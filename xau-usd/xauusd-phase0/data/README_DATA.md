@@ -30,6 +30,7 @@ data/processed/bars/{broker}/{symbol}/{timeframe}/
 ```
 
 Bar timestamps use the Phase 0 convention: `timestamp_utc` equals `bar_end_utc`.
+Processed bar files must be sorted ascending, duplicate-free by `timestamp_utc`, and each row's `bar_end_utc - bar_start_utc` must match its declared timeframe.
 
 ## Commands
 

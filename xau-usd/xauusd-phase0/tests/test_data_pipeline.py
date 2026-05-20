@@ -10,7 +10,7 @@ from phase0.bar_builder import build_bars_from_ticks
 from phase0.cli import main
 from phase0.config import load_project_config
 from phase0.data_import import import_required_bar_exports
-from phase0.data_validator import DataValidationError, validate_ticks
+from phase0.data_validator import DataValidationError, validate_bars, validate_ticks
 from phase0.manifests import generate_required_data_manifest
 from phase0.normalizer import normalize_bar_dataframe, normalize_tick_dataframe
 
@@ -162,6 +162,33 @@ def test_validate_ticks_rejects_negative_spread():
 
     with pytest.raises(DataValidationError, match="Ask must be greater"):
         validate_ticks(normalized, "bad.csv")
+
+
+def test_validate_bars_rejects_unsorted_timestamps():
+    bars = _sample_normalized_bars().iloc[[1, 0]].reset_index(drop=True)
+
+    with pytest.raises(DataValidationError, match="sorted ascending"):
+        validate_bars(bars, "unsorted.csv")
+
+
+def test_validate_bars_rejects_duplicate_timestamps():
+    bars = _sample_normalized_bars()
+    bars.loc[1, ["timestamp_utc", "bar_start_utc", "bar_end_utc"]] = bars.loc[
+        0,
+        ["timestamp_utc", "bar_start_utc", "bar_end_utc"],
+    ]
+
+    with pytest.raises(DataValidationError, match="Duplicate bar timestamp"):
+        validate_bars(bars, "duplicate.csv")
+
+
+def test_validate_bars_rejects_wrong_timeframe_duration():
+    bars = _sample_normalized_bars()
+    bars.loc[0, "bar_end_utc"] = "2016-01-04T10:06:00Z"
+    bars.loc[0, "timestamp_utc"] = "2016-01-04T10:06:00Z"
+
+    with pytest.raises(DataValidationError, match="does not match timeframe M5"):
+        validate_bars(bars, "wrong-duration.csv")
 
 
 def test_build_m5_bars_uses_bar_end_timestamp():
@@ -395,6 +422,27 @@ def _sample_normalized_ticks() -> pd.DataFrame:
         }
     )
     return normalize_tick_dataframe(raw, "capital_com", "XAUUSD", 0.01, "sample.csv")
+
+
+def _sample_normalized_bars() -> pd.DataFrame:
+    raw = pd.DataFrame(
+        {
+            "timestamp_utc": ["2016-01-04T10:00:00Z", "2016-01-04T10:05:00Z"],
+            "open": [100.0, 101.0],
+            "high": [102.0, 103.0],
+            "low": [99.0, 100.0],
+            "close": [101.0, 102.0],
+            "volume": [10, 12],
+        }
+    )
+    return normalize_bar_dataframe(
+        raw,
+        broker="capital_com",
+        symbol="XAUUSD",
+        timeframe="M5",
+        point_size=0.01,
+        source_file="sample-bars.csv",
+    )
 
 
 def _copy_project_config(project_root: Path, tmp_path: Path) -> Path:

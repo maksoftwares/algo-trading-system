@@ -4,6 +4,7 @@ import csv
 import shutil
 from pathlib import Path
 
+import pandas as pd
 import pytest
 
 from phase0.cli import main
@@ -16,6 +17,15 @@ from phase0.data_availability import (
     check_processed_data_availability,
     generate_data_readiness_report,
 )
+
+
+TIMEFRAME_DELTAS = {
+    "M5": pd.Timedelta(minutes=5),
+    "M15": pd.Timedelta(minutes=15),
+    "H1": pd.Timedelta(hours=1),
+    "H4": pd.Timedelta(hours=4),
+    "D1": pd.Timedelta(days=1),
+}
 
 
 def test_processed_data_availability_reports_missing_sets(project_root, tmp_path):
@@ -133,7 +143,6 @@ def _write_required_bar_placeholders(root: Path) -> None:
                         symbol,
                         timeframe,
                         "2016-01-01T00:00:00Z",
-                        "2016-01-01T00:05:00Z",
                     )
                 )
                 writer.writerow(
@@ -141,8 +150,7 @@ def _write_required_bar_placeholders(root: Path) -> None:
                         broker,
                         symbol,
                         timeframe,
-                        "2025-12-31T23:55:00Z",
-                        "2026-01-01T00:00:00Z",
+                        str(_last_bar_start(timeframe)),
                     )
                 )
 
@@ -168,7 +176,6 @@ def _write_short_bar_placeholders(root: Path) -> None:
                         symbol,
                         timeframe,
                         "2020-01-01T00:00:00Z",
-                        "2020-01-01T00:05:00Z",
                     )
                 )
 
@@ -195,12 +202,13 @@ def _valid_bar_row(
     symbol: str,
     timeframe: str,
     bar_start_utc: str,
-    bar_end_utc: str,
 ) -> dict[str, object]:
+    bar_start = pd.Timestamp(bar_start_utc)
+    bar_end = bar_start + TIMEFRAME_DELTAS[timeframe]
     return {
-        "timestamp_utc": bar_end_utc,
-        "bar_start_utc": bar_start_utc,
-        "bar_end_utc": bar_end_utc,
+        "timestamp_utc": _format_utc(bar_end),
+        "bar_start_utc": _format_utc(bar_start),
+        "bar_end_utc": _format_utc(bar_end),
         "broker": broker,
         "symbol": symbol,
         "timeframe": timeframe,
@@ -227,3 +235,11 @@ def _valid_bar_row(
         "tick_count": 10,
         "volume_sum": 100,
     }
+
+
+def _last_bar_start(timeframe: str) -> pd.Timestamp:
+    return pd.Timestamp("2026-01-01T00:00:00Z") - TIMEFRAME_DELTAS[timeframe]
+
+
+def _format_utc(timestamp: pd.Timestamp) -> str:
+    return pd.Timestamp(timestamp).strftime("%Y-%m-%dT%H:%M:%SZ")

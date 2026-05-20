@@ -54,6 +54,15 @@ BAR_REQUIRED_COLUMNS = (
     "volume_sum",
 )
 
+BAR_TIMEFRAME_DURATIONS = {
+    "M1": pd.Timedelta(minutes=1),
+    "M5": pd.Timedelta(minutes=5),
+    "M15": pd.Timedelta(minutes=15),
+    "H1": pd.Timedelta(hours=1),
+    "H4": pd.Timedelta(hours=4),
+    "D1": pd.Timedelta(days=1),
+}
+
 
 class DataValidationError(ConfigError):
     """Raised when market data violates the Phase 0 data contract."""
@@ -133,6 +142,16 @@ def validate_bars(df: pd.DataFrame, name: str = "bars", fail_on_error: bool = Tr
     _flag_invalid_mask(ends.isna(), "bar_end_utc", "Bar end is not parseable.", df, issues)
     _flag_invalid_mask(timestamps != ends, "timestamp_utc", "timestamp_utc must equal bar_end_utc.", df, issues)
     _flag_invalid_mask(ends <= starts, "bar_end_utc", "bar_end_utc must be after bar_start_utc.", df, issues)
+    if not timestamps.isna().any() and not timestamps.is_monotonic_increasing:
+        issues.append(ValidationIssue("ERROR", None, "timestamp_utc", "Timestamps are not sorted ascending."))
+    _flag_invalid_mask(
+        timestamps.duplicated(keep=False),
+        "timestamp_utc",
+        "Duplicate bar timestamp.",
+        df,
+        issues,
+    )
+    _validate_bar_timeframes(df, starts, ends, issues)
 
     high = pd.to_numeric(df["high"], errors="coerce")
     low = pd.to_numeric(df["low"], errors="coerce")
@@ -154,6 +173,38 @@ def validate_bars(df: pd.DataFrame, name: str = "bars", fail_on_error: bool = Tr
     )
     _flag_invalid_mask(pd.to_numeric(df["tick_count"], errors="coerce") <= 0, "tick_count", "tick_count must be positive.", df, issues)
     return _finish_report(name, df, issues, fail_on_error)
+
+
+def _validate_bar_timeframes(
+    df: pd.DataFrame,
+    starts: pd.Series,
+    ends: pd.Series,
+    issues: list[ValidationIssue],
+) -> None:
+    timeframes = df["timeframe"].astype(str).str.upper()
+    unsupported = ~timeframes.isin(BAR_TIMEFRAME_DURATIONS)
+    _flag_invalid_mask(
+        unsupported,
+        "timeframe",
+        f"Unsupported timeframe. Supported: {', '.join(BAR_TIMEFRAME_DURATIONS)}.",
+        df,
+        issues,
+    )
+    for index, timeframe in timeframes[~unsupported].items():
+        if pd.isna(starts.loc[index]) or pd.isna(ends.loc[index]):
+            continue
+        expected = BAR_TIMEFRAME_DURATIONS[timeframe]
+        actual = ends.loc[index] - starts.loc[index]
+        if actual != expected:
+            row_number = int(df.loc[index, "row_number"]) if "row_number" in df.columns else int(index) + 2
+            issues.append(
+                ValidationIssue(
+                    "ERROR",
+                    row_number,
+                    "bar_end_utc",
+                    f"Bar duration {actual} does not match timeframe {timeframe} ({expected}).",
+                )
+            )
 
 
 def write_validation_artifacts(
