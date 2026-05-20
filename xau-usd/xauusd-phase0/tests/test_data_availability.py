@@ -15,6 +15,7 @@ from phase0.data_availability import (
     REQUIRED_BACKTEST_TIMEFRAMES,
     assert_processed_data_available,
     check_processed_data_availability,
+    generate_data_requirements_csv,
     generate_data_readiness_report,
 )
 
@@ -103,6 +104,33 @@ def test_generate_data_readiness_report_lists_missing_sets(project_root, tmp_pat
     assert "capital_com | XAUUSD | M5" in text
     assert "Required Start" in text
     assert "python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5" in text
+
+
+def test_generate_data_requirements_csv_lists_required_inputs(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    config = load_project_config(root)
+
+    output_path = generate_data_requirements_csv(config)
+
+    rows = list(csv.DictReader(output_path.open(encoding="utf-8")))
+    assert len(rows) == 25
+    first = next(row for row in rows if row["broker"] == "capital_com" and row["symbol"] == "XAUUSD")
+    assert first["timeframe"] in REQUIRED_BACKTEST_TIMEFRAMES
+    assert first["required_start_utc"] == "2016-01-01T00:00:00Z"
+    assert first["required_end_utc"] == "2025-06-30T23:59:59Z"
+    assert "data" in first["raw_dir"]
+    assert first["suggested_raw_filename"].startswith(f"XAUUSD_{first['timeframe']}_")
+
+
+def test_generate_data_requirements_cli(project_root, tmp_path, capsys):
+    root = _copy_config(project_root, tmp_path)
+
+    exit_code = main(["--root", str(root), "generate-data-requirements"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "Required timeframe sets: 25" in captured.out
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_REQUIREMENTS.csv").exists()
 
 
 def test_generate_data_readiness_cli(project_root, tmp_path, capsys):

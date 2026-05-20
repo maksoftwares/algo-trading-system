@@ -50,6 +50,7 @@ python -m phase0 normalize-data --broker capital_com --symbol XAUUSD
 python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1,M5,M15,H1,H4,D1
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5 --input-file data\raw\capital_com\broker_export.csv
+python -m phase0 generate-data-requirements
 python -m phase0 import-required-bars
 python -m phase0 generate-data-manifest
 python -m phase0 generate-data-readiness

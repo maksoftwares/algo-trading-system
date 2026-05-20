@@ -374,8 +374,10 @@ def test_import_required_bars_cli(project_root, tmp_path, capsys):
     captured = capsys.readouterr()
     assert exit_code == 0
     assert "0 imported, 15 missing, 0 failed" in captured.out
+    assert "Data requirements:" in captured.out
     assert "Data manifest:" in captured.out
     assert (root / "outputs" / "manifests" / "PHASE0_BAR_IMPORT_REPORT.csv").exists()
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_REQUIREMENTS.csv").exists()
     assert (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").exists()
 
 

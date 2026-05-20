@@ -11,6 +11,7 @@ from phase0.constants import EXPERTS
 from phase0.data_availability import (
     assert_processed_data_available,
     check_processed_data_availability,
+    generate_data_requirements_csv,
     generate_data_readiness_report,
 )
 from phase0.data_import import import_required_bar_exports
@@ -89,6 +90,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     data_readiness.add_argument("--skip-multisymbol", action="store_true")
     data_readiness.set_defaults(func=_cmd_generate_data_readiness)
+
+    data_requirements = subparsers.add_parser(
+        "generate-data-requirements",
+        help="Write the required broker/symbol/timeframe acquisition checklist.",
+    )
+    data_requirements.add_argument("--skip-multisymbol", action="store_true")
+    data_requirements.set_defaults(func=_cmd_generate_data_requirements)
 
     data_manifest = subparsers.add_parser(
         "generate-data-manifest",
@@ -268,6 +276,21 @@ def _cmd_generate_data_readiness(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_generate_data_requirements(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output_path = generate_data_requirements_csv(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
+    checks = check_processed_data_availability(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
+    print(f"Data requirements: {output_path}")
+    print(f"Required timeframe sets: {len(checks)}")
+    return 0
+
+
 def _cmd_generate_data_manifest(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     output_path = generate_required_data_manifest(
@@ -324,6 +347,10 @@ def _cmd_import_required_bars(args: argparse.Namespace) -> int:
         include_multisymbol=not args.skip_multisymbol,
         timestamp_is=args.timestamp_is,
     )
+    requirements_path = generate_data_requirements_csv(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
     readiness_path = generate_data_readiness_report(
         config,
         include_multisymbol=not args.skip_multisymbol,
@@ -340,6 +367,7 @@ def _cmd_import_required_bars(args: argparse.Namespace) -> int:
         f"{missing} missing, {failed} failed."
     )
     print(f"Import report: {output.report_path}")
+    print(f"Data requirements: {requirements_path}")
     print(f"Data manifest: {manifest_path}")
     print(f"Data readiness report: {readiness_path}")
     return 1 if failed else 0

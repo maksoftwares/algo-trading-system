@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,6 +14,15 @@ from phase0.run_context import guarded_or_trimmed_period
 
 
 REQUIRED_BACKTEST_TIMEFRAMES = ("M5", "M15", "H1", "H4", "D1")
+DATA_REQUIREMENT_COLUMNS = (
+    "broker",
+    "symbol",
+    "timeframe",
+    "required_start_utc",
+    "required_end_utc",
+    "raw_dir",
+    "suggested_raw_filename",
+)
 
 
 @dataclass(frozen=True)
@@ -107,6 +117,44 @@ def generate_data_readiness_report(
         _render_data_readiness_report(config, checks, include_multisymbol),
         encoding="utf-8",
     )
+    return output_path
+
+
+def generate_data_requirements_csv(
+    config: ProjectConfig,
+    include_multisymbol: bool = True,
+) -> Path:
+    coverage = _required_coverage_by_broker_symbol(config, include_multisymbol)
+    rows: list[dict[str, str]] = []
+    for broker, symbol in required_broker_symbols(config, include_multisymbol):
+        required_start, required_end = _coverage_bounds(coverage[(broker, symbol)])
+        raw_dir = config.root / str(config.broker_sources["brokers"][broker]["raw_dir"])
+        for timeframe in REQUIRED_BACKTEST_TIMEFRAMES:
+            rows.append(
+                {
+                    "broker": broker,
+                    "symbol": symbol,
+                    "timeframe": timeframe,
+                    "required_start_utc": _timestamp_text(required_start),
+                    "required_end_utc": _timestamp_text(required_end),
+                    "raw_dir": str(raw_dir),
+                    "suggested_raw_filename": _suggested_raw_filename(
+                        broker,
+                        symbol,
+                        timeframe,
+                        required_start,
+                        required_end,
+                    ),
+                }
+            )
+
+    output_dir = config.root / "outputs" / "manifests"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / "PHASE0_DATA_REQUIREMENTS.csv"
+    with output_path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=DATA_REQUIREMENT_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
     return output_path
 
 
@@ -318,3 +366,15 @@ def _coverage_bounds(windows: list[RequiredCoverageWindow]) -> tuple[pd.Timestam
 
 def _timestamp_text(value: pd.Timestamp) -> str:
     return pd.Timestamp(value).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _suggested_raw_filename(
+    broker: str,
+    symbol: str,
+    timeframe: str,
+    required_start: pd.Timestamp,
+    required_end: pd.Timestamp,
+) -> str:
+    start = pd.Timestamp(required_start).strftime("%Y%m%d")
+    end = pd.Timestamp(required_end).strftime("%Y%m%d")
+    return f"{symbol}_{timeframe}_{start}_{end}_{broker}.csv"
