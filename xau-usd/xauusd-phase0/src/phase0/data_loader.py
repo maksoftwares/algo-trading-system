@@ -43,6 +43,29 @@ def find_raw_tick_files(config: ProjectConfig, broker: str, symbol: str) -> list
     return files
 
 
+def find_raw_bar_files(config: ProjectConfig, broker: str, symbol: str, timeframe: str) -> list[Path]:
+    directory = raw_data_dir(config, broker)
+    if not directory.exists():
+        raise ConfigError(f"Raw data directory does not exist: {directory}. Create it and add CSV files.")
+
+    canonical = resolve_symbol(config, symbol)
+    aliases = {
+        canonical.lower(),
+        *(str(alias).lower() for alias in config.symbols["symbols"][canonical].get("aliases", [])),
+    }
+    timeframe_token = timeframe.lower()
+    symbol_files = sorted(path for path in directory.rglob("*.csv") if _matches_symbol(path, aliases))
+    files = [path for path in symbol_files if timeframe_token in path.name.lower()]
+    if not files:
+        files = symbol_files
+    if not files:
+        raise ConfigError(
+            f"No raw bar CSV files found in {directory} for broker={broker}, "
+            f"symbol={canonical}, timeframe={timeframe}."
+        )
+    return files
+
+
 def latest_normalized_tick_file(config: ProjectConfig, broker: str, symbol: str) -> Path:
     directory = processed_ticks_dir(config, broker, symbol)
     files = sorted(directory.glob("*_ticks_*.csv"))

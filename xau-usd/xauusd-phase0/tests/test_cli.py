@@ -8,6 +8,7 @@ def test_cli_registers_required_commands():
 
     assert "validate-config" in help_text
     assert "run-matrix" in help_text
+    assert "normalize-bars" in help_text
     assert "generate-data-readiness" in help_text
     assert "generate-verdict" in help_text
     assert "generate-result-manifest" in help_text

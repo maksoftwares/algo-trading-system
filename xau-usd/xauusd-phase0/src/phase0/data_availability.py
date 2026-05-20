@@ -143,6 +143,9 @@ def _render_data_readiness_report(
                 f"| {check.broker} | {check.symbol} | {check.timeframe} | {check.file_count} | "
                 f"{check.candidate_file_count} | {check.directory} | {first_issue} |"
             )
+        lines.extend(["", "## Suggested Direct Bar Import Commands", "", "```powershell"])
+        lines.extend(_normalize_bar_command(check) for check in missing)
+        lines.append("```")
     lines.extend(
         [
             "",
@@ -161,6 +164,13 @@ def _raw_csv_candidate_count(config: ProjectConfig, broker: str, symbol: str) ->
         return 0
     aliases = {symbol.lower(), *(alias.lower() for alias in config.symbols["symbols"][symbol].get("aliases", []))}
     return sum(1 for path in raw_dir.rglob("*.csv") if any(alias in path.name.lower() for alias in aliases))
+
+
+def _normalize_bar_command(check: DataAvailabilityCheck) -> str:
+    return (
+        f"python -m phase0 normalize-bars --broker {check.broker} "
+        f"--symbol {check.symbol} --timeframe {check.timeframe}"
+    )
 
 
 def _valid_bar_files(files: list[Path]) -> tuple[list[Path], list[str]]:

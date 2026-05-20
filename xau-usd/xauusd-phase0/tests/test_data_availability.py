@@ -77,6 +77,7 @@ def test_generate_data_readiness_report_lists_missing_sets(project_root, tmp_pat
     assert "Status: BLOCKED" in text
     assert "Blocked timeframe sets: 25" in text
     assert "capital_com | XAUUSD | M5" in text
+    assert "python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5" in text
 
 
 def test_generate_data_readiness_cli(project_root, tmp_path, capsys):

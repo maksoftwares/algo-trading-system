@@ -48,6 +48,7 @@ python -m phase0 hash-hypotheses
 python -m phase0 validate-data --broker capital_com --symbol XAUUSD
 python -m phase0 normalize-data --broker capital_com --symbol XAUUSD
 python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1,M5,M15,H1,H4,D1
+python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
 python -m phase0 generate-data-readiness
 python -m phase0 check-data-availability
 python -m phase0 run-matrix --expert all

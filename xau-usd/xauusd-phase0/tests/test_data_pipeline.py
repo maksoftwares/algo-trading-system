@@ -10,7 +10,7 @@ from phase0.bar_builder import build_bars_from_ticks
 from phase0.cli import main
 from phase0.config import load_project_config
 from phase0.data_validator import DataValidationError, validate_ticks
-from phase0.normalizer import normalize_tick_dataframe
+from phase0.normalizer import normalize_bar_dataframe, normalize_tick_dataframe
 
 
 def test_normalize_format_a():
@@ -63,6 +63,63 @@ def test_normalize_dukascopy_format():
 
     assert normalized.loc[0, "volume"] == 6
     assert normalized.loc[0, "broker"] == "dukascopy"
+
+
+def test_normalize_mt5_bar_export_format():
+    raw = pd.DataFrame(
+        {
+            "<DATE>": ["2016.01.04"],
+            "<TIME>": ["10:00:00"],
+            "<OPEN>": [1061.25],
+            "<HIGH>": [1062.00],
+            "<LOW>": [1060.50],
+            "<CLOSE>": [1061.75],
+            "<TICKVOL>": [42],
+            "<SPREAD>": [20],
+        }
+    )
+
+    normalized = normalize_bar_dataframe(
+        raw,
+        broker="capital_com",
+        symbol="XAUUSD",
+        timeframe="M5",
+        point_size=0.01,
+        source_file="XAUUSD_M5.csv",
+    )
+
+    assert normalized.loc[0, "bar_start_utc"] == "2016-01-04T10:00:00Z"
+    assert normalized.loc[0, "bar_end_utc"] == "2016-01-04T10:05:00Z"
+    assert normalized.loc[0, "timestamp_utc"] == "2016-01-04T10:05:00Z"
+    assert normalized.loc[0, "tick_count"] == 42
+    assert normalized.loc[0, "bid_open"] == pytest.approx(1061.15)
+    assert normalized.loc[0, "ask_open"] == pytest.approx(1061.35)
+
+
+def test_normalize_bar_export_without_spread_leaves_bid_ask_blank():
+    raw = pd.DataFrame(
+        {
+            "timestamp_utc": ["2016-01-04T10:00:00Z"],
+            "open": [1061.25],
+            "high": [1062.00],
+            "low": [1060.50],
+            "close": [1061.75],
+            "volume": [42],
+        }
+    )
+
+    normalized = normalize_bar_dataframe(
+        raw,
+        broker="capital_com",
+        symbol="XAUUSD",
+        timeframe="M5",
+        point_size=0.01,
+        source_file="XAUUSD_M5.csv",
+    )
+
+    assert pd.isna(normalized.loc[0, "bid_open"])
+    assert pd.isna(normalized.loc[0, "ask_open"])
+    assert pd.isna(normalized.loc[0, "spread_median_points"])
 
 
 def test_validate_ticks_rejects_negative_spread():
@@ -142,6 +199,47 @@ def test_cli_validate_normalize_and_build_bars(project_root, tmp_path, capsys):
     manifest = root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md"
     assert manifest.exists()
     assert "data/raw/capital_com/XAUUSD_ticks.csv" in manifest.read_text(encoding="utf-8")
+
+
+def test_cli_normalize_bars_from_broker_export(project_root, tmp_path, capsys):
+    root = _copy_project_config(project_root, tmp_path)
+    raw_dir = root / "data" / "raw" / "capital_com"
+    raw_dir.mkdir(parents=True)
+    raw_file = raw_dir / "XAUUSD_M5_history.csv"
+    raw_file.write_text(
+        "\n".join(
+            [
+                "<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>,<SPREAD>",
+                "2016.01.04,10:00:00,100.00,101.00,99.00,100.50,10,20",
+                "2016.01.04,10:05:00,100.50,101.50,100.00,101.00,12,22",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "--root",
+            str(root),
+            "normalize-bars",
+            "--broker",
+            "capital_com",
+            "--symbol",
+            "XAUUSD",
+            "--timeframe",
+            "M5",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    written = list((root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5").glob("*.csv"))
+    assert exit_code == 0
+    assert "Normalized 1 bar file" in captured.out
+    assert len(written) == 1
+    bars = pd.read_csv(written[0])
+    assert bars.loc[0, "timestamp_utc"] == "2016-01-04T10:05:00Z"
+    assert bars.loc[1, "timestamp_utc"] == "2016-01-04T10:10:00Z"
 
 
 def _sample_normalized_ticks() -> pd.DataFrame:

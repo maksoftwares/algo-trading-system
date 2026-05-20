@@ -18,7 +18,12 @@ from phase0.hashing import HashingError, hash_manifest_path, register_hypotheses
 from phase0.manifests import generate_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
-from phase0.normalizer import NormalizationError, normalize_broker_ticks, validate_raw_files_without_writing
+from phase0.normalizer import (
+    NormalizationError,
+    normalize_broker_bars,
+    normalize_broker_ticks,
+    validate_raw_files_without_writing,
+)
 from phase0.reports import generate_all_reports
 from phase0.safety import audit_no_live_trading_calls
 from phase0.snapshot import generate_snapshot
@@ -86,6 +91,17 @@ def build_parser() -> argparse.ArgumentParser:
     normalize_data = subparsers.add_parser("normalize-data", help="Normalize source data.")
     _add_broker_symbol_args(normalize_data)
     normalize_data.set_defaults(func=_cmd_normalize_data)
+
+    normalize_bars = subparsers.add_parser("normalize-bars", help="Normalize broker OHLC bar CSV exports.")
+    _add_broker_symbol_args(normalize_bars)
+    normalize_bars.add_argument("--timeframe", required=True)
+    normalize_bars.add_argument(
+        "--timestamp-is",
+        choices=("bar_start", "bar_end"),
+        default="bar_start",
+        help="Interpret source timestamps as bar starts or bar ends. MT5 history exports usually use bar_start.",
+    )
+    normalize_bars.set_defaults(func=_cmd_normalize_bars)
 
     build_bars = subparsers.add_parser("build-bars", help="Build M1/M5/M15/H1/H4/D1 bars.")
     _add_broker_symbol_args(build_bars)
@@ -230,6 +246,23 @@ def _cmd_normalize_data(args: argparse.Namespace) -> int:
     written = normalize_broker_ticks(config, args.broker, args.symbol)
     manifest_path = generate_data_manifest(config, args.broker, args.symbol)
     print(f"Normalized {len(written)} tick file(s):")
+    for path in written:
+        print(path)
+    print(f"Data manifest: {manifest_path}")
+    return 0
+
+
+def _cmd_normalize_bars(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    written = normalize_broker_bars(
+        config,
+        args.broker,
+        args.symbol,
+        args.timeframe.upper(),
+        timestamp_is=args.timestamp_is,
+    )
+    manifest_path = generate_data_manifest(config, args.broker, args.symbol)
+    print(f"Normalized {len(written)} bar file(s):")
     for path in written:
         print(path)
     print(f"Data manifest: {manifest_path}")

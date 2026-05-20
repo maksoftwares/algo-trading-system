@@ -13,6 +13,7 @@ data/raw/dukascopy/
 ```
 
 Raw files may use broker-native column names. The normalizer recognizes common timestamp, bid, ask, and volume aliases, then writes the locked Phase 0 schema.
+Broker OHLC bar exports are also accepted. Use filenames that include the symbol and timeframe, for example `XAUUSD_M5_2016_2025_capital.csv`.
 
 ## Processed Output Layout
 
@@ -36,11 +37,13 @@ Bar timestamps use the Phase 0 convention: `timestamp_utc` equals `bar_end_utc`.
 python -m phase0 validate-data --broker capital_com --symbol XAUUSD
 python -m phase0 normalize-data --broker capital_com --symbol XAUUSD
 python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1,M5,M15,H1,H4,D1
+python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
 python -m phase0 generate-data-readiness
 python -m phase0 check-data-availability
 ```
 
 These commands write validation artifacts and `outputs/manifests/PHASE0_DATA_MANIFEST.md`.
+Use `normalize-data` plus `build-bars` for tick exports. Use `normalize-bars` for direct OHLC bar exports from MT5 History Center or a broker portal. By default, source bar timestamps are interpreted as bar starts; pass `--timestamp-is bar_end` only for exports that already use bar-close timestamps.
 `check-data-availability` requires each mandatory broker/symbol/timeframe folder to contain at least one non-empty bar CSV with the locked Phase 0 bar schema.
 `generate-data-readiness` writes `outputs/manifests/PHASE0_DATA_READINESS.md` with the exact missing or malformed broker/symbol/timeframe sets.
 
