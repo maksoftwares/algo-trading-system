@@ -56,6 +56,20 @@ def test_processed_data_availability_rejects_malformed_files(project_root, tmp_p
         assert_processed_data_available(config)
 
 
+def test_processed_data_availability_rejects_insufficient_coverage(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _write_short_bar_placeholders(root)
+    config = load_project_config(root)
+
+    checks = check_processed_data_availability(config)
+
+    assert all(not check.available for check in checks)
+    assert all(check.file_count == 1 for check in checks)
+    assert any("coverage starts" in issue for check in checks for issue in check.issues)
+    with pytest.raises(ConfigError, match="coverage starts"):
+        assert_processed_data_available(config)
+
+
 def test_check_data_availability_cli(project_root, tmp_path, capsys):
     root = _copy_config(project_root, tmp_path)
     _write_required_bar_placeholders(root)
@@ -77,6 +91,7 @@ def test_generate_data_readiness_report_lists_missing_sets(project_root, tmp_pat
     assert "Status: BLOCKED" in text
     assert "Blocked timeframe sets: 25" in text
     assert "capital_com | XAUUSD | M5" in text
+    assert "Required Start" in text
     assert "python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5" in text
 
 
@@ -112,7 +127,50 @@ def _write_required_bar_placeholders(root: Path) -> None:
             with path.open("w", newline="", encoding="utf-8") as handle:
                 writer = csv.DictWriter(handle, fieldnames=BAR_REQUIRED_COLUMNS)
                 writer.writeheader()
-                writer.writerow(_valid_bar_row(broker, symbol, timeframe))
+                writer.writerow(
+                    _valid_bar_row(
+                        broker,
+                        symbol,
+                        timeframe,
+                        "2016-01-01T00:00:00Z",
+                        "2016-01-01T00:05:00Z",
+                    )
+                )
+                writer.writerow(
+                    _valid_bar_row(
+                        broker,
+                        symbol,
+                        timeframe,
+                        "2025-12-31T23:55:00Z",
+                        "2026-01-01T00:00:00Z",
+                    )
+                )
+
+
+def _write_short_bar_placeholders(root: Path) -> None:
+    broker_symbols = {
+        ("capital_com", "XAUUSD"),
+        ("pepperstone", "XAUUSD"),
+        ("dukascopy", "XAUUSD"),
+        *(("capital_com", symbol) for symbol in COMPARISON_SYMBOLS),
+    }
+    for broker, symbol in broker_symbols:
+        for timeframe in REQUIRED_BACKTEST_TIMEFRAMES:
+            directory = root / "data" / "processed" / "bars" / broker / symbol / timeframe
+            directory.mkdir(parents=True, exist_ok=True)
+            path = directory / f"{symbol}_{broker}_{timeframe}_sample.csv"
+            with path.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=BAR_REQUIRED_COLUMNS)
+                writer.writeheader()
+                writer.writerow(
+                    _valid_bar_row(
+                        broker,
+                        symbol,
+                        timeframe,
+                        "2020-01-01T00:00:00Z",
+                        "2020-01-01T00:05:00Z",
+                    )
+                )
 
 
 def _write_malformed_bar_placeholders(root: Path) -> None:
@@ -132,11 +190,17 @@ def _write_malformed_bar_placeholders(root: Path) -> None:
             )
 
 
-def _valid_bar_row(broker: str, symbol: str, timeframe: str) -> dict[str, object]:
+def _valid_bar_row(
+    broker: str,
+    symbol: str,
+    timeframe: str,
+    bar_start_utc: str,
+    bar_end_utc: str,
+) -> dict[str, object]:
     return {
-        "timestamp_utc": "2020-01-01T00:05:00Z",
-        "bar_start_utc": "2020-01-01T00:00:00Z",
-        "bar_end_utc": "2020-01-01T00:05:00Z",
+        "timestamp_utc": bar_end_utc,
+        "bar_start_utc": bar_start_utc,
+        "bar_end_utc": bar_end_utc,
         "broker": broker,
         "symbol": symbol,
         "timeframe": timeframe,
