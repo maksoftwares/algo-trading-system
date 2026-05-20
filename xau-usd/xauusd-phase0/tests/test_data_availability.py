@@ -26,7 +26,7 @@ def test_processed_data_availability_reports_missing_sets(project_root, tmp_path
 
     assert len(checks) == 25
     assert all(not check.available for check in checks)
-    with pytest.raises(ConfigError, match="Missing processed bars"):
+    with pytest.raises(ConfigError, match="import-required-bars"):
         assert_processed_data_available(config)
 
 

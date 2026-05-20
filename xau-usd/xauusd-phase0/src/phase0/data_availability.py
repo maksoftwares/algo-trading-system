@@ -64,8 +64,9 @@ def assert_processed_data_available(
         raise ConfigError(
             "Missing processed bars required for Phase 0 real-data run:\n"
             + "\n".join(lines)
-            + "\nRun normalize-data and build-bars for each listed broker/symbol first, "
-            "or pass --synthetic-sample for a smoke test."
+            + "\nRun import-required-bars for direct OHLC bar exports, or "
+            "normalize-data and build-bars for tick exports. Use generate-data-readiness "
+            "for a full blocker report, or pass --synthetic-sample for a smoke test."
         )
     return checks
 

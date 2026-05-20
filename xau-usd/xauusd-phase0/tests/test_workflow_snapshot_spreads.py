@@ -6,13 +6,15 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from phase0.cli import main
-from phase0.config import load_project_config
+from phase0.config import ConfigError, load_project_config
 from phase0.hashing import register_hypotheses
 from phase0.manifests import generate_result_manifest
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
+from phase0.workflow import run_all_phase0
 
 
 def test_analyze_spread_logs_writes_cost_report(project_root, tmp_path):
@@ -82,6 +84,18 @@ def test_run_all_cli_synthetic(project_root, tmp_path, capsys):
     assert "Run-all complete" in captured.out
     assert (root / "outputs" / "reports" / "PHASE0_VERDICT.md").exists()
     assert (root / "outputs" / "manifests" / "PHASE0_RESULT_MANIFEST.csv").exists()
+
+
+def test_run_all_real_data_preflight_writes_readiness_artifacts(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+    register_hypotheses(config)
+
+    with pytest.raises(ConfigError, match="import-required-bars"):
+        run_all_phase0(config)
+
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").exists()
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md").exists()
 
 
 def _copy_project_shell(project_root: Path, tmp_path: Path) -> Path:
