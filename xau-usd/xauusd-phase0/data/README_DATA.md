@@ -46,6 +46,7 @@ python -m phase0 check-data-availability
 
 These commands write validation artifacts and `outputs/manifests/PHASE0_DATA_MANIFEST.md`.
 Use `normalize-data` plus `build-bars` for tick exports. Use `normalize-bars` for direct OHLC bar exports from MT5 History Center or a broker portal. By default, source bar timestamps are interpreted as bar starts; pass `--timestamp-is bar_end` only for exports that already use bar-close timestamps.
+If a direct bar export filename does not include the symbol and timeframe, pass `--input-file path\to\export.csv` to `normalize-bars`.
 Use `import-required-bars` after placing bar CSVs in `data/raw/{broker}/`; it batch-imports every required broker/symbol/timeframe whose filename includes both the symbol and timeframe, then writes `outputs/manifests/PHASE0_BAR_IMPORT_REPORT.csv`.
 Use `generate-data-manifest` to seal `outputs/manifests/PHASE0_DATA_MANIFEST.md` across all required broker/symbol inputs, including raw and processed file SHA256 values.
 `check-data-availability` requires each mandatory broker/symbol/timeframe folder to contain at least one non-empty bar CSV with the locked Phase 0 bar schema.

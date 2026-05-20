@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from pathlib import Path
 
 import pandas as pd
@@ -215,15 +216,35 @@ def normalize_broker_bars(
     require_timeframe_token: bool = False,
 ) -> list[Path]:
     canonical_symbol = resolve_symbol(config, symbol)
-    written: list[Path] = []
-    reports: list[ValidationReport] = []
-    for raw_file in find_raw_bar_files(
+    raw_files = find_raw_bar_files(
         config,
         broker,
         canonical_symbol,
         timeframe,
         require_timeframe_token=require_timeframe_token,
-    ):
+    )
+    return normalize_broker_bar_files(
+        config,
+        broker,
+        canonical_symbol,
+        timeframe,
+        raw_files,
+        timestamp_is=timestamp_is,
+    )
+
+
+def normalize_broker_bar_files(
+    config: ProjectConfig,
+    broker: str,
+    symbol: str,
+    timeframe: str,
+    raw_files: Iterable[Path],
+    timestamp_is: str = "bar_start",
+) -> list[Path]:
+    canonical_symbol = resolve_symbol(config, symbol)
+    written: list[Path] = []
+    reports: list[ValidationReport] = []
+    for raw_file in raw_files:
         normalized = normalize_raw_bar_file(
             config,
             broker,

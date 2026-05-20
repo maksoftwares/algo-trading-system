@@ -21,6 +21,7 @@ from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
 from phase0.normalizer import (
     NormalizationError,
+    normalize_broker_bar_files,
     normalize_broker_bars,
     normalize_broker_ticks,
     validate_raw_files_without_writing,
@@ -103,6 +104,11 @@ def build_parser() -> argparse.ArgumentParser:
     normalize_bars = subparsers.add_parser("normalize-bars", help="Normalize broker OHLC bar CSV exports.")
     _add_broker_symbol_args(normalize_bars)
     normalize_bars.add_argument("--timeframe", required=True)
+    normalize_bars.add_argument(
+        "--input-file",
+        type=Path,
+        help="Normalize one exact OHLC bar CSV path, even if the filename lacks symbol/timeframe tokens.",
+    )
     normalize_bars.add_argument(
         "--timestamp-is",
         choices=("bar_start", "bar_end"),
@@ -285,13 +291,24 @@ def _cmd_normalize_data(args: argparse.Namespace) -> int:
 
 def _cmd_normalize_bars(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
-    written = normalize_broker_bars(
-        config,
-        args.broker,
-        args.symbol,
-        args.timeframe.upper(),
-        timestamp_is=args.timestamp_is,
-    )
+    if args.input_file is None:
+        written = normalize_broker_bars(
+            config,
+            args.broker,
+            args.symbol,
+            args.timeframe.upper(),
+            timestamp_is=args.timestamp_is,
+        )
+    else:
+        input_file = args.input_file if args.input_file.is_absolute() else config.root / args.input_file
+        written = normalize_broker_bar_files(
+            config,
+            args.broker,
+            args.symbol,
+            args.timeframe.upper(),
+            [input_file],
+            timestamp_is=args.timestamp_is,
+        )
     manifest_path = generate_data_manifest(config, args.broker, args.symbol)
     print(f"Normalized {len(written)} bar file(s):")
     for path in written:

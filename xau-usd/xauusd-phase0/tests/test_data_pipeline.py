@@ -269,6 +269,45 @@ def test_cli_normalize_bars_from_broker_export(project_root, tmp_path, capsys):
     assert bars.loc[1, "timestamp_utc"] == "2016-01-04T10:10:00Z"
 
 
+def test_cli_normalize_bars_from_explicit_input_file(project_root, tmp_path, capsys):
+    root = _copy_project_config(project_root, tmp_path)
+    raw_dir = root / "data" / "raw" / "capital_com"
+    raw_dir.mkdir(parents=True)
+    raw_file = raw_dir / "broker_export.csv"
+    raw_file.write_text(
+        "\n".join(
+            [
+                "<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>",
+                "2016.01.04,10:00:00,100.00,101.00,99.00,100.50,10",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "--root",
+            str(root),
+            "normalize-bars",
+            "--broker",
+            "capital_com",
+            "--symbol",
+            "XAUUSD",
+            "--timeframe",
+            "M5",
+            "--input-file",
+            "data/raw/capital_com/broker_export.csv",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    written = list((root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5").glob("*.csv"))
+    assert exit_code == 0
+    assert "Normalized 1 bar file" in captured.out
+    assert len(written) == 1
+
+
 def test_import_required_bars_imports_available_sets_and_reports_missing(project_root, tmp_path):
     root = _copy_project_config(project_root, tmp_path)
     raw_dir = root / "data" / "raw" / "capital_com"
