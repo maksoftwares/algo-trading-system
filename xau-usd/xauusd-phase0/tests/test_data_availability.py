@@ -81,6 +81,20 @@ def test_processed_data_availability_rejects_insufficient_coverage(project_root,
         assert_processed_data_available(config)
 
 
+def test_processed_data_availability_rejects_large_internal_gaps(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _write_large_gap_bar_placeholders(root)
+    config = load_project_config(root)
+
+    checks = check_processed_data_availability(config)
+
+    assert all(not check.available for check in checks)
+    assert all(check.file_count == 1 for check in checks)
+    assert any("largest timestamp gap" in issue for check in checks for issue in check.issues)
+    with pytest.raises(ConfigError, match="largest timestamp gap"):
+        assert_processed_data_available(config)
+
+
 def test_check_data_availability_cli(project_root, tmp_path, capsys):
     root = _copy_config(project_root, tmp_path)
     _write_required_bar_placeholders(root)
@@ -151,6 +165,14 @@ def _copy_config(project_root: Path, tmp_path: Path) -> Path:
 
 
 def _write_required_bar_placeholders(root: Path) -> None:
+    _write_bar_placeholders(root, start_step_days=6)
+
+
+def _write_large_gap_bar_placeholders(root: Path) -> None:
+    _write_bar_placeholders(root)
+
+
+def _write_bar_placeholders(root: Path, start_step_days: int | None = None) -> None:
     broker_symbols = {
         ("capital_com", "XAUUSD"),
         ("pepperstone", "XAUUSD"),
@@ -165,22 +187,19 @@ def _write_required_bar_placeholders(root: Path) -> None:
             with path.open("w", newline="", encoding="utf-8") as handle:
                 writer = csv.DictWriter(handle, fieldnames=BAR_REQUIRED_COLUMNS)
                 writer.writeheader()
-                writer.writerow(
-                    _valid_bar_row(
-                        broker,
-                        symbol,
-                        timeframe,
-                        "2016-01-01T00:00:00Z",
-                    )
-                )
-                writer.writerow(
-                    _valid_bar_row(
-                        broker,
-                        symbol,
-                        timeframe,
-                        str(_last_bar_start(timeframe)),
-                    )
-                )
+                for bar_start in _bar_start_samples(timeframe, start_step_days):
+                    writer.writerow(_valid_bar_row(broker, symbol, timeframe, str(bar_start)))
+
+
+def _bar_start_samples(timeframe: str, start_step_days: int | None) -> list[pd.Timestamp]:
+    first_bar_start = pd.Timestamp("2016-01-01T00:00:00Z")
+    last_bar_start = _last_bar_start(timeframe)
+    if start_step_days is None:
+        return [first_bar_start, last_bar_start]
+    starts = list(pd.date_range(first_bar_start, last_bar_start, freq=f"{start_step_days}D"))
+    if starts[-1] != last_bar_start:
+        starts.append(last_bar_start)
+    return starts
 
 
 def _write_short_bar_placeholders(root: Path) -> None:

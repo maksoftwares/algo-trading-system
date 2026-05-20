@@ -14,6 +14,13 @@ from phase0.run_context import guarded_or_trimmed_period
 
 
 REQUIRED_BACKTEST_TIMEFRAMES = ("M5", "M15", "H1", "H4", "D1")
+MAX_ALLOWED_BAR_GAPS = {
+    "M5": pd.Timedelta(days=7),
+    "M15": pd.Timedelta(days=7),
+    "H1": pd.Timedelta(days=7),
+    "H4": pd.Timedelta(days=10),
+    "D1": pd.Timedelta(days=14),
+}
 DATA_REQUIREMENT_COLUMNS = (
     "broker",
     "symbol",
@@ -66,6 +73,7 @@ def check_processed_data_availability(
             files = sorted(directory.glob("*.csv")) if directory.exists() else []
             valid_files, issues, coverage_start, coverage_end = _valid_bar_files(
                 files,
+                timeframe,
                 required_start,
                 required_end,
             )
@@ -289,6 +297,7 @@ def _normalize_bar_command(check: DataAvailabilityCheck) -> str:
 
 def _valid_bar_files(
     files: list[Path],
+    timeframe: str,
     required_start: pd.Timestamp,
     required_end: pd.Timestamp,
 ) -> tuple[list[Path], list[str], pd.Timestamp | None, pd.Timestamp | None]:
@@ -296,6 +305,7 @@ def _valid_bar_files(
     issues: list[str] = []
     coverage_starts: list[pd.Timestamp] = []
     coverage_ends: list[pd.Timestamp] = []
+    coverage_points: list[pd.Series] = []
     for path in files:
         try:
             frame = pd.read_csv(path)
@@ -322,6 +332,7 @@ def _valid_bar_files(
         valid.append(path)
         coverage_starts.append(pd.Timestamp(starts.min()))
         coverage_ends.append(pd.Timestamp(ends.max()))
+        coverage_points.append(ends)
 
     coverage_start = min(coverage_starts) if coverage_starts else None
     coverage_end = max(coverage_ends) if coverage_ends else None
@@ -333,7 +344,35 @@ def _valid_bar_files(
         issues.append(
             f"coverage ends {_timestamp_text(coverage_end)}, required >= {_timestamp_text(required_end)}"
         )
+    if valid:
+        gap_issue = _max_gap_issue(coverage_points, timeframe)
+        if gap_issue:
+            issues.append(gap_issue)
     return valid, issues, coverage_start, coverage_end
+
+
+def _max_gap_issue(coverage_points: list[pd.Series], timeframe: str) -> str:
+    if not coverage_points:
+        return ""
+    timestamps = pd.concat(coverage_points).dropna().drop_duplicates().sort_values()
+    if len(timestamps) < 2:
+        return ""
+    allowed_gap = MAX_ALLOWED_BAR_GAPS[timeframe]
+    largest_gap = timestamps.diff().max()
+    if largest_gap <= allowed_gap:
+        return ""
+    return (
+        f"largest timestamp gap {_timedelta_text(largest_gap)} exceeds allowed "
+        f"{_timedelta_text(allowed_gap)} for {timeframe}"
+    )
+
+
+def _timedelta_text(value: pd.Timedelta) -> str:
+    seconds = int(pd.Timedelta(value).total_seconds())
+    days, remainder = divmod(seconds, 86_400)
+    hours, remainder = divmod(remainder, 3_600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{days}d {hours:02d}:{minutes:02d}:{seconds:02d}"
 
 
 def _availability_error_line(check: DataAvailabilityCheck) -> str:
