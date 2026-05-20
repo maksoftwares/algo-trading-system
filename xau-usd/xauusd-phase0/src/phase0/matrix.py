@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 
@@ -37,7 +38,13 @@ def run_phase0_matrix(
             else:
                 data_context = context_with_symbol_metadata(
                     config,
-                    load_cell_data_context(config, cell.broker, cell.symbol),
+                    load_cell_data_context(
+                        config,
+                        cell.broker,
+                        cell.symbol,
+                        required_start=cell.start_utc,
+                        required_end=cell.end_utc,
+                    ),
                     cell.symbol,
                 )
 
@@ -76,19 +83,68 @@ def run_phase0_matrix(
     return outputs
 
 
-def load_cell_data_context(config: ProjectConfig, broker: str, symbol: str) -> dict:
+def load_cell_data_context(
+    config: ProjectConfig,
+    broker: str,
+    symbol: str,
+    required_start: object | None = None,
+    required_end: object | None = None,
+) -> dict:
     bars_root = processed_bars_dir(config, broker, symbol)
     if not bars_root.exists():
         raise ConfigError(
             f"Processed bars not found at {bars_root}. "
-            "Run normalize-data and build-bars first, or use --synthetic-sample for a smoke test."
+            "Run import-required-bars for direct OHLC bar exports, or use --synthetic-sample for a smoke test."
         )
 
-    context: dict[str, object] = {"symbol": symbol}
+    context: dict[str, Any] = {"symbol": symbol}
     for timeframe in ("M5", "M15", "H1", "H4", "D1"):
         timeframe_dir = bars_root / timeframe
         files = sorted(timeframe_dir.glob("*.csv")) if timeframe_dir.exists() else []
         if not files:
             raise ConfigError(f"Missing processed {timeframe} bars in {timeframe_dir}.")
-        context[timeframe] = pd.read_csv(files[-1])
+        latest_file = files[-1]
+        frame = pd.read_csv(latest_file)
+        _assert_bar_coverage(frame, latest_file, timeframe, required_start, required_end)
+        context[timeframe] = frame
     return context
+
+
+def _assert_bar_coverage(
+    frame: pd.DataFrame,
+    path: Path,
+    timeframe: str,
+    required_start: object | None,
+    required_end: object | None,
+) -> None:
+    if required_start is None or required_end is None:
+        return
+    missing = [column for column in ("bar_start_utc", "bar_end_utc") if column not in frame.columns]
+    if missing:
+        raise ConfigError(
+            f"Processed {timeframe} bars in {path} missing coverage column(s): {', '.join(missing)}."
+        )
+
+    starts = pd.to_datetime(frame["bar_start_utc"], utc=True, errors="coerce").dropna()
+    ends = pd.to_datetime(frame["bar_end_utc"], utc=True, errors="coerce").dropna()
+    if starts.empty or ends.empty:
+        raise ConfigError(f"Processed {timeframe} bars in {path} have no valid coverage timestamps.")
+
+    coverage_start = pd.Timestamp(starts.min())
+    coverage_end = pd.Timestamp(ends.max())
+    needed_start = _utc_timestamp(required_start)
+    needed_end = _utc_timestamp(required_end)
+    if coverage_start > needed_start or coverage_end < needed_end:
+        raise ConfigError(
+            f"Processed {timeframe} bars in {path} cover "
+            f"{coverage_start.isoformat()} to {coverage_end.isoformat()}, "
+            f"but required {needed_start.isoformat()} to {needed_end.isoformat()}. "
+            "Run import-required-bars for direct OHLC bar exports, or regenerate processed bars."
+        )
+
+
+def _utc_timestamp(value: object) -> pd.Timestamp:
+    timestamp = pd.Timestamp(value)
+    if timestamp.tzinfo is None:
+        return timestamp.tz_localize("UTC")
+    return timestamp.tz_convert("UTC")

@@ -74,7 +74,13 @@ def _run_expert_deciles(
     if not synthetic_sample:
         base_context = context_with_symbol_metadata(
             config,
-            load_cell_data_context(config, "capital_com", "XAUUSD"),
+            load_cell_data_context(
+                config,
+                "capital_com",
+                "XAUUSD",
+                required_start=start,
+                required_end=end,
+            ),
             "XAUUSD",
         )
 

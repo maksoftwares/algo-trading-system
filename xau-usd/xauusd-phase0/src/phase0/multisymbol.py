@@ -102,7 +102,13 @@ def _run_symbol_check(
     else:
         context = context_with_symbol_metadata(
             config,
-            load_cell_data_context(config, broker, symbol),
+            load_cell_data_context(
+                config,
+                broker,
+                symbol,
+                required_start=start,
+                required_end=end,
+            ),
             symbol,
         )
         context = filter_context_by_time(context, start, end)

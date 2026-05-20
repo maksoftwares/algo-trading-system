@@ -5,16 +5,17 @@ import shutil
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 import phase0.matrix as matrix_module
 import phase0.backtester as backtester_module
 from phase0.backtester import BacktestResult, matrix_output_stem, run_backtest, write_backtest_outputs
 from phase0.cli import main
-from phase0.config import load_project_config
+from phase0.config import ConfigError, load_project_config
 from phase0.aggregation import aggregate_matrix_results
 from phase0.data_contracts import Signal, Trade, TradePlan
 from phase0.hashing import register_hypotheses
-from phase0.matrix import run_phase0_matrix
+from phase0.matrix import load_cell_data_context, run_phase0_matrix
 from phase0.strategies.registry import get_strategy
 from phase0.synthetic import synthetic_context_for_expert
 
@@ -119,8 +120,8 @@ def test_run_phase0_matrix_passes_full_context_and_cell_window(project_root, tmp
     config = load_project_config(root)
     observed_windows: list[tuple[str, str, tuple[str, ...], str, str]] = []
 
-    def fake_load_cell_data_context(config, broker, symbol):
-        del config, broker, symbol
+    def fake_load_cell_data_context(config, broker, symbol, required_start=None, required_end=None):
+        del config, broker, symbol, required_start, required_end
         bars = _window_probe_bars()
         return {timeframe: bars.copy() for timeframe in ("M5", "M15", "H1", "H4", "D1")}
 
@@ -188,6 +189,24 @@ def test_run_matrix_cli_synthetic(project_root, tmp_path, capsys):
     captured = capsys.readouterr()
     assert exit_code == 0
     assert "Matrix run complete: 9 cell output set" in captured.out
+
+
+def test_load_cell_data_context_rejects_insufficient_coverage(project_root, tmp_path):
+    root = _copy_minimal_project(project_root, tmp_path)
+    config = load_project_config(root)
+    for timeframe in ("M5", "M15", "H1", "H4", "D1"):
+        directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / timeframe
+        directory.mkdir(parents=True, exist_ok=True)
+        _short_coverage_bars().to_csv(directory / f"XAUUSD_capital_com_{timeframe}_sample.csv", index=False)
+
+    with pytest.raises(ConfigError, match="but required"):
+        load_cell_data_context(
+            config,
+            "capital_com",
+            "XAUUSD",
+            required_start="2016-01-01T00:00:00Z",
+            required_end="2024-12-31T23:59:59Z",
+        )
 
 
 def test_aggregate_matrix_results(project_root, tmp_path):
@@ -303,5 +322,19 @@ def _window_probe_bars() -> pd.DataFrame:
             "high": [101.0] * 5,
             "low": [99.0] * 5,
             "close": [100.5] * 5,
+        }
+    )
+
+
+def _short_coverage_bars() -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "timestamp_utc": ["2020-01-01T00:05:00Z"],
+            "bar_start_utc": ["2020-01-01T00:00:00Z"],
+            "bar_end_utc": ["2020-01-01T00:05:00Z"],
+            "open": [100.0],
+            "high": [101.0],
+            "low": [99.0],
+            "close": [100.5],
         }
     )
