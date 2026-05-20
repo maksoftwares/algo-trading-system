@@ -9,6 +9,7 @@ import pytest
 from phase0.bar_builder import build_bars_from_ticks
 from phase0.cli import main
 from phase0.config import load_project_config
+from phase0.data_import import import_required_bar_exports
 from phase0.data_validator import DataValidationError, validate_ticks
 from phase0.normalizer import normalize_bar_dataframe, normalize_tick_dataframe
 
@@ -120,6 +121,31 @@ def test_normalize_bar_export_without_spread_leaves_bid_ask_blank():
     assert pd.isna(normalized.loc[0, "bid_open"])
     assert pd.isna(normalized.loc[0, "ask_open"])
     assert pd.isna(normalized.loc[0, "spread_median_points"])
+
+
+def test_normalize_bar_end_column_is_inferred_as_bar_end():
+    raw = pd.DataFrame(
+        {
+            "bar_end_utc": ["2016-01-04T10:05:00Z"],
+            "open": [1061.25],
+            "high": [1062.00],
+            "low": [1060.50],
+            "close": [1061.75],
+            "volume": [42],
+        }
+    )
+
+    normalized = normalize_bar_dataframe(
+        raw,
+        broker="capital_com",
+        symbol="XAUUSD",
+        timeframe="M5",
+        point_size=0.01,
+        source_file="XAUUSD_M5.csv",
+    )
+
+    assert normalized.loc[0, "bar_start_utc"] == "2016-01-04T10:00:00Z"
+    assert normalized.loc[0, "bar_end_utc"] == "2016-01-04T10:05:00Z"
 
 
 def test_validate_ticks_rejects_negative_spread():
@@ -240,6 +266,42 @@ def test_cli_normalize_bars_from_broker_export(project_root, tmp_path, capsys):
     bars = pd.read_csv(written[0])
     assert bars.loc[0, "timestamp_utc"] == "2016-01-04T10:05:00Z"
     assert bars.loc[1, "timestamp_utc"] == "2016-01-04T10:10:00Z"
+
+
+def test_import_required_bars_imports_available_sets_and_reports_missing(project_root, tmp_path):
+    root = _copy_project_config(project_root, tmp_path)
+    raw_dir = root / "data" / "raw" / "capital_com"
+    raw_dir.mkdir(parents=True)
+    (raw_dir / "XAUUSD_M5_history.csv").write_text(
+        "\n".join(
+            [
+                "<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>,<SPREAD>",
+                "2016.01.04,10:00:00,100.00,101.00,99.00,100.50,10,20",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    config = load_project_config(root)
+
+    output = import_required_bar_exports(config, include_multisymbol=False)
+
+    statuses = [result.status for result in output.results]
+    assert statuses.count("IMPORTED") == 1
+    assert statuses.count("MISSING") == 14
+    assert output.report_path.exists()
+    assert list((root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5").glob("*.csv"))
+
+
+def test_import_required_bars_cli(project_root, tmp_path, capsys):
+    root = _copy_project_config(project_root, tmp_path)
+
+    exit_code = main(["--root", str(root), "import-required-bars", "--skip-multisymbol"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "0 imported, 15 missing, 0 failed" in captured.out
+    assert (root / "outputs" / "manifests" / "PHASE0_BAR_IMPORT_REPORT.csv").exists()
 
 
 def _sample_normalized_ticks() -> pd.DataFrame:

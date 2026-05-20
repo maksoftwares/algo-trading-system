@@ -13,6 +13,7 @@ from phase0.data_availability import (
     check_processed_data_availability,
     generate_data_readiness_report,
 )
+from phase0.data_import import import_required_bar_exports
 from phase0.deciles import run_decile_tests
 from phase0.hashing import HashingError, hash_manifest_path, register_hypotheses, validate_hypotheses
 from phase0.manifests import generate_data_manifest, generate_result_manifest
@@ -102,6 +103,19 @@ def build_parser() -> argparse.ArgumentParser:
         help="Interpret source timestamps as bar starts or bar ends. MT5 history exports usually use bar_start.",
     )
     normalize_bars.set_defaults(func=_cmd_normalize_bars)
+
+    import_required_bars = subparsers.add_parser(
+        "import-required-bars",
+        help="Batch-import raw OHLC bar exports for all required Phase 0 sets.",
+    )
+    import_required_bars.add_argument("--skip-multisymbol", action="store_true")
+    import_required_bars.add_argument(
+        "--timestamp-is",
+        choices=("bar_start", "bar_end"),
+        default="bar_start",
+        help="Interpret generic source timestamps as bar starts or bar ends.",
+    )
+    import_required_bars.set_defaults(func=_cmd_import_required_bars)
 
     build_bars = subparsers.add_parser("build-bars", help="Build M1/M5/M15/H1/H4/D1 bars.")
     _add_broker_symbol_args(build_bars)
@@ -267,6 +281,29 @@ def _cmd_normalize_bars(args: argparse.Namespace) -> int:
         print(path)
     print(f"Data manifest: {manifest_path}")
     return 0
+
+
+def _cmd_import_required_bars(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = import_required_bar_exports(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+        timestamp_is=args.timestamp_is,
+    )
+    readiness_path = generate_data_readiness_report(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
+    imported = sum(1 for result in output.results if result.status == "IMPORTED")
+    missing = sum(1 for result in output.results if result.status == "MISSING")
+    failed = sum(1 for result in output.results if result.status == "FAILED")
+    print(
+        f"Required bar import complete: {imported} imported, "
+        f"{missing} missing, {failed} failed."
+    )
+    print(f"Import report: {output.report_path}")
+    print(f"Data readiness report: {readiness_path}")
+    return 1 if failed else 0
 
 
 def _cmd_build_bars(args: argparse.Namespace) -> int:

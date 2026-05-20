@@ -17,6 +17,7 @@ def test_required_modules_import():
         "phase0.costs",
         "phase0.data_contracts",
         "phase0.data_availability",
+        "phase0.data_import",
         "phase0.data_loader",
         "phase0.data_validator",
         "phase0.deciles",

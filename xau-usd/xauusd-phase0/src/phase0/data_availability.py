@@ -34,7 +34,7 @@ def check_processed_data_availability(
     include_multisymbol: bool = True,
 ) -> list[DataAvailabilityCheck]:
     checks: list[DataAvailabilityCheck] = []
-    for broker, symbol in _required_broker_symbols(config, include_multisymbol):
+    for broker, symbol in required_broker_symbols(config, include_multisymbol):
         for timeframe in REQUIRED_BACKTEST_TIMEFRAMES:
             directory = processed_bars_dir(config, broker, symbol, timeframe)
             files = sorted(directory.glob("*.csv")) if directory.exists() else []
@@ -85,7 +85,7 @@ def generate_data_readiness_report(
     return output_path
 
 
-def _required_broker_symbols(
+def required_broker_symbols(
     config: ProjectConfig,
     include_multisymbol: bool,
 ) -> list[tuple[str, str]]:
@@ -106,7 +106,7 @@ def _render_data_readiness_report(
 ) -> str:
     ready = [check for check in checks if check.available]
     missing = [check for check in checks if not check.available]
-    broker_symbols = _required_broker_symbols(config, include_multisymbol)
+    broker_symbols = required_broker_symbols(config, include_multisymbol)
     status = "PASS" if not missing else "BLOCKED"
     lines = [
         "# Phase 0 Data Readiness",
@@ -151,7 +151,7 @@ def _render_data_readiness_report(
             "",
             "## Next Action",
             "",
-            "Add raw broker CSVs, run validate-data, normalize-data, build-bars for each broker/symbol, then rerun check-data-availability.",
+            "Add raw broker CSVs, run import-required-bars for direct bar exports or normalize-data/build-bars for tick exports, then rerun check-data-availability.",
             "",
         ]
     )

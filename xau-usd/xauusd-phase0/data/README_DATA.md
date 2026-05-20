@@ -38,12 +38,14 @@ python -m phase0 validate-data --broker capital_com --symbol XAUUSD
 python -m phase0 normalize-data --broker capital_com --symbol XAUUSD
 python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1,M5,M15,H1,H4,D1
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
+python -m phase0 import-required-bars
 python -m phase0 generate-data-readiness
 python -m phase0 check-data-availability
 ```
 
 These commands write validation artifacts and `outputs/manifests/PHASE0_DATA_MANIFEST.md`.
 Use `normalize-data` plus `build-bars` for tick exports. Use `normalize-bars` for direct OHLC bar exports from MT5 History Center or a broker portal. By default, source bar timestamps are interpreted as bar starts; pass `--timestamp-is bar_end` only for exports that already use bar-close timestamps.
+Use `import-required-bars` after placing bar CSVs in `data/raw/{broker}/`; it batch-imports every required broker/symbol/timeframe whose filename includes both the symbol and timeframe, then writes `outputs/manifests/PHASE0_BAR_IMPORT_REPORT.csv`.
 `check-data-availability` requires each mandatory broker/symbol/timeframe folder to contain at least one non-empty bar CSV with the locked Phase 0 bar schema.
 `generate-data-readiness` writes `outputs/manifests/PHASE0_DATA_READINESS.md` with the exact missing or malformed broker/symbol/timeframe sets.
 

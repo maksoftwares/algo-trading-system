@@ -127,9 +127,10 @@ def normalize_bar_dataframe(
         raise NormalizationError("timestamp_is must be 'bar_start' or 'bar_end'.")
 
     lookup = {_canonical_column(column): column for column in raw.columns}
-    timestamp = _extract_bar_timestamp(raw, lookup, source_file)
+    timestamp, inferred_timestamp_is = _extract_bar_timestamp(raw, lookup, source_file)
+    source_timestamp_is = timestamp_is if inferred_timestamp_is == "generic" else inferred_timestamp_is
     offset = pd.tseries.frequencies.to_offset(TIMEFRAME_FREQ[timeframe])
-    if timestamp_is == "bar_start":
+    if source_timestamp_is == "bar_start":
         bar_start = timestamp
         bar_end = timestamp + offset
     else:
@@ -211,11 +212,18 @@ def normalize_broker_bars(
     symbol: str,
     timeframe: str,
     timestamp_is: str = "bar_start",
+    require_timeframe_token: bool = False,
 ) -> list[Path]:
     canonical_symbol = resolve_symbol(config, symbol)
     written: list[Path] = []
     reports: list[ValidationReport] = []
-    for raw_file in find_raw_bar_files(config, broker, canonical_symbol, timeframe):
+    for raw_file in find_raw_bar_files(
+        config,
+        broker,
+        canonical_symbol,
+        timeframe,
+        require_timeframe_token=require_timeframe_token,
+    ):
         normalized = normalize_raw_bar_file(
             config,
             broker,
@@ -285,19 +293,26 @@ def _extract_bar_timestamp(
     raw: pd.DataFrame,
     lookup: dict[str, str],
     source_file: str,
-) -> pd.Series:
-    for aliases in (BAR_START_ALIASES, BAR_END_ALIASES, BAR_TIMESTAMP_ALIASES):
-        column = _find_optional_column(lookup, aliases)
-        if column is not None:
-            return pd.to_datetime(raw[column], utc=True, errors="coerce")
+) -> tuple[pd.Series, str]:
+    start_column = _find_optional_column(lookup, BAR_START_ALIASES)
+    if start_column is not None:
+        return pd.to_datetime(raw[start_column], utc=True, errors="coerce"), "bar_start"
+
+    end_column = _find_optional_column(lookup, BAR_END_ALIASES)
+    if end_column is not None:
+        return pd.to_datetime(raw[end_column], utc=True, errors="coerce"), "bar_end"
+
+    generic_column = _find_optional_column(lookup, BAR_TIMESTAMP_ALIASES)
+    if generic_column is not None:
+        return pd.to_datetime(raw[generic_column], utc=True, errors="coerce"), "generic"
 
     date_column = _find_optional_column(lookup, DATE_ALIASES)
     time_column = _find_optional_column(lookup, TIME_ALIASES)
     if date_column is not None and time_column is not None:
         combined = raw[date_column].astype(str).str.strip() + " " + raw[time_column].astype(str).str.strip()
-        return pd.to_datetime(combined, utc=True, errors="coerce")
+        return pd.to_datetime(combined, utc=True, errors="coerce"), "generic"
     if date_column is not None:
-        return pd.to_datetime(raw[date_column], utc=True, errors="coerce")
+        return pd.to_datetime(raw[date_column], utc=True, errors="coerce"), "generic"
 
     raise NormalizationError(
         f"{source_file} is missing a timestamp column. Tried timestamp/bar_start/bar_end, "
