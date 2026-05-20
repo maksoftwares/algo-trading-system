@@ -6,7 +6,11 @@ from pathlib import Path
 from phase0.adversarial import AdversarialPacketOutput, create_adversarial_packets
 from phase0.aggregation import AggregationOutput, aggregate_matrix_results
 from phase0.config import ProjectConfig, build_cell_configs
-from phase0.data_availability import assert_processed_data_available, generate_data_readiness_report
+from phase0.data_availability import (
+    assert_processed_data_available,
+    generate_data_readiness_report,
+    generate_data_requirements_csv,
+)
 from phase0.deciles import DecileRunOutput, run_decile_tests
 from phase0.hashing import validate_hypotheses
 from phase0.manifests import generate_required_data_manifest, generate_result_manifest
@@ -36,6 +40,7 @@ def run_all_phase0(
     assert_no_live_trading_calls(config)
     validate_hypotheses(config)
     if not synthetic_sample:
+        generate_data_requirements_csv(config)
         generate_required_data_manifest(config)
         generate_data_readiness_report(config)
         assert_processed_data_available(config)

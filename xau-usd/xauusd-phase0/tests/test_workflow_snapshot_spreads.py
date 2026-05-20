@@ -101,6 +101,7 @@ def test_run_all_real_data_preflight_writes_readiness_artifacts(project_root, tm
     with pytest.raises(ConfigError, match="import-required-bars"):
         run_all_phase0(config)
 
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_REQUIREMENTS.csv").exists()
     assert (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").exists()
     assert (root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md").exists()
 
