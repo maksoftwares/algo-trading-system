@@ -9,7 +9,12 @@ import pandas as pd
 from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolve_symbol
 from phase0.constants import COMPARISON_SYMBOLS
 from phase0.data_loader import processed_bars_dir
-from phase0.data_validator import BAR_REQUIRED_COLUMNS, largest_bar_gap_issue, validate_bars
+from phase0.data_validator import (
+    BAR_REQUIRED_COLUMNS,
+    bar_identity_issues,
+    largest_bar_gap_issue,
+    validate_bars,
+)
 from phase0.run_context import guarded_or_trimmed_period
 
 
@@ -66,6 +71,8 @@ def check_processed_data_availability(
             files = sorted(directory.glob("*.csv")) if directory.exists() else []
             valid_files, issues, coverage_start, coverage_end = _valid_bar_files(
                 files,
+                broker,
+                symbol,
                 timeframe,
                 required_start,
                 required_end,
@@ -290,6 +297,8 @@ def _normalize_bar_command(check: DataAvailabilityCheck) -> str:
 
 def _valid_bar_files(
     files: list[Path],
+    broker: str,
+    symbol: str,
     timeframe: str,
     required_start: pd.Timestamp,
     required_end: pd.Timestamp,
@@ -316,6 +325,10 @@ def _valid_bar_files(
         if report.error_count:
             issue = next(issue for issue in report.issues if issue.severity == "ERROR")
             issues.append(f"{path.name}: {issue.column} {issue.message}")
+            continue
+        identity_issues = bar_identity_issues(frame, broker, symbol, timeframe)
+        if identity_issues:
+            issues.append(f"{path.name}: {identity_issues[0]}")
             continue
         starts = pd.to_datetime(frame["bar_start_utc"], utc=True, errors="coerce").dropna()
         ends = pd.to_datetime(frame["bar_end_utc"], utc=True, errors="coerce").dropna()

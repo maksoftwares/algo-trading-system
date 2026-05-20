@@ -7,9 +7,9 @@ from typing import Any
 import pandas as pd
 
 from phase0.backtester import matrix_output_stem, run_backtest, write_backtest_outputs
-from phase0.config import ConfigError, ProjectConfig, build_cell_configs
+from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolve_symbol
 from phase0.data_loader import processed_bars_dir
-from phase0.data_validator import largest_bar_gap_issue, validate_bars
+from phase0.data_validator import bar_identity_issues, largest_bar_gap_issue, validate_bars
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
@@ -91,26 +91,32 @@ def load_cell_data_context(
     required_start: object | None = None,
     required_end: object | None = None,
 ) -> dict:
-    bars_root = processed_bars_dir(config, broker, symbol)
+    canonical_symbol = resolve_symbol(config, symbol)
+    bars_root = processed_bars_dir(config, broker, canonical_symbol)
     if not bars_root.exists():
         raise ConfigError(
             f"Processed bars not found at {bars_root}. "
             "Run import-required-bars for direct OHLC bar exports, or use --synthetic-sample for a smoke test."
         )
 
-    context: dict[str, Any] = {"symbol": symbol}
+    context: dict[str, Any] = {"symbol": canonical_symbol}
     for timeframe in ("M5", "M15", "H1", "H4", "D1"):
         timeframe_dir = bars_root / timeframe
         files = sorted(timeframe_dir.glob("*.csv")) if timeframe_dir.exists() else []
         if not files:
             raise ConfigError(f"Missing processed {timeframe} bars in {timeframe_dir}.")
-        frame = _load_processed_timeframe_bars(files, timeframe)
+        frame = _load_processed_timeframe_bars(files, broker, canonical_symbol, timeframe)
         _assert_bar_coverage(frame, timeframe_dir, timeframe, required_start, required_end)
         context[timeframe] = frame
     return context
 
 
-def _load_processed_timeframe_bars(files: list[Path], timeframe: str) -> pd.DataFrame:
+def _load_processed_timeframe_bars(
+    files: list[Path],
+    broker: str,
+    symbol: str,
+    timeframe: str,
+) -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
     for path in files:
         try:
@@ -136,6 +142,13 @@ def _load_processed_timeframe_bars(files: list[Path], timeframe: str) -> pd.Data
         raise ConfigError(
             f"Processed {timeframe} bars failed validation after combining {len(files)} file(s): "
             f"{first_issue.column} {first_issue.message}"
+        )
+
+    identity_issues = bar_identity_issues(combined, broker, symbol, timeframe)
+    if identity_issues:
+        raise ConfigError(
+            f"Processed {timeframe} bars failed identity check after combining "
+            f"{len(files)} file(s): {identity_issues[0]}."
         )
 
     gap_issue = largest_bar_gap_issue(combined["bar_end_utc"], timeframe)

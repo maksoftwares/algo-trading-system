@@ -272,6 +272,34 @@ def test_load_cell_data_context_rejects_split_files_with_large_gap(project_root,
         )
 
 
+def test_load_cell_data_context_rejects_mismatched_bar_identity(project_root, tmp_path):
+    root = _copy_minimal_project(project_root, tmp_path)
+    _write_split_coverage_bars(root)
+    path = (
+        root
+        / "data"
+        / "processed"
+        / "bars"
+        / "capital_com"
+        / "XAUUSD"
+        / "M5"
+        / "XAUUSD_capital_com_M5_part1.csv"
+    )
+    frame = pd.read_csv(path)
+    frame["symbol"] = "EURUSD"
+    frame.to_csv(path, index=False)
+    config = load_project_config(root)
+
+    with pytest.raises(ConfigError, match="identity check"):
+        load_cell_data_context(
+            config,
+            "capital_com",
+            "XAUUSD",
+            required_start="2016-01-01T00:00:00Z",
+            required_end="2025-06-30T23:59:59Z",
+        )
+
+
 def test_aggregate_matrix_results(project_root, tmp_path):
     root = _copy_minimal_project(project_root, tmp_path)
     config = load_project_config(root)

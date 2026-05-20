@@ -201,6 +201,31 @@ def largest_bar_gap_issue(bar_end_timestamps: pd.Series, timeframe: str) -> str:
     )
 
 
+def bar_identity_issues(
+    df: pd.DataFrame,
+    expected_broker: str,
+    expected_symbol: str,
+    expected_timeframe: str,
+) -> list[str]:
+    checks = (
+        ("broker", expected_broker, _identity_value),
+        ("symbol", expected_symbol, _identity_value),
+        ("timeframe", expected_timeframe, lambda value: _identity_value(value).upper()),
+    )
+    issues: list[str] = []
+    for column, expected, normalizer in checks:
+        if column not in df.columns:
+            continue
+        actual_values = _column_identity_values(df[column], normalizer)
+        expected_value = normalizer(expected)
+        if actual_values != {expected_value}:
+            issues.append(
+                f"{column} values {_identity_values_text(actual_values)} "
+                f"do not match expected {expected_value}"
+            )
+    return issues
+
+
 def _validate_bar_timeframes(
     df: pd.DataFrame,
     starts: pd.Series,
@@ -231,6 +256,20 @@ def _validate_bar_timeframes(
                     f"Bar duration {actual} does not match timeframe {timeframe} ({expected}).",
                 )
             )
+
+
+def _identity_value(value: object) -> str:
+    return str(value).strip()
+
+
+def _column_identity_values(series: pd.Series, normalizer) -> set[str]:
+    return {normalizer(value) for value in series.dropna().unique()}
+
+
+def _identity_values_text(values: set[str]) -> str:
+    if not values:
+        return "<none>"
+    return ", ".join(sorted(values)[:5])
 
 
 def _timedelta_text(value: pd.Timedelta) -> str:
