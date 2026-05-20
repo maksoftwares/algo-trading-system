@@ -14,10 +14,20 @@ from phase0.cli import main
 from phase0.config import ConfigError, load_project_config
 from phase0.aggregation import aggregate_matrix_results
 from phase0.data_contracts import Signal, Trade, TradePlan
+from phase0.data_validator import BAR_REQUIRED_COLUMNS
 from phase0.hashing import register_hypotheses
 from phase0.matrix import load_cell_data_context, run_phase0_matrix
 from phase0.strategies.registry import get_strategy
 from phase0.synthetic import synthetic_context_for_expert
+
+
+TIMEFRAME_DELTAS = {
+    "M5": pd.Timedelta(minutes=5),
+    "M15": pd.Timedelta(minutes=15),
+    "H1": pd.Timedelta(hours=1),
+    "H4": pd.Timedelta(hours=4),
+    "D1": pd.Timedelta(days=1),
+}
 
 
 def test_run_backtest_synthetic_trend_pullback(project_root):
@@ -197,7 +207,10 @@ def test_load_cell_data_context_rejects_insufficient_coverage(project_root, tmp_
     for timeframe in ("M5", "M15", "H1", "H4", "D1"):
         directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / timeframe
         directory.mkdir(parents=True, exist_ok=True)
-        _short_coverage_bars().to_csv(directory / f"XAUUSD_capital_com_{timeframe}_sample.csv", index=False)
+        _short_coverage_bars(timeframe).to_csv(
+            directory / f"XAUUSD_capital_com_{timeframe}_sample.csv",
+            index=False,
+        )
 
     with pytest.raises(ConfigError, match="but required"):
         load_cell_data_context(
@@ -206,6 +219,56 @@ def test_load_cell_data_context_rejects_insufficient_coverage(project_root, tmp_
             "XAUUSD",
             required_start="2016-01-01T00:00:00Z",
             required_end="2024-12-31T23:59:59Z",
+        )
+
+
+def test_load_cell_data_context_combines_split_timeframe_files(project_root, tmp_path):
+    root = _copy_minimal_project(project_root, tmp_path)
+    _write_split_coverage_bars(root)
+    config = load_project_config(root)
+
+    context = load_cell_data_context(
+        config,
+        "capital_com",
+        "XAUUSD",
+        required_start="2016-01-01T00:00:00Z",
+        required_end="2025-06-30T23:59:59Z",
+    )
+
+    m5_timestamps = pd.to_datetime(context["M5"]["timestamp_utc"], utc=True)
+    assert len(context["M5"]) > 500
+    assert m5_timestamps.is_monotonic_increasing
+    assert pd.to_datetime(context["M5"]["bar_start_utc"], utc=True).min() <= pd.Timestamp(
+        "2016-01-01T00:00:00Z"
+    )
+    assert pd.to_datetime(context["M5"]["bar_end_utc"], utc=True).max() >= pd.Timestamp(
+        "2025-06-30T23:59:59Z"
+    )
+
+
+def test_load_cell_data_context_rejects_split_files_with_large_gap(project_root, tmp_path):
+    root = _copy_minimal_project(project_root, tmp_path)
+    directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5"
+    directory.mkdir(parents=True, exist_ok=True)
+    _write_bar_rows(
+        directory / "XAUUSD_capital_com_M5_part1.csv",
+        "M5",
+        [pd.Timestamp("2016-01-01T00:00:00Z")],
+    )
+    _write_bar_rows(
+        directory / "XAUUSD_capital_com_M5_part2.csv",
+        "M5",
+        [_last_required_bar_start("M5")],
+    )
+    config = load_project_config(root)
+
+    with pytest.raises(ConfigError, match="continuity check"):
+        load_cell_data_context(
+            config,
+            "capital_com",
+            "XAUUSD",
+            required_start="2016-01-01T00:00:00Z",
+            required_end="2025-06-30T23:59:59Z",
         )
 
 
@@ -326,15 +389,85 @@ def _window_probe_bars() -> pd.DataFrame:
     )
 
 
-def _short_coverage_bars() -> pd.DataFrame:
+def _write_split_coverage_bars(root: Path) -> None:
+    for timeframe in ("M5", "M15", "H1", "H4", "D1"):
+        directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / timeframe
+        directory.mkdir(parents=True, exist_ok=True)
+        starts = _bar_start_samples(timeframe)
+        split_index = len(starts) // 2
+        _write_bar_rows(
+            directory / f"XAUUSD_capital_com_{timeframe}_part1.csv",
+            timeframe,
+            starts[:split_index],
+        )
+        _write_bar_rows(
+            directory / f"XAUUSD_capital_com_{timeframe}_part2.csv",
+            timeframe,
+            starts[split_index:],
+        )
+
+
+def _write_bar_rows(path: Path, timeframe: str, starts: list[pd.Timestamp]) -> None:
+    pd.DataFrame(
+        [_valid_bar_row(timeframe, start) for start in starts],
+        columns=BAR_REQUIRED_COLUMNS,
+    ).to_csv(path, index=False)
+
+
+def _bar_start_samples(timeframe: str) -> list[pd.Timestamp]:
+    first_bar_start = pd.Timestamp("2016-01-01T00:00:00Z")
+    last_bar_start = _last_required_bar_start(timeframe)
+    starts = list(pd.date_range(first_bar_start, last_bar_start, freq="6D"))
+    if starts[-1] != last_bar_start:
+        starts.append(last_bar_start)
+    return starts
+
+
+def _last_required_bar_start(timeframe: str) -> pd.Timestamp:
+    return pd.Timestamp("2025-07-01T00:00:00Z") - TIMEFRAME_DELTAS[timeframe]
+
+
+def _short_coverage_bars(timeframe: str) -> pd.DataFrame:
     return pd.DataFrame(
-        {
-            "timestamp_utc": ["2020-01-01T00:05:00Z"],
-            "bar_start_utc": ["2020-01-01T00:00:00Z"],
-            "bar_end_utc": ["2020-01-01T00:05:00Z"],
-            "open": [100.0],
-            "high": [101.0],
-            "low": [99.0],
-            "close": [100.5],
-        }
+        [_valid_bar_row(timeframe, pd.Timestamp("2020-01-01T00:00:00Z"))],
+        columns=BAR_REQUIRED_COLUMNS,
     )
+
+
+def _valid_bar_row(timeframe: str, bar_start_utc: pd.Timestamp) -> dict[str, object]:
+    bar_start = pd.Timestamp(bar_start_utc)
+    bar_end = bar_start + TIMEFRAME_DELTAS[timeframe]
+    return {
+        "timestamp_utc": _format_utc(bar_end),
+        "bar_start_utc": _format_utc(bar_start),
+        "bar_end_utc": _format_utc(bar_end),
+        "broker": "capital_com",
+        "symbol": "XAUUSD",
+        "timeframe": timeframe,
+        "open": 100.0,
+        "high": 101.0,
+        "low": 99.0,
+        "close": 100.5,
+        "mid_open": 100.0,
+        "mid_high": 101.0,
+        "mid_low": 99.0,
+        "mid_close": 100.5,
+        "bid_open": 99.9,
+        "bid_high": 100.9,
+        "bid_low": 98.9,
+        "bid_close": 100.4,
+        "ask_open": 100.1,
+        "ask_high": 101.1,
+        "ask_low": 99.1,
+        "ask_close": 100.6,
+        "spread_open_points": 20.0,
+        "spread_close_points": 20.0,
+        "spread_median_points": 20.0,
+        "spread_p95_points": 22.0,
+        "tick_count": 10,
+        "volume_sum": 100,
+    }
+
+
+def _format_utc(timestamp: pd.Timestamp) -> str:
+    return pd.Timestamp(timestamp).strftime("%Y-%m-%dT%H:%M:%SZ")

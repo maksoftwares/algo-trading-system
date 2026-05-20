@@ -9,18 +9,11 @@ import pandas as pd
 from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolve_symbol
 from phase0.constants import COMPARISON_SYMBOLS
 from phase0.data_loader import processed_bars_dir
-from phase0.data_validator import BAR_REQUIRED_COLUMNS, validate_bars
+from phase0.data_validator import BAR_REQUIRED_COLUMNS, largest_bar_gap_issue, validate_bars
 from phase0.run_context import guarded_or_trimmed_period
 
 
 REQUIRED_BACKTEST_TIMEFRAMES = ("M5", "M15", "H1", "H4", "D1")
-MAX_ALLOWED_BAR_GAPS = {
-    "M5": pd.Timedelta(days=7),
-    "M15": pd.Timedelta(days=7),
-    "H1": pd.Timedelta(days=7),
-    "H4": pd.Timedelta(days=10),
-    "D1": pd.Timedelta(days=14),
-}
 DATA_REQUIREMENT_COLUMNS = (
     "broker",
     "symbol",
@@ -345,34 +338,10 @@ def _valid_bar_files(
             f"coverage ends {_timestamp_text(coverage_end)}, required >= {_timestamp_text(required_end)}"
         )
     if valid:
-        gap_issue = _max_gap_issue(coverage_points, timeframe)
+        gap_issue = largest_bar_gap_issue(pd.concat(coverage_points), timeframe)
         if gap_issue:
             issues.append(gap_issue)
     return valid, issues, coverage_start, coverage_end
-
-
-def _max_gap_issue(coverage_points: list[pd.Series], timeframe: str) -> str:
-    if not coverage_points:
-        return ""
-    timestamps = pd.concat(coverage_points).dropna().drop_duplicates().sort_values()
-    if len(timestamps) < 2:
-        return ""
-    allowed_gap = MAX_ALLOWED_BAR_GAPS[timeframe]
-    largest_gap = timestamps.diff().max()
-    if largest_gap <= allowed_gap:
-        return ""
-    return (
-        f"largest timestamp gap {_timedelta_text(largest_gap)} exceeds allowed "
-        f"{_timedelta_text(allowed_gap)} for {timeframe}"
-    )
-
-
-def _timedelta_text(value: pd.Timedelta) -> str:
-    seconds = int(pd.Timedelta(value).total_seconds())
-    days, remainder = divmod(seconds, 86_400)
-    hours, remainder = divmod(remainder, 3_600)
-    minutes, seconds = divmod(remainder, 60)
-    return f"{days}d {hours:02d}:{minutes:02d}:{seconds:02d}"
 
 
 def _availability_error_line(check: DataAvailabilityCheck) -> str:

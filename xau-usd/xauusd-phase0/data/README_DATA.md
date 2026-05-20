@@ -31,6 +31,7 @@ data/processed/bars/{broker}/{symbol}/{timeframe}/
 
 Bar timestamps use the Phase 0 convention: `timestamp_utc` equals `bar_end_utc`.
 Processed bar files must be sorted ascending, duplicate-free by `timestamp_utc`, and each row's `bar_end_utc - bar_start_utc` must match its declared timeframe.
+Real-data runs load and validate every CSV in each required timeframe folder as one combined bar stream, so broker exports may be split into date chunks as long as the combined stream is continuous and duplicate-free.
 
 ## Commands
 

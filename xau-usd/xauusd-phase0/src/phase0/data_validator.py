@@ -62,6 +62,13 @@ BAR_TIMEFRAME_DURATIONS = {
     "H4": pd.Timedelta(hours=4),
     "D1": pd.Timedelta(days=1),
 }
+MAX_ALLOWED_BAR_GAPS = {
+    "M5": pd.Timedelta(days=7),
+    "M15": pd.Timedelta(days=7),
+    "H1": pd.Timedelta(days=7),
+    "H4": pd.Timedelta(days=10),
+    "D1": pd.Timedelta(days=14),
+}
 
 
 class DataValidationError(ConfigError):
@@ -175,6 +182,25 @@ def validate_bars(df: pd.DataFrame, name: str = "bars", fail_on_error: bool = Tr
     return _finish_report(name, df, issues, fail_on_error)
 
 
+def largest_bar_gap_issue(bar_end_timestamps: pd.Series, timeframe: str) -> str:
+    timestamps = (
+        pd.to_datetime(bar_end_timestamps, utc=True, errors="coerce")
+        .dropna()
+        .drop_duplicates()
+        .sort_values()
+    )
+    if len(timestamps) < 2:
+        return ""
+    allowed_gap = MAX_ALLOWED_BAR_GAPS[timeframe]
+    largest_gap = timestamps.diff().max()
+    if largest_gap <= allowed_gap:
+        return ""
+    return (
+        f"largest timestamp gap {_timedelta_text(largest_gap)} exceeds allowed "
+        f"{_timedelta_text(allowed_gap)} for {timeframe}"
+    )
+
+
 def _validate_bar_timeframes(
     df: pd.DataFrame,
     starts: pd.Series,
@@ -205,6 +231,14 @@ def _validate_bar_timeframes(
                     f"Bar duration {actual} does not match timeframe {timeframe} ({expected}).",
                 )
             )
+
+
+def _timedelta_text(value: pd.Timedelta) -> str:
+    seconds = int(pd.Timedelta(value).total_seconds())
+    days, remainder = divmod(seconds, 86_400)
+    hours, remainder = divmod(remainder, 3_600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{days}d {hours:02d}:{minutes:02d}:{seconds:02d}"
 
 
 def write_validation_artifacts(

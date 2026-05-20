@@ -9,6 +9,7 @@ import pandas as pd
 from phase0.backtester import matrix_output_stem, run_backtest, write_backtest_outputs
 from phase0.config import ConfigError, ProjectConfig, build_cell_configs
 from phase0.data_loader import processed_bars_dir
+from phase0.data_validator import largest_bar_gap_issue, validate_bars
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
@@ -103,16 +104,52 @@ def load_cell_data_context(
         files = sorted(timeframe_dir.glob("*.csv")) if timeframe_dir.exists() else []
         if not files:
             raise ConfigError(f"Missing processed {timeframe} bars in {timeframe_dir}.")
-        latest_file = files[-1]
-        frame = pd.read_csv(latest_file)
-        _assert_bar_coverage(frame, latest_file, timeframe, required_start, required_end)
+        frame = _load_processed_timeframe_bars(files, timeframe)
+        _assert_bar_coverage(frame, timeframe_dir, timeframe, required_start, required_end)
         context[timeframe] = frame
     return context
 
 
+def _load_processed_timeframe_bars(files: list[Path], timeframe: str) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    for path in files:
+        try:
+            frames.append(pd.read_csv(path))
+        except Exception as exc:
+            raise ConfigError(
+                f"Failed to read processed {timeframe} bars in {path}: {exc}"
+            ) from exc
+
+    combined = pd.concat(frames, ignore_index=True)
+    if "timestamp_utc" in combined.columns:
+        timestamps = pd.to_datetime(combined["timestamp_utc"], utc=True, errors="coerce")
+        combined = (
+            combined.assign(_phase0_sort_timestamp=timestamps)
+            .sort_values("_phase0_sort_timestamp", na_position="last")
+            .drop(columns="_phase0_sort_timestamp")
+            .reset_index(drop=True)
+        )
+
+    report = validate_bars(combined, name=f"{timeframe} processed bars", fail_on_error=False)
+    if report.error_count:
+        first_issue = next(issue for issue in report.issues if issue.severity == "ERROR")
+        raise ConfigError(
+            f"Processed {timeframe} bars failed validation after combining {len(files)} file(s): "
+            f"{first_issue.column} {first_issue.message}"
+        )
+
+    gap_issue = largest_bar_gap_issue(combined["bar_end_utc"], timeframe)
+    if gap_issue:
+        raise ConfigError(
+            f"Processed {timeframe} bars failed continuity check after combining "
+            f"{len(files)} file(s): {gap_issue}."
+        )
+    return combined
+
+
 def _assert_bar_coverage(
     frame: pd.DataFrame,
-    path: Path,
+    source: Path,
     timeframe: str,
     required_start: object | None,
     required_end: object | None,
@@ -122,13 +159,16 @@ def _assert_bar_coverage(
     missing = [column for column in ("bar_start_utc", "bar_end_utc") if column not in frame.columns]
     if missing:
         raise ConfigError(
-            f"Processed {timeframe} bars in {path} missing coverage column(s): {', '.join(missing)}."
+            f"Processed {timeframe} bars in {source} missing coverage column(s): "
+            f"{', '.join(missing)}."
         )
 
     starts = pd.to_datetime(frame["bar_start_utc"], utc=True, errors="coerce").dropna()
     ends = pd.to_datetime(frame["bar_end_utc"], utc=True, errors="coerce").dropna()
     if starts.empty or ends.empty:
-        raise ConfigError(f"Processed {timeframe} bars in {path} have no valid coverage timestamps.")
+        raise ConfigError(
+            f"Processed {timeframe} bars in {source} have no valid coverage timestamps."
+        )
 
     coverage_start = pd.Timestamp(starts.min())
     coverage_end = pd.Timestamp(ends.max())
@@ -136,7 +176,7 @@ def _assert_bar_coverage(
     needed_end = _utc_timestamp(required_end)
     if coverage_start > needed_start or coverage_end < needed_end:
         raise ConfigError(
-            f"Processed {timeframe} bars in {path} cover "
+            f"Processed {timeframe} bars in {source} cover "
             f"{coverage_start.isoformat()} to {coverage_end.isoformat()}, "
             f"but required {needed_start.isoformat()} to {needed_end.isoformat()}. "
             "Run import-required-bars for direct OHLC bar exports, or regenerate processed bars."
