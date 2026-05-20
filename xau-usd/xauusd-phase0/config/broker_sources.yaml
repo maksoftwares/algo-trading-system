@@ -1,0 +1,24 @@
+brokers:
+  capital_com:
+    display_name: "Capital.com"
+    priority: 1
+    raw_dir: "data/raw/capital_com"
+    processed_dir: "data/processed"
+    default_timezone: "UTC"
+    supports_ticks: true
+
+  pepperstone:
+    display_name: "Pepperstone"
+    priority: 2
+    raw_dir: "data/raw/pepperstone"
+    processed_dir: "data/processed"
+    default_timezone: "UTC"
+    supports_ticks: true
+
+  dukascopy:
+    display_name: "Dukascopy"
+    priority: 3
+    raw_dir: "data/raw/dukascopy"
+    processed_dir: "data/processed"
+    default_timezone: "UTC"
+    supports_ticks: true

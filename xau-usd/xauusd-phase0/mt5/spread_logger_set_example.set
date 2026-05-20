@@ -1,0 +1,7 @@
+InpSymbol=
+InpLogIntervalSeconds=5
+InpUseCommonFiles=true
+InpFilePrefix=spread_log
+InpPrintToExpertsTab=false
+InpRolloverHourServer=22
+InpRolloverWindowMinutes=30

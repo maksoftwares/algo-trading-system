@@ -1,0 +1,7 @@
+true_holdout:
+  status: "reserved"
+  purpose: "Never touched during development unless final pre-live review explicitly unlocks it."
+  start: "2025-07-01T00:00:00Z"
+  end: "2025-12-31T23:59:59Z"
+  unlock_requires_file: "docs/FINAL_HOLDOUT_UNLOCK_APPROVAL.md"
+  unlock_requires_cli_flag: "--unlock-true-holdout"

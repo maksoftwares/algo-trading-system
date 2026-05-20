@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Keep the directory layout, but do not commit large market data or generated outputs.
+data/raw/**
+!data/raw/
+!data/raw/*/
+!data/raw/*/.gitkeep
+
+data/processed/**
+!data/processed/
+!data/processed/*/
+!data/processed/*/.gitkeep
+
+outputs/**
+!outputs/
+!outputs/*/
+!outputs/*/.gitkeep

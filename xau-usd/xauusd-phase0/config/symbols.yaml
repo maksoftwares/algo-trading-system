@@ -1,0 +1,30 @@
+symbols:
+  XAUUSD:
+    aliases: ["XAUUSD", "XAUUSD.", "XAUUSDm", "GOLD"]
+    asset_class: "metal_cfd"
+    contract_size_per_lot: 100.0
+    point_size: 0.01
+    price_decimals: 2
+    min_lot: 0.01
+    lot_step: 0.01
+    default_lot_for_cost: 1.0
+
+  EURUSD:
+    aliases: ["EURUSD", "EURUSD.", "EURUSDm"]
+    asset_class: "fx_cfd"
+    contract_size_per_lot: 100000.0
+    point_size: 0.00001
+    price_decimals: 5
+    min_lot: 0.01
+    lot_step: 0.01
+    default_lot_for_cost: 1.0
+
+  USDJPY:
+    aliases: ["USDJPY", "USDJPY.", "USDJPYm"]
+    asset_class: "fx_cfd"
+    contract_size_per_lot: 100000.0
+    point_size: 0.001
+    price_decimals: 3
+    min_lot: 0.01
+    lot_step: 0.01
+    default_lot_for_cost: 1.0

@@ -1,0 +1,41 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+PACKAGE_ROOT = Path(__file__).resolve().parents[2]
+CONFIG_DIR = PACKAGE_ROOT / "config"
+DEFAULT_PHASE0_CONFIG = CONFIG_DIR / "phase0.yaml"
+DEFAULT_TRUE_HOLDOUT_CONFIG = CONFIG_DIR / "true_holdout_period.yaml"
+
+EXPERTS = ("trend_pullback", "breakout_retest", "range_mr")
+COST_MODELS = ("best_case", "median", "p95")
+BROKERS = ("capital_com", "pepperstone", "dukascopy")
+PRIMARY_SYMBOL = "XAUUSD"
+COMPARISON_SYMBOLS = ("EURUSD", "USDJPY")
+
+TIMEFRAMES = ("M1", "M5", "M15", "H1", "H4", "D1")
+BAR_TIMESTAMP_CONVENTION = "timestamp_utc_equals_bar_end_utc"
+
+CELL_WINDOWS = {
+    1: ("cell_1_3_start", "cell_1_3_end", "capital_com"),
+    2: ("cell_1_3_start", "cell_1_3_end", "capital_com"),
+    3: ("cell_1_3_start", "cell_1_3_end", "capital_com"),
+    4: ("cell_4_6_start", "cell_4_6_end", "pepperstone"),
+    5: ("cell_4_6_start", "cell_4_6_end", "pepperstone"),
+    6: ("cell_4_6_start", "cell_4_6_end", "pepperstone"),
+    7: ("cell_7_9_start", "cell_7_9_end", "dukascopy"),
+    8: ("cell_7_9_start", "cell_7_9_end", "dukascopy"),
+    9: ("cell_7_9_start", "cell_7_9_end", "dukascopy"),
+}
+
+CELL_COST_MODELS = {
+    1: "best_case",
+    2: "median",
+    3: "p95",
+    4: "best_case",
+    5: "median",
+    6: "p95",
+    7: "best_case",
+    8: "median",
+    9: "p95",
+}

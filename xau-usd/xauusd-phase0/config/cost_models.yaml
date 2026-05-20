@@ -1,0 +1,44 @@
+cost_models:
+  best_case:
+    description: "Optimistic spread scenario. Must not be used alone for approval."
+    spread_source: "configured"
+    spread_points:
+      XAUUSD: 10
+      EURUSD: 8
+      USDJPY: 8
+    commission_usd_per_round_turn_lot: 0.0
+    slippage_points_entry: 0
+    slippage_points_exit: 0
+
+  median:
+    description: "Median spread scenario. Replace with measured values once spread logger completes."
+    spread_source: "configured_or_measured"
+    spread_points:
+      XAUUSD: 20
+      EURUSD: 12
+      USDJPY: 12
+    commission_usd_per_round_turn_lot: 0.0
+    slippage_points_entry: 0
+    slippage_points_exit: 0
+
+  p95:
+    description: "P95 stress cost. Approval gates must survive this scenario."
+    spread_source: "configured_or_measured"
+    spread_points:
+      XAUUSD: 35
+      EURUSD: 20
+      USDJPY: 20
+    commission_usd_per_round_turn_lot: 0.0
+    slippage_points_entry: 2
+    slippage_points_exit: 2
+
+multi_broker_scenarios:
+  capital_com_zero_commission:
+    commission_usd_per_round_turn_lot: 0.0
+    spread_multiplier: 1.0
+  raw_spread_plus_3:
+    commission_usd_per_round_turn_lot: 3.0
+    spread_multiplier: 0.75
+  institutional_plus_7:
+    commission_usd_per_round_turn_lot: 7.0
+    spread_multiplier: 0.75
