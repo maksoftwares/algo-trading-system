@@ -30,6 +30,7 @@ class ExpertReportOutput:
     hypothesis_match_status: str
     final_status: str
     failed_gates: tuple[str, ...]
+    ten_gate_statuses: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -68,6 +69,13 @@ def generate_expert_report(
 
     matrix_status = _overall_status(matrix_gate_df["status"].astype(str).tolist())
     hypothesis_match_status = "PASS" if hash_summary["hash_match"] else "FAIL"
+    ten_gate_rows = _ten_gate_rows(
+        matrix_gate_df,
+        decile_summary.gate,
+        multisymbol_summary.gate,
+        adversarial_summary.gate,
+        hypothesis_match_status,
+    )
     category_statuses = [
         matrix_status,
         decile_summary.status,
@@ -98,6 +106,7 @@ def generate_expert_report(
             matrix_status=matrix_status,
             hypothesis_match_status=hypothesis_match_status,
             final_status=final_status,
+            ten_gate_rows=ten_gate_rows,
             failed_gates=failed_gates,
         ),
         encoding="utf-8",
@@ -113,6 +122,7 @@ def generate_expert_report(
         hypothesis_match_status=hypothesis_match_status,
         final_status=final_status,
         failed_gates=tuple(failed_gates),
+        ten_gate_statuses=tuple(str(row["Status"]) for row in ten_gate_rows),
     )
 
 
@@ -247,6 +257,7 @@ def _render_expert_report(
     matrix_status: str,
     hypothesis_match_status: str,
     final_status: str,
+    ten_gate_rows: list[dict[str, str]],
     failed_gates: list[str],
 ) -> str:
     generated_at = _generated_at_utc()
@@ -316,6 +327,10 @@ def _render_expert_report(
         "",
         _markdown_table(_hypothesis_vs_reality(config, expert, metrics_df), ["Claim", "Hypothesis", "Observed", "Status"]),
         "",
+        "## Ten-Gate Detail",
+        "",
+        _markdown_table(ten_gate_rows, ["Gate", "Name", "Status", "Threshold", "Observed"]),
+        "",
         "## Final Verdict",
         "",
         _markdown_table(
@@ -364,6 +379,28 @@ def _render_consolidated_verdict(
     rejected = [output.expert for output in expert_outputs if output.final_status == "FAIL"]
     pending = [output.expert for output in expert_outputs if output.final_status == "PENDING"]
     action = _recommended_action(len(passing), len(expert_outputs))
+    ten_gate_columns = [
+        "Expert",
+        "Gate 1",
+        "Gate 2",
+        "Gate 3",
+        "Gate 4",
+        "Gate 5",
+        "Gate 6",
+        "Gate 7",
+        "Gate 8",
+        "Gate 9",
+        "Gate 10",
+        "FINAL",
+    ]
+    ten_gate_rows = [
+        {
+            **{"Expert": output.expert},
+            **{f"Gate {index}": status for index, status in enumerate(output.ten_gate_statuses, start=1)},
+            **{"FINAL": output.final_status},
+        }
+        for output in expert_outputs
+    ]
 
     return "\n".join(
         [
@@ -377,6 +414,10 @@ def _render_consolidated_verdict(
                 rows,
                 ["Expert", "9-cell", "Decile", "Adversarial", "Multi-symbol", "Hypothesis-match", "FINAL"],
             ),
+            "",
+            "## Ten-Gate Detail",
+            "",
+            _markdown_table(ten_gate_rows, ten_gate_columns),
             "",
             "## Experts Approved for Phase 1",
             "",
@@ -572,6 +613,83 @@ def _failed_gates(
     if hypothesis_match_status == "FAIL":
         failed.append("Hypothesis-match - current SHA256 does not match registered SHA256")
     return failed
+
+
+def _ten_gate_rows(
+    matrix_gate_df: pd.DataFrame,
+    decile_gate: GateResult,
+    multisymbol_gate: GateResult,
+    adversarial_gate: GateResult,
+    hypothesis_match_status: str,
+) -> list[dict[str, str]]:
+    matrix_by_name = {
+        str(row["name"]): row.to_dict()
+        for _, row in matrix_gate_df.iterrows()
+    }
+    rows: list[dict[str, str]] = []
+    for gate_number, gate_name, label in (
+        (1, "multi_cell_survival", "Multi-cell survival"),
+        (2, "sample_size", "Sample size"),
+        (3, "no_catastrophic_failure", "No catastrophic failure"),
+        (4, "concentration", "Concentration"),
+        (5, "activity", "Activity"),
+        (6, "cost_sensitivity", "Cost sensitivity"),
+    ):
+        gate_row = matrix_by_name.get(gate_name)
+        if gate_row is None:
+            rows.append(_ten_gate_row(gate_number, label, "PENDING", "matrix gate required", "missing"))
+            continue
+        rows.append(
+            _ten_gate_row(
+                gate_number,
+                label,
+                str(gate_row["status"]),
+                str(gate_row["threshold"]),
+                str(gate_row["observed"]),
+            )
+        )
+
+    for gate_number, label, gate in (
+        (7, "Decile persistence", decile_gate),
+        (8, "Multi-symbol consistency", multisymbol_gate),
+        (9, "Adversarial review", adversarial_gate),
+    ):
+        rows.append(
+            _ten_gate_row(
+                gate_number,
+                label,
+                gate.status,
+                gate.threshold,
+                gate.observed,
+            )
+        )
+
+    rows.append(
+        _ten_gate_row(
+            10,
+            "Hypothesis SHA256 lock",
+            hypothesis_match_status,
+            "current SHA256 equals registered SHA256",
+            "hash match" if hypothesis_match_status == "PASS" else "hash mismatch",
+        )
+    )
+    return rows
+
+
+def _ten_gate_row(
+    gate_number: int,
+    name: str,
+    status: str,
+    threshold: str,
+    observed: str,
+) -> dict[str, str]:
+    return {
+        "Gate": f"Gate {gate_number}",
+        "Name": name,
+        "Status": status,
+        "Threshold": threshold,
+        "Observed": observed,
+    }
 
 
 def _passing_evidence(

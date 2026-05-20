@@ -22,6 +22,8 @@ def test_generate_all_reports_from_synthetic_matrix(project_root, tmp_path):
     assert output.verdict_path.exists()
     verdict = output.verdict_path.read_text(encoding="utf-8")
     assert "| Expert | 9-cell | Decile | Adversarial | Multi-symbol | Hypothesis-match | FINAL |" in verdict
+    assert "## Ten-Gate Detail" in verdict
+    assert "| Expert | Gate 1 | Gate 2 | Gate 3 | Gate 4 | Gate 5 | Gate 6 | Gate 7 | Gate 8 | Gate 9 | Gate 10 | FINAL |" in verdict
     assert "Stop before Phase 1" in verdict
 
     report = root / "outputs" / "reports" / "phase0_trend_pullback_results.md"
@@ -29,6 +31,8 @@ def test_generate_all_reports_from_synthetic_matrix(project_root, tmp_path):
     assert "## Hypothesis" in text
     assert "## 9-Cell Matrix Results" in text
     assert "## Hypothesis vs Reality" in text
+    assert "| Gate 1 | Multi-cell survival | FAIL |" in text
+    assert "| Gate 10 | Hypothesis SHA256 lock | PASS |" in text
     assert "| 9-cell | Decile | Adversarial | Multi-symbol | Hypothesis-match | FINAL |" in text
     assert "| sample_size | FAIL |" in text
 
