@@ -10,7 +10,7 @@ from typing import Any
 import pandas as pd
 
 from phase0.config import ProjectConfig, get_broker_details, resolve_symbol
-from phase0.data_loader import find_raw_tick_files, processed_bars_dir, processed_ticks_dir
+from phase0.data_loader import processed_bars_dir, processed_ticks_dir, raw_data_dir
 from phase0.data_validator import ValidationReport
 
 
@@ -21,6 +21,15 @@ class FileManifestRow:
     row_count: int
     start_timestamp_utc: str
     end_timestamp_utc: str
+
+
+@dataclass(frozen=True)
+class DataManifestSection:
+    broker: str
+    symbol: str
+    raw_rows: tuple[FileManifestRow, ...]
+    processed_rows: tuple[FileManifestRow, ...]
+    required_timeframes: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -58,7 +67,7 @@ def generate_data_manifest(
     prepared_by: str = "phase0",
 ) -> Path:
     canonical_symbol = resolve_symbol(config, symbol)
-    raw_files = find_raw_tick_files(config, broker, canonical_symbol)
+    raw_files = _raw_symbol_files(config, broker, canonical_symbol)
     processed_files = _processed_files(config, broker, canonical_symbol)
     output_dir = config.root / "outputs" / "manifests"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -71,6 +80,40 @@ def generate_data_manifest(
             raw_rows=[_file_row(config, path) for path in raw_files],
             processed_rows=[_file_row(config, path) for path in processed_files],
             validation_reports=validation_reports or [],
+            prepared_by=prepared_by,
+        ),
+        encoding="utf-8",
+    )
+    return output_path
+
+
+def generate_required_data_manifest(
+    config: ProjectConfig,
+    include_multisymbol: bool = True,
+    prepared_by: str = "phase0",
+) -> Path:
+    from phase0.data_availability import REQUIRED_BACKTEST_TIMEFRAMES, required_broker_symbols
+
+    sections: list[DataManifestSection] = []
+    for broker, symbol in required_broker_symbols(config, include_multisymbol):
+        sections.append(
+            DataManifestSection(
+                broker=broker,
+                symbol=symbol,
+                raw_rows=tuple(_file_row(config, path) for path in _raw_symbol_files(config, broker, symbol)),
+                processed_rows=tuple(
+                    _file_row(config, path) for path in _processed_files(config, broker, symbol)
+                ),
+                required_timeframes=REQUIRED_BACKTEST_TIMEFRAMES,
+            )
+        )
+
+    output_dir = config.root / "outputs" / "manifests"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = output_dir / "PHASE0_DATA_MANIFEST.md"
+    output_path.write_text(
+        _render_required_manifest(
+            sections=sections,
             prepared_by=prepared_by,
         ),
         encoding="utf-8",
@@ -97,6 +140,18 @@ def generate_result_manifest(config: ProjectConfig) -> Path:
                 }
             )
     return output_path
+
+
+def _raw_symbol_files(config: ProjectConfig, broker: str, symbol: str) -> list[Path]:
+    directory = raw_data_dir(config, broker)
+    if not directory.exists():
+        return []
+    canonical = resolve_symbol(config, symbol)
+    aliases = {
+        canonical.lower(),
+        *(str(alias).lower() for alias in config.symbols["symbols"][canonical].get("aliases", [])),
+    }
+    return sorted(path for path in directory.rglob("*.csv") if _matches_symbol(path, aliases))
 
 
 def _processed_files(config: ProjectConfig, broker: str, symbol: str) -> list[Path]:
@@ -194,6 +249,61 @@ def _render_manifest(
     )
 
 
+def _render_required_manifest(
+    *,
+    sections: list[DataManifestSection],
+    prepared_by: str,
+) -> str:
+    generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    lines = [
+        "# Phase 0 Data Manifest",
+        "",
+        f"Prepared by: {prepared_by}",
+        f"Prepared date UTC: {generated_at}",
+        "Scope: required Phase 0 broker/symbol inputs",
+        "",
+        "## Required Dataset Summary",
+        "",
+        "| Broker | Symbol | Required processed timeframes | Raw files | Processed files |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for section in sections:
+        lines.append(
+            f"| {section.broker} | {section.symbol} | "
+            f"{', '.join(section.required_timeframes) or 'not specified'} | "
+            f"{len(section.raw_rows)} | {len(section.processed_rows)} |"
+        )
+
+    for section in sections:
+        lines.extend(
+            [
+                "",
+                f"## {section.broker} / {section.symbol}",
+                "",
+                f"Required processed timeframes: {', '.join(section.required_timeframes) or 'not specified'}",
+                "",
+                "### Raw Files",
+                "",
+                _markdown_table(list(section.raw_rows)),
+                "",
+                "### Processed Files",
+                "",
+                _markdown_table(list(section.processed_rows)),
+            ]
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Known Gaps",
+            "",
+            "Use PHASE0_DATA_READINESS.md for exact missing or malformed processed timeframe sets.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def _file_row(config: ProjectConfig, path: Path) -> FileManifestRow:
     stats = _csv_stats(path)
     return FileManifestRow(
@@ -259,6 +369,11 @@ def _markdown_table(rows: list[FileManifestRow]) -> str:
         for row in rows
     ]
     return "\n".join([header, separator, *body])
+
+
+def _matches_symbol(path: Path, aliases: set[str]) -> bool:
+    name = path.name.lower()
+    return any(alias and alias in name for alias in aliases)
 
 
 def _sha256(path: Path) -> str:

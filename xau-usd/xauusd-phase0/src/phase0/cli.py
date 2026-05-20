@@ -16,7 +16,7 @@ from phase0.data_availability import (
 from phase0.data_import import import_required_bar_exports
 from phase0.deciles import run_decile_tests
 from phase0.hashing import HashingError, hash_manifest_path, register_hypotheses, validate_hypotheses
-from phase0.manifests import generate_data_manifest, generate_result_manifest
+from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
 from phase0.normalizer import (
@@ -88,6 +88,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     data_readiness.add_argument("--skip-multisymbol", action="store_true")
     data_readiness.set_defaults(func=_cmd_generate_data_readiness)
+
+    data_manifest = subparsers.add_parser(
+        "generate-data-manifest",
+        help="Write an auditable manifest for required Phase 0 data files.",
+    )
+    data_manifest.add_argument("--skip-multisymbol", action="store_true")
+    data_manifest.set_defaults(func=_cmd_generate_data_manifest)
 
     normalize_data = subparsers.add_parser("normalize-data", help="Normalize source data.")
     _add_broker_symbol_args(normalize_data)
@@ -255,6 +262,16 @@ def _cmd_generate_data_readiness(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_generate_data_manifest(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output_path = generate_required_data_manifest(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
+    print(f"Data manifest: {output_path}")
+    return 0
+
+
 def _cmd_normalize_data(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     written = normalize_broker_ticks(config, args.broker, args.symbol)
@@ -294,6 +311,10 @@ def _cmd_import_required_bars(args: argparse.Namespace) -> int:
         config,
         include_multisymbol=not args.skip_multisymbol,
     )
+    manifest_path = generate_required_data_manifest(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+    )
     imported = sum(1 for result in output.results if result.status == "IMPORTED")
     missing = sum(1 for result in output.results if result.status == "MISSING")
     failed = sum(1 for result in output.results if result.status == "FAILED")
@@ -302,6 +323,7 @@ def _cmd_import_required_bars(args: argparse.Namespace) -> int:
         f"{missing} missing, {failed} failed."
     )
     print(f"Import report: {output.report_path}")
+    print(f"Data manifest: {manifest_path}")
     print(f"Data readiness report: {readiness_path}")
     return 1 if failed else 0
 

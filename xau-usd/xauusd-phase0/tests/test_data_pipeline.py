@@ -11,6 +11,7 @@ from phase0.cli import main
 from phase0.config import load_project_config
 from phase0.data_import import import_required_bar_exports
 from phase0.data_validator import DataValidationError, validate_ticks
+from phase0.manifests import generate_required_data_manifest
 from phase0.normalizer import normalize_bar_dataframe, normalize_tick_dataframe
 
 
@@ -292,6 +293,12 @@ def test_import_required_bars_imports_available_sets_and_reports_missing(project
     assert output.report_path.exists()
     assert list((root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5").glob("*.csv"))
 
+    manifest_path = generate_required_data_manifest(config, include_multisymbol=False)
+    manifest = manifest_path.read_text(encoding="utf-8")
+    assert "## capital_com / XAUUSD" in manifest
+    assert "data/raw/capital_com/XAUUSD_M5_history.csv" in manifest
+    assert "data/processed/bars/capital_com/XAUUSD/M5" in manifest
+
 
 def test_import_required_bars_cli(project_root, tmp_path, capsys):
     root = _copy_project_config(project_root, tmp_path)
@@ -301,7 +308,36 @@ def test_import_required_bars_cli(project_root, tmp_path, capsys):
     captured = capsys.readouterr()
     assert exit_code == 0
     assert "0 imported, 15 missing, 0 failed" in captured.out
+    assert "Data manifest:" in captured.out
     assert (root / "outputs" / "manifests" / "PHASE0_BAR_IMPORT_REPORT.csv").exists()
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").exists()
+
+
+def test_generate_required_data_manifest_cli(project_root, tmp_path, capsys):
+    root = _copy_project_config(project_root, tmp_path)
+    raw_dir = root / "data" / "raw" / "capital_com"
+    raw_dir.mkdir(parents=True)
+    (raw_dir / "XAUUSD_M5_history.csv").write_text(
+        "\n".join(
+            [
+                "<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<TICKVOL>,<SPREAD>",
+                "2016.01.04,10:00:00,100.00,101.00,99.00,100.50,10,20",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    exit_code = main(["--root", str(root), "generate-data-manifest", "--skip-multisymbol"])
+
+    captured = capsys.readouterr()
+    manifest_path = root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md"
+    manifest = manifest_path.read_text(encoding="utf-8")
+    assert exit_code == 0
+    assert "Data manifest:" in captured.out
+    assert "## Required Dataset Summary" in manifest
+    assert "## capital_com / XAUUSD" in manifest
+    assert "data/raw/capital_com/XAUUSD_M5_history.csv" in manifest
 
 
 def _sample_normalized_ticks() -> pd.DataFrame:

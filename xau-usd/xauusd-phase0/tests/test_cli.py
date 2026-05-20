@@ -11,6 +11,7 @@ def test_cli_registers_required_commands():
     assert "normalize-bars" in help_text
     assert "import-required-bars" in help_text
     assert "generate-data-readiness" in help_text
+    assert "generate-data-manifest" in help_text
     assert "generate-verdict" in help_text
     assert "generate-result-manifest" in help_text
     assert "generate-snapshot" in help_text
