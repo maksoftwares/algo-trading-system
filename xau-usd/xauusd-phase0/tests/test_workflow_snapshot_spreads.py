@@ -62,6 +62,9 @@ def test_generate_result_manifest_hashes_generated_outputs(project_root, tmp_pat
     report_path = root / "outputs" / "reports" / "PHASE0_VERDICT.md"
     report_path.parent.mkdir(parents=True)
     report_path.write_text("# Verdict\n\nSynthetic smoke only.\n", encoding="utf-8")
+    readiness_path = root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md"
+    readiness_path.parent.mkdir(parents=True)
+    readiness_path.write_text("# Readiness\n\nStatus: BLOCKED\n", encoding="utf-8")
 
     manifest_path = generate_result_manifest(config)
 
@@ -69,7 +72,11 @@ def test_generate_result_manifest_hashes_generated_outputs(project_root, tmp_pat
     report_row = rows.loc[rows["path"] == "outputs/reports/PHASE0_VERDICT.md"].iloc[0]
     assert report_row["artifact_type"] == "reports"
     assert report_row["sha256"] == _sha256(report_path)
+    readiness_row = rows.loc[rows["path"] == "outputs/manifests/PHASE0_DATA_READINESS.md"].iloc[0]
+    assert readiness_row["artifact_type"] == "manifests"
+    assert readiness_row["sha256"] == _sha256(readiness_path)
     assert "outputs/hashes/hypothesis_hash_manifest.csv" in set(rows["path"])
+    assert "outputs/manifests/PHASE0_RESULT_MANIFEST.csv" not in set(rows["path"])
 
 
 def test_run_all_cli_synthetic(project_root, tmp_path, capsys):

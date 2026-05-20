@@ -56,6 +56,7 @@ RESULT_ARTIFACT_ROOTS = {
     ("outputs", "multisymbol_results"): "multisymbol_results",
     ("outputs", "adversarial_review"): "adversarial_review",
     ("outputs", "reports"): "reports",
+    ("outputs", "manifests"): "manifests",
 }
 
 
@@ -191,7 +192,7 @@ def _result_manifest_rows(config: ProjectConfig) -> list[ResultManifestRow]:
 def _iter_result_artifacts(root: Path) -> list[Path]:
     ignored_parts = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", ".venv"}
     ignored_suffixes = {".pyc", ".pyo"}
-    ignored_names = {".gitkeep"}
+    ignored_names = {".gitkeep", "PHASE0_RESULT_MANIFEST.csv"}
     files: list[Path] = []
     for path in sorted(root.rglob("*")):
         if not path.is_file():
