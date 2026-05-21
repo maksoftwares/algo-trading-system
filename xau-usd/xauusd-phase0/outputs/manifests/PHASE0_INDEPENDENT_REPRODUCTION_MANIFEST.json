@@ -1,0 +1,71 @@
+{
+  "bars_path": "data\\processed\\bars\\capital_com\\XAUUSD\\M5\\XAUUSD_capital_com_M5_20160103_20250701.csv",
+  "bars_sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+  "broker": "capital_com",
+  "cell_id": 2,
+  "comparisons": [
+    {
+      "delta_pct": 0.0,
+      "independent": 7287.0,
+      "metric": "trade_count",
+      "reference": 7287.0,
+      "status": "PASS",
+      "tolerance_pct": 5.0
+    },
+    {
+      "delta_pct": 0.0,
+      "independent": 1.4119615864693404,
+      "metric": "profit_factor",
+      "reference": 1.4119615864693404,
+      "status": "PASS",
+      "tolerance_pct": 5.0
+    },
+    {
+      "delta_pct": 0.0,
+      "independent": 0.4844243172773432,
+      "metric": "win_rate",
+      "reference": 0.4844243172773432,
+      "status": "PASS",
+      "tolerance_pct": 5.0
+    },
+    {
+      "delta_pct": 0.0,
+      "independent": 18642279.988449715,
+      "metric": "total_pnl_usd",
+      "reference": 18642279.988449715,
+      "status": "PASS",
+      "tolerance_pct": 5.0
+    },
+    {
+      "delta_pct": 1.8102538939660271e-13,
+      "independent": 9.81274972157902,
+      "metric": "max_drawdown_pct",
+      "reference": 9.812749721579038,
+      "status": "PASS",
+      "tolerance_pct": 5.0
+    }
+  ],
+  "cost_model": "median",
+  "expert": "breakout_retest",
+  "generated_at_utc": "2026-05-21T22:36:56+00:00",
+  "method": "standalone_pandas_event_replay",
+  "metrics": {
+    "avg_trade_R": 0.2106943001558617,
+    "max_drawdown_pct": 9.81274972157902,
+    "median_trade_R": -0.9900530080459243,
+    "profit_factor": 1.4119615864693404,
+    "total_pnl_usd": 18642279.988449715,
+    "total_return_pct": 186422.79988449716,
+    "trade_count": 7287,
+    "win_rate": 0.4844243172773432
+  },
+  "report_path": "outputs\\reports\\PHASE0_INDEPENDENT_REPRODUCTION.md",
+  "report_sha256": "2675f0fe0e7e64ab65ad1b25b220da7ab0e4ea34aed92b76f4b268a7f4d2bdb2",
+  "source_summary_path": "outputs\\matrix_results\\breakout_retest\\cell_2_breakout_retest_capital_com_median.csv",
+  "source_summary_sha256": "a843e9f84b770bc30c09397f4743cfb2517a12cfd4a49207a795ddf295b82696",
+  "source_trades_path": "outputs\\matrix_results\\breakout_retest\\cell_2_breakout_retest_capital_com_median_trades.csv",
+  "source_trades_sha256": "f714e24932990e4cc383747c2ab82d1a058e11e5b9dabe501099d7d24ab5b645",
+  "status": "PASS",
+  "symbol": "XAUUSD",
+  "tolerance_pct": 5.0
+}

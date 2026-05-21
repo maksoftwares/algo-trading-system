@@ -25,6 +25,7 @@ from phase0.hashing import (
     validate_hypotheses_complete,
 )
 from phase0.intrabar import generate_intrabar_ambiguity_report
+from phase0.independent_reproduction import generate_independent_reproduction
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
@@ -256,6 +257,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Verify the real-data Phase 0 evidence package before Phase 1 approval.",
     )
     verify_real.set_defaults(func=_cmd_verify_real_artifacts)
+
+    independent_reproduction = subparsers.add_parser(
+        "generate-independent-reproduction",
+        help="Run the D4 standalone reproduction for an approved matrix cell.",
+    )
+    independent_reproduction.add_argument("--expert", default="breakout_retest", choices=("breakout_retest",))
+    independent_reproduction.add_argument("--cell-id", type=int, default=2)
+    independent_reproduction.add_argument("--tolerance-pct", type=float, default=5.0)
+    independent_reproduction.set_defaults(func=_cmd_generate_independent_reproduction)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -624,6 +634,26 @@ def _cmd_verify_real_artifacts(args: argparse.Namespace) -> int:
     print(output.report_path)
     for check in output.checks:
         print(f"{check.status}: {check.name} - {check.message}")
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_independent_reproduction(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_independent_reproduction(
+        config,
+        expert=args.expert,
+        cell_id=args.cell_id,
+        tolerance_pct=args.tolerance_pct,
+    )
+    print(f"Independent reproduction: {output.status}")
+    print(output.report_path)
+    print(output.manifest_path)
+    for comparison in output.comparisons:
+        print(
+            f"{comparison['status']}: {comparison['metric']} "
+            f"reference={comparison['reference']} independent={comparison['independent']} "
+            f"delta_pct={comparison['delta_pct']}"
+        )
     return 0 if output.status == "PASS" else 1
 
 

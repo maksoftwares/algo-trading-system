@@ -9,7 +9,7 @@ This file maps the external review findings to concrete repository actions.
 | Complete the five-day Phase 1 soak honestly. | Accepted. Phase 1 acceptance remains `PENDING` until the wall-clock soak is complete. |
 | Start a second candidate expert in research mode. | Accepted. `SECOND_CANDIDATE_RESEARCH_PLAN.md` starts the `squeeze_breakout_long_v0` track without registering or testing it yet. |
 | Add D1 / D2 before live pilot. | Accepted. CPCV and Reality Check/SPA are advanced validation work before paper-trading or live authorization. |
-| Verify D3 / D4 explicitly. | Accepted. `PHASE0_INDEPENDENT_VALIDATION.md` records current D3/D4 status and avoids overclaiming. |
+| Verify D3 / D4 explicitly. | Accepted. `PHASE0_INDEPENDENT_VALIDATION.md` records D3 as guarded pending audit and D4 as closed by standalone reproduction. |
 | Audit the breakout-retest edge thesis. | Accepted. The current hypothesis already contains the edge mechanism, failure modes, code mapping, and falsification criteria; a separate edge-thesis file may still be added if reviewers want a standalone artifact. |
 | Add Phase 1 CI visibility. | Accepted. Phase 1 static checks already exist inside `phase0.yml`; a dedicated `phase1.yml` workflow should make this easier to review. |
 | Document workspace ownership. | Accepted. The active Windows paths are machine-local, not canonical project assumptions. |
@@ -41,3 +41,4 @@ Live deployment: NO
 ```
 
 The next highest-leverage work is to keep Phase 1 soaking, close D3/D4, add advanced validation planning, and pre-register a second candidate research track without changing the approved `breakout_retest` package.
+The next highest-leverage work is to keep Phase 1 soaking, close D3, add advanced validation planning, and pre-register a second candidate research track without changing the approved `breakout_retest` package.

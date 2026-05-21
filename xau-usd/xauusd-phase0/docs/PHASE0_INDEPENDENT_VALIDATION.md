@@ -9,7 +9,7 @@ This document tracks the reviewer-requested D3 and D4 checks. These checks do no
 | Item | Status | Current conclusion |
 | --- | --- | --- |
 | D3 - True 6-month holdout | GUARDED / NEEDS INDEPENDENT AUDIT | The reserved period is configured, locked, and the unlock file is absent. The run context also reports that available local data overlaps the reserved calendar period, so a final audit must confirm those rows were blocked or trimmed by workflow policy. |
-| D4 - Independent Python reproduction | PENDING | No separate reproduction report is committed yet. At least one `breakout_retest` matrix cell must be reproduced independently and compared within the accepted tolerance. |
+| D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
 ## D3 - True Holdout
 
@@ -48,7 +48,7 @@ Until that audit is completed, D3 remains guarded rather than fully satisfied.
 
 ## D4 - Independent Python Reproduction
 
-Required target:
+Completed target:
 
 | Field | Value |
 | --- | --- |
@@ -58,19 +58,35 @@ Required target:
 | Reference report | `outputs/reports/phase0_breakout_retest_results.md` |
 | Tolerance | Profit factor and trade count within 5% unless a documented simulator difference explains the variance. |
 
-Required output:
+Generated output:
 
 ```text
 outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md
 outputs/manifests/PHASE0_INDEPENDENT_REPRODUCTION_MANIFEST.json
 ```
 
-The reproduction should use a small standalone event simulator that does not call the Phase 0 strategy/backtester entry points. It may reuse CSV readers and generic metric formulas only if the report states exactly which shared helpers were reused.
+Command:
+
+```powershell
+.\.venv\Scripts\phase0.exe generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5
+```
+
+Latest result:
+
+| Metric | Reference | Independent | Delta % | Status |
+| --- | ---: | ---: | ---: | --- |
+| trade_count | 7287 | 7287 | 0.0 | PASS |
+| profit_factor | 1.4119615864693404 | 1.4119615864693404 | 0.0 | PASS |
+| win_rate | 0.4844243172773432 | 0.4844243172773432 | 0.0 | PASS |
+| total_pnl_usd | 18642279.988449715 | 18642279.988449715 | 0.0 | PASS |
+| max_drawdown_pct | 9.812749721579038 | 9.81274972157902 | 0.000000000000181 | PASS |
+
+The reproduction uses a standalone pandas event replay and does not call the Phase 0 strategy class, execution simulator, or metrics module.
 
 ## Current Go / No-Go Effect
 
 | Milestone | Effect |
 | --- | --- |
 | Phase 1 dry-run shell | Not blocked. Phase 1 has no broker-side execution and is telemetry-only. |
-| Phase 2 paper trading | Blocked until D3 and D4 are explicitly closed or owner signs a documented exception. |
-| Live deployment | Blocked until D3, D4, dry-run soak, paper-trading evidence, and later operational gates are complete. |
+| Phase 2 paper trading | Still blocked by D3 independent holdout audit, five-day dry-run soak completion, and owner approval. D4 is closed. |
+| Live deployment | Blocked until D3, dry-run soak, paper-trading evidence, and later operational gates are complete. |
