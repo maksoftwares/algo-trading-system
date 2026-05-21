@@ -1,0 +1,50 @@
+{
+  "approved_expert": "breakout_retest",
+  "block_months": 3,
+  "experts": [
+    "breakout_retest",
+    "range_mr",
+    "trend_pullback"
+  ],
+  "generated_at_utc": "2026-05-21T23:15:11+00:00",
+  "iterations": 5000,
+  "max_pairwise_spa_pvalue": 0.023395320935812838,
+  "max_pvalue": 0.1,
+  "method": "white_reality_check_and_spa_style_block_bootstrap_on_monthly_trade_ledger_returns",
+  "month_count": 108,
+  "observed_mean_monthly_pnl_usd": {
+    "breakout_retest": 209752.1711570768,
+    "range_mr": -1.8587828419199897,
+    "trend_pullback": -51.36958679521826
+  },
+  "pairwise_spa": [
+    {
+      "alternative": "range_mr",
+      "approved_expert": "breakout_retest",
+      "bootstrap_q95": 166857.40466817113,
+      "mean_monthly_edge_usd": 209754.02993991875,
+      "spa_pvalue": 0.023395320935812838,
+      "status": "PASS"
+    },
+    {
+      "alternative": "trend_pullback",
+      "approved_expert": "breakout_retest",
+      "bootstrap_q95": 166361.6250886456,
+      "mean_monthly_edge_usd": 209803.54074387203,
+      "spa_pvalue": 0.020795840831833633,
+      "status": "PASS"
+    }
+  ],
+  "report_path": "outputs\\reports\\PHASE0_REALITY_CHECK.md",
+  "report_sha256": "bdf1f44e7d637f304b5849d7393e4d8504da2deae1d317bd58817525f8fc127a",
+  "status": "PASS",
+  "summary_path": "outputs\\reports\\PHASE0_REALITY_CHECK_SUMMARY.csv",
+  "summary_sha256": "ec91787e224231dab6dfecb0a2a7a86ce5587e7f5abf25415c8d1ca9acfd1a0c",
+  "white_bootstrap_quantiles": {
+    "q90": 120986.58315673654,
+    "q95": 160688.48256842137,
+    "q99": 250328.7256187352
+  },
+  "white_reality_check_pvalue": 0.01999600079984003,
+  "winner": "breakout_retest"
+}

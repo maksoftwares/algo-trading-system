@@ -1,0 +1,6 @@
+row_type,expert,comparison,mean_monthly_pnl_usd,total_pnl_usd,pvalue,status
+expert_monthly_mean,breakout_retest,,209752.1711570768,22653234.484964296,,APPROVED_EXPERT
+expert_monthly_mean,range_mr,,-1.8587828419199897,-200.7485469273589,,ALTERNATIVE
+expert_monthly_mean,trend_pullback,,-51.36958679521826,-5547.915373883572,,ALTERNATIVE
+pairwise_spa,breakout_retest,range_mr,209754.02993991875,,0.023395320935812838,PASS
+pairwise_spa,breakout_retest,trend_pullback,209803.54074387203,,0.020795840831833633,PASS

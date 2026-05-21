@@ -158,6 +158,20 @@ def validate_hypotheses_complete(config: ProjectConfig, raise_on_error: bool = T
     return not errors
 
 
+def validate_hypothesis_file_complete(
+    expert: str,
+    hypothesis_path: str | Path,
+    raise_on_error: bool = True,
+) -> bool:
+    path = Path(hypothesis_path)
+    errors = _hypothesis_completeness_errors(expert, path)
+    if errors and raise_on_error:
+        raise HashingError(
+            f"Hypothesis pre-registration is incomplete for {expert}:\n" + "\n".join(errors)
+        )
+    return not errors
+
+
 def load_hash_manifest(path: str | Path) -> list[HypothesisHash]:
     resolved = Path(path)
     if not resolved.exists():

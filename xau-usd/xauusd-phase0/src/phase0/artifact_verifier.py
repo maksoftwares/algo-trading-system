@@ -37,6 +37,21 @@ def verify_real_artifacts(config: ProjectConfig) -> RealArtifactVerificationOutp
         _check_file("consolidated_verdict", config.root / "outputs" / "reports" / "PHASE0_VERDICT.md"),
         _check_holdout_manifest(config),
         _check_true_holdout_audit(config),
+        _check_status_report(
+            "independent_reproduction",
+            config.root / "outputs" / "reports" / "PHASE0_INDEPENDENT_REPRODUCTION.md",
+            "Run generate-independent-reproduction before Phase 2 authorization.",
+        ),
+        _check_status_report(
+            "cpcv_validation",
+            config.root / "outputs" / "reports" / "PHASE0_CPCV_VALIDATION.md",
+            "Run run-cpcv-validation before Phase 2 authorization.",
+        ),
+        _check_status_report(
+            "reality_check",
+            config.root / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md",
+            "Run run-reality-check before Phase 2 authorization.",
+        ),
         _check_verdict_state(config),
         _check_intrabar_reports(config),
         _check_adversarial_scores(config),
@@ -147,6 +162,22 @@ def _check_true_holdout_audit(config: ProjectConfig) -> ArtifactCheck:
         "FAIL",
         f"Holdout audit status is {status or 'unknown'}: {path}.",
     )
+
+
+def _check_status_report(name: str, path: Path, missing_message: str) -> ArtifactCheck:
+    if not path.exists():
+        return ArtifactCheck(name, "WARN", f"Missing {path}. {missing_message}")
+    status = _extract_status(path)
+    if status == "PASS":
+        return ArtifactCheck(name, "PASS", f"{name.replace('_', ' ').title()} passed: {path}.")
+    return ArtifactCheck(name, "FAIL", f"{name.replace('_', ' ').title()} status is {status or 'unknown'}: {path}.")
+
+
+def _extract_status(path: Path) -> str:
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("Overall status:") or line.startswith("Status:"):
+            return line.split(":", 1)[1].strip()
+    return ""
 
 
 def _check_verdict_state(config: ProjectConfig) -> ArtifactCheck:

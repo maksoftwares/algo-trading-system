@@ -9,6 +9,7 @@ from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
 from phase0.config import ConfigError, build_cell_configs, load_project_config
 from phase0.constants import EXPERTS
+from phase0.cpcv import run_cpcv_validation
 from phase0.data_availability import (
     assert_processed_data_available,
     check_processed_data_availability,
@@ -40,6 +41,8 @@ from phase0.normalizer import (
 )
 from phase0.reports import generate_all_reports
 from phase0.reference import validate_reference_files
+from phase0.reality_check import run_reality_check
+from phase0.research_hypotheses import register_research_hypothesis
 from phase0.review_bundle import generate_review_bundle
 from phase0.safety import audit_no_live_trading_calls
 from phase0.snapshot import generate_snapshot
@@ -273,6 +276,39 @@ def build_parser() -> argparse.ArgumentParser:
         help="Audit that generated result rows exclude the reserved true-holdout window.",
     )
     holdout_audit.set_defaults(func=_cmd_audit_true_holdout)
+
+    cpcv = subparsers.add_parser(
+        "run-cpcv-validation",
+        help="Run D1 combinatorial purged cross-validation on matrix trade ledgers.",
+    )
+    cpcv.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    cpcv.add_argument("--folds", type=int, default=6)
+    cpcv.add_argument("--test-fold-count", type=int, default=2)
+    cpcv.add_argument("--purge-days", type=float, default=1.0)
+    cpcv.add_argument("--min-oos-profit-factor", type=float, default=1.0)
+    cpcv.add_argument("--min-median-oos-profit-factor", type=float, default=1.10)
+    cpcv.add_argument("--min-oos-trades", type=int, default=40)
+    cpcv.set_defaults(func=_cmd_run_cpcv_validation)
+
+    reality_check = subparsers.add_parser(
+        "run-reality-check",
+        help="Run D2 White Reality Check and SPA-style bootstrap validation.",
+    )
+    reality_check.add_argument("--approved-expert", default="breakout_retest", choices=EXPERTS)
+    reality_check.add_argument("--iterations", type=int, default=5000)
+    reality_check.add_argument("--block-months", type=int, default=3)
+    reality_check.add_argument("--max-pvalue", type=float, default=0.10)
+    reality_check.add_argument("--seed", type=int, default=20260521)
+    reality_check.set_defaults(func=_cmd_run_reality_check)
+
+    research_hypothesis = subparsers.add_parser(
+        "register-research-hypothesis",
+        help="Validate and SHA256-lock a disabled next-candidate research hypothesis.",
+    )
+    research_hypothesis.add_argument("--expert", required=True)
+    research_hypothesis.add_argument("--hypothesis-file", required=True)
+    research_hypothesis.add_argument("--force", action="store_true")
+    research_hypothesis.set_defaults(func=_cmd_register_research_hypothesis)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -673,6 +709,66 @@ def _cmd_audit_true_holdout(args: argparse.Namespace) -> int:
     for check in output.checks:
         print(f"{check.status}: {check.name} - {check.message}")
     return 0 if output.status == "PASS" else 1
+
+
+def _cmd_run_cpcv_validation(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = run_cpcv_validation(
+        config,
+        expert=args.expert,
+        folds=args.folds,
+        test_fold_count=args.test_fold_count,
+        purge_days=args.purge_days,
+        min_oos_profit_factor=args.min_oos_profit_factor,
+        min_median_oos_profit_factor=args.min_median_oos_profit_factor,
+        min_oos_trades=args.min_oos_trades,
+    )
+    print(f"CPCV validation: {output.status}")
+    print(output.report_path)
+    print(output.paths_path)
+    print(output.manifest_path)
+    print(f"Paths: {output.path_count}")
+    print(f"Pass rate: {output.pass_rate:.3f}")
+    print(f"Median OOS PF: {output.median_oos_profit_factor:.3f}")
+    print(f"Min OOS PF: {output.min_oos_profit_factor:.3f}")
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_run_reality_check(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = run_reality_check(
+        config,
+        approved_expert=args.approved_expert,
+        iterations=args.iterations,
+        block_months=args.block_months,
+        max_pvalue=args.max_pvalue,
+        seed=args.seed,
+    )
+    print(f"Reality check: {output.status}")
+    print(output.report_path)
+    print(output.summary_path)
+    print(output.manifest_path)
+    print(f"Winner: {output.winner}")
+    print(f"White Reality Check p-value: {output.white_reality_check_pvalue:.4f}")
+    print(f"Max pairwise SPA p-value: {output.max_pairwise_spa_pvalue:.4f}")
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_register_research_hypothesis(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = register_research_hypothesis(
+        config,
+        expert=args.expert,
+        hypothesis_file=args.hypothesis_file,
+        force=args.force,
+    )
+    print(f"Research hypothesis: {output.status}")
+    print(output.report_path)
+    print(output.manifest_path)
+    print(f"Expert: {output.expert}")
+    print(f"SHA256: {output.sha256}")
+    print(f"Phase 0 result run allowed: {str(output.phase0_result_run_allowed).lower()}")
+    return 0
 
 
 def _cmd_analyze_spread_logs(args: argparse.Namespace) -> int:

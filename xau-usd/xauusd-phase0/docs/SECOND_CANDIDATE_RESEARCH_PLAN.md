@@ -42,7 +42,7 @@ No matrix, decile, multisymbol, or adversarial run may begin until the candidate
 
 ## Draft Mechanical Definition
 
-This is a draft only. It is not registered and must not be tested as a final hypothesis.
+This candidate now has a locked v0 hypothesis. The table below is retained as the design summary, while the controlling definition is `docs/hypothesis_squeeze_breakout_long_v0.md`.
 
 | Component | Draft rule |
 | --- | --- |
@@ -76,8 +76,10 @@ The second candidate must pass the same reduced-portfolio discipline:
 | Field | Value |
 | --- | --- |
 | Candidate | `squeeze_breakout_long_v0` |
-| Status | NOT_REGISTERED |
+| Status | HYPOTHESIS_LOCKED |
 | Testing allowed | NO |
-| Next action | Write the full hypothesis document, then hash-lock it before implementation/testing. |
+| Hypothesis document | `docs/hypothesis_squeeze_breakout_long_v0.md` |
+| Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
+| Next action | Implement the versioned strategy class and run a fresh Phase 0 pass without modifying the registered hypothesis. |
 
 Rejected experts remain rejected. `trend_pullback` and `range_mr` should not be retuned under their original names. Any future revisit must use a new versioned hypothesis.

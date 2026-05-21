@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 12. |
+| history_rows | PASS | History rows available: 14. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | PASS | Latest status is healthy; acceptance is PENDING. |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,11 +17,11 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 12
+- History rows: 14
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-21T22:15:28.590983+00:00
-- Latest M5 bar: 2026.05.21 22:15:00
-- Latest soak progress: 7.08%
+- Latest summary: 2026-05-21T23:19:20.350524+00:00
+- Latest M5 bar: 2026.05.21 23:15:00
+- Latest soak progress: 7.92%
 - Latest would-signal rows: 6
 - Latest setup clusters: 6
 
@@ -35,8 +35,6 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Summary UTC | Latest Bar | Rows | Progress % | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-21T19:48:31.384045+00:00 | 2026.05.21 19:45:00 | 78 | 5.0 | 4 | 4 | PENDING |
-| 2026-05-21T19:55:41.861919+00:00 | 2026.05.21 19:55:00 | 80 | 5.14 | 4 | 4 | PENDING |
 | 2026-05-21T19:56:40.945509+00:00 | 2026.05.21 19:55:00 | 80 | 5.14 | 4 | 4 | PENDING |
 | 2026-05-21T19:59:58.629836+00:00 | 2026.05.21 19:55:00 | 80 | 5.14 | 4 | 4 | PENDING |
 | 2026-05-21T20:01:47.627431+00:00 | 2026.05.21 20:00:00 | 81 | 5.21 | 4 | 4 | PENDING |
@@ -47,3 +45,5 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | 2026-05-21T22:14:43.284578+00:00 | 2026.05.21 22:10:00 | 95 | 7.01 | 6 | 6 | FAIL |
 | 2026-05-21T22:15:12.406592+00:00 | 2026.05.21 22:15:00 | 96 | 7.08 | 6 | 6 | FAIL |
 | 2026-05-21T22:15:28.590983+00:00 | 2026.05.21 22:15:00 | 96 | 7.08 | 6 | 6 | PENDING |
+| 2026-05-21T22:49:23.647175+00:00 | 2026.05.21 22:45:00 | 102 | 7.5 | 6 | 6 | PENDING |
+| 2026-05-21T23:19:20.350524+00:00 | 2026.05.21 23:15:00 | 108 | 7.92 | 6 | 6 | PENDING |

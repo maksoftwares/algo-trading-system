@@ -2,14 +2,79 @@
 
 Last updated: 2026-05-22
 
-This document tracks the reviewer-requested D3 and D4 checks. These checks do not change the current Phase 1 dry-run boundary, but they must be closed before Phase 2 paper-trading authorization.
+This document tracks the reviewer-requested D1-D4 checks. These checks do not change the current Phase 1 dry-run boundary, but they must be closed before Phase 2 paper-trading authorization.
 
 ## Summary
 
 | Item | Status | Current conclusion |
 | --- | --- | --- |
+| D1 - Combinatorial Purged Cross-Validation | PASS | `breakout_retest` passed 135 purged chronological paths across all 9 matrix cells; pass rate 100%, median OOS PF 1.379, minimum OOS PF 1.135. |
+| D2 - White Reality Check / SPA-style bootstrap | PASS | `breakout_retest` remained the family winner against `range_mr` and `trend_pullback`; White Reality Check p-value 0.0200 and max pairwise SPA p-value 0.0234. |
 | D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
+
+## D1 - Combinatorial Purged Cross-Validation
+
+Command:
+
+```powershell
+.\.venv\Scripts\phase0.exe run-cpcv-validation --expert breakout_retest
+```
+
+Generated output:
+
+```text
+outputs/reports/PHASE0_CPCV_VALIDATION.md
+outputs/reports/PHASE0_CPCV_PATHS.csv
+outputs/manifests/PHASE0_CPCV_MANIFEST.json
+```
+
+Latest result:
+
+| Metric | Value |
+| --- | ---: |
+| Status | PASS |
+| Matrix cells tested | 9 |
+| CPCV paths | 135 |
+| Path pass rate | 100.0% |
+| Median OOS PF | 1.379 |
+| Minimum OOS PF | 1.135 |
+| Minimum OOS trades | 2391 |
+
+Interpretation:
+
+The fixed `breakout_retest` definition stayed profitable across all purged chronological fold combinations. This supports robustness, but it does not replace Phase 1 soak completion or Phase 2 paper-trading drift evidence.
+
+## D2 - White Reality Check / SPA-Style Bootstrap
+
+Command:
+
+```powershell
+.\.venv\Scripts\phase0.exe run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10
+```
+
+Generated output:
+
+```text
+outputs/reports/PHASE0_REALITY_CHECK.md
+outputs/reports/PHASE0_REALITY_CHECK_SUMMARY.csv
+outputs/manifests/PHASE0_REALITY_CHECK_MANIFEST.json
+```
+
+Latest result:
+
+| Metric | Value |
+| --- | ---: |
+| Status | PASS |
+| Family winner | breakout_retest |
+| White Reality Check p-value | 0.0200 |
+| Max pairwise SPA p-value | 0.0234 |
+| Bootstrap iterations | 5000 |
+| Circular block length | 3 months |
+
+Interpretation:
+
+The approved expert remained the winner after a block-bootstrap adjustment for the tested expert family. This reduces, but cannot eliminate, data-mining risk.
 
 ## D3 - True Holdout
 
@@ -104,5 +169,5 @@ The reproduction uses a standalone pandas event replay and does not call the Pha
 | Milestone | Effect |
 | --- | --- |
 | Phase 1 dry-run shell | Not blocked. Phase 1 has no broker-side execution and is telemetry-only. |
-| Phase 2 paper trading | Still blocked by five-day dry-run soak completion, owner approval, and remaining advanced validation decisions. D3 and D4 are closed. |
+| Phase 2 paper trading | Still blocked by five-day dry-run soak completion and owner approval. D1-D4 are closed for the current evidence package. |
 | Live deployment | Blocked until dry-run soak, paper-trading evidence, and later operational gates are complete. |

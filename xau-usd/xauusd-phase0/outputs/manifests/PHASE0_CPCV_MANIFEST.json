@@ -1,0 +1,175 @@
+{
+  "cells": [
+    {
+      "broker": "capital_com",
+      "cell_id": 1,
+      "cost_model": "best_case",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.3883025251002594,
+      "min_oos_profit_factor": 1.3044682919678063,
+      "min_oos_trade_count": 2428,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "capital_com",
+      "cell_id": 2,
+      "cost_model": "median",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.3883025251002594,
+      "min_oos_profit_factor": 1.3044682919678063,
+      "min_oos_trade_count": 2428,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "capital_com",
+      "cell_id": 3,
+      "cost_model": "p95",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.2458775797111763,
+      "min_oos_profit_factor": 1.195285479598336,
+      "min_oos_trade_count": 2428,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "pepperstone",
+      "cell_id": 4,
+      "cost_model": "best_case",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.3063811350123327,
+      "min_oos_profit_factor": 1.1776795114752305,
+      "min_oos_trade_count": 2390,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "pepperstone",
+      "cell_id": 5,
+      "cost_model": "median",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.3063811350123327,
+      "min_oos_profit_factor": 1.1776795114752305,
+      "min_oos_trade_count": 2390,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "pepperstone",
+      "cell_id": 6,
+      "cost_model": "p95",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.233813173457779,
+      "min_oos_profit_factor": 1.1346747421752188,
+      "min_oos_trade_count": 2390,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "dukascopy",
+      "cell_id": 7,
+      "cost_model": "best_case",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.507885833490171,
+      "min_oos_profit_factor": 1.4281718687171803,
+      "min_oos_trade_count": 2596,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "dukascopy",
+      "cell_id": 8,
+      "cost_model": "median",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.5078526865431339,
+      "min_oos_profit_factor": 1.4281718687171803,
+      "min_oos_trade_count": 2596,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    },
+    {
+      "broker": "dukascopy",
+      "cell_id": 9,
+      "cost_model": "p95",
+      "failing_paths": 0,
+      "median_oos_profit_factor": 1.396246177433881,
+      "min_oos_profit_factor": 1.2575701293017032,
+      "min_oos_trade_count": 2596,
+      "path_count": 15,
+      "path_pass_rate": 1.0,
+      "status": "PASS"
+    }
+  ],
+  "expert": "breakout_retest",
+  "folds": 6,
+  "generated_at_utc": "2026-05-21T23:12:32+00:00",
+  "method": "combinatorial_purged_cross_validation_on_fixed_trade_ledgers",
+  "min_median_oos_profit_factor": 1.1,
+  "min_oos_profit_factor": 1.0,
+  "min_oos_trades": 40,
+  "paths_path": "outputs\\reports\\PHASE0_CPCV_PATHS.csv",
+  "paths_sha256": "502853d33004bbc65a3fca0b77763246712b0d6ee01326830d493317e5722cd6",
+  "purge_days": 1.0,
+  "report_path": "outputs\\reports\\PHASE0_CPCV_VALIDATION.md",
+  "report_sha256": "3121c7dde649b359adf2689263e176a6eb06d5fd0cc6e35e8520a4e560047523",
+  "source_files": [
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_1_breakout_retest_capital_com_best_case_trades.csv",
+      "sha256": "2aeac898dec0a3e44e7cca1f1a55a56cd082c364e6da178c95ca0e8d023a54c4"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_2_breakout_retest_capital_com_median_trades.csv",
+      "sha256": "f714e24932990e4cc383747c2ab82d1a058e11e5b9dabe501099d7d24ab5b645"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_3_breakout_retest_capital_com_p95_trades.csv",
+      "sha256": "3f04a9af494fb2aae282e846da6469af7b1d3e16e6ed52014f50b3fd52e29bfd"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_4_breakout_retest_pepperstone_best_case_trades.csv",
+      "sha256": "4f0b61b0d04c162bbf321244a527076f17b13002efc1a9d54076280fde4f8294"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_5_breakout_retest_pepperstone_median_trades.csv",
+      "sha256": "2ce7dde62a978a61e0ccef1a485f28e061af91b1ab3bdfb6adcc160e5692bfc4"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_6_breakout_retest_pepperstone_p95_trades.csv",
+      "sha256": "d3e4c2c1c7712aa9b6b3f66b3fde9acd82e19f70e9618e6c10c1e22afb5ceb34"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_7_breakout_retest_dukascopy_best_case_trades.csv",
+      "sha256": "2233ff89c110aa81d58dcf4dd0df9eb284186c608e7b77583cad09cea785b4da"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_8_breakout_retest_dukascopy_median_trades.csv",
+      "sha256": "0defd30d75cb08da37e58b448403951d9ed1e411a35a25324db1af7a9da35b43"
+    },
+    {
+      "path": "outputs\\matrix_results\\breakout_retest\\cell_9_breakout_retest_dukascopy_p95_trades.csv",
+      "sha256": "6606a03387d3a5fb65bad175e1ffc0d21a1e5920e76d507dc8ae9b85f99b9e9e"
+    }
+  ],
+  "status": "PASS",
+  "summary": {
+    "cell_count": 9,
+    "failing_cells": 0,
+    "failing_paths": 0,
+    "median_oos_profit_factor": 1.3787883300448711,
+    "min_oos_profit_factor": 1.1346747421752188,
+    "min_oos_trade_count": 2390,
+    "path_count": 135,
+    "path_pass_rate": 1.0,
+    "status": "PASS"
+  },
+  "test_fold_count": 2
+}

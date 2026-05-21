@@ -42,13 +42,13 @@ Last updated: 2026-05-22
 - Reviewer-prompt cleanup now includes reference validation, true-holdout run context manifests, intrabar ambiguity reporting, review-bundle generation, and real-artifact verification.
 - Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_111442.zip`.
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
-- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_111406.zip`.
+- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_232055.zip`.
 - Verification after code changes: `128 passed`; safety audit OK.
 - `verify-real-artifacts` returns PASS after Gate 9 closure.
 - Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it may now be expanded as a dry-run Master EA shell with `breakout_retest` reserved as the only approved future expert.
 - Phase 0.9 closure plan: `xau-usd\xauusd-phase0\docs\PHASE0_9_CLOSURE_PLAN.md`.
 - Phase 1 dry-run spec: `xau-usd\xauusd-phase1\docs\PHASE1_MASTER_EA_DRY_RUN_SPEC.md`.
-- Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_121022.zip`.
+- Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_232055.zip`.
 - Latest Phase 0 snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_121022.zip`.
 - Latest Phase 1 shell version: `phase1-dry-run-v0.5`.
 - Phase 1 module slices implemented:
@@ -82,20 +82,27 @@ Last updated: 2026-05-22
 - Latest runtime health status: PASS. Runtime files exist, latest row is fresh, dry-run and permission locks hold, server-time status is clean, no exact duplicate rows were found, and no larger-than-M5 gaps were found.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 84 decision rows, 5.42% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Latest status summary shows 108 decision rows, 7.92% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
-- D3/D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; D3 and D4 are closed for the current evidence package.
+- D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, Reality Check/SPA, true-holdout audit, and independent reproduction are closed for the current evidence package.
+- D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
+- Latest D1 result: PASS. 135 CPCV paths across 9 matrix cells, 100% pass rate, median OOS PF 1.379, minimum OOS PF 1.135.
+- D2 Reality Check command: `phase0 run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10`.
+- Latest D2 result: PASS. `breakout_retest` remained the family winner, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0234.
 - D3 true-holdout audit command: `phase0 audit-true-holdout`.
 - Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
 - Latest D4 result: PASS. `breakout_retest` cell 2 matched 7287 trades, PF 1.4119615864693404, win rate 0.4844243172773432, total PnL 18642279.988449715, and max drawdown within tolerance.
-- Second-candidate concentration-risk mitigation is started in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md` with `squeeze_breakout_long_v0` as the first unregistered research candidate.
+- Second-candidate concentration-risk mitigation is started in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md` with `squeeze_breakout_long_v0` as the first registered research candidate.
+- Second-candidate hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_squeeze_breakout_long_v0.md`.
+- Second-candidate research hash manifest: `xau-usd\xauusd-phase0\outputs\hashes\research_hypothesis_hash_manifest.csv`.
+- Latest second-candidate result-producing run status: blocked by missing versioned strategy implementation; do not test or tune it until the strategy class is implemented against the locked hypothesis.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
 - Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
 - Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
-- Latest soak history has 7 rows, status PASS, and is appended by the bundle generator plus the hourly soak automation.
+- Latest soak history has 14 rows, status PASS, and is appended by the bundle generator plus the hourly soak automation.
 - Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
 - Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.
@@ -111,9 +118,10 @@ Last updated: 2026-05-22
 - Hourly automation `phase1-mt5-soak-check` also regenerates the acceptance report, checks source safety, and reports five-trading-day soak progress.
 - Hourly automation `phase1-mt5-soak-check` also regenerates `PHASE1_STATUS_SUMMARY.json`, appends `PHASE1_SOAK_HISTORY.csv`, regenerates `PHASE1_SOAK_HISTORY_REPORT.md`, regenerates `PHASE1_REVIEW_INDEX.md`, and regenerates `PHASE2_READINESS_REPORT.md`.
 - Phase 1 bundle generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_bundle.py`.
-- Latest Phase 1 dry-run review bundle: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624.zip`.
-- Latest Phase 1 bundle manifest: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624_manifest.json`.
+- Latest Phase 1 dry-run review bundle: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_231920.zip`.
+- Latest Phase 1 bundle manifest: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_231920_manifest.json`.
 - Phase 2 preparation spec: `xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. This is spec-only and does not authorize broker-side behavior.
+- Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
 
 ## Local MT5 Discovery
 
