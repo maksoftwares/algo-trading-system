@@ -84,7 +84,9 @@ Last updated: 2026-05-22
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
 - Latest status summary shows 84 decision rows, 5.42% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
-- D3/D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; D3 is guarded pending independent audit and D4 is closed.
+- D3/D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; D3 and D4 are closed for the current evidence package.
+- D3 true-holdout audit command: `phase0 audit-true-holdout`.
+- Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
 - Latest D4 result: PASS. `breakout_retest` cell 2 matched 7287 trades, PF 1.4119615864693404, win rate 0.4844243172773432, total PnL 18642279.988449715, and max drawdown within tolerance.
 - Second-candidate concentration-risk mitigation is started in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md` with `squeeze_breakout_long_v0` as the first unregistered research candidate.

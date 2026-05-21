@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "message": "True holdout guard is enabled in phase0.yaml.",
+      "name": "true_holdout_enabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Unlock file is absent: docs\\FINAL_HOLDOUT_UNLOCK_APPROVAL.md",
+      "name": "unlock_file_absent",
+      "status": "PASS"
+    },
+    {
+      "message": "Run context remains locked. Configured periods overlap the holdout calendar, so result rows were audited for trimming.",
+      "name": "run_context_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "No holdout-window timestamps found in 96 scanned result CSV file(s).",
+      "name": "result_rows_exclude_holdout",
+      "status": "PASS"
+    },
+    {
+      "message": "Latest audited result timestamp is 2025-06-30T23:55:00+00:00, before holdout start 2025-07-01T00:00:00+00:00.",
+      "name": "latest_result_boundary",
+      "status": "PASS"
+    }
+  ],
+  "files_with_overlap": [],
+  "generated_at_utc": "2026-05-21T23:06:48+00:00",
+  "holdout_end": "2025-12-31T23:59:59+00:00",
+  "holdout_start": "2025-07-01T00:00:00+00:00",
+  "latest_result_timestamp_utc": "2025-06-30T23:55:00+00:00",
+  "report_path": "outputs\\reports\\PHASE0_TRUE_HOLDOUT_AUDIT.md",
+  "report_sha256": "d8b6c144fad10692788a9d16d6dc77b0a5e8a9b271505403f953827a10a3cb1e",
+  "run_context_path": "outputs\\manifests\\PHASE0_RUN_CONTEXT.json",
+  "run_context_sha256": "36255216972a5de784e4fd6e8dfa1673a9041cb3c597e0fc6718705f7a581878",
+  "scanned_files": 96,
+  "status": "PASS"
+}

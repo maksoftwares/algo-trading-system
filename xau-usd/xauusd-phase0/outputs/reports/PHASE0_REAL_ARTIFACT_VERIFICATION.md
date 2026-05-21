@@ -13,9 +13,10 @@ Overall status: PASS
 | data_manifest | PASS | Found C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\manifests\PHASE0_DATA_MANIFEST.md |
 | consolidated_verdict | PASS | Found C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_VERDICT.md |
 | true_holdout_status | PASS | True holdout status is explicit and remains locked. |
+| true_holdout_audit | PASS | Holdout audit passed: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_TRUE_HOLDOUT_AUDIT.md. |
 | final_verdict_state | PASS | Verdict contains at least one final approved expert. |
 | intrabar_ambiguity_reports | PASS | Intrabar ambiguity reports exist. |
 | adversarial_scores | PASS | Scored adversarial review files exist. |
-| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_121022.zip. |
+| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_223808.zip. |
 
 A PASS here means the artifact package is structurally reviewable. It does not approve EA coding unless the consolidated verdict also contains a final approved expert.

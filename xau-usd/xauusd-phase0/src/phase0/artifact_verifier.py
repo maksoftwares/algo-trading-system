@@ -36,6 +36,7 @@ def verify_real_artifacts(config: ProjectConfig) -> RealArtifactVerificationOutp
         _check_file("data_manifest", config.root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md"),
         _check_file("consolidated_verdict", config.root / "outputs" / "reports" / "PHASE0_VERDICT.md"),
         _check_holdout_manifest(config),
+        _check_true_holdout_audit(config),
         _check_verdict_state(config),
         _check_intrabar_reports(config),
         _check_adversarial_scores(config),
@@ -123,6 +124,28 @@ def _check_holdout_manifest(config: ProjectConfig) -> ArtifactCheck:
         "true_holdout_status",
         "PASS",
         "True holdout status is explicit and remains locked.",
+    )
+
+
+def _check_true_holdout_audit(config: ProjectConfig) -> ArtifactCheck:
+    path = config.root / "outputs" / "reports" / "PHASE0_TRUE_HOLDOUT_AUDIT.md"
+    if not path.exists():
+        return ArtifactCheck(
+            "true_holdout_audit",
+            "WARN",
+            f"Missing {path}. Run audit-true-holdout before Phase 2 authorization.",
+        )
+    status = ""
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("Overall status:"):
+            status = line.split(":", 1)[1].strip()
+            break
+    if status == "PASS":
+        return ArtifactCheck("true_holdout_audit", "PASS", f"Holdout audit passed: {path}.")
+    return ArtifactCheck(
+        "true_holdout_audit",
+        "FAIL",
+        f"Holdout audit status is {status or 'unknown'}: {path}.",
     )
 
 

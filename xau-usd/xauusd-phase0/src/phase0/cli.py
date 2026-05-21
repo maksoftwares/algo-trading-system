@@ -24,6 +24,7 @@ from phase0.hashing import (
     validate_hypotheses,
     validate_hypotheses_complete,
 )
+from phase0.holdout_audit import audit_true_holdout
 from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.independent_reproduction import generate_independent_reproduction
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
@@ -266,6 +267,12 @@ def build_parser() -> argparse.ArgumentParser:
     independent_reproduction.add_argument("--cell-id", type=int, default=2)
     independent_reproduction.add_argument("--tolerance-pct", type=float, default=5.0)
     independent_reproduction.set_defaults(func=_cmd_generate_independent_reproduction)
+
+    holdout_audit = subparsers.add_parser(
+        "audit-true-holdout",
+        help="Audit that generated result rows exclude the reserved true-holdout window.",
+    )
+    holdout_audit.set_defaults(func=_cmd_audit_true_holdout)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -654,6 +661,17 @@ def _cmd_generate_independent_reproduction(args: argparse.Namespace) -> int:
             f"reference={comparison['reference']} independent={comparison['independent']} "
             f"delta_pct={comparison['delta_pct']}"
         )
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_audit_true_holdout(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = audit_true_holdout(config)
+    print(f"True holdout audit: {output.status}")
+    print(output.report_path)
+    print(output.manifest_path)
+    for check in output.checks:
+        print(f"{check.status}: {check.name} - {check.message}")
     return 0 if output.status == "PASS" else 1
 
 

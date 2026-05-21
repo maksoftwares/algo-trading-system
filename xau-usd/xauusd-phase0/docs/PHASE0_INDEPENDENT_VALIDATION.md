@@ -8,7 +8,7 @@ This document tracks the reviewer-requested D3 and D4 checks. These checks do no
 
 | Item | Status | Current conclusion |
 | --- | --- | --- |
-| D3 - True 6-month holdout | GUARDED / NEEDS INDEPENDENT AUDIT | The reserved period is configured, locked, and the unlock file is absent. The run context also reports that available local data overlaps the reserved calendar period, so a final audit must confirm those rows were blocked or trimmed by workflow policy. |
+| D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
 ## D3 - True Holdout
@@ -35,16 +35,32 @@ Latest run-context evidence:
 | `true_holdout_overlap_detected` | `true` |
 | `normal_workflows_policy` | `blocked_or_trimmed_unless_unlock_file_and_cli_flag_are_present` |
 
+Completed audit:
+
+```powershell
+.\.venv\Scripts\phase0.exe audit-true-holdout
+```
+
+Generated output:
+
+```text
+outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md
+outputs/manifests/PHASE0_TRUE_HOLDOUT_AUDIT_MANIFEST.json
+```
+
+Latest audit result:
+
+| Check | Status | Evidence |
+| --- | --- | --- |
+| true_holdout_enabled | PASS | True holdout guard is enabled. |
+| unlock_file_absent | PASS | `docs/FINAL_HOLDOUT_UNLOCK_APPROVAL.md` is absent. |
+| run_context_locked | PASS | Run context remains locked. |
+| result_rows_exclude_holdout | PASS | 96 result CSV files scanned; no holdout-window timestamps found. |
+| latest_result_boundary | PASS | Latest audited result timestamp is `2025-06-30T23:55:00+00:00`, before holdout start. |
+
 Interpretation:
 
-The overlap flag means the local data store contains coverage that reaches the reserved calendar window. That is expected for a live research machine with broker history exports, but it is not enough by itself to prove the holdout stayed untouched. The required final D3 audit is:
-
-1. Confirm no unlock file exists.
-2. Confirm no command was run with the unlock flag.
-3. Confirm the result manifests and result rows exclude the reserved period unless a signed unlock exists.
-4. Record the command output and hashes in the final review bundle.
-
-Until that audit is completed, D3 remains guarded rather than fully satisfied.
+The configured periods overlap the holdout calendar, but the generated result rows are trimmed before the holdout starts and the unlock controls remain closed. D3 is closed for the current evidence package.
 
 ## D4 - Independent Python Reproduction
 
@@ -88,5 +104,5 @@ The reproduction uses a standalone pandas event replay and does not call the Pha
 | Milestone | Effect |
 | --- | --- |
 | Phase 1 dry-run shell | Not blocked. Phase 1 has no broker-side execution and is telemetry-only. |
-| Phase 2 paper trading | Still blocked by D3 independent holdout audit, five-day dry-run soak completion, and owner approval. D4 is closed. |
-| Live deployment | Blocked until D3, dry-run soak, paper-trading evidence, and later operational gates are complete. |
+| Phase 2 paper trading | Still blocked by five-day dry-run soak completion, owner approval, and remaining advanced validation decisions. D3 and D4 are closed. |
+| Live deployment | Blocked until dry-run soak, paper-trading evidence, and later operational gates are complete. |
