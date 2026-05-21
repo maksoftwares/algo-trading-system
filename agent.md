@@ -42,13 +42,13 @@ Last updated: 2026-05-22
 - Reviewer-prompt cleanup now includes reference validation, true-holdout run context manifests, intrabar ambiguity reporting, review-bundle generation, and real-artifact verification.
 - Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_111442.zip`.
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
-- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_232055.zip`.
+- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_233157.zip`.
 - Verification after code changes: `128 passed`; safety audit OK.
 - `verify-real-artifacts` returns PASS after Gate 9 closure.
 - Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it may now be expanded as a dry-run Master EA shell with `breakout_retest` reserved as the only approved future expert.
 - Phase 0.9 closure plan: `xau-usd\xauusd-phase0\docs\PHASE0_9_CLOSURE_PLAN.md`.
 - Phase 1 dry-run spec: `xau-usd\xauusd-phase1\docs\PHASE1_MASTER_EA_DRY_RUN_SPEC.md`.
-- Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_232055.zip`.
+- Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_233157.zip`.
 - Latest Phase 0 snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_121022.zip`.
 - Latest Phase 1 shell version: `phase1-dry-run-v0.5`.
 - Phase 1 module slices implemented:
