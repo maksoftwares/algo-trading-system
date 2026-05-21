@@ -27,10 +27,12 @@ Phase 0 currently leaves `breakout_retest` at `PENDING_MANUAL_REVIEW`. Because G
 ## Files
 
 - `mt5/Experts/Phase1DryRunShell.mq5`
+- `mt5/Config/phase1_dry_run_startup.ini`
 - `mt5/Include/Phase1/Phase1Types.mqh`
 - `mt5/Include/Phase1/Phase1Logger.mqh`
 - `mt5/Include/Phase1/Phase1Risk.mqh`
 - `mt5/Include/Phase1/Phase1Router.mqh`
+- `mt5/Presets/Phase1DryRunShell.safe.set`
 - `docs/PHASE1_DRY_RUN_SCOPE.md`
 - `docs/MAGIC_NUMBERS.md`
 - `docs/EXPERT_LIFECYCLE.md`
@@ -50,6 +52,8 @@ MQL5/
       Phase1Logger.mqh
       Phase1Risk.mqh
       Phase1Router.mqh
+  Presets/
+    Phase1DryRunShell.safe.set
 ```
 
 Attach `Phase1DryRunShell.mq5` to an XAUUSD demo chart. It writes one heartbeat row per new M5 bar when dry-run mode is locked.

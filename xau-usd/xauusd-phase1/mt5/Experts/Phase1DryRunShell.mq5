@@ -1,5 +1,5 @@
 #property strict
-#property version   "0.1"
+#property version   "1.000"
 #property description "XAUUSD Phase 1 dry-run shell. Telemetry only."
 
 #include <Phase1/Phase1Types.mqh>

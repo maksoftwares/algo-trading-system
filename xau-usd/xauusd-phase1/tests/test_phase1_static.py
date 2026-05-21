@@ -22,6 +22,13 @@ def test_dry_run_shell_is_locked_to_passive_mode():
     assert "g_logger.WriteHeartbeat" in text
 
 
+def test_safe_preset_keeps_expert_blocked():
+    text = (ROOT / "mt5" / "Presets" / "Phase1DryRunShell.safe.set").read_text(encoding="utf-8")
+
+    assert "InpDryRunOnly=true" in text
+    assert "InpAllowBreakoutRetest=false" in text
+
+
 def test_phase1_docs_record_gate9_boundary():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
 

@@ -1,0 +1,7 @@
+InpRunId=phase1-dry-run-v0.1
+InpDryRunOnly=true
+InpTargetSymbol=XAUUSD
+InpMaxSpreadPoints=80.0
+InpMaxRiskPct=0.25
+InpAllowBreakoutRetest=false
+InpLogFileName=phase1_dry_run_log.csv
