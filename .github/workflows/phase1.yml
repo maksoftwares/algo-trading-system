@@ -1,4 +1,4 @@
-name: Phase 1 Dry-Run Static Checks
+name: Phase 1 Dry-Run Validation
 
 on:
   push:
@@ -7,8 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  xauusd-phase1-static:
+  xauusd-phase1:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: xau-usd/xauusd-phase1
 
     steps:
       - name: Check out repository
@@ -19,11 +22,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install static-test dependencies
-        run: python -m pip install --upgrade pip pytest
+      - name: Install Phase 0 package for shared test runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e "../xauusd-phase0[dev]"
+
+      - name: Run Phase 1 tests
+        run: python -m pytest tests
 
       - name: Audit Phase 1 dry-run safety boundary
-        run: python xau-usd/xauusd-phase1/scripts/audit_phase1_safety.py
+        run: python scripts/audit_phase1_safety.py
 
-      - name: Run Phase 1 static tests
-        run: python -m pytest xau-usd/xauusd-phase1/tests
+      - name: Upload Phase 1 committed reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase1-committed-review-reports
+          path: |
+            xau-usd/xauusd-phase1/outputs/reports/**
+            xau-usd/xauusd-phase1/docs/**

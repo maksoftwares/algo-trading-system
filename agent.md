@@ -98,6 +98,7 @@ Last updated: 2026-05-22
 - Second-candidate research hash manifest: `xau-usd\xauusd-phase0\outputs\hashes\research_hypothesis_hash_manifest.csv`.
 - Latest second-candidate result-producing run status: blocked by missing versioned strategy implementation; do not test or tune it until the strategy class is implemented against the locked hypothesis.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
+- Dedicated Phase 1 CI workflow: `.github\workflows\phase1.yml`.
 - Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.

@@ -11,7 +11,7 @@ This file maps the external review findings to concrete repository actions.
 | Add D1 / D2 before live pilot. | Accepted and implemented. `PHASE0_INDEPENDENT_VALIDATION.md` records CPCV and Reality Check/SPA as PASS for `breakout_retest`. |
 | Verify D3 / D4 explicitly. | Accepted and implemented. `PHASE0_INDEPENDENT_VALIDATION.md` records both D3 and D4 as closed for the current evidence package. |
 | Audit the breakout-retest edge thesis. | Accepted. The current hypothesis already contains the edge mechanism, failure modes, code mapping, and falsification criteria; a separate edge-thesis file may still be added if reviewers want a standalone artifact. |
-| Add Phase 1 CI visibility. | Accepted. Phase 1 static checks already exist inside `phase0.yml`; a dedicated `phase1.yml` workflow should make this easier to review. |
+| Add Phase 1 CI visibility. | Accepted and implemented. `.github/workflows/phase1.yml` runs Phase 1 tests, dry-run safety audit, and uploads committed review reports. |
 | Document workspace ownership. | Accepted. The active Windows paths are machine-local, not canonical project assumptions. |
 | Reduce report overhead later. | Accepted. Canonical reporting policy should keep one machine-readable summary, one acceptance report, and one review bundle as the primary review surfaces. |
 
