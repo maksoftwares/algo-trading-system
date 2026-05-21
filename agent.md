@@ -24,7 +24,7 @@ Last updated: 2026-05-21
 - MT5 passive exports and public Dukascopy acquisition are complete for the Phase 0 required bar set.
 - Latest bar import status: `25 imported, 0 missing, 0 failed`.
 - Latest data readiness status: `PASS`, `25/25` required timeframe sets ready.
-- Full real-data `run-all` completed successfully on 2026-05-21:
+- Fresh post-review real-data `run-all` completed successfully on 2026-05-21 after hypothesis completion and re-registration:
   - Matrix output sets: 27.
   - Decile files: 3.
   - Multisymbol summaries: 3.
@@ -36,9 +36,9 @@ Last updated: 2026-05-21
 - Audit correction: the previous real-data run is exploratory evidence only because the registered hypothesis files still contained placeholder text when the run was produced.
 - Do not treat automated PASS as final PASS until hypothesis completeness, fresh hash registration, rerun evidence, manual adversarial review, and review bundle are complete.
 - Reviewer-prompt cleanup now includes reference validation, true-holdout run context manifests, intrabar ambiguity reporting, review-bundle generation, and real-artifact verification.
-- Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_092422.zip`.
+- Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_111442.zip`.
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
-- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_104426.zip`.
+- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_111406.zip`.
 - Verification after code changes: `128 passed`; safety audit OK.
 - `verify-real-artifacts` currently returns FAIL only because `PHASE0_VERDICT.md` still contains pending manual-review states; all structural artifact checks pass or are documented.
 
