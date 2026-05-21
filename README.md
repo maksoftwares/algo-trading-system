@@ -32,3 +32,5 @@ cd xau-usd\xauusd-phase0
 ```
 
 See `xau-usd/xauusd-phase0/README.md` for the full workflow.
+
+Agent handoff and current gate status are maintained in `agent.md`.
