@@ -14,6 +14,7 @@ data/raw/dukascopy/
 
 Raw files may use broker-native column names. The normalizer recognizes common timestamp, bid, ask, and volume aliases, then writes the locked Phase 0 schema.
 Broker OHLC bar exports are also accepted. Use filenames that include the symbol and timeframe, for example `XAUUSD_M5_2016_2025_capital.csv`.
+`mt5/PassiveBarExporter_Phase0.mq5` can export MT5 history into compatible OHLC files. Use it only for passive file export, then copy completed CSVs into `data/raw/{broker}/`.
 
 ## Processed Output Layout
 
@@ -54,6 +55,7 @@ These commands write validation artifacts and `outputs/manifests/PHASE0_DATA_MAN
 Use `generate-data-requirements` to write `outputs/manifests/PHASE0_DATA_REQUIREMENTS.csv`, a broker/symbol/timeframe acquisition checklist with required coverage windows and suggested raw filenames.
 Use `normalize-data` plus `build-bars` for tick exports. Use `normalize-bars` for direct OHLC bar exports from MT5 History Center or a broker portal. By default, source bar timestamps are interpreted as bar starts; pass `--timestamp-is bar_end` only for exports that already use bar-close timestamps.
 If a direct bar export filename does not include the symbol and timeframe, pass `--input-file path\to\export.csv` to `normalize-bars`.
+For MT5 server-time exports, confirm the UTC offset before import. If the broker changes offset across the requested history window, export separate date ranges with the correct fixed offset or prefer a broker portal export with UTC timestamps.
 Use `import-required-bars` after placing bar CSVs in `data/raw/{broker}/`; it batch-imports every required broker/symbol/timeframe whose filename includes both the symbol and timeframe, then writes `outputs/manifests/PHASE0_BAR_IMPORT_REPORT.csv`.
 Pass `--fail-on-missing` when using `import-required-bars` in automation so missing required exports return a non-zero exit code after reports are written.
 Use `generate-data-manifest` to seal `outputs/manifests/PHASE0_DATA_MANIFEST.md` across all required broker/symbol inputs, including raw and processed file SHA256 values.

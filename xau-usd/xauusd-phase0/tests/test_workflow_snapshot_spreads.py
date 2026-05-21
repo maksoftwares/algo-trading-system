@@ -46,6 +46,9 @@ def test_generate_snapshot_includes_required_files(project_root, tmp_path):
     assert "docs/hypothesis_trend_pullback.md" in names
     assert "data/README_DATA.md" in names
     assert "mt5/PassiveSpreadLogger_XAUUSD.mq5" in names
+    assert "mt5/PassiveBarExporter_Phase0.mq5" in names
+    assert "mt5/README_BAR_EXPORTER.md" in names
+    assert "mt5/bar_exporter_set_example.set" in names
     assert "scripts/run_all_phase0.py" in names
     assert "scripts/generate_result_manifest.py" in names
     assert "src/phase0/snapshot.py" in names

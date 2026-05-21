@@ -64,7 +64,7 @@ python -m phase0 generate-verdict
 python -m phase0 generate-snapshot
 ```
 
-## Passive Spread Logger
+## Passive MT5 Tools
 
 Attach `mt5/PassiveSpreadLogger_XAUUSD.mq5` to a demo MT5 chart and let it run for the measurement period. Copy completed CSV logs into `outputs/logs/`, then run:
 
@@ -75,6 +75,13 @@ python -m phase0 analyze-spread-logs
 This produces `outputs/reports/cost_model_measured.csv` and `outputs/reports/spread_distribution_report.md`.
 
 Measured `median` and `p95` spread values are used by the cost engine when `cost_model_measured.csv` exists. Lookup prefers symbol/broker/hour, then symbol/broker/day, then symbol/broker/global, before falling back to configured spreads.
+
+Run `mt5/PassiveBarExporter_Phase0.mq5` as an MT5 script to export historical OHLC bars for the required broker/symbol/timeframe sets. Copy completed CSVs into `data/raw/{broker}/`, then run:
+
+```powershell
+python -m phase0 import-required-bars --fail-on-missing
+python -m phase0 check-data-availability
+```
 
 ## Key Outputs
 

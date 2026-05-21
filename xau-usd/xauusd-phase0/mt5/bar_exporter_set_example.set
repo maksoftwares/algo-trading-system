@@ -1,0 +1,8 @@
+InpSymbol=
+InpBrokerLabel=capital_com
+InpTimeframes=M5,M15,H1,H4,D1
+InpStartServerTime=2016.01.01 00:00
+InpEndServerTime=2025.06.30 23:59
+InpServerToUtcOffsetHours=0
+InpUseCommonFiles=true
+InpPrintToExpertsTab=true
