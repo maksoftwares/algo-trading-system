@@ -83,7 +83,10 @@ def generate_expert_report(
         multisymbol_summary.status,
         hypothesis_match_status,
     ]
-    final_status = _final_status(category_statuses)
+    if hypothesis_match_status == "FAIL":
+        final_status = "INVALID_PRE_REGISTRATION"
+    else:
+        final_status = _final_status(category_statuses, adversarial_summary.status)
     failed_gates = _failed_gates(
         matrix_gate_df,
         decile_summary.gate,
@@ -377,7 +380,12 @@ def _render_consolidated_verdict(
     ]
     passing = [output.expert for output in expert_outputs if output.final_status == "PASS"]
     rejected = [output.expert for output in expert_outputs if output.final_status == "FAIL"]
-    pending = [output.expert for output in expert_outputs if output.final_status == "PENDING"]
+    pending = [output.expert for output in expert_outputs if output.final_status.startswith("PENDING")]
+    invalid = [
+        output.expert
+        for output in expert_outputs
+        if output.final_status == "INVALID_PRE_REGISTRATION"
+    ]
     action = _recommended_action(len(passing), len(expert_outputs))
     ten_gate_columns = [
         "Expert",
@@ -430,6 +438,10 @@ def _render_consolidated_verdict(
             "## Experts Pending Manual Review",
             "",
             _bullet_list(pending) if pending else "None.",
+            "",
+            "## Invalid Pre-Registration",
+            "",
+            _bullet_list(invalid) if invalid else "None.",
             "",
             "## Recommended Action",
             "",
@@ -724,9 +736,11 @@ def _overall_status(statuses: list[str]) -> str:
     return "PASS"
 
 
-def _final_status(statuses: list[str]) -> str:
+def _final_status(statuses: list[str], adversarial_status: str) -> str:
     if any(status == "FAIL" for status in statuses):
         return "FAIL"
+    if adversarial_status == "PENDING":
+        return "PENDING_MANUAL_REVIEW"
     if any(status == "PENDING" for status in statuses):
         return "PENDING"
     return "PASS"

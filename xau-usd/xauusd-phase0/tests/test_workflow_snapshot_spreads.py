@@ -10,9 +10,13 @@ import pytest
 
 from phase0.cli import main
 from phase0.config import ConfigError, load_project_config
+from phase0.artifact_verifier import verify_real_artifacts
 from phase0.hashing import register_hypotheses
+from phase0.holdout import write_run_context_manifest
+from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.manifests import generate_result_manifest
 from phase0.mt5_presets import generate_mt5_bar_export_presets
+from phase0.reference import validate_reference_files
 from phase0.review_bundle import generate_review_bundle
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
@@ -84,7 +88,32 @@ def test_generate_result_manifest_hashes_generated_outputs(project_root, tmp_pat
     assert readiness_row["artifact_type"] == "manifests"
     assert readiness_row["sha256"] == _sha256(readiness_path)
     assert "outputs/hashes/hypothesis_hash_manifest.csv" in set(rows["path"])
+    assert "outputs/manifests/PHASE0_RUN_CONTEXT.json" in set(rows["path"])
     assert "outputs/manifests/PHASE0_RESULT_MANIFEST.csv" not in set(rows["path"])
+
+
+def test_true_holdout_context_manifest_records_required_fields(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+
+    output_path = write_run_context_manifest(config)
+
+    data = output_path.read_text(encoding="utf-8")
+    assert '"true_holdout_period_start"' in data
+    assert '"true_holdout_period_end"' in data
+    assert '"true_holdout_unlocked": false' in data
+    assert '"true_holdout_unlock_file"' in data
+    assert '"true_holdout_overlap_detected"' in data
+
+
+def test_validate_reference_allows_documented_missing_specs(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+
+    output = validate_reference_files(config)
+
+    assert output.status == "DOCUMENTED_MISSING"
+    assert "PATH_TO_10.md" in output.missing_files
 
 
 def test_generate_review_bundle_includes_review_evidence(project_root, tmp_path):
@@ -108,6 +137,56 @@ def test_generate_review_bundle_includes_review_evidence(project_root, tmp_path)
     assert "outputs/reports/PHASE0_VERDICT.md" in names
     assert "outputs/manifests/PHASE0_DATA_READINESS.md" in names
     assert "outputs/hashes/hypothesis_hash_manifest.csv" in names
+    with zipfile.ZipFile(output.bundle_path) as archive:
+        manifest = archive.read("review_bundle_manifest.json").decode("utf-8")
+    assert "true_holdout_status" in manifest
+
+
+def test_generate_intrabar_ambiguity_report_summarizes_trade_csv(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    trades_dir = root / "outputs" / "matrix_results" / "breakout_retest"
+    trades_dir.mkdir(parents=True)
+    pd.DataFrame(
+        [
+            _trade_row("2020-01-01T00:00:00+00:00", "2020-01-01T00:00:00+00:00", -100.0, True),
+            _trade_row("2020-01-01T01:00:00+00:00", "2020-01-01T01:05:00+00:00", 200.0, False),
+        ]
+    ).to_csv(trades_dir / "cell_1_breakout_retest_capital_com_median_trades.csv", index=False)
+    config = load_project_config(root)
+
+    outputs = generate_intrabar_ambiguity_report(config, "breakout_retest")
+
+    assert len(outputs) == 1
+    assert outputs[0].total_trades == 2
+    assert outputs[0].ambiguous_exit_trades == 1
+    assert outputs[0].same_timestamp_exit_trades == 1
+    assert outputs[0].adverse_first_profit_factor == "2"
+    assert outputs[0].report_path.exists()
+
+
+def test_verify_real_artifacts_passes_complete_evidence_package(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+    register_hypotheses(config)
+    (root / "outputs" / "manifests").mkdir(parents=True, exist_ok=True)
+    (root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md").write_text("PASS\n", encoding="utf-8")
+    (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").write_text("manifest\n", encoding="utf-8")
+    reports_dir = root / "outputs" / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    (reports_dir / "PHASE0_VERDICT.md").write_text("FINAL PASS\n", encoding="utf-8")
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (reports_dir / f"{expert}_intrabar_ambiguity_report.md").write_text("ok\n", encoding="utf-8")
+    adversarial_dir = root / "outputs" / "adversarial_review"
+    adversarial_dir.mkdir(parents=True, exist_ok=True)
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (adversarial_dir / f"{expert}_adversarial_score.md").write_text("PASS\n", encoding="utf-8")
+    generate_result_manifest(config)
+    generate_review_bundle(config)
+
+    output = verify_real_artifacts(config)
+
+    assert output.status == "PASS"
+    assert output.report_path.exists()
 
 
 def test_run_all_cli_synthetic(project_root, tmp_path, capsys):
@@ -146,12 +225,39 @@ def _copy_project_shell(project_root: Path, tmp_path: Path) -> Path:
     shutil.copytree(project_root / "mt5", root / "mt5")
     shutil.copytree(project_root / "src" / "phase0", root / "src" / "phase0")
     shutil.copytree(project_root / "tests", root / "tests")
+    shutil.copytree(project_root / "reference", root / "reference")
     for name in ("pyproject.toml", "requirements.txt", "README.md"):
         shutil.copy2(project_root / name, root / name)
     (root / "data").mkdir(parents=True)
     shutil.copy2(project_root / "data" / "README_DATA.md", root / "data" / "README_DATA.md")
     (root / "outputs" / "hashes").mkdir(parents=True)
     return root
+
+
+def _trade_row(
+    entry_time_utc: str,
+    exit_time_utc: str,
+    net_pnl_usd: float,
+    ambiguous_exit: bool,
+) -> dict[str, object]:
+    return {
+        "expert": "breakout_retest",
+        "symbol": "XAUUSD",
+        "direction": "LONG",
+        "entry_time_utc": entry_time_utc,
+        "exit_time_utc": exit_time_utc,
+        "entry_price": 2000.0,
+        "exit_price": 2001.0,
+        "stop_loss": 1999.0,
+        "take_profit": 2001.5,
+        "lots": 0.1,
+        "gross_pnl_usd": net_pnl_usd,
+        "costs_usd": 0.0,
+        "net_pnl_usd": net_pnl_usd,
+        "r_multiple": net_pnl_usd / 100.0,
+        "exit_reason": "stop_loss" if net_pnl_usd < 0 else "take_profit",
+        "metadata_ambiguous_exit": ambiguous_exit,
+    }
 
 
 def _write_sample_spread_log(root: Path) -> None:

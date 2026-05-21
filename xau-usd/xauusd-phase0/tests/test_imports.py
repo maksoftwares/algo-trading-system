@@ -6,6 +6,7 @@ import importlib
 def test_required_modules_import():
     module_names = [
         "phase0",
+        "phase0.artifact_verifier",
         "phase0.adversarial",
         "phase0.aggregation",
         "phase0.backtester",
@@ -24,7 +25,9 @@ def test_required_modules_import():
         "phase0.execution",
         "phase0.gates",
         "phase0.hashing",
+        "phase0.holdout",
         "phase0.indicators",
+        "phase0.intrabar",
         "phase0.levels",
         "phase0.manifests",
         "phase0.metrics",
@@ -33,6 +36,7 @@ def test_required_modules_import():
         "phase0.mt5_presets",
         "phase0.normalizer",
         "phase0.reports",
+        "phase0.reference",
         "phase0.run_context",
         "phase0.safety",
         "phase0.sizing",

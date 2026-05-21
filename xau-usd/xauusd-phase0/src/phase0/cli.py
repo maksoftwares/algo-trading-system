@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from phase0.artifact_verifier import verify_real_artifacts
 from phase0.adversarial import create_adversarial_packets, score_adversarial_review
 from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
@@ -23,6 +24,7 @@ from phase0.hashing import (
     validate_hypotheses,
     validate_hypotheses_complete,
 )
+from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
@@ -35,6 +37,7 @@ from phase0.normalizer import (
     validate_raw_files_without_writing,
 )
 from phase0.reports import generate_all_reports
+from phase0.reference import validate_reference_files
 from phase0.review_bundle import generate_review_bundle
 from phase0.safety import audit_no_live_trading_calls
 from phase0.snapshot import generate_snapshot
@@ -86,6 +89,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Fail if enabled hypothesis files still contain placeholders or missing fields.",
     )
     validate_hypotheses_cmd.set_defaults(func=_cmd_validate_hypotheses_complete)
+
+    validate_reference = subparsers.add_parser(
+        "validate-reference",
+        help="Validate that required reference specs exist or the missing specs are documented.",
+    )
+    validate_reference.set_defaults(func=_cmd_validate_reference)
 
     validate_data = subparsers.add_parser("validate-data", help="Validate raw or processed data.")
     _add_broker_symbol_args(validate_data)
@@ -235,6 +244,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     review_bundle.set_defaults(func=_cmd_generate_review_bundle)
 
+    intrabar_report = subparsers.add_parser(
+        "generate-intrabar-ambiguity-report",
+        help="Summarize adverse-first intrabar ambiguity from matrix trade CSVs.",
+    )
+    intrabar_report.add_argument("--expert", choices=(*EXPERTS, "all"), required=True)
+    intrabar_report.set_defaults(func=_cmd_generate_intrabar_ambiguity_report)
+
+    verify_real = subparsers.add_parser(
+        "verify-real-artifacts",
+        help="Verify the real-data Phase 0 evidence package before Phase 1 approval.",
+    )
+    verify_real.set_defaults(func=_cmd_verify_real_artifacts)
+
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
     analyze_spreads.add_argument("--glob", default="spread_log_*.csv")
@@ -285,6 +307,18 @@ def _cmd_validate_hypotheses_complete(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     validate_hypotheses_complete(config)
     print("Hypothesis completeness OK: all enabled hypothesis files are fully specified.")
+    return 0
+
+
+def _cmd_validate_reference(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = validate_reference_files(config)
+    print(f"Reference status: {output.status}")
+    print(f"Reference directory: {output.reference_dir}")
+    if output.existing_files:
+        print(f"Existing reference docs: {', '.join(output.existing_files)}")
+    if output.missing_files:
+        print(f"Documented missing reference docs: {', '.join(output.missing_files)}")
     return 0
 
 
@@ -568,6 +602,29 @@ def _cmd_generate_review_bundle(args: argparse.Namespace) -> int:
     print(f"Review bundle created: {output.bundle_path}")
     print(f"Included files: {len(output.included_files)}")
     return 0
+
+
+def _cmd_generate_intrabar_ambiguity_report(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    outputs = generate_intrabar_ambiguity_report(config, args.expert)
+    print(f"Intrabar ambiguity reports generated: {len(outputs)} expert(s)")
+    for output in outputs:
+        print(
+            f"{output.expert}: {output.ambiguous_exit_trades}/{output.total_trades} ambiguous, "
+            f"PF adverse-first={output.adverse_first_profit_factor}"
+        )
+        print(output.report_path)
+    return 0
+
+
+def _cmd_verify_real_artifacts(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = verify_real_artifacts(config)
+    print(f"Real artifact verification: {output.status}")
+    print(output.report_path)
+    for check in output.checks:
+        print(f"{check.status}: {check.name} - {check.message}")
+    return 0 if output.status == "PASS" else 1
 
 
 def _cmd_analyze_spread_logs(args: argparse.Namespace) -> int:

@@ -42,7 +42,21 @@ jobs:
 
       - name: Run synthetic Phase 0 workflow
         run: |
+          python -m phase0 validate-reference
+          python -m phase0 validate-hypotheses-complete
           python -m phase0 hash-hypotheses --register --force
           python -m phase0 run-all --synthetic-sample
+          python -m phase0 generate-intrabar-ambiguity-report --expert all
           python -m phase0 generate-result-manifest
+          python -m phase0 generate-review-bundle
           python -m phase0 generate-snapshot
+
+      - name: Upload synthetic review artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase0-synthetic-review-artifacts
+          path: |
+            xau-usd/xauusd-phase0/outputs/reports/**
+            xau-usd/xauusd-phase0/outputs/manifests/**
+            xau-usd/xauusd-phase0/outputs/review_bundles/**
+            xau-usd/xauusd-phase0/outputs/snapshots/**

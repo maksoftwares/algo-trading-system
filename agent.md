@@ -35,9 +35,12 @@ Last updated: 2026-05-21
   - `trend_pullback` and `range_mr` are rejected by the current Phase 0 verdict.
 - Audit correction: the previous real-data run is exploratory evidence only because the registered hypothesis files still contained placeholder text when the run was produced.
 - Do not treat automated PASS as final PASS until hypothesis completeness, fresh hash registration, rerun evidence, manual adversarial review, and review bundle are complete.
+- Reviewer-prompt cleanup now includes reference validation, true-holdout run context manifests, intrabar ambiguity reporting, review-bundle generation, and real-artifact verification.
 - Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_092422.zip`.
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
-- Verification after code changes: `119 passed`; safety audit OK.
+- Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_104426.zip`.
+- Verification after code changes: `128 passed`; safety audit OK.
+- `verify-real-artifacts` currently returns FAIL only because `PHASE0_VERDICT.md` still contains pending manual-review states; all structural artifact checks pass or are documented.
 
 ## Local MT5 Discovery
 
@@ -64,6 +67,7 @@ Last updated: 2026-05-21
 cd xau-usd\xauusd-phase0
 .\.venv\Scripts\phase0.exe generate-data-requirements
 .\.venv\Scripts\phase0.exe generate-mt5-bar-presets
+.\.venv\Scripts\phase0.exe validate-reference
 .\.venv\Scripts\phase0.exe validate-hypotheses-complete
 .\.venv\Scripts\phase0.exe hash-hypotheses --register --force
 .\.venv\Scripts\phase0.exe import-required-bars --fail-on-missing
@@ -74,7 +78,9 @@ cd xau-usd\xauusd-phase0
 .\.venv\Scripts\python.exe -m pytest
 .\.venv\Scripts\phase0.exe generate-snapshot
 .\.venv\Scripts\phase0.exe score-adversarial-review --expert breakout_retest
+.\.venv\Scripts\phase0.exe generate-intrabar-ambiguity-report --expert breakout_retest
 .\.venv\Scripts\phase0.exe generate-review-bundle
+.\.venv\Scripts\phase0.exe verify-real-artifacts
 ```
 
 ## Remaining Gates Before Live EA Coding
@@ -83,8 +89,9 @@ cd xau-usd\xauusd-phase0
 2. Re-register hypothesis hashes before any new real-data run.
 3. Rerun Phase 0 real-data workflow; old real-data outputs stay exploratory.
 4. Complete and score Gate 9 manual adversarial review for `breakout_retest`.
-5. Generate the review bundle for third-party inspection.
-6. Only after the final verdict becomes PASS should Phase 1 dry-run EA work begin.
+5. Generate intrabar ambiguity reports and the review bundle for third-party inspection.
+6. Run `verify-real-artifacts` and resolve any FAIL findings.
+7. Only after the final verdict becomes PASS should Phase 1 dry-run EA work begin.
 
 ## Current Recommendation
 

@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from phase0.config import ProjectConfig
+from phase0.holdout import true_holdout_status, write_run_context_manifest
 from phase0.manifests import generate_result_manifest
 
 
@@ -20,6 +21,7 @@ class ReviewBundleOutput:
 def generate_review_bundle(config: ProjectConfig) -> ReviewBundleOutput:
     output_dir = config.root / "outputs" / "review_bundles"
     output_dir.mkdir(parents=True, exist_ok=True)
+    write_run_context_manifest(config)
     generate_result_manifest(config)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     bundle_path = output_dir / f"PHASE0_REVIEW_BUNDLE_{stamp}.zip"
@@ -39,6 +41,7 @@ def generate_review_bundle(config: ProjectConfig) -> ReviewBundleOutput:
             "git_commit": _git_commit(config.root) or "unavailable",
             "git_status": _git_status(config.root) or "unavailable",
             "raw_data_included": False,
+            "true_holdout_status": true_holdout_status(config).__dict__,
             "included_files": sorted(included),
         }
         archive.writestr("review_bundle_manifest.json", json.dumps(manifest, indent=2))

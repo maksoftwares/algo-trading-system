@@ -12,6 +12,7 @@ import pandas as pd
 from phase0.config import ProjectConfig, get_broker_details, resolve_symbol
 from phase0.data_loader import processed_bars_dir, processed_ticks_dir, raw_data_dir
 from phase0.data_validator import ValidationReport
+from phase0.holdout import write_run_context_manifest
 
 
 @dataclass(frozen=True)
@@ -125,6 +126,7 @@ def generate_required_data_manifest(
 def generate_result_manifest(config: ProjectConfig) -> Path:
     output_dir = config.root / "outputs" / "manifests"
     output_dir.mkdir(parents=True, exist_ok=True)
+    write_run_context_manifest(config)
     output_path = output_dir / "PHASE0_RESULT_MANIFEST.csv"
     rows = _result_manifest_rows(config)
     with output_path.open("w", newline="", encoding="utf-8") as handle:
