@@ -51,8 +51,21 @@ def run_decile_tests(
         unlock_true_holdout=unlock_true_holdout,
     )
     outputs: list[DecileRunOutput] = []
+    base_context = None
+    if not synthetic_sample:
+        base_context = context_with_symbol_metadata(
+            config,
+            load_cell_data_context(
+                config,
+                "capital_com",
+                "XAUUSD",
+                required_start=start,
+                required_end=end,
+            ),
+            "XAUUSD",
+        )
     for expert_name in enabled_strategy_names(expert):
-        rows = _run_expert_deciles(config, expert_name, start, end, synthetic_sample)
+        rows = _run_expert_deciles(config, expert_name, start, end, synthetic_sample, base_context)
         output_dir = config.root / "outputs" / "decile_results"
         output_dir.mkdir(parents=True, exist_ok=True)
         path = output_dir / f"{expert_name}_decile_results.csv"
@@ -67,22 +80,10 @@ def _run_expert_deciles(
     start: pd.Timestamp,
     end: pd.Timestamp,
     synthetic_sample: bool,
+    base_context: dict | None = None,
 ) -> list[dict[str, object]]:
     strategy = get_strategy(expert)
     rows: list[dict[str, object]] = []
-    base_context = None
-    if not synthetic_sample:
-        base_context = context_with_symbol_metadata(
-            config,
-            load_cell_data_context(
-                config,
-                "capital_com",
-                "XAUUSD",
-                required_start=start,
-                required_end=end,
-            ),
-            "XAUUSD",
-        )
 
     for decile_id, decile_start, decile_end in split_period(start, end, 10):
         if synthetic_sample:

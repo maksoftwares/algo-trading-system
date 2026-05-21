@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from phase0.candles import bearish_engulfing, bearish_pin_bar, bullish_engulfing, bullish_pin_bar
@@ -13,8 +14,6 @@ from phase0.strategies.base import (
     context_point_size,
     context_symbol,
     copy_context,
-    latest_completed_position,
-    latest_completed_row,
     require_frame,
     value_available,
 )
@@ -70,40 +69,53 @@ class TrendPullbackStrategy(StrategyBase):
         symbol = context_symbol(context)
         signals: list[Signal] = []
 
-        for position, row in m5.iterrows():
-            timestamp = row["timestamp_utc"]
-            h1_row = latest_completed_row(h1, timestamp)
-            m15_position = latest_completed_position(m15, timestamp)
-            if h1_row is None or m15_position is None:
+        h1_time_ns = h1["timestamp_utc"].astype("int64").to_numpy()
+        m15_time_ns = m15["timestamp_utc"].astype("int64").to_numpy()
+        m5_time_ns = m5["timestamp_utc"].astype("int64").to_numpy()
+        h1_ema50 = h1["ema50"].to_numpy()
+        h1_ema200 = h1["ema200"].to_numpy()
+        h1_slope = h1["ema50_slope20"].to_numpy()
+        h1_atr = h1["atr14"].to_numpy()
+        m15_close = m15["close"].to_numpy()
+        m15_ema21 = m15["ema21"].to_numpy()
+        m15_atr = m15["atr14"].to_numpy()
+        m5_close = m5["close"].to_numpy()
+        m5_bullish = (m5["bullish_engulfing"] | m5["bullish_pin_bar"]).to_numpy()
+        m5_bearish = (m5["bearish_engulfing"] | m5["bearish_pin_bar"]).to_numpy()
+
+        for position, timestamp_ns in enumerate(m5_time_ns):
+            h1_position = int(np.searchsorted(h1_time_ns, timestamp_ns, side="right")) - 1
+            m15_position = int(np.searchsorted(m15_time_ns, timestamp_ns, side="right")) - 1
+            if h1_position < 0 or m15_position < 0:
                 continue
-            m15_row = m15.iloc[m15_position]
             if not value_available(
-                h1_row["ema50"],
-                h1_row["ema200"],
-                h1_row["ema50_slope20"],
-                h1_row["atr14"],
-                m15_row["ema21"],
-                m15_row["atr14"],
+                h1_ema50[h1_position],
+                h1_ema200[h1_position],
+                h1_slope[h1_position],
+                h1_atr[h1_position],
+                m15_ema21[m15_position],
+                m15_atr[m15_position],
             ):
                 continue
 
-            pullback_distance = abs(float(m15_row["close"]) - float(m15_row["ema21"]))
-            if pullback_distance > 0.5 * float(h1_row["atr14"]):
+            pullback_distance = abs(float(m15_close[m15_position]) - float(m15_ema21[m15_position]))
+            if pullback_distance > 0.5 * float(h1_atr[h1_position]):
                 continue
 
+            timestamp = pd.Timestamp(m5["timestamp_utc"].iat[position])
             metadata = {
                 "m5_index": int(position),
                 "m15_index": int(m15_position),
-                "h1_timestamp_utc": h1_row["timestamp_utc"],
-                "m15_timestamp_utc": m15_row["timestamp_utc"],
-                "m5_close": float(row["close"]),
-                "m15_atr14": float(m15_row["atr14"]),
+                "h1_timestamp_utc": h1["timestamp_utc"].iat[h1_position],
+                "m15_timestamp_utc": m15["timestamp_utc"].iat[m15_position],
+                "m5_close": float(m5_close[position]),
+                "m15_atr14": float(m15_atr[m15_position]),
             }
 
             if (
-                float(h1_row["ema50"]) > float(h1_row["ema200"])
-                and float(h1_row["ema50_slope20"]) > 0
-                and (bool(row["bullish_engulfing"]) or bool(row["bullish_pin_bar"]))
+                float(h1_ema50[h1_position]) > float(h1_ema200[h1_position])
+                and float(h1_slope[h1_position]) > 0
+                and bool(m5_bullish[position])
             ):
                 signals.append(
                     Signal(
@@ -117,9 +129,9 @@ class TrendPullbackStrategy(StrategyBase):
                 )
 
             if (
-                float(h1_row["ema50"]) < float(h1_row["ema200"])
-                and float(h1_row["ema50_slope20"]) < 0
-                and (bool(row["bearish_engulfing"]) or bool(row["bearish_pin_bar"]))
+                float(h1_ema50[h1_position]) < float(h1_ema200[h1_position])
+                and float(h1_slope[h1_position]) < 0
+                and bool(m5_bearish[position])
             ):
                 signals.append(
                     Signal(
@@ -134,8 +146,9 @@ class TrendPullbackStrategy(StrategyBase):
         return signals
 
     def build_trade_plan(self, signal: Signal, data_context: dict[str, Any]) -> TradePlan:
-        context = self.prepare_features(data_context)
-        m5 = context["M5"]
+        m5 = data_context.get("M5")
+        if not isinstance(m5, pd.DataFrame):
+            raise ConfigError("Trend Pullback requires M5 bars for trade planning.")
         m5_position = int(signal.metadata["m5_index"])
         m15_atr = float(signal.metadata["m15_atr14"])
         estimated_entry = float(signal.metadata["m5_close"])

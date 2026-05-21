@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 
+import numpy as np
 import pandas as pd
 
 from phase0.config import ConfigError, ProjectConfig, parse_utc_datetime, resolve_symbol
@@ -38,6 +39,9 @@ class Fill:
 @dataclass(frozen=True)
 class ExitFill(Fill):
     ambiguous_exit: bool = False
+
+
+_PREPARED_EXECUTION_BARS_ATTR = "phase0_prepared_execution_bars"
 
 
 def simulate_trade(
@@ -118,17 +122,16 @@ def find_entry_fill(bars: pd.DataFrame, plan: TradePlan, cost_model: CostModel) 
     bars = prepare_execution_bars(bars)
     signal_time = _ensure_datetime(plan.signal_time_utc)
     if plan.entry_type == "MARKET":
-        candidates = bars[bars["bar_start_utc"] >= signal_time]
-        if candidates.empty:
+        position = _first_bar_position_at_or_after(bars, signal_time)
+        if position is None:
             raise ExecutionError("No bar is available at or after signal time for market entry.")
-        index = candidates.index[0]
-        row = bars.loc[index]
+        row = bars.iloc[position]
         base_price = _entry_price_from_bar(row, plan.direction, cost_model)
         price = apply_entry_slippage(base_price, plan.direction, cost_model.entry_slippage_price)
         return Fill(
             time_utc=row["bar_start_utc"],
             price=price,
-            bar_index=int(index),
+            bar_index=int(position),
             reason="market_next_bar_open",
         )
 
@@ -164,11 +167,25 @@ def find_exit_fill(
     entry: Fill,
     cost_model: CostModel,
 ) -> ExitFill:
-    candidates = bars.loc[entry.bar_index :]
-    for index, row in candidates.iterrows():
-        sl_hit, tp_hit = _exit_hits(row, plan.direction, plan.stop_loss, plan.take_profit)
-        if not sl_hit and not tp_hit:
-            continue
+    start = int(entry.bar_index)
+    highs = bars["high"].to_numpy(dtype=float, copy=False)[start:]
+    lows = bars["low"].to_numpy(dtype=float, copy=False)[start:]
+    if plan.direction == "LONG":
+        sl_hits = lows <= float(plan.stop_loss)
+        tp_hits = highs >= float(plan.take_profit)
+    elif plan.direction == "SHORT":
+        sl_hits = highs >= float(plan.stop_loss)
+        tp_hits = lows <= float(plan.take_profit)
+    else:
+        raise ExecutionError(f"Unknown direction {plan.direction!r}.")
+
+    hit_positions = np.flatnonzero(sl_hits | tp_hits)
+    if len(hit_positions):
+        relative_index = int(hit_positions[0])
+        index = start + relative_index
+        row = bars.iloc[index]
+        sl_hit = bool(sl_hits[relative_index])
+        tp_hit = bool(tp_hits[relative_index])
 
         if sl_hit and tp_hit:
             exit_price = apply_exit_slippage(
@@ -228,13 +245,17 @@ def prepare_execution_bars(bars: pd.DataFrame) -> pd.DataFrame:
     missing = sorted(required - set(bars.columns))
     if missing:
         raise ExecutionError(f"Execution bars missing required column(s): {', '.join(missing)}.")
+    if bars.attrs.get(_PREPARED_EXECUTION_BARS_ATTR):
+        return bars
 
     prepared = bars.copy().reset_index(drop=True)
     prepared["timestamp_utc"] = pd.to_datetime(prepared["timestamp_utc"], utc=True, errors="coerce")
     prepared["bar_start_utc"] = pd.to_datetime(prepared["bar_start_utc"], utc=True, errors="coerce")
     if prepared["timestamp_utc"].isna().any() or prepared["bar_start_utc"].isna().any():
         raise ExecutionError("Execution bars contain invalid timestamps.")
-    return prepared.sort_values("timestamp_utc").reset_index(drop=True)
+    prepared = prepared.sort_values("timestamp_utc").reset_index(drop=True)
+    prepared.attrs[_PREPARED_EXECUTION_BARS_ATTR] = True
+    return prepared
 
 
 def _entry_price_from_bar(row: pd.Series, direction: Direction, cost_model: CostModel) -> float:
@@ -292,11 +313,29 @@ def _pending_entry_candidates(
     plan: TradePlan,
     signal_time: pd.Timestamp,
 ) -> pd.DataFrame:
-    candidates = bars[bars["bar_start_utc"] >= signal_time]
+    position = _first_bar_position_at_or_after(bars, signal_time)
+    if position is None:
+        return bars.iloc[0:0]
+    candidates = bars.iloc[position:]
     expires_after_bars = _expires_after_bars(plan)
     if expires_after_bars is None:
         return candidates
     return candidates.iloc[:expires_after_bars]
+
+
+def _first_bar_position_at_or_after(
+    bars: pd.DataFrame,
+    signal_time: pd.Timestamp,
+) -> int | None:
+    starts = bars["bar_start_utc"]
+    if starts.is_monotonic_increasing:
+        position = int(starts.searchsorted(signal_time, side="left"))
+        return position if position < len(starts) else None
+
+    candidates = starts >= signal_time
+    if not candidates.any():
+        return None
+    return int(candidates.to_numpy().argmax())
 
 
 def _expires_after_bars(plan: TradePlan) -> int | None:

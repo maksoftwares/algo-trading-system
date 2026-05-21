@@ -34,3 +34,15 @@ cd xau-usd\xauusd-phase0
 See `xau-usd/xauusd-phase0/README.md` for the full workflow.
 
 Agent handoff and current gate status are maintained in `agent.md`.
+
+## Latest Review Status
+
+As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all required broker/timeframe bar sets and completed `phase0 run-all`.
+
+- Data readiness: `25/25` required timeframe sets ready.
+- Verification: `119 passed`; passive safety audit passed.
+- Current leading candidate: `breakout_retest`.
+- Current verdict: `breakout_retest` passed the automated matrix, decile, multisymbol, and hash gates, but remains `PENDING` until Gate 9 manual adversarial review is completed.
+- EA coding status: blocked until the final verdict becomes `PASS`.
+
+Generated market data, reports, manifests, and snapshots are intentionally ignored by Git because they can be large and environment-specific. The current local handoff in `agent.md` records the latest artifact paths and regeneration commands.

@@ -334,6 +334,15 @@ def _extract_bar_timestamp(
         return pd.to_datetime(combined, utc=True, errors="coerce"), "generic"
     if date_column is not None:
         return pd.to_datetime(raw[date_column], utc=True, errors="coerce"), "generic"
+    if time_column is not None:
+        time_values = raw[time_column].astype(str).str.strip()
+        non_empty_values = time_values[time_values != ""]
+        if not non_empty_values.empty and non_empty_values.str.contains(
+            r"\d{4}[-./]\d{1,2}[-./]\d{1,2}",
+            regex=True,
+            na=False,
+        ).all():
+            return pd.to_datetime(time_values, utc=True, errors="coerce"), "generic"
 
     raise NormalizationError(
         f"{source_file} is missing a timestamp column. Tried timestamp/bar_start/bar_end, "

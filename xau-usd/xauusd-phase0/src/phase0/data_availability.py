@@ -11,6 +11,7 @@ from phase0.constants import COMPARISON_SYMBOLS
 from phase0.data_loader import processed_bars_dir
 from phase0.data_validator import (
     BAR_REQUIRED_COLUMNS,
+    MAX_ALLOWED_BAR_GAPS,
     bar_identity_issues,
     largest_bar_gap_issue,
     validate_bars,
@@ -342,11 +343,22 @@ def _valid_bar_files(
 
     coverage_start = min(coverage_starts) if coverage_starts else None
     coverage_end = max(coverage_ends) if coverage_ends else None
-    if valid and coverage_start is not None and coverage_start > required_start:
+    allowed_boundary_gap = MAX_ALLOWED_BAR_GAPS[timeframe]
+    if (
+        valid
+        and coverage_start is not None
+        and coverage_start > required_start
+        and coverage_start - required_start > allowed_boundary_gap
+    ):
         issues.append(
             f"coverage starts {_timestamp_text(coverage_start)}, required <= {_timestamp_text(required_start)}"
         )
-    if valid and coverage_end is not None and coverage_end < required_end:
+    if (
+        valid
+        and coverage_end is not None
+        and coverage_end < required_end
+        and required_end - coverage_end > allowed_boundary_gap
+    ):
         issues.append(
             f"coverage ends {_timestamp_text(coverage_end)}, required >= {_timestamp_text(required_end)}"
         )

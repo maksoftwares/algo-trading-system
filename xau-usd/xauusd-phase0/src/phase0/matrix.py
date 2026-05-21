@@ -9,7 +9,12 @@ import pandas as pd
 from phase0.backtester import matrix_output_stem, run_backtest, write_backtest_outputs
 from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolve_symbol
 from phase0.data_loader import processed_bars_dir
-from phase0.data_validator import bar_identity_issues, largest_bar_gap_issue, validate_bars
+from phase0.data_validator import (
+    MAX_ALLOWED_BAR_GAPS,
+    bar_identity_issues,
+    largest_bar_gap_issue,
+    validate_bars,
+)
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
@@ -30,6 +35,7 @@ def run_phase0_matrix(
     synthetic_sample: bool = False,
 ) -> list[MatrixRunOutput]:
     outputs: list[MatrixRunOutput] = []
+    context_cache: dict[tuple[str, str, pd.Timestamp, pd.Timestamp], dict[str, Any]] = {}
     for expert_name in enabled_strategy_names(expert):
         strategy = get_strategy(expert_name)
         cells = build_cell_configs(config, symbol="XAUUSD")
@@ -37,17 +43,20 @@ def run_phase0_matrix(
             if synthetic_sample:
                 data_context = synthetic_context_for_expert(expert_name)
             else:
-                data_context = context_with_symbol_metadata(
-                    config,
-                    load_cell_data_context(
+                cache_key = (cell.broker, cell.symbol, cell.start_utc, cell.end_utc)
+                if cache_key not in context_cache:
+                    context_cache[cache_key] = context_with_symbol_metadata(
                         config,
-                        cell.broker,
+                        load_cell_data_context(
+                            config,
+                            cell.broker,
+                            cell.symbol,
+                            required_start=cell.start_utc,
+                            required_end=cell.end_utc,
+                        ),
                         cell.symbol,
-                        required_start=cell.start_utc,
-                        required_end=cell.end_utc,
-                    ),
-                    cell.symbol,
-                )
+                    )
+                data_context = context_cache[cache_key]
 
             result = run_backtest(
                 config=config,
@@ -187,7 +196,12 @@ def _assert_bar_coverage(
     coverage_end = pd.Timestamp(ends.max())
     needed_start = _utc_timestamp(required_start)
     needed_end = _utc_timestamp(required_end)
-    if coverage_start > needed_start or coverage_end < needed_end:
+    allowed_boundary_gap = MAX_ALLOWED_BAR_GAPS[timeframe]
+    starts_too_late = (
+        coverage_start > needed_start and coverage_start - needed_start > allowed_boundary_gap
+    )
+    ends_too_early = coverage_end < needed_end and needed_end - coverage_end > allowed_boundary_gap
+    if starts_too_late or ends_too_early:
         raise ConfigError(
             f"Processed {timeframe} bars in {source} cover "
             f"{coverage_start.isoformat()} to {coverage_end.isoformat()}, "

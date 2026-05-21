@@ -12,7 +12,7 @@ from phase0.config import load_project_config
 from phase0.data_import import import_required_bar_exports
 from phase0.data_validator import DataValidationError, validate_bars, validate_ticks
 from phase0.manifests import generate_required_data_manifest
-from phase0.normalizer import normalize_bar_dataframe, normalize_tick_dataframe
+from phase0.normalizer import NormalizationError, normalize_bar_dataframe, normalize_tick_dataframe
 
 
 def test_normalize_format_a():
@@ -96,6 +96,56 @@ def test_normalize_mt5_bar_export_format():
     assert normalized.loc[0, "tick_count"] == 42
     assert normalized.loc[0, "bid_open"] == pytest.approx(1061.15)
     assert normalized.loc[0, "ask_open"] == pytest.approx(1061.35)
+
+
+def test_normalize_mt5_copyrates_single_time_column_format():
+    raw = pd.DataFrame(
+        {
+            "Time": ["2016.01.04 10:00:00"],
+            "Open": [1061.25],
+            "High": [1062.00],
+            "Low": [1060.50],
+            "Close": [1061.75],
+            "TickVolume": [42],
+            "SpreadPoints": [20],
+        }
+    )
+
+    normalized = normalize_bar_dataframe(
+        raw,
+        broker="capital_com",
+        symbol="XAUUSD",
+        timeframe="M15",
+        point_size=0.01,
+        source_file="XAUUSD_M15.csv",
+    )
+
+    assert normalized.loc[0, "bar_start_utc"] == "2016-01-04T10:00:00Z"
+    assert normalized.loc[0, "bar_end_utc"] == "2016-01-04T10:15:00Z"
+    assert normalized.loc[0, "timestamp_utc"] == "2016-01-04T10:15:00Z"
+    assert normalized.loc[0, "tick_count"] == 42
+
+
+def test_normalize_rejects_time_only_bar_column_without_date():
+    raw = pd.DataFrame(
+        {
+            "Time": ["10:00:00"],
+            "Open": [1061.25],
+            "High": [1062.00],
+            "Low": [1060.50],
+            "Close": [1061.75],
+        }
+    )
+
+    with pytest.raises(NormalizationError, match="missing a timestamp column"):
+        normalize_bar_dataframe(
+            raw,
+            broker="capital_com",
+            symbol="XAUUSD",
+            timeframe="M15",
+            point_size=0.01,
+            source_file="bad_time_only.csv",
+        )
 
 
 def test_normalize_bar_export_without_spread_leaves_bid_ask_blank():

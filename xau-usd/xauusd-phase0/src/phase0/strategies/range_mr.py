@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from phase0.candles import bearish_pin_bar, bullish_pin_bar
@@ -54,22 +55,50 @@ class RangeMeanReversionStrategy(StrategyBase):
         m5 = context["M5"]
         symbol = context_symbol(context)
         signals: list[Signal] = []
+        h1_time_ns = h1["timestamp_utc"].astype("int64").to_numpy()
+        m15_time_ns = m15["timestamp_utc"].astype("int64").to_numpy()
+        m5_time_ns = m5["timestamp_utc"].astype("int64").to_numpy()
+        h1_range_ok = self._h1_range_ok(h1)
+        m15_state = self._m15_range_state_arrays(m15)
+        m5_low = m5["low"].to_numpy()
+        m5_high = m5["high"].to_numpy()
+        m5_bullish_pin = m5["bullish_pin_bar"].to_numpy()
+        m5_bearish_pin = m5["bearish_pin_bar"].to_numpy()
 
-        for m5_position, row in m5.iterrows():
-            timestamp = row["timestamp_utc"]
-            range_state = self._range_state(h1, m15, timestamp)
-            if range_state is None:
+        for m5_position, timestamp_ns in enumerate(m5_time_ns):
+            h1_position = int(np.searchsorted(h1_time_ns, timestamp_ns, side="right")) - 1
+            m15_position = int(np.searchsorted(m15_time_ns, timestamp_ns, side="right")) - 1
+            if (
+                h1_position < 0
+                or m15_position < 0
+                or h1_position >= len(h1_range_ok)
+                or m15_position >= len(m15_state["valid"])
+                or not h1_range_ok[h1_position]
+                or not m15_state["valid"][m15_position]
+            ):
                 continue
 
-            lower_trigger = range_state["lower_boundary"] + 0.2 * range_state["atr14_m15"]
-            upper_trigger = range_state["upper_boundary"] - 0.2 * range_state["atr14_m15"]
+            atr14_m15 = float(m15_state["atr14"][m15_position])
+            lower_boundary = float(m15_state["lower_boundary"][m15_position])
+            upper_boundary = float(m15_state["upper_boundary"][m15_position])
+            lower_trigger = lower_boundary + 0.2 * atr14_m15
+            upper_trigger = upper_boundary - 0.2 * atr14_m15
             base_metadata = {
-                **range_state,
+                "upper_boundary": upper_boundary,
+                "lower_boundary": lower_boundary,
+                "range_width": float(upper_boundary - lower_boundary),
+                "upper_touches": int(m15_state["upper_touches"][m15_position]),
+                "lower_touches": int(m15_state["lower_touches"][m15_position]),
+                "atr14_m15": atr14_m15,
+                "h1_index": int(h1_position),
+                "m15_index": int(m15_position),
+                "m15_time_utc": m15["timestamp_utc"].iat[m15_position],
                 "m5_index": int(m5_position),
-                "m5_time_utc": timestamp,
+                "m5_time_utc": m5["timestamp_utc"].iat[m5_position],
             }
 
-            if float(row["low"]) <= lower_trigger and bool(row["bullish_pin_bar"]):
+            if float(m5_low[m5_position]) <= lower_trigger and bool(m5_bullish_pin[m5_position]):
+                timestamp = pd.Timestamp(m5["timestamp_utc"].iat[m5_position])
                 signals.append(
                     Signal(
                         expert=self.name,
@@ -81,7 +110,8 @@ class RangeMeanReversionStrategy(StrategyBase):
                     )
                 )
 
-            if float(row["high"]) >= upper_trigger and bool(row["bearish_pin_bar"]):
+            if float(m5_high[m5_position]) >= upper_trigger and bool(m5_bearish_pin[m5_position]):
+                timestamp = pd.Timestamp(m5["timestamp_utc"].iat[m5_position])
                 signals.append(
                     Signal(
                         expert=self.name,
@@ -135,6 +165,50 @@ class RangeMeanReversionStrategy(StrategyBase):
             reason_code=signal.reason_code,
             metadata={**signal.metadata, "expires_after_bars": 6},
         )
+
+    def _h1_range_ok(self, h1: pd.DataFrame) -> np.ndarray:
+        adx14 = pd.to_numeric(h1["adx14"], errors="coerce")
+        return (adx14.rolling(20, min_periods=20).max() < 20).fillna(False).to_numpy()
+
+    def _m15_range_state_arrays(self, m15: pd.DataFrame) -> dict[str, np.ndarray]:
+        highs = pd.to_numeric(m15["high"], errors="coerce")
+        lows = pd.to_numeric(m15["low"], errors="coerce")
+        atr14 = pd.to_numeric(m15["atr14"], errors="coerce").to_numpy()
+        high_values = highs.to_numpy()
+        low_values = lows.to_numpy()
+        upper_boundary = highs.rolling(50, min_periods=50).max().to_numpy()
+        lower_boundary = lows.rolling(50, min_periods=50).min().to_numpy()
+        valid = np.zeros(len(m15), dtype=bool)
+        upper_touches = np.zeros(len(m15), dtype=int)
+        lower_touches = np.zeros(len(m15), dtype=int)
+
+        for position in range(49, len(m15)):
+            latest_atr = float(atr14[position])
+            upper = float(upper_boundary[position])
+            lower = float(lower_boundary[position])
+            if not value_available(latest_atr, upper, lower) or latest_atr <= 0:
+                continue
+            if upper - lower < 2.0 * latest_atr:
+                continue
+
+            high_window = high_values[position - 49 : position + 1]
+            low_window = low_values[position - 49 : position + 1]
+            upper_touch_count = int(np.count_nonzero(high_window >= upper - 0.2 * latest_atr))
+            lower_touch_count = int(np.count_nonzero(low_window <= lower + 0.2 * latest_atr))
+            if upper_touch_count < 3 or lower_touch_count < 3:
+                continue
+            valid[position] = True
+            upper_touches[position] = upper_touch_count
+            lower_touches[position] = lower_touch_count
+
+        return {
+            "valid": valid,
+            "upper_boundary": upper_boundary,
+            "lower_boundary": lower_boundary,
+            "upper_touches": upper_touches,
+            "lower_touches": lower_touches,
+            "atr14": atr14,
+        }
 
     def _range_state(
         self,

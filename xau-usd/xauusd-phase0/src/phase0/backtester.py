@@ -8,7 +8,7 @@ import pandas as pd
 
 from phase0.config import ConfigError, ProjectConfig
 from phase0.data_contracts import Signal, Trade
-from phase0.execution import ExecutionError, simulate_trade
+from phase0.execution import ExecutionError, prepare_execution_bars, simulate_trade
 from phase0.metrics import equity_curve_from_trades, metrics_row
 from phase0.strategies.base import StrategyBase
 from phase0.trades import trades_to_dataframe
@@ -45,10 +45,11 @@ def run_backtest(
         risk_per_trade_pct or config.phase0["project"]["phase0_risk_per_trade_pct"]
     )
 
+    strategy_context = _data_context_for_period_end(data_context, period_end)
     signals = sorted(
         (
             signal
-            for signal in strategy.generate_signals(data_context)
+            for signal in strategy.generate_signals(strategy_context)
             if _signal_in_period(signal, period_start, period_end)
         ),
         key=lambda signal: pd.Timestamp(signal.timestamp_utc),
@@ -57,7 +58,9 @@ def run_backtest(
     diagnostics: list[dict[str, object]] = []
     current_equity = starting_equity
     open_until: pd.Timestamp | None = None
-    execution_bars = _execution_bars_for_period(data_context["M5"], period_end)
+    execution_bars = prepare_execution_bars(
+        _execution_bars_for_period(strategy_context["M5"], period_end)
+    )
 
     for signal in signals:
         signal_time = pd.Timestamp(signal.timestamp_utc)
@@ -66,7 +69,7 @@ def run_backtest(
             continue
 
         try:
-            plan = strategy.build_trade_plan(signal, data_context)
+            plan = strategy.build_trade_plan(signal, strategy_context)
             trade = simulate_trade(
                 config=config,
                 bars=execution_bars,
@@ -161,6 +164,24 @@ def _period_timestamp(value: object) -> pd.Timestamp:
     if timestamp.tzinfo is None:
         return timestamp.tz_localize("UTC")
     return timestamp.tz_convert("UTC")
+
+
+def _data_context_for_period_end(
+    data_context: dict[str, Any],
+    period_end: object | None,
+) -> dict[str, Any]:
+    if period_end is None:
+        return data_context
+
+    bounded: dict[str, Any] = {}
+    end = _period_timestamp(period_end)
+    for key, value in data_context.items():
+        if isinstance(value, pd.DataFrame) and "timestamp_utc" in value.columns:
+            timestamps = pd.to_datetime(value["timestamp_utc"], utc=True, errors="coerce")
+            bounded[key] = value.loc[timestamps <= end].reset_index(drop=True).copy()
+        else:
+            bounded[key] = value
+    return bounded
 
 
 def _execution_bars_for_period(bars: pd.DataFrame, period_end: object | None) -> pd.DataFrame:

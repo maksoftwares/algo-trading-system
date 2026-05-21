@@ -82,6 +82,26 @@ def test_processed_data_availability_rejects_insufficient_coverage(project_root,
         assert_processed_data_available(config)
 
 
+def test_processed_data_availability_allows_market_closed_boundary_gap(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _write_required_bar_placeholders(root)
+    directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5"
+    path = next(directory.glob("*.csv"))
+    frame = pd.read_csv(path)
+    frame.iloc[1:].to_csv(path, index=False)
+    config = load_project_config(root)
+
+    checks = check_processed_data_availability(config)
+
+    check = next(
+        item
+        for item in checks
+        if item.broker == "capital_com" and item.symbol == "XAUUSD" and item.timeframe == "M5"
+    )
+    assert check.available
+    assert not any("coverage starts" in issue for issue in check.issues)
+
+
 def test_processed_data_availability_rejects_large_internal_gaps(project_root, tmp_path):
     root = _copy_config(project_root, tmp_path)
     _write_large_gap_bar_placeholders(root)

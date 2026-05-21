@@ -55,29 +55,37 @@ def ensure_utc_sorted(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def latest_completed_row(frame: pd.DataFrame, timestamp_utc: pd.Timestamp) -> pd.Series | None:
-    prepared = ensure_utc_sorted(frame)
-    timestamp = pd.Timestamp(timestamp_utc)
-    if timestamp.tzinfo is None:
-        timestamp = timestamp.tz_localize("UTC")
-    else:
-        timestamp = timestamp.tz_convert("UTC")
-    eligible = prepared[prepared["timestamp_utc"] <= timestamp]
-    if eligible.empty:
+    position = latest_completed_position(frame, timestamp_utc)
+    if position is None:
         return None
-    return eligible.iloc[-1]
+    return frame.iloc[position]
 
 
 def latest_completed_position(frame: pd.DataFrame, timestamp_utc: pd.Timestamp) -> int | None:
-    prepared = ensure_utc_sorted(frame)
+    timestamps = _utc_timestamps(frame)
     timestamp = pd.Timestamp(timestamp_utc)
     if timestamp.tzinfo is None:
         timestamp = timestamp.tz_localize("UTC")
     else:
         timestamp = timestamp.tz_convert("UTC")
-    eligible = prepared.index[prepared["timestamp_utc"] <= timestamp]
-    if len(eligible) == 0:
+
+    if timestamps.is_monotonic_increasing:
+        position = int(timestamps.searchsorted(timestamp, side="right")) - 1
+        return position if position >= 0 else None
+
+    eligible_positions = [index for index, value in enumerate(timestamps) if value <= timestamp]
+    if not eligible_positions:
         return None
-    return int(eligible[-1])
+    return max(eligible_positions, key=lambda index: timestamps.iloc[index])
+
+
+def _utc_timestamps(frame: pd.DataFrame) -> pd.Series:
+    timestamps = frame["timestamp_utc"]
+    if not pd.api.types.is_datetime64_any_dtype(timestamps):
+        timestamps = pd.to_datetime(timestamps, utc=True, errors="coerce")
+    if timestamps.isna().any():
+        raise ConfigError("Strategy input contains invalid timestamp_utc values.")
+    return timestamps
 
 
 def context_symbol(data_context: dict[str, Any]) -> str:

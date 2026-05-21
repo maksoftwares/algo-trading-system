@@ -50,38 +50,39 @@ class BreakoutRetestStrategy(StrategyBase):
         symbol = context_symbol(context)
         point_size = context_point_size(context)
         signals: list[Signal] = []
+        arrays = self._bar_arrays(m5)
 
         for confirmation_position in range(2, len(m5)):
-            confirmation = m5.iloc[confirmation_position]
             retest_position = confirmation_position - 1
-            retest = m5.iloc[retest_position]
             candidates: list[dict[str, Any]] = []
-            if float(confirmation["close"]) > float(confirmation["open"]):
+            if float(arrays["close"][confirmation_position]) > float(arrays["open"][confirmation_position]):
                 candidates.extend(
-                    self._long_candidates(m5, retest_position, confirmation_position, point_size)
+                    self._long_candidates(arrays, retest_position, point_size)
                 )
-            if float(confirmation["close"]) < float(confirmation["open"]):
+            if float(arrays["close"][confirmation_position]) < float(arrays["open"][confirmation_position]):
                 candidates.extend(
-                    self._short_candidates(m5, retest_position, confirmation_position, point_size)
+                    self._short_candidates(arrays, retest_position, point_size)
                 )
             if not candidates:
                 continue
 
             candidates.sort(key=lambda item: (item["stop_distance"], item["level_time_utc"]))
             selected = candidates[0]
+            confirmation_time = m5["timestamp_utc"].iat[confirmation_position]
+            retest_time = m5["timestamp_utc"].iat[retest_position]
             signals.append(
                 Signal(
                     expert=self.name,
-                    timestamp_utc=confirmation["timestamp_utc"].to_pydatetime(),
+                    timestamp_utc=confirmation_time.to_pydatetime(),
                     symbol=symbol,
                     direction=selected["direction"],
                     reason_code=selected["reason_code"],
                     metadata={
                         **selected,
                         "confirmation_index": int(confirmation_position),
-                        "confirmation_time_utc": confirmation["timestamp_utc"],
+                        "confirmation_time_utc": confirmation_time,
                         "retest_index": int(retest_position),
-                        "retest_time_utc": retest["timestamp_utc"],
+                        "retest_time_utc": retest_time,
                     },
                 )
             )
@@ -119,31 +120,32 @@ class BreakoutRetestStrategy(StrategyBase):
 
     def _long_candidates(
         self,
-        m5: pd.DataFrame,
+        arrays: dict[str, Any],
         retest_position: int,
-        confirmation_position: int,
         point_size: float,
     ) -> list[dict[str, Any]]:
-        retest = m5.iloc[retest_position]
-        retest_atr = float(retest["atr14"])
+        retest_atr = float(arrays["atr14"][retest_position])
         if not value_available(retest_atr):
             return []
+        retest_low = float(arrays["low"][retest_position])
+        retest_high = float(arrays["high"][retest_position])
+        retest_close = float(arrays["close"][retest_position])
 
         candidates: list[dict[str, Any]] = []
         for break_position in range(max(0, retest_position - 20), retest_position):
-            break_row = m5.iloc[break_position]
-            if not value_available(break_row["atr14"]):
+            break_atr = float(arrays["atr14"][break_position])
+            if not value_available(break_atr):
                 continue
-            for level in self._candidate_levels(break_row, "LONG", point_size):
+            for level in self._candidate_levels_from_arrays(arrays, break_position, "LONG", point_size):
                 price = float(level["level_price"])
-                if float(break_row["close"]) < price + 0.3 * float(break_row["atr14"]):
+                if float(arrays["close"][break_position]) < price + 0.3 * break_atr:
                     continue
-                if not (float(retest["low"]) <= price + 5.0 * point_size):
+                if not (retest_low <= price + 5.0 * point_size):
                     continue
-                if float(retest["close"]) < price:
+                if retest_close < price:
                     continue
-                entry_price = float(retest["high"]) + point_size
-                stop_loss = float(retest["low"]) - 0.1 * retest_atr
+                entry_price = retest_high + point_size
+                stop_loss = retest_low - 0.1 * retest_atr
                 risk_price = entry_price - stop_loss
                 if risk_price <= 0:
                     continue
@@ -155,7 +157,7 @@ class BreakoutRetestStrategy(StrategyBase):
                         "level_kind": level["level_kind"],
                         "level_time_utc": level["level_time_utc"],
                         "break_index": int(break_position),
-                        "break_time_utc": break_row["timestamp_utc"],
+                        "break_time_utc": arrays["timestamp"][break_position],
                         "entry_price": entry_price,
                         "stop_loss": stop_loss,
                         "stop_distance": risk_price,
@@ -166,32 +168,32 @@ class BreakoutRetestStrategy(StrategyBase):
 
     def _short_candidates(
         self,
-        m5: pd.DataFrame,
+        arrays: dict[str, Any],
         retest_position: int,
-        confirmation_position: int,
         point_size: float,
     ) -> list[dict[str, Any]]:
-        del confirmation_position
-        retest = m5.iloc[retest_position]
-        retest_atr = float(retest["atr14"])
+        retest_atr = float(arrays["atr14"][retest_position])
         if not value_available(retest_atr):
             return []
+        retest_low = float(arrays["low"][retest_position])
+        retest_high = float(arrays["high"][retest_position])
+        retest_close = float(arrays["close"][retest_position])
 
         candidates: list[dict[str, Any]] = []
         for break_position in range(max(0, retest_position - 20), retest_position):
-            break_row = m5.iloc[break_position]
-            if not value_available(break_row["atr14"]):
+            break_atr = float(arrays["atr14"][break_position])
+            if not value_available(break_atr):
                 continue
-            for level in self._candidate_levels(break_row, "SHORT", point_size):
+            for level in self._candidate_levels_from_arrays(arrays, break_position, "SHORT", point_size):
                 price = float(level["level_price"])
-                if float(break_row["close"]) > price - 0.3 * float(break_row["atr14"]):
+                if float(arrays["close"][break_position]) > price - 0.3 * break_atr:
                     continue
-                if not (float(retest["high"]) >= price - 5.0 * point_size):
+                if not (retest_high >= price - 5.0 * point_size):
                     continue
-                if float(retest["close"]) > price:
+                if retest_close > price:
                     continue
-                entry_price = float(retest["low"]) - point_size
-                stop_loss = float(retest["high"]) + 0.1 * retest_atr
+                entry_price = retest_low - point_size
+                stop_loss = retest_high + 0.1 * retest_atr
                 risk_price = stop_loss - entry_price
                 if risk_price <= 0:
                     continue
@@ -203,7 +205,7 @@ class BreakoutRetestStrategy(StrategyBase):
                         "level_kind": level["level_kind"],
                         "level_time_utc": level["level_time_utc"],
                         "break_index": int(break_position),
-                        "break_time_utc": break_row["timestamp_utc"],
+                        "break_time_utc": arrays["timestamp"][break_position],
                         "entry_price": entry_price,
                         "stop_loss": stop_loss,
                         "stop_distance": risk_price,
@@ -211,6 +213,75 @@ class BreakoutRetestStrategy(StrategyBase):
                     }
                 )
         return candidates
+
+    def _bar_arrays(self, m5: pd.DataFrame) -> dict[str, Any]:
+        return {
+            "timestamp": m5["timestamp_utc"].to_numpy(),
+            "open": m5["open"].to_numpy(),
+            "high": m5["high"].to_numpy(),
+            "low": m5["low"].to_numpy(),
+            "close": m5["close"].to_numpy(),
+            "atr14": m5["atr14"].to_numpy(),
+            "previous_daily_high": m5["previous_daily_high"].to_numpy(),
+            "previous_daily_low": m5["previous_daily_low"].to_numpy(),
+            "previous_weekly_high": m5["previous_weekly_high"].to_numpy(),
+            "previous_weekly_low": m5["previous_weekly_low"].to_numpy(),
+            "latest_swing_high": m5["latest_swing_high"].to_numpy(),
+            "latest_swing_low": m5["latest_swing_low"].to_numpy(),
+            "latest_swing_high_time_utc": m5["latest_swing_high_time_utc"].to_numpy(),
+            "latest_swing_low_time_utc": m5["latest_swing_low_time_utc"].to_numpy(),
+        }
+
+    def _candidate_levels_from_arrays(
+        self,
+        arrays: dict[str, Any],
+        position: int,
+        direction: str,
+        point_size: float,
+    ) -> list[dict[str, Any]]:
+        timestamp = arrays["timestamp"][position]
+        if direction == "LONG":
+            raw = (
+                ("previous_daily_high", arrays["previous_daily_high"][position], timestamp),
+                ("previous_weekly_high", arrays["previous_weekly_high"][position], timestamp),
+                (
+                    "latest_swing_high",
+                    arrays["latest_swing_high"][position],
+                    arrays["latest_swing_high_time_utc"][position],
+                ),
+            )
+        else:
+            raw = (
+                ("previous_daily_low", arrays["previous_daily_low"][position], timestamp),
+                ("previous_weekly_low", arrays["previous_weekly_low"][position], timestamp),
+                (
+                    "latest_swing_low",
+                    arrays["latest_swing_low"][position],
+                    arrays["latest_swing_low_time_utc"][position],
+                ),
+            )
+
+        levels = [
+            {"level_kind": kind, "level_price": float(price), "level_time_utc": level_time}
+            for kind, price, level_time in raw
+            if pd.notna(price) and pd.notna(level_time)
+        ]
+        if not levels:
+            return []
+
+        tolerance_price = 10.0 * point_size
+        kept: list[dict[str, Any]] = []
+        kept_prices: list[float] = []
+        for level in sorted(
+            levels,
+            key=lambda item: pd.Timestamp(item["level_time_utc"]),
+            reverse=True,
+        ):
+            price = float(level["level_price"])
+            if all(abs(price - kept_price) > tolerance_price for kept_price in kept_prices):
+                kept.append(level)
+                kept_prices.append(price)
+        return sorted(kept, key=lambda item: pd.Timestamp(item["level_time_utc"]))
 
     def _candidate_levels(
         self,

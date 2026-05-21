@@ -246,6 +246,36 @@ def test_load_cell_data_context_combines_split_timeframe_files(project_root, tmp
     )
 
 
+def test_load_cell_data_context_allows_market_closed_boundary_gap(project_root, tmp_path):
+    root = _copy_minimal_project(project_root, tmp_path)
+    _write_split_coverage_bars(root)
+    path = (
+        root
+        / "data"
+        / "processed"
+        / "bars"
+        / "capital_com"
+        / "XAUUSD"
+        / "M5"
+        / "XAUUSD_capital_com_M5_part1.csv"
+    )
+    bars = pd.read_csv(path)
+    bars.iloc[1:].to_csv(path, index=False)
+    config = load_project_config(root)
+
+    context = load_cell_data_context(
+        config,
+        "capital_com",
+        "XAUUSD",
+        required_start="2016-01-01T00:00:00Z",
+        required_end="2025-06-30T23:59:59Z",
+    )
+
+    assert pd.to_datetime(context["M5"]["bar_start_utc"], utc=True).min() > pd.Timestamp(
+        "2016-01-01T00:00:00Z"
+    )
+
+
 def test_load_cell_data_context_rejects_split_files_with_large_gap(project_root, tmp_path):
     root = _copy_minimal_project(project_root, tmp_path)
     directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5"
