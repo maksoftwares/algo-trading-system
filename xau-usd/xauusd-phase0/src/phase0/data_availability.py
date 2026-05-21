@@ -351,10 +351,23 @@ def _valid_bar_files(
             f"coverage ends {_timestamp_text(coverage_end)}, required >= {_timestamp_text(required_end)}"
         )
     if valid:
-        gap_issue = largest_bar_gap_issue(pd.concat(coverage_points), timeframe)
+        combined_points = pd.concat(coverage_points)
+        duplicate_issue = _duplicate_coverage_timestamp_issue(combined_points)
+        if duplicate_issue:
+            issues.append(duplicate_issue)
+        gap_issue = largest_bar_gap_issue(combined_points, timeframe)
         if gap_issue:
             issues.append(gap_issue)
     return valid, issues, coverage_start, coverage_end
+
+
+def _duplicate_coverage_timestamp_issue(timestamps: pd.Series) -> str:
+    values = pd.to_datetime(timestamps, utc=True, errors="coerce").dropna()
+    duplicates = values[values.duplicated(keep=False)]
+    if duplicates.empty:
+        return ""
+    first_values = [_timestamp_text(value) for value in duplicates.drop_duplicates().sort_values().head(5)]
+    return f"duplicate timestamp_utc across processed files: {', '.join(first_values)}"
 
 
 def _availability_error_line(check: DataAvailabilityCheck) -> str:

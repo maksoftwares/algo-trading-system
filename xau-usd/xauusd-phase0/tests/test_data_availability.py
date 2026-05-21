@@ -117,6 +117,27 @@ def test_processed_data_availability_rejects_wrong_bar_identity(project_root, tm
     assert any("symbol values" in issue for issue in check.issues)
 
 
+def test_processed_data_availability_rejects_overlapping_split_files(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _write_required_bar_placeholders(root)
+    directory = root / "data" / "processed" / "bars" / "capital_com" / "XAUUSD" / "M5"
+    original = next(directory.glob("*.csv"))
+    shutil.copy2(original, directory / "XAUUSD_capital_com_M5_overlap.csv")
+    config = load_project_config(root)
+
+    checks = check_processed_data_availability(config)
+
+    check = next(
+        item
+        for item in checks
+        if item.broker == "capital_com" and item.symbol == "XAUUSD" and item.timeframe == "M5"
+    )
+    assert not check.available
+    assert check.file_count == 2
+    assert check.candidate_file_count == 2
+    assert any("duplicate timestamp_utc" in issue for issue in check.issues)
+
+
 def test_check_data_availability_cli(project_root, tmp_path, capsys):
     root = _copy_config(project_root, tmp_path)
     _write_required_bar_placeholders(root)
