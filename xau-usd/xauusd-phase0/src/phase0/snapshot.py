@@ -53,6 +53,7 @@ def _snapshot_files(config: ProjectConfig, include_raw_data: bool) -> list[Path]
         config.root / "tests",
         config.root / "outputs" / "hashes",
         config.root / "outputs" / "manifests",
+        config.root / "outputs" / "mt5_bar_export_presets",
         config.root / "outputs" / "matrix_results",
         config.root / "outputs" / "decile_results",
         config.root / "outputs" / "multisymbol_results",

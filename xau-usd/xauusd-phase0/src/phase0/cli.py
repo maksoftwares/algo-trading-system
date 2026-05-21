@@ -20,6 +20,7 @@ from phase0.hashing import HashingError, hash_manifest_path, register_hypotheses
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
+from phase0.mt5_presets import generate_mt5_bar_export_presets
 from phase0.normalizer import (
     NormalizationError,
     normalize_broker_bar_files,
@@ -104,6 +105,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     data_manifest.add_argument("--skip-multisymbol", action="store_true")
     data_manifest.set_defaults(func=_cmd_generate_data_manifest)
+
+    mt5_presets = subparsers.add_parser(
+        "generate-mt5-bar-presets",
+        help="Write MT5 bar-export .set files from Phase 0 data requirements.",
+    )
+    mt5_presets.add_argument("--skip-multisymbol", action="store_true")
+    mt5_presets.add_argument(
+        "--server-to-utc-offset-hours",
+        type=int,
+        default=0,
+        help="Fixed MT5 server offset from UTC used in generated exporter presets.",
+    )
+    mt5_presets.set_defaults(func=_cmd_generate_mt5_bar_presets)
 
     normalize_data = subparsers.add_parser("normalize-data", help="Normalize source data.")
     _add_broker_symbol_args(normalize_data)
@@ -303,6 +317,20 @@ def _cmd_generate_data_manifest(args: argparse.Namespace) -> int:
         include_multisymbol=not args.skip_multisymbol,
     )
     print(f"Data manifest: {output_path}")
+    return 0
+
+
+def _cmd_generate_mt5_bar_presets(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_mt5_bar_export_presets(
+        config,
+        include_multisymbol=not args.skip_multisymbol,
+        server_to_utc_offset_hours=args.server_to_utc_offset_hours,
+    )
+    print(f"MT5 bar export presets: {len(output.preset_paths)} file(s)")
+    for path in output.preset_paths:
+        print(path)
+    print(f"Preset manifest: {output.manifest_path}")
     return 0
 
 

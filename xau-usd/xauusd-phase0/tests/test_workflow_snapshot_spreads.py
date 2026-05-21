@@ -12,6 +12,7 @@ from phase0.cli import main
 from phase0.config import ConfigError, load_project_config
 from phase0.hashing import register_hypotheses
 from phase0.manifests import generate_result_manifest
+from phase0.mt5_presets import generate_mt5_bar_export_presets
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
 from phase0.workflow import run_all_phase0
@@ -34,6 +35,7 @@ def test_generate_snapshot_includes_required_files(project_root, tmp_path):
     root = _copy_project_shell(project_root, tmp_path)
     config = load_project_config(root)
     register_hypotheses(config)
+    generate_mt5_bar_export_presets(config)
     (root / "outputs" / "reports").mkdir(parents=True)
     (root / "outputs" / "reports" / "PHASE0_VERDICT.md").write_text("pending\n", encoding="utf-8")
 
@@ -53,6 +55,8 @@ def test_generate_snapshot_includes_required_files(project_root, tmp_path):
     assert "scripts/generate_result_manifest.py" in names
     assert "src/phase0/snapshot.py" in names
     assert "outputs/hashes/hypothesis_hash_manifest.csv" in names
+    assert "outputs/mt5_bar_export_presets/PHASE0_MT5_BAR_EXPORT_PRESETS.csv" in names
+    assert "outputs/mt5_bar_export_presets/XAUUSD_capital_com_bar_export.set" in names
     assert "outputs/manifests/PHASE0_RESULT_MANIFEST.csv" in names
     assert "git_commit.txt" in names
     assert "git_status.txt" in names

@@ -18,6 +18,7 @@ from phase0.data_availability import (
     generate_data_requirements_csv,
     generate_data_readiness_report,
 )
+from phase0.mt5_presets import generate_mt5_bar_export_presets
 
 
 TIMEFRAME_DELTAS = {
@@ -188,6 +189,36 @@ def test_generate_data_requirements_cli(project_root, tmp_path, capsys):
     assert exit_code == 0
     assert "Required timeframe sets: 25" in captured.out
     assert (root / "outputs" / "manifests" / "PHASE0_DATA_REQUIREMENTS.csv").exists()
+
+
+def test_generate_mt5_bar_export_presets_groups_required_inputs(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    config = load_project_config(root)
+
+    output = generate_mt5_bar_export_presets(config)
+
+    rows = list(csv.DictReader(output.manifest_path.open(encoding="utf-8")))
+    assert len(output.preset_paths) == 5
+    assert len(rows) == 5
+    capital_xauusd = next(row for row in rows if row["broker"] == "capital_com" and row["symbol"] == "XAUUSD")
+    assert capital_xauusd["timeframes"] == "M5,M15,H1,H4,D1"
+    assert capital_xauusd["start_server_time"] == "2016.01.01 00:00"
+    assert capital_xauusd["end_server_time"] == "2025.06.30 23:59"
+    preset_text = (root / capital_xauusd["preset_path"]).read_text(encoding="utf-8")
+    assert "InpSymbol=XAUUSD" in preset_text
+    assert "InpBrokerLabel=capital_com" in preset_text
+    assert "InpTimeframes=M5,M15,H1,H4,D1" in preset_text
+
+
+def test_generate_mt5_bar_presets_cli(project_root, tmp_path, capsys):
+    root = _copy_config(project_root, tmp_path)
+
+    exit_code = main(["--root", str(root), "generate-mt5-bar-presets"])
+
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "MT5 bar export presets: 5 file(s)" in captured.out
+    assert (root / "outputs" / "mt5_bar_export_presets" / "PHASE0_MT5_BAR_EXPORT_PRESETS.csv").exists()
 
 
 def test_generate_data_readiness_cli(project_root, tmp_path, capsys):

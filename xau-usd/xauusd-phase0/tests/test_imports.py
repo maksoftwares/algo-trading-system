@@ -30,6 +30,7 @@ def test_required_modules_import():
         "phase0.metrics",
         "phase0.matrix",
         "phase0.multisymbol",
+        "phase0.mt5_presets",
         "phase0.normalizer",
         "phase0.reports",
         "phase0.run_context",

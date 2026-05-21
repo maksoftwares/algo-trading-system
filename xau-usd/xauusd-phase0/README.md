@@ -51,6 +51,7 @@ python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5 --input-file data\raw\capital_com\broker_export.csv
 python -m phase0 generate-data-requirements
+python -m phase0 generate-mt5-bar-presets
 python -m phase0 import-required-bars
 python -m phase0 generate-data-manifest
 python -m phase0 generate-data-readiness
@@ -79,6 +80,7 @@ Measured `median` and `p95` spread values are used by the cost engine when `cost
 Run `mt5/PassiveBarExporter_Phase0.mq5` as an MT5 script to export historical OHLC bars for the required broker/symbol/timeframe sets. Copy completed CSVs into `data/raw/{broker}/`, then run:
 
 ```powershell
+python -m phase0 generate-mt5-bar-presets
 python -m phase0 import-required-bars --fail-on-missing
 python -m phase0 check-data-availability
 ```
