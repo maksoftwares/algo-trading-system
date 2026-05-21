@@ -82,7 +82,7 @@ Last updated: 2026-05-22
 - Latest runtime health status: PASS. Runtime files exist, latest row is fresh, dry-run and permission locks hold, server-time status is clean, no exact duplicate rows were found, and no larger-than-M5 gaps were found.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 108 decision rows, 7.92% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Latest status summary shows 110 decision rows, 8.06% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
 - D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, Reality Check/SPA, true-holdout audit, and independent reproduction are closed for the current evidence package.
 - D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
@@ -124,6 +124,7 @@ Last updated: 2026-05-22
 - Phase 2 preparation spec: `xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. This is spec-only and does not authorize broker-side behavior.
 - Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
+- External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 
 ## Local MT5 Discovery
 

@@ -19,7 +19,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 - Setup clusters: 6
 - Directions observed: LONG, SHORT
 - Level kinds observed: latest_swing_high, latest_swing_low, previous_weekly_low
-- Review CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`
+- Review CSV: `outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`
 
 ## Setup Clusters
 

@@ -57,6 +57,14 @@ Implementation note:
 
 The existing local scripts already produce the data the monitor needs. Phase 2 should add the separate-host scheduler, not another in-terminal-only check.
 
+Prepared local check:
+
+```powershell
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\check_phase1_external_health.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --status-summary outputs\reports\PHASE1_STATUS_SUMMARY.json
+```
+
+This script is intentionally scheduler-friendly: it exits nonzero on health failure and can write `outputs/reports/PHASE1_EXTERNAL_HEALTH.json`.
+
 ## Disaster Recovery Runbook
 
 Recovery target:
