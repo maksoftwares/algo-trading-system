@@ -10,13 +10,13 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | BR Stage |
 | --- | --- | --- | --- | --- | --- |
-| 84 | 2026.05.21 20:15:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
+| 96 | 2026.05.21 22:15:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
 
 ## Gate Snapshot
 
 | Log | Soak | Runtime | Would-Signal | Acceptance | Soak Progress | Would Rows | Clusters |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| PASS | PASS | PASS | PASS | PENDING | 5.42% | 5 | 5 |
+| PASS | PASS | PASS | PASS | PENDING | 7.08% | 6 | 6 |
 
 ## Primary Artifacts
 
@@ -30,13 +30,13 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 | Soak history report | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md | Overall status: PASS. |
 | Phase 2 readiness report | PENDING | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md | Overall status: PENDING. |
 | Status summary JSON | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json | Present; 2141 bytes. |
-| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 1537 bytes. |
-| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 7278 bytes. |
+| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 1789 bytes. |
+| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 12396 bytes. |
 
 ## Review Bundle
 
-- Bundle: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624.zip`
-- Manifest: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624_manifest.json`
+- Bundle: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_221528.zip`
+- Manifest: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_221528_manifest.json`
 
 ## Boundary
 

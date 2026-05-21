@@ -169,7 +169,8 @@ def _check_exact_duplicates(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
 
 def _check_unique_bar_gaps(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
     gaps = _unique_bar_gaps(rows)
-    long_gaps = [gap for gap in gaps if gap["minutes"] > 5]
+    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["expected_market_break"]]
+    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["expected_market_break"]]
     if not gaps:
         return RuntimeHealthCheck("unique_bar_gaps", "WARN", "Not enough unique bars to evaluate gaps.")
     if long_gaps:
@@ -178,6 +179,12 @@ def _check_unique_bar_gaps(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
             "unique_bar_gaps",
             "WARN",
             f"Larger-than-M5 gaps: {len(long_gaps)}; largest {largest['minutes']} minute(s).",
+        )
+    if tolerated_gaps:
+        return RuntimeHealthCheck(
+            "unique_bar_gaps",
+            "PASS",
+            f"Only expected market-break gaps found: {len(tolerated_gaps)}.",
         )
     return RuntimeHealthCheck("unique_bar_gaps", "PASS", "Unique bar sequence has no larger-than-M5 gaps.")
 
@@ -220,7 +227,8 @@ def _render_report(
     latest = decision_rows[-1] if decision_rows else {}
     first_bar, latest_bar = _first_latest_bar(decision_rows)
     gaps = _unique_bar_gaps(decision_rows)
-    long_gaps = [gap for gap in gaps if gap["minutes"] > 5]
+    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["expected_market_break"]]
+    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["expected_market_break"]]
     return "\n".join(
         [
             "# Phase 1 Runtime Health Report",
@@ -245,6 +253,7 @@ def _render_report(
             f"- First unique M5 bar: {first_bar or 'n/a'}",
             f"- Latest unique M5 bar: {latest_bar or 'n/a'}",
             f"- Larger-than-M5 gaps: {len(long_gaps)}",
+            f"- Expected market-break gaps: {len(tolerated_gaps)}",
             "",
             "## Latest Row",
             "",
@@ -274,10 +283,11 @@ def _render_report(
                         "Left Bar": gap["left"],
                         "Right Bar": gap["right"],
                         "Minutes": str(gap["minutes"]),
+                        "Reason": "unexpected",
                     }
                     for gap in long_gaps[-10:]
                 ],
-                ["Left Bar", "Right Bar", "Minutes"],
+                ["Left Bar", "Right Bar", "Minutes", "Reason"],
             ),
             "",
             "## Rows By Run ID",
@@ -300,17 +310,41 @@ def _render_report(
 
 
 def _unique_bar_gaps(rows: list[dict[str, str]]) -> list[dict[str, object]]:
-    parsed = sorted(
-        {value for value in (_parse_mt5_datetime(row.get("bar_time", "")) for row in rows) if value}
-    )
+    parsed = _unique_bar_rows(rows)
     return [
         {
-            "left": left.strftime("%Y.%m.%d %H:%M:%S"),
-            "right": right.strftime("%Y.%m.%d %H:%M:%S"),
-            "minutes": int((right - left).total_seconds() / 60),
+            "left": left_time.strftime("%Y.%m.%d %H:%M:%S"),
+            "right": right_time.strftime("%Y.%m.%d %H:%M:%S"),
+            "minutes": int((right_time - left_time).total_seconds() / 60),
+            "expected_market_break": _is_expected_market_break(left_time, right_time, left_row, right_row),
         }
-        for left, right in zip(parsed, parsed[1:])
+        for (left_time, left_row), (right_time, right_row) in zip(parsed, parsed[1:])
     ]
+
+
+def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[str, str]]]:
+    seen: dict[datetime, dict[str, str]] = {}
+    for row in rows:
+        parsed = _parse_mt5_datetime(row.get("bar_time", ""))
+        if parsed is not None and parsed not in seen:
+            seen[parsed] = row
+    return sorted(seen.items(), key=lambda item: item[0])
+
+
+def _is_expected_market_break(
+    left: datetime,
+    right: datetime,
+    left_row: dict[str, str],
+    right_row: dict[str, str],
+) -> bool:
+    minutes = int((right - left).total_seconds() / 60)
+    if minutes > 90:
+        return False
+    right_session = right_row.get("session", "")
+    left_minute = left.hour * 60 + left.minute
+    right_minute = right.hour * 60 + right.minute
+    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
+    return right_session == "ROLLOVER" and crosses_known_gold_break
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

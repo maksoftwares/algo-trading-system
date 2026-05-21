@@ -1,10 +1,12 @@
 # Agent Handoff
 
-Last updated: 2026-05-21
+Last updated: 2026-05-22
 
 ## Workspace
 
 - Root: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system`
+- Canonical source: `https://github.com/maksoftwares/algo-trading-system`
+- Note: Windows workspace and MT5 paths are machine-local evidence paths, not reviewer requirements. See `xau-usd\xauusd-phase1\docs\WORKSPACE_OWNERSHIP.md`.
 - Active package: `xau-usd\xauusd-phase1`
 - Active phase label: Phase 1 - Master EA dry-run shell.
 - Current branch: `main`
@@ -81,6 +83,10 @@ Last updated: 2026-05-21
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
 - Latest status summary shows 84 decision rows, 5.42% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
+- D3/D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; D3 is guarded pending independent audit and D4 is pending.
+- Second-candidate concentration-risk mitigation is started in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md` with `squeeze_breakout_long_v0` as the first unregistered research candidate.
+- Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
 - Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.

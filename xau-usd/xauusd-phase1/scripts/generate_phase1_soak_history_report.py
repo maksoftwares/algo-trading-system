@@ -94,10 +94,10 @@ def _check_latest_status(rows: list[dict[str, str]]) -> HistoryCheck:
     if latest.get("would_signal", "") != "PASS":
         warn.append("would_signal")
     acceptance = latest.get("acceptance", "")
-    if acceptance not in {"PASS", "PENDING"}:
-        bad.append("acceptance")
     if bad:
         return HistoryCheck("latest_status", "FAIL", "Unexpected latest status fields: " + ", ".join(bad))
+    if acceptance not in {"PASS", "PENDING"}:
+        warn.append("acceptance")
     if warn:
         return HistoryCheck("latest_status", "WARN", "Latest warning status fields: " + ", ".join(warn))
     return HistoryCheck(

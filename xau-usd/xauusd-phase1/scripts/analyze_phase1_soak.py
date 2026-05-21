@@ -115,21 +115,29 @@ def _check_lifecycle_rows(startup_rows: list[dict[str, str]], shutdown_rows: lis
 
 def _check_per_run_cadence(rows: list[dict[str, str]]) -> SoakCheck:
     problems: list[str] = []
+    tolerated: list[str] = []
     for run_id, run_rows in _group_by(rows, "run_id").items():
-        parsed = sorted(
-            {value for value in (_parse_mt5_datetime(row.get("bar_time", "")) for row in run_rows) if value}
-        )
-        if len(parsed) < 2:
+        ordered = _unique_bar_rows(run_rows)
+        if len(ordered) < 2:
             continue
-        gaps = [
-            int((right - left).total_seconds() / 60)
-            for left, right in zip(parsed, parsed[1:])
-            if int((right - left).total_seconds() / 60) > 5
-        ]
+        gaps: list[int] = []
+        tolerated_gaps: list[int] = []
+        for (left, left_row), (right, right_row) in zip(ordered, ordered[1:]):
+            minutes = int((right - left).total_seconds() / 60)
+            if minutes <= 5:
+                continue
+            if _is_expected_market_break(left, right, left_row, right_row):
+                tolerated_gaps.append(minutes)
+            else:
+                gaps.append(minutes)
         if gaps:
             problems.append(f"{run_id}: {len(gaps)} gap(s)")
+        if tolerated_gaps:
+            tolerated.append(f"{run_id}: {len(tolerated_gaps)} expected market-break gap(s)")
     if problems:
         return SoakCheck("per_run_bar_cadence", "WARN", "; ".join(problems))
+    if tolerated:
+        return SoakCheck("per_run_bar_cadence", "PASS", "; ".join(tolerated))
     return SoakCheck("per_run_bar_cadence", "PASS", "No larger-than-M5 gaps inside individual run IDs.")
 
 
@@ -322,6 +330,31 @@ def _parse_mt5_datetime(value: str) -> datetime | None:
         return datetime.strptime(value, "%Y.%m.%d %H:%M:%S")
     except ValueError:
         return None
+
+
+def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[str, str]]]:
+    seen: dict[datetime, dict[str, str]] = {}
+    for row in rows:
+        parsed = _parse_mt5_datetime(row.get("bar_time", ""))
+        if parsed is not None and parsed not in seen:
+            seen[parsed] = row
+    return sorted(seen.items(), key=lambda item: item[0])
+
+
+def _is_expected_market_break(
+    left: datetime,
+    right: datetime,
+    left_row: dict[str, str],
+    right_row: dict[str, str],
+) -> bool:
+    minutes = int((right - left).total_seconds() / 60)
+    if minutes > 90:
+        return False
+    right_session = right_row.get("session", "")
+    left_minute = left.hour * 60 + left.minute
+    right_minute = right.hour * 60 + right.minute
+    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
+    return right_session == "ROLLOVER" and crosses_known_gold_break
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

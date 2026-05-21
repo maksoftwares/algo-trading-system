@@ -228,9 +228,8 @@ def _check_shutdown_rows(rows: list[dict[str, str]]) -> LogCheck:
 
 
 def _check_bar_cadence(rows: list[dict[str, str]]) -> LogCheck:
-    parsed_values = {_parse_mt5_datetime(row.get("bar_time", "")) for row in rows}
-    parsed = sorted(item for item in parsed_values if item is not None)
-    if len(parsed) < 2:
+    ordered = _unique_bar_rows(rows)
+    if len(ordered) < 2:
         return LogCheck("bar_cadence", "WARN", "Not enough unique bar times to evaluate cadence.")
 
     exact_row_keys = {
@@ -242,11 +241,16 @@ def _check_bar_cadence(rows: list[dict[str, str]]) -> LogCheck:
         for row in rows
     }
     duplicate_count = len(rows) - len(exact_row_keys)
-    gaps = [
-        int((right - left).total_seconds() / 60)
-        for left, right in zip(parsed, parsed[1:])
-        if int((right - left).total_seconds() / 60) > 5
-    ]
+    gaps: list[int] = []
+    tolerated_gaps: list[int] = []
+    for (left, left_row), (right, right_row) in zip(ordered, ordered[1:]):
+        minutes = int((right - left).total_seconds() / 60)
+        if minutes <= 5:
+            continue
+        if _is_expected_market_break(left, right, left_row, right_row):
+            tolerated_gaps.append(minutes)
+        else:
+            gaps.append(minutes)
     if duplicate_count:
         return LogCheck(
             "bar_cadence",
@@ -255,6 +259,12 @@ def _check_bar_cadence(rows: list[dict[str, str]]) -> LogCheck:
         )
     if gaps:
         return LogCheck("bar_cadence", "WARN", f"Larger-than-M5 gaps found: {len(gaps)}.")
+    if tolerated_gaps:
+        return LogCheck(
+            "bar_cadence",
+            "PASS",
+            f"Decision rows follow M5 cadence outside expected market breaks; tolerated gaps: {len(tolerated_gaps)}.",
+        )
     return LogCheck("bar_cadence", "PASS", "Decision rows follow M5 cadence; restart duplicates are tolerated.")
 
 
@@ -272,6 +282,31 @@ def _parse_mt5_datetime(value: str) -> datetime | None:
         return datetime.strptime(value, "%Y.%m.%d %H:%M:%S")
     except ValueError:
         return None
+
+
+def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[str, str]]]:
+    seen: dict[datetime, dict[str, str]] = {}
+    for row in rows:
+        parsed = _parse_mt5_datetime(row.get("bar_time", ""))
+        if parsed is not None and parsed not in seen:
+            seen[parsed] = row
+    return sorted(seen.items(), key=lambda item: item[0])
+
+
+def _is_expected_market_break(
+    left: datetime,
+    right: datetime,
+    left_row: dict[str, str],
+    right_row: dict[str, str],
+) -> bool:
+    minutes = int((right - left).total_seconds() / 60)
+    if minutes > 90:
+        return False
+    right_session = right_row.get("session", "")
+    left_minute = left.hour * 60 + left.minute
+    right_minute = right.hour * 60 + right.minute
+    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
+    return right_session == "ROLLOVER" and crosses_known_gold_break
 
 
 def _overall_status(checks: list[LogCheck]) -> str:

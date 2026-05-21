@@ -58,7 +58,7 @@ Phase 1 remains dry-run only. Live expert behavior stays out of scope until the 
 As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all required broker/timeframe bar sets and completed a fresh post-hypothesis-lock `phase0 run-all`.
 
 - Data readiness: `25/25` required timeframe sets ready.
-- Verification: `128 passed`; passive safety audit passed.
+- Verification: Phase 0 and Phase 1 test suites pass locally; passive safety audits pass.
 - Current leading candidate: `breakout_retest`.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
@@ -66,4 +66,14 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Phase 0 closure: `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`; `verify-real-artifacts` returns `PASS`.
 - EA coding status: Phase 1 dry-run shell is authorized for `breakout_retest` as the only approved future expert. Live execution remains blocked.
 
-Generated market data, reports, manifests, and snapshots are intentionally ignored by Git because they can be large and environment-specific. The current local handoff in `agent.md` records the latest artifact paths and regeneration commands.
+Large generated market data remains intentionally ignored by Git because it can be environment-specific. Small review artifacts, selected reports, and bundles may be committed when they are useful for third-party review. The current local handoff in `agent.md` records the latest artifact paths and regeneration commands.
+
+## Current Review Follow-Ups
+
+The latest reviewer feedback is tracked in:
+
+- `xau-usd/xauusd-phase0/docs/REVIEW_RESPONSE_2026_05_21.md`
+- `xau-usd/xauusd-phase0/docs/PHASE0_INDEPENDENT_VALIDATION.md`
+- `xau-usd/xauusd-phase0/docs/SECOND_CANDIDATE_RESEARCH_PLAN.md`
+- `xau-usd/xauusd-phase1/docs/REPORTING_POLICY.md`
+- `xau-usd/xauusd-phase1/docs/WORKSPACE_OWNERSHIP.md`
