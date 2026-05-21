@@ -123,6 +123,7 @@ Last updated: 2026-05-22
 - Latest Phase 1 bundle manifest: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_231920_manifest.json`.
 - Phase 2 preparation spec: `xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. This is spec-only and does not authorize broker-side behavior.
 - Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
+- Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
 
 ## Local MT5 Discovery
 

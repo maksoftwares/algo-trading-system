@@ -34,6 +34,8 @@ This checklist separates work that is already closed from gates that still requi
 | Quarterly review triggers | PENDING | Document drift, drawdown, trade-count, and behavior-review triggers. |
 | Second candidate implementation | PENDING | Implement and test `squeeze_breakout_long_v0` without changing the locked hypothesis. |
 
+Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
+
 ## Current Soak Snapshot
 
 | Field | Value |
