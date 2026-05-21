@@ -60,3 +60,24 @@ jobs:
             xau-usd/xauusd-phase0/outputs/manifests/**
             xau-usd/xauusd-phase0/outputs/review_bundles/**
             xau-usd/xauusd-phase0/outputs/snapshots/**
+
+  xauusd-phase1-static:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install static-test dependencies
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Audit Phase 1 dry-run safety boundary
+        run: python xau-usd/xauusd-phase1/scripts/audit_phase1_safety.py
+
+      - name: Run Phase 1 static tests
+        run: python -m pytest xau-usd/xauusd-phase1/tests

@@ -14,6 +14,7 @@ Last updated: 2026-05-21
 - Do not add live EA trade execution until Phase 0 real-data gates approve an expert.
 - No `OrderSend`, `OrderSendAsync`, `CTrade`, `trade.Buy`, `trade.Sell`, or position-opening logic in Phase 0.
 - Keep all MT5 tools passive: file export, logging, or diagnostics only.
+- Phase 1 currently means dry-run shell only: telemetry, lifecycle, risk, router contracts, and blocked reasons.
 - Prefer generated manifests, snapshots, and hashable artifacts over informal notes.
 - Do not push unless explicitly asked.
 
@@ -41,6 +42,7 @@ Last updated: 2026-05-21
 - Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_111406.zip`.
 - Verification after code changes: `128 passed`; safety audit OK.
 - `verify-real-artifacts` currently returns FAIL only because `PHASE0_VERDICT.md` still contains pending manual-review states; all structural artifact checks pass or are documented.
+- Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it has no approved expert module and keeps `breakout_retest` blocked until Gate 9 is complete.
 
 ## Local MT5 Discovery
 
@@ -81,6 +83,9 @@ cd xau-usd\xauusd-phase0
 .\.venv\Scripts\phase0.exe generate-intrabar-ambiguity-report --expert breakout_retest
 .\.venv\Scripts\phase0.exe generate-review-bundle
 .\.venv\Scripts\phase0.exe verify-real-artifacts
+cd ..\xauusd-phase1
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\audit_phase1_safety.py
+..\xauusd-phase0\.venv\Scripts\python.exe -m pytest tests
 ```
 
 ## Remaining Gates Before Live EA Coding

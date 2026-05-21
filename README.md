@@ -7,6 +7,7 @@ The repository is organized by symbol or instrument family so future symbols can
 ## Current Packages
 
 - `xau-usd/xauusd-phase0`: Phase 0 statistical validation package for the XAUUSD Master EA project.
+- `xau-usd/xauusd-phase1`: Phase 1 dry-run shell for MT5 telemetry and lifecycle/risk/router contracts.
 
 ## XAUUSD Phase 0
 
@@ -35,6 +36,12 @@ cd xau-usd\xauusd-phase0
 See `xau-usd/xauusd-phase0/README.md` for the full workflow.
 
 Agent handoff and current gate status are maintained in `agent.md`.
+
+## XAUUSD Phase 1
+
+Phase 1 has started as a dry-run-only shell. It does not include an approved expert module or broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
+
+`breakout_retest` remains `PENDING_MANUAL_REVIEW`, so expert logic stays blocked until Gate 9 is complete and the final Phase 0 verdict becomes `PASS`.
 
 ## Latest Review Status
 
