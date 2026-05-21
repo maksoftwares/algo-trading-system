@@ -136,6 +136,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="bar_start",
         help="Interpret generic source timestamps as bar starts or bar ends.",
     )
+    import_required_bars.add_argument(
+        "--fail-on-missing",
+        action="store_true",
+        help="Return non-zero when any required broker/symbol/timeframe set is still missing.",
+    )
     import_required_bars.set_defaults(func=_cmd_import_required_bars)
 
     build_bars = subparsers.add_parser("build-bars", help="Build M1/M5/M15/H1/H4/D1 bars.")
@@ -370,7 +375,7 @@ def _cmd_import_required_bars(args: argparse.Namespace) -> int:
     print(f"Data requirements: {requirements_path}")
     print(f"Data manifest: {manifest_path}")
     print(f"Data readiness report: {readiness_path}")
-    return 1 if failed else 0
+    return 1 if failed or (args.fail_on_missing and missing) else 0
 
 
 def _cmd_build_bars(args: argparse.Namespace) -> int:

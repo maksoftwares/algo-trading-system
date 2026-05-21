@@ -381,6 +381,26 @@ def test_import_required_bars_cli(project_root, tmp_path, capsys):
     assert (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").exists()
 
 
+def test_import_required_bars_cli_can_fail_on_missing(project_root, tmp_path, capsys):
+    root = _copy_project_config(project_root, tmp_path)
+
+    exit_code = main(
+        [
+            "--root",
+            str(root),
+            "import-required-bars",
+            "--skip-multisymbol",
+            "--fail-on-missing",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    assert exit_code == 1
+    assert "0 imported, 15 missing, 0 failed" in captured.out
+    assert (root / "outputs" / "manifests" / "PHASE0_BAR_IMPORT_REPORT.csv").exists()
+    assert (root / "outputs" / "manifests" / "PHASE0_DATA_REQUIREMENTS.csv").exists()
+
+
 def test_generate_required_data_manifest_cli(project_root, tmp_path, capsys):
     root = _copy_project_config(project_root, tmp_path)
     raw_dir = root / "data" / "raw" / "capital_com"

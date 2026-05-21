@@ -44,6 +44,7 @@ python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1
 python -m phase0 normalize-bars --broker capital_com --symbol XAUUSD --timeframe M5
 python -m phase0 generate-data-requirements
 python -m phase0 import-required-bars
+python -m phase0 import-required-bars --fail-on-missing
 python -m phase0 generate-data-manifest
 python -m phase0 generate-data-readiness
 python -m phase0 check-data-availability
@@ -54,6 +55,7 @@ Use `generate-data-requirements` to write `outputs/manifests/PHASE0_DATA_REQUIRE
 Use `normalize-data` plus `build-bars` for tick exports. Use `normalize-bars` for direct OHLC bar exports from MT5 History Center or a broker portal. By default, source bar timestamps are interpreted as bar starts; pass `--timestamp-is bar_end` only for exports that already use bar-close timestamps.
 If a direct bar export filename does not include the symbol and timeframe, pass `--input-file path\to\export.csv` to `normalize-bars`.
 Use `import-required-bars` after placing bar CSVs in `data/raw/{broker}/`; it batch-imports every required broker/symbol/timeframe whose filename includes both the symbol and timeframe, then writes `outputs/manifests/PHASE0_BAR_IMPORT_REPORT.csv`.
+Pass `--fail-on-missing` when using `import-required-bars` in automation so missing required exports return a non-zero exit code after reports are written.
 Use `generate-data-manifest` to seal `outputs/manifests/PHASE0_DATA_MANIFEST.md` across all required broker/symbol inputs, including raw and processed file SHA256 values.
 `check-data-availability` requires each mandatory broker/symbol/timeframe folder to contain at least one non-empty bar CSV with the locked Phase 0 bar schema, enough `bar_start_utc` / `bar_end_utc` coverage for the configured matrix, decile, and multi-symbol windows, and no large internal timestamp gaps for the declared timeframe.
 `generate-data-readiness` writes `outputs/manifests/PHASE0_DATA_READINESS.md` with the exact missing, malformed, or coverage-blocked broker/symbol/timeframe sets.
