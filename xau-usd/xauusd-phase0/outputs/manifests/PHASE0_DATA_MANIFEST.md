@@ -1,0 +1,213 @@
+# Phase 0 Data Manifest
+
+Prepared by: phase0
+Prepared date UTC: 2026-05-21T10:47:55+00:00
+Scope: required Phase 0 broker/symbol inputs
+
+## Required Dataset Summary
+
+| Broker | Symbol | Required processed timeframes | Raw files | Processed files |
+| --- | --- | --- | --- | --- |
+| capital_com | EURUSD | M5, M15, H1, H4, D1 | 5 | 5 |
+| capital_com | USDJPY | M5, M15, H1, H4, D1 | 5 | 5 |
+| capital_com | XAUUSD | M5, M15, H1, H4, D1 | 5 | 5 |
+| dukascopy | XAUUSD | M5, M15, H1, H4, D1 | 42 | 42 |
+| pepperstone | XAUUSD | M5, M15, H1, H4, D1 | 5 | 5 |
+
+## capital_com / EURUSD
+
+Required processed timeframes: M5, M15, H1, H4, D1
+
+### Raw Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/raw/capital_com/EURUSD_D1_20160101_20250630_capital_com.csv | 8df2ed9734e0abc0cbef32e61d4de67c43f335c89a1827bd4bbd321deeee2557 | 2959 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/EURUSD_H1_20160101_20250630_capital_com.csv | 9db0146429afffae006a4c145988034ea2b98805680409362f87811c05faf32d | 59022 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/EURUSD_H4_20160101_20250630_capital_com.csv | e3688d96c1e6757d5eb62991fe9ceba9cd57c371d74b2ffaa9ca36bd2ae8fb9d | 15235 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/EURUSD_M15_20160101_20250630_capital_com.csv | 4422c23fb34e90662dbeaece3e7c813ae865fcd7bc6194efc45fae078c5c7e14 | 236013 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/EURUSD_M5_20160101_20250630_capital_com.csv | efc2324985c38e007d18e5aa8f2696c5dd4083c0aaa5bc842b3846cb080cae3b | 707560 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+
+### Processed Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/processed/bars/capital_com/EURUSD/D1/EURUSD_capital_com_D1_20160104_20250701.csv | baba2884f4cd8c8a56a80c640a9304fc0f72e3fb0a959e0bc0d30026304de456 | 2959 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/EURUSD/H1/EURUSD_capital_com_H1_20160103_20250701.csv | 048fb4b60d132b3402e994bc0e189a693c6d4009a69c6f84471b0663a7aa383f | 59022 | 2016-01-03T22:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/EURUSD/H4/EURUSD_capital_com_H4_20160104_20250701.csv | da2da357cc272c1f671d02a1a68cc7c7dcaa7a23fbfad81018436ee0f457fa97 | 15235 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/EURUSD/M15/EURUSD_capital_com_M15_20160103_20250701.csv | b843a19dd7043c5d2360c8270fbb10ed91705896c953e9545111dc44bc52b293 | 236013 | 2016-01-03T21:15:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/EURUSD/M5/EURUSD_capital_com_M5_20160103_20250701.csv | 70751410259d02fd5b43b4014ac190828b0cbc4cbbaf94ea5f6e7964fd2549b0 | 707560 | 2016-01-03T21:05:00+00:00 | 2025-07-01T00:00:00+00:00 |
+
+## capital_com / USDJPY
+
+Required processed timeframes: M5, M15, H1, H4, D1
+
+### Raw Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/raw/capital_com/USDJPY_D1_20160101_20250630_capital_com.csv | 4d4b32cf942284c3717a870575f05eabcac8a61e4ce2a6696d350cd656dc5b43 | 2959 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/USDJPY_H1_20160101_20250630_capital_com.csv | fce7dc9d6a87c3eb515ac5ad73020bf7c3942b83f5ddcb0f5b073452f203298c | 59029 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/USDJPY_H4_20160101_20250630_capital_com.csv | fc29c164adeaf3b76f61657eecbe3dd78f1c0a596b41bae73f6f76d0adfae3f4 | 15236 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/USDJPY_M15_20160101_20250630_capital_com.csv | 04e6420923c80b60c7d65e2fd9cc972d0c5c77622e93ea752d68167f68334ee2 | 236034 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/USDJPY_M5_20160101_20250630_capital_com.csv | 2047ceb88b60bd6a027e83ae13b95382916486c1f091ce6aa64a7d4751e22eba | 707625 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+
+### Processed Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/processed/bars/capital_com/USDJPY/D1/USDJPY_capital_com_D1_20160104_20250701.csv | 35dda60e590b48241297b481108e22b29dab0cfcf7b9cbdc88a37dd4e43d6113 | 2959 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/USDJPY/H1/USDJPY_capital_com_H1_20160103_20250701.csv | 94c7502bcd481f7348eabb03fb35ce47ed146e9a215d9e41a0d50777538196f5 | 59029 | 2016-01-03T22:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/USDJPY/H4/USDJPY_capital_com_H4_20160104_20250701.csv | 733d91764f166981a30f452ea4f8d7f86a82f819eff5c5a9c093d9c04c9afd52 | 15236 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/USDJPY/M15/USDJPY_capital_com_M15_20160103_20250701.csv | d2c678f7aef0457ce84909909e53872fcd00a92bc34d2096f29c06586151c6ff | 236034 | 2016-01-03T21:15:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/USDJPY/M5/USDJPY_capital_com_M5_20160103_20250701.csv | dfc931cff056a6b792d6d7285153eddc43d6d926192fd7a05e5815767a653128 | 707625 | 2016-01-03T21:05:00+00:00 | 2025-07-01T00:00:00+00:00 |
+
+## capital_com / XAUUSD
+
+Required processed timeframes: M5, M15, H1, H4, D1
+
+### Raw Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/raw/capital_com/XAUUSD_D1_20160101_20250630_capital_com.csv | 4366675de04d7048784e1f3288dd64b2b9c6b8212887c9b2ce9d6be57c5ad93f | 2944 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/XAUUSD_H1_20160101_20250630_capital_com.csv | ac2930c4dfcf30fa902ea99a87d97570a519d98839abbba21d2ac8f94ab15e87 | 55960 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/XAUUSD_H4_20160101_20250630_capital_com.csv | e5fa4a8a13fb9db5d03d99577fd6503ed236820ac941e2193152947fa6785c43 | 15135 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/XAUUSD_M15_20160101_20250630_capital_com.csv | ae5de2cc6f62139f350e1b700688372bba4b02d8b40daad3d41c0f563a521e72 | 223716 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+| data/raw/capital_com/XAUUSD_M5_20160101_20250630_capital_com.csv | dee59c0da3bdc74df943054015813920271115cb614e38e03695e2299bed8ba4 | 667827 | 2016-01-03T00:00:00+00:00 | 2025-06-30T00:00:00+00:00 |
+
+### Processed Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/processed/bars/capital_com/XAUUSD/D1/XAUUSD_capital_com_D1_20160104_20250701.csv | 496c8a5cba53f79c8f1117d5f7341165b043accb5ad3cdf5bacc611047725909 | 2944 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv | 3552e55c4203eca69aa63bdf49ad1a3fb03e32562f29ee1e7d51148f483ad358 | 55960 | 2016-01-03T23:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv | 02d5f6d6ae9f39037dd7731aa89ab39b30590334167add166d2036b8e1352538 | 15135 | 2016-01-04T00:00:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/XAUUSD/M15/XAUUSD_capital_com_M15_20160103_20250701.csv | d08c62645b9504d49d537c209ef0f26afebd6d26dc18303b215f3c3ca4bb8833 | 223716 | 2016-01-03T22:15:00+00:00 | 2025-07-01T00:00:00+00:00 |
+| data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv | 4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7 | 667827 | 2016-01-03T22:10:00+00:00 | 2025-07-01T00:00:00+00:00 |
+
+## dukascopy / XAUUSD
+
+Required processed timeframes: M5, M15, H1, H4, D1
+
+### Raw Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/raw/dukascopy/XAUUSD_D1_20220101_20250101_dukascopy.csv | c225c3c3469909bf67604e4639202ed200a0b835e5cbb23e76f23225ec44327e | 1096 | 2022-01-01T00:00:00+00:00 | 2024-12-31T00:00:00+00:00 |
+| data/raw/dukascopy/XAUUSD_H1_20220101_20250101_dukascopy.csv | 44e9adfc2443a35a14b5fe63e5abb868960e2a7e7a5e0a9b35b8d3a31d047ddf | 26304 | 2022-01-01T00:00:00+00:00 | 2024-12-31T23:00:00+00:00 |
+| data/raw/dukascopy/XAUUSD_H4_20220101_20250101_dukascopy.csv | feaadf0c192d405375a8ebdc4ed37b80ea047fd7c66d5d3ae26780c1b84f539e | 6576 | 2022-01-01T00:00:00+00:00 | 2024-12-31T20:00:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M15_20220101_20250101_dukascopy_derived.csv | 83a23714ffff78cdc3258c5523a6c2e3acb53331df5ce7154ef6e4b309a41a1c | 105216 | 2022-01-01T00:00:00+00:00 | 2024-12-31T23:45:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220101_20220201_dukascopy.csv | 743de36950cfce71a019c2087d0b07afc7bf8469acf149b0d70340289f8a85a1 | 8928 | 2022-01-01T00:00:00+00:00 | 2022-01-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220201_20220301_dukascopy.csv | ed802d4f421ae6ceb455cdd243ee5bf8daaa1aee7a06d63c6c08a807d81f293a | 8064 | 2022-02-01T00:00:00+00:00 | 2022-02-28T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220301_20220401_dukascopy.csv | 80d3a3d43c8887db75253dcc95c56087da4c7ef89b450d59dc01ffe1efdc1ab5 | 8928 | 2022-03-01T00:00:00+00:00 | 2022-03-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220401_20220501_dukascopy.csv | f2a6408eb07bfb709a595a920f09875a25f853b7553f2798dee463a33bbad16d | 8640 | 2022-04-01T00:00:00+00:00 | 2022-04-30T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220501_20220601_dukascopy.csv | 1e3a268af33a7fce5dac3f651aebebbb06260b6583b88e987677b4c8d6a257a3 | 8928 | 2022-05-01T00:00:00+00:00 | 2022-05-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220601_20220701_dukascopy.csv | b24ff21de444d894acd31bc6c0d7afb1bcaeaf4e4feab83a586ff4609fe3ee27 | 8640 | 2022-06-01T00:00:00+00:00 | 2022-06-30T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220701_20220711_dukascopy.csv | 7f000f447ee14bc01e8e2f13aae247ab67394e10e9e9aa3c9c56841e289cedca | 2880 | 2022-07-01T00:00:00+00:00 | 2022-07-10T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220711_20220721_dukascopy.csv | 402298b92cc8a67a39533620af9897aa2e8b1d27e2df2fce7d14157846015c6c | 2880 | 2022-07-11T00:00:00+00:00 | 2022-07-20T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220721_20220801_dukascopy.csv | 618b2a51e0fd9ea67755c7c71466eaa3b8b5087d681ec6d2b89ce07353af96df | 3168 | 2022-07-21T00:00:00+00:00 | 2022-07-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220801_20220901_dukascopy.csv | fe2cef573f60c9fbfe8012d8dacd7a2f351d4a45cf0abcdcac1eece05b86b899 | 8928 | 2022-08-01T00:00:00+00:00 | 2022-08-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220901_20220911_dukascopy.csv | 284b7dd57810c6e888813fb296a78f3c6dc86dbef2e253ce6287ebf1728d39c6 | 2880 | 2022-09-01T00:00:00+00:00 | 2022-09-10T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220911_20220921_dukascopy.csv | 77310280dc39c9a38b2675de2dafb4af97cf56afd7fa7cd648a28434379bce62 | 2880 | 2022-09-11T00:00:00+00:00 | 2022-09-20T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220921_20220922_dukascopy.csv | fcc425885cab98e624e0f75c952038de851a87ebb3e0d4a6601d29b46f0fb0d9 | 288 | 2022-09-21T00:00:00+00:00 | 2022-09-21T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220922_20220923_dukascopy.csv | 22b15f83caff4c1e4de1084be9b239de608d5dccc6317940e0ce1c42c7eb122e | 288 | 2022-09-22T00:00:00+00:00 | 2022-09-22T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220923_20220924_dukascopy.csv | 86cc8b554af06a9224749f74ee6b0e018c77843896256f6be85101cb668a3b28 | 288 | 2022-09-23T00:00:00+00:00 | 2022-09-23T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220924_20220925_dukascopy.csv | 3ff378b95ee54b8ca8ffc027ed00dc74e9384c6fce2f730f6a6a18a03feffdf5 | 288 | 2022-09-24T00:00:00+00:00 | 2022-09-24T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220925_20220926_dukascopy.csv | 01521f704644a247ce3c24942a97e584b47f1ca3943d226e8f225ccd0b3d5d45 | 288 | 2022-09-25T00:00:00+00:00 | 2022-09-25T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20220926_20221001_dukascopy.csv | 7b487de13bba1f092573579689c4420a064252977f95db52a1377446ec723819 | 1440 | 2022-09-26T00:00:00+00:00 | 2022-09-30T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221001_20221006_dukascopy.csv | c1143fc1eb91bfe386bec4132337f7be84b2f4d929646a9616f6f1a303406077 | 1440 | 2022-10-01T00:00:00+00:00 | 2022-10-05T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221006_20221011_dukascopy.csv | 3481762f58a5834a0ac66780ad1651b04d368de0ecf292f51d2ac19939ab3011 | 1440 | 2022-10-06T00:00:00+00:00 | 2022-10-10T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221011_20221016_dukascopy.csv | 913c98e1b0e0c212449972e00b08eeb21d569f1099eb75ccbc0bb7f1c8df4482 | 1440 | 2022-10-11T00:00:00+00:00 | 2022-10-15T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221016_20221021_dukascopy.csv | d4e1ff1fe5338a716591733d2869d873a113cfe50dbebcf15d8284e65c41339a | 1440 | 2022-10-16T00:00:00+00:00 | 2022-10-20T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221021_20221026_dukascopy.csv | 544b24e3e287522695855861fa1fb1c7c6e335ba7a6d2f1a3169f2c4d6b6ace4 | 1440 | 2022-10-21T00:00:00+00:00 | 2022-10-25T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221026_20221101_dukascopy.csv | 716a0b4d064032f14e546aea8bfd99af9fead1959f6d71720280d7da422193cf | 1728 | 2022-10-26T00:00:00+00:00 | 2022-10-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221101_20221106_dukascopy.csv | c537906c25fc7024fc62a98f23120510858923a592d024d89e27a052d55bb1b0 | 1440 | 2022-11-01T00:00:00+00:00 | 2022-11-05T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221106_20221111_dukascopy.csv | e695187d57ca1d1e8cadab3357a93ae8786dd4baff11e9f0f8094140c53d8d84 | 1440 | 2022-11-06T00:00:00+00:00 | 2022-11-10T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221111_20221116_dukascopy.csv | 6eef97ae2280bdee4d76ba0764550ec8758493753cc2d6fbb50775d67d2a887a | 1440 | 2022-11-11T00:00:00+00:00 | 2022-11-15T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221116_20221121_dukascopy.csv | 4a37672f1d58f9a706e45991d78acd565a94e7b559203b82d716e614c53a56ca | 1440 | 2022-11-16T00:00:00+00:00 | 2022-11-20T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221121_20221126_dukascopy.csv | eee1be77cd36abf08bf143b262df78e43867ef5e7c2a1f81925066b02b3d19eb | 1440 | 2022-11-21T00:00:00+00:00 | 2022-11-25T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221126_20221201_dukascopy.csv | a4b5c8142d877c1efe3132bff7ad87db1338fc427edd55aedee59f4be141a605 | 1440 | 2022-11-26T00:00:00+00:00 | 2022-11-30T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221201_20221206_dukascopy.csv | 78c64879ede199eeb0461df94e151828a87a46915559c4c3dd6df4ef154819b7 | 1440 | 2022-12-01T00:00:00+00:00 | 2022-12-05T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221206_20221211_dukascopy.csv | 41d8e477e16a658415e9d509db49f059e0902cf8dd65c73284743f02c4a7d75b | 1440 | 2022-12-06T00:00:00+00:00 | 2022-12-10T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221211_20221216_dukascopy.csv | 8e6a53e52281e4eb1f8c2f89923f2919735520f15fd35b6ca6340a530d7aa553 | 1440 | 2022-12-11T00:00:00+00:00 | 2022-12-15T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221216_20221221_dukascopy.csv | 5e1945a25e6a1add3f223a3ee46eb710b22e77b46d24a2dede71bbe1101380fd | 1440 | 2022-12-16T00:00:00+00:00 | 2022-12-20T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221221_20221226_dukascopy.csv | df834204e73f90e6c4e55fd9e73bef193e99bb304b4dcba9482c9b6ea0a07df7 | 1440 | 2022-12-21T00:00:00+00:00 | 2022-12-25T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20221226_20230101_dukascopy.csv | 6bc1803a6689c3ffd4a4f3e8ab76a8b3ab5e646397b6532a2ee5acb180e8c091 | 1728 | 2022-12-26T00:00:00+00:00 | 2022-12-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20230101_20240101_dukascopy.csv | b24f2c010762790b74d10cb7ad34b1c2f55680deaab2cff98ff4530abb7dd43e | 105120 | 2023-01-01T00:00:00+00:00 | 2023-12-31T23:55:00+00:00 |
+| data/raw/dukascopy/XAUUSD_M5_20240101_20250101_dukascopy.csv | 981811eb84e67d2308da021223b8dd89865c5290fd427dbb70bf066e26550767 | 105408 | 2024-01-01T00:00:00+00:00 | 2024-12-31T23:55:00+00:00 |
+
+### Processed Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/processed/bars/dukascopy/XAUUSD/D1/XAUUSD_dukascopy_D1_20220102_20250101.csv | d1505f3bf9d65f86594d993bbfb0b79db27444eebbb88db807eaf30224a09d70 | 1096 | 2022-01-02T00:00:00+00:00 | 2025-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/H1/XAUUSD_dukascopy_H1_20220101_20250101.csv | adfb10a876150e8115b12418445088067c1df77775199ba08d3b0323964160a4 | 26304 | 2022-01-01T01:00:00+00:00 | 2025-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/H4/XAUUSD_dukascopy_H4_20220101_20250101.csv | b84a89d93720acd6171108495132ffc6043ff19a7634b686120971645c0010f1 | 6576 | 2022-01-01T04:00:00+00:00 | 2025-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M15/XAUUSD_dukascopy_M15_20220101_20250101.csv | a3b3a3c389e6e0494bf505992075eee07e1a4b0a44d647e08887c0d800f861bd | 105216 | 2022-01-01T00:15:00+00:00 | 2025-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220101_20220201.csv | 2e9aec4bd144cbb4b1ed11973fd20657a5a9d73a2ecb85d371e8f20634299b75 | 8928 | 2022-01-01T00:05:00+00:00 | 2022-02-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220201_20220301.csv | 0c385ab26292b1d956d405fafaa71ec25a6300d72334a37b27e80ef2f41fdd63 | 8064 | 2022-02-01T00:05:00+00:00 | 2022-03-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220301_20220401.csv | 37e51d7eca33ed923b2401c015521c52e39e10b5c7a14dbf68cb3729e4311431 | 8928 | 2022-03-01T00:05:00+00:00 | 2022-04-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220401_20220501.csv | 8c4faf814c13a48eac54e349167e91572352ced6f7115dd584b7ef3af448326d | 8640 | 2022-04-01T00:05:00+00:00 | 2022-05-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220501_20220601.csv | 693fe51ef3ca8191af6139286ea04467dd8d89b183be8f3111ddf33068108e8a | 8928 | 2022-05-01T00:05:00+00:00 | 2022-06-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220601_20220701.csv | 95dd767f24aeb1797a1a2d4ee5cd5647d459dad044a11e7bf160562aa4896ac9 | 8640 | 2022-06-01T00:05:00+00:00 | 2022-07-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220701_20220711.csv | 309cae282fcfb5b7fe8d7d1bf3ece301ab4cbd52ad7ac1a83eecf3f531d31013 | 2880 | 2022-07-01T00:05:00+00:00 | 2022-07-11T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220711_20220721.csv | 1e63aa502a4194c02325a69c04734c24d1f480f8482b33633ff2ef6dcfcb29d5 | 2880 | 2022-07-11T00:05:00+00:00 | 2022-07-21T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220721_20220801.csv | ff1798a7378ec977c86c4494ffd0069eb93bb05d7428361e212792dce7f1a9a7 | 3168 | 2022-07-21T00:05:00+00:00 | 2022-08-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220801_20220901.csv | 4f4457634856d953c9f73b252efd670adc721e5097d779b3c7441e6eee0ca806 | 8928 | 2022-08-01T00:05:00+00:00 | 2022-09-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220901_20220911.csv | a977a8e5d351d92a10c4d474040d9c6d3e0a764fb2e720c645b0bd957ee362e9 | 2880 | 2022-09-01T00:05:00+00:00 | 2022-09-11T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220911_20220921.csv | 29eb06dbb66c015e5bd967954f53f1372005ea942409ca0824425f619d794e70 | 2880 | 2022-09-11T00:05:00+00:00 | 2022-09-21T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220921_20220922.csv | ac8f6714c0f67cab01871da17e3038663444026b956e586a384607d328b75145 | 288 | 2022-09-21T00:05:00+00:00 | 2022-09-22T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220922_20220923.csv | b5615ab13facb488cb4b1f837371a51e92e362f4046dc8151def5a75db89fcf1 | 288 | 2022-09-22T00:05:00+00:00 | 2022-09-23T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220923_20220924.csv | 1a98220abd7b8acb0778cbb8934945610c7705b70e54ab3326b1415b96994eb0 | 288 | 2022-09-23T00:05:00+00:00 | 2022-09-24T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220924_20220925.csv | c5d452ae52411257cbb172dccfdfed5698565097a9a27ea3901301d115c7fbb8 | 288 | 2022-09-24T00:05:00+00:00 | 2022-09-25T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220925_20220926.csv | 140ddd41987a6ab72b2c53b42123c14e3f7a27522ec2870a1cccd0fd84c2ec0c | 288 | 2022-09-25T00:05:00+00:00 | 2022-09-26T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20220926_20221001.csv | 786c4371250e229b57916eae999dd8c2a3ecd75ef4854bfd5f0314cb923559ff | 1440 | 2022-09-26T00:05:00+00:00 | 2022-10-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221001_20221006.csv | 191c3883e53e53af92bc106a20b2fa9b956b53eea3faf321c60027ad73f0a788 | 1440 | 2022-10-01T00:05:00+00:00 | 2022-10-06T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221006_20221011.csv | 7d92439e4e4b151e877d44dbf6c938c52bb3208d24d2c8bb66d3b65f09d57fdd | 1440 | 2022-10-06T00:05:00+00:00 | 2022-10-11T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221011_20221016.csv | 146dd1665a75454ca33eb43bb3d2bde61c99aafd079f8de67d56b9915f2e4918 | 1440 | 2022-10-11T00:05:00+00:00 | 2022-10-16T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221016_20221021.csv | be119bb032fb92a6214c26ed2dace0e39194d21a5208479e17fa49abfcd8375d | 1440 | 2022-10-16T00:05:00+00:00 | 2022-10-21T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221021_20221026.csv | 3d652285dab6f9bc4387affbca5cc120ff1d194db8ede547f3764cd3a622f629 | 1440 | 2022-10-21T00:05:00+00:00 | 2022-10-26T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221026_20221101.csv | 42d9c4c372a41b257f420046772c2c4940eca619eddff77405be1b3ada8a5351 | 1728 | 2022-10-26T00:05:00+00:00 | 2022-11-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221101_20221106.csv | 6c837d3c33446343f60ebe1ff39f7cf6260fcdf0d679dfa251dabe71439977cc | 1440 | 2022-11-01T00:05:00+00:00 | 2022-11-06T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221106_20221111.csv | 1bd35e5e3322d43568d25c34320a47c0b879ab97d3c009e9146d39690f1cc890 | 1440 | 2022-11-06T00:05:00+00:00 | 2022-11-11T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221111_20221116.csv | 958831c45ed050f726539336e77776f6991310e6814aaa6ca0f85f89a73250a1 | 1440 | 2022-11-11T00:05:00+00:00 | 2022-11-16T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221116_20221121.csv | b7b2444be2ac1fb202d7e3d445e50a9158ecb23424fda618011d3adca368f625 | 1440 | 2022-11-16T00:05:00+00:00 | 2022-11-21T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221121_20221126.csv | 322a06bb0f6ee110fc19a51dccdfb58b69ea899a74e01c542b37dfb1a1830e64 | 1440 | 2022-11-21T00:05:00+00:00 | 2022-11-26T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221126_20221201.csv | 86888f83527992333b6cf50cdfb84df934a399277233f3761e94c94abaf82d59 | 1440 | 2022-11-26T00:05:00+00:00 | 2022-12-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221201_20221206.csv | faa9f61e25a78b692ba996d1a39c0d37b664c8c0322f7d9323e8d133ee51d07f | 1440 | 2022-12-01T00:05:00+00:00 | 2022-12-06T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221206_20221211.csv | 39f5285d9b4502bb125e7540dda20a8c74ad6057c38ef5d51b30f11095c07d55 | 1440 | 2022-12-06T00:05:00+00:00 | 2022-12-11T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221211_20221216.csv | 2d5f1ce811e829efef46da774b58096bdc84f0f7f961286baf9a5122b2be2b14 | 1440 | 2022-12-11T00:05:00+00:00 | 2022-12-16T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221216_20221221.csv | 72c21f33971261dcd718364b714e30936bd33f41eb0134254f01bd0ad79e9335 | 1440 | 2022-12-16T00:05:00+00:00 | 2022-12-21T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221221_20221226.csv | b5084b9e5d2f71688667321061a394fa3a896c2ebc4719246504885c085abc8e | 1440 | 2022-12-21T00:05:00+00:00 | 2022-12-26T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20221226_20230101.csv | 20454ca174e5491c346b4544d4fd333247a1da1a96dd3ec73de509eb626ea65c | 1728 | 2022-12-26T00:05:00+00:00 | 2023-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20230101_20240101.csv | dd1b4b05e4f9d0fb5891cee3c96f66daaa3980169958376553fcc88be93573c3 | 105120 | 2023-01-01T00:05:00+00:00 | 2024-01-01T00:00:00+00:00 |
+| data/processed/bars/dukascopy/XAUUSD/M5/XAUUSD_dukascopy_M5_20240101_20250101.csv | f8c46024542e894cc0811e6878bdd826429ab3b4f80d20b645d310be7db6d32e | 105408 | 2024-01-01T00:05:00+00:00 | 2025-01-01T00:00:00+00:00 |
+
+## pepperstone / XAUUSD
+
+Required processed timeframes: M5, M15, H1, H4, D1
+
+### Raw Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/raw/pepperstone/XAUUSD_D1_20190101_20211231_pepperstone.csv | 66d39a5b3a145a6f5524bc95e6bce4a7e365b2b9fa8f9ca82b57fbb82f76c137 | 775 | 2019-01-02T00:00:00+00:00 | 2021-12-31T00:00:00+00:00 |
+| data/raw/pepperstone/XAUUSD_H1_20190101_20211231_pepperstone.csv | e5acc8a22d7b694863d4532720c5494a8664291f0193f5688fdb7aa8648b1344 | 17749 | 2019-01-02T00:00:00+00:00 | 2021-12-31T00:00:00+00:00 |
+| data/raw/pepperstone/XAUUSD_H4_20190101_20211231_pepperstone.csv | 55f68ac29595b6b35d7239d41fb1d1401fda0dbc0317801cebe65065ef670117 | 4640 | 2019-01-02T00:00:00+00:00 | 2021-12-31T00:00:00+00:00 |
+| data/raw/pepperstone/XAUUSD_M15_20190101_20211231_pepperstone.csv | 42a1738ce168fe77edf4f02e7a4943fdc467d124599b74f39664b1cfbde1539f | 70967 | 2019-01-02T00:00:00+00:00 | 2021-12-31T00:00:00+00:00 |
+| data/raw/pepperstone/XAUUSD_M5_20190101_20211231_pepperstone.csv | d6fbc2c4d7769b3c9705405b3d9882c1a83f6385bdf5510f8a6ded7311978297 | 212724 | 2019-01-02T00:00:00+00:00 | 2021-12-31T00:00:00+00:00 |
+
+### Processed Files
+
+| path | sha256 | row_count | start_timestamp_utc | end_timestamp_utc |
+| --- | --- | --- | --- | --- |
+| data/processed/bars/pepperstone/XAUUSD/D1/XAUUSD_pepperstone_D1_20190103_20220101.csv | 43db200cad60b5c91306ddc229ec9c79019833c4b980c4c43478266126cc335a | 775 | 2019-01-03T00:00:00+00:00 | 2022-01-01T00:00:00+00:00 |
+| data/processed/bars/pepperstone/XAUUSD/H1/XAUUSD_pepperstone_H1_20190102_20220101.csv | 0e415dbf838b92913994a692914aa1414f87e83671a24cda9b6afee26cd2ab0a | 17749 | 2019-01-02T02:00:00+00:00 | 2022-01-01T00:00:00+00:00 |
+| data/processed/bars/pepperstone/XAUUSD/H4/XAUUSD_pepperstone_H4_20190102_20220101.csv | 0ff9526b4c9c5a6de0ee89351abec4d3a4fa887384c3484d9338a1ca2e02a2ee | 4640 | 2019-01-02T04:00:00+00:00 | 2022-01-01T00:00:00+00:00 |
+| data/processed/bars/pepperstone/XAUUSD/M15/XAUUSD_pepperstone_M15_20190102_20220101.csv | 8be1a28ca10fac9ada40caaf4af9ab275d726dd7a412b51bb257105c3c019a07 | 70967 | 2019-01-02T01:15:00+00:00 | 2022-01-01T00:00:00+00:00 |
+| data/processed/bars/pepperstone/XAUUSD/M5/XAUUSD_pepperstone_M5_20190102_20211231.csv | 72320a50a3db82973535842adb4a8deb2f672b7538431c3886eb82460e6a1995 | 212724 | 2019-01-02T01:05:00+00:00 | 2021-12-31T23:55:00+00:00 |
+
+## Known Gaps
+
+Use PHASE0_DATA_READINESS.md for exact missing or malformed processed timeframe sets.

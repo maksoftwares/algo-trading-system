@@ -5,7 +5,8 @@ Last updated: 2026-05-21
 ## Workspace
 
 - Root: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system`
-- Active package: `xau-usd\xauusd-phase0`
+- Active package: `xau-usd\xauusd-phase1`
+- Active phase label: Phase 1 - Master EA dry-run shell.
 - Current branch: `main`
 - Remote: `https://github.com/maksoftwares/algo-trading-system.git`
 
@@ -14,7 +15,7 @@ Last updated: 2026-05-21
 - Do not add live EA trade execution until Phase 0 real-data gates approve an expert.
 - No `OrderSend`, `OrderSendAsync`, `CTrade`, `trade.Buy`, `trade.Sell`, or position-opening logic in Phase 0.
 - Keep all MT5 tools passive: file export, logging, or diagnostics only.
-- Phase 1 currently means dry-run shell only: telemetry, lifecycle, risk, router contracts, and blocked reasons.
+- Phase 1 currently means dry-run shell only: telemetry, lifecycle, risk, router contracts, dashboard/logging work, and blocked reasons.
 - Prefer generated manifests, snapshots, and hashable artifacts over informal notes.
 - Do not push unless explicitly asked.
 
@@ -31,8 +32,8 @@ Last updated: 2026-05-21
   - Multisymbol summaries: 3.
   - Adversarial packets: 3.
   - Aggregation files: 3.
-- Latest verdict: no expert has a full final PASS yet.
-  - `breakout_retest` passed automated 9-cell, decile, multisymbol, and hash gates, but remains `PENDING` on manual adversarial review.
+- Latest verdict: `breakout_retest` has a full final PASS and is the only approved future expert.
+  - `breakout_retest` passed automated 9-cell, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
   - `trend_pullback` and `range_mr` are rejected by the current Phase 0 verdict.
 - Audit correction: the previous real-data run is exploratory evidence only because the registered hypothesis files still contained placeholder text when the run was produced.
 - Do not treat automated PASS as final PASS until hypothesis completeness, fresh hash registration, rerun evidence, manual adversarial review, and review bundle are complete.
@@ -41,8 +42,68 @@ Last updated: 2026-05-21
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
 - Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_111406.zip`.
 - Verification after code changes: `128 passed`; safety audit OK.
-- `verify-real-artifacts` currently returns FAIL only because `PHASE0_VERDICT.md` still contains pending manual-review states; all structural artifact checks pass or are documented.
-- Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it has no approved expert module and keeps `breakout_retest` blocked until Gate 9 is complete.
+- `verify-real-artifacts` returns PASS after Gate 9 closure.
+- Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it may now be expanded as a dry-run Master EA shell with `breakout_retest` reserved as the only approved future expert.
+- Phase 0.9 closure plan: `xau-usd\xauusd-phase0\docs\PHASE0_9_CLOSURE_PLAN.md`.
+- Phase 1 dry-run spec: `xau-usd\xauusd-phase1\docs\PHASE1_MASTER_EA_DRY_RUN_SPEC.md`.
+- Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_121022.zip`.
+- Latest Phase 0 snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_121022.zip`.
+- Latest Phase 1 shell version: `phase1-dry-run-v0.5`.
+- Phase 1 module slices implemented:
+  - v0.2: market snapshot, session detection, execution guard, news guard, router regime classification, decision logger, and dashboard.
+  - v0.3: feature telemetry, server-time validation, magic-number allocator, and expert lifecycle manager.
+  - v0.4: simulated daily/weekly/monthly/manual risk locks plus startup and shutdown CSV logs.
+  - v0.5: breakout-retest dry-run observer that reports level/break/retest/confirmation state, would-signal status, and synthetic entry/stop/target telemetry while keeping execution blocked.
+- MT5 Portable compile result for `Phase1DryRunShell.mq5`: 0 errors, 0 warnings.
+- Latest MT5 Portable decision log: `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv`.
+- Previous v0.2/v0.3 mixed-schema log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_3_20260521_162557.csv`.
+- Previous v0.3 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_4_20260521_163517.csv`.
+- Previous v0.4 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_5_20260521_174742.csv`.
+- Latest decision row confirms `phase1-dry-run-v0.5`, `DRY_RUN`, `DRY_RUN_ONLY`, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `risk_ok=true`, `would_have_allowed_experts=breakout_retest`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
+- Would-signal evidence report currently shows 5 breakout-retest dry-run would-signal rows across 5 setup clusters; all stayed dry-run and permission-locked.
+- Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK`; all kept `trade_permission=false`.
+- Latest MT5 lifecycle logs:
+  - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
+  - `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv`
+- Restart resilience verifier: `xau-usd\xauusd-phase1\scripts\verify_phase1_logs.py`.
+- Latest Phase 1 log report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_DRY_RUN_LOG_REPORT.md`.
+- Latest log verification status: PASS. Duplicate headers, schemas, dry-run lock, permission lock, breakout-retest observer, startup append, shutdown rows, M5 cadence, and risk-state coverage all passed.
+- Soak/drift analyzer: `xau-usd\xauusd-phase1\scripts\analyze_phase1_soak.py`.
+- Latest Phase 1 soak/drift report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_DRIFT_REPORT.md`.
+- Latest soak/drift status: PASS. Dry-run state, permission state, lifecycle rows, per-run cadence, latest-row freshness, server-time status, and breakout-retest observer activity passed.
+- Would-signal report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_would_signal_report.py`.
+- Latest Phase 1 would-signal report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
+- Latest Phase 1 would-signal review CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`.
+- Latest would-signal status: PASS with 5 rows and 5 setup clusters; both long and short observations have appeared in dry-run telemetry.
+- Runtime health report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_runtime_health_report.py`.
+- Latest Phase 1 runtime health report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md`.
+- Latest runtime health status: PASS. Runtime files exist, latest row is fresh, dry-run and permission locks hold, server-time status is clean, no exact duplicate rows were found, and no larger-than-M5 gaps were found.
+- Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
+- Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
+- Latest status summary shows 84 decision rows, 5.42% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.
+- Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
+- Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
+- Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
+- Latest soak history has 7 rows, status PASS, and is appended by the bundle generator plus the hourly soak automation.
+- Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
+- Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
+- Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.
+- Phase 2 readiness generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_readiness_report.py`.
+- Latest Phase 2 readiness report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md`.
+- Latest Phase 2 readiness status: PENDING. Phase 2 prep spec, Phase 1 summary health, latest dry-run boundary, and would-signal evidence pass; Phase 1 acceptance, Phase 1 review index, five-day soak completion, and owner approval remain pending.
+- Phase 1 deploy/compile helper: `xau-usd\xauusd-phase1\scripts\deploy_phase1_mt5.py`.
+- Latest helper run deployed 41 files to `C:\MT5PortableGoldMission\MQL5` plus the mapped terminal data MQL5 root, and MetaEditor compile status was PASS.
+- Hourly automation `phase1-mt5-soak-check` now runs both the runtime log verifier and the soak/drift analyzer against `C:\MT5PortableGoldMission\MQL5\Files`.
+- Acceptance report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_acceptance_report.py`.
+- Latest Phase 1 acceptance report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md`.
+- Latest acceptance status: PENDING. Compile/source-safety/log/soak/runtime-health/would-signal/soak-history/dry-run/permission/runtime-freshness/latest-row gates pass; only the five-trading-day wall-clock soak gate remains pending.
+- Hourly automation `phase1-mt5-soak-check` also regenerates the acceptance report, checks source safety, and reports five-trading-day soak progress.
+- Hourly automation `phase1-mt5-soak-check` also regenerates `PHASE1_STATUS_SUMMARY.json`, appends `PHASE1_SOAK_HISTORY.csv`, regenerates `PHASE1_SOAK_HISTORY_REPORT.md`, regenerates `PHASE1_REVIEW_INDEX.md`, and regenerates `PHASE2_READINESS_REPORT.md`.
+- Phase 1 bundle generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_bundle.py`.
+- Latest Phase 1 dry-run review bundle: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624.zip`.
+- Latest Phase 1 bundle manifest: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260521_201624_manifest.json`.
+- Phase 2 preparation spec: `xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. This is spec-only and does not authorize broker-side behavior.
 
 ## Local MT5 Discovery
 
@@ -90,14 +151,12 @@ cd ..\xauusd-phase1
 
 ## Remaining Gates Before Live EA Coding
 
-1. Complete the hypothesis files and run `validate-hypotheses-complete`.
-2. Re-register hypothesis hashes before any new real-data run.
-3. Rerun Phase 0 real-data workflow; old real-data outputs stay exploratory.
-4. Complete and score Gate 9 manual adversarial review for `breakout_retest`.
-5. Generate intrabar ambiguity reports and the review bundle for third-party inspection.
-6. Run `verify-real-artifacts` and resolve any FAIL findings.
-7. Only after the final verdict becomes PASS should Phase 1 dry-run EA work begin.
+1. Continue the Phase 1 MT5 soak and hourly log verification.
+2. Keep improving dry-run telemetry: breakout-retest observer coverage, data freshness, session/regime diagnostics, dashboard clarity, soak/drift summaries, and restart behavior.
+3. Keep the soak-history ledger growing during scheduled checks so the five-day evidence trail is reviewable.
+4. Add Phase 1 static/compile/review-bundle coverage whenever a new module slice is introduced.
+5. Do not add live execution or position-management behavior until a later milestone explicitly approves it after dry-run soak evidence is reviewed.
 
 ## Current Recommendation
 
-Do not start EA execution code yet. First close the pre-registration audit gap, rerun Phase 0 with completed hypotheses, review `outputs\adversarial_review\breakout_retest_losing_trades_review.csv`, mark logic-gap outcomes, score the review, regenerate the verdict, and proceed only if `breakout_retest` receives a full PASS.
+Phase 0 is closed for the reduced one-expert package. Proceed with Phase 1 Master EA dry-run shell work only: richer market data, session/regime/risk/execution/news state, dashboard, decision logs, restart safety, and MT5 demo telemetry. Do not add live execution or position-management behavior.

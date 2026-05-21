@@ -173,7 +173,27 @@ def test_verify_real_artifacts_passes_complete_evidence_package(project_root, tm
     (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").write_text("manifest\n", encoding="utf-8")
     reports_dir = root / "outputs" / "reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
-    (reports_dir / "PHASE0_VERDICT.md").write_text("FINAL PASS\n", encoding="utf-8")
+    (reports_dir / "PHASE0_VERDICT.md").write_text(
+        "\n".join(
+            [
+                "# Phase 0 Consolidated Verdict",
+                "",
+                "## Experts Approved for Phase 1",
+                "",
+                "- breakout_retest",
+                "",
+                "## Experts Pending Manual Review",
+                "",
+                "None.",
+                "",
+                "## Invalid Pre-Registration",
+                "",
+                "None.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
     for expert in ("trend_pullback", "breakout_retest", "range_mr"):
         (reports_dir / f"{expert}_intrabar_ambiguity_report.md").write_text("ok\n", encoding="utf-8")
     adversarial_dir = root / "outputs" / "adversarial_review"
@@ -187,6 +207,61 @@ def test_verify_real_artifacts_passes_complete_evidence_package(project_root, tm
 
     assert output.status == "PASS"
     assert output.report_path.exists()
+
+
+def test_verify_real_artifacts_allows_rejected_expert_pending_gate_detail(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+    register_hypotheses(config)
+    (root / "outputs" / "manifests").mkdir(parents=True, exist_ok=True)
+    (root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md").write_text("PASS\n", encoding="utf-8")
+    (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").write_text("manifest\n", encoding="utf-8")
+    reports_dir = root / "outputs" / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    (reports_dir / "PHASE0_VERDICT.md").write_text(
+        "\n".join(
+            [
+                "# Phase 0 Consolidated Verdict",
+                "",
+                "| Expert | Adversarial | FINAL |",
+                "| --- | --- | --- |",
+                "| trend_pullback | PENDING | FAIL |",
+                "| breakout_retest | PASS | PASS |",
+                "| range_mr | PENDING | FAIL |",
+                "",
+                "## Experts Approved for Phase 1",
+                "",
+                "- breakout_retest",
+                "",
+                "## Experts Rejected",
+                "",
+                "- trend_pullback",
+                "- range_mr",
+                "",
+                "## Experts Pending Manual Review",
+                "",
+                "None.",
+                "",
+                "## Invalid Pre-Registration",
+                "",
+                "None.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (reports_dir / f"{expert}_intrabar_ambiguity_report.md").write_text("ok\n", encoding="utf-8")
+    adversarial_dir = root / "outputs" / "adversarial_review"
+    adversarial_dir.mkdir(parents=True, exist_ok=True)
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (adversarial_dir / f"{expert}_adversarial_score.md").write_text("ok\n", encoding="utf-8")
+    generate_result_manifest(config)
+    generate_review_bundle(config)
+
+    output = verify_real_artifacts(config)
+
+    assert output.status == "PASS"
 
 
 def test_run_all_cli_synthetic(project_root, tmp_path, capsys):

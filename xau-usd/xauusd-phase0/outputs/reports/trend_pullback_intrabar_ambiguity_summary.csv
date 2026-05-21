@@ -1,0 +1,10 @@
+path,trade_count,ambiguous_exit_trades,same_timestamp_exit_trades,adverse_first_profit_factor
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_1_trend_pullback_capital_com_best_case_trades.csv,3280,10,0,0.803836
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_2_trend_pullback_capital_com_median_trades.csv,3280,10,0,0.803836
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_3_trend_pullback_capital_com_p95_trades.csv,3280,10,0,0.749313
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_4_trend_pullback_pepperstone_best_case_trades.csv,2873,14,0,0.936424
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_5_trend_pullback_pepperstone_median_trades.csv,2873,14,0,0.936424
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_6_trend_pullback_pepperstone_p95_trades.csv,2873,14,0,0.890875
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_7_trend_pullback_dukascopy_best_case_trades.csv,3039,10,0,1.00686
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_8_trend_pullback_dukascopy_median_trades.csv,3039,10,0,0.960589
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/trend_pullback/cell_9_trend_pullback_dukascopy_p95_trades.csv,3039,10,0,0.866534

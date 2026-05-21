@@ -1,0 +1,26 @@
+broker,symbol,timeframe,required_start_utc,required_end_utc,raw_dir,suggested_raw_filename
+capital_com,EURUSD,M5,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,EURUSD_M5_20160101_20250630_capital_com.csv
+capital_com,EURUSD,M15,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,EURUSD_M15_20160101_20250630_capital_com.csv
+capital_com,EURUSD,H1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,EURUSD_H1_20160101_20250630_capital_com.csv
+capital_com,EURUSD,H4,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,EURUSD_H4_20160101_20250630_capital_com.csv
+capital_com,EURUSD,D1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,EURUSD_D1_20160101_20250630_capital_com.csv
+capital_com,USDJPY,M5,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,USDJPY_M5_20160101_20250630_capital_com.csv
+capital_com,USDJPY,M15,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,USDJPY_M15_20160101_20250630_capital_com.csv
+capital_com,USDJPY,H1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,USDJPY_H1_20160101_20250630_capital_com.csv
+capital_com,USDJPY,H4,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,USDJPY_H4_20160101_20250630_capital_com.csv
+capital_com,USDJPY,D1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,USDJPY_D1_20160101_20250630_capital_com.csv
+capital_com,XAUUSD,M5,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,XAUUSD_M5_20160101_20250630_capital_com.csv
+capital_com,XAUUSD,M15,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,XAUUSD_M15_20160101_20250630_capital_com.csv
+capital_com,XAUUSD,H1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,XAUUSD_H1_20160101_20250630_capital_com.csv
+capital_com,XAUUSD,H4,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,XAUUSD_H4_20160101_20250630_capital_com.csv
+capital_com,XAUUSD,D1,2016-01-01T00:00:00Z,2025-06-30T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\capital_com,XAUUSD_D1_20160101_20250630_capital_com.csv
+dukascopy,XAUUSD,M5,2022-01-01T00:00:00Z,2024-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\dukascopy,XAUUSD_M5_20220101_20241231_dukascopy.csv
+dukascopy,XAUUSD,M15,2022-01-01T00:00:00Z,2024-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\dukascopy,XAUUSD_M15_20220101_20241231_dukascopy.csv
+dukascopy,XAUUSD,H1,2022-01-01T00:00:00Z,2024-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\dukascopy,XAUUSD_H1_20220101_20241231_dukascopy.csv
+dukascopy,XAUUSD,H4,2022-01-01T00:00:00Z,2024-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\dukascopy,XAUUSD_H4_20220101_20241231_dukascopy.csv
+dukascopy,XAUUSD,D1,2022-01-01T00:00:00Z,2024-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\dukascopy,XAUUSD_D1_20220101_20241231_dukascopy.csv
+pepperstone,XAUUSD,M5,2019-01-01T00:00:00Z,2021-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\pepperstone,XAUUSD_M5_20190101_20211231_pepperstone.csv
+pepperstone,XAUUSD,M15,2019-01-01T00:00:00Z,2021-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\pepperstone,XAUUSD_M15_20190101_20211231_pepperstone.csv
+pepperstone,XAUUSD,H1,2019-01-01T00:00:00Z,2021-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\pepperstone,XAUUSD_H1_20190101_20211231_pepperstone.csv
+pepperstone,XAUUSD,H4,2019-01-01T00:00:00Z,2021-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\pepperstone,XAUUSD_H4_20190101_20211231_pepperstone.csv
+pepperstone,XAUUSD,D1,2019-01-01T00:00:00Z,2021-12-31T23:59:59Z,C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\data\raw\pepperstone,XAUUSD_D1_20190101_20211231_pepperstone.csv

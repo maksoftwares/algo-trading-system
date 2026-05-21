@@ -39,20 +39,31 @@ Agent handoff and current gate status are maintained in `agent.md`.
 
 ## XAUUSD Phase 1
 
-Phase 1 has started as a dry-run-only shell. It does not include an approved expert module or broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
+Phase 1 dry-run is authorized for the reduced one-expert package. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
 
-`breakout_retest` remains `PENDING_MANUAL_REVIEW`, so expert logic stays blocked until Gate 9 is complete and the final Phase 0 verdict becomes `PASS`.
+`breakout_retest` is the only approved future expert. `trend_pullback` and `range_mr` remain rejected.
+
+## Current Phase Label
+
+The active project phase is:
+
+```text
+Phase 1 - Master EA dry-run shell
+```
+
+Phase 1 remains dry-run only. Live expert behavior stays out of scope until the dry-run shell has produced stable demo telemetry and a separate go/no-go review approves the next milestone.
 
 ## Latest Review Status
 
-As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all required broker/timeframe bar sets and completed an exploratory `phase0 run-all`.
+As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all required broker/timeframe bar sets and completed a fresh post-hypothesis-lock `phase0 run-all`.
 
 - Data readiness: `25/25` required timeframe sets ready.
 - Verification: `128 passed`; passive safety audit passed.
 - Current leading candidate: `breakout_retest`.
-- Audit status: previous real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time.
+- Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
-- Current verdict from exploratory evidence: `breakout_retest` passed automated matrix, decile, multisymbol, and hash gates, but remains `PENDING` until Gate 9 manual adversarial review is completed.
-- EA coding status: blocked until completed hypotheses are re-registered, Phase 0 is rerun, Gate 9 passes, `verify-real-artifacts` passes, and the final verdict becomes `PASS`.
+- Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
+- Phase 0 closure: `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`; `verify-real-artifacts` returns `PASS`.
+- EA coding status: Phase 1 dry-run shell is authorized for `breakout_retest` as the only approved future expert. Live execution remains blocked.
 
 Generated market data, reports, manifests, and snapshots are intentionally ignored by Git because they can be large and environment-specific. The current local handoff in `agent.md` records the latest artifact paths and regeneration commands.

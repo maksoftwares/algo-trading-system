@@ -137,15 +137,39 @@ def _check_verdict_state(config: ProjectConfig) -> ArtifactCheck:
             "FAIL",
             "Verdict explicitly marks pre-registration invalid.",
         )
-    if "PENDING" in text:
+    approved = _section_body(text, "## Experts Approved for Phase 1")
+    pending_manual = _section_body(text, "## Experts Pending Manual Review")
+    invalid_registration = _section_body(text, "## Invalid Pre-Registration")
+    if "PENDING_MANUAL_REVIEW" in text:
         return ArtifactCheck(
             "final_verdict_state",
             "FAIL",
-            "Verdict still contains PENDING states; Phase 1 EA coding remains blocked.",
+            "Verdict still contains a final pending-manual-review state; Phase 1 EA coding remains blocked.",
         )
-    if "PASS" in text:
-        return ArtifactCheck("final_verdict_state", "PASS", "Verdict contains final PASS evidence.")
-    return ArtifactCheck("final_verdict_state", "FAIL", "Verdict does not contain a final PASS state.")
+    if invalid_registration and invalid_registration.strip() != "None.":
+        return ArtifactCheck(
+            "final_verdict_state",
+            "FAIL",
+            "Verdict lists invalid pre-registration entries.",
+        )
+    if pending_manual and pending_manual.strip() != "None.":
+        return ArtifactCheck(
+            "final_verdict_state",
+            "FAIL",
+            "Verdict lists experts still pending manual review.",
+        )
+    if "- " in approved:
+        return ArtifactCheck("final_verdict_state", "PASS", "Verdict contains at least one final approved expert.")
+    return ArtifactCheck("final_verdict_state", "FAIL", "Verdict does not list an approved Phase 1 expert.")
+
+
+def _section_body(text: str, heading: str) -> str:
+    if heading not in text:
+        return ""
+    after_heading = text.split(heading, 1)[1]
+    if "\n## " in after_heading:
+        after_heading = after_heading.split("\n## ", 1)[0]
+    return after_heading.strip()
 
 
 def _check_intrabar_reports(config: ProjectConfig) -> ArtifactCheck:

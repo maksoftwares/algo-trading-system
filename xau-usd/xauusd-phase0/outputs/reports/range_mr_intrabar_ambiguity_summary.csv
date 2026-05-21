@@ -1,0 +1,10 @@
+path,trade_count,ambiguous_exit_trades,same_timestamp_exit_trades,adverse_first_profit_factor
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_1_range_mr_capital_com_best_case_trades.csv,3,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_2_range_mr_capital_com_median_trades.csv,3,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_3_range_mr_capital_com_p95_trades.csv,3,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_4_range_mr_pepperstone_best_case_trades.csv,5,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_5_range_mr_pepperstone_median_trades.csv,5,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_6_range_mr_pepperstone_p95_trades.csv,5,0,0,0
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_7_range_mr_dukascopy_best_case_trades.csv,0,0,0,n/a
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_8_range_mr_dukascopy_median_trades.csv,0,0,0,n/a
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/range_mr/cell_9_range_mr_dukascopy_p95_trades.csv,0,0,0,n/a

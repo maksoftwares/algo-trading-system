@@ -6,18 +6,50 @@
 #include <Phase1/Phase1Logger.mqh>
 #include <Phase1/Phase1Risk.mqh>
 #include <Phase1/Phase1Router.mqh>
+#include <Phase1/Phase1MarketData.mqh>
+#include <Phase1/Phase1Session.mqh>
+#include <Phase1/Phase1Execution.mqh>
+#include <Phase1/Phase1News.mqh>
+#include <Phase1/Phase1Dashboard.mqh>
+#include <Phase1/Phase1FeatureEngine.mqh>
+#include <Phase1/Phase1ServerTime.mqh>
+#include <Phase1/Phase1Magic.mqh>
+#include <Phase1/Phase1Lifecycle.mqh>
+#include <Phase1/Phase1BreakoutRetest.mqh>
 
-input string InpRunId = "phase1-dry-run-v0.1";
+input string InpRunId = "phase1-dry-run-v0.5";
 input bool InpDryRunOnly = true;
 input string InpTargetSymbol = "XAUUSD";
 input double InpMaxSpreadPoints = 80.0;
 input double InpMaxRiskPct = 0.25;
-input bool InpAllowBreakoutRetest = false;
-input string InpLogFileName = "phase1_dry_run_log.csv";
+input double InpDailyLossLimitPct = 2.0;
+input double InpWeeklyLossLimitPct = 5.0;
+input double InpMonthlyLossLimitPct = 10.0;
+input double InpSimulatedDailyPnlPct = 0.0;
+input double InpSimulatedWeeklyPnlPct = 0.0;
+input double InpSimulatedMonthlyPnlPct = 0.0;
+input bool InpManualRiskLock = false;
+input bool InpObserveBreakoutRetest = true;
+input bool InpManualNewsLockdown = false;
+input int InpExpectedLocalUtcOffsetHours = 4;
+input int InpMaxClockDriftSeconds = 300;
+input string InpDecisionLogFileName = "decision_log.csv";
+input string InpStartupLogFileName = "startup_log.csv";
+input string InpShutdownLogFileName = "shutdown_log.csv";
 
 CPhase1CsvLogger g_logger;
 CPhase1RiskGate g_risk_gate;
 CPhase1Router g_router;
+CPhase1MarketDataEngine g_market_data;
+CPhase1SessionEngine g_session_engine;
+CPhase1ExecutionGuard g_execution_guard;
+CPhase1NewsGuard g_news_guard;
+CPhase1Dashboard g_dashboard;
+CPhase1FeatureEngine g_feature_engine;
+CPhase1ServerTimeValidator g_server_time_validator;
+CPhase1MagicNumberAllocator g_magic_allocator;
+CPhase1ExpertLifecycleManager g_lifecycle_manager;
+CPhase1BreakoutRetestObserver g_breakout_retest_observer;
 datetime g_last_m5_bar_time = 0;
 
 int OnInit()
@@ -33,9 +65,51 @@ int OnInit()
       Print("Phase1DryRunShell attached to ", _Symbol, " but target is ", InpTargetSymbol);
    }
 
-   g_logger.Configure(InpLogFileName);
-   g_risk_gate.Configure(InpMaxSpreadPoints, InpMaxRiskPct);
-   g_router.Configure(InpAllowBreakoutRetest);
+   g_logger.Configure(InpDecisionLogFileName, InpStartupLogFileName, InpShutdownLogFileName);
+   g_risk_gate.Configure(
+      InpMaxSpreadPoints,
+      InpMaxRiskPct,
+      InpDailyLossLimitPct,
+      InpWeeklyLossLimitPct,
+      InpMonthlyLossLimitPct,
+      InpSimulatedDailyPnlPct,
+      InpSimulatedWeeklyPnlPct,
+      InpSimulatedMonthlyPnlPct,
+      InpManualRiskLock
+   );
+   if(!g_magic_allocator.ValidateNamespace())
+   {
+      Print("Phase1DryRunShell refused to start because magic-number namespace is invalid.");
+      return INIT_FAILED;
+   }
+
+   g_router.Configure(InpObserveBreakoutRetest, g_magic_allocator.BreakoutRetestMagic());
+   g_execution_guard.Configure(InpMaxSpreadPoints);
+   g_news_guard.Configure(InpManualNewsLockdown);
+   g_server_time_validator.Configure(InpExpectedLocalUtcOffsetHours, InpMaxClockDriftSeconds);
+   g_lifecycle_manager.Configure(InpObserveBreakoutRetest);
+   g_breakout_retest_observer.Configure();
+   Phase1MarketSnapshot startup_snapshot;
+   Phase1ServerTimeStatus startup_time_status;
+   if(g_market_data.BuildSnapshot(_Symbol, startup_snapshot))
+      g_server_time_validator.Validate(startup_snapshot, startup_time_status);
+   else
+      Phase1ResetServerTimeStatus(startup_time_status);
+   g_logger.WriteStartup(
+      InpRunId,
+      _Symbol,
+      InpDryRunOnly,
+      InpObserveBreakoutRetest,
+      InpMaxSpreadPoints,
+      InpMaxRiskPct,
+      InpDailyLossLimitPct,
+      InpWeeklyLossLimitPct,
+      InpMonthlyLossLimitPct,
+      InpManualRiskLock,
+      g_magic_allocator.ValidateNamespace(),
+      startup_time_status
+   );
+   EventSetTimer(1);
 
    Print("Phase1DryRunShell initialized: ", InpRunId);
    return INIT_SUCCEEDED;
@@ -43,52 +117,80 @@ int OnInit()
 
 void OnDeinit(const int reason)
 {
+   EventKillTimer();
+   g_dashboard.Clear();
+   g_logger.WriteShutdown(InpRunId, _Symbol, reason, g_last_m5_bar_time);
    Print("Phase1DryRunShell stopped. reason=", reason);
 }
 
 void OnTick()
 {
+}
+
+void OnTimer()
+{
    if(_Symbol != InpTargetSymbol)
       return;
 
-   datetime current_bar_time = iTime(_Symbol, PERIOD_M5, 0);
-   if(current_bar_time <= 0)
+   Phase1MarketSnapshot snapshot;
+   if(!g_market_data.BuildSnapshot(_Symbol, snapshot))
       return;
 
-   if(current_bar_time == g_last_m5_bar_time)
+   if(snapshot.m5_bar_time == g_last_m5_bar_time)
       return;
-   g_last_m5_bar_time = current_bar_time;
+   g_last_m5_bar_time = snapshot.m5_bar_time;
 
-   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
-   double spread_points = 0.0;
-   if(point > 0.0)
-      spread_points = (ask - bid) / point;
-
-   bool spread_ok = g_risk_gate.SpreadAllowed(spread_points);
+   g_execution_guard.RecordSpread(snapshot.spread_points);
 
    Phase1Signal signal;
    g_router.SelectSignal(signal);
 
-   if(!g_risk_gate.RiskAllowed(InpMaxRiskPct))
-   {
-      signal.blocked_reason = "risk_input_outside_phase1_limit";
-   }
-   else if(!spread_ok)
-   {
-      signal.blocked_reason = "spread_above_phase1_limit";
-   }
-
-   g_logger.WriteHeartbeat(
-      InpRunId,
-      "DRY_RUN",
-      _Symbol,
-      current_bar_time,
-      bid,
-      ask,
-      spread_points,
-      spread_ok,
-      signal
+   Phase1Decision decision;
+   Phase1ResetDecision(decision);
+   decision.run_id = InpRunId;
+   decision.lifecycle_state = "DRY_RUN";
+   decision.market = snapshot;
+   decision.session_state = g_session_engine.Detect(snapshot.utc_time);
+   decision.news_state = g_news_guard.Evaluate(snapshot.utc_time);
+   decision.execution_state = g_execution_guard.Evaluate(snapshot);
+   decision.risk_state = g_risk_gate.Evaluate(InpMaxRiskPct, decision.risk_details);
+   g_feature_engine.Build(snapshot.symbol_name, snapshot.point, decision.features);
+   g_server_time_validator.Validate(snapshot, decision.server_time);
+   g_breakout_retest_observer.Evaluate(snapshot.symbol_name, snapshot.point, decision.breakout_retest);
+   decision.regime_state = g_router.ClassifyRegime(
+      snapshot,
+      decision.session_state,
+      decision.execution_state,
+      decision.news_state
    );
+   decision.signal = signal;
+   if(decision.breakout_retest.would_signal)
+      decision.signal.reason_code = decision.breakout_retest.reason_code;
+   decision.allowed_expert = "none";
+   decision.would_have_allowed_experts = g_router.WouldHaveAllowedExperts();
+   decision.expert_lifecycle_state = g_lifecycle_manager.BreakoutRetestStateText();
+   decision.magic_namespace_ok = g_magic_allocator.ValidateNamespace();
+   decision.trade_permission = false;
+   decision.dry_run = true;
+   decision.block_reason = Phase1BlockReason(decision, signal);
+
+   g_logger.WriteDecision(decision);
+   g_dashboard.Render(decision);
+}
+
+string Phase1BlockReason(const Phase1Decision &decision, const Phase1Signal &signal)
+{
+   if(!decision.magic_namespace_ok)
+      return "magic_namespace_invalid";
+   if(!decision.server_time.clock_ok)
+      return decision.server_time.status_text;
+   if(decision.news_state != PHASE1_NEWS_NO_RISK)
+      return Phase1NewsText(decision.news_state);
+   if(decision.execution_state != PHASE1_EXECUTION_OK)
+      return Phase1ExecutionText(decision.execution_state);
+   if(decision.risk_state != PHASE1_RISK_NORMAL)
+      return Phase1RiskText(decision.risk_state);
+   if(signal.blocked_reason != "")
+      return signal.blocked_reason;
+   return "phase1_dry_run_only";
 }

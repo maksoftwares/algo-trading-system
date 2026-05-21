@@ -1,0 +1,10 @@
+{
+  "generated_at_utc": "2026-05-21T12:10:35+00:00",
+  "true_holdout_period_start": "2025-07-01T00:00:00+00:00",
+  "true_holdout_period_end": "2025-12-31T23:59:59+00:00",
+  "true_holdout_unlocked": false,
+  "true_holdout_unlock_file": "docs/FINAL_HOLDOUT_UNLOCK_APPROVAL.md",
+  "true_holdout_unlock_file_present": false,
+  "true_holdout_overlap_detected": true,
+  "normal_workflows_policy": "blocked_or_trimmed_unless_unlock_file_and_cli_flag_are_present"
+}

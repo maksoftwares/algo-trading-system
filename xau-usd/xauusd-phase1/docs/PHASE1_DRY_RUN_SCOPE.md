@@ -1,10 +1,10 @@
 # Phase 1 Dry-Run Scope
 
-Phase 1 builds the shell that will eventually host approved experts. It does not approve or implement a trading expert.
+This is the active Phase 1 dry-run scope after Phase 0 closure.
 
 ## Current Boundary
 
-`breakout_retest` has strong automated Phase 0 evidence but remains `PENDING_MANUAL_REVIEW`. Until Gate 9 is scored and the consolidated verdict becomes `PASS`, the Phase 1 shell must stay infrastructure-only.
+`breakout_retest` has a final Phase 0 PASS and is the only approved future expert. The Phase 1 shell remains dry-run only.
 
 ## Allowed
 
@@ -12,13 +12,26 @@ Phase 1 builds the shell that will eventually host approved experts. It does not
 - magic-number allocation plan
 - one-active-expert router contract
 - centralized risk gate contract
+- simulated daily/weekly/monthly risk caps
 - spread and session telemetry
+- server-time validation
+- magic-number namespace checks
+- expert lifecycle state
+- feature telemetry
+- breakout_retest dry-run signal-state observation
 - dry-run CSV logging
+- startup and shutdown CSV logging
+- restart-resilience log verification
+- review bundle generation
+- review index generation
+- runtime health and gap reporting
+- soak-history ledger generation
+- soak-history report generation
 - static safety tests
 
 ## Blocked
 
-- expert signal implementation
+- live expert signal implementation
 - broker-side execution
 - position management
 - strategy parameter tuning
@@ -27,10 +40,12 @@ Phase 1 builds the shell that will eventually host approved experts. It does not
 
 ## Phase 1 Exit Criteria
 
-Phase 1 can advance when the dry-run shell has run cleanly on demo for five trading days and the logs prove:
+Phase 1 can advance beyond dry-run when the shell has run cleanly on demo for five trading days and the logs prove:
 
 - dry-run mode could not be disabled from inputs
 - one heartbeat row was written per M5 bar
 - spread gate state was logged
 - lifecycle state was logged
 - no expert was active without explicit approval evidence
+- soak-history rows show clean recurring verification over the full period
+- runtime-health reports show fresh rows, no exact duplicate rows, and no unexpected M5 gaps

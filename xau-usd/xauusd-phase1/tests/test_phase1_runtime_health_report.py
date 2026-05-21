@@ -1,0 +1,179 @@
+from __future__ import annotations
+
+import csv
+import importlib.util
+import sys
+from datetime import datetime
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_runtime_health_report_passes_clean_runtime(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    _write_decision_log(files_dir / "decision_log.csv")
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 21, 12, 12),
+    )
+
+    report = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "PASS"
+    assert output.rows_analyzed == 3
+    assert "Phase 1 Runtime Health Report" in report
+    assert "Larger-than-M5 gaps: 0" in report
+    assert any(check.name == "permission_lock" and check.status == "PASS" for check in output.checks)
+
+
+def test_runtime_health_report_fails_when_permission_not_locked(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_decision_log(files_dir / "decision_log.csv", force_permission="true")
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 21, 12, 12),
+    )
+
+    assert output.status == "FAIL"
+    assert any(check.name == "permission_lock" and check.status == "FAIL" for check in output.checks)
+
+
+def test_runtime_health_report_warns_on_bar_gap(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_decision_log(files_dir / "decision_log.csv", minutes=(0, 5, 20))
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 21, 12, 22),
+    )
+
+    report = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "WARN"
+    assert "Larger-than-M5 gaps: 1" in report
+    assert any(check.name == "unique_bar_gaps" and check.status == "WARN" for check in output.checks)
+
+
+def _load_module():
+    scripts_dir = ROOT / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    path = scripts_dir / "generate_phase1_runtime_health_report.py"
+    spec = importlib.util.spec_from_file_location("generate_phase1_runtime_health_report", path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["generate_phase1_runtime_health_report"] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _write_startup_log(path: Path) -> None:
+    fieldnames = [
+        "timestamp_broker",
+        "timestamp_utc",
+        "timestamp_local",
+        "run_id",
+        "symbol",
+        "dry_run_only",
+        "magic_namespace_ok",
+        "server_time_status",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(
+            {
+                "timestamp_broker": "2026.05.21 12:00:00",
+                "timestamp_utc": "2026.05.21 08:00:00",
+                "timestamp_local": "2026.05.21 12:00:00",
+                "run_id": "phase1-dry-run-v0.5",
+                "symbol": "XAUUSD",
+                "dry_run_only": "true",
+                "magic_namespace_ok": "true",
+                "server_time_status": "CLOCK_OK",
+            }
+        )
+
+
+def _write_shutdown_log(path: Path) -> None:
+    fieldnames = [
+        "timestamp_broker",
+        "timestamp_utc",
+        "timestamp_local",
+        "run_id",
+        "symbol",
+        "shutdown_reason",
+        "last_m5_bar_time",
+        "last_decision_write_time",
+        "lifecycle_state",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(
+            {
+                "timestamp_broker": "2026.05.21 12:15:00",
+                "timestamp_utc": "2026.05.21 08:15:00",
+                "timestamp_local": "2026.05.21 12:15:00",
+                "run_id": "phase1-dry-run-v0.5",
+                "symbol": "XAUUSD",
+                "shutdown_reason": "9",
+                "last_m5_bar_time": "2026.05.21 12:10:00",
+                "last_decision_write_time": "2026.05.21 12:10:01",
+                "lifecycle_state": "DRY_RUN",
+            }
+        )
+
+
+def _write_decision_log(
+    path: Path,
+    force_permission: str = "false",
+    minutes: tuple[int, ...] = (0, 5, 10),
+) -> None:
+    fieldnames = [
+        "timestamp_broker",
+        "timestamp_utc",
+        "timestamp_local",
+        "run_id",
+        "lifecycle_state",
+        "symbol",
+        "bar_time",
+        "server_time_status",
+        "br_stage",
+        "dry_run",
+        "trade_permission",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for index, minute in enumerate(minutes):
+            writer.writerow(
+                {
+                    "timestamp_broker": f"2026.05.21 12:{minute:02d}:00",
+                    "timestamp_utc": f"2026.05.21 08:{minute:02d}:00",
+                    "timestamp_local": f"2026.05.21 12:{minute:02d}:00",
+                    "run_id": "phase1-dry-run-v0.5",
+                    "lifecycle_state": "DRY_RUN",
+                    "symbol": "XAUUSD",
+                    "bar_time": f"2026.05.21 12:{minute:02d}:00",
+                    "server_time_status": "CLOCK_OK",
+                    "br_stage": "WAIT_LEVEL_BREAK_RETEST",
+                    "dry_run": "true",
+                    "trade_permission": force_permission if index == 0 else "false",
+                }
+            )
