@@ -12,7 +12,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | startup_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` (2817 bytes). |
 | shutdown_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv` (2066 bytes). |
 | decision_rows | PASS | Decision rows: 110. |
-| latest_freshness | PASS | Latest row age is 0.9 minute(s); limit 15. |
+| latest_freshness | PASS | Latest row age is 3.4 minute(s); limit 20. |
 | dry_run_lock | PASS | All decision rows stayed dry-run. |
 | permission_lock | PASS | All decision rows kept permission false. |
 | server_time_status | PASS | All rows report CLOCK_OK. |

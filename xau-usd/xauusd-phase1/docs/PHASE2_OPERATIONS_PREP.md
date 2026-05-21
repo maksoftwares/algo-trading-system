@@ -65,6 +65,14 @@ Prepared local check:
 
 This script is intentionally scheduler-friendly: it exits nonzero on health failure and can write `outputs/reports/PHASE1_EXTERNAL_HEALTH.json`.
 
+Prepared periodic command:
+
+```powershell
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\run_phase1_periodic_checks.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log
+```
+
+This wraps status summary, soak history, acceptance, review index, Phase 2 readiness, and external health into one scheduler entry point.
+
 ## Disaster Recovery Runbook
 
 Recovery target:

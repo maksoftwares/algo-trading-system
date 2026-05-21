@@ -1,12 +1,12 @@
 {
-  "created_at_utc": "2026-05-21T23:25:54.248720+00:00",
+  "created_at_utc": "2026-05-21T23:28:25.862512+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
-    "acceptance_report": "outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
-    "log_report": "outputs\\reports\\PHASE1_DRY_RUN_LOG_REPORT.md",
+    "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
+    "log_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_DRY_RUN_LOG_REPORT.md",
     "runtime_health_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_RUNTIME_HEALTH_REPORT.md",
-    "soak_report": "outputs\\reports\\PHASE1_SOAK_DRIFT_REPORT.md",
-    "would_signal_report": "outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
+    "soak_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_DRIFT_REPORT.md",
+    "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
     "decision_rows": 110,
@@ -39,8 +39,8 @@
   },
   "would_signal": {
     "clusters": 6,
-    "csv_path": "outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
-    "report_path": "outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
+    "csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
+    "report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
     "rows": 6
   }
 }
