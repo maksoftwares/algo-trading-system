@@ -13,6 +13,7 @@ from phase0.config import ConfigError, load_project_config
 from phase0.hashing import register_hypotheses
 from phase0.manifests import generate_result_manifest
 from phase0.mt5_presets import generate_mt5_bar_export_presets
+from phase0.review_bundle import generate_review_bundle
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
 from phase0.workflow import run_all_phase0
@@ -86,6 +87,29 @@ def test_generate_result_manifest_hashes_generated_outputs(project_root, tmp_pat
     assert "outputs/manifests/PHASE0_RESULT_MANIFEST.csv" not in set(rows["path"])
 
 
+def test_generate_review_bundle_includes_review_evidence(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+    register_hypotheses(config)
+    report_path = root / "outputs" / "reports" / "PHASE0_VERDICT.md"
+    report_path.parent.mkdir(parents=True)
+    report_path.write_text("# Verdict\n\nPending review.\n", encoding="utf-8")
+    readiness_path = root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md"
+    readiness_path.parent.mkdir(parents=True)
+    readiness_path.write_text("# Readiness\n\nStatus: BLOCKED\n", encoding="utf-8")
+
+    output = generate_review_bundle(config)
+
+    assert output.bundle_path.exists()
+    with zipfile.ZipFile(output.bundle_path) as archive:
+        names = set(archive.namelist())
+    assert "review_bundle_manifest.json" in names
+    assert "docs/hypothesis_breakout_retest.md" in names
+    assert "outputs/reports/PHASE0_VERDICT.md" in names
+    assert "outputs/manifests/PHASE0_DATA_READINESS.md" in names
+    assert "outputs/hashes/hypothesis_hash_manifest.csv" in names
+
+
 def test_run_all_cli_synthetic(project_root, tmp_path, capsys):
     root = _copy_project_shell(project_root, tmp_path)
     config = load_project_config(root)
@@ -102,6 +126,7 @@ def test_run_all_cli_synthetic(project_root, tmp_path, capsys):
 
 def test_run_all_real_data_preflight_writes_readiness_artifacts(project_root, tmp_path):
     root = _copy_project_shell(project_root, tmp_path)
+    _write_complete_hypotheses(root)
     config = load_project_config(root)
     register_hypotheses(config)
 
@@ -138,6 +163,50 @@ def _write_sample_spread_log(root: Path) -> None:
         _spread_row("2026-01-05 22:00:00", 60.0, "ROLLOVER", "true"),
     ]
     pd.DataFrame(rows).to_csv(log_dir / "spread_log_123_demo_XAUUSD_20260105.csv", index=False)
+
+
+def _write_complete_hypotheses(root: Path) -> None:
+    for filename, expert_name in (
+        ("hypothesis_trend_pullback.md", "Trend Pullback"),
+        ("hypothesis_breakout_retest.md", "Breakout-Retest"),
+        ("hypothesis_range_mr.md", "Range Mean-Reversion"),
+    ):
+        (root / "docs" / filename).write_text(
+            f"""# Hypothesis: {expert_name} Expert
+
+Expert name: {expert_name}
+Hypothesis date: 2026-05-21
+Hypothesis version: v1.0
+Author / owner: Phase 0 research desk
+
+## Mechanical Definition
+
+The expert uses a fixed mechanical strategy implementation with completed bars only.
+
+## Expected Behavior
+
+Expected trade count per year: 200 +/- 20%
+
+Expected cost-adjusted PF: 1.30 +/- 0.3
+
+Expected losing-month percentage: 35% +/- 10%
+
+Expected worst single month: -8% equity
+
+Expected max consecutive zero months: 1
+
+Expected R-multiple distribution: median near -1R with positive right-tail winners.
+
+## Why This Hypothesis Should Exist
+
+The setup is expected to capture recurring behavior under adverse-first assumptions.
+
+## What Would Falsify It
+
+The hypothesis is falsified by failed matrix, decile, multisymbol, or adversarial gates.
+""",
+            encoding="utf-8",
+        )
 
 
 def _sha256(path: Path) -> str:

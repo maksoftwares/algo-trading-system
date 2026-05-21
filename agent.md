@@ -33,6 +33,8 @@ Last updated: 2026-05-21
 - Latest verdict: no expert has a full final PASS yet.
   - `breakout_retest` passed automated 9-cell, decile, multisymbol, and hash gates, but remains `PENDING` on manual adversarial review.
   - `trend_pullback` and `range_mr` are rejected by the current Phase 0 verdict.
+- Audit correction: the previous real-data run is exploratory evidence only because the registered hypothesis files still contained placeholder text when the run was produced.
+- Do not treat automated PASS as final PASS until hypothesis completeness, fresh hash registration, rerun evidence, manual adversarial review, and review bundle are complete.
 - Latest snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_092422.zip`.
 - Latest result manifest: `xau-usd\xauusd-phase0\outputs\manifests\PHASE0_RESULT_MANIFEST.csv`.
 - Verification after code changes: `119 passed`; safety audit OK.
@@ -62,6 +64,8 @@ Last updated: 2026-05-21
 cd xau-usd\xauusd-phase0
 .\.venv\Scripts\phase0.exe generate-data-requirements
 .\.venv\Scripts\phase0.exe generate-mt5-bar-presets
+.\.venv\Scripts\phase0.exe validate-hypotheses-complete
+.\.venv\Scripts\phase0.exe hash-hypotheses --register --force
 .\.venv\Scripts\phase0.exe import-required-bars --fail-on-missing
 .\.venv\Scripts\phase0.exe check-data-availability
 .\.venv\Scripts\phase0.exe run-all
@@ -69,14 +73,19 @@ cd xau-usd\xauusd-phase0
 .\.venv\Scripts\phase0.exe audit-safety
 .\.venv\Scripts\python.exe -m pytest
 .\.venv\Scripts\phase0.exe generate-snapshot
+.\.venv\Scripts\phase0.exe score-adversarial-review --expert breakout_retest
+.\.venv\Scripts\phase0.exe generate-review-bundle
 ```
 
 ## Remaining Gates Before Live EA Coding
 
-1. Complete Gate 9 manual adversarial review for `breakout_retest`.
-2. If Gate 9 passes, freeze the Phase 1 EA implementation spec for `breakout_retest`.
-3. Only after the final verdict becomes PASS should live EA coding begin.
+1. Complete the hypothesis files and run `validate-hypotheses-complete`.
+2. Re-register hypothesis hashes before any new real-data run.
+3. Rerun Phase 0 real-data workflow; old real-data outputs stay exploratory.
+4. Complete and score Gate 9 manual adversarial review for `breakout_retest`.
+5. Generate the review bundle for third-party inspection.
+6. Only after the final verdict becomes PASS should Phase 1 dry-run EA work begin.
 
 ## Current Recommendation
 
-Do not start EA execution code yet. Review `outputs\adversarial_review\breakout_retest_losing_trades_review.csv`, mark logic-gap outcomes, rerun verdict generation, and proceed to Phase 1 only if `breakout_retest` receives a full PASS.
+Do not start EA execution code yet. First close the pre-registration audit gap, rerun Phase 0 with completed hypotheses, review `outputs\adversarial_review\breakout_retest_losing_trades_review.csv`, mark logic-gap outcomes, score the review, regenerate the verdict, and proceed only if `breakout_retest` receives a full PASS.

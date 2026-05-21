@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import re
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -16,6 +17,31 @@ HASH_MANIFEST_COLUMNS = (
     "registered_at_utc",
     "file_size_bytes",
     "git_commit_if_available",
+)
+
+REQUIRED_HYPOTHESIS_SECTIONS = (
+    "Mechanical Definition",
+    "Expected Behavior",
+    "Why This Hypothesis Should Exist",
+    "What Would Falsify It",
+)
+REQUIRED_HYPOTHESIS_FIELDS = (
+    "Hypothesis date:",
+    "Hypothesis version:",
+    "Author / owner:",
+    "Expected trade count per year:",
+    "Expected cost-adjusted PF:",
+    "Expected losing-month percentage:",
+    "Expected worst single month:",
+    "Expected max consecutive zero months:",
+    "Expected R-multiple distribution:",
+)
+PLACEHOLDER_PATTERNS = (
+    re.compile(r"\bTBD\b", re.IGNORECASE),
+    re.compile(r"\bTODO\b", re.IGNORECASE),
+    re.compile(r"\bPLACEHOLDER\b", re.IGNORECASE),
+    re.compile(r"before any result-producing backtest", re.IGNORECASE),
+    re.compile(r"before hash registration", re.IGNORECASE),
 )
 
 
@@ -118,6 +144,20 @@ def validate_hypotheses(config: ProjectConfig, raise_on_mismatch: bool = True) -
     return not errors
 
 
+def validate_hypotheses_complete(config: ProjectConfig, raise_on_error: bool = True) -> bool:
+    errors: list[str] = []
+    for expert, hypothesis_path in iter_enabled_hypotheses(config):
+        errors.extend(_hypothesis_completeness_errors(expert, hypothesis_path))
+
+    if errors and raise_on_error:
+        raise HashingError(
+            "Hypothesis pre-registration is incomplete. "
+            "Real-data Phase 0 runs are invalid until every enabled hypothesis is fully specified:\n"
+            + "\n".join(errors)
+        )
+    return not errors
+
+
 def load_hash_manifest(path: str | Path) -> list[HypothesisHash]:
     resolved = Path(path)
     if not resolved.exists():
@@ -143,6 +183,63 @@ def load_hash_manifest(path: str | Path) -> list[HypothesisHash]:
             )
             for row in reader
         ]
+
+
+def _hypothesis_completeness_errors(expert: str, path: Path) -> list[str]:
+    if not path.exists():
+        return [f"{expert}: hypothesis file not found: {path}"]
+    text = path.read_text(encoding="utf-8")
+    errors: list[str] = []
+
+    for pattern in PLACEHOLDER_PATTERNS:
+        if pattern.search(text):
+            errors.append(f"{expert}: placeholder text remains in {path.name}: {pattern.pattern}")
+
+    for section in REQUIRED_HYPOTHESIS_SECTIONS:
+        if f"## {section}" not in text:
+            errors.append(f"{expert}: missing section '## {section}' in {path.name}")
+
+    for field in REQUIRED_HYPOTHESIS_FIELDS:
+        value = _field_value(text, field)
+        if value is None:
+            errors.append(f"{expert}: missing required field '{field}' in {path.name}")
+        elif not value.strip():
+            errors.append(f"{expert}: required field '{field}' is empty in {path.name}")
+
+    for section in REQUIRED_HYPOTHESIS_SECTIONS:
+        body = _section_body(text, section)
+        if body is None:
+            continue
+        meaningful_lines = [
+            line.strip()
+            for line in body.splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
+        if not meaningful_lines:
+            errors.append(f"{expert}: section '## {section}' has no content in {path.name}")
+
+    return errors
+
+
+def _field_value(text: str, field: str) -> str | None:
+    for line in text.splitlines():
+        if line.strip().lower().startswith(field.lower()):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
+def _section_body(text: str, section: str) -> str | None:
+    marker = f"## {section}"
+    start = text.find(marker)
+    if start < 0:
+        return None
+    body_start = text.find("\n", start)
+    if body_start < 0:
+        return ""
+    next_section = text.find("\n## ", body_start + 1)
+    if next_section < 0:
+        return text[body_start:].strip()
+    return text[body_start:next_section].strip()
 
 
 def current_git_commit(root: Path) -> str:

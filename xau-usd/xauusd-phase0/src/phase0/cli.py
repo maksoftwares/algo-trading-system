@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from phase0.adversarial import create_adversarial_packets
+from phase0.adversarial import create_adversarial_packets, score_adversarial_review
 from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
 from phase0.config import ConfigError, build_cell_configs, load_project_config
@@ -16,7 +16,13 @@ from phase0.data_availability import (
 )
 from phase0.data_import import import_required_bar_exports
 from phase0.deciles import run_decile_tests
-from phase0.hashing import HashingError, hash_manifest_path, register_hypotheses, validate_hypotheses
+from phase0.hashing import (
+    HashingError,
+    hash_manifest_path,
+    register_hypotheses,
+    validate_hypotheses,
+    validate_hypotheses_complete,
+)
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.multisymbol import run_multisymbol_checks
@@ -29,6 +35,7 @@ from phase0.normalizer import (
     validate_raw_files_without_writing,
 )
 from phase0.reports import generate_all_reports
+from phase0.review_bundle import generate_review_bundle
 from phase0.safety import audit_no_live_trading_calls
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
@@ -73,6 +80,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Overwrite the manifest. Only use before any result-producing run.",
     )
     hash_hypotheses.set_defaults(func=_cmd_hash_hypotheses)
+
+    validate_hypotheses_cmd = subparsers.add_parser(
+        "validate-hypotheses-complete",
+        help="Fail if enabled hypothesis files still contain placeholders or missing fields.",
+    )
+    validate_hypotheses_cmd.set_defaults(func=_cmd_validate_hypotheses_complete)
 
     validate_data = subparsers.add_parser("validate-data", help="Validate raw or processed data.")
     _add_broker_symbol_args(validate_data)
@@ -192,6 +205,13 @@ def build_parser() -> argparse.ArgumentParser:
     adversarial.add_argument("--expert", choices=(*EXPERTS, "all"), required=True)
     adversarial.set_defaults(func=_cmd_create_adversarial_packets)
 
+    score_adversarial = subparsers.add_parser(
+        "score-adversarial-review",
+        help="Score manually annotated adversarial review packets.",
+    )
+    score_adversarial.add_argument("--expert", choices=(*EXPERTS, "all"), required=True)
+    score_adversarial.set_defaults(func=_cmd_score_adversarial_review)
+
     aggregate = subparsers.add_parser("aggregate-results", help="Aggregate Phase 0 outputs.")
     aggregate.add_argument("--expert", choices=(*EXPERTS, "all"), required=True)
     aggregate.set_defaults(func=_cmd_aggregate_results)
@@ -208,6 +228,12 @@ def build_parser() -> argparse.ArgumentParser:
     generate_snapshot = subparsers.add_parser("generate-snapshot", help="Generate audit snapshot bundle.")
     generate_snapshot.add_argument("--include-raw-data", action="store_true")
     generate_snapshot.set_defaults(func=_cmd_generate_snapshot)
+
+    review_bundle = subparsers.add_parser(
+        "generate-review-bundle",
+        help="Create a small evidence bundle for third-party Phase 0 review.",
+    )
+    review_bundle.set_defaults(func=_cmd_generate_review_bundle)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -252,6 +278,13 @@ def _cmd_hash_hypotheses(args: argparse.Namespace) -> int:
 
     validate_hypotheses(config)
     print(f"Hypothesis hashes OK: {hash_manifest_path(config)}")
+    return 0
+
+
+def _cmd_validate_hypotheses_complete(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    validate_hypotheses_complete(config)
+    print("Hypothesis completeness OK: all enabled hypothesis files are fully specified.")
     return 0
 
 
@@ -421,6 +454,8 @@ def _cmd_build_bars(args: argparse.Namespace) -> int:
 def _cmd_run_matrix(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     validate_hypotheses(config)
+    if not args.synthetic_sample:
+        validate_hypotheses_complete(config)
     outputs = run_phase0_matrix(config, args.expert, synthetic_sample=args.synthetic_sample)
     print(f"Matrix run complete: {len(outputs)} cell output set(s)")
     for output in outputs:
@@ -443,6 +478,8 @@ def _cmd_aggregate_results(args: argparse.Namespace) -> int:
 def _cmd_run_deciles(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     validate_hypotheses(config)
+    if not args.synthetic_sample:
+        validate_hypotheses_complete(config)
     outputs = run_decile_tests(
         config,
         args.expert,
@@ -458,6 +495,8 @@ def _cmd_run_deciles(args: argparse.Namespace) -> int:
 def _cmd_run_multisymbol(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     validate_hypotheses(config)
+    if not args.synthetic_sample:
+        validate_hypotheses_complete(config)
     outputs = run_multisymbol_checks(
         config,
         args.expert,
@@ -483,6 +522,21 @@ def _cmd_create_adversarial_packets(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_score_adversarial_review(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    outputs = score_adversarial_review(config, args.expert)
+    print(f"Adversarial review scored: {len(outputs)} expert file(s)")
+    for output in outputs:
+        pct = "n/a" if output.logic_gap_failures_pct is None else f"{output.logic_gap_failures_pct:.4g}%"
+        print(
+            f"{output.expert}: {output.status} "
+            f"({output.reviewed_trades}/{output.total_trades} reviewed, "
+            f"logic gaps={output.logic_gap_failures}, pct={pct})"
+        )
+        print(output.score_path)
+    return 0
+
+
 def _cmd_generate_verdict(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     output = generate_all_reports(config)
@@ -504,6 +558,14 @@ def _cmd_generate_snapshot(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
     output = generate_snapshot(config, include_raw_data=args.include_raw_data)
     print(f"Snapshot created: {output.snapshot_path}")
+    print(f"Included files: {len(output.included_files)}")
+    return 0
+
+
+def _cmd_generate_review_bundle(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_review_bundle(config)
+    print(f"Review bundle created: {output.bundle_path}")
     print(f"Included files: {len(output.included_files)}")
     return 0
 

@@ -12,7 +12,7 @@ from phase0.data_availability import (
     generate_data_requirements_csv,
 )
 from phase0.deciles import DecileRunOutput, run_decile_tests
-from phase0.hashing import validate_hypotheses
+from phase0.hashing import validate_hypotheses, validate_hypotheses_complete
 from phase0.manifests import generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import MatrixRunOutput, run_phase0_matrix
 from phase0.multisymbol import MultisymbolRunOutput, run_multisymbol_checks
@@ -40,6 +40,7 @@ def run_all_phase0(
     assert_no_live_trading_calls(config)
     validate_hypotheses(config)
     if not synthetic_sample:
+        validate_hypotheses_complete(config)
         generate_data_requirements_csv(config)
         generate_required_data_manifest(config)
         generate_data_readiness_report(config)

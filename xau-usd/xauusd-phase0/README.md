@@ -8,7 +8,8 @@ This repository tests candidate expert behavior before any live-trading EA logic
 
 - No live order placement, position management, or trade-modification logic in Phase 0.
 - No parameter optimization after results are produced.
-- Hypotheses must be registered and hash-locked before backtests.
+- Hypotheses must be complete, registered, and hash-locked before real-data backtests.
+- Synthetic smoke tests are code-health checks only; they are not edge evidence.
 - Outputs must be deterministic, auditable, and written to CSV, Markdown, or snapshot zip files.
 - The reserved true holdout window is protected unless explicitly unlocked for final review.
 
@@ -44,7 +45,8 @@ See `data/README_DATA.md` for the folder contract, accepted workflow, and snapsh
 ```powershell
 python -m phase0 validate-config
 python -m phase0 audit-safety
-python -m phase0 hash-hypotheses
+python -m phase0 validate-hypotheses-complete
+python -m phase0 hash-hypotheses --register
 python -m phase0 validate-data --broker capital_com --symbol XAUUSD
 python -m phase0 normalize-data --broker capital_com --symbol XAUUSD
 python -m phase0 build-bars --broker capital_com --symbol XAUUSD --timeframes M1,M5,M15,H1,H4,D1
@@ -60,10 +62,14 @@ python -m phase0 run-matrix --expert all
 python -m phase0 run-deciles --expert all
 python -m phase0 run-multisymbol --expert all
 python -m phase0 create-adversarial-packets --expert all
+python -m phase0 score-adversarial-review --expert breakout_retest
 python -m phase0 aggregate-results --expert all
 python -m phase0 generate-verdict
 python -m phase0 generate-snapshot
+python -m phase0 generate-review-bundle
 ```
+
+Real-data `run-all`, `run-matrix`, `run-deciles`, and `run-multisymbol` fail fast when enabled hypothesis files still contain placeholders such as `TBD`. If exploratory runs were produced before complete hypothesis registration, label those outputs exploratory and rerun after registering complete hypotheses.
 
 ## Passive MT5 Tools
 
@@ -93,5 +99,7 @@ python -m phase0 check-data-availability
 - `outputs/manifests/PHASE0_DATA_READINESS.md`
 - `outputs/manifests/PHASE0_RESULT_MANIFEST.csv`
 - `outputs/snapshots/phase0_snapshot_{YYYYMMDD_HHMMSS}.zip`
+- `outputs/review_bundles/PHASE0_REVIEW_BUNDLE_{YYYYMMDD_HHMMSS}.zip`
 
 Snapshots include `git_commit.txt`, `git_status.txt`, and `snapshot_manifest.txt` for audit review.
+Review bundles include small evidence artifacts for third-party review and intentionally exclude raw broker data.

@@ -33,6 +33,13 @@ ADVERSARIAL_COLUMNS = (
     "reviewer",
     "reviewed_at_utc",
 )
+ADVERSARIAL_FAILURE_CLASSES = (
+    "VALID_LOSS",
+    "ROUTER_OPPORTUNITY",
+    "LOGIC_GAP",
+    "DATA_ISSUE",
+    "EXECUTION_AMBIGUITY",
+)
 
 ADVERSARIAL_REVIEW_SEED = 920000
 
@@ -43,6 +50,17 @@ class AdversarialPacketOutput:
     review_path: Path
     losing_trades: int
     selected_trades: int
+
+
+@dataclass(frozen=True)
+class AdversarialScoreOutput:
+    expert: str
+    score_path: Path
+    reviewed_trades: int
+    total_trades: int
+    logic_gap_failures: int
+    logic_gap_failures_pct: float | None
+    status: str
 
 
 def create_adversarial_packets(config: ProjectConfig, expert: str) -> list[AdversarialPacketOutput]:
@@ -62,6 +80,13 @@ def create_adversarial_packets(config: ProjectConfig, expert: str) -> list[Adver
                 selected_trades=len(selected),
             )
         )
+    return outputs
+
+
+def score_adversarial_review(config: ProjectConfig, expert: str) -> list[AdversarialScoreOutput]:
+    outputs: list[AdversarialScoreOutput] = []
+    for expert_name in enabled_strategy_names(expert):
+        outputs.append(_score_one_review(config, expert_name))
     return outputs
 
 
@@ -86,6 +111,79 @@ def _load_losing_matrix_trades(config: ProjectConfig, expert: str) -> list[dict[
                 continue
             rows.append(_review_row(expert, int(trade_index) + 1, summary, trade))
     return rows
+
+
+def _score_one_review(config: ProjectConfig, expert: str) -> AdversarialScoreOutput:
+    output_dir = config.root / "outputs" / "adversarial_review"
+    review_path = output_dir / f"{expert}_losing_trades_review.csv"
+    if not review_path.exists():
+        raise ConfigError(f"Adversarial review not found: {review_path}. Run create-adversarial-packets first.")
+
+    table = pd.read_csv(review_path)
+    missing = [column for column in ("manual_failure_class", "reviewer", "reviewed_at_utc") if column not in table.columns]
+    if missing:
+        raise ConfigError(f"Adversarial review {review_path} missing column(s): {', '.join(missing)}.")
+
+    if table.empty:
+        reviewed = pd.Series(dtype=bool)
+        reviewed_table = table
+    else:
+        failure_classes = table["manual_failure_class"].fillna("").astype(str).str.strip().str.upper()
+        invalid_classes = sorted(
+            value
+            for value in set(failure_classes)
+            if value and value not in ADVERSARIAL_FAILURE_CLASSES
+        )
+        if invalid_classes:
+            raise ConfigError(
+                f"Adversarial review {review_path} has unsupported manual_failure_class value(s): "
+                f"{', '.join(invalid_classes)}. Allowed: {', '.join(ADVERSARIAL_FAILURE_CLASSES)}."
+            )
+        reviewed = (
+            table[["manual_failure_class", "reviewer", "reviewed_at_utc"]]
+            .fillna("")
+            .astype(str)
+            .apply(lambda row: all(value.strip() for value in row), axis=1)
+        )
+        reviewed_table = table[reviewed].copy()
+        reviewed_table["manual_failure_class"] = (
+            reviewed_table["manual_failure_class"].fillna("").astype(str).str.strip().str.upper()
+        )
+
+    reviewed_count = int(len(reviewed_table))
+    logic_gaps = int((reviewed_table["manual_failure_class"] == "LOGIC_GAP").sum()) if reviewed_count else 0
+    logic_gap_pct = None if reviewed_count == 0 else logic_gaps / reviewed_count * 100.0
+    threshold = float(config.phase0["gates"]["adversarial_max_logic_gap_loser_pct"])
+    if len(table) and reviewed_count < len(table):
+        status = "PENDING"
+    elif logic_gap_pct is None:
+        status = "PASS"
+    else:
+        status = "PASS" if logic_gap_pct <= threshold else "FAIL"
+
+    score_path = output_dir / f"{expert}_adversarial_score.md"
+    score_path.write_text(
+        _render_adversarial_score(
+            expert=expert,
+            review_path=review_path,
+            total_trades=len(table),
+            reviewed_trades=reviewed_count,
+            logic_gap_failures=logic_gaps,
+            logic_gap_failures_pct=logic_gap_pct,
+            threshold=threshold,
+            status=status,
+        ),
+        encoding="utf-8",
+    )
+    return AdversarialScoreOutput(
+        expert=expert,
+        score_path=score_path,
+        reviewed_trades=reviewed_count,
+        total_trades=len(table),
+        logic_gap_failures=logic_gaps,
+        logic_gap_failures_pct=logic_gap_pct,
+        status=status,
+    )
 
 
 def _review_row(
@@ -141,3 +239,38 @@ def _select_review_sample(rows: list[dict[str, object]]) -> list[dict[str, objec
         .sort_values(["cell_id", "entry_time_utc", "trade_id"])
     )
     return selected.to_dict("records")
+
+
+def _render_adversarial_score(
+    *,
+    expert: str,
+    review_path: Path,
+    total_trades: int,
+    reviewed_trades: int,
+    logic_gap_failures: int,
+    logic_gap_failures_pct: float | None,
+    threshold: float,
+    status: str,
+) -> str:
+    pct_text = "n/a" if logic_gap_failures_pct is None else f"{logic_gap_failures_pct:.4g}%"
+    return "\n".join(
+        [
+            f"# Adversarial Review Score: {expert}",
+            "",
+            f"Review file: {review_path}",
+            "",
+            "| Metric | Value |",
+            "| --- | --- |",
+            f"| Total sampled losing trades | {total_trades} |",
+            f"| Reviewed trades | {reviewed_trades} |",
+            f"| Logic-gap failures | {logic_gap_failures} |",
+            f"| Logic-gap failure pct | {pct_text} |",
+            f"| Threshold | <= {threshold}% |",
+            f"| Status | {status} |",
+            "",
+            "Allowed manual_failure_class values:",
+            "",
+            "\n".join(f"- {value}" for value in ADVERSARIAL_FAILURE_CLASSES),
+            "",
+        ]
+    )
