@@ -96,7 +96,7 @@ Last updated: 2026-05-22
 - Second-candidate concentration-risk mitigation is started in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md` with `squeeze_breakout_long_v0` as the first registered research candidate.
 - Second-candidate hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_squeeze_breakout_long_v0.md`.
 - Second-candidate research hash manifest: `xau-usd\xauusd-phase0\outputs\hashes\research_hypothesis_hash_manifest.csv`.
-- Latest second-candidate result-producing run status: blocked by missing versioned strategy implementation; do not test or tune it until the strategy class is implemented against the locked hypothesis.
+- Latest second-candidate result-producing run status: blocked by disabled registry status; the versioned strategy draft exists, but do not test or tune it in result-producing Phase 0 workflows until it is explicitly promoted against the locked hypothesis.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
 - Dedicated Phase 1 CI workflow: `.github\workflows\phase1.yml`.
 - Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.

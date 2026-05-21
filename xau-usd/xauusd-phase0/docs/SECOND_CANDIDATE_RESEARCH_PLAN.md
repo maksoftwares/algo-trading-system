@@ -76,10 +76,11 @@ The second candidate must pass the same reduced-portfolio discipline:
 | Field | Value |
 | --- | --- |
 | Candidate | `squeeze_breakout_long_v0` |
-| Status | HYPOTHESIS_LOCKED |
+| Status | HYPOTHESIS_LOCKED_IMPLEMENTATION_DRAFTED |
 | Testing allowed | NO |
 | Hypothesis document | `docs/hypothesis_squeeze_breakout_long_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
-| Next action | Implement the versioned strategy class and run a fresh Phase 0 pass without modifying the registered hypothesis. |
+| Implementation draft | `src/phase0/strategies/squeeze_breakout_long_v0.py` |
+| Next action | Review the disabled strategy draft, then explicitly promote it into the Phase 0 registry for a fresh result-producing pass without modifying the registered hypothesis. |
 
 Rejected experts remain rejected. `trend_pullback` and `range_mr` should not be retuned under their original names. Any future revisit must use a new versioned hypothesis.
