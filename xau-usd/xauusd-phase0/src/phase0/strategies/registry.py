@@ -16,6 +16,9 @@ from phase0.strategies.ny_am_pullback_continuation_v0 import NyAmPullbackContinu
 from phase0.strategies.ny_london_overlap_compression_break_v0 import (
     NyLondonOverlapCompressionBreakV0Strategy,
 )
+from phase0.strategies.opening_drive_failed_continuation_v0 import (
+    OpeningDriveFailedContinuationV0Strategy,
+)
 from phase0.strategies.post_spike_short_v0 import PostSpikeShortV0Strategy
 from phase0.strategies.previous_day_extreme_retest_v0 import PreviousDayExtremeRetestV0Strategy
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
@@ -42,6 +45,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     NyFailedLondonReversalV0Strategy.name: NyFailedLondonReversalV0Strategy,
     NyAmPullbackContinuationV0Strategy.name: NyAmPullbackContinuationV0Strategy,
     NyLondonOverlapCompressionBreakV0Strategy.name: NyLondonOverlapCompressionBreakV0Strategy,
+    OpeningDriveFailedContinuationV0Strategy.name: OpeningDriveFailedContinuationV0Strategy,
     PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
     PreviousDayExtremeRetestV0Strategy.name: PreviousDayExtremeRetestV0Strategy,
     SessionVwapReclaimV0Strategy.name: SessionVwapReclaimV0Strategy,

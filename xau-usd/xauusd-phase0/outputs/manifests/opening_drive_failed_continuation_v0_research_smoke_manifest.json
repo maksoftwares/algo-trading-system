@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=SHORT, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "opening_drive_failed_continuation_v0",
+  "generated_at_utc": "2026-05-22T13:08:59+00:00",
+  "hypothesis_file": "docs\\hypothesis_opening_drive_failed_continuation_v0.md",
+  "hypothesis_sha256": "63673ecb407415a1397d465fff9c18e9d66b4490c38dd82e9a3624a196b76eaf",
+  "latest_plan": {
+    "direction": "SHORT",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 101.745,
+    "take_profit": 99.7575
+  },
+  "latest_signal": {
+    "direction": "SHORT",
+    "reason_code": "OPENING_DRIVE_FAILED_CONTINUATION_V0_SHORT",
+    "timestamp_utc": "2024-10-01T14:25:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\opening_drive_failed_continuation_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}

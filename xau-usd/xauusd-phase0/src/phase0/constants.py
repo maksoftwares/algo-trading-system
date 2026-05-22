@@ -18,6 +18,7 @@ RESEARCH_EXPERTS = (
     "ny_failed_london_reversal_v0",
     "ny_am_pullback_continuation_v0",
     "ny_london_overlap_compression_break_v0",
+    "opening_drive_failed_continuation_v0",
     "post_spike_short_v0",
     "previous_day_extreme_retest_v0",
     "session_vwap_reclaim_v0",

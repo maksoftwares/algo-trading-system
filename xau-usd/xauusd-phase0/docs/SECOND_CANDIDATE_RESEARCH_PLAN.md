@@ -75,15 +75,15 @@ The second candidate must pass the same reduced-portfolio discipline:
 
 | Field | Value |
 | --- | --- |
-| Candidate | `ny_london_overlap_compression_break_v0` |
+| Candidate | `opening_drive_failed_continuation_v0` |
 | Status | REJECTED_FIRST_PASS |
 | Testing allowed | NO_FURTHER_V0_TESTING |
-| Hypothesis document | `docs/hypothesis_ny_london_overlap_compression_break_v0.md` |
+| Hypothesis document | `docs/hypothesis_opening_drive_failed_continuation_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
-| Implementation draft | `src/phase0/strategies/ny_london_overlap_compression_break_v0.py` |
-| Research smoke | `outputs/reports/ny_london_overlap_compression_break_v0_research_smoke.md` |
-| First-pass matrix | `docs/NY_LONDON_OVERLAP_COMPRESSION_BREAK_V0_FIRST_PASS.md` |
-| Next action | Move to the next backlog candidate, `opening_drive_failed_continuation_v0`, starting with a fresh hypothesis lock. |
+| Implementation draft | `src/phase0/strategies/opening_drive_failed_continuation_v0.py` |
+| Research smoke | `outputs/reports/opening_drive_failed_continuation_v0_research_smoke.md` |
+| First-pass matrix | `docs/OPENING_DRIVE_FAILED_CONTINUATION_V0_FIRST_PASS.md` |
+| Next action | Move to the next backlog candidate, `liquidity_sweep_reversal_v0`, starting with a fresh hypothesis lock. |
 
 ## Promotion Prep Command
 
