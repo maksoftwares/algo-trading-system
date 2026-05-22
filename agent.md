@@ -207,6 +207,8 @@ Last updated: 2026-05-22
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.
 - Latest periodic check status after readiness-cycle cleanup: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
+- Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
+- Hourly local automation `phase1-mt5-soak-check` was paused before the planned shutdown; re-enable it only after the machine, `C:\MT5PortableGoldMission`, and `C:\MT5PortableSpreadLogger` are back online.
 
 ## Local MT5 Discovery
 
