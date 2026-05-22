@@ -18,12 +18,17 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
 | Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md` |
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
+| Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
+| Passive spread logger deployment | PENDING | Deployed and compiled, but `PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` remains PENDING until spread logs appear. |
 
 ## Still Pending
 
 | Gate | Current status | Closure rule |
 | --- | --- | --- |
 | Five trading day soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` must show five-day soak PASS. |
+| Passive spread log production | PENDING | `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` must show PASS. |
+| Measured cost model | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS. |
+| Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must show PASS. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
 | Project owner approval | PENDING | Add `outputs/reports/PHASE2_OWNER_APPROVAL.md` after the owner explicitly authorizes paper-mode work. |
@@ -41,16 +46,18 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | Field | Value |
 | --- | --- |
 | Latest status summary | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
-| Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260521_231920.zip` |
-| Decision rows | 108 |
-| Latest bar | 2026.05.21 23:15:00 |
-| Soak progress | 7.92% |
+| Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip` |
+| Decision rows | 197 |
+| Latest bar | 2026.05.22 06:40:00 |
+| Soak progress | 14.10% |
 | Acceptance | PENDING |
 
 ## Decision Rule
 
 ```text
 IF Phase 1 acceptance = PASS
+AND measured cost model = PASS
+AND measured-cost revalidation = PASS
 AND Phase 1 review index = PASS
 AND Phase 2 readiness = PASS
 AND owner approval file exists

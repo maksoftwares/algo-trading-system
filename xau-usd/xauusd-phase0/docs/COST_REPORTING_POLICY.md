@@ -107,8 +107,18 @@ After any cost-reporting change, regenerate:
 - `outputs/reports/FIXED_NOTIONAL_REPORT.md`
 - `outputs/reports/FIXED_NOTIONAL_SUMMARY.csv`
 - `outputs/manifests/FIXED_NOTIONAL_REPORT_MANIFEST.json`
+- `outputs/reports/MEASURED_COST_MODEL.md`
+- `outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`
 - `outputs/reports/PHASE0_REAL_ARTIFACT_VERIFICATION.md`
 - Phase 0 review bundle
+
+Commands:
+
+```powershell
+.\.venv\Scripts\phase0.exe generate-fixed-notional-report --expert breakout_retest
+.\.venv\Scripts\phase0.exe generate-measured-cost-model --input-dir C:\MT5PortableGoldMission\MQL5\Files
+.\.venv\Scripts\phase0.exe generate-measured-cost-revalidation --expert breakout_retest
+```
 
 ## Acceptance Gates Using Measured Costs
 

@@ -28,12 +28,26 @@ def test_analyze_spread_logs_writes_cost_report(project_root, tmp_path):
     _write_sample_spread_log(root)
     config = load_project_config(root)
 
-    output = analyze_spread_logs(config)
+    output = analyze_spread_logs(config, min_observations=3, min_observed_days=1)
 
+    assert output.status == "PASS"
     assert output.measured_cost_model_path.exists()
+    assert output.measured_report_path.exists()
+    assert "Overall status: PASS" in output.measured_report_path.read_text(encoding="utf-8")
     metrics = pd.read_csv(output.measured_cost_model_path)
     assert {"global", "hour_utc", "day_of_week_utc", "rollover"}.issubset(set(metrics["scope"]))
     assert output.report_path.read_text(encoding="utf-8").startswith("# Spread Distribution Report")
+
+
+def test_generate_measured_cost_model_pending_without_logs(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+
+    output = analyze_spread_logs(config, allow_pending=True)
+
+    assert output.status == "PENDING"
+    assert output.source_files == ()
+    assert "Overall status: PENDING" in output.measured_report_path.read_text(encoding="utf-8")
 
 
 def test_generate_snapshot_includes_required_files(project_root, tmp_path):

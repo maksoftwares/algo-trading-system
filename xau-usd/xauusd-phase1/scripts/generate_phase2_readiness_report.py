@@ -50,11 +50,20 @@ def generate_phase2_readiness_report(
     items = [
         _file_gate("Phase 2 preparation spec", root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md"),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
-        _file_gate("Fixed-notional reporting", _phase0_root(root) / "outputs" / "reports" / "FIXED_NOTIONAL_REPORT.md"),
-        _pending_file_gate("Measured cost model", _phase0_root(root) / "outputs" / "reports" / "MEASURED_COST_MODEL.md"),
-        _pending_file_gate(
+        _status_or_pending_gate(
+            "Fixed-notional reporting",
+            _phase0_root(root) / "outputs" / "reports" / "FIXED_NOTIONAL_REPORT.md",
+            required="PASS",
+        ),
+        _status_or_pending_gate(
+            "Measured cost model",
+            _phase0_root(root) / "outputs" / "reports" / "MEASURED_COST_MODEL.md",
+            required="PASS",
+        ),
+        _status_or_pending_gate(
             "Measured-cost revalidation",
             _phase0_root(root) / "outputs" / "reports" / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md",
+            required="PASS",
         ),
         _status_gate("Phase 1 acceptance", report_dir / "PHASE1_ACCEPTANCE_REPORT.md", required="PASS"),
         _status_gate("Phase 1 review index", report_dir / "PHASE1_REVIEW_INDEX.md", required="PASS"),
@@ -76,10 +85,15 @@ def _file_gate(gate: str, path: Path) -> Phase2ReadinessItem:
     return Phase2ReadinessItem(gate, "FAIL", f"Missing or empty `{path}`.")
 
 
-def _pending_file_gate(gate: str, path: Path) -> Phase2ReadinessItem:
-    if path.exists() and path.stat().st_size > 0:
-        return Phase2ReadinessItem(gate, "PASS", f"Found `{path}`.")
-    return Phase2ReadinessItem(gate, "PENDING", f"Missing `{path}`; required before Phase 2 authorization.")
+def _status_or_pending_gate(gate: str, path: Path, required: str) -> Phase2ReadinessItem:
+    if not path.exists():
+        return Phase2ReadinessItem(gate, "PENDING", f"Missing `{path}`; required before Phase 2 authorization.")
+    status = _read_markdown_status(path)
+    if status == required:
+        return Phase2ReadinessItem(gate, "PASS", f"`{path}` status is {status}.")
+    if status in {"PENDING", "WARN", "REVIEW", ""}:
+        return Phase2ReadinessItem(gate, "PENDING", f"`{path}` status is {status or 'unclear'}; required {required}.")
+    return Phase2ReadinessItem(gate, "FAIL", f"`{path}` status is {status}; required {required}.")
 
 
 def _phase0_root(phase1_root: Path) -> Path:

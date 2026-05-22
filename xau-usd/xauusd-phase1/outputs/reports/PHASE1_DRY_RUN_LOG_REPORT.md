@@ -17,7 +17,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 190. |
+| decision_rows | PASS | Decision rows: 197. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
@@ -29,7 +29,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 ## Summary
 
-- Decision rows: 190
+- Decision rows: 197
 - Unique run IDs: 5
 - Latest run ID: phase1-dry-run-v0.5
 
@@ -41,7 +41,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 186 |
+| NORMAL | 193 |
 
 ## Block Reasons
 
@@ -52,7 +52,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
 | SPREAD_TOO_HIGH | 1 |
-| phase1_dry_run_only | 185 |
+| phase1_dry_run_only | 192 |
 
 ## Breakout-Retest Observer
 
@@ -60,25 +60,25 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 177 |
-| WOULD_SIGNAL | 13 |
+| WAIT_LEVEL_BREAK_RETEST | 183 |
+| WOULD_SIGNAL | 14 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 102 |
-| SHORT | 88 |
+| LONG | 106 |
+| SHORT | 91 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 177 |
-| true | 13 |
+| false | 183 |
+| true | 14 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.5 | 2026.05.22 06:05:00 | WAIT_LEVEL_BREAK_RETEST | LONG | no_long_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.5 | 2026.05.22 06:40:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |

@@ -131,5 +131,8 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
     (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
     (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
     if include_measured:
-        (reports / "MEASURED_COST_MODEL.md").write_text("# Measured cost\n", encoding="utf-8")
-        (reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md").write_text("# Revalidation\n", encoding="utf-8")
+        (reports / "MEASURED_COST_MODEL.md").write_text("# Measured cost\n\nOverall status: PASS\n", encoding="utf-8")
+        (reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md").write_text(
+            "# Revalidation\n\nOverall status: PASS\n",
+            encoding="utf-8",
+        )

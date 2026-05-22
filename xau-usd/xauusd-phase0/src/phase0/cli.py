@@ -31,7 +31,9 @@ from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.independent_reproduction import generate_independent_reproduction
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
+from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.multisymbol import run_multisymbol_checks
+from phase0.mt5_deployment import check_passive_spread_logger_deployment
 from phase0.mt5_presets import generate_mt5_bar_export_presets
 from phase0.normalizer import (
     NormalizationError,
@@ -331,7 +333,38 @@ def build_parser() -> argparse.ArgumentParser:
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
     analyze_spreads.add_argument("--glob", default="spread_log_*.csv")
+    analyze_spreads.add_argument("--min-observations", type=int, default=500)
+    analyze_spreads.add_argument("--min-observed-days", type=int, default=5)
     analyze_spreads.set_defaults(func=_cmd_analyze_spread_logs)
+
+    measured_cost = subparsers.add_parser(
+        "generate-measured-cost-model",
+        help="Generate measured cost model reports from passive spread logs, or a PENDING report if logs are absent.",
+    )
+    measured_cost.add_argument("--input-dir", type=Path)
+    measured_cost.add_argument("--glob", default="spread_log_*.csv")
+    measured_cost.add_argument("--min-observations", type=int, default=500)
+    measured_cost.add_argument("--min-observed-days", type=int, default=5)
+    measured_cost.set_defaults(func=_cmd_generate_measured_cost_model)
+
+    measured_revalidation = subparsers.add_parser(
+        "generate-measured-cost-revalidation",
+        help="Revalidate an expert against measured P95 spread costs.",
+    )
+    measured_revalidation.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    measured_revalidation.add_argument("--fixed-risk-usd", type=float)
+    measured_revalidation.set_defaults(func=_cmd_generate_measured_cost_revalidation)
+
+    spread_logger_deployment = subparsers.add_parser(
+        "check-passive-spread-logger",
+        help="Check MT5 Portable passive spread logger deployment and log production.",
+    )
+    spread_logger_deployment.add_argument(
+        "--mt5-root",
+        type=Path,
+        default=Path("C:/MT5PortableGoldMission"),
+    )
+    spread_logger_deployment.set_defaults(func=_cmd_check_passive_spread_logger)
 
     run_all = subparsers.add_parser("run-all", help="Run the full Phase 0 workflow.")
     run_all.add_argument("--synthetic-sample", action="store_true")
@@ -824,10 +857,63 @@ def _cmd_generate_fixed_notional_report(args: argparse.Namespace) -> int:
 
 def _cmd_analyze_spread_logs(args: argparse.Namespace) -> int:
     config = load_project_config(args.root)
-    output = analyze_spread_logs(config, input_dir=args.input_dir, file_glob=args.glob)
+    output = analyze_spread_logs(
+        config,
+        input_dir=args.input_dir,
+        file_glob=args.glob,
+        min_observations=args.min_observations,
+        min_observed_days=args.min_observed_days,
+    )
     print(f"Analyzed {len(output.source_files)} spread log file(s)")
+    print(f"Measured cost status: {output.status}")
     print(output.measured_cost_model_path)
+    print(output.measured_report_path)
     print(output.report_path)
+    return 0
+
+
+def _cmd_generate_measured_cost_model(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = analyze_spread_logs(
+        config,
+        input_dir=args.input_dir,
+        file_glob=args.glob,
+        min_observations=args.min_observations,
+        min_observed_days=args.min_observed_days,
+        allow_pending=True,
+    )
+    print(f"Measured cost model: {output.status}")
+    print(f"Source files: {len(output.source_files)}")
+    print(f"Observations: {output.observation_count}")
+    print(f"Observed days: {output.observed_days}")
+    print(output.measured_cost_model_path)
+    print(output.measured_report_path)
+    print(output.report_path)
+    return 0
+
+
+def _cmd_generate_measured_cost_revalidation(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_measured_cost_revalidation(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Measured-cost revalidation: {output.status}")
+    print(output.report_path)
+    print(output.summary_path)
+    print(f"Passing cells: {output.passing_cells}/{output.required_passing_cells}")
+    print(f"Trades: {output.trade_count}")
+    return 0
+
+
+def _cmd_check_passive_spread_logger(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = check_passive_spread_logger_deployment(config, mt5_root=args.mt5_root)
+    print(f"Passive spread logger deployment: {output.status}")
+    print(output.report_path)
+    print(f"MT5 root: {output.mt5_root}")
+    print(f"Spread logs: {output.spread_log_count}")
     return 0
 
 

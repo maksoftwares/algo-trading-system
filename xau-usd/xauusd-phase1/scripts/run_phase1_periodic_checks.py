@@ -8,6 +8,9 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
+PHASE0_SRC = Path(__file__).resolve().parents[2] / "xauusd-phase0" / "src"
+if PHASE0_SRC.exists() and str(PHASE0_SRC) not in sys.path:
+    sys.path.insert(0, str(PHASE0_SRC))
 
 from append_phase1_soak_history import append_phase1_soak_history
 from check_phase1_external_health import check_external_health
@@ -17,6 +20,9 @@ from generate_phase1_runtime_health_report import generate_phase1_runtime_health
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase2_readiness_report import generate_phase2_readiness_report
+from phase0.config import load_project_config
+from phase0.measured_revalidation import generate_measured_cost_revalidation
+from phase0.spread_analysis import analyze_spread_logs
 
 
 @dataclass(frozen=True)
@@ -39,6 +45,11 @@ def run_phase1_periodic_checks(
     root = root.resolve()
     report_dir = root / "outputs" / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
+    phase0_root = root.parent / "xauusd-phase0"
+    if phase0_root.exists():
+        phase0_config = load_project_config(phase0_root)
+        analyze_spread_logs(phase0_config, input_dir=files_dir, allow_pending=True)
+        generate_measured_cost_revalidation(phase0_config, expert="breakout_retest")
 
     status_summary_path = generate_phase1_status_summary(
         files_dir=files_dir,

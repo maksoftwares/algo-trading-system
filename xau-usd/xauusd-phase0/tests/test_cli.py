@@ -18,6 +18,9 @@ def test_cli_registers_required_commands():
     assert "generate-result-manifest" in help_text
     assert "generate-snapshot" in help_text
     assert "analyze-spread-logs" in help_text
+    assert "generate-measured-cost-model" in help_text
+    assert "generate-measured-cost-revalidation" in help_text
+    assert "check-passive-spread-logger" in help_text
     assert "generate-independent-reproduction" in help_text
     assert "audit-true-holdout" in help_text
     assert "run-cpcv-validation" in help_text

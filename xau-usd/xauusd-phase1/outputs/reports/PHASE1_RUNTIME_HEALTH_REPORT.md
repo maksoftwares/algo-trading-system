@@ -8,11 +8,11 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| decision_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` (125195 bytes). |
+| decision_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` (129758 bytes). |
 | startup_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` (2817 bytes). |
 | shutdown_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv` (2066 bytes). |
-| decision_rows | PASS | Decision rows: 190. |
-| latest_freshness | PASS | Latest row age is 0.2 minute(s); limit 15. |
+| decision_rows | PASS | Decision rows: 197. |
+| latest_freshness | PASS | Latest row age is 2.0 minute(s); limit 15. |
 | dry_run_lock | PASS | All decision rows stayed dry-run. |
 | permission_lock | PASS | All decision rows kept permission false. |
 | server_time_status | PASS | All rows report CLOCK_OK. |
@@ -22,12 +22,12 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 ## Runtime Shape
 
-- Decision rows: 190
+- Decision rows: 197
 - Startup rows: 15
 - Shutdown rows: 13
 - Unique run IDs: 5
 - First unique M5 bar: 2026.05.21 13:45:00
-- Latest unique M5 bar: 2026.05.22 06:05:00
+- Latest unique M5 bar: 2026.05.22 06:40:00
 - Larger-than-M5 gaps: 0
 - Expected market-break gaps: 1
 
@@ -35,7 +35,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Run ID | Broker Time | Local Time | Bar Time | Dry Run | Permission | Server Time | BR Stage |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.5 | 2026.05.22 06:05:00 | 2026.05.22 10:04:57 | 2026.05.22 06:05:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
+| phase1-dry-run-v0.5 | 2026.05.22 06:40:00 | 2026.05.22 10:39:57 | 2026.05.22 06:40:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
 
 ## Recent Gaps
 
@@ -45,7 +45,7 @@ No rows.
 
 | Run ID | Rows | First Bar | Latest Bar |
 | --- | --- | --- | --- |
-| phase1-dry-run-v0.5 | 186 | 2026.05.21 13:45:00 | 2026.05.22 06:05:00 |
+| phase1-dry-run-v0.5 | 193 | 2026.05.21 13:45:00 | 2026.05.22 06:40:00 |
 | phase1-dry-run-v0.5-daily-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |
 | phase1-dry-run-v0.5-manual-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |
 | phase1-dry-run-v0.5-monthly-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |

@@ -9,7 +9,7 @@ It is a logger only. It must not include live order placement, order modificatio
 ```text
 InpSymbol=
 InpLogIntervalSeconds=5
-InpUseCommonFiles=true
+InpUseCommonFiles=false
 InpFilePrefix=spread_log
 InpPrintToExpertsTab=false
 InpRolloverHourServer=22
@@ -30,8 +30,9 @@ Expected columns:
 broker_time,gmt_time,local_time,account,server,symbol,bid,ask,spread_price,spread_points,point,digits,session_label,is_rollover_window
 ```
 
-Copy completed log files into `outputs/logs/`, then run:
+The recommended Phase 1/Phase 2 prep setting is `InpUseCommonFiles=false`, which writes into the active MT5 Portable `MQL5/Files` directory. Then run:
 
-```bash
-python -m phase0 analyze-spread-logs
+```powershell
+.\.venv\Scripts\phase0.exe generate-measured-cost-model --input-dir C:\MT5PortableGoldMission\MQL5\Files
+.\.venv\Scripts\phase0.exe generate-measured-cost-revalidation --expert breakout_retest
 ```

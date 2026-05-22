@@ -1,0 +1,505 @@
+{
+  "acceptance_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
+  "acceptance_status": "PENDING",
+  "created_at_utc": "2026-05-22T06:41:56.727239+00:00",
+  "files": [
+    {
+      "archive_path": "docs/CODEX_PHASE1_MASTER_EA_DRY_RUN_PROMPT.md",
+      "bytes": 1021,
+      "sha256": "1c1567a5d3fe932e499e3d73dcdcc55433193ab93ae536938c575ae3af754f3c",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\CODEX_PHASE1_MASTER_EA_DRY_RUN_PROMPT.md"
+    },
+    {
+      "archive_path": "docs/EXPERT_LIFECYCLE.md",
+      "bytes": 907,
+      "sha256": "397866b3b77959406190a43bc5e63141c4ae49395fdd49c5b0c55412d794a298",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\EXPERT_LIFECYCLE.md"
+    },
+    {
+      "archive_path": "docs/MAGIC_NUMBERS.md",
+      "bytes": 748,
+      "sha256": "501c627f604905ab8f2e5403b4d3663b9ffbbab31bcd80c80604a1562c3a64ee",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\MAGIC_NUMBERS.md"
+    },
+    {
+      "archive_path": "docs/PHASE1_DRY_RUN_SCOPE.md",
+      "bytes": 1583,
+      "sha256": "f8851b9a5d5f371025b18dd9e87d2bca152346b3b9799129abb57a446bc3df95",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE1_DRY_RUN_SCOPE.md"
+    },
+    {
+      "archive_path": "docs/PHASE1_MASTER_EA_DRY_RUN_SPEC.md",
+      "bytes": 4638,
+      "sha256": "15b70f44b6126997f8de4aa0f579fb87cc3621250b18db8a25bcff03e9d1d4c9",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE1_MASTER_EA_DRY_RUN_SPEC.md"
+    },
+    {
+      "archive_path": "docs/PHASE2_AUTHORIZATION_CHECKLIST.md",
+      "bytes": 3948,
+      "sha256": "ff2119b6c26cd70b9d358e8287acd353e550b0fbd80719c03ad0f6abc1b21d68",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_AUTHORIZATION_CHECKLIST.md"
+    },
+    {
+      "archive_path": "docs/PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md",
+      "bytes": 3629,
+      "sha256": "b1fd4154ec8eb8ad6cb9da58c744a1ab4728604a6de2932a0b661521d2e6c861",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md"
+    },
+    {
+      "archive_path": "docs/PHASE2_OPERATIONS_PREP.md",
+      "bytes": 6992,
+      "sha256": "b25ee3776ca32a4ed1395a0fd3bbc779b2b03f88497549ecd3695c8e5d5d351d",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_OPERATIONS_PREP.md"
+    },
+    {
+      "archive_path": "docs/REPORTING_POLICY.md",
+      "bytes": 1478,
+      "sha256": "d3639a0e0aeda576e36c62a7067984b6418f4479e491c1468d73e619e9f0b4f3",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\REPORTING_POLICY.md"
+    },
+    {
+      "archive_path": "docs/WORKSPACE_OWNERSHIP.md",
+      "bytes": 1327,
+      "sha256": "2ba646e4fabd97fd32b3d96d18eefbb6b736223dfb6d23f23979ad98ebda8bed",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\WORKSPACE_OWNERSHIP.md"
+    },
+    {
+      "archive_path": "mt5/Config/phase1_dry_run_startup.ini",
+      "bytes": 277,
+      "sha256": "c75c90fd95ce4b4868661269d2c5ac289c2b477791af9612ff4412aeb1e4e3bc",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Config\\phase1_dry_run_startup.ini"
+    },
+    {
+      "archive_path": "mt5/Experts/Phase1DryRunShell.mq5",
+      "bytes": 6801,
+      "sha256": "1edcc20f463c8f970b9eeaa0ee7ef4735a22936ccc1a44444de60c12906e5464",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase1DryRunShell.mq5"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1BreakoutRetest.mqh",
+      "bytes": 10458,
+      "sha256": "a409fe17fc6431a66e12a5333dff3bd00e68c9a566678808858e0f7f4a12ffcc",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1BreakoutRetest.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Dashboard.mqh",
+      "bytes": 2707,
+      "sha256": "351d192292dec1f68ec4da1ff589038725042f8b03f9a4cfc7f858a1e2060cf2",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Dashboard.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Execution.mqh",
+      "bytes": 2171,
+      "sha256": "34ce69452c27bc833a16a87eba137c875e8d246e49215409d484fb005310719b",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Execution.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1FeatureEngine.mqh",
+      "bytes": 2607,
+      "sha256": "61e995438a513f9137427808f8fcb53fb1528235e5e3a542695c519be8745f9b",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1FeatureEngine.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Lifecycle.mqh",
+      "bytes": 741,
+      "sha256": "d9cef4373b4c8b760f2bcbc487916e85dc4872010b82cfad3e822c3d2a676c11",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Lifecycle.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Logger.mqh",
+      "bytes": 14307,
+      "sha256": "1e1416b3f0abdc245279ac31bcac2d1f3b97e42de9eb98243dc0ec5667f3520b",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Logger.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Magic.mqh",
+      "bytes": 327,
+      "sha256": "100fc0f12f875bbd06e4950792b15964bc8f18d725daa9008bcf1f24bfd60b71",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Magic.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1MarketData.mqh",
+      "bytes": 1322,
+      "sha256": "86e67d248f29941a41c083e568e0758a6290100dc644534acc48152ba9d78e21",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1MarketData.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1News.mqh",
+      "bytes": 441,
+      "sha256": "688ec61893fa280392245040731e6b10ffcc74cefdaa126cbcd02930a9908fe7",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1News.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Risk.mqh",
+      "bytes": 3124,
+      "sha256": "230de6072417ea30bf88dd5669d2ba1fca6ea7a5f0218dda5a85293a469b238a",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Risk.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Router.mqh",
+      "bytes": 1964,
+      "sha256": "6746066076776dee69c0ff4bb4bc9c7e065d2e8f98f9c8615fcb159308b3e8e8",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Router.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1ServerTime.mqh",
+      "bytes": 1206,
+      "sha256": "65ef0a43dc979a8a72784987f479683ae75cff745696d076b61bb3a43c241118",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1ServerTime.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Session.mqh",
+      "bytes": 743,
+      "sha256": "be4dcf09c5908b1ecbde4c1a00c1fd7edab7eb1ad4b5dee0d9af61184498b732",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Session.mqh"
+    },
+    {
+      "archive_path": "mt5/Include/Phase1/Phase1Types.mqh",
+      "bytes": 10594,
+      "sha256": "121610812f5f8f455ebdf02d47b4382ec17e60eb7ca0dd5f230065ea8e15ca5a",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Types.mqh"
+    },
+    {
+      "archive_path": "mt5/Presets/Phase1DryRunShell.safe.set",
+      "bytes": 541,
+      "sha256": "d816dde614debc6edc443f7ae51be5e406edf82000d13d9a0b2412f354f4260c",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase1DryRunShell.safe.set"
+    },
+    {
+      "archive_path": "mt5/Presets/Phase1DryRunShell.test_daily_lock.set",
+      "bytes": 558,
+      "sha256": "e084918b413df7ea2ce5e0282eb33a17daf8a2abfdf683fa1ca7baa4eae0f475",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase1DryRunShell.test_daily_lock.set"
+    },
+    {
+      "archive_path": "mt5/Presets/Phase1DryRunShell.test_manual_lock.set",
+      "bytes": 557,
+      "sha256": "7ba8808e357d49f172c0670782c25945c38f99f46d264bc3fb116efdc70983e6",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase1DryRunShell.test_manual_lock.set"
+    },
+    {
+      "archive_path": "mt5/Presets/Phase1DryRunShell.test_monthly_lock.set",
+      "bytes": 561,
+      "sha256": "ed8fd6b2e35a4d2679f79cddaab5a234f93b1bb8024969895d194e4f7e502132",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase1DryRunShell.test_monthly_lock.set"
+    },
+    {
+      "archive_path": "mt5/Presets/Phase1DryRunShell.test_weekly_lock.set",
+      "bytes": 559,
+      "sha256": "3aece3f41616f1a1b2190099876fb29bd7aba488c5615e05626991a1ea8554d4",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase1DryRunShell.test_weekly_lock.set"
+    },
+    {
+      "archive_path": "mt5/README.md",
+      "bytes": 6948,
+      "sha256": "942503823d7d4f58d98634a6210b426aa24618c7cfdf3dc7305e842df4522302",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\README.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_ACCEPTANCE_REPORT.md",
+      "bytes": 2204,
+      "sha256": "d07bead6665328605a0e412ca932ebe517aefd1aed6a18aa0819605ca4888fc6",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_DRY_RUN_LOG_REPORT.md",
+      "bytes": 2644,
+      "sha256": "671b3407214f178912f68388034e6a0ffaf41e82eda77a2f2c4a3afb76a8cca8",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_DRY_RUN_LOG_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_EXTERNAL_HEALTH.json",
+      "bytes": 1480,
+      "sha256": "ed2c95c14e8a62e92a3f36972d6cfdd64fdc46ff6b9e06ccb5b69ee2f48491cb",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_EXTERNAL_HEALTH.json"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_REVIEW_INDEX.md",
+      "bytes": 3383,
+      "sha256": "a3f7a30cf8cdeefc67a68e5da25c2a8ed6f2dfe0a8a7ae5ab4f3d66fa403367e",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md",
+      "bytes": 2147,
+      "sha256": "57ae786880408ca4d872a886d7a8ba5a637a5cfc68b17449ad8cd56496c3e757",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_RUNTIME_HEALTH_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_SOAK_DRIFT_REPORT.md",
+      "bytes": 2843,
+      "sha256": "fd32740831c973cc408d92b7a9713dc6328027eba957687b13bc05e9df53dd3e",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_DRIFT_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_SOAK_HISTORY.csv",
+      "bytes": 35009,
+      "sha256": "dc2bc96b134afd814810ae8b65e9a4ec89820bc6718716fc6c3c762dab9f53a6",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_HISTORY.csv"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_SOAK_HISTORY_REPORT.md",
+      "bytes": 3074,
+      "sha256": "f98f72db83c3a146d03d69303c57356747f238d0e90af4c36c845d6b335cfbd8",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_HISTORY_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_STATUS_SUMMARY.json",
+      "bytes": 2145,
+      "sha256": "b910ee6eaa1d938efd0f0084eb4dbdbcf300f2fc34c6e2e71621b0d2a6e93cef",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md",
+      "bytes": 5493,
+      "sha256": "9bb685ff11b238af8bfad5fa5ad87bcb3eb92ef0e2a8234b1a038a0948bdb9d3",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE1_WOULD_SIGNAL_REVIEW.csv",
+      "bytes": 3804,
+      "sha256": "bc99b7a66662d25f1991de5c3abe88640a715c1c2a7e96d70eba0cd4bc4e6065",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv"
+    },
+    {
+      "archive_path": "outputs/reports/PHASE2_READINESS_REPORT.md",
+      "bytes": 2729,
+      "sha256": "140f11b924f1e0f4abd1db2706a10cf15737d0209a07556c2dd4c64455df9d02",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md"
+    },
+    {
+      "archive_path": "README.md",
+      "bytes": 6879,
+      "sha256": "cd473d781c8d9346b163024a34c7d26f2d52f9dc84986bd31f8dd5c74449fa86",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\README.md"
+    },
+    {
+      "archive_path": "scripts/analyze_phase1_soak.py",
+      "bytes": 17119,
+      "sha256": "505a4706d414c865733f47d354a1c465fca4a528fdeb92ad743727cb0f9ee64a",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\analyze_phase1_soak.py"
+    },
+    {
+      "archive_path": "scripts/append_phase1_soak_history.py",
+      "bytes": 7692,
+      "sha256": "d943856ec441d8d918e9c62498c8832bcdd73f2b4e7c4229d537dedb9e60c731",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\append_phase1_soak_history.py"
+    },
+    {
+      "archive_path": "scripts/audit_phase1_safety.py",
+      "bytes": 1658,
+      "sha256": "366ea3b32f1701ab26bb468dbcef6bf1027c874d03cfe03bfd5b3d70e8381b52",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\audit_phase1_safety.py"
+    },
+    {
+      "archive_path": "scripts/check_phase1_external_health.py",
+      "bytes": 6359,
+      "sha256": "ad84fa6acff654e3b75d0a8213189a244c349bb1ebc0df5bca845009986810a2",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\check_phase1_external_health.py"
+    },
+    {
+      "archive_path": "scripts/deploy_phase1_mt5.py",
+      "bytes": 5905,
+      "sha256": "f6c227f48ea095837bffbd672acbb9f3b221f64dde37341e2fad9cc2316a3ba9",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\deploy_phase1_mt5.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_acceptance_report.py",
+      "bytes": 14098,
+      "sha256": "9fc8ede8cba3217edaf0c68e1af75dccd5f86bf710556e60fbe97ff7def7e0c3",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_acceptance_report.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_bundle.py",
+      "bytes": 10655,
+      "sha256": "4a1b52f7c131f84feca17ef12c89ac399c8378a7236dabd1bed4812ddd5a098e",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_bundle.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_review_index.py",
+      "bytes": 11297,
+      "sha256": "d5b9f4218efe19f163f890ae4b0758b2af3f96356c5108d772007cf9ae312bdd",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_review_index.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_runtime_health_report.py",
+      "bytes": 15588,
+      "sha256": "2dc3a56d31dd120e69acc7b69bba66040595de5084b844843734080ce9276ab2",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_runtime_health_report.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_soak_history_report.py",
+      "bytes": 11660,
+      "sha256": "64de7c80c9e1f075e2ed02329a696f9640edc0507b29b75ce001fccf47f603b2",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_soak_history_report.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_status_summary.py",
+      "bytes": 5973,
+      "sha256": "1c7a3c6c1e68917805dd2b7643182accbdaa4b67ae0e42da89623bada1926d9f",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_status_summary.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase1_would_signal_report.py",
+      "bytes": 14200,
+      "sha256": "547e85f91b36a6ddde5fb72933483b675ea5f1724e3c9528e1ee5407e3105bdb",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase1_would_signal_report.py"
+    },
+    {
+      "archive_path": "scripts/generate_phase2_readiness_report.py",
+      "bytes": 12609,
+      "sha256": "ca238340785e5e0fc621a15aa22f1763cad1274caa8cfbd9f3c65cfede737e42",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\generate_phase2_readiness_report.py"
+    },
+    {
+      "archive_path": "scripts/run_phase1_periodic_checks.py",
+      "bytes": 5449,
+      "sha256": "6c557bd529a0859a0000244f7680fae77b2e21cd0be46bc9b5a7b5b9d2a32b76",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\run_phase1_periodic_checks.py"
+    },
+    {
+      "archive_path": "scripts/verify_phase1_logs.py",
+      "bytes": 16603,
+      "sha256": "b101704485e275c495b271d29c7a39aab3396cca53c8805126688cd07877a876",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\verify_phase1_logs.py"
+    },
+    {
+      "archive_path": "tests/test_external_health.py",
+      "bytes": 1935,
+      "sha256": "abd26423c967fb19bc3d8fa5eac8cab96d8a596168e6c6eca86bf1c86e9b36e3",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_external_health.py"
+    },
+    {
+      "archive_path": "tests/test_periodic_checks.py",
+      "bytes": 766,
+      "sha256": "598ea667f063f5a849ad82701291354b2fe2e6067488acdee46a28a0bb77e56a",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_periodic_checks.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_acceptance_report.py",
+      "bytes": 11012,
+      "sha256": "69de74b38d05b39491e259484e058babf6da82d2156f449848f68b3599b6612a",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_acceptance_report.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_bundle.py",
+      "bytes": 16001,
+      "sha256": "3d2119ca6953cfa1c847ef8b2fd4c074d535181ffc1bd5ceeabfc5b1d507f890",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_bundle.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_deploy.py",
+      "bytes": 2218,
+      "sha256": "96332513baedf0ffa3bcccfaa6ca6eb78dff3d315c34a69c8c15f95ae9e286f1",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_deploy.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_log_verifier.py",
+      "bytes": 12680,
+      "sha256": "4921cf42e671180e389438674efd37ca2dcd1b34a57c0581599061558d1bcde9",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_log_verifier.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_review_index.py",
+      "bytes": 5247,
+      "sha256": "c6e00dec6ecaae5314ca6735226639f80ec215108b92522b65a802309cd78ff0",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_review_index.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_runtime_health_report.py",
+      "bytes": 6080,
+      "sha256": "befea9489ab9977f87838d219f75535248c79d784b4583fd0cf5127190dda668",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_runtime_health_report.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_soak_analyzer.py",
+      "bytes": 6093,
+      "sha256": "e65e0fc7e0c2f1d35cf467ab6e8ed38f0c560b998f3b263d52e2dab1ff2db34e",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_soak_analyzer.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_soak_history.py",
+      "bytes": 4385,
+      "sha256": "63e9fabdbe7086ba8b643af7418d37ed98ba7b053eaa8986c7ee7ade28922ce3",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_soak_history.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_soak_history_report.py",
+      "bytes": 6957,
+      "sha256": "309c2458efdd36ed091ba2b3d08322b8df5078d7516c5b685567b65d837606fd",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_soak_history_report.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_static.py",
+      "bytes": 6770,
+      "sha256": "bdbad7c6fc0781b35b3084c6a76c968d40be7d7661d5845f00fc40291ebedb75",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_static.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_status_summary.py",
+      "bytes": 7235,
+      "sha256": "d1fcfab2a8476491f2ecdadfabd288be839f724acb3cdeab0ac3e2acafcda7de",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_status_summary.py"
+    },
+    {
+      "archive_path": "tests/test_phase1_would_signal_report.py",
+      "bytes": 4554,
+      "sha256": "db7dd35d712dd283bef88bd08a33d36ce006b80c7d1daf19e12248ea21798169",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase1_would_signal_report.py"
+    },
+    {
+      "archive_path": "tests/test_phase2_readiness_report.py",
+      "bytes": 5899,
+      "sha256": "4281490830e5e1e09b3994f0994a87c7cde939e483c36467f4dea3be9eca2c69",
+      "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\tests\\test_phase2_readiness_report.py"
+    },
+    {
+      "archive_path": "mt5_runtime/decision_log.csv",
+      "bytes": 129758,
+      "sha256": "3ed10916e151ab2e16d739303d38f7c9f77965952992f3d17a2c4b6b03a6139d",
+      "source_path": "C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv"
+    },
+    {
+      "archive_path": "mt5_runtime/startup_log.csv",
+      "bytes": 2817,
+      "sha256": "c88b07c57a214273ad716472a1e0a78896ffad29c58eb4fb818aeea1d92ddba2",
+      "source_path": "C:\\MT5PortableGoldMission\\MQL5\\Files\\startup_log.csv"
+    },
+    {
+      "archive_path": "mt5_runtime/shutdown_log.csv",
+      "bytes": 2066,
+      "sha256": "3d58be48b8ce61c34fc3188f02887cdc7c64a1156885ac3dbbf1faf67f33ff61",
+      "source_path": "C:\\MT5PortableGoldMission\\MQL5\\Files\\shutdown_log.csv"
+    },
+    {
+      "archive_path": "mt5_runtime/compile_Phase1DryRunShell.log",
+      "bytes": 7258,
+      "sha256": "136764f3423aeb25ddba736f430f8c560013754e7df1363a6baa387dc09af9e1",
+      "source_path": "C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log"
+    }
+  ],
+  "included_count": 79,
+  "log_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_DRY_RUN_LOG_REPORT.md",
+  "log_verification_status": "PASS",
+  "mt5_files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
+  "phase2_readiness_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
+  "phase2_readiness_status": "PENDING",
+  "review_index_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md",
+  "review_index_status": "PENDING",
+  "runtime_health_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_RUNTIME_HEALTH_REPORT.md",
+  "runtime_health_status": "PASS",
+  "soak_analysis_status": "PASS",
+  "soak_history_appended": true,
+  "soak_history_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_HISTORY.csv",
+  "soak_history_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_HISTORY_REPORT.md",
+  "soak_history_report_status": "PASS",
+  "soak_history_rows": 34,
+  "soak_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_SOAK_DRIFT_REPORT.md",
+  "status_summary_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json",
+  "workspace_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1",
+  "would_signal_cluster_count": 14,
+  "would_signal_count": 14,
+  "would_signal_csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
+  "would_signal_report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
+  "would_signal_status": "PASS"
+}

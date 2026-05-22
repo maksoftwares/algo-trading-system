@@ -4,7 +4,7 @@
 
 input string InpSymbol = "";
 input int    InpLogIntervalSeconds = 5;
-input bool   InpUseCommonFiles = true;
+input bool   InpUseCommonFiles = false;
 input string InpFilePrefix = "spread_log";
 input bool   InpPrintToExpertsTab = false;
 input int    InpRolloverHourServer = 22;
