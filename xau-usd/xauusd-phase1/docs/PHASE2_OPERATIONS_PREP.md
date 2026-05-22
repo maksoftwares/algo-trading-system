@@ -68,10 +68,11 @@ This script is intentionally scheduler-friendly: it exits nonzero on health fail
 Prepared periodic command:
 
 ```powershell
-..\xauusd-phase0\.venv\Scripts\python.exe scripts\run_phase1_periodic_checks.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\run_phase1_periodic_checks.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --spread-files-dir C:\MT5PortableSpreadLogger\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log
 ```
 
 This wraps status summary, soak history, acceptance, review index, Phase 2 readiness, and external health into one scheduler entry point.
+Use `--spread-files-dir` when the passive spread logger is isolated in a second MT5 Portable instance so Phase 1 soak telemetry and spread-cost telemetry do not compete for the same chart.
 
 ## Disaster Recovery Runbook
 

@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 34. |
+| history_rows | PASS | History rows available: 36. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | PASS | Latest status is healthy; acceptance is PENDING. |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,11 +17,11 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 34
+- History rows: 36
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-22T06:41:56.603607+00:00
-- Latest M5 bar: 2026.05.22 06:40:00
-- Latest soak progress: 14.1%
+- Latest summary: 2026-05-22T07:12:15.307285+00:00
+- Latest M5 bar: 2026.05.22 07:10:00
+- Latest soak progress: 14.51%
 - Latest would-signal rows: 14
 - Latest setup clusters: 14
 
@@ -35,8 +35,6 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Summary UTC | Latest Bar | Rows | Progress % | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-22T05:28:50.122794+00:00 | 2026.05.22 05:25:00 | 182 | 13.06 | 12 | 12 | PENDING |
-| 2026-05-22T05:59:40.705227+00:00 | 2026.05.22 05:55:00 | 188 | 13.47 | 13 | 13 | PENDING |
 | 2026-05-22T06:05:02.763056+00:00 | 2026.05.22 06:05:00 | 190 | 13.61 | 13 | 13 | PENDING |
 | 2026-05-22T06:05:06.898675+00:00 | 2026.05.22 06:05:00 | 190 | 13.61 | 13 | 13 | PENDING |
 | 2026-05-22T06:30:51.507653+00:00 | 2026.05.22 06:30:00 | 195 | 13.96 | 14 | 14 | PENDING |
@@ -47,6 +45,8 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | 2026-05-22T06:37:07.652332+00:00 | 2026.05.22 06:35:00 | 196 | 14.03 | 14 | 14 | PENDING |
 | 2026-05-22T06:41:56.240237+00:00 | 2026.05.22 06:40:00 | 197 | 14.1 | 14 | 14 | PENDING |
 | 2026-05-22T06:41:56.603607+00:00 | 2026.05.22 06:40:00 | 197 | 14.1 | 14 | 14 | PENDING |
+| 2026-05-22T07:01:07.365628+00:00 | 2026.05.22 07:00:00 | 201 | 14.37 | 14 | 14 | PENDING |
+| 2026-05-22T07:12:15.307285+00:00 | 2026.05.22 07:10:00 | 203 | 14.51 | 14 | 14 | PENDING |
 
 ## Historical Acceptance Notes
 

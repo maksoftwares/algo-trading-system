@@ -124,6 +124,7 @@ From this folder:
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase1_soak_history_report.py --history outputs\reports\PHASE1_SOAK_HISTORY.csv --report outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase1_review_index.py --root . --report outputs\reports\PHASE1_REVIEW_INDEX.md
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_readiness_report.py --root . --report outputs\reports\PHASE2_READINESS_REPORT.md
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\run_phase1_periodic_checks.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --spread-files-dir C:\MT5PortableSpreadLogger\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase1_bundle.py --files-dir C:\MT5PortableGoldMission\MQL5\Files
 ```
 
@@ -136,3 +137,4 @@ From the repo root, the existing Phase 0 checks should still pass.
 `generate_phase1_soak_history_report.py` writes `outputs/reports/PHASE1_SOAK_HISTORY_REPORT.md` as a reviewer-friendly view of that ledger.
 `generate_phase1_review_index.py` writes `outputs/reports/PHASE1_REVIEW_INDEX.md` as the single reviewer entry point.
 `generate_phase2_readiness_report.py` writes `outputs/reports/PHASE2_READINESS_REPORT.md` as a preflight gate report for paper-mode preparation.
+`run_phase1_periodic_checks.py` can read Phase 1 dry-run logs from one terminal and passive spread logs from a separate logger terminal with `--spread-files-dir`.

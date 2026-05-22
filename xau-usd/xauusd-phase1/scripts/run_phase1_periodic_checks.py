@@ -40,15 +40,17 @@ def run_phase1_periodic_checks(
     root: Path,
     files_dir: Path,
     compile_log: Path,
+    spread_files_dir: Path | None = None,
     max_fresh_minutes: int = 15,
 ) -> PeriodicCheckOutput:
     root = root.resolve()
+    spread_files_dir = spread_files_dir or files_dir
     report_dir = root / "outputs" / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
     phase0_root = root.parent / "xauusd-phase0"
     if phase0_root.exists():
         phase0_config = load_project_config(phase0_root)
-        analyze_spread_logs(phase0_config, input_dir=files_dir, allow_pending=True)
+        analyze_spread_logs(phase0_config, input_dir=spread_files_dir, allow_pending=True)
         generate_measured_cost_revalidation(phase0_config, expert="breakout_retest")
 
     status_summary_path = generate_phase1_status_summary(
@@ -115,6 +117,11 @@ def main(argv: list[str] | None = None) -> int:
         default=Path("C:/MT5PortableGoldMission/compile_Phase1DryRunShell.log"),
     )
     parser.add_argument(
+        "--spread-files-dir",
+        type=Path,
+        help="Optional passive spread logger Files directory. Defaults to --files-dir.",
+    )
+    parser.add_argument(
         "--root",
         type=Path,
         default=Path(__file__).resolve().parents[1],
@@ -126,11 +133,13 @@ def main(argv: list[str] | None = None) -> int:
         root=args.root,
         files_dir=args.files_dir,
         compile_log=args.compile_log,
+        spread_files_dir=args.spread_files_dir,
         max_fresh_minutes=args.max_fresh_minutes,
     )
     print(f"Periodic checks: {output.status}")
     print(f"Status summary: {output.status_summary_path}")
     print(f"External health: {output.external_health_path}")
+    print(f"Spread files dir: {args.spread_files_dir or args.files_dir}")
     print(f"Soak history rows: {output.soak_history_rows}")
     print(f"Acceptance: {output.acceptance_status}")
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")

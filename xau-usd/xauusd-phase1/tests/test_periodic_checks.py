@@ -25,3 +25,10 @@ def test_periodic_check_output_shape(tmp_path: Path):
 def test_periodic_imports_do_not_shadow_csv_datetime():
     assert csv.excel.delimiter == ","
     assert datetime(2026, 5, 22).year == 2026
+
+
+def test_periodic_checks_support_separate_spread_log_directory():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "--spread-files-dir" in script
+    assert "input_dir=spread_files_dir" in script

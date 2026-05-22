@@ -26,8 +26,9 @@ Last updated: 2026-05-22
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.
 - Passive MT5 tools exist for spread logging and historical bar export.
 - Passive spread logger is deployed and compiled under `C:\MT5PortableGoldMission\MQL5\Experts\Phase0\PassiveSpreadLogger_XAUUSD.ex5`; compile log `C:\MT5PortableGoldMission\compile_PassiveSpreadLogger_XAUUSD.log` shows 0 errors / 0 warnings.
-- Passive spread logger preset is deployed to `C:\MT5PortableGoldMission\MQL5\Presets\PassiveSpreadLogger_XAUUSD.safe.set` with `InpUseCommonFiles=false` so logs should appear in `C:\MT5PortableGoldMission\MQL5\Files` after the logger is attached to an XAUUSD chart.
-- Passive spread logger deployment report: `xau-usd\xauusd-phase0\outputs\reports\PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md`, status PENDING until `spread_log_*.csv` files appear.
+- Passive spread logger is running in an isolated portable clone at `C:\MT5PortableSpreadLogger\terminal64.exe` so the active Phase 1 dry-run chart in `C:\MT5PortableGoldMission` is not restarted or replaced.
+- Passive spread logger output path: `C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260522.csv`.
+- Passive spread logger deployment report: `xau-usd\xauusd-phase0\outputs\reports\PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md`, status PASS for the logger clone.
 - MT5 passive exports and public Dukascopy acquisition are complete for the Phase 0 required bar set.
 - Latest bar import status: `25 imported, 0 missing, 0 failed`.
 - Latest data readiness status: `PASS`, `25/25` required timeframe sets ready.
@@ -108,8 +109,8 @@ Last updated: 2026-05-22
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
-- Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableGoldMission\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING because no `spread_log_*.csv` files are present in the MT5 Files directory yet.
+- Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING until the passive spread logger reaches the required observation/day thresholds.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
@@ -127,7 +128,7 @@ Last updated: 2026-05-22
 - Latest Phase 2 readiness status: PENDING. Phase 2 prep spec, cost reporting policy, fixed-notional reporting, Phase 1 summary health, latest dry-run boundary, and would-signal evidence pass; measured cost model, measured-cost revalidation, Phase 1 acceptance, Phase 1 review index, five-day soak completion, and owner approval remain pending.
 - Phase 1 deploy/compile helper: `xau-usd\xauusd-phase1\scripts\deploy_phase1_mt5.py`.
 - Latest helper run deployed 41 files to `C:\MT5PortableGoldMission\MQL5` plus the mapped terminal data MQL5 root, and MetaEditor compile status was PASS.
-- Hourly automation `phase1-mt5-soak-check` now runs both the runtime log verifier and the soak/drift analyzer against `C:\MT5PortableGoldMission\MQL5\Files`.
+- Hourly automation `phase1-mt5-soak-check` runs the Phase 1 runtime checks against `C:\MT5PortableGoldMission\MQL5\Files` and measured-cost checks against `C:\MT5PortableSpreadLogger\MQL5\Files` through `--spread-files-dir`.
 - Acceptance report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_acceptance_report.py`.
 - Latest Phase 1 acceptance report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md`.
 - Latest acceptance status: PENDING. Compile/source-safety/log/soak/runtime-health/would-signal/soak-history/dry-run/permission/runtime-freshness/latest-row gates pass; only the five-trading-day wall-clock soak gate remains pending.

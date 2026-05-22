@@ -10,16 +10,18 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Files |
 | --- | --- | --- | --- | --- |
-| 0 | 500 | 0 | 5 | 0 |
+| 41 | 500 | 1 | 5 | 1 |
 
 ## Global Cost Model
 
-No rows.
+| scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| global | all | all | XAUUSD | 41 | 50 | 75 | 75 |
 
 ## Source Files
 
-No source files yet.
+- C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260522.csv
 
 ## Note
 
-No spread logger CSV files found in C:\MT5PortableGoldMission\MQL5\Files matching spread_log_*.csv.
+Measured cost model generated from passive spread logger data.

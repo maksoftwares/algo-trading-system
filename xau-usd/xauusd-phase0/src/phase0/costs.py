@@ -99,6 +99,9 @@ def _measured_spread_points(
     if cost_model not in {"median", "p95"}:
         return None
 
+    if not _measured_cost_model_is_pass(config):
+        return None
+
     path = config.root / "outputs" / "reports" / "cost_model_measured.csv"
     if not path.exists():
         return None
@@ -153,6 +156,13 @@ def _measured_spread_points(
             )
         return spread_points
     return None
+
+
+def _measured_cost_model_is_pass(config: ProjectConfig) -> bool:
+    path = config.root / "outputs" / "reports" / "MEASURED_COST_MODEL.md"
+    if not path.exists():
+        return False
+    return "Overall status: PASS" in path.read_text(encoding="utf-8", errors="replace")
 
 
 def _measured_lookup_order(timestamp_utc: datetime | None) -> list[tuple[str, str | int]]:

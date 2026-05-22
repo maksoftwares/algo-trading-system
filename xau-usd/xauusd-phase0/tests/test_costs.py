@@ -69,6 +69,16 @@ def test_measured_cost_model_falls_back_to_day_then_configured(project_root, tmp
     assert configured_model.spread_points == pytest.approx(35.0)
 
 
+def test_pending_measured_cost_model_does_not_override_config(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _write_measured_cost_model(root, status="PENDING")
+    config = load_project_config(root)
+
+    model = load_cost_model(config, "XAUUSD", "capital_com", "p95")
+
+    assert model.spread_points == pytest.approx(35.0)
+
+
 def test_mid_price_spread_application():
     assert price_from_mid(100.0, "LONG", "entry", 0.20) == pytest.approx(100.10)
     assert price_from_mid(100.0, "LONG", "exit", 0.20) == pytest.approx(99.90)
@@ -93,9 +103,13 @@ def _copy_config(project_root: Path, tmp_path: Path) -> Path:
     return root
 
 
-def _write_measured_cost_model(root: Path) -> None:
+def _write_measured_cost_model(root: Path, status: str = "PASS") -> None:
     path = root / "outputs" / "reports" / "cost_model_measured.csv"
     path.parent.mkdir(parents=True, exist_ok=True)
+    (path.parent / "MEASURED_COST_MODEL.md").write_text(
+        f"# Measured Cost Model\n\nOverall status: {status}\n",
+        encoding="utf-8",
+    )
     pd.DataFrame(
         [
             {
