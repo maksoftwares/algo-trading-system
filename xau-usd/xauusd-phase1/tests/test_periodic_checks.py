@@ -32,3 +32,9 @@ def test_periodic_checks_support_separate_spread_log_directory():
 
     assert "--spread-files-dir" in script
     assert "input_dir=spread_files_dir" in script
+
+
+def test_periodic_checks_break_phase1_phase2_report_cycle():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "include_phase2_readiness=False" in script

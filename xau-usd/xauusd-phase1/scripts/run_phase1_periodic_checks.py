@@ -81,6 +81,11 @@ def run_phase1_periodic_checks(
         runtime_health_report=runtime_health.report_path,
         max_fresh_minutes=max_fresh_minutes,
     )
+    generate_phase1_review_index(
+        root=root,
+        report_path=report_dir / "PHASE1_REVIEW_INDEX.md",
+        include_phase2_readiness=False,
+    )
     phase2_readiness = generate_phase2_readiness_report(
         root=root,
         report_path=report_dir / "PHASE2_READINESS_REPORT.md",

@@ -93,9 +93,10 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _overall_status(items: list[ReviewIndexItem]) -> str:
-    if any(item.status == "FAIL" for item in items):
+    phase1_items = [item for item in items if item.artifact != "Phase 2 readiness report"]
+    if any(item.status == "FAIL" for item in phase1_items):
         return "FAIL"
-    acceptance = next((item.status for item in items if item.artifact == "Acceptance report"), "")
+    acceptance = next((item.status for item in phase1_items if item.artifact == "Acceptance report"), "")
     if acceptance == "PASS":
         return "PASS"
     return "PENDING"

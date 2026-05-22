@@ -16,7 +16,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     (root / "docs").mkdir(parents=True)
     report_dir.mkdir(parents=True)
     _write_phase0_cost_artifacts(root)
-    (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
+    _write_phase2_docs(root)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=5.28)
@@ -38,7 +38,7 @@ def test_phase2_readiness_passes_when_all_gates_pass(tmp_path):
     report_dir.mkdir(parents=True)
     _write_phase0_cost_artifacts(root, include_measured=True)
     approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
-    (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
+    _write_phase2_docs(root)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
@@ -57,7 +57,7 @@ def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     (root / "docs").mkdir(parents=True)
     report_dir.mkdir(parents=True)
     _write_phase0_cost_artifacts(root, include_measured=True)
-    (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
+    _write_phase2_docs(root)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0, permission="true")
@@ -136,3 +136,20 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
             "# Revalidation\n\nOverall status: PASS\n",
             encoding="utf-8",
         )
+
+
+def _write_phase2_docs(root: Path) -> None:
+    docs = root / "docs"
+    (docs / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
+    (docs / "PHASE2_COST_MEASUREMENT_PROTOCOL.md").write_text(
+        "# Cost\n\ncost-measurement experiment\n\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R\n",
+        encoding="utf-8",
+    )
+    (docs / "PHASE2_SINGLE_EDGE_RISK_PLAN.md").write_text(
+        "# Risk\n\nsingle-edge same-family +0.10R\n",
+        encoding="utf-8",
+    )
+    (docs / "PHASE2_OPERATIONS_PREP.md").write_text(
+        "# Ops\n\nExternal Health Monitor Spec\n\nDisaster Recovery Runbook\n\nCapital Allocation Ladder\n",
+        encoding="utf-8",
+    )

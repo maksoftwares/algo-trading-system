@@ -49,6 +49,21 @@ def generate_phase2_readiness_report(
 
     items = [
         _file_gate("Phase 2 preparation spec", root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md"),
+        _file_contains_gate(
+            "Phase 2 cost-measurement protocol",
+            root / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md",
+            ("MIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R", "cost-measurement experiment"),
+        ),
+        _file_contains_gate(
+            "Single-edge risk plan",
+            root / "docs" / "PHASE2_SINGLE_EDGE_RISK_PLAN.md",
+            ("single-edge", "same-family", "+0.10R"),
+        ),
+        _file_contains_gate(
+            "Phase 2 operations prep",
+            root / "docs" / "PHASE2_OPERATIONS_PREP.md",
+            ("External Health Monitor Spec", "Disaster Recovery Runbook", "Capital Allocation Ladder"),
+        ),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
         _status_or_pending_gate(
             "Fixed-notional reporting",
@@ -83,6 +98,20 @@ def _file_gate(gate: str, path: Path) -> Phase2ReadinessItem:
     if path.exists() and path.stat().st_size > 0:
         return Phase2ReadinessItem(gate, "PASS", f"Found `{path}`.")
     return Phase2ReadinessItem(gate, "FAIL", f"Missing or empty `{path}`.")
+
+
+def _file_contains_gate(gate: str, path: Path, required_tokens: tuple[str, ...]) -> Phase2ReadinessItem:
+    if not path.exists() or path.stat().st_size == 0:
+        return Phase2ReadinessItem(gate, "FAIL", f"Missing or empty `{path}`.")
+    text = path.read_text(encoding="utf-8", errors="replace")
+    missing = [token for token in required_tokens if token not in text]
+    if missing:
+        return Phase2ReadinessItem(
+            gate,
+            "FAIL",
+            f"`{path}` is missing required token(s): {', '.join(missing)}.",
+        )
+    return Phase2ReadinessItem(gate, "PASS", f"`{path}` contains required Phase 2 controls.")
 
 
 def _status_or_pending_gate(gate: str, path: Path, required: str) -> Phase2ReadinessItem:

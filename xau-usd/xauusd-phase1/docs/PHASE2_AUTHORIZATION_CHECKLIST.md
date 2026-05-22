@@ -21,6 +21,12 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
+| Phase 2 cost-measurement protocol | PASS | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` documents Phase 2 as a cost-measurement experiment and pre-commits the +0.10R suspension rule. |
+| Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats both approved variants as one correlated breakout-retest family. |
+| External health monitor | PASS | `docs/PHASE2_OPERATIONS_PREP.md` defines the out-of-terminal monitor and local scheduler-friendly check script. |
+| Disaster recovery runbook | PASS | `docs/PHASE2_OPERATIONS_PREP.md` documents recovery assets, procedure, and rollback rule. |
+| Capital allocation ladder | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines the paper-to-micro ladder and single-edge sizing constraint. |
+| Quarterly/review triggers | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines cost, trade-count, PF, drawdown, concentration, execution, and logic triggers. |
 
 ## Still Pending
 
@@ -33,11 +39,6 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
 | Project owner approval | PENDING | Add `outputs/reports/PHASE2_OWNER_APPROVAL.md` after the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | Document provider, region, specs, backup access, and monitoring approach. |
-| External health monitor | PENDING | Define an out-of-terminal heartbeat or file freshness monitor. |
-| Disaster recovery runbook | PENDING | Document restore, redeploy, log recovery, and rollback procedure. |
-| Capital allocation ladder | PENDING | Define paper-mode sizing, step-up rules, and stop conditions. |
-| Measured-cost suspension rule | PENDING | Before Phase 2, document the pre-committed rule: suspend the breakout-retest family if measured paper/live execution cost pushes net expectancy below +0.10R. |
-| Quarterly review triggers | PENDING | Document drift, drawdown, trade-count, and behavior-review triggers. |
 | Independent second candidate implementation | PENDING | Keep searching for a non-breakout-retest-family candidate; same-family swing candidate is not independent diversification. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.

@@ -61,6 +61,29 @@ def test_review_index_fails_when_required_artifact_missing(tmp_path):
     assert any(item.status == "FAIL" for item in output.items)
 
 
+def test_phase2_readiness_failure_is_informational_for_phase1_index(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    report_dir.mkdir(parents=True)
+    _write_reports(report_dir)
+    (report_dir / "PHASE2_READINESS_REPORT.md").write_text(
+        "# Phase 2 readiness\n\nOverall status: FAIL\n",
+        encoding="utf-8",
+    )
+    _write_status_summary(report_dir / "PHASE1_STATUS_SUMMARY.json")
+    (report_dir / "PHASE1_WOULD_SIGNAL_REVIEW.csv").write_text("cluster_id\n1\n", encoding="utf-8")
+    (report_dir / "PHASE1_SOAK_HISTORY.csv").write_text("created_at_utc,acceptance\n", encoding="utf-8")
+
+    output = module.generate_phase1_review_index(root)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.artifact == "Phase 2 readiness report" and item.status == "FAIL"
+        for item in output.items
+    )
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:

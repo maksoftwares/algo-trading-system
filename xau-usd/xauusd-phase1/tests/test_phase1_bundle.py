@@ -106,6 +106,18 @@ def _write_project_shell(project: Path) -> None:
     (project / "README.md").write_text("# Phase 1\n", encoding="utf-8")
     (project / "docs" / "PHASE1_DRY_RUN_SCOPE.md").write_text("scope\n", encoding="utf-8")
     (project / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("phase2 prep\n", encoding="utf-8")
+    (project / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md").write_text(
+        "cost-measurement experiment\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R\n",
+        encoding="utf-8",
+    )
+    (project / "docs" / "PHASE2_SINGLE_EDGE_RISK_PLAN.md").write_text(
+        "single-edge same-family +0.10R\n",
+        encoding="utf-8",
+    )
+    (project / "docs" / "PHASE2_OPERATIONS_PREP.md").write_text(
+        "External Health Monitor Spec\nDisaster Recovery Runbook\nCapital Allocation Ladder\n",
+        encoding="utf-8",
+    )
     (project / "mt5" / "README.md").write_text("mt5\n", encoding="utf-8")
     (project / "mt5" / "Experts" / "Phase1DryRunShell.mq5").write_text("#property strict\n", encoding="utf-8")
     (project / "mt5" / "Include" / "Phase1" / "Phase1Types.mqh").write_text("#define X\n", encoding="utf-8")

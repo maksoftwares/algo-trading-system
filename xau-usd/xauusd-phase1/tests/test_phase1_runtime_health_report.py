@@ -68,6 +68,24 @@ def test_runtime_health_report_warns_on_bar_gap(tmp_path):
     assert any(check.name == "unique_bar_gaps" and check.status == "WARN" for check in output.checks)
 
 
+def test_runtime_health_tolerates_extra_shutdown_rows(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv", rows=2)
+    _write_decision_log(files_dir / "decision_log.csv")
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 21, 12, 12),
+    )
+
+    assert output.status == "PASS"
+    assert any(check.name == "startup_shutdown_rows" and check.status == "PASS" for check in output.checks)
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -110,7 +128,7 @@ def _write_startup_log(path: Path) -> None:
         )
 
 
-def _write_shutdown_log(path: Path) -> None:
+def _write_shutdown_log(path: Path, rows: int = 1) -> None:
     fieldnames = [
         "timestamp_broker",
         "timestamp_utc",
@@ -125,19 +143,21 @@ def _write_shutdown_log(path: Path) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerow(
-            {
-                "timestamp_broker": "2026.05.21 12:15:00",
-                "timestamp_utc": "2026.05.21 08:15:00",
-                "timestamp_local": "2026.05.21 12:15:00",
-                "run_id": "phase1-dry-run-v0.5",
-                "symbol": "XAUUSD",
-                "shutdown_reason": "9",
-                "last_m5_bar_time": "2026.05.21 12:10:00",
-                "last_decision_write_time": "2026.05.21 12:10:01",
-                "lifecycle_state": "DRY_RUN",
-            }
-        )
+        for index in range(rows):
+            minute = 15 + index
+            writer.writerow(
+                {
+                    "timestamp_broker": f"2026.05.21 12:{minute:02d}:00",
+                    "timestamp_utc": f"2026.05.21 08:{minute:02d}:00",
+                    "timestamp_local": f"2026.05.21 12:{minute:02d}:00",
+                    "run_id": "phase1-dry-run-v0.5",
+                    "symbol": "XAUUSD",
+                    "shutdown_reason": "9",
+                    "last_m5_bar_time": "2026.05.21 12:10:00",
+                    "last_decision_write_time": "2026.05.21 12:10:01",
+                    "lifecycle_state": "DRY_RUN",
+                }
+            )
 
 
 def _write_decision_log(

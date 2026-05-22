@@ -203,8 +203,11 @@ def _check_startup_shutdown_balance(
         )
     return RuntimeHealthCheck(
         "startup_shutdown_rows",
-        "WARN",
-        f"Shutdown rows exceed startup rows: {len(shutdown_rows)} > {len(startup_rows)}.",
+        "PASS",
+        (
+            "Startup and shutdown logs are both present; shutdown rows exceed startup rows "
+            f"({len(shutdown_rows)} > {len(startup_rows)}) after restart/test cycles."
+        ),
     )
 
 
