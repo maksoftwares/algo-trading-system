@@ -47,9 +47,9 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | --- | --- |
 | Latest status summary | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
 | Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip` |
-| Decision rows | 4 |
-| Latest bar | 2026.05.22 11:10:00 |
-| Soak progress | 0.14% after v0.6 schema reset |
+| Decision rows | 27 |
+| Latest bar | 2026.05.22 12:40:00 |
+| Soak progress | 1.39% after v0.6 schema reset |
 | Acceptance | PENDING |
 
 ## Decision Rule

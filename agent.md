@@ -71,8 +71,8 @@ Last updated: 2026-05-22
 - Phase 1 v0.5 logs were archived before the v0.6 schema change:
   - `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_6_20260522_150335.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log_pre_v0_6_20260522_150335.csv`
-- Current v0.6 would-signal report has 0 post-reset would-signal rows so far; the previous v0.5 report had 5 breakout-retest dry-run would-signal rows across 5 setup clusters, all dry-run and permission-locked.
-- Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the pre-v0.6 schema; v0.6 lock replay is pending because logs were intentionally archived for the new `sbr_*` schema.
+- Current v0.6 would-signal report has 4 post-reset dry-run would-signal rows across 4 setup clusters; all stayed dry-run and permission-locked.
+- Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the v0.6 `sbr_*` schema; the normal safe preset was restored afterward.
 - Latest MT5 lifecycle logs:
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv`

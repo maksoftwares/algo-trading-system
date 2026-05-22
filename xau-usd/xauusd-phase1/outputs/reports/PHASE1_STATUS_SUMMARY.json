@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-22T11:10:17.621338+00:00",
+  "created_at_utc": "2026-05-22T12:42:18.308322+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -9,9 +9,9 @@
     "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
-    "decision_rows": 4,
+    "decision_rows": 27,
     "latest_row": {
-      "bar_time": "2026.05.22 11:10:00",
+      "bar_time": "2026.05.22 12:40:00",
       "br_direction": "SHORT",
       "br_stage": "WAIT_LEVEL_BREAK_RETEST",
       "br_would_signal": "false",
@@ -22,28 +22,28 @@
       "sbr_stage": "WAIT_LEVEL_BREAK_RETEST",
       "sbr_would_signal": "false",
       "server_time_status": "CLOCK_OK",
-      "timestamp_broker": "2026.05.22 11:10:00",
-      "timestamp_local": "2026.05.22 15:09:57",
+      "timestamp_broker": "2026.05.22 12:42:07",
+      "timestamp_local": "2026.05.22 16:42:03",
       "trade_permission": "false"
     },
-    "unique_run_ids": 1
+    "unique_run_ids": 5
   },
   "soak": {
-    "observed_days": 0.0069,
-    "progress_pct": 0.14,
+    "observed_days": 0.0694,
+    "progress_pct": 1.39,
     "required_days": 5
   },
   "status": {
     "acceptance": "PENDING",
-    "log_verification": "WARN",
+    "log_verification": "PASS",
     "runtime_health": "WARN",
     "soak_analysis": "PASS",
-    "would_signal": "WARN"
+    "would_signal": "PASS"
   },
   "would_signal": {
-    "clusters": 0,
+    "clusters": 4,
     "csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
     "report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
-    "rows": 0
+    "rows": 4
   }
 }
