@@ -99,7 +99,8 @@ Last updated: 2026-05-22
 - D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
 - Latest D1 result: PASS. 135 CPCV paths across 9 matrix cells, 100% pass rate, median OOS PF 1.379, minimum OOS PF 1.135.
 - D2 Reality Check command: `phase0 run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10`.
-- Latest D2 result: PASS. `breakout_retest` remained the family winner, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0234.
+- Latest D2 result after Review #3 full-universe rerun: PASS. `breakout_retest` remained the family winner across 18 non-empty matrix-ledger candidates, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0336.
+- Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. It audited 17 rejected/research candidates; 4 had sample-size failures, all 17 had multi-cell expectancy failures, and 0 were frequency-only failures.
 - D3 true-holdout audit command: `phase0 audit-true-holdout`.
 - Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
@@ -170,9 +171,10 @@ Last updated: 2026-05-22
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 629 rows over 1 observed day; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 4326 rows over 1 observed day; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
+- Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
 - Dedicated Phase 1 CI workflow: `.github\workflows\phase1.yml`.
 - Soak history appender: `xau-usd\xauusd-phase1\scripts\append_phase1_soak_history.py`.

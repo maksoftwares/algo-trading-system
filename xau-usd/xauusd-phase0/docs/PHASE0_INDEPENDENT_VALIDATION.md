@@ -9,7 +9,7 @@ This document tracks the reviewer-requested D1-D4 checks. These checks do not ch
 | Item | Status | Current conclusion |
 | --- | --- | --- |
 | D1 - Combinatorial Purged Cross-Validation | PASS | `breakout_retest` passed 135 purged chronological paths across all 9 matrix cells; pass rate 100%, median OOS PF 1.379, minimum OOS PF 1.135. |
-| D2 - White Reality Check / SPA-style bootstrap | PASS | `breakout_retest` remained the family winner against `range_mr` and `trend_pullback`; White Reality Check p-value 0.0200 and max pairwise SPA p-value 0.0234. |
+| D2 - White Reality Check / SPA-style bootstrap | PASS | Review #3 rerun: `breakout_retest` remained the family winner against the 18 non-empty matrix-ledger candidates; White Reality Check p-value 0.0200 and max pairwise SPA p-value 0.0336. |
 | D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
@@ -68,13 +68,23 @@ Latest result:
 | Status | PASS |
 | Family winner | breakout_retest |
 | White Reality Check p-value | 0.0200 |
-| Max pairwise SPA p-value | 0.0234 |
+| Max pairwise SPA p-value | 0.0336 |
+| Non-empty candidate universe | 18 |
 | Bootstrap iterations | 5000 |
 | Circular block length | 3 months |
 
 Interpretation:
 
-The approved expert remained the winner after a block-bootstrap adjustment for the tested expert family. This reduces, but cannot eliminate, data-mining risk.
+The approved expert remained the winner after a Review #3 rerun across the full non-empty tested matrix universe. The command reads every matrix-result directory with a usable trade ledger and keeps each expert as one monthly series, so cost/broker cells do not become separate optimized candidates. This reduces, but cannot eliminate, data-mining risk.
+
+Related Review #3 gate-frequency audit:
+
+```text
+outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md
+outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv
+```
+
+That audit found 17 rejected/research candidates, 4 with sample-size failures, 17 with multi-cell expectancy failures, and 0 frequency-only failures.
 
 ## D3 - True Holdout
 

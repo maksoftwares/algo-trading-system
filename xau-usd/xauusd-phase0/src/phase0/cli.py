@@ -44,6 +44,7 @@ from phase0.normalizer import (
 )
 from phase0.reports import generate_all_reports
 from phase0.reference import validate_reference_files
+from phase0.rejection_audit import generate_rejection_gate_audit
 from phase0.reality_check import run_reality_check
 from phase0.research_hypotheses import register_research_hypothesis
 from phase0.research_smoke import run_research_candidate_smoke
@@ -304,6 +305,21 @@ def build_parser() -> argparse.ArgumentParser:
     reality_check.add_argument("--max-pvalue", type=float, default=0.10)
     reality_check.add_argument("--seed", type=int, default=20260521)
     reality_check.set_defaults(func=_cmd_run_reality_check)
+
+    rejection_audit = subparsers.add_parser(
+        "generate-rejection-gate-audit",
+        help="Aggregate rejected-candidate matrix gate failures for frequency-bias review.",
+    )
+    rejection_audit.add_argument(
+        "--approved-expert",
+        action="append",
+        default=None,
+        help=(
+            "Expert to exclude from rejected-candidate counts. Repeatable. "
+            "Defaults to breakout_retest and swing_breakout_retest_v0."
+        ),
+    )
+    rejection_audit.set_defaults(func=_cmd_generate_rejection_gate_audit)
 
     research_hypothesis = subparsers.add_parser(
         "register-research-hypothesis",
@@ -858,6 +874,24 @@ def _cmd_run_reality_check(args: argparse.Namespace) -> int:
     print(f"White Reality Check p-value: {output.white_reality_check_pvalue:.4f}")
     print(f"Max pairwise SPA p-value: {output.max_pairwise_spa_pvalue:.4f}")
     return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_rejection_gate_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_rejection_gate_audit(
+        config,
+        approved_experts=args.approved_expert
+        if args.approved_expert is not None
+        else ("breakout_retest", "swing_breakout_retest_v0"),
+    )
+    print("Rejected-candidate gate audit generated")
+    print(output.report_path)
+    print(output.summary_path)
+    print(f"Audited candidates: {output.audited_candidates}")
+    print(f"Rejected/research candidates: {output.rejected_candidates}")
+    print(f"Sample-size failures: {output.sample_size_failure_candidates}")
+    print(f"Multi-cell expectancy failures: {output.edge_expectancy_failure_candidates}")
+    return 0
 
 
 def _cmd_register_research_hypothesis(args: argparse.Namespace) -> int:
