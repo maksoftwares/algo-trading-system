@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from phase0.config import ConfigError
@@ -12,7 +13,6 @@ from phase0.strategies.base import (
     context_point_size,
     context_symbol,
     copy_context,
-    latest_completed_position,
     require_frame,
     value_available,
 )
@@ -35,6 +35,24 @@ class SqueezeBreakoutLongV0Strategy(StrategyBase):
             h1["ema50"] = h1["close"].ewm(span=50, adjust=False).mean()
         if "ema50_slope12" not in h1:
             h1["ema50_slope12"] = h1["ema50"] - h1["ema50"].shift(12)
+        m5["m5_atr14_compression_threshold"] = (
+            pd.to_numeric(m5["atr14"], errors="coerce")
+            .shift(1)
+            .rolling(288, min_periods=288)
+            .quantile(0.40)
+        )
+        m5["m5_atr_compressed"] = m5["atr14"] < m5["m5_atr14_compression_threshold"]
+        m15["compression_high_16"] = (
+            pd.to_numeric(m15["high"], errors="coerce").rolling(16, min_periods=16).max()
+        )
+        m15["compression_low_16"] = (
+            pd.to_numeric(m15["low"], errors="coerce").rolling(16, min_periods=16).min()
+        )
+        m15["compression_width_16"] = m15["compression_high_16"] - m15["compression_low_16"]
+        m15["m15_width_threshold_120"] = (
+            m15["compression_width_16"].shift(1).rolling(120, min_periods=120).quantile(0.35)
+        )
+        m15["m15_range_compressed"] = m15["compression_width_16"] < m15["m15_width_threshold_120"]
         context["M5"] = m5
         context["M15"] = m15
         context["H1"] = h1
@@ -50,13 +68,17 @@ class SqueezeBreakoutLongV0Strategy(StrategyBase):
         h1 = context["H1"]
         symbol = context_symbol(context)
         point_size = context_point_size(context)
+        m5_time_values = _timestamp_values(m5)
+        m15_time_values = _timestamp_values(m15)
+        h1_time_values = _timestamp_values(h1)
         signals: list[Signal] = []
 
         for m5_position in range(288, len(m5)):
             row = m5.iloc[m5_position]
             timestamp = pd.Timestamp(row["timestamp_utc"])
-            m15_position = latest_completed_position(m15, timestamp)
-            h1_position = latest_completed_position(h1, timestamp)
+            timestamp_value = int(m5_time_values[m5_position])
+            m15_position = _latest_completed_position_from_values(m15_time_values, timestamp_value)
+            h1_position = _latest_completed_position_from_values(h1_time_values, timestamp_value)
             if m15_position is None or h1_position is None:
                 continue
             setup = self._setup_at_position(m5, m15, h1, m5_position, m15_position, h1_position)
@@ -120,18 +142,17 @@ class SqueezeBreakoutLongV0Strategy(StrategyBase):
         m5_atr = float(row["atr14"])
         if not value_available(m5_atr) or m5_atr <= 0:
             return None
-        if not self._m5_atr_compressed(m5, m5_position):
+        if not bool(m5["m5_atr_compressed"].iat[m5_position]):
             return None
         if not self._h1_context_ok(h1, h1_position):
             return None
 
-        compression = m15.iloc[m15_position - 15 : m15_position + 1]
-        compression_high = float(compression["high"].max())
-        compression_low = float(compression["low"].min())
-        compression_width = compression_high - compression_low
-        if compression_width <= 0:
+        compression_high = float(m15["compression_high_16"].iat[m15_position])
+        compression_low = float(m15["compression_low_16"].iat[m15_position])
+        compression_width = float(m15["compression_width_16"].iat[m15_position])
+        if not value_available(compression_high, compression_low, compression_width) or compression_width <= 0:
             return None
-        if not self._m15_range_compressed(m15, m15_position, compression_width):
+        if not bool(m15["m15_range_compressed"].iat[m15_position]):
             return None
 
         high = float(row["high"])
@@ -188,3 +209,12 @@ class SqueezeBreakoutLongV0Strategy(StrategyBase):
         ema50 = float(h1["ema50"].iat[position])
         slope = float(h1["ema50_slope12"].iat[position])
         return value_available(close, ema50, slope) and close > ema50 and slope >= 0
+
+
+def _timestamp_values(frame: pd.DataFrame) -> np.ndarray:
+    return pd.to_datetime(frame["timestamp_utc"], utc=True, errors="coerce").astype("int64").to_numpy()
+
+
+def _latest_completed_position_from_values(values: np.ndarray, timestamp_value: int) -> int | None:
+    position = int(np.searchsorted(values, timestamp_value, side="right")) - 1
+    return position if position >= 0 else None

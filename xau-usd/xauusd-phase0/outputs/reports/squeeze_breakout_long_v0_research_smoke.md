@@ -1,7 +1,7 @@
 # Research Candidate Smoke Report
 
 Status: PASS
-Generated at UTC: 2026-05-22T05:27:36+00:00
+Generated at UTC: 2026-05-22T07:46:05+00:00
 Expert: `squeeze_breakout_long_v0`
 Hypothesis SHA256: `8afa7c87ae1ee1915a8fd5845e5babb673937084f5a38de98076cac45c252553`
 

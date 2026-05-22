@@ -322,6 +322,15 @@ def build_parser() -> argparse.ArgumentParser:
     research_smoke.add_argument("--hypothesis-file", required=True)
     research_smoke.set_defaults(func=_cmd_run_research_candidate_smoke)
 
+    research_matrix = subparsers.add_parser(
+        "run-research-matrix",
+        help="Run the 9-cell matrix for an explicitly hash-locked research candidate only.",
+    )
+    research_matrix.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_matrix.add_argument("--hypothesis-file", required=True)
+    research_matrix.add_argument("--synthetic-sample", action="store_true")
+    research_matrix.set_defaults(func=_cmd_run_research_matrix)
+
     fixed_notional = subparsers.add_parser(
         "generate-fixed-notional-report",
         help="Generate fixed-risk no-compounding and cost-in-R reporting for an expert.",
@@ -836,6 +845,33 @@ def _cmd_run_research_candidate_smoke(args: argparse.Namespace) -> int:
     print(f"Signals: {output.signal_count}")
     print(f"Phase 0 result run allowed: {str(output.phase0_result_run_allowed).lower()}")
     return 0 if output.status == "PASS" else 1
+
+
+def _cmd_run_research_matrix(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    smoke = run_research_candidate_smoke(
+        config,
+        expert=args.expert,
+        hypothesis_file=args.hypothesis_file,
+    )
+    if smoke.status != "PASS":
+        print(f"Research candidate smoke: {smoke.status}")
+        return 1
+    outputs = run_phase0_matrix(
+        config,
+        args.expert,
+        synthetic_sample=args.synthetic_sample,
+        allow_research_candidate=True,
+    )
+    print(f"Research matrix run complete: {len(outputs)} cell output set(s)")
+    print(f"Expert: {args.expert}")
+    print(f"Hypothesis file: {args.hypothesis_file}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        print(output.summary_path)
+        print(output.trades_path)
+        print(output.equity_path)
+    return 0
 
 
 def _cmd_generate_fixed_notional_report(args: argparse.Namespace) -> int:

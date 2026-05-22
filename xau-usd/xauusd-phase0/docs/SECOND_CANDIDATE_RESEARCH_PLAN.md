@@ -76,13 +76,14 @@ The second candidate must pass the same reduced-portfolio discipline:
 | Field | Value |
 | --- | --- |
 | Candidate | `squeeze_breakout_long_v0` |
-| Status | HYPOTHESIS_LOCKED_IMPLEMENTATION_DRAFTED |
-| Testing allowed | NO |
+| Status | REJECTED_FIRST_PASS |
+| Testing allowed | NO_FURTHER_V0_TESTING |
 | Hypothesis document | `docs/hypothesis_squeeze_breakout_long_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
 | Implementation draft | `src/phase0/strategies/squeeze_breakout_long_v0.py` |
 | Research smoke | `outputs/reports/squeeze_breakout_long_v0_research_smoke.md` |
-| Next action | Review the disabled strategy draft and smoke report, then explicitly promote it into the active Phase 0 registry for a fresh result-producing pass without modifying the registered hypothesis. |
+| First-pass matrix | `docs/SQUEEZE_BREAKOUT_LONG_V0_FIRST_PASS.md` |
+| Next action | Move to the next backlog candidate, `post_spike_short_v0`, starting with a fresh hypothesis lock. |
 
 ## Promotion Prep Command
 
@@ -98,5 +99,19 @@ This verifies:
 - The strategy exists only in the research registry, not the active `all` registry.
 - A synthetic signal and trade plan can be produced.
 - Phase 0 result-producing runs remain blocked until explicit promotion.
+
+## Explicit Research Matrix Command
+
+After the smoke check passes, the candidate may be evaluated with:
+
+```powershell
+.\.venv\Scripts\phase0.exe run-research-matrix --expert squeeze_breakout_long_v0 --hypothesis-file docs/hypothesis_squeeze_breakout_long_v0.md
+```
+
+This command keeps the boundary explicit:
+
+- `squeeze_breakout_long_v0` is not included in `phase0 run-matrix --expert all`.
+- `squeeze_breakout_long_v0` is not an approved EA.
+- Matrix output is candidate evidence only until all Phase 0 gates pass.
 
 Rejected experts remain rejected. `trend_pullback` and `range_mr` should not be retuned under their original names. Any future revisit must use a new versioned hypothesis.

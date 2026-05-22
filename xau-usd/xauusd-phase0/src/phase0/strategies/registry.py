@@ -19,10 +19,15 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
 }
 
 
-def get_strategy(name: str) -> StrategyBase:
-    if name not in STRATEGY_CLASSES:
-        raise ConfigError(f"Unknown strategy {name!r}. Available: {', '.join(STRATEGY_CLASSES)}.")
-    return STRATEGY_CLASSES[name]()
+def get_strategy(name: str, allow_research_candidate: bool = False) -> StrategyBase:
+    if name in STRATEGY_CLASSES:
+        return STRATEGY_CLASSES[name]()
+    if allow_research_candidate and name in RESEARCH_STRATEGY_CLASSES:
+        return RESEARCH_STRATEGY_CLASSES[name]()
+    available = list(STRATEGY_CLASSES)
+    if allow_research_candidate:
+        available.extend(RESEARCH_STRATEGY_CLASSES)
+    raise ConfigError(f"Unknown strategy {name!r}. Available: {', '.join(available)}.")
 
 
 def get_research_strategy(name: str) -> StrategyBase:
@@ -37,9 +42,11 @@ def research_strategy_names() -> list[str]:
     return list(RESEARCH_STRATEGY_CLASSES)
 
 
-def enabled_strategy_names(expert: str) -> list[str]:
+def enabled_strategy_names(expert: str, allow_research_candidate: bool = False) -> list[str]:
     if expert == "all":
         return list(STRATEGY_CLASSES)
     if expert not in STRATEGY_CLASSES:
+        if allow_research_candidate and expert in RESEARCH_STRATEGY_CLASSES:
+            return [expert]
         raise ConfigError(f"Unknown expert {expert!r}.")
     return [expert]

@@ -33,11 +33,12 @@ def run_phase0_matrix(
     config: ProjectConfig,
     expert: str,
     synthetic_sample: bool = False,
+    allow_research_candidate: bool = False,
 ) -> list[MatrixRunOutput]:
     outputs: list[MatrixRunOutput] = []
     context_cache: dict[tuple[str, str, pd.Timestamp, pd.Timestamp], dict[str, Any]] = {}
-    for expert_name in enabled_strategy_names(expert):
-        strategy = get_strategy(expert_name)
+    for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
+        strategy = get_strategy(expert_name, allow_research_candidate=allow_research_candidate)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:

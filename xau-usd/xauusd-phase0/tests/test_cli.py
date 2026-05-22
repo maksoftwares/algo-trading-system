@@ -27,6 +27,7 @@ def test_cli_registers_required_commands():
     assert "run-reality-check" in help_text
     assert "register-research-hypothesis" in help_text
     assert "run-research-candidate-smoke" in help_text
+    assert "run-research-matrix" in help_text
     assert "generate-fixed-notional-report" in help_text
 
 
