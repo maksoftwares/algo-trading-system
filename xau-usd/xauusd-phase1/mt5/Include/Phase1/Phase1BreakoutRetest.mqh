@@ -11,15 +11,17 @@ private:
    double m_retest_tolerance_points;
    double m_stop_atr_multiplier;
    double m_reward_multiple;
+   bool m_swing_only;
 
 public:
-   void Configure()
+   void Configure(const bool swing_only)
    {
       m_break_window_bars = 20;
       m_break_atr_multiplier = 0.30;
       m_retest_tolerance_points = 5.0;
       m_stop_atr_multiplier = 0.10;
       m_reward_multiple = 1.50;
+      m_swing_only = swing_only;
    }
 
    bool Evaluate(
@@ -117,14 +119,20 @@ private:
       if(!best.valid)
       {
          observation.stage = "WAIT_LEVEL_BREAK_RETEST";
-         observation.reason_code = is_long ? "no_long_breakout_retest_candidate" : "no_short_breakout_retest_candidate";
+         if(m_swing_only)
+            observation.reason_code = is_long ? "no_long_swing_breakout_retest_candidate" : "no_short_swing_breakout_retest_candidate";
+         else
+            observation.reason_code = is_long ? "no_long_breakout_retest_candidate" : "no_short_breakout_retest_candidate";
          return false;
       }
 
       observation.break_found = true;
       observation.retest_valid = true;
       observation.stage = "WOULD_SIGNAL";
-      observation.reason_code = is_long ? "BREAKOUT_RETEST_LONG_DRY_RUN" : "BREAKOUT_RETEST_SHORT_DRY_RUN";
+      if(m_swing_only)
+         observation.reason_code = is_long ? "SWING_BREAKOUT_RETEST_LONG_DRY_RUN" : "SWING_BREAKOUT_RETEST_SHORT_DRY_RUN";
+      else
+         observation.reason_code = is_long ? "BREAKOUT_RETEST_LONG_DRY_RUN" : "BREAKOUT_RETEST_SHORT_DRY_RUN";
       observation.would_signal = true;
       observation.level_kind = best.level_kind;
       observation.level_price = best.level_price;
@@ -169,6 +177,11 @@ private:
    ) const
    {
       int count = 0;
+      if(m_swing_only)
+      {
+         AddLevel(levels, count, is_long ? "latest_swing_high" : "latest_swing_low", SwingLevel(symbol_name, is_long, break_shift), point);
+         return count;
+      }
       AddLevel(levels, count, is_long ? "previous_daily_high" : "previous_daily_low", DailyLevel(symbol_name, is_long), point);
       AddLevel(levels, count, is_long ? "previous_weekly_high" : "previous_weekly_low", WeeklyLevel(symbol_name, is_long), point);
       AddLevel(levels, count, is_long ? "latest_swing_high" : "latest_swing_low", SwingLevel(symbol_name, is_long, break_shift), point);

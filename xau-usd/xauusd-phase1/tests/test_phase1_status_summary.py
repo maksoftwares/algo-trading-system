@@ -36,8 +36,8 @@ def test_status_summary_writes_machine_readable_snapshot(tmp_path):
     assert summary["status"]["would_signal"] == "PASS"
     assert summary["status"]["acceptance"] == "PENDING"
     assert summary["runtime"]["decision_rows"] == 3
-    assert summary["would_signal"]["rows"] == 1
-    assert summary["would_signal"]["clusters"] == 1
+    assert summary["would_signal"]["rows"] == 2
+    assert summary["would_signal"]["clusters"] == 2
     assert summary["soak"]["progress_pct"] > 0
 
 
@@ -147,6 +147,21 @@ def _write_decision_log(path: Path) -> None:
         "br_take_profit",
         "br_stop_distance_points",
         "br_break_shift",
+        "sbr_stage",
+        "sbr_direction",
+        "sbr_would_signal",
+        "sbr_reason_code",
+        "sbr_level_found",
+        "sbr_break_found",
+        "sbr_retest_valid",
+        "sbr_confirmation_valid",
+        "sbr_level_kind",
+        "sbr_level_price",
+        "sbr_entry_price",
+        "sbr_stop_loss",
+        "sbr_take_profit",
+        "sbr_stop_distance_points",
+        "sbr_break_shift",
         "allowed_expert",
         "would_have_allowed_experts",
         "trade_permission",
@@ -192,8 +207,23 @@ def _write_decision_log(path: Path) -> None:
                 "br_take_profit": "4528.52",
                 "br_stop_distance_points": "58.00",
                 "br_break_shift": "4",
+                "sbr_stage": "WOULD_SIGNAL" if would_signal else "WAIT_LEVEL_BREAK_RETEST",
+                "sbr_direction": "LONG",
+                "sbr_would_signal": "true" if would_signal else "false",
+                "sbr_reason_code": "SWING_BREAKOUT_RETEST_LONG_DRY_RUN" if would_signal else "waiting",
+                "sbr_level_found": "true",
+                "sbr_break_found": "true" if would_signal else "false",
+                "sbr_retest_valid": "true" if would_signal else "false",
+                "sbr_confirmation_valid": "true" if would_signal else "false",
+                "sbr_level_kind": "latest_swing_high",
+                "sbr_level_price": "4515.35",
+                "sbr_entry_price": "4519.82",
+                "sbr_stop_loss": "4514.02",
+                "sbr_take_profit": "4528.52",
+                "sbr_stop_distance_points": "58.00",
+                "sbr_break_shift": "4",
                 "allowed_expert": "none",
-                "would_have_allowed_experts": "breakout_retest",
+                "would_have_allowed_experts": "breakout_retest;swing_breakout_retest_v0",
                 "trade_permission": "false",
                 "block_reason": "phase1_dry_run_only",
                 "dry_run": "true",

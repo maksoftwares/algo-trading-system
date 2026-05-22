@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-21
 
-This document is the active Phase 1 dry-run build spec after `breakout_retest` received a final Phase 0 PASS and real-artifact verification passed.
+This document is the active Phase 1 dry-run build spec after `breakout_retest` received a final Phase 0 PASS and real-artifact verification passed. `swing_breakout_retest_v0` is now included as a same-family dry-run observer after its research Gate 9 pass.
 
 ## Objective
 
@@ -60,7 +60,7 @@ OnDeinit()
 | `FeatureEngine.mqh` | ATR, ADX, EMA, slopes, swings, ranges, candle ratios, volatility and spread features. |
 | `SessionEngine.mqh` | Asia, London, New York, rollover, weekend, and thin-liquidity windows. |
 | `RegimeRouter.mqh` | Regime classification only; no expert activation. |
-| `BreakoutRetestObserver.mqh` | Dry-run setup-stage observation for the approved future expert. |
+| `BreakoutRetestObserver.mqh` | Dry-run setup-stage observation for approved breakout-retest-family future expert candidates. |
 | `RiskManager.mqh` | Equity-state tracking and simulated daily/weekly/monthly caps. |
 | `ExecutionGuard.mqh` | Spread, stale tick, tradeability, and market-open classification. |
 | `NewsGuard.mqh` | Manual blackout windows and news state classification. |
@@ -90,6 +90,14 @@ execution_state
 news_state
 allowed_expert
 would_have_allowed_experts
+sbr_stage
+sbr_direction
+sbr_would_signal
+sbr_reason_code
+sbr_level_kind
+sbr_entry_price
+sbr_stop_loss
+sbr_take_profit
 trade_permission
 block_reason
 dry_run

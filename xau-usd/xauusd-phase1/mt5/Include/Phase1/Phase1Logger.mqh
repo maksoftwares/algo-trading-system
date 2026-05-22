@@ -34,6 +34,7 @@ public:
       const string symbol_name,
       const bool dry_run_only,
       const bool observe_breakout_retest,
+      const bool observe_swing_breakout_retest,
       const double max_spread_points,
       const double max_risk_pct,
       const double daily_loss_limit_pct,
@@ -59,6 +60,7 @@ public:
             "symbol",
             "dry_run_only",
             "observe_breakout_retest",
+            "observe_swing_breakout_retest",
             "max_spread_points",
             "max_risk_pct",
             "daily_loss_limit_pct",
@@ -83,6 +85,7 @@ public:
          symbol_name,
          dry_run_only ? "true" : "false",
          observe_breakout_retest ? "true" : "false",
+         observe_swing_breakout_retest ? "true" : "false",
          DoubleToString(max_spread_points, 2),
          DoubleToString(max_risk_pct, 4),
          DoubleToString(daily_loss_limit_pct, 2),
@@ -210,6 +213,21 @@ public:
          AppendCell(header, "br_take_profit");
          AppendCell(header, "br_stop_distance_points");
          AppendCell(header, "br_break_shift");
+         AppendCell(header, "sbr_stage");
+         AppendCell(header, "sbr_direction");
+         AppendCell(header, "sbr_would_signal");
+         AppendCell(header, "sbr_reason_code");
+         AppendCell(header, "sbr_level_found");
+         AppendCell(header, "sbr_break_found");
+         AppendCell(header, "sbr_retest_valid");
+         AppendCell(header, "sbr_confirmation_valid");
+         AppendCell(header, "sbr_level_kind");
+         AppendCell(header, "sbr_level_price");
+         AppendCell(header, "sbr_entry_price");
+         AppendCell(header, "sbr_stop_loss");
+         AppendCell(header, "sbr_take_profit");
+         AppendCell(header, "sbr_stop_distance_points");
+         AppendCell(header, "sbr_break_shift");
          AppendCell(header, "allowed_expert");
          AppendCell(header, "would_have_allowed_experts");
          AppendCell(header, "trade_permission");
@@ -243,7 +261,7 @@ public:
       AppendCell(row, TimeToString(decision.market.m5_bar_time, TIME_DATE | TIME_SECONDS));
       AppendCell(row, Phase1SessionText(decision.session_state));
       AppendCell(row, Phase1RegimeText(decision.regime_state));
-      AppendCell(row, "phase1_router_v0.5");
+      AppendCell(row, "phase1_router_v0.6");
       AppendCell(row, Phase1RiskText(decision.risk_state));
       AppendCell(row, DoubleToString(decision.risk_details.requested_risk_pct, 4));
       AppendCell(row, DoubleToString(decision.risk_details.max_risk_pct, 4));
@@ -287,6 +305,21 @@ public:
       AppendCell(row, DoubleToString(decision.breakout_retest.take_profit, decision.market.digits));
       AppendCell(row, DoubleToString(decision.breakout_retest.stop_distance_points, 2));
       AppendCell(row, IntegerToString(decision.breakout_retest.break_shift));
+      AppendCell(row, decision.swing_breakout_retest.stage);
+      AppendCell(row, decision.swing_breakout_retest.direction_text);
+      AppendCell(row, decision.swing_breakout_retest.would_signal ? "true" : "false");
+      AppendCell(row, decision.swing_breakout_retest.reason_code);
+      AppendCell(row, decision.swing_breakout_retest.level_found ? "true" : "false");
+      AppendCell(row, decision.swing_breakout_retest.break_found ? "true" : "false");
+      AppendCell(row, decision.swing_breakout_retest.retest_valid ? "true" : "false");
+      AppendCell(row, decision.swing_breakout_retest.confirmation_valid ? "true" : "false");
+      AppendCell(row, decision.swing_breakout_retest.level_kind);
+      AppendCell(row, DoubleToString(decision.swing_breakout_retest.level_price, decision.market.digits));
+      AppendCell(row, DoubleToString(decision.swing_breakout_retest.entry_price, decision.market.digits));
+      AppendCell(row, DoubleToString(decision.swing_breakout_retest.stop_loss, decision.market.digits));
+      AppendCell(row, DoubleToString(decision.swing_breakout_retest.take_profit, decision.market.digits));
+      AppendCell(row, DoubleToString(decision.swing_breakout_retest.stop_distance_points, 2));
+      AppendCell(row, IntegerToString(decision.swing_breakout_retest.break_shift));
       AppendCell(row, decision.allowed_expert);
       AppendCell(row, decision.would_have_allowed_experts);
       AppendCell(row, decision.trade_permission ? "true" : "false");

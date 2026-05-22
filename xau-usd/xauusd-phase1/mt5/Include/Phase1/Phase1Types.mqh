@@ -176,6 +176,7 @@ struct Phase1Decision
    Phase1ServerTimeStatus server_time;
    Phase1RiskSnapshot risk_details;
    Phase1BreakoutRetestObservation breakout_retest;
+   Phase1BreakoutRetestObservation swing_breakout_retest;
    string allowed_expert;
    string would_have_allowed_experts;
    string expert_lifecycle_state;
@@ -287,6 +288,7 @@ void Phase1ResetDecision(Phase1Decision &decision)
    Phase1ResetServerTimeStatus(decision.server_time);
    Phase1ResetRiskSnapshot(decision.risk_details);
    Phase1ResetBreakoutRetestObservation(decision.breakout_retest);
+   Phase1ResetBreakoutRetestObservation(decision.swing_breakout_retest);
    decision.allowed_expert = "none";
    decision.would_have_allowed_experts = "none";
    decision.expert_lifecycle_state = "DISABLED";

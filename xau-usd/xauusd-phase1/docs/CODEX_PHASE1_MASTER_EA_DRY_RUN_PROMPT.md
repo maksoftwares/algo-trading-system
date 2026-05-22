@@ -30,7 +30,7 @@ Build modules incrementally:
 13. Dashboard
 14. MasterEA orchestration
 
-Keep every expert disabled or dry-run only. The approved future expert list contains `breakout_retest` only.
+Keep every expert disabled or dry-run only. The approved future expert list contains `breakout_retest` and same-family `swing_breakout_retest_v0`; both are observation-only in Phase 1.
 
 Required verification:
 - static safety audit

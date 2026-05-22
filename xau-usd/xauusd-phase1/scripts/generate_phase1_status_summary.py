@@ -77,6 +77,9 @@ def generate_phase1_status_summary(
                 "br_stage": latest.get("br_stage", ""),
                 "br_direction": latest.get("br_direction", ""),
                 "br_would_signal": latest.get("br_would_signal", ""),
+                "sbr_stage": latest.get("sbr_stage", ""),
+                "sbr_direction": latest.get("sbr_direction", ""),
+                "sbr_would_signal": latest.get("sbr_would_signal", ""),
             },
         },
         "would_signal": {

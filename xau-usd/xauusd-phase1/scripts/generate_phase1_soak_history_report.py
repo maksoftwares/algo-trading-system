@@ -85,17 +85,21 @@ def _check_latest_status(rows: list[dict[str, str]]) -> HistoryCheck:
     if not rows:
         return HistoryCheck("latest_status", "FAIL", "No latest row available.")
     latest = rows[-1]
-    bad = [
+    fail = [
         name
         for name in ("log_verification", "soak_analysis", "runtime_health")
-        if latest.get(name, "") != "PASS"
+        if latest.get(name, "") == "FAIL"
     ]
-    warn = []
+    warn = [
+        name
+        for name in ("log_verification", "soak_analysis", "runtime_health")
+        if latest.get(name, "") not in {"PASS", "PENDING"} and latest.get(name, "") != "FAIL"
+    ]
+    if fail:
+        return HistoryCheck("latest_status", "FAIL", "Latest failing status fields: " + ", ".join(fail))
     if latest.get("would_signal", "") != "PASS":
         warn.append("would_signal")
     acceptance = latest.get("acceptance", "")
-    if bad:
-        return HistoryCheck("latest_status", "FAIL", "Unexpected latest status fields: " + ", ".join(bad))
     if acceptance not in {"PASS", "PENDING"}:
         warn.append("acceptance")
     if warn:

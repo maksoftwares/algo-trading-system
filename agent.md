@@ -49,25 +49,30 @@ Last updated: 2026-05-22
 - Latest review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260522_064147.zip`.
 - Verification after code changes: Phase 0 `148 passed`, Phase 1 `49 passed`; both safety audits OK.
 - `verify-real-artifacts` returns PASS after Gate 9 closure.
-- Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it may now be expanded as a dry-run Master EA shell with `breakout_retest` reserved as the only approved future expert.
+- Phase 1 dry-run shell is started under `xau-usd\xauusd-phase1`; it now observes `breakout_retest` plus same-family `swing_breakout_retest_v0` telemetry while keeping all execution blocked.
 - Phase 0.9 closure plan: `xau-usd\xauusd-phase0\docs\PHASE0_9_CLOSURE_PLAN.md`.
 - Phase 1 dry-run spec: `xau-usd\xauusd-phase1\docs\PHASE1_MASTER_EA_DRY_RUN_SPEC.md`.
 - Latest Phase 0 review bundle: `xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260522_064147.zip`.
 - Latest Phase 0 snapshot: `xau-usd\xauusd-phase0\outputs\snapshots\phase0_snapshot_20260521_121022.zip`.
-- Latest Phase 1 shell version: `phase1-dry-run-v0.5`.
+- Latest Phase 1 shell version: `phase1-dry-run-v0.6`.
 - Phase 1 module slices implemented:
   - v0.2: market snapshot, session detection, execution guard, news guard, router regime classification, decision logger, and dashboard.
   - v0.3: feature telemetry, server-time validation, magic-number allocator, and expert lifecycle manager.
   - v0.4: simulated daily/weekly/monthly/manual risk locks plus startup and shutdown CSV logs.
   - v0.5: breakout-retest dry-run observer that reports level/break/retest/confirmation state, would-signal status, and synthetic entry/stop/target telemetry while keeping execution blocked.
+  - v0.6: swing_breakout_retest_v0 dry-run observer added as a second same-family observation lane with `sbr_*` decision-log telemetry; execution remains blocked.
 - MT5 Portable compile result for `Phase1DryRunShell.mq5`: 0 errors, 0 warnings.
 - Latest MT5 Portable decision log: `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv`.
 - Previous v0.2/v0.3 mixed-schema log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_3_20260521_162557.csv`.
 - Previous v0.3 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_4_20260521_163517.csv`.
 - Previous v0.4 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_5_20260521_174742.csv`.
-- Latest decision row confirms `phase1-dry-run-v0.5`, `DRY_RUN`, `DRY_RUN_ONLY`, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `risk_ok=true`, `would_have_allowed_experts=breakout_retest`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
-- Would-signal evidence report currently shows 5 breakout-retest dry-run would-signal rows across 5 setup clusters; all stayed dry-run and permission-locked.
-- Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK`; all kept `trade_permission=false`.
+- Latest decision row confirms `phase1-dry-run-v0.6`, `DRY_RUN`, `DRY_RUN_ONLY`, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `risk_ok=true`, `would_have_allowed_experts=breakout_retest;swing_breakout_retest_v0`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
+- Latest v0.6 row includes `sbr_stage`, `sbr_direction`, `sbr_would_signal`, `sbr_reason_code`, `sbr_level_kind`, `sbr_entry_price`, `sbr_stop_loss`, and `sbr_take_profit`.
+- Phase 1 v0.5 logs were archived before the v0.6 schema change:
+  - `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_6_20260522_150335.csv`
+  - `C:\MT5PortableGoldMission\MQL5\Files\startup_log_pre_v0_6_20260522_150335.csv`
+- Current v0.6 would-signal report has 0 post-reset would-signal rows so far; the previous v0.5 report had 5 breakout-retest dry-run would-signal rows across 5 setup clusters, all dry-run and permission-locked.
+- Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the pre-v0.6 schema; v0.6 lock replay is pending because logs were intentionally archived for the new `sbr_*` schema.
 - Latest MT5 lifecycle logs:
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv`

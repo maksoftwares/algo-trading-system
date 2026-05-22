@@ -8,12 +8,12 @@ This checklist separates work that is already closed from gates that still requi
 
 | Item | Status | Evidence |
 | --- | --- | --- |
-| Phase 0 final verdict | PASS | `breakout_retest` is the only approved future expert. |
+| Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` is approved as a same-family future expert candidate. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
 | D2 Reality Check / SPA-style bootstrap | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
-| Second candidate hypothesis lock | REGISTERED | `xau-usd/xauusd-phase0/docs/hypothesis_squeeze_breakout_long_v0.md` |
+| Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
 | Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md` |
@@ -37,7 +37,7 @@ This checklist separates work that is already closed from gates that still requi
 | Disaster recovery runbook | PENDING | Document restore, redeploy, log recovery, and rollback procedure. |
 | Capital allocation ladder | PENDING | Define paper-mode sizing, step-up rules, and stop conditions. |
 | Quarterly review triggers | PENDING | Document drift, drawdown, trade-count, and behavior-review triggers. |
-| Second candidate implementation | PENDING | Implement and test `squeeze_breakout_long_v0` without changing the locked hypothesis. |
+| Independent second candidate implementation | PENDING | Keep searching for a non-breakout-retest-family candidate; same-family swing candidate is not independent diversification. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 
@@ -47,9 +47,9 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | --- | --- |
 | Latest status summary | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
 | Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip` |
-| Decision rows | 197 |
-| Latest bar | 2026.05.22 06:40:00 |
-| Soak progress | 14.10% |
+| Decision rows | 4 |
+| Latest bar | 2026.05.22 11:10:00 |
+| Soak progress | 0.14% after v0.6 schema reset |
 | Acceptance | PENDING |
 
 ## Decision Rule

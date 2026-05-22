@@ -15,7 +15,8 @@ Current lifecycle:
 
 | Expert | State | Reason |
 | --- | --- | --- |
-| `breakout_retest` | `PHASE0_PENDING` | Gate 9 manual adversarial review is incomplete. |
+| `breakout_retest` | `DRY_RUN_APPROVED` | Final Phase 0 PASS; Phase 1 observation only. |
+| `swing_breakout_retest_v0` | `DRY_RUN_APPROVED` | Research gates and Gate 9 passed; same-family with `breakout_retest`; Phase 1 observation only. |
 | `trend_pullback` | `RETIRED` | Failed Phase 0 gates. |
 | `range_mr` | `RETIRED` | Failed Phase 0 gates. |
 

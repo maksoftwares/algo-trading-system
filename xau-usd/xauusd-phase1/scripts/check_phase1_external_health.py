@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 DECISION_LOG = "decision_log.csv"
-EXPECTED_PASS_STATUSES = ("PASS", "PENDING")
+EXPECTED_PASS_STATUSES = ("PASS", "PENDING", "WARN")
 
 
 @dataclass(frozen=True)

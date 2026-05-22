@@ -1,4 +1,4 @@
-InpRunId=phase1-dry-run-v0.5-monthly-lock-test
+InpRunId=phase1-dry-run-v0.6-monthly-lock-test
 InpDryRunOnly=true
 InpTargetSymbol=XAUUSD
 InpMaxSpreadPoints=80.0
@@ -11,6 +11,7 @@ InpSimulatedWeeklyPnlPct=0.0
 InpSimulatedMonthlyPnlPct=-10.5
 InpManualRiskLock=false
 InpObserveBreakoutRetest=true
+InpObserveSwingBreakoutRetest=true
 InpManualNewsLockdown=false
 InpExpectedLocalUtcOffsetHours=4
 InpMaxClockDriftSeconds=300

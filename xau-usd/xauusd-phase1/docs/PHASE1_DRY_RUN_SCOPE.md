@@ -4,7 +4,7 @@ This is the active Phase 1 dry-run scope after Phase 0 closure.
 
 ## Current Boundary
 
-`breakout_retest` has a final Phase 0 PASS and is the only approved future expert. The Phase 1 shell remains dry-run only.
+`breakout_retest` has a final Phase 0 PASS. `swing_breakout_retest_v0` also passed its research matrix, decile, multisymbol, intrabar, and Gate 9 manual adversarial checks, but it is same-family with `breakout_retest`. The Phase 1 shell remains dry-run only.
 
 ## Allowed
 
@@ -19,6 +19,7 @@ This is the active Phase 1 dry-run scope after Phase 0 closure.
 - expert lifecycle state
 - feature telemetry
 - breakout_retest dry-run signal-state observation
+- swing_breakout_retest_v0 dry-run signal-state observation
 - dry-run CSV logging
 - startup and shutdown CSV logging
 - restart-resilience log verification

@@ -10,7 +10,7 @@ This package is intentionally passive:
 - no live expert module yet
 - CSV telemetry only
 
-Phase 0 is closed for the reduced one-expert package. `breakout_retest` is the only approved future expert. This phase remains dry-run only: lifecycle, magic-number planning, router/risk contracts, simulated risk caps, spread gating, dashboard state, startup/shutdown logging, and decision logging.
+Phase 0 is closed for the reduced first package. `breakout_retest` is approved, and `swing_breakout_retest_v0` is approved as a same-family future expert candidate after Gate 9 closure. This phase remains dry-run only: lifecycle, magic-number planning, router/risk contracts, simulated risk caps, spread gating, dashboard state, startup/shutdown logging, and decision logging.
 
 ## Scope
 
@@ -29,6 +29,7 @@ Phase 0 is closed for the reduced one-expert package. `breakout_retest` is the o
 Phase 1 dry-run authorization is now satisfied:
 
 - `breakout_retest` Gate 9 is scored as `PASS`.
+- `swing_breakout_retest_v0` Gate 9 is scored as `PASS`, with same-family concentration noted.
 - `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`.
 - `phase0 verify-real-artifacts` returns `PASS`.
 

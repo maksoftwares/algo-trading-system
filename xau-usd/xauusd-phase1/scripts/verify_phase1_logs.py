@@ -44,6 +44,21 @@ DECISION_REQUIRED_COLUMNS = (
     "br_take_profit",
     "br_stop_distance_points",
     "br_break_shift",
+    "sbr_stage",
+    "sbr_direction",
+    "sbr_would_signal",
+    "sbr_reason_code",
+    "sbr_level_found",
+    "sbr_break_found",
+    "sbr_retest_valid",
+    "sbr_confirmation_valid",
+    "sbr_level_kind",
+    "sbr_level_price",
+    "sbr_entry_price",
+    "sbr_stop_loss",
+    "sbr_take_profit",
+    "sbr_stop_distance_points",
+    "sbr_break_shift",
     "allowed_expert",
     "would_have_allowed_experts",
     "trade_permission",
@@ -121,6 +136,8 @@ def verify_phase1_logs(files_dir: Path, report_path: Path | None = None) -> LogV
         _check_permission_locked(decision_rows),
         _check_breakout_observation(decision_rows),
         _check_breakout_retest_observer(decision_rows),
+        _check_swing_breakout_observation(decision_rows),
+        _check_swing_breakout_retest_observer(decision_rows),
         _check_startup_rows(startup_rows),
         _check_shutdown_rows(shutdown_rows),
         _check_bar_cadence(decision_rows),
@@ -198,7 +215,7 @@ def _check_permission_locked(rows: list[dict[str, str]]) -> LogCheck:
 
 
 def _check_breakout_observation(rows: list[dict[str, str]]) -> LogCheck:
-    observed = any(row.get("would_have_allowed_experts") == "breakout_retest" for row in rows)
+    observed = any("breakout_retest" in _expert_list(row.get("would_have_allowed_experts", "")) for row in rows)
     if observed:
         return LogCheck("breakout_observation", "PASS", "breakout_retest appears as dry-run observed expert.")
     return LogCheck("breakout_observation", "WARN", "breakout_retest was not observed in decision rows.")
@@ -211,6 +228,26 @@ def _check_breakout_retest_observer(rows: list[dict[str, str]]) -> LogCheck:
     if all(stage == "NOT_EVALUATED" for stage in stages):
         return LogCheck("breakout_retest_observer", "WARN", "Observer only reported NOT_EVALUATED.")
     return LogCheck("breakout_retest_observer", "PASS", "Observer stages found: " + ", ".join(stages))
+
+
+def _check_swing_breakout_observation(rows: list[dict[str, str]]) -> LogCheck:
+    observed = any("swing_breakout_retest_v0" in _expert_list(row.get("would_have_allowed_experts", "")) for row in rows)
+    if observed:
+        return LogCheck(
+            "swing_breakout_observation",
+            "PASS",
+            "swing_breakout_retest_v0 appears as dry-run observed expert.",
+        )
+    return LogCheck("swing_breakout_observation", "WARN", "swing_breakout_retest_v0 was not observed in decision rows.")
+
+
+def _check_swing_breakout_retest_observer(rows: list[dict[str, str]]) -> LogCheck:
+    stages = sorted({row.get("sbr_stage", "") for row in rows if row.get("sbr_stage", "")})
+    if not stages:
+        return LogCheck("swing_breakout_retest_observer", "FAIL", "No swing_breakout_retest_v0 observer stages found.")
+    if all(stage == "NOT_EVALUATED" for stage in stages):
+        return LogCheck("swing_breakout_retest_observer", "WARN", "Swing observer only reported NOT_EVALUATED.")
+    return LogCheck("swing_breakout_retest_observer", "PASS", "Swing observer stages found: " + ", ".join(stages))
 
 
 def _check_startup_rows(rows: list[dict[str, str]]) -> LogCheck:
@@ -328,6 +365,9 @@ def _render_report(
     breakout_stages = _counts(row.get("br_stage", "") for row in decision_rows)
     breakout_directions = _counts(row.get("br_direction", "") for row in decision_rows)
     breakout_signal_counts = _counts(row.get("br_would_signal", "") for row in decision_rows)
+    swing_stages = _counts(row.get("sbr_stage", "") for row in decision_rows)
+    swing_directions = _counts(row.get("sbr_direction", "") for row in decision_rows)
+    swing_signal_counts = _counts(row.get("sbr_would_signal", "") for row in decision_rows)
     latest = decision_rows[-1] if decision_rows else {}
     return "\n".join(
         [
@@ -387,6 +427,29 @@ def _render_report(
                 ["Value", "Count"],
             ),
             "",
+            "## Swing Breakout-Retest Observer",
+            "",
+            "### Stages",
+            "",
+            _markdown_table(
+                [{"Value": key, "Count": str(value)} for key, value in swing_stages.items()],
+                ["Value", "Count"],
+            ),
+            "",
+            "### Directions",
+            "",
+            _markdown_table(
+                [{"Value": key, "Count": str(value)} for key, value in swing_directions.items()],
+                ["Value", "Count"],
+            ),
+            "",
+            "### Would-Signal",
+            "",
+            _markdown_table(
+                [{"Value": key, "Count": str(value)} for key, value in swing_signal_counts.items()],
+                ["Value", "Count"],
+            ),
+            "",
             "### Latest Observer Row",
             "",
             _markdown_table(
@@ -416,6 +479,10 @@ def _counts(values) -> dict[str, int]:
         key = value or "blank"
         counts[key] = counts.get(key, 0) + 1
     return dict(sorted(counts.items()))
+
+
+def _expert_list(value: str) -> set[str]:
+    return {item.strip() for item in value.replace(",", ";").split(";") if item.strip()}
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:

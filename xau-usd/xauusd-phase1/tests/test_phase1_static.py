@@ -77,10 +77,11 @@ def test_safe_preset_keeps_shell_in_dry_run_observation_mode():
 
     assert "InpDryRunOnly=true" in text
     assert "InpObserveBreakoutRetest=true" in text
+    assert "InpObserveSwingBreakoutRetest=true" in text
     assert "InpDecisionLogFileName=decision_log.csv" in text
     assert "InpStartupLogFileName=startup_log.csv" in text
     assert "InpShutdownLogFileName=shutdown_log.csv" in text
-    assert "InpRunId=phase1-dry-run-v0.5" in text
+    assert "InpRunId=phase1-dry-run-v0.6" in text
 
 
 def test_risk_test_presets_stay_dry_run_only():
@@ -104,7 +105,7 @@ def test_phase1_docs_record_gate9_boundary():
 
     assert "Phase 1 dry-run authorization is now satisfied" in text
     assert "Expert modules | Dry-run contracts only" in text
-    assert "`breakout_retest` is the only approved future expert" in text
+    assert "`swing_breakout_retest_v0` is approved as a same-family future expert candidate" in text
 
 
 def test_phase1_spec_keeps_first_build_observation_only():
@@ -142,6 +143,10 @@ def test_phase1_decision_logger_has_required_columns():
         "br_direction",
         "br_would_signal",
         "br_reason_code",
+        "sbr_stage",
+        "sbr_direction",
+        "sbr_would_signal",
+        "sbr_reason_code",
         "allowed_expert",
         "would_have_allowed_experts",
         "trade_permission",

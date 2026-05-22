@@ -43,6 +43,14 @@ public:
          + " "
          + DoubleToString(decision.breakout_retest.level_price, decision.market.digits)
          + "\n";
+      text += "SBR stage: " + decision.swing_breakout_retest.stage + "\n";
+      text += "SBR direction: " + decision.swing_breakout_retest.direction_text + "\n";
+      text += "SBR would signal: " + (decision.swing_breakout_retest.would_signal ? "true" : "false") + "\n";
+      text += "SBR level: "
+         + decision.swing_breakout_retest.level_kind
+         + " "
+         + DoubleToString(decision.swing_breakout_retest.level_price, decision.market.digits)
+         + "\n";
       text += "Allowed expert: " + decision.allowed_expert + "\n";
       text += "Would allow: " + decision.would_have_allowed_experts + "\n";
       text += "Permission: " + (decision.trade_permission ? "true" : "false") + "\n";

@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-22T08:01:11.937654+00:00",
+  "created_at_utc": "2026-05-22T11:10:17.621338+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -9,38 +9,41 @@
     "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
-    "decision_rows": 213,
+    "decision_rows": 4,
     "latest_row": {
-      "bar_time": "2026.05.22 08:00:00",
-      "br_direction": "LONG",
+      "bar_time": "2026.05.22 11:10:00",
+      "br_direction": "SHORT",
       "br_stage": "WAIT_LEVEL_BREAK_RETEST",
       "br_would_signal": "false",
       "dry_run": "true",
       "risk_state": "NORMAL",
-      "run_id": "phase1-dry-run-v0.5",
+      "run_id": "phase1-dry-run-v0.6",
+      "sbr_direction": "SHORT",
+      "sbr_stage": "WAIT_LEVEL_BREAK_RETEST",
+      "sbr_would_signal": "false",
       "server_time_status": "CLOCK_OK",
-      "timestamp_broker": "2026.05.22 08:00:00",
-      "timestamp_local": "2026.05.22 11:59:57",
+      "timestamp_broker": "2026.05.22 11:10:00",
+      "timestamp_local": "2026.05.22 15:09:57",
       "trade_permission": "false"
     },
-    "unique_run_ids": 5
+    "unique_run_ids": 1
   },
   "soak": {
-    "observed_days": 0.7604,
-    "progress_pct": 15.21,
+    "observed_days": 0.0069,
+    "progress_pct": 0.14,
     "required_days": 5
   },
   "status": {
     "acceptance": "PENDING",
-    "log_verification": "PASS",
-    "runtime_health": "PASS",
+    "log_verification": "WARN",
+    "runtime_health": "WARN",
     "soak_analysis": "PASS",
-    "would_signal": "PASS"
+    "would_signal": "WARN"
   },
   "would_signal": {
-    "clusters": 14,
+    "clusters": 0,
     "csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
     "report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
-    "rows": 14
+    "rows": 0
   }
 }

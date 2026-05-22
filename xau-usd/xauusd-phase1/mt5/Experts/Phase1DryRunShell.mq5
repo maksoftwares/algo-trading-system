@@ -17,7 +17,7 @@
 #include <Phase1/Phase1Lifecycle.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 
-input string InpRunId = "phase1-dry-run-v0.5";
+input string InpRunId = "phase1-dry-run-v0.6";
 input bool InpDryRunOnly = true;
 input string InpTargetSymbol = "XAUUSD";
 input double InpMaxSpreadPoints = 80.0;
@@ -30,6 +30,7 @@ input double InpSimulatedWeeklyPnlPct = 0.0;
 input double InpSimulatedMonthlyPnlPct = 0.0;
 input bool InpManualRiskLock = false;
 input bool InpObserveBreakoutRetest = true;
+input bool InpObserveSwingBreakoutRetest = true;
 input bool InpManualNewsLockdown = false;
 input int InpExpectedLocalUtcOffsetHours = 4;
 input int InpMaxClockDriftSeconds = 300;
@@ -50,6 +51,7 @@ CPhase1ServerTimeValidator g_server_time_validator;
 CPhase1MagicNumberAllocator g_magic_allocator;
 CPhase1ExpertLifecycleManager g_lifecycle_manager;
 CPhase1BreakoutRetestObserver g_breakout_retest_observer;
+CPhase1BreakoutRetestObserver g_swing_breakout_retest_observer;
 datetime g_last_m5_bar_time = 0;
 
 int OnInit()
@@ -83,12 +85,18 @@ int OnInit()
       return INIT_FAILED;
    }
 
-   g_router.Configure(InpObserveBreakoutRetest, g_magic_allocator.BreakoutRetestMagic());
+   g_router.Configure(
+      InpObserveBreakoutRetest,
+      InpObserveSwingBreakoutRetest,
+      g_magic_allocator.BreakoutRetestMagic(),
+      g_magic_allocator.SwingBreakoutRetestMagic()
+   );
    g_execution_guard.Configure(InpMaxSpreadPoints);
    g_news_guard.Configure(InpManualNewsLockdown);
    g_server_time_validator.Configure(InpExpectedLocalUtcOffsetHours, InpMaxClockDriftSeconds);
-   g_lifecycle_manager.Configure(InpObserveBreakoutRetest);
-   g_breakout_retest_observer.Configure();
+   g_lifecycle_manager.Configure(InpObserveBreakoutRetest, InpObserveSwingBreakoutRetest);
+   g_breakout_retest_observer.Configure(false);
+   g_swing_breakout_retest_observer.Configure(true);
    Phase1MarketSnapshot startup_snapshot;
    Phase1ServerTimeStatus startup_time_status;
    if(g_market_data.BuildSnapshot(_Symbol, startup_snapshot))
@@ -100,6 +108,7 @@ int OnInit()
       _Symbol,
       InpDryRunOnly,
       InpObserveBreakoutRetest,
+      InpObserveSwingBreakoutRetest,
       InpMaxSpreadPoints,
       InpMaxRiskPct,
       InpDailyLossLimitPct,
@@ -157,6 +166,7 @@ void OnTimer()
    g_feature_engine.Build(snapshot.symbol_name, snapshot.point, decision.features);
    g_server_time_validator.Validate(snapshot, decision.server_time);
    g_breakout_retest_observer.Evaluate(snapshot.symbol_name, snapshot.point, decision.breakout_retest);
+   g_swing_breakout_retest_observer.Evaluate(snapshot.symbol_name, snapshot.point, decision.swing_breakout_retest);
    decision.regime_state = g_router.ClassifyRegime(
       snapshot,
       decision.session_state,
@@ -166,6 +176,12 @@ void OnTimer()
    decision.signal = signal;
    if(decision.breakout_retest.would_signal)
       decision.signal.reason_code = decision.breakout_retest.reason_code;
+   if(!decision.breakout_retest.would_signal && decision.swing_breakout_retest.would_signal)
+   {
+      decision.signal.expert_name = "swing_breakout_retest_v0";
+      decision.signal.magic_number = g_magic_allocator.SwingBreakoutRetestMagic();
+      decision.signal.reason_code = decision.swing_breakout_retest.reason_code;
+   }
    decision.allowed_expert = "none";
    decision.would_have_allowed_experts = g_router.WouldHaveAllowedExperts();
    decision.expert_lifecycle_state = g_lifecycle_manager.BreakoutRetestStateText();

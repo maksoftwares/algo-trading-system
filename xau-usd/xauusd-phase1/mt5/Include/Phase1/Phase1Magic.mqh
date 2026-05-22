@@ -14,9 +14,16 @@ public:
       return 910100;
    }
 
+   int SwingBreakoutRetestMagic() const
+   {
+      return 910110;
+   }
+
    bool ValidateNamespace() const
    {
-      return ShellMagic() != BreakoutRetestMagic();
+      return ShellMagic() != BreakoutRetestMagic()
+         && ShellMagic() != SwingBreakoutRetestMagic()
+         && BreakoutRetestMagic() != SwingBreakoutRetestMagic();
    }
 };
 

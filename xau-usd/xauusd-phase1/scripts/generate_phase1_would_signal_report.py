@@ -70,11 +70,25 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
 
 
 def _would_signal_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
-    return [
-        row
-        for row in rows
-        if row.get("br_would_signal", "").lower() == "true" or row.get("br_stage", "") == "WOULD_SIGNAL"
-    ]
+    signal_rows: list[dict[str, str]] = []
+    for row in rows:
+        if row.get("br_would_signal", "").lower() == "true" or row.get("br_stage", "") == "WOULD_SIGNAL":
+            signal = dict(row)
+            signal["observer"] = "breakout_retest"
+            signal_rows.append(signal)
+        if row.get("sbr_would_signal", "").lower() == "true" or row.get("sbr_stage", "") == "WOULD_SIGNAL":
+            signal = dict(row)
+            signal["observer"] = "swing_breakout_retest_v0"
+            signal["br_direction"] = row.get("sbr_direction", "")
+            signal["br_level_kind"] = row.get("sbr_level_kind", "")
+            signal["br_level_price"] = row.get("sbr_level_price", "")
+            signal["br_entry_price"] = row.get("sbr_entry_price", "")
+            signal["br_stop_loss"] = row.get("sbr_stop_loss", "")
+            signal["br_take_profit"] = row.get("sbr_take_profit", "")
+            signal["br_stop_distance_points"] = row.get("sbr_stop_distance_points", "")
+            signal["br_reason_code"] = row.get("sbr_reason_code", "")
+            signal_rows.append(signal)
+    return signal_rows
 
 
 def _check_signal_rows(rows: list[dict[str, str]]) -> WouldSignalCheck:
@@ -117,6 +131,7 @@ def _overall_status(checks: list[WouldSignalCheck]) -> str:
 
 def _signal_key(row: dict[str, str]) -> tuple[str, ...]:
     return (
+        row.get("observer", "breakout_retest"),
         row.get("br_direction", ""),
         row.get("br_level_kind", ""),
         row.get("br_level_price", ""),
@@ -134,12 +149,13 @@ def _signal_clusters(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         if key not in clusters:
             clusters[key] = {
                 "cluster_id": f"WS{len(order) + 1:03d}",
-                "direction": key[0],
-                "level_kind": key[1],
-                "level_price": key[2],
-                "entry_price": key[3],
-                "stop_loss": key[4],
-                "take_profit": key[5],
+                "observer": key[0],
+                "direction": key[1],
+                "level_kind": key[2],
+                "level_price": key[3],
+                "entry_price": key[4],
+                "stop_loss": key[5],
+                "take_profit": key[6],
                 "first_bar_time": row.get("bar_time", ""),
                 "last_bar_time": row.get("bar_time", ""),
                 "rows": "0",
@@ -154,6 +170,8 @@ def _signal_clusters(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 def _cluster_id_for_row(row: dict[str, str], clusters: list[dict[str, str]]) -> str:
     for cluster in clusters:
         if (
+            row.get("observer", "breakout_retest") == cluster.get("observer", "breakout_retest")
+            and
             row.get("br_direction", "") == cluster["direction"]
             and row.get("br_level_kind", "") == cluster["level_kind"]
             and row.get("br_level_price", "") == cluster["level_price"]
@@ -172,6 +190,7 @@ def _write_review_csv(
 ) -> None:
     fieldnames = [
         "cluster_id",
+        "observer",
         "timestamp_broker",
         "timestamp_utc",
         "timestamp_local",
@@ -200,6 +219,7 @@ def _write_review_csv(
             writer.writerow(
                 {
                     "cluster_id": _cluster_id_for_row(row, clusters),
+                    "observer": row.get("observer", "breakout_retest"),
                     "timestamp_broker": row.get("timestamp_broker", ""),
                     "timestamp_utc": row.get("timestamp_utc", ""),
                     "timestamp_local": row.get("timestamp_local", ""),
@@ -253,6 +273,7 @@ def _render_report(
             f"- Setup clusters: {len(clusters)}",
             f"- Directions observed: {', '.join(_unique(signal_rows, 'br_direction')) or 'none'}",
             f"- Level kinds observed: {', '.join(_unique(signal_rows, 'br_level_kind')) or 'none'}",
+            f"- Observers observed: {', '.join(_unique(signal_rows, 'observer')) or 'none'}",
             f"- Review CSV: `{csv_path}`",
             "",
             "## Setup Clusters",
@@ -261,6 +282,7 @@ def _render_report(
                 [
                     {
                         "Cluster": cluster["cluster_id"],
+                        "Observer": cluster["observer"],
                         "Rows": cluster["rows"],
                         "Direction": cluster["direction"],
                         "Level Kind": cluster["level_kind"],
@@ -275,6 +297,7 @@ def _render_report(
                 ],
                 [
                     "Cluster",
+                    "Observer",
                     "Rows",
                     "Direction",
                     "Level Kind",
@@ -300,6 +323,7 @@ def _render_report(
             _markdown_table(
                 [
                     {
+                        "Observer": row.get("observer", "breakout_retest"),
                         "Broker Time": row.get("timestamp_broker", ""),
                         "Bar Time": row.get("bar_time", ""),
                         "Direction": row.get("br_direction", ""),
@@ -317,6 +341,7 @@ def _render_report(
                     for row in signal_rows[-50:]
                 ],
                 [
+                    "Observer",
                     "Broker Time",
                     "Bar Time",
                     "Direction",
