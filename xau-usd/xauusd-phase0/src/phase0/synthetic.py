@@ -26,6 +26,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _ny_failed_london_reversal_context()
     if expert == "ny_am_pullback_continuation_v0":
         return _ny_am_pullback_continuation_context()
+    if expert == "ny_london_overlap_compression_break_v0":
+        return _ny_london_overlap_compression_break_context()
     if expert == "post_spike_short_v0":
         return _post_spike_short_context()
     if expert == "previous_day_extreme_retest_v0":
@@ -738,6 +740,60 @@ def _ny_am_pullback_continuation_context() -> dict:
             "high": [102.0] * 24,
             "low": [98.0] * 24,
             "close": [100.0] * 24,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _ny_london_overlap_compression_break_context() -> dict:
+    m15_times = pd.date_range("2024-10-01T00:15:00Z", periods=180, freq="15min")
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "open": [100.0] * 180,
+            "high": [102.0] * 130 + [100.12] * 50,
+            "low": [98.0] * 130 + [99.88] * 50,
+            "close": [100.0] * 180,
+        }
+    )
+
+    m5_times = pd.date_range("2024-10-01T00:05:00Z", periods=500, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 500,
+            "high": [100.10] * 500,
+            "low": [99.90] * 500,
+            "close": [100.0] * 500,
+            "atr14": [1.0] * 448 + [0.35] * 52,
+            "mid_open": [100.0] * 500,
+            "mid_close": [100.0] * 500,
+            "bid_open": [99.9] * 500,
+            "ask_open": [100.1] * 500,
+            "bid_close": [99.9] * 500,
+            "ask_close": [100.1] * 500,
+        }
+    )
+    m5.loc[450, ["open", "high", "low", "close", "atr14"]] = [100.0, 100.58, 99.96, 100.50, 0.35]
+    m5.loc[450, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        100.0,
+        100.50,
+        99.9,
+        100.1,
+        100.40,
+        100.60,
+    ]
+
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-10-01T00:00:00Z", periods=60, freq="1h"),
+            "open": [100.0] * 60,
+            "high": [102.0] * 60,
+            "low": [99.0] * 60,
+            "close": [101.0] * 60,
+            "ema50": [100.0] * 60,
+            "ema50_slope12": [0.1] * 60,
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}

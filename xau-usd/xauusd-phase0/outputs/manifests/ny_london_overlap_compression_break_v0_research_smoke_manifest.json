@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=LONG, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "ny_london_overlap_compression_break_v0",
+  "generated_at_utc": "2026-05-22T12:55:42+00:00",
+  "hypothesis_file": "docs\\hypothesis_ny_london_overlap_compression_break_v0.md",
+  "hypothesis_sha256": "0000dafffe65d4949590e858df4fabab447dc98cc4725cbaa1c9091167c10b14",
+  "latest_plan": {
+    "direction": "LONG",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 99.88,
+    "take_profit": 101.43
+  },
+  "latest_signal": {
+    "direction": "LONG",
+    "reason_code": "NY_LONDON_OVERLAP_COMPRESSION_BREAK_V0_LONG",
+    "timestamp_utc": "2024-10-02T13:35:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\ny_london_overlap_compression_break_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}

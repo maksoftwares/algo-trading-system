@@ -104,14 +104,14 @@ Last updated: 2026-05-22
 - Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
 - Latest D4 result: PASS. `breakout_retest` cell 2 matched 7287 trades, PF 1.4119615864693404, win rate 0.4844243172773432, total PnL 18642279.988449715, and max drawdown within tolerance.
-- Candidate research backlog targets 10 mechanical hypotheses; see `xau-usd\xauusd-phase0\docs\CANDIDATE_RESEARCH_BACKLOG.md`.
-- Second-candidate concentration-risk mitigation is tracked in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md`; `squeeze_breakout_long_v0` is now REJECTED_FIRST_PASS.
-- Second-candidate hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_squeeze_breakout_long_v0.md`.
+- Candidate research backlog targets mechanical hypotheses; see `xau-usd\xauusd-phase0\docs\CANDIDATE_RESEARCH_BACKLOG.md`.
+- Second-candidate concentration-risk mitigation is tracked in `xau-usd\xauusd-phase0\docs\SECOND_CANDIDATE_RESEARCH_PLAN.md`; `ny_london_overlap_compression_break_v0` is now REJECTED_FIRST_PASS.
+- Latest independent-candidate hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_ny_london_overlap_compression_break_v0.md`.
 - Second-candidate research hash manifest: `xau-usd\xauusd-phase0\outputs\hashes\research_hypothesis_hash_manifest.csv`.
-- Latest second-candidate matrix summary: `xau-usd\xauusd-phase0\docs\SQUEEZE_BREAKOUT_LONG_V0_FIRST_PASS.md`.
-- Latest second-candidate result-producing run status: rejected. Real 9-cell matrix produced 194-211 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
-- Second-candidate smoke command: `phase0 run-research-candidate-smoke --expert squeeze_breakout_long_v0 --hypothesis-file docs/hypothesis_squeeze_breakout_long_v0.md`.
-- Latest second-candidate smoke result: PASS. It generated 1 synthetic signal, produced a valid synthetic plan, and confirmed the hypothesis hash lock. The follow-up real matrix failed the first hard gate.
+- Latest independent-candidate matrix summary: `xau-usd\xauusd-phase0\docs\NY_LONDON_OVERLAP_COMPRESSION_BREAK_V0_FIRST_PASS.md`.
+- Latest independent-candidate result-producing run status: rejected. Real 9-cell matrix produced only 2-41 trades per cell and only 3/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Latest independent-candidate smoke command: `phase0 run-research-candidate-smoke --expert ny_london_overlap_compression_break_v0 --hypothesis-file docs/hypothesis_ny_london_overlap_compression_break_v0.md`.
+- Latest independent-candidate smoke result: PASS. It generated 1 synthetic signal, produced a valid synthetic plan, and confirmed the hypothesis hash lock. The follow-up real matrix failed the first hard gate.
 - Third candidate `post_spike_short_v0` is also REJECTED_FIRST_PASS.
 - Post-spike hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_post_spike_short_v0.md`.
 - Post-spike matrix summary: `xau-usd\xauusd-phase0\docs\POST_SPIKE_SHORT_V0_FIRST_PASS.md`.
