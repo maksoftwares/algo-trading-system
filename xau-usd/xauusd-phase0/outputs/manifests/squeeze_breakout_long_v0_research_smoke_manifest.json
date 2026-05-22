@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=LONG, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "squeeze_breakout_long_v0",
+  "generated_at_utc": "2026-05-22T05:27:36+00:00",
+  "hypothesis_file": "docs\\hypothesis_squeeze_breakout_long_v0.md",
+  "hypothesis_sha256": "8afa7c87ae1ee1915a8fd5845e5babb673937084f5a38de98076cac45c252553",
+  "latest_plan": {
+    "direction": "LONG",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 99.9,
+    "take_profit": 101.52499999999998
+  },
+  "latest_signal": {
+    "direction": "LONG",
+    "reason_code": "SQUEEZE_BREAKOUT_LONG_V0",
+    "timestamp_utc": "2024-01-02T10:15:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\squeeze_breakout_long_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}

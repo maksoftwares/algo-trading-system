@@ -81,6 +81,22 @@ The second candidate must pass the same reduced-portfolio discipline:
 | Hypothesis document | `docs/hypothesis_squeeze_breakout_long_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
 | Implementation draft | `src/phase0/strategies/squeeze_breakout_long_v0.py` |
-| Next action | Review the disabled strategy draft, then explicitly promote it into the Phase 0 registry for a fresh result-producing pass without modifying the registered hypothesis. |
+| Research smoke | `outputs/reports/squeeze_breakout_long_v0_research_smoke.md` |
+| Next action | Review the disabled strategy draft and smoke report, then explicitly promote it into the active Phase 0 registry for a fresh result-producing pass without modifying the registered hypothesis. |
+
+## Promotion Prep Command
+
+Before the candidate can be promoted into result-producing Phase 0 runs, run:
+
+```powershell
+.\.venv\Scripts\phase0.exe run-research-candidate-smoke --expert squeeze_breakout_long_v0 --hypothesis-file docs/hypothesis_squeeze_breakout_long_v0.md
+```
+
+This verifies:
+
+- The hypothesis is complete and matches the research hash manifest.
+- The strategy exists only in the research registry, not the active `all` registry.
+- A synthetic signal and trade plan can be produced.
+- Phase 0 result-producing runs remain blocked until explicit promotion.
 
 Rejected experts remain rejected. `trend_pullback` and `range_mr` should not be retuned under their original names. Any future revisit must use a new versioned hypothesis.

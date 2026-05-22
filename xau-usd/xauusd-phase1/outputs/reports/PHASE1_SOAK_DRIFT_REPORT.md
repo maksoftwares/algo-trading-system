@@ -8,43 +8,43 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| decision_rows | PASS | Rows available for soak analysis: 110. |
+| decision_rows | PASS | Rows available for soak analysis: 182. |
 | dry_run_state | PASS | All rows stayed in dry-run state. |
 | permission_state | PASS | All rows kept permission false. |
 | lifecycle_rows | PASS | Startup rows: 15; shutdown rows: 13. |
 | per_run_bar_cadence | PASS | phase1-dry-run-v0.5: 1 expected market-break gap(s) |
-| latest_row_freshness | PASS | Latest row age is 3.4 minute(s); limit 20. |
+| latest_row_freshness | PASS | Latest row age is 3.9 minute(s); limit 15. |
 | server_time_status | PASS | All rows report CLOCK_OK. |
 | breakout_retest_observer | PASS | Observed stage values: WAIT_LEVEL_BREAK_RETEST, WOULD_SIGNAL |
 
 ## Runtime Summary
 
-- Decision rows: 110
+- Decision rows: 182
 - Startup rows: 15
 - Shutdown rows: 13
 - Unique run IDs: 5
 - First bar time: 2026.05.21 13:45:00
-- Latest bar time: 2026.05.21 23:25:00
-- Latest local timestamp: 2026.05.22 03:25:00
-- Observer transitions: 61
+- Latest bar time: 2026.05.22 05:25:00
+- Latest local timestamp: 2026.05.22 09:24:57
+- Observer transitions: 112
 
 ## Latest Row
 
 | Run ID | Broker Time | Bar Time | Risk | Execution | Server Time | BR Stage | BR Direction | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.5 | 2026.05.21 23:25:02 | 2026.05.21 23:25:00 | NORMAL | EXECUTION_OK | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST | SHORT | false |
+| phase1-dry-run-v0.5 | 2026.05.22 05:25:00 | 2026.05.22 05:25:00 | NORMAL | EXECUTION_OK | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST | LONG | false |
 
 ## Spread Points
 
 | count | min | median | p95 | max |
 | --- | --- | --- | --- | --- |
-| 110 | 50.00 | 50.00 | 75.00 | 95.00 |
+| 182 | 50.00 | 50.00 | 75.00 | 95.00 |
 
 ## Stale Seconds
 
 | count | min | median | p95 | max |
 | --- | --- | --- | --- | --- |
-| 110 | 0.00 | 0.00 | 1.00 | 1.00 |
+| 182 | 0.00 | 0.00 | 0.00 | 1.00 |
 
 ## State Counts
 
@@ -56,47 +56,47 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 106 |
+| NORMAL | 178 |
 
 ### Execution
 
 | Value | Count |
 | --- | --- |
-| EXECUTION_OK | 109 |
+| EXECUTION_OK | 181 |
 | SPREAD_TOO_HIGH | 1 |
 
 ### Server Time
 
 | Value | Count |
 | --- | --- |
-| CLOCK_OK | 110 |
+| CLOCK_OK | 182 |
 
 ### Breakout-Retest Stage
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 104 |
-| WOULD_SIGNAL | 6 |
+| WAIT_LEVEL_BREAK_RETEST | 170 |
+| WOULD_SIGNAL | 12 |
 
 ### Breakout-Retest Direction
 
 | Value | Count |
 | --- | --- |
-| LONG | 59 |
-| SHORT | 51 |
+| LONG | 98 |
+| SHORT | 84 |
 
 ### Breakout-Retest Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 104 |
-| true | 6 |
+| false | 170 |
+| true | 12 |
 
 ## Rows By Run ID
 
 | Run ID | Rows | First Bar | Latest Bar |
 | --- | --- | --- | --- |
-| phase1-dry-run-v0.5 | 106 | 2026.05.21 13:45:00 | 2026.05.21 23:25:00 |
+| phase1-dry-run-v0.5 | 178 | 2026.05.21 13:45:00 | 2026.05.22 05:25:00 |
 | phase1-dry-run-v0.5-daily-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |
 | phase1-dry-run-v0.5-manual-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |
 | phase1-dry-run-v0.5-monthly-lock-test | 1 | 2026.05.21 13:50:00 | 2026.05.21 13:50:00 |

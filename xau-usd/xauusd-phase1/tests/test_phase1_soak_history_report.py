@@ -23,6 +23,7 @@ def test_soak_history_report_passes_clean_history(tmp_path):
     assert "Phase 1 Soak History Report" in report
     assert "Latest M5 bar: 2026.05.21 19:55:00" in report
     assert "Recent History" in report
+    assert "No historical acceptance `FAIL` rows recorded." in report
 
 
 def test_soak_history_report_fails_when_latest_permission_is_not_locked(tmp_path):
@@ -35,6 +36,49 @@ def test_soak_history_report_fails_when_latest_permission_is_not_locked(tmp_path
 
     assert output.status == "FAIL"
     assert any(check.name == "latest_safety_state" and check.status == "FAIL" for check in output.checks)
+
+
+def test_soak_history_report_calls_out_historical_acceptance_fail_rows(tmp_path):
+    module = _load_module()
+    history_path = tmp_path / "PHASE1_SOAK_HISTORY.csv"
+    report_path = tmp_path / "PHASE1_SOAK_HISTORY_REPORT.md"
+    _write_history(
+        history_path,
+        rows_override=[
+            {
+                "created_at_utc": "2026-05-21T22:14:43+00:00",
+                "decision_rows": "95",
+                "latest_bar_time": "2026.05.21 22:10:00",
+                "soak_progress_pct": "7.01",
+                "latest_trade_permission": "false",
+                "log_verification": "PASS",
+                "soak_analysis": "PASS",
+                "runtime_health": "PASS",
+                "would_signal": "PASS",
+                "acceptance": "FAIL",
+            },
+            {
+                "created_at_utc": "2026-05-21T22:15:28+00:00",
+                "decision_rows": "96",
+                "latest_bar_time": "2026.05.21 22:15:00",
+                "soak_progress_pct": "7.08",
+                "latest_trade_permission": "false",
+                "log_verification": "PASS",
+                "soak_analysis": "PASS",
+                "runtime_health": "PASS",
+                "would_signal": "PASS",
+                "acceptance": "PENDING",
+            },
+        ],
+    )
+
+    output = module.generate_phase1_soak_history_report(history_path, report_path)
+
+    report = report_path.read_text(encoding="utf-8")
+    assert output.status == "PASS"
+    assert "Historical acceptance `FAIL` rows: 1" in report
+    assert "acceptance-only `FAIL`" in report
+    assert "historical anomalies only" in report
 
 
 def _load_module():
@@ -51,7 +95,7 @@ def _load_module():
     return module
 
 
-def _write_history(path: Path, latest_permission: str = "false") -> None:
+def _write_history(path: Path, latest_permission: str = "false", rows_override: list[dict[str, str]] | None = None) -> None:
     fieldnames = [
         "created_at_utc",
         "files_dir",
@@ -85,7 +129,7 @@ def _write_history(path: Path, latest_permission: str = "false") -> None:
         "would_signal_csv",
         "acceptance_report",
     ]
-    rows = [
+    rows = rows_override or [
         {
             "created_at_utc": "2026-05-21T19:48:31+00:00",
             "decision_rows": "78",
@@ -105,11 +149,11 @@ def _write_history(path: Path, latest_permission: str = "false") -> None:
         row.update(
             {
                 "files_dir": "C:/MT5PortableGoldMission/MQL5/Files",
-                "log_verification": "PASS",
-                "soak_analysis": "PASS",
-                "runtime_health": "PASS",
-                "would_signal": "PASS",
-                "acceptance": "PENDING",
+                "log_verification": row.get("log_verification", "PASS"),
+                "soak_analysis": row.get("soak_analysis", "PASS"),
+                "runtime_health": row.get("runtime_health", "PASS"),
+                "would_signal": row.get("would_signal", "PASS"),
+                "acceptance": row.get("acceptance", "PENDING"),
                 "unique_run_ids": "5",
                 "latest_run_id": "phase1-dry-run-v0.5",
                 "latest_timestamp_broker": row["latest_bar_time"],

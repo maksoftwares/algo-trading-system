@@ -148,6 +148,7 @@ def _render_report(
 ) -> str:
     latest = rows[-1] if rows else {}
     first = rows[0] if rows else {}
+    acceptance_notes = _acceptance_notes(rows)
     return "\n".join(
         [
             "# Phase 1 Soak History Report",
@@ -210,8 +211,47 @@ def _render_report(
                 ["Summary UTC", "Latest Bar", "Rows", "Progress %", "Would Rows", "Clusters", "Acceptance"],
             ),
             "",
+            "## Historical Acceptance Notes",
+            "",
+            *acceptance_notes,
+            "",
         ]
     )
+
+
+def _acceptance_notes(rows: list[dict[str, str]]) -> list[str]:
+    fail_rows = [row for row in rows if row.get("acceptance", "") == "FAIL"]
+    if not fail_rows:
+        return ["- No historical acceptance `FAIL` rows recorded."]
+
+    first_fail = fail_rows[0].get("created_at_utc", "n/a")
+    last_fail = fail_rows[-1].get("created_at_utc", "n/a")
+    acceptance_only_fail_rows = [
+        row
+        for row in fail_rows
+        if all(row.get(field, "") == "PASS" for field in ("log_verification", "soak_analysis", "runtime_health"))
+        and row.get("would_signal", "") == "PASS"
+    ]
+    notes = [
+        f"- Historical acceptance `FAIL` rows: {len(fail_rows)} between `{first_fail}` and `{last_fail}`.",
+    ]
+    if acceptance_only_fail_rows:
+        first_acceptance_only = acceptance_only_fail_rows[0].get("created_at_utc", "n/a")
+        last_acceptance_only = acceptance_only_fail_rows[-1].get("created_at_utc", "n/a")
+        notes.append(
+            "- "
+            f"{len(acceptance_only_fail_rows)} row(s) were acceptance-only `FAIL` with Log/Soak/Runtime/Would-Signal all `PASS`, "
+            f"from `{first_acceptance_only}` to `{last_acceptance_only}`."
+        )
+        notes.append(
+            "- This pattern points to a reporting transient rather than a dry-run boundary or runtime regression."
+        )
+    latest = rows[-1] if rows else {}
+    if latest and latest.get("acceptance", "") in {"PENDING", "PASS"}:
+        notes.append(
+            "- Latest history row is healthy again, so the earlier `FAIL` entries should be reviewed as historical anomalies only."
+        )
+    return notes
 
 
 def _parse_iso(value: str) -> datetime | None:

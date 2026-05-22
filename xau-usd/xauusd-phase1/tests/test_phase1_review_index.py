@@ -19,7 +19,16 @@ def test_review_index_summarizes_phase1_artifacts(tmp_path):
     _write_reports(report_dir)
     _write_status_summary(report_dir / "PHASE1_STATUS_SUMMARY.json")
     (report_dir / "PHASE1_WOULD_SIGNAL_REVIEW.csv").write_text("cluster_id\n1\n", encoding="utf-8")
-    (report_dir / "PHASE1_SOAK_HISTORY.csv").write_text("created_at_utc\n2026-05-21T20:00:00+00:00\n", encoding="utf-8")
+    (report_dir / "PHASE1_SOAK_HISTORY.csv").write_text(
+        "\n".join(
+            [
+                "created_at_utc,files_dir,log_verification,soak_analysis,runtime_health,would_signal,acceptance,decision_rows,unique_run_ids,latest_run_id,latest_bar_time,latest_timestamp_broker,latest_timestamp_local,latest_risk_state,latest_trade_permission,latest_dry_run,latest_server_time_status,latest_br_stage,latest_br_direction,latest_br_would_signal,would_signal_rows,would_signal_clusters,required_soak_days,observed_soak_days,soak_progress_pct,summary_path,log_report,soak_report,would_signal_report,would_signal_csv,acceptance_report",
+                "2026-05-21T22:14:43+00:00,C:/MT5PortableGoldMission/MQL5/Files,PASS,PASS,PASS,PASS,FAIL,95,5,phase1-dry-run-v0.5,2026.05.21 22:10:00,2026.05.21 22:10:00,2026.05.22 02:09:59,NORMAL,false,true,CLOCK_OK,WAIT_LEVEL_BREAK_RETEST,SHORT,false,6,6,5,0.3507,7.01,summary,log,soak,would,csv,acceptance",
+                "2026-05-21T22:15:28+00:00,C:/MT5PortableGoldMission/MQL5/Files,PASS,PASS,PASS,PASS,PENDING,96,5,phase1-dry-run-v0.5,2026.05.21 22:15:00,2026.05.21 22:15:00,2026.05.22 02:14:59,NORMAL,false,true,CLOCK_OK,WAIT_LEVEL_BREAK_RETEST,LONG,false,6,6,5,0.3542,7.08,summary,log,soak,would,csv,acceptance",
+            ]
+        ),
+        encoding="utf-8",
+    )
     bundle_path = bundle_dir / "PHASE1_DRY_RUN_BUNDLE_TEST.zip"
     manifest_path = bundle_dir / "PHASE1_DRY_RUN_BUNDLE_TEST_manifest.json"
     bundle_path.write_bytes(b"bundle")
@@ -36,6 +45,7 @@ def test_review_index_summarizes_phase1_artifacts(tmp_path):
     assert output.status == "PENDING"
     assert "Phase 1 Review Index" in report
     assert "Acceptance report | PENDING" in report
+    assert "Historical acceptance FAIL rows were seen" in report
     assert "PHASE1_DRY_RUN_BUNDLE_TEST.zip" in report
     assert "Broker-action code remains outside the approved scope" in report
 

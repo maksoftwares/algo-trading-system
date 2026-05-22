@@ -8,7 +8,7 @@ from phase0.adversarial import create_adversarial_packets, score_adversarial_rev
 from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
 from phase0.config import ConfigError, build_cell_configs, load_project_config
-from phase0.constants import EXPERTS
+from phase0.constants import EXPERTS, RESEARCH_EXPERTS
 from phase0.cpcv import run_cpcv_validation
 from phase0.data_availability import (
     assert_processed_data_available,
@@ -43,6 +43,7 @@ from phase0.reports import generate_all_reports
 from phase0.reference import validate_reference_files
 from phase0.reality_check import run_reality_check
 from phase0.research_hypotheses import register_research_hypothesis
+from phase0.research_smoke import run_research_candidate_smoke
 from phase0.review_bundle import generate_review_bundle
 from phase0.safety import audit_no_live_trading_calls
 from phase0.snapshot import generate_snapshot
@@ -309,6 +310,14 @@ def build_parser() -> argparse.ArgumentParser:
     research_hypothesis.add_argument("--hypothesis-file", required=True)
     research_hypothesis.add_argument("--force", action="store_true")
     research_hypothesis.set_defaults(func=_cmd_register_research_hypothesis)
+
+    research_smoke = subparsers.add_parser(
+        "run-research-candidate-smoke",
+        help="Run a synthetic smoke check for a disabled, hash-locked research candidate.",
+    )
+    research_smoke.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_smoke.add_argument("--hypothesis-file", required=True)
+    research_smoke.set_defaults(func=_cmd_run_research_candidate_smoke)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -769,6 +778,22 @@ def _cmd_register_research_hypothesis(args: argparse.Namespace) -> int:
     print(f"SHA256: {output.sha256}")
     print(f"Phase 0 result run allowed: {str(output.phase0_result_run_allowed).lower()}")
     return 0
+
+
+def _cmd_run_research_candidate_smoke(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = run_research_candidate_smoke(
+        config,
+        expert=args.expert,
+        hypothesis_file=args.hypothesis_file,
+    )
+    print(f"Research candidate smoke: {output.status}")
+    print(output.report_path)
+    print(output.manifest_path)
+    print(f"Expert: {output.expert}")
+    print(f"Signals: {output.signal_count}")
+    print(f"Phase 0 result run allowed: {str(output.phase0_result_run_allowed).lower()}")
+    return 0 if output.status == "PASS" else 1
 
 
 def _cmd_analyze_spread_logs(args: argparse.Namespace) -> int:

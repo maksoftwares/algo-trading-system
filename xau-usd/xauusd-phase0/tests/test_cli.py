@@ -23,6 +23,7 @@ def test_cli_registers_required_commands():
     assert "run-cpcv-validation" in help_text
     assert "run-reality-check" in help_text
     assert "register-research-hypothesis" in help_text
+    assert "run-research-candidate-smoke" in help_text
 
 
 def test_validate_config_command(project_root, capsys):

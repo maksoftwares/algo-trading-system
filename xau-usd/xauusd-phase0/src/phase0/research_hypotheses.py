@@ -26,6 +26,15 @@ class ResearchHypothesisRegistration:
     phase0_result_run_allowed: bool
 
 
+@dataclass(frozen=True)
+class ResearchHypothesisValidation:
+    status: str
+    expert: str
+    hypothesis_file: Path
+    sha256: str
+    message: str
+
+
 def register_research_hypothesis(
     config: ProjectConfig,
     expert: str,
@@ -71,6 +80,41 @@ def register_research_hypothesis(
         expert=expert,
         sha256=row.sha256,
         phase0_result_run_allowed=False,
+    )
+
+
+def validate_research_hypothesis(
+    config: ProjectConfig,
+    expert: str,
+    hypothesis_file: str,
+) -> ResearchHypothesisValidation:
+    relative_path = Path(hypothesis_file)
+    if relative_path.is_absolute():
+        raise ConfigError("Research hypothesis file must be relative to the Phase 0 root.")
+    hypothesis_path = config.root / relative_path
+    validate_hypothesis_file_complete(expert, hypothesis_path, raise_on_error=True)
+    manifest_path = config.root / "outputs" / "hashes" / "research_hypothesis_hash_manifest.csv"
+    existing = _load_existing_rows(manifest_path)
+    if expert not in existing:
+        raise ConfigError(f"Research hypothesis {expert!r} is not registered in {manifest_path}.")
+    current_hash = sha256_file(hypothesis_path)
+    registered = existing[expert]
+    if registered.hypothesis_file != relative_path.as_posix():
+        raise ConfigError(
+            f"Research hypothesis {expert!r} is registered to {registered.hypothesis_file}, "
+            f"not {relative_path.as_posix()}."
+        )
+    if registered.sha256 != current_hash:
+        raise ConfigError(
+            f"Research hypothesis {expert!r} changed after registration. "
+            "Create a new version before testing."
+        )
+    return ResearchHypothesisValidation(
+        status="PASS",
+        expert=expert,
+        hypothesis_file=hypothesis_path,
+        sha256=current_hash,
+        message="Research hypothesis is complete and hash-locked.",
     )
 
 

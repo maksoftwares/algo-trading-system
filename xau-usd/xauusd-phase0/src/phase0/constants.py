@@ -8,6 +8,7 @@ DEFAULT_PHASE0_CONFIG = CONFIG_DIR / "phase0.yaml"
 DEFAULT_TRUE_HOLDOUT_CONFIG = CONFIG_DIR / "true_holdout_period.yaml"
 
 EXPERTS = ("trend_pullback", "breakout_retest", "range_mr")
+RESEARCH_EXPERTS = ("squeeze_breakout_long_v0",)
 COST_MODELS = ("best_case", "median", "p95")
 BROKERS = ("capital_com", "pepperstone", "dukascopy")
 PRIMARY_SYMBOL = "XAUUSD"

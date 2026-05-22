@@ -114,6 +114,7 @@ def _render_report(
     soak = _mapping(summary.get("soak"))
     would_signal = _mapping(summary.get("would_signal"))
     status_fields = _mapping(summary.get("status"))
+    soak_history_note = _historical_soak_note(root / "outputs" / "reports" / "PHASE1_SOAK_HISTORY.csv")
 
     bundle_path = expected_bundle_path or _latest_path(root / "outputs" / "review_bundles", "*_BUNDLE_*.zip")
     manifest_path = expected_manifest_path or _latest_path(root / "outputs" / "review_bundles", "*_manifest.json")
@@ -177,6 +178,10 @@ def _render_report(
                 ["Artifact", "Status", "Path", "Note"],
             ),
             "",
+            "## Historical Note",
+            "",
+            soak_history_note,
+            "",
             "## Review Bundle",
             "",
             f"- Bundle: `{bundle_path if bundle_path else 'not generated yet'}`",
@@ -217,6 +222,39 @@ def _cell(value: Any) -> str:
     if value is None:
         return ""
     return str(value)
+
+
+def _historical_soak_note(path: Path) -> str:
+    if not path.exists():
+        return "Soak-history CSV not found, so no historical anomaly note is available."
+    import csv
+
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows:
+        return "No soak-history rows available for anomaly review."
+
+    fail_rows = [row for row in rows if row.get("acceptance", "") == "FAIL"]
+    if not fail_rows:
+        return "No historical acceptance FAIL rows recorded."
+
+    acceptance_only_fail_rows = [
+        row
+        for row in fail_rows
+        if all(row.get(field, "") == "PASS" for field in ("log_verification", "soak_analysis", "runtime_health"))
+        and row.get("would_signal", "") == "PASS"
+    ]
+    first_fail = fail_rows[0].get("created_at_utc", "n/a")
+    last_fail = fail_rows[-1].get("created_at_utc", "n/a")
+    if acceptance_only_fail_rows:
+        return (
+            f"Historical acceptance FAIL rows were seen from {first_fail} to {last_fail}; "
+            "some were acceptance-only while all underlying runtime checks were PASS, so treat them as reporting transients."
+        )
+    return (
+        f"Historical acceptance FAIL rows were seen from {first_fail} to {last_fail}; "
+        "compare them against the latest healthy row before treating them as active regressions."
+    )
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:

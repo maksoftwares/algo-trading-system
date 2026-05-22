@@ -20,6 +20,6 @@ Overall status: PASS
 | final_verdict_state | PASS | Verdict contains at least one final approved expert. |
 | intrabar_ambiguity_reports | PASS | Intrabar ambiguity reports exist. |
 | adversarial_scores | PASS | Scored adversarial review files exist. |
-| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260521_233157.zip. |
+| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260522_052815.zip. |
 
 A PASS here means the artifact package is structurally reviewable. It does not approve EA coding unless the consolidated verdict also contains a final approved expert.

@@ -10,6 +10,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _breakout_context()
     if expert == "range_mr":
         return _range_context()
+    if expert == "squeeze_breakout_long_v0":
+        return _squeeze_breakout_long_context()
     raise ValueError(f"Unknown synthetic expert {expert!r}.")
 
 
@@ -139,3 +141,57 @@ def _range_context() -> dict:
     m5["bullish_pin_bar"] = [True, False, False, False]
     m5["bearish_pin_bar"] = [False, False, False, False]
     return {"H1": h1, "M15": m15, "M5": m5, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _squeeze_breakout_long_context() -> dict:
+    m15_times = pd.date_range("2024-01-01T00:15:00Z", periods=140, freq="15min")
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "open": [100.0] * 140,
+            "high": [102.0] * 120 + [100.1] * 20,
+            "low": [98.0] * 120 + [99.9] * 20,
+            "close": [100.0] * 140,
+        }
+    )
+
+    m5_times = pd.date_range("2024-01-01T00:05:00Z", periods=430, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 430,
+            "high": [100.15] * 430,
+            "low": [99.95] * 430,
+            "close": [100.0] * 430,
+            "atr14": [1.0] * 409 + [0.4] * 21,
+            "mid_open": [100.0] * 430,
+            "mid_close": [100.0] * 430,
+            "bid_open": [99.9] * 430,
+            "ask_open": [100.1] * 430,
+            "bid_close": [99.9] * 430,
+            "ask_close": [100.1] * 430,
+        }
+    )
+    m5.loc[410, ["open", "high", "low", "close", "atr14"]] = [100.0, 100.7, 99.95, 100.55, 0.4]
+    m5.loc[410, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        100.0,
+        100.55,
+        99.9,
+        100.1,
+        100.45,
+        100.65,
+    ]
+
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T01:00:00Z", periods=40, freq="1h"),
+            "open": [100.0] * 40,
+            "high": [102.0] * 40,
+            "low": [99.0] * 40,
+            "close": [101.0] * 40,
+            "ema50": [100.0] * 40,
+            "ema50_slope12": [0.1] * 40,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
