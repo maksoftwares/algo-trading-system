@@ -331,6 +331,52 @@ def build_parser() -> argparse.ArgumentParser:
     research_matrix.add_argument("--synthetic-sample", action="store_true")
     research_matrix.set_defaults(func=_cmd_run_research_matrix)
 
+    research_deciles = subparsers.add_parser(
+        "run-research-deciles",
+        help="Run decile persistence tests for a hash-locked research candidate.",
+    )
+    research_deciles.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_deciles.add_argument("--hypothesis-file", required=True)
+    research_deciles.add_argument("--synthetic-sample", action="store_true")
+    research_deciles.add_argument("--unlock-true-holdout", action="store_true")
+    research_deciles.set_defaults(func=_cmd_run_research_deciles)
+
+    research_multisymbol = subparsers.add_parser(
+        "run-research-multisymbol",
+        help="Run multisymbol checks for a hash-locked research candidate.",
+    )
+    research_multisymbol.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_multisymbol.add_argument("--hypothesis-file", required=True)
+    research_multisymbol.add_argument("--broker", default="capital_com")
+    research_multisymbol.add_argument("--cost-model", default="median")
+    research_multisymbol.add_argument("--synthetic-sample", action="store_true")
+    research_multisymbol.add_argument("--unlock-true-holdout", action="store_true")
+    research_multisymbol.set_defaults(func=_cmd_run_research_multisymbol)
+
+    research_adversarial = subparsers.add_parser(
+        "create-research-adversarial-packets",
+        help="Create adversarial review packets for a hash-locked research candidate.",
+    )
+    research_adversarial.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_adversarial.add_argument("--hypothesis-file", required=True)
+    research_adversarial.set_defaults(func=_cmd_create_research_adversarial_packets)
+
+    research_adversarial_score = subparsers.add_parser(
+        "score-research-adversarial-review",
+        help="Score manually annotated adversarial review packets for a research candidate.",
+    )
+    research_adversarial_score.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_adversarial_score.add_argument("--hypothesis-file", required=True)
+    research_adversarial_score.set_defaults(func=_cmd_score_research_adversarial_review)
+
+    research_intrabar_report = subparsers.add_parser(
+        "generate-research-intrabar-ambiguity-report",
+        help="Summarize intrabar ambiguity for a hash-locked research candidate.",
+    )
+    research_intrabar_report.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
+    research_intrabar_report.add_argument("--hypothesis-file", required=True)
+    research_intrabar_report.set_defaults(func=_cmd_generate_research_intrabar_ambiguity_report)
+
     fixed_notional = subparsers.add_parser(
         "generate-fixed-notional-report",
         help="Generate fixed-risk no-compounding and cost-in-R reporting for an expert.",
@@ -871,6 +917,110 @@ def _cmd_run_research_matrix(args: argparse.Namespace) -> int:
         print(output.summary_path)
         print(output.trades_path)
         print(output.equity_path)
+    return 0
+
+
+def _cmd_run_research_deciles(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    if _validate_research_candidate(config, args.expert, args.hypothesis_file) != 0:
+        return 1
+    outputs = run_decile_tests(
+        config,
+        args.expert,
+        synthetic_sample=args.synthetic_sample,
+        unlock_true_holdout=args.unlock_true_holdout,
+        allow_research_candidate=True,
+    )
+    print(f"Research decile tests complete: {len(outputs)} expert result file(s)")
+    print(f"Expert: {args.expert}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        print(output.results_path)
+    return 0
+
+
+def _cmd_run_research_multisymbol(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    if _validate_research_candidate(config, args.expert, args.hypothesis_file) != 0:
+        return 1
+    outputs = run_multisymbol_checks(
+        config,
+        args.expert,
+        synthetic_sample=args.synthetic_sample,
+        broker=args.broker,
+        cost_model=args.cost_model,
+        unlock_true_holdout=args.unlock_true_holdout,
+        allow_research_candidate=True,
+    )
+    print(f"Research multisymbol checks complete: {len(outputs)} expert summary file(s)")
+    print(f"Expert: {args.expert}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        print(output.summary_path)
+        for trades_path in output.trades_paths:
+            print(trades_path)
+    return 0
+
+
+def _cmd_create_research_adversarial_packets(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    if _validate_research_candidate(config, args.expert, args.hypothesis_file) != 0:
+        return 1
+    outputs = create_adversarial_packets(config, args.expert, allow_research_candidate=True)
+    print(f"Research adversarial packets complete: {len(outputs)} expert review file(s)")
+    print(f"Expert: {args.expert}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        print(f"{output.review_path} ({output.selected_trades}/{output.losing_trades} losing trade(s))")
+    return 0
+
+
+def _cmd_score_research_adversarial_review(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    if _validate_research_candidate(config, args.expert, args.hypothesis_file) != 0:
+        return 1
+    outputs = score_adversarial_review(config, args.expert, allow_research_candidate=True)
+    print(f"Research adversarial review scored: {len(outputs)} expert file(s)")
+    print(f"Expert: {args.expert}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        pct = "n/a" if output.logic_gap_failures_pct is None else f"{output.logic_gap_failures_pct:.4g}%"
+        print(
+            f"{output.expert}: {output.status} "
+            f"({output.reviewed_trades}/{output.total_trades} reviewed, "
+            f"logic gaps={output.logic_gap_failures}, pct={pct})"
+        )
+        print(output.score_path)
+    return 0
+
+
+def _cmd_generate_research_intrabar_ambiguity_report(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    if _validate_research_candidate(config, args.expert, args.hypothesis_file) != 0:
+        return 1
+    outputs = generate_intrabar_ambiguity_report(
+        config,
+        args.expert,
+        allow_research_candidate=True,
+    )
+    print(f"Research intrabar ambiguity reports complete: {len(outputs)} expert report(s)")
+    print(f"Expert: {args.expert}")
+    print("Research boundary: candidate evaluation only, not approved EA status.")
+    for output in outputs:
+        print(output.report_path)
+        print(output.summary_path)
+    return 0
+
+
+def _validate_research_candidate(config, expert: str, hypothesis_file: str) -> int:
+    smoke = run_research_candidate_smoke(
+        config,
+        expert=expert,
+        hypothesis_file=hypothesis_file,
+    )
+    if smoke.status != "PASS":
+        print(f"Research candidate smoke: {smoke.status}")
+        return 1
     return 0
 
 

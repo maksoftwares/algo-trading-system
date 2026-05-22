@@ -63,11 +63,15 @@ class AdversarialScoreOutput:
     status: str
 
 
-def create_adversarial_packets(config: ProjectConfig, expert: str) -> list[AdversarialPacketOutput]:
+def create_adversarial_packets(
+    config: ProjectConfig,
+    expert: str,
+    allow_research_candidate: bool = False,
+) -> list[AdversarialPacketOutput]:
     output_dir = config.root / "outputs" / "adversarial_review"
     output_dir.mkdir(parents=True, exist_ok=True)
     outputs: list[AdversarialPacketOutput] = []
-    for expert_name in enabled_strategy_names(expert):
+    for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
         losing = _load_losing_matrix_trades(config, expert_name)
         selected = _select_review_sample(losing)
         path = output_dir / f"{expert_name}_losing_trades_review.csv"
@@ -83,9 +87,13 @@ def create_adversarial_packets(config: ProjectConfig, expert: str) -> list[Adver
     return outputs
 
 
-def score_adversarial_review(config: ProjectConfig, expert: str) -> list[AdversarialScoreOutput]:
+def score_adversarial_review(
+    config: ProjectConfig,
+    expert: str,
+    allow_research_candidate: bool = False,
+) -> list[AdversarialScoreOutput]:
     outputs: list[AdversarialScoreOutput] = []
-    for expert_name in enabled_strategy_names(expert):
+    for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
         outputs.append(_score_one_review(config, expert_name))
     return outputs
 

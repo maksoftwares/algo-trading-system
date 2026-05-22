@@ -43,6 +43,7 @@ def run_decile_tests(
     expert: str,
     synthetic_sample: bool = False,
     unlock_true_holdout: bool = False,
+    allow_research_candidate: bool = False,
 ) -> list[DecileRunOutput]:
     start, end = guarded_or_trimmed_period(
         config,
@@ -64,8 +65,16 @@ def run_decile_tests(
             ),
             "XAUUSD",
         )
-    for expert_name in enabled_strategy_names(expert):
-        rows = _run_expert_deciles(config, expert_name, start, end, synthetic_sample, base_context)
+    for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
+        rows = _run_expert_deciles(
+            config,
+            expert_name,
+            start,
+            end,
+            synthetic_sample,
+            base_context,
+            allow_research_candidate=allow_research_candidate,
+        )
         output_dir = config.root / "outputs" / "decile_results"
         output_dir.mkdir(parents=True, exist_ok=True)
         path = output_dir / f"{expert_name}_decile_results.csv"
@@ -81,8 +90,9 @@ def _run_expert_deciles(
     end: pd.Timestamp,
     synthetic_sample: bool,
     base_context: dict | None = None,
+    allow_research_candidate: bool = False,
 ) -> list[dict[str, object]]:
-    strategy = get_strategy(expert)
+    strategy = get_strategy(expert, allow_research_candidate=allow_research_candidate)
     rows: list[dict[str, object]] = []
 
     for decile_id, decile_start, decile_end in split_period(start, end, 10):

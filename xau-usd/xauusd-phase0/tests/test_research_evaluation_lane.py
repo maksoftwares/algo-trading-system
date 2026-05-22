@@ -18,7 +18,9 @@ def test_research_candidate_is_explicit_only():
         "ny_am_pullback_continuation_v0",
         "post_spike_short_v0",
         "previous_day_extreme_retest_v0",
+        "session_vwap_reclaim_v0",
         "squeeze_breakout_long_v0",
+        "swing_breakout_retest_v0",
         "weekly_level_reclaim_v0",
     ):
         with pytest.raises(ConfigError):
@@ -43,6 +45,8 @@ def test_research_candidate_is_explicit_only():
         "ny_am_pullback_continuation_v0",
         "post_spike_short_v0",
         "previous_day_extreme_retest_v0",
+        "session_vwap_reclaim_v0",
+        "swing_breakout_retest_v0",
         "weekly_level_reclaim_v0",
     ):
         assert expert not in enabled_strategy_names(
@@ -63,7 +67,9 @@ def test_research_strategy_requires_explicit_permission():
         "ny_am_pullback_continuation_v0",
         "post_spike_short_v0",
         "previous_day_extreme_retest_v0",
+        "session_vwap_reclaim_v0",
         "squeeze_breakout_long_v0",
+        "swing_breakout_retest_v0",
         "weekly_level_reclaim_v0",
     ):
         with pytest.raises(ConfigError):

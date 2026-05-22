@@ -47,6 +47,7 @@ def run_multisymbol_checks(
     broker: str = "capital_com",
     cost_model: str = "median",
     unlock_true_holdout: bool = False,
+    allow_research_candidate: bool = False,
 ) -> list[MultisymbolRunOutput]:
     start, end = guarded_or_trimmed_period(
         config,
@@ -74,7 +75,7 @@ def run_multisymbol_checks(
             context_cache[symbol] = filter_context_by_time(context, start, end)
 
     outputs: list[MultisymbolRunOutput] = []
-    for expert_name in enabled_strategy_names(expert):
+    for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
         summary_rows: list[dict[str, object]] = []
         trade_paths: list[Path] = []
         for symbol in COMPARISON_SYMBOLS:
@@ -88,6 +89,7 @@ def run_multisymbol_checks(
                 end,
                 synthetic_sample,
                 context_cache.get(symbol),
+                allow_research_candidate=allow_research_candidate,
             )
             summary_rows.append(_summary_row(config, expert_name, symbol, broker, cost_model, result.metrics))
             trades_path = output_dir / f"{expert_name}_{symbol}_trades.csv"
@@ -113,8 +115,9 @@ def _run_symbol_check(
     end: pd.Timestamp,
     synthetic_sample: bool,
     cached_context: dict | None = None,
+    allow_research_candidate: bool = False,
 ):
-    strategy = get_strategy(expert)
+    strategy = get_strategy(expert, allow_research_candidate=allow_research_candidate)
     if synthetic_sample:
         context = context_with_symbol_metadata(config, synthetic_context_for_expert(expert), symbol)
     else:

@@ -34,8 +34,9 @@ Expected path:
 | 13 | `ny_am_pullback_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 14 | `weekly_level_reclaim_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 15 | `asia_range_london_failed_break_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
-| 16 | `session_vwap_reclaim_v0` | NEXT_RESEARCH_CANDIDATE | Needs VWAP/proxy implementation and reclaim definition. |
-| 17 | `ny_london_overlap_compression_break_v0` | BACKLOG | Needs overlap compression and expansion definition. |
+| 16 | `session_vwap_reclaim_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 17 | `swing_breakout_retest_v0` | DEEP_GATES_PASS_PENDING_MANUAL_ADVERSARIAL_REVIEW | Passed 9-cell, decile, multisymbol, and intrabar checks; review 120 sampled losing trades before promotion. |
+| 18 | `ny_london_overlap_compression_break_v0` | BACKLOG | Needs overlap compression and expansion definition. |
 
 ## Discipline
 
@@ -44,3 +45,4 @@ Expected path:
 - No candidate enters the active EA roadmap until Phase 0 verdict is PASS.
 - `phase0 run-matrix --expert all` must remain reserved for the active approved/legacy Phase 0 set, not experimental backlog candidates.
 - Original 10-candidate bench is now fully resolved: 1 approved future expert and 9 rejected v0 candidates.
+- Extended bench status: `swing_breakout_retest_v0` is the next valid research candidate, but it remains unapproved until manual adversarial review passes.

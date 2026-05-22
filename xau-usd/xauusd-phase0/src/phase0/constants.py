@@ -19,7 +19,9 @@ RESEARCH_EXPERTS = (
     "ny_am_pullback_continuation_v0",
     "post_spike_short_v0",
     "previous_day_extreme_retest_v0",
+    "session_vwap_reclaim_v0",
     "squeeze_breakout_long_v0",
+    "swing_breakout_retest_v0",
     "weekly_level_reclaim_v0",
 )
 COST_MODELS = ("best_case", "median", "p95")

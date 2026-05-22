@@ -6,8 +6,8 @@ from typing import Any
 
 import pandas as pd
 
-from phase0.config import ConfigError, ProjectConfig
-from phase0.constants import EXPERTS
+from phase0.config import ProjectConfig
+from phase0.strategies.registry import enabled_strategy_names
 
 
 @dataclass(frozen=True)
@@ -25,10 +25,9 @@ class IntrabarAmbiguityOutput:
 def generate_intrabar_ambiguity_report(
     config: ProjectConfig,
     expert: str,
+    allow_research_candidate: bool = False,
 ) -> list[IntrabarAmbiguityOutput]:
-    experts = EXPERTS if expert == "all" else (expert,)
-    if expert != "all" and expert not in EXPERTS:
-        raise ConfigError(f"Unknown expert {expert!r}.")
+    experts = enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate)
     return [_generate_one(config, item) for item in experts]
 
 
