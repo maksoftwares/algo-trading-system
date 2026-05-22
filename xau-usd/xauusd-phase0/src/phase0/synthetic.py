@@ -4,6 +4,10 @@ import pandas as pd
 
 
 def synthetic_context_for_expert(expert: str) -> dict:
+    if expert == "asia_range_london_breakout_v0":
+        return _asia_range_london_breakout_context()
+    if expert == "asia_range_london_failed_break_reversal_v0":
+        return _asia_range_london_failed_break_reversal_context()
     if expert == "compression_retest_continuation_v0":
         return _compression_retest_continuation_context()
     if expert == "trend_pullback":
@@ -20,10 +24,16 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _london_fix_continuation_context()
     if expert == "ny_failed_london_reversal_v0":
         return _ny_failed_london_reversal_context()
+    if expert == "ny_am_pullback_continuation_v0":
+        return _ny_am_pullback_continuation_context()
     if expert == "post_spike_short_v0":
         return _post_spike_short_context()
+    if expert == "previous_day_extreme_retest_v0":
+        return _previous_day_extreme_retest_context()
     if expert == "squeeze_breakout_long_v0":
         return _squeeze_breakout_long_context()
+    if expert == "weekly_level_reclaim_v0":
+        return _weekly_level_reclaim_context()
     raise ValueError(f"Unknown synthetic expert {expert!r}.")
 
 
@@ -529,6 +539,239 @@ def _compression_retest_continuation_context() -> dict:
             "high": [102.0] * 50,
             "low": [98.0] * 50,
             "close": [100.0] * 50,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _asia_range_london_breakout_context() -> dict:
+    m5_times = pd.date_range("2024-08-01T00:05:00Z", periods=160, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 160,
+            "high": [100.3] * 160,
+            "low": [99.7] * 160,
+            "close": [100.0] * 160,
+            "atr14": [0.5] * 160,
+            "mid_open": [100.0] * 160,
+            "mid_close": [100.0] * 160,
+            "bid_open": [99.9] * 160,
+            "ask_open": [100.1] * 160,
+            "bid_close": [99.9] * 160,
+            "ask_close": [100.1] * 160,
+        }
+    )
+    asia_mask = (m5["bar_start_utc"].dt.hour >= 0) & (m5["bar_start_utc"].dt.hour < 6)
+    m5.loc[asia_mask, ["high", "low"]] = [101.0, 99.0]
+    m5.loc[90, ["open", "high", "low", "close"]] = [100.80, 101.70, 100.60, 101.50]
+    m5.loc[90, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        100.80,
+        101.50,
+        100.70,
+        100.90,
+        101.40,
+        101.60,
+    ]
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-08-01T00:15:00Z", periods=80, freq="15min"),
+            "open": [100.0] * 80,
+            "high": [101.0] * 80,
+            "low": [99.0] * 80,
+            "close": [100.0] * 80,
+            "atr14": [1.2] * 80,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-08-01T00:00:00Z", periods=24, freq="1h"),
+            "open": [100.0] * 24,
+            "high": [102.0] * 24,
+            "low": [98.0] * 24,
+            "close": [100.0] * 24,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _asia_range_london_failed_break_reversal_context() -> dict:
+    context = _asia_range_london_breakout_context()
+    m5 = context["M5"].copy()
+    m5.loc[90, ["open", "high", "low", "close"]] = [101.30, 101.60, 100.40, 100.60]
+    m5.loc[90, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        101.30,
+        100.60,
+        101.20,
+        101.40,
+        100.50,
+        100.70,
+    ]
+    context["M5"] = m5
+    return context
+
+
+def _previous_day_extreme_retest_context() -> dict:
+    m5_times = pd.date_range("2024-09-01T00:05:00Z", periods=600, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 600,
+            "high": [100.2] * 600,
+            "low": [99.8] * 600,
+            "close": [100.0] * 600,
+            "atr14": [0.5] * 600,
+            "mid_open": [100.0] * 600,
+            "mid_close": [100.0] * 600,
+            "bid_open": [99.9] * 600,
+            "ask_open": [100.1] * 600,
+            "bid_close": [99.9] * 600,
+            "ask_close": [100.1] * 600,
+        }
+    )
+    first_day = m5["bar_start_utc"].dt.strftime("%Y-%m-%d") == "2024-09-01"
+    m5.loc[first_day, ["high", "low"]] = [101.0, 99.0]
+    m5.loc[400, ["open", "high", "low", "close"]] = [100.20, 101.75, 100.15, 101.50]
+    m5.loc[403, ["open", "high", "low", "close"]] = [101.30, 101.35, 101.05, 101.15]
+    m5.loc[405, ["open", "high", "low", "close"]] = [101.20, 101.70, 101.15, 101.60]
+    for idx in (400, 403, 405):
+        m5.loc[idx, "mid_open"] = m5.loc[idx, "open"]
+        m5.loc[idx, "mid_close"] = m5.loc[idx, "close"]
+        m5.loc[idx, "bid_open"] = m5.loc[idx, "open"] - 0.1
+        m5.loc[idx, "ask_open"] = m5.loc[idx, "open"] + 0.1
+        m5.loc[idx, "bid_close"] = m5.loc[idx, "close"] - 0.1
+        m5.loc[idx, "ask_close"] = m5.loc[idx, "close"] + 0.1
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-09-01T00:15:00Z", periods=220, freq="15min"),
+            "open": [100.0] * 220,
+            "high": [101.0] * 220,
+            "low": [99.0] * 220,
+            "close": [100.0] * 220,
+            "atr14": [1.0] * 220,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-09-01T00:00:00Z", periods=60, freq="1h"),
+            "open": [100.0] * 60,
+            "high": [102.0] * 60,
+            "low": [98.0] * 60,
+            "close": [100.0] * 60,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _ny_am_pullback_continuation_context() -> dict:
+    m5_times = pd.date_range("2024-10-01T13:05:00Z", periods=120, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 120,
+            "high": [100.2] * 120,
+            "low": [99.8] * 120,
+            "close": [100.0] * 120,
+            "atr14": [0.5] * 120,
+            "mid_open": [100.0] * 120,
+            "mid_close": [100.0] * 120,
+            "bid_open": [99.9] * 120,
+            "ask_open": [100.1] * 120,
+            "bid_close": [99.9] * 120,
+            "ask_close": [100.1] * 120,
+        }
+    )
+    m5.loc[6, ["open", "high", "low", "close"]] = [100.00, 100.35, 99.90, 100.25]
+    m5.loc[7, ["open", "high", "low", "close"]] = [100.25, 100.75, 100.20, 100.65]
+    m5.loc[8, ["open", "high", "low", "close"]] = [100.65, 101.10, 100.60, 101.00]
+    m5.loc[9, ["open", "high", "low", "close"]] = [101.00, 101.35, 100.95, 101.20]
+    m5.loc[10, ["open", "high", "low", "close"]] = [101.20, 101.40, 101.00, 101.25]
+    m5.loc[11, ["open", "high", "low", "close"]] = [101.25, 101.45, 101.05, 101.30]
+    m5.loc[24, ["open", "high", "low", "close"]] = [100.95, 101.00, 100.57, 100.75]
+    m5.loc[26, ["open", "high", "low", "close"]] = [100.82, 101.28, 100.78, 101.20]
+    for idx in (6, 7, 8, 9, 10, 11, 24, 26):
+        m5.loc[idx, "mid_open"] = m5.loc[idx, "open"]
+        m5.loc[idx, "mid_close"] = m5.loc[idx, "close"]
+        m5.loc[idx, "bid_open"] = m5.loc[idx, "open"] - 0.1
+        m5.loc[idx, "ask_open"] = m5.loc[idx, "open"] + 0.1
+        m5.loc[idx, "bid_close"] = m5.loc[idx, "close"] - 0.1
+        m5.loc[idx, "ask_close"] = m5.loc[idx, "close"] + 0.1
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-10-01T13:15:00Z", periods=50, freq="15min"),
+            "open": [100.0] * 50,
+            "high": [101.0] * 50,
+            "low": [99.0] * 50,
+            "close": [100.0] * 50,
+            "atr14": [1.0] * 50,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-10-01T10:00:00Z", periods=24, freq="1h"),
+            "open": [100.0] * 24,
+            "high": [102.0] * 24,
+            "low": [98.0] * 24,
+            "close": [100.0] * 24,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _weekly_level_reclaim_context() -> dict:
+    m5_times = pd.date_range("2024-11-04T00:05:00Z", periods=2300, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 2300,
+            "high": [100.2] * 2300,
+            "low": [99.8] * 2300,
+            "close": [100.0] * 2300,
+            "atr14": [0.5] * 2300,
+            "mid_open": [100.0] * 2300,
+            "mid_close": [100.0] * 2300,
+            "bid_open": [99.9] * 2300,
+            "ask_open": [100.1] * 2300,
+            "bid_close": [99.9] * 2300,
+            "ask_close": [100.1] * 2300,
+        }
+    )
+    first_week = m5["bar_start_utc"].dt.isocalendar().week == 45
+    m5.loc[first_week, ["high", "low"]] = [101.0, 99.0]
+    m5.loc[2100, ["open", "high", "low", "close"]] = [98.70, 99.40, 98.60, 99.20]
+    m5.loc[2100, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        98.70,
+        99.20,
+        98.60,
+        98.80,
+        99.10,
+        99.30,
+    ]
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-11-04T00:15:00Z", periods=780, freq="15min"),
+            "open": [100.0] * 780,
+            "high": [101.0] * 780,
+            "low": [99.0] * 780,
+            "close": [100.0] * 780,
+            "atr14": [1.0] * 780,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-11-04T00:00:00Z", periods=200, freq="1h"),
+            "open": [100.0] * 200,
+            "high": [102.0] * 200,
+            "low": [98.0] * 200,
+            "close": [100.0] * 200,
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}

@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 from phase0.config import ConfigError
+from phase0.strategies.asia_range_london_breakout_v0 import AsiaRangeLondonBreakoutV0Strategy
+from phase0.strategies.asia_range_london_failed_break_reversal_v0 import (
+    AsiaRangeLondonFailedBreakReversalV0Strategy,
+)
 from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
 from phase0.strategies.compression_retest_continuation_v0 import CompressionRetestContinuationV0Strategy
@@ -8,10 +12,13 @@ from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
 from phase0.strategies.extreme_activity_mean_reversion_v0 import ExtremeActivityMeanReversionV0Strategy
 from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0Strategy
 from phase0.strategies.ny_failed_london_reversal_v0 import NyFailedLondonReversalV0Strategy
+from phase0.strategies.ny_am_pullback_continuation_v0 import NyAmPullbackContinuationV0Strategy
 from phase0.strategies.post_spike_short_v0 import PostSpikeShortV0Strategy
+from phase0.strategies.previous_day_extreme_retest_v0 import PreviousDayExtremeRetestV0Strategy
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
 from phase0.strategies.squeeze_breakout_long_v0 import SqueezeBreakoutLongV0Strategy
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
+from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
 
 
 STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
@@ -21,13 +28,18 @@ STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
 }
 
 RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
+    AsiaRangeLondonBreakoutV0Strategy.name: AsiaRangeLondonBreakoutV0Strategy,
+    AsiaRangeLondonFailedBreakReversalV0Strategy.name: AsiaRangeLondonFailedBreakReversalV0Strategy,
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
     ExtremeActivityMeanReversionV0Strategy.name: ExtremeActivityMeanReversionV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,
     NyFailedLondonReversalV0Strategy.name: NyFailedLondonReversalV0Strategy,
+    NyAmPullbackContinuationV0Strategy.name: NyAmPullbackContinuationV0Strategy,
     PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
+    PreviousDayExtremeRetestV0Strategy.name: PreviousDayExtremeRetestV0Strategy,
     SqueezeBreakoutLongV0Strategy.name: SqueezeBreakoutLongV0Strategy,
+    WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
 }
 
 

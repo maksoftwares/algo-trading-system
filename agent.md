@@ -132,7 +132,27 @@ Last updated: 2026-05-22
 - Compression retest continuation matrix summary: `xau-usd\xauusd-phase0\docs\COMPRESSION_RETEST_CONTINUATION_V0_FIRST_PASS.md`.
 - Latest compression retest continuation result-producing run status: rejected. Real 9-cell matrix produced 0 trades in every cell, so do not proceed to deciles or tune v0.
 - Original 10-candidate research bench status: 1 approved future expert (`breakout_retest`) and 9 rejected v0 candidates.
-- Extended bench next candidate: `asia_range_london_breakout_v0`.
+- Extended bench candidate `asia_range_london_breakout_v0` is REJECTED_FIRST_PASS.
+- Asia range London breakout hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_asia_range_london_breakout_v0.md`.
+- Asia range London breakout matrix summary: `xau-usd\xauusd-phase0\docs\ASIA_RANGE_LONDON_BREAKOUT_V0_FIRST_PASS.md`.
+- Latest Asia range London breakout result-producing run status: rejected. Real 9-cell matrix produced 507-571 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Extended bench candidate `previous_day_extreme_retest_v0` is REJECTED_FIRST_PASS.
+- Previous-day extreme retest hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_previous_day_extreme_retest_v0.md`.
+- Previous-day extreme retest matrix summary: `xau-usd\xauusd-phase0\docs\PREVIOUS_DAY_EXTREME_RETEST_V0_FIRST_PASS.md`.
+- Latest previous-day extreme retest result-producing run status: rejected. Real 9-cell matrix produced 478-704 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Extended bench candidate `ny_am_pullback_continuation_v0` is REJECTED_FIRST_PASS.
+- NY AM pullback continuation hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_ny_am_pullback_continuation_v0.md`.
+- NY AM pullback continuation matrix summary: `xau-usd\xauusd-phase0\docs\NY_AM_PULLBACK_CONTINUATION_V0_FIRST_PASS.md`.
+- Latest NY AM pullback continuation result-producing run status: rejected. Real 9-cell matrix produced 326-382 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Extended bench candidate `weekly_level_reclaim_v0` is REJECTED_FIRST_PASS.
+- Weekly level reclaim hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_weekly_level_reclaim_v0.md`.
+- Weekly level reclaim matrix summary: `xau-usd\xauusd-phase0\docs\WEEKLY_LEVEL_RECLAIM_V0_FIRST_PASS.md`.
+- Latest weekly level reclaim result-producing run status: rejected. Real 9-cell matrix produced 113-129 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Extended bench candidate `asia_range_london_failed_break_reversal_v0` is REJECTED_FIRST_PASS.
+- Asia range London failed-break reversal hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_asia_range_london_failed_break_reversal_v0.md`.
+- Asia range London failed-break reversal matrix summary: `xau-usd\xauusd-phase0\docs\ASIA_RANGE_LONDON_FAILED_BREAK_REVERSAL_V0_FIRST_PASS.md`.
+- Latest Asia range London failed-break reversal result-producing run status: rejected. Real 9-cell matrix produced 326-372 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Extended bench next candidate: `session_vwap_reclaim_v0`.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.

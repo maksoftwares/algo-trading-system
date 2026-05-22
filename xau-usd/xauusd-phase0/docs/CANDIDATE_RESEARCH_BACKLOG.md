@@ -29,10 +29,13 @@ Expected path:
 | 8 | `london_fix_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 9 | `extreme_activity_mean_reversion_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 10 | `compression_retest_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix trade-count gate; do not tune v0. |
-| 11 | `asia_range_london_breakout_v0` | NEXT_RESEARCH_CANDIDATE | Extended bench candidate after original 10-candidate set was exhausted. |
-| 12 | `previous_day_extreme_retest_v0` | BACKLOG | Needs prior-day level and retest definition. |
-| 13 | `ny_am_pullback_continuation_v0` | BACKLOG | Needs NY morning trend/pullback definition. |
-| 14 | `weekly_level_reclaim_v0` | BACKLOG | Needs weekly level and reclaim definition. |
+| 11 | `asia_range_london_breakout_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 12 | `previous_day_extreme_retest_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 13 | `ny_am_pullback_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 14 | `weekly_level_reclaim_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 15 | `asia_range_london_failed_break_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 16 | `session_vwap_reclaim_v0` | NEXT_RESEARCH_CANDIDATE | Needs VWAP/proxy implementation and reclaim definition. |
+| 17 | `ny_london_overlap_compression_break_v0` | BACKLOG | Needs overlap compression and expansion definition. |
 
 ## Discipline
 
