@@ -25,6 +25,7 @@ from phase0.hashing import (
     validate_hypotheses,
     validate_hypotheses_complete,
 )
+from phase0.fixed_notional import generate_fixed_notional_report
 from phase0.holdout_audit import audit_true_holdout
 from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.independent_reproduction import generate_independent_reproduction
@@ -318,6 +319,14 @@ def build_parser() -> argparse.ArgumentParser:
     research_smoke.add_argument("--expert", required=True, choices=RESEARCH_EXPERTS)
     research_smoke.add_argument("--hypothesis-file", required=True)
     research_smoke.set_defaults(func=_cmd_run_research_candidate_smoke)
+
+    fixed_notional = subparsers.add_parser(
+        "generate-fixed-notional-report",
+        help="Generate fixed-risk no-compounding and cost-in-R reporting for an expert.",
+    )
+    fixed_notional.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    fixed_notional.add_argument("--fixed-risk-usd", type=float)
+    fixed_notional.set_defaults(func=_cmd_generate_fixed_notional_report)
 
     analyze_spreads = subparsers.add_parser("analyze-spread-logs", help="Analyze passive spread logs.")
     analyze_spreads.add_argument("--input-dir", type=Path)
@@ -794,6 +803,23 @@ def _cmd_run_research_candidate_smoke(args: argparse.Namespace) -> int:
     print(f"Signals: {output.signal_count}")
     print(f"Phase 0 result run allowed: {str(output.phase0_result_run_allowed).lower()}")
     return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_fixed_notional_report(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_fixed_notional_report(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Fixed-notional report: {output.status}")
+    print(output.report_path)
+    print(output.summary_path)
+    print(output.manifest_path)
+    print(f"Trades: {output.trade_count}")
+    print(f"Net expectancy R: {output.net_expectancy_r:.4f}")
+    print(f"Mean all-in cost R: {output.mean_all_in_cost_r:.4f}")
+    return 0
 
 
 def _cmd_analyze_spread_logs(args: argparse.Namespace) -> int:

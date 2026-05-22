@@ -72,8 +72,12 @@ Large generated market data remains intentionally ignored by Git because it can 
 
 The latest reviewer feedback is tracked in:
 
+- `docs/REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`
 - `xau-usd/xauusd-phase0/docs/REVIEW_RESPONSE_2026_05_21.md`
+- `xau-usd/xauusd-phase0/docs/COST_REPORTING_POLICY.md`
 - `xau-usd/xauusd-phase0/docs/PHASE0_INDEPENDENT_VALIDATION.md`
 - `xau-usd/xauusd-phase0/docs/SECOND_CANDIDATE_RESEARCH_PLAN.md`
 - `xau-usd/xauusd-phase1/docs/REPORTING_POLICY.md`
 - `xau-usd/xauusd-phase1/docs/WORKSPACE_OWNERSHIP.md`
+
+Review #2 reframes `breakout_retest` as a high-frequency, cost-sensitive intraday strategy. Phase 2 remains blocked until the dry-run soak completes, measured cost evidence is available, and fixed-notional plus measured-cost revalidation gates are satisfied.

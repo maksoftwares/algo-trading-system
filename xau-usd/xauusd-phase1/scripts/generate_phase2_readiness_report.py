@@ -49,6 +49,13 @@ def generate_phase2_readiness_report(
 
     items = [
         _file_gate("Phase 2 preparation spec", root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md"),
+        _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
+        _file_gate("Fixed-notional reporting", _phase0_root(root) / "outputs" / "reports" / "FIXED_NOTIONAL_REPORT.md"),
+        _pending_file_gate("Measured cost model", _phase0_root(root) / "outputs" / "reports" / "MEASURED_COST_MODEL.md"),
+        _pending_file_gate(
+            "Measured-cost revalidation",
+            _phase0_root(root) / "outputs" / "reports" / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md",
+        ),
         _status_gate("Phase 1 acceptance", report_dir / "PHASE1_ACCEPTANCE_REPORT.md", required="PASS"),
         _status_gate("Phase 1 review index", report_dir / "PHASE1_REVIEW_INDEX.md", required="PASS"),
         _summary_health_gate(status_fields, summary_path),
@@ -67,6 +74,16 @@ def _file_gate(gate: str, path: Path) -> Phase2ReadinessItem:
     if path.exists() and path.stat().st_size > 0:
         return Phase2ReadinessItem(gate, "PASS", f"Found `{path}`.")
     return Phase2ReadinessItem(gate, "FAIL", f"Missing or empty `{path}`.")
+
+
+def _pending_file_gate(gate: str, path: Path) -> Phase2ReadinessItem:
+    if path.exists() and path.stat().st_size > 0:
+        return Phase2ReadinessItem(gate, "PASS", f"Found `{path}`.")
+    return Phase2ReadinessItem(gate, "PENDING", f"Missing `{path}`; required before Phase 2 authorization.")
+
+
+def _phase0_root(phase1_root: Path) -> Path:
+    return phase1_root.parent / "xauusd-phase0"
 
 
 def _status_gate(gate: str, path: Path, required: str) -> Phase2ReadinessItem:

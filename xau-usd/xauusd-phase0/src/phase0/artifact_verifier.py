@@ -35,6 +35,12 @@ def verify_real_artifacts(config: ProjectConfig) -> RealArtifactVerificationOutp
         _check_file("data_readiness_report", config.root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md"),
         _check_file("data_manifest", config.root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md"),
         _check_file("consolidated_verdict", config.root / "outputs" / "reports" / "PHASE0_VERDICT.md"),
+        _check_file("cost_reporting_policy", config.root / "docs" / "COST_REPORTING_POLICY.md"),
+        _check_status_report(
+            "fixed_notional_report",
+            config.root / "outputs" / "reports" / "FIXED_NOTIONAL_REPORT.md",
+            "Run generate-fixed-notional-report before Phase 2 authorization.",
+        ),
         _check_holdout_manifest(config),
         _check_true_holdout_audit(config),
         _check_status_report(

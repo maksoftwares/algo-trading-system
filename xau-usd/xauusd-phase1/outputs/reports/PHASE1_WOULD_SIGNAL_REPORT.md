@@ -8,15 +8,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| would_signal_rows | PASS | Would-signal rows observed: 12. |
-| would_signal_clusters | PASS | Setup clusters observed: 12. |
+| would_signal_rows | PASS | Would-signal rows observed: 13. |
+| would_signal_clusters | PASS | Setup clusters observed: 13. |
 | would_signal_dry_run | PASS | All would-signal rows stayed dry-run. |
 | would_signal_permission_lock | PASS | All would-signal rows kept permission false. |
 
 ## Summary
 
-- Would-signal rows: 12
-- Setup clusters: 12
+- Would-signal rows: 13
+- Setup clusters: 13
 - Directions observed: LONG, SHORT
 - Level kinds observed: latest_swing_high, latest_swing_low, previous_weekly_low
 - Review CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`
@@ -37,19 +37,20 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | WS010 | 1 | SHORT | latest_swing_low | 4530.10 | 4526.13 | 4532.49 | 4516.59 | 2026.05.22 01:35:00 | 2026.05.22 01:35:00 |
 | WS011 | 1 | SHORT | latest_swing_low | 4530.10 | 4526.49 | 4532.40 | 4517.62 | 2026.05.22 02:00:00 | 2026.05.22 02:00:00 |
 | WS012 | 1 | LONG | latest_swing_high | 4526.84 | 4529.29 | 4525.85 | 4534.45 | 2026.05.22 04:00:00 | 2026.05.22 04:00:00 |
+| WS013 | 1 | LONG | latest_swing_high | 4526.84 | 4531.17 | 4524.52 | 4541.14 | 2026.05.22 05:40:00 | 2026.05.22 05:40:00 |
 
 ## Direction Counts
 
 | Value | Count |
 | --- | --- |
-| LONG | 2 |
+| LONG | 3 |
 | SHORT | 10 |
 
 ## Level Kind Counts
 
 | Value | Count |
 | --- | --- |
-| latest_swing_high | 2 |
+| latest_swing_high | 3 |
 | latest_swing_low | 7 |
 | previous_weekly_low | 3 |
 
@@ -69,3 +70,4 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | 2026.05.22 01:35:00 | 2026.05.22 01:35:00 | SHORT | latest_swing_low | 4530.10 | 4526.13 | 4532.49 | 4516.59 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | 2026.05.22 02:00:00 | 2026.05.22 02:00:00 | SHORT | latest_swing_low | 4530.10 | 4526.49 | 4532.40 | 4517.62 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | 2026.05.22 04:00:01 | 2026.05.22 04:00:00 | LONG | latest_swing_high | 4526.84 | 4529.29 | 4525.85 | 4534.45 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| 2026.05.22 05:40:00 | 2026.05.22 05:40:00 | LONG | latest_swing_high | 4526.84 | 4531.17 | 4524.52 | 4541.14 | 50.00 | NORMAL | EXECUTION_OK | false | true |

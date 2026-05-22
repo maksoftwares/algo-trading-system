@@ -15,6 +15,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     report_dir = root / "outputs" / "reports"
     (root / "docs").mkdir(parents=True)
     report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root)
     (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
@@ -35,6 +36,7 @@ def test_phase2_readiness_passes_when_all_gates_pass(tmp_path):
     report_dir = root / "outputs" / "reports"
     (root / "docs").mkdir(parents=True)
     report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
     approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
     (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
@@ -54,6 +56,7 @@ def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     report_dir = root / "outputs" / "reports"
     (root / "docs").mkdir(parents=True)
     report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
     (root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
@@ -117,3 +120,16 @@ def _write_summary(path: Path, progress: float, permission: str = "false") -> No
         ),
         encoding="utf-8",
     )
+
+
+def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = False) -> None:
+    phase0_root = phase1_root.parent / "xauusd-phase0"
+    docs = phase0_root / "docs"
+    reports = phase0_root / "outputs" / "reports"
+    docs.mkdir(parents=True, exist_ok=True)
+    reports.mkdir(parents=True, exist_ok=True)
+    (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
+    (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
+    if include_measured:
+        (reports / "MEASURED_COST_MODEL.md").write_text("# Measured cost\n", encoding="utf-8")
+        (reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md").write_text("# Revalidation\n", encoding="utf-8")

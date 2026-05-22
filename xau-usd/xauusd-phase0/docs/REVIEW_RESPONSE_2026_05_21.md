@@ -31,6 +31,8 @@ This file maps the external review findings to concrete repository actions.
 | D1 CPCV validation | `outputs/reports/PHASE0_CPCV_VALIDATION.md` |
 | D2 Reality Check / SPA-style bootstrap | `outputs/reports/PHASE0_REALITY_CHECK.md` |
 | D3 / D4 independent validation status | `docs/PHASE0_INDEPENDENT_VALIDATION.md` |
+| Cost reporting policy | `docs/COST_REPORTING_POLICY.md` |
+| Fixed-notional cost report | `outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 
 ## Decision
 

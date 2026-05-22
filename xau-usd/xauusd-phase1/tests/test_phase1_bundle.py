@@ -19,6 +19,7 @@ def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
     project.mkdir()
     files_dir.mkdir()
     _write_project_shell(project)
+    _write_phase0_cost_artifacts(project)
     _write_runtime_logs(files_dir)
     compile_log = tmp_path / "compile.log"
     compile_log.write_text("Result: 0 errors, 0 warnings\n", encoding="utf-8")
@@ -111,6 +112,16 @@ def _write_project_shell(project: Path) -> None:
     (project / "mt5" / "Presets" / "Phase1DryRunShell.safe.set").write_text("InpDryRunOnly=true\n", encoding="utf-8")
     (project / "scripts" / "verify_phase1_logs.py").write_text("print('ok')\n", encoding="utf-8")
     (project / "tests" / "test_phase1_static.py").write_text("def test_ok(): assert True\n", encoding="utf-8")
+
+
+def _write_phase0_cost_artifacts(project: Path) -> None:
+    phase0_root = project.parent / "xauusd-phase0"
+    docs = phase0_root / "docs"
+    reports = phase0_root / "outputs" / "reports"
+    docs.mkdir(parents=True, exist_ok=True)
+    reports.mkdir(parents=True, exist_ok=True)
+    (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
+    (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
 
 
 def _write_runtime_logs(files_dir: Path) -> None:
