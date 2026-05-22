@@ -111,7 +111,28 @@ Last updated: 2026-05-22
 - Post-spike hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_post_spike_short_v0.md`.
 - Post-spike matrix summary: `xau-usd\xauusd-phase0\docs\POST_SPIKE_SHORT_V0_FIRST_PASS.md`.
 - Latest post-spike result-producing run status: rejected. Real 9-cell matrix produced 192-234 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
-- Next backlog candidate: `emr_inactivity_long_v0`.
+- Fourth candidate `emr_inactivity_long_v0` is also REJECTED_FIRST_PASS.
+- EMR inactivity hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_emr_inactivity_long_v0.md`.
+- EMR inactivity matrix summary: `xau-usd\xauusd-phase0\docs\EMR_INACTIVITY_LONG_V0_FIRST_PASS.md`.
+- Latest EMR inactivity result-producing run status: rejected. Real 9-cell matrix produced only 9-10 trades per cell and 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Fifth candidate `ny_failed_london_reversal_v0` is also REJECTED_FIRST_PASS.
+- NY failed-London hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_ny_failed_london_reversal_v0.md`.
+- NY failed-London matrix summary: `xau-usd\xauusd-phase0\docs\NY_FAILED_LONDON_REVERSAL_V0_FIRST_PASS.md`.
+- Latest NY failed-London result-producing run status: rejected. Real 9-cell matrix produced 322-415 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Sixth candidate `london_fix_continuation_v0` is also REJECTED_FIRST_PASS.
+- London fix continuation hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_london_fix_continuation_v0.md`.
+- London fix continuation matrix summary: `xau-usd\xauusd-phase0\docs\LONDON_FIX_CONTINUATION_V0_FIRST_PASS.md`.
+- Latest London fix continuation result-producing run status: rejected. Real 9-cell matrix produced 463-658 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Seventh candidate `extreme_activity_mean_reversion_v0` is also REJECTED_FIRST_PASS.
+- Extreme activity mean-reversion hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_extreme_activity_mean_reversion_v0.md`.
+- Extreme activity mean-reversion matrix summary: `xau-usd\xauusd-phase0\docs\EXTREME_ACTIVITY_MEAN_REVERSION_V0_FIRST_PASS.md`.
+- Latest extreme activity mean-reversion result-producing run status: rejected. Real 9-cell matrix produced 74-176 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Eighth extended/bench candidate `compression_retest_continuation_v0` is also REJECTED_FIRST_PASS.
+- Compression retest continuation hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_compression_retest_continuation_v0.md`.
+- Compression retest continuation matrix summary: `xau-usd\xauusd-phase0\docs\COMPRESSION_RETEST_CONTINUATION_V0_FIRST_PASS.md`.
+- Latest compression retest continuation result-producing run status: rejected. Real 9-cell matrix produced 0 trades in every cell, so do not proceed to deciles or tune v0.
+- Original 10-candidate research bench status: 1 approved future expert (`breakout_retest`) and 9 rejected v0 candidates.
+- Extended bench next candidate: `asia_range_london_breakout_v0`.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.

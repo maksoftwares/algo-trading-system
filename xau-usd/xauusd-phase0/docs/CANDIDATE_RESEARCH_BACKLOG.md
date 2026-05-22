@@ -24,11 +24,15 @@ Expected path:
 | 3 | `range_mr` | REJECTED_V1 | Do not tune under the same name. |
 | 4 | `squeeze_breakout_long_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 5 | `post_spike_short_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
-| 6 | `emr_inactivity_long_v0` | NEXT_RESEARCH_CANDIDATE | Write and lock hypothesis before coding. |
-| 7 | `ny_failed_london_reversal_v0` | BACKLOG | Needs session-failure definition before testing. |
-| 8 | `london_fix_continuation_v0` | BACKLOG | Needs time-window and cost thesis. |
-| 9 | `extreme_activity_mean_reversion_v0` | BACKLOG | Needs spike/exhaustion thresholds. |
-| 10 | `compression_retest_continuation_v0` | BACKLOG | Separate from v0 squeeze; retest must be mechanical. |
+| 6 | `emr_inactivity_long_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1 and trade-count gate; do not tune v0. |
+| 7 | `ny_failed_london_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 8 | `london_fix_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 9 | `extreme_activity_mean_reversion_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 10 | `compression_retest_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix trade-count gate; do not tune v0. |
+| 11 | `asia_range_london_breakout_v0` | NEXT_RESEARCH_CANDIDATE | Extended bench candidate after original 10-candidate set was exhausted. |
+| 12 | `previous_day_extreme_retest_v0` | BACKLOG | Needs prior-day level and retest definition. |
+| 13 | `ny_am_pullback_continuation_v0` | BACKLOG | Needs NY morning trend/pullback definition. |
+| 14 | `weekly_level_reclaim_v0` | BACKLOG | Needs weekly level and reclaim definition. |
 
 ## Discipline
 
@@ -36,3 +40,4 @@ Expected path:
 - Any revisit uses a new versioned hypothesis.
 - No candidate enters the active EA roadmap until Phase 0 verdict is PASS.
 - `phase0 run-matrix --expert all` must remain reserved for the active approved/legacy Phase 0 set, not experimental backlog candidates.
+- Original 10-candidate bench is now fully resolved: 1 approved future expert and 9 rejected v0 candidates.
