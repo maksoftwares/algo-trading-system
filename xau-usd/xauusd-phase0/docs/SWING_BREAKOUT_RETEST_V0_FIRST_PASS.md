@@ -4,11 +4,11 @@ Date: 2026-05-22
 
 ## Verdict
 
-`swing_breakout_retest_v0` is `DEEP_GATES_PASS_PENDING_MANUAL_ADVERSARIAL_REVIEW`.
+`swing_breakout_retest_v0` is `APPROVED_FUTURE_EXPERT_CANDIDATE`.
 
-This is the first extended-bench candidate after `breakout_retest` to survive the real 9-cell matrix, decile persistence, multisymbol consistency, and intrabar ambiguity checks. It is not an approved future expert yet because the adversarial losing-trade packet still needs manual review.
+This is the first extended-bench candidate after `breakout_retest` to survive the real 9-cell matrix, decile persistence, multisymbol consistency, intrabar ambiguity, and manual adversarial review checks.
 
-Important qualification: this candidate is same-family with the already approved `breakout_retest` expert. It reduces concentration risk inside the breakout-retest family, but it does not provide fully independent behavior.
+Important qualification: this candidate is same-family with the already approved `breakout_retest` expert. It reduces concentration risk inside the breakout-retest family, but it does not provide fully independent behavior and should not be treated as a separate uncorrelated portfolio leg yet.
 
 ## Gate Result
 
@@ -20,8 +20,8 @@ Important qualification: this candidate is same-family with the already approved
 | Decile concentration | No decile PF above 2x median | Max/median PF = 1.09x | PASS |
 | Multisymbol consistency | EURUSD and USDJPY PF >= 0.90 | EURUSD 1.375, USDJPY 1.668 | PASS |
 | Intrabar ambiguity | Must not be material enough to explain the edge | 342 of 57,897 trades, 0.59% | PASS_REVIEW_NOTE |
-| Adversarial review | Logic-gap losses <= 25% | 0 of 120 reviewed | PENDING |
-| Approval status | Full Phase 0 pass required | Manual adversarial pending | NOT_APPROVED |
+| Adversarial review | Logic-gap losses <= 25% | 0 logic gaps from 120/120 reviewed | PASS |
+| Approval status | Full Phase 0 pass required | All research gates passed | APPROVED_FUTURE_EXPERT_CANDIDATE |
 
 ## Matrix Summary
 
@@ -45,17 +45,17 @@ Important qualification: this candidate is same-family with the already approved
 | Multisymbol | `outputs/multisymbol_results/swing_breakout_retest_v0_multisymbol_summary.csv` | EURUSD PF 1.375; USDJPY PF 1.668 |
 | Intrabar | `outputs/reports/swing_breakout_retest_v0_intrabar_ambiguity_report.md` | 0.59% ambiguous exits; adverse-first PF 1.433 |
 | Adversarial packet | `outputs/adversarial_review/swing_breakout_retest_v0_losing_trades_review.csv` | 120 sampled losing trades selected from 29,988 losses |
-| Adversarial score | `outputs/adversarial_review/swing_breakout_retest_v0_adversarial_score.md` | PENDING; 0/120 manually reviewed |
+| Adversarial score | `outputs/adversarial_review/swing_breakout_retest_v0_adversarial_score.md` | PASS; 120/120 reviewed, 0 logic gaps |
 
 ## Decision
 
-Keep `swing_breakout_retest_v0` as the next valid research candidate, but do not promote it to approved future expert until Gate 9 manual adversarial review is complete.
+Promote `swing_breakout_retest_v0` to approved future expert candidate status.
 
-Next required manual step:
+Next required engineering step:
 
-1. Review `outputs/adversarial_review/swing_breakout_retest_v0_losing_trades_review.csv`.
-2. Fill `manual_failure_class`, `manual_notes`, `reviewer`, and `reviewed_at_utc` for all 120 rows.
-3. Run `phase0 score-research-adversarial-review --expert swing_breakout_retest_v0 --hypothesis-file docs/hypothesis_swing_breakout_retest_v0.md`.
-4. Promote only if logic-gap failures are <= 25%.
+1. Keep `swing_breakout_retest_v0` disabled in live execution.
+2. Add it only to Phase 1 dry-run observation after a separate dry-run implementation slice.
+3. Compare live dry-run telemetry against the Phase 0 distribution before any paper-trading authorization.
+4. Continue searching for a more independent, non-breakout-retest-family candidate.
 
 Do not tune `swing_breakout_retest_v0` in place. Any change to breakout distance, retest tolerance, stop offset, target, session, volatility, or news filters requires a new versioned hypothesis and fresh hash registration.

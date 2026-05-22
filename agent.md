@@ -156,10 +156,10 @@ Last updated: 2026-05-22
 - Session VWAP reclaim hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_session_vwap_reclaim_v0.md`.
 - Session VWAP reclaim matrix summary: `xau-usd\xauusd-phase0\docs\SESSION_VWAP_RECLAIM_V0_FIRST_PASS.md`.
 - Latest session VWAP reclaim result-producing run status: rejected. Real 9-cell matrix produced 481-614 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
-- Extended bench candidate `swing_breakout_retest_v0` is `DEEP_GATES_PASS_PENDING_MANUAL_ADVERSARIAL_REVIEW`.
+- Extended bench candidate `swing_breakout_retest_v0` is `APPROVED_FUTURE_EXPERT_CANDIDATE`.
 - Swing breakout-retest hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_swing_breakout_retest_v0.md`.
 - Swing breakout-retest matrix summary: `xau-usd\xauusd-phase0\docs\SWING_BREAKOUT_RETEST_V0_FIRST_PASS.md`.
-- Latest swing breakout-retest result-producing run status: promising but not approved. Real 9-cell matrix produced 6,281-6,600 trades per cell, 7/9 cells reached PF >= 1.30, deciles passed 10/10 with median PF 1.450, multisymbol passed with EURUSD PF 1.375 and USDJPY PF 1.668, and intrabar ambiguity was 342/57,897 trades (0.59%). Gate 9 remains pending with 120 sampled losing trades and 0 reviewed rows, so do not promote to approved future expert yet.
+- Latest swing breakout-retest result-producing run status: approved future expert candidate, but same-family with `breakout_retest`. Real 9-cell matrix produced 6,281-6,600 trades per cell, 7/9 cells reached PF >= 1.30, deciles passed 10/10 with median PF 1.450, multisymbol passed with EURUSD PF 1.375 and USDJPY PF 1.668, intrabar ambiguity was 342/57,897 trades (0.59%), and Gate 9 scored PASS with 120/120 reviewed losses and 0 logic gaps.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
