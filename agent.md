@@ -86,7 +86,7 @@ Last updated: 2026-05-22
 - Latest runtime health status: PASS. Runtime files exist, latest row is fresh, dry-run and permission locks hold, server-time status is clean, no exact duplicate rows were found, and no larger-than-M5 gaps were found.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 197 decision rows, 14.10% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Latest status summary shows 213 decision rows, 15.21% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #2 reframes `breakout_retest` as high-frequency and cost-sensitive; Phase 2 is now treated as a real-cost measurement phase, not a profit-confirmation phase.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
@@ -107,12 +107,17 @@ Last updated: 2026-05-22
 - Latest second-candidate result-producing run status: rejected. Real 9-cell matrix produced 194-211 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Second-candidate smoke command: `phase0 run-research-candidate-smoke --expert squeeze_breakout_long_v0 --hypothesis-file docs/hypothesis_squeeze_breakout_long_v0.md`.
 - Latest second-candidate smoke result: PASS. It generated 1 synthetic signal, produced a valid synthetic plan, and confirmed the hypothesis hash lock. The follow-up real matrix failed the first hard gate.
+- Third candidate `post_spike_short_v0` is also REJECTED_FIRST_PASS.
+- Post-spike hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_post_spike_short_v0.md`.
+- Post-spike matrix summary: `xau-usd\xauusd-phase0\docs\POST_SPIKE_SHORT_V0_FIRST_PASS.md`.
+- Latest post-spike result-producing run status: rejected. Real 9-cell matrix produced 192-234 trades per cell, but only 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Next backlog candidate: `emr_inactivity_long_v0`.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING until the passive spread logger reaches the required observation/day thresholds.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 629 rows over 1 observed day; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
@@ -121,7 +126,7 @@ Last updated: 2026-05-22
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
 - Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
-- Latest soak history has 34 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
+- Latest soak history has 37 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
 - Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
 - Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.

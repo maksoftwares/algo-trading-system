@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-22T07:12:15.307285+00:00",
+  "created_at_utc": "2026-05-22T08:01:11.937654+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -9,25 +9,25 @@
     "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
-    "decision_rows": 203,
+    "decision_rows": 213,
     "latest_row": {
-      "bar_time": "2026.05.22 07:10:00",
-      "br_direction": "SHORT",
+      "bar_time": "2026.05.22 08:00:00",
+      "br_direction": "LONG",
       "br_stage": "WAIT_LEVEL_BREAK_RETEST",
       "br_would_signal": "false",
       "dry_run": "true",
       "risk_state": "NORMAL",
       "run_id": "phase1-dry-run-v0.5",
       "server_time_status": "CLOCK_OK",
-      "timestamp_broker": "2026.05.22 07:10:00",
-      "timestamp_local": "2026.05.22 11:09:57",
+      "timestamp_broker": "2026.05.22 08:00:00",
+      "timestamp_local": "2026.05.22 11:59:57",
       "trade_permission": "false"
     },
     "unique_run_ids": 5
   },
   "soak": {
-    "observed_days": 0.7257,
-    "progress_pct": 14.51,
+    "observed_days": 0.7604,
+    "progress_pct": 15.21,
     "required_days": 5
   },
   "status": {

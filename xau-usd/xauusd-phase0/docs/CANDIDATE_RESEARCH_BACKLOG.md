@@ -23,8 +23,8 @@ Expected path:
 | 2 | `trend_pullback` | REJECTED_V1 | Do not tune under the same name. |
 | 3 | `range_mr` | REJECTED_V1 | Do not tune under the same name. |
 | 4 | `squeeze_breakout_long_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
-| 5 | `post_spike_short_v0` | NEXT_RESEARCH_CANDIDATE | Write and lock hypothesis before coding. |
-| 6 | `emr_inactivity_long_v0` | BACKLOG | Define strict inactivity/activity gate. |
+| 5 | `post_spike_short_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 6 | `emr_inactivity_long_v0` | NEXT_RESEARCH_CANDIDATE | Write and lock hypothesis before coding. |
 | 7 | `ny_failed_london_reversal_v0` | BACKLOG | Needs session-failure definition before testing. |
 | 8 | `london_fix_continuation_v0` | BACKLOG | Needs time-window and cost thesis. |
 | 9 | `extreme_activity_mean_reversion_v0` | BACKLOG | Needs spike/exhaustion thresholds. |

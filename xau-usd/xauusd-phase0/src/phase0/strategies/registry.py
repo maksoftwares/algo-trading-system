@@ -3,6 +3,7 @@ from __future__ import annotations
 from phase0.config import ConfigError
 from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
+from phase0.strategies.post_spike_short_v0 import PostSpikeShortV0Strategy
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
 from phase0.strategies.squeeze_breakout_long_v0 import SqueezeBreakoutLongV0Strategy
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
@@ -15,6 +16,7 @@ STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
 }
 
 RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
+    PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
     SqueezeBreakoutLongV0Strategy.name: SqueezeBreakoutLongV0Strategy,
 }
 
