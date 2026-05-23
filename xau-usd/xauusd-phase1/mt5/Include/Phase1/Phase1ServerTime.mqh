@@ -6,13 +6,13 @@
 class CPhase1ServerTimeValidator
 {
 private:
-   int m_expected_local_utc_offset_hours;
+   int m_expected_local_utc_offset_minutes;
    int m_max_clock_drift_seconds;
 
 public:
-   void Configure(const int expected_local_utc_offset_hours, const int max_clock_drift_seconds)
+   void Configure(const int expected_local_utc_offset_minutes, const int max_clock_drift_seconds)
    {
-      m_expected_local_utc_offset_hours = expected_local_utc_offset_hours;
+      m_expected_local_utc_offset_minutes = expected_local_utc_offset_minutes;
       m_max_clock_drift_seconds = max_clock_drift_seconds;
    }
 
@@ -22,7 +22,7 @@ public:
       status.broker_utc_offset_seconds = (long)(snapshot.broker_time - snapshot.utc_time);
       status.local_utc_offset_seconds = (long)(snapshot.local_time - snapshot.utc_time);
 
-      long expected_offset_seconds = (long)m_expected_local_utc_offset_hours * 3600;
+      long expected_offset_seconds = (long)m_expected_local_utc_offset_minutes * 60;
       status.local_clock_drift_seconds = status.local_utc_offset_seconds - expected_offset_seconds;
       status.clock_ok = (MathAbs((double)status.local_clock_drift_seconds) <= m_max_clock_drift_seconds);
       status.status_text = status.clock_ok ? "CLOCK_OK" : "LOCAL_CLOCK_DRIFT";

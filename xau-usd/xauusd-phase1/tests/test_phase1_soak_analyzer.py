@@ -55,6 +55,52 @@ def test_soak_analyzer_warns_when_latest_row_is_stale(tmp_path):
     assert any(check.name == "latest_row_freshness" and check.status == "WARN" for check in output.checks)
 
 
+def test_soak_analyzer_tolerates_stale_row_during_weekend_break(tmp_path):
+    module = _load_soak_analyzer()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_decision_log(files_dir / "decision_log.csv")
+
+    output = module.analyze_phase1_soak(files_dir, tmp_path / "soak.md", now=datetime(2026, 5, 23, 17, 50))
+
+    assert output.status == "PASS"
+    assert any(check.name == "latest_row_freshness" and check.status == "PASS" for check in output.checks)
+
+
+def test_soak_analyzer_tolerates_historical_clock_drift_and_weekend_gap(tmp_path):
+    module = _load_soak_analyzer()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    rows[0]["server_time_status"] = "LOCAL_CLOCK_DRIFT"
+    stale_weekend_row = rows[-1].copy()
+    stale_weekend_row["timestamp_broker"] = "2026.05.23 12:18:20"
+    stale_weekend_row["timestamp_utc"] = "2026.05.23 06:48:20"
+    stale_weekend_row["timestamp_local"] = "2026.05.23 17:48:20"
+    stale_weekend_row["bar_time"] = "2026.05.22 20:55:00"
+    stale_weekend_row["session"] = "WEEKEND"
+    stale_weekend_row["execution_state"] = "STALE_TICK"
+    stale_weekend_row["stale_seconds"] = "55165"
+    rows.append(stale_weekend_row)
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.analyze_phase1_soak(files_dir, tmp_path / "soak.md", now=datetime(2026, 5, 23, 17, 50))
+
+    assert output.status == "PASS"
+    assert any(check.name == "server_time_status" and check.status == "PASS" for check in output.checks)
+    assert any(check.name == "per_run_bar_cadence" and check.status == "PASS" for check in output.checks)
+
+
 def _load_soak_analyzer():
     path = ROOT / "scripts" / "analyze_phase1_soak.py"
     spec = importlib.util.spec_from_file_location("analyze_phase1_soak", path)
@@ -136,6 +182,7 @@ def _write_decision_log(path: Path, force_permission: str = "false") -> None:
         "ask",
         "spread_points",
         "bar_time",
+        "session",
         "risk_state",
         "execution_state",
         "server_time_status",
@@ -160,6 +207,7 @@ def _write_decision_log(path: Path, force_permission: str = "false") -> None:
                 "ask": "4500.40",
                 "spread_points": str(35 + index),
                 "bar_time": f"2026.05.21 12:{minute:02d}:00",
+                "session": "LONDON",
                 "risk_state": "NORMAL",
                 "execution_state": "EXECUTION_OK",
                 "server_time_status": "CLOCK_OK",

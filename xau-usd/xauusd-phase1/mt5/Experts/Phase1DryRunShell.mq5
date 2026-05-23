@@ -32,7 +32,7 @@ input bool InpManualRiskLock = false;
 input bool InpObserveBreakoutRetest = true;
 input bool InpObserveSwingBreakoutRetest = true;
 input bool InpManualNewsLockdown = false;
-input int InpExpectedLocalUtcOffsetHours = 4;
+input int InpExpectedLocalUtcOffsetMinutes = 330;
 input int InpMaxClockDriftSeconds = 300;
 input string InpDecisionLogFileName = "decision_log.csv";
 input string InpStartupLogFileName = "startup_log.csv";
@@ -93,7 +93,7 @@ int OnInit()
    );
    g_execution_guard.Configure(InpMaxSpreadPoints);
    g_news_guard.Configure(InpManualNewsLockdown);
-   g_server_time_validator.Configure(InpExpectedLocalUtcOffsetHours, InpMaxClockDriftSeconds);
+   g_server_time_validator.Configure(InpExpectedLocalUtcOffsetMinutes, InpMaxClockDriftSeconds);
    g_lifecycle_manager.Configure(InpObserveBreakoutRetest, InpObserveSwingBreakoutRetest);
    g_breakout_retest_observer.Configure(false);
    g_swing_breakout_retest_observer.Configure(true);

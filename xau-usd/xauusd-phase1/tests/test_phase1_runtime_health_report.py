@@ -68,6 +68,24 @@ def test_runtime_health_report_warns_on_bar_gap(tmp_path):
     assert any(check.name == "unique_bar_gaps" and check.status == "WARN" for check in output.checks)
 
 
+def test_runtime_health_tolerates_stale_row_during_weekend_break(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    _write_decision_log(files_dir / "decision_log.csv")
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 23, 17, 50),
+    )
+
+    assert output.status == "PASS"
+    assert any(check.name == "latest_freshness" and check.status == "PASS" for check in output.checks)
+
+
 def test_runtime_health_tolerates_extra_shutdown_rows(tmp_path):
     module = _load_module()
     files_dir = tmp_path / "files"
@@ -84,6 +102,43 @@ def test_runtime_health_tolerates_extra_shutdown_rows(tmp_path):
 
     assert output.status == "PASS"
     assert any(check.name == "startup_shutdown_rows" and check.status == "PASS" for check in output.checks)
+
+
+def test_runtime_health_tolerates_historical_clock_drift_and_weekend_gap(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    rows[0]["server_time_status"] = "LOCAL_CLOCK_DRIFT"
+    stale_weekend_row = rows[-1].copy()
+    stale_weekend_row["timestamp_broker"] = "2026.05.23 12:18:20"
+    stale_weekend_row["timestamp_utc"] = "2026.05.23 06:48:20"
+    stale_weekend_row["timestamp_local"] = "2026.05.23 17:48:20"
+    stale_weekend_row["bar_time"] = "2026.05.22 20:55:00"
+    stale_weekend_row["session"] = "WEEKEND"
+    stale_weekend_row["execution_state"] = "STALE_TICK"
+    stale_weekend_row["block_reason"] = "STALE_TICK"
+    rows.append(stale_weekend_row)
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 23, 17, 50),
+    )
+
+    assert output.status == "PASS"
+    assert any(check.name == "server_time_status" and check.status == "PASS" for check in output.checks)
+    assert any(check.name == "unique_bar_gaps" and check.status == "PASS" for check in output.checks)
 
 
 def _load_module():
@@ -173,10 +228,13 @@ def _write_decision_log(
         "lifecycle_state",
         "symbol",
         "bar_time",
+        "session",
+        "execution_state",
         "server_time_status",
         "br_stage",
         "dry_run",
         "trade_permission",
+        "block_reason",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -191,9 +249,12 @@ def _write_decision_log(
                     "lifecycle_state": "DRY_RUN",
                     "symbol": "XAUUSD",
                     "bar_time": f"2026.05.21 12:{minute:02d}:00",
+                    "session": "LONDON",
+                    "execution_state": "EXECUTION_OK",
                     "server_time_status": "CLOCK_OK",
                     "br_stage": "WAIT_LEVEL_BREAK_RETEST",
                     "dry_run": "true",
                     "trade_permission": force_permission if index == 0 else "false",
+                    "block_reason": "phase1_dry_run_only",
                 }
             )

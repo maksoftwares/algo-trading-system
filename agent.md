@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 ## Workspace
 
@@ -23,6 +23,12 @@ Last updated: 2026-05-22
 
 ## Current State
 
+- 2026-05-23 resume after planned one-day shutdown is complete.
+  - `C:\MT5PortableGoldMission\terminal64.exe` is running with `/portable /config:C:\MT5PortableGoldMission\Config\phase1_dry_run_startup.ini`.
+  - `C:\MT5PortableSpreadLogger\terminal64.exe` is running with `/portable /config:C:\MT5PortableSpreadLogger\Config\phase0_spread_logger_startup.ini`.
+  - Phase 1 startup now reports `server_time_status=CLOCK_OK` after changing the expected local UTC offset input from whole hours to minutes for India Standard Time (`330` minutes).
+  - Weekend/offline resume gaps are tolerated by the Phase 1 verifier, soak analyzer, runtime-health report, and external-health check when the latest row is a stale weekend market-break row.
+  - Latest periodic check status after restart: PASS. Phase 2 readiness remains PENDING, not FAIL, because five-day soak, measured-cost model, measured-cost revalidation, review index, and owner approval are still open.
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.
 - Passive MT5 tools exist for spread logging and historical bar export.
 - Passive spread logger is deployed and compiled under `C:\MT5PortableGoldMission\MQL5\Experts\Phase0\PassiveSpreadLogger_XAUUSD.ex5`; compile log `C:\MT5PortableGoldMission\compile_PassiveSpreadLogger_XAUUSD.log` shows 0 errors / 0 warnings.
@@ -66,12 +72,12 @@ Last updated: 2026-05-22
 - Previous v0.2/v0.3 mixed-schema log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_3_20260521_162557.csv`.
 - Previous v0.3 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_4_20260521_163517.csv`.
 - Previous v0.4 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_5_20260521_174742.csv`.
-- Latest decision row confirms `phase1-dry-run-v0.6`, `DRY_RUN`, `DRY_RUN_ONLY`, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `risk_ok=true`, `would_have_allowed_experts=breakout_retest;swing_breakout_retest_v0`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
+- Latest decision row confirms `phase1-dry-run-v0.6`, `DRY_RUN`, `DRY_RUN_ONLY`, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `would_have_allowed_experts=breakout_retest;swing_breakout_retest_v0`, `trade_permission=false`, and `block_reason=STALE_TICK` while the market is in weekend state.
 - Latest v0.6 row includes `sbr_stage`, `sbr_direction`, `sbr_would_signal`, `sbr_reason_code`, `sbr_level_kind`, `sbr_entry_price`, `sbr_stop_loss`, and `sbr_take_profit`.
 - Phase 1 v0.5 logs were archived before the v0.6 schema change:
   - `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_6_20260522_150335.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log_pre_v0_6_20260522_150335.csv`
-- Current v0.6 would-signal report has 4 post-reset dry-run would-signal rows across 4 setup clusters; all stayed dry-run and permission-locked.
+- Current v0.6 would-signal report has 10 dry-run would-signal rows across 10 setup clusters; all stayed dry-run and permission-locked.
 - Runtime risk simulations verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the v0.6 `sbr_*` schema; the normal safe preset was restored afterward.
 - Latest MT5 lifecycle logs:
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
@@ -85,13 +91,13 @@ Last updated: 2026-05-22
 - Would-signal report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_would_signal_report.py`.
 - Latest Phase 1 would-signal report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Latest Phase 1 would-signal review CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`.
-- Latest would-signal status: PASS with 5 rows and 5 setup clusters; both long and short observations have appeared in dry-run telemetry.
+- Latest would-signal status: PASS with 10 rows and 10 setup clusters; both long and short observations have appeared in dry-run telemetry.
 - Runtime health report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_runtime_health_report.py`.
 - Latest Phase 1 runtime health report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md`.
-- Latest runtime health status: PASS. Runtime files exist, latest row is fresh, dry-run and permission locks hold, server-time status is clean, no exact duplicate rows were found, and no larger-than-M5 gaps were found.
+- Latest runtime health status: PASS. Runtime files exist, latest row is fresh or weekend-paused, dry-run and permission locks hold, latest server-time status is clean, no exact duplicate rows were found, and the planned offline/weekend resume gap is classified as expected.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 213 decision rows, 15.21% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Latest status summary shows 56 decision rows, 8.26% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #2 reframes `breakout_retest` as high-frequency and cost-sensitive; Phase 2 is now treated as a real-cost measurement phase, not a profit-confirmation phase.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
@@ -171,7 +177,7 @@ Last updated: 2026-05-22
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 4326 rows over 1 observed day; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 5759 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -181,7 +187,7 @@ Last updated: 2026-05-22
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
 - Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
-- Latest soak history has 37 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
+- Latest soak history has 60 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
 - Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
 - Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.
@@ -206,9 +212,9 @@ Last updated: 2026-05-22
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.
-- Latest periodic check status after readiness-cycle cleanup: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
+- Latest periodic check status after resume-cycle cleanup: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
 - Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
-- Hourly local automation `phase1-mt5-soak-check` was paused before the planned shutdown; re-enable it only after the machine, `C:\MT5PortableGoldMission`, and `C:\MT5PortableSpreadLogger` are back online.
+- Hourly local automation `phase1-mt5-soak-check` should be ACTIVE while the machine is online; pause it before any future planned shutdown.
 
 ## Local MT5 Discovery
 

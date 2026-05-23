@@ -83,6 +83,41 @@ def test_phase1_log_verifier_allows_restart_same_bar(tmp_path):
     assert any(check.name == "bar_cadence" and check.status == "PASS" for check in output.checks)
 
 
+def test_phase1_log_verifier_tolerates_weekend_stale_resume_gap(tmp_path):
+    module = _load_log_verifier()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv", rows=2)
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    stale_weekend_row = rows[-1].copy()
+    stale_weekend_row["timestamp_broker"] = "2026.05.23 12:18:20"
+    stale_weekend_row["timestamp_utc"] = "2026.05.23 06:48:20"
+    stale_weekend_row["timestamp_local"] = "2026.05.23 17:48:20"
+    stale_weekend_row["bar_time"] = "2026.05.22 20:55:00"
+    stale_weekend_row["session"] = "WEEKEND"
+    stale_weekend_row["regime"] = "ABNORMAL_MARKET"
+    stale_weekend_row["execution_state"] = "STALE_TICK"
+    stale_weekend_row["block_reason"] = "STALE_TICK"
+    rows.append(stale_weekend_row)
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.verify_phase1_logs(files_dir, tmp_path / "report.md")
+
+    assert output.status == "PASS"
+    assert any(
+        check.name == "bar_cadence" and check.status == "PASS" and "tolerated gaps" in check.message
+        for check in output.checks
+    )
+
+
 def _load_log_verifier():
     path = ROOT / "scripts" / "verify_phase1_logs.py"
     spec = importlib.util.spec_from_file_location("verify_phase1_logs", path)

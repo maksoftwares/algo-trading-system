@@ -122,6 +122,15 @@ def _check_latest_freshness(
             "PASS",
             f"Latest row age is {max(age, 0):.1f} minute(s); limit {max_fresh_minutes}.",
         )
+    if _is_weekend_market_break(now):
+        return RuntimeHealthCheck(
+            "latest_freshness",
+            "PASS",
+            (
+                f"Latest row age is {age:.1f} minute(s), but local date is a weekend "
+                "market break; runtime freshness is paused."
+            ),
+        )
     return RuntimeHealthCheck(
         "latest_freshness",
         "WARN",
@@ -153,7 +162,15 @@ def _check_clock(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
         return RuntimeHealthCheck("server_time_status", "WARN", "No server-time status values found.")
     if values == ["CLOCK_OK"]:
         return RuntimeHealthCheck("server_time_status", "PASS", "All rows report CLOCK_OK.")
-    return RuntimeHealthCheck("server_time_status", "WARN", "Observed values: " + ", ".join(values))
+    latest_status = rows[-1].get("server_time_status", "") if rows else ""
+    if latest_status == "CLOCK_OK":
+        historical_non_ok = sum(1 for row in rows[:-1] if row.get("server_time_status", "") != "CLOCK_OK")
+        return RuntimeHealthCheck(
+            "server_time_status",
+            "PASS",
+            f"Latest row reports CLOCK_OK; historical non-CLOCK_OK rows: {historical_non_ok}.",
+        )
+    return RuntimeHealthCheck("server_time_status", "WARN", "Latest server-time status is " + (latest_status or "blank"))
 
 
 def _check_exact_duplicates(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
@@ -341,6 +358,8 @@ def _is_expected_market_break(
     right_row: dict[str, str],
 ) -> bool:
     minutes = int((right - left).total_seconds() / 60)
+    if _is_weekend_stale_resume_gap(right_row):
+        return True
     if minutes > 90:
         return False
     right_session = right_row.get("session", "")
@@ -348,6 +367,17 @@ def _is_expected_market_break(
     right_minute = right.hour * 60 + right.minute
     crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
     return right_session == "ROLLOVER" and crosses_known_gold_break
+
+
+def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
+    if row.get("session", "").upper() != "WEEKEND":
+        return False
+    if row.get("execution_state", "").upper() != "STALE_TICK":
+        return False
+    timestamp_broker = _parse_mt5_datetime(row.get("timestamp_broker", ""))
+    if timestamp_broker is None:
+        return False
+    return timestamp_broker.weekday() in {5, 6}
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:
@@ -371,6 +401,10 @@ def _parse_mt5_datetime(value: str) -> datetime | None:
         return datetime.strptime(value, "%Y.%m.%d %H:%M:%S")
     except ValueError:
         return None
+
+
+def _is_weekend_market_break(now: datetime) -> bool:
+    return now.weekday() in {5, 6}
 
 
 def _markdown_table(rows: list[dict[str, object]], columns: list[str]) -> str:

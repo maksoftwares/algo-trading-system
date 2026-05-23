@@ -63,3 +63,25 @@ def test_external_health_fails_stale_row(tmp_path: Path):
     )
 
     assert output.status == "FAIL"
+
+
+def test_external_health_tolerates_stale_row_during_weekend_break(tmp_path: Path):
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    (files_dir / "decision_log.csv").write_text(
+        "timestamp_local,dry_run,trade_permission,server_time_status\n"
+        "2026.05.22 18:55:00,true,false,CLOCK_OK\n",
+        encoding="utf-8",
+    )
+    summary = tmp_path / "summary.json"
+    summary.write_text(json.dumps({"status": {"runtime_health": "WARN"}}), encoding="utf-8")
+
+    output = check_external_health(
+        files_dir=files_dir,
+        status_summary=summary,
+        now=datetime(2026, 5, 23, 17, 40, 0),
+        max_fresh_minutes=15,
+    )
+
+    assert output.status == "PASS"
+    assert any(check.name == "latest_row_freshness" and check.status == "PASS" for check in output.checks)

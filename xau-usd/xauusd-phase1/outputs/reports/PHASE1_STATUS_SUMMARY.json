@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-22T14:00:58.008168+00:00",
+  "created_at_utc": "2026-05-23T12:24:23.423901+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -9,28 +9,28 @@
     "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
-    "decision_rows": 43,
+    "decision_rows": 56,
     "latest_row": {
-      "bar_time": "2026.05.22 14:00:00",
-      "br_direction": "SHORT",
+      "bar_time": "2026.05.22 20:55:00",
+      "br_direction": "LONG",
       "br_stage": "WAIT_LEVEL_BREAK_RETEST",
       "br_would_signal": "false",
       "dry_run": "true",
       "risk_state": "NORMAL",
       "run_id": "phase1-dry-run-v0.6",
-      "sbr_direction": "SHORT",
+      "sbr_direction": "LONG",
       "sbr_stage": "WAIT_LEVEL_BREAK_RETEST",
       "sbr_would_signal": "false",
       "server_time_status": "CLOCK_OK",
-      "timestamp_broker": "2026.05.22 14:00:00",
-      "timestamp_local": "2026.05.22 18:00:00",
+      "timestamp_broker": "2026.05.23 12:18:20",
+      "timestamp_local": "2026.05.23 17:48:29",
       "trade_permission": "false"
     },
     "unique_run_ids": 5
   },
   "soak": {
-    "observed_days": 0.125,
-    "progress_pct": 2.5,
+    "observed_days": 0.4132,
+    "progress_pct": 8.26,
     "required_days": 5
   },
   "status": {
@@ -41,9 +41,9 @@
     "would_signal": "PASS"
   },
   "would_signal": {
-    "clusters": 8,
+    "clusters": 10,
     "csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
     "report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
-    "rows": 8
+    "rows": 10
   }
 }

@@ -110,6 +110,15 @@ def _freshness_check(
             "PASS",
             f"Latest row age {age_minutes:.1f} minute(s), limit {max_fresh_minutes}.",
         )
+    if _is_weekend_market_break(now):
+        return HealthCheck(
+            "latest_row_freshness",
+            "PASS",
+            (
+                f"Latest row age {age_minutes:.1f} minute(s), but local date is a weekend "
+                "market break; do not count this as a runtime fault."
+            ),
+        )
     return HealthCheck(
         "latest_row_freshness",
         "FAIL",
@@ -149,6 +158,10 @@ def _parse_mt5_datetime(value: str) -> datetime | None:
         return datetime.strptime(value, "%Y.%m.%d %H:%M:%S")
     except ValueError:
         return None
+
+
+def _is_weekend_market_break(now: datetime) -> bool:
+    return now.weekday() in {5, 6}
 
 
 def _render_json(

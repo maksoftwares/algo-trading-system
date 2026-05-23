@@ -17,21 +17,21 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 27. |
+| decision_rows | PASS | Decision rows: 56. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
 | breakout_retest_observer | PASS | Observer stages found: WAIT_LEVEL_BREAK_RETEST, WOULD_SIGNAL |
 | swing_breakout_observation | PASS | swing_breakout_retest_v0 appears as dry-run observed expert. |
 | swing_breakout_retest_observer | PASS | Swing observer stages found: WAIT_LEVEL_BREAK_RETEST, WOULD_SIGNAL |
-| startup_restarts | PASS | Startup rows: 7; restart append observed. |
-| shutdown_rows | PASS | Shutdown rows: 13. |
-| bar_cadence | PASS | Decision rows follow M5 cadence; restart duplicates are tolerated. |
+| startup_restarts | PASS | Startup rows: 9; restart append observed. |
+| shutdown_rows | PASS | Shutdown rows: 14. |
+| bar_cadence | PASS | Decision rows follow M5 cadence outside expected market breaks; tolerated gaps: 1. |
 | risk_state_coverage | PASS | All simulated lock states observed. |
 
 ## Summary
 
-- Decision rows: 27
+- Decision rows: 56
 - Unique run IDs: 5
 - Latest run ID: phase1-dry-run-v0.6
 
@@ -43,17 +43,19 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 23 |
+| NORMAL | 52 |
 
 ## Block Reasons
 
 | Value | Count |
 | --- | --- |
+| LOCAL_CLOCK_DRIFT | 1 |
 | LOCKED_DAILY_LOSS | 1 |
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| phase1_dry_run_only | 23 |
+| STALE_TICK | 1 |
+| phase1_dry_run_only | 50 |
 
 ## Breakout-Retest Observer
 
@@ -61,22 +63,22 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 25 |
-| WOULD_SIGNAL | 2 |
+| WAIT_LEVEL_BREAK_RETEST | 51 |
+| WOULD_SIGNAL | 5 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 11 |
-| SHORT | 16 |
+| LONG | 25 |
+| SHORT | 31 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 25 |
-| true | 2 |
+| false | 51 |
+| true | 5 |
 
 ## Swing Breakout-Retest Observer
 
@@ -84,25 +86,25 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 25 |
-| WOULD_SIGNAL | 2 |
+| WAIT_LEVEL_BREAK_RETEST | 51 |
+| WOULD_SIGNAL | 5 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 11 |
-| SHORT | 16 |
+| LONG | 25 |
+| SHORT | 31 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 25 |
-| true | 2 |
+| false | 51 |
+| true | 5 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.6 | 2026.05.22 12:40:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.6 | 2026.05.22 20:55:00 | WAIT_LEVEL_BREAK_RETEST | LONG | no_long_breakout_retest_candidate | 0.00 | false |

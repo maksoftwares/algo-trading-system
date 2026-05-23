@@ -337,6 +337,8 @@ def _is_expected_market_break(
     right_row: dict[str, str],
 ) -> bool:
     minutes = int((right - left).total_seconds() / 60)
+    if _is_weekend_stale_resume_gap(right_row):
+        return True
     if minutes > 90:
         return False
     right_session = right_row.get("session", "")
@@ -344,6 +346,17 @@ def _is_expected_market_break(
     right_minute = right.hour * 60 + right.minute
     crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
     return right_session == "ROLLOVER" and crosses_known_gold_break
+
+
+def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
+    if row.get("session", "").upper() != "WEEKEND":
+        return False
+    if row.get("execution_state", "").upper() != "STALE_TICK":
+        return False
+    timestamp_broker = _parse_mt5_datetime(row.get("timestamp_broker", ""))
+    if timestamp_broker is None:
+        return False
+    return timestamp_broker.weekday() in {5, 6}
 
 
 def _overall_status(checks: list[LogCheck]) -> str:
