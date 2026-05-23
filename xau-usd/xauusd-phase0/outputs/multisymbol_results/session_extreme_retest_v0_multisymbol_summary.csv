@@ -1,0 +1,3 @@
+expert,symbol,broker,cost_model,trade_count,profit_factor,total_return_pct,max_drawdown_pct,avg_trade_R,verdict
+session_extreme_retest_v0,EURUSD,capital_com,p95,8354,1.1813642523560919,6920.369662500465,23.280516304617326,0.10535941080239124,PASS
+session_extreme_retest_v0,USDJPY,capital_com,p95,7095,1.236452975368091,1595.3499312263136,14.11882009738662,0.08232375763375366,PASS

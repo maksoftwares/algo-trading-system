@@ -174,14 +174,14 @@ def _render_html(
             '        <div class="panel-head candidates-head">',
             "          <div>",
             "            <h2>EA Candidate Bench</h2>",
-            f'            <span>{len(accepted)} accepted, {len(pending)} pending, {len(rejected)} rejected</span>',
+            f'            <span>{len(accepted)} accepted, {len(pending)} provisional, {len(rejected)} rejected</span>',
             "          </div>",
             '          <div class="table-tools">',
             '            <input id="candidateSearch" type="search" placeholder="Search experts">',
             '            <div class="segments" role="group" aria-label="Candidate filter">',
             '              <button class="seg active" type="button" data-filter="all">All</button>',
             '              <button class="seg" type="button" data-filter="accepted">Accepted</button>',
-            '              <button class="seg" type="button" data-filter="pending">Pending</button>',
+            '              <button class="seg" type="button" data-filter="pending">Provisional</button>',
             '              <button class="seg" type="button" data-filter="rejected">Rejected</button>',
             "            </div>",
             "          </div>",
@@ -195,6 +195,12 @@ def _render_html(
             "            <h2>$1,000 Account Example</h2>",
             f'            <span>{_esc(_account_assumption_text())}</span>',
             "          </div>",
+            '          <div class="segments" role="group" aria-label="Account example EA status filter">',
+            '            <button class="seg active" type="button" data-account-status-filter="all">All</button>',
+            '            <button class="seg" type="button" data-account-status-filter="accepted">Accepted</button>',
+            '            <button class="seg" type="button" data-account-status-filter="pending">Provisional</button>',
+            '            <button class="seg" type="button" data-account-status-filter="rejected">Rejected</button>',
+            "          </div>",
             "        </div>",
             _account_summary_table(account_example.get("summary", [])),
             "      </section>",
@@ -206,6 +212,7 @@ def _render_html(
             f'            <span>{_esc(_monthly_coverage_text(account_example))}</span>',
             "          </div>",
             '          <div class="table-tools">',
+            _monthly_status_options(),
             _monthly_expert_options(account_example.get("summary", [])),
             '            <input id="monthlySearch" type="search" placeholder="Search month or EA">',
             "          </div>",
@@ -408,7 +415,9 @@ table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th, td { text-align: left; padding: 10px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0; background: #f8fafc; position: sticky; top: 0; z-index: 1; }
 tr:last-child td { border-bottom: 0; }
-.num { text-align: right; font-variant-numeric: tabular-nums; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+th.status-col, td.status-col { width: 1%; white-space: nowrap; padding-left: 6px; padding-right: 6px; }
+.status-col .pill { justify-content: center; }
 .money-positive { color: var(--green); font-weight: 760; }
 .money-negative { color: var(--red); font-weight: 760; }
 .money-flat { color: var(--muted); font-weight: 700; }
@@ -534,7 +543,7 @@ def _kpi_grid(
                 label="EA bench",
                 value=f"{accepted_count} / {pending_count} / {rejected_count}",
                 status="ACTIVE",
-                note="accepted / pending / rejected candidates",
+                note="accepted / provisional / rejected candidates",
                 bar="",
             ),
             _kpi(
@@ -610,10 +619,21 @@ def _dashboard_script() -> str:
     const search = document.getElementById("candidateSearch");
     const monthlySearch = document.getElementById("monthlySearch");
     const monthlyExpertFilter = document.getElementById("monthlyExpertFilter");
+    const monthlyStatusFilter = document.getElementById("monthlyStatusFilter");
     const buttons = Array.from(document.querySelectorAll("[data-filter]"));
+    const accountButtons = Array.from(document.querySelectorAll("[data-account-status-filter]"));
     const rows = Array.from(document.querySelectorAll("[data-candidate-row]"));
+    const accountRows = Array.from(document.querySelectorAll("[data-account-row]"));
     const monthlyRows = Array.from(document.querySelectorAll("[data-monthly-row]"));
+    const monthlyExpertOptions = monthlyExpertFilter
+      ? Array.from(monthlyExpertFilter.options).map((option) => ({
+          value: option.value,
+          label: option.textContent,
+          status: option.dataset.status || "all",
+        }))
+      : [];
     let activeFilter = "all";
+    let activeAccountStatus = "all";
 
     function applyCandidateFilter() {
       const query = (search?.value || "").toLowerCase().trim();
@@ -627,13 +647,46 @@ def _dashboard_script() -> str:
     }
 
     function applyMonthlyFilter() {
+      updateMonthlyExpertOptions();
       const query = (monthlySearch?.value || "").toLowerCase().trim();
       const selectedExpert = monthlyExpertFilter?.value || "all";
+      const selectedStatus = monthlyStatusFilter?.value || "all";
       monthlyRows.forEach((row) => {
         const haystack = row.dataset.search || "";
         const expertMatch = selectedExpert === "all" || row.dataset.expert === selectedExpert;
+        const statusMatch = selectedStatus === "all" || row.dataset.status === selectedStatus;
         const queryMatch = !query || haystack.includes(query);
-        row.hidden = !(expertMatch && queryMatch);
+        row.hidden = !(expertMatch && statusMatch && queryMatch);
+      });
+    }
+
+    function updateMonthlyExpertOptions() {
+      if (!monthlyExpertFilter) return;
+      const selectedStatus = monthlyStatusFilter?.value || "all";
+      const previousValue = monthlyExpertFilter.value || "all";
+      const allowedOptions = monthlyExpertOptions.filter((option) => {
+        return option.value === "all" || selectedStatus === "all" || option.status === selectedStatus;
+      });
+      monthlyExpertFilter.replaceChildren(
+        ...allowedOptions.map((item) => {
+          const option = document.createElement("option");
+          option.value = item.value;
+          option.textContent = item.label;
+          option.dataset.status = item.status;
+          return option;
+        })
+      );
+      if (allowedOptions.some((item) => item.value === previousValue)) {
+        monthlyExpertFilter.value = previousValue;
+      } else {
+        monthlyExpertFilter.value = "all";
+      }
+    }
+
+    function applyAccountFilter() {
+      accountRows.forEach((row) => {
+        const status = row.dataset.status || "";
+        row.hidden = !(activeAccountStatus === "all" || status === activeAccountStatus);
       });
     }
 
@@ -645,9 +698,19 @@ def _dashboard_script() -> str:
       });
     });
 
+    accountButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeAccountStatus = button.dataset.accountStatusFilter;
+        accountButtons.forEach((item) => item.classList.toggle("active", item === button));
+        applyAccountFilter();
+      });
+    });
+
     search?.addEventListener("input", applyCandidateFilter);
     monthlySearch?.addEventListener("input", applyMonthlyFilter);
     monthlyExpertFilter?.addEventListener("change", applyMonthlyFilter);
+    monthlyStatusFilter?.addEventListener("change", applyMonthlyFilter);
+    updateMonthlyExpertOptions();
   </script>
 """
 
@@ -750,7 +813,8 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
         key=lambda item: (_candidate_sort_rank(item), item.get("candidate", "")),
     )
     columns = ("Expert", "Status", "Diagnosis", "Cells", "PF Cells", "Trades", "Median Cell Trades", "Failed Gates")
-    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    numeric_indexes = {3, 4, 5, 6}
+    header = _header_cells(columns, numeric_indexes, compact_indexes={1})
     body = []
     for item in sorted_candidates:
         status = _candidate_status(item)
@@ -765,7 +829,7 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
         ).lower()
         cells = [
             _esc(item.get("candidate", "")),
-            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _table_status_badge(status),
             _esc(item.get("frequency_bias_diagnosis", "")),
             _esc(item.get("complete_cells", "")),
             _esc(item.get("pf_passing_cells", "")),
@@ -773,10 +837,9 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
             _esc(item.get("median_cell_trades", "")),
             _esc(item.get("failed_gates", "")),
         ]
-        numeric_indexes = {3, 4, 5, 6}
         table_cells = []
         for index, value in enumerate(cells):
-            cell_class = ' class="num"' if index in numeric_indexes else ""
+            cell_class = _table_cell_class(index, numeric_indexes, compact_indexes={1})
             table_cells.append(f"<td{cell_class}>{value}</td>")
         tds = "".join(table_cells)
         body.append(
@@ -815,6 +878,12 @@ def _candidate_sort_rank(item: dict[str, str]) -> int:
     return 2
 
 
+def _table_status_badge(status: str) -> str:
+    display = "ACCEPTED" if status == "ACCEPTED SAME-FAMILY" else status
+    title = f' title="{_esc(status)}"' if display != status else ""
+    return f'<span class="pill {_status_class(status)}"{title}>{_esc(display)}</span>'
+
+
 def _account_summary_table(rows: list[dict[str, Any]]) -> str:
     columns = (
         "Expert",
@@ -828,7 +897,8 @@ def _account_summary_table(rows: list[dict[str, Any]]) -> str:
         "Best Month",
         "Positive Months",
     )
-    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    numeric_indexes = {2, 3, 4, 5, 6, 7, 8, 9}
+    header = _header_cells(columns, numeric_indexes, compact_indexes={1})
     body = []
     for row in rows:
         status = _cell(row.get("status"))
@@ -838,7 +908,7 @@ def _account_summary_table(rows: list[dict[str, Any]]) -> str:
         best_month = float(row.get("best_month_pnl_usd", 0.0))
         values = [
             _esc(row.get("expert", "")),
-            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _table_status_badge(status),
             _esc(row.get("trades", 0)),
             _esc(_format_pct(row.get("win_rate_pct"))),
             _money_cell(total_pnl, include_sign=True),
@@ -848,42 +918,50 @@ def _account_summary_table(rows: list[dict[str, Any]]) -> str:
             _money_cell(best_month, include_sign=True),
             _esc(f"{row.get('positive_months', 0)} / {row.get('total_months', 0)}"),
         ]
-        numeric_indexes = {2, 3, 4, 5, 6, 7, 8, 9}
         cells = []
         for index, value in enumerate(values):
-            klass = ' class="num"' if index in numeric_indexes else ""
+            klass = _table_cell_class(index, numeric_indexes, compact_indexes={1})
             cells.append(f"<td{klass}>{value}</td>")
-        body.append("<tr>" + "".join(cells) + "</tr>")
+        filter_status = _candidate_filter_status(status)
+        body.append(f'<tr data-account-row data-status="{filter_status}">' + "".join(cells) + "</tr>")
     if not body:
         body.append(f'<tr><td colspan="{len(columns)}" class="muted">No p95 trade ledgers found.</td></tr>')
     return '<div class="table-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
 
 
 def _monthly_return_table(rows: list[dict[str, Any]]) -> str:
-    columns = ("Month", "Expert", "Status", "Trades", "PnL", "Return")
-    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    columns = ("Month", "Expert", "Status", "Trades", "Win Rate", "Wins", "Losses", "Net R", "Avg R", "PnL", "Return")
+    numeric_indexes = {3, 4, 5, 6, 7, 8, 9, 10}
+    header = _header_cells(columns, numeric_indexes, compact_indexes={2})
     body = []
     for row in rows:
         expert = _cell(row.get("expert"))
         status = _cell(row.get("status"))
         pnl = float(row.get("pnl_usd", 0.0))
         return_pct = float(row.get("return_pct", 0.0))
+        net_r = float(row.get("net_r", 0.0))
+        avg_r = float(row.get("avg_r", 0.0))
         search_text = " ".join((_cell(row.get("month")), expert, status)).lower()
         values = [
             _esc(row.get("month", "")),
             _esc(expert),
-            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _table_status_badge(status),
             _esc(row.get("trades", 0)),
+            _esc(_format_pct(row.get("win_rate_pct"))),
+            _esc(row.get("wins", 0)),
+            _esc(row.get("losses", 0)),
+            _r_cell(net_r),
+            _r_cell(avg_r),
             _money_cell(pnl, include_sign=True),
             _money_cell(return_pct, suffix="%", include_sign=True),
         ]
-        numeric_indexes = {3, 4, 5}
         cells = []
         for index, value in enumerate(values):
-            klass = ' class="num"' if index in numeric_indexes else ""
+            klass = _table_cell_class(index, numeric_indexes, compact_indexes={2})
             cells.append(f"<td{klass}>{value}</td>")
         body.append(
-            f'<tr data-monthly-row data-expert="{_esc(expert)}" data-search="{_esc(search_text)}">'
+            f'<tr data-monthly-row data-expert="{_esc(expert)}" '
+            f'data-status="{_candidate_filter_status(status)}" data-search="{_esc(search_text)}">'
             + "".join(cells)
             + "</tr>"
         )
@@ -900,12 +978,54 @@ def _monthly_expert_options(rows: list[dict[str, Any]]) -> str:
             continue
         status = _cell(row.get("status"))
         label = f"{expert} ({status})"
-        options.append(f'<option value="{_esc(expert)}">{_esc(label)}</option>')
+        filter_status = _candidate_filter_status(status)
+        options.append(f'<option value="{_esc(expert)}" data-status="{filter_status}">{_esc(label)}</option>')
     return (
         '<select id="monthlyExpertFilter" aria-label="Filter monthly returns by EA">'
         + "".join(options)
         + "</select>"
     )
+
+
+def _monthly_status_options() -> str:
+    options = (
+        ("all", "All classifications"),
+        ("accepted", "Accepted EAs"),
+        ("pending", "Provisional EAs"),
+        ("rejected", "Rejected EAs"),
+    )
+    return (
+        '<select id="monthlyStatusFilter" aria-label="Filter monthly returns by EA status">'
+        + "".join(f'<option value="{value}">{label}</option>' for value, label in options)
+        + "</select>"
+    )
+
+
+def _header_cells(
+    columns: tuple[str, ...],
+    numeric_indexes: set[int] | None = None,
+    compact_indexes: set[int] | None = None,
+) -> str:
+    cells = []
+    for index, column in enumerate(columns):
+        klass = _table_cell_class(index, numeric_indexes, compact_indexes)
+        cells.append(f"<th{klass}>{_esc(column)}</th>")
+    return "".join(cells)
+
+
+def _table_cell_class(
+    index: int,
+    numeric_indexes: set[int] | None = None,
+    compact_indexes: set[int] | None = None,
+) -> str:
+    numeric_indexes = numeric_indexes or set()
+    compact_indexes = compact_indexes or set()
+    classes = []
+    if index in numeric_indexes:
+        classes.append("num")
+    if index in compact_indexes:
+        classes.append("status-col")
+    return f' class="{" ".join(classes)}"' if classes else ""
 
 
 def _account_assumption_text() -> str:
@@ -950,9 +1070,21 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
                         continue
                     r_multiple = _to_float(row.get("r_multiple")) or 0.0
                     pnl = r_multiple * ACCOUNT_EXAMPLE_RISK_USD
-                    bucket = buckets.setdefault(month, {"pnl_usd": 0.0, "trades": 0.0})
+                    bucket = buckets.setdefault(
+                        month,
+                        {
+                            "pnl_usd": 0.0,
+                            "trades": 0.0,
+                            "wins": 0.0,
+                            "losses": 0.0,
+                            "total_r": 0.0,
+                        },
+                    )
                     bucket["pnl_usd"] += pnl
                     bucket["trades"] += 1
+                    bucket["wins"] += 1 if r_multiple > 0 else 0
+                    bucket["losses"] += 1 if r_multiple <= 0 else 0
+                    bucket["total_r"] += r_multiple
                     months.add(month)
                     trades += 1
                     wins += 1 if r_multiple > 0 else 0
@@ -1000,14 +1132,32 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
             }
         )
         for month in reversed(ordered_months):
-            bucket = buckets.get(month, {"pnl_usd": 0.0, "trades": 0.0})
+            bucket = buckets.get(
+                month,
+                {
+                    "pnl_usd": 0.0,
+                    "trades": 0.0,
+                    "wins": 0.0,
+                    "losses": 0.0,
+                    "total_r": 0.0,
+                },
+            )
             pnl = float(bucket.get("pnl_usd", 0.0))
+            trades_for_month = int(bucket.get("trades", 0.0))
+            wins_for_month = int(bucket.get("wins", 0.0))
+            losses_for_month = int(bucket.get("losses", 0.0))
+            total_r_for_month = float(bucket.get("total_r", 0.0))
             monthly_rows.append(
                 {
                     "month": month,
                     "expert": expert,
                     "status": base["status"],
-                    "trades": int(bucket.get("trades", 0.0)),
+                    "trades": trades_for_month,
+                    "wins": wins_for_month,
+                    "losses": losses_for_month,
+                    "win_rate_pct": (wins_for_month / trades_for_month * 100.0) if trades_for_month else 0.0,
+                    "net_r": total_r_for_month,
+                    "avg_r": total_r_for_month / trades_for_month if trades_for_month else 0.0,
                     "pnl_usd": pnl,
                     "return_pct": (pnl / ACCOUNT_EXAMPLE_STARTING_USD) * 100.0,
                 }
@@ -1039,6 +1189,12 @@ def _money_cell(value: float, suffix: str = "", include_sign: bool = False) -> s
         sign = "+" if include_sign and value > 0 else ""
         formatted = f"{sign}${value:,.2f}"
     return f'<span class="{klass}">{_esc(formatted)}</span>'
+
+
+def _r_cell(value: float) -> str:
+    klass = _money_class(value)
+    sign = "+" if value > 0 else ""
+    return f'<span class="{klass}">{_esc(f"{sign}{value:.2f}R")}</span>'
 
 
 def _money_class(value: float) -> str:

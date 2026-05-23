@@ -24,6 +24,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _extreme_activity_mean_reversion_context()
     if expert == "london_fix_continuation_v0":
         return _london_fix_continuation_context()
+    if expert == "liquidity_sweep_continuation_v0":
+        return _liquidity_sweep_continuation_context()
     if expert == "liquidity_sweep_reversal_v0":
         return _liquidity_sweep_reversal_context()
     if expert == "m15_inside_bar_breakout_v0":
@@ -44,6 +46,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _previous_day_extreme_retest_context()
     if expert == "round_number_retest_v0":
         return _round_number_retest_context()
+    if expert == "session_extreme_retest_v0":
+        return _session_extreme_retest_context()
     if expert == "session_vwap_reclaim_v0":
         return _session_vwap_reclaim_context()
     if expert == "symbol_normalized_round_retest_v0":
@@ -470,6 +474,22 @@ def _liquidity_sweep_reversal_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _liquidity_sweep_continuation_context() -> dict:
+    context = _liquidity_sweep_reversal_context()
+    m5 = context["M5"].copy()
+    m5.loc[390, ["open", "high", "low", "close"]] = [100.95, 101.70, 100.85, 101.45]
+    m5.loc[390, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        100.95,
+        101.45,
+        100.85,
+        101.05,
+        101.35,
+        101.55,
+    ]
+    context["M5"] = m5
+    return context
 
 
 def _daily_pivot_reclaim_context() -> dict:
@@ -923,6 +943,27 @@ def _round_number_retest_context() -> dict:
     m5["latest_swing_low_time_utc"] = [pd.NaT] * len(m5)
     context["M5"] = m5
     return context
+
+
+def _session_extreme_retest_context() -> dict:
+    m5 = _base_m5("2024-04-01T00:00:00Z", 120)
+    m5["timestamp_utc"] = pd.to_datetime(m5["timestamp_utc"], utc=True)
+    m5["bar_start_utc"] = pd.to_datetime(m5["bar_start_utc"], utc=True)
+    m5["atr14"] = [1.0] * len(m5)
+    asia_mask = m5["bar_start_utc"].dt.hour < 6
+    m5.loc[asia_mask, ["high", "low", "close"]] = [100.0, 98.0, 99.0]
+    m5.loc[86, ["open", "high", "low", "close"]] = [99.8, 101.0, 99.7, 100.5]
+    m5.loc[88, ["open", "high", "low", "close"]] = [100.3, 100.4, 99.95, 100.1]
+    m5.loc[89, ["open", "high", "low", "close"]] = [100.1, 100.6, 100.0, 100.5]
+    for column in ("mid_open", "bid_open", "ask_open"):
+        m5[column] = m5["open"]
+    for column in ("mid_close", "bid_close", "ask_close"):
+        m5[column] = m5["close"]
+    m5["bid_open"] = m5["open"] - 0.1
+    m5["ask_open"] = m5["open"] + 0.1
+    m5["bid_close"] = m5["close"] - 0.1
+    m5["ask_close"] = m5["close"] + 0.1
+    return {"M5": m5, "symbol": "XAUUSD", "point_size": 0.01}
 
 
 def _symbol_round_sweep_reversal_context() -> dict:

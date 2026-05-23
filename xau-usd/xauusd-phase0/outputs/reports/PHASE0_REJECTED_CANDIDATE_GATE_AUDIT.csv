@@ -7,6 +7,7 @@ compression_retest_continuation_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILU
 daily_pivot_reclaim_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4713,486,558,527.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 emr_inactivity_long_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,84,9,10,9.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 extreme_activity_mean_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1056,74,176,102.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+liquidity_sweep_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,12222,1281,1423,1370.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 liquidity_sweep_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3906,393,482,427.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 london_fix_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4821,463,658,486.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 m15_inside_bar_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,7170,727,854,809.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
@@ -19,6 +20,7 @@ post_spike_short_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1860,192,23
 previous_day_extreme_retest_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,5295,478,704,583.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 range_mr,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,24,0,5,3.0,5,multi_cell_survival;sample_size;concentration;activity;cost_sensitivity,FAIL,FAIL,PASS,FAIL,FAIL,FAIL
 round_number_retest_v0,REJECTED_OR_RESEARCH,NON_MATRIX_REJECTION_OR_PENDING,9,9,47388,3837,6462,5497.0,0,none,PASS,PASS,PASS,PASS,PASS,PASS
+session_extreme_retest_v0,REJECTED_OR_RESEARCH,NON_MATRIX_REJECTION_OR_PENDING,9,9,23727,2331,2898,2680.0,0,none,PASS,PASS,PASS,PASS,PASS,PASS
 session_vwap_reclaim_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4806,481,614,507.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 squeeze_breakout_long_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1800,194,211,195.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 symbol_normalized_round_retest_v0,REJECTED_OR_RESEARCH,NON_MATRIX_REJECTION_OR_PENDING,9,9,47388,3837,6462,5497.0,0,none,PASS,PASS,PASS,PASS,PASS,PASS

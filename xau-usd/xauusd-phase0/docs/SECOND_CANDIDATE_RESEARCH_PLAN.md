@@ -75,15 +75,15 @@ The second candidate must pass the same reduced-portfolio discipline:
 
 | Field | Value |
 | --- | --- |
-| Candidate | `symbol_normalized_round_retest_v0` |
+| Candidate | `session_extreme_retest_v0` |
 | Status | PROVISIONAL_PASS_PENDING_GATE9 |
 | Testing allowed | GATE9_REVIEW_ONLY_BEFORE_APPROVAL |
-| Hypothesis document | `docs/hypothesis_symbol_normalized_round_retest_v0.md` |
+| Hypothesis document | `docs/hypothesis_session_extreme_retest_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
-| Implementation draft | `src/phase0/strategies/symbol_normalized_round_retest_v0.py` |
-| Research smoke | `outputs/reports/symbol_normalized_round_retest_v0_research_smoke.md` |
-| Research result | `docs/SYMBOL_NORMALIZED_ROUND_RETEST_V0_RESEARCH_RESULT.md` |
-| Next action | Complete Gate 9 manual adversarial review for this same-family candidate while continuing a separate search for a genuinely independent behavior family. The latest independent reversal probe, `symbol_round_sweep_reversal_v0`, was rejected first-pass. |
+| Implementation draft | `src/phase0/strategies/session_extreme_retest_v0.py` |
+| Research smoke | `outputs/reports/session_extreme_retest_v0_research_smoke.md` |
+| Research result | `docs/SESSION_EXTREME_RETEST_V0_RESEARCH_RESULT.md` |
+| Next action | Complete Gate 9 manual adversarial review for this same-family candidate while continuing a separate search for a genuinely independent behavior family. The latest independent continuation probe, `liquidity_sweep_continuation_v0`, was rejected first-pass. |
 
 ## Promotion Prep Command
 

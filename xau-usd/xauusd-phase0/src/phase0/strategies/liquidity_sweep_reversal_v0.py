@@ -22,6 +22,7 @@ class LiquiditySweepReversalV0Strategy(StrategyBase):
 
     name = "liquidity_sweep_reversal_v0"
     version = "0.1-research-disabled"
+    reason_prefix = "LIQUIDITY_SWEEP_REVERSAL_V0"
 
     def prepare_features(self, data_context: dict[str, Any]) -> dict[str, Any]:
         context = copy_context(data_context)
@@ -104,7 +105,7 @@ class LiquiditySweepReversalV0Strategy(StrategyBase):
                     timestamp_utc=timestamp.to_pydatetime(),
                     symbol=symbol,
                     direction=direction,
-                    reason_code=f"LIQUIDITY_SWEEP_REVERSAL_V0_{direction}",
+                    reason_code=f"{self.reason_prefix}_{direction}",
                     metadata={
                         **setup,
                         "m5_index": int(m5_position),

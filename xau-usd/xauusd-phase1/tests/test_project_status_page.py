@@ -55,13 +55,39 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Cost edge consumption" in html
     assert "$1,000 Account Example" in html
     assert "1% fixed risk per trade" in html
+    assert "data-account-status-filter=\"accepted\"" in html
+    assert "data-account-status-filter=\"rejected\"" in html
+    assert 'data-account-row data-status="accepted"' in html
+    assert 'data-account-row data-status="rejected"' in html
     assert "Monthly Returns Ledger" in html
+    assert "th.status-col, td.status-col" in html
+    assert '<th class="status-col">Status</th>' in html
+    assert '<td class="status-col"><span class="pill pass">ACCEPTED</span></td>' in html
+    assert "<th class=\"num\">Trades</th>" in html
+    assert "<th class=\"num\">Win Rate</th>" in html
+    assert "<th class=\"num\">Wins</th>" in html
+    assert "<th class=\"num\">Losses</th>" in html
+    assert "<th class=\"num\">Net R</th>" in html
+    assert "<th class=\"num\">Avg R</th>" in html
+    assert "<th class=\"num\">Total PnL</th>" in html
     assert "monthlySearch" in html
     assert "monthlyExpertFilter" in html
-    assert '<option value="breakout_retest">breakout_retest (ACCEPTED)</option>' in html
-    assert '<option value="trend_pullback">trend_pullback (REJECTED)</option>' in html
+    assert "monthlyStatusFilter" in html
+    assert html.index("monthlyStatusFilter") < html.index("monthlyExpertFilter")
+    assert '<option value="all">All classifications</option>' in html
+    assert '<option value="accepted">Accepted EAs</option>' in html
+    assert '<option value="pending">Provisional EAs</option>' in html
+    assert '<option value="rejected">Rejected EAs</option>' in html
+    assert '<option value="breakout_retest" data-status="accepted">breakout_retest (ACCEPTED)</option>' in html
+    assert '<option value="trend_pullback" data-status="rejected">trend_pullback (REJECTED)</option>' in html
+    assert "monthlyExpertOptions" in html
+    assert "updateMonthlyExpertOptions" in html
     assert 'data-expert="breakout_retest"' in html
+    assert 'data-status="accepted"' in html
+    assert 'data-status="rejected"' in html
     assert "66.67%" in html
+    assert "+0.50R" in html
+    assert "+0.25R" in html
     assert "+$10.00" in html
 
 

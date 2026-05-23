@@ -12,6 +12,7 @@ from phase0.strategies.daily_pivot_reclaim_v0 import DailyPivotReclaimV0Strategy
 from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
 from phase0.strategies.extreme_activity_mean_reversion_v0 import ExtremeActivityMeanReversionV0Strategy
 from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0Strategy
+from phase0.strategies.liquidity_sweep_continuation_v0 import LiquiditySweepContinuationV0Strategy
 from phase0.strategies.liquidity_sweep_reversal_v0 import LiquiditySweepReversalV0Strategy
 from phase0.strategies.m15_inside_bar_breakout_v0 import M15InsideBarBreakoutV0Strategy
 from phase0.strategies.m5_impulse_continuation_v0 import M5ImpulseContinuationV0Strategy
@@ -28,6 +29,7 @@ from phase0.strategies.previous_day_extreme_retest_v0 import PreviousDayExtremeR
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
 from phase0.strategies.round_number_retest_v0 import RoundNumberRetestV0Strategy
 from phase0.strategies.session_vwap_reclaim_v0 import SessionVwapReclaimV0Strategy
+from phase0.strategies.session_extreme_retest_v0 import SessionExtremeRetestV0Strategy
 from phase0.strategies.squeeze_breakout_long_v0 import SqueezeBreakoutLongV0Strategy
 from phase0.strategies.swing_breakout_retest_v0 import SwingBreakoutRetestV0Strategy
 from phase0.strategies.symbol_normalized_round_retest_v0 import SymbolNormalizedRoundRetestV0Strategy
@@ -50,6 +52,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
     ExtremeActivityMeanReversionV0Strategy.name: ExtremeActivityMeanReversionV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,
+    LiquiditySweepContinuationV0Strategy.name: LiquiditySweepContinuationV0Strategy,
     LiquiditySweepReversalV0Strategy.name: LiquiditySweepReversalV0Strategy,
     M15InsideBarBreakoutV0Strategy.name: M15InsideBarBreakoutV0Strategy,
     M5ImpulseContinuationV0Strategy.name: M5ImpulseContinuationV0Strategy,
@@ -60,6 +63,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
     PreviousDayExtremeRetestV0Strategy.name: PreviousDayExtremeRetestV0Strategy,
     RoundNumberRetestV0Strategy.name: RoundNumberRetestV0Strategy,
+    SessionExtremeRetestV0Strategy.name: SessionExtremeRetestV0Strategy,
     SessionVwapReclaimV0Strategy.name: SessionVwapReclaimV0Strategy,
     SqueezeBreakoutLongV0Strategy.name: SqueezeBreakoutLongV0Strategy,
     SwingBreakoutRetestV0Strategy.name: SwingBreakoutRetestV0Strategy,

@@ -1,7 +1,7 @@
 # PHASE0 REALITY CHECK
 
 Status: PASS
-Generated at UTC: 2026-05-23T15:23:25+00:00
+Generated at UTC: 2026-05-23T16:09:10+00:00
 Approved expert under test: breakout_retest
 
 ## Method
@@ -29,6 +29,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | daily_pivot_reclaim_v0 | -11.41 | -1232.00 | alternative |
 | emr_inactivity_long_v0 | 0.10 | 10.50 | alternative |
 | extreme_activity_mean_reversion_v0 | -5.31 | -573.63 | alternative |
+| liquidity_sweep_continuation_v0 | -36.89 | -3984.31 | alternative |
 | liquidity_sweep_reversal_v0 | -21.76 | -2350.27 | alternative |
 | london_fix_continuation_v0 | -7.05 | -761.12 | alternative |
 | m15_inside_bar_breakout_v0 | -4.99 | -538.47 | alternative |
@@ -41,6 +42,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | previous_day_extreme_retest_v0 | -9.14 | -987.22 | alternative |
 | range_mr | -1.86 | -200.75 | alternative |
 | round_number_retest_v0 | 74292.88 | 8023631.52 | alternative |
+| session_extreme_retest_v0 | 1873.10 | 202295.28 | alternative |
 | session_vwap_reclaim_v0 | -16.87 | -1822.46 | alternative |
 | squeeze_breakout_long_v0 | 1.77 | 191.43 | alternative |
 | swing_breakout_retest_v0 | 52707.87 | 5692449.56 | alternative |
@@ -58,25 +60,27 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | daily_pivot_reclaim_v0 | PASS | 209763.58 | 0.0230 | 164252.83 |
 | emr_inactivity_long_v0 | PASS | 209752.07 | 0.0224 | 160633.02 |
 | extreme_activity_mean_reversion_v0 | PASS | 209757.48 | 0.0236 | 169064.51 |
-| liquidity_sweep_reversal_v0 | PASS | 209773.93 | 0.0184 | 154889.14 |
-| london_fix_continuation_v0 | PASS | 209759.22 | 0.0190 | 159141.26 |
-| m15_inside_bar_breakout_v0 | PASS | 209757.16 | 0.0230 | 167442.52 |
-| m5_impulse_continuation_v0 | PASS | 209790.79 | 0.0206 | 163621.61 |
-| ny_am_pullback_continuation_v0 | PASS | 209758.82 | 0.0194 | 161531.37 |
-| ny_failed_london_reversal_v0 | PASS | 209754.57 | 0.0194 | 161115.30 |
-| ny_london_overlap_compression_break_v0 | PASS | 209752.69 | 0.0222 | 164784.96 |
-| opening_drive_failed_continuation_v0 | PASS | 209760.81 | 0.0238 | 166389.59 |
-| post_spike_short_v0 | PASS | 209755.63 | 0.0194 | 160311.66 |
-| previous_day_extreme_retest_v0 | PASS | 209761.31 | 0.0256 | 165659.67 |
-| range_mr | PASS | 209754.03 | 0.0230 | 167306.60 |
-| round_number_retest_v0 | PASS | 135459.29 | 0.0274 | 112368.86 |
-| session_vwap_reclaim_v0 | PASS | 209769.05 | 0.0240 | 162449.37 |
-| squeeze_breakout_long_v0 | PASS | 209750.40 | 0.0178 | 159074.13 |
-| swing_breakout_retest_v0 | PASS | 157044.30 | 0.0326 | 134267.37 |
-| symbol_normalized_round_retest_v0 | PASS | 135459.29 | 0.0272 | 110189.94 |
-| symbol_round_sweep_reversal_v0 | PASS | 209780.30 | 0.0228 | 162145.26 |
-| trend_pullback | PASS | 209803.54 | 0.0230 | 166871.59 |
-| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0176 | 160535.10 |
+| liquidity_sweep_continuation_v0 | PASS | 209789.06 | 0.0184 | 154904.42 |
+| liquidity_sweep_reversal_v0 | PASS | 209773.93 | 0.0190 | 159126.49 |
+| london_fix_continuation_v0 | PASS | 209759.22 | 0.0230 | 167454.48 |
+| m15_inside_bar_breakout_v0 | PASS | 209757.16 | 0.0206 | 163617.71 |
+| m5_impulse_continuation_v0 | PASS | 209790.79 | 0.0194 | 161520.18 |
+| ny_am_pullback_continuation_v0 | PASS | 209758.82 | 0.0194 | 161124.69 |
+| ny_failed_london_reversal_v0 | PASS | 209754.57 | 0.0222 | 164781.14 |
+| ny_london_overlap_compression_break_v0 | PASS | 209752.69 | 0.0238 | 166395.28 |
+| opening_drive_failed_continuation_v0 | PASS | 209760.81 | 0.0194 | 160316.39 |
+| post_spike_short_v0 | PASS | 209755.63 | 0.0256 | 165646.89 |
+| previous_day_extreme_retest_v0 | PASS | 209761.31 | 0.0230 | 167310.13 |
+| range_mr | PASS | 209754.03 | 0.0236 | 167328.39 |
+| round_number_retest_v0 | PASS | 135459.29 | 0.0296 | 112688.16 |
+| session_extreme_retest_v0 | PASS | 207879.07 | 0.0186 | 158431.56 |
+| session_vwap_reclaim_v0 | PASS | 209769.05 | 0.0240 | 164110.65 |
+| squeeze_breakout_long_v0 | PASS | 209750.40 | 0.0236 | 165050.64 |
+| swing_breakout_retest_v0 | PASS | 157044.30 | 0.0308 | 133222.01 |
+| symbol_normalized_round_retest_v0 | PASS | 135459.29 | 0.0284 | 112779.25 |
+| symbol_round_sweep_reversal_v0 | PASS | 209780.30 | 0.0176 | 160536.70 |
+| trend_pullback | PASS | 209803.54 | 0.0216 | 162100.30 |
+| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0190 | 158082.45 |
 
 ## Interpretation
 
