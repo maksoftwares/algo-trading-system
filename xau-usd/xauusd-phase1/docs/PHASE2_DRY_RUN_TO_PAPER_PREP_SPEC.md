@@ -110,3 +110,16 @@ The machine-checkable preflight artifact for this boundary is:
 ```text
 outputs/reports/PHASE2_READINESS_REPORT.md
 ```
+
+The paper-ledger evidence contract is defined in:
+
+```text
+docs/PHASE2_PAPER_LEDGER_SCHEMA.md
+```
+
+Its machine-checkable schema report and generated column template are:
+
+```text
+outputs/reports/PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md
+outputs/reports/PHASE2_PAPER_LEDGER_COLUMNS.csv
+```

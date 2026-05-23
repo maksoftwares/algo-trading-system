@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 60. |
+| history_rows | PASS | History rows available: 61. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | PASS | Latest status is healthy; acceptance is PENDING. |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,9 +17,9 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 60
+- History rows: 61
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-23T12:24:23.423901+00:00
+- Latest summary: 2026-05-23T12:35:15.747464+00:00
 - Latest M5 bar: 2026.05.22 20:55:00
 - Latest soak progress: 8.26%
 - Latest would-signal rows: 10
@@ -35,7 +35,6 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Summary UTC | Latest Bar | Rows | Progress % | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-22T13:58:10.800504+00:00 | 2026.05.22 13:55:00 | 42 | 2.43 | 8 | 8 | PENDING |
 | 2026-05-22T13:59:20.497658+00:00 | 2026.05.22 13:55:00 | 42 | 2.43 | 8 | 8 | PENDING |
 | 2026-05-22T14:00:05.838710+00:00 | 2026.05.22 14:00:00 | 43 | 2.5 | 8 | 8 | PENDING |
 | 2026-05-22T14:00:58.008168+00:00 | 2026.05.22 14:00:00 | 43 | 2.5 | 8 | 8 | PENDING |
@@ -47,6 +46,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | 2026-05-23T12:19:08.684120+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
 | 2026-05-23T12:21:53.759421+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
 | 2026-05-23T12:24:23.423901+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
+| 2026-05-23T12:35:15.747464+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
 
 ## Historical Acceptance Notes
 

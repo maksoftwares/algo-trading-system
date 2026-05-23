@@ -49,6 +49,11 @@ def generate_phase2_readiness_report(
 
     items = [
         _file_gate("Phase 2 preparation spec", root / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md"),
+        _status_gate(
+            "Paper ledger schema preflight",
+            report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md",
+            required="PASS",
+        ),
         _file_contains_gate(
             "Phase 2 cost-measurement protocol",
             root / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md",

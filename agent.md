@@ -206,13 +206,16 @@ Last updated: 2026-05-23
 - Latest Phase 1 dry-run review bundle: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip`.
 - Latest Phase 1 bundle manifest: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260522_064156_manifest.json`.
 - Phase 2 preparation spec: `xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. This is spec-only and does not authorize broker-side behavior.
+- Phase 2 paper-ledger schema: `xau-usd\xauusd-phase1\docs\PHASE2_PAPER_LEDGER_SCHEMA.md`. It defines the 40-column paper-only evidence contract for future paper-mode projections.
+- Phase 2 paper-ledger schema report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md`, status PASS.
+- Phase 2 paper-ledger column template: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_COLUMNS.csv`.
 - Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
 - Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.10R net expectancy.
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.
-- Latest periodic check status after resume-cycle cleanup: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
+- Latest periodic check status after Phase 2 paper-ledger schema prep: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
 - Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
 - Hourly local automation `phase1-mt5-soak-check` should be ACTIVE while the machine is online; pause it before any future planned shutdown.
 

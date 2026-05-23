@@ -11,6 +11,7 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Gate | Status | Evidence |
 | --- | --- | --- |
 | Phase 2 preparation spec | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md`. |
+| Paper ledger schema preflight | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md` status is PASS. |
 | Phase 2 cost-measurement protocol | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md` contains required Phase 2 controls. |
 | Single-edge risk plan | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md` contains required Phase 2 controls. |
 | Phase 2 operations prep | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md` contains required Phase 2 controls. |

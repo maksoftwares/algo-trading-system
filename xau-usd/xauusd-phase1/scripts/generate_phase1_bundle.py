@@ -16,6 +16,7 @@ from generate_phase1_runtime_health_report import generate_phase1_runtime_health
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from verify_phase1_logs import verify_phase1_logs
 
@@ -120,6 +121,11 @@ def generate_phase1_bundle(
         bundle_path,
         manifest_path,
         include_phase2_readiness=False,
+    )
+    generate_phase2_paper_ledger_schema_report(
+        root,
+        root / "outputs" / "reports" / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md",
+        root / "outputs" / "reports" / "PHASE2_PAPER_LEDGER_COLUMNS.csv",
     )
     phase2_readiness = generate_phase2_readiness_report(
         root,

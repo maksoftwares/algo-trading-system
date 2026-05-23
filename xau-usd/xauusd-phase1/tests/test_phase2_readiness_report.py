@@ -17,6 +17,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     report_dir.mkdir(parents=True)
     _write_phase0_cost_artifacts(root)
     _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=5.28)
@@ -39,6 +40,7 @@ def test_phase2_readiness_passes_when_all_gates_pass(tmp_path):
     _write_phase0_cost_artifacts(root, include_measured=True)
     approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
     _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
@@ -58,6 +60,7 @@ def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     report_dir.mkdir(parents=True)
     _write_phase0_cost_artifacts(root, include_measured=True)
     _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0, permission="true")
@@ -151,5 +154,12 @@ def _write_phase2_docs(root: Path) -> None:
     )
     (docs / "PHASE2_OPERATIONS_PREP.md").write_text(
         "# Ops\n\nExternal Health Monitor Spec\n\nDisaster Recovery Runbook\n\nCapital Allocation Ladder\n",
+        encoding="utf-8",
+    )
+
+
+def _write_phase2_schema_report(report_dir: Path) -> None:
+    (report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md").write_text(
+        "# Phase 2 Paper Ledger Schema Report\n\nOverall status: PASS\n",
         encoding="utf-8",
     )

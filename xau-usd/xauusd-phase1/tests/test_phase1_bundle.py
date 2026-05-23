@@ -50,6 +50,8 @@ def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
     assert "outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md" in names
     assert "outputs/reports/PHASE1_SOAK_HISTORY.csv" in names
     assert "outputs/reports/PHASE1_SOAK_HISTORY_REPORT.md" in names
+    assert "outputs/reports/PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md" in names
+    assert "outputs/reports/PHASE2_PAPER_LEDGER_COLUMNS.csv" in names
     assert manifest["log_verification_status"] == "PASS"
     assert manifest["soak_analysis_status"] == "PASS"
     assert manifest["runtime_health_status"] == "PASS"
@@ -106,6 +108,7 @@ def _write_project_shell(project: Path) -> None:
     (project / "README.md").write_text("# Phase 1\n", encoding="utf-8")
     (project / "docs" / "PHASE1_DRY_RUN_SCOPE.md").write_text("scope\n", encoding="utf-8")
     (project / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("phase2 prep\n", encoding="utf-8")
+    (project / "docs" / "PHASE2_PAPER_LEDGER_SCHEMA.md").write_text(_phase2_schema_doc(), encoding="utf-8")
     (project / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md").write_text(
         "cost-measurement experiment\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R\n",
         encoding="utf-8",
@@ -124,6 +127,19 @@ def _write_project_shell(project: Path) -> None:
     (project / "mt5" / "Presets" / "Phase1DryRunShell.safe.set").write_text("InpDryRunOnly=true\n", encoding="utf-8")
     (project / "scripts" / "verify_phase1_logs.py").write_text("print('ok')\n", encoding="utf-8")
     (project / "tests" / "test_phase1_static.py").write_text("def test_ok(): assert True\n", encoding="utf-8")
+
+
+def _phase2_schema_doc() -> str:
+    path = ROOT / "scripts" / "generate_phase2_paper_ledger_schema_report.py"
+    spec = importlib.util.spec_from_file_location("phase2_schema_for_bundle_test", path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["phase2_schema_for_bundle_test"] = module
+    spec.loader.exec_module(module)
+    columns = "\n".join(f"- {name}" for name, *_ in module.REQUIRED_COLUMNS)
+    tokens = "\n".join(f"- {token}" for token in module.REQUIRED_TOKENS)
+    return f"# Schema\n\n{columns}\n\n## Controls\n\n{tokens}\n"
 
 
 def _write_phase0_cost_artifacts(project: Path) -> None:

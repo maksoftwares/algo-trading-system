@@ -19,6 +19,7 @@ from generate_phase1_review_index import generate_phase1_review_index
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
+from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import load_project_config
 from phase0.measured_revalidation import generate_measured_cost_revalidation
@@ -71,6 +72,11 @@ def run_phase1_periodic_checks(
         files_dir=files_dir,
         report_path=report_dir / "PHASE1_RUNTIME_HEALTH_REPORT.md",
         max_fresh_minutes=max_fresh_minutes,
+    )
+    generate_phase2_paper_ledger_schema_report(
+        root=root,
+        report_path=report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md",
+        columns_csv_path=report_dir / "PHASE2_PAPER_LEDGER_COLUMNS.csv",
     )
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,
