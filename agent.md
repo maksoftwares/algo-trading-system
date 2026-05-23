@@ -109,8 +109,8 @@ Last updated: 2026-05-23
 - D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
 - Latest D1 result: PASS. 135 CPCV paths across 9 matrix cells, 100% pass rate, median OOS PF 1.379, minimum OOS PF 1.135.
 - D2 Reality Check command: `phase0 run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10`.
-- Latest D2 result after adding `liquidity_sweep_reversal_v0`: PASS. `breakout_retest` remained the family winner across 19 non-empty matrix-ledger candidates, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0342.
-- Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. It audited 18 rejected/research candidates; 4 had sample-size failures, all 18 had multi-cell expectancy failures, and 0 were frequency-only failures.
+- Latest D2 result after adding `daily_pivot_reclaim_v0`: PASS. `breakout_retest` remained the family winner across 20 non-empty matrix-ledger candidates, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0326.
+- Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. It audited 19 rejected/research candidates; 4 had sample-size failures, all 19 had multi-cell expectancy failures, and 0 were frequency-only failures.
 - D3 true-holdout audit command: `phase0 audit-true-holdout`.
 - Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
@@ -177,6 +177,7 @@ Last updated: 2026-05-23
 - Swing breakout-retest matrix summary: `xau-usd\xauusd-phase0\docs\SWING_BREAKOUT_RETEST_V0_FIRST_PASS.md`.
 - Latest swing breakout-retest result-producing run status: approved future expert candidate, but same-family with `breakout_retest`. Real 9-cell matrix produced 6,281-6,600 trades per cell, 7/9 cells reached PF >= 1.30, deciles passed 10/10 with median PF 1.450, multisymbol passed with EURUSD PF 1.375 and USDJPY PF 1.668, intrabar ambiguity was 342/57,897 trades (0.59%), and Gate 9 scored PASS with 120/120 reviewed losses and 0 logic gaps.
 - Latest independent candidate `liquidity_sweep_reversal_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 393-482 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Latest independent candidate `daily_pivot_reclaim_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 486-558 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.

@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=LONG, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "daily_pivot_reclaim_v0",
+  "generated_at_utc": "2026-05-23T13:46:30+00:00",
+  "hypothesis_file": "docs\\hypothesis_daily_pivot_reclaim_v0.md",
+  "hypothesis_sha256": "a2376e560029ba88281e451114d935c1e50328873d457ea3d99640b739456624",
+  "latest_plan": {
+    "direction": "LONG",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 99.225,
+    "take_profit": 101.9125
+  },
+  "latest_signal": {
+    "direction": "LONG",
+    "reason_code": "DAILY_PIVOT_RECLAIM_V0_LONG",
+    "timestamp_utc": "2024-04-02T08:35:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\daily_pivot_reclaim_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}

@@ -10,6 +10,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _asia_range_london_failed_break_reversal_context()
     if expert == "compression_retest_continuation_v0":
         return _compression_retest_continuation_context()
+    if expert == "daily_pivot_reclaim_v0":
+        return _daily_pivot_reclaim_context()
     if expert == "trend_pullback":
         return _trend_context()
     if expert == "breakout_retest":
@@ -446,6 +448,59 @@ def _liquidity_sweep_reversal_context() -> dict:
             "low": [99.0] * 120,
             "close": [100.0] * 120,
             "atr14": [1.2] * 120,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-04-01T00:00:00Z", periods=40, freq="1h"),
+            "open": [100.0] * 40,
+            "high": [102.0] * 40,
+            "low": [98.0] * 40,
+            "close": [100.0] * 40,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _daily_pivot_reclaim_context() -> dict:
+    m5_times = pd.date_range("2024-04-01T00:05:00Z", periods=440, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 440,
+            "high": [100.2] * 440,
+            "low": [99.8] * 440,
+            "close": [100.0] * 440,
+            "atr14": [0.5] * 440,
+            "mid_open": [100.0] * 440,
+            "mid_close": [100.0] * 440,
+            "bid_open": [99.9] * 440,
+            "ask_open": [100.1] * 440,
+            "bid_close": [99.9] * 440,
+            "ask_close": [100.1] * 440,
+        }
+    )
+    first_day = m5["bar_start_utc"].dt.strftime("%Y-%m-%d") == "2024-04-01"
+    m5.loc[first_day, ["high", "low", "close"]] = [101.0, 99.0, 100.0]
+    m5.loc[390, ["open", "high", "low", "close"]] = [99.65, 100.45, 99.35, 100.30]
+    m5.loc[390, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        99.65,
+        100.30,
+        99.55,
+        99.75,
+        100.20,
+        100.40,
+    ]
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-04-01T00:15:00Z", periods=120, freq="15min"),
+            "open": [100.0] * 120,
+            "high": [101.0] * 120,
+            "low": [99.0] * 120,
+            "close": [100.0] * 120,
+            "atr14": [1.0] * 120,
         }
     )
     h1 = pd.DataFrame(

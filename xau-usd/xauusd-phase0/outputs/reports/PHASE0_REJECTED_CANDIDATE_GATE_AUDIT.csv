@@ -4,6 +4,7 @@ swing_breakout_retest_v0,APPROVED_OR_ACTIVE,APPROVED_EDGE_FAMILY,9,7,57897,6281,
 asia_range_london_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4845,507,571,537.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 asia_range_london_failed_break_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3102,326,372,336.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 compression_retest_continuation_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,0,0,0,0.0,5,multi_cell_survival;sample_size;concentration;activity;cost_sensitivity,FAIL,FAIL,PASS,FAIL,FAIL,FAIL
+daily_pivot_reclaim_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4713,486,558,527.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 emr_inactivity_long_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,84,9,10,9.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 extreme_activity_mean_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1056,74,176,102.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 liquidity_sweep_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3906,393,482,427.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS

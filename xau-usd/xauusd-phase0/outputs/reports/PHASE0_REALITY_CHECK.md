@@ -1,7 +1,7 @@
 # PHASE0 REALITY CHECK
 
 Status: PASS
-Generated at UTC: 2026-05-23T13:40:59+00:00
+Generated at UTC: 2026-05-23T14:00:10+00:00
 Approved expert under test: breakout_retest
 
 ## Method
@@ -26,6 +26,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | asia_range_london_breakout_v0 | -28.83 | -3113.24 | alternative |
 | asia_range_london_failed_break_reversal_v0 | -16.89 | -1823.66 | alternative |
 | breakout_retest | 209752.17 | 22653234.48 | approved |
+| daily_pivot_reclaim_v0 | -11.41 | -1232.00 | alternative |
 | emr_inactivity_long_v0 | 0.10 | 10.50 | alternative |
 | extreme_activity_mean_reversion_v0 | -5.31 | -573.63 | alternative |
 | liquidity_sweep_reversal_v0 | -21.76 | -2350.27 | alternative |
@@ -49,22 +50,23 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | --- | --- | --- | --- | --- |
 | asia_range_london_breakout_v0 | PASS | 209781.00 | 0.0234 | 166854.30 |
 | asia_range_london_failed_break_reversal_v0 | PASS | 209769.06 | 0.0208 | 166350.70 |
-| emr_inactivity_long_v0 | PASS | 209752.07 | 0.0230 | 164247.10 |
-| extreme_activity_mean_reversion_v0 | PASS | 209757.48 | 0.0224 | 160631.53 |
-| liquidity_sweep_reversal_v0 | PASS | 209773.93 | 0.0236 | 169065.03 |
-| london_fix_continuation_v0 | PASS | 209759.22 | 0.0184 | 154895.08 |
-| ny_am_pullback_continuation_v0 | PASS | 209758.82 | 0.0190 | 159131.46 |
-| ny_failed_london_reversal_v0 | PASS | 209754.57 | 0.0230 | 167443.22 |
-| ny_london_overlap_compression_break_v0 | PASS | 209752.69 | 0.0206 | 163606.88 |
-| opening_drive_failed_continuation_v0 | PASS | 209760.81 | 0.0194 | 161532.02 |
-| post_spike_short_v0 | PASS | 209755.63 | 0.0194 | 161114.67 |
-| previous_day_extreme_retest_v0 | PASS | 209761.31 | 0.0222 | 164797.48 |
-| range_mr | PASS | 209754.03 | 0.0238 | 166396.78 |
-| session_vwap_reclaim_v0 | PASS | 209769.05 | 0.0194 | 160314.04 |
-| squeeze_breakout_long_v0 | PASS | 209750.40 | 0.0256 | 165650.26 |
-| swing_breakout_retest_v0 | PASS | 157044.30 | 0.0342 | 136519.75 |
-| trend_pullback | PASS | 209803.54 | 0.0236 | 167320.90 |
-| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0240 | 162454.62 |
+| daily_pivot_reclaim_v0 | PASS | 209763.58 | 0.0230 | 164252.83 |
+| emr_inactivity_long_v0 | PASS | 209752.07 | 0.0224 | 160633.02 |
+| extreme_activity_mean_reversion_v0 | PASS | 209757.48 | 0.0236 | 169064.51 |
+| liquidity_sweep_reversal_v0 | PASS | 209773.93 | 0.0184 | 154889.14 |
+| london_fix_continuation_v0 | PASS | 209759.22 | 0.0190 | 159141.26 |
+| ny_am_pullback_continuation_v0 | PASS | 209758.82 | 0.0230 | 167445.86 |
+| ny_failed_london_reversal_v0 | PASS | 209754.57 | 0.0206 | 163612.58 |
+| ny_london_overlap_compression_break_v0 | PASS | 209752.69 | 0.0194 | 161534.05 |
+| opening_drive_failed_continuation_v0 | PASS | 209760.81 | 0.0194 | 161116.92 |
+| post_spike_short_v0 | PASS | 209755.63 | 0.0222 | 164782.56 |
+| previous_day_extreme_retest_v0 | PASS | 209761.31 | 0.0238 | 166394.35 |
+| range_mr | PASS | 209754.03 | 0.0194 | 160312.71 |
+| session_vwap_reclaim_v0 | PASS | 209769.05 | 0.0256 | 165635.68 |
+| squeeze_breakout_long_v0 | PASS | 209750.40 | 0.0230 | 167305.38 |
+| swing_breakout_retest_v0 | PASS | 157044.30 | 0.0326 | 136575.64 |
+| trend_pullback | PASS | 209803.54 | 0.0240 | 162461.58 |
+| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0178 | 159076.61 |
 
 ## Interpretation
 

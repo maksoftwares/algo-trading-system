@@ -39,6 +39,7 @@ Expected path:
 | 18 | `ny_london_overlap_compression_break_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix PF coverage and trade-count gate; do not tune v0. |
 | 19 | `opening_drive_failed_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
 | 20 | `liquidity_sweep_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
+| 21 | `daily_pivot_reclaim_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 
 ## Discipline
 
@@ -48,4 +49,5 @@ Expected path:
 - `phase0 run-matrix --expert all` must remain reserved for the active approved/legacy Phase 0 set, not experimental backlog candidates.
 - Original 10-candidate bench is now fully resolved: 1 approved future expert and 9 rejected v0 candidates.
 - Extended bench status: `swing_breakout_retest_v0` is an approved future expert candidate, but it is same-family with `breakout_retest`; `ny_london_overlap_compression_break_v0` and `opening_drive_failed_continuation_v0` were rejected first-pass. Continue searching for a more independent second behavior.
-- Latest independent candidate result: `liquidity_sweep_reversal_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
+- Latest independent candidate result: `daily_pivot_reclaim_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
+- Next independent candidate should be a fresh, versioned hypothesis from a genuinely different behavior family; do not tune any rejected v0 in place.
