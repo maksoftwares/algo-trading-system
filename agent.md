@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 ## Workspace
 
@@ -32,7 +32,7 @@ Last updated: 2026-05-23
   - Weekend/offline resume gaps are tolerated by the Phase 1 verifier, soak analyzer, runtime-health report, and external-health check when the latest row is a stale weekend market-break row.
   - Latest periodic check status after restart: PASS. Phase 2 readiness remains PENDING, not FAIL, because five-day soak, measured-cost model, measured-cost revalidation, review index, and owner approval are still open.
   - Latest refreshed soak snapshot: 56 decision rows, latest M5 bar `2026.05.22 20:55:00`, soak progress `8.26%`, Phase 1 acceptance `PENDING`.
-  - Latest measured cost model snapshot: `6495` observed spread rows across `2` observed days; still `PENDING` until 5 observed days are available.
+  - Latest measured cost model snapshot: `11435` observed spread rows across `2` observed days; still `PENDING` until 5 observed days are available.
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.
 - Passive MT5 tools exist for spread logging and historical bar export.
 - Passive spread logger is deployed and compiled under `C:\MT5PortableGoldMission\MQL5\Experts\Phase0\PassiveSpreadLogger_XAUUSD.ex5`; compile log `C:\MT5PortableGoldMission\compile_PassiveSpreadLogger_XAUUSD.log` shows 0 errors / 0 warnings.
@@ -102,9 +102,11 @@ Last updated: 2026-05-23
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
 - Latest status summary shows 56 decision rows, 8.26% of the five-day soak target, `log_verification=PASS`, `soak_analysis=PASS`, `runtime_health=PASS`, `would_signal=PASS`, and `acceptance=PENDING`.
-- Review #6 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=weekend_breaks_active_market_streak`; the active-market 72-hour bar-continuity gate is separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
+- Review #7 direct-control items are reflected in the repo: the ten-candidate diversification result is codified in `xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md`, future low-frequency concentration/cross-venue gates are pre-registered in `xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md`, fixed-notional monthly R-series remains the canonical D2 evidence in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`, and `phase1_soak_streak.py` now explicitly rejects weekend/stale/market-closed rows for active-market streak continuity.
+- Review #6/#7 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=weekend_breaks_active_market_streak`; the active-market 72-hour bar-continuity gate is separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #6 reflection and action plan is tracked in `docs\REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`.
+- Review #7 reflection and action plan is tracked in `docs\REVIEW_07_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #2 reframes `breakout_retest` as high-frequency and cost-sensitive; Phase 2 is now treated as a real-cost measurement phase, not a profit-confirmation phase.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
 - D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, Reality Check/SPA, true-holdout audit, and independent reproduction are closed for the current evidence package.
@@ -201,13 +203,13 @@ Last updated: 2026-05-23
 - Latest D1 outside-day follow-through attempt `d1_outside_day_followthrough_v0` is `REJECTED_FIRST_PASS`: 261 total trades, 22-33 trades per cell, 0/9 PF cells >= 1.30, and 0/9 cells met the minimum trade-count gate. Do not tune v0.
 - Review #5 forcing rule remains strategically active for diversification: no same-family breakout-retest / level-and-pullback candidate should be treated as diversification, and independent non-level research must continue.
 - Hypothesis timeframe coverage by entry/decision cadence: `M5_M15=28`, `M30_H1=0`, `H4_D1=6`, `W1_plus=1`. `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or approved macro-proxy data exists locally; do not fake it with XAU-only inputs. No higher-timeframe independent candidate has passed Phase 0 first pass yet.
-- Review #6 non-level plan before Phase 2: add at least three more H4/D1 non-level concepts to the research bench unless explicitly deferred: `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, and `d1_multi_day_exhaustion_reversion_v0`.
+- Review #6/#7 non-level diversification requirement before Phase 2 is satisfied for the current review cycle: ten H4/D1/W1 non-level concepts were hash-locked, implemented where data allowed, smoke-tested, matrix-tested, and rejected first-pass. `h4_real_yield_proxy_momentum_v0` remains blocked because no approved macro-proxy data exists locally; do not fake it with XAU-only inputs.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 10206 rows over 2 observed days; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 11435 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -244,7 +246,7 @@ Last updated: 2026-05-23
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
 - Phase 2 VPS selection matrix: `xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md`, status PENDING until the owner selects provider, region, specs, backup method, and monitoring approach.
 - Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.15R net expectancy.
-- Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
+- Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest`, `swing_breakout_retest_v0`, and `symbol_normalized_round_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.
 - Latest periodic check status after project-status dashboard wiring: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.

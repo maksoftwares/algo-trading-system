@@ -1,6 +1,6 @@
 # Phase 2 Authorization Checklist
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
 This checklist separates work that is already closed from gates that still require wall-clock evidence or explicit owner approval. Phase 2 remains paper-mode preparation only until every required gate below is closed.
 
@@ -8,14 +8,16 @@ This checklist separates work that is already closed from gates that still requi
 
 | Item | Status | Evidence |
 | --- | --- | --- |
-| Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` is approved as a same-family future expert candidate. |
+| Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
 | D2 Reality Check / SPA-style bootstrap | PASS | Canonical fixed-notional monthly R rerun against 29 non-empty matrix-ledger candidates: White p=0.0002, max SPA p=0.0188; percent-return/compounding variants are superseded; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
-| Rejected-candidate gate audit | PASS | Latest audit: 30 audited candidates, 28 rejected/research rows, 5 sample-size failures, 25 multi-cell expectancy failures, 0 frequency-only failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
+| Rejected-candidate gate audit | PASS | Latest audit: 38 audited candidates, 35 rejected/research rows, 8 sample-size failures, 33 multi-cell expectancy failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
 | Frequency-normalized concentration audit | PASS | Latest audit generated normalized top-trade and top-5 R ratios for all matrix candidates; it does not rescue rejected candidates and is review context only; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` |
+| Diversification availability finding | PASS | Ten non-level H4/D1/W1 candidates were hash-locked and rejected first-pass; current operating frame remains single-edge; `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md` |
+| Forward hypothesis gates | PASS | `docs/HYPOTHESIS_LOCKING.md` pre-registers normalized concentration thresholds and a Pepperstone+Dukascopy cross-venue PF floor for future candidates. |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
 | Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md` |
@@ -42,8 +44,7 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` after provider, region, specs, backup access, and monitoring approach are selected. |
-| Non-level forcing candidate run | PASS | `d1_momentum_h4_pullback_v0` and `d1_volatility_expansion_reversal_v0` were registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. Both were rejected, so diversification remains unsolved. |
-| Additional non-level H4/D1 plan | PLANNED | Before Phase 2, plan at least `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, and `d1_multi_day_exhaustion_reversion_v0` as non-level H4/D1 candidates. |
+| Non-level forcing candidate run | PASS | Ten non-level H4/D1/W1 candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 

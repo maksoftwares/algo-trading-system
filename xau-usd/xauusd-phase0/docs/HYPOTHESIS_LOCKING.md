@@ -31,3 +31,23 @@ Timeframe diversification is classified by the entry and decision cadence, not b
 Every candidate that enters the non-empty matrix ledger remains in future D2 Reality Check / SPA runs unless there is a documented data-quality reason to exclude it.
 
 If the non-empty matrix-ledger candidate universe reaches 30 candidates, Phase 2 authorization requires Reality Check / SPA to clear alpha = 0.01 instead of alpha = 0.10. This avoids letting a growing candidate universe weaken the statistical evidence chain.
+
+## Forward Concentration Gates
+
+The frequency-normalized concentration audit is review context, not a rescue path for rejected candidates. For any future low-frequency hypothesis, the concentration requirement is pre-registered as:
+
+- pass the existing absolute Phase 0 concentration gates
+- normalized top-trade R ratio must be <= 1.00
+- normalized top-5-trade R ratio must be <= 2.50
+
+A future low-frequency candidate that fails either the absolute gate or the normalized gate must not proceed to Gate 9.
+
+## Forward Cross-Venue Robustness Gate
+
+For any future candidate, cross-venue robustness must be checked before Gate 9:
+
+- the simple average PF across Pepperstone and Dukascopy matrix cells must be >= 1.20
+- this average excludes Capital.com cells
+- this average uses all available cost cells for those two venues
+
+This rule prevents a Capital.com-dominated candidate from being approved when the other broker windows do not corroborate the behavior.

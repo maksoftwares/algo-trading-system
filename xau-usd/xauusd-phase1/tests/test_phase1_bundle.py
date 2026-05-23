@@ -153,6 +153,19 @@ def _write_phase0_cost_artifacts(project: Path) -> None:
         "# Independent validation\n\nCanonical fixed-notional monthly R evidence; compounding variants are superseded.\n",
         encoding="utf-8",
     )
+    (docs / "DIVERSIFICATION_AVAILABILITY_FINDING.md").write_text(
+        "# Diversification\n\nnon-level candidates tested. single-edge same-family operating frame.\n",
+        encoding="utf-8",
+    )
+    (docs / "HYPOTHESIS_LOCKING.md").write_text(
+        (
+            "# Locking\n\n"
+            "normalized top-trade R ratio\n\n"
+            "normalized top-5-trade R ratio\n\n"
+            "Pepperstone and Dukascopy cross-venue PF must be >= 1.20\n"
+        ),
+        encoding="utf-8",
+    )
     (docs / "CANDIDATE_RESEARCH_BACKLOG.md").write_text(
         "\n".join(
             [

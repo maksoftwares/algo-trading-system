@@ -1,8 +1,8 @@
 # Phase 2 Single-Edge Risk Plan
 
-Last updated: 2026-05-23
+Last updated: 2026-05-24
 
-This plan reflects Review #3: `swing_breakout_retest_v0` is same-family with `breakout_retest`, so the v1 portfolio is a single-edge breakout-retest family with two timeframe flavors. It must not be treated as diversified.
+This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and ten non-level H4/D1/W1 diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
 
 ## Approved Edge Family
 
@@ -10,6 +10,7 @@ This plan reflects Review #3: `swing_breakout_retest_v0` is same-family with `br
 | --- | --- | --- |
 | `breakout_retest` | Approved future expert | Primary expression of the breakout-retest family. |
 | `swing_breakout_retest_v0` | Approved future expert candidate | Same-family variant; useful for telemetry, not independent diversification. |
+| `symbol_normalized_round_retest_v0` | Approved future expert candidate | Same-family variant; useful for telemetry, not independent diversification. |
 
 Rejected experts and rejected research candidates remain rejected unless a new versioned hypothesis is written, hash-locked, and rerun through Phase 0.
 
@@ -21,11 +22,13 @@ Phase 2 paper mode must begin with exactly one execution-eligible stream:
 | --- | --- |
 | `breakout_retest` | Execution-eligible paper stream after all readiness gates pass. |
 | `swing_breakout_retest_v0` | observer-only telemetry. |
+| `symbol_normalized_round_retest_v0` | observer-only telemetry. |
 | `round_number_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
-| `symbol_normalized_round_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
 | `session_extreme_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
 
 Same-family variants must not be counted as diversification and must not generate paper fills in the first Phase 2 slice.
+
+The supporting Phase 0 finding is documented in `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`.
 
 ## Capital Principle
 

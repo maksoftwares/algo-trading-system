@@ -20,6 +20,8 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Fixed-notional reporting | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md` status is PASS. |
 | D2 fixed-notional R-series canonicalization | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md` contains required Phase 2 controls. |
 | Frequency-normalized concentration audit | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` status is PASS. |
+| Diversification availability finding | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md` contains required Phase 2 controls. |
+| Forward hypothesis gates | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md` contains required Phase 2 controls. |
 | Non-level H4/D1 candidate plan | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\CANDIDATE_RESEARCH_BACKLOG.md` contains required Phase 2 controls. |
 | Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. |
 | Measured-cost revalidation | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS. |
@@ -28,7 +30,7 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 summary health | PASS | Core summary checks are PASS in `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`. |
 | Five trading day soak | PENDING | Progress 8.26%; observed 0.4132 of 5.00 required days. |
 | Active-market 72-hour soak | PENDING | Longest active streak 2.25h; current active streak 0.0h; required 72h; weekend policy weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 34.30h; code-freeze 0.00h; required 96h; marker missing. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 34.73h; code-freeze 0.00h; required 96h; marker missing. |
 | Latest dry-run boundary | PASS | bar_time=2026.05.22 20:55:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
 | Would-signal evidence | PASS | Rows: 10; clusters: 10. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |

@@ -135,6 +135,10 @@ def _is_good_soak_row(row: dict[str, str]) -> bool:
         return False
     if row.get("server_time_status", "") != "CLOCK_OK":
         return False
+    if row.get("session", "").upper() == "WEEKEND":
+        return False
+    if row.get("execution_state", "").upper() in {"MARKET_CLOSED", "STALE_TICK"}:
+        return False
     magic = row.get("magic_namespace_ok", "")
     return magic == "" or magic.lower() == "true"
 

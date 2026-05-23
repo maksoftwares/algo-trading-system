@@ -75,7 +75,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Current leading candidate: `breakout_retest`.
 - Current same-family approved future expert candidates: `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0`; neither resolves independent diversification risk.
 - Current provisional research candidates: `round_number_retest_v0` and `session_extreme_retest_v0`; both are same-family/level-and-pullback variants and still need Gate 9 manual adversarial review.
-- Latest independent-candidate search status: six H4/D1 attempts and one W1/D1 attempt have now been hash-registered, smoke-tested, matrix-tested, and rejected first-pass without tuning. No higher-timeframe independent candidate is approved.
+- Latest independent-candidate search status: ten non-level H4/D1/W1 attempts have now been hash-registered, smoke-tested, matrix-tested where data allowed, and rejected first-pass without tuning. No higher-timeframe independent candidate is approved.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
@@ -96,5 +96,7 @@ The latest reviewer feedback is tracked in:
 - `xau-usd/xauusd-phase1/docs/REPORTING_POLICY.md`
 - `xau-usd/xauusd-phase1/docs/WORKSPACE_OWNERSHIP.md`
 - `docs/REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`
+- `docs/REVIEW_07_REFLECTION_AND_ACTION_PLAN.md`
+- `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`
 
-Review #6 keeps Phase 1 dry-run and Phase 2 preparation moving, but Phase 2 implementation remains blocked until the five-day soak, active-market 72h gate, process/code-freeze 96h gate, measured cost evidence, measured-cost revalidation, and owner approval are all closed.
+Review #7 keeps Phase 1 dry-run and Phase 2 preparation moving, but Phase 2 implementation remains blocked until the five-day soak, active-market 72h gate, process/code-freeze 96h gate, measured cost evidence, measured-cost revalidation, VPS/owner decisions, and owner approval are all closed. It also codifies that the current approved candidates are one correlated breakout-retest family, not independent diversification.

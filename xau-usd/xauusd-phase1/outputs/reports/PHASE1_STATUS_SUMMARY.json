@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-23T19:51:44.757694+00:00",
+  "created_at_utc": "2026-05-23T20:17:27.724940+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -41,7 +41,7 @@
     "max_bar_gap_minutes": 15.0,
     "observed_days": 0.4132,
     "process_code_freeze_pass": false,
-    "process_uptime_streak_hours": 34.3,
+    "process_uptime_streak_hours": 34.73,
     "progress_pct": 8.26,
     "required_code_freeze_hours": 96.0,
     "required_days": 5,

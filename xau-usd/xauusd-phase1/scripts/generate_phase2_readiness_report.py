@@ -105,6 +105,16 @@ def generate_phase2_readiness_report(
             required="PASS",
         ),
         _file_contains_gate(
+            "Diversification availability finding",
+            _phase0_root(root) / "docs" / "DIVERSIFICATION_AVAILABILITY_FINDING.md",
+            ("non-level", "single-edge", "same-family"),
+        ),
+        _file_contains_gate(
+            "Forward hypothesis gates",
+            _phase0_root(root) / "docs" / "HYPOTHESIS_LOCKING.md",
+            ("normalized top-trade R ratio", "Pepperstone and Dukascopy", ">= 1.20"),
+        ),
+        _file_contains_gate(
             "Non-level H4/D1 candidate plan",
             _phase0_root(root) / "docs" / "CANDIDATE_RESEARCH_BACKLOG.md",
             (

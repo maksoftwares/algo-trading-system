@@ -17,10 +17,10 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Soak history ledger | WARN | History report has warnings: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md` |
 | Dry-run state | PASS | All decision rows are in dry-run state. |
 | Permission lock | PASS | All decision rows keep permission false. |
-| Runtime freshness | WARN | Latest row age is 453.3 minute(s); limit 15. |
+| Runtime freshness | WARN | Latest row age is 479.0 minute(s); limit 15. |
 | Latest runtime row | PASS | run_id=phase1-dry-run-v0.6; bar_time=2026.05.22 20:55:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/LONG; would_signal=false |
 | Active-market 72-hour soak | PENDING | Longest active streak: 2.25h; current active streak: 0.00h; required: 72h; last restart UTC: 2026-05-22T11:03:44Z; weekend policy: weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 34.30h; code-freeze hours: 0.00h; required: 96h; marker: missing; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 34.73h; code-freeze hours: 0.00h; required: 96h; marker: missing; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
 | Five trading day soak | PENDING | Observed unique-bar span: 0.41 calendar day(s), from 2026-05-22 11:00:00 to 2026-05-22 20:55:00. |
 
 ## Decision
