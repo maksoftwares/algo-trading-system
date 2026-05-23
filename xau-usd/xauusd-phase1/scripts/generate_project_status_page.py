@@ -95,6 +95,8 @@ def _render_html(
     accepted = [item for item in candidates if item.get("decision_scope") == "APPROVED_OR_ACTIVE"]
     rejected = [item for item in candidates if item.get("decision_scope") != "APPROVED_OR_ACTIVE"]
     next_items = _next_actions(phase1_status, phase2_status, measured_cost)
+    soak_progress = _to_float(soak.get("progress_pct")) or 0.0
+    cost_consumption = _to_float(fixed_notional.get("Cost %")) or 0.0
 
     return "\n".join(
         [
@@ -109,87 +111,81 @@ def _render_html(
             "  </style>",
             "</head>",
             "<body>",
-            '  <main class="shell">',
-            '    <section class="topbar">',
-            "      <div>",
-            '        <p class="eyebrow">Algo Trading System</p>',
-            "        <h1>Project Status Dashboard</h1>",
-            f'        <p class="subtle">Generated { _esc(generated_at) } from local repo artifacts. Open this file any time: <code>{ _esc(str(repo_root / DEFAULT_OUTPUT)) }</code></p>',
-            "      </div>",
-            f'      <div class="badge { _status_class(phase2_status) }">Phase 2 { _esc(phase2_status) }</div>',
-            "    </section>",
+            '  <div class="app-shell">',
+            _sidebar(
+                generated_at=generated_at,
+                repo_root=repo_root,
+                phase0_status=phase0_status,
+                phase1_status=phase1_status,
+                phase2_status=phase2_status,
+                measured_status=measured_cost.get("status", "UNKNOWN"),
+            ),
+            '    <main class="workspace">',
+            '      <section class="command-bar">',
+            "        <div>",
+            '          <p class="eyebrow">XAUUSD Program</p>',
+            "          <h1>Mission Control</h1>",
+            f'          <p class="subtle">Generated { _esc(generated_at) } from local artifacts.</p>',
+            "        </div>",
+            '        <div class="status-stack">',
+            _status_pill("Dry run", _cell(latest.get("dry_run"))),
+            _status_pill("Permission", _cell(latest.get("trade_permission"))),
+            _status_pill("Server", _cell(latest.get("server_time_status"))),
+            "        </div>",
+            "      </section>",
             "",
-            '    <section class="cards">',
-            _metric_card(
-                "Phase 0",
-                phase0_status,
-                "Final research verdict",
-                "xau-usd/xauusd-phase0/outputs/reports/PHASE0_VERDICT.md",
+            _kpi_grid(
+                accepted_count=len(accepted),
+                rejected_count=len(rejected),
+                soak=soak,
+                soak_progress=soak_progress,
+                fixed_notional=fixed_notional,
+                cost_consumption=cost_consumption,
+                measured_cost=measured_cost,
+                runtime=runtime,
+                would_signal=would_signal,
             ),
-            _metric_card(
-                "Phase 1",
-                phase1_status,
-                "Dry-run shell acceptance",
-                "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md",
-            ),
-            _metric_card(
-                "Phase 2",
-                phase2_status,
-                "Paper-mode readiness",
-                "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md",
-            ),
-            _metric_card(
-                "Soak",
-                f"{_cell(soak.get('progress_pct'))}%",
-                f"{_cell(soak.get('observed_days'))} of {_cell(soak.get('required_days'))} days",
-                "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json",
-            ),
-            _metric_card(
-                "Candidates",
-                f"{len(accepted)} accepted / {len(rejected)} rejected",
-                "Includes same-family approved candidates",
-                "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv",
-            ),
-            _metric_card(
-                "Cost Model",
-                measured_cost.get("status", "UNKNOWN"),
-                f"{measured_cost.get('observed_rows', 'n/a')} rows, {measured_cost.get('observed_days', 'n/a')} observed days",
-                "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md",
-            ),
-            "    </section>",
             "",
-            '    <section class="grid two">',
+            '      <section class="grid focus-grid">',
             _panel(
-                "Runtime",
+                "Milestone Rail",
+                _timeline(phase0_status, phase1_status, phase2_status, status_fields, measured_cost),
+            ),
+            _panel(
+                "Runtime Boundary",
                 _runtime_table(status_fields, latest, runtime, would_signal),
             ),
             _panel(
-                "Breakout-Retest Cost Baseline",
+                "Cost Lens",
                 _cost_table(fixed_notional, measured_cost),
             ),
-            "    </section>",
+            "      </section>",
             "",
-            '    <section class="panel">',
-            "      <div class=\"panel-head\">",
-            "        <h2>Milestones</h2>",
-            "        <span>Current go/no-go surface</span>",
-            "      </div>",
-            _milestone_table(phase0_status, phase1_status, phase2_status, status_fields, measured_cost),
-            "    </section>",
-            "",
-            '    <section class="panel">',
-            "      <div class=\"panel-head\">",
-            "        <h2>Expert Candidates</h2>",
-            "        <span>Accepted, rejected, and why</span>",
-            "      </div>",
+            '      <section class="panel candidates-panel">',
+            '        <div class="panel-head candidates-head">',
+            "          <div>",
+            "            <h2>EA Candidate Bench</h2>",
+            f'            <span>{len(accepted)} accepted, {len(rejected)} rejected</span>',
+            "          </div>",
+            '          <div class="table-tools">',
+            '            <input id="candidateSearch" type="search" placeholder="Search experts">',
+            '            <div class="segments" role="group" aria-label="Candidate filter">',
+            '              <button class="seg active" type="button" data-filter="all">All</button>',
+            '              <button class="seg" type="button" data-filter="accepted">Accepted</button>',
+            '              <button class="seg" type="button" data-filter="rejected">Rejected</button>',
+            "            </div>",
+            "          </div>",
+            "        </div>",
             _candidate_table(candidates),
-            "    </section>",
+            "      </section>",
             "",
-            '    <section class="grid two">',
+            '      <section class="grid lower-grid">',
             _panel("Open Work", _list(next_items)),
             _panel("Primary Artifacts", _artifact_links()),
-            "    </section>",
-            "  </main>",
+            "      </section>",
+            "    </main>",
+            "  </div>",
+            _dashboard_script(),
             "</body>",
             "</html>",
         ]
@@ -200,69 +196,402 @@ def _css() -> str:
     return """
 :root {
   color-scheme: light;
-  --bg: #f6f8fb;
-  --panel: #ffffff;
-  --text: #1d2433;
-  --muted: #657084;
-  --line: #d9e1ec;
-  --green: #18794e;
-  --green-bg: #e9f7ef;
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --ink: #111827;
+  --muted: #64748b;
+  --line: #d8dee8;
+  --line-strong: #b8c2d0;
+  --green: #147a4a;
+  --green-bg: #e7f6ee;
   --red: #b42318;
-  --red-bg: #fff0ed;
-  --yellow: #946200;
-  --yellow-bg: #fff7db;
+  --red-bg: #fff1ee;
+  --amber: #936000;
+  --amber-bg: #fff4cf;
   --blue: #2454a6;
-  --blue-bg: #edf4ff;
+  --blue-bg: #eaf2ff;
+  --violet: #6842a0;
+  --violet-bg: #f3edff;
+  --teal: #0f766e;
+  --teal-bg: #e6f6f4;
   --gray-bg: #eef2f7;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--text); }
-.shell { width: min(1480px, calc(100vw - 32px)); margin: 0 auto; padding: 28px 0 44px; }
-.topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
-.eyebrow { margin: 0 0 4px; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 12px; }
-h1 { margin: 0; font-size: 34px; line-height: 1.1; letter-spacing: 0; }
-h2 { margin: 0; font-size: 18px; letter-spacing: 0; }
-.subtle { margin: 10px 0 0; color: var(--muted); line-height: 1.5; }
-code { background: var(--gray-bg); padding: 2px 6px; border-radius: 5px; font-size: 13px; overflow-wrap: anywhere; }
-.cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
-.card, .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 1px 2px rgba(22, 34, 51, 0.04); }
-.card { padding: 14px; min-height: 126px; display: flex; flex-direction: column; justify-content: space-between; }
-.label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
-.value { font-size: 22px; font-weight: 760; margin: 10px 0 6px; overflow-wrap: anywhere; }
-.note { color: var(--muted); font-size: 13px; line-height: 1.35; }
+body { margin: 0; background: var(--bg); color: var(--ink); }
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
-.badge, .pill { display: inline-flex; align-items: center; min-height: 28px; padding: 5px 9px; border-radius: 999px; font-size: 12px; font-weight: 760; white-space: nowrap; }
-.pass { color: var(--green); background: var(--green-bg); }
-.fail { color: var(--red); background: var(--red-bg); }
-.pending, .warn { color: var(--yellow); background: var(--yellow-bg); }
-.unknown { color: var(--muted); background: var(--gray-bg); }
+code { background: var(--gray-bg); padding: 2px 6px; border-radius: 5px; font-size: 12px; overflow-wrap: anywhere; }
+.app-shell {
+  display: grid;
+  grid-template-columns: 276px minmax(0, 1fr);
+  min-height: 100vh;
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 24px 18px;
+  background: #172033;
+  color: #edf2f7;
+  border-right: 1px solid #0f172a;
+  overflow-y: auto;
+}
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f8c14a;
+  color: #172033;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.brand-title { font-size: 14px; font-weight: 780; }
+.brand-subtitle { color: #aab7ca; font-size: 12px; margin-top: 2px; }
+.rail-label { color: #9fb0c6; font-size: 11px; font-weight: 760; text-transform: uppercase; margin: 22px 0 9px; }
+.rail { display: grid; gap: 8px; }
+.rail-item {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+}
+.rail-dot { width: 10px; height: 10px; border-radius: 50%; background: #94a3b8; }
+.rail-item.pass .rail-dot { background: #32c48d; }
+.rail-item.fail .rail-dot { background: #ff7b6e; }
+.rail-item.pending .rail-dot, .rail-item.warn .rail-dot { background: #f6c453; }
+.rail-name { font-size: 13px; font-weight: 680; overflow-wrap: anywhere; }
+.rail-status { color: #d5deeb; font-size: 11px; font-weight: 760; }
+.sidebar-path { color: #aab7ca; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+.workspace { min-width: 0; padding: 22px 24px 40px; }
+.command-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0 16px;
+}
+.eyebrow { margin: 0 0 5px; color: var(--teal); font-weight: 800; text-transform: uppercase; font-size: 12px; }
+h1 { margin: 0; font-size: 32px; line-height: 1.05; letter-spacing: 0; }
+h2 { margin: 0; font-size: 17px; letter-spacing: 0; }
+.subtle { margin: 8px 0 0; color: var(--muted); line-height: 1.45; }
+.status-stack { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.badge, .pill { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.status-chip { display: inline-flex; gap: 6px; align-items: center; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 12px; font-weight: 760; }
+.status-chip span:first-child { color: var(--muted); font-weight: 700; }
+.pill.pass, .badge.pass { color: var(--green); background: var(--green-bg); }
+.pill.fail, .badge.fail { color: var(--red); background: var(--red-bg); }
+.pill.pending, .badge.pending, .pill.warn, .badge.warn { color: var(--amber); background: var(--amber-bg); }
+.pill.unknown, .badge.unknown { color: var(--muted); background: var(--gray-bg); }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 140px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+}
+.kpi-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.kpi-label { color: var(--muted); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+.kpi-value { font-size: 28px; font-weight: 840; line-height: 1.05; overflow-wrap: anywhere; }
+.kpi-note { color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 8px; }
+.progress { height: 9px; border-radius: 999px; background: #e7ebf1; overflow: hidden; margin-top: 12px; }
+.progress span { display: block; height: 100%; width: var(--value); border-radius: inherit; background: var(--blue); }
+.progress.cost span { background: var(--amber); }
 .grid { display: grid; gap: 12px; margin-bottom: 12px; }
-.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.panel { padding: 16px; overflow: hidden; }
+.focus-grid { grid-template-columns: minmax(320px, 1.2fr) minmax(300px, 0.9fr) minmax(300px, 0.9fr); align-items: start; }
+.lower-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 15px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+}
 .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .panel-head span { color: var(--muted); font-size: 13px; }
+.timeline { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.timeline li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: start;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.step-num {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--gray-bg);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 820;
+}
+.timeline .name { font-size: 13px; font-weight: 780; }
+.timeline .detail { margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.candidates-panel { padding-bottom: 6px; }
+.candidates-head { align-items: center; }
+.table-tools { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+input[type="search"] {
+  width: 220px;
+  min-height: 34px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--ink);
+  background: #fff;
+}
+.segments { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: #fff; }
+.seg {
+  min-height: 34px;
+  border: 0;
+  border-right: 1px solid var(--line-strong);
+  padding: 7px 11px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 760;
+  cursor: pointer;
+}
+.seg:last-child { border-right: 0; }
+.seg.active { background: var(--blue-bg); color: var(--blue); }
 .table-wrap { width: 100%; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th, td { text-align: left; padding: 10px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0; background: #fafcff; }
+th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0; background: #f8fafc; position: sticky; top: 0; z-index: 1; }
 tr:last-child td { border-bottom: 0; }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
-.tight td { padding: 8px 9px; }
-.list { margin: 0; padding-left: 18px; line-height: 1.7; color: var(--text); }
+.kv table td:first-child { color: var(--muted); font-weight: 700; width: 46%; }
+.list { margin: 0; padding-left: 18px; line-height: 1.7; color: var(--ink); }
 .muted { color: var(--muted); }
-@media (max-width: 1150px) {
-  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .two { grid-template-columns: 1fr; }
+@media (max-width: 1280px) {
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .focus-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 920px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  .workspace { padding: 16px; }
+  .lower-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
-  .shell { width: min(100vw - 20px, 1480px); padding-top: 18px; }
-  .topbar { flex-direction: column; }
-  .cards { grid-template-columns: 1fr; }
-  h1 { font-size: 28px; }
-  .value { font-size: 20px; }
+  .command-bar { flex-direction: column; }
+  .status-stack { justify-content: flex-start; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .candidates-head { align-items: stretch; flex-direction: column; }
+  .table-tools { justify-content: stretch; }
+  input[type="search"], .segments { width: 100%; }
+  .seg { flex: 1; }
+  h1 { font-size: 26px; }
 }
+"""
+
+
+def _sidebar(
+    generated_at: str,
+    repo_root: Path,
+    phase0_status: str,
+    phase1_status: str,
+    phase2_status: str,
+    measured_status: str,
+) -> str:
+    items = (
+        ("Phase 0", phase0_status),
+        ("Phase 1", phase1_status),
+        ("Measured Cost", measured_status),
+        ("Phase 2", phase2_status),
+    )
+    rail = "\n".join(
+        [
+            f'        <div class="rail-item {_status_class(status)}">'
+            f'<span class="rail-dot"></span><span class="rail-name">{_esc(name)}</span>'
+            f'<span class="rail-status">{_esc(status)}</span></div>'
+            for name, status in items
+        ]
+    )
+    return "\n".join(
+        [
+            '    <aside class="sidebar">',
+            '      <div class="brand">',
+            '        <div class="brand-mark">AT</div>',
+            "        <div>",
+            '          <div class="brand-title">Algo Trading System</div>',
+            '          <div class="brand-subtitle">XAUUSD evidence dashboard</div>',
+            "        </div>",
+            "      </div>",
+            '      <div class="rail-label">Status rail</div>',
+            '      <div class="rail">',
+            rail,
+            "      </div>",
+            '      <div class="rail-label">Updated</div>',
+            f'      <div class="sidebar-path">{_esc(generated_at)}</div>',
+            '      <div class="rail-label">Local file</div>',
+            f'      <div class="sidebar-path">{_esc(str(repo_root / DEFAULT_OUTPUT))}</div>',
+            "    </aside>",
+        ]
+    )
+
+
+def _status_pill(label: str, value: str) -> str:
+    display = value if value else "n/a"
+    class_value = display
+    normalized = display.strip().lower()
+    if label == "Dry run" and normalized == "true":
+        class_value = "PASS"
+    elif label == "Permission" and normalized == "false":
+        class_value = "PASS"
+    elif label == "Server" and display.upper() == "CLOCK_OK":
+        class_value = "PASS"
+    return (
+        f'<div class="status-chip"><span>{_esc(label)}</span>'
+        f'<strong class="{_status_class(class_value)} pill">{_esc(display)}</strong></div>'
+    )
+
+
+def _kpi_grid(
+    accepted_count: int,
+    rejected_count: int,
+    soak: dict[str, Any],
+    soak_progress: float,
+    fixed_notional: dict[str, str],
+    cost_consumption: float,
+    measured_cost: dict[str, str],
+    runtime: dict[str, Any],
+    would_signal: dict[str, Any],
+) -> str:
+    return "\n".join(
+        [
+            '      <section class="kpi-grid">',
+            _kpi(
+                label="Soak progress",
+                value=f"{_fmt_float(soak_progress)}%",
+                status="PASS" if soak_progress >= 100.0 else "PENDING",
+                note=f"{_cell(soak.get('observed_days'))} of {_cell(soak.get('required_days'))} trading days",
+                bar=_progress_bar(soak_progress, "soak"),
+            ),
+            _kpi(
+                label="Modeled cost load",
+                value=f"{_fmt_float(cost_consumption)}%",
+                status=fixed_notional.get("Flag", ""),
+                note=f"Net { _r_value(fixed_notional.get('Avg R')) }, cost { _r_value(fixed_notional.get('Cost R')) }",
+                bar=_progress_bar(cost_consumption, "cost"),
+            ),
+            _kpi(
+                label="EA bench",
+                value=f"{accepted_count} / {rejected_count}",
+                status="ACTIVE",
+                note="accepted / rejected candidates",
+                bar="",
+            ),
+            _kpi(
+                label="Runtime evidence",
+                value=_cell(runtime.get("decision_rows")),
+                status="PASS",
+                note=f"{_cell(would_signal.get('clusters'))} would-signal clusters",
+                bar="",
+            ),
+            "      </section>",
+        ]
+    )
+
+
+def _kpi(label: str, value: str, status: str, note: str, bar: str) -> str:
+    return "\n".join(
+        [
+            '        <article class="kpi">',
+            '          <div class="kpi-top">',
+            f'            <div class="kpi-label">{_esc(label)}</div>',
+            f'            <span class="pill {_status_class(status)}">{_esc(status or "tracked")}</span>',
+            "          </div>",
+            f'          <div class="kpi-value">{_esc(value)}</div>',
+            f'          <div class="kpi-note">{_esc(note)}</div>',
+            f"          {bar}" if bar else "",
+            "        </article>",
+        ]
+    )
+
+
+def _progress_bar(value: float, kind: str) -> str:
+    bounded = max(0.0, min(100.0, value))
+    return f'<div class="progress {kind}"><span style="--value: {bounded:.2f}%"></span></div>'
+
+
+def _timeline(
+    phase0_status: str,
+    phase1_status: str,
+    phase2_status: str,
+    status_fields: dict[str, Any],
+    measured_cost: dict[str, str],
+) -> str:
+    rows = [
+        ("Phase 0", phase0_status, "Research closure and final expert verdict"),
+        ("Validation D1-D4", "PASS", "CPCV, Reality Check, holdout, reproduction"),
+        ("Dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 runtime boundary and observer telemetry"),
+        ("Five-day soak", phase1_status, "Wall-clock dry-run evidence"),
+        ("Measured cost", measured_cost.get("status", "UNKNOWN"), "Passive spread evidence and revalidation"),
+        ("Phase 2 paper", phase2_status, "Paper-mode readiness and owner approval"),
+    ]
+    items = []
+    for index, (name, status, detail) in enumerate(rows, start=1):
+        items.append(
+            "\n".join(
+                [
+                    f'        <li class="{_status_class(status)}">',
+                    f'          <span class="step-num">{index}</span>',
+                    "          <div>",
+                    f'            <div class="name">{_esc(name)}</div>',
+                    f'            <div class="detail">{_esc(detail)}</div>',
+                    "          </div>",
+                    f'          <span class="pill {_status_class(status)}">{_esc(status)}</span>',
+                    "        </li>",
+                ]
+            )
+        )
+    return '<ol class="timeline">\n' + "\n".join(items) + "\n      </ol>"
+
+
+def _dashboard_script() -> str:
+    return """
+  <script>
+    const search = document.getElementById("candidateSearch");
+    const buttons = Array.from(document.querySelectorAll("[data-filter]"));
+    const rows = Array.from(document.querySelectorAll("[data-candidate-row]"));
+    let activeFilter = "all";
+
+    function applyCandidateFilter() {
+      const query = (search?.value || "").toLowerCase().trim();
+      rows.forEach((row) => {
+        const status = row.dataset.status;
+        const haystack = row.dataset.search || "";
+        const statusMatch = activeFilter === "all" || status === activeFilter;
+        const queryMatch = !query || haystack.includes(query);
+        row.hidden = !(statusMatch && queryMatch);
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        buttons.forEach((item) => item.classList.toggle("active", item === button));
+        applyCandidateFilter();
+      });
+    });
+
+    search?.addEventListener("input", applyCandidateFilter);
+  </script>
 """
 
 
@@ -363,29 +692,42 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
         candidates,
         key=lambda item: (0 if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else 1, item.get("candidate", "")),
     )
-    rows = []
+    columns = ("Expert", "Status", "Diagnosis", "Cells", "PF Cells", "Trades", "Median Cell Trades", "Failed Gates")
+    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    body = []
     for item in sorted_candidates:
         status = "ACCEPTED" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "REJECTED"
         if item.get("candidate") == "swing_breakout_retest_v0":
             status = "ACCEPTED SAME-FAMILY"
-        rows.append(
-            {
-                "Expert": _esc(item.get("candidate", "")),
-                "Status": f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
-                "Diagnosis": _esc(item.get("frequency_bias_diagnosis", "")),
-                "Cells": _esc(item.get("complete_cells", "")),
-                "PF Cells": _esc(item.get("pf_passing_cells", "")),
-                "Trades": _esc(item.get("total_trades", "")),
-                "Median Cell Trades": _esc(item.get("median_cell_trades", "")),
-                "Failed Gates": _esc(item.get("failed_gates", "")),
-            }
+        filter_status = "accepted" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "rejected"
+        search_text = " ".join(
+            (
+                item.get("candidate", ""),
+                status,
+                item.get("frequency_bias_diagnosis", ""),
+                item.get("failed_gates", ""),
+            )
+        ).lower()
+        cells = [
+            _esc(item.get("candidate", "")),
+            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _esc(item.get("frequency_bias_diagnosis", "")),
+            _esc(item.get("complete_cells", "")),
+            _esc(item.get("pf_passing_cells", "")),
+            _esc(item.get("total_trades", "")),
+            _esc(item.get("median_cell_trades", "")),
+            _esc(item.get("failed_gates", "")),
+        ]
+        numeric_indexes = {3, 4, 5, 6}
+        table_cells = []
+        for index, value in enumerate(cells):
+            cell_class = ' class="num"' if index in numeric_indexes else ""
+            table_cells.append(f"<td{cell_class}>{value}</td>")
+        tds = "".join(table_cells)
+        body.append(
+            f'<tr data-candidate-row data-status="{filter_status}" data-search="{_esc(search_text)}">{tds}</tr>'
         )
-    return _html_table(
-        rows,
-        ("Expert", "Status", "Diagnosis", "Cells", "PF Cells", "Trades", "Median Cell Trades", "Failed Gates"),
-        raw_columns={"Status"},
-        numeric_columns={"Cells", "PF Cells", "Trades", "Median Cell Trades"},
-    )
+    return '<div class="table-wrap candidate-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
 
 
 def _artifact_links() -> str:
@@ -417,7 +759,7 @@ def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[st
 
 def _key_value_table(rows: list[tuple[str, str]]) -> str:
     table_rows = [{"Metric": _esc(key), "Value": _esc(value)} for key, value in rows]
-    return _html_table(table_rows, ("Metric", "Value"))
+    return '<div class="kv">' + _html_table(table_rows, ("Metric", "Value")) + "</div>"
 
 
 def _html_table(
@@ -529,13 +871,28 @@ def _link(path: str) -> str:
 
 def _status_class(value: str) -> str:
     upper = value.upper()
-    if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper:
+    if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper or "GREEN" in upper:
         return "pass"
     if "FAIL" in upper or "REJECTED" in upper or "BLOCKED" in upper:
         return "fail"
     if "PENDING" in upper or "WARN" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:
         return "pending"
     return "unknown"
+
+
+def _to_float(value: Any) -> float | None:
+    if value is None:
+        return None
+    try:
+        return float(str(value).strip().rstrip("%"))
+    except ValueError:
+        return None
+
+
+def _fmt_float(value: float) -> str:
+    if abs(value - round(value)) < 0.005:
+        return str(int(round(value)))
+    return f"{value:.2f}".rstrip("0").rstrip(".")
 
 
 def _pct(value: str | None) -> str:

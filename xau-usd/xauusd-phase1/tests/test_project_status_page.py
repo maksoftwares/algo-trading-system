@@ -34,10 +34,11 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert output.candidate_count == 2
     assert output.accepted_count == 1
     assert output.rejected_count == 1
-    assert "Project Status Dashboard" in html
+    assert "Mission Control" in html
     assert "breakout_retest" in html
     assert "trend_pullback" in html
-    assert "Phase 1 five-day soak" in html
+    assert "Five-day soak" in html
+    assert "candidateSearch" in html
     assert "Cost edge consumption" in html
 
 
