@@ -55,6 +55,9 @@ Expected path:
 | 34 | `h4_d1_momentum_expansion_continuation_v0` | REJECTED_FIRST_PASS | Fifth true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, all in Dukascopy, concentration failed; do not tune v0. |
 | 35 | `h4_inside_bar_d1_momentum_breakout_v0` | REJECTED_FIRST_PASS | Sixth H4/D1 decision-timing candidate; 2/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
 | 36 | `w1_d1_momentum_continuation_v0` | REJECTED_FIRST_PASS | First W1/D1-scale candidate; 3/9 PF cells reached 1.30, all cells positive, but concentration failed; do not tune v0. |
+| 37 | `weekly_open_reversion_v0` | REJECTED_FIRST_PASS | Weekly-open mean-reversion candidate; trade count passed, but 0/9 PF cells reached 1.30 and early broker/windows were negative; do not tune v0. |
+| 38 | `d1_inside_day_breakout_v0` | REJECTED_FIRST_PASS | D1 inside-day compression breakout; 3/9 PF cells reached 1.30 and only 3/9 cells had at least 40 trades; do not tune v0. |
+| 39 | `d1_outside_day_followthrough_v0` | REJECTED_FIRST_PASS | D1 outside-day follow-through; 0/9 PF cells reached 1.30 and 0/9 cells had at least 40 trades; do not tune v0. |
 
 ## Discipline
 
@@ -77,6 +80,9 @@ Expected path:
 - Latest H4/D1 diversification result: `h4_d1_momentum_expansion_continuation_v0` was rejected first-pass. It produced 81-83 trades per cell and 3/9 PF cells >= 1.30, but strength was Dukascopy-only and concentration failed.
 - Latest H4/D1 breakout result: `h4_inside_bar_d1_momentum_breakout_v0` was rejected first-pass. It produced 71-100 trades per cell and 2/9 PF cells >= 1.30, with small positive returns but inadequate cross-venue strength and failed concentration.
 - Latest W1/D1 result: `w1_d1_momentum_continuation_v0` was rejected first-pass. It produced 48-68 trades per cell and 3/9 PF cells >= 1.30; all cells were positive, but concentration failed and cross-venue PF strength was insufficient.
+- Latest independent weekly-reference result: `weekly_open_reversion_v0` was rejected first-pass. It produced 197-220 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Latest independent D1 compression breakout result: `d1_inside_day_breakout_v0` was rejected first-pass. It produced 11-41 trades per cell, only 3/9 cells reached PF >= 1.30, and only 3/9 cells met the minimum trade-count gate; do not tune v0.
+- Latest independent D1 outside-day follow-through result: `d1_outside_day_followthrough_v0` was rejected first-pass. It produced 22-33 trades per cell, 0/9 cells reached PF >= 1.30, and 0/9 cells met the minimum trade-count gate; do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.

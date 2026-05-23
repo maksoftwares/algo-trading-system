@@ -9,8 +9,10 @@ from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
 from phase0.strategies.compression_retest_continuation_v0 import CompressionRetestContinuationV0Strategy
 from phase0.strategies.d1_compression_h4_expansion_v0 import D1CompressionH4ExpansionV0Strategy
+from phase0.strategies.d1_inside_day_breakout_v0 import D1InsideDayBreakoutV0Strategy
 from phase0.strategies.d1_momentum_h4_pullback_v0 import D1MomentumH4PullbackV0Strategy
 from phase0.strategies.d1_multi_day_exhaustion_reversion_v0 import D1MultiDayExhaustionReversionV0Strategy
+from phase0.strategies.d1_outside_day_followthrough_v0 import D1OutsideDayFollowthroughV0Strategy
 from phase0.strategies.d1_volatility_expansion_reversal_v0 import D1VolatilityExpansionReversalV0Strategy
 from phase0.strategies.daily_pivot_reclaim_v0 import DailyPivotReclaimV0Strategy
 from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
@@ -45,6 +47,7 @@ from phase0.strategies.symbol_round_sweep_reversal_v0 import SymbolRoundSweepRev
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
 from phase0.strategies.w1_d1_momentum_continuation_v0 import W1D1MomentumContinuationV0Strategy
 from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
+from phase0.strategies.weekly_open_reversion_v0 import WeeklyOpenReversionV0Strategy
 
 
 STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
@@ -58,8 +61,10 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     AsiaRangeLondonFailedBreakReversalV0Strategy.name: AsiaRangeLondonFailedBreakReversalV0Strategy,
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
     D1CompressionH4ExpansionV0Strategy.name: D1CompressionH4ExpansionV0Strategy,
+    D1InsideDayBreakoutV0Strategy.name: D1InsideDayBreakoutV0Strategy,
     D1MomentumH4PullbackV0Strategy.name: D1MomentumH4PullbackV0Strategy,
     D1MultiDayExhaustionReversionV0Strategy.name: D1MultiDayExhaustionReversionV0Strategy,
+    D1OutsideDayFollowthroughV0Strategy.name: D1OutsideDayFollowthroughV0Strategy,
     D1VolatilityExpansionReversalV0Strategy.name: D1VolatilityExpansionReversalV0Strategy,
     DailyPivotReclaimV0Strategy.name: DailyPivotReclaimV0Strategy,
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
@@ -86,6 +91,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     SymbolRoundSweepReversalV0Strategy.name: SymbolRoundSweepReversalV0Strategy,
     W1D1MomentumContinuationV0Strategy.name: W1D1MomentumContinuationV0Strategy,
     WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
+    WeeklyOpenReversionV0Strategy.name: WeeklyOpenReversionV0Strategy,
 }
 
 

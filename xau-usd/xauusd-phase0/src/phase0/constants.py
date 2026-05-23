@@ -13,8 +13,10 @@ RESEARCH_EXPERTS = (
     "asia_range_london_failed_break_reversal_v0",
     "compression_retest_continuation_v0",
     "d1_compression_h4_expansion_v0",
+    "d1_inside_day_breakout_v0",
     "d1_momentum_h4_pullback_v0",
     "d1_multi_day_exhaustion_reversion_v0",
+    "d1_outside_day_followthrough_v0",
     "d1_volatility_expansion_reversal_v0",
     "daily_pivot_reclaim_v0",
     "emr_inactivity_long_v0",
@@ -41,6 +43,7 @@ RESEARCH_EXPERTS = (
     "swing_breakout_retest_v0",
     "w1_d1_momentum_continuation_v0",
     "weekly_level_reclaim_v0",
+    "weekly_open_reversion_v0",
 )
 COST_MODELS = ("best_case", "median", "p95")
 BROKERS = ("capital_com", "pepperstone", "dukascopy")

@@ -12,10 +12,14 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _compression_retest_continuation_context()
     if expert == "d1_compression_h4_expansion_v0":
         return _d1_compression_h4_expansion_context()
+    if expert == "d1_inside_day_breakout_v0":
+        return _d1_inside_day_breakout_context()
     if expert == "d1_momentum_h4_pullback_v0":
         return _d1_momentum_h4_pullback_context()
     if expert == "d1_multi_day_exhaustion_reversion_v0":
         return _d1_multi_day_exhaustion_reversion_context()
+    if expert == "d1_outside_day_followthrough_v0":
+        return _d1_outside_day_followthrough_context()
     if expert == "d1_volatility_expansion_reversal_v0":
         return _d1_volatility_expansion_reversal_context()
     if expert == "daily_pivot_reclaim_v0":
@@ -74,6 +78,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _w1_d1_momentum_continuation_context()
     if expert == "weekly_level_reclaim_v0":
         return _weekly_level_reclaim_context()
+    if expert == "weekly_open_reversion_v0":
+        return _weekly_open_reversion_context()
     raise ValueError(f"Unknown synthetic expert {expert!r}.")
 
 
@@ -1727,3 +1733,106 @@ def _session_vwap_reclaim_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _weekly_open_reversion_context() -> dict:
+    m15_times = pd.date_range("2024-12-02T00:15:00Z", periods=180, freq="15min")
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "bar_start_utc": m15_times - pd.Timedelta(minutes=15),
+            "open": [100.0] * 180,
+            "high": [100.4] * 180,
+            "low": [99.6] * 180,
+            "close": [100.0] * 180,
+            "atr14": [1.0] * 180,
+        }
+    )
+    m15.loc[128, ["open", "high", "low", "close"]] = [96.0, 97.0, 95.0, 96.8]
+
+    m5_times = pd.date_range("2024-12-02T00:05:00Z", periods=540, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 540,
+            "high": [100.2] * 540,
+            "low": [99.8] * 540,
+            "close": [100.0] * 540,
+            "mid_open": [100.0] * 540,
+            "mid_close": [100.0] * 540,
+            "bid_open": [99.9] * 540,
+            "ask_open": [100.1] * 540,
+            "bid_close": [99.9] * 540,
+            "ask_close": [100.1] * 540,
+        }
+    )
+    return {"M5": m5, "M15": m15, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _d1_inside_day_breakout_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=30, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [100.0] * 30,
+            "high": [102.0] * 30,
+            "low": [98.0] * 30,
+            "close": [100.0] * 30,
+            "atr14": [5.0] * 30,
+        }
+    )
+    d1.loc[21, ["open", "high", "low", "close"]] = [100.0, 105.0, 95.0, 100.0]
+    d1.loc[22, ["open", "high", "low", "close"]] = [100.0, 103.0, 97.0, 100.0]
+
+    h4_times = pd.date_range("2024-01-17T12:00:00Z", periods=50, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * 50,
+            "high": [101.0] * 50,
+            "low": [99.0] * 50,
+            "close": [100.0] * 50,
+            "atr14": [2.0] * 50,
+        }
+    )
+    h4.loc[34, ["open", "high", "low", "close"]] = [103.5, 106.0, 103.0, 105.5]
+
+    m5 = _base_m5("2024-01-17T12:00:00Z", 240)
+    return {"M5": m5, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _d1_outside_day_followthrough_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=30, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [100.0] * 30,
+            "high": [102.0] * 30,
+            "low": [98.0] * 30,
+            "close": [100.0] * 30,
+            "atr14": [4.0] * 30,
+        }
+    )
+    d1.loc[21, ["open", "high", "low", "close"]] = [100.0, 103.0, 97.0, 100.0]
+    d1.loc[22, ["open", "high", "low", "close"]] = [99.0, 106.0, 96.0, 105.0]
+
+    h4_times = pd.date_range("2024-01-17T12:00:00Z", periods=50, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * 50,
+            "high": [101.0] * 50,
+            "low": [99.0] * 50,
+            "close": [100.0] * 50,
+            "atr14": [2.0] * 50,
+        }
+    )
+    h4.loc[34, ["open", "high", "low", "close"]] = [105.0, 107.0, 104.7, 106.2]
+
+    m5 = _base_m5("2024-01-17T12:00:00Z", 240)
+    return {"M5": m5, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
