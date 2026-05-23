@@ -20,6 +20,7 @@ Last updated: 2026-05-23
 - Keep all MT5 tools passive: file export, logging, or diagnostics only.
 - Phase 1 currently means dry-run shell only: telemetry, lifecycle, risk, router contracts, dashboard/logging work, and blocked reasons.
 - Prefer generated manifests, snapshots, and hashable artifacts over informal notes.
+- Always keep the root `status.html` dashboard up to date. After any status-affecting Phase 0, Phase 1, soak, cost, report, or candidate change, regenerate it directly or through `run_phase1_periodic_checks.py` before committing or pushing.
 - Do not push unless explicitly asked.
 
 ## Current State
