@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 2 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=LONG, entry_type=STOP, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "round_number_retest_v0",
+  "generated_at_utc": "2026-05-23T14:47:56+00:00",
+  "hypothesis_file": "docs\\hypothesis_round_number_retest_v0.md",
+  "hypothesis_sha256": "03b34ddfeb155a915d980ba6c960a567a918fe14280c1c10a21eb9b2d6dd13ab",
+  "latest_plan": {
+    "direction": "LONG",
+    "entry_price": 100.51,
+    "entry_type": "STOP",
+    "risk_reward": 1.5,
+    "stop_loss": 99.9,
+    "take_profit": 101.42500000000001
+  },
+  "latest_signal": {
+    "direction": "LONG",
+    "reason_code": "BREAKOUT_RETEST_LONG",
+    "timestamp_utc": "2016-01-05T11:55:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\round_number_retest_v0_research_smoke.md",
+  "signal_count": 2,
+  "status": "PASS"
+}

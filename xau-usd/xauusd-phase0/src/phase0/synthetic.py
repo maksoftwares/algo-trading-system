@@ -42,6 +42,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _post_spike_short_context()
     if expert == "previous_day_extreme_retest_v0":
         return _previous_day_extreme_retest_context()
+    if expert == "round_number_retest_v0":
+        return _round_number_retest_context()
     if expert == "session_vwap_reclaim_v0":
         return _session_vwap_reclaim_context()
     if expert == "squeeze_breakout_long_v0":
@@ -902,6 +904,21 @@ def _previous_day_extreme_retest_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _round_number_retest_context() -> dict:
+    context = _breakout_context()
+    m5 = context["M5"].copy()
+    m5["previous_daily_high"] = [pd.NA] * len(m5)
+    m5["previous_daily_low"] = [pd.NA] * len(m5)
+    m5["previous_weekly_high"] = [pd.NA] * len(m5)
+    m5["previous_weekly_low"] = [pd.NA] * len(m5)
+    m5["latest_swing_high"] = [pd.NA] * len(m5)
+    m5["latest_swing_high_time_utc"] = [pd.NaT] * len(m5)
+    m5["latest_swing_low"] = [pd.NA] * len(m5)
+    m5["latest_swing_low_time_utc"] = [pd.NaT] * len(m5)
+    context["M5"] = m5
+    return context
 
 
 def _ny_am_pullback_continuation_context() -> dict:

@@ -1,0 +1,10 @@
+path,trade_count,ambiguous_exit_trades,same_timestamp_exit_trades,adverse_first_profit_factor
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_1_round_number_retest_v0_capital_com_best_case_trades.csv,3837,18,0,1.48594
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_2_round_number_retest_v0_capital_com_median_trades.csv,3837,18,0,1.48594
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_3_round_number_retest_v0_capital_com_p95_trades.csv,3837,18,0,1.35122
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_4_round_number_retest_v0_pepperstone_best_case_trades.csv,5497,28,0,1.5596
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_5_round_number_retest_v0_pepperstone_median_trades.csv,5497,28,0,1.5596
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_6_round_number_retest_v0_pepperstone_p95_trades.csv,5497,28,0,1.47213
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_7_round_number_retest_v0_dukascopy_best_case_trades.csv,6462,20,0,1.46919
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_8_round_number_retest_v0_dukascopy_median_trades.csv,6462,20,0,1.46919
+C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase0/outputs/matrix_results/round_number_retest_v0/cell_9_round_number_retest_v0_dukascopy_p95_trades.csv,6462,20,0,1.42093

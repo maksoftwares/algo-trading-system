@@ -52,8 +52,8 @@ def generate_project_status_page(
     phase1_acceptance = _read_markdown_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md")
     phase2_readiness = _read_markdown_status(phase1_reports / "PHASE2_READINESS_REPORT.md")
 
-    accepted_count = sum(1 for item in candidates if item.get("decision_scope") == "APPROVED_OR_ACTIVE")
-    rejected_count = sum(1 for item in candidates if item.get("decision_scope") != "APPROVED_OR_ACTIVE")
+    accepted_count = sum(1 for item in candidates if _candidate_status(item).startswith("ACCEPTED"))
+    rejected_count = sum(1 for item in candidates if _candidate_status(item) == "REJECTED")
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,8 +99,9 @@ def _render_html(
     latest = _mapping(runtime.get("latest_row"))
     soak = _mapping(summary.get("soak"))
     would_signal = _mapping(summary.get("would_signal"))
-    accepted = [item for item in candidates if item.get("decision_scope") == "APPROVED_OR_ACTIVE"]
-    rejected = [item for item in candidates if item.get("decision_scope") != "APPROVED_OR_ACTIVE"]
+    accepted = [item for item in candidates if _candidate_status(item).startswith("ACCEPTED")]
+    pending = [item for item in candidates if _candidate_status(item) == "PROVISIONAL"]
+    rejected = [item for item in candidates if _candidate_status(item) == "REJECTED"]
     next_items = _next_actions(phase1_status, phase2_status, measured_cost)
     soak_progress = _to_float(soak.get("progress_pct")) or 0.0
     cost_consumption = _to_float(fixed_notional.get("Cost %")) or 0.0
@@ -143,6 +144,7 @@ def _render_html(
             "",
             _kpi_grid(
                 accepted_count=len(accepted),
+                pending_count=len(pending),
                 rejected_count=len(rejected),
                 soak=soak,
                 soak_progress=soak_progress,
@@ -172,13 +174,14 @@ def _render_html(
             '        <div class="panel-head candidates-head">',
             "          <div>",
             "            <h2>EA Candidate Bench</h2>",
-            f'            <span>{len(accepted)} accepted, {len(rejected)} rejected</span>',
+            f'            <span>{len(accepted)} accepted, {len(pending)} pending, {len(rejected)} rejected</span>',
             "          </div>",
             '          <div class="table-tools">',
             '            <input id="candidateSearch" type="search" placeholder="Search experts">',
             '            <div class="segments" role="group" aria-label="Candidate filter">',
             '              <button class="seg active" type="button" data-filter="all">All</button>',
             '              <button class="seg" type="button" data-filter="accepted">Accepted</button>',
+            '              <button class="seg" type="button" data-filter="pending">Pending</button>',
             '              <button class="seg" type="button" data-filter="rejected">Rejected</button>',
             "            </div>",
             "          </div>",
@@ -500,6 +503,7 @@ def _status_pill(label: str, value: str) -> str:
 
 def _kpi_grid(
     accepted_count: int,
+    pending_count: int,
     rejected_count: int,
     soak: dict[str, Any],
     soak_progress: float,
@@ -528,9 +532,9 @@ def _kpi_grid(
             ),
             _kpi(
                 label="EA bench",
-                value=f"{accepted_count} / {rejected_count}",
+                value=f"{accepted_count} / {pending_count} / {rejected_count}",
                 status="ACTIVE",
-                note="accepted / rejected candidates",
+                note="accepted / pending / rejected candidates",
                 bar="",
             ),
             _kpi(
@@ -743,16 +747,14 @@ def _milestone_table(
 def _candidate_table(candidates: list[dict[str, str]]) -> str:
     sorted_candidates = sorted(
         candidates,
-        key=lambda item: (0 if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else 1, item.get("candidate", "")),
+        key=lambda item: (_candidate_sort_rank(item), item.get("candidate", "")),
     )
     columns = ("Expert", "Status", "Diagnosis", "Cells", "PF Cells", "Trades", "Median Cell Trades", "Failed Gates")
     header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
     body = []
     for item in sorted_candidates:
-        status = "ACCEPTED" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "REJECTED"
-        if item.get("candidate") == "swing_breakout_retest_v0":
-            status = "ACCEPTED SAME-FAMILY"
-        filter_status = "accepted" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "rejected"
+        status = _candidate_status(item)
+        filter_status = _candidate_filter_status(status)
         search_text = " ".join(
             (
                 item.get("candidate", ""),
@@ -781,6 +783,36 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
             f'<tr data-candidate-row data-status="{filter_status}" data-search="{_esc(search_text)}">{tds}</tr>'
         )
     return '<div class="table-wrap candidate-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _candidate_status(item: dict[str, str]) -> str:
+    if item.get("decision_scope") == "APPROVED_OR_ACTIVE":
+        if item.get("candidate") == "swing_breakout_retest_v0":
+            return "ACCEPTED SAME-FAMILY"
+        return "ACCEPTED"
+    if (
+        item.get("frequency_bias_diagnosis") == "NON_MATRIX_REJECTION_OR_PENDING"
+        and item.get("failed_gates", "").strip().lower() == "none"
+    ):
+        return "PROVISIONAL"
+    return "REJECTED"
+
+
+def _candidate_filter_status(status: str) -> str:
+    if status.startswith("ACCEPTED"):
+        return "accepted"
+    if status == "PROVISIONAL":
+        return "pending"
+    return "rejected"
+
+
+def _candidate_sort_rank(item: dict[str, str]) -> int:
+    status = _candidate_status(item)
+    if status.startswith("ACCEPTED"):
+        return 0
+    if status == "PROVISIONAL":
+        return 1
+    return 2
 
 
 def _account_summary_table(rows: list[dict[str, Any]]) -> str:
@@ -895,7 +927,7 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
     matrix_root = phase0_root / "outputs" / "matrix_results"
     candidate_items = sorted(
         candidates,
-        key=lambda item: (0 if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else 1, item.get("candidate", "")),
+        key=lambda item: (_candidate_sort_rank(item), item.get("candidate", "")),
     )
     monthly_by_expert: dict[str, dict[str, dict[str, float]]] = {}
     summary_base: dict[str, dict[str, Any]] = {}
@@ -905,9 +937,7 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
         expert = item.get("candidate", "")
         if not expert:
             continue
-        status = "ACCEPTED" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "REJECTED"
-        if expert == "swing_breakout_retest_v0":
-            status = "ACCEPTED SAME-FAMILY"
+        status = _candidate_status(item)
         buckets: dict[str, dict[str, float]] = {}
         trades = 0
         wins = 0
@@ -1171,7 +1201,7 @@ def _status_class(value: str) -> str:
         return "pass"
     if "FAIL" in upper or "REJECTED" in upper or "BLOCKED" in upper:
         return "fail"
-    if "PENDING" in upper or "WARN" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:
+    if "PENDING" in upper or "PROVISIONAL" in upper or "WARN" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:
         return "pending"
     return "unknown"
 

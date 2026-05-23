@@ -26,6 +26,7 @@ from phase0.strategies.opening_drive_failed_continuation_v0 import (
 from phase0.strategies.post_spike_short_v0 import PostSpikeShortV0Strategy
 from phase0.strategies.previous_day_extreme_retest_v0 import PreviousDayExtremeRetestV0Strategy
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
+from phase0.strategies.round_number_retest_v0 import RoundNumberRetestV0Strategy
 from phase0.strategies.session_vwap_reclaim_v0 import SessionVwapReclaimV0Strategy
 from phase0.strategies.squeeze_breakout_long_v0 import SqueezeBreakoutLongV0Strategy
 from phase0.strategies.swing_breakout_retest_v0 import SwingBreakoutRetestV0Strategy
@@ -56,6 +57,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     OpeningDriveFailedContinuationV0Strategy.name: OpeningDriveFailedContinuationV0Strategy,
     PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
     PreviousDayExtremeRetestV0Strategy.name: PreviousDayExtremeRetestV0Strategy,
+    RoundNumberRetestV0Strategy.name: RoundNumberRetestV0Strategy,
     SessionVwapReclaimV0Strategy.name: SessionVwapReclaimV0Strategy,
     SqueezeBreakoutLongV0Strategy.name: SqueezeBreakoutLongV0Strategy,
     SwingBreakoutRetestV0Strategy.name: SwingBreakoutRetestV0Strategy,

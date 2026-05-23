@@ -42,6 +42,7 @@ Expected path:
 | 21 | `daily_pivot_reclaim_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 22 | `m15_inside_bar_breakout_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 23 | `m5_impulse_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; high trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 24 | `round_number_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, low intrabar ambiguity, and XAU-specific multisymbol note; manual adversarial review still required. |
 
 ## Discipline
 
@@ -53,4 +54,5 @@ Expected path:
 - Extended bench status: `swing_breakout_retest_v0` is an approved future expert candidate, but it is same-family with `breakout_retest`; `ny_london_overlap_compression_break_v0` and `opening_drive_failed_continuation_v0` were rejected first-pass. Continue searching for a more independent second behavior.
 - Latest independent candidate result: `daily_pivot_reclaim_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
 - Latest independent candidate result: `m5_impulse_continuation_v0` was rejected first-pass. It produced high trade count, but 0/9 cells reached PF >= 1.30.
-- Next independent candidate should be a fresh, versioned hypothesis from a genuinely different behavior family; do not tune any rejected v0 in place.
+- Latest candidate result: `round_number_retest_v0` is a provisional same-family pass pending Gate 9 manual adversarial review.
+- Next independent candidate should still be a fresh, versioned hypothesis from a genuinely different behavior family; do not tune any rejected v0 in place.

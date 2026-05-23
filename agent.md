@@ -180,6 +180,7 @@ Last updated: 2026-05-23
 - Latest independent candidate `daily_pivot_reclaim_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 486-558 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Latest independent candidate `m15_inside_bar_breakout_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 727-854 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Latest independent candidate `m5_impulse_continuation_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 2199-2363 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
+- Latest candidate `round_number_retest_v0` was registered, hash-locked, smoke-tested, and promoted to `PROVISIONAL_PASS_PENDING_GATE9`. It passed all 9 matrix cells with PF 1.351-1.560, passed 10/10 deciles, had low intrabar ambiguity at 198/47,388 trades (0.42%), and passed multisymbol only with an XAU-specific mechanism note because EURUSD produced 0 trades while USDJPY PF was 1.435. Gate 9 is pending with 0/120 losses reviewed, so do not add it to Phase 1 or Phase 2 as an approved EA yet.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.

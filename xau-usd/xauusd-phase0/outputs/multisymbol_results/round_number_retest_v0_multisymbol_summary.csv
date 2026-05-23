@@ -1,0 +1,3 @@
+expert,symbol,broker,cost_model,trade_count,profit_factor,total_return_pct,max_drawdown_pct,avg_trade_R,verdict
+round_number_retest_v0,EURUSD,capital_com,median,0,0.0,0.0,0.0,0.0,FAIL
+round_number_retest_v0,USDJPY,capital_com,median,559,1.4349362060717805,65.53707472797598,5.546302913841409,0.18294445571487927,PASS

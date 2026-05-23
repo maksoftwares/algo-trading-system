@@ -16,6 +16,7 @@ expert_monthly_mean,opening_drive_failed_continuation_v0,,-8.63915650287592,-933
 expert_monthly_mean,post_spike_short_v0,,-3.458284206649631,-373.49469431816016,,ALTERNATIVE
 expert_monthly_mean,previous_day_extreme_retest_v0,,-9.140922352276444,-987.2196140458559,,ALTERNATIVE
 expert_monthly_mean,range_mr,,-1.8587828419199897,-200.7485469273589,,ALTERNATIVE
+expert_monthly_mean,round_number_retest_v0,,74292.88447199909,8023631.522975902,,ALTERNATIVE
 expert_monthly_mean,session_vwap_reclaim_v0,,-16.874658560467513,-1822.4631245304915,,ALTERNATIVE
 expert_monthly_mean,squeeze_breakout_long_v0,,1.772466563786245,191.42638888891446,,ALTERNATIVE
 expert_monthly_mean,swing_breakout_retest_v0,,52707.866273483785,5692449.557536249,,ALTERNATIVE
@@ -37,8 +38,9 @@ pairwise_spa,breakout_retest,opening_drive_failed_continuation_v0,209760.8103135
 pairwise_spa,breakout_retest,post_spike_short_v0,209755.62944128344,,0.019396120775844832,PASS
 pairwise_spa,breakout_retest,previous_day_extreme_retest_v0,209761.31207942907,,0.02559488102379524,PASS
 pairwise_spa,breakout_retest,range_mr,209754.02993991875,,0.02299540091981604,PASS
-pairwise_spa,breakout_retest,session_vwap_reclaim_v0,209769.0458156373,,0.023595280943811237,PASS
-pairwise_spa,breakout_retest,squeeze_breakout_long_v0,209750.39869051302,,0.02399520095980804,PASS
-pairwise_spa,breakout_retest,swing_breakout_retest_v0,157044.30488359302,,0.026394721055788842,PASS
-pairwise_spa,breakout_retest,trend_pullback,209803.54074387203,,0.02399520095980804,PASS
-pairwise_spa,breakout_retest,weekly_level_reclaim_v0,209756.7980824622,,0.023595280943811237,PASS
+pairwise_spa,breakout_retest,round_number_retest_v0,135459.28668507774,,0.027394521095780843,PASS
+pairwise_spa,breakout_retest,session_vwap_reclaim_v0,209769.0458156373,,0.02399520095980804,PASS
+pairwise_spa,breakout_retest,squeeze_breakout_long_v0,209750.39869051302,,0.01779644071185763,PASS
+pairwise_spa,breakout_retest,swing_breakout_retest_v0,157044.30488359302,,0.03259348130373925,PASS
+pairwise_spa,breakout_retest,trend_pullback,209803.54074387203,,0.023595280943811237,PASS
+pairwise_spa,breakout_retest,weekly_level_reclaim_v0,209756.7980824622,,0.022795440911817635,PASS
