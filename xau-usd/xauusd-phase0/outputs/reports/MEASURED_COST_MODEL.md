@@ -10,13 +10,13 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Files |
 | --- | --- | --- | --- | --- |
-| 10613 | 500 | 2 | 5 | 2 |
+| 10945 | 500 | 2 | 5 | 2 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 10613 | 50 | 75 | 75 |
+| global | all | all | XAUUSD | 10945 | 50 | 75 | 75 |
 
 ## Source Files
 

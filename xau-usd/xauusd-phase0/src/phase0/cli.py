@@ -46,6 +46,7 @@ from phase0.normalizer import (
 from phase0.reports import generate_all_reports
 from phase0.reference import validate_reference_files
 from phase0.rejection_audit import generate_rejection_gate_audit
+from phase0.rejection_audit import DEFAULT_APPROVED_EXPERTS
 from phase0.reality_check import run_reality_check
 from phase0.research_hypotheses import register_research_hypothesis
 from phase0.research_smoke import run_research_candidate_smoke
@@ -898,7 +899,7 @@ def _cmd_generate_rejection_gate_audit(args: argparse.Namespace) -> int:
         config,
         approved_experts=args.approved_expert
         if args.approved_expert is not None
-        else ("breakout_retest", "swing_breakout_retest_v0"),
+        else DEFAULT_APPROVED_EXPERTS,
     )
     print("Rejected-candidate gate audit generated")
     print(output.report_path)
@@ -916,7 +917,7 @@ def _cmd_generate_concentration_frequency_audit(args: argparse.Namespace) -> int
         config,
         approved_experts=args.approved_expert
         if args.approved_expert is not None
-        else ("breakout_retest", "swing_breakout_retest_v0"),
+        else DEFAULT_APPROVED_EXPERTS,
     )
     print("Frequency-normalized concentration audit generated")
     print(output.report_path)

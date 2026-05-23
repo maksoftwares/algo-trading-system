@@ -43,7 +43,7 @@ Expected path:
 | 22 | `m15_inside_bar_breakout_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 23 | `m5_impulse_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; high trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 24 | `round_number_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, low intrabar ambiguity, and XAU-specific multisymbol note; manual adversarial review still required. |
-| 25 | `symbol_normalized_round_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, low intrabar ambiguity, and non-zero EURUSD/USDJPY multisymbol transfer; manual adversarial review still required. |
+| 25 | `symbol_normalized_round_retest_v0` | APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY | Passed matrix, deciles, multisymbol, intrabar, and Gate 9 with owner-directed 120/120 valid-loss classification; same-family with `breakout_retest`, not diversification. |
 | 26 | `symbol_round_sweep_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30 and drawdown was too high, so do not tune v0. |
 | 27 | `liquidity_sweep_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 28 | `session_extreme_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, multisymbol, and intrabar checks; same-family level-and-pullback, so not diversification and Gate 9 remains pending. |
@@ -67,7 +67,7 @@ Expected path:
 - Latest independent candidate result: `daily_pivot_reclaim_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
 - Latest independent candidate result: `m5_impulse_continuation_v0` was rejected first-pass. It produced high trade count, but 0/9 cells reached PF >= 1.30.
 - Latest candidate result: `round_number_retest_v0` is a provisional same-family pass pending Gate 9 manual adversarial review.
-- Latest candidate result: `symbol_normalized_round_retest_v0` is a stronger provisional same-family pass than `round_number_retest_v0` because it preserves XAU matrix strength while producing EURUSD PF 1.298 and USDJPY PF 1.559 in multisymbol transfer. Gate 9 remains pending with 0/120 sampled losing trades reviewed.
+- Latest candidate result: `symbol_normalized_round_retest_v0` is an approved same-family future expert candidate. It preserves XAU matrix strength while producing EURUSD PF 1.298 and USDJPY PF 1.559 in multisymbol transfer, and Gate 9 scored PASS with 120/120 owner-attested valid losses and 0 logic gaps. It is still not diversification.
 - Latest independent reversal candidate result: `symbol_round_sweep_reversal_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30 and max drawdown reached 50.46%.
 - Latest independent continuation candidate result: `liquidity_sweep_continuation_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
 - Latest same-family provisional result: `session_extreme_retest_v0` passed automated research gates, but remains Gate 9 pending and does not diversify the breakout-retest family.

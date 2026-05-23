@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-23T19:08:57+00:00`
+Generated at UTC: `2026-05-23T19:36:37+00:00`
 
 Overall status: PASS
 
@@ -30,6 +30,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 |---|---|---|---:|---:|---:|---:|---:|---:|---|---|
 | breakout_retest | APPROVED_OR_ACTIVE | PASS | 9 | 66759 | 0.7566 | 3.7706 | 0.014596 | 0.072829 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | swing_breakout_retest_v0 | APPROVED_OR_ACTIVE | PASS | 9 | 57897 | 0.7609 | 3.7931 | 0.015577 | 0.077779 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
+| symbol_normalized_round_retest_v0 | APPROVED_OR_ACTIVE | PASS | 9 | 47388 | 0.7623 | 3.7948 | 0.019751 | 0.098656 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | asia_range_london_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4845 | 100.0 | 100.0 | 0.068632 | 0.316397 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | asia_range_london_failed_break_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3102 | 100.0 | 100.0 | 0.075313 | 0.363652 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | compression_retest_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 0 | 100.0 | 100.0 | 0.0 | 0.0 | NORMALIZATION_UNDEFINED_NO_TRADES | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
@@ -58,7 +59,6 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | session_extreme_retest_v0 | REJECTED_OR_RESEARCH | PASS | 9 | 23727 | 0.8203 | 4.056 | 0.025399 | 0.126433 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | session_vwap_reclaim_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4806 | 100.0 | 100.0 | 0.061582 | 0.301236 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | squeeze_breakout_long_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1800 | 100.0 | 163.3252 | 0.095484 | 0.463688 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
-| symbol_normalized_round_retest_v0 | REJECTED_OR_RESEARCH | PASS | 9 | 47388 | 0.7623 | 3.7948 | 0.019751 | 0.098656 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | symbol_round_sweep_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 9609 | 100.0 | 379.1626 | 0.057126 | 0.272656 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | trend_pullback | REJECTED_OR_RESEARCH | FAIL | 9 | 27576 | 164.5178 | 228.471 | 0.348799 | 0.459661 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | w1_d1_momentum_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 498 | 70.2727 | 337.7604 | 0.235291 | 1.026235 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |

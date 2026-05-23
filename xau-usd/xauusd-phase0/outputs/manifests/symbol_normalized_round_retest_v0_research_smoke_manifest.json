@@ -27,7 +27,7 @@
     }
   ],
   "expert": "symbol_normalized_round_retest_v0",
-  "generated_at_utc": "2026-05-23T15:09:56+00:00",
+  "generated_at_utc": "2026-05-23T19:35:00+00:00",
   "hypothesis_file": "docs\\hypothesis_symbol_normalized_round_retest_v0.md",
   "hypothesis_sha256": "49578289ffd65ce6974d3581ce309646d0232fc6ea36d156b450e9a64f3033f2",
   "latest_plan": {

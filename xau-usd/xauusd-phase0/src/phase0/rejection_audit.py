@@ -11,7 +11,11 @@ from phase0.config import ProjectConfig
 from phase0.gates import evaluate_matrix_gates
 
 
-DEFAULT_APPROVED_EXPERTS = ("breakout_retest", "swing_breakout_retest_v0")
+DEFAULT_APPROVED_EXPERTS = (
+    "breakout_retest",
+    "swing_breakout_retest_v0",
+    "symbol_normalized_round_retest_v0",
+)
 
 
 @dataclass(frozen=True)

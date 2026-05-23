@@ -1,17 +1,17 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-23T19:08:55+00:00`
+Generated at UTC: `2026-05-23T19:36:35+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
 Approved/same-family rows are included for context but excluded from the rejection counts.
 
-Approved or active experts excluded from rejection counts: `breakout_retest, swing_breakout_retest_v0`
+Approved or active experts excluded from rejection counts: `breakout_retest, swing_breakout_retest_v0, symbol_normalized_round_retest_v0`
 
 ## Summary
 
 - Audited candidates: 35
-- Rejected/research candidates audited: 33
+- Rejected/research candidates audited: 32
 - Rejected candidates with sample-size failure: 6
 - Rejected candidates with multi-cell expectancy failure: 30
 - Rejected candidates with both expectancy and sample-size failure: 6
@@ -26,6 +26,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 |---|---|---|---:|---:|---:|---:|---|
 | breakout_retest | APPROVED_OR_ACTIVE | APPROVED_EDGE_FAMILY | 9 | 7 | 66759 | 7174 | none |
 | swing_breakout_retest_v0 | APPROVED_OR_ACTIVE | APPROVED_EDGE_FAMILY | 9 | 7 | 57897 | 6281 | none |
+| symbol_normalized_round_retest_v0 | APPROVED_OR_ACTIVE | APPROVED_EDGE_FAMILY | 9 | 9 | 47388 | 3837 | none |
 | asia_range_london_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4845 | 507 | multi_cell_survival;no_catastrophic_failure;concentration |
 | asia_range_london_failed_break_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3102 | 326 | multi_cell_survival;no_catastrophic_failure;concentration |
 | compression_retest_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 0 | 0 | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
@@ -54,7 +55,6 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | session_extreme_retest_v0 | REJECTED_OR_RESEARCH | NON_MATRIX_REJECTION_OR_PENDING | 9 | 9 | 23727 | 2331 | none |
 | session_vwap_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4806 | 481 | multi_cell_survival;no_catastrophic_failure;concentration |
 | squeeze_breakout_long_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1800 | 194 | multi_cell_survival;concentration |
-| symbol_normalized_round_retest_v0 | REJECTED_OR_RESEARCH | NON_MATRIX_REJECTION_OR_PENDING | 9 | 9 | 47388 | 3837 | none |
 | symbol_round_sweep_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 9609 | 685 | multi_cell_survival;no_catastrophic_failure;concentration |
 | trend_pullback | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 27576 | 2873 | multi_cell_survival;no_catastrophic_failure;concentration |
 | w1_d1_momentum_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 498 | 48 | multi_cell_survival;concentration |
