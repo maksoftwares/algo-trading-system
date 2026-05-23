@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-23T13:59:57+00:00`
+Generated at UTC: `2026-05-23T14:12:59+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 21
-- Rejected/research candidates audited: 19
+- Audited candidates: 22
+- Rejected/research candidates audited: 20
 - Rejected candidates with sample-size failure: 4
-- Rejected candidates with multi-cell expectancy failure: 19
+- Rejected candidates with multi-cell expectancy failure: 20
 - Rejected candidates with both expectancy and sample-size failure: 4
-- Rejected candidates with expectancy-only failure: 15
+- Rejected candidates with expectancy-only failure: 16
 - Rejected candidates with frequency-only failure: 0
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -34,6 +34,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | extreme_activity_mean_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1056 | 74 | multi_cell_survival;concentration |
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3906 | 393 | multi_cell_survival;no_catastrophic_failure;concentration |
 | london_fix_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4821 | 463 | multi_cell_survival;concentration |
+| m15_inside_bar_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 7170 | 727 | multi_cell_survival;concentration |
 | ny_am_pullback_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3195 | 326 | multi_cell_survival;concentration |
 | ny_failed_london_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3369 | 322 | multi_cell_survival;concentration |
 | ny_london_overlap_compression_break_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 135 | 2 | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
