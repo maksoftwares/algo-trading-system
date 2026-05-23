@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=SHORT, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "liquidity_sweep_reversal_v0",
+  "generated_at_utc": "2026-05-23T13:31:38+00:00",
+  "hypothesis_file": "docs\\hypothesis_liquidity_sweep_reversal_v0.md",
+  "hypothesis_sha256": "fc05b534f2157af427b652eaaa4b67e2461dba324b480a900e55697f56d7875d",
+  "latest_plan": {
+    "direction": "SHORT",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 102.125,
+    "take_profit": 98.1875
+  },
+  "latest_signal": {
+    "direction": "SHORT",
+    "reason_code": "LIQUIDITY_SWEEP_REVERSAL_V0_SHORT",
+    "timestamp_utc": "2024-04-02T08:35:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\liquidity_sweep_reversal_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}
