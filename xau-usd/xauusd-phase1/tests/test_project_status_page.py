@@ -57,6 +57,10 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "1% fixed risk per trade" in html
     assert "Monthly Returns Ledger" in html
     assert "monthlySearch" in html
+    assert "monthlyExpertFilter" in html
+    assert '<option value="breakout_retest">breakout_retest (ACCEPTED)</option>' in html
+    assert '<option value="trend_pullback">trend_pullback (REJECTED)</option>' in html
+    assert 'data-expert="breakout_retest"' in html
     assert "66.67%" in html
     assert "+$10.00" in html
 

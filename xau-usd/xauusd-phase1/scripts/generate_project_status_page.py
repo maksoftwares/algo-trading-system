@@ -203,6 +203,7 @@ def _render_html(
             f'            <span>{_esc(_monthly_coverage_text(account_example))}</span>',
             "          </div>",
             '          <div class="table-tools">',
+            _monthly_expert_options(account_example.get("summary", [])),
             '            <input id="monthlySearch" type="search" placeholder="Search month or EA">',
             "          </div>",
             "        </div>",
@@ -376,7 +377,7 @@ h2 { margin: 0; font-size: 17px; letter-spacing: 0; }
 .candidates-panel { padding-bottom: 6px; }
 .candidates-head { align-items: center; }
 .table-tools { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
-input[type="search"] {
+input[type="search"], select {
   width: 220px;
   min-height: 34px;
   border: 1px solid var(--line-strong);
@@ -385,6 +386,7 @@ input[type="search"] {
   color: var(--ink);
   background: #fff;
 }
+select { width: 260px; }
 .segments { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: #fff; }
 .seg {
   min-height: 34px;
@@ -428,7 +430,7 @@ tr:last-child td { border-bottom: 0; }
   .kpi-grid { grid-template-columns: 1fr; }
   .candidates-head { align-items: stretch; flex-direction: column; }
   .table-tools { justify-content: stretch; }
-  input[type="search"], .segments { width: 100%; }
+  input[type="search"], select, .segments { width: 100%; }
   .seg { flex: 1; }
   h1 { font-size: 26px; }
 }
@@ -603,6 +605,7 @@ def _dashboard_script() -> str:
   <script>
     const search = document.getElementById("candidateSearch");
     const monthlySearch = document.getElementById("monthlySearch");
+    const monthlyExpertFilter = document.getElementById("monthlyExpertFilter");
     const buttons = Array.from(document.querySelectorAll("[data-filter]"));
     const rows = Array.from(document.querySelectorAll("[data-candidate-row]"));
     const monthlyRows = Array.from(document.querySelectorAll("[data-monthly-row]"));
@@ -621,9 +624,12 @@ def _dashboard_script() -> str:
 
     function applyMonthlyFilter() {
       const query = (monthlySearch?.value || "").toLowerCase().trim();
+      const selectedExpert = monthlyExpertFilter?.value || "all";
       monthlyRows.forEach((row) => {
         const haystack = row.dataset.search || "";
-        row.hidden = Boolean(query) && !haystack.includes(query);
+        const expertMatch = selectedExpert === "all" || row.dataset.expert === selectedExpert;
+        const queryMatch = !query || haystack.includes(query);
+        row.hidden = !(expertMatch && queryMatch);
       });
     }
 
@@ -637,6 +643,7 @@ def _dashboard_script() -> str:
 
     search?.addEventListener("input", applyCandidateFilter);
     monthlySearch?.addEventListener("input", applyMonthlyFilter);
+    monthlyExpertFilter?.addEventListener("change", applyMonthlyFilter);
   </script>
 """
 
@@ -825,13 +832,14 @@ def _monthly_return_table(rows: list[dict[str, Any]]) -> str:
     header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
     body = []
     for row in rows:
+        expert = _cell(row.get("expert"))
         status = _cell(row.get("status"))
         pnl = float(row.get("pnl_usd", 0.0))
         return_pct = float(row.get("return_pct", 0.0))
-        search_text = " ".join((_cell(row.get("month")), _cell(row.get("expert")), status)).lower()
+        search_text = " ".join((_cell(row.get("month")), expert, status)).lower()
         values = [
             _esc(row.get("month", "")),
-            _esc(row.get("expert", "")),
+            _esc(expert),
             f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
             _esc(row.get("trades", 0)),
             _money_cell(pnl, include_sign=True),
@@ -842,10 +850,30 @@ def _monthly_return_table(rows: list[dict[str, Any]]) -> str:
         for index, value in enumerate(values):
             klass = ' class="num"' if index in numeric_indexes else ""
             cells.append(f"<td{klass}>{value}</td>")
-        body.append(f'<tr data-monthly-row data-search="{_esc(search_text)}">' + "".join(cells) + "</tr>")
+        body.append(
+            f'<tr data-monthly-row data-expert="{_esc(expert)}" data-search="{_esc(search_text)}">'
+            + "".join(cells)
+            + "</tr>"
+        )
     if not body:
         body.append(f'<tr><td colspan="{len(columns)}" class="muted">No monthly rows available.</td></tr>')
     return '<div class="table-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _monthly_expert_options(rows: list[dict[str, Any]]) -> str:
+    options = ['<option value="all">All EAs</option>']
+    for row in rows:
+        expert = _cell(row.get("expert"))
+        if not expert or expert == "n/a":
+            continue
+        status = _cell(row.get("status"))
+        label = f"{expert} ({status})"
+        options.append(f'<option value="{_esc(expert)}">{_esc(label)}</option>')
+    return (
+        '<select id="monthlyExpertFilter" aria-label="Filter monthly returns by EA">'
+        + "".join(options)
+        + "</select>"
+    )
 
 
 def _account_assumption_text() -> str:
