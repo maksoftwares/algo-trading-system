@@ -1,6 +1,6 @@
 # Second Candidate Research Plan
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 ## Purpose
 
@@ -75,15 +75,15 @@ The second candidate must pass the same reduced-portfolio discipline:
 
 | Field | Value |
 | --- | --- |
-| Candidate | `opening_drive_failed_continuation_v0` |
-| Status | REJECTED_FIRST_PASS |
-| Testing allowed | NO_FURTHER_V0_TESTING |
-| Hypothesis document | `docs/hypothesis_opening_drive_failed_continuation_v0.md` |
+| Candidate | `symbol_normalized_round_retest_v0` |
+| Status | PROVISIONAL_PASS_PENDING_GATE9 |
+| Testing allowed | GATE9_REVIEW_ONLY_BEFORE_APPROVAL |
+| Hypothesis document | `docs/hypothesis_symbol_normalized_round_retest_v0.md` |
 | Hash manifest | `outputs/hashes/research_hypothesis_hash_manifest.csv` |
-| Implementation draft | `src/phase0/strategies/opening_drive_failed_continuation_v0.py` |
-| Research smoke | `outputs/reports/opening_drive_failed_continuation_v0_research_smoke.md` |
-| First-pass matrix | `docs/OPENING_DRIVE_FAILED_CONTINUATION_V0_FIRST_PASS.md` |
-| Next action | Move to the next backlog candidate, `liquidity_sweep_reversal_v0`, starting with a fresh hypothesis lock. |
+| Implementation draft | `src/phase0/strategies/symbol_normalized_round_retest_v0.py` |
+| Research smoke | `outputs/reports/symbol_normalized_round_retest_v0_research_smoke.md` |
+| Research result | `docs/SYMBOL_NORMALIZED_ROUND_RETEST_V0_RESEARCH_RESULT.md` |
+| Next action | Complete Gate 9 manual adversarial review for this same-family candidate while continuing a separate search for a genuinely independent behavior family. |
 
 ## Promotion Prep Command
 

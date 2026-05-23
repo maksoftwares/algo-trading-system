@@ -30,6 +30,7 @@ from phase0.strategies.round_number_retest_v0 import RoundNumberRetestV0Strategy
 from phase0.strategies.session_vwap_reclaim_v0 import SessionVwapReclaimV0Strategy
 from phase0.strategies.squeeze_breakout_long_v0 import SqueezeBreakoutLongV0Strategy
 from phase0.strategies.swing_breakout_retest_v0 import SwingBreakoutRetestV0Strategy
+from phase0.strategies.symbol_normalized_round_retest_v0 import SymbolNormalizedRoundRetestV0Strategy
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
 from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
 
@@ -61,6 +62,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     SessionVwapReclaimV0Strategy.name: SessionVwapReclaimV0Strategy,
     SqueezeBreakoutLongV0Strategy.name: SqueezeBreakoutLongV0Strategy,
     SwingBreakoutRetestV0Strategy.name: SwingBreakoutRetestV0Strategy,
+    SymbolNormalizedRoundRetestV0Strategy.name: SymbolNormalizedRoundRetestV0Strategy,
     WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
 }
 

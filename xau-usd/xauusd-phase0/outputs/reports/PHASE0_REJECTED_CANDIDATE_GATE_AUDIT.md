@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-23T14:48:17+00:00`
+Generated at UTC: `2026-05-23T15:10:56+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,8 +10,8 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 24
-- Rejected/research candidates audited: 22
+- Audited candidates: 25
+- Rejected/research candidates audited: 23
 - Rejected candidates with sample-size failure: 4
 - Rejected candidates with multi-cell expectancy failure: 21
 - Rejected candidates with both expectancy and sample-size failure: 4
@@ -46,6 +46,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | round_number_retest_v0 | REJECTED_OR_RESEARCH | NON_MATRIX_REJECTION_OR_PENDING | 9 | 9 | 47388 | 3837 | none |
 | session_vwap_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4806 | 481 | multi_cell_survival;no_catastrophic_failure;concentration |
 | squeeze_breakout_long_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1800 | 194 | multi_cell_survival;concentration |
+| symbol_normalized_round_retest_v0 | REJECTED_OR_RESEARCH | NON_MATRIX_REJECTION_OR_PENDING | 9 | 9 | 47388 | 3837 | none |
 | trend_pullback | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 27576 | 2873 | multi_cell_survival;no_catastrophic_failure;concentration |
 | weekly_level_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1083 | 113 | multi_cell_survival;concentration |
 

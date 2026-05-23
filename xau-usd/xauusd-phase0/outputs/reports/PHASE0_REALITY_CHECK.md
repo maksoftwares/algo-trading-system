@@ -1,7 +1,7 @@
 # PHASE0 REALITY CHECK
 
 Status: PASS
-Generated at UTC: 2026-05-23T14:48:45+00:00
+Generated at UTC: 2026-05-23T15:10:41+00:00
 Approved expert under test: breakout_retest
 
 ## Method
@@ -44,6 +44,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | session_vwap_reclaim_v0 | -16.87 | -1822.46 | alternative |
 | squeeze_breakout_long_v0 | 1.77 | 191.43 | alternative |
 | swing_breakout_retest_v0 | 52707.87 | 5692449.56 | alternative |
+| symbol_normalized_round_retest_v0 | 74292.88 | 8023631.52 | alternative |
 | trend_pullback | -51.37 | -5547.92 | alternative |
 | weekly_level_reclaim_v0 | -4.63 | -499.71 | alternative |
 
@@ -71,8 +72,9 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | session_vwap_reclaim_v0 | PASS | 209769.05 | 0.0240 | 162449.37 |
 | squeeze_breakout_long_v0 | PASS | 209750.40 | 0.0178 | 159074.13 |
 | swing_breakout_retest_v0 | PASS | 157044.30 | 0.0326 | 134267.37 |
-| trend_pullback | PASS | 209803.54 | 0.0236 | 165050.71 |
-| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0228 | 162148.52 |
+| symbol_normalized_round_retest_v0 | PASS | 135459.29 | 0.0272 | 110189.94 |
+| trend_pullback | PASS | 209803.54 | 0.0228 | 162146.84 |
+| weekly_level_reclaim_v0 | PASS | 209756.80 | 0.0230 | 166859.39 |
 
 ## Interpretation
 

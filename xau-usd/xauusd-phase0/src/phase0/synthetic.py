@@ -46,6 +46,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _round_number_retest_context()
     if expert == "session_vwap_reclaim_v0":
         return _session_vwap_reclaim_context()
+    if expert == "symbol_normalized_round_retest_v0":
+        return _round_number_retest_context()
     if expert == "squeeze_breakout_long_v0":
         return _squeeze_breakout_long_context()
     if expert == "swing_breakout_retest_v0":

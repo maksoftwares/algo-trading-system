@@ -723,9 +723,9 @@ def _milestone_table(
     measured_cost: dict[str, str],
 ) -> str:
     rows = [
-        ("Phase 0 research closure", phase0_status, "breakout_retest approved; trend_pullback and range_mr rejected"),
+        ("Phase 0 research closure", phase0_status, "breakout_retest approved; same-family provisional candidates remain Gate 9 pending"),
         ("D1 CPCV", "PASS", "Closed in Phase 0 independent validation"),
-        ("D2 Reality Check / SPA", "PASS", "Full-universe rerun remains PASS after latest rejected candidate"),
+        ("D2 Reality Check / SPA", "PASS", "Full-universe rerun remains PASS after latest provisional candidate"),
         ("D3 True holdout audit", "PASS", "Holdout remains locked"),
         ("D4 Independent reproduction", "PASS", "Independent reproduction within tolerance"),
         ("Phase 1 dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 telemetry and dry-run boundaries"),

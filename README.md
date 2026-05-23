@@ -52,9 +52,9 @@ The hourly Phase 1 periodic check also regenerates it while the machine is onlin
 
 ## XAUUSD Phase 1
 
-Phase 1 dry-run is authorized for the reduced one-expert package. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
+Phase 1 dry-run is authorized for the reduced breakout-retest family package. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
 
-`breakout_retest` is the only approved future expert. `trend_pullback` and `range_mr` remain rejected.
+`breakout_retest` is the primary approved future expert. `swing_breakout_retest_v0` is an approved same-family future expert candidate. `round_number_retest_v0` and `symbol_normalized_round_retest_v0` are provisional same-family candidates pending Gate 9 manual review. `trend_pullback` and `range_mr` remain rejected.
 
 ## Current Phase Label
 
@@ -73,6 +73,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Data readiness: `25/25` required timeframe sets ready.
 - Verification: Phase 0 and Phase 1 test suites pass locally; passive safety audits pass.
 - Current leading candidate: `breakout_retest`.
+- Current provisional research candidate: `symbol_normalized_round_retest_v0`, a same-family round-number retest variant that passed automated matrix/decile/multisymbol checks but still needs Gate 9 manual adversarial review.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
