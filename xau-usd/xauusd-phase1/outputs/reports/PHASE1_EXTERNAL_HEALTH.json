@@ -16,7 +16,7 @@
       "status": "PASS"
     },
     {
-      "evidence": "Latest row age 16.8 minute(s), but local date is a weekend market break; do not count this as a runtime fault.",
+      "evidence": "Latest row age 26.0 minute(s), but local date is a weekend market break; do not count this as a runtime fault.",
       "name": "latest_row_freshness",
       "status": "PASS"
     },
@@ -36,7 +36,7 @@
       "status": "PASS"
     }
   ],
-  "created_at_local": "2026-05-23T18:05:15.803821",
+  "created_at_local": "2026-05-23T18:14:28.784616",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "status": "PASS",
   "status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"

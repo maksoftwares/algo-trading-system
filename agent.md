@@ -11,6 +11,7 @@ Last updated: 2026-05-23
 - Active phase label: Phase 1 - Master EA dry-run shell.
 - Current branch: `main`
 - Remote: `https://github.com/maksoftwares/algo-trading-system.git`
+- Single-page status dashboard: `status.html` at the repo root.
 
 ## Standing Rules
 
@@ -177,7 +178,7 @@ Last updated: 2026-05-23
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 5759 rows over 2 observed days; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 6000 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -187,7 +188,7 @@ Last updated: 2026-05-23
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
 - Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
-- Latest soak history has 60 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
+- Latest soak history has 62 rows, status PASS, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
 - Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
 - Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.
@@ -215,7 +216,9 @@ Last updated: 2026-05-23
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.
-- Latest periodic check status after Phase 2 paper-ledger schema prep: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
+- Latest periodic check status after project-status dashboard wiring: PASS; Phase 2 readiness and Phase 1 review index are correctly PENDING rather than FAIL while measured-cost, five-day soak, and owner approval remain open.
+- Project status page generator: `xau-usd\xauusd-phase1\scripts\generate_project_status_page.py`.
+- Latest project status page: `status.html`. The hourly periodic check regenerates it from Phase 0/Phase 1/Phase 2 artifacts, including all accepted/rejected EA candidates.
 - Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
 - Hourly local automation `phase1-mt5-soak-check` should be ACTIVE while the machine is online; pause it before any future planned shutdown.
 

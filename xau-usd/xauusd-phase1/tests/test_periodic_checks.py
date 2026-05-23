@@ -38,3 +38,10 @@ def test_periodic_checks_break_phase1_phase2_report_cycle():
     script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
 
     assert "include_phase2_readiness=False" in script
+
+
+def test_periodic_checks_regenerate_single_status_page():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "generate_project_status_page" in script
+    assert "status.html" in script

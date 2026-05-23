@@ -37,6 +37,19 @@ See `xau-usd/xauusd-phase0/README.md` for the full workflow.
 
 Agent handoff and current gate status are maintained in `agent.md`.
 
+## Status Dashboard
+
+Open `status.html` in a browser for the current project dashboard. It summarizes Phase 0, Phase 1, Phase 2 readiness, soak progress, measured-cost status, and all accepted/rejected EA candidates in one page.
+
+The dashboard is generated from repo artifacts by:
+
+```powershell
+cd xau-usd\xauusd-phase1
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_project_status_page.py
+```
+
+The hourly Phase 1 periodic check also regenerates it while the machine is online.
+
 ## XAUUSD Phase 1
 
 Phase 1 dry-run is authorized for the reduced one-expert package. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.

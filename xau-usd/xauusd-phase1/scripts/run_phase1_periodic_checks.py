@@ -19,6 +19,7 @@ from generate_phase1_review_index import generate_phase1_review_index
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
+from generate_project_status_page import generate_project_status_page
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import load_project_config
@@ -100,6 +101,8 @@ def run_phase1_periodic_checks(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",
     )
+    repo_root = root.parents[1]
+    generate_project_status_page(repo_root, repo_root / "status.html")
     external_health_path = report_dir / "PHASE1_EXTERNAL_HEALTH.json"
     external_health = check_external_health(
         files_dir=files_dir,
