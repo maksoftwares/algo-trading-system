@@ -11,6 +11,10 @@ from typing import Any
 
 
 DEFAULT_OUTPUT = Path("status.html")
+ACCOUNT_EXAMPLE_STARTING_USD = 1000.0
+ACCOUNT_EXAMPLE_RISK_PCT = 0.01
+ACCOUNT_EXAMPLE_RISK_USD = ACCOUNT_EXAMPLE_STARTING_USD * ACCOUNT_EXAMPLE_RISK_PCT
+ACCOUNT_EXAMPLE_COST_MODEL = "p95"
 
 
 @dataclass(frozen=True)
@@ -41,6 +45,7 @@ def generate_project_status_page(
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
     candidates = _read_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    account_example = _load_account_example(phase0_root, candidates)
     phase0_verdict = _read_markdown_status(phase0_reports / "PHASE0_VERDICT.md") or _phase0_verdict_status(
         phase0_reports / "PHASE0_VERDICT.md"
     )
@@ -63,6 +68,7 @@ def generate_project_status_page(
             fixed_notional=fixed_notional,
             measured_cost=measured_cost,
             candidates=candidates,
+            account_example=account_example,
         ),
         encoding="utf-8",
     )
@@ -86,6 +92,7 @@ def _render_html(
     fixed_notional: dict[str, str],
     measured_cost: dict[str, str],
     candidates: list[dict[str, str]],
+    account_example: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
     runtime = _mapping(summary.get("runtime"))
@@ -177,6 +184,29 @@ def _render_html(
             "          </div>",
             "        </div>",
             _candidate_table(candidates),
+            "      </section>",
+            "",
+            '      <section class="panel account-panel">',
+            '        <div class="panel-head candidates-head">',
+            "          <div>",
+            "            <h2>$1,000 Account Example</h2>",
+            f'            <span>{_esc(_account_assumption_text())}</span>',
+            "          </div>",
+            "        </div>",
+            _account_summary_table(account_example.get("summary", [])),
+            "      </section>",
+            "",
+            '      <section class="panel monthly-panel">',
+            '        <div class="panel-head candidates-head">',
+            "          <div>",
+            "            <h2>Monthly Returns Ledger</h2>",
+            f'            <span>{_esc(_monthly_coverage_text(account_example))}</span>',
+            "          </div>",
+            '          <div class="table-tools">',
+            '            <input id="monthlySearch" type="search" placeholder="Search month or EA">',
+            "          </div>",
+            "        </div>",
+            _monthly_return_table(account_example.get("monthly_rows", [])),
             "      </section>",
             "",
             '      <section class="grid lower-grid">',
@@ -374,6 +404,11 @@ th, td { text-align: left; padding: 10px 9px; border-bottom: 1px solid var(--lin
 th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0; background: #f8fafc; position: sticky; top: 0; z-index: 1; }
 tr:last-child td { border-bottom: 0; }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
+.money-positive { color: var(--green); font-weight: 760; }
+.money-negative { color: var(--red); font-weight: 760; }
+.money-flat { color: var(--muted); font-weight: 700; }
+.monthly-panel .table-wrap { max-height: 620px; overflow: auto; }
+.monthly-panel th { top: 0; }
 .kv table td:first-child { color: var(--muted); font-weight: 700; width: 46%; }
 .list { margin: 0; padding-left: 18px; line-height: 1.7; color: var(--ink); }
 .muted { color: var(--muted); }
@@ -567,8 +602,10 @@ def _dashboard_script() -> str:
     return """
   <script>
     const search = document.getElementById("candidateSearch");
+    const monthlySearch = document.getElementById("monthlySearch");
     const buttons = Array.from(document.querySelectorAll("[data-filter]"));
     const rows = Array.from(document.querySelectorAll("[data-candidate-row]"));
+    const monthlyRows = Array.from(document.querySelectorAll("[data-monthly-row]"));
     let activeFilter = "all";
 
     function applyCandidateFilter() {
@@ -582,6 +619,14 @@ def _dashboard_script() -> str:
       });
     }
 
+    function applyMonthlyFilter() {
+      const query = (monthlySearch?.value || "").toLowerCase().trim();
+      monthlyRows.forEach((row) => {
+        const haystack = row.dataset.search || "";
+        row.hidden = Boolean(query) && !haystack.includes(query);
+      });
+    }
+
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         activeFilter = button.dataset.filter;
@@ -591,6 +636,7 @@ def _dashboard_script() -> str:
     });
 
     search?.addEventListener("input", applyCandidateFilter);
+    monthlySearch?.addEventListener("input", applyMonthlyFilter);
   </script>
 """
 
@@ -728,6 +774,228 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
             f'<tr data-candidate-row data-status="{filter_status}" data-search="{_esc(search_text)}">{tds}</tr>'
         )
     return '<div class="table-wrap candidate-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _account_summary_table(rows: list[dict[str, Any]]) -> str:
+    columns = (
+        "Expert",
+        "Status",
+        "Trades",
+        "Win Rate",
+        "Total PnL",
+        "Total Return",
+        "Avg Month",
+        "Worst Month",
+        "Best Month",
+        "Positive Months",
+    )
+    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    body = []
+    for row in rows:
+        status = _cell(row.get("status"))
+        total_pnl = float(row.get("total_pnl_usd", 0.0))
+        avg_month = float(row.get("avg_monthly_pnl_usd", 0.0))
+        worst_month = float(row.get("worst_month_pnl_usd", 0.0))
+        best_month = float(row.get("best_month_pnl_usd", 0.0))
+        values = [
+            _esc(row.get("expert", "")),
+            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _esc(row.get("trades", 0)),
+            _esc(_format_pct(row.get("win_rate_pct"))),
+            _money_cell(total_pnl, include_sign=True),
+            _money_cell(float(row.get("total_return_pct", 0.0)), suffix="%", include_sign=True),
+            _money_cell(avg_month, include_sign=True),
+            _money_cell(worst_month, include_sign=True),
+            _money_cell(best_month, include_sign=True),
+            _esc(f"{row.get('positive_months', 0)} / {row.get('total_months', 0)}"),
+        ]
+        numeric_indexes = {2, 3, 4, 5, 6, 7, 8, 9}
+        cells = []
+        for index, value in enumerate(values):
+            klass = ' class="num"' if index in numeric_indexes else ""
+            cells.append(f"<td{klass}>{value}</td>")
+        body.append("<tr>" + "".join(cells) + "</tr>")
+    if not body:
+        body.append(f'<tr><td colspan="{len(columns)}" class="muted">No p95 trade ledgers found.</td></tr>')
+    return '<div class="table-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _monthly_return_table(rows: list[dict[str, Any]]) -> str:
+    columns = ("Month", "Expert", "Status", "Trades", "PnL", "Return")
+    header = "".join(f"<th>{_esc(column)}</th>" for column in columns)
+    body = []
+    for row in rows:
+        status = _cell(row.get("status"))
+        pnl = float(row.get("pnl_usd", 0.0))
+        return_pct = float(row.get("return_pct", 0.0))
+        search_text = " ".join((_cell(row.get("month")), _cell(row.get("expert")), status)).lower()
+        values = [
+            _esc(row.get("month", "")),
+            _esc(row.get("expert", "")),
+            f'<span class="pill {_status_class(status)}">{_esc(status)}</span>',
+            _esc(row.get("trades", 0)),
+            _money_cell(pnl, include_sign=True),
+            _money_cell(return_pct, suffix="%", include_sign=True),
+        ]
+        numeric_indexes = {3, 4, 5}
+        cells = []
+        for index, value in enumerate(values):
+            klass = ' class="num"' if index in numeric_indexes else ""
+            cells.append(f"<td{klass}>{value}</td>")
+        body.append(f'<tr data-monthly-row data-search="{_esc(search_text)}">' + "".join(cells) + "</tr>")
+    if not body:
+        body.append(f'<tr><td colspan="{len(columns)}" class="muted">No monthly rows available.</td></tr>')
+    return '<div class="table-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _account_assumption_text() -> str:
+    return (
+        f"{ACCOUNT_EXAMPLE_COST_MODEL.upper()} matrix ledgers; "
+        f"${ACCOUNT_EXAMPLE_STARTING_USD:,.0f} starting account; "
+        f"{ACCOUNT_EXAMPLE_RISK_PCT:.0%} fixed risk per trade (${ACCOUNT_EXAMPLE_RISK_USD:,.0f}/R); no compounding."
+    )
+
+
+def _monthly_coverage_text(account_example: dict[str, Any]) -> str:
+    start = account_example.get("start_month") or "n/a"
+    end = account_example.get("end_month") or "n/a"
+    total = account_example.get("total_months") or 0
+    return f"{total} months shown from {start} to {end}; filter by month or EA name."
+
+
+def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -> dict[str, Any]:
+    matrix_root = phase0_root / "outputs" / "matrix_results"
+    candidate_items = sorted(
+        candidates,
+        key=lambda item: (0 if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else 1, item.get("candidate", "")),
+    )
+    monthly_by_expert: dict[str, dict[str, dict[str, float]]] = {}
+    summary_base: dict[str, dict[str, Any]] = {}
+    months: set[str] = set()
+
+    for item in candidate_items:
+        expert = item.get("candidate", "")
+        if not expert:
+            continue
+        status = "ACCEPTED" if item.get("decision_scope") == "APPROVED_OR_ACTIVE" else "REJECTED"
+        if expert == "swing_breakout_retest_v0":
+            status = "ACCEPTED SAME-FAMILY"
+        buckets: dict[str, dict[str, float]] = {}
+        trades = 0
+        wins = 0
+        total_r = 0.0
+        for path in sorted((matrix_root / expert).glob(f"*_{ACCOUNT_EXAMPLE_COST_MODEL}_trades.csv")):
+            with path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    month = _month_key(row.get("exit_time_utc") or row.get("entry_time_utc"))
+                    if not month:
+                        continue
+                    r_multiple = _to_float(row.get("r_multiple")) or 0.0
+                    pnl = r_multiple * ACCOUNT_EXAMPLE_RISK_USD
+                    bucket = buckets.setdefault(month, {"pnl_usd": 0.0, "trades": 0.0})
+                    bucket["pnl_usd"] += pnl
+                    bucket["trades"] += 1
+                    months.add(month)
+                    trades += 1
+                    wins += 1 if r_multiple > 0 else 0
+                    total_r += r_multiple
+        monthly_by_expert[expert] = buckets
+        summary_base[expert] = {
+            "expert": expert,
+            "status": status,
+            "trades": trades,
+            "wins": wins,
+            "total_r": total_r,
+        }
+
+    ordered_months = sorted(months)
+    total_months = len(ordered_months)
+    summary_rows: list[dict[str, Any]] = []
+    monthly_rows: list[dict[str, Any]] = []
+    for item in candidate_items:
+        expert = item.get("candidate", "")
+        if not expert:
+            continue
+        base = summary_base.get(expert, {"expert": expert, "status": "UNKNOWN", "trades": 0, "wins": 0, "total_r": 0.0})
+        buckets = monthly_by_expert.get(expert, {})
+        month_pnls = [float(buckets.get(month, {}).get("pnl_usd", 0.0)) for month in ordered_months]
+        total_pnl = sum(month_pnls)
+        positive_months = sum(1 for value in month_pnls if value > 0)
+        active_months = sum(1 for month in ordered_months if buckets.get(month, {}).get("trades", 0.0) > 0)
+        summary_rows.append(
+            {
+                "expert": expert,
+                "status": base["status"],
+                "trades": int(base["trades"]),
+                "win_rate_pct": (float(base["wins"]) / float(base["trades"]) * 100.0) if base["trades"] else 0.0,
+                "total_pnl_usd": total_pnl,
+                "total_return_pct": (total_pnl / ACCOUNT_EXAMPLE_STARTING_USD) * 100.0,
+                "avg_monthly_pnl_usd": total_pnl / total_months if total_months else 0.0,
+                "avg_monthly_return_pct": (total_pnl / total_months / ACCOUNT_EXAMPLE_STARTING_USD * 100.0)
+                if total_months
+                else 0.0,
+                "worst_month_pnl_usd": min(month_pnls) if month_pnls else 0.0,
+                "best_month_pnl_usd": max(month_pnls) if month_pnls else 0.0,
+                "positive_months": positive_months,
+                "active_months": active_months,
+                "total_months": total_months,
+            }
+        )
+        for month in reversed(ordered_months):
+            bucket = buckets.get(month, {"pnl_usd": 0.0, "trades": 0.0})
+            pnl = float(bucket.get("pnl_usd", 0.0))
+            monthly_rows.append(
+                {
+                    "month": month,
+                    "expert": expert,
+                    "status": base["status"],
+                    "trades": int(bucket.get("trades", 0.0)),
+                    "pnl_usd": pnl,
+                    "return_pct": (pnl / ACCOUNT_EXAMPLE_STARTING_USD) * 100.0,
+                }
+            )
+
+    return {
+        "summary": summary_rows,
+        "monthly_rows": monthly_rows,
+        "start_month": ordered_months[0] if ordered_months else "",
+        "end_month": ordered_months[-1] if ordered_months else "",
+        "total_months": total_months,
+    }
+
+
+def _month_key(value: str | None) -> str:
+    if not value:
+        return ""
+    return value.strip()[:7]
+
+
+def _money_cell(value: float, suffix: str = "", include_sign: bool = False) -> str:
+    klass = _money_class(value)
+    if suffix:
+        sign = "+" if include_sign and value > 0 else ""
+        formatted = f"{sign}{value:,.2f}{suffix}"
+    elif value < 0:
+        formatted = f"-${abs(value):,.2f}"
+    else:
+        sign = "+" if include_sign and value > 0 else ""
+        formatted = f"{sign}${value:,.2f}"
+    return f'<span class="{klass}">{_esc(formatted)}</span>'
+
+
+def _money_class(value: float) -> str:
+    if value > 0.000001:
+        return "money-positive"
+    if value < -0.000001:
+        return "money-negative"
+    return "money-flat"
+
+
+def _format_pct(value: Any) -> str:
+    numeric = _to_float(value)
+    if numeric is None:
+        return "n/a"
+    return f"{numeric:.2f}%"
 
 
 def _artifact_links() -> str:

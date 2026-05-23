@@ -14,6 +14,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     module = _load_module()
     repo = tmp_path / "repo"
     phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
+    phase0_matrix = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "matrix_results"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase0_reports.mkdir(parents=True)
     phase1_reports.mkdir(parents=True)
@@ -27,6 +28,18 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
     _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    _write_trade_ledger(
+        phase0_matrix / "breakout_retest" / "cell_3_breakout_retest_capital_com_p95_trades.csv",
+        [
+            ("2024-01-03 10:00:00+00:00", 1.5),
+            ("2024-01-07 10:00:00+00:00", -1.0),
+            ("2024-02-03 10:00:00+00:00", 0.5),
+        ],
+    )
+    _write_trade_ledger(
+        phase0_matrix / "trend_pullback" / "cell_3_trend_pullback_capital_com_p95_trades.csv",
+        [("2024-01-04 10:00:00+00:00", -1.0)],
+    )
 
     output = module.generate_project_status_page(repo)
 
@@ -40,6 +53,12 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Five-day soak" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
+    assert "$1,000 Account Example" in html
+    assert "1% fixed risk per trade" in html
+    assert "Monthly Returns Ledger" in html
+    assert "monthlySearch" in html
+    assert "66.67%" in html
+    assert "+$10.00" in html
 
 
 def _load_module():
@@ -162,3 +181,13 @@ def _write_candidate_audit(path: Path) -> None:
                 "failed_gates": "multi_cell_survival;concentration",
             }
         )
+
+
+def _write_trade_ledger(path: Path, rows: list[tuple[str, float]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = ["expert", "exit_time_utc", "r_multiple"]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for exit_time, r_multiple in rows:
+            writer.writerow({"expert": path.parent.name, "exit_time_utc": exit_time, "r_multiple": r_multiple})
