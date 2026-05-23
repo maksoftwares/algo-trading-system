@@ -28,6 +28,7 @@ RESEARCH_EXPERTS = (
     "round_number_retest_v0",
     "session_vwap_reclaim_v0",
     "symbol_normalized_round_retest_v0",
+    "symbol_round_sweep_reversal_v0",
     "squeeze_breakout_long_v0",
     "swing_breakout_retest_v0",
     "weekly_level_reclaim_v0",

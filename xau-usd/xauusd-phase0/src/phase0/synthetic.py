@@ -48,6 +48,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _session_vwap_reclaim_context()
     if expert == "symbol_normalized_round_retest_v0":
         return _round_number_retest_context()
+    if expert == "symbol_round_sweep_reversal_v0":
+        return _symbol_round_sweep_reversal_context()
     if expert == "squeeze_breakout_long_v0":
         return _squeeze_breakout_long_context()
     if expert == "swing_breakout_retest_v0":
@@ -921,6 +923,21 @@ def _round_number_retest_context() -> dict:
     m5["latest_swing_low_time_utc"] = [pd.NaT] * len(m5)
     context["M5"] = m5
     return context
+
+
+def _symbol_round_sweep_reversal_context() -> dict:
+    m5 = _base_m5("2024-12-03T09:00:00Z", 40)
+    m5["atr14"] = [1.0] * 40
+    m5.loc[30, ["open", "high", "low", "close"]] = [100.00, 100.45, 99.55, 100.25]
+    m5.loc[30, ["mid_open", "mid_close", "bid_open", "ask_open", "bid_close", "ask_close"]] = [
+        100.00,
+        100.25,
+        99.90,
+        100.10,
+        100.15,
+        100.35,
+    ]
+    return {"M5": m5, "symbol": "XAUUSD", "point_size": 0.01}
 
 
 def _ny_am_pullback_continuation_context() -> dict:

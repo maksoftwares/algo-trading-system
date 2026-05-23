@@ -9,7 +9,7 @@ This document tracks the reviewer-requested D1-D4 checks. These checks do not ch
 | Item | Status | Current conclusion |
 | --- | --- | --- |
 | D1 - Combinatorial Purged Cross-Validation | PASS | `breakout_retest` passed 135 purged chronological paths across all 9 matrix cells; pass rate 100%, median OOS PF 1.379, minimum OOS PF 1.135. |
-| D2 - White Reality Check / SPA-style bootstrap | PASS | Post-`symbol_normalized_round_retest_v0` rerun: `breakout_retest` remained the family winner against the 24 non-empty matrix-ledger candidates; White Reality Check p-value 0.0200 and max pairwise SPA p-value 0.0326. |
+| D2 - White Reality Check / SPA-style bootstrap | PASS | Post-`symbol_round_sweep_reversal_v0` rerun: `breakout_retest` remained the family winner against the 25 non-empty matrix-ledger candidates; White Reality Check p-value 0.0200 and max pairwise SPA p-value 0.0326. |
 | D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
@@ -69,7 +69,7 @@ Latest result:
 | Family winner | breakout_retest |
 | White Reality Check p-value | 0.0200 |
 | Max pairwise SPA p-value | 0.0326 |
-| Non-empty candidate universe | 24 |
+| Non-empty candidate universe | 25 |
 | Bootstrap iterations | 5000 |
 | Circular block length | 3 months |
 
@@ -84,7 +84,7 @@ outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md
 outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv
 ```
 
-That audit found 23 rejected/research candidates, 4 with sample-size failures, 21 with multi-cell expectancy failures, 0 frequency-only failures, and two non-matrix pending candidates: `round_number_retest_v0` and `symbol_normalized_round_retest_v0`.
+That audit found 24 rejected/research candidates, 4 with sample-size failures, 22 with multi-cell expectancy failures, 0 frequency-only failures, and two non-matrix pending candidates: `round_number_retest_v0` and `symbol_normalized_round_retest_v0`.
 
 ## D3 - True Holdout
 

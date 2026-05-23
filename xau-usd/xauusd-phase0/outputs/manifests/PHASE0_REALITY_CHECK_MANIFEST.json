@@ -24,10 +24,11 @@
     "squeeze_breakout_long_v0",
     "swing_breakout_retest_v0",
     "symbol_normalized_round_retest_v0",
+    "symbol_round_sweep_reversal_v0",
     "trend_pullback",
     "weekly_level_reclaim_v0"
   ],
-  "generated_at_utc": "2026-05-23T15:10:41+00:00",
+  "generated_at_utc": "2026-05-23T15:23:25+00:00",
   "iterations": 5000,
   "max_pairwise_spa_pvalue": 0.03259348130373925,
   "max_pvalue": 0.1,
@@ -56,6 +57,7 @@
     "squeeze_breakout_long_v0": 1.772466563786245,
     "swing_breakout_retest_v0": 52707.866273483785,
     "symbol_normalized_round_retest_v0": 74292.88447199909,
+    "symbol_round_sweep_reversal_v0": -28.131890402824677,
     "trend_pullback": -51.36958679521826,
     "weekly_level_reclaim_v0": -4.626925385405885
   },
@@ -229,27 +231,35 @@
       "status": "PASS"
     },
     {
+      "alternative": "symbol_round_sweep_reversal_v0",
+      "approved_expert": "breakout_retest",
+      "bootstrap_q95": 162145.2562993209,
+      "mean_monthly_edge_usd": 209780.30304747963,
+      "spa_pvalue": 0.022795440911817635,
+      "status": "PASS"
+    },
+    {
       "alternative": "trend_pullback",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 162146.84130215817,
+      "bootstrap_q95": 166871.59011605143,
       "mean_monthly_edge_usd": 209803.54074387203,
-      "spa_pvalue": 0.022795440911817635,
+      "spa_pvalue": 0.02299540091981604,
       "status": "PASS"
     },
     {
       "alternative": "weekly_level_reclaim_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 166859.38641700815,
+      "bootstrap_q95": 160535.10408763483,
       "mean_monthly_edge_usd": 209756.7980824622,
-      "spa_pvalue": 0.02299540091981604,
+      "spa_pvalue": 0.01759648070385923,
       "status": "PASS"
     }
   ],
   "report_path": "outputs\\reports\\PHASE0_REALITY_CHECK.md",
-  "report_sha256": "6fd1e03bfec772e3ba1a44b2cf773cd7605be269214a41ba8eb80e9b23d953a9",
+  "report_sha256": "bf4f46d74e525bf3268fd629755bd3d8e90ac7d3609e8111dd0d0529c4201fcb",
   "status": "PASS",
   "summary_path": "outputs\\reports\\PHASE0_REALITY_CHECK_SUMMARY.csv",
-  "summary_sha256": "5ad3857596bc9cf538721892cca7fa4f75e55ee56b755b2d23e21a5f0d78f635",
+  "summary_sha256": "c86cda3c25bb9693631cb6ca7508330c54776bad3a7f702f2518c646c82e80d0",
   "white_bootstrap_quantiles": {
     "q90": 120986.58315673654,
     "q95": 160688.48256842137,

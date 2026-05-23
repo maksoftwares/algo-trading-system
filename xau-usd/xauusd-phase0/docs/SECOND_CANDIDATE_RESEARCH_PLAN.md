@@ -83,7 +83,7 @@ The second candidate must pass the same reduced-portfolio discipline:
 | Implementation draft | `src/phase0/strategies/symbol_normalized_round_retest_v0.py` |
 | Research smoke | `outputs/reports/symbol_normalized_round_retest_v0_research_smoke.md` |
 | Research result | `docs/SYMBOL_NORMALIZED_ROUND_RETEST_V0_RESEARCH_RESULT.md` |
-| Next action | Complete Gate 9 manual adversarial review for this same-family candidate while continuing a separate search for a genuinely independent behavior family. |
+| Next action | Complete Gate 9 manual adversarial review for this same-family candidate while continuing a separate search for a genuinely independent behavior family. The latest independent reversal probe, `symbol_round_sweep_reversal_v0`, was rejected first-pass. |
 
 ## Promotion Prep Command
 
