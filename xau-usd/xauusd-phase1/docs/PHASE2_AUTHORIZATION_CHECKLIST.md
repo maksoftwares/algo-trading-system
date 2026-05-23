@@ -10,11 +10,11 @@ This checklist separates work that is already closed from gates that still requi
 | --- | --- | --- |
 | Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` is approved as a same-family future expert candidate. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
-| D2 Reality Check / SPA-style bootstrap | PASS | Review #3 rerun against 18 non-empty matrix-ledger candidates: White p=0.0200, max SPA p=0.0336; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
+| D2 Reality Check / SPA-style bootstrap | PASS | Rerun against 19 non-empty matrix-ledger candidates after `liquidity_sweep_reversal_v0`: White p=0.0200, max SPA p=0.0342; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
-| Rejected-candidate gate audit | PASS | Review #3 V3: 17 rejected/research candidates audited, 4 sample-size failures, 17 multi-cell expectancy failures, 0 frequency-only failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
+| Rejected-candidate gate audit | PASS | Review #3 V3: 18 rejected/research candidates audited, 4 sample-size failures, 18 multi-cell expectancy failures, 0 frequency-only failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
 | Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md` |
