@@ -12,3 +12,22 @@ Required flow for real-data runs:
 The manifest is written to `outputs/hashes/hypothesis_hash_manifest.csv` and stores expert name, hypothesis file path, SHA256, registration timestamp, file size, and current git commit when available.
 
 If a hypothesis changes after results exist, do not silently overwrite the manifest. Create a new hypothesis version, register that version, and treat previous results as exploratory unless there is a clean audit trail proving the run happened after registration.
+
+## Required Research Metadata
+
+Every new hypothesis must declare:
+
+- mechanic family
+- entry / decision timeframe
+- expected median hold bars in M5-equivalent bars
+- expected median hold hours
+- expected decisions per week
+- whether it qualifies as timeframe diversification
+
+Timeframe diversification is classified by the entry and decision cadence, not by the source of a reference level. A weekly level with M5 entries remains an intraday execution candidate.
+
+## Sequential Testing Rule
+
+Every candidate that enters the non-empty matrix ledger remains in future D2 Reality Check / SPA runs unless there is a documented data-quality reason to exclude it.
+
+If the non-empty matrix-ledger candidate universe reaches 30 candidates, Phase 2 authorization requires Reality Check / SPA to clear alpha = 0.01 instead of alpha = 0.10. This avoids letting a growing candidate universe weaken the statistical evidence chain.

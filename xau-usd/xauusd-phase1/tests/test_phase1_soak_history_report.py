@@ -22,6 +22,7 @@ def test_soak_history_report_passes_clean_history(tmp_path):
     assert output.rows_analyzed == 2
     assert "Phase 1 Soak History Report" in report
     assert "Latest M5 bar: 2026.05.21 19:55:00" in report
+    assert "Longest active streak" in report
     assert "Recent History" in report
     assert "No historical acceptance `FAIL` rows recorded." in report
 
@@ -122,6 +123,11 @@ def _write_history(path: Path, latest_permission: str = "false", rows_override: 
         "required_soak_days",
         "observed_soak_days",
         "soak_progress_pct",
+        "soak_current_streak_hours",
+        "soak_longest_streak_hours",
+        "soak_required_uninterrupted_streak_hours",
+        "soak_uninterrupted_pass",
+        "soak_last_restart_utc",
         "summary_path",
         "log_report",
         "soak_report",
@@ -168,6 +174,11 @@ def _write_history(path: Path, latest_permission: str = "false", rows_override: 
                 "would_signal_clusters": "4",
                 "required_soak_days": "5",
                 "observed_soak_days": "0.2569",
+                "soak_current_streak_hours": row.get("soak_current_streak_hours", "2.0"),
+                "soak_longest_streak_hours": row.get("soak_longest_streak_hours", "2.0"),
+                "soak_required_uninterrupted_streak_hours": "72.0",
+                "soak_uninterrupted_pass": "False",
+                "soak_last_restart_utc": "2026-05-21T08:00:00Z",
                 "summary_path": "outputs/reports/PHASE1_STATUS_SUMMARY.json",
                 "log_report": "outputs/reports/PHASE1_DRY_RUN_LOG_REPORT.md",
                 "soak_report": "outputs/reports/PHASE1_SOAK_DRIFT_REPORT.md",

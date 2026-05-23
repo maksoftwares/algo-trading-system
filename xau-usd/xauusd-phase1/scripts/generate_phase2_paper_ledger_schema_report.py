@@ -62,10 +62,11 @@ REQUIRED_TOKENS = (
     "paper-only",
     "dry_run=true",
     "trade_permission=false",
-    "+0.10R",
+    "+0.15R",
     "SUSPEND_FAMILY",
     "breakout_retest",
     "swing_breakout_retest_v0",
+    "observer-only",
 )
 
 

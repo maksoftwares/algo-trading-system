@@ -110,11 +110,11 @@ def _write_project_shell(project: Path) -> None:
     (project / "docs" / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("phase2 prep\n", encoding="utf-8")
     (project / "docs" / "PHASE2_PAPER_LEDGER_SCHEMA.md").write_text(_phase2_schema_doc(), encoding="utf-8")
     (project / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md").write_text(
-        "cost-measurement experiment\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R\n",
+        "cost-measurement experiment\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.15R\n",
         encoding="utf-8",
     )
     (project / "docs" / "PHASE2_SINGLE_EDGE_RISK_PLAN.md").write_text(
-        "single-edge same-family +0.10R\n",
+        "single-edge same-family +0.15R observer-only\n",
         encoding="utf-8",
     )
     (project / "docs" / "PHASE2_OPERATIONS_PREP.md").write_text(

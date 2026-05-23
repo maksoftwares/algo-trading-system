@@ -192,7 +192,7 @@ def _render_report(
             "",
             "- Current work remains dry-run only.",
             "- Broker-action code remains outside the approved scope.",
-            "- Final Phase 1 acceptance still depends on the five-trading-day soak gate.",
+            "- Final Phase 1 acceptance still depends on the five-trading-day soak gate and the 72-hour uninterrupted active-market streak gate.",
             "",
         ]
     )

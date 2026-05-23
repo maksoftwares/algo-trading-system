@@ -45,6 +45,11 @@ Expected path:
 | 24 | `round_number_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, low intrabar ambiguity, and XAU-specific multisymbol note; manual adversarial review still required. |
 | 25 | `symbol_normalized_round_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, low intrabar ambiguity, and non-zero EURUSD/USDJPY multisymbol transfer; manual adversarial review still required. |
 | 26 | `symbol_round_sweep_reversal_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30 and drawdown was too high, so do not tune v0. |
+| 27 | `liquidity_sweep_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; adequate trade count but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 28 | `session_extreme_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, multisymbol, and intrabar checks; same-family level-and-pullback, so not diversification and Gate 9 remains pending. |
+| 29 | `d1_momentum_h4_pullback_v0` | REJECTED_FIRST_PASS | First true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
+| 30 | `d1_volatility_expansion_reversal_v0` | REJECTED_FIRST_PASS | Second true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade-count and concentration gates failed; do not tune v0. |
+| 31 | `d1_compression_h4_expansion_v0` | PLANNED_NEXT_NON_LEVEL_H4_D1 | Next diversification attempt: D1 volatility contraction state with H4 expansion confirmation, expected median hold >24h, expected trades <100/year. |
 
 ## Discipline
 
@@ -59,4 +64,25 @@ Expected path:
 - Latest candidate result: `round_number_retest_v0` is a provisional same-family pass pending Gate 9 manual adversarial review.
 - Latest candidate result: `symbol_normalized_round_retest_v0` is a stronger provisional same-family pass than `round_number_retest_v0` because it preserves XAU matrix strength while producing EURUSD PF 1.298 and USDJPY PF 1.559 in multisymbol transfer. Gate 9 remains pending with 0/120 sampled losing trades reviewed.
 - Latest independent reversal candidate result: `symbol_round_sweep_reversal_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30 and max drawdown reached 50.46%.
-- Next independent candidate should still be a fresh, versioned hypothesis from a genuinely different behavior family; do not tune any rejected v0 in place.
+- Latest independent continuation candidate result: `liquidity_sweep_continuation_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
+- Latest same-family provisional result: `session_extreme_retest_v0` passed automated research gates, but remains Gate 9 pending and does not diversify the breakout-retest family.
+- Review #5 forcing-function result: `d1_momentum_h4_pullback_v0` was registered, hash-locked, implemented, smoke-tested, and run through a real 9-cell first pass before any new same-family candidate was authored. It was rejected with 3/9 PF cells >= 1.30 and a failed concentration gate.
+- Latest H4/D1 diversification result: `d1_volatility_expansion_reversal_v0` was rejected first-pass. It produced 30-53 trades per cell, 0/9 PF cells >= 1.30, and failed trade-count plus concentration gates.
+- Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
+
+## Timeframe Coverage
+
+Classify by entry / decision timeframe, not by the source of the reference level.
+
+```yaml
+hypothesis_timeframe_coverage:
+  M5_M15: 28
+  M30_H1: 0
+  H4_D1: 2
+  W1_plus: 0
+  planned_next_H4_D1: d1_compression_h4_expansion_v0
+```
+
+`daily_pivot_reclaim_v0` and `weekly_level_reclaim_v0` used slower reference levels, but both had M5 entries, so they do not count as H4/D1 diversification.
+
+`d1_momentum_h4_pullback_v0` and `d1_volatility_expansion_reversal_v0` count as H4/D1 diversification attempts by timing, but both are rejected and neither becomes an approved expert.

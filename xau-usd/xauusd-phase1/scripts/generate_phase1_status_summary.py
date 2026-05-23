@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from analyze_phase1_soak import analyze_phase1_soak
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from phase1_soak_streak import calculate_soak_streak
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -51,6 +53,7 @@ def generate_phase1_status_summary(
     rows = _read_csv(files_dir / DECISION_LOG)
     latest = rows[-1] if rows else {}
     soak_days = _soak_days(rows)
+    soak_streak = calculate_soak_streak(rows)
 
     summary = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -92,6 +95,7 @@ def generate_phase1_status_summary(
             "required_days": REQUIRED_SOAK_DAYS,
             "observed_days": round(soak_days, 4),
             "progress_pct": round(min(soak_days / REQUIRED_SOAK_DAYS, 1.0) * 100, 2),
+            **asdict(soak_streak),
         },
         "reports": {
             "log_report": str(log_status.report_path),

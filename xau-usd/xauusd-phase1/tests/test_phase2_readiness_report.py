@@ -28,6 +28,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     assert output.status == "PENDING"
     assert "Phase 2 preparation may continue" in report
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Uninterrupted 72-hour soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
@@ -134,6 +135,12 @@ def _write_summary(path: Path, progress: float, permission: str = "false") -> No
                     "progress_pct": progress,
                     "observed_days": 5 if progress >= 100 else 0.26,
                     "required_days": 5,
+                    "current_streak_hours": 72.0 if progress >= 100 else 2.0,
+                    "longest_streak_hours": 72.0 if progress >= 100 else 2.0,
+                    "required_uninterrupted_streak_hours": 72.0,
+                    "restart_count_during_current_streak": 0,
+                    "last_restart_utc": "2026-05-21T00:00:00Z",
+                    "uninterrupted_soak_pass": progress >= 100,
                 },
                 "would_signal": {
                     "rows": 4,
@@ -166,11 +173,11 @@ def _write_phase2_docs(root: Path) -> None:
     docs = root / "docs"
     (docs / "PHASE2_DRY_RUN_TO_PAPER_PREP_SPEC.md").write_text("# Phase 2\n", encoding="utf-8")
     (docs / "PHASE2_COST_MEASUREMENT_PROTOCOL.md").write_text(
-        "# Cost\n\ncost-measurement experiment\n\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R\n",
+        "# Cost\n\ncost-measurement experiment\n\nMIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.15R\n",
         encoding="utf-8",
     )
     (docs / "PHASE2_SINGLE_EDGE_RISK_PLAN.md").write_text(
-        "# Risk\n\nsingle-edge same-family +0.10R\n",
+        "# Risk\n\nsingle-edge same-family +0.15R observer-only\n",
         encoding="utf-8",
     )
     (docs / "PHASE2_OPERATIONS_PREP.md").write_text(
@@ -201,7 +208,7 @@ def _approval_text() -> str:
             "decision_date_utc: 2026-05-29T00:00:00Z",
             "decision: APPROVED",
             "scope: Phase 2 paper-mode only; no live capital",
-            "minimum_net_expectancy_r: 0.10",
+            "minimum_net_expectancy_r: 0.15",
             "single_edge_risk_ack: true",
             "no_live_capital_ack: true",
             "measured_cost_ack: true",

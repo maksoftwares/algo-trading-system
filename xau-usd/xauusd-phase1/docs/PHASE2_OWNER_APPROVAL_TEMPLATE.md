@@ -25,7 +25,7 @@ owner:
 decision_date_utc:
 decision:
 scope: Phase 2 paper-mode only; no live capital
-minimum_net_expectancy_r: 0.10
+minimum_net_expectancy_r: 0.15
 single_edge_risk_ack: false
 no_live_capital_ack: false
 measured_cost_ack: false
@@ -35,7 +35,7 @@ Required values:
 
 - `decision` must contain `APPROVED`
 - `scope` must be paper-mode only and must not authorize live capital
-- `minimum_net_expectancy_r` must be at least `0.10`
+- `minimum_net_expectancy_r` must be at least `0.15`
 - `single_edge_risk_ack`, `no_live_capital_ack`, and `measured_cost_ack` must be `true`
 
 ## Approved Scope Text
@@ -46,8 +46,8 @@ No live capital.
 No live order execution.
 Approved edge family: breakout-retest only.
 Approved future experts: breakout_retest and swing_breakout_retest_v0 as same-family observation/paper candidates.
-Minimum net expectancy after measured cost: +0.10R.
-Suspend the family if measured paper execution pushes net expectancy below +0.10R.
+Minimum net expectancy after measured cost: +0.15R.
+Suspend the family if measured paper execution pushes net expectancy below +0.15R.
 ```
 
 ## Approval Token

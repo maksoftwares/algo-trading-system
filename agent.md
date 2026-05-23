@@ -109,8 +109,8 @@ Last updated: 2026-05-23
 - D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
 - Latest D1 result: PASS. 135 CPCV paths across 9 matrix cells, 100% pass rate, median OOS PF 1.379, minimum OOS PF 1.135.
 - D2 Reality Check command: `phase0 run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10`.
-- Latest D2 result after adding `liquidity_sweep_continuation_v0` and `session_extreme_retest_v0`: PASS. `breakout_retest` remained the family winner across 27 non-empty matrix-ledger candidates, White Reality Check p-value 0.0200, max pairwise SPA p-value 0.0308.
-- Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. It audited 24 rejected/research candidates; 4 had sample-size failures, 22 had multi-cell expectancy failures, and 0 were frequency-only failures. `round_number_retest_v0` and `symbol_normalized_round_retest_v0` are pending/non-matrix-rejection rows, not approved EAs.
+- Latest D2 result after switching to fixed-notional monthly R and adding the first two H4/D1 attempts: PASS. `breakout_retest` remained the family winner across 29 non-empty matrix-ledger candidates, White Reality Check p-value 0.0002, max pairwise SPA p-value 0.0188.
+- Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. It audited 30 candidates, 28 rejected/research rows; 5 had sample-size failures, 25 had multi-cell expectancy failures, and 0 were frequency-only failures. `round_number_retest_v0`, `symbol_normalized_round_retest_v0`, and `session_extreme_retest_v0` are pending/non-matrix-rejection rows, not approved EAs.
 - D3 true-holdout audit command: `phase0 audit-true-holdout`.
 - Latest D3 result: PASS. 96 result CSV files scanned, no holdout-window timestamps found, latest audited result timestamp `2025-06-30T23:55:00+00:00`, unlock file absent.
 - D4 independent reproduction command: `phase0 generate-independent-reproduction --expert breakout_retest --cell-id 2 --tolerance-pct 5`.
@@ -185,12 +185,16 @@ Last updated: 2026-05-23
 - Latest independent reversal candidate `symbol_round_sweep_reversal_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. It produced 685-1,338 trades per cell, but 0/9 cells reached PF >= 1.30, total return was negative in 8/9 cells, and max drawdown reached 50.46%, so do not proceed to deciles or tune v0.
 - Latest independent continuation candidate `liquidity_sweep_continuation_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. It produced 1,281-1,423 trades per cell, but 0/9 cells reached PF >= 1.30 and every cell had PF below 1.0, so do not proceed to deciles or tune v0.
 - Latest found candidate `session_extreme_retest_v0` is `PROVISIONAL_PASS_PENDING_GATE9`. It passed 9/9 matrix cells with PF 1.328-1.596 and 23,727 total matrix trades, passed deciles 10/10 with PF 1.321-1.657, passed multisymbol at P95 cost with EURUSD PF 1.181 and USDJPY PF 1.236, and had intrabar ambiguity of 240/23,727 trades (1.01%). Gate 9 is pending with 0/120 losses reviewed. This is still same-family breakout-retest logic, so it is a candidate found, but not true diversification and not approved for Phase 1/Phase 2 until manual review passes.
+- Review #5 forcing-function result: `d1_momentum_h4_pullback_v0` was written, SHA256 registered, implemented, smoke-tested, and run through a result-producing 9-cell matrix before any new same-family candidate was authored. It is `REJECTED_FIRST_PASS`: 684 total trades, 69-80 trades per cell, only 3/9 PF cells >= 1.30, and concentration failed. Do not tune v0.
+- Latest H4/D1 diversification attempt `d1_volatility_expansion_reversal_v0` is `REJECTED_FIRST_PASS`: 354 total trades, 30-53 trades per cell, 0/9 PF cells >= 1.30, and sample-size plus concentration failed. Do not tune v0.
+- Review #5 forcing rule remains strategically active for diversification: no same-family breakout-retest / level-and-pullback candidate should be treated as diversification, and independent non-level research must continue.
+- Hypothesis timeframe coverage by entry/decision cadence: `M5_M15=28`, `M30_H1=0`, `H4_D1=2`, `W1_plus=0`. The planned next diversification attempt is `d1_compression_h4_expansion_v0`, which must use H4/D1 decision timing, expected median hold >24h, and expected trades <100/year.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 6495 rows over 2 observed days; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 9666 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -213,7 +217,7 @@ Last updated: 2026-05-23
 - Acceptance report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_acceptance_report.py`.
 - Latest Phase 1 acceptance report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md`.
 - Latest acceptance status: PENDING. Compile/source-safety/log/soak/runtime-health/would-signal/soak-history/dry-run/permission/runtime-freshness/latest-row gates pass; only the five-trading-day wall-clock soak gate remains pending.
-- Hourly automation `phase1-mt5-soak-check` also regenerates the acceptance report, checks source safety, and reports five-trading-day soak progress.
+- Hourly automation `phase1-mt5-soak-check` also regenerates the acceptance report, checks source safety, and reports five-trading-day soak progress plus the 72-hour uninterrupted active-market streak.
 - Hourly automation `phase1-mt5-soak-check` also regenerates `PHASE1_STATUS_SUMMARY.json`, appends `PHASE1_SOAK_HISTORY.csv`, regenerates `PHASE1_SOAK_HISTORY_REPORT.md`, regenerates `PHASE1_REVIEW_INDEX.md`, and regenerates `PHASE2_READINESS_REPORT.md`.
 - Phase 1 bundle generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_bundle.py`.
 - Latest Phase 1 dry-run review bundle: `xau-usd\xauusd-phase1\outputs\review_bundles\PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip`.
@@ -226,7 +230,7 @@ Last updated: 2026-05-23
 - Phase 2 owner approval template: `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_TEMPLATE.md`; do not create `outputs\reports\PHASE2_OWNER_APPROVAL.md` until all objective readiness gates pass and the owner explicitly approves paper-mode implementation.
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
 - Phase 2 VPS selection matrix: `xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md`, status PENDING until the owner selects provider, region, specs, backup method, and monitoring approach.
-- Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.10R net expectancy.
+- Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.15R net expectancy.
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.
 - Periodic Phase 1 check runner: `xau-usd\xauusd-phase1\scripts\run_phase1_periodic_checks.py`.

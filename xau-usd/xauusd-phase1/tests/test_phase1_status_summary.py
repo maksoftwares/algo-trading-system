@@ -39,6 +39,11 @@ def test_status_summary_writes_machine_readable_snapshot(tmp_path):
     assert summary["would_signal"]["rows"] == 2
     assert summary["would_signal"]["clusters"] == 2
     assert summary["soak"]["progress_pct"] > 0
+    assert summary["soak"]["required_uninterrupted_streak_hours"] == 72.0
+    assert summary["soak"]["current_streak_hours"] > 0
+    assert summary["soak"]["longest_streak_hours"] > 0
+    assert summary["soak"]["uninterrupted_soak_pass"] is False
+    assert summary["soak"]["last_restart_utc"] == "2026-05-21T08:00:00Z"
 
 
 def _load_module():

@@ -46,6 +46,7 @@ def run_reality_check(
         raise ConfigError("Reality check requires at least two expert candidates.")
     if len(panel) < block_months * 2:
         raise ConfigError("Reality check monthly panel is too short for the requested block size.")
+    effective_max_pvalue = 0.01 if len(panel.columns) >= 30 and max_pvalue > 0.01 else max_pvalue
 
     observed = panel.mean(axis=0)
     winner = str(observed.idxmax())
@@ -61,14 +62,14 @@ def run_reality_check(
         iterations=iterations,
         block_months=block_months,
         seed=seed + 17,
-        max_pvalue=max_pvalue,
+        max_pvalue=effective_max_pvalue,
     )
     max_pairwise_pvalue = max(float(row["spa_pvalue"]) for row in pairwise_rows)
     status = (
         "PASS"
         if winner == approved_expert
         and float(observed[approved_expert]) > 0
-        and white_pvalue <= max_pvalue
+        and white_pvalue <= effective_max_pvalue
         and all(row["status"] == "PASS" for row in pairwise_rows)
         else "FAIL"
     )
@@ -91,6 +92,7 @@ def run_reality_check(
             iterations=iterations,
             block_months=block_months,
             max_pvalue=max_pvalue,
+            effective_max_pvalue=effective_max_pvalue,
             observed=observed,
             white_pvalue=white_pvalue,
             white_bootstrap_quantiles=white_bootstrap_quantiles,
@@ -104,16 +106,17 @@ def run_reality_check(
         "status": status,
         "approved_expert": approved_expert,
         "winner": winner,
-        "method": "white_reality_check_and_spa_style_block_bootstrap_on_monthly_trade_ledger_returns",
+        "method": "white_reality_check_and_spa_style_block_bootstrap_on_fixed_notional_monthly_r",
         "iterations": iterations,
         "block_months": block_months,
         "max_pvalue": max_pvalue,
+        "effective_max_pvalue": effective_max_pvalue,
         "white_reality_check_pvalue": white_pvalue,
         "white_bootstrap_quantiles": white_bootstrap_quantiles,
         "max_pairwise_spa_pvalue": max_pairwise_pvalue,
         "month_count": int(len(panel)),
         "experts": list(panel.columns),
-        "observed_mean_monthly_pnl_usd": {str(key): float(value) for key, value in observed.items()},
+        "observed_mean_monthly_r": {str(key): float(value) for key, value in observed.items()},
         "pairwise_spa": pairwise_rows,
         "report_path": str(report_path.relative_to(config.root)),
         "summary_path": str(summary_path.relative_to(config.root)),
@@ -149,14 +152,18 @@ def _load_monthly_panel(config: ProjectConfig) -> pd.DataFrame:
 def _expert_monthly_series(expert_dir: Path) -> pd.Series:
     ledger_series: list[pd.Series] = []
     for trade_file in sorted(expert_dir.glob("*_trades.csv")):
-        frame = pd.read_csv(trade_file, usecols=["entry_time_utc", "net_pnl_usd"])
+        frame = pd.read_csv(
+            trade_file,
+            usecols=lambda column: column in {"entry_time_utc", "r_multiple", "net_pnl_usd"},
+        )
         frame["entry_time_utc"] = pd.to_datetime(frame["entry_time_utc"], utc=True, errors="coerce")
-        frame["net_pnl_usd"] = pd.to_numeric(frame["net_pnl_usd"], errors="coerce")
-        frame = frame.dropna(subset=["entry_time_utc", "net_pnl_usd"])
+        value_column = "r_multiple" if "r_multiple" in frame.columns else "net_pnl_usd"
+        frame[value_column] = pd.to_numeric(frame[value_column], errors="coerce")
+        frame = frame.dropna(subset=["entry_time_utc", value_column])
         if frame.empty:
             continue
         frame["month"] = frame["entry_time_utc"].dt.strftime("%Y-%m")
-        ledger_series.append(frame.groupby("month")["net_pnl_usd"].sum())
+        ledger_series.append(frame.groupby("month")[value_column].sum())
     if not ledger_series:
         return pd.Series(dtype="float64")
     return pd.concat(ledger_series, axis=1).fillna(0.0).mean(axis=1)
@@ -212,7 +219,7 @@ def _pairwise_spa_rows(
                 "status": "PASS" if observed_diff > 0 and pvalue <= max_pvalue else "FAIL",
                 "approved_expert": approved_expert,
                 "alternative": str(alternative),
-                "mean_monthly_edge_usd": observed_diff,
+                "mean_monthly_edge_r": observed_diff,
                 "spa_pvalue": pvalue,
                 "bootstrap_q95": float(np.quantile(bootstrap_stats, 0.95)),
             }
@@ -242,8 +249,8 @@ def _summary_rows(
             "row_type": "expert_monthly_mean",
             "expert": str(expert),
             "comparison": "",
-            "mean_monthly_pnl_usd": float(value),
-            "total_pnl_usd": float(panel[expert].sum()),
+            "mean_monthly_r": float(value),
+            "total_r": float(panel[expert].sum()),
             "pvalue": "",
             "status": "APPROVED_EXPERT" if expert == approved_expert else "ALTERNATIVE",
         }
@@ -255,8 +262,8 @@ def _summary_rows(
                 "row_type": "pairwise_spa",
                 "expert": row["approved_expert"],
                 "comparison": row["alternative"],
-                "mean_monthly_pnl_usd": row["mean_monthly_edge_usd"],
-                "total_pnl_usd": "",
+                "mean_monthly_r": row["mean_monthly_edge_r"],
+                "total_r": "",
                 "pvalue": row["spa_pvalue"],
                 "status": row["status"],
             }
@@ -271,6 +278,7 @@ def _render_report(
     iterations: int,
     block_months: int,
     max_pvalue: float,
+    effective_max_pvalue: float,
     observed: pd.Series,
     white_pvalue: float,
     white_bootstrap_quantiles: dict[str, float],
@@ -281,26 +289,26 @@ def _render_report(
         [
             {
                 "Expert": str(expert),
-                "Mean Monthly PnL": _money(value),
-                "Total PnL": _money(panel[expert].sum()),
+                "Mean Monthly R": _fmt(value, 4),
+                "Total R": _fmt(panel[expert].sum(), 2),
                 "Role": "approved" if expert == approved_expert else "alternative",
             }
             for expert, value in observed.items()
         ],
-        ["Expert", "Mean Monthly PnL", "Total PnL", "Role"],
+        ["Expert", "Mean Monthly R", "Total R", "Role"],
     )
     pairwise_table = _markdown_table(
         [
             {
                 "Alternative": str(row["alternative"]),
                 "Status": str(row["status"]),
-                "Mean Edge": _money(row["mean_monthly_edge_usd"]),
+                "Mean Edge R": _fmt(row["mean_monthly_edge_r"], 4),
                 "SPA p": _fmt(row["spa_pvalue"], 4),
-                "Bootstrap q95": _money(row["bootstrap_q95"]),
+                "Bootstrap q95 R": _fmt(row["bootstrap_q95"], 4),
             }
             for row in pairwise_rows
         ],
-        ["Alternative", "Status", "Mean Edge", "SPA p", "Bootstrap q95"],
+        ["Alternative", "Status", "Mean Edge R", "SPA p", "Bootstrap q95 R"],
     )
     return "\n".join(
         [
@@ -314,14 +322,16 @@ def _render_report(
             "",
             (
                 "This report applies a White Reality Check and SPA-style pairwise bootstrap to monthly "
-                "trade-ledger returns for the Phase 0 expert family. Each expert's monthly value is the "
-                "average monthly PnL across its matrix trade ledgers, which keeps cost/broker cells from "
-                "turning into separate optimized candidates."
+                "fixed-notional R returns for the Phase 0 expert family. Each expert's monthly value is "
+                "the average monthly R sum across its matrix trade ledgers, which keeps cost/broker cells "
+                "from turning into separate optimized candidates and avoids compounding-dollar scale artifacts."
             ),
             "",
             f"- Bootstrap iterations: {iterations}",
             f"- Circular block length: {block_months} month(s)",
             f"- Maximum accepted p-value: {max_pvalue}",
+            f"- Effective accepted p-value: {effective_max_pvalue}",
+            "- Candidate universes with at least 30 non-empty matrix-ledger candidates are tightened to alpha = 0.01.",
             f"- Months in panel: {len(panel)}",
             "",
             "## White Reality Check",
@@ -331,12 +341,12 @@ def _render_report(
                     {
                         "Winner": winner,
                         "White p": _fmt(white_pvalue, 4),
-                        "q90": _money(white_bootstrap_quantiles["q90"]),
-                        "q95": _money(white_bootstrap_quantiles["q95"]),
-                        "q99": _money(white_bootstrap_quantiles["q99"]),
+                        "q90 R": _fmt(white_bootstrap_quantiles["q90"], 4),
+                        "q95 R": _fmt(white_bootstrap_quantiles["q95"], 4),
+                        "q99 R": _fmt(white_bootstrap_quantiles["q99"], 4),
                     }
                 ],
-                ["Winner", "White p", "q90", "q95", "q99"],
+                ["Winner", "White p", "q90 R", "q95 R", "q99 R"],
             ),
             "",
             "## Expert Means",

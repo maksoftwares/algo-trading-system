@@ -162,7 +162,7 @@ def _render_html(
             ),
             _panel(
                 "Runtime Boundary",
-                _runtime_table(status_fields, latest, runtime, would_signal),
+                _runtime_table(status_fields, latest, runtime, would_signal, soak),
             ),
             _panel(
                 "Cost Lens",
@@ -533,6 +533,18 @@ def _kpi_grid(
                 bar=_progress_bar(soak_progress, "soak"),
             ),
             _kpi(
+                label="72h streak",
+                value=f"{_fmt_float(_to_float(soak.get('longest_streak_hours')) or 0.0)}h",
+                status="PASS" if soak.get("uninterrupted_soak_pass") is True else "PENDING",
+                note=f"current {_fmt_float(_to_float(soak.get('current_streak_hours')) or 0.0)}h active market bars",
+                bar=_progress_bar(
+                    ((_to_float(soak.get("longest_streak_hours")) or 0.0)
+                    / (_to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0))
+                    * 100.0,
+                    "soak",
+                ),
+            ),
+            _kpi(
                 label="Modeled cost load",
                 value=f"{_fmt_float(cost_consumption)}%",
                 status=fixed_notional.get("Flag", ""),
@@ -745,6 +757,7 @@ def _runtime_table(
     latest: dict[str, Any],
     runtime: dict[str, Any],
     would_signal: dict[str, Any],
+    soak: dict[str, Any],
 ) -> str:
     rows = [
         ("Decision rows", _cell(runtime.get("decision_rows"))),
@@ -757,6 +770,9 @@ def _runtime_table(
         ("Log verification", _cell(status_fields.get("log_verification"))),
         ("Runtime health", _cell(status_fields.get("runtime_health"))),
         ("Soak analysis", _cell(status_fields.get("soak_analysis"))),
+        ("Current active streak", f"{_cell(soak.get('current_streak_hours'))}h"),
+        ("Longest active streak", f"{_cell(soak.get('longest_streak_hours'))}h / {_cell(soak.get('required_uninterrupted_streak_hours'))}h"),
+        ("Last restart UTC", _cell(soak.get("last_restart_utc"))),
         ("Would-signal clusters", _cell(would_signal.get("clusters"))),
     ]
     return _key_value_table(rows)
@@ -1229,7 +1245,7 @@ def _artifact_links() -> str:
 def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[str, str]) -> list[str]:
     items = []
     if phase1_status != "PASS":
-        items.append("Let the five-trading-day Phase 1 soak continue; do not count weekend stale ticks as trading time.")
+        items.append("Let the five-trading-day Phase 1 soak and 72-hour uninterrupted active-market streak continue; do not count weekend stale ticks as trading time.")
     if measured_cost.get("status") != "PASS":
         items.append("Keep the passive spread logger running until measured-cost coverage reaches the required observed days.")
     if phase2_status != "PASS":

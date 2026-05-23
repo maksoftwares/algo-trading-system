@@ -103,7 +103,7 @@ The first milestone should be a paper ledger only. It should read the same dry-r
 
 ## Current Status
 
-Phase 2 preparation is allowed. Phase 2 implementation is not yet authorized because Phase 1 acceptance remains pending until the five-trading-day soak gate closes.
+Phase 2 preparation is allowed. Phase 2 implementation is not yet authorized because Phase 1 acceptance remains pending until both the five-trading-day soak gate and the 72-hour uninterrupted active-market streak gate close.
 
 The machine-checkable preflight artifact for this boundary is:
 

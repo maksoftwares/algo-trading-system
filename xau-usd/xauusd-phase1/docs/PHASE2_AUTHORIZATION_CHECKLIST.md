@@ -10,19 +10,19 @@ This checklist separates work that is already closed from gates that still requi
 | --- | --- | --- |
 | Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` is approved as a same-family future expert candidate. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
-| D2 Reality Check / SPA-style bootstrap | PASS | Rerun against 19 non-empty matrix-ledger candidates after `liquidity_sweep_reversal_v0`: White p=0.0200, max SPA p=0.0342; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
+| D2 Reality Check / SPA-style bootstrap | PASS | Fixed-notional R rerun against 29 non-empty matrix-ledger candidates: White p=0.0002, max SPA p=0.0188; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
-| Rejected-candidate gate audit | PASS | Review #3 V3: 18 rejected/research candidates audited, 4 sample-size failures, 18 multi-cell expectancy failures, 0 frequency-only failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
+| Rejected-candidate gate audit | PASS | Latest audit: 30 audited candidates, 28 rejected/research rows, 5 sample-size failures, 25 multi-cell expectancy failures, 0 frequency-only failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
 | Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md` |
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
-| Phase 2 cost-measurement protocol | PASS | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` documents Phase 2 as a cost-measurement experiment and pre-commits the +0.10R suspension rule. |
-| Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats both approved variants as one correlated breakout-retest family. |
+| Phase 2 cost-measurement protocol | PASS | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` documents Phase 2 as a cost-measurement experiment and pre-commits the +0.15R suspension rule. |
+| Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats same-family variants as one correlated breakout-retest family and makes `breakout_retest` the only execution-eligible first paper stream. |
 | External health monitor | PASS | `docs/PHASE2_OPERATIONS_PREP.md` defines the out-of-terminal monitor and local scheduler-friendly check script. |
 | Disaster recovery runbook | PASS | `docs/PHASE2_OPERATIONS_PREP.md` documents recovery assets, procedure, and rollback rule. |
 | Capital allocation ladder | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines the paper-to-micro ladder and single-edge sizing constraint. |
@@ -33,13 +33,14 @@ This checklist separates work that is already closed from gates that still requi
 | Gate | Current status | Closure rule |
 | --- | --- | --- |
 | Five trading day soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` must show five-day soak PASS. |
+| Uninterrupted 72-hour soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show longest active-market streak >= 72h with no dry-run, permission, schema, or server-time violations. |
 | Measured cost model | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS. |
 | Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must show PASS. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` after provider, region, specs, backup access, and monitoring approach are selected. |
-| Independent second candidate implementation | PENDING | Keep searching for a non-breakout-retest-family candidate; same-family swing candidate is not independent diversification. |
+| Non-level forcing candidate run | PASS | `d1_momentum_h4_pullback_v0` was registered, hash-locked, implemented, smoke-tested, and run through a real 9-cell first pass before any new same-family candidate was authored. It was rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 
@@ -52,6 +53,7 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | Decision rows | 56 |
 | Latest bar | 2026.05.22 20:55:00 |
 | Soak progress | 8.26% after v0.6 schema reset |
+| 72-hour active-market streak | Tracked in `PHASE1_STATUS_SUMMARY.json`; still PENDING until longest streak reaches 72h |
 | Acceptance | PENDING |
 
 ## Decision Rule
@@ -63,6 +65,7 @@ AND measured-cost revalidation = PASS
 AND Phase 1 review index = PASS
 AND Phase 2 readiness = PASS
 AND owner approval file exists
+AND owner approval minimum_net_expectancy_r >= 0.15
 THEN Phase 2 paper-mode implementation may begin.
 
 ELSE remain in Phase 1 dry-run / Phase 2 preparation.

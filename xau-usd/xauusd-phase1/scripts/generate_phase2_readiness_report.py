@@ -23,6 +23,7 @@ OWNER_APPROVAL_REQUIRED_FIELDS = (
     "minimum_net_expectancy_r",
     *OWNER_APPROVAL_TRUE_FIELDS,
 )
+MIN_PHASE2_NET_EXPECTANCY_R = 0.15
 
 
 @dataclass(frozen=True)
@@ -70,12 +71,12 @@ def generate_phase2_readiness_report(
         _file_contains_gate(
             "Phase 2 cost-measurement protocol",
             root / "docs" / "PHASE2_COST_MEASUREMENT_PROTOCOL.md",
-            ("MIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R", "cost-measurement experiment"),
+            ("MIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.15R", "cost-measurement experiment"),
         ),
         _file_contains_gate(
             "Single-edge risk plan",
             root / "docs" / "PHASE2_SINGLE_EDGE_RISK_PLAN.md",
-            ("single-edge", "same-family", "+0.10R"),
+            ("single-edge", "same-family", "+0.15R", "observer-only"),
         ),
         _file_contains_gate(
             "Phase 2 operations prep",
@@ -107,6 +108,7 @@ def generate_phase2_readiness_report(
         _status_gate("Phase 1 review index", report_dir / "PHASE1_REVIEW_INDEX.md", required="PASS"),
         _summary_health_gate(status_fields, summary_path),
         _soak_progress_gate(soak),
+        _uninterrupted_soak_gate(soak),
         _latest_boundary_gate(latest),
         _would_signal_gate(would_signal),
         _owner_approval_gate(owner_approval_path),
@@ -187,6 +189,22 @@ def _soak_progress_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
     return Phase2ReadinessItem("Five trading day soak", "PENDING", evidence)
 
 
+def _uninterrupted_soak_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
+    required = _to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0
+    longest = _to_float(soak.get("longest_streak_hours"))
+    current = _to_float(soak.get("current_streak_hours"))
+    passed = soak.get("uninterrupted_soak_pass") is True
+    if longest is None:
+        return Phase2ReadinessItem("Uninterrupted 72-hour soak", "FAIL", "Streak fields missing from status summary.")
+    evidence = (
+        f"Longest active streak {longest:.2f}h; current active streak "
+        f"{current if current is not None else 'n/a'}h; required {required:.0f}h."
+    )
+    if passed and longest >= required:
+        return Phase2ReadinessItem("Uninterrupted 72-hour soak", "PASS", evidence)
+    return Phase2ReadinessItem("Uninterrupted 72-hour soak", "PENDING", evidence)
+
+
 def _latest_boundary_gate(latest: dict[str, Any]) -> Phase2ReadinessItem:
     dry_run = str(latest.get("dry_run", "")).lower()
     permission = str(latest.get("trade_permission", "")).lower()
@@ -251,11 +269,11 @@ def _owner_approval_gate(path: Path) -> Phase2ReadinessItem:
             f"`{path}` scope must be paper-mode only.",
         )
     minimum_net = _to_float(fields.get("minimum_net_expectancy_r"))
-    if minimum_net is None or minimum_net < 0.10:
+    if minimum_net is None or minimum_net < MIN_PHASE2_NET_EXPECTANCY_R:
         return Phase2ReadinessItem(
             "Project owner approval",
             "PENDING",
-            f"`{path}` minimum_net_expectancy_r must be at least 0.10.",
+            f"`{path}` minimum_net_expectancy_r must be at least {MIN_PHASE2_NET_EXPECTANCY_R:.2f}.",
         )
     return Phase2ReadinessItem("Project owner approval", "PASS", f"Signed approval fields found in `{path}`.")
 

@@ -11,6 +11,7 @@ from audit_phase1_safety import audit_phase1_tree
 from deploy_phase1_mt5 import _read_compile_log
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from phase1_soak_streak import calculate_soak_streak
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -88,6 +89,7 @@ def generate_phase1_acceptance_report(
         _permission_item(decision_rows),
         _freshness_item(decision_rows, now, max_fresh_minutes),
         _latest_row_item(decision_rows),
+        _uninterrupted_soak_item(decision_rows),
         _soak_duration_item(decision_rows),
     ]
 
@@ -220,6 +222,21 @@ def _soak_duration_item(rows: list[dict[str, str]]) -> AcceptanceItem:
     if span_days >= REQUIRED_SOAK_DAYS:
         return AcceptanceItem("Five trading day soak", "PASS", evidence)
     return AcceptanceItem("Five trading day soak", "PENDING", evidence)
+
+
+def _uninterrupted_soak_item(rows: list[dict[str, str]]) -> AcceptanceItem:
+    if not rows:
+        return AcceptanceItem("Uninterrupted 72-hour soak", "PENDING", "No decision rows found.")
+    streak = calculate_soak_streak(rows)
+    evidence = (
+        f"Longest active streak: {streak.longest_streak_hours:.2f}h; "
+        f"current active streak: {streak.current_streak_hours:.2f}h; "
+        f"required: {streak.required_uninterrupted_streak_hours:.0f}h; "
+        f"last restart UTC: {streak.last_restart_utc or 'n/a'}."
+    )
+    if streak.uninterrupted_soak_pass:
+        return AcceptanceItem("Uninterrupted 72-hour soak", "PASS", evidence)
+    return AcceptanceItem("Uninterrupted 72-hour soak", "PENDING", evidence)
 
 
 def _parse_mt5_datetime(value: str) -> datetime | None:

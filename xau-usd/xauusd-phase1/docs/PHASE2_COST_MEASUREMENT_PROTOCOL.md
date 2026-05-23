@@ -1,6 +1,6 @@
 # Phase 2 Cost Measurement Protocol
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 Phase 2 is a paper-mode cost-measurement experiment. It is not a profit-confirmation phase and it does not authorize live capital.
 
@@ -26,6 +26,7 @@ The modeled cost is provisional until the measured cost model and measured-cost 
 | `MEASURED_COST_MODEL.md` | PASS |
 | `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` | PASS |
 | Phase 1 five-trading-day soak | PASS |
+| Phase 1 uninterrupted 72-hour active-market streak | PASS |
 | Phase 1 review index | PASS |
 | Owner approval file | PASS |
 
@@ -54,13 +55,13 @@ Every paper-mode would-order or paper-order observation must preserve:
 Pre-committed threshold:
 
 ```text
-MIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.10R
+MIN_NET_EXPECTANCY_R_AFTER_MEASURED_COST = +0.15R
 ```
 
 Decision rule:
 
 ```text
-IF measured paper/live execution cost pushes breakout_retest family net expectancy below +0.10R
+IF measured paper/live execution cost pushes breakout_retest family net expectancy below +0.15R
 THEN suspend the breakout-retest family and return to research.
 ```
 
@@ -72,14 +73,14 @@ This rule applies to the family, not only one timeframe flavor. `breakout_retest
 | --- | --- |
 | Daily during Phase 2 | Check cost, spread, slippage proxy, stale ticks, and dry-run/paper permission state. |
 | Weekly during Phase 2 | Produce a cost-retention summary against the 0.1888R modeled baseline. |
-| Before any live pilot | Recompute net expectancy after measured costs and confirm it remains at or above +0.10R. |
+| Before any live pilot | Recompute net expectancy after measured costs and confirm it remains at or above +0.15R. |
 
 ## Interpretation
 
 | Outcome | Decision |
 | --- | --- |
-| Net expectancy >= +0.10R and drift acceptable | Continue paper-mode evidence collection. |
-| Net expectancy between +0.00R and +0.10R | Suspend family; do not live-pilot. |
+| Net expectancy >= +0.15R and drift acceptable | Continue paper-mode evidence collection. |
+| Net expectancy between +0.00R and +0.15R | Suspend family; do not live-pilot. |
 | Net expectancy <= +0.00R | Retire or redesign as a new locked hypothesis. |
 | Cost evidence incomplete | Remain in Phase 1/2 preparation. |
 

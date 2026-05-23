@@ -36,6 +36,9 @@ def test_append_soak_history_flattens_status_summary_and_is_idempotent(tmp_path)
     assert rows[0]["would_signal_clusters"] == "4"
     assert rows[0]["observed_soak_days"] == "0.25"
     assert rows[0]["soak_progress_pct"] == "5.0"
+    assert rows[0]["soak_current_streak_hours"] == "2.0"
+    assert rows[0]["soak_longest_streak_hours"] == "2.0"
+    assert rows[0]["soak_uninterrupted_pass"] == "False"
     assert rows[0]["summary_path"] == str(summary_path.resolve())
 
 
@@ -93,6 +96,11 @@ def _write_summary(path: Path) -> None:
                     "required_days": 5,
                     "observed_days": 0.25,
                     "progress_pct": 5.0,
+                    "current_streak_hours": 2.0,
+                    "longest_streak_hours": 2.0,
+                    "required_uninterrupted_streak_hours": 72.0,
+                    "uninterrupted_soak_pass": False,
+                    "last_restart_utc": "2026-05-21T08:00:00Z",
                 },
                 "reports": {
                     "log_report": "outputs/reports/PHASE1_DRY_RUN_LOG_REPORT.md",

@@ -1,6 +1,6 @@
 # Phase 2 Single-Edge Risk Plan
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 This plan reflects Review #3: `swing_breakout_retest_v0` is same-family with `breakout_retest`, so the v1 portfolio is a single-edge breakout-retest family with two timeframe flavors. It must not be treated as diversified.
 
@@ -12,6 +12,20 @@ This plan reflects Review #3: `swing_breakout_retest_v0` is same-family with `br
 | `swing_breakout_retest_v0` | Approved future expert candidate | Same-family variant; useful for telemetry, not independent diversification. |
 
 Rejected experts and rejected research candidates remain rejected unless a new versioned hypothesis is written, hash-locked, and rerun through Phase 0.
+
+## Phase 2 Paper Eligibility
+
+Phase 2 paper mode must begin with exactly one execution-eligible stream:
+
+| Expert | Phase 2 role |
+| --- | --- |
+| `breakout_retest` | Execution-eligible paper stream after all readiness gates pass. |
+| `swing_breakout_retest_v0` | observer-only telemetry. |
+| `round_number_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
+| `symbol_normalized_round_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
+| `session_extreme_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
+
+Same-family variants must not be counted as diversification and must not generate paper fills in the first Phase 2 slice.
 
 ## Capital Principle
 
@@ -25,7 +39,7 @@ Phase 2 remains paper-mode only. No live capital is authorized by this document.
 | --- | --- | --- |
 | Phase 2 paper | Phase 1 acceptance PASS, measured-cost gates PASS, owner approval PASS | Paper-only, measure cost and drift. |
 | Live micro pilot | Separate future approval after paper evidence | Lower than the original 0.25% per trade assumption. |
-| Step 1 | Paper/live review shows cost-adjusted expectancy >= +0.10R and drift acceptable | Small fixed risk, no compounding. |
+| Step 1 | Paper/live review shows cost-adjusted expectancy >= +0.15R and drift acceptable | Small fixed risk, no compounding. |
 | Step 2 | Additional review period passes without concentration or drift breach | Modest increase only after written review. |
 | Stop | Cost, drawdown, drift, logic, or execution trigger fires | Suspend the family and return to research. |
 
@@ -38,7 +52,7 @@ Phase 2 remains paper-mode only. No live capital is authorized by this document.
 | Compounding | Disabled through paper and any future micro pilot. |
 | Recovery behavior | No martingale, grid, averaging down, or loss recovery. |
 | Live execution | Not authorized until a later phase. |
-| Cost floor | Suspend if measured net expectancy falls below +0.10R. |
+| Cost floor | Suspend if measured net expectancy falls below +0.15R. |
 
 ## Drift And Review Triggers
 
@@ -46,7 +60,7 @@ Immediate review is required if any trigger fires:
 
 | Trigger | Rule |
 | --- | --- |
-| Cost drift | Measured cost exceeds the level that keeps net expectancy >= +0.10R. |
+| Cost drift | Measured cost exceeds the level that keeps net expectancy >= +0.15R. |
 | Trade-count drift | Observed frequency materially departs from Phase 0 expectation. |
 | PF drift | Rolling PF falls below the pre-defined warning band. |
 | Drawdown | Daily, weekly, monthly, or rolling drawdown reaches warning state. |

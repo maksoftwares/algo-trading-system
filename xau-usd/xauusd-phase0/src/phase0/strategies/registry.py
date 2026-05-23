@@ -8,6 +8,8 @@ from phase0.strategies.asia_range_london_failed_break_reversal_v0 import (
 from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
 from phase0.strategies.compression_retest_continuation_v0 import CompressionRetestContinuationV0Strategy
+from phase0.strategies.d1_momentum_h4_pullback_v0 import D1MomentumH4PullbackV0Strategy
+from phase0.strategies.d1_volatility_expansion_reversal_v0 import D1VolatilityExpansionReversalV0Strategy
 from phase0.strategies.daily_pivot_reclaim_v0 import DailyPivotReclaimV0Strategy
 from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
 from phase0.strategies.extreme_activity_mean_reversion_v0 import ExtremeActivityMeanReversionV0Strategy
@@ -48,6 +50,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     AsiaRangeLondonBreakoutV0Strategy.name: AsiaRangeLondonBreakoutV0Strategy,
     AsiaRangeLondonFailedBreakReversalV0Strategy.name: AsiaRangeLondonFailedBreakReversalV0Strategy,
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
+    D1MomentumH4PullbackV0Strategy.name: D1MomentumH4PullbackV0Strategy,
+    D1VolatilityExpansionReversalV0Strategy.name: D1VolatilityExpansionReversalV0Strategy,
     DailyPivotReclaimV0Strategy.name: DailyPivotReclaimV0Strategy,
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
     ExtremeActivityMeanReversionV0Strategy.name: ExtremeActivityMeanReversionV0Strategy,

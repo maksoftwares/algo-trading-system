@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 74. |
+| history_rows | PASS | History rows available: 82. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | PASS | Latest status is healthy; acceptance is PENDING. |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,11 +17,13 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 74
+- History rows: 82
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-23T15:30:41.429034+00:00
+- Latest summary: 2026-05-23T18:04:53.181536+00:00
 - Latest M5 bar: 2026.05.22 20:55:00
 - Latest soak progress: 8.26%
+- Longest active streak: 2.25h
+- Current active streak: 0.0h
 - Latest would-signal rows: 10
 - Latest setup clusters: 10
 
@@ -33,20 +35,20 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Recent History
 
-| Summary UTC | Latest Bar | Rows | Progress % | Would Rows | Clusters | Acceptance |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-23T12:57:20.994045+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:05:51.077953+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:10:52.070735+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:14:53.825051+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:16:59.264872+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:25:05.558361+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | FAIL |
-| 2026-05-23T13:25:45.490020+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:28:30.709189+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:30:29.675614+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T13:41:51.469556+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T14:29:40.837117+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
-| 2026-05-23T15:30:41.429034+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 10 | 10 | PENDING |
+| Summary UTC | Latest Bar | Rows | Progress % | Longest h | Would Rows | Clusters | Acceptance |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-23T13:30:29.675614+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 |  | 10 | 10 | PENDING |
+| 2026-05-23T13:41:51.469556+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 |  | 10 | 10 | PENDING |
+| 2026-05-23T14:29:40.837117+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 |  | 10 | 10 | PENDING |
+| 2026-05-23T15:30:41.429034+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 |  | 10 | 10 | PENDING |
+| 2026-05-23T16:31:34.602442+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T16:37:15.442879+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T16:37:38.782624+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T16:39:06.014258+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T17:33:14.345619+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T17:50:03.690843+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T17:59:11.447398+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
+| 2026-05-23T18:04:53.181536+00:00 | 2026.05.22 20:55:00 | 56 | 8.26 | 2.25 | 10 | 10 | PENDING |
 
 ## Historical Acceptance Notes
 
