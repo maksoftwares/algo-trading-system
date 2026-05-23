@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "message": "Research hypothesis is complete and hash-locked.",
+      "name": "hypothesis_hash_locked",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is available only in the research registry.",
+      "name": "research_strategy_registered",
+      "status": "PASS"
+    },
+    {
+      "message": "Strategy is not included in the active Phase 0 `all` registry.",
+      "name": "active_registry_disabled",
+      "status": "PASS"
+    },
+    {
+      "message": "Generated 1 synthetic signal(s).",
+      "name": "synthetic_signal",
+      "status": "PASS"
+    },
+    {
+      "message": "Plan direction=LONG, entry_type=MARKET, risk_reward=1.5.",
+      "name": "synthetic_trade_plan",
+      "status": "PASS"
+    }
+  ],
+  "expert": "m5_impulse_continuation_v0",
+  "generated_at_utc": "2026-05-23T14:16:05+00:00",
+  "hypothesis_file": "docs\\hypothesis_m5_impulse_continuation_v0.md",
+  "hypothesis_sha256": "5a69857e4291c4dd49143478b5826c4d7f3d8440c30bd0eeccf688b1a86a76ab",
+  "latest_plan": {
+    "direction": "LONG",
+    "entry_price": null,
+    "entry_type": "MARKET",
+    "risk_reward": 1.5,
+    "stop_loss": 99.85000000000001,
+    "take_profit": 102.125
+  },
+  "latest_signal": {
+    "direction": "LONG",
+    "reason_code": "M5_IMPULSE_CONTINUATION_V0_LONG",
+    "timestamp_utc": "2024-05-01T12:20:00+00:00"
+  },
+  "phase0_result_run_allowed": false,
+  "report_path": "outputs\\reports\\m5_impulse_continuation_v0_research_smoke.md",
+  "signal_count": 1,
+  "status": "PASS"
+}

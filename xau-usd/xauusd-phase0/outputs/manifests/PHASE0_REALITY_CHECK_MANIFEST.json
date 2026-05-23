@@ -11,6 +11,7 @@
     "liquidity_sweep_reversal_v0",
     "london_fix_continuation_v0",
     "m15_inside_bar_breakout_v0",
+    "m5_impulse_continuation_v0",
     "ny_am_pullback_continuation_v0",
     "ny_failed_london_reversal_v0",
     "ny_london_overlap_compression_break_v0",
@@ -24,9 +25,9 @@
     "trend_pullback",
     "weekly_level_reclaim_v0"
   ],
-  "generated_at_utc": "2026-05-23T14:13:06+00:00",
+  "generated_at_utc": "2026-05-23T14:23:52+00:00",
   "iterations": 5000,
-  "max_pairwise_spa_pvalue": 0.032993401319736056,
+  "max_pairwise_spa_pvalue": 0.026394721055788842,
   "max_pvalue": 0.1,
   "method": "white_reality_check_and_spa_style_block_bootstrap_on_monthly_trade_ledger_returns",
   "month_count": 108,
@@ -40,6 +41,7 @@
     "liquidity_sweep_reversal_v0": -21.76178174521231,
     "london_fix_continuation_v0": -7.047391460904813,
     "m15_inside_bar_breakout_v0": -4.985802004574391,
+    "m5_impulse_continuation_v0": -38.61463343884341,
     "ny_am_pullback_continuation_v0": -6.645574801383526,
     "ny_failed_london_reversal_v0": -2.394852077395981,
     "ny_london_overlap_compression_break_v0": -0.5213739711934979,
@@ -119,17 +121,25 @@
       "status": "PASS"
     },
     {
+      "alternative": "m5_impulse_continuation_v0",
+      "approved_expert": "breakout_retest",
+      "bootstrap_q95": 163621.60969735065,
+      "mean_monthly_edge_usd": 209790.78579051566,
+      "spa_pvalue": 0.020595880823835233,
+      "status": "PASS"
+    },
+    {
       "alternative": "ny_am_pullback_continuation_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 163603.83694752556,
+      "bootstrap_q95": 161531.3684942985,
       "mean_monthly_edge_usd": 209758.81673187818,
-      "spa_pvalue": 0.020595880823835233,
+      "spa_pvalue": 0.019396120775844832,
       "status": "PASS"
     },
     {
       "alternative": "ny_failed_london_reversal_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 161524.52362729757,
+      "bootstrap_q95": 161115.30465449073,
       "mean_monthly_edge_usd": 209754.5660091542,
       "spa_pvalue": 0.019396120775844832,
       "status": "PASS"
@@ -137,89 +147,89 @@
     {
       "alternative": "ny_london_overlap_compression_break_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 161115.14663775143,
+      "bootstrap_q95": 164784.95619276716,
       "mean_monthly_edge_usd": 209752.692531048,
-      "spa_pvalue": 0.019396120775844832,
+      "spa_pvalue": 0.022195560887822437,
       "status": "PASS"
     },
     {
       "alternative": "opening_drive_failed_continuation_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 164780.2996029523,
+      "bootstrap_q95": 166389.5903635856,
       "mean_monthly_edge_usd": 209760.81031357974,
-      "spa_pvalue": 0.022195560887822437,
+      "spa_pvalue": 0.023795240951809637,
       "status": "PASS"
     },
     {
       "alternative": "post_spike_short_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 166394.49135563808,
+      "bootstrap_q95": 160311.65810236987,
       "mean_monthly_edge_usd": 209755.62944128344,
-      "spa_pvalue": 0.023795240951809637,
+      "spa_pvalue": 0.019396120775844832,
       "status": "PASS"
     },
     {
       "alternative": "previous_day_extreme_retest_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 160313.7321314787,
+      "bootstrap_q95": 165659.6696921968,
       "mean_monthly_edge_usd": 209761.31207942907,
-      "spa_pvalue": 0.019396120775844832,
+      "spa_pvalue": 0.02559488102379524,
       "status": "PASS"
     },
     {
       "alternative": "range_mr",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 165648.89597134525,
+      "bootstrap_q95": 167306.59618084237,
       "mean_monthly_edge_usd": 209754.02993991875,
-      "spa_pvalue": 0.02559488102379524,
+      "spa_pvalue": 0.02299540091981604,
       "status": "PASS"
     },
     {
       "alternative": "session_vwap_reclaim_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 167301.2606933268,
+      "bootstrap_q95": 167315.05941199535,
       "mean_monthly_edge_usd": 209769.0458156373,
-      "spa_pvalue": 0.02299540091981604,
+      "spa_pvalue": 0.023595280943811237,
       "status": "PASS"
     },
     {
       "alternative": "squeeze_breakout_long_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 167324.7720663192,
+      "bootstrap_q95": 162452.97529893144,
       "mean_monthly_edge_usd": 209750.39869051302,
-      "spa_pvalue": 0.023595280943811237,
+      "spa_pvalue": 0.02399520095980804,
       "status": "PASS"
     },
     {
       "alternative": "swing_breakout_retest_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 133023.12990433682,
+      "bootstrap_q95": 129493.5727623999,
       "mean_monthly_edge_usd": 157044.30488359302,
-      "spa_pvalue": 0.032993401319736056,
+      "spa_pvalue": 0.026394721055788842,
       "status": "PASS"
     },
     {
       "alternative": "trend_pullback",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 159064.41440811788,
+      "bootstrap_q95": 164125.15666200113,
       "mean_monthly_edge_usd": 209803.54074387203,
-      "spa_pvalue": 0.01779644071185763,
+      "spa_pvalue": 0.02399520095980804,
       "status": "PASS"
     },
     {
       "alternative": "weekly_level_reclaim_v0",
       "approved_expert": "breakout_retest",
-      "bootstrap_q95": 164114.2635144944,
+      "bootstrap_q95": 165055.76074664373,
       "mean_monthly_edge_usd": 209756.7980824622,
-      "spa_pvalue": 0.02399520095980804,
+      "spa_pvalue": 0.023595280943811237,
       "status": "PASS"
     }
   ],
   "report_path": "outputs\\reports\\PHASE0_REALITY_CHECK.md",
-  "report_sha256": "48dcf0d092cdf87be4aa7d87720f05ccc4571ec135020050aac636d04a7d9c5d",
+  "report_sha256": "dd8eb342de3d52f33269f315b22bb18b2aa641f5eb0f9db96e4f5cfaec1c10b2",
   "status": "PASS",
   "summary_path": "outputs\\reports\\PHASE0_REALITY_CHECK_SUMMARY.csv",
-  "summary_sha256": "17fdacaf2d41e9c5377f97943c6801b1c263f0f145f84738ebb6efeb7758aafc",
+  "summary_sha256": "c137b1cfab5331f206a0ce34b49b2e5044f38c73f8829104e19a30af6caa33b9",
   "white_bootstrap_quantiles": {
     "q90": 120986.58315673654,
     "q95": 160688.48256842137,

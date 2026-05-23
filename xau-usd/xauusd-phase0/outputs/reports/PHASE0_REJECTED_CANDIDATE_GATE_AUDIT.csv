@@ -10,6 +10,7 @@ extreme_activity_mean_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,
 liquidity_sweep_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3906,393,482,427.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 london_fix_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,4821,463,658,486.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 m15_inside_bar_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,7170,727,854,809.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+m5_impulse_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,20346,2199,2363,2220.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
 ny_am_pullback_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3195,326,382,357.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 ny_failed_london_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,3369,322,415,386.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 ny_london_overlap_compression_break_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,135,2,41,2.0,5,multi_cell_survival;sample_size;concentration;activity;cost_sensitivity,FAIL,FAIL,PASS,FAIL,FAIL,FAIL

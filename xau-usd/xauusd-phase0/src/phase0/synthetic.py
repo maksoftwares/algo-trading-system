@@ -28,6 +28,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _liquidity_sweep_reversal_context()
     if expert == "m15_inside_bar_breakout_v0":
         return _m15_inside_bar_breakout_context()
+    if expert == "m5_impulse_continuation_v0":
+        return _m5_impulse_continuation_context()
     if expert == "ny_failed_london_reversal_v0":
         return _ny_failed_london_reversal_context()
     if expert == "ny_am_pullback_continuation_v0":
@@ -572,6 +574,49 @@ def _m15_inside_bar_breakout_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _m5_impulse_continuation_context() -> dict:
+    m5_times = pd.date_range("2024-05-01T06:05:00Z", periods=120, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.0] * 120,
+            "high": [100.2] * 120,
+            "low": [99.8] * 120,
+            "close": [100.0] * 120,
+            "atr14": [0.5] * 120,
+            "mid_open": [100.0] * 120,
+            "mid_close": [100.0] * 120,
+            "bid_open": [99.9] * 120,
+            "ask_open": [100.1] * 120,
+            "bid_close": [99.9] * 120,
+            "ask_close": [100.1] * 120,
+        }
+    )
+    m5.loc[74, ["open", "high", "low", "close"]] = [100.00, 100.45, 99.95, 100.35]
+    m5.loc[75, ["open", "high", "low", "close"]] = [100.35, 100.82, 100.30, 100.76]
+    for idx in (74, 75):
+        m5.loc[idx, "mid_open"] = m5.loc[idx, "open"]
+        m5.loc[idx, "mid_close"] = m5.loc[idx, "close"]
+        m5.loc[idx, "bid_open"] = m5.loc[idx, "open"] - 0.1
+        m5.loc[idx, "ask_open"] = m5.loc[idx, "open"] + 0.1
+        m5.loc[idx, "bid_close"] = m5.loc[idx, "close"] - 0.1
+        m5.loc[idx, "ask_close"] = m5.loc[idx, "close"] + 0.1
+
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-05-01T00:00:00Z", periods=30, freq="1h"),
+            "open": [100.0] * 30,
+            "high": [102.0] * 30,
+            "low": [98.0] * 30,
+            "close": [101.0] * 30,
+            "ema50": [100.0] * 30,
+            "ema50_slope12": [0.1] * 30,
+        }
+    )
+    return {"M5": m5, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
 
 
 def _london_fix_continuation_context() -> dict:
