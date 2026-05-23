@@ -149,7 +149,28 @@ def _write_phase0_cost_artifacts(project: Path) -> None:
     docs.mkdir(parents=True, exist_ok=True)
     reports.mkdir(parents=True, exist_ok=True)
     (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
+    (docs / "PHASE0_INDEPENDENT_VALIDATION.md").write_text(
+        "# Independent validation\n\nCanonical fixed-notional monthly R evidence; compounding variants are superseded.\n",
+        encoding="utf-8",
+    )
+    (docs / "CANDIDATE_RESEARCH_BACKLOG.md").write_text(
+        "\n".join(
+            [
+                "# Backlog",
+                "",
+                "d1_compression_h4_expansion_v0",
+                "h4_real_yield_proxy_momentum_v0",
+                "d1_multi_day_exhaustion_reversion_v0",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
     (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
+    (reports / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md").write_text(
+        "# Concentration\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
 
 
 def _write_runtime_logs(files_dir: Path) -> None:

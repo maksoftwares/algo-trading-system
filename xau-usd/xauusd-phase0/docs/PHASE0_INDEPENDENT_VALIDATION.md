@@ -9,7 +9,7 @@ This document tracks the reviewer-requested D1-D4 checks. These checks do not ch
 | Item | Status | Current conclusion |
 | --- | --- | --- |
 | D1 - Combinatorial Purged Cross-Validation | PASS | `breakout_retest` passed 135 purged chronological paths across all 9 matrix cells; pass rate 100%, median OOS PF 1.379, minimum OOS PF 1.135. |
-| D2 - White Reality Check / SPA-style bootstrap | PASS | Latest fixed-notional R rerun: `breakout_retest` remained the family winner against 29 non-empty matrix-ledger candidates; White Reality Check p-value 0.0002 and max pairwise SPA p-value 0.0188. |
+| D2 - White Reality Check / SPA-style bootstrap | PASS | Canonical fixed-notional monthly R rerun: `breakout_retest` remained the family winner against 29 non-empty matrix-ledger candidates; White Reality Check p-value 0.0002 and max pairwise SPA p-value 0.0188. Percent-return and compounding D2 variants are superseded. |
 | D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
@@ -73,6 +73,10 @@ Latest result:
 | Bootstrap iterations | 5000 |
 | Circular block length | 3 months |
 
+Canonicalization note:
+
+The fixed-notional monthly R-series output is the canonical D2 evidence. Earlier percent-return or compounding variants are superseded because they can overweight account-path artifacts rather than the strategy's per-trade edge. Future D2 reruns should use the same fixed-notional R-series construction unless a reviewer explicitly approves a new pre-registered statistical method.
+
 Interpretation:
 
 The approved expert remained the winner after a fixed-notional R rerun across the full non-empty tested matrix universe. The command reads every matrix-result directory with a usable trade ledger and keeps each expert as one monthly R series, so cost/broker cells do not become separate optimized candidates and raw dollar compounding artifacts do not drive the bootstrap. This reduces, but cannot eliminate, data-mining risk.
@@ -85,6 +89,15 @@ outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv
 ```
 
 That audit found 28 rejected/research rows, 5 with sample-size failures, 25 with multi-cell expectancy failures, 0 frequency-only failures, and three non-matrix pending/provisional candidates: `round_number_retest_v0`, `symbol_normalized_round_retest_v0`, and `session_extreme_retest_v0`.
+
+Related Review #6 concentration-frequency audit:
+
+```text
+outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md
+outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.csv
+```
+
+That audit adds normalized concentration ratios for concentration-failed candidates. It does not rescue or reclassify rejected candidates; it is context for future gate design if new low-frequency, pre-registered candidates are tested.
 
 ## D3 - True Holdout
 

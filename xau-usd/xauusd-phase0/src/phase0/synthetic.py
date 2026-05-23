@@ -10,8 +10,12 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _asia_range_london_failed_break_reversal_context()
     if expert == "compression_retest_continuation_v0":
         return _compression_retest_continuation_context()
+    if expert == "d1_compression_h4_expansion_v0":
+        return _d1_compression_h4_expansion_context()
     if expert == "d1_momentum_h4_pullback_v0":
         return _d1_momentum_h4_pullback_context()
+    if expert == "d1_multi_day_exhaustion_reversion_v0":
+        return _d1_multi_day_exhaustion_reversion_context()
     if expert == "d1_volatility_expansion_reversal_v0":
         return _d1_volatility_expansion_reversal_context()
     if expert == "daily_pivot_reclaim_v0":
@@ -26,6 +30,10 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _emr_inactivity_long_context()
     if expert == "extreme_activity_mean_reversion_v0":
         return _extreme_activity_mean_reversion_context()
+    if expert == "h4_d1_momentum_expansion_continuation_v0":
+        return _h4_d1_momentum_expansion_continuation_context()
+    if expert == "h4_inside_bar_d1_momentum_breakout_v0":
+        return _h4_inside_bar_d1_momentum_breakout_context()
     if expert == "london_fix_continuation_v0":
         return _london_fix_continuation_context()
     if expert == "liquidity_sweep_continuation_v0":
@@ -62,6 +70,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _squeeze_breakout_long_context()
     if expert == "swing_breakout_retest_v0":
         return _swing_breakout_retest_context()
+    if expert == "w1_d1_momentum_continuation_v0":
+        return _w1_d1_momentum_continuation_context()
     if expert == "weekly_level_reclaim_v0":
         return _weekly_level_reclaim_context()
     raise ValueError(f"Unknown synthetic expert {expert!r}.")
@@ -610,6 +620,333 @@ def _d1_momentum_h4_pullback_context() -> dict:
             "high": [130.5] * 760,
             "low": [129.5] * 760,
             "close": [130.0] * 760,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _d1_compression_h4_expansion_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=82, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [100.0] * 82,
+            "high": [102.0] * 82,
+            "low": [98.0] * 82,
+            "close": [100.0] * 82,
+        }
+    )
+    for idx in range(60, 82):
+        d1.loc[idx, ["open", "high", "low", "close"]] = [100.0, 100.4, 99.6, 100.0]
+
+    h4_times = pd.date_range("2024-03-05T00:00:00Z", periods=110, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * 110,
+            "high": [100.5] * 110,
+            "low": [99.5] * 110,
+            "close": [100.0] * 110,
+        }
+    )
+    h4.loc[33, ["open", "high", "low", "close"]] = [100.0, 102.0, 99.6, 101.8]
+
+    m5_times = pd.date_range("2024-03-05T00:05:00Z", periods=8000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [101.8] * 8000,
+            "high": [102.4] * 8000,
+            "low": [101.2] * 8000,
+            "close": [101.8] * 8000,
+            "mid_open": [101.8] * 8000,
+            "mid_close": [101.8] * 8000,
+            "bid_open": [101.7] * 8000,
+            "ask_open": [101.9] * 8000,
+            "bid_close": [101.7] * 8000,
+            "ask_close": [101.9] * 8000,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-05T00:15:00Z", periods=2700, freq="15min"),
+            "open": [101.8] * 2700,
+            "high": [102.4] * 2700,
+            "low": [101.2] * 2700,
+            "close": [101.8] * 2700,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-05T00:00:00Z", periods=680, freq="1h"),
+            "open": [101.8] * 680,
+            "high": [102.4] * 680,
+            "low": [101.2] * 680,
+            "close": [101.8] * 680,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _d1_multi_day_exhaustion_reversion_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=80, freq="1D")
+    d1_closes = [100.0] * 80
+    for idx in range(55, 80):
+        d1_closes[idx] = d1_closes[idx - 1] + 1.2
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [close - 0.3 for close in d1_closes],
+            "high": [close + 0.8 for close in d1_closes],
+            "low": [close - 0.8 for close in d1_closes],
+            "close": d1_closes,
+        }
+    )
+
+    h4_times = pd.date_range("2024-03-10T00:00:00Z", periods=120, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [128.0] * 120,
+            "high": [128.7] * 120,
+            "low": [127.3] * 120,
+            "close": [128.0] * 120,
+        }
+    )
+    h4.loc[31, ["open", "high", "low", "close"]] = [130.4, 131.2, 128.6, 129.0]
+
+    m5_times = pd.date_range("2024-03-10T00:05:00Z", periods=8000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [129.0] * 8000,
+            "high": [129.6] * 8000,
+            "low": [128.4] * 8000,
+            "close": [129.0] * 8000,
+            "mid_open": [129.0] * 8000,
+            "mid_close": [129.0] * 8000,
+            "bid_open": [128.9] * 8000,
+            "ask_open": [129.1] * 8000,
+            "bid_close": [128.9] * 8000,
+            "ask_close": [129.1] * 8000,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-10T00:15:00Z", periods=2700, freq="15min"),
+            "open": [129.0] * 2700,
+            "high": [129.6] * 2700,
+            "low": [128.4] * 2700,
+            "close": [129.0] * 2700,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-10T00:00:00Z", periods=680, freq="1h"),
+            "open": [129.0] * 680,
+            "high": [129.6] * 680,
+            "low": [128.4] * 680,
+            "close": [129.0] * 680,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_d1_momentum_expansion_continuation_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=90, freq="1D")
+    d1_closes = [100.0 + 0.45 * index for index in range(90)]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [close - 0.2 for close in d1_closes],
+            "high": [close + 0.9 for close in d1_closes],
+            "low": [close - 0.9 for close in d1_closes],
+            "close": d1_closes,
+        }
+    )
+
+    h4_times = pd.date_range("2024-03-01T00:00:00Z", periods=180, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [130.0] * 180,
+            "high": [130.45] * 180,
+            "low": [129.55] * 180,
+            "close": [130.0] * 180,
+        }
+    )
+    h4.loc[120, ["open", "high", "low", "close"]] = [130.0, 131.8, 129.8, 131.55]
+
+    m5_times = pd.date_range("2024-03-01T00:05:00Z", periods=9000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [131.55] * 9000,
+            "high": [132.2] * 9000,
+            "low": [130.9] * 9000,
+            "close": [131.55] * 9000,
+            "mid_open": [131.55] * 9000,
+            "mid_close": [131.55] * 9000,
+            "bid_open": [131.45] * 9000,
+            "ask_open": [131.65] * 9000,
+            "bid_close": [131.45] * 9000,
+            "ask_close": [131.65] * 9000,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-01T00:15:00Z", periods=3000, freq="15min"),
+            "open": [131.55] * 3000,
+            "high": [132.2] * 3000,
+            "low": [130.9] * 3000,
+            "close": [131.55] * 3000,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-01T00:00:00Z", periods=760, freq="1h"),
+            "open": [131.55] * 760,
+            "high": [132.2] * 760,
+            "low": [130.9] * 760,
+            "close": [131.55] * 760,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_inside_bar_d1_momentum_breakout_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=90, freq="1D")
+    d1_closes = [100.0 + 0.35 * index for index in range(90)]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [close - 0.2 for close in d1_closes],
+            "high": [close + 0.9 for close in d1_closes],
+            "low": [close - 0.9 for close in d1_closes],
+            "close": d1_closes,
+        }
+    )
+
+    h4_times = pd.date_range("2024-03-01T00:00:00Z", periods=180, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [130.0] * 180,
+            "high": [130.7] * 180,
+            "low": [129.3] * 180,
+            "close": [130.0] * 180,
+        }
+    )
+    h4.loc[118, ["open", "high", "low", "close"]] = [130.0, 131.2, 128.8, 130.4]
+    h4.loc[119, ["open", "high", "low", "close"]] = [130.3, 130.8, 129.7, 130.2]
+    h4.loc[120, ["open", "high", "low", "close"]] = [130.4, 132.0, 130.1, 131.8]
+
+    m5_times = pd.date_range("2024-03-01T00:05:00Z", periods=9000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [131.8] * 9000,
+            "high": [132.4] * 9000,
+            "low": [131.2] * 9000,
+            "close": [131.8] * 9000,
+            "mid_open": [131.8] * 9000,
+            "mid_close": [131.8] * 9000,
+            "bid_open": [131.7] * 9000,
+            "ask_open": [131.9] * 9000,
+            "bid_close": [131.7] * 9000,
+            "ask_close": [131.9] * 9000,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-01T00:15:00Z", periods=3000, freq="15min"),
+            "open": [131.8] * 3000,
+            "high": [132.4] * 3000,
+            "low": [131.2] * 3000,
+            "close": [131.8] * 3000,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-03-01T00:00:00Z", periods=760, freq="1h"),
+            "open": [131.8] * 760,
+            "high": [132.4] * 760,
+            "low": [131.2] * 760,
+            "close": [131.8] * 760,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _w1_d1_momentum_continuation_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=90, freq="1D")
+    d1_closes = [100.0 + 0.35 * index for index in range(90)]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [close - 0.25 for close in d1_closes],
+            "high": [close + 0.9 for close in d1_closes],
+            "low": [close - 0.9 for close in d1_closes],
+            "close": d1_closes,
+        }
+    )
+    d1.loc[70, ["open", "high", "low", "close"]] = [124.2, 126.2, 124.0, 125.9]
+
+    m5_times = pd.date_range("2024-01-01T00:05:00Z", periods=26000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [125.9] * 26000,
+            "high": [126.5] * 26000,
+            "low": [125.3] * 26000,
+            "close": [125.9] * 26000,
+            "mid_open": [125.9] * 26000,
+            "mid_close": [125.9] * 26000,
+            "bid_open": [125.8] * 26000,
+            "ask_open": [126.0] * 26000,
+            "bid_close": [125.8] * 26000,
+            "ask_close": [126.0] * 26000,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T00:15:00Z", periods=8700, freq="15min"),
+            "open": [125.9] * 8700,
+            "high": [126.5] * 8700,
+            "low": [125.3] * 8700,
+            "close": [125.9] * 8700,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T00:00:00Z", periods=2200, freq="1h"),
+            "open": [125.9] * 2200,
+            "high": [126.5] * 2200,
+            "low": [125.3] * 2200,
+            "close": [125.9] * 2200,
+        }
+    )
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T00:00:00Z", periods=550, freq="4h"),
+            "open": [125.9] * 550,
+            "high": [126.5] * 550,
+            "low": [125.3] * 550,
+            "close": [125.9] * 550,
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}

@@ -7,6 +7,7 @@ import pandas as pd
 
 from phase0.cli import main
 from phase0.config import ProjectConfig
+from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.rejection_audit import generate_rejection_gate_audit
 
 
@@ -43,7 +44,41 @@ def test_generate_rejection_gate_audit_cli(project_root: Path, tmp_path: Path, c
     assert (root / "outputs" / "reports" / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md").exists()
 
 
-def _write_candidate(root: Path, expert: str, trade_count: int, profit_factor: float) -> None:
+def test_generate_concentration_frequency_audit_flags_review_context(tmp_path: Path):
+    _write_candidate(tmp_path, "breakout_retest", trade_count=100, profit_factor=1.6)
+    _write_candidate(
+        tmp_path,
+        "low_frequency_concentration_candidate",
+        trade_count=45,
+        profit_factor=0.8,
+        largest_single_pct=16.0,
+        top5_pct=48.0,
+        write_trades=True,
+    )
+    config = ProjectConfig(tmp_path, {"gates": _gates()}, {}, {}, {}, {})
+
+    output = generate_concentration_frequency_audit(config)
+
+    assert output.audited_candidates == 2
+    assert output.concentration_failed_candidates == 1
+    assert output.normalized_review_candidates == 1
+    summary = pd.read_csv(output.summary_path).set_index("candidate")
+    assert (
+        summary.loc["low_frequency_concentration_candidate", "normalized_concentration_flag"]
+        == "REVIEW_NORMALIZED_CONTEXT"
+    )
+    assert "does not approve, rescue, tune, or reclassify" in output.report_path.read_text(encoding="utf-8")
+
+
+def _write_candidate(
+    root: Path,
+    expert: str,
+    trade_count: int,
+    profit_factor: float,
+    largest_single_pct: float = 5.0,
+    top5_pct: float = 20.0,
+    write_trades: bool = False,
+) -> None:
     expert_dir = root / "outputs" / "matrix_results" / expert
     expert_dir.mkdir(parents=True)
     for cell_id in range(1, 10):
@@ -56,12 +91,17 @@ def _write_candidate(root: Path, expert: str, trade_count: int, profit_factor: f
                     "trade_count": trade_count,
                     "max_drawdown_pct": 5.0,
                     "total_return_pct": 10.0,
-                    "largest_single_trade_pct_of_pnl": 5.0,
-                    "top5_trades_pct_of_pnl": 20.0,
+                    "largest_single_trade_pct_of_pnl": largest_single_pct,
+                    "top5_trades_pct_of_pnl": top5_pct,
                     "max_consecutive_zero_trade_months": 0,
                 }
             ]
         ).to_csv(expert_dir / f"cell_{cell_id}_{expert}.csv", index=False)
+        if write_trades:
+            pd.DataFrame({"r_multiple": [-1.0] * 25 + [1.3] * 20}).to_csv(
+                expert_dir / f"cell_{cell_id}_{expert}_trades.csv",
+                index=False,
+            )
 
 
 def _gates() -> dict[str, float | int]:

@@ -23,6 +23,7 @@ from generate_project_status_page import generate_project_status_page
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import load_project_config
+from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.spread_analysis import analyze_spread_logs
 
@@ -52,6 +53,7 @@ def run_phase1_periodic_checks(
     phase0_root = root.parent / "xauusd-phase0"
     if phase0_root.exists():
         phase0_config = load_project_config(phase0_root)
+        generate_concentration_frequency_audit(phase0_config)
         analyze_spread_logs(phase0_config, input_dir=spread_files_dir, allow_pending=True)
         generate_measured_cost_revalidation(phase0_config, expert="breakout_retest")
 

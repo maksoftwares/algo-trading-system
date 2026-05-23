@@ -11,7 +11,7 @@ from analyze_phase1_soak import analyze_phase1_soak
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
-from phase1_soak_streak import calculate_soak_streak
+from phase1_soak_streak import CODE_FREEZE_MARKER_NAME, calculate_soak_streak, read_code_freeze_marker
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -53,7 +53,11 @@ def generate_phase1_status_summary(
     rows = _read_csv(files_dir / DECISION_LOG)
     latest = rows[-1] if rows else {}
     soak_days = _soak_days(rows)
-    soak_streak = calculate_soak_streak(rows)
+    soak_streak = calculate_soak_streak(
+        rows,
+        code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
+        now=now,
+    )
 
     summary = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),

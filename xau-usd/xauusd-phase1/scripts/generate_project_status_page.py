@@ -533,13 +533,25 @@ def _kpi_grid(
                 bar=_progress_bar(soak_progress, "soak"),
             ),
             _kpi(
-                label="72h streak",
-                value=f"{_fmt_float(_to_float(soak.get('longest_streak_hours')) or 0.0)}h",
+                label="Active 72h gate",
+                value=f"{_fmt_float(_to_float(soak.get('active_market_streak_hours')) or _to_float(soak.get('longest_streak_hours')) or 0.0)}h",
                 status="PASS" if soak.get("uninterrupted_soak_pass") is True else "PENDING",
-                note=f"current {_fmt_float(_to_float(soak.get('current_streak_hours')) or 0.0)}h active market bars",
+                note=f"weekends break this bar-continuity gate; current {_fmt_float(_to_float(soak.get('current_streak_hours')) or 0.0)}h",
                 bar=_progress_bar(
-                    ((_to_float(soak.get("longest_streak_hours")) or 0.0)
+                    ((_to_float(soak.get("active_market_streak_hours")) or _to_float(soak.get("longest_streak_hours")) or 0.0)
                     / (_to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0))
+                    * 100.0,
+                    "soak",
+                ),
+            ),
+            _kpi(
+                label="96h freeze gate",
+                value=f"{_fmt_float(_to_float(soak.get('code_freeze_hours')) or 0.0)}h",
+                status="PASS" if soak.get("process_code_freeze_pass") is True else "PENDING",
+                note=f"process {_fmt_float(_to_float(soak.get('process_uptime_streak_hours')) or 0.0)}h; marker { _cell(soak.get('code_freeze_started_at')) }",
+                bar=_progress_bar(
+                    ((_to_float(soak.get("code_freeze_hours")) or 0.0)
+                    / (_to_float(soak.get("required_code_freeze_hours")) or 96.0))
                     * 100.0,
                     "soak",
                 ),
@@ -771,7 +783,10 @@ def _runtime_table(
         ("Runtime health", _cell(status_fields.get("runtime_health"))),
         ("Soak analysis", _cell(status_fields.get("soak_analysis"))),
         ("Current active streak", f"{_cell(soak.get('current_streak_hours'))}h"),
-        ("Longest active streak", f"{_cell(soak.get('longest_streak_hours'))}h / {_cell(soak.get('required_uninterrupted_streak_hours'))}h"),
+        ("Longest active streak", f"{_cell(soak.get('active_market_streak_hours') or soak.get('longest_streak_hours'))}h / {_cell(soak.get('required_uninterrupted_streak_hours'))}h"),
+        ("Weekend policy", _cell(soak.get("weekend_policy"))),
+        ("Process uptime streak", f"{_cell(soak.get('process_uptime_streak_hours'))}h"),
+        ("Code-freeze hours", f"{_cell(soak.get('code_freeze_hours'))}h / {_cell(soak.get('required_code_freeze_hours'))}h"),
         ("Last restart UTC", _cell(soak.get("last_restart_utc"))),
         ("Would-signal clusters", _cell(would_signal.get("clusters"))),
     ]
@@ -1233,6 +1248,7 @@ def _artifact_links() -> str:
         ("Agent handoff", "agent.md"),
         ("Phase 0 verdict", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_VERDICT.md"),
         ("Rejected candidate audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md"),
+        ("Frequency-normalized concentration audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md"),
         ("Fixed-notional cost report", "xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md"),
         ("Measured cost model", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md"),
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
@@ -1245,7 +1261,7 @@ def _artifact_links() -> str:
 def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[str, str]) -> list[str]:
     items = []
     if phase1_status != "PASS":
-        items.append("Let the five-trading-day Phase 1 soak and 72-hour uninterrupted active-market streak continue; do not count weekend stale ticks as trading time.")
+        items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour process/code-freeze gate continue.")
     if measured_cost.get("status") != "PASS":
         items.append("Keep the passive spread logger running until measured-cost coverage reaches the required observed days.")
     if phase2_status != "PASS":

@@ -42,6 +42,13 @@ def test_status_summary_writes_machine_readable_snapshot(tmp_path):
     assert summary["soak"]["required_uninterrupted_streak_hours"] == 72.0
     assert summary["soak"]["current_streak_hours"] > 0
     assert summary["soak"]["longest_streak_hours"] > 0
+    assert summary["soak"]["active_market_streak_hours"] > 0
+    assert summary["soak"]["weekend_policy"] == "weekend_breaks_active_market_streak"
+    assert summary["soak"]["process_uptime_streak_hours"] > 0
+    assert summary["soak"]["required_code_freeze_hours"] == 96.0
+    assert summary["soak"]["code_freeze_started_at"] == ""
+    assert summary["soak"]["code_freeze_pass"] is False
+    assert summary["soak"]["process_code_freeze_pass"] is False
     assert summary["soak"]["uninterrupted_soak_pass"] is False
     assert summary["soak"]["last_restart_utc"] == "2026-05-21T08:00:00Z"
 

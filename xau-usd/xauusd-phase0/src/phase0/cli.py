@@ -8,6 +8,7 @@ from phase0.adversarial import create_adversarial_packets, score_adversarial_rev
 from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
 from phase0.config import ConfigError, build_cell_configs, load_project_config
+from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.constants import EXPERTS, RESEARCH_EXPERTS
 from phase0.cpcv import run_cpcv_validation
 from phase0.data_availability import (
@@ -320,6 +321,21 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     rejection_audit.set_defaults(func=_cmd_generate_rejection_gate_audit)
+
+    concentration_audit = subparsers.add_parser(
+        "generate-concentration-frequency-audit",
+        help="Audit absolute concentration failures with frequency-normalized trade-R ratios.",
+    )
+    concentration_audit.add_argument(
+        "--approved-expert",
+        action="append",
+        default=None,
+        help=(
+            "Expert to treat as approved/same-family context. Repeatable. "
+            "Defaults to breakout_retest and swing_breakout_retest_v0."
+        ),
+    )
+    concentration_audit.set_defaults(func=_cmd_generate_concentration_frequency_audit)
 
     research_hypothesis = subparsers.add_parser(
         "register-research-hypothesis",
@@ -891,6 +907,23 @@ def _cmd_generate_rejection_gate_audit(args: argparse.Namespace) -> int:
     print(f"Rejected/research candidates: {output.rejected_candidates}")
     print(f"Sample-size failures: {output.sample_size_failure_candidates}")
     print(f"Multi-cell expectancy failures: {output.edge_expectancy_failure_candidates}")
+    return 0
+
+
+def _cmd_generate_concentration_frequency_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_concentration_frequency_audit(
+        config,
+        approved_experts=args.approved_expert
+        if args.approved_expert is not None
+        else ("breakout_retest", "swing_breakout_retest_v0"),
+    )
+    print("Frequency-normalized concentration audit generated")
+    print(output.report_path)
+    print(output.summary_path)
+    print(f"Audited candidates: {output.audited_candidates}")
+    print(f"Absolute concentration failures: {output.concentration_failed_candidates}")
+    print(f"Normalized review-context candidates: {output.normalized_review_candidates}")
     return 0
 
 

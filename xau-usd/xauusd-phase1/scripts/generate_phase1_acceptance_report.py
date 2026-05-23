@@ -11,7 +11,7 @@ from audit_phase1_safety import audit_phase1_tree
 from deploy_phase1_mt5 import _read_compile_log
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
-from phase1_soak_streak import calculate_soak_streak
+from phase1_soak_streak import CODE_FREEZE_MARKER_NAME, calculate_soak_streak, read_code_freeze_marker
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -89,7 +89,8 @@ def generate_phase1_acceptance_report(
         _permission_item(decision_rows),
         _freshness_item(decision_rows, now, max_fresh_minutes),
         _latest_row_item(decision_rows),
-        _uninterrupted_soak_item(decision_rows),
+        _active_market_soak_item(decision_rows, files_dir, now),
+        _process_code_freeze_item(decision_rows, files_dir, now),
         _soak_duration_item(decision_rows),
     ]
 
@@ -224,19 +225,45 @@ def _soak_duration_item(rows: list[dict[str, str]]) -> AcceptanceItem:
     return AcceptanceItem("Five trading day soak", "PENDING", evidence)
 
 
-def _uninterrupted_soak_item(rows: list[dict[str, str]]) -> AcceptanceItem:
+def _active_market_soak_item(rows: list[dict[str, str]], files_dir: Path, now: datetime) -> AcceptanceItem:
     if not rows:
-        return AcceptanceItem("Uninterrupted 72-hour soak", "PENDING", "No decision rows found.")
-    streak = calculate_soak_streak(rows)
+        return AcceptanceItem("Active-market 72-hour soak", "PENDING", "No decision rows found.")
+    streak = calculate_soak_streak(
+        rows,
+        code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
+        now=now,
+    )
     evidence = (
         f"Longest active streak: {streak.longest_streak_hours:.2f}h; "
         f"current active streak: {streak.current_streak_hours:.2f}h; "
         f"required: {streak.required_uninterrupted_streak_hours:.0f}h; "
-        f"last restart UTC: {streak.last_restart_utc or 'n/a'}."
+        f"last restart UTC: {streak.last_restart_utc or 'n/a'}; "
+        f"weekend policy: {streak.weekend_policy}."
     )
     if streak.uninterrupted_soak_pass:
-        return AcceptanceItem("Uninterrupted 72-hour soak", "PASS", evidence)
-    return AcceptanceItem("Uninterrupted 72-hour soak", "PENDING", evidence)
+        return AcceptanceItem("Active-market 72-hour soak", "PASS", evidence)
+    return AcceptanceItem("Active-market 72-hour soak", "PENDING", evidence)
+
+
+def _process_code_freeze_item(rows: list[dict[str, str]], files_dir: Path, now: datetime) -> AcceptanceItem:
+    if not rows:
+        return AcceptanceItem("Process/code-freeze 96-hour gate", "PENDING", "No decision rows found.")
+    marker_path = files_dir / CODE_FREEZE_MARKER_NAME
+    streak = calculate_soak_streak(
+        rows,
+        code_freeze_started_at=read_code_freeze_marker(marker_path),
+        now=now,
+    )
+    evidence = (
+        f"Process uptime streak: {streak.process_uptime_streak_hours:.2f}h; "
+        f"code-freeze hours: {streak.code_freeze_hours:.2f}h; "
+        f"required: {streak.required_code_freeze_hours:.0f}h; "
+        f"marker: {streak.code_freeze_started_at or 'missing'}; "
+        f"marker path: `{marker_path}`."
+    )
+    if streak.process_code_freeze_pass:
+        return AcceptanceItem("Process/code-freeze 96-hour gate", "PASS", evidence)
+    return AcceptanceItem("Process/code-freeze 96-hour gate", "PENDING", evidence)
 
 
 def _parse_mt5_datetime(value: str) -> datetime | None:

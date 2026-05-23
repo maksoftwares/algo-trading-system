@@ -49,7 +49,12 @@ Expected path:
 | 28 | `session_extreme_retest_v0` | PROVISIONAL_PASS_PENDING_GATE9 | Passed 9-cell matrix, deciles, multisymbol, and intrabar checks; same-family level-and-pullback, so not diversification and Gate 9 remains pending. |
 | 29 | `d1_momentum_h4_pullback_v0` | REJECTED_FIRST_PASS | First true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
 | 30 | `d1_volatility_expansion_reversal_v0` | REJECTED_FIRST_PASS | Second true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade-count and concentration gates failed; do not tune v0. |
-| 31 | `d1_compression_h4_expansion_v0` | PLANNED_NEXT_NON_LEVEL_H4_D1 | Next diversification attempt: D1 volatility contraction state with H4 expansion confirmation, expected median hold >24h, expected trades <100/year. |
+| 31 | `d1_compression_h4_expansion_v0` | REJECTED_FIRST_PASS | Third true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
+| 32 | `h4_real_yield_proxy_momentum_v0` | BLOCKED_MISSING_MACRO_DATA | Macro-proxy attempt deferred until real-yield, DXY, Treasury, or approved proxy series exists locally; do not fake it with XAU-only data. |
+| 33 | `d1_multi_day_exhaustion_reversion_v0` | REJECTED_FIRST_PASS | Fourth true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade-count/activity/concentration failed; do not tune v0. |
+| 34 | `h4_d1_momentum_expansion_continuation_v0` | REJECTED_FIRST_PASS | Fifth true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, all in Dukascopy, concentration failed; do not tune v0. |
+| 35 | `h4_inside_bar_d1_momentum_breakout_v0` | REJECTED_FIRST_PASS | Sixth H4/D1 decision-timing candidate; 2/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
+| 36 | `w1_d1_momentum_continuation_v0` | REJECTED_FIRST_PASS | First W1/D1-scale candidate; 3/9 PF cells reached 1.30, all cells positive, but concentration failed; do not tune v0. |
 
 ## Discipline
 
@@ -67,8 +72,14 @@ Expected path:
 - Latest independent continuation candidate result: `liquidity_sweep_continuation_v0` was rejected first-pass. It produced enough trades, but 0/9 cells reached PF >= 1.30.
 - Latest same-family provisional result: `session_extreme_retest_v0` passed automated research gates, but remains Gate 9 pending and does not diversify the breakout-retest family.
 - Review #5 forcing-function result: `d1_momentum_h4_pullback_v0` was registered, hash-locked, implemented, smoke-tested, and run through a real 9-cell first pass before any new same-family candidate was authored. It was rejected with 3/9 PF cells >= 1.30 and a failed concentration gate.
-- Latest H4/D1 diversification result: `d1_volatility_expansion_reversal_v0` was rejected first-pass. It produced 30-53 trades per cell, 0/9 PF cells >= 1.30, and failed trade-count plus concentration gates.
+- Latest H4/D1 diversification result: `d1_compression_h4_expansion_v0` was rejected first-pass. It produced 68-122 trades per cell, 0/9 PF cells >= 1.30, passed trade count, and failed concentration.
+- Latest H4/D1 diversification result: `d1_multi_day_exhaustion_reversion_v0` was rejected first-pass. It produced 24-41 trades per cell, 0/9 PF cells >= 1.30, and failed trade-count, activity, and concentration gates.
+- Latest H4/D1 diversification result: `h4_d1_momentum_expansion_continuation_v0` was rejected first-pass. It produced 81-83 trades per cell and 3/9 PF cells >= 1.30, but strength was Dukascopy-only and concentration failed.
+- Latest H4/D1 breakout result: `h4_inside_bar_d1_momentum_breakout_v0` was rejected first-pass. It produced 71-100 trades per cell and 2/9 PF cells >= 1.30, with small positive returns but inadequate cross-venue strength and failed concentration.
+- Latest W1/D1 result: `w1_d1_momentum_continuation_v0` was rejected first-pass. It produced 48-68 trades per cell and 3/9 PF cells >= 1.30; all cells were positive, but concentration failed and cross-venue PF strength was insufficient.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
+- `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
+- Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
 
 ## Timeframe Coverage
 
@@ -78,11 +89,13 @@ Classify by entry / decision timeframe, not by the source of the reference level
 hypothesis_timeframe_coverage:
   M5_M15: 28
   M30_H1: 0
-  H4_D1: 2
-  W1_plus: 0
-  planned_next_H4_D1: d1_compression_h4_expansion_v0
+  H4_D1: 6
+  W1_plus: 1
+  planned_next_H4_D1: []
+  blocked_H4_D1:
+    - h4_real_yield_proxy_momentum_v0
 ```
 
 `daily_pivot_reclaim_v0` and `weekly_level_reclaim_v0` used slower reference levels, but both had M5 entries, so they do not count as H4/D1 diversification.
 
-`d1_momentum_h4_pullback_v0` and `d1_volatility_expansion_reversal_v0` count as H4/D1 diversification attempts by timing, but both are rejected and neither becomes an approved expert.
+`d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, and `h4_inside_bar_d1_momentum_breakout_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.

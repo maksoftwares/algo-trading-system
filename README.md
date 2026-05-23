@@ -39,7 +39,7 @@ Agent handoff and current gate status are maintained in `agent.md`.
 
 ## Status Dashboard
 
-Open `status.html` in a browser for the current project dashboard. It summarizes Phase 0, Phase 1, Phase 2 readiness, soak progress, measured-cost status, and all accepted/rejected EA candidates in one page.
+Open `status.html` in a browser for the current project dashboard. It summarizes Phase 0, Phase 1, Phase 2 readiness, soak progress, the active-market 72h gate, the process/code-freeze 96h gate, measured-cost status, and all accepted/rejected EA candidates in one page.
 
 The dashboard is generated from repo artifacts by:
 
@@ -54,7 +54,7 @@ The hourly Phase 1 periodic check also regenerates it while the machine is onlin
 
 Phase 1 dry-run is authorized for the reduced breakout-retest family package. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
 
-`breakout_retest` is the primary approved future expert. `swing_breakout_retest_v0` is an approved same-family future expert candidate. `round_number_retest_v0` and `symbol_normalized_round_retest_v0` are provisional same-family candidates pending Gate 9 manual review. `trend_pullback` and `range_mr` remain rejected.
+`breakout_retest` is the primary approved future expert. `swing_breakout_retest_v0` is an approved same-family future expert candidate. `round_number_retest_v0`, `symbol_normalized_round_retest_v0`, and `session_extreme_retest_v0` are provisional same-family candidates pending Gate 9 manual review. `trend_pullback`, `range_mr`, and the higher-timeframe independent research attempts remain rejected.
 
 ## Current Phase Label
 
@@ -73,7 +73,8 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Data readiness: `25/25` required timeframe sets ready.
 - Verification: Phase 0 and Phase 1 test suites pass locally; passive safety audits pass.
 - Current leading candidate: `breakout_retest`.
-- Current provisional research candidate: `symbol_normalized_round_retest_v0`, a same-family round-number retest variant that passed automated matrix/decile/multisymbol checks but still needs Gate 9 manual adversarial review.
+- Current provisional research candidates: `symbol_normalized_round_retest_v0`, `round_number_retest_v0`, and `session_extreme_retest_v0`; all are same-family/level-and-pullback variants and still need Gate 9 manual adversarial review.
+- Latest independent-candidate search status: six H4/D1 attempts and one W1/D1 attempt have now been hash-registered, smoke-tested, matrix-tested, and rejected first-pass without tuning. No higher-timeframe independent candidate is approved.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
@@ -93,5 +94,6 @@ The latest reviewer feedback is tracked in:
 - `xau-usd/xauusd-phase0/docs/SECOND_CANDIDATE_RESEARCH_PLAN.md`
 - `xau-usd/xauusd-phase1/docs/REPORTING_POLICY.md`
 - `xau-usd/xauusd-phase1/docs/WORKSPACE_OWNERSHIP.md`
+- `docs/REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`
 
-Review #2 reframes `breakout_retest` as a high-frequency, cost-sensitive intraday strategy. Phase 2 remains blocked until the dry-run soak completes, measured cost evidence is available, and fixed-notional plus measured-cost revalidation gates are satisfied.
+Review #6 keeps Phase 1 dry-run and Phase 2 preparation moving, but Phase 2 implementation remains blocked until the five-day soak, active-market 72h gate, process/code-freeze 96h gate, measured cost evidence, measured-cost revalidation, and owner approval are all closed.

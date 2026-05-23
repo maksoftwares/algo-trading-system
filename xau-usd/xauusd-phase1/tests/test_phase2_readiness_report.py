@@ -28,7 +28,8 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     assert output.status == "PENDING"
     assert "Phase 2 preparation may continue" in report
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
-    assert any(item.gate == "Uninterrupted 72-hour soak" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Active-market 72-hour soak" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Process/code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
@@ -137,10 +138,18 @@ def _write_summary(path: Path, progress: float, permission: str = "false") -> No
                     "required_days": 5,
                     "current_streak_hours": 72.0 if progress >= 100 else 2.0,
                     "longest_streak_hours": 72.0 if progress >= 100 else 2.0,
+                    "active_market_streak_hours": 72.0 if progress >= 100 else 2.0,
                     "required_uninterrupted_streak_hours": 72.0,
                     "restart_count_during_current_streak": 0,
                     "last_restart_utc": "2026-05-21T00:00:00Z",
                     "uninterrupted_soak_pass": progress >= 100,
+                    "weekend_policy": "weekend_breaks_active_market_streak",
+                    "process_uptime_streak_hours": 96.0 if progress >= 100 else 2.0,
+                    "code_freeze_started_at": "2026-05-21T00:00:00Z" if progress >= 100 else "",
+                    "code_freeze_hours": 96.0 if progress >= 100 else 0.0,
+                    "required_code_freeze_hours": 96.0,
+                    "code_freeze_pass": progress >= 100,
+                    "process_code_freeze_pass": progress >= 100,
                 },
                 "would_signal": {
                     "rows": 4,
@@ -160,7 +169,28 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
     docs.mkdir(parents=True, exist_ok=True)
     reports.mkdir(parents=True, exist_ok=True)
     (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
+    (docs / "PHASE0_INDEPENDENT_VALIDATION.md").write_text(
+        "# Independent validation\n\nCanonical fixed-notional monthly R evidence; compounding variants are superseded.\n",
+        encoding="utf-8",
+    )
+    (docs / "CANDIDATE_RESEARCH_BACKLOG.md").write_text(
+        "\n".join(
+            [
+                "# Backlog",
+                "",
+                "d1_compression_h4_expansion_v0",
+                "h4_real_yield_proxy_momentum_v0",
+                "d1_multi_day_exhaustion_reversion_v0",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
     (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
+    (reports / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md").write_text(
+        "# Concentration\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
     if include_measured:
         (reports / "MEASURED_COST_MODEL.md").write_text("# Measured cost\n\nOverall status: PASS\n", encoding="utf-8")
         (reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md").write_text(
