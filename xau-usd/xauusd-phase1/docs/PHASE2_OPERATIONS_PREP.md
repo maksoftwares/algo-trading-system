@@ -28,6 +28,14 @@ Decision record to fill before Phase 2:
 | Backup method | Pending owner selection |
 | Monitoring endpoint | Pending external monitor setup |
 
+Detailed selection artifact:
+
+```text
+docs/PHASE2_VPS_SELECTION_MATRIX.md
+```
+
+That document remains `PENDING` until the owner selects a provider, region, backup method, and monitoring approach.
+
 ## External Health Monitor Spec
 
 Goal:

@@ -80,7 +80,7 @@ If measured live/paper execution cost pushes breakout_retest net expectancy belo
 
 | Blocker | Why it remains open |
 | --- | --- |
-| Measured cost model | Current measured report is PENDING: 4326 rows but only 1 observed day, with 5 observed days required. |
+| Measured cost model | Current measured report is PENDING: 6390 rows across 2 observed days, with 5 observed days required. |
 | Measured-cost revalidation | Cannot run to PASS until measured cost model is PASS. |
 | Five-day Phase 1 soak | Wall-clock evidence has not elapsed yet. |
 | Owner Phase 2 approval | Must be explicit after cost and soak gates close. |
@@ -90,5 +90,5 @@ If measured live/paper execution cost pushes breakout_retest net expectancy belo
 
 1. Let the Phase 1 soak and passive spread logger continue.
 2. Keep regenerating measured-cost reports from `C:\MT5PortableSpreadLogger\MQL5\Files`.
-3. Add the +0.10R measured-cost suspension rule to Phase 2 authorization before paper-mode approval.
+3. Use `xau-usd/xauusd-phase1/docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` only after objective readiness gates pass; do not create the live approval file early.
 4. Continue independent candidate research only with new, locked hypotheses and the no-tuning rule.

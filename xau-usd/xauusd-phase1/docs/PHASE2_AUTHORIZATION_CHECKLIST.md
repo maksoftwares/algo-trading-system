@@ -1,6 +1,6 @@
 # Phase 2 Authorization Checklist
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 This checklist separates work that is already closed from gates that still require wall-clock evidence or explicit owner approval. Phase 2 remains paper-mode preparation only until every required gate below is closed.
 
@@ -37,8 +37,8 @@ This checklist separates work that is already closed from gates that still requi
 | Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must show PASS. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
-| Project owner approval | PENDING | Add `outputs/reports/PHASE2_OWNER_APPROVAL.md` after the owner explicitly authorizes paper-mode work. |
-| VPS selection | PENDING | Document provider, region, specs, backup access, and monitoring approach. |
+| Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
+| VPS selection | PENDING | `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` after provider, region, specs, backup access, and monitoring approach are selected. |
 | Independent second candidate implementation | PENDING | Keep searching for a non-breakout-retest-family candidate; same-family swing candidate is not independent diversification. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
@@ -49,9 +49,9 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | --- | --- |
 | Latest status summary | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
 | Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip` |
-| Decision rows | 27 |
-| Latest bar | 2026.05.22 12:40:00 |
-| Soak progress | 1.39% after v0.6 schema reset |
+| Decision rows | 56 |
+| Latest bar | 2026.05.22 20:55:00 |
+| Soak progress | 8.26% after v0.6 schema reset |
 | Acceptance | PENDING |
 
 ## Decision Rule

@@ -1,6 +1,6 @@
 # Candidate Research Backlog
 
-Last updated: 2026-05-22
+Last updated: 2026-05-23
 
 ## Planning Rule
 
@@ -38,7 +38,7 @@ Expected path:
 | 17 | `swing_breakout_retest_v0` | APPROVED_FUTURE_EXPERT_CANDIDATE | Passed 9-cell, decile, multisymbol, intrabar, and Gate 9 manual adversarial checks; same-family with `breakout_retest`. |
 | 18 | `ny_london_overlap_compression_break_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix PF coverage and trade-count gate; do not tune v0. |
 | 19 | `opening_drive_failed_continuation_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |
-| 20 | `liquidity_sweep_reversal_v0` | BACKLOG | Needs a fresh stop-sweep and rejection definition. |
+| 20 | `liquidity_sweep_reversal_v0` | ACTIVE_RESEARCH | Fresh stop-sweep and rejection definition added; register, smoke-test, then run first-pass matrix without tuning. |
 
 ## Discipline
 
@@ -48,3 +48,4 @@ Expected path:
 - `phase0 run-matrix --expert all` must remain reserved for the active approved/legacy Phase 0 set, not experimental backlog candidates.
 - Original 10-candidate bench is now fully resolved: 1 approved future expert and 9 rejected v0 candidates.
 - Extended bench status: `swing_breakout_retest_v0` is an approved future expert candidate, but it is same-family with `breakout_retest`; `ny_london_overlap_compression_break_v0` and `opening_drive_failed_continuation_v0` were rejected first-pass. Continue searching for a more independent second behavior.
+- Current next independent candidate: `liquidity_sweep_reversal_v0`, a failed-liquidity-sweep reversal hypothesis distinct from breakout-retest continuation.

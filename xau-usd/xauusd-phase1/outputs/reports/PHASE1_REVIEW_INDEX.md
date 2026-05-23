@@ -31,11 +31,11 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 | Phase 2 readiness report | PENDING | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md | Overall status: PENDING. |
 | Status summary JSON | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json | Present; 2258 bytes. |
 | Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 3025 bytes. |
-| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 66839 bytes. |
+| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 72998 bytes. |
 
 ## Historical Note
 
-Historical acceptance FAIL rows were seen from 2026-05-21T22:12:57.446733+00:00 to 2026-05-22T11:08:17.659899+00:00; some were acceptance-only while all underlying runtime checks were PASS, so treat them as reporting transients.
+Historical acceptance FAIL rows were seen from 2026-05-21T22:12:57.446733+00:00 to 2026-05-23T13:25:05.558361+00:00; some were acceptance-only while all underlying runtime checks were PASS, so treat them as reporting transients.
 
 ## Review Bundle
 

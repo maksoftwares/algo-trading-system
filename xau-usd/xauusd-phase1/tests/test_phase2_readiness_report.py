@@ -44,12 +44,33 @@ def test_phase2_readiness_passes_when_all_gates_pass(tmp_path):
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
-    approval.write_text("PHASE2_PAPER_PREP_APPROVED\n", encoding="utf-8")
+    approval.write_text(_approval_text(), encoding="utf-8")
 
     output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
 
     assert output.status == "PASS"
     assert all(item.status == "PASS" for item in output.items)
+
+
+def test_phase2_readiness_does_not_pass_with_token_only_approval(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text("PHASE2_PAPER_PREP_APPROVED\n", encoding="utf-8")
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
 def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
@@ -156,10 +177,34 @@ def _write_phase2_docs(root: Path) -> None:
         "# Ops\n\nExternal Health Monitor Spec\n\nDisaster Recovery Runbook\n\nCapital Allocation Ladder\n",
         encoding="utf-8",
     )
+    (docs / "PHASE2_VPS_SELECTION_MATRIX.md").write_text(
+        "# VPS\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
 
 
 def _write_phase2_schema_report(report_dir: Path) -> None:
     (report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md").write_text(
         "# Phase 2 Paper Ledger Schema Report\n\nOverall status: PASS\n",
         encoding="utf-8",
+    )
+
+
+def _approval_text() -> str:
+    return "\n".join(
+        [
+            "# Phase 2 Owner Approval",
+            "",
+            "PHASE2_PAPER_PREP_APPROVED",
+            "",
+            "owner: maksoftwares",
+            "decision_date_utc: 2026-05-29T00:00:00Z",
+            "decision: APPROVED",
+            "scope: Phase 2 paper-mode only; no live capital",
+            "minimum_net_expectancy_r: 0.10",
+            "single_edge_risk_ack: true",
+            "no_live_capital_ack: true",
+            "measured_cost_ack: true",
+            "",
+        ]
     )

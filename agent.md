@@ -31,11 +31,13 @@ Last updated: 2026-05-23
   - Phase 1 startup now reports `server_time_status=CLOCK_OK` after changing the expected local UTC offset input from whole hours to minutes for India Standard Time (`330` minutes).
   - Weekend/offline resume gaps are tolerated by the Phase 1 verifier, soak analyzer, runtime-health report, and external-health check when the latest row is a stale weekend market-break row.
   - Latest periodic check status after restart: PASS. Phase 2 readiness remains PENDING, not FAIL, because five-day soak, measured-cost model, measured-cost revalidation, review index, and owner approval are still open.
+  - Latest refreshed soak snapshot: 56 decision rows, latest M5 bar `2026.05.22 20:55:00`, soak progress `8.26%`, Phase 1 acceptance `PENDING`.
+  - Latest measured cost model snapshot: `6495` observed spread rows across `2` observed days; still `PENDING` until 5 observed days are available.
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.
 - Passive MT5 tools exist for spread logging and historical bar export.
 - Passive spread logger is deployed and compiled under `C:\MT5PortableGoldMission\MQL5\Experts\Phase0\PassiveSpreadLogger_XAUUSD.ex5`; compile log `C:\MT5PortableGoldMission\compile_PassiveSpreadLogger_XAUUSD.log` shows 0 errors / 0 warnings.
 - Passive spread logger is running in an isolated portable clone at `C:\MT5PortableSpreadLogger\terminal64.exe` so the active Phase 1 dry-run chart in `C:\MT5PortableGoldMission` is not restarted or replaced.
-- Passive spread logger output path: `C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260522.csv`.
+- Passive spread logger latest output path: `C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260523.csv`.
 - Passive spread logger deployment report: `xau-usd\xauusd-phase0\outputs\reports\PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md`, status PASS for the logger clone.
 - MT5 passive exports and public Dukascopy acquisition are complete for the Phase 0 required bar set.
 - Latest bar import status: `25 imported, 0 missing, 0 failed`.
@@ -179,7 +181,7 @@ Last updated: 2026-05-23
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 6000 rows over 2 observed days; it still needs 5 observed days.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 6495 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -212,7 +214,9 @@ Last updated: 2026-05-23
 - Phase 2 paper-ledger schema report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md`, status PASS.
 - Phase 2 paper-ledger column template: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_COLUMNS.csv`.
 - Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
+- Phase 2 owner approval template: `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_TEMPLATE.md`; do not create `outputs\reports\PHASE2_OWNER_APPROVAL.md` until all objective readiness gates pass and the owner explicitly approves paper-mode implementation.
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
+- Phase 2 VPS selection matrix: `xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md`, status PENDING until the owner selects provider, region, specs, backup method, and monitoring approach.
 - Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.10R net expectancy.
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest` and `swing_breakout_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.

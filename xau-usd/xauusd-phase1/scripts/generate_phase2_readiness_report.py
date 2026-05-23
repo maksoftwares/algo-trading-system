@@ -10,6 +10,19 @@ from typing import Any
 DEFAULT_REPORT = Path("outputs") / "reports" / "PHASE2_READINESS_REPORT.md"
 DEFAULT_OWNER_APPROVAL = Path("outputs") / "reports" / "PHASE2_OWNER_APPROVAL.md"
 OWNER_APPROVAL_TOKEN = "PHASE2_PAPER_PREP_APPROVED"
+OWNER_APPROVAL_TRUE_FIELDS = (
+    "single_edge_risk_ack",
+    "no_live_capital_ack",
+    "measured_cost_ack",
+)
+OWNER_APPROVAL_REQUIRED_FIELDS = (
+    "owner",
+    "decision_date_utc",
+    "decision",
+    "scope",
+    "minimum_net_expectancy_r",
+    *OWNER_APPROVAL_TRUE_FIELDS,
+)
 
 
 @dataclass(frozen=True)
@@ -68,6 +81,11 @@ def generate_phase2_readiness_report(
             "Phase 2 operations prep",
             root / "docs" / "PHASE2_OPERATIONS_PREP.md",
             ("External Health Monitor Spec", "Disaster Recovery Runbook", "Capital Allocation Ladder"),
+        ),
+        _status_or_pending_gate(
+            "VPS selection",
+            root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md",
+            required="PASS",
         ),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
         _status_or_pending_gate(
@@ -205,9 +223,52 @@ def _owner_approval_gate(path: Path) -> Phase2ReadinessItem:
             f"No approval file found at `{path}`.",
         )
     text = path.read_text(encoding="utf-8", errors="replace")
-    if OWNER_APPROVAL_TOKEN in text:
-        return Phase2ReadinessItem("Project owner approval", "PASS", f"Approval token found in `{path}`.")
-    return Phase2ReadinessItem("Project owner approval", "PENDING", f"Approval token missing in `{path}`.")
+    if OWNER_APPROVAL_TOKEN not in text:
+        return Phase2ReadinessItem("Project owner approval", "PENDING", f"Approval token missing in `{path}`.")
+    fields = _parse_approval_fields(text)
+    missing = [name for name in OWNER_APPROVAL_REQUIRED_FIELDS if not fields.get(name)]
+    if missing:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` is missing owner approval field(s): {', '.join(missing)}.",
+        )
+    bad_true_fields = [name for name in OWNER_APPROVAL_TRUE_FIELDS if fields.get(name, "").lower() != "true"]
+    if bad_true_fields:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` must set acknowledgement field(s) to true: {', '.join(bad_true_fields)}.",
+        )
+    decision = fields.get("decision", "").upper()
+    if "APPROVED" not in decision:
+        return Phase2ReadinessItem("Project owner approval", "PENDING", f"`{path}` decision is not APPROVED.")
+    scope = fields.get("scope", "").lower()
+    if "paper" not in scope:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` scope must be paper-mode only.",
+        )
+    minimum_net = _to_float(fields.get("minimum_net_expectancy_r"))
+    if minimum_net is None or minimum_net < 0.10:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` minimum_net_expectancy_r must be at least 0.10.",
+        )
+    return Phase2ReadinessItem("Project owner approval", "PASS", f"Signed approval fields found in `{path}`.")
+
+
+def _parse_approval_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for line in text.splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        normalized = key.strip().lower().replace(" ", "_").replace("-", "_")
+        fields[normalized] = value.strip()
+    return fields
 
 
 def _overall_status(items: list[Phase2ReadinessItem]) -> str:

@@ -15,6 +15,7 @@ RESEARCH_EXPERTS = (
     "emr_inactivity_long_v0",
     "extreme_activity_mean_reversion_v0",
     "london_fix_continuation_v0",
+    "liquidity_sweep_reversal_v0",
     "ny_failed_london_reversal_v0",
     "ny_am_pullback_continuation_v0",
     "ny_london_overlap_compression_break_v0",
