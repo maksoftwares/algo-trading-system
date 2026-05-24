@@ -2,8 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import os
 from pathlib import Path
+import time
 from typing import Iterable
+from uuid import uuid4
 
 import pandas as pd
 
@@ -86,7 +89,7 @@ def generate_rejection_gate_audit(
     summary_df = pd.DataFrame(rows).sort_values(["decision_scope", "candidate"])
     summary_path = reports_dir / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv"
     report_path = reports_dir / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md"
-    summary_df.to_csv(summary_path, index=False)
+    _write_csv_with_retry(summary_df, summary_path)
     _write_report(report_path, summary_df, approved)
 
     rejected = summary_df[summary_df["decision_scope"] == "REJECTED_OR_RESEARCH"]
@@ -239,3 +242,24 @@ def _write_report(report_path: Path, df: pd.DataFrame, approved: set[str]) -> No
         ]
     )
     report_path.write_text("\n".join(lines), encoding="utf-8")
+
+
+def _write_csv_with_retry(df: pd.DataFrame, path: Path, attempts: int = 8, delay_seconds: float = 0.25) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    last_error: PermissionError | None = None
+    for _ in range(attempts):
+        temp_path = path.with_name(f"{path.stem}.{uuid4().hex}.tmp")
+        try:
+            df.to_csv(temp_path, index=False)
+            os.replace(temp_path, path)
+            return
+        except PermissionError as exc:
+            last_error = exc
+            if temp_path.exists():
+                temp_path.unlink(missing_ok=True)
+            time.sleep(delay_seconds)
+        else:
+            if temp_path.exists():
+                temp_path.unlink(missing_ok=True)
+    if last_error is not None:
+        raise last_error
