@@ -55,7 +55,10 @@ from phase0.xau_xag_relative_data import load_xau_xag_relative_h1_context
 
 XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME = "xag_lead_xau_followthrough_v0"
 XAU_XAG_FX_COMPOSITE_EXPERT_NAME = "xau_xag_fx_composite_reversion_v0"
-MACRO_COMPOSITE_EXPERT_NAME = "h4_macro_composite_risk_state_v0"
+MACRO_COMPOSITE_EXPERT_NAMES = (
+    "h4_macro_composite_risk_state_v0",
+    "h4_macro_composite_risk_state_v1",
+)
 
 
 @dataclass(frozen=True)
@@ -92,7 +95,7 @@ def run_phase0_matrix(
             _assert_cot_gold_data_ready(config)
         if expert_name == CREDIT_SPREAD_EXPERT_NAME and not synthetic_sample:
             _assert_credit_spread_data_ready(config)
-        if expert_name == MACRO_COMPOSITE_EXPERT_NAME and not synthetic_sample:
+        if expert_name in MACRO_COMPOSITE_EXPERT_NAMES and not synthetic_sample:
             _assert_macro_composite_data_ready(config)
         if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
@@ -196,7 +199,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == MACRO_COMPOSITE_EXPERT_NAME:
+                if expert_name in MACRO_COMPOSITE_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         MACRO_FRAME_KEY: load_macro_real_yield_context(

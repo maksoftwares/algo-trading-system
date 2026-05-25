@@ -31,6 +31,7 @@ h4_financial_conditions_stress_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_
 h4_gvz_volatility_panic_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,489,100.0,212.5005,0.277442,1.289932,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration;activity
 h4_inside_bar_d1_momentum_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,741,92.6435,446.3203,0.16605,0.808783,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 h4_macro_composite_risk_state_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,516,118.853,561.4902,0.268946,1.300981,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;sample_size;concentration;activity
+h4_macro_composite_risk_state_v1,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,894,100.0,100.0,0.22252,1.082554,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration;activity
 h4_real_yield_proxy_momentum_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,306,251.2082,1194.5654,0.409761,1.863491,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;sample_size;concentration;activity
 h4_treasury_curve_stress_momentum_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,975,100.0,300.5803,0.247986,1.119923,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration;activity
 h4_vix_risk_off_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,504,100.0,243.0016,0.29159,1.330496,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration

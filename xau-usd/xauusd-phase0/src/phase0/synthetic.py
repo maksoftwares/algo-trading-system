@@ -70,6 +70,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_inside_bar_d1_momentum_breakout_context()
     if expert == "h4_macro_composite_risk_state_v0":
         return _h4_macro_composite_risk_state_context()
+    if expert == "h4_macro_composite_risk_state_v1":
+        return _h4_macro_composite_risk_state_context()
     if expert == "h4_real_yield_proxy_momentum_v0":
         return _h4_real_yield_proxy_momentum_context()
     if expert == "h4_treasury_curve_stress_momentum_v0":
