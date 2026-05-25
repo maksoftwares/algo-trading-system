@@ -21,6 +21,9 @@ from phase0.data_validator import (
 from phase0.gold_fx_proxy_data import EXPERT_NAME as GOLD_FX_PROXY_EXPERT_NAME
 from phase0.gold_fx_proxy_data import check_gold_fx_proxy_data
 from phase0.gold_fx_proxy_data import load_gold_fx_proxy_h1_context
+from phase0.gvz_volatility_data import EXPERT_NAME as GVZ_VOLATILITY_EXPERT_NAME
+from phase0.gvz_volatility_data import GVZ_FRAME_KEY
+from phase0.gvz_volatility_data import load_gvz_volatility_context
 from phase0.macro_real_yield_data import EXPERT_NAME as MACRO_REAL_YIELD_EXPERT_NAME
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
 from phase0.macro_real_yield_data import load_macro_real_yield_context
@@ -67,6 +70,8 @@ def run_phase0_matrix(
             _assert_macro_real_yield_data_ready(config)
         if expert_name == COT_GOLD_EXPERT_NAME and not synthetic_sample:
             _assert_cot_gold_data_ready(config)
+        if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
+            _assert_gvz_volatility_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:
@@ -150,6 +155,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name == GVZ_VOLATILITY_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        GVZ_FRAME_KEY: load_gvz_volatility_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
 
             result = run_backtest(
                 config=config,
@@ -228,6 +242,12 @@ def _assert_cot_gold_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_cot_gold_context(config, start, end)
+
+
+def _assert_gvz_volatility_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_gvz_volatility_context(config, start, end)
 
 
 def load_cell_data_context(

@@ -38,6 +38,9 @@ from phase0.strategies.h1_walk_forward_linear_state_v0 import H1WalkForwardLinea
 from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
     H4D1MomentumExpansionContinuationV0Strategy,
 )
+from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
+    H4GvzVolatilityPanicReversalV0Strategy,
+)
 from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v0 import H4InsideBarD1MomentumBreakoutV0Strategy
 from phase0.strategies.h4_real_yield_proxy_momentum_v0 import H4RealYieldProxyMomentumV0Strategy
 from phase0.strategies.h4_walk_forward_knn_momentum_state_v0 import H4WalkForwardKnnMomentumStateV0Strategy
@@ -111,6 +114,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1WalkForwardLinearStateV0Strategy.name: H1WalkForwardLinearStateV0Strategy,
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,
+    H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
     H4RealYieldProxyMomentumV0Strategy.name: H4RealYieldProxyMomentumV0Strategy,
     H4WalkForwardKnnMomentumStateV0Strategy.name: H4WalkForwardKnnMomentumStateV0Strategy,

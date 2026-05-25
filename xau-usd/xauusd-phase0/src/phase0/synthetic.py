@@ -58,6 +58,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _xau_xag_relative_value_context()
     if expert == "h4_d1_momentum_expansion_continuation_v0":
         return _h4_d1_momentum_expansion_continuation_context()
+    if expert == "h4_gvz_volatility_panic_reversal_v0":
+        return _h4_gvz_volatility_panic_reversal_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
         return _h4_inside_bar_d1_momentum_breakout_context()
     if expert == "h4_real_yield_proxy_momentum_v0":
@@ -1005,6 +1007,82 @@ def _h4_real_yield_proxy_momentum_context() -> dict:
         "H4": h4,
         "D1": d1,
         "macro_proxy": macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_gvz_volatility_panic_reversal_context() -> dict:
+    gvz_dates = pd.bdate_range("2022-01-03", periods=340, tz="UTC")
+    gvz_close: list[float] = []
+    for index in range(340):
+        if index < 260:
+            gvz_close.append(18.0 + 0.03 * (index % 8))
+        else:
+            gvz_close.append(18.0 + 0.24 * (index - 259))
+    gvz = pd.DataFrame({"timestamp_utc": gvz_dates, "gvz_close": gvz_close})
+
+    h4_periods = 180
+    h4_times = pd.date_range(gvz_dates[300] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        if index < 120:
+            current -= 1.20
+        elif index == 120:
+            current += 3.20
+        else:
+            current += 0.12 if index % 4 else -0.04
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2005.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [1998.0] * 40,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    m5_periods = h4_periods * 48 + 288
+    m5_times = pd.date_range(h4_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "gvz_volatility": gvz,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
