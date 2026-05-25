@@ -62,6 +62,10 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _liquidity_sweep_reversal_context()
     if expert == "m15_inside_bar_breakout_v0":
         return _m15_inside_bar_breakout_context()
+    if expert == "m15_two_bar_impulse_continuation_v0":
+        return _m15_two_bar_impulse_continuation_context()
+    if expert == "m15_two_bar_exhaustion_reversal_v0":
+        return _m15_two_bar_exhaustion_reversal_context()
     if expert == "m5_impulse_continuation_v0":
         return _m5_impulse_continuation_context()
     if expert == "ny_failed_london_reversal_v0":
@@ -1096,6 +1100,128 @@ def _m15_inside_bar_breakout_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _m15_two_bar_exhaustion_reversal_context() -> dict:
+    periods = 80
+    m15_times = pd.date_range("2024-05-02T00:15:00Z", periods=periods, freq="15min")
+    closes = [2000.0 + (0.05 if index % 2 == 0 else -0.05) for index in range(periods)]
+    opens = [2000.0] * periods
+    highs = [2000.45] * periods
+    lows = [1999.55] * periods
+
+    opens[-3] = 2000.0
+    closes[-3] = 2000.0
+    highs[-3] = 2000.45
+    lows[-3] = 1999.55
+    opens[-2] = 2000.0
+    closes[-2] = 1999.05
+    highs[-2] = 2000.20
+    lows[-2] = 1998.85
+    opens[-1] = 1999.05
+    closes[-1] = 1997.80
+    highs[-1] = 1999.20
+    lows[-1] = 1997.60
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "bar_start_utc": m15_times - pd.Timedelta(minutes=15),
+            "open": opens,
+            "high": highs,
+            "low": lows,
+            "close": closes,
+            "mid_open": opens,
+            "mid_high": highs,
+            "mid_low": lows,
+            "mid_close": closes,
+            "bid_open": [value - 0.01 for value in opens],
+            "ask_open": [value + 0.01 for value in opens],
+            "bid_close": [value - 0.01 for value in closes],
+            "ask_close": [value + 0.01 for value in closes],
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(m15_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 0.8] * 180,
+            "low": [last_close - 0.8] * 180,
+            "close": [last_close + 0.1] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.1] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close] * 180,
+            "ask_close": [last_close + 0.2] * 180,
+        }
+    )
+    return {"M5": m5, "M15": m15, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _m15_two_bar_impulse_continuation_context() -> dict:
+    periods = 80
+    m15_times = pd.date_range("2024-05-03T00:15:00Z", periods=periods, freq="15min")
+    closes = [2000.0 + (0.05 if index % 2 == 0 else -0.05) for index in range(periods)]
+    opens = [2000.0] * periods
+    highs = [2000.45] * periods
+    lows = [1999.55] * periods
+
+    opens[-3] = 2000.0
+    closes[-3] = 2000.0
+    highs[-3] = 2000.45
+    lows[-3] = 1999.55
+    opens[-2] = 2000.0
+    closes[-2] = 2000.95
+    highs[-2] = 2001.15
+    lows[-2] = 1999.80
+    opens[-1] = 2000.95
+    closes[-1] = 2002.20
+    highs[-1] = 2002.40
+    lows[-1] = 2000.80
+
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "bar_start_utc": m15_times - pd.Timedelta(minutes=15),
+            "open": opens,
+            "high": highs,
+            "low": lows,
+            "close": closes,
+            "mid_open": opens,
+            "mid_high": highs,
+            "mid_low": lows,
+            "mid_close": closes,
+            "bid_open": [value - 0.01 for value in opens],
+            "ask_open": [value + 0.01 for value in opens],
+            "bid_close": [value - 0.01 for value in closes],
+            "ask_close": [value + 0.01 for value in closes],
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(m15_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 0.8] * 180,
+            "low": [last_close - 0.8] * 180,
+            "close": [last_close + 0.1] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.1] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close] * 180,
+            "ask_close": [last_close + 0.2] * 180,
+        }
+    )
+    return {"M5": m5, "M15": m15, "symbol": "XAUUSD", "point_size": 0.01}
 
 
 def _m5_impulse_continuation_context() -> dict:

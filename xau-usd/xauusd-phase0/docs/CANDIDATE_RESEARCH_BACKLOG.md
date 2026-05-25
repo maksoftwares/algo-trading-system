@@ -66,6 +66,8 @@ Expected path:
 | 45 | `h1_tick_volume_climax_reversal_v0` | REJECTED_FIRST_PASS | H1 tick-volume participation climax candidate; 0/9 PF cells reached 1.30 and Dukascopy produced no trades, so do not tune v0. |
 | 46 | `h1_walk_forward_linear_state_v0` | REJECTED_FIRST_PASS | Walk-forward learned H1 state candidate; blocker-fixed run produced 561-788 trades per cell, but 0/9 PF cells reached 1.30, so do not tune v0. |
 | 47 | `h1_calendar_drift_state_v0` | REJECTED_FIRST_PASS | Learned hour-of-week drift candidate; 802-1209 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed, so do not tune v0. |
+| 48 | `m15_two_bar_exhaustion_reversal_v0` | REJECTED_FIRST_PASS | M15 two-bar impulse fade candidate; 1304-1454 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in seven cells, so do not tune v0. |
+| 49 | `m15_two_bar_impulse_continuation_v0` | REJECTED_FIRST_PASS | M15 two-bar impulse continuation candidate; 1192-1310 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in five cells, so do not tune v0. |
 
 ## Discipline
 
@@ -99,6 +101,8 @@ Expected path:
 - Round 5 tick-volume result: `h1_tick_volume_climax_reversal_v0` was rejected first-pass. It produced 0-495 trades per cell, 0/9 PF cells reached 1.30, and Dukascopy had no trades; do not tune v0.
 - Round 6 walk-forward learned-state result: `h1_walk_forward_linear_state_v0` was rejected first-pass after a neutral tick-count blocker fix. It produced 561-788 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
 - Round 7 calendar-drift result: `h1_calendar_drift_state_v0` was rejected first-pass. It produced 802-1209 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in Capital.com and Dukascopy windows; do not tune v0.
+- Round 8 M15 two-bar exhaustion-reversal result: `m15_two_bar_exhaustion_reversal_v0` was rejected first-pass. It produced 1304-1454 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in seven cells; do not tune v0.
+- Round 9 M15 two-bar impulse-continuation result: `m15_two_bar_impulse_continuation_v0` was rejected first-pass. It produced 1192-1310 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in five cells; do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -109,7 +113,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 
 ```yaml
 hypothesis_timeframe_coverage:
-  M5_M15: 28
+  M5_M15: 30
   M30_H1: 8
   H4_D1: 6
   W1_plus: 1

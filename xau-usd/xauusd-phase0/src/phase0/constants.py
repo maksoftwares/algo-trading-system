@@ -34,6 +34,8 @@ RESEARCH_EXPERTS = (
     "liquidity_sweep_continuation_v0",
     "liquidity_sweep_reversal_v0",
     "m15_inside_bar_breakout_v0",
+    "m15_two_bar_impulse_continuation_v0",
+    "m15_two_bar_exhaustion_reversal_v0",
     "m5_impulse_continuation_v0",
     "ny_failed_london_reversal_v0",
     "ny_am_pullback_continuation_v0",

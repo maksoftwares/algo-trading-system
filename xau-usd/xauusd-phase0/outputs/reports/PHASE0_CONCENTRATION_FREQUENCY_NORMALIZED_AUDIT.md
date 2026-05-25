@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-25T14:02:28+00:00`
+Generated at UTC: `2026-05-25T14:27:32+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 46
-- Absolute concentration-failed candidates: 41
-- Review-context candidates under normalized thresholds: 40
+- Audited candidates: 48
+- Absolute concentration-failed candidates: 43
+- Review-context candidates under normalized thresholds: 42
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -56,6 +56,8 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3906 | 100.0 | 100.0 | 0.075868 | 0.335886 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | london_fix_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4821 | 100.0 | 100.0 | 0.064478 | 0.319355 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | m15_inside_bar_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 7170 | 100.0 | 100.0 | 0.054633 | 0.243609 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| m15_two_bar_exhaustion_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 12282 | 100.0 | 100.0 | 0.053249 | 0.232785 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
+| m15_two_bar_impulse_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 11191 | 100.0 | 100.0 | 0.048188 | 0.230759 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | m5_impulse_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 20346 | 100.0 | 100.0 | 0.03133 | 0.148409 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | ny_am_pullback_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3195 | 100.0 | 100.0 | 0.074729 | 0.366887 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | ny_failed_london_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3369 | 105.3398 | 520.4927 | 0.077302 | 0.37158 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |

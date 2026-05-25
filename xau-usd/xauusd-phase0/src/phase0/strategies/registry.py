@@ -38,6 +38,12 @@ from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0
 from phase0.strategies.liquidity_sweep_continuation_v0 import LiquiditySweepContinuationV0Strategy
 from phase0.strategies.liquidity_sweep_reversal_v0 import LiquiditySweepReversalV0Strategy
 from phase0.strategies.m15_inside_bar_breakout_v0 import M15InsideBarBreakoutV0Strategy
+from phase0.strategies.m15_two_bar_impulse_continuation_v0 import (
+    M15TwoBarImpulseContinuationV0Strategy,
+)
+from phase0.strategies.m15_two_bar_exhaustion_reversal_v0 import (
+    M15TwoBarExhaustionReversalV0Strategy,
+)
 from phase0.strategies.m5_impulse_continuation_v0 import M5ImpulseContinuationV0Strategy
 from phase0.strategies.ny_failed_london_reversal_v0 import NyFailedLondonReversalV0Strategy
 from phase0.strategies.ny_am_pullback_continuation_v0 import NyAmPullbackContinuationV0Strategy
@@ -96,6 +102,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     LiquiditySweepContinuationV0Strategy.name: LiquiditySweepContinuationV0Strategy,
     LiquiditySweepReversalV0Strategy.name: LiquiditySweepReversalV0Strategy,
     M15InsideBarBreakoutV0Strategy.name: M15InsideBarBreakoutV0Strategy,
+    M15TwoBarImpulseContinuationV0Strategy.name: M15TwoBarImpulseContinuationV0Strategy,
+    M15TwoBarExhaustionReversalV0Strategy.name: M15TwoBarExhaustionReversalV0Strategy,
     M5ImpulseContinuationV0Strategy.name: M5ImpulseContinuationV0Strategy,
     NyFailedLondonReversalV0Strategy.name: NyFailedLondonReversalV0Strategy,
     NyAmPullbackContinuationV0Strategy.name: NyAmPullbackContinuationV0Strategy,
