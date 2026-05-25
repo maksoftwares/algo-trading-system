@@ -11,6 +11,9 @@ from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolv
 from phase0.cot_gold_data import COT_FRAME_KEY
 from phase0.cot_gold_data import EXPERT_NAME as COT_GOLD_EXPERT_NAME
 from phase0.cot_gold_data import load_cot_gold_context
+from phase0.credit_spread_data import CREDIT_SPREAD_FRAME_KEY
+from phase0.credit_spread_data import EXPERT_NAME as CREDIT_SPREAD_EXPERT_NAME
+from phase0.credit_spread_data import load_credit_spread_context
 from phase0.data_loader import processed_bars_dir
 from phase0.data_validator import (
     MAX_ALLOWED_BAR_GAPS,
@@ -86,6 +89,8 @@ def run_phase0_matrix(
             _assert_macro_real_yield_data_ready(config)
         if expert_name == COT_GOLD_EXPERT_NAME and not synthetic_sample:
             _assert_cot_gold_data_ready(config)
+        if expert_name == CREDIT_SPREAD_EXPERT_NAME and not synthetic_sample:
+            _assert_credit_spread_data_ready(config)
         if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
         if expert_name == VIX_RISK_EXPERT_NAME and not synthetic_sample:
@@ -174,6 +179,15 @@ def run_phase0_matrix(
                     data_context = {
                         **data_context,
                         COT_FRAME_KEY: load_cot_gold_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == CREDIT_SPREAD_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        CREDIT_SPREAD_FRAME_KEY: load_credit_spread_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,
@@ -302,6 +316,12 @@ def _assert_cot_gold_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_cot_gold_context(config, start, end)
+
+
+def _assert_credit_spread_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_credit_spread_context(config, start, end)
 
 
 def _assert_gvz_volatility_data_ready(config: ProjectConfig) -> None:

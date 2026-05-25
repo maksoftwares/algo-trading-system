@@ -9,6 +9,9 @@ from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
 from phase0.strategies.compression_retest_continuation_v0 import CompressionRetestContinuationV0Strategy
 from phase0.strategies.cot_gold_positioning_reversal_v0 import CotGoldPositioningReversalV0Strategy
+from phase0.strategies.h4_credit_spread_stress_momentum_v0 import (
+    H4CreditSpreadStressMomentumV0Strategy,
+)
 from phase0.strategies.d1_compression_h4_expansion_v0 import D1CompressionH4ExpansionV0Strategy
 from phase0.strategies.d1_inside_day_breakout_v0 import D1InsideDayBreakoutV0Strategy
 from phase0.strategies.d1_momentum_h4_pullback_v0 import D1MomentumH4PullbackV0Strategy
@@ -105,6 +108,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     AsiaRangeLondonFailedBreakReversalV0Strategy.name: AsiaRangeLondonFailedBreakReversalV0Strategy,
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
     CotGoldPositioningReversalV0Strategy.name: CotGoldPositioningReversalV0Strategy,
+    H4CreditSpreadStressMomentumV0Strategy.name: H4CreditSpreadStressMomentumV0Strategy,
     D1CompressionH4ExpansionV0Strategy.name: D1CompressionH4ExpansionV0Strategy,
     D1InsideDayBreakoutV0Strategy.name: D1InsideDayBreakoutV0Strategy,
     D1MomentumH4PullbackV0Strategy.name: D1MomentumH4PullbackV0Strategy,

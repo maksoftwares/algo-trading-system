@@ -79,6 +79,7 @@ Expected path:
 | 58 | `h4_financial_conditions_stress_reversal_v0` | REJECTED_FIRST_PASS | Financial-conditions stress candidate using FRED NFCI/ANFCI; 46-61 trades per cell, 0/9 PF cells reached 1.30, concentration/activity failed; do not tune v0. |
 | 59 | `h4_breakeven_inflation_momentum_v0` | REJECTED_FIRST_PASS | Breakeven-inflation momentum candidate using FRED T5YIE/T10YIE; 183-273 trades per cell, 0/9 PF cells reached 1.30, concentration failed; do not tune v0. |
 | 60 | `h4_treasury_curve_stress_momentum_v0` | REJECTED_FIRST_PASS | Nominal Treasury-rate and yield-curve stress candidate using FRED DGS2/DGS10/T10Y2Y; 55-207 trades per cell, 3/9 PF cells reached 1.30, Pepperstone-only strength, concentration/activity failed; do not tune v0. |
+| 61 | `h4_credit_spread_stress_momentum_v0` | REJECTED_FIRST_PASS | Corporate credit-spread stress candidate using FRED BAA10Y/AAA10Y; 153-211 trades per cell, 0/9 PF cells reached 1.30, concentration/activity failed; do not tune v0. |
 
 ## Discipline
 
@@ -126,6 +127,7 @@ Expected path:
 - Round 19 financial-conditions result: `h4_financial_conditions_stress_reversal_v0` was rejected first-pass after public FRED `NFCI` and `ANFCI` data were acquired. It produced 46-61 trades per cell and passed sample size, but 0/9 PF cells reached 1.30 and concentration/activity failed in every cell; do not tune v0.
 - Round 20 breakeven-inflation result: `h4_breakeven_inflation_momentum_v0` was rejected first-pass after public FRED `T5YIE` and `T10YIE` data were acquired. It produced 183-273 trades per cell and passed sample size, activity, catastrophic-loss, and cost-sensitivity gates, but 0/9 PF cells reached 1.30 and concentration failed in seven cells; do not tune v0.
 - Round 21 Treasury curve result: `h4_treasury_curve_stress_momentum_v0` was rejected first-pass after public FRED `DGS2`, `DGS10`, and `T10Y2Y` data were acquired. It produced 55-207 trades per cell and 3/9 PF cells reached 1.30, but all passing cells were Pepperstone-only and concentration/activity failed; do not tune v0.
+- Round 22 credit-spread result: `h4_credit_spread_stress_momentum_v0` was rejected first-pass after public FRED `BAA10Y` and `AAA10Y` data were acquired. It produced 153-211 trades per cell and passed sample size, catastrophic-loss, and cost-sensitivity gates, but 0/9 PF cells reached 1.30 and concentration/activity failed; do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -138,7 +140,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 hypothesis_timeframe_coverage:
   M5_M15: 30
   M30_H1: 11
-  H4_D1: 15
+  H4_D1: 16
   W1_plus: 1
   planned_next_H4_D1: []
   planned_next_M30_H1: []
@@ -148,6 +150,6 @@ hypothesis_timeframe_coverage:
 
 `daily_pivot_reclaim_v0` and `weekly_level_reclaim_v0` used slower reference levels, but both had M5 entries, so they do not count as H4/D1 diversification.
 
-`d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `cot_gold_positioning_reversal_v0`, `h4_gvz_volatility_panic_reversal_v0`, `h4_vix_risk_off_reversal_v0`, `h4_financial_conditions_stress_reversal_v0`, `h4_breakeven_inflation_momentum_v0`, `h4_treasury_curve_stress_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
+`d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `cot_gold_positioning_reversal_v0`, `h4_gvz_volatility_panic_reversal_v0`, `h4_vix_risk_off_reversal_v0`, `h4_financial_conditions_stress_reversal_v0`, `h4_breakeven_inflation_momentum_v0`, `h4_treasury_curve_stress_momentum_v0`, `h4_credit_spread_stress_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
 
 `xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing. `h1_volatility_squeeze_breakout_v0` counts as an M30/H1 volatility-regime diversification attempt by timing. All are rejected and none becomes an approved expert.

@@ -14,6 +14,7 @@ RESEARCH_EXPERTS = (
     "compression_retest_continuation_v0",
     "cot_gold_positioning_reversal_v0",
     "d1_compression_h4_expansion_v0",
+    "h4_credit_spread_stress_momentum_v0",
     "d1_inside_day_breakout_v0",
     "d1_momentum_h4_pullback_v0",
     "d1_multi_day_exhaustion_reversion_v0",
