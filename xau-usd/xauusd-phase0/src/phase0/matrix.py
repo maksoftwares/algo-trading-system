@@ -21,6 +21,11 @@ from phase0.data_validator import (
 from phase0.gold_fx_proxy_data import EXPERT_NAME as GOLD_FX_PROXY_EXPERT_NAME
 from phase0.gold_fx_proxy_data import check_gold_fx_proxy_data
 from phase0.gold_fx_proxy_data import load_gold_fx_proxy_h1_context
+from phase0.financial_conditions_data import (
+    EXPERT_NAME as FINANCIAL_CONDITIONS_EXPERT_NAME,
+)
+from phase0.financial_conditions_data import FINANCIAL_CONDITIONS_FRAME_KEY
+from phase0.financial_conditions_data import load_financial_conditions_context
 from phase0.gvz_volatility_data import EXPERT_NAME as GVZ_VOLATILITY_EXPERT_NAME
 from phase0.gvz_volatility_data import GVZ_FRAME_KEY
 from phase0.gvz_volatility_data import load_gvz_volatility_context
@@ -77,6 +82,8 @@ def run_phase0_matrix(
             _assert_gvz_volatility_data_ready(config)
         if expert_name == VIX_RISK_EXPERT_NAME and not synthetic_sample:
             _assert_vix_risk_data_ready(config)
+        if expert_name == FINANCIAL_CONDITIONS_EXPERT_NAME and not synthetic_sample:
+            _assert_financial_conditions_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:
@@ -178,6 +185,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name == FINANCIAL_CONDITIONS_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        FINANCIAL_CONDITIONS_FRAME_KEY: load_financial_conditions_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
 
             result = run_backtest(
                 config=config,
@@ -268,6 +284,12 @@ def _assert_vix_risk_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_vix_risk_context(config, start, end)
+
+
+def _assert_financial_conditions_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_financial_conditions_context(config, start, end)
 
 
 def load_cell_data_context(

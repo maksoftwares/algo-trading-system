@@ -58,6 +58,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _xau_xag_relative_value_context()
     if expert == "h4_d1_momentum_expansion_continuation_v0":
         return _h4_d1_momentum_expansion_continuation_context()
+    if expert == "h4_financial_conditions_stress_reversal_v0":
+        return _h4_financial_conditions_stress_reversal_context()
     if expert == "h4_gvz_volatility_panic_reversal_v0":
         return _h4_gvz_volatility_panic_reversal_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
@@ -1009,6 +1011,97 @@ def _h4_real_yield_proxy_momentum_context() -> dict:
         "H4": h4,
         "D1": d1,
         "macro_proxy": macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_financial_conditions_stress_reversal_context() -> dict:
+    condition_dates = pd.date_range("2018-01-05", periods=220, freq="7D", tz="UTC")
+    nfci: list[float] = []
+    anfci: list[float] = []
+    for index in range(220):
+        if index < 160:
+            nfci.append(-0.45 + 0.01 * (index % 5))
+            anfci.append(-0.40 + 0.01 * (index % 5))
+        else:
+            nfci.append(-0.45 + 0.035 * (index - 159))
+            anfci.append(-0.40 + 0.030 * (index - 159))
+    financial_conditions = pd.DataFrame(
+        {"timestamp_utc": condition_dates, "nfci": nfci, "anfci": anfci}
+    )
+
+    h4_periods = 180
+    h4_times = pd.date_range(
+        condition_dates[190] + pd.Timedelta(hours=4),
+        periods=h4_periods,
+        freq="4h",
+    )
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        if index < 120:
+            current -= 1.15
+        elif index == 120:
+            current += 3.10
+        else:
+            current += 0.10 if index % 4 else -0.04
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+    h4["high"] = h4[["open", "close"]].max(axis=1) + 5.0
+    h4["low"] = h4[["open", "close"]].min(axis=1) - 20.0
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2005.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [1998.0] * 40,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    m5_periods = h4_periods * 48 + 288
+    m5_times = pd.date_range(
+        h4_times[0] + pd.Timedelta(minutes=5),
+        periods=m5_periods,
+        freq="5min",
+    )
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "financial_conditions": financial_conditions,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

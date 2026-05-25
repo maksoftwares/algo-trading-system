@@ -25,6 +25,7 @@ h1_tick_volume_climax_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILUR
 h1_volatility_squeeze_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,2127,116,300,293.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_walk_forward_linear_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,5979,561,788,644.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_d1_momentum_expansion_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,735,81,83,81.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h4_financial_conditions_stress_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,483,46,61,54.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h4_gvz_volatility_panic_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,489,48,60,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h4_inside_bar_d1_momentum_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,2,741,71,100,76.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_real_yield_proxy_momentum_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,306,18,64,20.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
