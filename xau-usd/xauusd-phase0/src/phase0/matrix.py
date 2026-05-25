@@ -25,6 +25,9 @@ from phase0.xau_xag_relative_data import EXPERT_NAME as XAU_XAG_RELATIVE_EXPERT_
 from phase0.xau_xag_relative_data import check_xau_xag_relative_data
 from phase0.xau_xag_relative_data import load_xau_xag_relative_h1_context
 
+XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME = "xag_lead_xau_followthrough_v0"
+XAU_XAG_FX_COMPOSITE_EXPERT_NAME = "xau_xag_fx_composite_reversion_v0"
+
 
 @dataclass(frozen=True)
 class MatrixRunOutput:
@@ -48,6 +51,11 @@ def run_phase0_matrix(
         if expert_name == GOLD_FX_PROXY_EXPERT_NAME and not synthetic_sample:
             _assert_gold_fx_proxy_data_ready(config)
         if expert_name == XAU_XAG_RELATIVE_EXPERT_NAME and not synthetic_sample:
+            _assert_xau_xag_relative_data_ready(config)
+        if expert_name == XAU_XAG_FX_COMPOSITE_EXPERT_NAME and not synthetic_sample:
+            _assert_gold_fx_proxy_data_ready(config)
+            _assert_xau_xag_relative_data_ready(config)
+        if expert_name == XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME and not synthetic_sample:
             _assert_xau_xag_relative_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
@@ -81,6 +89,32 @@ def run_phase0_matrix(
                 if expert_name == XAU_XAG_RELATIVE_EXPERT_NAME:
                     data_context = {
                         **data_context,
+                        "relative_value": load_xau_xag_relative_h1_context(
+                            config,
+                            cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        "relative_value": load_xau_xag_relative_h1_context(
+                            config,
+                            cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == XAU_XAG_FX_COMPOSITE_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        "intermarket_proxy": load_gold_fx_proxy_h1_context(
+                            config,
+                            cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
                         "relative_value": load_xau_xag_relative_h1_context(
                             config,
                             cell.broker,

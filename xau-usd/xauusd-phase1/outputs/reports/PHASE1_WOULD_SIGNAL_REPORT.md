@@ -8,15 +8,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| would_signal_rows | PASS | Would-signal rows observed: 18. |
-| would_signal_clusters | PASS | Setup clusters observed: 18. |
+| would_signal_rows | PASS | Would-signal rows observed: 22. |
+| would_signal_clusters | PASS | Setup clusters observed: 22. |
 | would_signal_dry_run | PASS | All would-signal rows stayed dry-run. |
 | would_signal_permission_lock | PASS | All would-signal rows kept permission false. |
 
 ## Summary
 
-- Would-signal rows: 18
-- Setup clusters: 18
+- Would-signal rows: 22
+- Setup clusters: 22
 - Directions observed: LONG, SHORT
 - Level kinds observed: latest_swing_high, latest_swing_low
 - Observers observed: breakout_retest, swing_breakout_retest_v0
@@ -44,19 +44,23 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | WS016 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4567.36 | 4566.19 | 4569.52 | 4561.19 | 2026.05.25 12:50:00 | 2026.05.25 12:50:00 |
 | WS017 | breakout_retest | 1 | SHORT | latest_swing_low | 4567.36 | 4562.45 | 4568.88 | 4552.81 | 2026.05.25 13:20:00 | 2026.05.25 13:20:00 |
 | WS018 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4567.36 | 4562.45 | 4568.88 | 4552.81 | 2026.05.25 13:20:00 | 2026.05.25 13:20:00 |
+| WS019 | breakout_retest | 1 | LONG | latest_swing_high | 4565.43 | 4566.87 | 4564.95 | 4569.75 | 2026.05.25 15:05:00 | 2026.05.25 15:05:00 |
+| WS020 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4565.43 | 4566.87 | 4564.95 | 4569.75 | 2026.05.25 15:05:00 | 2026.05.25 15:05:00 |
+| WS021 | breakout_retest | 1 | LONG | latest_swing_high | 4565.43 | 4568.04 | 4565.21 | 4572.29 | 2026.05.25 15:15:00 | 2026.05.25 15:15:00 |
+| WS022 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4565.43 | 4568.04 | 4565.21 | 4572.29 | 2026.05.25 15:15:00 | 2026.05.25 15:15:00 |
 
 ## Direction Counts
 
 | Value | Count |
 | --- | --- |
-| LONG | 6 |
+| LONG | 10 |
 | SHORT | 12 |
 
 ## Level Kind Counts
 
 | Value | Count |
 | --- | --- |
-| latest_swing_high | 6 |
+| latest_swing_high | 10 |
 | latest_swing_low | 12 |
 
 ## Would-Signal Rows
@@ -81,3 +85,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | swing_breakout_retest_v0 | 2026.05.25 12:50:00 | 2026.05.25 12:50:00 | SHORT | latest_swing_low | 4567.36 | 4566.19 | 4569.52 | 4561.19 | 75.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.25 13:20:00 | 2026.05.25 13:20:00 | SHORT | latest_swing_low | 4567.36 | 4562.45 | 4568.88 | 4552.81 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.05.25 13:20:00 | 2026.05.25 13:20:00 | SHORT | latest_swing_low | 4567.36 | 4562.45 | 4568.88 | 4552.81 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.05.25 15:05:00 | 2026.05.25 15:05:00 | LONG | latest_swing_high | 4565.43 | 4566.87 | 4564.95 | 4569.75 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.05.25 15:05:00 | 2026.05.25 15:05:00 | LONG | latest_swing_high | 4565.43 | 4566.87 | 4564.95 | 4569.75 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.05.25 15:15:00 | 2026.05.25 15:15:00 | LONG | latest_swing_high | 4565.43 | 4568.04 | 4565.21 | 4572.29 | 75.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.05.25 15:15:00 | 2026.05.25 15:15:00 | LONG | latest_swing_high | 4565.43 | 4568.04 | 4565.21 | 4572.29 | 75.00 | NORMAL | EXECUTION_OK | false | true |

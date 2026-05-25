@@ -18,6 +18,7 @@ RESEARCH_EXPERTS = (
     "d1_multi_day_exhaustion_reversion_v0",
     "d1_outside_day_followthrough_v0",
     "d1_volatility_expansion_reversal_v0",
+    "d1_w1_momentum_h4_pullback_v0",
     "daily_pivot_reclaim_v0",
     "emr_inactivity_long_v0",
     "extreme_activity_mean_reversion_v0",
@@ -30,6 +31,7 @@ RESEARCH_EXPERTS = (
     "h1_walk_forward_linear_state_v0",
     "h4_d1_momentum_expansion_continuation_v0",
     "h4_inside_bar_d1_momentum_breakout_v0",
+    "h4_walk_forward_knn_momentum_state_v0",
     "london_fix_continuation_v0",
     "liquidity_sweep_continuation_v0",
     "liquidity_sweep_reversal_v0",
@@ -53,6 +55,8 @@ RESEARCH_EXPERTS = (
     "w1_d1_momentum_continuation_v0",
     "weekly_level_reclaim_v0",
     "weekly_open_reversion_v0",
+    "xag_lead_xau_followthrough_v0",
+    "xau_xag_fx_composite_reversion_v0",
     "xau_xag_relative_value_v0",
 )
 COST_MODELS = ("best_case", "median", "p95")

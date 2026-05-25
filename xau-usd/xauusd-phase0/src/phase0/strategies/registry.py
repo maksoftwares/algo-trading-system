@@ -14,6 +14,7 @@ from phase0.strategies.d1_momentum_h4_pullback_v0 import D1MomentumH4PullbackV0S
 from phase0.strategies.d1_multi_day_exhaustion_reversion_v0 import D1MultiDayExhaustionReversionV0Strategy
 from phase0.strategies.d1_outside_day_followthrough_v0 import D1OutsideDayFollowthroughV0Strategy
 from phase0.strategies.d1_volatility_expansion_reversal_v0 import D1VolatilityExpansionReversalV0Strategy
+from phase0.strategies.d1_w1_momentum_h4_pullback_v0 import D1W1MomentumH4PullbackV0Strategy
 from phase0.strategies.daily_pivot_reclaim_v0 import DailyPivotReclaimV0Strategy
 from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
 from phase0.strategies.extreme_activity_mean_reversion_v0 import ExtremeActivityMeanReversionV0Strategy
@@ -34,6 +35,7 @@ from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
     H4D1MomentumExpansionContinuationV0Strategy,
 )
 from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v0 import H4InsideBarD1MomentumBreakoutV0Strategy
+from phase0.strategies.h4_walk_forward_knn_momentum_state_v0 import H4WalkForwardKnnMomentumStateV0Strategy
 from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0Strategy
 from phase0.strategies.liquidity_sweep_continuation_v0 import LiquiditySweepContinuationV0Strategy
 from phase0.strategies.liquidity_sweep_reversal_v0 import LiquiditySweepReversalV0Strategy
@@ -67,6 +69,10 @@ from phase0.strategies.trend_pullback import TrendPullbackStrategy
 from phase0.strategies.w1_d1_momentum_continuation_v0 import W1D1MomentumContinuationV0Strategy
 from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
 from phase0.strategies.weekly_open_reversion_v0 import WeeklyOpenReversionV0Strategy
+from phase0.strategies.xag_lead_xau_followthrough_v0 import XagLeadXauFollowthroughV0Strategy
+from phase0.strategies.xau_xag_fx_composite_reversion_v0 import (
+    XauXagFxCompositeReversionV0Strategy,
+)
 from phase0.strategies.xau_xag_relative_value_v0 import XauXagRelativeValueV0Strategy
 
 
@@ -86,6 +92,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     D1MultiDayExhaustionReversionV0Strategy.name: D1MultiDayExhaustionReversionV0Strategy,
     D1OutsideDayFollowthroughV0Strategy.name: D1OutsideDayFollowthroughV0Strategy,
     D1VolatilityExpansionReversalV0Strategy.name: D1VolatilityExpansionReversalV0Strategy,
+    D1W1MomentumH4PullbackV0Strategy.name: D1W1MomentumH4PullbackV0Strategy,
     DailyPivotReclaimV0Strategy.name: DailyPivotReclaimV0Strategy,
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
     ExtremeActivityMeanReversionV0Strategy.name: ExtremeActivityMeanReversionV0Strategy,
@@ -98,6 +105,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
+    H4WalkForwardKnnMomentumStateV0Strategy.name: H4WalkForwardKnnMomentumStateV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,
     LiquiditySweepContinuationV0Strategy.name: LiquiditySweepContinuationV0Strategy,
     LiquiditySweepReversalV0Strategy.name: LiquiditySweepReversalV0Strategy,
@@ -121,6 +129,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     W1D1MomentumContinuationV0Strategy.name: W1D1MomentumContinuationV0Strategy,
     WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
     WeeklyOpenReversionV0Strategy.name: WeeklyOpenReversionV0Strategy,
+    XagLeadXauFollowthroughV0Strategy.name: XagLeadXauFollowthroughV0Strategy,
+    XauXagFxCompositeReversionV0Strategy.name: XauXagFxCompositeReversionV0Strategy,
     XauXagRelativeValueV0Strategy.name: XauXagRelativeValueV0Strategy,
 }
 

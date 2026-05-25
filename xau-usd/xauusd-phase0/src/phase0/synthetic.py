@@ -22,6 +22,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _d1_outside_day_followthrough_context()
     if expert == "d1_volatility_expansion_reversal_v0":
         return _d1_volatility_expansion_reversal_context()
+    if expert == "d1_w1_momentum_h4_pullback_v0":
+        return _d1_momentum_h4_pullback_context()
     if expert == "daily_pivot_reclaim_v0":
         return _daily_pivot_reclaim_context()
     if expert == "trend_pullback":
@@ -54,6 +56,12 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_d1_momentum_expansion_continuation_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
         return _h4_inside_bar_d1_momentum_breakout_context()
+    if expert == "h4_walk_forward_knn_momentum_state_v0":
+        return _h4_walk_forward_knn_momentum_state_context()
+    if expert == "xag_lead_xau_followthrough_v0":
+        return _xag_lead_xau_followthrough_context()
+    if expert == "xau_xag_fx_composite_reversion_v0":
+        return _xau_xag_fx_composite_reversion_context()
     if expert == "london_fix_continuation_v0":
         return _london_fix_continuation_context()
     if expert == "liquidity_sweep_continuation_v0":
@@ -914,6 +922,64 @@ def _h4_inside_bar_d1_momentum_breakout_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_walk_forward_knn_momentum_state_context() -> dict:
+    h4_periods = 980
+    h4_times = pd.date_range("2024-01-01T04:00:00Z", periods=h4_periods, freq="4h")
+    h4_closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        current += 0.28 if index % 4 != 0 else -0.04
+        h4_closes.append(current)
+    h4_opens = [h4_closes[0] - 0.12, *h4_closes[:-1]]
+    h4_highs = [max(open_price, close) + 0.18 for open_price, close in zip(h4_opens, h4_closes)]
+    h4_lows = [min(open_price, close) - 0.18 for open_price, close in zip(h4_opens, h4_closes)]
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": h4_opens,
+            "high": h4_highs,
+            "low": h4_lows,
+            "close": h4_closes,
+        }
+    )
+
+    d1_periods = 220
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=d1_periods, freq="1D")
+    d1_closes = [2000.0 + 1.0 * index for index in range(d1_periods)]
+    d1_opens = [close - 0.35 for close in d1_closes]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": d1_opens,
+            "high": [close + 1.0 for close in d1_closes],
+            "low": [open_price - 0.8 for open_price in d1_opens],
+            "close": d1_closes,
+        }
+    )
+
+    last_close = h4_closes[-1]
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=240, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 240,
+            "high": [last_close + 0.8] * 240,
+            "low": [last_close - 0.8] * 240,
+            "close": [last_close + 0.1] * 240,
+            "mid_open": [last_close] * 240,
+            "mid_close": [last_close + 0.1] * 240,
+            "bid_open": [last_close - 0.1] * 240,
+            "ask_open": [last_close + 0.1] * 240,
+            "bid_close": [last_close] * 240,
+            "ask_close": [last_close + 0.2] * 240,
+        }
+    )
+    return {"M5": m5, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
 
 
 def _w1_d1_momentum_continuation_context() -> dict:
@@ -2254,6 +2320,107 @@ def _xau_xag_relative_value_context() -> dict:
     for index in range(periods - 12, periods):
         xag_returns[index] = 0.0001
         xau_returns[index] = 0.0015
+
+    xau_close = _price_path(2000.0, xau_returns)
+    xag_close = _price_path(24.0, xag_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    xag = _ohlc_from_closes(h1_times, xag_close, "capital_com", "XAGUSD", "H1")
+
+    last_close = float(h1["close"].iloc[-1])
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 1.0] * 180,
+            "low": [last_close - 1.0] * 180,
+            "close": [last_close + 0.2] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.2] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close + 0.1] * 180,
+            "ask_close": [last_close + 0.3] * 180,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "relative_value": {"XAGUSD": xag},
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _xau_xag_fx_composite_reversion_context() -> dict:
+    periods = 760
+    h1_times = pd.date_range("2024-01-01T01:00:00Z", periods=periods, freq="1h")
+    xag_returns = [0.00008 if index % 2 == 0 else -0.00005 for index in range(periods)]
+    xau_returns = [0.00005 if index % 2 == 0 else -0.00004 for index in range(periods)]
+    eurusd_returns = [0.00003 if index % 2 == 0 else -0.00002 for index in range(periods)]
+    usdjpy_returns = [0.00002 if index % 2 == 0 else -0.00003 for index in range(periods)]
+
+    for index in range(periods - 48, periods - 4):
+        xag_returns[index] = 0.0011
+        xau_returns[index] = -0.00055
+        eurusd_returns[index] = 0.00070
+        usdjpy_returns[index] = -0.00065
+    for index in range(periods - 4, periods):
+        xag_returns[index] = 0.00015
+        xau_returns[index] = 0.00120
+        eurusd_returns[index] = 0.00055
+        usdjpy_returns[index] = -0.00055
+
+    xau_close = _price_path(2000.0, xau_returns)
+    xag_close = _price_path(24.0, xag_returns)
+    eurusd_close = _price_path(1.10, eurusd_returns)
+    usdjpy_close = _price_path(145.0, usdjpy_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    xag = _ohlc_from_closes(h1_times, xag_close, "capital_com", "XAGUSD", "H1")
+    eurusd = _ohlc_from_closes(h1_times, eurusd_close, "capital_com", "EURUSD", "H1")
+    usdjpy = _ohlc_from_closes(h1_times, usdjpy_close, "capital_com", "USDJPY", "H1")
+
+    last_close = float(h1["close"].iloc[-1])
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 1.0] * 180,
+            "low": [last_close - 1.0] * 180,
+            "close": [last_close + 0.2] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.2] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close + 0.1] * 180,
+            "ask_close": [last_close + 0.3] * 180,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "relative_value": {"XAGUSD": xag},
+        "intermarket_proxy": {"EURUSD": eurusd, "USDJPY": usdjpy},
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _xag_lead_xau_followthrough_context() -> dict:
+    periods = 720
+    h1_times = pd.date_range("2024-01-01T01:00:00Z", periods=periods, freq="1h")
+    xag_returns = [0.00004 if index % 2 == 0 else -0.00003 for index in range(periods)]
+    xau_returns = [0.00003 if index % 2 == 0 else -0.00002 for index in range(periods)]
+
+    for index in range(periods - 24, periods - 4):
+        xag_returns[index] = 0.00120
+        xau_returns[index] = 0.00005
+    for index in range(periods - 4, periods):
+        xag_returns[index] = 0.00040
+        xau_returns[index] = 0.00095
 
     xau_close = _price_path(2000.0, xau_returns)
     xag_close = _price_path(24.0, xag_returns)

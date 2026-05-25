@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-25T14:27:32+00:00`
+Generated at UTC: `2026-05-25T16:29:56+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 48
-- Absolute concentration-failed candidates: 43
-- Review-context candidates under normalized thresholds: 42
+- Audited candidates: 52
+- Absolute concentration-failed candidates: 47
+- Review-context candidates under normalized thresholds: 46
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -40,6 +40,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | d1_multi_day_exhaustion_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 291 | 100.0 | 169.4033 | 0.321023 | 1.517631 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | d1_outside_day_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 261 | 100.0 | 100.0 | 0.31156 | 1.453205 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | d1_volatility_expansion_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 354 | 100.0 | 170.9 | 0.273805 | 1.333514 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration |
+| d1_w1_momentum_h4_pullback_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 552 | 60.9924 | 201.5032 | 0.386344 | 1.225295 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | daily_pivot_reclaim_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4713 | 100.0 | 100.0 | 0.066935 | 0.305054 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | emr_inactivity_long_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 84 | 1306.4986 | 5105.6392 | 0.416545 | 1.695691 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | extreme_activity_mean_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1056 | 100.0 | 100.0 | 0.151877 | 0.750729 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
@@ -52,6 +53,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | h1_walk_forward_linear_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5979 | 100.0 | 129.2628 | 0.230808 | 0.830408 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 735 | 100.0 | 111.7863 | 0.1678 | 0.809899 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 741 | 92.6435 | 446.3203 | 0.16605 | 0.808783 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h4_walk_forward_knn_momentum_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5013 | 100.0 | 292.6321 | 0.117498 | 0.490744 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | liquidity_sweep_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 12222 | 100.0 | 100.0 | 0.043763 | 0.195929 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3906 | 100.0 | 100.0 | 0.075868 | 0.335886 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | london_fix_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4821 | 100.0 | 100.0 | 0.064478 | 0.319355 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
@@ -75,4 +77,6 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | w1_d1_momentum_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 498 | 70.2727 | 337.7604 | 0.235291 | 1.026235 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | weekly_level_reclaim_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1083 | 100.0 | 100.0 | 0.133429 | 0.60837 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | weekly_open_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1878 | 149.5025 | 372.9627 | 0.960612 | 2.413121 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
+| xag_lead_xau_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 7608 | 100.0 | 121.4003 | 0.183137 | 0.43421 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| xau_xag_fx_composite_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4704 | 100.0 | 159.6138 | 0.216725 | 0.67042 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | xau_xag_relative_value_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 936 | 272.0114 | 1349.4661 | 0.143336 | 0.709778 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |

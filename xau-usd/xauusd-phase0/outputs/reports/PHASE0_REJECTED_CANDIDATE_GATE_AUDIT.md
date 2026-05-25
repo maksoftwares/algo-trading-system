@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-25T14:27:30+00:00`
+Generated at UTC: `2026-05-25T16:29:55+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 48
-- Rejected/research candidates audited: 45
+- Audited candidates: 52
+- Rejected/research candidates audited: 49
 - Rejected candidates with sample-size failure: 9
-- Rejected candidates with multi-cell expectancy failure: 43
+- Rejected candidates with multi-cell expectancy failure: 47
 - Rejected candidates with both expectancy and sample-size failure: 9
-- Rejected candidates with expectancy-only failure: 34
+- Rejected candidates with expectancy-only failure: 38
 - Rejected candidates with frequency-only failure: 0
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -36,6 +36,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | d1_multi_day_exhaustion_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 291 | 24 | multi_cell_survival;sample_size;concentration;activity |
 | d1_outside_day_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 261 | 22 | multi_cell_survival;sample_size;concentration;activity |
 | d1_volatility_expansion_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 354 | 30 | multi_cell_survival;sample_size;concentration |
+| d1_w1_momentum_h4_pullback_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 552 | 53 | multi_cell_survival;concentration |
 | daily_pivot_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4713 | 486 | multi_cell_survival;no_catastrophic_failure;concentration |
 | emr_inactivity_long_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 84 | 9 | multi_cell_survival;sample_size;concentration;activity |
 | extreme_activity_mean_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1056 | 74 | multi_cell_survival;concentration |
@@ -48,6 +49,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_walk_forward_linear_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 5979 | 561 | multi_cell_survival;concentration |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 735 | 81 | multi_cell_survival;concentration |
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 2 | 741 | 71 | multi_cell_survival;concentration |
+| h4_walk_forward_knn_momentum_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 5013 | 485 | multi_cell_survival;concentration;activity |
 | liquidity_sweep_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 12222 | 1281 | multi_cell_survival;no_catastrophic_failure;concentration |
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3906 | 393 | multi_cell_survival;no_catastrophic_failure;concentration |
 | london_fix_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4821 | 463 | multi_cell_survival;concentration |
@@ -71,6 +73,8 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | w1_d1_momentum_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 498 | 48 | multi_cell_survival;concentration |
 | weekly_level_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1083 | 113 | multi_cell_survival;concentration |
 | weekly_open_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1878 | 197 | multi_cell_survival;no_catastrophic_failure;concentration |
+| xag_lead_xau_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 7608 | 816 | multi_cell_survival;concentration |
+| xau_xag_fx_composite_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4704 | 506 | multi_cell_survival;concentration |
 | xau_xag_relative_value_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 936 | 102 | multi_cell_survival;concentration |
 
 ## Gate Columns

@@ -17,7 +17,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 249. |
+| decision_rows | PASS | Decision rows: 270. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
@@ -31,7 +31,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 ## Summary
 
-- Decision rows: 249
+- Decision rows: 270
 - Unique run IDs: 5
 - Latest run ID: phase1-dry-run-v0.6
 
@@ -43,7 +43,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 245 |
+| NORMAL | 266 |
 
 ## Block Reasons
 
@@ -56,7 +56,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | MANUAL_LOCK | 1 |
 | SPREAD_TOO_HIGH | 2 |
 | STALE_TICK | 1 |
-| phase1_dry_run_only | 241 |
+| phase1_dry_run_only | 262 |
 
 ## Breakout-Retest Observer
 
@@ -64,22 +64,22 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 240 |
-| WOULD_SIGNAL | 9 |
+| WAIT_LEVEL_BREAK_RETEST | 259 |
+| WOULD_SIGNAL | 11 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 129 |
-| SHORT | 120 |
+| LONG | 141 |
+| SHORT | 129 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 240 |
-| true | 9 |
+| false | 259 |
+| true | 11 |
 
 ## Swing Breakout-Retest Observer
 
@@ -87,25 +87,25 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Value | Count |
 | --- | --- |
-| WAIT_LEVEL_BREAK_RETEST | 240 |
-| WOULD_SIGNAL | 9 |
+| WAIT_LEVEL_BREAK_RETEST | 259 |
+| WOULD_SIGNAL | 11 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 129 |
-| SHORT | 120 |
+| LONG | 141 |
+| SHORT | 129 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 240 |
-| true | 9 |
+| false | 259 |
+| true | 11 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.6 | 2026.05.25 14:00:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.6 | 2026.05.25 15:45:00 | WAIT_LEVEL_BREAK_RETEST | LONG | no_long_breakout_retest_candidate | 0.00 | false |

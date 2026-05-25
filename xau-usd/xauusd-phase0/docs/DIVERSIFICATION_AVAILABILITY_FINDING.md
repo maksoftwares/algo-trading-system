@@ -1,10 +1,10 @@
 # Diversification Availability Finding
 
-Last updated: 2026-05-24
+Last updated: 2026-05-25
 
 ## Finding
 
-As of 2026-05-24, the project has tested a broad set of non-level and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Ten H4/D1/W1 candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
+As of 2026-05-25, the project has tested a broad set of non-level, intermarket, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Twelve H4/D1/W1 candidates and multiple H1 intermarket candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
 
 The current evidence supports this operating conclusion:
 
@@ -29,6 +29,17 @@ Same-family variants may be useful for observation, cost study, and future compa
 | 8 | `weekly_open_reversion_v0` | W1/M15 | 0/9 | REJECTED_FIRST_PASS |
 | 9 | `d1_inside_day_breakout_v0` | H4/D1 | 3/9 | REJECTED_FIRST_PASS |
 | 10 | `d1_outside_day_followthrough_v0` | H4/D1 | 0/9 | REJECTED_FIRST_PASS |
+| 11 | `d1_w1_momentum_h4_pullback_v0` | H4/D1 with W1 state | 3/9 | REJECTED_FIRST_PASS |
+| 12 | `h4_walk_forward_knn_momentum_state_v0` | H4/D1 | 0/9 | REJECTED_FIRST_PASS |
+
+Additional H1 intermarket diversification attempts:
+
+| # | Candidate | Input Family | PF >= 1.30 cells | First-pass status |
+| ---: | --- | --- | ---: | --- |
+| 1 | `gold_fx_proxy_divergence_v0` | EURUSD/USDJPY proxy | 0/9 | REJECTED_FIRST_PASS |
+| 2 | `xau_xag_relative_value_v0` | XAGUSD relative value | 0/9 | REJECTED_FIRST_PASS |
+| 3 | `xau_xag_fx_composite_reversion_v0` | XAGUSD plus EURUSD/USDJPY proxy | 0/9 | REJECTED_FIRST_PASS |
+| 4 | `xag_lead_xau_followthrough_v0` | XAGUSD lead-lag continuation | 0/9 | REJECTED_FIRST_PASS |
 
 Supporting artifacts:
 

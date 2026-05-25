@@ -1,8 +1,8 @@
 # Phase 2 Single-Edge Risk Plan
 
-Last updated: 2026-05-24
+Last updated: 2026-05-25
 
-This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and ten non-level H4/D1/W1 diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
+This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and twelve non-level H4/D1/W1 plus multiple H1 intermarket diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
 
 ## Approved Edge Family
 
