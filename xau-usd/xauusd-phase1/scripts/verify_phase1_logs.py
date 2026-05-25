@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from atomic_write import atomic_write_text
+
 
 DECISION_LOG = "decision_log.csv"
 STARTUP_LOG = "startup_log.csv"
@@ -146,7 +148,7 @@ def verify_phase1_logs(files_dir: Path, report_path: Path | None = None) -> LogV
 
     status = _overall_status(checks)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(_render_report(status, files_dir, checks, decision_rows), encoding="utf-8")
+    atomic_write_text(report_path, _render_report(status, files_dir, checks, decision_rows))
     return LogVerification(status=status, report_path=report_path, checks=tuple(checks))
 
 

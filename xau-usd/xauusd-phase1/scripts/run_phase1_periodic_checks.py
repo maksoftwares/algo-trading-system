@@ -13,12 +13,14 @@ if PHASE0_SRC.exists() and str(PHASE0_SRC) not in sys.path:
     sys.path.insert(0, str(PHASE0_SRC))
 
 from append_phase1_soak_history import append_phase1_soak_history
+from analyze_phase1_soak import analyze_phase1_soak
 from check_phase1_external_health import check_external_health
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_review_index import generate_phase1_review_index
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
+from generate_phase1_would_signal_report import generate_phase1_would_signal_report
 from generate_project_status_page import generate_project_status_page
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
@@ -26,6 +28,7 @@ from phase0.config import load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.spread_analysis import analyze_spread_logs
+from verify_phase1_logs import verify_phase1_logs
 
 
 @dataclass(frozen=True)
@@ -57,11 +60,39 @@ def run_phase1_periodic_checks(
         analyze_spread_logs(phase0_config, input_dir=spread_files_dir, allow_pending=True)
         generate_measured_cost_revalidation(phase0_config, expert="breakout_retest")
 
+    log_verification = verify_phase1_logs(files_dir, report_dir / "PHASE1_DRY_RUN_LOG_REPORT.md")
+    soak_analysis = analyze_phase1_soak(
+        files_dir,
+        report_dir / "PHASE1_SOAK_DRIFT_REPORT.md",
+        max_fresh_minutes=max_fresh_minutes,
+    )
+    runtime_health = generate_phase1_runtime_health_report(
+        files_dir=files_dir,
+        report_path=report_dir / "PHASE1_RUNTIME_HEALTH_REPORT.md",
+        max_fresh_minutes=max_fresh_minutes,
+    )
+    would_signal = generate_phase1_would_signal_report(
+        files_dir,
+        report_dir / "PHASE1_WOULD_SIGNAL_REPORT.md",
+    )
+    acceptance = generate_phase1_acceptance_report(
+        files_dir=files_dir,
+        report_path=report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
+        compile_log=compile_log,
+        source_root=root,
+        runtime_health_report=runtime_health.report_path,
+        max_fresh_minutes=max_fresh_minutes,
+    )
     status_summary_path = generate_phase1_status_summary(
         files_dir=files_dir,
         output_path=report_dir / "PHASE1_STATUS_SUMMARY.json",
         compile_log=compile_log,
         source_root=root,
+        log_status=log_verification,
+        soak_status=soak_analysis,
+        runtime_health_status=runtime_health,
+        would_signal_status=would_signal,
+        acceptance_status=acceptance,
     )
     soak_history = append_phase1_soak_history(
         summary_path=status_summary_path,
@@ -70,11 +101,6 @@ def run_phase1_periodic_checks(
     soak_history_report = generate_phase1_soak_history_report(
         history_path=soak_history.history_path,
         report_path=report_dir / "PHASE1_SOAK_HISTORY_REPORT.md",
-    )
-    runtime_health = generate_phase1_runtime_health_report(
-        files_dir=files_dir,
-        report_path=report_dir / "PHASE1_RUNTIME_HEALTH_REPORT.md",
-        max_fresh_minutes=max_fresh_minutes,
     )
     generate_phase2_paper_ledger_schema_report(
         root=root,
@@ -89,6 +115,17 @@ def run_phase1_periodic_checks(
         soak_history_report=soak_history_report.report_path,
         runtime_health_report=runtime_health.report_path,
         max_fresh_minutes=max_fresh_minutes,
+    )
+    status_summary_path = generate_phase1_status_summary(
+        files_dir=files_dir,
+        output_path=report_dir / "PHASE1_STATUS_SUMMARY.json",
+        compile_log=compile_log,
+        source_root=root,
+        log_status=log_verification,
+        soak_status=soak_analysis,
+        runtime_health_status=runtime_health,
+        would_signal_status=would_signal,
+        acceptance_status=acceptance,
     )
     generate_phase1_review_index(
         root=root,

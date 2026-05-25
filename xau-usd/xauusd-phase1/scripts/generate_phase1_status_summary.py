@@ -7,6 +7,7 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+from atomic_write import atomic_write_text
 from analyze_phase1_soak import analyze_phase1_soak
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
@@ -25,6 +26,11 @@ def generate_phase1_status_summary(
     compile_log: Path | None = None,
     source_root: Path | None = None,
     now: datetime | None = None,
+    log_status=None,
+    soak_status=None,
+    runtime_health_status=None,
+    would_signal_status=None,
+    acceptance_status=None,
 ) -> Path:
     files_dir = files_dir.resolve()
     if output_path is None:
@@ -35,21 +41,29 @@ def generate_phase1_status_summary(
         now = datetime.now()
 
     report_dir = output_path.parent
-    log_status = verify_phase1_logs(files_dir, report_dir / "PHASE1_DRY_RUN_LOG_REPORT.md")
-    soak_status = analyze_phase1_soak(files_dir, report_dir / "PHASE1_SOAK_DRIFT_REPORT.md", now=now)
-    runtime_health_status = generate_phase1_runtime_health_report(
-        files_dir,
-        report_dir / "PHASE1_RUNTIME_HEALTH_REPORT.md",
-        now=now,
-    )
-    would_signal_status = generate_phase1_would_signal_report(files_dir, report_dir / "PHASE1_WOULD_SIGNAL_REPORT.md")
-    acceptance_status = generate_phase1_acceptance_report(
-        files_dir,
-        report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
-        compile_log,
-        source_root,
-        now=now,
-    )
+    if log_status is None:
+        log_status = verify_phase1_logs(files_dir, report_dir / "PHASE1_DRY_RUN_LOG_REPORT.md")
+    if soak_status is None:
+        soak_status = analyze_phase1_soak(files_dir, report_dir / "PHASE1_SOAK_DRIFT_REPORT.md", now=now)
+    if runtime_health_status is None:
+        runtime_health_status = generate_phase1_runtime_health_report(
+            files_dir,
+            report_dir / "PHASE1_RUNTIME_HEALTH_REPORT.md",
+            now=now,
+        )
+    if would_signal_status is None:
+        would_signal_status = generate_phase1_would_signal_report(
+            files_dir,
+            report_dir / "PHASE1_WOULD_SIGNAL_REPORT.md",
+        )
+    if acceptance_status is None:
+        acceptance_status = generate_phase1_acceptance_report(
+            files_dir,
+            report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
+            compile_log,
+            source_root,
+            now=now,
+        )
     rows = _read_csv(files_dir / DECISION_LOG)
     latest = rows[-1] if rows else {}
     soak_days = _soak_days(rows)
@@ -110,8 +124,7 @@ def generate_phase1_status_summary(
         },
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
+    atomic_write_text(output_path, json.dumps(summary, indent=2, sort_keys=True))
     return output_path
 
 
