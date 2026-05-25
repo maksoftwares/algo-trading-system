@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-25T16:58:23+00:00`
+Generated at UTC: `2026-05-25T17:12:04+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,11 +10,11 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 53
-- Rejected/research candidates audited: 50
-- Rejected candidates with sample-size failure: 9
-- Rejected candidates with multi-cell expectancy failure: 48
-- Rejected candidates with both expectancy and sample-size failure: 9
+- Audited candidates: 54
+- Rejected/research candidates audited: 51
+- Rejected candidates with sample-size failure: 10
+- Rejected candidates with multi-cell expectancy failure: 49
+- Rejected candidates with both expectancy and sample-size failure: 10
 - Rejected candidates with expectancy-only failure: 39
 - Rejected candidates with frequency-only failure: 0
 
@@ -50,6 +50,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_walk_forward_linear_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 5979 | 561 | multi_cell_survival;concentration |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 735 | 81 | multi_cell_survival;concentration |
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 2 | 741 | 71 | multi_cell_survival;concentration |
+| h4_real_yield_proxy_momentum_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 306 | 18 | multi_cell_survival;sample_size;concentration;activity |
 | h4_walk_forward_knn_momentum_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 5013 | 485 | multi_cell_survival;concentration;activity |
 | liquidity_sweep_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 12222 | 1281 | multi_cell_survival;no_catastrophic_failure;concentration |
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3906 | 393 | multi_cell_survival;no_catastrophic_failure;concentration |

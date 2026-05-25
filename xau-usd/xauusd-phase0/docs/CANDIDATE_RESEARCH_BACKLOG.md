@@ -50,7 +50,7 @@ Expected path:
 | 29 | `d1_momentum_h4_pullback_v0` | REJECTED_FIRST_PASS | First true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
 | 30 | `d1_volatility_expansion_reversal_v0` | REJECTED_FIRST_PASS | Second true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade-count and concentration gates failed; do not tune v0. |
 | 31 | `d1_compression_h4_expansion_v0` | REJECTED_FIRST_PASS | Third true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
-| 32 | `h4_real_yield_proxy_momentum_v0` | BLOCKED_MISSING_MACRO_DATA | Macro-proxy attempt deferred until real-yield, DXY, Treasury, or approved proxy series exists locally; do not fake it with XAU-only data. |
+| 32 | `h4_real_yield_proxy_momentum_v0` | REJECTED_FIRST_PASS | Real-yield and broad dollar-index macro lane unblocked with FRED data; 18-64 trades per cell, 3/9 PF cells reached 1.30, all Dukascopy, sample-size/concentration/activity failed; do not tune v0. |
 | 33 | `d1_multi_day_exhaustion_reversion_v0` | REJECTED_FIRST_PASS | Fourth true H4/D1 decision-timing candidate; 0/9 PF cells reached 1.30, trade-count/activity/concentration failed; do not tune v0. |
 | 34 | `h4_d1_momentum_expansion_continuation_v0` | REJECTED_FIRST_PASS | Fifth true H4/D1 decision-timing candidate; 3/9 PF cells reached 1.30, all in Dukascopy, concentration failed; do not tune v0. |
 | 35 | `h4_inside_bar_d1_momentum_breakout_v0` | REJECTED_FIRST_PASS | Sixth H4/D1 decision-timing candidate; 2/9 PF cells reached 1.30, trade count passed, concentration failed; do not tune v0. |
@@ -113,8 +113,9 @@ Expected path:
 - Round 12 intermarket composite result: `xau_xag_fx_composite_reversion_v0` was rejected first-pass. It produced 506-547 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
 - Round 13 XAG lead-lag result: `xag_lead_xau_followthrough_v0` was rejected first-pass. It produced 816-887 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
 - Round 14 H1 volatility squeeze result: `h1_volatility_squeeze_breakout_v0` was rejected first-pass. It produced 116-300 trades per cell and 3/9 PF cells reached 1.30, all in Dukascopy; concentration failed, so do not tune v0.
+- Round 15 macro blocker-fix result: `h4_real_yield_proxy_momentum_v0` was rejected first-pass after public FRED `DFII10` and `DTWEXBGS` data were acquired. It produced 18-64 trades per cell and 3/9 PF cells reached 1.30, all in Dukascopy; sample-size, concentration, and activity failed, so do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
-- `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
+- `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
 
 ## Timeframe Coverage
@@ -125,17 +126,16 @@ Classify by entry / decision timeframe, not by the source of the reference level
 hypothesis_timeframe_coverage:
   M5_M15: 30
   M30_H1: 11
-  H4_D1: 8
+  H4_D1: 9
   W1_plus: 1
   planned_next_H4_D1: []
   planned_next_M30_H1: []
   blocked_M30_H1: []
-  blocked_H4_D1:
-    - h4_real_yield_proxy_momentum_v0
+  blocked_H4_D1: []
 ```
 
 `daily_pivot_reclaim_v0` and `weekly_level_reclaim_v0` used slower reference levels, but both had M5 entries, so they do not count as H4/D1 diversification.
 
-`d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
+`d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
 
 `xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing. `h1_volatility_squeeze_breakout_v0` counts as an M30/H1 volatility-regime diversification attempt by timing. All are rejected and none becomes an approved expert.

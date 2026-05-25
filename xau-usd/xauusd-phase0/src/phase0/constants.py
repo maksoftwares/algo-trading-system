@@ -32,6 +32,7 @@ RESEARCH_EXPERTS = (
     "h1_walk_forward_linear_state_v0",
     "h4_d1_momentum_expansion_continuation_v0",
     "h4_inside_bar_d1_momentum_breakout_v0",
+    "h4_real_yield_proxy_momentum_v0",
     "h4_walk_forward_knn_momentum_state_v0",
     "london_fix_continuation_v0",
     "liquidity_sweep_continuation_v0",

@@ -58,6 +58,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_d1_momentum_expansion_continuation_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
         return _h4_inside_bar_d1_momentum_breakout_context()
+    if expert == "h4_real_yield_proxy_momentum_v0":
+        return _h4_real_yield_proxy_momentum_context()
     if expert == "h4_walk_forward_knn_momentum_state_v0":
         return _h4_walk_forward_knn_momentum_state_context()
     if expert == "xag_lead_xau_followthrough_v0":
@@ -924,6 +926,86 @@ def _h4_inside_bar_d1_momentum_breakout_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_real_yield_proxy_momentum_context() -> dict:
+    macro_dates = pd.bdate_range("2022-01-03", periods=360, tz="UTC")
+    real_yield: list[float] = []
+    dollar_index: list[float] = []
+    for index in range(360):
+        if index < 240:
+            real_yield.append(2.50 + (0.01 if index % 2 else -0.01))
+            dollar_index.append(110.0 + (0.05 if index % 2 else -0.04))
+        else:
+            real_yield.append(2.50 - 0.015 * (index - 239))
+            dollar_index.append(110.0 - 0.075 * (index - 239))
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": macro_dates,
+            "real_yield_10y": real_yield,
+            "dollar_index_broad": dollar_index,
+        }
+    )
+
+    h4_periods = 240
+    h4_times = pd.date_range(macro_dates[270] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        current += 0.24 if index % 5 else -0.03
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=60, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 60,
+            "high": [2005.0] * 60,
+            "low": [1995.0] * 60,
+            "close": [2001.0] * 60,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "macro_proxy": macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
 
 
 def _h4_walk_forward_knn_momentum_state_context() -> dict:

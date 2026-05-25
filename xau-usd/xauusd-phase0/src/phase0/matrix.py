@@ -18,6 +18,9 @@ from phase0.data_validator import (
 from phase0.gold_fx_proxy_data import EXPERT_NAME as GOLD_FX_PROXY_EXPERT_NAME
 from phase0.gold_fx_proxy_data import check_gold_fx_proxy_data
 from phase0.gold_fx_proxy_data import load_gold_fx_proxy_h1_context
+from phase0.macro_real_yield_data import EXPERT_NAME as MACRO_REAL_YIELD_EXPERT_NAME
+from phase0.macro_real_yield_data import MACRO_FRAME_KEY
+from phase0.macro_real_yield_data import load_macro_real_yield_context
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
@@ -57,6 +60,8 @@ def run_phase0_matrix(
             _assert_xau_xag_relative_data_ready(config)
         if expert_name == XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME and not synthetic_sample:
             _assert_xau_xag_relative_data_ready(config)
+        if expert_name == MACRO_REAL_YIELD_EXPERT_NAME and not synthetic_sample:
+            _assert_macro_real_yield_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:
@@ -118,6 +123,15 @@ def run_phase0_matrix(
                         "relative_value": load_xau_xag_relative_h1_context(
                             config,
                             cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == MACRO_REAL_YIELD_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        MACRO_FRAME_KEY: load_macro_real_yield_context(
+                            config,
                             cell.start_utc,
                             cell.end_utc,
                         ),
@@ -188,6 +202,12 @@ def _assert_xau_xag_relative_data_ready(config: ProjectConfig) -> None:
         + "\n".join(lines)
         + "\nRun generate-xau-xag-relative-data-readiness for the exact acquisition checklist."
     )
+
+
+def _assert_macro_real_yield_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_macro_real_yield_context(config, start, end)
 
 
 def load_cell_data_context(
