@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-25T19:02:45+00:00`
+Generated at UTC: `2026-05-25T23:38:29+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 63
-- Rejected/research candidates audited: 60
+- Audited candidates: 64
+- Rejected/research candidates audited: 61
 - Rejected candidates with sample-size failure: 12
-- Rejected candidates with multi-cell expectancy failure: 58
+- Rejected candidates with multi-cell expectancy failure: 59
 - Rejected candidates with both expectancy and sample-size failure: 12
-- Rejected candidates with expectancy-only failure: 46
+- Rejected candidates with expectancy-only failure: 47
 - Rejected candidates with frequency-only failure: 0
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -57,6 +57,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 2 | 741 | 71 | multi_cell_survival;concentration |
 | h4_macro_composite_risk_state_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 6 | 516 | 34 | multi_cell_survival;sample_size;concentration;activity |
 | h4_macro_composite_risk_state_v1 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 894 | 51 | multi_cell_survival;concentration;activity |
+| h4_policy_uncertainty_safe_haven_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 1443 | 142 | multi_cell_survival;concentration |
 | h4_real_yield_proxy_momentum_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 306 | 18 | multi_cell_survival;sample_size;concentration;activity |
 | h4_treasury_curve_stress_momentum_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 975 | 55 | multi_cell_survival;concentration;activity |
 | h4_vix_risk_off_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 504 | 47 | multi_cell_survival;concentration |

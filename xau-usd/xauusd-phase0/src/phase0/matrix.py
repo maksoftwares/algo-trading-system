@@ -40,6 +40,9 @@ from phase0.inflation_expectations_data import load_inflation_expectations_conte
 from phase0.macro_real_yield_data import EXPERT_NAME as MACRO_REAL_YIELD_EXPERT_NAME
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
 from phase0.macro_real_yield_data import load_macro_real_yield_context
+from phase0.policy_uncertainty_data import EXPERT_NAME as POLICY_UNCERTAINTY_EXPERT_NAME
+from phase0.policy_uncertainty_data import POLICY_UNCERTAINTY_FRAME_KEY
+from phase0.policy_uncertainty_data import load_policy_uncertainty_context
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
@@ -91,6 +94,8 @@ def run_phase0_matrix(
             _assert_xau_xag_relative_data_ready(config)
         if expert_name == MACRO_REAL_YIELD_EXPERT_NAME and not synthetic_sample:
             _assert_macro_real_yield_data_ready(config)
+        if expert_name == POLICY_UNCERTAINTY_EXPERT_NAME and not synthetic_sample:
+            _assert_policy_uncertainty_data_ready(config)
         if expert_name == COT_GOLD_EXPERT_NAME and not synthetic_sample:
             _assert_cot_gold_data_ready(config)
         if expert_name == CREDIT_SPREAD_EXPERT_NAME and not synthetic_sample:
@@ -176,6 +181,15 @@ def run_phase0_matrix(
                     data_context = {
                         **data_context,
                         MACRO_FRAME_KEY: load_macro_real_yield_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == POLICY_UNCERTAINTY_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        POLICY_UNCERTAINTY_FRAME_KEY: load_policy_uncertainty_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,
@@ -355,6 +369,12 @@ def _assert_macro_real_yield_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_macro_real_yield_context(config, start, end)
+
+
+def _assert_policy_uncertainty_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_policy_uncertainty_context(config, start, end)
 
 
 def _assert_cot_gold_data_ready(config: ProjectConfig) -> None:

@@ -53,6 +53,9 @@ from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
 from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v0 import H4InsideBarD1MomentumBreakoutV0Strategy
 from phase0.strategies.h4_macro_composite_risk_state_v0 import H4MacroCompositeRiskStateV0Strategy
 from phase0.strategies.h4_macro_composite_risk_state_v1 import H4MacroCompositeRiskStateV1Strategy
+from phase0.strategies.h4_policy_uncertainty_safe_haven_v0 import (
+    H4PolicyUncertaintySafeHavenV0Strategy,
+)
 from phase0.strategies.h4_real_yield_proxy_momentum_v0 import H4RealYieldProxyMomentumV0Strategy
 from phase0.strategies.h4_treasury_curve_stress_momentum_v0 import (
     H4TreasuryCurveStressMomentumV0Strategy,
@@ -136,6 +139,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
     H4MacroCompositeRiskStateV0Strategy.name: H4MacroCompositeRiskStateV0Strategy,
     H4MacroCompositeRiskStateV1Strategy.name: H4MacroCompositeRiskStateV1Strategy,
+    H4PolicyUncertaintySafeHavenV0Strategy.name: H4PolicyUncertaintySafeHavenV0Strategy,
     H4RealYieldProxyMomentumV0Strategy.name: H4RealYieldProxyMomentumV0Strategy,
     H4TreasuryCurveStressMomentumV0Strategy.name: H4TreasuryCurveStressMomentumV0Strategy,
     H4VixRiskOffReversalV0Strategy.name: H4VixRiskOffReversalV0Strategy,
