@@ -17,7 +17,7 @@ Review #7 keeps the project in Phase 1 dry-run and Phase 2 preparation. It does 
 
 | Review #7 item | Response |
 | --- | --- |
-| N8 - codify diversification result | Added and refreshed `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`. It records that thirteen non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were hash-locked, tested, and rejected first-pass. |
+| N8 - codify diversification result | Added and refreshed `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`. It records that fourteen non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were hash-locked, tested, and rejected first-pass. |
 | N9 - pre-register normalized concentration thresholds | Added forward low-frequency concentration rules to `xau-usd/xauusd-phase0/docs/HYPOTHESIS_LOCKING.md`: absolute gates still apply, normalized top-trade R ratio must be <= 1.00, and normalized top-5-trade R ratio must be <= 2.50. |
 | N10 - pre-commit cross-venue PF floor | Added a forward cross-venue robustness rule to `HYPOTHESIS_LOCKING.md`: future candidates need average PF >= 1.20 across Pepperstone and Dukascopy matrix cells before Gate 9. |
 | Weekend/stale active-market streak clarity | Tightened `phase1_soak_streak.py` so weekend, `MARKET_CLOSED`, and `STALE_TICK` rows explicitly break active-market continuity. Added regression coverage. |

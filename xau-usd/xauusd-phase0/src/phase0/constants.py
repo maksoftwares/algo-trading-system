@@ -12,6 +12,7 @@ RESEARCH_EXPERTS = (
     "asia_range_london_breakout_v0",
     "asia_range_london_failed_break_reversal_v0",
     "compression_retest_continuation_v0",
+    "cot_gold_positioning_reversal_v0",
     "d1_compression_h4_expansion_v0",
     "d1_inside_day_breakout_v0",
     "d1_momentum_h4_pullback_v0",

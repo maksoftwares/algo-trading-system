@@ -4,7 +4,7 @@ Last updated: 2026-05-25
 
 ## Finding
 
-As of 2026-05-25, the project has tested a broad set of non-level, intermarket, macro-regime, volatility-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Thirteen H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
+As of 2026-05-25, the project has tested a broad set of non-level, intermarket, macro-regime, futures-positioning, volatility-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Fourteen H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
 
 The current evidence supports this operating conclusion:
 
@@ -32,6 +32,7 @@ Same-family variants may be useful for observation, cost study, and future compa
 | 11 | `d1_w1_momentum_h4_pullback_v0` | H4/D1 with W1 state | 3/9 | REJECTED_FIRST_PASS |
 | 12 | `h4_walk_forward_knn_momentum_state_v0` | H4/D1 | 0/9 | REJECTED_FIRST_PASS |
 | 13 | `h4_real_yield_proxy_momentum_v0` | H4/D1 with FRED real-yield/dollar state | 3/9 | REJECTED_FIRST_PASS |
+| 14 | `cot_gold_positioning_reversal_v0` | H4 with official CFTC gold COT positioning | 0/9 | REJECTED_FIRST_PASS |
 
 Additional H1 intermarket and volatility-regime diversification attempts:
 

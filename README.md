@@ -75,7 +75,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Current leading candidate: `breakout_retest`.
 - Current same-family approved future expert candidates: `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0`; neither resolves independent diversification risk.
 - Current provisional research candidates: `round_number_retest_v0` and `session_extreme_retest_v0`; both are same-family/level-and-pullback variants and still need Gate 9 manual adversarial review.
-- Latest independent-candidate search status: thirteen non-level H4/D1/W1 attempts plus additional H1 intermarket and volatility-regime attempts have now been hash-registered, smoke-tested, matrix-tested, and rejected first-pass without tuning. No independent candidate is approved.
+- Latest independent-candidate search status: fourteen non-level H4/D1/W1 attempts plus additional H1 intermarket and volatility-regime attempts have now been hash-registered, smoke-tested, matrix-tested, and rejected first-pass without tuning. No independent candidate is approved.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates.

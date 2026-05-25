@@ -5,6 +5,7 @@ symbol_normalized_round_retest_v0,APPROVED_OR_ACTIVE,APPROVED_EDGE_FAMILY,PASS,9
 asia_range_london_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,4845,100.0,100.0,0.068632,0.316397,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;no_catastrophic_failure;concentration
 asia_range_london_failed_break_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,3102,100.0,100.0,0.075313,0.363652,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;no_catastrophic_failure;concentration
 compression_retest_continuation_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,0,100.0,100.0,0.0,0.0,9,NORMALIZATION_UNDEFINED_NO_TRADES,multi_cell_survival;sample_size;concentration;activity;cost_sensitivity
+cot_gold_positioning_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,126,510.922,993.2456,0.61179,1.758605,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;sample_size;concentration;activity
 d1_compression_h4_expansion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,783,100.0,100.0,0.202561,0.976849,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 d1_inside_day_breakout_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,192,100.0,100.0,0.452674,1.504711,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;sample_size;concentration;activity
 d1_momentum_h4_pullback_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,684,68.9427,148.749,0.91943,1.801944,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration

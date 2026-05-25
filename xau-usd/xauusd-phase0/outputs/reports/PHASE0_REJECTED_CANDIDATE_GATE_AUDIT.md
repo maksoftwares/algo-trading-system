@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-25T17:12:04+00:00`
+Generated at UTC: `2026-05-25T17:31:29+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,11 +10,11 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 54
-- Rejected/research candidates audited: 51
-- Rejected candidates with sample-size failure: 10
-- Rejected candidates with multi-cell expectancy failure: 49
-- Rejected candidates with both expectancy and sample-size failure: 10
+- Audited candidates: 55
+- Rejected/research candidates audited: 52
+- Rejected candidates with sample-size failure: 11
+- Rejected candidates with multi-cell expectancy failure: 50
+- Rejected candidates with both expectancy and sample-size failure: 11
 - Rejected candidates with expectancy-only failure: 39
 - Rejected candidates with frequency-only failure: 0
 
@@ -30,6 +30,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | asia_range_london_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4845 | 507 | multi_cell_survival;no_catastrophic_failure;concentration |
 | asia_range_london_failed_break_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 3102 | 326 | multi_cell_survival;no_catastrophic_failure;concentration |
 | compression_retest_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 0 | 0 | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
+| cot_gold_positioning_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 126 | 5 | multi_cell_survival;sample_size;concentration;activity |
 | d1_compression_h4_expansion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 783 | 68 | multi_cell_survival;concentration |
 | d1_inside_day_breakout_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 192 | 11 | multi_cell_survival;sample_size;concentration;activity |
 | d1_momentum_h4_pullback_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 684 | 69 | multi_cell_survival;concentration |

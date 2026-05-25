@@ -10,6 +10,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _asia_range_london_failed_break_reversal_context()
     if expert == "compression_retest_continuation_v0":
         return _compression_retest_continuation_context()
+    if expert == "cot_gold_positioning_reversal_v0":
+        return _cot_gold_positioning_reversal_context()
     if expert == "d1_compression_h4_expansion_v0":
         return _d1_compression_h4_expansion_context()
     if expert == "d1_inside_day_breakout_v0":
@@ -1003,6 +1005,92 @@ def _h4_real_yield_proxy_momentum_context() -> dict:
         "H4": h4,
         "D1": d1,
         "macro_proxy": macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _cot_gold_positioning_reversal_context() -> dict:
+    cot_dates = pd.date_range("2020-01-07", periods=210, freq="7D", tz="UTC")
+    open_interest = [400000.0] * 210
+    mm_net: list[float] = []
+    producer_net: list[float] = []
+    for index in range(210):
+        if index < 160:
+            mm_net.append(0.10 + 0.001 * (index % 20))
+            producer_net.append(-0.10 - 0.001 * (index % 20))
+        else:
+            mm_net.append(-0.24 + 0.004 * (index - 159))
+            producer_net.append(0.24 - 0.001 * (index - 159))
+    cot = pd.DataFrame(
+        {
+            "report_date": cot_dates,
+            "market": ["GOLD - COMMODITY EXCHANGE INC."] * 210,
+            "cftc_contract_market_code": ["088691"] * 210,
+            "open_interest_all": open_interest,
+            "producer_long_all": [160000.0 + max(value, 0) * 400000.0 for value in producer_net],
+            "producer_short_all": [160000.0 + max(-value, 0) * 400000.0 for value in producer_net],
+            "managed_money_long_all": [150000.0 + max(value, 0) * 400000.0 for value in mm_net],
+            "managed_money_short_all": [150000.0 + max(-value, 0) * 400000.0 for value in mm_net],
+        }
+    )
+
+    h4_periods = 260
+    h4_times = pd.date_range(cot_dates[170] + pd.Timedelta(days=6, hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current = 1900.0
+    for index in range(h4_periods):
+        current += 0.22 if index % 5 else -0.02
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=80, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [1900.0] * 80,
+            "high": [1905.0] * 80,
+            "low": [1895.0] * 80,
+            "close": [1901.0] * 80,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "cot_gold": cot,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
