@@ -97,6 +97,7 @@ The latest reviewer feedback is tracked in:
 - `xau-usd/xauusd-phase1/docs/WORKSPACE_OWNERSHIP.md`
 - `docs/REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`
 - `docs/REVIEW_07_REFLECTION_AND_ACTION_PLAN.md`
+- `docs/REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`
 - `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`
 
-Review #7 keeps Phase 1 dry-run and Phase 2 preparation moving, but Phase 2 implementation remains blocked until the five-day soak, active-market 72h gate, process/code-freeze 96h gate, measured cost evidence, measured-cost revalidation, VPS/owner decisions, and owner approval are all closed. It also codifies that the current approved candidates are one correlated breakout-retest family, not independent diversification.
+Review #8 keeps Phase 1 dry-run and Phase 2 preparation moving, but Phase 2 implementation remains blocked until the five-day soak, active-market 72h gate, process/code-freeze 96h gate, measured cost evidence, measured-cost revalidation, VPS/owner decisions, and owner approval are all closed. It also confirms that the current approved candidates are one correlated breakout-retest family, not independent diversification, and that the next important evidence is soak/cost maturity rather than another strategy idea.

@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-24
+Last updated: 2026-05-25
 
 ## Workspace
 
@@ -107,6 +107,7 @@ Last updated: 2026-05-24
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #6 reflection and action plan is tracked in `docs\REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #7 reflection and action plan is tracked in `docs\REVIEW_07_REFLECTION_AND_ACTION_PLAN.md`.
+- Review #8 final repo review action plan is tracked in `docs\REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`. It keeps Phase 1 dry-run and Phase 2 preparation as GO, but Phase 2 paper implementation, broker execution, and live trading remain NO-GO until the soak, active-market 72h, process/code-freeze 96h, measured-cost, revalidation, VPS, and owner-approval gates all pass.
 - Review #2 reframes `breakout_retest` as high-frequency and cost-sensitive; Phase 2 is now treated as a real-cost measurement phase, not a profit-confirmation phase.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
 - D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, Reality Check/SPA, true-holdout audit, and independent reproduction are closed for the current evidence package.
