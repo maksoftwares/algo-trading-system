@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-25T18:15:04+00:00`
+Generated at UTC: `2026-05-25T18:24:47+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 58
-- Absolute concentration-failed candidates: 53
-- Review-context candidates under normalized thresholds: 52
+- Audited candidates: 59
+- Absolute concentration-failed candidates: 54
+- Review-context candidates under normalized thresholds: 53
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -53,6 +53,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | h1_tick_volume_climax_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2904 | 100.0 | 100.0 | 0.065098 | 0.314496 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity |
 | h1_volatility_squeeze_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2127 | 100.0 | 100.0 | 0.171019 | 0.82588 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_walk_forward_linear_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5979 | 100.0 | 129.2628 | 0.230808 | 0.830408 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h4_breakeven_inflation_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2055 | 100.0 | 100.0 | 0.130137 | 0.594438 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 735 | 100.0 | 111.7863 | 0.1678 | 0.809899 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_financial_conditions_stress_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 483 | 100.0 | 100.0 | 0.356255 | 1.407623 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_gvz_volatility_panic_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 489 | 100.0 | 212.5005 | 0.277442 | 1.289932 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |

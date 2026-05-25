@@ -20,6 +20,9 @@ from phase0.strategies.daily_pivot_reclaim_v0 import DailyPivotReclaimV0Strategy
 from phase0.strategies.emr_inactivity_long_v0 import EmrInactivityLongV0Strategy
 from phase0.strategies.extreme_activity_mean_reversion_v0 import ExtremeActivityMeanReversionV0Strategy
 from phase0.strategies.gold_fx_proxy_divergence_v0 import GoldFxProxyDivergenceV0Strategy
+from phase0.strategies.h4_breakeven_inflation_momentum_v0 import (
+    H4BreakevenInflationMomentumV0Strategy,
+)
 from phase0.strategies.h1_calendar_drift_state_v0 import H1CalendarDriftStateV0Strategy
 from phase0.strategies.h1_smooth_trend_exhaustion_reversal_v0 import (
     H1SmoothTrendExhaustionReversalV0Strategy,
@@ -110,6 +113,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     EmrInactivityLongV0Strategy.name: EmrInactivityLongV0Strategy,
     ExtremeActivityMeanReversionV0Strategy.name: ExtremeActivityMeanReversionV0Strategy,
     GoldFxProxyDivergenceV0Strategy.name: GoldFxProxyDivergenceV0Strategy,
+    H4BreakevenInflationMomentumV0Strategy.name: H4BreakevenInflationMomentumV0Strategy,
     H1CalendarDriftStateV0Strategy.name: H1CalendarDriftStateV0Strategy,
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,

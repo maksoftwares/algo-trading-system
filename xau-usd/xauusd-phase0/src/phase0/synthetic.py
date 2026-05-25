@@ -40,6 +40,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _extreme_activity_mean_reversion_context()
     if expert == "gold_fx_proxy_divergence_v0":
         return _gold_fx_proxy_divergence_context()
+    if expert == "h4_breakeven_inflation_momentum_v0":
+        return _h4_breakeven_inflation_momentum_context()
     if expert == "h1_calendar_drift_state_v0":
         return _h1_calendar_drift_state_context()
     if expert == "h1_m5_path_skew_reversal_v0":
@@ -1011,6 +1013,94 @@ def _h4_real_yield_proxy_momentum_context() -> dict:
         "H4": h4,
         "D1": d1,
         "macro_proxy": macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_breakeven_inflation_momentum_context() -> dict:
+    inflation_dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
+    breakeven_5y: list[float] = []
+    breakeven_10y: list[float] = []
+    for index in range(380):
+        if index < 260:
+            breakeven_5y.append(2.00 + (0.01 if index % 2 else -0.01))
+            breakeven_10y.append(2.10 + (0.005 if index % 2 else -0.005))
+        else:
+            breakeven_5y.append(2.00 + 0.012 * (index - 259))
+            breakeven_10y.append(2.10 + 0.009 * (index - 259))
+    inflation = pd.DataFrame(
+        {
+            "timestamp_utc": inflation_dates,
+            "breakeven_5y": breakeven_5y,
+            "breakeven_10y": breakeven_10y,
+        }
+    )
+
+    h4_periods = 220
+    h4_times = pd.date_range(
+        inflation_dates[310] + pd.Timedelta(hours=4),
+        periods=h4_periods,
+        freq="4h",
+    )
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        current += 0.22 if index % 5 else -0.02
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=50, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 50,
+            "high": [2005.0] * 50,
+            "low": [1995.0] * 50,
+            "close": [2001.0] * 50,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    m5_periods = h4_periods * 48 + 432
+    m5_times = pd.date_range(
+        h4_times[0] + pd.Timedelta(minutes=5),
+        periods=m5_periods,
+        freq="5min",
+    )
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "inflation_expectations": inflation,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
