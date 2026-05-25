@@ -1,0 +1,8 @@
+InpSymbol=EURUSD
+InpBrokerLabel=dukascopy
+InpTimeframes=H1
+InpStartServerTime=2022.01.01 00:00
+InpEndServerTime=2024.12.31 23:59
+InpServerToUtcOffsetHours=0
+InpUseCommonFiles=true
+InpPrintToExpertsTab=true

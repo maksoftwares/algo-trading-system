@@ -27,6 +27,7 @@ from phase0.hashing import (
     validate_hypotheses_complete,
 )
 from phase0.fixed_notional import generate_fixed_notional_report
+from phase0.gold_fx_proxy_data import generate_gold_fx_proxy_data_readiness
 from phase0.holdout_audit import audit_true_holdout
 from phase0.intrabar import generate_intrabar_ambiguity_report
 from phase0.independent_reproduction import generate_independent_reproduction
@@ -56,6 +57,7 @@ from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
 from phase0.utils import configure_run_logging, log_command_failure, log_command_success
 from phase0.workflow import run_all_phase0
+from phase0.xau_xag_relative_data import generate_xau_xag_relative_data_readiness
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -132,6 +134,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     data_requirements.add_argument("--skip-multisymbol", action="store_true")
     data_requirements.set_defaults(func=_cmd_generate_data_requirements)
+
+    gold_fx_proxy_data = subparsers.add_parser(
+        "generate-gold-fx-proxy-data-readiness",
+        help="Write research-only data readiness artifacts for gold_fx_proxy_divergence_v0.",
+    )
+    gold_fx_proxy_data.set_defaults(func=_cmd_generate_gold_fx_proxy_data_readiness)
+
+    xau_xag_relative_data = subparsers.add_parser(
+        "generate-xau-xag-relative-data-readiness",
+        help="Write research-only data readiness artifacts for xau_xag_relative_value_v0.",
+    )
+    xau_xag_relative_data.set_defaults(func=_cmd_generate_xau_xag_relative_data_readiness)
 
     data_manifest = subparsers.add_parser(
         "generate-data-manifest",
@@ -566,6 +580,26 @@ def _cmd_generate_data_requirements(args: argparse.Namespace) -> int:
     )
     print(f"Data requirements: {output_path}")
     print(f"Required timeframe sets: {len(checks)}")
+    return 0
+
+
+def _cmd_generate_gold_fx_proxy_data_readiness(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_gold_fx_proxy_data_readiness(config)
+    print(f"gold_fx_proxy_divergence_v0 data readiness: {output.status}")
+    print(output.report_path)
+    print(output.requirements_path)
+    print(f"Ready: {output.ready_count}/{len(output.checks)} proxy H1 set(s)")
+    return 0
+
+
+def _cmd_generate_xau_xag_relative_data_readiness(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_xau_xag_relative_data_readiness(config)
+    print(f"xau_xag_relative_value_v0 data readiness: {output.status}")
+    print(output.report_path)
+    print(output.requirements_path)
+    print(f"Ready: {output.ready_count}/{len(output.checks)} XAGUSD H1 set(s)")
     return 0
 
 

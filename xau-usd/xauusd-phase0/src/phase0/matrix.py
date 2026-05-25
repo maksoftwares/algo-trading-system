@@ -15,9 +15,15 @@ from phase0.data_validator import (
     largest_bar_gap_issue,
     validate_bars,
 )
+from phase0.gold_fx_proxy_data import EXPERT_NAME as GOLD_FX_PROXY_EXPERT_NAME
+from phase0.gold_fx_proxy_data import check_gold_fx_proxy_data
+from phase0.gold_fx_proxy_data import load_gold_fx_proxy_h1_context
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
+from phase0.xau_xag_relative_data import EXPERT_NAME as XAU_XAG_RELATIVE_EXPERT_NAME
+from phase0.xau_xag_relative_data import check_xau_xag_relative_data
+from phase0.xau_xag_relative_data import load_xau_xag_relative_h1_context
 
 
 @dataclass(frozen=True)
@@ -39,6 +45,10 @@ def run_phase0_matrix(
     context_cache: dict[tuple[str, str, pd.Timestamp, pd.Timestamp], dict[str, Any]] = {}
     for expert_name in enabled_strategy_names(expert, allow_research_candidate=allow_research_candidate):
         strategy = get_strategy(expert_name, allow_research_candidate=allow_research_candidate)
+        if expert_name == GOLD_FX_PROXY_EXPERT_NAME and not synthetic_sample:
+            _assert_gold_fx_proxy_data_ready(config)
+        if expert_name == XAU_XAG_RELATIVE_EXPERT_NAME and not synthetic_sample:
+            _assert_xau_xag_relative_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:
@@ -58,6 +68,26 @@ def run_phase0_matrix(
                         cell.symbol,
                     )
                 data_context = context_cache[cache_key]
+                if expert_name == GOLD_FX_PROXY_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        "intermarket_proxy": load_gold_fx_proxy_h1_context(
+                            config,
+                            cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == XAU_XAG_RELATIVE_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        "relative_value": load_xau_xag_relative_h1_context(
+                            config,
+                            cell.broker,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
 
             result = run_backtest(
                 config=config,
@@ -92,6 +122,38 @@ def run_phase0_matrix(
                 )
             )
     return outputs
+
+
+def _assert_gold_fx_proxy_data_ready(config: ProjectConfig) -> None:
+    missing = [check for check in check_gold_fx_proxy_data(config) if not check.available]
+    if not missing:
+        return
+    lines = [
+        f"- broker={check.broker}, symbol={check.symbol}, timeframe={check.timeframe}, "
+        f"dir={check.directory}, first_issue={check.issues[0] if check.issues else 'no candidate CSV files'}"
+        for check in missing
+    ]
+    raise ConfigError(
+        f"{GOLD_FX_PROXY_EXPERT_NAME} research matrix is blocked by missing proxy data:\n"
+        + "\n".join(lines)
+        + "\nRun generate-gold-fx-proxy-data-readiness for the exact acquisition checklist."
+    )
+
+
+def _assert_xau_xag_relative_data_ready(config: ProjectConfig) -> None:
+    missing = [check for check in check_xau_xag_relative_data(config) if not check.available]
+    if not missing:
+        return
+    lines = [
+        f"- broker={check.broker}, symbol={check.symbol}, timeframe={check.timeframe}, "
+        f"dir={check.directory}, first_issue={check.issues[0] if check.issues else 'no candidate CSV files'}"
+        for check in missing
+    ]
+    raise ConfigError(
+        f"{XAU_XAG_RELATIVE_EXPERT_NAME} research matrix is blocked by missing XAGUSD data:\n"
+        + "\n".join(lines)
+        + "\nRun generate-xau-xag-relative-data-readiness for the exact acquisition checklist."
+    )
 
 
 def load_cell_data_context(

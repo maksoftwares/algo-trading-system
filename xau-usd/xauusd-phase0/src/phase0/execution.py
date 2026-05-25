@@ -168,8 +168,10 @@ def find_exit_fill(
     cost_model: CostModel,
 ) -> ExitFill:
     start = int(entry.bar_index)
-    highs = bars["high"].to_numpy(dtype=float, copy=False)[start:]
-    lows = bars["low"].to_numpy(dtype=float, copy=False)[start:]
+    end = _exit_window_end(plan, start, len(bars))
+    exit_window = bars.iloc[start:end]
+    highs = exit_window["high"].to_numpy(dtype=float, copy=False)
+    lows = exit_window["low"].to_numpy(dtype=float, copy=False)
     if plan.direction == "LONG":
         sl_hits = lows <= float(plan.stop_loss)
         tp_hits = highs >= float(plan.take_profit)
@@ -226,7 +228,12 @@ def find_exit_fill(
             reason="take_profit",
         )
 
-    final = bars.iloc[-1]
+    final = exit_window.iloc[-1]
+    exit_reason = (
+        "time_stop"
+        if _max_holding_bars(plan) is not None and end < len(bars)
+        else "end_of_test_period"
+    )
     exit_price = apply_exit_slippage(
         _close_exit_price(final, plan.direction, cost_model),
         plan.direction,
@@ -235,8 +242,8 @@ def find_exit_fill(
     return ExitFill(
         time_utc=final["timestamp_utc"],
         price=exit_price,
-        bar_index=int(bars.index[-1]),
-        reason="end_of_test_period",
+        bar_index=int(final.name),
+        reason=exit_reason,
     )
 
 
@@ -349,6 +356,26 @@ def _expires_after_bars(plan: TradePlan) -> int | None:
     if expires_after_bars <= 0:
         raise ExecutionError("expires_after_bars must be a positive integer.")
     return expires_after_bars
+
+
+def _exit_window_end(plan: TradePlan, start: int, bar_count: int) -> int:
+    max_holding_bars = _max_holding_bars(plan)
+    if max_holding_bars is None:
+        return bar_count
+    return min(start + max_holding_bars, bar_count)
+
+
+def _max_holding_bars(plan: TradePlan) -> int | None:
+    raw_value = plan.metadata.get("max_holding_bars")
+    if raw_value in (None, ""):
+        return None
+    try:
+        max_holding_bars = int(raw_value)
+    except (TypeError, ValueError) as exc:
+        raise ExecutionError("max_holding_bars must be a positive integer.") from exc
+    if max_holding_bars <= 0:
+        raise ExecutionError("max_holding_bars must be a positive integer.")
+    return max_holding_bars
 
 
 def _exit_hits(

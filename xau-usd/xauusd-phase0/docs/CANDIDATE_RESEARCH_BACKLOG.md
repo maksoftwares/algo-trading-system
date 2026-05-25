@@ -1,6 +1,6 @@
 # Candidate Research Backlog
 
-Last updated: 2026-05-23
+Last updated: 2026-05-25
 
 ## Planning Rule
 
@@ -58,6 +58,14 @@ Expected path:
 | 37 | `weekly_open_reversion_v0` | REJECTED_FIRST_PASS | Weekly-open mean-reversion candidate; trade count passed, but 0/9 PF cells reached 1.30 and early broker/windows were negative; do not tune v0. |
 | 38 | `d1_inside_day_breakout_v0` | REJECTED_FIRST_PASS | D1 inside-day compression breakout; 3/9 PF cells reached 1.30 and only 3/9 cells had at least 40 trades; do not tune v0. |
 | 39 | `d1_outside_day_followthrough_v0` | REJECTED_FIRST_PASS | D1 outside-day follow-through; 0/9 PF cells reached 1.30 and 0/9 cells had at least 40 trades; do not tune v0. |
+| 40 | `gold_fx_proxy_divergence_v0` | REJECTED_FIRST_PASS | Intermarket relative-strength candidate; proxy data blocker was cleared, trade count passed, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 41 | `h1_smooth_trend_exhaustion_reversal_v0` | REJECTED_FIRST_PASS | XAU-only H1 smooth-trend exhaustion reversal; trade count passed, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 42 | `xau_xag_relative_value_v0` | REJECTED_FIRST_PASS | XAU/XAG relative-value candidate; XAGUSD data blocker was cleared, trade count passed, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 43 | `h1_return_autocorrelation_state_v0` | REJECTED_FIRST_PASS | H1 modeled return-state candidate; trade count passed, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 44 | `h1_m5_path_skew_reversal_v0` | REJECTED_FIRST_PASS | H1/M5 path-skew reversal candidate; trade count passed, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 45 | `h1_tick_volume_climax_reversal_v0` | REJECTED_FIRST_PASS | H1 tick-volume participation climax candidate; 0/9 PF cells reached 1.30 and Dukascopy produced no trades, so do not tune v0. |
+| 46 | `h1_walk_forward_linear_state_v0` | REJECTED_FIRST_PASS | Walk-forward learned H1 state candidate; blocker-fixed run produced 561-788 trades per cell, but 0/9 PF cells reached 1.30, so do not tune v0. |
+| 47 | `h1_calendar_drift_state_v0` | REJECTED_FIRST_PASS | Learned hour-of-week drift candidate; 802-1209 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed, so do not tune v0. |
 
 ## Discipline
 
@@ -83,6 +91,14 @@ Expected path:
 - Latest independent weekly-reference result: `weekly_open_reversion_v0` was rejected first-pass. It produced 197-220 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
 - Latest independent D1 compression breakout result: `d1_inside_day_breakout_v0` was rejected first-pass. It produced 11-41 trades per cell, only 3/9 cells reached PF >= 1.30, and only 3/9 cells met the minimum trade-count gate; do not tune v0.
 - Latest independent D1 outside-day follow-through result: `d1_outside_day_followthrough_v0` was rejected first-pass. It produced 22-33 trades per cell, 0/9 cells reached PF >= 1.30, and 0/9 cells met the minimum trade-count gate; do not tune v0.
+- Latest intermarket independent result: `gold_fx_proxy_divergence_v0` was rejected first-pass after broker-consistent proxy data was acquired. It produced 99-132 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Parallel XAU-only independent lane result: `h1_smooth_trend_exhaustion_reversal_v0` was rejected first-pass. It produced 42-77 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 2 XAU/XAG relative-value result: `xau_xag_relative_value_v0` was rejected first-pass after Capital.com, Pepperstone, and Dukascopy XAGUSD H1 data were acquired. It produced 102-107 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 3 modeled-state result: `h1_return_autocorrelation_state_v0` was rejected first-pass. It produced 148-193 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 4 M5 path-structure result: `h1_m5_path_skew_reversal_v0` was rejected first-pass. It produced 498-644 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 5 tick-volume result: `h1_tick_volume_climax_reversal_v0` was rejected first-pass. It produced 0-495 trades per cell, 0/9 PF cells reached 1.30, and Dukascopy had no trades; do not tune v0.
+- Round 6 walk-forward learned-state result: `h1_walk_forward_linear_state_v0` was rejected first-pass after a neutral tick-count blocker fix. It produced 561-788 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 7 calendar-drift result: `h1_calendar_drift_state_v0` was rejected first-pass. It produced 802-1209 trades per cell, but 0/9 PF cells reached 1.30 and catastrophic loss failed in Capital.com and Dukascopy windows; do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -94,10 +110,12 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 28
-  M30_H1: 0
+  M30_H1: 8
   H4_D1: 6
   W1_plus: 1
   planned_next_H4_D1: []
+  planned_next_M30_H1: []
+  blocked_M30_H1: []
   blocked_H4_D1:
     - h4_real_yield_proxy_momentum_v0
 ```

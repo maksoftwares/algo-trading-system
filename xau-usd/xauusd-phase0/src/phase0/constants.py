@@ -21,6 +21,13 @@ RESEARCH_EXPERTS = (
     "daily_pivot_reclaim_v0",
     "emr_inactivity_long_v0",
     "extreme_activity_mean_reversion_v0",
+    "gold_fx_proxy_divergence_v0",
+    "h1_calendar_drift_state_v0",
+    "h1_m5_path_skew_reversal_v0",
+    "h1_return_autocorrelation_state_v0",
+    "h1_smooth_trend_exhaustion_reversal_v0",
+    "h1_tick_volume_climax_reversal_v0",
+    "h1_walk_forward_linear_state_v0",
     "h4_d1_momentum_expansion_continuation_v0",
     "h4_inside_bar_d1_momentum_breakout_v0",
     "london_fix_continuation_v0",
@@ -44,6 +51,7 @@ RESEARCH_EXPERTS = (
     "w1_d1_momentum_continuation_v0",
     "weekly_level_reclaim_v0",
     "weekly_open_reversion_v0",
+    "xau_xag_relative_value_v0",
 )
 COST_MODELS = ("best_case", "median", "p95")
 BROKERS = ("capital_com", "pepperstone", "dukascopy")

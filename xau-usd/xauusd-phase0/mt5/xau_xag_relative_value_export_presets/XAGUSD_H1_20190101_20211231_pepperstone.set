@@ -1,0 +1,8 @@
+InpSymbol=XAGUSD
+InpBrokerLabel=pepperstone
+InpTimeframes=H1
+InpStartServerTime=2019.01.01 00:00
+InpEndServerTime=2021.12.31 23:59
+InpServerToUtcOffsetHours=0
+InpUseCommonFiles=true
+InpPrintToExpertsTab=true

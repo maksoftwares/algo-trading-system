@@ -1,0 +1,5 @@
+preset_file,broker,symbol,timeframe,start_server_time,end_server_time,server_to_utc_offset_hours,expected_raw_file,expected_processed_folder
+EURUSD_H1_20190101_20211231_pepperstone.set,pepperstone,EURUSD,H1,2019.01.01 00:00,2021.12.31 23:59,0,data/raw/pepperstone/EURUSD_H1_20190101_20211231_pepperstone.csv,data/processed/bars/pepperstone/EURUSD/H1/
+USDJPY_H1_20190101_20211231_pepperstone.set,pepperstone,USDJPY,H1,2019.01.01 00:00,2021.12.31 23:59,0,data/raw/pepperstone/USDJPY_H1_20190101_20211231_pepperstone.csv,data/processed/bars/pepperstone/USDJPY/H1/
+EURUSD_H1_20220101_20241231_dukascopy.set,dukascopy,EURUSD,H1,2022.01.01 00:00,2024.12.31 23:59,0,data/raw/dukascopy/EURUSD_H1_20220101_20241231_dukascopy.csv,data/processed/bars/dukascopy/EURUSD/H1/
+USDJPY_H1_20220101_20241231_dukascopy.set,dukascopy,USDJPY,H1,2022.01.01 00:00,2024.12.31 23:59,0,data/raw/dukascopy/USDJPY_H1_20220101_20241231_dukascopy.csv,data/processed/bars/dukascopy/USDJPY/H1/

@@ -1,0 +1,4 @@
+preset_file,broker,symbol,timeframe,start_server_time,end_server_time,server_to_utc_offset_hours,expected_raw_file,expected_processed_folder
+XAGUSD_H1_20160101_20181231_capital_com.set,capital_com,XAGUSD,H1,2016.01.01 00:00,2018.12.31 23:59,0,data/raw/capital_com/XAGUSD_H1_20160101_20181231_capital_com.csv,data/processed/bars/capital_com/XAGUSD/H1/
+XAGUSD_H1_20190101_20211231_pepperstone.set,pepperstone,XAGUSD,H1,2019.01.01 00:00,2021.12.31 23:59,0,data/raw/pepperstone/XAGUSD_H1_20190101_20211231_pepperstone.csv,data/processed/bars/pepperstone/XAGUSD/H1/
+XAGUSD_H1_20220101_20241231_dukascopy.set,dukascopy,XAGUSD,H1,2022.01.01 00:00,2024.12.31 23:59,0,data/raw/dukascopy/XAGUSD_H1_20220101_20241231_dukascopy.csv,data/processed/bars/dukascopy/XAGUSD/H1/

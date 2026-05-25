@@ -10,19 +10,20 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Files |
 | --- | --- | --- | --- | --- |
-| 12961 | 500 | 3 | 5 | 3 |
+| 30398 | 500 | 4 | 5 | 4 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 12961 | 50 | 75 | 75 |
+| global | all | all | XAUUSD | 30398 | 50 | 75 | 180 |
 
 ## Source Files
 
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260522.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260523.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260524.csv
+- C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260525.csv
 
 ## Note
 

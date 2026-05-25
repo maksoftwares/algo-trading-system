@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import os
 from pathlib import Path
+import tempfile
 import time
 from typing import Iterable
 from uuid import uuid4
@@ -248,7 +249,13 @@ def _write_csv_with_retry(df: pd.DataFrame, path: Path, attempts: int = 8, delay
     path.parent.mkdir(parents=True, exist_ok=True)
     last_error: PermissionError | None = None
     for _ in range(attempts):
-        temp_path = path.with_name(f"{path.stem}.{uuid4().hex}.tmp")
+        temp_fd, temp_name = tempfile.mkstemp(
+            prefix=f"{path.stem}.",
+            suffix=".tmp",
+            dir=path.parent,
+        )
+        os.close(temp_fd)
+        temp_path = Path(temp_name)
         try:
             df.to_csv(temp_path, index=False)
             os.replace(temp_path, path)

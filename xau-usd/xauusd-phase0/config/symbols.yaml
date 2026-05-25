@@ -28,3 +28,13 @@ symbols:
     min_lot: 0.01
     lot_step: 0.01
     default_lot_for_cost: 1.0
+
+  XAGUSD:
+    aliases: ["XAGUSD", "XAGUSD.", "XAGUSDm", "SILVER"]
+    asset_class: "metal_cfd"
+    contract_size_per_lot: 5000.0
+    point_size: 0.001
+    price_decimals: 3
+    min_lot: 0.01
+    lot_step: 0.01
+    default_lot_for_cost: 1.0

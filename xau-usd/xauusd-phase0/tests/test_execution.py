@@ -157,6 +157,37 @@ def test_end_of_period_close(project_root):
     assert trade.exit_time_utc == pd.Timestamp("2016-01-04T10:20:00Z")
 
 
+def test_max_holding_bars_exits_at_time_stop(project_root):
+    config = load_project_config(project_root)
+    plan = TradePlan(
+        expert="trend_pullback",
+        symbol="XAUUSD",
+        direction="LONG",
+        signal_time_utc=datetime(2016, 1, 4, 10, 0, tzinfo=timezone.utc),
+        entry_type="MARKET",
+        entry_price=None,
+        stop_loss=90.0,
+        take_profit=120.0,
+        invalidation_level=90.0,
+        risk_reward=2.0,
+        reason_code="TIME_STOP",
+        metadata={"max_holding_bars": 2},
+    )
+
+    trade = simulate_trade(
+        config,
+        bars=_execution_bars(),
+        plan=plan,
+        broker="capital_com",
+        cost_model_name="median",
+        current_equity=10000.0,
+        risk_per_trade_pct=0.005,
+    )
+
+    assert trade.exit_reason == "time_stop"
+    assert trade.exit_time_utc == pd.Timestamp("2016-01-04T10:10:00Z")
+
+
 def _market_plan(direction: str) -> TradePlan:
     return TradePlan(
         expert="trend_pullback",
