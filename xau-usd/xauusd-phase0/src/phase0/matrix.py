@@ -40,6 +40,9 @@ from phase0.macro_real_yield_data import load_macro_real_yield_context
 from phase0.run_context import context_with_symbol_metadata
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
+from phase0.treasury_curve_data import EXPERT_NAME as TREASURY_CURVE_EXPERT_NAME
+from phase0.treasury_curve_data import TREASURY_CURVE_FRAME_KEY
+from phase0.treasury_curve_data import load_treasury_curve_context
 from phase0.vix_risk_data import EXPERT_NAME as VIX_RISK_EXPERT_NAME
 from phase0.vix_risk_data import VIX_FRAME_KEY
 from phase0.vix_risk_data import load_vix_risk_context
@@ -91,6 +94,8 @@ def run_phase0_matrix(
             _assert_financial_conditions_data_ready(config)
         if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME and not synthetic_sample:
             _assert_inflation_expectations_data_ready(config)
+        if expert_name == TREASURY_CURVE_EXPERT_NAME and not synthetic_sample:
+            _assert_treasury_curve_data_ready(config)
         cells = build_cell_configs(config, symbol="XAUUSD")
         for cell in cells:
             if synthetic_sample:
@@ -210,6 +215,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name == TREASURY_CURVE_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        TREASURY_CURVE_FRAME_KEY: load_treasury_curve_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
 
             result = run_backtest(
                 config=config,
@@ -312,6 +326,12 @@ def _assert_inflation_expectations_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_inflation_expectations_context(config, start, end)
+
+
+def _assert_treasury_curve_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_treasury_curve_context(config, start, end)
 
 
 def load_cell_data_context(

@@ -30,6 +30,7 @@ h4_financial_conditions_stress_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_
 h4_gvz_volatility_panic_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,489,48,60,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h4_inside_bar_d1_momentum_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,2,741,71,100,76.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_real_yield_proxy_momentum_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,306,18,64,20.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
+h4_treasury_curve_stress_momentum_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,975,55,207,63.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h4_vix_risk_off_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,504,47,61,60.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_walk_forward_knn_momentum_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,5013,485,652,534.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 liquidity_sweep_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,12222,1281,1423,1370.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS

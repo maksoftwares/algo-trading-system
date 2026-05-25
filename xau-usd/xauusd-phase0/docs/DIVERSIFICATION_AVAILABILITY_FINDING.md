@@ -4,7 +4,7 @@ Last updated: 2026-05-25
 
 ## Finding
 
-As of 2026-05-25, the project has tested a broad set of non-level, intermarket, macro-regime, futures-positioning, options-implied-volatility, equity-risk implied-volatility, financial-conditions, breakeven-inflation, volatility-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Eighteen H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
+As of 2026-05-25, the project has tested a broad set of non-level, intermarket, macro-regime, nominal-rate, yield-curve, futures-positioning, options-implied-volatility, equity-risk implied-volatility, financial-conditions, breakeven-inflation, volatility-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Nineteen H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
 
 The current evidence supports this operating conclusion:
 
@@ -37,6 +37,7 @@ Same-family variants may be useful for observation, cost study, and future compa
 | 16 | `h4_vix_risk_off_reversal_v0` | H4 with FRED VIX equity-risk implied volatility | 3/9 | REJECTED_FIRST_PASS |
 | 17 | `h4_financial_conditions_stress_reversal_v0` | H4 with FRED NFCI/ANFCI financial conditions | 0/9 | REJECTED_FIRST_PASS |
 | 18 | `h4_breakeven_inflation_momentum_v0` | H4 with FRED T5YIE/T10YIE breakeven inflation momentum | 0/9 | REJECTED_FIRST_PASS |
+| 19 | `h4_treasury_curve_stress_momentum_v0` | H4 with FRED DGS2/DGS10/T10Y2Y Treasury curve stress | 3/9 | REJECTED_FIRST_PASS |
 
 Additional H1 intermarket and volatility-regime diversification attempts:
 

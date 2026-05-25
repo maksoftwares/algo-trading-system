@@ -37,6 +37,7 @@ RESEARCH_EXPERTS = (
     "h4_gvz_volatility_panic_reversal_v0",
     "h4_inside_bar_d1_momentum_breakout_v0",
     "h4_real_yield_proxy_momentum_v0",
+    "h4_treasury_curve_stress_momentum_v0",
     "h4_vix_risk_off_reversal_v0",
     "h4_walk_forward_knn_momentum_state_v0",
     "london_fix_continuation_v0",
