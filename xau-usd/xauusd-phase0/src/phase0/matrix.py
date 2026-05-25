@@ -55,6 +55,7 @@ from phase0.xau_xag_relative_data import load_xau_xag_relative_h1_context
 
 XAG_LEAD_XAU_FOLLOWTHROUGH_EXPERT_NAME = "xag_lead_xau_followthrough_v0"
 XAU_XAG_FX_COMPOSITE_EXPERT_NAME = "xau_xag_fx_composite_reversion_v0"
+MACRO_COMPOSITE_EXPERT_NAME = "h4_macro_composite_risk_state_v0"
 
 
 @dataclass(frozen=True)
@@ -91,6 +92,8 @@ def run_phase0_matrix(
             _assert_cot_gold_data_ready(config)
         if expert_name == CREDIT_SPREAD_EXPERT_NAME and not synthetic_sample:
             _assert_credit_spread_data_ready(config)
+        if expert_name == MACRO_COMPOSITE_EXPERT_NAME and not synthetic_sample:
+            _assert_macro_composite_data_ready(config)
         if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
         if expert_name == VIX_RISK_EXPERT_NAME and not synthetic_sample:
@@ -188,6 +191,45 @@ def run_phase0_matrix(
                     data_context = {
                         **data_context,
                         CREDIT_SPREAD_FRAME_KEY: load_credit_spread_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name == MACRO_COMPOSITE_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        MACRO_FRAME_KEY: load_macro_real_yield_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        INFLATION_EXPECTATIONS_FRAME_KEY: load_inflation_expectations_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        TREASURY_CURVE_FRAME_KEY: load_treasury_curve_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        CREDIT_SPREAD_FRAME_KEY: load_credit_spread_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        VIX_FRAME_KEY: load_vix_risk_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        GVZ_FRAME_KEY: load_gvz_volatility_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                        FINANCIAL_CONDITIONS_FRAME_KEY: load_financial_conditions_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,
@@ -322,6 +364,18 @@ def _assert_credit_spread_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_credit_spread_context(config, start, end)
+
+
+def _assert_macro_composite_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_macro_real_yield_context(config, start, end)
+    load_inflation_expectations_context(config, start, end)
+    load_treasury_curve_context(config, start, end)
+    load_credit_spread_context(config, start, end)
+    load_vix_risk_context(config, start, end)
+    load_gvz_volatility_context(config, start, end)
+    load_financial_conditions_context(config, start, end)
 
 
 def _assert_gvz_volatility_data_ready(config: ProjectConfig) -> None:

@@ -14,9 +14,9 @@ This checklist separates work that is already closed from gates that still requi
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
-| Rejected-candidate gate audit | PASS | Latest audit: 61 audited candidates, 58 rejected/research rows, 11 sample-size failures, 56 multi-cell expectancy failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
-| Frequency-normalized concentration audit | PASS | Latest audit: 61 audited candidates, 56 absolute concentration failures, 55 normalized review-context candidates; it does not rescue rejected candidates and is review context only; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` |
-| Diversification availability finding | PASS | Twenty non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were hash-locked and rejected first-pass; current operating frame remains single-edge; `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md` |
+| Rejected-candidate gate audit | PASS | Latest audit: 62 audited candidates, 59 rejected/research rows, 12 sample-size failures, 57 multi-cell expectancy failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
+| Frequency-normalized concentration audit | PASS | Latest audit: 62 audited candidates, 57 absolute concentration failures, 56 normalized review-context candidates; it does not rescue rejected candidates and is review context only; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` |
+| Diversification availability finding | PASS | Twenty-one non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were hash-locked and rejected first-pass; current operating frame remains single-edge; `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md` |
 | Forward hypothesis gates | PASS | `docs/HYPOTHESIS_LOCKING.md` pre-registers normalized concentration thresholds and a Pepperstone+Dukascopy cross-venue PF floor for future candidates. |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
@@ -44,7 +44,7 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` after provider, region, specs, backup access, and monitoring approach are selected. |
-| Non-level/intermarket forcing candidate run | PASS | Twenty non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
+| Non-level/intermarket forcing candidate run | PASS | Twenty-one non-level H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 

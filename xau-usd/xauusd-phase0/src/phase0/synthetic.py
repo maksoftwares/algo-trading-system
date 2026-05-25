@@ -68,6 +68,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_gvz_volatility_panic_reversal_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
         return _h4_inside_bar_d1_momentum_breakout_context()
+    if expert == "h4_macro_composite_risk_state_v0":
+        return _h4_macro_composite_risk_state_context()
     if expert == "h4_real_yield_proxy_momentum_v0":
         return _h4_real_yield_proxy_momentum_context()
     if expert == "h4_treasury_curve_stress_momentum_v0":
@@ -1287,6 +1289,150 @@ def _h4_credit_spread_stress_momentum_context() -> dict:
         "H4": h4,
         "D1": d1,
         "credit_spread": credit,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_macro_composite_risk_state_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
+    macro_values: dict[str, list[float]] = {
+        "real_yield_10y": [],
+        "dollar_index_broad": [],
+        "breakeven_5y": [],
+        "breakeven_10y": [],
+        "dgs2": [],
+        "dgs10": [],
+        "treasury_10y2y": [],
+        "baa10y": [],
+        "aaa10y": [],
+        "vix_close": [],
+        "gvz_close": [],
+        "nfci": [],
+        "anfci": [],
+    }
+    for index in range(380):
+        if index < 260:
+            step = 0.0
+            wiggle = 0.01 if index % 2 else -0.01
+        else:
+            step = float(index - 259)
+            wiggle = 0.0
+        macro_values["real_yield_10y"].append(1.60 + wiggle - 0.010 * step)
+        macro_values["dollar_index_broad"].append(120.0 + wiggle - 0.080 * step)
+        macro_values["breakeven_5y"].append(2.00 + wiggle + 0.008 * step)
+        macro_values["breakeven_10y"].append(2.10 + 0.5 * wiggle + 0.005 * step)
+        macro_values["dgs2"].append(4.30 + wiggle - 0.010 * step)
+        macro_values["dgs10"].append(4.20 + 0.5 * wiggle - 0.006 * step)
+        macro_values["treasury_10y2y"].append(-0.10 + 0.5 * wiggle + 0.004 * step)
+        macro_values["baa10y"].append(1.80 + wiggle + 0.008 * step)
+        macro_values["aaa10y"].append(1.10 + 0.5 * wiggle + 0.003 * step)
+        macro_values["vix_close"].append(16.0 + 0.5 * wiggle + 0.200 * step)
+        macro_values["gvz_close"].append(18.0 + 0.5 * wiggle + 0.180 * step)
+        macro_values["nfci"].append(-0.40 + 0.5 * wiggle + 0.030 * step)
+        macro_values["anfci"].append(-0.35 + 0.5 * wiggle + 0.025 * step)
+
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "real_yield_10y": macro_values["real_yield_10y"],
+            "dollar_index_broad": macro_values["dollar_index_broad"],
+        }
+    )
+    inflation = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "breakeven_5y": macro_values["breakeven_5y"],
+            "breakeven_10y": macro_values["breakeven_10y"],
+        }
+    )
+    treasury = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "dgs2": macro_values["dgs2"],
+            "dgs10": macro_values["dgs10"],
+            "treasury_10y2y": macro_values["treasury_10y2y"],
+        }
+    )
+    credit = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "baa10y": macro_values["baa10y"],
+            "aaa10y": macro_values["aaa10y"],
+        }
+    )
+    vix = pd.DataFrame({"timestamp_utc": dates, "vix_close": macro_values["vix_close"]})
+    gvz = pd.DataFrame({"timestamp_utc": dates, "gvz_close": macro_values["gvz_close"]})
+    conditions = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "nfci": macro_values["nfci"],
+            "anfci": macro_values["anfci"],
+        }
+    )
+
+    h4_periods = 220
+    h4_times = pd.date_range(dates[310] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        current += 0.25 if index % 5 else -0.01
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=50, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 50,
+            "high": [2005.0] * 50,
+            "low": [1995.0] * 50,
+            "close": [2001.0] * 50,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    m5_periods = h4_periods * 48 + 432
+    m5_times = pd.date_range(h4_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "macro_proxy": macro,
+        "inflation_expectations": inflation,
+        "treasury_curve": treasury,
+        "credit_spread": credit,
+        "vix_risk": vix,
+        "gvz_volatility": gvz,
+        "financial_conditions": conditions,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
