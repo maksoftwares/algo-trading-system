@@ -48,6 +48,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_smooth_trend_exhaustion_reversal_context()
     if expert == "h1_tick_volume_climax_reversal_v0":
         return _h1_tick_volume_climax_reversal_context()
+    if expert == "h1_volatility_squeeze_breakout_v0":
+        return _h1_volatility_squeeze_breakout_context()
     if expert == "h1_walk_forward_linear_state_v0":
         return _h1_walk_forward_linear_state_context()
     if expert == "xau_xag_relative_value_v0":
@@ -2221,6 +2223,49 @@ def _h1_tick_volume_climax_reversal_context() -> dict:
             "ask_open": [last_close + 0.1] * 180,
             "bid_close": [last_close] * 180,
             "ask_close": [last_close + 0.2] * 180,
+        }
+    )
+    return {"M5": m5, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h1_volatility_squeeze_breakout_context() -> dict:
+    periods = 340
+    h1_times = pd.date_range("2024-01-01T01:00:00Z", periods=periods, freq="1h")
+    closes = [2000.0]
+    for index in range(1, periods):
+        if index < periods - 8:
+            change = 0.06 if index % 2 == 0 else -0.05
+        else:
+            change = 0.45
+        closes.append(closes[-1] + change)
+
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    for index in range(periods - 8, periods):
+        h1.loc[h1.index[index], "open"] = float(h1.loc[h1.index[index - 1], "close"])
+        h1.loc[h1.index[index], "close"] = float(h1.loc[h1.index[index], "open"]) + 0.45
+        h1.loc[h1.index[index], "high"] = float(h1.loc[h1.index[index], "close"]) + 0.08
+        h1.loc[h1.index[index], "low"] = float(h1.loc[h1.index[index], "open"]) - 0.06
+        for column in ("mid_open", "bid_open", "ask_open"):
+            h1.loc[h1.index[index], column] = h1.loc[h1.index[index], "open"]
+        for column in ("mid_close", "bid_close", "ask_close"):
+            h1.loc[h1.index[index], column] = h1.loc[h1.index[index], "close"]
+
+    last_close = float(h1["close"].iloc[-1])
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 1.0] * 180,
+            "low": [last_close - 1.0] * 180,
+            "close": [last_close + 0.2] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.2] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close + 0.1] * 180,
+            "ask_close": [last_close + 0.3] * 180,
         }
     )
     return {"M5": m5, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}

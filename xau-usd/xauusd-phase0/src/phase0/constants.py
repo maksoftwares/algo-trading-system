@@ -28,6 +28,7 @@ RESEARCH_EXPERTS = (
     "h1_return_autocorrelation_state_v0",
     "h1_smooth_trend_exhaustion_reversal_v0",
     "h1_tick_volume_climax_reversal_v0",
+    "h1_volatility_squeeze_breakout_v0",
     "h1_walk_forward_linear_state_v0",
     "h4_d1_momentum_expansion_continuation_v0",
     "h4_inside_bar_d1_momentum_breakout_v0",

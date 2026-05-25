@@ -30,6 +30,9 @@ from phase0.strategies.h1_m5_path_skew_reversal_v0 import H1M5PathSkewReversalV0
 from phase0.strategies.h1_tick_volume_climax_reversal_v0 import (
     H1TickVolumeClimaxReversalV0Strategy,
 )
+from phase0.strategies.h1_volatility_squeeze_breakout_v0 import (
+    H1VolatilitySqueezeBreakoutV0Strategy,
+)
 from phase0.strategies.h1_walk_forward_linear_state_v0 import H1WalkForwardLinearStateV0Strategy
 from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
     H4D1MomentumExpansionContinuationV0Strategy,
@@ -101,6 +104,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
     H1TickVolumeClimaxReversalV0Strategy.name: H1TickVolumeClimaxReversalV0Strategy,
+    H1VolatilitySqueezeBreakoutV0Strategy.name: H1VolatilitySqueezeBreakoutV0Strategy,
     H1WalkForwardLinearStateV0Strategy.name: H1WalkForwardLinearStateV0Strategy,
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,

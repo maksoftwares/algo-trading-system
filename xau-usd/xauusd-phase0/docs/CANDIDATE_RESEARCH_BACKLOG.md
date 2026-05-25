@@ -72,6 +72,7 @@ Expected path:
 | 51 | `h4_walk_forward_knn_momentum_state_v0` | REJECTED_FIRST_PASS | Deterministic AI-style H4 KNN state candidate; 485-652 trades per cell, but 0/9 PF cells reached 1.30 and activity/concentration failed; do not tune v0. |
 | 52 | `xau_xag_fx_composite_reversion_v0` | REJECTED_FIRST_PASS | XAU/XAG plus FX-proxy composite reversion candidate; 506-547 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0. |
 | 53 | `xag_lead_xau_followthrough_v0` | REJECTED_FIRST_PASS | XAG lead-lag continuation candidate; 816-887 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0. |
+| 54 | `h1_volatility_squeeze_breakout_v0` | REJECTED_FIRST_PASS | H1 volatility-compression breakout candidate; 116-300 trades per cell, 3/9 PF cells reached 1.30, all Dukascopy, concentration failed; do not tune v0. |
 
 ## Discipline
 
@@ -111,6 +112,7 @@ Expected path:
 - Round 11 AI-style H4 KNN state result: `h4_walk_forward_knn_momentum_state_v0` was rejected first-pass after a neutral nullable-feature blocker fix. It produced 485-652 trades per cell, but 0/9 PF cells reached 1.30 and activity/concentration failed; do not tune v0.
 - Round 12 intermarket composite result: `xau_xag_fx_composite_reversion_v0` was rejected first-pass. It produced 506-547 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
 - Round 13 XAG lead-lag result: `xag_lead_xau_followthrough_v0` was rejected first-pass. It produced 816-887 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.
+- Round 14 H1 volatility squeeze result: `h1_volatility_squeeze_breakout_v0` was rejected first-pass. It produced 116-300 trades per cell and 3/9 PF cells reached 1.30, all in Dukascopy; concentration failed, so do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is blocked because no real-yield, DXY, Treasury, or macro-proxy series is present in `data/` or `reference/`; move to `d1_multi_day_exhaustion_reversion_v0` rather than inventing macro inputs.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -122,7 +124,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 30
-  M30_H1: 10
+  M30_H1: 11
   H4_D1: 8
   W1_plus: 1
   planned_next_H4_D1: []
@@ -136,4 +138,4 @@ hypothesis_timeframe_coverage:
 
 `d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
 
-`xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing, but both are rejected and neither becomes an approved expert.
+`xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing. `h1_volatility_squeeze_breakout_v0` counts as an M30/H1 volatility-regime diversification attempt by timing. All are rejected and none becomes an approved expert.
