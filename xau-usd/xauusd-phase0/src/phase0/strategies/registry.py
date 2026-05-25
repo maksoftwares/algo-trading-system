@@ -43,6 +43,7 @@ from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
 )
 from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v0 import H4InsideBarD1MomentumBreakoutV0Strategy
 from phase0.strategies.h4_real_yield_proxy_momentum_v0 import H4RealYieldProxyMomentumV0Strategy
+from phase0.strategies.h4_vix_risk_off_reversal_v0 import H4VixRiskOffReversalV0Strategy
 from phase0.strategies.h4_walk_forward_knn_momentum_state_v0 import H4WalkForwardKnnMomentumStateV0Strategy
 from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0Strategy
 from phase0.strategies.liquidity_sweep_continuation_v0 import LiquiditySweepContinuationV0Strategy
@@ -117,6 +118,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
     H4RealYieldProxyMomentumV0Strategy.name: H4RealYieldProxyMomentumV0Strategy,
+    H4VixRiskOffReversalV0Strategy.name: H4VixRiskOffReversalV0Strategy,
     H4WalkForwardKnnMomentumStateV0Strategy.name: H4WalkForwardKnnMomentumStateV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,
     LiquiditySweepContinuationV0Strategy.name: LiquiditySweepContinuationV0Strategy,
