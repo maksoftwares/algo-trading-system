@@ -201,9 +201,16 @@ def _summary_health_gate(status_fields: dict[str, Any], summary_path: Path) -> P
     if not summary_path.exists():
         return Phase2ReadinessItem("Phase 1 summary health", "FAIL", f"Missing `{summary_path}`.")
     required = ("log_verification", "soak_analysis", "runtime_health")
-    bad = [name for name in required if status_fields.get(name) != "PASS"]
-    if bad:
-        return Phase2ReadinessItem("Phase 1 summary health", "FAIL", "Non-pass status fields: " + ", ".join(bad))
+    failing = [name for name in required if status_fields.get(name) == "FAIL"]
+    if failing:
+        return Phase2ReadinessItem("Phase 1 summary health", "FAIL", "Failing status fields: " + ", ".join(failing))
+    pending = [name for name in required if status_fields.get(name) != "PASS"]
+    if pending:
+        return Phase2ReadinessItem(
+            "Phase 1 summary health",
+            "PENDING",
+            "Non-pass status fields: " + ", ".join(pending),
+        )
     return Phase2ReadinessItem("Phase 1 summary health", "PASS", f"Core summary checks are PASS in `{summary_path}`.")
 
 

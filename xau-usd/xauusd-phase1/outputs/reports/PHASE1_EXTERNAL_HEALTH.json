@@ -1,7 +1,7 @@
 {
   "checks": [
     {
-      "evidence": "56 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
+      "evidence": "249 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
       "name": "decision_log_has_rows",
       "status": "PASS"
     },
@@ -11,12 +11,12 @@
       "status": "PASS"
     },
     {
-      "evidence": "Statuses are acceptable: {'acceptance': 'PENDING', 'log_verification': 'PASS', 'runtime_health': 'PASS', 'soak_analysis': 'PASS', 'would_signal': 'PASS'}",
+      "evidence": "Statuses are acceptable: {'acceptance': 'PENDING', 'log_verification': 'WARN', 'runtime_health': 'WARN', 'soak_analysis': 'WARN', 'would_signal': 'PASS'}",
       "name": "status_summary_health",
       "status": "PASS"
     },
     {
-      "evidence": "Latest row age 1396.3 minute(s), but local date is a weekend market break; do not count this as a runtime fault.",
+      "evidence": "Latest row age 2.5 minute(s), limit 15.",
       "name": "latest_row_freshness",
       "status": "PASS"
     },
@@ -36,7 +36,7 @@
       "status": "PASS"
     }
   ],
-  "created_at_local": "2026-05-24T17:04:49.018037",
+  "created_at_local": "2026-05-25T19:32:29.225820",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "status": "PASS",
   "status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"

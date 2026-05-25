@@ -94,6 +94,33 @@ def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     assert any(item.gate == "Latest dry-run boundary" and item.status == "FAIL" for item in output.items)
 
 
+def test_phase2_readiness_keeps_warn_summary_health_pending(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root)
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
+    _write_summary(
+        report_dir / "PHASE1_STATUS_SUMMARY.json",
+        progress=62.5,
+        core_status={
+            "log_verification": "WARN",
+            "soak_analysis": "WARN",
+            "runtime_health": "WARN",
+        },
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
+
+    assert output.status == "PENDING"
+    assert any(item.gate == "Phase 1 summary health" and item.status == "PENDING" for item in output.items)
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -112,14 +139,22 @@ def _write_markdown_status(path: Path, status: str) -> None:
     path.write_text(f"# Report\n\nOverall status: {status}\n", encoding="utf-8")
 
 
-def _write_summary(path: Path, progress: float, permission: str = "false") -> None:
+def _write_summary(
+    path: Path,
+    progress: float,
+    permission: str = "false",
+    core_status: dict[str, str] | None = None,
+) -> None:
+    core_status = core_status or {
+        "log_verification": "PASS",
+        "soak_analysis": "PASS",
+        "runtime_health": "PASS",
+    }
     path.write_text(
         json.dumps(
             {
                 "status": {
-                    "log_verification": "PASS",
-                    "soak_analysis": "PASS",
-                    "runtime_health": "PASS",
+                    **core_status,
                     "would_signal": "PASS",
                     "acceptance": "PENDING" if progress < 100 else "PASS",
                 },
