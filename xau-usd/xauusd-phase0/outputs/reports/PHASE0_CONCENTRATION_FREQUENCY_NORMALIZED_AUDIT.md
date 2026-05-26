@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-25T23:38:31+00:00`
+Generated at UTC: `2026-05-26T10:58:33+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 64
-- Absolute concentration-failed candidates: 59
-- Review-context candidates under normalized thresholds: 58
+- Audited candidates: 65
+- Absolute concentration-failed candidates: 60
+- Review-context candidates under normalized thresholds: 59
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -48,6 +48,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | gold_fx_proxy_divergence_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1044 | 100.0 | 243.4894 | 0.179865 | 0.806486 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_calendar_drift_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 8661 | 100.0 | 100.0 | 0.396239 | 0.706334 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | h1_m5_path_skew_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4920 | 100.0 | 100.0 | 0.30479 | 0.539155 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_macro_event_aftershock_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 810 | 100.0 | 404.178 | 0.238853 | 0.778705 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_return_autocorrelation_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1497 | 100.0 | 100.0 | 0.254866 | 0.798369 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_smooth_trend_exhaustion_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 486 | 100.0 | 100.0 | 0.202137 | 0.980795 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_tick_volume_climax_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2904 | 100.0 | 100.0 | 0.065098 | 0.314496 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity |

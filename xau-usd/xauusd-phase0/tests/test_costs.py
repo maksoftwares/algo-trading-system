@@ -17,8 +17,9 @@ from phase0.costs import (
 )
 
 
-def test_load_configured_cost_model(project_root):
-    config = load_project_config(project_root)
+def test_load_configured_cost_model(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    config = load_project_config(root)
 
     model = load_cost_model(config, "XAUUSD", "capital_com", "p95")
 

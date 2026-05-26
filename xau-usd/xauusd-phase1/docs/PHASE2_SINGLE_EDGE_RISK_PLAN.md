@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-25
 
-This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and twenty-three non-level H4/D1/W1 plus additional H1 intermarket and volatility-regime diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
+This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and twenty-three non-level H4/D1/W1 plus additional H1 intermarket, volatility-regime, and event-regime diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
 
 ## Approved Edge Family
 

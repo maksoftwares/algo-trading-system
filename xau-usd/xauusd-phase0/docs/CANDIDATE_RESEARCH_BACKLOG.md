@@ -83,6 +83,7 @@ Expected path:
 | 62 | `h4_macro_composite_risk_state_v0` | REJECTED_FIRST_PASS | Fixed AI-style macro-composite vote using public FRED macro/risk inputs; 34-98 trades per cell, 6/9 PF cells reached 1.30, all cells positive, but sample-size/concentration/activity failed; do not tune v0. |
 | 63 | `h4_macro_composite_risk_state_v1` | REJECTED_FIRST_PASS | Broader fixed macro-composite vote; 51-169 trades per cell, 3/9 PF cells reached 1.30, Pepperstone-only strength, concentration/activity failed; do not tune v1. |
 | 64 | `h4_policy_uncertainty_safe_haven_v0` | REJECTED_FIRST_PASS | Policy-uncertainty safe-haven candidate using FRED USEPUINDXD; 142-181 trades per cell, 3/9 PF cells reached 1.30, Pepperstone-only strength, concentration failed; do not tune v0. |
+| 65 | `h1_macro_event_aftershock_v0` | REJECTED_FIRST_PASS | Standardized US macro-event aftershock continuation candidate; 85-93 trades per cell, 0/9 PF cells reached 1.30, concentration failed in every cell; do not tune v0. |
 
 ## Discipline
 
@@ -134,6 +135,7 @@ Expected path:
 - Round 23 macro-composite result: `h4_macro_composite_risk_state_v0` was rejected first-pass after a fixed AI-style macro vote was registered. It produced 34-98 trades per cell and 6/9 PF cells reached 1.30 with all cells positive, but Capital.com sample size was too low and concentration/activity failed; do not tune v0.
 - Round 24 macro-composite v1 result: `h4_macro_composite_risk_state_v1` was rejected first-pass after a new versioned hypothesis was registered. It produced 51-169 trades per cell and passed sample size, but only 3/9 PF cells reached 1.30, all Pepperstone; do not tune v1.
 - Round 25 policy-uncertainty result: `h4_policy_uncertainty_safe_haven_v0` was rejected first-pass after public FRED `USEPUINDXD` data was acquired. It produced 142-181 trades per cell and passed sample size, activity, catastrophic-loss, and cost-sensitivity gates, but only 3/9 PF cells reached 1.30, all Pepperstone, and concentration failed; do not tune v0.
+- Round 26 event-regime result: `h1_macro_event_aftershock_v0` was rejected first-pass after a standardized US macro-event timing hypothesis was registered. It produced 85-93 trades per cell and passed sample size, activity, catastrophic-loss, and cost-sensitivity gates, but 0/9 PF cells reached 1.30 and concentration failed in every cell; do not tune v0.
 - Continue searching for a genuinely independent non-level behavior family; no rejected v0 candidate may be tuned in place.
 - `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -145,7 +147,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 30
-  M30_H1: 11
+  M30_H1: 12
   H4_D1: 19
   W1_plus: 1
   planned_next_H4_D1: []
@@ -158,4 +160,4 @@ hypothesis_timeframe_coverage:
 
 `d1_momentum_h4_pullback_v0`, `d1_volatility_expansion_reversal_v0`, `d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `cot_gold_positioning_reversal_v0`, `h4_gvz_volatility_panic_reversal_v0`, `h4_vix_risk_off_reversal_v0`, `h4_financial_conditions_stress_reversal_v0`, `h4_breakeven_inflation_momentum_v0`, `h4_treasury_curve_stress_momentum_v0`, `h4_credit_spread_stress_momentum_v0`, `h4_macro_composite_risk_state_v0`, `h4_macro_composite_risk_state_v1`, `h4_policy_uncertainty_safe_haven_v0`, `d1_multi_day_exhaustion_reversion_v0`, `h4_d1_momentum_expansion_continuation_v0`, `h4_inside_bar_d1_momentum_breakout_v0`, `d1_w1_momentum_h4_pullback_v0`, and `h4_walk_forward_knn_momentum_state_v0` count as H4/D1 diversification attempts by timing, but all are rejected and none becomes an approved expert.
 
-`xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing. `h1_volatility_squeeze_breakout_v0` counts as an M30/H1 volatility-regime diversification attempt by timing. All are rejected and none becomes an approved expert.
+`xau_xag_fx_composite_reversion_v0` and `xag_lead_xau_followthrough_v0` count as M30/H1 intermarket diversification attempts by timing. `h1_volatility_squeeze_breakout_v0` counts as an M30/H1 volatility-regime diversification attempt by timing. `h1_macro_event_aftershock_v0` counts as an M30/H1 event-regime diversification attempt by timing. All are rejected and none becomes an approved expert.

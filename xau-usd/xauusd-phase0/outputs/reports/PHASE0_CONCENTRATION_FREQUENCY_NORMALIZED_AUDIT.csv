@@ -19,6 +19,7 @@ extreme_activity_mean_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,
 gold_fx_proxy_divergence_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,1044,100.0,243.4894,0.179865,0.806486,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 h1_calendar_drift_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,8661,100.0,100.0,0.396239,0.706334,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;no_catastrophic_failure;concentration
 h1_m5_path_skew_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,4920,100.0,100.0,0.30479,0.539155,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
+h1_macro_event_aftershock_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,810,100.0,404.178,0.238853,0.778705,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 h1_return_autocorrelation_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,1497,100.0,100.0,0.254866,0.798369,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 h1_smooth_trend_exhaustion_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,FAIL,9,486,100.0,100.0,0.202137,0.980795,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;concentration
 h1_tick_volume_climax_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,FAIL,9,2904,100.0,100.0,0.065098,0.314496,9,REVIEW_NORMALIZED_CONTEXT,multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity

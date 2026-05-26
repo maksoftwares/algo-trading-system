@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import pandas as pd
 
+from phase0.macro_event_calendar import MACRO_EVENT_FRAME_KEY
+
 
 def synthetic_context_for_expert(expert: str) -> dict:
     if expert == "asia_range_london_breakout_v0":
@@ -46,6 +48,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_breakeven_inflation_momentum_context()
     if expert == "h1_calendar_drift_state_v0":
         return _h1_calendar_drift_state_context()
+    if expert == "h1_macro_event_aftershock_v0":
+        return _h1_macro_event_aftershock_context()
     if expert == "h1_m5_path_skew_reversal_v0":
         return _h1_m5_path_skew_reversal_context()
     if expert == "h1_return_autocorrelation_state_v0":
@@ -3438,6 +3442,55 @@ def _price_path(start: float, returns: list[float]) -> list[float]:
         current *= 1.0 + value
         prices.append(current)
     return prices
+
+
+def _h1_macro_event_aftershock_context() -> dict:
+    h1_times = pd.date_range("2022-01-03T00:00:00Z", periods=220, freq="1h")
+    event_timestamp = pd.Timestamp("2022-01-07T13:30:00Z")
+    confirm_timestamp = pd.Timestamp("2022-01-07T15:00:00Z")
+    closes: list[float] = []
+    current = 2000.0
+    for timestamp in h1_times:
+        current += 0.08 if timestamp.hour % 2 else -0.03
+        if timestamp >= confirm_timestamp:
+            current += 1.15
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+
+    m5_periods = len(h1_times) * 12 + 144
+    m5_times = pd.date_range(h1_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    events = pd.DataFrame(
+        {
+            "timestamp_utc": [event_timestamp],
+            "event_type": ["NFP_FIRST_FRIDAY"],
+            "source_rule": ["NFP_FIRST_FRIDAY"],
+            "local_date": ["2022-01-07"],
+            "local_time_et": ["08:30"],
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        MACRO_EVENT_FRAME_KEY: events,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
 
 
 def _ohlc_from_closes(

@@ -27,6 +27,7 @@ from phase0.strategies.h4_breakeven_inflation_momentum_v0 import (
     H4BreakevenInflationMomentumV0Strategy,
 )
 from phase0.strategies.h1_calendar_drift_state_v0 import H1CalendarDriftStateV0Strategy
+from phase0.strategies.h1_macro_event_aftershock_v0 import H1MacroEventAftershockV0Strategy
 from phase0.strategies.h1_smooth_trend_exhaustion_reversal_v0 import (
     H1SmoothTrendExhaustionReversalV0Strategy,
 )
@@ -127,6 +128,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     GoldFxProxyDivergenceV0Strategy.name: GoldFxProxyDivergenceV0Strategy,
     H4BreakevenInflationMomentumV0Strategy.name: H4BreakevenInflationMomentumV0Strategy,
     H1CalendarDriftStateV0Strategy.name: H1CalendarDriftStateV0Strategy,
+    H1MacroEventAftershockV0Strategy.name: H1MacroEventAftershockV0Strategy,
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
     H1TickVolumeClimaxReversalV0Strategy.name: H1TickVolumeClimaxReversalV0Strategy,

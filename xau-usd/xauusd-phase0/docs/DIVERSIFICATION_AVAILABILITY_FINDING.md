@@ -4,7 +4,7 @@ Last updated: 2026-05-26
 
 ## Finding
 
-As of 2026-05-26, the project has tested a broad set of non-level, intermarket, macro-regime, AI-style macro-composite, policy-uncertainty, nominal-rate, yield-curve, corporate-credit, futures-positioning, options-implied-volatility, equity-risk implied-volatility, financial-conditions, breakeven-inflation, volatility-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Twenty-three H4/D1/W1 candidates plus additional H1 intermarket and volatility-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
+As of 2026-05-26, the project has tested a broad set of non-level, intermarket, macro-regime, AI-style macro-composite, policy-uncertainty, nominal-rate, yield-curve, corporate-credit, futures-positioning, options-implied-volatility, equity-risk implied-volatility, financial-conditions, breakeven-inflation, volatility-regime, event-regime, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Twenty-three H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced the required PF >= 1.30 survival rate in at least 7 of 9 cells.
 
 The current evidence supports this operating conclusion:
 
@@ -43,7 +43,7 @@ Same-family variants may be useful for observation, cost study, and future compa
 | 22 | `h4_macro_composite_risk_state_v1` | H4 with broader fixed AI-style FRED macro/risk vote | 3/9 | REJECTED_FIRST_PASS |
 | 23 | `h4_policy_uncertainty_safe_haven_v0` | H4 with FRED USEPUINDXD policy-uncertainty safe-haven state | 3/9 | REJECTED_FIRST_PASS |
 
-Additional H1 intermarket and volatility-regime diversification attempts:
+Additional H1 intermarket, volatility-regime, and event-regime diversification attempts:
 
 | # | Candidate | Input Family | PF >= 1.30 cells | First-pass status |
 | ---: | --- | --- | ---: | --- |
@@ -52,6 +52,7 @@ Additional H1 intermarket and volatility-regime diversification attempts:
 | 3 | `xau_xag_fx_composite_reversion_v0` | XAGUSD plus EURUSD/USDJPY proxy | 0/9 | REJECTED_FIRST_PASS |
 | 4 | `xag_lead_xau_followthrough_v0` | XAGUSD lead-lag continuation | 0/9 | REJECTED_FIRST_PASS |
 | 5 | `h1_volatility_squeeze_breakout_v0` | H1 volatility-compression expansion | 3/9 | REJECTED_FIRST_PASS |
+| 6 | `h1_macro_event_aftershock_v0` | H1 standardized US macro-event aftershock continuation | 0/9 | REJECTED_FIRST_PASS |
 
 Supporting artifacts:
 

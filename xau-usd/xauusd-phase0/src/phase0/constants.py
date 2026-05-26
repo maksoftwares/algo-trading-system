@@ -27,6 +27,7 @@ RESEARCH_EXPERTS = (
     "gold_fx_proxy_divergence_v0",
     "h4_breakeven_inflation_momentum_v0",
     "h1_calendar_drift_state_v0",
+    "h1_macro_event_aftershock_v0",
     "h1_m5_path_skew_reversal_v0",
     "h1_return_autocorrelation_state_v0",
     "h1_smooth_trend_exhaustion_reversal_v0",
