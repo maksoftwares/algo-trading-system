@@ -37,8 +37,10 @@ def generate_phase1_status_summary(
         output_path = Path.cwd() / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json"
     if source_root is None:
         source_root = Path(__file__).resolve().parents[1]
+    default_now = now is None
     if now is None:
         now = datetime.now()
+    soak_now = datetime.now(timezone.utc) if default_now else now
 
     report_dir = output_path.parent
     if log_status is None:
@@ -70,7 +72,7 @@ def generate_phase1_status_summary(
     soak_streak = calculate_soak_streak(
         rows,
         code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
-        now=now,
+        now=soak_now,
     )
 
     summary = {

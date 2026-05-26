@@ -65,6 +65,7 @@ int OnInit()
    if(_Symbol != InpTargetSymbol)
    {
       Print("Phase1DryRunShell attached to ", _Symbol, " but target is ", InpTargetSymbol);
+      return INIT_FAILED;
    }
 
    g_logger.Configure(InpDecisionLogFileName, InpStartupLogFileName, InpShutdownLogFileName);
@@ -79,7 +80,8 @@ int OnInit()
       InpSimulatedMonthlyPnlPct,
       InpManualRiskLock
    );
-   if(!g_magic_allocator.ValidateNamespace())
+   bool magic_namespace_ok = g_magic_allocator.ValidateNamespace();
+   if(!magic_namespace_ok)
    {
       Print("Phase1DryRunShell refused to start because magic-number namespace is invalid.");
       return INIT_FAILED;
@@ -115,7 +117,7 @@ int OnInit()
       InpWeeklyLossLimitPct,
       InpMonthlyLossLimitPct,
       InpManualRiskLock,
-      g_magic_allocator.ValidateNamespace(),
+      magic_namespace_ok,
       startup_time_status
    );
    EventSetTimer(1);
@@ -173,25 +175,75 @@ void OnTimer()
       decision.execution_state,
       decision.news_state
    );
-   decision.signal = signal;
-   if(decision.breakout_retest.would_signal)
-      decision.signal.reason_code = decision.breakout_retest.reason_code;
-   if(!decision.breakout_retest.would_signal && decision.swing_breakout_retest.would_signal)
-   {
-      decision.signal.expert_name = "swing_breakout_retest_v0";
-      decision.signal.magic_number = g_magic_allocator.SwingBreakoutRetestMagic();
-      decision.signal.reason_code = decision.swing_breakout_retest.reason_code;
-   }
+   Phase1NormalizeSignalFromObservers(decision, signal);
    decision.allowed_expert = "none";
    decision.would_have_allowed_experts = g_router.WouldHaveAllowedExperts();
-   decision.expert_lifecycle_state = g_lifecycle_manager.BreakoutRetestStateText();
+   decision.br_lifecycle_state = g_lifecycle_manager.BreakoutRetestStateText();
+   decision.sbr_lifecycle_state = g_lifecycle_manager.SwingBreakoutRetestStateText();
+   decision.expert_lifecycle_state = decision.br_lifecycle_state;
    decision.magic_namespace_ok = g_magic_allocator.ValidateNamespace();
    decision.trade_permission = false;
    decision.dry_run = true;
-   decision.block_reason = Phase1BlockReason(decision, signal);
+   decision.block_reason = Phase1BlockReason(decision, decision.signal);
 
    g_logger.WriteDecision(decision);
    g_dashboard.Render(decision);
+}
+
+void Phase1NormalizeSignalFromObservers(Phase1Decision &decision, const Phase1Signal &router_signal)
+{
+   Phase1ResetSignal(decision.signal);
+   decision.signal.blocked_reason = router_signal.blocked_reason;
+   if(decision.signal.blocked_reason == "")
+      decision.signal.blocked_reason = "phase1_dry_run_only";
+
+   if(decision.breakout_retest.would_signal)
+   {
+      Phase1FillSignalFromObservation(
+         decision.signal,
+         "breakout_retest",
+         g_magic_allocator.BreakoutRetestMagic(),
+         decision.breakout_retest
+      );
+      return;
+   }
+
+   if(decision.swing_breakout_retest.would_signal)
+   {
+      Phase1FillSignalFromObservation(
+         decision.signal,
+         "swing_breakout_retest_v0",
+         g_magic_allocator.SwingBreakoutRetestMagic(),
+         decision.swing_breakout_retest
+      );
+   }
+}
+
+void Phase1FillSignalFromObservation(
+   Phase1Signal &signal,
+   const string expert_name,
+   const int magic_number,
+   const Phase1BreakoutRetestObservation &observation
+)
+{
+   signal.expert_name = expert_name;
+   signal.magic_number = magic_number;
+   signal.direction = Phase1DirectionFromObserverText(observation.direction_text);
+   signal.entry_price = observation.entry_price;
+   signal.stop_loss = observation.stop_loss;
+   signal.take_profit = observation.take_profit;
+   signal.risk_pct = InpMaxRiskPct;
+   signal.reason_code = observation.reason_code;
+   signal.blocked_reason = "phase1_dry_run_only";
+}
+
+Phase1SignalDirection Phase1DirectionFromObserverText(const string direction_text)
+{
+   if(direction_text == "LONG")
+      return PHASE1_SIGNAL_LONG;
+   if(direction_text == "SHORT")
+      return PHASE1_SIGNAL_SHORT;
+   return PHASE1_SIGNAL_NONE;
 }
 
 string Phase1BlockReason(const Phase1Decision &decision, const Phase1Signal &signal)

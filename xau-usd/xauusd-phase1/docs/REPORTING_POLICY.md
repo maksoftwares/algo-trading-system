@@ -38,3 +38,5 @@ If reports disagree, the canonical order is:
 4. Derived report that explains the underlying check
 
 Phase 1 remains dry-run only regardless of report status. A passing report does not authorize broker-side behavior by itself.
+
+Static docs must not pin current runtime row counts, latest bar times, soak percentages, active-streak hours, or acceptance status. Those values move during soak and belong in `PHASE1_STATUS_SUMMARY.json`.

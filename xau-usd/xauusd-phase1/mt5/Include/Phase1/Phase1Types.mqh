@@ -180,6 +180,8 @@ struct Phase1Decision
    string allowed_expert;
    string would_have_allowed_experts;
    string expert_lifecycle_state;
+   string br_lifecycle_state;
+   string sbr_lifecycle_state;
    bool magic_namespace_ok;
    bool trade_permission;
    bool dry_run;
@@ -292,6 +294,8 @@ void Phase1ResetDecision(Phase1Decision &decision)
    decision.allowed_expert = "none";
    decision.would_have_allowed_experts = "none";
    decision.expert_lifecycle_state = "DISABLED";
+   decision.br_lifecycle_state = "DISABLED";
+   decision.sbr_lifecycle_state = "DISABLED";
    decision.magic_namespace_ok = false;
    decision.trade_permission = false;
    decision.dry_run = true;

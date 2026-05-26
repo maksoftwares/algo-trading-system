@@ -184,6 +184,8 @@ public:
          AppendCell(header, "execution_state");
          AppendCell(header, "news_state");
          AppendCell(header, "expert_lifecycle_state");
+         AppendCell(header, "br_lifecycle_state");
+         AppendCell(header, "sbr_lifecycle_state");
          AppendCell(header, "magic_namespace_ok");
          AppendCell(header, "server_time_status");
          AppendCell(header, "broker_utc_offset_seconds");
@@ -276,6 +278,8 @@ public:
       AppendCell(row, Phase1ExecutionText(decision.execution_state));
       AppendCell(row, Phase1NewsText(decision.news_state));
       AppendCell(row, decision.expert_lifecycle_state);
+      AppendCell(row, decision.br_lifecycle_state);
+      AppendCell(row, decision.sbr_lifecycle_state);
       AppendCell(row, decision.magic_namespace_ok ? "true" : "false");
       AppendCell(row, decision.server_time.status_text);
       AppendCell(row, IntegerToString(decision.server_time.broker_utc_offset_seconds));

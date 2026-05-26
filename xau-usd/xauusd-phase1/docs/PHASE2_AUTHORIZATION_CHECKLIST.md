@@ -42,25 +42,26 @@ This checklist separates work that is already closed from gates that still requi
 | Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must show PASS. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must show PASS. |
+| Phase 1 observer parity | PENDING | `PHASE1_OBSERVER_PARITY_REPORT.md` must prove the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic before paper-mode implementation. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` after provider, region, specs, backup access, and monitoring approach are selected. |
 | Non-level/intermarket forcing candidate run | PASS | Twenty-three non-level H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 
-## Current Soak Snapshot
+## Current State Source
 
 | Field | Value |
 | --- | --- |
-| Latest status summary | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
-| Latest review bundle | `outputs/review_bundles/PHASE1_DRY_RUN_BUNDLE_20260522_064156.zip` |
-| Decision rows | 56 |
-| Latest bar | 2026.05.22 20:55:00 |
-| Soak progress | 8.26% after v0.6 schema reset |
+| Canonical current state | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
+| Latest review bundle | Read from the latest bundle manifest in `outputs/review_bundles/` |
+| Decision rows | Do not pin in static docs; read `runtime.decision_rows` from `PHASE1_STATUS_SUMMARY.json` |
+| Latest bar | Do not pin in static docs; read `runtime.latest_row.bar_time` from `PHASE1_STATUS_SUMMARY.json` |
+| Soak progress | Do not pin in static docs; read `soak.progress_pct` from `PHASE1_STATUS_SUMMARY.json` |
 | Active-market 72-hour streak | Tracked in `PHASE1_STATUS_SUMMARY.json`; still PENDING until longest active-market bar-continuity streak reaches 72h |
 | Weekend policy | `weekend_breaks_active_market_streak`; process/code-freeze is tracked separately |
 | Process/code-freeze 96-hour gate | Tracked in `PHASE1_STATUS_SUMMARY.json`; still PENDING until process uptime and code-freeze both reach 96h |
-| Acceptance | PENDING |
+| Acceptance | Read `status.acceptance` from `PHASE1_STATUS_SUMMARY.json` |
 
 ## Decision Rule
 
@@ -69,6 +70,7 @@ IF Phase 1 acceptance = PASS
 AND measured cost model = PASS
 AND measured-cost revalidation = PASS
 AND Phase 1 review index = PASS
+AND Phase 1 observer parity = PASS
 AND Phase 2 readiness = PASS
 AND active-market 72-hour soak = PASS
 AND process/code-freeze 96-hour gate = PASS

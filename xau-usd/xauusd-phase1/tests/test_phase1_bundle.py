@@ -45,6 +45,7 @@ def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
     assert "mt5_runtime/compile.log" in names
     assert "outputs/reports/PHASE1_WOULD_SIGNAL_REVIEW.csv" in names
     assert "outputs/reports/PHASE1_REVIEW_INDEX.md" in names
+    assert "outputs/reports/PHASE1_OBSERVER_PARITY_REPORT.md" in names
     assert "outputs/reports/PHASE2_READINESS_REPORT.md" in names
     assert "outputs/reports/PHASE1_STATUS_SUMMARY.json" in names
     assert "outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md" in names
@@ -68,6 +69,8 @@ def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
     assert manifest["acceptance_status"] == "PENDING"
     assert manifest["review_index_status"] == "PENDING"
     assert manifest["review_index_path"].endswith("PHASE1_REVIEW_INDEX.md")
+    assert manifest["observer_parity_status"] == "PASS"
+    assert manifest["observer_parity_report_path"].endswith("PHASE1_OBSERVER_PARITY_REPORT.md")
     assert manifest["phase2_readiness_status"] == "PENDING"
     assert manifest["phase2_readiness_path"].endswith("PHASE2_READINESS_REPORT.md")
     assert manifest["included_count"] == output.included_count
@@ -124,6 +127,10 @@ def _write_project_shell(project: Path) -> None:
     (project / "mt5" / "README.md").write_text("mt5\n", encoding="utf-8")
     (project / "mt5" / "Experts" / "Phase1DryRunShell.mq5").write_text("#property strict\n", encoding="utf-8")
     (project / "mt5" / "Include" / "Phase1" / "Phase1Types.mqh").write_text("#define X\n", encoding="utf-8")
+    (project / "mt5" / "Include" / "Phase1" / "Phase1BreakoutRetest.mqh").write_text(
+        _mql_parity_tokens(),
+        encoding="utf-8",
+    )
     (project / "mt5" / "Presets" / "Phase1DryRunShell.safe.set").write_text("InpDryRunOnly=true\n", encoding="utf-8")
     (project / "scripts" / "verify_phase1_logs.py").write_text("print('ok')\n", encoding="utf-8")
     (project / "tests" / "test_phase1_static.py").write_text("def test_ok(): assert True\n", encoding="utf-8")
@@ -146,8 +153,11 @@ def _write_phase0_cost_artifacts(project: Path) -> None:
     phase0_root = project.parent / "xauusd-phase0"
     docs = phase0_root / "docs"
     reports = phase0_root / "outputs" / "reports"
+    strategy = phase0_root / "src" / "phase0" / "strategies" / "breakout_retest.py"
     docs.mkdir(parents=True, exist_ok=True)
     reports.mkdir(parents=True, exist_ok=True)
+    strategy.parent.mkdir(parents=True, exist_ok=True)
+    strategy.write_text(_python_parity_tokens(), encoding="utf-8")
     (docs / "COST_REPORTING_POLICY.md").write_text("# Cost policy\n", encoding="utf-8")
     (docs / "PHASE0_INDEPENDENT_VALIDATION.md").write_text(
         "# Independent validation\n\nCanonical fixed-notional monthly R evidence; compounding variants are superseded.\n",
@@ -183,6 +193,40 @@ def _write_phase0_cost_artifacts(project: Path) -> None:
     (reports / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md").write_text(
         "# Concentration\n\nOverall status: PASS\n",
         encoding="utf-8",
+    )
+
+
+def _mql_parity_tokens() -> str:
+    return "\n".join(
+        [
+            "m_break_window_bars = 20;",
+            "m_break_atr_multiplier = 0.30;",
+            "m_retest_tolerance_points = 5.0;",
+            "m_stop_atr_multiplier = 0.10;",
+            "m_reward_multiple = 1.50;",
+            '"previous_daily_high"; "previous_weekly_high"; "latest_swing_high";',
+            '"previous_daily_low"; "previous_weekly_low"; "latest_swing_low";',
+            "10.0 * point;",
+            "candidate.stop_distance_points < best.stop_distance_points;",
+            "BREAKOUT_RETEST_LONG_DRY_RUN;",
+        ]
+    )
+
+
+def _python_parity_tokens() -> str:
+    return "\n".join(
+        [
+            "retest_position - 20",
+            "0.3 * break_atr",
+            "5.0 * point_size",
+            "0.1 * retest_atr",
+            "1.5 * risk_price",
+            '"previous_daily_high"; "previous_weekly_high"; "latest_swing_high";',
+            '"previous_daily_low"; "previous_weekly_low"; "latest_swing_low";',
+            "10.0 * point_size",
+            'item["stop_distance"]',
+            "BREAKOUT_RETEST_LONG",
+        ]
     )
 
 
@@ -268,6 +312,8 @@ def _write_decision_log(path: Path) -> None:
         "execution_state",
         "news_state",
         "expert_lifecycle_state",
+        "br_lifecycle_state",
+        "sbr_lifecycle_state",
         "magic_namespace_ok",
         "server_time_status",
         "br_stage",
@@ -452,6 +498,7 @@ def _write_decision_log(path: Path) -> None:
         row.update(
             {
                 "br_level_found": "true",
+                "br_lifecycle_state": "DRY_RUN_ONLY",
                 "br_break_found": "false",
                 "br_retest_valid": "false",
                 "br_confirmation_valid": "false",
@@ -463,6 +510,7 @@ def _write_decision_log(path: Path) -> None:
                 "br_stop_distance_points": "0.00",
                 "br_break_shift": "-1",
                 "sbr_stage": "WAIT_LEVEL_BREAK_RETEST",
+                "sbr_lifecycle_state": "DRY_RUN_ONLY",
                 "sbr_direction": "LONG",
                 "sbr_would_signal": "false",
                 "sbr_reason_code": "no_long_swing_breakout_retest_candidate",

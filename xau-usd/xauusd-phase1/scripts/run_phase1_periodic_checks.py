@@ -16,6 +16,7 @@ from append_phase1_soak_history import append_phase1_soak_history
 from analyze_phase1_soak import analyze_phase1_soak
 from check_phase1_external_health import check_external_health
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
+from generate_phase1_observer_parity_report import generate_phase1_observer_parity_report
 from generate_phase1_review_index import generate_phase1_review_index
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
@@ -106,6 +107,10 @@ def run_phase1_periodic_checks(
         root=root,
         report_path=report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md",
         columns_csv_path=report_dir / "PHASE2_PAPER_LEDGER_COLUMNS.csv",
+    )
+    generate_phase1_observer_parity_report(
+        phase1_root=root,
+        report_path=report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md",
     )
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,

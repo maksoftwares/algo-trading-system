@@ -27,6 +27,7 @@ The modeled cost is provisional until the measured cost model and measured-cost 
 | `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` | PASS |
 | Phase 1 five-trading-day soak | PASS |
 | Phase 1 uninterrupted 72-hour active-market streak | PASS |
+| Phase 1 observer parity report | PASS |
 | Phase 1 review index | PASS |
 | Owner approval file | PASS |
 

@@ -20,6 +20,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PENDING")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=5.28)
 
     output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
@@ -30,6 +31,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Active-market 72-hour soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Process/code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Phase 1 observer parity" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
@@ -45,6 +47,7 @@ def test_phase2_readiness_passes_when_all_gates_pass(tmp_path):
     _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
     approval.write_text(_approval_text(), encoding="utf-8")
 
@@ -66,6 +69,7 @@ def test_phase2_readiness_does_not_pass_with_token_only_approval(tmp_path):
     _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
     approval.write_text("PHASE2_PAPER_PREP_APPROVED\n", encoding="utf-8")
 
@@ -86,6 +90,7 @@ def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
     _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0, permission="true")
 
     output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
@@ -105,6 +110,7 @@ def test_phase2_readiness_keeps_warn_summary_health_pending(tmp_path):
     _write_phase2_schema_report(report_dir)
     _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PENDING")
     _write_summary(
         report_dir / "PHASE1_STATUS_SUMMARY.json",
         progress=62.5,

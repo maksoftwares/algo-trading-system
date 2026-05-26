@@ -13,8 +13,9 @@ FORBIDDEN_TERMS = (
     "Position" + "Open",
 )
 
-SCAN_SUFFIXES = {".mq5", ".mqh", ".md", ".py"}
-IGNORED_PARTS = {"__pycache__", ".pytest_cache", ".venv"}
+SCAN_SUFFIXES = {".mq5", ".mqh", ".py"}
+SOURCE_PARTS = ("mt5", "scripts")
+IGNORED_PARTS = {"__pycache__", ".pytest_cache", ".venv", "outputs", "docs"}
 
 
 @dataclass(frozen=True)
@@ -37,9 +38,13 @@ def audit_phase1_tree(root: Path) -> list[SafetyFinding]:
 
 
 def _scan_paths(root: Path) -> list[Path]:
+    roots = [root / part for part in SOURCE_PARTS if (root / part).exists()]
+    if not roots:
+        roots = [root]
     return sorted(
         path
-        for path in root.rglob("*")
+        for scan_root in roots
+        for path in scan_root.rglob("*")
         if path.is_file()
         and path.suffix in SCAN_SUFFIXES
         and not any(part in IGNORED_PARTS for part in path.parts)

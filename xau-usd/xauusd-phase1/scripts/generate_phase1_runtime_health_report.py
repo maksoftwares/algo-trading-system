@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 
@@ -360,6 +360,8 @@ def _is_expected_market_break(
     minutes = int((right - left).total_seconds() / 60)
     if _is_weekend_stale_resume_gap(right_row):
         return True
+    if _spans_weekend_market_break(left, right):
+        return True
     if minutes > 90:
         return False
     right_session = right_row.get("session", "")
@@ -378,6 +380,21 @@ def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
     if timestamp_broker is None:
         return False
     return timestamp_broker.weekday() in {5, 6}
+
+
+def _spans_weekend_market_break(left: datetime, right: datetime) -> bool:
+    if right <= left:
+        return False
+    hours = (right - left).total_seconds() / 3600
+    if hours > 96:
+        return False
+    day = left.date()
+    end_day = right.date()
+    while day <= end_day:
+        if day.weekday() in {5, 6}:
+            return True
+        day += timedelta(days=1)
+    return False
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

@@ -70,6 +70,12 @@ def test_dry_run_shell_is_locked_to_passive_mode():
     assert "CPhase1ServerTimeValidator" in text
     assert "CPhase1MagicNumberAllocator" in text
     assert "CPhase1ExpertLifecycleManager" in text
+    assert "return INIT_FAILED;" in text
+    assert "Phase1NormalizeSignalFromObservers" in text
+    assert "Phase1FillSignalFromObservation" in text
+    assert "signal.entry_price = observation.entry_price" in text
+    assert "signal.stop_loss = observation.stop_loss" in text
+    assert "signal.take_profit = observation.take_profit" in text
 
 
 def test_safe_preset_keeps_shell_in_dry_run_observation_mode():
@@ -135,6 +141,8 @@ def test_phase1_decision_logger_has_required_columns():
         "execution_state",
         "news_state",
         "expert_lifecycle_state",
+        "br_lifecycle_state",
+        "sbr_lifecycle_state",
         "magic_namespace_ok",
         "server_time_status",
         "atr14_points",
@@ -161,6 +169,42 @@ def test_phase1_startup_and_shutdown_loggers_exist():
 
     assert "bool WriteStartup" in text
     assert "bool WriteShutdown" in text
+
+
+def test_phase1_magic_validation_has_reserved_range_and_collision_checks():
+    text = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Magic.mqh").read_text(encoding="utf-8")
+
+    assert "ReservedRangeMin" in text
+    assert "ReservedRangeMax" in text
+    assert "ValidateReservedRange" in text
+    assert "ValidateExternalCollisions" in text
+    assert "PositionsTotal" in text
+    assert "OrdersTotal" in text
+
+
+def test_phase1_safety_audit_ignores_docs():
+    text = (ROOT / "scripts" / "audit_phase1_safety.py").read_text(encoding="utf-8")
+
+    assert "SOURCE_PARTS" in text
+    assert '".md"' not in text
+    assert '"docs"' in text
+
+
+def test_phase1_observer_parity_report_script_exists():
+    text = (ROOT / "scripts" / "generate_phase1_observer_parity_report.py").read_text(encoding="utf-8")
+
+    assert "generate_phase1_observer_parity_report" in text
+    assert "PHASE1_OBSERVER_PARITY_REPORT" in text
+    assert "breakout_retest" in text
+
+
+def test_static_docs_do_not_pin_runtime_snapshots():
+    text = (ROOT / "docs" / "PHASE2_AUTHORIZATION_CHECKLIST.md").read_text(encoding="utf-8")
+
+    assert "## Current State Source" in text
+    assert "| Decision rows | 56 |" not in text
+    assert "| Latest bar | 2026." not in text
+    assert "| Soak progress | 8.26%" not in text
 
 
 def test_phase1_risk_gate_has_simulated_lock_states():

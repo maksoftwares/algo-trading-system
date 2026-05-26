@@ -12,6 +12,7 @@ Phase 2 preparation can continue while the soak runs, but Phase 2 implementation
 
 - `PHASE1_ACCEPTANCE_REPORT.md` is `PASS`
 - `PHASE1_REVIEW_INDEX.md` is `PASS`
+- `PHASE1_OBSERVER_PARITY_REPORT.md` is `PASS` for Phase 1 MQL observer parity against the Python Phase 0 `breakout_retest` strategy
 - five trading days of clean dry-run telemetry are present
 - would-signal clusters have been reviewed for obvious router or observer defects
 - the safety scanner passes for all Phase 1 and preparation files
@@ -104,6 +105,8 @@ The first milestone should be a paper ledger only. It should read the same dry-r
 ## Current Status
 
 Phase 2 preparation is allowed. Phase 2 implementation is not yet authorized because Phase 1 acceptance remains pending until both the five-trading-day soak gate and the 72-hour uninterrupted active-market streak gate close.
+
+Observer parity is also a hard implementation gate: the MQL Phase 1 observer must remain proven against the Python Phase 0 `breakout_retest` logic before any paper-mode code is added.
 
 The machine-checkable preflight artifact for this boundary is:
 

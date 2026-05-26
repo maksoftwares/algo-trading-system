@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from analyze_phase1_soak import analyze_phase1_soak
@@ -49,8 +49,10 @@ def generate_phase1_acceptance_report(
         report_path = Path.cwd() / "outputs" / "reports" / "PHASE1_ACCEPTANCE_REPORT.md"
     if source_root is None:
         source_root = Path(__file__).resolve().parents[1]
+    default_now = now is None
     if now is None:
         now = datetime.now()
+    soak_now = datetime.now(timezone.utc) if default_now else now
 
     log_report = report_path.parent / "PHASE1_DRY_RUN_LOG_REPORT.md"
     soak_report = report_path.parent / "PHASE1_SOAK_DRIFT_REPORT.md"
@@ -89,8 +91,8 @@ def generate_phase1_acceptance_report(
         _permission_item(decision_rows),
         _freshness_item(decision_rows, now, max_fresh_minutes),
         _latest_row_item(decision_rows),
-        _active_market_soak_item(decision_rows, files_dir, now),
-        _process_code_freeze_item(decision_rows, files_dir, now),
+        _active_market_soak_item(decision_rows, files_dir, soak_now),
+        _process_code_freeze_item(decision_rows, files_dir, soak_now),
         _soak_duration_item(decision_rows),
     ]
 

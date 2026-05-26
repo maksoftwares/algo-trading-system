@@ -135,6 +135,7 @@ def generate_phase2_readiness_report(
         ),
         _status_gate("Phase 1 acceptance", report_dir / "PHASE1_ACCEPTANCE_REPORT.md", required="PASS"),
         _status_gate("Phase 1 review index", report_dir / "PHASE1_REVIEW_INDEX.md", required="PASS"),
+        _status_gate("Phase 1 observer parity", report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", required="PASS"),
         _summary_health_gate(status_fields, summary_path),
         _soak_progress_gate(soak),
         _active_market_soak_gate(soak),

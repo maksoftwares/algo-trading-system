@@ -118,6 +118,41 @@ def test_phase1_log_verifier_tolerates_weekend_stale_resume_gap(tmp_path):
     )
 
 
+def test_phase1_log_verifier_tolerates_weekend_reopen_gap(tmp_path):
+    module = _load_log_verifier()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv", rows=2)
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    rows = rows[:2]
+    rows[0]["timestamp_broker"] = "2026.05.22 20:55:00"
+    rows[0]["timestamp_utc"] = "2026.05.22 16:55:00"
+    rows[0]["timestamp_local"] = "2026.05.22 20:55:00"
+    rows[0]["bar_time"] = "2026.05.22 20:55:00"
+    rows[1]["timestamp_broker"] = "2026.05.25 00:05:00"
+    rows[1]["timestamp_utc"] = "2026.05.24 20:05:00"
+    rows[1]["timestamp_local"] = "2026.05.25 00:05:00"
+    rows[1]["bar_time"] = "2026.05.25 00:05:00"
+    rows[1]["session"] = "ASIA"
+    rows[1]["execution_state"] = "EXECUTION_OK"
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.verify_phase1_logs(files_dir, tmp_path / "report.md")
+
+    assert any(
+        check.name == "bar_cadence" and check.status == "PASS" and "tolerated gaps" in check.message
+        for check in output.checks
+    )
+
+
 def _load_log_verifier():
     path = ROOT / "scripts" / "verify_phase1_logs.py"
     spec = importlib.util.spec_from_file_location("verify_phase1_logs", path)
@@ -237,6 +272,8 @@ def _write_decision_log(path: Path, force_permission: str = "false") -> None:
         "execution_state",
         "news_state",
         "expert_lifecycle_state",
+        "br_lifecycle_state",
+        "sbr_lifecycle_state",
         "magic_namespace_ok",
         "server_time_status",
         "broker_utc_offset_seconds",
@@ -355,6 +392,8 @@ def _decision_row(
         "execution_state": "EXECUTION_OK",
         "news_state": "NO_NEWS_RISK",
         "expert_lifecycle_state": "DRY_RUN_ONLY",
+        "br_lifecycle_state": "DRY_RUN_ONLY",
+        "sbr_lifecycle_state": "DRY_RUN_ONLY",
         "magic_namespace_ok": "true",
         "server_time_status": "CLOCK_OK",
         "broker_utc_offset_seconds": "4",

@@ -42,37 +42,45 @@ def calculate_soak_streak(
     required_code_freeze_hours: float = DEFAULT_REQUIRED_CODE_FREEZE_HOURS,
 ) -> SoakStreakSummary:
     if now is None:
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
+    now_utc = _coerce_utc(now)
     max_gap_seconds = max_bar_gap_minutes * 60
     current_start: datetime | None = None
     current_end: datetime | None = None
-    current_run_id = ""
+    current_run_ids: set[str] = set()
     current_bars = 0
     longest_hours = 0.0
     longest_bars = 0
+    restart_count = 0
 
     for row in rows:
         bar_time = _parse_mt5_datetime(row.get("bar_time", ""))
         if bar_time is None or not _is_good_soak_row(row):
             current_start = None
             current_end = None
-            current_run_id = ""
+            current_run_ids = set()
             current_bars = 0
+            restart_count = 0
             continue
 
         run_id = row.get("run_id", "")
-        needs_new_segment = current_start is None or run_id != current_run_id
+        needs_new_segment = current_start is None
         if current_end is not None and (bar_time - current_end).total_seconds() > max_gap_seconds:
             needs_new_segment = True
 
         if needs_new_segment:
             current_start = bar_time
             current_end = bar_time
-            current_run_id = run_id
+            current_run_ids = {run_id} if run_id else set()
             current_bars = 1
-        elif current_end is not None and bar_time > current_end:
-            current_end = bar_time
-            current_bars += 1
+            restart_count = 0
+        elif current_end is not None:
+            if run_id and run_id not in current_run_ids:
+                current_run_ids.add(run_id)
+                restart_count = max(len(current_run_ids) - 1, 0)
+            if bar_time > current_end:
+                current_end = bar_time
+                current_bars += 1
 
         segment_hours = _segment_hours(current_start, current_end)
         if segment_hours >= longest_hours:
@@ -82,9 +90,9 @@ def calculate_soak_streak(
     current_hours = _segment_hours(current_start, current_end)
     latest_run_id = rows[-1].get("run_id", "") if rows else ""
     last_restart_utc = _latest_run_start_utc(rows, latest_run_id)
-    process_uptime_hours = _process_uptime_hours(rows, latest_run_id, now)
+    process_uptime_hours = _process_uptime_hours(rows, latest_run_id, now_utc)
     normalized_code_freeze_started_at = _normalize_code_freeze_started_at(code_freeze_started_at)
-    code_freeze_hours = _code_freeze_hours(normalized_code_freeze_started_at)
+    code_freeze_hours = _code_freeze_hours(normalized_code_freeze_started_at, now_utc)
     code_freeze_pass = code_freeze_hours >= required_code_freeze_hours
     process_code_freeze_pass = (
         process_uptime_hours >= required_code_freeze_hours and code_freeze_pass
@@ -94,7 +102,7 @@ def calculate_soak_streak(
         longest_streak_hours=round(longest_hours, 2),
         required_uninterrupted_streak_hours=required_hours,
         active_market_streak_hours=round(longest_hours, 2),
-        restart_count_during_current_streak=0 if current_hours > 0 else 0,
+        restart_count_during_current_streak=restart_count if current_hours > 0 else 0,
         last_restart_utc=last_restart_utc,
         weekend_policy=WEEKEND_POLICY,
         process_uptime_streak_hours=round(process_uptime_hours, 2),
@@ -161,14 +169,11 @@ def _process_uptime_hours(rows: list[dict[str, str]], latest_run_id: str, now: d
     for row in rows:
         if row.get("run_id", "") != latest_run_id:
             continue
-        started = (
-            _parse_mt5_datetime(row.get("timestamp_local", ""))
-            or _parse_mt5_datetime(row.get("timestamp_utc", ""))
-            or _parse_mt5_datetime(row.get("timestamp_broker", ""))
-        )
+        started = _parse_mt5_datetime(row.get("timestamp_utc", ""))
         if started is None:
             return 0.0
-        return max((now.replace(tzinfo=None) - started).total_seconds() / 3600, 0.0)
+        started_utc = started.replace(tzinfo=timezone.utc)
+        return max((now - started_utc).total_seconds() / 3600, 0.0)
     return 0.0
 
 
@@ -179,11 +184,17 @@ def _normalize_code_freeze_started_at(value: str) -> str:
     return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def _code_freeze_hours(started_at: str) -> float:
+def _code_freeze_hours(started_at: str, now: datetime) -> float:
     started = _parse_iso_datetime(started_at)
     if started is None:
         return 0.0
-    return max((datetime.now(timezone.utc) - started).total_seconds() / 3600, 0.0)
+    return max((now - started).total_seconds() / 3600, 0.0)
+
+
+def _coerce_utc(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
 
 
 def _parse_iso_datetime(value: str) -> datetime | None:

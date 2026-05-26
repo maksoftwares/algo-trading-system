@@ -29,6 +29,39 @@ def test_weekend_and_stale_tick_rows_break_active_market_streak():
     assert summary.current_streak_bar_count == 0
 
 
+def test_restart_count_tracks_run_id_changes_inside_active_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.21 12:00:00", run_id="phase1-a"),
+        _row("2026.05.21 12:05:00", run_id="phase1-a"),
+        _row("2026.05.21 12:10:00", run_id="phase1-b"),
+        _row("2026.05.21 12:15:00", run_id="phase1-b"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        now=datetime(2026, 5, 21, 12, 20),
+    )
+
+    assert summary.current_streak_hours == 0.25
+    assert summary.restart_count_during_current_streak == 1
+    assert summary.current_streak_bar_count == 4
+
+
+def test_process_uptime_uses_timestamp_utc():
+    module = _load_module()
+    row = _row("2026.05.21 12:00:00")
+    row["timestamp_utc"] = "2026.05.21 08:00:00"
+    row["timestamp_local"] = "2026.05.21 20:00:00"
+
+    summary = module.calculate_soak_streak(
+        [row],
+        now=datetime(2026, 5, 21, 10, 0),
+    )
+
+    assert summary.process_uptime_streak_hours == 2.0
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -47,11 +80,12 @@ def _row(
     bar_time: str,
     session: str = "LONDON",
     execution_state: str = "EXECUTION_OK",
+    run_id: str = "phase1-dry-run-v0.6",
 ) -> dict[str, str]:
     return {
         "timestamp_local": bar_time,
         "timestamp_utc": bar_time,
-        "run_id": "phase1-dry-run-v0.6",
+        "run_id": run_id,
         "lifecycle_state": "DRY_RUN",
         "bar_time": bar_time,
         "session": session,

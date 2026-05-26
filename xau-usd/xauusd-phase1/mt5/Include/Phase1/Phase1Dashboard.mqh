@@ -25,7 +25,8 @@ public:
          + "\n";
       text += "Execution: " + Phase1ExecutionText(decision.execution_state) + "\n";
       text += "News: " + Phase1NewsText(decision.news_state) + "\n";
-      text += "Lifecycle: " + decision.expert_lifecycle_state + "\n";
+      text += "BR lifecycle: " + decision.br_lifecycle_state + "\n";
+      text += "SBR lifecycle: " + decision.sbr_lifecycle_state + "\n";
       text += "Magic namespace: " + (decision.magic_namespace_ok ? "ok" : "invalid") + "\n";
       text += "Server time: " + decision.server_time.status_text + "\n";
       text += "ATR14 M5: " + DoubleToString(decision.features.atr14_points, 2) + "\n";

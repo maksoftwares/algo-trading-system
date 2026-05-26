@@ -11,6 +11,7 @@ from pathlib import Path
 from analyze_phase1_soak import analyze_phase1_soak
 from append_phase1_soak_history import append_phase1_soak_history
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
+from generate_phase1_observer_parity_report import generate_phase1_observer_parity_report
 from generate_phase1_review_index import generate_phase1_review_index
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
@@ -127,6 +128,10 @@ def generate_phase1_bundle(
         root / "outputs" / "reports" / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md",
         root / "outputs" / "reports" / "PHASE2_PAPER_LEDGER_COLUMNS.csv",
     )
+    observer_parity = generate_phase1_observer_parity_report(
+        root,
+        root / "outputs" / "reports" / "PHASE1_OBSERVER_PARITY_REPORT.md",
+    )
     phase2_readiness = generate_phase2_readiness_report(
         root,
         root / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md",
@@ -170,6 +175,8 @@ def generate_phase1_bundle(
             "acceptance_report_path": str(acceptance.report_path),
             "review_index_status": review_index.status,
             "review_index_path": str(review_index.report_path),
+            "observer_parity_status": observer_parity.status,
+            "observer_parity_report_path": str(observer_parity.report_path),
             "phase2_readiness_status": phase2_readiness.status,
             "phase2_readiness_path": str(phase2_readiness.report_path),
             "status_summary_path": str(status_summary_path),
