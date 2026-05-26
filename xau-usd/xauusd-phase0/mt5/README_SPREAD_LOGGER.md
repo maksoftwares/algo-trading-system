@@ -14,6 +14,7 @@ InpFilePrefix=spread_log
 InpPrintToExpertsTab=false
 InpRolloverHourServer=22
 InpRolloverWindowMinutes=30
+InpMaxTickAgeSeconds=30
 ```
 
 ## Output
@@ -27,8 +28,10 @@ spread_log_{account}_{server}_{symbol}_{YYYYMMDD}.csv
 Expected columns:
 
 ```text
-broker_time,gmt_time,local_time,account,server,symbol,bid,ask,spread_price,spread_points,point,digits,session_label,is_rollover_window
+broker_time,gmt_time,local_time,tick_time,tick_time_msc,seconds_since_tick,tick_fresh,account,server,symbol,bid,ask,spread_price,spread_points,point,digits,session_label,is_rollover_window
 ```
+
+The analyzer only admits rows where `tick_fresh=true`, so stale quotes cannot silently contaminate the measured-cost model.
 
 The recommended Phase 1/Phase 2 prep setting is `InpUseCommonFiles=false`, which writes into the active MT5 Portable `MQL5/Files` directory. Then run:
 

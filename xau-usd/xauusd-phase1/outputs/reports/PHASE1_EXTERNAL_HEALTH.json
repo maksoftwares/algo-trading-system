@@ -1,7 +1,7 @@
 {
   "checks": [
     {
-      "evidence": "578 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
+      "evidence": "596 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
       "name": "decision_log_has_rows",
       "status": "PASS"
     },
@@ -16,9 +16,9 @@
       "status": "FAIL"
     },
     {
-      "evidence": "Latest row age 26.7 minute(s), limit 15.",
+      "evidence": "Latest row age 2.3 minute(s), limit 15.",
       "name": "latest_row_freshness",
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "evidence": "dry_run=true",
@@ -36,7 +36,7 @@
       "status": "PASS"
     }
   ],
-  "created_at_local": "2026-05-27T02:51:42.929391",
+  "created_at_local": "2026-05-27T04:57:18.218854",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "status": "FAIL",
   "status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"

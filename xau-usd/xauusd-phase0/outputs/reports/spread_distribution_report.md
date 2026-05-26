@@ -12,7 +12,7 @@
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 54003 | 50 | 75 | 180 |
+| global | all | all | XAUUSD | 54738 | 50 | 75 | 180 |
 
 ## Hourly Distribution
 
@@ -32,8 +32,8 @@
 | hour_utc | 19 | all | XAUUSD | 2880 | 50 | 75 | 75 |
 | hour_utc | 2 | all | XAUUSD | 1440 | 50 | 75 | 75 |
 | hour_utc | 20 | all | XAUUSD | 2410 | 50 | 75 | 75 |
-| hour_utc | 21 | all | XAUUSD | 1691 | 50 | 75 | 75 |
-| hour_utc | 22 | all | XAUUSD | 1439 | 50 | 95 | 180 |
+| hour_utc | 21 | all | XAUUSD | 2160 | 50 | 75 | 75 |
+| hour_utc | 22 | all | XAUUSD | 1705 | 50 | 180 | 180 |
 | hour_utc | 23 | all | XAUUSD | 1440 | 50 | 75 | 75 |
 | hour_utc | 3 | all | XAUUSD | 1440 | 50 | 75 | 75 |
 | hour_utc | 4 | all | XAUUSD | 1440 | 50 | 75 | 75 |
@@ -51,13 +51,13 @@
 | day_of_week_utc | Monday | all | XAUUSD | 17280 | 50 | 75 | 180 |
 | day_of_week_utc | Saturday | all | XAUUSD | 5838 | 50 | 50 | 50 |
 | day_of_week_utc | Sunday | all | XAUUSD | 9877 | 50 | 50 | 180 |
-| day_of_week_utc | Tuesday | all | XAUUSD | 15370 | 50 | 75 | 75 |
+| day_of_week_utc | Tuesday | all | XAUUSD | 16105 | 50 | 75 | 180 |
 
 ## Rollover Distribution
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| rollover | all | all | XAUUSD | 1463 | 50 | 95 | 180 |
+| rollover | all | all | XAUUSD | 2090 | 50 | 180 | 180 |
 
 ## News-Window Distribution
 

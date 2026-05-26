@@ -177,6 +177,44 @@ def test_runtime_health_tolerates_weekend_reopen_bar_gap(tmp_path):
     assert any(check.name == "unique_bar_gaps" and check.status == "PASS" for check in output.checks)
 
 
+def test_runtime_health_tolerates_configured_daily_market_break_gap(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv")
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path, minutes=(0, 5))
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    rows[0]["timestamp_broker"] = "2026.05.25 18:25:00"
+    rows[0]["timestamp_utc"] = "2026.05.25 18:25:00"
+    rows[0]["timestamp_local"] = "2026.05.25 18:25:00"
+    rows[0]["bar_time"] = "2026.05.25 18:25:00"
+    rows[1]["timestamp_broker"] = "2026.05.25 22:00:00"
+    rows[1]["timestamp_utc"] = "2026.05.25 22:00:00"
+    rows[1]["timestamp_local"] = "2026.05.25 22:00:00"
+    rows[1]["bar_time"] = "2026.05.25 22:00:00"
+    rows[1]["session"] = "NEW_YORK"
+    rows[1]["execution_state"] = "EXECUTION_OK"
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.generate_phase1_runtime_health_report(
+        files_dir,
+        tmp_path / "runtime_health.md",
+        now=datetime(2026, 5, 25, 22, 2),
+    )
+
+    report = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "PASS"
+    assert "Expected market-break gaps: 1" in report
+    assert any(check.name == "unique_bar_gaps" and check.status == "PASS" for check in output.checks)
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:

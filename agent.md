@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-25
+Last updated: 2026-05-26
 
 ## Workspace
 
@@ -25,12 +25,15 @@ Last updated: 2026-05-25
 
 ## Current State
 
+- Current measured-cost decision: `MEASURED_COST_MODEL.md` has enough passive-spread coverage to evaluate, but `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` is `FAIL`. Treat `breakout_retest` as `COST_SUSPENDED`; it may remain in Phase 1 telemetry, but it is not Phase 2 paper-mode execution eligible unless a cost-conversion defect is found, fixed, and the corrected revalidation passes.
+- Phase 2 paper-mode implementation is blocked by failed cost evidence, not merely pending cost evidence. Continue Phase 1 dry-run and passive spread logging; do not add broker-side execution.
+- New review blockers being addressed: schema-versioned Phase 1 log rotation, expected market-break classification, measured-cost diagnostic/audit/delta reports, passive spread quote-freshness filtering, cost-suspended lifecycle docs, and magic-number external registry/readiness gates.
 - 2026-05-23 resume after planned one-day shutdown is complete.
   - `C:\MT5PortableGoldMission\terminal64.exe` is running with `/portable /config:C:\MT5PortableGoldMission\Config\phase1_dry_run_startup.ini`.
   - `C:\MT5PortableSpreadLogger\terminal64.exe` is running with `/portable /config:C:\MT5PortableSpreadLogger\Config\phase0_spread_logger_startup.ini`.
   - Phase 1 startup now reports `server_time_status=CLOCK_OK` after changing the expected local UTC offset input from whole hours to minutes for India Standard Time (`330` minutes).
   - Weekend/offline resume gaps are tolerated by the Phase 1 verifier, soak analyzer, runtime-health report, and external-health check when the latest row is a stale weekend market-break row.
-  - Latest periodic check status after restart: PASS. Phase 2 readiness remains PENDING, not FAIL, because five-day soak, measured-cost model, measured-cost revalidation, review index, and owner approval are still open.
+  - Historical periodic-check note: earlier Phase 2 readiness was PENDING while measured-cost evidence was incomplete. Current status must be read from generated reports; after measured-cost revalidation FAIL, Phase 2 implementation is blocked by failed cost evidence.
   - Latest refreshed soak snapshot: 56 decision rows, latest M5 bar `2026.05.22 20:55:00`, soak progress `8.26%`, Phase 1 acceptance `PENDING`.
   - Latest measured cost model snapshot: `11435` observed spread rows across `2` observed days; still `PENDING` until 5 observed days are available.
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.
@@ -225,7 +228,7 @@ Last updated: 2026-05-25
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
 - Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING with 11435 rows over 2 observed days; it still needs 5 observed days.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
-- Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until measured cost model status is PASS.
+- Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status FAIL in the current review; this is a hard Phase 2 paper-mode blocker unless the cost audit finds and fixes a conversion defect.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
 - Phase 1 canonical reporting policy is tracked in `xau-usd\xauusd-phase1\docs\REPORTING_POLICY.md`.
 - Dedicated Phase 1 CI workflow: `.github\workflows\phase1.yml`.
@@ -239,7 +242,7 @@ Last updated: 2026-05-25
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.
 - Phase 2 readiness generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_readiness_report.py`.
 - Latest Phase 2 readiness report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md`.
-- Latest Phase 2 readiness status: PENDING. Phase 2 prep spec, cost reporting policy, fixed-notional reporting, Phase 1 summary health, latest dry-run boundary, and would-signal evidence pass; measured cost model, measured-cost revalidation, Phase 1 acceptance, Phase 1 review index, five-day soak completion, and owner approval remain pending.
+- Latest Phase 2 readiness status: FAIL while measured-cost revalidation is FAIL. Phase 2 prep may continue, but paper-mode implementation remains blocked.
 - Phase 1 deploy/compile helper: `xau-usd\xauusd-phase1\scripts\deploy_phase1_mt5.py`.
 - Latest helper run deployed 41 files to `C:\MT5PortableGoldMission\MQL5` plus the mapped terminal data MQL5 root, and MetaEditor compile status was PASS.
 - Hourly automation `phase1-mt5-soak-check` runs the Phase 1 runtime checks against `C:\MT5PortableGoldMission\MQL5\Files` and measured-cost checks against `C:\MT5PortableSpreadLogger\MQL5\Files` through `--spread-files-dir`.

@@ -2,16 +2,33 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from pathlib import Path
 
-from atomic_write import atomic_write_text
+try:
+    from atomic_write import atomic_write_text
+except ModuleNotFoundError:  # pragma: no cover - supports direct importlib test loading
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from atomic_write import atomic_write_text
 
 
 DECISION_LOG = "decision_log.csv"
 STARTUP_LOG = "startup_log.csv"
 SHUTDOWN_LOG = "shutdown_log.csv"
+DEFAULT_EXPECTED_BREAKS = Path(__file__).resolve().parents[1] / "PHASE1_EXPECTED_MARKET_BREAKS.yaml"
+WEEKDAY_INDEX = {
+    "MONDAY": 0,
+    "TUESDAY": 1,
+    "WEDNESDAY": 2,
+    "THURSDAY": 3,
+    "FRIDAY": 4,
+    "SATURDAY": 5,
+    "SUNDAY": 6,
+}
 
 DECISION_REQUIRED_COLUMNS = (
     "timestamp_broker",
@@ -19,6 +36,8 @@ DECISION_REQUIRED_COLUMNS = (
     "timestamp_local",
     "run_id",
     "lifecycle_state",
+    "decision_schema_version",
+    "decision_schema_hash",
     "symbol",
     "bar_time",
     "session",
@@ -79,6 +98,11 @@ STARTUP_REQUIRED_COLUMNS = (
     "dry_run_only",
     "magic_namespace_ok",
     "server_time_status",
+    "decision_schema_version",
+    "decision_schema_hash",
+    "decision_schema_rotation_performed",
+    "decision_schema_rotation_reason",
+    "decision_schema_archive_path",
 )
 
 SHUTDOWN_REQUIRED_COLUMNS = (
@@ -92,6 +116,9 @@ SHUTDOWN_REQUIRED_COLUMNS = (
     "last_decision_write_time",
     "lifecycle_state",
 )
+
+DECISION_SCHEMA_VERSION = "phase1_decision_schema_v2"
+EXPECTED_DECISION_SCHEMA_HASH = hashlib.sha256(",".join(DECISION_REQUIRED_COLUMNS).encode("utf-8")).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -126,7 +153,9 @@ def verify_phase1_logs(files_dir: Path, report_path: Path | None = None) -> LogV
         _check_file("startup_log_exists", startup_path),
         _check_optional_file("shutdown_log_exists", shutdown_path),
         _check_columns("decision_schema", decision_columns, DECISION_REQUIRED_COLUMNS),
+        _check_decision_schema_hash(decision_columns, decision_rows),
         _check_columns("startup_schema", startup_columns, STARTUP_REQUIRED_COLUMNS),
+        _check_startup_schema_rotation(startup_rows),
         _check_columns("shutdown_schema", shutdown_columns, SHUTDOWN_REQUIRED_COLUMNS)
         if shutdown_path.exists()
         else LogCheck("shutdown_schema", "WARN", "No shutdown log exists yet."),
@@ -179,6 +208,74 @@ def _check_columns(name: str, columns: tuple[str, ...], required: tuple[str, ...
     if missing:
         return LogCheck(name, "FAIL", "Missing column(s): " + ", ".join(missing))
     return LogCheck(name, "PASS", f"Required columns present ({len(required)} checked).")
+
+
+def _check_decision_schema_hash(columns: tuple[str, ...], rows: list[dict[str, str]]) -> LogCheck:
+    observed_contract_columns = tuple(column for column in DECISION_REQUIRED_COLUMNS if column in columns)
+    observed_hash = hashlib.sha256(",".join(observed_contract_columns).encode("utf-8")).hexdigest() if columns else ""
+    if observed_hash != EXPECTED_DECISION_SCHEMA_HASH:
+        return LogCheck(
+            "decision_schema_hash",
+            "FAIL",
+            (
+                f"schema_version={_latest_schema_version(rows) or 'missing'}; "
+                f"expected_schema_hash={EXPECTED_DECISION_SCHEMA_HASH}; "
+                f"observed_schema_hash={observed_hash or 'missing'}."
+            ),
+        )
+    bad_versions = [row.get("run_id", "") for row in rows if row.get("decision_schema_version", "") != DECISION_SCHEMA_VERSION]
+    bad_hashes = [row.get("run_id", "") for row in rows if row.get("decision_schema_hash", "") != EXPECTED_DECISION_SCHEMA_HASH]
+    if bad_versions or bad_hashes:
+        return LogCheck(
+            "decision_schema_hash",
+            "FAIL",
+            (
+                f"schema_version={_latest_schema_version(rows) or 'missing'}; "
+                f"expected_schema_hash={EXPECTED_DECISION_SCHEMA_HASH}; "
+                f"observed_schema_hash={observed_hash}; "
+                f"rows_with_bad_version={len(bad_versions)}; rows_with_bad_hash={len(bad_hashes)}."
+            ),
+        )
+    return LogCheck(
+        "decision_schema_hash",
+        "PASS",
+        (
+            f"schema_version={DECISION_SCHEMA_VERSION}; "
+            f"expected_schema_hash={EXPECTED_DECISION_SCHEMA_HASH}; observed_schema_hash={observed_hash}."
+        ),
+    )
+
+
+def _check_startup_schema_rotation(rows: list[dict[str, str]]) -> LogCheck:
+    if not rows:
+        return LogCheck("decision_schema_rotation", "FAIL", "No startup rows found.")
+    latest = rows[-1]
+    performed = latest.get("decision_schema_rotation_performed", "")
+    reason = latest.get("decision_schema_rotation_reason", "")
+    archive_path = latest.get("decision_schema_archive_path", "")
+    schema_hash = latest.get("decision_schema_hash", "")
+    if schema_hash != EXPECTED_DECISION_SCHEMA_HASH:
+        return LogCheck(
+            "decision_schema_rotation",
+            "FAIL",
+            (
+                f"Startup schema hash is {schema_hash or 'missing'}; "
+                f"expected_schema_hash={EXPECTED_DECISION_SCHEMA_HASH}."
+            ),
+        )
+    if performed.lower() == "true":
+        return LogCheck(
+            "decision_schema_rotation",
+            "PASS",
+            f"rotation_performed=true; reason={reason or 'unknown'}; archive={archive_path or 'missing'}.",
+        )
+    return LogCheck("decision_schema_rotation", "PASS", "rotation_performed=false; current schema already matched.")
+
+
+def _latest_schema_version(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return ""
+    return rows[-1].get("decision_schema_version", "")
 
 
 def _check_duplicate_headers(name: str, path: Path) -> LogCheck:
@@ -345,6 +442,8 @@ def _is_expected_market_break(
         return True
     if _spans_weekend_market_break(left, right):
         return True
+    if _is_configured_market_break(left, right):
+        return True
     if minutes > 90:
         return False
     right_session = right_row.get("session", "")
@@ -378,6 +477,78 @@ def _spans_weekend_market_break(left: datetime, right: datetime) -> bool:
             return True
         day += timedelta(days=1)
     return False
+
+
+def _is_configured_market_break(left: datetime, right: datetime, path: Path = DEFAULT_EXPECTED_BREAKS) -> bool:
+    minutes = int((right - left).total_seconds() / 60)
+    for item in _load_expected_market_breaks(path):
+        max_gap = _to_int(item.get("max_gap_minutes")) or 0
+        if max_gap <= 0 or minutes > max_gap:
+            continue
+        weekdays = _weekday_indexes(item.get("weekdays", ""))
+        if weekdays and left.weekday() not in weekdays:
+            continue
+        start = _parse_time(item.get("start_utc", ""))
+        end = _parse_time(item.get("end_utc", ""))
+        if start is None or end is None:
+            continue
+        start_at = datetime.combine(left.date(), start)
+        end_at = datetime.combine(left.date(), end)
+        if end_at <= start_at:
+            end_at += timedelta(days=1)
+        if left <= start_at and right >= end_at:
+            return True
+    return False
+
+
+def _load_expected_market_breaks(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+    for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("- label:"):
+            if current:
+                rows.append(current)
+            current = {"label": _yaml_value(line.split(":", 1)[1])}
+            continue
+        if current is not None and ":" in line:
+            key, value = line.split(":", 1)
+            current[key.strip()] = _yaml_value(value)
+    if current:
+        rows.append(current)
+    return rows
+
+
+def _yaml_value(value: str) -> str:
+    return value.strip().strip('"').strip("'")
+
+
+def _weekday_indexes(value: str) -> set[int]:
+    cleaned = value.strip().strip("[]")
+    return {
+        WEEKDAY_INDEX[item.strip().upper()]
+        for item in cleaned.split(",")
+        if item.strip().upper() in WEEKDAY_INDEX
+    }
+
+
+def _parse_time(value: str) -> time | None:
+    try:
+        hour, minute = value.split(":", 1)
+        return time(int(hour), int(minute))
+    except (ValueError, TypeError):
+        return None
+
+
+def _to_int(value: object) -> int | None:
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return None
 
 
 def _overall_status(checks: list[LogCheck]) -> str:

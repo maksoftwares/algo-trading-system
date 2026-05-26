@@ -9,6 +9,7 @@ input string InpFilePrefix = "spread_log";
 input bool   InpPrintToExpertsTab = false;
 input int    InpRolloverHourServer = 22;
 input int    InpRolloverWindowMinutes = 30;
+input int    InpMaxTickAgeSeconds = 30;
 
 string g_symbol = "";
 string g_current_date = "";
@@ -50,6 +51,10 @@ void OnTimer()
    datetime broker_time = TimeCurrent();
    datetime gmt_time = TimeGMT();
    datetime local_time = TimeLocal();
+   datetime tick_time = (datetime)tick.time;
+   long tick_time_msc = tick.time_msc;
+   int seconds_since_tick = tick_time > 0 ? (int)(broker_time - tick_time) : 2147483647;
+   bool tick_fresh = seconds_since_tick >= 0 && seconds_since_tick <= InpMaxTickAgeSeconds;
    double point = SymbolInfoDouble(g_symbol, SYMBOL_POINT);
    int digits = (int)SymbolInfoInteger(g_symbol, SYMBOL_DIGITS);
    double spread_price = tick.ask - tick.bid;
@@ -79,6 +84,10 @@ void OnTimer()
          "broker_time",
          "gmt_time",
          "local_time",
+         "tick_time",
+         "tick_time_msc",
+         "seconds_since_tick",
+         "tick_fresh",
          "account",
          "server",
          "symbol",
@@ -98,6 +107,10 @@ void OnTimer()
       TimeToString(broker_time, TIME_DATE | TIME_SECONDS),
       TimeToString(gmt_time, TIME_DATE | TIME_SECONDS),
       TimeToString(local_time, TIME_DATE | TIME_SECONDS),
+      TimeToString(tick_time, TIME_DATE | TIME_SECONDS),
+      (string)tick_time_msc,
+      (string)seconds_since_tick,
+      tick_fresh ? "true" : "false",
       (string)AccountInfoInteger(ACCOUNT_LOGIN),
       AccountInfoString(ACCOUNT_SERVER),
       g_symbol,
@@ -114,7 +127,7 @@ void OnTimer()
 
    TrackRowsToday(gmt_time);
    g_rows_today++;
-   UpdateDashboard(gmt_time, tick.bid, tick.ask, spread_points);
+   UpdateDashboard(gmt_time, tick.bid, tick.ask, spread_points, tick_fresh, seconds_since_tick);
 }
 
 void TrackRowsToday(datetime gmt_time)
@@ -179,8 +192,9 @@ string SessionLabel(datetime gmt_time, bool rollover)
    return "OFF_HOURS";
 }
 
-void UpdateDashboard(datetime gmt_time, double bid, double ask, double spread_points)
+void UpdateDashboard(datetime gmt_time, double bid, double ask, double spread_points, bool tick_fresh, int seconds_since_tick)
 {
+   string tick_fresh_text = tick_fresh ? "true" : "false";
    Comment(
       "Passive Spread Logger\n",
       "Symbol: ", g_symbol, "\n",
@@ -189,6 +203,7 @@ void UpdateDashboard(datetime gmt_time, double bid, double ask, double spread_po
       "Last log: ", TimeToString(gmt_time, TIME_DATE | TIME_SECONDS), "\n",
       "Bid/Ask: ", DoubleToString(bid, _Digits), "/", DoubleToString(ask, _Digits), "\n",
       "Spread points: ", DoubleToString(spread_points, 2), "\n",
+      "Tick fresh: ", tick_fresh_text, " (", (string)seconds_since_tick, "s)\n",
       "Rows written today: ", (string)g_rows_today, "\n",
       "NO TRADING FUNCTIONS PRESENT"
    );

@@ -130,6 +130,8 @@ def test_phase1_decision_logger_has_required_columns():
         "timestamp_utc",
         "timestamp_local",
         "session",
+        "decision_schema_version",
+        "decision_schema_hash",
         "regime",
         "risk_state",
         "requested_risk_pct",
@@ -169,10 +171,14 @@ def test_phase1_startup_and_shutdown_loggers_exist():
 
     assert "bool WriteStartup" in text
     assert "bool WriteShutdown" in text
+    assert "EnsureDecisionLogSchema" in text
+    assert "decision_schema_rotation_performed" in text
+    assert "decision_schema_archive_path" in text
 
 
 def test_phase1_magic_validation_has_reserved_range_and_collision_checks():
     text = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Magic.mqh").read_text(encoding="utf-8")
+    registry = (ROOT / "docs" / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md").read_text(encoding="utf-8")
 
     assert "ReservedRangeMin" in text
     assert "ReservedRangeMax" in text
@@ -180,6 +186,21 @@ def test_phase1_magic_validation_has_reserved_range_and_collision_checks():
     assert "ValidateExternalCollisions" in text
     assert "PositionsTotal" in text
     assert "OrdersTotal" in text
+    assert "910000-910999" in registry
+    assert "V61" in registry
+    assert "V77" in registry
+    assert "V80" in registry
+    assert "V85" in registry
+    assert "account isolation" in registry
+
+
+def test_breakout_retest_lifecycle_is_cost_suspended():
+    types = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Types.mqh").read_text(encoding="utf-8")
+    lifecycle = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Lifecycle.mqh").read_text(encoding="utf-8")
+
+    assert "PHASE1_EXPERT_COST_SUSPENDED" in types
+    assert 'return "COST_SUSPENDED"' in types
+    assert "PHASE1_EXPERT_COST_SUSPENDED" in lifecycle
 
 
 def test_phase1_safety_audit_ignores_docs():

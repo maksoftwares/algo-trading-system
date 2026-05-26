@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from pathlib import Path
 
 
@@ -12,6 +12,16 @@ STARTUP_LOG = "startup_log.csv"
 SHUTDOWN_LOG = "shutdown_log.csv"
 DEFAULT_MAX_FRESH_MINUTES = 15
 DEFAULT_REPORT = Path("outputs") / "reports" / "PHASE1_RUNTIME_HEALTH_REPORT.md"
+DEFAULT_EXPECTED_BREAKS = Path(__file__).resolve().parents[1] / "PHASE1_EXPECTED_MARKET_BREAKS.yaml"
+WEEKDAY_INDEX = {
+    "MONDAY": 0,
+    "TUESDAY": 1,
+    "WEDNESDAY": 2,
+    "THURSDAY": 3,
+    "FRIDAY": 4,
+    "SATURDAY": 5,
+    "SUNDAY": 6,
+}
 
 
 @dataclass(frozen=True)
@@ -362,6 +372,8 @@ def _is_expected_market_break(
         return True
     if _spans_weekend_market_break(left, right):
         return True
+    if _is_configured_market_break(left, right):
+        return True
     if minutes > 90:
         return False
     right_session = right_row.get("session", "")
@@ -395,6 +407,78 @@ def _spans_weekend_market_break(left: datetime, right: datetime) -> bool:
             return True
         day += timedelta(days=1)
     return False
+
+
+def _is_configured_market_break(left: datetime, right: datetime, path: Path = DEFAULT_EXPECTED_BREAKS) -> bool:
+    minutes = int((right - left).total_seconds() / 60)
+    for item in _load_expected_market_breaks(path):
+        max_gap = _to_int(item.get("max_gap_minutes")) or 0
+        if max_gap <= 0 or minutes > max_gap:
+            continue
+        weekdays = _weekday_indexes(item.get("weekdays", ""))
+        if weekdays and left.weekday() not in weekdays:
+            continue
+        start = _parse_time(item.get("start_utc", ""))
+        end = _parse_time(item.get("end_utc", ""))
+        if start is None or end is None:
+            continue
+        start_at = datetime.combine(left.date(), start)
+        end_at = datetime.combine(left.date(), end)
+        if end_at <= start_at:
+            end_at += timedelta(days=1)
+        if left <= start_at and right >= end_at:
+            return True
+    return False
+
+
+def _load_expected_market_breaks(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+    for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("- label:"):
+            if current:
+                rows.append(current)
+            current = {"label": _yaml_value(line.split(":", 1)[1])}
+            continue
+        if current is not None and ":" in line:
+            key, value = line.split(":", 1)
+            current[key.strip()] = _yaml_value(value)
+    if current:
+        rows.append(current)
+    return rows
+
+
+def _yaml_value(value: str) -> str:
+    return value.strip().strip('"').strip("'")
+
+
+def _weekday_indexes(value: str) -> set[int]:
+    cleaned = value.strip().strip("[]")
+    return {
+        WEEKDAY_INDEX[item.strip().upper()]
+        for item in cleaned.split(",")
+        if item.strip().upper() in WEEKDAY_INDEX
+    }
+
+
+def _parse_time(value: str) -> time | None:
+    try:
+        hour, minute = value.split(":", 1)
+        return time(int(hour), int(minute))
+    except (ValueError, TypeError):
+        return None
+
+
+def _to_int(value: object) -> int | None:
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return None
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

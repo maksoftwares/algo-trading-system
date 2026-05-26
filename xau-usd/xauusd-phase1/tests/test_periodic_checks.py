@@ -32,6 +32,7 @@ def test_periodic_checks_support_separate_spread_log_directory():
 
     assert "--spread-files-dir" in script
     assert "input_dir=spread_files_dir" in script
+    assert "SPREAD_LOG_FRESHNESS_SCHEMA_WARNING.md" in script
 
 
 def test_periodic_checks_break_phase1_phase2_report_cycle():

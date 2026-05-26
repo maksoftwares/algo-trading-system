@@ -1,6 +1,6 @@
 # Phase 2 Cost Measurement Protocol
 
-Last updated: 2026-05-23
+Last updated: 2026-05-26
 
 Phase 2 is a paper-mode cost-measurement experiment. It is not a profit-confirmation phase and it does not authorize live capital.
 
@@ -17,14 +17,17 @@ Current modeled baseline:
 | Gross expectancy estimate | 0.5115R |
 | Cost consumption | 63.09% |
 
-The modeled cost is provisional until the measured cost model and measured-cost revalidation reports both pass.
+The measured cost model now has enough passive-spread evidence to evaluate. Current measured-cost revalidation fails, so `breakout_retest` is cost-suspended unless the audit finds and corrects a conversion defect.
 
 ## Required Inputs
 
 | Input | Required status |
 | --- | --- |
 | `MEASURED_COST_MODEL.md` | PASS |
-| `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` | PASS |
+| `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` | PASS after any required correction |
+| `MEASURED_COST_ASSUMPTION_DELTA.md` | PASS |
+| `BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md` | Reviewed |
+| `BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` | Reviewed |
 | Phase 1 five-trading-day soak | PASS |
 | Phase 1 uninterrupted 72-hour active-market streak | PASS |
 | Phase 1 observer parity report | PASS |
@@ -84,5 +87,6 @@ This rule applies to the family, not only one timeframe flavor. `breakout_retest
 | Net expectancy between +0.00R and +0.15R | Suspend family; do not live-pilot. |
 | Net expectancy <= +0.00R | Retire or redesign as a new locked hypothesis. |
 | Cost evidence incomplete | Remain in Phase 1/2 preparation. |
+| Cost revalidation fails | Keep the family cost-suspended; do not implement paper mode. |
 
 No filter may be added to rescue the result inside the same hypothesis version.

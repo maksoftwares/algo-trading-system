@@ -7,6 +7,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DECISION_SCHEMA_VERSION = "phase1_decision_schema_v2"
+DECISION_SCHEMA_HASH = "ee45252876eff387cd75ddbd350230b15872b18316f0508a24a4a19dcc657e60"
 
 
 def test_phase1_log_verifier_passes_complete_restart_sample(tmp_path):
@@ -54,6 +56,28 @@ def test_phase1_log_verifier_fails_permission_true(tmp_path):
 
     assert output.status == "FAIL"
     assert any(check.name == "trade_permission_locked" and check.status == "FAIL" for check in output.checks)
+
+
+def test_phase1_log_verifier_fails_stale_decision_schema(tmp_path):
+    module = _load_log_verifier()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv", rows=2)
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    fieldnames = [field for field in rows[0].keys() if field not in {"decision_schema_version", "decision_schema_hash"}]
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.verify_phase1_logs(files_dir, tmp_path / "report.md")
+
+    assert output.status == "FAIL"
+    assert any(check.name == "decision_schema_hash" and check.status == "FAIL" for check in output.checks)
 
 
 def test_phase1_log_verifier_allows_restart_same_bar(tmp_path):
@@ -153,6 +177,49 @@ def test_phase1_log_verifier_tolerates_weekend_reopen_gap(tmp_path):
     )
 
 
+def test_phase1_log_verifier_tolerates_configured_daily_market_break_gap(tmp_path):
+    module = _load_log_verifier()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_startup_log(files_dir / "startup_log.csv", rows=2)
+    _write_shutdown_log(files_dir / "shutdown_log.csv")
+    decision_path = files_dir / "decision_log.csv"
+    _write_decision_log(decision_path)
+    with decision_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+        fieldnames = rows[0].keys()
+    rows[0]["timestamp_broker"] = "2026.05.25 18:25:00"
+    rows[0]["timestamp_utc"] = "2026.05.25 18:25:00"
+    rows[0]["timestamp_local"] = "2026.05.25 18:25:00"
+    rows[0]["bar_time"] = "2026.05.25 18:25:00"
+    rows[1]["timestamp_broker"] = "2026.05.25 22:00:00"
+    rows[1]["timestamp_utc"] = "2026.05.25 22:00:00"
+    rows[1]["timestamp_local"] = "2026.05.25 22:00:00"
+    rows[1]["bar_time"] = "2026.05.25 22:00:00"
+    rows[1]["session"] = "NEW_YORK"
+    rows[1]["execution_state"] = "EXECUTION_OK"
+    for index, row in enumerate(rows[2:], start=1):
+        minute = index * 5
+        row["timestamp_broker"] = f"2026.05.25 22:{minute:02d}:00"
+        row["timestamp_utc"] = f"2026.05.25 22:{minute:02d}:00"
+        row["timestamp_local"] = f"2026.05.25 22:{minute:02d}:00"
+        row["bar_time"] = f"2026.05.25 22:{minute:02d}:00"
+        row["session"] = "NEW_YORK"
+        row["execution_state"] = "EXECUTION_OK"
+    with decision_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    output = module.verify_phase1_logs(files_dir, tmp_path / "report.md")
+
+    assert output.status == "PASS"
+    assert any(
+        check.name == "bar_cadence" and check.status == "PASS" and "tolerated gaps" in check.message
+        for check in output.checks
+    )
+
+
 def _load_log_verifier():
     path = ROOT / "scripts" / "verify_phase1_logs.py"
     spec = importlib.util.spec_from_file_location("verify_phase1_logs", path)
@@ -184,6 +251,11 @@ def _write_startup_log(path: Path, rows: int) -> None:
         "broker_utc_offset_seconds",
         "local_utc_offset_seconds",
         "local_clock_drift_seconds",
+        "decision_schema_version",
+        "decision_schema_hash",
+        "decision_schema_rotation_performed",
+        "decision_schema_rotation_reason",
+        "decision_schema_archive_path",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -209,6 +281,11 @@ def _write_startup_log(path: Path, rows: int) -> None:
                     "broker_utc_offset_seconds": "4",
                     "local_utc_offset_seconds": "14400",
                     "local_clock_drift_seconds": "0",
+                    "decision_schema_version": DECISION_SCHEMA_VERSION,
+                    "decision_schema_hash": DECISION_SCHEMA_HASH,
+                    "decision_schema_rotation_performed": "false",
+                    "decision_schema_rotation_reason": "none",
+                    "decision_schema_archive_path": "",
                 }
             )
 
@@ -250,6 +327,8 @@ def _write_decision_log(path: Path, force_permission: str = "false") -> None:
         "timestamp_local",
         "run_id",
         "lifecycle_state",
+        "decision_schema_version",
+        "decision_schema_hash",
         "symbol",
         "bid",
         "ask",
@@ -370,6 +449,8 @@ def _decision_row(
         "timestamp_local": "2026.05.21 16:00:00",
         "run_id": run_id,
         "lifecycle_state": "DRY_RUN",
+        "decision_schema_version": DECISION_SCHEMA_VERSION,
+        "decision_schema_hash": DECISION_SCHEMA_HASH,
         "symbol": "XAUUSD",
         "bid": "4500.00",
         "ask": "4500.50",

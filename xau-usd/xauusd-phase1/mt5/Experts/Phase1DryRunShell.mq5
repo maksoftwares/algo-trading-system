@@ -69,6 +69,11 @@ int OnInit()
    }
 
    g_logger.Configure(InpDecisionLogFileName, InpStartupLogFileName, InpShutdownLogFileName);
+   if(!g_logger.EnsureDecisionLogSchema())
+   {
+      Print("Phase1DryRunShell refused to start because decision-log schema rotation failed.");
+      return INIT_FAILED;
+   }
    g_risk_gate.Configure(
       InpMaxSpreadPoints,
       InpMaxRiskPct,
@@ -250,6 +255,8 @@ string Phase1BlockReason(const Phase1Decision &decision, const Phase1Signal &sig
 {
    if(!decision.magic_namespace_ok)
       return "magic_namespace_invalid";
+   if(signal.expert_name == "breakout_retest" && decision.br_lifecycle_state == "COST_SUSPENDED")
+      return "COST_SUSPENDED";
    if(!decision.server_time.clock_ok)
       return decision.server_time.status_text;
    if(decision.news_state != PHASE1_NEWS_NO_RISK)

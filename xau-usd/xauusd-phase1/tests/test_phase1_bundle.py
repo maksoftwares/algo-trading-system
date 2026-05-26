@@ -10,6 +10,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DECISION_SCHEMA_VERSION = "phase1_decision_schema_v2"
+DECISION_SCHEMA_HASH = "ee45252876eff387cd75ddbd350230b15872b18316f0508a24a4a19dcc657e60"
 
 
 def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
@@ -122,6 +124,10 @@ def _write_project_shell(project: Path) -> None:
     )
     (project / "docs" / "PHASE2_OPERATIONS_PREP.md").write_text(
         "External Health Monitor Spec\nDisaster Recovery Runbook\nCapital Allocation Ladder\n",
+        encoding="utf-8",
+    )
+    (project / "docs" / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md").write_text(
+        "910000-910999\nV61\nV77\nV80\nV85\naccount isolation\ncross-EA collision plan\n",
         encoding="utf-8",
     )
     (project / "mt5" / "README.md").write_text("mt5\n", encoding="utf-8")
@@ -246,6 +252,11 @@ def _write_startup_log(path: Path) -> None:
         "dry_run_only",
         "magic_namespace_ok",
         "server_time_status",
+        "decision_schema_version",
+        "decision_schema_hash",
+        "decision_schema_rotation_performed",
+        "decision_schema_rotation_reason",
+        "decision_schema_archive_path",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -261,6 +272,11 @@ def _write_startup_log(path: Path) -> None:
                     "dry_run_only": "true",
                     "magic_namespace_ok": "true",
                     "server_time_status": "CLOCK_OK",
+                    "decision_schema_version": DECISION_SCHEMA_VERSION,
+                    "decision_schema_hash": DECISION_SCHEMA_HASH,
+                    "decision_schema_rotation_performed": "false",
+                    "decision_schema_rotation_reason": "none",
+                    "decision_schema_archive_path": "",
                 }
             )
 
@@ -302,6 +318,8 @@ def _write_decision_log(path: Path) -> None:
         "timestamp_local",
         "run_id",
         "lifecycle_state",
+        "decision_schema_version",
+        "decision_schema_hash",
         "symbol",
         "bar_time",
         "session",
@@ -359,6 +377,8 @@ def _write_decision_log(path: Path) -> None:
             "timestamp_local": "2026.05.21 16:00:00",
             "run_id": "phase1-dry-run-v0.4",
             "lifecycle_state": "DRY_RUN",
+            "decision_schema_version": DECISION_SCHEMA_VERSION,
+            "decision_schema_hash": DECISION_SCHEMA_HASH,
             "symbol": "XAUUSD",
             "bar_time": "2026.05.21 12:00:00",
             "session": "LONDON",
@@ -387,6 +407,8 @@ def _write_decision_log(path: Path) -> None:
             "timestamp_local": "2026.05.21 16:05:00",
             "run_id": "phase1-dry-run-v0.4-daily-lock-test",
             "lifecycle_state": "DRY_RUN",
+            "decision_schema_version": DECISION_SCHEMA_VERSION,
+            "decision_schema_hash": DECISION_SCHEMA_HASH,
             "symbol": "XAUUSD",
             "bar_time": "2026.05.21 12:05:00",
             "session": "LONDON",
@@ -415,6 +437,8 @@ def _write_decision_log(path: Path) -> None:
             "timestamp_local": "2026.05.21 16:10:00",
             "run_id": "phase1-dry-run-v0.4-weekly-lock-test",
             "lifecycle_state": "DRY_RUN",
+            "decision_schema_version": DECISION_SCHEMA_VERSION,
+            "decision_schema_hash": DECISION_SCHEMA_HASH,
             "symbol": "XAUUSD",
             "bar_time": "2026.05.21 12:10:00",
             "session": "LONDON",
@@ -443,6 +467,8 @@ def _write_decision_log(path: Path) -> None:
             "timestamp_local": "2026.05.21 16:15:00",
             "run_id": "phase1-dry-run-v0.4-monthly-lock-test",
             "lifecycle_state": "DRY_RUN",
+            "decision_schema_version": DECISION_SCHEMA_VERSION,
+            "decision_schema_hash": DECISION_SCHEMA_HASH,
             "symbol": "XAUUSD",
             "bar_time": "2026.05.21 12:15:00",
             "session": "LONDON",
@@ -471,6 +497,8 @@ def _write_decision_log(path: Path) -> None:
             "timestamp_local": "2026.05.21 16:20:00",
             "run_id": "phase1-dry-run-v0.4-manual-lock-test",
             "lifecycle_state": "DRY_RUN",
+            "decision_schema_version": DECISION_SCHEMA_VERSION,
+            "decision_schema_hash": DECISION_SCHEMA_HASH,
             "symbol": "XAUUSD",
             "bar_time": "2026.05.21 12:20:00",
             "session": "LONDON",

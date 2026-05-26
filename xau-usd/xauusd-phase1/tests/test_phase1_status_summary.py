@@ -9,6 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DECISION_SCHEMA_VERSION = "phase1_decision_schema_v2"
+DECISION_SCHEMA_HASH = "ee45252876eff387cd75ddbd350230b15872b18316f0508a24a4a19dcc657e60"
 
 
 def test_status_summary_writes_machine_readable_snapshot(tmp_path):
@@ -77,6 +79,11 @@ def _write_startup_log(path: Path) -> None:
         "dry_run_only",
         "magic_namespace_ok",
         "server_time_status",
+        "decision_schema_version",
+        "decision_schema_hash",
+        "decision_schema_rotation_performed",
+        "decision_schema_rotation_reason",
+        "decision_schema_archive_path",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -91,6 +98,11 @@ def _write_startup_log(path: Path) -> None:
                 "dry_run_only": "true",
                 "magic_namespace_ok": "true",
                 "server_time_status": "CLOCK_OK",
+                "decision_schema_version": DECISION_SCHEMA_VERSION,
+                "decision_schema_hash": DECISION_SCHEMA_HASH,
+                "decision_schema_rotation_performed": "false",
+                "decision_schema_rotation_reason": "none",
+                "decision_schema_archive_path": "",
             }
         )
 
@@ -132,6 +144,8 @@ def _write_decision_log(path: Path) -> None:
         "timestamp_local",
         "run_id",
         "lifecycle_state",
+        "decision_schema_version",
+        "decision_schema_hash",
         "symbol",
         "bar_time",
         "session",
@@ -194,6 +208,8 @@ def _write_decision_log(path: Path) -> None:
                 "timestamp_local": f"2026.05.21 16:{minute:02d}:00",
                 "run_id": "phase1-dry-run-v0.5",
                 "lifecycle_state": "DRY_RUN",
+                "decision_schema_version": DECISION_SCHEMA_VERSION,
+                "decision_schema_hash": DECISION_SCHEMA_HASH,
                 "symbol": "XAUUSD",
                 "bar_time": f"2026.05.21 12:{minute:02d}:00",
                 "session": "LONDON",

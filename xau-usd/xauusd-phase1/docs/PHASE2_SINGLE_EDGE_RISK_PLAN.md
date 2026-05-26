@@ -8,7 +8,7 @@ This plan reflects the current Phase 0 evidence: same-family variants are correl
 
 | Expert | Status | Diversification treatment |
 | --- | --- | --- |
-| `breakout_retest` | Approved future expert | Primary expression of the breakout-retest family. |
+| `breakout_retest` | COST_SUSPENDED | Primary expression of the breakout-retest family, but measured-cost revalidation currently fails. |
 | `swing_breakout_retest_v0` | Approved future expert candidate | Same-family variant; useful for telemetry, not independent diversification. |
 | `symbol_normalized_round_retest_v0` | Approved future expert candidate | Same-family variant; useful for telemetry, not independent diversification. |
 
@@ -16,11 +16,11 @@ Rejected experts and rejected research candidates remain rejected unless a new v
 
 ## Phase 2 Paper Eligibility
 
-Phase 2 paper mode must begin with exactly one execution-eligible stream:
+Phase 2 paper mode currently has no execution-eligible stream because the only primary edge family fails measured-cost revalidation. If a cost-conversion defect is found and corrected, Phase 2 paper mode must still begin with exactly one execution-eligible stream:
 
 | Expert | Phase 2 role |
 | --- | --- |
-| `breakout_retest` | Execution-eligible paper stream after all readiness gates pass. |
+| `breakout_retest` | Cost-suspended; execution-eligible only if corrected measured-cost revalidation passes all readiness gates. |
 | `swing_breakout_retest_v0` | observer-only telemetry. |
 | `symbol_normalized_round_retest_v0` | observer-only telemetry. |
 | `round_number_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
@@ -40,7 +40,7 @@ Phase 2 remains paper-mode only. No live capital is authorized by this document.
 
 | Stage | Authorization condition | Risk posture |
 | --- | --- | --- |
-| Phase 2 paper | Phase 1 acceptance PASS, measured-cost gates PASS, owner approval PASS | Paper-only, measure cost and drift. |
+| Phase 2 paper | Phase 1 acceptance PASS, corrected measured-cost gates PASS, owner approval PASS | Paper-only, measure cost and drift. Current status: blocked by measured-cost revalidation FAIL. |
 | Live micro pilot | Separate future approval after paper evidence | Lower than the original 0.25% per trade assumption. |
 | Step 1 | Paper/live review shows cost-adjusted expectancy >= +0.15R and drift acceptable | Small fixed risk, no compounding. |
 | Step 2 | Additional review period passes without concentration or drift breach | Modest increase only after written review. |

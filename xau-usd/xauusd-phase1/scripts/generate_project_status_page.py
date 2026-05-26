@@ -44,6 +44,12 @@ def generate_project_status_page(
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
+    measured_cost["revalidation_status"] = _read_markdown_status(
+        phase0_reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md"
+    ) or "UNKNOWN"
+    measured_cost["assumption_delta_status"] = _read_markdown_status(
+        phase0_reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
+    ) or "UNKNOWN"
     candidates = _read_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
     account_example = _load_account_example(phase0_root, candidates)
     phase0_verdict = _read_markdown_status(phase0_reports / "PHASE0_VERDICT.md") or _phase0_verdict_status(
@@ -126,7 +132,7 @@ def _render_html(
                 phase0_status=phase0_status,
                 phase1_status=phase1_status,
                 phase2_status=phase2_status,
-                measured_status=measured_cost.get("status", "UNKNOWN"),
+                measured_status=_measured_cost_rollup(measured_cost),
             ),
             '    <main class="workspace">',
             '      <section class="command-bar">',
@@ -610,12 +616,17 @@ def _timeline(
     status_fields: dict[str, Any],
     measured_cost: dict[str, str],
 ) -> str:
+    cost_rollup = _measured_cost_rollup(measured_cost)
     rows = [
         ("Phase 0", phase0_status, "Research closure and final expert verdict"),
         ("Validation D1-D4", "PASS", "CPCV, Reality Check, holdout, reproduction"),
         ("Dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 runtime boundary and observer telemetry"),
         ("Five-day soak", phase1_status, "Wall-clock dry-run evidence"),
-        ("Measured cost", measured_cost.get("status", "UNKNOWN"), "Passive spread evidence and revalidation"),
+        (
+            "Measured cost",
+            cost_rollup,
+            f"Model {measured_cost.get('status', 'UNKNOWN')}; revalidation {measured_cost.get('revalidation_status', 'UNKNOWN')}",
+        ),
         ("Phase 2 paper", phase2_status, "Paper-mode readiness and owner approval"),
     ]
     items = []
@@ -803,7 +814,9 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ("Mean modeled cost", _r_value(fixed.get("Cost R"))),
         ("Cost edge consumption", _pct(fixed.get("Cost %"))),
         ("Cost flag", fixed.get("Flag", "n/a")),
-        ("Measured cost status", measured.get("status", "n/a")),
+        ("Measured cost model", measured.get("status", "n/a")),
+        ("Measured-cost revalidation", measured.get("revalidation_status", "n/a")),
+        ("Measured-cost assumption delta", measured.get("assumption_delta_status", "n/a")),
         ("Measured rows/days", f"{measured.get('observed_rows', 'n/a')} rows / {measured.get('observed_days', 'n/a')} days"),
     ]
     return _key_value_table(rows)
@@ -824,7 +837,8 @@ def _milestone_table(
         ("D4 Independent reproduction", "PASS", "Independent reproduction within tolerance"),
         ("Phase 1 dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 telemetry and dry-run boundaries"),
         ("Phase 1 five-day soak", phase1_status, "Wall-clock evidence still accumulating"),
-        ("Measured cost model", measured_cost.get("status", "UNKNOWN"), "Needs required observed days before Phase 2"),
+        ("Measured cost model", measured_cost.get("status", "UNKNOWN"), "Passive spread coverage evidence"),
+        ("Measured-cost revalidation", measured_cost.get("revalidation_status", "UNKNOWN"), "Hard paper-mode execution gate"),
         ("Phase 2 paper readiness", phase2_status, "Paper-mode implementation not authorized until all gates pass"),
     ]
     table_rows = [
@@ -1251,11 +1265,30 @@ def _artifact_links() -> str:
         ("Frequency-normalized concentration audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md"),
         ("Fixed-notional cost report", "xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md"),
         ("Measured cost model", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md"),
+        ("Measured-cost revalidation", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md"),
+        ("Measured-cost assumption delta", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md"),
+        ("Measured-cost audit", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"),
+        ("Cost-R diagnostic", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"),
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
     ]
     return _list([f'<a href="{_esc(_link(href))}">{_esc(label)}</a>' for label, href in links], raw=True)
+
+
+def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
+    model = measured_cost.get("status", "UNKNOWN")
+    revalidation = measured_cost.get("revalidation_status", "UNKNOWN")
+    delta = measured_cost.get("assumption_delta_status", "UNKNOWN")
+    if "FAIL" in {model, revalidation, delta}:
+        return "FAIL"
+    if model != "PASS":
+        return model
+    if revalidation != "PASS":
+        return revalidation
+    if delta != "PASS":
+        return delta
+    return "PASS"
 
 
 def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[str, str]) -> list[str]:
@@ -1264,6 +1297,8 @@ def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[st
         items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour process/code-freeze gate continue.")
     if measured_cost.get("status") != "PASS":
         items.append("Keep the passive spread logger running until measured-cost coverage reaches the required observed days.")
+    if measured_cost.get("revalidation_status") == "FAIL":
+        items.append("Keep breakout_retest COST_SUSPENDED; audit the cost-R conversion before any paper-mode implementation.")
     if phase2_status != "PASS":
         items.append("Keep Phase 2 in preparation mode only; no paper-mode implementation until readiness is PASS.")
     items.append("Continue independent candidate research without tuning rejected v0 hypotheses.")

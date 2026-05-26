@@ -13,7 +13,8 @@ enum Phase1ExpertLifecycleState
    PHASE1_EXPERT_DRY_RUN_ONLY = 1,
    PHASE1_EXPERT_ACTIVE = 2,
    PHASE1_EXPERT_SUSPENDED = 3,
-   PHASE1_EXPERT_RETIRED = 4
+   PHASE1_EXPERT_RETIRED = 4,
+   PHASE1_EXPERT_COST_SUSPENDED = 5
 };
 
 enum Phase1SessionState
@@ -322,6 +323,8 @@ string Phase1ExpertLifecycleText(const Phase1ExpertLifecycleState state)
       return "SUSPENDED";
    if(state == PHASE1_EXPERT_RETIRED)
       return "RETIRED";
+   if(state == PHASE1_EXPERT_COST_SUSPENDED)
+      return "COST_SUSPENDED";
    return "DISABLED";
 }
 

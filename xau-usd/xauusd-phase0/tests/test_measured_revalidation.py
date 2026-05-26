@@ -33,6 +33,16 @@ def test_measured_cost_revalidation_passes_with_measured_p95_model(project_root,
     assert output.passing_cells == 9
     assert output.trade_count == 27
     assert "Overall status: PASS" in output.report_path.read_text(encoding="utf-8")
+    reports = root / "outputs" / "reports"
+    diagnostic = reports / "BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"
+    delta = reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
+    audit = reports / "BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"
+    assert diagnostic.exists()
+    assert delta.exists()
+    assert audit.exists()
+    assert "risk_price" in diagnostic.read_text(encoding="utf-8")
+    assert "configured_p95_spread_points" in delta.read_text(encoding="utf-8")
+    assert "measured spread replaces modeled entry spread" in audit.read_text(encoding="utf-8")
 
 
 def _copy_config(project_root: Path, tmp_path: Path) -> Path:

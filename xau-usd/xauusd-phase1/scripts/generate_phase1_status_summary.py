@@ -7,7 +7,13 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-from atomic_write import atomic_write_text
+try:
+    from atomic_write import atomic_write_text
+except ModuleNotFoundError:  # pragma: no cover - supports direct importlib test loading
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from atomic_write import atomic_write_text
 from analyze_phase1_soak import analyze_phase1_soak
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report

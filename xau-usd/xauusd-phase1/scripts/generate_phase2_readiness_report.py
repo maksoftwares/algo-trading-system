@@ -83,6 +83,11 @@ def generate_phase2_readiness_report(
             root / "docs" / "PHASE2_OPERATIONS_PREP.md",
             ("External Health Monitor Spec", "Disaster Recovery Runbook", "Capital Allocation Ladder"),
         ),
+        _file_contains_gate(
+            "Magic-number external registry",
+            root / "docs" / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md",
+            ("910000-910999", "V61", "V77", "V80", "V85", "account isolation", "cross-EA collision plan"),
+        ),
         _status_or_pending_gate(
             "VPS selection",
             root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md",
@@ -131,6 +136,11 @@ def generate_phase2_readiness_report(
         _status_or_pending_gate(
             "Measured-cost revalidation",
             _phase0_root(root) / "outputs" / "reports" / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md",
+            required="PASS",
+        ),
+        _status_or_pending_gate(
+            "Measured-cost assumption delta",
+            _phase0_root(root) / "outputs" / "reports" / "MEASURED_COST_ASSUMPTION_DELTA.md",
             required="PASS",
         ),
         _status_gate("Phase 1 acceptance", report_dir / "PHASE1_ACCEPTANCE_REPORT.md", required="PASS"),

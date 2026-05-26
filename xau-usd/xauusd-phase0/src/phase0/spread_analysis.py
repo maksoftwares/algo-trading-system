@@ -13,6 +13,10 @@ REQUIRED_SPREAD_COLUMNS = (
     "broker_time",
     "gmt_time",
     "local_time",
+    "tick_time",
+    "tick_time_msc",
+    "seconds_since_tick",
+    "tick_fresh",
     "account",
     "server",
     "symbol",
@@ -76,12 +80,14 @@ def analyze_spread_logs(
         raise ConfigError(f"No spread logger CSV files found in {directory} matching {file_glob}.")
 
     frame = _load_spread_logs(files)
+    source_row_count = int(frame.attrs.get("source_row_count", len(frame)))
+    stale_row_count = int(frame.attrs.get("stale_row_count", 0))
     metrics = _spread_metrics(frame)
     observation_count = int(len(frame))
     observed_days = int(frame["gmt_time"].dt.date.nunique())
     status = "PASS" if observation_count >= min_observations and observed_days >= min_observed_days else "PENDING"
     metrics.to_csv(measured_path, index=False)
-    report_path.write_text(_render_spread_report(metrics, files), encoding="utf-8")
+    report_path.write_text(_render_spread_report(metrics, files, source_row_count, stale_row_count), encoding="utf-8")
     measured_report_path.write_text(
         _render_measured_cost_model_report(
             status=status,
@@ -91,7 +97,10 @@ def analyze_spread_logs(
             observed_days=observed_days,
             min_observations=min_observations,
             min_observed_days=min_observed_days,
-            note="Measured cost model generated from passive spread logger data.",
+            note=(
+                "Measured cost model generated from passive spread logger data after filtering "
+                f"to tick_fresh=true rows. Stale rows excluded: {stale_row_count}."
+            ),
         ),
         encoding="utf-8",
     )
@@ -118,9 +127,16 @@ def _load_spread_logs(files: list[Path]) -> pd.DataFrame:
     combined = pd.concat(frames, ignore_index=True)
     combined["spread_points"] = pd.to_numeric(combined["spread_points"], errors="coerce")
     combined["gmt_time"] = pd.to_datetime(combined["gmt_time"], errors="coerce", utc=True)
+    combined["seconds_since_tick"] = pd.to_numeric(combined["seconds_since_tick"], errors="coerce")
+    fresh_mask = combined["tick_fresh"].astype(str).str.lower().isin({"true", "1", "yes"})
+    source_row_count = int(len(combined))
+    stale_row_count = int(source_row_count - fresh_mask.sum())
+    combined = combined[fresh_mask].copy()
     combined = combined.dropna(subset=["spread_points", "gmt_time"])
     if combined.empty:
-        raise ConfigError("Spread logs contain no usable spread rows.")
+        raise ConfigError("Spread logs contain no usable fresh spread rows.")
+    combined.attrs["source_row_count"] = source_row_count
+    combined.attrs["stale_row_count"] = stale_row_count
     combined["hour_utc"] = combined["gmt_time"].dt.hour
     combined["day_of_week_utc"] = combined["gmt_time"].dt.day_name()
     return combined
@@ -170,10 +186,21 @@ def _group_rows(frame: pd.DataFrame, scope: str, buckets: pd.Series) -> list[dic
     return rows
 
 
-def _render_spread_report(metrics: pd.DataFrame, files: list[Path]) -> str:
+def _render_spread_report(
+    metrics: pd.DataFrame,
+    files: list[Path],
+    source_row_count: int,
+    stale_row_count: int,
+) -> str:
     return "\n".join(
         [
             "# Spread Distribution Report",
+            "",
+            "## Freshness Filter",
+            "",
+            f"- Source rows: {source_row_count}",
+            f"- Rows excluded because tick_fresh was false: {stale_row_count}",
+            f"- Fresh rows used: {source_row_count - stale_row_count}",
             "",
             "## Source Files",
             "",

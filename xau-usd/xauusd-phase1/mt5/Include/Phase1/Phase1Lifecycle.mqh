@@ -19,7 +19,7 @@ public:
    Phase1ExpertLifecycleState BreakoutRetestState() const
    {
       if(m_observe_breakout_retest)
-         return PHASE1_EXPERT_DRY_RUN_ONLY;
+         return PHASE1_EXPERT_COST_SUSPENDED;
       return PHASE1_EXPERT_DISABLED;
    }
 
@@ -43,6 +43,11 @@ public:
    bool IsBreakoutRetestDryRunOnly() const
    {
       return BreakoutRetestState() == PHASE1_EXPERT_DRY_RUN_ONLY;
+   }
+
+   bool IsBreakoutRetestCostSuspended() const
+   {
+      return BreakoutRetestState() == PHASE1_EXPERT_COST_SUSPENDED;
    }
 };
 

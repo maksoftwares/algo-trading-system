@@ -251,6 +251,10 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
             "# Revalidation\n\nOverall status: PASS\n",
             encoding="utf-8",
         )
+        (reports / "MEASURED_COST_ASSUMPTION_DELTA.md").write_text(
+            "# Delta\n\nOverall status: PASS\n",
+            encoding="utf-8",
+        )
 
 
 def _write_phase2_docs(root: Path) -> None:
@@ -266,6 +270,10 @@ def _write_phase2_docs(root: Path) -> None:
     )
     (docs / "PHASE2_OPERATIONS_PREP.md").write_text(
         "# Ops\n\nExternal Health Monitor Spec\n\nDisaster Recovery Runbook\n\nCapital Allocation Ladder\n",
+        encoding="utf-8",
+    )
+    (docs / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md").write_text(
+        "# Magic\n\n910000-910999\n\nV61\nV77\nV80\nV85\n\naccount isolation\n\ncross-EA collision plan\n",
         encoding="utf-8",
     )
     (docs / "PHASE2_VPS_SELECTION_MATRIX.md").write_text(

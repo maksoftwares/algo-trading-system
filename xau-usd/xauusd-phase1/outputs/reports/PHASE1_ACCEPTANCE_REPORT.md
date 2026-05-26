@@ -13,15 +13,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Runtime log verification | FAIL | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_DRY_RUN_LOG_REPORT.md` |
 | Soak/drift analysis | WARN | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_DRIFT_REPORT.md` |
 | Runtime health | WARN | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md` |
-| Would-signal evidence | PASS | Rows: 61; clusters: 61; report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`; csv: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` |
+| Would-signal evidence | PASS | Rows: 65; clusters: 65; report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`; csv: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` |
 | Soak history ledger | FAIL | History report failed: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md` |
 | Dry-run state | PASS | All decision rows are in dry-run state. |
 | Permission lock | PASS | All decision rows keep permission false. |
-| Runtime freshness | WARN | Latest row age is 26.7 minute(s); limit 15. |
-| Latest runtime row | PASS | run_id=phase1-dry-run-v0.6; bar_time=2026.05.26 20:55:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/LONG; would_signal=false |
-| Active-market 72-hour soak | PENDING | Longest active streak: 22.92h; current active streak: 22.92h; required: 72h; last restart UTC: 2026-05-22T11:03:44Z; weekend policy: weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 106.30h; code-freeze hours: 59.74h; required: 96h; marker: 2026-05-24T09:37:32Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
-| Five trading day soak | PENDING | Observed unique-bar span: 4.41 calendar day(s), from 2026-05-22 11:00:00 to 2026-05-26 20:55:00. |
+| Runtime freshness | PASS | Latest row age is 2.3 minute(s); limit 15. |
+| Latest runtime row | PASS | run_id=phase1-dry-run-v0.6; bar_time=2026.05.26 23:25:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/SHORT; would_signal=false |
+| Active-market 72-hour soak | PENDING | Longest active streak: 22.92h; current active streak: 1.42h; required: 72h; last restart UTC: 2026-05-22T11:03:44Z; weekend policy: weekend_breaks_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 108.39h; code-freeze hours: 61.83h; required: 96h; marker: 2026-05-24T09:37:32Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
+| Five trading day soak | PENDING | Observed unique-bar span: 4.52 calendar day(s), from 2026-05-22 11:00:00 to 2026-05-26 23:25:00. |
 
 ## Decision
 
@@ -29,5 +29,5 @@ Phase 1 acceptance evidence has a failing gate. Keep the shell in dry-run mode a
 
 ## Runtime Rows
 
-- Decision rows analyzed: 578
+- Decision rows analyzed: 596
 - Unique run IDs: 5

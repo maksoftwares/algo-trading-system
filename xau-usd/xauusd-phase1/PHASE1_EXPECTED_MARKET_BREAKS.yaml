@@ -1,0 +1,8 @@
+symbol: XAUUSD
+broker: Capital.ComMena-Live
+expected_breaks:
+  - label: daily_maintenance
+    weekdays: [Monday, Tuesday, Wednesday, Thursday, Friday]
+    start_utc: "18:25"
+    end_utc: "22:00"
+    max_gap_minutes: 240

@@ -10,6 +10,9 @@ private:
    string m_startup_file_name;
    string m_shutdown_file_name;
    datetime m_last_decision_write_time;
+   bool m_decision_schema_rotation_performed;
+   string m_decision_schema_rotation_reason;
+   string m_decision_schema_archive_path;
 
 public:
    void Configure(
@@ -22,11 +25,54 @@ public:
       m_startup_file_name = startup_file_name;
       m_shutdown_file_name = shutdown_file_name;
       m_last_decision_write_time = 0;
+      m_decision_schema_rotation_performed = false;
+      m_decision_schema_rotation_reason = "none";
+      m_decision_schema_archive_path = "";
    }
 
    datetime LastDecisionWriteTime() const
    {
       return m_last_decision_write_time;
+   }
+
+   string DecisionSchemaVersion() const
+   {
+      return "phase1_decision_schema_v2";
+   }
+
+   string DecisionSchemaHash() const
+   {
+      return "ee45252876eff387cd75ddbd350230b15872b18316f0508a24a4a19dcc657e60";
+   }
+
+   bool EnsureDecisionLogSchema()
+   {
+      m_decision_schema_rotation_performed = false;
+      m_decision_schema_rotation_reason = "none";
+      m_decision_schema_archive_path = "";
+
+      if(!FileIsExist(m_decision_file_name, 0))
+         return true;
+
+      string observed_header = ReadFirstLine(m_decision_file_name);
+      if(observed_header == "" || observed_header == DecisionHeader())
+         return true;
+
+      string archive_dir = "logs\\archive";
+      FolderCreate("logs", 0);
+      FolderCreate(archive_dir, 0);
+      string archive_path = archive_dir + "\\decision_log_" + TimestampForFile(TimeGMT()) + "_schema_mismatch.csv";
+      if(!FileMove(m_decision_file_name, 0, archive_path, FILE_REWRITE))
+      {
+         Print("Phase1 logger could not rotate stale decision log header: ", m_decision_file_name, " error=", GetLastError());
+         return false;
+      }
+
+      m_decision_schema_rotation_performed = true;
+      m_decision_schema_rotation_reason = "schema_mismatch";
+      m_decision_schema_archive_path = archive_path;
+      Print("Phase1 logger rotated stale decision log to ", archive_path);
+      return true;
    }
 
    bool WriteStartup(
@@ -45,35 +91,15 @@ public:
       const Phase1ServerTimeStatus &server_time
    )
    {
+      if(!EnsureStartupLogSchema())
+         return false;
+
       int handle = OpenCsv(m_startup_file_name);
       if(handle == INVALID_HANDLE)
          return false;
 
       if(FileSize(handle) == 0)
-      {
-         FileWrite(
-            handle,
-            "timestamp_broker",
-            "timestamp_utc",
-            "timestamp_local",
-            "run_id",
-            "symbol",
-            "dry_run_only",
-            "observe_breakout_retest",
-            "observe_swing_breakout_retest",
-            "max_spread_points",
-            "max_risk_pct",
-            "daily_loss_limit_pct",
-            "weekly_loss_limit_pct",
-            "monthly_loss_limit_pct",
-            "manual_risk_lock",
-            "magic_namespace_ok",
-            "server_time_status",
-            "broker_utc_offset_seconds",
-            "local_utc_offset_seconds",
-            "local_clock_drift_seconds"
-         );
-      }
+         FileWriteString(handle, StartupHeader() + "\r\n");
 
       FileSeek(handle, 0, SEEK_END);
       FileWrite(
@@ -96,7 +122,12 @@ public:
          server_time.status_text,
          server_time.broker_utc_offset_seconds,
          server_time.local_utc_offset_seconds,
-         server_time.local_clock_drift_seconds
+         server_time.local_clock_drift_seconds,
+         DecisionSchemaVersion(),
+         DecisionSchemaHash(),
+         m_decision_schema_rotation_performed ? "true" : "false",
+         m_decision_schema_rotation_reason,
+         m_decision_schema_archive_path
       );
       FileFlush(handle);
       FileClose(handle);
@@ -150,103 +181,16 @@ public:
 
    bool WriteDecision(const Phase1Decision &decision)
    {
+      if(!EnsureDecisionLogSchema())
+         return false;
+
       int handle = OpenCsv(m_decision_file_name);
       if(handle == INVALID_HANDLE)
          return false;
 
       if(FileSize(handle) == 0)
       {
-         string header = "";
-         AppendCell(header, "timestamp_broker");
-         AppendCell(header, "timestamp_utc");
-         AppendCell(header, "timestamp_local");
-         AppendCell(header, "run_id");
-         AppendCell(header, "lifecycle_state");
-         AppendCell(header, "symbol");
-         AppendCell(header, "bid");
-         AppendCell(header, "ask");
-         AppendCell(header, "spread_points");
-         AppendCell(header, "bar_time");
-         AppendCell(header, "session");
-         AppendCell(header, "regime");
-         AppendCell(header, "router_version");
-         AppendCell(header, "risk_state");
-         AppendCell(header, "requested_risk_pct");
-         AppendCell(header, "max_risk_pct");
-         AppendCell(header, "simulated_daily_pnl_pct");
-         AppendCell(header, "simulated_weekly_pnl_pct");
-         AppendCell(header, "simulated_monthly_pnl_pct");
-         AppendCell(header, "daily_loss_limit_pct");
-         AppendCell(header, "weekly_loss_limit_pct");
-         AppendCell(header, "monthly_loss_limit_pct");
-         AppendCell(header, "manual_risk_lock");
-         AppendCell(header, "risk_ok");
-         AppendCell(header, "execution_state");
-         AppendCell(header, "news_state");
-         AppendCell(header, "expert_lifecycle_state");
-         AppendCell(header, "br_lifecycle_state");
-         AppendCell(header, "sbr_lifecycle_state");
-         AppendCell(header, "magic_namespace_ok");
-         AppendCell(header, "server_time_status");
-         AppendCell(header, "broker_utc_offset_seconds");
-         AppendCell(header, "local_utc_offset_seconds");
-         AppendCell(header, "local_clock_drift_seconds");
-         AppendCell(header, "feature_ok");
-         AppendCell(header, "atr14_points");
-         AppendCell(header, "m5_range_points");
-         AppendCell(header, "m5_body_points");
-         AppendCell(header, "m5_upper_wick_points");
-         AppendCell(header, "m5_lower_wick_points");
-         AppendCell(header, "m15_range_points");
-         AppendCell(header, "h1_range_points");
-         AppendCell(header, "compression_state");
-         AppendCell(header, "br_stage");
-         AppendCell(header, "br_direction");
-         AppendCell(header, "br_would_signal");
-         AppendCell(header, "br_reason_code");
-         AppendCell(header, "br_level_found");
-         AppendCell(header, "br_break_found");
-         AppendCell(header, "br_retest_valid");
-         AppendCell(header, "br_confirmation_valid");
-         AppendCell(header, "br_level_kind");
-         AppendCell(header, "br_level_price");
-         AppendCell(header, "br_entry_price");
-         AppendCell(header, "br_stop_loss");
-         AppendCell(header, "br_take_profit");
-         AppendCell(header, "br_stop_distance_points");
-         AppendCell(header, "br_break_shift");
-         AppendCell(header, "sbr_stage");
-         AppendCell(header, "sbr_direction");
-         AppendCell(header, "sbr_would_signal");
-         AppendCell(header, "sbr_reason_code");
-         AppendCell(header, "sbr_level_found");
-         AppendCell(header, "sbr_break_found");
-         AppendCell(header, "sbr_retest_valid");
-         AppendCell(header, "sbr_confirmation_valid");
-         AppendCell(header, "sbr_level_kind");
-         AppendCell(header, "sbr_level_price");
-         AppendCell(header, "sbr_entry_price");
-         AppendCell(header, "sbr_stop_loss");
-         AppendCell(header, "sbr_take_profit");
-         AppendCell(header, "sbr_stop_distance_points");
-         AppendCell(header, "sbr_break_shift");
-         AppendCell(header, "allowed_expert");
-         AppendCell(header, "would_have_allowed_experts");
-         AppendCell(header, "trade_permission");
-         AppendCell(header, "block_reason");
-         AppendCell(header, "dry_run");
-         AppendCell(header, "tick_ok");
-         AppendCell(header, "stale_seconds");
-         AppendCell(header, "expert_name");
-         AppendCell(header, "magic_number");
-         AppendCell(header, "direction");
-         AppendCell(header, "entry_price");
-         AppendCell(header, "stop_loss");
-         AppendCell(header, "take_profit");
-         AppendCell(header, "risk_pct");
-         AppendCell(header, "reason_code");
-         AppendCell(header, "blocked_reason");
-         FileWriteString(handle, header + "\r\n");
+         FileWriteString(handle, DecisionHeader() + "\r\n");
       }
 
       FileSeek(handle, 0, SEEK_END);
@@ -256,6 +200,8 @@ public:
       AppendCell(row, TimeToString(decision.market.local_time, TIME_DATE | TIME_SECONDS));
       AppendCell(row, decision.run_id);
       AppendCell(row, decision.lifecycle_state);
+      AppendCell(row, DecisionSchemaVersion());
+      AppendCell(row, DecisionSchemaHash());
       AppendCell(row, decision.market.symbol_name);
       AppendCell(row, DoubleToString(decision.market.bid, decision.market.digits));
       AppendCell(row, DoubleToString(decision.market.ask, decision.market.digits));
@@ -348,6 +294,178 @@ public:
    }
 
 private:
+   bool EnsureStartupLogSchema()
+   {
+      if(!FileIsExist(m_startup_file_name, 0))
+         return true;
+
+      string observed_header = ReadFirstLine(m_startup_file_name);
+      if(observed_header == "" || observed_header == StartupHeader())
+         return true;
+
+      string archive_dir = "logs\\archive";
+      FolderCreate("logs", 0);
+      FolderCreate(archive_dir, 0);
+      string archive_path = archive_dir + "\\startup_log_" + TimestampForFile(TimeGMT()) + "_schema_mismatch.csv";
+      if(!FileMove(m_startup_file_name, 0, archive_path, FILE_REWRITE))
+      {
+         Print("Phase1 logger could not rotate stale startup log header: ", m_startup_file_name, " error=", GetLastError());
+         return false;
+      }
+      Print("Phase1 logger rotated stale startup log to ", archive_path);
+      return true;
+   }
+
+   string StartupHeader() const
+   {
+      string header = "";
+      AppendCell(header, "timestamp_broker");
+      AppendCell(header, "timestamp_utc");
+      AppendCell(header, "timestamp_local");
+      AppendCell(header, "run_id");
+      AppendCell(header, "symbol");
+      AppendCell(header, "dry_run_only");
+      AppendCell(header, "observe_breakout_retest");
+      AppendCell(header, "observe_swing_breakout_retest");
+      AppendCell(header, "max_spread_points");
+      AppendCell(header, "max_risk_pct");
+      AppendCell(header, "daily_loss_limit_pct");
+      AppendCell(header, "weekly_loss_limit_pct");
+      AppendCell(header, "monthly_loss_limit_pct");
+      AppendCell(header, "manual_risk_lock");
+      AppendCell(header, "magic_namespace_ok");
+      AppendCell(header, "server_time_status");
+      AppendCell(header, "broker_utc_offset_seconds");
+      AppendCell(header, "local_utc_offset_seconds");
+      AppendCell(header, "local_clock_drift_seconds");
+      AppendCell(header, "decision_schema_version");
+      AppendCell(header, "decision_schema_hash");
+      AppendCell(header, "decision_schema_rotation_performed");
+      AppendCell(header, "decision_schema_rotation_reason");
+      AppendCell(header, "decision_schema_archive_path");
+      return header;
+   }
+
+   string DecisionHeader() const
+   {
+      string header = "";
+      AppendCell(header, "timestamp_broker");
+      AppendCell(header, "timestamp_utc");
+      AppendCell(header, "timestamp_local");
+      AppendCell(header, "run_id");
+      AppendCell(header, "lifecycle_state");
+      AppendCell(header, "decision_schema_version");
+      AppendCell(header, "decision_schema_hash");
+      AppendCell(header, "symbol");
+      AppendCell(header, "bid");
+      AppendCell(header, "ask");
+      AppendCell(header, "spread_points");
+      AppendCell(header, "bar_time");
+      AppendCell(header, "session");
+      AppendCell(header, "regime");
+      AppendCell(header, "router_version");
+      AppendCell(header, "risk_state");
+      AppendCell(header, "requested_risk_pct");
+      AppendCell(header, "max_risk_pct");
+      AppendCell(header, "simulated_daily_pnl_pct");
+      AppendCell(header, "simulated_weekly_pnl_pct");
+      AppendCell(header, "simulated_monthly_pnl_pct");
+      AppendCell(header, "daily_loss_limit_pct");
+      AppendCell(header, "weekly_loss_limit_pct");
+      AppendCell(header, "monthly_loss_limit_pct");
+      AppendCell(header, "manual_risk_lock");
+      AppendCell(header, "risk_ok");
+      AppendCell(header, "execution_state");
+      AppendCell(header, "news_state");
+      AppendCell(header, "expert_lifecycle_state");
+      AppendCell(header, "br_lifecycle_state");
+      AppendCell(header, "sbr_lifecycle_state");
+      AppendCell(header, "magic_namespace_ok");
+      AppendCell(header, "server_time_status");
+      AppendCell(header, "broker_utc_offset_seconds");
+      AppendCell(header, "local_utc_offset_seconds");
+      AppendCell(header, "local_clock_drift_seconds");
+      AppendCell(header, "feature_ok");
+      AppendCell(header, "atr14_points");
+      AppendCell(header, "m5_range_points");
+      AppendCell(header, "m5_body_points");
+      AppendCell(header, "m5_upper_wick_points");
+      AppendCell(header, "m5_lower_wick_points");
+      AppendCell(header, "m15_range_points");
+      AppendCell(header, "h1_range_points");
+      AppendCell(header, "compression_state");
+      AppendCell(header, "br_stage");
+      AppendCell(header, "br_direction");
+      AppendCell(header, "br_would_signal");
+      AppendCell(header, "br_reason_code");
+      AppendCell(header, "br_level_found");
+      AppendCell(header, "br_break_found");
+      AppendCell(header, "br_retest_valid");
+      AppendCell(header, "br_confirmation_valid");
+      AppendCell(header, "br_level_kind");
+      AppendCell(header, "br_level_price");
+      AppendCell(header, "br_entry_price");
+      AppendCell(header, "br_stop_loss");
+      AppendCell(header, "br_take_profit");
+      AppendCell(header, "br_stop_distance_points");
+      AppendCell(header, "br_break_shift");
+      AppendCell(header, "sbr_stage");
+      AppendCell(header, "sbr_direction");
+      AppendCell(header, "sbr_would_signal");
+      AppendCell(header, "sbr_reason_code");
+      AppendCell(header, "sbr_level_found");
+      AppendCell(header, "sbr_break_found");
+      AppendCell(header, "sbr_retest_valid");
+      AppendCell(header, "sbr_confirmation_valid");
+      AppendCell(header, "sbr_level_kind");
+      AppendCell(header, "sbr_level_price");
+      AppendCell(header, "sbr_entry_price");
+      AppendCell(header, "sbr_stop_loss");
+      AppendCell(header, "sbr_take_profit");
+      AppendCell(header, "sbr_stop_distance_points");
+      AppendCell(header, "sbr_break_shift");
+      AppendCell(header, "allowed_expert");
+      AppendCell(header, "would_have_allowed_experts");
+      AppendCell(header, "trade_permission");
+      AppendCell(header, "block_reason");
+      AppendCell(header, "dry_run");
+      AppendCell(header, "tick_ok");
+      AppendCell(header, "stale_seconds");
+      AppendCell(header, "expert_name");
+      AppendCell(header, "magic_number");
+      AppendCell(header, "direction");
+      AppendCell(header, "entry_price");
+      AppendCell(header, "stop_loss");
+      AppendCell(header, "take_profit");
+      AppendCell(header, "risk_pct");
+      AppendCell(header, "reason_code");
+      AppendCell(header, "blocked_reason");
+      return header;
+   }
+
+   string ReadFirstLine(const string file_name) const
+   {
+      int handle = FileOpen(file_name, FILE_READ | FILE_TXT | FILE_ANSI);
+      if(handle == INVALID_HANDLE)
+         return "";
+      string line = "";
+      if(!FileIsEnding(handle))
+         line = FileReadString(handle);
+      FileClose(handle);
+      StringReplace(line, "\r", "");
+      StringReplace(line, "\n", "");
+      return line;
+   }
+
+   string TimestampForFile(const datetime timestamp) const
+   {
+      string value = TimeToString(timestamp, TIME_DATE | TIME_SECONDS);
+      StringReplace(value, ".", "");
+      StringReplace(value, ":", "");
+      StringReplace(value, " ", "_");
+      return value;
+   }
+
    int OpenCsv(const string file_name) const
    {
       int handle = FileOpen(

@@ -5,3 +5,4 @@ InpFilePrefix=spread_log
 InpPrintToExpertsTab=false
 InpRolloverHourServer=22
 InpRolloverWindowMinutes=30
+InpMaxTickAgeSeconds=30
