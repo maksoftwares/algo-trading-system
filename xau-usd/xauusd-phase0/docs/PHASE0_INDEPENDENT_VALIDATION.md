@@ -82,6 +82,10 @@ Current failure reason:
 
 The expanded universe now has at least 30 non-empty candidates, so the D2 implementation tightens the effective accepted p-value from 0.10 to 0.01. `breakout_retest` remains the winner and the White Reality Check p-value remains strong, but pairwise SPA checks against same-family `round_number_retest_v0` and `symbol_normalized_round_retest_v0` fail the stricter 0.01 threshold. Treat D2 as an open blocker before Phase 2 authorization.
 
+Method decision:
+
+`docs/D2_METHOD_DECISION_2026_05_27.md` keeps the current fixed-notional candidate-level D2 report as the canonical Phase 2 readiness gate. It does not permit a retroactive PASS by collapsing same-family variants. It pre-registers a possible `D2_FAMILY_CLUSTERED_V0` study as a separate method candidate that must be reviewed before it can affect readiness.
+
 Reviewer-facing note:
 
 Any older D2 report or review comment that references percent-return compounding, dollar-account compounding, a smaller candidate universe, or a pre-threshold-tightening PASS is historical context only. The current D2 evidence is the fixed-notional monthly R-series rerun shown above.

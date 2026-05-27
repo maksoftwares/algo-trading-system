@@ -28,6 +28,10 @@ Generated at UTC: 2026-05-27
 | Should same-family candidates be consolidated before D2? | Only after a written method decision. Same-family consolidation is statistically defensible for portfolio-family questions, but using it after seeing a failing individual-candidate D2 would be a process change requiring explicit approval. |
 | What exact gate must be PASS before Phase 2 readiness can pass? | Either the current individual-candidate D2 report returns PASS, or a pre-registered family-clustered D2 interpretation is approved and its rerun returns PASS. Until then, `PHASE2_READINESS_REPORT.md` must keep D2 as FAIL. |
 
+## Method Decision
+
+`docs/D2_METHOD_DECISION_2026_05_27.md` keeps the current fixed-notional candidate-level D2 report as canonical and keeps Phase 2 blocked. It also pre-registers the requirements for a possible `D2_FAMILY_CLUSTERED_V0` study, but that study is not a retroactive override.
+
 ## Interpretation
 
 `breakout_retest` remains the best-performing candidate in the fixed-notional monthly R-series universe, and the White Reality Check result remains strong. The blocker is narrower: the expanded universe now includes highly related retest variants that are close enough to fail the stricter SPA threshold of 0.01.

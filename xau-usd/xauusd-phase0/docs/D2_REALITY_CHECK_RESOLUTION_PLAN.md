@@ -38,11 +38,14 @@ This does not make those alternatives true diversification. It means the evidenc
 
 ## Resolution Options
 
-1. Keep D2 as-is and require a PASS before Phase 2. This is the strictest option and currently blocks Phase 2.
-2. Pre-register a family-clustered D2 method, then rerun it as a separate exploratory-to-canonical review decision. This must not be used retroactively without reviewer approval.
-3. Continue independent-family candidate research until a genuinely different edge survives first-pass gates, then rerun D2 with clearer family separation.
-4. Proceed only with dry-run and cost measurement evidence while marking Phase 2 paper execution as not authorized.
+The method decision is now recorded in `D2_METHOD_DECISION_2026_05_27.md`.
+
+1. Keep the current fixed-notional candidate-level D2 as the canonical Phase 2 readiness gate.
+2. Do not convert the current D2 FAIL into PASS by retroactively collapsing same-family variants.
+3. Permit a separately pre-registered `D2_FAMILY_CLUSTERED_V0` study as a new method candidate, subject to reviewer or owner approval before it can affect readiness.
+4. Continue independent-family candidate research until a genuinely different edge survives first-pass gates.
+5. Proceed only with dry-run and cost measurement evidence while marking Phase 2 paper execution as not authorized.
 
 ## Next Action
 
-Do not tune `breakout_retest` or the same-family alternatives to force D2. Continue the independent EA search and keep the Phase 1 dry-run / measured-cost soak running until the objective wall-clock gates mature.
+Do not tune `breakout_retest` or the same-family alternatives to force D2. The next implementation step, if approved, is a family-assignment table and `D2_FAMILY_CLUSTERED_V0` report generator that leaves the current candidate-level D2 report unchanged.

@@ -1341,6 +1341,8 @@ def _artifact_links() -> str:
     links = [
         ("Agent handoff", "agent.md"),
         ("Phase 0 verdict", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_VERDICT.md"),
+        ("D2 method decision", "xau-usd/xauusd-phase0/docs/D2_METHOD_DECISION_2026_05_27.md"),
+        ("D2 reality-check interpretation", "xau-usd/xauusd-phase0/docs/PHASE0_REALITY_CHECK_INTERPRETATION.md"),
         ("Rejected candidate audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md"),
         ("Frequency-normalized concentration audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md"),
         ("Fixed-notional cost report", "xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md"),
