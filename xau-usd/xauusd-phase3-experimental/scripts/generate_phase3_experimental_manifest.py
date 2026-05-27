@@ -33,6 +33,12 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
         "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "phase3_suspend_family_csv": reports / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
+        "phase3_cost_mode_comparison_json": reports / "PHASE3_COST_MODE_COMPARISON.json",
+        "phase3_cost_mode_comparison_md": reports / "PHASE3_COST_MODE_COMPARISON.md",
+        "phase3_cost_mode_comparison_csv": reports / "PHASE3_COST_MODE_COMPARISON.csv",
+        "phase3_family_dedup_audit_json": reports / "PHASE3_FAMILY_DEDUP_AUDIT.json",
+        "phase3_family_dedup_audit_md": reports / "PHASE3_FAMILY_DEDUP_AUDIT.md",
+        "phase3_family_dedup_audit_csv": reports / "PHASE3_FAMILY_DEDUP_AUDIT.csv",
         "phase2_readiness_report": repo_root
         / "xau-usd"
         / "xauusd-phase1"
@@ -51,9 +57,12 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_status": phase3_root / "scripts" / "generate_phase3_experimental_status.py",
         "script_safety": phase3_root / "scripts" / "audit_phase3_experimental_safety.py",
         "script_manifest": phase3_root / "scripts" / "generate_phase3_experimental_manifest.py",
+        "script_cost_mode_comparison": phase3_root / "scripts" / "generate_phase3_cost_mode_comparison.py",
+        "script_family_dedup_audit": phase3_root / "scripts" / "generate_phase3_family_dedup_audit.py",
     }
+    files = {name: _file_entry(path) for name, path in paths.items()}
     manifest = {
-        "status": "PASS" if safety.get("status") == "PASS" and simulation else "PENDING",
+        "status": "PASS" if _manifest_pass(safety, simulation, files) else "PENDING",
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
@@ -63,7 +72,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "simulation_status": simulation.get("status", "UNKNOWN"),
         "safety_status": safety.get("status", "UNKNOWN"),
         "phase3_status": status.get("status", "UNKNOWN"),
-        "files": {name: _file_entry(path) for name, path in paths.items()},
+        "files": files,
     }
     json_path = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
     md_path = reports / "PHASE3_EXPERIMENTAL_MANIFEST.md"
@@ -84,6 +93,18 @@ def _file_entry(path: Path | None) -> dict[str, Any]:
         "sha256": _sha256(path),
         "bytes": path.stat().st_size,
     }
+
+
+def _manifest_pass(
+    safety: dict[str, Any],
+    simulation: dict[str, Any],
+    files: dict[str, dict[str, Any]],
+) -> bool:
+    return (
+        safety.get("status") == "PASS"
+        and bool(simulation)
+        and all(entry.get("exists") is True for entry in files.values())
+    )
 
 
 def _sha256(path: Path) -> str:

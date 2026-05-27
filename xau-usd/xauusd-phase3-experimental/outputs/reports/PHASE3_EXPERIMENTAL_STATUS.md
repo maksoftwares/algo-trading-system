@@ -46,5 +46,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Suspend review status | REVIEW_READY |
 | Suspend unique family events | 10 |
 | Suspend primary rows | 10 |
+| Cost-mode comparison | REVIEW_READY |
+| Stress suspend family events | 44 |
+| De-dup audit | REVIEW_READY |
+| De-dup classifications | {'TRUE_DUPLICATE': 47} |
 | Manifest status | PASS |
-| Manifest commit | 34df05f |
+| Manifest commit | 36398b9 |

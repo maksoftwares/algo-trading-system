@@ -30,14 +30,22 @@ jobs:
       - name: Audit Phase 3 experimental safety boundary
         run: python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
 
+      - name: Check committed dashboard freshness
+        run: |
+          python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
+          git diff --exit-code status.html
+
       - name: Regenerate synthetic Phase 3 experimental reports
         run: |
           python xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
           python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
           python xau-usd/xauusd-phase3-experimental/scripts/analyze_phase3_suspend_family.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_mode_comparison.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_family_dedup_audit.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
 
       - name: Upload Phase 3 experimental reports

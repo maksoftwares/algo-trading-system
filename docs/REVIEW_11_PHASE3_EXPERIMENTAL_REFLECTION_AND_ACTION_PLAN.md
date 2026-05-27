@@ -52,6 +52,8 @@ This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md 
 | Median net after proxy cost | 0.2562R |
 | Kill rule counts | NORMAL 66, COST_WATCH 2, SUSPEND_FAMILY 19 |
 | Suspend-family review | 19 raw suspended rows collapse to 10 unique primary family events and 9 duplicate observer rows |
+| Cost-mode comparison | `entry_only_proxy` 0 suspended families, `entry_exit_proxy` 10, `p95_fresh_proxy` 24, `stress_2x_p95_proxy` 44 |
+| Family de-dup audit | 47 groups, 40 multi-row groups, all currently `TRUE_DUPLICATE` |
 | Safety report | PASS |
 | Manifest | PASS |
 
@@ -66,6 +68,18 @@ This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md 
 | `normal_spread_small_stop` | 4 | Spread was normal, but stop distance was still too small for cost survival. |
 
 The median suspended row cost is `0.4822R`. The maximum cost proxy that still preserves the +0.15R floor is `0.3616R`. If Phase 2 later passes, these rows should become the first candidates for cost-aware entry blocking rather than execution.
+
+## Follow-Up Hardening
+
+After the follow-up Phase 3 review, the sandbox now adds:
+
+| Artifact | Purpose |
+| --- | --- |
+| `PHASE3_COST_MODE_COMPARISON.md/csv/json` | Compares entry-only, entry-exit, P95 fresh, and 2x P95 stress assumptions. |
+| `PHASE3_FAMILY_DEDUP_AUDIT.md/csv/json` | Shows whether same-bar family groups are true duplicates, distinct levels, direction conflicts, or execution conflicts. |
+| CI dashboard freshness check | Regenerates `status.html` and fails if the committed dashboard is stale. |
+
+These additions remain repo-only. They do not modify MT5 or real Phase 2 readiness.
 
 ## Remaining Boundaries
 

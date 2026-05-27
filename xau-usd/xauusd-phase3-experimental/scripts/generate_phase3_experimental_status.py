@@ -21,6 +21,8 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
     manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json")
     suspend_family = _read_json(reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json")
+    cost_mode_comparison = _read_json(reports / "PHASE3_COST_MODE_COMPARISON.json")
+    family_dedup_audit = _read_json(reports / "PHASE3_FAMILY_DEDUP_AUDIT.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -49,6 +51,8 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "simulation": simulation,
         "safety": safety,
         "suspend_family_review": suspend_family,
+        "cost_mode_comparison": _comparison_summary(cost_mode_comparison),
+        "family_dedup_audit": _audit_summary(family_dedup_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
             "EXPERIMENTAL_ACTIVE",
@@ -74,6 +78,8 @@ def _render_markdown(status: dict[str, object]) -> str:
     simulation = _mapping(status.get("simulation"))
     safety = _mapping(status.get("safety"))
     suspend_family = _mapping(status.get("suspend_family_review"))
+    cost_mode_comparison = _mapping(status.get("cost_mode_comparison"))
+    family_dedup_audit = _mapping(status.get("family_dedup_audit"))
     manifest = _mapping(status.get("manifest"))
     return "\n".join(
         [
@@ -129,6 +135,10 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Suspend review status", str(suspend_family.get("status", "UNKNOWN"))),
                     ("Suspend unique family events", str(suspend_family.get("suspend_unique_family_events", "UNKNOWN"))),
                     ("Suspend primary rows", str(suspend_family.get("suspend_primary_rows", "UNKNOWN"))),
+                    ("Cost-mode comparison", str(cost_mode_comparison.get("status", "UNKNOWN"))),
+                    ("Stress suspend family events", str(cost_mode_comparison.get("stress_suspend_family_unique_events", "UNKNOWN"))),
+                    ("De-dup audit", str(family_dedup_audit.get("status", "UNKNOWN"))),
+                    ("De-dup classifications", str(family_dedup_audit.get("classification_counts", "UNKNOWN"))),
                     ("Manifest status", str(manifest.get("status", "UNKNOWN"))),
                     ("Manifest commit", str(manifest.get("commit_short", "UNKNOWN"))),
                 ]
@@ -156,6 +166,36 @@ def _manifest_summary(manifest: dict[str, object]) -> dict[str, object]:
         "status": manifest.get("status", "UNKNOWN"),
         "commit_short": manifest.get("commit_short", ""),
         "created_at_utc": manifest.get("created_at_utc", ""),
+    }
+
+
+def _comparison_summary(comparison: dict[str, object]) -> dict[str, object]:
+    if not comparison:
+        return {}
+    rows = comparison.get("rows", [])
+    if not isinstance(rows, list):
+        rows = []
+    stress = next(
+        (row for row in rows if isinstance(row, dict) and row.get("cost_mode") == "stress_2x_p95_proxy"),
+        {},
+    )
+    return {
+        "status": comparison.get("status", "UNKNOWN"),
+        "mode_count": len(rows),
+        "stress_suspend_family_unique_events": stress.get("suspend_family_unique_events", "UNKNOWN")
+        if isinstance(stress, dict)
+        else "UNKNOWN",
+    }
+
+
+def _audit_summary(audit: dict[str, object]) -> dict[str, object]:
+    if not audit:
+        return {}
+    return {
+        "status": audit.get("status", "UNKNOWN"),
+        "family_group_count": audit.get("family_group_count", "UNKNOWN"),
+        "multi_row_group_count": audit.get("multi_row_group_count", "UNKNOWN"),
+        "classification_counts": audit.get("classification_counts", {}),
     }
 
 
