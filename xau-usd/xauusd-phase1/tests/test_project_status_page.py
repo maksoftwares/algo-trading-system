@@ -15,10 +15,12 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     module = _load_module()
     repo = tmp_path / "repo"
     phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
+    phase0_manifests = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "manifests"
     phase0_matrix = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "matrix_results"
     phase0_docs = repo / "xau-usd" / "xauusd-phase0" / "docs"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase0_reports.mkdir(parents=True)
+    phase0_manifests.mkdir(parents=True)
     phase0_docs.mkdir(parents=True)
     phase1_reports.mkdir(parents=True)
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
@@ -30,6 +32,12 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     )
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
+    _write_status(phase0_reports / "PHASE0_REALITY_CHECK.md", "FAIL")
+    _write_family_d2(
+        phase0_reports / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md",
+        phase0_manifests / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED_MANIFEST.json",
+        reviewer_accepted=True,
+    )
     _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
     _write_candidate_backlog(phase0_docs / "CANDIDATE_RESEARCH_BACKLOG.md")
     _write_trade_ledger(
@@ -57,6 +65,8 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "h4_us_session_liquidity_reversal_v0" in html
     assert "HASH_LOCKED_SMOKE_PASS_PENDING_MATRIX" in html
     assert "Five-day soak" in html
+    assert "Candidate-level D2 FAIL preserved; owner-accepted family-clustered D2 PASS; D1/D3/D4 remain closed" in html
+    assert "D2 Reality Check/SPA FAIL; D1/D3/D4 remain closed" not in html
     assert "Observer conflicts" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
@@ -239,6 +249,21 @@ def _write_measured_cost(path: Path) -> None:
                 "| --- | --- | --- | --- | --- |",
                 "| 5759 | 500 | 2 | 5 | 2 |",
             ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_family_d2(report_path: Path, manifest_path: Path, reviewer_accepted: bool) -> None:
+    report_path.write_text("# Family D2\n\nOverall status: PASS\n", encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "method": "D2_FAMILY_CLUSTERED_V0",
+                "reviewer_accepted_method": reviewer_accepted,
+                "statistical_pass": True,
+                "winner_family": "breakout_retest_family",
+            }
         ),
         encoding="utf-8",
     )

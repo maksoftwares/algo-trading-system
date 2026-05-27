@@ -10,13 +10,13 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | BR Stage |
 | --- | --- | --- | --- | --- | --- |
-| 799 | 2026.05.27 16:05:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
+| 816 | 2026.05.27 17:30:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
 
 ## Gate Snapshot
 
 | Log | Soak | Runtime | Would-Signal | Acceptance | Soak Progress | Would Rows | Clusters |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| WARN | WARN | WARN | PASS | PENDING | 100.0% | 83 | 83 |
+| WARN | WARN | WARN | PASS | PENDING | 100.0% | 85 | 85 |
 
 ## Primary Artifacts
 
@@ -28,10 +28,10 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 | Soak/drift report | WARN | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_DRIFT_REPORT.md | Overall status: WARN. |
 | Would-signal report | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md | Overall status: PASS. |
 | Soak history report | WARN | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md | Overall status: WARN. |
-| Phase 2 readiness report | FAIL | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md | Overall status: FAIL. |
-| Status summary JSON | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json | Present; 3166 bytes. |
-| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 23101 bytes. |
-| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 168249 bytes. |
+| Phase 2 readiness report | PENDING | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md | Overall status: PENDING. |
+| Status summary JSON | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json | Present; 3167 bytes. |
+| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 23650 bytes. |
+| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 170572 bytes. |
 
 ## Historical Note
 

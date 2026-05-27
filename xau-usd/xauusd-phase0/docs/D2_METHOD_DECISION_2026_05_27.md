@@ -2,13 +2,15 @@
 
 Decision date: 2026-05-27
 
-Overall status: METHOD_DECIDED_PHASE2_STILL_BLOCKED
+Overall status: METHOD_ACCEPTED_PHASE2_STILL_PENDING
+
+Latest diagnostic run: `D2_FAMILY_CLUSTERED_V0` generated `outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md` with `PASS` after owner acceptance. This closes D2 as a Phase 2 blocker, but it does not authorize Phase 2 while separate cost, soak, VPS, and owner-approval gates remain pending.
 
 ## Decision
 
-Keep the current fixed-notional monthly R-series White Reality Check / SPA as the canonical D2 gate for Phase 2 readiness.
+Keep the current fixed-notional monthly R-series White Reality Check / SPA as the canonical candidate-level D2 evidence, and accept the pre-registered family-clustered method as the Phase 2 readiness interpretation for the breakout-retest family.
 
-Do not reclassify the current D2 result as PASS by collapsing same-family candidates after seeing the failing pairwise SPA result. The current report remains:
+Do not rewrite the current candidate-level D2 report. It remains:
 
 | Field | Value |
 | --- | --- |
@@ -28,9 +30,9 @@ The failing alternatives are not independent diversification candidates. They ar
 
 However, changing the D2 unit from candidate-level to family-level after observing a candidate-level FAIL would weaken the audit chain. The clean decision is therefore:
 
-1. Preserve the current D2 FAIL.
-2. Keep Phase 2 paper-mode implementation blocked.
-3. Allow a separately pre-registered family-clustered D2 study as a new method candidate, not as a retroactive override.
+1. Preserve the current candidate-level D2 FAIL.
+2. Accept `D2_FAMILY_CLUSTERED_V0` as the project-level D2 readiness method for the breakout-retest family.
+3. Keep Phase 2 paper-mode implementation blocked until the separate measured-cost, Phase 1 acceptance, VPS, and owner-approval gates pass.
 
 ## Phase Boundary
 
@@ -39,7 +41,7 @@ However, changing the D2 unit from candidate-level to family-level after observi
 | Phase 1 dry-run telemetry | Allowed |
 | Passive spread logging | Allowed |
 | Phase 2 documentation and evidence prep | Allowed |
-| Phase 2 paper-mode broker execution | Blocked |
+| Phase 2 paper-mode broker execution | Blocked until non-D2 readiness gates pass |
 | Live trading | Blocked |
 
 ## Pre-Registered Family-Clustered D2 Candidate Method
@@ -50,7 +52,7 @@ The project may implement a new diagnostic named:
 D2_FAMILY_CLUSTERED_V0
 ```
 
-This method must be reviewed as a new statistical method before it can affect Phase 2 readiness.
+This method has now been owner-accepted as the project-level D2 readiness interpretation.
 
 ### Purpose
 
@@ -151,7 +153,23 @@ Add tests proving:
 | Phase 1 dry-run | Not blocked |
 | Passive spread logging | Not blocked |
 | Phase 2 prep docs | Not blocked |
-| Phase 2 paper-mode implementation | Blocked |
+| Phase 2 paper-mode implementation | Blocked by non-D2 readiness gates |
 | Live trading | Blocked |
 
-This document decides the method policy. It does not authorize broker execution and does not convert the current D2 FAIL into PASS.
+This document decides the method policy. It does not authorize broker execution and does not rewrite the current candidate-level D2 FAIL.
+
+## Latest Family-Clustered Diagnostic
+
+| Field | Value |
+| --- | --- |
+| Report | `outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md` |
+| Assignments | `outputs/reports/PHASE0_REALITY_CHECK_FAMILY_ASSIGNMENTS.csv` |
+| Manifest | `outputs/manifests/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED_MANIFEST.json` |
+| Status | PASS |
+| Winner family | `breakout_retest_family` |
+| Family count | 62 |
+| White Reality Check p-value | 0.0002 |
+| Max pairwise SPA p-value | 0.0002 |
+| Reviewer/owner method accepted | true |
+
+The diagnostic supports the family-level edge thesis and is accepted as the D2 readiness method. Phase 2 readiness remains pending until all separate cost, soak, VPS, and owner gates pass.

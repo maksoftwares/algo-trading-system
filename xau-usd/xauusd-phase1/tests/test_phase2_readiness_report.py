@@ -79,6 +79,55 @@ def test_phase2_readiness_does_not_pass_with_token_only_approval(tmp_path):
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
+def test_phase2_readiness_accepts_owner_approved_family_clustered_d2(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True, d2_status="FAIL")
+    _write_family_clustered_d2(root, status="PASS", reviewer_accepted=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(_approval_text(), encoding="utf-8")
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PASS"
+    assert any(
+        item.gate == "D2 Reality Check / SPA"
+        and item.status == "PASS"
+        and "D2_FAMILY_CLUSTERED_V0" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_keeps_family_clustered_d2_pending_without_owner_acceptance(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True, d2_status="FAIL")
+    _write_family_clustered_d2(root, status="PASS_REVIEW_REQUIRED", reviewer_accepted=False)
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
+
+    assert output.status == "PENDING"
+    assert any(item.gate == "D2 Reality Check / SPA" and item.status == "PENDING" for item in output.items)
+
+
 def test_phase2_readiness_fails_when_latest_boundary_is_not_locked(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -203,7 +252,11 @@ def _write_summary(
     )
 
 
-def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = False) -> None:
+def _write_phase0_cost_artifacts(
+    phase1_root: Path,
+    include_measured: bool = False,
+    d2_status: str = "PASS",
+) -> None:
     phase0_root = phase1_root.parent / "xauusd-phase0"
     docs = phase0_root / "docs"
     reports = phase0_root / "outputs" / "reports"
@@ -242,7 +295,7 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
     )
     (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
     (reports / "PHASE0_REALITY_CHECK.md").write_text(
-        "# Reality check\n\nOverall status: PASS\n",
+        f"# Reality check\n\nOverall status: {d2_status}\n",
         encoding="utf-8",
     )
     (reports / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md").write_text(
@@ -259,6 +312,29 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
             "# Delta\n\nOverall status: PASS\n",
             encoding="utf-8",
         )
+
+
+def _write_family_clustered_d2(phase1_root: Path, status: str, reviewer_accepted: bool) -> None:
+    phase0_root = phase1_root.parent / "xauusd-phase0"
+    reports = phase0_root / "outputs" / "reports"
+    manifests = phase0_root / "outputs" / "manifests"
+    reports.mkdir(parents=True, exist_ok=True)
+    manifests.mkdir(parents=True, exist_ok=True)
+    (reports / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md").write_text(
+        f"# Family D2\n\nOverall status: {status}\n",
+        encoding="utf-8",
+    )
+    (manifests / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED_MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "method": "D2_FAMILY_CLUSTERED_V0",
+                "reviewer_accepted_method": reviewer_accepted,
+                "statistical_pass": status == "PASS",
+                "winner_family": "breakout_retest_family",
+            }
+        ),
+        encoding="utf-8",
+    )
 
 
 def _write_phase2_docs(root: Path) -> None:

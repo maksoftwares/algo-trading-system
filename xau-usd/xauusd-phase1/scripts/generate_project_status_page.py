@@ -31,6 +31,14 @@ class StatusPageFreshnessError(RuntimeError):
     pass
 
 
+@dataclass(frozen=True)
+class D2Decision:
+    status: str
+    detail: str
+    candidate_status: str
+    family_status: str
+
+
 def generate_project_status_page(
     repo_root: Path,
     output_path: Path | None = None,
@@ -55,6 +63,7 @@ def generate_project_status_page(
         phase0_reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
     ) or "UNKNOWN"
     reality_check_status = _read_markdown_status(phase0_reports / "PHASE0_REALITY_CHECK.md") or "UNKNOWN"
+    d2_decision = _resolve_d2_decision(phase0_reports, reality_check_status)
     candidates = _candidate_rows(
         phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv",
         phase0_root / "docs" / "CANDIDATE_RESEARCH_BACKLOG.md",
@@ -81,7 +90,7 @@ def generate_project_status_page(
             summary=phase1_summary,
             fixed_notional=fixed_notional,
             measured_cost=measured_cost,
-            reality_check_status=reality_check_status,
+            d2_decision=d2_decision,
             candidates=candidates,
             account_example=account_example,
         ),
@@ -127,7 +136,7 @@ def _render_html(
     summary: dict[str, Any],
     fixed_notional: dict[str, str],
     measured_cost: dict[str, str],
-    reality_check_status: str,
+    d2_decision: D2Decision,
     candidates: list[dict[str, str]],
     account_example: dict[str, Any],
 ) -> str:
@@ -201,7 +210,7 @@ def _render_html(
                     phase2_status,
                     status_fields,
                     measured_cost,
-                    reality_check_status,
+                    d2_decision,
                     soak,
                 ),
             ),
@@ -654,17 +663,16 @@ def _timeline(
     phase2_status: str,
     status_fields: dict[str, Any],
     measured_cost: dict[str, str],
-    reality_check_status: str,
+    d2_decision: D2Decision,
     soak: dict[str, Any],
 ) -> str:
     cost_rollup = _measured_cost_rollup(measured_cost)
-    validation_status = "PASS" if reality_check_status == "PASS" else reality_check_status
     rows = [
         ("Phase 0", phase0_status, "Research closure and final expert verdict"),
         (
             "Validation D1-D4",
-            validation_status,
-            f"D2 Reality Check/SPA {reality_check_status}; D1/D3/D4 remain closed",
+            d2_decision.status,
+            d2_decision.detail,
         ),
         ("Dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 runtime boundary and observer telemetry"),
         ("Five-day soak", _five_day_soak_status(soak), _five_day_soak_detail(soak)),
@@ -901,11 +909,18 @@ def _milestone_table(
     phase2_status: str,
     status_fields: dict[str, Any],
     measured_cost: dict[str, str],
+    d2_decision: D2Decision | None = None,
 ) -> str:
+    d2_decision = d2_decision or D2Decision(
+        status="UNKNOWN",
+        detail="D2 decision unavailable; D1/D3/D4 status must be checked in Phase 0 independent validation.",
+        candidate_status="UNKNOWN",
+        family_status="UNKNOWN",
+    )
     rows = [
         ("Phase 0 research closure", phase0_status, "breakout_retest approved; same-family provisional candidates remain Gate 9 pending"),
         ("D1 CPCV", "PASS", "Closed in Phase 0 independent validation"),
-        ("D2 Reality Check / SPA", "PASS", "Full-universe rerun remains PASS after latest provisional candidate"),
+        ("D2 Reality Check / SPA", d2_decision.status, d2_decision.detail),
         ("D3 True holdout audit", "PASS", "Holdout remains locked"),
         ("D4 Independent reproduction", "PASS", "Independent reproduction within tolerance"),
         ("Phase 1 dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 telemetry and dry-run boundaries"),
@@ -1343,6 +1358,8 @@ def _artifact_links() -> str:
         ("Phase 0 verdict", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_VERDICT.md"),
         ("D2 method decision", "xau-usd/xauusd-phase0/docs/D2_METHOD_DECISION_2026_05_27.md"),
         ("D2 reality-check interpretation", "xau-usd/xauusd-phase0/docs/PHASE0_REALITY_CHECK_INTERPRETATION.md"),
+        ("D2 family-clustered report", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md"),
+        ("D2 family assignments", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK_FAMILY_ASSIGNMENTS.csv"),
         ("Rejected candidate audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md"),
         ("Frequency-normalized concentration audit", "xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md"),
         ("Fixed-notional cost report", "xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md"),
@@ -1532,6 +1549,51 @@ def _parse_measured_cost(path: Path) -> dict[str, str]:
             result["required_days"] = data.get("Required Days", "")
             return result
     return result
+
+
+def _resolve_d2_decision(phase0_reports: Path, candidate_status: str) -> D2Decision:
+    family_report = phase0_reports / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md"
+    family_manifest = phase0_reports.parent / "manifests" / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED_MANIFEST.json"
+    family_status = _read_markdown_status(family_report) or "UNKNOWN"
+    manifest = _read_json(family_manifest) if family_manifest.exists() else {}
+    family_override_pass = (
+        family_status == "PASS"
+        and manifest.get("method") == "D2_FAMILY_CLUSTERED_V0"
+        and manifest.get("reviewer_accepted_method") is True
+        and manifest.get("statistical_pass") is True
+        and manifest.get("winner_family") == "breakout_retest_family"
+    )
+
+    if candidate_status == "PASS":
+        return D2Decision(
+            status="PASS",
+            detail="Candidate-level D2 Reality Check/SPA PASS; D1/D3/D4 remain closed",
+            candidate_status=candidate_status,
+            family_status=family_status,
+        )
+
+    if family_override_pass:
+        return D2Decision(
+            status="PASS",
+            detail="Candidate-level D2 FAIL preserved; owner-accepted family-clustered D2 PASS; D1/D3/D4 remain closed",
+            candidate_status=candidate_status,
+            family_status=family_status,
+        )
+
+    if family_status == "PASS" and manifest.get("method") == "D2_FAMILY_CLUSTERED_V0":
+        return D2Decision(
+            status="PENDING",
+            detail="Family-clustered D2 report is PASS, but owner acceptance metadata is incomplete; D1/D3/D4 remain closed",
+            candidate_status=candidate_status,
+            family_status=family_status,
+        )
+
+    return D2Decision(
+        status=candidate_status or "UNKNOWN",
+        detail=f"D2 Reality Check/SPA {candidate_status or 'UNKNOWN'}; D1/D3/D4 remain closed",
+        candidate_status=candidate_status or "UNKNOWN",
+        family_status=family_status,
+    )
 
 
 def _read_markdown_status(path: Path) -> str:

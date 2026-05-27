@@ -1,10 +1,10 @@
 # Phase 2 Readiness Report
 
-Overall status: FAIL
+Overall status: PENDING
 
 ## Decision
 
-Phase 2 implementation is blocked by at least one failing readiness gate.
+Phase 2 preparation may continue, but implementation is not authorized yet.
 
 ## Gates
 
@@ -21,7 +21,7 @@ Phase 2 implementation is blocked by at least one failing readiness gate.
 | Cost reporting policy | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`. |
 | Fixed-notional reporting | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md` status is PASS. |
 | D2 fixed-notional R-series canonicalization | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md` contains required Phase 2 controls. |
-| D2 Reality Check / SPA | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK.md` status is FAIL; required PASS. |
+| D2 Reality Check / SPA | PASS | Candidate-level D2 `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK.md` remains FAIL, but owner-accepted `D2_FAMILY_CLUSTERED_V0` report `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md` is PASS with `breakout_retest_family` as winner. |
 | Frequency-normalized concentration audit | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` status is PASS. |
 | Diversification availability finding | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md` contains required Phase 2 controls. |
 | Forward hypothesis gates | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md` contains required Phase 2 controls. |
@@ -33,18 +33,18 @@ Phase 2 implementation is blocked by at least one failing readiness gate.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PENDING | Non-pass status fields: log_verification, soak_analysis, runtime_health |
-| Five trading day soak | PASS | Progress 100.00%; observed 5.2118 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 5.42h; required 72h; weekend policy weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 5.40h; code-freeze 5.41h; required 96h; marker 2026-05-27T10:41:50Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.27 16:05:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 83; clusters: 83. |
+| Five trading day soak | PASS | Progress 100.00%; observed 5.2708 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 6.83h; required 72h; weekend policy weekend_breaks_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 6.86h; code-freeze 6.86h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.27 17:30:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 85; clusters: 85. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 799 | 2026.05.27 16:05:00 | true | false | CLOCK_OK | 100.0% |
+| 816 | 2026.05.27 17:30:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

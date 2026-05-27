@@ -9,7 +9,7 @@ This document tracks the reviewer-requested D1-D4 checks. These checks do not ch
 | Item | Status | Current conclusion |
 | --- | --- | --- |
 | D1 - Combinatorial Purged Cross-Validation | PASS | `breakout_retest` passed 135 purged chronological paths across all 9 matrix cells; pass rate 100%, median OOS PF 1.379, minimum OOS PF 1.135. |
-| D2 - White Reality Check / SPA-style bootstrap | FAIL | Canonical fixed-notional monthly R rerun: `breakout_retest` remained the family winner against 66 non-empty matrix-ledger candidates, White Reality Check p-value 0.0002, and max pairwise SPA p-value 0.0174. The effective alpha tightened to 0.01 after the universe reached at least 30 candidates; same-family `round_number_retest_v0` and `symbol_normalized_round_retest_v0` failed pairwise SPA at that stricter threshold. |
+| D2 - White Reality Check / SPA-style bootstrap | PASS | Candidate-level D2 remains FAIL, but owner accepted the pre-registered `D2_FAMILY_CLUSTERED_V0` method. The family-clustered run returned PASS: `breakout_retest_family` won across 62 family representatives, White Reality Check p-value 0.0002, and max pairwise SPA p-value 0.0002. |
 | D3 - True 6-month holdout | PASS | The reserved period is configured, locked, the unlock file is absent, and `audit-true-holdout` found no generated result timestamps inside the 2025-07-01 to 2025-12-31 holdout window. |
 | D4 - Independent Python reproduction | PASS | `breakout_retest` cell 2 was replayed by a standalone pandas event simulator and matched trade count, PF, win rate, total PnL, and max drawdown within the 5% tolerance. |
 
@@ -78,13 +78,17 @@ Canonicalization note:
 
 The fixed-notional monthly R-series output is the canonical D2 evidence. Earlier percent-return or compounding variants are superseded because they can overweight account-path artifacts rather than the strategy's per-trade edge. Future D2 reruns should use the same fixed-notional R-series construction unless a reviewer explicitly approves a new pre-registered statistical method.
 
-Current failure reason:
+Candidate-level failure reason:
 
-The expanded universe now has at least 30 non-empty candidates, so the D2 implementation tightens the effective accepted p-value from 0.10 to 0.01. `breakout_retest` remains the winner and the White Reality Check p-value remains strong, but pairwise SPA checks against same-family `round_number_retest_v0` and `symbol_normalized_round_retest_v0` fail the stricter 0.01 threshold. Treat D2 as an open blocker before Phase 2 authorization.
+The expanded universe now has at least 30 non-empty candidates, so the candidate-level D2 implementation tightens the effective accepted p-value from 0.10 to 0.01. `breakout_retest` remains the winner and the White Reality Check p-value remains strong, but pairwise SPA checks against same-family `round_number_retest_v0` and `symbol_normalized_round_retest_v0` fail the stricter 0.01 threshold. This candidate-level result remains preserved as evidence.
 
 Method decision:
 
-`docs/D2_METHOD_DECISION_2026_05_27.md` keeps the current fixed-notional candidate-level D2 report as the canonical Phase 2 readiness gate. It does not permit a retroactive PASS by collapsing same-family variants. It pre-registers a possible `D2_FAMILY_CLUSTERED_V0` study as a separate method candidate that must be reviewed before it can affect readiness.
+`docs/D2_METHOD_DECISION_2026_05_27.md` keeps the current fixed-notional candidate-level D2 report as preserved evidence, accepts `D2_FAMILY_CLUSTERED_V0` as the project-level D2 readiness method, and does not rewrite the candidate-level FAIL.
+
+Latest family-clustered diagnostic:
+
+`outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md` returned `PASS`: `breakout_retest_family` won against 62 family representatives, White Reality Check p-value was 0.0002, and max pairwise SPA p-value was 0.0002. The assignment table is `outputs/reports/PHASE0_REALITY_CHECK_FAMILY_ASSIGNMENTS.csv`. This closes D2 as a Phase 2 blocker.
 
 Reviewer-facing note:
 
@@ -92,7 +96,7 @@ Any older D2 report or review comment that references percent-return compounding
 
 Interpretation:
 
-The approved expert remained the winner after a fixed-notional R rerun across the full non-empty tested matrix universe. The command reads every matrix-result directory with a usable trade ledger and keeps each expert as one monthly R series, so cost/broker cells do not become separate optimized candidates and raw dollar compounding artifacts do not drive the bootstrap. However, the expanded same-family search now blocks a clean D2 PASS under the stricter alpha rule. This does not invalidate the Phase 1 dry-run soak, but it must be resolved before Phase 2 authorization.
+The approved expert remained the winner after a fixed-notional R rerun across the full non-empty tested matrix universe. The command reads every matrix-result directory with a usable trade ledger and keeps each expert as one monthly R series, so cost/broker cells do not become separate optimized candidates and raw dollar compounding artifacts do not drive the bootstrap. The accepted family-clustered method resolves the same-family selection ambiguity for Phase 2 readiness, while preserving the candidate-level result for audit history.
 
 Related Review #3 gate-frequency audit:
 
@@ -205,5 +209,5 @@ The reproduction uses a standalone pandas event replay and does not call the Pha
 | Milestone | Effect |
 | --- | --- |
 | Phase 1 dry-run shell | Not blocked. Phase 1 has no broker-side execution and is telemetry-only. |
-| Phase 2 paper trading | Blocked. D2 is now FAIL under the expanded-universe rule, and measured-cost, active-market soak, code-freeze, VPS, and owner approval gates are still not all PASS. |
+| Phase 2 paper trading | Blocked by non-D2 gates. D2 is now PASS via the accepted family-clustered method, but measured-cost, active-market soak, code-freeze, VPS, and owner approval gates are still not all PASS. |
 | Live deployment | Blocked until dry-run soak, paper-trading evidence, and later operational gates are complete. |

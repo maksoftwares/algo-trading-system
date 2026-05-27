@@ -48,7 +48,7 @@ from phase0.reports import generate_all_reports
 from phase0.reference import validate_reference_files
 from phase0.rejection_audit import generate_rejection_gate_audit
 from phase0.rejection_audit import DEFAULT_APPROVED_EXPERTS
-from phase0.reality_check import run_reality_check
+from phase0.reality_check import run_family_clustered_reality_check, run_reality_check
 from phase0.research_hypotheses import register_research_hypothesis
 from phase0.research_smoke import run_research_candidate_smoke
 from phase0.review_bundle import generate_review_bundle
@@ -321,6 +321,23 @@ def build_parser() -> argparse.ArgumentParser:
     reality_check.add_argument("--max-pvalue", type=float, default=0.10)
     reality_check.add_argument("--seed", type=int, default=20260521)
     reality_check.set_defaults(func=_cmd_run_reality_check)
+
+    family_reality_check = subparsers.add_parser(
+        "run-reality-check-family-clustered",
+        help="Run the pre-registered D2 family-clustered Reality Check diagnostic.",
+    )
+    family_reality_check.add_argument("--approved-expert", default="breakout_retest", choices=EXPERTS)
+    family_reality_check.add_argument("--approved-family", default="breakout_retest_family")
+    family_reality_check.add_argument("--iterations", type=int, default=5000)
+    family_reality_check.add_argument("--block-months", type=int, default=3)
+    family_reality_check.add_argument("--max-pvalue", type=float, default=0.10)
+    family_reality_check.add_argument("--seed", type=int, default=20260527)
+    family_reality_check.add_argument(
+        "--reviewer-accepted-method",
+        action="store_true",
+        help="Only use after reviewer/owner acceptance of D2_FAMILY_CLUSTERED_V0.",
+    )
+    family_reality_check.set_defaults(func=_cmd_run_family_clustered_reality_check)
 
     rejection_audit = subparsers.add_parser(
         "generate-rejection-gate-audit",
@@ -925,6 +942,29 @@ def _cmd_run_reality_check(args: argparse.Namespace) -> int:
     print(f"White Reality Check p-value: {output.white_reality_check_pvalue:.4f}")
     print(f"Max pairwise SPA p-value: {output.max_pairwise_spa_pvalue:.4f}")
     return 0 if output.status == "PASS" else 1
+
+
+def _cmd_run_family_clustered_reality_check(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = run_family_clustered_reality_check(
+        config,
+        approved_expert=args.approved_expert,
+        approved_family=args.approved_family,
+        iterations=args.iterations,
+        block_months=args.block_months,
+        max_pvalue=args.max_pvalue,
+        seed=args.seed,
+        reviewer_accepted_method=args.reviewer_accepted_method,
+    )
+    print(f"Family-clustered reality check: {output.status}")
+    print(output.report_path)
+    print(output.assignments_path)
+    print(output.manifest_path)
+    print(f"Winner family: {output.winner_family}")
+    print(f"Families: {output.family_count}")
+    print(f"White Reality Check p-value: {output.white_reality_check_pvalue:.4f}")
+    print(f"Max pairwise SPA p-value: {output.max_pairwise_spa_pvalue:.4f}")
+    return 0 if output.status in {"PASS", "PASS_REVIEW_REQUIRED"} else 1
 
 
 def _cmd_generate_rejection_gate_audit(args: argparse.Namespace) -> int:

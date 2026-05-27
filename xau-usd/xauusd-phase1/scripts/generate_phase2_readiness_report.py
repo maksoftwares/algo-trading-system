@@ -109,11 +109,7 @@ def generate_phase2_readiness_report(
             _phase0_root(root) / "docs" / "PHASE0_INDEPENDENT_VALIDATION.md",
             ("Canonical fixed-notional monthly R", "superseded"),
         ),
-        _status_or_pending_gate(
-            "D2 Reality Check / SPA",
-            _phase0_root(root) / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md",
-            required="PASS",
-        ),
+        _d2_reality_check_gate(root),
         _status_or_pending_gate(
             "Frequency-normalized concentration audit",
             _phase0_root(root) / "outputs" / "reports" / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md",
@@ -199,6 +195,63 @@ def _status_or_pending_gate(gate: str, path: Path, required: str) -> Phase2Readi
     if status in {"PENDING", "WARN", "REVIEW", ""}:
         return Phase2ReadinessItem(gate, "PENDING", f"`{path}` status is {status or 'unclear'}; required {required}.")
     return Phase2ReadinessItem(gate, "FAIL", f"`{path}` status is {status}; required {required}.")
+
+
+def _d2_reality_check_gate(root: Path) -> Phase2ReadinessItem:
+    phase0 = _phase0_root(root)
+    candidate_report = phase0 / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md"
+    family_report = phase0 / "outputs" / "reports" / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md"
+    family_manifest = phase0 / "outputs" / "manifests" / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED_MANIFEST.json"
+
+    candidate_status = _read_markdown_status(candidate_report) if candidate_report.exists() else ""
+    if candidate_status == "PASS":
+        return Phase2ReadinessItem(
+            "D2 Reality Check / SPA",
+            "PASS",
+            f"Candidate-level D2 report `{candidate_report}` status is PASS.",
+        )
+
+    family_status = _read_markdown_status(family_report) if family_report.exists() else ""
+    manifest = _read_json(family_manifest)
+    method = str(manifest.get("method", ""))
+    accepted = manifest.get("reviewer_accepted_method") is True
+    statistical_pass = manifest.get("statistical_pass") is True
+    winner = str(manifest.get("winner_family", ""))
+    if (
+        candidate_status == "FAIL"
+        and family_status == "PASS"
+        and method == "D2_FAMILY_CLUSTERED_V0"
+        and accepted
+        and statistical_pass
+        and winner == "breakout_retest_family"
+    ):
+        return Phase2ReadinessItem(
+            "D2 Reality Check / SPA",
+            "PASS",
+            (
+                f"Candidate-level D2 `{candidate_report}` remains FAIL, but owner-accepted "
+                f"`D2_FAMILY_CLUSTERED_V0` report `{family_report}` is PASS with "
+                "`breakout_retest_family` as winner."
+            ),
+        )
+
+    if family_status in {"PENDING", "WARN", "REVIEW", "PASS_REVIEW_REQUIRED"}:
+        return Phase2ReadinessItem(
+            "D2 Reality Check / SPA",
+            "PENDING",
+            f"Candidate-level D2 status is {candidate_status or 'missing'}; family-clustered status is {family_status}.",
+        )
+    if candidate_status == "FAIL" or family_status == "FAIL":
+        return Phase2ReadinessItem(
+            "D2 Reality Check / SPA",
+            "FAIL",
+            f"Candidate-level D2 status is {candidate_status or 'missing'}; accepted family-clustered PASS not found.",
+        )
+    return Phase2ReadinessItem(
+        "D2 Reality Check / SPA",
+        "PENDING",
+        f"D2 evidence incomplete: candidate status {candidate_status or 'missing'}, family status {family_status or 'missing'}.",
+    )
 
 
 def _phase0_root(phase1_root: Path) -> Path:
