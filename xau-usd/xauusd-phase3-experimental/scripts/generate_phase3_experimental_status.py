@@ -6,12 +6,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+PHASE2_AUTHORITY_SENTENCE = (
+    "This report has no authority over Phase 2 readiness. "
+    "PHASE2_READINESS_REPORT.md remains the sole real readiness authority."
+)
+
+
 def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | None = None) -> Path:
     phase3_root = phase3_root.resolve()
     repo_root = (repo_root or phase3_root.parents[1]).resolve()
     reports = phase3_root / "outputs" / "reports"
     reports.mkdir(parents=True, exist_ok=True)
     simulation = _read_json(reports / "PHASE3_EXPERIMENTAL_SIMULATION.json")
+    safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
+    manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -20,14 +28,17 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_ACCEPTANCE_REPORT.md"
     )
     latest = _mapping(_mapping(phase1_summary.get("runtime")).get("latest_row"))
+    status_label = _phase3_status(simulation, safety)
     status = {
-        "status": "EXPERIMENTAL_ACTIVE",
+        "status": status_label,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "authority": PHASE2_AUTHORITY_SENTENCE,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
         "real_phase1_acceptance": phase1_acceptance or "UNKNOWN",
         "real_phase2_readiness": phase2_readiness or "UNKNOWN",
         "assumption": "assumes_phase2_pass_for_design_only",
         "authorized_for_deployment": False,
+        "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
         "mt5_runtime_touched": False,
         "broker_action_code_allowed": False,
         "latest_phase1_bar": latest.get("bar_time", ""),
@@ -35,6 +46,16 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "latest_phase1_dry_run": latest.get("dry_run", ""),
         "latest_phase1_trade_permission": latest.get("trade_permission", ""),
         "simulation": simulation,
+        "safety": safety,
+        "manifest": _manifest_summary(manifest),
+        "known_state_strings": [
+            "EXPERIMENTAL_ACTIVE",
+            "EXPERIMENTAL_WAITING_FOR_PHASE2",
+            "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+            "EXPERIMENTAL_BOUNDARY_FAIL",
+            "EXPERIMENTAL_REVIEW_READY",
+            "EXPERIMENTAL_ARCHIVED",
+        ],
         "docs": [
             "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
             "docs/PHASE3_EXECUTION_READINESS_DESIGN.md",
@@ -49,9 +70,13 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
 
 def _render_markdown(status: dict[str, object]) -> str:
     simulation = _mapping(status.get("simulation"))
+    safety = _mapping(status.get("safety"))
+    manifest = _mapping(status.get("manifest"))
     return "\n".join(
         [
             "# Phase 3 Experimental Status",
+            "",
+            PHASE2_AUTHORITY_SENTENCE,
             "",
             f"Overall status: {status['status']}",
             "",
@@ -61,6 +86,7 @@ def _render_markdown(status: dict[str, object]) -> str:
             "- This sandbox assumes Phase 2 PASS for design only.",
             "- MT5 runtime was not touched.",
             "- Broker-action code is not allowed.",
+            "- This experiment is excluded from the owner approval flow for real Phase 2 or real Phase 3.",
             "",
             "## Current Real Gate State",
             "",
@@ -79,15 +105,52 @@ def _render_markdown(status: dict[str, object]) -> str:
             _table(
                 [
                     ("Accepted events", str(simulation.get("accepted_events", "0"))),
+                    ("Raw observer events", str(simulation.get("raw_observer_event_count", "0"))),
+                    ("Family unique events", str(simulation.get("family_unique_event_count", "0"))),
+                    ("Observer duplicates", str(simulation.get("observer_duplicate_count", "0"))),
+                    ("Observer conflicts", str(simulation.get("observer_conflict_count", "0"))),
                     ("Rejected source rows", str(simulation.get("rejected_source_rows", "0"))),
+                    ("Cost mode", str(simulation.get("cost_mode", "n/a"))),
                     ("Median proxy cost R", str(simulation.get("median_proxy_cost_r", "n/a"))),
                     ("Median net after proxy cost R", str(simulation.get("median_net_after_proxy_cost_r", "n/a"))),
                     ("Minimum net expectancy R", str(simulation.get("minimum_net_expectancy_r", "n/a"))),
                 ]
             ),
             "",
+            "## Safety And Manifest",
+            "",
+            _table(
+                [
+                    ("Safety status", str(safety.get("status", "UNKNOWN"))),
+                    ("Safety findings", str(safety.get("findings_count", "UNKNOWN"))),
+                    ("Manifest status", str(manifest.get("status", "UNKNOWN"))),
+                    ("Manifest commit", str(manifest.get("commit_short", "UNKNOWN"))),
+                ]
+            ),
+            "",
         ]
     )
+
+
+def _phase3_status(simulation: dict[str, object], safety: dict[str, object]) -> str:
+    if safety and safety.get("status") != "PASS":
+        return "EXPERIMENTAL_BOUNDARY_FAIL"
+    if not simulation:
+        return "EXPERIMENTAL_WAITING_FOR_PHASE2"
+    simulation_status = str(simulation.get("status") or "")
+    if simulation_status == "EXPERIMENTAL_COST_SUSPEND_SCENARIO":
+        return simulation_status
+    return "EXPERIMENTAL_ACTIVE"
+
+
+def _manifest_summary(manifest: dict[str, object]) -> dict[str, object]:
+    if not manifest:
+        return {}
+    return {
+        "status": manifest.get("status", "UNKNOWN"),
+        "commit_short": manifest.get("commit_short", ""),
+        "created_at_utc": manifest.get("created_at_utc", ""),
+    }
 
 
 def _read_json(path: Path) -> dict[str, object]:

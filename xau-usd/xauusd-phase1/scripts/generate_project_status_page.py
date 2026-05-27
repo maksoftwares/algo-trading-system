@@ -1391,6 +1391,8 @@ def _artifact_links() -> str:
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),
+        ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
+        ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
         ("Phase 3 experimental ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv"),
     ]
     return _list([f'<a href="{_esc(_link(href))}">{_esc(label)}</a>' for label, href in links], raw=True)
@@ -1431,13 +1433,22 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     if not phase3_status:
         return _list(["Not started."])
     simulation = _mapping(phase3_status.get("simulation"))
+    safety = _mapping(phase3_status.get("safety"))
+    manifest = _mapping(phase3_status.get("manifest"))
     rows = [
         ("Status", _phase3_status_label(phase3_status)),
         ("Real Phase 2", _cell(phase3_status.get("real_phase2_readiness"))),
         ("Assumption", _cell(phase3_status.get("assumption"))),
         ("Authorized for deployment", _cell(phase3_status.get("authorized_for_deployment"))),
         ("MT5 runtime touched", _cell(phase3_status.get("mt5_runtime_touched"))),
-        ("Accepted offline events", _cell(simulation.get("accepted_events"))),
+        ("Safety status", _cell(safety.get("status"))),
+        ("Manifest status", _cell(manifest.get("status"))),
+        ("Cost mode", _cell(simulation.get("cost_mode"))),
+        ("Raw observer events", _cell(simulation.get("raw_observer_event_count"))),
+        ("Family unique events", _cell(simulation.get("family_unique_event_count"))),
+        ("Primary stream allowed", _cell(simulation.get("primary_stream_allowed_count"))),
+        ("Observer duplicates", _cell(simulation.get("observer_duplicate_count"))),
+        ("Observer conflicts", _cell(simulation.get("observer_conflict_count"))),
         ("Rejected source rows", _cell(simulation.get("rejected_source_rows"))),
         ("Median proxy cost R", _cell(simulation.get("median_proxy_cost_r"))),
         ("Median net after proxy cost R", _cell(simulation.get("median_net_after_proxy_cost_r"))),

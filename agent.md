@@ -29,9 +29,13 @@ Last updated: 2026-05-28
   - Owner authorized a repo-only Phase 3 experimental lane that assumes Phase 2 may pass for design purposes only. This does not mark Phase 2 as passed and does not authorize paper-mode implementation or broker-side execution.
   - New isolated package: `xau-usd\xauusd-phase3-experimental`.
   - Boundary: no MT5 deployment, no restart, no live runtime changes, no broker-action code. The live Phase 1 dry-run and passive spread logger continue untouched.
-  - First offline simulation consumed `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` and produced `87` accepted experimental events, `2` rejected source rows, median proxy cost `0.1277R`, and median net-after-proxy-cost `0.3839R`. This is design evidence only, not a trading verdict.
-  - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, and `PHASE3_EXPERIMENTAL_LEDGER.csv`.
-  - Status dashboard now includes a `Phase 3 Experimental Lab` panel while still showing real Phase 2 as PENDING.
+  - Review 11 hardening is implemented: Phase 3 CI workflow, committed fixture CSV, family-level observer de-duplication, explicit cost modes, safety report, source-hash manifest, and expanded tests.
+  - Current offline simulation consumed `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` and produced `87` raw observer events, `47` family-unique primary events, `40` observer duplicates, `0` observer conflicts, `2` rejected source rows, median proxy cost `0.2554R`, and median net-after-proxy-cost `0.2562R` under default `entry_exit_proxy` cost mode. Kill-rule counts: NORMAL `66`, COST_WATCH `2`, SUSPEND_FAMILY `19`.
+  - Current Phase 3 experimental status is `EXPERIMENTAL_COST_SUSPEND_SCENARIO`; this is design pressure only and has no authority over Phase 2 readiness.
+  - Exact authority rule for Phase 3 reports: `This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.`
+  - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, `PHASE3_EXPERIMENTAL_LEDGER.csv`, `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md`, and `PHASE3_EXPERIMENTAL_MANIFEST.md`.
+  - Phase 3 safety report is PASS with 0 findings. Manifest is PASS and records source/input/report hashes.
+  - Status dashboard now includes Phase 3 family de-dup, cost-mode, safety, and manifest fields while still showing real Phase 2 as PENDING.
 - 2026-05-27 refresh:
   - Review instruction update implemented: Phase 1 source is now `phase1-dry-run-v0.7`, deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and restarted. The code-freeze marker was intentionally reset to `2026-05-27T10:41:50Z`.
   - Canonical cost lifecycle is now `COST_REVALIDATION_PENDING` while `MEASURED_COST_MODEL.md` is PENDING. `COST_SUSPENDED` is reserved only for an authoritative measured-cost revalidation FAIL after the fresh measured-cost model reaches PASS.

@@ -4,6 +4,8 @@ Status: EXPERIMENTAL_ACTIVE
 
 This document defines the experimental Phase 3 lane requested by the owner while Phase 2 evidence continues to mature.
 
+This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
+
 ## Assumption
 
 For design purposes only, this sandbox assumes:
@@ -44,6 +46,39 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_EXPERIMENTAL_SIMULATION.md` | Human-readable simulation summary. |
 | `PHASE3_EXPERIMENTAL_STATUS.json` | Machine-readable status for the dashboard. |
 | `PHASE3_EXPERIMENTAL_STATUS.md` | Reviewer-facing status summary. |
+| `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
+| `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
+
+## Family De-Duplication
+
+| Stream | Role |
+| --- | --- |
+| `breakout_retest` | Primary stream. |
+| `swing_breakout_retest_v0` | Observer-only same-family stream. |
+| `symbol_normalized_round_retest_v0` | Observer-only same-family stream. |
+| Provisional or disabled variants | Excluded from the experimental ledger. |
+
+The ledger must expose `family_event_id`, `family_duplicate_group_id`, `family_event_role`, and `primary_stream_allowed` so reviewers can separate raw observer rows from unique family events.
+
+## Cost Modes
+
+| Mode | Meaning |
+| --- | --- |
+| `entry_only_proxy` | Entry spread plus entry slippage only. |
+| `entry_exit_proxy` | Entry and exit spread plus entry and exit slippage. This is the default. |
+| `p95_fresh_proxy` | Uses fresh measured P95 spread for both entry and exit spread assumptions. |
+| `stress_2x_p95_proxy` | Doubles fresh measured P95 spread for both entry and exit stress. |
+
+## State Strings
+
+```text
+EXPERIMENTAL_ACTIVE
+EXPERIMENTAL_WAITING_FOR_PHASE2
+EXPERIMENTAL_COST_SUSPEND_SCENARIO
+EXPERIMENTAL_BOUNDARY_FAIL
+EXPERIMENTAL_REVIEW_READY
+EXPERIMENTAL_ARCHIVED
+```
 
 ## Non-Negotiable Boundary
 

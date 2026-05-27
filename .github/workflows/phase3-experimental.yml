@@ -1,0 +1,48 @@
+name: Phase 3 Experimental Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  xauusd-phase3-experimental:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install shared Phase 0 test runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e "xau-usd/xauusd-phase0[dev]"
+
+      - name: Run Phase 3 experimental tests
+        run: python -m pytest xau-usd/xauusd-phase3-experimental/tests
+
+      - name: Audit Phase 3 experimental safety boundary
+        run: python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
+
+      - name: Regenerate synthetic Phase 3 experimental reports
+        run: |
+          python xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
+          python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
+          python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
+
+      - name: Upload Phase 3 experimental reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase3-experimental-review-reports
+          path: |
+            xau-usd/xauusd-phase3-experimental/outputs/reports/**
+            status.html

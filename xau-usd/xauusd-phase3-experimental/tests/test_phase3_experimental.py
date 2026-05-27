@@ -8,35 +8,77 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+FIXTURE = ROOT / "tests" / "fixtures" / "sample_would_signals.csv"
 
 
-def test_phase3_simulation_filters_unsafe_rows(tmp_path: Path):
+def test_phase3_simulation_filters_unsafe_rows_and_deduplicates_family_events(tmp_path: Path):
     module = _load_script("simulate_phase3_from_would_signals")
-    input_csv = tmp_path / "would.csv"
-    _write_would_signal_csv(input_csv)
 
-    output = module.simulate_phase3_from_would_signals(input_csv, tmp_path / "reports")
+    output = module.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
 
-    assert output.status == "EXPERIMENTAL_ACTIVE"
-    assert output.accepted_events == 1
-    assert output.rejected_source_rows == 2
+    assert output.status == "EXPERIMENTAL_COST_SUSPEND_SCENARIO"
+    assert output.accepted_events == 7
+    assert output.rejected_source_rows == 6
+    summary = json.loads(output.summary_path.read_text(encoding="utf-8"))
+    assert summary["raw_observer_event_count"] == 7
+    assert summary["family_unique_event_count"] == 3
+    assert summary["observer_duplicate_count"] == 1
+    assert summary["observer_conflict_count"] == 2
+    assert summary["primary_stream_allowed_count"] == 3
+    assert summary["kill_rule_counts"] == {
+        "COST_WATCH": 1,
+        "NORMAL": 5,
+        "SUSPEND_FAMILY": 1,
+    }
     with output.ledger_path.open("r", encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    assert rows[0]["source_dry_run"] == "true"
-    assert rows[0]["source_trade_permission"] == "false"
-    assert rows[0]["experimental_state"] == "EXPERIMENT_ONLY"
+    roles = {row["source_cluster_id"]: row for row in rows}
+    assert roles["WS100"]["family_event_role"] == "PRIMARY_EXECUTION_CANDIDATE"
+    assert roles["WS100"]["primary_stream_allowed"] == "true"
+    assert roles["WS101"]["family_event_role"] == "OBSERVER_DUPLICATE"
+    assert roles["WS101"]["primary_stream_allowed"] == "false"
+    assert roles["WS104"]["family_event_role"] == "OBSERVER_CONFLICT"
+    assert roles["WS105"]["family_event_role"] == "OBSERVER_CONFLICT"
+    assert roles["WS106"]["family_event_role"] == "OBSERVER_ONLY_NO_PRIMARY"
+    assert roles["WS102"]["kill_rule_state"] == "COST_WATCH"
+    assert roles["WS103"]["kill_rule_state"] == "SUSPEND_FAMILY"
+    assert roles["WS100"]["cost_mode"] == "entry_exit_proxy"
+    assert "This report has no authority over Phase 2 readiness." in output.report_path.read_text(encoding="utf-8")
 
 
-def test_phase3_status_preserves_real_phase2_pending(tmp_path: Path):
+def test_phase3_cost_modes_are_explicit(tmp_path: Path):
+    module = _load_script("simulate_phase3_from_would_signals")
+
+    entry_only = module.simulate_phase3_from_would_signals(
+        FIXTURE,
+        tmp_path / "entry",
+        cost_mode="entry_only_proxy",
+    )
+    stress = module.simulate_phase3_from_would_signals(
+        FIXTURE,
+        tmp_path / "stress",
+        cost_mode="stress_2x_p95_proxy",
+    )
+
+    entry_summary = json.loads(entry_only.summary_path.read_text(encoding="utf-8"))
+    stress_summary = json.loads(stress.summary_path.read_text(encoding="utf-8"))
+    assert entry_summary["cost_mode"] == "entry_only_proxy"
+    assert stress_summary["cost_mode"] == "stress_2x_p95_proxy"
+    assert stress_summary["kill_rule_counts"]["SUSPEND_FAMILY"] > entry_summary["kill_rule_counts"]["SUSPEND_FAMILY"]
+
+
+def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
+    safety_module = _load_script("audit_phase3_experimental_safety")
+    manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     repo = tmp_path / "repo"
     phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase1_reports.mkdir(parents=True)
-    input_csv = tmp_path / "would.csv"
-    _write_would_signal_csv(input_csv)
-    simulator.simulate_phase3_from_would_signals(input_csv, phase3 / "outputs" / "reports")
+    simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
+    safety_module.generate_phase3_safety_report(ROOT, phase3 / "outputs" / "reports")
+    manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
         json.dumps(
             {
@@ -58,18 +100,46 @@ def test_phase3_status_preserves_real_phase2_pending(tmp_path: Path):
     status_path = status_module.generate_phase3_experimental_status(phase3, repo)
 
     status = json.loads(status_path.read_text(encoding="utf-8"))
-    assert status["status"] == "EXPERIMENTAL_ACTIVE"
+    assert status["status"] == "EXPERIMENTAL_COST_SUSPEND_SCENARIO"
     assert status["real_phase2_readiness"] == "PENDING"
     assert status["authorized_for_deployment"] is False
     assert status["mt5_runtime_touched"] is False
+    assert status["safety"]["status"] == "PASS"
+    assert status["manifest"]["status"] == "PASS"
+    assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in (
+        phase3 / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_STATUS.md"
+    ).read_text(encoding="utf-8")
 
 
-def test_phase3_safety_audit_passes():
+def test_phase3_safety_audit_passes_and_report_is_generated(tmp_path: Path):
     module = _load_script("audit_phase3_experimental_safety")
 
     findings = module.audit_phase3_tree(ROOT)
+    output = module.generate_phase3_safety_report(ROOT, tmp_path / "reports")
 
     assert findings == []
+    assert output.status == "PASS"
+    assert output.findings_count == 0
+    assert output.report_path.exists()
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in output.report_path.read_text(
+        encoding="utf-8"
+    )
+
+
+def test_phase3_safety_audit_detects_forbidden_broker_action_reference(tmp_path: Path):
+    module = _load_script("audit_phase3_experimental_safety")
+    root = tmp_path / "xauusd-phase3-experimental"
+    root.mkdir()
+    forbidden = "Order" + "Send"
+    (root / "unsafe.py").write_text(f"def unsafe():\n    return '{forbidden}'\n", encoding="utf-8")
+
+    output = module.generate_phase3_safety_report(root)
+
+    assert output.status == "FAIL"
+    assert output.findings_count == 1
+    summary = json.loads(output.summary_path.read_text(encoding="utf-8"))
+    assert summary["findings"][0]["term"] == forbidden
 
 
 def _load_script(name: str):
@@ -84,66 +154,3 @@ def _load_script(name: str):
     sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
-
-
-def _write_would_signal_csv(path: Path) -> None:
-    fieldnames = [
-        "cluster_id",
-        "observer",
-        "timestamp_broker",
-        "timestamp_utc",
-        "timestamp_local",
-        "bar_time",
-        "run_id",
-        "symbol",
-        "direction",
-        "level_kind",
-        "level_price",
-        "entry_price",
-        "stop_loss",
-        "take_profit",
-        "stop_distance_points",
-        "spread_points",
-        "risk_state",
-        "execution_state",
-        "server_time_status",
-        "reason_code",
-        "trade_permission",
-        "dry_run",
-    ]
-    rows = [
-        _row("WS001"),
-        _row("WS002", dry_run="false"),
-        _row("WS003", trade_permission="true"),
-    ]
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
-def _row(cluster_id: str, dry_run: str = "true", trade_permission: str = "false") -> dict[str, str]:
-    return {
-        "cluster_id": cluster_id,
-        "observer": "breakout_retest",
-        "timestamp_broker": "2026.05.27 12:00:00",
-        "timestamp_utc": "2026.05.27 08:00:00",
-        "timestamp_local": "2026.05.27 17:30:00",
-        "bar_time": "2026.05.27 12:00:00",
-        "run_id": "phase1-dry-run-v0.7",
-        "symbol": "XAUUSD",
-        "direction": "LONG",
-        "level_kind": "latest_swing_high",
-        "level_price": "4500.00",
-        "entry_price": "4502.00",
-        "stop_loss": "4497.00",
-        "take_profit": "4509.50",
-        "stop_distance_points": "500.00",
-        "spread_points": "50.00",
-        "risk_state": "NORMAL",
-        "execution_state": "EXECUTION_OK",
-        "server_time_status": "CLOCK_OK",
-        "reason_code": "DRY_RUN_SIGNAL",
-        "trade_permission": trade_permission,
-        "dry_run": dry_run,
-    }
