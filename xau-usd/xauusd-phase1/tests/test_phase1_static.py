@@ -235,6 +235,22 @@ def test_static_docs_do_not_pin_runtime_snapshots():
     assert "| Soak progress | 8.26%" not in text
 
 
+def test_phase2_authorization_checklist_uses_owner_accepted_family_d2_method():
+    text = (ROOT / "docs" / "PHASE2_AUTHORIZATION_CHECKLIST.md").read_text(encoding="utf-8")
+
+    assert "| D2 Reality Check / SPA-style bootstrap | PASS | Active readiness method is owner-accepted `D2_FAMILY_CLUSTERED_V0`" in text
+    assert "Candidate-level D2 remains preserved audit evidence, not the active readiness blocker." in text
+    assert "| D2 Reality Check / SPA-style bootstrap | FAIL |" not in text
+    assert "same-family variants as diversification" not in text
+
+
+def test_phase2_authorization_checklist_references_gap_classification_review():
+    text = (ROOT / "docs" / "PHASE2_AUTHORIZATION_CHECKLIST.md").read_text(encoding="utf-8")
+
+    assert "PHASE1_GAP_CLASSIFICATION_REVIEW.md" in text
+    assert "not proven to be an expected market break" in text
+
+
 def test_phase1_risk_gate_has_simulated_lock_states():
     text = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Risk.mqh").read_text(encoding="utf-8")
 

@@ -33,18 +33,18 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PENDING | Non-pass status fields: log_verification, soak_analysis, runtime_health |
-| Five trading day soak | PASS | Progress 100.00%; observed 5.2708 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 6.83h; required 72h; weekend policy weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 6.86h; code-freeze 6.86h; required 96h; marker 2026-05-27T10:41:50Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.27 17:30:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 85; clusters: 85. |
+| Five trading day soak | PASS | Progress 100.00%; observed 5.2986 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 7.5h; required 72h; weekend policy weekend_breaks_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 7.53h; code-freeze 7.54h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.27 18:10:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 89; clusters: 89. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 816 | 2026.05.27 17:30:00 | true | false | CLOCK_OK | 100.0% |
+| 824 | 2026.05.27 18:10:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

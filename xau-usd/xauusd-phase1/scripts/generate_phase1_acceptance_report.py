@@ -329,7 +329,7 @@ def _decision_text(status: str) -> str:
         return "Phase 1 acceptance evidence is complete for the current dry-run scope."
     if status == "FAIL":
         return "Phase 1 acceptance evidence has a failing gate. Keep the shell in dry-run mode and resolve the finding."
-    return "Phase 1 is progressing, but final acceptance remains pending until the required wall-clock soak is complete."
+    return "Phase 1 is progressing, but final acceptance remains pending until active-market continuity, process/code-freeze, and all runtime health gates are complete."
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:

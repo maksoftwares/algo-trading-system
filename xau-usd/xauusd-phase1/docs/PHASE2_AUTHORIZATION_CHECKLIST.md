@@ -10,7 +10,7 @@ This checklist separates work that is already closed from gates that still requi
 | --- | --- | --- |
 | Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
-| D2 Reality Check / SPA-style bootstrap | FAIL | Canonical fixed-notional monthly R rerun against 66 non-empty matrix-ledger candidates: `breakout_retest` remains winner and White p=0.0002, but the expanded universe tightens effective alpha to 0.01 and same-family pairwise SPA reaches 0.0174; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK.md` |
+| D2 Reality Check / SPA-style bootstrap | PASS | Active readiness method is owner-accepted `D2_FAMILY_CLUSTERED_V0`: `breakout_retest_family` wins across 62 family representatives, White p=0.0002, and max pairwise SPA p=0.0002; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md`. Candidate-level D2 remains preserved audit evidence, not the active readiness blocker. |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
@@ -20,7 +20,7 @@ This checklist separates work that is already closed from gates that still requi
 | Forward hypothesis gates | PASS | `docs/HYPOTHESIS_LOCKING.md` pre-registers normalized concentration thresholds and a Pepperstone+Dukascopy cross-venue PF floor for future candidates. |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
-| Phase 1 runtime health | WARN | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; remaining warnings are maturity gates after the v0.7 reset. |
+| Phase 1 runtime health | WARN | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; remaining warnings are maturity gates after the v0.7 reset. The 2026-05-26 65-minute gap is classified in `docs/PHASE1_GAP_CLASSIFICATION_REVIEW.md` as not proven to be an expected market break, so runtime health stays WARN until a clean 72h active-market streak matures. |
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
@@ -38,7 +38,6 @@ This checklist separates work that is already closed from gates that still requi
 
 | Gate | Current status | Closure rule |
 | --- | --- | --- |
-| D2 Reality Check / SPA-style bootstrap | FAIL | Resolve the expanded-universe same-family SPA blocker before Phase 2. Do not override this by treating same-family variants as diversification; any method change must be pre-registered and reviewer-visible. |
 | Active-market 72-hour soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show longest active-market bar-continuity streak >= 72h with no dry-run, permission, schema, or server-time violations. Weekend closures break this active-market streak. |
 | Process/code-freeze 96-hour gate | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show process uptime streak >= 96h and code-freeze hours >= 96h using `phase1_code_freeze_started_at.txt`. |
 | Measured cost model | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS from five fresh observed market days before evaluation. |
@@ -46,7 +45,7 @@ This checklist separates work that is already closed from gates that still requi
 | Measured-cost assumption delta | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` remains pending until authoritative measured-cost revalidation runs. |
 | Measured-cost audit | REVIEW | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` and `BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md` must be reviewed to decide whether the cost failure is real or a conversion defect. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
-| Phase 2 readiness report | FAIL | `PHASE2_READINESS_REPORT.md` must return to PASS after D2 and all remaining readiness gates are closed. |
+| Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must return to PASS after all remaining readiness gates are closed. D2 is no longer the active blocker after owner acceptance of `D2_FAMILY_CLUSTERED_V0`. |
 | Phase 1 observer parity | PENDING | `PHASE1_OBSERVER_PARITY_REPORT.md` must prove the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic before paper-mode implementation. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | Shortlist is ready. `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` only after provider, region, specs, backup access, monitoring approach, and first-day latency evidence are selected. |

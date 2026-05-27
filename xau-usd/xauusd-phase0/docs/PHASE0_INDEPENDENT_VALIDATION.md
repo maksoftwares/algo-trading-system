@@ -74,7 +74,7 @@ Latest result:
 | Bootstrap iterations | 5000 |
 | Circular block length | 3 months |
 
-Canonicalization note:
+Canonical fixed-notional monthly R canonicalization note:
 
 The fixed-notional monthly R-series output is the canonical D2 evidence. Earlier percent-return or compounding variants are superseded because they can overweight account-path artifacts rather than the strategy's per-trade edge. Future D2 reruns should use the same fixed-notional R-series construction unless a reviewer explicitly approves a new pre-registered statistical method.
 
