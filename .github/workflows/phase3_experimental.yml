@@ -33,6 +33,7 @@ jobs:
       - name: Check committed dashboard freshness
         run: |
           python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
+          python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
           git diff --exit-code status.html
 
       - name: Regenerate synthetic Phase 3 experimental reports
@@ -48,9 +49,10 @@ jobs:
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
 
-      - name: Verify Phase 3 authority sentence
+      - name: Verify Phase 3 review artifacts
         run: |
-          grep -R "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority." xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_*.md
+          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked
+          python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
       - name: Verify Phase 3 remains non-deployable
         run: |

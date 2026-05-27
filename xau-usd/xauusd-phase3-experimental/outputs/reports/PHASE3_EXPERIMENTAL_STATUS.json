@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-27T20:30:34.973208Z",
+  "created_at_utc": "2026-05-27T21:06:42.180900Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -16,7 +16,7 @@
   "latest_phase1_trade_permission": "false",
   "simulation": {
     "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-    "created_at_utc": "2026-05-27T20:30:34.255253Z",
+    "created_at_utc": "2026-05-27T21:05:33.861421Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
     "phase2_assumption": "assumes_phase2_pass_for_design_only",
@@ -32,8 +32,10 @@
     "primary_stream_allowed_count": 47,
     "rejected_source_rows": 2,
     "baseline_gross_edge_r": 0.5116,
+    "gross_expectancy_r_source": "fixed_notional_phase0_baseline",
     "baseline_net_expectancy_r": 0.1888,
     "baseline_modeled_cost_r": 0.3228,
+    "baseline_assumed_cost_r": 0.3228,
     "minimum_net_expectancy_r": 0.15,
     "cost_mode": "entry_exit_proxy",
     "exit_spread_points_assumed": null,
@@ -44,6 +46,8 @@
     "mean_proxy_cost_r": 0.2831,
     "median_net_after_proxy_cost_r": 0.2562,
     "mean_net_after_proxy_cost_r": 0.2285,
+    "median_net_delta_vs_assumed_baseline_r": 0.0674,
+    "mean_net_delta_vs_assumed_baseline_r": 0.0397,
     "kill_rule_counts": {
       "COST_WATCH": 2,
       "NORMAL": 66,
@@ -58,7 +62,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-27T20:30:34.324974Z",
+    "created_at_utc": "2026-05-27T21:06:23.145127Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -80,7 +84,7 @@
   },
   "suspend_family_review": {
     "status": "REVIEW_READY",
-    "created_at_utc": "2026-05-27T20:30:34.401945Z",
+    "created_at_utc": "2026-05-27T21:05:34.015887Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
     "raw_ledger_rows": 87,
@@ -89,10 +93,15 @@
     "suspend_primary_rows": 10,
     "suspend_primary_family_events": 10,
     "suspend_duplicate_rows": 9,
+    "gross_expectancy_r_source": "fixed_notional_phase0_baseline",
+    "baseline_assumed_cost_r": 0.3228,
+    "baseline_net_expectancy_r": 0.1888,
+    "baseline_gross_edge_r": 0.5116,
     "max_cost_proxy_r_before_suspend": 0.3616,
     "minimum_net_expectancy_r": 0.15,
     "median_suspend_cost_r": 0.4822,
     "mean_suspend_cost_r": 0.4963,
+    "median_suspend_net_delta_vs_assumed_baseline_r": -0.1594,
     "median_suspend_stop_distance_points": 229.12,
     "diagnosis_counts": {
       "normal_spread_small_stop": 4,
@@ -133,8 +142,8 @@
   },
   "manifest": {
     "status": "PASS",
-    "commit_short": "36398b9",
-    "created_at_utc": "2026-05-27T20:30:34.774989Z"
+    "commit_short": "3790ed3",
+    "created_at_utc": "2026-05-27T21:06:41.990690Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

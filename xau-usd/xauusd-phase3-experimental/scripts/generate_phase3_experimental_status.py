@@ -120,8 +120,15 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Observer conflicts", str(simulation.get("observer_conflict_count", "0"))),
                     ("Rejected source rows", str(simulation.get("rejected_source_rows", "0"))),
                     ("Cost mode", str(simulation.get("cost_mode", "n/a"))),
+                    ("Gross expectancy R source", str(simulation.get("gross_expectancy_r_source", "n/a"))),
+                    ("Baseline assumed cost R", str(simulation.get("baseline_assumed_cost_r", "n/a"))),
+                    ("Baseline net expectancy R", str(simulation.get("baseline_net_expectancy_r", "n/a"))),
                     ("Median proxy cost R", str(simulation.get("median_proxy_cost_r", "n/a"))),
                     ("Median net after proxy cost R", str(simulation.get("median_net_after_proxy_cost_r", "n/a"))),
+                    (
+                        "Median net delta vs assumed baseline R",
+                        str(simulation.get("median_net_delta_vs_assumed_baseline_r", "n/a")),
+                    ),
                     ("Minimum net expectancy R", str(simulation.get("minimum_net_expectancy_r", "n/a"))),
                 ]
             ),

@@ -59,6 +59,12 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_manifest": phase3_root / "scripts" / "generate_phase3_experimental_manifest.py",
         "script_cost_mode_comparison": phase3_root / "scripts" / "generate_phase3_cost_mode_comparison.py",
         "script_family_dedup_audit": phase3_root / "scripts" / "generate_phase3_family_dedup_audit.py",
+        "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
+        "script_status_dashboard_freshness": repo_root
+        / "xau-usd"
+        / "xauusd-phase1"
+        / "scripts"
+        / "verify_status_dashboard_freshness.py",
     }
     files = {name: _file_entry(path) for name, path in paths.items()}
     manifest = {

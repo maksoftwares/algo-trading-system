@@ -25,6 +25,10 @@ def test_phase3_simulation_filters_unsafe_rows_and_deduplicates_family_events(tm
     assert summary["observer_duplicate_count"] == 1
     assert summary["observer_conflict_count"] == 2
     assert summary["primary_stream_allowed_count"] == 3
+    assert summary["gross_expectancy_r_source"] == "fixed_notional_phase0_baseline"
+    assert summary["baseline_assumed_cost_r"] == 0.3228
+    assert summary["baseline_net_expectancy_r"] == 0.1888
+    assert "median_net_delta_vs_assumed_baseline_r" in summary
     assert summary["kill_rule_counts"] == {
         "COST_WATCH": 1,
         "NORMAL": 5,
@@ -35,6 +39,12 @@ def test_phase3_simulation_filters_unsafe_rows_and_deduplicates_family_events(tm
     roles = {row["source_cluster_id"]: row for row in rows}
     assert roles["WS100"]["family_event_role"] == "PRIMARY_EXECUTION_CANDIDATE"
     assert roles["WS100"]["primary_stream_allowed"] == "true"
+    assert roles["WS100"]["gross_expectancy_r_source"] == "fixed_notional_phase0_baseline"
+    assert roles["WS100"]["baseline_assumed_cost_r"] == "0.3228"
+    assert roles["WS100"]["baseline_net_expectancy_r"] == "0.1888"
+    assert roles["WS100"]["proxy_cost_r"] == roles["WS100"]["measured_cost_r_proxy"]
+    assert roles["WS100"]["net_after_proxy_from_gross_r"] == roles["WS100"]["net_expectancy_r_after_proxy_cost"]
+    assert "net_delta_vs_assumed_baseline_r" in roles["WS100"]
     assert roles["WS101"]["family_event_role"] == "OBSERVER_DUPLICATE"
     assert roles["WS101"]["primary_stream_allowed"] == "false"
     assert roles["WS104"]["family_event_role"] == "OBSERVER_CONFLICT"
@@ -117,6 +127,9 @@ def test_phase3_cost_mode_comparison_runs_all_modes(tmp_path: Path):
     assert modes == {"entry_only_proxy", "entry_exit_proxy", "p95_fresh_proxy", "stress_2x_p95_proxy"}
     by_mode = {row["cost_mode"]: row for row in rows}
     assert by_mode["stress_2x_p95_proxy"]["suspend_family_count"] >= by_mode["entry_only_proxy"]["suspend_family_count"]
+    assert by_mode["entry_exit_proxy"]["gross_expectancy_r_source"] == "fixed_notional_phase0_baseline"
+    assert by_mode["entry_exit_proxy"]["baseline_assumed_cost_r"] == 0.3228
+    assert "median_net_delta_vs_assumed_baseline_r" in by_mode["entry_exit_proxy"]
     assert (tmp_path / "reports" / "PHASE3_COST_MODE_COMPARISON.md").exists()
     assert (tmp_path / "reports" / "PHASE3_COST_MODE_COMPARISON.csv").exists()
 
@@ -277,6 +290,10 @@ def test_phase3_suspend_family_review_summarizes_primary_vs_duplicate_rows(tmp_p
     assert review["suspend_unique_family_events"] == 1
     assert review["suspend_primary_rows"] == 1
     assert review["suspend_duplicate_rows"] == 0
+    assert review["gross_expectancy_r_source"] == "fixed_notional_phase0_baseline"
+    assert review["baseline_assumed_cost_r"] == 0.3228
+    assert review["baseline_net_expectancy_r"] == 0.1888
+    assert "median_suspend_net_delta_vs_assumed_baseline_r" in review
     assert review["diagnosis_counts"] == {"tight_stop_cost_dominates": 1}
     report = (tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_REVIEW.md").read_text(encoding="utf-8")
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
@@ -356,6 +373,25 @@ def test_phase3_fixture_report_generation_is_deterministic_for_csv_outputs(tmp_p
     assert (tmp_path / "a" / "PHASE3_FAMILY_DEDUP_AUDIT.csv").read_text(encoding="utf-8") == (
         tmp_path / "b" / "PHASE3_FAMILY_DEDUP_AUDIT.csv"
     ).read_text(encoding="utf-8")
+
+
+def test_phase3_artifact_verifier_requires_reports_and_authority_sentence(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+
+    assert module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo") == []
+
+    (reports / "PHASE3_EXPERIMENTAL_STATUS.md").write_text("missing authority\n", encoding="utf-8")
+    errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
+    assert any("missing required Phase 2 authority sentence" in error for error in errors)
 
 
 def _load_script(name: str):

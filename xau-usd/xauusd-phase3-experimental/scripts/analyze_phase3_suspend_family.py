@@ -10,7 +10,10 @@ from statistics import mean, median
 from typing import Any
 
 
-BASELINE_GROSS_EDGE_R = 0.5116
+BASELINE_NET_EXPECTANCY_R = 0.1888
+BASELINE_ASSUMED_COST_R = 0.3228
+BASELINE_GROSS_EDGE_R = BASELINE_NET_EXPECTANCY_R + BASELINE_ASSUMED_COST_R
+GROSS_EXPECTANCY_R_SOURCE = "fixed_notional_phase0_baseline"
 MINIMUM_NET_EXPECTANCY_R = 0.15
 MAX_COST_PROXY_R = BASELINE_GROSS_EDGE_R - MINIMUM_NET_EXPECTANCY_R
 PHASE2_AUTHORITY_SENTENCE = (
@@ -59,6 +62,12 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         "stop_distance_points",
         "measured_cost_r_proxy",
         "net_expectancy_r_after_proxy_cost",
+        "gross_expectancy_r_source",
+        "baseline_assumed_cost_r",
+        "baseline_net_expectancy_r",
+        "proxy_cost_r",
+        "net_after_proxy_from_gross_r",
+        "net_delta_vs_assumed_baseline_r",
         "cost_excess_r",
         "cost_excess_points",
         "diagnosis",
@@ -73,6 +82,7 @@ def _enrich(row: dict[str, str]) -> dict[str, Any]:
     stop_distance = _to_float(row.get("stop_distance_points")) or 0.0
     cost_points = _to_float(row.get("total_cost_points")) or 0.0
     cost_r = _to_float(row.get("measured_cost_r_proxy")) or 0.0
+    net_after_proxy = _to_float(row.get("net_expectancy_r_after_proxy_cost")) or 0.0
     threshold_points = MAX_COST_PROXY_R * stop_distance
     diagnosis = _diagnosis(row, stop_distance, cost_points)
     return {
@@ -88,7 +98,16 @@ def _enrich(row: dict[str, str]) -> dict[str, Any]:
         "total_cost_points": _fmt(cost_points),
         "stop_distance_points": _fmt(stop_distance),
         "measured_cost_r_proxy": _fmt(cost_r),
-        "net_expectancy_r_after_proxy_cost": _fmt(_to_float(row.get("net_expectancy_r_after_proxy_cost")) or 0.0),
+        "net_expectancy_r_after_proxy_cost": _fmt(net_after_proxy),
+        "gross_expectancy_r_source": row.get("gross_expectancy_r_source", GROSS_EXPECTANCY_R_SOURCE),
+        "baseline_assumed_cost_r": row.get("baseline_assumed_cost_r", _fmt(BASELINE_ASSUMED_COST_R)),
+        "baseline_net_expectancy_r": row.get("baseline_net_expectancy_r", _fmt(BASELINE_NET_EXPECTANCY_R)),
+        "proxy_cost_r": row.get("proxy_cost_r", _fmt(cost_r)),
+        "net_after_proxy_from_gross_r": row.get("net_after_proxy_from_gross_r", _fmt(net_after_proxy)),
+        "net_delta_vs_assumed_baseline_r": row.get(
+            "net_delta_vs_assumed_baseline_r",
+            _fmt(net_after_proxy - BASELINE_NET_EXPECTANCY_R),
+        ),
         "cost_excess_r": _fmt(max(0.0, cost_r - MAX_COST_PROXY_R)),
         "cost_excess_points": _fmt(max(0.0, cost_points - threshold_points)),
         "diagnosis": diagnosis,
@@ -116,6 +135,8 @@ def _summary(
     primary_family_ids = {str(row.get("family_event_id", "")) for row in primary_rows if row.get("family_event_id")}
     cost_values = [_to_float(row.get("measured_cost_r_proxy")) for row in suspend_rows]
     cost_values = [value for value in cost_values if value is not None]
+    delta_values = [_to_float(row.get("net_delta_vs_assumed_baseline_r")) for row in suspend_rows]
+    delta_values = [value for value in delta_values if value is not None]
     stop_values = [_to_float(row.get("stop_distance_points")) for row in suspend_rows]
     stop_values = [value for value in stop_values if value is not None]
     return {
@@ -129,10 +150,15 @@ def _summary(
         "suspend_primary_rows": len(primary_rows),
         "suspend_primary_family_events": len(primary_family_ids),
         "suspend_duplicate_rows": len(suspend_rows) - len(primary_rows),
+        "gross_expectancy_r_source": GROSS_EXPECTANCY_R_SOURCE,
+        "baseline_assumed_cost_r": BASELINE_ASSUMED_COST_R,
+        "baseline_net_expectancy_r": BASELINE_NET_EXPECTANCY_R,
+        "baseline_gross_edge_r": round(BASELINE_GROSS_EDGE_R, 4),
         "max_cost_proxy_r_before_suspend": round(MAX_COST_PROXY_R, 4),
         "minimum_net_expectancy_r": MINIMUM_NET_EXPECTANCY_R,
         "median_suspend_cost_r": round(median(cost_values), 4) if cost_values else None,
         "mean_suspend_cost_r": round(mean(cost_values), 4) if cost_values else None,
+        "median_suspend_net_delta_vs_assumed_baseline_r": round(median(delta_values), 4) if delta_values else None,
         "median_suspend_stop_distance_points": round(median(stop_values), 4) if stop_values else None,
         "diagnosis_counts": _counts(row.get("diagnosis", "") for row in suspend_rows),
         "role_counts": _counts(row.get("family_event_role", "") for row in suspend_rows),
@@ -164,11 +190,22 @@ def _render_markdown(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str
                     ("Suspend unique family events", str(summary["suspend_unique_family_events"])),
                     ("Suspend primary rows", str(summary["suspend_primary_rows"])),
                     ("Suspend duplicate observer rows", str(summary["suspend_duplicate_rows"])),
+                    ("Gross expectancy R source", str(summary["gross_expectancy_r_source"])),
+                    ("Baseline assumed cost R", str(summary["baseline_assumed_cost_r"])),
+                    ("Baseline net expectancy R", str(summary["baseline_net_expectancy_r"])),
                     ("Max cost proxy R before suspend", str(summary["max_cost_proxy_r_before_suspend"])),
                     ("Median suspend cost R", str(summary["median_suspend_cost_r"])),
+                    (
+                        "Median suspend net delta vs assumed baseline R",
+                        str(summary["median_suspend_net_delta_vs_assumed_baseline_r"]),
+                    ),
                     ("Median suspend stop distance points", str(summary["median_suspend_stop_distance_points"])),
                 ]
             ),
+            "",
+            "## Cost Semantics",
+            "",
+            "Suspension rows are identified from baseline gross expectancy minus the Phase 3 proxy cost. The delta column is the proxy-based net minus the Phase 0 assumed-cost baseline net; it is a design stress signal, not Phase 2 readiness evidence.",
             "",
             "## Diagnosis Counts",
             "",
@@ -203,6 +240,7 @@ def _event_table(rows: list[dict[str, Any]]) -> str:
         "total_cost_points",
         "stop_distance_points",
         "measured_cost_r_proxy",
+        "net_delta_vs_assumed_baseline_r",
         "cost_excess_r",
         "diagnosis",
     ]

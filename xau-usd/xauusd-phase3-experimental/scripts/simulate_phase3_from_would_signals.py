@@ -12,6 +12,7 @@ from statistics import mean, median
 BASELINE_NET_EXPECTANCY_R = 0.1888
 BASELINE_MODELED_COST_R = 0.3228
 BASELINE_GROSS_EDGE_R = BASELINE_NET_EXPECTANCY_R + BASELINE_MODELED_COST_R
+GROSS_EXPECTANCY_R_SOURCE = "fixed_notional_phase0_baseline"
 MINIMUM_NET_EXPECTANCY_R = 0.15
 DEFAULT_SLIPPAGE_POINTS = 5.0
 DEFAULT_COST_MODE = "entry_exit_proxy"
@@ -75,6 +76,12 @@ LEDGER_COLUMNS = (
     "measured_cost_r_proxy",
     "net_expectancy_r_baseline",
     "net_expectancy_r_after_proxy_cost",
+    "gross_expectancy_r_source",
+    "baseline_assumed_cost_r",
+    "baseline_net_expectancy_r",
+    "proxy_cost_r",
+    "net_after_proxy_from_gross_r",
+    "net_delta_vs_assumed_baseline_r",
     "kill_rule_state",
     "source_trade_permission",
     "source_dry_run",
@@ -250,6 +257,7 @@ def _ledger_row(
     cost = _cost_points(spread_points, assumptions)
     measured_cost_r_proxy = (cost["total"] / stop_distance) if stop_distance > 0 else 999.0
     net_after_proxy = BASELINE_GROSS_EDGE_R - measured_cost_r_proxy
+    net_delta_vs_baseline = net_after_proxy - BASELINE_NET_EXPECTANCY_R
     return {
         "event_id": f"PH3EXP{index:05d}",
         "experimental_session_id": EXPERIMENTAL_SESSION_ID,
@@ -290,6 +298,12 @@ def _ledger_row(
         "measured_cost_r_proxy": _fmt(measured_cost_r_proxy),
         "net_expectancy_r_baseline": _fmt(BASELINE_NET_EXPECTANCY_R),
         "net_expectancy_r_after_proxy_cost": _fmt(net_after_proxy),
+        "gross_expectancy_r_source": GROSS_EXPECTANCY_R_SOURCE,
+        "baseline_assumed_cost_r": _fmt(BASELINE_MODELED_COST_R),
+        "baseline_net_expectancy_r": _fmt(BASELINE_NET_EXPECTANCY_R),
+        "proxy_cost_r": _fmt(measured_cost_r_proxy),
+        "net_after_proxy_from_gross_r": _fmt(net_after_proxy),
+        "net_delta_vs_assumed_baseline_r": _fmt(net_delta_vs_baseline),
         "kill_rule_state": _kill_rule_state(net_after_proxy),
         "source_trade_permission": row.get("trade_permission", ""),
         "source_dry_run": row.get("dry_run", ""),
@@ -350,6 +364,8 @@ def _summary(
     costs = [value for value in costs if value is not None]
     net_values = [_to_float(row.get("net_expectancy_r_after_proxy_cost")) for row in ledger_rows]
     net_values = [value for value in net_values if value is not None]
+    delta_values = [_to_float(row.get("net_delta_vs_assumed_baseline_r")) for row in ledger_rows]
+    delta_values = [value for value in delta_values if value is not None]
     kill_counts = _counts(row.get("kill_rule_state", "") for row in ledger_rows)
     family_roles = _counts(row.get("family_event_role", "") for row in ledger_rows)
     family_event_ids = {
@@ -385,8 +401,10 @@ def _summary(
         ),
         "rejected_source_rows": rejected_source_rows,
         "baseline_gross_edge_r": round(BASELINE_GROSS_EDGE_R, 4),
+        "gross_expectancy_r_source": GROSS_EXPECTANCY_R_SOURCE,
         "baseline_net_expectancy_r": BASELINE_NET_EXPECTANCY_R,
         "baseline_modeled_cost_r": BASELINE_MODELED_COST_R,
+        "baseline_assumed_cost_r": BASELINE_MODELED_COST_R,
         "minimum_net_expectancy_r": MINIMUM_NET_EXPECTANCY_R,
         "cost_mode": assumptions.cost_mode,
         "exit_spread_points_assumed": assumptions.exit_spread_points,
@@ -397,6 +415,8 @@ def _summary(
         "mean_proxy_cost_r": round(mean(costs), 4) if costs else None,
         "median_net_after_proxy_cost_r": round(median(net_values), 4) if net_values else None,
         "mean_net_after_proxy_cost_r": round(mean(net_values), 4) if net_values else None,
+        "median_net_delta_vs_assumed_baseline_r": round(median(delta_values), 4) if delta_values else None,
+        "mean_net_delta_vs_assumed_baseline_r": round(mean(delta_values), 4) if delta_values else None,
         "kill_rule_counts": kill_counts,
         "family_role_counts": family_roles,
         "mt5_runtime_touched": False,
@@ -437,10 +457,36 @@ def _render_report(summary: dict[str, object], ledger_rows: list[dict[str, str]]
                     ("Observer conflicts", str(summary["observer_conflict_count"])),
                     ("Rejected source rows", str(summary["rejected_source_rows"])),
                     ("Cost mode", str(summary["cost_mode"])),
+                    ("Gross expectancy R source", str(summary["gross_expectancy_r_source"])),
+                    ("Baseline assumed cost R", str(summary["baseline_assumed_cost_r"])),
                     ("Baseline net expectancy R", str(summary["baseline_net_expectancy_r"])),
                     ("Median proxy cost R", str(summary["median_proxy_cost_r"])),
                     ("Median net after proxy cost R", str(summary["median_net_after_proxy_cost_r"])),
+                    ("Median net delta vs assumed baseline R", str(summary["median_net_delta_vs_assumed_baseline_r"])),
                     ("Minimum net expectancy R", str(summary["minimum_net_expectancy_r"])),
+                ]
+            ),
+            "",
+            "## Cost Semantics",
+            "",
+            _markdown_table(
+                [
+                    (
+                        "Baseline net expectancy",
+                        "Phase 0 fixed-notional net after the originally assumed cost model.",
+                    ),
+                    (
+                        "Proxy cost",
+                        "Offline Phase 3 event-level spread/slippage proxy; it is not measured live execution cost.",
+                    ),
+                    (
+                        "Net after proxy",
+                        "Baseline gross expectancy minus the Phase 3 proxy cost.",
+                    ),
+                    (
+                        "Delta vs assumed baseline",
+                        "Net after proxy minus the Phase 0 baseline net expectancy.",
+                    ),
                 ]
             ),
             "",
@@ -474,6 +520,7 @@ def _event_table(rows: list[dict[str, str]]) -> str:
         "cost_mode",
         "measured_cost_r_proxy",
         "net_expectancy_r_after_proxy_cost",
+        "net_delta_vs_assumed_baseline_r",
         "kill_rule_state",
     )
     header = "| " + " | ".join(columns) + " |"

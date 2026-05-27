@@ -33,8 +33,12 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Observer conflicts | 0 |
 | Rejected source rows | 2 |
 | Cost mode | entry_exit_proxy |
+| Gross expectancy R source | fixed_notional_phase0_baseline |
+| Baseline assumed cost R | 0.3228 |
+| Baseline net expectancy R | 0.1888 |
 | Median proxy cost R | 0.2554 |
 | Median net after proxy cost R | 0.2562 |
+| Median net delta vs assumed baseline R | 0.0674 |
 | Minimum net expectancy R | 0.15 |
 
 ## Safety And Manifest
@@ -51,4 +55,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 47} |
 | Manifest status | PASS |
-| Manifest commit | 36398b9 |
+| Manifest commit | 3790ed3 |

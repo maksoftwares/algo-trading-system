@@ -1493,8 +1493,12 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("De-dup audit", _cell(family_dedup_audit.get("status"))),
         ("De-dup multi-row groups", _cell(family_dedup_audit.get("multi_row_group_count"))),
         ("Rejected source rows", _cell(simulation.get("rejected_source_rows"))),
+        ("Gross expectancy R source", _cell(simulation.get("gross_expectancy_r_source"))),
+        ("Baseline assumed cost R", _cell(simulation.get("baseline_assumed_cost_r"))),
+        ("Baseline net expectancy R", _cell(simulation.get("baseline_net_expectancy_r"))),
         ("Median proxy cost R", _cell(simulation.get("median_proxy_cost_r"))),
         ("Median net after proxy cost R", _cell(simulation.get("median_net_after_proxy_cost_r"))),
+        ("Median net delta vs assumed baseline R", _cell(simulation.get("median_net_delta_vs_assumed_baseline_r"))),
     ]
     return _key_value_table(rows)
 
