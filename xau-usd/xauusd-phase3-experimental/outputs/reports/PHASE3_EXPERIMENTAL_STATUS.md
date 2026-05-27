@@ -55,4 +55,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 47} |
 | Manifest status | PASS |
-| Manifest commit | 3790ed3 |
+| Manifest commit | 6d64e48 |

@@ -1,14 +1,15 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-27T21:06:42.282160Z",
+  "created_at_utc": "2026-05-27T21:23:14.598904Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "3790ed30fd095f1b3ddb7923b9b0e581bda3a902",
-  "commit_short": "3790ed3",
-  "working_tree_short_status": "M .github/workflows/phase3_experimental.yml\n M status.html\n M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py\n M xau-usd/xauusd-phase1/tests/test_project_status_page.py\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.csv\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_ROWS.csv\n M xau-usd/xauusd-phase3-experimental/scripts/analyze_phase3_suspend_family.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_mode_comparison.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py\n M xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py\n M xau-usd/xauusd-phase3-experimental/tests/test_phase3_experimental.py\n?? xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py\n?? xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py",
+  "commit_hash": "6d64e488bc47f8821f28401ba373dc5f71492395",
+  "commit_short": "6d64e48",
+  "working_tree_clean": true,
+  "working_tree_short_status": "",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
   "safety_status": "PASS",
-  "phase3_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+  "manifest_scope": "phase3_review_release_snapshot",
   "files": {
     "phase3_input_would_signals": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
@@ -27,12 +28,6 @@
       "exists": true,
       "sha256": "76dd3987452f85c782f59261c47e1d7df026d33263ccfdce6c48abcbf1c6d65c",
       "bytes": 664
-    },
-    "phase3_status_json": {
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_STATUS.json",
-      "exists": true,
-      "sha256": "3df832232b27992f970c72d8494d094984383731f231d788148410e473e6029b",
-      "bytes": 6343
     },
     "phase3_suspend_family_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_REVIEW.json",
@@ -133,8 +128,8 @@
     "script_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_experimental_manifest.py",
       "exists": true,
-      "sha256": "5f295a127844f41b27aa900ebe7154f444a3e2b5e39e664ddee67e239e8baba6",
-      "bytes": 8702
+      "sha256": "d47ab2201226c3ee9596a3b1e7bd9d2f40651709120101324f28f50a9d521c71",
+      "bytes": 9313
     },
     "script_cost_mode_comparison": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_cost_mode_comparison.py",
@@ -151,8 +146,8 @@
     "script_artifact_verifier": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\verify_phase3_experimental_artifacts.py",
       "exists": true,
-      "sha256": "7f7074ad3d438253f1a5d4c694261d46890a8bffed829c798d2df84342b33c23",
-      "bytes": 2892
+      "sha256": "1d82e44fb29c6777b14547529d33475997f868ecd4dbf8b57900e168ffeede91",
+      "bytes": 4018
     },
     "script_status_dashboard_freshness": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\verify_status_dashboard_freshness.py",
