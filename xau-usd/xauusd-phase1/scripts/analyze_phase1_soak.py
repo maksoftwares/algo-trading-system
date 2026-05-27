@@ -7,6 +7,8 @@ from datetime import datetime
 from pathlib import Path
 from statistics import median
 
+from phase1_gap_classifier import classify_gap
+
 
 DECISION_LOG = "decision_log.csv"
 STARTUP_LOG = "startup_log.csv"
@@ -126,7 +128,8 @@ def _check_per_run_cadence(rows: list[dict[str, str]]) -> SoakCheck:
             minutes = int((right - left).total_seconds() / 60)
             if minutes <= 5:
                 continue
-            if _is_expected_market_break(left, right, left_row, right_row):
+            classification = classify_gap(left, right, left_row, right_row)
+            if not classification.counts_as_runtime_warning:
                 tolerated_gaps.append(minutes)
             else:
                 gaps.append(minutes)
@@ -360,35 +363,6 @@ def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[st
         if parsed is not None and parsed not in seen:
             seen[parsed] = row
     return sorted(seen.items(), key=lambda item: item[0])
-
-
-def _is_expected_market_break(
-    left: datetime,
-    right: datetime,
-    left_row: dict[str, str],
-    right_row: dict[str, str],
-) -> bool:
-    minutes = int((right - left).total_seconds() / 60)
-    if _is_weekend_stale_resume_gap(right_row):
-        return True
-    if minutes > 90:
-        return False
-    right_session = right_row.get("session", "")
-    left_minute = left.hour * 60 + left.minute
-    right_minute = right.hour * 60 + right.minute
-    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
-    return right_session == "ROLLOVER" and crosses_known_gold_break
-
-
-def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
-    if row.get("session", "").upper() != "WEEKEND":
-        return False
-    if row.get("execution_state", "").upper() != "STALE_TICK":
-        return False
-    timestamp_broker = _parse_mt5_datetime(row.get("timestamp_broker", ""))
-    if timestamp_broker is None:
-        return False
-    return timestamp_broker.weekday() in {5, 6}
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

@@ -54,12 +54,12 @@ def test_runtime_health_report_warns_on_bar_gap(tmp_path):
     files_dir = tmp_path / "files"
     files_dir.mkdir()
     _write_startup_log(files_dir / "startup_log.csv")
-    _write_decision_log(files_dir / "decision_log.csv", minutes=(0, 5, 20))
+    _write_decision_log(files_dir / "decision_log.csv", minutes=(0, 5, 25))
 
     output = module.generate_phase1_runtime_health_report(
         files_dir,
         tmp_path / "runtime_health.md",
-        now=datetime(2026, 5, 21, 12, 22),
+        now=datetime(2026, 5, 21, 12, 27),
     )
 
     report = output.report_path.read_text(encoding="utf-8")

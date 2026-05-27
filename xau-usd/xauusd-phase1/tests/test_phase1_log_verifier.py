@@ -221,7 +221,10 @@ def test_phase1_log_verifier_tolerates_configured_daily_market_break_gap(tmp_pat
 
 
 def _load_log_verifier():
-    path = ROOT / "scripts" / "verify_phase1_logs.py"
+    scripts_dir = ROOT / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    path = scripts_dir / "verify_phase1_logs.py"
     spec = importlib.util.spec_from_file_location("verify_phase1_logs", path)
     assert spec is not None
     assert spec.loader is not None

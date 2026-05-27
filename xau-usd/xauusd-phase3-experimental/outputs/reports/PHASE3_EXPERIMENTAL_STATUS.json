@@ -1,0 +1,44 @@
+{
+  "status": "EXPERIMENTAL_ACTIVE",
+  "created_at_utc": "2026-05-27T19:32:22.182722Z",
+  "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+  "real_phase1_acceptance": "PENDING",
+  "real_phase2_readiness": "PENDING",
+  "assumption": "assumes_phase2_pass_for_design_only",
+  "authorized_for_deployment": false,
+  "mt5_runtime_touched": false,
+  "broker_action_code_allowed": false,
+  "latest_phase1_bar": "2026.05.27 19:20:00",
+  "latest_phase1_run_id": "phase1-dry-run-v0.7",
+  "latest_phase1_dry_run": "true",
+  "latest_phase1_trade_permission": "false",
+  "simulation": {
+    "status": "EXPERIMENTAL_ACTIVE",
+    "created_at_utc": "2026-05-27T19:32:16.543240Z",
+    "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+    "phase2_assumption": "assumes_phase2_pass_for_design_only",
+    "real_phase2_status": "unchanged_pending",
+    "input_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
+    "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
+    "accepted_events": 87,
+    "rejected_source_rows": 2,
+    "baseline_gross_edge_r": 0.5116,
+    "baseline_net_expectancy_r": 0.1888,
+    "baseline_modeled_cost_r": 0.3228,
+    "minimum_net_expectancy_r": 0.15,
+    "slippage_points_assumed": 5.0,
+    "median_proxy_cost_r": 0.1277,
+    "mean_proxy_cost_r": 0.1416,
+    "median_net_after_proxy_cost_r": 0.3839,
+    "mean_net_after_proxy_cost_r": 0.37,
+    "kill_rule_counts": {
+      "NORMAL": 87
+    },
+    "mt5_runtime_touched": false,
+    "broker_action_code_allowed": false
+  },
+  "docs": [
+    "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
+    "docs/PHASE3_EXECUTION_READINESS_DESIGN.md"
+  ]
+}

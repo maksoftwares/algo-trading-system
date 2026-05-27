@@ -9,24 +9,24 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 157. |
+| history_rows | PASS | History rows available: 159. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
-| latest_status | WARN | Latest warning status fields: log_verification, soak_analysis, runtime_health |
+| latest_status | PASS | Latest status is healthy; acceptance is PENDING. |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
 | progress_monotonic | WARN | Soak progress decreased between history rows. |
 
 ## Summary
 
-- History rows: 157
+- History rows: 159
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-27T18:13:58.304506+00:00
-- Latest M5 bar: 2026.05.27 18:10:00
+- Latest summary: 2026-05-27T19:22:15.977027+00:00
+- Latest M5 bar: 2026.05.27 19:20:00
 - Latest soak progress: 100.0%
-- Longest active streak: 22.92h
-- Current active streak: 7.5h
-- Weekend policy: weekend_breaks_active_market_streak
-- Process uptime streak: 7.53h
-- Code-freeze hours: 7.54h
+- Longest active streak: 53.92h
+- Current active streak: 8.67h
+- Weekend policy: expected_market_breaks_pause_active_market_streak
+- Process uptime streak: 8.67h
+- Code-freeze hours: 8.67h
 - Latest would-signal rows: 89
 - Latest setup clusters: 89
 
@@ -34,14 +34,12 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Log | Soak | Runtime | Would-Signal | Acceptance | Dry Run | Permission |
 | --- | --- | --- | --- | --- | --- | --- |
-| WARN | WARN | WARN | PASS | PENDING | true | false |
+| PASS | PASS | PASS | PASS | PENDING | true | false |
 
 ## Recent History
 
 | Summary UTC | Latest Bar | Rows | Progress % | Longest h | Freeze h | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-27T13:40:12.671525+00:00 | 2026.05.27 13:40:00 | 770 | 100.0 | 22.92 | 2.97 | 81 | 81 | PENDING |
-| 2026-05-27T13:41:11.071571+00:00 | 2026.05.27 13:40:00 | 770 | 100.0 | 22.92 | 2.99 | 81 | 81 | PENDING |
 | 2026-05-27T13:49:30.037112+00:00 | 2026.05.27 13:45:00 | 771 | 100.0 | 22.92 | 3.13 | 81 | 81 | PENDING |
 | 2026-05-27T13:50:11.639816+00:00 | 2026.05.27 13:50:00 | 772 | 100.0 | 22.92 | 3.14 | 81 | 81 | PENDING |
 | 2026-05-27T14:06:24.569055+00:00 | 2026.05.27 14:05:00 | 775 | 100.0 | 22.92 | 3.41 | 81 | 81 | PENDING |
@@ -52,6 +50,8 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | 2026-05-27T17:33:41.941688+00:00 | 2026.05.27 17:30:00 | 816 | 100.0 | 22.92 | 6.86 | 85 | 85 | PENDING |
 | 2026-05-27T18:13:06.914764+00:00 | 2026.05.27 18:10:00 | 824 | 100.0 | 22.92 | 7.52 | 89 | 89 | PENDING |
 | 2026-05-27T18:13:58.304506+00:00 | 2026.05.27 18:10:00 | 824 | 100.0 | 22.92 | 7.54 | 89 | 89 | PENDING |
+| 2026-05-27T18:38:29.312886+00:00 | 2026.05.27 18:35:00 | 829 | 100.0 | 53.92 | 7.94 | 89 | 89 | PENDING |
+| 2026-05-27T19:22:15.977027+00:00 | 2026.05.27 19:20:00 | 838 | 100.0 | 53.92 | 8.67 | 89 | 89 | PENDING |
 
 ## Historical Acceptance Notes
 

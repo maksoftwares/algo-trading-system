@@ -19,13 +19,16 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     phase0_matrix = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "matrix_results"
     phase0_docs = repo / "xau-usd" / "xauusd-phase0" / "docs"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase3_reports = repo / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports"
     phase0_reports.mkdir(parents=True)
     phase0_manifests.mkdir(parents=True)
     phase0_docs.mkdir(parents=True)
     phase1_reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     (phase0_reports / "PHASE0_VERDICT.md").write_text(
         "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
         encoding="utf-8",
@@ -60,6 +63,9 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert output.accepted_count == 1
     assert output.rejected_count == 1
     assert "Mission Control" in html
+    assert "Phase 3 Experimental Lab" in html
+    assert "EXPERIMENTAL_ACTIVE" in html
+    assert "Phase 3 experimental status" in html
     assert "breakout_retest" in html
     assert "trend_pullback" in html
     assert "h4_us_session_liquidity_reversal_v0" in html
@@ -249,6 +255,27 @@ def _write_measured_cost(path: Path) -> None:
                 "| --- | --- | --- | --- | --- |",
                 "| 5759 | 500 | 2 | 5 | 2 |",
             ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase3_status(path: Path) -> None:
+    path.write_text(
+        json.dumps(
+            {
+                "status": "EXPERIMENTAL_ACTIVE",
+                "real_phase2_readiness": "PENDING",
+                "assumption": "assumes_phase2_pass_for_design_only",
+                "authorized_for_deployment": False,
+                "mt5_runtime_touched": False,
+                "simulation": {
+                    "accepted_events": 12,
+                    "rejected_source_rows": 1,
+                    "median_proxy_cost_r": 0.12,
+                    "median_net_after_proxy_cost_r": 0.39,
+                },
+            }
         ),
         encoding="utf-8",
     )

@@ -233,7 +233,7 @@ def _write_summary(
                     "restart_count_during_current_streak": 0,
                     "last_restart_utc": "2026-05-21T00:00:00Z",
                     "uninterrupted_soak_pass": progress >= 100,
-                    "weekend_policy": "weekend_breaks_active_market_streak",
+                    "weekend_policy": "expected_market_breaks_pause_active_market_streak",
                     "process_uptime_streak_hours": 96.0 if progress >= 100 else 2.0,
                     "code_freeze_started_at": "2026-05-21T00:00:00Z" if progress >= 100 else "",
                     "code_freeze_hours": 96.0 if progress >= 100 else 0.0,

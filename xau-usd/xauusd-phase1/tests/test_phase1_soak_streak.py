@@ -23,7 +23,7 @@ def test_weekend_and_stale_tick_rows_break_active_market_streak():
         now=datetime(2026, 5, 21, 12, 20),
     )
 
-    assert summary.weekend_policy == "weekend_breaks_active_market_streak"
+    assert summary.weekend_policy == "expected_market_breaks_pause_active_market_streak"
     assert summary.longest_streak_hours == 0.08
     assert summary.current_streak_hours == 0.0
     assert summary.current_streak_bar_count == 0
@@ -44,6 +44,26 @@ def test_same_run_id_continuous_bars_accumulate_active_streak():
     )
 
     assert summary.current_streak_hours == 0.25
+    assert summary.restart_count_during_current_streak == 0
+    assert summary.current_streak_bar_count == 4
+
+
+def test_configured_daily_broker_break_pauses_without_resetting_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.26 20:50:00", run_id="phase1-a"),
+        _row("2026.05.26 20:55:00", run_id="phase1-a"),
+        _row("2026.05.26 22:00:00", run_id="phase1-a"),
+        _row("2026.05.26 22:05:00", run_id="phase1-a"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        max_bar_gap_minutes=15.0,
+        now=datetime(2026, 5, 26, 22, 10),
+    )
+
+    assert summary.current_streak_hours == 0.17
     assert summary.restart_count_during_current_streak == 0
     assert summary.current_streak_bar_count == 4
 

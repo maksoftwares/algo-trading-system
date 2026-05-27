@@ -18,10 +18,10 @@ Overall status: PASS
 | true_holdout_audit | PASS | Holdout audit passed: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_TRUE_HOLDOUT_AUDIT.md. |
 | independent_reproduction | PASS | Independent Reproduction passed: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_INDEPENDENT_REPRODUCTION.md. |
 | cpcv_validation | PASS | Cpcv Validation passed: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_CPCV_VALIDATION.md. |
-| reality_check | PASS | Reality Check passed: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK.md. |
+| reality_check | PASS | Owner-accepted D2_FAMILY_CLUSTERED_V0 passed; candidate-level D2 remains preserved audit evidence with status FAIL: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md. |
 | final_verdict_state | PASS | Verdict contains at least one final approved expert. |
 | intrabar_ambiguity_reports | PASS | Intrabar ambiguity reports exist. |
 | adversarial_scores | PASS | Scored adversarial review files exist. |
-| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260522_064147.zip. |
+| review_bundle | PASS | Found latest review bundle C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\review_bundles\PHASE0_REVIEW_BUNDLE_20260527_120324.zip. |
 
 A PASS here means the artifact package is structurally reviewable. It does not approve EA coding unless the consolidated verdict also contains a final approved expert.

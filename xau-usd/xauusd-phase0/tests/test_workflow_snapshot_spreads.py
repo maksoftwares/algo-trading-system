@@ -250,6 +250,73 @@ def test_verify_real_artifacts_passes_complete_evidence_package(project_root, tm
     assert output.report_path.exists()
 
 
+def test_verify_real_artifacts_uses_owner_accepted_family_d2(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    config = load_project_config(root)
+    register_hypotheses(config)
+    (root / "outputs" / "manifests").mkdir(parents=True, exist_ok=True)
+    (root / "outputs" / "manifests" / "PHASE0_DATA_READINESS.md").write_text("PASS\n", encoding="utf-8")
+    (root / "outputs" / "manifests" / "PHASE0_DATA_MANIFEST.md").write_text("manifest\n", encoding="utf-8")
+    reports_dir = root / "outputs" / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    (reports_dir / "PHASE0_VERDICT.md").write_text(
+        "\n".join(
+            [
+                "# Phase 0 Consolidated Verdict",
+                "",
+                "## Experts Approved for Phase 1",
+                "",
+                "- breakout_retest",
+                "",
+                "## Experts Pending Manual Review",
+                "",
+                "None.",
+                "",
+                "## Invalid Pre-Registration",
+                "",
+                "None.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (reports_dir / "PHASE0_REALITY_CHECK.md").write_text(
+        "# Candidate D2\n\nOverall status: FAIL\n",
+        encoding="utf-8",
+    )
+    (reports_dir / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md").write_text(
+        "\n".join(
+            [
+                "# Family D2",
+                "",
+                "Overall status: PASS",
+                "Method: D2_FAMILY_CLUSTERED_V0",
+                "Reviewer/owner accepted method: true",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (reports_dir / f"{expert}_intrabar_ambiguity_report.md").write_text("ok\n", encoding="utf-8")
+    adversarial_dir = root / "outputs" / "adversarial_review"
+    adversarial_dir.mkdir(parents=True, exist_ok=True)
+    for expert in ("trend_pullback", "breakout_retest", "range_mr"):
+        (adversarial_dir / f"{expert}_adversarial_score.md").write_text("PASS\n", encoding="utf-8")
+    generate_result_manifest(config)
+    generate_review_bundle(config)
+
+    output = verify_real_artifacts(config)
+
+    assert output.status == "PASS"
+    assert any(
+        check.name == "reality_check"
+        and check.status == "PASS"
+        and "D2_FAMILY_CLUSTERED_V0" in check.message
+        for check in output.checks
+    )
+
+
 def test_verify_real_artifacts_allows_rejected_expert_pending_gate_detail(project_root, tmp_path):
     root = _copy_project_shell(project_root, tmp_path)
     config = load_project_config(root)

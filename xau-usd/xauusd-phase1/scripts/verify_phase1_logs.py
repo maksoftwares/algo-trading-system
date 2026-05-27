@@ -4,7 +4,7 @@ import argparse
 import csv
 import hashlib
 from dataclasses import dataclass
-from datetime import datetime, time, timedelta
+from datetime import datetime
 from pathlib import Path
 
 try:
@@ -14,21 +14,12 @@ except ModuleNotFoundError:  # pragma: no cover - supports direct importlib test
 
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from atomic_write import atomic_write_text
+from phase1_gap_classifier import classify_gap
 
 
 DECISION_LOG = "decision_log.csv"
 STARTUP_LOG = "startup_log.csv"
 SHUTDOWN_LOG = "shutdown_log.csv"
-DEFAULT_EXPECTED_BREAKS = Path(__file__).resolve().parents[1] / "PHASE1_EXPECTED_MARKET_BREAKS.yaml"
-WEEKDAY_INDEX = {
-    "MONDAY": 0,
-    "TUESDAY": 1,
-    "WEDNESDAY": 2,
-    "THURSDAY": 3,
-    "FRIDAY": 4,
-    "SATURDAY": 5,
-    "SUNDAY": 6,
-}
 
 DECISION_REQUIRED_COLUMNS = (
     "timestamp_broker",
@@ -385,7 +376,8 @@ def _check_bar_cadence(rows: list[dict[str, str]]) -> LogCheck:
         minutes = int((right - left).total_seconds() / 60)
         if minutes <= 5:
             continue
-        if _is_expected_market_break(left, right, left_row, right_row):
+        classification = classify_gap(left, right, left_row, right_row)
+        if not classification.counts_as_runtime_warning:
             tolerated_gaps.append(minutes)
         else:
             gaps.append(minutes)
@@ -431,126 +423,6 @@ def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[st
     return sorted(seen.items(), key=lambda item: item[0])
 
 
-def _is_expected_market_break(
-    left: datetime,
-    right: datetime,
-    left_row: dict[str, str],
-    right_row: dict[str, str],
-) -> bool:
-    minutes = int((right - left).total_seconds() / 60)
-    if _is_weekend_stale_resume_gap(right_row):
-        return True
-    if _spans_weekend_market_break(left, right):
-        return True
-    if _is_configured_market_break(left, right):
-        return True
-    if minutes > 90:
-        return False
-    right_session = right_row.get("session", "")
-    left_minute = left.hour * 60 + left.minute
-    right_minute = right.hour * 60 + right.minute
-    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
-    return right_session == "ROLLOVER" and crosses_known_gold_break
-
-
-def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
-    if row.get("session", "").upper() != "WEEKEND":
-        return False
-    if row.get("execution_state", "").upper() != "STALE_TICK":
-        return False
-    timestamp_broker = _parse_mt5_datetime(row.get("timestamp_broker", ""))
-    if timestamp_broker is None:
-        return False
-    return timestamp_broker.weekday() in {5, 6}
-
-
-def _spans_weekend_market_break(left: datetime, right: datetime) -> bool:
-    if right <= left:
-        return False
-    hours = (right - left).total_seconds() / 3600
-    if hours > 96:
-        return False
-    day = left.date()
-    end_day = right.date()
-    while day <= end_day:
-        if day.weekday() in {5, 6}:
-            return True
-        day += timedelta(days=1)
-    return False
-
-
-def _is_configured_market_break(left: datetime, right: datetime, path: Path = DEFAULT_EXPECTED_BREAKS) -> bool:
-    minutes = int((right - left).total_seconds() / 60)
-    for item in _load_expected_market_breaks(path):
-        max_gap = _to_int(item.get("max_gap_minutes")) or 0
-        if max_gap <= 0 or minutes > max_gap:
-            continue
-        weekdays = _weekday_indexes(item.get("weekdays", ""))
-        if weekdays and left.weekday() not in weekdays:
-            continue
-        start = _parse_time(item.get("start_utc", ""))
-        end = _parse_time(item.get("end_utc", ""))
-        if start is None or end is None:
-            continue
-        start_at = datetime.combine(left.date(), start)
-        end_at = datetime.combine(left.date(), end)
-        if end_at <= start_at:
-            end_at += timedelta(days=1)
-        if left <= start_at and right >= end_at:
-            return True
-    return False
-
-
-def _load_expected_market_breaks(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        return []
-    rows: list[dict[str, str]] = []
-    current: dict[str, str] | None = None
-    for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("- label:"):
-            if current:
-                rows.append(current)
-            current = {"label": _yaml_value(line.split(":", 1)[1])}
-            continue
-        if current is not None and ":" in line:
-            key, value = line.split(":", 1)
-            current[key.strip()] = _yaml_value(value)
-    if current:
-        rows.append(current)
-    return rows
-
-
-def _yaml_value(value: str) -> str:
-    return value.strip().strip('"').strip("'")
-
-
-def _weekday_indexes(value: str) -> set[int]:
-    cleaned = value.strip().strip("[]")
-    return {
-        WEEKDAY_INDEX[item.strip().upper()]
-        for item in cleaned.split(",")
-        if item.strip().upper() in WEEKDAY_INDEX
-    }
-
-
-def _parse_time(value: str) -> time | None:
-    try:
-        hour, minute = value.split(":", 1)
-        return time(int(hour), int(minute))
-    except (ValueError, TypeError):
-        return None
-
-
-def _to_int(value: object) -> int | None:
-    try:
-        return int(str(value))
-    except (TypeError, ValueError):
-        return None
-
-
 def _overall_status(checks: list[LogCheck]) -> str:
     if any(check.status == "FAIL" for check in checks):
         return "FAIL"
@@ -567,6 +439,9 @@ def _render_report(
 ) -> str:
     risk_states = _counts(row.get("risk_state", "") for row in decision_rows)
     block_reasons = _counts(row.get("block_reason", "") for row in decision_rows)
+    latest_run_id = decision_rows[-1].get("run_id", "") if decision_rows else ""
+    current_run_rows = [row for row in decision_rows if row.get("run_id", "") == latest_run_id]
+    current_run_block_reasons = _counts(row.get("block_reason", "") for row in current_run_rows)
     breakout_stages = _counts(row.get("br_stage", "") for row in decision_rows)
     breakout_directions = _counts(row.get("br_direction", "") for row in decision_rows)
     breakout_signal_counts = _counts(row.get("br_would_signal", "") for row in decision_rows)
@@ -593,7 +468,8 @@ def _render_report(
             "",
             f"- Decision rows: {len(decision_rows)}",
             f"- Unique run IDs: {len({row.get('run_id', '') for row in decision_rows})}",
-            f"- Latest run ID: {decision_rows[-1].get('run_id', '') if decision_rows else 'n/a'}",
+            f"- Latest run ID: {latest_run_id if latest_run_id else 'n/a'}",
+            f"- Current run rows: {len(current_run_rows)}",
             "",
             "## Risk States",
             "",
@@ -606,6 +482,15 @@ def _render_report(
             "",
             _markdown_table(
                 [{"Value": key, "Count": str(value)} for key, value in block_reasons.items()],
+                ["Value", "Count"],
+            ),
+            "",
+            "## Current Run Block Reasons",
+            "",
+            "Only the latest run_id determines the current lifecycle interpretation. Older run IDs remain audit history.",
+            "",
+            _markdown_table(
+                [{"Value": key, "Count": str(value)} for key, value in current_run_block_reasons.items()],
                 ["Value", "Count"],
             ),
             "",

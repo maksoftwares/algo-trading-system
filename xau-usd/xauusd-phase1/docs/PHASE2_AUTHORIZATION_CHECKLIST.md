@@ -20,7 +20,7 @@ This checklist separates work that is already closed from gates that still requi
 | Forward hypothesis gates | PASS | `docs/HYPOTHESIS_LOCKING.md` pre-registers normalized concentration thresholds and a Pepperstone+Dukascopy cross-venue PF floor for future candidates. |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
-| Phase 1 runtime health | WARN | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; remaining warnings are maturity gates after the v0.7 reset. The 2026-05-26 65-minute gap is classified in `docs/PHASE1_GAP_CLASSIFICATION_REVIEW.md` as not proven to be an expected market break, so runtime health stays WARN until a clean 72h active-market streak matures. |
+| Phase 1 runtime health | WARN | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; remaining warnings are maturity gates after the v0.7 reset. `docs/PHASE1_GAP_CLASSIFICATION_REVIEW.md` is superseded by the shared gap classifier: configured expected broker maintenance gaps pause the active-market streak without counting elapsed closed-market time; unexpected gaps, restarts, and unsafe states still reset it. |
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
@@ -38,7 +38,7 @@ This checklist separates work that is already closed from gates that still requi
 
 | Gate | Current status | Closure rule |
 | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show longest active-market bar-continuity streak >= 72h with no dry-run, permission, schema, or server-time violations. Weekend closures break this active-market streak. |
+| Active-market 72-hour soak | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show longest active-market bar-continuity streak >= 72h with no dry-run, permission, schema, server-time, run-reset, or unexpected-gap violations. Expected broker maintenance gaps pause the streak without adding closed-market time. |
 | Process/code-freeze 96-hour gate | PENDING | `PHASE1_ACCEPTANCE_REPORT.md` and `PHASE1_STATUS_SUMMARY.json` must show process uptime streak >= 96h and code-freeze hours >= 96h using `phase1_code_freeze_started_at.txt`. |
 | Measured cost model | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS from five fresh observed market days before evaluation. |
 | Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must be rerun after measured cost model PASS and show PASS before any paper-mode implementation. |
@@ -64,7 +64,7 @@ Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 | Latest bar | Do not pin in static docs; read `runtime.latest_row.bar_time` from `PHASE1_STATUS_SUMMARY.json` |
 | Soak progress | Do not pin in static docs; read `soak.progress_pct` from `PHASE1_STATUS_SUMMARY.json` |
 | Active-market 72-hour streak | Tracked in `PHASE1_STATUS_SUMMARY.json`; still PENDING until longest active-market bar-continuity streak reaches 72h |
-| Weekend policy | `weekend_breaks_active_market_streak`; process/code-freeze is tracked separately |
+| Expected market-break policy | `expected_market_breaks_pause_active_market_streak`; process/code-freeze is tracked separately |
 | Process/code-freeze 96-hour gate | Tracked in `PHASE1_STATUS_SUMMARY.json`; still PENDING until process uptime and code-freeze both reach 96h |
 | Acceptance | Read `status.acceptance` from `PHASE1_STATUS_SUMMARY.json` |
 

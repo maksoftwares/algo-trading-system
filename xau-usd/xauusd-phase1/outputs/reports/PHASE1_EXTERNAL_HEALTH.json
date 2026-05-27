@@ -1,7 +1,7 @@
 {
   "checks": [
     {
-      "evidence": "824 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
+      "evidence": "838 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
       "name": "decision_log_has_rows",
       "status": "PASS"
     },
@@ -11,12 +11,12 @@
       "status": "PASS"
     },
     {
-      "evidence": "Statuses are acceptable: {'acceptance': 'PENDING', 'log_verification': 'WARN', 'runtime_health': 'WARN', 'soak_analysis': 'WARN', 'would_signal': 'PASS'}",
+      "evidence": "Statuses are acceptable: {'acceptance': 'PENDING', 'log_verification': 'PASS', 'runtime_health': 'PASS', 'soak_analysis': 'PASS', 'would_signal': 'PASS'}",
       "name": "status_summary_health",
       "status": "PASS"
     },
     {
-      "evidence": "Latest row age 4.0 minute(s), limit 15.",
+      "evidence": "Latest row age 2.3 minute(s), limit 15.",
       "name": "latest_row_freshness",
       "status": "PASS"
     },
@@ -36,7 +36,7 @@
       "status": "PASS"
     }
   ],
-  "created_at_local": "2026-05-27T23:43:59.468266",
+  "created_at_local": "2026-05-28T00:52:17.042419",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "status": "PASS",
   "status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"

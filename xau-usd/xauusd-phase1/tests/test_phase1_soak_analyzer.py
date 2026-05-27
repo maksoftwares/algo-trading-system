@@ -102,7 +102,10 @@ def test_soak_analyzer_tolerates_historical_clock_drift_and_weekend_gap(tmp_path
 
 
 def _load_soak_analyzer():
-    path = ROOT / "scripts" / "analyze_phase1_soak.py"
+    scripts_dir = ROOT / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    path = scripts_dir / "analyze_phase1_soak.py"
     spec = importlib.util.spec_from_file_location("analyze_phase1_soak", path)
     assert spec is not None
     assert spec.loader is not None

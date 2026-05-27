@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-27
+Last updated: 2026-05-28
 
 ## Workspace
 
@@ -25,10 +25,17 @@ Last updated: 2026-05-27
 
 ## Current State
 
+- 2026-05-28 Phase 3 experimental sandbox:
+  - Owner authorized a repo-only Phase 3 experimental lane that assumes Phase 2 may pass for design purposes only. This does not mark Phase 2 as passed and does not authorize paper-mode implementation or broker-side execution.
+  - New isolated package: `xau-usd\xauusd-phase3-experimental`.
+  - Boundary: no MT5 deployment, no restart, no live runtime changes, no broker-action code. The live Phase 1 dry-run and passive spread logger continue untouched.
+  - First offline simulation consumed `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` and produced `87` accepted experimental events, `2` rejected source rows, median proxy cost `0.1277R`, and median net-after-proxy-cost `0.3839R`. This is design evidence only, not a trading verdict.
+  - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, and `PHASE3_EXPERIMENTAL_LEDGER.csv`.
+  - Status dashboard now includes a `Phase 3 Experimental Lab` panel while still showing real Phase 2 as PENDING.
 - 2026-05-27 refresh:
   - Review instruction update implemented: Phase 1 source is now `phase1-dry-run-v0.7`, deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and restarted. The code-freeze marker was intentionally reset to `2026-05-27T10:41:50Z`.
   - Canonical cost lifecycle is now `COST_REVALIDATION_PENDING` while `MEASURED_COST_MODEL.md` is PENDING. `COST_SUSPENDED` is reserved only for an authoritative measured-cost revalidation FAIL after the fresh measured-cost model reaches PASS.
-  - Active-market soak streaks now reset on `run_id` changes, >15m active-market gaps, weekend/closed-market/stale-tick rows, or dry-run/permission/server-time violations. Process uptime and code-freeze remain separate gates.
+  - Active-market soak streaks now reset on `run_id` changes, unexpected >15m active-market gaps, unsafe closed/stale rows, or dry-run/permission/server-time violations. Configured expected broker maintenance gaps pause the active-market streak without adding closed-market time. Process uptime and code-freeze remain separate gates.
   - Latest refreshed runtime snapshot after v0.7 deployment: 816 decision rows, latest bar `2026.05.27 17:30:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, BR/SBR lifecycle `COST_REVALIDATION_PENDING`.
   - Latest soak evidence: five-day wall-clock gate is `PASS` at `100.00%` (`5.2708/5.00` observed days), active-market longest `22.92h/72h`, current active-market `6.83h/72h`, process/code-freeze `6.86h/96h`.
   - Latest measured cost model: `PENDING` with `12356` authoritative fresh rows over `1` observed fresh market day (`2026-05-27`). Required: at least `500` fresh rows across `5` fresh observed market days.
@@ -45,7 +52,7 @@ Last updated: 2026-05-27
   - Earlier measured cost model snapshot after freshness filtering: `PENDING` with 205 authoritative fresh rows over 1 observed market day.
   - Phase 2 readiness is `PENDING`; D2 is now PASS via owner-accepted `D2_FAMILY_CLUSTERED_V0`, but paper-mode broker execution remains blocked while measured-cost revalidation, Phase 1 acceptance, VPS selection, and owner approval are not PASS.
   - Review V3 alignment: `PHASE2_AUTHORIZATION_CHECKLIST.md` now uses the same D2 readiness semantics as `PHASE2_READINESS_REPORT.md`: candidate-level D2 FAIL is preserved audit evidence, while owner-accepted `D2_FAMILY_CLUSTERED_V0` PASS is the active readiness gate.
-  - Gap classification note: `PHASE1_GAP_CLASSIFICATION_REVIEW.md` keeps the 2026-05-26 20:55 -> 22:00 65-minute gap as WARN, not an expected market break. No runtime code action is required unless a similar gap repeats under v0.7 with fresh logger evidence.
+  - Review V4 gap policy update: shared `scripts\phase1_gap_classifier.py` now classifies configured expected broker maintenance gaps as expected pauses shared by soak streak, log verification, soak analysis, runtime health, status, acceptance, and Phase 2 readiness reports. Unexpected gaps, run resets, and unsafe rows still reset or warn.
 - Current measured-cost decision: `MEASURED_COST_MODEL.md` is `PENDING` after the freshness audit. Treat the prior measured-cost `FAIL` as a non-authoritative legacy diagnostic, not a final gate result. `breakout_retest` may remain in Phase 1 telemetry, but it is not Phase 2 paper-mode execution eligible until the fresh measured-cost model reaches PASS and revalidation passes.
 - Phase 2 paper-mode implementation is blocked by pending measured-cost evidence, pending Phase 1 acceptance, VPS evidence, and owner approval. Continue Phase 1 dry-run and passive spread logging; do not add broker-side execution.
 - New review blockers being addressed: expected market-break classification, measured-cost diagnostic/audit/delta reports, passive spread quote-freshness filtering, cost-revalidation-pending lifecycle docs, and magic-number external registry/readiness gates. Schema-versioned Phase 1 log rotation is implemented and verified.
@@ -128,12 +135,12 @@ Last updated: 2026-05-27
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
 - Latest status summary shows 816 decision rows, 100.00% of the five-day wall-clock soak target, `log_verification=WARN`, `soak_analysis=WARN`, `runtime_health=WARN`, `would_signal=PASS`, and `acceptance=PENDING`.
 - Review #7 direct-control items are reflected in the repo: the ten-candidate diversification result is codified in `xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md`, future low-frequency concentration/cross-venue gates are pre-registered in `xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md`, fixed-notional monthly R-series remains the canonical D2 evidence in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`, and `phase1_soak_streak.py` now explicitly rejects weekend/stale/market-closed rows for active-market streak continuity.
-- Review #6/#7 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=weekend_breaks_active_market_streak`; the active-market 72-hour bar-continuity gate is separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
+- Review #6/#7/#V4 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=expected_market_breaks_pause_active_market_streak`; expected broker maintenance breaks pause the active-market 72-hour bar-continuity gate, while unexpected gaps, run resets, and unsafe states reset it. The 72-hour active-market gate remains separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #6 reflection and action plan is tracked in `docs\REVIEW_06_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #7 reflection and action plan is tracked in `docs\REVIEW_07_REFLECTION_AND_ACTION_PLAN.md`.
 - Review #8 final repo review action plan is tracked in `docs\REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`. It keeps Phase 1 dry-run and Phase 2 preparation as GO, but Phase 2 paper implementation, broker execution, and live trading remain NO-GO until the soak, active-market 72h, process/code-freeze 96h, measured-cost, revalidation, VPS, and owner-approval gates all pass.
-- Review #9 / 2026-05-27 V3 reflection is tracked in `docs\REVIEW_09_REFLECTION_AND_ACTION_PLAN.md`. It accepts the V3 NO-GO for Phase 2 implementation, aligns D2 readiness semantics, preserves the 65-minute gap as WARN, and keeps work limited to report/docs/status/test changes during the 72h/96h maturity window.
+- Review #9 / 2026-05-27 V3 reflection is tracked in `docs\REVIEW_09_REFLECTION_AND_ACTION_PLAN.md`. Review V4 supersedes the earlier 65-minute gap handling by adding a shared expected-break classifier; work remains limited to report/docs/status/test changes during the 72h/96h maturity window.
 - Review V2 follow-up notes are tracked in `xau-usd\xauusd-phase0\docs\PHASE0_REALITY_CHECK_INTERPRETATION.md`, `xau-usd\xauusd-phase1\docs\PHASE1_COST_LIFECYCLE_ROW_NOTE.md`, `xau-usd\xauusd-phase1\docs\PHASE1_GAP_CLASSIFICATION_REVIEW.md`, and `xau-usd\xauusd-phase1\docs\PHASE1_WOULD_SIGNAL_MANUAL_REVIEW.md`.
 - D2 method decision is tracked in `xau-usd\xauusd-phase0\docs\D2_METHOD_DECISION_2026_05_27.md`: current fixed-notional candidate-level D2 remains preserved evidence, current candidate-level D2 remains FAIL, and owner-accepted `D2_FAMILY_CLUSTERED_V0` is the project-level D2 readiness method.
 - Latest `D2_FAMILY_CLUSTERED_V0` diagnostic generated `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md` and `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK_FAMILY_ASSIGNMENTS.csv`; status is `PASS`, winner family `breakout_retest_family`, White p-value `0.0002`, max pairwise SPA p-value `0.0002`, and reviewer/owner method acceptance is true.

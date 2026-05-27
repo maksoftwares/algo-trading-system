@@ -46,7 +46,7 @@ def test_status_summary_writes_machine_readable_snapshot(tmp_path):
     assert summary["soak"]["current_streak_hours"] > 0
     assert summary["soak"]["longest_streak_hours"] > 0
     assert summary["soak"]["active_market_streak_hours"] > 0
-    assert summary["soak"]["weekend_policy"] == "weekend_breaks_active_market_streak"
+    assert summary["soak"]["weekend_policy"] == "expected_market_breaks_pause_active_market_streak"
     assert summary["soak"]["process_uptime_streak_hours"] > 0
     assert summary["soak"]["required_code_freeze_hours"] == 96.0
     assert summary["soak"]["code_freeze_started_at"] == ""

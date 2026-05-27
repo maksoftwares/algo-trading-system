@@ -3,8 +3,10 @@ from __future__ import annotations
 import argparse
 import csv
 from dataclasses import dataclass
-from datetime import datetime, time, timedelta
+from datetime import datetime
 from pathlib import Path
+
+from phase1_gap_classifier import classify_gap
 
 
 DECISION_LOG = "decision_log.csv"
@@ -12,16 +14,6 @@ STARTUP_LOG = "startup_log.csv"
 SHUTDOWN_LOG = "shutdown_log.csv"
 DEFAULT_MAX_FRESH_MINUTES = 15
 DEFAULT_REPORT = Path("outputs") / "reports" / "PHASE1_RUNTIME_HEALTH_REPORT.md"
-DEFAULT_EXPECTED_BREAKS = Path(__file__).resolve().parents[1] / "PHASE1_EXPECTED_MARKET_BREAKS.yaml"
-WEEKDAY_INDEX = {
-    "MONDAY": 0,
-    "TUESDAY": 1,
-    "WEDNESDAY": 2,
-    "THURSDAY": 3,
-    "FRIDAY": 4,
-    "SATURDAY": 5,
-    "SUNDAY": 6,
-}
 
 
 @dataclass(frozen=True)
@@ -196,8 +188,8 @@ def _check_exact_duplicates(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
 
 def _check_unique_bar_gaps(rows: list[dict[str, str]]) -> RuntimeHealthCheck:
     gaps = _unique_bar_gaps(rows)
-    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["expected_market_break"]]
-    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["expected_market_break"]]
+    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["counts_as_runtime_warning"]]
+    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["counts_as_runtime_warning"]]
     if not gaps:
         return RuntimeHealthCheck("unique_bar_gaps", "WARN", "Not enough unique bars to evaluate gaps.")
     if long_gaps:
@@ -257,8 +249,8 @@ def _render_report(
     latest = decision_rows[-1] if decision_rows else {}
     first_bar, latest_bar = _first_latest_bar(decision_rows)
     gaps = _unique_bar_gaps(decision_rows)
-    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["expected_market_break"]]
-    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["expected_market_break"]]
+    long_gaps = [gap for gap in gaps if gap["minutes"] > 5 and gap["counts_as_runtime_warning"]]
+    tolerated_gaps = [gap for gap in gaps if gap["minutes"] > 5 and not gap["counts_as_runtime_warning"]]
     return "\n".join(
         [
             "# Phase 1 Runtime Health Report",
@@ -313,7 +305,7 @@ def _render_report(
                         "Left Bar": gap["left"],
                         "Right Bar": gap["right"],
                         "Minutes": str(gap["minutes"]),
-                        "Reason": "unexpected",
+                        "Reason": str(gap["reason"]),
                     }
                     for gap in long_gaps[-10:]
                 ],
@@ -341,15 +333,20 @@ def _render_report(
 
 def _unique_bar_gaps(rows: list[dict[str, str]]) -> list[dict[str, object]]:
     parsed = _unique_bar_rows(rows)
-    return [
-        {
-            "left": left_time.strftime("%Y.%m.%d %H:%M:%S"),
-            "right": right_time.strftime("%Y.%m.%d %H:%M:%S"),
-            "minutes": int((right_time - left_time).total_seconds() / 60),
-            "expected_market_break": _is_expected_market_break(left_time, right_time, left_row, right_row),
-        }
-        for (left_time, left_row), (right_time, right_row) in zip(parsed, parsed[1:])
-    ]
+    gaps: list[dict[str, object]] = []
+    for (left_time, left_row), (right_time, right_row) in zip(parsed, parsed[1:]):
+        classification = classify_gap(left_time, right_time, left_row, right_row)
+        gaps.append(
+            {
+                "left": left_time.strftime("%Y.%m.%d %H:%M:%S"),
+                "right": right_time.strftime("%Y.%m.%d %H:%M:%S"),
+                "minutes": int((right_time - left_time).total_seconds() / 60),
+                "reason": classification.reason,
+                "expected_market_break": classification.is_expected_pause,
+                "counts_as_runtime_warning": classification.counts_as_runtime_warning,
+            }
+        )
+    return gaps
 
 
 def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[str, str]]]:
@@ -359,126 +356,6 @@ def _unique_bar_rows(rows: list[dict[str, str]]) -> list[tuple[datetime, dict[st
         if parsed is not None and parsed not in seen:
             seen[parsed] = row
     return sorted(seen.items(), key=lambda item: item[0])
-
-
-def _is_expected_market_break(
-    left: datetime,
-    right: datetime,
-    left_row: dict[str, str],
-    right_row: dict[str, str],
-) -> bool:
-    minutes = int((right - left).total_seconds() / 60)
-    if _is_weekend_stale_resume_gap(right_row):
-        return True
-    if _spans_weekend_market_break(left, right):
-        return True
-    if _is_configured_market_break(left, right):
-        return True
-    if minutes > 90:
-        return False
-    right_session = right_row.get("session", "")
-    left_minute = left.hour * 60 + left.minute
-    right_minute = right.hour * 60 + right.minute
-    crosses_known_gold_break = left_minute <= 21 * 60 <= right_minute or left_minute <= 22 * 60 <= right_minute
-    return right_session == "ROLLOVER" and crosses_known_gold_break
-
-
-def _is_weekend_stale_resume_gap(row: dict[str, str]) -> bool:
-    if row.get("session", "").upper() != "WEEKEND":
-        return False
-    if row.get("execution_state", "").upper() != "STALE_TICK":
-        return False
-    timestamp_broker = _parse_mt5_datetime(row.get("timestamp_broker", ""))
-    if timestamp_broker is None:
-        return False
-    return timestamp_broker.weekday() in {5, 6}
-
-
-def _spans_weekend_market_break(left: datetime, right: datetime) -> bool:
-    if right <= left:
-        return False
-    hours = (right - left).total_seconds() / 3600
-    if hours > 96:
-        return False
-    day = left.date()
-    end_day = right.date()
-    while day <= end_day:
-        if day.weekday() in {5, 6}:
-            return True
-        day += timedelta(days=1)
-    return False
-
-
-def _is_configured_market_break(left: datetime, right: datetime, path: Path = DEFAULT_EXPECTED_BREAKS) -> bool:
-    minutes = int((right - left).total_seconds() / 60)
-    for item in _load_expected_market_breaks(path):
-        max_gap = _to_int(item.get("max_gap_minutes")) or 0
-        if max_gap <= 0 or minutes > max_gap:
-            continue
-        weekdays = _weekday_indexes(item.get("weekdays", ""))
-        if weekdays and left.weekday() not in weekdays:
-            continue
-        start = _parse_time(item.get("start_utc", ""))
-        end = _parse_time(item.get("end_utc", ""))
-        if start is None or end is None:
-            continue
-        start_at = datetime.combine(left.date(), start)
-        end_at = datetime.combine(left.date(), end)
-        if end_at <= start_at:
-            end_at += timedelta(days=1)
-        if left <= start_at and right >= end_at:
-            return True
-    return False
-
-
-def _load_expected_market_breaks(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        return []
-    rows: list[dict[str, str]] = []
-    current: dict[str, str] | None = None
-    for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("- label:"):
-            if current:
-                rows.append(current)
-            current = {"label": _yaml_value(line.split(":", 1)[1])}
-            continue
-        if current is not None and ":" in line:
-            key, value = line.split(":", 1)
-            current[key.strip()] = _yaml_value(value)
-    if current:
-        rows.append(current)
-    return rows
-
-
-def _yaml_value(value: str) -> str:
-    return value.strip().strip('"').strip("'")
-
-
-def _weekday_indexes(value: str) -> set[int]:
-    cleaned = value.strip().strip("[]")
-    return {
-        WEEKDAY_INDEX[item.strip().upper()]
-        for item in cleaned.split(",")
-        if item.strip().upper() in WEEKDAY_INDEX
-    }
-
-
-def _parse_time(value: str) -> time | None:
-    try:
-        hour, minute = value.split(":", 1)
-        return time(int(hour), int(minute))
-    except (ValueError, TypeError):
-        return None
-
-
-def _to_int(value: object) -> int | None:
-    try:
-        return int(str(value))
-    except (TypeError, ValueError):
-        return None
 
 
 def _first_latest_bar(rows: list[dict[str, str]]) -> tuple[str | None, str | None]:

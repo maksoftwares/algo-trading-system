@@ -53,11 +53,7 @@ def verify_real_artifacts(config: ProjectConfig) -> RealArtifactVerificationOutp
             config.root / "outputs" / "reports" / "PHASE0_CPCV_VALIDATION.md",
             "Run run-cpcv-validation before Phase 2 authorization.",
         ),
-        _check_status_report(
-            "reality_check",
-            config.root / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md",
-            "Run run-reality-check before Phase 2 authorization.",
-        ),
+        _check_d2_reality_check(config),
         _check_verdict_state(config),
         _check_intrabar_reports(config),
         _check_adversarial_scores(config),
@@ -177,6 +173,36 @@ def _check_status_report(name: str, path: Path, missing_message: str) -> Artifac
     if status == "PASS":
         return ArtifactCheck(name, "PASS", f"{name.replace('_', ' ').title()} passed: {path}.")
     return ArtifactCheck(name, "FAIL", f"{name.replace('_', ' ').title()} status is {status or 'unknown'}: {path}.")
+
+
+def _check_d2_reality_check(config: ProjectConfig) -> ArtifactCheck:
+    candidate_path = config.root / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md"
+    family_path = config.root / "outputs" / "reports" / "PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md"
+    if family_path.exists():
+        family_status = _extract_status(family_path)
+        family_text = family_path.read_text(encoding="utf-8", errors="replace")
+        owner_accepted = "Reviewer/owner accepted method: true" in family_text
+        if family_status == "PASS" and owner_accepted:
+            candidate_status = _extract_status(candidate_path) if candidate_path.exists() else "missing"
+            return ArtifactCheck(
+                "reality_check",
+                "PASS",
+                (
+                    "Owner-accepted D2_FAMILY_CLUSTERED_V0 passed; candidate-level D2 "
+                    f"remains preserved audit evidence with status {candidate_status or 'unknown'}: {family_path}."
+                ),
+            )
+        if family_status and family_status != "PASS":
+            return ArtifactCheck(
+                "reality_check",
+                "FAIL",
+                f"Family-clustered D2 status is {family_status}: {family_path}.",
+            )
+    return _check_status_report(
+        "reality_check",
+        candidate_path,
+        "Run run-reality-check or owner-accepted run-family-clustered-reality-check before Phase 2 authorization.",
+    )
 
 
 def _extract_status(path: Path) -> str:

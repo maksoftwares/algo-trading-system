@@ -1,8 +1,8 @@
 # Phase 1 Gap Classification Review
 
-Overall status: WARN_REMAINS
+Overall status: SHARED_CLASSIFIER_ACTIVE
 
-Generated at UTC: 2026-05-27
+Last updated: 2026-05-27
 
 ## Reviewed Gap
 
@@ -11,35 +11,58 @@ Generated at UTC: 2026-05-27
 | Left bar | 2026.05.26 20:55:00 |
 | Right bar | 2026.05.26 22:00:00 |
 | Duration | 65 minutes |
-| Runtime report reason | unexpected |
-| Affected report | `PHASE1_RUNTIME_HEALTH_REPORT.md` |
-| Active-market streak effect | resets active-market streak |
+| Prior interpretation | Runtime WARN / active-market reset |
+| Current interpretation | Expected broker maintenance pause under configured break policy |
+| Classifier source | `xau-usd/xauusd-phase1/scripts/phase1_gap_classifier.py` |
+| Config source | `xau-usd/xauusd-phase1/PHASE1_EXPECTED_MARKET_BREAKS.yaml` |
 
-## Evidence
+## Policy Update
 
-Decision-log rows immediately before the gap were clean:
+Review V4 accepted Option A:
 
-| Bar | Run ID | Dry Run | Permission | Server Time | Execution | Spread | Block Reason |
-| --- | --- | --- | --- | --- | --- | ---: | --- |
-| 2026.05.26 20:50:00 | `phase1-dry-run-v0.6` | true | false | CLOCK_OK | EXECUTION_OK | 50 | `phase1_dry_run_only` |
-| 2026.05.26 20:55:00 | `phase1-dry-run-v0.6` | true | false | CLOCK_OK | EXECUTION_OK | 50 | `phase1_dry_run_only` |
-| 2026.05.26 22:00:00 | `phase1-dry-run-v0.6` | true | false | CLOCK_OK | SPREAD_TOO_HIGH | 180 | `SPREAD_TOO_HIGH` |
-| 2026.05.26 22:05:00 | `phase1-dry-run-v0.6` | true | false | CLOCK_OK | SPREAD_TOO_HIGH | 180 | `SPREAD_TOO_HIGH` |
-| 2026.05.26 22:10:00 | `phase1-dry-run-v0.6` | true | false | CLOCK_OK | SPREAD_TOO_HIGH | 95 | `SPREAD_TOO_HIGH` |
+```text
+Expected broker maintenance breaks pause the active-market streak but do not reset it.
+Closed-market time inside those breaks does not count toward the 72h active-market total.
+Unexpected gaps, run resets, stale/closed unsafe rows, dry-run violations, permission violations,
+and server-time violations still reset or warn.
+```
 
-The separate passive spread logger file for 2026-05-26 contains rows through the reviewed window, including 1,440 rows between 20:30 and 22:30 UTC. That source file is legacy diagnostic evidence because it does not contain `tick_fresh` / `seconds_since_tick` columns.
+This is a reporting/gate-stability change only. It does not change MT5 runtime behavior, trading permissions, observer thresholds, costs, or any broker execution boundary.
 
-## Classification
+## Shared Classifier Coverage
 
-| Check | Finding |
+| Consumer | Uses shared classifier |
 | --- | --- |
-| Broker session state | Not proven as a clean closed-market gap from current authoritative evidence. |
-| Spread logger state | Separate logger continued to write legacy rows during the window. |
-| MT5 terminal state | Active EA produced no decision rows between 20:55 and 22:00. |
-| Runtime code action needed | No, unless the gap repeats under v0.7 with fresh logger evidence. |
-| Report status effect | Keep runtime-health WARN. |
-| Soak status effect | Keep active-market 72h streak reset. |
+| `phase1_soak_streak.py` | Yes |
+| `verify_phase1_logs.py` | Yes |
+| `analyze_phase1_soak.py` | Yes |
+| `generate_phase1_runtime_health_report.py` | Yes |
+| `generate_phase1_status_summary.py` | Indirectly through soak/health reports |
+| `generate_phase1_acceptance_report.py` | Indirectly through status summary / soak streak |
+| `generate_phase2_readiness_report.py` | Indirectly through Phase 1 acceptance/status inputs |
 
-## Decision
+## Classification Rules
 
-Do not reclassify this as an expected market break with current evidence. It remains a runtime cadence warning and continues to block clean Phase 1 acceptance until the 72h active-market streak and 96h process/code-freeze gates mature without similar gaps.
+| Gap type | Active-market streak | Runtime warning |
+| --- | --- | --- |
+| Normal M5 cadence / tolerated small gap | Continues | No |
+| Configured daily broker maintenance break | Pauses, with elapsed closed-market time excluded | No |
+| Weekend market break | Pauses, with elapsed closed-market time excluded | No |
+| Expected rollover market break | Pauses when classified as expected | No |
+| Unexpected active-market gap | Resets | Yes |
+| `run_id` change / restart | Resets | Lifecycle/readiness gate |
+| Unsafe state row | Resets or fails | Yes |
+
+## Phase 2 Effect
+
+Phase 2 remains NO-GO. The shared classifier prevents expected broker maintenance from making the 72h active-market gate impossible, but it does not close the gate by itself. Phase 2 still requires:
+
+| Gate | Status |
+| --- | --- |
+| Active-market 72h streak | PENDING |
+| Process/code-freeze 96h | PENDING |
+| Measured cost model | PENDING |
+| Measured-cost revalidation | PENDING |
+| Observer parity | PENDING |
+| VPS latency evidence | PENDING |
+| Owner approval | PENDING |

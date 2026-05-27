@@ -50,10 +50,13 @@ def generate_project_status_page(
 
     phase0_root = repo_root / "xau-usd" / "xauusd-phase0"
     phase1_root = repo_root / "xau-usd" / "xauusd-phase1"
+    phase3_root = repo_root / "xau-usd" / "xauusd-phase3-experimental"
     phase0_reports = phase0_root / "outputs" / "reports"
     phase1_reports = phase1_root / "outputs" / "reports"
+    phase3_reports = phase3_root / "outputs" / "reports"
 
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
+    phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
     measured_cost["revalidation_status"] = _read_markdown_status(
@@ -93,6 +96,7 @@ def generate_project_status_page(
             d2_decision=d2_decision,
             candidates=candidates,
             account_example=account_example,
+            phase3_status=phase3_status,
         ),
         encoding="utf-8",
     )
@@ -139,6 +143,7 @@ def _render_html(
     d2_decision: D2Decision,
     candidates: list[dict[str, str]],
     account_example: dict[str, Any],
+    phase3_status: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
     runtime = _mapping(summary.get("runtime"))
@@ -148,7 +153,7 @@ def _render_html(
     accepted = [item for item in candidates if _candidate_status(item).startswith("ACCEPTED")]
     pending = [item for item in candidates if _candidate_status(item) == "PROVISIONAL"]
     rejected = [item for item in candidates if _candidate_status(item) == "REJECTED"]
-    next_items = _next_actions(phase1_status, phase2_status, measured_cost)
+    next_items = _next_actions(phase1_status, phase2_status, measured_cost, phase3_status)
     soak_progress = _to_float(soak.get("progress_pct")) or 0.0
     cost_consumption = _to_float(fixed_notional.get("Cost %")) or 0.0
 
@@ -172,6 +177,7 @@ def _render_html(
                 phase0_status=phase0_status,
                 phase1_status=phase1_status,
                 phase2_status=phase2_status,
+                phase3_status=_phase3_status_label(phase3_status),
                 measured_status=_measured_cost_rollup(measured_cost),
             ),
             '    <main class="workspace">',
@@ -212,6 +218,7 @@ def _render_html(
                     measured_cost,
                     d2_decision,
                     soak,
+                    phase3_status,
                 ),
             ),
             _panel(
@@ -275,6 +282,7 @@ def _render_html(
             "      </section>",
             "",
             '      <section class="grid lower-grid">',
+            _panel("Phase 3 Experimental Lab", _phase3_experimental_panel(phase3_status)),
             _panel("Open Work", _list(next_items)),
             _panel("Primary Artifacts", _artifact_links()),
             "      </section>",
@@ -509,6 +517,7 @@ def _sidebar(
     phase0_status: str,
     phase1_status: str,
     phase2_status: str,
+    phase3_status: str,
     measured_status: str,
 ) -> str:
     items = (
@@ -516,6 +525,7 @@ def _sidebar(
         ("Phase 1", phase1_status),
         ("Measured Cost", measured_status),
         ("Phase 2", phase2_status),
+        ("Phase 3 Lab", phase3_status),
     )
     rail = "\n".join(
         [
@@ -665,6 +675,7 @@ def _timeline(
     measured_cost: dict[str, str],
     d2_decision: D2Decision,
     soak: dict[str, Any],
+    phase3_status: dict[str, Any],
 ) -> str:
     cost_rollup = _measured_cost_rollup(measured_cost)
     rows = [
@@ -682,6 +693,11 @@ def _timeline(
             f"Model {measured_cost.get('status', 'UNKNOWN')}; revalidation {measured_cost.get('revalidation_status', 'UNKNOWN')}",
         ),
         ("Phase 2 paper", phase2_status, "Paper-mode readiness and owner approval"),
+        (
+            "Phase 3 lab",
+            _phase3_status_label(phase3_status),
+            "Experimental offline design only; real Phase 2 remains authoritative",
+        ),
     ]
     items = []
     for index, (name, status, detail) in enumerate(rows, start=1):
@@ -1372,6 +1388,10 @@ def _artifact_links() -> str:
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
+        ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
+        ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
+        ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),
+        ("Phase 3 experimental ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv"),
     ]
     return _list([f'<a href="{_esc(_link(href))}">{_esc(label)}</a>' for label, href in links], raw=True)
 
@@ -1403,7 +1423,34 @@ def _breakout_family_lifecycle(measured_cost: dict[str, str]) -> str:
     return "COST_REVALIDATION_PENDING"
 
 
-def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[str, str]) -> list[str]:
+def _phase3_status_label(phase3_status: dict[str, Any]) -> str:
+    return str(phase3_status.get("status") or "NOT_STARTED")
+
+
+def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
+    if not phase3_status:
+        return _list(["Not started."])
+    simulation = _mapping(phase3_status.get("simulation"))
+    rows = [
+        ("Status", _phase3_status_label(phase3_status)),
+        ("Real Phase 2", _cell(phase3_status.get("real_phase2_readiness"))),
+        ("Assumption", _cell(phase3_status.get("assumption"))),
+        ("Authorized for deployment", _cell(phase3_status.get("authorized_for_deployment"))),
+        ("MT5 runtime touched", _cell(phase3_status.get("mt5_runtime_touched"))),
+        ("Accepted offline events", _cell(simulation.get("accepted_events"))),
+        ("Rejected source rows", _cell(simulation.get("rejected_source_rows"))),
+        ("Median proxy cost R", _cell(simulation.get("median_proxy_cost_r"))),
+        ("Median net after proxy cost R", _cell(simulation.get("median_net_after_proxy_cost_r"))),
+    ]
+    return _key_value_table(rows)
+
+
+def _next_actions(
+    phase1_status: str,
+    phase2_status: str,
+    measured_cost: dict[str, str],
+    phase3_status: dict[str, Any],
+) -> list[str]:
     items = []
     lifecycle = _breakout_family_lifecycle(measured_cost)
     if phase1_status != "PASS":
@@ -1414,6 +1461,8 @@ def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[st
         items.append("Keep the breakout-retest family COST_SUSPENDED; audit the cost-R conversion before any paper-mode implementation.")
     if phase2_status != "PASS":
         items.append("Keep Phase 2 in preparation mode only; no paper-mode implementation until readiness is PASS.")
+    if _phase3_status_label(phase3_status) == "EXPERIMENTAL_ACTIVE":
+        items.append("Continue Phase 3 experimental work as repo-only simulation; do not promote it into the real implementation until Phase 2 readiness is PASS.")
     items.append("Continue independent candidate research without tuning rejected v0 hypotheses.")
     items.append("Keep dry-run and permission-lock safety audits green.")
     return items
@@ -1641,6 +1690,8 @@ def _link(path: str) -> str:
 
 def _status_class(value: str) -> str:
     upper = value.upper()
+    if "EXPERIMENTAL" in upper:
+        return "pending"
     if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper or "GREEN" in upper:
         return "pass"
     if "FAIL" in upper or "REJECTED" in upper or "BLOCKED" in upper:
