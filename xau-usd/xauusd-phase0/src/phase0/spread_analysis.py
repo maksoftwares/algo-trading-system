@@ -13,10 +13,6 @@ REQUIRED_SPREAD_COLUMNS = (
     "broker_time",
     "gmt_time",
     "local_time",
-    "tick_time",
-    "tick_time_msc",
-    "seconds_since_tick",
-    "tick_fresh",
     "account",
     "server",
     "symbol",
@@ -29,6 +25,8 @@ REQUIRED_SPREAD_COLUMNS = (
     "session_label",
     "is_rollover_window",
 )
+
+FRESHNESS_COLUMNS = ("tick_time", "tick_time_msc", "seconds_since_tick", "tick_fresh")
 
 
 @dataclass(frozen=True)
@@ -82,12 +80,28 @@ def analyze_spread_logs(
     frame = _load_spread_logs(files)
     source_row_count = int(frame.attrs.get("source_row_count", len(frame)))
     stale_row_count = int(frame.attrs.get("stale_row_count", 0))
+    missing_tick_fresh_row_count = int(frame.attrs.get("missing_tick_fresh_row_count", 0))
+    weekend_row_count = int(frame.attrs.get("weekend_row_count", 0))
+    freshness_available = bool(frame.attrs.get("freshness_available", False))
+    missing_freshness_columns = str(frame.attrs.get("missing_freshness_columns", ""))
     metrics = _spread_metrics(frame)
     observation_count = int(len(frame))
     observed_days = int(frame["gmt_time"].dt.date.nunique())
     status = "PASS" if observation_count >= min_observations and observed_days >= min_observed_days else "PENDING"
     metrics.to_csv(measured_path, index=False)
-    report_path.write_text(_render_spread_report(metrics, files, source_row_count, stale_row_count), encoding="utf-8")
+    report_path.write_text(
+        _render_spread_report(
+            metrics,
+            files,
+            source_row_count,
+            stale_row_count,
+            missing_tick_fresh_row_count,
+            weekend_row_count,
+            freshness_available,
+            missing_freshness_columns,
+        ),
+        encoding="utf-8",
+    )
     measured_report_path.write_text(
         _render_measured_cost_model_report(
             status=status,
@@ -97,9 +111,18 @@ def analyze_spread_logs(
             observed_days=observed_days,
             min_observations=min_observations,
             min_observed_days=min_observed_days,
-            note=(
-                "Measured cost model generated from passive spread logger data after filtering "
-                f"to tick_fresh=true rows. Stale rows excluded: {stale_row_count}."
+            source_row_count=source_row_count,
+            stale_row_count=stale_row_count,
+            missing_tick_fresh_row_count=missing_tick_fresh_row_count,
+            weekend_row_count=weekend_row_count,
+            freshness_available=freshness_available,
+            missing_freshness_columns=missing_freshness_columns,
+            note=_measured_cost_note(
+                freshness_available,
+                missing_freshness_columns,
+                stale_row_count,
+                missing_tick_fresh_row_count,
+                weekend_row_count,
             ),
         ),
         encoding="utf-8",
@@ -125,20 +148,39 @@ def _load_spread_logs(files: list[Path]) -> pd.DataFrame:
         frame["source_file"] = path.name
         frames.append(frame)
     combined = pd.concat(frames, ignore_index=True)
+    source_row_count = int(len(combined))
+    missing_freshness_columns = [column for column in FRESHNESS_COLUMNS if column not in combined.columns]
+    freshness_available = "tick_fresh" in combined.columns
     combined["spread_points"] = pd.to_numeric(combined["spread_points"], errors="coerce")
     combined["gmt_time"] = pd.to_datetime(combined["gmt_time"], errors="coerce", utc=True)
-    combined["seconds_since_tick"] = pd.to_numeric(combined["seconds_since_tick"], errors="coerce")
-    fresh_mask = combined["tick_fresh"].astype(str).str.lower().isin({"true", "1", "yes"})
-    source_row_count = int(len(combined))
-    stale_row_count = int(source_row_count - fresh_mask.sum())
-    combined = combined[fresh_mask].copy()
     combined = combined.dropna(subset=["spread_points", "gmt_time"])
+    if freshness_available:
+        combined["seconds_since_tick"] = pd.to_numeric(
+            combined.get("seconds_since_tick", pd.Series(index=combined.index, dtype="float64")),
+            errors="coerce",
+        )
+        missing_tick_fresh_row_count = int(combined["tick_fresh"].isna().sum())
+        fresh_mask = combined["tick_fresh"].astype(str).str.lower().isin({"true", "1", "yes"})
+    else:
+        missing_tick_fresh_row_count = int(len(combined))
+        fresh_mask = pd.Series(True, index=combined.index)
+    stale_row_count = int((~fresh_mask).sum())
+    combined = combined[fresh_mask].copy()
     if combined.empty:
         raise ConfigError("Spread logs contain no usable fresh spread rows.")
-    combined.attrs["source_row_count"] = source_row_count
-    combined.attrs["stale_row_count"] = stale_row_count
     combined["hour_utc"] = combined["gmt_time"].dt.hour
     combined["day_of_week_utc"] = combined["gmt_time"].dt.day_name()
+    weekend_mask = combined["day_of_week_utc"].isin({"Saturday", "Sunday"})
+    weekend_row_count = int(weekend_mask.sum())
+    combined = combined[~weekend_mask].copy()
+    if combined.empty:
+        raise ConfigError("Spread logs contain no usable weekday market rows after filtering weekend quotes.")
+    combined.attrs["source_row_count"] = source_row_count
+    combined.attrs["stale_row_count"] = stale_row_count
+    combined.attrs["missing_tick_fresh_row_count"] = missing_tick_fresh_row_count
+    combined.attrs["weekend_row_count"] = weekend_row_count
+    combined.attrs["freshness_available"] = freshness_available
+    combined.attrs["missing_freshness_columns"] = ",".join(missing_freshness_columns)
     return combined
 
 
@@ -191,16 +233,24 @@ def _render_spread_report(
     files: list[Path],
     source_row_count: int,
     stale_row_count: int,
+    missing_tick_fresh_row_count: int,
+    weekend_row_count: int,
+    freshness_available: bool,
+    missing_freshness_columns: str,
 ) -> str:
     return "\n".join(
         [
             "# Spread Distribution Report",
             "",
-            "## Freshness Filter",
+            "## Admission Filters",
             "",
             f"- Source rows: {source_row_count}",
-            f"- Rows excluded because tick_fresh was false: {stale_row_count}",
-            f"- Fresh rows used: {source_row_count - stale_row_count}",
+            f"- Freshness columns available: {'yes' if freshness_available else 'no'}",
+            f"- Missing freshness columns: {missing_freshness_columns or 'none'}",
+            f"- Rows excluded because tick_fresh was not true or was missing: {stale_row_count}",
+            f"- Rows missing tick_fresh: {missing_tick_fresh_row_count}",
+            f"- Weekend/closed-market rows excluded: {weekend_row_count}",
+            f"- Weekday rows used: {source_row_count - stale_row_count - weekend_row_count}",
             "",
             "## Source Files",
             "",
@@ -238,7 +288,13 @@ def _render_measured_cost_model_report(
     observed_days: int,
     min_observations: int,
     min_observed_days: int,
-    note: str,
+    source_row_count: int = 0,
+    stale_row_count: int = 0,
+    missing_tick_fresh_row_count: int = 0,
+    weekend_row_count: int = 0,
+    freshness_available: bool = False,
+    missing_freshness_columns: str = "",
+    note: str = "",
 ) -> str:
     global_rows = metrics[metrics["scope"] == "global"] if not metrics.empty else pd.DataFrame()
     return "\n".join(
@@ -260,10 +316,24 @@ def _render_measured_cost_model_report(
                         "Required Rows": str(min_observations),
                         "Observed Days": str(observed_days),
                         "Required Days": str(min_observed_days),
+                        "Source Rows": str(source_row_count),
+                        "Rows Missing Tick Fresh": str(missing_tick_fresh_row_count),
+                        "Weekend Rows Excluded": str(weekend_row_count),
+                        "Tick Freshness": "available" if freshness_available else "legacy_missing",
                         "Source Files": str(len(files)),
                     }
                 ],
-                ["Observed Rows", "Required Rows", "Observed Days", "Required Days", "Source Files"],
+                [
+                    "Observed Rows",
+                    "Required Rows",
+                    "Observed Days",
+                    "Required Days",
+                    "Source Rows",
+                    "Rows Missing Tick Fresh",
+                    "Weekend Rows Excluded",
+                    "Tick Freshness",
+                    "Source Files",
+                ],
             ),
             "",
             "## Global Cost Model",
@@ -278,6 +348,8 @@ def _render_measured_cost_model_report(
             "",
             note,
             "",
+            "Missing freshness columns: " + (missing_freshness_columns or "none"),
+            "",
         ]
     )
 
@@ -286,6 +358,27 @@ def _measured_decision_text(status: str) -> str:
     if status == "PASS":
         return "Measured spread evidence is sufficient for measured-cost revalidation."
     return "Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending."
+
+
+def _measured_cost_note(
+    freshness_available: bool,
+    missing_freshness_columns: str,
+    stale_row_count: int,
+    missing_tick_fresh_row_count: int,
+    weekend_row_count: int,
+) -> str:
+    freshness_text = (
+        "after filtering to tick_fresh=true rows. "
+        f"Rows excluded because tick_fresh was not true or was missing: {stale_row_count}; "
+        f"rows missing tick_fresh: {missing_tick_fresh_row_count}."
+        if freshness_available
+        else "from legacy spread logs that do not expose tick freshness fields."
+    )
+    return (
+        "Measured cost model generated from passive spread logger data "
+        f"{freshness_text} Weekend/closed-market rows excluded: {weekend_row_count}. "
+        f"Missing freshness columns: {missing_freshness_columns or 'none'}."
+    )
 
 
 def _markdown_table(frame: pd.DataFrame) -> str:

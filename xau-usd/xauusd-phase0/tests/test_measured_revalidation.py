@@ -37,12 +37,18 @@ def test_measured_cost_revalidation_passes_with_measured_p95_model(project_root,
     diagnostic = reports / "BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"
     delta = reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
     audit = reports / "BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"
+    viability = reports / "BREAKOUT_RETEST_COST_VIABILITY_MAP.md"
     assert diagnostic.exists()
     assert delta.exists()
     assert audit.exists()
+    assert viability.exists()
     assert "risk_price" in diagnostic.read_text(encoding="utf-8")
     assert "configured_p95_spread_points" in delta.read_text(encoding="utf-8")
     assert "measured spread replaces modeled entry spread" in audit.read_text(encoding="utf-8")
+    viability_text = viability.read_text(encoding="utf-8")
+    assert "## Scenario Map" in viability_text
+    assert "## Spread Thresholds" in viability_text
+    assert "Measured hourly P95 lookup" in viability_text
 
 
 def _copy_config(project_root: Path, tmp_path: Path) -> Path:

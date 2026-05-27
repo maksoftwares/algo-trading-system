@@ -50,6 +50,23 @@ def test_generate_measured_cost_model_pending_without_logs(project_root, tmp_pat
     assert "Overall status: PENDING" in output.measured_report_path.read_text(encoding="utf-8")
 
 
+def test_analyze_spread_logs_excludes_weekend_legacy_rows_from_coverage(project_root, tmp_path):
+    root = _copy_project_shell(project_root, tmp_path)
+    _write_legacy_weekend_spread_log(root)
+    config = load_project_config(root)
+
+    output = analyze_spread_logs(config, min_observations=2, min_observed_days=3)
+
+    assert output.status == "PENDING"
+    measured_text = output.measured_report_path.read_text(encoding="utf-8")
+    assert "Overall status: PENDING" in measured_text
+    assert "legacy_missing" in measured_text
+    assert "Weekend/closed-market rows excluded: 1" in measured_text
+    metrics = pd.read_csv(output.measured_cost_model_path)
+    assert "Saturday" not in set(metrics.loc[metrics["scope"] == "day_of_week_utc", "bucket"])
+    assert int(metrics.loc[metrics["scope"] == "global", "observations"].iloc[0]) == 2
+
+
 def test_generate_snapshot_includes_required_files(project_root, tmp_path):
     root = _copy_project_shell(project_root, tmp_path)
     config = load_project_config(root)
@@ -360,6 +377,17 @@ def _write_sample_spread_log(root: Path) -> None:
     pd.DataFrame(rows).to_csv(log_dir / "spread_log_123_demo_XAUUSD_20260105.csv", index=False)
 
 
+def _write_legacy_weekend_spread_log(root: Path) -> None:
+    log_dir = root / "outputs" / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    rows = [
+        _legacy_spread_row("2026-01-02 09:00:00", 50.0, "LONDON", "false"),
+        _legacy_spread_row("2026-01-03 09:00:00", 50.0, "WEEKEND", "false"),
+        _legacy_spread_row("2026-01-05 09:00:00", 75.0, "LONDON", "false"),
+    ]
+    pd.DataFrame(rows).to_csv(log_dir / "spread_log_123_demo_XAUUSD_legacy.csv", index=False)
+
+
 def _write_complete_hypotheses(root: Path) -> None:
     for filename, expert_name in (
         ("hypothesis_trend_pullback.md", "Trend Pullback"),
@@ -427,6 +455,25 @@ def _spread_row(gmt_time: str, spread_points: float, session_label: str, rollove
         "bid": 2000.0,
         "ask": 2000.2,
         "spread_price": 0.2,
+        "spread_points": spread_points,
+        "point": 0.01,
+        "digits": 2,
+        "session_label": session_label,
+        "is_rollover_window": rollover,
+    }
+
+
+def _legacy_spread_row(gmt_time: str, spread_points: float, session_label: str, rollover: str) -> dict[str, object]:
+    return {
+        "broker_time": gmt_time,
+        "gmt_time": gmt_time,
+        "local_time": gmt_time,
+        "account": "123",
+        "server": "demo",
+        "symbol": "XAUUSD",
+        "bid": 2000.0,
+        "ask": 2000.5,
+        "spread_price": 0.5,
         "spread_points": spread_points,
         "point": 0.01,
         "digits": 2,

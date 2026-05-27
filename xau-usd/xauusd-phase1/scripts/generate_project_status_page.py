@@ -164,7 +164,7 @@ def _render_html(
             '      <section class="grid focus-grid">',
             _panel(
                 "Milestone Rail",
-                _timeline(phase0_status, phase1_status, phase2_status, status_fields, measured_cost),
+                _timeline(phase0_status, phase1_status, phase2_status, status_fields, measured_cost, soak),
             ),
             _panel(
                 "Runtime Boundary",
@@ -615,13 +615,14 @@ def _timeline(
     phase2_status: str,
     status_fields: dict[str, Any],
     measured_cost: dict[str, str],
+    soak: dict[str, Any],
 ) -> str:
     cost_rollup = _measured_cost_rollup(measured_cost)
     rows = [
         ("Phase 0", phase0_status, "Research closure and final expert verdict"),
         ("Validation D1-D4", "PASS", "CPCV, Reality Check, holdout, reproduction"),
         ("Dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 runtime boundary and observer telemetry"),
-        ("Five-day soak", phase1_status, "Wall-clock dry-run evidence"),
+        ("Five-day soak", _five_day_soak_status(soak), _five_day_soak_detail(soak)),
         (
             "Measured cost",
             cost_rollup,
@@ -646,6 +647,20 @@ def _timeline(
             )
         )
     return '<ol class="timeline">\n' + "\n".join(items) + "\n      </ol>"
+
+
+def _five_day_soak_status(soak: dict[str, Any]) -> str:
+    observed = _to_float(soak.get("observed_days")) or 0.0
+    required = _to_float(soak.get("required_days")) or 5.0
+    return "PASS" if observed >= required else "PENDING"
+
+
+def _five_day_soak_detail(soak: dict[str, Any]) -> str:
+    observed = _to_float(soak.get("observed_days")) or 0.0
+    required = _to_float(soak.get("required_days")) or 5.0
+    progress = _to_float(soak.get("progress_pct"))
+    progress_text = f"{_fmt_float(progress)}%" if progress is not None else "n/a"
+    return f"Wall-clock evidence accumulating: {_fmt_float(observed)} of {_fmt_float(required)} trading days ({progress_text})"
 
 
 def _dashboard_script() -> str:
@@ -1268,6 +1283,7 @@ def _artifact_links() -> str:
         ("Measured-cost revalidation", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md"),
         ("Measured-cost assumption delta", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md"),
         ("Measured-cost audit", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"),
+        ("Cost viability map", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_VIABILITY_MAP.md"),
         ("Cost-R diagnostic", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"),
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),

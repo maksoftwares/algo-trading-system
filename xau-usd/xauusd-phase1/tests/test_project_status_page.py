@@ -53,6 +53,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Five-day soak" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
+    assert "Cost viability map" in html
     assert "$1,000 Account Example" in html
     assert "1% fixed risk per trade" in html
     assert "data-account-status-filter=\"accepted\"" in html
@@ -91,6 +92,41 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "+$10.00" in html
 
 
+def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_fails(tmp_path: Path):
+    module = _load_module()
+    repo = tmp_path / "repo"
+    phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
+    phase0_matrix = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "matrix_results"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase0_reports.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    _write_phase1_summary(
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+        acceptance="FAIL",
+        soak={"progress_pct": 90.0, "observed_days": 4.5, "required_days": 5},
+    )
+    _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "FAIL")
+    _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "FAIL")
+    (phase0_reports / "PHASE0_VERDICT.md").write_text(
+        "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
+        encoding="utf-8",
+    )
+    _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
+    _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
+    _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    _write_trade_ledger(
+        phase0_matrix / "breakout_retest" / "cell_3_breakout_retest_capital_com_p95_trades.csv",
+        [("2024-01-03 10:00:00+00:00", 1.5)],
+    )
+
+    output = module.generate_project_status_page(repo)
+
+    html = output.output_path.read_text(encoding="utf-8")
+    assert '<div class="name">Five-day soak</div>' in html
+    assert "Wall-clock evidence accumulating: 4.5 of 5 trading days (90%)" in html
+    assert '<span class="pill pending">PENDING</span>' in html
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -109,12 +145,17 @@ def _write_status(path: Path, status: str) -> None:
     path.write_text(f"# Report\n\nOverall status: {status}\n", encoding="utf-8")
 
 
-def _write_phase1_summary(path: Path) -> None:
+def _write_phase1_summary(
+    path: Path,
+    acceptance: str = "PENDING",
+    soak: dict[str, float] | None = None,
+) -> None:
+    soak = soak or {"progress_pct": 8.26, "observed_days": 0.4132, "required_days": 5}
     path.write_text(
         json.dumps(
             {
                 "status": {
-                    "acceptance": "PENDING",
+                    "acceptance": acceptance,
                     "log_verification": "PASS",
                     "runtime_health": "PASS",
                     "soak_analysis": "PASS",
@@ -131,7 +172,7 @@ def _write_phase1_summary(path: Path) -> None:
                         "block_reason": "phase1_dry_run_only",
                     },
                 },
-                "soak": {"progress_pct": 8.26, "observed_days": 0.4132, "required_days": 5},
+                "soak": soak,
                 "would_signal": {"rows": 10, "clusters": 10},
             }
         ),

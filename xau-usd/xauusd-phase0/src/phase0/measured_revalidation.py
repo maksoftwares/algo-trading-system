@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -45,9 +46,11 @@ def generate_measured_cost_revalidation(
     summary_path = reports_dir / f"{expert}_measured_cost_revalidation_summary.csv"
     diagnostic_path = reports_dir / f"{expert.upper()}_COST_R_DIAGNOSTIC.md"
     audit_path = reports_dir / f"{expert.upper()}_MEASURED_COST_AUDIT.md"
+    viability_path = reports_dir / f"{expert.upper()}_COST_VIABILITY_MAP.md"
     if expert == "breakout_retest":
         diagnostic_path = reports_dir / "BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"
         audit_path = reports_dir / "BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"
+        viability_path = reports_dir / "BREAKOUT_RETEST_COST_VIABILITY_MAP.md"
     delta_path = reports_dir / "MEASURED_COST_ASSUMPTION_DELTA.md"
 
     measured_status = _read_measured_report_status(reports_dir / "MEASURED_COST_MODEL.md")
@@ -62,6 +65,7 @@ def generate_measured_cost_revalidation(
         diagnostic_path.write_text(_render_pending_named_report("Breakout Retest Cost-R Diagnostic", reason), encoding="utf-8")
         delta_path.write_text(_render_pending_named_report("Measured-Cost Assumption Delta", reason), encoding="utf-8")
         audit_path.write_text(_render_pending_named_report("Breakout Retest Measured-Cost Audit", reason), encoding="utf-8")
+        viability_path.write_text(_render_pending_named_report("Breakout Retest Cost Viability Map", reason), encoding="utf-8")
         return MeasuredCostRevalidationOutput("PENDING", report_path, summary_path, expert, 0, _required_cells(config), 0)
 
     measured = _read_measured_cost_model(config, measured_path)
@@ -117,6 +121,19 @@ def generate_measured_cost_revalidation(
     )
     audit_path.write_text(
         _render_measured_cost_audit(status, adjusted_all),
+        encoding="utf-8",
+    )
+    viability_path.write_text(
+        _render_cost_viability_map(
+            config,
+            measured,
+            baseline,
+            adjusted_all,
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
         encoding="utf-8",
     )
     return MeasuredCostRevalidationOutput(
@@ -509,6 +526,452 @@ def _render_measured_cost_audit(status: str, frame: pd.DataFrame) -> str:
             _audit_conclusion(status),
             "",
         ]
+    )
+
+
+def _render_cost_viability_map(
+    config: ProjectConfig,
+    measured: pd.DataFrame,
+    baseline: pd.DataFrame,
+    measured_p95_frame: pd.DataFrame,
+    fixed_risk_usd: float,
+    pf_threshold: float,
+    min_trades: int,
+    required_cells: int,
+) -> str:
+    configured_p95 = _configured_spread_points(config, "p95", "XAUUSD")
+    measured_global = _measured_global_row(measured, config, "XAUUSD")
+    measured_median = _float_or_none(measured_global.get("median_spread_points")) or configured_p95
+    measured_p95 = _float_or_none(measured_global.get("p95_spread_points")) or configured_p95
+    measured_max = _float_or_none(measured_global.get("max_spread_points")) or measured_p95
+
+    prepared = _prepare_viability_frame(baseline)
+    no_rollover_proxy = prepared[~prepared["entry_hour_utc"].isin([22, 23])].copy()
+    liquid_window = prepared[prepared["entry_hour_utc"].between(12, 17)].copy()
+
+    scenario_rows = [
+        _viability_scenario_row(
+            "Configured matrix as-run",
+            "No additional filter",
+            prepared,
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Configured P95 fixed {configured_p95:.0f} pts",
+            "No additional filter",
+            _apply_constant_spread_points(prepared, configured_p95),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Measured global median fixed {measured_median:.0f} pts",
+            "No additional filter",
+            _apply_constant_spread_points(prepared, measured_median),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Measured global P95 fixed {measured_p95:.0f} pts",
+            "No additional filter",
+            _apply_constant_spread_points(prepared, measured_p95),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            "Measured hourly P95 lookup",
+            "No additional filter",
+            measured_p95_frame,
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Measured P95 fixed {measured_p95:.0f} pts",
+            "Exclude UTC 22-23 rollover proxy",
+            _apply_constant_spread_points(no_rollover_proxy, measured_p95),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Measured P95 fixed {measured_p95:.0f} pts",
+            "UTC 12-17 liquid window only",
+            _apply_constant_spread_points(liquid_window, measured_p95),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Measured median fixed {measured_median:.0f} pts",
+            "UTC 12-17 liquid window only",
+            _apply_constant_spread_points(liquid_window, measured_median),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+        _viability_scenario_row(
+            f"Configured P95 fixed {configured_p95:.0f} pts",
+            "UTC 12-17 liquid window only",
+            _apply_constant_spread_points(liquid_window, configured_p95),
+            fixed_risk_usd,
+            pf_threshold,
+            min_trades,
+            required_cells,
+        ),
+    ]
+
+    threshold_rows = []
+    for label, frame in [
+        ("All trades", prepared),
+        ("Exclude UTC 22-23", no_rollover_proxy),
+        ("UTC 12-17 only", liquid_window),
+    ]:
+        threshold_rows.extend(_spread_threshold_rows(label, frame))
+
+    return "\n".join(
+        [
+            "# Breakout Retest Cost Viability Map",
+            "",
+            "Overall status: REVIEW",
+            "",
+            "## Decision",
+            "",
+            _viability_decision_text(scenario_rows, measured_p95, measured_median),
+            "",
+            "## Scenario Map",
+            "",
+            _markdown_table_from_rows(
+                scenario_rows,
+                [
+                    "Scenario",
+                    "Filter",
+                    "Trades",
+                    "Win %",
+                    "PF",
+                    "Net R",
+                    "Cost R",
+                    "Passing Cells",
+                    "Gate",
+                    "Fixed PnL",
+                ],
+            ),
+            "",
+            "## Spread Thresholds",
+            "",
+            _markdown_table_from_rows(
+                threshold_rows,
+                ["Trade Set", "Requirement", "Max Spread Points"],
+            ),
+            "",
+            "## Measured Spread Slices",
+            "",
+            _markdown_table_from_rows(
+                _measured_spread_slice_rows(measured, config),
+                ["Slice", "Observations", "Median Pts", "P95 Pts", "Max Pts", "Note"],
+            ),
+            "",
+            "## Hour Map Under Measured Hourly P95 Lookup",
+            "",
+            _markdown_table_from_rows(
+                _hour_viability_rows(measured_p95_frame, fixed_risk_usd),
+                ["UTC Hour", "Trades", "Spread P95 Pts", "PF", "Net R", "Cost R", "Gate"],
+            ),
+            "",
+            "## Interpretation",
+            "",
+            "- `Configured matrix as-run` is the old evidence surface and mixes best-case, median, and p95 matrix cells.",
+            "- Fixed-spread scenarios replace only modeled entry spread; existing slippage and commission are preserved.",
+            "- `Measured hourly P95 lookup` is the hard measured-cost revalidation surface currently used for Phase 2 gating.",
+            "- UTC 22-23 is a rollover-proxy filter because the measured model has a dedicated rollover bucket and the hour-22 bucket carries the highest measured P95.",
+            "- This report is diagnostic only. It does not authorize Phase 2 paper-mode execution.",
+            "",
+        ]
+    )
+
+
+def _prepare_viability_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    prepared = frame.copy()
+    prepared["risk_price"] = (prepared["entry_price"] - prepared["stop_loss"]).abs().replace(0, pd.NA).astype("float64")
+    prepared["point_size"] = _point_size_for_symbol(prepared)
+    prepared["entry_hour_utc"] = pd.to_datetime(
+        prepared["entry_time_utc"], utc=True, errors="coerce"
+    ).dt.hour.astype("Int64")
+    return prepared
+
+
+def _apply_constant_spread_points(frame: pd.DataFrame, spread_points: float) -> pd.DataFrame:
+    adjusted = _prepare_viability_frame(frame)
+    risk_price = adjusted["risk_price"].replace(0, pd.NA)
+    new_entry_spread_r = (float(spread_points) * adjusted["point_size"] / risk_price).fillna(0.0)
+    adjusted["scenario_spread_points"] = float(spread_points)
+    adjusted["scenario_entry_spread_R"] = new_entry_spread_r
+    adjusted["all_in_cost_R"] = (
+        pd.to_numeric(adjusted["all_in_cost_R"], errors="coerce").fillna(0.0)
+        - pd.to_numeric(adjusted["entry_spread_R"], errors="coerce").fillna(0.0)
+        + new_entry_spread_r
+    ).clip(lower=0.0)
+    adjusted["net_R"] = (
+        pd.to_numeric(adjusted["net_R"], errors="coerce").fillna(0.0)
+        + pd.to_numeric(adjusted["entry_spread_R"], errors="coerce").fillna(0.0)
+        - new_entry_spread_r
+    )
+    adjusted["gross_expectancy_proxy_R"] = adjusted["net_R"] + adjusted["all_in_cost_R"]
+    return adjusted
+
+
+def _viability_scenario_row(
+    scenario: str,
+    filter_label: str,
+    frame: pd.DataFrame,
+    fixed_risk_usd: float,
+    pf_threshold: float,
+    min_trades: int,
+    required_cells: int,
+) -> dict[str, str]:
+    if frame.empty:
+        return {
+            "Scenario": scenario,
+            "Filter": filter_label,
+            "Trades": "0",
+            "Win %": "n/a",
+            "PF": "n/a",
+            "Net R": "n/a",
+            "Cost R": "n/a",
+            "Passing Cells": f"0/{required_cells}",
+            "Gate": "FAIL",
+            "Fixed PnL": "0.00",
+        }
+    prepared = _prepare_viability_frame(frame)
+    overall = _summarize_frame(
+        prepared,
+        fixed_risk_usd,
+        {"cell_id": "ALL", "broker": "ALL", "cost_model": scenario, "symbol": "XAUUSD"},
+    )
+    passing_cells = _passing_cell_count(prepared, pf_threshold, min_trades)
+    gate = "PASS" if passing_cells >= required_cells and overall["profit_factor"] >= pf_threshold else "FAIL"
+    return {
+        "Scenario": scenario,
+        "Filter": filter_label,
+        "Trades": str(overall["trade_count"]),
+        "Win %": f"{float(overall['win_rate']) * 100:.2f}",
+        "PF": _fmt(overall["profit_factor"]),
+        "Net R": _fmt(overall["net_expectancy_R"]),
+        "Cost R": _fmt(overall["mean_all_in_cost_R"]),
+        "Passing Cells": f"{passing_cells}/{required_cells}",
+        "Gate": gate,
+        "Fixed PnL": f"{float(overall['fixed_notional_total_pnl_usd']):.2f}",
+    }
+
+
+def _passing_cell_count(frame: pd.DataFrame, pf_threshold: float, min_trades: int) -> int:
+    passing = 0
+    for _, group in frame.groupby("cell_id", dropna=False):
+        if len(group) < min_trades:
+            continue
+        net_r = pd.to_numeric(group["net_R"], errors="coerce").fillna(0.0)
+        if _profit_factor(net_r) >= pf_threshold:
+            passing += 1
+    return passing
+
+
+def _spread_threshold_rows(label: str, frame: pd.DataFrame) -> list[dict[str, str]]:
+    return [
+        {
+            "Trade Set": label,
+            "Requirement": "Average net R >= 0.00",
+            "Max Spread Points": _format_spread_threshold(_max_spread_for_average_net(frame, 0.0)),
+        },
+        {
+            "Trade Set": label,
+            "Requirement": "Average net R >= 0.10",
+            "Max Spread Points": _format_spread_threshold(_max_spread_for_average_net(frame, 0.10)),
+        },
+        {
+            "Trade Set": label,
+            "Requirement": "Average net R >= 0.15",
+            "Max Spread Points": _format_spread_threshold(_max_spread_for_average_net(frame, 0.15)),
+        },
+        {
+            "Trade Set": label,
+            "Requirement": "PF >= 1.00",
+            "Max Spread Points": _format_spread_threshold(_max_spread_for_profit_factor(frame, 1.0)),
+        },
+        {
+            "Trade Set": label,
+            "Requirement": "PF >= 1.30",
+            "Max Spread Points": _format_spread_threshold(_max_spread_for_profit_factor(frame, 1.30)),
+        },
+    ]
+
+
+def _max_spread_for_average_net(frame: pd.DataFrame, target_net_r: float) -> float | None:
+    prepared = _prepare_viability_frame(frame)
+    risk_price = prepared["risk_price"].replace(0, pd.NA)
+    coefficient = (prepared["point_size"] / risk_price).dropna().mean()
+    intercept = (
+        pd.to_numeric(prepared["net_R"], errors="coerce").fillna(0.0)
+        + pd.to_numeric(prepared["entry_spread_R"], errors="coerce").fillna(0.0)
+    ).mean()
+    if pd.isna(coefficient) or coefficient <= 0:
+        return None
+    threshold = (float(intercept) - target_net_r) / float(coefficient)
+    return threshold if threshold >= 0 else None
+
+
+def _max_spread_for_profit_factor(frame: pd.DataFrame, target_pf: float) -> float | None:
+    prepared = _prepare_viability_frame(frame)
+    if _profit_factor(pd.to_numeric(_apply_constant_spread_points(prepared, 0.0)["net_R"], errors="coerce").fillna(0.0)) < target_pf:
+        return None
+    high = 300.0
+    if _profit_factor(pd.to_numeric(_apply_constant_spread_points(prepared, high)["net_R"], errors="coerce").fillna(0.0)) >= target_pf:
+        return high
+    low = 0.0
+    for _ in range(40):
+        mid = (low + high) / 2.0
+        net_r = pd.to_numeric(_apply_constant_spread_points(prepared, mid)["net_R"], errors="coerce").fillna(0.0)
+        if _profit_factor(net_r) >= target_pf:
+            low = mid
+        else:
+            high = mid
+    return low
+
+
+def _profit_factor(net_r: pd.Series) -> float:
+    gross_profit = float(net_r[net_r > 0].sum())
+    gross_loss = float(-net_r[net_r < 0].sum())
+    if gross_loss == 0:
+        return math.inf if gross_profit > 0 else 0.0
+    return gross_profit / gross_loss
+
+
+def _format_spread_threshold(value: float | None) -> str:
+    if value is None:
+        return "none"
+    if value >= 299.999:
+        return ">=300.00"
+    return f"{value:.2f}"
+
+
+def _measured_spread_slice_rows(measured: pd.DataFrame, config: ProjectConfig) -> list[dict[str, str]]:
+    return [
+        _measured_slice_row(measured, config, "global", "all", "Global", "All admitted spread rows"),
+        _measured_slice_row(measured, config, "rollover", "all", "Rollover", "High-risk spread window"),
+        _measured_slice_row(measured, config, "hour_utc", "22", "UTC hour 22", "Rollover-proxy hour"),
+        _measured_slice_row(measured, config, "hour_utc", "23", "UTC hour 23", "Post-rollover/thin-liquidity hour"),
+        _measured_slice_row(measured, config, "day_of_week_utc", "Saturday", "Saturday", "Weekend rows should be reviewed for quote freshness"),
+        _measured_slice_row(measured, config, "day_of_week_utc", "Sunday", "Sunday", "Weekend/open rows should be reviewed for quote freshness"),
+    ]
+
+
+def _measured_slice_row(
+    measured: pd.DataFrame,
+    config: ProjectConfig,
+    scope: str,
+    bucket: str,
+    label: str,
+    note: str,
+) -> dict[str, str]:
+    canonical = resolve_symbol(config, "XAUUSD")
+    rows = measured[
+        (measured["scope"].astype(str) == scope)
+        & (measured["bucket"].astype(str) == bucket)
+        & measured["symbol"].astype(str).apply(lambda value: _matches_csv_value(value, canonical))
+    ]
+    if rows.empty:
+        return {
+            "Slice": label,
+            "Observations": "0",
+            "Median Pts": "n/a",
+            "P95 Pts": "n/a",
+            "Max Pts": "n/a",
+            "Note": note,
+        }
+    row = rows.iloc[0]
+    return {
+        "Slice": label,
+        "Observations": str(row.get("observations", "")),
+        "Median Pts": _fmt(row.get("median_spread_points", "")),
+        "P95 Pts": _fmt(row.get("p95_spread_points", "")),
+        "Max Pts": _fmt(row.get("max_spread_points", "")),
+        "Note": note,
+    }
+
+
+def _hour_viability_rows(frame: pd.DataFrame, fixed_risk_usd: float) -> list[dict[str, str]]:
+    working = _prepare_viability_frame(frame)
+    rows: list[dict[str, str]] = []
+    for hour, group in working.groupby("entry_hour_utc", dropna=False, sort=True):
+        if group.empty:
+            continue
+        summary = _summarize_frame(
+            group,
+            fixed_risk_usd,
+            {"cell_id": "ALL", "broker": "ALL", "cost_model": "MEASURED_P95", "symbol": "XAUUSD"},
+        )
+        spread_p95 = (
+            pd.to_numeric(group.get("measured_p95_spread_points", pd.Series(dtype=float)), errors="coerce")
+            .dropna()
+            .quantile(0.95)
+        )
+        gate = "REVIEW" if summary["net_expectancy_R"] >= 0 and summary["profit_factor"] >= 1.0 else "FAIL"
+        rows.append(
+            {
+                "UTC Hour": str(hour),
+                "Trades": str(summary["trade_count"]),
+                "Spread P95 Pts": _fmt(spread_p95),
+                "PF": _fmt(summary["profit_factor"]),
+                "Net R": _fmt(summary["net_expectancy_R"]),
+                "Cost R": _fmt(summary["mean_all_in_cost_R"]),
+                "Gate": gate,
+            }
+        )
+    return rows
+
+
+def _viability_decision_text(
+    scenario_rows: list[dict[str, str]],
+    measured_p95: float,
+    measured_median: float,
+) -> str:
+    hard_gate = next((row for row in scenario_rows if row["Scenario"] == "Measured hourly P95 lookup"), None)
+    liquid_median = next(
+        (
+            row
+            for row in scenario_rows
+            if row["Scenario"].startswith("Measured median fixed")
+            and row["Filter"] == "UTC 12-17 liquid window only"
+        ),
+        None,
+    )
+    hard_text = (
+        f"The hard measured-cost gate remains {hard_gate['Gate']} with PF {hard_gate['PF']} "
+        f"and net {hard_gate['Net R']}R."
+        if hard_gate
+        else "The hard measured-cost gate is unavailable."
+    )
+    liquid_text = (
+        f"The best simple liquidity filter tested here is still only {liquid_median['Gate']} "
+        f"at measured median {measured_median:.0f} points, with PF {liquid_median['PF']} "
+        f"and net {liquid_median['Net R']}R."
+        if liquid_median
+        else "No simple liquidity-filter scenario was available."
+    )
+    return (
+        f"Measured P95 spread is {measured_p95:.0f} points, far above the spread level needed "
+        f"for the historical breakout-retest edge to remain healthy. {hard_text} {liquid_text}"
     )
 
 

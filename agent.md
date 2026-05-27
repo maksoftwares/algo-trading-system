@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-26
+Last updated: 2026-05-27
 
 ## Workspace
 
@@ -25,9 +25,22 @@ Last updated: 2026-05-26
 
 ## Current State
 
-- Current measured-cost decision: `MEASURED_COST_MODEL.md` has enough passive-spread coverage to evaluate, but `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` is `FAIL`. Treat `breakout_retest` as `COST_SUSPENDED`; it may remain in Phase 1 telemetry, but it is not Phase 2 paper-mode execution eligible unless a cost-conversion defect is found, fixed, and the corrected revalidation passes.
-- Phase 2 paper-mode implementation is blocked by failed cost evidence, not merely pending cost evidence. Continue Phase 1 dry-run and passive spread logging; do not add broker-side execution.
-- New review blockers being addressed: schema-versioned Phase 1 log rotation, expected market-break classification, measured-cost diagnostic/audit/delta reports, passive spread quote-freshness filtering, cost-suspended lifecycle docs, and magic-number external registry/readiness gates.
+- 2026-05-27 refresh:
+  - Phase 1 schema acceptance fix is deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and the terminal was restarted. The logger rotated stale CSVs to `MQL5\Files\logs\archive`; live `decision_log.csv` now uses `phase1_decision_schema_v2` with `decision_schema_hash`, `br_lifecycle_state`, and `sbr_lifecycle_state`.
+  - Soak evidence was recovered after schema rotation: archived old-schema decision rows were migrated into the current v2 schema with `scripts\migrate_phase1_decision_log_schema.py`; live `decision_log.csv` now preserves 613 rows from the original 2026-05-22 start while keeping the v2 schema hash fields.
+  - Phase 1 acceptance is `PENDING`. Runtime verification is `WARN` rather than `FAIL` because schemas are valid and the remaining warnings are soak/cadence/health maturity gates, not a broken log format.
+  - Latest refreshed runtime snapshot: 613 clean-schema decision rows, latest bar `2026.05.27 00:40:00`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, would-signal evidence `65` rows / `65` clusters.
+  - Five-day soak evidence is preserved at `91.39%` (`4.5694/5.00` observed calendar days), from `2026-05-22 11:00:00` to `2026-05-27 00:40:00`. Active-market streak remains `22.92h/72h` longest and `2.67h/72h` current.
+  - Code-freeze was correctly reset by the real deployment: code-freeze `0.16h/96h`, marker `2026-05-27T00:31:23Z`. Do not backdate or fake this gate.
+  - Regression coverage exists for the migration path: `tests\test_phase1_decision_log_migration.py` checks that archived old-schema rows are migrated into v2 without losing soak timestamps.
+  - Status dashboard fix: the Milestone Rail `Five-day soak` row now uses the actual soak counters (`observed_days` vs `required_days`) instead of inheriting overall Phase 1 acceptance status. It should show `PENDING` until the five-day wall-clock target is reached; Phase 1 acceptance failures remain separate.
+  - Measured-cost forensics corrected the coverage gate: legacy spread logs from `2026-05-22` through `2026-05-26` lacked `tick_fresh` / `seconds_since_tick`, so they are no longer admitted as authoritative measured-cost rows. Weekend/closed-market rows are also excluded before coverage is counted.
+  - Passive spread logger was redeployed to `C:\MT5PortableSpreadLogger` from the repo source, compiled with 0 errors / 0 warnings, restarted, and is now writing `tick_fresh=true` rows in `spread_log_121409_Capital.ComMena-Live_XAUUSD_20260527.csv`.
+  - Measured cost model is now `PENDING` with 205 authoritative fresh rows over 1 observed market day; measured-cost revalidation and assumption delta are also `PENDING` until 500 fresh rows across 5 observed market days exist.
+  - Phase 2 readiness is `PENDING`; do not add paper-mode broker execution while measured-cost revalidation, Phase 1 acceptance, VPS selection, and owner approval are not PASS.
+- Current measured-cost decision: `MEASURED_COST_MODEL.md` is `PENDING` after the freshness audit. Treat the prior measured-cost `FAIL` as a non-authoritative legacy diagnostic, not a final gate result. `breakout_retest` may remain in Phase 1 telemetry, but it is not Phase 2 paper-mode execution eligible until the fresh measured-cost model reaches PASS and revalidation passes.
+- Phase 2 paper-mode implementation is blocked by pending measured-cost evidence plus pending Phase 1 acceptance. Continue Phase 1 dry-run and passive spread logging; do not add broker-side execution.
+- New review blockers being addressed: expected market-break classification, measured-cost diagnostic/audit/delta reports, passive spread quote-freshness filtering, cost-suspended lifecycle docs, and magic-number external registry/readiness gates. Schema-versioned Phase 1 log rotation is implemented and verified.
 - 2026-05-23 resume after planned one-day shutdown is complete.
   - `C:\MT5PortableGoldMission\terminal64.exe` is running with `/portable /config:C:\MT5PortableGoldMission\Config\phase1_dry_run_startup.ini`.
   - `C:\MT5PortableSpreadLogger\terminal64.exe` is running with `/portable /config:C:\MT5PortableSpreadLogger\Config\phase0_spread_logger_startup.ini`.
