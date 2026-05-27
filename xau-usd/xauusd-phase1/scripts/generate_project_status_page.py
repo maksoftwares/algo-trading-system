@@ -54,7 +54,11 @@ def generate_project_status_page(
     measured_cost["assumption_delta_status"] = _read_markdown_status(
         phase0_reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
     ) or "UNKNOWN"
-    candidates = _read_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    reality_check_status = _read_markdown_status(phase0_reports / "PHASE0_REALITY_CHECK.md") or "UNKNOWN"
+    candidates = _candidate_rows(
+        phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv",
+        phase0_root / "docs" / "CANDIDATE_RESEARCH_BACKLOG.md",
+    )
     account_example = _load_account_example(phase0_root, candidates)
     phase0_verdict = _read_markdown_status(phase0_reports / "PHASE0_VERDICT.md") or _phase0_verdict_status(
         phase0_reports / "PHASE0_VERDICT.md"
@@ -77,6 +81,7 @@ def generate_project_status_page(
             summary=phase1_summary,
             fixed_notional=fixed_notional,
             measured_cost=measured_cost,
+            reality_check_status=reality_check_status,
             candidates=candidates,
             account_example=account_example,
         ),
@@ -122,6 +127,7 @@ def _render_html(
     summary: dict[str, Any],
     fixed_notional: dict[str, str],
     measured_cost: dict[str, str],
+    reality_check_status: str,
     candidates: list[dict[str, str]],
     account_example: dict[str, Any],
 ) -> str:
@@ -189,7 +195,15 @@ def _render_html(
             '      <section class="grid focus-grid">',
             _panel(
                 "Milestone Rail",
-                _timeline(phase0_status, phase1_status, phase2_status, status_fields, measured_cost, soak),
+                _timeline(
+                    phase0_status,
+                    phase1_status,
+                    phase2_status,
+                    status_fields,
+                    measured_cost,
+                    reality_check_status,
+                    soak,
+                ),
             ),
             _panel(
                 "Runtime Boundary",
@@ -640,12 +654,18 @@ def _timeline(
     phase2_status: str,
     status_fields: dict[str, Any],
     measured_cost: dict[str, str],
+    reality_check_status: str,
     soak: dict[str, Any],
 ) -> str:
     cost_rollup = _measured_cost_rollup(measured_cost)
+    validation_status = "PASS" if reality_check_status == "PASS" else reality_check_status
     rows = [
         ("Phase 0", phase0_status, "Research closure and final expert verdict"),
-        ("Validation D1-D4", "PASS", "CPCV, Reality Check, holdout, reproduction"),
+        (
+            "Validation D1-D4",
+            validation_status,
+            f"D2 Reality Check/SPA {reality_check_status}; D1/D3/D4 remain closed",
+        ),
         ("Dry-run shell", _cell(status_fields.get("runtime_health")), "MT5 runtime boundary and observer telemetry"),
         ("Five-day soak", _five_day_soak_status(soak), _five_day_soak_detail(soak)),
         (
@@ -947,6 +967,13 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
 
 
 def _candidate_status(item: dict[str, str]) -> str:
+    backlog_status = item.get("backlog_status", "").upper()
+    if "PROVISIONAL" in backlog_status or "REGISTERED" in backlog_status or "PLANNED" in backlog_status:
+        return "PROVISIONAL"
+    if backlog_status.startswith("REJECTED"):
+        return "REJECTED"
+    if backlog_status.startswith("APPROVED"):
+        return "ACCEPTED SAME-FAMILY" if "SAME_FAMILY" in backlog_status else "ACCEPTED"
     if item.get("decision_scope") == "APPROVED_OR_ACTIVE":
         if item.get("candidate") == "swing_breakout_retest_v0":
             return "ACCEPTED SAME-FAMILY"
@@ -1410,6 +1437,67 @@ def _read_candidate_audit(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def _candidate_rows(audit_path: Path, backlog_path: Path) -> list[dict[str, str]]:
+    rows = _read_candidate_audit(audit_path)
+    seen = {row.get("candidate", "") for row in rows}
+    for row in _read_candidate_backlog(backlog_path):
+        candidate = row.get("candidate", "")
+        if not candidate or candidate in seen:
+            continue
+        rows.append(_pending_backlog_candidate(row))
+        seen.add(candidate)
+    return rows
+
+
+def _read_candidate_backlog(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        stripped = line.strip()
+        if not stripped.startswith("|") or stripped.startswith("| ---") or stripped.startswith("| #"):
+            continue
+        parts = [part.strip() for part in stripped.strip("|").split("|")]
+        if len(parts) < 4 or parts[0] == "#":
+            continue
+        candidate = parts[1].strip("`")
+        if not candidate or candidate.lower() == "candidate":
+            continue
+        rows.append({"candidate": candidate, "backlog_status": parts[2], "next_action": parts[3]})
+    return rows
+
+
+def _pending_backlog_candidate(row: dict[str, str]) -> dict[str, str]:
+    status = row.get("backlog_status", "")
+    if "SMOKE" in status.upper():
+        diagnosis = "HASH_LOCKED_SMOKE_PASS_PENDING_MATRIX"
+    elif "REGISTERED" in status.upper():
+        diagnosis = "HASH_LOCKED_PENDING_SMOKE_OR_MATRIX"
+    else:
+        diagnosis = "PLANNED_NOT_MATRIX_TESTED"
+    return {
+        "candidate": row.get("candidate", ""),
+        "decision_scope": "RESEARCH_PENDING",
+        "frequency_bias_diagnosis": diagnosis,
+        "complete_cells": "0",
+        "pf_passing_cells": "0",
+        "total_trades": "0",
+        "min_cell_trades": "0",
+        "max_cell_trades": "0",
+        "median_cell_trades": "0",
+        "failed_gate_count": "0",
+        "failed_gates": "pending_matrix_not_run",
+        "multi_cell_survival": "PENDING",
+        "sample_size": "PENDING",
+        "no_catastrophic_failure": "PENDING",
+        "concentration": "PENDING",
+        "activity": "PENDING",
+        "cost_sensitivity": "PENDING",
+        "backlog_status": status,
+        "next_action": row.get("next_action", ""),
+    }
+
+
 def _parse_fixed_notional(path: Path) -> dict[str, str]:
     if not path.exists():
         return {}
@@ -1450,6 +1538,8 @@ def _read_markdown_status(path: Path) -> str:
     text = path.read_text(encoding="utf-8", errors="replace")
     for line in text.splitlines():
         if line.startswith("Overall status:"):
+            return line.split(":", 1)[1].strip()
+        if line.startswith("Status:"):
             return line.split(":", 1)[1].strip()
     return ""
 

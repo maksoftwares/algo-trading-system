@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.macro_event_calendar import MACRO_EVENT_FRAME_KEY
 
 
@@ -68,6 +69,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_d1_momentum_expansion_continuation_context()
     if expert == "h4_financial_conditions_stress_reversal_v0":
         return _h4_financial_conditions_stress_reversal_context()
+    if expert == "h4_gold_futures_volume_climax_v0":
+        return _h4_gold_futures_volume_climax_context()
     if expert == "h4_gvz_volatility_panic_reversal_v0":
         return _h4_gvz_volatility_panic_reversal_context()
     if expert == "h4_inside_bar_d1_momentum_breakout_v0":
@@ -82,6 +85,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_real_yield_proxy_momentum_context()
     if expert == "h4_treasury_curve_stress_momentum_v0":
         return _h4_treasury_curve_stress_momentum_context()
+    if expert == "h4_us_session_liquidity_reversal_v0":
+        return _h4_us_session_liquidity_reversal_context()
     if expert == "h4_vix_risk_off_reversal_v0":
         return _h4_vix_risk_off_reversal_context()
     if expert == "h4_walk_forward_knn_momentum_state_v0":
@@ -2047,6 +2052,168 @@ def _d1_volatility_expansion_reversal_context() -> dict:
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_us_session_liquidity_reversal_context() -> dict:
+    h4_times = pd.date_range("2024-05-01T00:00:00Z", periods=96, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * 96,
+            "high": [100.5] * 96,
+            "low": [99.5] * 96,
+            "close": [100.0] * 96,
+        }
+    )
+    h4.loc[40, ["open", "high", "low", "close"]] = [102.0, 105.0, 99.0, 100.5]
+
+    m5_periods = 96 * 48 + 576
+    m5_times = pd.date_range("2024-05-01T00:05:00Z", periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [100.5] * m5_periods,
+            "high": [101.0] * m5_periods,
+            "low": [100.0] * m5_periods,
+            "close": [100.5] * m5_periods,
+            "mid_open": [100.5] * m5_periods,
+            "mid_close": [100.5] * m5_periods,
+            "bid_open": [100.4] * m5_periods,
+            "ask_open": [100.6] * m5_periods,
+            "bid_close": [100.4] * m5_periods,
+            "ask_close": [100.6] * m5_periods,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-05-01T00:15:00Z", periods=1600, freq="15min"),
+            "open": [100.5] * 1600,
+            "high": [101.0] * 1600,
+            "low": [100.0] * 1600,
+            "close": [100.5] * 1600,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-05-01T00:00:00Z", periods=500, freq="1h"),
+            "open": [100.5] * 500,
+            "high": [101.0] * 500,
+            "low": [100.0] * 500,
+            "close": [100.5] * 500,
+        }
+    )
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-05-01T00:00:00Z", periods=30, freq="1D"),
+            "bar_start_utc": pd.date_range("2024-04-30T00:00:00Z", periods=30, freq="1D"),
+            "open": [100.0] * 30,
+            "high": [101.0] * 30,
+            "low": [99.0] * 30,
+            "close": [100.0] * 30,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h4_gold_futures_volume_climax_context() -> dict:
+    h4_periods = 320
+    h4_times = pd.date_range("2024-01-01T00:00:00Z", periods=h4_periods, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * h4_periods,
+            "high": [100.5] * h4_periods,
+            "low": [99.5] * h4_periods,
+            "close": [100.0] * h4_periods,
+        }
+    )
+    signal_index = 260
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [98.0, 100.0, 97.0, 99.7]
+
+    m5_periods = h4_periods * 48 + 384
+    m5_times = pd.date_range("2024-01-01T00:05:00Z", periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [99.7] * m5_periods,
+            "high": [100.2] * m5_periods,
+            "low": [99.2] * m5_periods,
+            "close": [99.7] * m5_periods,
+            "mid_open": [99.7] * m5_periods,
+            "mid_close": [99.7] * m5_periods,
+            "bid_open": [99.6] * m5_periods,
+            "ask_open": [99.8] * m5_periods,
+            "bid_close": [99.6] * m5_periods,
+            "ask_close": [99.8] * m5_periods,
+        }
+    )
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T00:15:00Z", periods=5200, freq="15min"),
+            "open": [99.7] * 5200,
+            "high": [100.2] * 5200,
+            "low": [99.2] * 5200,
+            "close": [99.7] * 5200,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range("2024-01-01T00:00:00Z", periods=1400, freq="1h"),
+            "open": [99.7] * 1400,
+            "high": [100.2] * 1400,
+            "low": [99.2] * 1400,
+            "close": [99.7] * 1400,
+        }
+    )
+
+    d1_periods = 90
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=d1_periods, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [100.0] * d1_periods,
+            "high": [101.0] * d1_periods,
+            "low": [99.0] * d1_periods,
+            "close": [100.0] * d1_periods,
+        }
+    )
+    prior_day = pd.Timestamp(h4_times[signal_index]).normalize() - pd.Timedelta(days=1)
+    prior_index = d1.index[d1["timestamp_utc"] == prior_day][0]
+    d1.loc[prior_index, ["open", "high", "low", "close"]] = [102.0, 104.0, 96.0, 98.0]
+
+    gc_days = 430
+    gc_times = pd.date_range("2023-01-01T00:00:00Z", periods=gc_days, freq="1D")
+    gc_volume = pd.DataFrame(
+        {
+            "timestamp_utc": gc_times,
+            "open": [1800.0] * gc_days,
+            "high": [1810.0] * gc_days,
+            "low": [1790.0] * gc_days,
+            "close": [1800.0] * gc_days,
+            "volume": [120000] * gc_days,
+            "source_symbol": ["GC=F"] * gc_days,
+            "source": ["synthetic"] * gc_days,
+        }
+    )
+    gc_spike_day = prior_day
+    gc_index = gc_volume.index[gc_volume["timestamp_utc"] == gc_spike_day][0]
+    gc_volume.loc[gc_index, ["close", "volume"]] = [1780.0, 450000]
+
+    return {
+        "M5": m5,
+        "M15": m15,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        GC_FUTURES_VOLUME_FRAME_KEY: gc_volume,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
 
 
 def _m15_inside_bar_breakout_context() -> dict:

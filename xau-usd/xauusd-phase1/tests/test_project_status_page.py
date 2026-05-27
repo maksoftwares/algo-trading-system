@@ -16,8 +16,10 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     repo = tmp_path / "repo"
     phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
     phase0_matrix = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "matrix_results"
+    phase0_docs = repo / "xau-usd" / "xauusd-phase0" / "docs"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase0_reports.mkdir(parents=True)
+    phase0_docs.mkdir(parents=True)
     phase1_reports.mkdir(parents=True)
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
@@ -29,6 +31,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
     _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    _write_candidate_backlog(phase0_docs / "CANDIDATE_RESEARCH_BACKLOG.md")
     _write_trade_ledger(
         phase0_matrix / "breakout_retest" / "cell_3_breakout_retest_capital_com_p95_trades.csv",
         [
@@ -45,12 +48,14 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     output = module.generate_project_status_page(repo)
 
     html = output.output_path.read_text(encoding="utf-8")
-    assert output.candidate_count == 2
+    assert output.candidate_count == 3
     assert output.accepted_count == 1
     assert output.rejected_count == 1
     assert "Mission Control" in html
     assert "breakout_retest" in html
     assert "trend_pullback" in html
+    assert "h4_us_session_liquidity_reversal_v0" in html
+    assert "HASH_LOCKED_SMOKE_PASS_PENDING_MATRIX" in html
     assert "Five-day soak" in html
     assert "Observer conflicts" in html
     assert "candidateSearch" in html
@@ -277,6 +282,21 @@ def _write_candidate_audit(path: Path) -> None:
                 "failed_gates": "multi_cell_survival;concentration",
             }
         )
+
+
+def _write_candidate_backlog(path: Path) -> None:
+    path.write_text(
+        "\n".join(
+            [
+                "# Candidate Research Backlog",
+                "",
+                "| # | Candidate | Status | Next Action |",
+                "| ---: | --- | --- | --- |",
+                "| 3 | `h4_us_session_liquidity_reversal_v0` | REGISTERED_SMOKE_PASS_PENDING_MATRIX | First-pass matrix pending. |",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def _write_trade_ledger(path: Path, rows: list[tuple[str, float]]) -> None:

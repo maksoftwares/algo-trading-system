@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-27T12:02:13+00:00`
+Generated at UTC: `2026-05-27T14:06:23+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 65
-- Absolute concentration-failed candidates: 60
-- Review-context candidates under normalized thresholds: 59
+- Audited candidates: 67
+- Absolute concentration-failed candidates: 62
+- Review-context candidates under normalized thresholds: 61
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -58,6 +58,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | h4_credit_spread_stress_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1689 | 100.0 | 274.6079 | 0.188391 | 0.780804 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 735 | 100.0 | 111.7863 | 0.1678 | 0.809899 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_financial_conditions_stress_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 483 | 100.0 | 100.0 | 0.356255 | 1.407623 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h4_gold_futures_volume_climax_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 141 | 145.1773 | 693.6699 | 0.55586 | 1.784213 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | h4_gvz_volatility_panic_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 489 | 100.0 | 212.5005 | 0.277442 | 1.289932 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 741 | 92.6435 | 446.3203 | 0.16605 | 0.808783 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_macro_composite_risk_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 516 | 118.853 | 561.4902 | 0.268946 | 1.300981 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
@@ -65,6 +66,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | h4_policy_uncertainty_safe_haven_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1443 | 131.9038 | 654.5928 | 0.161796 | 0.682656 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_real_yield_proxy_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 306 | 251.2082 | 1194.5654 | 0.409761 | 1.863491 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | h4_treasury_curve_stress_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 975 | 100.0 | 300.5803 | 0.247986 | 1.119923 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h4_us_session_liquidity_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 378 | 283.5924 | 1386.1514 | 0.304343 | 1.448929 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration |
 | h4_vix_risk_off_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 504 | 100.0 | 243.0016 | 0.29159 | 1.330496 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_walk_forward_knn_momentum_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5013 | 100.0 | 292.6321 | 0.117498 | 0.490744 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | liquidity_sweep_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 12222 | 100.0 | 100.0 | 0.043763 | 0.195929 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |

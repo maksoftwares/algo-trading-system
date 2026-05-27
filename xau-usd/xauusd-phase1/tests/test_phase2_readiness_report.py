@@ -241,6 +241,10 @@ def _write_phase0_cost_artifacts(phase1_root: Path, include_measured: bool = Fal
         encoding="utf-8",
     )
     (reports / "FIXED_NOTIONAL_REPORT.md").write_text("# Fixed notional\n\nOverall status: PASS\n", encoding="utf-8")
+    (reports / "PHASE0_REALITY_CHECK.md").write_text(
+        "# Reality check\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
     (reports / "PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md").write_text(
         "# Concentration\n\nOverall status: PASS\n",
         encoding="utf-8",
@@ -285,6 +289,10 @@ def _write_phase2_docs(root: Path) -> None:
 def _write_phase2_schema_report(report_dir: Path) -> None:
     (report_dir / "PHASE2_PAPER_LEDGER_SCHEMA_REPORT.md").write_text(
         "# Phase 2 Paper Ledger Schema Report\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+    (report_dir / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
+        "# Phase 2 VPS Latency Report\n\nOverall status: PASS\n",
         encoding="utf-8",
     )
 

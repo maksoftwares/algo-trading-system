@@ -48,6 +48,7 @@ from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
 from phase0.strategies.h4_financial_conditions_stress_reversal_v0 import (
     H4FinancialConditionsStressReversalV0Strategy,
 )
+from phase0.strategies.h4_gold_futures_volume_climax_v0 import H4GoldFuturesVolumeClimaxV0Strategy
 from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
     H4GvzVolatilityPanicReversalV0Strategy,
 )
@@ -60,6 +61,9 @@ from phase0.strategies.h4_policy_uncertainty_safe_haven_v0 import (
 from phase0.strategies.h4_real_yield_proxy_momentum_v0 import H4RealYieldProxyMomentumV0Strategy
 from phase0.strategies.h4_treasury_curve_stress_momentum_v0 import (
     H4TreasuryCurveStressMomentumV0Strategy,
+)
+from phase0.strategies.h4_us_session_liquidity_reversal_v0 import (
+    H4UsSessionLiquidityReversalV0Strategy,
 )
 from phase0.strategies.h4_vix_risk_off_reversal_v0 import H4VixRiskOffReversalV0Strategy
 from phase0.strategies.h4_walk_forward_knn_momentum_state_v0 import H4WalkForwardKnnMomentumStateV0Strategy
@@ -137,6 +141,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,
     H4FinancialConditionsStressReversalV0Strategy.name: H4FinancialConditionsStressReversalV0Strategy,
+    H4GoldFuturesVolumeClimaxV0Strategy.name: H4GoldFuturesVolumeClimaxV0Strategy,
     H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
     H4MacroCompositeRiskStateV0Strategy.name: H4MacroCompositeRiskStateV0Strategy,
@@ -144,6 +149,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4PolicyUncertaintySafeHavenV0Strategy.name: H4PolicyUncertaintySafeHavenV0Strategy,
     H4RealYieldProxyMomentumV0Strategy.name: H4RealYieldProxyMomentumV0Strategy,
     H4TreasuryCurveStressMomentumV0Strategy.name: H4TreasuryCurveStressMomentumV0Strategy,
+    H4UsSessionLiquidityReversalV0Strategy.name: H4UsSessionLiquidityReversalV0Strategy,
     H4VixRiskOffReversalV0Strategy.name: H4VixRiskOffReversalV0Strategy,
     H4WalkForwardKnnMomentumStateV0Strategy.name: H4WalkForwardKnnMomentumStateV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,

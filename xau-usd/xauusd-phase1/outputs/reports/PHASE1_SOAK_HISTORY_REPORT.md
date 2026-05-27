@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 142. |
+| history_rows | PASS | History rows available: 150. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | WARN | Latest warning status fields: log_verification, soak_analysis, runtime_health |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,18 +17,18 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 142
+- History rows: 150
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-27T12:03:23.730846+00:00
-- Latest M5 bar: 2026.05.27 12:00:00
+- Latest summary: 2026-05-27T14:06:24.569055+00:00
+- Latest M5 bar: 2026.05.27 14:05:00
 - Latest soak progress: 100.0%
 - Longest active streak: 22.92h
-- Current active streak: 1.33h
+- Current active streak: 3.42h
 - Weekend policy: weekend_breaks_active_market_streak
-- Process uptime streak: 1.36h
-- Code-freeze hours: 1.36h
-- Latest would-signal rows: 80
-- Latest setup clusters: 80
+- Process uptime streak: 3.41h
+- Code-freeze hours: 3.41h
+- Latest would-signal rows: 81
+- Latest setup clusters: 81
 
 ## Latest Status
 
@@ -40,18 +40,18 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Summary UTC | Latest Bar | Rows | Progress % | Longest h | Freeze h | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-27T08:34:09.338293+00:00 | 2026.05.27 08:30:00 | 707 | 97.92 | 22.92 | 8.05 | 70 | 70 | PENDING |
-| 2026-05-27T09:36:01.671567+00:00 | 2026.05.27 09:35:00 | 720 | 98.82 | 22.92 | 9.08 | 74 | 74 | PENDING |
-| 2026-05-27T10:36:38.661834+00:00 | 2026.05.27 10:35:00 | 732 | 99.65 | 22.92 | 10.09 | 78 | 78 | PENDING |
-| 2026-05-27T10:42:32.257656+00:00 | 2026.05.27 10:40:00 | 734 | 99.72 | 22.92 | 0.0 | 78 | 78 | PENDING |
-| 2026-05-27T10:43:36.553911+00:00 | 2026.05.27 10:40:00 | 734 | 99.72 | 22.92 | 0.03 | 78 | 78 | PENDING |
-| 2026-05-27T10:46:00.639890+00:00 | 2026.05.27 10:45:00 | 735 | 99.79 | 22.92 | 0.07 | 78 | 78 | PENDING |
-| 2026-05-27T11:38:19.358235+00:00 | 2026.05.27 11:35:00 | 745 | 100.0 | 22.92 | 0.94 | 78 | 78 | PENDING |
-| 2026-05-27T11:51:01.972653+00:00 | 2026.05.27 11:50:00 | 748 | 100.0 | 22.92 | 1.15 | 78 | 78 | PENDING |
 | 2026-05-27T11:56:29.013735+00:00 | 2026.05.27 11:55:00 | 749 | 100.0 | 22.92 | 1.24 | 80 | 80 | PENDING |
 | 2026-05-27T12:01:13.746497+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.32 | 80 | 80 | PENDING |
 | 2026-05-27T12:02:14.361519+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.34 | 80 | 80 | PENDING |
 | 2026-05-27T12:03:23.730846+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.36 | 80 | 80 | PENDING |
+| 2026-05-27T12:38:58.026629+00:00 | 2026.05.27 12:35:00 | 757 | 100.0 | 22.92 | 1.95 | 80 | 80 | PENDING |
+| 2026-05-27T13:11:06.242796+00:00 | 2026.05.27 13:10:00 | 764 | 100.0 | 22.92 | 2.49 | 81 | 81 | PENDING |
+| 2026-05-27T13:27:31.465799+00:00 | 2026.05.27 13:25:00 | 767 | 100.0 | 22.92 | 2.76 | 81 | 81 | PENDING |
+| 2026-05-27T13:40:12.671525+00:00 | 2026.05.27 13:40:00 | 770 | 100.0 | 22.92 | 2.97 | 81 | 81 | PENDING |
+| 2026-05-27T13:41:11.071571+00:00 | 2026.05.27 13:40:00 | 770 | 100.0 | 22.92 | 2.99 | 81 | 81 | PENDING |
+| 2026-05-27T13:49:30.037112+00:00 | 2026.05.27 13:45:00 | 771 | 100.0 | 22.92 | 3.13 | 81 | 81 | PENDING |
+| 2026-05-27T13:50:11.639816+00:00 | 2026.05.27 13:50:00 | 772 | 100.0 | 22.92 | 3.14 | 81 | 81 | PENDING |
+| 2026-05-27T14:06:24.569055+00:00 | 2026.05.27 14:05:00 | 775 | 100.0 | 22.92 | 3.41 | 81 | 81 | PENDING |
 
 ## Historical Acceptance Notes
 

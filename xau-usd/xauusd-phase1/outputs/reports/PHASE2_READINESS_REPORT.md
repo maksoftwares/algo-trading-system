@@ -1,10 +1,10 @@
 # Phase 2 Readiness Report
 
-Overall status: PENDING
+Overall status: FAIL
 
 ## Decision
 
-Phase 2 preparation may continue, but implementation is not authorized yet.
+Phase 2 implementation is blocked by at least one failing readiness gate.
 
 ## Gates
 
@@ -17,9 +17,11 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 2 operations prep | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md` contains required Phase 2 controls. |
 | Magic-number external registry | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\MAGIC_NUMBER_EXTERNAL_REGISTRY.md` contains required Phase 2 controls. |
 | VPS selection | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |
+| VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | Cost reporting policy | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`. |
 | Fixed-notional reporting | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md` status is PASS. |
 | D2 fixed-notional R-series canonicalization | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md` contains required Phase 2 controls. |
+| D2 Reality Check / SPA | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_REALITY_CHECK.md` status is FAIL; required PASS. |
 | Frequency-normalized concentration audit | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` status is PASS. |
 | Diversification availability finding | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md` contains required Phase 2 controls. |
 | Forward hypothesis gates | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md` contains required Phase 2 controls. |
@@ -31,18 +33,18 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PENDING | Non-pass status fields: log_verification, soak_analysis, runtime_health |
-| Five trading day soak | PASS | Progress 100.00%; observed 5.0417 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 1.33h; required 72h; weekend policy weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 1.36h; code-freeze 1.36h; required 96h; marker 2026-05-27T10:41:50Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.27 12:00:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 80; clusters: 80. |
+| Five trading day soak | PASS | Progress 100.00%; observed 5.1285 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 3.42h; required 72h; weekend policy weekend_breaks_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 3.41h; code-freeze 3.41h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.27 14:05:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 81; clusters: 81. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 750 | 2026.05.27 12:00:00 | true | false | CLOCK_OK | 100.0% |
+| 775 | 2026.05.27 14:05:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

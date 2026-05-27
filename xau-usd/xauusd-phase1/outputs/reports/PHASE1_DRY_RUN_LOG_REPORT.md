@@ -19,7 +19,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 750. |
+| decision_rows | PASS | Decision rows: 775. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
@@ -33,7 +33,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 ## Summary
 
-- Decision rows: 750
+- Decision rows: 775
 - Unique run IDs: 6
 - Latest run ID: phase1-dry-run-v0.7
 
@@ -45,13 +45,13 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 746 |
+| NORMAL | 771 |
 
 ## Block Reasons
 
 | Value | Count |
 | --- | --- |
-| COST_REVALIDATION_PENDING | 1 |
+| COST_REVALIDATION_PENDING | 2 |
 | COST_SUSPENDED | 7 |
 | LOCAL_CLOCK_DRIFT | 1 |
 | LOCKED_DAILY_LOSS | 1 |
@@ -60,7 +60,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | MANUAL_LOCK | 1 |
 | SPREAD_TOO_HIGH | 6 |
 | STALE_TICK | 1 |
-| phase1_dry_run_only | 730 |
+| phase1_dry_run_only | 754 |
 
 ## Breakout-Retest Observer
 
@@ -69,23 +69,23 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Value | Count |
 | --- | --- |
 | WAIT_CONFIRMATION | 1 |
-| WAIT_LEVEL_BREAK_RETEST | 708 |
-| WOULD_SIGNAL | 41 |
+| WAIT_LEVEL_BREAK_RETEST | 732 |
+| WOULD_SIGNAL | 42 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 366 |
+| LONG | 379 |
 | NONE | 1 |
-| SHORT | 383 |
+| SHORT | 395 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 709 |
-| true | 41 |
+| false | 733 |
+| true | 42 |
 
 ## Swing Breakout-Retest Observer
 
@@ -94,26 +94,26 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Value | Count |
 | --- | --- |
 | WAIT_CONFIRMATION | 1 |
-| WAIT_LEVEL_BREAK_RETEST | 710 |
+| WAIT_LEVEL_BREAK_RETEST | 735 |
 | WOULD_SIGNAL | 39 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 366 |
+| LONG | 379 |
 | NONE | 1 |
-| SHORT | 383 |
+| SHORT | 395 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 711 |
+| false | 736 |
 | true | 39 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.7 | 2026.05.27 12:00:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.7 | 2026.05.27 14:05:00 | WAIT_LEVEL_BREAK_RETEST | LONG | no_long_breakout_retest_candidate | 0.00 | false |

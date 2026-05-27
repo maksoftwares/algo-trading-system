@@ -93,6 +93,11 @@ def generate_phase2_readiness_report(
             root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md",
             required="PASS",
         ),
+        _status_or_pending_gate(
+            "VPS latency evidence",
+            report_dir / "PHASE2_VPS_LATENCY_REPORT.md",
+            required="PASS",
+        ),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
         _status_or_pending_gate(
             "Fixed-notional reporting",
@@ -103,6 +108,11 @@ def generate_phase2_readiness_report(
             "D2 fixed-notional R-series canonicalization",
             _phase0_root(root) / "docs" / "PHASE0_INDEPENDENT_VALIDATION.md",
             ("Canonical fixed-notional monthly R", "superseded"),
+        ),
+        _status_or_pending_gate(
+            "D2 Reality Check / SPA",
+            _phase0_root(root) / "outputs" / "reports" / "PHASE0_REALITY_CHECK.md",
+            required="PASS",
         ),
         _status_or_pending_gate(
             "Frequency-normalized concentration audit",
@@ -431,6 +441,8 @@ def _read_markdown_status(path: Path) -> str:
     text = path.read_text(encoding="utf-8", errors="replace")
     for line in text.splitlines():
         if line.startswith("Overall status:"):
+            return line.split(":", 1)[1].strip()
+        if line.startswith("Status:"):
             return line.split(":", 1)[1].strip()
     return ""
 

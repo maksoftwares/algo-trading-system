@@ -8,17 +8,17 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| would_signal_rows | PASS | Would-signal rows observed: 80. |
-| would_signal_clusters | PASS | Setup clusters observed: 80. |
+| would_signal_rows | PASS | Would-signal rows observed: 81. |
+| would_signal_clusters | PASS | Setup clusters observed: 81. |
 | would_signal_dry_run | PASS | All would-signal rows stayed dry-run. |
 | would_signal_permission_lock | PASS | All would-signal rows kept permission false. |
 
 ## Summary
 
-- Would-signal rows: 80
-- Setup clusters: 80
+- Would-signal rows: 81
+- Setup clusters: 81
 - Directions observed: LONG, SHORT
-- Level kinds observed: latest_swing_high, latest_swing_low, previous_daily_low
+- Level kinds observed: latest_swing_high, latest_swing_low, previous_daily_low, previous_weekly_low
 - Observers observed: breakout_retest, swing_breakout_retest_v0
 - Review CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`
 
@@ -26,7 +26,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Bucket | Count |
 | --- | --- |
-| BR only | 2 |
+| BR only | 3 |
 | SBR only | 0 |
 | Both same direction | 39 |
 | Both opposite direction | 0 |
@@ -115,13 +115,14 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | WS078 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4489.04 | 4489.79 | 4487.67 | 4492.97 | 2026.05.27 09:55:00 | 2026.05.27 09:55:00 |
 | WS079 | breakout_retest | 1 | SHORT | latest_swing_low | 4442.48 | 4438.79 | 4445.41 | 4428.86 | 2026.05.27 11:55:00 | 2026.05.27 11:55:00 |
 | WS080 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4442.48 | 4438.79 | 4445.41 | 4428.86 | 2026.05.27 11:55:00 | 2026.05.27 11:55:00 |
+| WS081 | breakout_retest | 1 | SHORT | previous_weekly_low | 4453.16 | 4444.51 | 4454.29 | 4429.84 | 2026.05.27 12:45:00 | 2026.05.27 12:45:00 |
 
 ## Direction Counts
 
 | Value | Count |
 | --- | --- |
 | LONG | 36 |
-| SHORT | 44 |
+| SHORT | 45 |
 
 ## Level Kind Counts
 
@@ -130,12 +131,12 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | latest_swing_high | 36 |
 | latest_swing_low | 42 |
 | previous_daily_low | 2 |
+| previous_weekly_low | 1 |
 
 ## Would-Signal Rows
 
 | Observer | Broker Time | Bar Time | Direction | Level Kind | Level | Entry | Stop | Target | Spread | Risk | Execution | Permission | Dry Run |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| breakout_retest | 2026.05.26 00:55:00 | 2026.05.26 00:55:00 | SHORT | previous_daily_low | 4550.23 | 4544.51 | 4552.17 | 4533.02 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.26 05:50:00 | 2026.05.26 05:50:00 | SHORT | latest_swing_low | 4529.75 | 4527.70 | 4533.13 | 4519.56 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.05.26 05:50:00 | 2026.05.26 05:50:00 | SHORT | latest_swing_low | 4529.75 | 4527.70 | 4533.13 | 4519.56 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.26 07:40:00 | 2026.05.26 07:40:00 | SHORT | latest_swing_low | 4528.04 | 4522.83 | 4530.14 | 4511.87 | 50.00 | NORMAL | EXECUTION_OK | false | true |
@@ -185,3 +186,4 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | swing_breakout_retest_v0 | 2026.05.27 09:55:03 | 2026.05.27 09:55:00 | LONG | latest_swing_high | 4489.04 | 4489.79 | 4487.67 | 4492.97 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.27 11:55:00 | 2026.05.27 11:55:00 | SHORT | latest_swing_low | 4442.48 | 4438.79 | 4445.41 | 4428.86 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.05.27 11:55:00 | 2026.05.27 11:55:00 | SHORT | latest_swing_low | 4442.48 | 4438.79 | 4445.41 | 4428.86 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.05.27 12:45:00 | 2026.05.27 12:45:00 | SHORT | previous_weekly_low | 4453.16 | 4444.51 | 4454.29 | 4429.84 | 50.00 | NORMAL | EXECUTION_OK | false | true |

@@ -29,10 +29,10 @@ Last updated: 2026-05-27
   - Review instruction update implemented: Phase 1 source is now `phase1-dry-run-v0.7`, deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and restarted. The code-freeze marker was intentionally reset to `2026-05-27T10:41:50Z`.
   - Canonical cost lifecycle is now `COST_REVALIDATION_PENDING` while `MEASURED_COST_MODEL.md` is PENDING. `COST_SUSPENDED` is reserved only for an authoritative measured-cost revalidation FAIL after the fresh measured-cost model reaches PASS.
   - Active-market soak streaks now reset on `run_id` changes, >15m active-market gaps, weekend/closed-market/stale-tick rows, or dry-run/permission/server-time violations. Process uptime and code-freeze remain separate gates.
-  - Latest refreshed runtime snapshot after v0.7 deployment: 750 decision rows, latest bar `2026.05.27 12:00:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, BR/SBR lifecycle `COST_REVALIDATION_PENDING`.
-  - Latest soak evidence: five-day wall-clock gate is `PASS` at `100.00%` (`5.0417/5.00` observed days), active-market longest `22.92h/72h`, current active-market `1.33h/72h`, process/code-freeze `1.36h/96h`.
-  - Latest measured cost model: `PENDING` with `8376` authoritative fresh rows over `1` observed fresh market day. Required: at least `500` fresh rows across `5` fresh observed market days.
-  - Latest would-signal observer conflict counts: BR-only `2`, SBR-only `0`, both same direction `39`, both opposite direction `0`.
+  - Latest refreshed runtime snapshot after v0.7 deployment: 775 decision rows, latest bar `2026.05.27 14:05:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, BR/SBR lifecycle `COST_REVALIDATION_PENDING`.
+  - Latest soak evidence: five-day wall-clock gate is `PASS` at `100.00%` (`5.1285/5.00` observed days), active-market longest `22.92h/72h`, current active-market `3.42h/72h`, process/code-freeze `3.41h/96h`.
+  - Latest measured cost model: `PENDING` with `9868` authoritative fresh rows over `1` observed fresh market day. Required: at least `500` fresh rows across `5` fresh observed market days.
+  - Latest would-signal observer conflict counts: BR-only `3`, SBR-only `0`, both same direction `39`, both opposite direction `0`.
   - Phase 1 schema acceptance fix is deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and the terminal was restarted. The logger rotated stale CSVs to `MQL5\Files\logs\archive`; live `decision_log.csv` now uses `phase1_decision_schema_v2` with `decision_schema_hash`, `br_lifecycle_state`, and `sbr_lifecycle_state`.
   - Earlier schema-rotation recovery remains in place: archived old-schema decision rows were migrated into the current v2 schema with `scripts\migrate_phase1_decision_log_schema.py`; live `decision_log.csv` preserves the original 2026-05-22 evidence while keeping the v2 schema hash fields.
   - Phase 1 acceptance is `PENDING`. Runtime verification is `WARN` rather than `FAIL` because schemas are valid and the remaining warnings are soak/cadence/health maturity gates, not a broken log format.
@@ -104,7 +104,7 @@ Last updated: 2026-05-27
 - Phase 1 v0.5 logs were archived before the v0.6 schema change:
   - `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_6_20260522_150335.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log_pre_v0_6_20260522_150335.csv`
-- Current v0.7 would-signal report has 80 dry-run would-signal rows across 80 setup clusters; all stayed dry-run and permission-locked.
+- Current v0.7 would-signal report has 81 dry-run would-signal rows across 81 setup clusters; all stayed dry-run and permission-locked.
 - Runtime risk simulations previously verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the v0.6 `sbr_*` schema; rerun those simulations before any future Phase 2 authorization.
 - Latest MT5 lifecycle logs:
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
@@ -118,13 +118,13 @@ Last updated: 2026-05-27
 - Would-signal report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_would_signal_report.py`.
 - Latest Phase 1 would-signal report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Latest Phase 1 would-signal review CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`.
-- Latest would-signal status: PASS with 80 rows and 80 setup clusters; all observations remain dry-run telemetry with trade permission false.
+- Latest would-signal status: PASS with 81 rows and 81 setup clusters; all observations remain dry-run telemetry with trade permission false.
 - Runtime health report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_runtime_health_report.py`.
 - Latest Phase 1 runtime health report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md`.
 - Latest runtime health status: WARN. Runtime files exist, latest row is fresh, dry-run and permission locks hold, latest server-time status is clean, and no exact duplicate rows were found; remaining warnings are maturity gates after the v0.7 reset.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 750 decision rows, 100.00% of the five-day wall-clock soak target, `log_verification=WARN`, `soak_analysis=WARN`, `runtime_health=WARN`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Latest status summary shows 775 decision rows, 100.00% of the five-day wall-clock soak target, `log_verification=WARN`, `soak_analysis=WARN`, `runtime_health=WARN`, `would_signal=PASS`, and `acceptance=PENDING`.
 - Review #7 direct-control items are reflected in the repo: the ten-candidate diversification result is codified in `xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md`, future low-frequency concentration/cross-venue gates are pre-registered in `xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md`, fixed-notional monthly R-series remains the canonical D2 evidence in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`, and `phase1_soak_streak.py` now explicitly rejects weekend/stale/market-closed rows for active-market streak continuity.
 - Review #6/#7 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=weekend_breaks_active_market_streak`; the active-market 72-hour bar-continuity gate is separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.
@@ -133,11 +133,11 @@ Last updated: 2026-05-27
 - Review #8 final repo review action plan is tracked in `docs\REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`. It keeps Phase 1 dry-run and Phase 2 preparation as GO, but Phase 2 paper implementation, broker execution, and live trading remain NO-GO until the soak, active-market 72h, process/code-freeze 96h, measured-cost, revalidation, VPS, and owner-approval gates all pass.
 - Review #2 reframes `breakout_retest` as high-frequency and cost-sensitive; Phase 2 is now treated as a real-cost measurement phase, not a profit-confirmation phase.
 - External review follow-up on 2026-05-21 is tracked in `xau-usd\xauusd-phase0\docs\REVIEW_RESPONSE_2026_05_21.md`.
-- D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, Reality Check/SPA, true-holdout audit, and independent reproduction are closed for the current evidence package.
+- D1-D4 status is tracked in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`; CPCV, true-holdout audit, and independent reproduction remain closed, but D2 Reality Check/SPA is now an open blocker after the expanded same-family universe triggered the stricter 0.01 alpha rule.
 - D1 CPCV command: `phase0 run-cpcv-validation --expert breakout_retest`.
 - Latest D1 result: PASS. 135 CPCV paths across 9 matrix cells, 100% pass rate, median OOS PF 1.379, minimum OOS PF 1.135.
 - D2 Reality Check command: `phase0 run-reality-check --approved-expert breakout_retest --iterations 5000 --block-months 3 --max-pvalue 0.10`.
-- Latest D2 result after switching to fixed-notional monthly R and adding the first two H4/D1 attempts: PASS. `breakout_retest` remained the family winner across 29 non-empty matrix-ledger candidates, White Reality Check p-value 0.0002, max pairwise SPA p-value 0.0188.
+- Latest D2 result after adding `h4_gold_futures_volume_climax_v0`: FAIL under the tightened expanded-universe rule. `breakout_retest` remained the family winner across 66 non-empty matrix-ledger candidates and White Reality Check p-value remained 0.0002, but the effective alpha tightened to 0.01 and pairwise SPA failed versus same-family `round_number_retest_v0` / `symbol_normalized_round_retest_v0` with max pairwise p-value 0.0174.
 - Fixed-notional monthly R-series is the canonical D2 evidence. Earlier percent-return/compounding Reality Check variants are superseded.
 - Review #3 rejected-candidate gate audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md`. Latest audit includes the expanded higher-timeframe search and treats `symbol_normalized_round_retest_v0` as approved same-family after Gate 9 owner attestation. `round_number_retest_v0` and `session_extreme_retest_v0` remain pending/non-matrix-rejection rows, not approved EAs.
 - Review #6 frequency-normalized concentration audit: `xau-usd\xauusd-phase0\outputs\reports\PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md`. It adds normalized top-trade/top-5 R ratios for concentration-failed candidates as review context only; it does not rescue or reclassify rejected v0 hypotheses.
@@ -238,8 +238,9 @@ Last updated: 2026-05-27
 - Latest AI-style macro-composite v1 attempt `h4_macro_composite_risk_state_v1` is `REJECTED_FIRST_PASS`: broader fixed vote, 51-169 trades per cell, 3/9 PF cells >= 1.30, all successful cells were Pepperstone, and concentration/activity failed. Do not tune v1.
 - Latest policy-uncertainty safe-haven attempt `h4_policy_uncertainty_safe_haven_v0` is `REJECTED_FIRST_PASS`: FRED `USEPUINDXD` data acquired, 142-181 trades per cell, 3/9 PF cells >= 1.30, all successful cells were Pepperstone, and concentration failed. Do not tune v0.
 - Latest event-regime attempt `h1_macro_event_aftershock_v0` is `REJECTED_FIRST_PASS`: standardized US macro event slots tested, 85-93 trades per cell, 0/9 PF cells >= 1.30, and concentration failed in every cell. Do not tune v0.
+- Latest current-data independent candidate `h4_us_session_liquidity_reversal_v0` is `REJECTED_FIRST_PASS`: hypothesis file, disabled research strategy, synthetic context, and unit tests exist; SHA256 is `3746ce113d49c1bb1a17402fcba6bf82a8c01a95c5c07bca642da96f6589826c`; synthetic research smoke generated 1 signal and PASSed; real 9-cell matrix produced 378 total trades, 0/9 PF cells >= 1.30, and six cells below the 40-trade gate. Do not tune v0.
 - Review #5 forcing rule remains strategically active for diversification: no same-family breakout-retest / level-and-pullback candidate should be treated as diversification, and independent non-level/intermarket research must continue.
-- Hypothesis timeframe coverage by entry/decision cadence: `M5_M15=30`, `M30_H1=12`, `H4_D1=19`, `W1_plus=1`. The real-yield macro blocker, GVZ options-implied-volatility lane, VIX equity-risk lane, NFCI/ANFCI financial-conditions lane, T5YIE/T10YIE breakeven-inflation lane, DGS2/DGS10/T10Y2Y Treasury curve lane, BAA10Y/AAA10Y credit-spread lane, fixed AI-style macro-composite lanes, USEPUINDXD policy-uncertainty lane, and standardized US macro event-regime lane are now cleared, but all locked first passes are rejected. No independent candidate has passed Phase 0 first pass yet.
+- Hypothesis timeframe coverage by entry/decision cadence: `M5_M15=30`, `M30_H1=12`, `H4_D1=20`, `W1_plus=1`. The real-yield macro blocker, GVZ options-implied-volatility lane, VIX equity-risk lane, NFCI/ANFCI financial-conditions lane, T5YIE/T10YIE breakeven-inflation lane, DGS2/DGS10/T10Y2Y Treasury curve lane, BAA10Y/AAA10Y credit-spread lane, fixed AI-style macro-composite lanes, USEPUINDXD policy-uncertainty lane, standardized US macro event-regime lane, and H4 US-session liquidity-reversal lane are now cleared; all locked independent first passes remain rejected. No independent candidate has passed Phase 0 first pass yet.
 - Review #6/#7 non-level diversification requirement before Phase 2 is satisfied for the current review cycle: twenty-three H4/D1/W1 non-level concepts plus additional H1 intermarket, volatility-regime, and event-regime concepts were hash-locked, implemented where data allowed, smoke-tested, matrix-tested, and rejected first-pass.
 - Cost reporting policy: `xau-usd\xauusd-phase0\docs\COST_REPORTING_POLICY.md`.
 - Fixed-notional report command: `phase0 generate-fixed-notional-report --expert breakout_retest`.
@@ -280,8 +281,10 @@ Last updated: 2026-05-27
 - Phase 2 paper-ledger column template: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_PAPER_LEDGER_COLUMNS.csv`.
 - Phase 2 authorization checklist: `xau-usd\xauusd-phase1\docs\PHASE2_AUTHORIZATION_CHECKLIST.md`.
 - Phase 2 owner approval template: `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_TEMPLATE.md`; do not create `outputs\reports\PHASE2_OWNER_APPROVAL.md` until all objective readiness gates pass and the owner explicitly approves paper-mode implementation.
+- Phase 2 owner approval draft: `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_DRAFT.md`; this is non-authorizing and only prepares the fields the owner must sign later.
 - Phase 2 operations prep spec: `xau-usd\xauusd-phase1\docs\PHASE2_OPERATIONS_PREP.md`.
-- Phase 2 VPS selection matrix: `xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md`, status PENDING until the owner selects provider, region, specs, backup method, and monitoring approach.
+- Phase 2 VPS selection matrix: `xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md`, status PENDING until the owner selects provider, region, specs, backup method, monitoring approach, and first-day latency evidence. Shortlist is ready for owner review: FXVM Advanced in Dubai/Mumbai/Singapore first, ForexVPS.net Core as backup, QuantVPS only if broker-latency testing favors US/Chicago.
+- Phase 2 VPS latency report generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_vps_latency_report.py`; current report is intentionally PENDING until a candidate VPS is provisioned and ping/traceroute/Test-NetConnection evidence is captured.
 - Phase 2 cost-measurement protocol: `xau-usd\xauusd-phase1\docs\PHASE2_COST_MEASUREMENT_PROTOCOL.md`; pre-commits suspension if measured costs push the breakout-retest family below +0.15R net expectancy.
 - Phase 2 single-edge risk plan: `xau-usd\xauusd-phase1\docs\PHASE2_SINGLE_EDGE_RISK_PLAN.md`; treats `breakout_retest`, `swing_breakout_retest_v0`, and `symbol_normalized_round_retest_v0` as one correlated edge family.
 - External health check script: `xau-usd\xauusd-phase1\scripts\check_phase1_external_health.py`.

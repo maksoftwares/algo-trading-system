@@ -29,6 +29,9 @@ from phase0.financial_conditions_data import (
 )
 from phase0.financial_conditions_data import FINANCIAL_CONDITIONS_FRAME_KEY
 from phase0.financial_conditions_data import load_financial_conditions_context
+from phase0.gc_futures_volume_data import EXPERT_NAME as GC_FUTURES_VOLUME_EXPERT_NAME
+from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
+from phase0.gc_futures_volume_data import load_gc_futures_volume_context
 from phase0.gvz_volatility_data import EXPERT_NAME as GVZ_VOLATILITY_EXPERT_NAME
 from phase0.gvz_volatility_data import GVZ_FRAME_KEY
 from phase0.gvz_volatility_data import load_gvz_volatility_context
@@ -113,6 +116,8 @@ def run_phase0_matrix(
             _assert_vix_risk_data_ready(config)
         if expert_name == FINANCIAL_CONDITIONS_EXPERT_NAME and not synthetic_sample:
             _assert_financial_conditions_data_ready(config)
+        if expert_name == GC_FUTURES_VOLUME_EXPERT_NAME and not synthetic_sample:
+            _assert_gc_futures_volume_data_ready(config)
         if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME and not synthetic_sample:
             _assert_inflation_expectations_data_ready(config)
         if expert_name == TREASURY_CURVE_EXPERT_NAME and not synthetic_sample:
@@ -293,6 +298,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name == GC_FUTURES_VOLUME_EXPERT_NAME:
+                    data_context = {
+                        **data_context,
+                        GC_FUTURES_VOLUME_FRAME_KEY: load_gc_futures_volume_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
                 if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME:
                     data_context = {
                         **data_context,
@@ -437,6 +451,12 @@ def _assert_financial_conditions_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_financial_conditions_context(config, start, end)
+
+
+def _assert_gc_futures_volume_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_gc_futures_volume_context(config, start, end)
 
 
 def _assert_inflation_expectations_data_ready(config: ProjectConfig) -> None:
