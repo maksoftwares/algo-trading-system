@@ -23,13 +23,11 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
 
     simulation = _read_json(reports / "PHASE3_EXPERIMENTAL_SIMULATION.json")
     safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
-    status = _read_json(reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     input_csv = Path(str(simulation.get("input_csv", ""))) if simulation.get("input_csv") else None
     paths = {
         "phase3_input_would_signals": input_csv,
         "phase3_simulation_json": reports / "PHASE3_EXPERIMENTAL_SIMULATION.json",
         "phase3_safety_json": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
-        "phase3_status_json": reports / "PHASE3_EXPERIMENTAL_STATUS.json",
         "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
         "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "phase3_suspend_family_csv": reports / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
@@ -67,17 +65,19 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         / "verify_status_dashboard_freshness.py",
     }
     files = {name: _file_entry(path) for name, path in paths.items()}
+    working_tree_short_status = _git_output(repo_root, "status", "--short")
     manifest = {
-        "status": "PASS" if _manifest_pass(safety, simulation, files) else "PENDING",
+        "status": _manifest_status(safety, simulation, files, working_tree_short_status),
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
         "commit_hash": _git_output(repo_root, "rev-parse", "HEAD"),
         "commit_short": _git_output(repo_root, "rev-parse", "--short", "HEAD"),
-        "working_tree_short_status": _git_output(repo_root, "status", "--short"),
+        "working_tree_clean": working_tree_short_status == "",
+        "working_tree_short_status": working_tree_short_status,
         "simulation_status": simulation.get("status", "UNKNOWN"),
         "safety_status": safety.get("status", "UNKNOWN"),
-        "phase3_status": status.get("status", "UNKNOWN"),
+        "manifest_scope": "phase3_review_release_snapshot",
         "files": files,
     }
     json_path = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
@@ -111,6 +111,19 @@ def _manifest_pass(
         and bool(simulation)
         and all(entry.get("exists") is True for entry in files.values())
     )
+
+
+def _manifest_status(
+    safety: dict[str, Any],
+    simulation: dict[str, Any],
+    files: dict[str, dict[str, Any]],
+    working_tree_short_status: str,
+) -> str:
+    if not _manifest_pass(safety, simulation, files):
+        return "PENDING"
+    if working_tree_short_status.strip():
+        return "DIRTY_WORKTREE"
+    return "PASS"
 
 
 def _sha256(path: Path) -> str:
@@ -163,10 +176,14 @@ def _render_markdown(manifest: dict[str, Any]) -> str:
                     ("Commit", str(manifest.get("commit_short", ""))),
                     ("Simulation status", str(manifest.get("simulation_status", ""))),
                     ("Safety status", str(manifest.get("safety_status", ""))),
-                    ("Phase 3 status", str(manifest.get("phase3_status", ""))),
+                    ("Working tree clean", str(manifest.get("working_tree_clean", ""))),
                     ("Boundary", str(manifest.get("boundary", ""))),
                 ]
             ),
+            "",
+            "## Working Tree",
+            "",
+            _working_tree_block(str(manifest.get("working_tree_short_status", ""))),
             "",
             "## Source Hashes",
             "",
@@ -200,6 +217,12 @@ def _files_table(files: dict[str, Any]) -> str:
             *rows,
         ]
     )
+
+
+def _working_tree_block(status: str) -> str:
+    if not status:
+        return "Clean."
+    return "```text\n" + status + "\n```"
 
 
 def _table(rows: list[tuple[str, str]]) -> str:

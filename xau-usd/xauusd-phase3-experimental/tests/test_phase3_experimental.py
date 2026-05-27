@@ -358,6 +358,17 @@ def test_phase3_manifest_is_pending_when_required_reports_are_missing(tmp_path: 
     assert manifest["files"]["phase3_cost_mode_comparison_md"]["exists"] is False
 
 
+def test_phase3_manifest_status_marks_dirty_worktree():
+    module = _load_script("generate_phase3_experimental_manifest")
+    files = {"all_good": {"exists": True}}
+    safety = {"status": "PASS"}
+    simulation = {"status": "EXPERIMENTAL_ACTIVE"}
+
+    assert module._manifest_status(safety, simulation, files, "") == "PASS"
+    assert module._manifest_status(safety, simulation, files, " M changed.py") == "DIRTY_WORKTREE"
+    assert module._manifest_status({}, simulation, files, "") == "PENDING"
+
+
 def test_phase3_fixture_report_generation_is_deterministic_for_csv_outputs(tmp_path: Path):
     comparison = _load_script("generate_phase3_cost_mode_comparison")
     dedup = _load_script("generate_phase3_family_dedup_audit")
@@ -392,6 +403,41 @@ def test_phase3_artifact_verifier_requires_reports_and_authority_sentence(tmp_pa
     (reports / "PHASE3_EXPERIMENTAL_STATUS.md").write_text("missing authority\n", encoding="utf-8")
     errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
     assert any("missing required Phase 2 authority sentence" in error for error in errors)
+
+
+def test_phase3_artifact_verifier_can_require_clean_manifest(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    manifest_json = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
+    manifest_json.write_text(
+        json.dumps({"status": "PASS", "working_tree_clean": True, "working_tree_short_status": ""}),
+        encoding="utf-8",
+    )
+
+    assert module.verify_phase3_experimental_artifacts(
+        phase3,
+        tmp_path / "repo",
+        require_clean_manifest=True,
+    ) == []
+
+    manifest_json.write_text(
+        json.dumps({"status": "DIRTY_WORKTREE", "working_tree_clean": False, "working_tree_short_status": " M x"}),
+        encoding="utf-8",
+    )
+    errors = module.verify_phase3_experimental_artifacts(
+        phase3,
+        tmp_path / "repo",
+        require_clean_manifest=True,
+    )
+    assert any("status must be PASS" in error for error in errors)
 
 
 def _load_script(name: str):
