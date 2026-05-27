@@ -67,6 +67,45 @@ def test_phase3_cost_modes_are_explicit(tmp_path: Path):
     assert stress_summary["kill_rule_counts"]["SUSPEND_FAMILY"] > entry_summary["kill_rule_counts"]["SUSPEND_FAMILY"]
 
 
+def test_non_primary_observers_cannot_be_primary_stream_allowed(tmp_path: Path):
+    module = _load_script("simulate_phase3_from_would_signals")
+
+    output = module.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+
+    with output.ledger_path.open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    for row in rows:
+        if row["observer"] != "breakout_retest":
+            assert row["primary_stream_allowed"] == "false"
+            assert row["family_event_role"] != "PRIMARY_EXECUTION_CANDIDATE"
+
+
+def test_p95_proxy_can_suspend_without_mutating_real_phase2_readiness(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    status_module = _load_script("generate_phase3_experimental_status")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_reports.mkdir(parents=True)
+    simulator.simulate_phase3_from_would_signals(
+        FIXTURE,
+        phase3 / "outputs" / "reports",
+        cost_mode="p95_fresh_proxy",
+    )
+    (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+
+    status_path = status_module.generate_phase3_experimental_status(phase3, repo)
+
+    simulation = json.loads((phase3 / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_SIMULATION.json").read_text(encoding="utf-8"))
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    assert simulation["cost_mode"] == "p95_fresh_proxy"
+    assert simulation["kill_rule_counts"]["SUSPEND_FAMILY"] > 0
+    assert status["real_phase2_readiness"] == "PENDING"
+    assert status["authorized_for_deployment"] is False
+
+
 def test_phase3_cost_mode_comparison_runs_all_modes(tmp_path: Path):
     module = _load_script("generate_phase3_cost_mode_comparison")
 
@@ -124,6 +163,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["status"] == "EXPERIMENTAL_COST_SUSPEND_SCENARIO"
     assert status["real_phase2_readiness"] == "PENDING"
     assert status["authorized_for_deployment"] is False
+    assert status["broker_action_code_allowed"] is False
     assert status["mt5_runtime_touched"] is False
     assert status["safety"]["status"] == "PASS"
     assert status["suspend_family_review"]["status"] == "REVIEW_READY"
@@ -157,6 +197,27 @@ def test_phase3_status_becomes_boundary_fail_if_safety_fails(tmp_path: Path):
     status = json.loads(status_path.read_text(encoding="utf-8"))
     assert status["status"] == "EXPERIMENTAL_BOUNDARY_FAIL"
     assert status["real_phase2_readiness"] == "PENDING"
+
+
+def test_phase3_status_cannot_set_authorized_for_deployment_true(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    status_module = _load_script("generate_phase3_experimental_status")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_reports.mkdir(parents=True)
+    simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
+    (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PASS\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PASS\n", encoding="utf-8")
+
+    status_path = status_module.generate_phase3_experimental_status(phase3, repo)
+
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    assert status["authorized_for_deployment"] is False
+    assert status["broker_action_code_allowed"] is False
+    assert status["mt5_runtime_touched"] is False
+    assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
 
 
 def test_phase3_safety_audit_passes_and_report_is_generated(tmp_path: Path):

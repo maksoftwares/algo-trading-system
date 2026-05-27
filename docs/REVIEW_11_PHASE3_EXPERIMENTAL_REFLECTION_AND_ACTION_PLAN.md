@@ -25,7 +25,7 @@ This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md 
 
 | Review item | Response |
 | --- | --- |
-| P3-1: Add Phase 3 CI | Added `.github/workflows/phase3-experimental.yml` to run tests, safety audit, synthetic simulation, status generation, manifest generation, root dashboard generation, and artifact upload. |
+| P3-1: Add Phase 3 CI | Added `.github/workflows/phase3_experimental.yml` to run tests, safety audit, synthetic simulation, status generation, manifest generation, root dashboard generation, and artifact upload. |
 | P3-2: Commit fixture | Added `xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv`. |
 | P3-3: Add family de-duplication | Added `family_event_id`, `family_duplicate_group_id`, `family_event_role`, `primary_stream_allowed`, and summary counts for raw observers, unique family events, duplicates, and conflicts. |
 | P3-4: Add cost modes | Added `entry_only_proxy`, `entry_exit_proxy`, `p95_fresh_proxy`, and `stress_2x_p95_proxy`; default is `entry_exit_proxy`. |

@@ -1,4 +1,4 @@
-name: Phase 3 Experimental Validation
+name: Phase 3 Experimental Sandbox Validation
 
 on:
   push:
@@ -47,6 +47,24 @@ jobs:
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
+
+      - name: Verify Phase 3 authority sentence
+        run: |
+          grep -R "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority." xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_*.md
+
+      - name: Verify Phase 3 remains non-deployable
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          status = json.loads(Path("xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json").read_text())
+          if status.get("authorized_for_deployment") is not False:
+              raise SystemExit("Phase 3 status must keep authorized_for_deployment=false")
+          if status.get("broker_action_code_allowed") is not False:
+              raise SystemExit("Phase 3 status must keep broker_action_code_allowed=false")
+          if status.get("real_phase2_readiness") == "PASS":
+              raise SystemExit("Phase 3 must not promote real Phase 2 readiness")
+          PY
 
       - name: Upload Phase 3 experimental reports
         uses: actions/upload-artifact@v4
