@@ -1391,6 +1391,7 @@ def _artifact_links() -> str:
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),
+        ("Phase 3 suspend-family review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md"),
         ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
         ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
         ("Phase 3 experimental ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv"),
@@ -1434,6 +1435,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         return _list(["Not started."])
     simulation = _mapping(phase3_status.get("simulation"))
     safety = _mapping(phase3_status.get("safety"))
+    suspend_family = _mapping(phase3_status.get("suspend_family_review"))
     manifest = _mapping(phase3_status.get("manifest"))
     rows = [
         ("Status", _phase3_status_label(phase3_status)),
@@ -1449,6 +1451,9 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Primary stream allowed", _cell(simulation.get("primary_stream_allowed_count"))),
         ("Observer duplicates", _cell(simulation.get("observer_duplicate_count"))),
         ("Observer conflicts", _cell(simulation.get("observer_conflict_count"))),
+        ("Suspend review", _cell(suspend_family.get("status"))),
+        ("Suspend unique families", _cell(suspend_family.get("suspend_unique_family_events"))),
+        ("Suspend primary rows", _cell(suspend_family.get("suspend_primary_rows"))),
         ("Rejected source rows", _cell(simulation.get("rejected_source_rows"))),
         ("Median proxy cost R", _cell(simulation.get("median_proxy_cost_r"))),
         ("Median net after proxy cost R", _cell(simulation.get("median_net_after_proxy_cost_r"))),

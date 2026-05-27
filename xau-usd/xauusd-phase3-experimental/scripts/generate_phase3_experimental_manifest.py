@@ -30,6 +30,9 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_simulation_json": reports / "PHASE3_EXPERIMENTAL_SIMULATION.json",
         "phase3_safety_json": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
         "phase3_status_json": reports / "PHASE3_EXPERIMENTAL_STATUS.json",
+        "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
+        "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
+        "phase3_suspend_family_csv": reports / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
         "phase2_readiness_report": repo_root
         / "xau-usd"
         / "xauusd-phase1"

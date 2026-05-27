@@ -43,5 +43,8 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | --- | --- |
 | Safety status | PASS |
 | Safety findings | 0 |
+| Suspend review status | REVIEW_READY |
+| Suspend unique family events | 10 |
+| Suspend primary rows | 10 |
 | Manifest status | PASS |
-| Manifest commit | eb9c667 |
+| Manifest commit | 34df05f |

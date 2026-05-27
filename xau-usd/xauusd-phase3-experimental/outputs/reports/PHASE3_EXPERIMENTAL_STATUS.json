@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-27T20:01:45.114212Z",
+  "created_at_utc": "2026-05-27T20:10:42.208409Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -16,7 +16,7 @@
   "latest_phase1_trade_permission": "false",
   "simulation": {
     "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-    "created_at_utc": "2026-05-27T20:01:44.689199Z",
+    "created_at_utc": "2026-05-27T20:10:41.740647Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
     "phase2_assumption": "assumes_phase2_pass_for_design_only",
@@ -58,7 +58,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-27T20:01:44.767307Z",
+    "created_at_utc": "2026-05-27T20:10:41.819344Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -78,10 +78,50 @@
     "findings_count": 0,
     "findings": []
   },
+  "suspend_family_review": {
+    "status": "REVIEW_READY",
+    "created_at_utc": "2026-05-27T20:10:41.898000Z",
+    "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+    "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
+    "raw_ledger_rows": 87,
+    "suspend_raw_rows": 19,
+    "suspend_unique_family_events": 10,
+    "suspend_primary_rows": 10,
+    "suspend_primary_family_events": 10,
+    "suspend_duplicate_rows": 9,
+    "max_cost_proxy_r_before_suspend": 0.3616,
+    "minimum_net_expectancy_r": 0.15,
+    "median_suspend_cost_r": 0.4822,
+    "mean_suspend_cost_r": 0.4963,
+    "median_suspend_stop_distance_points": 229.12,
+    "diagnosis_counts": {
+      "normal_spread_small_stop": 4,
+      "tight_stop_cost_dominates": 6,
+      "wide_spread_plus_entry_exit_cost": 9
+    },
+    "role_counts": {
+      "OBSERVER_DUPLICATE": 9,
+      "PRIMARY_EXECUTION_CANDIDATE": 10
+    },
+    "observer_counts": {
+      "breakout_retest": 10,
+      "swing_breakout_retest_v0": 9
+    },
+    "direction_counts": {
+      "LONG": 14,
+      "SHORT": 5
+    },
+    "level_kind_counts": {
+      "latest_swing_high": 14,
+      "latest_swing_low": 4,
+      "previous_weekly_low": 1
+    },
+    "recommendation": "Do not promote these rows into real execution. If Phase 2 later passes, use this review to require cost-aware entry blocking before any paper-mode order path is considered."
+  },
   "manifest": {
     "status": "PASS",
-    "commit_short": "eb9c667",
-    "created_at_utc": "2026-05-27T20:01:44.918273Z"
+    "commit_short": "34df05f",
+    "created_at_utc": "2026-05-27T20:10:42.032918Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

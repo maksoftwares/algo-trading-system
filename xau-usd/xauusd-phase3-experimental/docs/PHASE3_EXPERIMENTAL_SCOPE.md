@@ -46,6 +46,8 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_EXPERIMENTAL_SIMULATION.md` | Human-readable simulation summary. |
 | `PHASE3_EXPERIMENTAL_STATUS.json` | Machine-readable status for the dashboard. |
 | `PHASE3_EXPERIMENTAL_STATUS.md` | Reviewer-facing status summary. |
+| `PHASE3_SUSPEND_FAMILY_REVIEW.md` | Review of cost-survival suspensions and whether they are primary events or duplicate observer rows. |
+| `PHASE3_SUSPEND_FAMILY_ROWS.csv` | Filtered rows for each `SUSPEND_FAMILY` event with diagnosis fields. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
 

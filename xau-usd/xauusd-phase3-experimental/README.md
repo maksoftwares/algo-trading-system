@@ -34,6 +34,7 @@ From this directory:
 ```powershell
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\simulate_phase3_from_would_signals.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\audit_phase3_experimental_safety.py
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\analyze_phase3_suspend_family.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_status.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_manifest.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_status.py
@@ -52,6 +53,16 @@ The default outputs are under:
 ```text
 outputs\reports\
 ```
+
+Important generated outputs:
+
+| Output | Purpose |
+| --- | --- |
+| `PHASE3_EXPERIMENTAL_LEDGER.csv` | Offline event ledger built from blocked Phase 1 would-signals. |
+| `PHASE3_EXPERIMENTAL_SIMULATION.md` | Human-readable simulation summary. |
+| `PHASE3_SUSPEND_FAMILY_REVIEW.md` | Review of offline rows that fail the +0.15R cost-survival threshold. |
+| `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
+| `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
 
 ## Family De-Duplication
 

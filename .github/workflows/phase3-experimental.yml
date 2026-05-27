@@ -34,6 +34,7 @@ jobs:
         run: |
           python xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
           python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
+          python xau-usd/xauusd-phase3-experimental/scripts/analyze_phase3_suspend_family.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py

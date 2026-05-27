@@ -1,0 +1,54 @@
+# Phase 3 Suspend Family Review
+
+This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
+
+Overall status: REVIEW_READY
+
+## Summary
+
+| Field | Value |
+| --- | --- |
+| Raw ledger rows | 87 |
+| Suspend raw rows | 19 |
+| Suspend unique family events | 10 |
+| Suspend primary rows | 10 |
+| Suspend duplicate observer rows | 9 |
+| Max cost proxy R before suspend | 0.3616 |
+| Median suspend cost R | 0.4822 |
+| Median suspend stop distance points | 229.12 |
+
+## Diagnosis Counts
+
+| Field | Value |
+| --- | --- |
+| normal_spread_small_stop | 4 |
+| tight_stop_cost_dominates | 6 |
+| wide_spread_plus_entry_exit_cost | 9 |
+
+## Role Counts
+
+| Field | Value |
+| --- | --- |
+| OBSERVER_DUPLICATE | 9 |
+| PRIMARY_EXECUTION_CANDIDATE | 10 |
+
+## Highest Cost Suspensions
+
+| event_id | family_event_id | family_event_role | observer | decision_bar_time | direction | total_cost_points | stop_distance_points | measured_cost_r_proxy | cost_excess_r | diagnosis |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| PH3EXP00023 | FAM00012 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.25 16:45:00 | LONG | 110.0000 | 177.0400 | 0.6213 | 0.2597 | tight_stop_cost_dominates |
+| PH3EXP00024 | FAM00012 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.25 16:45:00 | LONG | 110.0000 | 177.0400 | 0.6213 | 0.2597 | tight_stop_cost_dominates |
+| PH3EXP00019 | FAM00010 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.25 15:05:00 | LONG | 110.0000 | 191.8100 | 0.5735 | 0.2119 | tight_stop_cost_dominates |
+| PH3EXP00020 | FAM00010 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.25 15:05:00 | LONG | 110.0000 | 191.8100 | 0.5735 | 0.2119 | tight_stop_cost_dominates |
+| PH3EXP00021 | FAM00011 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.25 15:15:00 | LONG | 160.0000 | 283.0900 | 0.5652 | 0.2036 | wide_spread_plus_entry_exit_cost |
+| PH3EXP00022 | FAM00011 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.25 15:15:00 | LONG | 160.0000 | 283.0900 | 0.5652 | 0.2036 | wide_spread_plus_entry_exit_cost |
+| PH3EXP00075 | FAM00039 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.27 09:55:00 | LONG | 110.0000 | 211.6700 | 0.5197 | 0.1581 | tight_stop_cost_dominates |
+| PH3EXP00076 | FAM00039 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.27 09:55:00 | LONG | 110.0000 | 211.6700 | 0.5197 | 0.1581 | tight_stop_cost_dominates |
+| PH3EXP00027 | FAM00014 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.25 22:20:00 | LONG | 110.0000 | 228.1100 | 0.4822 | 0.1206 | normal_spread_small_stop |
+| PH3EXP00028 | FAM00014 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.25 22:20:00 | LONG | 110.0000 | 228.1100 | 0.4822 | 0.1206 | normal_spread_small_stop |
+| PH3EXP00015 | FAM00008 | PRIMARY_EXECUTION_CANDIDATE | breakout_retest | 2026.05.25 12:50:00 | SHORT | 160.0000 | 333.0400 | 0.4804 | 0.1188 | wide_spread_plus_entry_exit_cost |
+| PH3EXP00016 | FAM00008 | OBSERVER_DUPLICATE | swing_breakout_retest_v0 | 2026.05.25 12:50:00 | SHORT | 160.0000 | 333.0400 | 0.4804 | 0.1188 | wide_spread_plus_entry_exit_cost |
+
+## Recommendation
+
+Do not promote these rows into real execution. If Phase 2 later passes, use this review to require cost-aware entry blocking before any paper-mode order path is considered.

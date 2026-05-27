@@ -51,10 +51,21 @@ This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md 
 | Median proxy cost | 0.2554R |
 | Median net after proxy cost | 0.2562R |
 | Kill rule counts | NORMAL 66, COST_WATCH 2, SUSPEND_FAMILY 19 |
+| Suspend-family review | 19 raw suspended rows collapse to 10 unique primary family events and 9 duplicate observer rows |
 | Safety report | PASS |
 | Manifest | PASS |
 
 `EXPERIMENTAL_COST_SUSPEND_SCENARIO` means the offline Phase 3 cost proxy found some would-signal rows where projected net expectancy falls below the +0.15R kill threshold. This is useful design pressure, not a real trading gate verdict.
+
+## Suspend-Family Diagnosis
+
+| Diagnosis | Count | Meaning |
+| --- | ---: | --- |
+| `tight_stop_cost_dominates` | 6 | Stop distance was too tight for entry/exit cost to preserve the +0.15R floor. |
+| `wide_spread_plus_entry_exit_cost` | 9 | Wider spread plus entry/exit cost pushed cost proxy above the suspend threshold. |
+| `normal_spread_small_stop` | 4 | Spread was normal, but stop distance was still too small for cost survival. |
+
+The median suspended row cost is `0.4822R`. The maximum cost proxy that still preserves the +0.15R floor is `0.3616R`. If Phase 2 later passes, these rows should become the first candidates for cost-aware entry blocking rather than execution.
 
 ## Remaining Boundaries
 

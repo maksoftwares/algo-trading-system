@@ -70,14 +70,16 @@ def test_phase3_cost_modes_are_explicit(tmp_path: Path):
 def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
+    suspend_module = _load_script("analyze_phase3_suspend_family")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     repo = tmp_path / "repo"
     phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
     phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase1_reports.mkdir(parents=True)
-    simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
     safety_module.generate_phase3_safety_report(ROOT, phase3 / "outputs" / "reports")
+    suspend_module.analyze_suspend_family(simulation.ledger_path, phase3 / "outputs" / "reports")
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
         json.dumps(
@@ -105,6 +107,8 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["authorized_for_deployment"] is False
     assert status["mt5_runtime_touched"] is False
     assert status["safety"]["status"] == "PASS"
+    assert status["suspend_family_review"]["status"] == "REVIEW_READY"
+    assert status["suspend_family_review"]["suspend_unique_family_events"] == 1
     assert status["manifest"]["status"] == "PASS"
     assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in (
@@ -140,6 +144,24 @@ def test_phase3_safety_audit_detects_forbidden_broker_action_reference(tmp_path:
     assert output.findings_count == 1
     summary = json.loads(output.summary_path.read_text(encoding="utf-8"))
     assert summary["findings"][0]["term"] == forbidden
+
+
+def test_phase3_suspend_family_review_summarizes_primary_vs_duplicate_rows(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    suspend_module = _load_script("analyze_phase3_suspend_family")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+
+    review_path = suspend_module.analyze_suspend_family(simulation.ledger_path, tmp_path / "reports")
+
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    assert review["status"] == "REVIEW_READY"
+    assert review["suspend_raw_rows"] == 1
+    assert review["suspend_unique_family_events"] == 1
+    assert review["suspend_primary_rows"] == 1
+    assert review["suspend_duplicate_rows"] == 0
+    assert review["diagnosis_counts"] == {"tight_stop_cost_dominates": 1}
+    report = (tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_REVIEW.md").read_text(encoding="utf-8")
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
 
 
 def _load_script(name: str):

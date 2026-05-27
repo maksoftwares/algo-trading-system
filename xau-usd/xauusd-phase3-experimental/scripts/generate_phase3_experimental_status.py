@@ -20,6 +20,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     simulation = _read_json(reports / "PHASE3_EXPERIMENTAL_SIMULATION.json")
     safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
     manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json")
+    suspend_family = _read_json(reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -47,6 +48,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "latest_phase1_trade_permission": latest.get("trade_permission", ""),
         "simulation": simulation,
         "safety": safety,
+        "suspend_family_review": suspend_family,
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
             "EXPERIMENTAL_ACTIVE",
@@ -71,6 +73,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
 def _render_markdown(status: dict[str, object]) -> str:
     simulation = _mapping(status.get("simulation"))
     safety = _mapping(status.get("safety"))
+    suspend_family = _mapping(status.get("suspend_family_review"))
     manifest = _mapping(status.get("manifest"))
     return "\n".join(
         [
@@ -123,6 +126,9 @@ def _render_markdown(status: dict[str, object]) -> str:
                 [
                     ("Safety status", str(safety.get("status", "UNKNOWN"))),
                     ("Safety findings", str(safety.get("findings_count", "UNKNOWN"))),
+                    ("Suspend review status", str(suspend_family.get("status", "UNKNOWN"))),
+                    ("Suspend unique family events", str(suspend_family.get("suspend_unique_family_events", "UNKNOWN"))),
+                    ("Suspend primary rows", str(suspend_family.get("suspend_primary_rows", "UNKNOWN"))),
                     ("Manifest status", str(manifest.get("status", "UNKNOWN"))),
                     ("Manifest commit", str(manifest.get("commit_short", "UNKNOWN"))),
                 ]
