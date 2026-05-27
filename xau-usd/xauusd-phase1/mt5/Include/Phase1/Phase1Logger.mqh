@@ -209,7 +209,7 @@ public:
       AppendCell(row, TimeToString(decision.market.m5_bar_time, TIME_DATE | TIME_SECONDS));
       AppendCell(row, Phase1SessionText(decision.session_state));
       AppendCell(row, Phase1RegimeText(decision.regime_state));
-      AppendCell(row, "phase1_router_v0.6");
+      AppendCell(row, "phase1_router_v0.7");
       AppendCell(row, Phase1RiskText(decision.risk_state));
       AppendCell(row, DoubleToString(decision.risk_details.requested_risk_pct, 4));
       AppendCell(row, DoubleToString(decision.risk_details.max_risk_pct, 4));

@@ -22,7 +22,7 @@ from generate_phase1_runtime_health_report import generate_phase1_runtime_health
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
-from generate_project_status_page import generate_project_status_page
+from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import ConfigError, load_project_config
@@ -166,6 +166,7 @@ def run_phase1_periodic_checks(
     )
     repo_root = root.parents[1]
     generate_project_status_page(repo_root, repo_root / "status.html")
+    assert_status_page_current(repo_root, repo_root / "status.html", status_summary_path)
     external_health_path = report_dir / "PHASE1_EXTERNAL_HEALTH.json"
     external_health = check_external_health(
         files_dir=files_dir,

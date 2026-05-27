@@ -62,6 +62,8 @@ def test_dry_run_shell_is_locked_to_passive_mode():
     text = (ROOT / "mt5" / "Experts" / "Phase1DryRunShell.mq5").read_text(encoding="utf-8")
 
     assert "input bool InpDryRunOnly = true;" in text
+    assert 'input string InpRunId = "phase1-dry-run-v0.7";' in text
+    assert 'input string InpBreakoutRetestFamilyCostState = "COST_REVALIDATION_PENDING";' in text
     assert "InpObserveBreakoutRetest = true" in text
     assert "g_logger.WriteDecision" in text
     assert "g_logger.WriteStartup" in text
@@ -73,6 +75,7 @@ def test_dry_run_shell_is_locked_to_passive_mode():
     assert "return INIT_FAILED;" in text
     assert "Phase1NormalizeSignalFromObservers" in text
     assert "Phase1FillSignalFromObservation" in text
+    assert "Phase1IsBreakoutRetestFamily" in text
     assert "signal.entry_price = observation.entry_price" in text
     assert "signal.stop_loss = observation.stop_loss" in text
     assert "signal.take_profit = observation.take_profit" in text
@@ -87,7 +90,8 @@ def test_safe_preset_keeps_shell_in_dry_run_observation_mode():
     assert "InpDecisionLogFileName=decision_log.csv" in text
     assert "InpStartupLogFileName=startup_log.csv" in text
     assert "InpShutdownLogFileName=shutdown_log.csv" in text
-    assert "InpRunId=phase1-dry-run-v0.6" in text
+    assert "InpRunId=phase1-dry-run-v0.7" in text
+    assert "InpBreakoutRetestFamilyCostState=COST_REVALIDATION_PENDING" in text
 
 
 def test_risk_test_presets_stay_dry_run_only():
@@ -194,13 +198,16 @@ def test_phase1_magic_validation_has_reserved_range_and_collision_checks():
     assert "account isolation" in registry
 
 
-def test_breakout_retest_lifecycle_is_cost_suspended():
+def test_breakout_retest_lifecycle_has_family_cost_pending_and_suspension_states():
     types = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Types.mqh").read_text(encoding="utf-8")
     lifecycle = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Lifecycle.mqh").read_text(encoding="utf-8")
 
+    assert "PHASE1_EXPERT_COST_REVALIDATION_PENDING" in types
+    assert 'return "COST_REVALIDATION_PENDING"' in types
     assert "PHASE1_EXPERT_COST_SUSPENDED" in types
     assert 'return "COST_SUSPENDED"' in types
-    assert "PHASE1_EXPERT_COST_SUSPENDED" in lifecycle
+    assert "IsBreakoutRetestFamilyBlockedByCost" in lifecycle
+    assert "ParseBreakoutRetestFamilyCostState" in lifecycle
 
 
 def test_phase1_safety_audit_ignores_docs():

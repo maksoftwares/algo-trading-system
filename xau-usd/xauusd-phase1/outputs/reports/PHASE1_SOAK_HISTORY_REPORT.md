@@ -9,7 +9,7 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 | Check | Status | Message |
 | --- | --- | --- |
 | history_exists | PASS | Found `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`. |
-| history_rows | PASS | History rows available: 132. |
+| history_rows | PASS | History rows available: 142. |
 | created_at_parse | PASS | All summary timestamps are parseable and ordered. |
 | latest_status | WARN | Latest warning status fields: log_verification, soak_analysis, runtime_health |
 | latest_safety_state | PASS | Latest row stayed dry-run and permission-locked. |
@@ -17,18 +17,18 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 ## Summary
 
-- History rows: 132
+- History rows: 142
 - First summary: 2026-05-21T19:48:31.384045+00:00
-- Latest summary: 2026-05-27T09:36:01.671567+00:00
-- Latest M5 bar: 2026.05.27 09:35:00
-- Latest soak progress: 98.82%
+- Latest summary: 2026-05-27T12:03:23.730846+00:00
+- Latest M5 bar: 2026.05.27 12:00:00
+- Latest soak progress: 100.0%
 - Longest active streak: 22.92h
-- Current active streak: 11.58h
+- Current active streak: 1.33h
 - Weekend policy: weekend_breaks_active_market_streak
-- Process uptime streak: 118.54h
-- Code-freeze hours: 9.08h
-- Latest would-signal rows: 74
-- Latest setup clusters: 74
+- Process uptime streak: 1.36h
+- Code-freeze hours: 1.36h
+- Latest would-signal rows: 80
+- Latest setup clusters: 80
 
 ## Latest Status
 
@@ -40,18 +40,18 @@ History CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-us
 
 | Summary UTC | Latest Bar | Rows | Progress % | Longest h | Freeze h | Would Rows | Clusters | Acceptance |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-27T00:31:32.458153+00:00 | 2026.05.27 00:30:00 | 1 | 0.0 | 0.0 | 0.0 | 0 | 0 | FAIL |
-| 2026-05-27T00:36:59.062573+00:00 | 2026.05.27 00:35:00 | 612 | 91.32 | 22.92 | 0.09 | 65 | 65 | PENDING |
-| 2026-05-27T00:41:03.912380+00:00 | 2026.05.27 00:40:00 | 613 | 91.39 | 22.92 | 0.16 | 65 | 65 | PENDING |
-| 2026-05-27T01:25:31.924939+00:00 | 2026.05.27 01:25:00 | 622 | 92.01 | 22.92 | 0.9 | 67 | 67 | PENDING |
-| 2026-05-27T02:27:11.598116+00:00 | 2026.05.27 02:25:00 | 634 | 92.85 | 22.92 | 1.93 | 67 | 67 | PENDING |
-| 2026-05-27T03:28:06.775244+00:00 | 2026.05.27 03:25:00 | 646 | 93.68 | 22.92 | 2.95 | 67 | 67 | PENDING |
-| 2026-05-27T04:30:15.418056+00:00 | 2026.05.27 04:30:00 | 659 | 94.58 | 22.92 | 3.98 | 67 | 67 | PENDING |
-| 2026-05-27T05:30:50.152862+00:00 | 2026.05.27 05:30:00 | 671 | 95.42 | 22.92 | 4.99 | 67 | 67 | PENDING |
-| 2026-05-27T06:32:14.152980+00:00 | 2026.05.27 06:30:00 | 683 | 96.25 | 22.92 | 6.01 | 69 | 69 | PENDING |
-| 2026-05-27T07:32:40.798053+00:00 | 2026.05.27 07:30:00 | 695 | 97.08 | 22.92 | 7.02 | 69 | 69 | PENDING |
 | 2026-05-27T08:34:09.338293+00:00 | 2026.05.27 08:30:00 | 707 | 97.92 | 22.92 | 8.05 | 70 | 70 | PENDING |
 | 2026-05-27T09:36:01.671567+00:00 | 2026.05.27 09:35:00 | 720 | 98.82 | 22.92 | 9.08 | 74 | 74 | PENDING |
+| 2026-05-27T10:36:38.661834+00:00 | 2026.05.27 10:35:00 | 732 | 99.65 | 22.92 | 10.09 | 78 | 78 | PENDING |
+| 2026-05-27T10:42:32.257656+00:00 | 2026.05.27 10:40:00 | 734 | 99.72 | 22.92 | 0.0 | 78 | 78 | PENDING |
+| 2026-05-27T10:43:36.553911+00:00 | 2026.05.27 10:40:00 | 734 | 99.72 | 22.92 | 0.03 | 78 | 78 | PENDING |
+| 2026-05-27T10:46:00.639890+00:00 | 2026.05.27 10:45:00 | 735 | 99.79 | 22.92 | 0.07 | 78 | 78 | PENDING |
+| 2026-05-27T11:38:19.358235+00:00 | 2026.05.27 11:35:00 | 745 | 100.0 | 22.92 | 0.94 | 78 | 78 | PENDING |
+| 2026-05-27T11:51:01.972653+00:00 | 2026.05.27 11:50:00 | 748 | 100.0 | 22.92 | 1.15 | 78 | 78 | PENDING |
+| 2026-05-27T11:56:29.013735+00:00 | 2026.05.27 11:55:00 | 749 | 100.0 | 22.92 | 1.24 | 80 | 80 | PENDING |
+| 2026-05-27T12:01:13.746497+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.32 | 80 | 80 | PENDING |
+| 2026-05-27T12:02:14.361519+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.34 | 80 | 80 | PENDING |
+| 2026-05-27T12:03:23.730846+00:00 | 2026.05.27 12:00:00 | 750 | 100.0 | 22.92 | 1.36 | 80 | 80 | PENDING |
 
 ## Historical Acceptance Notes
 

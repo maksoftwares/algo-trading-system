@@ -40,6 +40,7 @@ def test_status_summary_writes_machine_readable_snapshot(tmp_path):
     assert summary["runtime"]["decision_rows"] == 3
     assert summary["would_signal"]["rows"] == 2
     assert summary["would_signal"]["clusters"] == 2
+    assert summary["would_signal"]["observer_conflicts"]["both_same_direction"] == 1
     assert summary["soak"]["progress_pct"] > 0
     assert summary["soak"]["required_uninterrupted_streak_hours"] == 72.0
     assert summary["soak"]["current_streak_hours"] > 0

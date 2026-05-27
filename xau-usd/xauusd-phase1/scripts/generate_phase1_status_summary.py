@@ -103,6 +103,7 @@ def generate_phase1_status_summary(
                 "trade_permission": latest.get("trade_permission", ""),
                 "dry_run": latest.get("dry_run", ""),
                 "server_time_status": latest.get("server_time_status", ""),
+                "block_reason": latest.get("block_reason", ""),
                 "br_stage": latest.get("br_stage", ""),
                 "br_direction": latest.get("br_direction", ""),
                 "br_would_signal": latest.get("br_would_signal", ""),
@@ -114,6 +115,7 @@ def generate_phase1_status_summary(
         "would_signal": {
             "rows": would_signal_status.signal_count,
             "clusters": would_signal_status.cluster_count,
+            "observer_conflicts": dict(getattr(would_signal_status, "observer_conflict_counts", {})),
             "report_path": str(would_signal_status.report_path),
             "csv_path": str(would_signal_status.csv_path),
         },

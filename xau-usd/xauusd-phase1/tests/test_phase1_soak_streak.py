@@ -29,7 +29,26 @@ def test_weekend_and_stale_tick_rows_break_active_market_streak():
     assert summary.current_streak_bar_count == 0
 
 
-def test_restart_count_tracks_run_id_changes_inside_active_streak():
+def test_same_run_id_continuous_bars_accumulate_active_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.21 12:00:00", run_id="phase1-a"),
+        _row("2026.05.21 12:05:00", run_id="phase1-a"),
+        _row("2026.05.21 12:10:00", run_id="phase1-a"),
+        _row("2026.05.21 12:15:00", run_id="phase1-a"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        now=datetime(2026, 5, 21, 12, 20),
+    )
+
+    assert summary.current_streak_hours == 0.25
+    assert summary.restart_count_during_current_streak == 0
+    assert summary.current_streak_bar_count == 4
+
+
+def test_run_id_change_resets_active_market_streak_even_without_bar_gap():
     module = _load_module()
     rows = [
         _row("2026.05.21 12:00:00", run_id="phase1-a"),
@@ -43,9 +62,64 @@ def test_restart_count_tracks_run_id_changes_inside_active_streak():
         now=datetime(2026, 5, 21, 12, 20),
     )
 
-    assert summary.current_streak_hours == 0.25
-    assert summary.restart_count_during_current_streak == 1
-    assert summary.current_streak_bar_count == 4
+    assert summary.current_streak_hours == 0.08
+    assert summary.restart_count_during_current_streak == 0
+    assert summary.current_streak_bar_count == 2
+
+
+def test_active_market_gap_over_threshold_resets_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.21 12:00:00"),
+        _row("2026.05.21 12:05:00"),
+        _row("2026.05.21 12:25:00"),
+        _row("2026.05.21 12:30:00"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        max_bar_gap_minutes=15.0,
+        now=datetime(2026, 5, 21, 12, 35),
+    )
+
+    assert summary.current_streak_hours == 0.08
+    assert summary.current_streak_bar_count == 2
+
+
+def test_bad_safety_row_resets_active_market_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.21 12:00:00"),
+        _row("2026.05.21 12:05:00"),
+        _row("2026.05.21 12:10:00", trade_permission="true"),
+        _row("2026.05.21 12:15:00"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        now=datetime(2026, 5, 21, 12, 20),
+    )
+
+    assert summary.current_streak_hours == 0.0
+    assert summary.current_streak_bar_count == 0
+
+
+def test_bad_server_time_resets_active_market_streak():
+    module = _load_module()
+    rows = [
+        _row("2026.05.21 12:00:00"),
+        _row("2026.05.21 12:05:00", server_time_status="CLOCK_DRIFT"),
+        _row("2026.05.21 12:10:00"),
+        _row("2026.05.21 12:15:00"),
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        now=datetime(2026, 5, 21, 12, 20),
+    )
+
+    assert summary.current_streak_hours == 0.08
+    assert summary.current_streak_bar_count == 2
 
 
 def test_process_uptime_uses_timestamp_utc():
@@ -60,6 +134,14 @@ def test_process_uptime_uses_timestamp_utc():
     )
 
     assert summary.process_uptime_streak_hours == 2.0
+
+
+def test_code_freeze_marker_reader_ignores_utf8_bom(tmp_path: Path):
+    module = _load_module()
+    marker = tmp_path / "phase1_code_freeze_started_at.txt"
+    marker.write_text("\ufeff2026-05-27T10:41:50Z\n", encoding="utf-8")
+
+    assert module.read_code_freeze_marker(marker) == "2026-05-27T10:41:50Z"
 
 
 def _load_module():
@@ -80,7 +162,9 @@ def _row(
     bar_time: str,
     session: str = "LONDON",
     execution_state: str = "EXECUTION_OK",
-    run_id: str = "phase1-dry-run-v0.6",
+    run_id: str = "phase1-dry-run-v0.7",
+    trade_permission: str = "false",
+    server_time_status: str = "CLOCK_OK",
 ) -> dict[str, str]:
     return {
         "timestamp_local": bar_time,
@@ -90,8 +174,8 @@ def _row(
         "bar_time": bar_time,
         "session": session,
         "execution_state": execution_state,
-        "trade_permission": "false",
+        "trade_permission": trade_permission,
         "dry_run": "true",
-        "server_time_status": "CLOCK_OK",
+        "server_time_status": server_time_status,
         "magic_namespace_ok": "true",
     }

@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -51,9 +52,12 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "breakout_retest" in html
     assert "trend_pullback" in html
     assert "Five-day soak" in html
+    assert "Observer conflicts" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
     assert "Cost viability map" in html
+    assert "Breakout family lifecycle" in html
+    assert "COST_REVALIDATION_PENDING" in html
     assert "$1,000 Account Example" in html
     assert "1% fixed risk per trade" in html
     assert "data-account-status-filter=\"accepted\"" in html
@@ -125,6 +129,27 @@ def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_
     assert '<div class="name">Five-day soak</div>' in html
     assert "Wall-clock evidence accumulating: 4.5 of 5 trading days (90%)" in html
     assert '<span class="pill pending">PENDING</span>' in html
+
+
+def test_status_page_freshness_check_fails_when_html_older_than_summary(tmp_path: Path):
+    module = _load_module()
+    repo = tmp_path / "repo"
+    summary_path = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json"
+    status_path = repo / "status.html"
+    summary_path.parent.mkdir(parents=True)
+    summary_path.write_text("{}", encoding="utf-8")
+    status_path.write_text("<html></html>", encoding="utf-8")
+    old_time = 1_800_000_000
+    new_time = old_time + 10
+    os.utime(status_path, (old_time, old_time))
+    os.utime(summary_path, (new_time, new_time))
+
+    try:
+        module.assert_status_page_current(repo, status_path, summary_path)
+    except module.StatusPageFreshnessError as exc:
+        assert "older than PHASE1_STATUS_SUMMARY" in str(exc)
+    else:
+        raise AssertionError("Expected stale status page to fail freshness check")
 
 
 def _load_module():

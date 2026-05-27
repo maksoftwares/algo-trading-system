@@ -60,7 +60,7 @@ This schema is preparation only. It defines the paper-mode evidence contract tha
 - `net_expectancy_R_after_measured_cost` must be compared against `+0.15R`.
 - If the breakout-retest family falls below the threshold, `kill_rule_state` becomes `SUSPEND_FAMILY`.
 - `swing_breakout_retest_v0` and `breakout_retest` remain one correlated edge family for risk and kill-rule purposes.
-- `breakout_retest` is currently cost-suspended; it becomes the only possible execution-eligible paper expert only if corrected measured-cost revalidation passes. `swing_breakout_retest_v0` remains observer-only telemetry.
+- The breakout-retest family is currently `COST_REVALIDATION_PENDING`; `breakout_retest` becomes the only possible execution-eligible paper expert only if fresh measured-cost revalidation passes. `swing_breakout_retest_v0` remains observer-only telemetry and inherits the family-level cost state.
 - Paper-mode output must preserve the source `decision_log.csv` row number so reviewers can reconstruct every event.
 - Paper-mode output must be reproducible from a saved `decision_log.csv` without needing broker access.
 

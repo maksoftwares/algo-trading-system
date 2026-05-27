@@ -62,6 +62,8 @@ def test_analyze_spread_logs_excludes_weekend_legacy_rows_from_coverage(project_
     assert "Overall status: PENDING" in measured_text
     assert "legacy_missing" in measured_text
     assert "Weekend/closed-market rows excluded: 1" in measured_text
+    assert "Why Observed Days Reset" in measured_text
+    assert "Fresh observed market days, not source-file count or legacy row count, control PASS/PENDING." in measured_text
     metrics = pd.read_csv(output.measured_cost_model_path)
     assert "Saturday" not in set(metrics.loc[metrics["scope"] == "day_of_week_utc", "bucket"])
     assert int(metrics.loc[metrics["scope"] == "global", "observations"].iloc[0]) == 2

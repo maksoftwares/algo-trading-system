@@ -23,8 +23,11 @@ def test_would_signal_report_passes_when_permission_locked(tmp_path):
     assert output.cluster_count == 2
     assert output.csv_path.exists()
     assert "Would-Signal Rows" in report
+    assert "Observer Conflict Counts" in report
     assert "Setup Clusters" in report
     assert "previous_weekly_low" in report
+    assert output.observer_conflict_counts["br_only"] == 2
+    assert output.observer_conflict_counts["sbr_only"] == 0
     with output.csv_path.open("r", encoding="utf-8", newline="") as handle:
         csv_rows = list(csv.DictReader(handle))
     assert len(csv_rows) == 2
@@ -59,6 +62,66 @@ def test_would_signal_report_fails_when_permission_not_locked(tmp_path):
     assert any(check.name == "would_signal_permission_lock" and check.status == "FAIL" for check in output.checks)
 
 
+def test_would_signal_report_counts_dual_observer_conflicts(tmp_path):
+    module = _load_module()
+    files_dir = tmp_path / "files"
+    files_dir.mkdir()
+    _write_decision_log(files_dir / "decision_log.csv", include_signals=False)
+    with (files_dir / "decision_log.csv").open("a", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=_fieldnames())
+        writer.writerow(
+            _row(
+                "2026.05.21 12:15:00",
+                "WOULD_SIGNAL",
+                "LONG",
+                "true",
+                "previous_daily_high",
+                "false",
+                sbr_stage="WOULD_SIGNAL",
+                sbr_direction="LONG",
+                sbr_would_signal="true",
+            )
+        )
+        writer.writerow(
+            _row(
+                "2026.05.21 12:20:00",
+                "WOULD_SIGNAL",
+                "LONG",
+                "true",
+                "previous_daily_high",
+                "false",
+                sbr_stage="WOULD_SIGNAL",
+                sbr_direction="SHORT",
+                sbr_would_signal="true",
+            )
+        )
+        writer.writerow(
+            _row(
+                "2026.05.21 12:25:00",
+                "WAIT_LEVEL_BREAK_RETEST",
+                "LONG",
+                "false",
+                "previous_daily_high",
+                "false",
+                sbr_stage="WOULD_SIGNAL",
+                sbr_direction="SHORT",
+                sbr_would_signal="true",
+            )
+        )
+
+    output = module.generate_phase1_would_signal_report(files_dir, tmp_path / "would.md")
+
+    assert output.observer_conflict_counts == {
+        "br_only": 0,
+        "sbr_only": 1,
+        "both_same_direction": 1,
+        "both_opposite_direction": 1,
+    }
+    report = output.report_path.read_text(encoding="utf-8")
+    assert "Both same direction" in report
+    assert "Both opposite direction" in report
+
+
 def _load_module():
     path = ROOT / "scripts" / "generate_phase1_would_signal_report.py"
     spec = importlib.util.spec_from_file_location("generate_phase1_would_signal_report", path)
@@ -71,7 +134,21 @@ def _load_module():
 
 
 def _write_decision_log(path: Path, include_signals: bool = True, force_permission: str = "false") -> None:
-    fieldnames = [
+    fieldnames = _fieldnames()
+    rows = [
+        _row("2026.05.21 12:00:00", "WAIT_LEVEL_BREAK_RETEST", "SHORT", "false", "previous_weekly_low", "false"),
+    ]
+    if include_signals:
+        rows.append(_row("2026.05.21 12:05:00", "WOULD_SIGNAL", "SHORT", "true", "previous_weekly_low", force_permission))
+        rows.append(_row("2026.05.21 12:10:00", "WOULD_SIGNAL", "LONG", "true", "latest_swing_high", "false"))
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _fieldnames() -> list[str]:
+    return [
         "timestamp_broker",
         "bar_time",
         "run_id",
@@ -88,19 +165,17 @@ def _write_decision_log(path: Path, include_signals: bool = True, force_permissi
         "br_entry_price",
         "br_stop_loss",
         "br_take_profit",
+        "sbr_stage",
+        "sbr_direction",
+        "sbr_would_signal",
+        "sbr_level_kind",
+        "sbr_level_price",
+        "sbr_entry_price",
+        "sbr_stop_loss",
+        "sbr_take_profit",
         "trade_permission",
         "dry_run",
     ]
-    rows = [
-        _row("2026.05.21 12:00:00", "WAIT_LEVEL_BREAK_RETEST", "SHORT", "false", "previous_weekly_low", "false"),
-    ]
-    if include_signals:
-        rows.append(_row("2026.05.21 12:05:00", "WOULD_SIGNAL", "SHORT", "true", "previous_weekly_low", force_permission))
-        rows.append(_row("2026.05.21 12:10:00", "WOULD_SIGNAL", "LONG", "true", "latest_swing_high", "false"))
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
 
 
 def _row(
@@ -110,6 +185,9 @@ def _row(
     would_signal: str,
     level_kind: str,
     permission: str,
+    sbr_stage: str = "WAIT_LEVEL_BREAK_RETEST",
+    sbr_direction: str = "LONG",
+    sbr_would_signal: str = "false",
 ) -> dict[str, str]:
     return {
         "timestamp_broker": timestamp,
@@ -128,6 +206,14 @@ def _row(
         "br_entry_price": "4510.00",
         "br_stop_loss": "4512.00",
         "br_take_profit": "4507.00",
+        "sbr_stage": sbr_stage,
+        "sbr_direction": sbr_direction,
+        "sbr_would_signal": sbr_would_signal,
+        "sbr_level_kind": "latest_swing_high",
+        "sbr_level_price": "4511.36",
+        "sbr_entry_price": "4510.00",
+        "sbr_stop_loss": "4512.00",
+        "sbr_take_profit": "4507.00",
         "trade_permission": permission,
         "dry_run": "true",
     }

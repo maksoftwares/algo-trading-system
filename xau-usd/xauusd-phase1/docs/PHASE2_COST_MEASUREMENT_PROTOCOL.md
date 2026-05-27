@@ -17,7 +17,7 @@ Current modeled baseline:
 | Gross expectancy estimate | 0.5115R |
 | Cost consumption | 63.09% |
 
-The measured cost model now has enough passive-spread evidence to evaluate. Current measured-cost revalidation fails, so `breakout_retest` is cost-suspended unless the audit finds and corrects a conversion defect.
+The measured cost model is currently pending under the authoritative freshness-aware rule. Legacy spread rows without `tick_fresh` / `seconds_since_tick` are diagnostic only, so the breakout-retest family remains `COST_REVALIDATION_PENDING` until five fresh observed market days are available and measured-cost revalidation is rerun.
 
 ## Required Inputs
 
@@ -86,7 +86,7 @@ This rule applies to the family, not only one timeframe flavor. `breakout_retest
 | Net expectancy >= +0.15R and drift acceptable | Continue paper-mode evidence collection. |
 | Net expectancy between +0.00R and +0.15R | Suspend family; do not live-pilot. |
 | Net expectancy <= +0.00R | Retire or redesign as a new locked hypothesis. |
-| Cost evidence incomplete | Remain in Phase 1/2 preparation. |
-| Cost revalidation fails | Keep the family cost-suspended; do not implement paper mode. |
+| Cost evidence incomplete | Remain in Phase 1/2 preparation with family state `COST_REVALIDATION_PENDING`. |
+| Authoritative cost revalidation fails | Keep the family `COST_SUSPENDED`; do not implement paper mode. |
 
 No filter may be added to rescue the result inside the same hypothesis version.

@@ -46,7 +46,7 @@ Required values:
 Phase 2 paper-mode implementation only.
 No live capital.
 No live order execution.
-Approved edge family: breakout-retest only if no longer cost-suspended.
+Approved edge family: breakout-retest only if no longer `COST_REVALIDATION_PENDING` or `COST_SUSPENDED`.
 Approved future experts: breakout_retest and swing_breakout_retest_v0 as same-family observation/paper candidates.
 Minimum net expectancy after measured cost: +0.15R.
 Suspend the family if measured paper execution pushes net expectancy below +0.15R.

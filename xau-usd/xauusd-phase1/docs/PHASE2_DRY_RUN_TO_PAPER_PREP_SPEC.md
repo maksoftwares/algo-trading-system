@@ -13,7 +13,7 @@ Phase 2 preparation can continue while the soak runs, but Phase 2 implementation
 - `PHASE1_ACCEPTANCE_REPORT.md` is `PASS`
 - `PHASE1_REVIEW_INDEX.md` is `PASS`
 - `PHASE1_OBSERVER_PARITY_REPORT.md` is `PASS` for Phase 1 MQL observer parity against the Python Phase 0 `breakout_retest` strategy
-- measured-cost revalidation is `PASS` after any required correction and `breakout_retest` is no longer `COST_SUSPENDED`
+- measured-cost model is `PASS`, measured-cost revalidation is `PASS`, and the breakout-retest family is no longer `COST_REVALIDATION_PENDING` or `COST_SUSPENDED`
 - five trading days of clean dry-run telemetry are present
 - would-signal clusters have been reviewed for obvious router or observer defects
 - the safety scanner passes for all Phase 1 and preparation files

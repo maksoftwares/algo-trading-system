@@ -23,6 +23,7 @@ class WouldSignalReport:
     csv_path: Path
     signal_count: int
     cluster_count: int
+    observer_conflict_counts: dict[str, int]
     checks: tuple[WouldSignalCheck, ...]
 
 
@@ -40,6 +41,7 @@ def generate_phase1_would_signal_report(
     rows = _read_csv(files_dir / DECISION_LOG)
     signal_rows = _would_signal_rows(rows)
     clusters = _signal_clusters(signal_rows)
+    observer_conflict_counts = _observer_conflict_counts(rows)
     checks = [
         _check_signal_rows(signal_rows),
         _check_signal_clusters(clusters),
@@ -51,13 +53,17 @@ def generate_phase1_would_signal_report(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     _write_review_csv(csv_path, signal_rows, clusters)
-    report_path.write_text(_render_report(status, files_dir, checks, signal_rows, clusters, csv_path), encoding="utf-8")
+    report_path.write_text(
+        _render_report(status, files_dir, checks, signal_rows, clusters, csv_path, observer_conflict_counts),
+        encoding="utf-8",
+    )
     return WouldSignalReport(
         status=status,
         report_path=report_path,
         csv_path=csv_path,
         signal_count=len(signal_rows),
         cluster_count=len(clusters),
+        observer_conflict_counts=observer_conflict_counts,
         checks=tuple(checks),
     )
 
@@ -89,6 +95,37 @@ def _would_signal_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
             signal["br_reason_code"] = row.get("sbr_reason_code", "")
             signal_rows.append(signal)
     return signal_rows
+
+
+def _observer_conflict_counts(rows: list[dict[str, str]]) -> dict[str, int]:
+    counts = {
+        "br_only": 0,
+        "sbr_only": 0,
+        "both_same_direction": 0,
+        "both_opposite_direction": 0,
+    }
+    for row in rows:
+        br_signal = _is_true_signal(row, "br")
+        sbr_signal = _is_true_signal(row, "sbr")
+        if br_signal and sbr_signal:
+            br_direction = row.get("br_direction", "").upper()
+            sbr_direction = row.get("sbr_direction", "").upper()
+            if br_direction and br_direction == sbr_direction:
+                counts["both_same_direction"] += 1
+            else:
+                counts["both_opposite_direction"] += 1
+        elif br_signal:
+            counts["br_only"] += 1
+        elif sbr_signal:
+            counts["sbr_only"] += 1
+    return counts
+
+
+def _is_true_signal(row: dict[str, str], prefix: str) -> bool:
+    return (
+        row.get(f"{prefix}_would_signal", "").lower() == "true"
+        or row.get(f"{prefix}_stage", "") == "WOULD_SIGNAL"
+    )
 
 
 def _check_signal_rows(rows: list[dict[str, str]]) -> WouldSignalCheck:
@@ -251,6 +288,7 @@ def _render_report(
     signal_rows: list[dict[str, str]],
     clusters: list[dict[str, str]],
     csv_path: Path,
+    observer_conflict_counts: dict[str, int],
 ) -> str:
     return "\n".join(
         [
@@ -275,6 +313,10 @@ def _render_report(
             f"- Level kinds observed: {', '.join(_unique(signal_rows, 'br_level_kind')) or 'none'}",
             f"- Observers observed: {', '.join(_unique(signal_rows, 'observer')) or 'none'}",
             f"- Review CSV: `{csv_path}`",
+            "",
+            "## Observer Conflict Counts",
+            "",
+            _observer_conflict_table(observer_conflict_counts),
             "",
             "## Setup Clusters",
             "",
@@ -374,6 +416,19 @@ def _count_table(values) -> str:
     return _markdown_table(
         [{"Value": key, "Count": str(value)} for key, value in sorted(counts.items())],
         ["Value", "Count"],
+    )
+
+
+def _observer_conflict_table(counts: dict[str, int]) -> str:
+    labels = {
+        "br_only": "BR only",
+        "sbr_only": "SBR only",
+        "both_same_direction": "Both same direction",
+        "both_opposite_direction": "Both opposite direction",
+    }
+    return _markdown_table(
+        [{"Bucket": labels[key], "Count": str(counts.get(key, 0))} for key in labels],
+        ["Bucket", "Count"],
     )
 
 

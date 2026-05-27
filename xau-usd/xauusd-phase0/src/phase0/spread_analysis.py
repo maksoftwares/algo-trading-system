@@ -348,6 +348,17 @@ def _render_measured_cost_model_report(
             "",
             note,
             "",
+            "## Why Observed Days Reset",
+            "",
+            (
+                "Legacy spread logs before the freshness-aware logger redeployment did not include "
+                "`tick_fresh` / `seconds_since_tick`, so they are retained as diagnostic source files "
+                "but excluded from authoritative measured-cost gating. Fresh observed market days, "
+                "not source-file count or legacy row count, control PASS/PENDING."
+                if (freshness_available and missing_tick_fresh_row_count > 0) or missing_freshness_columns
+                else "Observed days count only admitted fresh market rows that pass the current measured-cost filters."
+            ),
+            "",
             "Missing freshness columns: " + (missing_freshness_columns or "none"),
             "",
         ]

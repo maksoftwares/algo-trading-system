@@ -31,18 +31,18 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PENDING | Non-pass status fields: log_verification, soak_analysis, runtime_health |
-| Five trading day soak | PENDING | Progress 98.82%; observed 4.941 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 11.58h; required 72h; weekend policy weekend_breaks_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 118.54h; code-freeze 9.08h; required 96h; marker 2026-05-27T00:31:23Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.27 09:35:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 74; clusters: 74. |
+| Five trading day soak | PASS | Progress 100.00%; observed 5.0417 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 22.92h; current active streak 1.33h; required 72h; weekend policy weekend_breaks_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 1.36h; code-freeze 1.36h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.27 12:00:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 80; clusters: 80. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 720 | 2026.05.27 09:35:00 | true | false | CLOCK_OK | 98.82% |
+| 750 | 2026.05.27 12:00:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

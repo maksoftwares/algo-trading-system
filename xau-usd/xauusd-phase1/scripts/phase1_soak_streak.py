@@ -47,7 +47,7 @@ def calculate_soak_streak(
     max_gap_seconds = max_bar_gap_minutes * 60
     current_start: datetime | None = None
     current_end: datetime | None = None
-    current_run_ids: set[str] = set()
+    current_run_id = ""
     current_bars = 0
     longest_hours = 0.0
     longest_bars = 0
@@ -58,7 +58,7 @@ def calculate_soak_streak(
         if bar_time is None or not _is_good_soak_row(row):
             current_start = None
             current_end = None
-            current_run_ids = set()
+            current_run_id = ""
             current_bars = 0
             restart_count = 0
             continue
@@ -67,17 +67,16 @@ def calculate_soak_streak(
         needs_new_segment = current_start is None
         if current_end is not None and (bar_time - current_end).total_seconds() > max_gap_seconds:
             needs_new_segment = True
+        if current_run_id and run_id and run_id != current_run_id:
+            needs_new_segment = True
 
         if needs_new_segment:
             current_start = bar_time
             current_end = bar_time
-            current_run_ids = {run_id} if run_id else set()
+            current_run_id = run_id
             current_bars = 1
             restart_count = 0
         elif current_end is not None:
-            if run_id and run_id not in current_run_ids:
-                current_run_ids.add(run_id)
-                restart_count = max(len(current_run_ids) - 1, 0)
             if bar_time > current_end:
                 current_end = bar_time
                 current_bars += 1
@@ -122,7 +121,7 @@ def read_code_freeze_marker(path: Path) -> str:
     if not path.exists():
         return ""
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        value = line.strip()
+        value = line.strip().lstrip("\ufeff")
         if value:
             return value
     return ""

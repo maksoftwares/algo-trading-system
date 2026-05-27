@@ -17,7 +17,7 @@
 #include <Phase1/Phase1Lifecycle.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 
-input string InpRunId = "phase1-dry-run-v0.6";
+input string InpRunId = "phase1-dry-run-v0.7";
 input bool InpDryRunOnly = true;
 input string InpTargetSymbol = "XAUUSD";
 input double InpMaxSpreadPoints = 80.0;
@@ -31,6 +31,7 @@ input double InpSimulatedMonthlyPnlPct = 0.0;
 input bool InpManualRiskLock = false;
 input bool InpObserveBreakoutRetest = true;
 input bool InpObserveSwingBreakoutRetest = true;
+input string InpBreakoutRetestFamilyCostState = "COST_REVALIDATION_PENDING";
 input bool InpManualNewsLockdown = false;
 input int InpExpectedLocalUtcOffsetMinutes = 330;
 input int InpMaxClockDriftSeconds = 300;
@@ -101,7 +102,11 @@ int OnInit()
    g_execution_guard.Configure(InpMaxSpreadPoints);
    g_news_guard.Configure(InpManualNewsLockdown);
    g_server_time_validator.Configure(InpExpectedLocalUtcOffsetMinutes, InpMaxClockDriftSeconds);
-   g_lifecycle_manager.Configure(InpObserveBreakoutRetest, InpObserveSwingBreakoutRetest);
+   g_lifecycle_manager.Configure(
+      InpObserveBreakoutRetest,
+      InpObserveSwingBreakoutRetest,
+      InpBreakoutRetestFamilyCostState
+   );
    g_breakout_retest_observer.Configure(false);
    g_swing_breakout_retest_observer.Configure(true);
    Phase1MarketSnapshot startup_snapshot;
@@ -255,8 +260,8 @@ string Phase1BlockReason(const Phase1Decision &decision, const Phase1Signal &sig
 {
    if(!decision.magic_namespace_ok)
       return "magic_namespace_invalid";
-   if(signal.expert_name == "breakout_retest" && decision.br_lifecycle_state == "COST_SUSPENDED")
-      return "COST_SUSPENDED";
+   if(Phase1IsBreakoutRetestFamily(signal.expert_name) && g_lifecycle_manager.IsBreakoutRetestFamilyBlockedByCost())
+      return g_lifecycle_manager.BreakoutRetestFamilyBlockReason();
    if(!decision.server_time.clock_ok)
       return decision.server_time.status_text;
    if(decision.news_state != PHASE1_NEWS_NO_RISK)
@@ -268,4 +273,19 @@ string Phase1BlockReason(const Phase1Decision &decision, const Phase1Signal &sig
    if(signal.blocked_reason != "")
       return signal.blocked_reason;
    return "phase1_dry_run_only";
+}
+
+bool Phase1IsBreakoutRetestFamily(const string expert_name)
+{
+   if(expert_name == "breakout_retest")
+      return true;
+   if(expert_name == "swing_breakout_retest_v0")
+      return true;
+   if(expert_name == "symbol_normalized_round_retest_v0")
+      return true;
+   if(expert_name == "round_number_retest_v0")
+      return true;
+   if(expert_name == "session_extreme_retest_v0")
+      return true;
+   return false;
 }

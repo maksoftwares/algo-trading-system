@@ -27,6 +27,10 @@ class StatusPageOutput:
     phase2_status: str
 
 
+class StatusPageFreshnessError(RuntimeError):
+    pass
+
+
 def generate_project_status_page(
     repo_root: Path,
     output_path: Path | None = None,
@@ -86,6 +90,27 @@ def generate_project_status_page(
         phase1_status=phase1_acceptance or "UNKNOWN",
         phase2_status=phase2_readiness or "UNKNOWN",
     )
+
+
+def assert_status_page_current(
+    repo_root: Path,
+    output_path: Path | None = None,
+    summary_path: Path | None = None,
+) -> None:
+    repo_root = repo_root.resolve()
+    output_path = (output_path or repo_root / DEFAULT_OUTPUT).resolve()
+    summary_path = (
+        summary_path
+        or repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json"
+    ).resolve()
+    if not output_path.exists():
+        raise StatusPageFreshnessError(f"Status page is missing: {output_path}")
+    if not summary_path.exists():
+        raise StatusPageFreshnessError(f"Phase 1 status summary is missing: {summary_path}")
+    if output_path.stat().st_mtime + 1.0 < summary_path.stat().st_mtime:
+        raise StatusPageFreshnessError(
+            f"Status page is older than PHASE1_STATUS_SUMMARY.json: {output_path} < {summary_path}"
+        )
 
 
 def _render_html(
@@ -797,6 +822,7 @@ def _runtime_table(
     would_signal: dict[str, Any],
     soak: dict[str, Any],
 ) -> str:
+    conflicts = _mapping(would_signal.get("observer_conflicts"))
     rows = [
         ("Decision rows", _cell(runtime.get("decision_rows"))),
         ("Latest bar", _cell(latest.get("bar_time"))),
@@ -815,11 +841,21 @@ def _runtime_table(
         ("Code-freeze hours", f"{_cell(soak.get('code_freeze_hours'))}h / {_cell(soak.get('required_code_freeze_hours'))}h"),
         ("Last restart UTC", _cell(soak.get("last_restart_utc"))),
         ("Would-signal clusters", _cell(would_signal.get("clusters"))),
+        (
+            "Observer conflicts",
+            "BR {br}; SBR {sbr}; same {same}; opposite {opposite}".format(
+                br=_cell(conflicts.get("br_only", 0)),
+                sbr=_cell(conflicts.get("sbr_only", 0)),
+                same=_cell(conflicts.get("both_same_direction", 0)),
+                opposite=_cell(conflicts.get("both_opposite_direction", 0)),
+            ),
+        ),
     ]
     return _key_value_table(rows)
 
 
 def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
+    lifecycle = _breakout_family_lifecycle(measured)
     rows = [
         ("Trades", fixed.get("Trades", "n/a")),
         ("Win rate", _pct(fixed.get("Win %"))),
@@ -833,6 +869,8 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ("Measured-cost revalidation", measured.get("revalidation_status", "n/a")),
         ("Measured-cost assumption delta", measured.get("assumption_delta_status", "n/a")),
         ("Measured rows/days", f"{measured.get('observed_rows', 'n/a')} rows / {measured.get('observed_days', 'n/a')} days"),
+        ("Breakout family lifecycle", lifecycle),
+        ("Execution eligibility", "BLOCKED" if lifecycle in {"COST_REVALIDATION_PENDING", "COST_SUSPENDED"} else "DRY_RUN_ONLY"),
     ]
     return _key_value_table(rows)
 
@@ -1296,10 +1334,10 @@ def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
     model = measured_cost.get("status", "UNKNOWN")
     revalidation = measured_cost.get("revalidation_status", "UNKNOWN")
     delta = measured_cost.get("assumption_delta_status", "UNKNOWN")
-    if "FAIL" in {model, revalidation, delta}:
-        return "FAIL"
     if model != "PASS":
         return model
+    if "FAIL" in {revalidation, delta}:
+        return "FAIL"
     if revalidation != "PASS":
         return revalidation
     if delta != "PASS":
@@ -1307,14 +1345,27 @@ def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
     return "PASS"
 
 
+def _breakout_family_lifecycle(measured_cost: dict[str, str]) -> str:
+    model = measured_cost.get("status", "UNKNOWN")
+    revalidation = measured_cost.get("revalidation_status", "UNKNOWN")
+    if model != "PASS":
+        return "COST_REVALIDATION_PENDING"
+    if revalidation == "FAIL":
+        return "COST_SUSPENDED"
+    if revalidation == "PASS":
+        return "DRY_RUN_APPROVED"
+    return "COST_REVALIDATION_PENDING"
+
+
 def _next_actions(phase1_status: str, phase2_status: str, measured_cost: dict[str, str]) -> list[str]:
     items = []
+    lifecycle = _breakout_family_lifecycle(measured_cost)
     if phase1_status != "PASS":
         items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour process/code-freeze gate continue.")
     if measured_cost.get("status") != "PASS":
-        items.append("Keep the passive spread logger running until measured-cost coverage reaches the required observed days.")
-    if measured_cost.get("revalidation_status") == "FAIL":
-        items.append("Keep breakout_retest COST_SUSPENDED; audit the cost-R conversion before any paper-mode implementation.")
+        items.append("Keep the passive spread logger running until measured-cost coverage reaches the required fresh observed days; breakout-retest family stays COST_REVALIDATION_PENDING.")
+    if lifecycle == "COST_SUSPENDED":
+        items.append("Keep the breakout-retest family COST_SUSPENDED; audit the cost-R conversion before any paper-mode implementation.")
     if phase2_status != "PASS":
         items.append("Keep Phase 2 in preparation mode only; no paper-mode implementation until readiness is PASS.")
     items.append("Continue independent candidate research without tuning rejected v0 hypotheses.")
