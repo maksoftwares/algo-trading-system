@@ -38,6 +38,7 @@ class SpreadAnalysisOutput:
     source_files: tuple[Path, ...]
     observation_count: int
     observed_days: int
+    observed_dates: tuple[str, ...] = ()
 
 
 def analyze_spread_logs(
@@ -66,6 +67,7 @@ def analyze_spread_logs(
                 files=[],
                 observation_count=0,
                 observed_days=0,
+                observed_dates=(),
                 min_observations=min_observations,
                 min_observed_days=min_observed_days,
                 note=f"No spread logger CSV files found in {directory} matching {file_glob}.",
@@ -86,7 +88,8 @@ def analyze_spread_logs(
     missing_freshness_columns = str(frame.attrs.get("missing_freshness_columns", ""))
     metrics = _spread_metrics(frame)
     observation_count = int(len(frame))
-    observed_days = int(frame["gmt_time"].dt.date.nunique())
+    observed_dates = tuple(sorted(str(day) for day in frame["gmt_time"].dt.date.dropna().unique()))
+    observed_days = len(observed_dates)
     status = "PASS" if observation_count >= min_observations and observed_days >= min_observed_days else "PENDING"
     metrics.to_csv(measured_path, index=False)
     report_path.write_text(
@@ -109,6 +112,7 @@ def analyze_spread_logs(
             files=files,
             observation_count=observation_count,
             observed_days=observed_days,
+            observed_dates=observed_dates,
             min_observations=min_observations,
             min_observed_days=min_observed_days,
             source_row_count=source_row_count,
@@ -135,6 +139,7 @@ def analyze_spread_logs(
         tuple(files),
         observation_count,
         observed_days,
+        observed_dates,
     )
 
 
@@ -288,6 +293,7 @@ def _render_measured_cost_model_report(
     observed_days: int,
     min_observations: int,
     min_observed_days: int,
+    observed_dates: tuple[str, ...] = (),
     source_row_count: int = 0,
     stale_row_count: int = 0,
     missing_tick_fresh_row_count: int = 0,
@@ -339,6 +345,10 @@ def _render_measured_cost_model_report(
             "## Global Cost Model",
             "",
             _markdown_table(global_rows),
+            "",
+            "## Fresh Observed Dates",
+            "",
+            "\n".join(f"- {day}" for day in observed_dates) if observed_dates else "No admitted fresh dates yet.",
             "",
             "## Source Files",
             "",

@@ -33,7 +33,11 @@ def test_analyze_spread_logs_writes_cost_report(project_root, tmp_path):
     assert output.status == "PASS"
     assert output.measured_cost_model_path.exists()
     assert output.measured_report_path.exists()
-    assert "Overall status: PASS" in output.measured_report_path.read_text(encoding="utf-8")
+    measured_text = output.measured_report_path.read_text(encoding="utf-8")
+    assert "Overall status: PASS" in measured_text
+    assert "## Fresh Observed Dates" in measured_text
+    assert "- 2026-01-05" in measured_text
+    assert output.observed_dates == ("2026-01-05",)
     metrics = pd.read_csv(output.measured_cost_model_path)
     assert {"global", "hour_utc", "day_of_week_utc", "rollover"}.issubset(set(metrics["scope"]))
     assert output.report_path.read_text(encoding="utf-8").startswith("# Spread Distribution Report")
@@ -47,7 +51,9 @@ def test_generate_measured_cost_model_pending_without_logs(project_root, tmp_pat
 
     assert output.status == "PENDING"
     assert output.source_files == ()
-    assert "Overall status: PENDING" in output.measured_report_path.read_text(encoding="utf-8")
+    measured_text = output.measured_report_path.read_text(encoding="utf-8")
+    assert "Overall status: PENDING" in measured_text
+    assert "No admitted fresh dates yet." in measured_text
 
 
 def test_analyze_spread_logs_excludes_weekend_legacy_rows_from_coverage(project_root, tmp_path):
@@ -64,6 +70,8 @@ def test_analyze_spread_logs_excludes_weekend_legacy_rows_from_coverage(project_
     assert "Weekend/closed-market rows excluded: 1" in measured_text
     assert "Why Observed Days Reset" in measured_text
     assert "Fresh observed market days, not source-file count or legacy row count, control PASS/PENDING." in measured_text
+    assert "- 2026-01-02" in measured_text
+    assert "- 2026-01-05" in measured_text
     metrics = pd.read_csv(output.measured_cost_model_path)
     assert "Saturday" not in set(metrics.loc[metrics["scope"] == "day_of_week_utc", "bucket"])
     assert int(metrics.loc[metrics["scope"] == "global", "observations"].iloc[0]) == 2
