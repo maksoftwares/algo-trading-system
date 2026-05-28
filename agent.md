@@ -39,6 +39,7 @@ Last updated: 2026-05-28
   - Status dashboard now includes Phase 3 completion, family de-dup, cost-mode, cost-gate, demo rehearsal, safety, and manifest fields while still showing real Phase 2 as PENDING.
 - 2026-05-28 periodic readiness refresh:
   - `run_phase1_periodic_checks.py` is the canonical refresh command for Phase 1/Phase 2 reports when manual refresh is needed.
+  - VPS first-day manual evidence is now structured. Use `xau-usd\xauusd-phase1\docs\templates\vps_ntp_sync.template.txt`, `vps_backup_config.template.txt`, and `vps_rdp_recovery.template.txt` as copy-fill templates under `outputs\reports`; placeholders, unverified flags, and unredacted recovery secrets are rejected by `generate_phase2_vps_first_day_verification.py`.
   - Current changing Phase 1 runtime, soak, and would-signal counters must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`, `PHASE1_ACCEPTANCE_REPORT.md`, and `PHASE1_REVIEW_INDEX.md`.
   - Current changing measured-cost counters must be read from `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, and `MEASURED_COST_ASSUMPTION_DELTA.md`.
   - Current Phase 2 readiness must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md`.

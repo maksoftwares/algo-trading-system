@@ -49,13 +49,7 @@ def test_vps_first_day_verification_passes_with_complete_evidence(tmp_path: Path
     recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
     _seed_git_repo(repo)
     _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
-    for path, text in (
-        (ntp, "NTP enabled; time source synced."),
-        (backup, "Weekly image backup configured."),
-        (recovery, "RDP recovery login verified by owner without storing secrets."),
-    ):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding="utf-8")
+    _write_verified_manual_evidence(ntp, backup, recovery)
 
     output = module.generate_phase2_vps_first_day_verification(
         root=root,
@@ -73,6 +67,100 @@ def test_vps_first_day_verification_passes_with_complete_evidence(tmp_path: Path
     assert payload["phase2_paper_mode_authorized"] is False
     assert payload["demo_trading_authorized"] is False
     assert all(check.status == "PASS" for check in output.checks)
+
+
+def test_vps_first_day_verification_rejects_template_placeholders(tmp_path: Path):
+    module = _load_module()
+    repo = tmp_path / "repo"
+    root = repo / "xau-usd" / "xauusd-phase1"
+    files_dir = tmp_path / "mt5" / "MQL5" / "Files"
+    terminal = tmp_path / "mt5" / "terminal64.exe"
+    compile_log = tmp_path / "mt5" / "compile.log"
+    ntp = root / "outputs" / "reports" / "vps_ntp_sync.txt"
+    backup = root / "outputs" / "reports" / "vps_backup_config.txt"
+    recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
+    _seed_git_repo(repo)
+    _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
+    for path in (ntp, backup, recovery):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            "\n".join(
+                [
+                    "evidence_status: PENDING",
+                    "owner_verified: false",
+                    "time_sync_enabled: false",
+                    "backup_configured: false",
+                    "restore_owner_confirmed: false",
+                    "recovery_login_verified: false",
+                    "notes: TODO replace this template",
+                ]
+            ),
+            encoding="utf-8",
+        )
+
+    output = module.generate_phase2_vps_first_day_verification(
+        root=root,
+        terminal_path=terminal,
+        data_path=tmp_path / "mt5",
+        files_dir=files_dir,
+        compile_log=compile_log,
+        ntp_evidence_path=ntp,
+        backup_evidence_path=backup,
+        recovery_evidence_path=recovery,
+    )
+
+    assert output.status == "PENDING"
+    assert any(
+        check.name == "ntp_time_sync_evidence"
+        and check.status == "PENDING"
+        and "unverified required field" in check.evidence
+        for check in output.checks
+    )
+
+
+def test_vps_first_day_verification_fails_on_unredacted_recovery_secret(tmp_path: Path):
+    module = _load_module()
+    repo = tmp_path / "repo"
+    root = repo / "xau-usd" / "xauusd-phase1"
+    files_dir = tmp_path / "mt5" / "MQL5" / "Files"
+    terminal = tmp_path / "mt5" / "terminal64.exe"
+    compile_log = tmp_path / "mt5" / "compile.log"
+    ntp = root / "outputs" / "reports" / "vps_ntp_sync.txt"
+    backup = root / "outputs" / "reports" / "vps_backup_config.txt"
+    recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
+    _seed_git_repo(repo)
+    _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
+    _write_verified_manual_evidence(ntp, backup, recovery)
+    recovery.write_text(
+        "\n".join(
+            [
+                "evidence_status: VERIFIED",
+                "owner_verified: true",
+                "recovery_login_verified: true",
+                "password: visible-demo-password",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_vps_first_day_verification(
+        root=root,
+        terminal_path=terminal,
+        data_path=tmp_path / "mt5",
+        files_dir=files_dir,
+        compile_log=compile_log,
+        ntp_evidence_path=ntp,
+        backup_evidence_path=backup,
+        recovery_evidence_path=recovery,
+    )
+
+    assert output.status == "FAIL"
+    assert any(
+        check.name == "rdp_recovery_login_evidence"
+        and check.status == "FAIL"
+        and "non-redacted `password`" in check.evidence
+        for check in output.checks
+    )
 
 
 def test_vps_first_day_verification_fails_on_unsafe_status_summary(tmp_path: Path):
@@ -159,6 +247,46 @@ def _write_runtime_evidence(
     )
     (reports / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
         f"# Phase 2 VPS Latency Report\n\nOverall status: {latency_status}\n",
+        encoding="utf-8",
+    )
+
+
+def _write_verified_manual_evidence(ntp: Path, backup: Path, recovery: Path) -> None:
+    ntp.parent.mkdir(parents=True, exist_ok=True)
+    ntp.write_text(
+        "\n".join(
+            [
+                "evidence_status: VERIFIED",
+                "owner_verified: true",
+                "time_sync_enabled: true",
+                "provider: Test VPS",
+                "region: Test Region",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    backup.write_text(
+        "\n".join(
+            [
+                "evidence_status: VERIFIED",
+                "owner_verified: true",
+                "backup_configured: true",
+                "restore_owner_confirmed: true",
+                "backup_method: snapshot",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    recovery.write_text(
+        "\n".join(
+            [
+                "evidence_status: VERIFIED",
+                "owner_verified: true",
+                "recovery_login_verified: true",
+                "password: REDACTED",
+                "secret: REDACTED",
+            ]
+        ),
         encoding="utf-8",
     )
 

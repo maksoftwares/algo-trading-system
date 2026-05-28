@@ -177,6 +177,36 @@ After selection and setup, the first VPS verification packet must include:
 - latency test output
 - RDP recovery-login confirmation
 
+Manual evidence must be created from the templates so placeholders cannot accidentally pass:
+
+```powershell
+Copy-Item docs\templates\vps_ntp_sync.template.txt outputs\reports\vps_ntp_sync.txt
+Copy-Item docs\templates\vps_backup_config.template.txt outputs\reports\vps_backup_config.txt
+Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_recovery.txt
+```
+
+Then fill the copied files after VPS setup. The verifier requires:
+
+```text
+vps_ntp_sync.txt:
+evidence_status: VERIFIED
+owner_verified: true
+time_sync_enabled: true
+
+vps_backup_config.txt:
+evidence_status: VERIFIED
+owner_verified: true
+backup_configured: true
+restore_owner_confirmed: true
+
+vps_rdp_recovery.txt:
+evidence_status: VERIFIED
+owner_verified: true
+recovery_login_verified: true
+```
+
+Do not store passwords, API tokens, private keys, or unredacted secret values in any evidence file.
+
 Generate the canonical packet from the Phase 1 root:
 
 ```powershell

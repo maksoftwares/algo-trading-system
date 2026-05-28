@@ -1,0 +1,18 @@
+# Phase 2 VPS RDP/recovery-login evidence
+
+evidence_status: PENDING
+owner_verified: false
+recovery_login_verified: false
+provider:
+region:
+recovery_method:
+tested_at_utc:
+checker:
+password: REDACTED
+secret: REDACTED
+token: REDACTED
+
+notes:
+- Replace this template after the selected VPS recovery-login path is tested.
+- Confirm RDP or console recovery can reach the VPS after disconnect/reconnect.
+- Never store passwords, API tokens, private keys, screenshots with visible secrets, or shared credentials in this file.

@@ -1,0 +1,17 @@
+# Phase 2 VPS NTP/time-sync evidence
+
+evidence_status: PENDING
+owner_verified: false
+time_sync_enabled: false
+provider:
+region:
+vps_hostname:
+timezone:
+time_source:
+checked_at_utc:
+checker:
+
+notes:
+- Replace this template after the selected VPS is provisioned.
+- Record evidence that Windows time sync/NTP is enabled and the server clock is healthy.
+- Do not mark VERIFIED until the owner has inspected the VPS evidence.

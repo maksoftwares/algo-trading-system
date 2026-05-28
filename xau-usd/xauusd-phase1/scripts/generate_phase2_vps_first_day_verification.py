@@ -16,6 +16,9 @@ DEFAULT_TERMINAL = Path("C:/MT5PortableGoldMission/terminal64.exe")
 DEFAULT_DATA_PATH = Path("C:/MT5PortableGoldMission")
 DEFAULT_FILES_DIR = Path("C:/MT5PortableGoldMission/MQL5/Files")
 DEFAULT_COMPILE_LOG = Path("C:/MT5PortableGoldMission/compile_Phase1DryRunShell.log")
+DEFAULT_NTP_EVIDENCE = Path("outputs") / "reports" / "vps_ntp_sync.txt"
+DEFAULT_BACKUP_EVIDENCE = Path("outputs") / "reports" / "vps_backup_config.txt"
+DEFAULT_RECOVERY_EVIDENCE = Path("outputs") / "reports" / "vps_rdp_recovery.txt"
 
 
 @dataclass(frozen=True)
@@ -56,6 +59,13 @@ def generate_phase2_vps_first_day_verification(
     external_health = report_dir / "PHASE1_EXTERNAL_HEALTH.json"
     status_summary = report_dir / "PHASE1_STATUS_SUMMARY.json"
     readiness_report = report_dir / "PHASE2_READINESS_REPORT.md"
+    ntp_evidence_path = (root / DEFAULT_NTP_EVIDENCE if ntp_evidence_path is None else ntp_evidence_path).resolve()
+    backup_evidence_path = (
+        root / DEFAULT_BACKUP_EVIDENCE if backup_evidence_path is None else backup_evidence_path
+    ).resolve()
+    recovery_evidence_path = (
+        root / DEFAULT_RECOVERY_EVIDENCE if recovery_evidence_path is None else recovery_evidence_path
+    ).resolve()
 
     checks = [
         _repo_commit_check(repo_root),
@@ -68,9 +78,35 @@ def generate_phase2_vps_first_day_verification(
         _status_summary_check(status_summary),
         _report_exists_check("phase2_readiness_report", readiness_report),
         _markdown_status_check("vps_latency_report", latency_report, required="PASS"),
-        _optional_evidence_check("ntp_time_sync_evidence", ntp_evidence_path),
-        _optional_evidence_check("backup_configuration_evidence", backup_evidence_path),
-        _optional_evidence_check("rdp_recovery_login_evidence", recovery_evidence_path),
+        _manual_evidence_check(
+            "ntp_time_sync_evidence",
+            ntp_evidence_path,
+            required_fields={
+                "evidence_status": "verified",
+                "owner_verified": "true",
+                "time_sync_enabled": "true",
+            },
+        ),
+        _manual_evidence_check(
+            "backup_configuration_evidence",
+            backup_evidence_path,
+            required_fields={
+                "evidence_status": "verified",
+                "owner_verified": "true",
+                "backup_configured": "true",
+                "restore_owner_confirmed": "true",
+            },
+        ),
+        _manual_evidence_check(
+            "rdp_recovery_login_evidence",
+            recovery_evidence_path,
+            required_fields={
+                "evidence_status": "verified",
+                "owner_verified": "true",
+                "recovery_login_verified": "true",
+            },
+            reject_secret_values=True,
+        ),
     ]
     status = _overall_status(checks)
     payload = {
@@ -85,9 +121,9 @@ def generate_phase2_vps_first_day_verification(
             "data_path": str(data_path),
             "files_dir": str(files_dir),
             "compile_log": str(compile_log),
-            "ntp_evidence_path": str(ntp_evidence_path or ""),
-            "backup_evidence_path": str(backup_evidence_path or ""),
-            "recovery_evidence_path": str(recovery_evidence_path or ""),
+            "ntp_evidence_path": str(ntp_evidence_path),
+            "backup_evidence_path": str(backup_evidence_path),
+            "recovery_evidence_path": str(recovery_evidence_path),
         },
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -193,12 +229,81 @@ def _markdown_status_check(name: str, path: Path, required: str) -> VpsFirstDayC
     return VpsFirstDayCheck(name, "FAIL", f"`{path}` status is {status}; required {required}.")
 
 
-def _optional_evidence_check(name: str, path: Path | None) -> VpsFirstDayCheck:
-    if path is None:
-        return VpsFirstDayCheck(name, "PENDING", "Evidence file path was not provided.")
-    if path.exists() and path.stat().st_size > 0:
-        return VpsFirstDayCheck(name, "PASS", f"Evidence captured in `{path}`.")
-    return VpsFirstDayCheck(name, "PENDING", f"Missing or empty `{path}`.")
+def _manual_evidence_check(
+    name: str,
+    path: Path,
+    required_fields: dict[str, str],
+    reject_secret_values: bool = False,
+) -> VpsFirstDayCheck:
+    if not path.exists() or path.stat().st_size == 0:
+        return VpsFirstDayCheck(name, "PENDING", f"Missing or empty `{path}`.")
+
+    text = _read_text_lossy(path)
+    fields = _parse_key_value_evidence(text)
+    missing = [key for key in required_fields if key not in fields]
+    if missing:
+        return VpsFirstDayCheck(
+            name,
+            "PENDING",
+            f"`{path}` is missing required field(s): {', '.join(missing)}.",
+        )
+
+    mismatches = [
+        f"{key}={fields[key]}"
+        for key, expected in required_fields.items()
+        if fields[key].lower() != expected.lower()
+    ]
+    if mismatches:
+        return VpsFirstDayCheck(
+            name,
+            "PENDING",
+            f"`{path}` has unverified required field(s): {', '.join(mismatches)}.",
+        )
+
+    placeholder = _first_placeholder_token(text)
+    if placeholder:
+        return VpsFirstDayCheck(name, "PENDING", f"`{path}` still contains placeholder token `{placeholder}`.")
+
+    if reject_secret_values:
+        secret_key = _first_secret_value_key(fields)
+        if secret_key:
+            return VpsFirstDayCheck(
+                name,
+                "FAIL",
+                f"`{path}` appears to contain a non-redacted `{secret_key}` value. Remove secrets and keep proof only.",
+            )
+
+    return VpsFirstDayCheck(name, "PASS", f"Verified structured evidence captured in `{path}`.")
+
+
+def _parse_key_value_evidence(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        fields[key.strip().lower()] = value.strip()
+    return fields
+
+
+def _first_placeholder_token(text: str) -> str:
+    lowered = text.lower()
+    for token in ("todo", "tbd", "replace_me", "pending"):
+        if token in lowered:
+            return token.upper()
+    for line in text.splitlines():
+        if "<" in line and ">" in line:
+            return "<...>"
+    return ""
+
+
+def _first_secret_value_key(fields: dict[str, str]) -> str:
+    redacted_values = {"", "none", "n/a", "redacted", "[redacted]", "***", "not stored"}
+    for key, value in fields.items():
+        if key in {"password", "secret", "token", "api_key", "private_key"} and value.strip().lower() not in redacted_values:
+            return key
+    return ""
 
 
 def _overall_status(checks: list[VpsFirstDayCheck]) -> str:
@@ -237,9 +342,9 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "",
             "## Manual Evidence Still Needed",
             "",
-            "- `vps_ntp_sync.txt`: text or screenshot notes proving NTP/time sync is enabled.",
-            "- `vps_backup_config.txt`: backup configuration and restore owner notes.",
-            "- `vps_rdp_recovery.txt`: recovery-login confirmation without secrets.",
+            "- Copy `docs/templates/vps_ntp_sync.template.txt` to `outputs/reports/vps_ntp_sync.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, and `time_sync_enabled: true` after VPS setup.",
+            "- Copy `docs/templates/vps_backup_config.template.txt` to `outputs/reports/vps_backup_config.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, `backup_configured: true`, and `restore_owner_confirmed: true` after backup/recovery proof.",
+            "- Copy `docs/templates/vps_rdp_recovery.template.txt` to `outputs/reports/vps_rdp_recovery.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, and `recovery_login_verified: true` without storing passwords, secrets, tokens, or keys.",
             "",
         ]
     )

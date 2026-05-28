@@ -1,0 +1,18 @@
+# Phase 2 VPS backup configuration evidence
+
+evidence_status: PENDING
+owner_verified: false
+backup_configured: false
+restore_owner_confirmed: false
+provider:
+region:
+backup_method:
+backup_frequency:
+config_backup_path:
+last_backup_checked_at_utc:
+checker:
+
+notes:
+- Replace this template after the selected VPS backup plan is configured.
+- Confirm both system/instance backup and repo/config backup coverage.
+- Do not mark VERIFIED until the owner confirms the restore path is understood.

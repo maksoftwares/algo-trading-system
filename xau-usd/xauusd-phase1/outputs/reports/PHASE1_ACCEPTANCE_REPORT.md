@@ -17,11 +17,11 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Soak history ledger | WARN | History report has warnings: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md` |
 | Dry-run state | PASS | All decision rows are in dry-run state. |
 | Permission lock | PASS | All decision rows keep permission false. |
-| Runtime freshness | PASS | Latest row age is 3.2 minute(s); limit 15. |
-| Latest runtime row | PASS | run_id=phase1-dry-run-v0.7; bar_time=2026.05.28 13:45:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/SHORT; would_signal=false |
-| Active-market 72-hour soak | PENDING | Longest active streak: 53.92h; current active streak: 26.00h; required: 72h; last restart UTC: 2026-05-27T10:41:55Z; weekend policy: expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 27.10h; code-freeze hours: 27.11h; required: 96h; marker: 2026-05-27T10:41:50Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
-| Five trading day soak | PASS | Observed unique-bar span: 6.11 calendar day(s), from 2026-05-22 11:00:00 to 2026-05-28 13:45:00. |
+| Runtime freshness | PASS | Latest row age is 4.4 minute(s); limit 15. |
+| Latest runtime row | PASS | run_id=phase1-dry-run-v0.7; bar_time=2026.05.28 13:50:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/LONG; would_signal=false |
+| Active-market 72-hour soak | PENDING | Longest active streak: 53.92h; current active streak: 26.08h; required: 72h; last restart UTC: 2026-05-27T10:41:55Z; weekend policy: expected_market_breaks_pause_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak: 27.21h; code-freeze hours: 27.21h; required: 96h; marker: 2026-05-27T10:41:50Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. |
+| Five trading day soak | PASS | Observed unique-bar span: 6.12 calendar day(s), from 2026-05-22 11:00:00 to 2026-05-28 13:50:00. |
 
 ## Decision
 
@@ -29,5 +29,5 @@ Phase 1 is progressing, but final acceptance remains pending until active-market
 
 ## Runtime Rows
 
-- Decision rows analyzed: 1047
+- Decision rows analyzed: 1048
 - Unique run IDs: 6
