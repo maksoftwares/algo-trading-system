@@ -94,5 +94,5 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Phase 3 repo complete | True |
 | Demo authorized | False |
 | External blockers | 11 |
-| Manifest status | DIRTY_WORKTREE |
-| Manifest commit | 32c114a |
+| Manifest status | PASS |
+| Manifest commit | 3ef095c |

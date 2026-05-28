@@ -9,6 +9,7 @@ Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 | Field | Value |
 | --- | --- |
 | Phase 3 repo-side complete | True |
+| Phase 3 release-clean | True |
 | Demo/paper authorized | False |
 | Real Phase 1 acceptance | PENDING |
 | Real Phase 2 readiness | PENDING |
@@ -36,7 +37,7 @@ Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 | Observer conflict playbook is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md |
 | Future real-implementation prompt is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
 | Portable review bundle exists. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
-| Phase 3 manifest exists and records the current review/worktree state. | PASS | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
+| Phase 3 manifest exists and records the current review/worktree state. | PASS | manifest=PASS; clean=True | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 | Root status dashboard is updated from Phase 3 status. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\status.html |
 
 ## Remaining Phase 3 Repo Items

@@ -2,134 +2,22 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: DIRTY_WORKTREE
+Overall status: PASS
 
 ## Snapshot
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T19:35:37.845667Z |
-| Commit | 32c114a |
+| Created at UTC | 2026-05-28T22:18:08.694495Z |
+| Commit | 3ef095c |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
-| Working tree clean | False |
+| Working tree clean | True |
 | Boundary | repo_only_no_mt5_deployment_no_phase2_status_change |
 
 ## Working Tree
 
-```text
-M agent.md
- M status.html
- M xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md
- M xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md
- M xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md
- M xau-usd/xauusd-phase0/outputs/reports/spread_distribution_report.md
- M xau-usd/xauusd-phase1/docs/PHASE2_AUTHORIZATION_CHECKLIST.md
- M xau-usd/xauusd-phase1/docs/PHASE2_DEMO_TRANSITION_RUNBOOK.md
- M xau-usd/xauusd-phase1/docs/PHASE2_OPERATIONS_PREP.md
- M xau-usd/xauusd-phase1/docs/PHASE2_OWNER_APPROVAL_DRAFT.md
- M xau-usd/xauusd-phase1/docs/PHASE2_OWNER_APPROVAL_TEMPLATE.md
- M xau-usd/xauusd-phase1/docs/PHASE2_VPS_SELECTION_MATRIX.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_DRY_RUN_LOG_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_EXTERNAL_HEALTH.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_REVIEW_INDEX.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_SOAK_DRIFT_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_SOAK_HISTORY.csv
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_SOAK_HISTORY_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.json
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md
- M xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_LATENCY_REPORT.md
- M xau-usd/xauusd-phase1/scripts/capture_phase2_vps_latency_evidence.ps1
- M xau-usd/xauusd-phase1/scripts/generate_phase1_bundle.py
- M xau-usd/xauusd-phase1/scripts/generate_phase1_review_index.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_demo_preflight_report.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_owner_action_packet.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_readiness_report.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_vps_bootstrap_packet.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_vps_first_day_verification.py
- M xau-usd/xauusd-phase1/scripts/generate_phase2_vps_latency_report.py
- M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
- M xau-usd/xauusd-phase1/scripts/install_phase2_periodic_checks_task.ps1
- M xau-usd/xauusd-phase1/scripts/run_phase1_periodic_checks.py
- M xau-usd/xauusd-phase1/scripts/verify_phase2_transition_artifacts.py
- M xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
- M xau-usd/xauusd-phase1/tests/test_agent_handoff.py
- M xau-usd/xauusd-phase1/tests/test_periodic_checks.py
- M xau-usd/xauusd-phase1/tests/test_phase1_bundle.py
- M xau-usd/xauusd-phase1/tests/test_phase1_review_index.py
- M xau-usd/xauusd-phase1/tests/test_phase2_demo_preflight_report.py
- M xau-usd/xauusd-phase1/tests/test_phase2_owner_action_packet.py
- M xau-usd/xauusd-phase1/tests/test_phase2_owner_approval_docs.py
- M xau-usd/xauusd-phase1/tests/test_phase2_readiness_report.py
- M xau-usd/xauusd-phase1/tests/test_phase2_scheduler_setup.py
- M xau-usd/xauusd-phase1/tests/test_phase2_transition_artifacts.py
- M xau-usd/xauusd-phase1/tests/test_phase2_vps_bootstrap_packet.py
- M xau-usd/xauusd-phase1/tests/test_phase2_vps_first_day_verification.py
- M xau-usd/xauusd-phase1/tests/test_phase2_vps_latency_report.py
- M xau-usd/xauusd-phase1/tests/test_project_status_page.py
- M xau-usd/xauusd-phase3-experimental/README.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COMPLETION_AUDIT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COMPLETION_AUDIT.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_PLAN.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_LEDGER.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_LEDGER.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_LEDGER.csv
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md
- M xau-usd/xauusd-phase3-experimental/outputs/review_bundles/PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip
- M xau-usd/xauusd-phase3-experimental/outputs/review_bundles/PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py
- M xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py
- M xau-usd/xauusd-phase3-experimental/tests/test_phase3_experimental.py
-?? xau-usd/xauusd-phase1/scripts/generate_phase2_demo_next_actions_report.py
-?? xau-usd/xauusd-phase1/scripts/generate_phase2_vps_selection_decision_check.py
-?? xau-usd/xauusd-phase1/scripts/prepare_phase2_vps_evidence_workspace.ps1
-?? xau-usd/xauusd-phase1/tests/test_phase2_demo_next_actions_report.py
-?? xau-usd/xauusd-phase1/tests/test_phase2_vps_evidence_workspace.py
-?? xau-usd/xauusd-phase1/tests/test_phase2_vps_selection_decision_check.py
-?? xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_to_demo_handoff.py
-```
+Clean.
 
 ## Source Hashes
 
@@ -184,8 +72,8 @@ M agent.md
 | phase3_suspend_family_md | True | 5010 | e9168f8ef51ff6d56f6342df9f1b630ec5aa6ad0d17a90cbd879d221a6f76ae6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_SUSPEND_FAMILY_REVIEW.md |
 | phase3_to_demo_handoff_json | True | 8486 | a75a75a7198096ff782fa7450b895dd97d28e226d4950e49b3b812e9ee7336a6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_TO_DEMO_HANDOFF.json |
 | phase3_to_demo_handoff_md | True | 6406 | 3af6f4f1425693871fa767c81f520b4ea38519224a5064427d361094895a5999 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_TO_DEMO_HANDOFF.md |
-| script_artifact_verifier | True | 13656 | 3e6132c8d22ccbff2f9ea4044694a3ed48dbe207de6e7b0ecc4e5e20b3688aca | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\verify_phase3_experimental_artifacts.py |
-| script_completion_audit | True | 19212 | d5be5787459d77ad41a748ee0ef349f86c007195db9b00f29c8d3758a2a876cc | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_completion_audit.py |
+| script_artifact_verifier | True | 16600 | 2e19a50893f19b516fbb946acf766048ad03a397daf6d673f4f1aae88546e94f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\verify_phase3_experimental_artifacts.py |
+| script_completion_audit | True | 20191 | 119ef6a24a0dd81e63ac235bf8c1292811817de10c11552e623f19c5d0cabd2f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_completion_audit.py |
 | script_cost_gate_review | True | 12615 | 2a34b873ac58faac702ab7b423c2fc02d6b4d377bbe2e1147af1e7994cfeac21 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_cost_gate_review.py |
 | script_cost_mode_comparison | True | 7963 | 811341903c70125ac37875cc3a9a3dcd16b71a319498fca743981d3d25e625e4 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_cost_mode_comparison.py |
 | script_demo_handoff | True | 11510 | ac949181e429c05e5ed5ad2e12ef41defd1bad555c7a240b5bd3002fbaf553e3 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_to_demo_handoff.py |
@@ -199,5 +87,5 @@ M agent.md
 | script_shadow_lifecycle_experiment | True | 16600 | 870bf3e34c554beb2f2d0b945a8d35fc5d7a57607585966c9dbe503fd465bdf6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_shadow_lifecycle_experiment.py |
 | script_simulation | True | 24283 | d6f88b84457a38d4545a214f659d11125802229cb3ce81b8964045b37a615e1c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\simulate_phase3_from_would_signals.py |
 | script_status | True | 28048 | a319c9ebcec828efb8a9106d1147ccf9b3d0719a385937b018b1dd2bdb6013b2 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_status.py |
-| script_status_dashboard_freshness | True | 15859 | 5707d4beeec37443b987cacbeb6254bfcc0ba60be57500aa0b300b1c85540d02 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\verify_status_dashboard_freshness.py |
+| script_status_dashboard_freshness | True | 18470 | f0e6fda5afb7c92ee1f759904012a31109db9b620b97d71e7f2782dcd8531360 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\verify_status_dashboard_freshness.py |
 | script_suspend_family_decision | True | 7827 | 523c1b56a92de426f8e53e4cf0ea175f29841efd8ad16f5d117af1505a9a463f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_suspend_family_decision.py |

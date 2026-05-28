@@ -1,0 +1,187 @@
+{
+  "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
+  "created_at_utc": "2026-05-28T18:17:22.950720Z",
+  "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "phase3_repo_complete": true,
+  "phase1_acceptance": "PENDING",
+  "phase2_readiness": "PENDING",
+  "phase3_completion_status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
+  "phase3_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+  "can_start_demo_now": false,
+  "can_start_real_paper_shadow_branch": false,
+  "demo_authorized": false,
+  "paper_mode_authorized": false,
+  "broker_action_code_allowed": false,
+  "mt5_runtime_touched": false,
+  "rehearsal_can_start_real_demo": false,
+  "wait_gates": [
+    {
+      "gate": "Active-market 72-hour soak",
+      "status": "PENDING",
+      "current": 30.42,
+      "required": 72.0,
+      "remaining": 41.58,
+      "unit": "hours"
+    },
+    {
+      "gate": "Process/code-freeze 96-hour gate",
+      "status": "PENDING",
+      "current": 31.53,
+      "required": 96.0,
+      "remaining": 64.47,
+      "unit": "hours"
+    },
+    {
+      "gate": "Measured cost model",
+      "status": "PENDING",
+      "current": 2.0,
+      "required": 5.0,
+      "remaining": 3.0,
+      "unit": "fresh_market_days"
+    }
+  ],
+  "owner_actions": [
+    {
+      "gate": "VPS selection",
+      "status": "PENDING",
+      "action": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
+    },
+    {
+      "gate": "VPS latency evidence",
+      "status": "PENDING",
+      "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
+    },
+    {
+      "gate": "VPS first-day verification",
+      "status": "PENDING",
+      "action": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
+    },
+    {
+      "gate": "Project owner approval",
+      "status": "PENDING",
+      "action": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS."
+    }
+  ],
+  "owner_approval_readiness": {
+    "status": "NOT_READY_TO_SIGN",
+    "pending_objective_gate_count": 10,
+    "pending_objective_gates": [
+      {
+        "gate": "VPS selection",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "VPS latency evidence",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "VPS first-day verification",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured cost model",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured-cost revalidation",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured-cost assumption delta",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Phase 1 acceptance",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Phase 1 review index",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Active-market 72-hour soak",
+        "status": "PENDING",
+        "evidence": "Longest active streak 53.92h; current active streak 30.42h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      },
+      {
+        "gate": "Process/code-freeze 96-hour gate",
+        "status": "PENDING",
+        "evidence": "Process uptime streak 31.53h; code-freeze 31.53h; required 96h; marker 2026-05-27T10:41:50Z."
+      }
+    ],
+    "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."
+  },
+  "reusable_phase3_outputs": [
+    {
+      "item": "cost-aware blocking design",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_COST_GATE_REVIEW.md",
+      "exists": "true"
+    },
+    {
+      "item": "same-family de-duplication",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_FAMILY_DEDUP_AUDIT.md",
+      "exists": "true"
+    },
+    {
+      "item": "keep-suspended decisions",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_DECISION.md",
+      "exists": "true"
+    },
+    {
+      "item": "paper-shadow lifecycle shape",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_PAPER_SHADOW_SUMMARY.md",
+      "exists": "true"
+    },
+    {
+      "item": "guarded lifecycle controls",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
+      "exists": "true"
+    },
+    {
+      "item": "demo rehearsal sequence",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+      "exists": "true"
+    },
+    {
+      "item": "real implementation prompt",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+      "exists": "true"
+    }
+  ],
+  "must_not_reuse_as_authority": [
+    "PHASE3_EXPERIMENTAL_STATUS.md",
+    "PHASE3_COMPLETION_AUDIT.md",
+    "PHASE3_DEMO_REHEARSAL_CHECKLIST.md"
+  ],
+  "pre_branch_commands": [
+    "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files",
+    "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\verify_phase2_transition_artifacts.py --root . --repo-root ..\\.. --status-path ..\\..\\status.html",
+    "..\\xauusd-phase0\\.venv\\Scripts\\python.exe ..\\xauusd-phase3-experimental\\scripts\\verify_phase3_experimental_artifacts.py --phase3-root ..\\xauusd-phase3-experimental --repo-root ..\\.."
+  ],
+  "first_real_branch_rules": [
+    "Start from docs/PHASE3_REAL_IMPLEMENTATION_PROMPT.md only after Phase 2 readiness PASS and owner approval.",
+    "Implement paper-shadow only; do not implement broker-side execution.",
+    "Consume the Phase 1 decision stream and approved Phase 2 paper ledger schema.",
+    "Apply cost-aware blocks, same-family de-duplication, and keep-suspended family decisions.",
+    "Keep same-family variants observer-only unless a later owner-approved gate changes that."
+  ],
+  "forbidden_until_later_phase": [
+    "OrderSend",
+    "OrderSendAsync",
+    "CTrade",
+    "trade.Buy",
+    "trade.Sell",
+    "PositionOpen",
+    "PositionModify",
+    "PositionClose",
+    "live capital behavior"
+  ]
+}
