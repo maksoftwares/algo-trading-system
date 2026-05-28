@@ -40,13 +40,21 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     owner_live_path = report_dir / "PHASE2_OWNER_APPROVAL.md"
 
     countdown = _read_json(countdown_path)
-    owner_actions = _owner_actions(countdown)
     wait_gates = _wait_gates(countdown)
+    readiness_gates = _read_gate_table(readiness_path)
+    owner_actions = _owner_actions(countdown, readiness_gates)
     readiness_status = _read_markdown_status(readiness_path) or "UNKNOWN"
     preflight_status = _read_markdown_status(preflight_path) or "UNKNOWN"
-    first_day_status = _read_markdown_status(first_day_path) or "UNKNOWN"
-    vps_matrix_status = _read_markdown_status(vps_matrix_path) or "UNKNOWN"
-    owner_live_status = _read_markdown_status(owner_live_path) if owner_live_path.exists() else "MISSING"
+    first_day_status = (
+        _gate_status(readiness_gates, "VPS first-day verification")
+        or _read_markdown_status(first_day_path)
+        or "UNKNOWN"
+    )
+    vps_matrix_status = _gate_status(readiness_gates, "VPS selection") or _read_markdown_status(vps_matrix_path) or "UNKNOWN"
+    vps_latency_status = _gate_status(readiness_gates, "VPS latency evidence") or "UNKNOWN"
+    owner_live_status = _gate_status(readiness_gates, "Project owner approval") or (
+        _read_markdown_status(owner_live_path) if owner_live_path.exists() else "MISSING"
+    )
 
     checklist = _build_owner_checklist(
         root=root,
@@ -65,6 +73,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         "phase2_readiness_status": readiness_status,
         "phase2_demo_preflight_status": preflight_status,
         "vps_selection_status": vps_matrix_status,
+        "vps_latency_status": vps_latency_status,
         "vps_first_day_verification_status": first_day_status,
         "owner_approval_status": owner_live_status,
         "paper_mode_authorized": False,
@@ -182,9 +191,22 @@ def _commands() -> dict[str, str]:
     }
 
 
-def _owner_actions(countdown: dict[str, Any]) -> list[dict[str, Any]]:
+def _owner_actions(countdown: dict[str, Any], readiness_gates: list[dict[str, str]]) -> list[dict[str, Any]]:
     value = countdown.get("owner_actions_now")
-    return value if isinstance(value, list) else []
+    if isinstance(value, list) and value:
+        return value
+    actions = []
+    action_text = {
+        "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
+        "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
+        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence.",
+        "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
+    }
+    for gate, action in action_text.items():
+        status = _gate_status(readiness_gates, gate)
+        if status and status != "PASS":
+            actions.append({"gate": gate, "status": status, "action": action})
+    return actions
 
 
 def _wait_gates(countdown: dict[str, Any]) -> list[dict[str, Any]]:
@@ -204,6 +226,30 @@ def _read_markdown_status(path: Path) -> str:
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
         if line.startswith("Overall status:") or line.startswith("Status:"):
             return line.split(":", 1)[1].strip()
+    return ""
+
+
+def _read_gate_table(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    in_gates = False
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("## "):
+            in_gates = line.strip() == "## Gates"
+            continue
+        if not in_gates or not line.startswith("| ") or line.startswith("| ---") or line.startswith("| Gate |"):
+            continue
+        parts = [part.strip() for part in line.strip("|").split("|")]
+        if len(parts) >= 3:
+            rows.append({"Gate": parts[0], "Status": parts[1], "Evidence": parts[2]})
+    return rows
+
+
+def _gate_status(gates: list[dict[str, str]], gate: str) -> str:
+    for row in gates:
+        if row.get("Gate") == gate:
+            return row.get("Status", "")
     return ""
 
 
@@ -232,6 +278,7 @@ def _render_markdown(payload: dict[str, Any]) -> str:
                     ("Phase 2 readiness", str(payload["phase2_readiness_status"])),
                     ("Phase 2 demo preflight", str(payload["phase2_demo_preflight_status"])),
                     ("VPS selection", str(payload["vps_selection_status"])),
+                    ("VPS latency", str(payload["vps_latency_status"])),
                     ("VPS first-day verification", str(payload["vps_first_day_verification_status"])),
                     ("Owner approval", str(payload["owner_approval_status"])),
                 ]

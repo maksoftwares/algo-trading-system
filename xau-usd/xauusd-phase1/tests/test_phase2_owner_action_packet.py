@@ -60,6 +60,35 @@ def test_owner_action_packet_ready_for_approval_when_wait_and_owner_actions_clea
     assert output.status == "READY_FOR_OWNER_APPROVAL_REVIEW"
 
 
+def test_owner_action_packet_prefers_readiness_gate_over_document_status(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    report_dir = root / "outputs" / "reports"
+    docs = root / "docs"
+    report_dir.mkdir(parents=True)
+    docs.mkdir(parents=True)
+    _write_countdown(
+        report_dir / "PHASE2_DEMO_COUNTDOWN.json",
+        owner_actions=[],
+        wait_status="PASS",
+        countdown_status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL",
+    )
+    _write_readiness_with_vps_gate(report_dir / "PHASE2_READINESS_REPORT.md", vps_selection_status="PENDING")
+    _write_status(report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md", "PENDING")
+    _write_status(report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md", "PASS")
+    _write_status(docs / "PHASE2_VPS_SELECTION_MATRIX.md", "PASS")
+
+    output = module.generate_phase2_owner_action_packet(root)
+
+    payload = json.loads(output.json_path.read_text(encoding="utf-8"))
+    assert payload["vps_selection_status"] == "PENDING"
+    assert any(item["gate"] == "VPS selection" and item["status"] == "PENDING" for item in payload["owner_actions_now"])
+    assert any(
+        item["title"] == "Select VPS provider, region, and plan" and item["status"] == "PENDING"
+        for item in payload["owner_checklist"]
+    )
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -76,6 +105,29 @@ def _load_module():
 
 def _write_status(path: Path, status: str) -> None:
     path.write_text(f"# Report\n\nOverall status: {status}\n", encoding="utf-8")
+
+
+def _write_readiness_with_vps_gate(path: Path, vps_selection_status: str) -> None:
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Readiness Report",
+                "",
+                "Overall status: PENDING",
+                "",
+                "## Gates",
+                "",
+                "| Gate | Status | Evidence |",
+                "| --- | --- | --- |",
+                f"| VPS selection | {vps_selection_status} | readiness gate evidence |",
+                "| VPS latency evidence | PASS | latency captured |",
+                "| VPS first-day verification | PASS | first day verified |",
+                "| Project owner approval | PENDING | approval missing |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def _write_countdown(
