@@ -91,6 +91,6 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
 | Phase 3 repo complete | True |
 | Demo authorized | False |
-| External blockers | 10 |
+| External blockers | 11 |
 | Manifest status | PASS |
-| Manifest commit | f8d0122 |
+| Manifest commit | dafb475 |

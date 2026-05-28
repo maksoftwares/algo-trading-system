@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-28T15:45:09.774233Z",
+  "created_at_utc": "2026-05-28T15:47:27.877989Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -305,16 +305,16 @@
   },
   "completion_audit": {
     "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-    "created_at_utc": "2026-05-28T13:10:43.545712Z",
+    "created_at_utc": "2026-05-28T15:45:09.778630Z",
     "phase3_repo_complete": true,
     "demo_authorized": false,
     "remaining_phase3_repo_items": 0,
-    "external_blocker_count": 10
+    "external_blocker_count": 11
   },
   "manifest": {
     "status": "PASS",
-    "commit_short": "f8d0122",
-    "created_at_utc": "2026-05-28T15:03:18.632037Z"
+    "commit_short": "dafb475",
+    "created_at_utc": "2026-05-28T15:47:27.747427Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",
