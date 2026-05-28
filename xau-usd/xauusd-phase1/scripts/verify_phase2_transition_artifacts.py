@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -92,8 +93,8 @@ def _compare_json(label: str, committed_path: Path, generated_path: Path) -> lis
 
 
 def _compare_text(label: str, committed_path: Path, generated_path: Path) -> list[str]:
-    committed = _normalize_newlines(committed_path.read_text(encoding="utf-8"))
-    generated = _normalize_newlines(generated_path.read_text(encoding="utf-8"))
+    committed = _normalize_text(committed_path.read_text(encoding="utf-8"))
+    generated = _normalize_text(generated_path.read_text(encoding="utf-8"))
     if committed == generated:
         return []
     return [f"{label} is stale relative to canonical inputs; regenerate and commit it."]
@@ -193,11 +194,14 @@ def _normalize_json(value: Any) -> Any:
         return {key: _normalize_json(item) for key, item in value.items() if key != "created_at_utc"}
     if isinstance(value, list):
         return [_normalize_json(item) for item in value]
+    if isinstance(value, str):
+        return _normalize_text(value)
     return value
 
 
-def _normalize_newlines(value: str) -> str:
-    return value.replace("\r\n", "\n").replace("\r", "\n")
+def _normalize_text(value: str) -> str:
+    normalized = value.replace("\r\n", "\n").replace("\r", "\n").replace("\\", "/")
+    return re.sub(r"(?:[A-Za-z]:/|/)[^`|\n]*?(xau-usd/)", r"<repo>/\1", normalized)
 
 
 def main(argv: list[str] | None = None) -> int:

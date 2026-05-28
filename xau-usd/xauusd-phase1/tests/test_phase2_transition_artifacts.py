@@ -27,6 +27,74 @@ def test_phase2_transition_artifact_verifier_ignores_generated_timestamps(tmp_pa
     assert module._compare_json("sample", committed, generated) == []
 
 
+def test_phase2_transition_artifact_verifier_normalizes_machine_local_paths(tmp_path: Path):
+    module = _load_module()
+    committed = tmp_path / "committed.json"
+    generated = tmp_path / "generated.json"
+    committed.write_text(
+        json.dumps(
+            {
+                "source_reports": {
+                    "readiness": (
+                        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\"
+                        "xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md"
+                    )
+                },
+                "evidence": (
+                    "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\"
+                    "xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md` status is PENDING."
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+    generated.write_text(
+        json.dumps(
+            {
+                "source_reports": {
+                    "readiness": (
+                        "/home/runner/work/algo-trading-system/algo-trading-system/"
+                        "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"
+                    )
+                },
+                "evidence": (
+                    "`/home/runner/work/algo-trading-system/algo-trading-system/"
+                    "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md` status is PENDING."
+                ),
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert module._compare_json("sample", committed, generated) == []
+
+
+def test_phase2_transition_artifact_verifier_normalizes_machine_local_markdown_paths(tmp_path: Path):
+    module = _load_module()
+    committed = tmp_path / "committed.md"
+    generated = tmp_path / "generated.md"
+    committed.write_text(
+        (
+            "| Gate | Evidence |\n"
+            "| --- | --- |\n"
+            "| Readiness | `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\"
+            "xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md` status is PENDING. |\n"
+        ),
+        encoding="utf-8",
+    )
+    generated.write_text(
+        (
+            "| Gate | Evidence |\n"
+            "| --- | --- |\n"
+            "| Readiness | `/home/runner/work/algo-trading-system/algo-trading-system/"
+            "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md` status is PENDING. |\n"
+        ),
+        encoding="utf-8",
+    )
+
+    assert module._compare_text("sample.md", committed, generated) == []
+
+
 def test_phase2_transition_artifact_verifier_detects_stale_payload(tmp_path: Path):
     module = _load_module()
     committed = tmp_path / "committed.json"
