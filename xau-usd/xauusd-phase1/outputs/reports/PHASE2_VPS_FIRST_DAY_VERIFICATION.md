@@ -14,7 +14,7 @@ Overall status: PENDING
 
 | name | status | evidence |
 | --- | --- | --- |
-| repo_commit_hash | PASS | Repository commit hash captured: e6584147cc63425e35058e4fa4655b16f1c757df. |
+| repo_commit_hash | PASS | Repository commit hash captured: 0b9c32f1cbcec1f4e8b189e96294fa6e565506fa. |
 | mt5_terminal_path | PASS | MT5 terminal path exists. `C:\MT5PortableGoldMission\terminal64.exe`. |
 | mt5_data_path | PASS | MT5 data path exists. `C:\MT5PortableGoldMission`. |
 | compile_log | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` shows 0 errors, 0 warnings. |

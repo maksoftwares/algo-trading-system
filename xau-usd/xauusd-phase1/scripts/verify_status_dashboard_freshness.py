@@ -19,6 +19,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "measured_cost": phase0_reports / "MEASURED_COST_MODEL.md",
         "phase2_demo_countdown": phase1_reports / "PHASE2_DEMO_COUNTDOWN.json",
         "phase2_demo_preflight": phase1_reports / "PHASE2_DEMO_PREFLIGHT.json",
+        "phase2_vps_bootstrap": phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json",
         "phase2_readiness": phase1_reports / "PHASE2_READINESS_REPORT.md",
         "phase3_status": phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
     }
@@ -35,6 +36,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase3_status = _read_json(canonical_paths["phase3_status"])
     phase2_countdown = _read_json(canonical_paths["phase2_demo_countdown"])
     phase2_preflight = _read_json(canonical_paths["phase2_demo_preflight"])
+    phase2_bootstrap = _read_json(canonical_paths["phase2_vps_bootstrap"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])
     phase2_status = _markdown_status(canonical_paths["phase2_readiness"])
 
@@ -46,6 +48,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase3_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     phase3_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
     phase3_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
+    bootstrap_source_status = _mapping(phase2_bootstrap.get("source_status"))
     median_net_by_mode = _mapping(phase3_cost_modes.get("median_net_after_proxy_by_mode"))
     suspend_count_by_mode = _mapping(phase3_cost_modes.get("suspend_family_count_by_mode"))
     core_expectations = {
@@ -62,6 +65,12 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "demo preflight implementation authorization": str(
             phase2_preflight.get("paper_mode_implementation_authorized", "")
         ).lower(),
+        "vps bootstrap status": phase2_bootstrap.get("status"),
+        "vps bootstrap demo authorization": str(phase2_bootstrap.get("demo_trading_authorized", "")).lower(),
+        "vps bootstrap selection status": bootstrap_source_status.get("vps_selection"),
+        "vps bootstrap latency status": bootstrap_source_status.get("vps_latency"),
+        "vps bootstrap first-day status": bootstrap_source_status.get("vps_first_day_verification"),
+        "vps bootstrap owner approval status": bootstrap_source_status.get("project_owner_approval"),
         "demo countdown paper authorization": str(phase2_countdown.get("paper_mode_authorized", "")).lower(),
         "demo countdown broker execution authorization": str(
             phase2_countdown.get("broker_execution_authorized", "")
@@ -100,6 +109,12 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
             core_expectations[f"demo wait gate {gate}"] = gate
         if wait_gate.get("remaining") not in {None, ""}:
             core_expectations[f"demo wait gate {gate} remaining"] = wait_gate.get("remaining")
+    for phase in phase2_bootstrap.get("bootstrap_phases", []):
+        if not isinstance(phase, dict):
+            continue
+        name = phase.get("phase")
+        if name:
+            core_expectations[f"vps bootstrap phase {name}"] = name
     for label, value in core_expectations.items():
         if value is None or value == "":
             continue

@@ -172,6 +172,7 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
     _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    _write_phase2_bootstrap(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -187,11 +188,16 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
     )
     _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json", pending_gate_count=123)
     _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json", status="RECHECK_REQUIRED")
+    _write_phase2_bootstrap(
+        phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json",
+        status="VPS_BOOTSTRAP_ACTION_REQUIRED",
+    )
     errors = freshness.verify_status_dashboard_freshness(repo, output.output_path)
     assert any("status.html is missing soak observed days: 2.5" in error for error in errors)
     assert any("status.html is missing soak progress pct: 50.00%" in error for error in errors)
     assert any("status.html is missing demo countdown pending gate count: 123" in error for error in errors)
     assert any("status.html is missing demo preflight status: RECHECK_REQUIRED" in error for error in errors)
+    assert any("status.html is missing vps bootstrap status: VPS_BOOTSTRAP_ACTION_REQUIRED" in error for error in errors)
 
 
 def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_content_matches(tmp_path: Path):
@@ -211,6 +217,7 @@ def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_conten
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
     _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    _write_phase2_bootstrap(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -242,6 +249,7 @@ def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "FAIL")
     _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    _write_phase2_bootstrap(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
     (phase0_reports / "PHASE0_VERDICT.md").write_text(
         "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
         encoding="utf-8",
@@ -408,11 +416,11 @@ def _write_phase2_preflight(path: Path, status: str = "PENDING") -> None:
     )
 
 
-def _write_phase2_bootstrap(path: Path) -> None:
+def _write_phase2_bootstrap(path: Path, status: str = "WAITING_AND_VPS_BOOTSTRAP_PENDING") -> None:
     path.write_text(
         json.dumps(
             {
-                "status": "WAITING_AND_VPS_BOOTSTRAP_PENDING",
+                "status": status,
                 "demo_trading_authorized": False,
                 "source_status": {
                     "vps_selection": "PENDING",

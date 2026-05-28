@@ -36,7 +36,7 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 summary health | PASS | Core summary checks are PASS in `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`. |
 | Five trading day soak | PASS | Progress 100.00%; observed 6.1424 of 5.00 required days. |
 | Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 26.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 27.73h; code-freeze 27.73h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 27.80h; code-freeze 27.80h; required 96h; marker 2026-05-27T10:41:50Z. |
 | Latest dry-run boundary | PASS | bar_time=2026.05.28 14:25:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
 | Would-signal evidence | PASS | Rows: 118; clusters: 118. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |

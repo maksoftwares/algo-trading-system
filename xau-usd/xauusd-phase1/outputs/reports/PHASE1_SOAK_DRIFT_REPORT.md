@@ -13,7 +13,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | permission_state | PASS | All rows kept permission false. |
 | lifecycle_rows | PASS | Startup rows: 3; shutdown rows: 14. |
 | per_run_bar_cadence | PASS | phase1-dry-run-v0.6: 4 expected market-break gap(s); phase1-dry-run-v0.7: 1 expected market-break gap(s) |
-| latest_row_freshness | PASS | Latest row age is 0.7 minute(s); limit 15. |
+| latest_row_freshness | PASS | Latest row age is 4.9 minute(s); limit 15. |
 | server_time_status | PASS | Latest row reports CLOCK_OK; historical non-CLOCK_OK rows: 1. |
 | breakout_retest_observer | PASS | Observed stage values: WAIT_CONFIRMATION, WAIT_LEVEL_BREAK_RETEST, WOULD_SIGNAL |
 
