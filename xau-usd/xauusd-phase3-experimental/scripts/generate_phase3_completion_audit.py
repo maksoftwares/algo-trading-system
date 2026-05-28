@@ -15,6 +15,7 @@ PHASE2_AUTHORITY_SENTENCE = (
 
 PHASE3_REPO_REQUIREMENTS = (
     ("scope_doc", "Experimental scope defines allowed work and hard boundaries."),
+    ("freeze_doc", "Experimental freeze note blocks new feature expansion until real gates pass or owner opens a new ticket."),
     ("simulation", "Offline ledger/simulation exists from Phase 1 would-signal evidence."),
     ("safety", "Phase 3 source safety audit passes with no broker-action findings."),
     ("family_dedup", "Family de-duplication/observer conflict audit is generated."),
@@ -88,6 +89,7 @@ def _evidence_paths(phase3_root: Path, repo_root: Path) -> dict[str, Path]:
     reports = phase3_root / "outputs" / "reports"
     return {
         "scope_doc": phase3_root / "docs" / "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "freeze_doc": phase3_root / "docs" / "PHASE3_EXPERIMENTAL_FREEZE.md",
         "simulation": reports / "PHASE3_EXPERIMENTAL_SIMULATION.md",
         "safety": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
         "family_dedup": reports / "PHASE3_FAMILY_DEDUP_AUDIT.md",

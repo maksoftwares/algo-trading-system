@@ -29,28 +29,19 @@ Last updated: 2026-05-28
   - Owner authorized a repo-only Phase 3 experimental lane that assumes Phase 2 may pass for design purposes only. This does not mark Phase 2 as passed and does not authorize paper-mode implementation or broker-side execution.
   - New isolated package: `xau-usd\xauusd-phase3-experimental`.
   - Boundary: no MT5 deployment, no restart, no live runtime changes, no broker-action code. The live Phase 1 dry-run and passive spread logger continue untouched.
-  - Review 11 hardening is implemented: Phase 3 CI workflow, committed fixture CSV, family-level observer de-duplication, explicit cost modes, safety report, source-hash manifest, and expanded tests.
-  - Current offline simulation consumed `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` and produced `89` raw observer events, `49` family-unique primary events, `40` observer duplicates, `0` observer conflicts, `2` rejected source rows, median proxy cost `0.2554R`, and median net-after-proxy-cost `0.2562R` under default `entry_exit_proxy` cost mode. Kill-rule counts: NORMAL `66`, COST_WATCH `3`, SUSPEND_FAMILY `20`.
-  - Current Phase 3 experimental status is `EXPERIMENTAL_COST_SUSPEND_SCENARIO`; this is design pressure only and has no authority over Phase 2 readiness.
-  - Phase 3 suspend-family review: `20` raw suspended rows collapse to `11` unique primary family events and `9` duplicate observer rows. Diagnosis counts: `tight_stop_cost_dominates=7`, `wide_spread_plus_entry_exit_cost=9`, `normal_spread_small_stop=4`. Median suspended cost is `0.4822R` versus the `0.3616R` max cost proxy before the +0.15R floor is breached.
-  - Phase 3 cost-mode comparison is generated: `entry_only_proxy` suspends `0` family events, `entry_exit_proxy` suspends `10`, `p95_fresh_proxy` suspends `24`, and `stress_2x_p95_proxy` suspends `44`. This confirms the family is strongly cost-mode sensitive in the offline experiment.
-  - Phase 3 cost-gate review is generated: proxy cost caps at `0.20R`, `0.25R`, `0.30R`, and `0.35R` would block `34`, `28`, `15`, and `13` family events respectively. Spread-regime buckets use current ledger median `50` points and P95 `75` points. Family kill-state summary is NORMAL `36`, COST_WATCH `2`, SUSPEND_FAMILY `11`.
-  - Phase 3 suspend-family rows now include reviewer annotation fields: `suggested_reviewer_annotation`, `manual_reviewer_annotation`, `manual_reviewer_notes`, `reviewer`, and `reviewed_at_utc`.
-  - Phase 3 suspend-family decision is generated: all `11` primary suspended family events are `KEEP_SUSPENDED` for future design. Future-rule counts: `REQUIRE_COST_R_AND_SPREAD_BLOCK=5`, `REQUIRE_TIGHT_STOP_COST_BLOCK=4`, `REQUIRE_MANUAL_REVIEW_BEFORE_PROMOTION=2`.
-  - Phase 3 family de-dup audit is generated: `49` family groups, `40` multi-row groups, and all current multi-row groups classify as `TRUE_DUPLICATE`. The current `symbol+bar_time` grouping does not collapse distinct same-bar levels in the latest would-signal artifact.
-  - Phase 3 completion audit is generated: `REPO_SIDE_COMPLETE_WAITING_REAL_GATES`, `phase3_repo_complete=true`, `demo_authorized=false`, `remaining_phase3_repo_items=0`, and `external_blocker_count=10`.
-  - Phase 3 review-ready docs are now present: promotion/rollback criteria, observer conflict playbook, real implementation prompt for future use, and expanded execution readiness design.
+  - Phase 3 repo-side work is complete and frozen. New feature expansion is blocked unless the owner opens a new experimental ticket or real Phase 2 gates pass with a separate implementation scope.
+  - Current changing Phase 3 metrics must be read from `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md` and `PHASE3_COMPLETION_AUDIT.md`, not from this handoff.
+  - Phase 3 review-ready docs are now present: freeze note, promotion/rollback criteria, observer conflict playbook, real implementation prompt for future use, and expanded execution readiness design.
   - Phase 3 review bundle generator is present; latest bundle path is `xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip`.
   - Exact authority rule for Phase 3 reports: `This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.`
-  - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, `PHASE3_EXPERIMENTAL_LEDGER.csv`, `PHASE3_SUSPEND_FAMILY_REVIEW.md`, `PHASE3_SUSPEND_FAMILY_ROWS.csv`, `PHASE3_SUSPEND_FAMILY_DECISION.md`, `PHASE3_COST_MODE_COMPARISON.md`, `PHASE3_COST_GATE_REVIEW.md`, `PHASE3_FAMILY_DEDUP_AUDIT.md`, `PHASE3_COMPLETION_AUDIT.md`, `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md`, and `PHASE3_EXPERIMENTAL_MANIFEST.md`.
+  - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, `PHASE3_EXPERIMENTAL_LEDGER.csv`, `PHASE3_SUSPEND_FAMILY_REVIEW.md`, `PHASE3_SUSPEND_FAMILY_ROWS.csv`, `PHASE3_SUSPEND_FAMILY_DECISION.md`, `PHASE3_COST_MODE_COMPARISON.md`, `PHASE3_COST_GATE_REVIEW.md`, `PHASE3_FAMILY_DEDUP_AUDIT.md`, `PHASE3_DEMO_REHEARSAL_CHECKLIST.md`, `PHASE3_DEMO_REHEARSAL_LEDGER.csv`, `PHASE3_COMPLETION_AUDIT.md`, `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md`, and `PHASE3_EXPERIMENTAL_MANIFEST.md`.
   - Phase 3 safety report is PASS with 0 findings. Manifest is PASS and records source/input/report hashes.
-  - Status dashboard now includes Phase 3 completion, family de-dup, cost-mode, cost-gate, safety, and manifest fields while still showing real Phase 2 as PENDING.
+  - Status dashboard now includes Phase 3 completion, family de-dup, cost-mode, cost-gate, demo rehearsal, safety, and manifest fields while still showing real Phase 2 as PENDING.
 - 2026-05-28 periodic readiness refresh:
-  - `run_phase1_periodic_checks.py` completed with `PASS` external health while keeping Phase 1 acceptance `PENDING`, Phase 2 readiness `PENDING`, and Phase 1 review index `PENDING`.
-  - Latest Phase 1 status summary: `859` decision rows, latest bar `2026.05.27 22:05:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`.
-  - Five trading-day wall-clock soak remains `PASS` at `5.4618/5.00` observed days. Active-market 72h gate remains `PENDING`: longest `53.92h/72h`, current `10.33h/72h`. Process/code-freeze remains `PENDING`: `11.39h/96h`.
-  - Measured-cost model remains `PENDING`: `14,953` authoritative fresh rows over `1/5` fresh observed market days, median fresh spread `50` points, P95 fresh spread `75` points, max fresh spread `180` points. Measured-cost revalidation remains `PENDING` until `MEASURED_COST_MODEL.md` reaches PASS and `cost_model_measured.csv` exists.
-  - Would-signal evidence now has `91` rows / `91` clusters. Observer conflict counts: BR-only `9`, SBR-only `0`, both same direction `41`, both opposite direction `0`.
+  - `run_phase1_periodic_checks.py` is the canonical refresh command for Phase 1/Phase 2 reports when manual refresh is needed.
+  - Current changing Phase 1 runtime, soak, and would-signal counters must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`, `PHASE1_ACCEPTANCE_REPORT.md`, and `PHASE1_REVIEW_INDEX.md`.
+  - Current changing measured-cost counters must be read from `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, and `MEASURED_COST_ASSUMPTION_DELTA.md`.
+  - Current Phase 2 readiness must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md`.
 - 2026-05-27 refresh:
   - Review instruction update implemented: Phase 1 source is now `phase1-dry-run-v0.7`, deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and restarted. The code-freeze marker was intentionally reset to `2026-05-27T10:41:50Z`.
   - Canonical cost lifecycle is now `COST_REVALIDATION_PENDING` while `MEASURED_COST_MODEL.md` is PENDING. `COST_SUSPENDED` is reserved only for an authoritative measured-cost revalidation FAIL after the fresh measured-cost model reaches PASS.
@@ -279,7 +270,7 @@ Last updated: 2026-05-28
 - Latest fixed-notional report: `xau-usd\xauusd-phase0\outputs\reports\FIXED_NOTIONAL_REPORT.md`.
 - Current fixed-notional summary for `breakout_retest`: 66,759 trades, net expectancy 0.1888R, mean all-in cost 0.3228R, and cost-edge consumption flagged ORANGE.
 - Measured cost model command: `phase0 generate-measured-cost-model --input-dir C:\MT5PortableSpreadLogger\MQL5\Files`.
-- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, status PENDING after filtering to authoritative `tick_fresh=true` rows; it currently has 1/5 fresh observed market days and 12,356 admitted fresh rows.
+- Latest measured cost model report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`. Read current row/day coverage directly from that report; it remains the source of truth after filtering to authoritative `tick_fresh=true` rows.
 - Measured-cost revalidation command: `phase0 generate-measured-cost-revalidation --expert breakout_retest`.
 - Latest measured-cost revalidation report: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, status PENDING until the fresh measured-cost model reaches PASS. The breakout-retest family lifecycle is `COST_REVALIDATION_PENDING`, not `COST_SUSPENDED`, unless authoritative revalidation later fails.
 - Review #3 response and action plan: `docs\REVIEW_03_REFLECTION_AND_ACTION_PLAN.md`. Phase 2 remains framed as a paper-mode cost-measurement experiment for one breakout-retest edge family, not a profit-confirmation phase.
@@ -289,7 +280,7 @@ Last updated: 2026-05-28
 - Latest Phase 1 soak history CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv`.
 - Soak history report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_soak_history_report.py`.
 - Latest Phase 1 soak history report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`.
-- Latest soak history has 153 rows, status WARN because the historical progress ledger includes expected schema/reset decreases, and is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
+- Latest soak-history row count and status should be read directly from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md`; the ledger is appended by the bundle generator, periodic check runner, plus the hourly soak automation.
 - Review index generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_review_index.py`.
 - Latest Phase 1 review index: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md`.
 - Latest review index status: PENDING, with all primary artifacts present and only final acceptance still pending.

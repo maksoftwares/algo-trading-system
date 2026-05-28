@@ -68,6 +68,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         / "reports"
         / "PHASE1_STATUS_SUMMARY.json",
         "phase3_scope_doc": phase3_root / "docs" / "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "phase3_freeze_doc": phase3_root / "docs" / "PHASE3_EXPERIMENTAL_FREEZE.md",
         "phase3_design_doc": phase3_root / "docs" / "PHASE3_EXECUTION_READINESS_DESIGN.md",
         "phase3_promotion_rollback_doc": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "phase3_observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",

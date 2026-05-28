@@ -176,6 +176,41 @@ def test_phase2_readiness_keeps_warn_summary_health_pending(tmp_path):
     assert any(item.gate == "Phase 1 summary health" and item.status == "PENDING" for item in output.items)
 
 
+def test_phase2_readiness_does_not_use_phase3_experimental_pass_as_gate_closure(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root)
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PENDING")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PENDING")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    (phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.md").write_text(
+        "# Phase 3\n\nOverall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES\n",
+        encoding="utf-8",
+    )
+    (phase3_reports / "PHASE3_COMPLETION_AUDIT.md").write_text(
+        "# Phase 3 Completion\n\nOverall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES\n\n"
+        "Phase 3 repo-side complete: true\n",
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
+
+    report = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "PENDING"
+    assert "PHASE3" not in report
+    assert "Phase 3" not in report
+    assert any(item.gate == "Measured cost model" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:

@@ -2,6 +2,8 @@
 
 This package is a repo-only experiment. It assumes Phase 2 might pass later, but it does not change the real project gate state.
 
+Phase 3 experimental work is now frozen as a repo-side complete design package. See `docs/PHASE3_EXPERIMENTAL_FREEZE.md`.
+
 ## Boundary
 
 - Real Phase 2 remains PENDING until the objective readiness reports pass.
@@ -34,6 +36,7 @@ The experiment lets us design and test Phase 3 concepts while Phase 2 evidence c
 - promotion/rollback criteria
 - observer conflict playbook
 - future implementation prompt
+- experimental freeze note
 - review bundle generation
 - source-hash manifests
 

@@ -2,13 +2,13 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
+Overall status: PENDING
 
 ## Decision
 
 | Field | Value |
 | --- | --- |
-| Phase 3 repo-side complete | True |
+| Phase 3 repo-side complete | False |
 | Demo/paper authorized | False |
 | Real Phase 1 acceptance | PENDING |
 | Real Phase 2 readiness | PENDING |
@@ -19,6 +19,7 @@ Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 | Requirement | Status | Detail | Evidence |
 | --- | --- | --- | --- |
 | Experimental scope defines allowed work and hard boundaries. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_SCOPE.md |
+| Experimental freeze note blocks new feature expansion until real gates pass or owner opens a new ticket. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_FREEZE.md |
 | Offline ledger/simulation exists from Phase 1 would-signal evidence. | PASS | accepted_events=108; status=EXPERIMENTAL_COST_SUSPEND_SCENARIO | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SIMULATION.md |
 | Phase 3 source safety audit passes with no broker-action findings. | PASS | safety=PASS; findings=0 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SAFETY_REPORT.md |
 | Family de-duplication/observer conflict audit is generated. | PASS | audit=REVIEW_READY; conflicts=0 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_FAMILY_DEDUP_AUDIT.md |
@@ -34,12 +35,14 @@ Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 | Observer conflict playbook is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md |
 | Future real-implementation prompt is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
 | Portable review bundle exists. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
-| Phase 3 manifest is a clean PASS snapshot. | PASS | manifest=PASS; clean=True | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
+| Phase 3 manifest is a clean PASS snapshot. | PENDING | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 | Root status dashboard is updated from Phase 3 status. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\status.html |
 
 ## Remaining Phase 3 Repo Items
 
-None. All repo-side Phase 3 experimental requirements are complete.
+| Requirement | Status | Detail | Evidence |
+| --- | --- | --- | --- |
+| Phase 3 manifest is a clean PASS snapshot. | PENDING | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 
 ## External Gates Still Blocking Demo
 

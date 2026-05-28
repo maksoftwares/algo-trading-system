@@ -591,6 +591,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     (phase3 / "docs").mkdir(parents=True)
     for name in [
         "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "PHASE3_EXPERIMENTAL_FREEZE.md",
         "PHASE3_EXECUTION_READINESS_DESIGN.md",
         "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
@@ -658,6 +659,7 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
     bundle_dir.mkdir(parents=True)
     for name in [
         "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "PHASE3_EXPERIMENTAL_FREEZE.md",
         "PHASE3_EXECUTION_READINESS_DESIGN.md",
         "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
@@ -853,6 +855,7 @@ def test_phase3_artifact_verifier_requires_reports_and_authority_sentence(tmp_pa
             path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
         else:
             path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
 
     assert module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo") == []
 
@@ -872,11 +875,8 @@ def test_phase3_artifact_verifier_can_require_clean_manifest(tmp_path: Path):
             path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
         else:
             path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
     manifest_json = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
-    manifest_json.write_text(
-        json.dumps({"status": "PASS", "working_tree_clean": True, "working_tree_short_status": ""}),
-        encoding="utf-8",
-    )
 
     assert module.verify_phase3_experimental_artifacts(
         phase3,
@@ -894,6 +894,28 @@ def test_phase3_artifact_verifier_can_require_clean_manifest(tmp_path: Path):
         require_clean_manifest=True,
     )
     assert any("status must be PASS" in error for error in errors)
+
+
+def test_phase3_artifact_verifier_detects_status_simulation_mismatch(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
+    status_json = reports / "PHASE3_EXPERIMENTAL_STATUS.json"
+    status = json.loads(status_json.read_text(encoding="utf-8"))
+    status["simulation"]["accepted_events"] = 999
+    status_json.write_text(json.dumps(status), encoding="utf-8")
+
+    errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
+
+    assert any("status/simulation mismatch for accepted_events" in error for error in errors)
 
 
 def _load_script(name: str):
@@ -978,3 +1000,70 @@ def _safe_row(
         "trade_permission": "false",
         "dry_run": "true",
     }
+
+
+def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None:
+    reports = phase3 / "outputs" / "reports"
+    simulation = {
+        "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+        "accepted_events": 3,
+        "raw_observer_event_count": 3,
+        "family_unique_event_count": 2,
+        "observer_duplicate_count": 1,
+        "observer_conflict_count": 0,
+        "rejected_source_rows": 0,
+        "cost_mode": "entry_exit_proxy",
+    }
+    status = {
+        "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+        "real_phase2_readiness": "PENDING",
+        "authorized_for_deployment": False,
+        "mt5_runtime_touched": False,
+        "broker_action_code_allowed": False,
+        "simulation": simulation,
+    }
+    safety = {"status": "PASS", "findings_count": 0}
+    rehearsal = {
+        "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+        "demo_authorized": False,
+        "can_start_real_demo": False,
+    }
+    completion = {
+        "repo_requirement_rows": [
+            {
+                "status": "PASS",
+                "evidence": str(reports / "PHASE3_EXPERIMENTAL_STATUS.md"),
+            }
+        ]
+    }
+    files = {}
+    manifest_tracked_names = [
+        *module.REQUIRED_ARTIFACTS,
+        *(name for name in module.REQUIRED_JSON_ARTIFACTS if name != "PHASE3_EXPERIMENTAL_MANIFEST.json"),
+    ]
+    for name in manifest_tracked_names:
+        path = reports / name
+        if not path.exists():
+            path.write_text("{}\n", encoding="utf-8")
+        files[name] = {
+            "exists": True,
+            "path": str(path),
+            "sha256": module._sha256(path),
+            "bytes": path.stat().st_size,
+        }
+    manifest = {
+        "status": "PASS",
+        "working_tree_clean": True,
+        "working_tree_short_status": "",
+        "files": files,
+    }
+    (reports / "PHASE3_EXPERIMENTAL_SIMULATION.json").write_text(json.dumps(simulation), encoding="utf-8")
+    (reports / "PHASE3_EXPERIMENTAL_STATUS.json").write_text(json.dumps(status), encoding="utf-8")
+    (reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json").write_text(json.dumps(safety), encoding="utf-8")
+    (reports / "PHASE3_DEMO_REHEARSAL_PLAN.json").write_text(json.dumps(rehearsal), encoding="utf-8")
+    (reports / "PHASE3_COMPLETION_AUDIT.json").write_text(json.dumps(completion), encoding="utf-8")
+    for name in manifest_tracked_names:
+        path = reports / name
+        files[name]["sha256"] = module._sha256(path)
+        files[name]["bytes"] = path.stat().st_size
+    (reports / "PHASE3_EXPERIMENTAL_MANIFEST.json").write_text(json.dumps(manifest), encoding="utf-8")

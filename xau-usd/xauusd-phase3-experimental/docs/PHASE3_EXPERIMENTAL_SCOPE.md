@@ -6,6 +6,8 @@ This document defines the experimental Phase 3 lane requested by the owner while
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
+The repo-side Phase 3 experiment is frozen after completion. New feature expansion is blocked unless the owner opens a new experimental ticket. Maintenance remains limited to bug fixes, report regeneration, consistency checks, and boundary documentation.
+
 ## Assumption
 
 For design purposes only, this sandbox assumes:
