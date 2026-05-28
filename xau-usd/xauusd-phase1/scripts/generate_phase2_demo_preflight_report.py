@@ -154,12 +154,32 @@ def _phase3_separation_check(phase3_status: dict[str, Any], path: Path) -> Prefl
     can_start = rehearsal.get("can_start_real_demo")
     demo_authorized = completion.get("demo_authorized")
     real_phase2 = phase3_status.get("real_phase2_readiness")
-    if can_start is False and demo_authorized is False and real_phase2 != "PASS":
+    unsafe_flags = {
+        "authorized_for_deployment": phase3_status.get("authorized_for_deployment"),
+        "broker_action_code_allowed": phase3_status.get("broker_action_code_allowed"),
+        "mt5_runtime_touched": phase3_status.get("mt5_runtime_touched"),
+    }
+    owner_flow = phase3_status.get("owner_approval_flow")
+    if (
+        can_start is False
+        and demo_authorized is False
+        and real_phase2 != "PASS"
+        and all(value is False for value in unsafe_flags.values())
+        and owner_flow == "excluded_from_real_phase2_phase3_approval_flow"
+    ):
         return PreflightCheck("phase3_separation", "PASS", f"`{path}` does not promote the side experiment into real demo.")
     return PreflightCheck(
         "phase3_separation",
         "FAIL",
-        f"`{path}` contains an unsafe Phase 3 promotion signal: can_start_real_demo={can_start}, demo_authorized={demo_authorized}, real_phase2_readiness={real_phase2}.",
+        (
+            f"`{path}` contains an unsafe Phase 3 promotion signal: "
+            f"can_start_real_demo={can_start}, demo_authorized={demo_authorized}, "
+            f"real_phase2_readiness={real_phase2}, "
+            f"authorized_for_deployment={unsafe_flags['authorized_for_deployment']}, "
+            f"broker_action_code_allowed={unsafe_flags['broker_action_code_allowed']}, "
+            f"mt5_runtime_touched={unsafe_flags['mt5_runtime_touched']}, "
+            f"owner_approval_flow={owner_flow}."
+        ),
     )
 
 

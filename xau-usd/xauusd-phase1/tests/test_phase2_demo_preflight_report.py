@@ -73,6 +73,27 @@ def test_phase2_demo_preflight_fails_on_unsafe_runtime_boundary(tmp_path: Path):
     assert any(check.name == "latest_runtime_boundary" and check.status == "FAIL" for check in output.checks)
 
 
+def test_phase2_demo_preflight_fails_on_phase3_promotion_leakage(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    reports = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
+    _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
+    _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_phase3_status(
+        phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
+        authorized_for_deployment=True,
+    )
+
+    output = module.generate_phase2_demo_preflight_report(root)
+
+    assert output.status == "FAIL"
+    assert any(check.name == "phase3_separation" and check.status == "FAIL" for check in output.checks)
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -143,11 +164,15 @@ def _write_summary(path: Path, permission: str = "false") -> None:
     )
 
 
-def _write_phase3_status(path: Path) -> None:
+def _write_phase3_status(path: Path, authorized_for_deployment: bool = False) -> None:
     path.write_text(
         json.dumps(
             {
                 "real_phase2_readiness": "PENDING",
+                "authorized_for_deployment": authorized_for_deployment,
+                "broker_action_code_allowed": False,
+                "mt5_runtime_touched": False,
+                "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
                 "demo_rehearsal": {"can_start_real_demo": False},
                 "completion_audit": {"demo_authorized": False},
             }
