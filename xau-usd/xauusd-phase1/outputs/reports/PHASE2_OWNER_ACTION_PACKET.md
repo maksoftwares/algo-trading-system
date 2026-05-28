@@ -28,8 +28,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 27.5 | 72.0 | 44.5 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 28.58 | 96.0 | 67.42 | hours |
+| Active-market 72-hour soak | PENDING | 27.67 | 72.0 | 44.33 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 28.79 | 96.0 | 67.21 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Checklist
