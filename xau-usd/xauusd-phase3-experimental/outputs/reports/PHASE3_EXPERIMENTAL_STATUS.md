@@ -71,4 +71,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo authorized | False |
 | External blockers | 10 |
 | Manifest status | PASS |
-| Manifest commit | 73873ed |
+| Manifest commit | f501c1e |

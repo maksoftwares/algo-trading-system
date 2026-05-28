@@ -1,10 +1,10 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T11:14:36.796412Z",
+  "created_at_utc": "2026-05-28T11:30:04.899579Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "73873ed5e22aa0219ed3178e70662dae3052b7b8",
-  "commit_short": "73873ed",
+  "commit_hash": "f501c1ee15b9fadc8b699047a05e70a945d4a361",
+  "commit_short": "f501c1e",
   "working_tree_clean": true,
   "working_tree_short_status": "",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
@@ -14,8 +14,8 @@
     "phase3_input_would_signals": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
       "exists": true,
-      "sha256": "51b117a6c3937cdbfbd2dd5eab6202803556a442d665b0c0d8fcd95de8f6ae27",
-      "bytes": 25276
+      "sha256": "2a91789bd7ba9d27df0aeda6f84b845f7993b449c250f7f29e0c021aefc17211",
+      "bytes": 30485
     },
     "phase3_simulation_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SIMULATION.json",
@@ -122,20 +122,20 @@
     "phase2_readiness_report": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
       "exists": true,
-      "sha256": "1bc87d902f27e8d2cb1af3416c50a7092cbd90235dafccffd02bcd127c6890e0",
-      "bytes": 6311
+      "sha256": "173c94d7d840e92d8e94c925c61279759406f8764ef4a4dc2163a56d0e65f2f3",
+      "bytes": 6314
     },
     "phase1_status_summary": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json",
       "exists": true,
-      "sha256": "40f1a825b97e1b8f73e19ad8a125f590f395ee29f76affbc06675b53caabbc26",
-      "bytes": 3187
+      "sha256": "d229c2e437f746c6b5dda493a4404ec01e4d496a4a074a2a330dac04eeb58b21",
+      "bytes": 3173
     },
     "phase3_scope_doc": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_EXPERIMENTAL_SCOPE.md",
       "exists": true,
-      "sha256": "c4a41f4fa586df6bf8ab859629768565cf233f35530d910109c4e8ea96bd0e77",
-      "bytes": 3954
+      "sha256": "7b5c9b31e9e3364df689a19511741952419c114bc4192edc1713791200ab696a",
+      "bytes": 4088
     },
     "phase3_design_doc": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_EXECUTION_READINESS_DESIGN.md",
@@ -164,14 +164,14 @@
     "phase3_review_bundle_latest_zip": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
       "exists": true,
-      "sha256": "94d34a062695572b524801be6db9d02e750e911ae69a0d0f5fa5770b4531f855",
-      "bytes": 51545
+      "sha256": "5d048396a20dc1f8c9559480b2bdf6ac753379f2078d4fa0d76083b4683b2d78",
+      "bytes": 55630
     },
     "phase3_review_bundle_latest_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json",
       "exists": true,
-      "sha256": "adcfdfd4d92164938320d06a0d4d2a01740c83937ee544f2fb14c0d83433d833",
-      "bytes": 4315
+      "sha256": "5281cb8552ca86c214e147f5d9153adc33c840f0d14dad0a6cd593201bfc03ee",
+      "bytes": 4557
     },
     "script_simulation": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\simulate_phase3_from_would_signals.py",
@@ -182,8 +182,8 @@
     "script_status": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_experimental_status.py",
       "exists": true,
-      "sha256": "4679dc93da536f0f49da1d73d52276fb51166c138b2eb78a1783f3cdf46c1e68",
-      "bytes": 16156
+      "sha256": "377b9f1048396921e2d571eeb40726d383b530f251a2f11d117cd766027ed0f4",
+      "bytes": 17502
     },
     "script_safety": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\audit_phase3_experimental_safety.py",
@@ -224,14 +224,14 @@
     "script_review_bundle": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_review_bundle.py",
       "exists": true,
-      "sha256": "d00a6bec9744f15074785c311d4322346004709a2e895e2292af04f958af58ad",
-      "bytes": 4462
+      "sha256": "bb78a5c589f6b837928dc8bb5cddc67b583b9220a8ed00804fc1f69cfa302088",
+      "bytes": 4564
     },
     "script_artifact_verifier": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\verify_phase3_experimental_artifacts.py",
       "exists": true,
-      "sha256": "333de63847dc4907e98bfd28a5bf85c8cb77e14660d15361247cba76bbcd25c6",
-      "bytes": 4093
+      "sha256": "1d3945b6b7732c8d79c7ba4c6dbf64ae147b06f8d2ccd918089c5f851cd0c2fb",
+      "bytes": 4127
     },
     "script_status_dashboard_freshness": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\verify_status_dashboard_freshness.py",
