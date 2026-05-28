@@ -1,0 +1,129 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import tempfile
+from pathlib import Path
+from typing import Any
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
+from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
+from verify_status_dashboard_freshness import verify_status_dashboard_freshness
+
+
+def verify_phase2_transition_artifacts(
+    root: Path,
+    repo_root: Path | None = None,
+    status_path: Path | None = None,
+) -> list[str]:
+    root = root.resolve()
+    repo_root = (repo_root or root.parents[1]).resolve()
+    status_path = (status_path or repo_root / "status.html").resolve()
+    report_dir = root / "outputs" / "reports"
+    errors: list[str] = []
+
+    expected_files = {
+        "demo preflight json": report_dir / "PHASE2_DEMO_PREFLIGHT.json",
+        "demo preflight markdown": report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md",
+        "owner action json": report_dir / "PHASE2_OWNER_ACTION_PACKET.json",
+        "owner action markdown": report_dir / "PHASE2_OWNER_ACTION_PACKET.md",
+    }
+    for label, path in expected_files.items():
+        if not path.exists():
+            errors.append(f"missing committed {label}: {path}")
+    if errors:
+        return errors
+
+    with tempfile.TemporaryDirectory(prefix="phase2-transition-verify-") as tmp:
+        tmp_dir = Path(tmp)
+        generated_preflight = generate_phase2_demo_preflight_report(
+            root,
+            tmp_dir / "PHASE2_DEMO_PREFLIGHT.json",
+        )
+        generated_owner = generate_phase2_owner_action_packet(
+            root,
+            tmp_dir / "PHASE2_OWNER_ACTION_PACKET.json",
+        )
+        errors.extend(
+            _compare_json(
+                "PHASE2_DEMO_PREFLIGHT.json",
+                expected_files["demo preflight json"],
+                generated_preflight.json_path,
+            )
+        )
+        errors.extend(
+            _compare_text(
+                "PHASE2_DEMO_PREFLIGHT_REPORT.md",
+                expected_files["demo preflight markdown"],
+                generated_preflight.markdown_path,
+            )
+        )
+        errors.extend(
+            _compare_json(
+                "PHASE2_OWNER_ACTION_PACKET.json",
+                expected_files["owner action json"],
+                generated_owner.json_path,
+            )
+        )
+        errors.extend(
+            _compare_text(
+                "PHASE2_OWNER_ACTION_PACKET.md",
+                expected_files["owner action markdown"],
+                generated_owner.markdown_path,
+            )
+        )
+
+    errors.extend(verify_status_dashboard_freshness(repo_root, status_path))
+    return errors
+
+
+def _compare_json(label: str, committed_path: Path, generated_path: Path) -> list[str]:
+    committed = _normalize_json(json.loads(committed_path.read_text(encoding="utf-8")))
+    generated = _normalize_json(json.loads(generated_path.read_text(encoding="utf-8")))
+    if committed == generated:
+        return []
+    return [f"{label} is stale relative to canonical inputs; regenerate and commit it."]
+
+
+def _compare_text(label: str, committed_path: Path, generated_path: Path) -> list[str]:
+    committed = _normalize_newlines(committed_path.read_text(encoding="utf-8"))
+    generated = _normalize_newlines(generated_path.read_text(encoding="utf-8"))
+    if committed == generated:
+        return []
+    return [f"{label} is stale relative to canonical inputs; regenerate and commit it."]
+
+
+def _normalize_json(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: _normalize_json(item) for key, item in value.items() if key != "created_at_utc"}
+    if isinstance(value, list):
+        return [_normalize_json(item) for item in value]
+    return value
+
+
+def _normalize_newlines(value: str) -> str:
+    return value.replace("\r\n", "\n").replace("\r", "\n")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Verify Phase 2 transition artifacts are fresh and non-authorizing.")
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[3])
+    parser.add_argument("--status-path", type=Path, default=None)
+    args = parser.parse_args(argv)
+    errors = verify_phase2_transition_artifacts(args.root, args.repo_root, args.status_path)
+    if errors:
+        for error in errors:
+            print(f"FAIL: {error}")
+        return 1
+    print("Phase 2 transition artifacts: PASS")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
