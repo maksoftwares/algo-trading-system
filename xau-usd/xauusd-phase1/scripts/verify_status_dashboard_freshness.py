@@ -41,6 +41,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase3_paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
     phase3_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     phase3_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
+    phase3_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
     median_net_by_mode = _mapping(phase3_cost_modes.get("median_net_after_proxy_by_mode"))
     suspend_count_by_mode = _mapping(phase3_cost_modes.get("suspend_family_count_by_mode"))
     core_expectations = {
@@ -68,6 +69,11 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "lifecycle guard status": phase3_guard.get("status"),
         "lifecycle guard open count": phase3_guard.get("guarded_open_count"),
         "lifecycle guard total net R": phase3_guard.get("guarded_total_net_r"),
+        "demo rehearsal status": phase3_rehearsal.get("status"),
+        "demo rehearsal event count": phase3_rehearsal.get("rehearsal_event_count"),
+        "demo rehearsal shadow opens": phase3_rehearsal.get("shadow_open_events"),
+        "demo rehearsal blocked events": phase3_rehearsal.get("blocked_events"),
+        "demo rehearsal can start real demo": phase3_rehearsal.get("can_start_real_demo"),
     }
     for label, value in core_expectations.items():
         if value is None or value == "":

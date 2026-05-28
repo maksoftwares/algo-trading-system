@@ -1,6 +1,6 @@
 {
   "status": "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
-  "created_at_utc": "2026-05-28T12:21:59.098218Z",
+  "created_at_utc": "2026-05-28T12:45:20.797758Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "side_experiment_only_no_mt5_touch_no_real_gate_promotion",
   "assumption": "assumes_phase2_pass_for_design_only",

@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "created_at_utc": "2026-05-28T12:23:41.333223Z",
+  "status": "DIRTY_WORKTREE",
+  "created_at_utc": "2026-05-28T12:45:21.259955Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "f39267b5faa27efac80d41de524f31553d353dad",
-  "commit_short": "f39267b",
-  "working_tree_clean": true,
-  "working_tree_short_status": "",
+  "commit_hash": "b8776ab982087fe66ea81b9bc3a9b2a8e3502d86",
+  "commit_short": "b8776ab",
+  "working_tree_clean": false,
+  "working_tree_short_status": "M .github/workflows/phase3_experimental.yml\n M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py\n M xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py\n M xau-usd/xauusd-phase1/tests/test_project_status_page.py\n M xau-usd/xauusd-phase3-experimental/README.md\n M xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py\n M xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py\n M xau-usd/xauusd-phase3-experimental/tests/test_phase3_experimental.py\n?? xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_demo_rehearsal_package.py",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
   "safety_status": "PASS",
   "manifest_scope": "phase3_review_release_snapshot",
@@ -20,19 +20,19 @@
     "phase3_simulation_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SIMULATION.json",
       "exists": true,
-      "sha256": "f950f7776d21f1ebc2a67f919af6fee88d1a102a5654a8cbd97fce4cd71902f0",
+      "sha256": "2d2b84dc609b8612acc119fd7782c65fcb57e91662842e02ef1c890272909396",
       "bytes": 2007
     },
     "phase3_safety_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
       "exists": true,
-      "sha256": "a85331c01ff530d9bc6d4d83c291cb9defb3486e0b9030a8737e5857ebc2b8b3",
+      "sha256": "9c38883702e3cac2c04c3c1cad277f0ac1decc9687293e4f887aa67eb6e16f40",
       "bytes": 664
     },
     "phase3_suspend_family_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_REVIEW.json",
       "exists": true,
-      "sha256": "9ca1a1571840e9d6f72bb159067159e4268103455f7e8da021d21709c42c513a",
+      "sha256": "d33fbc82358afad2c3444c818e76d01fd69bcbda14765b48883f4f083c224b55",
       "bytes": 2062
     },
     "phase3_suspend_family_md": {
@@ -50,7 +50,7 @@
     "phase3_suspend_family_decision_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_DECISION.json",
       "exists": true,
-      "sha256": "d0b8d59d7c0f187dcd76023962e2e9d14ab2114beb0b4821fae2b2e6bcbc90ec",
+      "sha256": "88b3c6814f1a8ac7a712ae21a34af15e75828236074ca433b6e3bc70cbb51faf",
       "bytes": 10147
     },
     "phase3_suspend_family_decision_md": {
@@ -68,7 +68,7 @@
     "phase3_cost_mode_comparison_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_COST_MODE_COMPARISON.json",
       "exists": true,
-      "sha256": "1036b59e2d20e5da1d37fbccd7261c4109517ed526e356f8f7a55243936b45f5",
+      "sha256": "e83c59384fdc008d0235cf6ab8f8918423da2c3004582c95c19b8cd15f0dcce1",
       "bytes": 3721
     },
     "phase3_cost_mode_comparison_md": {
@@ -86,7 +86,7 @@
     "phase3_cost_gate_review_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_COST_GATE_REVIEW.json",
       "exists": true,
-      "sha256": "aed5ab72892db0fcdf04df9743aa3422847292828766c65f273def070079c5c2",
+      "sha256": "156b36fd3809f0ef65f2be434c3864bcee1781bf5086f1cdcae09caf4e3ba818",
       "bytes": 8704
     },
     "phase3_cost_gate_review_md": {
@@ -104,7 +104,7 @@
     "phase3_family_dedup_audit_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_FAMILY_DEDUP_AUDIT.json",
       "exists": true,
-      "sha256": "1fad680c66b88c27ca0ce72ffbb6ba87193aded03c7e1dd1cfea76f11298465b",
+      "sha256": "a9b5ea40bdb49361b4802da49abfe1cc09a4b6844d141f9d82f89d87a4bc59b5",
       "bytes": 35827
     },
     "phase3_family_dedup_audit_md": {
@@ -122,7 +122,7 @@
     "phase3_paper_shadow_summary_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_PAPER_SHADOW_SUMMARY.json",
       "exists": true,
-      "sha256": "f473df80d39fe7eb6669d4a2a1036e8d98e8397525c0a14ff6d2338c373cb3d8",
+      "sha256": "c8423296c0bcf258d020105f69eaa96dc5829b79811f8cd3bd2c29121b6bad8f",
       "bytes": 1985
     },
     "phase3_paper_shadow_summary_md": {
@@ -140,7 +140,7 @@
     "phase3_shadow_lifecycle_summary_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SHADOW_LIFECYCLE_SUMMARY.json",
       "exists": true,
-      "sha256": "630b1e606780369677bc5589aec061108356b1c684f6ae4174709ce505a45df9",
+      "sha256": "11ecb6e5e3063a09f754f49fdf4e2054f90b9ad32955ff1a1ae1f41394ee4f89",
       "bytes": 2337
     },
     "phase3_shadow_lifecycle_summary_md": {
@@ -158,7 +158,7 @@
     "phase3_lifecycle_guard_summary_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
       "exists": true,
-      "sha256": "f95c96b172f31f8291d54f58e0227afff0b3e610d8bdc254e3127d78fa61ff3d",
+      "sha256": "162e541220e7e3a33f0dc52ae3450ba0d90e9768f0b02b340d2be8975b517f66",
       "bytes": 2350
     },
     "phase3_lifecycle_guard_summary_md": {
@@ -172,6 +172,24 @@
       "exists": true,
       "sha256": "1392cd8bd6a8d0195edab539db41bcd272af1d00ce2b8406bd43804a3029ca61",
       "bytes": 50392
+    },
+    "phase3_demo_rehearsal_plan_json": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_DEMO_REHEARSAL_PLAN.json",
+      "exists": true,
+      "sha256": "f9e4bc614adaa71b6e3fd0bc9eaab744f8aa9a4b7823e25f3808f1103d835608",
+      "bytes": 2307
+    },
+    "phase3_demo_rehearsal_checklist_md": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+      "exists": true,
+      "sha256": "f894f98217e8554b31fe8f1baee23a75fcf24059cf986ecefdc1f9c66cb62372",
+      "bytes": 3889
+    },
+    "phase3_demo_rehearsal_ledger_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+      "exists": true,
+      "sha256": "409a608f0ee084efad673405b33ad3527d2c4ac3c2f4c3c0caa7c783735eb589",
+      "bytes": 41329
     },
     "phase2_readiness_report": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
@@ -188,8 +206,8 @@
     "phase3_scope_doc": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_EXPERIMENTAL_SCOPE.md",
       "exists": true,
-      "sha256": "41e4c862a5364dde15c2dfb1ee31383debfbd49302390b093101603f719fcfc5",
-      "bytes": 4966
+      "sha256": "d21839ba5f03dd22259957c1b83a97959b9b9f2343c8057d7d6149b3999a669e",
+      "bytes": 5264
     },
     "phase3_design_doc": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_EXECUTION_READINESS_DESIGN.md",
@@ -218,13 +236,13 @@
     "phase3_review_bundle_latest_zip": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
       "exists": true,
-      "sha256": "9e9926ac13ea7458fd6fd46e72f35443eefd0e803266d214c76decc2f6931419",
-      "bytes": 86469
+      "sha256": "227ae02c3d049845dda355275c3da76a3e49c96e3a5f47c28ea35b21ef9c3775",
+      "bytes": 85945
     },
     "phase3_review_bundle_latest_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json",
       "exists": true,
-      "sha256": "f265adf320cd1e478af15dfcd92ef3faa5a54f25a676053ebe2d6397925048a2",
+      "sha256": "c2703ebd672a6b49d90deeb8b8b311628952fc5565e195d1cce6bbac13cf7135",
       "bytes": 5707
     },
     "script_simulation": {
@@ -236,8 +254,8 @@
     "script_status": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_experimental_status.py",
       "exists": true,
-      "sha256": "70e22ac7bdaec86e161e12ef71bdc3147ef15d77e9f554fe1ed38b84d45225eb",
-      "bytes": 24054
+      "sha256": "cf1b4df17e0ad9654f61b1c4805d3fb995848923c3e4ea32f906544440480287",
+      "bytes": 26407
     },
     "script_safety": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\audit_phase3_experimental_safety.py",
@@ -248,8 +266,8 @@
     "script_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_experimental_manifest.py",
       "exists": true,
-      "sha256": "f831bcf620228fe34d94c7533b5f443485020743e108f8618ccb1346791ea792",
-      "bytes": 11983
+      "sha256": "85d4d9d3fa57ddbe6f6c6d887229b1ea15f967c8e047fd0fd3403eb693898bf0",
+      "bytes": 12367
     },
     "script_cost_mode_comparison": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_cost_mode_comparison.py",
@@ -293,23 +311,29 @@
       "sha256": "b359ce26a1bda76e197ffe251712708651d6ae3e935bfce37cb260e75ab492b7",
       "bytes": 17046
     },
+    "script_demo_rehearsal_package": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_demo_rehearsal_package.py",
+      "exists": true,
+      "sha256": "16f0cfba480faa6aae77417c69dd6ee93ec62b4e5860c8af662ac4b4f1e263f6",
+      "bytes": 15833
+    },
     "script_review_bundle": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_review_bundle.py",
       "exists": true,
-      "sha256": "ac2cdddad8a7ea32731cba68ace434c1eae1996b974bb73b4664e25c9682a360",
-      "bytes": 5077
+      "sha256": "48999b06c2299c198ee3793ca563869a1dd84860e3de240345016401565c8e56",
+      "bytes": 5246
     },
     "script_artifact_verifier": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\verify_phase3_experimental_artifacts.py",
       "exists": true,
-      "sha256": "51c56da8f6bf21b6f49cba9c22a6297b98ebe6c447de749d8810456342f049ac",
-      "bytes": 4369
+      "sha256": "9c0a490c22ed3b429a389505bacefd8e95a8514b09fa67e441d402269aafec86",
+      "bytes": 4451
     },
     "script_status_dashboard_freshness": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\verify_status_dashboard_freshness.py",
       "exists": true,
-      "sha256": "8c09dddb9cd8e9f1c8345fb3a5b3300e86a77aca85977fca143f599463ef4e11",
-      "bytes": 6522
+      "sha256": "31b1d03c91561533afed98b0fac255d5e3f57d58dd17d8d7bf147d9d285ad9e7",
+      "bytes": 6996
     }
   }
 }

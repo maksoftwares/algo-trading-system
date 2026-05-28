@@ -52,6 +52,9 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_lifecycle_guard_summary_json": reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
         "phase3_lifecycle_guard_summary_md": reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
         "phase3_lifecycle_guard_ledger_csv": reports / "PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+        "phase3_demo_rehearsal_plan_json": reports / "PHASE3_DEMO_REHEARSAL_PLAN.json",
+        "phase3_demo_rehearsal_checklist_md": reports / "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+        "phase3_demo_rehearsal_ledger_csv": reports / "PHASE3_DEMO_REHEARSAL_LEDGER.csv",
         "phase2_readiness_report": repo_root
         / "xau-usd"
         / "xauusd-phase1"
@@ -88,6 +91,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_paper_shadow_experiment": phase3_root / "scripts" / "generate_phase3_paper_shadow_experiment.py",
         "script_shadow_lifecycle_experiment": phase3_root / "scripts" / "generate_phase3_shadow_lifecycle_experiment.py",
         "script_lifecycle_guard_experiment": phase3_root / "scripts" / "generate_phase3_lifecycle_guard_experiment.py",
+        "script_demo_rehearsal_package": phase3_root / "scripts" / "generate_phase3_demo_rehearsal_package.py",
         "script_review_bundle": phase3_root / "scripts" / "generate_phase3_review_bundle.py",
         "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
         "script_status_dashboard_freshness": repo_root

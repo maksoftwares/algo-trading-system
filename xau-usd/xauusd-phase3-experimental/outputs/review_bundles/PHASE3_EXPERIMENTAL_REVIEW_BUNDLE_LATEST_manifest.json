@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T12:23:41.758206Z",
+  "created_at_utc": "2026-05-28T12:45:21.647565Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
   "latest_bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
@@ -8,12 +8,12 @@
     {
       "path": "README.md",
       "exists": true,
-      "bytes": 6344
+      "bytes": 6710
     },
     {
       "path": "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
       "exists": true,
-      "bytes": 4966
+      "bytes": 5264
     },
     {
       "path": "docs/PHASE3_EXECUTION_READINESS_DESIGN.md",
@@ -38,12 +38,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md",
       "exists": true,
-      "bytes": 3403
+      "bytes": 3601
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json",
       "exists": true,
-      "bytes": 11316
+      "bytes": 12319
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md",
@@ -181,14 +181,29 @@
       "bytes": 50392
     },
     {
+      "path": "outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+      "exists": true,
+      "bytes": 3889
+    },
+    {
+      "path": "outputs/reports/PHASE3_DEMO_REHEARSAL_PLAN.json",
+      "exists": true,
+      "bytes": 2307
+    },
+    {
+      "path": "outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+      "exists": true,
+      "bytes": 41329
+    },
+    {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.md",
       "exists": true,
-      "bytes": 7321
+      "bytes": 7896
     },
     {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.json",
       "exists": true,
-      "bytes": 10048
+      "bytes": 10878
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
@@ -203,12 +218,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md",
       "exists": true,
-      "bytes": 13577
+      "bytes": 16500
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json",
       "exists": true,
-      "bytes": 17850
+      "bytes": 21108
     }
   ]
 }

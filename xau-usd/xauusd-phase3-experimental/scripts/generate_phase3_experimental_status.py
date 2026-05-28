@@ -29,6 +29,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     paper_shadow = _read_json(reports / "PHASE3_PAPER_SHADOW_SUMMARY.json")
     shadow_lifecycle = _read_json(reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.json")
     lifecycle_guard = _read_json(reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json")
+    demo_rehearsal = _read_json(reports / "PHASE3_DEMO_REHEARSAL_PLAN.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -64,6 +65,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "paper_shadow_experiment": _paper_shadow_summary(paper_shadow),
         "shadow_lifecycle_experiment": _shadow_lifecycle_summary(shadow_lifecycle),
         "lifecycle_guard_experiment": _lifecycle_guard_summary(lifecycle_guard),
+        "demo_rehearsal": _demo_rehearsal_summary(demo_rehearsal),
         "completion_audit": _completion_audit_summary(completion_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
@@ -77,6 +79,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
             "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
             "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
             "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
+            "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
         ],
         "docs": [
             "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
@@ -101,6 +104,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     paper_shadow = _mapping(status.get("paper_shadow_experiment"))
     shadow_lifecycle = _mapping(status.get("shadow_lifecycle_experiment"))
     lifecycle_guard = _mapping(status.get("lifecycle_guard_experiment"))
+    demo_rehearsal = _mapping(status.get("demo_rehearsal"))
     completion_audit = _mapping(status.get("completion_audit"))
     manifest = _mapping(status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -199,6 +203,11 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Lifecycle guard max DD R", str(lifecycle_guard.get("guarded_max_drawdown_r", "UNKNOWN"))),
                     ("Lifecycle guard net improvement R", str(lifecycle_guard.get("net_improvement_r", "UNKNOWN"))),
                     ("Lifecycle guard DD improvement R", str(lifecycle_guard.get("drawdown_improvement_r", "UNKNOWN"))),
+                    ("Demo rehearsal status", str(demo_rehearsal.get("status", "UNKNOWN"))),
+                    ("Demo rehearsal events", str(demo_rehearsal.get("rehearsal_event_count", "UNKNOWN"))),
+                    ("Demo rehearsal shadow opens", str(demo_rehearsal.get("shadow_open_events", "UNKNOWN"))),
+                    ("Demo rehearsal blocked", str(demo_rehearsal.get("blocked_events", "UNKNOWN"))),
+                    ("Demo rehearsal can start real demo", str(demo_rehearsal.get("can_start_real_demo", "UNKNOWN"))),
                     ("Completion audit", str(completion_audit.get("status", "UNKNOWN"))),
                     ("Phase 3 repo complete", str(completion_audit.get("phase3_repo_complete", "UNKNOWN"))),
                     ("Demo authorized", str(completion_audit.get("demo_authorized", "UNKNOWN"))),
@@ -391,6 +400,32 @@ def _lifecycle_guard_summary(summary: dict[str, object]) -> dict[str, object]:
         "guarded_win_rate_pct": summary.get("guarded_win_rate_pct", "UNKNOWN"),
         "guard_decision_counts": summary.get("guard_decision_counts", {}),
         "guard_block_reason_counts": summary.get("guard_block_reason_counts", {}),
+    }
+
+
+def _demo_rehearsal_summary(summary: dict[str, object]) -> dict[str, object]:
+    if not summary:
+        return {}
+    return {
+        "status": summary.get("status", "UNKNOWN"),
+        "created_at_utc": summary.get("created_at_utc", ""),
+        "real_phase2_readiness": summary.get("real_phase2_readiness", "UNKNOWN"),
+        "demo_authorized": summary.get("demo_authorized", "UNKNOWN"),
+        "can_start_real_demo": summary.get("can_start_real_demo", "UNKNOWN"),
+        "mt5_runtime_touched": summary.get("mt5_runtime_touched", "UNKNOWN"),
+        "broker_action_code_allowed": summary.get("broker_action_code_allowed", "UNKNOWN"),
+        "source_guard_rows": summary.get("source_guard_rows", "UNKNOWN"),
+        "rehearsal_event_count": summary.get("rehearsal_event_count", "UNKNOWN"),
+        "shadow_open_events": summary.get("shadow_open_events", "UNKNOWN"),
+        "shadow_close_events": summary.get("shadow_close_events", "UNKNOWN"),
+        "blocked_events": summary.get("blocked_events", "UNKNOWN"),
+        "blocked_cost_events": summary.get("blocked_cost_events", "UNKNOWN"),
+        "blocked_risk_events": summary.get("blocked_risk_events", "UNKNOWN"),
+        "no_exposure_events": summary.get("no_exposure_events", "UNKNOWN"),
+        "guarded_total_net_r": summary.get("guarded_total_net_r", "UNKNOWN"),
+        "guarded_max_drawdown_r": summary.get("guarded_max_drawdown_r", "UNKNOWN"),
+        "event_type_counts": summary.get("event_type_counts", {}),
+        "next_real_gate_needed": summary.get("next_real_gate_needed", ""),
     }
 
 

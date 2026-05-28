@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-28T12:23:41.661067Z",
+  "created_at_utc": "2026-05-28T12:45:21.528544Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -16,7 +16,7 @@
   "latest_phase1_trade_permission": "false",
   "simulation": {
     "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-    "created_at_utc": "2026-05-28T12:21:58.363938Z",
+    "created_at_utc": "2026-05-28T12:45:20.160757Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
     "phase2_assumption": "assumes_phase2_pass_for_design_only",
@@ -62,7 +62,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-28T12:23:21.714411Z",
+    "created_at_utc": "2026-05-28T12:45:20.243779Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -84,7 +84,7 @@
   },
   "suspend_family_review": {
     "status": "REVIEW_READY",
-    "created_at_utc": "2026-05-28T12:21:58.569590Z",
+    "created_at_utc": "2026-05-28T12:45:20.314080Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
     "raw_ledger_rows": 108,
@@ -142,7 +142,7 @@
   },
   "suspend_family_decision": {
     "status": "REVIEW_READY_KEEP_SUSPENDED",
-    "created_at_utc": "2026-05-28T12:21:58.654968Z",
+    "created_at_utc": "2026-05-28T12:45:20.402412Z",
     "primary_suspend_rows": 12,
     "unique_family_events": 12,
     "keep_suspended_primary_rows": 12,
@@ -177,7 +177,7 @@
   },
   "cost_gate_review": {
     "status": "REVIEW_READY",
-    "created_at_utc": "2026-05-28T12:21:58.872017Z",
+    "created_at_utc": "2026-05-28T12:45:20.618460Z",
     "threshold_count": 4,
     "threshold_0_25_family_unique_events": 30,
     "stop_bucket_count": 4,
@@ -201,7 +201,7 @@
   },
   "paper_shadow_experiment": {
     "status": "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
-    "created_at_utc": "2026-05-28T12:21:59.098218Z",
+    "created_at_utc": "2026-05-28T12:45:20.797758Z",
     "real_phase2_readiness": "PENDING",
     "demo_authorized": false,
     "source_ledger_rows": 108,
@@ -217,7 +217,7 @@
   },
   "shadow_lifecycle_experiment": {
     "status": "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
-    "created_at_utc": "2026-05-28T12:21:59.203646Z",
+    "created_at_utc": "2026-05-28T12:45:20.891693Z",
     "demo_authorized": false,
     "source_shadow_rows": 108,
     "synthetic_open_count": 49,
@@ -247,7 +247,7 @@
   },
   "lifecycle_guard_experiment": {
     "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
-    "created_at_utc": "2026-05-28T12:22:47.184893Z",
+    "created_at_utc": "2026-05-28T12:45:20.978334Z",
     "demo_authorized": false,
     "baseline_open_count": 49,
     "guarded_open_count": 3,
@@ -276,18 +276,45 @@
       "proxy_cost_r_at_or_above_0_30": 3
     }
   },
-  "completion_audit": {
-    "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-    "created_at_utc": "2026-05-28T12:23:41.588235Z",
-    "phase3_repo_complete": true,
+  "demo_rehearsal": {
+    "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+    "created_at_utc": "2026-05-28T12:45:21.077371Z",
+    "real_phase2_readiness": "PENDING",
     "demo_authorized": false,
-    "remaining_phase3_repo_items": 0,
+    "can_start_real_demo": false,
+    "mt5_runtime_touched": false,
+    "broker_action_code_allowed": false,
+    "source_guard_rows": 108,
+    "rehearsal_event_count": 111,
+    "shadow_open_events": 3,
+    "shadow_close_events": 3,
+    "blocked_events": 46,
+    "blocked_cost_events": 5,
+    "blocked_risk_events": 41,
+    "no_exposure_events": 59,
+    "guarded_total_net_r": -3.5803,
+    "guarded_max_drawdown_r": -3.5803,
+    "event_type_counts": {
+      "REHEARSAL_BLOCKED_COST": 5,
+      "REHEARSAL_BLOCKED_RISK": 41,
+      "REHEARSAL_NO_EXPOSURE": 59,
+      "REHEARSAL_SHADOW_CLOSE": 3,
+      "REHEARSAL_SHADOW_OPEN": 3
+    },
+    "next_real_gate_needed": "PHASE2_READINESS_REPORT.md PASS plus owner approval before any runtime deployment."
+  },
+  "completion_audit": {
+    "status": "PENDING",
+    "created_at_utc": "2026-05-28T12:45:21.468790Z",
+    "phase3_repo_complete": false,
+    "demo_authorized": false,
+    "remaining_phase3_repo_items": 1,
     "external_blocker_count": 10
   },
   "manifest": {
-    "status": "PASS",
-    "commit_short": "f39267b",
-    "created_at_utc": "2026-05-28T12:23:41.333223Z"
+    "status": "DIRTY_WORKTREE",
+    "commit_short": "b8776ab",
+    "created_at_utc": "2026-05-28T12:45:21.259955Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",
@@ -299,7 +326,8 @@
     "SIDE_EXPERIMENT_READY_FOR_PAPER_SHADOW_PROTOTYPE",
     "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
     "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
-    "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY"
+    "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
+    "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY"
   ],
   "docs": [
     "docs/PHASE3_EXPERIMENTAL_SCOPE.md",

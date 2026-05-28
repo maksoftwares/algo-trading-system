@@ -30,6 +30,7 @@ The experiment lets us design and test Phase 3 concepts while Phase 2 evidence c
 - paper-shadow side-experiment lifecycle rows
 - synthetic shadow-open lifecycle and risk-lock accounting
 - guarded lifecycle controller comparison
+- non-deploying demo rehearsal package
 - promotion/rollback criteria
 - observer conflict playbook
 - future implementation prompt
@@ -51,6 +52,7 @@ From this directory:
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_paper_shadow_experiment.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_shadow_lifecycle_experiment.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_lifecycle_guard_experiment.py
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_demo_rehearsal_package.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_status.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_manifest.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_status.py
@@ -90,6 +92,8 @@ Important generated outputs:
 | `PHASE3_SHADOW_LIFECYCLE_LEDGER.csv` | Synthetic lifecycle rows with close reasons, net R, drawdown, and risk-lock states. |
 | `PHASE3_LIFECYCLE_GUARD_SUMMARY.md` | Guarded controller comparison that blocks cost-watch, high-cost, and risk-locked synthetic exposure. |
 | `PHASE3_LIFECYCLE_GUARD_LEDGER.csv` | Guarded lifecycle rows with block reasons, running equity, and daily/portfolio lock states. |
+| `PHASE3_DEMO_REHEARSAL_CHECKLIST.md` | Non-deploying demo rehearsal checklist that keeps real authorization false. |
+| `PHASE3_DEMO_REHEARSAL_LEDGER.csv` | Rehearsal sequence for shadow open/close, blocked, and no-exposure events. |
 | `PHASE3_COMPLETION_AUDIT.md` | Explicit repo-side completion audit and external gate list before demo/paper work. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |

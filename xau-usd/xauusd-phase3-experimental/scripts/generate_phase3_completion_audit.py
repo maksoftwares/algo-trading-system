@@ -25,6 +25,7 @@ PHASE3_REPO_REQUIREMENTS = (
     ("paper_shadow", "Paper-shadow side-experiment ledger and summary are generated without demo authorization."),
     ("shadow_lifecycle", "Synthetic shadow lifecycle ledger and summary are generated without demo authorization."),
     ("lifecycle_guard", "Guarded lifecycle controller comparison is generated without demo authorization."),
+    ("demo_rehearsal", "Demo rehearsal checklist and ledger are generated without demo authorization."),
     ("promotion_rollback", "Promotion and rollback criteria are documented."),
     ("observer_conflict_playbook", "Observer conflict playbook is documented."),
     ("future_prompt", "Future real-implementation prompt is documented."),
@@ -97,6 +98,7 @@ def _evidence_paths(phase3_root: Path, repo_root: Path) -> dict[str, Path]:
         "paper_shadow": reports / "PHASE3_PAPER_SHADOW_SUMMARY.md",
         "shadow_lifecycle": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
         "lifecycle_guard": reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
+        "demo_rehearsal": reports / "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
         "promotion_rollback": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
         "future_prompt": phase3_root / "docs" / "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
@@ -182,6 +184,21 @@ def _requirement_row(
             f"net_r={guard.get('guarded_total_net_r', 'UNKNOWN')}; "
             f"dd_r={guard.get('guarded_max_drawdown_r', 'UNKNOWN')}; "
             f"demo_authorized={guard.get('demo_authorized', 'UNKNOWN')}"
+        )
+    elif key == "demo_rehearsal":
+        rehearsal = _mapping(status.get("demo_rehearsal"))
+        gate_ok = (
+            gate_ok
+            and bool(rehearsal.get("rehearsal_event_count"))
+            and rehearsal.get("demo_authorized") is False
+            and rehearsal.get("can_start_real_demo") is False
+        )
+        detail = (
+            f"status={rehearsal.get('status', 'UNKNOWN')}; "
+            f"events={rehearsal.get('rehearsal_event_count', 'UNKNOWN')}; "
+            f"opens={rehearsal.get('shadow_open_events', 'UNKNOWN')}; "
+            f"blocked={rehearsal.get('blocked_events', 'UNKNOWN')}; "
+            f"can_start_real_demo={rehearsal.get('can_start_real_demo', 'UNKNOWN')}"
         )
     return {
         "key": key,

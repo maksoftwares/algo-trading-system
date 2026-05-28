@@ -83,12 +83,17 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Lifecycle guard status" in html
     assert "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY" in html
     assert "Lifecycle guard total net R" in html
+    assert "Demo rehearsal status" in html
+    assert "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY" in html
+    assert "Demo rehearsal can start real demo" in html
     assert "Phase 3 paper-shadow summary" in html
     assert "Phase 3 paper-shadow ledger" in html
     assert "Phase 3 shadow lifecycle summary" in html
     assert "Phase 3 shadow lifecycle ledger" in html
     assert "Phase 3 lifecycle guard summary" in html
     assert "Phase 3 lifecycle guard ledger" in html
+    assert "Phase 3 demo rehearsal checklist" in html
+    assert "Phase 3 demo rehearsal ledger" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
     assert "Cost viability map" in html
@@ -392,6 +397,13 @@ def _write_phase3_status(path: Path) -> None:
                     "guarded_max_drawdown_r": -1.25,
                     "net_improvement_r": 2.0,
                     "drawdown_improvement_r": 1.5,
+                },
+                "demo_rehearsal": {
+                    "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+                    "rehearsal_event_count": 12,
+                    "shadow_open_events": 4,
+                    "blocked_events": 3,
+                    "can_start_real_demo": False,
                 },
             }
         ),

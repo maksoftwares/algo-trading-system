@@ -1,6 +1,6 @@
 {
   "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
-  "created_at_utc": "2026-05-28T12:22:47.184893Z",
+  "created_at_utc": "2026-05-28T12:45:20.978334Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "side_experiment_only_guarded_lifecycle_no_mt5_touch_no_real_gate_promotion",
   "assumption": "assumes_phase2_pass_for_design_only_and_blocks_exposure_with_guard_rules",

@@ -1,0 +1,46 @@
+{
+  "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+  "created_at_utc": "2026-05-28T12:45:21.077371Z",
+  "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "boundary": "side_experiment_only_demo_rehearsal_no_mt5_touch_no_real_gate_promotion",
+  "assumption": "assumes_phase2_pass_for_design_only_and_builds_a_non_deploying_demo_rehearsal",
+  "real_phase2_readiness": "PENDING",
+  "demo_authorized": false,
+  "can_start_real_demo": false,
+  "mt5_runtime_touched": false,
+  "broker_action_code_allowed": false,
+  "blocker_override_mode": "side_experiment_only",
+  "guard_ledger": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+  "guard_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
+  "rehearsal_ledger": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+  "source_guard_rows": 108,
+  "rehearsal_event_count": 111,
+  "shadow_open_events": 3,
+  "shadow_close_events": 3,
+  "blocked_events": 46,
+  "blocked_cost_events": 5,
+  "blocked_risk_events": 41,
+  "no_exposure_events": 59,
+  "event_type_counts": {
+    "REHEARSAL_BLOCKED_COST": 5,
+    "REHEARSAL_BLOCKED_RISK": 41,
+    "REHEARSAL_NO_EXPOSURE": 59,
+    "REHEARSAL_SHADOW_CLOSE": 3,
+    "REHEARSAL_SHADOW_OPEN": 3
+  },
+  "guarded_open_count": 3,
+  "guarded_blocked_count": 46,
+  "guarded_total_net_r": -3.5803,
+  "guarded_max_drawdown_r": -3.5803,
+  "missing_real_authorizations": [
+    "real_phase2_readiness_pass",
+    "owner_demo_start_approval",
+    "separate_runtime_deployment_review"
+  ],
+  "next_real_gate_needed": "PHASE2_READINESS_REPORT.md PASS plus owner approval before any runtime deployment.",
+  "notes": [
+    "This is a non-deploying demo rehearsal plan, not a paper account action.",
+    "Every row preserves demo_authorized=false and can_start_real_demo=false.",
+    "The rehearsal packages the exact sequence reviewers should expect after real approval."
+  ]
+}

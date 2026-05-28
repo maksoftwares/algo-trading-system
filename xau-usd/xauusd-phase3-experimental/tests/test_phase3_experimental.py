@@ -278,6 +278,58 @@ def test_phase3_lifecycle_guard_blocks_cost_and_risk_exposure(tmp_path: Path):
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
 
 
+def test_phase3_demo_rehearsal_package_preserves_non_deployment_boundary(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    shadow_module = _load_script("generate_phase3_paper_shadow_experiment")
+    lifecycle_module = _load_script("generate_phase3_shadow_lifecycle_experiment")
+    guard_module = _load_script("generate_phase3_lifecycle_guard_experiment")
+    rehearsal_module = _load_script("generate_phase3_demo_rehearsal_package")
+    repo = tmp_path / "repo"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_reports.mkdir(parents=True)
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+    shadow_module.generate_paper_shadow_experiment(simulation.ledger_path, tmp_path / "reports", repo)
+    lifecycle_module.generate_shadow_lifecycle_experiment(
+        tmp_path / "reports" / "PHASE3_PAPER_SHADOW_LEDGER.csv",
+        tmp_path / "reports",
+    )
+    guard_module.generate_lifecycle_guard_experiment(
+        tmp_path / "reports" / "PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
+        tmp_path / "reports",
+    )
+
+    path = rehearsal_module.generate_demo_rehearsal_package(
+        tmp_path / "reports" / "PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+        tmp_path / "reports" / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
+        tmp_path / "reports",
+        repo,
+    )
+
+    summary = json.loads(path.read_text(encoding="utf-8"))
+    assert summary["status"] == "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY"
+    assert summary["demo_authorized"] is False
+    assert summary["can_start_real_demo"] is False
+    assert summary["mt5_runtime_touched"] is False
+    assert summary["broker_action_code_allowed"] is False
+    assert summary["real_phase2_readiness"] == "PENDING"
+    assert summary["shadow_open_events"] == 1
+    assert summary["shadow_close_events"] == 1
+    assert summary["blocked_events"] == 1
+    rows = list(csv.DictReader((tmp_path / "reports" / "PHASE3_DEMO_REHEARSAL_LEDGER.csv").open("r", encoding="utf-8")))
+    events_by_cluster = {}
+    for row in rows:
+        events_by_cluster.setdefault(row["source_cluster_id"], []).append(row["rehearsal_event_type"])
+        assert row["demo_authorized"] == "false"
+        assert row["can_start_real_demo"] == "false"
+    assert events_by_cluster["WS100"] == ["REHEARSAL_SHADOW_OPEN", "REHEARSAL_SHADOW_CLOSE"]
+    assert events_by_cluster["WS102"] == ["REHEARSAL_BLOCKED_COST"]
+    assert events_by_cluster["WS103"] == ["REHEARSAL_NO_EXPOSURE"]
+    report = (tmp_path / "reports" / "PHASE3_DEMO_REHEARSAL_CHECKLIST.md").read_text(encoding="utf-8")
+    assert "Demo Rehearsal Checklist" in report
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+
+
 def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
@@ -289,6 +341,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     shadow_module = _load_script("generate_phase3_paper_shadow_experiment")
     lifecycle_module = _load_script("generate_phase3_shadow_lifecycle_experiment")
     guard_module = _load_script("generate_phase3_lifecycle_guard_experiment")
+    rehearsal_module = _load_script("generate_phase3_demo_rehearsal_package")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     repo = tmp_path / "repo"
@@ -313,6 +366,12 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     guard_module.generate_lifecycle_guard_experiment(
         phase3 / "outputs" / "reports" / "PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
         phase3 / "outputs" / "reports",
+    )
+    rehearsal_module.generate_demo_rehearsal_package(
+        phase3 / "outputs" / "reports" / "PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+        phase3 / "outputs" / "reports" / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
+        phase3 / "outputs" / "reports",
+        repo,
     )
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
@@ -361,6 +420,10 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["lifecycle_guard_experiment"]["status"] == "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY"
     assert status["lifecycle_guard_experiment"]["guarded_open_count"] == 1
     assert status["lifecycle_guard_experiment"]["demo_authorized"] is False
+    assert status["demo_rehearsal"]["status"] == "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY"
+    assert status["demo_rehearsal"]["shadow_open_events"] == 1
+    assert status["demo_rehearsal"]["can_start_real_demo"] is False
+    assert status["demo_rehearsal"]["demo_authorized"] is False
     assert status["manifest"]["status"] == "PENDING"
     assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in (
@@ -516,6 +579,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     shadow_module = _load_script("generate_phase3_paper_shadow_experiment")
     lifecycle_module = _load_script("generate_phase3_shadow_lifecycle_experiment")
     guard_module = _load_script("generate_phase3_lifecycle_guard_experiment")
+    rehearsal_module = _load_script("generate_phase3_demo_rehearsal_package")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     completion_module = _load_script("generate_phase3_completion_audit")
@@ -550,6 +614,12 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
         phase3 / "outputs" / "reports" / "PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
         phase3 / "outputs" / "reports",
     )
+    rehearsal_module.generate_demo_rehearsal_package(
+        phase3 / "outputs" / "reports" / "PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+        phase3 / "outputs" / "reports" / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json",
+        phase3 / "outputs" / "reports",
+        repo,
+    )
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
     (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
     (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
@@ -571,6 +641,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     assert any(item["path"] == "outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.md" for item in manifest["files"])
     assert any(item["path"] == "outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.md" for item in manifest["files"])
     assert any(item["path"] == "outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.md" for item in manifest["files"])
+    assert any(item["path"] == "outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md" for item in manifest["files"])
 
 
 def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path: Path):
@@ -604,6 +675,7 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
         "PHASE3_PAPER_SHADOW_SUMMARY.md",
         "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
         "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
+        "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
         "PHASE3_EXPERIMENTAL_MANIFEST.md",
     ]:
         (reports / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
@@ -642,6 +714,14 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
                     "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
                     "guarded_open_count": 1,
                     "demo_authorized": False,
+                },
+                "demo_rehearsal": {
+                    "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+                    "rehearsal_event_count": 3,
+                    "shadow_open_events": 1,
+                    "blocked_events": 1,
+                    "demo_authorized": False,
+                    "can_start_real_demo": False,
                 },
             }
         ),

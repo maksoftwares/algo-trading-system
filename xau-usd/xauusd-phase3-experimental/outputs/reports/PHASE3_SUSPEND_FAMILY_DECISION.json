@@ -1,6 +1,6 @@
 {
   "status": "REVIEW_READY_KEEP_SUSPENDED",
-  "created_at_utc": "2026-05-28T12:21:58.654968Z",
+  "created_at_utc": "2026-05-28T12:45:20.402412Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "rows_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_ROWS.csv",
   "raw_suspend_rows": 22,

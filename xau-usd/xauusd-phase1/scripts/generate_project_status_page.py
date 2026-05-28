@@ -322,6 +322,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     phase3_paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
     phase3_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     phase3_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
+    phase3_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
     collect(phase3_simulation.get("created_at_utc"))
     collect(phase3_safety.get("created_at_utc"))
     collect(phase3_manifest.get("created_at_utc"))
@@ -332,6 +333,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     collect(phase3_paper_shadow.get("created_at_utc"))
     collect(phase3_lifecycle.get("created_at_utc"))
     collect(phase3_guard.get("created_at_utc"))
+    collect(phase3_rehearsal.get("created_at_utc"))
     if not candidates:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return max(candidates).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1444,6 +1446,8 @@ def _artifact_links() -> str:
         ("Phase 3 shadow lifecycle ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_LEDGER.csv"),
         ("Phase 3 lifecycle guard summary", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.md"),
         ("Phase 3 lifecycle guard ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_LEDGER.csv"),
+        ("Phase 3 demo rehearsal checklist", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md"),
+        ("Phase 3 demo rehearsal ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv"),
         ("Phase 3 completion audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COMPLETION_AUDIT.md"),
         ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
         ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
@@ -1496,6 +1500,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
     shadow_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     lifecycle_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
+    demo_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
     completion_audit = _mapping(phase3_status.get("completion_audit"))
     manifest = _mapping(phase3_status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -1552,6 +1557,11 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Lifecycle guard max DD R", _cell(lifecycle_guard.get("guarded_max_drawdown_r"))),
         ("Lifecycle guard net improvement R", _cell(lifecycle_guard.get("net_improvement_r"))),
         ("Lifecycle guard DD improvement R", _cell(lifecycle_guard.get("drawdown_improvement_r"))),
+        ("Demo rehearsal status", _cell(demo_rehearsal.get("status"))),
+        ("Demo rehearsal events", _cell(demo_rehearsal.get("rehearsal_event_count"))),
+        ("Demo rehearsal shadow opens", _cell(demo_rehearsal.get("shadow_open_events"))),
+        ("Demo rehearsal blocked", _cell(demo_rehearsal.get("blocked_events"))),
+        ("Demo rehearsal can start real demo", _cell(demo_rehearsal.get("can_start_real_demo"))),
         ("Completion audit", _cell(completion_audit.get("status"))),
         ("Phase 3 repo complete", _cell(completion_audit.get("phase3_repo_complete"))),
         ("Demo authorized", _cell(completion_audit.get("demo_authorized"))),

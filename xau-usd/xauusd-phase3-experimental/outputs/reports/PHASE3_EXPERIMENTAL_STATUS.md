@@ -83,9 +83,14 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Lifecycle guard max DD R | -3.5803 |
 | Lifecycle guard net improvement R | 7.1645 |
 | Lifecycle guard DD improvement R | 8.2192 |
-| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
-| Phase 3 repo complete | True |
+| Demo rehearsal status | SIDE_EXPERIMENT_DEMO_REHEARSAL_READY |
+| Demo rehearsal events | 111 |
+| Demo rehearsal shadow opens | 3 |
+| Demo rehearsal blocked | 46 |
+| Demo rehearsal can start real demo | False |
+| Completion audit | PENDING |
+| Phase 3 repo complete | False |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | PASS |
-| Manifest commit | f39267b |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | b8776ab |
