@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-27T22:06:12.496017Z",
+  "created_at_utc": "2026-05-28T10:11:34.299499Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -16,7 +16,7 @@
   "latest_phase1_trade_permission": "false",
   "simulation": {
     "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-    "created_at_utc": "2026-05-27T22:06:11.869143Z",
+    "created_at_utc": "2026-05-28T10:11:11.617036Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
     "phase2_assumption": "assumes_phase2_pass_for_design_only",
@@ -62,7 +62,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-27T22:06:11.944821Z",
+    "created_at_utc": "2026-05-28T10:11:21.786789Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -84,7 +84,7 @@
   },
   "suspend_family_review": {
     "status": "REVIEW_READY",
-    "created_at_utc": "2026-05-27T22:06:12.030976Z",
+    "created_at_utc": "2026-05-28T10:11:21.780137Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
     "raw_ledger_rows": 89,
@@ -108,6 +108,19 @@
       "tight_stop_cost_dominates": 7,
       "wide_spread_plus_entry_exit_cost": 9
     },
+    "suggested_annotation_counts": {
+      "COST_ISSUE": 5,
+      "DUPLICATED_OBSERVER_ISSUE": 9,
+      "TIGHT_STOP_ISSUE": 4,
+      "UNKNOWN": 2
+    },
+    "review_annotation_options": [
+      "COST_ISSUE",
+      "TIGHT_STOP_ISSUE",
+      "TIMING_ISSUE",
+      "DUPLICATED_OBSERVER_ISSUE",
+      "UNKNOWN"
+    ],
     "role_counts": {
       "OBSERVER_DUPLICATE": 9,
       "PRIMARY_EXECUTION_CANDIDATE": 11
@@ -132,6 +145,21 @@
     "mode_count": 4,
     "stress_suspend_family_unique_events": 46
   },
+  "cost_gate_review": {
+    "status": "REVIEW_READY",
+    "created_at_utc": "2026-05-28T10:11:21.790045Z",
+    "threshold_count": 4,
+    "threshold_0_25_family_unique_events": 28,
+    "stop_bucket_count": 4,
+    "spread_bucket_count": 3,
+    "spread_median_points": 50.0,
+    "spread_p95_points": 75.0,
+    "kill_state_counts": {
+      "COST_WATCH": 2,
+      "NORMAL": 36,
+      "SUSPEND_FAMILY": 11
+    }
+  },
   "family_dedup_audit": {
     "status": "REVIEW_READY",
     "family_group_count": 49,
@@ -142,8 +170,8 @@
   },
   "manifest": {
     "status": "DIRTY_WORKTREE",
-    "commit_short": "efad08c",
-    "created_at_utc": "2026-05-27T22:06:12.348967Z"
+    "commit_short": "10d18ef",
+    "created_at_utc": "2026-05-28T10:11:27.523265Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

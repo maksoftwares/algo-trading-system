@@ -52,7 +52,11 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Suspend primary rows | 11 |
 | Cost-mode comparison | REVIEW_READY |
 | Stress suspend family events | 46 |
+| Cost-gate review | REVIEW_READY |
+| Cost-gate 0.25R blocked families | 28 |
+| Spread P95 points | 75.0 |
+| Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 36, 'SUSPEND_FAMILY': 11} |
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 49} |
 | Manifest status | DIRTY_WORKTREE |
-| Manifest commit | efad08c |
+| Manifest commit | 10d18ef |

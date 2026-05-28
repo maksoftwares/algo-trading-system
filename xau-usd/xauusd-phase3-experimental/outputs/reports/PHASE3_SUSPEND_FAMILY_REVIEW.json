@@ -1,6 +1,6 @@
 {
   "status": "REVIEW_READY",
-  "created_at_utc": "2026-05-27T22:06:12.030976Z",
+  "created_at_utc": "2026-05-28T10:11:21.780137Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
   "raw_ledger_rows": 89,
@@ -24,6 +24,19 @@
     "tight_stop_cost_dominates": 7,
     "wide_spread_plus_entry_exit_cost": 9
   },
+  "suggested_annotation_counts": {
+    "COST_ISSUE": 5,
+    "DUPLICATED_OBSERVER_ISSUE": 9,
+    "TIGHT_STOP_ISSUE": 4,
+    "UNKNOWN": 2
+  },
+  "review_annotation_options": [
+    "COST_ISSUE",
+    "TIGHT_STOP_ISSUE",
+    "TIMING_ISSUE",
+    "DUPLICATED_OBSERVER_ISSUE",
+    "UNKNOWN"
+  ],
   "role_counts": {
     "OBSERVER_DUPLICATE": 9,
     "PRIMARY_EXECUTION_CANDIDATE": 11
