@@ -28,6 +28,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     completion_audit = _read_json(reports / "PHASE3_COMPLETION_AUDIT.json")
     paper_shadow = _read_json(reports / "PHASE3_PAPER_SHADOW_SUMMARY.json")
     shadow_lifecycle = _read_json(reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.json")
+    lifecycle_guard = _read_json(reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -62,6 +63,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "family_dedup_audit": _audit_summary(family_dedup_audit),
         "paper_shadow_experiment": _paper_shadow_summary(paper_shadow),
         "shadow_lifecycle_experiment": _shadow_lifecycle_summary(shadow_lifecycle),
+        "lifecycle_guard_experiment": _lifecycle_guard_summary(lifecycle_guard),
         "completion_audit": _completion_audit_summary(completion_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
@@ -74,6 +76,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
             "SIDE_EXPERIMENT_READY_FOR_PAPER_SHADOW_PROTOTYPE",
             "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
             "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
+            "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
         ],
         "docs": [
             "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
@@ -97,6 +100,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
     paper_shadow = _mapping(status.get("paper_shadow_experiment"))
     shadow_lifecycle = _mapping(status.get("shadow_lifecycle_experiment"))
+    lifecycle_guard = _mapping(status.get("lifecycle_guard_experiment"))
     completion_audit = _mapping(status.get("completion_audit"))
     manifest = _mapping(status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -189,6 +193,12 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Shadow lifecycle net R", str(shadow_lifecycle.get("synthetic_total_net_r", "UNKNOWN"))),
                     ("Shadow lifecycle max DD R", str(shadow_lifecycle.get("synthetic_max_drawdown_r", "UNKNOWN"))),
                     ("Shadow lifecycle risk locks", str(shadow_lifecycle.get("risk_lock_counts", "UNKNOWN"))),
+                    ("Lifecycle guard status", str(lifecycle_guard.get("status", "UNKNOWN"))),
+                    ("Lifecycle guard opens", str(lifecycle_guard.get("guarded_open_count", "UNKNOWN"))),
+                    ("Lifecycle guard net R", str(lifecycle_guard.get("guarded_total_net_r", "UNKNOWN"))),
+                    ("Lifecycle guard max DD R", str(lifecycle_guard.get("guarded_max_drawdown_r", "UNKNOWN"))),
+                    ("Lifecycle guard net improvement R", str(lifecycle_guard.get("net_improvement_r", "UNKNOWN"))),
+                    ("Lifecycle guard DD improvement R", str(lifecycle_guard.get("drawdown_improvement_r", "UNKNOWN"))),
                     ("Completion audit", str(completion_audit.get("status", "UNKNOWN"))),
                     ("Phase 3 repo complete", str(completion_audit.get("phase3_repo_complete", "UNKNOWN"))),
                     ("Demo authorized", str(completion_audit.get("demo_authorized", "UNKNOWN"))),
@@ -359,6 +369,28 @@ def _shadow_lifecycle_summary(summary: dict[str, object]) -> dict[str, object]:
         "synthetic_max_drawdown_r": summary.get("synthetic_max_drawdown_r", "UNKNOWN"),
         "risk_lock_counts": summary.get("risk_lock_counts", {}),
         "close_reason_counts": summary.get("close_reason_counts", {}),
+    }
+
+
+def _lifecycle_guard_summary(summary: dict[str, object]) -> dict[str, object]:
+    if not summary:
+        return {}
+    return {
+        "status": summary.get("status", "UNKNOWN"),
+        "created_at_utc": summary.get("created_at_utc", ""),
+        "demo_authorized": summary.get("demo_authorized", "UNKNOWN"),
+        "baseline_open_count": summary.get("baseline_open_count", "UNKNOWN"),
+        "guarded_open_count": summary.get("guarded_open_count", "UNKNOWN"),
+        "blocked_count": summary.get("blocked_count", "UNKNOWN"),
+        "baseline_total_net_r": summary.get("baseline_total_net_r", "UNKNOWN"),
+        "guarded_total_net_r": summary.get("guarded_total_net_r", "UNKNOWN"),
+        "net_improvement_r": summary.get("net_improvement_r", "UNKNOWN"),
+        "baseline_max_drawdown_r": summary.get("baseline_max_drawdown_r", "UNKNOWN"),
+        "guarded_max_drawdown_r": summary.get("guarded_max_drawdown_r", "UNKNOWN"),
+        "drawdown_improvement_r": summary.get("drawdown_improvement_r", "UNKNOWN"),
+        "guarded_win_rate_pct": summary.get("guarded_win_rate_pct", "UNKNOWN"),
+        "guard_decision_counts": summary.get("guard_decision_counts", {}),
+        "guard_block_reason_counts": summary.get("guard_block_reason_counts", {}),
     }
 
 

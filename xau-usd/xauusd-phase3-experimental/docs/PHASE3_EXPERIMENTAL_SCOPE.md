@@ -57,6 +57,8 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_PAPER_SHADOW_LEDGER.csv` | Offline paper-shadow rows showing eligible, cost-watch, blocked, duplicate, and conflict states. |
 | `PHASE3_SHADOW_LIFECYCLE_SUMMARY.md` | Synthetic post-open lifecycle summary for would-open rows; not a backtest or paper trading. |
 | `PHASE3_SHADOW_LIFECYCLE_LEDGER.csv` | Synthetic lifecycle rows with close reasons, net R, drawdown, and risk-lock states. |
+| `PHASE3_LIFECYCLE_GUARD_SUMMARY.md` | Guarded controller comparison that blocks cost-watch, high-cost, and risk-locked synthetic exposure. |
+| `PHASE3_LIFECYCLE_GUARD_LEDGER.csv` | Guarded lifecycle rows with block reasons, running equity, and daily/portfolio lock states. |
 | `PHASE3_COMPLETION_AUDIT.md` | Repo-side completion audit that separates finished Phase 3 prep from external demo/paper blockers. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
@@ -92,6 +94,7 @@ EXPERIMENTAL_BOUNDARY_FAIL
 EXPERIMENTAL_REVIEW_READY
 EXPERIMENTAL_ARCHIVED
 SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY
+SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY
 ```
 
 ## Non-Negotiable Boundary

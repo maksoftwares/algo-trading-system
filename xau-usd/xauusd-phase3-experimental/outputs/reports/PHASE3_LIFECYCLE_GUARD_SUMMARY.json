@@ -1,0 +1,51 @@
+{
+  "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
+  "created_at_utc": "2026-05-28T12:22:47.184893Z",
+  "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "boundary": "side_experiment_only_guarded_lifecycle_no_mt5_touch_no_real_gate_promotion",
+  "assumption": "assumes_phase2_pass_for_design_only_and_blocks_exposure_with_guard_rules",
+  "demo_authorized": false,
+  "mt5_runtime_touched": false,
+  "broker_action_code_allowed": false,
+  "blocker_override_mode": "side_experiment_only",
+  "max_proxy_cost_r": 0.3,
+  "daily_lock_r": -2.0,
+  "portfolio_drawdown_lock_r": -4.0,
+  "baseline_lifecycle_ledger": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
+  "guard_ledger": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
+  "baseline_open_count": 49,
+  "guarded_open_count": 3,
+  "blocked_count": 46,
+  "no_exposure_review_only_count": 59,
+  "baseline_total_net_r": -10.7448,
+  "guarded_total_net_r": -3.5803,
+  "net_improvement_r": 7.1645,
+  "baseline_max_drawdown_r": -11.7995,
+  "guarded_max_drawdown_r": -3.5803,
+  "drawdown_improvement_r": 8.2192,
+  "guarded_win_count": 0,
+  "guarded_loss_count": 3,
+  "guarded_win_rate_pct": 0.0,
+  "guarded_mean_net_r": -1.1934,
+  "guard_decision_counts": {
+    "BLOCKED_COST_R": 3,
+    "BLOCKED_COST_WATCH": 2,
+    "BLOCKED_DAILY_BUDGET": 20,
+    "BLOCKED_PORTFOLIO_BUDGET": 21,
+    "GUARDED_SYNTHETIC_OPEN": 3,
+    "NO_EXPOSURE_REVIEW_ONLY": 59
+  },
+  "guard_block_reason_counts": {
+    "baseline_no_exposure": 59,
+    "blank": 3,
+    "cost_watch_requires_review_before_exposure": 2,
+    "daily_worst_case_loss_budget_would_breach": 20,
+    "portfolio_worst_case_loss_budget_would_breach": 21,
+    "proxy_cost_r_at_or_above_0_30": 3
+  },
+  "notes": [
+    "This is a controller-design experiment, not a claim of live or paper profitability.",
+    "The guard layer improves the harsh synthetic lifecycle by refusing cost-watch, high-cost, and risk-locked exposure.",
+    "The real implementation path still requires separate authorization."
+  ]
+}

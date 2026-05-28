@@ -24,6 +24,7 @@ PHASE3_REPO_REQUIREMENTS = (
     ("suspend_decision", "Primary suspended family rows have explicit keep-suspended decisions."),
     ("paper_shadow", "Paper-shadow side-experiment ledger and summary are generated without demo authorization."),
     ("shadow_lifecycle", "Synthetic shadow lifecycle ledger and summary are generated without demo authorization."),
+    ("lifecycle_guard", "Guarded lifecycle controller comparison is generated without demo authorization."),
     ("promotion_rollback", "Promotion and rollback criteria are documented."),
     ("observer_conflict_playbook", "Observer conflict playbook is documented."),
     ("future_prompt", "Future real-implementation prompt is documented."),
@@ -95,6 +96,7 @@ def _evidence_paths(phase3_root: Path, repo_root: Path) -> dict[str, Path]:
         "suspend_decision": reports / "PHASE3_SUSPEND_FAMILY_DECISION.md",
         "paper_shadow": reports / "PHASE3_PAPER_SHADOW_SUMMARY.md",
         "shadow_lifecycle": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
+        "lifecycle_guard": reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
         "promotion_rollback": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
         "future_prompt": phase3_root / "docs" / "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
@@ -166,6 +168,20 @@ def _requirement_row(
             f"opens={lifecycle.get('synthetic_open_count', 'UNKNOWN')}; "
             f"net_r={lifecycle.get('synthetic_total_net_r', 'UNKNOWN')}; "
             f"demo_authorized={lifecycle.get('demo_authorized', 'UNKNOWN')}"
+        )
+    elif key == "lifecycle_guard":
+        guard = _mapping(status.get("lifecycle_guard_experiment"))
+        gate_ok = (
+            gate_ok
+            and bool(guard.get("guarded_open_count"))
+            and guard.get("demo_authorized") is False
+        )
+        detail = (
+            f"status={guard.get('status', 'UNKNOWN')}; "
+            f"opens={guard.get('guarded_open_count', 'UNKNOWN')}; "
+            f"net_r={guard.get('guarded_total_net_r', 'UNKNOWN')}; "
+            f"dd_r={guard.get('guarded_max_drawdown_r', 'UNKNOWN')}; "
+            f"demo_authorized={guard.get('demo_authorized', 'UNKNOWN')}"
         )
     return {
         "key": key,

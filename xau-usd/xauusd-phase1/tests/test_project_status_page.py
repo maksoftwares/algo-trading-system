@@ -80,10 +80,15 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Shadow lifecycle status" in html
     assert "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY" in html
     assert "Shadow lifecycle total net R" in html
+    assert "Lifecycle guard status" in html
+    assert "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY" in html
+    assert "Lifecycle guard total net R" in html
     assert "Phase 3 paper-shadow summary" in html
     assert "Phase 3 paper-shadow ledger" in html
     assert "Phase 3 shadow lifecycle summary" in html
     assert "Phase 3 shadow lifecycle ledger" in html
+    assert "Phase 3 lifecycle guard summary" in html
+    assert "Phase 3 lifecycle guard ledger" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
     assert "Cost viability map" in html
@@ -379,6 +384,14 @@ def _write_phase3_status(path: Path) -> None:
                     "synthetic_total_net_r": 1.25,
                     "synthetic_max_drawdown_r": -2.75,
                     "risk_lock_counts": {"NORMAL": 8},
+                },
+                "lifecycle_guard_experiment": {
+                    "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
+                    "guarded_open_count": 4,
+                    "guarded_total_net_r": 0.75,
+                    "guarded_max_drawdown_r": -1.25,
+                    "net_improvement_r": 2.0,
+                    "drawdown_improvement_r": 1.5,
                 },
             }
         ),

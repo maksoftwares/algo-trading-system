@@ -77,9 +77,15 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Shadow lifecycle net R | -10.7448 |
 | Shadow lifecycle max DD R | -11.7995 |
 | Shadow lifecycle risk locks | {'NORMAL': 28, 'SYNTHETIC_DAILY_LOCK': 75, 'SYNTHETIC_DEFENSIVE': 5} |
-| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
-| Phase 3 repo complete | True |
+| Lifecycle guard status | SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY |
+| Lifecycle guard opens | 3 |
+| Lifecycle guard net R | -3.5803 |
+| Lifecycle guard max DD R | -3.5803 |
+| Lifecycle guard net improvement R | 7.1645 |
+| Lifecycle guard DD improvement R | 8.2192 |
+| Completion audit | PENDING |
+| Phase 3 repo complete | False |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | PASS |
-| Manifest commit | 19e4925 |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | 8cc2b76 |
