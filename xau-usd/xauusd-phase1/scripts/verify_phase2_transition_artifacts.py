@@ -78,6 +78,7 @@ def verify_phase2_transition_artifacts(
             )
         )
 
+    errors.extend(_authorization_boundary_errors(root, repo_root))
     errors.extend(verify_status_dashboard_freshness(repo_root, status_path))
     return errors
 
@@ -96,6 +97,95 @@ def _compare_text(label: str, committed_path: Path, generated_path: Path) -> lis
     if committed == generated:
         return []
     return [f"{label} is stale relative to canonical inputs; regenerate and commit it."]
+
+
+def _authorization_boundary_errors(root: Path, repo_root: Path) -> list[str]:
+    report_dir = root / "outputs" / "reports"
+    phase3_status_path = repo_root / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_STATUS.json"
+    checks = [
+        (
+            "PHASE2_DEMO_PREFLIGHT.json",
+            report_dir / "PHASE2_DEMO_PREFLIGHT.json",
+            {
+                "demo_trading_authorized": False,
+                "live_trading_authorized": False,
+            },
+        ),
+        (
+            "PHASE2_OWNER_ACTION_PACKET.json",
+            report_dir / "PHASE2_OWNER_ACTION_PACKET.json",
+            {
+                "paper_mode_authorized": False,
+                "demo_trading_authorized": False,
+                "broker_execution_authorized": False,
+                "live_trading_authorized": False,
+            },
+        ),
+        (
+            "PHASE2_DEMO_COUNTDOWN.json",
+            report_dir / "PHASE2_DEMO_COUNTDOWN.json",
+            {
+                "paper_mode_authorized": False,
+                "broker_execution_authorized": False,
+                "live_trading_authorized": False,
+            },
+        ),
+        (
+            "PHASE2_VPS_BOOTSTRAP_PACKET.json",
+            report_dir / "PHASE2_VPS_BOOTSTRAP_PACKET.json",
+            {
+                "paper_mode_authorized": False,
+                "demo_trading_authorized": False,
+                "broker_execution_authorized": False,
+                "live_trading_authorized": False,
+            },
+        ),
+        (
+            "PHASE2_VPS_FIRST_DAY_VERIFICATION.json",
+            report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.json",
+            {
+                "phase2_paper_mode_authorized": False,
+                "demo_trading_authorized": False,
+                "live_trading_authorized": False,
+            },
+        ),
+        (
+            "PHASE3_EXPERIMENTAL_STATUS.json",
+            phase3_status_path,
+            {
+                "authorized_for_deployment": False,
+                "broker_action_code_allowed": False,
+                "mt5_runtime_touched": False,
+            },
+        ),
+    ]
+    errors: list[str] = []
+    for label, path, expected in checks:
+        if not path.exists():
+            errors.append(f"missing authorization-boundary artifact {label}: {path}")
+            continue
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        for key, expected_value in expected.items():
+            if payload.get(key) is not expected_value:
+                errors.append(f"{label} must keep {key}={expected_value!r}; found {payload.get(key)!r}.")
+
+    preflight = json.loads((report_dir / "PHASE2_DEMO_PREFLIGHT.json").read_text(encoding="utf-8"))
+    preflight_status = preflight.get("status")
+    preflight_paper = preflight.get("paper_mode_implementation_authorized")
+    if preflight_status != "PASS" and preflight_paper is not False:
+        errors.append(
+            "PHASE2_DEMO_PREFLIGHT.json must keep paper_mode_implementation_authorized=false unless status=PASS."
+        )
+    if preflight_status == "PASS" and preflight_paper is not True:
+        errors.append("PHASE2_DEMO_PREFLIGHT.json status=PASS must explicitly set paper_mode_implementation_authorized=true.")
+
+    phase3 = json.loads(phase3_status_path.read_text(encoding="utf-8"))
+    if phase3.get("owner_approval_flow") != "excluded_from_real_phase2_phase3_approval_flow":
+        errors.append(
+            "PHASE3_EXPERIMENTAL_STATUS.json must keep owner_approval_flow="
+            "excluded_from_real_phase2_phase3_approval_flow."
+        )
+    return errors
 
 
 def _normalize_json(value: Any) -> Any:
