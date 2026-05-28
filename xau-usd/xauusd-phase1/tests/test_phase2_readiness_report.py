@@ -125,6 +125,66 @@ def test_phase2_readiness_requires_vps_fields_in_owner_approval(tmp_path):
     )
 
 
+def test_phase2_readiness_rejects_placeholder_owner_approval_fields(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(
+        _approval_text().replace("selected_vps_provider: FXVM", "selected_vps_provider: Pending owner selection"),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "placeholder owner approval field" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_rejects_owner_approval_vps_mismatch(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(
+        _approval_text().replace("selected_vps_provider: FXVM", "selected_vps_provider: ForexVPS.net"),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "does not match owner approval" in item.evidence
+        for item in output.items
+    )
+
+
 def test_phase2_readiness_does_not_accept_placeholder_vps_selection_record(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"

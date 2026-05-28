@@ -49,6 +49,8 @@ Required values:
 - `minimum_net_expectancy_r` must be at least `0.15`
 - `single_edge_risk_ack`, `no_live_capital_ack`, and `measured_cost_ack` must be `true`
 - `selected_vps_provider`, `selected_vps_region`, `selected_vps_plan`, `selected_vps_monthly_cost`, and `latency_evidence_path` must be non-empty
+- approval fields must not contain placeholder values such as `Pending`, `TBD`, `TODO`, `unknown`, blank text, or angle-bracket placeholders
+- selected VPS provider, region, plan, monthly cost, and latency evidence path must match the completed `Decision Record` in `docs/PHASE2_VPS_SELECTION_MATRIX.md`
 
 ## Approved Scope Text
 

@@ -21,7 +21,7 @@ Overall status: PENDING
 | VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | VPS first-day verification | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS. |
 | demo_countdown | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` status is DEMO_NOT_READY with 11 pending gate(s). |
-| latest_runtime_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 14:05:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK. |
+| latest_runtime_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 14:10:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK. |
 | authority_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` keeps broker/live authorization false. |
 | phase3_separation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.json` does not promote the side experiment into real demo. |
 | phase1_safety_audit | PASS | Phase 1 safety audit found 0 forbidden broker-action findings. |

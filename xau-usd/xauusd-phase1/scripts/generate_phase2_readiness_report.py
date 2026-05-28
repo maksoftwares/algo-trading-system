@@ -176,7 +176,7 @@ def generate_phase2_readiness_report(
         _process_code_freeze_gate(soak),
         _latest_boundary_gate(latest),
         _would_signal_gate(would_signal),
-        _owner_approval_gate(owner_approval_path),
+        _owner_approval_gate(owner_approval_path, root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
     ]
     status = _overall_status(items)
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -442,7 +442,7 @@ def _would_signal_gate(would_signal: dict[str, Any]) -> Phase2ReadinessItem:
     return Phase2ReadinessItem("Would-signal evidence", "WARN", "No would-signal clusters found yet.")
 
 
-def _owner_approval_gate(path: Path) -> Phase2ReadinessItem:
+def _owner_approval_gate(path: Path, vps_selection_path: Path) -> Phase2ReadinessItem:
     if not path.exists():
         return Phase2ReadinessItem(
             "Project owner approval",
@@ -459,6 +459,13 @@ def _owner_approval_gate(path: Path) -> Phase2ReadinessItem:
             "Project owner approval",
             "PENDING",
             f"`{path}` is missing owner approval field(s): {', '.join(missing)}.",
+        )
+    placeholders = [name for name in OWNER_APPROVAL_REQUIRED_FIELDS if _is_placeholder_value(fields.get(name, ""))]
+    if placeholders:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` has placeholder owner approval field(s): {', '.join(placeholders)}.",
         )
     bad_true_fields = [name for name in OWNER_APPROVAL_TRUE_FIELDS if fields.get(name, "").lower() != "true"]
     if bad_true_fields:
@@ -484,7 +491,44 @@ def _owner_approval_gate(path: Path) -> Phase2ReadinessItem:
             "PENDING",
             f"`{path}` minimum_net_expectancy_r must be at least {MIN_PHASE2_NET_EXPECTANCY_R:.2f}.",
         )
+    vps_mismatch = _owner_approval_vps_mismatch(fields, vps_selection_path)
+    if vps_mismatch:
+        return Phase2ReadinessItem("Project owner approval", "PENDING", vps_mismatch)
     return Phase2ReadinessItem("Project owner approval", "PASS", f"Signed approval fields found in `{path}`.")
+
+
+def _owner_approval_vps_mismatch(fields: dict[str, str], vps_selection_path: Path) -> str:
+    if not vps_selection_path.exists():
+        return f"Cannot compare owner approval against missing VPS selection matrix `{vps_selection_path}`."
+    decision_fields = _parse_decision_record_fields(vps_selection_path.read_text(encoding="utf-8", errors="replace"))
+    if not decision_fields:
+        return f"Cannot compare owner approval against missing VPS decision record in `{vps_selection_path}`."
+    comparisons = {
+        "selected_vps_provider": "selected_provider",
+        "selected_vps_region": "selected_region",
+        "selected_vps_plan": "selected_plan",
+        "selected_vps_monthly_cost": "monthly_cost",
+        "latency_evidence_path": "latency_evidence_path",
+    }
+    mismatches = []
+    for approval_field, decision_field in comparisons.items():
+        approval_value = _normalize_compare(fields.get(approval_field, ""))
+        decision_value = _normalize_compare(decision_fields.get(decision_field, ""))
+        if not decision_value:
+            mismatches.append(f"{decision_field}=missing")
+        elif approval_value != decision_value:
+            mismatches.append(f"{approval_field}={fields.get(approval_field, '')} != {decision_fields.get(decision_field, '')}")
+    if mismatches:
+        return (
+            f"`{vps_selection_path}` decision record does not match owner approval field(s): "
+            + "; ".join(mismatches)
+            + "."
+        )
+    return ""
+
+
+def _normalize_compare(value: str) -> str:
+    return value.strip().strip("`").lower().replace("\\", "/")
 
 
 def _parse_approval_fields(text: str) -> dict[str, str]:

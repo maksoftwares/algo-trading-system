@@ -42,6 +42,8 @@ selected_vps_monthly_cost:
 latency_evidence_path:
 ```
 
+The live approval file is rejected if any required value is a placeholder, or if the selected VPS provider, region, plan, monthly cost, or latency evidence path does not match `docs/PHASE2_VPS_SELECTION_MATRIX.md`.
+
 ## Scope Boundary To Accept
 
 ```text
