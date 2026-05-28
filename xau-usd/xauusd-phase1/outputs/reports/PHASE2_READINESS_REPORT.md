@@ -34,10 +34,10 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PASS | Core summary checks are PASS in `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`. |
-| Five trading day soak | PASS | Progress 100.00%; observed 6.1736 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 27.42h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 28.52h; code-freeze 28.52h; required 96h; marker 2026-05-27T10:41:50Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.28 15:10:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Five trading day soak | PASS | Progress 100.00%; observed 6.1771 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 27.5h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 28.57h; code-freeze 28.58h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.28 15:15:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
 | Would-signal evidence | PASS | Rows: 118; clusters: 118. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
@@ -45,7 +45,7 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 1064 | 2026.05.28 15:10:00 | true | false | CLOCK_OK | 100.0% |
+| 1065 | 2026.05.28 15:15:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

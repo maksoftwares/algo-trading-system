@@ -14,14 +14,14 @@ Overall status: PENDING
 
 | name | status | evidence |
 | --- | --- | --- |
-| repo_commit_hash | PASS | Repository commit hash captured: 45e6999fccba19bd3735a72de799d8271b2fecad. |
+| repo_commit_hash | PASS | Repository commit hash captured: ad70f0a16150841ed12fb44e000936367c59fedc. |
 | mt5_terminal_path | PASS | MT5 terminal path exists. `C:\MT5PortableGoldMission\terminal64.exe`. |
 | mt5_data_path | PASS | MT5 data path exists. `C:\MT5PortableGoldMission`. |
 | compile_log | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` shows 0 errors, 0 warnings. |
 | latest_startup_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` has 3 row(s); latest row captured. |
-| latest_decision_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` has 1064 row(s); latest row captured. |
+| latest_decision_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` has 1065 row(s); latest row captured. |
 | external_health | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_EXTERNAL_HEALTH.json` status is PASS. |
-| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 15:10:00 keeps dry_run=true and trade_permission=false. |
+| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 15:15:00 keeps dry_run=true and trade_permission=false. |
 | phase2_readiness_report | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md` exists; current status is PENDING. |
 | vps_latency_report | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | ntp_time_sync_evidence | PENDING | Missing or empty `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_ntp_sync.txt`. |
