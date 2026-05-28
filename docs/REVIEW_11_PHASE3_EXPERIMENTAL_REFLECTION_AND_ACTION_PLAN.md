@@ -77,6 +77,7 @@ After the follow-up Phase 3 review, the sandbox now adds:
 | --- | --- |
 | `PHASE3_COST_MODE_COMPARISON.md/csv/json` | Compares entry-only, entry-exit, P95 fresh, and 2x P95 stress assumptions. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.md/csv/json` | Shows whether same-bar family groups are true duplicates, distinct levels, direction conflicts, or execution conflicts. |
+| `PHASE3_COMPLETION_AUDIT.md/json` | Confirms repo-side Phase 3 completion and lists the real external gates still blocking demo/paper authorization. |
 | CI dashboard freshness check | Regenerates `status.html` and fails if the committed dashboard is stale. |
 
 These additions remain repo-only. They do not modify MT5 or real Phase 2 readiness.
@@ -90,6 +91,8 @@ These additions remain repo-only. They do not modify MT5 or real Phase 2 readine
 | Broker-action code allowed | False |
 | Real Phase 2 readiness changed | False |
 | Real owner approval advanced | False |
+| Phase 3 repo-side remaining items | 0 |
+| Demo/paper authorized by Phase 3 | False |
 
 ## Next Safe Work
 

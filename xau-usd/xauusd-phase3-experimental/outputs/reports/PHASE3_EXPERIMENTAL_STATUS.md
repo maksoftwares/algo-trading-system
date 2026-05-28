@@ -66,5 +66,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 36, 'SUSPEND_FAMILY': 11} |
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 49} |
+| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
+| Phase 3 repo complete | True |
+| Demo authorized | False |
+| External blockers | 10 |
 | Manifest status | PASS |
 | Manifest commit | 73873ed |

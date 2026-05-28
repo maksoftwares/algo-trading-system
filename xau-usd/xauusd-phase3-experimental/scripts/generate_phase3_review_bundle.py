@@ -38,6 +38,8 @@ BUNDLE_FILES = (
     "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md",
     "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json",
     "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.csv",
+    "outputs/reports/PHASE3_COMPLETION_AUDIT.md",
+    "outputs/reports/PHASE3_COMPLETION_AUDIT.json",
     "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
     "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
     "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md",

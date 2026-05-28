@@ -1,0 +1,169 @@
+{
+  "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
+  "created_at_utc": "2026-05-28T11:23:12.910147Z",
+  "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+  "phase3_repo_complete": true,
+  "demo_authorized": false,
+  "real_phase1_acceptance": "PENDING",
+  "real_phase2_readiness": "PENDING",
+  "repo_requirement_rows": [
+    {
+      "key": "scope_doc",
+      "requirement": "Experimental scope defines allowed work and hard boundaries.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_EXPERIMENTAL_SCOPE.md",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "simulation",
+      "requirement": "Offline ledger/simulation exists from Phase 1 would-signal evidence.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SIMULATION.md",
+      "detail": "accepted_events=89; status=EXPERIMENTAL_COST_SUSPEND_SCENARIO"
+    },
+    {
+      "key": "safety",
+      "requirement": "Phase 3 source safety audit passes with no broker-action findings.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
+      "detail": "safety=PASS; findings=0"
+    },
+    {
+      "key": "family_dedup",
+      "requirement": "Family de-duplication/observer conflict audit is generated.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_FAMILY_DEDUP_AUDIT.md",
+      "detail": "audit=REVIEW_READY; conflicts=0"
+    },
+    {
+      "key": "cost_modes",
+      "requirement": "Cost-mode comparison is generated.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_COST_MODE_COMPARISON.md",
+      "detail": "comparison=REVIEW_READY; modes=4"
+    },
+    {
+      "key": "cost_gates",
+      "requirement": "Cost-in-R gate review is generated.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_COST_GATE_REVIEW.md",
+      "detail": "review=REVIEW_READY; thresholds=4"
+    },
+    {
+      "key": "suspend_review",
+      "requirement": "Suspend-family review is generated.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_REVIEW.md",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "suspend_decision",
+      "requirement": "Primary suspended family rows have explicit keep-suspended decisions.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_DECISION.md",
+      "detail": "decision=REVIEW_READY_KEEP_SUSPENDED; keep_suspended=11"
+    },
+    {
+      "key": "promotion_rollback",
+      "requirement": "Promotion and rollback criteria are documented.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "observer_conflict_playbook",
+      "requirement": "Observer conflict playbook is documented.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "future_prompt",
+      "requirement": "Future real-implementation prompt is documented.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\docs\\PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "review_bundle",
+      "requirement": "Portable review bundle exists.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
+      "detail": "evidence exists"
+    },
+    {
+      "key": "manifest",
+      "requirement": "Phase 3 manifest is a clean PASS snapshot.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
+      "detail": "manifest=PASS; clean=True"
+    },
+    {
+      "key": "dashboard",
+      "requirement": "Root status dashboard is updated from Phase 3 status.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\status.html",
+      "detail": "evidence exists"
+    }
+  ],
+  "remaining_phase3_repo_items": [],
+  "external_blockers": [
+    {
+      "gate": "VPS selection",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "VPS latency evidence",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Measured cost model",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Measured-cost revalidation",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Measured-cost assumption delta",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Phase 1 acceptance",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Phase 1 review index",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
+    },
+    {
+      "gate": "Active-market 72-hour soak",
+      "status": "PENDING",
+      "evidence": "Longest active streak 53.92h; current active streak 10.33h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+    },
+    {
+      "gate": "Process/code-freeze 96-hour gate",
+      "status": "PENDING",
+      "evidence": "Process uptime streak 11.39h; code-freeze 11.39h; required 96h; marker 2026-05-27T10:41:50Z."
+    },
+    {
+      "gate": "Project owner approval",
+      "status": "PENDING",
+      "evidence": "No approval file found at `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md`."
+    }
+  ],
+  "next_when_real_gates_pass": [
+    "Use PHASE3_REAL_IMPLEMENTATION_PROMPT.md as the starting prompt.",
+    "Keep the first real reuse paper-shadow only.",
+    "Carry forward cost-aware blocking, family de-duplication, and keep-suspended decisions.",
+    "Do not add broker-action code until a separate owner-approved implementation phase allows it."
+  ]
+}

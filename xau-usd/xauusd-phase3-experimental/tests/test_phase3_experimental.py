@@ -379,6 +379,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     dedup_module = _load_script("generate_phase3_family_dedup_audit")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
+    completion_module = _load_script("generate_phase3_completion_audit")
     bundle_module = _load_script("generate_phase3_review_bundle")
     repo = tmp_path / "repo"
     phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
@@ -406,6 +407,8 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     status_module.generate_phase3_experimental_status(phase3, repo)
+    completion_module.generate_phase3_completion_audit(phase3, repo)
+    status_module.generate_phase3_experimental_status(phase3, repo)
 
     bundle_path = bundle_module.generate_phase3_review_bundle(phase3)
 
@@ -416,6 +419,91 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     manifest = json.loads(latest_manifest.read_text(encoding="utf-8"))
     assert manifest["status"] == "PASS"
     assert any(item["path"] == "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.md" for item in manifest["files"])
+    assert any(item["path"] == "outputs/reports/PHASE3_COMPLETION_AUDIT.md" for item in manifest["files"])
+
+
+def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path: Path):
+    module = _load_script("generate_phase3_completion_audit")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    docs = phase3 / "docs"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    bundle_dir = phase3 / "outputs" / "review_bundles"
+    reports.mkdir(parents=True)
+    docs.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    bundle_dir.mkdir(parents=True)
+    for name in [
+        "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "PHASE3_EXECUTION_READINESS_DESIGN.md",
+        "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+        "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+        "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+    ]:
+        (docs / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+    for name in [
+        "PHASE3_EXPERIMENTAL_SIMULATION.md",
+        "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
+        "PHASE3_FAMILY_DEDUP_AUDIT.md",
+        "PHASE3_COST_MODE_COMPARISON.md",
+        "PHASE3_COST_GATE_REVIEW.md",
+        "PHASE3_SUSPEND_FAMILY_REVIEW.md",
+        "PHASE3_SUSPEND_FAMILY_DECISION.md",
+        "PHASE3_EXPERIMENTAL_MANIFEST.md",
+    ]:
+        (reports / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+    (repo / "status.html").write_text("<!doctype html>\n", encoding="utf-8")
+    (bundle_dir / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip").write_bytes(b"zip")
+    (reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json").write_text(
+        json.dumps({"status": "PASS", "findings_count": 0}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_EXPERIMENTAL_MANIFEST.json").write_text(
+        json.dumps({"status": "PASS", "working_tree_clean": True}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_EXPERIMENTAL_STATUS.json").write_text(
+        json.dumps(
+            {
+                "simulation": {"accepted_events": 3, "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO"},
+                "suspend_family_decision": {
+                    "status": "REVIEW_READY_KEEP_SUSPENDED",
+                    "keep_suspended_primary_rows": 1,
+                },
+                "family_dedup_audit": {"status": "REVIEW_READY"},
+                "cost_mode_comparison": {"status": "REVIEW_READY", "mode_count": 4},
+                "cost_gate_review": {"status": "REVIEW_READY", "threshold_count": 4},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text(
+        "\n".join(
+                [
+                    "# Phase 2 Readiness Report",
+                    "",
+                    "Overall status: PENDING",
+                    "",
+                    "## Gates",
+                    "",
+                    "| Gate | Status | Evidence |",
+                "| --- | --- | --- |",
+                "| Owner approval | PENDING | No approval file. |",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    path = module.generate_phase3_completion_audit(phase3, repo)
+
+    audit = json.loads(path.read_text(encoding="utf-8"))
+    assert audit["status"] == "REPO_SIDE_COMPLETE_WAITING_REAL_GATES"
+    assert audit["phase3_repo_complete"] is True
+    assert audit["demo_authorized"] is False
+    assert audit["remaining_phase3_repo_items"] == []
+    assert audit["external_blockers"][0]["gate"] == "Owner approval"
 
 
 def test_phase3_family_dedup_audit_detects_same_bar_distinct_level(tmp_path: Path):

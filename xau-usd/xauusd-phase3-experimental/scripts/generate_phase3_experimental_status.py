@@ -25,6 +25,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     cost_mode_comparison = _read_json(reports / "PHASE3_COST_MODE_COMPARISON.json")
     cost_gate_review = _read_json(reports / "PHASE3_COST_GATE_REVIEW.json")
     family_dedup_audit = _read_json(reports / "PHASE3_FAMILY_DEDUP_AUDIT.json")
+    completion_audit = _read_json(reports / "PHASE3_COMPLETION_AUDIT.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -57,6 +58,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "cost_mode_comparison": _comparison_summary(cost_mode_comparison),
         "cost_gate_review": _cost_gate_summary(cost_gate_review),
         "family_dedup_audit": _audit_summary(family_dedup_audit),
+        "completion_audit": _completion_audit_summary(completion_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
             "EXPERIMENTAL_ACTIVE",
@@ -86,6 +88,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     cost_mode_comparison = _mapping(status.get("cost_mode_comparison"))
     cost_gate_review = _mapping(status.get("cost_gate_review"))
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
+    completion_audit = _mapping(status.get("completion_audit"))
     manifest = _mapping(status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
     suspend_count_by_mode = _mapping(cost_mode_comparison.get("suspend_family_count_by_mode"))
@@ -166,6 +169,10 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Kill-state summary", str(cost_gate_review.get("kill_state_counts", "UNKNOWN"))),
                     ("De-dup audit", str(family_dedup_audit.get("status", "UNKNOWN"))),
                     ("De-dup classifications", str(family_dedup_audit.get("classification_counts", "UNKNOWN"))),
+                    ("Completion audit", str(completion_audit.get("status", "UNKNOWN"))),
+                    ("Phase 3 repo complete", str(completion_audit.get("phase3_repo_complete", "UNKNOWN"))),
+                    ("Demo authorized", str(completion_audit.get("demo_authorized", "UNKNOWN"))),
+                    ("External blockers", str(completion_audit.get("external_blocker_count", "UNKNOWN"))),
                     ("Manifest status", str(manifest.get("status", "UNKNOWN"))),
                     ("Manifest commit", str(manifest.get("commit_short", "UNKNOWN"))),
                 ]
@@ -290,6 +297,25 @@ def _audit_summary(audit: dict[str, object]) -> dict[str, object]:
         "family_group_count": audit.get("family_group_count", "UNKNOWN"),
         "multi_row_group_count": audit.get("multi_row_group_count", "UNKNOWN"),
         "classification_counts": audit.get("classification_counts", {}),
+    }
+
+
+def _completion_audit_summary(audit: dict[str, object]) -> dict[str, object]:
+    if not audit:
+        return {}
+    blockers = audit.get("external_blockers", [])
+    remaining = audit.get("remaining_phase3_repo_items", [])
+    if not isinstance(blockers, list):
+        blockers = []
+    if not isinstance(remaining, list):
+        remaining = []
+    return {
+        "status": audit.get("status", "UNKNOWN"),
+        "created_at_utc": audit.get("created_at_utc", ""),
+        "phase3_repo_complete": audit.get("phase3_repo_complete", "UNKNOWN"),
+        "demo_authorized": audit.get("demo_authorized", "UNKNOWN"),
+        "remaining_phase3_repo_items": len(remaining),
+        "external_blocker_count": len(blockers),
     }
 
 

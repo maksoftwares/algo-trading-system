@@ -53,6 +53,7 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_COST_MODE_COMPARISON.csv` | Machine-readable cost-mode comparison. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.md` | Review-only classification of same-bar family groups. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.csv` | Machine-readable de-dup audit rows. |
+| `PHASE3_COMPLETION_AUDIT.md` | Repo-side completion audit that separates finished Phase 3 prep from external demo/paper blockers. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
 | `PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip` | Portable review package for the experimental lane. |
