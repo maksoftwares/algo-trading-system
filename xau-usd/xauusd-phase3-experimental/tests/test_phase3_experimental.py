@@ -212,6 +212,10 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["safety"]["status"] == "PASS"
     assert status["suspend_family_review"]["status"] == "REVIEW_READY"
     assert status["suspend_family_review"]["suspend_unique_family_events"] == 1
+    assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["entry_exit_proxy"] is not None
+    assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["p95_fresh_proxy"] is not None
+    assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["stress_2x_p95_proxy"] is not None
+    assert status["cost_mode_comparison"]["suspend_family_count_by_mode"]["stress_2x_p95_proxy"] > 0
     assert status["cost_gate_review"]["status"] == "REVIEW_READY"
     assert status["cost_gate_review"]["threshold_count"] == 4
     assert status["manifest"]["status"] == "PENDING"

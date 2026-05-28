@@ -1475,6 +1475,8 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     cost_gate_review = _mapping(phase3_status.get("cost_gate_review"))
     family_dedup_audit = _mapping(phase3_status.get("family_dedup_audit"))
     manifest = _mapping(phase3_status.get("manifest"))
+    median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
+    suspend_count_by_mode = _mapping(cost_mode_comparison.get("suspend_family_count_by_mode"))
     rows = [
         ("Status", _phase3_status_label(phase3_status)),
         ("Real Phase 2", _cell(phase3_status.get("real_phase2_readiness"))),
@@ -1493,6 +1495,12 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Suspend unique families", _cell(suspend_family.get("suspend_unique_family_events"))),
         ("Suspend primary rows", _cell(suspend_family.get("suspend_primary_rows"))),
         ("Cost-mode comparison", _cell(cost_mode_comparison.get("status"))),
+        ("entry_exit_proxy median net R", _cell(median_net_by_mode.get("entry_exit_proxy"))),
+        ("p95_fresh_proxy median net R", _cell(median_net_by_mode.get("p95_fresh_proxy"))),
+        ("stress_2x_p95_proxy median net R", _cell(median_net_by_mode.get("stress_2x_p95_proxy"))),
+        ("entry_exit_proxy suspend rows", _cell(suspend_count_by_mode.get("entry_exit_proxy"))),
+        ("p95_fresh_proxy suspend rows", _cell(suspend_count_by_mode.get("p95_fresh_proxy"))),
+        ("stress_2x_p95_proxy suspend rows", _cell(suspend_count_by_mode.get("stress_2x_p95_proxy"))),
         ("Stress suspend families", _cell(cost_mode_comparison.get("stress_suspend_family_unique_events"))),
         ("Cost-gate review", _cell(cost_gate_review.get("status"))),
         ("0.25R blocked families", _cell(cost_gate_review.get("threshold_0_25_family_unique_events"))),

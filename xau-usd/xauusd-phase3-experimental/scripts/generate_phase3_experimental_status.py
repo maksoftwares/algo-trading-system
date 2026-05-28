@@ -84,6 +84,8 @@ def _render_markdown(status: dict[str, object]) -> str:
     cost_gate_review = _mapping(status.get("cost_gate_review"))
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
     manifest = _mapping(status.get("manifest"))
+    median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
+    suspend_count_by_mode = _mapping(cost_mode_comparison.get("suspend_family_count_by_mode"))
     return "\n".join(
         [
             "# Phase 3 Experimental Status",
@@ -146,6 +148,12 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Suspend unique family events", str(suspend_family.get("suspend_unique_family_events", "UNKNOWN"))),
                     ("Suspend primary rows", str(suspend_family.get("suspend_primary_rows", "UNKNOWN"))),
                     ("Cost-mode comparison", str(cost_mode_comparison.get("status", "UNKNOWN"))),
+                    ("entry_exit_proxy median net R", str(median_net_by_mode.get("entry_exit_proxy", "UNKNOWN"))),
+                    ("p95_fresh_proxy median net R", str(median_net_by_mode.get("p95_fresh_proxy", "UNKNOWN"))),
+                    ("stress_2x_p95_proxy median net R", str(median_net_by_mode.get("stress_2x_p95_proxy", "UNKNOWN"))),
+                    ("entry_exit_proxy SUSPEND_FAMILY rows", str(suspend_count_by_mode.get("entry_exit_proxy", "UNKNOWN"))),
+                    ("p95_fresh_proxy SUSPEND_FAMILY rows", str(suspend_count_by_mode.get("p95_fresh_proxy", "UNKNOWN"))),
+                    ("stress_2x_p95_proxy SUSPEND_FAMILY rows", str(suspend_count_by_mode.get("stress_2x_p95_proxy", "UNKNOWN"))),
                     ("Stress suspend family events", str(cost_mode_comparison.get("stress_suspend_family_unique_events", "UNKNOWN"))),
                     ("Cost-gate review", str(cost_gate_review.get("status", "UNKNOWN"))),
                     ("Cost-gate 0.25R blocked families", str(cost_gate_review.get("threshold_0_25_family_unique_events", "UNKNOWN"))),
@@ -189,6 +197,11 @@ def _comparison_summary(comparison: dict[str, object]) -> dict[str, object]:
     rows = comparison.get("rows", [])
     if not isinstance(rows, list):
         rows = []
+    by_mode = {
+        str(row.get("cost_mode")): row
+        for row in rows
+        if isinstance(row, dict) and row.get("cost_mode")
+    }
     stress = next(
         (row for row in rows if isinstance(row, dict) and row.get("cost_mode") == "stress_2x_p95_proxy"),
         {},
@@ -199,6 +212,15 @@ def _comparison_summary(comparison: dict[str, object]) -> dict[str, object]:
         "stress_suspend_family_unique_events": stress.get("suspend_family_unique_events", "UNKNOWN")
         if isinstance(stress, dict)
         else "UNKNOWN",
+        "median_net_after_proxy_by_mode": {
+            mode: row.get("median_net_after_proxy_cost_r", "UNKNOWN") for mode, row in sorted(by_mode.items())
+        },
+        "suspend_family_count_by_mode": {
+            mode: row.get("suspend_family_count", "UNKNOWN") for mode, row in sorted(by_mode.items())
+        },
+        "suspend_family_unique_events_by_mode": {
+            mode: row.get("suspend_family_unique_events", "UNKNOWN") for mode, row in sorted(by_mode.items())
+        },
     }
 
 
