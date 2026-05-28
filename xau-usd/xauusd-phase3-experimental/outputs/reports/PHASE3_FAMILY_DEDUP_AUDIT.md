@@ -8,15 +8,16 @@ Overall status: REVIEW_READY
 
 | Field | Value |
 | --- | --- |
-| Safe source rows | 89 |
-| Family groups | 49 |
-| Multi-row groups | 40 |
+| Safe source rows | 108 |
+| Family groups | 61 |
+| Multi-row groups | 47 |
 
 ## Classification Counts
 
 | Field | Value |
 | --- | --- |
-| TRUE_DUPLICATE | 49 |
+| SAME_BAR_DISTINCT_LEVEL | 1 |
+| TRUE_DUPLICATE | 60 |
 
 ## Multi-Row Groups
 
@@ -62,6 +63,13 @@ Overall status: REVIEW_READY
 | FAM00040 | 2026.05.27 11:55:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4442.48 | 4438.79 | 4445.41 | 4428.86 | 662.26 |
 | FAM00042 | 2026.05.27 15:50:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4435.37 | 4432.76 | 4441.56 | 4419.55 | 880.43 |
 | FAM00043 | 2026.05.27 17:20:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4441.36 | 4445.62 | 4440.92 | 4452.66 | 469.56 |
+| FAM00052 | 2026.05.28 01:10:00 | 2 | SAME_BAR_DISTINCT_LEVEL | observer;level_kind;level_price | breakout_retest;swing_breakout_retest_v0 | SHORT | previous_weekly_low;latest_swing_low | 4453.16;4455.11 | 4445.47 | 4459.17 | 4424.92 | 1370.29 |
+| FAM00053 | 2026.05.28 03:20:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4396.23 | 4391.51 | 4397.86 | 4381.99 | 634.91 |
+| FAM00054 | 2026.05.28 05:40:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4375.03 | 4387.50 | 4374.37 | 4407.20 | 1313.46 |
+| FAM00055 | 2026.05.28 06:20:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4375.03 | 4381.41 | 4373.91 | 4392.66 | 749.79 |
+| FAM00056 | 2026.05.28 06:25:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4375.03 | 4380.16 | 4373.43 | 4390.25 | 672.74 |
+| FAM00057 | 2026.05.28 08:00:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4385.30 | 4389.19 | 4382.19 | 4399.69 | 700.14 |
+| FAM00061 | 2026.05.28 11:25:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4386.49 | 4390.90 | 4379.88 | 440.67 |
 
 ## Scope
 

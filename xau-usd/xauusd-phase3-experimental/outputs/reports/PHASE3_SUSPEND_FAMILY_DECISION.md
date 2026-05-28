@@ -8,12 +8,12 @@ Overall status: REVIEW_READY_KEEP_SUSPENDED
 
 | Field | Value |
 | --- | --- |
-| Raw suspend rows | 20 |
-| Primary suspend rows | 11 |
-| Unique family events | 11 |
-| Decision counts | {'KEEP_SUSPENDED': 11} |
-| Suggested annotation counts | {'COST_ISSUE': 5, 'TIGHT_STOP_ISSUE': 4, 'UNKNOWN': 2} |
-| Future rule counts | {'REQUIRE_COST_R_AND_SPREAD_BLOCK': 5, 'REQUIRE_MANUAL_REVIEW_BEFORE_PROMOTION': 2, 'REQUIRE_TIGHT_STOP_COST_BLOCK': 4} |
+| Raw suspend rows | 22 |
+| Primary suspend rows | 12 |
+| Unique family events | 12 |
+| Decision counts | {'KEEP_SUSPENDED': 12} |
+| Suggested annotation counts | {'COST_ISSUE': 6, 'TIGHT_STOP_ISSUE': 4, 'UNKNOWN': 2} |
+| Future rule counts | {'REQUIRE_COST_R_AND_SPREAD_BLOCK': 6, 'REQUIRE_MANUAL_REVIEW_BEFORE_PROMOTION': 2, 'REQUIRE_TIGHT_STOP_COST_BLOCK': 4} |
 
 ## Decision
 
@@ -34,3 +34,4 @@ All primary suspended family events remain `KEEP_SUSPENDED` in the future design
 | FAM00039 | PH3EXP00075 | 2026.05.27 09:55:00 | LONG | 0.5197 | -0.0081 | tight_stop_cost_dominates | TIGHT_STOP_ISSUE | KEEP_SUSPENDED | REQUIRE_TIGHT_STOP_COST_BLOCK |
 | FAM00046 | PH3EXP00086 | 2026.05.27 18:00:00 | SHORT | 0.4639 | 0.0477 | wide_spread_plus_entry_exit_cost | COST_ISSUE | KEEP_SUSPENDED | REQUIRE_COST_R_AND_SPREAD_BLOCK |
 | FAM00049 | PH3EXP00089 | 2026.05.27 19:55:00 | SHORT | 0.5228 | -0.0112 | tight_stop_cost_dominates | TIGHT_STOP_ISSUE | KEEP_SUSPENDED | REQUIRE_TIGHT_STOP_COST_BLOCK |
+| FAM00061 | PH3EXP00107 | 2026.05.28 11:25:00 | SHORT | 0.3631 | 0.1485 | wide_spread_plus_entry_exit_cost | COST_ISSUE | KEEP_SUSPENDED | REQUIRE_COST_R_AND_SPREAD_BLOCK |

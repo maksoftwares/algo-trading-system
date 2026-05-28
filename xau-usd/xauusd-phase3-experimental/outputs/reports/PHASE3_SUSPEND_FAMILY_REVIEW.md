@@ -8,18 +8,18 @@ Overall status: REVIEW_READY
 
 | Field | Value |
 | --- | --- |
-| Raw ledger rows | 89 |
-| Suspend raw rows | 20 |
-| Suspend unique family events | 11 |
-| Suspend primary rows | 11 |
-| Suspend duplicate observer rows | 9 |
+| Raw ledger rows | 108 |
+| Suspend raw rows | 22 |
+| Suspend unique family events | 12 |
+| Suspend primary rows | 12 |
+| Suspend duplicate observer rows | 10 |
 | Gross expectancy R source | fixed_notional_phase0_baseline |
 | Baseline assumed cost R | 0.3228 |
 | Baseline net expectancy R | 0.1888 |
 | Max cost proxy R before suspend | 0.3616 |
-| Median suspend cost R | 0.4822 |
-| Median suspend net delta vs assumed baseline R | -0.1594 |
-| Median suspend stop distance points | 229.12 |
+| Median suspend cost R | 0.4813 |
+| Median suspend net delta vs assumed baseline R | -0.1585 |
+| Median suspend stop distance points | 256.105 |
 
 ## Cost Semantics
 
@@ -31,7 +31,7 @@ Suspension rows are identified from baseline gross expectancy minus the Phase 3 
 | --- | --- |
 | normal_spread_small_stop | 4 |
 | tight_stop_cost_dominates | 7 |
-| wide_spread_plus_entry_exit_cost | 9 |
+| wide_spread_plus_entry_exit_cost | 11 |
 
 ## Reviewer Annotation Template
 
@@ -47,8 +47,8 @@ Suspension rows are identified from baseline gross expectancy minus the Phase 3 
 
 | Field | Value |
 | --- | --- |
-| COST_ISSUE | 5 |
-| DUPLICATED_OBSERVER_ISSUE | 9 |
+| COST_ISSUE | 6 |
+| DUPLICATED_OBSERVER_ISSUE | 10 |
 | TIGHT_STOP_ISSUE | 4 |
 | UNKNOWN | 2 |
 
@@ -56,8 +56,8 @@ Suspension rows are identified from baseline gross expectancy minus the Phase 3 
 
 | Field | Value |
 | --- | --- |
-| OBSERVER_DUPLICATE | 9 |
-| PRIMARY_EXECUTION_CANDIDATE | 11 |
+| OBSERVER_DUPLICATE | 10 |
+| PRIMARY_EXECUTION_CANDIDATE | 12 |
 
 ## Highest Cost Suspensions
 

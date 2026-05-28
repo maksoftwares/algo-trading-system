@@ -26,6 +26,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     cost_gate_review = _read_json(reports / "PHASE3_COST_GATE_REVIEW.json")
     family_dedup_audit = _read_json(reports / "PHASE3_FAMILY_DEDUP_AUDIT.json")
     completion_audit = _read_json(reports / "PHASE3_COMPLETION_AUDIT.json")
+    paper_shadow = _read_json(reports / "PHASE3_PAPER_SHADOW_SUMMARY.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -58,6 +59,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "cost_mode_comparison": _comparison_summary(cost_mode_comparison),
         "cost_gate_review": _cost_gate_summary(cost_gate_review),
         "family_dedup_audit": _audit_summary(family_dedup_audit),
+        "paper_shadow_experiment": _paper_shadow_summary(paper_shadow),
         "completion_audit": _completion_audit_summary(completion_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
@@ -67,6 +69,8 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
             "EXPERIMENTAL_BOUNDARY_FAIL",
             "EXPERIMENTAL_REVIEW_READY",
             "EXPERIMENTAL_ARCHIVED",
+            "SIDE_EXPERIMENT_READY_FOR_PAPER_SHADOW_PROTOTYPE",
+            "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
         ],
         "docs": [
             "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
@@ -88,6 +92,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     cost_mode_comparison = _mapping(status.get("cost_mode_comparison"))
     cost_gate_review = _mapping(status.get("cost_gate_review"))
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
+    paper_shadow = _mapping(status.get("paper_shadow_experiment"))
     completion_audit = _mapping(status.get("completion_audit"))
     manifest = _mapping(status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -169,6 +174,12 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Kill-state summary", str(cost_gate_review.get("kill_state_counts", "UNKNOWN"))),
                     ("De-dup audit", str(family_dedup_audit.get("status", "UNKNOWN"))),
                     ("De-dup classifications", str(family_dedup_audit.get("classification_counts", "UNKNOWN"))),
+                    ("Paper-shadow status", str(paper_shadow.get("status", "UNKNOWN"))),
+                    ("Paper-shadow would-open", str(paper_shadow.get("would_open_count", "UNKNOWN"))),
+                    ("Paper-shadow cost-review opens", str(paper_shadow.get("would_open_review_count", "UNKNOWN"))),
+                    ("Paper-shadow blocked suspend", str(paper_shadow.get("blocked_suspend_count", "UNKNOWN"))),
+                    ("Paper-shadow observer no-exposure", str(paper_shadow.get("observer_no_exposure_count", "UNKNOWN"))),
+                    ("Paper-shadow monthly estimate", str(paper_shadow.get("estimated_monthly_shadow_open_count", "UNKNOWN"))),
                     ("Completion audit", str(completion_audit.get("status", "UNKNOWN"))),
                     ("Phase 3 repo complete", str(completion_audit.get("phase3_repo_complete", "UNKNOWN"))),
                     ("Demo authorized", str(completion_audit.get("demo_authorized", "UNKNOWN"))),
@@ -297,6 +308,27 @@ def _audit_summary(audit: dict[str, object]) -> dict[str, object]:
         "family_group_count": audit.get("family_group_count", "UNKNOWN"),
         "multi_row_group_count": audit.get("multi_row_group_count", "UNKNOWN"),
         "classification_counts": audit.get("classification_counts", {}),
+    }
+
+
+def _paper_shadow_summary(summary: dict[str, object]) -> dict[str, object]:
+    if not summary:
+        return {}
+    return {
+        "status": summary.get("status", "UNKNOWN"),
+        "created_at_utc": summary.get("created_at_utc", ""),
+        "real_phase2_readiness": summary.get("real_phase2_readiness", "UNKNOWN"),
+        "demo_authorized": summary.get("demo_authorized", "UNKNOWN"),
+        "source_ledger_rows": summary.get("source_ledger_rows", "UNKNOWN"),
+        "primary_stream_rows": summary.get("primary_stream_rows", "UNKNOWN"),
+        "would_open_count": summary.get("would_open_count", "UNKNOWN"),
+        "would_open_review_count": summary.get("would_open_review_count", "UNKNOWN"),
+        "blocked_suspend_count": summary.get("blocked_suspend_count", "UNKNOWN"),
+        "observer_no_exposure_count": summary.get("observer_no_exposure_count", "UNKNOWN"),
+        "duplicate_ignored_count": summary.get("duplicate_ignored_count", "UNKNOWN"),
+        "conflict_review_count": summary.get("conflict_review_count", "UNKNOWN"),
+        "estimated_monthly_shadow_open_count": summary.get("estimated_monthly_shadow_open_count", "UNKNOWN"),
+        "mean_shadow_open_net_r": summary.get("mean_shadow_open_net_r", "UNKNOWN"),
     }
 
 

@@ -74,6 +74,11 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Candidate-level D2 FAIL preserved; owner-accepted family-clustered D2 PASS; D1/D3/D4 remain closed" in html
     assert "D2 Reality Check/SPA FAIL; D1/D3/D4 remain closed" not in html
     assert "Observer conflicts" in html
+    assert "Paper-shadow status" in html
+    assert "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS" in html
+    assert "Paper-shadow would-open" in html
+    assert "Phase 3 paper-shadow summary" in html
+    assert "Phase 3 paper-shadow ledger" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
     assert "Cost viability map" in html
@@ -352,6 +357,15 @@ def _write_phase3_status(path: Path) -> None:
                     "rejected_source_rows": 1,
                     "median_proxy_cost_r": 0.12,
                     "median_net_after_proxy_cost_r": 0.39,
+                },
+                "paper_shadow_experiment": {
+                    "status": "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
+                    "would_open_count": 8,
+                    "would_open_review_count": 2,
+                    "blocked_suspend_count": 1,
+                    "observer_no_exposure_count": 4,
+                    "estimated_monthly_shadow_open_count": 24.0,
+                    "mean_shadow_open_net_r": 0.22,
                 },
             }
         ),

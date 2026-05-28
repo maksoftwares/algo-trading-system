@@ -163,6 +163,42 @@ def test_phase3_cost_gate_review_reports_thresholds_buckets_and_kill_states(tmp_
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
 
 
+def test_phase3_paper_shadow_experiment_models_lifecycle_without_demo_authority(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    module = _load_script("generate_phase3_paper_shadow_experiment")
+    repo = tmp_path / "repo"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_reports.mkdir(parents=True)
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+
+    path = module.generate_paper_shadow_experiment(simulation.ledger_path, tmp_path / "reports", repo)
+
+    summary = json.loads(path.read_text(encoding="utf-8"))
+    assert summary["status"] == "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS"
+    assert summary["real_phase2_readiness"] == "PENDING"
+    assert summary["demo_authorized"] is False
+    assert summary["mt5_runtime_touched"] is False
+    assert summary["broker_action_code_allowed"] is False
+    assert summary["source_ledger_rows"] == 7
+    assert summary["primary_stream_rows"] == 3
+    assert summary["would_open_count"] == 2
+    assert summary["would_open_review_count"] == 1
+    assert summary["blocked_suspend_count"] == 1
+    assert summary["observer_no_exposure_count"] == 4
+    rows = list(csv.DictReader((tmp_path / "reports" / "PHASE3_PAPER_SHADOW_LEDGER.csv").open("r", encoding="utf-8")))
+    by_cluster = {row["source_cluster_id"]: row for row in rows}
+    assert by_cluster["WS100"]["paper_shadow_action"] == "WOULD_PAPER_SHADOW_OPEN"
+    assert by_cluster["WS102"]["paper_shadow_action"] == "WOULD_PAPER_SHADOW_OPEN_REVIEW"
+    assert by_cluster["WS103"]["paper_shadow_action"] == "BLOCKED_SUSPEND_FAMILY"
+    assert by_cluster["WS101"]["paper_shadow_action"] == "NO_EXPOSURE_DUPLICATE_IGNORED"
+    assert by_cluster["WS104"]["paper_shadow_action"] == "NO_EXPOSURE_CONFLICT_REVIEW"
+    assert by_cluster["WS100"]["demo_authorized"] == "false"
+    report = (tmp_path / "reports" / "PHASE3_PAPER_SHADOW_SUMMARY.md").read_text(encoding="utf-8")
+    assert "Paper-Shadow Side Experiment" in report
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+
+
 def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
@@ -171,6 +207,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     comparison_module = _load_script("generate_phase3_cost_mode_comparison")
     cost_gate_module = _load_script("generate_phase3_cost_gate_review")
     dedup_module = _load_script("generate_phase3_family_dedup_audit")
+    shadow_module = _load_script("generate_phase3_paper_shadow_experiment")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     repo = tmp_path / "repo"
@@ -187,6 +224,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     comparison_module.generate_cost_mode_comparison(FIXTURE, phase3 / "outputs" / "reports")
     cost_gate_module.generate_cost_gate_review(simulation.ledger_path, phase3 / "outputs" / "reports")
     dedup_module.generate_family_dedup_audit(FIXTURE, phase3 / "outputs" / "reports")
+    shadow_module.generate_paper_shadow_experiment(simulation.ledger_path, phase3 / "outputs" / "reports", repo)
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
         json.dumps(
@@ -225,6 +263,9 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["cost_mode_comparison"]["suspend_family_count_by_mode"]["stress_2x_p95_proxy"] > 0
     assert status["cost_gate_review"]["status"] == "REVIEW_READY"
     assert status["cost_gate_review"]["threshold_count"] == 4
+    assert status["paper_shadow_experiment"]["status"] == "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS"
+    assert status["paper_shadow_experiment"]["would_open_count"] == 2
+    assert status["paper_shadow_experiment"]["demo_authorized"] is False
     assert status["manifest"]["status"] == "PENDING"
     assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in (
@@ -377,6 +418,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     comparison_module = _load_script("generate_phase3_cost_mode_comparison")
     cost_gate_module = _load_script("generate_phase3_cost_gate_review")
     dedup_module = _load_script("generate_phase3_family_dedup_audit")
+    shadow_module = _load_script("generate_phase3_paper_shadow_experiment")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     completion_module = _load_script("generate_phase3_completion_audit")
@@ -402,6 +444,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     comparison_module.generate_cost_mode_comparison(FIXTURE, phase3 / "outputs" / "reports")
     cost_gate_module.generate_cost_gate_review(simulation.ledger_path, phase3 / "outputs" / "reports")
     dedup_module.generate_family_dedup_audit(FIXTURE, phase3 / "outputs" / "reports")
+    shadow_module.generate_paper_shadow_experiment(simulation.ledger_path, phase3 / "outputs" / "reports", repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
     (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
     (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
@@ -420,6 +463,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     assert manifest["status"] == "PASS"
     assert any(item["path"] == "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.md" for item in manifest["files"])
     assert any(item["path"] == "outputs/reports/PHASE3_COMPLETION_AUDIT.md" for item in manifest["files"])
+    assert any(item["path"] == "outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.md" for item in manifest["files"])
 
 
 def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path: Path):
@@ -450,6 +494,7 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
         "PHASE3_COST_GATE_REVIEW.md",
         "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "PHASE3_SUSPEND_FAMILY_DECISION.md",
+        "PHASE3_PAPER_SHADOW_SUMMARY.md",
         "PHASE3_EXPERIMENTAL_MANIFEST.md",
     ]:
         (reports / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
@@ -474,6 +519,11 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
                 "family_dedup_audit": {"status": "REVIEW_READY"},
                 "cost_mode_comparison": {"status": "REVIEW_READY", "mode_count": 4},
                 "cost_gate_review": {"status": "REVIEW_READY", "threshold_count": 4},
+                "paper_shadow_experiment": {
+                    "status": "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
+                    "would_open_count": 2,
+                    "demo_authorized": False,
+                },
             }
         ),
         encoding="utf-8",

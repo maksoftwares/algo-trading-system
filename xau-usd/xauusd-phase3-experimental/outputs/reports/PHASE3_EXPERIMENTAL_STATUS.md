@@ -26,19 +26,19 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 
 | Field | Value |
 | --- | --- |
-| Accepted events | 89 |
-| Raw observer events | 89 |
-| Family unique events | 49 |
-| Observer duplicates | 40 |
+| Accepted events | 108 |
+| Raw observer events | 108 |
+| Family unique events | 61 |
+| Observer duplicates | 47 |
 | Observer conflicts | 0 |
 | Rejected source rows | 2 |
 | Cost mode | entry_exit_proxy |
 | Gross expectancy R source | fixed_notional_phase0_baseline |
 | Baseline assumed cost R | 0.3228 |
 | Baseline net expectancy R | 0.1888 |
-| Median proxy cost R | 0.2554 |
-| Median net after proxy cost R | 0.2562 |
-| Median net delta vs assumed baseline R | 0.0674 |
+| Median proxy cost R | 0.2452 |
+| Median net after proxy cost R | 0.2664 |
+| Median net delta vs assumed baseline R | 0.0776 |
 | Minimum net expectancy R | 0.15 |
 
 ## Safety And Manifest
@@ -48,27 +48,33 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Safety status | PASS |
 | Safety findings | 0 |
 | Suspend review status | REVIEW_READY |
-| Suspend unique family events | 11 |
-| Suspend primary rows | 11 |
+| Suspend unique family events | 12 |
+| Suspend primary rows | 12 |
 | Suspend decision | REVIEW_READY_KEEP_SUSPENDED |
-| Keep-suspended primary rows | 11 |
+| Keep-suspended primary rows | 12 |
 | Cost-mode comparison | REVIEW_READY |
-| entry_exit_proxy median net R | 0.2562 |
-| p95_fresh_proxy median net R | 0.1437 |
-| stress_2x_p95_proxy median net R | -0.2012 |
-| entry_exit_proxy SUSPEND_FAMILY rows | 20 |
-| p95_fresh_proxy SUSPEND_FAMILY rows | 45 |
-| stress_2x_p95_proxy SUSPEND_FAMILY rows | 84 |
-| Stress suspend family events | 46 |
+| entry_exit_proxy median net R | 0.2664 |
+| p95_fresh_proxy median net R | 0.1829 |
+| stress_2x_p95_proxy median net R | -0.1253 |
+| entry_exit_proxy SUSPEND_FAMILY rows | 22 |
+| p95_fresh_proxy SUSPEND_FAMILY rows | 48 |
+| stress_2x_p95_proxy SUSPEND_FAMILY rows | 98 |
+| Stress suspend family events | 55 |
 | Cost-gate review | REVIEW_READY |
-| Cost-gate 0.25R blocked families | 28 |
+| Cost-gate 0.25R blocked families | 30 |
 | Spread P95 points | 75.0 |
-| Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 36, 'SUSPEND_FAMILY': 11} |
+| Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 47, 'SUSPEND_FAMILY': 12} |
 | De-dup audit | REVIEW_READY |
-| De-dup classifications | {'TRUE_DUPLICATE': 49} |
-| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
-| Phase 3 repo complete | True |
+| De-dup classifications | {'SAME_BAR_DISTINCT_LEVEL': 1, 'TRUE_DUPLICATE': 60} |
+| Paper-shadow status | SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS |
+| Paper-shadow would-open | 49 |
+| Paper-shadow cost-review opens | 2 |
+| Paper-shadow blocked suspend | 12 |
+| Paper-shadow observer no-exposure | 47 |
+| Paper-shadow monthly estimate | 246.28 |
+| Completion audit | PENDING |
+| Phase 3 repo complete | False |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | PASS |
-| Manifest commit | f501c1e |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | 5966d50 |

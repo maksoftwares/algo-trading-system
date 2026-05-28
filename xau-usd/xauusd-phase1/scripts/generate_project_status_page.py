@@ -319,6 +319,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     phase3_cost_gate = _mapping(phase3_status.get("cost_gate_review"))
     phase3_suspend_decision = _mapping(phase3_status.get("suspend_family_decision"))
     phase3_completion = _mapping(phase3_status.get("completion_audit"))
+    phase3_paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
     collect(phase3_simulation.get("created_at_utc"))
     collect(phase3_safety.get("created_at_utc"))
     collect(phase3_manifest.get("created_at_utc"))
@@ -326,6 +327,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     collect(phase3_cost_gate.get("created_at_utc"))
     collect(phase3_suspend_decision.get("created_at_utc"))
     collect(phase3_completion.get("created_at_utc"))
+    collect(phase3_paper_shadow.get("created_at_utc"))
     if not candidates:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return max(candidates).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1432,6 +1434,8 @@ def _artifact_links() -> str:
         ("Phase 3 cost-mode comparison", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.md"),
         ("Phase 3 cost-gate review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.md"),
         ("Phase 3 family de-dup audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md"),
+        ("Phase 3 paper-shadow summary", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.md"),
+        ("Phase 3 paper-shadow ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_LEDGER.csv"),
         ("Phase 3 completion audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COMPLETION_AUDIT.md"),
         ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
         ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
@@ -1481,6 +1485,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     cost_mode_comparison = _mapping(phase3_status.get("cost_mode_comparison"))
     cost_gate_review = _mapping(phase3_status.get("cost_gate_review"))
     family_dedup_audit = _mapping(phase3_status.get("family_dedup_audit"))
+    paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
     completion_audit = _mapping(phase3_status.get("completion_audit"))
     manifest = _mapping(phase3_status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -1518,6 +1523,13 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Kill-state families", _cell(cost_gate_review.get("kill_state_counts"))),
         ("De-dup audit", _cell(family_dedup_audit.get("status"))),
         ("De-dup multi-row groups", _cell(family_dedup_audit.get("multi_row_group_count"))),
+        ("Paper-shadow status", _cell(paper_shadow.get("status"))),
+        ("Paper-shadow would-open", _cell(paper_shadow.get("would_open_count"))),
+        ("Paper-shadow cost-review opens", _cell(paper_shadow.get("would_open_review_count"))),
+        ("Paper-shadow blocked suspend", _cell(paper_shadow.get("blocked_suspend_count"))),
+        ("Paper-shadow observer no-exposure", _cell(paper_shadow.get("observer_no_exposure_count"))),
+        ("Paper-shadow monthly estimate", _cell(paper_shadow.get("estimated_monthly_shadow_open_count"))),
+        ("Paper-shadow mean net R", _cell(paper_shadow.get("mean_shadow_open_net_r"))),
         ("Completion audit", _cell(completion_audit.get("status"))),
         ("Phase 3 repo complete", _cell(completion_audit.get("phase3_repo_complete"))),
         ("Demo authorized", _cell(completion_audit.get("demo_authorized"))),

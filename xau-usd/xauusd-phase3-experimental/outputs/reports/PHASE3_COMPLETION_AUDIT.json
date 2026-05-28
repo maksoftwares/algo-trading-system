@@ -1,9 +1,9 @@
 {
-  "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-28T11:29:16.227160Z",
+  "status": "PENDING",
+  "created_at_utc": "2026-05-28T11:46:19.257649Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "phase3_repo_complete": true,
+  "phase3_repo_complete": false,
   "demo_authorized": false,
   "real_phase1_acceptance": "PENDING",
   "real_phase2_readiness": "PENDING",
@@ -20,7 +20,7 @@
       "requirement": "Offline ledger/simulation exists from Phase 1 would-signal evidence.",
       "status": "PASS",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SIMULATION.md",
-      "detail": "accepted_events=89; status=EXPERIMENTAL_COST_SUSPEND_SCENARIO"
+      "detail": "accepted_events=108; status=EXPERIMENTAL_COST_SUSPEND_SCENARIO"
     },
     {
       "key": "safety",
@@ -62,7 +62,14 @@
       "requirement": "Primary suspended family rows have explicit keep-suspended decisions.",
       "status": "PASS",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SUSPEND_FAMILY_DECISION.md",
-      "detail": "decision=REVIEW_READY_KEEP_SUSPENDED; keep_suspended=11"
+      "detail": "decision=REVIEW_READY_KEEP_SUSPENDED; keep_suspended=12"
+    },
+    {
+      "key": "paper_shadow",
+      "requirement": "Paper-shadow side-experiment ledger and summary are generated without demo authorization.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_PAPER_SHADOW_SUMMARY.md",
+      "detail": "status=SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS; would_open=49; demo_authorized=False"
     },
     {
       "key": "promotion_rollback",
@@ -95,9 +102,9 @@
     {
       "key": "manifest",
       "requirement": "Phase 3 manifest is a clean PASS snapshot.",
-      "status": "PASS",
+      "status": "PENDING",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
-      "detail": "manifest=PASS; clean=True"
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
     },
     {
       "key": "dashboard",
@@ -107,7 +114,15 @@
       "detail": "evidence exists"
     }
   ],
-  "remaining_phase3_repo_items": [],
+  "remaining_phase3_repo_items": [
+    {
+      "key": "manifest",
+      "requirement": "Phase 3 manifest is a clean PASS snapshot.",
+      "status": "PENDING",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
+    }
+  ],
   "external_blockers": [
     {
       "gate": "VPS selection",
