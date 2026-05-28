@@ -34,6 +34,9 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_cost_mode_comparison_json": reports / "PHASE3_COST_MODE_COMPARISON.json",
         "phase3_cost_mode_comparison_md": reports / "PHASE3_COST_MODE_COMPARISON.md",
         "phase3_cost_mode_comparison_csv": reports / "PHASE3_COST_MODE_COMPARISON.csv",
+        "phase3_cost_gate_review_json": reports / "PHASE3_COST_GATE_REVIEW.json",
+        "phase3_cost_gate_review_md": reports / "PHASE3_COST_GATE_REVIEW.md",
+        "phase3_cost_gate_review_csv": reports / "PHASE3_COST_GATE_REVIEW.csv",
         "phase3_family_dedup_audit_json": reports / "PHASE3_FAMILY_DEDUP_AUDIT.json",
         "phase3_family_dedup_audit_md": reports / "PHASE3_FAMILY_DEDUP_AUDIT.md",
         "phase3_family_dedup_audit_csv": reports / "PHASE3_FAMILY_DEDUP_AUDIT.csv",
@@ -56,6 +59,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_safety": phase3_root / "scripts" / "audit_phase3_experimental_safety.py",
         "script_manifest": phase3_root / "scripts" / "generate_phase3_experimental_manifest.py",
         "script_cost_mode_comparison": phase3_root / "scripts" / "generate_phase3_cost_mode_comparison.py",
+        "script_cost_gate_review": phase3_root / "scripts" / "generate_phase3_cost_gate_review.py",
         "script_family_dedup_audit": phase3_root / "scripts" / "generate_phase3_family_dedup_audit.py",
         "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
         "script_status_dashboard_freshness": repo_root

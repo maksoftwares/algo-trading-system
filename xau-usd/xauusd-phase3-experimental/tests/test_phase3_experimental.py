@@ -134,11 +134,41 @@ def test_phase3_cost_mode_comparison_runs_all_modes(tmp_path: Path):
     assert (tmp_path / "reports" / "PHASE3_COST_MODE_COMPARISON.csv").exists()
 
 
+def test_phase3_cost_gate_review_reports_thresholds_buckets_and_kill_states(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    module = _load_script("generate_phase3_cost_gate_review")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+
+    path = module.generate_cost_gate_review(simulation.ledger_path, tmp_path / "reports")
+
+    review = json.loads(path.read_text(encoding="utf-8"))
+    assert review["status"] == "REVIEW_READY"
+    assert review["raw_ledger_rows"] == 7
+    assert review["family_unique_events"] == 5
+    assert review["review_annotation_options"] == [
+        "COST_ISSUE",
+        "TIGHT_STOP_ISSUE",
+        "TIMING_ISSUE",
+        "DUPLICATED_OBSERVER_ISSUE",
+        "UNKNOWN",
+    ]
+    thresholds = {row["threshold_r"]: row for row in review["threshold_rows"]}
+    assert thresholds[0.2]["family_unique_events"] >= thresholds[0.35]["family_unique_events"]
+    assert len(review["stop_distance_bucket_rows"]) == 4
+    assert len(review["spread_regime_bucket_rows"]) == 3
+    kill_rows = {row["bucket"]: row for row in review["kill_state_rows"]}
+    assert kill_rows["SUSPEND_FAMILY"]["raw_rows"] == 1
+    report = (tmp_path / "reports" / "PHASE3_COST_GATE_REVIEW.md").read_text(encoding="utf-8")
+    assert "Cost-In-R Gate Prototypes" in report
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+
+
 def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
     suspend_module = _load_script("analyze_phase3_suspend_family")
     comparison_module = _load_script("generate_phase3_cost_mode_comparison")
+    cost_gate_module = _load_script("generate_phase3_cost_gate_review")
     dedup_module = _load_script("generate_phase3_family_dedup_audit")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
@@ -150,6 +180,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     safety_module.generate_phase3_safety_report(ROOT, phase3 / "outputs" / "reports")
     suspend_module.analyze_suspend_family(simulation.ledger_path, phase3 / "outputs" / "reports")
     comparison_module.generate_cost_mode_comparison(FIXTURE, phase3 / "outputs" / "reports")
+    cost_gate_module.generate_cost_gate_review(simulation.ledger_path, phase3 / "outputs" / "reports")
     dedup_module.generate_family_dedup_audit(FIXTURE, phase3 / "outputs" / "reports")
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
@@ -181,6 +212,8 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["safety"]["status"] == "PASS"
     assert status["suspend_family_review"]["status"] == "REVIEW_READY"
     assert status["suspend_family_review"]["suspend_unique_family_events"] == 1
+    assert status["cost_gate_review"]["status"] == "REVIEW_READY"
+    assert status["cost_gate_review"]["threshold_count"] == 4
     assert status["manifest"]["status"] == "PENDING"
     assert status["owner_approval_flow"] == "excluded_from_real_phase2_phase3_approval_flow"
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in (
@@ -295,6 +328,10 @@ def test_phase3_suspend_family_review_summarizes_primary_vs_duplicate_rows(tmp_p
     assert review["baseline_net_expectancy_r"] == 0.1888
     assert "median_suspend_net_delta_vs_assumed_baseline_r" in review
     assert review["diagnosis_counts"] == {"tight_stop_cost_dominates": 1}
+    assert review["suggested_annotation_counts"] == {"TIGHT_STOP_ISSUE": 1}
+    rows = list(csv.DictReader((tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_ROWS.csv").open("r", encoding="utf-8")))
+    assert rows[0]["suggested_reviewer_annotation"] == "TIGHT_STOP_ISSUE"
+    assert "manual_reviewer_annotation" in rows[0]
     report = (tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_REVIEW.md").read_text(encoding="utf-8")
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
 

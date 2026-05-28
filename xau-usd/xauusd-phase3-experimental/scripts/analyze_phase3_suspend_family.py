@@ -20,6 +20,13 @@ PHASE2_AUTHORITY_SENTENCE = (
     "This report has no authority over Phase 2 readiness. "
     "PHASE2_READINESS_REPORT.md remains the sole real readiness authority."
 )
+REVIEW_ANNOTATION_OPTIONS = (
+    "COST_ISSUE",
+    "TIGHT_STOP_ISSUE",
+    "TIMING_ISSUE",
+    "DUPLICATED_OBSERVER_ISSUE",
+    "UNKNOWN",
+)
 
 
 def analyze_suspend_family(
@@ -71,6 +78,11 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         "cost_excess_r",
         "cost_excess_points",
         "diagnosis",
+        "suggested_reviewer_annotation",
+        "manual_reviewer_annotation",
+        "manual_reviewer_notes",
+        "reviewer",
+        "reviewed_at_utc",
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns)
@@ -111,6 +123,11 @@ def _enrich(row: dict[str, str]) -> dict[str, Any]:
         "cost_excess_r": _fmt(max(0.0, cost_r - MAX_COST_PROXY_R)),
         "cost_excess_points": _fmt(max(0.0, cost_points - threshold_points)),
         "diagnosis": diagnosis,
+        "suggested_reviewer_annotation": _suggested_annotation(row, diagnosis),
+        "manual_reviewer_annotation": "",
+        "manual_reviewer_notes": "",
+        "reviewer": "",
+        "reviewed_at_utc": "",
     }
 
 
@@ -123,6 +140,16 @@ def _diagnosis(row: dict[str, str], stop_distance: float, cost_points: float) ->
     if cost_points >= 150:
         return "entry_exit_cost_high_for_stop"
     return "normal_spread_small_stop"
+
+
+def _suggested_annotation(row: dict[str, str], diagnosis: str) -> str:
+    if row.get("family_event_role") == "OBSERVER_DUPLICATE":
+        return "DUPLICATED_OBSERVER_ISSUE"
+    if diagnosis == "tight_stop_cost_dominates":
+        return "TIGHT_STOP_ISSUE"
+    if diagnosis in {"wide_spread_plus_entry_exit_cost", "entry_exit_cost_high_for_stop"}:
+        return "COST_ISSUE"
+    return "UNKNOWN"
 
 
 def _summary(
@@ -161,6 +188,8 @@ def _summary(
         "median_suspend_net_delta_vs_assumed_baseline_r": round(median(delta_values), 4) if delta_values else None,
         "median_suspend_stop_distance_points": round(median(stop_values), 4) if stop_values else None,
         "diagnosis_counts": _counts(row.get("diagnosis", "") for row in suspend_rows),
+        "suggested_annotation_counts": _counts(row.get("suggested_reviewer_annotation", "") for row in suspend_rows),
+        "review_annotation_options": REVIEW_ANNOTATION_OPTIONS,
         "role_counts": _counts(row.get("family_event_role", "") for row in suspend_rows),
         "observer_counts": _counts(row.get("observer", "") for row in suspend_rows),
         "direction_counts": _counts(row.get("direction", "") for row in suspend_rows),
@@ -211,6 +240,14 @@ def _render_markdown(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str
             "",
             _table(sorted((key, str(value)) for key, value in summary["diagnosis_counts"].items())),
             "",
+            "## Reviewer Annotation Template",
+            "",
+            _table([(option, _annotation_description(option)) for option in summary["review_annotation_options"]]),
+            "",
+            "## Suggested Annotation Counts",
+            "",
+            _table(sorted((key, str(value)) for key, value in summary["suggested_annotation_counts"].items())),
+            "",
             "## Role Counts",
             "",
             _table(sorted((key, str(value)) for key, value in summary["role_counts"].items())),
@@ -243,6 +280,7 @@ def _event_table(rows: list[dict[str, Any]]) -> str:
         "net_delta_vs_assumed_baseline_r",
         "cost_excess_r",
         "diagnosis",
+        "suggested_reviewer_annotation",
     ]
     header = "| " + " | ".join(columns) + " |"
     separator = "| " + " | ".join("---" for _ in columns) + " |"
@@ -258,6 +296,16 @@ def _table(rows: list[tuple[str, str]]) -> str:
         return "No rows."
     body = [f"| {_escape(key)} | {_escape(value)} |" for key, value in rows]
     return "\n".join(["| Field | Value |", "| --- | --- |", *body])
+
+
+def _annotation_description(option: str) -> str:
+    return {
+        "COST_ISSUE": "Spread/slippage proxy dominates an otherwise mechanically valid event.",
+        "TIGHT_STOP_ISSUE": "Stop distance is so small that normal cost consumes the edge.",
+        "TIMING_ISSUE": "Event timing appears structurally poor even before cost.",
+        "DUPLICATED_OBSERVER_ISSUE": "Suspension belongs to a duplicate observer row, not a primary event.",
+        "UNKNOWN": "Reviewer could not classify the suspension with current evidence.",
+    }[option]
 
 
 def _counts(values) -> dict[str, int]:

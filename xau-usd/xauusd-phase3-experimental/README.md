@@ -25,6 +25,7 @@ The experiment lets us design and test Phase 3 concepts while Phase 2 evidence c
 - reviewable experimental ledgers
 - family-level observer de-duplication
 - explicit cost-mode stress checks
+- cost-in-R gates, stop-distance buckets, spread-regime buckets, and family kill-state summaries
 - source-hash manifests
 
 ## Commands
@@ -36,6 +37,7 @@ From this directory:
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\audit_phase3_experimental_safety.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\analyze_phase3_suspend_family.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_cost_mode_comparison.py
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_cost_gate_review.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_family_dedup_audit.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_status.py
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase3_experimental_manifest.py
@@ -64,6 +66,7 @@ Important generated outputs:
 | `PHASE3_EXPERIMENTAL_SIMULATION.md` | Human-readable simulation summary. |
 | `PHASE3_SUSPEND_FAMILY_REVIEW.md` | Review of offline rows that fail the +0.15R cost-survival threshold. |
 | `PHASE3_COST_MODE_COMPARISON.md` | Comparison of all supported cost modes against the same blocked would-signals. |
+| `PHASE3_COST_GATE_REVIEW.md` | Cost-in-R gate prototypes, stop-distance buckets, spread-regime buckets, and family kill-state summary. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.md` | Review-only audit of same-bar family grouping and duplicate/conflict classifications. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |

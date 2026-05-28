@@ -316,10 +316,12 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     phase3_safety = _mapping(phase3_status.get("safety"))
     phase3_manifest = _mapping(phase3_status.get("manifest"))
     phase3_suspend = _mapping(phase3_status.get("suspend_family_review"))
+    phase3_cost_gate = _mapping(phase3_status.get("cost_gate_review"))
     collect(phase3_simulation.get("created_at_utc"))
     collect(phase3_safety.get("created_at_utc"))
     collect(phase3_manifest.get("created_at_utc"))
     collect(phase3_suspend.get("created_at_utc"))
+    collect(phase3_cost_gate.get("created_at_utc"))
     if not candidates:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return max(candidates).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1423,6 +1425,7 @@ def _artifact_links() -> str:
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),
         ("Phase 3 suspend-family review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md"),
         ("Phase 3 cost-mode comparison", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.md"),
+        ("Phase 3 cost-gate review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.md"),
         ("Phase 3 family de-dup audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md"),
         ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
         ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
@@ -1469,6 +1472,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     safety = _mapping(phase3_status.get("safety"))
     suspend_family = _mapping(phase3_status.get("suspend_family_review"))
     cost_mode_comparison = _mapping(phase3_status.get("cost_mode_comparison"))
+    cost_gate_review = _mapping(phase3_status.get("cost_gate_review"))
     family_dedup_audit = _mapping(phase3_status.get("family_dedup_audit"))
     manifest = _mapping(phase3_status.get("manifest"))
     rows = [
@@ -1490,6 +1494,10 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Suspend primary rows", _cell(suspend_family.get("suspend_primary_rows"))),
         ("Cost-mode comparison", _cell(cost_mode_comparison.get("status"))),
         ("Stress suspend families", _cell(cost_mode_comparison.get("stress_suspend_family_unique_events"))),
+        ("Cost-gate review", _cell(cost_gate_review.get("status"))),
+        ("0.25R blocked families", _cell(cost_gate_review.get("threshold_0_25_family_unique_events"))),
+        ("Spread P95 points", _cell(cost_gate_review.get("spread_p95_points"))),
+        ("Kill-state families", _cell(cost_gate_review.get("kill_state_counts"))),
         ("De-dup audit", _cell(family_dedup_audit.get("status"))),
         ("De-dup multi-row groups", _cell(family_dedup_audit.get("multi_row_group_count"))),
         ("Rejected source rows", _cell(simulation.get("rejected_source_rows"))),

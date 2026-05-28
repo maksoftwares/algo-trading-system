@@ -22,6 +22,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json")
     suspend_family = _read_json(reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json")
     cost_mode_comparison = _read_json(reports / "PHASE3_COST_MODE_COMPARISON.json")
+    cost_gate_review = _read_json(reports / "PHASE3_COST_GATE_REVIEW.json")
     family_dedup_audit = _read_json(reports / "PHASE3_FAMILY_DEDUP_AUDIT.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
@@ -52,6 +53,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "safety": safety,
         "suspend_family_review": suspend_family,
         "cost_mode_comparison": _comparison_summary(cost_mode_comparison),
+        "cost_gate_review": _cost_gate_summary(cost_gate_review),
         "family_dedup_audit": _audit_summary(family_dedup_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
@@ -79,6 +81,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     safety = _mapping(status.get("safety"))
     suspend_family = _mapping(status.get("suspend_family_review"))
     cost_mode_comparison = _mapping(status.get("cost_mode_comparison"))
+    cost_gate_review = _mapping(status.get("cost_gate_review"))
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
     manifest = _mapping(status.get("manifest"))
     return "\n".join(
@@ -144,6 +147,10 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Suspend primary rows", str(suspend_family.get("suspend_primary_rows", "UNKNOWN"))),
                     ("Cost-mode comparison", str(cost_mode_comparison.get("status", "UNKNOWN"))),
                     ("Stress suspend family events", str(cost_mode_comparison.get("stress_suspend_family_unique_events", "UNKNOWN"))),
+                    ("Cost-gate review", str(cost_gate_review.get("status", "UNKNOWN"))),
+                    ("Cost-gate 0.25R blocked families", str(cost_gate_review.get("threshold_0_25_family_unique_events", "UNKNOWN"))),
+                    ("Spread P95 points", str(cost_gate_review.get("spread_p95_points", "UNKNOWN"))),
+                    ("Kill-state summary", str(cost_gate_review.get("kill_state_counts", "UNKNOWN"))),
                     ("De-dup audit", str(family_dedup_audit.get("status", "UNKNOWN"))),
                     ("De-dup classifications", str(family_dedup_audit.get("classification_counts", "UNKNOWN"))),
                     ("Manifest status", str(manifest.get("status", "UNKNOWN"))),
@@ -192,6 +199,43 @@ def _comparison_summary(comparison: dict[str, object]) -> dict[str, object]:
         "stress_suspend_family_unique_events": stress.get("suspend_family_unique_events", "UNKNOWN")
         if isinstance(stress, dict)
         else "UNKNOWN",
+    }
+
+
+def _cost_gate_summary(review: dict[str, object]) -> dict[str, object]:
+    if not review:
+        return {}
+    threshold_rows = review.get("threshold_rows", [])
+    if not isinstance(threshold_rows, list):
+        threshold_rows = []
+    kill_rows = review.get("kill_state_rows", [])
+    if not isinstance(kill_rows, list):
+        kill_rows = []
+    threshold_025 = next(
+        (row for row in threshold_rows if isinstance(row, dict) and str(row.get("threshold_r")) == "0.25"),
+        {},
+    )
+    kill_state_counts = {
+        str(row.get("bucket", "UNKNOWN")): row.get("family_unique_events", "UNKNOWN")
+        for row in kill_rows
+        if isinstance(row, dict)
+    }
+    return {
+        "status": review.get("status", "UNKNOWN"),
+        "created_at_utc": review.get("created_at_utc", ""),
+        "threshold_count": len(threshold_rows),
+        "threshold_0_25_family_unique_events": threshold_025.get("family_unique_events", "UNKNOWN")
+        if isinstance(threshold_025, dict)
+        else "UNKNOWN",
+        "stop_bucket_count": len(review.get("stop_distance_bucket_rows", []))
+        if isinstance(review.get("stop_distance_bucket_rows"), list)
+        else "UNKNOWN",
+        "spread_bucket_count": len(review.get("spread_regime_bucket_rows", []))
+        if isinstance(review.get("spread_regime_bucket_rows"), list)
+        else "UNKNOWN",
+        "spread_median_points": review.get("spread_median_points", "UNKNOWN"),
+        "spread_p95_points": review.get("spread_p95_points", "UNKNOWN"),
+        "kill_state_counts": kill_state_counts,
     }
 
 
