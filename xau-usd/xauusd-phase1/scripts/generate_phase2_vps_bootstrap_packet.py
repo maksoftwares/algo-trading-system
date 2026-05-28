@@ -192,6 +192,7 @@ def _bootstrap_phases(root: Path) -> list[dict[str, Any]]:
             "objective": "Confirm objective gates before any paper-mode implementation.",
             "steps": [
                 "Run scripts/run_phase1_periodic_checks.py with the VPS MT5 Files directory and passive spread Files directory.",
+                "Install or verify the Windows Task Scheduler entry for periodic checks.",
                 "Verify PHASE2_READINESS_REPORT.md and PHASE2_DEMO_PREFLIGHT_REPORT.md are PASS.",
                 "Verify PHASE2_DEMO_COUNTDOWN.md has zero pending gates.",
                 "Only then create outputs/reports/PHASE2_OWNER_APPROVAL.md.",
@@ -201,6 +202,7 @@ def _bootstrap_phases(root: Path) -> list[dict[str, Any]]:
                 str(root / "outputs" / "reports" / "PHASE2_DEMO_PREFLIGHT_REPORT.md"),
                 str(root / "outputs" / "reports" / "PHASE2_DEMO_COUNTDOWN.md"),
                 str(root / "outputs" / "reports" / "PHASE2_OWNER_APPROVAL.md"),
+                str(root / "scripts" / "install_phase2_periodic_checks_task.ps1"),
             ],
         },
     ]
@@ -229,6 +231,16 @@ def _commands() -> dict[str, str]:
         ),
         "generate_bootstrap_packet": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_bootstrap_packet.py"
+        ),
+        "install_periodic_checks_task": (
+            r".\scripts\install_phase2_periodic_checks_task.ps1 "
+            r"-Phase1Root <phase1_root> "
+            r"-PythonExe <phase0_python_exe> "
+            r"-FilesDir <mt5_files_dir> "
+            r"-SpreadFilesDir <spread_logger_files_dir> "
+            r"-CompileLog <compile_log_path> "
+            r"-IntervalMinutes 60 "
+            r"-WhatIfOnly"
         ),
     }
 

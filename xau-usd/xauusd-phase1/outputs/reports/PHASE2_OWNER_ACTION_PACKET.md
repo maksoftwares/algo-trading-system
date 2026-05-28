@@ -28,8 +28,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 26.75 | 72.0 | 45.25 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 27.84 | 96.0 | 68.16 | hours |
+| Active-market 72-hour soak | PENDING | 26.83 | 72.0 | 45.17 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 27.91 | 96.0 | 68.09 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Checklist
@@ -78,6 +78,12 @@ Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_r
 
 ```powershell
 .\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20
+```
+
+### install_periodic_checks_task_dry_run
+
+```powershell
+.\scripts\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly
 ```
 
 ## Owner Templates

@@ -196,6 +196,16 @@ def _commands() -> dict[str, str]:
             r".\scripts\capture_phase2_vps_latency_evidence.ps1 "
             r'-Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20'
         ),
+        "install_periodic_checks_task_dry_run": (
+            r".\scripts\install_phase2_periodic_checks_task.ps1 "
+            r"-Phase1Root <phase1_root> "
+            r"-PythonExe <phase0_python_exe> "
+            r"-FilesDir <mt5_files_dir> "
+            r"-SpreadFilesDir <spread_logger_files_dir> "
+            r"-CompileLog <compile_log_path> "
+            r"-IntervalMinutes 60 "
+            r"-WhatIfOnly"
+        ),
     }
 
 

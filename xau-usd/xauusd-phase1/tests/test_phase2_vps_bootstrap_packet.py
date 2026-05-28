@@ -43,6 +43,8 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     assert "-SampleCount 20" in payload["commands"]["capture_vps_latency"]
     assert "trade_permission=false" in markdown
     assert "PHASE2_OWNER_APPROVAL.md" in markdown
+    assert "install_phase2_periodic_checks_task.ps1" in markdown
+    assert "-WhatIfOnly" in payload["commands"]["install_periodic_checks_task"]
     assert "This packet is an operational VPS bootstrap handoff only" in markdown
 
 

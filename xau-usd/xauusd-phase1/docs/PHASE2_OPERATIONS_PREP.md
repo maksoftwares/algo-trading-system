@@ -82,6 +82,21 @@ Prepared periodic command:
 This wraps status summary, soak history, acceptance, review index, Phase 2 readiness, and external health into one scheduler entry point.
 Use `--spread-files-dir` when the passive spread logger is isolated in a second MT5 Portable instance so Phase 1 soak telemetry and spread-cost telemetry do not compete for the same chart.
 
+Prepared Windows Task Scheduler installer:
+
+```powershell
+.\scripts\install_phase2_periodic_checks_task.ps1 `
+  -Phase1Root "<phase1_root>" `
+  -PythonExe "<phase0_python_exe>" `
+  -FilesDir "<mt5_files_dir>" `
+  -SpreadFilesDir "<spread_logger_files_dir>" `
+  -CompileLog "<compile_log_path>" `
+  -IntervalMinutes 60 `
+  -WhatIfOnly
+```
+
+Run first with `-WhatIfOnly` and inspect the printed command. Remove `-WhatIfOnly` only after the VPS paths are verified. The scheduled task only runs report/readiness checks; it does not start MT5, change dry-run mode, enable demo trading, or authorize broker execution.
+
 ## Disaster Recovery Runbook
 
 Recovery target:

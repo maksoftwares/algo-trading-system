@@ -30,8 +30,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1056 |
-| latest_bar | 2026.05.28 14:30:00 |
+| decision_rows | 1057 |
+| latest_bar | 2026.05.28 14:35:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -40,8 +40,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 26.75 | 72.0 | 45.25 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 27.84 | 96.0 | 68.16 | hours |
+| Active-market 72-hour soak | PENDING | 26.83 | 72.0 | 45.17 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 27.91 | 96.0 | 68.09 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions Now
@@ -105,6 +105,7 @@ Confirm objective gates before any paper-mode implementation.
 
 Steps:
 - Run scripts/run_phase1_periodic_checks.py with the VPS MT5 Files directory and passive spread Files directory.
+- Install or verify the Windows Task Scheduler entry for periodic checks.
 - Verify PHASE2_READINESS_REPORT.md and PHASE2_DEMO_PREFLIGHT_REPORT.md are PASS.
 - Verify PHASE2_DEMO_COUNTDOWN.md has zero pending gates.
 - Only then create outputs/reports/PHASE2_OWNER_APPROVAL.md.
@@ -114,6 +115,7 @@ Evidence:
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_PREFLIGHT_REPORT.md
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.md
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md
+- C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\install_phase2_periodic_checks_task.ps1
 
 ## Commands
 
@@ -147,6 +149,12 @@ Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_r
 
 ```powershell
 ..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_bootstrap_packet.py
+```
+
+### install_periodic_checks_task
+
+```powershell
+.\scripts\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly
 ```
 
 ## Evidence Paths
