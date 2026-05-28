@@ -55,18 +55,26 @@ def generate_phase3_completion_audit(phase3_root: Path, repo_root: Path | None =
         _requirement_row(key, label, evidence_paths.get(key), status, manifest, safety)
         for key, label in PHASE3_REPO_REQUIREMENTS
     ]
-    repo_complete = all(row["status"] == "PASS" for row in requirement_rows)
+    release_clean = all(row["status"] == "PASS" for row in requirement_rows)
+    repo_complete = all(row["status"] in {"PASS", "WARN"} for row in requirement_rows)
     phase1_status = _read_markdown_status(phase1_report) or "UNKNOWN"
     phase2_status = _read_markdown_status(phase2_report) or "UNKNOWN"
     countdown = _read_json(phase2_countdown)
     external_blockers = _phase2_pending_gates(phase2_report, countdown) if phase2_status != "PASS" else []
-    demo_authorized = repo_complete and phase1_status == "PASS" and phase2_status == "PASS" and not external_blockers
+    demo_authorized = release_clean and phase1_status == "PASS" and phase2_status == "PASS" and not external_blockers
+    if release_clean and not demo_authorized:
+        overall_status = "REPO_SIDE_COMPLETE_WAITING_REAL_GATES"
+    elif repo_complete and not release_clean:
+        overall_status = "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES"
+    else:
+        overall_status = "PENDING"
     audit = {
-        "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES" if repo_complete and not demo_authorized else "PENDING",
+        "status": overall_status,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
         "phase3_repo_complete": repo_complete,
+        "phase3_release_clean": release_clean,
         "demo_authorized": demo_authorized,
         "real_phase1_acceptance": phase1_status,
         "real_phase2_readiness": phase2_status,
@@ -130,8 +138,24 @@ def _requirement_row(
         gate_ok = gate_ok and safety.get("status") == "PASS" and safety.get("findings_count") == 0
         detail = f"safety={safety.get('status', 'UNKNOWN')}; findings={safety.get('findings_count', 'UNKNOWN')}"
     elif key == "manifest":
-        gate_ok = gate_ok and manifest.get("status") in {"PASS", "DIRTY_WORKTREE"}
-        detail = f"manifest={manifest.get('status', 'UNKNOWN')}; clean={manifest.get('working_tree_clean', 'UNKNOWN')}"
+        manifest_status = str(manifest.get("status", "UNKNOWN"))
+        manifest_clean = manifest.get("working_tree_clean")
+        if not gate_ok:
+            row_status = "PENDING"
+        elif manifest_status == "PASS" and manifest_clean is True:
+            row_status = "PASS"
+        elif manifest_status == "DIRTY_WORKTREE" or manifest_clean is False:
+            row_status = "WARN"
+        else:
+            row_status = "PENDING"
+        detail = f"manifest={manifest_status}; clean={manifest_clean}"
+        return {
+            "key": key,
+            "requirement": label,
+            "status": row_status,
+            "evidence": str(evidence) if evidence else "",
+            "detail": detail if exists else "missing evidence",
+        }
     elif key == "suspend_decision":
         decision = _mapping(status.get("suspend_family_decision"))
         gate_ok = gate_ok and decision.get("status") == "REVIEW_READY_KEEP_SUSPENDED"
@@ -304,6 +328,7 @@ def _render_markdown(audit: dict[str, Any]) -> str:
             _table(
                 [
                     ("Phase 3 repo-side complete", str(audit.get("phase3_repo_complete", False))),
+                    ("Phase 3 release-clean", str(audit.get("phase3_release_clean", False))),
                     ("Demo/paper authorized", str(audit.get("demo_authorized", False))),
                     ("Real Phase 1 acceptance", str(audit.get("real_phase1_acceptance", "UNKNOWN"))),
                     ("Real Phase 2 readiness", str(audit.get("real_phase2_readiness", "UNKNOWN"))),

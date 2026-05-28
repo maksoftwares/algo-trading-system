@@ -605,7 +605,7 @@ def test_phase3_ci_workflow_keeps_synthetic_reports_isolated():
     assert "not_real_review_evidence=true" in workflow
     assert "simulate_phase3_from_would_signals.py --input-csv \"$FIXTURE\" --output-dir \"$CI_SYNTH\"" in workflow
     assert "audit_phase3_experimental_safety.py --output-dir \"$CI_SYNTH\"" in workflow
-    assert "verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-manifest" in workflow
+    assert "verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-release-snapshot" in workflow
     assert "generate_phase3_experimental_manifest.py" not in workflow
     assert "generate_project_status_page.py" not in workflow
 
@@ -1020,8 +1020,10 @@ def test_phase3_completion_audit_accepts_dirty_manifest_as_wip_snapshot(tmp_path
 
     audit = json.loads(path.read_text(encoding="utf-8"))
     manifest_row = next(row for row in audit["repo_requirement_rows"] if row["key"] == "manifest")
+    assert audit["status"] == "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES"
     assert audit["phase3_repo_complete"] is True
-    assert manifest_row["status"] == "PASS"
+    assert audit["phase3_release_clean"] is False
+    assert manifest_row["status"] == "WARN"
     assert "DIRTY_WORKTREE" in manifest_row["detail"]
 
 
@@ -1162,9 +1164,57 @@ def test_phase3_artifact_verifier_can_require_clean_manifest(tmp_path: Path):
     errors = module.verify_phase3_experimental_artifacts(
         phase3,
         tmp_path / "repo",
-        require_clean_manifest=True,
+        require_clean_release_snapshot=True,
     )
     assert any("status must be PASS" in error for error in errors)
+
+
+def test_phase3_artifact_verifier_allows_dirty_working_snapshot_with_warned_audit(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
+    manifest_json = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
+    clean_manifest = json.loads(manifest_json.read_text(encoding="utf-8"))
+    manifest_json.write_text(
+        json.dumps(
+            {
+                "status": "DIRTY_WORKTREE",
+                "working_tree_clean": False,
+                "working_tree_short_status": " M x",
+                "files": clean_manifest["files"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    completion_json = reports / "PHASE3_COMPLETION_AUDIT.json"
+    completion_json.write_text(
+        json.dumps(
+            {
+                "repo_requirement_rows": [
+                    {
+                        "key": "manifest",
+                        "status": "WARN",
+                        "evidence": str(reports / "PHASE3_EXPERIMENTAL_MANIFEST.md"),
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert module.verify_phase3_experimental_artifacts(
+        phase3,
+        tmp_path / "repo",
+        allow_dirty_working_snapshot=True,
+    ) == []
 
 
 def test_phase3_artifact_verifier_detects_status_simulation_mismatch(tmp_path: Path):

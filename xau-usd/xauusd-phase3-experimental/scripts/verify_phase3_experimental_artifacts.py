@@ -67,6 +67,8 @@ def verify_phase3_experimental_artifacts(
     repo_root: Path | None = None,
     require_git_tracked: bool = False,
     require_clean_manifest: bool = False,
+    allow_dirty_working_snapshot: bool = False,
+    require_clean_release_snapshot: bool = False,
 ) -> list[str]:
     phase3_root = phase3_root.resolve()
     repo_root = (repo_root or phase3_root.parents[1]).resolve()
@@ -94,8 +96,10 @@ def verify_phase3_experimental_artifacts(
             errors.append(f"required Phase 3 JSON artifact is not git-tracked: {path}")
     errors.extend(_verify_consistency(reports))
     errors.extend(_verify_current_state_freshness(reports, repo_root))
-    if require_clean_manifest:
+    if require_clean_manifest or require_clean_release_snapshot:
         errors.extend(_verify_clean_manifest(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"))
+    elif allow_dirty_working_snapshot:
+        errors.extend(_verify_working_manifest(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"))
     return errors
 
 
@@ -152,6 +156,16 @@ def _verify_consistency(reports: Path) -> list[str]:
     if isinstance(audit_rows, list):
         for row in audit_rows:
             item = _mapping(row)
+            if item.get("key") == "manifest":
+                manifest_is_dirty = (
+                    manifest.get("status") == "DIRTY_WORKTREE"
+                    or manifest.get("working_tree_clean") is False
+                    or bool(str(manifest.get("working_tree_short_status", "")).strip())
+                )
+                if manifest_is_dirty and item.get("status") == "PASS":
+                    errors.append("completion audit must mark a dirty Phase 3 manifest row as WARN, not PASS.")
+                if not manifest_is_dirty and manifest.get("status") == "PASS" and item.get("status") != "PASS":
+                    errors.append("completion audit must mark a clean PASS Phase 3 manifest row as PASS.")
             evidence = Path(str(item.get("evidence", "")))
             if str(evidence) and not evidence.exists():
                 errors.append(f"completion audit references missing evidence: {evidence}")
@@ -211,6 +225,33 @@ def _verify_clean_manifest(path: Path) -> list[str]:
     if str(manifest.get("working_tree_short_status", "")).strip():
         errors.append("Phase 3 manifest must not record a dirty working_tree_short_status")
     return errors
+
+
+def _verify_working_manifest(path: Path) -> list[str]:
+    if not path.exists():
+        return [f"missing required Phase 3 manifest JSON: {path}"]
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    status = manifest.get("status")
+    if status not in {"PASS", "DIRTY_WORKTREE"}:
+        return [f"Phase 3 working manifest status must be PASS or DIRTY_WORKTREE: {status}"]
+    return []
+
+
+def _dirty_manifest_warnings(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    dirty = (
+        manifest.get("status") == "DIRTY_WORKTREE"
+        or manifest.get("working_tree_clean") is False
+        or bool(str(manifest.get("working_tree_short_status", "")).strip())
+    )
+    if not dirty:
+        return []
+    return [
+        "Phase 3 manifest is a dirty working snapshot; this is allowed for WIP review, "
+        "but not for release snapshots."
+    ]
 
 
 def _verify_current_state_freshness(reports: Path, repo_root: Path) -> list[str]:
@@ -310,19 +351,37 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--require-clean-manifest",
         action="store_true",
-        help="Fail if PHASE3_EXPERIMENTAL_MANIFEST.json is not a clean PASS snapshot.",
+        help="Deprecated alias for --require-clean-release-snapshot.",
+    )
+    parser.add_argument(
+        "--allow-dirty-working-snapshot",
+        action="store_true",
+        help="Allow a DIRTY_WORKTREE manifest for local WIP review snapshots and print a warning.",
+    )
+    parser.add_argument(
+        "--require-clean-release-snapshot",
+        action="store_true",
+        help="Fail if PHASE3_EXPERIMENTAL_MANIFEST.json is not a clean PASS release snapshot.",
     )
     args = parser.parse_args(argv)
+    clean_required = args.require_clean_manifest or args.require_clean_release_snapshot
+    if args.allow_dirty_working_snapshot and clean_required:
+        parser.error("--allow-dirty-working-snapshot cannot be combined with clean release snapshot requirements")
     errors = verify_phase3_experimental_artifacts(
         phase3_root=args.phase3_root,
         repo_root=args.repo_root,
         require_git_tracked=args.require_git_tracked,
         require_clean_manifest=args.require_clean_manifest,
+        allow_dirty_working_snapshot=args.allow_dirty_working_snapshot,
+        require_clean_release_snapshot=args.require_clean_release_snapshot,
     )
     if errors:
         for error in errors:
             print(f"FAIL: {error}")
         return 1
+    if args.allow_dirty_working_snapshot:
+        for warning in _dirty_manifest_warnings(args.phase3_root / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_MANIFEST.json"):
+            print(f"WARN: {warning}")
     print("Phase 3 experimental artifacts: PASS")
     return 0
 

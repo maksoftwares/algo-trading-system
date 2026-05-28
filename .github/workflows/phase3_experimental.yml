@@ -21,7 +21,7 @@ jobs:
 
       - name: Verify committed review artifacts
         run: |
-          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-manifest
+          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-release-snapshot
           python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
       - name: Install shared Phase 0 test runtime
@@ -62,7 +62,7 @@ jobs:
 
       - name: Re-verify committed review artifacts
         run: |
-          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-manifest
+          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-release-snapshot
           python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
       - name: Verify Phase 3 remains non-deployable

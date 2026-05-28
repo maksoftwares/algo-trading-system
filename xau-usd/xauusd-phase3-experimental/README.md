@@ -66,6 +66,15 @@ From this directory:
 
 The status command is intentionally run again after the manifest and completion audit so the dashboard can show both states.
 
+Use the artifact verifier in the correct snapshot mode:
+
+```powershell
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\verify_phase3_experimental_artifacts.py --allow-dirty-working-snapshot
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-release-snapshot
+```
+
+The dirty working mode is for local WIP review only. Release/reviewer artifacts must use the clean release snapshot mode.
+
 The default input is:
 
 ```text
