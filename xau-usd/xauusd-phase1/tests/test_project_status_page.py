@@ -77,8 +77,13 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Paper-shadow status" in html
     assert "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS" in html
     assert "Paper-shadow would-open" in html
+    assert "Shadow lifecycle status" in html
+    assert "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY" in html
+    assert "Shadow lifecycle total net R" in html
     assert "Phase 3 paper-shadow summary" in html
     assert "Phase 3 paper-shadow ledger" in html
+    assert "Phase 3 shadow lifecycle summary" in html
+    assert "Phase 3 shadow lifecycle ledger" in html
     assert "candidateSearch" in html
     assert "Cost edge consumption" in html
     assert "Cost viability map" in html
@@ -366,6 +371,14 @@ def _write_phase3_status(path: Path) -> None:
                     "observer_no_exposure_count": 4,
                     "estimated_monthly_shadow_open_count": 24.0,
                     "mean_shadow_open_net_r": 0.22,
+                },
+                "shadow_lifecycle_experiment": {
+                    "status": "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
+                    "synthetic_open_count": 8,
+                    "synthetic_win_rate_pct": 50.0,
+                    "synthetic_total_net_r": 1.25,
+                    "synthetic_max_drawdown_r": -2.75,
+                    "risk_lock_counts": {"NORMAL": 8},
                 },
             }
         ),

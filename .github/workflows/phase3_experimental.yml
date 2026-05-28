@@ -48,6 +48,7 @@ jobs:
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_gate_review.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_family_dedup_audit.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_paper_shadow_experiment.py
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_shadow_lifecycle_experiment.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
           python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py

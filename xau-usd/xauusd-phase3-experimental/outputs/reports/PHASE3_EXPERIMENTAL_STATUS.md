@@ -72,9 +72,14 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Paper-shadow blocked suspend | 12 |
 | Paper-shadow observer no-exposure | 47 |
 | Paper-shadow monthly estimate | 246.28 |
-| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
-| Phase 3 repo complete | True |
+| Shadow lifecycle status | SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY |
+| Shadow lifecycle synthetic opens | 49 |
+| Shadow lifecycle net R | -10.7448 |
+| Shadow lifecycle max DD R | -11.7995 |
+| Shadow lifecycle risk locks | {'NORMAL': 28, 'SYNTHETIC_DAILY_LOCK': 75, 'SYNTHETIC_DEFENSIVE': 5} |
+| Completion audit | PENDING |
+| Phase 3 repo complete | False |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | PASS |
-| Manifest commit | ccf6bee |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | 4967c2a |

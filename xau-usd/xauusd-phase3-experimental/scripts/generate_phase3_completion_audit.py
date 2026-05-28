@@ -23,6 +23,7 @@ PHASE3_REPO_REQUIREMENTS = (
     ("suspend_review", "Suspend-family review is generated."),
     ("suspend_decision", "Primary suspended family rows have explicit keep-suspended decisions."),
     ("paper_shadow", "Paper-shadow side-experiment ledger and summary are generated without demo authorization."),
+    ("shadow_lifecycle", "Synthetic shadow lifecycle ledger and summary are generated without demo authorization."),
     ("promotion_rollback", "Promotion and rollback criteria are documented."),
     ("observer_conflict_playbook", "Observer conflict playbook is documented."),
     ("future_prompt", "Future real-implementation prompt is documented."),
@@ -93,6 +94,7 @@ def _evidence_paths(phase3_root: Path, repo_root: Path) -> dict[str, Path]:
         "suspend_review": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "suspend_decision": reports / "PHASE3_SUSPEND_FAMILY_DECISION.md",
         "paper_shadow": reports / "PHASE3_PAPER_SHADOW_SUMMARY.md",
+        "shadow_lifecycle": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
         "promotion_rollback": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
         "future_prompt": phase3_root / "docs" / "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
@@ -151,6 +153,19 @@ def _requirement_row(
             f"status={paper_shadow.get('status', 'UNKNOWN')}; "
             f"would_open={paper_shadow.get('would_open_count', 'UNKNOWN')}; "
             f"demo_authorized={paper_shadow.get('demo_authorized', 'UNKNOWN')}"
+        )
+    elif key == "shadow_lifecycle":
+        lifecycle = _mapping(status.get("shadow_lifecycle_experiment"))
+        gate_ok = (
+            gate_ok
+            and bool(lifecycle.get("synthetic_open_count"))
+            and lifecycle.get("demo_authorized") is False
+        )
+        detail = (
+            f"status={lifecycle.get('status', 'UNKNOWN')}; "
+            f"opens={lifecycle.get('synthetic_open_count', 'UNKNOWN')}; "
+            f"net_r={lifecycle.get('synthetic_total_net_r', 'UNKNOWN')}; "
+            f"demo_authorized={lifecycle.get('demo_authorized', 'UNKNOWN')}"
         )
     return {
         "key": key,

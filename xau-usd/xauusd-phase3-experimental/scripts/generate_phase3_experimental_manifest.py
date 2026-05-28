@@ -46,6 +46,9 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_paper_shadow_summary_json": reports / "PHASE3_PAPER_SHADOW_SUMMARY.json",
         "phase3_paper_shadow_summary_md": reports / "PHASE3_PAPER_SHADOW_SUMMARY.md",
         "phase3_paper_shadow_ledger_csv": reports / "PHASE3_PAPER_SHADOW_LEDGER.csv",
+        "phase3_shadow_lifecycle_summary_json": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.json",
+        "phase3_shadow_lifecycle_summary_md": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
+        "phase3_shadow_lifecycle_ledger_csv": reports / "PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
         "phase2_readiness_report": repo_root
         / "xau-usd"
         / "xauusd-phase1"
@@ -80,6 +83,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_suspend_family_decision": phase3_root / "scripts" / "generate_phase3_suspend_family_decision.py",
         "script_family_dedup_audit": phase3_root / "scripts" / "generate_phase3_family_dedup_audit.py",
         "script_paper_shadow_experiment": phase3_root / "scripts" / "generate_phase3_paper_shadow_experiment.py",
+        "script_shadow_lifecycle_experiment": phase3_root / "scripts" / "generate_phase3_shadow_lifecycle_experiment.py",
         "script_review_bundle": phase3_root / "scripts" / "generate_phase3_review_bundle.py",
         "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
         "script_status_dashboard_freshness": repo_root

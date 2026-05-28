@@ -1,9 +1,9 @@
 {
-  "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-28T11:47:40.514247Z",
+  "status": "PENDING",
+  "created_at_utc": "2026-05-28T12:09:14.447495Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "phase3_repo_complete": true,
+  "phase3_repo_complete": false,
   "demo_authorized": false,
   "real_phase1_acceptance": "PENDING",
   "real_phase2_readiness": "PENDING",
@@ -72,6 +72,13 @@
       "detail": "status=SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS; would_open=49; demo_authorized=False"
     },
     {
+      "key": "shadow_lifecycle",
+      "requirement": "Synthetic shadow lifecycle ledger and summary are generated without demo authorization.",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
+      "detail": "status=SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY; opens=49; net_r=-10.7448; demo_authorized=False"
+    },
+    {
       "key": "promotion_rollback",
       "requirement": "Promotion and rollback criteria are documented.",
       "status": "PASS",
@@ -102,9 +109,9 @@
     {
       "key": "manifest",
       "requirement": "Phase 3 manifest is a clean PASS snapshot.",
-      "status": "PASS",
+      "status": "PENDING",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
-      "detail": "manifest=PASS; clean=True"
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
     },
     {
       "key": "dashboard",
@@ -114,7 +121,15 @@
       "detail": "evidence exists"
     }
   ],
-  "remaining_phase3_repo_items": [],
+  "remaining_phase3_repo_items": [
+    {
+      "key": "manifest",
+      "requirement": "Phase 3 manifest is a clean PASS snapshot.",
+      "status": "PENDING",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
+    }
+  ],
   "external_blockers": [
     {
       "gate": "VPS selection",

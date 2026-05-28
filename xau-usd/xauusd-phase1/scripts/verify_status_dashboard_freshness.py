@@ -39,6 +39,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     soak = _mapping(phase1_summary.get("soak"))
     phase3_cost_modes = _mapping(phase3_status.get("cost_mode_comparison"))
     phase3_paper_shadow = _mapping(phase3_status.get("paper_shadow_experiment"))
+    phase3_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     median_net_by_mode = _mapping(phase3_cost_modes.get("median_net_after_proxy_by_mode"))
     suspend_count_by_mode = _mapping(phase3_cost_modes.get("suspend_family_count_by_mode"))
     core_expectations = {
@@ -60,6 +61,9 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "paper-shadow status": phase3_paper_shadow.get("status"),
         "paper-shadow would-open count": phase3_paper_shadow.get("would_open_count"),
         "paper-shadow blocked suspend count": phase3_paper_shadow.get("blocked_suspend_count"),
+        "shadow lifecycle status": phase3_lifecycle.get("status"),
+        "shadow lifecycle synthetic open count": phase3_lifecycle.get("synthetic_open_count"),
+        "shadow lifecycle total net R": phase3_lifecycle.get("synthetic_total_net_r"),
     }
     for label, value in core_expectations.items():
         if value is None or value == "":

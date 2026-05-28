@@ -55,6 +55,8 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_FAMILY_DEDUP_AUDIT.csv` | Machine-readable de-dup audit rows. |
 | `PHASE3_PAPER_SHADOW_SUMMARY.md` | Side-experiment paper-shadow lifecycle summary; demo authorization remains false. |
 | `PHASE3_PAPER_SHADOW_LEDGER.csv` | Offline paper-shadow rows showing eligible, cost-watch, blocked, duplicate, and conflict states. |
+| `PHASE3_SHADOW_LIFECYCLE_SUMMARY.md` | Synthetic post-open lifecycle summary for would-open rows; not a backtest or paper trading. |
+| `PHASE3_SHADOW_LIFECYCLE_LEDGER.csv` | Synthetic lifecycle rows with close reasons, net R, drawdown, and risk-lock states. |
 | `PHASE3_COMPLETION_AUDIT.md` | Repo-side completion audit that separates finished Phase 3 prep from external demo/paper blockers. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
@@ -89,6 +91,7 @@ EXPERIMENTAL_COST_SUSPEND_SCENARIO
 EXPERIMENTAL_BOUNDARY_FAIL
 EXPERIMENTAL_REVIEW_READY
 EXPERIMENTAL_ARCHIVED
+SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY
 ```
 
 ## Non-Negotiable Boundary
