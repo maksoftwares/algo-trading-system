@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-28T12:46:17.367029Z",
+  "created_at_utc": "2026-05-28T12:47:28.032167Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -62,7 +62,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-28T12:45:20.243779Z",
+    "created_at_utc": "2026-05-28T12:46:28.226993Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -305,7 +305,7 @@
   },
   "completion_audit": {
     "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-    "created_at_utc": "2026-05-28T12:46:17.291082Z",
+    "created_at_utc": "2026-05-28T12:47:27.965528Z",
     "phase3_repo_complete": true,
     "demo_authorized": false,
     "remaining_phase3_repo_items": 0,
@@ -313,8 +313,8 @@
   },
   "manifest": {
     "status": "PASS",
-    "commit_short": "6450400",
-    "created_at_utc": "2026-05-28T12:46:17.077125Z"
+    "commit_short": "21a0635",
+    "created_at_utc": "2026-05-28T12:47:27.751954Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

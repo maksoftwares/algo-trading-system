@@ -1,10 +1,10 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T12:46:17.077125Z",
+  "created_at_utc": "2026-05-28T12:47:27.751954Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "645040079d39d94f44ad79c99f8d1952614d06d7",
-  "commit_short": "6450400",
+  "commit_hash": "21a063557336ede4d27bfb310f5db827f08e50ac",
+  "commit_short": "21a0635",
   "working_tree_clean": true,
   "working_tree_short_status": "",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
@@ -26,7 +26,7 @@
     "phase3_safety_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
       "exists": true,
-      "sha256": "9c38883702e3cac2c04c3c1cad277f0ac1decc9687293e4f887aa67eb6e16f40",
+      "sha256": "f8b51e1e15a4606dac08a36076d82e7695be6eb6463f28ead7333e15d94cf5b4",
       "bytes": 664
     },
     "phase3_suspend_family_json": {
@@ -236,13 +236,13 @@
     "phase3_review_bundle_latest_zip": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
       "exists": true,
-      "sha256": "7922f9f7de45366305aa863be9d4b82b284749d25143e79fb6c91db8ecf0c4da",
-      "bytes": 92680
+      "sha256": "f94e52ce90de56fa305f4a64bcbe49fd1dae795b202c5fadb0e535ee98a7f6bc",
+      "bytes": 92252
     },
     "phase3_review_bundle_latest_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json",
       "exists": true,
-      "sha256": "6f7ef4a29eca1c15afeed1079c993cea1ba462ab1d38a410be894b395785050d",
+      "sha256": "6e14c6a37e0cc0de9c14a806864e0cc9bda52f9624a02abc1c0af6a7960ac295",
       "bytes": 6087
     },
     "script_simulation": {

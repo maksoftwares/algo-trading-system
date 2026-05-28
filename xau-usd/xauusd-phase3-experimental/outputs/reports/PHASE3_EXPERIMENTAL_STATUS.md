@@ -93,4 +93,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo authorized | False |
 | External blockers | 10 |
 | Manifest status | PASS |
-| Manifest commit | 6450400 |
+| Manifest commit | 21a0635 |
