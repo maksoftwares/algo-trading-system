@@ -8,8 +8,8 @@ Overall status: PASS
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T13:10:43.325092Z |
-| Commit | 3b191a8 |
+| Created at UTC | 2026-05-28T14:55:38.765882Z |
+| Commit | ae4f06f |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
 | Working tree clean | True |
@@ -23,8 +23,8 @@ Clean.
 
 | Name | Exists | Bytes | SHA256 | Path |
 | --- | --- | ---: | --- | --- |
-| phase1_status_summary | True | 3173 | d229c2e437f746c6b5dda493a4404ec01e4d496a4a074a2a330dac04eeb58b21 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json |
-| phase2_readiness_report | True | 6314 | 173c94d7d840e92d8e94c925c61279759406f8764ef4a4dc2163a56d0e65f2f3 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md |
+| phase1_status_summary | True | 3191 | 48a8672b2bde65f7524cabd7ca922f23c34cd383777fb8df950c552018508a8c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json |
+| phase2_readiness_report | True | 6529 | 851d4b020031688d1020331b755a384dd723da51a67aa8e2f7ca8dc32c031362 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md |
 | phase3_cost_gate_review_csv | True | 1620 | 8b06d2f9ef6cca5d7ed79b419e0c4b56228aa26bf9c0c1a46352861368f5f4c3 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_COST_GATE_REVIEW.csv |
 | phase3_cost_gate_review_json | True | 8704 | 156b36fd3809f0ef65f2be434c3864bcee1781bf5086f1cdcae09caf4e3ba818 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_COST_GATE_REVIEW.json |
 | phase3_cost_gate_review_md | True | 3997 | 15b5d734e3f7f0330bc4070f0deee072519ea5d007b824ae291cd2f217f948d3 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_COST_GATE_REVIEW.md |
@@ -39,7 +39,7 @@ Clean.
 | phase3_family_dedup_audit_json | True | 35827 | a9b5ea40bdb49361b4802da49abfe1cc09a4b6844d141f9d82f89d87a4bc59b5 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_FAMILY_DEDUP_AUDIT.json |
 | phase3_family_dedup_audit_md | True | 9827 | a757909c463b0b713f656231e8e3217c9dd9670e4816a58d5e2c56e6380e4018 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_FAMILY_DEDUP_AUDIT.md |
 | phase3_freeze_doc | True | 1499 | 41f0423e6771eee3a8e29ae7459afea59ad2859bcc04ba519fe39f21b3f483d7 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_FREEZE.md |
-| phase3_input_would_signals | True | 30485 | 2a91789bd7ba9d27df0aeda6f84b845f7993b449c250f7f29e0c021aefc17211 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv |
+| phase3_input_would_signals | True | 32689 | 5a22bb4163618cc82a7e80fd0587edee13f1c74f29e361e562fac8547870c1b1 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv |
 | phase3_lifecycle_guard_ledger_csv | True | 50392 | 1392cd8bd6a8d0195edab539db41bcd272af1d00ce2b8406bd43804a3029ca61 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_LIFECYCLE_GUARD_LEDGER.csv |
 | phase3_lifecycle_guard_summary_json | True | 2350 | 162e541220e7e3a33f0dc52ae3450ba0d90e9768f0b02b340d2be8975b517f66 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_LIFECYCLE_GUARD_SUMMARY.json |
 | phase3_lifecycle_guard_summary_md | True | 4288 | 4532b2a14b26e6df8545701bebe0d336baa9dc7f27407b93cebd3ecdd2dd41f9 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_LIFECYCLE_GUARD_SUMMARY.md |
@@ -49,8 +49,8 @@ Clean.
 | phase3_paper_shadow_summary_md | True | 4089 | bc206aa99b87bb20e1a5a4ca45804880b6561c1b030c3c9a5e4691380b0058fe | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_PAPER_SHADOW_SUMMARY.md |
 | phase3_promotion_rollback_doc | True | 3888 | e3d44bd18cc479ccc62e7e7215d8e0f567482602a48e1995b757f5f0ce19b688 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_PROMOTION_ROLLBACK_CRITERIA.md |
 | phase3_real_implementation_prompt | True | 2031 | f66cc798ad386212e7674d4d37a6e51517be54f711af4a39c366e9fe51109dff | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
-| phase3_review_bundle_latest_manifest | True | 6199 | 7b3fca0655c0bfd75fdb428b28babe4ae6a4deb1d1db870363d89519378061a6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json |
-| phase3_review_bundle_latest_zip | True | 93737 | 1e6e34bd9691ba5f9d88db0727924c7f1029553d415bd5f5e4a5cc0dd82e8052 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
+| phase3_review_bundle_latest_manifest | True | 6199 | 1775b32371ce26fcf2d11200e9b0771c2435a8bfbcc48e501ec2026fb75a1f23 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json |
+| phase3_review_bundle_latest_zip | True | 93517 | 1dc86bd2425389ce84ada393fb7f25c1c9edf8cde89a15c7ad86f3cc536b5423 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
 | phase3_safety_json | True | 664 | bc38e5859f71150748ee9384b39220ed53efa35efcfef0a7c69f2d563fc5b8f7 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json |
 | phase3_scope_doc | True | 5520 | 978d59a39372d85d2c04a409dd56affd30d5fabd8cc4ff35263598ea5a011173 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_SCOPE.md |
 | phase3_shadow_lifecycle_ledger_csv | True | 64626 | ce5ea54158040a76bf27023055fb8712b3dc4655d74192d119bbbfdc74f1954b | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_SHADOW_LIFECYCLE_LEDGER.csv |
@@ -76,5 +76,5 @@ Clean.
 | script_shadow_lifecycle_experiment | True | 16600 | 870bf3e34c554beb2f2d0b945a8d35fc5d7a57607585966c9dbe503fd465bdf6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_shadow_lifecycle_experiment.py |
 | script_simulation | True | 24283 | d6f88b84457a38d4545a214f659d11125802229cb3ce81b8964045b37a615e1c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\simulate_phase3_from_would_signals.py |
 | script_status | True | 26407 | cf1b4df17e0ad9654f61b1c4805d3fb995848923c3e4ea32f906544440480287 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_status.py |
-| script_status_dashboard_freshness | True | 6996 | 31b1d03c91561533afed98b0fac255d5e3f57d58dd17d8d7bf147d9d285ad9e7 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\verify_status_dashboard_freshness.py |
+| script_status_dashboard_freshness | True | 9517 | fca6606ee40a6b495e1cadd65a13b465193e1c060c8b37a2d024f69cb7138714 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\verify_status_dashboard_freshness.py |
 | script_suspend_family_decision | True | 7827 | 523c1b56a92de426f8e53e4cf0ea175f29841efd8ad16f5d117af1505a9a463f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_suspend_family_decision.py |
