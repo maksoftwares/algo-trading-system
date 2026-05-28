@@ -17,6 +17,7 @@ def test_vps_latency_report_pending_without_evidence(tmp_path):
     report = output.report_path.read_text(encoding="utf-8")
     assert output.status == "PENDING"
     assert "Overall status: PENDING" in report
+    assert "capture_phase2_vps_latency_evidence.ps1" in report
     assert any(check.name == "selection_fields" and check.status == "PENDING" for check in output.checks)
     assert any(check.name == "ping_evidence" and check.status == "PENDING" for check in output.checks)
 
@@ -97,6 +98,16 @@ def test_parse_linux_ping_output():
     assert stats.received == 4
     assert stats.loss_pct == 0
     assert stats.average_ms == 13.456
+
+
+def test_vps_latency_capture_script_is_evidence_only():
+    script = (ROOT / "scripts" / "capture_phase2_vps_latency_evidence.ps1").read_text(encoding="utf-8")
+
+    assert "generate_phase2_vps_latency_report.py" in script
+    assert "Test-NetConnection" in script
+    assert "Tee-Object -FilePath $PingPath" in script
+    assert "OrderSend" not in script
+    assert "CTrade" not in script
 
 
 def _load_module():

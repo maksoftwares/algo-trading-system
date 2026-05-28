@@ -139,7 +139,7 @@ def _owner_actions(gates: list[dict[str, str]]) -> list[dict[str, str]]:
             continue
         action = {
             "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
-            "VPS latency evidence": "After VPS is provisioned, capture ping/traceroute/Test-NetConnection evidence.",
+            "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
             "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
         }[gate]
         actions.append({"gate": gate, "status": status, "action": action})

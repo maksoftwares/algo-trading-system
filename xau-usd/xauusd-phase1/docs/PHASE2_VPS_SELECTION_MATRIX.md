@@ -105,14 +105,13 @@ Test-NetConnection <broker_or_mt5_endpoint> -Port 443
 Then generate the canonical report:
 
 ```powershell
-..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_latency_report.py `
-  --provider "<provider>" `
-  --region "<region>" `
-  --endpoint "<broker_or_mt5_endpoint>" `
-  --ping-output outputs\reports\vps_ping.txt `
-  --tracert-output outputs\reports\vps_tracert.txt `
-  --test-net-output outputs\reports\vps_test_net.txt
+.\scripts\capture_phase2_vps_latency_evidence.ps1 `
+  -Provider "<provider>" `
+  -Region "<region>" `
+  -Endpoint "<broker_or_mt5_endpoint>"
 ```
+
+Manual fallback: run `ping`, `tracert`, and `Test-NetConnection` into `outputs\reports\vps_*.txt`, then call `scripts\generate_phase2_vps_latency_report.py` with those paths.
 
 Also record from MT5:
 

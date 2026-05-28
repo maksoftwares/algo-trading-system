@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T13:21:43.817514Z",
+  "created_at_utc": "2026-05-28T13:25:39.488585Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -51,12 +51,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 25.58h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 53.92h; current active streak 25.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 26.66h; code-freeze 26.66h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 26.73h; code-freeze 26.73h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -68,17 +68,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 25.58,
+      "current": 25.67,
       "required": 72.0,
-      "remaining": 46.42,
+      "remaining": 46.33,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 26.66,
+      "current": 26.73,
       "required": 96.0,
-      "remaining": 69.34,
+      "remaining": 69.27,
       "unit": "hours"
     },
     {
@@ -99,7 +99,7 @@
     {
       "gate": "VPS latency evidence",
       "status": "PENDING",
-      "action": "After VPS is provisioned, capture ping/traceroute/Test-NetConnection evidence."
+      "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
     },
     {
       "gate": "Project owner approval",
@@ -108,19 +108,19 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1042,
-    "latest_bar": "2026.05.28 13:20:00",
+    "decision_rows": 1043,
+    "latest_bar": "2026.05.28 13:25:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "25949",
+    "observed_rows": "25996",
     "required_rows": "500",
     "observed_days": "2",
     "required_days": "5",
-    "source_rows": "82313",
+    "source_rows": "82360",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",
