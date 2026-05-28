@@ -38,6 +38,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     vps_bootstrap_path = report_dir / "PHASE2_VPS_BOOTSTRAP_PACKET.md"
     vps_matrix_path = root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"
     owner_draft_path = root / "docs" / "PHASE2_OWNER_APPROVAL_DRAFT.md"
+    transition_runbook_path = root / "docs" / "PHASE2_DEMO_TRANSITION_RUNBOOK.md"
     owner_live_path = report_dir / "PHASE2_OWNER_APPROVAL.md"
 
     countdown = _read_json(countdown_path)
@@ -100,6 +101,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
             "vps_first_day_verification": str(first_day_path),
             "vps_selection_matrix": str(vps_matrix_path),
             "owner_approval_draft": str(owner_draft_path),
+            "phase2_demo_transition_runbook": str(transition_runbook_path),
         },
     }
     output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")

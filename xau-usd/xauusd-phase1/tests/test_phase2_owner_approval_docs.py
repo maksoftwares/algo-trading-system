@@ -24,3 +24,15 @@ def test_authorization_checklist_keeps_first_day_verification_as_phase2_gate():
     assert "| VPS first-day verification | PENDING |" in checklist
     assert "periodic scheduler" in checklist
     assert "AND VPS first-day verification = PASS" in checklist
+
+
+def test_demo_transition_runbook_keeps_phase2_go_no_go_boundary():
+    runbook = (ROOT / "docs" / "PHASE2_DEMO_TRANSITION_RUNBOOK.md").read_text(encoding="utf-8")
+
+    assert "Status: PREPARED_NOT_AUTHORIZED" in runbook
+    assert "outputs/reports/PHASE2_READINESS_REPORT.md is the sole readiness authority" in runbook
+    assert "Phase 3 experimental reports may be used only as design input" in runbook
+    assert "Do not proceed unless every item above is PASS" in runbook
+    assert "paper-shadow only" in runbook
+    assert "OrderSend" in runbook
+    assert "Live-capital authorization requires a later phase" in runbook
