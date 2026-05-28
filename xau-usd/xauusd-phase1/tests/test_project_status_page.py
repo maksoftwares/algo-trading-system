@@ -30,6 +30,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
     _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    _write_phase2_bootstrap(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     (phase0_reports / "PHASE0_VERDICT.md").write_text(
         "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
@@ -75,6 +76,10 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Five-day soak" in html
     assert "Demo Trading Countdown" in html
     assert "Demo Owner Moves" in html
+    assert "VPS Bootstrap" in html
+    assert "WAITING_AND_VPS_BOOTSTRAP_PENDING" in html
+    assert "Before VPS Purchase" in html
+    assert "Phase 2 VPS bootstrap packet" in html
     assert "DEMO_NOT_READY" in html
     assert "Demo preflight" in html
     assert "Phase 2 demo preflight" in html
@@ -397,6 +402,28 @@ def _write_phase2_preflight(path: Path, status: str = "PENDING") -> None:
                 "paper_mode_implementation_authorized": False,
                 "demo_trading_authorized": False,
                 "live_trading_authorized": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase2_bootstrap(path: Path) -> None:
+    path.write_text(
+        json.dumps(
+            {
+                "status": "WAITING_AND_VPS_BOOTSTRAP_PENDING",
+                "demo_trading_authorized": False,
+                "source_status": {
+                    "vps_selection": "PENDING",
+                    "vps_latency": "PENDING",
+                    "vps_first_day_verification": "PENDING",
+                    "project_owner_approval": "PENDING",
+                },
+                "bootstrap_phases": [
+                    {"phase": "Before VPS Purchase", "objective": "Choose the VPS without touching MT5."},
+                    {"phase": "On VPS First Login", "objective": "Capture environment and latency evidence."},
+                ],
             }
         ),
         encoding="utf-8",

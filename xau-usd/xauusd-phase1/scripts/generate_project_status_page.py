@@ -58,6 +58,7 @@ def generate_project_status_page(
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    phase2_bootstrap = _read_json(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
     phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -100,6 +101,7 @@ def generate_project_status_page(
             account_example=account_example,
             phase2_countdown=phase2_countdown,
             phase2_preflight=phase2_preflight,
+            phase2_bootstrap=phase2_bootstrap,
             phase3_status=phase3_status,
         ),
         encoding="utf-8",
@@ -149,6 +151,7 @@ def _render_html(
     account_example: dict[str, Any],
     phase2_countdown: dict[str, Any],
     phase2_preflight: dict[str, Any],
+    phase2_bootstrap: dict[str, Any],
     phase3_status: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
@@ -240,6 +243,7 @@ def _render_html(
             '      <section class="grid lower-grid">',
             _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight)),
             _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown)),
+            _panel("VPS Bootstrap", _demo_vps_bootstrap_panel(phase2_bootstrap)),
             "      </section>",
             "",
             '      <section class="panel candidates-panel">',
@@ -1028,6 +1032,42 @@ def _demo_owner_moves_panel(countdown: dict[str, Any]) -> str:
     )
 
 
+def _demo_vps_bootstrap_panel(bootstrap: dict[str, Any]) -> str:
+    if not bootstrap:
+        return _list(["VPS bootstrap packet has not been generated yet."])
+    source_status = _mapping(bootstrap.get("source_status"))
+    phases = _mapping_rows(bootstrap.get("bootstrap_phases"))
+    phase_rows = [
+        {
+            "Phase": _esc(_cell(row.get("phase"))),
+            "Objective": _esc(_cell(row.get("objective"))),
+        }
+        for row in phases
+    ]
+    return "\n".join(
+        [
+            _raw_key_value_table(
+                [
+                    ("Bootstrap status", _status_badge(_cell(bootstrap.get("status", "UNKNOWN")))),
+                    ("VPS selection", _status_badge(_cell(source_status.get("vps_selection", "UNKNOWN")))),
+                    ("VPS latency", _status_badge(_cell(source_status.get("vps_latency", "UNKNOWN")))),
+                    (
+                        "VPS first-day verification",
+                        _status_badge(_cell(source_status.get("vps_first_day_verification", "UNKNOWN"))),
+                    ),
+                    ("Owner approval", _status_badge(_cell(source_status.get("project_owner_approval", "UNKNOWN")))),
+                    (
+                        "Demo authorized",
+                        _status_badge(str(bootstrap.get("demo_trading_authorized", False)).lower()),
+                    ),
+                ]
+            ),
+            '<h3 class="mini-heading">Bootstrap Sequence</h3>',
+            _html_table(phase_rows, ("Phase", "Objective")) if phase_rows else "<p class=\"muted\">No phases listed.</p>",
+        ]
+    )
+
+
 def _demo_wait_gate_table(rows: list[dict[str, Any]]) -> str:
     if not rows:
         return "<p class=\"muted\">Countdown wait gates are not available yet.</p>"
@@ -1530,6 +1570,7 @@ def _artifact_links() -> str:
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
         ("Phase 2 owner action packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.md"),
+        ("Phase 2 VPS bootstrap packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md"),
         ("Phase 2 VPS first-day verification", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md"),
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
