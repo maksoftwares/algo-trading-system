@@ -1,12 +1,12 @@
 {
-  "status": "DIRTY_WORKTREE",
-  "created_at_utc": "2026-05-28T12:09:14.129248Z",
+  "status": "PASS",
+  "created_at_utc": "2026-05-28T12:10:12.562489Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "4967c2a3bef421f2f4d49ba65ea40a9aca2db30a",
-  "commit_short": "4967c2a",
-  "working_tree_clean": false,
-  "working_tree_short_status": "M .github/workflows/phase3_experimental.yml\n M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py\n M xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py\n M xau-usd/xauusd-phase1/tests/test_project_status_page.py\n M xau-usd/xauusd-phase3-experimental/README.md\n M xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.json\n M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py\n M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py\n M xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py\n M xau-usd/xauusd-phase3-experimental/tests/test_phase3_experimental.py\n?? xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_shadow_lifecycle_experiment.py",
+  "commit_hash": "19e4925fc98c21a2fa83e6bf5ee935d3b3252a1e",
+  "commit_short": "19e4925",
+  "working_tree_clean": true,
+  "working_tree_short_status": "",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
   "safety_status": "PASS",
   "manifest_scope": "phase3_review_release_snapshot",
@@ -26,7 +26,7 @@
     "phase3_safety_json": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
       "exists": true,
-      "sha256": "1bfda650ddf0410b6f0526853043fdcfb4b382c80ec5de96a8db76781fca4e8a",
+      "sha256": "0c9ca624285f45518e92c58890ac7a50bbeb2c33222e0b70d74438b10227c945",
       "bytes": 664
     },
     "phase3_suspend_family_json": {
@@ -200,14 +200,14 @@
     "phase3_review_bundle_latest_zip": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
       "exists": true,
-      "sha256": "42d6386f852891786c62ed4115a2984561b8758562efd3f4ebd031f1fa69a717",
-      "bytes": 67697
+      "sha256": "cec9d878265c8b8f648b0553910ee2950ebd925b66efbd8ae4d2689d31dfef3c",
+      "bytes": 78561
     },
     "phase3_review_bundle_latest_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json",
       "exists": true,
-      "sha256": "db078bf30da7701c1714c60f6e34813b39b6e1cbe9df12d7dfa62f021aad9a62",
-      "bytes": 4934
+      "sha256": "6fb21b992fddfaad7e810fa7961b2f309c4ce7d9381bb0ecee17459df717fccd",
+      "bytes": 5322
     },
     "script_simulation": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\simulate_phase3_from_would_signals.py",
