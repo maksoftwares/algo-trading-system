@@ -21,6 +21,7 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     _write_readiness(report_dir / "PHASE2_READINESS_REPORT.md", vps_selection_status="PENDING")
     _write_status(report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md", "PENDING")
     _write_status(report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md", "PENDING")
+    _write_network_baseline(report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md")
     _write_status(docs / "PHASE2_VPS_SELECTION_MATRIX.md", "PENDING")
 
     output = module.generate_phase2_vps_bootstrap_packet(root)
@@ -34,6 +35,9 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     assert payload["broker_execution_authorized"] is False
     assert payload["live_trading_authorized"] is False
     assert payload["source_status"]["vps_selection"] == "PENDING"
+    assert payload["local_mt5_network_baseline"]["median_ping"] == "129.78 ms"
+    assert payload["source_reports"]["local_mt5_network_baseline"].endswith("PHASE2_LOCAL_MT5_NETWORK_BASELINE.md")
+    assert payload["evidence_paths"]["local_mt5_network_baseline"].endswith("PHASE2_LOCAL_MT5_NETWORK_BASELINE.md")
     assert [phase["phase"] for phase in payload["bootstrap_phases"]] == [
         "Before VPS Purchase",
         "On VPS First Login",
@@ -43,6 +47,8 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     assert "-SampleCount 20" in payload["commands"]["capture_vps_latency"]
     assert "trade_permission=false" in markdown
     assert "PHASE2_OWNER_APPROVAL.md" in markdown
+    assert "Local MT5 Network Baseline" in markdown
+    assert "129.78 ms" in markdown
     assert "install_phase2_periodic_checks_task.ps1" in markdown
     assert "-WhatIfOnly" in payload["commands"]["install_periodic_checks_task"]
     assert "Copy-Item docs\\templates\\vps_periodic_task.template.txt" in markdown
@@ -117,6 +123,24 @@ def _load_module():
 
 def _write_status(path: Path, status: str) -> None:
     path.write_text(f"# Report\n\nOverall status: {status}\n", encoding="utf-8")
+
+
+def _write_network_baseline(path: Path) -> None:
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Local MT5 Network Baseline",
+                "",
+                "Overall status: PASS",
+                "",
+                "| Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |",
+                "| --- | --- | --- | --- | --- | --- |",
+                "| 5755 | 185.76 ms | 129.78 ms | 121.76 ms | 312.50 ms | 1 |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def _write_readiness(

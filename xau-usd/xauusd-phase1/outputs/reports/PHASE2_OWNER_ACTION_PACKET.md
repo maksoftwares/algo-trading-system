@@ -28,9 +28,21 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 27.83 | 72.0 | 44.17 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 28.93 | 96.0 | 67.07 | hours |
+| Active-market 72-hour soak | PENDING | 27.92 | 72.0 | 44.08 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 29.0 | 96.0 | 67.0 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
+
+## Local MT5 Network Baseline
+
+| Field | Value |
+| --- | --- |
+| status | PASS |
+| samples | 5755 |
+| latest_ping | 185.76 ms |
+| median_ping | 129.78 ms |
+| best_ping | 121.76 ms |
+| worst_ping | 312.50 ms |
+| latest_access_point | 1 |
 
 ## Owner Checklist
 
@@ -105,6 +117,7 @@ Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_peri
 | phase2_readiness | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md |
 | phase2_demo_preflight | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_PREFLIGHT_REPORT.md |
 | phase2_vps_bootstrap | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_BOOTSTRAP_PACKET.md |
+| local_mt5_network_baseline | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md |
 | vps_first_day_verification | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md |
 | vps_selection_matrix | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md |
 | owner_approval_draft | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_DRAFT.md |

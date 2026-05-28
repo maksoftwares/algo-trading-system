@@ -37,6 +37,7 @@ def generate_phase2_vps_bootstrap_packet(root: Path, output_json: Path | None = 
     preflight_path = report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md"
     vps_first_day_path = report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"
     vps_latency_path = report_dir / "PHASE2_VPS_LATENCY_REPORT.md"
+    local_network_baseline_path = report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
     status_summary_path = report_dir / "PHASE1_STATUS_SUMMARY.json"
     vps_matrix_path = root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"
 
@@ -81,6 +82,7 @@ def generate_phase2_vps_bootstrap_packet(root: Path, output_json: Path | None = 
         "wait_gates": wait_gates,
         "owner_actions_now": owner_actions,
         "runtime_snapshot": _runtime_snapshot(_read_json(status_summary_path), countdown),
+        "local_mt5_network_baseline": _read_network_baseline(local_network_baseline_path),
         "bootstrap_phases": phases,
         "commands": _commands(),
         "evidence_paths": _evidence_paths(root),
@@ -91,6 +93,7 @@ def generate_phase2_vps_bootstrap_packet(root: Path, output_json: Path | None = 
             "phase2_demo_preflight": str(preflight_path),
             "vps_selection_matrix": str(vps_matrix_path),
             "vps_latency_report": str(vps_latency_path),
+            "local_mt5_network_baseline": str(local_network_baseline_path),
             "vps_first_day_verification": str(vps_first_day_path),
             "phase1_status_summary": str(status_summary_path),
         },
@@ -253,6 +256,7 @@ def _evidence_paths(root: Path) -> dict[str, str]:
         "vps_selection_matrix": str(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
         "vps_selection_decision_template": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
         "vps_latency_report": str(root / "outputs" / "reports" / "PHASE2_VPS_LATENCY_REPORT.md"),
+        "local_mt5_network_baseline": str(root / "outputs" / "reports" / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
         "vps_first_day_verification": str(root / "outputs" / "reports" / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"),
         "phase2_readiness": str(root / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"),
         "phase2_owner_approval": str(root / "outputs" / "reports" / "PHASE2_OWNER_APPROVAL.md"),
@@ -304,6 +308,10 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "## Runtime Snapshot",
             "",
             _table([(key, str(value)) for key, value in payload["runtime_snapshot"].items()]),
+            "",
+            "## Local MT5 Network Baseline",
+            "",
+            _table([(key, str(value)) for key, value in payload["local_mt5_network_baseline"].items()]),
             "",
             "## Wait Gates",
             "",
@@ -396,6 +404,31 @@ def _read_gate_table(path: Path) -> list[dict[str, str]]:
         if len(parts) >= 3:
             rows.append({"Gate": parts[0], "Status": parts[1], "Evidence": parts[2]})
     return rows
+
+
+def _read_network_baseline(path: Path) -> dict[str, str]:
+    baseline = {"status": _read_markdown_status(path) or "MISSING"}
+    if not path.exists():
+        return baseline
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    for index, line in enumerate(lines):
+        if line.startswith("| Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |"):
+            if index + 2 >= len(lines):
+                break
+            values = [part.strip() for part in lines[index + 2].strip("|").split("|")]
+            if len(values) >= 6:
+                baseline.update(
+                    {
+                        "samples": values[0],
+                        "latest_ping": values[1],
+                        "median_ping": values[2],
+                        "best_ping": values[3],
+                        "worst_ping": values[4],
+                        "latest_access_point": values[5],
+                    }
+                )
+            break
+    return baseline
 
 
 def _gate_status(gates: list[dict[str, str]], gate: str) -> str:

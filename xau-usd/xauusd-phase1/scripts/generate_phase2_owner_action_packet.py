@@ -36,6 +36,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     first_day_path = report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"
     preflight_path = report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md"
     vps_bootstrap_path = report_dir / "PHASE2_VPS_BOOTSTRAP_PACKET.md"
+    local_network_baseline_path = report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
     vps_matrix_path = root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"
     owner_draft_path = root / "docs" / "PHASE2_OWNER_APPROVAL_DRAFT.md"
     transition_runbook_path = root / "docs" / "PHASE2_DEMO_TRANSITION_RUNBOOK.md"
@@ -85,6 +86,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         "wait_gates": wait_gates,
         "owner_actions_now": owner_actions,
         "owner_checklist": checklist,
+        "local_mt5_network_baseline": _read_network_baseline(local_network_baseline_path),
         "commands": _commands(),
         "owner_templates": {
             "vps_selection_decision": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
@@ -98,6 +100,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
             "phase2_readiness": str(readiness_path),
             "phase2_demo_preflight": str(preflight_path),
             "phase2_vps_bootstrap": str(vps_bootstrap_path),
+            "local_mt5_network_baseline": str(local_network_baseline_path),
             "vps_first_day_verification": str(first_day_path),
             "vps_selection_matrix": str(vps_matrix_path),
             "owner_approval_draft": str(owner_draft_path),
@@ -269,6 +272,31 @@ def _read_gate_table(path: Path) -> list[dict[str, str]]:
     return rows
 
 
+def _read_network_baseline(path: Path) -> dict[str, str]:
+    baseline = {"status": _read_markdown_status(path) or "MISSING"}
+    if not path.exists():
+        return baseline
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    for index, line in enumerate(lines):
+        if line.startswith("| Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |"):
+            if index + 2 >= len(lines):
+                break
+            values = [part.strip() for part in lines[index + 2].strip("|").split("|")]
+            if len(values) >= 6:
+                baseline.update(
+                    {
+                        "samples": values[0],
+                        "latest_ping": values[1],
+                        "median_ping": values[2],
+                        "best_ping": values[3],
+                        "worst_ping": values[4],
+                        "latest_access_point": values[5],
+                    }
+                )
+            break
+    return baseline
+
+
 def _gate_status(gates: list[dict[str, str]], gate: str) -> str:
     for row in gates:
         if row.get("Gate") == gate:
@@ -310,6 +338,10 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "## Wait Gates",
             "",
             _rows_table(payload["wait_gates"], ["gate", "status", "current", "required", "remaining", "unit"]),
+            "",
+            "## Local MT5 Network Baseline",
+            "",
+            _table([(key, str(value)) for key, value in payload["local_mt5_network_baseline"].items()]),
             "",
             "## Owner Checklist",
             "",

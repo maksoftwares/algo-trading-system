@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T15:37:53.112251Z",
+  "created_at_utc": "2026-05-28T15:41:40.228672Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -56,12 +56,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 27.83h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 53.92h; current active streak 27.92h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 28.93h; code-freeze 28.93h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 29.00h; code-freeze 29.00h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -73,17 +73,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 27.83,
+      "current": 27.92,
       "required": 72.0,
-      "remaining": 44.17,
+      "remaining": 44.08,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 28.93,
+      "current": 29.0,
       "required": 96.0,
-      "remaining": 67.07,
+      "remaining": 67.0,
       "unit": "hours"
     },
     {
@@ -118,19 +118,19 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1069,
-    "latest_bar": "2026.05.28 15:35:00",
+    "decision_rows": 1070,
+    "latest_bar": "2026.05.28 15:40:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "27582",
+    "observed_rows": "27628",
     "required_rows": "500",
     "observed_days": "2",
     "required_days": "5",
-    "source_rows": "83946",
+    "source_rows": "83992",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",

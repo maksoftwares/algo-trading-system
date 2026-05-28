@@ -1,6 +1,6 @@
 {
   "status": "PENDING",
-  "created_at_utc": "2026-05-28T15:37:51.800056Z",
+  "created_at_utc": "2026-05-28T15:41:39.856517Z",
   "phase2_paper_mode_authorized": false,
   "demo_trading_authorized": false,
   "live_trading_authorized": false,
@@ -8,7 +8,7 @@
     {
       "name": "repo_commit_hash",
       "status": "PASS",
-      "evidence": "Repository commit hash captured: 955d8dd8e97665ff0188cdc18590c5b35727f1e0."
+      "evidence": "Repository commit hash captured: 8ab20dc11f3fe7f4697da7ea53f1b8c33c3de9c5."
     },
     {
       "name": "mt5_terminal_path",
@@ -33,7 +33,7 @@
     {
       "name": "latest_decision_log_row",
       "status": "PASS",
-      "evidence": "`C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv` has 1069 row(s); latest row captured."
+      "evidence": "`C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv` has 1070 row(s); latest row captured."
     },
     {
       "name": "external_health",
@@ -43,7 +43,7 @@
     {
       "name": "phase1_status_summary",
       "status": "PASS",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 15:35:00 keeps dry_run=true and trade_permission=false."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 15:40:00 keeps dry_run=true and trade_permission=false."
     },
     {
       "name": "phase2_readiness_report",
