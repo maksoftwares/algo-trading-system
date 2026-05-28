@@ -72,9 +72,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Paper-shadow blocked suspend | 12 |
 | Paper-shadow observer no-exposure | 47 |
 | Paper-shadow monthly estimate | 246.28 |
-| Completion audit | PENDING |
-| Phase 3 repo complete | False |
+| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
+| Phase 3 repo complete | True |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | DIRTY_WORKTREE |
-| Manifest commit | 5966d50 |
+| Manifest status | PASS |
+| Manifest commit | ccf6bee |
