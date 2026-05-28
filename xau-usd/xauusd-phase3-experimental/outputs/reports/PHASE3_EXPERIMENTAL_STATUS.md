@@ -66,5 +66,5 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 36, 'SUSPEND_FAMILY': 11} |
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 49} |
-| Manifest status | DIRTY_WORKTREE |
-| Manifest commit | 9b33e48 |
+| Manifest status | PASS |
+| Manifest commit | 73873ed |

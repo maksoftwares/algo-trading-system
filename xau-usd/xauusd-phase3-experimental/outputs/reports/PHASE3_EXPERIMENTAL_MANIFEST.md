@@ -2,35 +2,22 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: DIRTY_WORKTREE
+Overall status: PASS
 
 ## Snapshot
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T11:11:44.345617Z |
-| Commit | 9b33e48 |
+| Created at UTC | 2026-05-28T11:14:36.796412Z |
+| Commit | 73873ed |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
-| Working tree clean | False |
+| Working tree clean | True |
 | Boundary | repo_only_no_mt5_deployment_no_phase2_status_change |
 
 ## Working Tree
 
-```text
-M status.html
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py
-```
+Clean.
 
 ## Source Hashes
 
