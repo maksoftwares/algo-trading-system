@@ -50,6 +50,8 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Suspend review status | REVIEW_READY |
 | Suspend unique family events | 11 |
 | Suspend primary rows | 11 |
+| Suspend decision | REVIEW_READY_KEEP_SUSPENDED |
+| Keep-suspended primary rows | 11 |
 | Cost-mode comparison | REVIEW_READY |
 | entry_exit_proxy median net R | 0.2562 |
 | p95_fresh_proxy median net R | 0.1437 |
@@ -64,5 +66,5 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Kill-state summary | {'COST_WATCH': 2, 'NORMAL': 36, 'SUSPEND_FAMILY': 11} |
 | De-dup audit | REVIEW_READY |
 | De-dup classifications | {'TRUE_DUPLICATE': 49} |
-| Manifest status | PASS |
-| Manifest commit | 0e52b36 |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | 9b33e48 |

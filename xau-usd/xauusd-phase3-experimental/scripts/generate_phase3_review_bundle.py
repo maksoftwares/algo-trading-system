@@ -76,8 +76,10 @@ def generate_phase3_review_bundle(phase3_root: Path, output_dir: Path | None = N
     shutil.copyfile(zip_path, latest_zip_path)
     manifest_path = output_dir / f"{zip_path.stem}_manifest.json"
     manifest_path.write_text(json.dumps(bundle_manifest, indent=2), encoding="utf-8")
+    latest_bundle_manifest = dict(bundle_manifest)
+    latest_bundle_manifest["bundle_path"] = str(latest_zip_path)
     latest_path = output_dir / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json"
-    latest_path.write_text(json.dumps(bundle_manifest, indent=2), encoding="utf-8")
+    latest_path.write_text(json.dumps(latest_bundle_manifest, indent=2), encoding="utf-8")
     return zip_path
 
 

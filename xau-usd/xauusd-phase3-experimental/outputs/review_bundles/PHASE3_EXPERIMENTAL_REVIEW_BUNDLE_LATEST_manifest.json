@@ -1,0 +1,159 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-05-28T11:11:38.363184Z",
+  "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
+  "latest_bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
+  "files": [
+    {
+      "path": "README.md",
+      "exists": true,
+      "bytes": 4836
+    },
+    {
+      "path": "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
+      "exists": true,
+      "bytes": 3954
+    },
+    {
+      "path": "docs/PHASE3_EXECUTION_READINESS_DESIGN.md",
+      "exists": true,
+      "bytes": 5696
+    },
+    {
+      "path": "docs/PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+      "exists": true,
+      "bytes": 3888
+    },
+    {
+      "path": "docs/PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+      "exists": true,
+      "bytes": 1981
+    },
+    {
+      "path": "docs/PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+      "exists": true,
+      "bytes": 2031
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md",
+      "exists": true,
+      "bytes": 2367
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json",
+      "exists": true,
+      "bytes": 8059
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md",
+      "exists": true,
+      "bytes": 3746
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json",
+      "exists": true,
+      "bytes": 2006
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv",
+      "exists": true,
+      "bytes": 61015
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md",
+      "exists": true,
+      "bytes": 5004
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json",
+      "exists": true,
+      "bytes": 2055
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_ROWS.csv",
+      "exists": true,
+      "bytes": 6304
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.md",
+      "exists": true,
+      "bytes": 3111
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.json",
+      "exists": true,
+      "bytes": 9366
+    },
+    {
+      "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.csv",
+      "exists": true,
+      "bytes": 3437
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.md",
+      "exists": true,
+      "bytes": 1565
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.json",
+      "exists": true,
+      "bytes": 3717
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.csv",
+      "exists": true,
+      "bytes": 964
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.md",
+      "exists": true,
+      "bytes": 3990
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.json",
+      "exists": true,
+      "bytes": 8698
+    },
+    {
+      "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.csv",
+      "exists": true,
+      "bytes": 1615
+    },
+    {
+      "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md",
+      "exists": true,
+      "bytes": 8422
+    },
+    {
+      "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json",
+      "exists": true,
+      "bytes": 28891
+    },
+    {
+      "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.csv",
+      "exists": true,
+      "bytes": 8597
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
+      "exists": true,
+      "bytes": 570
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
+      "exists": true,
+      "bytes": 664
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md",
+      "exists": true,
+      "bytes": 11253
+    },
+    {
+      "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json",
+      "exists": true,
+      "bytes": 14489
+    }
+  ]
+}

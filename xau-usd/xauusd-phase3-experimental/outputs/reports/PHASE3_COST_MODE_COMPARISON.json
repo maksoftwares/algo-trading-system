@@ -1,6 +1,6 @@
 {
   "status": "REVIEW_READY",
-  "created_at_utc": "2026-05-28T10:11:21.844960Z",
+  "created_at_utc": "2026-05-28T11:10:37.584795Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "input_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
   "cost_modes": [
