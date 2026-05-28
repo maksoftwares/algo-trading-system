@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-28T10:44:22.964266Z",
+  "created_at_utc": "2026-05-28T10:50:40.469177Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -188,8 +188,8 @@
   },
   "manifest": {
     "status": "PASS",
-    "commit_short": "1d4df2c",
-    "created_at_utc": "2026-05-28T10:44:18.464397Z"
+    "commit_short": "0e52b36",
+    "created_at_utc": "2026-05-28T10:50:32.668949Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",
