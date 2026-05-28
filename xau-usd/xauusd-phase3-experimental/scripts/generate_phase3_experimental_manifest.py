@@ -31,6 +31,9 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
         "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "phase3_suspend_family_csv": reports / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
+        "phase3_suspend_family_decision_json": reports / "PHASE3_SUSPEND_FAMILY_DECISION.json",
+        "phase3_suspend_family_decision_md": reports / "PHASE3_SUSPEND_FAMILY_DECISION.md",
+        "phase3_suspend_family_decision_csv": reports / "PHASE3_SUSPEND_FAMILY_DECISION.csv",
         "phase3_cost_mode_comparison_json": reports / "PHASE3_COST_MODE_COMPARISON.json",
         "phase3_cost_mode_comparison_md": reports / "PHASE3_COST_MODE_COMPARISON.md",
         "phase3_cost_mode_comparison_csv": reports / "PHASE3_COST_MODE_COMPARISON.csv",
@@ -54,13 +57,26 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         / "PHASE1_STATUS_SUMMARY.json",
         "phase3_scope_doc": phase3_root / "docs" / "PHASE3_EXPERIMENTAL_SCOPE.md",
         "phase3_design_doc": phase3_root / "docs" / "PHASE3_EXECUTION_READINESS_DESIGN.md",
+        "phase3_promotion_rollback_doc": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+        "phase3_observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+        "phase3_real_implementation_prompt": phase3_root / "docs" / "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+        "phase3_review_bundle_latest_zip": phase3_root
+        / "outputs"
+        / "review_bundles"
+        / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
+        "phase3_review_bundle_latest_manifest": phase3_root
+        / "outputs"
+        / "review_bundles"
+        / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json",
         "script_simulation": phase3_root / "scripts" / "simulate_phase3_from_would_signals.py",
         "script_status": phase3_root / "scripts" / "generate_phase3_experimental_status.py",
         "script_safety": phase3_root / "scripts" / "audit_phase3_experimental_safety.py",
         "script_manifest": phase3_root / "scripts" / "generate_phase3_experimental_manifest.py",
         "script_cost_mode_comparison": phase3_root / "scripts" / "generate_phase3_cost_mode_comparison.py",
         "script_cost_gate_review": phase3_root / "scripts" / "generate_phase3_cost_gate_review.py",
+        "script_suspend_family_decision": phase3_root / "scripts" / "generate_phase3_suspend_family_decision.py",
         "script_family_dedup_audit": phase3_root / "scripts" / "generate_phase3_family_dedup_audit.py",
+        "script_review_bundle": phase3_root / "scripts" / "generate_phase3_review_bundle.py",
         "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
         "script_status_dashboard_freshness": repo_root
         / "xau-usd"

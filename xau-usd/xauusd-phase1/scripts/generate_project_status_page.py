@@ -317,11 +317,13 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     phase3_manifest = _mapping(phase3_status.get("manifest"))
     phase3_suspend = _mapping(phase3_status.get("suspend_family_review"))
     phase3_cost_gate = _mapping(phase3_status.get("cost_gate_review"))
+    phase3_suspend_decision = _mapping(phase3_status.get("suspend_family_decision"))
     collect(phase3_simulation.get("created_at_utc"))
     collect(phase3_safety.get("created_at_utc"))
     collect(phase3_manifest.get("created_at_utc"))
     collect(phase3_suspend.get("created_at_utc"))
     collect(phase3_cost_gate.get("created_at_utc"))
+    collect(phase3_suspend_decision.get("created_at_utc"))
     if not candidates:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return max(candidates).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1424,6 +1426,7 @@ def _artifact_links() -> str:
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),
         ("Phase 3 suspend-family review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md"),
+        ("Phase 3 suspend-family decision", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.md"),
         ("Phase 3 cost-mode comparison", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.md"),
         ("Phase 3 cost-gate review", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.md"),
         ("Phase 3 family de-dup audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md"),
@@ -1471,6 +1474,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     simulation = _mapping(phase3_status.get("simulation"))
     safety = _mapping(phase3_status.get("safety"))
     suspend_family = _mapping(phase3_status.get("suspend_family_review"))
+    suspend_family_decision = _mapping(phase3_status.get("suspend_family_decision"))
     cost_mode_comparison = _mapping(phase3_status.get("cost_mode_comparison"))
     cost_gate_review = _mapping(phase3_status.get("cost_gate_review"))
     family_dedup_audit = _mapping(phase3_status.get("family_dedup_audit"))
@@ -1494,6 +1498,8 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Suspend review", _cell(suspend_family.get("status"))),
         ("Suspend unique families", _cell(suspend_family.get("suspend_unique_family_events"))),
         ("Suspend primary rows", _cell(suspend_family.get("suspend_primary_rows"))),
+        ("Suspend decision", _cell(suspend_family_decision.get("status"))),
+        ("Keep-suspended primary rows", _cell(suspend_family_decision.get("keep_suspended_primary_rows"))),
         ("Cost-mode comparison", _cell(cost_mode_comparison.get("status"))),
         ("entry_exit_proxy median net R", _cell(median_net_by_mode.get("entry_exit_proxy"))),
         ("p95_fresh_proxy median net R", _cell(median_net_by_mode.get("p95_fresh_proxy"))),

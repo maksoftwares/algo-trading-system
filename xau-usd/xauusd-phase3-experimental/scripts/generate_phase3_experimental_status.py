@@ -21,6 +21,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
     manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json")
     suspend_family = _read_json(reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json")
+    suspend_family_decision = _read_json(reports / "PHASE3_SUSPEND_FAMILY_DECISION.json")
     cost_mode_comparison = _read_json(reports / "PHASE3_COST_MODE_COMPARISON.json")
     cost_gate_review = _read_json(reports / "PHASE3_COST_GATE_REVIEW.json")
     family_dedup_audit = _read_json(reports / "PHASE3_FAMILY_DEDUP_AUDIT.json")
@@ -52,6 +53,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "simulation": simulation,
         "safety": safety,
         "suspend_family_review": suspend_family,
+        "suspend_family_decision": _suspend_decision_summary(suspend_family_decision),
         "cost_mode_comparison": _comparison_summary(cost_mode_comparison),
         "cost_gate_review": _cost_gate_summary(cost_gate_review),
         "family_dedup_audit": _audit_summary(family_dedup_audit),
@@ -80,6 +82,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     simulation = _mapping(status.get("simulation"))
     safety = _mapping(status.get("safety"))
     suspend_family = _mapping(status.get("suspend_family_review"))
+    suspend_family_decision = _mapping(status.get("suspend_family_decision"))
     cost_mode_comparison = _mapping(status.get("cost_mode_comparison"))
     cost_gate_review = _mapping(status.get("cost_gate_review"))
     family_dedup_audit = _mapping(status.get("family_dedup_audit"))
@@ -147,6 +150,8 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Suspend review status", str(suspend_family.get("status", "UNKNOWN"))),
                     ("Suspend unique family events", str(suspend_family.get("suspend_unique_family_events", "UNKNOWN"))),
                     ("Suspend primary rows", str(suspend_family.get("suspend_primary_rows", "UNKNOWN"))),
+                    ("Suspend decision", str(suspend_family_decision.get("status", "UNKNOWN"))),
+                    ("Keep-suspended primary rows", str(suspend_family_decision.get("keep_suspended_primary_rows", "UNKNOWN"))),
                     ("Cost-mode comparison", str(cost_mode_comparison.get("status", "UNKNOWN"))),
                     ("entry_exit_proxy median net R", str(median_net_by_mode.get("entry_exit_proxy", "UNKNOWN"))),
                     ("p95_fresh_proxy median net R", str(median_net_by_mode.get("p95_fresh_proxy", "UNKNOWN"))),
@@ -188,6 +193,22 @@ def _manifest_summary(manifest: dict[str, object]) -> dict[str, object]:
         "status": manifest.get("status", "UNKNOWN"),
         "commit_short": manifest.get("commit_short", ""),
         "created_at_utc": manifest.get("created_at_utc", ""),
+    }
+
+
+def _suspend_decision_summary(decision: dict[str, object]) -> dict[str, object]:
+    if not decision:
+        return {}
+    counts = decision.get("codex_review_decision_counts", {})
+    if not isinstance(counts, dict):
+        counts = {}
+    return {
+        "status": decision.get("status", "UNKNOWN"),
+        "created_at_utc": decision.get("created_at_utc", ""),
+        "primary_suspend_rows": decision.get("primary_suspend_rows", "UNKNOWN"),
+        "unique_family_events": decision.get("unique_family_events", "UNKNOWN"),
+        "keep_suspended_primary_rows": counts.get("KEEP_SUSPENDED", "UNKNOWN"),
+        "future_rule_counts": decision.get("future_rule_counts", {}),
     }
 
 

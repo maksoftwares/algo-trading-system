@@ -48,12 +48,14 @@ That assumption is not written back into the real readiness reports. `PHASE2_REA
 | `PHASE3_EXPERIMENTAL_STATUS.md` | Reviewer-facing status summary. |
 | `PHASE3_SUSPEND_FAMILY_REVIEW.md` | Review of cost-survival suspensions and whether they are primary events or duplicate observer rows. |
 | `PHASE3_SUSPEND_FAMILY_ROWS.csv` | Filtered rows for each `SUSPEND_FAMILY` event with diagnosis fields. |
+| `PHASE3_SUSPEND_FAMILY_DECISION.md` | Explicit keep-suspended decisions and future implementation rules for primary suspended events. |
 | `PHASE3_COST_MODE_COMPARISON.md` | Comparison of entry-only, entry-exit, P95 fresh, and stress cost assumptions. |
 | `PHASE3_COST_MODE_COMPARISON.csv` | Machine-readable cost-mode comparison. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.md` | Review-only classification of same-bar family groups. |
 | `PHASE3_FAMILY_DEDUP_AUDIT.csv` | Machine-readable de-dup audit rows. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |
+| `PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip` | Portable review package for the experimental lane. |
 
 ## Family De-Duplication
 

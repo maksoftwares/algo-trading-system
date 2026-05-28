@@ -167,6 +167,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
     suspend_module = _load_script("analyze_phase3_suspend_family")
+    suspend_decision_module = _load_script("generate_phase3_suspend_family_decision")
     comparison_module = _load_script("generate_phase3_cost_mode_comparison")
     cost_gate_module = _load_script("generate_phase3_cost_gate_review")
     dedup_module = _load_script("generate_phase3_family_dedup_audit")
@@ -179,6 +180,10 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
     safety_module.generate_phase3_safety_report(ROOT, phase3 / "outputs" / "reports")
     suspend_module.analyze_suspend_family(simulation.ledger_path, phase3 / "outputs" / "reports")
+    suspend_decision_module.generate_suspend_family_decision(
+        phase3 / "outputs" / "reports" / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
+        phase3 / "outputs" / "reports",
+    )
     comparison_module.generate_cost_mode_comparison(FIXTURE, phase3 / "outputs" / "reports")
     cost_gate_module.generate_cost_gate_review(simulation.ledger_path, phase3 / "outputs" / "reports")
     dedup_module.generate_family_dedup_audit(FIXTURE, phase3 / "outputs" / "reports")
@@ -212,6 +217,8 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     assert status["safety"]["status"] == "PASS"
     assert status["suspend_family_review"]["status"] == "REVIEW_READY"
     assert status["suspend_family_review"]["suspend_unique_family_events"] == 1
+    assert status["suspend_family_decision"]["status"] == "REVIEW_READY_KEEP_SUSPENDED"
+    assert status["suspend_family_decision"]["keep_suspended_primary_rows"] == 1
     assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["entry_exit_proxy"] is not None
     assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["p95_fresh_proxy"] is not None
     assert status["cost_mode_comparison"]["median_net_after_proxy_by_mode"]["stress_2x_p95_proxy"] is not None
@@ -338,6 +345,77 @@ def test_phase3_suspend_family_review_summarizes_primary_vs_duplicate_rows(tmp_p
     assert "manual_reviewer_annotation" in rows[0]
     report = (tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_REVIEW.md").read_text(encoding="utf-8")
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+
+
+def test_phase3_suspend_family_decision_keeps_primary_rows_suspended(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    suspend_module = _load_script("analyze_phase3_suspend_family")
+    decision_module = _load_script("generate_phase3_suspend_family_decision")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, tmp_path / "reports")
+    suspend_module.analyze_suspend_family(simulation.ledger_path, tmp_path / "reports")
+
+    path = decision_module.generate_suspend_family_decision(
+        tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
+        tmp_path / "reports",
+    )
+
+    decision = json.loads(path.read_text(encoding="utf-8"))
+    assert decision["status"] == "REVIEW_READY_KEEP_SUSPENDED"
+    assert decision["primary_suspend_rows"] == 1
+    assert decision["codex_review_decision_counts"] == {"KEEP_SUSPENDED": 1}
+    assert decision["decision_rows"][0]["future_rule"] == "REQUIRE_TIGHT_STOP_COST_BLOCK"
+    report = (tmp_path / "reports" / "PHASE3_SUSPEND_FAMILY_DECISION.md").read_text(encoding="utf-8")
+    assert "KEEP_SUSPENDED" in report
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+
+
+def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
+    simulator = _load_script("simulate_phase3_from_would_signals")
+    safety_module = _load_script("audit_phase3_experimental_safety")
+    suspend_module = _load_script("analyze_phase3_suspend_family")
+    decision_module = _load_script("generate_phase3_suspend_family_decision")
+    comparison_module = _load_script("generate_phase3_cost_mode_comparison")
+    cost_gate_module = _load_script("generate_phase3_cost_gate_review")
+    dedup_module = _load_script("generate_phase3_family_dedup_audit")
+    manifest_module = _load_script("generate_phase3_experimental_manifest")
+    status_module = _load_script("generate_phase3_experimental_status")
+    bundle_module = _load_script("generate_phase3_review_bundle")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_reports.mkdir(parents=True)
+    (phase3 / "docs").mkdir(parents=True)
+    for name in [
+        "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "PHASE3_EXECUTION_READINESS_DESIGN.md",
+        "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+        "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+        "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+    ]:
+        (phase3 / "docs" / name).write_text("This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.\n", encoding="utf-8")
+    (phase3 / "README.md").write_text("This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.\n", encoding="utf-8")
+    simulation = simulator.simulate_phase3_from_would_signals(FIXTURE, phase3 / "outputs" / "reports")
+    safety_module.generate_phase3_safety_report(ROOT, phase3 / "outputs" / "reports")
+    suspend_module.analyze_suspend_family(simulation.ledger_path, phase3 / "outputs" / "reports")
+    decision_module.generate_suspend_family_decision(phase3 / "outputs" / "reports" / "PHASE3_SUSPEND_FAMILY_ROWS.csv", phase3 / "outputs" / "reports")
+    comparison_module.generate_cost_mode_comparison(FIXTURE, phase3 / "outputs" / "reports")
+    cost_gate_module.generate_cost_gate_review(simulation.ledger_path, phase3 / "outputs" / "reports")
+    dedup_module.generate_family_dedup_audit(FIXTURE, phase3 / "outputs" / "reports")
+    (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    manifest_module.generate_phase3_experimental_manifest(phase3, repo)
+    status_module.generate_phase3_experimental_status(phase3, repo)
+
+    bundle_path = bundle_module.generate_phase3_review_bundle(phase3)
+
+    assert bundle_path.exists()
+    latest = phase3 / "outputs" / "review_bundles" / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip"
+    latest_manifest = phase3 / "outputs" / "review_bundles" / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json"
+    assert latest.exists()
+    manifest = json.loads(latest_manifest.read_text(encoding="utf-8"))
+    assert manifest["status"] == "PASS"
+    assert any(item["path"] == "outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.md" for item in manifest["files"])
 
 
 def test_phase3_family_dedup_audit_detects_same_bar_distinct_level(tmp_path: Path):
