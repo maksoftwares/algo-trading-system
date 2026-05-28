@@ -2,46 +2,22 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: DIRTY_WORKTREE
+Overall status: PASS
 
 ## Snapshot
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T12:45:21.259955Z |
-| Commit | b8776ab |
+| Created at UTC | 2026-05-28T12:46:17.077125Z |
+| Commit | 6450400 |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
-| Working tree clean | False |
+| Working tree clean | True |
 | Boundary | repo_only_no_mt5_deployment_no_phase2_status_change |
 
 ## Working Tree
 
-```text
-M .github/workflows/phase3_experimental.yml
- M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
- M xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
- M xau-usd/xauusd-phase1/tests/test_project_status_page.py
- M xau-usd/xauusd-phase3-experimental/README.md
- M xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_GATE_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COST_MODE_COMPARISON.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_DECISION.json
- M xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.json
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
- M xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py
- M xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py
- M xau-usd/xauusd-phase3-experimental/tests/test_phase3_experimental.py
-?? xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_demo_rehearsal_package.py
-```
+Clean.
 
 ## Source Hashes
 
@@ -72,8 +48,8 @@ M .github/workflows/phase3_experimental.yml
 | phase3_paper_shadow_summary_md | True | 4089 | bc206aa99b87bb20e1a5a4ca45804880b6561c1b030c3c9a5e4691380b0058fe | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_PAPER_SHADOW_SUMMARY.md |
 | phase3_promotion_rollback_doc | True | 3888 | e3d44bd18cc479ccc62e7e7215d8e0f567482602a48e1995b757f5f0ce19b688 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_PROMOTION_ROLLBACK_CRITERIA.md |
 | phase3_real_implementation_prompt | True | 2031 | f66cc798ad386212e7674d4d37a6e51517be54f711af4a39c366e9fe51109dff | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
-| phase3_review_bundle_latest_manifest | True | 5707 | c2703ebd672a6b49d90deeb8b8b311628952fc5565e195d1cce6bbac13cf7135 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json |
-| phase3_review_bundle_latest_zip | True | 85945 | 227ae02c3d049845dda355275c3da76a3e49c96e3a5f47c28ea35b21ef9c3775 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
+| phase3_review_bundle_latest_manifest | True | 6087 | 6f7ef4a29eca1c15afeed1079c993cea1ba462ab1d38a410be894b395785050d | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST_manifest.json |
+| phase3_review_bundle_latest_zip | True | 92680 | 7922f9f7de45366305aa863be9d4b82b284749d25143e79fb6c91db8ecf0c4da | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
 | phase3_safety_json | True | 664 | 9c38883702e3cac2c04c3c1cad277f0ac1decc9687293e4f887aa67eb6e16f40 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json |
 | phase3_scope_doc | True | 5264 | d21839ba5f03dd22259957c1b83a97959b9b9f2343c8057d7d6149b3999a669e | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_SCOPE.md |
 | phase3_shadow_lifecycle_ledger_csv | True | 64626 | ce5ea54158040a76bf27023055fb8712b3dc4655d74192d119bbbfdc74f1954b | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_SHADOW_LIFECYCLE_LEDGER.csv |

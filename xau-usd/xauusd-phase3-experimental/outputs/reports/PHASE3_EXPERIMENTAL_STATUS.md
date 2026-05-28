@@ -88,9 +88,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo rehearsal shadow opens | 3 |
 | Demo rehearsal blocked | 46 |
 | Demo rehearsal can start real demo | False |
-| Completion audit | PENDING |
-| Phase 3 repo complete | False |
+| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
+| Phase 3 repo complete | True |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | DIRTY_WORKTREE |
-| Manifest commit | b8776ab |
+| Manifest status | PASS |
+| Manifest commit | 6450400 |

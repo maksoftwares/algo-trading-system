@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T12:45:21.647565Z",
+  "created_at_utc": "2026-05-28T12:46:17.460411Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
   "latest_bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
@@ -38,12 +38,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md",
       "exists": true,
-      "bytes": 3601
+      "bytes": 3620
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json",
       "exists": true,
-      "bytes": 12319
+      "bytes": 12338
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md",
@@ -198,12 +198,12 @@
     {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.md",
       "exists": true,
-      "bytes": 7896
+      "bytes": 7665
     },
     {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.json",
       "exists": true,
-      "bytes": 10878
+      "bytes": 10523
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
@@ -218,12 +218,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md",
       "exists": true,
-      "bytes": 16500
+      "bytes": 14639
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json",
       "exists": true,
-      "bytes": 21108
+      "bytes": 19255
     }
   ]
 }
