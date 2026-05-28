@@ -44,6 +44,7 @@ def test_phase2_demo_preflight_passes_when_transition_inputs_pass(tmp_path: Path
     _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
     _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
     _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_local_mt5_network_baseline(reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md", "Capital.ComMena-Demo")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
 
     output = module.generate_phase2_demo_preflight_report(root)
@@ -53,6 +54,30 @@ def test_phase2_demo_preflight_passes_when_transition_inputs_pass(tmp_path: Path
     assert payload["paper_mode_implementation_authorized"] is True
     assert payload["demo_trading_authorized"] is False
     assert all(check.status == "PASS" for check in output.checks)
+
+
+def test_phase2_demo_preflight_fails_on_live_server_context(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    reports = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
+    _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
+    _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_local_mt5_network_baseline(reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md", "Capital.ComMena-Live")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+
+    output = module.generate_phase2_demo_preflight_report(root)
+
+    assert output.status == "FAIL"
+    assert any(
+        check.name == "demo_account_isolation"
+        and check.status == "FAIL"
+        and "Capital.ComMena-Live" in check.evidence
+        for check in output.checks
+    )
 
 
 def test_phase2_demo_preflight_fails_on_unsafe_runtime_boundary(tmp_path: Path):
@@ -94,6 +119,52 @@ def test_phase2_demo_preflight_fails_on_phase3_promotion_leakage(tmp_path: Path)
     assert any(check.name == "phase3_separation" and check.status == "FAIL" for check in output.checks)
 
 
+def test_phase2_demo_preflight_fails_on_unexpected_ready_countdown_status(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    reports = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
+    _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="READY", pending_gate_count=0)
+    _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+
+    output = module.generate_phase2_demo_preflight_report(root)
+
+    assert output.status == "FAIL"
+    assert any(check.name == "demo_countdown" and check.status == "FAIL" for check in output.checks)
+
+
+def test_phase2_demo_preflight_fails_on_countdown_paper_authorization_flag(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    reports = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
+    _write_countdown(
+        reports / "PHASE2_DEMO_COUNTDOWN.json",
+        status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL",
+        pending_gate_count=0,
+        paper_mode_authorized=True,
+    )
+    _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+
+    output = module.generate_phase2_demo_preflight_report(root)
+
+    assert output.status == "FAIL"
+    assert any(
+        check.name == "authority_boundary"
+        and check.status == "FAIL"
+        and "paper_mode_authorized" in check.evidence
+        for check in output.checks
+    )
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -132,12 +203,18 @@ def _write_readiness(path: Path, status: str, pending: bool) -> None:
     )
 
 
-def _write_countdown(path: Path, status: str, pending_gate_count: int) -> None:
+def _write_countdown(
+    path: Path,
+    status: str,
+    pending_gate_count: int,
+    paper_mode_authorized: bool = False,
+) -> None:
     path.write_text(
         json.dumps(
             {
                 "status": status,
                 "pending_gate_count": pending_gate_count,
+                "paper_mode_authorized": paper_mode_authorized,
                 "broker_execution_authorized": False,
                 "live_trading_authorized": False,
             }
@@ -159,6 +236,24 @@ def _write_summary(path: Path, permission: str = "false") -> None:
                     }
                 }
             }
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_local_mt5_network_baseline(path: Path, server: str) -> None:
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Local MT5 Network Baseline",
+                "",
+                "Overall status: PASS",
+                "",
+                "| Timestamp | Server | Access Point | Ping |",
+                "| --- | --- | --- | --- |",
+                f"| 2026-05-28 12:00:00 | {server} | 1 | 20.0 ms |",
+                "",
+            ]
         ),
         encoding="utf-8",
     )

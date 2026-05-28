@@ -13,6 +13,10 @@ def test_phase2_scheduler_installer_runs_periodic_checks_only():
     assert "run_phase1_periodic_checks.py" in script
     assert "--spread-files-dir" in script
     assert "$WhatIfOnly" in script
+    assert "$WriteEvidence" in script
+    assert "vps_periodic_task.txt" in script
+    assert "last_run_verified: false" in script
+    assert "does not authorize demo trading" in script
     assert "terminal64.exe" not in script
     assert "MetaEditor" not in script
     assert "OrderSend" not in script
@@ -24,5 +28,6 @@ def test_operations_prep_documents_scheduler_dry_run_first():
 
     assert "install_phase2_periodic_checks_task.ps1" in text
     assert "-WhatIfOnly" in text
+    assert "-WriteEvidence" in text
     assert "does not start MT5" in text
     assert "does not" in text and "authorize broker execution" in text

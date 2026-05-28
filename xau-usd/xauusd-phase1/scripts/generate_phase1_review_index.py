@@ -51,7 +51,17 @@ def generate_phase1_review_index(
         _file_item("Soak history CSV", report_dir / "PHASE1_SOAK_HISTORY.csv"),
     ]
     if include_phase2_readiness:
-        items.insert(6, _markdown_item("Phase 2 readiness report", report_dir / "PHASE2_READINESS_REPORT.md"))
+        items[6:6] = [
+            _markdown_item("Phase 2 readiness report", report_dir / "PHASE2_READINESS_REPORT.md"),
+            _markdown_item("Phase 2 demo countdown", report_dir / "PHASE2_DEMO_COUNTDOWN.md"),
+            _markdown_item("Phase 2 demo preflight", report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md"),
+            _markdown_item("Phase 2 demo next actions", report_dir / "PHASE2_DEMO_NEXT_ACTIONS.md"),
+            _markdown_item("Phase 2 owner action packet", report_dir / "PHASE2_OWNER_ACTION_PACKET.md"),
+            _markdown_item("Phase 2 VPS bootstrap packet", report_dir / "PHASE2_VPS_BOOTSTRAP_PACKET.md"),
+            _markdown_item("Phase 2 VPS latency report", report_dir / "PHASE2_VPS_LATENCY_REPORT.md"),
+            _markdown_item("Phase 2 local MT5 network baseline", report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
+            _markdown_item("Phase 2 VPS first-day verification", report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"),
+        ]
 
     summary = _read_json(summary_path)
     status = _overall_status(items)
@@ -93,13 +103,17 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 
 def _overall_status(items: list[ReviewIndexItem]) -> str:
-    phase1_items = [item for item in items if item.artifact != "Phase 2 readiness report"]
+    phase1_items = [item for item in items if not _is_phase2_artifact(item.artifact)]
     if any(item.status == "FAIL" for item in phase1_items):
         return "FAIL"
     acceptance = next((item.status for item in phase1_items if item.artifact == "Acceptance report"), "")
     if acceptance == "PASS":
         return "PASS"
     return "PENDING"
+
+
+def _is_phase2_artifact(artifact: str) -> bool:
+    return artifact.startswith("Phase 2 ")
 
 
 def _render_report(

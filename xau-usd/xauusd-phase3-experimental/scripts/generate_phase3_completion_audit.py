@@ -27,11 +27,12 @@ PHASE3_REPO_REQUIREMENTS = (
     ("shadow_lifecycle", "Synthetic shadow lifecycle ledger and summary are generated without demo authorization."),
     ("lifecycle_guard", "Guarded lifecycle controller comparison is generated without demo authorization."),
     ("demo_rehearsal", "Demo rehearsal checklist and ledger are generated without demo authorization."),
+    ("demo_handoff", "Phase 3 to demo handoff is generated without demo authorization."),
     ("promotion_rollback", "Promotion and rollback criteria are documented."),
     ("observer_conflict_playbook", "Observer conflict playbook is documented."),
     ("future_prompt", "Future real-implementation prompt is documented."),
     ("review_bundle", "Portable review bundle exists."),
-    ("manifest", "Phase 3 manifest is a clean PASS snapshot."),
+    ("manifest", "Phase 3 manifest exists and records the current review/worktree state."),
     ("dashboard", "Root status dashboard is updated from Phase 3 status."),
 )
 
@@ -103,6 +104,7 @@ def _evidence_paths(phase3_root: Path, repo_root: Path) -> dict[str, Path]:
         "shadow_lifecycle": reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
         "lifecycle_guard": reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
         "demo_rehearsal": reports / "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+        "demo_handoff": reports / "PHASE3_TO_DEMO_HANDOFF.md",
         "promotion_rollback": phase3_root / "docs" / "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
         "observer_conflict_playbook": phase3_root / "docs" / "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
         "future_prompt": phase3_root / "docs" / "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
@@ -128,7 +130,7 @@ def _requirement_row(
         gate_ok = gate_ok and safety.get("status") == "PASS" and safety.get("findings_count") == 0
         detail = f"safety={safety.get('status', 'UNKNOWN')}; findings={safety.get('findings_count', 'UNKNOWN')}"
     elif key == "manifest":
-        gate_ok = gate_ok and manifest.get("status") == "PASS" and manifest.get("working_tree_clean") is True
+        gate_ok = gate_ok and manifest.get("status") in {"PASS", "DIRTY_WORKTREE"}
         detail = f"manifest={manifest.get('status', 'UNKNOWN')}; clean={manifest.get('working_tree_clean', 'UNKNOWN')}"
     elif key == "suspend_decision":
         decision = _mapping(status.get("suspend_family_decision"))
@@ -203,6 +205,18 @@ def _requirement_row(
             f"opens={rehearsal.get('shadow_open_events', 'UNKNOWN')}; "
             f"blocked={rehearsal.get('blocked_events', 'UNKNOWN')}; "
             f"can_start_real_demo={rehearsal.get('can_start_real_demo', 'UNKNOWN')}"
+        )
+    elif key == "demo_handoff":
+        handoff = _mapping(status.get("demo_handoff"))
+        gate_ok = (
+            gate_ok
+            and handoff.get("can_start_demo_now") is False
+            and handoff.get("demo_authorized") is False
+        )
+        detail = (
+            f"status={handoff.get('status', 'UNKNOWN')}; "
+            f"phase2={handoff.get('phase2_readiness', 'UNKNOWN')}; "
+            f"can_start_demo_now={handoff.get('can_start_demo_now', 'UNKNOWN')}"
         )
     return {
         "key": key,

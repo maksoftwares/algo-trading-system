@@ -18,7 +18,7 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 | Field | Value |
 | --- | --- |
 | phase2_readiness | PENDING |
-| phase2_demo_preflight | PENDING |
+| phase2_demo_preflight | FAIL |
 | phase2_demo_countdown | DEMO_NOT_READY |
 | phase2_owner_action_packet | WAITING_AND_OWNER_ACTION_REQUIRED |
 | vps_selection | PENDING |
@@ -30,8 +30,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1070 |
-| latest_bar | 2026.05.28 15:40:00 |
+| decision_rows | 1116 |
+| latest_bar | 2026.05.28 19:30:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -52,8 +52,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 27.92 | 72.0 | 44.08 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 29.03 | 96.0 | 66.97 | hours |
+| Active-market 72-hour soak | PENDING | 31.75 | 72.0 | 40.25 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 32.88 | 96.0 | 63.12 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions Now
@@ -88,6 +88,7 @@ Steps:
 - Clone or copy the repository to the VPS and keep secrets out of tracked files.
 - Install or copy MT5 Portable in dry-run configuration only.
 - Run the 20-sample latency capture against the broker or MT5 endpoint.
+- Run scripts/prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.
 - Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values.
 
 Evidence:
@@ -153,6 +154,12 @@ Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_r
 Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_periodic_task.txt
 ```
 
+### prepare_vps_evidence_workspace
+
+```powershell
+.\scripts\prepare_phase2_vps_evidence_workspace.ps1 -Phase1Root <phase1_root>
+```
+
 ### generate_vps_first_day_verification
 
 ```powershell
@@ -168,7 +175,7 @@ Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_peri
 ### install_periodic_checks_task
 
 ```powershell
-.\scripts\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly
+.\scripts\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -Provider <selected_provider> -Region <selected_region> -WriteEvidence -WhatIfOnly
 ```
 
 ## Evidence Paths

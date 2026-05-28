@@ -22,6 +22,7 @@ Phase 3 experimental reports may be used only as design input. They cannot close
 | Measured cost model | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` |
 | Measured-cost revalidation | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` |
 | Measured-cost assumption delta | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` |
+| Local MT5 broker-access baseline | `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` |
 | VPS selection | `docs/PHASE2_VPS_SELECTION_MATRIX.md` |
 | VPS latency evidence | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` |
 | VPS first-day verification | `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` |
@@ -51,6 +52,7 @@ outputs/reports/PHASE2_READINESS_REPORT.md
 outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md
 outputs/reports/PHASE2_OWNER_ACTION_PACKET.md
 outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md
+outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
 ```
 
 4. Confirm all authorization flags are still safe:
@@ -71,7 +73,16 @@ server_time_status=CLOCK_OK
 no OrderSend / CTrade / broker-side execution code
 ```
 
-6. Only then create a new implementation branch for Phase 2 paper-mode design review.
+6. Compare selected VPS latency against the local MT5 baseline:
+
+```text
+local baseline: outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
+selected VPS: outputs/reports/PHASE2_VPS_LATENCY_REPORT.md
+```
+
+The selected VPS should materially improve on local median ping and show 0% packet loss. If it does not beat the local baseline, owner review is required before the VPS can be treated as an operational improvement.
+
+7. Only then create a new implementation branch for Phase 2 paper-mode design review.
 
 ## First Implementation Scope After Go
 
@@ -107,6 +118,8 @@ Stop and stay in Phase 1 dry-run if any of these are true:
 - Phase 3 reports claim deployment authority
 - latest MT5 row is not `dry_run=true` and `trade_permission=false`
 - VPS latency, backup, recovery-login, NTP, or periodic scheduler evidence is missing
+- selected VPS latency is not compared against `PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`
+- selected VPS decision record, latency report, and first-day manual evidence disagree on provider or region
 - owner approval is absent, placeholder-filled, or mismatched with the VPS selection record
 
 ## Promotion Boundary

@@ -28,15 +28,15 @@ Overall status: SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY
 
 | Field | Value |
 | --- | --- |
-| Baseline opens | 49 |
+| Baseline opens | 53 |
 | Guarded opens | 3 |
-| Blocked rows | 46 |
-| Baseline total net R | -10.7448 |
+| Blocked rows | 50 |
+| Baseline total net R | -10.9699 |
 | Guarded total net R | -3.5803 |
-| Net improvement R | 7.1645 |
-| Baseline max DD R | -11.7995 |
+| Net improvement R | 7.3896 |
+| Baseline max DD R | -12.4405 |
 | Guarded max DD R | -3.5803 |
-| Drawdown improvement R | 8.2192 |
+| Drawdown improvement R | 8.8602 |
 | Guarded win rate pct | 0.0 |
 | Demo authorized | False |
 
@@ -47,19 +47,19 @@ Overall status: SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY
 | BLOCKED_COST_R | 3 |
 | BLOCKED_COST_WATCH | 2 |
 | BLOCKED_DAILY_BUDGET | 20 |
-| BLOCKED_PORTFOLIO_BUDGET | 21 |
+| BLOCKED_PORTFOLIO_BUDGET | 25 |
 | GUARDED_SYNTHETIC_OPEN | 3 |
-| NO_EXPOSURE_REVIEW_ONLY | 59 |
+| NO_EXPOSURE_REVIEW_ONLY | 63 |
 
 ## Block Reason Counts
 
 | Field | Value |
 | --- | --- |
-| baseline_no_exposure | 59 |
+| baseline_no_exposure | 63 |
 | blank | 3 |
 | cost_watch_requires_review_before_exposure | 2 |
 | daily_worst_case_loss_budget_would_breach | 20 |
-| portfolio_worst_case_loss_budget_would_breach | 21 |
+| portfolio_worst_case_loss_budget_would_breach | 25 |
 | proxy_cost_r_at_or_above_0_30 | 3 |
 
 ## Sample Rows

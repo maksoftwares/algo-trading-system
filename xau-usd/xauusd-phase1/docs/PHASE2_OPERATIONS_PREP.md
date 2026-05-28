@@ -1,6 +1,6 @@
 # Phase 2 Operations Prep
 
-Last updated: 2026-05-22
+Last updated: 2026-05-28
 
 This document prepares the operational pieces needed before paper-mode work is authorized. It does not authorize production-risk behavior. The Phase 1 dry-run shell remains permission-locked until the Phase 1 acceptance and owner approval gates pass.
 
@@ -35,6 +35,14 @@ docs/PHASE2_VPS_SELECTION_MATRIX.md
 ```
 
 That document remains `PENDING` until the owner selects a provider, region, backup method, and monitoring approach.
+
+Local comparison baseline:
+
+```text
+outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
+```
+
+That report is generated from sanitized MT5 terminal authorization pings and excludes account identifiers, source IP addresses, credentials, and raw log lines. The selected VPS latency report must be compared against this baseline. If the VPS does not materially improve on the local median ping or shows packet loss, owner review is required before treating the VPS as an operational improvement.
 
 ## External Health Monitor Spec
 
@@ -92,12 +100,15 @@ Prepared Windows Task Scheduler installer:
   -SpreadFilesDir "<spread_logger_files_dir>" `
   -CompileLog "<compile_log_path>" `
   -IntervalMinutes 60 `
+  -Provider "<selected_provider>" `
+  -Region "<selected_region>" `
+  -WriteEvidence `
   -WhatIfOnly
 ```
 
 Run first with `-WhatIfOnly` and inspect the printed command. Remove `-WhatIfOnly` only after the VPS paths are verified. The scheduled task only runs report/readiness checks; it does not start MT5, change dry-run mode, enable demo trading, or authorize broker execution.
 
-First-day VPS verification requires evidence that this scheduled task was registered and completed at least one readiness run. Copy `docs\templates\vps_periodic_task.template.txt` to `outputs\reports\vps_periodic_task.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, `task_registered: true`, and `last_run_verified: true` only after the task has regenerated the readiness reports on the selected VPS.
+First-day VPS verification requires evidence that this scheduled task was registered and completed at least one readiness run. The installer can write a non-authorizing `outputs\reports\vps_periodic_task.txt` evidence skeleton with `-WriteEvidence`; it intentionally leaves `evidence_status: PENDING`, `owner_verified: false`, and `last_run_verified: false`. Set `evidence_status: VERIFIED`, `owner_verified: true`, `task_registered: true`, and `last_run_verified: true` only after the task has regenerated the readiness reports on the selected VPS.
 
 ## Disaster Recovery Runbook
 

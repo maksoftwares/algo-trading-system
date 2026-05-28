@@ -29,6 +29,18 @@ OWNER_APPROVAL_REQUIRED_FIELDS = (
     *OWNER_APPROVAL_TRUE_FIELDS,
 )
 MIN_PHASE2_NET_EXPECTANCY_R = 0.15
+OWNER_APPROVAL_DANGEROUS_SCOPE_PHRASES = (
+    "plus live capital",
+    "with live capital",
+    "and live capital",
+    "authorizes live capital",
+    "live capital allowed",
+    "live trading",
+    "broker execution",
+    "broker-side execution",
+    "order execution",
+    "real money",
+)
 VPS_SELECTION_REQUIRED_FIELDS = (
     "selected_provider",
     "selected_region",
@@ -106,16 +118,8 @@ def generate_phase2_readiness_report(
             ("910000-910999", "V61", "V77", "V80", "V85", "account isolation", "cross-EA collision plan"),
         ),
         _vps_selection_gate(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
-        _status_or_pending_gate(
-            "VPS latency evidence",
-            report_dir / "PHASE2_VPS_LATENCY_REPORT.md",
-            required="PASS",
-        ),
-        _status_or_pending_gate(
-            "VPS first-day verification",
-            report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md",
-            required="PASS",
-        ),
+        _vps_latency_gate(report_dir / "PHASE2_VPS_LATENCY_REPORT.md"),
+        _vps_first_day_gate(report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
         _status_or_pending_gate(
             "Fixed-notional reporting",
@@ -176,8 +180,14 @@ def generate_phase2_readiness_report(
         _process_code_freeze_gate(soak),
         _latest_boundary_gate(latest),
         _would_signal_gate(would_signal),
-        _owner_approval_gate(owner_approval_path, root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
     ]
+    items.append(
+        _owner_approval_gate(
+            owner_approval_path,
+            root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md",
+            items,
+        )
+    )
     status = _overall_status(items)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(_render_report(status, root, items, summary), encoding="utf-8")
@@ -244,6 +254,54 @@ def _vps_selection_gate(path: Path) -> Phase2ReadinessItem:
             f"`{path}` is PASS but still has placeholder decision field(s): {', '.join(placeholders)}.",
         )
     return Phase2ReadinessItem("VPS selection", "PASS", f"`{path}` status is PASS with completed decision record.")
+
+
+def _vps_latency_gate(path: Path) -> Phase2ReadinessItem:
+    base = _status_or_pending_gate("VPS latency evidence", path, required="PASS")
+    if base.status != "PASS":
+        return base
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if "| local_baseline_comparison | PASS |" not in text:
+        return Phase2ReadinessItem(
+            "VPS latency evidence",
+            "FAIL",
+            f"`{path}` is PASS but does not prove local_baseline_comparison PASS.",
+        )
+    if "Local MT5 baseline:" not in text:
+        return Phase2ReadinessItem(
+            "VPS latency evidence",
+            "FAIL",
+            f"`{path}` is PASS but is missing the local MT5 baseline evidence path.",
+        )
+    return Phase2ReadinessItem(
+        "VPS latency evidence",
+        "PASS",
+        f"`{path}` status is PASS and includes local baseline comparison.",
+    )
+
+
+def _vps_first_day_gate(path: Path) -> Phase2ReadinessItem:
+    base = _status_or_pending_gate("VPS first-day verification", path, required="PASS")
+    if base.status != "PASS":
+        return base
+    text = path.read_text(encoding="utf-8", errors="replace")
+    if "| selected_vps_consistency | PASS |" not in text:
+        return Phase2ReadinessItem(
+            "VPS first-day verification",
+            "FAIL",
+            f"`{path}` is PASS but does not prove selected_vps_consistency PASS.",
+        )
+    if "| Demo trading authorized | false |" not in text:
+        return Phase2ReadinessItem(
+            "VPS first-day verification",
+            "FAIL",
+            f"`{path}` is PASS but does not preserve demo_trading_authorized=false in the evidence packet.",
+        )
+    return Phase2ReadinessItem(
+        "VPS first-day verification",
+        "PASS",
+        f"`{path}` status is PASS and includes selected-VPS consistency proof.",
+    )
 
 
 def _parse_decision_record_fields(text: str) -> dict[str, str]:
@@ -442,7 +500,11 @@ def _would_signal_gate(would_signal: dict[str, Any]) -> Phase2ReadinessItem:
     return Phase2ReadinessItem("Would-signal evidence", "WARN", "No would-signal clusters found yet.")
 
 
-def _owner_approval_gate(path: Path, vps_selection_path: Path) -> Phase2ReadinessItem:
+def _owner_approval_gate(
+    path: Path,
+    vps_selection_path: Path,
+    objective_items: list[Phase2ReadinessItem],
+) -> Phase2ReadinessItem:
     if not path.exists():
         return Phase2ReadinessItem(
             "Project owner approval",
@@ -484,6 +546,21 @@ def _owner_approval_gate(path: Path, vps_selection_path: Path) -> Phase2Readines
             "PENDING",
             f"`{path}` scope must be paper-mode only.",
         )
+    if "no live capital" not in scope and "no capital" not in scope:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` scope must explicitly prohibit live capital.",
+        )
+    dangerous_scope_phrases = [
+        phrase for phrase in OWNER_APPROVAL_DANGEROUS_SCOPE_PHRASES if phrase in scope
+    ]
+    if dangerous_scope_phrases:
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            f"`{path}` contains forbidden owner approval scope phrase(s): {', '.join(dangerous_scope_phrases)}.",
+        )
     minimum_net = _to_float(fields.get("minimum_net_expectancy_r"))
     if minimum_net is None or minimum_net < MIN_PHASE2_NET_EXPECTANCY_R:
         return Phase2ReadinessItem(
@@ -494,6 +571,19 @@ def _owner_approval_gate(path: Path, vps_selection_path: Path) -> Phase2Readines
     vps_mismatch = _owner_approval_vps_mismatch(fields, vps_selection_path)
     if vps_mismatch:
         return Phase2ReadinessItem("Project owner approval", "PENDING", vps_mismatch)
+    objective_blockers = [item for item in objective_items if item.status != "PASS"]
+    if objective_blockers:
+        blocker_names = ", ".join(item.gate for item in objective_blockers[:8])
+        extra = len(objective_blockers) - 8
+        suffix = f", plus {extra} more" if extra > 0 else ""
+        return Phase2ReadinessItem(
+            "Project owner approval",
+            "PENDING",
+            (
+                f"`{path}` is signed, but owner approval is invalid until every objective gate is PASS. "
+                f"Still pending/failing: {blocker_names}{suffix}."
+            ),
+        )
     return Phase2ReadinessItem("Project owner approval", "PASS", f"Signed approval fields found in `{path}`.")
 
 

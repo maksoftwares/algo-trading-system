@@ -22,6 +22,7 @@ def test_vps_latency_report_pending_without_evidence(tmp_path):
     assert "ping -n 20 $endpoint" in report
     assert any(check.name == "selection_fields" and check.status == "PENDING" for check in output.checks)
     assert any(check.name == "ping_evidence" and check.status == "PENDING" for check in output.checks)
+    assert any(check.name == "local_baseline_comparison" and check.status == "PENDING" for check in output.checks)
 
 
 def test_vps_latency_report_passes_with_clean_windows_evidence(tmp_path):
@@ -30,6 +31,7 @@ def test_vps_latency_report_passes_with_clean_windows_evidence(tmp_path):
     ping = tmp_path / "ping.txt"
     tracert = tmp_path / "tracert.txt"
     test_net = tmp_path / "test_net.txt"
+    baseline = _write_local_baseline(root, median_ms=129.78)
     ping.write_text(
         "\n".join(
             [
@@ -55,10 +57,14 @@ def test_vps_latency_report_passes_with_clean_windows_evidence(tmp_path):
         ping_output_path=ping,
         tracert_output_path=tracert,
         test_net_output_path=test_net,
+        local_baseline_path=baseline,
     )
 
     assert output.status == "PASS"
-    assert "Average latency 18.00 ms is preferred" in output.report_path.read_text(encoding="utf-8")
+    report = output.report_path.read_text(encoding="utf-8")
+    assert "Average latency 18.00 ms is preferred" in report
+    assert "VPS average latency 18.00 ms improves on local median 129.78 ms" in report
+    assert "Local Median" in report
 
 
 def test_vps_latency_report_requires_enough_ping_samples(tmp_path):
@@ -67,6 +73,7 @@ def test_vps_latency_report_requires_enough_ping_samples(tmp_path):
     ping = tmp_path / "ping.txt"
     tracert = tmp_path / "tracert.txt"
     test_net = tmp_path / "test_net.txt"
+    baseline = _write_local_baseline(root, median_ms=129.78)
     ping.write_text(
         "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),\n"
         "Minimum = 17ms, Maximum = 19ms, Average = 18ms\n",
@@ -83,6 +90,7 @@ def test_vps_latency_report_requires_enough_ping_samples(tmp_path):
         ping_output_path=ping,
         tracert_output_path=tracert,
         test_net_output_path=test_net,
+        local_baseline_path=baseline,
     )
 
     assert output.status == "PENDING"
@@ -100,6 +108,7 @@ def test_vps_latency_report_fails_on_packet_loss(tmp_path):
     ping = tmp_path / "ping.txt"
     tracert = tmp_path / "tracert.txt"
     test_net = tmp_path / "test_net.txt"
+    baseline = _write_local_baseline(root, median_ms=129.78)
     ping.write_text(
         "Packets: Sent = 20, Received = 15, Lost = 5 (25% loss),\n"
         "Minimum = 17ms, Maximum = 19ms, Average = 18ms\n",
@@ -116,10 +125,81 @@ def test_vps_latency_report_fails_on_packet_loss(tmp_path):
         ping_output_path=ping,
         tracert_output_path=tracert,
         test_net_output_path=test_net,
+        local_baseline_path=baseline,
     )
 
     assert output.status == "FAIL"
     assert any(check.name == "packet_loss" and check.status == "FAIL" for check in output.checks)
+
+
+def test_vps_latency_report_fails_when_vps_does_not_beat_local_baseline(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    ping = tmp_path / "ping.txt"
+    tracert = tmp_path / "tracert.txt"
+    test_net = tmp_path / "test_net.txt"
+    baseline = _write_local_baseline(root, median_ms=129.78)
+    ping.write_text(
+        "Packets: Sent = 20, Received = 20, Lost = 0 (0% loss),\n"
+        "Minimum = 130ms, Maximum = 140ms, Average = 135ms\n",
+        encoding="utf-8",
+    )
+    tracert.write_text("Tracing route to broker.example\n", encoding="utf-8")
+    test_net.write_text("TcpTestSucceeded : True\n", encoding="utf-8")
+
+    output = module.generate_phase2_vps_latency_report(
+        root=root,
+        provider="FXVM",
+        region="Dubai",
+        endpoint="broker.example",
+        ping_output_path=ping,
+        tracert_output_path=tracert,
+        test_net_output_path=test_net,
+        local_baseline_path=baseline,
+    )
+
+    assert output.status == "FAIL"
+    assert any(
+        check.name == "local_baseline_comparison"
+        and check.status == "FAIL"
+        and "does not beat local median" in check.evidence
+        for check in output.checks
+    )
+
+
+def test_vps_latency_report_keeps_small_baseline_improvement_pending_for_owner_review(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    ping = tmp_path / "ping.txt"
+    tracert = tmp_path / "tracert.txt"
+    test_net = tmp_path / "test_net.txt"
+    baseline = _write_local_baseline(root, median_ms=100.00)
+    ping.write_text(
+        "Packets: Sent = 20, Received = 20, Lost = 0 (0% loss),\n"
+        "Minimum = 92ms, Maximum = 98ms, Average = 95ms\n",
+        encoding="utf-8",
+    )
+    tracert.write_text("Tracing route to broker.example\n", encoding="utf-8")
+    test_net.write_text("TcpTestSucceeded : True\n", encoding="utf-8")
+
+    output = module.generate_phase2_vps_latency_report(
+        root=root,
+        provider="FXVM",
+        region="Dubai",
+        endpoint="broker.example",
+        ping_output_path=ping,
+        tracert_output_path=tracert,
+        test_net_output_path=test_net,
+        local_baseline_path=baseline,
+    )
+
+    assert output.status == "PENDING"
+    assert any(
+        check.name == "local_baseline_comparison"
+        and check.status == "WARN"
+        and "owner review required" in check.evidence
+        for check in output.checks
+    )
 
 
 def test_parse_linux_ping_output():
@@ -139,6 +219,8 @@ def test_vps_latency_capture_script_is_evidence_only():
     script = (ROOT / "scripts" / "capture_phase2_vps_latency_evidence.ps1").read_text(encoding="utf-8")
 
     assert "generate_phase2_vps_latency_report.py" in script
+    assert "local_baseline_path=$LocalBaselinePath" in script
+    assert "--local-baseline $LocalBaselinePath" in script
     assert "Test-NetConnection" in script
     assert "ping -n $SampleCount $Endpoint" in script
     assert "Tee-Object -FilePath $PingPath" in script
@@ -158,3 +240,26 @@ def _load_module():
     sys.modules["generate_phase2_vps_latency_report"] = module
     spec.loader.exec_module(module)
     return module
+
+
+def _write_local_baseline(root: Path, median_ms: float) -> Path:
+    report = root / "outputs" / "reports" / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
+    report.parent.mkdir(parents=True, exist_ok=True)
+    report.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Local MT5 Network Baseline",
+                "",
+                "Overall status: PASS",
+                "",
+                "## Summary",
+                "",
+                "| Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |",
+                "| --- | --- | --- | --- | --- | --- |",
+                f"| 5755 | 185.76 ms | {median_ms:.2f} ms | 121.76 ms | 312.50 ms | 1 |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return report

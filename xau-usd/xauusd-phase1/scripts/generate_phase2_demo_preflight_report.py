@@ -45,6 +45,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
     countdown_path = report_dir / "PHASE2_DEMO_COUNTDOWN.json"
     summary_path = report_dir / "PHASE1_STATUS_SUMMARY.json"
     phase3_status_path = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_STATUS.json"
+    local_mt5_network_baseline_path = report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
 
     readiness_status = _read_markdown_status(readiness_path)
     readiness_gates = _read_gate_table(readiness_path)
@@ -62,6 +63,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
         _countdown_check(countdown, countdown_path),
         _latest_boundary_check(latest, summary_path),
         _countdown_authority_boundary_check(countdown, countdown_path),
+        _demo_account_isolation_check(local_mt5_network_baseline_path),
         _phase3_separation_check(phase3_status, phase3_status_path),
         _safety_check(root),
     ]
@@ -79,6 +81,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
             "phase2_demo_countdown": str(countdown_path),
             "phase1_status_summary": str(summary_path),
             "phase3_experimental_status": str(phase3_status_path),
+            "local_mt5_network_baseline": str(local_mt5_network_baseline_path),
         },
     }
     output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -109,10 +112,16 @@ def _gate_check(gates: list[dict[str, str]], gate: str) -> PreflightCheck:
 def _countdown_check(countdown: dict[str, Any], path: Path) -> PreflightCheck:
     pending_count = _to_int(countdown.get("pending_gate_count"))
     status = str(countdown.get("status", ""))
-    if pending_count == 0 and status != "DEMO_NOT_READY":
+    if pending_count == 0 and status == "DEMO_READY_TO_REQUEST_OWNER_APPROVAL":
         return PreflightCheck("demo_countdown", "PASS", f"`{path}` has zero pending gates and status {status}.")
     if pending_count is None:
         return PreflightCheck("demo_countdown", "PENDING", f"`{path}` is missing pending_gate_count.")
+    if pending_count == 0:
+        return PreflightCheck(
+            "demo_countdown",
+            "FAIL",
+            f"`{path}` has zero pending gates but unexpected status {status or 'missing'}; required DEMO_READY_TO_REQUEST_OWNER_APPROVAL.",
+        )
     return PreflightCheck(
         "demo_countdown",
         "PENDING",
@@ -140,12 +149,58 @@ def _latest_boundary_check(latest: dict[str, Any], path: Path) -> PreflightCheck
 def _countdown_authority_boundary_check(countdown: dict[str, Any], path: Path) -> PreflightCheck:
     unsafe = [
         key
-        for key in ("broker_execution_authorized", "live_trading_authorized")
+        for key in ("paper_mode_authorized", "broker_execution_authorized", "live_trading_authorized")
         if countdown.get(key) is not False
     ]
     if unsafe:
         return PreflightCheck("authority_boundary", "FAIL", f"`{path}` has unsafe authorization flag(s): {', '.join(unsafe)}.")
-    return PreflightCheck("authority_boundary", "PASS", f"`{path}` keeps broker/live authorization false.")
+    return PreflightCheck("authority_boundary", "PASS", f"`{path}` keeps paper/broker/live authorization false.")
+
+
+def _demo_account_isolation_check(path: Path) -> PreflightCheck:
+    if not path.exists():
+        return PreflightCheck(
+            "demo_account_isolation",
+            "PENDING",
+            f"`{path}` is missing; cannot prove the MT5 account/server context is demo-only.",
+        )
+    text = path.read_text(encoding="utf-8", errors="replace")
+    live_markers = sorted(_server_markers(text, ("Live", "Real")))
+    demo_markers = sorted(_server_markers(text, ("Demo", "Practice")))
+    if live_markers:
+        return PreflightCheck(
+            "demo_account_isolation",
+            "FAIL",
+            (
+                f"`{path}` contains live/real server marker(s): {', '.join(live_markers)}. "
+                "Do not start experimental demo trading from this runtime."
+            ),
+        )
+    if demo_markers:
+        return PreflightCheck(
+            "demo_account_isolation",
+            "PASS",
+            f"`{path}` contains demo/practice server marker(s) and no live/real server markers: {', '.join(demo_markers)}.",
+        )
+    return PreflightCheck(
+        "demo_account_isolation",
+        "PENDING",
+        f"`{path}` exists but does not contain an explicit demo/practice server marker.",
+    )
+
+
+def _server_markers(text: str, suffixes: tuple[str, ...]) -> set[str]:
+    markers: set[str] = set()
+    separators = " \t\r\n|`,;:()[]{}<>\"'"
+    for raw in text.replace("\\", " ").replace("/", " ").split():
+        token = raw.strip(separators)
+        if not token:
+            continue
+        normalized = token.rstrip(".,;:")
+        for suffix in suffixes:
+            if normalized.endswith(f"-{suffix}"):
+                markers.add(normalized)
+    return markers
 
 
 def _phase3_separation_check(phase3_status: dict[str, Any], path: Path) -> PreflightCheck:

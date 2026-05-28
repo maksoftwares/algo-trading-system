@@ -185,6 +185,69 @@ def test_phase2_readiness_rejects_owner_approval_vps_mismatch(tmp_path):
     )
 
 
+def test_phase2_readiness_rejects_owner_approval_without_no_live_capital_scope(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(
+        _approval_text().replace("scope: Phase 2 paper-mode only; no live capital", "scope: Phase 2 paper-mode only"),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "scope must explicitly prohibit live capital" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_rejects_owner_approval_mixed_live_scope(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(
+        _approval_text().replace(
+            "scope: Phase 2 paper-mode only; no live capital",
+            "scope: Phase 2 paper-mode only; no live capital; plus live capital after demo",
+        ),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "forbidden owner approval scope phrase" in item.evidence
+        for item in output.items
+    )
+
+
 def test_phase2_readiness_does_not_accept_placeholder_vps_selection_record(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -232,6 +295,97 @@ def test_phase2_readiness_does_not_accept_placeholder_vps_selection_record(tmp_p
         item.gate == "VPS selection"
         and item.status == "PENDING"
         and "placeholder decision field" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_rejects_early_owner_approval_when_objective_gates_pending(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(_approval_text(), encoding="utf-8")
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(item.gate == "Measured cost model" and item.status == "PENDING" for item in output.items)
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "invalid until every objective gate is PASS" in item.evidence
+        and "Measured cost model" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_rejects_vps_latency_pass_without_local_baseline_comparison(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    (report_dir / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
+        "# Phase 2 VPS Latency Report\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(_approval_text(), encoding="utf-8")
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "FAIL"
+    assert any(
+        item.gate == "VPS latency evidence"
+        and item.status == "FAIL"
+        and "local_baseline_comparison PASS" in item.evidence
+        for item in output.items
+    )
+
+
+def test_phase2_readiness_rejects_first_day_pass_without_selected_vps_consistency(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    (report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md").write_text(
+        "# Phase 2 VPS First-Day Verification\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(_approval_text(), encoding="utf-8")
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "FAIL"
+    assert any(
+        item.gate == "VPS first-day verification"
+        and item.status == "FAIL"
+        and "selected_vps_consistency PASS" in item.evidence
         for item in output.items
     )
 
@@ -560,11 +714,47 @@ def _write_phase2_schema_report(report_dir: Path) -> None:
         encoding="utf-8",
     )
     (report_dir / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
-        "# Phase 2 VPS Latency Report\n\nOverall status: PASS\n",
+        "\n".join(
+            [
+                "# Phase 2 VPS Latency Report",
+                "",
+                "Overall status: PASS",
+                "",
+                "## Checks",
+                "",
+                "| Check | Status | Evidence |",
+                "| --- | --- | --- |",
+                "| local_baseline_comparison | PASS | VPS average latency improves on local median. |",
+                "",
+                "## Evidence Paths",
+                "",
+                "- Local MT5 baseline: `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`",
+                "",
+            ]
+        ),
         encoding="utf-8",
     )
     (report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md").write_text(
-        "# Phase 2 VPS First-Day Verification\n\nOverall status: PASS\n",
+        "\n".join(
+            [
+                "# Phase 2 VPS First-Day Verification",
+                "",
+                "Overall status: PASS",
+                "",
+                "## Authority",
+                "",
+                "| Field | Value |",
+                "| --- | --- |",
+                "| Demo trading authorized | false |",
+                "",
+                "## Checks",
+                "",
+                "| name | status | evidence |",
+                "| --- | --- | --- |",
+                "| selected_vps_consistency | PASS | Selected VPS evidence matches. |",
+                "",
+            ]
+        ),
         encoding="utf-8",
     )
 

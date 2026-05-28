@@ -6,6 +6,8 @@ This is a draft only. It does not authorize Phase 2, paper trading, live capital
 
 Do not copy this document to `outputs/reports/PHASE2_OWNER_APPROVAL.md` until every objective readiness gate has passed and the project owner explicitly approves paper-mode implementation.
 
+If the live approval file is created before every objective gate is PASS, `PHASE2_READINESS_REPORT.md` rejects the owner approval gate as early/invalid even if the approval fields are otherwise complete.
+
 ## Current Gate State
 
 | Gate | Current state | Required state |
@@ -43,7 +45,18 @@ selected_vps_monthly_cost:
 latency_evidence_path:
 ```
 
-The live approval file is rejected if any required value is a placeholder, or if the selected VPS provider, region, plan, monthly cost, or latency evidence path does not match `docs/PHASE2_VPS_SELECTION_MATRIX.md`.
+The live approval file is rejected if any required value is a placeholder, if the scope does not explicitly include `no live capital`, if the scope mixes paper approval with live-capital or broker-execution wording, or if the selected VPS provider, region, plan, monthly cost, or latency evidence path does not match `docs/PHASE2_VPS_SELECTION_MATRIX.md`.
+
+Forbidden mixed-scope wording includes:
+
+```text
+plus live capital
+live trading
+broker execution
+broker-side execution
+order execution
+real money
+```
 
 ## Scope Boundary To Accept
 

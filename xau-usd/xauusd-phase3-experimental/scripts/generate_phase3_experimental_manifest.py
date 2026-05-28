@@ -27,11 +27,14 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
     paths = {
         "phase3_input_would_signals": input_csv,
         "phase3_simulation_json": reports / "PHASE3_EXPERIMENTAL_SIMULATION.json",
+        "phase3_simulation_md": reports / "PHASE3_EXPERIMENTAL_SIMULATION.md",
+        "phase3_experimental_ledger_csv": reports / "PHASE3_EXPERIMENTAL_LEDGER.csv",
         "phase3_status_json": reports / "PHASE3_EXPERIMENTAL_STATUS.json",
         "phase3_status_md": reports / "PHASE3_EXPERIMENTAL_STATUS.md",
         "phase3_completion_audit_json": reports / "PHASE3_COMPLETION_AUDIT.json",
         "phase3_completion_audit_md": reports / "PHASE3_COMPLETION_AUDIT.md",
         "phase3_safety_json": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
+        "phase3_safety_md": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
         "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
         "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
         "phase3_suspend_family_csv": reports / "PHASE3_SUSPEND_FAMILY_ROWS.csv",
@@ -59,6 +62,8 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "phase3_demo_rehearsal_plan_json": reports / "PHASE3_DEMO_REHEARSAL_PLAN.json",
         "phase3_demo_rehearsal_checklist_md": reports / "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
         "phase3_demo_rehearsal_ledger_csv": reports / "PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+        "phase3_to_demo_handoff_json": reports / "PHASE3_TO_DEMO_HANDOFF.json",
+        "phase3_to_demo_handoff_md": reports / "PHASE3_TO_DEMO_HANDOFF.md",
         "phase2_readiness_report": repo_root
         / "xau-usd"
         / "xauusd-phase1"
@@ -98,6 +103,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_shadow_lifecycle_experiment": phase3_root / "scripts" / "generate_phase3_shadow_lifecycle_experiment.py",
         "script_lifecycle_guard_experiment": phase3_root / "scripts" / "generate_phase3_lifecycle_guard_experiment.py",
         "script_demo_rehearsal_package": phase3_root / "scripts" / "generate_phase3_demo_rehearsal_package.py",
+        "script_demo_handoff": phase3_root / "scripts" / "generate_phase3_to_demo_handoff.py",
         "script_review_bundle": phase3_root / "scripts" / "generate_phase3_review_bundle.py",
         "script_artifact_verifier": phase3_root / "scripts" / "verify_phase3_experimental_artifacts.py",
         "script_status_dashboard_freshness": repo_root

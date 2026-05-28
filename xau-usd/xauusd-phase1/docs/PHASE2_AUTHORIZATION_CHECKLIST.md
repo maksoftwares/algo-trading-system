@@ -26,6 +26,7 @@ This checklist separates work that is already closed from gates that still requi
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
 | Phase 2 cost-measurement protocol | PASS | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` documents Phase 2 as a cost-measurement experiment and pre-commits the +0.15R suspension rule. |
 | Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats same-family variants as one correlated breakout-retest family and marks the family as cost-revalidation-pending until fresh measured-cost revalidation passes. |
+| Local MT5 broker-access baseline | PASS | `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` provides the sanitized local MT5 authorization-ping benchmark that selected VPS latency must be compared against. |
 | External health monitor | PASS | `docs/PHASE2_OPERATIONS_PREP.md` defines the out-of-terminal monitor and local scheduler-friendly check script. |
 | Disaster recovery runbook | PASS | `docs/PHASE2_OPERATIONS_PREP.md` documents recovery assets, procedure, and rollback rule. |
 | Capital allocation ladder | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines the paper-to-micro ladder and single-edge sizing constraint. |
@@ -49,8 +50,8 @@ This checklist separates work that is already closed from gates that still requi
 | Phase 1 observer parity | PENDING | `PHASE1_OBSERVER_PARITY_REPORT.md` must prove the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic before paper-mode implementation. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | Shortlist is ready. `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` only after provider, region, specs, backup access, monitoring approach, and first-day latency evidence are selected. |
-| VPS latency evidence | PENDING | Run `scripts/generate_phase2_vps_latency_report.py` on the selected VPS and require `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` to show PASS before VPS selection can close. |
-| VPS first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. |
+| VPS latency evidence | PENDING | Run `scripts/generate_phase2_vps_latency_report.py` on the selected VPS and require `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` to show PASS before VPS selection can close. The selected VPS must also be compared against `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`; if it does not materially improve on local median ping, owner review is required before treating it as an operational improvement. |
+| VPS first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after selected-VPS consistency, NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. The selected provider/region in the decision record, latency report, and manual VPS evidence must match. |
 | Non-level/intermarket forcing candidate run | PASS | Twenty-three non-level H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
@@ -79,6 +80,8 @@ AND Phase 1 review index = PASS
 AND Phase 1 observer parity = PASS
 AND Phase 2 readiness = PASS
 AND VPS latency evidence = PASS
+AND selected VPS latency is compared against PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
+AND selected VPS decision record matches latency and first-day manual evidence
 AND VPS first-day verification = PASS
 AND active-market 72-hour soak = PASS
 AND process/code-freeze 96-hour gate = PASS

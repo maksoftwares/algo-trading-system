@@ -17,14 +17,14 @@ Overall status: SIDE_EXPERIMENT_DEMO_REHEARSAL_READY
 | Field | Value |
 | --- | --- |
 | Real Phase 2 readiness | PENDING |
-| Source guard rows | 108 |
-| Rehearsal events | 111 |
+| Source guard rows | 116 |
+| Rehearsal events | 119 |
 | Shadow open events | 3 |
 | Shadow close events | 3 |
-| Blocked events | 46 |
+| Blocked events | 50 |
 | Cost-block events | 5 |
-| Risk-block events | 41 |
-| No-exposure events | 59 |
+| Risk-block events | 45 |
+| No-exposure events | 63 |
 | Guarded total net R | -3.5803 |
 | Guarded max DD R | -3.5803 |
 | Can start real demo | False |
@@ -40,8 +40,8 @@ Overall status: SIDE_EXPERIMENT_DEMO_REHEARSAL_READY
 | Field | Value |
 | --- | --- |
 | REHEARSAL_BLOCKED_COST | 5 |
-| REHEARSAL_BLOCKED_RISK | 41 |
-| REHEARSAL_NO_EXPOSURE | 59 |
+| REHEARSAL_BLOCKED_RISK | 45 |
+| REHEARSAL_NO_EXPOSURE | 63 |
 | REHEARSAL_SHADOW_CLOSE | 3 |
 | REHEARSAL_SHADOW_OPEN | 3 |
 

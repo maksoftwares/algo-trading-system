@@ -24,6 +24,7 @@ from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
+from generate_phase2_demo_next_actions_report import generate_phase2_demo_next_actions_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
 from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
 from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
@@ -31,6 +32,7 @@ from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_led
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from generate_phase2_vps_bootstrap_packet import generate_phase2_vps_bootstrap_packet
 from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
+from generate_phase2_vps_selection_decision_check import generate_phase2_vps_selection_decision_check
 from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
@@ -150,6 +152,7 @@ def run_phase1_periodic_checks(
         logs_dir=files_dir.parent.parent / "logs",
         report_path=report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md",
     )
+    generate_phase2_vps_selection_decision_check(root=root)
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,
         report_path=report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
@@ -183,6 +186,7 @@ def run_phase1_periodic_checks(
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     owner_action_packet = generate_phase2_owner_action_packet(root=root)
     vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)
+    generate_phase2_demo_next_actions_report(root=root)
     review_index = generate_phase1_review_index(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",

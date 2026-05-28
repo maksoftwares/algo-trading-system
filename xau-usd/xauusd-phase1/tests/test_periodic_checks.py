@@ -95,6 +95,15 @@ def test_periodic_checks_generate_vps_bootstrap_after_owner_action_packet():
     )
 
 
+def test_periodic_checks_generate_demo_next_actions_after_vps_bootstrap():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "generate_phase2_demo_next_actions_report" in script
+    assert script.index("vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)") < script.index(
+        "generate_phase2_demo_next_actions_report(root=root)"
+    )
+
+
 def test_periodic_checks_generate_vps_first_day_before_phase2_readiness():
     script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
 

@@ -17,16 +17,16 @@ Overall status: SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS
 | Field | Value |
 | --- | --- |
 | Real Phase 2 readiness | PENDING |
-| Source ledger rows | 108 |
-| Primary stream rows | 61 |
-| Would shadow-open | 49 |
+| Source ledger rows | 116 |
+| Primary stream rows | 65 |
+| Would shadow-open | 53 |
 | Would shadow-open with cost review | 2 |
 | Blocked by suspend-family rule | 12 |
-| Observer no-exposure rows | 47 |
-| Duplicate ignored | 47 |
+| Observer no-exposure rows | 51 |
+| Duplicate ignored | 51 |
 | Conflict review | 0 |
-| Estimated monthly shadow opens | 246.28 |
-| Mean shadow-open net R | 0.2984 |
+| Estimated monthly shadow opens | 263.17 |
+| Mean shadow-open net R | 0.299 |
 | Demo authorized | False |
 | Boundary | side_experiment_only_no_mt5_touch_no_real_gate_promotion |
 
@@ -35,8 +35,8 @@ Overall status: SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS
 | Field | Value |
 | --- | --- |
 | BLOCKED_SUSPEND_FAMILY | 12 |
-| NO_EXPOSURE_DUPLICATE_IGNORED | 47 |
-| WOULD_PAPER_SHADOW_OPEN | 47 |
+| NO_EXPOSURE_DUPLICATE_IGNORED | 51 |
+| WOULD_PAPER_SHADOW_OPEN | 51 |
 | WOULD_PAPER_SHADOW_OPEN_REVIEW | 2 |
 
 ## State Counts
@@ -44,8 +44,8 @@ Overall status: SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS
 | Field | Value |
 | --- | --- |
 | COST_WATCH_OPEN_WITH_REVIEW | 2 |
-| DUPLICATE_IGNORED | 47 |
-| PAPER_SHADOW_ELIGIBLE | 47 |
+| DUPLICATE_IGNORED | 51 |
+| PAPER_SHADOW_ELIGIBLE | 51 |
 | SUSPEND_FAMILY_BLOCKED | 12 |
 
 ## Sample Rows

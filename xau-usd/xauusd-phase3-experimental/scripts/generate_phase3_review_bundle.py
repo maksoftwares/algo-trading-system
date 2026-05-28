@@ -51,6 +51,8 @@ BUNDLE_FILES = (
     "outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
     "outputs/reports/PHASE3_DEMO_REHEARSAL_PLAN.json",
     "outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+    "outputs/reports/PHASE3_TO_DEMO_HANDOFF.md",
+    "outputs/reports/PHASE3_TO_DEMO_HANDOFF.json",
     "outputs/reports/PHASE3_COMPLETION_AUDIT.md",
     "outputs/reports/PHASE3_COMPLETION_AUDIT.json",
     "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",

@@ -126,6 +126,139 @@ def test_phase2_transition_artifact_verifier_detects_unsafe_authorization_flag(t
     assert "PHASE2_OWNER_ACTION_PACKET.json must keep demo_trading_authorized=False; found True." in errors
 
 
+def test_phase2_transition_artifact_verifier_requires_vps_latency_baseline_comparison(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    reports = root / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    (reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md").write_text(
+        "# Baseline\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+    (reports / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
+        "# VPS Latency\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+
+    errors = module._vps_latency_baseline_errors(root)
+
+    assert "PHASE2_VPS_LATENCY_REPORT.md must include a local_baseline_comparison check." in errors
+    assert "PHASE2_VPS_LATENCY_REPORT.md must include the Local MT5 baseline evidence path." in errors
+    assert "PHASE2_VPS_LATENCY_REPORT.md status=PASS must prove local_baseline_comparison PASS." in errors
+
+
+def test_phase2_transition_artifact_verifier_requires_owner_packet_vps_recommendation(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    reports = root / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    (reports / "PHASE2_OWNER_ACTION_PACKET.json").write_text(
+        json.dumps(
+            {
+                "paper_mode_authorized": False,
+                "demo_trading_authorized": False,
+                "broker_execution_authorized": False,
+                "live_trading_authorized": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "PHASE2_OWNER_ACTION_PACKET.md").write_text(
+        "# Phase 2 Owner Action Packet\n\nOverall status: PENDING\n",
+        encoding="utf-8",
+    )
+
+    errors = module._owner_packet_recommendation_errors(root)
+
+    assert "PHASE2_OWNER_ACTION_PACKET.json must include vps_selection_recommendation." in errors
+
+
+def test_phase2_transition_artifact_verifier_accepts_owner_packet_vps_recommendation(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    reports = root / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    recommendation = {
+        "status": "PENDING",
+        "primary_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
+        "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
+        "defer": "QuantVPS unless broker latency testing favors US/Chicago",
+    }
+    decision_sheet = {
+        "status": "WAITING_OWNER_SELECTION",
+        "recommended_first_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
+        "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
+        "decision_record_path": "docs/PHASE2_VPS_SELECTION_MATRIX.md",
+    }
+    (reports / "PHASE2_OWNER_ACTION_PACKET.json").write_text(
+        json.dumps(
+            {
+                "vps_selection_recommendation": recommendation,
+                "one_screen_vps_decision_sheet": decision_sheet,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "PHASE2_OWNER_ACTION_PACKET.md").write_text(
+        "\n".join(
+            [
+                "# Phase 2 Owner Action Packet",
+                "",
+                "## VPS Selection Recommendation",
+                "",
+                "| Field | Value |",
+                "| --- | --- |",
+                "| Matrix status | PENDING |",
+                "| Primary trial | FXVM Advanced VPS in Dubai, Mumbai, or Singapore |",
+                "| Backup trial | ForexVPS.net Core in the lowest-latency available region |",
+                "| Defer | QuantVPS unless broker latency testing favors US/Chicago |",
+                "",
+                "## One-Screen VPS Decision Sheet",
+                "",
+                "| Field | Value |",
+                "| --- | --- |",
+                "| Status | WAITING_OWNER_SELECTION |",
+                "| Recommended first trial | FXVM Advanced VPS in Dubai, Mumbai, or Singapore |",
+                "| Backup trial | ForexVPS.net Core in the lowest-latency available region |",
+                "| Decision record | docs/PHASE2_VPS_SELECTION_MATRIX.md |",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert module._owner_packet_recommendation_errors(root) == []
+
+
+def test_phase2_transition_artifact_verifier_accepts_pending_vps_latency_with_baseline_schema(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    reports = root / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    (reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md").write_text(
+        "# Baseline\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
+    (reports / "PHASE2_VPS_LATENCY_REPORT.md").write_text(
+        "\n".join(
+            [
+                "# VPS Latency",
+                "",
+                "Overall status: PENDING",
+                "",
+                "| Check | Status | Evidence |",
+                "| --- | --- | --- |",
+                "| local_baseline_comparison | PENDING | waiting for VPS ping evidence |",
+                "",
+                "- Local MT5 baseline: `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    assert module._vps_latency_baseline_errors(root) == []
+
+
 def _load_module():
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:

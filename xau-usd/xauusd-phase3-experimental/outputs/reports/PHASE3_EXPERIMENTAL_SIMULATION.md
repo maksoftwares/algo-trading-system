@@ -15,19 +15,19 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 
 | Metric | Value |
 | --- | --- |
-| Raw observer events | 108 |
-| Family unique events | 61 |
-| Primary stream allowed | 61 |
-| Observer duplicates | 47 |
+| Raw observer events | 116 |
+| Family unique events | 65 |
+| Primary stream allowed | 65 |
+| Observer duplicates | 51 |
 | Observer conflicts | 0 |
 | Rejected source rows | 2 |
 | Cost mode | entry_exit_proxy |
 | Gross expectancy R source | fixed_notional_phase0_baseline |
 | Baseline assumed cost R | 0.3228 |
 | Baseline net expectancy R | 0.1888 |
-| Median proxy cost R | 0.2452 |
-| Median net after proxy cost R | 0.2664 |
-| Median net delta vs assumed baseline R | 0.0776 |
+| Median proxy cost R | 0.2311 |
+| Median net after proxy cost R | 0.2805 |
+| Median net delta vs assumed baseline R | 0.0917 |
 | Minimum net expectancy R | 0.15 |
 
 ## Cost Semantics
@@ -43,15 +43,15 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 
 | Metric | Value |
 | --- | --- |
-| OBSERVER_DUPLICATE | 47 |
-| PRIMARY_EXECUTION_CANDIDATE | 61 |
+| OBSERVER_DUPLICATE | 51 |
+| PRIMARY_EXECUTION_CANDIDATE | 65 |
 
 ## Kill Rule Counts
 
 | Metric | Value |
 | --- | --- |
 | COST_WATCH | 3 |
-| NORMAL | 83 |
+| NORMAL | 91 |
 | SUSPEND_FAMILY | 22 |
 
 ## Sample Events

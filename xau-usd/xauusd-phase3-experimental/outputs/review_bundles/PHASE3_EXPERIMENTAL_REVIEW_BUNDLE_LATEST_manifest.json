@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T13:10:43.725192Z",
+  "created_at_utc": "2026-05-28T19:35:17.485574Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
   "latest_bundle_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\review_bundles\\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip",
@@ -8,7 +8,7 @@
     {
       "path": "README.md",
       "exists": true,
-      "bytes": 6860
+      "bytes": 7010
     },
     {
       "path": "docs/PHASE3_EXPERIMENTAL_SCOPE.md",
@@ -43,12 +43,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md",
       "exists": true,
-      "bytes": 3620
+      "bytes": 3734
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_STATUS.json",
       "exists": true,
-      "bytes": 12338
+      "bytes": 12855
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md",
@@ -63,7 +63,7 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_LEDGER.csv",
       "exists": true,
-      "bytes": 73784
+      "bytes": 79172
     },
     {
       "path": "outputs/reports/PHASE3_SUSPEND_FAMILY_REVIEW.md",
@@ -98,17 +98,17 @@
     {
       "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.md",
       "exists": true,
-      "bytes": 1566
+      "bytes": 1569
     },
     {
       "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.json",
       "exists": true,
-      "bytes": 3721
+      "bytes": 3724
     },
     {
       "path": "outputs/reports/PHASE3_COST_MODE_COMPARISON.csv",
       "exists": true,
-      "bytes": 968
+      "bytes": 971
     },
     {
       "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.md",
@@ -118,57 +118,57 @@
     {
       "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.json",
       "exists": true,
-      "bytes": 8704
+      "bytes": 8705
     },
     {
       "path": "outputs/reports/PHASE3_COST_GATE_REVIEW.csv",
       "exists": true,
-      "bytes": 1620
+      "bytes": 1621
     },
     {
       "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.md",
       "exists": true,
-      "bytes": 9827
+      "bytes": 10575
     },
     {
       "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.json",
       "exists": true,
-      "bytes": 35827
+      "bytes": 38167
     },
     {
       "path": "outputs/reports/PHASE3_FAMILY_DEDUP_AUDIT.csv",
       "exists": true,
-      "bytes": 10613
+      "bytes": 11325
     },
     {
       "path": "outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.md",
       "exists": true,
-      "bytes": 4089
+      "bytes": 4088
     },
     {
       "path": "outputs/reports/PHASE3_PAPER_SHADOW_SUMMARY.json",
       "exists": true,
-      "bytes": 1985
+      "bytes": 1984
     },
     {
       "path": "outputs/reports/PHASE3_PAPER_SHADOW_LEDGER.csv",
       "exists": true,
-      "bytes": 57729
+      "bytes": 61913
     },
     {
       "path": "outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
       "exists": true,
-      "bytes": 4203
+      "bytes": 4200
     },
     {
       "path": "outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.json",
       "exists": true,
-      "bytes": 2337
+      "bytes": 2334
     },
     {
       "path": "outputs/reports/PHASE3_SHADOW_LIFECYCLE_LEDGER.csv",
       "exists": true,
-      "bytes": 64626
+      "bytes": 69382
     },
     {
       "path": "outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
@@ -183,7 +183,7 @@
     {
       "path": "outputs/reports/PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
       "exists": true,
-      "bytes": 50392
+      "bytes": 54115
     },
     {
       "path": "outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
@@ -198,17 +198,27 @@
     {
       "path": "outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv",
       "exists": true,
-      "bytes": 41329
+      "bytes": 44353
+    },
+    {
+      "path": "outputs/reports/PHASE3_TO_DEMO_HANDOFF.md",
+      "exists": true,
+      "bytes": 6406
+    },
+    {
+      "path": "outputs/reports/PHASE3_TO_DEMO_HANDOFF.json",
+      "exists": true,
+      "bytes": 8486
     },
     {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.md",
       "exists": true,
-      "bytes": 7932
+      "bytes": 9096
     },
     {
       "path": "outputs/reports/PHASE3_COMPLETION_AUDIT.json",
       "exists": true,
-      "bytes": 10916
+      "bytes": 12430
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
@@ -223,12 +233,12 @@
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md",
       "exists": true,
-      "bytes": 14875
+      "bytes": 26052
     },
     {
       "path": "outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.json",
       "exists": true,
-      "bytes": 19576
+      "bytes": 31689
     }
   ]
 }

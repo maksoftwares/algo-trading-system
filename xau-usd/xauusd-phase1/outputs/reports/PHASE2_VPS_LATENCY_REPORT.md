@@ -8,9 +8,9 @@ VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readine
 
 ## Candidate
 
-| Provider | Region | Endpoint | Average Ping | Packet Loss |
-| --- | --- | --- | --- | --- |
-| Pending | Pending | Pending |  |  |
+| Provider | Region | Endpoint | Average Ping | Packet Loss | Local Median | Improvement |
+| --- | --- | --- | --- | --- | --- | --- |
+| Pending | Pending | Pending |  |  | 129.78 ms |  |
 
 ## Checks
 
@@ -20,6 +20,7 @@ VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readine
 | ping_evidence | PENDING | No ping evidence file provided. |
 | packet_loss | PENDING | Packet loss evidence is not available yet. |
 | latency_threshold | PENDING | Average latency evidence is not available yet. |
+| local_baseline_comparison | PENDING | VPS average latency is not available for local-baseline comparison. |
 | traceroute_evidence | PENDING | No traceroute evidence file provided. |
 | port_reachability_evidence | PENDING | No Test-NetConnection evidence file provided. |
 
@@ -28,6 +29,7 @@ VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readine
 - Ping output: `pending`
 - Traceroute output: `pending`
 - Test-NetConnection output: `pending`
+- Local MT5 baseline: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`
 
 ## Capture Commands
 
@@ -51,5 +53,6 @@ python scripts\generate_phase2_vps_latency_report.py --provider "<provider>" --r
 
 - This report is evidence-only and does not authorize Phase 2 paper-mode implementation.
 - Passing latency evidence does not authorize live capital or broker-side execution.
+- A VPS latency PASS requires a PASS local MT5 baseline and at least 10% better average ping than the local median.
 - Keep `dry_run=true` and `trade_permission=false` until all Phase 2 readiness gates pass and the owner signs approval.
 - Workspace root: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1`

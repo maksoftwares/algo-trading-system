@@ -2,6 +2,8 @@
 
 This is a template only. Do not copy it to `outputs/reports/PHASE2_OWNER_APPROVAL.md` until every objective Phase 2 readiness gate has passed and the project owner explicitly approves paper-mode implementation.
 
+If the live approval file is created before every objective gate is PASS, the Phase 2 readiness generator rejects the owner approval gate as early/invalid even if the fields are otherwise complete.
+
 ## Required Gate Evidence
 
 | Gate | Required state | Evidence path |
@@ -47,12 +49,13 @@ latency_evidence_path:
 Required values:
 
 - `decision` must contain `APPROVED`
-- `scope` must be paper-mode only and must not authorize live capital
+- `scope` must be paper-mode only, must explicitly include `no live capital`, and must not authorize live capital
 - `minimum_net_expectancy_r` must be at least `0.15`
 - `single_edge_risk_ack`, `no_live_capital_ack`, and `measured_cost_ack` must be `true`
 - `selected_vps_provider`, `selected_vps_region`, `selected_vps_plan`, `selected_vps_monthly_cost`, and `latency_evidence_path` must be non-empty
 - approval fields must not contain placeholder values such as `Pending`, `TBD`, `TODO`, `unknown`, blank text, or angle-bracket placeholders
 - selected VPS provider, region, plan, monthly cost, and latency evidence path must match the completed `Decision Record` in `docs/PHASE2_VPS_SELECTION_MATRIX.md`
+- mixed scopes are rejected; the live approval file must not contain phrases such as `plus live capital`, `live trading`, `broker execution`, `broker-side execution`, `order execution`, or `real money`
 
 ## Approved Scope Text
 

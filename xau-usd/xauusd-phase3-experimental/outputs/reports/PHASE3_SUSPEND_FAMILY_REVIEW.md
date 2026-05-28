@@ -8,7 +8,7 @@ Overall status: REVIEW_READY
 
 | Field | Value |
 | --- | --- |
-| Raw ledger rows | 108 |
+| Raw ledger rows | 116 |
 | Suspend raw rows | 22 |
 | Suspend unique family events | 12 |
 | Suspend primary rows | 12 |

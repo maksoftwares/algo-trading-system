@@ -97,6 +97,7 @@ Important generated outputs:
 | `PHASE3_LIFECYCLE_GUARD_LEDGER.csv` | Guarded lifecycle rows with block reasons, running equity, and daily/portfolio lock states. |
 | `PHASE3_DEMO_REHEARSAL_CHECKLIST.md` | Non-deploying demo rehearsal checklist that keeps real authorization false. |
 | `PHASE3_DEMO_REHEARSAL_LEDGER.csv` | Rehearsal sequence for shadow open/close, blocked, and no-exposure events. |
+| `PHASE3_TO_DEMO_HANDOFF.md` | Non-authorizing handoff from Phase 3 experiment to a future real paper-shadow/demo branch after Phase 2 gates pass. |
 | `PHASE3_COMPLETION_AUDIT.md` | Explicit repo-side completion audit and external gate list before demo/paper work. |
 | `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md` | Safety-boundary scan for broker-action references. |
 | `PHASE3_EXPERIMENTAL_MANIFEST.md` | Source-hash manifest for inputs, scripts, status, and reports. |

@@ -1,15 +1,15 @@
 section,bucket,threshold_r,rule,raw_rows,family_unique_events,primary_rows,observer_duplicate_rows,median_proxy_cost_r,mean_proxy_cost_r,median_net_after_proxy_r,median_stop_distance_points,median_spread_points,normal_count,cost_watch_count,suspend_family_count
-cost_gate_threshold,proxy_cost_gt_0.20R,0.2,proxy_cost_r > 0.20,67,38,38,29,0.287,0.3367,0.2246,417.54,50.0,42,3,22
+cost_gate_threshold,proxy_cost_gt_0.20R,0.2,proxy_cost_r > 0.20,71,40,40,31,0.276,0.3303,0.2356,417.78,50.0,46,3,22
 cost_gate_threshold,proxy_cost_gt_0.25R,0.25,proxy_cost_r > 0.25,53,30,30,23,0.3082,0.3667,0.2034,399.46,50.0,28,3,22
 cost_gate_threshold,proxy_cost_gt_0.30R,0.3,proxy_cost_r > 0.30,30,17,17,13,0.472,0.4428,0.0396,322.53,50.0,5,3,22
 cost_gate_threshold,proxy_cost_gt_0.35R,0.35,proxy_cost_r > 0.35,25,14,14,11,0.4804,0.4698,0.0312,283.09,50.0,0,3,22
 bucket,0_to_249,,0_to_249,11,6,6,5,0.5197,0.5342,-0.0081,211.67,50.0,0,0,11
-bucket,250_to_499,,250_to_499,45,26,26,19,0.2754,0.3114,0.2362,417.54,50.0,31,3,11
-bucket,500_to_749,,500_to_749,38,20,20,18,0.1761,0.191,0.3355,635.57,50.0,38,0,0
+bucket,250_to_499,,250_to_499,47,27,27,20,0.2689,0.3079,0.2427,417.78,50.0,33,3,11
+bucket,500_to_749,,500_to_749,44,23,23,21,0.1838,0.1921,0.3278,624.815,50.0,44,0,0
 bucket,750_plus,,750_plus,14,9,9,5,0.1343,0.1268,0.3774,991.805,50.0,14,0,0
-bucket,spread_lte_median_50_0,,spread_lte_median_50_0,85,48,48,37,0.2252,0.2498,0.2864,488.54,50.0,72,2,11
+bucket,spread_lte_median_50_0,,spread_lte_median_50_0,93,52,52,41,0.2179,0.246,0.2937,504.76,50.0,80,2,11
 bucket,spread_median_to_p95_50_0_75_0,,spread_median_to_p95_50_0_75_0,23,13,13,10,0.361,0.3345,0.1506,443.17,75.0,11,1,11
 bucket,spread_gt_p95_75_0,,spread_gt_p95_75_0,0,0,0,0,,,,,,0,0,0
 kill_state,COST_WATCH,,kill_rule_state,3,2,2,1,0.3525,0.3553,0.1591,312.02,50.0,0,3,0
-kill_state,NORMAL,,kill_rule_state,83,47,47,36,0.2026,0.207,0.309,590.46,50.0,83,0,0
+kill_state,NORMAL,,kill_rule_state,91,51,51,40,0.2026,0.2069,0.309,575.4,50.0,91,0,0
 kill_state,SUSPEND_FAMILY,,kill_rule_state,22,12,12,10,0.4813,0.4854,0.0303,256.105,62.5,0,0,22

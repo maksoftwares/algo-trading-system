@@ -20,6 +20,19 @@ DEFAULT_NTP_EVIDENCE = Path("outputs") / "reports" / "vps_ntp_sync.txt"
 DEFAULT_BACKUP_EVIDENCE = Path("outputs") / "reports" / "vps_backup_config.txt"
 DEFAULT_RECOVERY_EVIDENCE = Path("outputs") / "reports" / "vps_rdp_recovery.txt"
 DEFAULT_SCHEDULER_EVIDENCE = Path("outputs") / "reports" / "vps_periodic_task.txt"
+DEFAULT_VPS_SELECTION_MATRIX = Path("docs") / "PHASE2_VPS_SELECTION_MATRIX.md"
+VPS_SELECTION_REQUIRED_FIELDS = (
+    "selected_provider",
+    "selected_region",
+    "selected_plan",
+    "monthly_cost",
+    "backup_method",
+    "monitoring_endpoint_or_scheduler",
+    "recovery_access_owner",
+    "latency_evidence_path",
+    "decision_date",
+    "owner_acceptance",
+)
 
 
 @dataclass(frozen=True)
@@ -82,7 +95,13 @@ def generate_phase2_vps_first_day_verification(
         _json_status_check("external_health", external_health, required="PASS"),
         _status_summary_check(status_summary),
         _report_exists_check("phase2_readiness_report", readiness_report),
-        _markdown_status_check("vps_latency_report", latency_report, required="PASS"),
+        _vps_latency_report_check(latency_report),
+        _selected_vps_consistency_check(
+            root / DEFAULT_VPS_SELECTION_MATRIX,
+            latency_report,
+            root,
+            (ntp_evidence_path, backup_evidence_path, recovery_evidence_path, scheduler_evidence_path),
+        ),
         _manual_evidence_check(
             "ntp_time_sync_evidence",
             ntp_evidence_path,
@@ -188,7 +207,7 @@ def _csv_row_check(name: str, path: Path) -> VpsFirstDayCheck:
     rows = _read_csv_rows(path)
     if not rows:
         return VpsFirstDayCheck(name, "PENDING", f"`{path}` has no data rows.")
-    return VpsFirstDayCheck(name, "PASS", f"`{path}` has {len(rows)} row(s); latest row captured.")
+    return VpsFirstDayCheck(name, "PASS", f"`{path}` has data rows; latest row captured.")
 
 
 def _json_status_check(name: str, path: Path, required: str) -> VpsFirstDayCheck:
@@ -243,6 +262,263 @@ def _markdown_status_check(name: str, path: Path, required: str) -> VpsFirstDayC
     if status in {"PENDING", "WARN", "REVIEW", ""}:
         return VpsFirstDayCheck(name, "PENDING", f"`{path}` status is {status or 'missing'}; required {required}.")
     return VpsFirstDayCheck(name, "FAIL", f"`{path}` status is {status}; required {required}.")
+
+
+def _vps_latency_report_check(path: Path) -> VpsFirstDayCheck:
+    base = _markdown_status_check("vps_latency_report", path, required="PASS")
+    if base.status != "PASS":
+        return base
+    text = _read_text_lossy(path)
+    if "| local_baseline_comparison | PASS |" not in text:
+        return VpsFirstDayCheck(
+            "vps_latency_report",
+            "FAIL",
+            f"`{path}` is PASS but does not prove local_baseline_comparison PASS.",
+        )
+    if "Local MT5 baseline:" not in text:
+        return VpsFirstDayCheck(
+            "vps_latency_report",
+            "FAIL",
+            f"`{path}` is PASS but is missing the local MT5 baseline evidence path.",
+        )
+    return VpsFirstDayCheck(
+        "vps_latency_report",
+        "PASS",
+        f"`{path}` status is PASS and includes local baseline comparison.",
+    )
+
+
+def _selected_vps_consistency_check(
+    selection_path: Path,
+    latency_report_path: Path,
+    root: Path,
+    manual_evidence_paths: tuple[Path, ...],
+) -> VpsFirstDayCheck:
+    if not selection_path.exists():
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "PENDING",
+            f"Missing VPS selection matrix `{selection_path}`.",
+        )
+
+    selection_text = _read_text_lossy(selection_path)
+    selection_status = _read_markdown_status(selection_path)
+    if selection_status in {"", "PENDING", "WARN", "REVIEW"}:
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "PENDING",
+            f"`{selection_path}` status is {selection_status or 'missing'}; required PASS.",
+        )
+    if selection_status != "PASS":
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "FAIL",
+            f"`{selection_path}` status is {selection_status}; required PASS.",
+        )
+
+    decision_fields = _parse_decision_record_fields(selection_text)
+    missing = [field for field in VPS_SELECTION_REQUIRED_FIELDS if not decision_fields.get(field)]
+    if missing:
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "PENDING",
+            f"`{selection_path}` is PASS but missing decision record field(s): {', '.join(missing)}.",
+        )
+    placeholders = [
+        field
+        for field in VPS_SELECTION_REQUIRED_FIELDS
+        if _is_placeholder_value(decision_fields.get(field, ""))
+    ]
+    if placeholders:
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "PENDING",
+            f"`{selection_path}` is PASS but still has placeholder decision field(s): {', '.join(placeholders)}.",
+        )
+
+    latency_candidate = _parse_latency_candidate(latency_report_path)
+    if not latency_candidate:
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "FAIL",
+            f"`{latency_report_path}` is missing a candidate provider/region table for selected-VPS comparison.",
+        )
+
+    mismatches: list[str] = []
+    selected_provider = decision_fields.get("selected_provider", "")
+    selected_region = decision_fields.get("selected_region", "")
+    if not _compatible_label(selected_provider, latency_candidate.get("provider", "")):
+        mismatches.append(
+            f"latency provider {latency_candidate.get('provider', '') or 'missing'} != selected provider {selected_provider}"
+        )
+    if not _compatible_label(selected_region, latency_candidate.get("region", "")):
+        mismatches.append(
+            f"latency region {latency_candidate.get('region', '') or 'missing'} != selected region {selected_region}"
+        )
+    if not _path_value_matches(decision_fields.get("latency_evidence_path", ""), latency_report_path, root):
+        mismatches.append(
+            f"latency_evidence_path {decision_fields.get('latency_evidence_path', '')} does not point to `{latency_report_path}`"
+        )
+
+    manual_status, manual_details = _manual_provider_region_consistency(
+        manual_evidence_paths,
+        selected_provider,
+        selected_region,
+    )
+    if manual_status == "PENDING":
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "PENDING",
+            "Manual VPS evidence is not ready for selected-provider comparison: " + "; ".join(manual_details) + ".",
+        )
+    mismatches.extend(manual_details)
+    if mismatches:
+        return VpsFirstDayCheck(
+            "selected_vps_consistency",
+            "FAIL",
+            "Selected VPS evidence mismatch: " + "; ".join(mismatches) + ".",
+        )
+
+    return VpsFirstDayCheck(
+        "selected_vps_consistency",
+        "PASS",
+        f"Selected VPS decision record, latency report, and manual evidence all reference {selected_provider} / {selected_region}.",
+    )
+
+
+def _parse_decision_record_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    in_decision_record = False
+    for line in text.splitlines():
+        if line.startswith("## "):
+            in_decision_record = line.strip().lower() == "## decision record"
+            continue
+        if not in_decision_record or not line.startswith("| ") or line.startswith("| ---") or line.startswith("| Field |"):
+            continue
+        parts = [part.strip() for part in line.strip("|").split("|")]
+        if len(parts) < 2:
+            continue
+        key = parts[0].strip().lower().replace(" ", "_").replace("-", "_")
+        fields[key] = parts[1].strip().strip("`")
+    return fields
+
+
+def _parse_latency_candidate(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    tables = _parse_markdown_tables(_read_text_lossy(path))
+    for table in tables:
+        if not table:
+            continue
+        first = table[0]
+        if {"provider", "region"}.issubset(first):
+            return {
+                "provider": first.get("provider", "").strip(),
+                "region": first.get("region", "").strip(),
+            }
+    return {}
+
+
+def _parse_markdown_tables(text: str) -> list[list[dict[str, str]]]:
+    tables: list[list[dict[str, str]]] = []
+    lines = text.splitlines()
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        if not line.startswith("| "):
+            index += 1
+            continue
+        header = _split_markdown_row(line)
+        if index + 1 >= len(lines) or not _is_markdown_separator(lines[index + 1]):
+            index += 1
+            continue
+        index += 2
+        rows: list[dict[str, str]] = []
+        while index < len(lines) and lines[index].startswith("| "):
+            values = _split_markdown_row(lines[index])
+            rows.append(
+                {
+                    _normalize_key(header[column]): values[column] if column < len(values) else ""
+                    for column in range(len(header))
+                }
+            )
+            index += 1
+        tables.append(rows)
+    return tables
+
+
+def _split_markdown_row(line: str) -> list[str]:
+    return [cell.strip().strip("`") for cell in line.strip().strip("|").split("|")]
+
+
+def _is_markdown_separator(line: str) -> bool:
+    cells = _split_markdown_row(line)
+    return bool(cells) and all(set(cell.replace(":", "").strip()) <= {"-"} for cell in cells)
+
+
+def _normalize_key(value: str) -> str:
+    return value.strip().lower().replace(" ", "_").replace("-", "_")
+
+
+def _is_placeholder_value(value: str) -> bool:
+    normalized = value.strip().lower()
+    if normalized in {"", "pending", "n/a", "none", "tbd", "todo", "unknown"}:
+        return True
+    if "pending owner selection" in normalized or "pending selection" in normalized:
+        return True
+    if "pending" in normalized and "outputs/reports/phase2_vps_latency_report.md" not in normalized:
+        return True
+    return "<" in normalized and ">" in normalized
+
+
+def _compatible_label(left: str, right: str) -> bool:
+    left_norm = _normalize_compare(left)
+    right_norm = _normalize_compare(right)
+    if not left_norm or not right_norm:
+        return False
+    return left_norm == right_norm or left_norm in right_norm or right_norm in left_norm
+
+
+def _path_value_matches(value: str, actual_path: Path, root: Path) -> bool:
+    expected = _normalize_compare(value)
+    if not expected:
+        return False
+    actual_absolute = _normalize_compare(str(actual_path))
+    try:
+        actual_relative = _normalize_compare(str(actual_path.resolve().relative_to(root.resolve())))
+    except ValueError:
+        actual_relative = actual_absolute
+    return expected in {actual_absolute, actual_relative} or actual_absolute.endswith(expected)
+
+
+def _manual_provider_region_consistency(
+    paths: tuple[Path, ...],
+    selected_provider: str,
+    selected_region: str,
+) -> tuple[str, list[str]]:
+    pending: list[str] = []
+    mismatches: list[str] = []
+    for path in paths:
+        if not path.exists():
+            pending.append(f"{path.name} missing")
+            continue
+        fields = _parse_key_value_evidence(_read_text_lossy(path))
+        if fields.get("evidence_status", "").lower() != "verified" or fields.get("owner_verified", "").lower() != "true":
+            pending.append(f"{path.name} not owner-verified")
+            continue
+        provider = fields.get("provider", "")
+        region = fields.get("region", "")
+        if not _compatible_label(selected_provider, provider):
+            mismatches.append(f"{path.name} provider {provider or 'missing'} != selected provider {selected_provider}")
+        if not _compatible_label(selected_region, region):
+            mismatches.append(f"{path.name} region {region or 'missing'} != selected region {selected_region}")
+    if pending:
+        return "PENDING", pending
+    return "PASS", mismatches
+
+
+def _normalize_compare(value: str) -> str:
+    return value.strip().strip("`").lower().replace("\\", "/")
 
 
 def _manual_evidence_check(

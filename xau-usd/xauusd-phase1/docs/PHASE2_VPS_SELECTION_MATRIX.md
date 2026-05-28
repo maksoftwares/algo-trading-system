@@ -176,6 +176,7 @@ no broker-side execution behavior
 
 After selection and setup, the first VPS verification packet must include:
 
+- selected VPS consistency between this decision record, the latency report, and manual VPS evidence
 - repository commit hash
 - MT5 terminal path
 - MT5 data path

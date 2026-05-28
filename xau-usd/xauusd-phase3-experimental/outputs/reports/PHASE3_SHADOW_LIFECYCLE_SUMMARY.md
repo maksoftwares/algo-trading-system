@@ -17,16 +17,16 @@ Overall status: SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY
 
 | Field | Value |
 | --- | --- |
-| Source shadow rows | 108 |
-| Synthetic opens | 49 |
-| Synthetic closes | 49 |
-| No-exposure review-only rows | 59 |
-| Synthetic win rate pct | 26.53 |
-| Synthetic total gross R | -0.3 |
-| Synthetic total net R | -10.7448 |
-| Synthetic mean net R | -0.2193 |
-| Synthetic final equity R | -10.7448 |
-| Synthetic max drawdown R | -11.7995 |
+| Source shadow rows | 116 |
+| Synthetic opens | 53 |
+| Synthetic closes | 53 |
+| No-exposure review-only rows | 63 |
+| Synthetic win rate pct | 28.3 |
+| Synthetic total gross R | 0.3 |
+| Synthetic total net R | -10.9699 |
+| Synthetic mean net R | -0.207 |
+| Synthetic final equity R | -10.9699 |
+| Synthetic max drawdown R | -12.4405 |
 | Demo authorized | False |
 | Boundary | side_experiment_only_synthetic_lifecycle_no_mt5_touch_no_real_gate_promotion |
 
@@ -34,8 +34,8 @@ Overall status: SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY
 
 | Field | Value |
 | --- | --- |
-| NO_EXPOSURE_REVIEW_ONLY | 59 |
-| OPENED_THEN_CLOSED | 44 |
+| NO_EXPOSURE_REVIEW_ONLY | 63 |
+| OPENED_THEN_CLOSED | 48 |
 | OPENED_THEN_COST_DRIFT_CLOSED | 3 |
 | OPENED_THEN_REVIEW_CLOSED | 2 |
 
@@ -46,19 +46,19 @@ Overall status: SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY
 | cost_drift_exit | 3 |
 | cost_watch_review_exit | 2 |
 | net_expectancy_below_minimum_after_proxy_cost | 12 |
-| observer_duplicate | 47 |
+| observer_duplicate | 51 |
 | synthetic_break_even | 11 |
-| synthetic_stop_hit | 10 |
-| synthetic_target_hit | 6 |
-| synthetic_time_stop_small_loss | 10 |
-| synthetic_time_stop_small_win | 7 |
+| synthetic_stop_hit | 11 |
+| synthetic_target_hit | 7 |
+| synthetic_time_stop_small_loss | 11 |
+| synthetic_time_stop_small_win | 8 |
 
 ## Risk Lock Counts
 
 | Field | Value |
 | --- | --- |
 | NORMAL | 28 |
-| SYNTHETIC_DAILY_LOCK | 75 |
+| SYNTHETIC_DAILY_LOCK | 83 |
 | SYNTHETIC_DEFENSIVE | 5 |
 
 ## Sample Rows

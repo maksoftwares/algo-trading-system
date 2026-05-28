@@ -29,6 +29,7 @@ REQUIRED_ARTIFACTS = (
     "PHASE3_LIFECYCLE_GUARD_LEDGER.csv",
     "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
     "PHASE3_DEMO_REHEARSAL_LEDGER.csv",
+    "PHASE3_TO_DEMO_HANDOFF.md",
     "PHASE3_COMPLETION_AUDIT.md",
     "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
     "PHASE3_EXPERIMENTAL_MANIFEST.md",
@@ -41,7 +42,24 @@ REQUIRED_JSON_ARTIFACTS = (
     "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
     "PHASE3_EXPERIMENTAL_MANIFEST.json",
     "PHASE3_DEMO_REHEARSAL_PLAN.json",
+    "PHASE3_TO_DEMO_HANDOFF.json",
 )
+
+SELF_REFERENTIAL_MANIFEST_FILES = {
+    "PHASE3_EXPERIMENTAL_MANIFEST.md",
+    "PHASE3_EXPERIMENTAL_MANIFEST.json",
+}
+
+SUMMARY_FILES_THAT_REFERENCE_MANIFEST = {
+    "PHASE3_EXPERIMENTAL_STATUS.md",
+    "PHASE3_EXPERIMENTAL_STATUS.json",
+    "PHASE3_COMPLETION_AUDIT.md",
+    "PHASE3_COMPLETION_AUDIT.json",
+}
+
+HASH_EXCLUDED_OUTPUT_PARTS = {
+    "review_bundles",
+}
 
 
 def verify_phase3_experimental_artifacts(
@@ -75,6 +93,7 @@ def verify_phase3_experimental_artifacts(
         if require_git_tracked and not _is_git_tracked(repo_root, path):
             errors.append(f"required Phase 3 JSON artifact is not git-tracked: {path}")
     errors.extend(_verify_consistency(reports))
+    errors.extend(_verify_current_state_freshness(reports, repo_root))
     if require_clean_manifest:
         errors.extend(_verify_clean_manifest(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"))
     return errors
@@ -88,6 +107,7 @@ def _verify_consistency(reports: Path) -> list[str]:
     manifest = _read_json(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json") or {}
     completion = _read_json(reports / "PHASE3_COMPLETION_AUDIT.json") or {}
     rehearsal = _read_json(reports / "PHASE3_DEMO_REHEARSAL_PLAN.json") or {}
+    handoff = _read_json(reports / "PHASE3_TO_DEMO_HANDOFF.json") or {}
 
     status_simulation = _mapping(status.get("simulation"))
     for key in (
@@ -117,6 +137,16 @@ def _verify_consistency(reports: Path) -> list[str]:
             errors.append(f"Phase 3 status must keep {key}=false; found {status.get(key)!r}")
     if rehearsal.get("can_start_real_demo") is not False or rehearsal.get("demo_authorized") is not False:
         errors.append("Phase 3 demo rehearsal must keep can_start_real_demo=false and demo_authorized=false.")
+    if handoff:
+        if handoff.get("can_start_demo_now") is not False or handoff.get("demo_authorized") is not False:
+            errors.append("Phase 3 to demo handoff must keep can_start_demo_now=false and demo_authorized=false.")
+        if handoff.get("broker_action_code_allowed") is not False:
+            errors.append("Phase 3 to demo handoff must keep broker_action_code_allowed=false.")
+        if handoff.get("phase2_readiness") != status.get("real_phase2_readiness"):
+            errors.append(
+                "Phase 3 to demo handoff phase2_readiness must match status real_phase2_readiness: "
+                f"handoff={handoff.get('phase2_readiness')!r}; status={status.get('real_phase2_readiness')!r}"
+            )
 
     audit_rows = completion.get("repo_requirement_rows", [])
     if isinstance(audit_rows, list):
@@ -130,16 +160,18 @@ def _verify_consistency(reports: Path) -> list[str]:
 
     files = manifest.get("files", {})
     if isinstance(files, dict):
+        indexed_manifest_paths: dict[str, Path] = {}
         for name, raw in files.items():
             entry = _mapping(raw)
             if entry.get("exists") is not True:
                 errors.append(f"manifest file entry is missing: {name}")
                 continue
             path = Path(str(entry.get("path", "")))
+            indexed_manifest_paths[path.name] = path
             if not path.exists():
                 errors.append(f"manifest path does not exist: {name}: {path}")
                 continue
-            if "outputs" in path.parts:
+            if _skip_manifest_hash_check(path):
                 continue
             expected_sha = str(entry.get("sha256", ""))
             if expected_sha and _sha256(path) != expected_sha:
@@ -147,9 +179,24 @@ def _verify_consistency(reports: Path) -> list[str]:
             expected_bytes = entry.get("bytes")
             if expected_bytes is not None and path.stat().st_size != expected_bytes:
                 errors.append(f"manifest byte count is stale for {name}: {path}")
+        required_manifest_names = (
+            set(REQUIRED_ARTIFACTS)
+            | set(REQUIRED_JSON_ARTIFACTS)
+        ) - SELF_REFERENTIAL_MANIFEST_FILES
+        for required_name in sorted(required_manifest_names):
+            if required_name not in indexed_manifest_paths:
+                errors.append(f"manifest does not hash required Phase 3 artifact: {required_name}")
     else:
         errors.append("manifest files field must be a dict.")
     return errors
+
+
+def _skip_manifest_hash_check(path: Path) -> bool:
+    if path.name in SELF_REFERENTIAL_MANIFEST_FILES:
+        return True
+    if path.name in SUMMARY_FILES_THAT_REFERENCE_MANIFEST:
+        return True
+    return any(part in HASH_EXCLUDED_OUTPUT_PARTS for part in path.parts)
 
 
 def _verify_clean_manifest(path: Path) -> list[str]:
@@ -164,6 +211,58 @@ def _verify_clean_manifest(path: Path) -> list[str]:
     if str(manifest.get("working_tree_short_status", "")).strip():
         errors.append("Phase 3 manifest must not record a dirty working_tree_short_status")
     return errors
+
+
+def _verify_current_state_freshness(reports: Path, repo_root: Path) -> list[str]:
+    errors: list[str] = []
+    status = _read_json(reports / "PHASE3_EXPERIMENTAL_STATUS.json") or {}
+    if not status:
+        return errors
+
+    phase1_reports = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_summary_path = phase1_reports / "PHASE1_STATUS_SUMMARY.json"
+    phase1_acceptance_path = phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md"
+    phase2_readiness_path = phase1_reports / "PHASE2_READINESS_REPORT.md"
+
+    phase1_acceptance = _read_markdown_status(phase1_acceptance_path)
+    if phase1_acceptance and status.get("real_phase1_acceptance") != phase1_acceptance:
+        errors.append(
+            "Phase 3 status real_phase1_acceptance is stale: "
+            f"status={status.get('real_phase1_acceptance')!r}; current={phase1_acceptance!r}"
+        )
+
+    phase2_readiness = _read_markdown_status(phase2_readiness_path)
+    if phase2_readiness and status.get("real_phase2_readiness") != phase2_readiness:
+        errors.append(
+            "Phase 3 status real_phase2_readiness is stale: "
+            f"status={status.get('real_phase2_readiness')!r}; current={phase2_readiness!r}"
+        )
+
+    phase1_summary = _read_json(phase1_summary_path) or {}
+    latest = _mapping(_mapping(phase1_summary.get("runtime")).get("latest_row"))
+    comparisons = {
+        "latest_phase1_bar": latest.get("bar_time"),
+        "latest_phase1_dry_run": latest.get("dry_run"),
+        "latest_phase1_trade_permission": latest.get("trade_permission"),
+    }
+    for status_key, current_value in comparisons.items():
+        if current_value in {None, ""}:
+            continue
+        if str(status.get(status_key, "")) != str(current_value):
+            errors.append(
+                f"Phase 3 status {status_key} is stale: "
+                f"status={status.get(status_key)!r}; current={current_value!r}"
+            )
+    return errors
+
+
+def _read_markdown_status(path: Path) -> str:
+    if not path.exists():
+        return ""
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("Overall status:") or line.startswith("Status:"):
+            return line.split(":", 1)[1].strip()
+    return ""
 
 
 def _read_json(path: Path) -> dict[str, object] | None:

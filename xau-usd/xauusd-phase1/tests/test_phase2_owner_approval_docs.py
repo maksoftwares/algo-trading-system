@@ -18,6 +18,22 @@ def test_owner_approval_docs_require_vps_first_day_scheduler_evidence():
     assert "outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md" in draft
 
 
+def test_owner_approval_docs_reject_mixed_live_scope_wording():
+    template = (ROOT / "docs" / "PHASE2_OWNER_APPROVAL_TEMPLATE.md").read_text(encoding="utf-8")
+    draft = (ROOT / "docs" / "PHASE2_OWNER_APPROVAL_DRAFT.md").read_text(encoding="utf-8")
+
+    for text in (template, draft):
+        assert "no live capital" in text
+        assert "before every objective gate is PASS" in text
+        assert "early/invalid" in text
+        assert "plus live capital" in text
+        assert "live trading" in text
+        assert "broker execution" in text
+        assert "broker-side execution" in text
+        assert "order execution" in text
+        assert "real money" in text
+
+
 def test_authorization_checklist_keeps_first_day_verification_as_phase2_gate():
     checklist = (ROOT / "docs" / "PHASE2_AUTHORIZATION_CHECKLIST.md").read_text(encoding="utf-8")
 

@@ -8,10 +8,10 @@ Overall status: REVIEW_READY
 
 | cost_mode | family_unique_events | primary_stream_allowed | median_proxy_cost_r | mean_proxy_cost_r | median_net_after_proxy_cost_r | mean_net_after_proxy_cost_r | baseline_assumed_cost_r | baseline_net_expectancy_r | median_net_delta_vs_assumed_baseline_r | normal_count | cost_watch_count | suspend_family_count | suspend_family_unique_events |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| entry_only_proxy | 61 | 61 | 0.1226 | 0.1339 | 0.389 | 0.3777 | 0.3228 | 0.1888 | 0.2002 | 108 | 0 | 0 | 0 |
-| entry_exit_proxy | 61 | 61 | 0.2452 | 0.2678 | 0.2664 | 0.2438 | 0.3228 | 0.1888 | 0.0776 | 83 | 3 | 22 | 12 |
-| p95_fresh_proxy | 61 | 61 | 0.3287 | 0.3571 | 0.1829 | 0.1545 | 0.3228 | 0.1888 | -0.006 | 52 | 8 | 48 | 27 |
-| stress_2x_p95_proxy | 61 | 61 | 0.6369 | 0.692 | -0.1253 | -0.1804 | 0.3228 | 0.1888 | -0.3141 | 8 | 2 | 98 | 55 |
+| entry_only_proxy | 65 | 65 | 0.1155 | 0.1318 | 0.3961 | 0.3798 | 0.3228 | 0.1888 | 0.2073 | 116 | 0 | 0 | 0 |
+| entry_exit_proxy | 65 | 65 | 0.2311 | 0.2636 | 0.2805 | 0.248 | 0.3228 | 0.1888 | 0.0917 | 91 | 3 | 22 | 12 |
+| p95_fresh_proxy | 65 | 65 | 0.3223 | 0.3532 | 0.1894 | 0.1584 | 0.3228 | 0.1888 | 0.0005 | 58 | 10 | 48 | 27 |
+| stress_2x_p95_proxy | 65 | 65 | 0.6243 | 0.6843 | -0.1127 | -0.1727 | 0.3228 | 0.1888 | -0.3015 | 8 | 2 | 106 | 59 |
 
 ## Cost Semantics
 

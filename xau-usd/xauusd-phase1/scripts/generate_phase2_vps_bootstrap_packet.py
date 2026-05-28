@@ -166,6 +166,7 @@ def _bootstrap_phases(root: Path) -> list[dict[str, Any]]:
                 "Clone or copy the repository to the VPS and keep secrets out of tracked files.",
                 "Install or copy MT5 Portable in dry-run configuration only.",
                 "Run the 20-sample latency capture against the broker or MT5 endpoint.",
+                "Run scripts/prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.",
                 "Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values.",
             ],
             "evidence": [
@@ -229,6 +230,10 @@ def _commands() -> dict[str, str]:
             "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\n"
             "Copy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt"
         ),
+        "prepare_vps_evidence_workspace": (
+            r".\scripts\prepare_phase2_vps_evidence_workspace.ps1 "
+            r"-Phase1Root <phase1_root>"
+        ),
         "generate_vps_first_day_verification": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py "
             r"--files-dir C:\MT5PortableGoldMission\MQL5\Files "
@@ -246,6 +251,9 @@ def _commands() -> dict[str, str]:
             r"-SpreadFilesDir <spread_logger_files_dir> "
             r"-CompileLog <compile_log_path> "
             r"-IntervalMinutes 60 "
+            r"-Provider <selected_provider> "
+            r"-Region <selected_region> "
+            r"-WriteEvidence "
             r"-WhatIfOnly"
         ),
     }

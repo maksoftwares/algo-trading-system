@@ -1,11 +1,12 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-28T15:43:44.461578Z",
+  "created_at_utc": "2026-05-28T19:34:46.089953Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
-  "phase2_demo_preflight_status": "PENDING",
+  "phase2_demo_preflight_status": "FAIL",
   "vps_selection_status": "PENDING",
   "vps_latency_status": "PENDING",
+  "vps_selection_decision_check_status": "PENDING",
   "vps_first_day_verification_status": "PENDING",
   "owner_approval_status": "PENDING",
   "paper_mode_authorized": false,
@@ -16,17 +17,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 27.92,
+      "current": 31.75,
       "required": 72.0,
-      "remaining": 44.08,
+      "remaining": 40.25,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 29.03,
+      "current": 32.88,
       "required": 96.0,
-      "remaining": 66.97,
+      "remaining": 63.12,
       "unit": "hours"
     },
     {
@@ -60,6 +61,63 @@
       "action": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS."
     }
   ],
+  "owner_approval_readiness": {
+    "status": "NOT_READY_TO_SIGN",
+    "pending_objective_gate_count": 10,
+    "pending_objective_gates": [
+      {
+        "gate": "VPS selection",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "VPS latency evidence",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "VPS first-day verification",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured cost model",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured-cost revalidation",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Measured-cost assumption delta",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Phase 1 acceptance",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Phase 1 review index",
+        "status": "PENDING",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
+      },
+      {
+        "gate": "Active-market 72-hour soak",
+        "status": "PENDING",
+        "evidence": "Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      },
+      {
+        "gate": "Process/code-freeze 96-hour gate",
+        "status": "PENDING",
+        "evidence": "Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z."
+      }
+    ],
+    "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."
+  },
   "owner_checklist": [
     {
       "step": "1",
@@ -107,12 +165,99 @@
     "worst_ping": "312.50 ms",
     "latest_access_point": "1"
   },
+  "vps_evidence_workspace": {
+    "status": "PREPARED_PENDING_OWNER_VERIFICATION",
+    "manifest_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_evidence_workspace_manifest.json",
+    "authority": "Evidence workspace preparation only; does not authorize Phase 2, demo trading, broker execution, live capital, or MT5 runtime changes.",
+    "reports_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports",
+    "allow_overwrite_verified": false,
+    "items": [
+      {
+        "target": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_ntp_sync.txt",
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_ntp_sync.template.txt",
+        "action": "SKIPPED_EXISTING",
+        "reason": "Use -Force to refresh pending template evidence."
+      },
+      {
+        "target": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_backup_config.txt",
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_backup_config.template.txt",
+        "action": "SKIPPED_EXISTING",
+        "reason": "Use -Force to refresh pending template evidence."
+      },
+      {
+        "target": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_rdp_recovery.txt",
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_rdp_recovery.template.txt",
+        "action": "SKIPPED_EXISTING",
+        "reason": "Use -Force to refresh pending template evidence."
+      },
+      {
+        "target": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_periodic_task.txt",
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_periodic_task.template.txt",
+        "action": "SKIPPED_EXISTING",
+        "reason": "Use -Force to refresh pending template evidence."
+      }
+    ]
+  },
+  "vps_selection_recommendation": {
+    "status": "PENDING",
+    "primary_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
+    "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
+    "defer": "QuantVPS unless broker latency testing favors US/Chicago",
+    "reasoning": [
+      "FXVM Advanced meets the minimum 2 CPU / 4 GB / 60 GB requirement and offers Dubai/Mumbai/Singapore regions to test against the current broker account geography.",
+      "ForexVPS.net Core is a clean minimum-spec alternative with stronger entry resources than FXVM Basic and an explicit 4 GB / 100 GB profile.",
+      "QuantVPS has excellent specs but is more expensive and appears more Chicago/futures oriented, so it should not be chosen for XAU/Capital.com paper mode unless latency proves it."
+    ],
+    "latency_preference": [
+      "median ping <= 50 ms: preferred",
+      "median ping 51-100 ms: acceptable for Phase 2 paper-cost measurement",
+      "median ping > 100 ms: owner review required",
+      "packet loss > 0%: reject or retest before selection"
+    ]
+  },
+  "one_screen_vps_decision_sheet": {
+    "status": "WAITING_OWNER_SELECTION",
+    "decision": "Select the Phase 2 VPS provider, region, and plan; do not sign owner approval yet.",
+    "authority_boundary": "This decision only prepares VPS evidence. It does not authorize paper mode, demo trading, broker execution, or live capital.",
+    "recommended_first_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
+    "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
+    "deferred_option": "QuantVPS unless broker latency testing favors US/Chicago",
+    "decision_record_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",
+    "fillable_template_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\phase2_vps_selection_decision.template.md",
+    "local_baseline_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md",
+    "required_decision_fields": [
+      "Selected provider",
+      "Selected region",
+      "Selected plan",
+      "Monthly cost",
+      "Backup method",
+      "Monitoring endpoint or scheduler",
+      "Recovery access owner",
+      "Decision date",
+      "Owner acceptance that Phase 2 is paper-mode only"
+    ],
+    "pass_preferences": [
+      "median ping <= 50 ms: preferred",
+      "median ping 51-100 ms: acceptable for Phase 2 paper-cost measurement",
+      "median ping > 100 ms: owner review required",
+      "packet loss > 0%: reject or retest before selection"
+    ],
+    "after_vps_is_provisioned": [
+      "Run prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.",
+      "Run capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
+      "Copy and fill the vps_ntp_sync, vps_backup_config, vps_rdp_recovery, and vps_periodic_task evidence templates.",
+      "Compile and run the Phase 1 dry-run shell only, with dry_run=true and trade_permission=false.",
+      "Regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md and PHASE2_READINESS_REPORT.md."
+    ]
+  },
   "commands": {
     "refresh_readiness": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files",
     "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\nCopy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt",
+    "prepare_vps_evidence_workspace": ".\\scripts\\prepare_phase2_vps_evidence_workspace.ps1 -Phase1Root <phase1_root>",
     "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log --scheduler-evidence outputs\\reports\\vps_periodic_task.txt",
     "capture_vps_latency": ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\" -SampleCount 20",
-    "install_periodic_checks_task_dry_run": ".\\scripts\\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly"
+    "check_vps_selection_decision": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_selection_decision_check.py",
+    "install_periodic_checks_task_dry_run": ".\\scripts\\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -Provider <selected_provider> -Region <selected_region> -WriteEvidence -WhatIfOnly"
   },
   "owner_templates": {
     "vps_selection_decision": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\phase2_vps_selection_decision.template.md",
@@ -127,7 +272,9 @@
     "phase2_demo_preflight": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_PREFLIGHT_REPORT.md",
     "phase2_vps_bootstrap": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_BOOTSTRAP_PACKET.md",
     "local_mt5_network_baseline": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md",
+    "vps_evidence_workspace_manifest": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_evidence_workspace_manifest.json",
     "vps_first_day_verification": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md",
+    "vps_selection_decision_check": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_SELECTION_DECISION_CHECK.md",
     "vps_selection_matrix": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",
     "owner_approval_draft": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_OWNER_APPROVAL_DRAFT.md",
     "phase2_demo_transition_runbook": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_DEMO_TRANSITION_RUNBOOK.md"

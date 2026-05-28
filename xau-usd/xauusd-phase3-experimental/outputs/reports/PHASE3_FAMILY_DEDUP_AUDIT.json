@@ -1,14 +1,14 @@
 {
   "status": "REVIEW_READY",
-  "created_at_utc": "2026-05-28T12:45:20.710629Z",
+  "created_at_utc": "2026-05-28T18:08:59.147410Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "input_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
-  "safe_source_rows": 108,
-  "family_group_count": 61,
-  "multi_row_group_count": 47,
+  "safe_source_rows": 116,
+  "family_group_count": 65,
+  "multi_row_group_count": 51,
   "classification_counts": {
     "SAME_BAR_DISTINCT_LEVEL": 1,
-    "TRUE_DUPLICATE": 60
+    "TRUE_DUPLICATE": 64
   },
   "rows": [
     {
@@ -1047,6 +1047,74 @@
       "stop_losses": "4390.90",
       "take_profits": "4379.88",
       "stop_distance_points": "440.67"
+    },
+    {
+      "family_event_id": "FAM00062",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.28 11:30:00",
+      "group_size": "2",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "observer",
+      "source_cluster_ids": "WS111;WS112",
+      "observers": "breakout_retest;swing_breakout_retest_v0",
+      "directions": "SHORT",
+      "level_kinds": "latest_swing_low",
+      "level_prices": "4389.67",
+      "entry_prices": "4385.45",
+      "stop_losses": "4390.50",
+      "take_profits": "4377.88",
+      "stop_distance_points": "504.76"
+    },
+    {
+      "family_event_id": "FAM00063",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.28 11:45:00",
+      "group_size": "2",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "observer",
+      "source_cluster_ids": "WS113;WS114",
+      "observers": "breakout_retest;swing_breakout_retest_v0",
+      "directions": "SHORT",
+      "level_kinds": "latest_swing_low",
+      "level_prices": "4389.67",
+      "entry_prices": "4385.69",
+      "stop_losses": "4390.52",
+      "take_profits": "4378.45",
+      "stop_distance_points": "482.78"
+    },
+    {
+      "family_event_id": "FAM00064",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.28 11:50:00",
+      "group_size": "2",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "observer",
+      "source_cluster_ids": "WS115;WS116",
+      "observers": "breakout_retest;swing_breakout_retest_v0",
+      "directions": "SHORT",
+      "level_kinds": "latest_swing_low",
+      "level_prices": "4389.67",
+      "entry_prices": "4384.90",
+      "stop_losses": "4390.74",
+      "take_profits": "4376.13",
+      "stop_distance_points": "584.41"
+    },
+    {
+      "family_event_id": "FAM00065",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.28 12:25:00",
+      "group_size": "2",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "observer",
+      "source_cluster_ids": "WS117;WS118",
+      "observers": "breakout_retest;swing_breakout_retest_v0",
+      "directions": "SHORT",
+      "level_kinds": "latest_swing_low",
+      "level_prices": "4389.67",
+      "entry_prices": "4387.42",
+      "stop_losses": "4393.17",
+      "take_profits": "4378.79",
+      "stop_distance_points": "575.40"
     }
   ]
 }

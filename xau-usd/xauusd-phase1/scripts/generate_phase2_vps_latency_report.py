@@ -7,9 +7,11 @@ from pathlib import Path
 
 
 DEFAULT_REPORT = Path("outputs") / "reports" / "PHASE2_VPS_LATENCY_REPORT.md"
+DEFAULT_LOCAL_BASELINE = Path("outputs") / "reports" / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
 PREFERRED_LATENCY_MS = 50.0
 MAX_ACCEPTABLE_LATENCY_MS = 100.0
 MIN_PING_SAMPLES = 10
+MATERIAL_IMPROVEMENT_RATIO = 0.90
 
 
 @dataclass(frozen=True)
@@ -18,6 +20,13 @@ class PingStats:
     received: int | None
     loss_pct: float | None
     average_ms: float | None
+
+
+@dataclass(frozen=True)
+class LocalBaselineStats:
+    status: str | None
+    median_ms: float | None
+    sample_count: int | None
 
 
 @dataclass(frozen=True)
@@ -43,19 +52,24 @@ def generate_phase2_vps_latency_report(
     ping_output_path: Path | None = None,
     tracert_output_path: Path | None = None,
     test_net_output_path: Path | None = None,
+    local_baseline_path: Path | None = None,
 ) -> VpsLatencyReportOutput:
     root = root.resolve()
     report_path = (root / DEFAULT_REPORT if report_path is None else report_path).resolve()
+    local_baseline_path = root / DEFAULT_LOCAL_BASELINE if local_baseline_path is None else local_baseline_path
     ping_text = _read_optional_text(ping_output_path)
     tracert_text = _read_optional_text(tracert_output_path)
     test_net_text = _read_optional_text(test_net_output_path)
+    baseline_text = _read_optional_text(local_baseline_path)
     ping_stats = parse_ping_output(ping_text) if ping_text else None
+    baseline_stats = parse_local_baseline_report(baseline_text) if baseline_text else None
 
     checks = [
         _selection_check(provider, region, endpoint),
         _ping_evidence_check(ping_output_path, ping_text, ping_stats),
         _packet_loss_check(ping_stats),
         _latency_threshold_check(ping_stats),
+        _local_baseline_check(local_baseline_path, baseline_stats, ping_stats),
         _tracert_check(tracert_output_path, tracert_text),
         _test_net_check(test_net_output_path, test_net_text),
     ]
@@ -70,9 +84,11 @@ def generate_phase2_vps_latency_report(
             endpoint=endpoint,
             checks=checks,
             ping_stats=ping_stats,
+            baseline_stats=baseline_stats,
             ping_output_path=ping_output_path,
             tracert_output_path=tracert_output_path,
             test_net_output_path=test_net_output_path,
+            local_baseline_path=local_baseline_path,
         ),
         encoding="utf-8",
     )
@@ -116,6 +132,28 @@ def parse_ping_output(text: str) -> PingStats:
         average_ms = float(linux_rtt.group("avg"))
 
     return PingStats(sent=sent, received=received, loss_pct=loss_pct, average_ms=average_ms)
+
+
+def parse_local_baseline_report(text: str) -> LocalBaselineStats:
+    status_match = re.search(r"^Overall status:\s*(?P<status>\w+)\s*$", text, flags=re.IGNORECASE | re.MULTILINE)
+    status = status_match.group("status").upper() if status_match else None
+
+    sample_count = None
+    samples_match = re.search(
+        r"^\|\s*(?P<samples>\d+)\s*\|\s*[^|\n]+\|\s*(?P<median>[\d.]+)\s*ms\s*\|",
+        text,
+        flags=re.IGNORECASE | re.MULTILINE,
+    )
+    median_ms = None
+    if samples_match:
+        sample_count = int(samples_match.group("samples"))
+        median_ms = float(samples_match.group("median"))
+    else:
+        median_match = re.search(r"\|\s*Median Ping\s*\|.*?\n\|.*?\n\|[^|\n]*\|[^|\n]*\|\s*(?P<median>[\d.]+)\s*ms", text, flags=re.IGNORECASE | re.DOTALL)
+        if median_match:
+            median_ms = float(median_match.group("median"))
+
+    return LocalBaselineStats(status=status, median_ms=median_ms, sample_count=sample_count)
 
 
 def _selection_check(provider: str, region: str, endpoint: str) -> LatencyCheck:
@@ -185,6 +223,47 @@ def _latency_threshold_check(stats: PingStats | None) -> LatencyCheck:
     )
 
 
+def _local_baseline_check(
+    path: Path | None,
+    baseline: LocalBaselineStats | None,
+    stats: PingStats | None,
+) -> LatencyCheck:
+    if path is None or not path.exists():
+        return LatencyCheck("local_baseline_comparison", "PENDING", "Local MT5 network baseline report is missing.")
+    if baseline is None or baseline.status != "PASS" or baseline.median_ms is None:
+        return LatencyCheck(
+            "local_baseline_comparison",
+            "PENDING",
+            f"Local MT5 network baseline is incomplete or not PASS: `{path}`.",
+        )
+    if stats is None or stats.average_ms is None:
+        return LatencyCheck(
+            "local_baseline_comparison",
+            "PENDING",
+            "VPS average latency is not available for local-baseline comparison.",
+        )
+
+    target_ms = baseline.median_ms * MATERIAL_IMPROVEMENT_RATIO
+    improvement_pct = ((baseline.median_ms - stats.average_ms) / baseline.median_ms) * 100.0
+    if stats.average_ms <= target_ms:
+        return LatencyCheck(
+            "local_baseline_comparison",
+            "PASS",
+            f"VPS average latency {stats.average_ms:.2f} ms improves on local median {baseline.median_ms:.2f} ms by {improvement_pct:.1f}% (required >= 10.0%).",
+        )
+    if stats.average_ms < baseline.median_ms:
+        return LatencyCheck(
+            "local_baseline_comparison",
+            "WARN",
+            f"VPS average latency {stats.average_ms:.2f} ms beats local median {baseline.median_ms:.2f} ms by only {improvement_pct:.1f}%; owner review required.",
+        )
+    return LatencyCheck(
+        "local_baseline_comparison",
+        "FAIL",
+        f"VPS average latency {stats.average_ms:.2f} ms does not beat local median {baseline.median_ms:.2f} ms; choose another region/provider or require owner exception.",
+    )
+
+
 def _tracert_check(path: Path | None, text: str) -> LatencyCheck:
     if path is None or not text:
         return LatencyCheck("traceroute_evidence", "PENDING", "No traceroute evidence file provided.")
@@ -227,10 +306,13 @@ def _render_report(
     endpoint: str,
     checks: list[LatencyCheck],
     ping_stats: PingStats | None,
+    baseline_stats: LocalBaselineStats | None,
     ping_output_path: Path | None,
     tracert_output_path: Path | None,
     test_net_output_path: Path | None,
+    local_baseline_path: Path | None,
 ) -> str:
+    improvement = _fmt_improvement(ping_stats, baseline_stats)
     return "\n".join(
         [
             "# Phase 2 VPS Latency Report",
@@ -251,9 +333,11 @@ def _render_report(
                         "Endpoint": endpoint or "Pending",
                         "Average Ping": "" if ping_stats is None or ping_stats.average_ms is None else f"{ping_stats.average_ms:.2f} ms",
                         "Packet Loss": "" if ping_stats is None or ping_stats.loss_pct is None else f"{ping_stats.loss_pct:.2f}%",
+                        "Local Median": "" if baseline_stats is None or baseline_stats.median_ms is None else f"{baseline_stats.median_ms:.2f} ms",
+                        "Improvement": improvement,
                     }
                 ],
-                ["Provider", "Region", "Endpoint", "Average Ping", "Packet Loss"],
+                ["Provider", "Region", "Endpoint", "Average Ping", "Packet Loss", "Local Median", "Improvement"],
             ),
             "",
             "## Checks",
@@ -268,6 +352,7 @@ def _render_report(
             f"- Ping output: `{ping_output_path or 'pending'}`",
             f"- Traceroute output: `{tracert_output_path or 'pending'}`",
             f"- Test-NetConnection output: `{test_net_output_path or 'pending'}`",
+            f"- Local MT5 baseline: `{local_baseline_path or 'pending'}`",
             "",
             "## Capture Commands",
             "",
@@ -291,6 +376,7 @@ def _render_report(
             "",
             "- This report is evidence-only and does not authorize Phase 2 paper-mode implementation.",
             "- Passing latency evidence does not authorize live capital or broker-side execution.",
+            "- A VPS latency PASS requires a PASS local MT5 baseline and at least 10% better average ping than the local median.",
             "- Keep `dry_run=true` and `trade_permission=false` until all Phase 2 readiness gates pass and the owner signs approval.",
             f"- Workspace root: `{root}`",
             "",
@@ -300,10 +386,16 @@ def _render_report(
 
 def _decision_text(status: str) -> str:
     if status == "PASS":
-        return "The VPS candidate has enough latency evidence for owner review."
+        return "The VPS candidate has enough latency evidence and beats the local MT5 baseline for owner review."
     if status == "FAIL":
         return "The VPS candidate failed latency or reachability checks. Retest another region/provider before selection."
     return "VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readiness pending."
+
+
+def _fmt_improvement(stats: PingStats | None, baseline: LocalBaselineStats | None) -> str:
+    if stats is None or stats.average_ms is None or baseline is None or baseline.median_ms is None:
+        return ""
+    return f"{((baseline.median_ms - stats.average_ms) / baseline.median_ms) * 100.0:.1f}%"
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:
@@ -332,6 +424,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ping-output", type=Path, default=None)
     parser.add_argument("--tracert-output", type=Path, default=None)
     parser.add_argument("--test-net-output", type=Path, default=None)
+    parser.add_argument("--local-baseline", type=Path, default=None)
     args = parser.parse_args(argv)
 
     output = generate_phase2_vps_latency_report(
@@ -343,6 +436,7 @@ def main(argv: list[str] | None = None) -> int:
         ping_output_path=args.ping_output,
         tracert_output_path=args.tracert_output,
         test_net_output_path=args.test_net_output,
+        local_baseline_path=args.local_baseline,
     )
     print(f"Phase 2 VPS latency report: {output.status}")
     print(output.report_path)

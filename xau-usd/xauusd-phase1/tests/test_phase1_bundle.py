@@ -49,6 +49,14 @@ def test_generate_phase1_bundle_includes_manifest_and_runtime_logs(tmp_path):
     assert "outputs/reports/PHASE1_REVIEW_INDEX.md" in names
     assert "outputs/reports/PHASE1_OBSERVER_PARITY_REPORT.md" in names
     assert "outputs/reports/PHASE2_READINESS_REPORT.md" in names
+    assert "outputs/reports/PHASE2_DEMO_COUNTDOWN.md" in names
+    assert "outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md" in names
+    assert "outputs/reports/PHASE2_DEMO_NEXT_ACTIONS.md" in names
+    assert "outputs/reports/PHASE2_OWNER_ACTION_PACKET.md" in names
+    assert "outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md" in names
+    assert "outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md" in names
+    assert "outputs/reports/PHASE2_VPS_SELECTION_DECISION_CHECK.md" in names
+    assert "outputs/reports/PHASE2_VPS_SELECTION_DECISION_CHECK.json" in names
     assert "outputs/reports/PHASE1_STATUS_SUMMARY.json" in names
     assert "outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md" in names
     assert "outputs/reports/PHASE1_SOAK_HISTORY.csv" in names

@@ -50,7 +50,12 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     assert "Local MT5 Network Baseline" in markdown
     assert "129.78 ms" in markdown
     assert "install_phase2_periodic_checks_task.ps1" in markdown
+    assert "prepare_phase2_vps_evidence_workspace.ps1" in markdown
+    assert "prepare_phase2_vps_evidence_workspace.ps1" in payload["commands"]["prepare_vps_evidence_workspace"]
     assert "-WhatIfOnly" in payload["commands"]["install_periodic_checks_task"]
+    assert "-WriteEvidence" in payload["commands"]["install_periodic_checks_task"]
+    assert "-Provider <selected_provider>" in payload["commands"]["install_periodic_checks_task"]
+    assert "-Region <selected_region>" in payload["commands"]["install_periodic_checks_task"]
     assert "Copy-Item docs\\templates\\vps_periodic_task.template.txt" in markdown
     assert "--scheduler-evidence outputs\\reports\\vps_periodic_task.txt" in markdown
     assert any(

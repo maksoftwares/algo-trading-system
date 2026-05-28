@@ -331,6 +331,90 @@ def test_phase3_demo_rehearsal_package_preserves_non_deployment_boundary(tmp_pat
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
 
 
+def test_phase3_to_demo_handoff_preserves_demo_boundary_and_lists_gates(tmp_path: Path):
+    module = _load_script("generate_phase3_to_demo_handoff")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    (reports / "PHASE3_EXPERIMENTAL_STATUS.json").write_text(
+        json.dumps({"status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO"}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_COMPLETION_AUDIT.json").write_text(
+        json.dumps({"status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES", "phase3_repo_complete": True}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_DEMO_REHEARSAL_PLAN.json").write_text(
+        json.dumps({"can_start_real_demo": False}),
+        encoding="utf-8",
+    )
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_DEMO_COUNTDOWN.json").write_text(
+        json.dumps(
+            {
+                "wait_gates": [
+                    {
+                        "gate": "Active-market 72-hour soak",
+                        "status": "PENDING",
+                        "current": 28.5,
+                        "required": 72.0,
+                        "remaining": 43.5,
+                        "unit": "hours",
+                    }
+                ],
+                "owner_actions_now": [
+                    {
+                        "gate": "VPS selection",
+                        "status": "PENDING",
+                        "action": "Select VPS.",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (phase1_reports / "PHASE2_OWNER_ACTION_PACKET.json").write_text(
+        json.dumps(
+            {
+                "owner_approval_readiness": {
+                    "status": "NOT_READY_TO_SIGN",
+                    "pending_objective_gate_count": 1,
+                    "pending_objective_gates": [
+                        {
+                            "gate": "Active-market 72-hour soak",
+                            "status": "PENDING",
+                            "evidence": "Need more active-market hours.",
+                        }
+                    ],
+                    "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS.",
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    path = module.generate_phase3_to_demo_handoff(phase3, repo)
+
+    handoff = json.loads(path.read_text(encoding="utf-8"))
+    assert handoff["status"] == "READY_FOR_REVIEW_WAITING_REAL_GATES"
+    assert handoff["can_start_demo_now"] is False
+    assert handoff["demo_authorized"] is False
+    assert handoff["broker_action_code_allowed"] is False
+    assert handoff["wait_gates"][0]["gate"] == "Active-market 72-hour soak"
+    assert handoff["owner_actions"][0]["gate"] == "VPS selection"
+    assert handoff["owner_approval_readiness"]["status"] == "NOT_READY_TO_SIGN"
+    assert handoff["owner_approval_readiness"]["pending_objective_gate_count"] == 1
+    report = (reports / "PHASE3_TO_DEMO_HANDOFF.md").read_text(encoding="utf-8")
+    assert "Phase 3 To Demo Handoff" in report
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in report
+    assert "Owner Approval Readiness" in report
+    assert "NOT_READY_TO_SIGN" in report
+
+
 def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path: Path):
     simulator = _load_script("simulate_phase3_from_would_signals")
     safety_module = _load_script("audit_phase3_experimental_safety")
@@ -343,6 +427,7 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     lifecycle_module = _load_script("generate_phase3_shadow_lifecycle_experiment")
     guard_module = _load_script("generate_phase3_lifecycle_guard_experiment")
     rehearsal_module = _load_script("generate_phase3_demo_rehearsal_package")
+    handoff_module = _load_script("generate_phase3_to_demo_handoff")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     repo = tmp_path / "repo"
@@ -614,6 +699,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     lifecycle_module = _load_script("generate_phase3_shadow_lifecycle_experiment")
     guard_module = _load_script("generate_phase3_lifecycle_guard_experiment")
     rehearsal_module = _load_script("generate_phase3_demo_rehearsal_package")
+    handoff_module = _load_script("generate_phase3_to_demo_handoff")
     manifest_module = _load_script("generate_phase3_experimental_manifest")
     status_module = _load_script("generate_phase3_experimental_status")
     completion_module = _load_script("generate_phase3_completion_audit")
@@ -658,6 +744,14 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(json.dumps({"runtime": {"latest_row": {}}}), encoding="utf-8")
     (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
     (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_DEMO_COUNTDOWN.json").write_text(
+        json.dumps({"wait_gates": [], "owner_actions_now": []}),
+        encoding="utf-8",
+    )
+    manifest_module.generate_phase3_experimental_manifest(phase3, repo)
+    status_module.generate_phase3_experimental_status(phase3, repo)
+    completion_module.generate_phase3_completion_audit(phase3, repo)
+    handoff_module.generate_phase3_to_demo_handoff(phase3, repo)
     manifest_module.generate_phase3_experimental_manifest(phase3, repo)
     status_module.generate_phase3_experimental_status(phase3, repo)
     completion_module.generate_phase3_completion_audit(phase3, repo)
@@ -677,6 +771,7 @@ def test_phase3_review_bundle_includes_key_docs_and_reports(tmp_path: Path):
     assert any(item["path"] == "outputs/reports/PHASE3_SHADOW_LIFECYCLE_SUMMARY.md" for item in manifest["files"])
     assert any(item["path"] == "outputs/reports/PHASE3_LIFECYCLE_GUARD_SUMMARY.md" for item in manifest["files"])
     assert any(item["path"] == "outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md" for item in manifest["files"])
+    assert any(item["path"] == "outputs/reports/PHASE3_TO_DEMO_HANDOFF.md" for item in manifest["files"])
 
 
 def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path: Path):
@@ -712,6 +807,7 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
         "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
         "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
         "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+        "PHASE3_TO_DEMO_HANDOFF.md",
         "PHASE3_EXPERIMENTAL_MANIFEST.md",
     ]:
         (reports / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
@@ -758,6 +854,12 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
                     "blocked_events": 1,
                     "demo_authorized": False,
                     "can_start_real_demo": False,
+                },
+                "demo_handoff": {
+                    "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
+                    "phase2_readiness": "PENDING",
+                    "can_start_demo_now": False,
+                    "demo_authorized": False,
                 },
             }
         ),
@@ -817,6 +919,110 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
     assert audit["external_blockers"][0]["current_detail"] == "current=27.92; required=72.0; remaining=44.08; unit=hours"
     assert audit["external_blockers"][1]["gate"] == "Owner approval"
     assert "objective gates pass" in audit["external_blockers"][1]["current_detail"]
+
+
+def test_phase3_completion_audit_accepts_dirty_manifest_as_wip_snapshot(tmp_path: Path):
+    module = _load_script("generate_phase3_completion_audit")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    docs = phase3 / "docs"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    bundle_dir = phase3 / "outputs" / "review_bundles"
+    reports.mkdir(parents=True)
+    docs.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    bundle_dir.mkdir(parents=True)
+    for name in [
+        "PHASE3_EXPERIMENTAL_SCOPE.md",
+        "PHASE3_EXPERIMENTAL_FREEZE.md",
+        "PHASE3_EXECUTION_READINESS_DESIGN.md",
+        "PHASE3_PROMOTION_ROLLBACK_CRITERIA.md",
+        "PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md",
+        "PHASE3_REAL_IMPLEMENTATION_PROMPT.md",
+    ]:
+        (docs / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+    for name in [
+        "PHASE3_EXPERIMENTAL_SIMULATION.md",
+        "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md",
+        "PHASE3_FAMILY_DEDUP_AUDIT.md",
+        "PHASE3_COST_MODE_COMPARISON.md",
+        "PHASE3_COST_GATE_REVIEW.md",
+        "PHASE3_SUSPEND_FAMILY_REVIEW.md",
+        "PHASE3_SUSPEND_FAMILY_DECISION.md",
+        "PHASE3_PAPER_SHADOW_SUMMARY.md",
+        "PHASE3_SHADOW_LIFECYCLE_SUMMARY.md",
+        "PHASE3_LIFECYCLE_GUARD_SUMMARY.md",
+        "PHASE3_DEMO_REHEARSAL_CHECKLIST.md",
+        "PHASE3_TO_DEMO_HANDOFF.md",
+        "PHASE3_EXPERIMENTAL_MANIFEST.md",
+    ]:
+        (reports / name).write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+    (repo / "status.html").write_text("<!doctype html>\n", encoding="utf-8")
+    (bundle_dir / "PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip").write_bytes(b"zip")
+    (reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json").write_text(
+        json.dumps({"status": "PASS", "findings_count": 0}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_EXPERIMENTAL_MANIFEST.json").write_text(
+        json.dumps({"status": "DIRTY_WORKTREE", "working_tree_clean": False}),
+        encoding="utf-8",
+    )
+    (reports / "PHASE3_EXPERIMENTAL_STATUS.json").write_text(
+        json.dumps(
+            {
+                "simulation": {"accepted_events": 3, "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO"},
+                "suspend_family_decision": {
+                    "status": "REVIEW_READY_KEEP_SUSPENDED",
+                    "keep_suspended_primary_rows": 1,
+                },
+                "family_dedup_audit": {"status": "REVIEW_READY"},
+                "cost_mode_comparison": {"status": "REVIEW_READY", "mode_count": 4},
+                "cost_gate_review": {"status": "REVIEW_READY", "threshold_count": 4},
+                "paper_shadow_experiment": {
+                    "status": "SIDE_EXPERIMENT_PAPER_SHADOW_READY_WITH_COST_BLOCKS",
+                    "would_open_count": 2,
+                    "demo_authorized": False,
+                },
+                "shadow_lifecycle_experiment": {
+                    "status": "SIDE_EXPERIMENT_SYNTHETIC_LIFECYCLE_READY",
+                    "synthetic_open_count": 2,
+                    "demo_authorized": False,
+                },
+                "lifecycle_guard_experiment": {
+                    "status": "SIDE_EXPERIMENT_GUARDED_LIFECYCLE_READY",
+                    "guarded_open_count": 1,
+                    "demo_authorized": False,
+                },
+                "demo_rehearsal": {
+                    "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
+                    "rehearsal_event_count": 3,
+                    "shadow_open_events": 1,
+                    "blocked_events": 1,
+                    "demo_authorized": False,
+                    "can_start_real_demo": False,
+                },
+                "demo_handoff": {
+                    "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
+                    "phase2_readiness": "PENDING",
+                    "can_start_demo_now": False,
+                    "demo_authorized": False,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n\n## Gates\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_DEMO_COUNTDOWN.json").write_text(json.dumps({}), encoding="utf-8")
+
+    path = module.generate_phase3_completion_audit(phase3, repo)
+
+    audit = json.loads(path.read_text(encoding="utf-8"))
+    manifest_row = next(row for row in audit["repo_requirement_rows"] if row["key"] == "manifest")
+    assert audit["phase3_repo_complete"] is True
+    assert manifest_row["status"] == "PASS"
+    assert "DIRTY_WORKTREE" in manifest_row["detail"]
 
 
 def test_phase3_family_dedup_audit_detects_same_bar_distinct_level(tmp_path: Path):
@@ -983,6 +1189,94 @@ def test_phase3_artifact_verifier_detects_status_simulation_mismatch(tmp_path: P
     assert any("status/simulation mismatch for accepted_events" in error for error in errors)
 
 
+def test_phase3_artifact_verifier_detects_stale_core_report_hash(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
+
+    assert module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo") == []
+
+    (reports / "PHASE3_COST_GATE_REVIEW.md").write_text(
+        module.PHASE2_AUTHORITY_SENTENCE + "\nchanged after manifest\n",
+        encoding="utf-8",
+    )
+    errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
+
+    assert any("manifest hash is stale" in error for error in errors)
+
+
+def test_phase3_artifact_verifier_requires_core_reports_in_manifest(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
+    manifest_json = reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"
+    manifest = json.loads(manifest_json.read_text(encoding="utf-8"))
+    manifest["files"] = {
+        key: value
+        for key, value in manifest["files"].items()
+        if Path(value["path"]).name != "PHASE3_EXPERIMENTAL_LEDGER.csv"
+    }
+    manifest_json.write_text(json.dumps(manifest), encoding="utf-8")
+
+    errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
+
+    assert any("manifest does not hash required Phase 3 artifact: PHASE3_EXPERIMENTAL_LEDGER.csv" in error for error in errors)
+
+
+def test_phase3_artifact_verifier_detects_stale_real_status_snapshot(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    repo = tmp_path / "repo"
+    phase3 = repo / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, repo)
+    (phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md").write_text("Overall status: PASS\n", encoding="utf-8")
+    (phase1_reports / "PHASE2_READINESS_REPORT.md").write_text("Overall status: PENDING\n", encoding="utf-8")
+    (phase1_reports / "PHASE1_STATUS_SUMMARY.json").write_text(
+        json.dumps(
+            {
+                "runtime": {
+                    "latest_row": {
+                        "bar_time": "2026.05.28 16:25:00",
+                        "dry_run": "true",
+                        "trade_permission": "false",
+                    }
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    errors = module.verify_phase3_experimental_artifacts(phase3, repo)
+
+    assert any("real_phase1_acceptance is stale" in error for error in errors)
+    assert any("latest_phase1_bar is stale" in error for error in errors)
+
+
 def _load_script(name: str):
     scripts_dir = ROOT / "scripts"
     if str(scripts_dir) not in sys.path:
@@ -1081,10 +1375,14 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
     }
     status = {
         "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+        "real_phase1_acceptance": "PENDING",
         "real_phase2_readiness": "PENDING",
         "authorized_for_deployment": False,
         "mt5_runtime_touched": False,
         "broker_action_code_allowed": False,
+        "latest_phase1_bar": "2026.05.28 15:40:00",
+        "latest_phase1_dry_run": "true",
+        "latest_phase1_trade_permission": "false",
         "simulation": simulation,
     }
     safety = {"status": "PASS", "findings_count": 0}
@@ -1092,6 +1390,13 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
         "status": "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY",
         "demo_authorized": False,
         "can_start_real_demo": False,
+    }
+    handoff = {
+        "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
+        "phase2_readiness": "PENDING",
+        "can_start_demo_now": False,
+        "demo_authorized": False,
+        "broker_action_code_allowed": False,
     }
     completion = {
         "repo_requirement_rows": [
@@ -1126,6 +1431,7 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
     (reports / "PHASE3_EXPERIMENTAL_STATUS.json").write_text(json.dumps(status), encoding="utf-8")
     (reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json").write_text(json.dumps(safety), encoding="utf-8")
     (reports / "PHASE3_DEMO_REHEARSAL_PLAN.json").write_text(json.dumps(rehearsal), encoding="utf-8")
+    (reports / "PHASE3_TO_DEMO_HANDOFF.json").write_text(json.dumps(handoff), encoding="utf-8")
     (reports / "PHASE3_COMPLETION_AUDIT.json").write_text(json.dumps(completion), encoding="utf-8")
     for name in manifest_tracked_names:
         path = reports / name

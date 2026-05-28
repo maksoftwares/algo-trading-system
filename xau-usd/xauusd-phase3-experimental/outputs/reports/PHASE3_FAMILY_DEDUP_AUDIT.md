@@ -8,16 +8,16 @@ Overall status: REVIEW_READY
 
 | Field | Value |
 | --- | --- |
-| Safe source rows | 108 |
-| Family groups | 61 |
-| Multi-row groups | 47 |
+| Safe source rows | 116 |
+| Family groups | 65 |
+| Multi-row groups | 51 |
 
 ## Classification Counts
 
 | Field | Value |
 | --- | --- |
 | SAME_BAR_DISTINCT_LEVEL | 1 |
-| TRUE_DUPLICATE | 60 |
+| TRUE_DUPLICATE | 64 |
 
 ## Multi-Row Groups
 
@@ -70,6 +70,10 @@ Overall status: REVIEW_READY
 | FAM00056 | 2026.05.28 06:25:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4375.03 | 4380.16 | 4373.43 | 4390.25 | 672.74 |
 | FAM00057 | 2026.05.28 08:00:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | LONG | latest_swing_high | 4385.30 | 4389.19 | 4382.19 | 4399.69 | 700.14 |
 | FAM00061 | 2026.05.28 11:25:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4386.49 | 4390.90 | 4379.88 | 440.67 |
+| FAM00062 | 2026.05.28 11:30:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4385.45 | 4390.50 | 4377.88 | 504.76 |
+| FAM00063 | 2026.05.28 11:45:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4385.69 | 4390.52 | 4378.45 | 482.78 |
+| FAM00064 | 2026.05.28 11:50:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4384.90 | 4390.74 | 4376.13 | 584.41 |
+| FAM00065 | 2026.05.28 12:25:00 | 2 | TRUE_DUPLICATE | observer | breakout_retest;swing_breakout_retest_v0 | SHORT | latest_swing_low | 4389.67 | 4387.42 | 4393.17 | 4378.79 | 575.40 |
 
 ## Scope
 

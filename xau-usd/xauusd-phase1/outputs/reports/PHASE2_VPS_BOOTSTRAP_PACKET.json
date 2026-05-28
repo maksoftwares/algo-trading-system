@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_VPS_BOOTSTRAP_PENDING",
-  "created_at_utc": "2026-05-28T15:43:44.461578Z",
+  "created_at_utc": "2026-05-28T19:34:46.089953Z",
   "authority": "This packet is an operational VPS bootstrap handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or paper-mode implementation.",
   "paper_mode_authorized": false,
   "demo_trading_authorized": false,
@@ -8,7 +8,7 @@
   "live_trading_authorized": false,
   "source_status": {
     "phase2_readiness": "PENDING",
-    "phase2_demo_preflight": "PENDING",
+    "phase2_demo_preflight": "FAIL",
     "phase2_demo_countdown": "DEMO_NOT_READY",
     "phase2_owner_action_packet": "WAITING_AND_OWNER_ACTION_REQUIRED",
     "vps_selection": "PENDING",
@@ -20,17 +20,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 27.92,
+      "current": 31.75,
       "required": 72.0,
-      "remaining": 44.08,
+      "remaining": 40.25,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 29.03,
+      "current": 32.88,
       "required": 96.0,
-      "remaining": 66.97,
+      "remaining": 63.12,
       "unit": "hours"
     },
     {
@@ -65,8 +65,8 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1070,
-    "latest_bar": "2026.05.28 15:40:00",
+    "decision_rows": 1116,
+    "latest_bar": "2026.05.28 19:30:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
@@ -101,6 +101,7 @@
         "Clone or copy the repository to the VPS and keep secrets out of tracked files.",
         "Install or copy MT5 Portable in dry-run configuration only.",
         "Run the 20-sample latency capture against the broker or MT5 endpoint.",
+        "Run scripts/prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.",
         "Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values."
       ],
       "evidence": [
@@ -149,9 +150,10 @@
     "refresh_local_readiness": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files",
     "capture_vps_latency": ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\" -SampleCount 20",
     "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\nCopy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt",
+    "prepare_vps_evidence_workspace": ".\\scripts\\prepare_phase2_vps_evidence_workspace.ps1 -Phase1Root <phase1_root>",
     "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log --scheduler-evidence outputs\\reports\\vps_periodic_task.txt",
     "generate_bootstrap_packet": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_bootstrap_packet.py",
-    "install_periodic_checks_task": ".\\scripts\\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly"
+    "install_periodic_checks_task": ".\\scripts\\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -Provider <selected_provider> -Region <selected_region> -WriteEvidence -WhatIfOnly"
   },
   "evidence_paths": {
     "vps_selection_matrix": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",

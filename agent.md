@@ -36,12 +36,15 @@ Last updated: 2026-05-28
   - Exact authority rule for Phase 3 reports: `This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.`
   - Phase 3 outputs: `xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.md`, `PHASE3_EXPERIMENTAL_SIMULATION.md`, `PHASE3_EXPERIMENTAL_LEDGER.csv`, `PHASE3_SUSPEND_FAMILY_REVIEW.md`, `PHASE3_SUSPEND_FAMILY_ROWS.csv`, `PHASE3_SUSPEND_FAMILY_DECISION.md`, `PHASE3_COST_MODE_COMPARISON.md`, `PHASE3_COST_GATE_REVIEW.md`, `PHASE3_FAMILY_DEDUP_AUDIT.md`, `PHASE3_DEMO_REHEARSAL_CHECKLIST.md`, `PHASE3_DEMO_REHEARSAL_LEDGER.csv`, `PHASE3_COMPLETION_AUDIT.md`, `PHASE3_EXPERIMENTAL_SAFETY_REPORT.md`, and `PHASE3_EXPERIMENTAL_MANIFEST.md`.
   - Phase 3 safety report is PASS with 0 findings. Manifest is PASS and records source/input/report hashes.
-  - Status dashboard now includes Phase 3 completion, family de-dup, cost-mode, cost-gate, demo rehearsal, safety, and manifest fields while still showing real Phase 2 as PENDING.
+  - Phase 3 artifact verifier now enforces manifest coverage and hash/byte freshness for core experimental evidence files, excluding only self-referential manifest/status/completion summaries and review-bundle outputs. Current verification command: `xau-usd\xauusd-phase3-experimental\scripts\verify_phase3_experimental_artifacts.py`.
+  - Status dashboard now includes Phase 3 completion, family de-dup, cost-mode, cost-gate, demo rehearsal, safety, manifest fields, and the Phase 2 VPS decision-check status while still showing real Phase 2 as PENDING.
 - 2026-05-28 periodic readiness refresh:
   - `run_phase1_periodic_checks.py` is the canonical refresh command for Phase 1/Phase 2 reports when manual refresh is needed.
   - VPS first-day manual evidence is now structured. Use `xau-usd\xauusd-phase1\docs\templates\vps_ntp_sync.template.txt`, `vps_backup_config.template.txt`, `vps_rdp_recovery.template.txt`, and `vps_periodic_task.template.txt` as copy-fill templates under `outputs\reports`; placeholders, unverified flags, unverified scheduler evidence, and unredacted recovery secrets are rejected by `generate_phase2_vps_first_day_verification.py`.
+  - VPS evidence workspace has been prepared with pending fillable files at `xau-usd\xauusd-phase1\outputs\reports\vps_ntp_sync.txt`, `vps_backup_config.txt`, `vps_rdp_recovery.txt`, and `vps_periodic_task.txt`; manifest: `xau-usd\xauusd-phase1\outputs\reports\vps_evidence_workspace_manifest.json`. These files are evidence placeholders only and do not authorize Phase 2, demo trading, broker execution, live capital, or MT5 runtime changes.
   - Owner-side VPS/demo handoff is now generated at `xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_ACTION_PACKET.md`; it summarizes wait gates, VPS selection, latency capture, first-day verification, and owner approval without authorizing demo trading. Its gate statuses are sourced from `PHASE2_READINESS_REPORT.md` when available, so stale child-document status lines cannot override the readiness authority. A fillable VPS decision-record template is available at `xau-usd\xauusd-phase1\docs\templates\phase2_vps_selection_decision.template.md`.
   - VPS operator bootstrap handoff is now generated at `xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_BOOTSTRAP_PACKET.md`; it sequences before-purchase, first-login, dry-run deploy, and owner-approval evidence steps while keeping demo/paper/live authorization false.
+  - Demo next-actions handoff is generated at `xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_NEXT_ACTIONS.md`; it now includes reproducible earliest UTC target estimates for hour-based wait gates, a condition-based target for measured-cost fresh market days, and a gate-closure map that classifies each blocker by owner/system/wall-clock responsibility, proof artifact, closure action, pass condition, and verification command. This is an operational aid only; `PHASE2_READINESS_REPORT.md` remains the sole readiness authority.
   - `PHASE2_OWNER_APPROVAL.md` validation now rejects placeholder approval fields and requires selected VPS provider, region, plan, monthly cost, and latency evidence path to match the VPS selection decision record.
   - VPS latency capture now defaults to `-SampleCount 20`; `PHASE2_VPS_LATENCY_REPORT.md` requires at least 10 parsed ping samples before the ping-evidence check can pass.
   - Current changing Phase 1 runtime, soak, and would-signal counters must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`, `PHASE1_ACCEPTANCE_REPORT.md`, and `PHASE1_REVIEW_INDEX.md`.
@@ -51,10 +54,10 @@ Last updated: 2026-05-28
   - Review instruction update implemented: Phase 1 source is now `phase1-dry-run-v0.7`, deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and restarted. The code-freeze marker was intentionally reset to `2026-05-27T10:41:50Z`.
   - Canonical cost lifecycle is now `COST_REVALIDATION_PENDING` while `MEASURED_COST_MODEL.md` is PENDING. `COST_SUSPENDED` is reserved only for an authoritative measured-cost revalidation FAIL after the fresh measured-cost model reaches PASS.
   - Active-market soak streaks now reset on `run_id` changes, unexpected >15m active-market gaps, unsafe closed/stale rows, or dry-run/permission/server-time violations. Configured expected broker maintenance gaps pause the active-market streak without adding closed-market time. Process uptime and code-freeze remain separate gates.
-  - Latest refreshed runtime snapshot after v0.7 deployment: 816 decision rows, latest bar `2026.05.27 17:30:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, BR/SBR lifecycle `COST_REVALIDATION_PENDING`.
-  - Latest soak evidence: five-day wall-clock gate is `PASS` at `100.00%` (`5.2708/5.00` observed days), active-market longest `22.92h/72h`, current active-market `6.83h/72h`, process/code-freeze `6.86h/96h`.
+  - Historical 2026-05-27 refreshed runtime snapshot after v0.7 deployment: 816 decision rows, latest bar `2026.05.27 17:30:00`, `run_id=phase1-dry-run-v0.7`, `dry_run=true`, `trade_permission=false`, `server_time_status=CLOCK_OK`, BR/SBR lifecycle `COST_REVALIDATION_PENDING`. For current counters, read the canonical reports listed above.
+  - Historical 2026-05-27 soak evidence: five-day wall-clock gate was `PASS` at `100.00%` (`5.2708/5.00` observed days), active-market longest `22.92h/72h`, current active-market `6.83h/72h`, process/code-freeze `6.86h/96h`. For current soak counters, read `PHASE1_STATUS_SUMMARY.json` and `PHASE1_ACCEPTANCE_REPORT.md`.
   - Superseded measured cost model snapshot: `PENDING` with `12356` authoritative fresh rows over `1` observed fresh market day (`2026-05-27`). Required: at least `500` fresh rows across `5` fresh observed market days.
-  - Latest would-signal observer conflict counts: BR-only `3`, SBR-only `0`, both same direction `41`, both opposite direction `0`.
+  - Historical 2026-05-27 would-signal observer conflict counts: BR-only `3`, SBR-only `0`, both same direction `41`, both opposite direction `0`. For current would-signal counts, read `PHASE1_WOULD_SIGNAL_REPORT.md`.
   - Phase 1 schema acceptance fix is deployed to `C:\MT5PortableGoldMission`, compiled with 0 errors / 0 warnings, and the terminal was restarted. The logger rotated stale CSVs to `MQL5\Files\logs\archive`; live `decision_log.csv` now uses `phase1_decision_schema_v2` with `decision_schema_hash`, `br_lifecycle_state`, and `sbr_lifecycle_state`.
   - Earlier schema-rotation recovery remains in place: archived old-schema decision rows were migrated into the current v2 schema with `scripts\migrate_phase1_decision_log_schema.py`; live `decision_log.csv` preserves the original 2026-05-22 evidence while keeping the v2 schema hash fields.
   - Phase 1 acceptance is `PENDING`. Runtime verification is `WARN` rather than `FAIL` because schemas are valid and the remaining warnings are soak/cadence/health maturity gates, not a broken log format.
@@ -135,17 +138,17 @@ Last updated: 2026-05-28
   - `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv`
 - Restart resilience verifier: `xau-usd\xauusd-phase1\scripts\verify_phase1_logs.py`.
 - Latest Phase 1 log report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_DRY_RUN_LOG_REPORT.md`.
-- Latest log verification status: WARN. Schemas, dry-run lock, permission lock, breakout-retest observer, startup append, shutdown rows, and risk-state coverage remain intact; remaining warnings are tied to soak/cadence maturity after the v0.7 code-freeze reset.
+- Current log verification status must be read from `PHASE1_DRY_RUN_LOG_REPORT.md`; do not copy the changing status into this handoff.
 - Soak/drift analyzer: `xau-usd\xauusd-phase1\scripts\analyze_phase1_soak.py`.
 - Latest Phase 1 soak/drift report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_DRIFT_REPORT.md`.
-- Latest soak/drift status: WARN. Dry-run state, permission state, lifecycle rows, latest-row freshness, server-time status, and breakout-retest observer activity remain clean; active-market 72h and process/code-freeze 96h gates are still maturing.
+- Current soak/drift status must be read from `PHASE1_SOAK_DRIFT_REPORT.md`; active-market 72h and process/code-freeze 96h maturity remain tracked in `PHASE1_STATUS_SUMMARY.json` and `PHASE1_ACCEPTANCE_REPORT.md`.
 - Would-signal report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_would_signal_report.py`.
 - Latest Phase 1 would-signal report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Latest Phase 1 would-signal review CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`.
 - Current would-signal status and cluster counts must be read directly from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Runtime health report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_runtime_health_report.py`.
 - Latest Phase 1 runtime health report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md`.
-- Latest runtime health status: WARN. Runtime files exist, latest row is fresh, dry-run and permission locks hold, latest server-time status is clean, and no exact duplicate rows were found; remaining warnings are maturity gates after the v0.7 reset.
+- Current runtime health status must be read from `PHASE1_RUNTIME_HEALTH_REPORT.md`; do not treat this handoff as the status source.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
 - Current status-summary counters and gate statuses must be read directly from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`; do not copy decision-row, soak, health, would-signal, or acceptance counters from this handoff.
@@ -321,6 +324,10 @@ Last updated: 2026-05-28
 - Latest periodic check status after project-status dashboard wiring: PASS; Phase 2 readiness is correctly PENDING after D2 acceptance, while measured-cost, Phase 1 review index, VPS, and owner approval remain open.
 - Project status page generator: `xau-usd\xauusd-phase1\scripts\generate_project_status_page.py`.
 - Latest project status page: `status.html`. The hourly periodic check regenerates it from Phase 0/Phase 1/Phase 2 artifacts, including all accepted/rejected EA candidates.
+- Experimental demo observer attachment script: `xau-usd\xauusd-phase1\scripts\attach_phase2_experimental_demo_observers.py`.
+- Latest experimental demo attachment report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.md`, status `ATTACHED_TO_DEMO_TERMINAL`.
+- Capital.com demo standard MT5 profile currently has 14 `Phase2ExperimentalDemoObserver` chart attachments: three accepted candidates across qualifying symbols plus two provisional candidates across qualifying symbols. `round_number_retest_v0` is intentionally not attached to EURUSD because its multisymbol summary failed there.
+- The experimental demo attachments are telemetry-only and compile to `Phase2ExperimentalDemoObserver.ex5`; `broker_action_allowed=false`, `dry_run_only=true`, and no canonical Phase 2/live authorization is implied.
 - Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
 - Hourly local automation `phase1-mt5-soak-check` should be ACTIVE while the machine is online; pause it before any future planned shutdown.
 

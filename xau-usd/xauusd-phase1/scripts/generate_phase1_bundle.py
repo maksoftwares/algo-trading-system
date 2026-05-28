@@ -17,8 +17,15 @@ from generate_phase1_runtime_health_report import generate_phase1_runtime_health
 from generate_phase1_soak_history_report import generate_phase1_soak_history_report
 from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
+from generate_phase2_demo_next_actions_report import generate_phase2_demo_next_actions_report
+from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
+from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
+from generate_phase2_vps_bootstrap_packet import generate_phase2_vps_bootstrap_packet
+from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
+from generate_phase2_vps_selection_decision_check import generate_phase2_vps_selection_decision_check
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -132,10 +139,20 @@ def generate_phase1_bundle(
         root,
         root / "outputs" / "reports" / "PHASE1_OBSERVER_PARITY_REPORT.md",
     )
+    vps_first_day_kwargs = {"root": root, "files_dir": files_dir}
+    if compile_log is not None:
+        vps_first_day_kwargs["compile_log"] = compile_log
+    generate_phase2_vps_first_day_verification(**vps_first_day_kwargs)
     phase2_readiness = generate_phase2_readiness_report(
         root,
         root / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md",
     )
+    generate_phase2_demo_countdown_report(root)
+    generate_phase2_demo_preflight_report(root)
+    generate_phase2_vps_selection_decision_check(root)
+    generate_phase2_owner_action_packet(root)
+    generate_phase2_vps_bootstrap_packet(root)
+    generate_phase2_demo_next_actions_report(root)
     review_index = generate_phase1_review_index(
         root,
         root / "outputs" / "reports" / "PHASE1_REVIEW_INDEX.md",

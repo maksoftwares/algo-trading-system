@@ -30,6 +30,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     shadow_lifecycle = _read_json(reports / "PHASE3_SHADOW_LIFECYCLE_SUMMARY.json")
     lifecycle_guard = _read_json(reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json")
     demo_rehearsal = _read_json(reports / "PHASE3_DEMO_REHEARSAL_PLAN.json")
+    demo_handoff = _read_json(reports / "PHASE3_TO_DEMO_HANDOFF.json")
     phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
     phase2_readiness = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
@@ -66,6 +67,7 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "shadow_lifecycle_experiment": _shadow_lifecycle_summary(shadow_lifecycle),
         "lifecycle_guard_experiment": _lifecycle_guard_summary(lifecycle_guard),
         "demo_rehearsal": _demo_rehearsal_summary(demo_rehearsal),
+        "demo_handoff": _demo_handoff_summary(demo_handoff),
         "completion_audit": _completion_audit_summary(completion_audit),
         "manifest": _manifest_summary(manifest),
         "known_state_strings": [
@@ -105,6 +107,7 @@ def _render_markdown(status: dict[str, object]) -> str:
     shadow_lifecycle = _mapping(status.get("shadow_lifecycle_experiment"))
     lifecycle_guard = _mapping(status.get("lifecycle_guard_experiment"))
     demo_rehearsal = _mapping(status.get("demo_rehearsal"))
+    demo_handoff = _mapping(status.get("demo_handoff"))
     completion_audit = _mapping(status.get("completion_audit"))
     manifest = _mapping(status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -208,6 +211,8 @@ def _render_markdown(status: dict[str, object]) -> str:
                     ("Demo rehearsal shadow opens", str(demo_rehearsal.get("shadow_open_events", "UNKNOWN"))),
                     ("Demo rehearsal blocked", str(demo_rehearsal.get("blocked_events", "UNKNOWN"))),
                     ("Demo rehearsal can start real demo", str(demo_rehearsal.get("can_start_real_demo", "UNKNOWN"))),
+                    ("Demo handoff status", str(demo_handoff.get("status", "UNKNOWN"))),
+                    ("Demo handoff can start now", str(demo_handoff.get("can_start_demo_now", "UNKNOWN"))),
                     ("Completion audit", str(completion_audit.get("status", "UNKNOWN"))),
                     ("Phase 3 repo complete", str(completion_audit.get("phase3_repo_complete", "UNKNOWN"))),
                     ("Demo authorized", str(completion_audit.get("demo_authorized", "UNKNOWN"))),
@@ -426,6 +431,28 @@ def _demo_rehearsal_summary(summary: dict[str, object]) -> dict[str, object]:
         "guarded_max_drawdown_r": summary.get("guarded_max_drawdown_r", "UNKNOWN"),
         "event_type_counts": summary.get("event_type_counts", {}),
         "next_real_gate_needed": summary.get("next_real_gate_needed", ""),
+    }
+
+
+def _demo_handoff_summary(summary: dict[str, object]) -> dict[str, object]:
+    if not summary:
+        return {}
+    return {
+        "status": summary.get("status", "UNKNOWN"),
+        "created_at_utc": summary.get("created_at_utc", ""),
+        "phase3_repo_complete": summary.get("phase3_repo_complete", "UNKNOWN"),
+        "phase1_acceptance": summary.get("phase1_acceptance", "UNKNOWN"),
+        "phase2_readiness": summary.get("phase2_readiness", "UNKNOWN"),
+        "can_start_demo_now": summary.get("can_start_demo_now", "UNKNOWN"),
+        "can_start_real_paper_shadow_branch": summary.get("can_start_real_paper_shadow_branch", "UNKNOWN"),
+        "demo_authorized": summary.get("demo_authorized", "UNKNOWN"),
+        "owner_approval_readiness": _mapping(summary.get("owner_approval_readiness")).get("status", "UNKNOWN"),
+        "pending_objective_gate_count": _mapping(summary.get("owner_approval_readiness")).get(
+            "pending_objective_gate_count",
+            "UNKNOWN",
+        ),
+        "wait_gate_count": len(summary.get("wait_gates", [])) if isinstance(summary.get("wait_gates"), list) else 0,
+        "owner_action_count": len(summary.get("owner_actions", [])) if isinstance(summary.get("owner_actions"), list) else 0,
     }
 
 

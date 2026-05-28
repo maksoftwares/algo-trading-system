@@ -34,9 +34,11 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     countdown_path = report_dir / "PHASE2_DEMO_COUNTDOWN.json"
     readiness_path = report_dir / "PHASE2_READINESS_REPORT.md"
     first_day_path = report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md"
+    vps_selection_check_path = report_dir / "PHASE2_VPS_SELECTION_DECISION_CHECK.md"
     preflight_path = report_dir / "PHASE2_DEMO_PREFLIGHT_REPORT.md"
     vps_bootstrap_path = report_dir / "PHASE2_VPS_BOOTSTRAP_PACKET.md"
     local_network_baseline_path = report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
+    vps_evidence_workspace_manifest_path = report_dir / "vps_evidence_workspace_manifest.json"
     vps_matrix_path = root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"
     owner_draft_path = root / "docs" / "PHASE2_OWNER_APPROVAL_DRAFT.md"
     transition_runbook_path = root / "docs" / "PHASE2_DEMO_TRANSITION_RUNBOOK.md"
@@ -46,6 +48,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     wait_gates = _wait_gates(countdown)
     readiness_gates = _read_gate_table(readiness_path)
     owner_actions = _owner_actions(countdown, readiness_gates)
+    owner_approval_readiness = _owner_approval_readiness(readiness_gates)
     readiness_status = _read_markdown_status(readiness_path) or "UNKNOWN"
     preflight_status = _read_markdown_status(preflight_path) or "UNKNOWN"
     first_day_status = (
@@ -55,6 +58,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
     )
     vps_matrix_status = _gate_status(readiness_gates, "VPS selection") or _read_markdown_status(vps_matrix_path) or "UNKNOWN"
     vps_latency_status = _gate_status(readiness_gates, "VPS latency evidence") or "UNKNOWN"
+    vps_selection_check_status = _read_markdown_status(vps_selection_check_path) or "UNKNOWN"
     owner_live_status = _gate_status(readiness_gates, "Project owner approval") or (
         _read_markdown_status(owner_live_path) if owner_live_path.exists() else "MISSING"
     )
@@ -68,7 +72,14 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         vps_matrix_status=vps_matrix_status,
         owner_live_status=owner_live_status,
     )
-    status = _packet_status(wait_gates, owner_actions, readiness_status, preflight_status, owner_live_status)
+    status = _packet_status(
+        wait_gates,
+        owner_actions,
+        readiness_status,
+        preflight_status,
+        owner_live_status,
+        owner_approval_readiness,
+    )
     payload = {
         "status": status,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -77,6 +88,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         "phase2_demo_preflight_status": preflight_status,
         "vps_selection_status": vps_matrix_status,
         "vps_latency_status": vps_latency_status,
+        "vps_selection_decision_check_status": vps_selection_check_status,
         "vps_first_day_verification_status": first_day_status,
         "owner_approval_status": owner_live_status,
         "paper_mode_authorized": False,
@@ -85,8 +97,15 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         "live_trading_authorized": False,
         "wait_gates": wait_gates,
         "owner_actions_now": owner_actions,
+        "owner_approval_readiness": owner_approval_readiness,
         "owner_checklist": checklist,
         "local_mt5_network_baseline": _read_network_baseline(local_network_baseline_path),
+        "vps_evidence_workspace": _read_vps_evidence_workspace(vps_evidence_workspace_manifest_path),
+        "vps_selection_recommendation": _read_vps_selection_recommendation(vps_matrix_path),
+        "one_screen_vps_decision_sheet": _one_screen_vps_decision_sheet(
+            root=root,
+            recommendation=_read_vps_selection_recommendation(vps_matrix_path),
+        ),
         "commands": _commands(),
         "owner_templates": {
             "vps_selection_decision": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
@@ -101,7 +120,9 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
             "phase2_demo_preflight": str(preflight_path),
             "phase2_vps_bootstrap": str(vps_bootstrap_path),
             "local_mt5_network_baseline": str(local_network_baseline_path),
+            "vps_evidence_workspace_manifest": str(vps_evidence_workspace_manifest_path),
             "vps_first_day_verification": str(first_day_path),
+            "vps_selection_decision_check": str(vps_selection_check_path),
             "vps_selection_matrix": str(vps_matrix_path),
             "owner_approval_draft": str(owner_draft_path),
             "phase2_demo_transition_runbook": str(transition_runbook_path),
@@ -118,9 +139,12 @@ def _packet_status(
     readiness_status: str,
     preflight_status: str,
     owner_live_status: str,
+    owner_approval_readiness: dict[str, Any],
 ) -> str:
     if readiness_status == "PASS" and preflight_status == "PASS" and owner_live_status == "PASS":
         return "PHASE2_OWNER_PACKET_COMPLETE"
+    if owner_approval_readiness.get("status") == "READY_TO_SIGN" and owner_live_status != "PASS":
+        return "READY_FOR_OWNER_APPROVAL_REVIEW"
     if owner_actions and any(gate.get("status") != "PASS" for gate in wait_gates):
         return "WAITING_AND_OWNER_ACTION_REQUIRED"
     if owner_actions:
@@ -194,6 +218,10 @@ def _commands() -> dict[str, str]:
             "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\n"
             "Copy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt"
         ),
+        "prepare_vps_evidence_workspace": (
+            r".\scripts\prepare_phase2_vps_evidence_workspace.ps1 "
+            r"-Phase1Root <phase1_root>"
+        ),
         "generate_vps_first_day_verification": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py "
             r"--files-dir C:\MT5PortableGoldMission\MQL5\Files "
@@ -204,6 +232,10 @@ def _commands() -> dict[str, str]:
             r".\scripts\capture_phase2_vps_latency_evidence.ps1 "
             r'-Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20'
         ),
+        "check_vps_selection_decision": (
+            r"..\xauusd-phase0\.venv\Scripts\python.exe "
+            r"scripts\generate_phase2_vps_selection_decision_check.py"
+        ),
         "install_periodic_checks_task_dry_run": (
             r".\scripts\install_phase2_periodic_checks_task.ps1 "
             r"-Phase1Root <phase1_root> "
@@ -212,8 +244,44 @@ def _commands() -> dict[str, str]:
             r"-SpreadFilesDir <spread_logger_files_dir> "
             r"-CompileLog <compile_log_path> "
             r"-IntervalMinutes 60 "
+            r"-Provider <selected_provider> "
+            r"-Region <selected_region> "
+            r"-WriteEvidence "
             r"-WhatIfOnly"
         ),
+    }
+
+
+def _one_screen_vps_decision_sheet(root: Path, recommendation: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "status": "WAITING_OWNER_SELECTION",
+        "decision": "Select the Phase 2 VPS provider, region, and plan; do not sign owner approval yet.",
+        "authority_boundary": "This decision only prepares VPS evidence. It does not authorize paper mode, demo trading, broker execution, or live capital.",
+        "recommended_first_trial": recommendation.get("primary_trial", ""),
+        "backup_trial": recommendation.get("backup_trial", ""),
+        "deferred_option": recommendation.get("defer", ""),
+        "decision_record_path": str(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
+        "fillable_template_path": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
+        "local_baseline_path": str(root / "outputs" / "reports" / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
+        "required_decision_fields": [
+            "Selected provider",
+            "Selected region",
+            "Selected plan",
+            "Monthly cost",
+            "Backup method",
+            "Monitoring endpoint or scheduler",
+            "Recovery access owner",
+            "Decision date",
+            "Owner acceptance that Phase 2 is paper-mode only",
+        ],
+        "pass_preferences": recommendation.get("latency_preference", []),
+        "after_vps_is_provisioned": [
+            "Run prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.",
+            "Run capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
+            "Copy and fill the vps_ntp_sync, vps_backup_config, vps_rdp_recovery, and vps_periodic_task evidence templates.",
+            "Compile and run the Phase 1 dry-run shell only, with dry_run=true and trade_permission=false.",
+            "Regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md and PHASE2_READINESS_REPORT.md.",
+        ],
     }
 
 
@@ -233,6 +301,24 @@ def _owner_actions(countdown: dict[str, Any], readiness_gates: list[dict[str, st
         if status and status != "PASS":
             actions.append({"gate": gate, "status": status, "action": action})
     return actions
+
+
+def _owner_approval_readiness(readiness_gates: list[dict[str, str]]) -> dict[str, Any]:
+    pending = [
+        {
+            "gate": row.get("Gate", ""),
+            "status": row.get("Status", ""),
+            "evidence": row.get("Evidence", ""),
+        }
+        for row in readiness_gates
+        if row.get("Gate") != "Project owner approval" and row.get("Status") != "PASS"
+    ]
+    return {
+        "status": "READY_TO_SIGN" if not pending and readiness_gates else "NOT_READY_TO_SIGN",
+        "pending_objective_gate_count": len(pending),
+        "pending_objective_gates": pending,
+        "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS.",
+    }
 
 
 def _wait_gates(countdown: dict[str, Any]) -> list[dict[str, Any]]:
@@ -297,6 +383,81 @@ def _read_network_baseline(path: Path) -> dict[str, str]:
     return baseline
 
 
+def _read_vps_evidence_workspace(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {
+            "status": "MISSING",
+            "manifest_path": str(path),
+            "authority": "Evidence workspace has not been prepared yet.",
+            "items": [],
+        }
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    except json.JSONDecodeError as exc:
+        return {
+            "status": "FAIL",
+            "manifest_path": str(path),
+            "authority": f"Manifest is not valid JSON: {exc}.",
+            "items": [],
+        }
+    items = payload.get("items")
+    return {
+        "status": str(payload.get("status", "UNKNOWN")),
+        "manifest_path": str(path),
+        "authority": str(payload.get("authority", "")),
+        "reports_dir": str(payload.get("reports_dir", "")),
+        "allow_overwrite_verified": payload.get("allow_overwrite_verified", False),
+        "items": items if isinstance(items, list) else [],
+    }
+
+
+def _read_vps_selection_recommendation(path: Path) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "status": _read_markdown_status(path) or "MISSING",
+        "primary_trial": "",
+        "backup_trial": "",
+        "defer": "",
+        "reasoning": [],
+        "latency_preference": [
+            "median ping <= 50 ms: preferred",
+            "median ping 51-100 ms: acceptable for Phase 2 paper-cost measurement",
+            "median ping > 100 ms: owner review required",
+            "packet loss > 0%: reject or retest before selection",
+        ],
+    }
+    if not path.exists():
+        return result
+
+    in_section = False
+    in_code_block = False
+    in_reasoning = False
+    for raw_line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw_line.strip()
+        if line.startswith("## "):
+            if in_section and line != "## Recommended Selection":
+                break
+            in_section = line == "## Recommended Selection"
+            in_reasoning = False
+            continue
+        if not in_section:
+            continue
+        if line.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+        if in_code_block and ":" in line:
+            key, value = [part.strip() for part in line.split(":", 1)]
+            normalized = key.lower().replace(" ", "_")
+            if normalized in {"primary_trial", "backup_trial", "defer"}:
+                result[normalized] = value.rstrip(".")
+            continue
+        if line == "Reasoning:":
+            in_reasoning = True
+            continue
+        if in_reasoning and line.startswith("- "):
+            result["reasoning"].append(line[2:].strip())
+    return result
+
+
 def _gate_status(gates: list[dict[str, str]], gate: str) -> str:
     for row in gates:
         if row.get("Gate") == gate:
@@ -328,8 +489,9 @@ def _render_markdown(payload: dict[str, Any]) -> str:
                 [
                     ("Phase 2 readiness", str(payload["phase2_readiness_status"])),
                     ("Phase 2 demo preflight", str(payload["phase2_demo_preflight_status"])),
-                    ("VPS selection", str(payload["vps_selection_status"])),
-                    ("VPS latency", str(payload["vps_latency_status"])),
+                ("VPS selection", str(payload["vps_selection_status"])),
+                ("VPS decision check", str(payload["vps_selection_decision_check_status"])),
+                ("VPS latency", str(payload["vps_latency_status"])),
                     ("VPS first-day verification", str(payload["vps_first_day_verification_status"])),
                     ("Owner approval", str(payload["owner_approval_status"])),
                 ]
@@ -343,9 +505,25 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "",
             _table([(key, str(value)) for key, value in payload["local_mt5_network_baseline"].items()]),
             "",
+            "## VPS Selection Recommendation",
+            "",
+            _recommendation_markdown(payload["vps_selection_recommendation"]),
+            "",
+            "## One-Screen VPS Decision Sheet",
+            "",
+            _decision_sheet_markdown(payload["one_screen_vps_decision_sheet"]),
+            "",
+            "## Prepared VPS Evidence Workspace",
+            "",
+            _vps_evidence_workspace_markdown(payload["vps_evidence_workspace"]),
+            "",
             "## Owner Checklist",
             "",
             _rows_table(payload["owner_checklist"], ["step", "title", "status", "detail"]),
+            "",
+            "## Owner Approval Readiness",
+            "",
+            _owner_approval_readiness_markdown(payload["owner_approval_readiness"]),
             "",
             "## Immediate Owner Actions",
             "",
@@ -380,9 +558,98 @@ def _commands_markdown(commands: dict[str, str]) -> str:
     return "\n".join(blocks).rstrip()
 
 
+def _recommendation_markdown(recommendation: dict[str, Any]) -> str:
+    rows = [
+        ("Matrix status", str(recommendation.get("status", "UNKNOWN"))),
+        ("Primary trial", str(recommendation.get("primary_trial", ""))),
+        ("Backup trial", str(recommendation.get("backup_trial", ""))),
+        ("Defer", str(recommendation.get("defer", ""))),
+    ]
+    sections = [_table(rows)]
+    reasoning = recommendation.get("reasoning")
+    if isinstance(reasoning, list) and reasoning:
+        sections.extend(["", "Reasoning:", "", _bullet_list([str(item) for item in reasoning])])
+    latency = recommendation.get("latency_preference")
+    if isinstance(latency, list) and latency:
+        sections.extend(["", "Latency decision rule:", "", _bullet_list([str(item) for item in latency])])
+    return "\n".join(sections)
+
+
+def _decision_sheet_markdown(sheet: dict[str, Any]) -> str:
+    sections = [
+        _table(
+            [
+                ("Status", str(sheet.get("status", "UNKNOWN"))),
+                ("Decision", str(sheet.get("decision", ""))),
+                ("Authority boundary", str(sheet.get("authority_boundary", ""))),
+                ("Recommended first trial", str(sheet.get("recommended_first_trial", ""))),
+                ("Backup trial", str(sheet.get("backup_trial", ""))),
+                ("Deferred option", str(sheet.get("deferred_option", ""))),
+                ("Decision record", str(sheet.get("decision_record_path", ""))),
+                ("Fillable template", str(sheet.get("fillable_template_path", ""))),
+                ("Local baseline", str(sheet.get("local_baseline_path", ""))),
+            ]
+        ),
+        "",
+        "Required owner fields:",
+        "",
+        _bullet_list([str(item) for item in sheet.get("required_decision_fields", [])]),
+        "",
+        "Latency pass preferences:",
+        "",
+        _bullet_list([str(item) for item in sheet.get("pass_preferences", [])]),
+        "",
+        "After VPS is provisioned:",
+        "",
+        _bullet_list([str(item) for item in sheet.get("after_vps_is_provisioned", [])]),
+    ]
+    return "\n".join(sections)
+
+
+def _vps_evidence_workspace_markdown(workspace: dict[str, Any]) -> str:
+    rows = [
+        ("Status", str(workspace.get("status", "UNKNOWN"))),
+        ("Manifest", str(workspace.get("manifest_path", ""))),
+        ("Reports directory", str(workspace.get("reports_dir", ""))),
+        ("Allow overwrite verified", str(workspace.get("allow_overwrite_verified", False)).lower()),
+        ("Authority", str(workspace.get("authority", ""))),
+    ]
+    items = workspace.get("items")
+    sections = [_table(rows), "", "Prepared files:", ""]
+    if isinstance(items, list) and items:
+        sections.append(_rows_table(items, ["action", "target", "reason"]))
+    else:
+        sections.append("No prepared VPS evidence files found yet.")
+    return "\n".join(sections)
+
+
+def _owner_approval_readiness_markdown(readiness: dict[str, Any]) -> str:
+    rows = [
+        ("Status", str(readiness.get("status", "UNKNOWN"))),
+        ("Pending objective gates", str(readiness.get("pending_objective_gate_count", "UNKNOWN"))),
+        ("Signing rule", str(readiness.get("signing_rule", ""))),
+    ]
+    pending = readiness.get("pending_objective_gates")
+    sections = [_table(rows)]
+    if isinstance(pending, list) and pending:
+        sections.extend(
+            [
+                "",
+                "Objective gates still pending before owner signature:",
+                "",
+                _rows_table(pending, ["gate", "status", "evidence"]),
+            ]
+        )
+    return "\n".join(sections)
+
+
 def _table(rows: list[tuple[str, str]]) -> str:
     body = [f"| {_escape(key)} | {_escape(value)} |" for key, value in rows]
     return "\n".join(["| Field | Value |", "| --- | --- |", *body])
+
+
+def _bullet_list(items: list[str]) -> str:
+    return "\n".join(f"- {_escape(item)}" for item in items)
 
 
 def _rows_table(rows: list[dict[str, Any]], columns: list[str]) -> str:

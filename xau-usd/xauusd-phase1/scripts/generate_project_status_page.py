@@ -4,6 +4,8 @@ import argparse
 import csv
 import html
 import json
+import os
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -58,9 +60,17 @@ def generate_project_status_page(
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    phase2_experimental_demo_terminal = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_TERMINAL.json")
+    phase2_experimental_demo_attachments = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.json")
+    phase2_next_actions = _read_json(phase1_reports / "PHASE2_DEMO_NEXT_ACTIONS.json")
+    phase2_owner_packet = _read_json(phase1_reports / "PHASE2_OWNER_ACTION_PACKET.json")
     phase2_bootstrap = _read_json(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
+    phase2_vps_selection_check = _read_json(phase1_reports / "PHASE2_VPS_SELECTION_DECISION_CHECK.json")
     mt5_network_baseline = _parse_mt5_network_baseline(phase1_reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md")
     phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+    phase3_handoff = _read_json(phase3_reports / "PHASE3_TO_DEMO_HANDOFF.json")
+    if phase3_handoff:
+        phase3_status = {**phase3_status, "demo_handoff": phase3_handoff}
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
     measured_cost["revalidation_status"] = _read_markdown_status(
@@ -86,8 +96,8 @@ def generate_project_status_page(
     rejected_count = sum(1 for item in candidates if _candidate_status(item) == "REJECTED")
     generated_at = _dashboard_generated_at(phase1_summary, phase3_status)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(
+    _write_text_with_retries(
+        output_path,
         _render_html(
             repo_root=repo_root,
             generated_at=generated_at,
@@ -102,11 +112,15 @@ def generate_project_status_page(
             account_example=account_example,
             phase2_countdown=phase2_countdown,
             phase2_preflight=phase2_preflight,
+            phase2_experimental_demo_terminal=phase2_experimental_demo_terminal,
+            phase2_experimental_demo_attachments=phase2_experimental_demo_attachments,
+            phase2_next_actions=phase2_next_actions,
+            phase2_owner_packet=phase2_owner_packet,
             phase2_bootstrap=phase2_bootstrap,
+            phase2_vps_selection_check=phase2_vps_selection_check,
             mt5_network_baseline=mt5_network_baseline,
             phase3_status=phase3_status,
         ),
-        encoding="utf-8",
     )
     return StatusPageOutput(
         output_path=output_path,
@@ -139,6 +153,28 @@ def assert_status_page_current(
         )
 
 
+def _write_text_with_retries(path: Path, text: str, attempts: int = 5, sleep_seconds: float = 0.25) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    last_error: OSError | None = None
+    for attempt in range(attempts):
+        try:
+            temp_path.write_text(text, encoding="utf-8")
+            temp_path.replace(path)
+            return
+        except OSError as exc:
+            last_error = exc
+            try:
+                temp_path.unlink(missing_ok=True)
+            except OSError:
+                pass
+            if attempt + 1 == attempts:
+                raise
+            time.sleep(sleep_seconds * (attempt + 1))
+    if last_error is not None:
+        raise last_error
+
+
 def _render_html(
     repo_root: Path,
     generated_at: str,
@@ -153,7 +189,12 @@ def _render_html(
     account_example: dict[str, Any],
     phase2_countdown: dict[str, Any],
     phase2_preflight: dict[str, Any],
+    phase2_experimental_demo_terminal: dict[str, Any],
+    phase2_experimental_demo_attachments: dict[str, Any],
+    phase2_next_actions: dict[str, Any],
+    phase2_owner_packet: dict[str, Any],
     phase2_bootstrap: dict[str, Any],
+    phase2_vps_selection_check: dict[str, Any],
     mt5_network_baseline: dict[str, str],
     phase3_status: dict[str, Any],
 ) -> str:
@@ -245,7 +286,10 @@ def _render_html(
             "",
             '      <section class="grid lower-grid">',
             _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight)),
-            _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown)),
+            _panel("Experimental Demo Terminal", _experimental_demo_terminal_panel(phase2_experimental_demo_terminal)),
+            _panel("Experimental Demo Attachments", _experimental_demo_attachments_panel(phase2_experimental_demo_attachments)),
+            _panel("Demo Next Actions", _demo_next_actions_panel(phase2_next_actions)),
+            _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown, phase2_owner_packet, phase2_vps_selection_check)),
             _panel("VPS Bootstrap", _demo_vps_bootstrap_panel(phase2_bootstrap, mt5_network_baseline)),
             "      </section>",
             "",
@@ -341,6 +385,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     phase3_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     phase3_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
     phase3_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
+    phase3_handoff = _mapping(phase3_status.get("demo_handoff"))
     collect(phase3_simulation.get("created_at_utc"))
     collect(phase3_safety.get("created_at_utc"))
     collect(phase3_manifest.get("created_at_utc"))
@@ -352,6 +397,7 @@ def _dashboard_generated_at(phase1_summary: dict[str, Any], phase3_status: dict[
     collect(phase3_lifecycle.get("created_at_utc"))
     collect(phase3_guard.get("created_at_utc"))
     collect(phase3_rehearsal.get("created_at_utc"))
+    collect(phase3_handoff.get("created_at_utc"))
     if not candidates:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return max(candidates).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1008,9 +1054,117 @@ def _demo_countdown_panel(countdown: dict[str, Any], preflight: dict[str, Any]) 
     )
 
 
-def _demo_owner_moves_panel(countdown: dict[str, Any]) -> str:
+def _experimental_demo_terminal_panel(report: dict[str, Any]) -> str:
+    if not report:
+        return _list(["Experimental demo terminal report has not been generated yet."])
+    terminal = _mapping(report.get("terminal"))
+    active_experts = _mapping_rows(report.get("active_experts"))
+    summary_rows = [
+        ("Overall status", _status_badge(_cell(report.get("status", "UNKNOWN")))),
+        ("Clean demo setup ready", _status_badge(str(report.get("clean_demo_setup_ready", False)).lower())),
+        (
+            "Can start experimental demo setup",
+            _status_badge(str(report.get("can_start_experimental_demo_setup", False)).lower()),
+        ),
+        ("Experimental observers attached", _status_badge(str(report.get("experimental_observers_attached", False)).lower())),
+        ("Observer active count", _esc(_cell(report.get("experimental_observer_active_count", "0")))),
+        ("Can start demo broker rehearsal", _status_badge(str(report.get("can_start_demo_broker_rehearsal", False)).lower())),
+        ("Canonical Phase 2 authorized", _status_badge(str(report.get("canonical_phase2_authorized", False)).lower())),
+        ("Live trading authorized", _status_badge(str(report.get("live_trading_authorized", False)).lower())),
+        ("MT5 runtime touched by script", _status_badge(str(report.get("mt5_runtime_touched_by_script", False)).lower())),
+        ("Latest server", _esc(_cell(terminal.get("latest_authorization_server", "UNKNOWN")))),
+        ("Latest authorization time", _esc(_cell(terminal.get("latest_authorization_time", "UNKNOWN")))),
+    ]
+    if active_experts:
+        expert_rows = _html_table(
+            [
+                {
+                    "Expert": _esc(_cell(row.get("expert"))),
+                    "Symbol": _esc(_cell(row.get("symbol"))),
+                    "TF": _esc(_cell(row.get("timeframe"))),
+                    "Last seen": _esc(_cell(row.get("last_seen"))),
+                }
+                for row in active_experts
+            ],
+            ("Expert", "Symbol", "TF", "Last seen"),
+        )
+    else:
+        expert_rows = "<p class=\"muted\">No active expert-loaded state was detected in the latest report.</p>"
+    next_actions = [str(item) for item in report.get("next_actions", [])]
+    return "\n".join(
+        [
+            _raw_key_value_table(summary_rows),
+            '<h3 class="mini-heading">Active Experts</h3>',
+            expert_rows,
+            '<h3 class="mini-heading">Next Actions</h3>',
+            _list(next_actions),
+        ]
+    )
+
+
+def _experimental_demo_attachments_panel(report: dict[str, Any]) -> str:
+    if not report:
+        return _list(["Experimental demo attachment report has not been generated yet."])
+    terminal = _mapping(report.get("terminal"))
+    ea = _mapping(report.get("ea"))
+    attachments = _mapping_rows(report.get("attachments"))
+    summary_rows = [
+        ("Attachment status", _status_badge(_cell(report.get("status", "UNKNOWN")))),
+        ("Run ID", _esc(_cell(report.get("run_id", "UNKNOWN")))),
+        ("Attachment count", _esc(_cell(report.get("attachment_count", "0")))),
+        ("Terminal relaunched", _status_badge(str(terminal.get("terminal_relaunched", False)).lower())),
+        ("Dry run only", _status_badge(str(ea.get("dry_run_only", False)).lower())),
+        ("Broker action allowed", _status_badge(str(ea.get("broker_action_allowed", False)).lower())),
+        ("Compile log", _esc(_cell(ea.get("compile_log", "n/a")))),
+        ("Profile backup", _esc(_cell(terminal.get("profile_backup_dir", "n/a")))),
+    ]
+    table = _html_table(
+        [
+            {
+                "Candidate": _esc(_cell(row.get("candidate"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Symbol": _esc(_cell(row.get("symbol"))),
+                "Observer": _esc("native" if row.get("observer_supported") else "stub pending MQL"),
+                "Qualification": _esc(_cell(row.get("qualification_source"))),
+            }
+            for row in attachments
+        ],
+        ("Candidate", "Status", "Symbol", "Observer", "Qualification"),
+    )
+    limitations = [str(item) for item in report.get("observer_limitations", [])]
+    return "\n".join(
+        [
+            _raw_key_value_table(summary_rows),
+            '<h3 class="mini-heading">Attached Candidates</h3>',
+            table,
+            '<h3 class="mini-heading">Current Limitations</h3>',
+            _list(limitations),
+        ]
+    )
+
+
+def _demo_owner_moves_panel(
+    countdown: dict[str, Any],
+    owner_packet: dict[str, Any],
+    vps_selection_check: dict[str, Any],
+) -> str:
     actions = _mapping_rows(countdown.get("owner_actions_now"))
     forbidden = [str(item) for item in countdown.get("forbidden_until_ready", [])]
+    recommendation = _mapping(owner_packet.get("vps_selection_recommendation"))
+    evidence_workspace = _mapping(owner_packet.get("vps_evidence_workspace"))
+    workspace_items = _mapping_rows(evidence_workspace.get("items"))
+    vps_checks = _mapping_rows(vps_selection_check.get("checks"))
+    recommendation_rows = [
+        ("Owner packet status", _status_badge(_cell(owner_packet.get("status", "UNKNOWN")))),
+        ("VPS decision check", _status_badge(_cell(vps_selection_check.get("status", "UNKNOWN")))),
+        ("VPS evidence workspace", _status_badge(_cell(evidence_workspace.get("status", "UNKNOWN")))),
+        ("VPS evidence manifest", _esc(_cell(evidence_workspace.get("manifest_path", "n/a")))),
+        ("VPS recommendation status", _status_badge(_cell(recommendation.get("status", "UNKNOWN")))),
+        ("Primary VPS trial", _esc(_cell(recommendation.get("primary_trial", "n/a")))),
+        ("Backup VPS trial", _esc(_cell(recommendation.get("backup_trial", "n/a")))),
+        ("Deferred VPS option", _esc(_cell(recommendation.get("defer", "n/a")))),
+        ("VPS next action", _esc(_cell(vps_selection_check.get("next_action", "n/a")))),
+    ]
     if not actions:
         action_table = "<p class=\"muted\">No owner-side action is currently listed in the countdown report.</p>"
     else:
@@ -1028,10 +1182,127 @@ def _demo_owner_moves_panel(countdown: dict[str, Any]) -> str:
         )
     return "\n".join(
         [
+            _raw_key_value_table(recommendation_rows),
+            '<h3 class="mini-heading">VPS Decision Checks</h3>',
+            _vps_decision_check_table(vps_checks),
+            '<h3 class="mini-heading">Prepared VPS Evidence Files</h3>',
+            _vps_evidence_workspace_table(workspace_items),
+            '<h3 class="mini-heading">Immediate Owner Actions</h3>',
             action_table,
             '<h3 class="mini-heading">Still Forbidden</h3>',
             _list(forbidden),
         ]
+    )
+
+
+def _vps_evidence_workspace_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">VPS evidence workspace has not been prepared yet.</p>"
+    return _html_table(
+        [
+            {
+                "Action": _esc(_cell(row.get("action"))),
+                "Target": _esc(_cell(row.get("target"))),
+                "Reason": _esc(_cell(row.get("reason"))),
+            }
+            for row in rows
+        ],
+        ("Action", "Target", "Reason"),
+    )
+
+
+def _vps_decision_check_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">VPS selection decision check has not been generated yet.</p>"
+    return _html_table(
+        [
+            {
+                "Check": _esc(_cell(row.get("check"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Evidence": _esc(_cell(row.get("evidence"))),
+            }
+            for row in rows
+        ],
+        ("Check", "Status", "Evidence"),
+        raw_columns={"Status"},
+    )
+
+
+def _demo_next_actions_panel(next_actions: dict[str, Any]) -> str:
+    if not next_actions:
+        return _list(["Phase 2 demo next-actions report has not been generated yet."])
+    do_now = _mapping_rows(next_actions.get("do_now"))
+    after_vps = _mapping_rows(next_actions.get("after_vps_is_provisioned"))
+    earliest_targets = _mapping_rows(next_actions.get("earliest_gate_targets"))
+    gate_closure_map = _mapping_rows(next_actions.get("gate_closure_map"))
+    owner_signature = _mapping_rows(next_actions.get("owner_signature_sequence"))
+    summary_rows = [
+        ("Next-actions status", _status_badge(_cell(next_actions.get("status", "UNKNOWN")))),
+        ("Countdown status", _status_badge(_cell(next_actions.get("phase2_demo_countdown_status", "UNKNOWN")))),
+        ("Phase 2 readiness", _status_badge(_cell(next_actions.get("phase2_readiness_status", "UNKNOWN")))),
+        ("Pending gates", _esc(_cell(next_actions.get("pending_gate_count", "n/a")))),
+        ("Demo authorized", _status_badge(str(next_actions.get("demo_trading_authorized", False)).lower())),
+        ("Broker execution authorized", _status_badge(str(next_actions.get("broker_execution_authorized", False)).lower())),
+    ]
+    return "\n".join(
+        [
+            _raw_key_value_table(summary_rows),
+            '<h3 class="mini-heading">Earliest Gate Targets</h3>',
+            _earliest_gate_target_table(earliest_targets),
+            '<h3 class="mini-heading">Gate Closure Map</h3>',
+            _gate_closure_map_table(gate_closure_map),
+            '<h3 class="mini-heading">Do Now</h3>',
+            _next_action_table(do_now),
+            '<h3 class="mini-heading">After VPS Exists</h3>',
+            _next_action_table(after_vps[:4]),
+            '<h3 class="mini-heading">Owner Signature</h3>',
+            _next_action_table(owner_signature),
+        ]
+    )
+
+
+def _earliest_gate_target_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">No gate targets listed.</p>"
+    return _html_table(
+        [
+            {
+                "Gate": _esc(_cell(row.get("gate"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Current": _esc(_cell(row.get("current"))),
+                "Remaining": _esc(_cell(row.get("remaining"))),
+                "Unit": _esc(_cell(row.get("unit"))),
+                "Target UTC": _esc(_cell(row.get("earliest_target_utc") or "condition-based")),
+                "Condition": _esc(_cell(row.get("condition"))),
+            }
+            for row in rows
+        ],
+        ("Gate", "Status", "Current", "Remaining", "Unit", "Target UTC", "Condition"),
+        raw_columns={"Status"},
+        numeric_columns={"Current", "Remaining"},
+    )
+
+
+def _gate_closure_map_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">No gate-closure rows listed.</p>"
+    return _html_table(
+        [
+            {
+                "Gate": _esc(_cell(row.get("gate"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Category": _esc(_cell(row.get("category"))),
+                "Owner": _esc(_cell(row.get("owner"))),
+                "Why": _esc(_cell(row.get("why_required"))),
+                "Proof": _esc(_compact_path(_cell(row.get("proof_artifact")))),
+                "Action": _esc(_cell(row.get("closure_action"))),
+                "Pass Condition": _esc(_cell(row.get("pass_condition"))),
+                "Verify": _esc(_cell(row.get("verification_command"))),
+            }
+            for row in rows
+        ],
+        ("Gate", "Status", "Category", "Owner", "Why", "Proof", "Action", "Pass Condition", "Verify"),
+        raw_columns={"Status"},
     )
 
 
@@ -1072,6 +1343,23 @@ def _demo_vps_bootstrap_panel(bootstrap: dict[str, Any], mt5_network_baseline: d
             '<h3 class="mini-heading">Bootstrap Sequence</h3>',
             _html_table(phase_rows, ("Phase", "Objective")) if phase_rows else "<p class=\"muted\">No phases listed.</p>",
         ]
+    )
+
+
+def _next_action_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">No rows listed.</p>"
+    return _html_table(
+        [
+            {
+                "Step": _esc(_cell(row.get("step"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Action": _esc(_cell(row.get("action"))),
+            }
+            for row in rows
+        ],
+        ("Step", "Status", "Action"),
+        raw_columns={"Status"},
     )
 
 
@@ -1576,6 +1864,9 @@ def _artifact_links() -> str:
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
+        ("Phase 2 experimental demo terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_TERMINAL.md"),
+        ("Phase 2 experimental demo attachments", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.md"),
+        ("Phase 2 demo next actions", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_NEXT_ACTIONS.md"),
         ("Phase 2 owner action packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.md"),
         ("Phase 2 VPS bootstrap packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md"),
         ("Phase 2 local MT5 network baseline", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
@@ -1596,6 +1887,7 @@ def _artifact_links() -> str:
         ("Phase 3 lifecycle guard ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_LIFECYCLE_GUARD_LEDGER.csv"),
         ("Phase 3 demo rehearsal checklist", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_CHECKLIST.md"),
         ("Phase 3 demo rehearsal ledger", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_DEMO_REHEARSAL_LEDGER.csv"),
+        ("Phase 3 to demo handoff", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_TO_DEMO_HANDOFF.md"),
         ("Phase 3 completion audit", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_COMPLETION_AUDIT.md"),
         ("Phase 3 safety report", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SAFETY_REPORT.md"),
         ("Phase 3 source manifest", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_MANIFEST.md"),
@@ -1649,6 +1941,7 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
     shadow_lifecycle = _mapping(phase3_status.get("shadow_lifecycle_experiment"))
     lifecycle_guard = _mapping(phase3_status.get("lifecycle_guard_experiment"))
     demo_rehearsal = _mapping(phase3_status.get("demo_rehearsal"))
+    demo_handoff = _mapping(phase3_status.get("demo_handoff"))
     completion_audit = _mapping(phase3_status.get("completion_audit"))
     manifest = _mapping(phase3_status.get("manifest"))
     median_net_by_mode = _mapping(cost_mode_comparison.get("median_net_after_proxy_by_mode"))
@@ -1710,6 +2003,15 @@ def _phase3_experimental_panel(phase3_status: dict[str, Any]) -> str:
         ("Demo rehearsal shadow opens", _cell(demo_rehearsal.get("shadow_open_events"))),
         ("Demo rehearsal blocked", _cell(demo_rehearsal.get("blocked_events"))),
         ("Demo rehearsal can start real demo", _cell(demo_rehearsal.get("can_start_real_demo"))),
+        ("Demo handoff status", _cell(demo_handoff.get("status"))),
+        ("Demo handoff can start now", _cell(demo_handoff.get("can_start_demo_now"))),
+        ("Demo handoff paper-shadow branch", _cell(demo_handoff.get("can_start_real_paper_shadow_branch"))),
+        ("Demo handoff owner readiness", _cell(demo_handoff.get("owner_approval_readiness"))),
+        ("Demo handoff pending objective gates", _cell(demo_handoff.get("pending_objective_gate_count"))),
+        ("Demo handoff demo authorized", _cell(demo_handoff.get("demo_authorized"))),
+        ("Demo handoff paper mode authorized", _cell(demo_handoff.get("paper_mode_authorized"))),
+        ("Demo handoff broker-action allowed", _cell(demo_handoff.get("broker_action_code_allowed"))),
+        ("Demo handoff MT5 runtime touched", _cell(demo_handoff.get("mt5_runtime_touched"))),
         ("Completion audit", _cell(completion_audit.get("status"))),
         ("Phase 3 repo complete", _cell(completion_audit.get("phase3_repo_complete"))),
         ("Demo authorized", _cell(completion_audit.get("demo_authorized"))),
@@ -1995,6 +2297,14 @@ def _esc(value: Any) -> str:
 
 def _link(path: str) -> str:
     return path.replace("\\", "/")
+
+
+def _compact_path(path: str) -> str:
+    normalized = _link(path)
+    marker = "xau-usd/"
+    if marker in normalized:
+        return marker + normalized.split(marker, 1)[1]
+    return normalized
 
 
 def _status_class(value: str) -> str:
