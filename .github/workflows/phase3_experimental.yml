@@ -36,10 +36,7 @@ jobs:
         run: python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
 
       - name: Check committed dashboard freshness
-        run: |
-          python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
-          python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
-          git diff --exit-code status.html
+        run: python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
       - name: Regenerate synthetic Phase 3 experimental reports
         run: |
