@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T14:51:37.714262Z",
+  "created_at_utc": "2026-05-28T14:54:59.412657Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -61,7 +61,7 @@
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 28.16h; code-freeze 28.16h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 28.22h; code-freeze 28.22h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -81,9 +81,9 @@
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 28.16,
+      "current": 28.22,
       "required": 96.0,
-      "remaining": 67.84,
+      "remaining": 67.78,
       "unit": "hours"
     },
     {
@@ -126,11 +126,11 @@
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "27028",
+    "observed_rows": "27068",
     "required_rows": "500",
     "observed_days": "2",
     "required_days": "5",
-    "source_rows": "83392",
+    "source_rows": "83432",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",

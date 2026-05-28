@@ -123,12 +123,12 @@ Last updated: 2026-05-28
 - Previous v0.2/v0.3 mixed-schema log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_3_20260521_162557.csv`.
 - Previous v0.3 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_4_20260521_163517.csv`.
 - Previous v0.4 decision log was archived as `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_5_20260521_174742.csv`.
-- Latest decision row confirms `phase1-dry-run-v0.7`, `DRY_RUN`, `COST_REVALIDATION_PENDING` family lifecycle, `magic_namespace_ok=true`, `server_time_status=CLOCK_OK`, `risk_state=NORMAL`, `would_have_allowed_experts=breakout_retest;swing_breakout_retest_v0`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
-- Latest v0.7 row includes `sbr_stage`, `sbr_direction`, `sbr_would_signal`, `sbr_reason_code`, `sbr_level_kind`, `sbr_entry_price`, `sbr_stop_loss`, and `sbr_take_profit`.
+- Current decision-row values must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`; the expected safe boundary remains `phase1-dry-run-v0.7`, `DRY_RUN`, `COST_REVALIDATION_PENDING`, `trade_permission=false`, and `block_reason=phase1_dry_run_only`.
+- Current v0.7 row schema must include `sbr_stage`, `sbr_direction`, `sbr_would_signal`, `sbr_reason_code`, `sbr_level_kind`, `sbr_entry_price`, `sbr_stop_loss`, and `sbr_take_profit`.
 - Phase 1 v0.5 logs were archived before the v0.6 schema change:
   - `C:\MT5PortableGoldMission\MQL5\Files\decision_log_pre_v0_6_20260522_150335.csv`
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log_pre_v0_6_20260522_150335.csv`
-- Current v0.7 would-signal report has 85 dry-run would-signal rows across 85 setup clusters; all stayed dry-run and permission-locked.
+- Current v0.7 would-signal counts must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`; all observations must remain dry-run telemetry with trade permission false.
 - Runtime risk simulations previously verified `LOCKED_DAILY_LOSS`, `LOCKED_WEEKLY_LOSS`, `LOCKED_MONTHLY_LOSS`, and `MANUAL_LOCK` under the v0.6 `sbr_*` schema; rerun those simulations before any future Phase 2 authorization.
 - Latest MT5 lifecycle logs:
   - `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv`
@@ -142,13 +142,13 @@ Last updated: 2026-05-28
 - Would-signal report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_would_signal_report.py`.
 - Latest Phase 1 would-signal report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Latest Phase 1 would-signal review CSV: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv`.
-- Latest would-signal status: PASS with 81 rows and 81 setup clusters; all observations remain dry-run telemetry with trade permission false.
+- Current would-signal status and cluster counts must be read directly from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`.
 - Runtime health report generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_runtime_health_report.py`.
 - Latest Phase 1 runtime health report: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md`.
 - Latest runtime health status: WARN. Runtime files exist, latest row is fresh, dry-run and permission locks hold, latest server-time status is clean, and no exact duplicate rows were found; remaining warnings are maturity gates after the v0.7 reset.
 - Status summary generator: `xau-usd\xauusd-phase1\scripts\generate_phase1_status_summary.py`.
 - Latest Phase 1 status summary JSON: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`.
-- Latest status summary shows 816 decision rows, 100.00% of the five-day wall-clock soak target, `log_verification=WARN`, `soak_analysis=WARN`, `runtime_health=WARN`, `would_signal=PASS`, and `acceptance=PENDING`.
+- Current status-summary counters and gate statuses must be read directly from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`; do not copy decision-row, soak, health, would-signal, or acceptance counters from this handoff.
 - Review #7 direct-control items are reflected in the repo: the ten-candidate diversification result is codified in `xau-usd\xauusd-phase0\docs\DIVERSIFICATION_AVAILABILITY_FINDING.md`, future low-frequency concentration/cross-venue gates are pre-registered in `xau-usd\xauusd-phase0\docs\HYPOTHESIS_LOCKING.md`, fixed-notional monthly R-series remains the canonical D2 evidence in `xau-usd\xauusd-phase0\docs\PHASE0_INDEPENDENT_VALIDATION.md`, and `phase1_soak_streak.py` now explicitly rejects weekend/stale/market-closed rows for active-market streak continuity.
 - Review #6/#7/#V4 soak policy is implemented in status/acceptance/readiness reports: `weekend_policy=expected_market_breaks_pause_active_market_streak`; expected broker maintenance breaks pause the active-market 72-hour bar-continuity gate, while unexpected gaps, run resets, and unsafe states reset it. The 72-hour active-market gate remains separate from the 96-hour process/code-freeze gate. Code-freeze marker file: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`.
 - Review #2 reflection and action plan is tracked in `docs\REVIEW_02_REFLECTION_AND_ACTION_PLAN.md`.

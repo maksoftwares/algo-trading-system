@@ -41,7 +41,7 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market 72-hour soak | PENDING | 27.08 | 72.0 | 44.92 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 28.16 | 96.0 | 67.84 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 28.22 | 96.0 | 67.78 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions Now
