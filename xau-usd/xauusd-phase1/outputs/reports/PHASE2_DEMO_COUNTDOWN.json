@@ -1,0 +1,137 @@
+{
+  "status": "DEMO_NOT_READY",
+  "created_at_utc": "2026-05-28T13:21:43.817514Z",
+  "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
+  "paper_mode_authorized": false,
+  "broker_execution_authorized": false,
+  "live_trading_authorized": false,
+  "phase2_readiness_status": "PENDING",
+  "phase1_acceptance_status": "PENDING",
+  "measured_cost_status": "PENDING",
+  "measured_cost_revalidation_status": "PENDING",
+  "measured_cost_delta_status": "PENDING",
+  "pending_gate_count": 10,
+  "pending_gates": [
+    {
+      "Gate": "VPS selection",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "VPS latency evidence",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Measured cost model",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Measured-cost revalidation",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Measured-cost assumption delta",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Phase 1 acceptance",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Phase 1 review index",
+      "Status": "PENDING",
+      "Evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
+    },
+    {
+      "Gate": "Active-market 72-hour soak",
+      "Status": "PENDING",
+      "Evidence": "Longest active streak 53.92h; current active streak 25.58h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+    },
+    {
+      "Gate": "Process/code-freeze 96-hour gate",
+      "Status": "PENDING",
+      "Evidence": "Process uptime streak 26.66h; code-freeze 26.66h; required 96h; marker 2026-05-27T10:41:50Z."
+    },
+    {
+      "Gate": "Project owner approval",
+      "Status": "PENDING",
+      "Evidence": "No approval file found at `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md`."
+    }
+  ],
+  "wait_gates": [
+    {
+      "gate": "Active-market 72-hour soak",
+      "status": "PENDING",
+      "current": 25.58,
+      "required": 72.0,
+      "remaining": 46.42,
+      "unit": "hours"
+    },
+    {
+      "gate": "Process/code-freeze 96-hour gate",
+      "status": "PENDING",
+      "current": 26.66,
+      "required": 96.0,
+      "remaining": 69.34,
+      "unit": "hours"
+    },
+    {
+      "gate": "Measured cost model",
+      "status": "PENDING",
+      "current": 2.0,
+      "required": 5.0,
+      "remaining": 3.0,
+      "unit": "fresh_market_days"
+    }
+  ],
+  "owner_actions_now": [
+    {
+      "gate": "VPS selection",
+      "status": "PENDING",
+      "action": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
+    },
+    {
+      "gate": "VPS latency evidence",
+      "status": "PENDING",
+      "action": "After VPS is provisioned, capture ping/traceroute/Test-NetConnection evidence."
+    },
+    {
+      "gate": "Project owner approval",
+      "status": "PENDING",
+      "action": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS."
+    }
+  ],
+  "runtime_snapshot": {
+    "decision_rows": 1042,
+    "latest_bar": "2026.05.28 13:20:00",
+    "dry_run": "true",
+    "trade_permission": "false",
+    "server_time_status": "CLOCK_OK"
+  },
+  "measured_cost_coverage": {
+    "status": "PENDING",
+    "observed_rows": "25949",
+    "required_rows": "500",
+    "observed_days": "2",
+    "required_days": "5",
+    "source_rows": "82313",
+    "rows_missing_tick_fresh": "55704",
+    "weekend_rows_excluded": "0",
+    "tick_freshness": "available",
+    "source_files": "7"
+  },
+  "forbidden_until_ready": [
+    "paper-mode implementation",
+    "MT5 runtime redeployment for trading behavior",
+    "broker-side execution paths",
+    "live capital",
+    "treating Phase 3 experimental PASS as Phase 2 readiness"
+  ],
+  "next_refresh_command": ".\\xau-usd\\xauusd-phase0\\.venv\\Scripts\\python.exe xau-usd\\xauusd-phase1\\scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files"
+}

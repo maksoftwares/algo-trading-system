@@ -1432,6 +1432,7 @@ def _artifact_links() -> str:
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
+        ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),

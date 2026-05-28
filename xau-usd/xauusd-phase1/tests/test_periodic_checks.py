@@ -53,3 +53,12 @@ def test_periodic_checks_regenerate_single_status_page():
 
     assert "generate_project_status_page" in script
     assert "status.html" in script
+
+
+def test_periodic_checks_generate_demo_countdown_after_phase2_readiness():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "generate_phase2_demo_countdown_report" in script
+    assert script.index("phase2_readiness = generate_phase2_readiness_report") < script.index(
+        "generate_phase2_demo_countdown_report(root=root)"
+    )

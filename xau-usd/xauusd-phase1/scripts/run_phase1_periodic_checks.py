@@ -23,6 +23,7 @@ from generate_phase1_soak_history_report import generate_phase1_soak_history_rep
 from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
+from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import ConfigError, load_project_config
@@ -160,6 +161,7 @@ def run_phase1_periodic_checks(
         root=root,
         report_path=report_dir / "PHASE2_READINESS_REPORT.md",
     )
+    generate_phase2_demo_countdown_report(root=root)
     review_index = generate_phase1_review_index(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",

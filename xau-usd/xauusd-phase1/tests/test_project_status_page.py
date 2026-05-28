@@ -86,6 +86,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Demo rehearsal status" in html
     assert "SIDE_EXPERIMENT_DEMO_REHEARSAL_READY" in html
     assert "Demo rehearsal can start real demo" in html
+    assert "Phase 2 demo countdown" in html
     assert "Phase 3 paper-shadow summary" in html
     assert "Phase 3 paper-shadow ledger" in html
     assert "Phase 3 shadow lifecycle summary" in html
