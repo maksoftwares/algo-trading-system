@@ -32,8 +32,14 @@ def test_owner_action_packet_summarizes_wait_gates_and_owner_steps(tmp_path: Pat
     assert payload["paper_mode_authorized"] is False
     assert payload["demo_trading_authorized"] is False
     assert any(item["title"] == "Select VPS provider, region, and plan" for item in payload["owner_checklist"])
+    assert payload["owner_templates"]["vps_selection_decision"].endswith(
+        "docs\\templates\\phase2_vps_selection_decision.template.md"
+    ) or payload["owner_templates"]["vps_selection_decision"].endswith(
+        "docs/templates/phase2_vps_selection_decision.template.md"
+    )
     assert "capture_phase2_vps_latency_evidence.ps1" in payload["commands"]["capture_vps_latency"]
     assert "Copy-Item docs\\templates\\vps_ntp_sync.template.txt" in markdown
+    assert "phase2_vps_selection_decision.template.md" in markdown
     assert "This packet is an owner handoff only" in markdown
 
 

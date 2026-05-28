@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-28T14:05:27.930311Z",
+  "created_at_utc": "2026-05-28T14:08:03.305461Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "PENDING",
@@ -24,9 +24,9 @@
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 27.39,
+      "current": 27.44,
       "required": 96.0,
-      "remaining": 68.61,
+      "remaining": 68.56,
       "unit": "hours"
     },
     {
@@ -103,6 +103,12 @@
     "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt",
     "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log",
     "capture_vps_latency": ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\""
+  },
+  "owner_templates": {
+    "vps_selection_decision": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\phase2_vps_selection_decision.template.md",
+    "vps_ntp_sync": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_ntp_sync.template.txt",
+    "vps_backup_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_backup_config.template.txt",
+    "vps_rdp_recovery": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\templates\\vps_rdp_recovery.template.txt"
   },
   "source_reports": {
     "phase2_demo_countdown": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_COUNTDOWN.json",

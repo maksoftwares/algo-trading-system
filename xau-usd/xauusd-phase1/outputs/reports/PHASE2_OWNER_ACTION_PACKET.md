@@ -29,7 +29,7 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market 72-hour soak | PENDING | 26.33 | 72.0 | 45.67 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 27.39 | 96.0 | 68.61 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 27.44 | 96.0 | 68.56 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Checklist
@@ -79,6 +79,15 @@ Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_r
 ```powershell
 .\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>"
 ```
+
+## Owner Templates
+
+| template | path |
+| --- | --- |
+| vps_selection_decision | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\templates\phase2_vps_selection_decision.template.md |
+| vps_ntp_sync | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\templates\vps_ntp_sync.template.txt |
+| vps_backup_config | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\templates\vps_backup_config.template.txt |
+| vps_rdp_recovery | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\templates\vps_rdp_recovery.template.txt |
 
 ## Source Reports
 

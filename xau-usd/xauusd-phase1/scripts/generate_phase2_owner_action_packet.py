@@ -84,6 +84,12 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
         "owner_actions_now": owner_actions,
         "owner_checklist": checklist,
         "commands": _commands(),
+        "owner_templates": {
+            "vps_selection_decision": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
+            "vps_ntp_sync": str(root / "docs" / "templates" / "vps_ntp_sync.template.txt"),
+            "vps_backup_config": str(root / "docs" / "templates" / "vps_backup_config.template.txt"),
+            "vps_rdp_recovery": str(root / "docs" / "templates" / "vps_rdp_recovery.template.txt"),
+        },
         "source_reports": {
             "phase2_demo_countdown": str(countdown_path),
             "phase2_readiness": str(readiness_path),
@@ -299,6 +305,13 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "## Commands",
             "",
             _commands_markdown(payload["commands"]),
+            "",
+            "## Owner Templates",
+            "",
+            _rows_table(
+                [{"template": key, "path": value} for key, value in payload["owner_templates"].items()],
+                ["template", "path"],
+            ),
             "",
             "## Source Reports",
             "",

@@ -34,6 +34,8 @@ Required before `PASS`:
 
 The Phase 2 readiness generator validates the `Decision Record` table. Do not change `Overall status` to `PASS` while any required field still contains `Pending owner selection`, `Pending`, `TBD`, `TODO`, `unknown`, blank text, or angle-bracket placeholders.
 
+A fillable decision table is available at `docs/templates/phase2_vps_selection_decision.template.md`.
+
 Recommended owner-selection rule:
 
 ```text
