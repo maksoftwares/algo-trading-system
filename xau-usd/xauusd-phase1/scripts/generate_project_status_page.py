@@ -59,6 +59,7 @@ def generate_project_status_page(
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
     phase2_bootstrap = _read_json(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
+    mt5_network_baseline = _parse_mt5_network_baseline(phase1_reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md")
     phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -102,6 +103,7 @@ def generate_project_status_page(
             phase2_countdown=phase2_countdown,
             phase2_preflight=phase2_preflight,
             phase2_bootstrap=phase2_bootstrap,
+            mt5_network_baseline=mt5_network_baseline,
             phase3_status=phase3_status,
         ),
         encoding="utf-8",
@@ -152,6 +154,7 @@ def _render_html(
     phase2_countdown: dict[str, Any],
     phase2_preflight: dict[str, Any],
     phase2_bootstrap: dict[str, Any],
+    mt5_network_baseline: dict[str, str],
     phase3_status: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
@@ -243,7 +246,7 @@ def _render_html(
             '      <section class="grid lower-grid">',
             _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight)),
             _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown)),
-            _panel("VPS Bootstrap", _demo_vps_bootstrap_panel(phase2_bootstrap)),
+            _panel("VPS Bootstrap", _demo_vps_bootstrap_panel(phase2_bootstrap, mt5_network_baseline)),
             "      </section>",
             "",
             '      <section class="panel candidates-panel">',
@@ -1032,7 +1035,7 @@ def _demo_owner_moves_panel(countdown: dict[str, Any]) -> str:
     )
 
 
-def _demo_vps_bootstrap_panel(bootstrap: dict[str, Any]) -> str:
+def _demo_vps_bootstrap_panel(bootstrap: dict[str, Any], mt5_network_baseline: dict[str, str]) -> str:
     if not bootstrap:
         return _list(["VPS bootstrap packet has not been generated yet."])
     source_status = _mapping(bootstrap.get("source_status"))
@@ -1060,6 +1063,10 @@ def _demo_vps_bootstrap_panel(bootstrap: dict[str, Any]) -> str:
                         "Demo authorized",
                         _status_badge(str(bootstrap.get("demo_trading_authorized", False)).lower()),
                     ),
+                    ("Local MT5 network baseline", _status_badge(_cell(mt5_network_baseline.get("status", "UNKNOWN")))),
+                    ("Local median ping", _esc(_cell(mt5_network_baseline.get("median_ping", "n/a")))),
+                    ("Local best ping", _esc(_cell(mt5_network_baseline.get("best_ping", "n/a")))),
+                    ("Local samples", _esc(_cell(mt5_network_baseline.get("samples", "n/a")))),
                 ]
             ),
             '<h3 class="mini-heading">Bootstrap Sequence</h3>',
@@ -1571,6 +1578,7 @@ def _artifact_links() -> str:
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
         ("Phase 2 owner action packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.md"),
         ("Phase 2 VPS bootstrap packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md"),
+        ("Phase 2 local MT5 network baseline", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
         ("Phase 2 VPS first-day verification", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md"),
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
@@ -1869,6 +1877,31 @@ def _parse_measured_cost(path: Path) -> dict[str, str]:
             result["observed_days"] = data.get("Observed Days", "")
             result["required_days"] = data.get("Required Days", "")
             return result
+    return result
+
+
+def _parse_mt5_network_baseline(path: Path) -> dict[str, str]:
+    result = {"status": _read_markdown_status(path) or "UNKNOWN"}
+    if not path.exists():
+        return result
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    for index, line in enumerate(lines):
+        if line.startswith("| Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |"):
+            if index + 2 >= len(lines):
+                break
+            values = [part.strip() for part in lines[index + 2].strip("|").split("|")]
+            if len(values) >= 6:
+                result.update(
+                    {
+                        "samples": values[0],
+                        "latest_ping": values[1],
+                        "median_ping": values[2],
+                        "best_ping": values[3],
+                        "worst_ping": values[4],
+                        "latest_access_point": values[5],
+                    }
+                )
+            break
     return result
 
 

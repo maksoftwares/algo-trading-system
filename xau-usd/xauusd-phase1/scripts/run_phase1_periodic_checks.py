@@ -25,6 +25,7 @@ from generate_phase1_would_signal_report import generate_phase1_would_signal_rep
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
+from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
 from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
@@ -144,6 +145,10 @@ def run_phase1_periodic_checks(
         root=root,
         files_dir=files_dir,
         compile_log=compile_log,
+    )
+    generate_phase2_mt5_network_baseline(
+        logs_dir=files_dir.parent.parent / "logs",
+        report_path=report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md",
     )
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,

@@ -98,6 +98,14 @@ Reasoning:
 
 ## Latency Test Plan
 
+Before provisioning, use the local baseline report as the comparison target:
+
+```text
+outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
+```
+
+That report is generated from sanitized MT5 terminal authorization pings and intentionally excludes account identifiers, source IP addresses, credentials, and raw log lines.
+
 Run this only after a trial VPS is provisioned:
 
 ```powershell
