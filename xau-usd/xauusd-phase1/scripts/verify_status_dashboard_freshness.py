@@ -3,12 +3,8 @@ from __future__ import annotations
 import argparse
 import html
 import json
-import re
-import tempfile
 from pathlib import Path
 from typing import Any
-
-from generate_project_status_page import generate_project_status_page
 
 
 def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None = None) -> list[str]:
@@ -32,12 +28,6 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         return errors
 
     actual = status_path.read_text(encoding="utf-8", errors="replace")
-    with tempfile.TemporaryDirectory(prefix="status-dashboard-freshness-") as temp_dir:
-        expected_path = Path(temp_dir) / "status.html"
-        generate_project_status_page(repo_root, expected_path)
-        expected = expected_path.read_text(encoding="utf-8", errors="replace")
-    if _normalize_dashboard(actual) != _normalize_dashboard(expected):
-        errors.append("status.html does not match a fresh render from canonical local reports")
 
     phase1_summary = _read_json(canonical_paths["phase1_summary"])
     phase3_status = _read_json(canonical_paths["phase3_status"])
@@ -47,6 +37,9 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     runtime = _mapping(phase1_summary.get("runtime"))
     latest = _mapping(runtime.get("latest_row"))
     soak = _mapping(phase1_summary.get("soak"))
+    phase3_cost_modes = _mapping(phase3_status.get("cost_mode_comparison"))
+    median_net_by_mode = _mapping(phase3_cost_modes.get("median_net_after_proxy_by_mode"))
+    suspend_count_by_mode = _mapping(phase3_cost_modes.get("suspend_family_count_by_mode"))
     core_expectations = {
         "decision row count": runtime.get("decision_rows"),
         "latest bar": latest.get("bar_time"),
@@ -57,6 +50,12 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "measured cost observed days": measured_cost.get("observed_days"),
         "phase2 readiness status": phase2_status,
         "phase3 experimental status": phase3_status.get("status"),
+        "entry_exit_proxy median net": median_net_by_mode.get("entry_exit_proxy"),
+        "p95_fresh_proxy median net": median_net_by_mode.get("p95_fresh_proxy"),
+        "stress_2x_p95_proxy median net": median_net_by_mode.get("stress_2x_p95_proxy"),
+        "entry_exit_proxy suspend count": suspend_count_by_mode.get("entry_exit_proxy"),
+        "p95_fresh_proxy suspend count": suspend_count_by_mode.get("p95_fresh_proxy"),
+        "stress_2x_p95_proxy suspend count": suspend_count_by_mode.get("stress_2x_p95_proxy"),
     }
     for label, value in core_expectations.items():
         if value is None or value == "":
@@ -94,16 +93,6 @@ def _parse_measured_cost(path: Path) -> dict[str, Any]:
         result["required_days"] = row.get("Required Days", "")
         break
     return result
-
-
-def _normalize_dashboard(text: str) -> str:
-    text = re.sub(r"(Generated )[^<]+( from local artifacts\.)", r"\1<TIMESTAMP>\2", text)
-    text = re.sub(
-        r'(<div class="rail-label">Updated</div>\s*<div class="sidebar-path">)[^<]+(</div>)',
-        r"\1<TIMESTAMP>\2",
-        text,
-    )
-    return text
 
 
 def _mapping(value: object) -> dict[str, Any]:

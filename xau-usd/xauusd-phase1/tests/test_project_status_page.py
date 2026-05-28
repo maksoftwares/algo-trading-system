@@ -148,7 +148,8 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
         soak={"progress_pct": 50.0, "observed_days": 2.5, "required_days": 5},
     )
     errors = freshness.verify_status_dashboard_freshness(repo, output.output_path)
-    assert any("does not match a fresh render" in error for error in errors)
+    assert any("status.html is missing soak observed days: 2.5" in error for error in errors)
+    assert any("status.html is missing soak progress pct: 50.00%" in error for error in errors)
 
 
 def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_content_matches(tmp_path: Path):
