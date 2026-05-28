@@ -21,6 +21,11 @@ OWNER_APPROVAL_REQUIRED_FIELDS = (
     "decision",
     "scope",
     "minimum_net_expectancy_r",
+    "selected_vps_provider",
+    "selected_vps_region",
+    "selected_vps_plan",
+    "selected_vps_monthly_cost",
+    "latency_evidence_path",
     *OWNER_APPROVAL_TRUE_FIELDS,
 )
 MIN_PHASE2_NET_EXPECTANCY_R = 0.15

@@ -10,10 +10,14 @@ This is a template only. Do not copy it to `outputs/reports/PHASE2_OWNER_APPROVA
 | Phase 1 review index | PASS | `outputs/reports/PHASE1_REVIEW_INDEX.md` |
 | Phase 2 readiness | PASS | `outputs/reports/PHASE2_READINESS_REPORT.md` |
 | Five trading day soak | PASS | `outputs/reports/PHASE1_SOAK_DRIFT_REPORT.md` |
+| Active-market 72-hour soak | PASS | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
+| Process/code-freeze 96-hour gate | PASS | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
 | Measured cost model | PASS | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` |
 | Measured-cost revalidation | PASS after any required correction | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` |
 | Measured-cost assumption delta | PASS | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` |
 | Measured-cost audit | REVIEWED | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` |
+| VPS selection | PASS | `docs/PHASE2_VPS_SELECTION_MATRIX.md` |
+| VPS latency evidence | PASS | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` |
 | Safety audit | PASS | `scripts/audit_phase1_safety.py` |
 | Single-edge risk plan | Accepted | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` |
 | Cost-measurement protocol | Accepted | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` |
@@ -31,6 +35,11 @@ minimum_net_expectancy_r: 0.15
 single_edge_risk_ack: false
 no_live_capital_ack: false
 measured_cost_ack: false
+selected_vps_provider:
+selected_vps_region:
+selected_vps_plan:
+selected_vps_monthly_cost:
+latency_evidence_path:
 ```
 
 Required values:
@@ -39,6 +48,7 @@ Required values:
 - `scope` must be paper-mode only and must not authorize live capital
 - `minimum_net_expectancy_r` must be at least `0.15`
 - `single_edge_risk_ack`, `no_live_capital_ack`, and `measured_cost_ack` must be `true`
+- `selected_vps_provider`, `selected_vps_region`, `selected_vps_plan`, `selected_vps_monthly_cost`, and `latency_evidence_path` must be non-empty
 
 ## Approved Scope Text
 
@@ -76,4 +86,5 @@ The live file must include:
 - accepted scope
 - explicit single-edge risk acknowledgement
 - explicit no-live-capital boundary
+- selected VPS provider, region, plan, monthly cost, and latency evidence path
 - reference to the latest Phase 2 readiness report

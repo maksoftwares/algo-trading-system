@@ -79,6 +79,52 @@ def test_phase2_readiness_does_not_pass_with_token_only_approval(tmp_path):
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 
 
+def test_phase2_readiness_requires_vps_fields_in_owner_approval(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    (root / "docs").mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    approval = report_dir / "PHASE2_OWNER_APPROVAL.md"
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    approval.write_text(
+        "\n".join(
+            [
+                "# Approval",
+                "",
+                "PHASE2_PAPER_PREP_APPROVED",
+                "",
+                "owner: maksoftwares",
+                "decision_date_utc: 2026-05-29T00:00:00Z",
+                "decision: APPROVED",
+                "scope: Phase 2 paper-mode only; no live capital",
+                "minimum_net_expectancy_r: 0.15",
+                "single_edge_risk_ack: true",
+                "no_live_capital_ack: true",
+                "measured_cost_ack: true",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md", approval)
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "Project owner approval"
+        and item.status == "PENDING"
+        and "selected_vps_provider" in item.evidence
+        for item in output.items
+    )
+
+
 def test_phase2_readiness_accepts_owner_approved_family_clustered_d2(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -420,6 +466,11 @@ def _approval_text() -> str:
             "decision: APPROVED",
             "scope: Phase 2 paper-mode only; no live capital",
             "minimum_net_expectancy_r: 0.15",
+            "selected_vps_provider: FXVM",
+            "selected_vps_region: Dubai",
+            "selected_vps_plan: Advanced VPS",
+            "selected_vps_monthly_cost: 50 USD",
+            "latency_evidence_path: outputs/reports/PHASE2_VPS_LATENCY_REPORT.md",
             "single_edge_risk_ack: true",
             "no_live_capital_ack: true",
             "measured_cost_ack: true",
