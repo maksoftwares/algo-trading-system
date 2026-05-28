@@ -8,8 +8,8 @@ Overall status: PASS
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T10:12:45.309556Z |
-| Commit | 759286d |
+| Created at UTC | 2026-05-28T10:40:01.172053Z |
+| Commit | 824b19b |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
 | Working tree clean | True |
@@ -49,5 +49,5 @@ Clean.
 | script_manifest | True | 9653 | 90cbd7716dc44bf0c96a5f5c09f75e0e07ce682423705c2d2db45be2870a8795 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_manifest.py |
 | script_safety | True | 6157 | 428ccb22a7ba55e5451a296f3a797bb5294321cfbd8d3b5e663cd479ac8bc9e5 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\audit_phase3_experimental_safety.py |
 | script_simulation | True | 24283 | d6f88b84457a38d4545a214f659d11125802229cb3ce81b8964045b37a615e1c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\simulate_phase3_from_would_signals.py |
-| script_status | True | 13436 | 602d7a271c47d5f120616a5e1886f84974ff4e835c004f80e635c762608261f6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_status.py |
+| script_status | True | 14988 | b19348b99ccee899afaead79628d05b260c16dd0ce6c14fee6bac7a301b3ce0c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_status.py |
 | script_status_dashboard_freshness | True | 5890 | 6e39fa122a37593a0722117eca04e54304f226226a2faa4c3a4af6dad637647f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\scripts\verify_status_dashboard_freshness.py |
