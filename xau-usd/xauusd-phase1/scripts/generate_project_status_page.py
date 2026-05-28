@@ -57,6 +57,7 @@ def generate_project_status_page(
 
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
+    phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
     phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -98,6 +99,7 @@ def generate_project_status_page(
             candidates=candidates,
             account_example=account_example,
             phase2_countdown=phase2_countdown,
+            phase2_preflight=phase2_preflight,
             phase3_status=phase3_status,
         ),
         encoding="utf-8",
@@ -146,6 +148,7 @@ def _render_html(
     candidates: list[dict[str, str]],
     account_example: dict[str, Any],
     phase2_countdown: dict[str, Any],
+    phase2_preflight: dict[str, Any],
     phase3_status: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
@@ -235,7 +238,7 @@ def _render_html(
             "      </section>",
             "",
             '      <section class="grid lower-grid">',
-            _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown)),
+            _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight)),
             _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown)),
             "      </section>",
             "",
@@ -972,14 +975,19 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
     return _key_value_table(rows)
 
 
-def _demo_countdown_panel(countdown: dict[str, Any]) -> str:
+def _demo_countdown_panel(countdown: dict[str, Any], preflight: dict[str, Any]) -> str:
     wait_gates = _mapping_rows(countdown.get("wait_gates"))
     summary_rows = [
         ("Overall status", _status_badge(_cell(countdown.get("status", "UNKNOWN")))),
+        ("Demo preflight", _status_badge(_cell(preflight.get("status", "UNKNOWN")))),
         ("Phase 2 readiness", _status_badge(_cell(countdown.get("phase2_readiness_status", "UNKNOWN")))),
         ("Phase 1 acceptance", _status_badge(_cell(countdown.get("phase1_acceptance_status", "UNKNOWN")))),
         ("Measured cost model", _status_badge(_cell(countdown.get("measured_cost_status", "UNKNOWN")))),
         ("Pending gates", _esc(_cell(countdown.get("pending_gate_count", "n/a")))),
+        (
+            "Paper implementation authorized",
+            _status_badge(str(preflight.get("paper_mode_implementation_authorized", False)).lower()),
+        ),
         ("Paper mode authorized", _status_badge(str(countdown.get("paper_mode_authorized", False)).lower())),
         ("Broker execution authorized", _status_badge(str(countdown.get("broker_execution_authorized", False)).lower())),
         ("Live trading authorized", _status_badge(str(countdown.get("live_trading_authorized", False)).lower())),
@@ -1520,6 +1528,7 @@ def _artifact_links() -> str:
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
+        ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
         ("Phase 3 experimental scope", "xau-usd/xauusd-phase3-experimental/docs/PHASE3_EXPERIMENTAL_SCOPE.md"),
         ("Phase 3 experimental status", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_STATUS.md"),
         ("Phase 3 offline simulation", "xau-usd/xauusd-phase3-experimental/outputs/reports/PHASE3_EXPERIMENTAL_SIMULATION.md"),

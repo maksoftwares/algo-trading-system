@@ -15,6 +15,7 @@ def test_periodic_check_output_shape(tmp_path: Path):
         soak_history_rows=3,
         acceptance_status="PENDING",
         phase2_readiness_status="PENDING",
+        phase2_demo_preflight_status="PENDING",
         review_index_status="PENDING",
     )
 
@@ -61,4 +62,13 @@ def test_periodic_checks_generate_demo_countdown_after_phase2_readiness():
     assert "generate_phase2_demo_countdown_report" in script
     assert script.index("phase2_readiness = generate_phase2_readiness_report") < script.index(
         "generate_phase2_demo_countdown_report(root=root)"
+    )
+
+
+def test_periodic_checks_generate_demo_preflight_after_countdown():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "generate_phase2_demo_preflight_report" in script
+    assert script.index("generate_phase2_demo_countdown_report(root=root)") < script.index(
+        "phase2_preflight = generate_phase2_demo_preflight_report(root=root)"
     )

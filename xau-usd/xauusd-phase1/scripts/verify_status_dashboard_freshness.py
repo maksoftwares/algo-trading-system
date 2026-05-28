@@ -18,6 +18,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "phase1_summary": phase1_reports / "PHASE1_STATUS_SUMMARY.json",
         "measured_cost": phase0_reports / "MEASURED_COST_MODEL.md",
         "phase2_demo_countdown": phase1_reports / "PHASE2_DEMO_COUNTDOWN.json",
+        "phase2_demo_preflight": phase1_reports / "PHASE2_DEMO_PREFLIGHT.json",
         "phase2_readiness": phase1_reports / "PHASE2_READINESS_REPORT.md",
         "phase3_status": phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
     }
@@ -33,6 +34,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase1_summary = _read_json(canonical_paths["phase1_summary"])
     phase3_status = _read_json(canonical_paths["phase3_status"])
     phase2_countdown = _read_json(canonical_paths["phase2_demo_countdown"])
+    phase2_preflight = _read_json(canonical_paths["phase2_demo_preflight"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])
     phase2_status = _markdown_status(canonical_paths["phase2_readiness"])
 
@@ -56,6 +58,10 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "measured cost observed days": measured_cost.get("observed_days"),
         "demo countdown status": phase2_countdown.get("status"),
         "demo countdown pending gate count": phase2_countdown.get("pending_gate_count"),
+        "demo preflight status": phase2_preflight.get("status"),
+        "demo preflight implementation authorization": str(
+            phase2_preflight.get("paper_mode_implementation_authorized", "")
+        ).lower(),
         "demo countdown paper authorization": str(phase2_countdown.get("paper_mode_authorized", "")).lower(),
         "demo countdown broker execution authorization": str(
             phase2_countdown.get("broker_execution_authorized", "")

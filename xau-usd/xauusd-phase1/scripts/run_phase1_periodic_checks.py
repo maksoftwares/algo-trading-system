@@ -24,6 +24,7 @@ from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
+from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from phase0.config import ConfigError, load_project_config
@@ -41,6 +42,7 @@ class PeriodicCheckOutput:
     soak_history_rows: int
     acceptance_status: str
     phase2_readiness_status: str
+    phase2_demo_preflight_status: str
     review_index_status: str
 
 
@@ -162,6 +164,7 @@ def run_phase1_periodic_checks(
         report_path=report_dir / "PHASE2_READINESS_REPORT.md",
     )
     generate_phase2_demo_countdown_report(root=root)
+    phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     review_index = generate_phase1_review_index(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",
@@ -184,6 +187,7 @@ def run_phase1_periodic_checks(
         soak_history_rows=soak_history.row_count,
         acceptance_status=acceptance.status,
         phase2_readiness_status=phase2_readiness.status,
+        phase2_demo_preflight_status=phase2_preflight.status,
         review_index_status=review_index.status,
     )
 
@@ -223,6 +227,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Soak history rows: {output.soak_history_rows}")
     print(f"Acceptance: {output.acceptance_status}")
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")
+    print(f"Phase 2 demo preflight: {output.phase2_demo_preflight_status}")
     print(f"Review index: {output.review_index_status}")
     return 0 if output.status == "PASS" else 1
 
