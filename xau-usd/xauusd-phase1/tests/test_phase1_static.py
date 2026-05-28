@@ -263,6 +263,15 @@ def test_review_12_records_phase3_freeze_and_demo_gate_boundary():
     assert "Broker-action code" in text
 
 
+def test_phase1_ci_verifies_phase2_transition_artifacts_and_dashboard():
+    workflow = (ROOT.parents[1] / ".github" / "workflows" / "phase1.yml").read_text(encoding="utf-8")
+
+    assert "Verify Phase 2 transition artifacts and dashboard freshness" in workflow
+    assert "generate_phase2_demo_preflight_report.py --root ." in workflow
+    assert "generate_phase2_owner_action_packet.py --root ." in workflow
+    assert "verify_status_dashboard_freshness.py --repo-root ../.. --status-path ../../status.html" in workflow
+
+
 def test_phase1_risk_gate_has_simulated_lock_states():
     text = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Risk.mqh").read_text(encoding="utf-8")
 

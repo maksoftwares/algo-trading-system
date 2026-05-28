@@ -33,6 +33,12 @@ jobs:
       - name: Audit Phase 1 dry-run safety boundary
         run: python scripts/audit_phase1_safety.py
 
+      - name: Verify Phase 2 transition artifacts and dashboard freshness
+        run: |
+          python scripts/generate_phase2_demo_preflight_report.py --root .
+          python scripts/generate_phase2_owner_action_packet.py --root .
+          python scripts/verify_status_dashboard_freshness.py --repo-root ../.. --status-path ../../status.html
+
       - name: Upload Phase 1 committed reports
         uses: actions/upload-artifact@v4
         with:
