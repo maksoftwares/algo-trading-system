@@ -583,8 +583,8 @@ def _sidebar(
             "      </div>",
             '      <div class="rail-label">Updated</div>',
             f'      <div class="sidebar-path">{_esc(generated_at)}</div>',
-            '      <div class="rail-label">Local file</div>',
-            f'      <div class="sidebar-path">{_esc(str(repo_root / DEFAULT_OUTPUT))}</div>',
+            '      <div class="rail-label">Tracked file</div>',
+            f'      <div class="sidebar-path">{_esc(DEFAULT_OUTPUT)}</div>',
             "    </aside>",
         ]
     )
