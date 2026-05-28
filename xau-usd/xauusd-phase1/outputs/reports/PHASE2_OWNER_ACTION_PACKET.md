@@ -28,8 +28,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 27.33 | 72.0 | 44.67 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 28.47 | 96.0 | 67.53 | hours |
+| Active-market 72-hour soak | PENDING | 27.42 | 72.0 | 44.58 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 28.52 | 96.0 | 67.48 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Checklist
@@ -108,3 +108,4 @@ Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_peri
 | vps_first_day_verification | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md |
 | vps_selection_matrix | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md |
 | owner_approval_draft | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_OWNER_APPROVAL_DRAFT.md |
+| phase2_demo_transition_runbook | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DEMO_TRANSITION_RUNBOOK.md |

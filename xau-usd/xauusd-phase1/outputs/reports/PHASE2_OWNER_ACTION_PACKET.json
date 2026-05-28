@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-28T15:09:59.329697Z",
+  "created_at_utc": "2026-05-28T15:14:42.189499Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "PENDING",
@@ -16,17 +16,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 27.33,
+      "current": 27.42,
       "required": 72.0,
-      "remaining": 44.67,
+      "remaining": 44.58,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 28.47,
+      "current": 28.52,
       "required": 96.0,
-      "remaining": 67.53,
+      "remaining": 67.48,
       "unit": "hours"
     },
     {
@@ -119,6 +119,7 @@
     "phase2_vps_bootstrap": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_BOOTSTRAP_PACKET.md",
     "vps_first_day_verification": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md",
     "vps_selection_matrix": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",
-    "owner_approval_draft": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_OWNER_APPROVAL_DRAFT.md"
+    "owner_approval_draft": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_OWNER_APPROVAL_DRAFT.md",
+    "phase2_demo_transition_runbook": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_DEMO_TRANSITION_RUNBOOK.md"
   }
 }

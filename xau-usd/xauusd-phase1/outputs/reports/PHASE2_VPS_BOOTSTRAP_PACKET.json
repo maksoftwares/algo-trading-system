@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_VPS_BOOTSTRAP_PENDING",
-  "created_at_utc": "2026-05-28T15:09:59.329697Z",
+  "created_at_utc": "2026-05-28T15:13:04.237821Z",
   "authority": "This packet is an operational VPS bootstrap handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or paper-mode implementation.",
   "paper_mode_authorized": false,
   "demo_trading_authorized": false,
@@ -20,17 +20,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 27.33,
+      "current": 27.42,
       "required": 72.0,
-      "remaining": 44.67,
+      "remaining": 44.58,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 28.47,
+      "current": 28.52,
       "required": 96.0,
-      "remaining": 67.53,
+      "remaining": 67.48,
       "unit": "hours"
     },
     {
@@ -65,8 +65,8 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1063,
-    "latest_bar": "2026.05.28 15:05:00",
+    "decision_rows": 1064,
+    "latest_bar": "2026.05.28 15:10:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
