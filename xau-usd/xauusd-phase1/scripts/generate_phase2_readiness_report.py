@@ -29,6 +29,18 @@ OWNER_APPROVAL_REQUIRED_FIELDS = (
     *OWNER_APPROVAL_TRUE_FIELDS,
 )
 MIN_PHASE2_NET_EXPECTANCY_R = 0.15
+VPS_SELECTION_REQUIRED_FIELDS = (
+    "selected_provider",
+    "selected_region",
+    "selected_plan",
+    "monthly_cost",
+    "backup_method",
+    "monitoring_endpoint_or_scheduler",
+    "recovery_access_owner",
+    "latency_evidence_path",
+    "decision_date",
+    "owner_acceptance",
+)
 
 
 @dataclass(frozen=True)
@@ -93,11 +105,7 @@ def generate_phase2_readiness_report(
             root / "docs" / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md",
             ("910000-910999", "V61", "V77", "V80", "V85", "account isolation", "cross-EA collision plan"),
         ),
-        _status_or_pending_gate(
-            "VPS selection",
-            root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md",
-            required="PASS",
-        ),
+        _vps_selection_gate(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
         _status_or_pending_gate(
             "VPS latency evidence",
             report_dir / "PHASE2_VPS_LATENCY_REPORT.md",
@@ -205,6 +213,65 @@ def _status_or_pending_gate(gate: str, path: Path, required: str) -> Phase2Readi
     if status in {"PENDING", "WARN", "REVIEW", ""}:
         return Phase2ReadinessItem(gate, "PENDING", f"`{path}` status is {status or 'unclear'}; required {required}.")
     return Phase2ReadinessItem(gate, "FAIL", f"`{path}` status is {status}; required {required}.")
+
+
+def _vps_selection_gate(path: Path) -> Phase2ReadinessItem:
+    if not path.exists():
+        return Phase2ReadinessItem("VPS selection", "PENDING", f"Missing `{path}`; required before Phase 2 authorization.")
+    status = _read_markdown_status(path)
+    if status in {"PENDING", "WARN", "REVIEW", ""}:
+        return Phase2ReadinessItem("VPS selection", "PENDING", f"`{path}` status is {status or 'unclear'}; required PASS.")
+    if status != "PASS":
+        return Phase2ReadinessItem("VPS selection", "FAIL", f"`{path}` status is {status}; required PASS.")
+
+    fields = _parse_decision_record_fields(path.read_text(encoding="utf-8", errors="replace"))
+    missing = [field for field in VPS_SELECTION_REQUIRED_FIELDS if not fields.get(field)]
+    if missing:
+        return Phase2ReadinessItem(
+            "VPS selection",
+            "PENDING",
+            f"`{path}` is PASS but missing decision record field(s): {', '.join(missing)}.",
+        )
+    placeholders = [
+        field
+        for field in VPS_SELECTION_REQUIRED_FIELDS
+        if _is_placeholder_value(fields.get(field, ""))
+    ]
+    if placeholders:
+        return Phase2ReadinessItem(
+            "VPS selection",
+            "PENDING",
+            f"`{path}` is PASS but still has placeholder decision field(s): {', '.join(placeholders)}.",
+        )
+    return Phase2ReadinessItem("VPS selection", "PASS", f"`{path}` status is PASS with completed decision record.")
+
+
+def _parse_decision_record_fields(text: str) -> dict[str, str]:
+    fields: dict[str, str] = {}
+    in_decision_record = False
+    for line in text.splitlines():
+        if line.startswith("## "):
+            in_decision_record = line.strip().lower() == "## decision record"
+            continue
+        if not in_decision_record or not line.startswith("| ") or line.startswith("| ---") or line.startswith("| Field |"):
+            continue
+        parts = [part.strip() for part in line.strip("|").split("|")]
+        if len(parts) < 2:
+            continue
+        key = parts[0].strip().lower().replace(" ", "_").replace("-", "_")
+        fields[key] = parts[1].strip()
+    return fields
+
+
+def _is_placeholder_value(value: str) -> bool:
+    normalized = value.strip().lower()
+    if normalized in {"", "pending", "n/a", "none", "tbd", "todo", "unknown"}:
+        return True
+    if "pending owner selection" in normalized or "pending selection" in normalized:
+        return True
+    if "pending" in normalized and "outputs/reports/phase2_vps_latency_report.md" not in normalized:
+        return True
+    return "<" in normalized and ">" in normalized
 
 
 def _d2_reality_check_gate(root: Path) -> Phase2ReadinessItem:

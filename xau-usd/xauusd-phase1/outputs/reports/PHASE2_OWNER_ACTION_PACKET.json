@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-28T13:59:33.560036Z",
+  "created_at_utc": "2026-05-28T14:02:33.527524Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "PENDING",
@@ -15,17 +15,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 26.17,
+      "current": 26.25,
       "required": 72.0,
-      "remaining": 45.83,
+      "remaining": 45.75,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 27.3,
+      "current": 27.35,
       "required": 96.0,
-      "remaining": 68.7,
+      "remaining": 68.65,
       "unit": "hours"
     },
     {

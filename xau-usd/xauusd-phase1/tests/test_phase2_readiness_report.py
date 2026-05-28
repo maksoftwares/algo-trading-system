@@ -125,6 +125,57 @@ def test_phase2_readiness_requires_vps_fields_in_owner_approval(tmp_path):
     )
 
 
+def test_phase2_readiness_does_not_accept_placeholder_vps_selection_record(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    report_dir = root / "outputs" / "reports"
+    docs = root / "docs"
+    docs.mkdir(parents=True)
+    report_dir.mkdir(parents=True)
+    _write_phase0_cost_artifacts(root, include_measured=True)
+    _write_phase2_docs(root)
+    _write_phase2_schema_report(report_dir)
+    _write_markdown_status(report_dir / "PHASE1_ACCEPTANCE_REPORT.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_REVIEW_INDEX.md", "PASS")
+    _write_markdown_status(report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md", "PASS")
+    _write_summary(report_dir / "PHASE1_STATUS_SUMMARY.json", progress=100.0)
+    (docs / "PHASE2_VPS_SELECTION_MATRIX.md").write_text(
+        "\n".join(
+            [
+                "# VPS",
+                "",
+                "Overall status: PASS",
+                "",
+                "## Decision Record",
+                "",
+                "| Field | Value |",
+                "| --- | --- |",
+                "| Selected provider | Pending owner selection |",
+                "| Selected region | Dubai |",
+                "| Selected plan | Advanced VPS |",
+                "| Monthly cost | 50 USD |",
+                "| Backup method | weekly snapshot |",
+                "| Monitoring endpoint or scheduler | Windows Task Scheduler |",
+                "| Recovery access owner | maksoftwares |",
+                "| Latency evidence path | outputs/reports/PHASE2_VPS_LATENCY_REPORT.md |",
+                "| Decision date | 2026-05-29 |",
+                "| Owner acceptance | paper mode only accepted |",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    output = module.generate_phase2_readiness_report(root, report_dir / "PHASE2_READINESS_REPORT.md")
+
+    assert output.status == "PENDING"
+    assert any(
+        item.gate == "VPS selection"
+        and item.status == "PENDING"
+        and "placeholder decision field" in item.evidence
+        for item in output.items
+    )
+
+
 def test_phase2_readiness_accepts_owner_approved_family_clustered_d2(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -438,7 +489,7 @@ def _write_phase2_docs(root: Path) -> None:
         encoding="utf-8",
     )
     (docs / "PHASE2_VPS_SELECTION_MATRIX.md").write_text(
-        "# VPS\n\nOverall status: PASS\n",
+        "# VPS\n\nOverall status: PASS\n\n" + _vps_decision_record(),
         encoding="utf-8",
     )
 
@@ -478,6 +529,28 @@ def _approval_text() -> str:
             "single_edge_risk_ack: true",
             "no_live_capital_ack: true",
             "measured_cost_ack: true",
+            "",
+        ]
+    )
+
+
+def _vps_decision_record() -> str:
+    return "\n".join(
+        [
+            "## Decision Record",
+            "",
+            "| Field | Value |",
+            "| --- | --- |",
+            "| Selected provider | FXVM |",
+            "| Selected region | Dubai |",
+            "| Selected plan | Advanced VPS |",
+            "| Monthly cost | 50 USD |",
+            "| Backup method | weekly snapshot |",
+            "| Monitoring endpoint or scheduler | Windows Task Scheduler |",
+            "| Recovery access owner | maksoftwares |",
+            "| Latency evidence path | outputs/reports/PHASE2_VPS_LATENCY_REPORT.md |",
+            "| Decision date | 2026-05-29 |",
+            "| Owner acceptance | Phase 2 paper-mode only accepted |",
             "",
         ]
     )

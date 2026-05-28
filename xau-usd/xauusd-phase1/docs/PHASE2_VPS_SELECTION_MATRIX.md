@@ -32,6 +32,8 @@ Required before `PASS`:
 - owner accepts that Phase 2 is paper-mode only
 - fresh latency test captured from the selected VPS to the broker server or MT5 endpoint
 
+The Phase 2 readiness generator validates the `Decision Record` table. Do not change `Overall status` to `PASS` while any required field still contains `Pending owner selection`, `Pending`, `TBD`, `TODO`, `unknown`, blank text, or angle-bracket placeholders.
+
 Recommended owner-selection rule:
 
 ```text
