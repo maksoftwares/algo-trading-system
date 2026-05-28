@@ -15,9 +15,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 
 | Metric | Value |
 | --- | --- |
-| Raw observer events | 87 |
-| Family unique events | 47 |
-| Primary stream allowed | 47 |
+| Raw observer events | 89 |
+| Family unique events | 49 |
+| Primary stream allowed | 49 |
 | Observer duplicates | 40 |
 | Observer conflicts | 0 |
 | Rejected source rows | 2 |
@@ -44,15 +44,15 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Metric | Value |
 | --- | --- |
 | OBSERVER_DUPLICATE | 40 |
-| PRIMARY_EXECUTION_CANDIDATE | 47 |
+| PRIMARY_EXECUTION_CANDIDATE | 49 |
 
 ## Kill Rule Counts
 
 | Metric | Value |
 | --- | --- |
-| COST_WATCH | 2 |
+| COST_WATCH | 3 |
 | NORMAL | 66 |
-| SUSPEND_FAMILY | 19 |
+| SUSPEND_FAMILY | 20 |
 
 ## Sample Events
 

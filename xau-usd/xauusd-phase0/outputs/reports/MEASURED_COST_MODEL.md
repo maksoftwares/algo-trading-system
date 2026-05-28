@@ -10,13 +10,13 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Rows | Rows Missing Tick Fresh | Weekend Rows Excluded | Tick Freshness | Source Files |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 13658 | 500 | 1 | 5 | 69362 | 55704 | 0 | available | 6 |
+| 14953 | 500 | 1 | 5 | 71317 | 55704 | 0 | available | 6 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 13658 | 50 | 75 | 75 |
+| global | all | all | XAUUSD | 14953 | 50 | 75 | 180 |
 
 ## Fresh Observed Dates
 
@@ -33,7 +33,7 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 ## Note
 
-Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 55704; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 0. Missing freshness columns: none.
+Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 56364; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 0. Missing freshness columns: none.
 
 ## Why Observed Days Reset
 

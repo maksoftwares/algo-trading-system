@@ -1,13 +1,13 @@
 {
   "status": "REVIEW_READY",
-  "created_at_utc": "2026-05-27T21:05:34.208373Z",
+  "created_at_utc": "2026-05-27T22:06:12.212333Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "input_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
-  "safe_source_rows": 87,
-  "family_group_count": 47,
+  "safe_source_rows": 89,
+  "family_group_count": 49,
   "multi_row_group_count": 40,
   "classification_counts": {
-    "TRUE_DUPLICATE": 47
+    "TRUE_DUPLICATE": 49
   },
   "rows": [
     {
@@ -808,6 +808,40 @@
       "stop_losses": "4454.19",
       "take_profits": "4443.96",
       "stop_distance_points": "409.13"
+    },
+    {
+      "family_event_id": "FAM00048",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.27 19:30:00",
+      "group_size": "1",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "",
+      "source_cluster_ids": "WS090",
+      "observers": "breakout_retest",
+      "directions": "SHORT",
+      "level_kinds": "previous_weekly_low",
+      "level_prices": "4453.16",
+      "entry_prices": "4449.73",
+      "stop_losses": "4454.16",
+      "take_profits": "4443.08",
+      "stop_distance_points": "443.17"
+    },
+    {
+      "family_event_id": "FAM00049",
+      "symbol": "XAUUSD",
+      "bar_time": "2026.05.27 19:55:00",
+      "group_size": "1",
+      "classification": "TRUE_DUPLICATE",
+      "differing_fields": "",
+      "source_cluster_ids": "WS091",
+      "observers": "breakout_retest",
+      "directions": "SHORT",
+      "level_kinds": "previous_weekly_low",
+      "level_prices": "4453.16",
+      "entry_prices": "4451.70",
+      "stop_losses": "4453.80",
+      "take_profits": "4448.54",
+      "stop_distance_points": "210.42"
     }
   ]
 }

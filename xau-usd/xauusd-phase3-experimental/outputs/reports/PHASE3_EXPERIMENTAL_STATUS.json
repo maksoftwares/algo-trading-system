@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-27T21:23:14.752023Z",
+  "created_at_utc": "2026-05-27T22:06:12.496017Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -10,26 +10,26 @@
   "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
   "mt5_runtime_touched": false,
   "broker_action_code_allowed": false,
-  "latest_phase1_bar": "2026.05.27 19:20:00",
+  "latest_phase1_bar": "2026.05.27 22:05:00",
   "latest_phase1_run_id": "phase1-dry-run-v0.7",
   "latest_phase1_dry_run": "true",
   "latest_phase1_trade_permission": "false",
   "simulation": {
     "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-    "created_at_utc": "2026-05-27T21:05:33.861421Z",
+    "created_at_utc": "2026-05-27T22:06:11.869143Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
     "phase2_assumption": "assumes_phase2_pass_for_design_only",
     "real_phase2_status": "unchanged_pending",
     "input_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
     "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
-    "accepted_events": 87,
-    "raw_observer_event_count": 87,
-    "family_unique_event_count": 47,
+    "accepted_events": 89,
+    "raw_observer_event_count": 89,
+    "family_unique_event_count": 49,
     "observer_duplicate_count": 40,
     "observer_conflict_count": 0,
     "observer_conflict_group_count": 0,
-    "primary_stream_allowed_count": 47,
+    "primary_stream_allowed_count": 49,
     "rejected_source_rows": 2,
     "baseline_gross_edge_r": 0.5116,
     "gross_expectancy_r_source": "fixed_notional_phase0_baseline",
@@ -43,26 +43,26 @@
     "slippage_exit_points_assumed": 5.0,
     "p95_fresh_spread_points": 75.0,
     "median_proxy_cost_r": 0.2554,
-    "mean_proxy_cost_r": 0.2831,
+    "mean_proxy_cost_r": 0.2867,
     "median_net_after_proxy_cost_r": 0.2562,
-    "mean_net_after_proxy_cost_r": 0.2285,
+    "mean_net_after_proxy_cost_r": 0.2249,
     "median_net_delta_vs_assumed_baseline_r": 0.0674,
-    "mean_net_delta_vs_assumed_baseline_r": 0.0397,
+    "mean_net_delta_vs_assumed_baseline_r": 0.0361,
     "kill_rule_counts": {
-      "COST_WATCH": 2,
+      "COST_WATCH": 3,
       "NORMAL": 66,
-      "SUSPEND_FAMILY": 19
+      "SUSPEND_FAMILY": 20
     },
     "family_role_counts": {
       "OBSERVER_DUPLICATE": 40,
-      "PRIMARY_EXECUTION_CANDIDATE": 47
+      "PRIMARY_EXECUTION_CANDIDATE": 49
     },
     "mt5_runtime_touched": false,
     "broker_action_code_allowed": false
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-27T21:06:23.145127Z",
+    "created_at_utc": "2026-05-27T22:06:11.944821Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -84,14 +84,14 @@
   },
   "suspend_family_review": {
     "status": "REVIEW_READY",
-    "created_at_utc": "2026-05-27T21:05:34.015887Z",
+    "created_at_utc": "2026-05-27T22:06:12.030976Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "ledger_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_LEDGER.csv",
-    "raw_ledger_rows": 87,
-    "suspend_raw_rows": 19,
-    "suspend_unique_family_events": 10,
-    "suspend_primary_rows": 10,
-    "suspend_primary_family_events": 10,
+    "raw_ledger_rows": 89,
+    "suspend_raw_rows": 20,
+    "suspend_unique_family_events": 11,
+    "suspend_primary_rows": 11,
+    "suspend_primary_family_events": 11,
     "suspend_duplicate_rows": 9,
     "gross_expectancy_r_source": "fixed_notional_phase0_baseline",
     "baseline_assumed_cost_r": 0.3228,
@@ -100,50 +100,50 @@
     "max_cost_proxy_r_before_suspend": 0.3616,
     "minimum_net_expectancy_r": 0.15,
     "median_suspend_cost_r": 0.4822,
-    "mean_suspend_cost_r": 0.4963,
+    "mean_suspend_cost_r": 0.4976,
     "median_suspend_net_delta_vs_assumed_baseline_r": -0.1594,
     "median_suspend_stop_distance_points": 229.12,
     "diagnosis_counts": {
       "normal_spread_small_stop": 4,
-      "tight_stop_cost_dominates": 6,
+      "tight_stop_cost_dominates": 7,
       "wide_spread_plus_entry_exit_cost": 9
     },
     "role_counts": {
       "OBSERVER_DUPLICATE": 9,
-      "PRIMARY_EXECUTION_CANDIDATE": 10
+      "PRIMARY_EXECUTION_CANDIDATE": 11
     },
     "observer_counts": {
-      "breakout_retest": 10,
+      "breakout_retest": 11,
       "swing_breakout_retest_v0": 9
     },
     "direction_counts": {
       "LONG": 14,
-      "SHORT": 5
+      "SHORT": 6
     },
     "level_kind_counts": {
       "latest_swing_high": 14,
       "latest_swing_low": 4,
-      "previous_weekly_low": 1
+      "previous_weekly_low": 2
     },
     "recommendation": "Do not promote these rows into real execution. If Phase 2 later passes, use this review to require cost-aware entry blocking before any paper-mode order path is considered."
   },
   "cost_mode_comparison": {
     "status": "REVIEW_READY",
     "mode_count": 4,
-    "stress_suspend_family_unique_events": 44
+    "stress_suspend_family_unique_events": 46
   },
   "family_dedup_audit": {
     "status": "REVIEW_READY",
-    "family_group_count": 47,
+    "family_group_count": 49,
     "multi_row_group_count": 40,
     "classification_counts": {
-      "TRUE_DUPLICATE": 47
+      "TRUE_DUPLICATE": 49
     }
   },
   "manifest": {
-    "status": "PASS",
-    "commit_short": "6d64e48",
-    "created_at_utc": "2026-05-27T21:23:14.598904Z"
+    "status": "DIRTY_WORKTREE",
+    "commit_short": "efad08c",
+    "created_at_utc": "2026-05-27T22:06:12.348967Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

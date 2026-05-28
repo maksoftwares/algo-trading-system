@@ -8,15 +8,15 @@ Overall status: REVIEW_READY
 
 | Field | Value |
 | --- | --- |
-| Safe source rows | 87 |
-| Family groups | 47 |
+| Safe source rows | 89 |
+| Family groups | 49 |
 | Multi-row groups | 40 |
 
 ## Classification Counts
 
 | Field | Value |
 | --- | --- |
-| TRUE_DUPLICATE | 47 |
+| TRUE_DUPLICATE | 49 |
 
 ## Multi-Row Groups
 

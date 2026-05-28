@@ -18,7 +18,7 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | --- | --- |
 | Phase 1 acceptance | PENDING |
 | Phase 2 readiness | PENDING |
-| Latest Phase 1 bar | 2026.05.27 19:20:00 |
+| Latest Phase 1 bar | 2026.05.27 22:05:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 
@@ -26,9 +26,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 
 | Field | Value |
 | --- | --- |
-| Accepted events | 87 |
-| Raw observer events | 87 |
-| Family unique events | 47 |
+| Accepted events | 89 |
+| Raw observer events | 89 |
+| Family unique events | 49 |
 | Observer duplicates | 40 |
 | Observer conflicts | 0 |
 | Rejected source rows | 2 |
@@ -48,11 +48,11 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Safety status | PASS |
 | Safety findings | 0 |
 | Suspend review status | REVIEW_READY |
-| Suspend unique family events | 10 |
-| Suspend primary rows | 10 |
+| Suspend unique family events | 11 |
+| Suspend primary rows | 11 |
 | Cost-mode comparison | REVIEW_READY |
-| Stress suspend family events | 44 |
+| Stress suspend family events | 46 |
 | De-dup audit | REVIEW_READY |
-| De-dup classifications | {'TRUE_DUPLICATE': 47} |
-| Manifest status | PASS |
-| Manifest commit | 6d64e48 |
+| De-dup classifications | {'TRUE_DUPLICATE': 49} |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | efad08c |

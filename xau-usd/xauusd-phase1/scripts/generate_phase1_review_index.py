@@ -192,7 +192,7 @@ def _render_report(
             "",
             "- Current work remains dry-run only.",
             "- Broker-action code remains outside the approved scope.",
-            "- Final Phase 1 acceptance still depends on the five-trading-day soak gate, the active-market 72-hour bar-continuity gate, and the separate 96-hour process/code-freeze gate.",
+            "- Final Phase 1 acceptance still depends on any pending wall-clock, active-market continuity, runtime-health, and process/code-freeze gates shown above.",
             "",
         ]
     )
