@@ -1,10 +1,10 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-05-28T14:55:38.765882Z",
+  "created_at_utc": "2026-05-28T15:03:18.632037Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
-  "commit_hash": "ae4f06f8b295b7aeea1523ea330a8a8861191318",
-  "commit_short": "ae4f06f",
+  "commit_hash": "f8d0122dfef0eb85a65067b26c9d240df21dd565",
+  "commit_short": "f8d0122",
   "working_tree_clean": true,
   "working_tree_short_status": "",
   "simulation_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
@@ -266,8 +266,8 @@
     "script_safety": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\audit_phase3_experimental_safety.py",
       "exists": true,
-      "sha256": "428ccb22a7ba55e5451a296f3a797bb5294321cfbd8d3b5e663cd479ac8bc9e5",
-      "bytes": 6157
+      "sha256": "b90a5815e106ae1085f9a44014faafb1d809731a95260acdf220fdafec3325e8",
+      "bytes": 6615
     },
     "script_manifest": {
       "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\scripts\\generate_phase3_experimental_manifest.py",

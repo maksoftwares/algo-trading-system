@@ -8,8 +8,8 @@ Overall status: PASS
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T14:55:38.765882Z |
-| Commit | ae4f06f |
+| Created at UTC | 2026-05-28T15:03:18.632037Z |
+| Commit | f8d0122 |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
 | Working tree clean | True |
@@ -72,7 +72,7 @@ Clean.
 | script_manifest | True | 12452 | 5650b6b0ca2147ee9a3a26d8c72dc5635e899faeae3d19d7114a480de298799f | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_manifest.py |
 | script_paper_shadow_experiment | True | 17334 | 996ede552ab866ae1224d15241bfaff360c447d62c0d4efc5f0029c4f5ce9dff | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_paper_shadow_experiment.py |
 | script_review_bundle | True | 5288 | 173ec64f97f1dc6059f52708802f8a3b2c57d73f3d42912226f2a9ad25e21e55 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_review_bundle.py |
-| script_safety | True | 6157 | 428ccb22a7ba55e5451a296f3a797bb5294321cfbd8d3b5e663cd479ac8bc9e5 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\audit_phase3_experimental_safety.py |
+| script_safety | True | 6615 | b90a5815e106ae1085f9a44014faafb1d809731a95260acdf220fdafec3325e8 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\audit_phase3_experimental_safety.py |
 | script_shadow_lifecycle_experiment | True | 16600 | 870bf3e34c554beb2f2d0b945a8d35fc5d7a57607585966c9dbe503fd465bdf6 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_shadow_lifecycle_experiment.py |
 | script_simulation | True | 24283 | d6f88b84457a38d4545a214f659d11125802229cb3ce81b8964045b37a615e1c | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\simulate_phase3_from_would_signals.py |
 | script_status | True | 26407 | cf1b4df17e0ad9654f61b1c4805d3fb995848923c3e4ea32f906544440480287 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\scripts\generate_phase3_experimental_status.py |
