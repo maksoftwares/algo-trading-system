@@ -39,10 +39,6 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     if _normalize_dashboard(actual) != _normalize_dashboard(expected):
         errors.append("status.html does not match a fresh render from canonical local reports")
 
-    newest_report_mtime = max(path.stat().st_mtime for path in canonical_paths.values())
-    if status_path.stat().st_mtime + 1.0 < newest_report_mtime:
-        errors.append("status.html timestamp is older than at least one canonical report")
-
     phase1_summary = _read_json(canonical_paths["phase1_summary"])
     phase3_status = _read_json(canonical_paths["phase3_status"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])

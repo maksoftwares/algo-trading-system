@@ -151,6 +151,35 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
     assert any("does not match a fresh render" in error for error in errors)
 
 
+def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_content_matches(tmp_path: Path):
+    module = _load_module()
+    freshness = _load_script("verify_status_dashboard_freshness")
+    repo = tmp_path / "repo"
+    phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
+    phase0_docs = repo / "xau-usd" / "xauusd-phase0" / "docs"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase3_reports = repo / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports"
+    phase0_reports.mkdir(parents=True)
+    phase0_docs.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
+    _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+    _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
+    _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
+    _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    _write_candidate_backlog(phase0_docs / "CANDIDATE_RESEARCH_BACKLOG.md")
+    output = module.generate_project_status_page(repo)
+    old_time = 1_800_000_000
+    new_time = old_time + 10
+    os.utime(output.output_path, (old_time, old_time))
+    os.utime(phase1_reports / "PHASE1_STATUS_SUMMARY.json", (new_time, new_time))
+
+    assert freshness.verify_status_dashboard_freshness(repo, output.output_path) == []
+
+
 def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_fails(tmp_path: Path):
     module = _load_module()
     repo = tmp_path / "repo"
