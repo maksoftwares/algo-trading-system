@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import importlib.util
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -489,6 +490,39 @@ def test_phase3_safety_audit_passes_and_report_is_generated(tmp_path: Path):
     assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in output.report_path.read_text(
         encoding="utf-8"
     )
+
+
+def test_phase3_safety_cli_supports_isolated_output_dir(tmp_path: Path):
+    output_dir = tmp_path / "ci_synthetic" / "reports"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "audit_phase3_experimental_safety.py"),
+            "--output-dir",
+            str(output_dir),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert (output_dir / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.md").exists()
+    assert (output_dir / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json").exists()
+
+
+def test_phase3_ci_workflow_keeps_synthetic_reports_isolated():
+    workflow = (ROOT.parents[1] / ".github" / "workflows" / "phase3_experimental.yml").read_text(encoding="utf-8")
+
+    assert "outputs/ci_synthetic/reports" in workflow
+    assert "outputs/ci_synthetic/safety_boundary" in workflow
+    assert "not_real_review_evidence=true" in workflow
+    assert "simulate_phase3_from_would_signals.py --input-csv \"$FIXTURE\" --output-dir \"$CI_SYNTH\"" in workflow
+    assert "audit_phase3_experimental_safety.py --output-dir \"$CI_SYNTH\"" in workflow
+    assert "verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-manifest" in workflow
+    assert "generate_phase3_experimental_manifest.py" not in workflow
+    assert "generate_project_status_page.py" not in workflow
 
 
 def test_phase3_safety_audit_detects_forbidden_broker_action_reference(tmp_path: Path):

@@ -33,34 +33,36 @@ jobs:
         run: python -m pytest xau-usd/xauusd-phase3-experimental/tests
 
       - name: Audit Phase 3 experimental safety boundary
-        run: python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
+        run: |
+          CI_SYNTH="xau-usd/xauusd-phase3-experimental/outputs/ci_synthetic/safety_boundary"
+          mkdir -p "$CI_SYNTH"
+          printf "source=synthetic_fixture\nnot_real_review_evidence=true\n" > "$CI_SYNTH/CI_SYNTHETIC_ARTIFACTS.txt"
+          python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py --output-dir "$CI_SYNTH"
 
       - name: Check committed dashboard freshness
         run: python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
-      - name: Regenerate synthetic Phase 3 experimental reports
+      - name: Generate isolated synthetic Phase 3 experimental reports
         run: |
-          python xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
-          python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py
-          python xau-usd/xauusd-phase3-experimental/scripts/analyze_phase3_suspend_family.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_suspend_family_decision.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_mode_comparison.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_gate_review.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_family_dedup_audit.py --input-csv xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_paper_shadow_experiment.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_shadow_lifecycle_experiment.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_lifecycle_guard_experiment.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_demo_rehearsal_package.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_manifest.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_completion_audit.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_experimental_status.py
-          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_review_bundle.py
-          python xau-usd/xauusd-phase1/scripts/generate_project_status_page.py
+          CI_SYNTH="xau-usd/xauusd-phase3-experimental/outputs/ci_synthetic/reports"
+          FIXTURE="xau-usd/xauusd-phase3-experimental/tests/fixtures/sample_would_signals.csv"
+          mkdir -p "$CI_SYNTH"
+          printf "source=synthetic_fixture\nnot_real_review_evidence=true\n" > "$CI_SYNTH/CI_SYNTHETIC_ARTIFACTS.txt"
+          python xau-usd/xauusd-phase3-experimental/scripts/simulate_phase3_from_would_signals.py --input-csv "$FIXTURE" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/audit_phase3_experimental_safety.py --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/analyze_phase3_suspend_family.py --ledger-path "$CI_SYNTH/PHASE3_EXPERIMENTAL_LEDGER.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_suspend_family_decision.py --rows-path "$CI_SYNTH/PHASE3_SUSPEND_FAMILY_ROWS.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_mode_comparison.py --input-csv "$FIXTURE" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_cost_gate_review.py --ledger-path "$CI_SYNTH/PHASE3_EXPERIMENTAL_LEDGER.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_family_dedup_audit.py --input-csv "$FIXTURE" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_paper_shadow_experiment.py --ledger-path "$CI_SYNTH/PHASE3_EXPERIMENTAL_LEDGER.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_shadow_lifecycle_experiment.py --shadow-ledger-path "$CI_SYNTH/PHASE3_PAPER_SHADOW_LEDGER.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_lifecycle_guard_experiment.py --lifecycle-ledger-path "$CI_SYNTH/PHASE3_SHADOW_LIFECYCLE_LEDGER.csv" --output-dir "$CI_SYNTH"
+          python xau-usd/xauusd-phase3-experimental/scripts/generate_phase3_demo_rehearsal_package.py --guard-ledger-path "$CI_SYNTH/PHASE3_LIFECYCLE_GUARD_LEDGER.csv" --guard-summary-path "$CI_SYNTH/PHASE3_LIFECYCLE_GUARD_SUMMARY.json" --output-dir "$CI_SYNTH"
 
-      - name: Verify Phase 3 review artifacts
+      - name: Re-verify committed review artifacts
         run: |
-          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked
+          python xau-usd/xauusd-phase3-experimental/scripts/verify_phase3_experimental_artifacts.py --require-git-tracked --require-clean-manifest
           python xau-usd/xauusd-phase1/scripts/verify_status_dashboard_freshness.py
 
       - name: Verify Phase 3 remains non-deployable
@@ -84,4 +86,5 @@ jobs:
           path: |
             xau-usd/xauusd-phase3-experimental/outputs/reports/**
             xau-usd/xauusd-phase3-experimental/outputs/review_bundles/**
+            xau-usd/xauusd-phase3-experimental/outputs/ci_synthetic/**
             status.html

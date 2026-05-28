@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -169,13 +170,20 @@ def _escape(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", "<br>")
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     root = Path(__file__).resolve().parents[1]
-    output = generate_phase3_safety_report(root)
+    parser = argparse.ArgumentParser(description="Audit the Phase 3 experimental source safety boundary.")
+    parser.add_argument("--phase3-root", type=Path, default=root)
+    parser.add_argument("--output-dir", type=Path, default=None)
+    args = parser.parse_args(argv)
+    output = generate_phase3_safety_report(args.phase3_root, args.output_dir)
     if output.status != "PASS":
-        findings = audit_phase3_tree(root)
+        findings = audit_phase3_tree(args.phase3_root)
         for finding in findings:
-            rel = finding.path.relative_to(root)
+            try:
+                rel = finding.path.relative_to(args.phase3_root)
+            except ValueError:
+                rel = finding.path
             print(f"{rel}:{finding.line_number}: {finding.term}: {finding.line}")
         print(output.report_path)
         return 1
