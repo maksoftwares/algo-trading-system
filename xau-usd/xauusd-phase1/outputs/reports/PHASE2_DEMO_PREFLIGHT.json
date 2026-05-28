@@ -1,6 +1,6 @@
 {
   "status": "PENDING",
-  "created_at_utc": "2026-05-28T14:11:28.343546Z",
+  "created_at_utc": "2026-05-28T14:16:29.643296Z",
   "paper_mode_implementation_authorized": false,
   "demo_trading_authorized": false,
   "live_trading_authorized": false,
@@ -39,7 +39,7 @@
     {
       "name": "latest_runtime_boundary",
       "status": "PASS",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 14:10:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 14:15:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK."
     },
     {
       "name": "authority_boundary",

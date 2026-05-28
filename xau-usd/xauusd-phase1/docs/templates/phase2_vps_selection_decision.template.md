@@ -29,4 +29,4 @@ Minimum acceptable decision:
 - NTP/time sync available
 - RDP or console recovery path available
 - Backup method selected
-- Latency report generated and PASS
+- Latency report generated from at least 20 ping samples and PASS

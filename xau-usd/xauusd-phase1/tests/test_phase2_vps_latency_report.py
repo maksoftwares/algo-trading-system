@@ -18,6 +18,8 @@ def test_vps_latency_report_pending_without_evidence(tmp_path):
     assert output.status == "PENDING"
     assert "Overall status: PENDING" in report
     assert "capture_phase2_vps_latency_evidence.ps1" in report
+    assert "-SampleCount 20" in report
+    assert "ping -n 20 $endpoint" in report
     assert any(check.name == "selection_fields" and check.status == "PENDING" for check in output.checks)
     assert any(check.name == "ping_evidence" and check.status == "PENDING" for check in output.checks)
 
@@ -36,7 +38,7 @@ def test_vps_latency_report_passes_with_clean_windows_evidence(tmp_path):
                 "Reply from 192.0.2.10: bytes=32 time=19ms TTL=57",
                 "Reply from 192.0.2.10: bytes=32 time=17ms TTL=57",
                 "Reply from 192.0.2.10: bytes=32 time=18ms TTL=57",
-                "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),",
+                "Packets: Sent = 20, Received = 20, Lost = 0 (0% loss),",
                 "Minimum = 17ms, Maximum = 19ms, Average = 18ms",
             ]
         ),
@@ -59,6 +61,39 @@ def test_vps_latency_report_passes_with_clean_windows_evidence(tmp_path):
     assert "Average latency 18.00 ms is preferred" in output.report_path.read_text(encoding="utf-8")
 
 
+def test_vps_latency_report_requires_enough_ping_samples(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    ping = tmp_path / "ping.txt"
+    tracert = tmp_path / "tracert.txt"
+    test_net = tmp_path / "test_net.txt"
+    ping.write_text(
+        "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),\n"
+        "Minimum = 17ms, Maximum = 19ms, Average = 18ms\n",
+        encoding="utf-8",
+    )
+    tracert.write_text("Tracing route to broker.example\n", encoding="utf-8")
+    test_net.write_text("TcpTestSucceeded : True\n", encoding="utf-8")
+
+    output = module.generate_phase2_vps_latency_report(
+        root=root,
+        provider="FXVM",
+        region="Dubai",
+        endpoint="broker.example",
+        ping_output_path=ping,
+        tracert_output_path=tracert,
+        test_net_output_path=test_net,
+    )
+
+    assert output.status == "PENDING"
+    assert any(
+        check.name == "ping_evidence"
+        and check.status == "PENDING"
+        and "at least 10" in check.evidence
+        for check in output.checks
+    )
+
+
 def test_vps_latency_report_fails_on_packet_loss(tmp_path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -66,7 +101,7 @@ def test_vps_latency_report_fails_on_packet_loss(tmp_path):
     tracert = tmp_path / "tracert.txt"
     test_net = tmp_path / "test_net.txt"
     ping.write_text(
-        "Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),\n"
+        "Packets: Sent = 20, Received = 15, Lost = 5 (25% loss),\n"
         "Minimum = 17ms, Maximum = 19ms, Average = 18ms\n",
         encoding="utf-8",
     )
@@ -105,6 +140,7 @@ def test_vps_latency_capture_script_is_evidence_only():
 
     assert "generate_phase2_vps_latency_report.py" in script
     assert "Test-NetConnection" in script
+    assert "ping -n $SampleCount $Endpoint" in script
     assert "Tee-Object -FilePath $PingPath" in script
     assert "OrderSend" not in script
     assert "CTrade" not in script

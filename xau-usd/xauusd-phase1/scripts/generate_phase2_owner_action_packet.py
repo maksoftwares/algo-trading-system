@@ -192,7 +192,7 @@ def _commands() -> dict[str, str]:
         ),
         "capture_vps_latency": (
             r".\scripts\capture_phase2_vps_latency_evidence.ps1 "
-            r'-Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>"'
+            r'-Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20'
         ),
     }
 

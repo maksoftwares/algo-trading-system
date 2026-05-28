@@ -1,7 +1,7 @@
 {
   "checks": [
     {
-      "evidence": "1052 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
+      "evidence": "1053 row(s) in C:\\MT5PortableGoldMission\\MQL5\\Files\\decision_log.csv",
       "name": "decision_log_has_rows",
       "status": "PASS"
     },
@@ -36,7 +36,7 @@
       "status": "PASS"
     }
   ],
-  "created_at_local": "2026-05-28T19:41:29.256873",
+  "created_at_local": "2026-05-28T19:46:30.573671",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "status": "PASS",
   "status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json"

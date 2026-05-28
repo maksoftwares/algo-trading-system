@@ -9,6 +9,7 @@ from pathlib import Path
 DEFAULT_REPORT = Path("outputs") / "reports" / "PHASE2_VPS_LATENCY_REPORT.md"
 PREFERRED_LATENCY_MS = 50.0
 MAX_ACCEPTABLE_LATENCY_MS = 100.0
+MIN_PING_SAMPLES = 10
 
 
 @dataclass(frozen=True)
@@ -141,10 +142,16 @@ def _ping_evidence_check(path: Path | None, text: str, stats: PingStats | None) 
         return LatencyCheck("ping_evidence", "PENDING", "No ping evidence file provided.")
     if stats is None or stats.average_ms is None or stats.loss_pct is None:
         return LatencyCheck("ping_evidence", "FAIL", f"Ping evidence could not be parsed: `{path}`.")
+    if stats.sent is None or stats.sent < MIN_PING_SAMPLES:
+        return LatencyCheck(
+            "ping_evidence",
+            "PENDING",
+            f"Ping evidence has {stats.sent or 0} sample(s); at least {MIN_PING_SAMPLES} are required.",
+        )
     return LatencyCheck(
         "ping_evidence",
         "PASS",
-        f"Parsed ping evidence from `{path}`: average {stats.average_ms:.2f} ms, loss {stats.loss_pct:.2f}%.",
+        f"Parsed ping evidence from `{path}`: {stats.sent} sample(s), average {stats.average_ms:.2f} ms, loss {stats.loss_pct:.2f}%.",
     )
 
 
@@ -267,14 +274,14 @@ def _render_report(
             "Run these commands on the candidate VPS after it is provisioned:",
             "",
             "```powershell",
-            ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\"",
+            ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\" -SampleCount 20",
             "```",
             "",
             "Manual fallback:",
             "",
             "```powershell",
             "$endpoint = \"<broker_or_mt5_endpoint>\"",
-            "ping $endpoint | Tee-Object -FilePath outputs\\reports\\vps_ping.txt",
+            "ping -n 20 $endpoint | Tee-Object -FilePath outputs\\reports\\vps_ping.txt",
             "tracert $endpoint | Tee-Object -FilePath outputs\\reports\\vps_tracert.txt",
             "Test-NetConnection $endpoint -Port 443 | Tee-Object -FilePath outputs\\reports\\vps_test_net.txt",
             "python scripts\\generate_phase2_vps_latency_report.py --provider \"<provider>\" --region \"<region>\" --endpoint $endpoint --ping-output outputs\\reports\\vps_ping.txt --tracert-output outputs\\reports\\vps_tracert.txt --test-net-output outputs\\reports\\vps_test_net.txt",

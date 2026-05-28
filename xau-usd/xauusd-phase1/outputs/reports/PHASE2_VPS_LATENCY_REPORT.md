@@ -34,14 +34,14 @@ VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readine
 Run these commands on the candidate VPS after it is provisioned:
 
 ```powershell
-.\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>"
+.\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20
 ```
 
 Manual fallback:
 
 ```powershell
 $endpoint = "<broker_or_mt5_endpoint>"
-ping $endpoint | Tee-Object -FilePath outputs\reports\vps_ping.txt
+ping -n 20 $endpoint | Tee-Object -FilePath outputs\reports\vps_ping.txt
 tracert $endpoint | Tee-Object -FilePath outputs\reports\vps_tracert.txt
 Test-NetConnection $endpoint -Port 443 | Tee-Object -FilePath outputs\reports\vps_test_net.txt
 python scripts\generate_phase2_vps_latency_report.py --provider "<provider>" --region "<region>" --endpoint $endpoint --ping-output outputs\reports\vps_ping.txt --tracert-output outputs\reports\vps_tracert.txt --test-net-output outputs\reports\vps_test_net.txt

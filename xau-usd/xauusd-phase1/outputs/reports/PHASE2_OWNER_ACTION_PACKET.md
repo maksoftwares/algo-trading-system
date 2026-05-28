@@ -28,8 +28,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 26.42 | 72.0 | 45.58 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 27.49 | 96.0 | 68.51 | hours |
+| Active-market 72-hour soak | PENDING | 26.5 | 72.0 | 45.5 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 27.58 | 96.0 | 68.42 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Checklist
@@ -77,7 +77,7 @@ Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_r
 ### capture_vps_latency
 
 ```powershell
-.\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>"
+.\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20
 ```
 
 ## Owner Templates

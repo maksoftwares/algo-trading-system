@@ -101,7 +101,7 @@ Reasoning:
 Run this only after a trial VPS is provisioned:
 
 ```powershell
-ping <broker_or_mt5_endpoint>
+ping -n 20 <broker_or_mt5_endpoint>
 tracert <broker_or_mt5_endpoint>
 Test-NetConnection <broker_or_mt5_endpoint> -Port 443
 ```
@@ -112,7 +112,8 @@ Then generate the canonical report:
 .\scripts\capture_phase2_vps_latency_evidence.ps1 `
   -Provider "<provider>" `
   -Region "<region>" `
-  -Endpoint "<broker_or_mt5_endpoint>"
+  -Endpoint "<broker_or_mt5_endpoint>" `
+  -SampleCount 20
 ```
 
 Manual fallback: run `ping`, `tracert`, and `Test-NetConnection` into `outputs\reports\vps_*.txt`, then call `scripts\generate_phase2_vps_latency_report.py` with those paths.

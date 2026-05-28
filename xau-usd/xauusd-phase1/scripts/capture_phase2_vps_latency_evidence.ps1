@@ -10,6 +10,8 @@ param(
 
     [int]$Port = 443,
 
+    [int]$SampleCount = 20,
+
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
 
     [string]$Python = ""
@@ -39,7 +41,9 @@ try {
     "provider=$Provider region=$Region endpoint=$Endpoint captured_at_utc=$((Get-Date).ToUniversalTime().ToString('o'))" |
         Out-File -FilePath (Join-Path $ReportsDir "vps_latency_capture_context.txt") -Encoding utf8
 
-    ping $Endpoint | Tee-Object -FilePath $PingPath
+    "sample_count=$SampleCount" | Add-Content -Path (Join-Path $ReportsDir "vps_latency_capture_context.txt") -Encoding utf8
+
+    ping -n $SampleCount $Endpoint | Tee-Object -FilePath $PingPath
     tracert $Endpoint | Tee-Object -FilePath $TracertPath
     Test-NetConnection $Endpoint -Port $Port | Tee-Object -FilePath $TestNetPath
 
