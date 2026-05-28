@@ -51,6 +51,12 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Suspend unique family events | 11 |
 | Suspend primary rows | 11 |
 | Cost-mode comparison | REVIEW_READY |
+| entry_exit_proxy median net R | 0.2562 |
+| p95_fresh_proxy median net R | 0.1437 |
+| stress_2x_p95_proxy median net R | -0.2012 |
+| entry_exit_proxy SUSPEND_FAMILY rows | 20 |
+| p95_fresh_proxy SUSPEND_FAMILY rows | 45 |
+| stress_2x_p95_proxy SUSPEND_FAMILY rows | 84 |
 | Stress suspend family events | 46 |
 | Cost-gate review | REVIEW_READY |
 | Cost-gate 0.25R blocked families | 28 |
