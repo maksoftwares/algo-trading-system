@@ -8,8 +8,8 @@ Overall status: PASS
 
 | Field | Value |
 | --- | --- |
-| Created at UTC | 2026-05-28T10:40:01.172053Z |
-| Commit | 824b19b |
+| Created at UTC | 2026-05-28T10:41:03.847781Z |
+| Commit | b4cf79d |
 | Simulation status | EXPERIMENTAL_COST_SUSPEND_SCENARIO |
 | Safety status | PASS |
 | Working tree clean | True |
@@ -36,7 +36,7 @@ Clean.
 | phase3_family_dedup_audit_json | True | 28891 | a85cd8cd1f3fa0df89b10838f452e643be7d957500454865e2b612a63f63944b | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_FAMILY_DEDUP_AUDIT.json |
 | phase3_family_dedup_audit_md | True | 8422 | 566620be5fc39adc0edbb9664fc23c53f44eaf75ac29ad4e1063e1fa49ca9855 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_FAMILY_DEDUP_AUDIT.md |
 | phase3_input_would_signals | True | 25276 | 51b117a6c3937cdbfbd2dd5eab6202803556a442d665b0c0d8fcd95de8f6ae27 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv |
-| phase3_safety_json | True | 664 | 38db6389274e7b612e6f9304a8271c7fe6ebc4f3b939fb9574e7a0e20bdc9010 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json |
+| phase3_safety_json | True | 664 | 852a06627dccc57e55e9e24b85888e942b023093661b93f6f301b9002a2fdd07 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SAFETY_REPORT.json |
 | phase3_scope_doc | True | 3712 | 928acb61ae87714bb6338a8e6178f671985f3e8d6b0007ad283970f51e9b81e4 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_EXPERIMENTAL_SCOPE.md |
 | phase3_simulation_json | True | 2006 | 3e3aaf8170255201d98e636b57c362d286ca192ea38aeeeaada7c4b766f9f958 | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_SIMULATION.json |
 | phase3_suspend_family_csv | True | 6304 | ad84f904e250465f6a5689bde288fae979155a6433a31377e9b4081df50100bd | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_SUSPEND_FAMILY_ROWS.csv |
