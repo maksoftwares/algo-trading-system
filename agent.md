@@ -40,6 +40,7 @@ Last updated: 2026-05-28
 - 2026-05-28 periodic readiness refresh:
   - `run_phase1_periodic_checks.py` is the canonical refresh command for Phase 1/Phase 2 reports when manual refresh is needed.
   - VPS first-day manual evidence is now structured. Use `xau-usd\xauusd-phase1\docs\templates\vps_ntp_sync.template.txt`, `vps_backup_config.template.txt`, and `vps_rdp_recovery.template.txt` as copy-fill templates under `outputs\reports`; placeholders, unverified flags, and unredacted recovery secrets are rejected by `generate_phase2_vps_first_day_verification.py`.
+  - Owner-side VPS/demo handoff is now generated at `xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_ACTION_PACKET.md`; it summarizes wait gates, VPS selection, latency capture, first-day verification, and owner approval without authorizing demo trading.
   - Current changing Phase 1 runtime, soak, and would-signal counters must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`, `PHASE1_ACCEPTANCE_REPORT.md`, and `PHASE1_REVIEW_INDEX.md`.
   - Current changing measured-cost counters must be read from `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md`, `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md`, and `MEASURED_COST_ASSUMPTION_DELTA.md`.
   - Current Phase 2 readiness must be read from `xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md`.

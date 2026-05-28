@@ -25,6 +25,7 @@ from generate_phase1_would_signal_report import generate_phase1_would_signal_rep
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
+from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
@@ -44,6 +45,7 @@ class PeriodicCheckOutput:
     acceptance_status: str
     phase2_readiness_status: str
     phase2_demo_preflight_status: str
+    phase2_owner_action_status: str
     vps_first_day_status: str
     review_index_status: str
 
@@ -172,6 +174,7 @@ def run_phase1_periodic_checks(
     )
     generate_phase2_demo_countdown_report(root=root)
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
+    owner_action_packet = generate_phase2_owner_action_packet(root=root)
     review_index = generate_phase1_review_index(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",
@@ -195,6 +198,7 @@ def run_phase1_periodic_checks(
         acceptance_status=acceptance.status,
         phase2_readiness_status=phase2_readiness.status,
         phase2_demo_preflight_status=phase2_preflight.status,
+        phase2_owner_action_status=owner_action_packet.status,
         vps_first_day_status=vps_first_day.status,
         review_index_status=review_index.status,
     )
@@ -236,6 +240,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Acceptance: {output.acceptance_status}")
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")
     print(f"Phase 2 demo preflight: {output.phase2_demo_preflight_status}")
+    print(f"Phase 2 owner action packet: {output.phase2_owner_action_status}")
     print(f"VPS first-day verification: {output.vps_first_day_status}")
     print(f"Review index: {output.review_index_status}")
     return 0 if output.status == "PASS" else 1

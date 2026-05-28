@@ -16,6 +16,7 @@ def test_periodic_check_output_shape(tmp_path: Path):
         acceptance_status="PENDING",
         phase2_readiness_status="PENDING",
         phase2_demo_preflight_status="PENDING",
+        phase2_owner_action_status="WAITING_AND_OWNER_ACTION_REQUIRED",
         vps_first_day_status="PENDING",
         review_index_status="PENDING",
     )
@@ -72,6 +73,15 @@ def test_periodic_checks_generate_demo_preflight_after_countdown():
     assert "generate_phase2_demo_preflight_report" in script
     assert script.index("generate_phase2_demo_countdown_report(root=root)") < script.index(
         "phase2_preflight = generate_phase2_demo_preflight_report(root=root)"
+    )
+
+
+def test_periodic_checks_generate_owner_action_packet_after_preflight():
+    script = Path("scripts/run_phase1_periodic_checks.py").read_text(encoding="utf-8")
+
+    assert "generate_phase2_owner_action_packet" in script
+    assert script.index("phase2_preflight = generate_phase2_demo_preflight_report(root=root)") < script.index(
+        "owner_action_packet = generate_phase2_owner_action_packet(root=root)"
     )
 
 

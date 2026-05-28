@@ -1,0 +1,114 @@
+{
+  "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
+  "created_at_utc": "2026-05-28T13:59:33.560036Z",
+  "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
+  "phase2_readiness_status": "PENDING",
+  "phase2_demo_preflight_status": "PENDING",
+  "vps_selection_status": "PENDING",
+  "vps_first_day_verification_status": "PENDING",
+  "owner_approval_status": "MISSING",
+  "paper_mode_authorized": false,
+  "demo_trading_authorized": false,
+  "broker_execution_authorized": false,
+  "live_trading_authorized": false,
+  "wait_gates": [
+    {
+      "gate": "Active-market 72-hour soak",
+      "status": "PENDING",
+      "current": 26.17,
+      "required": 72.0,
+      "remaining": 45.83,
+      "unit": "hours"
+    },
+    {
+      "gate": "Process/code-freeze 96-hour gate",
+      "status": "PENDING",
+      "current": 27.3,
+      "required": 96.0,
+      "remaining": 68.7,
+      "unit": "hours"
+    },
+    {
+      "gate": "Measured cost model",
+      "status": "PENDING",
+      "current": 2.0,
+      "required": 5.0,
+      "remaining": 3.0,
+      "unit": "fresh_market_days"
+    }
+  ],
+  "owner_actions_now": [
+    {
+      "gate": "VPS selection",
+      "status": "PENDING",
+      "action": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
+    },
+    {
+      "gate": "VPS latency evidence",
+      "status": "PENDING",
+      "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
+    },
+    {
+      "gate": "VPS first-day verification",
+      "status": "PENDING",
+      "action": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence."
+    },
+    {
+      "gate": "Project owner approval",
+      "status": "PENDING",
+      "action": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS."
+    }
+  ],
+  "owner_checklist": [
+    {
+      "step": "1",
+      "title": "Keep local evidence collectors running",
+      "status": "PENDING",
+      "detail": "Do not stop the Phase 1 dry-run terminal or passive spread logger while wait gates mature."
+    },
+    {
+      "step": "2",
+      "title": "Select VPS provider, region, and plan",
+      "status": "PENDING",
+      "detail": "Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider, region, plan, backup, recovery, monitoring, and owner acceptance."
+    },
+    {
+      "step": "3",
+      "title": "Capture VPS latency evidence",
+      "status": "PENDING",
+      "detail": "Run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root after the VPS is provisioned."
+    },
+    {
+      "step": "4",
+      "title": "Fill first-day VPS verification evidence",
+      "status": "PENDING",
+      "detail": "Copy docs/templates/vps_*.template.txt into outputs/reports, fill verified keys, then regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md."
+    },
+    {
+      "step": "5",
+      "title": "Review objective Phase 2 readiness",
+      "status": "PENDING",
+      "detail": "Use outputs/reports/PHASE2_READINESS_REPORT.md as the sole readiness authority."
+    },
+    {
+      "step": "6",
+      "title": "Sign owner approval only after all objective gates pass",
+      "status": "PENDING",
+      "detail": "Create C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md only after readiness is PASS."
+    }
+  ],
+  "commands": {
+    "refresh_readiness": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files",
+    "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt",
+    "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log",
+    "capture_vps_latency": ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\""
+  },
+  "source_reports": {
+    "phase2_demo_countdown": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_COUNTDOWN.json",
+    "phase2_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
+    "phase2_demo_preflight": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_PREFLIGHT_REPORT.md",
+    "vps_first_day_verification": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md",
+    "vps_selection_matrix": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",
+    "owner_approval_draft": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_OWNER_APPROVAL_DRAFT.md"
+  }
+}
