@@ -18,6 +18,8 @@ This is a template only. Do not copy it to `outputs/reports/PHASE2_OWNER_APPROVA
 | Measured-cost audit | REVIEWED | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` |
 | VPS selection | PASS | `docs/PHASE2_VPS_SELECTION_MATRIX.md` |
 | VPS latency evidence | PASS | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` |
+| VPS first-day verification | PASS | `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` |
+| VPS periodic readiness task | VERIFIED | `outputs/reports/vps_periodic_task.txt` |
 | Safety audit | PASS | `scripts/audit_phase1_safety.py` |
 | Single-edge risk plan | Accepted | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` |
 | Cost-measurement protocol | Accepted | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` |
@@ -59,7 +61,7 @@ Phase 2 paper-mode implementation only.
 No live capital.
 No live order execution.
 Approved edge family: breakout-retest only if no longer `COST_REVALIDATION_PENDING` or `COST_SUSPENDED`.
-Approved future experts: breakout_retest and swing_breakout_retest_v0 as same-family observation/paper candidates.
+Approved future experts: breakout_retest, swing_breakout_retest_v0, and symbol_normalized_round_retest_v0 as same-family observation/paper candidates only after measured-cost eligibility.
 Minimum net expectancy after measured cost: +0.15R.
 Suspend the family if measured paper execution pushes net expectancy below +0.15R.
 ```
@@ -89,4 +91,5 @@ The live file must include:
 - explicit single-edge risk acknowledgement
 - explicit no-live-capital boundary
 - selected VPS provider, region, plan, monthly cost, and latency evidence path
+- reference to the completed VPS first-day verification packet, including periodic readiness task evidence
 - reference to the latest Phase 2 readiness report

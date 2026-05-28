@@ -22,8 +22,8 @@ Overall status: DEMO_NOT_READY
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 27.0 | 72.0 | 45.0 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 28.09 | 96.0 | 67.91 | hours |
+| Active-market 72-hour soak | PENDING | 27.08 | 72.0 | 44.92 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 28.16 | 96.0 | 67.84 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions
@@ -39,8 +39,8 @@ Overall status: DEMO_NOT_READY
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1059 |
-| latest_bar | 2026.05.28 14:45:00 |
+| decision_rows | 1060 |
+| latest_bar | 2026.05.28 14:50:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |

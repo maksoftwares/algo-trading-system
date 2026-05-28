@@ -50,6 +50,7 @@ This checklist separates work that is already closed from gates that still requi
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | Shortlist is ready. `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` only after provider, region, specs, backup access, monitoring approach, and first-day latency evidence are selected. |
 | VPS latency evidence | PENDING | Run `scripts/generate_phase2_vps_latency_report.py` on the selected VPS and require `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` to show PASS before VPS selection can close. |
+| VPS first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. |
 | Non-level/intermarket forcing candidate run | PASS | Twenty-three non-level H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
@@ -78,6 +79,7 @@ AND Phase 1 review index = PASS
 AND Phase 1 observer parity = PASS
 AND Phase 2 readiness = PASS
 AND VPS latency evidence = PASS
+AND VPS first-day verification = PASS
 AND active-market 72-hour soak = PASS
 AND process/code-freeze 96-hour gate = PASS
 AND owner approval file exists

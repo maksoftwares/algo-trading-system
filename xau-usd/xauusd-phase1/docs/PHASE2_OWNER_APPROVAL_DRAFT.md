@@ -18,6 +18,7 @@ Do not copy this document to `outputs/reports/PHASE2_OWNER_APPROVAL.md` until ev
 | Measured-cost assumption delta | PENDING | PASS |
 | VPS selection | PENDING | PASS |
 | VPS latency evidence | PENDING | PASS |
+| VPS first-day verification | PENDING | PASS |
 | Phase 1 acceptance | PENDING | PASS |
 | Phase 1 review index | PENDING | PASS |
 | Project owner approval | PENDING | PASS |
@@ -63,8 +64,9 @@ Suspend the family if measured paper execution pushes net expectancy below +0.15
 - I understand measured cost is still pending until 5 fresh observed market days are available.
 - I understand paper-mode implementation still cannot include live capital.
 - I understand no `OrderSend`, `OrderSendAsync`, `CTrade`, `trade.Buy`, `trade.Sell`, `PositionOpen`, or broker-side execution helper is authorized by this draft.
-- I understand VPS selection must be backed by first-day latency/recovery/backup evidence.
+- I understand VPS selection must be backed by first-day latency/recovery/backup evidence and a verified periodic readiness task.
 - I understand `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` must be PASS before VPS selection closes.
+- I understand `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` must be PASS before owner approval is valid.
 
 ## Activation Rule
 
@@ -83,6 +85,7 @@ The live file must include:
 - minimum net expectancy threshold
 - selected VPS provider and region
 - latency evidence path
+- first-day VPS verification path
 - explicit single-edge risk acknowledgement
 - explicit no-live-capital boundary
 - reference to the latest `PHASE2_READINESS_REPORT.md`
