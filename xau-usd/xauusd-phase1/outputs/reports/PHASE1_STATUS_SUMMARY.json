@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-28T11:28:43.809645+00:00",
+  "created_at_utc": "2026-05-28T13:14:10.399349+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -9,40 +9,40 @@
     "would_signal_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md"
   },
   "runtime": {
-    "decision_rows": 1019,
+    "decision_rows": 1040,
     "latest_row": {
-      "bar_time": "2026.05.28 11:25:00",
-      "block_reason": "COST_REVALIDATION_PENDING",
+      "bar_time": "2026.05.28 13:10:00",
+      "block_reason": "phase1_dry_run_only",
       "br_direction": "SHORT",
-      "br_stage": "WOULD_SIGNAL",
-      "br_would_signal": "true",
+      "br_stage": "WAIT_LEVEL_BREAK_RETEST",
+      "br_would_signal": "false",
       "dry_run": "true",
       "risk_state": "NORMAL",
       "run_id": "phase1-dry-run-v0.7",
       "sbr_direction": "SHORT",
-      "sbr_stage": "WOULD_SIGNAL",
-      "sbr_would_signal": "true",
+      "sbr_stage": "WAIT_LEVEL_BREAK_RETEST",
+      "sbr_would_signal": "false",
       "server_time_status": "CLOCK_OK",
-      "timestamp_broker": "2026.05.28 11:25:00",
-      "timestamp_local": "2026.05.28 16:54:55",
+      "timestamp_broker": "2026.05.28 13:10:00",
+      "timestamp_local": "2026.05.28 18:40:00",
       "trade_permission": "false"
     },
     "unique_run_ids": 6
   },
   "soak": {
     "active_market_streak_hours": 53.92,
-    "code_freeze_hours": 24.78,
+    "code_freeze_hours": 26.54,
     "code_freeze_pass": false,
     "code_freeze_started_at": "2026-05-27T10:41:50Z",
-    "current_streak_bar_count": 286,
-    "current_streak_hours": 23.67,
+    "current_streak_bar_count": 307,
+    "current_streak_hours": 25.42,
     "last_restart_utc": "2026-05-27T10:41:55Z",
     "longest_streak_bar_count": 650,
     "longest_streak_hours": 53.92,
     "max_bar_gap_minutes": 15.0,
-    "observed_days": 6.0174,
+    "observed_days": 6.0903,
     "process_code_freeze_pass": false,
-    "process_uptime_streak_hours": 24.78,
+    "process_uptime_streak_hours": 26.54,
     "progress_pct": 100.0,
     "required_code_freeze_hours": 96.0,
     "required_days": 5,
@@ -59,15 +59,15 @@
     "would_signal": "PASS"
   },
   "would_signal": {
-    "clusters": 110,
+    "clusters": 118,
     "csv_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REVIEW.csv",
     "observer_conflicts": {
       "both_opposite_direction": 0,
-      "both_same_direction": 48,
+      "both_same_direction": 52,
       "br_only": 14,
       "sbr_only": 0
     },
     "report_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_WOULD_SIGNAL_REPORT.md",
-    "rows": 110
+    "rows": 118
   }
 }
