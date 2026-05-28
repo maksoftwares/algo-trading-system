@@ -27,6 +27,10 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
     paths = {
         "phase3_input_would_signals": input_csv,
         "phase3_simulation_json": reports / "PHASE3_EXPERIMENTAL_SIMULATION.json",
+        "phase3_status_json": reports / "PHASE3_EXPERIMENTAL_STATUS.json",
+        "phase3_status_md": reports / "PHASE3_EXPERIMENTAL_STATUS.md",
+        "phase3_completion_audit_json": reports / "PHASE3_COMPLETION_AUDIT.json",
+        "phase3_completion_audit_md": reports / "PHASE3_COMPLETION_AUDIT.md",
         "phase3_safety_json": reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json",
         "phase3_suspend_family_json": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.json",
         "phase3_suspend_family_md": reports / "PHASE3_SUSPEND_FAMILY_REVIEW.md",
@@ -85,6 +89,7 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "script_status": phase3_root / "scripts" / "generate_phase3_experimental_status.py",
         "script_safety": phase3_root / "scripts" / "audit_phase3_experimental_safety.py",
         "script_manifest": phase3_root / "scripts" / "generate_phase3_experimental_manifest.py",
+        "script_completion_audit": phase3_root / "scripts" / "generate_phase3_completion_audit.py",
         "script_cost_mode_comparison": phase3_root / "scripts" / "generate_phase3_cost_mode_comparison.py",
         "script_cost_gate_review": phase3_root / "scripts" / "generate_phase3_cost_gate_review.py",
         "script_suspend_family_decision": phase3_root / "scripts" / "generate_phase3_suspend_family_decision.py",

@@ -47,6 +47,7 @@ def generate_phase3_completion_audit(phase3_root: Path, repo_root: Path | None =
     safety = _read_json(reports / "PHASE3_EXPERIMENTAL_SAFETY_REPORT.json")
     phase2_report = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
     phase1_report = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_ACCEPTANCE_REPORT.md"
+    phase2_countdown = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_DEMO_COUNTDOWN.json"
 
     evidence_paths = _evidence_paths(phase3_root, repo_root)
     requirement_rows = [
@@ -56,7 +57,8 @@ def generate_phase3_completion_audit(phase3_root: Path, repo_root: Path | None =
     repo_complete = all(row["status"] == "PASS" for row in requirement_rows)
     phase1_status = _read_markdown_status(phase1_report) or "UNKNOWN"
     phase2_status = _read_markdown_status(phase2_report) or "UNKNOWN"
-    external_blockers = _phase2_pending_gates(phase2_report) if phase2_status != "PASS" else []
+    countdown = _read_json(phase2_countdown)
+    external_blockers = _phase2_pending_gates(phase2_report, countdown) if phase2_status != "PASS" else []
     demo_authorized = repo_complete and phase1_status == "PASS" and phase2_status == "PASS" and not external_blockers
     audit = {
         "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES" if repo_complete and not demo_authorized else "PENDING",
@@ -211,9 +213,11 @@ def _requirement_row(
     }
 
 
-def _phase2_pending_gates(path: Path) -> list[dict[str, str]]:
+def _phase2_pending_gates(path: Path, countdown: dict[str, Any]) -> list[dict[str, str]]:
     if not path.exists():
         return [{"gate": "Phase 2 readiness report", "status": "MISSING", "evidence": str(path)}]
+    wait_gate_details = _countdown_wait_gate_details(countdown)
+    owner_action_details = _countdown_owner_action_details(countdown)
     rows: list[dict[str, str]] = []
     in_gates = False
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
@@ -229,8 +233,44 @@ def _phase2_pending_gates(path: Path) -> list[dict[str, str]]:
             continue
         gate, status, evidence = parts[:3]
         if status != "PASS":
-            rows.append({"gate": gate, "status": status, "evidence": evidence})
+            detail = wait_gate_details.get(gate) or owner_action_details.get(gate)
+            row = {"gate": gate, "status": status, "evidence": evidence}
+            if detail:
+                row["current_detail"] = detail
+            rows.append(row)
     return rows
+
+
+def _countdown_wait_gate_details(countdown: dict[str, Any]) -> dict[str, str]:
+    details: dict[str, str] = {}
+    wait_gates = countdown.get("wait_gates")
+    if not isinstance(wait_gates, list):
+        return details
+    for raw in wait_gates:
+        row = _mapping(raw)
+        gate = str(row.get("gate", ""))
+        if not gate:
+            continue
+        current = row.get("current", "UNKNOWN")
+        required = row.get("required", "UNKNOWN")
+        remaining = row.get("remaining", "UNKNOWN")
+        unit = row.get("unit", "")
+        details[gate] = f"current={current}; required={required}; remaining={remaining}; unit={unit}"
+    return details
+
+
+def _countdown_owner_action_details(countdown: dict[str, Any]) -> dict[str, str]:
+    details: dict[str, str] = {}
+    actions = countdown.get("owner_actions_now")
+    if not isinstance(actions, list):
+        return details
+    for raw in actions:
+        row = _mapping(raw)
+        gate = str(row.get("gate", ""))
+        action = str(row.get("action", ""))
+        if gate and action:
+            details[gate] = action
+    return details
 
 
 def _render_markdown(audit: dict[str, Any]) -> str:
@@ -305,7 +345,7 @@ def _remaining_repo_items(rows: Any) -> str:
 def _blocker_table(rows: list[Any]) -> str:
     if not rows:
         return "None recorded in `PHASE2_READINESS_REPORT.md`."
-    output = ["| Gate | Status | Evidence |", "| --- | --- | --- |"]
+    output = ["| Gate | Status | Evidence | Current Detail |", "| --- | --- | --- | --- |"]
     for raw in rows:
         row = _mapping(raw)
         output.append(
@@ -315,6 +355,7 @@ def _blocker_table(rows: list[Any]) -> str:
                     _escape(row.get("gate", "")),
                     _escape(row.get("status", "")),
                     _escape(row.get("evidence", "")),
+                    _escape(row.get("current_detail", "")),
                 ]
             )
             + " |"

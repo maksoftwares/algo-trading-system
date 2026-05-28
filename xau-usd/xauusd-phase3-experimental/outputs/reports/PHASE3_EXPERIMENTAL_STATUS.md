@@ -18,7 +18,7 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | --- | --- |
 | Phase 1 acceptance | PENDING |
 | Phase 2 readiness | PENDING |
-| Latest Phase 1 bar | 2026.05.28 11:25:00 |
+| Latest Phase 1 bar | 2026.05.28 15:40:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 
@@ -93,4 +93,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo authorized | False |
 | External blockers | 10 |
 | Manifest status | PASS |
-| Manifest commit | 3b191a8 |
+| Manifest commit | f8d0122 |

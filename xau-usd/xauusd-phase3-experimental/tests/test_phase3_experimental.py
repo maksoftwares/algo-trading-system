@@ -775,8 +775,33 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
                     "",
                     "| Gate | Status | Evidence |",
                 "| --- | --- | --- |",
+                "| Active-market 72-hour soak | PENDING | Longest active streak pending. |",
                 "| Owner approval | PENDING | No approval file. |",
             ]
+        ),
+        encoding="utf-8",
+    )
+    (phase1_reports / "PHASE2_DEMO_COUNTDOWN.json").write_text(
+        json.dumps(
+            {
+                "wait_gates": [
+                    {
+                        "gate": "Active-market 72-hour soak",
+                        "status": "PENDING",
+                        "current": 27.92,
+                        "required": 72.0,
+                        "remaining": 44.08,
+                        "unit": "hours",
+                    }
+                ],
+                "owner_actions_now": [
+                    {
+                        "gate": "Owner approval",
+                        "status": "PENDING",
+                        "action": "Sign PHASE2_OWNER_APPROVAL.md only after objective gates pass.",
+                    }
+                ],
+            }
         ),
         encoding="utf-8",
     )
@@ -788,7 +813,10 @@ def test_phase3_completion_audit_reports_repo_complete_but_demo_blocked(tmp_path
     assert audit["phase3_repo_complete"] is True
     assert audit["demo_authorized"] is False
     assert audit["remaining_phase3_repo_items"] == []
-    assert audit["external_blockers"][0]["gate"] == "Owner approval"
+    assert audit["external_blockers"][0]["gate"] == "Active-market 72-hour soak"
+    assert audit["external_blockers"][0]["current_detail"] == "current=27.92; required=72.0; remaining=44.08; unit=hours"
+    assert audit["external_blockers"][1]["gate"] == "Owner approval"
+    assert "objective gates pass" in audit["external_blockers"][1]["current_detail"]
 
 
 def test_phase3_family_dedup_audit_detects_same_bar_distinct_level(tmp_path: Path):
@@ -848,6 +876,9 @@ def test_phase3_manifest_is_pending_when_required_reports_are_missing(tmp_path: 
     manifest = json.loads(path.read_text(encoding="utf-8"))
     assert manifest["status"] == "PENDING"
     assert manifest["files"]["phase3_cost_mode_comparison_md"]["exists"] is False
+    assert manifest["files"]["script_completion_audit"]["path"].endswith("generate_phase3_completion_audit.py")
+    assert manifest["files"]["phase3_completion_audit_md"]["path"].endswith("PHASE3_COMPLETION_AUDIT.md")
+    assert manifest["files"]["phase3_status_json"]["path"].endswith("PHASE3_EXPERIMENTAL_STATUS.json")
 
 
 def test_phase3_manifest_status_marks_dirty_worktree():

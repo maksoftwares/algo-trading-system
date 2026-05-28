@@ -1,6 +1,6 @@
 {
   "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-28T13:10:43.545712Z",
+  "created_at_utc": "2026-05-28T15:45:09.778630Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "phase3_repo_complete": true,
@@ -147,17 +147,26 @@
     {
       "gate": "VPS selection",
       "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS.",
+      "current_detail": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
     },
     {
       "gate": "VPS latency evidence",
       "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS.",
+      "current_detail": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
+    },
+    {
+      "gate": "VPS first-day verification",
+      "status": "PENDING",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS.",
+      "current_detail": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Measured cost model",
       "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS.",
+      "current_detail": "current=2.0; required=5.0; remaining=3.0; unit=fresh_market_days"
     },
     {
       "gate": "Measured-cost revalidation",
@@ -182,17 +191,20 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "evidence": "Longest active streak 53.92h; current active streak 23.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "evidence": "Longest active streak 53.92h; current active streak 27.92h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak.",
+      "current_detail": "current=27.92; required=72.0; remaining=44.08; unit=hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "evidence": "Process uptime streak 24.78h; code-freeze 24.78h; required 96h; marker 2026-05-27T10:41:50Z."
+      "evidence": "Process uptime streak 29.03h; code-freeze 29.03h; required 96h; marker 2026-05-27T10:41:50Z.",
+      "current_detail": "current=29.03; required=96.0; remaining=66.97; unit=hours"
     },
     {
       "gate": "Project owner approval",
       "status": "PENDING",
-      "evidence": "No approval file found at `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md`."
+      "evidence": "No approval file found at `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md`.",
+      "current_detail": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS."
     }
   ],
   "next_when_real_gates_pass": [
