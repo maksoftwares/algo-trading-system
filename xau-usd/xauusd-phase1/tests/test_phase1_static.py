@@ -251,6 +251,18 @@ def test_phase2_authorization_checklist_references_gap_classification_review():
     assert "expected broker maintenance gaps pause" in text
 
 
+def test_review_12_records_phase3_freeze_and_demo_gate_boundary():
+    text = (ROOT.parents[1] / "docs" / "REVIEW_12_PHASE3_FREEZE_AND_DEMO_GATE_RESPONSE.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "PHASE2_READINESS_REPORT.md remains the sole real readiness authority" in text
+    assert "Phase 3 is now a design evidence package, not an active expansion lane." in text
+    assert "outputs/ci_synthetic/" in text
+    assert "Phase 3-to-Phase 2 leakage protection" in text
+    assert "Broker-action code" in text
+
+
 def test_phase1_risk_gate_has_simulated_lock_states():
     text = (ROOT / "mt5" / "Include" / "Phase1" / "Phase1Risk.mqh").read_text(encoding="utf-8")
 
