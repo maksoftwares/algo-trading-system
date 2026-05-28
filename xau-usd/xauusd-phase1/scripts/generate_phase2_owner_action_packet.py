@@ -90,6 +90,7 @@ def generate_phase2_owner_action_packet(root: Path, output_json: Path | None = N
             "vps_ntp_sync": str(root / "docs" / "templates" / "vps_ntp_sync.template.txt"),
             "vps_backup_config": str(root / "docs" / "templates" / "vps_backup_config.template.txt"),
             "vps_rdp_recovery": str(root / "docs" / "templates" / "vps_rdp_recovery.template.txt"),
+            "vps_periodic_task": str(root / "docs" / "templates" / "vps_periodic_task.template.txt"),
         },
         "source_reports": {
             "phase2_demo_countdown": str(countdown_path),
@@ -185,12 +186,14 @@ def _commands() -> dict[str, str]:
         "copy_vps_evidence_templates": (
             "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\n"
             "Copy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\n"
-            "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt"
+            "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\n"
+            "Copy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt"
         ),
         "generate_vps_first_day_verification": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py "
             r"--files-dir C:\MT5PortableGoldMission\MQL5\Files "
-            r"--compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log"
+            r"--compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log "
+            r"--scheduler-evidence outputs\reports\vps_periodic_task.txt"
         ),
         "capture_vps_latency": (
             r".\scripts\capture_phase2_vps_latency_evidence.ps1 "
@@ -217,7 +220,7 @@ def _owner_actions(countdown: dict[str, Any], readiness_gates: list[dict[str, st
     action_text = {
         "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
         "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
-        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence.",
+        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence.",
         "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
     }
     for gate, action in action_text.items():

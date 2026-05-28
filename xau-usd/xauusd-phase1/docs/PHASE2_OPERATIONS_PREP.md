@@ -97,6 +97,8 @@ Prepared Windows Task Scheduler installer:
 
 Run first with `-WhatIfOnly` and inspect the printed command. Remove `-WhatIfOnly` only after the VPS paths are verified. The scheduled task only runs report/readiness checks; it does not start MT5, change dry-run mode, enable demo trading, or authorize broker execution.
 
+First-day VPS verification requires evidence that this scheduled task was registered and completed at least one readiness run. Copy `docs\templates\vps_periodic_task.template.txt` to `outputs\reports\vps_periodic_task.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, `task_registered: true`, and `last_run_verified: true` only after the task has regenerated the readiness reports on the selected VPS.
+
 ## Disaster Recovery Runbook
 
 Recovery target:

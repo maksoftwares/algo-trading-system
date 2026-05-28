@@ -19,6 +19,7 @@ DEFAULT_COMPILE_LOG = Path("C:/MT5PortableGoldMission/compile_Phase1DryRunShell.
 DEFAULT_NTP_EVIDENCE = Path("outputs") / "reports" / "vps_ntp_sync.txt"
 DEFAULT_BACKUP_EVIDENCE = Path("outputs") / "reports" / "vps_backup_config.txt"
 DEFAULT_RECOVERY_EVIDENCE = Path("outputs") / "reports" / "vps_rdp_recovery.txt"
+DEFAULT_SCHEDULER_EVIDENCE = Path("outputs") / "reports" / "vps_periodic_task.txt"
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,7 @@ def generate_phase2_vps_first_day_verification(
     ntp_evidence_path: Path | None = None,
     backup_evidence_path: Path | None = None,
     recovery_evidence_path: Path | None = None,
+    scheduler_evidence_path: Path | None = None,
 ) -> VpsFirstDayOutput:
     root = root.resolve()
     report_path = (root / DEFAULT_REPORT if report_path is None else report_path).resolve()
@@ -65,6 +67,9 @@ def generate_phase2_vps_first_day_verification(
     ).resolve()
     recovery_evidence_path = (
         root / DEFAULT_RECOVERY_EVIDENCE if recovery_evidence_path is None else recovery_evidence_path
+    ).resolve()
+    scheduler_evidence_path = (
+        root / DEFAULT_SCHEDULER_EVIDENCE if scheduler_evidence_path is None else scheduler_evidence_path
     ).resolve()
 
     checks = [
@@ -107,6 +112,16 @@ def generate_phase2_vps_first_day_verification(
             },
             reject_secret_values=True,
         ),
+        _manual_evidence_check(
+            "periodic_scheduler_evidence",
+            scheduler_evidence_path,
+            required_fields={
+                "evidence_status": "verified",
+                "owner_verified": "true",
+                "task_registered": "true",
+                "last_run_verified": "true",
+            },
+        ),
     ]
     status = _overall_status(checks)
     payload = {
@@ -124,6 +139,7 @@ def generate_phase2_vps_first_day_verification(
             "ntp_evidence_path": str(ntp_evidence_path),
             "backup_evidence_path": str(backup_evidence_path),
             "recovery_evidence_path": str(recovery_evidence_path),
+            "scheduler_evidence_path": str(scheduler_evidence_path),
         },
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -345,6 +361,7 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "- Copy `docs/templates/vps_ntp_sync.template.txt` to `outputs/reports/vps_ntp_sync.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, and `time_sync_enabled: true` after VPS setup.",
             "- Copy `docs/templates/vps_backup_config.template.txt` to `outputs/reports/vps_backup_config.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, `backup_configured: true`, and `restore_owner_confirmed: true` after backup/recovery proof.",
             "- Copy `docs/templates/vps_rdp_recovery.template.txt` to `outputs/reports/vps_rdp_recovery.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, and `recovery_login_verified: true` without storing passwords, secrets, tokens, or keys.",
+            "- Copy `docs/templates/vps_periodic_task.template.txt` to `outputs/reports/vps_periodic_task.txt`, then set `evidence_status: VERIFIED`, `owner_verified: true`, `task_registered: true`, and `last_run_verified: true` after the scheduled readiness check has run once.",
             "",
         ]
     )
@@ -394,6 +411,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--ntp-evidence", type=Path, default=None)
     parser.add_argument("--backup-evidence", type=Path, default=None)
     parser.add_argument("--recovery-evidence", type=Path, default=None)
+    parser.add_argument("--scheduler-evidence", type=Path, default=None)
     args = parser.parse_args(argv)
     output = generate_phase2_vps_first_day_verification(
         root=args.root,
@@ -406,6 +424,7 @@ def main(argv: list[str] | None = None) -> int:
         ntp_evidence_path=args.ntp_evidence,
         backup_evidence_path=args.backup_evidence,
         recovery_evidence_path=args.recovery_evidence,
+        scheduler_evidence_path=args.scheduler_evidence,
     )
     print(f"Phase 2 VPS first-day verification: {output.status}")
     print(output.report_path)

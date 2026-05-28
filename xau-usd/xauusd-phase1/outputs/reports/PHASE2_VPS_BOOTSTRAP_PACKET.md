@@ -30,8 +30,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1057 |
-| latest_bar | 2026.05.28 14:35:00 |
+| decision_rows | 1059 |
+| latest_bar | 2026.05.28 14:45:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -40,8 +40,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 26.83 | 72.0 | 45.17 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 27.91 | 96.0 | 68.09 | hours |
+| Active-market 72-hour soak | PENDING | 27.0 | 72.0 | 45.0 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 28.09 | 96.0 | 67.91 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions Now
@@ -50,7 +50,7 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 | --- | --- | --- |
 | VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
 | VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
-| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence. |
+| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Bootstrap Phases
@@ -76,13 +76,14 @@ Steps:
 - Clone or copy the repository to the VPS and keep secrets out of tracked files.
 - Install or copy MT5 Portable in dry-run configuration only.
 - Run the 20-sample latency capture against the broker or MT5 endpoint.
-- Copy the NTP, backup, and RDP recovery templates into outputs/reports and fill only verified values.
+- Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values.
 
 Evidence:
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_ntp_sync.txt
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_backup_config.txt
 - C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_rdp_recovery.txt
+- C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_periodic_task.txt
 
 ### After MT5 Dry-Run Deploy
 
@@ -137,12 +138,13 @@ Evidence:
 Copy-Item docs\templates\vps_ntp_sync.template.txt outputs\reports\vps_ntp_sync.txt
 Copy-Item docs\templates\vps_backup_config.template.txt outputs\reports\vps_backup_config.txt
 Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_recovery.txt
+Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_periodic_task.txt
 ```
 
 ### generate_vps_first_day_verification
 
 ```powershell
-..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py --files-dir C:\MT5PortableGoldMission\MQL5\Files --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log --scheduler-evidence outputs\reports\vps_periodic_task.txt
 ```
 
 ### generate_bootstrap_packet

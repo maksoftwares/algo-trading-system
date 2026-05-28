@@ -130,7 +130,7 @@ def _owner_actions(
     action_text = {
         "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
         "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
-        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence.",
+        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence.",
         "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
     }
     derived: list[dict[str, Any]] = []
@@ -163,13 +163,14 @@ def _bootstrap_phases(root: Path) -> list[dict[str, Any]]:
                 "Clone or copy the repository to the VPS and keep secrets out of tracked files.",
                 "Install or copy MT5 Portable in dry-run configuration only.",
                 "Run the 20-sample latency capture against the broker or MT5 endpoint.",
-                "Copy the NTP, backup, and RDP recovery templates into outputs/reports and fill only verified values.",
+                "Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values.",
             ],
             "evidence": [
                 str(root / "outputs" / "reports" / "PHASE2_VPS_LATENCY_REPORT.md"),
                 str(root / "outputs" / "reports" / "vps_ntp_sync.txt"),
                 str(root / "outputs" / "reports" / "vps_backup_config.txt"),
                 str(root / "outputs" / "reports" / "vps_rdp_recovery.txt"),
+                str(root / "outputs" / "reports" / "vps_periodic_task.txt"),
             ],
         },
         {
@@ -222,12 +223,14 @@ def _commands() -> dict[str, str]:
         "copy_vps_evidence_templates": (
             "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\n"
             "Copy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\n"
-            "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt"
+            "Copy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\n"
+            "Copy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt"
         ),
         "generate_vps_first_day_verification": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py "
             r"--files-dir C:\MT5PortableGoldMission\MQL5\Files "
-            r"--compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log"
+            r"--compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log "
+            r"--scheduler-evidence outputs\reports\vps_periodic_task.txt"
         ),
         "generate_bootstrap_packet": (
             r"..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_bootstrap_packet.py"

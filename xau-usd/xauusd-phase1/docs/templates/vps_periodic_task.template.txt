@@ -1,0 +1,19 @@
+# Phase 2 VPS periodic-readiness scheduled task evidence
+
+evidence_status: PENDING
+owner_verified: false
+task_registered: false
+last_run_verified: false
+task_name: phase2-periodic-readiness-check
+provider:
+region:
+registered_at_utc:
+last_run_at_utc:
+last_run_result:
+checker:
+
+notes:
+- Replace this template after `scripts/install_phase2_periodic_checks_task.ps1` has been run on the selected VPS.
+- Run first with `-WhatIfOnly`, then register the task only after all VPS paths are verified.
+- Mark `last_run_verified: true` only after the task has run once and regenerated `PHASE1_EXTERNAL_HEALTH.json` / `PHASE2_READINESS_REPORT.md`.
+- This scheduled task must only run report/readiness checks. It must not start MT5, change dry-run mode, enable demo trading, or authorize broker execution.

@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_VPS_BOOTSTRAP_PENDING",
-  "created_at_utc": "2026-05-28T14:36:35.551552Z",
+  "created_at_utc": "2026-05-28T14:47:13.283923Z",
   "authority": "This packet is an operational VPS bootstrap handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or paper-mode implementation.",
   "paper_mode_authorized": false,
   "demo_trading_authorized": false,
@@ -20,17 +20,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 26.83,
+      "current": 27.0,
       "required": 72.0,
-      "remaining": 45.17,
+      "remaining": 45.0,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 27.91,
+      "current": 28.09,
       "required": 96.0,
-      "remaining": 68.09,
+      "remaining": 67.91,
       "unit": "hours"
     },
     {
@@ -56,7 +56,7 @@
     {
       "gate": "VPS first-day verification",
       "status": "PENDING",
-      "action": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence."
+      "action": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Project owner approval",
@@ -65,8 +65,8 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1057,
-    "latest_bar": "2026.05.28 14:35:00",
+    "decision_rows": 1059,
+    "latest_bar": "2026.05.28 14:45:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
@@ -92,13 +92,14 @@
         "Clone or copy the repository to the VPS and keep secrets out of tracked files.",
         "Install or copy MT5 Portable in dry-run configuration only.",
         "Run the 20-sample latency capture against the broker or MT5 endpoint.",
-        "Copy the NTP, backup, and RDP recovery templates into outputs/reports and fill only verified values."
+        "Copy the NTP, backup, RDP recovery, and periodic-task templates into outputs/reports and fill only verified values."
       ],
       "evidence": [
         "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md",
         "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_ntp_sync.txt",
         "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_backup_config.txt",
-        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_rdp_recovery.txt"
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_rdp_recovery.txt",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\vps_periodic_task.txt"
       ]
     },
     {
@@ -138,8 +139,8 @@
   "commands": {
     "refresh_local_readiness": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\run_phase1_periodic_checks.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files",
     "capture_vps_latency": ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\" -SampleCount 20",
-    "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt",
-    "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log",
+    "copy_vps_evidence_templates": "Copy-Item docs\\templates\\vps_ntp_sync.template.txt outputs\\reports\\vps_ntp_sync.txt\nCopy-Item docs\\templates\\vps_backup_config.template.txt outputs\\reports\\vps_backup_config.txt\nCopy-Item docs\\templates\\vps_rdp_recovery.template.txt outputs\\reports\\vps_rdp_recovery.txt\nCopy-Item docs\\templates\\vps_periodic_task.template.txt outputs\\reports\\vps_periodic_task.txt",
+    "generate_vps_first_day_verification": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_first_day_verification.py --files-dir C:\\MT5PortableGoldMission\\MQL5\\Files --compile-log C:\\MT5PortableGoldMission\\compile_Phase1DryRunShell.log --scheduler-evidence outputs\\reports\\vps_periodic_task.txt",
     "generate_bootstrap_packet": "..\\xauusd-phase0\\.venv\\Scripts\\python.exe scripts\\generate_phase2_vps_bootstrap_packet.py",
     "install_periodic_checks_task": ".\\scripts\\install_phase2_periodic_checks_task.ps1 -Phase1Root <phase1_root> -PythonExe <phase0_python_exe> -FilesDir <mt5_files_dir> -SpreadFilesDir <spread_logger_files_dir> -CompileLog <compile_log_path> -IntervalMinutes 60 -WhatIfOnly"
   },

@@ -34,6 +34,7 @@ def test_vps_first_day_verification_pending_without_manual_vps_evidence(tmp_path
     assert any(check.name == "repo_commit_hash" and check.status == "PASS" for check in output.checks)
     assert any(check.name == "vps_latency_report" and check.status == "PENDING" for check in output.checks)
     assert any(check.name == "ntp_time_sync_evidence" and check.status == "PENDING" for check in output.checks)
+    assert any(check.name == "periodic_scheduler_evidence" and check.status == "PENDING" for check in output.checks)
     assert "Phase 2 paper-mode authorized | false" in report
 
 
@@ -47,9 +48,10 @@ def test_vps_first_day_verification_passes_with_complete_evidence(tmp_path: Path
     ntp = root / "outputs" / "reports" / "vps_ntp_sync.txt"
     backup = root / "outputs" / "reports" / "vps_backup_config.txt"
     recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
+    scheduler = root / "outputs" / "reports" / "vps_periodic_task.txt"
     _seed_git_repo(repo)
     _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
-    _write_verified_manual_evidence(ntp, backup, recovery)
+    _write_verified_manual_evidence(ntp, backup, recovery, scheduler)
 
     output = module.generate_phase2_vps_first_day_verification(
         root=root,
@@ -60,6 +62,7 @@ def test_vps_first_day_verification_passes_with_complete_evidence(tmp_path: Path
         ntp_evidence_path=ntp,
         backup_evidence_path=backup,
         recovery_evidence_path=recovery,
+        scheduler_evidence_path=scheduler,
     )
 
     payload = json.loads(output.json_path.read_text(encoding="utf-8"))
@@ -79,9 +82,10 @@ def test_vps_first_day_verification_rejects_template_placeholders(tmp_path: Path
     ntp = root / "outputs" / "reports" / "vps_ntp_sync.txt"
     backup = root / "outputs" / "reports" / "vps_backup_config.txt"
     recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
+    scheduler = root / "outputs" / "reports" / "vps_periodic_task.txt"
     _seed_git_repo(repo)
     _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
-    for path in (ntp, backup, recovery):
+    for path in (ntp, backup, recovery, scheduler):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(
             "\n".join(
@@ -107,6 +111,7 @@ def test_vps_first_day_verification_rejects_template_placeholders(tmp_path: Path
         ntp_evidence_path=ntp,
         backup_evidence_path=backup,
         recovery_evidence_path=recovery,
+        scheduler_evidence_path=scheduler,
     )
 
     assert output.status == "PENDING"
@@ -128,9 +133,10 @@ def test_vps_first_day_verification_fails_on_unredacted_recovery_secret(tmp_path
     ntp = root / "outputs" / "reports" / "vps_ntp_sync.txt"
     backup = root / "outputs" / "reports" / "vps_backup_config.txt"
     recovery = root / "outputs" / "reports" / "vps_rdp_recovery.txt"
+    scheduler = root / "outputs" / "reports" / "vps_periodic_task.txt"
     _seed_git_repo(repo)
     _write_runtime_evidence(root, files_dir, terminal, compile_log, latency_status="PASS")
-    _write_verified_manual_evidence(ntp, backup, recovery)
+    _write_verified_manual_evidence(ntp, backup, recovery, scheduler)
     recovery.write_text(
         "\n".join(
             [
@@ -152,6 +158,7 @@ def test_vps_first_day_verification_fails_on_unredacted_recovery_secret(tmp_path
         ntp_evidence_path=ntp,
         backup_evidence_path=backup,
         recovery_evidence_path=recovery,
+        scheduler_evidence_path=scheduler,
     )
 
     assert output.status == "FAIL"
@@ -251,7 +258,7 @@ def _write_runtime_evidence(
     )
 
 
-def _write_verified_manual_evidence(ntp: Path, backup: Path, recovery: Path) -> None:
+def _write_verified_manual_evidence(ntp: Path, backup: Path, recovery: Path, scheduler: Path) -> None:
     ntp.parent.mkdir(parents=True, exist_ok=True)
     ntp.write_text(
         "\n".join(
@@ -285,6 +292,19 @@ def _write_verified_manual_evidence(ntp: Path, backup: Path, recovery: Path) -> 
                 "recovery_login_verified: true",
                 "password: REDACTED",
                 "secret: REDACTED",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    scheduler.write_text(
+        "\n".join(
+            [
+                "evidence_status: VERIFIED",
+                "owner_verified: true",
+                "task_registered: true",
+                "last_run_verified: true",
+                "task_name: phase2-periodic-readiness-check",
+                "last_run_result: PASS",
             ]
         ),
         encoding="utf-8",

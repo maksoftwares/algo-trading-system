@@ -40,9 +40,16 @@ def test_owner_action_packet_summarizes_wait_gates_and_owner_steps(tmp_path: Pat
     assert "capture_phase2_vps_latency_evidence.ps1" in payload["commands"]["capture_vps_latency"]
     assert "-SampleCount 20" in payload["commands"]["capture_vps_latency"]
     assert payload["source_reports"]["phase2_vps_bootstrap"].endswith("PHASE2_VPS_BOOTSTRAP_PACKET.md")
+    assert payload["owner_templates"]["vps_periodic_task"].endswith(
+        "docs\\templates\\vps_periodic_task.template.txt"
+    ) or payload["owner_templates"]["vps_periodic_task"].endswith(
+        "docs/templates/vps_periodic_task.template.txt"
+    )
     assert "install_phase2_periodic_checks_task.ps1" in payload["commands"]["install_periodic_checks_task_dry_run"]
     assert "-WhatIfOnly" in payload["commands"]["install_periodic_checks_task_dry_run"]
     assert "Copy-Item docs\\templates\\vps_ntp_sync.template.txt" in markdown
+    assert "Copy-Item docs\\templates\\vps_periodic_task.template.txt" in markdown
+    assert "--scheduler-evidence outputs\\reports\\vps_periodic_task.txt" in markdown
     assert "PHASE2_VPS_BOOTSTRAP_PACKET.md" in markdown
     assert "phase2_vps_selection_decision.template.md" in markdown
     assert "This packet is an owner handoff only" in markdown

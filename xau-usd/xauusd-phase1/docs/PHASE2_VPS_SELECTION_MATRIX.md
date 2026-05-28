@@ -188,6 +188,7 @@ Manual evidence must be created from the templates so placeholders cannot accide
 Copy-Item docs\templates\vps_ntp_sync.template.txt outputs\reports\vps_ntp_sync.txt
 Copy-Item docs\templates\vps_backup_config.template.txt outputs\reports\vps_backup_config.txt
 Copy-Item docs\templates\vps_rdp_recovery.template.txt outputs\reports\vps_rdp_recovery.txt
+Copy-Item docs\templates\vps_periodic_task.template.txt outputs\reports\vps_periodic_task.txt
 ```
 
 Then fill the copied files after VPS setup. The verifier requires:
@@ -208,6 +209,12 @@ vps_rdp_recovery.txt:
 evidence_status: VERIFIED
 owner_verified: true
 recovery_login_verified: true
+
+vps_periodic_task.txt:
+evidence_status: VERIFIED
+owner_verified: true
+task_registered: true
+last_run_verified: true
 ```
 
 Do not store passwords, API tokens, private keys, or unredacted secret values in any evidence file.
@@ -220,7 +227,8 @@ Generate the canonical packet from the Phase 1 root:
   --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log `
   --ntp-evidence outputs\reports\vps_ntp_sync.txt `
   --backup-evidence outputs\reports\vps_backup_config.txt `
-  --recovery-evidence outputs\reports\vps_rdp_recovery.txt
+  --recovery-evidence outputs\reports\vps_rdp_recovery.txt `
+  --scheduler-evidence outputs\reports\vps_periodic_task.txt
 ```
 
-The report remains `PENDING` until NTP/time-sync, backup, recovery-login, latency, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are all present.
+The report remains `PENDING` until NTP/time-sync, backup, recovery-login, periodic scheduler, latency, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are all present.

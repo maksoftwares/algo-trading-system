@@ -45,6 +45,14 @@ def test_vps_bootstrap_packet_sequences_demo_handoff_without_authorization(tmp_p
     assert "PHASE2_OWNER_APPROVAL.md" in markdown
     assert "install_phase2_periodic_checks_task.ps1" in markdown
     assert "-WhatIfOnly" in payload["commands"]["install_periodic_checks_task"]
+    assert "Copy-Item docs\\templates\\vps_periodic_task.template.txt" in markdown
+    assert "--scheduler-evidence outputs\\reports\\vps_periodic_task.txt" in markdown
+    assert any(
+        str(path).endswith("outputs\\reports\\vps_periodic_task.txt")
+        or str(path).endswith("outputs/reports/vps_periodic_task.txt")
+        for phase in payload["bootstrap_phases"]
+        for path in phase["evidence"]
+    )
     assert "This packet is an operational VPS bootstrap handoff only" in markdown
 
 

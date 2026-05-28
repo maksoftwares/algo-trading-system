@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T14:36:35.536885Z",
+  "created_at_utc": "2026-05-28T14:47:13.265646Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -56,12 +56,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 26.83h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 53.92h; current active streak 27.0h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 27.91h; code-freeze 27.91h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 28.09h; code-freeze 28.09h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -73,17 +73,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 26.83,
+      "current": 27.0,
       "required": 72.0,
-      "remaining": 45.17,
+      "remaining": 45.0,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 27.91,
+      "current": 28.09,
       "required": 96.0,
-      "remaining": 68.09,
+      "remaining": 67.91,
       "unit": "hours"
     },
     {
@@ -109,7 +109,7 @@
     {
       "gate": "VPS first-day verification",
       "status": "PENDING",
-      "action": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence."
+      "action": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Project owner approval",
@@ -118,19 +118,19 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1057,
-    "latest_bar": "2026.05.28 14:35:00",
+    "decision_rows": 1059,
+    "latest_bar": "2026.05.28 14:45:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "26847",
+    "observed_rows": "26975",
     "required_rows": "500",
     "observed_days": "2",
     "required_days": "5",
-    "source_rows": "83211",
+    "source_rows": "83339",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",
