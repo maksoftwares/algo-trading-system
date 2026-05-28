@@ -2,13 +2,13 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: PENDING
+Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 
 ## Decision
 
 | Field | Value |
 | --- | --- |
-| Phase 3 repo-side complete | False |
+| Phase 3 repo-side complete | True |
 | Demo/paper authorized | False |
 | Real Phase 1 acceptance | PENDING |
 | Real Phase 2 readiness | PENDING |
@@ -35,14 +35,12 @@ Overall status: PENDING
 | Observer conflict playbook is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md |
 | Future real-implementation prompt is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
 | Portable review bundle exists. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
-| Phase 3 manifest is a clean PASS snapshot. | PENDING | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
+| Phase 3 manifest is a clean PASS snapshot. | PASS | manifest=PASS; clean=True | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 | Root status dashboard is updated from Phase 3 status. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\status.html |
 
 ## Remaining Phase 3 Repo Items
 
-| Requirement | Status | Detail | Evidence |
-| --- | --- | --- | --- |
-| Phase 3 manifest is a clean PASS snapshot. | PENDING | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
+None. All repo-side Phase 3 experimental requirements are complete.
 
 ## External Gates Still Blocking Demo
 
