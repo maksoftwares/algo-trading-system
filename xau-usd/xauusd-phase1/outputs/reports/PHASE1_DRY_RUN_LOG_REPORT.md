@@ -19,7 +19,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 859. |
+| decision_rows | PASS | Decision rows: 1019. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
@@ -33,10 +33,10 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 ## Summary
 
-- Decision rows: 859
+- Decision rows: 1019
 - Unique run IDs: 6
 - Latest run ID: phase1-dry-run-v0.7
-- Current run rows: 126
+- Current run rows: 286
 
 ## Risk States
 
@@ -46,13 +46,13 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 855 |
+| NORMAL | 1015 |
 
 ## Block Reasons
 
 | Value | Count |
 | --- | --- |
-| COST_REVALIDATION_PENDING | 10 |
+| COST_REVALIDATION_PENDING | 22 |
 | COST_SUSPENDED | 7 |
 | LOCAL_CLOCK_DRIFT | 1 |
 | LOCKED_DAILY_LOSS | 1 |
@@ -61,7 +61,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | MANUAL_LOCK | 1 |
 | SPREAD_TOO_HIGH | 7 |
 | STALE_TICK | 1 |
-| phase1_dry_run_only | 829 |
+| phase1_dry_run_only | 977 |
 
 ## Current Run Block Reasons
 
@@ -69,9 +69,9 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 
 | Value | Count |
 | --- | --- |
-| COST_REVALIDATION_PENDING | 10 |
+| COST_REVALIDATION_PENDING | 22 |
 | SPREAD_TOO_HIGH | 1 |
-| phase1_dry_run_only | 115 |
+| phase1_dry_run_only | 263 |
 
 ## Breakout-Retest Observer
 
@@ -79,24 +79,24 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 
 | Value | Count |
 | --- | --- |
-| WAIT_CONFIRMATION | 1 |
-| WAIT_LEVEL_BREAK_RETEST | 808 |
-| WOULD_SIGNAL | 50 |
+| WAIT_CONFIRMATION | 2 |
+| WAIT_LEVEL_BREAK_RETEST | 955 |
+| WOULD_SIGNAL | 62 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 429 |
-| NONE | 1 |
-| SHORT | 429 |
+| LONG | 506 |
+| NONE | 2 |
+| SHORT | 511 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 809 |
-| true | 50 |
+| false | 957 |
+| true | 62 |
 
 ## Swing Breakout-Retest Observer
 
@@ -104,27 +104,27 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 
 | Value | Count |
 | --- | --- |
-| WAIT_CONFIRMATION | 1 |
-| WAIT_LEVEL_BREAK_RETEST | 817 |
-| WOULD_SIGNAL | 41 |
+| WAIT_CONFIRMATION | 2 |
+| WAIT_LEVEL_BREAK_RETEST | 969 |
+| WOULD_SIGNAL | 48 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 429 |
-| NONE | 1 |
-| SHORT | 429 |
+| LONG | 506 |
+| NONE | 2 |
+| SHORT | 511 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 818 |
-| true | 41 |
+| false | 971 |
+| true | 48 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.7 | 2026.05.27 22:05:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.7 | 2026.05.28 11:25:00 | WOULD_SIGNAL | SHORT | BREAKOUT_RETEST_SHORT_DRY_RUN | 4389.67 | true |

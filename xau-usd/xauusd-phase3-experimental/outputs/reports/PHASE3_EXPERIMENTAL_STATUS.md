@@ -18,7 +18,7 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | --- | --- |
 | Phase 1 acceptance | PENDING |
 | Phase 2 readiness | PENDING |
-| Latest Phase 1 bar | 2026.05.27 22:05:00 |
+| Latest Phase 1 bar | 2026.05.28 11:25:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 

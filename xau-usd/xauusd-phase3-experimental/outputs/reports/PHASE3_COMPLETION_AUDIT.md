@@ -48,8 +48,8 @@ None. All repo-side Phase 3 experimental requirements are complete.
 | Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |
 | Phase 1 acceptance | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS. |
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 10.33h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 11.39h; code-freeze 11.39h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 23.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 24.78h; code-freeze 24.78h; required 96h; marker 2026-05-27T10:41:50Z. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## When Real Gates Pass

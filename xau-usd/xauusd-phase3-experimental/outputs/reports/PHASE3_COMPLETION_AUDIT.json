@@ -1,6 +1,6 @@
 {
   "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-28T11:23:12.910147Z",
+  "created_at_utc": "2026-05-28T11:29:16.227160Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "phase3_repo_complete": true,
@@ -147,12 +147,12 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "evidence": "Longest active streak 53.92h; current active streak 10.33h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "evidence": "Longest active streak 53.92h; current active streak 23.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "evidence": "Process uptime streak 11.39h; code-freeze 11.39h; required 96h; marker 2026-05-27T10:41:50Z."
+      "evidence": "Process uptime streak 24.78h; code-freeze 24.78h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "gate": "Project owner approval",
