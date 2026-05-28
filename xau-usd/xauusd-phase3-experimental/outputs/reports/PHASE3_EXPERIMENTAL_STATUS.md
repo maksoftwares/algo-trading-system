@@ -83,9 +83,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Lifecycle guard max DD R | -3.5803 |
 | Lifecycle guard net improvement R | 7.1645 |
 | Lifecycle guard DD improvement R | 8.2192 |
-| Completion audit | PENDING |
-| Phase 3 repo complete | False |
+| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
+| Phase 3 repo complete | True |
 | Demo authorized | False |
 | External blockers | 10 |
-| Manifest status | DIRTY_WORKTREE |
-| Manifest commit | 8cc2b76 |
+| Manifest status | PASS |
+| Manifest commit | f39267b |
