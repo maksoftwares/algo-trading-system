@@ -28,6 +28,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     (phase0_reports / "PHASE0_VERDICT.md").write_text(
         "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
@@ -71,6 +72,12 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "h4_us_session_liquidity_reversal_v0" in html
     assert "HASH_LOCKED_SMOKE_PASS_PENDING_MATRIX" in html
     assert "Five-day soak" in html
+    assert "Demo Trading Countdown" in html
+    assert "Demo Owner Moves" in html
+    assert "DEMO_NOT_READY" in html
+    assert "Paper mode authorized" in html
+    assert "Active-market 72-hour soak" in html
+    assert "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1" in html
     assert "Candidate-level D2 FAIL preserved; owner-accepted family-clustered D2 PASS; D1/D3/D4 remain closed" in html
     assert "D2 Reality Check/SPA FAIL; D1/D3/D4 remain closed" not in html
     assert "Observer conflicts" in html
@@ -155,6 +162,7 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -168,9 +176,11 @@ def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: 
         phase1_reports / "PHASE1_STATUS_SUMMARY.json",
         soak={"progress_pct": 50.0, "observed_days": 2.5, "required_days": 5},
     )
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json", pending_gate_count=123)
     errors = freshness.verify_status_dashboard_freshness(repo, output.output_path)
     assert any("status.html is missing soak observed days: 2.5" in error for error in errors)
     assert any("status.html is missing soak progress pct: 50.00%" in error for error in errors)
+    assert any("status.html is missing demo countdown pending gate count: 123" in error for error in errors)
 
 
 def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_content_matches(tmp_path: Path):
@@ -188,6 +198,7 @@ def test_status_dashboard_freshness_validator_ignores_checkout_mtime_when_conten
     _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "PENDING")
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "PENDING")
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -217,6 +228,7 @@ def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_
     )
     _write_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md", "FAIL")
     _write_status(phase1_reports / "PHASE2_READINESS_REPORT.md", "FAIL")
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     (phase0_reports / "PHASE0_VERDICT.md").write_text(
         "| breakout_retest | PASS | PASS | PASS | PASS | PASS | PASS |\n",
         encoding="utf-8",
@@ -319,6 +331,50 @@ def _write_phase1_summary(
                 },
                 "soak": soak,
                 "would_signal": {"rows": 10, "clusters": 10},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase2_countdown(path: Path, pending_gate_count: int = 10) -> None:
+    path.write_text(
+        json.dumps(
+            {
+                "status": "DEMO_NOT_READY",
+                "phase2_readiness_status": "PENDING",
+                "phase1_acceptance_status": "PENDING",
+                "measured_cost_status": "PENDING",
+                "paper_mode_authorized": False,
+                "broker_execution_authorized": False,
+                "live_trading_authorized": False,
+                "pending_gate_count": pending_gate_count,
+                "wait_gates": [
+                    {
+                        "gate": "Active-market 72-hour soak",
+                        "status": "PENDING",
+                        "current": 25.67,
+                        "required": 72.0,
+                        "remaining": 46.33,
+                        "unit": "hours",
+                    },
+                    {
+                        "gate": "Measured cost model",
+                        "status": "PENDING",
+                        "current": 2.0,
+                        "required": 5.0,
+                        "remaining": 3.0,
+                        "unit": "fresh_market_days",
+                    },
+                ],
+                "owner_actions_now": [
+                    {
+                        "gate": "VPS latency evidence",
+                        "status": "PENDING",
+                        "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
+                    }
+                ],
+                "forbidden_until_ready": ["paper-mode implementation", "live capital"],
             }
         ),
         encoding="utf-8",

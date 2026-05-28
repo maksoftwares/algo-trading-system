@@ -56,6 +56,7 @@ def generate_project_status_page(
     phase3_reports = phase3_root / "outputs" / "reports"
 
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
+    phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase3_status = _read_json(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
     fixed_notional = _parse_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
     measured_cost = _parse_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
@@ -96,6 +97,7 @@ def generate_project_status_page(
             d2_decision=d2_decision,
             candidates=candidates,
             account_example=account_example,
+            phase2_countdown=phase2_countdown,
             phase3_status=phase3_status,
         ),
         encoding="utf-8",
@@ -143,6 +145,7 @@ def _render_html(
     d2_decision: D2Decision,
     candidates: list[dict[str, str]],
     account_example: dict[str, Any],
+    phase2_countdown: dict[str, Any],
     phase3_status: dict[str, Any],
 ) -> str:
     status_fields = _mapping(summary.get("status"))
@@ -229,6 +232,11 @@ def _render_html(
                 "Cost Lens",
                 _cost_table(fixed_notional, measured_cost),
             ),
+            "      </section>",
+            "",
+            '      <section class="grid lower-grid">',
+            _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown)),
+            _panel("Demo Owner Moves", _demo_owner_moves_panel(phase2_countdown)),
             "      </section>",
             "",
             '      <section class="panel candidates-panel">',
@@ -532,6 +540,7 @@ th.status-col, td.status-col { width: 1%; white-space: nowrap; padding-left: 6px
 .kv table td:first-child { color: var(--muted); font-weight: 700; width: 46%; }
 .list { margin: 0; padding-left: 18px; line-height: 1.7; color: var(--ink); }
 .muted { color: var(--muted); }
+.mini-heading { margin: 14px 0 8px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0; }
 @media (max-width: 1280px) {
   .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .focus-grid { grid-template-columns: 1fr; }
@@ -961,6 +970,84 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ("Execution eligibility", "BLOCKED" if lifecycle in {"COST_REVALIDATION_PENDING", "COST_SUSPENDED"} else "DRY_RUN_ONLY"),
     ]
     return _key_value_table(rows)
+
+
+def _demo_countdown_panel(countdown: dict[str, Any]) -> str:
+    wait_gates = _mapping_rows(countdown.get("wait_gates"))
+    summary_rows = [
+        ("Overall status", _status_badge(_cell(countdown.get("status", "UNKNOWN")))),
+        ("Phase 2 readiness", _status_badge(_cell(countdown.get("phase2_readiness_status", "UNKNOWN")))),
+        ("Phase 1 acceptance", _status_badge(_cell(countdown.get("phase1_acceptance_status", "UNKNOWN")))),
+        ("Measured cost model", _status_badge(_cell(countdown.get("measured_cost_status", "UNKNOWN")))),
+        ("Pending gates", _esc(_cell(countdown.get("pending_gate_count", "n/a")))),
+        ("Paper mode authorized", _status_badge(str(countdown.get("paper_mode_authorized", False)).lower())),
+        ("Broker execution authorized", _status_badge(str(countdown.get("broker_execution_authorized", False)).lower())),
+        ("Live trading authorized", _status_badge(str(countdown.get("live_trading_authorized", False)).lower())),
+    ]
+    return "\n".join(
+        [
+            _raw_key_value_table(summary_rows),
+            '<h3 class="mini-heading">Remaining Wait Gates</h3>',
+            _demo_wait_gate_table(wait_gates),
+        ]
+    )
+
+
+def _demo_owner_moves_panel(countdown: dict[str, Any]) -> str:
+    actions = _mapping_rows(countdown.get("owner_actions_now"))
+    forbidden = [str(item) for item in countdown.get("forbidden_until_ready", [])]
+    if not actions:
+        action_table = "<p class=\"muted\">No owner-side action is currently listed in the countdown report.</p>"
+    else:
+        action_table = _html_table(
+            [
+                {
+                    "Gate": _esc(_cell(row.get("gate"))),
+                    "Status": _status_badge(_cell(row.get("status"))),
+                    "Action": _esc(_cell(row.get("action"))),
+                }
+                for row in actions
+            ],
+            ("Gate", "Status", "Action"),
+            raw_columns={"Status"},
+        )
+    return "\n".join(
+        [
+            action_table,
+            '<h3 class="mini-heading">Still Forbidden</h3>',
+            _list(forbidden),
+        ]
+    )
+
+
+def _demo_wait_gate_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">Countdown wait gates are not available yet.</p>"
+    return _html_table(
+        [
+            {
+                "Gate": _esc(_cell(row.get("gate"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Current": _esc(_cell(row.get("current"))),
+                "Required": _esc(_cell(row.get("required"))),
+                "Remaining": _esc(_cell(row.get("remaining"))),
+                "Unit": _esc(_cell(row.get("unit"))),
+            }
+            for row in rows
+        ],
+        ("Gate", "Status", "Current", "Required", "Remaining", "Unit"),
+        raw_columns={"Status"},
+        numeric_columns={"Current", "Required", "Remaining"},
+    )
+
+
+def _status_badge(value: str) -> str:
+    return f'<span class="pill {_status_class(value)}">{_esc(value)}</span>'
+
+
+def _raw_key_value_table(rows: list[tuple[str, str]]) -> str:
+    table_rows = [{"Metric": _esc(key), "Value": value} for key, value in rows]
+    return '<div class="kv">' + _html_table(table_rows, ("Metric", "Value"), raw_columns={"Value"}) + "</div>"
 
 
 def _milestone_table(
@@ -1807,6 +1894,10 @@ def _mapping(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
+def _mapping_rows(value: Any) -> list[dict[str, Any]]:
+    return value if isinstance(value, list) else []
+
+
 def _cell(value: Any) -> str:
     if value is None:
         return "n/a"
@@ -1823,13 +1914,15 @@ def _link(path: str) -> str:
 
 def _status_class(value: str) -> str:
     upper = value.upper()
+    if upper == "FALSE":
+        return "pass"
     if "EXPERIMENTAL" in upper:
         return "pending"
     if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper or "GREEN" in upper:
         return "pass"
     if "FAIL" in upper or "REJECTED" in upper or "BLOCKED" in upper:
         return "fail"
-    if "PENDING" in upper or "PROVISIONAL" in upper or "WARN" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:
+    if "PENDING" in upper or "PROVISIONAL" in upper or "WARN" in upper or "NOT_READY" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:
         return "pending"
     return "unknown"
 

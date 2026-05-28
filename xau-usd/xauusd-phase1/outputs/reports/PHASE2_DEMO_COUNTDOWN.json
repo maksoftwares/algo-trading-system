@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T13:28:02.198460Z",
+  "created_at_utc": "2026-05-28T13:32:43.737396Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -51,12 +51,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 25.67h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 53.92h; current active streak 25.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 26.77h; code-freeze 26.77h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 26.85h; code-freeze 26.85h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -68,17 +68,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 25.67,
+      "current": 25.75,
       "required": 72.0,
-      "remaining": 46.33,
+      "remaining": 46.25,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 26.77,
+      "current": 26.85,
       "required": 96.0,
-      "remaining": 69.23,
+      "remaining": 69.15,
       "unit": "hours"
     },
     {
@@ -108,19 +108,19 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1043,
-    "latest_bar": "2026.05.28 13:25:00",
+    "decision_rows": 1044,
+    "latest_bar": "2026.05.28 13:30:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "26024",
+    "observed_rows": "26081",
     "required_rows": "500",
     "observed_days": "2",
     "required_days": "5",
-    "source_rows": "82388",
+    "source_rows": "82445",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",

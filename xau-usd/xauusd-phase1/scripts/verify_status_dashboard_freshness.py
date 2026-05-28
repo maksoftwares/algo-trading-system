@@ -17,6 +17,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     canonical_paths = {
         "phase1_summary": phase1_reports / "PHASE1_STATUS_SUMMARY.json",
         "measured_cost": phase0_reports / "MEASURED_COST_MODEL.md",
+        "phase2_demo_countdown": phase1_reports / "PHASE2_DEMO_COUNTDOWN.json",
         "phase2_readiness": phase1_reports / "PHASE2_READINESS_REPORT.md",
         "phase3_status": phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
     }
@@ -31,6 +32,7 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
 
     phase1_summary = _read_json(canonical_paths["phase1_summary"])
     phase3_status = _read_json(canonical_paths["phase3_status"])
+    phase2_countdown = _read_json(canonical_paths["phase2_demo_countdown"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])
     phase2_status = _markdown_status(canonical_paths["phase2_readiness"])
 
@@ -52,6 +54,15 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "measured cost status": measured_cost.get("status"),
         "measured cost observed rows": measured_cost.get("observed_rows"),
         "measured cost observed days": measured_cost.get("observed_days"),
+        "demo countdown status": phase2_countdown.get("status"),
+        "demo countdown pending gate count": phase2_countdown.get("pending_gate_count"),
+        "demo countdown paper authorization": str(phase2_countdown.get("paper_mode_authorized", "")).lower(),
+        "demo countdown broker execution authorization": str(
+            phase2_countdown.get("broker_execution_authorized", "")
+        ).lower(),
+        "demo countdown live trading authorization": str(
+            phase2_countdown.get("live_trading_authorized", "")
+        ).lower(),
         "phase2 readiness status": phase2_status,
         "phase3 experimental status": phase3_status.get("status"),
         "entry_exit_proxy median net": median_net_by_mode.get("entry_exit_proxy"),
@@ -75,6 +86,14 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "demo rehearsal blocked events": phase3_rehearsal.get("blocked_events"),
         "demo rehearsal can start real demo": phase3_rehearsal.get("can_start_real_demo"),
     }
+    for wait_gate in phase2_countdown.get("wait_gates", []):
+        if not isinstance(wait_gate, dict):
+            continue
+        gate = str(wait_gate.get("gate", ""))
+        if gate:
+            core_expectations[f"demo wait gate {gate}"] = gate
+        if wait_gate.get("remaining") not in {None, ""}:
+            core_expectations[f"demo wait gate {gate} remaining"] = wait_gate.get("remaining")
     for label, value in core_expectations.items():
         if value is None or value == "":
             continue
