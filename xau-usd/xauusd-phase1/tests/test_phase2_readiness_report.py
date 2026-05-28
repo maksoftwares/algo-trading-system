@@ -452,6 +452,10 @@ def _write_phase2_schema_report(report_dir: Path) -> None:
         "# Phase 2 VPS Latency Report\n\nOverall status: PASS\n",
         encoding="utf-8",
     )
+    (report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md").write_text(
+        "# Phase 2 VPS First-Day Verification\n\nOverall status: PASS\n",
+        encoding="utf-8",
+    )
 
 
 def _approval_text() -> str:

@@ -28,7 +28,7 @@ def test_phase2_demo_countdown_tracks_wait_gates_and_owner_actions(tmp_path: Pat
     payload = json.loads(output.json_path.read_text(encoding="utf-8"))
     markdown = output.markdown_path.read_text(encoding="utf-8")
     assert output.status == "DEMO_NOT_READY"
-    assert output.pending_gate_count == 5
+    assert output.pending_gate_count == 6
     assert payload["paper_mode_authorized"] is False
     assert payload["broker_execution_authorized"] is False
     assert payload["live_trading_authorized"] is False
@@ -36,6 +36,7 @@ def test_phase2_demo_countdown_tracks_wait_gates_and_owner_actions(tmp_path: Pat
     assert any(item["gate"] == "Process/code-freeze 96-hour gate" and item["remaining"] == 69.46 for item in payload["wait_gates"])
     assert any(item["gate"] == "Measured cost model" and item["remaining"] == 3.0 for item in payload["wait_gates"])
     assert any(item["gate"] == "VPS selection" for item in payload["owner_actions_now"])
+    assert any(item["gate"] == "VPS first-day verification" for item in payload["owner_actions_now"])
     assert "This report is a countdown aid only" in markdown
     assert "Paper mode authorized" in markdown
     assert "false" in markdown
@@ -73,6 +74,7 @@ def _write_readiness(path: Path) -> None:
                 "| --- | --- | --- |",
                 "| Phase 2 preparation spec | PASS | complete |",
                 "| VPS selection | PENDING | owner decision required |",
+                "| VPS first-day verification | PENDING | first-day packet incomplete |",
                 "| Measured cost model | PENDING | two fresh days observed |",
                 "| Active-market 72-hour soak | PENDING | waiting |",
                 "| Process/code-freeze 96-hour gate | PENDING | waiting |",

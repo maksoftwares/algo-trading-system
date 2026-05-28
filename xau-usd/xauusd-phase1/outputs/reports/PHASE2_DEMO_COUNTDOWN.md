@@ -16,14 +16,14 @@ Overall status: DEMO_NOT_READY
 | Paper mode authorized | false |
 | Broker execution authorized | false |
 | Live trading authorized | false |
-| Pending gates | 10 |
+| Pending gates | 11 |
 
 ## Wait Gates
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 25.83 | 72.0 | 46.17 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 26.96 | 96.0 | 69.04 | hours |
+| Active-market 72-hour soak | PENDING | 26.0 | 72.0 | 46.0 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 27.11 | 96.0 | 68.89 | hours |
 | Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
 
 ## Owner Actions
@@ -32,14 +32,15 @@ Overall status: DEMO_NOT_READY
 | --- | --- | --- |
 | VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
 | VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
+| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Runtime Snapshot
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1045 |
-| latest_bar | 2026.05.28 13:35:00 |
+| decision_rows | 1047 |
+| latest_bar | 2026.05.28 13:45:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |

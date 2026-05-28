@@ -103,6 +103,7 @@ def _write_readiness(path: Path, status: str, pending: bool) -> None:
                 f"| Project owner approval | {gate_status} | owner approval evidence |",
                 f"| VPS selection | {gate_status} | vps selection evidence |",
                 f"| VPS latency evidence | {gate_status} | latency evidence |",
+                f"| VPS first-day verification | {gate_status} | first-day evidence |",
                 "",
             ]
         ),

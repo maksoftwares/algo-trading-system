@@ -103,6 +103,11 @@ def generate_phase2_readiness_report(
             report_dir / "PHASE2_VPS_LATENCY_REPORT.md",
             required="PASS",
         ),
+        _status_or_pending_gate(
+            "VPS first-day verification",
+            report_dir / "PHASE2_VPS_FIRST_DAY_VERIFICATION.md",
+            required="PASS",
+        ),
         _file_gate("Cost reporting policy", _phase0_root(root) / "docs" / "COST_REPORTING_POLICY.md"),
         _status_or_pending_gate(
             "Fixed-notional reporting",

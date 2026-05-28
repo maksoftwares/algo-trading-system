@@ -27,6 +27,7 @@ from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
 from generate_phase2_readiness_report import generate_phase2_readiness_report
+from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
 from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
@@ -43,6 +44,7 @@ class PeriodicCheckOutput:
     acceptance_status: str
     phase2_readiness_status: str
     phase2_demo_preflight_status: str
+    vps_first_day_status: str
     review_index_status: str
 
 
@@ -134,6 +136,11 @@ def run_phase1_periodic_checks(
         phase1_root=root,
         report_path=report_dir / "PHASE1_OBSERVER_PARITY_REPORT.md",
     )
+    vps_first_day = generate_phase2_vps_first_day_verification(
+        root=root,
+        files_dir=files_dir,
+        compile_log=compile_log,
+    )
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,
         report_path=report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
@@ -188,6 +195,7 @@ def run_phase1_periodic_checks(
         acceptance_status=acceptance.status,
         phase2_readiness_status=phase2_readiness.status,
         phase2_demo_preflight_status=phase2_preflight.status,
+        vps_first_day_status=vps_first_day.status,
         review_index_status=review_index.status,
     )
 
@@ -228,6 +236,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Acceptance: {output.acceptance_status}")
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")
     print(f"Phase 2 demo preflight: {output.phase2_demo_preflight_status}")
+    print(f"VPS first-day verification: {output.vps_first_day_status}")
     print(f"Review index: {output.review_index_status}")
     return 0 if output.status == "PASS" else 1
 

@@ -176,3 +176,16 @@ After selection and setup, the first VPS verification packet must include:
 - backup configuration evidence
 - latency test output
 - RDP recovery-login confirmation
+
+Generate the canonical packet from the Phase 1 root:
+
+```powershell
+..\xauusd-phase0\.venv\Scripts\python.exe scripts\generate_phase2_vps_first_day_verification.py `
+  --files-dir C:\MT5PortableGoldMission\MQL5\Files `
+  --compile-log C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log `
+  --ntp-evidence outputs\reports\vps_ntp_sync.txt `
+  --backup-evidence outputs\reports\vps_backup_config.txt `
+  --recovery-evidence outputs\reports\vps_rdp_recovery.txt
+```
+
+The report remains `PENDING` until NTP/time-sync, backup, recovery-login, latency, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are all present.

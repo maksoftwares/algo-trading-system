@@ -133,13 +133,14 @@ def _wait_gates(soak: dict[str, Any], measured: dict[str, Any], gates: list[dict
 
 def _owner_actions(gates: list[dict[str, str]]) -> list[dict[str, str]]:
     actions = []
-    for gate in ("VPS selection", "VPS latency evidence", "Project owner approval"):
+    for gate in ("VPS selection", "VPS latency evidence", "VPS first-day verification", "Project owner approval"):
         status = _gate_status(gates, gate)
         if status == "PASS":
             continue
         action = {
             "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
             "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
+            "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, MT5 path, compile, startup, decision, and health evidence.",
             "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
         }[gate]
         actions.append({"gate": gate, "status": status, "action": action})

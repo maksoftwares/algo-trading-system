@@ -58,6 +58,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
         _gate_check(readiness_gates, "Project owner approval"),
         _gate_check(readiness_gates, "VPS selection"),
         _gate_check(readiness_gates, "VPS latency evidence"),
+        _gate_check(readiness_gates, "VPS first-day verification"),
         _countdown_check(countdown, countdown_path),
         _latest_boundary_check(latest, summary_path),
         _countdown_authority_boundary_check(countdown, countdown_path),
