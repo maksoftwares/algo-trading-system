@@ -602,12 +602,12 @@ def _write_phase2_experimental_demo_attachments(path: Path) -> None:
                         "status": "PROVISIONAL",
                         "symbol": "USDJPY",
                         "qualification_source": "round_number_retest_v0_multisymbol_summary.csv:PASS",
-                        "observer_supported": False,
+                        "observer_supported": True,
                     },
                 ],
                 "observer_limitations": [
                     "breakout_retest uses the native Phase 1 breakout-retest observer.",
-                    "round_number_retest_v0 is attached as a telemetry stub until its exact MQL observer is implemented.",
+                    "round_number_retest_v0 uses the experimental MQL dry-run observer for signal telemetry only.",
                 ],
             }
         ),

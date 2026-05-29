@@ -9,6 +9,66 @@ from phase0.strategies.base import StrategyBase
 from phase0.strategies.breakout_retest import BreakoutRetestStrategy
 from phase0.strategies.compression_retest_continuation_v0 import CompressionRetestContinuationV0Strategy
 from phase0.strategies.cot_gold_positioning_reversal_v0 import CotGoldPositioningReversalV0Strategy
+from phase0.strategies.h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0 import (
+    H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_dbc_uup_commodity_dollar_followthrough_v0 import (
+    H1DbcUupCommodityDollarFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_dbb_uup_industrial_metals_followthrough_v0 import (
+    H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_eurjpy_usdjpy_fx_risk_rotation_followthrough_v0 import (
+    H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_broker_fx_usd_pressure_followthrough_v0 import (
+    H1BrokerFxUsdPressureFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_broker_fx_usd_pressure_conflict_reversion_v0 import (
+    H1BrokerFxUsdPressureConflictReversionV0Strategy,
+)
+from phase0.strategies.h1_btc_risk_pressure_gold_followthrough_v0 import (
+    H1BtcRiskPressureGoldFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_qqq_spy_growth_risk_rotation_followthrough_v0 import (
+    H1QqqSpyGrowthRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_iwm_spy_size_risk_rotation_followthrough_v0 import (
+    H1IwmSpySizeRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_slv_gld_precious_beta_rotation_followthrough_v0 import (
+    H1SlvGldPreciousBetaRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_xle_xlu_energy_defensive_rotation_followthrough_v0 import (
+    H1XleXluEnergyDefensiveRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_eem_spy_em_risk_rotation_followthrough_v0 import (
+    H1EemSpyEmRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_acwx_spy_global_ex_us_rotation_followthrough_v0 import (
+    H1AcwxSpyGlobalExUsRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_xme_spy_metals_mining_rotation_followthrough_v0 import (
+    H1XmeSpyMetalsMiningRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_fxy_uup_safe_haven_fx_rotation_followthrough_v0 import (
+    H1FxyUupSafeHavenFxRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_fxf_uup_safe_haven_fx_rotation_followthrough_v0 import (
+    H1FxfUupSafeHavenFxRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0 import (
+    H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0 import (
+    H1CybUupYuanDollarFxRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0 import (
+    H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_cot_positioning_continuation_v0 import (
+    H1CotPositioningContinuationV0Strategy,
+)
 from phase0.strategies.h4_credit_spread_stress_momentum_v0 import (
     H4CreditSpreadStressMomentumV0Strategy,
 )
@@ -27,6 +87,37 @@ from phase0.strategies.h4_breakeven_inflation_momentum_v0 import (
     H4BreakevenInflationMomentumV0Strategy,
 )
 from phase0.strategies.h1_calendar_drift_state_v0 import H1CalendarDriftStateV0Strategy
+from phase0.strategies.h1_friday_position_squaring_reversion_v0 import (
+    H1FridayPositionSquaringReversionV0Strategy,
+)
+from phase0.strategies.h1_gc_momentum_pullback_v0 import H1GcMomentumPullbackV0Strategy
+from phase0.strategies.h1_gdx_gld_trend_confirmation_v0 import H1GdxGldTrendConfirmationV0Strategy
+from phase0.strategies.h1_gc_xau_basis_reversion_v0 import H1GcXauBasisReversionV0Strategy
+from phase0.strategies.h1_gvz_vix_vol_premium_reversal_v0 import (
+    H1GvzVixVolPremiumReversalV0Strategy,
+)
+from phase0.strategies.h1_move_vix_bond_vol_shock_reversal_v0 import (
+    H1MoveVixBondVolShockReversalV0Strategy,
+)
+from phase0.strategies.h1_hyg_ief_credit_risk_rotation_followthrough_v0 import (
+    H1HygIefCreditRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_xlp_xly_consumer_rotation_followthrough_v0 import (
+    H1XlpXlyConsumerRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_xlf_xlu_financials_defensive_rotation_followthrough_v0 import (
+    H1XlfXluFinancialsDefensiveRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_xli_xlu_cyclical_defensive_rotation_followthrough_v0 import (
+    H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_macro_composite_pullback_v0 import H1MacroCompositePullbackV0Strategy
+from phase0.strategies.h1_macro_composite_state_reversion_v0 import (
+    H1MacroCompositeStateReversionV0Strategy,
+)
+from phase0.strategies.h1_macro_composite_trend_continuation_v0 import (
+    H1MacroCompositeTrendContinuationV0Strategy,
+)
 from phase0.strategies.h1_macro_event_aftershock_v0 import H1MacroEventAftershockV0Strategy
 from phase0.strategies.h1_smooth_trend_exhaustion_reversal_v0 import (
     H1SmoothTrendExhaustionReversalV0Strategy,
@@ -35,19 +126,52 @@ from phase0.strategies.h1_return_autocorrelation_state_v0 import (
     H1ReturnAutocorrelationStateV0Strategy,
 )
 from phase0.strategies.h1_m5_path_skew_reversal_v0 import H1M5PathSkewReversalV0Strategy
+from phase0.strategies.h1_month_turn_flow_continuation_v0 import H1MonthTurnFlowContinuationV0Strategy
+from phase0.strategies.h1_real_yield_dollar_shock_followthrough_v0 import (
+    H1RealYieldDollarShockFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_real_yield_dollar_shock_reversal_v0 import (
+    H1RealYieldDollarShockReversalV0Strategy,
+)
+from phase0.strategies.h1_session_impulse_reversion_v0 import H1SessionImpulseReversionV0Strategy
 from phase0.strategies.h1_tick_volume_climax_reversal_v0 import (
     H1TickVolumeClimaxReversalV0Strategy,
+)
+from phase0.strategies.h1_spy_tlt_risk_rotation_followthrough_v0 import (
+    H1SpyTltRiskRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_tip_ief_real_yield_rotation_followthrough_v0 import (
+    H1TipIefRealYieldRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_tlt_uup_pressure_reversion_v0 import H1TltUupPressureReversionV0Strategy
+from phase0.strategies.h1_tlt_uup_pressure_followthrough_v0 import (
+    H1TltUupPressureFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_tlt_shy_duration_rotation_followthrough_v0 import (
+    H1TltShyDurationRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_uso_uup_oil_dollar_followthrough_v0 import (
+    H1UsoUupOilDollarFollowthroughV0Strategy,
 )
 from phase0.strategies.h1_volatility_squeeze_breakout_v0 import (
     H1VolatilitySqueezeBreakoutV0Strategy,
 )
 from phase0.strategies.h1_walk_forward_linear_state_v0 import H1WalkForwardLinearStateV0Strategy
+from phase0.strategies.h1_xlu_xlk_defensive_rotation_followthrough_v0 import (
+    H1XluXlkDefensiveRotationFollowthroughV0Strategy,
+)
 from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
     H4D1MomentumExpansionContinuationV0Strategy,
 )
 from phase0.strategies.h4_financial_conditions_stress_reversal_v0 import (
     H4FinancialConditionsStressReversalV0Strategy,
 )
+from phase0.strategies.h4_gdx_gld_miner_divergence_v0 import H4GdxGldMinerDivergenceV0Strategy
+from phase0.strategies.h4_gld_etf_flow_reversal_v0 import H4GldEtfFlowReversalV0Strategy
+from phase0.strategies.h4_gld_etf_flow_reversal_v1 import H4GldEtfFlowReversalV1Strategy
+from phase0.strategies.h1_gld_flow_momentum_pullback_v0 import H1GldFlowMomentumPullbackV0Strategy
+from phase0.strategies.h1_gld_flow_stress_followthrough_v0 import H1GldFlowStressFollowthroughV0Strategy
+from phase0.strategies.h1_gld_flow_stress_reversal_v0 import H1GldFlowStressReversalV0Strategy
 from phase0.strategies.h4_gold_futures_volume_climax_v0 import H4GoldFuturesVolumeClimaxV0Strategy
 from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
     H4GvzVolatilityPanicReversalV0Strategy,
@@ -88,6 +212,7 @@ from phase0.strategies.opening_drive_failed_continuation_v0 import (
 )
 from phase0.strategies.post_spike_short_v0 import PostSpikeShortV0Strategy
 from phase0.strategies.previous_day_extreme_retest_v0 import PreviousDayExtremeRetestV0Strategy
+from phase0.strategies.quarter_round_retest_v0 import QuarterRoundRetestV0Strategy
 from phase0.strategies.range_mr import RangeMeanReversionStrategy
 from phase0.strategies.round_number_retest_v0 import RoundNumberRetestV0Strategy
 from phase0.strategies.session_vwap_reclaim_v0 import SessionVwapReclaimV0Strategy
@@ -118,6 +243,25 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     AsiaRangeLondonFailedBreakReversalV0Strategy.name: AsiaRangeLondonFailedBreakReversalV0Strategy,
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
     CotGoldPositioningReversalV0Strategy.name: CotGoldPositioningReversalV0Strategy,
+    H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy.name: H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
+    H1DbbUupIndustrialMetalsFollowthroughV0Strategy.name: H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
+    H1DbcUupCommodityDollarFollowthroughV0Strategy.name: H1DbcUupCommodityDollarFollowthroughV0Strategy,
+    H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy.name: H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy,
+    H1BrokerFxUsdPressureFollowthroughV0Strategy.name: H1BrokerFxUsdPressureFollowthroughV0Strategy,
+    H1BrokerFxUsdPressureConflictReversionV0Strategy.name: H1BrokerFxUsdPressureConflictReversionV0Strategy,
+    H1BtcRiskPressureGoldFollowthroughV0Strategy.name: H1BtcRiskPressureGoldFollowthroughV0Strategy,
+    H1QqqSpyGrowthRiskRotationFollowthroughV0Strategy.name: H1QqqSpyGrowthRiskRotationFollowthroughV0Strategy,
+    H1IwmSpySizeRiskRotationFollowthroughV0Strategy.name: H1IwmSpySizeRiskRotationFollowthroughV0Strategy,
+    H1SlvGldPreciousBetaRotationFollowthroughV0Strategy.name: H1SlvGldPreciousBetaRotationFollowthroughV0Strategy,
+    H1XleXluEnergyDefensiveRotationFollowthroughV0Strategy.name: H1XleXluEnergyDefensiveRotationFollowthroughV0Strategy,
+    H1EemSpyEmRiskRotationFollowthroughV0Strategy.name: H1EemSpyEmRiskRotationFollowthroughV0Strategy,
+    H1AcwxSpyGlobalExUsRotationFollowthroughV0Strategy.name: H1AcwxSpyGlobalExUsRotationFollowthroughV0Strategy,
+    H1XmeSpyMetalsMiningRotationFollowthroughV0Strategy.name: H1XmeSpyMetalsMiningRotationFollowthroughV0Strategy,
+    H1FxyUupSafeHavenFxRotationFollowthroughV0Strategy.name: H1FxyUupSafeHavenFxRotationFollowthroughV0Strategy,
+    H1FxfUupSafeHavenFxRotationFollowthroughV0Strategy.name: H1FxfUupSafeHavenFxRotationFollowthroughV0Strategy,
+    H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy.name: H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy,
+    H1CybUupYuanDollarFxRotationFollowthroughV0Strategy.name: H1CybUupYuanDollarFxRotationFollowthroughV0Strategy,
+    H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy.name: H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
     H4CreditSpreadStressMomentumV0Strategy.name: H4CreditSpreadStressMomentumV0Strategy,
     D1CompressionH4ExpansionV0Strategy.name: D1CompressionH4ExpansionV0Strategy,
     D1InsideDayBreakoutV0Strategy.name: D1InsideDayBreakoutV0Strategy,
@@ -132,15 +276,46 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     GoldFxProxyDivergenceV0Strategy.name: GoldFxProxyDivergenceV0Strategy,
     H4BreakevenInflationMomentumV0Strategy.name: H4BreakevenInflationMomentumV0Strategy,
     H1CalendarDriftStateV0Strategy.name: H1CalendarDriftStateV0Strategy,
+    H1CotPositioningContinuationV0Strategy.name: H1CotPositioningContinuationV0Strategy,
+    H1FridayPositionSquaringReversionV0Strategy.name: H1FridayPositionSquaringReversionV0Strategy,
+    H1GcMomentumPullbackV0Strategy.name: H1GcMomentumPullbackV0Strategy,
+    H1GcXauBasisReversionV0Strategy.name: H1GcXauBasisReversionV0Strategy,
+    H1GdxGldTrendConfirmationV0Strategy.name: H1GdxGldTrendConfirmationV0Strategy,
+    H1GvzVixVolPremiumReversalV0Strategy.name: H1GvzVixVolPremiumReversalV0Strategy,
+    H1MoveVixBondVolShockReversalV0Strategy.name: H1MoveVixBondVolShockReversalV0Strategy,
+    H1HygIefCreditRiskRotationFollowthroughV0Strategy.name: H1HygIefCreditRiskRotationFollowthroughV0Strategy,
+    H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy.name: H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy,
+    H1XlfXluFinancialsDefensiveRotationFollowthroughV0Strategy.name: H1XlfXluFinancialsDefensiveRotationFollowthroughV0Strategy,
+    H1XlpXlyConsumerRotationFollowthroughV0Strategy.name: H1XlpXlyConsumerRotationFollowthroughV0Strategy,
+    H1MacroCompositePullbackV0Strategy.name: H1MacroCompositePullbackV0Strategy,
+    H1MacroCompositeStateReversionV0Strategy.name: H1MacroCompositeStateReversionV0Strategy,
+    H1MacroCompositeTrendContinuationV0Strategy.name: H1MacroCompositeTrendContinuationV0Strategy,
     H1MacroEventAftershockV0Strategy.name: H1MacroEventAftershockV0Strategy,
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
+    H1MonthTurnFlowContinuationV0Strategy.name: H1MonthTurnFlowContinuationV0Strategy,
+    H1RealYieldDollarShockFollowthroughV0Strategy.name: H1RealYieldDollarShockFollowthroughV0Strategy,
+    H1RealYieldDollarShockReversalV0Strategy.name: H1RealYieldDollarShockReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
+    H1SessionImpulseReversionV0Strategy.name: H1SessionImpulseReversionV0Strategy,
+    H1SpyTltRiskRotationFollowthroughV0Strategy.name: H1SpyTltRiskRotationFollowthroughV0Strategy,
+    H1TipIefRealYieldRotationFollowthroughV0Strategy.name: H1TipIefRealYieldRotationFollowthroughV0Strategy,
     H1TickVolumeClimaxReversalV0Strategy.name: H1TickVolumeClimaxReversalV0Strategy,
+    H1TltShyDurationRotationFollowthroughV0Strategy.name: H1TltShyDurationRotationFollowthroughV0Strategy,
+    H1TltUupPressureFollowthroughV0Strategy.name: H1TltUupPressureFollowthroughV0Strategy,
+    H1TltUupPressureReversionV0Strategy.name: H1TltUupPressureReversionV0Strategy,
+    H1UsoUupOilDollarFollowthroughV0Strategy.name: H1UsoUupOilDollarFollowthroughV0Strategy,
     H1VolatilitySqueezeBreakoutV0Strategy.name: H1VolatilitySqueezeBreakoutV0Strategy,
     H1WalkForwardLinearStateV0Strategy.name: H1WalkForwardLinearStateV0Strategy,
+    H1XluXlkDefensiveRotationFollowthroughV0Strategy.name: H1XluXlkDefensiveRotationFollowthroughV0Strategy,
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,
     H4FinancialConditionsStressReversalV0Strategy.name: H4FinancialConditionsStressReversalV0Strategy,
+    H4GdxGldMinerDivergenceV0Strategy.name: H4GdxGldMinerDivergenceV0Strategy,
+    H4GldEtfFlowReversalV0Strategy.name: H4GldEtfFlowReversalV0Strategy,
+    H4GldEtfFlowReversalV1Strategy.name: H4GldEtfFlowReversalV1Strategy,
+    H1GldFlowMomentumPullbackV0Strategy.name: H1GldFlowMomentumPullbackV0Strategy,
+    H1GldFlowStressFollowthroughV0Strategy.name: H1GldFlowStressFollowthroughV0Strategy,
+    H1GldFlowStressReversalV0Strategy.name: H1GldFlowStressReversalV0Strategy,
     H4GoldFuturesVolumeClimaxV0Strategy.name: H4GoldFuturesVolumeClimaxV0Strategy,
     H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
@@ -165,6 +340,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     OpeningDriveFailedContinuationV0Strategy.name: OpeningDriveFailedContinuationV0Strategy,
     PostSpikeShortV0Strategy.name: PostSpikeShortV0Strategy,
     PreviousDayExtremeRetestV0Strategy.name: PreviousDayExtremeRetestV0Strategy,
+    QuarterRoundRetestV0Strategy.name: QuarterRoundRetestV0Strategy,
     RoundNumberRetestV0Strategy.name: RoundNumberRetestV0Strategy,
     SessionExtremeRetestV0Strategy.name: SessionExtremeRetestV0Strategy,
     SessionVwapReclaimV0Strategy.name: SessionVwapReclaimV0Strategy,

@@ -8,6 +8,11 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h4_real_yield_proxy_momentum_v0"
+EXPERT_NAMES = (
+    "h4_real_yield_proxy_momentum_v0",
+    "h1_real_yield_dollar_shock_reversal_v0",
+    "h1_real_yield_dollar_shock_followthrough_v0",
+)
 MACRO_FRAME_KEY = "macro_proxy"
 MACRO_RAW_DIR = Path("data/raw/macro")
 REAL_YIELD_FILE = "FRED_DFII10.csv"

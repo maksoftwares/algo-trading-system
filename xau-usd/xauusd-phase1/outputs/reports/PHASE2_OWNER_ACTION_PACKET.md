@@ -29,9 +29,9 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 31.75 | 72.0 | 40.25 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 32.88 | 96.0 | 63.12 | hours |
-| Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
+| Active-market 72-hour soak | PENDING | 46.75 | 72.0 | 25.25 | hours |
+| Process/code-freeze 96-hour gate | PENDING | 48.96 | 96.0 | 47.04 | hours |
+| Measured cost model | PENDING | 3.0 | 5.0 | 2.0 | fresh_market_days |
 
 ## Local MT5 Network Baseline
 
@@ -158,8 +158,8 @@ Objective gates still pending before owner signature:
 | Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |
 | Phase 1 acceptance | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS. |
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z. |
 
 ## Immediate Owner Actions
 

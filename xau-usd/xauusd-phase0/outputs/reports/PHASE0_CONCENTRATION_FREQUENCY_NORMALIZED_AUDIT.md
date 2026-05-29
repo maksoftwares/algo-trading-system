@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-05-28T19:34:45+00:00`
+Generated at UTC: `2026-05-29T20:47:05+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 67
-- Absolute concentration-failed candidates: 62
-- Review-context candidates under normalized thresholds: 61
+- Audited candidates: 117
+- Absolute concentration-failed candidates: 111
+- Review-context candidates under normalized thresholds: 110
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -46,18 +46,67 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | emr_inactivity_long_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 84 | 1306.4986 | 5105.6392 | 0.416545 | 1.695691 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | extreme_activity_mean_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1056 | 100.0 | 100.0 | 0.151877 | 0.750729 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | gold_fx_proxy_divergence_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1044 | 100.0 | 243.4894 | 0.179865 | 0.806486 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_acwx_spy_global_ex_us_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1008 | 100.0 | 257.9141 | 0.146641 | 0.719518 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1143 | 100.0 | 248.01 | 0.136295 | 0.649509 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_broker_fx_usd_pressure_conflict_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 402 | 244.2681 | 1179.6025 | 0.339944 | 1.533546 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_broker_fx_usd_pressure_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2280 | 100.0 | 193.925 | 0.149042 | 0.602812 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_btc_risk_pressure_gold_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 558 | 100.0 | 100.0 | 0.200803 | 0.992193 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h1_calendar_drift_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 8661 | 100.0 | 100.0 | 0.396239 | 0.706334 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
+| h1_cot_positioning_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 594 | 12988.2189 | 62854.1312 | 0.214637 | 1.027058 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_dbb_uup_industrial_metals_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1395 | 100.0 | 376.4468 | 0.138513 | 0.588259 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_dbc_uup_commodity_dollar_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1398 | 100.0 | 224.9287 | 0.188567 | 0.652092 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_eem_spy_em_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1188 | 288.5275 | 1425.5268 | 0.13355 | 0.653854 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_eurjpy_usdjpy_fx_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 957 | 100.0 | 153.0088 | 0.153419 | 0.748009 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_friday_position_squaring_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 318 | 100.0 | 392.4532 | 0.246593 | 1.195806 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1473 | 100.0 | 461.871 | 0.203006 | 0.664219 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1380 | 100.0 | 442.2977 | 0.219732 | 0.684412 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_fxf_uup_safe_haven_fx_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1410 | 330.8786 | 1630.5956 | 0.116616 | 0.57268 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_fxy_uup_safe_haven_fx_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1476 | 197.8179 | 978.5978 | 0.115988 | 0.57402 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_gc_momentum_pullback_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1095 | 100.0 | 102.8309 | 0.135225 | 0.655737 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_gc_xau_basis_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2097 | 115.7354 | 575.0712 | 0.090374 | 0.44078 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_gdx_gld_trend_confirmation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 729 | 220.2661 | 1090.0616 | 0.166657 | 0.815404 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_gld_flow_momentum_pullback_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 576 | 100.0 | 100.0 | 0.188199 | 0.929852 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_gld_flow_stress_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 726 | 100.0 | 100.0 | 0.173253 | 0.85848 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_gld_flow_stress_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 234 | 100.0 | 100.0 | 0.291392 | 1.419548 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_gvz_vix_vol_premium_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1437 | 100.0 | 100.0 | 0.218837 | 0.656807 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_hyg_ief_credit_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1287 | 100.0 | 195.8705 | 0.125047 | 0.622703 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_iwm_spy_size_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1134 | 224.4925 | 1087.2778 | 0.14777 | 0.722319 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_m5_path_skew_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 4920 | 100.0 | 100.0 | 0.30479 | 0.539155 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_macro_composite_pullback_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 144 | 117.8966 | 585.0963 | 0.427487 | 1.99258 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_macro_composite_state_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 93 | 100.0 | 100.0 | 0.760302 | 1.530157 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
+| h1_macro_composite_trend_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 609 | 100.0 | 248.9907 | 0.222538 | 1.07799 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | h1_macro_event_aftershock_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 810 | 100.0 | 404.178 | 0.238853 | 0.778705 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_month_turn_flow_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1524 | 100.0 | 161.202 | 0.107871 | 0.530657 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_move_vix_bond_vol_shock_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 531 | 401.0384 | 1909.6415 | 0.280898 | 1.344556 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_qqq_spy_growth_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1017 | 100.0 | 270.4123 | 0.284194 | 0.885657 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_real_yield_dollar_shock_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 474 | 100.0 | 289.9276 | 0.358331 | 1.353954 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h1_real_yield_dollar_shock_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 507 | 100.0 | 257.7074 | 0.220364 | 1.054095 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | h1_return_autocorrelation_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1497 | 100.0 | 100.0 | 0.254866 | 0.798369 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_session_impulse_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2328 | 100.0 | 201.5235 | 0.088148 | 0.416474 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_slv_gld_precious_beta_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1371 | 100.0 | 100.0 | 0.143741 | 0.604722 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_smooth_trend_exhaustion_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 486 | 100.0 | 100.0 | 0.202137 | 0.980795 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_spy_tlt_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1431 | 100.0 | 160.3211 | 0.122065 | 0.605766 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_tick_volume_climax_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2904 | 100.0 | 100.0 | 0.065098 | 0.314496 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity |
+| h1_tip_ief_real_yield_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1080 | 100.0 | 100.0 | 0.19527 | 0.765386 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h1_tlt_shy_duration_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1467 | 100.0 | 493.3351 | 0.120781 | 0.596814 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_tlt_uup_pressure_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1473 | 100.0 | 100.0 | 0.134849 | 0.581675 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_tlt_uup_pressure_reversion_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1149 | 100.0 | 100.0 | 0.146139 | 0.667831 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_uso_uup_oil_dollar_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1353 | 100.0 | 145.2113 | 0.190808 | 0.664446 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_volatility_squeeze_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2127 | 100.0 | 100.0 | 0.171019 | 0.82588 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h1_walk_forward_linear_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5979 | 100.0 | 129.2628 | 0.230808 | 0.830408 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xle_xlu_energy_defensive_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1182 | 100.0 | 176.7098 | 0.153925 | 0.653755 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xlf_xlu_financials_defensive_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1488 | 152.1062 | 751.9574 | 0.189357 | 0.60207 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xli_xlu_cyclical_defensive_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1425 | 100.0 | 103.6017 | 0.204349 | 0.646005 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xlp_xly_consumer_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1389 | 220.8673 | 1096.5807 | 0.19541 | 0.611319 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xlu_xlk_defensive_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1476 | 100.0 | 158.1288 | 0.194936 | 0.612058 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h1_xme_spy_metals_mining_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1161 | 100.0 | 100.0 | 0.134063 | 0.661712 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_breakeven_inflation_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2055 | 100.0 | 100.0 | 0.130137 | 0.594438 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_credit_spread_stress_momentum_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1689 | 100.0 | 274.6079 | 0.188391 | 0.780804 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 735 | 100.0 | 111.7863 | 0.1678 | 0.809899 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_financial_conditions_stress_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 483 | 100.0 | 100.0 | 0.356255 | 1.407623 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
+| h4_gdx_gld_miner_divergence_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 165 | 434.0433 | 2009.9961 | 0.462394 | 1.705509 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
+| h4_gld_etf_flow_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 312 | 30.1329 | 143.7496 | 0.317246 | 1.531172 | REVIEW_NORMALIZED_CONTEXT | sample_size;concentration;activity |
+| h4_gld_etf_flow_reversal_v1 | REJECTED_OR_RESEARCH | FAIL | 9 | 621 | 100.0 | 197.3541 | 0.241862 | 1.182034 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_gold_futures_volume_climax_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 141 | 145.1773 | 693.6699 | 0.55586 | 1.784213 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity |
 | h4_gvz_volatility_panic_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 489 | 100.0 | 212.5005 | 0.277442 | 1.289932 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_inside_bar_d1_momentum_breakout_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 741 | 92.6435 | 446.3203 | 0.16605 | 0.808783 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
@@ -82,6 +131,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | opening_drive_failed_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 2208 | 100.0 | 100.0 | 0.091738 | 0.448952 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | post_spike_short_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 1860 | 495.1683 | 2221.5365 | 0.098392 | 0.468973 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | previous_day_extreme_retest_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5295 | 100.0 | 333.617 | 0.072168 | 0.325522 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
+| quarter_round_retest_v0 | REJECTED_OR_RESEARCH | PASS | 9 | 73431 | 0.7595 | 3.76 | 0.015676 | 0.078196 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | range_mr | REJECTED_OR_RESEARCH | FAIL | 9 | 24 | 100.0 | 100.0 | 0.0 | 0.0 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
 | round_number_retest_v0 | REJECTED_OR_RESEARCH | PASS | 9 | 47388 | 0.7623 | 3.7948 | 0.019751 | 0.098656 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |
 | session_extreme_retest_v0 | REJECTED_OR_RESEARCH | PASS | 9 | 23727 | 0.8203 | 4.056 | 0.025399 | 0.126433 | NOT_ABSOLUTE_CONCENTRATION_FAIL | none |

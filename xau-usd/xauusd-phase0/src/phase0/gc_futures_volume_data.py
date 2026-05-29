@@ -8,6 +8,11 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h4_gold_futures_volume_climax_v0"
+EXPERT_NAMES = (
+    "h4_gold_futures_volume_climax_v0",
+    "h1_gc_xau_basis_reversion_v0",
+    "h1_gc_momentum_pullback_v0",
+)
 GC_FUTURES_VOLUME_FRAME_KEY = "gc_futures_volume"
 GC_FUTURES_VOLUME_REFERENCE_PATH = Path(
     "data/reference/futures/gc_continuous_daily_yahoo_2015_2025.csv"

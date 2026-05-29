@@ -14,14 +14,14 @@ Overall status: PENDING
 
 | name | status | evidence |
 | --- | --- | --- |
-| repo_commit_hash | PASS | Repository commit hash captured: 32c114a579c527c5f6d26e89acb4ae4f4b510c56. |
+| repo_commit_hash | PASS | Repository commit hash captured: ca594502e3ac72e9c7a5a8db59b264d2c191162d. |
 | mt5_terminal_path | PASS | MT5 terminal path exists. `C:\MT5PortableGoldMission\terminal64.exe`. |
 | mt5_data_path | PASS | MT5 data path exists. `C:\MT5PortableGoldMission`. |
 | compile_log | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` shows 0 errors, 0 warnings. |
 | latest_startup_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` has data rows; latest row captured. |
 | latest_decision_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` has data rows; latest row captured. |
 | external_health | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_EXTERNAL_HEALTH.json` status is PASS. |
-| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.28 19:30:00 keeps dry_run=true and trade_permission=false. |
+| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.29 11:35:00 keeps dry_run=true and trade_permission=false. |
 | phase2_readiness_report | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md` exists; current status is PENDING. |
 | vps_latency_report | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | selected_vps_consistency | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |

@@ -34,18 +34,18 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PASS | Core summary checks are PASS in `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`. |
-| Five trading day soak | PASS | Progress 100.00%; observed 6.3542 of 5.00 required days. |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z. |
-| Latest dry-run boundary | PASS | bar_time=2026.05.28 19:30:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 118; clusters: 118. |
+| Five trading day soak | PASS | Progress 100.00%; observed 7.0243 of 5.00 required days. |
+| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z. |
+| Latest dry-run boundary | PASS | bar_time=2026.05.29 11:35:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 148; clusters: 148. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 1116 | 2026.05.28 19:30:00 | true | false | CLOCK_OK | 100.0% |
+| 1297 | 2026.05.29 11:35:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

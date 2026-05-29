@@ -1,7 +1,7 @@
 # PHASE0 REALITY CHECK
 
 Status: FAIL
-Generated at UTC: 2026-05-27T14:05:29+00:00
+Generated at UTC: 2026-05-29T12:54:36+00:00
 Approved expert under test: breakout_retest
 
 ## Method
@@ -19,7 +19,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 
 | Winner | White p | q90 R | q95 R | q99 R |
 | --- | --- | --- | --- | --- |
-| breakout_retest | 0.0002 | 1.1378 | 1.3456 | 1.7720 |
+| quarter_round_retest_v0 | 0.0002 | 1.3556 | 1.6608 | 2.3193 |
 
 ## Expert Means
 
@@ -41,7 +41,9 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | extreme_activity_mean_reversion_v0 | -0.1063 | -11.48 | alternative |
 | gold_fx_proxy_divergence_v0 | -0.0548 | -5.92 | alternative |
 | h1_calendar_drift_state_v0 | -0.3297 | -35.61 | alternative |
+| h1_gdx_gld_trend_confirmation_v0 | -0.0620 | -6.69 | alternative |
 | h1_m5_path_skew_reversal_v0 | -0.1238 | -13.37 | alternative |
+| h1_macro_composite_pullback_v0 | 0.0234 | 2.52 | alternative |
 | h1_macro_event_aftershock_v0 | -0.0144 | -1.55 | alternative |
 | h1_return_autocorrelation_state_v0 | -0.0130 | -1.40 | alternative |
 | h1_smooth_trend_exhaustion_reversal_v0 | -0.0828 | -8.95 | alternative |
@@ -52,6 +54,9 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | h4_credit_spread_stress_momentum_v0 | -0.0582 | -6.28 | alternative |
 | h4_d1_momentum_expansion_continuation_v0 | 0.0497 | 5.37 | alternative |
 | h4_financial_conditions_stress_reversal_v0 | -0.0266 | -2.87 | alternative |
+| h4_gdx_gld_miner_divergence_v0 | 0.0050 | 0.54 | alternative |
+| h4_gld_etf_flow_reversal_v0 | 0.0583 | 6.30 | alternative |
+| h4_gld_etf_flow_reversal_v1 | 0.0067 | 0.72 | alternative |
 | h4_gold_futures_volume_climax_v0 | -0.0095 | -1.02 | alternative |
 | h4_gvz_volatility_panic_reversal_v0 | -0.0115 | -1.24 | alternative |
 | h4_inside_bar_d1_momentum_breakout_v0 | 0.0646 | 6.98 | alternative |
@@ -76,6 +81,7 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | opening_drive_failed_continuation_v0 | -0.1762 | -19.03 | alternative |
 | post_spike_short_v0 | -0.0660 | -7.12 | alternative |
 | previous_day_extreme_retest_v0 | -0.1903 | -20.55 | alternative |
+| quarter_round_retest_v0 | 16.7597 | 1810.05 | alternative |
 | range_mr | -0.0375 | -4.05 | alternative |
 | round_number_retest_v0 | 11.0507 | 1193.48 | alternative |
 | session_extreme_retest_v0 | 5.4747 | 591.27 | alternative |
@@ -111,56 +117,62 @@ This report applies a White Reality Check and SPA-style pairwise bootstrap to mo
 | extreme_activity_mean_reversion_v0 | PASS | 13.0730 | 0.0002 | 0.9796 |
 | gold_fx_proxy_divergence_v0 | PASS | 13.0214 | 0.0002 | 1.0045 |
 | h1_calendar_drift_state_v0 | PASS | 13.2963 | 0.0002 | 1.1851 |
-| h1_m5_path_skew_reversal_v0 | PASS | 13.0905 | 0.0002 | 1.0674 |
-| h1_macro_event_aftershock_v0 | PASS | 12.9810 | 0.0002 | 1.0097 |
-| h1_return_autocorrelation_state_v0 | PASS | 12.9796 | 0.0002 | 1.0334 |
-| h1_smooth_trend_exhaustion_reversal_v0 | PASS | 13.0495 | 0.0002 | 1.0196 |
-| h1_tick_volume_climax_reversal_v0 | PASS | 13.2497 | 0.0002 | 1.0349 |
-| h1_volatility_squeeze_breakout_v0 | PASS | 12.9707 | 0.0002 | 1.0008 |
-| h1_walk_forward_linear_state_v0 | PASS | 12.8517 | 0.0002 | 1.1233 |
-| h4_breakeven_inflation_momentum_v0 | PASS | 12.8412 | 0.0002 | 1.0030 |
-| h4_credit_spread_stress_momentum_v0 | PASS | 13.0248 | 0.0002 | 1.0076 |
-| h4_d1_momentum_expansion_continuation_v0 | PASS | 12.9169 | 0.0002 | 1.0036 |
-| h4_financial_conditions_stress_reversal_v0 | PASS | 12.9932 | 0.0002 | 1.0264 |
-| h4_gold_futures_volume_climax_v0 | PASS | 12.9761 | 0.0002 | 1.0083 |
-| h4_gvz_volatility_panic_reversal_v0 | PASS | 12.9781 | 0.0002 | 0.9659 |
-| h4_inside_bar_d1_momentum_breakout_v0 | PASS | 12.9020 | 0.0002 | 1.0308 |
-| h4_macro_composite_risk_state_v0 | PASS | 12.8924 | 0.0002 | 0.9847 |
-| h4_macro_composite_risk_state_v1 | PASS | 12.9379 | 0.0002 | 1.0062 |
-| h4_policy_uncertainty_safe_haven_v0 | PASS | 12.8131 | 0.0002 | 1.0013 |
-| h4_real_yield_proxy_momentum_v0 | PASS | 12.9149 | 0.0002 | 1.0031 |
-| h4_treasury_curve_stress_momentum_v0 | PASS | 12.9137 | 0.0002 | 1.0022 |
-| h4_us_session_liquidity_reversal_v0 | PASS | 12.9559 | 0.0002 | 0.9911 |
-| h4_vix_risk_off_reversal_v0 | PASS | 12.9419 | 0.0002 | 0.9668 |
-| h4_walk_forward_knn_momentum_state_v0 | PASS | 12.8978 | 0.0002 | 1.0800 |
-| liquidity_sweep_continuation_v0 | PASS | 13.9385 | 0.0002 | 1.0627 |
-| liquidity_sweep_reversal_v0 | PASS | 13.4718 | 0.0002 | 1.0255 |
-| london_fix_continuation_v0 | PASS | 13.1021 | 0.0002 | 1.0389 |
-| m15_inside_bar_breakout_v0 | PASS | 13.0512 | 0.0002 | 1.0391 |
-| m15_two_bar_exhaustion_reversal_v0 | PASS | 14.6700 | 0.0002 | 1.1957 |
-| m15_two_bar_impulse_continuation_v0 | PASS | 13.3581 | 0.0002 | 1.0042 |
-| m5_impulse_continuation_v0 | PASS | 13.9983 | 0.0002 | 1.0271 |
-| ny_am_pullback_continuation_v0 | PASS | 13.0947 | 0.0002 | 0.9761 |
-| ny_failed_london_reversal_v0 | PASS | 13.0064 | 0.0002 | 1.0135 |
-| ny_london_overlap_compression_break_v0 | PASS | 12.9767 | 0.0002 | 1.0097 |
-| opening_drive_failed_continuation_v0 | PASS | 13.1428 | 0.0002 | 1.0236 |
-| post_spike_short_v0 | PASS | 13.0326 | 0.0002 | 1.0194 |
-| previous_day_extreme_retest_v0 | PASS | 13.1569 | 0.0002 | 0.9894 |
-| range_mr | PASS | 13.0041 | 0.0002 | 0.9874 |
-| round_number_retest_v0 | FAIL | 1.9159 | 0.0174 | 1.5088 |
-| session_extreme_retest_v0 | PASS | 7.4919 | 0.0002 | 1.0964 |
-| session_vwap_reclaim_v0 | PASS | 13.3272 | 0.0002 | 0.9791 |
-| squeeze_breakout_long_v0 | PASS | 12.9293 | 0.0002 | 1.0094 |
-| swing_breakout_retest_v0 | PASS | 1.7647 | 0.0002 | 0.3981 |
-| symbol_normalized_round_retest_v0 | FAIL | 1.9159 | 0.0148 | 1.4119 |
-| symbol_round_sweep_reversal_v0 | PASS | 13.6416 | 0.0002 | 1.0116 |
-| trend_pullback | PASS | 14.7822 | 0.0002 | 1.1795 |
-| w1_d1_momentum_continuation_v0 | PASS | 12.9144 | 0.0002 | 0.9964 |
-| weekly_level_reclaim_v0 | PASS | 13.0592 | 0.0002 | 1.0631 |
-| weekly_open_reversion_v0 | PASS | 13.1362 | 0.0002 | 0.9512 |
-| xag_lead_xau_followthrough_v0 | PASS | 13.2230 | 0.0002 | 1.0552 |
-| xau_xag_fx_composite_reversion_v0 | PASS | 13.1259 | 0.0002 | 1.0400 |
-| xau_xag_relative_value_v0 | PASS | 12.9567 | 0.0002 | 1.0080 |
+| h1_gdx_gld_trend_confirmation_v0 | PASS | 13.0286 | 0.0002 | 1.0235 |
+| h1_m5_path_skew_reversal_v0 | PASS | 13.0905 | 0.0002 | 1.0717 |
+| h1_macro_composite_pullback_v0 | PASS | 12.9433 | 0.0002 | 1.0151 |
+| h1_macro_event_aftershock_v0 | PASS | 12.9810 | 0.0002 | 1.0030 |
+| h1_return_autocorrelation_state_v0 | PASS | 12.9796 | 0.0002 | 1.0492 |
+| h1_smooth_trend_exhaustion_reversal_v0 | PASS | 13.0495 | 0.0002 | 1.0341 |
+| h1_tick_volume_climax_reversal_v0 | PASS | 13.2497 | 0.0002 | 1.0088 |
+| h1_volatility_squeeze_breakout_v0 | PASS | 12.9707 | 0.0002 | 0.9941 |
+| h1_walk_forward_linear_state_v0 | PASS | 12.8517 | 0.0002 | 1.1219 |
+| h4_breakeven_inflation_momentum_v0 | PASS | 12.8412 | 0.0002 | 1.0243 |
+| h4_credit_spread_stress_momentum_v0 | PASS | 13.0248 | 0.0002 | 1.0063 |
+| h4_d1_momentum_expansion_continuation_v0 | PASS | 12.9169 | 0.0002 | 1.0014 |
+| h4_financial_conditions_stress_reversal_v0 | PASS | 12.9932 | 0.0002 | 0.9754 |
+| h4_gdx_gld_miner_divergence_v0 | PASS | 12.9616 | 0.0002 | 1.0276 |
+| h4_gld_etf_flow_reversal_v0 | PASS | 12.9083 | 0.0002 | 0.9942 |
+| h4_gld_etf_flow_reversal_v1 | PASS | 12.9600 | 0.0002 | 1.0090 |
+| h4_gold_futures_volume_climax_v0 | PASS | 12.9761 | 0.0002 | 0.9912 |
+| h4_gvz_volatility_panic_reversal_v0 | PASS | 12.9781 | 0.0002 | 1.0159 |
+| h4_inside_bar_d1_momentum_breakout_v0 | PASS | 12.9020 | 0.0002 | 1.0105 |
+| h4_macro_composite_risk_state_v0 | PASS | 12.8924 | 0.0002 | 0.9815 |
+| h4_macro_composite_risk_state_v1 | PASS | 12.9379 | 0.0002 | 0.9742 |
+| h4_policy_uncertainty_safe_haven_v0 | PASS | 12.8131 | 0.0002 | 1.0150 |
+| h4_real_yield_proxy_momentum_v0 | PASS | 12.9149 | 0.0002 | 1.0223 |
+| h4_treasury_curve_stress_momentum_v0 | PASS | 12.9137 | 0.0002 | 1.0089 |
+| h4_us_session_liquidity_reversal_v0 | PASS | 12.9559 | 0.0002 | 1.0160 |
+| h4_vix_risk_off_reversal_v0 | PASS | 12.9419 | 0.0002 | 0.9942 |
+| h4_walk_forward_knn_momentum_state_v0 | PASS | 12.8978 | 0.0002 | 1.0616 |
+| liquidity_sweep_continuation_v0 | PASS | 13.9385 | 0.0002 | 1.0675 |
+| liquidity_sweep_reversal_v0 | PASS | 13.4718 | 0.0002 | 1.0156 |
+| london_fix_continuation_v0 | PASS | 13.1021 | 0.0002 | 1.0128 |
+| m15_inside_bar_breakout_v0 | PASS | 13.0512 | 0.0002 | 1.0443 |
+| m15_two_bar_exhaustion_reversal_v0 | PASS | 14.6700 | 0.0002 | 1.1920 |
+| m15_two_bar_impulse_continuation_v0 | PASS | 13.3581 | 0.0002 | 1.0300 |
+| m5_impulse_continuation_v0 | PASS | 13.9983 | 0.0002 | 1.0362 |
+| ny_am_pullback_continuation_v0 | PASS | 13.0947 | 0.0002 | 0.9596 |
+| ny_failed_london_reversal_v0 | PASS | 13.0064 | 0.0002 | 1.0332 |
+| ny_london_overlap_compression_break_v0 | PASS | 12.9767 | 0.0002 | 1.0133 |
+| opening_drive_failed_continuation_v0 | PASS | 13.1428 | 0.0002 | 1.0460 |
+| post_spike_short_v0 | PASS | 13.0326 | 0.0002 | 1.0309 |
+| previous_day_extreme_retest_v0 | PASS | 13.1569 | 0.0002 | 0.9848 |
+| quarter_round_retest_v0 | FAIL | -3.7931 | 0.9998 | 1.7132 |
+| range_mr | PASS | 13.0041 | 0.0002 | 0.9772 |
+| round_number_retest_v0 | FAIL | 1.9159 | 0.0172 | 1.5071 |
+| session_extreme_retest_v0 | PASS | 7.4919 | 0.0002 | 1.0458 |
+| session_vwap_reclaim_v0 | PASS | 13.3272 | 0.0002 | 0.9548 |
+| squeeze_breakout_long_v0 | PASS | 12.9293 | 0.0002 | 1.0479 |
+| swing_breakout_retest_v0 | PASS | 1.7647 | 0.0002 | 0.3983 |
+| symbol_normalized_round_retest_v0 | FAIL | 1.9159 | 0.0142 | 1.4761 |
+| symbol_round_sweep_reversal_v0 | PASS | 13.6416 | 0.0002 | 1.0272 |
+| trend_pullback | PASS | 14.7822 | 0.0002 | 1.1470 |
+| w1_d1_momentum_continuation_v0 | PASS | 12.9144 | 0.0002 | 0.9750 |
+| weekly_level_reclaim_v0 | PASS | 13.0592 | 0.0002 | 1.0354 |
+| weekly_open_reversion_v0 | PASS | 13.1362 | 0.0002 | 0.9434 |
+| xag_lead_xau_followthrough_v0 | PASS | 13.2230 | 0.0002 | 1.0305 |
+| xau_xag_fx_composite_reversion_v0 | PASS | 13.1259 | 0.0002 | 1.0541 |
+| xau_xag_relative_value_v0 | PASS | 12.9567 | 0.0002 | 1.0100 |
 
 ## Interpretation
 

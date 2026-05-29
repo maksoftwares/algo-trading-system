@@ -62,6 +62,7 @@ def test_run_family_clustered_reality_check_excludes_same_family_variants(tmp_pa
     experts = {
         "breakout_retest": 100.0,
         "round_number_retest_v0": 99.0,
+        "quarter_round_retest_v0": 120.0,
         "range_mr": -10.0,
     }
     start = pd.Timestamp("2024-01-01T00:00:00Z")
@@ -98,7 +99,12 @@ def test_run_family_clustered_reality_check_excludes_same_family_variants(tmp_pa
     assert round_row["family"] == "breakout_retest_family"
     assert str(round_row["included_in_family_panel"]).lower() == "false"
     assert round_row["role"] == "same_family_excluded_from_pairwise_spa"
+    quarter_row = assignments.loc[assignments["expert"] == "quarter_round_retest_v0"].iloc[0]
+    assert quarter_row["family"] == "breakout_retest_family"
+    assert str(quarter_row["included_in_family_panel"]).lower() == "false"
+    assert quarter_row["role"] == "same_family_excluded_from_pairwise_spa"
 
     report_text = output.report_path.read_text(encoding="utf-8")
     assert "This report does not modify `PHASE0_REALITY_CHECK.md`." in report_text
     assert "round_number_retest_v0" in report_text
+    assert "quarter_round_retest_v0" in report_text

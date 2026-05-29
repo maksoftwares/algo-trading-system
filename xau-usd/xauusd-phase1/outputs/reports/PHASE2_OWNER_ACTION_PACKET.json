@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-28T19:34:46.089953Z",
+  "created_at_utc": "2026-05-29T11:39:20.691408Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "FAIL",
@@ -17,25 +17,25 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 31.75,
+      "current": 46.75,
       "required": 72.0,
-      "remaining": 40.25,
+      "remaining": 25.25,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 32.88,
+      "current": 48.96,
       "required": 96.0,
-      "remaining": 63.12,
+      "remaining": 47.04,
       "unit": "hours"
     },
     {
       "gate": "Measured cost model",
       "status": "PENDING",
-      "current": 2.0,
+      "current": 3.0,
       "required": 5.0,
-      "remaining": 3.0,
+      "remaining": 2.0,
       "unit": "fresh_market_days"
     }
   ],
@@ -108,12 +108,12 @@
       {
         "gate": "Active-market 72-hour soak",
         "status": "PENDING",
-        "evidence": "Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+        "evidence": "Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
       },
       {
         "gate": "Process/code-freeze 96-hour gate",
         "status": "PENDING",
-        "evidence": "Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z."
+        "evidence": "Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z."
       }
     ],
     "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."

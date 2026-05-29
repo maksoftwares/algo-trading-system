@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-28T19:34:46.074118Z",
+  "created_at_utc": "2026-05-29T11:39:20.674812Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -56,12 +56,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -73,25 +73,25 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 31.75,
+      "current": 46.75,
       "required": 72.0,
-      "remaining": 40.25,
+      "remaining": 25.25,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 32.88,
+      "current": 48.96,
       "required": 96.0,
-      "remaining": 63.12,
+      "remaining": 47.04,
       "unit": "hours"
     },
     {
       "gate": "Measured cost model",
       "status": "PENDING",
-      "current": 2.0,
+      "current": 3.0,
       "required": 5.0,
-      "remaining": 3.0,
+      "remaining": 2.0,
       "unit": "fresh_market_days"
     }
   ],
@@ -118,23 +118,23 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1116,
-    "latest_bar": "2026.05.28 19:30:00",
+    "decision_rows": 1297,
+    "latest_bar": "2026.05.29 11:35:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "30425",
+    "observed_rows": "41337",
     "required_rows": "500",
-    "observed_days": "2",
+    "observed_days": "3",
     "required_days": "5",
-    "source_rows": "86789",
+    "source_rows": "98361",
     "rows_missing_tick_fresh": "55704",
     "weekend_rows_excluded": "0",
     "tick_freshness": "available",
-    "source_files": "7"
+    "source_files": "8"
   },
   "forbidden_until_ready": [
     "paper-mode implementation",

@@ -1124,7 +1124,7 @@ def _experimental_demo_attachments_panel(report: dict[str, Any]) -> str:
                 "Candidate": _esc(_cell(row.get("candidate"))),
                 "Status": _status_badge(_cell(row.get("status"))),
                 "Symbol": _esc(_cell(row.get("symbol"))),
-                "Observer": _esc("native" if row.get("observer_supported") else "stub pending MQL"),
+                "Observer": _esc("native signal logger" if row.get("observer_supported") else "stub pending MQL"),
                 "Qualification": _esc(_cell(row.get("qualification_source"))),
             }
             for row in attachments

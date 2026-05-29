@@ -43,6 +43,7 @@ BREAKOUT_RETEST_FAMILY = frozenset(
         "round_number_retest_v0",
         "symbol_normalized_round_retest_v0",
         "session_extreme_retest_v0",
+        "quarter_round_retest_v0",
     }
 )
 BREAKOUT_RETEST_FAMILY_NAME = "breakout_retest_family"

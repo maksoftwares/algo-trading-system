@@ -23,6 +23,7 @@ def test_attachment_plan_includes_all_approved_and_provisional_symbols():
     assert ("round_number_retest_v0", "USDJPY") in pairs
     assert ("round_number_retest_v0", "EURUSD") not in pairs
     assert ("session_extreme_retest_v0", "EURUSD") in pairs
+    assert all(row.observer_supported for row in plan)
 
 
 def test_attachment_chart_is_dry_run_and_demo_scoped():

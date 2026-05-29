@@ -8,6 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "cot_gold_positioning_reversal_v0"
+EXPERT_NAMES = (
+    "cot_gold_positioning_reversal_v0",
+    "h1_cot_positioning_continuation_v0",
+)
 COT_FRAME_KEY = "cot_gold"
 COT_REFERENCE_PATH = Path("data/reference/cot/gold_disaggregated_futures_only_2016_2024.csv")
 

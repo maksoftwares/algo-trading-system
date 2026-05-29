@@ -1,0 +1,86 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+import pandas as pd
+
+from phase0.config import ConfigError, ProjectConfig
+
+
+EXPERT_NAME = "h1_acwx_spy_global_ex_us_rotation_followthrough_v0"
+EXPERT_NAMES = ("h1_acwx_spy_global_ex_us_rotation_followthrough_v0",)
+ACWX_SPY_GLOBAL_EX_US_ROTATION_FRAME_KEY = "acwx_spy_global_ex_us_rotation"
+ACWX_SPY_GLOBAL_EX_US_ROTATION_REFERENCE_PATH = Path("data/reference/etf/acwx_spy_daily_yahoo_2015_2025.csv")
+
+
+def load_acwx_spy_global_ex_us_rotation_context(
+    config: ProjectConfig,
+    required_start: object,
+    required_end: object,
+) -> pd.DataFrame:
+    path = config.root / ACWX_SPY_GLOBAL_EX_US_ROTATION_REFERENCE_PATH
+    if not path.exists():
+        raise ConfigError(
+            f"{EXPERT_NAME} requires {path}. Run scripts/acquire_acwx_spy_global_ex_us_rotation_proxy.py "
+            "before any real matrix run. This is a public ACWX/SPY ETF daily OHLCV proxy, "
+            "not primary global equity, USD funding, or order-flow data."
+        )
+    try:
+        frame = pd.read_csv(path)
+    except Exception as exc:
+        raise ConfigError(f"Failed to read {EXPERT_NAME} ACWX/SPY proxy file {path}: {exc}") from exc
+
+    required_columns = {
+        "timestamp_utc",
+        "acwx_close",
+        "acwx_volume",
+        "spy_close",
+        "spy_volume",
+        "source",
+    }
+    missing = required_columns.difference(frame.columns)
+    if missing:
+        raise ConfigError(f"{path} missing required ACWX/SPY column(s): {', '.join(sorted(missing))}.")
+
+    frame = frame.copy()
+    frame["timestamp_utc"] = pd.to_datetime(frame["timestamp_utc"], utc=True, errors="coerce")
+    for column in ("acwx_close", "acwx_volume", "spy_close", "spy_volume"):
+        frame[column] = pd.to_numeric(frame[column], errors="coerce")
+    frame = frame.dropna(subset=["timestamp_utc", "acwx_close", "spy_close"]).sort_values("timestamp_utc")
+    frame = frame.drop_duplicates("timestamp_utc").reset_index(drop=True)
+    if frame.empty:
+        raise ConfigError(f"{path} has no usable ACWX/SPY rows.")
+
+    _assert_coverage(frame, path, required_start, required_end)
+    return frame
+
+
+def _assert_coverage(
+    frame: pd.DataFrame,
+    source: Path,
+    required_start: object,
+    required_end: object,
+) -> None:
+    coverage_start = pd.Timestamp(frame["timestamp_utc"].min())
+    coverage_end = pd.Timestamp(frame["timestamp_utc"].max())
+    needed_start = _utc_timestamp(required_start)
+    needed_end = _utc_timestamp(required_end)
+    allowed_start_gap = pd.Timedelta(days=370)
+    allowed_end_gap = pd.Timedelta(days=5)
+    if coverage_start > needed_start and coverage_start - needed_start > allowed_start_gap:
+        raise ConfigError(
+            f"{EXPERT_NAME} ACWX/SPY data in {source} start {coverage_start.isoformat()}, "
+            f"but required {needed_start.isoformat()}."
+        )
+    if coverage_end < needed_end and needed_end - coverage_end > allowed_end_gap:
+        raise ConfigError(
+            f"{EXPERT_NAME} ACWX/SPY data in {source} end {coverage_end.isoformat()}, "
+            f"but required {needed_end.isoformat()}."
+        )
+
+
+def _utc_timestamp(value: object) -> pd.Timestamp:
+    timestamp = pd.Timestamp(value)
+    if timestamp.tzinfo is None:
+        return timestamp.tz_localize("UTC")
+    return timestamp.tz_convert("UTC")

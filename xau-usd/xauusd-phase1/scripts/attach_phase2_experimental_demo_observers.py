@@ -73,7 +73,7 @@ def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
                     status=status,
                     symbol=symbol,
                     qualification_source=qualified[symbol],
-                    observer_supported=candidate in {"breakout_retest", "swing_breakout_retest_v0"},
+                    observer_supported=True,
                 )
             )
     return rows
@@ -143,7 +143,8 @@ def attach_phase2_experimental_demo_observers(
         "attachments": [_attachment_payload(row) for row in attachments],
         "observer_limitations": [
             "breakout_retest and swing_breakout_retest_v0 use the native Phase 1 breakout-retest observer.",
-            "symbol_normalized_round_retest_v0, round_number_retest_v0, and session_extreme_retest_v0 are attached as telemetry stubs until exact MQL observers are implemented.",
+            "symbol_normalized_round_retest_v0, round_number_retest_v0, and session_extreme_retest_v0 now use experimental MQL dry-run observers for signal telemetry only.",
+            "All observers remain dry-run and explicitly set broker_action_allowed=false.",
         ],
     }
     output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -407,7 +408,7 @@ def _render_markdown(payload: dict[str, Any]) -> str:
                 candidate=item["candidate"],
                 status=item["status"],
                 symbol=item["symbol"],
-                observer="native" if item["observer_supported"] else "attached_stub_pending_mql_observer",
+                observer="native_signal_logger" if item["observer_supported"] else "attached_stub_pending_mql_observer",
                 qualification=item["qualification_source"],
             )
         )

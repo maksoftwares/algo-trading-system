@@ -15,7 +15,9 @@ expert_monthly_mean,emr_inactivity_long_v0,,0.0021957544921479165,0.237141485151
 expert_monthly_mean,extreme_activity_mean_reversion_v0,,-0.10633267106308006,-11.483928474812647,,ALTERNATIVE
 expert_monthly_mean,gold_fx_proxy_divergence_v0,,-0.05481653317229278,-5.92018558260762,,ALTERNATIVE
 expert_monthly_mean,h1_calendar_drift_state_v0,,-0.32970588599881134,-35.60823568787163,,ALTERNATIVE
+expert_monthly_mean,h1_gdx_gld_trend_confirmation_v0,,-0.061950018724268655,-6.6906020222210145,,ALTERNATIVE
 expert_monthly_mean,h1_m5_path_skew_reversal_v0,,-0.12384165693256038,-13.374898948716522,,ALTERNATIVE
+expert_monthly_mean,h1_macro_composite_pullback_v0,,0.02336223581842199,2.523121468389575,,ALTERNATIVE
 expert_monthly_mean,h1_macro_event_aftershock_v0,,-0.014358018518354573,-1.5506659999822938,,ALTERNATIVE
 expert_monthly_mean,h1_return_autocorrelation_state_v0,,-0.013007586702016023,-1.4048193638177304,,ALTERNATIVE
 expert_monthly_mean,h1_smooth_trend_exhaustion_reversal_v0,,-0.08283603904168786,-8.94629221650229,,ALTERNATIVE
@@ -26,6 +28,9 @@ expert_monthly_mean,h4_breakeven_inflation_momentum_v0,,0.12544521365582922,13.5
 expert_monthly_mean,h4_credit_spread_stress_momentum_v0,,-0.05817928610187882,-6.2833628990029124,,ALTERNATIVE
 expert_monthly_mean,h4_d1_momentum_expansion_continuation_v0,,0.04971137119376353,5.3688280889264615,,ALTERNATIVE
 expert_monthly_mean,h4_financial_conditions_stress_reversal_v0,,-0.026571282362179514,-2.8696984951153874,,ALTERNATIVE
+expert_monthly_mean,h4_gdx_gld_miner_divergence_v0,,0.005029223935462889,0.543156185029992,,ALTERNATIVE
+expert_monthly_mean,h4_gld_etf_flow_reversal_v0,,0.05834773896722181,6.301555808459955,,ALTERNATIVE
+expert_monthly_mean,h4_gld_etf_flow_reversal_v1,,0.006652271951980026,0.7184453708138427,,ALTERNATIVE
 expert_monthly_mean,h4_gold_futures_volume_climax_v0,,-0.009474231220971479,-1.0232169718649198,,ALTERNATIVE
 expert_monthly_mean,h4_gvz_volatility_panic_reversal_v0,,-0.01150570245091532,-1.2426158646988545,,ALTERNATIVE
 expert_monthly_mean,h4_inside_bar_d1_momentum_breakout_v0,,0.06464559369789213,6.981724119372351,,ALTERNATIVE
@@ -50,6 +55,7 @@ expert_monthly_mean,ny_london_overlap_compression_break_v0,,-0.01003723638035651
 expert_monthly_mean,opening_drive_failed_continuation_v0,,-0.17618270848107465,-19.02773251595606,,ALTERNATIVE
 expert_monthly_mean,post_spike_short_v0,,-0.06596305809520737,-7.124010274282396,,ALTERNATIVE
 expert_monthly_mean,previous_day_extreme_retest_v0,,-0.19028281906618452,-20.55054445914793,,ALTERNATIVE
+expert_monthly_mean,quarter_round_retest_v0,,16.759746279592218,1810.0525981959595,,ALTERNATIVE
 expert_monthly_mean,range_mr,,-0.03748186335593795,-4.048041242441299,,ALTERNATIVE
 expert_monthly_mean,round_number_retest_v0,,11.050705306400577,1193.4761730912624,,ALTERNATIVE
 expert_monthly_mean,session_extreme_retest_v0,,5.474702908164751,591.2679140817932,,ALTERNATIVE
@@ -80,7 +86,9 @@ pairwise_spa,breakout_retest,emr_inactivity_long_v0,12.964432663115518,,0.000199
 pairwise_spa,breakout_retest,extreme_activity_mean_reversion_v0,13.072961088670748,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,gold_fx_proxy_divergence_v0,13.021444950779959,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h1_calendar_drift_state_v0,13.296334303606477,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,h1_gdx_gld_trend_confirmation_v0,13.028578436331937,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h1_m5_path_skew_reversal_v0,13.090470074540226,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,h1_macro_composite_pullback_v0,12.943266181789241,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h1_macro_event_aftershock_v0,12.980986436126022,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h1_return_autocorrelation_state_v0,12.979636004309683,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h1_smooth_trend_exhaustion_reversal_v0,13.049464456649355,,0.0001999600079984003,PASS
@@ -91,6 +99,9 @@ pairwise_spa,breakout_retest,h4_breakeven_inflation_momentum_v0,12.8411832039518
 pairwise_spa,breakout_retest,h4_credit_spread_stress_momentum_v0,13.024807703709543,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h4_d1_momentum_expansion_continuation_v0,12.916917046413902,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h4_financial_conditions_stress_reversal_v0,12.993199699969844,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,h4_gdx_gld_miner_divergence_v0,12.961599193672203,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,h4_gld_etf_flow_reversal_v0,12.908280678640441,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,h4_gld_etf_flow_reversal_v1,12.959976145655684,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h4_gold_futures_volume_climax_v0,12.976102648828636,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h4_gvz_volatility_panic_reversal_v0,12.978134120058582,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,h4_inside_bar_d1_momentum_breakout_v0,12.901982823909773,,0.0001999600079984003,PASS
@@ -115,13 +126,14 @@ pairwise_spa,breakout_retest,ny_london_overlap_compression_break_v0,12.976665653
 pairwise_spa,breakout_retest,opening_drive_failed_continuation_v0,13.14281112608874,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,post_spike_short_v0,13.032591475702874,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,previous_day_extreme_retest_v0,13.156911236673851,,0.0001999600079984003,PASS
+pairwise_spa,breakout_retest,quarter_round_retest_v0,-3.7931178619845514,,0.9998000399920016,FAIL
 pairwise_spa,breakout_retest,range_mr,13.004110280963603,,0.0001999600079984003,PASS
-pairwise_spa,breakout_retest,round_number_retest_v0,1.9159231112070922,,0.01739652069586083,FAIL
+pairwise_spa,breakout_retest,round_number_retest_v0,1.9159231112070922,,0.017196560687862426,FAIL
 pairwise_spa,breakout_retest,session_extreme_retest_v0,7.491925509442914,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,session_vwap_reclaim_v0,13.327231416887317,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,squeeze_breakout_long_v0,12.929271142257118,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,swing_breakout_retest_v0,1.764727744745092,,0.0001999600079984003,PASS
-pairwise_spa,breakout_retest,symbol_normalized_round_retest_v0,1.9159231112070922,,0.014797040591881624,FAIL
+pairwise_spa,breakout_retest,symbol_normalized_round_retest_v0,1.9159231112070922,,0.014197160567886422,FAIL
 pairwise_spa,breakout_retest,symbol_round_sweep_reversal_v0,13.641603481895945,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,trend_pullback,14.782198092281279,,0.0001999600079984003,PASS
 pairwise_spa,breakout_retest,w1_d1_momentum_continuation_v0,12.914372257446065,,0.0001999600079984003,PASS
