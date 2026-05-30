@@ -148,6 +148,7 @@ Expected path:
 | 127 | `h1_policy_uncertainty_intraday_reversal_v0` | REJECTED_FIRST_PASS | H1 policy-uncertainty shock intraday reversal lane; 366 total cost-cell trades, 6/9 trade-count cells, and 0/9 PF cells; Pepperstone/Dukascopy had mild positive pockets below threshold while Capital.com was negative. |
 | 128 | `h1_breakeven_inflation_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 breakeven-inflation shock reversal lane; 855 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; every broker/cost window was negative. |
 | 129 | `h1_treasury_curve_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 Treasury-rate/curve shock reversal lane; 558 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; max zero-trade months reached 10. |
+| 130 | `h1_credit_spread_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 corporate credit-spread shock reversal lane; 1,002 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy's small positive pocket stayed far below threshold. |
 
 ## Discipline
 
@@ -261,6 +262,8 @@ Expected path:
 - Latest GLD/SPY safe-haven rotation candidate `h1_gld_spy_safe_haven_rotation_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted GLD/SPY relative strength with H1 XAU trend confirmation. It produced 1,596 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; all cells were below threshold and Dukascopy P95 turned negative.
 - Latest VIX risk-off followthrough candidate `h4_vix_risk_off_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted daily VIX stress with H4 XAU trend confirmation. It produced 1,404 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com was positive below threshold while Pepperstone/Dukascopy were negative.
 - Latest Treasury-rate/curve shock reversal candidate `h1_treasury_curve_shock_reversal_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED DGS2/DGS10/T10Y2Y shocks with H1 XAU overreaction/reversal. It produced 558 total cost-cell trades, 9/9 trade-count cells, and 0/9 PF cells; max zero-trade months reached 10.
+- Latest corporate credit-spread shock reversal candidate `h1_credit_spread_shock_reversal_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED BAA10Y/AAA10Y shocks with H1 XAU overreaction/reversal. It produced 1,002 total cost-cell trades, 9/9 trade-count cells, and 0/9 PF cells; the best PF was only 1.0278.
+- Latest financial-conditions shock reversal candidate `h1_financial_conditions_shock_reversal_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED NFCI/ANFCI shocks with H1 XAU overreaction/reversal. It produced 1,284 total cost-cell trades, 9/9 trade-count cells, and 0/9 PF cells; the best PF was only 1.0737 and max zero-trade months reached 6.
 - The stronger strategic next move remains adding a higher-quality new data class, preferably primary COMEX/CME volume/order-flow or options-skew data rather than another OHLC-only or non-authoritative proxy.
 - `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -272,7 +275,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 30
-  M30_H1: 68
+  M30_H1: 70
   H4_D1: 26
   W1_plus: 1
   planned_next_H4_D1: []
@@ -294,3 +297,7 @@ hypothesis_timeframe_coverage:
 `h1_breakeven_inflation_shock_reversal_v0` also counts as an M30/H1 breakeven-inflation shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
 
 `h1_treasury_curve_shock_reversal_v0` also counts as an M30/H1 Treasury-rate/curve shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
+
+`h1_credit_spread_shock_reversal_v0` also counts as an M30/H1 corporate credit-spread shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
+
+`h1_financial_conditions_shock_reversal_v0` also counts as an M30/H1 financial-conditions shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.

@@ -21,6 +21,8 @@ RESEARCH_EXPERTS = (
     "h1_broker_fx_usd_pressure_followthrough_v0",
     "h1_broker_fx_usd_pressure_conflict_reversion_v0",
     "h1_btc_risk_pressure_gold_followthrough_v0",
+    "h1_credit_spread_shock_reversal_v0",
+    "h1_financial_conditions_shock_reversal_v0",
     "h1_qqq_spy_growth_risk_rotation_followthrough_v0",
     "h1_iwm_spy_size_risk_rotation_followthrough_v0",
     "h1_slv_gld_precious_beta_rotation_followthrough_v0",

@@ -15,6 +15,12 @@ from phase0.strategies.h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0 impor
 from phase0.strategies.h1_breakeven_inflation_shock_reversal_v0 import (
     H1BreakevenInflationShockReversalV0Strategy,
 )
+from phase0.strategies.h1_credit_spread_shock_reversal_v0 import (
+    H1CreditSpreadShockReversalV0Strategy,
+)
+from phase0.strategies.h1_financial_conditions_shock_reversal_v0 import (
+    H1FinancialConditionsShockReversalV0Strategy,
+)
 from phase0.strategies.h1_dbc_uup_commodity_dollar_followthrough_v0 import (
     H1DbcUupCommodityDollarFollowthroughV0Strategy,
 )
@@ -272,6 +278,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     CotGoldPositioningReversalV0Strategy.name: CotGoldPositioningReversalV0Strategy,
     H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy.name: H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
     H1BreakevenInflationShockReversalV0Strategy.name: H1BreakevenInflationShockReversalV0Strategy,
+    H1CreditSpreadShockReversalV0Strategy.name: H1CreditSpreadShockReversalV0Strategy,
+    H1FinancialConditionsShockReversalV0Strategy.name: H1FinancialConditionsShockReversalV0Strategy,
     H1DbbUupIndustrialMetalsFollowthroughV0Strategy.name: H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
     H1DbcUupCommodityDollarFollowthroughV0Strategy.name: H1DbcUupCommodityDollarFollowthroughV0Strategy,
     H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy.name: H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy,

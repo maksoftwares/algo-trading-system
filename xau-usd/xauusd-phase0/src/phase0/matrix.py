@@ -24,7 +24,7 @@ from phase0.cot_gold_data import COT_FRAME_KEY
 from phase0.cot_gold_data import EXPERT_NAMES as COT_GOLD_EXPERT_NAMES
 from phase0.cot_gold_data import load_cot_gold_context
 from phase0.credit_spread_data import CREDIT_SPREAD_FRAME_KEY
-from phase0.credit_spread_data import EXPERT_NAME as CREDIT_SPREAD_EXPERT_NAME
+from phase0.credit_spread_data import EXPERT_NAMES as CREDIT_SPREAD_EXPERT_NAMES
 from phase0.credit_spread_data import load_credit_spread_context
 from phase0.dbc_uup_commodity_dollar_data import EXPERT_NAMES as DBC_UUP_COMMODITY_DOLLAR_EXPERT_NAMES
 from phase0.dbc_uup_commodity_dollar_data import DBC_UUP_COMMODITY_DOLLAR_FRAME_KEY
@@ -89,7 +89,7 @@ from phase0.gold_fx_proxy_data import EXPERT_NAME as GOLD_FX_PROXY_EXPERT_NAME
 from phase0.gold_fx_proxy_data import check_gold_fx_proxy_data
 from phase0.gold_fx_proxy_data import load_gold_fx_proxy_h1_context
 from phase0.financial_conditions_data import (
-    EXPERT_NAME as FINANCIAL_CONDITIONS_EXPERT_NAME,
+    EXPERT_NAMES as FINANCIAL_CONDITIONS_EXPERT_NAMES,
 )
 from phase0.financial_conditions_data import FINANCIAL_CONDITIONS_FRAME_KEY
 from phase0.financial_conditions_data import load_financial_conditions_context
@@ -255,7 +255,7 @@ def run_phase0_matrix(
             _assert_dbc_uup_commodity_dollar_data_ready(config)
         if expert_name in DBB_UUP_INDUSTRIAL_METALS_EXPERT_NAMES and not synthetic_sample:
             _assert_dbb_uup_industrial_metals_data_ready(config)
-        if expert_name == CREDIT_SPREAD_EXPERT_NAME and not synthetic_sample:
+        if expert_name in CREDIT_SPREAD_EXPERT_NAMES and not synthetic_sample:
             _assert_credit_spread_data_ready(config)
         if expert_name in MACRO_COMPOSITE_EXPERT_NAMES and not synthetic_sample:
             _assert_macro_composite_data_ready(config)
@@ -271,7 +271,7 @@ def run_phase0_matrix(
         if expert_name == MOVE_BOND_VOL_EXPERT_NAME and not synthetic_sample:
             _assert_move_bond_vol_data_ready(config)
             _assert_vix_risk_data_ready(config)
-        if expert_name == FINANCIAL_CONDITIONS_EXPERT_NAME and not synthetic_sample:
+        if expert_name in FINANCIAL_CONDITIONS_EXPERT_NAMES and not synthetic_sample:
             _assert_financial_conditions_data_ready(config)
         if expert_name in GDX_GLD_RELATIVE_EXPERT_NAMES and not synthetic_sample:
             _assert_gdx_gld_relative_data_ready(config)
@@ -436,7 +436,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == CREDIT_SPREAD_EXPERT_NAME:
+                if expert_name in CREDIT_SPREAD_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         CREDIT_SPREAD_FRAME_KEY: load_credit_spread_context(
@@ -539,7 +539,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == FINANCIAL_CONDITIONS_EXPERT_NAME:
+                if expert_name in FINANCIAL_CONDITIONS_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         FINANCIAL_CONDITIONS_FRAME_KEY: load_financial_conditions_context(

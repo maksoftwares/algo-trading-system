@@ -7,7 +7,11 @@ import pandas as pd
 from phase0.config import ConfigError, ProjectConfig
 
 
-EXPERT_NAME = "h4_financial_conditions_stress_reversal_v0"
+EXPERT_NAMES = (
+    "h4_financial_conditions_stress_reversal_v0",
+    "h1_financial_conditions_shock_reversal_v0",
+)
+EXPERT_NAME = EXPERT_NAMES[0]
 FINANCIAL_CONDITIONS_FRAME_KEY = "financial_conditions"
 FINANCIAL_CONDITIONS_RAW_DIR = Path("data/raw/financial_conditions")
 NFCI_FILE = "FRED_NFCI.csv"

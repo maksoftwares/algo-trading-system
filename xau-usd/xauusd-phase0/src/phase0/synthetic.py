@@ -61,6 +61,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_friday_position_squaring_reversion_context()
     if expert == "h4_credit_spread_stress_momentum_v0":
         return _h4_credit_spread_stress_momentum_context()
+    if expert == "h1_credit_spread_shock_reversal_v0":
+        return _h1_credit_spread_shock_reversal_context()
     if expert == "d1_compression_h4_expansion_v0":
         return _d1_compression_h4_expansion_context()
     if expert == "d1_inside_day_breakout_v0":
@@ -201,6 +203,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_d1_momentum_expansion_continuation_context()
     if expert == "h4_financial_conditions_stress_reversal_v0":
         return _h4_financial_conditions_stress_reversal_context()
+    if expert == "h1_financial_conditions_shock_reversal_v0":
+        return _h1_financial_conditions_shock_reversal_context()
     if expert == "h4_gdx_gld_miner_divergence_v0":
         return _h4_gdx_gld_miner_divergence_context()
     if expert == "h4_gld_etf_flow_reversal_v0":
@@ -4414,6 +4418,89 @@ def _h4_credit_spread_stress_momentum_context() -> dict:
     }
 
 
+def _h1_credit_spread_shock_reversal_context() -> dict:
+    credit_dates = pd.bdate_range("2022-01-03", periods=560, tz="UTC")
+    baa10y: list[float] = []
+    aaa10y: list[float] = []
+    for index in range(560):
+        if index < 430:
+            baa10y.append(1.80 + (0.006 if index % 2 else -0.006))
+            aaa10y.append(1.10 + (0.003 if index % 2 else -0.003))
+        else:
+            step = index - 429
+            baa10y.append(1.80 + 0.014 * step)
+            aaa10y.append(1.10 + 0.005 * step)
+    credit = pd.DataFrame(
+        {
+            "timestamp_utc": credit_dates,
+            "baa10y": baa10y,
+            "aaa10y": aaa10y,
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(credit_dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.04 if index % 5 else -0.02
+        elif index < signal_index:
+            current -= 0.45
+        elif index == signal_index:
+            current += 1.20
+        else:
+            current += 0.05 if index % 4 else -0.03
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 2.0)
+
+    h4_times = pd.date_range(h1_times[0] + pd.Timedelta(hours=4), periods=120, freq="4h")
+    h4_closes = [2000.0 + 0.03 * index for index in range(120)]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1992.0] * 40,
+            "close": [2001.0] * 40,
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "credit_spread": credit,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
 def _h4_macro_composite_risk_state_context() -> dict:
     dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
     macro_values: dict[str, list[float]] = {
@@ -5195,6 +5282,89 @@ def _h4_financial_conditions_stress_reversal_context() -> dict:
             "ask_open": [closes[-1] + 0.1] * m5_periods,
             "bid_close": [closes[-1] + 0.4] * m5_periods,
             "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "financial_conditions": financial_conditions,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_financial_conditions_shock_reversal_context() -> dict:
+    condition_dates = pd.date_range("2018-01-05", periods=300, freq="7D", tz="UTC")
+    nfci: list[float] = []
+    anfci: list[float] = []
+    for index in range(300):
+        if index < 190:
+            nfci.append(-0.50 + 0.008 * (index % 5))
+            anfci.append(-0.44 + 0.007 * (index % 5))
+        else:
+            step = index - 189
+            nfci.append(-0.50 + 0.032 * step)
+            anfci.append(-0.44 + 0.028 * step)
+    financial_conditions = pd.DataFrame(
+        {"timestamp_utc": condition_dates, "nfci": nfci, "anfci": anfci}
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(
+        condition_dates[220] + pd.Timedelta(hours=7),
+        periods=h1_periods,
+        freq="1h",
+    )
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.04 if index % 5 else -0.02
+        elif index < signal_index:
+            current -= 0.45
+        elif index == signal_index:
+            current += 1.20
+        else:
+            current += 0.05 if index % 4 else -0.03
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 2.0)
+
+    h4_times = pd.date_range(h1_times[0] + pd.Timedelta(hours=4), periods=120, freq="4h")
+    h4_closes = [2000.0 + 0.03 * index for index in range(120)]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1992.0] * 40,
+            "close": [2001.0] * 40,
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
         }
     )
     return {

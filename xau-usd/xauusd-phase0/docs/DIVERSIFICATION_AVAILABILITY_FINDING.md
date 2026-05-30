@@ -111,6 +111,8 @@ Additional H1 intermarket, volatility-regime, and event-regime diversification a
 | 56 | `h1_policy_uncertainty_intraday_reversal_v0` | FRED USEPUINDXD policy-uncertainty shock reversal | 0/9 | REJECTED_FIRST_PASS |
 | 57 | `h1_breakeven_inflation_shock_reversal_v0` | FRED T5YIE/T10YIE breakeven-inflation shock reversal | 0/9 | REJECTED_FIRST_PASS |
 | 58 | `h1_treasury_curve_shock_reversal_v0` | FRED DGS2/DGS10/T10Y2Y Treasury-rate/curve shock reversal | 0/9 | REJECTED_FIRST_PASS |
+| 59 | `h1_credit_spread_shock_reversal_v0` | FRED BAA10Y/AAA10Y corporate credit-spread shock reversal | 0/9 | REJECTED_FIRST_PASS |
+| 60 | `h1_financial_conditions_shock_reversal_v0` | FRED NFCI/ANFCI financial-conditions shock reversal | 0/9 | REJECTED_FIRST_PASS |
 
 Supporting artifacts:
 
