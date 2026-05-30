@@ -19,6 +19,7 @@ extreme_activity_mean_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,
 gold_fx_proxy_divergence_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1044,99,132,117.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_acwx_spy_global_ex_us_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1008,89,130,117.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1143,109,144,128.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_breakeven_inflation_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,855,82,116,87.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_broker_fx_usd_pressure_conflict_reversion_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,402,24,76,34.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h1_broker_fx_usd_pressure_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,2280,196,287,277.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_btc_risk_pressure_gold_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,558,51,80,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
@@ -52,6 +53,7 @@ h1_macro_event_aftershock_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,81
 h1_month_turn_flow_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1524,165,176,167.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_month_turn_flow_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,780,79,94,87.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_move_vix_bond_vol_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,531,23,84,70.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
+h1_policy_uncertainty_intraday_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,366,31,51,40.0,3,multi_cell_survival;sample_size;concentration,FAIL,FAIL,PASS,FAIL,PASS,PASS
 h1_qqq_spy_growth_risk_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1017,80,146,113.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_real_yield_dollar_shock_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,474,31,78,49.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h1_real_yield_dollar_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,507,39,86,44.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
@@ -66,6 +68,7 @@ h1_tip_ief_real_yield_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECT
 h1_tlt_shy_duration_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1467,140,176,173.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_tlt_uup_pressure_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1473,144,174,173.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_tlt_uup_pressure_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1149,119,140,124.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_treasury_curve_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,558,53,75,58.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_uso_uup_oil_dollar_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1353,144,154,153.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_vix_term_structure_inversion_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,897,86,110,103.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_vix_term_structure_inversion_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,513,46,70,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS

@@ -144,7 +144,7 @@ from phase0.xlp_xly_consumer_rotation_data import EXPERT_NAMES as XLP_XLY_CONSUM
 from phase0.xlp_xly_consumer_rotation_data import XLP_XLY_CONSUMER_ROTATION_FRAME_KEY
 from phase0.xlp_xly_consumer_rotation_data import load_xlp_xly_consumer_rotation_context
 from phase0.inflation_expectations_data import (
-    EXPERT_NAME as INFLATION_EXPECTATIONS_EXPERT_NAME,
+    EXPERT_NAMES as INFLATION_EXPECTATIONS_EXPERT_NAMES,
 )
 from phase0.inflation_expectations_data import INFLATION_EXPECTATIONS_FRAME_KEY
 from phase0.inflation_expectations_data import load_inflation_expectations_context
@@ -154,7 +154,7 @@ from phase0.macro_event_calendar import load_macro_event_calendar_context
 from phase0.macro_real_yield_data import EXPERT_NAMES as MACRO_REAL_YIELD_EXPERT_NAMES
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
 from phase0.macro_real_yield_data import load_macro_real_yield_context
-from phase0.policy_uncertainty_data import EXPERT_NAME as POLICY_UNCERTAINTY_EXPERT_NAME
+from phase0.policy_uncertainty_data import EXPERT_NAMES as POLICY_UNCERTAINTY_EXPERT_NAMES
 from phase0.policy_uncertainty_data import POLICY_UNCERTAINTY_FRAME_KEY
 from phase0.policy_uncertainty_data import load_policy_uncertainty_context
 from phase0.qqq_spy_growth_rotation_data import QQQ_SPY_GROWTH_ROTATION_FRAME_KEY
@@ -171,7 +171,7 @@ from phase0.tip_ief_real_yield_rotation_data import TIP_IEF_REAL_YIELD_ROTATION_
 from phase0.tip_ief_real_yield_rotation_data import load_tip_ief_real_yield_rotation_context
 from phase0.strategies.registry import enabled_strategy_names, get_strategy
 from phase0.synthetic import synthetic_context_for_expert
-from phase0.treasury_curve_data import EXPERT_NAME as TREASURY_CURVE_EXPERT_NAME
+from phase0.treasury_curve_data import EXPERT_NAMES as TREASURY_CURVE_EXPERT_NAMES
 from phase0.treasury_curve_data import TREASURY_CURVE_FRAME_KEY
 from phase0.treasury_curve_data import load_treasury_curve_context
 from phase0.tlt_uup_macro_pressure_data import EXPERT_NAMES as TLT_UUP_PRESSURE_EXPERT_NAMES
@@ -247,7 +247,7 @@ def run_phase0_matrix(
             _assert_macro_real_yield_data_ready(config)
         if expert_name == MACRO_EVENT_EXPERT_NAME and not synthetic_sample:
             _assert_macro_event_calendar_ready(config)
-        if expert_name == POLICY_UNCERTAINTY_EXPERT_NAME and not synthetic_sample:
+        if expert_name in POLICY_UNCERTAINTY_EXPERT_NAMES and not synthetic_sample:
             _assert_policy_uncertainty_data_ready(config)
         if expert_name in COT_GOLD_EXPERT_NAMES and not synthetic_sample:
             _assert_cot_gold_data_ready(config)
@@ -309,9 +309,9 @@ def run_phase0_matrix(
             _assert_cny_dollar_pressure_data_ready(config)
         if expert_name in FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_fxa_uup_aussie_dollar_fx_rotation_data_ready(config)
-        if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME and not synthetic_sample:
+        if expert_name in INFLATION_EXPECTATIONS_EXPERT_NAMES and not synthetic_sample:
             _assert_inflation_expectations_data_ready(config)
-        if expert_name == TREASURY_CURVE_EXPERT_NAME and not synthetic_sample:
+        if expert_name in TREASURY_CURVE_EXPERT_NAMES and not synthetic_sample:
             _assert_treasury_curve_data_ready(config)
         if expert_name in TLT_UUP_PRESSURE_EXPERT_NAMES and not synthetic_sample:
             _assert_tlt_uup_macro_pressure_data_ready(config)
@@ -418,7 +418,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == POLICY_UNCERTAINTY_EXPERT_NAME:
+                if expert_name in POLICY_UNCERTAINTY_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         POLICY_UNCERTAINTY_FRAME_KEY: load_policy_uncertainty_context(
@@ -827,7 +827,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME:
+                if expert_name in INFLATION_EXPECTATIONS_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         INFLATION_EXPECTATIONS_FRAME_KEY: load_inflation_expectations_context(
@@ -836,7 +836,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == TREASURY_CURVE_EXPERT_NAME:
+                if expert_name in TREASURY_CURVE_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         TREASURY_CURVE_FRAME_KEY: load_treasury_curve_context(

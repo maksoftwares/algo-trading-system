@@ -108,6 +108,9 @@ Additional H1 intermarket, volatility-regime, and event-regime diversification a
 | 53 | `h1_move_vix_bond_vol_shock_reversal_v0` | Yahoo MOVE plus FRED VIX bond-volatility shock reversal | 0/9 | REJECTED_FIRST_PASS |
 | 54 | `h1_vix_term_structure_inversion_reversal_v0` | FRED VIX/VXV equity-volatility term structure | 0/9 | REJECTED_FIRST_PASS |
 | 55 | `h1_vix_term_structure_inversion_followthrough_v0` | FRED VIX/VXV equity-volatility term structure | 0/9 | REJECTED_FIRST_PASS |
+| 56 | `h1_policy_uncertainty_intraday_reversal_v0` | FRED USEPUINDXD policy-uncertainty shock reversal | 0/9 | REJECTED_FIRST_PASS |
+| 57 | `h1_breakeven_inflation_shock_reversal_v0` | FRED T5YIE/T10YIE breakeven-inflation shock reversal | 0/9 | REJECTED_FIRST_PASS |
+| 58 | `h1_treasury_curve_shock_reversal_v0` | FRED DGS2/DGS10/T10Y2Y Treasury-rate/curve shock reversal | 0/9 | REJECTED_FIRST_PASS |
 
 Supporting artifacts:
 

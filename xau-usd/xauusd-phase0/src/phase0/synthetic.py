@@ -91,6 +91,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _gold_fx_proxy_divergence_context()
     if expert == "h4_breakeven_inflation_momentum_v0":
         return _h4_breakeven_inflation_momentum_context()
+    if expert == "h1_breakeven_inflation_shock_reversal_v0":
+        return _h1_breakeven_inflation_shock_reversal_context()
     if expert == "h1_calendar_drift_state_v0":
         return _h1_calendar_drift_state_context()
     if expert == "h1_gdx_gld_trend_confirmation_v0":
@@ -119,6 +121,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_month_turn_flow_continuation_context()
     if expert == "h1_month_turn_flow_reversion_v0":
         return _h1_month_turn_flow_reversion_context()
+    if expert == "h1_policy_uncertainty_intraday_reversal_v0":
+        return _h1_policy_uncertainty_intraday_reversal_context()
     if expert == "h1_return_autocorrelation_state_v0":
         return _h1_return_autocorrelation_state_context()
     if expert == "h1_session_impulse_reversion_v0":
@@ -139,6 +143,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_tlt_uup_pressure_reversion_context()
     if expert == "h1_tlt_shy_duration_rotation_followthrough_v0":
         return _h1_tlt_shy_duration_rotation_followthrough_context()
+    if expert == "h1_treasury_curve_shock_reversal_v0":
+        return _h1_treasury_curve_shock_reversal_context()
     if expert == "h1_uso_uup_oil_dollar_followthrough_v0":
         return _h1_uso_uup_oil_dollar_followthrough_context()
     if expert == "h1_volatility_squeeze_breakout_v0":
@@ -4066,6 +4072,84 @@ def _h4_breakeven_inflation_momentum_context() -> dict:
     }
 
 
+def _h1_breakeven_inflation_shock_reversal_context() -> dict:
+    inflation_dates = pd.bdate_range("2021-01-04", periods=420, tz="UTC")
+    breakeven_5y: list[float] = []
+    breakeven_10y: list[float] = []
+    for index in range(420):
+        if index < 280:
+            breakeven_5y.append(2.00 + (0.01 if index % 2 else -0.01))
+            breakeven_10y.append(2.10 + (0.005 if index % 2 else -0.005))
+        else:
+            step = index - 279
+            breakeven_5y.append(2.00 + 0.014 * step)
+            breakeven_10y.append(2.10 + 0.010 * step)
+    inflation = pd.DataFrame(
+        {
+            "timestamp_utc": inflation_dates,
+            "breakeven_5y": breakeven_5y,
+            "breakeven_10y": breakeven_10y,
+        }
+    )
+
+    h1_periods = 240
+    h1_times = pd.date_range(
+        inflation_dates[340] + pd.Timedelta(hours=1),
+        periods=h1_periods,
+        freq="1h",
+    )
+    closes: list[float] = []
+    current = 2050.0
+    for index in range(h1_periods):
+        if index < 110:
+            current -= 0.70
+        else:
+            current += 0.12
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+
+    h4_times = h1_times[::4]
+    h4_closes = [float(value) for value in h1["close"].iloc[::4]]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=14, freq="1D")
+    d1_closes = [closes[min(index * 24, len(closes) - 1)] for index in range(14)]
+    d1 = _ohlc_from_closes(d1_times, d1_closes, "capital_com", "XAUUSD", "D1")
+
+    m5_periods = h1_periods * 12 + 216
+    last_close = closes[-1]
+    m5_times = pd.date_range(
+        h1_times[0] + pd.Timedelta(minutes=5),
+        periods=m5_periods,
+        freq="5min",
+    )
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * m5_periods,
+            "high": [last_close + 1.5] * m5_periods,
+            "low": [last_close - 1.5] * m5_periods,
+            "close": [last_close + 0.35] * m5_periods,
+            "mid_open": [last_close] * m5_periods,
+            "mid_close": [last_close + 0.35] * m5_periods,
+            "bid_open": [last_close - 0.1] * m5_periods,
+            "ask_open": [last_close + 0.1] * m5_periods,
+            "bid_close": [last_close + 0.25] * m5_periods,
+            "ask_close": [last_close + 0.45] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "inflation_expectations": inflation,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
 def _h4_treasury_curve_stress_momentum_context() -> dict:
     treasury_dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
     dgs2: list[float] = []
@@ -4146,6 +4230,88 @@ def _h4_treasury_curve_stress_momentum_context() -> dict:
             "ask_open": [closes[-1] + 0.1] * m5_periods,
             "bid_close": [closes[-1] + 0.4] * m5_periods,
             "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "treasury_curve": treasury,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_treasury_curve_shock_reversal_context() -> dict:
+    treasury_dates = pd.bdate_range("2021-01-04", periods=420, tz="UTC")
+    dgs2: list[float] = []
+    dgs10: list[float] = []
+    curve: list[float] = []
+    for index in range(420):
+        if index < 280:
+            dgs2.append(4.30 + (0.01 if index % 2 else -0.01))
+            dgs10.append(4.20 + (0.005 if index % 2 else -0.005))
+            curve.append(-0.10 + (0.005 if index % 2 else -0.005))
+        else:
+            step = index - 279
+            dgs2.append(4.30 - 0.022 * step)
+            dgs10.append(4.20 - 0.014 * step)
+            curve.append(-0.10 + 0.009 * step)
+    treasury = pd.DataFrame(
+        {
+            "timestamp_utc": treasury_dates,
+            "dgs2": dgs2,
+            "dgs10": dgs10,
+            "treasury_10y2y": curve,
+        }
+    )
+
+    h1_periods = 240
+    h1_times = pd.date_range(
+        treasury_dates[340] + pd.Timedelta(hours=1),
+        periods=h1_periods,
+        freq="1h",
+    )
+    closes: list[float] = []
+    current = 2050.0
+    for index in range(h1_periods):
+        if index < 110:
+            current -= 0.70
+        else:
+            current += 0.12
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+
+    h4_times = h1_times[::4]
+    h4_closes = [float(value) for value in h1["close"].iloc[::4]]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=14, freq="1D")
+    d1_closes = [closes[min(index * 24, len(closes) - 1)] for index in range(14)]
+    d1 = _ohlc_from_closes(d1_times, d1_closes, "capital_com", "XAUUSD", "D1")
+
+    m5_periods = h1_periods * 12 + 216
+    last_close = closes[-1]
+    m5_times = pd.date_range(
+        h1_times[0] + pd.Timedelta(minutes=5),
+        periods=m5_periods,
+        freq="5min",
+    )
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * m5_periods,
+            "high": [last_close + 1.5] * m5_periods,
+            "low": [last_close - 1.5] * m5_periods,
+            "close": [last_close + 0.35] * m5_periods,
+            "mid_open": [last_close] * m5_periods,
+            "mid_close": [last_close + 0.35] * m5_periods,
+            "bid_open": [last_close - 0.1] * m5_periods,
+            "ask_open": [last_close + 0.1] * m5_periods,
+            "bid_close": [last_close + 0.25] * m5_periods,
+            "ask_close": [last_close + 0.45] * m5_periods,
         }
     )
     return {
@@ -4864,6 +5030,80 @@ def _h4_policy_uncertainty_safe_haven_context() -> dict:
             "ask_open": [closes[-1] + 0.1] * m5_periods,
             "bid_close": [closes[-1] + 0.4] * m5_periods,
             "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "policy_uncertainty": policy,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_policy_uncertainty_intraday_reversal_context() -> dict:
+    policy_dates = pd.bdate_range("2021-01-04", periods=420, tz="UTC")
+    policy_values: list[float] = []
+    for index in range(420):
+        if index < 280:
+            policy_values.append(115.0 + (8.0 if index % 2 else -8.0))
+        else:
+            step = index - 279
+            policy_values.append(120.0 + 4.0 * step)
+    policy = pd.DataFrame(
+        {
+            "timestamp_utc": policy_dates,
+            "policy_uncertainty": policy_values,
+        }
+    )
+
+    h1_periods = 240
+    h1_times = pd.date_range(
+        policy_dates[340] + pd.Timedelta(hours=1),
+        periods=h1_periods,
+        freq="1h",
+    )
+    closes: list[float] = []
+    current = 2050.0
+    for index in range(h1_periods):
+        if index < 110:
+            current -= 0.70
+        else:
+            current += 0.12
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+
+    h4_times = h1_times[::4]
+    h4_closes = [float(value) for value in h1["close"].iloc[::4]]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=14, freq="1D")
+    d1_closes = [closes[min(index * 24, len(closes) - 1)] for index in range(14)]
+    d1 = _ohlc_from_closes(d1_times, d1_closes, "capital_com", "XAUUSD", "D1")
+
+    m5_periods = h1_periods * 12 + 216
+    last_close = closes[-1]
+    m5_times = pd.date_range(
+        h1_times[0] + pd.Timedelta(minutes=5),
+        periods=m5_periods,
+        freq="5min",
+    )
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * m5_periods,
+            "high": [last_close + 1.5] * m5_periods,
+            "low": [last_close - 1.5] * m5_periods,
+            "close": [last_close + 0.35] * m5_periods,
+            "mid_open": [last_close] * m5_periods,
+            "mid_close": [last_close + 0.35] * m5_periods,
+            "bid_open": [last_close - 0.1] * m5_periods,
+            "ask_open": [last_close + 0.1] * m5_periods,
+            "bid_close": [last_close + 0.25] * m5_periods,
+            "ask_close": [last_close + 0.45] * m5_periods,
         }
     )
     return {

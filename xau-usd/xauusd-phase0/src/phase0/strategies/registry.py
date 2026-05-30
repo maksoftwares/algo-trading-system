@@ -12,6 +12,9 @@ from phase0.strategies.cot_gold_positioning_reversal_v0 import CotGoldPositionin
 from phase0.strategies.h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0 import (
     H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
 )
+from phase0.strategies.h1_breakeven_inflation_shock_reversal_v0 import (
+    H1BreakevenInflationShockReversalV0Strategy,
+)
 from phase0.strategies.h1_dbc_uup_commodity_dollar_followthrough_v0 import (
     H1DbcUupCommodityDollarFollowthroughV0Strategy,
 )
@@ -131,6 +134,9 @@ from phase0.strategies.h1_return_autocorrelation_state_v0 import (
 from phase0.strategies.h1_m5_path_skew_reversal_v0 import H1M5PathSkewReversalV0Strategy
 from phase0.strategies.h1_month_turn_flow_continuation_v0 import H1MonthTurnFlowContinuationV0Strategy
 from phase0.strategies.h1_month_turn_flow_reversion_v0 import H1MonthTurnFlowReversionV0Strategy
+from phase0.strategies.h1_policy_uncertainty_intraday_reversal_v0 import (
+    H1PolicyUncertaintyIntradayReversalV0Strategy,
+)
 from phase0.strategies.h1_real_yield_dollar_shock_followthrough_v0 import (
     H1RealYieldDollarShockFollowthroughV0Strategy,
 )
@@ -156,6 +162,9 @@ from phase0.strategies.h1_tlt_uup_pressure_followthrough_v0 import (
 )
 from phase0.strategies.h1_tlt_shy_duration_rotation_followthrough_v0 import (
     H1TltShyDurationRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_treasury_curve_shock_reversal_v0 import (
+    H1TreasuryCurveShockReversalV0Strategy,
 )
 from phase0.strategies.h1_uso_uup_oil_dollar_followthrough_v0 import (
     H1UsoUupOilDollarFollowthroughV0Strategy,
@@ -262,6 +271,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     CompressionRetestContinuationV0Strategy.name: CompressionRetestContinuationV0Strategy,
     CotGoldPositioningReversalV0Strategy.name: CotGoldPositioningReversalV0Strategy,
     H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy.name: H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
+    H1BreakevenInflationShockReversalV0Strategy.name: H1BreakevenInflationShockReversalV0Strategy,
     H1DbbUupIndustrialMetalsFollowthroughV0Strategy.name: H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
     H1DbcUupCommodityDollarFollowthroughV0Strategy.name: H1DbcUupCommodityDollarFollowthroughV0Strategy,
     H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy.name: H1EurjpyUsdjpyFxRiskRotationFollowthroughV0Strategy,
@@ -313,6 +323,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
     H1MonthTurnFlowContinuationV0Strategy.name: H1MonthTurnFlowContinuationV0Strategy,
     H1MonthTurnFlowReversionV0Strategy.name: H1MonthTurnFlowReversionV0Strategy,
+    H1PolicyUncertaintyIntradayReversalV0Strategy.name: H1PolicyUncertaintyIntradayReversalV0Strategy,
     H1RealYieldDollarShockFollowthroughV0Strategy.name: H1RealYieldDollarShockFollowthroughV0Strategy,
     H1RealYieldDollarShockReversalV0Strategy.name: H1RealYieldDollarShockReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
@@ -324,6 +335,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1TltShyDurationRotationFollowthroughV0Strategy.name: H1TltShyDurationRotationFollowthroughV0Strategy,
     H1TltUupPressureFollowthroughV0Strategy.name: H1TltUupPressureFollowthroughV0Strategy,
     H1TltUupPressureReversionV0Strategy.name: H1TltUupPressureReversionV0Strategy,
+    H1TreasuryCurveShockReversalV0Strategy.name: H1TreasuryCurveShockReversalV0Strategy,
     H1UsoUupOilDollarFollowthroughV0Strategy.name: H1UsoUupOilDollarFollowthroughV0Strategy,
     H1VixTermStructureInversionFollowthroughV0Strategy.name: H1VixTermStructureInversionFollowthroughV0Strategy,
     H1VixTermStructureInversionReversalV0Strategy.name: H1VixTermStructureInversionReversalV0Strategy,

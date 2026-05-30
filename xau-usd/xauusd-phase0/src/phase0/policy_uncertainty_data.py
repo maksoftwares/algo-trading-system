@@ -8,6 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h4_policy_uncertainty_safe_haven_v0"
+EXPERT_NAMES = (
+    "h4_policy_uncertainty_safe_haven_v0",
+    "h1_policy_uncertainty_intraday_reversal_v0",
+)
 POLICY_UNCERTAINTY_FRAME_KEY = "policy_uncertainty"
 POLICY_UNCERTAINTY_RAW_DIR = Path("data/raw/policy_uncertainty")
 POLICY_UNCERTAINTY_FILE = "FRED_USEPUINDXD.csv"
