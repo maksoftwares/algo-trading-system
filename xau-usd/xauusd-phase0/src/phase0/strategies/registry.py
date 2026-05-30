@@ -24,6 +24,9 @@ from phase0.strategies.h1_credit_spread_shock_followthrough_v0 import (
 from phase0.strategies.h1_financial_conditions_shock_reversal_v0 import (
     H1FinancialConditionsShockReversalV0Strategy,
 )
+from phase0.strategies.h1_financial_conditions_shock_followthrough_v0 import (
+    H1FinancialConditionsShockFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_dbc_uup_commodity_dollar_followthrough_v0 import (
     H1DbcUupCommodityDollarFollowthroughV0Strategy,
 )
@@ -114,8 +117,14 @@ from phase0.strategies.h1_gc_xau_basis_reversion_v0 import H1GcXauBasisReversion
 from phase0.strategies.h1_gvz_vix_vol_premium_reversal_v0 import (
     H1GvzVixVolPremiumReversalV0Strategy,
 )
+from phase0.strategies.h1_gvz_vix_vol_premium_followthrough_v0 import (
+    H1GvzVixVolPremiumFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_gvz_realized_vol_spread_reversal_v0 import (
     H1GvzRealizedVolSpreadReversalV0Strategy,
+)
+from phase0.strategies.h1_gvz_realized_vol_spread_followthrough_v0 import (
+    H1GvzRealizedVolSpreadFollowthroughV0Strategy,
 )
 from phase0.strategies.h1_move_vix_bond_vol_shock_reversal_v0 import (
     H1MoveVixBondVolShockReversalV0Strategy,
@@ -298,6 +307,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1BreakevenInflationShockReversalV0Strategy.name: H1BreakevenInflationShockReversalV0Strategy,
     H1CreditSpreadShockFollowthroughV0Strategy.name: H1CreditSpreadShockFollowthroughV0Strategy,
     H1CreditSpreadShockReversalV0Strategy.name: H1CreditSpreadShockReversalV0Strategy,
+    H1FinancialConditionsShockFollowthroughV0Strategy.name: H1FinancialConditionsShockFollowthroughV0Strategy,
     H1FinancialConditionsShockReversalV0Strategy.name: H1FinancialConditionsShockReversalV0Strategy,
     H1DbbUupIndustrialMetalsFollowthroughV0Strategy.name: H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
     H1DbcUupCommodityDollarFollowthroughV0Strategy.name: H1DbcUupCommodityDollarFollowthroughV0Strategy,
@@ -338,7 +348,9 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1GcMomentumPullbackV0Strategy.name: H1GcMomentumPullbackV0Strategy,
     H1GcXauBasisReversionV0Strategy.name: H1GcXauBasisReversionV0Strategy,
     H1GdxGldTrendConfirmationV0Strategy.name: H1GdxGldTrendConfirmationV0Strategy,
+    H1GvzRealizedVolSpreadFollowthroughV0Strategy.name: H1GvzRealizedVolSpreadFollowthroughV0Strategy,
     H1GvzRealizedVolSpreadReversalV0Strategy.name: H1GvzRealizedVolSpreadReversalV0Strategy,
+    H1GvzVixVolPremiumFollowthroughV0Strategy.name: H1GvzVixVolPremiumFollowthroughV0Strategy,
     H1GvzVixVolPremiumReversalV0Strategy.name: H1GvzVixVolPremiumReversalV0Strategy,
     H1MoveVixBondVolShockReversalV0Strategy.name: H1MoveVixBondVolShockReversalV0Strategy,
     H1HygIefCreditRiskRotationFollowthroughV0Strategy.name: H1HygIefCreditRiskRotationFollowthroughV0Strategy,

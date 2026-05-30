@@ -150,9 +150,12 @@ Expected path:
 | 129 | `h1_treasury_curve_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 Treasury-rate/curve shock reversal lane; 558 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; max zero-trade months reached 10. |
 | 130 | `h1_credit_spread_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 corporate credit-spread shock reversal lane; 1,002 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy's small positive pocket stayed far below threshold. |
 | 131 | `h1_financial_conditions_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 NFCI/ANFCI financial-conditions shock reversal lane; 1,284 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone's positive pocket stayed below threshold and activity failed. |
-| 132 | `h1_gvz_realized_vol_spread_reversal_v0` | REJECTED_FIRST_PASS | H1 GVZ implied-volatility versus realized-volatility spread reversal lane; 309 total cost-cell trades, only 3/9 trade-count cells, and 1/9 PF cells; strength was Dukascopy-only. |
-| 133 | `h1_real_yield_inflation_mix_reversal_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix reversal lane; 408 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy was positive below threshold while Capital.com/Pepperstone were negative. |
-| 134 | `h1_real_yield_inflation_mix_followthrough_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix follow-through lane; 759 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. |
+| 132 | `h1_financial_conditions_shock_followthrough_v0` | REJECTED_FIRST_PASS | H1 NFCI/ANFCI financial-conditions shock follow-through lane; 2,439 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone's positive pocket stayed below threshold and Capital.com/Dukascopy were negative. |
+| 133 | `h1_gvz_realized_vol_spread_reversal_v0` | REJECTED_FIRST_PASS | H1 GVZ implied-volatility versus realized-volatility spread reversal lane; 309 total cost-cell trades, only 3/9 trade-count cells, and 1/9 PF cells; strength was Dukascopy-only. |
+| 134 | `h1_gvz_realized_vol_spread_followthrough_v0` | REJECTED_FIRST_PASS | H1 GVZ implied-volatility versus realized-volatility spread follow-through lane; 528 total cost-cell trades, 9/9 trade-count cells, but only 1/9 PF cells; all cells were positive but the PF-threshold pocket was Dukascopy-only and activity failed. |
+| 135 | `h1_real_yield_inflation_mix_reversal_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix reversal lane; 408 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy was positive below threshold while Capital.com/Pepperstone were negative. |
+| 136 | `h1_real_yield_inflation_mix_followthrough_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix follow-through lane; 759 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. |
+| 137 | `h1_gvz_vix_vol_premium_followthrough_v0` | REJECTED_FIRST_PASS | H1 GVZ/VIX volatility-premium follow-through lane; 1,926 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; all broker/cost windows were negative. |
 
 ## Discipline
 
@@ -272,6 +275,9 @@ Expected path:
 - Latest official CNY-dollar pressure reversion candidate `h1_cny_dollar_pressure_reversion_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `DEXCHUS`/`DTWEXBGS` pressure against H1 XAU local exhaustion. It produced 279 total cost-cell trades, 0/9 trade-count cells, 3/9 PF cells, and max zero-trade months 7; the only positive pocket was sparse Capital.com while Pepperstone/Dukascopy were negative.
 - Latest Treasury-curve shock follow-through candidate `h1_treasury_curve_shock_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `DGS2`/`DGS10`/`T10Y2Y` shocks with H1 XAU continuation. It produced 1,422 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com was positive below threshold, Pepperstone was negative/flat, and Dukascopy was materially negative.
 - Latest corporate credit-spread shock follow-through candidate `h1_credit_spread_shock_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `BAA10Y`/`AAA10Y` shocks with H1 XAU continuation. It produced 2,070 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was positive below threshold while Capital.com and Dukascopy were negative.
+- Latest financial-conditions shock follow-through candidate `h1_financial_conditions_shock_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `NFCI`/`ANFCI` shocks with H1 XAU continuation. It produced 2,439 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was positive below threshold while Capital.com and Dukascopy were negative.
+- Latest GVZ-realized-volatility spread follow-through candidate `h1_gvz_realized_vol_spread_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `GVZCLS` implied-volatility premium against H1 XAU realized volatility and continuation. It produced 528 total cost-cell trades, 9/9 trade-count cells, and 1/9 PF cells; all cells were positive, but the only PF-threshold pocket was Dukascopy best-case and activity failed.
+- Latest GVZ/VIX volatility-premium follow-through candidate `h1_gvz_vix_vol_premium_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after testing shifted FRED `GVZCLS`/`VIXCLS` relative volatility premium with H1 XAU continuation. It produced 1,926 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; all broker/cost windows were negative.
 - The stronger strategic next move remains adding a higher-quality new data class, preferably primary COMEX/CME volume/order-flow or options-skew data rather than another OHLC-only or non-authoritative proxy.
 - `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -283,7 +289,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 30
-  M30_H1: 74
+  M30_H1: 76
   H4_D1: 26
   W1_plus: 1
   planned_next_H4_D1: []
@@ -313,5 +319,9 @@ hypothesis_timeframe_coverage:
 `h1_credit_spread_shock_reversal_v0` also counts as an M30/H1 corporate credit-spread shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
 
 `h1_financial_conditions_shock_reversal_v0` also counts as an M30/H1 financial-conditions shock-reversal diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
+
+`h1_financial_conditions_shock_followthrough_v0` also counts as an M30/H1 financial-conditions shock follow-through diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.
+
+`h1_gvz_realized_vol_spread_followthrough_v0` and `h1_gvz_vix_vol_premium_followthrough_v0` also count as M30/H1 options-implied-volatility premium follow-through diversification attempts by timing; both are rejected first-pass and do not become approved independent experts.
 
 `h1_gvz_realized_vol_spread_reversal_v0` also counts as an M30/H1 options-implied versus realized-volatility spread diversification attempt by timing; it is rejected first-pass and does not become an approved independent expert.

@@ -212,7 +212,10 @@ MACRO_COMPOSITE_EXPERT_NAMES = (
     "h1_macro_composite_trend_continuation_v0",
     "h1_macro_composite_state_reversion_v0",
 )
-GVZ_VIX_VOL_PREMIUM_EXPERT_NAME = "h1_gvz_vix_vol_premium_reversal_v0"
+GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES = (
+    "h1_gvz_vix_vol_premium_reversal_v0",
+    "h1_gvz_vix_vol_premium_followthrough_v0",
+)
 
 
 @dataclass(frozen=True)
@@ -265,7 +268,7 @@ def run_phase0_matrix(
             _assert_vix_risk_data_ready(config)
         if expert_name in VIX_TERM_STRUCTURE_EXPERT_NAMES and not synthetic_sample:
             _assert_vix_term_structure_data_ready(config)
-        if expert_name == GVZ_VIX_VOL_PREMIUM_EXPERT_NAME and not synthetic_sample:
+        if expert_name in GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
             _assert_vix_risk_data_ready(config)
         if expert_name == MOVE_BOND_VOL_EXPERT_NAME and not synthetic_sample:
@@ -511,7 +514,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == GVZ_VIX_VOL_PREMIUM_EXPERT_NAME:
+                if expert_name in GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         GVZ_FRAME_KEY: load_gvz_volatility_context(

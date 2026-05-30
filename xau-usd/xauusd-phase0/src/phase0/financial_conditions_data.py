@@ -10,6 +10,7 @@ from phase0.config import ConfigError, ProjectConfig
 EXPERT_NAMES = (
     "h4_financial_conditions_stress_reversal_v0",
     "h1_financial_conditions_shock_reversal_v0",
+    "h1_financial_conditions_shock_followthrough_v0",
 )
 EXPERT_NAME = EXPERT_NAMES[0]
 FINANCIAL_CONDITIONS_FRAME_KEY = "financial_conditions"
