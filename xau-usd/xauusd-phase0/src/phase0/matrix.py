@@ -102,7 +102,7 @@ from phase0.gld_etf_flow_data import load_gld_etf_flow_context
 from phase0.gc_futures_volume_data import EXPERT_NAMES as GC_FUTURES_VOLUME_EXPERT_NAMES
 from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.gc_futures_volume_data import load_gc_futures_volume_context
-from phase0.gvz_volatility_data import EXPERT_NAME as GVZ_VOLATILITY_EXPERT_NAME
+from phase0.gvz_volatility_data import EXPERT_NAMES as GVZ_VOLATILITY_EXPERT_NAMES
 from phase0.gvz_volatility_data import GVZ_FRAME_KEY
 from phase0.gvz_volatility_data import load_gvz_volatility_context
 from phase0.move_bond_vol_data import MOVE_BOND_VOL_FRAME_KEY
@@ -259,7 +259,7 @@ def run_phase0_matrix(
             _assert_credit_spread_data_ready(config)
         if expert_name in MACRO_COMPOSITE_EXPERT_NAMES and not synthetic_sample:
             _assert_macro_composite_data_ready(config)
-        if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
+        if expert_name in GVZ_VOLATILITY_EXPERT_NAMES and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
         if expert_name in VIX_RISK_EXPERT_NAMES and not synthetic_sample:
             _assert_vix_risk_data_ready(config)
@@ -484,7 +484,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == GVZ_VOLATILITY_EXPERT_NAME:
+                if expert_name in GVZ_VOLATILITY_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         GVZ_FRAME_KEY: load_gvz_volatility_context(

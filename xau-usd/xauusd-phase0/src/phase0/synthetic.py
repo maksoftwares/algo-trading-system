@@ -105,6 +105,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_gc_xau_basis_reversion_context()
     if expert == "h1_gvz_vix_vol_premium_reversal_v0":
         return _h1_gvz_vix_vol_premium_reversal_context()
+    if expert == "h1_gvz_realized_vol_spread_reversal_v0":
+        return _h1_gvz_realized_vol_spread_reversal_context()
     if expert == "h1_move_vix_bond_vol_shock_reversal_v0":
         return _h1_move_vix_bond_vol_shock_reversal_context()
     if expert == "h1_hyg_ief_credit_risk_rotation_followthrough_v0":
@@ -5865,6 +5867,95 @@ def _h1_gvz_vix_vol_premium_reversal_context() -> dict:
         "D1": d1,
         "gvz_volatility": gvz,
         "vix_risk": vix,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_gvz_realized_vol_spread_reversal_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=360, tz="UTC")
+    gvz_close: list[float] = []
+    for index in range(360):
+        if index < 270:
+            gvz_close.append(17.5 + 0.02 * (index % 9))
+        else:
+            step = index - 269
+            gvz_close.append(17.5 + 0.34 * step)
+    gvz = pd.DataFrame({"timestamp_utc": dates, "gvz_close": gvz_close})
+
+    h1_periods = 420
+    signal_index = 268
+    h1_times = pd.date_range(dates[315] + pd.Timedelta(hours=2), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.03 if index % 6 else -0.02
+        elif index < signal_index - 8:
+            current -= 0.65
+        elif index < signal_index:
+            current -= 0.15
+        elif index == signal_index:
+            current += 1.30
+        else:
+            current += 0.05 if index % 5 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    h1["high"] = h1[["open", "close"]].max(axis=1) + 1.6
+    h1["low"] = h1[["open", "close"]].min(axis=1) - 1.6
+    h1.loc[signal_index, ["open", "high", "low", "close"]] = [
+        closes[signal_index - 1] - 0.20,
+        closes[signal_index - 1] + 1.80,
+        closes[signal_index - 1] - 0.70,
+        closes[signal_index - 1] + 1.10,
+    ]
+
+    h4_times = pd.date_range(h1_times[0].floor("4h") + pd.Timedelta(hours=4), periods=110, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [2000.0] * 110,
+            "high": [2006.0] * 110,
+            "low": [1994.0] * 110,
+            "close": [1998.0] * 110,
+        }
+    )
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2005.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [1998.0] * 40,
+        }
+    )
+    m5_periods = h1_periods * 12 + 288
+    m5_times = pd.date_range(h1_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "gvz_volatility": gvz,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

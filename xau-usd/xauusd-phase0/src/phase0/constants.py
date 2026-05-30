@@ -55,6 +55,7 @@ RESEARCH_EXPERTS = (
     "h1_gc_momentum_pullback_v0",
     "h1_gc_xau_basis_reversion_v0",
     "h1_gld_spy_safe_haven_rotation_followthrough_v0",
+    "h1_gvz_realized_vol_spread_reversal_v0",
     "h1_macro_event_aftershock_v0",
     "h1_macro_composite_pullback_v0",
     "h1_macro_composite_state_reversion_v0",

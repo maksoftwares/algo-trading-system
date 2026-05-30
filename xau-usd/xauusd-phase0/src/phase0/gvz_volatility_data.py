@@ -7,7 +7,11 @@ import pandas as pd
 from phase0.config import ConfigError, ProjectConfig
 
 
-EXPERT_NAME = "h4_gvz_volatility_panic_reversal_v0"
+EXPERT_NAMES = (
+    "h4_gvz_volatility_panic_reversal_v0",
+    "h1_gvz_realized_vol_spread_reversal_v0",
+)
+EXPERT_NAME = EXPERT_NAMES[0]
 GVZ_FRAME_KEY = "gvz_volatility"
 GVZ_RAW_DIR = Path("data/raw/options")
 GVZ_FILE = "FRED_GVZCLS.csv"

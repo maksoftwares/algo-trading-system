@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-30T15:04:50+00:00`
+Generated at UTC: `2026-05-30T15:14:45+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,11 +10,11 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 130
-- Rejected/research candidates audited: 127
-- Rejected candidates with sample-size failure: 28
-- Rejected candidates with multi-cell expectancy failure: 123
-- Rejected candidates with both expectancy and sample-size failure: 27
+- Audited candidates: 131
+- Rejected/research candidates audited: 128
+- Rejected candidates with sample-size failure: 29
+- Rejected candidates with multi-cell expectancy failure: 124
+- Rejected candidates with both expectancy and sample-size failure: 28
 - Rejected candidates with expectancy-only failure: 96
 - Rejected candidates with frequency-only failure: 1
 
@@ -69,6 +69,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_gld_flow_stress_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 2 | 726 | 71 | multi_cell_survival;concentration;activity |
 | h1_gld_flow_stress_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 234 | 22 | multi_cell_survival;sample_size;concentration;activity |
 | h1_gld_spy_safe_haven_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1596 | 161 | multi_cell_survival;concentration |
+| h1_gvz_realized_vol_spread_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 1 | 309 | 21 | multi_cell_survival;sample_size;concentration;activity |
 | h1_gvz_vix_vol_premium_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1437 | 123 | multi_cell_survival;concentration;activity |
 | h1_hyg_ief_credit_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1287 | 118 | multi_cell_survival;concentration |
 | h1_iwm_spy_size_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1134 | 100 | multi_cell_survival;concentration |
