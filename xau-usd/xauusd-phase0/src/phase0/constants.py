@@ -61,6 +61,7 @@ RESEARCH_EXPERTS = (
     "h1_gvz_realized_vol_spread_followthrough_v0",
     "h1_gvz_realized_vol_spread_reversal_v0",
     "h1_gvz_vix_vol_premium_followthrough_v0",
+    "h1_hg_gc_copper_gold_rotation_followthrough_v0",
     "h1_macro_event_aftershock_v0",
     "h1_macro_composite_pullback_v0",
     "h1_macro_composite_state_reversion_v0",

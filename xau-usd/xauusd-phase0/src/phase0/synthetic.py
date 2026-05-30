@@ -19,6 +19,7 @@ from phase0.fxa_uup_aussie_dollar_fx_rotation_data import FXA_UUP_AUSSIE_DOLLAR_
 from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.gdx_gld_relative_data import GDX_GLD_RELATIVE_FRAME_KEY
 from phase0.gld_etf_flow_data import GLD_ETF_FLOW_FRAME_KEY
+from phase0.hg_gc_copper_gold_data import HG_GC_COPPER_GOLD_FRAME_KEY
 from phase0.hyg_ief_credit_risk_rotation_data import HYG_IEF_CREDIT_RISK_ROTATION_FRAME_KEY
 from phase0.inflation_expectations_data import INFLATION_EXPECTATIONS_FRAME_KEY
 from phase0.iwm_spy_size_rotation_data import IWM_SPY_SIZE_ROTATION_FRAME_KEY
@@ -118,6 +119,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_move_vix_bond_vol_shock_reversal_context()
     if expert == "h1_hyg_ief_credit_risk_rotation_followthrough_v0":
         return _h1_hyg_ief_credit_risk_rotation_followthrough_context()
+    if expert == "h1_hg_gc_copper_gold_rotation_followthrough_v0":
+        return _h1_hg_gc_copper_gold_rotation_followthrough_context()
     if expert == "h1_macro_event_aftershock_v0":
         return _h1_macro_event_aftershock_context()
     if expert == "h1_macro_composite_pullback_v0":
@@ -2438,6 +2441,95 @@ def _h1_xlu_xlk_defensive_rotation_followthrough_context() -> dict:
         "H4": h4,
         "D1": d1,
         XLU_XLK_DEFENSIVE_ROTATION_FRAME_KEY: rotation,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_hg_gc_copper_gold_rotation_followthrough_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=560, tz="UTC")
+    hg_close: list[float] = []
+    gc_close: list[float] = []
+    hg_volume: list[float] = []
+    gc_volume: list[float] = []
+    for index in range(560):
+        if index < 430:
+            hg_close.append(3.75 + (0.004 if index % 2 else -0.004))
+            gc_close.append(1850.0 + (0.8 if index % 2 else -0.8))
+        else:
+            step = index - 429
+            hg_close.append(3.75 + 0.018 * step)
+            gc_close.append(1850.0 + 0.55 * step)
+        hg_volume.append(70_000.0 + 700.0 * (index % 17))
+        gc_volume.append(160_000.0 + 1_300.0 * (index % 13))
+    pressure = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "hg_close": hg_close,
+            "hg_volume": hg_volume,
+            "gc_close": gc_close,
+            "gc_volume": gc_volume,
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.02 if index % 5 else -0.01
+        elif index < signal_index:
+            current += 0.32
+        elif index == signal_index:
+            current += 0.82
+        else:
+            current += 0.04 if index % 4 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.3)
+
+    h4_times = pd.date_range(h1_times[0] + pd.Timedelta(hours=4), periods=120, freq="4h")
+    h4_closes = [2000.0 + 0.02 * index for index in range(120)]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1992.0] * 40,
+            "close": [2001.0] * 40,
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        HG_GC_COPPER_GOLD_FRAME_KEY: pressure,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

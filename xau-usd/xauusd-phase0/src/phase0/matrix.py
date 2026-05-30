@@ -111,6 +111,9 @@ from phase0.move_bond_vol_data import load_move_bond_vol_context
 from phase0.hyg_ief_credit_risk_rotation_data import EXPERT_NAMES as HYG_IEF_CREDIT_RISK_ROTATION_EXPERT_NAMES
 from phase0.hyg_ief_credit_risk_rotation_data import HYG_IEF_CREDIT_RISK_ROTATION_FRAME_KEY
 from phase0.hyg_ief_credit_risk_rotation_data import load_hyg_ief_credit_risk_rotation_context
+from phase0.hg_gc_copper_gold_data import EXPERT_NAMES as HG_GC_COPPER_GOLD_EXPERT_NAMES
+from phase0.hg_gc_copper_gold_data import HG_GC_COPPER_GOLD_FRAME_KEY
+from phase0.hg_gc_copper_gold_data import load_hg_gc_copper_gold_context
 from phase0.iwm_spy_size_rotation_data import IWM_SPY_SIZE_ROTATION_FRAME_KEY
 from phase0.iwm_spy_size_rotation_data import EXPERT_NAMES as IWM_SPY_SIZE_ROTATION_EXPERT_NAMES
 from phase0.iwm_spy_size_rotation_data import load_iwm_spy_size_rotation_context
@@ -328,6 +331,8 @@ def run_phase0_matrix(
             _assert_tip_ief_real_yield_rotation_data_ready(config)
         if expert_name in HYG_IEF_CREDIT_RISK_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_hyg_ief_credit_risk_rotation_data_ready(config)
+        if expert_name in HG_GC_COPPER_GOLD_EXPERT_NAMES and not synthetic_sample:
+            _assert_hg_gc_copper_gold_data_ready(config)
         if expert_name in XLF_XLU_FINANCIALS_DEFENSIVE_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_xlf_xlu_financials_defensive_rotation_data_ready(config)
         if expert_name in XLI_XLU_CYCLICAL_DEFENSIVE_ROTATION_EXPERT_NAMES and not synthetic_sample:
@@ -785,6 +790,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name in HG_GC_COPPER_GOLD_EXPERT_NAMES:
+                    data_context = {
+                        **data_context,
+                        HG_GC_COPPER_GOLD_FRAME_KEY: load_hg_gc_copper_gold_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
                 if expert_name in XLF_XLU_FINANCIALS_DEFENSIVE_ROTATION_EXPERT_NAMES:
                     data_context = {
                         **data_context,
@@ -1154,6 +1168,12 @@ def _assert_hyg_ief_credit_risk_rotation_data_ready(config: ProjectConfig) -> No
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_hyg_ief_credit_risk_rotation_context(config, start, end)
+
+
+def _assert_hg_gc_copper_gold_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_hg_gc_copper_gold_context(config, start, end)
 
 
 def _assert_xlf_xlu_financials_defensive_rotation_data_ready(config: ProjectConfig) -> None:

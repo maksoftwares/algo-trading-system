@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-30
 
-Overall status: NO_INDEPENDENT_APPROVAL_AFTER_139_RESULT_PRODUCING_CANDIDATES
+Overall status: NO_INDEPENDENT_APPROVAL_AFTER_140_RESULT_PRODUCING_CANDIDATES
 
 This document defines what can still be done while Phase 1 soak, code-freeze, and measured-cost clocks mature. It does not approve any new EA and it does not reopen rejected candidates.
 
@@ -14,7 +14,7 @@ The current approved/provisional set is still one correlated edge family:
 level-and-pullback / breakout-retest
 ```
 
-The project has already tested 139 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, official CNY-dollar pressure, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. The latest tested candidate, `h1_gvz_vix_vol_premium_followthrough_v0`, failed with 0/9 PF cells despite 9/9 trade-count cells, and all broker/cost windows were negative. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
+The project has already tested 140 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, official CNY-dollar pressure, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, direct HG/GC copper-gold futures rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. The latest tested candidate, `h1_hg_gc_copper_gold_rotation_followthrough_v0`, failed with 0/9 PF cells despite 9/9 trade-count cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
 
 ## Research Boundary
 
@@ -92,6 +92,7 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_gvz_realized_vol_spread_reversal_v0` | FRED GVZ gold implied volatility versus H1 realized XAU volatility | Yes | High | REJECTED_FIRST_PASS; only 3/9 trade-count cells and 1/9 PF cells; strength was Dukascopy-only. |
 | `h1_gvz_realized_vol_spread_followthrough_v0` | FRED GVZ gold implied volatility versus H1 realized XAU volatility | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and all-positive returns, but only 1/9 PF cells; activity failed in Capital.com/Pepperstone. |
 | `h1_gvz_vix_vol_premium_followthrough_v0` | FRED GVZ/VIX relative volatility premium | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; all broker/cost windows were negative. |
+| `h1_hg_gc_copper_gold_rotation_followthrough_v0` | Yahoo HG=F/GC=F direct copper-gold futures rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold while Capital.com/Dukascopy were negative. |
 | `h1_gc_xau_basis_reversion_v0` | GC futures / XAU spot relative value | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Dukascopy-only strength below threshold. |
 | `h1_gc_momentum_pullback_v0` | GC futures-proxy momentum with XAU H1 pullback | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells. |
 | `h1_cot_positioning_continuation_v0` | Official CFTC gold COT positioning with XAU H1 pullback | Yes | High | REJECTED_FIRST_PASS; solved sample size with 9/9 trade-count cells but 0/9 PF cells. |
@@ -145,29 +146,30 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 The latest current-data candidate was:
 
 ```text
-h1_gvz_vix_vol_premium_followthrough_v0
+h1_hg_gc_copper_gold_rotation_followthrough_v0
 ```
 
 Mechanism:
 
 ```text
-Shifted GVZ/VIX gold-volatility premium may identify H1 XAUUSD continuation when spot has already started moving in the volatility-premium direction.
-The paired long case tests high gold-volatility premium after local gold strength; the paired short case tests high gold-volatility premium after local gold weakness.
+Shifted public Yahoo HG=F/GC=F copper-versus-gold futures pressure may identify H1 XAUUSD continuation when spot has already started moving in the copper/gold rotation direction.
+The paired long case tests copper leadership after local gold strength; the paired short case tests gold leadership / copper weakness after local gold weakness.
 ```
 
 Why this is not same-family:
 
 - It does not trade retests of levels.
 - It does not require a broken support/resistance level.
-- It is an options/equity-volatility relative-premium follow-through signal, not breakout continuation.
-- It uses shifted public FRED GVZCLS and VIXCLS observations plus H1 continuation state, not M5/M15 retest mechanics.
+- It is a direct futures-relative pressure follow-through signal, not breakout continuation.
+- It uses shifted public Yahoo HG=F and GC=F daily futures observations plus H1 continuation state, not M5/M15 retest mechanics.
 
 Why it is still risky:
 
 - It passed sample size with 9/9 cells reaching 40 trades.
 - It failed PF persistence with 0/9 PF cells above 1.30.
-- It failed activity with max zero-trade months reaching 7.
-- All broker/cost windows were negative.
+- Pepperstone was mildly positive, but below threshold.
+- Capital.com and Dukascopy were negative after costs.
+- It did not show cross-venue transfer.
 
 ## Pre-Registration Status
 
@@ -225,6 +227,7 @@ docs/hypothesis_h1_credit_spread_shock_followthrough_v0.md
 docs/hypothesis_h1_financial_conditions_shock_followthrough_v0.md
 docs/hypothesis_h1_gvz_realized_vol_spread_followthrough_v0.md
 docs/hypothesis_h1_gvz_vix_vol_premium_followthrough_v0.md
+docs/hypothesis_h1_hg_gc_copper_gold_rotation_followthrough_v0.md
 src/phase0/strategies/h4_gld_etf_flow_reversal_v0.py
 src/phase0/strategies/h4_gld_etf_flow_reversal_v1.py
 src/phase0/strategies/h4_gdx_gld_miner_divergence_v0.py
@@ -272,6 +275,7 @@ src/phase0/strategies/h1_credit_spread_shock_followthrough_v0.py
 src/phase0/strategies/h1_financial_conditions_shock_followthrough_v0.py
 src/phase0/strategies/h1_gvz_realized_vol_spread_followthrough_v0.py
 src/phase0/strategies/h1_gvz_vix_vol_premium_followthrough_v0.py
+src/phase0/strategies/h1_hg_gc_copper_gold_rotation_followthrough_v0.py
 src/phase0/strategies/h1_real_yield_inflation_mix_followthrough_v0.py
 src/phase0/strategies/h1_real_yield_inflation_mix_reversal_v0.py
 tests/test_h4_gld_etf_flow_reversal_v0.py
@@ -321,6 +325,7 @@ tests/test_h1_credit_spread_shock_followthrough_v0.py
 tests/test_h1_financial_conditions_shock_followthrough_v0.py
 tests/test_h1_gvz_realized_vol_spread_followthrough_v0.py
 tests/test_h1_gvz_vix_vol_premium_followthrough_v0.py
+tests/test_h1_hg_gc_copper_gold_rotation_followthrough_v0.py
 tests/test_h1_real_yield_inflation_mix_followthrough_v0.py
 tests/test_h1_real_yield_inflation_mix_reversal_v0.py
 ```
@@ -329,12 +334,12 @@ Registration, smoke, and first-pass status:
 
 ```text
 Research hypothesis: REGISTERED
-Latest SHA256: cdc36c7cce61609d67c1e58473100ffdd9521c3d297a7a23715f345626b60700
+Latest SHA256: ae9e4f85904f86bb518fe6e071fcbc16c65bdd3b1518bdf83fdfa99370df29c2
 Synthetic smoke: PASS
 First-pass matrix: REJECTED_FIRST_PASS
-Latest matrix trades: 1,926 across cost cells
+Latest matrix trades: 954 across cost cells
 Latest PF cells >= 1.30: 0/9
-Latest minimum cell trades: 157
+Latest minimum cell trades: 95
 ```
 
 ## First-Pass Result
@@ -417,31 +422,9 @@ Latest minimum cell trades: 157
 
 `h1_gvz_vix_vol_premium_followthrough_v0` tested shifted FRED GVZ/VIX relative volatility premium with H1 XAU continuation timing. It produced 1,926 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold and max zero-trade months reached 7. All broker/cost windows were negative. The correct action is to reject v0 without tuning.
 
-Required mechanical definition:
+`h1_hg_gc_copper_gold_rotation_followthrough_v0` tested shifted public Yahoo HG=F/GC=F direct copper-versus-gold futures pressure with H1 XAU continuation timing. It produced 954 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold. Pepperstone was mildly positive below threshold while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
 
-- GLD daily volume and return features are shifted by one observation before any XAU H4 merge.
-- GLD flow stress requires high rolling volume percentile, high log-volume or dollar-volume z-score, and a minimum one-day GLD return shock.
-- XAU H4 must already have moved in the same direction as the GLD shock over the prior 12 H4 bars.
-- Entry occurs only after the current H4 bar closes as a reversal candle.
-- Stop, target, time stop, and decision hours are fixed before the run.
-- Maximum one signal per UTC day per direction.
-- No news filters or post-result threshold changes are allowed.
-
-Suggested fixed first-pass parameters:
-
-```text
-H4 ATR lookback: 14
-GLD volume percentile: >= 0.75
-GLD volume z-score: >= 0.80
-GLD one-day return shock: abs(return) >= 0.003
-XAU H4 12-bar return threshold: abs(return) >= 0.0025
-Stop: 1.15 x H4 ATR14
-Target: 1.50R
-Time stop: 6 H4 bars
-Decision hours: 08:00, 12:00, 16:00, 20:00 UTC
-```
-
-These were first-pass v1 values, not tuning handles. Because this version failed, reject it and do not tune v1.
+No current untested independent candidate is pre-registered in this file. The next candidate must be written as a fresh hypothesis, SHA256-registered, smoke-tested, and run through the first-pass matrix before any result is interpreted.
 
 ## Pass/Fail Rule
 

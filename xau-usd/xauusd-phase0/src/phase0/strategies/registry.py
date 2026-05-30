@@ -132,6 +132,9 @@ from phase0.strategies.h1_move_vix_bond_vol_shock_reversal_v0 import (
 from phase0.strategies.h1_hyg_ief_credit_risk_rotation_followthrough_v0 import (
     H1HygIefCreditRiskRotationFollowthroughV0Strategy,
 )
+from phase0.strategies.h1_hg_gc_copper_gold_rotation_followthrough_v0 import (
+    H1HgGcCopperGoldRotationFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_xlp_xly_consumer_rotation_followthrough_v0 import (
     H1XlpXlyConsumerRotationFollowthroughV0Strategy,
 )
@@ -352,6 +355,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1GvzRealizedVolSpreadReversalV0Strategy.name: H1GvzRealizedVolSpreadReversalV0Strategy,
     H1GvzVixVolPremiumFollowthroughV0Strategy.name: H1GvzVixVolPremiumFollowthroughV0Strategy,
     H1GvzVixVolPremiumReversalV0Strategy.name: H1GvzVixVolPremiumReversalV0Strategy,
+    H1HgGcCopperGoldRotationFollowthroughV0Strategy.name: H1HgGcCopperGoldRotationFollowthroughV0Strategy,
     H1MoveVixBondVolShockReversalV0Strategy.name: H1MoveVixBondVolShockReversalV0Strategy,
     H1HygIefCreditRiskRotationFollowthroughV0Strategy.name: H1HygIefCreditRiskRotationFollowthroughV0Strategy,
     H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy.name: H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy,
