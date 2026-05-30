@@ -1,6 +1,6 @@
 # Candidate Research Backlog
 
-Last updated: 2026-05-29
+Last updated: 2026-05-30
 
 ## Planning Rule
 
@@ -137,6 +137,7 @@ Expected path:
 | 116 | `h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0` | BLOCKED_DATA_COVERAGE | New CYB/UUP yuan-versus-dollar FX rotation lane; public Yahoo proxy had 2,222 rows but ended on 2023-10-30, short of the 2024-12-31 matrix requirement. Do not run a partial matrix. |
 | 117 | `h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0` | REJECTED_FIRST_PASS | New FXA/UUP Aussie-dollar FX rotation follow-through lane; 1,473 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com/Pepperstone were weakly positive below threshold while Dukascopy was flat-to-negative. |
 | 118 | `h1_move_vix_bond_vol_shock_reversal_v0` | REJECTED_FIRST_PASS | New MOVE/VIX bond-volatility shock reversal lane; 531 total cost-cell trades, 6/9 trade-count cells, and 0/9 PF cells; Capital.com/Pepperstone were mildly positive below threshold while Dukascopy was negative and max zero-trade months reached 14. |
+| 119 | `h1_cny_dollar_pressure_followthrough_v0` | REJECTED_FIRST_PASS | Official FRED CNY-dollar pressure lane replacing the stale CYB/UUP proxy; 1,188 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com/Pepperstone were positive below threshold while Dukascopy was negative. |
 
 ## Discipline
 
@@ -243,6 +244,7 @@ Expected path:
 - Latest FXE/UUP euro-dollar FX rotation follow-through candidate `h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after a public Yahoo FXE/UUP daily OHLCV proxy was acquired. It produced 1,380 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was weakly positive below threshold while Capital.com and Dukascopy were negative.
 - Latest CYB/UUP yuan-dollar FX rotation candidate `h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0` was SHA256-locked and synthetic-smoke PASS, but blocked before matrix because the public Yahoo proxy ended on 2023-10-30. It remains untested rather than rejected.
 - Latest FXA/UUP Aussie-dollar FX rotation follow-through candidate `h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after a public Yahoo FXA/UUP daily OHLCV proxy was acquired. It produced 1,473 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com/Pepperstone were weakly positive below threshold while Dukascopy was flat-to-negative.
+- Latest official CNY-dollar pressure candidate `h1_cny_dollar_pressure_followthrough_v0` was SHA256-locked, synthetic-smoke PASS, and rejected first-pass after official FRED `DEXCHUS` yuan-per-dollar data was acquired. It produced 1,188 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Capital.com/Pepperstone were positive below threshold while Dukascopy was negative.
 - The stronger strategic next move remains adding a higher-quality new data class, preferably primary COMEX/CME volume/order-flow or options-skew data rather than another OHLC-only or non-authoritative proxy.
 - `h4_real_yield_proxy_momentum_v0` is no longer blocked by missing macro inputs; public FRED macro data was acquired and the locked first pass was rejected without tuning.
 - Review #6 plan before Phase 2: pre-register and test at least three additional non-level H4/D1 concepts (`d1_compression_h4_expansion_v0`, `h4_real_yield_proxy_momentum_v0`, `d1_multi_day_exhaustion_reversion_v0`) unless the project owner explicitly defers them in writing.
@@ -254,7 +256,7 @@ Classify by entry / decision timeframe, not by the source of the reference level
 ```yaml
 hypothesis_timeframe_coverage:
   M5_M15: 30
-  M30_H1: 58
+  M30_H1: 59
   H4_D1: 24
   W1_plus: 1
   planned_next_H4_D1: []

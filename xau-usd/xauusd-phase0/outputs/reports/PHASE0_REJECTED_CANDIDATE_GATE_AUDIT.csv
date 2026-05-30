@@ -23,6 +23,7 @@ h1_broker_fx_usd_pressure_conflict_reversion_v0,REJECTED_OR_RESEARCH,EDGE_AND_FR
 h1_broker_fx_usd_pressure_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,2280,196,287,277.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_btc_risk_pressure_gold_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,558,51,80,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_calendar_drift_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,8661,802,1209,876.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS
+h1_cny_dollar_pressure_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1188,111,153,132.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_cot_positioning_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,594,41,99,58.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_dbb_uup_industrial_metals_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1395,140,170,155.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_dbc_uup_commodity_dollar_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1398,144,165,157.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS

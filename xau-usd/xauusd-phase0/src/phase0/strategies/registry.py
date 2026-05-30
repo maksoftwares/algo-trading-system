@@ -63,6 +63,9 @@ from phase0.strategies.h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0 impor
 from phase0.strategies.h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0 import (
     H1CybUupYuanDollarFxRotationFollowthroughV0Strategy,
 )
+from phase0.strategies.h1_cny_dollar_pressure_followthrough_v0 import (
+    H1CnyDollarPressureFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0 import (
     H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
 )
@@ -261,6 +264,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1FxfUupSafeHavenFxRotationFollowthroughV0Strategy.name: H1FxfUupSafeHavenFxRotationFollowthroughV0Strategy,
     H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy.name: H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy,
     H1CybUupYuanDollarFxRotationFollowthroughV0Strategy.name: H1CybUupYuanDollarFxRotationFollowthroughV0Strategy,
+    H1CnyDollarPressureFollowthroughV0Strategy.name: H1CnyDollarPressureFollowthroughV0Strategy,
     H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy.name: H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
     H4CreditSpreadStressMomentumV0Strategy.name: H4CreditSpreadStressMomentumV0Strategy,
     D1CompressionH4ExpansionV0Strategy.name: D1CompressionH4ExpansionV0Strategy,

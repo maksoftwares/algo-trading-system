@@ -14,6 +14,7 @@ from phase0.fxy_uup_safe_haven_fx_rotation_data import FXY_UUP_SAFE_HAVEN_FX_ROT
 from phase0.fxf_uup_safe_haven_fx_rotation_data import FXF_UUP_SAFE_HAVEN_FX_ROTATION_FRAME_KEY
 from phase0.fxe_uup_euro_dollar_fx_rotation_data import FXE_UUP_EURO_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.cyb_uup_yuan_dollar_fx_rotation_data import CYB_UUP_YUAN_DOLLAR_FX_ROTATION_FRAME_KEY
+from phase0.cny_dollar_pressure_data import CNY_DOLLAR_PRESSURE_FRAME_KEY
 from phase0.fxa_uup_aussie_dollar_fx_rotation_data import FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.gdx_gld_relative_data import GDX_GLD_RELATIVE_FRAME_KEY
@@ -158,6 +159,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_fxe_uup_euro_dollar_fx_rotation_followthrough_context()
     if expert == "h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0":
         return _h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_context()
+    if expert == "h1_cny_dollar_pressure_followthrough_v0":
+        return _h1_cny_dollar_pressure_followthrough_context()
     if expert == "h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0":
         return _h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_context()
     if expert == "h1_broker_fx_usd_pressure_followthrough_v0":
@@ -3267,6 +3270,74 @@ def _h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_context() -> dict:
         "M5": m5,
         "H1": h1,
         CYB_UUP_YUAN_DOLLAR_FX_ROTATION_FRAME_KEY: rotation,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_cny_dollar_pressure_followthrough_context() -> dict:
+    dates = pd.bdate_range("2021-01-04", periods=560, tz="UTC")
+    cny_per_usd: list[float] = []
+    dollar_index: list[float] = []
+    cny_current = 7.10
+    dollar_current = 105.0
+    for index in range(560):
+        if index < 430:
+            cny_current *= 1.0001 if index % 2 else 0.9999
+            dollar_current *= 1.0001 if index % 3 else 0.9999
+        else:
+            cny_current *= 0.9960
+            dollar_current *= 0.9980
+        cny_per_usd.append(cny_current)
+        dollar_index.append(dollar_current)
+
+    pressure = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "cny_per_usd": cny_per_usd,
+            "dollar_index_broad": dollar_index,
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    xau_returns: list[float] = []
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            xau_returns.append(0.00002 if index % 4 else -0.00001)
+        elif index < signal_index:
+            xau_returns.append(0.00055)
+        elif index == signal_index:
+            xau_returns.append(0.00150)
+        else:
+            xau_returns.append(0.00002 if index % 4 else -0.00001)
+    xau_close = _price_path(2000.0, xau_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.3)
+
+    last_close = xau_close[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        CNY_DOLLAR_PRESSURE_FRAME_KEY: pressure,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

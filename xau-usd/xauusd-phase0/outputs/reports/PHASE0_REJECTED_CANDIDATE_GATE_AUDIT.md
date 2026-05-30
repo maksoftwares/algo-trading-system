@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-29T20:47:02+00:00`
+Generated at UTC: `2026-05-30T12:15:35+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 117
-- Rejected/research candidates audited: 114
+- Audited candidates: 118
+- Rejected/research candidates audited: 115
 - Rejected candidates with sample-size failure: 25
-- Rejected candidates with multi-cell expectancy failure: 110
+- Rejected candidates with multi-cell expectancy failure: 111
 - Rejected candidates with both expectancy and sample-size failure: 24
-- Rejected candidates with expectancy-only failure: 86
+- Rejected candidates with expectancy-only failure: 87
 - Rejected candidates with frequency-only failure: 1
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -48,6 +48,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_broker_fx_usd_pressure_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 2280 | 196 | multi_cell_survival;concentration |
 | h1_btc_risk_pressure_gold_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 558 | 51 | multi_cell_survival;concentration;activity |
 | h1_calendar_drift_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 8661 | 802 | multi_cell_survival;no_catastrophic_failure;concentration |
+| h1_cny_dollar_pressure_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1188 | 111 | multi_cell_survival;concentration |
 | h1_cot_positioning_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 594 | 41 | multi_cell_survival;concentration;activity |
 | h1_dbb_uup_industrial_metals_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1395 | 140 | multi_cell_survival;concentration |
 | h1_dbc_uup_commodity_dollar_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1398 | 144 | multi_cell_survival;concentration |

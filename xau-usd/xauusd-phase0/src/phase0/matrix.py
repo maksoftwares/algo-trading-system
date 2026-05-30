@@ -71,6 +71,9 @@ from phase0.cyb_uup_yuan_dollar_fx_rotation_data import (
     EXPERT_NAMES as CYB_UUP_YUAN_DOLLAR_FX_ROTATION_EXPERT_NAMES,
 )
 from phase0.cyb_uup_yuan_dollar_fx_rotation_data import load_cyb_uup_yuan_dollar_fx_rotation_context
+from phase0.cny_dollar_pressure_data import CNY_DOLLAR_PRESSURE_FRAME_KEY
+from phase0.cny_dollar_pressure_data import EXPERT_NAMES as CNY_DOLLAR_PRESSURE_EXPERT_NAMES
+from phase0.cny_dollar_pressure_data import load_cny_dollar_pressure_context
 from phase0.fxa_uup_aussie_dollar_fx_rotation_data import FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.fxa_uup_aussie_dollar_fx_rotation_data import (
     EXPERT_NAMES as FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_EXPERT_NAMES,
@@ -297,6 +300,8 @@ def run_phase0_matrix(
             _assert_fxe_uup_euro_dollar_fx_rotation_data_ready(config)
         if expert_name in CYB_UUP_YUAN_DOLLAR_FX_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_cyb_uup_yuan_dollar_fx_rotation_data_ready(config)
+        if expert_name in CNY_DOLLAR_PRESSURE_EXPERT_NAMES and not synthetic_sample:
+            _assert_cny_dollar_pressure_data_ready(config)
         if expert_name in FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_fxa_uup_aussie_dollar_fx_rotation_data_ready(config)
         if expert_name == INFLATION_EXPECTATIONS_EXPERT_NAME and not synthetic_sample:
@@ -673,6 +678,15 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
+                if expert_name in CNY_DOLLAR_PRESSURE_EXPERT_NAMES:
+                    data_context = {
+                        **data_context,
+                        CNY_DOLLAR_PRESSURE_FRAME_KEY: load_cny_dollar_pressure_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
                 if expert_name in FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_EXPERT_NAMES:
                     data_context = {
                         **data_context,
@@ -1039,6 +1053,12 @@ def _assert_cyb_uup_yuan_dollar_fx_rotation_data_ready(config: ProjectConfig) ->
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_cyb_uup_yuan_dollar_fx_rotation_context(config, start, end)
+
+
+def _assert_cny_dollar_pressure_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_cny_dollar_pressure_context(config, start, end)
 
 
 def _assert_fxa_uup_aussie_dollar_fx_rotation_data_ready(config: ProjectConfig) -> None:

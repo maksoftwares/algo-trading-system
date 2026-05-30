@@ -32,6 +32,7 @@ RESEARCH_EXPERTS = (
     "h1_fxf_uup_safe_haven_fx_rotation_followthrough_v0",
     "h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0",
     "h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0",
+    "h1_cny_dollar_pressure_followthrough_v0",
     "h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0",
     "h4_credit_spread_stress_momentum_v0",
     "d1_inside_day_breakout_v0",
