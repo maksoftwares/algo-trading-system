@@ -8,6 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_move_vix_bond_vol_shock_reversal_v0"
+EXPERT_NAMES = (
+    "h1_move_vix_bond_vol_shock_reversal_v0",
+    "h1_move_vix_bond_vol_shock_followthrough_v0",
+)
 MOVE_BOND_VOL_FRAME_KEY = "move_bond_vol"
 MOVE_BOND_VOL_REFERENCE_PATH = Path("data/reference/rates/move_daily_yahoo_2015_2025.csv")
 

@@ -126,6 +126,9 @@ from phase0.strategies.h1_gvz_realized_vol_spread_reversal_v0 import (
 from phase0.strategies.h1_gvz_realized_vol_spread_followthrough_v0 import (
     H1GvzRealizedVolSpreadFollowthroughV0Strategy,
 )
+from phase0.strategies.h1_move_vix_bond_vol_shock_followthrough_v0 import (
+    H1MoveVixBondVolShockFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_move_vix_bond_vol_shock_reversal_v0 import (
     H1MoveVixBondVolShockReversalV0Strategy,
 )
@@ -134,6 +137,9 @@ from phase0.strategies.h1_hyg_ief_credit_risk_rotation_followthrough_v0 import (
 )
 from phase0.strategies.h1_hg_gc_copper_gold_rotation_followthrough_v0 import (
     H1HgGcCopperGoldRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_hg_gc_copper_gold_rotation_reversal_v0 import (
+    H1HgGcCopperGoldRotationReversalV0Strategy,
 )
 from phase0.strategies.h1_xlp_xly_consumer_rotation_followthrough_v0 import (
     H1XlpXlyConsumerRotationFollowthroughV0Strategy,
@@ -286,6 +292,7 @@ from phase0.strategies.symbol_normalized_round_retest_v0 import SymbolNormalized
 from phase0.strategies.symbol_round_sweep_reversal_v0 import SymbolRoundSweepReversalV0Strategy
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
 from phase0.strategies.w1_d1_momentum_continuation_v0 import W1D1MomentumContinuationV0Strategy
+from phase0.strategies.weekend_gap_reversion_v0 import WeekendGapReversionV0Strategy
 from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
 from phase0.strategies.weekly_open_reversion_v0 import WeeklyOpenReversionV0Strategy
 from phase0.strategies.xag_lead_xau_followthrough_v0 import XagLeadXauFollowthroughV0Strategy
@@ -356,6 +363,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1GvzVixVolPremiumFollowthroughV0Strategy.name: H1GvzVixVolPremiumFollowthroughV0Strategy,
     H1GvzVixVolPremiumReversalV0Strategy.name: H1GvzVixVolPremiumReversalV0Strategy,
     H1HgGcCopperGoldRotationFollowthroughV0Strategy.name: H1HgGcCopperGoldRotationFollowthroughV0Strategy,
+    H1HgGcCopperGoldRotationReversalV0Strategy.name: H1HgGcCopperGoldRotationReversalV0Strategy,
+    H1MoveVixBondVolShockFollowthroughV0Strategy.name: H1MoveVixBondVolShockFollowthroughV0Strategy,
     H1MoveVixBondVolShockReversalV0Strategy.name: H1MoveVixBondVolShockReversalV0Strategy,
     H1HygIefCreditRiskRotationFollowthroughV0Strategy.name: H1HygIefCreditRiskRotationFollowthroughV0Strategy,
     H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy.name: H1XliXluCyclicalDefensiveRotationFollowthroughV0Strategy,
@@ -435,6 +444,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     SymbolNormalizedRoundRetestV0Strategy.name: SymbolNormalizedRoundRetestV0Strategy,
     SymbolRoundSweepReversalV0Strategy.name: SymbolRoundSweepReversalV0Strategy,
     W1D1MomentumContinuationV0Strategy.name: W1D1MomentumContinuationV0Strategy,
+    WeekendGapReversionV0Strategy.name: WeekendGapReversionV0Strategy,
     WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
     WeeklyOpenReversionV0Strategy.name: WeeklyOpenReversionV0Strategy,
     XagLeadXauFollowthroughV0Strategy.name: XagLeadXauFollowthroughV0Strategy,

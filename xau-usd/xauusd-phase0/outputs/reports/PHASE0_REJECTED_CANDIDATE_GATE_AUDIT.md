@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-30T17:36:18+00:00`
+Generated at UTC: `2026-05-30T18:12:01+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 140
-- Rejected/research candidates audited: 137
-- Rejected candidates with sample-size failure: 30
-- Rejected candidates with multi-cell expectancy failure: 133
-- Rejected candidates with both expectancy and sample-size failure: 29
-- Rejected candidates with expectancy-only failure: 104
+- Audited candidates: 143
+- Rejected/research candidates audited: 140
+- Rejected candidates with sample-size failure: 32
+- Rejected candidates with multi-cell expectancy failure: 136
+- Rejected candidates with both expectancy and sample-size failure: 31
+- Rejected candidates with expectancy-only failure: 105
 - Rejected candidates with frequency-only failure: 1
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -77,6 +77,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_gvz_vix_vol_premium_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1926 | 157 | multi_cell_survival;concentration;activity |
 | h1_gvz_vix_vol_premium_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1437 | 123 | multi_cell_survival;concentration;activity |
 | h1_hg_gc_copper_gold_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 954 | 95 | multi_cell_survival;concentration |
+| h1_hg_gc_copper_gold_rotation_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 1 | 519 | 44 | multi_cell_survival;concentration;activity |
 | h1_hyg_ief_credit_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1287 | 118 | multi_cell_survival;concentration |
 | h1_iwm_spy_size_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1134 | 100 | multi_cell_survival;concentration |
 | h1_m5_path_skew_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 4920 | 498 | multi_cell_survival;concentration |
@@ -86,6 +87,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_macro_event_aftershock_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 810 | 85 | multi_cell_survival;concentration |
 | h1_month_turn_flow_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1524 | 165 | multi_cell_survival;concentration |
 | h1_month_turn_flow_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 780 | 79 | multi_cell_survival;concentration |
+| h1_move_vix_bond_vol_shock_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 861 | 32 | multi_cell_survival;sample_size;concentration;activity |
 | h1_move_vix_bond_vol_shock_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 531 | 23 | multi_cell_survival;sample_size;concentration;activity |
 | h1_policy_uncertainty_intraday_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 366 | 31 | multi_cell_survival;sample_size;concentration |
 | h1_qqq_spy_growth_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1017 | 80 | multi_cell_survival;concentration;activity |
@@ -159,6 +161,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | symbol_round_sweep_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 9609 | 685 | multi_cell_survival;no_catastrophic_failure;concentration |
 | trend_pullback | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 27576 | 2873 | multi_cell_survival;no_catastrophic_failure;concentration |
 | w1_d1_momentum_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 498 | 48 | multi_cell_survival;concentration |
+| weekend_gap_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 33 | 0 | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
 | weekly_level_reclaim_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1083 | 113 | multi_cell_survival;concentration |
 | weekly_open_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1878 | 197 | multi_cell_survival;no_catastrophic_failure;concentration |
 | xag_lead_xau_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 7608 | 816 | multi_cell_survival;concentration |

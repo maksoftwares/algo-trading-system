@@ -18,6 +18,7 @@ class H1MoveVixBondVolShockReversalV0Strategy(StrategyBase):
 
     name = "h1_move_vix_bond_vol_shock_reversal_v0"
     version = "0.1-research-disabled"
+    reason_code_prefix = "H1_MOVE_VIX_BOND_VOL_SHOCK_REVERSAL_V0"
 
     risk_reward = 1.50
 
@@ -85,7 +86,7 @@ class H1MoveVixBondVolShockReversalV0Strategy(StrategyBase):
                     timestamp_utc=timestamp.to_pydatetime(),
                     symbol=symbol,
                     direction=direction,
-                    reason_code=f"H1_MOVE_VIX_BOND_VOL_SHOCK_REVERSAL_V0_{direction}",
+                    reason_code=f"{self.reason_code_prefix}_{direction}",
                     metadata={**setup, "h1_index": int(position), "signal_day": key[0]},
                 )
             )

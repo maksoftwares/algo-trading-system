@@ -106,7 +106,7 @@ from phase0.gvz_volatility_data import EXPERT_NAMES as GVZ_VOLATILITY_EXPERT_NAM
 from phase0.gvz_volatility_data import GVZ_FRAME_KEY
 from phase0.gvz_volatility_data import load_gvz_volatility_context
 from phase0.move_bond_vol_data import MOVE_BOND_VOL_FRAME_KEY
-from phase0.move_bond_vol_data import EXPERT_NAME as MOVE_BOND_VOL_EXPERT_NAME
+from phase0.move_bond_vol_data import EXPERT_NAMES as MOVE_BOND_VOL_EXPERT_NAMES
 from phase0.move_bond_vol_data import load_move_bond_vol_context
 from phase0.hyg_ief_credit_risk_rotation_data import EXPERT_NAMES as HYG_IEF_CREDIT_RISK_ROTATION_EXPERT_NAMES
 from phase0.hyg_ief_credit_risk_rotation_data import HYG_IEF_CREDIT_RISK_ROTATION_FRAME_KEY
@@ -274,7 +274,7 @@ def run_phase0_matrix(
         if expert_name in GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
             _assert_vix_risk_data_ready(config)
-        if expert_name == MOVE_BOND_VOL_EXPERT_NAME and not synthetic_sample:
+        if expert_name in MOVE_BOND_VOL_EXPERT_NAMES and not synthetic_sample:
             _assert_move_bond_vol_data_ready(config)
             _assert_vix_risk_data_ready(config)
         if expert_name in FINANCIAL_CONDITIONS_EXPERT_NAMES and not synthetic_sample:
@@ -533,7 +533,7 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == MOVE_BOND_VOL_EXPERT_NAME:
+                if expert_name in MOVE_BOND_VOL_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         MOVE_BOND_VOL_FRAME_KEY: load_move_bond_vol_context(
