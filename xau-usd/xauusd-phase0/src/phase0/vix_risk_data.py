@@ -8,6 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h4_vix_risk_off_reversal_v0"
+EXPERT_NAMES = (
+    "h4_vix_risk_off_reversal_v0",
+    "h4_vix_risk_off_followthrough_v0",
+)
 VIX_FRAME_KEY = "vix_risk"
 VIX_RAW_DIR = Path("data/raw/risk")
 VIX_FILE = "FRED_VIXCLS.csv"

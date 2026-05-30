@@ -183,9 +183,12 @@ from phase0.tlt_shy_duration_rotation_data import load_tlt_shy_duration_rotation
 from phase0.uso_uup_oil_dollar_data import EXPERT_NAMES as USO_UUP_OIL_DOLLAR_EXPERT_NAMES
 from phase0.uso_uup_oil_dollar_data import USO_UUP_OIL_DOLLAR_FRAME_KEY
 from phase0.uso_uup_oil_dollar_data import load_uso_uup_oil_dollar_context
-from phase0.vix_risk_data import EXPERT_NAME as VIX_RISK_EXPERT_NAME
+from phase0.vix_risk_data import EXPERT_NAMES as VIX_RISK_EXPERT_NAMES
 from phase0.vix_risk_data import VIX_FRAME_KEY
 from phase0.vix_risk_data import load_vix_risk_context
+from phase0.vix_term_structure_data import EXPERT_NAMES as VIX_TERM_STRUCTURE_EXPERT_NAMES
+from phase0.vix_term_structure_data import VIX_TERM_STRUCTURE_FRAME_KEY
+from phase0.vix_term_structure_data import load_vix_term_structure_context
 from phase0.xlu_xlk_defensive_rotation_data import EXPERT_NAMES as XLU_XLK_DEFENSIVE_ROTATION_EXPERT_NAMES
 from phase0.xlu_xlk_defensive_rotation_data import XLU_XLK_DEFENSIVE_ROTATION_FRAME_KEY
 from phase0.xlu_xlk_defensive_rotation_data import load_xlu_xlk_defensive_rotation_context
@@ -258,8 +261,10 @@ def run_phase0_matrix(
             _assert_macro_composite_data_ready(config)
         if expert_name == GVZ_VOLATILITY_EXPERT_NAME and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
-        if expert_name == VIX_RISK_EXPERT_NAME and not synthetic_sample:
+        if expert_name in VIX_RISK_EXPERT_NAMES and not synthetic_sample:
             _assert_vix_risk_data_ready(config)
+        if expert_name in VIX_TERM_STRUCTURE_EXPERT_NAMES and not synthetic_sample:
+            _assert_vix_term_structure_data_ready(config)
         if expert_name == GVZ_VIX_VOL_PREMIUM_EXPERT_NAME and not synthetic_sample:
             _assert_gvz_volatility_data_ready(config)
             _assert_vix_risk_data_ready(config)
@@ -488,10 +493,19 @@ def run_phase0_matrix(
                             cell.end_utc,
                         ),
                     }
-                if expert_name == VIX_RISK_EXPERT_NAME:
+                if expert_name in VIX_RISK_EXPERT_NAMES:
                     data_context = {
                         **data_context,
                         VIX_FRAME_KEY: load_vix_risk_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name in VIX_TERM_STRUCTURE_EXPERT_NAMES:
+                    data_context = {
+                        **data_context,
+                        VIX_TERM_STRUCTURE_FRAME_KEY: load_vix_term_structure_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,
@@ -951,6 +965,12 @@ def _assert_vix_risk_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_vix_risk_context(config, start, end)
+
+
+def _assert_vix_term_structure_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_vix_term_structure_context(config, start, end)
 
 
 def _assert_move_bond_vol_data_ready(config: ProjectConfig) -> None:

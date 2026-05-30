@@ -67,6 +67,8 @@ h1_tlt_shy_duration_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTAN
 h1_tlt_uup_pressure_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1473,144,174,173.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_tlt_uup_pressure_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1149,119,140,124.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_uso_uup_oil_dollar_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1353,144,154,153.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_vix_term_structure_inversion_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,897,86,110,103.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_vix_term_structure_inversion_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,513,46,70,55.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_volatility_squeeze_breakout_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,2127,116,300,293.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_walk_forward_linear_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,5979,561,788,644.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_xle_xlu_energy_defensive_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1182,117,142,135.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
@@ -92,6 +94,7 @@ h4_policy_uncertainty_safe_haven_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE
 h4_real_yield_proxy_momentum_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,306,18,64,20.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h4_treasury_curve_stress_momentum_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,975,55,207,63.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h4_us_session_liquidity_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,378,32,60,34.0,3,multi_cell_survival;sample_size;concentration,FAIL,FAIL,PASS,FAIL,PASS,PASS
+h4_vix_risk_off_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1404,149,160,159.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_vix_risk_off_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,504,47,61,60.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h4_walk_forward_knn_momentum_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,5013,485,652,534.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 liquidity_sweep_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,12222,1281,1423,1370.0,3,multi_cell_survival;no_catastrophic_failure;concentration,FAIL,PASS,FAIL,FAIL,PASS,PASS

@@ -235,6 +235,12 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_us_session_liquidity_reversal_context()
     if expert == "h4_vix_risk_off_reversal_v0":
         return _h4_vix_risk_off_reversal_context()
+    if expert == "h4_vix_risk_off_followthrough_v0":
+        return _h4_vix_risk_off_followthrough_context()
+    if expert == "h1_vix_term_structure_inversion_reversal_v0":
+        return _h1_vix_term_structure_inversion_reversal_context()
+    if expert == "h1_vix_term_structure_inversion_followthrough_v0":
+        return _h1_vix_term_structure_inversion_followthrough_context()
     if expert == "h4_walk_forward_knn_momentum_state_v0":
         return _h4_walk_forward_knn_momentum_state_context()
     if expert == "xag_lead_xau_followthrough_v0":
@@ -5111,6 +5117,260 @@ def _h4_vix_risk_off_reversal_context() -> dict:
         "H4": h4,
         "D1": d1,
         "vix_risk": vix,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_vix_risk_off_followthrough_context() -> dict:
+    vix_dates = pd.bdate_range("2022-01-03", periods=340, tz="UTC")
+    vix_close: list[float] = []
+    for index in range(340):
+        if index < 260:
+            vix_close.append(18.0 + 0.04 * (index % 7))
+        else:
+            vix_close.append(18.0 + 0.25 * (index - 259))
+    vix = pd.DataFrame({"timestamp_utc": vix_dates, "vix_close": vix_close})
+
+    h4_periods = 180
+    h4_times = pd.date_range(vix_dates[300] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h4_periods):
+        if index < 120:
+            current += 0.95
+        elif index == 120:
+            current += 2.80
+        else:
+            current += 0.14 if index % 4 else -0.03
+        closes.append(current)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+    h4["high"] = h4[["open", "close"]].max(axis=1) + 1.0
+    h4["low"] = h4[["open", "close"]].min(axis=1) - 4.0
+
+    d1_times = pd.date_range(h4_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [2004.0] * 40,
+        }
+    )
+    h1_times = pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [closes[-1]] * len(h1_times),
+            "high": [closes[-1] + 1.0] * len(h1_times),
+            "low": [closes[-1] - 1.0] * len(h1_times),
+            "close": [closes[-1]] * len(h1_times),
+        }
+    )
+
+    m5_periods = h4_periods * 48 + 288
+    m5_times = pd.date_range(h4_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 2.0] * m5_periods,
+            "low": [closes[-1] - 2.0] * m5_periods,
+            "close": [closes[-1] + 0.5] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.5] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.4] * m5_periods,
+            "ask_close": [closes[-1] + 0.6] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "vix_risk": vix,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_vix_term_structure_inversion_reversal_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
+    vix_close: list[float] = []
+    vxv_close: list[float] = []
+    for index in range(380):
+        if index < 290:
+            vix_close.append(18.0 + 0.02 * (index % 5))
+            vxv_close.append(22.0 + 0.02 * (index % 7))
+        else:
+            step = index - 289
+            vix_close.append(18.0 + 0.35 * step)
+            vxv_close.append(22.0 + 0.08 * step)
+    term = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "vix_close": vix_close,
+            "vxv_close": vxv_close,
+        }
+    )
+
+    h1_periods = 360
+    h1_times = pd.date_range(dates[330] + pd.Timedelta(hours=1), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < 180:
+            current += 0.75
+        elif index == 180:
+            current -= 2.80
+        else:
+            current -= 0.06 if index % 5 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    h1["high"] = h1[["open", "close"]].max(axis=1) + 1.1
+    h1["low"] = h1[["open", "close"]].min(axis=1) - 0.8
+
+    h4_times = pd.date_range(h1_times[0].floor("4h") + pd.Timedelta(hours=4), periods=95, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [2000.0] * len(h4_times),
+            "high": [2005.0] * len(h4_times),
+            "low": [1995.0] * len(h4_times),
+            "close": [2001.0] * len(h4_times),
+        }
+    )
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [2004.0] * 40,
+        }
+    )
+
+    m5_periods = h1_periods * 12 + 144
+    m5_times = pd.date_range(h1_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 1.0] * m5_periods,
+            "low": [closes[-1] - 1.0] * m5_periods,
+            "close": [closes[-1] - 0.4] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] - 0.4] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] - 0.5] * m5_periods,
+            "ask_close": [closes[-1] - 0.3] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "vix_term_structure": term,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_vix_term_structure_inversion_followthrough_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=380, tz="UTC")
+    vix_close: list[float] = []
+    vxv_close: list[float] = []
+    for index in range(380):
+        if index < 290:
+            vix_close.append(18.0 + 0.02 * (index % 5))
+            vxv_close.append(22.0 + 0.02 * (index % 7))
+        else:
+            step = index - 289
+            vix_close.append(18.0 + 0.35 * step)
+            vxv_close.append(22.0 + 0.08 * step)
+    term = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "vix_close": vix_close,
+            "vxv_close": vxv_close,
+        }
+    )
+
+    h1_periods = 360
+    h1_times = pd.date_range(dates[330] + pd.Timedelta(hours=1), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < 180:
+            current += 0.42
+        elif index == 180:
+            current += 1.90
+        else:
+            current += 0.08 if index % 5 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    h1["high"] = h1[["open", "close"]].max(axis=1) + 1.0
+    h1["low"] = h1[["open", "close"]].min(axis=1) - 2.8
+
+    h4_times = pd.date_range(h1_times[0].floor("4h") + pd.Timedelta(hours=4), periods=95, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [2000.0] * len(h4_times),
+            "high": [2005.0] * len(h4_times),
+            "low": [1995.0] * len(h4_times),
+            "close": [2001.0] * len(h4_times),
+        }
+    )
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1995.0] * 40,
+            "close": [2004.0] * 40,
+        }
+    )
+
+    m5_periods = h1_periods * 12 + 144
+    m5_times = pd.date_range(h1_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [closes[-1]] * m5_periods,
+            "high": [closes[-1] + 1.0] * m5_periods,
+            "low": [closes[-1] - 1.0] * m5_periods,
+            "close": [closes[-1] + 0.4] * m5_periods,
+            "mid_open": [closes[-1]] * m5_periods,
+            "mid_close": [closes[-1] + 0.4] * m5_periods,
+            "bid_open": [closes[-1] - 0.1] * m5_periods,
+            "ask_open": [closes[-1] + 0.1] * m5_periods,
+            "bid_close": [closes[-1] + 0.3] * m5_periods,
+            "ask_close": [closes[-1] + 0.5] * m5_periods,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        "vix_term_structure": term,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

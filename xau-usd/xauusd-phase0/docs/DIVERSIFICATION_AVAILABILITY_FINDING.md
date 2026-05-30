@@ -4,7 +4,7 @@ Last updated: 2026-05-30
 
 ## Finding
 
-As of 2026-05-30, the project has tested a broad set of non-level, intermarket, macro-regime, AI-style macro-composite, policy-uncertainty, nominal-rate, yield-curve, corporate-credit, futures-positioning, options-implied-volatility, equity-risk implied-volatility, GVZ/VIX relative volatility-premium, GC/XAU futures-spot basis, GC futures-proxy momentum, official CFTC COT continuation, calendar-flow, session impulse-reversion, Friday position-squaring, financial-conditions, breakeven-inflation, volatility-regime, event-regime, non-authoritative futures-volume proxy, public GLD ETF flow proxy, public GDX/GLD miner-relative proxy, public FX ETF rotation proxies, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Twenty-seven H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, ETF-relative, ETF-flow, macro-composite, calendar-flow, session impulse-reversion, Friday position-squaring, volatility-premium, futures-spot relative-value, futures-proxy momentum, FX-rotation, and futures-positioning candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced a full independent Phase 0 first-pass approval. One GLD ETF flow v0 candidate produced PF >= 1.30 in 9/9 cells, but failed trade-count, activity, and concentration gates; broader GLD-flow versions either solved trade count while diluting PF or preserved only one-broker pockets. A new `quarter_round_retest_v0` same-family level candidate passed automated gates, but it is not diversification and remains Gate 9 pending.
+As of 2026-05-30, the project has tested a broad set of non-level, intermarket, macro-regime, AI-style macro-composite, policy-uncertainty, nominal-rate, yield-curve, corporate-credit, futures-positioning, options-implied-volatility, equity-risk implied-volatility, GVZ/VIX relative volatility-premium, GC/XAU futures-spot basis, GC futures-proxy momentum, official CFTC COT continuation, calendar-flow, session impulse-reversion, Friday position-squaring, financial-conditions, breakeven-inflation, volatility-regime, event-regime, non-authoritative futures-volume proxy, public GLD ETF flow proxy, public GDX/GLD miner-relative proxy, public FX ETF rotation proxies, and higher-timeframe XAUUSD candidates under the locked Phase 0 research lane. Twenty-nine H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, ETF-relative, ETF-flow, macro-composite, calendar-flow, session impulse-reversion, Friday position-squaring, volatility-premium, futures-spot relative-value, futures-proxy momentum, FX-rotation, and futures-positioning candidates were registered, SHA256-locked, smoke-tested, and run through the real 9-cell matrix without tuning. Zero produced a full independent Phase 0 first-pass approval. One GLD ETF flow v0 candidate produced PF >= 1.30 in 9/9 cells, but failed trade-count, activity, and concentration gates; broader GLD-flow versions either solved trade count while diluting PF or preserved only one-broker pockets. A new `quarter_round_retest_v0` same-family level candidate passed automated gates, but it is not diversification and remains Gate 9 pending.
 
 The current evidence supports this operating conclusion:
 
@@ -35,17 +35,19 @@ Same-family variants may be useful for observation, cost study, and future compa
 | 14 | `cot_gold_positioning_reversal_v0` | H4 with official CFTC gold COT positioning | 0/9 | REJECTED_FIRST_PASS |
 | 15 | `h4_gvz_volatility_panic_reversal_v0` | H4 with FRED GVZ gold-options implied volatility | 0/9 | REJECTED_FIRST_PASS |
 | 16 | `h4_vix_risk_off_reversal_v0` | H4 with FRED VIX equity-risk implied volatility | 3/9 | REJECTED_FIRST_PASS |
-| 17 | `h4_financial_conditions_stress_reversal_v0` | H4 with FRED NFCI/ANFCI financial conditions | 0/9 | REJECTED_FIRST_PASS |
-| 18 | `h4_breakeven_inflation_momentum_v0` | H4 with FRED T5YIE/T10YIE breakeven inflation momentum | 0/9 | REJECTED_FIRST_PASS |
-| 19 | `h4_treasury_curve_stress_momentum_v0` | H4 with FRED DGS2/DGS10/T10Y2Y Treasury curve stress | 3/9 | REJECTED_FIRST_PASS |
-| 20 | `h4_credit_spread_stress_momentum_v0` | H4 with FRED BAA10Y/AAA10Y corporate credit spread stress | 0/9 | REJECTED_FIRST_PASS |
-| 21 | `h4_macro_composite_risk_state_v0` | H4 with fixed AI-style FRED macro/risk vote | 6/9 | REJECTED_FIRST_PASS |
-| 22 | `h4_macro_composite_risk_state_v1` | H4 with broader fixed AI-style FRED macro/risk vote | 3/9 | REJECTED_FIRST_PASS |
-| 23 | `h4_policy_uncertainty_safe_haven_v0` | H4 with FRED USEPUINDXD policy-uncertainty safe-haven state | 3/9 | REJECTED_FIRST_PASS |
-| 24 | `h4_gold_futures_volume_climax_v0` | H4 with Yahoo `GC=F` continuous futures daily-volume proxy | 0/9 | REJECTED_FIRST_PASS |
-| 25 | `h4_gld_etf_flow_reversal_v0` | H4 with Yahoo `GLD` ETF daily OHLCV flow proxy | 9/9 | REJECTED_FIRST_PASS: sample-size, activity, and concentration failed |
-| 26 | `h4_gdx_gld_miner_divergence_v0` | H4 with Yahoo `GDX`/`GLD` ETF relative proxy | 0/9 | REJECTED_FIRST_PASS |
-| 27 | `h4_gld_etf_flow_reversal_v1` | H4 with Yahoo `GLD` ETF daily OHLCV flow proxy | 0/9 | REJECTED_FIRST_PASS: result-informed v1 diluted PF |
+| 17 | `h4_vix_risk_off_followthrough_v0` | H4 with FRED VIX equity-risk implied volatility | 0/9 | REJECTED_FIRST_PASS |
+| 18 | `h4_financial_conditions_stress_reversal_v0` | H4 with FRED NFCI/ANFCI financial conditions | 0/9 | REJECTED_FIRST_PASS |
+| 19 | `h4_breakeven_inflation_momentum_v0` | H4 with FRED T5YIE/T10YIE breakeven inflation momentum | 0/9 | REJECTED_FIRST_PASS |
+| 20 | `h4_treasury_curve_stress_momentum_v0` | H4 with FRED DGS2/DGS10/T10Y2Y Treasury curve stress | 3/9 | REJECTED_FIRST_PASS |
+| 21 | `h4_credit_spread_stress_momentum_v0` | H4 with FRED BAA10Y/AAA10Y corporate credit spread stress | 0/9 | REJECTED_FIRST_PASS |
+| 22 | `h4_macro_composite_risk_state_v0` | H4 with fixed AI-style FRED macro/risk vote | 6/9 | REJECTED_FIRST_PASS |
+| 23 | `h4_macro_composite_risk_state_v1` | H4 with broader fixed AI-style FRED macro/risk vote | 3/9 | REJECTED_FIRST_PASS |
+| 24 | `h4_policy_uncertainty_safe_haven_v0` | H4 with FRED USEPUINDXD policy-uncertainty safe-haven state | 3/9 | REJECTED_FIRST_PASS |
+| 25 | `h4_gold_futures_volume_climax_v0` | H4 with Yahoo `GC=F` continuous futures daily-volume proxy | 0/9 | REJECTED_FIRST_PASS |
+| 26 | `h4_gld_etf_flow_reversal_v0` | H4 with Yahoo `GLD` ETF daily OHLCV flow proxy | 9/9 | REJECTED_FIRST_PASS: sample-size, activity, and concentration failed |
+| 27 | `h4_gdx_gld_miner_divergence_v0` | H4 with Yahoo `GDX`/`GLD` ETF relative proxy | 0/9 | REJECTED_FIRST_PASS |
+| 28 | `h4_gld_etf_flow_reversal_v1` | H4 with Yahoo `GLD` ETF daily OHLCV flow proxy | 0/9 | REJECTED_FIRST_PASS: result-informed v1 diluted PF |
+| 29 | `h4_gld_etf_flow_reversal_v2` | H4 with Yahoo `GLD` ETF daily OHLCV flow proxy | 6/9 | REJECTED_FIRST_PASS: sample-size, activity, and concentration failed |
 
 Additional H1 intermarket, volatility-regime, and event-regime diversification attempts:
 
@@ -104,6 +106,8 @@ Additional H1 intermarket, volatility-regime, and event-regime diversification a
 | 51 | `h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0` | Yahoo CYB/UUP daily yuan-dollar FX rotation | n/a | BLOCKED_DATA_COVERAGE |
 | 52 | `h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0` | Yahoo FXA/UUP daily Aussie-dollar FX rotation | 0/9 | REJECTED_FIRST_PASS |
 | 53 | `h1_move_vix_bond_vol_shock_reversal_v0` | Yahoo MOVE plus FRED VIX bond-volatility shock reversal | 0/9 | REJECTED_FIRST_PASS |
+| 54 | `h1_vix_term_structure_inversion_reversal_v0` | FRED VIX/VXV equity-volatility term structure | 0/9 | REJECTED_FIRST_PASS |
+| 55 | `h1_vix_term_structure_inversion_followthrough_v0` | FRED VIX/VXV equity-volatility term structure | 0/9 | REJECTED_FIRST_PASS |
 
 Supporting artifacts:
 

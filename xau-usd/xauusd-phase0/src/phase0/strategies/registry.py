@@ -160,6 +160,12 @@ from phase0.strategies.h1_tlt_shy_duration_rotation_followthrough_v0 import (
 from phase0.strategies.h1_uso_uup_oil_dollar_followthrough_v0 import (
     H1UsoUupOilDollarFollowthroughV0Strategy,
 )
+from phase0.strategies.h1_vix_term_structure_inversion_followthrough_v0 import (
+    H1VixTermStructureInversionFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_vix_term_structure_inversion_reversal_v0 import (
+    H1VixTermStructureInversionReversalV0Strategy,
+)
 from phase0.strategies.h1_volatility_squeeze_breakout_v0 import (
     H1VolatilitySqueezeBreakoutV0Strategy,
 )
@@ -200,6 +206,7 @@ from phase0.strategies.h4_treasury_curve_stress_momentum_v0 import (
 from phase0.strategies.h4_us_session_liquidity_reversal_v0 import (
     H4UsSessionLiquidityReversalV0Strategy,
 )
+from phase0.strategies.h4_vix_risk_off_followthrough_v0 import H4VixRiskOffFollowthroughV0Strategy
 from phase0.strategies.h4_vix_risk_off_reversal_v0 import H4VixRiskOffReversalV0Strategy
 from phase0.strategies.h4_walk_forward_knn_momentum_state_v0 import H4WalkForwardKnnMomentumStateV0Strategy
 from phase0.strategies.london_fix_continuation_v0 import LondonFixContinuationV0Strategy
@@ -318,6 +325,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1TltUupPressureFollowthroughV0Strategy.name: H1TltUupPressureFollowthroughV0Strategy,
     H1TltUupPressureReversionV0Strategy.name: H1TltUupPressureReversionV0Strategy,
     H1UsoUupOilDollarFollowthroughV0Strategy.name: H1UsoUupOilDollarFollowthroughV0Strategy,
+    H1VixTermStructureInversionFollowthroughV0Strategy.name: H1VixTermStructureInversionFollowthroughV0Strategy,
+    H1VixTermStructureInversionReversalV0Strategy.name: H1VixTermStructureInversionReversalV0Strategy,
     H1VolatilitySqueezeBreakoutV0Strategy.name: H1VolatilitySqueezeBreakoutV0Strategy,
     H1WalkForwardLinearStateV0Strategy.name: H1WalkForwardLinearStateV0Strategy,
     H1XluXlkDefensiveRotationFollowthroughV0Strategy.name: H1XluXlkDefensiveRotationFollowthroughV0Strategy,
@@ -341,6 +350,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4RealYieldProxyMomentumV0Strategy.name: H4RealYieldProxyMomentumV0Strategy,
     H4TreasuryCurveStressMomentumV0Strategy.name: H4TreasuryCurveStressMomentumV0Strategy,
     H4UsSessionLiquidityReversalV0Strategy.name: H4UsSessionLiquidityReversalV0Strategy,
+    H4VixRiskOffFollowthroughV0Strategy.name: H4VixRiskOffFollowthroughV0Strategy,
     H4VixRiskOffReversalV0Strategy.name: H4VixRiskOffReversalV0Strategy,
     H4WalkForwardKnnMomentumStateV0Strategy.name: H4WalkForwardKnnMomentumStateV0Strategy,
     LondonFixContinuationV0Strategy.name: LondonFixContinuationV0Strategy,
