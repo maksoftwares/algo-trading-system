@@ -11,6 +11,8 @@ EXPERT_NAME = "h4_gld_etf_flow_reversal_v0"
 EXPERT_NAMES = (
     "h4_gld_etf_flow_reversal_v0",
     "h4_gld_etf_flow_reversal_v1",
+    "h4_gld_etf_flow_reversal_v2",
+    "h1_gld_spy_safe_haven_rotation_followthrough_v0",
     "h1_gld_flow_momentum_pullback_v0",
     "h1_gld_flow_stress_followthrough_v0",
     "h1_gld_flow_stress_reversal_v0",

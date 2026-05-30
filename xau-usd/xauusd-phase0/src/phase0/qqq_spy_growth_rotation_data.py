@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_qqq_spy_growth_risk_rotation_followthrough_v0"
-EXPERT_NAMES = ("h1_qqq_spy_growth_risk_rotation_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_qqq_spy_growth_risk_rotation_followthrough_v0",
+    "h1_gld_spy_safe_haven_rotation_followthrough_v0",
+)
 QQQ_SPY_GROWTH_ROTATION_FRAME_KEY = "qqq_spy_growth_rotation"
 QQQ_SPY_GROWTH_ROTATION_REFERENCE_PATH = Path("data/reference/etf/qqq_spy_daily_yahoo_2015_2025.csv")
 

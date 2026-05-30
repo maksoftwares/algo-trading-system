@@ -176,9 +176,13 @@ from phase0.strategies.h4_financial_conditions_stress_reversal_v0 import (
 from phase0.strategies.h4_gdx_gld_miner_divergence_v0 import H4GdxGldMinerDivergenceV0Strategy
 from phase0.strategies.h4_gld_etf_flow_reversal_v0 import H4GldEtfFlowReversalV0Strategy
 from phase0.strategies.h4_gld_etf_flow_reversal_v1 import H4GldEtfFlowReversalV1Strategy
+from phase0.strategies.h4_gld_etf_flow_reversal_v2 import H4GldEtfFlowReversalV2Strategy
 from phase0.strategies.h1_gld_flow_momentum_pullback_v0 import H1GldFlowMomentumPullbackV0Strategy
 from phase0.strategies.h1_gld_flow_stress_followthrough_v0 import H1GldFlowStressFollowthroughV0Strategy
 from phase0.strategies.h1_gld_flow_stress_reversal_v0 import H1GldFlowStressReversalV0Strategy
+from phase0.strategies.h1_gld_spy_safe_haven_rotation_followthrough_v0 import (
+    H1GldSpySafeHavenRotationFollowthroughV0Strategy,
+)
 from phase0.strategies.h4_gold_futures_volume_climax_v0 import H4GoldFuturesVolumeClimaxV0Strategy
 from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
     H4GvzVolatilityPanicReversalV0Strategy,
@@ -323,9 +327,11 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4GdxGldMinerDivergenceV0Strategy.name: H4GdxGldMinerDivergenceV0Strategy,
     H4GldEtfFlowReversalV0Strategy.name: H4GldEtfFlowReversalV0Strategy,
     H4GldEtfFlowReversalV1Strategy.name: H4GldEtfFlowReversalV1Strategy,
+    H4GldEtfFlowReversalV2Strategy.name: H4GldEtfFlowReversalV2Strategy,
     H1GldFlowMomentumPullbackV0Strategy.name: H1GldFlowMomentumPullbackV0Strategy,
     H1GldFlowStressFollowthroughV0Strategy.name: H1GldFlowStressFollowthroughV0Strategy,
     H1GldFlowStressReversalV0Strategy.name: H1GldFlowStressReversalV0Strategy,
+    H1GldSpySafeHavenRotationFollowthroughV0Strategy.name: H1GldSpySafeHavenRotationFollowthroughV0Strategy,
     H4GoldFuturesVolumeClimaxV0Strategy.name: H4GoldFuturesVolumeClimaxV0Strategy,
     H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,

@@ -201,12 +201,16 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_gld_etf_flow_reversal_context()
     if expert == "h4_gld_etf_flow_reversal_v1":
         return _h4_gld_etf_flow_reversal_context()
+    if expert == "h4_gld_etf_flow_reversal_v2":
+        return _h4_gld_etf_flow_reversal_context()
     if expert == "h1_gld_flow_momentum_pullback_v0":
         return _h1_gld_flow_momentum_pullback_context()
     if expert == "h1_gld_flow_stress_followthrough_v0":
         return _h1_gld_flow_stress_followthrough_context()
     if expert == "h1_gld_flow_stress_reversal_v0":
         return _h1_gld_flow_stress_reversal_context()
+    if expert == "h1_gld_spy_safe_haven_rotation_followthrough_v0":
+        return _h1_gld_spy_safe_haven_rotation_followthrough_context()
     if expert == "h4_gold_futures_volume_climax_v0":
         return _h4_gold_futures_volume_climax_context()
     if expert == "h4_gvz_volatility_panic_reversal_v0":
@@ -3701,6 +3705,106 @@ def _h1_qqq_spy_growth_risk_rotation_followthrough_context() -> dict:
         "M5": m5,
         "H1": h1,
         QQQ_SPY_GROWTH_ROTATION_FRAME_KEY: rotation,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_gld_spy_safe_haven_rotation_followthrough_context() -> dict:
+    dates = pd.bdate_range("2021-01-04", periods=560, tz="UTC")
+    gld_close: list[float] = []
+    spy_close: list[float] = []
+    gld_volume: list[float] = []
+    spy_volume: list[float] = []
+    qqq_close: list[float] = []
+    qqq_volume: list[float] = []
+    gld_current = 175.0
+    spy_current = 375.0
+    qqq_current = 310.0
+    for index in range(560):
+        if index < 430:
+            gld_current *= 1.0002 if index % 3 else 0.9998
+            spy_current *= 1.0004 if index % 2 else 0.9996
+            qqq_current *= 1.0005 if index % 2 else 0.9995
+        else:
+            step = index - 429
+            gld_current *= 1.0065
+            spy_current *= 0.9980
+            qqq_current *= 0.9990
+            gld_volume.append(14_000_000.0 + 20_000.0 * step)
+            spy_volume.append(85_000_000.0 + 40_000.0 * step)
+            qqq_volume.append(65_000_000.0 + 30_000.0 * step)
+            gld_close.append(gld_current)
+            spy_close.append(spy_current)
+            qqq_close.append(qqq_current)
+            continue
+        gld_volume.append(8_000_000.0 + 50_000.0 * (index % 7))
+        spy_volume.append(70_000_000.0 + 100_000.0 * (index % 5))
+        qqq_volume.append(50_000_000.0 + 100_000.0 * (index % 7))
+        gld_close.append(gld_current)
+        spy_close.append(spy_current)
+        qqq_close.append(qqq_current)
+
+    gld_flow = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "close": gld_close,
+            "volume": gld_volume,
+            "source_symbol": ["GLD"] * len(dates),
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+    qqq_spy = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "qqq_close": qqq_close,
+            "qqq_volume": qqq_volume,
+            "spy_close": spy_close,
+            "spy_volume": spy_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    xau_returns: list[float] = []
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            xau_returns.append(0.00002 if index % 4 else -0.00001)
+        elif index < signal_index:
+            xau_returns.append(0.00055)
+        elif index == signal_index:
+            xau_returns.append(0.00150)
+        else:
+            xau_returns.append(0.00002 if index % 4 else -0.00001)
+    xau_close = _price_path(2000.0, xau_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.3)
+
+    last_close = xau_close[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        GLD_ETF_FLOW_FRAME_KEY: gld_flow,
+        QQQ_SPY_GROWTH_ROTATION_FRAME_KEY: qqq_spy,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
