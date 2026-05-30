@@ -28,6 +28,9 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     report = output.report_path.read_text(encoding="utf-8")
     assert output.status == "PENDING"
     assert "Phase 2 preparation may continue" in report
+    assert "Candidate-level D2 remains preserved audit evidence" in report
+    assert "Same-family variants are not diversification" in report
+    assert "`breakout_retest` is the only possible execution-eligible stream" in report
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Active-market 72-hour soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Process/code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)

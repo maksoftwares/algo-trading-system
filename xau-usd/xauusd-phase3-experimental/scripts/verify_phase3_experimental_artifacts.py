@@ -61,6 +61,21 @@ HASH_EXCLUDED_OUTPUT_PARTS = {
     "review_bundles",
 }
 
+FORBIDDEN_PHASE3_AUTHORITY_FILENAMES = {
+    "PHASE2_OWNER_APPROVAL.md",
+    "PHASE2_READINESS_REPORT.md",
+}
+
+FORBIDDEN_PHASE3_DEPLOYMENT_TOKENS = (
+    "deploy_phase1_mt5",
+    "MetaEditor64.exe",
+    "terminal64.exe",
+    "MQL5\\Experts",
+    "MQL5/Experts",
+)
+
+MUTATING_TOKENS = ("write_text", ".open(\"w", ".open('w", "open(\"w", "open('w")
+
 
 def verify_phase3_experimental_artifacts(
     phase3_root: Path,
@@ -96,10 +111,42 @@ def verify_phase3_experimental_artifacts(
             errors.append(f"required Phase 3 JSON artifact is not git-tracked: {path}")
     errors.extend(_verify_consistency(reports))
     errors.extend(_verify_current_state_freshness(reports, repo_root))
+    errors.extend(_verify_freeze_boundaries(phase3_root))
     if require_clean_manifest or require_clean_release_snapshot:
         errors.extend(_verify_clean_manifest(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"))
     elif allow_dirty_working_snapshot:
         errors.extend(_verify_working_manifest(reports / "PHASE3_EXPERIMENTAL_MANIFEST.json"))
+    return errors
+
+
+def _verify_freeze_boundaries(phase3_root: Path) -> list[str]:
+    errors: list[str] = []
+    for path in phase3_root.rglob("*"):
+        if not path.is_file():
+            continue
+        if any(part == "review_bundles" for part in path.parts):
+            continue
+        if path.name in FORBIDDEN_PHASE3_AUTHORITY_FILENAMES:
+            errors.append(f"Phase 3 must not create authority file `{path.name}` inside the sandbox: {path}")
+        if path.suffix.lower() in {".ex5", ".set"}:
+            errors.append(f"Phase 3 must not contain MT5 deployment artifact `{path.suffix}`: {path}")
+
+    for path in (phase3_root / "scripts").glob("*.py"):
+        if path.name == Path(__file__).name:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for token in FORBIDDEN_PHASE3_DEPLOYMENT_TOKENS:
+            if token in text:
+                errors.append(f"Phase 3 script contains forbidden deployment token `{token}`: {path}")
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if "PHASE2_READINESS_REPORT.md" in line and any(token in line for token in MUTATING_TOKENS):
+                errors.append(
+                    f"Phase 3 script appears able to mutate PHASE2_READINESS_REPORT.md: {path}:{line_number}"
+                )
+            if "PHASE2_OWNER_APPROVAL.md" in line and any(token in line for token in MUTATING_TOKENS):
+                errors.append(
+                    f"Phase 3 script appears able to generate PHASE2_OWNER_APPROVAL.md: {path}:{line_number}"
+                )
     return errors
 
 

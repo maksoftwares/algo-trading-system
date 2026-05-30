@@ -111,6 +111,11 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         / "xauusd-phase1"
         / "scripts"
         / "verify_status_dashboard_freshness.py",
+        "script_status_report_freshness": repo_root
+        / "xau-usd"
+        / "xauusd-phase1"
+        / "scripts"
+        / "verify_status_report_freshness.py",
     }
     files = {name: _file_entry(path) for name, path in paths.items()}
     working_tree_short_status = _git_output(repo_root, "status", "--short")

@@ -2,14 +2,14 @@
 
 This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.
 
-Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
+Overall status: REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES
 
 ## Decision
 
 | Field | Value |
 | --- | --- |
 | Phase 3 repo-side complete | True |
-| Phase 3 release-clean | True |
+| Phase 3 release-clean | False |
 | Demo/paper authorized | False |
 | Real Phase 1 acceptance | PENDING |
 | Real Phase 2 readiness | PENDING |
@@ -37,12 +37,14 @@ Overall status: REPO_SIDE_COMPLETE_WAITING_REAL_GATES
 | Observer conflict playbook is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_OBSERVER_CONFLICT_PLAYBOOK.md |
 | Future real-implementation prompt is documented. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\docs\PHASE3_REAL_IMPLEMENTATION_PROMPT.md |
 | Portable review bundle exists. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\review_bundles\PHASE3_EXPERIMENTAL_REVIEW_BUNDLE_LATEST.zip |
-| Phase 3 manifest exists and records the current review/worktree state. | PASS | manifest=PASS; clean=True | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
+| Phase 3 manifest exists and records the current review/worktree state. | WARN | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 | Root status dashboard is updated from Phase 3 status. | PASS | evidence exists | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\status.html |
 
 ## Remaining Phase 3 Repo Items
 
-None. All repo-side Phase 3 experimental requirements are complete.
+| Requirement | Status | Detail | Evidence |
+| --- | --- | --- | --- |
+| Phase 3 manifest exists and records the current review/worktree state. | WARN | manifest=DIRTY_WORKTREE; clean=False | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_MANIFEST.md |
 
 ## External Gates Still Blocking Demo
 
@@ -51,13 +53,13 @@ None. All repo-side Phase 3 experimental requirements are complete.
 | VPS selection | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
 | VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
 | VPS first-day verification | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS. | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
-| Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. | current=2.0; required=5.0; remaining=3.0; unit=fresh_market_days |
+| Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. | current=3.0; required=5.0; remaining=2.0; unit=fresh_market_days |
 | Measured-cost revalidation | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS. |  |
 | Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |  |
 | Phase 1 acceptance | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS. |  |
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |  |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. | current=31.75; required=72.0; remaining=40.25; unit=hours |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z. | current=32.88; required=96.0; remaining=63.12; unit=hours |
+| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. | current=46.75; required=72.0; remaining=25.25; unit=hours |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z. | current=48.96; required=96.0; remaining=47.04; unit=hours |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## When Real Gates Pass

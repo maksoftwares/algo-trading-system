@@ -41,6 +41,17 @@ Phase 2 preparation may continue, but implementation is not authorized yet.
 | Would-signal evidence | PASS | Rows: 148; clusters: 148. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
+## D2 Authority
+
+- Candidate-level D2 remains preserved audit evidence and must not be described as PASS unless `PHASE0_REALITY_CHECK.md` itself returns PASS.
+- The active Phase 2 readiness interpretation is the owner-accepted `D2_FAMILY_CLUSTERED_V0` method when the D2 gate above is PASS.
+- Same-family variants are not diversification and do not become paper-mode execution candidates from the family-clustered D2 result.
+
+## Same-Family Execution Lock
+
+- Before the first Phase 2 paper slice, `breakout_retest` is the only possible execution-eligible stream, and only after every objective gate above is PASS.
+- `swing_breakout_retest_v0`, `symbol_normalized_round_retest_v0`, `quarter_round_retest_v0`, `session_extreme_retest_v0`, and other same-family variants remain observer-only or disabled until their own full review and explicit owner authorization.
+
 ## Current Runtime
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |

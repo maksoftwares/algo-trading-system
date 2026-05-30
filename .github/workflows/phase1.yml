@@ -36,6 +36,9 @@ jobs:
       - name: Verify Phase 2 transition artifacts and dashboard freshness
         run: python scripts/verify_phase2_transition_artifacts.py --root . --repo-root ../.. --status-path ../../status.html
 
+      - name: Verify status report freshness
+        run: python scripts/verify_status_report_freshness.py --repo-root ../.. --status-path ../../status.html
+
       - name: Upload Phase 1 committed reports
         uses: actions/upload-artifact@v4
         with:

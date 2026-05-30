@@ -195,6 +195,74 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "+$10.00" in html
     freshness = _load_script("verify_status_dashboard_freshness")
     assert freshness.verify_status_dashboard_freshness(repo, output.output_path) == []
+    _write_phase1_acceptance_from_summary(
+        phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase1_review_index_from_summary(
+        phase1_reports / "PHASE1_REVIEW_INDEX.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase2_readiness_from_summary(
+        phase1_reports / "PHASE2_READINESS_REPORT.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase3_status_markdown(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.md")
+    report_freshness = _load_script("verify_status_report_freshness")
+    assert report_freshness.verify_status_report_freshness(repo, output.output_path) == []
+
+
+def test_status_report_freshness_detects_stale_child_report_counters(tmp_path: Path):
+    module = _load_module()
+    report_freshness = _load_script("verify_status_report_freshness")
+    repo = tmp_path / "repo"
+    phase0_reports = repo / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
+    phase0_docs = repo / "xau-usd" / "xauusd-phase0" / "docs"
+    phase1_reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase3_reports = repo / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports"
+    phase0_reports.mkdir(parents=True)
+    phase0_docs.mkdir(parents=True)
+    phase1_reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_phase1_summary(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_phase1_acceptance_from_summary(
+        phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase1_review_index_from_summary(
+        phase1_reports / "PHASE1_REVIEW_INDEX.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase2_readiness_from_summary(
+        phase1_reports / "PHASE2_READINESS_REPORT.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+    )
+    _write_phase2_countdown(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
+    _write_phase2_preflight(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    _write_phase2_experimental_demo_terminal(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_TERMINAL.json")
+    _write_phase2_experimental_demo_attachments(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.json")
+    _write_phase2_next_actions(phase1_reports / "PHASE2_DEMO_NEXT_ACTIONS.json")
+    _write_phase2_owner_packet(phase1_reports / "PHASE2_OWNER_ACTION_PACKET.json")
+    _write_phase2_vps_selection_check(phase1_reports / "PHASE2_VPS_SELECTION_DECISION_CHECK.json")
+    _write_phase2_bootstrap(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+    _write_phase3_status_markdown(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.md")
+    _write_phase3_handoff(phase3_reports / "PHASE3_TO_DEMO_HANDOFF.json")
+    _write_fixed_notional(phase0_reports / "FIXED_NOTIONAL_REPORT.md")
+    _write_measured_cost(phase0_reports / "MEASURED_COST_MODEL.md")
+    _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
+    _write_candidate_backlog(phase0_docs / "CANDIDATE_RESEARCH_BACKLOG.md")
+    output = module.generate_project_status_page(repo)
+
+    assert report_freshness.verify_status_report_freshness(repo, output.output_path) == []
+
+    _write_phase2_readiness_from_summary(
+        phase1_reports / "PHASE2_READINESS_REPORT.md",
+        phase1_reports / "PHASE1_STATUS_SUMMARY.json",
+        latest_bar="2026.05.20 00:00:00",
+    )
+    errors = report_freshness.verify_status_report_freshness(repo, output.output_path)
+    assert any("PHASE2_READINESS_REPORT.md is missing current phase2 readiness latest bar" in error for error in errors)
 
 
 def test_status_dashboard_freshness_validator_detects_canonical_drift(tmp_path: Path):
@@ -817,10 +885,14 @@ def _write_phase3_status(path: Path) -> None:
         json.dumps(
             {
                 "status": "EXPERIMENTAL_ACTIVE",
+                "real_phase1_acceptance": "PENDING",
                 "real_phase2_readiness": "PENDING",
                 "assumption": "assumes_phase2_pass_for_design_only",
                 "authorized_for_deployment": False,
                 "mt5_runtime_touched": False,
+                "latest_phase1_bar": "2026.05.22 20:55:00",
+                "latest_phase1_dry_run": "true",
+                "latest_phase1_trade_permission": "false",
                 "simulation": {
                     "accepted_events": 12,
                     "rejected_source_rows": 1,
@@ -901,6 +973,117 @@ def _write_phase3_handoff(
         ),
         encoding="utf-8",
     )
+
+
+def _write_phase1_review_index_from_summary(path: Path, summary_path: Path) -> None:
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    runtime = summary["runtime"]
+    latest = runtime["latest_row"]
+    status = summary["status"]
+    soak = summary["soak"]
+    would = summary["would_signal"]
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 1 Review Index",
+                "",
+                "Overall status: PENDING",
+                "",
+                "## Latest Runtime Snapshot",
+                "",
+                "| Decision Rows | Latest Bar | Dry Run | Permission | Server Time | BR Stage |",
+                "| --- | --- | --- | --- | --- | --- |",
+                (
+                    f"| {runtime['decision_rows']} | {latest['bar_time']} | {latest['dry_run']} | "
+                    f"{latest['trade_permission']} | {latest['server_time_status']} | "
+                    f"{latest.get('br_stage', 'WAIT_LEVEL_BREAK_RETEST')} |"
+                ),
+                "",
+                "## Gate Snapshot",
+                "",
+                "| Log | Soak | Runtime | Would-Signal | Acceptance | Soak Progress | Would Rows | Clusters |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- |",
+                (
+                    f"| {status['log_verification']} | {status['soak_analysis']} | {status['runtime_health']} | "
+                    f"{status['would_signal']} | {status['acceptance']} | {soak['progress_pct']}% | "
+                    f"{would['rows']} | {would['clusters']} |"
+                ),
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase1_acceptance_from_summary(path: Path, summary_path: Path) -> None:
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    status = summary["status"]
+    latest = summary["runtime"]["latest_row"]
+    soak = summary["soak"]
+    five_day = "PASS" if float(soak["progress_pct"]) >= 100 else "PENDING"
+    active_market = "PASS" if soak.get("uninterrupted_soak_pass") is True else "PENDING"
+    process_freeze = "PASS" if soak.get("process_code_freeze_pass") is True else "PENDING"
+    active_hours = float(soak.get("active_market_streak_hours", soak.get("longest_streak_hours", 0.0)))
+    process_hours = float(soak.get("process_uptime_streak_hours", 0.0))
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 1 Acceptance Report",
+                "",
+                f"Overall status: {status['acceptance']}",
+                "",
+                "## Acceptance Gates",
+                "",
+                "| Gate | Status | Evidence |",
+                "| --- | --- | --- |",
+                f"| Runtime log verification | {status['log_verification']} | Report refreshed. |",
+                f"| Soak/drift analysis | {status['soak_analysis']} | Report refreshed. |",
+                f"| Runtime health | {status['runtime_health']} | Report refreshed. |",
+                f"| Would-signal evidence | {status['would_signal']} | Report refreshed. |",
+                f"| Latest runtime row | PASS | bar_time={latest['bar_time']}; server_time={latest['server_time_status']}. |",
+                f"| Active-market 72-hour soak | {active_market} | Longest active streak: {active_hours:.2f}h. |",
+                f"| Process/code-freeze 96-hour gate | {process_freeze} | Process uptime streak: {process_hours:.2f}h. |",
+                f"| Five trading day soak | {five_day} | Observed {soak['observed_days']} of {soak['required_days']} days. |",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase2_readiness_from_summary(path: Path, summary_path: Path, latest_bar: str | None = None) -> None:
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    runtime = summary["runtime"]
+    latest = dict(runtime["latest_row"])
+    if latest_bar is not None:
+        latest["bar_time"] = latest_bar
+    soak = summary["soak"]
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Readiness Report",
+                "",
+                "Overall status: PENDING",
+                "",
+                "## D2 Authority",
+                "",
+                "- Candidate-level D2 remains preserved audit evidence and must not be described as PASS unless `PHASE0_REALITY_CHECK.md` itself returns PASS.",
+                "- The active Phase 2 readiness interpretation is the owner-accepted `D2_FAMILY_CLUSTERED_V0` method when the D2 gate above is PASS.",
+                "",
+                "## Current Runtime",
+                "",
+                "| Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |",
+                "| --- | --- | --- | --- | --- | --- |",
+                (
+                    f"| {runtime['decision_rows']} | {latest['bar_time']} | {latest['dry_run']} | "
+                    f"{latest['trade_permission']} | {latest['server_time_status']} | {soak['progress_pct']}% |"
+                ),
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_phase3_status_markdown(path: Path) -> None:
+    path.write_text("# Phase 3 Experimental Status\n\nOverall status: EXPERIMENTAL_ACTIVE\n", encoding="utf-8")
 
 
 def _write_family_d2(report_path: Path, manifest_path: Path, reviewer_accepted: bool) -> None:

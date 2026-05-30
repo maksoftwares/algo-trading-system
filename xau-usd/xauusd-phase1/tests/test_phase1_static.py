@@ -268,6 +268,29 @@ def test_phase1_ci_verifies_phase2_transition_artifacts_and_dashboard():
 
     assert "Verify Phase 2 transition artifacts and dashboard freshness" in workflow
     assert "verify_phase2_transition_artifacts.py --root . --repo-root ../.. --status-path ../../status.html" in workflow
+    assert "Verify status report freshness" in workflow
+    assert "verify_status_report_freshness.py --repo-root ../.. --status-path ../../status.html" in workflow
+
+
+def test_status_report_freshness_guard_exists():
+    text = (ROOT / "scripts" / "verify_status_report_freshness.py").read_text(encoding="utf-8")
+
+    assert "verify_status_report_freshness" in text
+    assert "PHASE1_ACCEPTANCE_REPORT.md" in text
+    assert "PHASE1_REVIEW_INDEX.md" in text
+    assert "PHASE2_READINESS_REPORT.md" in text
+    assert "PHASE3_EXPERIMENTAL_STATUS.md" in text
+    assert "Candidate-level D2 remains preserved audit evidence" in text
+
+
+def test_measured_cost_pass_sequence_refuses_pending_revalidation():
+    text = (ROOT / "scripts" / "run_measured_cost_pass_sequence.py").read_text(encoding="utf-8")
+
+    assert "run_measured_cost_pass_sequence" in text
+    assert "REFUSED_MEASURED_COST_PENDING" in text
+    assert "generate_measured_cost_revalidation" in text
+    assert "if measured.status != \"PASS\"" in text
+    assert "Revalidation was not run because MEASURED_COST_MODEL.md is not PASS." in text
 
 
 def test_phase1_risk_gate_has_simulated_lock_states():

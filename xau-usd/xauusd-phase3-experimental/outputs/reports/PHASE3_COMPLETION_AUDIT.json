@@ -1,10 +1,10 @@
 {
-  "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-28T22:18:08.861182Z",
+  "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
+  "created_at_utc": "2026-05-30T11:45:05.114213Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "phase3_repo_complete": true,
-  "phase3_release_clean": true,
+  "phase3_release_clean": false,
   "demo_authorized": false,
   "real_phase1_acceptance": "PENDING",
   "real_phase2_readiness": "PENDING",
@@ -138,9 +138,9 @@
     {
       "key": "manifest",
       "requirement": "Phase 3 manifest exists and records the current review/worktree state.",
-      "status": "PASS",
+      "status": "WARN",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
-      "detail": "manifest=PASS; clean=True"
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
     },
     {
       "key": "dashboard",
@@ -150,7 +150,15 @@
       "detail": "evidence exists"
     }
   ],
-  "remaining_phase3_repo_items": [],
+  "remaining_phase3_repo_items": [
+    {
+      "key": "manifest",
+      "requirement": "Phase 3 manifest exists and records the current review/worktree state.",
+      "status": "WARN",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_EXPERIMENTAL_MANIFEST.md",
+      "detail": "manifest=DIRTY_WORKTREE; clean=False"
+    }
+  ],
   "external_blockers": [
     {
       "gate": "VPS selection",
@@ -174,7 +182,7 @@
       "gate": "Measured cost model",
       "status": "PENDING",
       "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS.",
-      "current_detail": "current=2.0; required=5.0; remaining=3.0; unit=fresh_market_days"
+      "current_detail": "current=3.0; required=5.0; remaining=2.0; unit=fresh_market_days"
     },
     {
       "gate": "Measured-cost revalidation",
@@ -199,14 +207,14 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "evidence": "Longest active streak 53.92h; current active streak 31.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak.",
-      "current_detail": "current=31.75; required=72.0; remaining=40.25; unit=hours"
+      "evidence": "Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak.",
+      "current_detail": "current=46.75; required=72.0; remaining=25.25; unit=hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "evidence": "Process uptime streak 32.88h; code-freeze 32.88h; required 96h; marker 2026-05-27T10:41:50Z.",
-      "current_detail": "current=32.88; required=96.0; remaining=63.12; unit=hours"
+      "evidence": "Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z.",
+      "current_detail": "current=48.96; required=96.0; remaining=47.04; unit=hours"
     },
     {
       "gate": "Project owner approval",

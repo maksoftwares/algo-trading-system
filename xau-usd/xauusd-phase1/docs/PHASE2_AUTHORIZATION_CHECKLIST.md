@@ -10,7 +10,7 @@ This checklist separates work that is already closed from gates that still requi
 | --- | --- | --- |
 | Phase 0 final verdict | PASS | `breakout_retest` is approved; `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates. |
 | D1 CPCV | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CPCV_VALIDATION.md` |
-| D2 Reality Check / SPA-style bootstrap | PASS | Active readiness method is owner-accepted `D2_FAMILY_CLUSTERED_V0`: `breakout_retest_family` wins across 62 family representatives, White p=0.0002, and max pairwise SPA p=0.0002; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md`. Candidate-level D2 remains preserved audit evidence, not the active readiness blocker. |
+| D2 Reality Check / SPA-style bootstrap | PASS | Active readiness method is owner-accepted `D2_FAMILY_CLUSTERED_V0`: `breakout_retest_family` wins across 67 family representatives, White p=0.0002, and max pairwise SPA p=0.0002; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REALITY_CHECK_FAMILY_CLUSTERED.md`. Candidate-level D2 remains preserved audit evidence, not the active readiness blocker. It must not be described as candidate-level PASS. |
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |

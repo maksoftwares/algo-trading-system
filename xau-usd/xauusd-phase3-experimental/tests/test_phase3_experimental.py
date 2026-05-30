@@ -1137,6 +1137,29 @@ def test_phase3_artifact_verifier_requires_reports_and_authority_sentence(tmp_pa
     assert any("missing required Phase 2 authority sentence" in error for error in errors)
 
 
+def test_phase3_artifact_verifier_blocks_authority_files_and_deploy_tokens(tmp_path: Path):
+    module = _load_script("verify_phase3_experimental_artifacts")
+    phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"
+    reports = phase3 / "outputs" / "reports"
+    scripts = phase3 / "scripts"
+    reports.mkdir(parents=True)
+    scripts.mkdir(parents=True)
+    for name in module.REQUIRED_ARTIFACTS:
+        path = reports / name
+        if path.suffix == ".md":
+            path.write_text(module.PHASE2_AUTHORITY_SENTENCE + "\n", encoding="utf-8")
+        else:
+            path.write_text("event_id\n", encoding="utf-8")
+    _write_valid_phase3_verifier_jsons(module, phase3, tmp_path / "repo")
+    (reports / "PHASE2_OWNER_APPROVAL.md").write_text("not allowed\n", encoding="utf-8")
+    (scripts / "bad_deploy.py").write_text("deploy_phase1_mt5()\n", encoding="utf-8")
+
+    errors = module.verify_phase3_experimental_artifacts(phase3, tmp_path / "repo")
+
+    assert any("must not create authority file `PHASE2_OWNER_APPROVAL.md`" in error for error in errors)
+    assert any("forbidden deployment token `deploy_phase1_mt5`" in error for error in errors)
+
+
 def test_phase3_artifact_verifier_can_require_clean_manifest(tmp_path: Path):
     module = _load_script("verify_phase3_experimental_artifacts")
     phase3 = tmp_path / "repo" / "xau-usd" / "xauusd-phase3-experimental"

@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-28T22:18:08.945310Z",
+  "created_at_utc": "2026-05-30T11:43:51.694629Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -10,7 +10,7 @@
   "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
   "mt5_runtime_touched": false,
   "broker_action_code_allowed": false,
-  "latest_phase1_bar": "2026.05.28 19:30:00",
+  "latest_phase1_bar": "2026.05.29 11:35:00",
   "latest_phase1_run_id": "phase1-dry-run-v0.7",
   "latest_phase1_dry_run": "true",
   "latest_phase1_trade_permission": "false",
