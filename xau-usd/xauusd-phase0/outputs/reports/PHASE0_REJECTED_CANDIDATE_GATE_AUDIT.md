@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-30T15:14:45+00:00`
+Generated at UTC: `2026-05-30T15:50:43+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 131
-- Rejected/research candidates audited: 128
+- Audited candidates: 133
+- Rejected/research candidates audited: 130
 - Rejected candidates with sample-size failure: 29
-- Rejected candidates with multi-cell expectancy failure: 124
+- Rejected candidates with multi-cell expectancy failure: 126
 - Rejected candidates with both expectancy and sample-size failure: 28
-- Rejected candidates with expectancy-only failure: 96
+- Rejected candidates with expectancy-only failure: 98
 - Rejected candidates with frequency-only failure: 1
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -85,6 +85,8 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_qqq_spy_growth_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1017 | 80 | multi_cell_survival;concentration;activity |
 | h1_real_yield_dollar_shock_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 474 | 31 | multi_cell_survival;sample_size;concentration;activity |
 | h1_real_yield_dollar_shock_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 507 | 39 | multi_cell_survival;sample_size;concentration;activity |
+| h1_real_yield_inflation_mix_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 759 | 53 | multi_cell_survival;concentration |
+| h1_real_yield_inflation_mix_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 408 | 43 | multi_cell_survival;concentration;activity |
 | h1_return_autocorrelation_state_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1497 | 148 | multi_cell_survival;concentration |
 | h1_session_impulse_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 2328 | 254 | multi_cell_survival;concentration |
 | h1_slv_gld_precious_beta_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 1371 | 135 | multi_cell_survival;concentration |

@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-30
 
-Overall status: NO_INDEPENDENT_APPROVAL_AFTER_132_RESULT_PRODUCING_CANDIDATES
+Overall status: NO_INDEPENDENT_APPROVAL_AFTER_134_RESULT_PRODUCING_CANDIDATES
 
 This document defines what can still be done while Phase 1 soak, code-freeze, and measured-cost clocks mature. It does not approve any new EA and it does not reopen rejected candidates.
 
@@ -14,7 +14,7 @@ The current approved/provisional set is still one correlated edge family:
 level-and-pullback / breakout-retest
 ```
 
-The project has already tested 132 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. Candidate 132 tested H1 GVZ-realized-volatility spread reversal and failed with only 1/9 PF cells, 3/9 trade-count cells, and a Dukascopy-only pocket. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
+The project has already tested 134 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. Candidate 134 tested H1 real-yield / breakeven-inflation mix follow-through and failed with 0/9 PF cells despite 9/9 trade-count cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
 
 ## Research Boundary
 
@@ -96,6 +96,8 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_gld_flow_stress_followthrough_v0` | GLD ETF flow-stress H1 follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but only 2/9 PF cells and Dukascopy-only threshold strength. |
 | `h1_real_yield_dollar_shock_reversal_v0` | FRED real-yield plus broad-dollar H1 shock reversal | Yes | High | REJECTED_FIRST_PASS; 0/9 PF cells and only 6/9 trade-count cells. |
 | `h1_real_yield_dollar_shock_followthrough_v0` | FRED real-yield plus broad-dollar H1 shock follow-through | Yes | High | REJECTED_FIRST_PASS; 3/9 PF cells, only 6/9 trade-count cells, and Pepperstone-only strength. |
+| `h1_real_yield_inflation_mix_followthrough_v0` | FRED real-yield plus breakeven-inflation mix follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Pepperstone-only positive pocket below threshold. |
+| `h1_real_yield_inflation_mix_reversal_v0` | FRED real-yield plus breakeven-inflation mix reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Dukascopy-only positive pocket below threshold. |
 | `h1_tlt_uup_pressure_reversion_v0` | Yahoo TLT/UUP traded rates-dollar ETF pressure reversion | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and every broker window negative. |
 | `h1_tlt_uup_pressure_followthrough_v0` | Yahoo TLT/UUP traded rates-dollar ETF pressure follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive but below threshold. |
 | `h1_spy_tlt_risk_rotation_followthrough_v0` | Yahoo SPY/TLT traded equity-vs-Treasury risk rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone positive below threshold and Dukascopy negative. |
@@ -137,30 +139,30 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 The latest current-data candidate was:
 
 ```text
-h1_gvz_realized_vol_spread_reversal_v0
+h1_real_yield_inflation_mix_followthrough_v0
 ```
 
 Mechanism:
 
 ```text
-Shifted GVZ gold implied volatility that is rich versus recent H1 realized XAU volatility may identify short-term overreaction and reversal opportunities.
-The candidate trades only after GVZ percentile/return, implied-minus-realized spread, and a completed H1 XAU reversal candle align.
+Shifted daily real-yield and breakeven-inflation changes may identify H1 XAUUSD continuation when spot has already started moving in the same direction as the macro mix.
+The paired short case tests hostile real-yield/inflation-compensation deterioration after local gold weakness.
 ```
 
 Why this is not same-family:
 
 - It does not trade retests of levels.
 - It does not require a broken support/resistance level.
-- It is an options-implied versus realized-volatility spread signal, not breakout continuation.
-- It uses shifted public FRED GVZCLS observations plus realized H1 XAU volatility and H1 reversal state, not M5/M15 retest mechanics.
+- It is a macro-decomposition follow-through signal, not breakout continuation.
+- It uses shifted public FRED DFII10, DTWEXBGS, T5YIE, and T10YIE observations plus H1 reversal state, not M5/M15 retest mechanics.
 
 Why it is still risky:
 
-- It reached the trade-count floor in only 3/9 cells.
-- It failed PF persistence with only 1/9 PF cells above 1.30.
-- Best PF was 1.3098, but only in Dukascopy best-case.
-- Capital.com and Pepperstone were negative and under-sampled.
-- Neither raw GVZ panic, GVZ/VIX premium, nor GVZ/realized-volatility spread is approved.
+- It failed PF persistence with 0/9 PF cells above 1.30.
+- Best PF was only 1.1544, below threshold.
+- Capital.com and Dukascopy were negative across all cost cases.
+- Pepperstone was positive but below threshold.
+- Neither pure real-yield/dollar shocks, breakeven-only shocks, nor real-yield / inflation mix reversal/follow-through is approved.
 
 ## Pre-Registration Status
 
@@ -210,6 +212,8 @@ docs/hypothesis_h1_policy_uncertainty_intraday_reversal_v0.md
 docs/hypothesis_h1_breakeven_inflation_shock_reversal_v0.md
 docs/hypothesis_h1_treasury_curve_shock_reversal_v0.md
 docs/hypothesis_h1_credit_spread_shock_reversal_v0.md
+docs/hypothesis_h1_real_yield_inflation_mix_followthrough_v0.md
+docs/hypothesis_h1_real_yield_inflation_mix_reversal_v0.md
 src/phase0/strategies/h4_gld_etf_flow_reversal_v0.py
 src/phase0/strategies/h4_gld_etf_flow_reversal_v1.py
 src/phase0/strategies/h4_gdx_gld_miner_divergence_v0.py
@@ -253,6 +257,8 @@ src/phase0/strategies/h1_policy_uncertainty_intraday_reversal_v0.py
 src/phase0/strategies/h1_breakeven_inflation_shock_reversal_v0.py
 src/phase0/strategies/h1_treasury_curve_shock_reversal_v0.py
 src/phase0/strategies/h1_credit_spread_shock_reversal_v0.py
+src/phase0/strategies/h1_real_yield_inflation_mix_followthrough_v0.py
+src/phase0/strategies/h1_real_yield_inflation_mix_reversal_v0.py
 tests/test_h4_gld_etf_flow_reversal_v0.py
 tests/test_h4_gld_etf_flow_reversal_v1.py
 tests/test_h4_gdx_gld_miner_divergence_v0.py
@@ -296,18 +302,20 @@ tests/test_h1_policy_uncertainty_intraday_reversal_v0.py
 tests/test_h1_breakeven_inflation_shock_reversal_v0.py
 tests/test_h1_treasury_curve_shock_reversal_v0.py
 tests/test_h1_credit_spread_shock_reversal_v0.py
+tests/test_h1_real_yield_inflation_mix_followthrough_v0.py
+tests/test_h1_real_yield_inflation_mix_reversal_v0.py
 ```
 
 Registration, smoke, and first-pass status:
 
 ```text
 Research hypothesis: REGISTERED
-Latest SHA256: 9fae1c419722b818d66028084548b467a0a96d45a97ae9eaf1671aaf58c91cb0
+Latest SHA256: 03a64898d50d0e7b02c99450e0c88539def73e9c4a40c62fc55bdd0ca8c85649
 Synthetic smoke: PASS
 First-pass matrix: REJECTED_FIRST_PASS
-Latest matrix trades: 1,002 across cost cells
+Latest matrix trades: 759 across cost cells
 Latest PF cells >= 1.30: 0/9
-Latest minimum cell trades: 103
+Latest minimum cell trades: 53
 ```
 
 ## First-Pass Result
@@ -319,6 +327,10 @@ Latest minimum cell trades: 103
 `h1_real_yield_dollar_shock_reversal_v0` tested a distinct macro-shock H1 reversal lane using full-history FRED `DFII10` and `DTWEXBGS` inputs. It produced enough activity in Pepperstone and Dukascopy but failed with 0/9 PF cells above 1.30 and only 6/9 cells over the 40-trade minimum. The correct action is to reject v0 without tuning.
 
 `h1_real_yield_dollar_shock_followthrough_v0` tested the paired macro-shock H1 continuation lane. It improved to 3/9 PF cells, but all passing cells were Pepperstone-only and below the trade-count floor, while Dukascopy was negative. The correct action is to reject v0 without tuning.
+
+`h1_real_yield_inflation_mix_reversal_v0` tested shifted FRED real-yield plus breakeven-inflation mix reversals. It passed the trade-count floor in every cell, but failed with 0/9 PF cells; Dukascopy was positive below threshold while Capital.com and Pepperstone were negative. The correct action is to reject v0 without tuning.
+
+`h1_real_yield_inflation_mix_followthrough_v0` tested the paired macro-decomposition follow-through lane. It passed the trade-count and activity gates, but failed with 0/9 PF cells; Pepperstone was positive below threshold while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
 
 `h1_macro_composite_state_reversion_v0` tested H1 exhaustion reversion inside the strongest fixed macro-composite state. It was too sparse, with 0/9 trade-count cells and only two Pepperstone trades behind the 3/9 PF cells. The correct action is to reject v0 without tuning.
 

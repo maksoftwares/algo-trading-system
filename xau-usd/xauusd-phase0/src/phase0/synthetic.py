@@ -20,6 +20,7 @@ from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.gdx_gld_relative_data import GDX_GLD_RELATIVE_FRAME_KEY
 from phase0.gld_etf_flow_data import GLD_ETF_FLOW_FRAME_KEY
 from phase0.hyg_ief_credit_risk_rotation_data import HYG_IEF_CREDIT_RISK_ROTATION_FRAME_KEY
+from phase0.inflation_expectations_data import INFLATION_EXPECTATIONS_FRAME_KEY
 from phase0.iwm_spy_size_rotation_data import IWM_SPY_SIZE_ROTATION_FRAME_KEY
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
 from phase0.macro_event_calendar import MACRO_EVENT_FRAME_KEY
@@ -241,6 +242,10 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_real_yield_dollar_shock_reversal_context()
     if expert == "h1_real_yield_dollar_shock_followthrough_v0":
         return _h1_real_yield_dollar_shock_followthrough_context()
+    if expert == "h1_real_yield_inflation_mix_followthrough_v0":
+        return _h1_real_yield_inflation_mix_followthrough_context()
+    if expert == "h1_real_yield_inflation_mix_reversal_v0":
+        return _h1_real_yield_inflation_mix_reversal_context()
     if expert == "h4_treasury_curve_stress_momentum_v0":
         return _h4_treasury_curve_stress_momentum_context()
     if expert == "h4_us_session_liquidity_reversal_v0":
@@ -1362,6 +1367,220 @@ def _h1_real_yield_dollar_shock_followthrough_context() -> dict:
         "H4": h4,
         "D1": d1,
         MACRO_FRAME_KEY: macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_real_yield_inflation_mix_reversal_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=560, tz="UTC")
+    real_yield: list[float] = []
+    dollar_index: list[float] = []
+    breakeven_5y: list[float] = []
+    breakeven_10y: list[float] = []
+    for index in range(560):
+        if index < 430:
+            wiggle = 0.005 if index % 2 else -0.005
+            real_yield.append(1.60 + wiggle)
+            dollar_index.append(120.0 + 0.02 * (index % 5))
+            breakeven_5y.append(2.00 + wiggle)
+            breakeven_10y.append(2.10 + 0.5 * wiggle)
+        else:
+            step = index - 429
+            real_yield.append(1.60 - 0.012 * step)
+            dollar_index.append(120.0 - 0.006 * step)
+            breakeven_5y.append(2.00 + 0.010 * step)
+            breakeven_10y.append(2.10 + 0.007 * step)
+
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "real_yield_10y": real_yield,
+            "dollar_index_broad": dollar_index,
+        }
+    )
+    inflation = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "breakeven_5y": breakeven_5y,
+            "breakeven_10y": breakeven_10y,
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.03 if index % 6 else -0.02
+        elif index < signal_index - 8:
+            current -= 0.62
+        elif index < signal_index:
+            current -= 0.10
+        elif index == signal_index:
+            current += 1.35
+        else:
+            current += 0.05 if index % 5 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 2.0)
+    h1.loc[signal_index, ["open", "high", "low", "close"]] = [
+        closes[signal_index - 1] - 0.15,
+        closes[signal_index - 1] + 1.75,
+        closes[signal_index - 1] - 0.75,
+        closes[signal_index - 1] + 1.15,
+    ]
+
+    h4_times = pd.date_range(h1_times[0] + pd.Timedelta(hours=4), periods=120, freq="4h")
+    h4_closes = [2000.0 + 0.02 * index for index in range(120)]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1992.0] * 40,
+            "close": [2001.0] * 40,
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        MACRO_FRAME_KEY: macro,
+        INFLATION_EXPECTATIONS_FRAME_KEY: inflation,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_real_yield_inflation_mix_followthrough_context() -> dict:
+    dates = pd.bdate_range("2022-01-03", periods=560, tz="UTC")
+    real_yield: list[float] = []
+    dollar_index: list[float] = []
+    breakeven_5y: list[float] = []
+    breakeven_10y: list[float] = []
+    for index in range(560):
+        if index < 430:
+            wiggle = 0.005 if index % 2 else -0.005
+            real_yield.append(1.60 + wiggle)
+            dollar_index.append(120.0 + 0.02 * (index % 5))
+            breakeven_5y.append(2.00 + wiggle)
+            breakeven_10y.append(2.10 + 0.5 * wiggle)
+        else:
+            step = index - 429
+            real_yield.append(1.60 - 0.012 * step)
+            dollar_index.append(120.0 - 0.006 * step)
+            breakeven_5y.append(2.00 + 0.010 * step)
+            breakeven_10y.append(2.10 + 0.007 * step)
+
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "real_yield_10y": real_yield,
+            "dollar_index_broad": dollar_index,
+        }
+    )
+    inflation = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "breakeven_5y": breakeven_5y,
+            "breakeven_10y": breakeven_10y,
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 300
+    h1_times = pd.date_range(dates[465] + pd.Timedelta(hours=7), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 2000.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.02 if index % 6 else -0.01
+        elif index < signal_index - 8:
+            current += 0.42
+        elif index < signal_index:
+            current += 0.24
+        elif index == signal_index:
+            current += 1.10
+        else:
+            current += 0.05 if index % 5 else -0.02
+        closes.append(current)
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.4)
+    h1.loc[signal_index, ["open", "high", "low", "close"]] = [
+        closes[signal_index - 1] - 0.10,
+        closes[signal_index - 1] + 2.00,
+        closes[signal_index - 1] - 0.55,
+        closes[signal_index - 1] + 1.55,
+    ]
+
+    h4_times = pd.date_range(h1_times[0] + pd.Timedelta(hours=4), periods=120, freq="4h")
+    h4_closes = [2000.0 + 0.04 * index for index in range(120)]
+    h4 = _ohlc_from_closes(h4_times, h4_closes, "capital_com", "XAUUSD", "H4")
+
+    d1_times = pd.date_range(h1_times[0].normalize(), periods=40, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2000.0] * 40,
+            "high": [2008.0] * 40,
+            "low": [1992.0] * 40,
+            "close": [2001.0] * 40,
+        }
+    )
+
+    last_close = closes[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        MACRO_FRAME_KEY: macro,
+        INFLATION_EXPECTATIONS_FRAME_KEY: inflation,
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }

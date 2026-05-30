@@ -11,6 +11,8 @@ EXPERT_NAME = "h4_breakeven_inflation_momentum_v0"
 EXPERT_NAMES = (
     "h4_breakeven_inflation_momentum_v0",
     "h1_breakeven_inflation_shock_reversal_v0",
+    "h1_real_yield_inflation_mix_followthrough_v0",
+    "h1_real_yield_inflation_mix_reversal_v0",
 )
 INFLATION_EXPECTATIONS_FRAME_KEY = "inflation_expectations"
 INFLATION_EXPECTATIONS_RAW_DIR = Path("data/raw/inflation_expectations")

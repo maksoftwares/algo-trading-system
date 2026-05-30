@@ -151,6 +151,8 @@ Expected path:
 | 130 | `h1_credit_spread_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 corporate credit-spread shock reversal lane; 1,002 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy's small positive pocket stayed far below threshold. |
 | 131 | `h1_financial_conditions_shock_reversal_v0` | REJECTED_FIRST_PASS | H1 NFCI/ANFCI financial-conditions shock reversal lane; 1,284 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone's positive pocket stayed below threshold and activity failed. |
 | 132 | `h1_gvz_realized_vol_spread_reversal_v0` | REJECTED_FIRST_PASS | H1 GVZ implied-volatility versus realized-volatility spread reversal lane; 309 total cost-cell trades, only 3/9 trade-count cells, and 1/9 PF cells; strength was Dukascopy-only. |
+| 133 | `h1_real_yield_inflation_mix_reversal_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix reversal lane; 408 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Dukascopy was positive below threshold while Capital.com/Pepperstone were negative. |
+| 134 | `h1_real_yield_inflation_mix_followthrough_v0` | REJECTED_FIRST_PASS | H1 real-yield plus breakeven-inflation mix follow-through lane; 759 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. |
 
 ## Discipline
 

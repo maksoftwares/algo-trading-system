@@ -60,6 +60,8 @@ h1_policy_uncertainty_intraday_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUEN
 h1_qqq_spy_growth_risk_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1017,80,146,113.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_real_yield_dollar_shock_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,474,31,78,49.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h1_real_yield_dollar_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,507,39,86,44.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
+h1_real_yield_inflation_mix_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,759,53,112,88.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_real_yield_inflation_mix_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,408,43,50,43.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_return_autocorrelation_state_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1497,148,193,158.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_session_impulse_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,2328,254,264,258.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_slv_gld_precious_beta_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,1371,135,163,159.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS

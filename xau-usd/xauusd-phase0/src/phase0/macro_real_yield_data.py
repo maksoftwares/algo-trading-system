@@ -12,6 +12,8 @@ EXPERT_NAMES = (
     "h4_real_yield_proxy_momentum_v0",
     "h1_real_yield_dollar_shock_reversal_v0",
     "h1_real_yield_dollar_shock_followthrough_v0",
+    "h1_real_yield_inflation_mix_followthrough_v0",
+    "h1_real_yield_inflation_mix_reversal_v0",
 )
 MACRO_FRAME_KEY = "macro_proxy"
 MACRO_RAW_DIR = Path("data/raw/macro")

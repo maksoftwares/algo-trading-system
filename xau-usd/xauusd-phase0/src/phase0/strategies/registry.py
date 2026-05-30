@@ -152,6 +152,12 @@ from phase0.strategies.h1_real_yield_dollar_shock_followthrough_v0 import (
 from phase0.strategies.h1_real_yield_dollar_shock_reversal_v0 import (
     H1RealYieldDollarShockReversalV0Strategy,
 )
+from phase0.strategies.h1_real_yield_inflation_mix_reversal_v0 import (
+    H1RealYieldInflationMixReversalV0Strategy,
+)
+from phase0.strategies.h1_real_yield_inflation_mix_followthrough_v0 import (
+    H1RealYieldInflationMixFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_session_impulse_reversion_v0 import H1SessionImpulseReversionV0Strategy
 from phase0.strategies.h1_tick_volume_climax_continuation_v0 import (
     H1TickVolumeClimaxContinuationV0Strategy,
@@ -337,6 +343,8 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1MonthTurnFlowReversionV0Strategy.name: H1MonthTurnFlowReversionV0Strategy,
     H1PolicyUncertaintyIntradayReversalV0Strategy.name: H1PolicyUncertaintyIntradayReversalV0Strategy,
     H1RealYieldDollarShockFollowthroughV0Strategy.name: H1RealYieldDollarShockFollowthroughV0Strategy,
+    H1RealYieldInflationMixFollowthroughV0Strategy.name: H1RealYieldInflationMixFollowthroughV0Strategy,
+    H1RealYieldInflationMixReversalV0Strategy.name: H1RealYieldInflationMixReversalV0Strategy,
     H1RealYieldDollarShockReversalV0Strategy.name: H1RealYieldDollarShockReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
     H1SessionImpulseReversionV0Strategy.name: H1SessionImpulseReversionV0Strategy,

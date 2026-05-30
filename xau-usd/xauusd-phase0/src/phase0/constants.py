@@ -103,6 +103,8 @@ RESEARCH_EXPERTS = (
     "h1_gld_flow_stress_followthrough_v0",
     "h1_gld_flow_stress_reversal_v0",
     "h1_real_yield_dollar_shock_followthrough_v0",
+    "h1_real_yield_inflation_mix_followthrough_v0",
+    "h1_real_yield_inflation_mix_reversal_v0",
     "h1_real_yield_dollar_shock_reversal_v0",
     "h4_real_yield_proxy_momentum_v0",
     "h4_treasury_curve_stress_momentum_v0",
