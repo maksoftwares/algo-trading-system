@@ -18,6 +18,9 @@ from phase0.strategies.h1_breakeven_inflation_shock_reversal_v0 import (
 from phase0.strategies.h1_credit_spread_shock_reversal_v0 import (
     H1CreditSpreadShockReversalV0Strategy,
 )
+from phase0.strategies.h1_credit_spread_shock_followthrough_v0 import (
+    H1CreditSpreadShockFollowthroughV0Strategy,
+)
 from phase0.strategies.h1_financial_conditions_shock_reversal_v0 import (
     H1FinancialConditionsShockReversalV0Strategy,
 )
@@ -74,6 +77,9 @@ from phase0.strategies.h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0 impor
 )
 from phase0.strategies.h1_cny_dollar_pressure_followthrough_v0 import (
     H1CnyDollarPressureFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_cny_dollar_pressure_reversion_v0 import (
+    H1CnyDollarPressureReversionV0Strategy,
 )
 from phase0.strategies.h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0 import (
     H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
@@ -177,6 +183,9 @@ from phase0.strategies.h1_tlt_uup_pressure_followthrough_v0 import (
 )
 from phase0.strategies.h1_tlt_shy_duration_rotation_followthrough_v0 import (
     H1TltShyDurationRotationFollowthroughV0Strategy,
+)
+from phase0.strategies.h1_treasury_curve_shock_followthrough_v0 import (
+    H1TreasuryCurveShockFollowthroughV0Strategy,
 )
 from phase0.strategies.h1_treasury_curve_shock_reversal_v0 import (
     H1TreasuryCurveShockReversalV0Strategy,
@@ -287,6 +296,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     CotGoldPositioningReversalV0Strategy.name: CotGoldPositioningReversalV0Strategy,
     H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy.name: H1AudjpyUsdjpyFxCarryRotationFollowthroughV0Strategy,
     H1BreakevenInflationShockReversalV0Strategy.name: H1BreakevenInflationShockReversalV0Strategy,
+    H1CreditSpreadShockFollowthroughV0Strategy.name: H1CreditSpreadShockFollowthroughV0Strategy,
     H1CreditSpreadShockReversalV0Strategy.name: H1CreditSpreadShockReversalV0Strategy,
     H1FinancialConditionsShockReversalV0Strategy.name: H1FinancialConditionsShockReversalV0Strategy,
     H1DbbUupIndustrialMetalsFollowthroughV0Strategy.name: H1DbbUupIndustrialMetalsFollowthroughV0Strategy,
@@ -307,6 +317,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy.name: H1FxeUupEuroDollarFxRotationFollowthroughV0Strategy,
     H1CybUupYuanDollarFxRotationFollowthroughV0Strategy.name: H1CybUupYuanDollarFxRotationFollowthroughV0Strategy,
     H1CnyDollarPressureFollowthroughV0Strategy.name: H1CnyDollarPressureFollowthroughV0Strategy,
+    H1CnyDollarPressureReversionV0Strategy.name: H1CnyDollarPressureReversionV0Strategy,
     H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy.name: H1FxaUupAussieDollarFxRotationFollowthroughV0Strategy,
     H4CreditSpreadStressMomentumV0Strategy.name: H4CreditSpreadStressMomentumV0Strategy,
     D1CompressionH4ExpansionV0Strategy.name: D1CompressionH4ExpansionV0Strategy,
@@ -355,6 +366,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1TltShyDurationRotationFollowthroughV0Strategy.name: H1TltShyDurationRotationFollowthroughV0Strategy,
     H1TltUupPressureFollowthroughV0Strategy.name: H1TltUupPressureFollowthroughV0Strategy,
     H1TltUupPressureReversionV0Strategy.name: H1TltUupPressureReversionV0Strategy,
+    H1TreasuryCurveShockFollowthroughV0Strategy.name: H1TreasuryCurveShockFollowthroughV0Strategy,
     H1TreasuryCurveShockReversalV0Strategy.name: H1TreasuryCurveShockReversalV0Strategy,
     H1UsoUupOilDollarFollowthroughV0Strategy.name: H1UsoUupOilDollarFollowthroughV0Strategy,
     H1VixTermStructureInversionFollowthroughV0Strategy.name: H1VixTermStructureInversionFollowthroughV0Strategy,

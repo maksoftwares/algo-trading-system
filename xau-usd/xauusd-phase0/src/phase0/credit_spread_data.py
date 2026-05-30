@@ -11,6 +11,7 @@ EXPERT_NAME = "h4_credit_spread_stress_momentum_v0"
 EXPERT_NAMES = (
     "h4_credit_spread_stress_momentum_v0",
     "h1_credit_spread_shock_reversal_v0",
+    "h1_credit_spread_shock_followthrough_v0",
 )
 CREDIT_SPREAD_FRAME_KEY = "credit_spread"
 CREDIT_SPREAD_RAW_DIR = Path("data/raw/credit_spread")

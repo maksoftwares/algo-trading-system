@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-30
 
-Overall status: NO_INDEPENDENT_APPROVAL_AFTER_134_RESULT_PRODUCING_CANDIDATES
+Overall status: NO_INDEPENDENT_APPROVAL_AFTER_136_RESULT_PRODUCING_CANDIDATES
 
 This document defines what can still be done while Phase 1 soak, code-freeze, and measured-cost clocks mature. It does not approve any new EA and it does not reopen rejected candidates.
 
@@ -14,7 +14,7 @@ The current approved/provisional set is still one correlated edge family:
 level-and-pullback / breakout-retest
 ```
 
-The project has already tested 134 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. Candidate 134 tested H1 real-yield / breakeven-inflation mix follow-through and failed with 0/9 PF cells despite 9/9 trade-count cells; Pepperstone was positive below threshold while Capital.com/Dukascopy were negative. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
+The project has already tested 136 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, official CNY-dollar pressure, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. The latest tested candidate, `h1_credit_spread_shock_followthrough_v0`, failed with 0/9 PF cells despite 9/9 trade-count cells. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
 
 ## Research Boundary
 
@@ -85,6 +85,7 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_policy_uncertainty_intraday_reversal_v0` | FRED USEPUINDXD policy-uncertainty shock reversal | Yes | High | REJECTED_FIRST_PASS; 6/9 trade-count cells and 0/9 PF cells, with mild Pepperstone/Dukascopy pockets below threshold and Capital.com negative. |
 | `h1_breakeven_inflation_shock_reversal_v0` | FRED T5YIE/T10YIE breakeven-inflation shock reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 0/9 PF cells; every broker/cost window was negative. |
 | `h1_treasury_curve_shock_reversal_v0` | FRED DGS2/DGS10/T10Y2Y Treasury-rate/curve shock reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 0/9 PF cells; max zero-trade months reached 10. |
+| `h1_treasury_curve_shock_followthrough_v0` | FRED DGS2/DGS10/T10Y2Y Treasury-rate/curve shock follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com positive below threshold, Pepperstone negative/flat, and Dukascopy materially negative. |
 | `h1_credit_spread_shock_reversal_v0` | FRED BAA10Y/AAA10Y corporate credit-spread shock reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 0/9 PF cells; best PF only 1.0278. |
 | `h1_financial_conditions_shock_reversal_v0` | FRED NFCI/ANFCI financial-conditions shock reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 0/9 PF cells; best PF only 1.0737 and max zero-trade months reached 6. |
 | `h1_gvz_realized_vol_spread_reversal_v0` | FRED GVZ gold implied volatility versus H1 realized XAU volatility | Yes | High | REJECTED_FIRST_PASS; only 3/9 trade-count cells and 1/9 PF cells; strength was Dukascopy-only. |
@@ -128,6 +129,8 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_fxe_uup_euro_dollar_fx_rotation_followthrough_v0` | Yahoo FXE/UUP daily euro-dollar FX rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone weakly positive below threshold and Capital.com/Dukascopy negative. |
 | `h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0` | Yahoo CYB/UUP daily yuan-dollar FX rotation | Partial | High | BLOCKED_DATA_COVERAGE; public proxy ends in 2023, before the full matrix end date. |
 | `h1_fxa_uup_aussie_dollar_fx_rotation_followthrough_v0` | Yahoo FXA/UUP daily Aussie-dollar FX rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone weakly positive below threshold and Dukascopy flat-to-negative. |
+| `h1_cny_dollar_pressure_reversion_v0` | Official FRED CNY-dollar pressure | Yes | High | REJECTED_FIRST_PASS; 0/9 trade-count cells and 3/9 PF cells; sparse Capital.com pocket did not generalize to Pepperstone/Dukascopy. |
+| `h1_credit_spread_shock_followthrough_v0` | FRED BAA10Y/AAA10Y corporate credit-spread shock follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold while Capital.com/Dukascopy were negative. |
 | `quarter_round_retest_v0` | XAU/OHLC level-and-retest | Yes | Low | PROVISIONAL_PASS_PENDING_GATE9; same-family, not independent diversification. |
 | `h1_real_yield_intraday_shock_v0` | Intraday rates/real-yield proxy | No | High | Defer until intraday rate data exists. |
 | `h1_news_surprise_repricing_v0` | Actual economic surprise values | No | High | Defer until event surprise data exists. |
@@ -139,30 +142,29 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 The latest current-data candidate was:
 
 ```text
-h1_real_yield_inflation_mix_followthrough_v0
+h1_credit_spread_shock_followthrough_v0
 ```
 
 Mechanism:
 
 ```text
-Shifted daily real-yield and breakeven-inflation changes may identify H1 XAUUSD continuation when spot has already started moving in the same direction as the macro mix.
-The paired short case tests hostile real-yield/inflation-compensation deterioration after local gold weakness.
+Shifted corporate-credit spread shocks may identify H1 XAUUSD continuation when spot has already started moving in the credit-stress or credit-relief direction.
+The paired long case tests credit-stress expansion after local gold strength; the paired short case tests credit-spread relief after local gold weakness.
 ```
 
 Why this is not same-family:
 
 - It does not trade retests of levels.
 - It does not require a broken support/resistance level.
-- It is a macro-decomposition follow-through signal, not breakout continuation.
-- It uses shifted public FRED DFII10, DTWEXBGS, T5YIE, and T10YIE observations plus H1 reversal state, not M5/M15 retest mechanics.
+- It is a macro/credit shock follow-through signal, not breakout continuation.
+- It uses shifted public FRED BAA10Y and AAA10Y observations plus H1 continuation state, not M5/M15 retest mechanics.
 
 Why it is still risky:
 
+- It passed sample size with 9/9 cells reaching 40 trades.
 - It failed PF persistence with 0/9 PF cells above 1.30.
-- Best PF was only 1.1544, below threshold.
-- Capital.com and Dukascopy were negative across all cost cases.
-- Pepperstone was positive but below threshold.
-- Neither pure real-yield/dollar shocks, breakeven-only shocks, nor real-yield / inflation mix reversal/follow-through is approved.
+- Pepperstone was positive below threshold, but Capital.com and Dukascopy were negative.
+- Neither corporate-credit H4 stress momentum, H1 shock reversal, nor H1 shock follow-through is approved.
 
 ## Pre-Registration Status
 
@@ -214,6 +216,9 @@ docs/hypothesis_h1_treasury_curve_shock_reversal_v0.md
 docs/hypothesis_h1_credit_spread_shock_reversal_v0.md
 docs/hypothesis_h1_real_yield_inflation_mix_followthrough_v0.md
 docs/hypothesis_h1_real_yield_inflation_mix_reversal_v0.md
+docs/hypothesis_h1_cny_dollar_pressure_reversion_v0.md
+docs/hypothesis_h1_treasury_curve_shock_followthrough_v0.md
+docs/hypothesis_h1_credit_spread_shock_followthrough_v0.md
 src/phase0/strategies/h4_gld_etf_flow_reversal_v0.py
 src/phase0/strategies/h4_gld_etf_flow_reversal_v1.py
 src/phase0/strategies/h4_gdx_gld_miner_divergence_v0.py
@@ -257,6 +262,7 @@ src/phase0/strategies/h1_policy_uncertainty_intraday_reversal_v0.py
 src/phase0/strategies/h1_breakeven_inflation_shock_reversal_v0.py
 src/phase0/strategies/h1_treasury_curve_shock_reversal_v0.py
 src/phase0/strategies/h1_credit_spread_shock_reversal_v0.py
+src/phase0/strategies/h1_credit_spread_shock_followthrough_v0.py
 src/phase0/strategies/h1_real_yield_inflation_mix_followthrough_v0.py
 src/phase0/strategies/h1_real_yield_inflation_mix_reversal_v0.py
 tests/test_h4_gld_etf_flow_reversal_v0.py
@@ -302,6 +308,7 @@ tests/test_h1_policy_uncertainty_intraday_reversal_v0.py
 tests/test_h1_breakeven_inflation_shock_reversal_v0.py
 tests/test_h1_treasury_curve_shock_reversal_v0.py
 tests/test_h1_credit_spread_shock_reversal_v0.py
+tests/test_h1_credit_spread_shock_followthrough_v0.py
 tests/test_h1_real_yield_inflation_mix_followthrough_v0.py
 tests/test_h1_real_yield_inflation_mix_reversal_v0.py
 ```
@@ -310,12 +317,12 @@ Registration, smoke, and first-pass status:
 
 ```text
 Research hypothesis: REGISTERED
-Latest SHA256: 03a64898d50d0e7b02c99450e0c88539def73e9c4a40c62fc55bdd0ca8c85649
+Latest SHA256: 929a8e124517aa8cdfe39a78b5b89a888df73c882a1ce4af8f1ece016bc82f6e
 Synthetic smoke: PASS
 First-pass matrix: REJECTED_FIRST_PASS
-Latest matrix trades: 759 across cost cells
+Latest matrix trades: 2070 across cost cells
 Latest PF cells >= 1.30: 0/9
-Latest minimum cell trades: 53
+Latest minimum cell trades: 200
 ```
 
 ## First-Pass Result
@@ -391,6 +398,8 @@ Latest minimum cell trades: 53
 `h1_treasury_curve_shock_reversal_v0` tested shifted FRED DGS2/DGS10/T10Y2Y Treasury-rate and curve shocks with H1 XAU reversal timing. It produced 558 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold and max zero-trade months reached 10. The correct action is to reject v0 without tuning.
 
 `h1_credit_spread_shock_reversal_v0` tested shifted FRED BAA10Y/AAA10Y corporate credit-spread shocks with H1 XAU reversal timing. It produced 1,002 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold and best PF was only 1.0278. The correct action is to reject v0 without tuning.
+
+`h1_credit_spread_shock_followthrough_v0` tested shifted FRED BAA10Y/AAA10Y corporate credit-spread shocks with H1 XAU continuation timing. It produced 2,070 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold. Pepperstone was positive below threshold, while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
 
 Required mechanical definition:
 

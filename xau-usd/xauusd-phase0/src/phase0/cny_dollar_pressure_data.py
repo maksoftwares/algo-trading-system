@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_cny_dollar_pressure_followthrough_v0"
-EXPERT_NAMES = ("h1_cny_dollar_pressure_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_cny_dollar_pressure_followthrough_v0",
+    "h1_cny_dollar_pressure_reversion_v0",
+)
 CNY_DOLLAR_PRESSURE_FRAME_KEY = "cny_dollar_pressure"
 MACRO_RAW_DIR = Path("data/raw/macro")
 CNY_PER_USD_FILE = "FRED_DEXCHUS.csv"

@@ -11,6 +11,7 @@ EXPERT_NAME = "h4_treasury_curve_stress_momentum_v0"
 EXPERT_NAMES = (
     "h4_treasury_curve_stress_momentum_v0",
     "h1_treasury_curve_shock_reversal_v0",
+    "h1_treasury_curve_shock_followthrough_v0",
 )
 TREASURY_CURVE_FRAME_KEY = "treasury_curve"
 TREASURY_CURVE_RAW_DIR = Path("data/raw/treasury_curve")
