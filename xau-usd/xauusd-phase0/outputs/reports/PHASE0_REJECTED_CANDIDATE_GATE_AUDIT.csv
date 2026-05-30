@@ -49,6 +49,7 @@ h1_macro_composite_state_reversion_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FA
 h1_macro_composite_trend_continuation_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,609,38,113,52.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h1_macro_event_aftershock_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,810,85,93,92.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_month_turn_flow_continuation_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1524,165,176,167.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_month_turn_flow_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,780,79,94,87.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_move_vix_bond_vol_shock_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,531,23,84,70.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
 h1_qqq_spy_growth_risk_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1017,80,146,113.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_real_yield_dollar_shock_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,3,474,31,78,49.0,4,multi_cell_survival;sample_size;concentration;activity,FAIL,FAIL,PASS,FAIL,FAIL,PASS
@@ -58,6 +59,7 @@ h1_session_impulse_reversion_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0
 h1_slv_gld_precious_beta_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,3,1371,135,163,159.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_smooth_trend_exhaustion_reversal_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,486,42,77,43.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
 h1_spy_tlt_risk_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1431,131,177,169.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS
+h1_tick_volume_climax_continuation_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,2199,0,371,362.0,5,multi_cell_survival;sample_size;concentration;activity;cost_sensitivity,FAIL,FAIL,PASS,FAIL,FAIL,FAIL
 h1_tick_volume_climax_reversal_v0,REJECTED_OR_RESEARCH,EDGE_AND_FREQUENCY_FAILURE,9,0,2904,0,495,473.0,6,multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity,FAIL,FAIL,FAIL,FAIL,FAIL,FAIL
 h1_tip_ief_real_yield_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1080,88,145,127.0,3,multi_cell_survival;concentration;activity,FAIL,PASS,PASS,FAIL,FAIL,PASS
 h1_tlt_shy_duration_rotation_followthrough_v0,REJECTED_OR_RESEARCH,EDGE_EXPECTANCY_FAILURE,9,0,1467,140,176,173.0,2,multi_cell_survival;concentration,FAIL,PASS,PASS,FAIL,PASS,PASS

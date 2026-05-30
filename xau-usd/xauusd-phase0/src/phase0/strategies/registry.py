@@ -130,6 +130,7 @@ from phase0.strategies.h1_return_autocorrelation_state_v0 import (
 )
 from phase0.strategies.h1_m5_path_skew_reversal_v0 import H1M5PathSkewReversalV0Strategy
 from phase0.strategies.h1_month_turn_flow_continuation_v0 import H1MonthTurnFlowContinuationV0Strategy
+from phase0.strategies.h1_month_turn_flow_reversion_v0 import H1MonthTurnFlowReversionV0Strategy
 from phase0.strategies.h1_real_yield_dollar_shock_followthrough_v0 import (
     H1RealYieldDollarShockFollowthroughV0Strategy,
 )
@@ -137,6 +138,9 @@ from phase0.strategies.h1_real_yield_dollar_shock_reversal_v0 import (
     H1RealYieldDollarShockReversalV0Strategy,
 )
 from phase0.strategies.h1_session_impulse_reversion_v0 import H1SessionImpulseReversionV0Strategy
+from phase0.strategies.h1_tick_volume_climax_continuation_v0 import (
+    H1TickVolumeClimaxContinuationV0Strategy,
+)
 from phase0.strategies.h1_tick_volume_climax_reversal_v0 import (
     H1TickVolumeClimaxReversalV0Strategy,
 )
@@ -297,10 +301,12 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H1MacroEventAftershockV0Strategy.name: H1MacroEventAftershockV0Strategy,
     H1M5PathSkewReversalV0Strategy.name: H1M5PathSkewReversalV0Strategy,
     H1MonthTurnFlowContinuationV0Strategy.name: H1MonthTurnFlowContinuationV0Strategy,
+    H1MonthTurnFlowReversionV0Strategy.name: H1MonthTurnFlowReversionV0Strategy,
     H1RealYieldDollarShockFollowthroughV0Strategy.name: H1RealYieldDollarShockFollowthroughV0Strategy,
     H1RealYieldDollarShockReversalV0Strategy.name: H1RealYieldDollarShockReversalV0Strategy,
     H1ReturnAutocorrelationStateV0Strategy.name: H1ReturnAutocorrelationStateV0Strategy,
     H1SessionImpulseReversionV0Strategy.name: H1SessionImpulseReversionV0Strategy,
+    H1TickVolumeClimaxContinuationV0Strategy.name: H1TickVolumeClimaxContinuationV0Strategy,
     H1SpyTltRiskRotationFollowthroughV0Strategy.name: H1SpyTltRiskRotationFollowthroughV0Strategy,
     H1TipIefRealYieldRotationFollowthroughV0Strategy.name: H1TipIefRealYieldRotationFollowthroughV0Strategy,
     H1TickVolumeClimaxReversalV0Strategy.name: H1TickVolumeClimaxReversalV0Strategy,

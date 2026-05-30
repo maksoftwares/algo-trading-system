@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-05-30T12:15:35+00:00`
+Generated at UTC: `2026-05-30T12:41:04+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 118
-- Rejected/research candidates audited: 115
-- Rejected candidates with sample-size failure: 25
-- Rejected candidates with multi-cell expectancy failure: 111
-- Rejected candidates with both expectancy and sample-size failure: 24
-- Rejected candidates with expectancy-only failure: 87
+- Audited candidates: 120
+- Rejected/research candidates audited: 117
+- Rejected candidates with sample-size failure: 26
+- Rejected candidates with multi-cell expectancy failure: 113
+- Rejected candidates with both expectancy and sample-size failure: 25
+- Rejected candidates with expectancy-only failure: 88
 - Rejected candidates with frequency-only failure: 1
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -74,6 +74,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_macro_composite_trend_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 609 | 38 | multi_cell_survival;sample_size;concentration;activity |
 | h1_macro_event_aftershock_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 810 | 85 | multi_cell_survival;concentration |
 | h1_month_turn_flow_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1524 | 165 | multi_cell_survival;concentration |
+| h1_month_turn_flow_reversion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 780 | 79 | multi_cell_survival;concentration |
 | h1_move_vix_bond_vol_shock_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 531 | 23 | multi_cell_survival;sample_size;concentration;activity |
 | h1_qqq_spy_growth_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1017 | 80 | multi_cell_survival;concentration;activity |
 | h1_real_yield_dollar_shock_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 3 | 474 | 31 | multi_cell_survival;sample_size;concentration;activity |
@@ -83,6 +84,7 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h1_slv_gld_precious_beta_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 1371 | 135 | multi_cell_survival;concentration |
 | h1_smooth_trend_exhaustion_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 486 | 42 | multi_cell_survival;concentration |
 | h1_spy_tlt_risk_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1431 | 131 | multi_cell_survival;concentration |
+| h1_tick_volume_climax_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 2199 | 0 | multi_cell_survival;sample_size;concentration;activity;cost_sensitivity |
 | h1_tick_volume_climax_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 2904 | 0 | multi_cell_survival;sample_size;no_catastrophic_failure;concentration;activity;cost_sensitivity |
 | h1_tip_ief_real_yield_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1080 | 88 | multi_cell_survival;concentration;activity |
 | h1_tlt_shy_duration_rotation_followthrough_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1467 | 140 | multi_cell_survival;concentration |
