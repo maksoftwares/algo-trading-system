@@ -1,6 +1,6 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-05-30T11:43:51.694629Z",
+  "created_at_utc": "2026-05-30T21:06:12.421773Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase1_acceptance": "PENDING",
@@ -10,7 +10,7 @@
   "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
   "mt5_runtime_touched": false,
   "broker_action_code_allowed": false,
-  "latest_phase1_bar": "2026.05.29 11:35:00",
+  "latest_phase1_bar": "2026.05.29 20:55:00",
   "latest_phase1_run_id": "phase1-dry-run-v0.7",
   "latest_phase1_dry_run": "true",
   "latest_phase1_trade_permission": "false",
@@ -62,7 +62,7 @@
   },
   "safety": {
     "status": "PASS",
-    "created_at_utc": "2026-05-28T19:35:10.459332Z",
+    "created_at_utc": "2026-05-30T21:06:11.821564Z",
     "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
     "scan_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental",
     "boundary_status": "PASS",
@@ -318,17 +318,17 @@
     "owner_action_count": 4
   },
   "completion_audit": {
-    "status": "REPO_SIDE_COMPLETE_WAITING_REAL_GATES",
-    "created_at_utc": "2026-05-28T22:18:08.861182Z",
+    "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
+    "created_at_utc": "2026-05-30T21:06:12.322706Z",
     "phase3_repo_complete": true,
     "demo_authorized": false,
-    "remaining_phase3_repo_items": 0,
+    "remaining_phase3_repo_items": 1,
     "external_blocker_count": 11
   },
   "manifest": {
-    "status": "PASS",
-    "commit_short": "3ef095c",
-    "created_at_utc": "2026-05-28T22:18:08.694495Z"
+    "status": "DIRTY_WORKTREE",
+    "commit_short": "39eb96b",
+    "created_at_utc": "2026-05-30T21:06:12.039259Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

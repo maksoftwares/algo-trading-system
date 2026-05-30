@@ -10,13 +10,13 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | BR Stage |
 | --- | --- | --- | --- | --- | --- |
-| 1297 | 2026.05.29 11:35:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
+| 1407 | 2026.05.29 20:55:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
 
 ## Gate Snapshot
 
 | Log | Soak | Runtime | Would-Signal | Acceptance | Soak Progress | Would Rows | Clusters |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| PASS | PASS | PASS | PASS | PENDING | 100.0% | 148 | 148 |
+| PASS | PASS | PASS | PASS | PENDING | 100.0% | 157 | 157 |
 
 ## Primary Artifacts
 
@@ -38,8 +38,8 @@ Phase 1 is progressing. Continue the scheduled dry-run soak and review the remai
 | Phase 2 local MT5 network baseline | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md | Overall status: PASS. |
 | Phase 2 VPS first-day verification | PENDING | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md | Overall status: PENDING. |
 | Status summary JSON | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json | Present; 3191 bytes. |
-| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 40912 bytes. |
-| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 269810 bytes. |
+| Would-signal review CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv | Present; 43370 bytes. |
+| Soak history CSV | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY.csv | Present; 270993 bytes. |
 
 ## Historical Note
 

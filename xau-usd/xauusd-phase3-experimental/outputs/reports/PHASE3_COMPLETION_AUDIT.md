@@ -58,8 +58,8 @@ Overall status: REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES
 | Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |  |
 | Phase 1 acceptance | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS. |  |
 | Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |  |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. | current=46.75; required=72.0; remaining=25.25; unit=hours |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z. | current=48.96; required=96.0; remaining=47.04; unit=hours |
+| Active-market 72-hour soak | PENDING | Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. | current=56.08; required=72.0; remaining=15.92; unit=hours |
+| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 82.37h; code-freeze 82.37h; required 96h; marker 2026-05-27T10:41:50Z. | current=82.37; required=96.0; remaining=13.63; unit=hours |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## When Real Gates Pass

@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-29T11:39:20.674812Z",
+  "created_at_utc": "2026-05-30T21:03:58.177624Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -56,12 +56,12 @@
     {
       "Gate": "Active-market 72-hour soak",
       "Status": "PENDING",
-      "Evidence": "Longest active streak 53.92h; current active streak 46.75h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
+      "Evidence": "Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
       "Gate": "Process/code-freeze 96-hour gate",
       "Status": "PENDING",
-      "Evidence": "Process uptime streak 48.96h; code-freeze 48.96h; required 96h; marker 2026-05-27T10:41:50Z."
+      "Evidence": "Process uptime streak 82.37h; code-freeze 82.37h; required 96h; marker 2026-05-27T10:41:50Z."
     },
     {
       "Gate": "Project owner approval",
@@ -73,17 +73,17 @@
     {
       "gate": "Active-market 72-hour soak",
       "status": "PENDING",
-      "current": 46.75,
+      "current": 56.08,
       "required": 72.0,
-      "remaining": 25.25,
+      "remaining": 15.92,
       "unit": "hours"
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
       "status": "PENDING",
-      "current": 48.96,
+      "current": 82.37,
       "required": 96.0,
-      "remaining": 47.04,
+      "remaining": 13.63,
       "unit": "hours"
     },
     {
@@ -118,23 +118,23 @@
     }
   ],
   "runtime_snapshot": {
-    "decision_rows": 1297,
-    "latest_bar": "2026.05.29 11:35:00",
+    "decision_rows": 1407,
+    "latest_bar": "2026.05.29 20:55:00",
     "dry_run": "true",
     "trade_permission": "false",
     "server_time_status": "CLOCK_OK"
   },
   "measured_cost_coverage": {
     "status": "PENDING",
-    "observed_rows": "41337",
+    "observed_rows": "50006",
     "required_rows": "500",
     "observed_days": "3",
     "required_days": "5",
-    "source_rows": "98361",
+    "source_rows": "122196",
     "rows_missing_tick_fresh": "55704",
-    "weekend_rows_excluded": "0",
+    "weekend_rows_excluded": "15166",
     "tick_freshness": "available",
-    "source_files": "8"
+    "source_files": "9"
   },
   "forbidden_until_ready": [
     "paper-mode implementation",

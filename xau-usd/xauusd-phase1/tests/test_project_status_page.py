@@ -55,14 +55,14 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     _write_trade_ledger(
         phase0_matrix / "breakout_retest" / "cell_3_breakout_retest_capital_com_p95_trades.csv",
         [
-            ("2024-01-03 10:00:00+00:00", 1.5),
-            ("2024-01-07 10:00:00+00:00", -1.0),
-            ("2024-02-03 10:00:00+00:00", 0.5),
+            ("2024-01-03 10:00:00+00:00", 1.5, "LONG", 100.0, 101.0),
+            ("2024-01-07 10:00:00+00:00", -1.0, "LONG", 100.0, 99.0),
+            ("2024-02-03 10:00:00+00:00", 0.5, "LONG", 100.0, 100.5),
         ],
     )
     _write_trade_ledger(
         phase0_matrix / "trend_pullback" / "cell_3_trend_pullback_capital_com_p95_trades.csv",
-        [("2024-01-04 10:00:00+00:00", -1.0)],
+        [("2024-01-04 10:00:00+00:00", -1.0, "LONG", 100.0, 99.0)],
     )
 
     output = module.generate_project_status_page(repo)
@@ -158,7 +158,8 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Breakout family lifecycle" in html
     assert "COST_REVALIDATION_PENDING" in html
     assert "$1,000 Account Example" in html
-    assert "1% fixed risk per trade" in html
+    assert "$100 fixed margin per trade at 50x leverage" in html
+    assert "PnL uses entry/exit price move" in html
     assert "data-account-status-filter=\"accepted\"" in html
     assert "data-account-status-filter=\"rejected\"" in html
     assert 'data-account-row data-status="accepted"' in html
@@ -192,7 +193,7 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "66.67%" in html
     assert "+0.50R" in html
     assert "+0.25R" in html
-    assert "+$10.00" in html
+    assert "+$25.00" in html
     freshness = _load_script("verify_status_dashboard_freshness")
     assert freshness.verify_status_dashboard_freshness(repo, output.output_path) == []
     _write_phase1_acceptance_from_summary(
@@ -423,7 +424,7 @@ def test_project_status_page_keeps_five_day_soak_pending_when_phase1_acceptance_
     _write_candidate_audit(phase0_reports / "PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.csv")
     _write_trade_ledger(
         phase0_matrix / "breakout_retest" / "cell_3_breakout_retest_capital_com_p95_trades.csv",
-        [("2024-01-03 10:00:00+00:00", 1.5)],
+        [("2024-01-03 10:00:00+00:00", 1.5, "LONG", 100.0, 101.0)],
     )
 
     output = module.generate_project_status_page(repo)
@@ -1156,11 +1157,20 @@ def _write_candidate_backlog(path: Path) -> None:
     )
 
 
-def _write_trade_ledger(path: Path, rows: list[tuple[str, float]]) -> None:
+def _write_trade_ledger(path: Path, rows: list[tuple[str, float, str, float, float]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["expert", "exit_time_utc", "r_multiple"]
+    fieldnames = ["expert", "exit_time_utc", "r_multiple", "direction", "entry_price", "exit_price"]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
-        for exit_time, r_multiple in rows:
-            writer.writerow({"expert": path.parent.name, "exit_time_utc": exit_time, "r_multiple": r_multiple})
+        for exit_time, r_multiple, direction, entry_price, exit_price in rows:
+            writer.writerow(
+                {
+                    "expert": path.parent.name,
+                    "exit_time_utc": exit_time,
+                    "r_multiple": r_multiple,
+                    "direction": direction,
+                    "entry_price": entry_price,
+                    "exit_price": exit_price,
+                }
+            )

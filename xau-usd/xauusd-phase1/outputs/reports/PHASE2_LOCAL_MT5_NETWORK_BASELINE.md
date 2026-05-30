@@ -10,22 +10,20 @@ This report gives a sanitized local MT5 broker-access baseline before VPS select
 
 | Samples | Latest Ping | Median Ping | Best Ping | Worst Ping | Latest Access Point |
 | --- | --- | --- | --- | --- | --- |
-| 5755 | 185.76 ms | 129.78 ms | 121.76 ms | 312.50 ms | 1 |
+| 5757 | 174.55 ms | 129.78 ms | 121.76 ms | 312.50 ms | 1 |
 
 ## Access Point Breakdown
 
 | Access Point | Samples | Median Ping | Best Ping | Worst Ping |
 | --- | --- | --- | --- | --- |
-| 1 | 17 | 173.47 ms | 140.84 ms | 214.80 ms |
-| 2 | 5729 | 129.78 ms | 125.76 ms | 312.50 ms |
+| 1 | 18 | 174.01 ms | 140.84 ms | 214.80 ms |
+| 2 | 5730 | 129.78 ms | 125.76 ms | 312.50 ms |
 | 3 | 9 | 170.48 ms | 121.76 ms | 235.49 ms |
 
 ## Recent Authorization Pings
 
 | Timestamp | Server | Access Point | Ping |
 | --- | --- | --- | --- |
-| 2026-05-27 06:00:47.670000 | Capital.ComMena-Live | 1 | 181.42 ms |
-| 2026-05-27 06:06:26.354000 | Capital.ComMena-Live | 1 | 181.42 ms |
 | 2026-05-27 16:11:53.476000 | Capital.ComMena-Live | 1 | 181.42 ms |
 | 2026-05-28 00:34:16.081000 | Capital.ComMena-Live | 2 | 311.01 ms |
 | 2026-05-28 00:34:23.426000 | Capital.ComMena-Live | 1 | 172.80 ms |
@@ -34,6 +32,8 @@ This report gives a sanitized local MT5 broker-access baseline before VPS select
 | 2026-05-28 12:00:20.686000 | Capital.ComMena-Live | 3 | 174.52 ms |
 | 2026-05-28 12:00:25.988000 | Capital.ComMena-Live | 3 | 174.52 ms |
 | 2026-05-28 12:00:27.501000 | Capital.ComMena-Live | 1 | 185.76 ms |
+| 2026-05-29 19:13:34.641000 | Capital.ComMena-Live | 2 | 310.73 ms |
+| 2026-05-29 19:13:42.157000 | Capital.ComMena-Live | 1 | 174.55 ms |
 
 ## VPS Selection Use
 

@@ -14,8 +14,9 @@ from typing import Any
 
 DEFAULT_OUTPUT = Path("status.html")
 ACCOUNT_EXAMPLE_STARTING_USD = 1000.0
-ACCOUNT_EXAMPLE_RISK_PCT = 0.01
-ACCOUNT_EXAMPLE_RISK_USD = ACCOUNT_EXAMPLE_STARTING_USD * ACCOUNT_EXAMPLE_RISK_PCT
+ACCOUNT_EXAMPLE_MARGIN_USD = 100.0
+ACCOUNT_EXAMPLE_LEVERAGE = 50.0
+ACCOUNT_EXAMPLE_NOTIONAL_USD = ACCOUNT_EXAMPLE_MARGIN_USD * ACCOUNT_EXAMPLE_LEVERAGE
 ACCOUNT_EXAMPLE_COST_MODEL = "p95"
 
 
@@ -1662,7 +1663,10 @@ def _account_assumption_text() -> str:
     return (
         f"{ACCOUNT_EXAMPLE_COST_MODEL.upper()} matrix ledgers; "
         f"${ACCOUNT_EXAMPLE_STARTING_USD:,.0f} starting account; "
-        f"{ACCOUNT_EXAMPLE_RISK_PCT:.0%} fixed risk per trade (${ACCOUNT_EXAMPLE_RISK_USD:,.0f}/R); no compounding."
+        f"${ACCOUNT_EXAMPLE_MARGIN_USD:,.0f} fixed margin per trade at "
+        f"{ACCOUNT_EXAMPLE_LEVERAGE:.0f}x leverage "
+        f"(${ACCOUNT_EXAMPLE_NOTIONAL_USD:,.0f} notional); "
+        "PnL uses entry/exit price move; no compounding."
     )
 
 
@@ -1698,8 +1702,10 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
                     month = _month_key(row.get("exit_time_utc") or row.get("entry_time_utc"))
                     if not month:
                         continue
+                    pnl = _leveraged_account_pnl_usd(row)
+                    if pnl is None:
+                        continue
                     r_multiple = _to_float(row.get("r_multiple")) or 0.0
-                    pnl = r_multiple * ACCOUNT_EXAMPLE_RISK_USD
                     bucket = buckets.setdefault(
                         month,
                         {
@@ -1712,12 +1718,12 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
                     )
                     bucket["pnl_usd"] += pnl
                     bucket["trades"] += 1
-                    bucket["wins"] += 1 if r_multiple > 0 else 0
-                    bucket["losses"] += 1 if r_multiple <= 0 else 0
+                    bucket["wins"] += 1 if pnl > 0 else 0
+                    bucket["losses"] += 1 if pnl <= 0 else 0
                     bucket["total_r"] += r_multiple
                     months.add(month)
                     trades += 1
-                    wins += 1 if r_multiple > 0 else 0
+                    wins += 1 if pnl > 0 else 0
                     total_r += r_multiple
         monthly_by_expert[expert] = buckets
         summary_base[expert] = {
@@ -1800,6 +1806,21 @@ def _load_account_example(phase0_root: Path, candidates: list[dict[str, str]]) -
         "end_month": ordered_months[-1] if ordered_months else "",
         "total_months": total_months,
     }
+
+
+def _leveraged_account_pnl_usd(row: dict[str, Any]) -> float | None:
+    entry = _to_float(row.get("entry_price"))
+    exit_price = _to_float(row.get("exit_price"))
+    direction = _cell(row.get("direction")).upper()
+    if entry is None or exit_price is None or entry == 0.0:
+        return None
+    if direction == "LONG":
+        price_return = (exit_price - entry) / entry
+    elif direction == "SHORT":
+        price_return = (entry - exit_price) / entry
+    else:
+        return None
+    return ACCOUNT_EXAMPLE_NOTIONAL_USD * price_return
 
 
 def _month_key(value: str | None) -> str:

@@ -1,8 +1,10 @@
 # Phase 2 Authorization Checklist
 
-Last updated: 2026-05-27
+Last updated: 2026-05-31
 
 This checklist separates work that is already closed from gates that still require wall-clock evidence or explicit owner approval. Phase 2 remains paper-mode preparation only until every required gate below is closed.
+
+Authority rule: `outputs/reports/PHASE2_READINESS_REPORT.md` is the sole current readiness authority. This checklist records policy requirements and evidence pointers; if a generated report disagrees with this static checklist, regenerate reports and use `PHASE2_READINESS_REPORT.md` for the go/no-go decision.
 
 ## Evidence and Current Gate State
 
@@ -14,13 +16,13 @@ This checklist separates work that is already closed from gates that still requi
 | D3 true holdout audit | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_TRUE_HOLDOUT_AUDIT.md` |
 | D4 independent reproduction | PASS | `xau-usd/xauusd-phase0/outputs/reports/PHASE0_INDEPENDENT_REPRODUCTION.md` |
 | Same-family second candidate | PASS | `xau-usd/xauusd-phase0/docs/SWING_BREAKOUT_RETEST_V0_GATE9_REVIEW.md` |
-| Rejected-candidate gate audit | PASS | Latest audit: 67 audited candidates, 64 rejected/research rows, 14 sample-size failures, 62 multi-cell expectancy failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
-| Frequency-normalized concentration audit | PASS | Latest audit: 65 audited candidates, 60 absolute concentration failures, 59 normalized review-context candidates; it does not rescue rejected candidates and is review context only; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` |
-| Diversification availability finding | PASS | Twenty-three non-level H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates were hash-locked and rejected first-pass; current operating frame remains single-edge; `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md` |
+| Rejected-candidate gate audit | PASS | Latest audit: 143 audited candidates, 140 rejected/research rows, 32 sample-size failures, 136 multi-cell expectancy failures; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_REJECTED_CANDIDATE_GATE_AUDIT.md` |
+| Frequency-normalized concentration audit | PASS | Latest audit: 117 result-producing candidates, 111 absolute concentration failures, and 110 normalized review-context candidates; it does not rescue rejected candidates and is review context only; `xau-usd/xauusd-phase0/outputs/reports/PHASE0_CONCENTRATION_FREQUENCY_NORMALIZED_AUDIT.md` |
+| Diversification availability finding | PASS | Twenty-nine H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, macro, ETF, FX, futures-proxy, volatility-premium, and calendar/microstructure candidates were hash-locked and rejected first-pass; current operating frame remains single-edge; `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md` |
 | Forward hypothesis gates | PASS | `docs/HYPOTHESIS_LOCKING.md` pre-registers normalized concentration thresholds and a Pepperstone+Dukascopy cross-venue PF floor for future candidates. |
 | Phase 1 dry-run compile | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` |
 | Phase 1 source safety | PASS | `scripts/audit_phase1_safety.py` |
-| Phase 1 runtime health | WARN | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; remaining warnings are maturity gates after the v0.7 reset. `docs/PHASE1_GAP_CLASSIFICATION_REVIEW.md` is superseded by the shared gap classifier: configured expected broker maintenance gaps pause the active-market streak without counting elapsed closed-market time; unexpected gaps, restarts, and unsafe states still reset it. |
+| Phase 1 runtime health | PASS | `outputs/reports/PHASE1_RUNTIME_HEALTH_REPORT.md`; runtime boundary is clean. `docs/PHASE1_GAP_CLASSIFICATION_REVIEW.md` is superseded by the shared gap classifier for calculations, but remains retained as audit context. The active-market 72-hour streak remains a separate pending acceptance gate: configured expected broker maintenance gaps pause the active-market streak without counting elapsed closed-market time; unexpected gaps, restarts, and unsafe states still reset it. |
 | Phase 1 would-signal evidence | PASS | `outputs/reports/PHASE1_WOULD_SIGNAL_REPORT.md` |
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
@@ -32,6 +34,7 @@ This checklist separates work that is already closed from gates that still requi
 | Capital allocation ladder | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines the paper-to-micro ladder and single-edge sizing constraint. |
 | Quarterly/review triggers | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` defines cost, trade-count, PF, drawdown, concentration, execution, and logic triggers. |
 | Five trading day soak | PASS | `PHASE1_ACCEPTANCE_REPORT.md` shows the five-day wall-clock soak has crossed 100%. |
+| Phase 1 observer parity | PASS | `PHASE1_OBSERVER_PARITY_REPORT.md` proves the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic. |
 | VPS shortlist | READY_FOR_OWNER_SELECTION | `docs/PHASE2_VPS_SELECTION_MATRIX.md` now contains a shortlist, latency-test rule, and first-day verification packet. |
 | Owner approval draft | READY_FOR_OWNER_SELECTION | `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` is prepared as a non-authorizing draft. Do not create the live approval file until all objective gates pass and the owner signs. |
 
@@ -47,12 +50,11 @@ This checklist separates work that is already closed from gates that still requi
 | Measured-cost audit | REVIEW | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` and `BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md` must be reviewed to decide whether the cost failure is real or a conversion defect. |
 | Phase 1 review index | PENDING | `PHASE1_REVIEW_INDEX.md` must show PASS after acceptance and bundle refresh. |
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must return to PASS after all remaining readiness gates are closed. D2 is no longer the active blocker after owner acceptance of `D2_FAMILY_CLUSTERED_V0`. |
-| Phase 1 observer parity | PENDING | `PHASE1_OBSERVER_PARITY_REPORT.md` must prove the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic before paper-mode implementation. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | VPS selection | PENDING | Shortlist is ready. `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` only after provider, region, specs, backup access, monitoring approach, and first-day latency evidence are selected. |
 | VPS latency evidence | PENDING | Run `scripts/generate_phase2_vps_latency_report.py` on the selected VPS and require `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` to show PASS before VPS selection can close. The selected VPS must also be compared against `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`; if it does not materially improve on local median ping, owner review is required before treating it as an operational improvement. |
 | VPS first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after selected-VPS consistency, NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. The selected provider/region in the decision record, latency report, and manual VPS evidence must match. |
-| Non-level/intermarket forcing candidate run | PASS | Twenty-three non-level H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, and event-regime candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All were rejected, so diversification remains unsolved. |
+| Non-level/intermarket forcing candidate run | PASS | Twenty-nine H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, macro, ETF, FX, futures-proxy, volatility-premium, and calendar/microstructure candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All independent candidates were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
 

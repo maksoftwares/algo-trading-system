@@ -18,7 +18,7 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | --- | --- |
 | Phase 1 acceptance | PENDING |
 | Phase 2 readiness | PENDING |
-| Latest Phase 1 bar | 2026.05.29 11:35:00 |
+| Latest Phase 1 bar | 2026.05.29 20:55:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 
@@ -90,9 +90,9 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo rehearsal can start real demo | False |
 | Demo handoff status | READY_FOR_REVIEW_WAITING_REAL_GATES |
 | Demo handoff can start now | False |
-| Completion audit | REPO_SIDE_COMPLETE_WAITING_REAL_GATES |
+| Completion audit | REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES |
 | Phase 3 repo complete | True |
 | Demo authorized | False |
 | External blockers | 11 |
-| Manifest status | PASS |
-| Manifest commit | 3ef095c |
+| Manifest status | DIRTY_WORKTREE |
+| Manifest commit | 39eb96b |

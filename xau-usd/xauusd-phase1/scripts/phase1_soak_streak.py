@@ -98,6 +98,9 @@ def calculate_soak_streak(
                 )
                 if classification.resets_active_market_streak:
                     needs_new_segment = True
+                else:
+                    # Expected broker/weekend pauses preserve continuity but do not add closed-market time.
+                    gap_seconds_to_count = 0.0
             else:
                 gap_seconds_to_count = max(gap_seconds, 0.0)
 

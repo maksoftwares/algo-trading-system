@@ -1,6 +1,6 @@
 {
   "status": "PENDING",
-  "created_at_utc": "2026-05-30T11:46:10.587853Z",
+  "created_at_utc": "2026-05-30T21:03:57.718355Z",
   "phase2_paper_mode_authorized": false,
   "demo_trading_authorized": false,
   "live_trading_authorized": false,
@@ -8,7 +8,7 @@
     {
       "name": "repo_commit_hash",
       "status": "PASS",
-      "evidence": "Repository commit hash captured: ab24b2d3beccee50f5c5f19dbe34dfaccf8525ea."
+      "evidence": "Repository commit hash captured: 39eb96bbf626edee607ce48590b78e0e3891beb6."
     },
     {
       "name": "mt5_terminal_path",
@@ -43,7 +43,7 @@
     {
       "name": "phase1_status_summary",
       "status": "PASS",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.29 11:35:00 keeps dry_run=true and trade_permission=false."
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json` latest bar 2026.05.29 20:55:00 keeps dry_run=true and trade_permission=false."
     },
     {
       "name": "phase2_readiness_report",
