@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-30T21:03:58.192913Z",
+  "created_at_utc": "2026-05-31T10:42:20.649545Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "FAIL",
@@ -24,10 +24,10 @@
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
-      "status": "PENDING",
-      "current": 82.37,
+      "status": "PASS",
+      "current": 96.01,
       "required": 96.0,
-      "remaining": 13.63,
+      "remaining": 0.0,
       "unit": "hours"
     },
     {
@@ -63,7 +63,7 @@
   ],
   "owner_approval_readiness": {
     "status": "NOT_READY_TO_SIGN",
-    "pending_objective_gate_count": 10,
+    "pending_objective_gate_count": 9,
     "pending_objective_gates": [
       {
         "gate": "VPS selection",
@@ -109,11 +109,6 @@
         "gate": "Active-market 72-hour soak",
         "status": "PENDING",
         "evidence": "Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
-      },
-      {
-        "gate": "Process/code-freeze 96-hour gate",
-        "status": "PENDING",
-        "evidence": "Process uptime streak 82.37h; code-freeze 82.37h; required 96h; marker 2026-05-27T10:41:50Z."
       }
     ],
     "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."
@@ -158,8 +153,8 @@
   ],
   "local_mt5_network_baseline": {
     "status": "PASS",
-    "samples": "5757",
-    "latest_ping": "174.55 ms",
+    "samples": "5758",
+    "latest_ping": "176.40 ms",
     "median_ping": "129.78 ms",
     "best_ping": "121.76 ms",
     "worst_ping": "312.50 ms",

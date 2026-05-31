@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-30
+Last updated: 2026-05-31
 
 ## Workspace
 
@@ -12,6 +12,7 @@ Last updated: 2026-05-30
 - Current branch: `main`
 - Remote: `https://github.com/maksoftwares/algo-trading-system.git`
 - Single-page status dashboard: `status.html` at the repo root.
+- Latest shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_31.md`; records the planned shutdown, captured 96-hour process/code-freeze PASS evidence, and Monday 2026-06-01 market-open resume procedure.
 
 ## Standing Rules
 

@@ -1,6 +1,6 @@
 {
   "status": "DEMO_NOT_READY",
-  "created_at_utc": "2026-05-30T21:03:58.177624Z",
+  "created_at_utc": "2026-05-31T10:42:20.633843Z",
   "authority": "This report is a countdown aid only. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "boundary": "paper_mode_not_authorized_until_phase2_readiness_pass",
   "paper_mode_authorized": false,
@@ -11,7 +11,7 @@
   "measured_cost_status": "PENDING",
   "measured_cost_revalidation_status": "PENDING",
   "measured_cost_delta_status": "PENDING",
-  "pending_gate_count": 11,
+  "pending_gate_count": 10,
   "pending_gates": [
     {
       "Gate": "VPS selection",
@@ -59,11 +59,6 @@
       "Evidence": "Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
     },
     {
-      "Gate": "Process/code-freeze 96-hour gate",
-      "Status": "PENDING",
-      "Evidence": "Process uptime streak 82.37h; code-freeze 82.37h; required 96h; marker 2026-05-27T10:41:50Z."
-    },
-    {
       "Gate": "Project owner approval",
       "Status": "PENDING",
       "Evidence": "No approval file found at `C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_OWNER_APPROVAL.md`."
@@ -80,10 +75,10 @@
     },
     {
       "gate": "Process/code-freeze 96-hour gate",
-      "status": "PENDING",
-      "current": 82.37,
+      "status": "PASS",
+      "current": 96.01,
       "required": 96.0,
-      "remaining": 13.63,
+      "remaining": 0.0,
       "unit": "hours"
     },
     {
@@ -130,11 +125,11 @@
     "required_rows": "500",
     "observed_days": "3",
     "required_days": "5",
-    "source_rows": "122196",
+    "source_rows": "132017",
     "rows_missing_tick_fresh": "55704",
-    "weekend_rows_excluded": "15166",
+    "weekend_rows_excluded": "24987",
     "tick_freshness": "available",
-    "source_files": "9"
+    "source_files": "10"
   },
   "forbidden_until_ready": [
     "paper-mode implementation",

@@ -2,12 +2,12 @@
 
 ## Admission Filters
 
-- Source rows: 122196
+- Source rows: 132017
 - Freshness columns available: yes
 - Missing freshness columns: none
 - Rows excluded because tick_fresh was not true or was missing: 57024
 - Rows missing tick_fresh: 55704
-- Weekend/closed-market rows excluded: 15166
+- Weekend/closed-market rows excluded: 24987
 - Weekday rows used: 50006
 
 ## Source Files
@@ -21,6 +21,7 @@
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260528.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260529.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260530.csv
+- C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260531.csv
 
 ## Global Distribution
 

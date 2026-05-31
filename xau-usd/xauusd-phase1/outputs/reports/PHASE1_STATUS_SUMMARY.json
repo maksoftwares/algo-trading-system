@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-05-30T21:03:58.154617+00:00",
+  "created_at_utc": "2026-05-31T10:42:20.615479+00:00",
   "files_dir": "C:\\MT5PortableGoldMission\\MQL5\\Files",
   "reports": {
     "acceptance_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
@@ -31,8 +31,8 @@
   },
   "soak": {
     "active_market_streak_hours": 56.08,
-    "code_freeze_hours": 82.37,
-    "code_freeze_pass": false,
+    "code_freeze_hours": 96.01,
+    "code_freeze_pass": true,
     "code_freeze_started_at": "2026-05-27T10:41:50Z",
     "current_streak_bar_count": 674,
     "current_streak_hours": 56.08,
@@ -41,8 +41,8 @@
     "longest_streak_hours": 56.08,
     "max_bar_gap_minutes": 15.0,
     "observed_days": 7.4132,
-    "process_code_freeze_pass": false,
-    "process_uptime_streak_hours": 82.37,
+    "process_code_freeze_pass": true,
+    "process_uptime_streak_hours": 96.01,
     "progress_pct": 100.0,
     "required_code_freeze_hours": 96.0,
     "required_days": 5,
