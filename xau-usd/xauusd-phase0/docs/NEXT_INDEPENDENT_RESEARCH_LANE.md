@@ -1,8 +1,8 @@
 # Next Independent Research Lane
 
-Last updated: 2026-05-30
+Last updated: 2026-06-01
 
-Overall status: NO_INDEPENDENT_APPROVAL_AFTER_143_RESULT_PRODUCING_CANDIDATES
+Overall status: NO_INDEPENDENT_APPROVAL_AFTER_156_RESULT_PRODUCING_CANDIDATES
 
 This document defines what can still be done while Phase 1 soak, code-freeze, and measured-cost clocks mature. It does not approve any new EA and it does not reopen rejected candidates.
 
@@ -14,7 +14,7 @@ The current approved/provisional set is still one correlated edge family:
 level-and-pullback / breakout-retest
 ```
 
-The project has already tested 143 result-producing candidates plus one data-blocked CYB/UUP lane, including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, official CNY-dollar pressure, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, direct HG/GC copper-gold futures rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, weekend/market-break gap reversion, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. The latest tested candidate, `weekend_gap_reversion_v0`, failed with only 33 total cost-cell trades, 0/9 trade-count cells, 0/9 PF cells, best PF 0.5933, and max zero-trade months of 36. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
+The project has already tested 156 result-producing candidates plus two data-blocked lanes (`h1_cyb_uup_yuan_dollar_fx_rotation_followthrough_v0` and `h4_cme_cvol_skew_reversal_v0`), including non-level, H4/D1/W1, intermarket, macro-regime, macro-shock, BTC crypto risk pressure, QQQ/SPY growth-risk rotation, IWM/SPY size-risk breadth rotation, SLV/GLD precious-beta rotation, XLE/XLU energy-defensive rotation, EEM/SPY emerging-market risk rotation, ACWX/SPY global ex-US rotation, XME/SPY metals-mining rotation, FXY/UUP, FXF/UUP, FXE/UUP, CYB/UUP, and FXA/UUP FX rotation, official CNY-dollar pressure, broker-consistent FX dollar pressure, FX-cross carry/risk rotation, direct HG/GC copper-gold futures rotation, volatility-regime, event-regime, calendar-flow, session impulse-reversion, Friday position-squaring, weekend/market-break gap reversion, H4 daily range-extension reversal, H4 real-yield/dollar stress reversal, H4 CNY-dollar pressure reversal, H4 SLV/GLD precious-beta reversal, H4 month-turn flow reversion, H4 XLE/XLU energy-defensive reversal, H4 TIP/IEF real-yield rotation reversal, H4 SPY/TLT risk-rotation reversal, H4 HYG/IEF credit-risk rotation reversal, H4 XLU/XLK defensive-sector reversal, H4 GVZ/VIX volatility-premium reversal, H4 VIX/VXV term-structure reversal, H4 MOVE/VIX bond-volatility shock reversal, AI-style fixed-state concepts, official CFTC gold COT positioning, a non-authoritative GC continuous futures daily-volume proxy, public GLD ETF daily-flow proxies, public GDX/GLD miner-relative proxies, TLT/UUP traded ETF rates-dollar pressure, TLT/SHY traded ETF duration rotation, SPY/TLT traded ETF equity-vs-Treasury risk rotation, TIP/IEF traded ETF real-yield rotation, DBC/UUP broad-commodity versus dollar pressure, DBB/UUP industrial-metals versus dollar pressure, USO/UUP crude-oil versus dollar pressure, HYG/IEF credit-risk versus Treasury rotation, XLU/XLK defensive-sector rotation, XLP/XLY consumer rotation, XLF/XLU financials-defensive rotation, XLI/XLU cyclical-defensive rotation, GVZ/VIX volatility-premium context, GVZ/realized-volatility spread context, real-yield / breakeven-inflation mix context, VIX/VXV term-structure context, MOVE/VIX bond-volatility context, policy-uncertainty shock context, breakeven-inflation shock context, Treasury-rate/curve shock context, corporate credit-spread shock context, financial-conditions shock context, GC/XAU futures-spot basis context, GC futures-proxy momentum context, and same-family level variants. No genuinely independent candidate has passed first pass. Candidate 68, `h4_gld_etf_flow_reversal_v0`, remains the strongest independent PF lead because it reached 9/9 PF cells above 1.30, but it failed trade-count and concentration/activity gates. The latest tested candidate, `h4_xle_xlu_energy_defensive_rotation_reversal_v0`, produced 453 total cost-cell trades and 9/9 trade-count cells, but only 3/9 PF cells; all PF-threshold cells were Pepperstone-only while Capital.com/Dukascopy were negative. Candidate 73, `quarter_round_retest_v0`, passed automated gates but is explicitly same-family and still Gate 9 pending.
 
 ## Research Boundary
 
@@ -78,11 +78,17 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_session_impulse_reversion_v0` | H1 session impulse exhaustion / mean reversion | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Capital.com strongly negative. |
 | `h1_friday_position_squaring_reversion_v0` | H1 Friday position-squaring / mean reversion | Yes | High | REJECTED_FIRST_PASS; 0/9 PF cells and only 3/9 trade-count cells. |
 | `h1_gvz_vix_vol_premium_reversal_v0` | FRED GVZ/VIX relative volatility premium | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and weak cross-broker persistence. |
+| `h4_gvz_vix_vol_premium_reversal_v0` | FRED GVZ/VIX relative volatility premium H4 reversal | Yes | High | REJECTED_FIRST_PASS; 501 total cost-cell trades, 9/9 trade-count cells, 3/9 PF cells, and 9/9 positive-PnL cells, but zero-trade months and concentration failed. |
 | `h1_move_vix_bond_vol_shock_reversal_v0` | Yahoo MOVE plus FRED VIX bond-volatility shock | Yes | High | REJECTED_FIRST_PASS; 6/9 trade-count cells, 0/9 PF cells, and max zero-trade months of 14. |
 | `h1_move_vix_bond_vol_shock_followthrough_v0` | Yahoo MOVE plus FRED VIX bond-volatility shock | Yes | High | REJECTED_FIRST_PASS; 6/9 trade-count cells, 0/9 PF cells, and max zero-trade months of 11. |
+| `h4_move_vix_bond_vol_shock_reversal_v0` | Yahoo MOVE plus FRED VIX bond-volatility shock H4 reversal | Yes | High | REJECTED_FIRST_PASS; 183 total cost-cell trades, 0/9 trade-count cells, 3/9 PF cells, all PF cells sparse Dukascopy-only. |
+| `h4_cny_dollar_pressure_reversal_v0` | Official FRED CNY-dollar pressure H4 reversal | Yes | High | REJECTED_FIRST_PASS; 351 total cost-cell trades, 3/9 trade-count cells, 0/9 PF cells, and best PF only 1.0592. |
 | `weekend_gap_reversion_v0` | XAUUSD weekend-style market-break gap reversion | Yes | High | REJECTED_FIRST_PASS; only 33 total cost-cell trades, 0/9 trade-count cells, 0/9 PF cells, and max zero-trade months of 36. |
+| `h4_daily_range_extension_reversal_v0` | XAUUSD H4/D1 OHLC-only daily range exhaustion | Yes | High | REJECTED_FIRST_PASS; 513 total cost-cell trades, 9/9 trade-count cells, but 0/9 PF cells and all broker/cost windows negative after costs. |
+| `h4_real_yield_dollar_stress_reversal_v0` | FRED real-yield plus broad-dollar H4 macro-stress reversal | Yes | High | REJECTED_FIRST_PASS; 189 total cost-cell trades, 3/9 trade-count cells, 0/9 PF cells, best PF 1.2402 in Dukascopy best-case only. |
 | `h4_vix_risk_off_followthrough_v0` | FRED VIX equity-risk implied-volatility followthrough | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells, with only Capital.com positive below threshold. |
 | `h1_vix_term_structure_inversion_reversal_v0` | FRED VIX/VXV equity-volatility term structure | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells, with Pepperstone/Dukascopy positive below threshold and Capital.com negative. |
+| `h4_vix_term_structure_inversion_reversal_v0` | FRED VIX/VXV equity-volatility term structure H4 reversal | Yes | High | REJECTED_FIRST_PASS; 345 total cost-cell trades, 6/9 trade-count cells, 3/9 PF cells, and 6/9 positive-PnL cells; Capital.com pocket did not generalize. |
 | `h1_vix_term_structure_inversion_followthrough_v0` | FRED VIX/VXV equity-volatility term structure | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells, with best PF only 1.0207 and Pepperstone materially negative. |
 | `h1_policy_uncertainty_intraday_reversal_v0` | FRED USEPUINDXD policy-uncertainty shock reversal | Yes | High | REJECTED_FIRST_PASS; 6/9 trade-count cells and 0/9 PF cells, with mild Pepperstone/Dukascopy pockets below threshold and Capital.com negative. |
 | `h1_breakeven_inflation_shock_reversal_v0` | FRED T5YIE/T10YIE breakeven-inflation shock reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 0/9 PF cells; every broker/cost window was negative. |
@@ -106,15 +112,19 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_real_yield_dollar_shock_followthrough_v0` | FRED real-yield plus broad-dollar H1 shock follow-through | Yes | High | REJECTED_FIRST_PASS; 3/9 PF cells, only 6/9 trade-count cells, and Pepperstone-only strength. |
 | `h1_real_yield_inflation_mix_followthrough_v0` | FRED real-yield plus breakeven-inflation mix follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Pepperstone-only positive pocket below threshold. |
 | `h1_real_yield_inflation_mix_reversal_v0` | FRED real-yield plus breakeven-inflation mix reversal | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and Dukascopy-only positive pocket below threshold. |
+| `h4_tip_ief_real_yield_rotation_reversal_v0` | Yahoo TIP/IEF traded real-yield rotation reversal | Yes | High | REJECTED_FIRST_PASS; 351 total cost-cell trades, 6/9 trade-count cells, 3/9 PF cells, and PF-threshold strength was Pepperstone-only while Dukascopy was negative. |
 | `h1_tlt_uup_pressure_reversion_v0` | Yahoo TLT/UUP traded rates-dollar ETF pressure reversion | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells and every broker window negative. |
 | `h1_tlt_uup_pressure_followthrough_v0` | Yahoo TLT/UUP traded rates-dollar ETF pressure follow-through | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive but below threshold. |
 | `h1_spy_tlt_risk_rotation_followthrough_v0` | Yahoo SPY/TLT traded equity-vs-Treasury risk rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone positive below threshold and Dukascopy negative. |
+| `h4_spy_tlt_risk_rotation_reversal_v0` | Yahoo SPY/TLT traded equity-vs-Treasury risk-rotation reversal | Yes | High | REJECTED_FIRST_PASS; 435 total cost-cell trades, 9/9 trade-count cells, but 0/9 PF cells; Capital.com was mildly positive below threshold and Pepperstone/Dukascopy were negative. |
 | `h1_tip_ief_real_yield_rotation_followthrough_v0` | Yahoo TIP/IEF traded real-yield/inflation-protection rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy negative. |
 | `h1_dbc_uup_commodity_dollar_followthrough_v0` | Yahoo DBC/UUP traded broad-commodity versus dollar pressure | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy negative. |
 | `h1_dbb_uup_industrial_metals_followthrough_v0` | Yahoo DBB/UUP traded industrial-metals versus dollar pressure | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com positive below threshold and Pepperstone/Dukascopy negative. |
 | `h1_uso_uup_oil_dollar_followthrough_v0` | Yahoo USO/UUP traded crude-oil versus dollar pressure | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy negative. |
 | `h1_hyg_ief_credit_risk_rotation_followthrough_v0` | Yahoo HYG/IEF traded credit-risk versus Treasury rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone positive below threshold and Dukascopy negative. |
+| `h4_hyg_ief_credit_risk_rotation_reversal_v0` | Yahoo HYG/IEF traded credit-risk versus Treasury H4 reversal | Yes | High | REJECTED_FIRST_PASS; 435 total cost-cell trades, 9/9 trade-count cells, 0/9 PF cells, best PF 1.0471, and Pepperstone/Dukascopy negative. |
 | `h1_xlu_xlk_defensive_rotation_followthrough_v0` | Yahoo XLU/XLK traded defensive-sector versus technology-risk rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com positive below threshold and Pepperstone/Dukascopy negative. |
+| `h4_xlu_xlk_defensive_rotation_reversal_v0` | Yahoo XLU/XLK traded defensive-sector versus technology H4 reversal | Yes | High | REJECTED_FIRST_PASS; 453 total cost-cell trades, 9/9 trade-count cells, 0/9 PF cells, 0/9 positive-PnL cells, and best PF only 0.8174. |
 | `h1_xlp_xly_consumer_rotation_followthrough_v0` | Yahoo XLP/XLY traded consumer-defensive versus discretionary rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com positive below threshold, Pepperstone flat, and Dukascopy negative. |
 | `h1_tlt_shy_duration_rotation_followthrough_v0` | Yahoo TLT/SHY traded long-duration versus short-duration Treasury rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone/Dukascopy small positive pockets stayed below threshold and Capital.com was negative. |
 | `h1_xlf_xlu_financials_defensive_rotation_followthrough_v0` | Yahoo XLF/XLU traded financials versus defensive utilities rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone positive pockets stayed below threshold and Dukascopy was flat/negative. |
@@ -127,6 +137,9 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_qqq_spy_growth_risk_rotation_followthrough_v0` | Yahoo QQQ/SPY daily growth-risk style rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Dukascopy negative. |
 | `h1_iwm_spy_size_risk_rotation_followthrough_v0` | Yahoo IWM/SPY daily size-risk breadth rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy weak. |
 | `h1_slv_gld_precious_beta_rotation_followthrough_v0` | Yahoo SLV/GLD daily precious-beta rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells and 3/9 PF cells, but all PF cells were Pepperstone-only while Capital.com/Dukascopy were negative. |
+| `h4_slv_gld_precious_beta_reversal_v0` | Yahoo SLV/GLD daily precious-beta H4 reversal | Yes | High | REJECTED_FIRST_PASS; 387 total cost-cell trades, 6/9 trade-count cells, 0/9 PF cells, and best PF only 1.0841. |
+| `h4_month_turn_flow_reversion_v0` | XAU H4 calendar-flow month-turn pressure reversion | Yes | High | REJECTED_FIRST_PASS; 528 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells and best PF only 1.0286. |
+| `h4_xle_xlu_energy_defensive_rotation_reversal_v0` | Yahoo XLE/XLU daily energy-defensive H4 reversal | Yes | High | REJECTED_FIRST_PASS; 453 total cost-cell trades, 9/9 trade-count cells, but only 3/9 PF cells, all Pepperstone-only. |
 | `h1_xle_xlu_energy_defensive_rotation_followthrough_v0` | Yahoo XLE/XLU daily energy-defensive rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy negative. |
 | `h1_eem_spy_em_risk_rotation_followthrough_v0` | Yahoo EEM/SPY daily emerging-market risk rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Capital.com/Pepperstone near flat and Dukascopy materially negative. |
 | `h1_acwx_spy_global_ex_us_rotation_followthrough_v0` | Yahoo ACWX/SPY daily global ex-US rotation | Yes | High | REJECTED_FIRST_PASS; 9/9 trade-count cells but 0/9 PF cells; Pepperstone positive below threshold and Capital.com/Dukascopy negative. |
@@ -143,37 +156,38 @@ B. a current-data hypothesis with a clearly different mechanism from breakout/re
 | `h1_news_surprise_repricing_v0` | Actual economic surprise values | No | High | Defer until event surprise data exists. |
 | `d1_macro_liquidity_regime_v0` | Central-bank liquidity and USD funding proxies | Partial | High | Possible later, but likely slow-moving and low trade count. |
 | `xau_options_skew_reversal_v0` | Gold options skew | No | High | Defer until options-skew source exists. |
+| `h4_cme_cvol_skew_reversal_v0` | Official CME Gold CVOL/skew | No | High | BLOCKED_DATA_SOURCE; hypothesis is SHA-locked and synthetic-smoke PASS, but real matrix requires licensed CME Gold CVOL history at `data/reference/options/cme_cvol_gold_daily.csv`. |
 
 ## Latest Tested Candidate
 
 The latest current-data candidate was:
 
 ```text
-h1_move_vix_bond_vol_shock_followthrough_v0
+h4_xle_xlu_energy_defensive_rotation_reversal_v0
 ```
 
 Mechanism:
 
 ```text
-Shifted MOVE/VIX bond-volatility stress may identify H1 XAUUSD follow-through when spot has already started moving in the same direction.
-The paired long case tests bond-volatility stress after local gold strength; the paired short case tests bond-volatility stress after local gold weakness.
+Shifted XLE/XLU energy-versus-defensive sector rotation may identify commodity/risk-state pressure that conflicts with local XAU overextension once a completed H4 rejection candle appears.
+The paired long case tests energy leadership after local gold weakness; the paired short case tests defensive utility leadership after local gold strength.
 ```
 
 Why this is not same-family:
 
 - It does not trade retests of levels.
 - It does not require a broken support/resistance level.
-- It is a bond-volatility versus equity-volatility stress signal, not breakout continuation.
-- It uses shifted daily MOVE and VIX observations plus H1 continuation state, not M5/M15 retest mechanics.
+- It is an energy-versus-defensive sector rotation reversal signal, not breakout continuation.
+- It uses shifted daily XLE/XLU observations plus H4 rejection state, not M5/M15 retest mechanics.
 
 Why it is still risky:
 
-- It passed sample size in only 6/9 cells.
-- It failed PF persistence with 0/9 PF cells above 1.30.
-- Capital.com was weakly positive but below threshold.
-- Pepperstone and Dukascopy were negative after costs.
-- Max zero-trade months reached 11, far above the activity threshold.
-- It did not show cross-venue transfer.
+- It generated 387 total cost-cell trades, but only 6/9 cells passed the trade-count gate.
+- 0/9 cells reached PF >= 1.30.
+- Pepperstone was positive but below threshold.
+- Capital.com and Dukascopy were negative.
+- Max zero-trade months reached 6 and concentration failed.
+- Largest-trade and top-5 concentration failed badly.
 
 ## Pre-Registration Status
 
@@ -344,12 +358,12 @@ Registration, smoke, and first-pass status:
 
 ```text
 Research hypothesis: REGISTERED
-Latest SHA256: dfc4c2a08bbde085a7b7c52d78a12b831dcc7be1191a48dd8b90bf6ab7fb3f9d
+Latest SHA256: 1e48509add7580fcea6bf9470ed34fd88cd81e1c6251a5736822f614cf73f938
 Synthetic smoke: PASS
 First-pass matrix: REJECTED_FIRST_PASS
-Latest matrix trades: 861 across cost cells
-Latest PF cells >= 1.30: 0/9
-Latest minimum cell trades: 32
+Latest matrix trades: 183 across cost cells
+Latest PF cells >= 1.30: 3/9
+Latest minimum cell trades: 6
 ```
 
 ## First-Pass Result
@@ -400,6 +414,12 @@ Latest minimum cell trades: 32
 
 `h1_slv_gld_precious_beta_rotation_followthrough_v0` tested a public SLV/GLD daily precious-beta rotation data class. It produced enough sample size and reached 3/9 PF cells, but all PF-passing cells were Pepperstone-only while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning and keep searching for a different independent data class or behavior family.
 
+`h4_slv_gld_precious_beta_reversal_v0` tested shifted public SLV/GLD daily precious-beta rotation with H4 XAU rejection timing. It produced 387 total cost-cell trades, 6/9 trade-count cells, 0/9 PF cells, and 3/9 positive-PnL cells. Pepperstone was mildly positive below threshold while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
+
+`h4_month_turn_flow_reversion_v0` tested H4 month-end/month-start flow-pressure reversion after completed XAU rejection candles. It produced 528 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells, only 3/9 positive-PnL cells, and best PF only 1.0286. Capital.com was only slightly positive while Pepperstone and Dukascopy were negative. The correct action is to reject v0 without tuning.
+
+`h4_xle_xlu_energy_defensive_rotation_reversal_v0` tested shifted public XLE/XLU daily energy-versus-defensive rotation with H4 XAU rejection timing. It produced 453 total cost-cell trades and 9/9 trade-count cells, but only 3/9 PF cells. All PF-threshold cells were Pepperstone-only, while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
+
 `h1_xle_xlu_energy_defensive_rotation_followthrough_v0` tested a public XLE/XLU daily energy-defensive rotation data class. It produced enough sample size, but failed with 0/9 PF cells; Pepperstone was positive below threshold while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning and keep searching for a different independent data class or behavior family.
 
 `h1_eem_spy_em_risk_rotation_followthrough_v0` tested a public EEM/SPY daily emerging-market risk rotation data class. It produced enough sample size, but failed with 0/9 PF cells; Capital.com and Pepperstone were near flat while Dukascopy was materially negative. The correct action is to reject v0 without tuning and keep searching for a different independent data class or behavior family.
@@ -432,6 +452,14 @@ Latest minimum cell trades: 32
 
 `h1_gvz_vix_vol_premium_followthrough_v0` tested shifted FRED GVZ/VIX relative volatility premium with H1 XAU continuation timing. It produced 1,926 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold and max zero-trade months reached 7. All broker/cost windows were negative. The correct action is to reject v0 without tuning.
 
+`h4_gvz_vix_vol_premium_reversal_v0` tested shifted FRED GVZ/VIX relative volatility premium with H4 XAU rejection timing. It produced 501 total cost-cell trades, passed sample size in every cell, and was positive in every broker/cost cell, but only 3/9 PF cells reached the threshold and the zero-trade-month and concentration gates failed. The correct action is to reject v0 without tuning while noting it as a better but still insufficient higher-timeframe lead.
+
+`h4_vix_term_structure_inversion_reversal_v0` tested shifted FRED VIX/VXV term-structure inversion with H4 XAU rejection timing. It produced 345 total cost-cell trades, only 6/9 trade-count cells, 3/9 PF cells, and 6/9 positive-PnL cells. Capital.com was strong, Pepperstone was positive below threshold, and Dukascopy was sparse and negative. The correct action is to reject v0 without tuning.
+
+`h4_move_vix_bond_vol_shock_reversal_v0` tested shifted public Yahoo MOVE versus FRED VIX rates-volatility shock with H4 XAU rejection timing. It produced only 183 total cost-cell trades, 0/9 trade-count cells, 3/9 PF cells, and 3/9 positive-PnL cells. The only PF-threshold cells were sparse Dukascopy pockets while Capital.com and Pepperstone were negative. The correct action is to reject v0 without tuning.
+
+`h4_cny_dollar_pressure_reversal_v0` tested shifted official FRED DEXCHUS yuan-per-dollar plus DTWEXBGS broad-dollar pressure with H4 XAU rejection timing. It produced 351 total cost-cell trades, 3/9 trade-count cells, 0/9 PF cells, and 5/9 positive-PnL cells. Pepperstone was clearly negative despite enough trades, while Capital.com and Dukascopy were weak below threshold. The correct action is to reject v0 without tuning.
+
 `h1_hg_gc_copper_gold_rotation_followthrough_v0` tested shifted public Yahoo HG=F/GC=F direct copper-versus-gold futures pressure with H1 XAU continuation timing. It produced 954 total cost-cell trades and passed sample size in every cell, but 0/9 PF cells reached the threshold. Pepperstone was mildly positive below threshold while Capital.com and Dukascopy were negative. The correct action is to reject v0 without tuning.
 
 `h1_hg_gc_copper_gold_rotation_reversal_v0` tested shifted public Yahoo HG=F/GC=F direct copper-versus-gold futures pressure with H1 XAU overextension reversal timing. It produced 519 total cost-cell trades and passed sample size in every cell, but only 1/9 PF cells reached the threshold. The only PF-threshold pocket was Dukascopy best-case, Capital.com and Pepperstone were negative, and max zero-trade months reached 4. The correct action is to reject v0 without tuning.
@@ -439,6 +467,8 @@ Latest minimum cell trades: 32
 `h1_move_vix_bond_vol_shock_followthrough_v0` tested shifted MOVE/VIX bond-volatility stress with H1 XAU continuation timing. It produced 861 total cost-cell trades, but only 6/9 cells passed the trade-count floor and 0/9 PF cells reached the threshold. Capital.com was weakly positive below threshold, while Pepperstone and Dukascopy were negative and max zero-trade months reached 11. The correct action is to reject v0 without tuning.
 
 `weekend_gap_reversion_v0` tested the first completed M15 candle after weekend-style market breaks for gap-fill mean reversion toward the pre-gap close. It produced only 33 total cost-cell trades, 0/9 trade-count cells, 0/9 PF cells, best PF 0.5933, and max zero-trade months reached 36. Capital.com was sparse and negative while Pepperstone/Dukascopy generated no qualifying matrix trades. The correct action is to reject v0 without tuning.
+
+`h4_daily_range_extension_reversal_v0` tested completed H4 rejection candles after the UTC day had already extended at least 0.85x its prior 20-day median range. It produced enough sample size with 513 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells reached the threshold and every broker/cost window was negative after costs. The correct action is to reject v0 without tuning.
 
 No current untested independent candidate is pre-registered in this file. The next candidate must be written as a fresh hypothesis, SHA256-registered, smoke-tested, and run through the first-pass matrix before any result is interpreted.
 
@@ -473,3 +503,5 @@ Primary COMEX/CME futures volume/order-flow or options-skew data.
 Reason:
 
 The current OHLC/macro/intermarket/COT/ETF-flow search has already covered enough nearby hypotheses that another OHLC-only candidate has a low prior probability. The non-authoritative GC continuous-volume proxy failed outright, the official COT continuation lane solved sample size but had no PF persistence, the GDX/GLD relative proxy failed, the GLD ETF flow proxy only survived in the narrow under-sampled v0 form, and the H1 GLD-flow continuation variant also failed 0/9 PF cells. The next lift should be primary COMEX/CME/order-flow/options-skew data or another genuinely new data class, not another GLD/GDX/COT threshold variant.
+
+2026-06-01 update: `h4_cme_cvol_skew_reversal_v0` now implements the official CME Gold CVOL/skew lane as a disabled research candidate with a strict local data contract. Synthetic smoke is PASS and the hypothesis is locked, but the real matrix is blocked until licensed CVOL history is supplied. This is the correct higher-timeframe direction; do not substitute another OHLC-only variant for this data-source requirement.

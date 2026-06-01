@@ -19,6 +19,9 @@ from phase0.backtester import matrix_output_stem, run_backtest, write_backtest_o
 from phase0.btc_risk_pressure_data import BTC_RISK_PRESSURE_FRAME_KEY
 from phase0.btc_risk_pressure_data import EXPERT_NAMES as BTC_RISK_PRESSURE_EXPERT_NAMES
 from phase0.btc_risk_pressure_data import load_btc_risk_pressure_context
+from phase0.cme_cvol_gold_data import CME_CVOL_GOLD_FRAME_KEY
+from phase0.cme_cvol_gold_data import EXPERT_NAMES as CME_CVOL_GOLD_EXPERT_NAMES
+from phase0.cme_cvol_gold_data import load_cme_cvol_gold_context
 from phase0.config import ConfigError, ProjectConfig, build_cell_configs, resolve_symbol
 from phase0.cot_gold_data import COT_FRAME_KEY
 from phase0.cot_gold_data import EXPERT_NAMES as COT_GOLD_EXPERT_NAMES
@@ -218,6 +221,7 @@ MACRO_COMPOSITE_EXPERT_NAMES = (
 GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES = (
     "h1_gvz_vix_vol_premium_reversal_v0",
     "h1_gvz_vix_vol_premium_followthrough_v0",
+    "h4_gvz_vix_vol_premium_reversal_v0",
 )
 
 
@@ -291,6 +295,8 @@ def run_phase0_matrix(
             _assert_eurjpy_usdjpy_fx_risk_rotation_data_ready(config)
         if expert_name in BTC_RISK_PRESSURE_EXPERT_NAMES and not synthetic_sample:
             _assert_btc_risk_pressure_data_ready(config)
+        if expert_name in CME_CVOL_GOLD_EXPERT_NAMES and not synthetic_sample:
+            _assert_cme_cvol_gold_data_ready(config)
         if expert_name in QQQ_SPY_GROWTH_ROTATION_EXPERT_NAMES and not synthetic_sample:
             _assert_qqq_spy_growth_rotation_data_ready(config)
         if expert_name in IWM_SPY_SIZE_ROTATION_EXPERT_NAMES and not synthetic_sample:
@@ -605,6 +611,15 @@ def run_phase0_matrix(
                     data_context = {
                         **data_context,
                         BTC_RISK_PRESSURE_FRAME_KEY: load_btc_risk_pressure_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name in CME_CVOL_GOLD_EXPERT_NAMES:
+                    data_context = {
+                        **data_context,
+                        CME_CVOL_GOLD_FRAME_KEY: load_cme_cvol_gold_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,
@@ -1030,6 +1045,12 @@ def _assert_btc_risk_pressure_data_ready(config: ProjectConfig) -> None:
     start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
     load_btc_risk_pressure_context(config, start, end)
+
+
+def _assert_cme_cvol_gold_data_ready(config: ProjectConfig) -> None:
+    start = min(pd.Timestamp(cell.start_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    end = max(pd.Timestamp(cell.end_utc) for cell in build_cell_configs(config, symbol="XAUUSD"))
+    load_cme_cvol_gold_context(config, start, end)
 
 
 def _assert_qqq_spy_growth_rotation_data_ready(config: ProjectConfig) -> None:

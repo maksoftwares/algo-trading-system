@@ -9,6 +9,7 @@ from phase0.config import ConfigError, ProjectConfig
 
 EXPERT_NAMES = (
     "h4_gvz_volatility_panic_reversal_v0",
+    "h4_gvz_vix_vol_premium_reversal_v0",
     "h1_gvz_realized_vol_spread_reversal_v0",
     "h1_gvz_realized_vol_spread_followthrough_v0",
 )

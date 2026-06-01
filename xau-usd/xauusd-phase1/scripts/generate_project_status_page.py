@@ -212,6 +212,7 @@ def _render_html(
     would_signal = _mapping(summary.get("would_signal"))
     accepted = [item for item in candidates if _candidate_status(item).startswith("ACCEPTED")]
     pending = [item for item in candidates if _candidate_status(item) == "PROVISIONAL"]
+    blocked = [item for item in candidates if _candidate_status(item) == "DATA_BLOCKED"]
     rejected = [item for item in candidates if _candidate_status(item) == "REJECTED"]
     next_items = _next_actions(phase1_status, phase2_status, measured_cost, phase3_status)
     soak_progress = _to_float(soak.get("progress_pct")) or 0.0
@@ -257,6 +258,7 @@ def _render_html(
             _kpi_grid(
                 accepted_count=len(accepted),
                 pending_count=len(pending),
+                blocked_count=len(blocked),
                 rejected_count=len(rejected),
                 soak=soak,
                 soak_progress=soak_progress,
@@ -305,7 +307,7 @@ def _render_html(
             '        <div class="panel-head candidates-head">',
             "          <div>",
             "            <h2>EA Candidate Bench</h2>",
-            f'            <span>{len(accepted)} accepted, {len(pending)} provisional, {len(rejected)} rejected</span>',
+            f'            <span>{len(accepted)} accepted, {len(pending)} provisional, {len(blocked)} data-blocked, {len(rejected)} rejected</span>',
             "          </div>",
             '          <div class="table-tools">',
             '            <input id="candidateSearch" type="search" placeholder="Search experts">',
@@ -313,6 +315,7 @@ def _render_html(
             '              <button class="seg active" type="button" data-filter="all">All</button>',
             '              <button class="seg" type="button" data-filter="accepted">Accepted</button>',
             '              <button class="seg" type="button" data-filter="pending">Provisional</button>',
+            '              <button class="seg" type="button" data-filter="blocked">Data-blocked</button>',
             '              <button class="seg" type="button" data-filter="rejected">Rejected</button>',
             "            </div>",
             "          </div>",
@@ -330,6 +333,7 @@ def _render_html(
             '            <button class="seg active" type="button" data-account-status-filter="all">All</button>',
             '            <button class="seg" type="button" data-account-status-filter="accepted">Accepted</button>',
             '            <button class="seg" type="button" data-account-status-filter="pending">Provisional</button>',
+            '            <button class="seg" type="button" data-account-status-filter="blocked">Data-blocked</button>',
             '            <button class="seg" type="button" data-account-status-filter="rejected">Rejected</button>',
             "          </div>",
             "        </div>",
@@ -694,6 +698,7 @@ def _status_pill(label: str, value: str) -> str:
 def _kpi_grid(
     accepted_count: int,
     pending_count: int,
+    blocked_count: int,
     rejected_count: int,
     soak: dict[str, Any],
     soak_progress: float,
@@ -750,9 +755,9 @@ def _kpi_grid(
             ),
             _kpi(
                 label="EA bench",
-                value=f"{accepted_count} / {pending_count} / {rejected_count}",
+                value=f"{accepted_count} / {pending_count} / {blocked_count} / {rejected_count}",
                 status="ACTIVE",
-                note="accepted / provisional / rejected candidates",
+                note="accepted / provisional / data-blocked / rejected candidates",
                 bar="",
             ),
             _kpi(
@@ -1191,6 +1196,7 @@ def _experimental_demo_attachments_panel(report: dict[str, Any]) -> str:
         ("Terminal relaunched", _status_badge(str(terminal.get("terminal_relaunched", False)).lower())),
         ("Dry run only", _status_badge(str(ea.get("dry_run_only", False)).lower())),
         ("Broker action allowed", _status_badge(str(ea.get("broker_action_allowed", False)).lower())),
+        ("Observer dashboard", f'<a href="{_esc(_link("demo-observer-dashboard.html"))}">Open demo observer dashboard</a>'),
         ("Compile log", _esc(_cell(ea.get("compile_log", "n/a")))),
         ("Profile backup", _esc(_cell(terminal.get("profile_backup_dir", "n/a")))),
     ]
@@ -1549,6 +1555,8 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
 
 def _candidate_status(item: dict[str, str]) -> str:
     backlog_status = item.get("backlog_status", "").upper()
+    if "BLOCKED" in backlog_status:
+        return "DATA_BLOCKED"
     if "PROVISIONAL" in backlog_status or "REGISTERED" in backlog_status or "PLANNED" in backlog_status:
         return "PROVISIONAL"
     if backlog_status.startswith("REJECTED"):
@@ -1572,6 +1580,8 @@ def _candidate_filter_status(status: str) -> str:
         return "accepted"
     if status == "PROVISIONAL":
         return "pending"
+    if status == "DATA_BLOCKED":
+        return "blocked"
     return "rejected"
 
 
@@ -1581,7 +1591,9 @@ def _candidate_sort_rank(item: dict[str, str]) -> int:
         return 0
     if status == "PROVISIONAL":
         return 1
-    return 2
+    if status == "DATA_BLOCKED":
+        return 2
+    return 3
 
 
 def _table_status_badge(status: str) -> str:
@@ -1698,6 +1710,7 @@ def _monthly_status_options() -> str:
         ("all", "All classifications"),
         ("accepted", "Accepted EAs"),
         ("pending", "Provisional EAs"),
+        ("blocked", "Data-blocked EAs"),
         ("rejected", "Rejected EAs"),
     )
     return (
@@ -1964,6 +1977,9 @@ def _artifact_links() -> str:
         ("Phase 2 readiness consistency", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_CONSISTENCY.md"),
         ("Phase 2 experimental demo terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_TERMINAL.md"),
         ("Phase 2 experimental demo attachments", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.md"),
+        ("Demo observer dashboard", "demo-observer-dashboard.html"),
+        ("Demo observer dashboard JSON", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_OBSERVER_DASHBOARD.json"),
+        ("Demo observer dashboard ledger", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_OBSERVER_DASHBOARD_LEDGER.csv"),
         ("Phase 2 demo next actions", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_NEXT_ACTIONS.md"),
         ("Phase 2 owner action packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_OWNER_ACTION_PACKET.md"),
         ("Phase 2 VPS bootstrap packet", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md"),
@@ -2413,6 +2429,8 @@ def _status_class(value: str) -> str:
         return "pending"
     if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper or "GREEN" in upper:
         return "pass"
+    if "DATA_BLOCKED" in upper:
+        return "pending"
     if "FAIL" in upper or "REJECTED" in upper or "BLOCKED" in upper:
         return "fail"
     if "PENDING" in upper or "PROVISIONAL" in upper or "WARN" in upper or "NOT_READY" in upper or "%" in upper or "ORANGE" in upper or "YELLOW" in upper:

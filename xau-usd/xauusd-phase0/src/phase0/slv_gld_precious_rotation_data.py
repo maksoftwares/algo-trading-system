@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_slv_gld_precious_beta_rotation_followthrough_v0"
-EXPERT_NAMES = ("h1_slv_gld_precious_beta_rotation_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_slv_gld_precious_beta_rotation_followthrough_v0",
+    "h4_slv_gld_precious_beta_reversal_v0",
+)
 SLV_GLD_PRECIOUS_ROTATION_FRAME_KEY = "slv_gld_precious_rotation"
 SLV_GLD_PRECIOUS_ROTATION_REFERENCE_PATH = Path("data/reference/etf/slv_gld_daily_yahoo_2015_2025.csv")
 

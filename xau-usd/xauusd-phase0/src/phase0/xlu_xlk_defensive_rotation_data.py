@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_xlu_xlk_defensive_rotation_followthrough_v0"
-EXPERT_NAMES = ("h1_xlu_xlk_defensive_rotation_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_xlu_xlk_defensive_rotation_followthrough_v0",
+    "h4_xlu_xlk_defensive_rotation_reversal_v0",
+)
 XLU_XLK_DEFENSIVE_ROTATION_FRAME_KEY = "xlu_xlk_defensive_rotation"
 XLU_XLK_DEFENSIVE_ROTATION_REFERENCE_PATH = Path("data/reference/etf/xlu_xlk_daily_yahoo_2015_2025.csv")
 

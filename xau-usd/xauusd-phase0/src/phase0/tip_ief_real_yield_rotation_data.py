@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_tip_ief_real_yield_rotation_followthrough_v0"
-EXPERT_NAMES = ("h1_tip_ief_real_yield_rotation_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_tip_ief_real_yield_rotation_followthrough_v0",
+    "h4_tip_ief_real_yield_rotation_reversal_v0",
+)
 TIP_IEF_REAL_YIELD_ROTATION_FRAME_KEY = "tip_ief_real_yield_rotation"
 TIP_IEF_REAL_YIELD_ROTATION_REFERENCE_PATH = Path("data/reference/etf/tip_ief_daily_yahoo_2015_2025.csv")
 

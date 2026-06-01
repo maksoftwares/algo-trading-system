@@ -136,7 +136,10 @@ def _parse_latest_log(logs_dir: Path) -> dict[str, Any]:
             "trading_enabled": [],
             "expert_events": [],
         }
-    logs = sorted(logs_dir.glob("*.log"), key=lambda path: (path.stat().st_mtime, path.name))
+    logs = sorted(
+        (path for path in logs_dir.glob("*.log") if path.name.lower() != "metaeditor.log"),
+        key=lambda path: (path.stat().st_mtime, path.name),
+    )
     latest_log = logs[-1] if logs else None
     if latest_log is None:
         return {

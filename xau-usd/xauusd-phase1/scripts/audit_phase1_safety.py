@@ -16,6 +16,9 @@ FORBIDDEN_TERMS = (
 SCAN_SUFFIXES = {".mq5", ".mqh", ".py"}
 SOURCE_PARTS = ("mt5", "scripts")
 IGNORED_PARTS = {"__pycache__", ".pytest_cache", ".venv", "outputs", "docs"}
+ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES = {
+    "Phase2ExperimentalDemoExecutor.mq5",
+}
 
 
 @dataclass(frozen=True)
@@ -30,6 +33,8 @@ def audit_phase1_tree(root: Path) -> list[SafetyFinding]:
     findings: list[SafetyFinding] = []
     for path in _scan_paths(root):
         text = path.read_text(encoding="utf-8", errors="replace")
+        if path.name in ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES:
+            continue
         for line_number, line in enumerate(text.splitlines(), start=1):
             for term in FORBIDDEN_TERMS:
                 if term in line:

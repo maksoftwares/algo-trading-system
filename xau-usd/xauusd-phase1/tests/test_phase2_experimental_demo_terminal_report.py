@@ -67,6 +67,32 @@ def test_experimental_demo_terminal_is_ready_when_clean_demo_context(tmp_path: P
     assert payload["live_trading_authorized"] is False
 
 
+def test_experimental_demo_terminal_ignores_metaeditor_log(tmp_path: Path):
+    module = _load_module()
+    terminal = _terminal_with_log(
+        tmp_path,
+        [
+            "OO\t0\t01:07:58.100\tTerminal\tMetaTrader 5 x64 build 5833 started for MetaQuotes Ltd.",
+            "RM\t0\t01:07:59.258\tNetwork\t'1025742': authorized on Capital.ComMena-Demo through Access Point 1 (ping: 169.89 ms, build 5800)",
+            "CI\t0\t01:07:59.601\tNetwork\t'1025742': terminal synchronized with Capital Com Mena Securities Trading L.L.C: 0 positions, 0 orders, 232 symbols, 0 spreads",
+            "PI\t0\t01:07:59.601\tNetwork\t'1025742': trading has been enabled - hedging mode",
+        ],
+    )
+    metaeditor_log = terminal / "logs" / "metaeditor.log"
+    metaeditor_log.write_text("compile output without authorization lines", encoding="utf-8")
+    metaeditor_log.touch()
+
+    output = module.generate_phase2_experimental_demo_terminal_report(
+        root=tmp_path / "xauusd-phase1",
+        terminal_data_dir=terminal,
+        terminal_exe=_terminal_exe(tmp_path),
+    )
+
+    payload = json.loads(output.json_path.read_text(encoding="utf-8"))
+    assert output.status == "DEMO_TERMINAL_VERIFIED_READY_FOR_SAFE_SETUP"
+    assert payload["terminal"]["latest_log"].endswith("20260529.log")
+
+
 def test_experimental_demo_terminal_fails_when_latest_authorization_is_live(tmp_path: Path):
     module = _load_module()
     terminal = _terminal_with_log(

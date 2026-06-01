@@ -11,6 +11,7 @@ EXPERT_NAME = "h1_vix_term_structure_inversion_reversal_v0"
 EXPERT_NAMES = (
     "h1_vix_term_structure_inversion_reversal_v0",
     "h1_vix_term_structure_inversion_followthrough_v0",
+    "h4_vix_term_structure_inversion_reversal_v0",
 )
 VIX_TERM_STRUCTURE_FRAME_KEY = "vix_term_structure"
 VIX_TERM_STRUCTURE_RAW_DIR = Path("data/raw/risk")

@@ -8,7 +8,10 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_xlp_xly_consumer_rotation_followthrough_v0"
-EXPERT_NAMES = ("h1_xlp_xly_consumer_rotation_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_xlp_xly_consumer_rotation_followthrough_v0",
+    "h4_xlp_xly_consumer_rotation_reversal_v0",
+)
 XLP_XLY_CONSUMER_ROTATION_FRAME_KEY = "xlp_xly_consumer_rotation"
 XLP_XLY_CONSUMER_ROTATION_REFERENCE_PATH = Path("data/reference/etf/xlp_xly_daily_yahoo_2015_2025.csv")
 
