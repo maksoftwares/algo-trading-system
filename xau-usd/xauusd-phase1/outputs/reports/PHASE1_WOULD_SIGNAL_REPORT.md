@@ -8,15 +8,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| would_signal_rows | PASS | Would-signal rows observed: 157. |
-| would_signal_clusters | PASS | Setup clusters observed: 157. |
+| would_signal_rows | PASS | Would-signal rows observed: 168. |
+| would_signal_clusters | PASS | Setup clusters observed: 168. |
 | would_signal_dry_run | PASS | All would-signal rows stayed dry-run. |
 | would_signal_permission_lock | PASS | All would-signal rows kept permission false. |
 
 ## Summary
 
-- Would-signal rows: 157
-- Setup clusters: 157
+- Would-signal rows: 168
+- Setup clusters: 168
 - Directions observed: LONG, SHORT
 - Level kinds observed: latest_swing_high, latest_swing_low, previous_daily_high, previous_daily_low, previous_weekly_low
 - Observers observed: breakout_retest, swing_breakout_retest_v0
@@ -26,9 +26,9 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Bucket | Count |
 | --- | --- |
-| BR only | 21 |
+| BR only | 24 |
 | SBR only | 0 |
-| Both same direction | 68 |
+| Both same direction | 72 |
 | Both opposite direction | 0 |
 
 ## Setup Clusters
@@ -192,39 +192,39 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | WS155 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4538.78 | 4540.85 | 4535.69 | 4548.60 | 2026.05.29 14:55:00 | 2026.05.29 14:55:00 |
 | WS156 | breakout_retest | 1 | SHORT | latest_swing_low | 4560.71 | 4559.78 | 4561.88 | 4556.62 | 2026.05.29 18:45:00 | 2026.05.29 18:45:00 |
 | WS157 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4560.71 | 4559.78 | 4561.88 | 4556.62 | 2026.05.29 18:45:00 | 2026.05.29 18:45:00 |
+| WS158 | breakout_retest | 1 | SHORT | latest_swing_low | 4542.48 | 4539.97 | 4543.58 | 4534.56 | 2026.05.31 23:20:00 | 2026.05.31 23:20:00 |
+| WS159 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4542.48 | 4539.97 | 4543.58 | 4534.56 | 2026.05.31 23:20:00 | 2026.05.31 23:20:00 |
+| WS160 | breakout_retest | 1 | SHORT | latest_swing_low | 4542.48 | 4540.97 | 4543.92 | 4536.54 | 2026.05.31 23:25:00 | 2026.05.31 23:25:00 |
+| WS161 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4542.48 | 4540.97 | 4543.92 | 4536.54 | 2026.05.31 23:25:00 | 2026.05.31 23:25:00 |
+| WS162 | breakout_retest | 1 | SHORT | latest_swing_low | 4535.02 | 4529.73 | 4537.10 | 4518.68 | 2026.06.01 01:30:00 | 2026.06.01 01:30:00 |
+| WS163 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4535.02 | 4529.73 | 4537.10 | 4518.68 | 2026.06.01 01:30:00 | 2026.06.01 01:30:00 |
+| WS164 | breakout_retest | 1 | SHORT | latest_swing_low | 4523.56 | 4519.74 | 4524.34 | 4512.83 | 2026.06.01 03:40:00 | 2026.06.01 03:40:00 |
+| WS165 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4523.56 | 4519.74 | 4524.34 | 4512.83 | 2026.06.01 03:40:00 | 2026.06.01 03:40:00 |
+| WS166 | breakout_retest | 1 | SHORT | previous_daily_low | 4516.75 | 4515.33 | 4519.91 | 4508.45 | 2026.06.01 04:10:00 | 2026.06.01 04:10:00 |
+| WS167 | breakout_retest | 1 | SHORT | previous_daily_low | 4516.75 | 4515.03 | 4517.82 | 4510.85 | 2026.06.01 04:35:00 | 2026.06.01 04:35:00 |
+| WS168 | breakout_retest | 1 | SHORT | previous_daily_low | 4516.75 | 4514.20 | 4517.46 | 4509.32 | 2026.06.01 04:50:00 | 2026.06.01 04:50:00 |
 
 ## Direction Counts
 
 | Value | Count |
 | --- | --- |
 | LONG | 73 |
-| SHORT | 84 |
+| SHORT | 95 |
 
 ## Level Kind Counts
 
 | Value | Count |
 | --- | --- |
 | latest_swing_high | 66 |
-| latest_swing_low | 69 |
+| latest_swing_low | 77 |
 | previous_daily_high | 7 |
-| previous_daily_low | 5 |
+| previous_daily_low | 8 |
 | previous_weekly_low | 10 |
 
 ## Would-Signal Rows
 
 | Observer | Broker Time | Bar Time | Direction | Level Kind | Level | Entry | Stop | Target | Spread | Risk | Execution | Permission | Dry Run |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| breakout_retest | 2026.05.28 10:40:01 | 2026.05.28 10:40:00 | SHORT | previous_daily_low | 4401.21 | 4397.91 | 4402.76 | 4390.64 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.28 11:25:00 | 2026.05.28 11:25:00 | SHORT | latest_swing_low | 4389.67 | 4386.49 | 4390.90 | 4379.88 | 75.00 | NORMAL | EXECUTION_OK | false | true |
-| swing_breakout_retest_v0 | 2026.05.28 11:25:00 | 2026.05.28 11:25:00 | SHORT | latest_swing_low | 4389.67 | 4386.49 | 4390.90 | 4379.88 | 75.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.28 11:30:00 | 2026.05.28 11:30:00 | SHORT | latest_swing_low | 4389.67 | 4385.45 | 4390.50 | 4377.88 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| swing_breakout_retest_v0 | 2026.05.28 11:30:00 | 2026.05.28 11:30:00 | SHORT | latest_swing_low | 4389.67 | 4385.45 | 4390.50 | 4377.88 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.28 11:45:00 | 2026.05.28 11:45:00 | SHORT | latest_swing_low | 4389.67 | 4385.69 | 4390.52 | 4378.45 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| swing_breakout_retest_v0 | 2026.05.28 11:45:00 | 2026.05.28 11:45:00 | SHORT | latest_swing_low | 4389.67 | 4385.69 | 4390.52 | 4378.45 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.28 11:50:00 | 2026.05.28 11:50:00 | SHORT | latest_swing_low | 4389.67 | 4384.90 | 4390.74 | 4376.13 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| swing_breakout_retest_v0 | 2026.05.28 11:50:00 | 2026.05.28 11:50:00 | SHORT | latest_swing_low | 4389.67 | 4384.90 | 4390.74 | 4376.13 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.28 12:25:00 | 2026.05.28 12:25:00 | SHORT | latest_swing_low | 4389.67 | 4387.42 | 4393.17 | 4378.79 | 50.00 | NORMAL | EXECUTION_OK | false | true |
-| swing_breakout_retest_v0 | 2026.05.28 12:25:00 | 2026.05.28 12:25:00 | SHORT | latest_swing_low | 4389.67 | 4387.42 | 4393.17 | 4378.79 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.28 20:45:00 | 2026.05.28 20:45:00 | SHORT | latest_swing_low | 4498.46 | 4496.20 | 4500.42 | 4489.87 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.05.28 20:45:00 | 2026.05.28 20:45:00 | SHORT | latest_swing_low | 4498.46 | 4496.20 | 4500.42 | 4489.87 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.28 22:10:00 | 2026.05.28 22:10:00 | SHORT | latest_swing_low | 4498.46 | 4494.04 | 4499.71 | 4485.53 | 50.00 | NORMAL | EXECUTION_OK | false | true |
@@ -264,3 +264,14 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | swing_breakout_retest_v0 | 2026.05.29 14:55:00 | 2026.05.29 14:55:00 | LONG | latest_swing_high | 4538.78 | 4540.85 | 4535.69 | 4548.60 | 75.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.29 18:45:01 | 2026.05.29 18:45:00 | SHORT | latest_swing_low | 4560.71 | 4559.78 | 4561.88 | 4556.62 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.05.29 18:45:01 | 2026.05.29 18:45:00 | SHORT | latest_swing_low | 4560.71 | 4559.78 | 4561.88 | 4556.62 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.05.31 23:20:00 | 2026.05.31 23:20:00 | SHORT | latest_swing_low | 4542.48 | 4539.97 | 4543.58 | 4534.56 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.05.31 23:20:00 | 2026.05.31 23:20:00 | SHORT | latest_swing_low | 4542.48 | 4539.97 | 4543.58 | 4534.56 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.05.31 23:25:00 | 2026.05.31 23:25:00 | SHORT | latest_swing_low | 4542.48 | 4540.97 | 4543.92 | 4536.54 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.05.31 23:25:00 | 2026.05.31 23:25:00 | SHORT | latest_swing_low | 4542.48 | 4540.97 | 4543.92 | 4536.54 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.01 01:30:00 | 2026.06.01 01:30:00 | SHORT | latest_swing_low | 4535.02 | 4529.73 | 4537.10 | 4518.68 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.06.01 01:30:00 | 2026.06.01 01:30:00 | SHORT | latest_swing_low | 4535.02 | 4529.73 | 4537.10 | 4518.68 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.01 03:40:00 | 2026.06.01 03:40:00 | SHORT | latest_swing_low | 4523.56 | 4519.74 | 4524.34 | 4512.83 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.06.01 03:40:00 | 2026.06.01 03:40:00 | SHORT | latest_swing_low | 4523.56 | 4519.74 | 4524.34 | 4512.83 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.01 04:10:00 | 2026.06.01 04:10:00 | SHORT | previous_daily_low | 4516.75 | 4515.33 | 4519.91 | 4508.45 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.01 04:35:00 | 2026.06.01 04:35:00 | SHORT | previous_daily_low | 4516.75 | 4515.03 | 4517.82 | 4510.85 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.01 04:50:00 | 2026.06.01 04:50:00 | SHORT | previous_daily_low | 4516.75 | 4514.20 | 4517.46 | 4509.32 | 50.00 | NORMAL | EXECUTION_OK | false | true |

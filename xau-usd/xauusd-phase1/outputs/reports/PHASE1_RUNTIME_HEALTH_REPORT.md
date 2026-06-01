@@ -8,34 +8,34 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| decision_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` (1308106 bytes). |
-| startup_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` (1373 bytes). |
-| shutdown_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv` (2204 bytes). |
-| decision_rows | PASS | Decision rows: 1407. |
-| latest_freshness | PASS | Latest row age is 2267.4 minute(s), but local date is a weekend market break; runtime freshness is paused. |
+| decision_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` (1382904 bytes). |
+| startup_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` (1916 bytes). |
+| shutdown_log | PASS | Found `C:\MT5PortableGoldMission\MQL5\Files\shutdown_log.csv` (2480 bytes). |
+| decision_rows | PASS | Decision rows: 1487. |
+| latest_freshness | PASS | Latest row age is 0.5 minute(s); limit 15. |
 | dry_run_lock | PASS | All decision rows stayed dry-run. |
 | permission_lock | PASS | All decision rows kept permission false. |
-| server_time_status | PASS | Latest row reports CLOCK_OK; historical non-CLOCK_OK rows: 1. |
+| server_time_status | PASS | Latest row reports CLOCK_OK; historical non-CLOCK_OK rows: 3. |
 | exact_duplicate_rows | PASS | No exact duplicate runtime rows found. |
-| unique_bar_gaps | PASS | Only expected market-break gaps found: 7. |
-| startup_shutdown_rows | PASS | Startup and shutdown logs are both present; shutdown rows exceed startup rows (14 > 3) after restart/test cycles. |
+| unique_bar_gaps | PASS | Only expected market-break gaps found: 8. |
+| startup_shutdown_rows | PASS | Startup and shutdown logs are both present; shutdown rows exceed startup rows (16 > 5) after restart/test cycles. |
 
 ## Runtime Shape
 
-- Decision rows: 1407
-- Startup rows: 3
-- Shutdown rows: 14
+- Decision rows: 1487
+- Startup rows: 5
+- Shutdown rows: 16
 - Unique run IDs: 6
 - First unique M5 bar: 2026.05.22 11:00:00
-- Latest unique M5 bar: 2026.05.29 20:55:00
+- Latest unique M5 bar: 2026.06.01 05:40:00
 - Larger-than-M5 gaps: 0
-- Expected market-break gaps: 7
+- Expected market-break gaps: 8
 
 ## Latest Row
 
 | Run ID | Broker Time | Local Time | Bar Time | Dry Run | Permission | Server Time | BR Stage |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.7 | 2026.05.29 20:55:00 | 2026.05.30 02:24:58 | 2026.05.29 20:55:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
+| phase1-dry-run-v0.7 | 2026.06.01 05:40:00 | 2026.06.01 09:39:59 | 2026.06.01 05:40:00 | true | false | CLOCK_OK | WAIT_LEVEL_BREAK_RETEST |
 
 ## Recent Gaps
 
@@ -50,4 +50,4 @@ No rows.
 | phase1-dry-run-v0.6-manual-lock-test | 1 | 2026.05.22 12:40:00 | 2026.05.22 12:40:00 |
 | phase1-dry-run-v0.6-monthly-lock-test | 1 | 2026.05.22 12:40:00 | 2026.05.22 12:40:00 |
 | phase1-dry-run-v0.6-weekly-lock-test | 1 | 2026.05.22 12:40:00 | 2026.05.22 12:40:00 |
-| phase1-dry-run-v0.7 | 674 | 2026.05.27 10:40:00 | 2026.05.29 20:55:00 |
+| phase1-dry-run-v0.7 | 754 | 2026.05.27 10:40:00 | 2026.06.01 05:40:00 |

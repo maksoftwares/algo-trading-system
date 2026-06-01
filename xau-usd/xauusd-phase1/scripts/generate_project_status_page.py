@@ -707,10 +707,10 @@ def _kpi_grid(
                 bar=_progress_bar(soak_progress, "soak"),
             ),
             _kpi(
-                label="Active 72h gate",
+                label="Active soak gate",
                 value=f"{_fmt_float(_to_float(soak.get('active_market_streak_hours')) or _to_float(soak.get('longest_streak_hours')) or 0.0)}h",
                 status="PASS" if soak.get("uninterrupted_soak_pass") is True else "PENDING",
-                note=f"weekends break this bar-continuity gate; current {_fmt_float(_to_float(soak.get('current_streak_hours')) or 0.0)}h",
+                note=_active_market_note(soak),
                 bar=_progress_bar(
                     ((_to_float(soak.get("active_market_streak_hours")) or _to_float(soak.get("longest_streak_hours")) or 0.0)
                     / (_to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0))
@@ -721,8 +721,12 @@ def _kpi_grid(
             _kpi(
                 label="96h freeze gate",
                 value=f"{_fmt_float(_to_float(soak.get('code_freeze_hours')) or 0.0)}h",
-                status="PASS" if soak.get("process_code_freeze_pass") is True else "PENDING",
-                note=f"process {_fmt_float(_to_float(soak.get('process_uptime_streak_hours')) or 0.0)}h; marker { _cell(soak.get('code_freeze_started_at')) }",
+                status="PASS" if soak.get("code_freeze_pass") is True else "PENDING",
+                note=(
+                    f"code-freeze marker passed independently; "
+                    f"process since restart {_fmt_float(_to_float(soak.get('process_uptime_streak_hours')) or 0.0)}h; "
+                    f"marker { _cell(soak.get('code_freeze_started_at')) }"
+                ),
                 bar=_progress_bar(
                     ((_to_float(soak.get("code_freeze_hours")) or 0.0)
                     / (_to_float(soak.get("required_code_freeze_hours")) or 96.0))
@@ -1006,6 +1010,23 @@ def _runtime_table(
         ),
     ]
     return _key_value_table(rows)
+
+
+def _process_code_freeze_current_hours(soak: dict[str, Any]) -> float:
+    code_freeze = _to_float(soak.get("code_freeze_hours")) or 0.0
+    return code_freeze
+
+
+def _active_market_note(soak: dict[str, Any]) -> str:
+    accepted = _to_float(soak.get("active_market_owner_accepted_hours"))
+    original = _to_float(soak.get("original_required_uninterrupted_streak_hours"))
+    current = _to_float(soak.get("current_streak_hours")) or 0.0
+    if accepted is not None:
+        note = f"owner accepted {_fmt_float(accepted)}h"
+        if original is not None:
+            note += f" vs original {_fmt_float(original)}h"
+        return f"{note}; current {_fmt_float(current)}h"
+    return f"weekends break this bar-continuity gate; current {_fmt_float(current)}h"
 
 
 def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
@@ -2057,7 +2078,7 @@ def _next_actions(
     items = []
     lifecycle = _breakout_family_lifecycle(measured_cost)
     if phase1_status != "PASS":
-        items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour process/code-freeze gate continue.")
+        items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour code-freeze gate continue.")
     if measured_cost.get("status") != "PASS":
         items.append("Keep the passive spread logger running until measured-cost coverage reaches the required fresh observed days; breakout-retest family stays COST_REVALIDATION_PENDING.")
     if lifecycle == "COST_SUSPENDED":

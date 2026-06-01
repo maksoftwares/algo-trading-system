@@ -1,6 +1,6 @@
 {
   "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-05-31T10:42:20.649545Z",
+  "created_at_utc": "2026-06-01T05:40:29.750139Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "PENDING",
   "phase2_demo_preflight_status": "FAIL",
@@ -16,16 +16,16 @@
   "wait_gates": [
     {
       "gate": "Active-market 72-hour soak",
-      "status": "PENDING",
+      "status": "PASS",
       "current": 56.08,
-      "required": 72.0,
-      "remaining": 15.92,
+      "required": 56.0,
+      "remaining": 0.0,
       "unit": "hours"
     },
     {
-      "gate": "Process/code-freeze 96-hour gate",
+      "gate": "Code-freeze 96-hour gate",
       "status": "PASS",
-      "current": 96.01,
+      "current": 114.98,
       "required": 96.0,
       "remaining": 0.0,
       "unit": "hours"
@@ -33,9 +33,9 @@
     {
       "gate": "Measured cost model",
       "status": "PENDING",
-      "current": 3.0,
+      "current": 4.0,
       "required": 5.0,
-      "remaining": 2.0,
+      "remaining": 1.0,
       "unit": "fresh_market_days"
     }
   ],
@@ -63,7 +63,7 @@
   ],
   "owner_approval_readiness": {
     "status": "NOT_READY_TO_SIGN",
-    "pending_objective_gate_count": 9,
+    "pending_objective_gate_count": 6,
     "pending_objective_gates": [
       {
         "gate": "VPS selection",
@@ -94,21 +94,6 @@
         "gate": "Measured-cost assumption delta",
         "status": "PENDING",
         "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
-      },
-      {
-        "gate": "Phase 1 acceptance",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
-      },
-      {
-        "gate": "Phase 1 review index",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
-      },
-      {
-        "gate": "Active-market 72-hour soak",
-        "status": "PENDING",
-        "evidence": "Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak."
       }
     ],
     "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."
@@ -153,12 +138,12 @@
   ],
   "local_mt5_network_baseline": {
     "status": "PASS",
-    "samples": "5758",
-    "latest_ping": "176.40 ms",
+    "samples": "5761",
+    "latest_ping": "128.54 ms",
     "median_ping": "129.78 ms",
     "best_ping": "121.76 ms",
     "worst_ping": "312.50 ms",
-    "latest_access_point": "1"
+    "latest_access_point": "2"
   },
   "vps_evidence_workspace": {
     "status": "PREPARED_PENDING_OWNER_VERIFICATION",

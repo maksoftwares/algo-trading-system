@@ -33,7 +33,7 @@ def test_phase2_readiness_is_pending_until_soak_and_approval_pass(tmp_path):
     assert "`breakout_retest` is the only possible execution-eligible stream" in report
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Active-market 72-hour soak" and item.status == "PENDING" for item in output.items)
-    assert any(item.gate == "Process/code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Phase 1 observer parity" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Project owner approval" and item.status == "PENDING" for item in output.items)
 

@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-05-31
+Last updated: 2026-06-01
 
 ## Workspace
 
@@ -13,6 +13,7 @@ Last updated: 2026-05-31
 - Remote: `https://github.com/maksoftwares/algo-trading-system.git`
 - Single-page status dashboard: `status.html` at the repo root.
 - Latest shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_31.md`; records the planned shutdown, captured 96-hour process/code-freeze PASS evidence, and Monday 2026-06-01 market-open resume procedure.
+- Latest resume checkpoint: `xau-usd\xauusd-phase1\docs\RESUME_CHECKPOINT_2026_06_01.md`; records the Monday restart, Dubai timezone preset correction, refreshed reports, and experimental demo observer resume.
 
 ## Standing Rules
 
@@ -26,6 +27,14 @@ Last updated: 2026-05-31
 
 ## Current State
 
+- 2026-06-01 market-open resume:
+  - Running terminals: `C:\MT5PortableGoldMission\terminal64.exe`, `C:\MT5PortableSpreadLogger\terminal64.exe`, and `C:\Program Files\MetaTrader 5\terminal64.exe`.
+  - First Phase 1 rows after restart reported `LOCAL_CLOCK_DRIFT` because the machine is on Arabian Standard Time (`UTC+04:00`) while the deployed safe preset still expected India Standard Time (`UTC+05:30`). The deployed safe preset was corrected to `InpExpectedLocalUtcOffsetMinutes=240`, and the Phase 1 dry-run terminal was restarted.
+  - Latest Phase 1 row is back to `server_time_status=CLOCK_OK`, with `dry_run=true` and `trade_permission=false`.
+  - Latest periodic checks are PASS; Phase 1 acceptance remains PENDING; Phase 2 readiness is PENDING because objective Phase 2 gates are still unresolved.
+  - Process/code-freeze reporting now uses the latest startup row for the current process. The pre-shutdown 96-hour evidence remains captured in `SHUTDOWN_RESUME_CHECKPOINT_2026_05_31.md`, but the current restarted process uptime is fresh and must rebuild separately.
+  - Experimental demo observer terminal is verified on `Capital.ComMena-Demo`, synchronized with `0 positions` and `0 orders`, with only expected `Phase2ExperimentalDemoObserver` telemetry charts active. This does not authorize canonical Phase 2 or broker execution.
+  - Current reports/status must be read from `PHASE1_STATUS_SUMMARY.json`, `PHASE1_ACCEPTANCE_REPORT.md`, `PHASE2_READINESS_REPORT.md`, `PHASE2_EXPERIMENTAL_DEMO_TERMINAL.md`, and root `status.html`.
 - 2026-05-28 Phase 3 experimental sandbox:
   - Owner authorized a repo-only Phase 3 experimental lane that assumes Phase 2 may pass for design purposes only. This does not mark Phase 2 as passed and does not authorize paper-mode implementation or broker-side execution.
   - New isolated package: `xau-usd\xauusd-phase3-experimental`.

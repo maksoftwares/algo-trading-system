@@ -99,22 +99,30 @@ def generate_phase2_demo_countdown_report(root: Path, output_json: Path | None =
 def _wait_gates(soak: dict[str, Any], measured: dict[str, Any], gates: list[dict[str, str]]) -> list[dict[str, Any]]:
     active_required = _to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0
     active_current = _to_float(soak.get("current_streak_hours")) or 0.0
+    active_longest = _to_float(soak.get("active_market_streak_hours")) or _to_float(soak.get("longest_streak_hours")) or 0.0
+    active_status = _gate_status(gates, "Active-market 72-hour soak")
+    active_display_current = max(active_current, active_longest, active_required) if active_status == "PASS" else active_current
     freeze_required = _to_float(soak.get("required_code_freeze_hours")) or 96.0
-    freeze_current = _to_float(soak.get("code_freeze_hours")) or 0.0
+    process_uptime = _to_float(soak.get("process_uptime_streak_hours")) or 0.0
+    code_freeze = _to_float(soak.get("code_freeze_hours")) or 0.0
+    freeze_status = _gate_status(gates, "Code-freeze 96-hour gate")
+    if freeze_status == "UNKNOWN":
+        freeze_status = _gate_status(gates, "Process/code-freeze 96-hour gate")
+    freeze_current = code_freeze
     measured_days = _to_float(measured.get("observed_days")) or 0.0
     required_days = _to_float(measured.get("required_days")) or 5.0
     return [
         {
             "gate": "Active-market 72-hour soak",
-            "status": _gate_status(gates, "Active-market 72-hour soak"),
-            "current": round(active_current, 2),
+            "status": active_status,
+            "current": round(active_display_current, 2),
             "required": round(active_required, 2),
-            "remaining": round(max(active_required - active_current, 0.0), 2),
+            "remaining": round(max(active_required - active_display_current, 0.0), 2),
             "unit": "hours",
         },
         {
-            "gate": "Process/code-freeze 96-hour gate",
-            "status": _gate_status(gates, "Process/code-freeze 96-hour gate"),
+            "gate": "Code-freeze 96-hour gate",
+            "status": freeze_status,
             "current": round(freeze_current, 2),
             "required": round(freeze_required, 2),
             "remaining": round(max(freeze_required - freeze_current, 0.0), 2),

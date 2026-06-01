@@ -223,6 +223,27 @@ def test_process_uptime_uses_timestamp_utc():
     assert summary.process_uptime_streak_hours == 2.0
 
 
+def test_process_uptime_uses_latest_startup_row_for_same_run_id():
+    module = _load_module()
+    rows = [
+        _row("2026.05.27 10:40:00", run_id="phase1-dry-run-v0.7"),
+        _row("2026.06.01 00:00:00", run_id="phase1-dry-run-v0.7"),
+    ]
+    startup_rows = [
+        {"run_id": "phase1-dry-run-v0.7", "timestamp_utc": "2026.05.27 10:41:54"},
+        {"run_id": "phase1-dry-run-v0.7", "timestamp_utc": "2026.05.31 23:17:38"},
+    ]
+
+    summary = module.calculate_soak_streak(
+        rows,
+        startup_rows=startup_rows,
+        now=datetime(2026, 6, 1, 0, 17, 38),
+    )
+
+    assert summary.last_restart_utc == "2026-05-31T23:17:38Z"
+    assert summary.process_uptime_streak_hours == 1.0
+
+
 def test_code_freeze_and_process_uptime_are_separate_from_active_market_streak():
     module = _load_module()
     rows = _rows_at_cadence(datetime(2026, 5, 21, 12, 0), 13)

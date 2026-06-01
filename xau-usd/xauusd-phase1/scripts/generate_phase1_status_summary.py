@@ -18,11 +18,13 @@ from analyze_phase1_soak import analyze_phase1_soak
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from phase1_owner_acceptance import read_active_market_acceptance
 from phase1_soak_streak import CODE_FREEZE_MARKER_NAME, calculate_soak_streak, read_code_freeze_marker
 from verify_phase1_logs import verify_phase1_logs
 
 
 DECISION_LOG = "decision_log.csv"
+STARTUP_LOG = "startup_log.csv"
 REQUIRED_SOAK_DAYS = 5
 
 
@@ -73,13 +75,27 @@ def generate_phase1_status_summary(
             now=now,
         )
     rows = _read_csv(files_dir / DECISION_LOG)
+    startup_rows = _read_csv(files_dir / STARTUP_LOG)
     latest = rows[-1] if rows else {}
     soak_days = _soak_days(rows)
     soak_streak = calculate_soak_streak(
         rows,
         code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
         now=soak_now,
+        startup_rows=startup_rows,
     )
+    soak_payload = asdict(soak_streak)
+    active_acceptance = read_active_market_acceptance(source_root)
+    if active_acceptance is not None and soak_streak.longest_streak_hours >= active_acceptance.accepted_hours:
+        soak_payload["original_required_uninterrupted_streak_hours"] = soak_payload[
+            "required_uninterrupted_streak_hours"
+        ]
+        soak_payload["required_uninterrupted_streak_hours"] = active_acceptance.accepted_hours
+        soak_payload["uninterrupted_soak_pass"] = True
+        soak_payload["owner_accepted_active_market_soak_pass"] = True
+        soak_payload["active_market_owner_accepted_hours"] = active_acceptance.accepted_hours
+        soak_payload["active_market_owner_acceptance_path"] = str(active_acceptance.path)
+        soak_payload["active_market_owner_acceptance_token"] = active_acceptance.token
 
     summary = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -123,7 +139,7 @@ def generate_phase1_status_summary(
             "required_days": REQUIRED_SOAK_DAYS,
             "observed_days": round(soak_days, 4),
             "progress_pct": round(min(soak_days / REQUIRED_SOAK_DAYS, 1.0) * 100, 2),
-            **asdict(soak_streak),
+            **soak_payload,
         },
         "reports": {
             "log_report": str(log_status.report_path),

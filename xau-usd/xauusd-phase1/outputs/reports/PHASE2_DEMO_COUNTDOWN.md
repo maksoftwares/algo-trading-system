@@ -9,22 +9,22 @@ Overall status: DEMO_NOT_READY
 | Field | Value |
 | --- | --- |
 | Phase 2 readiness | PENDING |
-| Phase 1 acceptance | PENDING |
+| Phase 1 acceptance | PASS |
 | Measured cost model | PENDING |
 | Measured-cost revalidation | PENDING |
 | Measured-cost delta | PENDING |
 | Paper mode authorized | false |
 | Broker execution authorized | false |
 | Live trading authorized | false |
-| Pending gates | 10 |
+| Pending gates | 7 |
 
 ## Wait Gates
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 56.08 | 72.0 | 15.92 | hours |
-| Process/code-freeze 96-hour gate | PASS | 96.01 | 96.0 | 0.0 | hours |
-| Measured cost model | PENDING | 3.0 | 5.0 | 2.0 | fresh_market_days |
+| Active-market 72-hour soak | PASS | 56.08 | 56.0 | 0.0 | hours |
+| Code-freeze 96-hour gate | PASS | 114.98 | 96.0 | 0.0 | hours |
+| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
 
 ## Owner Actions
 
@@ -39,8 +39,8 @@ Overall status: DEMO_NOT_READY
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1407 |
-| latest_bar | 2026.05.29 20:55:00 |
+| decision_rows | 1487 |
+| latest_bar | 2026.06.01 05:40:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |

@@ -33,7 +33,7 @@ def test_phase2_demo_countdown_tracks_wait_gates_and_owner_actions(tmp_path: Pat
     assert payload["broker_execution_authorized"] is False
     assert payload["live_trading_authorized"] is False
     assert any(item["gate"] == "Active-market 72-hour soak" and item["remaining"] == 46.58 for item in payload["wait_gates"])
-    assert any(item["gate"] == "Process/code-freeze 96-hour gate" and item["remaining"] == 69.46 for item in payload["wait_gates"])
+    assert any(item["gate"] == "Code-freeze 96-hour gate" and item["remaining"] == 69.46 for item in payload["wait_gates"])
     assert any(item["gate"] == "Measured cost model" and item["remaining"] == 3.0 for item in payload["wait_gates"])
     assert any(item["gate"] == "VPS selection" for item in payload["owner_actions_now"])
     assert any(item["gate"] == "VPS first-day verification" for item in payload["owner_actions_now"])
@@ -77,7 +77,7 @@ def _write_readiness(path: Path) -> None:
                 "| VPS first-day verification | PENDING | first-day packet incomplete |",
                 "| Measured cost model | PENDING | two fresh days observed |",
                 "| Active-market 72-hour soak | PENDING | waiting |",
-                "| Process/code-freeze 96-hour gate | PENDING | waiting |",
+                "| Code-freeze 96-hour gate | PENDING | waiting |",
                 "| Project owner approval | PENDING | approval not signed |",
                 "",
             ]
@@ -102,6 +102,7 @@ def _write_summary(path: Path) -> None:
                 "soak": {
                     "current_streak_hours": 25.42,
                     "required_uninterrupted_streak_hours": 72.0,
+                    "process_uptime_streak_hours": 26.54,
                     "code_freeze_hours": 26.54,
                     "required_code_freeze_hours": 96.0,
                 },

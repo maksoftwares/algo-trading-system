@@ -206,7 +206,7 @@ def _render_report(
             "",
             "- Current work remains dry-run only.",
             "- Broker-action code remains outside the approved scope.",
-            "- Final Phase 1 acceptance still depends on any pending wall-clock, active-market continuity, runtime-health, and process/code-freeze gates shown above.",
+            "- Final Phase 1 acceptance still depends on any pending wall-clock, active-market continuity, runtime-health, and code-freeze gates shown above.",
             "",
         ]
     )

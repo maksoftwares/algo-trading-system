@@ -10,19 +10,20 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Rows | Rows Missing Tick Fresh | Weekend Rows Excluded | Tick Freshness | Source Files |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 50006 | 500 | 3 | 5 | 132017 | 55704 | 24987 | available | 10 |
+| 54092 | 500 | 4 | 5 | 136750 | 55704 | 25634 | available | 11 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 50006 | 50 | 75 | 180 |
+| global | all | all | XAUUSD | 54092 | 50 | 75 | 180 |
 
 ## Fresh Observed Dates
 
 - 2026-05-27
 - 2026-05-28
 - 2026-05-29
+- 2026-06-01
 
 ## Source Files
 
@@ -36,10 +37,11 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260529.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260530.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260531.csv
+- C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260601.csv
 
 ## Note
 
-Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 57024; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 24987. Missing freshness columns: none.
+Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 57024; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 25634. Missing freshness columns: none.
 
 ## Why Observed Days Reset
 

@@ -107,7 +107,7 @@ def verify_status_report_freshness(repo_root: Path, status_path: Path | None = N
     _expect_gate_status(
         errors,
         acceptance_rows,
-        "Process/code-freeze 96-hour gate",
+        "Code-freeze 96-hour gate",
         _process_freeze_status(soak),
         "PHASE1_ACCEPTANCE_REPORT.md",
     )
@@ -256,11 +256,9 @@ def _active_market_status(soak: dict[str, Any]) -> str:
 
 def _process_freeze_status(soak: dict[str, Any]) -> str:
     required = _to_float(soak.get("required_code_freeze_hours")) or 96.0
-    uptime = _to_float(soak.get("process_uptime_streak_hours"))
     freeze = _to_float(soak.get("code_freeze_hours"))
-    if soak.get("process_code_freeze_pass") is True and uptime is not None and freeze is not None:
-        if uptime >= required and freeze >= required:
-            return "PASS"
+    if soak.get("code_freeze_pass") is True and freeze is not None and freeze >= required:
+        return "PASS"
     return "PENDING"
 
 

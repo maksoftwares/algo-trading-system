@@ -1022,7 +1022,7 @@ def _write_phase1_acceptance_from_summary(path: Path, summary_path: Path) -> Non
     soak = summary["soak"]
     five_day = "PASS" if float(soak["progress_pct"]) >= 100 else "PENDING"
     active_market = "PASS" if soak.get("uninterrupted_soak_pass") is True else "PENDING"
-    process_freeze = "PASS" if soak.get("process_code_freeze_pass") is True else "PENDING"
+    process_freeze = "PASS" if soak.get("code_freeze_pass") is True else "PENDING"
     active_hours = float(soak.get("active_market_streak_hours", soak.get("longest_streak_hours", 0.0)))
     process_hours = float(soak.get("process_uptime_streak_hours", 0.0))
     path.write_text(
@@ -1042,7 +1042,7 @@ def _write_phase1_acceptance_from_summary(path: Path, summary_path: Path) -> Non
                 f"| Would-signal evidence | {status['would_signal']} | Report refreshed. |",
                 f"| Latest runtime row | PASS | bar_time={latest['bar_time']}; server_time={latest['server_time_status']}. |",
                 f"| Active-market 72-hour soak | {active_market} | Longest active streak: {active_hours:.2f}h. |",
-                f"| Process/code-freeze 96-hour gate | {process_freeze} | Process uptime streak: {process_hours:.2f}h. |",
+                f"| Code-freeze 96-hour gate | {process_freeze} | Process uptime streak: {process_hours:.2f}h. |",
                 f"| Five trading day soak | {five_day} | Observed {soak['observed_days']} of {soak['required_days']} days. |",
             ]
         ),

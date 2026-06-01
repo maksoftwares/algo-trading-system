@@ -38,9 +38,9 @@ def test_acceptance_report_is_pending_until_soak_duration_is_complete(tmp_path):
     assert "Would-signal evidence" in report
     assert "Soak history ledger" in report
     assert "Active-market 72-hour soak" in report
-    assert "Process/code-freeze 96-hour gate" in report
+    assert "Code-freeze 96-hour gate" in report
     assert "Five trading day soak" in report
-    assert "active-market continuity, process/code-freeze, and all runtime health gates" in report
+    assert "active-market continuity and all runtime health gates" in report
     assert any(item.gate == "Source safety audit" and item.status == "PASS" for item in output.items)
     assert any(item.gate == "Permission lock" and item.status == "PASS" for item in output.items)
     assert any(item.gate == "Runtime freshness" and item.status == "PASS" for item in output.items)
@@ -48,7 +48,7 @@ def test_acceptance_report_is_pending_until_soak_duration_is_complete(tmp_path):
     assert any(item.gate == "Would-signal evidence" and item.status == "WARN" for item in output.items)
     assert any(item.gate == "Soak history ledger" and item.status == "WARN" for item in output.items)
     assert any(item.gate == "Active-market 72-hour soak" and item.status == "PENDING" for item in output.items)
-    assert any(item.gate == "Process/code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
+    assert any(item.gate == "Code-freeze 96-hour gate" and item.status == "PENDING" for item in output.items)
     assert any(item.gate == "Five trading day soak" and item.status == "PENDING" for item in output.items)
 
 

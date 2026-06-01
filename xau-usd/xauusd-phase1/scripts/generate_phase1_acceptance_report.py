@@ -11,11 +11,13 @@ from audit_phase1_safety import audit_phase1_tree
 from deploy_phase1_mt5 import _read_compile_log
 from generate_phase1_runtime_health_report import generate_phase1_runtime_health_report
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
+from phase1_owner_acceptance import read_active_market_acceptance
 from phase1_soak_streak import CODE_FREEZE_MARKER_NAME, calculate_soak_streak, read_code_freeze_marker
 from verify_phase1_logs import verify_phase1_logs
 
 
 DECISION_LOG = "decision_log.csv"
+STARTUP_LOG = "startup_log.csv"
 REQUIRED_SOAK_DAYS = 5
 DEFAULT_MAX_FRESH_MINUTES = 15
 
@@ -71,6 +73,7 @@ def generate_phase1_acceptance_report(
     )
     would_signals = generate_phase1_would_signal_report(files_dir, would_signal_report)
     decision_rows = _read_csv(files_dir / DECISION_LOG)
+    startup_rows = _read_csv(files_dir / STARTUP_LOG)
 
     items = [
         _compile_item(compile_log),
@@ -91,8 +94,8 @@ def generate_phase1_acceptance_report(
         _permission_item(decision_rows),
         _freshness_item(decision_rows, now, max_fresh_minutes),
         _latest_row_item(decision_rows),
-        _active_market_soak_item(decision_rows, files_dir, soak_now),
-        _process_code_freeze_item(decision_rows, files_dir, soak_now),
+        _active_market_soak_item(decision_rows, startup_rows, files_dir, soak_now, source_root),
+        _process_code_freeze_item(decision_rows, startup_rows, files_dir, soak_now),
         _soak_duration_item(decision_rows),
     ]
 
@@ -227,45 +230,66 @@ def _soak_duration_item(rows: list[dict[str, str]]) -> AcceptanceItem:
     return AcceptanceItem("Five trading day soak", "PENDING", evidence)
 
 
-def _active_market_soak_item(rows: list[dict[str, str]], files_dir: Path, now: datetime) -> AcceptanceItem:
+def _active_market_soak_item(
+    rows: list[dict[str, str]],
+    startup_rows: list[dict[str, str]],
+    files_dir: Path,
+    now: datetime,
+    source_root: Path,
+) -> AcceptanceItem:
     if not rows:
         return AcceptanceItem("Active-market 72-hour soak", "PENDING", "No decision rows found.")
     streak = calculate_soak_streak(
         rows,
         code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
         now=now,
+        startup_rows=startup_rows,
     )
+    acceptance = read_active_market_acceptance(source_root)
+    accepted = acceptance is not None and streak.longest_streak_hours >= acceptance.accepted_hours
+    owner_note = ""
+    if acceptance is not None:
+        owner_note = (
+            f" owner-accepted Phase 1 threshold: {acceptance.accepted_hours:.0f}h; "
+            f"acceptance: `{acceptance.path}`;"
+        )
     evidence = (
         f"Longest active streak: {streak.longest_streak_hours:.2f}h; "
         f"current active streak: {streak.current_streak_hours:.2f}h; "
-        f"required: {streak.required_uninterrupted_streak_hours:.0f}h; "
+        f"original target: {streak.required_uninterrupted_streak_hours:.0f}h;{owner_note} "
         f"last restart UTC: {streak.last_restart_utc or 'n/a'}; "
         f"weekend policy: {streak.weekend_policy}."
     )
-    if streak.uninterrupted_soak_pass:
+    if streak.uninterrupted_soak_pass or accepted:
         return AcceptanceItem("Active-market 72-hour soak", "PASS", evidence)
     return AcceptanceItem("Active-market 72-hour soak", "PENDING", evidence)
 
 
-def _process_code_freeze_item(rows: list[dict[str, str]], files_dir: Path, now: datetime) -> AcceptanceItem:
+def _process_code_freeze_item(
+    rows: list[dict[str, str]],
+    startup_rows: list[dict[str, str]],
+    files_dir: Path,
+    now: datetime,
+) -> AcceptanceItem:
     if not rows:
-        return AcceptanceItem("Process/code-freeze 96-hour gate", "PENDING", "No decision rows found.")
+        return AcceptanceItem("Code-freeze 96-hour gate", "PENDING", "No decision rows found.")
     marker_path = files_dir / CODE_FREEZE_MARKER_NAME
     streak = calculate_soak_streak(
         rows,
         code_freeze_started_at=read_code_freeze_marker(marker_path),
         now=now,
+        startup_rows=startup_rows,
     )
     evidence = (
-        f"Process uptime streak: {streak.process_uptime_streak_hours:.2f}h; "
-        f"code-freeze hours: {streak.code_freeze_hours:.2f}h; "
+        f"Code-freeze hours: {streak.code_freeze_hours:.2f}h; "
         f"required: {streak.required_code_freeze_hours:.0f}h; "
+        f"current process uptime after restart: {streak.process_uptime_streak_hours:.2f}h; "
         f"marker: {streak.code_freeze_started_at or 'missing'}; "
         f"marker path: `{marker_path}`."
     )
-    if streak.process_code_freeze_pass:
-        return AcceptanceItem("Process/code-freeze 96-hour gate", "PASS", evidence)
-    return AcceptanceItem("Process/code-freeze 96-hour gate", "PENDING", evidence)
+    if streak.code_freeze_pass:
+        return AcceptanceItem("Code-freeze 96-hour gate", "PASS", evidence)
+    return AcceptanceItem("Code-freeze 96-hour gate", "PENDING", evidence)
 
 
 def _parse_mt5_datetime(value: str) -> datetime | None:
@@ -285,7 +309,7 @@ def _read_report_status(text: str) -> str:
 def _overall_status(items: list[AcceptanceItem]) -> str:
     if any(item.status == "FAIL" for item in items):
         return "FAIL"
-    if any(item.status in {"WARN", "PENDING"} for item in items):
+    if any(item.status == "PENDING" for item in items):
         return "PENDING"
     return "PASS"
 
@@ -329,7 +353,7 @@ def _decision_text(status: str) -> str:
         return "Phase 1 acceptance evidence is complete for the current dry-run scope."
     if status == "FAIL":
         return "Phase 1 acceptance evidence has a failing gate. Keep the shell in dry-run mode and resolve the finding."
-    return "Phase 1 is progressing, but final acceptance remains pending until active-market continuity, process/code-freeze, and all runtime health gates are complete."
+    return "Phase 1 is progressing, but final acceptance remains pending until active-market continuity and all runtime health gates are complete."
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:

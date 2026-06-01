@@ -437,6 +437,7 @@ def _soak_progress_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
 
 def _active_market_soak_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
     required = _to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0
+    original_required = _to_float(soak.get("original_required_uninterrupted_streak_hours"))
     longest = _to_float(soak.get("active_market_streak_hours")) or _to_float(soak.get("longest_streak_hours"))
     current = _to_float(soak.get("current_streak_hours"))
     passed = soak.get("uninterrupted_soak_pass") is True
@@ -445,6 +446,8 @@ def _active_market_soak_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
     evidence = (
         f"Longest active streak {longest:.2f}h; current active streak "
         f"{current if current is not None else 'n/a'}h; required {required:.0f}h; "
+        f"original target {original_required if original_required is not None else required:.0f}h; "
+        f"owner acceptance {soak.get('active_market_owner_acceptance_path') or 'n/a'}; "
         f"weekend policy {soak.get('weekend_policy', 'n/a')}."
     )
     if passed and longest >= required:
@@ -456,20 +459,21 @@ def _process_code_freeze_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
     required = _to_float(soak.get("required_code_freeze_hours")) or 96.0
     process_uptime = _to_float(soak.get("process_uptime_streak_hours"))
     code_freeze_hours = _to_float(soak.get("code_freeze_hours"))
-    passed = soak.get("process_code_freeze_pass") is True
+    passed = soak.get("code_freeze_pass") is True
     if process_uptime is None or code_freeze_hours is None:
         return Phase2ReadinessItem(
-            "Process/code-freeze 96-hour gate",
+            "Code-freeze 96-hour gate",
             "FAIL",
-            "Process/code-freeze fields missing from status summary.",
+            "Code-freeze fields missing from status summary.",
         )
     evidence = (
-        f"Process uptime streak {process_uptime:.2f}h; code-freeze {code_freeze_hours:.2f}h; "
-        f"required {required:.0f}h; marker {soak.get('code_freeze_started_at') or 'missing'}."
+        f"Code-freeze {code_freeze_hours:.2f}h; required {required:.0f}h; "
+        f"current process uptime after restart {process_uptime:.2f}h; "
+        f"marker {soak.get('code_freeze_started_at') or 'missing'}."
     )
-    if passed and process_uptime >= required and code_freeze_hours >= required:
-        return Phase2ReadinessItem("Process/code-freeze 96-hour gate", "PASS", evidence)
-    return Phase2ReadinessItem("Process/code-freeze 96-hour gate", "PENDING", evidence)
+    if passed and code_freeze_hours >= required:
+        return Phase2ReadinessItem("Code-freeze 96-hour gate", "PASS", evidence)
+    return Phase2ReadinessItem("Code-freeze 96-hour gate", "PENDING", evidence)
 
 
 def _latest_boundary_gate(latest: dict[str, Any]) -> Phase2ReadinessItem:

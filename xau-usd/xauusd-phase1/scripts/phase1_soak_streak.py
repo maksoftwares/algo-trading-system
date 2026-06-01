@@ -42,6 +42,7 @@ def calculate_soak_streak(
     code_freeze_started_at: str = "",
     now: datetime | None = None,
     required_code_freeze_hours: float = DEFAULT_REQUIRED_CODE_FREEZE_HOURS,
+    startup_rows: list[dict[str, str]] | None = None,
 ) -> SoakStreakSummary:
     if now is None:
         now = datetime.now(timezone.utc)
@@ -126,8 +127,9 @@ def calculate_soak_streak(
 
     current_hours = current_seconds / 3600 if current_start is not None else 0.0
     latest_run_id = rows[-1].get("run_id", "") if rows else ""
-    last_restart_utc = _latest_run_start_utc(rows, latest_run_id)
-    process_uptime_hours = _process_uptime_hours(rows, latest_run_id, now_utc)
+    startup_rows = startup_rows or []
+    last_restart_utc = _latest_run_start_utc(rows, latest_run_id, startup_rows)
+    process_uptime_hours = _process_uptime_hours(rows, latest_run_id, now_utc, startup_rows)
     normalized_code_freeze_started_at = _normalize_code_freeze_started_at(code_freeze_started_at)
     code_freeze_hours = _code_freeze_hours(normalized_code_freeze_started_at, now_utc)
     code_freeze_pass = code_freeze_hours >= required_code_freeze_hours
@@ -165,9 +167,20 @@ def read_code_freeze_marker(path: Path) -> str:
     return ""
 
 
-def _latest_run_start_utc(rows: list[dict[str, str]], latest_run_id: str) -> str:
+def _latest_run_start_utc(
+    rows: list[dict[str, str]],
+    latest_run_id: str,
+    startup_rows: list[dict[str, str]] | None = None,
+) -> str:
     if not latest_run_id:
         return ""
+    for row in reversed(startup_rows or []):
+        if row.get("run_id", "") != latest_run_id:
+            continue
+        parsed = _parse_mt5_datetime(row.get("timestamp_utc", ""))
+        if parsed is not None:
+            return parsed.strftime("%Y-%m-%dT%H:%M:%SZ")
+        return row.get("timestamp_utc", "")
     for row in rows:
         if row.get("run_id", "") == latest_run_id:
             parsed = _parse_mt5_datetime(row.get("timestamp_utc", ""))
@@ -177,9 +190,22 @@ def _latest_run_start_utc(rows: list[dict[str, str]], latest_run_id: str) -> str
     return ""
 
 
-def _process_uptime_hours(rows: list[dict[str, str]], latest_run_id: str, now: datetime) -> float:
+def _process_uptime_hours(
+    rows: list[dict[str, str]],
+    latest_run_id: str,
+    now: datetime,
+    startup_rows: list[dict[str, str]] | None = None,
+) -> float:
     if not latest_run_id:
         return 0.0
+    for row in reversed(startup_rows or []):
+        if row.get("run_id", "") != latest_run_id:
+            continue
+        started = _parse_mt5_datetime(row.get("timestamp_utc", ""))
+        if started is None:
+            return 0.0
+        started_utc = started.replace(tzinfo=timezone.utc)
+        return max((now - started_utc).total_seconds() / 3600, 0.0)
     for row in rows:
         if row.get("run_id", "") != latest_run_id:
             continue
