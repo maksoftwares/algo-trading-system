@@ -10,6 +10,7 @@ PHASE2_AUTHORITY_SENTENCE = (
     "This report has no authority over Phase 2 readiness. "
     "PHASE2_READINESS_REPORT.md remains the sole real readiness authority."
 )
+AUTHORITY_STATUS = "NON_AUTHORITATIVE_EXPERIMENTAL"
 
 
 def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | None = None) -> Path:
@@ -31,10 +32,12 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
     lifecycle_guard = _read_json(reports / "PHASE3_LIFECYCLE_GUARD_SUMMARY.json")
     demo_rehearsal = _read_json(reports / "PHASE3_DEMO_REHEARSAL_PLAN.json")
     demo_handoff = _read_json(reports / "PHASE3_TO_DEMO_HANDOFF.json")
-    phase1_summary = _read_json(repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json")
-    phase2_readiness = _read_markdown_status(
+    phase1_summary_path = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json"
+    phase2_readiness_path = (
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
     )
+    phase1_summary = _read_json(phase1_summary_path)
+    phase2_readiness = _read_markdown_status(phase2_readiness_path)
     phase1_acceptance = _read_markdown_status(
         repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_ACCEPTANCE_REPORT.md"
     )
@@ -44,7 +47,12 @@ def generate_phase3_experimental_status(phase3_root: Path, repo_root: Path | Non
         "status": status_label,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
+        "authority_status": AUTHORITY_STATUS,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+        "real_phase2_readiness_source": str(phase2_readiness_path),
+        "snapshot_created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "latest_real_phase1_status_read_at_utc": _file_mtime_utc(phase1_summary_path),
+        "latest_real_phase2_status_read_at_utc": _file_mtime_utc(phase2_readiness_path),
         "real_phase1_acceptance": phase1_acceptance or "UNKNOWN",
         "real_phase2_readiness": phase2_readiness or "UNKNOWN",
         "assumption": "assumes_phase2_pass_for_design_only",
@@ -134,6 +142,9 @@ def _render_markdown(status: dict[str, object]) -> str:
                 [
                     ("Phase 1 acceptance", str(status.get("real_phase1_acceptance", "UNKNOWN"))),
                     ("Phase 2 readiness", str(status.get("real_phase2_readiness", "UNKNOWN"))),
+                    ("Authority status", str(status.get("authority_status", "UNKNOWN"))),
+                    ("Real Phase 2 source", str(status.get("real_phase2_readiness_source", "UNKNOWN"))),
+                    ("Snapshot created", str(status.get("snapshot_created_at_utc", "UNKNOWN"))),
                     ("Latest Phase 1 bar", str(status.get("latest_phase1_bar", ""))),
                     ("Latest Phase 1 dry run", str(status.get("latest_phase1_dry_run", ""))),
                     ("Latest Phase 1 trade permission", str(status.get("latest_phase1_trade_permission", ""))),
@@ -479,6 +490,12 @@ def _read_json(path: Path) -> dict[str, object]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _file_mtime_utc(path: Path) -> str:
+    if not path.exists():
+        return "MISSING"
+    return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def _read_markdown_status(path: Path) -> str:

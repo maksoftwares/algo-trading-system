@@ -483,6 +483,9 @@ def test_phase3_status_preserves_real_phase2_pending_and_reports_safety(tmp_path
     status = json.loads(status_path.read_text(encoding="utf-8"))
     assert status["status"] == "EXPERIMENTAL_COST_SUSPEND_SCENARIO"
     assert status["real_phase2_readiness"] == "PENDING"
+    assert status["authority_status"] == "NON_AUTHORITATIVE_EXPERIMENTAL"
+    assert status["real_phase2_readiness_source"].endswith("PHASE2_READINESS_REPORT.md")
+    assert status["snapshot_created_at_utc"]
     assert status["authorized_for_deployment"] is False
     assert status["broker_action_code_allowed"] is False
     assert status["mt5_runtime_touched"] is False
@@ -1210,6 +1213,8 @@ def test_phase3_artifact_verifier_allows_dirty_working_snapshot_with_warned_audi
         json.dumps(
             {
                 "status": "DIRTY_WORKTREE",
+                "authority_status": clean_manifest["authority_status"],
+                "real_phase2_readiness_source": clean_manifest["real_phase2_readiness_source"],
                 "working_tree_clean": False,
                 "working_tree_short_status": " M x",
                 "files": clean_manifest["files"],
@@ -1220,8 +1225,18 @@ def test_phase3_artifact_verifier_allows_dirty_working_snapshot_with_warned_audi
     completion_json = reports / "PHASE3_COMPLETION_AUDIT.json"
     completion_json.write_text(
         json.dumps(
-            {
-                "repo_requirement_rows": [
+                {
+                    "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
+                    "real_phase2_readiness_source": str(
+                        tmp_path
+                        / "repo"
+                        / "xau-usd"
+                        / "xauusd-phase1"
+                        / "outputs"
+                        / "reports"
+                        / "PHASE2_READINESS_REPORT.md"
+                    ),
+                    "repo_requirement_rows": [
                     {
                         "key": "manifest",
                         "status": "WARN",
@@ -1448,6 +1463,10 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
     }
     status = {
         "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
+        "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
+        "real_phase2_readiness_source": str(
+            repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
+        ),
         "real_phase1_acceptance": "PENDING",
         "real_phase2_readiness": "PENDING",
         "authorized_for_deployment": False,
@@ -1472,6 +1491,10 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
         "broker_action_code_allowed": False,
     }
     completion = {
+        "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
+        "real_phase2_readiness_source": str(
+            repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
+        ),
         "repo_requirement_rows": [
             {
                 "status": "PASS",
@@ -1496,6 +1519,10 @@ def _write_valid_phase3_verifier_jsons(module, phase3: Path, repo: Path) -> None
         }
     manifest = {
         "status": "PASS",
+        "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
+        "real_phase2_readiness_source": str(
+            repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE2_READINESS_REPORT.md"
+        ),
         "working_tree_clean": True,
         "working_tree_short_status": "",
         "files": files,

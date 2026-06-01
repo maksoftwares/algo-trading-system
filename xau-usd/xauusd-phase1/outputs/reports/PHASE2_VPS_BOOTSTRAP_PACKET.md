@@ -30,8 +30,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1487 |
-| latest_bar | 2026.06.01 05:40:00 |
+| decision_rows | 1500 |
+| latest_bar | 2026.06.01 06:45:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -52,8 +52,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 114.98 | 96.0 | 0.0 | hours |
+| Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
+| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
 | Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
 
 ## Owner Actions Now

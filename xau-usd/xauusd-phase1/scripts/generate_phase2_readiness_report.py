@@ -436,13 +436,27 @@ def _soak_progress_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
 
 
 def _active_market_soak_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
+    default_gate = "Active-market 72-hour soak"
+    owner_gate = "Active-market soak (owner-accepted 56h)"
     required = _to_float(soak.get("required_uninterrupted_streak_hours")) or 72.0
     original_required = _to_float(soak.get("original_required_uninterrupted_streak_hours"))
     longest = _to_float(soak.get("active_market_streak_hours")) or _to_float(soak.get("longest_streak_hours"))
     current = _to_float(soak.get("current_streak_hours"))
     passed = soak.get("uninterrupted_soak_pass") is True
+    owner_accepted = soak.get("owner_accepted_active_market_soak_pass") is True
     if longest is None:
-        return Phase2ReadinessItem("Active-market 72-hour soak", "FAIL", "Streak fields missing from status summary.")
+        return Phase2ReadinessItem(default_gate, "FAIL", "Streak fields missing from status summary.")
+    if owner_accepted and passed and longest >= required:
+        evidence = (
+            "Active-market soak: PASS via owner-accepted 56h threshold; "
+            "original 72h target waived for Phase 1 dry-run closure only. "
+            f"Longest active streak {longest:.2f}h; current active streak "
+            f"{current if current is not None else 'n/a'}h; required {required:.0f}h; "
+            f"original target {original_required if original_required is not None else required:.0f}h; "
+            f"owner acceptance {soak.get('active_market_owner_acceptance_path') or 'n/a'}; "
+            f"weekend policy {soak.get('weekend_policy', 'n/a')}."
+        )
+        return Phase2ReadinessItem(owner_gate, "PASS", evidence)
     evidence = (
         f"Longest active streak {longest:.2f}h; current active streak "
         f"{current if current is not None else 'n/a'}h; required {required:.0f}h; "
@@ -451,8 +465,8 @@ def _active_market_soak_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
         f"weekend policy {soak.get('weekend_policy', 'n/a')}."
     )
     if passed and longest >= required:
-        return Phase2ReadinessItem("Active-market 72-hour soak", "PASS", evidence)
-    return Phase2ReadinessItem("Active-market 72-hour soak", "PENDING", evidence)
+        return Phase2ReadinessItem(default_gate, "PASS", evidence)
+    return Phase2ReadinessItem(default_gate, "PENDING", evidence)
 
 
 def _process_code_freeze_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
@@ -469,7 +483,9 @@ def _process_code_freeze_gate(soak: dict[str, Any]) -> Phase2ReadinessItem:
     evidence = (
         f"Code-freeze {code_freeze_hours:.2f}h; required {required:.0f}h; "
         f"current process uptime after restart {process_uptime:.2f}h; "
-        f"marker {soak.get('code_freeze_started_at') or 'missing'}."
+        f"marker {soak.get('code_freeze_started_at') or 'missing'}. "
+        "Current gate is code-freeze marker age only; process uptime after restart is informational. "
+        "Phase 2 still needs fresh VPS-specific process/first-day verification if relevant."
     )
     if passed and code_freeze_hours >= required:
         return Phase2ReadinessItem("Code-freeze 96-hour gate", "PASS", evidence)

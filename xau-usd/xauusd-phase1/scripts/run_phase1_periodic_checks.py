@@ -24,6 +24,7 @@ from generate_phase1_status_summary import generate_phase1_status_summary
 from generate_phase1_would_signal_report import generate_phase1_would_signal_report
 from generate_project_status_page import assert_status_page_current, generate_project_status_page
 from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown_report
+from generate_phase2_demo_account_isolation_report import generate_phase2_demo_account_isolation_report
 from generate_phase2_demo_next_actions_report import generate_phase2_demo_next_actions_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
 from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
@@ -37,6 +38,7 @@ from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.spread_analysis import analyze_spread_logs
+from verify_readiness_consistency import verify_readiness_consistency
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -49,6 +51,8 @@ class PeriodicCheckOutput:
     acceptance_status: str
     phase2_readiness_status: str
     phase2_demo_preflight_status: str
+    phase2_demo_account_isolation_status: str
+    phase2_readiness_consistency_status: str
     phase2_owner_action_status: str
     phase2_vps_bootstrap_status: str
     vps_first_day_status: str
@@ -183,10 +187,12 @@ def run_phase1_periodic_checks(
         report_path=report_dir / "PHASE2_READINESS_REPORT.md",
     )
     generate_phase2_demo_countdown_report(root=root)
+    demo_account_isolation = generate_phase2_demo_account_isolation_report(root=root)
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     owner_action_packet = generate_phase2_owner_action_packet(root=root)
     vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)
     generate_phase2_demo_next_actions_report(root=root)
+    readiness_consistency = verify_readiness_consistency(root=root)
     review_index = generate_phase1_review_index(
         root=root,
         report_path=report_dir / "PHASE1_REVIEW_INDEX.md",
@@ -210,6 +216,8 @@ def run_phase1_periodic_checks(
         acceptance_status=acceptance.status,
         phase2_readiness_status=phase2_readiness.status,
         phase2_demo_preflight_status=phase2_preflight.status,
+        phase2_demo_account_isolation_status=demo_account_isolation.status,
+        phase2_readiness_consistency_status=readiness_consistency.status,
         phase2_owner_action_status=owner_action_packet.status,
         phase2_vps_bootstrap_status=vps_bootstrap_packet.status,
         vps_first_day_status=vps_first_day.status,
@@ -253,6 +261,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Acceptance: {output.acceptance_status}")
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")
     print(f"Phase 2 demo preflight: {output.phase2_demo_preflight_status}")
+    print(f"Phase 2 demo account isolation: {output.phase2_demo_account_isolation_status}")
+    print(f"Phase 2 readiness consistency: {output.phase2_readiness_consistency_status}")
     print(f"Phase 2 owner action packet: {output.phase2_owner_action_status}")
     print(f"Phase 2 VPS bootstrap packet: {output.phase2_vps_bootstrap_status}")
     print(f"VPS first-day verification: {output.vps_first_day_status}")

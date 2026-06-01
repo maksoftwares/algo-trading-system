@@ -29,7 +29,7 @@ The measured cost model is currently pending under the authoritative freshness-a
 | `BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md` | Reviewed |
 | `BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` | Reviewed |
 | Phase 1 five-trading-day soak | PASS |
-| Phase 1 uninterrupted 72-hour active-market streak | PASS |
+| Phase 1 active-market soak | PASS via owner-accepted 56h threshold; original 72h target waived for Phase 1 dry-run closure only |
 | Phase 1 observer parity report | PASS |
 | Phase 1 review index | PASS |
 | Owner approval file | PASS |

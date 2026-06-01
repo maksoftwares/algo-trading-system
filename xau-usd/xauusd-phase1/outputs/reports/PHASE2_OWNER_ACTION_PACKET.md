@@ -29,8 +29,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 114.98 | 96.0 | 0.0 | hours |
+| Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
+| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
 | Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
 
 ## Local MT5 Network Baseline

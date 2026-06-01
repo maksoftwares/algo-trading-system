@@ -13,6 +13,7 @@ PHASE2_AUTHORITY_SENTENCE = (
     "This report has no authority over Phase 2 readiness. "
     "PHASE2_READINESS_REPORT.md remains the sole real readiness authority."
 )
+AUTHORITY_STATUS = "NON_AUTHORITATIVE_EXPERIMENTAL"
 
 
 def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | None = None) -> Path:
@@ -123,7 +124,11 @@ def generate_phase3_experimental_manifest(phase3_root: Path, repo_root: Path | N
         "status": _manifest_status(safety, simulation, files, working_tree_short_status),
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
+        "authority_status": AUTHORITY_STATUS,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+        "real_phase2_readiness_source": str(paths["phase2_readiness_report"]),
+        "latest_real_phase2_status_read_at_utc": _file_mtime_utc(paths["phase2_readiness_report"]),
+        "snapshot_created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "commit_hash": _git_output(repo_root, "rev-parse", "HEAD"),
         "commit_short": _git_output(repo_root, "rev-parse", "--short", "HEAD"),
         "working_tree_clean": working_tree_short_status == "",
@@ -209,6 +214,12 @@ def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _file_mtime_utc(path: Path | None) -> str:
+    if path is None or not path.exists():
+        return "MISSING"
+    return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat().replace("+00:00", "Z")
+
+
 def _render_markdown(manifest: dict[str, Any]) -> str:
     files = manifest.get("files", {})
     if not isinstance(files, dict):
@@ -229,6 +240,9 @@ def _render_markdown(manifest: dict[str, Any]) -> str:
                     ("Commit", str(manifest.get("commit_short", ""))),
                     ("Simulation status", str(manifest.get("simulation_status", ""))),
                     ("Safety status", str(manifest.get("safety_status", ""))),
+                    ("Authority status", str(manifest.get("authority_status", ""))),
+                    ("Real Phase 2 source", str(manifest.get("real_phase2_readiness_source", ""))),
+                    ("Snapshot created", str(manifest.get("snapshot_created_at_utc", ""))),
                     ("Working tree clean", str(manifest.get("working_tree_clean", ""))),
                     ("Boundary", str(manifest.get("boundary", ""))),
                 ]

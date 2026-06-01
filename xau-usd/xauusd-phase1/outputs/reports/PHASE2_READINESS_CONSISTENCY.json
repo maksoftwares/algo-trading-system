@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-01T06:46:31.488305Z",
+  "phase2_readiness_status": "PENDING",
+  "phase1_acceptance_status": "PASS",
+  "checks": [
+    {
+      "name": "phase1_acceptance_status",
+      "status": "PASS",
+      "evidence": "Phase 1 acceptance status is PASS in summary and report."
+    },
+    {
+      "name": "active_market_owner_acceptance",
+      "status": "PASS",
+      "evidence": "Active-market soak is consistently recorded as PASS via owner-accepted 56h threshold; original 72h target is waived only for Phase 1 dry-run closure."
+    },
+    {
+      "name": "code_freeze_semantics",
+      "status": "PASS",
+      "evidence": "Code-freeze PASS is marker-age based; restarted process uptime is informational and VPS first-day evidence remains separate."
+    },
+    {
+      "name": "measured_cost_statuses",
+      "status": "PASS",
+      "evidence": "Measured-cost readiness gates match their source reports."
+    },
+    {
+      "name": "demo_authorization_boundary",
+      "status": "PASS",
+      "evidence": "Countdown, preflight, and demo-isolation artifacts keep authorization false while Phase 2 is pending."
+    },
+    {
+      "name": "owner_approval_ordering",
+      "status": "PASS",
+      "evidence": "Owner approval is absent/pending until objective gates pass."
+    },
+    {
+      "name": "phase2_authority_source",
+      "status": "PASS",
+      "evidence": "`PHASE2_READINESS_REPORT.md` exists and remains the sole readiness authority."
+    }
+  ],
+  "source_reports": {
+    "phase1_status_summary": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_STATUS_SUMMARY.json",
+    "phase1_acceptance": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md",
+    "phase2_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
+    "phase2_demo_countdown": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_COUNTDOWN.json",
+    "phase2_demo_preflight": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_PREFLIGHT.json",
+    "phase2_demo_account_isolation": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACCOUNT_ISOLATION.json"
+  }
+}

@@ -1,12 +1,16 @@
 {
   "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
-  "created_at_utc": "2026-05-30T21:06:12.322706Z",
+  "created_at_utc": "2026-06-01T06:46:56.736147Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
+  "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+  "real_phase2_readiness_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
+  "latest_real_phase2_status_read_at_utc": "2026-06-01T06:46:31.381713Z",
+  "snapshot_created_at_utc": "2026-06-01T06:46:56.736147Z",
   "phase3_repo_complete": true,
   "phase3_release_clean": false,
   "demo_authorized": false,
-  "real_phase1_acceptance": "PENDING",
+  "real_phase1_acceptance": "PASS",
   "real_phase2_readiness": "PENDING",
   "repo_requirement_rows": [
     {
@@ -182,7 +186,7 @@
       "gate": "Measured cost model",
       "status": "PENDING",
       "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS.",
-      "current_detail": "current=3.0; required=5.0; remaining=2.0; unit=fresh_market_days"
+      "current_detail": "current=4.0; required=5.0; remaining=1.0; unit=fresh_market_days"
     },
     {
       "gate": "Measured-cost revalidation",
@@ -193,28 +197,6 @@
       "gate": "Measured-cost assumption delta",
       "status": "PENDING",
       "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
-    },
-    {
-      "gate": "Phase 1 acceptance",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS."
-    },
-    {
-      "gate": "Phase 1 review index",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS."
-    },
-    {
-      "gate": "Active-market 72-hour soak",
-      "status": "PENDING",
-      "evidence": "Longest active streak 56.08h; current active streak 56.08h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak.",
-      "current_detail": "current=56.08; required=72.0; remaining=15.92; unit=hours"
-    },
-    {
-      "gate": "Process/code-freeze 96-hour gate",
-      "status": "PENDING",
-      "evidence": "Process uptime streak 82.37h; code-freeze 82.37h; required 96h; marker 2026-05-27T10:41:50Z.",
-      "current_detail": "current=82.37; required=96.0; remaining=13.63; unit=hours"
     },
     {
       "gate": "Project owner approval",

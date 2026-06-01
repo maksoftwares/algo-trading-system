@@ -237,8 +237,10 @@ def _active_market_soak_item(
     now: datetime,
     source_root: Path,
 ) -> AcceptanceItem:
+    default_gate = "Active-market 72-hour soak"
+    owner_gate = "Active-market soak (owner-accepted 56h)"
     if not rows:
-        return AcceptanceItem("Active-market 72-hour soak", "PENDING", "No decision rows found.")
+        return AcceptanceItem(default_gate, "PENDING", "No decision rows found.")
     streak = calculate_soak_streak(
         rows,
         code_freeze_started_at=read_code_freeze_marker(files_dir / CODE_FREEZE_MARKER_NAME),
@@ -260,9 +262,15 @@ def _active_market_soak_item(
         f"last restart UTC: {streak.last_restart_utc or 'n/a'}; "
         f"weekend policy: {streak.weekend_policy}."
     )
-    if streak.uninterrupted_soak_pass or accepted:
-        return AcceptanceItem("Active-market 72-hour soak", "PASS", evidence)
-    return AcceptanceItem("Active-market 72-hour soak", "PENDING", evidence)
+    if accepted:
+        evidence += (
+            " Active-market soak: PASS via owner-accepted 56h threshold; "
+            "original 72h target waived for Phase 1 dry-run closure only."
+        )
+        return AcceptanceItem(owner_gate, "PASS", evidence)
+    if streak.uninterrupted_soak_pass:
+        return AcceptanceItem(default_gate, "PASS", evidence)
+    return AcceptanceItem(default_gate, "PENDING", evidence)
 
 
 def _process_code_freeze_item(
@@ -285,7 +293,9 @@ def _process_code_freeze_item(
         f"required: {streak.required_code_freeze_hours:.0f}h; "
         f"current process uptime after restart: {streak.process_uptime_streak_hours:.2f}h; "
         f"marker: {streak.code_freeze_started_at or 'missing'}; "
-        f"marker path: `{marker_path}`."
+        f"marker path: `{marker_path}`. "
+        "Current gate is code-freeze marker age only; process uptime after restart is informational. "
+        "Phase 2 still needs fresh VPS-specific process/first-day verification if relevant."
     )
     if streak.code_freeze_pass:
         return AcceptanceItem("Code-freeze 96-hour gate", "PASS", evidence)

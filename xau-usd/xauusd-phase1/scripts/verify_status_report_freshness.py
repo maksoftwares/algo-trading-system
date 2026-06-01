@@ -100,7 +100,7 @@ def verify_status_report_freshness(repo_root: Path, status_path: Path | None = N
     _expect_gate_status(
         errors,
         acceptance_rows,
-        "Active-market 72-hour soak",
+        _active_market_gate_name(acceptance_rows, soak),
         _active_market_status(soak),
         "PHASE1_ACCEPTANCE_REPORT.md",
     )
@@ -215,6 +215,13 @@ def _expect_gate_status(
     actual = row[1] if len(row) > 1 else ""
     if actual != expected:
         errors.append(f"{report_name} gate `{gate}` is stale: report={actual!r}; expected={expected!r}")
+
+
+def _active_market_gate_name(rows: dict[str, list[str]], soak: dict[str, Any]) -> str:
+    owner_gate = "Active-market soak (owner-accepted 56h)"
+    if soak.get("owner_accepted_active_market_soak_pass") is True and owner_gate in rows:
+        return owner_gate
+    return "Active-market 72-hour soak"
 
 
 def _expect_fragment(

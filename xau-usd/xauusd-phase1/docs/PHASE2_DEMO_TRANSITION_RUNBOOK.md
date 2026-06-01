@@ -17,8 +17,8 @@ Phase 3 experimental reports may be used only as design input. They cannot close
 | Phase 1 acceptance | `outputs/reports/PHASE1_ACCEPTANCE_REPORT.md` |
 | Phase 1 review index | `outputs/reports/PHASE1_REVIEW_INDEX.md` |
 | Observer parity | `outputs/reports/PHASE1_OBSERVER_PARITY_REPORT.md` |
-| Active-market 72-hour soak | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
-| Process/code-freeze 96-hour gate | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
+| Active-market soak | `outputs/reports/PHASE1_STATUS_SUMMARY.json`; PASS via owner-accepted 56h threshold, original 72h target waived for Phase 1 dry-run closure only |
+| Code-freeze marker gate | `outputs/reports/PHASE1_STATUS_SUMMARY.json`; current process uptime after restart is informational, and Phase 2 still needs fresh VPS-specific first-day verification |
 | Measured cost model | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` |
 | Measured-cost revalidation | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` |
 | Measured-cost assumption delta | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` |
@@ -27,6 +27,7 @@ Phase 3 experimental reports may be used only as design input. They cannot close
 | VPS latency evidence | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` |
 | VPS first-day verification | `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` |
 | Demo preflight | `outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md` |
+| Demo account isolation | `outputs/reports/PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` |
 | Owner approval | `outputs/reports/PHASE2_OWNER_APPROVAL.md` |
 
 Do not proceed unless every item above is PASS and `PHASE2_DEMO_COUNTDOWN.md` no longer says `DEMO_NOT_READY`.

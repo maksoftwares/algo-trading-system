@@ -12,8 +12,8 @@ If the live approval file is created before every objective gate is PASS, the Ph
 | Phase 1 review index | PASS | `outputs/reports/PHASE1_REVIEW_INDEX.md` |
 | Phase 2 readiness | PASS | `outputs/reports/PHASE2_READINESS_REPORT.md` |
 | Five trading day soak | PASS | `outputs/reports/PHASE1_SOAK_DRIFT_REPORT.md` |
-| Active-market 72-hour soak | PASS | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
-| Process/code-freeze 96-hour gate | PASS | `outputs/reports/PHASE1_STATUS_SUMMARY.json` |
+| Active-market soak | PASS via owner-accepted 56h threshold | `outputs/reports/PHASE1_STATUS_SUMMARY.json`; original 72h target waived for Phase 1 dry-run closure only |
+| Code-freeze marker gate | PASS | `outputs/reports/PHASE1_STATUS_SUMMARY.json`; process uptime after restart is informational |
 | Measured cost model | PASS | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` |
 | Measured-cost revalidation | PASS after any required correction | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` |
 | Measured-cost assumption delta | PASS | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` |

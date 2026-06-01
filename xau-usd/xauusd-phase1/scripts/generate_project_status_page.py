@@ -61,6 +61,8 @@ def generate_project_status_page(
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
+    phase2_demo_account_isolation = _read_json(phase1_reports / "PHASE2_DEMO_ACCOUNT_ISOLATION.json")
+    phase2_readiness_consistency = _read_json(phase1_reports / "PHASE2_READINESS_CONSISTENCY.json")
     phase2_experimental_demo_terminal = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_TERMINAL.json")
     phase2_experimental_demo_attachments = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.json")
     phase2_next_actions = _read_json(phase1_reports / "PHASE2_DEMO_NEXT_ACTIONS.json")
@@ -113,6 +115,8 @@ def generate_project_status_page(
             account_example=account_example,
             phase2_countdown=phase2_countdown,
             phase2_preflight=phase2_preflight,
+            phase2_demo_account_isolation=phase2_demo_account_isolation,
+            phase2_readiness_consistency=phase2_readiness_consistency,
             phase2_experimental_demo_terminal=phase2_experimental_demo_terminal,
             phase2_experimental_demo_attachments=phase2_experimental_demo_attachments,
             phase2_next_actions=phase2_next_actions,
@@ -190,6 +194,8 @@ def _render_html(
     account_example: dict[str, Any],
     phase2_countdown: dict[str, Any],
     phase2_preflight: dict[str, Any],
+    phase2_demo_account_isolation: dict[str, Any],
+    phase2_readiness_consistency: dict[str, Any],
     phase2_experimental_demo_terminal: dict[str, Any],
     phase2_experimental_demo_attachments: dict[str, Any],
     phase2_next_actions: dict[str, Any],
@@ -286,7 +292,8 @@ def _render_html(
             "      </section>",
             "",
             '      <section class="grid lower-grid">',
-            _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight)),
+            _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight, phase2_readiness_consistency)),
+            _panel("Demo Account Isolation", _demo_account_isolation_panel(phase2_demo_account_isolation)),
             _panel("Experimental Demo Terminal", _experimental_demo_terminal_panel(phase2_experimental_demo_terminal)),
             _panel("Experimental Demo Attachments", _experimental_demo_attachments_panel(phase2_experimental_demo_attachments)),
             _panel("Demo Next Actions", _demo_next_actions_panel(phase2_next_actions)),
@@ -1050,11 +1057,16 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
     return _key_value_table(rows)
 
 
-def _demo_countdown_panel(countdown: dict[str, Any], preflight: dict[str, Any]) -> str:
+def _demo_countdown_panel(
+    countdown: dict[str, Any],
+    preflight: dict[str, Any],
+    consistency: dict[str, Any],
+) -> str:
     wait_gates = _mapping_rows(countdown.get("wait_gates"))
     summary_rows = [
         ("Overall status", _status_badge(_cell(countdown.get("status", "UNKNOWN")))),
         ("Demo preflight", _status_badge(_cell(preflight.get("status", "UNKNOWN")))),
+        ("Readiness consistency", _status_badge(_cell(consistency.get("status", "UNKNOWN")))),
         ("Phase 2 readiness", _status_badge(_cell(countdown.get("phase2_readiness_status", "UNKNOWN")))),
         ("Phase 1 acceptance", _status_badge(_cell(countdown.get("phase1_acceptance_status", "UNKNOWN")))),
         ("Measured cost model", _status_badge(_cell(countdown.get("measured_cost_status", "UNKNOWN")))),
@@ -1073,6 +1085,48 @@ def _demo_countdown_panel(countdown: dict[str, Any], preflight: dict[str, Any]) 
             '<h3 class="mini-heading">Remaining Wait Gates</h3>',
             _demo_wait_gate_table(wait_gates),
         ]
+    )
+
+
+def _demo_account_isolation_panel(report: dict[str, Any]) -> str:
+    if not report:
+        return _list(["Demo account isolation report has not been generated yet."])
+    account = _mapping(report.get("account"))
+    checks = _mapping_rows(report.get("checks"))
+    summary_rows = [
+        ("Overall status", _status_badge(_cell(report.get("status", "UNKNOWN")))),
+        ("Account server", _esc(_cell(account.get("account_server", "UNKNOWN")))),
+        ("Account type", _esc(_cell(account.get("account_type_or_label", "UNKNOWN")))),
+        ("Positions", _esc(_cell(account.get("positions_count", "UNKNOWN")))),
+        ("Orders", _esc(_cell(account.get("orders_count", "UNKNOWN")))),
+        ("Live marker present", _status_badge(str(account.get("live_server_marker_present", "UNKNOWN")).lower())),
+        ("Paper mode authorized", _status_badge(str(report.get("paper_mode_authorized", False)).lower())),
+        ("Demo trading authorized", _status_badge(str(report.get("demo_trading_authorized", False)).lower())),
+        ("Broker execution authorized", _status_badge(str(report.get("broker_execution_authorized", False)).lower())),
+    ]
+    return "\n".join(
+        [
+            _raw_key_value_table(summary_rows),
+            '<h3 class="mini-heading">Isolation Checks</h3>',
+            _mini_status_rows(checks),
+        ]
+    )
+
+
+def _mini_status_rows(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return '<p class="muted">No checks available.</p>'
+    return _html_table(
+        [
+            {
+                "Check": _esc(_cell(row.get("name"))),
+                "Status": _status_badge(_cell(row.get("status"))),
+                "Evidence": _esc(_cell(row.get("evidence"))),
+            }
+            for row in rows
+        ],
+        ("Check", "Status", "Evidence"),
+        raw_columns={"Check", "Status", "Evidence"},
     )
 
 
@@ -1906,6 +1960,8 @@ def _artifact_links() -> str:
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
+        ("Phase 2 demo account isolation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md"),
+        ("Phase 2 readiness consistency", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_CONSISTENCY.md"),
         ("Phase 2 experimental demo terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_TERMINAL.md"),
         ("Phase 2 experimental demo attachments", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.md"),
         ("Phase 2 demo next actions", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_NEXT_ACTIONS.md"),

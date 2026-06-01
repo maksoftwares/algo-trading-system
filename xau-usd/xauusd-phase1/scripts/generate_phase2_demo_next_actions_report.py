@@ -298,7 +298,7 @@ def _gate_classification(name: str) -> dict[str, str]:
         return {"category": "OWNER_DECISION", "owner": "Project owner"}
     if name in {"VPS latency evidence", "VPS first-day verification"}:
         return {"category": "OWNER_AFTER_VPS", "owner": "Project owner + operator"}
-    if name in {"Active-market 72-hour soak", "Code-freeze 96-hour gate", "Process/code-freeze 96-hour gate", "Measured cost model"}:
+    if _is_active_market_gate(name) or name in {"Code-freeze 96-hour gate", "Process/code-freeze 96-hour gate", "Measured cost model"}:
         return {"category": "WALL_CLOCK_EVIDENCE", "owner": "System clock + running collectors"}
     if name in {"Measured-cost revalidation", "Measured-cost assumption delta"}:
         return {"category": "SYSTEM_AFTER_COST_PASS", "owner": "Codex/operator after measured-cost PASS"}
@@ -321,6 +321,7 @@ def _gate_proof_artifact(root: Path, name: str) -> str:
         "Phase 1 acceptance": report_dir / "PHASE1_ACCEPTANCE_REPORT.md",
         "Phase 1 review index": report_dir / "PHASE1_REVIEW_INDEX.md",
         "Active-market 72-hour soak": report_dir / "PHASE1_SOAK_DRIFT_REPORT.md",
+        "Active-market soak (owner-accepted 56h)": report_dir / "PHASE1_SOAK_DRIFT_REPORT.md",
         "Code-freeze 96-hour gate": report_dir / "PHASE1_STATUS_SUMMARY.json",
         "Process/code-freeze 96-hour gate": report_dir / "PHASE1_STATUS_SUMMARY.json",
         "Project owner approval": report_dir / "PHASE2_OWNER_APPROVAL.md",
@@ -366,6 +367,10 @@ def _gate_why_required(name: str) -> str:
             "Proves the shell can observe live active-market bars continuously without unsafe rows, "
             "unexpected gaps, or restarts resetting the active-market streak."
         ),
+        "Active-market soak (owner-accepted 56h)": (
+            "Documents the owner-accepted Phase 1 active-market exception: the original 72h target is waived "
+            "only for Phase 1 dry-run closure after the observed 56h live-market streak."
+        ),
         "Code-freeze 96-hour gate": (
             "Proves the deployed code-freeze marker has stayed stable long enough that acceptance is not "
             "being earned by freshly changed runtime code."
@@ -395,6 +400,8 @@ def _gate_closure_action(name: str, wait: dict[str, Any]) -> str:
         return "After Phase 1 acceptance passes, regenerate the review index."
     if name == "Active-market 72-hour soak":
         return "Keep Phase 1 dry-run running without restarts or unsafe rows until the active-market streak reaches 72h."
+    if name == "Active-market soak (owner-accepted 56h)":
+        return "Keep Phase 1 dry-run running and preserve the owner-accepted 56h closure evidence; do not reuse it as a generic 72h pass."
     if name in {"Code-freeze 96-hour gate", "Process/code-freeze 96-hour gate"}:
         return "Do not redeploy or modify runtime code; keep the code-freeze marker running to 96h."
     if name == "Project owner approval":
@@ -480,6 +487,12 @@ def _gate_verification_command(name: str) -> str:
             "--files-dir C:\\MT5PortableGoldMission\\MQL5\\Files "
             "--spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files"
         ),
+        "Active-market soak (owner-accepted 56h)": (
+            "..\\xauusd-phase0\\.venv\\Scripts\\python.exe "
+            "scripts\\run_phase1_periodic_checks.py "
+            "--files-dir C:\\MT5PortableGoldMission\\MQL5\\Files "
+            "--spread-files-dir C:\\MT5PortableSpreadLogger\\MQL5\\Files"
+        ),
         "Code-freeze 96-hour gate": (
             "..\\xauusd-phase0\\.venv\\Scripts\\python.exe "
             "scripts\\run_phase1_periodic_checks.py "
@@ -520,6 +533,10 @@ def _owner_signature_actions(countdown: dict[str, Any], owner_packet: dict[str, 
 
 def _has_pending_wait_gates(wait_gates: list[dict[str, Any]]) -> bool:
     return any(str(gate.get("status", "")).upper() != "PASS" for gate in wait_gates)
+
+
+def _is_active_market_gate(name: str) -> bool:
+    return name in {"Active-market 72-hour soak", "Active-market soak (owner-accepted 56h)"}
 
 
 def _to_float(value: Any) -> float | None:

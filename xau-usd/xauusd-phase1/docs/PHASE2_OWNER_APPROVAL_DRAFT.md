@@ -13,8 +13,8 @@ If the live approval file is created before every objective gate is PASS, `PHASE
 | Gate | Current state | Required state |
 | --- | --- | --- |
 | Five trading-day wall-clock soak | PASS | PASS |
-| Active-market 72-hour soak | PENDING | PASS |
-| Process/code-freeze 96-hour gate | PENDING | PASS |
+| Active-market soak | PASS via owner-accepted 56h threshold | PASS |
+| Code-freeze marker gate | PASS | PASS |
 | Measured cost model | PENDING | PASS |
 | Measured-cost revalidation | PENDING | PASS |
 | Measured-cost assumption delta | PENDING | PASS |

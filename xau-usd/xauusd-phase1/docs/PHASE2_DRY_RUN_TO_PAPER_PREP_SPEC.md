@@ -106,7 +106,7 @@ The first milestone should be a paper ledger only. It should read the same dry-r
 
 ## Current Status
 
-Phase 2 preparation is allowed. Phase 2 implementation is not authorized because the fresh measured-cost model is still PENDING, measured-cost revalidation is still PENDING, and Phase 1 acceptance remains pending until the 72-hour active-market streak and the separate 96-hour process/code-freeze gate close. The five-trading-day wall-clock soak gate has passed, but it is not sufficient by itself.
+Phase 2 preparation is allowed. Phase 2 implementation is not authorized because the fresh measured-cost model is still PENDING, measured-cost revalidation is still PENDING, VPS/owner gates remain PENDING, and demo preflight remains blocked until clean Phase 2 demo/VPS-specific evidence replaces local live-server markers. Phase 1 acceptance is PASS: the active-market soak is PASS via owner-accepted 56h threshold, the original 72h target is waived for Phase 1 dry-run closure only, and the code-freeze marker-age gate is PASS while process uptime after restart remains informational.
 
 Observer parity is also a hard implementation gate: the MQL Phase 1 observer must remain proven against the Python Phase 0 `breakout_retest` logic before any paper-mode code is added.
 

@@ -9,7 +9,7 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | Field | Value |
 | --- | --- |
 | Phase 3 repo complete | True |
-| Phase 1 acceptance | PENDING |
+| Phase 1 acceptance | PASS |
 | Phase 2 readiness | PENDING |
 | Can start demo now | False |
 | Can start real paper-shadow branch | False |
@@ -22,9 +22,9 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
-| Active-market 72-hour soak | PENDING | 30.42 | 72.0 | 41.58 | hours |
-| Process/code-freeze 96-hour gate | PENDING | 31.53 | 96.0 | 64.47 | hours |
-| Measured cost model | PENDING | 2.0 | 5.0 | 3.0 | fresh_market_days |
+| Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
+| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
+| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
 
 ## Owner Actions
 
@@ -40,7 +40,7 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | Field | Value |
 | --- | --- |
 | Status | NOT_READY_TO_SIGN |
-| Pending objective gates | 10 |
+| Pending objective gates | 6 |
 | Signing rule | Owner may sign only after every objective gate except Project owner approval is PASS. |
 
 ### Pending Objective Gates
@@ -53,10 +53,6 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. |
 | Measured-cost revalidation | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS. |
 | Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |
-| Phase 1 acceptance | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_ACCEPTANCE_REPORT.md` status is PENDING; required PASS. |
-| Phase 1 review index | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PENDING; required PASS. |
-| Active-market 72-hour soak | PENDING | Longest active streak 53.92h; current active streak 30.42h; required 72h; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Process/code-freeze 96-hour gate | PENDING | Process uptime streak 31.53h; code-freeze 31.53h; required 96h; marker 2026-05-27T10:41:50Z. |
 
 ## Reusable Phase 3 Outputs
 

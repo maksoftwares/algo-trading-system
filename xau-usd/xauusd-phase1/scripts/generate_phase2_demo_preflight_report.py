@@ -46,6 +46,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
     summary_path = report_dir / "PHASE1_STATUS_SUMMARY.json"
     phase3_status_path = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports" / "PHASE3_EXPERIMENTAL_STATUS.json"
     local_mt5_network_baseline_path = report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"
+    demo_account_isolation_path = report_dir / "PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md"
 
     readiness_status = _read_markdown_status(readiness_path)
     readiness_gates = _read_gate_table(readiness_path)
@@ -82,6 +83,7 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
             "phase1_status_summary": str(summary_path),
             "phase3_experimental_status": str(phase3_status_path),
             "local_mt5_network_baseline": str(local_mt5_network_baseline_path),
+            "demo_account_isolation": str(demo_account_isolation_path),
         },
     }
     output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")

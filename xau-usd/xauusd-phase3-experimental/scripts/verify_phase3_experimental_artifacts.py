@@ -183,6 +183,18 @@ def _verify_consistency(reports: Path) -> list[str]:
         )
     if status.get("real_phase2_readiness") == "PASS":
         errors.append("Phase 3 status must not promote real_phase2_readiness to PASS.")
+    for label, report in (
+        ("status", status),
+        ("manifest", manifest),
+        ("completion", completion),
+    ):
+        if report and report.get("authority_status") != "NON_AUTHORITATIVE_EXPERIMENTAL":
+            errors.append(
+                f"Phase 3 {label} must record authority_status=NON_AUTHORITATIVE_EXPERIMENTAL; "
+                f"found {report.get('authority_status')!r}"
+            )
+        if report and not str(report.get("real_phase2_readiness_source", "")).endswith("PHASE2_READINESS_REPORT.md"):
+            errors.append(f"Phase 3 {label} must record real_phase2_readiness_source.")
     for key in ("authorized_for_deployment", "mt5_runtime_touched", "broker_action_code_allowed"):
         if status.get(key) is not False:
             errors.append(f"Phase 3 status must keep {key}=false; found {status.get(key)!r}")

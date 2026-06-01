@@ -11,6 +11,7 @@ PHASE2_AUTHORITY_SENTENCE = (
     "This report has no authority over Phase 2 readiness. "
     "PHASE2_READINESS_REPORT.md remains the sole real readiness authority."
 )
+AUTHORITY_STATUS = "NON_AUTHORITATIVE_EXPERIMENTAL"
 
 
 PHASE3_REPO_REQUIREMENTS = (
@@ -72,7 +73,11 @@ def generate_phase3_completion_audit(phase3_root: Path, repo_root: Path | None =
         "status": overall_status,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": PHASE2_AUTHORITY_SENTENCE,
+        "authority_status": AUTHORITY_STATUS,
         "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
+        "real_phase2_readiness_source": str(phase2_report),
+        "latest_real_phase2_status_read_at_utc": _file_mtime_utc(phase2_report),
+        "snapshot_created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "phase3_repo_complete": repo_complete,
         "phase3_release_clean": release_clean,
         "demo_authorized": demo_authorized,
@@ -332,6 +337,8 @@ def _render_markdown(audit: dict[str, Any]) -> str:
                     ("Demo/paper authorized", str(audit.get("demo_authorized", False))),
                     ("Real Phase 1 acceptance", str(audit.get("real_phase1_acceptance", "UNKNOWN"))),
                     ("Real Phase 2 readiness", str(audit.get("real_phase2_readiness", "UNKNOWN"))),
+                    ("Authority status", str(audit.get("authority_status", "UNKNOWN"))),
+                    ("Real Phase 2 source", str(audit.get("real_phase2_readiness_source", "UNKNOWN"))),
                     ("Boundary", str(audit.get("boundary", ""))),
                 ]
             ),
@@ -415,6 +422,12 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _file_mtime_utc(path: Path) -> str:
+    if not path.exists():
+        return "MISSING"
+    return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def _read_markdown_status(path: Path) -> str:

@@ -96,6 +96,10 @@ def generate_phase1_status_summary(
         soak_payload["active_market_owner_accepted_hours"] = active_acceptance.accepted_hours
         soak_payload["active_market_owner_acceptance_path"] = str(active_acceptance.path)
         soak_payload["active_market_owner_acceptance_token"] = active_acceptance.token
+        soak_payload["original_active_market_target_hours"] = soak_streak.required_uninterrupted_streak_hours
+        soak_payload["owner_accepted_active_market_target_hours"] = active_acceptance.accepted_hours
+        soak_payload["observed_longest_active_market_hours"] = soak_streak.longest_streak_hours
+        soak_payload["phase1_active_market_acceptance_status"] = "PASS_OWNER_ACCEPTED_THRESHOLD"
 
     summary = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
