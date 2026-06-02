@@ -202,6 +202,33 @@ def test_vps_latency_report_keeps_small_baseline_improvement_pending_for_owner_r
     )
 
 
+def test_vps_latency_report_accepts_owner_selected_local_runtime(tmp_path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    baseline = _write_local_baseline(root, median_ms=129.78)
+
+    output = module.generate_phase2_vps_latency_report(
+        root=root,
+        provider="LOCAL_SYSTEM_RUNTIME",
+        region="Local Windows workstation / Asia-Dubai operator timezone",
+        endpoint="Capital.ComMena MT5 local authorization ping baseline",
+        local_baseline_path=baseline,
+    )
+
+    report = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "PASS"
+    assert "LOCAL_SYSTEM_RUNTIME" in report
+    assert "local workstation as the Phase 2 runtime host" in report
+    assert "No VPS-improvement claim is made" in report
+    assert "| local_baseline_comparison | PASS |" in report
+    assert any(
+        check.name == "local_runtime_owner_exception"
+        and check.status == "PASS"
+        and "power/internet/restart risk" in check.evidence
+        for check in output.checks
+    )
+
+
 def test_parse_linux_ping_output():
     module = _load_module()
     stats = module.parse_ping_output(

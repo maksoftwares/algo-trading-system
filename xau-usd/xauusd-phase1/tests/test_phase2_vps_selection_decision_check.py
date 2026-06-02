@@ -72,6 +72,40 @@ def test_vps_selection_decision_check_requires_owner_boundary_text(tmp_path: Pat
     assert "no live capital" in boundary["evidence"]
 
 
+def test_vps_selection_decision_check_accepts_local_system_runtime(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "phase1"
+    docs = root / "docs"
+    reports = root / "outputs" / "reports"
+    docs.mkdir(parents=True)
+    reports.mkdir(parents=True)
+    _write_matrix(
+        docs / "PHASE2_VPS_SELECTION_MATRIX.md",
+        "PASS",
+        pending=False,
+        provider="LOCAL_SYSTEM_RUNTIME",
+        region="Local Windows workstation / Asia-Dubai operator timezone",
+        plan="Existing local Windows workstation",
+        monthly_cost="0 incremental USD/month",
+        owner_acceptance=(
+            "Phase 2 paper-mode only accepted; no live capital; no broker execution until readiness PASS; "
+            "local-system power/internet/restart risk accepted for next few months"
+        ),
+    )
+    _write_latency_report(
+        reports / "PHASE2_VPS_LATENCY_REPORT.md",
+        provider="LOCAL_SYSTEM_RUNTIME",
+        region="Local Windows workstation / Asia-Dubai operator timezone",
+    )
+
+    output = module.generate_phase2_vps_selection_decision_check(root)
+
+    payload = json.loads(output.json_path.read_text(encoding="utf-8"))
+    assert output.status == "PASS"
+    assert payload["decision_fields"]["selected_provider"] == "LOCAL_SYSTEM_RUNTIME"
+    assert "VPS selection evidence is ready" in payload["next_action"]
+
+
 def test_vps_selection_decision_check_rejects_latency_provider_mismatch(tmp_path: Path):
     module = _load_module()
     root = tmp_path / "phase1"
@@ -111,6 +145,10 @@ def _write_matrix(
     status: str,
     pending: bool,
     owner_acceptance: str = "Phase 2 paper-mode only accepted; no live capital; no broker execution until readiness PASS",
+    provider: str = "FXVM",
+    region: str = "Dubai",
+    plan: str = "Advanced VPS",
+    monthly_cost: str = "50 USD/month",
 ) -> None:
     if pending:
         values = {
@@ -127,10 +165,10 @@ def _write_matrix(
         }
     else:
         values = {
-            "Selected provider": "FXVM",
-            "Selected region": "Dubai",
-            "Selected plan": "Advanced VPS",
-            "Monthly cost": "50 USD/month",
+            "Selected provider": provider,
+            "Selected region": region,
+            "Selected plan": plan,
+            "Monthly cost": monthly_cost,
             "Backup method": "weekly image backup",
             "Monitoring endpoint or scheduler": "Windows Task Scheduler hourly checks",
             "Recovery access owner": "Project owner",

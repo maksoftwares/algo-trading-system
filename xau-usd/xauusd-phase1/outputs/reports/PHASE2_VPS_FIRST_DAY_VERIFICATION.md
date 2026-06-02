@@ -14,17 +14,17 @@ Overall status: PENDING
 
 | name | status | evidence |
 | --- | --- | --- |
-| repo_commit_hash | PASS | Repository commit hash captured: a94ab3e1b91e4ba59b74ce9086401ebf202faebe. |
+| repo_commit_hash | PASS | Repository commit hash captured: bfbcae38b1118ffc7cdba76eae99299f51082526. |
 | mt5_terminal_path | PASS | MT5 terminal path exists. `C:\MT5PortableGoldMission\terminal64.exe`. |
 | mt5_data_path | PASS | MT5 data path exists. `C:\MT5PortableGoldMission`. |
 | compile_log | PASS | `C:\MT5PortableGoldMission\compile_Phase1DryRunShell.log` shows 0 errors, 0 warnings. |
 | latest_startup_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\startup_log.csv` has data rows; latest row captured. |
 | latest_decision_log_row | PASS | `C:\MT5PortableGoldMission\MQL5\Files\decision_log.csv` has data rows; latest row captured. |
 | external_health | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_EXTERNAL_HEALTH.json` status is PASS. |
-| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.06.01 06:45:00 keeps dry_run=true and trade_permission=false. |
+| phase1_status_summary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.06.02 06:50:00 keeps dry_run=true and trade_permission=false. |
 | phase2_readiness_report | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md` exists; current status is PENDING. |
-| vps_latency_report | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
-| selected_vps_consistency | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |
+| vps_latency_report | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PASS and includes local baseline comparison. |
+| selected_vps_consistency | PENDING | Manual VPS evidence is not ready for selected-provider comparison: vps_ntp_sync.txt not owner-verified; vps_backup_config.txt not owner-verified; vps_rdp_recovery.txt not owner-verified; vps_periodic_task.txt not owner-verified. |
 | ntp_time_sync_evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_ntp_sync.txt` has unverified required field(s): evidence_status=PENDING, owner_verified=false, time_sync_enabled=false. |
 | backup_configuration_evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_backup_config.txt` has unverified required field(s): evidence_status=PENDING, owner_verified=false, backup_configured=false, restore_owner_confirmed=false. |
 | rdp_recovery_login_evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\vps_rdp_recovery.txt` has unverified required field(s): evidence_status=PENDING, owner_verified=false, recovery_login_verified=false. |

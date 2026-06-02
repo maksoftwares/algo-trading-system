@@ -19,7 +19,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | decision_duplicate_headers | PASS | No duplicate CSV headers found. |
 | startup_duplicate_headers | PASS | No duplicate CSV headers found. |
 | shutdown_duplicate_headers | PASS | No duplicate CSV headers found. |
-| decision_rows | PASS | Decision rows: 1500. |
+| decision_rows | PASS | Decision rows: 1777. |
 | dry_run_locked | PASS | All decision rows are dry-run. |
 | trade_permission_locked | PASS | All decision rows keep permission false. |
 | breakout_observation | PASS | breakout_retest appears as dry-run observed expert. |
@@ -28,15 +28,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | swing_breakout_retest_observer | PASS | Swing observer stages found: WAIT_CONFIRMATION, WAIT_LEVEL_BREAK_RETEST, WOULD_SIGNAL |
 | startup_restarts | PASS | Startup rows: 5; restart append observed. |
 | shutdown_rows | PASS | Shutdown rows: 16. |
-| bar_cadence | PASS | Decision rows follow M5 cadence outside expected market breaks; tolerated gaps: 8. |
+| bar_cadence | PASS | Decision rows follow M5 cadence outside expected market breaks; tolerated gaps: 9. |
 | risk_state_coverage | PASS | All simulated lock states observed. |
 
 ## Summary
 
-- Decision rows: 1500
+- Decision rows: 1777
 - Unique run IDs: 6
 - Latest run ID: phase1-dry-run-v0.7
-- Current run rows: 767
+- Current run rows: 1044
 
 ## Risk States
 
@@ -46,22 +46,22 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| NORMAL | 1496 |
+| NORMAL | 1773 |
 
 ## Block Reasons
 
 | Value | Count |
 | --- | --- |
-| COST_REVALIDATION_PENDING | 59 |
+| COST_REVALIDATION_PENDING | 71 |
 | COST_SUSPENDED | 7 |
 | LOCAL_CLOCK_DRIFT | 3 |
 | LOCKED_DAILY_LOSS | 1 |
 | LOCKED_MONTHLY_LOSS | 1 |
 | LOCKED_WEEKLY_LOSS | 1 |
 | MANUAL_LOCK | 1 |
-| SPREAD_TOO_HIGH | 8 |
+| SPREAD_TOO_HIGH | 9 |
 | STALE_TICK | 1 |
-| phase1_dry_run_only | 1418 |
+| phase1_dry_run_only | 1682 |
 
 ## Current Run Block Reasons
 
@@ -69,10 +69,10 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 
 | Value | Count |
 | --- | --- |
-| COST_REVALIDATION_PENDING | 59 |
+| COST_REVALIDATION_PENDING | 71 |
 | LOCAL_CLOCK_DRIFT | 2 |
-| SPREAD_TOO_HIGH | 2 |
-| phase1_dry_run_only | 704 |
+| SPREAD_TOO_HIGH | 3 |
+| phase1_dry_run_only | 968 |
 
 ## Breakout-Retest Observer
 
@@ -81,23 +81,23 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 | Value | Count |
 | --- | --- |
 | WAIT_CONFIRMATION | 3 |
-| WAIT_LEVEL_BREAK_RETEST | 1398 |
-| WOULD_SIGNAL | 99 |
+| WAIT_LEVEL_BREAK_RETEST | 1663 |
+| WOULD_SIGNAL | 111 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 747 |
+| LONG | 888 |
 | NONE | 3 |
-| SHORT | 750 |
+| SHORT | 886 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 1401 |
-| true | 99 |
+| false | 1666 |
+| true | 111 |
 
 ## Swing Breakout-Retest Observer
 
@@ -106,26 +106,26 @@ Only the latest run_id determines the current lifecycle interpretation. Older ru
 | Value | Count |
 | --- | --- |
 | WAIT_CONFIRMATION | 3 |
-| WAIT_LEVEL_BREAK_RETEST | 1423 |
-| WOULD_SIGNAL | 74 |
+| WAIT_LEVEL_BREAK_RETEST | 1688 |
+| WOULD_SIGNAL | 86 |
 
 ### Directions
 
 | Value | Count |
 | --- | --- |
-| LONG | 747 |
+| LONG | 888 |
 | NONE | 3 |
-| SHORT | 750 |
+| SHORT | 886 |
 
 ### Would-Signal
 
 | Value | Count |
 | --- | --- |
-| false | 1426 |
-| true | 74 |
+| false | 1691 |
+| true | 86 |
 
 ### Latest Observer Row
 
 | Run ID | Bar Time | Stage | Direction | Reason | Level | Would Signal |
 | --- | --- | --- | --- | --- | --- | --- |
-| phase1-dry-run-v0.7 | 2026.06.01 06:45:00 | WAIT_LEVEL_BREAK_RETEST | SHORT | no_short_breakout_retest_candidate | 0.00 | false |
+| phase1-dry-run-v0.7 | 2026.06.02 06:50:00 | WAIT_LEVEL_BREAK_RETEST | LONG | no_long_breakout_retest_candidate | 0.00 | false |

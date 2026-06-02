@@ -140,3 +140,17 @@ def test_periodic_checks_generate_vps_first_day_before_phase2_readiness():
     assert script.index("generate_phase2_vps_first_day_verification") < script.index(
         "phase2_readiness = generate_phase2_readiness_report"
     )
+
+
+def test_periodic_checks_refresh_local_runtime_latency_when_selected():
+    script = _periodic_script()
+
+    assert "_refresh_local_runtime_latency_if_selected(root)" in script
+    assert "LOCAL_SYSTEM_RUNTIME" in script
+    assert "generate_phase2_vps_latency_report" in script
+    assert script.index("generate_phase2_mt5_network_baseline") < script.index(
+        "_refresh_local_runtime_latency_if_selected(root)"
+    )
+    assert script.index("_refresh_local_runtime_latency_if_selected(root)") < script.index(
+        "generate_phase2_vps_selection_decision_check(root=root)"
+    )

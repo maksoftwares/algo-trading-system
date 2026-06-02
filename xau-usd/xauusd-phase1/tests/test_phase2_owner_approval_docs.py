@@ -37,9 +37,9 @@ def test_owner_approval_docs_reject_mixed_live_scope_wording():
 def test_authorization_checklist_keeps_first_day_verification_as_phase2_gate():
     checklist = (ROOT / "docs" / "PHASE2_AUTHORIZATION_CHECKLIST.md").read_text(encoding="utf-8")
 
-    assert "| VPS first-day verification | PENDING |" in checklist
+    assert "| Local runtime first-day verification | PENDING |" in checklist
     assert "periodic scheduler" in checklist
-    assert "AND VPS first-day verification = PASS" in checklist
+    assert "AND local runtime first-day verification = PASS" in checklist
 
 
 def test_demo_transition_runbook_keeps_phase2_go_no_go_boundary():
@@ -52,3 +52,21 @@ def test_demo_transition_runbook_keeps_phase2_go_no_go_boundary():
     assert "paper-shadow only" in runbook
     assert "OrderSend" in runbook
     assert "Live-capital authorization requires a later phase" in runbook
+
+
+def test_owner_vps_readiness_package_tracks_remaining_phase2_blockers():
+    package = (ROOT / "docs" / "PHASE2_OWNER_VPS_READINESS_PACKAGE.md").read_text(encoding="utf-8")
+
+    assert "Overall status: LOCAL_RUNTIME_SELECTED_OBJECTIVE_GATES_PENDING" in package
+    assert "outputs/reports/PHASE2_READINESS_REPORT.md" in package
+    assert "Can canonical Phase 2 be marked approved now? | NO" in package
+    assert "Measured cost model | PENDING" in package
+    assert "LOCAL_SYSTEM_RUNTIME" in package
+    assert "Local runtime first-day verification | PENDING" in package
+    assert "Project owner approval | PENDING" in package
+    assert "PHASE2_VPS_SELECTION_MATRIX.md" in package
+    assert "generate_phase2_vps_latency_report.py --provider LOCAL_SYSTEM_RUNTIME" in package
+    assert "PHASE2_OWNER_APPROVAL.md" in package
+    assert "PHASE2_PAPER_PREP_APPROVED" in package
+    assert "no live capital" in package
+    assert "broker execution" in package

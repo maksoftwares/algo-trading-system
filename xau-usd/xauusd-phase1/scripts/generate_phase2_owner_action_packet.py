@@ -174,15 +174,15 @@ def _build_owner_checklist(
         },
         {
             "step": "2",
-            "title": "Select VPS provider, region, and plan",
+            "title": "Confirm selected runtime host",
             "status": "PASS" if vps_matrix_status == "PASS" else "PENDING",
-            "detail": "Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider, region, plan, backup, recovery, monitoring, and owner acceptance.",
+            "detail": "Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider/runtime, region, plan, backup, recovery, monitoring, and owner acceptance.",
         },
         {
             "step": "3",
-            "title": "Capture VPS latency evidence",
+            "title": "Capture runtime latency evidence",
             "status": "PASS" if actions.get("VPS latency evidence", "PASS") == "PASS" else "PENDING",
-            "detail": "Run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root after the VPS is provisioned.",
+            "detail": "Use PHASE2_VPS_LATENCY_REPORT.md for either selected VPS evidence or LOCAL_SYSTEM_RUNTIME baseline evidence.",
         },
         {
             "step": "4",
@@ -253,6 +253,38 @@ def _commands() -> dict[str, str]:
 
 
 def _one_screen_vps_decision_sheet(root: Path, recommendation: dict[str, Any]) -> dict[str, Any]:
+    decision_fields = _read_decision_record_fields(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md")
+    if decision_fields.get("selected_provider"):
+        return {
+            "status": "RUNTIME_HOST_SELECTED",
+            "decision": (
+                f"Selected runtime host: {decision_fields.get('selected_provider', '')} / "
+                f"{decision_fields.get('selected_region', '')}; do not sign owner approval yet."
+            ),
+            "authority_boundary": "This decision only records runtime-host selection. It does not authorize paper mode, demo trading, broker execution, or live capital.",
+            "recommended_first_trial": decision_fields.get("selected_provider", ""),
+            "backup_trial": recommendation.get("backup_trial", ""),
+            "deferred_option": recommendation.get("defer", ""),
+            "decision_record_path": str(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md"),
+            "fillable_template_path": str(root / "docs" / "templates" / "phase2_vps_selection_decision.template.md"),
+            "local_baseline_path": str(root / "outputs" / "reports" / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md"),
+            "required_decision_fields": [
+                "Selected provider",
+                "Selected region",
+                "Selected plan",
+                "Monthly cost",
+                "Backup method",
+                "Monitoring endpoint or scheduler",
+                "Recovery access owner",
+                "Decision date",
+                "Owner acceptance that Phase 2 is paper-mode only",
+            ],
+            "pass_preferences": recommendation.get("latency_preference", []),
+            "after_vps_is_provisioned": [
+                "Fill NTP/time-sync, backup, recovery, and periodic-task evidence for the selected runtime host.",
+                "Regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md and PHASE2_READINESS_REPORT.md.",
+            ],
+        }
     return {
         "status": "WAITING_OWNER_SELECTION",
         "decision": "Select the Phase 2 VPS provider, region, and plan; do not sign owner approval yet.",
@@ -285,6 +317,23 @@ def _one_screen_vps_decision_sheet(root: Path, recommendation: dict[str, Any]) -
     }
 
 
+def _read_decision_record_fields(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    fields: dict[str, str] = {}
+    in_decision_record = False
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("## "):
+            in_decision_record = line.strip().lower() == "## decision record"
+            continue
+        if not in_decision_record or not line.startswith("| ") or line.startswith("| ---") or line.startswith("| Field |"):
+            continue
+        parts = [part.strip() for part in line.strip("|").split("|")]
+        if len(parts) >= 2:
+            fields[parts[0].strip().lower().replace(" ", "_").replace("-", "_")] = parts[1].strip()
+    return fields
+
+
 def _owner_actions(countdown: dict[str, Any], readiness_gates: list[dict[str, str]]) -> list[dict[str, Any]]:
     value = countdown.get("owner_actions_now")
     if isinstance(value, list) and value:
@@ -293,7 +342,7 @@ def _owner_actions(countdown: dict[str, Any], readiness_gates: list[dict[str, st
     action_text = {
         "VPS selection": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md.",
         "VPS latency evidence": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
-        "VPS first-day verification": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence.",
+        "VPS first-day verification": "For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence.",
         "Project owner approval": "Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS.",
     }
     for gate, action in action_text.items():

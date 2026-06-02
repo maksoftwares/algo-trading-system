@@ -1,28 +1,24 @@
 # Phase 2 VPS Latency Report
 
-Overall status: PENDING
+Overall status: PASS
 
 ## Decision
 
-VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readiness pending.
+The owner selected the local workstation as the Phase 2 runtime host for the next few months; local MT5 baseline evidence is accepted for this host-selection gate.
 
 ## Candidate
 
 | Provider | Region | Endpoint | Average Ping | Packet Loss | Local Median | Improvement |
 | --- | --- | --- | --- | --- | --- | --- |
-| Pending | Pending | Pending |  |  | 129.78 ms |  |
+| LOCAL_SYSTEM_RUNTIME | Local Windows workstation / Asia-Dubai operator timezone | Capital.ComMena MT5 local authorization ping baseline | 129.78 ms | n/a | 129.78 ms |  |
 
 ## Checks
 
 | Check | Status | Evidence |
 | --- | --- | --- |
-| selection_fields | PENDING | Missing field(s): provider, region, endpoint. |
-| ping_evidence | PENDING | No ping evidence file provided. |
-| packet_loss | PENDING | Packet loss evidence is not available yet. |
-| latency_threshold | PENDING | Average latency evidence is not available yet. |
-| local_baseline_comparison | PENDING | VPS average latency is not available for local-baseline comparison. |
-| traceroute_evidence | PENDING | No traceroute evidence file provided. |
-| port_reachability_evidence | PENDING | No Test-NetConnection evidence file provided. |
+| selection_fields | PASS | provider=LOCAL_SYSTEM_RUNTIME; region=Local Windows workstation / Asia-Dubai operator timezone; endpoint=Capital.ComMena MT5 local authorization ping baseline. |
+| local_baseline_comparison | PASS | Owner selected LOCAL_SYSTEM_RUNTIME; local MT5 median latency is 129.78 ms across 5761 sample(s). No VPS-improvement claim is made. |
+| local_runtime_owner_exception | PASS | Owner selected local workstation runtime for the next few months and accepts power/internet/restart risk. |
 
 ## Evidence Paths
 
@@ -33,7 +29,7 @@ VPS latency evidence is not complete yet. Keep VPS selection and Phase 2 readine
 
 ## Capture Commands
 
-Run these commands on the candidate VPS after it is provisioned:
+Run these commands on the candidate VPS after it is provisioned, unless `Provider` is `LOCAL_SYSTEM_RUNTIME`:
 
 ```powershell
 .\scripts\capture_phase2_vps_latency_evidence.ps1 -Provider "<provider>" -Region "<region>" -Endpoint "<broker_or_mt5_endpoint>" -SampleCount 20
@@ -54,5 +50,6 @@ python scripts\generate_phase2_vps_latency_report.py --provider "<provider>" --r
 - This report is evidence-only and does not authorize Phase 2 paper-mode implementation.
 - Passing latency evidence does not authorize live capital or broker-side execution.
 - A VPS latency PASS requires a PASS local MT5 baseline and at least 10% better average ping than the local median.
+- A LOCAL_SYSTEM_RUNTIME PASS means the owner has selected the local workstation instead of claiming any VPS latency improvement.
 - Keep `dry_run=true` and `trade_permission=false` until all Phase 2 readiness gates pass and the owner signs approval.
 - Workspace root: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1`

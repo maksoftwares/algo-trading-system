@@ -2,7 +2,7 @@
 
 This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.
 
-Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
+Overall status: OWNER_ACTION_REQUIRED
 
 ## Authority
 
@@ -17,11 +17,11 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | Field | Value |
 | --- | --- |
-| Phase 2 readiness | PENDING |
+| Phase 2 readiness | FAIL |
 | Phase 2 demo preflight | FAIL |
-| VPS selection | PENDING |
-| VPS decision check | PENDING |
-| VPS latency | PENDING |
+| VPS selection | PASS |
+| VPS decision check | PASS |
+| VPS latency | PASS |
 | VPS first-day verification | PENDING |
 | Owner approval | PENDING |
 
@@ -30,8 +30,8 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
-| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
+| Code-freeze 96-hour gate | PASS | 140.2 | 96.0 | 0.0 | hours |
+| Measured cost model | PASS | 5.0 | 5.0 | 0.0 | fresh_market_days |
 
 ## Local MT5 Network Baseline
 
@@ -49,7 +49,7 @@ Overall status: WAITING_AND_OWNER_ACTION_REQUIRED
 
 | Field | Value |
 | --- | --- |
-| Matrix status | PENDING |
+| Matrix status | PASS |
 | Primary trial | FXVM Advanced VPS in Dubai, Mumbai, or Singapore |
 | Backup trial | ForexVPS.net Core in the lowest-latency available region |
 | Defer | QuantVPS unless broker latency testing favors US/Chicago |
@@ -71,10 +71,10 @@ Latency decision rule:
 
 | Field | Value |
 | --- | --- |
-| Status | WAITING_OWNER_SELECTION |
-| Decision | Select the Phase 2 VPS provider, region, and plan; do not sign owner approval yet. |
-| Authority boundary | This decision only prepares VPS evidence. It does not authorize paper mode, demo trading, broker execution, or live capital. |
-| Recommended first trial | FXVM Advanced VPS in Dubai, Mumbai, or Singapore |
+| Status | RUNTIME_HOST_SELECTED |
+| Decision | Selected runtime host: LOCAL_SYSTEM_RUNTIME / Local Windows workstation / Asia-Dubai operator timezone; do not sign owner approval yet. |
+| Authority boundary | This decision only records runtime-host selection. It does not authorize paper mode, demo trading, broker execution, or live capital. |
+| Recommended first trial | LOCAL_SYSTEM_RUNTIME |
 | Backup trial | ForexVPS.net Core in the lowest-latency available region |
 | Deferred option | QuantVPS unless broker latency testing favors US/Chicago |
 | Decision record | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md |
@@ -102,10 +102,7 @@ Latency pass preferences:
 
 After VPS is provisioned:
 
-- Run prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.
-- Run capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.
-- Copy and fill the vps_ntp_sync, vps_backup_config, vps_rdp_recovery, and vps_periodic_task evidence templates.
-- Compile and run the Phase 1 dry-run shell only, with dry_run=true and trade_permission=false.
+- Fill NTP/time-sync, backup, recovery, and periodic-task evidence for the selected runtime host.
 - Regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md and PHASE2_READINESS_REPORT.md.
 
 ## Prepared VPS Evidence Workspace
@@ -131,9 +128,9 @@ Prepared files:
 
 | step | title | status | detail |
 | --- | --- | --- | --- |
-| 1 | Keep local evidence collectors running | PENDING | Do not stop the Phase 1 dry-run terminal or passive spread logger while wait gates mature. |
-| 2 | Select VPS provider, region, and plan | PENDING | Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider, region, plan, backup, recovery, monitoring, and owner acceptance. |
-| 3 | Capture VPS latency evidence | PENDING | Run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root after the VPS is provisioned. |
+| 1 | Keep local evidence collectors running | PASS | Do not stop the Phase 1 dry-run terminal or passive spread logger while wait gates mature. |
+| 2 | Confirm selected runtime host | PASS | Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider/runtime, region, plan, backup, recovery, monitoring, and owner acceptance. |
+| 3 | Capture runtime latency evidence | PASS | Use PHASE2_VPS_LATENCY_REPORT.md for either selected VPS evidence or LOCAL_SYSTEM_RUNTIME baseline evidence. |
 | 4 | Fill first-day VPS verification evidence | PENDING | Copy docs/templates/vps_*.template.txt into outputs/reports, fill verified keys, then regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md. |
 | 5 | Review objective Phase 2 readiness | PENDING | Use outputs/reports/PHASE2_READINESS_REPORT.md as the sole readiness authority. |
 | 6 | Sign owner approval only after all objective gates pass | PENDING | Create C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md only after readiness is PASS. |
@@ -143,27 +140,22 @@ Prepared files:
 | Field | Value |
 | --- | --- |
 | Status | NOT_READY_TO_SIGN |
-| Pending objective gates | 6 |
+| Pending objective gates | 3 |
 | Signing rule | Owner may sign only after every objective gate except Project owner approval is PASS. |
 
 Objective gates still pending before owner signature:
 
 | gate | status | evidence |
 | --- | --- | --- |
-| VPS selection | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |
-| VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | VPS first-day verification | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS. |
-| Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. |
-| Measured-cost revalidation | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS. |
-| Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |
+| Measured-cost revalidation | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL; required PASS. |
+| Measured-cost assumption delta | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL; required PASS. |
 
 ## Immediate Owner Actions
 
 | gate | status | action |
 | --- | --- | --- |
-| VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
-| VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
-| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
+| VPS first-day verification | PENDING | For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Commands

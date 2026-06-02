@@ -2,7 +2,7 @@
 
 This packet is an operational VPS bootstrap handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or paper-mode implementation.
 
-Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
+Overall status: VPS_BOOTSTRAP_ACTION_REQUIRED
 
 ## Authority
 
@@ -17,12 +17,12 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| phase2_readiness | PENDING |
+| phase2_readiness | FAIL |
 | phase2_demo_preflight | FAIL |
 | phase2_demo_countdown | DEMO_NOT_READY |
-| phase2_owner_action_packet | WAITING_AND_OWNER_ACTION_REQUIRED |
-| vps_selection | PENDING |
-| vps_latency | PENDING |
+| phase2_owner_action_packet | OWNER_ACTION_REQUIRED |
+| vps_selection | PASS |
+| vps_latency | PASS |
 | vps_first_day_verification | PENDING |
 | project_owner_approval | PENDING |
 
@@ -30,8 +30,8 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1500 |
-| latest_bar | 2026.06.01 06:45:00 |
+| decision_rows | 1777 |
+| latest_bar | 2026.06.02 06:50:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -53,16 +53,14 @@ Overall status: WAITING_AND_VPS_BOOTSTRAP_PENDING
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
-| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
+| Code-freeze 96-hour gate | PASS | 140.2 | 96.0 | 0.0 | hours |
+| Measured cost model | PASS | 5.0 | 5.0 | 0.0 | fresh_market_days |
 
 ## Owner Actions Now
 
 | gate | status | action |
 | --- | --- | --- |
-| VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
-| VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
-| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
+| VPS first-day verification | PENDING | For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Bootstrap Phases

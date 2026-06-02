@@ -1,22 +1,22 @@
 # Measured Cost Model
 
-Overall status: PENDING
+Overall status: PASS
 
 ## Decision
 
-Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
+Measured spread evidence is sufficient for measured-cost revalidation.
 
 ## Coverage
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Rows | Rows Missing Tick Fresh | Weekend Rows Excluded | Tick Freshness | Source Files |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 54884 | 500 | 4 | 5 | 137542 | 55704 | 25634 | available | 11 |
+| 71577 | 500 | 5 | 5 | 154895 | 55704 | 25634 | available | 12 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 54884 | 50 | 75 | 180 |
+| global | all | all | XAUUSD | 71577 | 50 | 75 | 180 |
 
 ## Fresh Observed Dates
 
@@ -24,6 +24,7 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 - 2026-05-28
 - 2026-05-29
 - 2026-06-01
+- 2026-06-02
 
 ## Source Files
 
@@ -38,10 +39,11 @@ Measured spread evidence is not sufficient yet. Keep Phase 2 readiness pending.
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260530.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260531.csv
 - C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260601.csv
+- C:\MT5PortableSpreadLogger\MQL5\Files\spread_log_121409_Capital.ComMena-Live_XAUUSD_20260602.csv
 
 ## Note
 
-Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 57024; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 25634. Missing freshness columns: none.
+Measured cost model generated from passive spread logger data after filtering to tick_fresh=true rows. Rows excluded because tick_fresh was not true or was missing: 57684; rows missing tick_fresh: 55704. Weekend/closed-market rows excluded: 25634. Missing freshness columns: none.
 
 ## Why Observed Days Reset
 

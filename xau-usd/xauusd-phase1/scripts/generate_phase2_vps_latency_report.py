@@ -12,6 +12,7 @@ PREFERRED_LATENCY_MS = 50.0
 MAX_ACCEPTABLE_LATENCY_MS = 100.0
 MIN_PING_SAMPLES = 10
 MATERIAL_IMPROVEMENT_RATIO = 0.90
+LOCAL_RUNTIME_PROVIDER = "LOCAL_SYSTEM_RUNTIME"
 
 
 @dataclass(frozen=True)
@@ -64,15 +65,22 @@ def generate_phase2_vps_latency_report(
     ping_stats = parse_ping_output(ping_text) if ping_text else None
     baseline_stats = parse_local_baseline_report(baseline_text) if baseline_text else None
 
-    checks = [
-        _selection_check(provider, region, endpoint),
-        _ping_evidence_check(ping_output_path, ping_text, ping_stats),
-        _packet_loss_check(ping_stats),
-        _latency_threshold_check(ping_stats),
-        _local_baseline_check(local_baseline_path, baseline_stats, ping_stats),
-        _tracert_check(tracert_output_path, tracert_text),
-        _test_net_check(test_net_output_path, test_net_text),
-    ]
+    if _is_local_runtime(provider):
+        checks = [
+            _selection_check(provider, region, endpoint),
+            _local_runtime_baseline_check(local_baseline_path, baseline_stats),
+            _local_runtime_owner_exception_check(region, endpoint),
+        ]
+    else:
+        checks = [
+            _selection_check(provider, region, endpoint),
+            _ping_evidence_check(ping_output_path, ping_text, ping_stats),
+            _packet_loss_check(ping_stats),
+            _latency_threshold_check(ping_stats),
+            _local_baseline_check(local_baseline_path, baseline_stats, ping_stats),
+            _tracert_check(tracert_output_path, tracert_text),
+            _test_net_check(test_net_output_path, test_net_text),
+        ]
     status = _overall_status(checks)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
@@ -264,6 +272,40 @@ def _local_baseline_check(
     )
 
 
+def _local_runtime_baseline_check(path: Path | None, baseline: LocalBaselineStats | None) -> LatencyCheck:
+    if path is None or not path.exists():
+        return LatencyCheck("local_baseline_comparison", "PENDING", "Local MT5 network baseline report is missing.")
+    if baseline is None or baseline.status != "PASS" or baseline.median_ms is None:
+        return LatencyCheck(
+            "local_baseline_comparison",
+            "PENDING",
+            f"Local MT5 network baseline is incomplete or not PASS: `{path}`.",
+        )
+    samples = "" if baseline.sample_count is None else f" across {baseline.sample_count} sample(s)"
+    return LatencyCheck(
+        "local_baseline_comparison",
+        "PASS",
+        (
+            f"Owner selected LOCAL_SYSTEM_RUNTIME; local MT5 median latency is "
+            f"{baseline.median_ms:.2f} ms{samples}. No VPS-improvement claim is made."
+        ),
+    )
+
+
+def _local_runtime_owner_exception_check(region: str, endpoint: str) -> LatencyCheck:
+    if not region.strip() or not endpoint.strip():
+        return LatencyCheck(
+            "local_runtime_owner_exception",
+            "PENDING",
+            "Local runtime selection requires region/endpoint context.",
+        )
+    return LatencyCheck(
+        "local_runtime_owner_exception",
+        "PASS",
+        "Owner selected local workstation runtime for the next few months and accepts power/internet/restart risk.",
+    )
+
+
 def _tracert_check(path: Path | None, text: str) -> LatencyCheck:
     if path is None or not text:
         return LatencyCheck("traceroute_evidence", "PENDING", "No traceroute evidence file provided.")
@@ -313,6 +355,8 @@ def _render_report(
     local_baseline_path: Path | None,
 ) -> str:
     improvement = _fmt_improvement(ping_stats, baseline_stats)
+    average_ping = _candidate_average_ping(provider, ping_stats, baseline_stats)
+    packet_loss = _candidate_packet_loss(provider, ping_stats)
     return "\n".join(
         [
             "# Phase 2 VPS Latency Report",
@@ -321,7 +365,7 @@ def _render_report(
             "",
             "## Decision",
             "",
-            _decision_text(status),
+            _decision_text(status, provider),
             "",
             "## Candidate",
             "",
@@ -331,8 +375,8 @@ def _render_report(
                         "Provider": provider or "Pending",
                         "Region": region or "Pending",
                         "Endpoint": endpoint or "Pending",
-                        "Average Ping": "" if ping_stats is None or ping_stats.average_ms is None else f"{ping_stats.average_ms:.2f} ms",
-                        "Packet Loss": "" if ping_stats is None or ping_stats.loss_pct is None else f"{ping_stats.loss_pct:.2f}%",
+                        "Average Ping": average_ping,
+                        "Packet Loss": packet_loss,
                         "Local Median": "" if baseline_stats is None or baseline_stats.median_ms is None else f"{baseline_stats.median_ms:.2f} ms",
                         "Improvement": improvement,
                     }
@@ -356,7 +400,7 @@ def _render_report(
             "",
             "## Capture Commands",
             "",
-            "Run these commands on the candidate VPS after it is provisioned:",
+            "Run these commands on the candidate VPS after it is provisioned, unless `Provider` is `LOCAL_SYSTEM_RUNTIME`:",
             "",
             "```powershell",
             ".\\scripts\\capture_phase2_vps_latency_evidence.ps1 -Provider \"<provider>\" -Region \"<region>\" -Endpoint \"<broker_or_mt5_endpoint>\" -SampleCount 20",
@@ -377,6 +421,7 @@ def _render_report(
             "- This report is evidence-only and does not authorize Phase 2 paper-mode implementation.",
             "- Passing latency evidence does not authorize live capital or broker-side execution.",
             "- A VPS latency PASS requires a PASS local MT5 baseline and at least 10% better average ping than the local median.",
+            "- A LOCAL_SYSTEM_RUNTIME PASS means the owner has selected the local workstation instead of claiming any VPS latency improvement.",
             "- Keep `dry_run=true` and `trade_permission=false` until all Phase 2 readiness gates pass and the owner signs approval.",
             f"- Workspace root: `{root}`",
             "",
@@ -384,7 +429,13 @@ def _render_report(
     )
 
 
-def _decision_text(status: str) -> str:
+def _decision_text(status: str, provider: str) -> str:
+    if _is_local_runtime(provider):
+        if status == "PASS":
+            return "The owner selected the local workstation as the Phase 2 runtime host for the next few months; local MT5 baseline evidence is accepted for this host-selection gate."
+        if status == "FAIL":
+            return "The local runtime evidence failed validation. Keep Phase 2 preparation pending until local host evidence is repaired."
+        return "Local runtime evidence is not complete yet. Keep Phase 2 readiness pending."
     if status == "PASS":
         return "The VPS candidate has enough latency evidence and beats the local MT5 baseline for owner review."
     if status == "FAIL":
@@ -396,6 +447,26 @@ def _fmt_improvement(stats: PingStats | None, baseline: LocalBaselineStats | Non
     if stats is None or stats.average_ms is None or baseline is None or baseline.median_ms is None:
         return ""
     return f"{((baseline.median_ms - stats.average_ms) / baseline.median_ms) * 100.0:.1f}%"
+
+
+def _candidate_average_ping(provider: str, stats: PingStats | None, baseline: LocalBaselineStats | None) -> str:
+    if stats is not None and stats.average_ms is not None:
+        return f"{stats.average_ms:.2f} ms"
+    if _is_local_runtime(provider) and baseline is not None and baseline.median_ms is not None:
+        return f"{baseline.median_ms:.2f} ms"
+    return ""
+
+
+def _candidate_packet_loss(provider: str, stats: PingStats | None) -> str:
+    if stats is not None and stats.loss_pct is not None:
+        return f"{stats.loss_pct:.2f}%"
+    if _is_local_runtime(provider):
+        return "n/a"
+    return ""
+
+
+def _is_local_runtime(provider: str) -> bool:
+    return provider.strip().upper() == LOCAL_RUNTIME_PROVIDER
 
 
 def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:

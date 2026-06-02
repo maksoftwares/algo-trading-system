@@ -1,6 +1,6 @@
 # Phase 0 Frequency-Normalized Concentration Audit
 
-Generated at UTC: `2026-06-01T10:00:31+00:00`
+Generated at UTC: `2026-06-02T06:52:35+00:00`
 
 Overall status: PASS
 
@@ -17,9 +17,9 @@ This report does not approve, rescue, tune, or reclassify any rejected candidate
 
 ## Summary
 
-- Audited candidates: 156
-- Absolute concentration-failed candidates: 150
-- Review-context candidates under normalized thresholds: 149
+- Audited candidates: 157
+- Absolute concentration-failed candidates: 151
+- Review-context candidates under normalized thresholds: 150
 - Candidates with high normalized concentration: 0
 
 Conclusion: concentration-failed candidates remain rejected under the current Phase 0 rules. Normalized flags should only inform future gate design for new pre-registered low-frequency hypotheses.
@@ -155,6 +155,7 @@ Conclusion: concentration-failed candidates remain rejected under the current Ph
 | h4_vix_term_structure_inversion_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 345 | 100.0 | 354.554 | 0.323058 | 1.533349 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;sample_size;concentration |
 | h4_walk_forward_knn_momentum_state_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 5013 | 100.0 | 292.6321 | 0.117498 | 0.490744 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration;activity |
 | h4_xle_xlu_energy_defensive_rotation_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 453 | 100.0 | 111.4237 | 0.262885 | 1.270674 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
+| h4_xlp_xly_consumer_rotation_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 444 | 100.0 | 420.2599 | 0.314629 | 1.248109 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | h4_xlu_xlk_defensive_rotation_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 453 | 100.0 | 100.0 | 0.297523 | 1.372841 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;concentration |
 | liquidity_sweep_continuation_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 12222 | 100.0 | 100.0 | 0.043763 | 0.195929 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |
 | liquidity_sweep_reversal_v0 | REJECTED_OR_RESEARCH | FAIL | 9 | 3906 | 100.0 | 100.0 | 0.075868 | 0.335886 | REVIEW_NORMALIZED_CONTEXT | multi_cell_survival;no_catastrophic_failure;concentration |

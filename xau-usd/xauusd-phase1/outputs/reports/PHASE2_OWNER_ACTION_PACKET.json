@@ -1,12 +1,12 @@
 {
-  "status": "WAITING_AND_OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-06-01T06:46:31.456743Z",
+  "status": "OWNER_ACTION_REQUIRED",
+  "created_at_utc": "2026-06-02T06:53:33.929791Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
-  "phase2_readiness_status": "PENDING",
+  "phase2_readiness_status": "FAIL",
   "phase2_demo_preflight_status": "FAIL",
-  "vps_selection_status": "PENDING",
-  "vps_latency_status": "PENDING",
-  "vps_selection_decision_check_status": "PENDING",
+  "vps_selection_status": "PASS",
+  "vps_latency_status": "PASS",
+  "vps_selection_decision_check_status": "PASS",
   "vps_first_day_verification_status": "PENDING",
   "owner_approval_status": "PENDING",
   "paper_mode_authorized": false,
@@ -25,35 +25,25 @@
     {
       "gate": "Code-freeze 96-hour gate",
       "status": "PASS",
-      "current": 116.08,
+      "current": 140.2,
       "required": 96.0,
       "remaining": 0.0,
       "unit": "hours"
     },
     {
       "gate": "Measured cost model",
-      "status": "PENDING",
-      "current": 4.0,
+      "status": "PASS",
+      "current": 5.0,
       "required": 5.0,
-      "remaining": 1.0,
+      "remaining": 0.0,
       "unit": "fresh_market_days"
     }
   ],
   "owner_actions_now": [
     {
-      "gate": "VPS selection",
-      "status": "PENDING",
-      "action": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
-    },
-    {
-      "gate": "VPS latency evidence",
-      "status": "PENDING",
-      "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
-    },
-    {
       "gate": "VPS first-day verification",
       "status": "PENDING",
-      "action": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
+      "action": "For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Project owner approval",
@@ -63,37 +53,22 @@
   ],
   "owner_approval_readiness": {
     "status": "NOT_READY_TO_SIGN",
-    "pending_objective_gate_count": 6,
+    "pending_objective_gate_count": 3,
     "pending_objective_gates": [
-      {
-        "gate": "VPS selection",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
-      },
-      {
-        "gate": "VPS latency evidence",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
-      },
       {
         "gate": "VPS first-day verification",
         "status": "PENDING",
         "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS."
       },
       {
-        "gate": "Measured cost model",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
-      },
-      {
         "gate": "Measured-cost revalidation",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+        "status": "FAIL",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL; required PASS."
       },
       {
         "gate": "Measured-cost assumption delta",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+        "status": "FAIL",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL; required PASS."
       }
     ],
     "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."
@@ -102,20 +77,20 @@
     {
       "step": "1",
       "title": "Keep local evidence collectors running",
-      "status": "PENDING",
+      "status": "PASS",
       "detail": "Do not stop the Phase 1 dry-run terminal or passive spread logger while wait gates mature."
     },
     {
       "step": "2",
-      "title": "Select VPS provider, region, and plan",
-      "status": "PENDING",
-      "detail": "Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider, region, plan, backup, recovery, monitoring, and owner acceptance."
+      "title": "Confirm selected runtime host",
+      "status": "PASS",
+      "detail": "Fill the decision record in docs/PHASE2_VPS_SELECTION_MATRIX.md with provider/runtime, region, plan, backup, recovery, monitoring, and owner acceptance."
     },
     {
       "step": "3",
-      "title": "Capture VPS latency evidence",
-      "status": "PENDING",
-      "detail": "Run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root after the VPS is provisioned."
+      "title": "Capture runtime latency evidence",
+      "status": "PASS",
+      "detail": "Use PHASE2_VPS_LATENCY_REPORT.md for either selected VPS evidence or LOCAL_SYSTEM_RUNTIME baseline evidence."
     },
     {
       "step": "4",
@@ -179,7 +154,7 @@
     ]
   },
   "vps_selection_recommendation": {
-    "status": "PENDING",
+    "status": "PASS",
     "primary_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
     "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
     "defer": "QuantVPS unless broker latency testing favors US/Chicago",
@@ -196,10 +171,10 @@
     ]
   },
   "one_screen_vps_decision_sheet": {
-    "status": "WAITING_OWNER_SELECTION",
-    "decision": "Select the Phase 2 VPS provider, region, and plan; do not sign owner approval yet.",
-    "authority_boundary": "This decision only prepares VPS evidence. It does not authorize paper mode, demo trading, broker execution, or live capital.",
-    "recommended_first_trial": "FXVM Advanced VPS in Dubai, Mumbai, or Singapore",
+    "status": "RUNTIME_HOST_SELECTED",
+    "decision": "Selected runtime host: LOCAL_SYSTEM_RUNTIME / Local Windows workstation / Asia-Dubai operator timezone; do not sign owner approval yet.",
+    "authority_boundary": "This decision only records runtime-host selection. It does not authorize paper mode, demo trading, broker execution, or live capital.",
+    "recommended_first_trial": "LOCAL_SYSTEM_RUNTIME",
     "backup_trial": "ForexVPS.net Core in the lowest-latency available region",
     "deferred_option": "QuantVPS unless broker latency testing favors US/Chicago",
     "decision_record_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md",
@@ -223,10 +198,7 @@
       "packet loss > 0%: reject or retest before selection"
     ],
     "after_vps_is_provisioned": [
-      "Run prepare_phase2_vps_evidence_workspace.ps1 to create pending evidence files without overwriting verified evidence.",
-      "Run capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root.",
-      "Copy and fill the vps_ntp_sync, vps_backup_config, vps_rdp_recovery, and vps_periodic_task evidence templates.",
-      "Compile and run the Phase 1 dry-run shell only, with dry_run=true and trade_permission=false.",
+      "Fill NTP/time-sync, backup, recovery, and periodic-task evidence for the selected runtime host.",
       "Regenerate PHASE2_VPS_FIRST_DAY_VERIFICATION.md and PHASE2_READINESS_REPORT.md."
     ]
   },

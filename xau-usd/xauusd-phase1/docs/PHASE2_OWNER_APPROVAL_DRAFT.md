@@ -18,12 +18,30 @@ If the live approval file is created before every objective gate is PASS, `PHASE
 | Measured cost model | PENDING | PASS |
 | Measured-cost revalidation | PENDING | PASS |
 | Measured-cost assumption delta | PENDING | PASS |
-| VPS selection | PENDING | PASS |
-| VPS latency evidence | PENDING | PASS |
+| Runtime host selection | PASS | PASS |
+| Runtime latency evidence | PASS | PASS |
 | VPS first-day verification | PENDING | PASS |
-| Phase 1 acceptance | PENDING | PASS |
-| Phase 1 review index | PENDING | PASS |
+| Phase 1 acceptance | PASS | PASS |
+| Phase 1 review index | PASS | PASS |
+| Phase 1 observer parity | PASS | PASS |
+| Phase 2 readiness report | PENDING | PASS |
 | Project owner approval | PENDING | PASS |
+
+Latest tracked handoff package:
+
+```text
+docs/PHASE2_OWNER_VPS_READINESS_PACKAGE.md
+```
+
+Latest generated owner/VPS packets:
+
+```text
+outputs/reports/PHASE2_OWNER_ACTION_PACKET.md
+outputs/reports/PHASE2_VPS_BOOTSTRAP_PACKET.md
+outputs/reports/PHASE2_VPS_SELECTION_DECISION_CHECK.md
+outputs/reports/PHASE2_VPS_LATENCY_REPORT.md
+outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md
+```
 
 ## Draft Approval Fields
 
@@ -43,6 +61,16 @@ selected_vps_region:
 selected_vps_plan:
 selected_vps_monthly_cost:
 latency_evidence_path:
+```
+
+For the current owner-selected local runtime, the later live approval values should match:
+
+```text
+selected_vps_provider: LOCAL_SYSTEM_RUNTIME
+selected_vps_region: Local Windows workstation / Asia-Dubai operator timezone
+selected_vps_plan: Existing local Windows workstation with MT5 Portable and standard MT5 terminal
+selected_vps_monthly_cost: 0 incremental USD/month
+latency_evidence_path: outputs/reports/PHASE2_VPS_LATENCY_REPORT.md
 ```
 
 The live approval file is rejected if any required value is a placeholder, if the scope does not explicitly include `no live capital`, if the scope mixes paper approval with live-capital or broker-execution wording, or if the selected VPS provider, region, plan, monthly cost, or latency evidence path does not match `docs/PHASE2_VPS_SELECTION_MATRIX.md`.

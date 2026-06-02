@@ -33,6 +33,7 @@ from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_led
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from generate_phase2_vps_bootstrap_packet import generate_phase2_vps_bootstrap_packet
 from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
+from generate_phase2_vps_latency_report import generate_phase2_vps_latency_report
 from generate_phase2_vps_selection_decision_check import generate_phase2_vps_selection_decision_check
 from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
@@ -156,6 +157,7 @@ def run_phase1_periodic_checks(
         logs_dir=files_dir.parent.parent / "logs",
         report_path=report_dir / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md",
     )
+    _refresh_local_runtime_latency_if_selected(root)
     generate_phase2_vps_selection_decision_check(root=root)
     acceptance = generate_phase1_acceptance_report(
         files_dir=files_dir,
@@ -223,6 +225,35 @@ def run_phase1_periodic_checks(
         vps_first_day_status=vps_first_day.status,
         review_index_status=review_index.status,
     )
+
+
+def _refresh_local_runtime_latency_if_selected(root: Path) -> None:
+    fields = _decision_record_fields(root / "docs" / "PHASE2_VPS_SELECTION_MATRIX.md")
+    if fields.get("selected_provider", "").strip().upper() != "LOCAL_SYSTEM_RUNTIME":
+        return
+    generate_phase2_vps_latency_report(
+        root=root,
+        provider="LOCAL_SYSTEM_RUNTIME",
+        region=fields.get("selected_region", "Local Windows workstation"),
+        endpoint="Capital.ComMena MT5 local authorization ping baseline",
+    )
+
+
+def _decision_record_fields(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    fields: dict[str, str] = {}
+    in_decision_record = False
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("## "):
+            in_decision_record = line.strip().lower() == "## decision record"
+            continue
+        if not in_decision_record or not line.startswith("| ") or line.startswith("| ---") or line.startswith("| Field |"):
+            continue
+        parts = [part.strip() for part in line.strip("|").split("|")]
+        if len(parts) >= 2:
+            fields[parts[0].strip().lower().replace(" ", "_").replace("-", "_")] = parts[1].strip()
+    return fields
 
 
 def main(argv: list[str] | None = None) -> int:

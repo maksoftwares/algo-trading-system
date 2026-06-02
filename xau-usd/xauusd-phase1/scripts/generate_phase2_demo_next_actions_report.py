@@ -297,7 +297,7 @@ def _gate_classification(name: str) -> dict[str, str]:
     if name in {"VPS selection", "Project owner approval"}:
         return {"category": "OWNER_DECISION", "owner": "Project owner"}
     if name in {"VPS latency evidence", "VPS first-day verification"}:
-        return {"category": "OWNER_AFTER_VPS", "owner": "Project owner + operator"}
+        return {"category": "OWNER_AFTER_RUNTIME_SELECTION", "owner": "Project owner + operator"}
     if _is_active_market_gate(name) or name in {"Code-freeze 96-hour gate", "Process/code-freeze 96-hour gate", "Measured cost model"}:
         return {"category": "WALL_CLOCK_EVIDENCE", "owner": "System clock + running collectors"}
     if name in {"Measured-cost revalidation", "Measured-cost assumption delta"}:
@@ -340,7 +340,7 @@ def _gate_why_required(name: str) -> str:
             "packet-loss evidence before paper-mode cost measurement depends on it."
         ),
         "VPS first-day verification": (
-            "Proves the VPS can compile, run, log, recover, keep time, and refresh reports in the same "
+            "Proves the selected runtime host can compile, run, log, recover, keep time, and refresh reports in the same "
             "dry-run-only posture as the local Phase 1 shell."
         ),
         "Measured cost model": (
@@ -423,7 +423,7 @@ def _gate_pass_condition(name: str, wait: dict[str, Any]) -> str:
     conditions = {
         "VPS selection": "Decision record has no placeholders and PHASE2_VPS_SELECTION_DECISION_CHECK.md is PASS.",
         "VPS latency evidence": "PHASE2_VPS_LATENCY_REPORT.md is PASS with selected provider/region evidence.",
-        "VPS first-day verification": "PHASE2_VPS_FIRST_DAY_VERIFICATION.md is PASS with verified NTP, backup, recovery, scheduler, MT5, compile, startup, log, health, and status evidence.",
+        "VPS first-day verification": "PHASE2_VPS_FIRST_DAY_VERIFICATION.md is PASS with verified runtime-host NTP/time-sync, backup, recovery, scheduler, MT5, compile, startup, log, health, and status evidence.",
         "Measured-cost revalidation": "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md is PASS after measured-cost model PASS.",
         "Measured-cost assumption delta": "MEASURED_COST_ASSUMPTION_DELTA.md is PASS after measured-cost model PASS.",
         "Phase 1 acceptance": "PHASE1_ACCEPTANCE_REPORT.md is PASS.",

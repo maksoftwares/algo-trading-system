@@ -15,13 +15,13 @@ Overall status: FAIL
 
 | name | status | evidence |
 | --- | --- | --- |
-| phase2_readiness | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md` status is PENDING; required PASS. |
+| phase2_readiness | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md` status is FAIL; required PASS. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
-| VPS selection | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |
-| VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
+| VPS selection | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PASS with completed decision record. |
+| VPS latency evidence | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PASS and includes local baseline comparison. |
 | VPS first-day verification | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS. |
-| demo_countdown | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` status is DEMO_NOT_READY with 7 pending gate(s). |
-| latest_runtime_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.06.01 06:45:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK. |
+| demo_countdown | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` status is DEMO_NOT_READY with 4 pending gate(s). |
+| latest_runtime_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.06.02 06:50:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK. |
 | authority_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` keeps paper/broker/live authorization false. |
 | demo_account_isolation | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` contains live/real server marker(s): Capital.ComMena-Live. Do not start experimental demo trading from this runtime. |
 | phase3_separation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.json` does not promote the side experiment into real demo. |

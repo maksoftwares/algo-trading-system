@@ -1,12 +1,20 @@
-# Phase 2 VPS Selection Matrix
+# Phase 2 VPS / Runtime Host Selection Matrix
 
-Overall status: PENDING
+Overall status: PASS
 
-This document prepares the VPS decision for Phase 2 paper-mode operations. It does not authorize Phase 2 implementation, paper trading, live capital, broker-side actions, or any order execution.
+This document records the runtime-host decision for Phase 2 paper-mode operations. It does not authorize Phase 2 implementation, paper trading, live capital, broker-side actions, or any order execution.
+
+Owner decision on 2026-06-02:
+
+```text
+Use the current local Windows workstation for the next few months instead of purchasing a VPS now.
+```
+
+This closes the provider-selection question only. It does not close measured-cost revalidation, first-day local-runtime verification, or owner approval.
 
 ## Decision State
 
-Status remains `PENDING` because no provider has been selected, no VPS has been provisioned, and no real latency test has been run against `Capital.ComMena-Live`.
+Status is `PASS` because the owner selected `LOCAL_SYSTEM_RUNTIME` as the operating host for the next few months.
 
 Prepared state:
 
@@ -14,11 +22,13 @@ Prepared state:
 - minimum requirements defined
 - owner-selection rule defined
 - first-day VPS verification packet defined
-- approval still pending
+- local runtime decision recorded
+- local MT5 network baseline available
+- approval still pending because measured-cost, first-day local evidence, and owner approval are separate gates
 
 ## Decision Rule
 
-The status may be changed to `PASS` only after the project owner selects a provider and fills the decision record below with real values.
+The status may be changed to `PASS` only after the project owner selects a provider or explicitly selects local runtime and fills the decision record below with real values.
 
 Required before `PASS`:
 
@@ -30,7 +40,7 @@ Required before `PASS`:
 - monitoring approach selected
 - expected monthly cost documented
 - owner accepts that Phase 2 is paper-mode only
-- fresh latency test captured from the selected VPS to the broker server or MT5 endpoint
+- fresh latency evidence captured from the selected VPS, or local MT5 baseline accepted when `LOCAL_SYSTEM_RUNTIME` is selected
 
 The Phase 2 readiness generator validates the `Decision Record` table. Do not change `Overall status` to `PASS` while any required field still contains `Pending owner selection`, `Pending`, `TBD`, `TODO`, `unknown`, blank text, or angle-bracket placeholders.
 
@@ -62,6 +72,12 @@ If the cheapest option lacks 4 GB RAM or reliable backups, reject it for Phase 2
 | Monitoring | Separate scheduler or external host can run health checks outside MT5 | READY_FOR_OWNER_SELECTION |
 | Security | Password/key rotation and limited credential sharing | READY_FOR_OWNER_SELECTION |
 | Cost | Monthly cost acceptable to owner | PENDING |
+
+Local-system decision note:
+
+- The owner accepts that the local workstation has higher operational risk than a managed VPS: power loss, ISP outage, Windows restart, user-session interruption, and local hardware failure.
+- These risks are accepted for the next few months as a Phase 2 paper/cost-measurement operating decision, not as live-capital approval.
+- First-day local verification must still prove time sync, backup/recovery plan, periodic readiness checks, MT5 paths, compile logs, startup logs, decision logs, external health, and status-summary evidence.
 
 ## Candidate Comparison
 
@@ -148,20 +164,20 @@ packet loss > 0%: reject or retest before selection
 
 | Field | Value |
 | --- | --- |
-| Selected provider | Pending owner selection |
-| Selected region | Pending owner selection |
-| Selected plan | Pending owner selection |
-| Monthly cost | Pending owner selection |
-| Backup method | Pending owner selection |
-| Monitoring endpoint or scheduler | Pending owner selection |
-| Recovery access owner | Pending owner selection |
-| Latency evidence path | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` after VPS provision |
-| Decision date | Pending owner selection |
-| Owner acceptance | Pending owner selection |
+| Selected provider | LOCAL_SYSTEM_RUNTIME |
+| Selected region | Local Windows workstation / Asia-Dubai operator timezone |
+| Selected plan | Existing local Windows workstation with MT5 Portable and standard MT5 terminal |
+| Monthly cost | 0 incremental USD/month |
+| Backup method | GitHub remote source backup plus owner-managed local config backup before Phase 2 paper start |
+| Monitoring endpoint or scheduler | Local Windows Task Scheduler readiness checks plus local status/dashboard refresh |
+| Recovery access owner | Project owner / local machine operator |
+| Latency evidence path | outputs/reports/PHASE2_VPS_LATENCY_REPORT.md |
+| Decision date | 2026-06-02 |
+| Owner acceptance | Phase 2 paper-mode only accepted; no live capital; no broker execution until readiness PASS; local-system power/internet/restart risk accepted for next few months |
 
 ## Deployment Boundary
 
-The VPS is for Phase 2 paper-mode evidence only after all readiness gates pass. It must start with the same safety posture as the local Phase 1 shell:
+The selected runtime host is for Phase 2 paper-mode evidence only after all readiness gates pass. It must start with the same safety posture as the local Phase 1 shell:
 
 ```text
 dry_run=true
@@ -172,9 +188,9 @@ no trade helper object usage
 no broker-side execution behavior
 ```
 
-## First-Day VPS Verification
+## First-Day VPS / Local Runtime Verification
 
-After selection and setup, the first VPS verification packet must include:
+After selection and setup, the first verification packet must include:
 
 - selected VPS consistency between this decision record, the latency report, and manual VPS evidence
 - repository commit hash

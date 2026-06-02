@@ -38,8 +38,10 @@ Authority rule: `outputs/reports/PHASE2_READINESS_REPORT.md` is the sole current
 | Code-freeze marker gate | PASS | Current gate is code-freeze marker age only; process uptime after restart is informational. Phase 2 still needs fresh VPS-specific process/first-day verification if relevant. Evidence: `outputs/reports/PHASE1_STATUS_SUMMARY.json`. |
 | Phase 1 observer parity | PASS | `PHASE1_OBSERVER_PARITY_REPORT.md` proves the MQL Phase 1 observer remains aligned with the Python Phase 0 `breakout_retest` logic. |
 | Phase 1 review index | PASS | `PHASE1_REVIEW_INDEX.md` is PASS after Phase 1 closure and bundle refresh. |
-| VPS shortlist | READY_FOR_OWNER_SELECTION | `docs/PHASE2_VPS_SELECTION_MATRIX.md` now contains a shortlist, latency-test rule, and first-day verification packet. |
+| Runtime host selection | PASS | Owner selected `LOCAL_SYSTEM_RUNTIME` for the next few months in `docs/PHASE2_VPS_SELECTION_MATRIX.md`; no VPS latency-improvement claim is made. |
+| Runtime latency evidence | PASS | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` uses the local MT5 baseline for `LOCAL_SYSTEM_RUNTIME`. |
 | Owner approval draft | READY_FOR_OWNER_SELECTION | `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` is prepared as a non-authorizing draft. Do not create the live approval file until all objective gates pass and the owner signs. |
+| Owner/VPS readiness package | READY_FOR_OWNER_SELECTION | `docs/PHASE2_OWNER_VPS_READINESS_PACKAGE.md` summarizes the remaining owner decisions, VPS evidence sequence, generated packet paths, and paper-only signing rule. |
 
 ## Still Pending
 
@@ -52,9 +54,7 @@ Authority rule: `outputs/reports/PHASE2_READINESS_REPORT.md` is the sole current
 | Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must return to PASS after all remaining readiness gates are closed. D2 is no longer the active blocker after owner acceptance of `D2_FAMILY_CLUSTERED_V0`. |
 | Demo account isolation/preflight | FAIL/PENDING | `PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` records the clean owner-opened demo terminal evidence, but `PHASE2_DEMO_PREFLIGHT_REPORT.md` may remain FAIL/PENDING until clean demo/VPS-specific Phase 2 evidence replaces local live-server markers and all readiness gates pass. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
-| VPS selection | PENDING | Shortlist is ready. `docs/PHASE2_VPS_SELECTION_MATRIX.md` must show `Overall status: PASS` only after provider, region, specs, backup access, monitoring approach, and first-day latency evidence are selected. |
-| VPS latency evidence | PENDING | Run `scripts/generate_phase2_vps_latency_report.py` on the selected VPS and require `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` to show PASS before VPS selection can close. The selected VPS must also be compared against `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md`; if it does not materially improve on local median ping, owner review is required before treating it as an operational improvement. |
-| VPS first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after selected-VPS consistency, NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. The selected provider/region in the decision record, latency report, and manual VPS evidence must match. |
+| Local runtime first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after local-runtime consistency, NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. The selected provider/region in the decision record, latency report, and manual runtime evidence must match. |
 | Non-level/intermarket forcing candidate run | PASS | Twenty-nine H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, macro, ETF, FX, futures-proxy, volatility-premium, and calendar/microstructure candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All independent candidates were rejected, so diversification remains unsolved. |
 
 Operational prep spec: `docs/PHASE2_OPERATIONS_PREP.md`.
@@ -84,10 +84,9 @@ AND measured-cost revalidation = PASS after any required cost-conversion correct
 AND Phase 1 review index = PASS
 AND Phase 1 observer parity = PASS
 AND Phase 2 readiness = PASS
-AND VPS latency evidence = PASS
-AND selected VPS latency is compared against PHASE2_LOCAL_MT5_NETWORK_BASELINE.md
-AND selected VPS decision record matches latency and first-day manual evidence
-AND VPS first-day verification = PASS
+AND runtime latency evidence = PASS
+AND selected runtime decision record matches latency and first-day manual evidence
+AND local runtime first-day verification = PASS
 AND owner approval file exists
 AND owner approval minimum_net_expectancy_r >= 0.15
 THEN Phase 2 paper-mode implementation may begin.

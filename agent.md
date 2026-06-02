@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-06-01
+Last updated: 2026-06-02
 
 ## Workspace
 
@@ -47,6 +47,12 @@ Last updated: 2026-06-01
 
 ## Current State
 
+- 2026-06-02 Phase 2 owner/VPS readiness package:
+  - Tracked owner handoff package added at `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_VPS_READINESS_PACKAGE.md`.
+  - `PHASE2_OWNER_APPROVAL_DRAFT.md` now reflects current closed Phase 1 gates: Phase 1 acceptance PASS, Phase 1 review index PASS, and Phase 1 observer parity PASS.
+  - Owner selected `LOCAL_SYSTEM_RUNTIME` for the next few months instead of purchasing/provisioning a VPS now. `PHASE2_VPS_SELECTION_MATRIX.md` is PASS for runtime-host selection, and `PHASE2_VPS_LATENCY_REPORT.md` is PASS using the local MT5 baseline without claiming any VPS latency improvement.
+  - Latest generated statuses: `PHASE2_OWNER_ACTION_PACKET.md` = `WAITING_AND_OWNER_ACTION_REQUIRED`, `PHASE2_VPS_BOOTSTRAP_PACKET.md` = `WAITING_AND_VPS_BOOTSTRAP_PENDING`, and `PHASE2_VPS_SELECTION_DECISION_CHECK.md` = `PASS`.
+  - Canonical Phase 2 remains PENDING until measured-cost gates, local first-day verification, and project owner approval pass. The owner package does not authorize paper mode, demo trading, broker execution, or live capital.
 - 2026-06-01 experimental demo broker-action start:
   - Owner explicitly authorized experimental demo order placement on the already-open Capital.com demo account. This is not canonical Phase 2 approval and does not authorize live/real trading.
   - Isolated executor: `xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5`; standard dry-run shell remains broker-action-free and Phase 1 safety audit still passes.

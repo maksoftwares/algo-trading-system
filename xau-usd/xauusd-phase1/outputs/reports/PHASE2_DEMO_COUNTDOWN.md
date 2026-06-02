@@ -8,40 +8,38 @@ Overall status: DEMO_NOT_READY
 
 | Field | Value |
 | --- | --- |
-| Phase 2 readiness | PENDING |
+| Phase 2 readiness | FAIL |
 | Phase 1 acceptance | PASS |
-| Measured cost model | PENDING |
-| Measured-cost revalidation | PENDING |
-| Measured-cost delta | PENDING |
+| Measured cost model | PASS |
+| Measured-cost revalidation | FAIL |
+| Measured-cost delta | FAIL |
 | Paper mode authorized | false |
 | Demo trading authorized | false |
 | Broker execution authorized | false |
 | Live trading authorized | false |
-| Pending gates | 7 |
+| Pending gates | 4 |
 
 ## Wait Gates
 
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
-| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
+| Code-freeze 96-hour gate | PASS | 140.2 | 96.0 | 0.0 | hours |
+| Measured cost model | PASS | 5.0 | 5.0 | 0.0 | fresh_market_days |
 
 ## Owner Actions
 
 | gate | status | action |
 | --- | --- | --- |
-| VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
-| VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
-| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
+| VPS first-day verification | PENDING | For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Runtime Snapshot
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1500 |
-| latest_bar | 2026.06.01 06:45:00 |
+| decision_rows | 1777 |
+| latest_bar | 2026.06.02 06:50:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |

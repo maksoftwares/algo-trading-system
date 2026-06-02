@@ -35,7 +35,7 @@ def test_owner_action_packet_summarizes_wait_gates_and_owner_steps(tmp_path: Pat
     assert payload["demo_trading_authorized"] is False
     assert payload["owner_approval_readiness"]["status"] == "NOT_READY_TO_SIGN"
     assert payload["owner_approval_readiness"]["pending_objective_gate_count"] == 1
-    assert any(item["title"] == "Select VPS provider, region, and plan" for item in payload["owner_checklist"])
+    assert any(item["title"] == "Confirm selected runtime host" for item in payload["owner_checklist"])
     assert payload["owner_templates"]["vps_selection_decision"].endswith(
         "docs\\templates\\phase2_vps_selection_decision.template.md"
     ) or payload["owner_templates"]["vps_selection_decision"].endswith(
@@ -151,7 +151,7 @@ def test_owner_action_packet_prefers_readiness_gate_over_document_status(tmp_pat
     assert payload["vps_selection_status"] == "PENDING"
     assert any(item["gate"] == "VPS selection" and item["status"] == "PENDING" for item in payload["owner_actions_now"])
     assert any(
-        item["title"] == "Select VPS provider, region, and plan" and item["status"] == "PENDING"
+        item["title"] == "Confirm selected runtime host" and item["status"] == "PENDING"
         for item in payload["owner_checklist"]
     )
 
