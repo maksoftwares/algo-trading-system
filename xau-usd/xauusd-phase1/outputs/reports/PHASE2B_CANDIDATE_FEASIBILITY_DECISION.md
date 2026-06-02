@@ -1,6 +1,6 @@
 # Phase 2B Candidate Feasibility Decision
 
-Overall status: PENDING
+Overall status: REVIEW_READY_LOW_SAMPLE
 
 Decision authority: PASSIVE OBSERVER ONLY. A feasible subset must become a new locked Phase 0R hypothesis before any canonical Phase 2 reconsideration.
 
@@ -8,11 +8,15 @@ Decision authority: PASSIVE OBSERVER ONLY. A feasible subset must become a new l
 
 | Candidate | Rows | Median cost_R | Median net edge_R | Gate counts | Passive read |
 | --- | --- | --- | --- | --- | --- |
-| n/a | n/a | n/a | n/a | n/a | n/a |
+| breakout_retest | 67 | 0.2130 | 0.2986 | COST_BLOCK=20, COST_OK_ACCEPTABLE=10, COST_OK_STRONG=21, COST_WARN=16 | MARGINAL_REVIEW_REQUIRED |
+| round_number_retest_v0 | 56 | 0.0909 | 0.4207 | COST_OK_ACCEPTABLE=4, COST_OK_STRONG=51, COST_WARN=1 | COST_FEASIBLE_CANDIDATE_FOR_HUMAN_REVIEW |
+| session_extreme_retest_v0 | 23 | 0.2858 | 0.2258 | COST_BLOCK=11, COST_OK_ACCEPTABLE=2, COST_OK_STRONG=6, COST_WARN=4 | MARGINAL_REVIEW_REQUIRED |
+| swing_breakout_retest_v0 | 47 | 0.2130 | 0.2986 | COST_BLOCK=12, COST_OK_ACCEPTABLE=7, COST_OK_STRONG=15, COST_WARN=13 | MARGINAL_REVIEW_REQUIRED |
+| symbol_normalized_round_retest_v0 | 76 | 0.1047 | 0.4069 | COST_BLOCK=11, COST_OK_ACCEPTABLE=5, COST_OK_STRONG=53, COST_WARN=7 | COST_FEASIBLE_CANDIDATE_FOR_HUMAN_REVIEW |
 
 ## Current Decision
 
-Passive sample is not ready. Required: 20 active market days, 300 preferred unique family events, 100 minimum with warning, and 100% cost_R coverage. Observed: active_days=0, unique_events=0, coverage=0.00%.
+Enough events exist for preliminary review, but the preferred sample is not complete. Keep observing before candidate promotion decisions.
 
 ## Source Boundary
 

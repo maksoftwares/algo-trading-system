@@ -63,6 +63,28 @@ def test_phase2b_sample_requirements_doc_exists():
     assert "Forbidden" in text
 
 
+def test_phase2b_importer_uses_only_passive_observer_signal_rows(tmp_path):
+    module = _load_module("import_phase2b_passive_observer_logs")
+    root = tmp_path / "phase1"
+    files_dir = tmp_path / "terminal" / "MQL5" / "Files"
+    files_dir.mkdir(parents=True)
+    _write_attachment_log(files_dir / "experimental_demo_attachment_log_breakout_retest_xauusd.csv")
+    _write_executor_order_log(files_dir / "experimental_demo_executor_order_log_breakout_retest_xauusd.csv")
+
+    output = module.import_phase2b_passive_observer_logs(root, files_dir=files_dir)
+
+    assert output.status == "IMPORTED"
+    assert output.imported_rows == 1
+    assert output.unique_events == 1
+    imported = list(csv.DictReader(output.output_path.open(newline="", encoding="utf-8")))
+    assert imported[0]["would_signal"] == "true"
+    assert imported[0]["source_kind"] == "passive_demo_observer_attachment_log"
+    assert imported[0]["estimated_total_cost_R"] == "0.0795"
+    report = output.report_path.read_text(encoding="utf-8")
+    assert "Experimental demo order logs used | false" in report
+    assert "Experimental executor signal logs used | false" in report
+
+
 def _write_passive_log(path: Path) -> None:
     fieldnames = [
         "timestamp_utc",
@@ -118,6 +140,135 @@ def _write_passive_log(path: Path) -> None:
                     "tick_fresh": "true",
                 }
             )
+
+
+def _write_attachment_log(path: Path) -> None:
+    fieldnames = [
+        "timestamp_broker",
+        "timestamp_utc",
+        "timestamp_local",
+        "run_id",
+        "account_server",
+        "symbol",
+        "candidate",
+        "candidate_status",
+        "qualified_symbol",
+        "dry_run",
+        "broker_action_allowed",
+        "observer_supported",
+        "m5_bar_time",
+        "bid",
+        "ask",
+        "spread_points",
+        "stage",
+        "direction",
+        "would_signal",
+        "reason_code",
+        "level_kind",
+        "level_price",
+        "entry_price",
+        "stop_loss",
+        "take_profit",
+        "stop_distance_points",
+    ]
+    rows = [
+        {
+            "timestamp_broker": "2026.05.29 09:40:00",
+            "timestamp_utc": "2026.05.29 09:39:56",
+            "timestamp_local": "2026.05.29 15:09:56",
+            "run_id": "phase2-experimental-demo-attach-v0.1",
+            "account_server": "Capital.ComMena-Demo",
+            "symbol": "XAUUSD",
+            "candidate": "breakout_retest",
+            "candidate_status": "ACCEPTED",
+            "qualified_symbol": "true",
+            "dry_run": "true",
+            "broker_action_allowed": "false",
+            "observer_supported": "true",
+            "m5_bar_time": "2026.05.29 09:40:00",
+            "bid": "4528.68",
+            "ask": "4529.18",
+            "spread_points": "50.00",
+            "stage": "WOULD_SIGNAL",
+            "direction": "LONG",
+            "would_signal": "true",
+            "reason_code": "BREAKOUT_RETEST_LONG_DRY_RUN",
+            "level_kind": "latest_swing_high",
+            "level_price": "4526.04",
+            "entry_price": "4530.50",
+            "stop_loss": "4524.21",
+            "take_profit": "4539.94",
+            "stop_distance_points": "629.18",
+        },
+        {
+            "timestamp_broker": "2026.05.29 09:45:00",
+            "timestamp_utc": "2026.05.29 09:44:56",
+            "timestamp_local": "2026.05.29 15:14:56",
+            "run_id": "phase2-experimental-demo-attach-v0.1",
+            "account_server": "Capital.ComMena-Demo",
+            "symbol": "XAUUSD",
+            "candidate": "breakout_retest",
+            "candidate_status": "ACCEPTED",
+            "qualified_symbol": "true",
+            "dry_run": "true",
+            "broker_action_allowed": "false",
+            "observer_supported": "true",
+            "m5_bar_time": "2026.05.29 09:45:00",
+            "bid": "4532.23",
+            "ask": "4532.98",
+            "spread_points": "75.00",
+            "stage": "WAIT_LEVEL_BREAK_RETEST",
+            "direction": "LONG",
+            "would_signal": "false",
+            "reason_code": "no_long_breakout_retest_candidate",
+            "level_kind": "none",
+            "level_price": "0.00",
+            "entry_price": "0.00",
+            "stop_loss": "0.00",
+            "take_profit": "0.00",
+            "stop_distance_points": "0.00",
+        },
+        {
+            "timestamp_broker": "2026.05.29 09:50:00",
+            "timestamp_utc": "2026.05.29 09:49:56",
+            "timestamp_local": "2026.05.29 15:19:56",
+            "run_id": "phase2-experimental-demo-attach-v0.1",
+            "account_server": "Capital.ComMena-Demo",
+            "symbol": "XAUUSD",
+            "candidate": "breakout_retest",
+            "candidate_status": "ACCEPTED",
+            "qualified_symbol": "true",
+            "dry_run": "true",
+            "broker_action_allowed": "true",
+            "observer_supported": "true",
+            "m5_bar_time": "2026.05.29 09:50:00",
+            "bid": "4532.23",
+            "ask": "4532.98",
+            "spread_points": "75.00",
+            "stage": "WOULD_SIGNAL",
+            "direction": "LONG",
+            "would_signal": "true",
+            "reason_code": "bad_broker_action_row",
+            "level_kind": "latest_swing_high",
+            "level_price": "4526.04",
+            "entry_price": "4530.50",
+            "stop_loss": "4524.21",
+            "take_profit": "4539.94",
+            "stop_distance_points": "629.18",
+        },
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _write_executor_order_log(path: Path) -> None:
+    path.write_text(
+        "timestamp,candidate,symbol,action,profit\n"
+        "2026.05.29 09:40:00,breakout_retest,XAUUSD,ORDER_SEND,10\n",
+        encoding="utf-8",
+    )
 
 
 def _load_module(name: str):

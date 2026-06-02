@@ -48,11 +48,13 @@ The experimental demo broker ledger now has an early review note: `xau-usd/xauus
 | Artifact | Purpose | Current state |
 | --- | --- | --- |
 | `docs/PHASE2B_PASSIVE_OBSERVER_SAMPLE_REQUIREMENTS.md` | Minimum sample standard for passive cost feasibility. | ACTIVE |
+| `scripts/import_phase2b_passive_observer_logs.py` | Imports passive dry-run observer attachment logs into `outputs/paper_observer/passive_cost_observer_log.csv`. | IMPLEMENTED |
 | `scripts/generate_phase2b_passive_observer_reports.py` | Generates the Phase 2B cost, stop-distance, spread-regime, session, hour, and candidate-decision reports. | IMPLEMENTED |
-| `outputs/reports/PHASE2B_COST_FEASIBILITY_REPORT.md` | Current passive cost feasibility report. | PENDING; no passive observer rows yet |
-| `outputs/reports/PHASE2B_CANDIDATE_FEASIBILITY_DECISION.md` | Candidate-level passive read. | PENDING; no passive observer rows yet |
+| `outputs/reports/PHASE2B_PASSIVE_OBSERVER_IMPORT_REPORT.md` | Import evidence showing source files, rows, and boundary flags. | IMPORTED |
+| `outputs/reports/PHASE2B_COST_FEASIBILITY_REPORT.md` | Current passive cost feasibility report. | REVIEW_READY_LOW_SAMPLE; 154 unique family events / 3 active market days |
+| `outputs/reports/PHASE2B_CANDIDATE_FEASIBILITY_DECISION.md` | Candidate-level passive read. | REVIEW_READY_LOW_SAMPLE; preferred 300 events / 20 active market days still open |
 
-Phase 2B reports read `outputs/paper_observer/passive_cost_observer_log.csv` only. They do not read experimental demo order logs and cannot authorize Phase 2.
+Phase 2B reports read `outputs/paper_observer/passive_cost_observer_log.csv` only. The importer populates that file from `experimental_demo_attachment_log*.csv` passive observer logs where `dry_run=true`, `broker_action_allowed=false`, and `would_signal=true`. It does not read experimental demo order logs or experimental executor signal logs and cannot authorize Phase 2.
 
 ## Boundary Validators
 

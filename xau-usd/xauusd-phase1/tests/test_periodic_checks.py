@@ -42,6 +42,7 @@ def test_periodic_check_output_shape(tmp_path: Path):
     assert output.broker_action_boundary_status == "PASS"
     assert output.phase2_readiness_consistency_status == "PASS"
     assert output.phase2b_passive_observer_status == "UNKNOWN"
+    assert output.phase2b_passive_import_status == "UNKNOWN"
     assert output.cost_suspended_promotion_blocker_status == "UNKNOWN"
     assert output.phase3_proxy_non_authoritative_status == "UNKNOWN"
 
@@ -168,9 +169,14 @@ def test_periodic_checks_refresh_local_runtime_latency_when_selected():
 def test_periodic_checks_generate_phase2b_and_boundary_validators():
     script = _periodic_script()
 
+    assert "import_phase2b_passive_observer_logs" in script
     assert "generate_phase2b_passive_observer_reports" in script
     assert "verify_no_cost_suspended_family_promotion" in script
     assert "verify_phase3_proxy_non_authoritative" in script
     assert script.index("phase2_blocker_summary = generate_phase2_blocker_summary(root)") < script.index(
+        "phase2b_passive_import = import_phase2b_passive_observer_logs"
+    )
+    assert script.index("phase2b_passive_import = import_phase2b_passive_observer_logs") < script.index(
         "phase2b_passive_observer = generate_phase2b_passive_observer_reports(root)"
     )
+    assert "--phase2b-passive-files-dir" in script

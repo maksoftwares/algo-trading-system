@@ -1,6 +1,6 @@
 # Phase 2B Cost Feasibility Report
 
-Overall status: PENDING
+Overall status: REVIEW_READY_LOW_SAMPLE
 
 This report reads passive paper-observer logs only. It does not read experimental demo order logs and does not authorize canonical Phase 2, paper-mode execution, demo execution as Phase 2 evidence, or live trading.
 
@@ -8,32 +8,35 @@ This report reads passive paper-observer logs only. It does not read experimenta
 
 | Field | Value |
 | --- | --- |
-| Overall status | PENDING |
+| Overall status | REVIEW_READY_LOW_SAMPLE |
 | Passive log path | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\paper_observer\passive_cost_observer_log.csv |
-| Rows | 0 |
-| Unique family events | 0 |
-| Active market days | 0 |
-| Cost_R coverage | 0.00% |
-| Median cost_R | n/a |
-| Median net edge_R | n/a |
-| Mean cost_R | n/a |
-| Mean net edge_R | n/a |
+| Rows | 269 |
+| Unique family events | 154 |
+| Active market days | 3 |
+| Cost_R coverage | 100.00% |
+| Median cost_R | 0.1379 |
+| Median net edge_R | 0.3737 |
+| Mean cost_R | 0.1972 |
+| Mean net edge_R | 0.3144 |
 
 ## Cost Gate Counts
 
 | Cost gate | Rows |
 | --- | --- |
-| NO_PASSIVE_ROWS | 0 |
+| COST_BLOCK | 54 |
+| COST_OK_ACCEPTABLE | 28 |
+| COST_OK_STRONG | 146 |
+| COST_WARN | 41 |
 
 ## Sample Requirements
 
 | Requirement | Target | Observed | Status |
 | --- | --- | --- | --- |
-| Active market days | >= 20 | 0 | PENDING |
-| Unique family events preferred | >= 300 | 0 | PENDING |
-| Unique family events minimum | >= 100 | 0 | PENDING |
-| Cost_R coverage | 100% | 0.00% | PENDING |
+| Active market days | >= 20 | 3 | PENDING |
+| Unique family events preferred | >= 300 | 154 | PENDING |
+| Unique family events minimum | >= 100 | 154 | PASS |
+| Cost_R coverage | 100% | 100.00% | PASS |
 
 ## Decision
 
-Passive sample is not ready. Required: 20 active market days, 300 preferred unique family events, 100 minimum with warning, and 100% cost_R coverage. Observed: active_days=0, unique_events=0, coverage=0.00%.
+See `PHASE2B_CANDIDATE_FEASIBILITY_DECISION.md` for the candidate-level passive read.

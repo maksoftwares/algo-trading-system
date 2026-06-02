@@ -40,6 +40,8 @@ from generate_phase2_vps_bootstrap_packet import generate_phase2_vps_bootstrap_p
 from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
 from generate_phase2_vps_latency_report import generate_phase2_vps_latency_report
 from generate_phase2_vps_selection_decision_check import generate_phase2_vps_selection_decision_check
+from import_phase2b_passive_observer_logs import DEFAULT_FILES_DIR as DEFAULT_PHASE2B_PASSIVE_FILES_DIR
+from import_phase2b_passive_observer_logs import import_phase2b_passive_observer_logs
 from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
@@ -77,6 +79,7 @@ class PeriodicCheckOutput:
     phase2b_passive_observer_status: str = "UNKNOWN"
     cost_suspended_promotion_blocker_status: str = "UNKNOWN"
     phase3_proxy_non_authoritative_status: str = "UNKNOWN"
+    phase2b_passive_import_status: str = "UNKNOWN"
 
 
 def run_phase1_periodic_checks(
@@ -84,10 +87,12 @@ def run_phase1_periodic_checks(
     files_dir: Path,
     compile_log: Path,
     spread_files_dir: Path | None = None,
+    phase2b_passive_files_dir: Path | None = None,
     max_fresh_minutes: int = 15,
 ) -> PeriodicCheckOutput:
     root = root.resolve()
     spread_files_dir = spread_files_dir or files_dir
+    phase2b_passive_files_dir = phase2b_passive_files_dir or DEFAULT_PHASE2B_PASSIVE_FILES_DIR
     report_dir = root / "outputs" / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
     phase0_root = root.parent / "xauusd-phase0"
@@ -216,6 +221,7 @@ def run_phase1_periodic_checks(
     phase2_blocker_summary = generate_phase2_blocker_summary(root)
     canonical_block_status = "PASS" if verify_canonical_phase2_block(root) == 0 else "FAIL"
     experimental_quarantine_status = "PASS" if verify_experimental_quarantine(root) == 0 else "FAIL"
+    phase2b_passive_import = import_phase2b_passive_observer_logs(root, files_dir=phase2b_passive_files_dir)
     phase2b_passive_observer = generate_phase2b_passive_observer_reports(root)
     cost_suspended_promotion_status = (
         "PASS" if verify_no_cost_suspended_family_promotion(root) == 0 else "FAIL"
@@ -271,6 +277,7 @@ def run_phase1_periodic_checks(
         canonical_phase2_block_status=canonical_block_status,
         experimental_quarantine_status=experimental_quarantine_status,
         phase2b_passive_observer_status=phase2b_passive_observer.status,
+        phase2b_passive_import_status=phase2b_passive_import.status,
         cost_suspended_promotion_blocker_status=cost_suspended_promotion_status,
         phase3_proxy_non_authoritative_status=phase3_proxy_non_authoritative_status,
         phase2_readiness_consistency_status=readiness_consistency.status,
@@ -324,6 +331,12 @@ def main(argv: list[str] | None = None) -> int:
         help="Optional passive spread logger Files directory. Defaults to --files-dir.",
     )
     parser.add_argument(
+        "--phase2b-passive-files-dir",
+        type=Path,
+        default=DEFAULT_PHASE2B_PASSIVE_FILES_DIR,
+        help="MT5 Files directory containing passive Phase 2B observer attachment logs.",
+    )
+    parser.add_argument(
         "--root",
         type=Path,
         default=Path(__file__).resolve().parents[1],
@@ -336,6 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         files_dir=args.files_dir,
         compile_log=args.compile_log,
         spread_files_dir=args.spread_files_dir,
+        phase2b_passive_files_dir=args.phase2b_passive_files_dir,
         max_fresh_minutes=args.max_fresh_minutes,
     )
     print(f"Periodic checks: {output.status}")
@@ -354,6 +368,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Phase 2 owner action packet: {output.phase2_owner_action_status}")
     print(f"Phase 2 VPS bootstrap packet: {output.phase2_vps_bootstrap_status}")
     print(f"VPS first-day verification: {output.vps_first_day_status}")
+    print(f"Phase 2B passive import: {output.phase2b_passive_import_status}")
     print(f"Phase 2B passive observer: {output.phase2b_passive_observer_status}")
     print(f"Cost-suspended promotion blocker: {output.cost_suspended_promotion_blocker_status}")
     print(f"Phase 3 proxy non-authoritative: {output.phase3_proxy_non_authoritative_status}")
