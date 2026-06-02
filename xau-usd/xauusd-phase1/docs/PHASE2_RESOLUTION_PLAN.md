@@ -43,6 +43,35 @@ The experimental demo broker ledger now has an early review note: `xau-usd/xauus
 | Phase 0R replacement research | Find lower-cost, wider-stop candidates | New locked hypotheses only |
 | Phase 2Q experimental quarantine | Keep owner-requested demo execution isolated | Not canonical evidence |
 
+## Phase 2B Passive Observer Tooling
+
+| Artifact | Purpose | Current state |
+| --- | --- | --- |
+| `docs/PHASE2B_PASSIVE_OBSERVER_SAMPLE_REQUIREMENTS.md` | Minimum sample standard for passive cost feasibility. | ACTIVE |
+| `scripts/generate_phase2b_passive_observer_reports.py` | Generates the Phase 2B cost, stop-distance, spread-regime, session, hour, and candidate-decision reports. | IMPLEMENTED |
+| `outputs/reports/PHASE2B_COST_FEASIBILITY_REPORT.md` | Current passive cost feasibility report. | PENDING; no passive observer rows yet |
+| `outputs/reports/PHASE2B_CANDIDATE_FEASIBILITY_DECISION.md` | Candidate-level passive read. | PENDING; no passive observer rows yet |
+
+Phase 2B reports read `outputs/paper_observer/passive_cost_observer_log.csv` only. They do not read experimental demo order logs and cannot authorize Phase 2.
+
+## Boundary Validators
+
+| Script | Required result | Purpose |
+| --- | --- | --- |
+| `scripts/verify_no_cost_suspended_family_promotion.py` | PASS | Fails if a `COST_SUSPENDED_CANONICAL` family is promoted to execution eligibility, paper-mode approval, demo-evidence approval, live approval, or diversification eligibility. |
+| `scripts/verify_phase3_proxy_non_authoritative.py` | PASS | Fails if Phase 3 proxy evidence is used to set Phase 2 readiness, owner approval, paper-mode execution, or canonical authorization. |
+
+Latest expected generated outputs:
+
+```text
+outputs/reports/COST_SUSPENDED_PROMOTION_BLOCKER_REPORT.md = PASS
+outputs/reports/PHASE3_PROXY_NON_AUTHORITATIVE_VERIFICATION.md = PASS
+```
+
+## New Candidate Draft
+
+The current draft for a future cost-aware candidate is `xau-usd/xauusd-phase0/docs/hypothesis_breakout_retest_cost_aware_v2_DRAFT.md`. It is not hash-locked and is not approved for matrix testing until humans review and finalize it.
+
 ## Reopening Criteria
 
 Canonical Phase 2 can be reconsidered only if one path is satisfied:

@@ -34,6 +34,7 @@ from generate_phase2_blocker_summary import generate_phase2_blocker_summary
 from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
 from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
+from generate_phase2b_passive_observer_reports import generate_phase2b_passive_observer_reports
 from generate_phase2_readiness_report import generate_phase2_readiness_report
 from generate_phase2_vps_bootstrap_packet import generate_phase2_vps_bootstrap_packet
 from generate_phase2_vps_first_day_verification import generate_phase2_vps_first_day_verification
@@ -47,6 +48,8 @@ from phase0.spread_analysis import analyze_spread_logs
 from verify_readiness_consistency import verify_readiness_consistency
 from verify_canonical_phase2_block import verify_canonical_phase2_block
 from verify_experimental_quarantine import verify_experimental_quarantine
+from verify_no_cost_suspended_family_promotion import verify_no_cost_suspended_family_promotion
+from verify_phase3_proxy_non_authoritative import verify_phase3_proxy_non_authoritative
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -71,6 +74,9 @@ class PeriodicCheckOutput:
     phase2_blocker_summary_status: str = "UNKNOWN"
     canonical_phase2_block_status: str = "UNKNOWN"
     experimental_quarantine_status: str = "UNKNOWN"
+    phase2b_passive_observer_status: str = "UNKNOWN"
+    cost_suspended_promotion_blocker_status: str = "UNKNOWN"
+    phase3_proxy_non_authoritative_status: str = "UNKNOWN"
 
 
 def run_phase1_periodic_checks(
@@ -210,6 +216,13 @@ def run_phase1_periodic_checks(
     phase2_blocker_summary = generate_phase2_blocker_summary(root)
     canonical_block_status = "PASS" if verify_canonical_phase2_block(root) == 0 else "FAIL"
     experimental_quarantine_status = "PASS" if verify_experimental_quarantine(root) == 0 else "FAIL"
+    phase2b_passive_observer = generate_phase2b_passive_observer_reports(root)
+    cost_suspended_promotion_status = (
+        "PASS" if verify_no_cost_suspended_family_promotion(root) == 0 else "FAIL"
+    )
+    phase3_proxy_non_authoritative_status = (
+        "PASS" if verify_phase3_proxy_non_authoritative(root) == 0 else "FAIL"
+    )
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     owner_action_packet = generate_phase2_owner_action_packet(root=root)
     vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)
@@ -238,6 +251,8 @@ def run_phase1_periodic_checks(
         and phase2_blocker_summary.status == "BLOCKED_BY_MEASURED_COST"
         and canonical_block_status == "PASS"
         and experimental_quarantine_status == "PASS"
+        and cost_suspended_promotion_status == "PASS"
+        and phase3_proxy_non_authoritative_status == "PASS"
         else "FAIL"
     )
     return PeriodicCheckOutput(
@@ -255,6 +270,9 @@ def run_phase1_periodic_checks(
         phase2_blocker_summary_status=phase2_blocker_summary.status,
         canonical_phase2_block_status=canonical_block_status,
         experimental_quarantine_status=experimental_quarantine_status,
+        phase2b_passive_observer_status=phase2b_passive_observer.status,
+        cost_suspended_promotion_blocker_status=cost_suspended_promotion_status,
+        phase3_proxy_non_authoritative_status=phase3_proxy_non_authoritative_status,
         phase2_readiness_consistency_status=readiness_consistency.status,
         phase2_owner_action_status=owner_action_packet.status,
         phase2_vps_bootstrap_status=vps_bootstrap_packet.status,
@@ -336,6 +354,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Phase 2 owner action packet: {output.phase2_owner_action_status}")
     print(f"Phase 2 VPS bootstrap packet: {output.phase2_vps_bootstrap_status}")
     print(f"VPS first-day verification: {output.vps_first_day_status}")
+    print(f"Phase 2B passive observer: {output.phase2b_passive_observer_status}")
+    print(f"Cost-suspended promotion blocker: {output.cost_suspended_promotion_blocker_status}")
+    print(f"Phase 3 proxy non-authoritative: {output.phase3_proxy_non_authoritative_status}")
     print(f"Review index: {output.review_index_status}")
     return 0 if output.status == "PASS" else 1
 
