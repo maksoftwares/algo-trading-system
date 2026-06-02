@@ -22,6 +22,10 @@ Current lifecycle:
 | --- | --- | --- |
 | `breakout_retest` | `COST_SUSPENDED_CANONICAL` | Fresh measured-cost model is PASS, measured-cost revalidation is FAIL, assumption delta is FAIL, and `MEASURED_COST_REVALIDATION_SANITY_CHECK.md` is `CALCULATION_CONFIRMED`. Phase 1 observation may continue only as telemetry. |
 | `swing_breakout_retest_v0` | `COST_SUSPENDED_CANONICAL` | Research gates and Gate 9 passed; same-family with `breakout_retest`; it inherits the breakout-retest family measured-cost suspension and is not independent execution eligibility. |
+| `symbol_normalized_round_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; it inherits the family-level measured-cost suspension and is not independent execution eligibility. |
+| `quarter_round_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
+| `round_number_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
+| `session_extreme_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
 | `trend_pullback` | `RETIRED` | Failed Phase 0 gates. |
 | `range_mr` | `RETIRED` | Failed Phase 0 gates. |
 

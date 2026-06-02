@@ -8,15 +8,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Check | Status | Message |
 | --- | --- | --- |
-| would_signal_rows | PASS | Would-signal rows observed: 197. |
-| would_signal_clusters | PASS | Setup clusters observed: 197. |
+| would_signal_rows | PASS | Would-signal rows observed: 199. |
+| would_signal_clusters | PASS | Setup clusters observed: 199. |
 | would_signal_dry_run | PASS | All would-signal rows stayed dry-run. |
 | would_signal_permission_lock | PASS | All would-signal rows kept permission false. |
 
 ## Summary
 
-- Would-signal rows: 197
-- Setup clusters: 197
+- Would-signal rows: 199
+- Setup clusters: 199
 - Directions observed: LONG, SHORT
 - Level kinds observed: latest_swing_high, latest_swing_low, previous_daily_high, previous_daily_low, previous_weekly_low
 - Observers observed: breakout_retest, swing_breakout_retest_v0
@@ -28,7 +28,7 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | --- | --- |
 | BR only | 25 |
 | SBR only | 0 |
-| Both same direction | 86 |
+| Both same direction | 87 |
 | Both opposite direction | 0 |
 
 ## Setup Clusters
@@ -232,19 +232,21 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | WS195 | swing_breakout_retest_v0 | 1 | SHORT | latest_swing_low | 4484.62 | 4481.38 | 4485.09 | 4475.81 | 2026.06.01 22:30:00 | 2026.06.01 22:30:00 |
 | WS196 | breakout_retest | 1 | LONG | latest_swing_high | 4485.59 | 4489.42 | 4485.09 | 4495.91 | 2026.06.02 03:15:00 | 2026.06.02 03:15:00 |
 | WS197 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4485.59 | 4489.42 | 4485.09 | 4495.91 | 2026.06.02 03:15:00 | 2026.06.02 03:15:00 |
+| WS198 | breakout_retest | 1 | LONG | latest_swing_high | 4528.16 | 4531.94 | 4527.37 | 4538.80 | 2026.06.02 08:00:00 | 2026.06.02 08:00:00 |
+| WS199 | swing_breakout_retest_v0 | 1 | LONG | latest_swing_high | 4528.16 | 4531.94 | 4527.37 | 4538.80 | 2026.06.02 08:00:00 | 2026.06.02 08:00:00 |
 
 ## Direction Counts
 
 | Value | Count |
 | --- | --- |
-| LONG | 79 |
+| LONG | 81 |
 | SHORT | 118 |
 
 ## Level Kind Counts
 
 | Value | Count |
 | --- | --- |
-| latest_swing_high | 72 |
+| latest_swing_high | 74 |
 | latest_swing_low | 99 |
 | previous_daily_high | 7 |
 | previous_daily_low | 9 |
@@ -254,8 +256,6 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 
 | Observer | Broker Time | Bar Time | Direction | Level Kind | Level | Entry | Stop | Target | Spread | Risk | Execution | Permission | Dry Run |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| swing_breakout_retest_v0 | 2026.05.29 10:30:00 | 2026.05.29 10:30:00 | LONG | latest_swing_high | 4526.04 | 4527.63 | 4525.35 | 4531.05 | 75.00 | NORMAL | EXECUTION_OK | false | true |
-| breakout_retest | 2026.05.29 12:40:01 | 2026.05.29 12:40:00 | LONG | previous_daily_high | 4516.51 | 4523.33 | 4514.20 | 4537.03 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.29 13:00:00 | 2026.05.29 13:00:00 | LONG | previous_daily_high | 4516.51 | 4519.85 | 4513.53 | 4529.32 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.29 13:05:00 | 2026.05.29 13:05:00 | LONG | previous_daily_high | 4516.51 | 4523.79 | 4515.82 | 4535.75 | 75.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.05.29 13:15:00 | 2026.05.29 13:15:00 | SHORT | latest_swing_low | 4525.75 | 4520.19 | 4527.30 | 4509.53 | 50.00 | NORMAL | EXECUTION_OK | false | true |
@@ -304,3 +304,5 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | swing_breakout_retest_v0 | 2026.06.01 22:30:05 | 2026.06.01 22:30:00 | SHORT | latest_swing_low | 4484.62 | 4481.38 | 4485.09 | 4475.81 | 50.00 | NORMAL | EXECUTION_OK | false | true |
 | breakout_retest | 2026.06.02 03:15:00 | 2026.06.02 03:15:00 | LONG | latest_swing_high | 4485.59 | 4489.42 | 4485.09 | 4495.91 | 75.00 | NORMAL | EXECUTION_OK | false | true |
 | swing_breakout_retest_v0 | 2026.06.02 03:15:00 | 2026.06.02 03:15:00 | LONG | latest_swing_high | 4485.59 | 4489.42 | 4485.09 | 4495.91 | 75.00 | NORMAL | EXECUTION_OK | false | true |
+| breakout_retest | 2026.06.02 08:00:00 | 2026.06.02 08:00:00 | LONG | latest_swing_high | 4528.16 | 4531.94 | 4527.37 | 4538.80 | 50.00 | NORMAL | EXECUTION_OK | false | true |
+| swing_breakout_retest_v0 | 2026.06.02 08:00:00 | 2026.06.02 08:00:00 | LONG | latest_swing_high | 4528.16 | 4531.94 | 4527.37 | 4538.80 | 50.00 | NORMAL | EXECUTION_OK | false | true |

@@ -93,6 +93,8 @@ def attach_phase2_experimental_demo_executors(
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
     max_account_open_positions: int = 3,
+    max_estimated_cost_r: float = 0.30,
+    max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
 ) -> AttachOutput:
     phase1_root = phase1_root.resolve()
@@ -126,6 +128,8 @@ def attach_phase2_experimental_demo_executors(
         authorized_candidates_csv=authorized_candidates_csv,
         max_account_orders_per_day=max_account_orders_per_day,
         max_account_open_positions=max_account_open_positions,
+        max_estimated_cost_r=max_estimated_cost_r,
+        max_measured_spread_points=max_measured_spread_points,
         kill_switch_file_name=kill_switch_file_name,
     )
     if launch:
@@ -160,6 +164,8 @@ def attach_phase2_experimental_demo_executors(
             "max_orders_per_day_account": max_account_orders_per_day,
             "max_open_positions_per_instance": 1,
             "max_open_positions_account": max_account_open_positions,
+            "max_estimated_cost_R": max_estimated_cost_r,
+            "max_measured_spread_points": max_measured_spread_points,
             "allowed_account_logins_configured": bool(allowed_account_logins_csv.strip()),
             "authorized_candidates_csv": authorized_candidates_csv,
             "authorization_token_configured": experimental_authorization_token == REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN,
@@ -175,6 +181,7 @@ def attach_phase2_experimental_demo_executors(
             "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
             "Each candidate-symbol instance uses fixed 0.01 lot, hard SL/TP, and one open exposure per instance.",
             "Account-level daily order and open-position caps apply across chart instances.",
+            "Current spread and estimated cost in R must remain below configured thresholds before any order is sent.",
             "This is an experimental demo execution run, not canonical live authorization.",
         ],
     }
@@ -291,6 +298,8 @@ def _replace_default_profile(
     authorized_candidates_csv: str,
     max_account_orders_per_day: int,
     max_account_open_positions: int,
+    max_estimated_cost_r: float,
+    max_measured_spread_points: float,
     kill_switch_file_name: str,
 ) -> Path:
     charts_root = terminal_data_dir / "MQL5" / "Profiles" / "Charts"
@@ -315,6 +324,8 @@ def _replace_default_profile(
                 authorized_candidates_csv=authorized_candidates_csv,
                 max_account_orders_per_day=max_account_orders_per_day,
                 max_account_open_positions=max_account_open_positions,
+                max_estimated_cost_r=max_estimated_cost_r,
+                max_measured_spread_points=max_measured_spread_points,
                 kill_switch_file_name=kill_switch_file_name,
             ),
             encoding="utf-8",
@@ -331,6 +342,8 @@ def _render_chart(
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
     max_account_open_positions: int = 3,
+    max_estimated_cost_r: float = 0.30,
+    max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
 ) -> str:
     left = 20 + ((index - 1) % 3) * 42
@@ -398,6 +411,8 @@ def _render_chart(
             "InpMaxOpenPositionsPerInstance=1",
             f"InpMaxAccountOpenPositions={max_account_open_positions}",
             "InpDeviationPoints=50",
+            f"InpMaxEstimatedCostR={max_estimated_cost_r:.2f}",
+            f"InpMaxMeasuredSpreadPoints={max_measured_spread_points:.1f}",
             "</inputs>",
             "</expert>",
             "",
@@ -481,6 +496,11 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         f"Data folder: `{payload['terminal']['terminal_data_dir']}`",
         f"Profile backup: `{payload['terminal']['profile_backup_dir']}`",
         f"Executor log backup: `{payload['terminal']['executor_log_backup_dir']}`",
+        f"Authorized candidates: `{payload['ea']['authorized_candidates_csv']}`",
+        f"Account order cap: `{payload['ea']['max_orders_per_day_account']}`",
+        f"Account exposure cap: `{payload['ea']['max_open_positions_account']}`",
+        f"Max estimated cost R: `{payload['ea']['max_estimated_cost_R']}`",
+        f"Max measured spread points: `{payload['ea']['max_measured_spread_points']}`",
         "",
         "| Candidate | Status | Symbol | Executor | Qualification |",
         "|---|---|---|---|---|",
@@ -521,6 +541,8 @@ def main() -> int:
     parser.add_argument("--authorized-candidates-csv", default=DEFAULT_AUTHORIZED_CANDIDATES_CSV)
     parser.add_argument("--max-account-orders-per-day", type=int, default=24)
     parser.add_argument("--max-account-open-positions", type=int, default=3)
+    parser.add_argument("--max-estimated-cost-r", type=float, default=0.30)
+    parser.add_argument("--max-measured-spread-points", type=float, default=75.0)
     parser.add_argument("--kill-switch-file-name", default="experimental_demo_kill_switch.txt")
     args = parser.parse_args()
 
@@ -536,6 +558,8 @@ def main() -> int:
         authorized_candidates_csv=args.authorized_candidates_csv,
         max_account_orders_per_day=args.max_account_orders_per_day,
         max_account_open_positions=args.max_account_open_positions,
+        max_estimated_cost_r=args.max_estimated_cost_r,
+        max_measured_spread_points=args.max_measured_spread_points,
         kill_switch_file_name=args.kill_switch_file_name,
     )
     print(f"{output.status}: {output.attachment_count} attachments")

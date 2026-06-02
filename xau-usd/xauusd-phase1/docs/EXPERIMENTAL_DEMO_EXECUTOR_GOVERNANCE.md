@@ -28,6 +28,8 @@ Overall status: QUARANTINE_REVIEW_ONLY
 | Account open exposure cap | `InpMaxAccountOpenPositions`; counts experimental magic-number positions/orders across symbols. |
 | Per-instance caps | Fixed lot, one open exposure per instance, min seconds between orders, and per-instance order cap. |
 | Kill switch | `InpKillSwitchFileName`; if the file contains `KILL`, new orders are blocked immediately. |
+| Cost-R pre-order guard | `InpMaxEstimatedCostR`; estimated spread cost in R must remain below the configured threshold before `OrderSend`. |
+| Spread pre-order guard | `InpMaxMeasuredSpreadPoints`; current spread must remain below the configured point threshold before `OrderSend`. |
 | Mode truthfulness | Order logs use `order_mode=MARKET_PROXY` when market orders approximate stop-entry logic. |
 | Cost telemetry | Order logs include spread, slippage, stop distance, and estimated cost in R. |
 

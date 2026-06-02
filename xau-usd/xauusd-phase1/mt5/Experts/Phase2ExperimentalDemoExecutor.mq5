@@ -28,6 +28,8 @@ input int InpMinSecondsBetweenOrders = 300;
 input int InpMaxOpenPositionsPerInstance = 1;
 input int InpMaxAccountOpenPositions = 3;
 input int InpDeviationPoints = 50;
+input double InpMaxEstimatedCostR = 0.30;
+input double InpMaxMeasuredSpreadPoints = 75.0;
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
 datetime g_last_m5_bar_time = 0;
@@ -96,6 +98,23 @@ bool CandidateExecutionAuthorized()
 bool ExperimentalAuthorizationTokenValid()
 {
    return TrimToken(InpExperimentalAuthorizationToken) == TrimToken(InpRequiredExperimentalAuthorizationToken);
+}
+
+double CurrentSpreadPoints()
+{
+   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   if(point <= 0.0)
+      return 0.0;
+   return (SymbolInfoDouble(_Symbol, SYMBOL_ASK) - SymbolInfoDouble(_Symbol, SYMBOL_BID)) / point;
+}
+
+double EstimatedCostRForObservation(const Phase1BreakoutRetestObservation &observation, const double spread_points)
+{
+   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   double risk_price = MathAbs(observation.entry_price - observation.stop_loss);
+   if(point <= 0.0 || risk_price <= 0.0)
+      return 0.0;
+   return spread_points * point / risk_price;
 }
 
 bool IsAllowedCandidate(const string candidate)
@@ -668,6 +687,8 @@ bool EnsureStartupLogHeader()
       "authorization_token_present",
       "account_max_orders_per_day",
       "account_max_open_positions",
+      "max_estimated_cost_R",
+      "max_measured_spread_points",
       "kill_switch_file",
       "startup_status"
    };
@@ -695,6 +716,8 @@ bool WriteStartupRow(const string status_text)
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
       IntegerToString(InpMaxAccountOrdersPerDay),
       IntegerToString(InpMaxAccountOpenPositions),
+      DoubleToString(InpMaxEstimatedCostR, 4),
+      DoubleToString(InpMaxMeasuredSpreadPoints, 2),
       InpKillSwitchFileName,
       status_text
    };
@@ -921,7 +944,12 @@ void WriteOrderLogRow(
    AppendCsvRow(InpOrderLogFileName, row);
 }
 
-bool TradingGuardsPass(const Phase1BreakoutRetestObservation &observation, string &guard_reason)
+bool TradingGuardsPass(
+   const Phase1BreakoutRetestObservation &observation,
+   const double spread_points,
+   const double estimated_cost_r,
+   string &guard_reason
+)
 {
    ResetDailyOrderCounterIfNeeded();
    if(InpDryRunOnly)
@@ -975,6 +1003,16 @@ bool TradingGuardsPass(const Phase1BreakoutRetestObservation &observation, strin
       guard_reason = "missing_entry_sl_tp";
       return false;
    }
+   if(InpMaxMeasuredSpreadPoints > 0.0 && spread_points > InpMaxMeasuredSpreadPoints)
+   {
+      guard_reason = "measured_spread_points_exceeds_threshold";
+      return false;
+   }
+   if(InpMaxEstimatedCostR > 0.0 && estimated_cost_r > InpMaxEstimatedCostR)
+   {
+      guard_reason = "estimated_cost_r_exceeds_threshold";
+      return false;
+   }
    if(InpMaxOrdersPerDay > 0 && g_orders_today >= InpMaxOrdersPerDay)
    {
       guard_reason = "max_orders_per_day_reached";
@@ -1012,8 +1050,9 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double spread_at_signal_points = point > 0.0 ? (ask - bid) / point : 0.0;
-   if(!TradingGuardsPass(observation, guard_reason))
+   double spread_at_signal_points = CurrentSpreadPoints();
+   double estimated_cost_r_signal = EstimatedCostRForObservation(observation, spread_at_signal_points);
+   if(!TradingGuardsPass(observation, spread_at_signal_points, estimated_cost_r_signal, guard_reason))
    {
       WriteOrderLogRow(
          "GUARD_BLOCK",
@@ -1029,7 +1068,7 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
          spread_at_signal_points,
          spread_at_signal_points,
          observation.entry_price,
-         0.0,
+         estimated_cost_r_signal,
          observation.stop_distance_points
       );
       return false;
@@ -1094,7 +1133,7 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
       g_orders_today++;
       IncrementAccountOrdersToday();
    }
-   double spread_at_order_points = point > 0.0 ? (SymbolInfoDouble(_Symbol, SYMBOL_ASK) - SymbolInfoDouble(_Symbol, SYMBOL_BID)) / point : 0.0;
+   double spread_at_order_points = CurrentSpreadPoints();
    double estimated_cost_r = signal_risk > 0.0 ? (spread_at_order_points * point / signal_risk) : 0.0;
    WriteOrderLogRow(
       action,

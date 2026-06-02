@@ -39,7 +39,7 @@ Agent handoff and current gate status are maintained in `agent.md`.
 
 ## Status Dashboard
 
-Open `status.html` in a browser for the current project dashboard. It summarizes Phase 0, Phase 1, Phase 2 readiness, soak progress, the active-market 72h gate, the process/code-freeze 96h gate, measured-cost status, and all accepted/rejected EA candidates in one page.
+Open `status.html` in a browser for the current project dashboard. It summarizes Phase 0, Phase 1, Phase 2 readiness, soak progress, the active-market 72h gate, the process/code-freeze 96h gate, measured-cost status, experimental-demo governance, and all accepted/rejected EA candidates in one page.
 
 The dashboard is generated from repo artifacts by:
 
@@ -54,7 +54,7 @@ The hourly Phase 1 periodic check also regenerates it while the machine is onlin
 
 Phase 1 dry-run is authorized for infrastructure telemetry only. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
 
-`breakout_retest` passed the historical Phase 0 package, but the breakout-retest family is currently `COST_SUSPENDED_CANONICAL`: the fresh measured-cost model is PASS, measured-cost revalidation is FAIL, measured-cost assumption delta is FAIL, and the sanity check confirms the conversion path. Execution eligibility remains `BLOCKED`. `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates, not independent diversification or Phase 2 execution authorization. `round_number_retest_v0` and `session_extreme_retest_v0` remain provisional same-family candidates pending separate review. `trend_pullback`, `range_mr`, and the non-level independent research attempts remain rejected.
+`breakout_retest` passed the historical Phase 0 package, but the breakout-retest family is currently `COST_SUSPENDED_CANONICAL`: the fresh measured-cost model is PASS, measured-cost revalidation is FAIL, measured-cost assumption delta is FAIL, and the sanity check confirms the conversion path. Execution eligibility remains `BLOCKED`. `swing_breakout_retest_v0`, `symbol_normalized_round_retest_v0`, `quarter_round_retest_v0`, `round_number_retest_v0`, and `session_extreme_retest_v0` are same-family variants; they are not independent diversification and cannot become canonical Phase 2 execution streams while the family-level cost suspension stands. `trend_pullback`, `range_mr`, and the non-level independent research attempts remain rejected.
 
 ## Current Phase Label
 
@@ -100,4 +100,4 @@ The latest reviewer feedback is tracked in:
 - `docs/REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`
 - `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`
 
-Review #9 keeps Phase 1 telemetry, limited Phase 2 documentation, and independent-candidate research moving, but Phase 2 implementation is blocked by measured-cost revalidation FAIL, measured-cost assumption delta FAIL, and owner approval PENDING. It also confirms that the current approved candidates are one correlated breakout-retest family, not independent diversification.
+Review #9 keeps Phase 1 telemetry, limited Phase 2 documentation, and independent-candidate research moving, but Phase 2 implementation is blocked by measured-cost revalidation FAIL, measured-cost assumption delta FAIL, and owner approval PENDING. The 2026-06-02 Phase 2 review adds a cost-suspension closure package and experimental-executor governance parity audit while keeping canonical Phase 2 broker execution NO-GO. It also confirms that the current approved/provisional candidates are one correlated breakout-retest family, not independent diversification.

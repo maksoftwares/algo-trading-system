@@ -334,8 +334,22 @@ def _owner_packet_recommendation_errors(root: Path) -> list[str]:
     decision_sheet = payload.get("one_screen_vps_decision_sheet")
     if not isinstance(decision_sheet, dict):
         errors.append("PHASE2_OWNER_ACTION_PACKET.json must include one_screen_vps_decision_sheet.")
-    elif decision_sheet.get("status") != "WAITING_OWNER_SELECTION":
-        errors.append("PHASE2_OWNER_ACTION_PACKET.json one_screen_vps_decision_sheet must wait for owner selection.")
+    elif decision_sheet.get("status") not in {"WAITING_OWNER_SELECTION", "RUNTIME_HOST_SELECTED"}:
+        errors.append(
+            "PHASE2_OWNER_ACTION_PACKET.json one_screen_vps_decision_sheet must either wait for owner selection "
+            "or record an owner-selected runtime host."
+        )
+    elif decision_sheet.get("status") == "RUNTIME_HOST_SELECTED":
+        decision = str(decision_sheet.get("decision", "")).upper()
+        authority = str(decision_sheet.get("authority_boundary", "")).lower()
+        if "LOCAL_SYSTEM_RUNTIME" not in decision and "VPS" not in decision:
+            errors.append(
+                "PHASE2_OWNER_ACTION_PACKET.json one_screen_vps_decision_sheet must name the selected runtime host."
+            )
+        if "does not authorize" not in authority:
+            errors.append(
+                "PHASE2_OWNER_ACTION_PACKET.json one_screen_vps_decision_sheet must preserve the non-authorizing boundary."
+            )
 
     required_fields = {
         "status": "VPS recommendation status",

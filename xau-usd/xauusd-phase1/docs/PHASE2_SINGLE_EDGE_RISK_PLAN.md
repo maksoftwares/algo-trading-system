@@ -13,6 +13,9 @@ Update 2026-06-02: the fresh measured-cost model is PASS, but measured-cost reva
 | `breakout_retest` | COST_SUSPENDED_CANONICAL | Primary expression of the breakout-retest family; execution is blocked after confirmed measured-cost failure. |
 | `swing_breakout_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
 | `symbol_normalized_round_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
+| `quarter_round_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; provisional evidence cannot override the family-level measured-cost suspension. |
+| `round_number_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; provisional evidence cannot override the family-level measured-cost suspension. |
+| `session_extreme_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; provisional evidence cannot override the family-level measured-cost suspension. |
 
 Rejected experts and rejected research candidates remain rejected unless a new versioned hypothesis is written, hash-locked, and rerun through Phase 0.
 
@@ -25,8 +28,9 @@ Phase 2 paper mode currently has no execution-eligible stream because the only p
 | `breakout_retest` | Cost-suspended canonical; not execution-eligible under the current measured-cost evidence. |
 | `swing_breakout_retest_v0` | observer-only telemetry. |
 | `symbol_normalized_round_retest_v0` | observer-only telemetry. |
-| `round_number_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
-| `session_extreme_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
+| `quarter_round_retest_v0` | Cost-suspended same-family research/provisional lane; disabled for canonical Phase 2 execution. |
+| `round_number_retest_v0` | Cost-suspended same-family research/provisional lane; disabled for canonical Phase 2 execution. |
+| `session_extreme_retest_v0` | Cost-suspended same-family research/provisional lane; disabled for canonical Phase 2 execution. |
 
 Same-family variants must not be counted as diversification and must not generate paper fills in the first Phase 2 slice.
 

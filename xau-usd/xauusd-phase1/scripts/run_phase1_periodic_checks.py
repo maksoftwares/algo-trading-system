@@ -14,6 +14,7 @@ if PHASE0_SRC.exists() and str(PHASE0_SRC) not in sys.path:
 
 from append_phase1_soak_history import append_phase1_soak_history
 from analyze_phase1_soak import analyze_phase1_soak
+from audit_experimental_executor_governance import audit_experimental_executor_governance
 from check_phase1_external_health import check_external_health
 from generate_phase1_acceptance_report import generate_phase1_acceptance_report
 from generate_phase1_observer_parity_report import generate_phase1_observer_parity_report
@@ -54,6 +55,7 @@ class PeriodicCheckOutput:
     phase2_readiness_status: str
     phase2_demo_preflight_status: str
     phase2_demo_account_isolation_status: str
+    experimental_executor_governance_status: str
     phase2_readiness_consistency_status: str
     phase2_owner_action_status: str
     phase2_vps_bootstrap_status: str
@@ -192,6 +194,7 @@ def run_phase1_periodic_checks(
     )
     generate_phase2_demo_countdown_report(root=root)
     demo_account_isolation = generate_phase2_demo_account_isolation_report(root=root)
+    experimental_governance = audit_experimental_executor_governance(root)
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     owner_action_packet = generate_phase2_owner_action_packet(root=root)
     vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)
@@ -211,7 +214,7 @@ def run_phase1_periodic_checks(
         output_path=external_health_path,
         max_fresh_minutes=max_fresh_minutes,
     )
-    status = "PASS" if external_health.status == "PASS" else "FAIL"
+    status = "PASS" if external_health.status == "PASS" and experimental_governance.status == "PASS" else "FAIL"
     return PeriodicCheckOutput(
         status=status,
         status_summary_path=status_summary_path,
@@ -221,6 +224,7 @@ def run_phase1_periodic_checks(
         phase2_readiness_status=phase2_readiness.status,
         phase2_demo_preflight_status=phase2_preflight.status,
         phase2_demo_account_isolation_status=demo_account_isolation.status,
+        experimental_executor_governance_status=experimental_governance.status,
         phase2_readiness_consistency_status=readiness_consistency.status,
         phase2_owner_action_status=owner_action_packet.status,
         phase2_vps_bootstrap_status=vps_bootstrap_packet.status,
@@ -295,6 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Phase 2 readiness: {output.phase2_readiness_status}")
     print(f"Phase 2 demo preflight: {output.phase2_demo_preflight_status}")
     print(f"Phase 2 demo account isolation: {output.phase2_demo_account_isolation_status}")
+    print(f"Experimental executor governance: {output.experimental_executor_governance_status}")
     print(f"Phase 2 readiness consistency: {output.phase2_readiness_consistency_status}")
     print(f"Phase 2 owner action packet: {output.phase2_owner_action_status}")
     print(f"Phase 2 VPS bootstrap packet: {output.phase2_vps_bootstrap_status}")

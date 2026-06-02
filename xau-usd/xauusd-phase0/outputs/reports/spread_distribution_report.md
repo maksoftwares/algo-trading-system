@@ -2,13 +2,13 @@
 
 ## Admission Filters
 
-- Source rows: 154895
+- Source rows: 155842
 - Freshness columns available: yes
 - Missing freshness columns: none
 - Rows excluded because tick_fresh was not true or was missing: 57684
 - Rows missing tick_fresh: 55704
 - Weekend/closed-market rows excluded: 25634
-- Weekday rows used: 71577
+- Weekday rows used: 72524
 
 ## Source Files
 
@@ -29,7 +29,7 @@
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 71577 | 50 | 75 | 180 |
+| global | all | all | XAUUSD | 72524 | 50 | 75 | 180 |
 
 ## Hourly Distribution
 
@@ -55,9 +55,9 @@
 | hour_utc | 3 | all | XAUUSD | 3600 | 50 | 75 | 75 |
 | hour_utc | 4 | all | XAUUSD | 3600 | 50 | 75 | 75 |
 | hour_utc | 5 | all | XAUUSD | 3600 | 50 | 75 | 75 |
-| hour_utc | 6 | all | XAUUSD | 3511 | 50 | 75 | 75 |
-| hour_utc | 7 | all | XAUUSD | 2880 | 50 | 75 | 75 |
-| hour_utc | 8 | all | XAUUSD | 2880 | 50 | 75 | 75 |
+| hour_utc | 6 | all | XAUUSD | 3600 | 50 | 75 | 75 |
+| hour_utc | 7 | all | XAUUSD | 3600 | 50 | 75 | 75 |
+| hour_utc | 8 | all | XAUUSD | 3018 | 50 | 75 | 75 |
 | hour_utc | 9 | all | XAUUSD | 2880 | 50 | 75 | 75 |
 
 ## Day-Of-Week Distribution
@@ -67,7 +67,7 @@
 | day_of_week_utc | Friday | all | XAUUSD | 17061 | 50 | 75 | 75 |
 | day_of_week_utc | Monday | all | XAUUSD | 16620 | 50 | 75 | 95 |
 | day_of_week_utc | Thursday | all | XAUUSD | 16614 | 50 | 75 | 180 |
-| day_of_week_utc | Tuesday | all | XAUUSD | 4951 | 50 | 75 | 75 |
+| day_of_week_utc | Tuesday | all | XAUUSD | 5898 | 50 | 75 | 75 |
 | day_of_week_utc | Wednesday | all | XAUUSD | 16331 | 50 | 75 | 180 |
 
 ## Rollover Distribution

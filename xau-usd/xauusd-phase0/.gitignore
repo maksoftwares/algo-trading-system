@@ -24,3 +24,5 @@ outputs/**
 !outputs/*/
 !outputs/*/.gitkeep
 !outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md
+!outputs/reports/BREAKOUT_RETEST_COST_SUSPENSION_DECISION.md
+!outputs/reports/MEASURED_COST_REVALIDATION_DECISION.md

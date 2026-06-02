@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-02T08:13:17.770746Z",
+  "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+  "governance_doc": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\EXPERIMENTAL_DEMO_EXECUTOR_GOVERNANCE.md",
+  "authority": "This audit checks experimental demo executor source/governance parity only. It does not authorize canonical Phase 2, demo execution, broker execution, or live capital.",
+  "checks": [
+    {
+      "check": "account_login_whitelist_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpAllowedAccountLoginsCsv"
+    },
+    {
+      "check": "experimental_authorization_token_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpExperimentalAuthorizationToken"
+    },
+    {
+      "check": "candidate_runtime_allowlist_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpAuthorizedCandidatesCsv"
+    },
+    {
+      "check": "account_daily_order_cap_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpMaxAccountOrdersPerDay"
+    },
+    {
+      "check": "account_open_exposure_cap_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpMaxAccountOpenPositions"
+    },
+    {
+      "check": "kill_switch_input",
+      "status": "PASS",
+      "evidence": "doc_has=True; source_has=True; token=InpKillSwitchFileName"
+    },
+    {
+      "check": "globalvariable_account_counter_logic",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "account_level_exposure_counter_logic",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "kill_switch_file_read_logic",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "candidate_authorization_guard",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "startup_refuses_blank_or_invalid_token",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "startup_refuses_unlisted_account",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "startup_refuses_unauthorized_candidate",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "startup_refuses_kill_switch",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "no_live_real_server_allowed",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "cost_r_pre_order_guard",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "spread_pre_order_guard",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "order_log_account_order_count",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "order_log_account_open_exposure",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "order_log_estimated_cost_r",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "order_log_mode_truthfulness",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "experimental_magic_namespace",
+      "status": "PASS",
+      "evidence": "all required source tokens present"
+    },
+    {
+      "check": "fixed_lot_default_lte_0_01",
+      "status": "PASS",
+      "evidence": "InpFixedLot=0.01"
+    }
+  ],
+  "failed_count": 0
+}
