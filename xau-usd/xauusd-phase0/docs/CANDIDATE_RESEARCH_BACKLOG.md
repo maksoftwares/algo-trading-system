@@ -177,6 +177,7 @@ Expected path:
 | 154 | `h4_month_turn_flow_reversion_v0` | REJECTED_FIRST_PASS | H4 calendar-flow month-turn pressure reversion lane; 528 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells, only 3/9 positive-PnL cells, and best PF only 1.0286; do not tune v0. |
 | 155 | `h4_xle_xlu_energy_defensive_rotation_reversal_v0` | REJECTED_FIRST_PASS | H4 XLE/XLU energy-versus-defensive rotation reversal lane; 453 total cost-cell trades and 9/9 trade-count cells, but only 3/9 PF cells, all Pepperstone-only, while Capital.com/Dukascopy were negative; do not tune v0. |
 | 156 | `h4_xlp_xly_consumer_rotation_reversal_v0` | REJECTED_FIRST_PASS | H4 XLP/XLY consumer defensive-versus-discretionary rotation reversal lane; 444 total cost-cell trades and 9/9 trade-count cells, but 0/9 PF cells, only a weak Dukascopy positive pocket below threshold, and concentration failed; do not tune v0. |
+| 157 | `h4_d1_volatility_contraction_expansion_v0` | HYPOTHESIS_DRAFTED_COST_PRECHECK_PASS | Fresh Phase 0R lower-cost H4/D1 contraction-expansion draft; expected 400-point median stop, measured median cost_R 0.1250, measured P95 cost_R 0.1875. Next: SHA256-register before implementation or matrix testing. |
 
 ## Discipline
 
@@ -197,6 +198,7 @@ Expected path:
 - Latest H4/D1 diversification result: `d1_compression_h4_expansion_v0` was rejected first-pass. It produced 68-122 trades per cell, 0/9 PF cells >= 1.30, passed trade count, and failed concentration.
 - Latest H4/D1 diversification result: `d1_multi_day_exhaustion_reversion_v0` was rejected first-pass. It produced 24-41 trades per cell, 0/9 PF cells >= 1.30, and failed trade-count, activity, and concentration gates.
 - Latest H4/D1 diversification result: `h4_d1_momentum_expansion_continuation_v0` was rejected first-pass. It produced 81-83 trades per cell and 3/9 PF cells >= 1.30, but strength was Dukascopy-only and concentration failed.
+- Latest Phase 0R draft: `h4_d1_volatility_contraction_expansion_v0` is a fresh lower-cost H4/D1 contraction-expansion candidate with hypothesis draft and measured-cost structural precheck PASS. It is not hash-registered, implemented, matrix-tested, or approved yet.
 - Latest H4/D1 breakout result: `h4_inside_bar_d1_momentum_breakout_v0` was rejected first-pass. It produced 71-100 trades per cell and 2/9 PF cells >= 1.30, with small positive returns but inadequate cross-venue strength and failed concentration.
 - Latest W1/D1 result: `w1_d1_momentum_continuation_v0` was rejected first-pass. It produced 48-68 trades per cell and 3/9 PF cells >= 1.30; all cells were positive, but concentration failed and cross-venue PF strength was insufficient.
 - Latest independent weekly-reference result: `weekly_open_reversion_v0` was rejected first-pass. It produced 197-220 trades per cell, but 0/9 PF cells reached 1.30; do not tune v0.

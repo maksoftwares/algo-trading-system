@@ -60,3 +60,38 @@ jobs:
             xau-usd/xauusd-phase0/outputs/manifests/**
             xau-usd/xauusd-phase0/outputs/review_bundles/**
             xau-usd/xauusd-phase0/outputs/snapshots/**
+
+  xauusd-phase1-governance:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: xau-usd/xauusd-phase1
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
+      - name: Run Phase 1 tests
+        run: python -m pytest
+
+      - name: Audit canonical Phase 1 safety boundary
+        run: python scripts/audit_phase1_safety.py
+
+      - name: Audit experimental executor governance
+        run: python scripts/audit_experimental_executor_governance.py
+
+      - name: Audit broker-action file boundary
+        run: python scripts/audit_broker_action_file_boundary.py
+
+      - name: Enforce cost-suspension lock
+        run: python scripts/assert_cost_suspension.py

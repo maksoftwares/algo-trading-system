@@ -1,12 +1,12 @@
 {
   "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
-  "created_at_utc": "2026-06-02T07:37:42.665772Z",
+  "created_at_utc": "2026-06-02T11:21:27.526657Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase2_readiness_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
-  "latest_real_phase2_status_read_at_utc": "2026-06-02T07:31:17.463619Z",
-  "snapshot_created_at_utc": "2026-06-02T07:37:42.665772Z",
+  "latest_real_phase2_status_read_at_utc": "2026-06-02T10:24:40.979762Z",
+  "snapshot_created_at_utc": "2026-06-02T11:21:27.526657Z",
   "phase3_repo_complete": true,
   "phase3_release_clean": false,
   "demo_authorized": false,
@@ -109,7 +109,7 @@
       "requirement": "Phase 3 to demo handoff is generated without demo authorization.",
       "status": "PASS",
       "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase3-experimental\\outputs\\reports\\PHASE3_TO_DEMO_HANDOFF.md",
-      "detail": "status=READY_FOR_REVIEW_WAITING_REAL_GATES; phase2=PENDING; can_start_demo_now=False"
+      "detail": "status=READY_FOR_REVIEW_WAITING_REAL_GATES; phase2=FAIL; can_start_demo_now=False"
     },
     {
       "key": "promotion_rollback",

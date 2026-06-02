@@ -80,7 +80,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates, but confirmed measured-cost revalidation failure blocks canonical execution eligibility.
 - Phase 0 closure: `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`; `verify-real-artifacts` returns `PASS`.
-- EA coding status: Phase 1 dry-run shell is authorized for telemetry only. Paper-mode implementation and live execution remain blocked while measured-cost evidence is pending.
+- EA coding status: Phase 1 dry-run shell is authorized for telemetry only. Paper-mode implementation and live execution remain blocked because measured-cost revalidation is `FAIL`, measured-cost assumption delta is `FAIL`, and the breakout-retest family cost suspension is active.
 
 Large generated market data remains intentionally ignored by Git because it can be environment-specific. Small review artifacts, selected reports, and bundles may be committed when they are useful for third-party review. The current local handoff in `agent.md` records the latest artifact paths and regeneration commands.
 

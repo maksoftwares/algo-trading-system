@@ -20,8 +20,8 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Phase 2 readiness | FAIL |
 | Authority status | NON_AUTHORITATIVE_EXPERIMENTAL |
 | Real Phase 2 source | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md |
-| Snapshot created | 2026-06-02T07:37:42.707772Z |
-| Latest Phase 1 bar | 2026.06.02 06:50:00 |
+| Snapshot created | 2026-06-02T11:21:33.242893Z |
+| Latest Phase 1 bar | 2026.06.02 10:20:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 
@@ -98,4 +98,4 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Demo authorized | False |
 | External blockers | 4 |
 | Manifest status | DIRTY_WORKTREE |
-| Manifest commit | a94ab3e |
+| Manifest commit | f7aed5e |

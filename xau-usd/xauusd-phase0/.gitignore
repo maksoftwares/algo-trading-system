@@ -26,3 +26,4 @@ outputs/**
 !outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md
 !outputs/reports/BREAKOUT_RETEST_COST_SUSPENSION_DECISION.md
 !outputs/reports/MEASURED_COST_REVALIDATION_DECISION.md
+!outputs/reports/phase0r_cost_precheck_h4_d1_volatility_contraction_expansion_v0.md

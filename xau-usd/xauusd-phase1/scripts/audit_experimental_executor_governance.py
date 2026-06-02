@@ -71,6 +71,9 @@ def _checks(root: Path, source: str, governance: str) -> list[GovernanceCheck]:
         _source_contains("non_canonical_banner", source, "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2"),
         _contains_both("account_login_whitelist_input", governance, source, "InpAllowedAccountLoginsCsv"),
         _contains_both("experimental_authorization_token_input", governance, source, "InpExperimentalAuthorizationToken"),
+        _contains_both("cost_suspension_acknowledgement_token_input", governance, source, "InpCostSuspensionAcknowledgementToken"),
+        _input_default_check("candidate_status_default_quarantined", source, "InpCandidateStatus", {"EXPERIMENTAL_QUARANTINE_REVIEW_ONLY"}),
+        _input_default_check("family_lifecycle_default_cost_suspended", source, "InpFamilyLifecycleStatus", {"COST_SUSPENDED_CANONICAL"}),
         _contains_both("candidate_runtime_allowlist_input", governance, source, "InpAuthorizedCandidatesCsv"),
         _contains_both("account_daily_order_cap_input", governance, source, "InpMaxAccountOrdersPerDay"),
         _contains_both("account_open_exposure_cap_input", governance, source, "InpMaxAccountOpenPositions"),
@@ -80,6 +83,7 @@ def _checks(root: Path, source: str, governance: str) -> list[GovernanceCheck]:
         _source_contains("kill_switch_file_read_logic", source, "KillSwitchActive", "FileOpen", "KILL"),
         _source_contains("candidate_authorization_guard", source, "CandidateExecutionAuthorized", "candidate_not_explicitly_authorized"),
         _source_contains("startup_refuses_blank_or_invalid_token", source, "ExperimentalAuthorizationTokenValid", "valid experimental authorization token"),
+        _source_contains("startup_refuses_missing_cost_suspension_ack", source, "CostSuspensionAcknowledgementTokenValid", "cost-suspension acknowledgement token"),
         _source_contains("startup_refuses_unlisted_account", source, "AccountLoginWhitelisted", "not in InpAllowedAccountLoginsCsv"),
         _source_contains("startup_refuses_unauthorized_candidate", source, "CandidateExecutionAuthorized", "not explicitly authorized"),
         _source_contains("startup_refuses_kill_switch", source, "KillSwitchActive", "kill switch is active"),
@@ -88,6 +92,8 @@ def _checks(root: Path, source: str, governance: str) -> list[GovernanceCheck]:
         _source_contains("spread_pre_order_guard", source, "InpMaxMeasuredSpreadPoints", "measured_spread_points_exceeds_threshold", "CurrentSpreadPoints"),
         _source_contains("order_log_account_order_count", source, "account_orders_today", "AccountOrdersToday()"),
         _source_contains("order_log_account_open_exposure", source, "account_open_exposure", "CountOpenExposureForAccount()"),
+        _source_contains("order_log_family_lifecycle_status", source, "family_lifecycle_status", "InpFamilyLifecycleStatus"),
+        _source_contains("order_guard_cost_suspension_ack", source, "cost_suspension_acknowledgement_token_missing_or_invalid"),
         _source_contains("order_log_estimated_cost_r", source, "estimated_cost_R", "estimated_cost_r"),
         _source_contains("order_log_mode_truthfulness", source, "order_mode", "MARKET_PROXY"),
         _source_contains("experimental_magic_namespace", source, "magic >= 920000", "magic < 921000"),
@@ -107,6 +113,16 @@ def _source_contains(name: str, source: str, *tokens: str) -> GovernanceCheck:
     status = "PASS" if not missing else "FAIL"
     evidence = "all required source tokens present" if not missing else "missing: " + ", ".join(missing)
     return GovernanceCheck(name, status, evidence)
+
+
+def _input_default_check(name: str, source: str, input_name: str, allowed_values: set[str]) -> GovernanceCheck:
+    pattern = rf"input\s+string\s+{re.escape(input_name)}\s*=\s*\"([^\"]*)\""
+    match = re.search(pattern, source)
+    if not match:
+        return GovernanceCheck(name, "FAIL", f"{input_name} default not found.")
+    value = match.group(1)
+    status = "PASS" if value in allowed_values else "FAIL"
+    return GovernanceCheck(name, status, f"{input_name}={value}; allowed={','.join(sorted(allowed_values))}")
 
 
 def _fixed_lot_check(source: str) -> GovernanceCheck:

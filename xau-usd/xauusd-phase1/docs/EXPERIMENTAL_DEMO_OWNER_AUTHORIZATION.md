@@ -10,6 +10,8 @@ This document is a fillable owner authorization record for the quarantined exper
 | --- | --- |
 | Which account login is whitelisted? | PENDING_OWNER_INPUT |
 | Which candidates are explicitly authorized? | PENDING_OWNER_INPUT |
+| What candidate status will be logged? | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
+| What family lifecycle status will be logged? | `COST_SUSPENDED_CANONICAL` |
 | What daily account-level order cap is allowed? | PENDING_OWNER_INPUT |
 | What account-level open exposure cap is allowed? | PENDING_OWNER_INPUT |
 | Where is the kill-switch file? | `experimental_demo_kill_switch.txt` in the MT5 Files directory selected by runtime input |
@@ -24,6 +26,9 @@ ack_phase2_not_authorized:
 ack_demo_pnl_not_phase2_evidence:
 ack_no_live_or_real_capital:
 ack_same_family_not_diversification:
+ack_breakout_family_is_cost_suspended_canonical:
+ack_demo_orders_do_not_reactivate_cost_suspended_family:
+cost_suspension_acknowledgement_token:
 ack_kill_switch_test_required:
 ```
 

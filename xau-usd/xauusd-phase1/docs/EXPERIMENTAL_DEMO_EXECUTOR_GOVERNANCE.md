@@ -23,6 +23,9 @@ Overall status: QUARANTINE_REVIEW_ONLY
 | --- | --- |
 | Account login whitelist | `InpAllowedAccountLoginsCsv`; startup and order guards refuse unlisted account logins. |
 | Authorization token | `InpExperimentalAuthorizationToken`; startup refuses unless it matches the required token. |
+| Cost-suspension acknowledgement token | `InpCostSuspensionAcknowledgementToken`; startup and order guards refuse a cost-suspended family unless it matches `InpRequiredCostSuspensionAcknowledgementToken`. |
+| Candidate status default | `InpCandidateStatus` defaults to `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY`, not `ACCEPTED`. |
+| Family lifecycle status | `InpFamilyLifecycleStatus` defaults to `COST_SUSPENDED_CANONICAL` and is logged with startup, signal, and order rows. |
 | Candidate execution allowlist | `InpAuthorizedCandidatesCsv`; default generated charts authorize only `breakout_retest`. |
 | Account daily order cap | `InpMaxAccountOrdersPerDay`; tracked across chart instances with MT5 GlobalVariables. |
 | Account open exposure cap | `InpMaxAccountOpenPositions`; counts experimental magic-number positions/orders across symbols. |
@@ -37,9 +40,9 @@ Overall status: QUARANTINE_REVIEW_ONLY
 
 | Candidate class | Default execution state | Requirement to enable |
 | --- | --- | --- |
-| `breakout_retest` | Allowed only with owner token and account whitelist | Explicit owner experimental authorization. |
-| Same-family approved variants | Blocked by default | Add candidate to `InpAuthorizedCandidatesCsv` and record authorization. |
-| Provisional candidates | Blocked by default | Separate per-candidate owner authorization plus Gate 9 status disclosure. |
+| `breakout_retest` | Quarantined by default | Explicit owner experimental authorization plus cost-suspension acknowledgement token. |
+| Same-family approved variants | Quarantined and blocked by default | Add candidate to `InpAuthorizedCandidatesCsv`, record authorization, and acknowledge `COST_SUSPENDED_CANONICAL`. |
+| Provisional candidates | Quarantined and blocked by default | Separate per-candidate owner authorization, Gate 9 status disclosure, and cost-suspension acknowledgement if same-family. |
 | Rejected candidates | Blocked | New versioned hypothesis required before any future use. |
 
 ## Logging Requirements
@@ -48,6 +51,8 @@ Every order attempt, guard block, or send result must log:
 
 ```text
 candidate
+candidate_status
+family_lifecycle_status
 symbol
 action
 direction

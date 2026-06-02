@@ -9,21 +9,24 @@
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 
-input string InpRunId = "phase2-experimental-demo-executor-v0.1";
+input string InpRunId = "phase2-experimental-demo-executor-v0.2";
 input bool InpDryRunOnly = false;
 input bool InpBrokerActionAllowed = false;
 input string InpCandidate = "breakout_retest";
-input string InpCandidateStatus = "ACCEPTED";
+input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
+input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
 input string InpTargetSymbol = "XAUUSD";
 input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,USDJPY";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "";
 input string InpExperimentalAuthorizationToken = "";
 input string InpRequiredExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
+input string InpCostSuspensionAcknowledgementToken = "";
+input string InpRequiredCostSuspensionAcknowledgementToken = "I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT";
 input string InpAuthorizedCandidatesCsv = "breakout_retest";
-input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log.csv";
-input string InpStartupLogFileName = "experimental_demo_executor_startup.csv";
-input string InpOrderLogFileName = "experimental_demo_executor_order_log.csv";
+input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v02.csv";
+input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
+input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
 input int InpMaxOrdersPerDay = 12;
@@ -102,6 +105,18 @@ bool CandidateExecutionAuthorized()
 bool ExperimentalAuthorizationTokenValid()
 {
    return TrimToken(InpExperimentalAuthorizationToken) == TrimToken(InpRequiredExperimentalAuthorizationToken);
+}
+
+bool FamilyLifecycleCostSuspended()
+{
+   return ContainsText(InpFamilyLifecycleStatus, "cost_suspended");
+}
+
+bool CostSuspensionAcknowledgementTokenValid()
+{
+   if(!FamilyLifecycleCostSuspended())
+      return true;
+   return TrimToken(InpCostSuspensionAcknowledgementToken) == TrimToken(InpRequiredCostSuspensionAcknowledgementToken);
 }
 
 double CurrentSpreadPoints()
@@ -645,6 +660,7 @@ bool EnsureAttachmentLogHeader()
       "symbol",
       "candidate",
       "candidate_status",
+      "family_lifecycle_status",
       "qualified_symbol",
       "dry_run",
       "broker_action_allowed",
@@ -681,6 +697,7 @@ bool EnsureStartupLogHeader()
       "symbol",
       "candidate",
       "candidate_status",
+      "family_lifecycle_status",
       "qualified_symbols",
       "account_login",
       "allowed_account_logins",
@@ -689,6 +706,7 @@ bool EnsureStartupLogHeader()
       "broker_action_allowed",
       "observer_supported",
       "authorization_token_present",
+      "cost_suspension_ack_token_present",
       "account_max_orders_per_day",
       "account_max_open_positions",
       "max_estimated_cost_R",
@@ -710,6 +728,7 @@ bool WriteStartupRow(const string status_text)
       _Symbol,
       InpCandidate,
       InpCandidateStatus,
+      InpFamilyLifecycleStatus,
       InpQualifiedSymbolsCsv,
       IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
       InpAllowedAccountLoginsCsv,
@@ -718,6 +737,7 @@ bool WriteStartupRow(const string status_text)
       BoolText(InpBrokerActionAllowed),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      BoolText(StringLen(TrimToken(InpCostSuspensionAcknowledgementToken)) > 0),
       IntegerToString(InpMaxAccountOrdersPerDay),
       IntegerToString(InpMaxAccountOpenPositions),
       DoubleToString(InpMaxEstimatedCostR, 4),
@@ -743,9 +763,11 @@ bool EnsureOrderLogHeader()
       "symbol",
       "candidate",
       "candidate_status",
+      "family_lifecycle_status",
       "magic",
       "broker_action_allowed",
       "dry_run",
+      "cost_suspension_ack_token_present",
       "action",
       "direction",
       "volume",
@@ -917,9 +939,11 @@ void WriteOrderLogRow(
       _Symbol,
       InpCandidate,
       InpCandidateStatus,
+      InpFamilyLifecycleStatus,
       IntegerToString((int)InstanceMagic()),
       BoolText(InpBrokerActionAllowed),
       BoolText(InpDryRunOnly),
+      BoolText(StringLen(TrimToken(InpCostSuspensionAcknowledgementToken)) > 0),
       action,
       direction,
       DoubleToString(volume, 2),
@@ -974,6 +998,11 @@ bool TradingGuardsPass(
    if(!ExperimentalAuthorizationTokenValid())
    {
       guard_reason = "experimental_authorization_token_missing_or_invalid";
+      return false;
+   }
+   if(!CostSuspensionAcknowledgementTokenValid())
+   {
+      guard_reason = "cost_suspension_acknowledgement_token_missing_or_invalid";
       return false;
    }
    if(!AccountLoginWhitelisted())
@@ -1180,6 +1209,12 @@ int OnInit()
       return INIT_FAILED;
    }
 
+   if(!CostSuspensionAcknowledgementTokenValid())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused to start without a valid cost-suspension acknowledgement token.");
+      return INIT_FAILED;
+   }
+
    if(!AccountLoginWhitelisted())
    {
       Print("Phase2ExperimentalDemoExecutor refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
@@ -1238,6 +1273,7 @@ void OnDeinit(const int reason)
       _Symbol,
       InpCandidate,
       InpCandidateStatus,
+      InpFamilyLifecycleStatus,
       InpQualifiedSymbolsCsv,
       IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
       InpAllowedAccountLoginsCsv,
@@ -1246,6 +1282,7 @@ void OnDeinit(const int reason)
       BoolText(InpBrokerActionAllowed),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      BoolText(StringLen(TrimToken(InpCostSuspensionAcknowledgementToken)) > 0),
       IntegerToString(InpMaxAccountOrdersPerDay),
       IntegerToString(InpMaxAccountOpenPositions),
       InpKillSwitchFileName,
@@ -1293,6 +1330,7 @@ void OnTimer()
       _Symbol,
       InpCandidate,
       InpCandidateStatus,
+      InpFamilyLifecycleStatus,
       BoolText(CsvContainsSymbol(InpQualifiedSymbolsCsv, _Symbol)),
       BoolText(InpDryRunOnly),
       BoolText(InpBrokerActionAllowed),

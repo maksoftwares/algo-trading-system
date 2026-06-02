@@ -62,6 +62,12 @@ Last updated: 2026-06-02
   - Experimental demo executor source now includes account whitelist, owner authorization token, candidate allowlist, account-level daily/open-exposure caps, kill switch, cost-R pre-order guard, and measured-spread pre-order guard. The source was not redeployed or reattached during this cleanup.
   - Experimental demo continuation templates are present at `EXPERIMENTAL_DEMO_OWNER_AUTHORIZATION.md`, `EXPERIMENTAL_DEMO_DAILY_REVIEW_TEMPLATE.md`, and `EXPERIMENTAL_DEMO_KILL_SWITCH_TEST.md`; all are non-authorizing until filled and reviewed.
   - New lower-cost independent-candidate backlog/spec: `xau-usd\xauusd-phase0\docs\phase0r_lower_cost_independent_candidate_search.md` and `xau-usd\xauusd-phase0\docs\PHASE0R_LOWER_COST_CANDIDATE_SPEC.md`; continue H1/H4/D1/W1 wider-stop, lower-cost, non-retail-spread-sensitive research and avoid more M5 same-family retest variants.
+- 2026-06-02 V2 review hardening:
+  - `Phase2ExperimentalDemoExecutor.mq5` default `InpCandidateStatus` is now `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY`; default `InpFamilyLifecycleStatus` is `COST_SUSPENDED_CANONICAL`.
+  - Experimental executor startup/order guards now require `InpCostSuspensionAcknowledgementToken` to match `InpRequiredCostSuspensionAcknowledgementToken` when the family lifecycle is cost-suspended.
+  - Experimental executor logs now include `family_lifecycle_status`, and future generated executor attachment packs use v0.2 log filenames to avoid appending new columns under old v0.1 headers.
+  - The Phase 1 GitHub workflow now runs Phase 1 tests, canonical safety audit, experimental executor governance audit, broker-action boundary audit, and cost-suspension enforcement.
+  - No MT5 redeploy, reattach, or runtime broker-action change was performed during this V2 cleanup.
 - 2026-06-02 measured-cost closure and executor governance:
   - New report: `xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_REVALIDATION_SANITY_CHECK.md`; status `CALCULATION_CONFIRMED`.
   - Current lifecycle: `breakout_retest_family = COST_SUSPENDED_CANONICAL` for formal Phase 2 execution. Phase 1 telemetry may continue; canonical paper-mode implementation remains blocked. This applies to `breakout_retest`, `swing_breakout_retest_v0`, `symbol_normalized_round_retest_v0`, `quarter_round_retest_v0`, `round_number_retest_v0`, `session_extreme_retest_v0`, and future same-family level/retest variants.
@@ -141,7 +147,7 @@ Last updated: 2026-06-02
   - `C:\MT5PortableSpreadLogger\terminal64.exe` is running with `/portable /config:C:\MT5PortableSpreadLogger\Config\phase0_spread_logger_startup.ini`.
   - Phase 1 startup now reports `server_time_status=CLOCK_OK` after changing the expected local UTC offset input from whole hours to minutes for India Standard Time (`330` minutes).
   - Weekend/offline resume gaps are tolerated by the Phase 1 verifier, soak analyzer, runtime-health report, and external-health check when the latest row is a stale weekend market-break row.
-  - Historical periodic-check note: earlier Phase 2 readiness was PENDING while measured-cost evidence was incomplete. Current status must be read from generated reports; after freshness filtering, Phase 2 implementation is blocked by pending authoritative measured-cost evidence.
+  - Historical periodic-check note: earlier Phase 2 readiness was PENDING while measured-cost evidence was incomplete. Current status must be read from generated reports; after freshness filtering, Phase 2 implementation is blocked by confirmed measured-cost revalidation FAIL, measured-cost assumption delta FAIL, and active `COST_SUSPENDED_CANONICAL` family lock.
   - Historical 2026-05-23 refreshed soak snapshot: 56 decision rows, latest M5 bar `2026.05.22 20:55:00`, soak progress `8.26%`, Phase 1 acceptance `PENDING`.
   - Historical 2026-05-23 measured cost model snapshot: `11435` observed spread rows across `2` observed days; current authoritative freshness-filtered cost status must be read from `MEASURED_COST_MODEL.md`.
 - Latest committed acquisition helper: `generate-mt5-bar-presets`.

@@ -19,6 +19,12 @@ def test_demo_executor_is_demo_scoped_and_explicitly_armed():
     assert "AccountLoginWhitelisted()" in text
     assert "InpExperimentalAuthorizationToken" in text
     assert "ExperimentalAuthorizationTokenValid()" in text
+    assert 'input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";' in text
+    assert 'input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";' in text
+    assert "InpCostSuspensionAcknowledgementToken" in text
+    assert "CostSuspensionAcknowledgementTokenValid()" in text
+    assert "cost_suspension_acknowledgement_token_missing_or_invalid" in text
+    assert "family_lifecycle_status" in text
     assert "InpAuthorizedCandidatesCsv" in text
     assert "CandidateExecutionAuthorized()" in text
     assert "InpMaxAccountOrdersPerDay" in text
@@ -48,7 +54,7 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     module = _load_module()
     row = module.AttachmentRow(
         candidate="breakout_retest",
-        status="ACCEPTED",
+        status="EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
         symbol="XAUUSD",
         qualification_source="test",
         observer_supported=True,
@@ -60,9 +66,13 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpDryRunOnly=false" in chart
     assert "InpBrokerActionAllowed=true" in chart
     assert "InpExpectedServerMarker=Demo" in chart
+    assert "InpCandidateStatus=EXPERIMENTAL_QUARANTINE_REVIEW_ONLY" in chart
+    assert "InpFamilyLifecycleStatus=COST_SUSPENDED_CANONICAL" in chart
     assert "InpAllowedAccountLoginsCsv=" in chart
     assert "InpExperimentalAuthorizationToken=" in chart
     assert "InpRequiredExperimentalAuthorizationToken=EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY" in chart
+    assert "InpCostSuspensionAcknowledgementToken=" in chart
+    assert "InpRequiredCostSuspensionAcknowledgementToken=I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT" in chart
     assert "InpAuthorizedCandidatesCsv=breakout_retest" in chart
     assert "InpFixedLot=0.01" in chart
     assert "InpMaxAccountOrdersPerDay=24" in chart
@@ -71,7 +81,7 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpMaxEstimatedCostR=0.30" in chart
     assert "InpMaxMeasuredSpreadPoints=75.0" in chart
     assert "InpKillSwitchFileName=experimental_demo_kill_switch.txt" in chart
-    assert "InpOrderLogFileName=experimental_demo_executor_order_log_breakout_retest_xauusd.csv" in chart
+    assert "InpOrderLogFileName=experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv" in chart
 
 
 def test_demo_executor_attach_script_discloses_cost_and_spread_guards():
@@ -79,8 +89,10 @@ def test_demo_executor_attach_script_discloses_cost_and_spread_guards():
 
     assert "--max-estimated-cost-r" in text
     assert "--max-measured-spread-points" in text
+    assert "--cost-suspension-acknowledgement-token" in text
     assert "max_estimated_cost_R" in text
     assert "max_measured_spread_points" in text
+    assert "cost_suspension_acknowledgement_token_configured" in text
     assert "Max estimated cost R" in text
     assert "Max measured spread points" in text
 
@@ -96,6 +108,9 @@ def test_experimental_executor_governance_audit_passes(tmp_path):
     report = (tmp_path / "governance_audit.json").read_text(encoding="utf-8")
     assert '"check": "cost_r_pre_order_guard"' in report
     assert '"check": "spread_pre_order_guard"' in report
+    assert '"check": "candidate_status_default_quarantined"' in report
+    assert '"check": "family_lifecycle_default_cost_suspended"' in report
+    assert '"check": "cost_suspension_acknowledgement_token_input"' in report
 
 
 def test_phase1_safety_audit_allowlist_names_only_executor():

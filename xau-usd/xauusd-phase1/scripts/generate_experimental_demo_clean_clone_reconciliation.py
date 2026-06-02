@@ -20,6 +20,9 @@ DEPLOY_REL = Path("xau-usd") / "xauusd-phase1" / "scripts" / "deploy_phase1_mt5.
 REQUIRED_SOURCE_TOKENS = (
     "InpAllowedAccountLoginsCsv",
     "InpExperimentalAuthorizationToken",
+    "InpCostSuspensionAcknowledgementToken",
+    "InpCandidateStatus",
+    "InpFamilyLifecycleStatus",
     "InpAuthorizedCandidatesCsv",
     "InpMaxAccountOrdersPerDay",
     "InpMaxAccountOpenPositions",

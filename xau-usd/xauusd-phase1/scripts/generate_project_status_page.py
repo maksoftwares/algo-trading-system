@@ -5,6 +5,7 @@ import csv
 import html
 import json
 import os
+import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -65,6 +66,10 @@ def generate_project_status_page(
     phase2_readiness_consistency = _read_json(phase1_reports / "PHASE2_READINESS_CONSISTENCY.json")
     phase2_experimental_demo_terminal = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_TERMINAL.json")
     phase2_experimental_demo_attachments = _read_json(phase1_reports / "PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.json")
+    executor_governance = _read_json(phase1_reports / "EXPERIMENTAL_DEMO_EXECUTOR_SOURCE_GOVERNANCE_PARITY.json")
+    executor_clean_clone = _read_json(phase1_reports / "EXPERIMENTAL_DEMO_EXECUTOR_CLEAN_CLONE_RECONCILIATION.json")
+    broker_action_boundary = _read_json(phase1_reports / "BROKER_ACTION_FILE_BOUNDARY_AUDIT.json")
+    cost_suspension_enforcement = _read_json(phase1_reports / "COST_SUSPENSION_ENFORCEMENT_REPORT.json")
     phase2_next_actions = _read_json(phase1_reports / "PHASE2_DEMO_NEXT_ACTIONS.json")
     phase2_owner_packet = _read_json(phase1_reports / "PHASE2_OWNER_ACTION_PACKET.json")
     phase2_bootstrap = _read_json(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
@@ -122,6 +127,10 @@ def generate_project_status_page(
             phase2_readiness_consistency=phase2_readiness_consistency,
             phase2_experimental_demo_terminal=phase2_experimental_demo_terminal,
             phase2_experimental_demo_attachments=phase2_experimental_demo_attachments,
+            executor_governance=executor_governance,
+            executor_clean_clone=executor_clean_clone,
+            broker_action_boundary=broker_action_boundary,
+            cost_suspension_enforcement=cost_suspension_enforcement,
             phase2_next_actions=phase2_next_actions,
             phase2_owner_packet=phase2_owner_packet,
             phase2_bootstrap=phase2_bootstrap,
@@ -201,6 +210,10 @@ def _render_html(
     phase2_readiness_consistency: dict[str, Any],
     phase2_experimental_demo_terminal: dict[str, Any],
     phase2_experimental_demo_attachments: dict[str, Any],
+    executor_governance: dict[str, Any],
+    executor_clean_clone: dict[str, Any],
+    broker_action_boundary: dict[str, Any],
+    cost_suspension_enforcement: dict[str, Any],
     phase2_next_actions: dict[str, Any],
     phase2_owner_packet: dict[str, Any],
     phase2_bootstrap: dict[str, Any],
@@ -299,6 +312,16 @@ def _render_html(
             '      <section class="grid lower-grid">',
             _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight, phase2_readiness_consistency)),
             _panel("Demo Account Isolation", _demo_account_isolation_panel(phase2_demo_account_isolation)),
+            _panel(
+                "Experimental Executor Governance",
+                _experimental_executor_governance_panel(
+                    executor_governance,
+                    executor_clean_clone,
+                    broker_action_boundary,
+                    cost_suspension_enforcement,
+                    phase2_experimental_demo_attachments,
+                ),
+            ),
             _panel("Experimental Demo Terminal", _experimental_demo_terminal_panel(phase2_experimental_demo_terminal)),
             _panel("Experimental Demo Attachments", _experimental_demo_attachments_panel(phase2_experimental_demo_attachments)),
             _panel("Demo Next Actions", _demo_next_actions_panel(phase2_next_actions)),
@@ -1150,6 +1173,47 @@ def _mini_status_rows(rows: list[dict[str, Any]]) -> str:
     )
 
 
+def _experimental_executor_governance_panel(
+    governance: dict[str, Any],
+    clean_clone: dict[str, Any],
+    broker_boundary: dict[str, Any],
+    cost_enforcement: dict[str, Any],
+    attachments: dict[str, Any],
+) -> str:
+    input_block = _cell(governance.get("input_declaration_block") or clean_clone.get("source_input_declaration_block"))
+    default_candidate_status = _input_default_from_block(input_block, "InpCandidateStatus")
+    family_lifecycle_status = _input_default_from_block(input_block, "InpFamilyLifecycleStatus")
+    cost_ack_default = _input_default_from_block(input_block, "InpCostSuspensionAcknowledgementToken")
+    attachment_count = _to_float(attachments.get("attachment_count")) or 0.0
+    attachment_status = _cell(attachments.get("status", "NO_ATTACHMENT_REPORT"))
+    attached_source_status = "NOT_ATTACHED"
+    if attachment_count > 0:
+        attached_source_status = "NOT_VERIFIED_STALE_UNTIL_REDEPLOY"
+        if _cell(attachments.get("run_id")) == "phase2-experimental-demo-executor-v0.2":
+            attached_source_status = "PENDING_SOURCE_HASH_ATTACHMENT_REPORT"
+
+    rows = [
+        ("Governance parity", _status_badge(_cell(governance.get("status", "UNKNOWN")))),
+        ("Source SHA256", _esc(_short_hash(_cell(governance.get("source_file_sha256", "UNKNOWN"))))),
+        ("Clean-clone status", _status_badge(_cell(clean_clone.get("status", "UNKNOWN")))),
+        ("Clean-clone commit", _esc(_short_hash(_cell(clean_clone.get("clone_commit_hash", "UNKNOWN"))))),
+        ("Clean-clone source SHA256", _esc(_short_hash(_cell(clean_clone.get("source_file_sha256", "UNKNOWN"))))),
+        ("Broker-action boundary", _status_badge(_cell(broker_boundary.get("status", "UNKNOWN")))),
+        ("Cost-suspension enforcement", _status_badge(_cell(cost_enforcement.get("status", "UNKNOWN")))),
+        ("Executor default candidate status", _status_badge(default_candidate_status or "UNKNOWN")),
+        ("Executor family lifecycle default", _status_badge(family_lifecycle_status or "UNKNOWN")),
+        ("Cost ack token default blank", _status_badge(str(cost_ack_default == "").lower())),
+        ("Historical executor attachment status", _status_badge(attachment_status)),
+        ("Historical attachment count", _esc(_cell(int(attachment_count)))),
+        ("Attached source matches hardened source", _status_badge(attached_source_status)),
+    ]
+    notes = [
+        "Existing June 1 attachments are historical and must not be assumed to contain the hardened v0.2 source.",
+        "Any future experimental continuation needs explicit account whitelist, authorization token, cost-suspension acknowledgement token, and kill-switch test.",
+    ]
+    return "\n".join([_raw_key_value_table(rows), '<h3 class="mini-heading">Boundary Notes</h3>', _list(notes)])
+
+
 def _experimental_demo_terminal_panel(report: dict[str, Any]) -> str:
     if not report:
         return _list(["Experimental demo terminal report has not been generated yet."])
@@ -1566,6 +1630,22 @@ def _candidate_table(candidates: list[dict[str, str]]) -> str:
             f'<tr data-candidate-row data-status="{filter_status}" data-search="{_esc(search_text)}">{tds}</tr>'
         )
     return '<div class="table-wrap candidate-wrap"><table><thead><tr>' + header + "</tr></thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def _input_default_from_block(input_block: str, input_name: str) -> str:
+    pattern = rf"input\s+string\s+{re.escape(input_name)}\s*=\s*\"([^\"]*)\""
+    match = re.search(pattern, input_block)
+    if not match:
+        return ""
+    return match.group(1)
+
+
+def _short_hash(value: str) -> str:
+    if value in {"", "UNKNOWN", "MISSING", "n/a"}:
+        return value
+    if len(value) <= 16:
+        return value
+    return f"{value[:12]}...{value[-8:]}"
 
 
 def _candidate_status(item: dict[str, str]) -> str:

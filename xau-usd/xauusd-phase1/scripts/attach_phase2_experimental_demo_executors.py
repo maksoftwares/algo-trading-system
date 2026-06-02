@@ -22,8 +22,11 @@ DEFAULT_OUTPUT_MD = Path("outputs") / "reports" / "PHASE2_EXPERIMENTAL_DEMO_EXEC
 TERMINAL_READY_REPORT = Path("outputs") / "reports" / "PHASE2_EXPERIMENTAL_DEMO_TERMINAL.json"
 EA_NAME = "Phase2ExperimentalDemoExecutor"
 EA_SOURCE = Path("mt5") / "Experts" / f"{EA_NAME}.mq5"
-RUN_ID = "phase2-experimental-demo-executor-v0.1"
+RUN_ID = "phase2-experimental-demo-executor-v0.2"
 REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY"
+REQUIRED_COST_SUSPENSION_ACKNOWLEDGEMENT_TOKEN = "I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT"
+EXECUTOR_CANDIDATE_STATUS = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY"
+FAMILY_LIFECYCLE_STATUS = "COST_SUSPENDED_CANONICAL"
 DEFAULT_AUTHORIZED_CANDIDATES_CSV = "breakout_retest"
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
@@ -45,6 +48,7 @@ class AttachmentRow:
     symbol: str
     qualification_source: str
     observer_supported: bool
+    research_status: str = ""
 
 
 @dataclass(frozen=True)
@@ -58,7 +62,7 @@ class AttachOutput:
 def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
     rows: list[AttachmentRow] = []
     for candidate in [*ACCEPTED_CANDIDATES, *PROVISIONAL_CANDIDATES]:
-        status = "ACCEPTED" if candidate in ACCEPTED_CANDIDATES else "PROVISIONAL"
+        research_status = "ACCEPTED" if candidate in ACCEPTED_CANDIDATES else "PROVISIONAL"
         qualified = {PRIMARY_SYMBOL: "primary_xau_matrix_or_candidate_status"}
         summary = phase1_root / MULTISYMBOL_DIR / f"{candidate}_multisymbol_summary.csv"
         if summary.exists():
@@ -72,10 +76,11 @@ def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
             rows.append(
                 AttachmentRow(
                     candidate=candidate,
-                    status=status,
+                    status=EXECUTOR_CANDIDATE_STATUS,
                     symbol=symbol,
                     qualification_source=qualified[symbol],
                     observer_supported=True,
+                    research_status=research_status,
                 )
             )
     return rows
@@ -90,6 +95,7 @@ def attach_phase2_experimental_demo_executors(
     launch: bool = True,
     allowed_account_logins_csv: str = "",
     experimental_authorization_token: str = "",
+    cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
     max_account_open_positions: int = 3,
@@ -125,6 +131,7 @@ def attach_phase2_experimental_demo_executors(
         attachments,
         allowed_account_logins_csv=allowed_account_logins_csv,
         experimental_authorization_token=experimental_authorization_token,
+        cost_suspension_acknowledgement_token=cost_suspension_acknowledgement_token,
         authorized_candidates_csv=authorized_candidates_csv,
         max_account_orders_per_day=max_account_orders_per_day,
         max_account_open_positions=max_account_open_positions,
@@ -169,6 +176,11 @@ def attach_phase2_experimental_demo_executors(
             "allowed_account_logins_configured": bool(allowed_account_logins_csv.strip()),
             "authorized_candidates_csv": authorized_candidates_csv,
             "authorization_token_configured": experimental_authorization_token == REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN,
+            "cost_suspension_acknowledgement_token_configured": (
+                cost_suspension_acknowledgement_token == REQUIRED_COST_SUSPENSION_ACKNOWLEDGEMENT_TOKEN
+            ),
+            "default_candidate_status": EXECUTOR_CANDIDATE_STATUS,
+            "family_lifecycle_status": FAMILY_LIFECYCLE_STATUS,
             "kill_switch_file_name": kill_switch_file_name,
         },
         "attachment_count": len(attachments),
@@ -177,6 +189,7 @@ def attach_phase2_experimental_demo_executors(
             "All attachments must refuse live/real server names at EA startup.",
             "All attachments must refuse non-whitelisted account logins at EA startup.",
             "All attachments require the experimental authorization token; no token is written by default.",
+            "All attachments require a separate cost-suspension acknowledgement token before startup.",
             "Same-family/provisional candidates require explicit inclusion in InpAuthorizedCandidatesCsv.",
             "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
             "Each candidate-symbol instance uses fixed 0.01 lot, hard SL/TP, and one open exposure per instance.",
@@ -295,6 +308,7 @@ def _replace_default_profile(
     *,
     allowed_account_logins_csv: str,
     experimental_authorization_token: str,
+    cost_suspension_acknowledgement_token: str,
     authorized_candidates_csv: str,
     max_account_orders_per_day: int,
     max_account_open_positions: int,
@@ -321,6 +335,7 @@ def _replace_default_profile(
                 index,
                 allowed_account_logins_csv=allowed_account_logins_csv,
                 experimental_authorization_token=experimental_authorization_token,
+                cost_suspension_acknowledgement_token=cost_suspension_acknowledgement_token,
                 authorized_candidates_csv=authorized_candidates_csv,
                 max_account_orders_per_day=max_account_orders_per_day,
                 max_account_open_positions=max_account_open_positions,
@@ -339,6 +354,7 @@ def _render_chart(
     *,
     allowed_account_logins_csv: str = "",
     experimental_authorization_token: str = "",
+    cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
     max_account_open_positions: int = 3,
@@ -393,12 +409,15 @@ def _render_chart(
             "InpBrokerActionAllowed=true",
             f"InpCandidate={row.candidate}",
             f"InpCandidateStatus={row.status}",
+            f"InpFamilyLifecycleStatus={FAMILY_LIFECYCLE_STATUS}",
             f"InpTargetSymbol={row.symbol}",
             f"InpQualifiedSymbolsCsv={qualified_csv}",
             "InpExpectedServerMarker=Demo",
             f"InpAllowedAccountLoginsCsv={allowed_account_logins_csv}",
             f"InpExperimentalAuthorizationToken={experimental_authorization_token}",
             f"InpRequiredExperimentalAuthorizationToken={REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN}",
+            f"InpCostSuspensionAcknowledgementToken={cost_suspension_acknowledgement_token}",
+            f"InpRequiredCostSuspensionAcknowledgementToken={REQUIRED_COST_SUSPENSION_ACKNOWLEDGEMENT_TOKEN}",
             f"InpAuthorizedCandidatesCsv={authorized_candidates_csv}",
             f"InpAttachmentLogFileName={_attachment_log_name(row)}",
             f"InpStartupLogFileName={_startup_log_name(row)}",
@@ -440,15 +459,15 @@ def _attachment_payload(row: AttachmentRow) -> dict[str, Any]:
 
 
 def _attachment_log_name(row: AttachmentRow) -> str:
-    return f"experimental_demo_executor_signal_log_{_instance_slug(row)}.csv"
+    return f"experimental_demo_executor_signal_log_v02_{_instance_slug(row)}.csv"
 
 
 def _startup_log_name(row: AttachmentRow) -> str:
-    return f"experimental_demo_executor_startup_{_instance_slug(row)}.csv"
+    return f"experimental_demo_executor_startup_v02_{_instance_slug(row)}.csv"
 
 
 def _order_log_name(row: AttachmentRow) -> str:
-    return f"experimental_demo_executor_order_log_{_instance_slug(row)}.csv"
+    return f"experimental_demo_executor_order_log_v02_{_instance_slug(row)}.csv"
 
 
 def _instance_slug(row: AttachmentRow) -> str:
@@ -497,19 +516,24 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         f"Profile backup: `{payload['terminal']['profile_backup_dir']}`",
         f"Executor log backup: `{payload['terminal']['executor_log_backup_dir']}`",
         f"Authorized candidates: `{payload['ea']['authorized_candidates_csv']}`",
+        f"Default candidate status: `{payload['ea']['default_candidate_status']}`",
+        f"Family lifecycle status: `{payload['ea']['family_lifecycle_status']}`",
+        f"Cost-suspension acknowledgement configured: `{payload['ea']['cost_suspension_acknowledgement_token_configured']}`",
         f"Account order cap: `{payload['ea']['max_orders_per_day_account']}`",
         f"Account exposure cap: `{payload['ea']['max_open_positions_account']}`",
         f"Max estimated cost R: `{payload['ea']['max_estimated_cost_R']}`",
         f"Max measured spread points: `{payload['ea']['max_measured_spread_points']}`",
         "",
-        "| Candidate | Status | Symbol | Executor | Qualification |",
-        "|---|---|---|---|---|",
+        "| Candidate | Research status | Executor status | Family lifecycle | Symbol | Executor | Qualification |",
+        "|---|---|---|---|---|---|---|",
     ]
     for item in attachments:
         lines.append(
-            "| {candidate} | {status} | {symbol} | {executor} | {qualification} |".format(
+            "| {candidate} | {research_status} | {status} | {family_lifecycle} | {symbol} | {executor} | {qualification} |".format(
                 candidate=item["candidate"],
+                research_status=item.get("research_status", "UNKNOWN"),
                 status=item["status"],
+                family_lifecycle=payload["ea"]["family_lifecycle_status"],
                 symbol=item["symbol"],
                 executor="demo_order_executor" if item["observer_supported"] else "unsupported",
                 qualification=item["qualification_source"],
@@ -538,6 +562,7 @@ def main() -> int:
     parser.add_argument("--no-launch", action="store_true")
     parser.add_argument("--allowed-account-logins-csv", default="")
     parser.add_argument("--experimental-authorization-token", default="")
+    parser.add_argument("--cost-suspension-acknowledgement-token", default="")
     parser.add_argument("--authorized-candidates-csv", default=DEFAULT_AUTHORIZED_CANDIDATES_CSV)
     parser.add_argument("--max-account-orders-per-day", type=int, default=24)
     parser.add_argument("--max-account-open-positions", type=int, default=3)
@@ -555,6 +580,7 @@ def main() -> int:
         launch=not args.no_launch,
         allowed_account_logins_csv=args.allowed_account_logins_csv,
         experimental_authorization_token=args.experimental_authorization_token,
+        cost_suspension_acknowledgement_token=args.cost_suspension_acknowledgement_token,
         authorized_candidates_csv=args.authorized_candidates_csv,
         max_account_orders_per_day=args.max_account_orders_per_day,
         max_account_open_positions=args.max_account_open_positions,
