@@ -6,11 +6,11 @@ This clean-clone reconciliation proves the public GitHub source at the recorded 
 
 Repo URL: `https://github.com/maksoftwares/algo-trading-system.git`
 Branch: `main`
-Clean-clone commit hash: `f3c24f0f1ad73e8aa8b30575b59c6b8b2b43de2b`
+Clean-clone commit hash: `082796fae4367dcad1d0e95ee1d494abbfe9f7d3`
 Source path: `xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5`
-Source SHA256: `0efef32e0e26fc900b7cac146a2dfb73a23bf7229e37fd27c356dec046bfce46`
-Governance doc SHA256: `e4af355f4fe4d5fdf8d34f983bd19969593d6cb4ba37d1f04b9b22759c435048`
-Parity report SHA256: `5c9f0e82726434e41270499af5d9a9fa7a0cebefc81c1d80579361e5f3e9dfee`
+Source SHA256: `765c66be2ad026e02625edf6a779884ab80a2cfd71cbe9d97256d5219972a451`
+Governance doc SHA256: `fbf8ab5c25721ba62844dbfcf5142c1a50ad1109169a376b4448c5b7b7de06d3`
+Parity report SHA256: `080e23aaeb3f06e7afdce46d5a8761ce75a350e86605b051176c00f50949a7bb`
 
 ## Required Source Tokens
 
@@ -27,7 +27,7 @@ Parity report SHA256: `5c9f0e82726434e41270499af5d9a9fa7a0cebefc81c1d80579361e5f
 | InpKillSwitchFileName | PASS | 30 |
 | InpMaxEstimatedCostR | PASS | 38 |
 | InpMaxMeasuredSpreadPoints | PASS | 39 |
-| OrderSend | PASS | 1161 |
+| OrderSend | PASS | 1169 |
 
 ## Packaging Proof
 
