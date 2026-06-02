@@ -32,6 +32,8 @@ The measured-cost model is PASS, but `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION
 
 That means the current failure is treated as real unless a future reproducible forensic audit proves a calculation, unit-conversion, data-freshness, or symbol-specification bug.
 
+The experimental demo broker ledger now has an early review note: `xau-usd/xauusd-phase1/docs/PHASE2_ACTUAL_BROKER_TRADE_REVIEW_2026_06_02.md`. The accepted-only deduplicated broker sample is positive, while `session_extreme_retest_v0` is the main drag. This is review-only evidence and does not reopen canonical Phase 2 by itself.
+
 ## Resolution Tracks
 
 | Track | Purpose | Boundary |
