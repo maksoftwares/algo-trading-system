@@ -15,13 +15,13 @@ public:
    {
       m_observe_breakout_retest = false;
       m_observe_swing_breakout_retest = false;
-      m_breakout_retest_family_state = PHASE1_EXPERT_COST_REVALIDATION_PENDING;
+      m_breakout_retest_family_state = PHASE1_EXPERT_COST_SUSPENDED_CANONICAL;
    }
 
    void Configure(
       const bool observe_breakout_retest,
       const bool observe_swing_breakout_retest,
-      const string breakout_retest_family_cost_state = "COST_REVALIDATION_PENDING"
+      const string breakout_retest_family_cost_state = "COST_SUSPENDED_CANONICAL"
    )
    {
       m_observe_breakout_retest = observe_breakout_retest;
@@ -60,12 +60,15 @@ public:
 
    bool IsBreakoutRetestCostSuspended() const
    {
-      return m_breakout_retest_family_state == PHASE1_EXPERT_COST_SUSPENDED;
+      return m_breakout_retest_family_state == PHASE1_EXPERT_COST_SUSPENDED
+         || m_breakout_retest_family_state == PHASE1_EXPERT_COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK
+         || m_breakout_retest_family_state == PHASE1_EXPERT_COST_SUSPENDED_CANONICAL;
    }
 
    bool IsBreakoutRetestCostRevalidationPending() const
    {
-      return m_breakout_retest_family_state == PHASE1_EXPERT_COST_REVALIDATION_PENDING;
+      return m_breakout_retest_family_state == PHASE1_EXPERT_COST_REVALIDATION_PENDING
+         || m_breakout_retest_family_state == PHASE1_EXPERT_COST_REVALIDATION_REGENERATED_PENDING_REVIEW;
    }
 
    bool IsBreakoutRetestFamilyBlockedByCost() const
@@ -75,10 +78,9 @@ public:
 
    string BreakoutRetestFamilyBlockReason() const
    {
-      if(IsBreakoutRetestCostSuspended())
-         return "COST_SUSPENDED";
-      if(IsBreakoutRetestCostRevalidationPending())
-         return "COST_REVALIDATION_PENDING";
+      const string state = Phase1ExpertLifecycleText(m_breakout_retest_family_state);
+      if(IsBreakoutRetestCostSuspended() || IsBreakoutRetestCostRevalidationPending())
+         return state;
       return "";
    }
 
@@ -87,13 +89,19 @@ private:
    {
       if(state_text == "COST_SUSPENDED")
          return PHASE1_EXPERT_COST_SUSPENDED;
+      if(state_text == "COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK")
+         return PHASE1_EXPERT_COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK;
+      if(state_text == "COST_SUSPENDED_CANONICAL")
+         return PHASE1_EXPERT_COST_SUSPENDED_CANONICAL;
+      if(state_text == "COST_REVALIDATION_REGENERATED_PENDING_REVIEW")
+         return PHASE1_EXPERT_COST_REVALIDATION_REGENERATED_PENDING_REVIEW;
       if(state_text == "COST_REVALIDATION_PENDING")
          return PHASE1_EXPERT_COST_REVALIDATION_PENDING;
       if(state_text == "DRY_RUN_APPROVED" || state_text == "DRY_RUN_ONLY")
          return PHASE1_EXPERT_DRY_RUN_ONLY;
       if(state_text == "RETIRED")
          return PHASE1_EXPERT_RETIRED;
-      return PHASE1_EXPERT_COST_REVALIDATION_PENDING;
+      return PHASE1_EXPERT_COST_SUSPENDED_CANONICAL;
    }
 };
 

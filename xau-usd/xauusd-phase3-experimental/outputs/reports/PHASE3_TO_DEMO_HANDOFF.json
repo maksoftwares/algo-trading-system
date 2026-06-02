@@ -1,10 +1,10 @@
 {
   "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
-  "created_at_utc": "2026-06-01T06:46:56.395462Z",
+  "created_at_utc": "2026-06-02T07:37:42.683772Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "phase3_repo_complete": true,
   "phase1_acceptance": "PASS",
-  "phase2_readiness": "PENDING",
+  "phase2_readiness": "FAIL",
   "phase3_completion_status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
   "phase3_status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
   "can_start_demo_now": false,
@@ -26,35 +26,25 @@
     {
       "gate": "Code-freeze 96-hour gate",
       "status": "PASS",
-      "current": 116.08,
+      "current": 140.2,
       "required": 96.0,
       "remaining": 0.0,
       "unit": "hours"
     },
     {
       "gate": "Measured cost model",
-      "status": "PENDING",
-      "current": 4.0,
+      "status": "PASS",
+      "current": 5.0,
       "required": 5.0,
-      "remaining": 1.0,
+      "remaining": 0.0,
       "unit": "fresh_market_days"
     }
   ],
   "owner_actions": [
     {
-      "gate": "VPS selection",
-      "status": "PENDING",
-      "action": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
-    },
-    {
-      "gate": "VPS latency evidence",
-      "status": "PENDING",
-      "action": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
-    },
-    {
       "gate": "VPS first-day verification",
       "status": "PENDING",
-      "action": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
+      "action": "For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Project owner approval",
@@ -64,37 +54,22 @@
   ],
   "owner_approval_readiness": {
     "status": "NOT_READY_TO_SIGN",
-    "pending_objective_gate_count": 6,
+    "pending_objective_gate_count": 3,
     "pending_objective_gates": [
-      {
-        "gate": "VPS selection",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS."
-      },
-      {
-        "gate": "VPS latency evidence",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS."
-      },
       {
         "gate": "VPS first-day verification",
         "status": "PENDING",
         "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS."
       },
       {
-        "gate": "Measured cost model",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS."
-      },
-      {
         "gate": "Measured-cost revalidation",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+        "status": "FAIL",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL; required PASS."
       },
       {
         "gate": "Measured-cost assumption delta",
-        "status": "PENDING",
-        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+        "status": "FAIL",
+        "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL; required PASS."
       }
     ],
     "signing_rule": "Owner may sign only after every objective gate except Project owner approval is PASS."

@@ -7,6 +7,7 @@ import pandas as pd
 
 from phase0.config import load_project_config
 from phase0.measured_revalidation import generate_measured_cost_revalidation
+from phase0.measured_sanity import generate_measured_cost_revalidation_sanity_check
 
 
 def test_measured_cost_revalidation_pending_without_measured_model(project_root, tmp_path):
@@ -49,6 +50,25 @@ def test_measured_cost_revalidation_passes_with_measured_p95_model(project_root,
     assert "## Scenario Map" in viability_text
     assert "## Spread Thresholds" in viability_text
     assert "Measured hourly P95 lookup" in viability_text
+
+
+def test_measured_cost_sanity_check_confirms_conversion(project_root, tmp_path):
+    root = _copy_config(project_root, tmp_path)
+    _lower_trade_threshold(root)
+    _write_measured_cost_model(root)
+    _write_trade_ledgers(root)
+    config = load_project_config(root)
+    generate_measured_cost_revalidation(config)
+
+    output = generate_measured_cost_revalidation_sanity_check(config)
+
+    text = output.report_path.read_text(encoding="utf-8")
+    assert output.status == "CALCULATION_CONFIRMED"
+    assert output.sample_count == 3
+    assert "Decision: CALCULATION_CONFIRMED" in text
+    assert "Sample-Trade Manual Recomputations" in text
+    assert "measured_entry_spread_R = measured_p95_spread_points * point_size / abs(entry_price - stop_loss)" in text
+    assert "measured_median_fixed_20_points" in text
 
 
 def _copy_config(project_root: Path, tmp_path: Path) -> Path:

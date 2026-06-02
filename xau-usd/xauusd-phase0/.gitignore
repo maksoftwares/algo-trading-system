@@ -23,3 +23,4 @@ outputs/**
 !outputs/
 !outputs/*/
 !outputs/*/.gitkeep
+!outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md

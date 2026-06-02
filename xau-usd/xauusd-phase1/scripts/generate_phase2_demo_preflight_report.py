@@ -64,7 +64,8 @@ def generate_phase2_demo_preflight_report(root: Path, output_json: Path | None =
         _countdown_check(countdown, countdown_path),
         _latest_boundary_check(latest, summary_path),
         _countdown_authority_boundary_check(countdown, countdown_path),
-        _demo_account_isolation_check(local_mt5_network_baseline_path),
+        _demo_account_isolation_check(demo_account_isolation_path),
+        _local_network_baseline_context_check(local_mt5_network_baseline_path),
         _phase3_separation_check(phase3_status, phase3_status_path),
         _safety_check(root),
     ]
@@ -188,6 +189,45 @@ def _demo_account_isolation_check(path: Path) -> PreflightCheck:
         "demo_account_isolation",
         "PENDING",
         f"`{path}` exists but does not contain an explicit demo/practice server marker.",
+    )
+
+
+def _local_network_baseline_context_check(path: Path) -> PreflightCheck:
+    if not path.exists():
+        return PreflightCheck(
+            "local_network_baseline_context",
+            "PENDING",
+            f"`{path}` is missing; local runtime latency/broker-access context is not documented.",
+        )
+    status = _read_markdown_status(path)
+    text = path.read_text(encoding="utf-8", errors="replace")
+    live_markers = sorted(_server_markers(text, ("Live", "Real")))
+    demo_markers = sorted(_server_markers(text, ("Demo", "Practice")))
+    if status != "PASS":
+        return PreflightCheck(
+            "local_network_baseline_context",
+            "PENDING",
+            f"`{path}` status is {status or 'missing'}; expected PASS for runtime context.",
+        )
+    if live_markers:
+        return PreflightCheck(
+            "local_network_baseline_context",
+            "WARN",
+            (
+                f"`{path}` is PASS and contains live/real server marker(s) used only as local network baseline context: "
+                f"{', '.join(live_markers)}. This must not be read as demo account isolation."
+            ),
+        )
+    if demo_markers:
+        return PreflightCheck(
+            "local_network_baseline_context",
+            "PASS",
+            f"`{path}` is PASS and contains demo/practice marker(s): {', '.join(demo_markers)}.",
+        )
+    return PreflightCheck(
+        "local_network_baseline_context",
+        "PASS",
+        f"`{path}` is PASS; no explicit server marker was found in the sanitized baseline.",
     )
 
 

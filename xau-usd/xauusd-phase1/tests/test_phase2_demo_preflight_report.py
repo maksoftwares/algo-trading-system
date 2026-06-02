@@ -44,6 +44,7 @@ def test_phase2_demo_preflight_passes_when_transition_inputs_pass(tmp_path: Path
     _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
     _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
     _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_demo_account_isolation(reports / "PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md", "Capital.ComMena-Demo")
     _write_local_mt5_network_baseline(reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md", "Capital.ComMena-Demo")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
 
@@ -56,7 +57,7 @@ def test_phase2_demo_preflight_passes_when_transition_inputs_pass(tmp_path: Path
     assert all(check.status == "PASS" for check in output.checks)
 
 
-def test_phase2_demo_preflight_fails_on_live_server_context(tmp_path: Path):
+def test_phase2_demo_preflight_treats_live_local_baseline_as_context(tmp_path: Path):
     module = _load_module()
     root = tmp_path / "xauusd-phase1"
     reports = root / "outputs" / "reports"
@@ -66,7 +67,34 @@ def test_phase2_demo_preflight_fails_on_live_server_context(tmp_path: Path):
     _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
     _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
     _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_demo_account_isolation(reports / "PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md", "Capital.ComMena-Demo")
     _write_local_mt5_network_baseline(reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md", "Capital.ComMena-Live")
+    _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
+
+    output = module.generate_phase2_demo_preflight_report(root)
+
+    assert output.status == "PASS"
+    assert any(check.name == "demo_account_isolation" and check.status == "PASS" for check in output.checks)
+    assert any(
+        check.name == "local_network_baseline_context"
+        and check.status == "WARN"
+        and "Capital.ComMena-Live" in check.evidence
+        for check in output.checks
+    )
+
+
+def test_phase2_demo_preflight_fails_on_live_demo_isolation_report(tmp_path: Path):
+    module = _load_module()
+    root = tmp_path / "xauusd-phase1"
+    reports = root / "outputs" / "reports"
+    phase3_reports = root.parent / "xauusd-phase3-experimental" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    phase3_reports.mkdir(parents=True)
+    _write_readiness(reports / "PHASE2_READINESS_REPORT.md", status="PASS", pending=False)
+    _write_countdown(reports / "PHASE2_DEMO_COUNTDOWN.json", status="DEMO_READY_TO_REQUEST_OWNER_APPROVAL", pending_gate_count=0)
+    _write_summary(reports / "PHASE1_STATUS_SUMMARY.json")
+    _write_demo_account_isolation(reports / "PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md", "Capital.ComMena-Live")
+    _write_local_mt5_network_baseline(reports / "PHASE2_LOCAL_MT5_NETWORK_BASELINE.md", "Capital.ComMena-Demo")
     _write_phase3_status(phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json")
 
     output = module.generate_phase2_demo_preflight_report(root)
@@ -252,6 +280,27 @@ def _write_local_mt5_network_baseline(path: Path, server: str) -> None:
                 "| Timestamp | Server | Access Point | Ping |",
                 "| --- | --- | --- | --- |",
                 f"| 2026-05-28 12:00:00 | {server} | 1 | 20.0 ms |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _write_demo_account_isolation(path: Path, server: str) -> None:
+    path.write_text(
+        "\n".join(
+            [
+                "# Phase 2 Demo Account Isolation Report",
+                "",
+                "Overall status: PASS",
+                "",
+                "## Account Evidence",
+                "",
+                "| Field | Value |",
+                "| --- | --- |",
+                f"| account_server | {server} |",
+                "| live_server_marker_present | False |",
                 "",
             ]
         ),

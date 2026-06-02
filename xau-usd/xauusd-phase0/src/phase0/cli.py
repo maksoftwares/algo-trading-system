@@ -34,6 +34,7 @@ from phase0.independent_reproduction import generate_independent_reproduction
 from phase0.manifests import generate_data_manifest, generate_required_data_manifest, generate_result_manifest
 from phase0.matrix import run_phase0_matrix
 from phase0.measured_revalidation import generate_measured_cost_revalidation
+from phase0.measured_sanity import generate_measured_cost_revalidation_sanity_check
 from phase0.multisymbol import run_multisymbol_checks
 from phase0.mt5_deployment import check_passive_spread_logger_deployment
 from phase0.mt5_presets import generate_mt5_bar_export_presets
@@ -473,6 +474,14 @@ def build_parser() -> argparse.ArgumentParser:
     measured_revalidation.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
     measured_revalidation.add_argument("--fixed-risk-usd", type=float)
     measured_revalidation.set_defaults(func=_cmd_generate_measured_cost_revalidation)
+
+    measured_sanity = subparsers.add_parser(
+        "generate-measured-cost-sanity-check",
+        help="Generate the measured-cost revalidation calculation sanity-check report.",
+    )
+    measured_sanity.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    measured_sanity.add_argument("--fixed-risk-usd", type=float)
+    measured_sanity.set_defaults(func=_cmd_generate_measured_cost_sanity_check)
 
     spread_logger_deployment = subparsers.add_parser(
         "check-passive-spread-logger",
@@ -1233,6 +1242,20 @@ def _cmd_generate_measured_cost_revalidation(args: argparse.Namespace) -> int:
     print(f"Passing cells: {output.passing_cells}/{output.required_passing_cells}")
     print(f"Trades: {output.trade_count}")
     return 0
+
+
+def _cmd_generate_measured_cost_sanity_check(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_measured_cost_revalidation_sanity_check(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Measured-cost sanity check: {output.status}")
+    print(output.report_path)
+    print(f"Decision: {output.decision}")
+    print(f"Samples: {output.sample_count}")
+    return 0 if output.status != "BUG_FOUND" else 1
 
 
 def _cmd_check_passive_spread_logger(args: argparse.Namespace) -> int:

@@ -13,13 +13,20 @@ input string InpCandidateStatus = "ACCEPTED";
 input string InpTargetSymbol = "XAUUSD";
 input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,USDJPY";
 input string InpExpectedServerMarker = "Demo";
+input string InpAllowedAccountLoginsCsv = "";
+input string InpExperimentalAuthorizationToken = "";
+input string InpRequiredExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
+input string InpAuthorizedCandidatesCsv = "breakout_retest";
 input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log.csv";
 input string InpStartupLogFileName = "experimental_demo_executor_startup.csv";
 input string InpOrderLogFileName = "experimental_demo_executor_order_log.csv";
+input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
 input int InpMaxOrdersPerDay = 12;
+input int InpMaxAccountOrdersPerDay = 24;
 input int InpMinSecondsBetweenOrders = 300;
 input int InpMaxOpenPositionsPerInstance = 1;
+input int InpMaxAccountOpenPositions = 3;
 input int InpDeviationPoints = 50;
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
@@ -61,6 +68,34 @@ bool CsvContainsSymbol(const string csv, const string symbol_name)
          return true;
    }
    return false;
+}
+
+bool CsvContainsTextToken(const string csv, const string wanted)
+{
+   string tokens[];
+   int count = StringSplit(csv, ',', tokens);
+   string wanted_trimmed = TrimToken(wanted);
+   for(int index = 0; index < count; index++)
+   {
+      if(TrimToken(tokens[index]) == wanted_trimmed)
+         return true;
+   }
+   return false;
+}
+
+bool AccountLoginWhitelisted()
+{
+   return CsvContainsTextToken(InpAllowedAccountLoginsCsv, IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)));
+}
+
+bool CandidateExecutionAuthorized()
+{
+   return CsvContainsTextToken(InpAuthorizedCandidatesCsv, InpCandidate);
+}
+
+bool ExperimentalAuthorizationTokenValid()
+{
+   return TrimToken(InpExperimentalAuthorizationToken) == TrimToken(InpRequiredExperimentalAuthorizationToken);
 }
 
 bool IsAllowedCandidate(const string candidate)
@@ -491,6 +526,79 @@ bool AppendCsvRow(const string file_name, const string &values[])
    return true;
 }
 
+bool KillSwitchActive()
+{
+   if(!FileIsExist(InpKillSwitchFileName))
+      return false;
+   int handle = FileOpen(InpKillSwitchFileName, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
+   if(handle == INVALID_HANDLE)
+      return false;
+   string content = "";
+   while(!FileIsEnding(handle))
+      content += " " + FileReadString(handle);
+   FileClose(handle);
+   return ContainsText(content, "KILL");
+}
+
+string CompactDateKey()
+{
+   string key = TimeToString(TimeCurrent(), TIME_DATE);
+   StringReplace(key, ".", "");
+   StringReplace(key, "-", "");
+   StringReplace(key, " ", "");
+   return key;
+}
+
+string AccountOrderCounterName()
+{
+   return "P2DEMO_ORD_" + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)) + "_" + CompactDateKey();
+}
+
+int AccountOrdersToday()
+{
+   string name = AccountOrderCounterName();
+   if(!GlobalVariableCheck(name))
+      return 0;
+   return (int)GlobalVariableGet(name);
+}
+
+void IncrementAccountOrdersToday()
+{
+   string name = AccountOrderCounterName();
+   GlobalVariableSet(name, (double)(AccountOrdersToday() + 1));
+}
+
+bool IsExperimentalMagic(const long magic)
+{
+   return magic >= 920000 && magic < 921000;
+}
+
+int CountOpenExposureForAccount()
+{
+   int count = 0;
+   for(int index = 0; index < PositionsTotal(); index++)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(!PositionSelectByTicket(ticket))
+         continue;
+      if(IsExperimentalMagic((long)PositionGetInteger(POSITION_MAGIC)))
+         count++;
+   }
+   for(int index = 0; index < OrdersTotal(); index++)
+   {
+      ulong ticket = OrderGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(!OrderSelect(ticket))
+         continue;
+      if(IsExperimentalMagic((long)OrderGetInteger(ORDER_MAGIC)))
+         count++;
+   }
+   return count;
+}
+
 string CsvEscape(string value)
 {
    bool needs_quote = StringFind(value, ",") >= 0 || StringFind(value, "\"") >= 0 || StringFind(value, "\n") >= 0;
@@ -551,9 +659,16 @@ bool EnsureStartupLogHeader()
       "candidate",
       "candidate_status",
       "qualified_symbols",
+      "account_login",
+      "allowed_account_logins",
+      "authorized_candidates",
       "dry_run",
       "broker_action_allowed",
       "observer_supported",
+      "authorization_token_present",
+      "account_max_orders_per_day",
+      "account_max_open_positions",
+      "kill_switch_file",
       "startup_status"
    };
    return AppendCsvRow(InpStartupLogFileName, header);
@@ -571,9 +686,16 @@ bool WriteStartupRow(const string status_text)
       InpCandidate,
       InpCandidateStatus,
       InpQualifiedSymbolsCsv,
+      IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
+      InpAllowedAccountLoginsCsv,
+      InpAuthorizedCandidatesCsv,
       BoolText(InpDryRunOnly),
       BoolText(InpBrokerActionAllowed),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
+      BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      IntegerToString(InpMaxAccountOrdersPerDay),
+      IntegerToString(InpMaxAccountOpenPositions),
+      InpKillSwitchFileName,
       status_text
    };
    return AppendCsvRow(InpStartupLogFileName, row);
@@ -600,7 +722,12 @@ bool EnsureOrderLogHeader()
       "action",
       "direction",
       "volume",
+      "order_mode",
+      "spread_at_signal_points",
+      "spread_at_order_points",
+      "signal_entry_price",
       "request_price",
+      "actual_request_price",
       "sl",
       "tp",
       "retcode",
@@ -609,6 +736,11 @@ bool EnsureOrderLogHeader()
       "deal_ticket",
       "result_price",
       "result_volume",
+      "slippage_points",
+      "estimated_cost_R",
+      "stop_distance_points",
+      "account_orders_today",
+      "account_open_exposure",
       "reason_code",
       "guard_reason"
    };
@@ -734,10 +866,20 @@ void WriteOrderLogRow(
    const double tp,
    const MqlTradeResult &result,
    const string reason_code,
-   const string guard_reason
+   const string guard_reason,
+   const string order_mode,
+   const double spread_at_signal_points,
+   const double spread_at_order_points,
+   const double signal_entry_price,
+   const double estimated_cost_r,
+   const double stop_distance_points
 )
 {
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   double slippage_points = (point > 0.0 && result.price > 0.0 && request_price > 0.0)
+      ? MathAbs(result.price - request_price) / point
+      : 0.0;
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
@@ -754,6 +896,11 @@ void WriteOrderLogRow(
       action,
       direction,
       DoubleToString(volume, 2),
+      order_mode,
+      DoubleToString(spread_at_signal_points, 2),
+      DoubleToString(spread_at_order_points, 2),
+      DoubleToString(signal_entry_price, digits),
+      DoubleToString(request_price, digits),
       DoubleToString(request_price, digits),
       DoubleToString(sl, digits),
       DoubleToString(tp, digits),
@@ -763,6 +910,11 @@ void WriteOrderLogRow(
       IntegerToString((int)result.deal),
       DoubleToString(result.price, digits),
       DoubleToString(result.volume, 2),
+      DoubleToString(slippage_points, 2),
+      DoubleToString(estimated_cost_r, 4),
+      DoubleToString(stop_distance_points, 2),
+      IntegerToString(AccountOrdersToday()),
+      IntegerToString(CountOpenExposureForAccount()),
       reason_code,
       guard_reason
    };
@@ -780,6 +932,26 @@ bool TradingGuardsPass(const Phase1BreakoutRetestObservation &observation, strin
    if(!InpBrokerActionAllowed)
    {
       guard_reason = "broker_action_not_allowed";
+      return false;
+   }
+   if(KillSwitchActive())
+   {
+      guard_reason = "kill_switch_active";
+      return false;
+   }
+   if(!ExperimentalAuthorizationTokenValid())
+   {
+      guard_reason = "experimental_authorization_token_missing_or_invalid";
+      return false;
+   }
+   if(!AccountLoginWhitelisted())
+   {
+      guard_reason = "account_login_not_whitelisted";
+      return false;
+   }
+   if(!CandidateExecutionAuthorized())
+   {
+      guard_reason = "candidate_not_explicitly_authorized";
       return false;
    }
    string server = AccountInfoString(ACCOUNT_SERVER);
@@ -808,6 +980,11 @@ bool TradingGuardsPass(const Phase1BreakoutRetestObservation &observation, strin
       guard_reason = "max_orders_per_day_reached";
       return false;
    }
+   if(InpMaxAccountOrdersPerDay > 0 && AccountOrdersToday() >= InpMaxAccountOrdersPerDay)
+   {
+      guard_reason = "max_account_orders_per_day_reached";
+      return false;
+   }
    if(InpMinSecondsBetweenOrders > 0 && g_last_order_submit_time > 0 && TimeCurrent() - g_last_order_submit_time < InpMinSecondsBetweenOrders)
    {
       guard_reason = "min_seconds_between_orders";
@@ -816,6 +993,11 @@ bool TradingGuardsPass(const Phase1BreakoutRetestObservation &observation, strin
    if(InpMaxOpenPositionsPerInstance > 0 && CountOpenExposureForInstance() >= InpMaxOpenPositionsPerInstance)
    {
       guard_reason = "open_instance_exposure_exists";
+      return false;
+   }
+   if(InpMaxAccountOpenPositions > 0 && CountOpenExposureForAccount() >= InpMaxAccountOpenPositions)
+   {
+      guard_reason = "account_open_exposure_cap_reached";
       return false;
    }
    guard_reason = "pass";
@@ -827,16 +1009,33 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    string guard_reason = "";
    MqlTradeResult result;
    ZeroMemory(result);
+   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   double spread_at_signal_points = point > 0.0 ? (ask - bid) / point : 0.0;
    if(!TradingGuardsPass(observation, guard_reason))
    {
-      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, 0.0, 0.0, 0.0, result, observation.reason_code, guard_reason);
+      WriteOrderLogRow(
+         "GUARD_BLOCK",
+         observation.direction_text,
+         0.0,
+         0.0,
+         0.0,
+         0.0,
+         result,
+         observation.reason_code,
+         guard_reason,
+         "MARKET_PROXY",
+         spread_at_signal_points,
+         spread_at_signal_points,
+         observation.entry_price,
+         0.0,
+         observation.stop_distance_points
+      );
       return false;
    }
 
-   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    bool is_long = observation.direction_text == "LONG";
    double price = is_long ? ask : bid;
    double signal_risk = MathAbs(observation.entry_price - observation.stop_loss);
@@ -854,9 +1053,10 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    if(signal_risk <= 0.0 || price <= 0.0)
    {
       guard_reason = "invalid_price_or_risk";
-      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, price, 0.0, 0.0, result, observation.reason_code, guard_reason);
+      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, price, 0.0, 0.0, result, observation.reason_code, guard_reason, "MARKET_PROXY", spread_at_signal_points, spread_at_signal_points, observation.entry_price, 0.0, observation.stop_distance_points);
       return false;
    }
+   double stop_distance_points = point > 0.0 ? signal_risk / point : 0.0;
 
    double sl = is_long ? price - signal_risk : price + signal_risk;
    double tp = is_long ? price + 1.50 * signal_risk : price - 1.50 * signal_risk;
@@ -867,7 +1067,7 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    if(volume <= 0.0)
    {
       guard_reason = "invalid_volume";
-      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, price, sl, tp, result, observation.reason_code, guard_reason);
+      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, price, sl, tp, result, observation.reason_code, guard_reason, "MARKET_PROXY", spread_at_signal_points, spread_at_signal_points, observation.entry_price, 0.0, stop_distance_points);
       return false;
    }
 
@@ -892,8 +1092,27 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    {
       g_last_order_submit_time = TimeCurrent();
       g_orders_today++;
+      IncrementAccountOrdersToday();
    }
-   WriteOrderLogRow(action, observation.direction_text, volume, price, sl, tp, result, observation.reason_code, guard_reason);
+   double spread_at_order_points = point > 0.0 ? (SymbolInfoDouble(_Symbol, SYMBOL_ASK) - SymbolInfoDouble(_Symbol, SYMBOL_BID)) / point : 0.0;
+   double estimated_cost_r = signal_risk > 0.0 ? (spread_at_order_points * point / signal_risk) : 0.0;
+   WriteOrderLogRow(
+      action,
+      observation.direction_text,
+      volume,
+      price,
+      sl,
+      tp,
+      result,
+      observation.reason_code,
+      guard_reason,
+      "MARKET_PROXY",
+      spread_at_signal_points,
+      spread_at_order_points,
+      observation.entry_price,
+      estimated_cost_r,
+      stop_distance_points
+   );
    return sent;
 }
 
@@ -912,6 +1131,24 @@ int OnInit()
       return INIT_FAILED;
    }
 
+   if(!ExperimentalAuthorizationTokenValid())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused to start without a valid experimental authorization token.");
+      return INIT_FAILED;
+   }
+
+   if(!AccountLoginWhitelisted())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
+      return INIT_FAILED;
+   }
+
+   if(KillSwitchActive())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused to start because kill switch is active.");
+      return INIT_FAILED;
+   }
+
    if(_Symbol != InpTargetSymbol)
    {
       Print("Phase2ExperimentalDemoExecutor attached to ", _Symbol, " but target is ", InpTargetSymbol);
@@ -927,6 +1164,12 @@ int OnInit()
    if(!IsAllowedCandidate(InpCandidate))
    {
       Print("Phase2ExperimentalDemoExecutor refused unknown candidate ", InpCandidate);
+      return INIT_FAILED;
+   }
+
+   if(!CandidateExecutionAuthorized())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused candidate ", InpCandidate, " because it is not explicitly authorized.");
       return INIT_FAILED;
    }
 
@@ -953,9 +1196,16 @@ void OnDeinit(const int reason)
       InpCandidate,
       InpCandidateStatus,
       InpQualifiedSymbolsCsv,
+      IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
+      InpAllowedAccountLoginsCsv,
+      InpAuthorizedCandidatesCsv,
       BoolText(InpDryRunOnly),
       BoolText(InpBrokerActionAllowed),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
+      BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      IntegerToString(InpMaxAccountOrdersPerDay),
+      IntegerToString(InpMaxAccountOpenPositions),
+      InpKillSwitchFileName,
       "REMOVED_REASON_" + IntegerToString(reason)
    };
    AppendCsvRow(InpStartupLogFileName, row);

@@ -82,6 +82,9 @@ def generate_project_status_page(
     measured_cost["assumption_delta_status"] = _read_markdown_status(
         phase0_reports / "MEASURED_COST_ASSUMPTION_DELTA.md"
     ) or "UNKNOWN"
+    measured_cost["sanity_check_status"] = _read_markdown_status(
+        phase0_reports / "MEASURED_COST_REVALIDATION_SANITY_CHECK.md"
+    ) or "UNKNOWN"
     reality_check_status = _read_markdown_status(phase0_reports / "PHASE0_REALITY_CHECK.md") or "UNKNOWN"
     d2_decision = _resolve_d2_decision(phase0_reports, reality_check_status)
     candidates = _candidate_rows(
@@ -1055,9 +1058,21 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ("Measured cost model", measured.get("status", "n/a")),
         ("Measured-cost revalidation", measured.get("revalidation_status", "n/a")),
         ("Measured-cost assumption delta", measured.get("assumption_delta_status", "n/a")),
+        ("Measured-cost sanity check", measured.get("sanity_check_status", "n/a")),
         ("Measured rows/days", f"{measured.get('observed_rows', 'n/a')} rows / {measured.get('observed_days', 'n/a')} days"),
         ("Breakout family lifecycle", lifecycle),
-        ("Execution eligibility", "BLOCKED" if lifecycle in {"COST_REVALIDATION_PENDING", "COST_SUSPENDED"} else "DRY_RUN_ONLY"),
+        (
+            "Execution eligibility",
+            "BLOCKED"
+            if lifecycle
+            in {
+                "COST_REVALIDATION_PENDING",
+                "COST_SUSPENDED",
+                "COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK",
+                "COST_SUSPENDED_CANONICAL",
+            }
+            else "DRY_RUN_ONLY",
+        ),
     ]
     return _key_value_table(rows)
 
@@ -1965,6 +1980,7 @@ def _artifact_links() -> str:
         ("Measured cost model", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md"),
         ("Measured-cost revalidation", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md"),
         ("Measured-cost assumption delta", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md"),
+        ("Measured-cost sanity check", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md"),
         ("Measured-cost audit", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"),
         ("Cost viability map", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_VIABILITY_MAP.md"),
         ("Cost-R diagnostic", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md"),
@@ -2028,10 +2044,13 @@ def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
 def _breakout_family_lifecycle(measured_cost: dict[str, str]) -> str:
     model = measured_cost.get("status", "UNKNOWN")
     revalidation = measured_cost.get("revalidation_status", "UNKNOWN")
+    sanity = measured_cost.get("sanity_check_status", "UNKNOWN")
     if model != "PASS":
         return "COST_REVALIDATION_PENDING"
     if revalidation == "FAIL":
-        return "COST_SUSPENDED"
+        if sanity == "CALCULATION_CONFIRMED":
+            return "COST_SUSPENDED_CANONICAL"
+        return "COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK"
     if revalidation == "PASS":
         return "DRY_RUN_APPROVED"
     return "COST_REVALIDATION_PENDING"
@@ -2153,8 +2172,10 @@ def _next_actions(
         items.append("Let the five-trading-day Phase 1 soak, active-market 72-hour bar-continuity gate, and separate 96-hour code-freeze gate continue.")
     if measured_cost.get("status") != "PASS":
         items.append("Keep the passive spread logger running until measured-cost coverage reaches the required fresh observed days; breakout-retest family stays COST_REVALIDATION_PENDING.")
-    if lifecycle == "COST_SUSPENDED":
-        items.append("Keep the breakout-retest family COST_SUSPENDED; audit the cost-R conversion before any paper-mode implementation.")
+    if lifecycle == "COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK":
+        items.append("Audit the measured-cost conversion before any paper-mode implementation; breakout-retest family stays cost-suspended pending sanity check.")
+    if lifecycle in {"COST_SUSPENDED", "COST_SUSPENDED_CANONICAL"}:
+        items.append("Keep the breakout-retest family COST_SUSPENDED_CANONICAL; measured-cost sanity check confirmed the failure, so continue lower-cost independent candidate research.")
     if phase2_status != "PASS":
         items.append("Keep Phase 2 in preparation mode only; no paper-mode implementation until readiness is PASS.")
     if _phase3_status_label(phase3_status) == "EXPERIMENTAL_ACTIVE":

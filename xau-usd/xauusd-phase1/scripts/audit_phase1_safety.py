@@ -65,6 +65,9 @@ def main() -> int:
             print(f"{rel}:{finding.line_number}: {finding.term}: {finding.line}")
         return 1
     print("Phase 1 safety audit OK: dry-run shell contains no forbidden broker-action calls.")
+    if ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES:
+        allowed = ", ".join(sorted(ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES))
+        print(f"Excluded experimental broker-action allowlist: {allowed}. These paths are non-canonical and require separate governance.")
     return 0
 
 

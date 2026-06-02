@@ -1,6 +1,6 @@
 # Phase 2 Authorization Checklist
 
-Last updated: 2026-06-01
+Last updated: 2026-06-02
 
 This checklist separates work that is already closed from gates that still require wall-clock evidence or explicit owner approval. Phase 2 remains paper-mode preparation only until every required gate below is closed.
 
@@ -27,7 +27,7 @@ Authority rule: `outputs/reports/PHASE2_READINESS_REPORT.md` is the sole current
 | Fixed-notional cost report | PASS | `xau-usd/xauusd-phase0/outputs/reports/FIXED_NOTIONAL_REPORT.md` |
 | Passive spread logger deployment | PASS | Deployed, compiled, and producing logs in the isolated logger clone; `xau-usd/xauusd-phase0/outputs/reports/PASSIVE_SPREAD_LOGGER_DEPLOYMENT.md` |
 | Phase 2 cost-measurement protocol | PASS | `docs/PHASE2_COST_MEASUREMENT_PROTOCOL.md` documents Phase 2 as a cost-measurement experiment and pre-commits the +0.15R suspension rule. |
-| Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats same-family variants as one correlated breakout-retest family and marks the family as cost-revalidation-pending until fresh measured-cost revalidation passes. |
+| Single-edge risk plan | PASS | `docs/PHASE2_SINGLE_EDGE_RISK_PLAN.md` treats same-family variants as one correlated breakout-retest family and marks the family as `COST_SUSPENDED_CANONICAL` after confirmed measured-cost failure. |
 | Local MT5 broker-access baseline | PASS | `outputs/reports/PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` provides the sanitized local MT5 authorization-ping benchmark that selected VPS latency must be compared against. |
 | External health monitor | PASS | `docs/PHASE2_OPERATIONS_PREP.md` defines the out-of-terminal monitor and local scheduler-friendly check script. |
 | Disaster recovery runbook | PASS | `docs/PHASE2_OPERATIONS_PREP.md` documents recovery assets, procedure, and rollback rule. |
@@ -40,19 +40,19 @@ Authority rule: `outputs/reports/PHASE2_READINESS_REPORT.md` is the sole current
 | Phase 1 review index | PASS | `PHASE1_REVIEW_INDEX.md` is PASS after Phase 1 closure and bundle refresh. |
 | Runtime host selection | PASS | Owner selected `LOCAL_SYSTEM_RUNTIME` for the next few months in `docs/PHASE2_VPS_SELECTION_MATRIX.md`; no VPS latency-improvement claim is made. |
 | Runtime latency evidence | PASS | `outputs/reports/PHASE2_VPS_LATENCY_REPORT.md` uses the local MT5 baseline for `LOCAL_SYSTEM_RUNTIME`. |
-| Owner approval draft | READY_FOR_OWNER_SELECTION | `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` is prepared as a non-authorizing draft. Do not create the live approval file until all objective gates pass and the owner signs. |
+| Owner approval draft | BLOCKED | `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` is prepared as a non-authorizing draft, but owner approval must not be signed while measured-cost revalidation is FAIL. |
 | Owner/VPS readiness package | READY_FOR_OWNER_SELECTION | `docs/PHASE2_OWNER_VPS_READINESS_PACKAGE.md` summarizes the remaining owner decisions, VPS evidence sequence, generated packet paths, and paper-only signing rule. |
 
 ## Still Pending
 
 | Gate | Current status | Closure rule |
 | --- | --- | --- |
-| Measured cost model | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS from five fresh observed market days before evaluation. |
-| Measured-cost revalidation | PENDING | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must be rerun after measured cost model PASS and show PASS before any paper-mode implementation. |
-| Measured-cost assumption delta | PENDING | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` remains pending until authoritative measured-cost revalidation runs. |
-| Measured-cost audit | REVIEW | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md` and `BREAKOUT_RETEST_COST_R_DIAGNOSTIC.md` must be reviewed to decide whether the cost failure is real or a conversion defect. |
-| Phase 2 readiness report | PENDING | `PHASE2_READINESS_REPORT.md` must return to PASS after all remaining readiness gates are closed. D2 is no longer the active blocker after owner acceptance of `D2_FAMILY_CLUSTERED_V0`. |
-| Demo account isolation/preflight | FAIL/PENDING | `PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` records the clean owner-opened demo terminal evidence, but `PHASE2_DEMO_PREFLIGHT_REPORT.md` may remain FAIL/PENDING until clean demo/VPS-specific Phase 2 evidence replaces local live-server markers and all readiness gates pass. |
+| Measured cost model | PASS | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` has five fresh observed market days and sufficient rows. |
+| Measured-cost revalidation | FAIL | `xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` fails with 0/9 passing cells under measured P95 cost. |
+| Measured-cost assumption delta | FAIL | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` shows measured cost assumptions materially exceed the configured model. |
+| Measured-cost sanity check | CALCULATION_CONFIRMED | `xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md` confirms point conversion, one-time spread replacement, denominator, commission/slippage handling, and sample recomputations. |
+| Phase 2 readiness report | FAIL | `PHASE2_READINESS_REPORT.md` remains the sole authority and blocks Phase 2 while measured-cost revalidation and assumption delta are FAIL. D2 is no longer the active blocker after owner acceptance of `D2_FAMILY_CLUSTERED_V0`. |
+| Demo account isolation/preflight | PASS/FAIL | `PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` records clean demo terminal evidence. `PHASE2_DEMO_PREFLIGHT_REPORT.md` remains FAIL because Phase 2 readiness is FAIL; local live-server network baseline is context only, not demo-isolation failure. |
 | Project owner approval | PENDING | Use `docs/PHASE2_OWNER_APPROVAL_DRAFT.md` after all objective gates pass, then add `outputs/reports/PHASE2_OWNER_APPROVAL.md` only when the owner explicitly authorizes paper-mode work. |
 | Local runtime first-day verification | PENDING | Require `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` to show PASS after local-runtime consistency, NTP/time sync, backup, recovery login, periodic scheduler, MT5 path, compile, startup, decision-log, external-health, and status-summary evidence are captured. The selected provider/region in the decision record, latency report, and manual runtime evidence must match. |
 | Non-level/intermarket forcing candidate run | PASS | Twenty-nine H4/D1/W1 candidates plus additional H1 intermarket, volatility-regime, event-regime, macro, ETF, FX, futures-proxy, volatility-premium, and calendar/microstructure candidates have been registered, hash-locked, implemented, smoke-tested, and run through real 9-cell first passes. All independent candidates were rejected, so diversification remains unsolved. |
@@ -80,7 +80,8 @@ IF Phase 1 acceptance = PASS
 AND Phase 1 active-market soak = PASS via owner-accepted 56h threshold
 AND code-freeze marker gate = PASS
 AND measured cost model = PASS
-AND measured-cost revalidation = PASS after any required cost-conversion correction
+AND measured-cost revalidation = PASS after any reviewed cost-conversion bug fix or new approved candidate evidence
+AND measured-cost sanity check is not CALCULATION_CONFIRMED for a failing revalidation
 AND Phase 1 review index = PASS
 AND Phase 1 observer parity = PASS
 AND Phase 2 readiness = PASS

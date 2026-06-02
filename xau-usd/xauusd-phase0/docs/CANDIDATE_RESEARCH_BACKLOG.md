@@ -1,6 +1,8 @@
 # Candidate Research Backlog
 
-Last updated: 2026-05-30
+Last updated: 2026-06-02
+
+2026-06-02 cost update: the breakout-retest family is `COST_SUSPENDED_CANONICAL` for formal Phase 2 execution after measured-cost revalidation FAIL and sanity-check `CALCULATION_CONFIRMED`. Continue research toward lower-cost, wider-stop, non-breakout-retest, non-M5-retail-spread-sensitive candidates.
 
 ## Planning Rule
 
@@ -19,7 +21,7 @@ Expected path:
 
 | # | Candidate | Status | Next Action |
 | ---: | --- | --- | --- |
-| 1 | `breakout_retest` | APPROVED_FUTURE_EXPERT | Keep in Phase 1 dry-run observation only. |
+| 1 | `breakout_retest` | COST_SUSPENDED_CANONICAL | Keep in Phase 1 telemetry only; not execution-eligible under the current measured-cost evidence. |
 | 2 | `trend_pullback` | REJECTED_V1 | Do not tune under the same name. |
 | 3 | `range_mr` | REJECTED_V1 | Do not tune under the same name. |
 | 4 | `squeeze_breakout_long_v0` | REJECTED_FIRST_PASS | Failed 9-cell matrix Gate 1; do not tune v0. |

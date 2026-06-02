@@ -23,6 +23,8 @@ TERMINAL_READY_REPORT = Path("outputs") / "reports" / "PHASE2_EXPERIMENTAL_DEMO_
 EA_NAME = "Phase2ExperimentalDemoExecutor"
 EA_SOURCE = Path("mt5") / "Experts" / f"{EA_NAME}.mq5"
 RUN_ID = "phase2-experimental-demo-executor-v0.1"
+REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY"
+DEFAULT_AUTHORIZED_CANDIDATES_CSV = "breakout_retest"
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
     "swing_breakout_retest_v0",
@@ -86,6 +88,12 @@ def attach_phase2_experimental_demo_executors(
     metaeditor_exe: Path = DEFAULT_METAEDITOR_EXE,
     output_json: Path | None = None,
     launch: bool = True,
+    allowed_account_logins_csv: str = "",
+    experimental_authorization_token: str = "",
+    authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
+    max_account_orders_per_day: int = 24,
+    max_account_open_positions: int = 3,
+    kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
 ) -> AttachOutput:
     phase1_root = phase1_root.resolve()
     terminal_data_dir = terminal_data_dir.resolve()
@@ -110,7 +118,16 @@ def attach_phase2_experimental_demo_executors(
     compile_log = _compile_ea(metaeditor_exe, terminal_data_dir)
     terminal_closed = _close_terminal(terminal_exe)
     executor_log_backup_dir = _archive_existing_executor_logs(terminal_data_dir)
-    backup_dir = _replace_default_profile(terminal_data_dir, attachments)
+    backup_dir = _replace_default_profile(
+        terminal_data_dir,
+        attachments,
+        allowed_account_logins_csv=allowed_account_logins_csv,
+        experimental_authorization_token=experimental_authorization_token,
+        authorized_candidates_csv=authorized_candidates_csv,
+        max_account_orders_per_day=max_account_orders_per_day,
+        max_account_open_positions=max_account_open_positions,
+        kill_switch_file_name=kill_switch_file_name,
+    )
     if launch:
         subprocess.Popen([str(terminal_exe)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(3.0)
@@ -140,13 +157,24 @@ def attach_phase2_experimental_demo_executors(
             "broker_action_allowed": True,
             "fixed_lot": 0.01,
             "max_orders_per_day_per_instance": 12,
+            "max_orders_per_day_account": max_account_orders_per_day,
             "max_open_positions_per_instance": 1,
+            "max_open_positions_account": max_account_open_positions,
+            "allowed_account_logins_configured": bool(allowed_account_logins_csv.strip()),
+            "authorized_candidates_csv": authorized_candidates_csv,
+            "authorization_token_configured": experimental_authorization_token == REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN,
+            "kill_switch_file_name": kill_switch_file_name,
         },
         "attachment_count": len(attachments),
         "attachments": [_attachment_payload(row) for row in attachments],
         "observer_limitations": [
             "All attachments must refuse live/real server names at EA startup.",
+            "All attachments must refuse non-whitelisted account logins at EA startup.",
+            "All attachments require the experimental authorization token; no token is written by default.",
+            "Same-family/provisional candidates require explicit inclusion in InpAuthorizedCandidatesCsv.",
+            "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
             "Each candidate-symbol instance uses fixed 0.01 lot, hard SL/TP, and one open exposure per instance.",
+            "Account-level daily order and open-position caps apply across chart instances.",
             "This is an experimental demo execution run, not canonical live authorization.",
         ],
     }
@@ -254,7 +282,17 @@ exit 0
     return result.returncode == 0
 
 
-def _replace_default_profile(terminal_data_dir: Path, attachments: list[AttachmentRow]) -> Path:
+def _replace_default_profile(
+    terminal_data_dir: Path,
+    attachments: list[AttachmentRow],
+    *,
+    allowed_account_logins_csv: str,
+    experimental_authorization_token: str,
+    authorized_candidates_csv: str,
+    max_account_orders_per_day: int,
+    max_account_open_positions: int,
+    kill_switch_file_name: str,
+) -> Path:
     charts_root = terminal_data_dir / "MQL5" / "Profiles" / "Charts"
     default_profile = charts_root / "Default"
     backup_root = terminal_data_dir / "_codex_quarantine" / "profile_backups"
@@ -268,11 +306,33 @@ def _replace_default_profile(terminal_data_dir: Path, attachments: list[Attachme
 
     for index, row in enumerate(attachments, start=1):
         chart = default_profile / f"chart{index:02d}.chr"
-        chart.write_text(_render_chart(row, index), encoding="utf-8")
+        chart.write_text(
+            _render_chart(
+                row,
+                index,
+                allowed_account_logins_csv=allowed_account_logins_csv,
+                experimental_authorization_token=experimental_authorization_token,
+                authorized_candidates_csv=authorized_candidates_csv,
+                max_account_orders_per_day=max_account_orders_per_day,
+                max_account_open_positions=max_account_open_positions,
+                kill_switch_file_name=kill_switch_file_name,
+            ),
+            encoding="utf-8",
+        )
     return backup_dir
 
 
-def _render_chart(row: AttachmentRow, index: int) -> str:
+def _render_chart(
+    row: AttachmentRow,
+    index: int,
+    *,
+    allowed_account_logins_csv: str = "",
+    experimental_authorization_token: str = "",
+    authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
+    max_account_orders_per_day: int = 24,
+    max_account_open_positions: int = 3,
+    kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
+) -> str:
     left = 20 + ((index - 1) % 3) * 42
     top = 20 + ((index - 1) // 3) * 35
     right = left + 980
@@ -323,13 +383,20 @@ def _render_chart(row: AttachmentRow, index: int) -> str:
             f"InpTargetSymbol={row.symbol}",
             f"InpQualifiedSymbolsCsv={qualified_csv}",
             "InpExpectedServerMarker=Demo",
+            f"InpAllowedAccountLoginsCsv={allowed_account_logins_csv}",
+            f"InpExperimentalAuthorizationToken={experimental_authorization_token}",
+            f"InpRequiredExperimentalAuthorizationToken={REQUIRED_EXPERIMENTAL_AUTHORIZATION_TOKEN}",
+            f"InpAuthorizedCandidatesCsv={authorized_candidates_csv}",
             f"InpAttachmentLogFileName={_attachment_log_name(row)}",
             f"InpStartupLogFileName={_startup_log_name(row)}",
             f"InpOrderLogFileName={_order_log_name(row)}",
+            f"InpKillSwitchFileName={kill_switch_file_name}",
             "InpFixedLot=0.01",
             "InpMaxOrdersPerDay=12",
+            f"InpMaxAccountOrdersPerDay={max_account_orders_per_day}",
             "InpMinSecondsBetweenOrders=300",
             "InpMaxOpenPositionsPerInstance=1",
+            f"InpMaxAccountOpenPositions={max_account_open_positions}",
             "InpDeviationPoints=50",
             "</inputs>",
             "</expert>",
@@ -449,6 +516,12 @@ def main() -> int:
     parser.add_argument("--metaeditor-exe", type=Path, default=DEFAULT_METAEDITOR_EXE)
     parser.add_argument("--output-json", type=Path, default=None)
     parser.add_argument("--no-launch", action="store_true")
+    parser.add_argument("--allowed-account-logins-csv", default="")
+    parser.add_argument("--experimental-authorization-token", default="")
+    parser.add_argument("--authorized-candidates-csv", default=DEFAULT_AUTHORIZED_CANDIDATES_CSV)
+    parser.add_argument("--max-account-orders-per-day", type=int, default=24)
+    parser.add_argument("--max-account-open-positions", type=int, default=3)
+    parser.add_argument("--kill-switch-file-name", default="experimental_demo_kill_switch.txt")
     args = parser.parse_args()
 
     output = attach_phase2_experimental_demo_executors(
@@ -458,6 +531,12 @@ def main() -> int:
         metaeditor_exe=args.metaeditor_exe,
         output_json=args.output_json,
         launch=not args.no_launch,
+        allowed_account_logins_csv=args.allowed_account_logins_csv,
+        experimental_authorization_token=args.experimental_authorization_token,
+        authorized_candidates_csv=args.authorized_candidates_csv,
+        max_account_orders_per_day=args.max_account_orders_per_day,
+        max_account_open_positions=args.max_account_open_positions,
+        kill_switch_file_name=args.kill_switch_file_name,
     )
     print(f"{output.status}: {output.attachment_count} attachments")
     print(output.json_path)

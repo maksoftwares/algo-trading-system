@@ -1,26 +1,28 @@
 # Phase 2 Single-Edge Risk Plan
 
-Last updated: 2026-05-25
+Last updated: 2026-06-02
 
 This plan reflects the current Phase 0 evidence: same-family variants are correlated with `breakout_retest`, and twenty-three non-level H4/D1/W1 plus additional H1 intermarket, volatility-regime, and event-regime diversification attempts have been rejected first-pass. The v1 portfolio is a single-edge breakout-retest family and must not be treated as diversified.
+
+Update 2026-06-02: the fresh measured-cost model is PASS, but measured-cost revalidation and assumption delta are FAIL. `MEASURED_COST_REVALIDATION_SANITY_CHECK.md` is `CALCULATION_CONFIRMED`, so the breakout-retest family is `COST_SUSPENDED_CANONICAL` for formal Phase 2 execution.
 
 ## Approved Edge Family
 
 | Expert | Status | Diversification treatment |
 | --- | --- | --- |
-| `breakout_retest` | COST_REVALIDATION_PENDING | Primary expression of the breakout-retest family; execution is blocked until fresh measured-cost model PASS and measured-cost revalidation PASS. |
-| `swing_breakout_retest_v0` | COST_REVALIDATION_PENDING | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
-| `symbol_normalized_round_retest_v0` | COST_REVALIDATION_PENDING | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
+| `breakout_retest` | COST_SUSPENDED_CANONICAL | Primary expression of the breakout-retest family; execution is blocked after confirmed measured-cost failure. |
+| `swing_breakout_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
+| `symbol_normalized_round_retest_v0` | COST_SUSPENDED_CANONICAL | Same-family variant; useful for telemetry, not independent diversification, and inherits family-level cost state. |
 
 Rejected experts and rejected research candidates remain rejected unless a new versioned hypothesis is written, hash-locked, and rerun through Phase 0.
 
 ## Phase 2 Paper Eligibility
 
-Phase 2 paper mode currently has no execution-eligible stream because the only primary edge family is pending authoritative measured-cost revalidation. If fresh measured-cost evidence passes, Phase 2 paper mode must still begin with exactly one execution-eligible stream:
+Phase 2 paper mode currently has no execution-eligible stream because the only primary edge family failed measured-cost revalidation and the cost-conversion sanity check confirmed the calculation. If a future version or independent candidate passes measured-cost evidence, Phase 2 paper mode must still begin with exactly one execution-eligible stream:
 
 | Expert | Phase 2 role |
 | --- | --- |
-| `breakout_retest` | Cost-revalidation-pending; execution-eligible only if fresh measured-cost revalidation passes all readiness gates. |
+| `breakout_retest` | Cost-suspended canonical; not execution-eligible under the current measured-cost evidence. |
 | `swing_breakout_retest_v0` | observer-only telemetry. |
 | `symbol_normalized_round_retest_v0` | observer-only telemetry. |
 | `round_number_retest_v0` | Disabled/research-only until Gate 9 and separate authorization pass. |
@@ -40,7 +42,7 @@ Phase 2 remains paper-mode only. No live capital is authorized by this document.
 
 | Stage | Authorization condition | Risk posture |
 | --- | --- | --- |
-| Phase 2 paper | Phase 1 acceptance PASS, fresh measured-cost gates PASS, owner approval PASS | Paper-only, measure cost and drift. Current status: blocked by pending measured-cost revalidation. |
+| Phase 2 paper | Phase 1 acceptance PASS, measured-cost gates PASS, owner approval PASS | Paper-only, measure cost and drift. Current status: blocked by confirmed measured-cost failure. |
 | Live micro pilot | Separate future approval after paper evidence | Lower than the original 0.25% per trade assumption. |
 | Step 1 | Paper/live review shows cost-adjusted expectancy >= +0.15R and drift acceptable | Small fixed risk, no compounding. |
 | Step 2 | Additional review period passes without concentration or drift breach | Modest increase only after written review. |

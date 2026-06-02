@@ -23,7 +23,8 @@ Overall status: FAIL
 | demo_countdown | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` status is DEMO_NOT_READY with 4 pending gate(s). |
 | latest_runtime_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json` latest bar 2026.06.02 06:50:00 is dry_run=true, trade_permission=false, server_time=CLOCK_OK. |
 | authority_boundary | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_COUNTDOWN.json` keeps paper/broker/live authorization false. |
-| demo_account_isolation | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` contains live/real server marker(s): Capital.ComMena-Live. Do not start experimental demo trading from this runtime. |
+| demo_account_isolation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` contains demo/practice server marker(s) and no live/real server markers: Capital.ComMena-Demo. |
+| local_network_baseline_context | WARN | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` is PASS and contains live/real server marker(s) used only as local network baseline context: Capital.ComMena-Live. This must not be read as demo account isolation. |
 | phase3_separation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.json` does not promote the side experiment into real demo. |
 | phase1_safety_audit | PASS | Phase 1 safety audit found 0 forbidden broker-action findings. |
 

@@ -63,7 +63,7 @@ def test_dry_run_shell_is_locked_to_passive_mode():
 
     assert "input bool InpDryRunOnly = true;" in text
     assert 'input string InpRunId = "phase1-dry-run-v0.7";' in text
-    assert 'input string InpBreakoutRetestFamilyCostState = "COST_REVALIDATION_PENDING";' in text
+    assert 'input string InpBreakoutRetestFamilyCostState = "COST_SUSPENDED_CANONICAL";' in text
     assert "InpObserveBreakoutRetest = true" in text
     assert "g_logger.WriteDecision" in text
     assert "g_logger.WriteStartup" in text
@@ -91,7 +91,7 @@ def test_safe_preset_keeps_shell_in_dry_run_observation_mode():
     assert "InpStartupLogFileName=startup_log.csv" in text
     assert "InpShutdownLogFileName=shutdown_log.csv" in text
     assert "InpRunId=phase1-dry-run-v0.7" in text
-    assert "InpBreakoutRetestFamilyCostState=COST_REVALIDATION_PENDING" in text
+    assert "InpBreakoutRetestFamilyCostState=COST_SUSPENDED_CANONICAL" in text
 
 
 def test_risk_test_presets_stay_dry_run_only():
@@ -206,8 +206,15 @@ def test_breakout_retest_lifecycle_has_family_cost_pending_and_suspension_states
     assert 'return "COST_REVALIDATION_PENDING"' in types
     assert "PHASE1_EXPERT_COST_SUSPENDED" in types
     assert 'return "COST_SUSPENDED"' in types
+    assert "PHASE1_EXPERT_COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK" in types
+    assert 'return "COST_SUSPENDED_CANONICAL_PENDING_SANITY_CHECK"' in types
+    assert "PHASE1_EXPERT_COST_SUSPENDED_CANONICAL" in types
+    assert 'return "COST_SUSPENDED_CANONICAL"' in types
+    assert "PHASE1_EXPERT_COST_REVALIDATION_REGENERATED_PENDING_REVIEW" in types
+    assert 'return "COST_REVALIDATION_REGENERATED_PENDING_REVIEW"' in types
     assert "IsBreakoutRetestFamilyBlockedByCost" in lifecycle
     assert "ParseBreakoutRetestFamilyCostState" in lifecycle
+    assert 'breakout_retest_family_cost_state = "COST_SUSPENDED_CANONICAL"' in lifecycle
 
 
 def test_phase1_safety_audit_ignores_docs():

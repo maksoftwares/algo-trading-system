@@ -38,6 +38,7 @@ from generate_phase2_vps_selection_decision_check import generate_phase2_vps_sel
 from phase0.config import ConfigError, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
 from phase0.measured_revalidation import generate_measured_cost_revalidation
+from phase0.measured_sanity import generate_measured_cost_revalidation_sanity_check
 from phase0.spread_analysis import analyze_spread_logs
 from verify_readiness_consistency import verify_readiness_consistency
 from verify_phase1_logs import verify_phase1_logs
@@ -96,6 +97,7 @@ def run_phase1_periodic_checks(
                 encoding="utf-8",
             )
         generate_measured_cost_revalidation(phase0_config, expert="breakout_retest")
+        generate_measured_cost_revalidation_sanity_check(phase0_config, expert="breakout_retest")
 
     log_verification = verify_phase1_logs(files_dir, report_dir / "PHASE1_DRY_RUN_LOG_REPORT.md")
     soak_analysis = analyze_phase1_soak(

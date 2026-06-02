@@ -10,7 +10,7 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | --- | --- |
 | Phase 3 repo complete | True |
 | Phase 1 acceptance | PASS |
-| Phase 2 readiness | PENDING |
+| Phase 2 readiness | FAIL |
 | Can start demo now | False |
 | Can start real paper-shadow branch | False |
 | Owner approval readiness | NOT_READY_TO_SIGN |
@@ -23,16 +23,14 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 116.08 | 96.0 | 0.0 | hours |
-| Measured cost model | PENDING | 4.0 | 5.0 | 1.0 | fresh_market_days |
+| Code-freeze 96-hour gate | PASS | 140.2 | 96.0 | 0.0 | hours |
+| Measured cost model | PASS | 5.0 | 5.0 | 0.0 | fresh_market_days |
 
 ## Owner Actions
 
 | gate | status | action |
 | --- | --- | --- |
-| VPS selection | PENDING | Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md. |
-| VPS latency evidence | PENDING | After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root. |
-| VPS first-day verification | PENDING | After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
+| VPS first-day verification | PENDING | For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence. |
 | Project owner approval | PENDING | Sign PHASE2_OWNER_APPROVAL.md only after all objective gates are PASS. |
 
 ## Owner Approval Readiness
@@ -40,19 +38,16 @@ Overall status: READY_FOR_REVIEW_WAITING_REAL_GATES
 | Field | Value |
 | --- | --- |
 | Status | NOT_READY_TO_SIGN |
-| Pending objective gates | 6 |
+| Pending objective gates | 3 |
 | Signing rule | Owner may sign only after every objective gate except Project owner approval is PASS. |
 
 ### Pending Objective Gates
 
 | gate | status | evidence |
 | --- | --- | --- |
-| VPS selection | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS. |
-| VPS latency evidence | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS. |
 | VPS first-day verification | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS. |
-| Measured cost model | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_MODEL.md` status is PENDING; required PASS. |
-| Measured-cost revalidation | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS. |
-| Measured-cost assumption delta | PENDING | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS. |
+| Measured-cost revalidation | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL; required PASS. |
+| Measured-cost assumption delta | FAIL | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase0\outputs\reports\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL; required PASS. |
 
 ## Reusable Phase 3 Outputs
 

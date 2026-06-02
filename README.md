@@ -54,7 +54,7 @@ The hourly Phase 1 periodic check also regenerates it while the machine is onlin
 
 Phase 1 dry-run is authorized for infrastructure telemetry only. It does not include broker-side execution. The shell logs one heartbeat per M5 bar and records lifecycle, spread, router, risk, and blocked-reason fields.
 
-`breakout_retest` passed the historical Phase 0 package but the breakout-retest family is currently `COST_REVALIDATION_PENDING`: the authoritative measured-cost clock restarted after the freshness-aware passive spread logger began writing `tick_fresh=true` rows. Until `MEASURED_COST_MODEL.md` reaches `PASS` and measured-cost revalidation is rerun, execution eligibility remains `BLOCKED`. `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates, not independent diversification or Phase 2 execution authorization. `round_number_retest_v0` and `session_extreme_retest_v0` remain provisional same-family candidates pending separate review. `trend_pullback`, `range_mr`, and the non-level independent research attempts remain rejected.
+`breakout_retest` passed the historical Phase 0 package, but the breakout-retest family is currently `COST_SUSPENDED_CANONICAL`: the fresh measured-cost model is PASS, measured-cost revalidation is FAIL, measured-cost assumption delta is FAIL, and the sanity check confirms the conversion path. Execution eligibility remains `BLOCKED`. `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are approved same-family future expert candidates, not independent diversification or Phase 2 execution authorization. `round_number_retest_v0` and `session_extreme_retest_v0` remain provisional same-family candidates pending separate review. `trend_pullback`, `range_mr`, and the non-level independent research attempts remain rejected.
 
 ## Current Phase Label
 
@@ -64,7 +64,7 @@ The active project phase is:
 Phase 1 - Master EA dry-run shell
 ```
 
-Phase 1 remains dry-run only. Paper-mode and live expert behavior stay out of scope until the dry-run shell has clean telemetry, the fresh measured-cost model reaches `PASS`, measured-cost revalidation passes, and the project owner explicitly authorizes the next phase.
+Phase 1 remains dry-run only. Paper-mode and live expert behavior stay out of scope until the dry-run shell has clean telemetry, measured-cost revalidation passes for an eligible candidate/family, Phase 2 readiness returns to `PASS`, and the project owner explicitly authorizes the next phase.
 
 ## Latest Review Status
 
@@ -78,7 +78,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Latest candidate-search status: one hundred seventeen result-producing candidates have now been hash-registered, smoke-tested where applicable, matrix-tested, and resolved without tuning, plus one CYB/UUP yuan-dollar lane is data-blocked because public Yahoo coverage ends in 2023. The strongest independent GLD ETF flow v0 candidate reached PF >= 1.30 in 9/9 cells but failed trade-count, activity, and concentration gates; broader H1/H4 GLD-flow variants either solved trade count while diluting PF or preserved only a one-broker pocket. A same-family `quarter_round_retest_v0` candidate passed automated research gates and is provisional pending manual Gate 9. The latest MOVE/VIX bond-volatility shock reversal candidate failed with 0/9 PF cells, only 6/9 trade-count cells, and max zero-trade months of 14, so no new independent candidate is approved.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
-- Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates, but fresh measured-cost revalidation is pending and blocks execution eligibility.
+- Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates, but confirmed measured-cost revalidation failure blocks canonical execution eligibility.
 - Phase 0 closure: `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`; `verify-real-artifacts` returns `PASS`.
 - EA coding status: Phase 1 dry-run shell is authorized for telemetry only. Paper-mode implementation and live execution remain blocked while measured-cost evidence is pending.
 
@@ -100,4 +100,4 @@ The latest reviewer feedback is tracked in:
 - `docs/REVIEW_08_REFLECTION_AND_ACTION_PLAN.md`
 - `xau-usd/xauusd-phase0/docs/DIVERSIFICATION_AVAILABILITY_FINDING.md`
 
-Review #8 keeps Phase 1 dry-run and limited Phase 2 preparation moving, but Phase 2 implementation is blocked by pending fresh measured-cost revalidation, plus the still-open soak, active-market 72h, process/code-freeze 96h, VPS, and owner-approval gates. It also confirms that the current approved candidates are one correlated breakout-retest family, not independent diversification.
+Review #9 keeps Phase 1 telemetry, limited Phase 2 documentation, and independent-candidate research moving, but Phase 2 implementation is blocked by measured-cost revalidation FAIL, measured-cost assumption delta FAIL, and owner approval PENDING. It also confirms that the current approved candidates are one correlated breakout-retest family, not independent diversification.

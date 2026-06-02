@@ -1,21 +1,21 @@
 {
   "status": "EXPERIMENTAL_COST_SUSPEND_SCENARIO",
-  "created_at_utc": "2026-06-01T06:46:56.457462Z",
+  "created_at_utc": "2026-06-02T07:37:42.707772Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase2_readiness_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
-  "snapshot_created_at_utc": "2026-06-01T06:46:56.457462Z",
-  "latest_real_phase1_status_read_at_utc": "2026-06-01T06:46:31.323119Z",
-  "latest_real_phase2_status_read_at_utc": "2026-06-01T06:46:31.381713Z",
+  "snapshot_created_at_utc": "2026-06-02T07:37:42.707772Z",
+  "latest_real_phase1_status_read_at_utc": "2026-06-02T06:53:33.896663Z",
+  "latest_real_phase2_status_read_at_utc": "2026-06-02T07:31:17.463619Z",
   "real_phase1_acceptance": "PASS",
-  "real_phase2_readiness": "PENDING",
+  "real_phase2_readiness": "FAIL",
   "assumption": "assumes_phase2_pass_for_design_only",
   "authorized_for_deployment": false,
   "owner_approval_flow": "excluded_from_real_phase2_phase3_approval_flow",
   "mt5_runtime_touched": false,
   "broker_action_code_allowed": false,
-  "latest_phase1_bar": "2026.06.01 06:45:00",
+  "latest_phase1_bar": "2026.06.02 06:50:00",
   "latest_phase1_run_id": "phase1-dry-run-v0.7",
   "latest_phase1_dry_run": "true",
   "latest_phase1_trade_permission": "false",
@@ -310,30 +310,30 @@
   },
   "demo_handoff": {
     "status": "READY_FOR_REVIEW_WAITING_REAL_GATES",
-    "created_at_utc": "2026-06-01T06:46:56.395462Z",
+    "created_at_utc": "2026-06-02T07:37:42.683772Z",
     "phase3_repo_complete": true,
     "phase1_acceptance": "PASS",
-    "phase2_readiness": "PENDING",
+    "phase2_readiness": "FAIL",
     "can_start_demo_now": false,
     "can_start_real_paper_shadow_branch": false,
     "demo_authorized": false,
     "owner_approval_readiness": "NOT_READY_TO_SIGN",
-    "pending_objective_gate_count": 6,
+    "pending_objective_gate_count": 3,
     "wait_gate_count": 3,
-    "owner_action_count": 4
+    "owner_action_count": 2
   },
   "completion_audit": {
     "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
-    "created_at_utc": "2026-06-01T06:46:56.326085Z",
+    "created_at_utc": "2026-06-02T07:37:42.665772Z",
     "phase3_repo_complete": true,
     "demo_authorized": false,
     "remaining_phase3_repo_items": 1,
-    "external_blocker_count": 7
+    "external_blocker_count": 4
   },
   "manifest": {
     "status": "DIRTY_WORKTREE",
     "commit_short": "a94ab3e",
-    "created_at_utc": "2026-06-01T06:46:56.192098Z"
+    "created_at_utc": "2026-06-01T06:46:56.609234Z"
   },
   "known_state_strings": [
     "EXPERIMENTAL_ACTIVE",

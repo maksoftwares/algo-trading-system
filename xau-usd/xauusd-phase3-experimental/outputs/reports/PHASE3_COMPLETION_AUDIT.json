@@ -1,17 +1,17 @@
 {
   "status": "REPO_SIDE_COMPLETE_WITH_WARNINGS_WAITING_REAL_GATES",
-  "created_at_utc": "2026-06-01T06:46:56.736147Z",
+  "created_at_utc": "2026-06-02T07:37:42.665772Z",
   "authority": "This report has no authority over Phase 2 readiness. PHASE2_READINESS_REPORT.md remains the sole real readiness authority.",
   "authority_status": "NON_AUTHORITATIVE_EXPERIMENTAL",
   "boundary": "repo_only_no_mt5_deployment_no_phase2_status_change",
   "real_phase2_readiness_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
-  "latest_real_phase2_status_read_at_utc": "2026-06-01T06:46:31.381713Z",
-  "snapshot_created_at_utc": "2026-06-01T06:46:56.736147Z",
+  "latest_real_phase2_status_read_at_utc": "2026-06-02T07:31:17.463619Z",
+  "snapshot_created_at_utc": "2026-06-02T07:37:42.665772Z",
   "phase3_repo_complete": true,
   "phase3_release_clean": false,
   "demo_authorized": false,
   "real_phase1_acceptance": "PASS",
-  "real_phase2_readiness": "PENDING",
+  "real_phase2_readiness": "FAIL",
   "repo_requirement_rows": [
     {
       "key": "scope_doc",
@@ -165,38 +165,20 @@
   ],
   "external_blockers": [
     {
-      "gate": "VPS selection",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\PHASE2_VPS_SELECTION_MATRIX.md` status is PENDING; required PASS.",
-      "current_detail": "Owner selects provider/region/plan from PHASE2_VPS_SELECTION_MATRIX.md."
-    },
-    {
-      "gate": "VPS latency evidence",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_LATENCY_REPORT.md` status is PENDING; required PASS.",
-      "current_detail": "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1 from the Phase 1 root."
-    },
-    {
       "gate": "VPS first-day verification",
       "status": "PENDING",
       "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_VPS_FIRST_DAY_VERIFICATION.md` status is PENDING; required PASS.",
-      "current_detail": "After VPS setup, capture NTP, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
-    },
-    {
-      "gate": "Measured cost model",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md` status is PENDING; required PASS.",
-      "current_detail": "current=4.0; required=5.0; remaining=1.0; unit=fresh_market_days"
+      "current_detail": "For the selected runtime host, capture NTP/time-sync, backup, recovery-login, periodic scheduler, MT5 path, compile, startup, decision, and health evidence."
     },
     {
       "gate": "Measured-cost revalidation",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is PENDING; required PASS."
+      "status": "FAIL",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL; required PASS."
     },
     {
       "gate": "Measured-cost assumption delta",
-      "status": "PENDING",
-      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is PENDING; required PASS."
+      "status": "FAIL",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL; required PASS."
     },
     {
       "gate": "Project owner approval",
