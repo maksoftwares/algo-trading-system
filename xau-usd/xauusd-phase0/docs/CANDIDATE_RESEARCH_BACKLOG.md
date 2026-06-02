@@ -2,7 +2,7 @@
 
 Last updated: 2026-06-02
 
-2026-06-02 cost update: the breakout-retest family is `COST_SUSPENDED_CANONICAL` for formal Phase 2 execution after measured-cost revalidation FAIL and sanity-check `CALCULATION_CONFIRMED`. Continue research toward lower-cost, wider-stop, non-breakout-retest, non-M5-retail-spread-sensitive candidates. Active Phase 0R backlog: `docs/phase0r_lower_cost_independent_candidate_search.md`.
+2026-06-02 cost update: the breakout-retest family is `COST_SUSPENDED_CANONICAL` for formal Phase 2 execution after measured-cost revalidation FAIL and sanity-check `CALCULATION_CONFIRMED`. Continue research toward lower-cost, wider-stop, non-breakout-retest, non-M5-retail-spread-sensitive candidates. Active Phase 0R backlog: `docs/phase0r_lower_cost_independent_candidate_search.md`. Phase 0R candidate spec and measured-cost precheck: `docs/PHASE0R_LOWER_COST_CANDIDATE_SPEC.md`.
 
 ## Planning Rule
 

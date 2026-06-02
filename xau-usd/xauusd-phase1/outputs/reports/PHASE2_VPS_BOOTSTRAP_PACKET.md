@@ -30,8 +30,8 @@ Overall status: VPS_BOOTSTRAP_ACTION_REQUIRED
 
 | Field | Value |
 | --- | --- |
-| decision_rows | 1793 |
-| latest_bar | 2026.06.02 08:10:00 |
+| decision_rows | 1819 |
+| latest_bar | 2026.06.02 10:20:00 |
 | dry_run | true |
 | trade_permission | false |
 | server_time_status | CLOCK_OK |
@@ -53,7 +53,7 @@ Overall status: VPS_BOOTSTRAP_ACTION_REQUIRED
 | gate | status | current | required | remaining | unit |
 | --- | --- | --- | --- | --- | --- |
 | Active-market soak (owner-accepted 56h) | PASS | 56.08 | 56.0 | 0.0 | hours |
-| Code-freeze 96-hour gate | PASS | 141.52 | 96.0 | 0.0 | hours |
+| Code-freeze 96-hour gate | PASS | 143.71 | 96.0 | 0.0 | hours |
 | Measured cost model | PASS | 5.0 | 5.0 | 0.0 | fresh_market_days |
 
 ## Owner Actions Now

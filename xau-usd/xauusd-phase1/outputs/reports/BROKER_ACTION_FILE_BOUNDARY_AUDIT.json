@@ -1,0 +1,155 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-02T10:24:41.637916Z",
+  "authority": "This audit classifies broker-action MQL files. A PASS does not authorize Phase 2, demo execution, broker execution, or live capital.",
+  "files": [
+    {
+      "path": "xau-usd\\xauusd-phase0\\mt5\\PassiveBarExporter_Phase0.mq5",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase0\\mt5\\PassiveSpreadLogger_XAUUSD.mq5",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase1DryRunShell.mq5",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "classification": "approved_experimental_quarantined",
+      "broker_action_terms": [
+        "OrderSend"
+      ],
+      "status": "PASS",
+      "evidence": "guarded experimental broker-action file"
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoObserver.mq5",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1BreakoutRetest.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Dashboard.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Execution.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1FeatureEngine.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Lifecycle.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Logger.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Magic.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1MarketData.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1News.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Risk.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Router.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1ServerTime.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Session.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Include\\Phase1\\Phase1Types.mqh",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    }
+  ],
+  "packaging_checks": [
+    {
+      "check": "canonical_deploy_excludes_experimental_executor",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\deploy_phase1_mt5.py"
+    },
+    {
+      "check": "phase1_review_bundle_is_non_authorizing_if_it_contains_sources",
+      "status": "PASS",
+      "evidence": "Phase 1 review bundle is evidence-only; canonical deploy script is the deploy authority."
+    }
+  ],
+  "finding_count": 0
+}

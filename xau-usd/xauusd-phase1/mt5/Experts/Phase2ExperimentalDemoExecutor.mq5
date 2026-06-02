@@ -1,3 +1,7 @@
+// NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2.
+// This file contains guarded demo broker-action logic for a quarantined owner-requested
+// experiment. It is not part of the canonical Phase 1 dry-run shell, cannot authorize
+// Phase 2, and must remain excluded from canonical deploy/compile bundles.
 #property strict
 #property version   "1.000"
 #property description "Experimental demo executor attachment. Demo account only; sends small guarded orders."

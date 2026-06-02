@@ -21,7 +21,7 @@ outputs/reports/PHASE2_READINESS_REPORT.md
 | Can experimental demo evidence continue separately? | YES, but it must not be used to mark canonical readiness PASS |
 | Can owner approval be signed now? | NO |
 | Selected operating host for next few months | LOCAL_SYSTEM_RUNTIME |
-| Main owner action now | Verify local backup/recovery/scheduler evidence and wait for measured-cost gates |
+| Main owner action now | Keep formal Phase 2 blocked by confirmed measured-cost failure; continue Phase 0R replacement research |
 
 ## Gates Already Closed
 
@@ -39,9 +39,11 @@ outputs/reports/PHASE2_READINESS_REPORT.md
 
 | Gate | Current state | Closure condition |
 | --- | --- | --- |
-| Measured cost model | PENDING | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` must show PASS from fresh observed market days. |
-| Measured-cost revalidation | PENDING | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` must show PASS after measured-cost model PASS. |
-| Measured-cost assumption delta | PENDING | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` must show PASS. |
+| Measured cost model | PASS | `../xauusd-phase0/outputs/reports/MEASURED_COST_MODEL.md` has enough fresh observed market days. |
+| Measured-cost revalidation | FAIL | `../xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` failed with 0/9 passing cells under measured P95 cost. |
+| Measured-cost assumption delta | FAIL | `../xauusd-phase0/outputs/reports/MEASURED_COST_ASSUMPTION_DELTA.md` shows measured costs materially exceed configured assumptions. |
+| Cost sanity check | CALCULATION_CONFIRMED | `../xauusd-phase0/outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md` confirms the measured-cost failure is not currently explained by a conversion bug. |
+| Formal Phase 2 | BLOCKED_BY_CONFIRMED_COST_FAILURE | `outputs/reports/PHASE2A_COST_CLOSURE_REPORT.md` and `docs/COST_SUSPENSION_LOCK.md` keep the breakout-retest family execution-blocked. |
 | Local runtime first-day verification | PENDING | Generate `outputs/reports/PHASE2_VPS_FIRST_DAY_VERIFICATION.md` after NTP/time sync, backup, recovery, periodic task, MT5 path, compile, startup, decision-log, health, and status evidence are verified for the local system. |
 | Project owner approval | PENDING | Create `outputs/reports/PHASE2_OWNER_APPROVAL.md` only after every objective gate above is PASS. |
 
@@ -152,4 +154,4 @@ real money
 
 ## Next Practical Action
 
-The next useful owner-side action is to fill and verify the local NTP/time-sync, backup, recovery, and periodic scheduler evidence files. Until those are verified, local runtime has been selected but first-day verification cannot truthfully pass.
+The next useful project action is Phase 0R lower-cost replacement research. The next owner-side infrastructure action is still filling and verifying local NTP/time-sync, backup, recovery, and periodic scheduler evidence files, but that will not unblock canonical Phase 2 until measured-cost-aware candidate evidence also passes.

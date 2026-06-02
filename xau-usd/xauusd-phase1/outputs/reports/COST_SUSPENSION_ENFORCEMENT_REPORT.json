@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "family": "breakout_retest_family",
+  "required_state": "COST_SUSPENDED_CANONICAL",
+  "authority": "This report enforces the cost-suspension boundary. It does not authorize Phase 2, demo execution, broker execution, or live capital.",
+  "checks": [
+    {
+      "check": "cost_suspension_lock_active",
+      "status": "PASS",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\COST_SUSPENSION_LOCK.md` contains required lock language."
+    },
+    {
+      "check": "same_family_lifecycle_suspended",
+      "status": "PASS",
+      "evidence": "All same-family rows are cost-suspended."
+    },
+    {
+      "check": "same_family_not_execution_eligible",
+      "status": "PASS",
+      "evidence": "Single-edge plan preserves same-family execution lock."
+    },
+    {
+      "check": "phase2_readiness_cannot_pass_when_cost_revalidation_fails",
+      "status": "PASS",
+      "evidence": "readiness=FAIL; cost_revalidation=FAIL"
+    },
+    {
+      "check": "owner_approval_absent_while_cost_revalidation_fails",
+      "status": "PASS",
+      "evidence": "owner_approval_exists=False; cost_revalidation=FAIL"
+    },
+    {
+      "check": "PHASE2_DEMO_PREFLIGHT.json_authorization_false",
+      "status": "PASS",
+      "evidence": "No true paper/demo/broker/live authorization fields."
+    },
+    {
+      "check": "PHASE2_OWNER_ACTION_PACKET.json_authorization_false",
+      "status": "PASS",
+      "evidence": "No true paper/demo/broker/live authorization fields."
+    },
+    {
+      "check": "PHASE2_DEMO_COUNTDOWN.json_authorization_false",
+      "status": "PASS",
+      "evidence": "No true paper/demo/broker/live authorization fields."
+    },
+    {
+      "check": "PHASE2_VPS_BOOTSTRAP_PACKET.json_authorization_false",
+      "status": "PASS",
+      "evidence": "No true paper/demo/broker/live authorization fields."
+    },
+    {
+      "check": "PHASE2_VPS_FIRST_DAY_VERIFICATION.json_authorization_false",
+      "status": "PASS",
+      "evidence": "No true paper/demo/broker/live authorization fields."
+    },
+    {
+      "check": "phase3_authorization_false",
+      "status": "PASS",
+      "evidence": "Phase 3 remains non-authorizing."
+    },
+    {
+      "check": "measured_cost_revalidation_still_fail",
+      "status": "PASS",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` status is FAIL."
+    },
+    {
+      "check": "measured_cost_assumption_delta_still_fail",
+      "status": "PASS",
+      "evidence": "`C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md` status is FAIL."
+    }
+  ],
+  "failed_count": 0,
+  "source_reports": {
+    "phase2_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md",
+    "phase2_demo_preflight": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_PREFLIGHT.json",
+    "cost_revalidation": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md",
+    "cost_assumption_delta": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md",
+    "cost_suspension_lock": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\COST_SUSPENSION_LOCK.md"
+  }
+}

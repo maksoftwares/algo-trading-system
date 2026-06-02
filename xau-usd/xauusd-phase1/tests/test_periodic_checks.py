@@ -25,6 +25,8 @@ def test_periodic_check_output_shape(tmp_path: Path):
         phase2_demo_preflight_status="PENDING",
         phase2_demo_account_isolation_status="PASS",
         experimental_executor_governance_status="PASS",
+        cost_suspension_enforcement_status="PASS",
+        broker_action_boundary_status="PASS",
         phase2_readiness_consistency_status="PASS",
         phase2_owner_action_status="WAITING_AND_OWNER_ACTION_REQUIRED",
         phase2_vps_bootstrap_status="WAITING_AND_VPS_BOOTSTRAP_PENDING",
@@ -36,6 +38,8 @@ def test_periodic_check_output_shape(tmp_path: Path):
     assert output.soak_history_rows == 3
     assert output.phase2_demo_account_isolation_status == "PASS"
     assert output.experimental_executor_governance_status == "PASS"
+    assert output.cost_suspension_enforcement_status == "PASS"
+    assert output.broker_action_boundary_status == "PASS"
     assert output.phase2_readiness_consistency_status == "PASS"
 
 

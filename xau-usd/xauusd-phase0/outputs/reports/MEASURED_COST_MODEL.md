@@ -10,13 +10,13 @@ Measured spread evidence is sufficient for measured-cost revalidation.
 
 | Observed Rows | Required Rows | Observed Days | Required Days | Source Rows | Rows Missing Tick Fresh | Weekend Rows Excluded | Tick Freshness | Source Files |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 72524 | 500 | 5 | 5 | 155842 | 55704 | 25634 | available | 12 |
+| 74100 | 500 | 5 | 5 | 157418 | 55704 | 25634 | available | 12 |
 
 ## Global Cost Model
 
 | scope | bucket | broker | symbol | observations | median_spread_points | p95_spread_points | max_spread_points |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| global | all | all | XAUUSD | 72524 | 50 | 75 | 180 |
+| global | all | all | XAUUSD | 74100 | 50 | 75 | 180 |
 
 ## Fresh Observed Dates
 

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
+import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -39,7 +41,7 @@ def audit_experimental_executor_governance(root: Path, output_json: Path | None 
 
     source = _read(source_path)
     governance = _read(doc_path)
-    checks = _checks(source, governance)
+    checks = _checks(root, source, governance)
     failed = [check for check in checks if check.status != "PASS"]
     status = "PASS" if not failed else "FAIL"
     payload = {
@@ -47,6 +49,10 @@ def audit_experimental_executor_governance(root: Path, output_json: Path | None 
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source": str(source_path),
         "governance_doc": str(doc_path),
+        "repo_commit_hash": _git_commit(root),
+        "source_file_sha256": _sha256(source_path),
+        "governance_doc_sha256": _sha256(doc_path),
+        "input_declaration_block": _input_declaration_block(source),
         "authority": (
             "This audit checks experimental demo executor source/governance parity only. "
             "It does not authorize canonical Phase 2, demo execution, broker execution, or live capital."
@@ -59,8 +65,10 @@ def audit_experimental_executor_governance(root: Path, output_json: Path | None 
     return GovernanceAuditOutput(status, output_json, output_md, len(failed))
 
 
-def _checks(source: str, governance: str) -> list[GovernanceCheck]:
+def _checks(root: Path, source: str, governance: str) -> list[GovernanceCheck]:
     return [
+        _source_is_tracked_check(root),
+        _source_contains("non_canonical_banner", source, "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2"),
         _contains_both("account_login_whitelist_input", governance, source, "InpAllowedAccountLoginsCsv"),
         _contains_both("experimental_authorization_token_input", governance, source, "InpExperimentalAuthorizationToken"),
         _contains_both("candidate_runtime_allowlist_input", governance, source, "InpAuthorizedCandidatesCsv"),
@@ -110,6 +118,23 @@ def _fixed_lot_check(source: str) -> GovernanceCheck:
     return GovernanceCheck("fixed_lot_default_lte_0_01", status, f"InpFixedLot={value:.2f}")
 
 
+def _source_is_tracked_check(root: Path) -> GovernanceCheck:
+    rel = EA_PATH.as_posix()
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", rel],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError as exc:
+        return GovernanceCheck("source_file_tracked_by_git", "FAIL", f"git unavailable: {exc}")
+    if completed.returncode == 0:
+        return GovernanceCheck("source_file_tracked_by_git", "PASS", f"tracked path: {rel}")
+    return GovernanceCheck("source_file_tracked_by_git", "FAIL", f"source path is not tracked by git: {rel}")
+
+
 def _render_markdown(payload: dict[str, object]) -> str:
     checks = payload["checks"]
     assert isinstance(checks, list)
@@ -122,6 +147,9 @@ def _render_markdown(payload: dict[str, object]) -> str:
         "",
         f"Source: `{payload['source']}`",
         f"Governance doc: `{payload['governance_doc']}`",
+        f"Repo commit hash: `{payload['repo_commit_hash']}`",
+        f"Source SHA256: `{payload['source_file_sha256']}`",
+        f"Governance doc SHA256: `{payload['governance_doc_sha256']}`",
         f"Failed checks: {payload['failed_count']}",
         "",
         "| Check | Status | Evidence |",
@@ -132,6 +160,12 @@ def _render_markdown(payload: dict[str, object]) -> str:
         lines.append(f"| {check['check']} | {check['status']} | {_escape(str(check['evidence']))} |")
     lines.extend(
         [
+            "",
+            "## Input Declaration Block",
+            "",
+            "```mql5",
+            str(payload["input_declaration_block"]).rstrip(),
+            "```",
             "",
             "## Boundary",
             "",
@@ -144,6 +178,36 @@ def _render_markdown(payload: dict[str, object]) -> str:
 
 def _escape(value: str) -> str:
     return value.replace("|", "\\|").replace("\n", "<br>")
+
+
+def _git_commit(root: Path) -> str:
+    try:
+        completed = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return "UNKNOWN"
+    if completed.returncode != 0:
+        return "UNKNOWN"
+    return completed.stdout.strip()
+
+
+def _sha256(path: Path) -> str:
+    if not path.exists():
+        return "MISSING"
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _input_declaration_block(source: str) -> str:
+    lines = source.splitlines()
+    input_lines = [f"{index}: {line}" for index, line in enumerate(lines, start=1) if line.strip().startswith("input ")]
+    if input_lines:
+        return "\n".join(input_lines[:80])
+    return "\n".join(f"{index}: {line}" for index, line in enumerate(lines[:80], start=1))
 
 
 def _read(path: Path) -> str:

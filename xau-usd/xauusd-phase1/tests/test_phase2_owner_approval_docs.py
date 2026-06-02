@@ -60,7 +60,11 @@ def test_owner_vps_readiness_package_tracks_remaining_phase2_blockers():
     assert "Overall status: LOCAL_RUNTIME_SELECTED_OBJECTIVE_GATES_PENDING" in package
     assert "outputs/reports/PHASE2_READINESS_REPORT.md" in package
     assert "Can canonical Phase 2 be marked approved now? | NO" in package
-    assert "Measured cost model | PENDING" in package
+    assert "Measured cost model | PASS" in package
+    assert "Measured-cost revalidation | FAIL" in package
+    assert "Measured-cost assumption delta | FAIL" in package
+    assert "Cost sanity check | CALCULATION_CONFIRMED" in package
+    assert "Formal Phase 2 | BLOCKED_BY_CONFIRMED_COST_FAILURE" in package
     assert "LOCAL_SYSTEM_RUNTIME" in package
     assert "Local runtime first-day verification | PENDING" in package
     assert "Project owner approval | PENDING" in package

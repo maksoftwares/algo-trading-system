@@ -1,6 +1,6 @@
 {
   "status": "OWNER_ACTION_REQUIRED",
-  "created_at_utc": "2026-06-02T08:13:17.788849Z",
+  "created_at_utc": "2026-06-02T10:24:41.656727Z",
   "authority": "This packet is an owner handoff only. It does not authorize Phase 2, demo trading, broker execution, live capital, or any paper-mode implementation.",
   "phase2_readiness_status": "FAIL",
   "phase2_demo_preflight_status": "FAIL",
@@ -25,7 +25,7 @@
     {
       "gate": "Code-freeze 96-hour gate",
       "status": "PASS",
-      "current": 141.52,
+      "current": 143.71,
       "required": 96.0,
       "remaining": 0.0,
       "unit": "hours"
