@@ -1,59 +1,59 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-02T10:21:53.665112Z",
+  "created_at_utc": "2026-06-02T10:40:37.660257Z",
   "repo_url": "https://github.com/maksoftwares/algo-trading-system.git",
   "branch": "main",
-  "clone_commit_hash": "78921f3f6143e4ec37e9adae10bffa307cf89020",
+  "clone_commit_hash": "0363fe40a1b6c42cba294b69b46858ad773dd254",
   "source_path": "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5",
-  "source_file_sha256": "0073b43363117ebf442e85379b33f2a4df65515684049f5262b4d292059ca54f",
+  "source_file_sha256": "cc2d330876ee9376e154a5133ebcbc01d1c15ec033aecd48d19db57ee76bf5cd",
   "governance_doc_sha256": "7766c50c0a75c2f94a7671466dd8781b57a2a32ccb15f85fe3f488eb63ea0cd8",
-  "parity_report_sha256": "6be387e8e3213fb3afeeeee36331190a39ced60d6688aa95f5cde2b5f87d594f",
-  "source_input_declaration_block": "8: input string InpRunId = \"phase2-experimental-demo-executor-v0.1\";\n9: input bool InpDryRunOnly = false;\n10: input bool InpBrokerActionAllowed = false;\n11: input string InpCandidate = \"breakout_retest\";\n12: input string InpCandidateStatus = \"ACCEPTED\";\n13: input string InpTargetSymbol = \"XAUUSD\";\n14: input string InpQualifiedSymbolsCsv = \"XAUUSD,EURUSD,USDJPY\";\n15: input string InpExpectedServerMarker = \"Demo\";\n16: input string InpAllowedAccountLoginsCsv = \"\";\n17: input string InpExperimentalAuthorizationToken = \"\";\n18: input string InpRequiredExperimentalAuthorizationToken = \"EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY\";\n19: input string InpAuthorizedCandidatesCsv = \"breakout_retest\";\n20: input string InpAttachmentLogFileName = \"experimental_demo_executor_signal_log.csv\";\n21: input string InpStartupLogFileName = \"experimental_demo_executor_startup.csv\";\n22: input string InpOrderLogFileName = \"experimental_demo_executor_order_log.csv\";\n23: input string InpKillSwitchFileName = \"experimental_demo_kill_switch.txt\";\n24: input double InpFixedLot = 0.01;\n25: input int InpMaxOrdersPerDay = 12;\n26: input int InpMaxAccountOrdersPerDay = 24;\n27: input int InpMinSecondsBetweenOrders = 300;\n28: input int InpMaxOpenPositionsPerInstance = 1;\n29: input int InpMaxAccountOpenPositions = 3;\n30: input int InpDeviationPoints = 50;\n31: input double InpMaxEstimatedCostR = 0.30;\n32: input double InpMaxMeasuredSpreadPoints = 75.0;",
+  "parity_report_sha256": "848c100282522d374b2e07893e3decd1682fe96c4e30f382b42c8b1965012083",
+  "source_input_declaration_block": "12: input string InpRunId = \"phase2-experimental-demo-executor-v0.1\";\n13: input bool InpDryRunOnly = false;\n14: input bool InpBrokerActionAllowed = false;\n15: input string InpCandidate = \"breakout_retest\";\n16: input string InpCandidateStatus = \"ACCEPTED\";\n17: input string InpTargetSymbol = \"XAUUSD\";\n18: input string InpQualifiedSymbolsCsv = \"XAUUSD,EURUSD,USDJPY\";\n19: input string InpExpectedServerMarker = \"Demo\";\n20: input string InpAllowedAccountLoginsCsv = \"\";\n21: input string InpExperimentalAuthorizationToken = \"\";\n22: input string InpRequiredExperimentalAuthorizationToken = \"EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY\";\n23: input string InpAuthorizedCandidatesCsv = \"breakout_retest\";\n24: input string InpAttachmentLogFileName = \"experimental_demo_executor_signal_log.csv\";\n25: input string InpStartupLogFileName = \"experimental_demo_executor_startup.csv\";\n26: input string InpOrderLogFileName = \"experimental_demo_executor_order_log.csv\";\n27: input string InpKillSwitchFileName = \"experimental_demo_kill_switch.txt\";\n28: input double InpFixedLot = 0.01;\n29: input int InpMaxOrdersPerDay = 12;\n30: input int InpMaxAccountOrdersPerDay = 24;\n31: input int InpMinSecondsBetweenOrders = 300;\n32: input int InpMaxOpenPositionsPerInstance = 1;\n33: input int InpMaxAccountOpenPositions = 3;\n34: input int InpDeviationPoints = 50;\n35: input double InpMaxEstimatedCostR = 0.30;\n36: input double InpMaxMeasuredSpreadPoints = 75.0;",
   "required_token_rows": [
     {
       "token": "InpAllowedAccountLoginsCsv",
       "status": "PASS",
-      "line": "16"
+      "line": "20"
     },
     {
       "token": "InpExperimentalAuthorizationToken",
       "status": "PASS",
-      "line": "17"
+      "line": "21"
     },
     {
       "token": "InpAuthorizedCandidatesCsv",
       "status": "PASS",
-      "line": "19"
+      "line": "23"
     },
     {
       "token": "InpMaxAccountOrdersPerDay",
       "status": "PASS",
-      "line": "26"
+      "line": "30"
     },
     {
       "token": "InpMaxAccountOpenPositions",
       "status": "PASS",
-      "line": "29"
+      "line": "33"
     },
     {
       "token": "InpKillSwitchFileName",
       "status": "PASS",
-      "line": "23"
+      "line": "27"
     },
     {
       "token": "InpMaxEstimatedCostR",
       "status": "PASS",
-      "line": "31"
+      "line": "35"
     },
     {
       "token": "InpMaxMeasuredSpreadPoints",
       "status": "PASS",
-      "line": "32"
+      "line": "36"
     },
     {
       "token": "OrderSend",
       "status": "PASS",
-      "line": "1128"
+      "line": "1132"
     }
   ],
   "packaging_rows": [
