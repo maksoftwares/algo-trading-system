@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "InpCandidateStatus_default",
+      "status": "PASS",
+      "evidence": "actual='EXPERIMENTAL_QUARANTINE_REVIEW_ONLY'; expected='EXPERIMENTAL_QUARANTINE_REVIEW_ONLY'"
+    },
+    {
+      "name": "InpFamilyLifecycleStatus_default",
+      "status": "PASS",
+      "evidence": "actual='COST_SUSPENDED_CANONICAL'; expected='COST_SUSPENDED_CANONICAL'"
+    },
+    {
+      "name": "InpCostSuspensionAcknowledgementToken_default",
+      "status": "PASS",
+      "evidence": "actual=''; expected=''"
+    },
+    {
+      "name": "experimental_quarantine_logged",
+      "status": "PASS",
+      "evidence": "token_present=True"
+    },
+    {
+      "name": "canonical_phase2_evidence_logged",
+      "status": "PASS",
+      "evidence": "token_present=True"
+    },
+    {
+      "name": "phase2_readiness_override_logged",
+      "status": "PASS",
+      "evidence": "token_present=True"
+    },
+    {
+      "name": "EXPERIMENTAL_DEMO_EXECUTOR_SOURCE_GOVERNANCE_PARITY.json",
+      "status": "PASS",
+      "evidence": "status=PASS; expected=PASS"
+    },
+    {
+      "name": "BROKER_ACTION_FILE_BOUNDARY_AUDIT.json",
+      "status": "PASS",
+      "evidence": "status=PASS; expected=PASS"
+    }
+  ]
+}

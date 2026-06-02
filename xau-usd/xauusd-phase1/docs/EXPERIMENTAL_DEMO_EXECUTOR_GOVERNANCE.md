@@ -53,6 +53,10 @@ Every order attempt, guard block, or send result must log:
 candidate
 candidate_status
 family_lifecycle_status
+candidate_family_status
+experimental_quarantine
+canonical_phase2_evidence
+phase2_readiness_override
 symbol
 action
 direction
@@ -69,6 +73,8 @@ guard_reason
 account_orders_today
 account_open_exposure
 ```
+
+The expected quarantine labels are `experimental_quarantine=true`, `canonical_phase2_evidence=false`, `phase2_readiness_override=false`, and `candidate_family_status=COST_SUSPENDED_CANONICAL`.
 
 ## Non-Authority Statement
 

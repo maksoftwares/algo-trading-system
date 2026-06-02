@@ -95,3 +95,9 @@ jobs:
 
       - name: Enforce cost-suspension lock
         run: python scripts/assert_cost_suspension.py
+
+      - name: Verify canonical Phase 2 block
+        run: python scripts/verify_canonical_phase2_block.py
+
+      - name: Verify experimental executor quarantine
+        run: python scripts/verify_experimental_quarantine.py

@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "canonical_phase2_blocked_by_measured_cost",
+      "status": "PASS",
+      "evidence": "canonical_phase2_status=BLOCKED_BY_MEASURED_COST"
+    },
+    {
+      "name": "phase2_readiness_not_pass",
+      "status": "PASS",
+      "evidence": "PHASE2_READINESS_REPORT status=FAIL"
+    },
+    {
+      "name": "demo_not_phase2_evidence",
+      "status": "PASS",
+      "evidence": "demo_execution_as_phase2_evidence=False"
+    },
+    {
+      "name": "live_trading_not_authorized",
+      "status": "PASS",
+      "evidence": "live_trading_authorized=False"
+    }
+  ]
+}

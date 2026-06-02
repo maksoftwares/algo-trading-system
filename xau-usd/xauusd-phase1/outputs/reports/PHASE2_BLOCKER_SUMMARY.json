@@ -1,0 +1,25 @@
+{
+  "status": "BLOCKED_BY_MEASURED_COST",
+  "created_at_utc": "2026-06-02T11:48:39Z",
+  "canonical_phase2_status": "BLOCKED_BY_MEASURED_COST",
+  "breakout_retest_family_status": "COST_SUSPENDED_CANONICAL",
+  "measured_cost_model_status": "PASS",
+  "measured_cost_revalidation_status": "FAIL",
+  "measured_cost_assumption_delta_status": "FAIL",
+  "measured_cost_sanity_status": "CALCULATION_CONFIRMED",
+  "phase1_acceptance_status": "PASS",
+  "phase2_readiness_status": "FAIL",
+  "experimental_demo_executor_status": "QUARANTINE_REVIEW_ONLY",
+  "demo_execution_as_phase2_evidence": false,
+  "live_trading_authorized": false,
+  "canonical_broker_side_execution": false,
+  "paper_mode_execution_allowed": false,
+  "decision": "Canonical Phase 2 is blocked because the measured-cost model is PASS but breakout-retest measured-cost revalidation and assumption delta are FAIL.",
+  "source_reports": {
+    "measured_cost_model": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_MODEL.md",
+    "measured_cost_revalidation": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md",
+    "assumption_delta": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_ASSUMPTION_DELTA.md",
+    "sanity_check": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\MEASURED_COST_REVALIDATION_SANITY_CHECK.md",
+    "phase2_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_READINESS_REPORT.md"
+  }
+}

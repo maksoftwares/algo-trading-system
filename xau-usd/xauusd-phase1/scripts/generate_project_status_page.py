@@ -70,6 +70,8 @@ def generate_project_status_page(
     executor_clean_clone = _read_json(phase1_reports / "EXPERIMENTAL_DEMO_EXECUTOR_CLEAN_CLONE_RECONCILIATION.json")
     broker_action_boundary = _read_json(phase1_reports / "BROKER_ACTION_FILE_BOUNDARY_AUDIT.json")
     cost_suspension_enforcement = _read_json(phase1_reports / "COST_SUSPENSION_ENFORCEMENT_REPORT.json")
+    phase2_blocker_summary = _read_json(phase1_reports / "PHASE2_BLOCKER_SUMMARY.json")
+    experimental_quarantine = _read_json(phase1_reports / "EXPERIMENTAL_DEMO_QUARANTINE_VERIFICATION.json")
     phase2_next_actions = _read_json(phase1_reports / "PHASE2_DEMO_NEXT_ACTIONS.json")
     phase2_owner_packet = _read_json(phase1_reports / "PHASE2_OWNER_ACTION_PACKET.json")
     phase2_bootstrap = _read_json(phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json")
@@ -131,6 +133,8 @@ def generate_project_status_page(
             executor_clean_clone=executor_clean_clone,
             broker_action_boundary=broker_action_boundary,
             cost_suspension_enforcement=cost_suspension_enforcement,
+            phase2_blocker_summary=phase2_blocker_summary,
+            experimental_quarantine=experimental_quarantine,
             phase2_next_actions=phase2_next_actions,
             phase2_owner_packet=phase2_owner_packet,
             phase2_bootstrap=phase2_bootstrap,
@@ -214,6 +218,8 @@ def _render_html(
     executor_clean_clone: dict[str, Any],
     broker_action_boundary: dict[str, Any],
     cost_suspension_enforcement: dict[str, Any],
+    phase2_blocker_summary: dict[str, Any],
+    experimental_quarantine: dict[str, Any],
     phase2_next_actions: dict[str, Any],
     phase2_owner_packet: dict[str, Any],
     phase2_bootstrap: dict[str, Any],
@@ -310,6 +316,7 @@ def _render_html(
             "      </section>",
             "",
             '      <section class="grid lower-grid">',
+            _panel("Phase 2 Blocker Summary", _phase2_blocker_panel(phase2_blocker_summary)),
             _panel("Demo Trading Countdown", _demo_countdown_panel(phase2_countdown, phase2_preflight, phase2_readiness_consistency)),
             _panel("Demo Account Isolation", _demo_account_isolation_panel(phase2_demo_account_isolation)),
             _panel(
@@ -319,6 +326,7 @@ def _render_html(
                     executor_clean_clone,
                     broker_action_boundary,
                     cost_suspension_enforcement,
+                    experimental_quarantine,
                     phase2_experimental_demo_attachments,
                 ),
             ),
@@ -1156,6 +1164,29 @@ def _demo_account_isolation_panel(report: dict[str, Any]) -> str:
     )
 
 
+def _phase2_blocker_panel(report: dict[str, Any]) -> str:
+    if not report:
+        return _list(["Phase 2 blocker summary has not been generated yet."])
+    rows = [
+        ("Canonical Phase 2", _status_badge(_cell(report.get("canonical_phase2_status", "UNKNOWN")))),
+        ("Breakout family", _status_badge(_cell(report.get("breakout_retest_family_status", "UNKNOWN")))),
+        ("Measured-cost model", _status_badge(_cell(report.get("measured_cost_model_status", "UNKNOWN")))),
+        ("Measured-cost revalidation", _status_badge(_cell(report.get("measured_cost_revalidation_status", "UNKNOWN")))),
+        ("Assumption delta", _status_badge(_cell(report.get("measured_cost_assumption_delta_status", "UNKNOWN")))),
+        ("Sanity status", _status_badge(_cell(report.get("measured_cost_sanity_status", "UNKNOWN")))),
+        ("Experimental executor", _status_badge(_cell(report.get("experimental_demo_executor_status", "UNKNOWN")))),
+        ("Demo as Phase 2 evidence", _status_badge(str(report.get("demo_execution_as_phase2_evidence", "UNKNOWN")).lower())),
+        ("Live trading authorized", _status_badge(str(report.get("live_trading_authorized", "UNKNOWN")).lower())),
+    ]
+    return "\n".join(
+        [
+            _raw_key_value_table(rows),
+            '<h3 class="mini-heading">Decision</h3>',
+            _list([_cell(report.get("decision", "Canonical Phase 2 remains blocked until measured-cost-aware evidence passes."))]),
+        ]
+    )
+
+
 def _mini_status_rows(rows: list[dict[str, Any]]) -> str:
     if not rows:
         return '<p class="muted">No checks available.</p>'
@@ -1178,6 +1209,7 @@ def _experimental_executor_governance_panel(
     clean_clone: dict[str, Any],
     broker_boundary: dict[str, Any],
     cost_enforcement: dict[str, Any],
+    experimental_quarantine: dict[str, Any],
     attachments: dict[str, Any],
 ) -> str:
     input_block = _cell(governance.get("input_declaration_block") or clean_clone.get("source_input_declaration_block"))
@@ -1200,6 +1232,7 @@ def _experimental_executor_governance_panel(
         ("Clean-clone source SHA256", _esc(_short_hash(_cell(clean_clone.get("source_file_sha256", "UNKNOWN"))))),
         ("Broker-action boundary", _status_badge(_cell(broker_boundary.get("status", "UNKNOWN")))),
         ("Cost-suspension enforcement", _status_badge(_cell(cost_enforcement.get("status", "UNKNOWN")))),
+        ("Quarantine verification", _status_badge(_cell(experimental_quarantine.get("status", "UNKNOWN")))),
         ("Executor default candidate status", _status_badge(default_candidate_status or "UNKNOWN")),
         ("Executor family lifecycle default", _status_badge(family_lifecycle_status or "UNKNOWN")),
         ("Cost ack token default blank", _status_badge(str(cost_ack_default == "").lower())),
@@ -2063,7 +2096,16 @@ def _artifact_links() -> str:
         ("Measured-cost sanity check", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_REVALIDATION_SANITY_CHECK.md"),
         ("Measured-cost revalidation decision", "xau-usd/xauusd-phase0/outputs/reports/MEASURED_COST_REVALIDATION_DECISION.md"),
         ("Measured-cost audit", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_AUDIT.md"),
+        ("Measured-cost forensic review", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_MEASURED_COST_FORENSIC_REVIEW.md"),
+        ("Cost-R sample audit", "xau-usd/xauusd-phase0/outputs/reports/COST_R_SAMPLE_AUDIT.csv"),
+        ("Point size and digits audit", "xau-usd/xauusd-phase0/outputs/reports/POINT_SIZE_AND_DIGITS_AUDIT.md"),
+        ("Spread replacement audit", "xau-usd/xauusd-phase0/outputs/reports/SPREAD_REPLACEMENT_AUDIT.md"),
+        ("Stale quote and rollover audit", "xau-usd/xauusd-phase0/outputs/reports/STALE_QUOTE_AND_ROLLOVER_EXCLUSION_AUDIT.md"),
+        ("Cost break-even analysis", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_BREAK_EVEN_ANALYSIS.md"),
         ("Breakout-retest cost suspension decision", "xau-usd/xauusd-phase0/outputs/reports/BREAKOUT_RETEST_COST_SUSPENSION_DECISION.md"),
+        ("Cost suspension policy", "xau-usd/xauusd-phase0/docs/COST_SUSPENSION_POLICY.md"),
+        ("Candidate cost feasibility requirements", "xau-usd/xauusd-phase0/docs/CANDIDATE_COST_FEASIBILITY_REQUIREMENTS.md"),
+        ("Phase 0R replacement research plan", "xau-usd/xauusd-phase0/docs/PHASE0R_REPLACEMENT_RESEARCH_PLAN.md"),
         ("Cost suspension lock", "xau-usd/xauusd-phase1/docs/COST_SUSPENSION_LOCK.md"),
         ("Cost suspension enforcement", "xau-usd/xauusd-phase1/outputs/reports/COST_SUSPENSION_ENFORCEMENT_REPORT.md"),
         ("Phase 0R lower-cost candidate search", "xau-usd/xauusd-phase0/docs/phase0r_lower_cost_independent_candidate_search.md"),
@@ -2073,6 +2115,11 @@ def _artifact_links() -> str:
         ("Phase 1 status summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_STATUS_SUMMARY.json"),
         ("Phase 1 acceptance", "xau-usd/xauusd-phase1/outputs/reports/PHASE1_ACCEPTANCE_REPORT.md"),
         ("Phase 2 readiness", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_READINESS_REPORT.md"),
+        ("Phase 2 resolution plan", "xau-usd/xauusd-phase1/docs/PHASE2_RESOLUTION_PLAN.md"),
+        ("Phase 2 canonical block policy", "xau-usd/xauusd-phase1/docs/PHASE2_CANONICAL_BLOCK_POLICY.md"),
+        ("Phase 2 blocker summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md"),
+        ("Phase 2 canonical block verification", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md"),
+        ("Passive paper observer spec", "xau-usd/xauusd-phase1/docs/PASSIVE_PAPER_OBSERVER_SPEC.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
         ("Phase 2 demo account isolation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md"),
@@ -2082,6 +2129,8 @@ def _artifact_links() -> str:
         ("Experimental executor governance parity", "xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_EXECUTOR_SOURCE_GOVERNANCE_PARITY.md"),
         ("Experimental executor clean-clone reconciliation", "xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_EXECUTOR_CLEAN_CLONE_RECONCILIATION.md"),
         ("Broker-action boundary audit", "xau-usd/xauusd-phase1/outputs/reports/BROKER_ACTION_FILE_BOUNDARY_AUDIT.md"),
+        ("Experimental demo quarantine policy", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_QUARANTINE_POLICY.md"),
+        ("Experimental demo quarantine verification", "xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_QUARANTINE_VERIFICATION.md"),
         ("Experimental demo owner authorization", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_OWNER_AUTHORIZATION.md"),
         ("Experimental demo daily review template", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_DAILY_REVIEW_TEMPLATE.md"),
         ("Experimental demo kill-switch test", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_KILL_SWITCH_TEST.md"),

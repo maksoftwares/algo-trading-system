@@ -35,6 +35,15 @@ from phase0.manifests import generate_data_manifest, generate_required_data_mani
 from phase0.matrix import run_phase0_matrix
 from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.measured_sanity import generate_measured_cost_revalidation_sanity_check
+from phase0.cost_forensics import (
+    generate_candidate_cost_feasibility,
+    generate_cost_break_even_analysis,
+    generate_cost_r_sample_audit,
+    generate_measured_cost_forensic_review,
+    generate_point_size_and_digits_audit,
+    generate_spread_replacement_audit,
+    generate_stale_quote_rollover_audit,
+)
 from phase0.multisymbol import run_multisymbol_checks
 from phase0.mt5_deployment import check_passive_spread_logger_deployment
 from phase0.mt5_presets import generate_mt5_bar_export_presets
@@ -482,6 +491,63 @@ def build_parser() -> argparse.ArgumentParser:
     measured_sanity.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
     measured_sanity.add_argument("--fixed-risk-usd", type=float)
     measured_sanity.set_defaults(func=_cmd_generate_measured_cost_sanity_check)
+
+    measured_forensic = subparsers.add_parser(
+        "measured-cost-forensic-review",
+        help="Generate the measured-cost forensic review for an expert.",
+    )
+    measured_forensic.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    measured_forensic.add_argument("--fixed-risk-usd", type=float)
+    measured_forensic.set_defaults(func=_cmd_generate_measured_cost_forensic_review)
+
+    cost_sample = subparsers.add_parser(
+        "cost-r-sample-audit",
+        help="Write a deterministic measured-cost R sample audit CSV.",
+    )
+    cost_sample.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    cost_sample.add_argument("--sample-size", type=int, default=100)
+    cost_sample.add_argument("--fixed-risk-usd", type=float)
+    cost_sample.set_defaults(func=_cmd_generate_cost_r_sample_audit)
+
+    point_digits = subparsers.add_parser(
+        "point-size-and-digits-audit",
+        help="Audit symbol point-size and digit assumptions used by measured-cost R conversion.",
+    )
+    point_digits.add_argument("--symbol", default="XAUUSD")
+    point_digits.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    point_digits.add_argument("--fixed-risk-usd", type=float)
+    point_digits.set_defaults(func=_cmd_generate_point_size_and_digits_audit)
+
+    spread_replacement = subparsers.add_parser(
+        "spread-replacement-audit",
+        help="Audit that measured spread replaces modeled entry spread instead of double-counting.",
+    )
+    spread_replacement.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    spread_replacement.add_argument("--fixed-risk-usd", type=float)
+    spread_replacement.set_defaults(func=_cmd_generate_spread_replacement_audit)
+
+    stale_rollover = subparsers.add_parser(
+        "stale-quote-rollover-audit",
+        help="Audit measured-cost freshness, weekend exclusion, and rollover diagnostics.",
+    )
+    stale_rollover.add_argument("--symbol", default="XAUUSD")
+    stale_rollover.set_defaults(func=_cmd_generate_stale_quote_rollover_audit)
+
+    break_even = subparsers.add_parser(
+        "cost-break-even-analysis",
+        help="Generate stop-distance and cost break-even analysis for an expert.",
+    )
+    break_even.add_argument("--expert", default="breakout_retest", choices=EXPERTS)
+    break_even.add_argument("--fixed-risk-usd", type=float)
+    break_even.set_defaults(func=_cmd_generate_cost_break_even_analysis)
+
+    candidate_feasibility = subparsers.add_parser(
+        "candidate-cost-feasibility",
+        help="Pre-screen a future candidate against measured-cost stop-distance thresholds.",
+    )
+    candidate_feasibility.add_argument("--expert", required=True)
+    candidate_feasibility.add_argument("--median-stop-points", type=float)
+    candidate_feasibility.set_defaults(func=_cmd_generate_candidate_cost_feasibility)
 
     spread_logger_deployment = subparsers.add_parser(
         "check-passive-spread-logger",
@@ -1256,6 +1322,89 @@ def _cmd_generate_measured_cost_sanity_check(args: argparse.Namespace) -> int:
     print(f"Decision: {output.decision}")
     print(f"Samples: {output.sample_count}")
     return 0 if output.status != "BUG_FOUND" else 1
+
+
+def _cmd_generate_measured_cost_forensic_review(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_measured_cost_forensic_review(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Measured-cost forensic review: {output.status}")
+    print(output.report_path)
+    return 0 if output.status != "REVIEW_REQUIRED" else 1
+
+
+def _cmd_generate_cost_r_sample_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_cost_r_sample_audit(
+        config,
+        expert=args.expert,
+        sample_size=args.sample_size,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Cost-R sample audit: {output.status}")
+    print(output.report_path)
+    print(f"Rows: {output.rows}")
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_point_size_and_digits_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_point_size_and_digits_audit(
+        config,
+        symbol=args.symbol,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Point-size and digits audit: {output.status}")
+    print(output.report_path)
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_spread_replacement_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_spread_replacement_audit(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Spread replacement audit: {output.status}")
+    print(output.report_path)
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_stale_quote_rollover_audit(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_stale_quote_rollover_audit(config, symbol=args.symbol)
+    print(f"Stale quote/rollover audit: {output.status}")
+    print(output.report_path)
+    return 0 if output.status == "PASS" else 1
+
+
+def _cmd_generate_cost_break_even_analysis(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_cost_break_even_analysis(
+        config,
+        expert=args.expert,
+        fixed_risk_usd=args.fixed_risk_usd,
+    )
+    print(f"Cost break-even analysis: {output.status}")
+    print(output.report_path)
+    return 0
+
+
+def _cmd_generate_candidate_cost_feasibility(args: argparse.Namespace) -> int:
+    config = load_project_config(args.root)
+    output = generate_candidate_cost_feasibility(
+        config,
+        expert=args.expert,
+        median_stop_points=args.median_stop_points,
+    )
+    print(f"Candidate cost feasibility: {output.status}")
+    print(output.report_path)
+    return 0 if output.status.startswith("PASS") else 1
 
 
 def _cmd_check_passive_spread_logger(args: argparse.Namespace) -> int:

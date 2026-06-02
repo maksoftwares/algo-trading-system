@@ -66,6 +66,10 @@ Last updated: 2026-06-02
   - `Phase2ExperimentalDemoExecutor.mq5` default `InpCandidateStatus` is now `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY`; default `InpFamilyLifecycleStatus` is `COST_SUSPENDED_CANONICAL`.
   - Experimental executor startup/order guards now require `InpCostSuspensionAcknowledgementToken` to match `InpRequiredCostSuspensionAcknowledgementToken` when the family lifecycle is cost-suspended.
   - Experimental executor logs now include `family_lifecycle_status`, and future generated executor attachment packs use v0.2 log filenames to avoid appending new columns under old v0.1 headers.
+  - 2026-06-02 Phase 2 resolution package is tracked at `xau-usd\xauusd-phase1\docs\PHASE2_RESOLUTION_PLAN.md`, `PHASE2_CANONICAL_BLOCK_POLICY.md`, `PASSIVE_PAPER_OBSERVER_SPEC.md`, and `EXPERIMENTAL_DEMO_QUARANTINE_POLICY.md`.
+  - New generated blocker/verification reports: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_BLOCKER_SUMMARY.md`, `PHASE2_CANONICAL_BLOCK_VERIFICATION.md`, and `EXPERIMENTAL_DEMO_QUARANTINE_VERIFICATION.md`.
+  - New Phase 2A forensic reports: `xau-usd\xauusd-phase0\outputs\reports\BREAKOUT_RETEST_MEASURED_COST_FORENSIC_REVIEW.md`, `COST_R_SAMPLE_AUDIT.csv`, `POINT_SIZE_AND_DIGITS_AUDIT.md`, `SPREAD_REPLACEMENT_AUDIT.md`, `STALE_QUOTE_AND_ROLLOVER_EXCLUSION_AUDIT.md`, and `BREAKOUT_RETEST_COST_BREAK_EVEN_ANALYSIS.md`.
+  - Experimental order logs now include `candidate_family_status`, `experimental_quarantine=true`, `canonical_phase2_evidence=false`, and `phase2_readiness_override=false`.
   - The Phase 1 GitHub workflow now runs Phase 1 tests, canonical safety audit, experimental executor governance audit, broker-action boundary audit, and cost-suspension enforcement.
   - No MT5 redeploy, reattach, or runtime broker-action change was performed during this V2 cleanup.
 - 2026-06-02 measured-cost closure and executor governance:

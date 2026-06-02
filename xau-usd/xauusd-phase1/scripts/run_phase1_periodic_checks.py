@@ -30,6 +30,7 @@ from generate_phase2_demo_countdown_report import generate_phase2_demo_countdown
 from generate_phase2_demo_account_isolation_report import generate_phase2_demo_account_isolation_report
 from generate_phase2_demo_next_actions_report import generate_phase2_demo_next_actions_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
+from generate_phase2_blocker_summary import generate_phase2_blocker_summary
 from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
 from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
@@ -44,6 +45,8 @@ from phase0.measured_revalidation import generate_measured_cost_revalidation
 from phase0.measured_sanity import generate_measured_cost_revalidation_sanity_check
 from phase0.spread_analysis import analyze_spread_logs
 from verify_readiness_consistency import verify_readiness_consistency
+from verify_canonical_phase2_block import verify_canonical_phase2_block
+from verify_experimental_quarantine import verify_experimental_quarantine
 from verify_phase1_logs import verify_phase1_logs
 
 
@@ -65,6 +68,9 @@ class PeriodicCheckOutput:
     phase2_vps_bootstrap_status: str
     vps_first_day_status: str
     review_index_status: str
+    phase2_blocker_summary_status: str = "UNKNOWN"
+    canonical_phase2_block_status: str = "UNKNOWN"
+    experimental_quarantine_status: str = "UNKNOWN"
 
 
 def run_phase1_periodic_checks(
@@ -201,6 +207,9 @@ def run_phase1_periodic_checks(
     experimental_governance = audit_experimental_executor_governance(root)
     cost_suspension = assert_cost_suspension(root)
     broker_action_boundary = audit_broker_action_file_boundary(root.parents[1])
+    phase2_blocker_summary = generate_phase2_blocker_summary(root)
+    canonical_block_status = "PASS" if verify_canonical_phase2_block(root) == 0 else "FAIL"
+    experimental_quarantine_status = "PASS" if verify_experimental_quarantine(root) == 0 else "FAIL"
     phase2_preflight = generate_phase2_demo_preflight_report(root=root)
     owner_action_packet = generate_phase2_owner_action_packet(root=root)
     vps_bootstrap_packet = generate_phase2_vps_bootstrap_packet(root=root)
@@ -226,6 +235,9 @@ def run_phase1_periodic_checks(
         and experimental_governance.status == "PASS"
         and cost_suspension.status == "PASS"
         and broker_action_boundary.status == "PASS"
+        and phase2_blocker_summary.status == "BLOCKED_BY_MEASURED_COST"
+        and canonical_block_status == "PASS"
+        and experimental_quarantine_status == "PASS"
         else "FAIL"
     )
     return PeriodicCheckOutput(
@@ -240,6 +252,9 @@ def run_phase1_periodic_checks(
         experimental_executor_governance_status=experimental_governance.status,
         cost_suspension_enforcement_status=cost_suspension.status,
         broker_action_boundary_status=broker_action_boundary.status,
+        phase2_blocker_summary_status=phase2_blocker_summary.status,
+        canonical_phase2_block_status=canonical_block_status,
+        experimental_quarantine_status=experimental_quarantine_status,
         phase2_readiness_consistency_status=readiness_consistency.status,
         phase2_owner_action_status=owner_action_packet.status,
         phase2_vps_bootstrap_status=vps_bootstrap_packet.status,

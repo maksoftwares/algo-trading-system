@@ -27,3 +27,10 @@ outputs/**
 !outputs/reports/BREAKOUT_RETEST_COST_SUSPENSION_DECISION.md
 !outputs/reports/MEASURED_COST_REVALIDATION_DECISION.md
 !outputs/reports/phase0r_cost_precheck_h4_d1_volatility_contraction_expansion_v0.md
+!outputs/reports/BREAKOUT_RETEST_MEASURED_COST_FORENSIC_REVIEW.md
+!outputs/reports/COST_R_SAMPLE_AUDIT.csv
+!outputs/reports/POINT_SIZE_AND_DIGITS_AUDIT.md
+!outputs/reports/SPREAD_REPLACEMENT_AUDIT.md
+!outputs/reports/STALE_QUOTE_AND_ROLLOVER_EXCLUSION_AUDIT.md
+!outputs/reports/BREAKOUT_RETEST_COST_BREAK_EVEN_ANALYSIS.md
+!outputs/reports/h4_d1_volatility_contraction_expansion_v0_candidate_cost_feasibility.md

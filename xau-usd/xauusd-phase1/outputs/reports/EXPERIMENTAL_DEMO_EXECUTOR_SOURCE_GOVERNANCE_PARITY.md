@@ -6,9 +6,9 @@ This audit checks experimental demo executor source/governance parity only. It d
 
 Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5`
 Governance doc: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\EXPERIMENTAL_DEMO_EXECUTOR_GOVERNANCE.md`
-Repo commit hash: `4c92f8671c07dc370147b2e8be1e20e17bd37f4c`
-Source SHA256: `0efef32e0e26fc900b7cac146a2dfb73a23bf7229e37fd27c356dec046bfce46`
-Governance doc SHA256: `e4af355f4fe4d5fdf8d34f983bd19969593d6cb4ba37d1f04b9b22759c435048`
+Repo commit hash: `f257bed9c8f20550b911b463663f0b8250e7c01c`
+Source SHA256: `765c66be2ad026e02625edf6a779884ab80a2cfd71cbe9d97256d5219972a451`
+Governance doc SHA256: `fbf8ab5c25721ba62844dbfcf5142c1a50ad1109169a376b4448c5b7b7de06d3`
 Failed checks: 0
 
 | Check | Status | Evidence |
@@ -39,6 +39,7 @@ Failed checks: 0
 | order_log_account_order_count | PASS | all required source tokens present |
 | order_log_account_open_exposure | PASS | all required source tokens present |
 | order_log_family_lifecycle_status | PASS | all required source tokens present |
+| order_log_non_authoritative_flags | PASS | all required source tokens present |
 | order_guard_cost_suspension_ack | PASS | all required source tokens present |
 | order_log_estimated_cost_r | PASS | all required source tokens present |
 | order_log_mode_truthfulness | PASS | all required source tokens present |
