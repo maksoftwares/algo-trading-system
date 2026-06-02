@@ -16,6 +16,7 @@ DEFAULT_TERMINAL_DATA_DIR = Path(
 )
 DEFAULT_TERMINAL_EXE = Path("C:/Program Files/MetaTrader 5/terminal64.exe")
 DEFAULT_OUTPUT_NAME = "demo-observer-dashboard.html"
+DEFAULT_LIVE_REFRESH_URL = "http://127.0.0.1:8777/demo-observer-dashboard.html"
 DEFAULT_MARGIN_AED = 100.0
 DEFAULT_LEVERAGE = 50.0
 DEMO_MAGIC_MIN = 920000
@@ -116,6 +117,7 @@ def generate_demo_observer_dashboard(
         "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "terminal_data_dir": str(terminal_data_dir),
         "files_dir": str(files_dir),
+        "live_refresh_url": DEFAULT_LIVE_REFRESH_URL,
         "focus_date": latest_date,
         "margin_aed": margin_aed,
         "leverage": leverage,
@@ -141,6 +143,7 @@ def generate_demo_observer_dashboard(
         "notes": [
             "This dashboard can read both telemetry-only observer logs and demo executor logs.",
             "Actual Broker Trades are direct MT5 account history/open-position evidence when the terminal bridge is available.",
+            f"For refresh-time updates, open the live dashboard URL: {DEFAULT_LIVE_REFRESH_URL}",
             "Signal Ledger PnL is estimated from logged bid/ask snapshots, not broker fills.",
             "Open trades are marked to the latest logged bid/ask in the same observer file.",
             "Executor order rows are demo-only evidence; live/real server names are refused by the EA.",
@@ -914,6 +917,7 @@ def _render_html(payload: dict[str, Any]) -> str:
         <div class="note"><strong>Latest write:</strong><br>{html.escape(str(payload["latest_log_write"]))}</div>
         <div class="note"><strong>Source folder:</strong><br>{html.escape(str(payload["files_dir"]))}</div>
         <div class="note"><strong>Actual broker account:</strong><br>{html.escape(str(actual_account.get("login", "n/a")))} / {html.escape(str(actual_account.get("server", actual_broker.get("status", "UNKNOWN"))))}</div>
+        <div class="note"><strong>Live refresh URL:</strong><br><a href="{html.escape(str(payload.get("live_refresh_url", DEFAULT_LIVE_REFRESH_URL)))}">{html.escape(str(payload.get("live_refresh_url", DEFAULT_LIVE_REFRESH_URL)))}</a></div>
         <div class="note"><strong>Execution mode:</strong><br>Observer rows are telemetry-only; executor rows are demo-only and must refuse live/real servers.</div>
       </div>
     </section>
