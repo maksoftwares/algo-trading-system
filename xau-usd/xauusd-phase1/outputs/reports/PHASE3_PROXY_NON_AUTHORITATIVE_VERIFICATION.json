@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-02T13:01:20Z",
+  "created_at_utc": "2026-06-02T14:08:47Z",
   "phase2_readiness_status": "FAIL",
   "phase3_proxy_non_authoritative": true,
   "canonical_phase2_authorized": false,

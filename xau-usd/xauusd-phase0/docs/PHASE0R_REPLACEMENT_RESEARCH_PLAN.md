@@ -28,6 +28,10 @@ Find a lower-frequency, wider-stop, measured-cost-aware candidate that can pass 
 - news spike entries
 - same strategy plus one extra filter
 
-## First Active Draft
+## Latest Closed Drafts
 
-`h4_d1_volatility_contraction_expansion_v0` is drafted with a measured-cost structural precheck PASS. It still needs SHA256 registration, implementation, smoke testing, matrix testing, measured-cost revalidation, concentration/frequency audit, and adversarial review.
+`h4_d1_volatility_contraction_expansion_v0` was SHA256-registered, implemented, smoke-tested, and real matrix-tested. It passed measured-cost structural precheck but is `REJECTED_FIRST_PASS` because 0/9 PF cells reached 1.30 and Dukascopy was negative across costs.
+
+`h4_d1_contraction_trend_continuation_v0` was SHA256-registered, implemented, smoke-tested, and real matrix-tested. It passed measured-cost structural precheck but is `REJECTED_FIRST_PASS` because every real matrix cell had PF below 1.0.
+
+Next action: continue Phase 0R with a new pre-registered candidate, preferably from a stronger data class than OHLC-only range/ATR/EMA structure.

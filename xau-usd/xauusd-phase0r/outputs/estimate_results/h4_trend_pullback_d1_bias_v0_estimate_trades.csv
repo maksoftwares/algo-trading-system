@@ -1,0 +1,1 @@
+candidate_id,cell_id,broker,cost_model,measured_cost,signal_time_utc,entry_time_utc,exit_time_utc,direction,entry_price,stop_loss,take_profit_1_5r,take_profit_2_0r,exit_price,stop_distance_points,gross_r,cost_r_median,cost_r_p95,applied_cost_r,net_r,estimated_net_pnl_usd,exit_reason,reason_code

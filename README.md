@@ -8,6 +8,16 @@ The repository is organized by symbol or instrument family so future symbols can
 
 - `xau-usd/xauusd-phase0`: Phase 0 statistical validation package for the XAUUSD Master EA project.
 - `xau-usd/xauusd-phase1`: Phase 1 dry-run shell for MT5 telemetry and lifecycle/risk/router contracts.
+- `xau-usd/xauusd-phase0r`: Separate Phase 0R research lane for draft candidate hypotheses and cost feasibility checks.
+- `xau-usd/xauusd-phase2b-passive-observers`: Separate Phase 2B passive observer lane for draft candidate telemetry only.
+
+## Separate EA Research Lane - Phase 0R / Phase 2B Passive Observers
+
+- These are not current canonical EAs.
+- They are not execution-authorized.
+- They do not modify current accepted/rejected experts.
+- They are dry-run/passive-observer only.
+- They must pass Phase 0R before any future paper-mode consideration.
 
 ## XAUUSD Phase 0
 
@@ -75,7 +85,7 @@ As of 2026-05-21, the XAUUSD Phase 0 real-data workflow has imported all require
 - Current leading candidate: `breakout_retest`.
 - Current same-family approved future expert candidates: `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0`; neither resolves independent diversification risk.
 - Current provisional research candidates: `round_number_retest_v0` and `session_extreme_retest_v0`; both are same-family/level-and-pullback variants and still need Gate 9 manual adversarial review.
-- Latest candidate-search status: one hundred seventeen result-producing candidates have now been hash-registered, smoke-tested where applicable, matrix-tested, and resolved without tuning, plus one CYB/UUP yuan-dollar lane is data-blocked because public Yahoo coverage ends in 2023. The strongest independent GLD ETF flow v0 candidate reached PF >= 1.30 in 9/9 cells but failed trade-count, activity, and concentration gates; broader H1/H4 GLD-flow variants either solved trade count while diluting PF or preserved only a one-broker pocket. A same-family `quarter_round_retest_v0` candidate passed automated research gates and is provisional pending manual Gate 9. The latest MOVE/VIX bond-volatility shock reversal candidate failed with 0/9 PF cells, only 6/9 trade-count cells, and max zero-trade months of 14, so no new independent candidate is approved.
+- Latest candidate-search status: one hundred nineteen result-producing candidates have now been hash-registered, smoke-tested where applicable, matrix-tested, and resolved without tuning, plus one CYB/UUP yuan-dollar lane is data-blocked because public Yahoo coverage ends in 2023. The newest two Phase 0R lower-cost H4/D1 contraction candidates passed structural P95 cost_R prechecks, but both were rejected first-pass: `h4_d1_volatility_contraction_expansion_v0` had 0/9 PF cells >= 1.30, and `h4_d1_contraction_trend_continuation_v0` had every cell below PF 1.0. No new independent candidate is approved.
 - Audit status: older real-data results are exploratory only because the hash-registered hypothesis files still contained placeholders at run time; the latest run was regenerated after completing and locking hypotheses.
 - Reviewer-prompt cleanup: reference status, hypothesis completeness checks, holdout manifest fields, review bundle generation, intrabar ambiguity reporting, and real artifact verification commands are now part of the package.
 - Current verdict: `breakout_retest` passed automated matrix, decile, multisymbol, hash, and Gate 9 manual adversarial gates, but confirmed measured-cost revalidation failure blocks canonical execution eligibility.

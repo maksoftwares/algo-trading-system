@@ -1,6 +1,6 @@
 # Phase 0 Rejected Candidate Gate Audit
 
-Generated at UTC: `2026-06-02T10:22:36+00:00`
+Generated at UTC: `2026-06-02T14:07:02+00:00`
 
 Purpose: answer Review #3 V3 by aggregating the matrix gates that rejected candidate experts.
 
@@ -10,12 +10,12 @@ Approved or active experts excluded from rejection counts: `breakout_retest, swi
 
 ## Summary
 
-- Audited candidates: 157
-- Rejected/research candidates audited: 154
+- Audited candidates: 159
+- Rejected/research candidates audited: 156
 - Rejected candidates with sample-size failure: 38
-- Rejected candidates with multi-cell expectancy failure: 150
+- Rejected candidates with multi-cell expectancy failure: 152
 - Rejected candidates with both expectancy and sample-size failure: 37
-- Rejected candidates with expectancy-only failure: 113
+- Rejected candidates with expectancy-only failure: 115
 - Rejected candidates with frequency-only failure: 1
 
 Conclusion: Sample-size/frequency failures are present, so low-frequency candidates should not be rescued by assumption; however, expectancy survival failures are at least as common and must remain the primary rejection evidence.
@@ -122,7 +122,9 @@ Conclusion: Sample-size/frequency failures are present, so low-frequency candida
 | h4_breakeven_inflation_momentum_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 2055 | 183 | multi_cell_survival;concentration |
 | h4_cny_dollar_pressure_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 351 | 30 | multi_cell_survival;sample_size;concentration;activity |
 | h4_credit_spread_stress_momentum_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1689 | 153 | multi_cell_survival;concentration;activity |
+| h4_d1_contraction_trend_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 657 | 50 | multi_cell_survival;concentration;activity |
 | h4_d1_momentum_expansion_continuation_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 3 | 735 | 81 | multi_cell_survival;concentration |
+| h4_d1_volatility_contraction_expansion_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 1053 | 75 | multi_cell_survival;concentration |
 | h4_daily_range_extension_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 513 | 40 | multi_cell_survival;concentration |
 | h4_financial_conditions_stress_reversal_v0 | REJECTED_OR_RESEARCH | EDGE_EXPECTANCY_FAILURE | 9 | 0 | 483 | 46 | multi_cell_survival;concentration;activity |
 | h4_gdx_gld_miner_divergence_v0 | REJECTED_OR_RESEARCH | EDGE_AND_FREQUENCY_FAILURE | 9 | 0 | 165 | 10 | multi_cell_survival;sample_size;concentration;activity |

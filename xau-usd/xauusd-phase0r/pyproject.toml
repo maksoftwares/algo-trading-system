@@ -1,0 +1,23 @@
+[project]
+name = "xauusd-phase0r"
+version = "0.1.0"
+description = "Separate Phase 0R research lane for XAUUSD passive observer candidates"
+requires-python = ">=3.10"
+dependencies = ["pandas>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+phase0r = "phase0r.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

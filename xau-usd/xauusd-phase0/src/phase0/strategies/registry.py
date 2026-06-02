@@ -262,8 +262,14 @@ from phase0.strategies.h4_xle_xlu_energy_defensive_rotation_reversal_v0 import (
 from phase0.strategies.h4_xlu_xlk_defensive_rotation_reversal_v0 import (
     H4XluXlkDefensiveRotationReversalV0Strategy,
 )
+from phase0.strategies.h4_d1_contraction_trend_continuation_v0 import (
+    H4D1ContractionTrendContinuationV0Strategy,
+)
 from phase0.strategies.h4_d1_momentum_expansion_continuation_v0 import (
     H4D1MomentumExpansionContinuationV0Strategy,
+)
+from phase0.strategies.h4_d1_volatility_contraction_expansion_v0 import (
+    H4D1VolatilityContractionExpansionV0Strategy,
 )
 from phase0.strategies.h4_financial_conditions_stress_reversal_v0 import (
     H4FinancialConditionsStressReversalV0Strategy,
@@ -455,7 +461,9 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4XleXluEnergyDefensiveRotationReversalV0Strategy.name: H4XleXluEnergyDefensiveRotationReversalV0Strategy,
     H4XluXlkDefensiveRotationReversalV0Strategy.name: H4XluXlkDefensiveRotationReversalV0Strategy,
     H1SmoothTrendExhaustionReversalV0Strategy.name: H1SmoothTrendExhaustionReversalV0Strategy,
+    H4D1ContractionTrendContinuationV0Strategy.name: H4D1ContractionTrendContinuationV0Strategy,
     H4D1MomentumExpansionContinuationV0Strategy.name: H4D1MomentumExpansionContinuationV0Strategy,
+    H4D1VolatilityContractionExpansionV0Strategy.name: H4D1VolatilityContractionExpansionV0Strategy,
     H4FinancialConditionsStressReversalV0Strategy.name: H4FinancialConditionsStressReversalV0Strategy,
     H4GdxGldMinerDivergenceV0Strategy.name: H4GdxGldMinerDivergenceV0Strategy,
     H4GldEtfFlowReversalV0Strategy.name: H4GldEtfFlowReversalV0Strategy,

@@ -1,0 +1,4 @@
+candidate_id,version,status,hypothesis_path,sha256,registered_at_utc,registered_by,notes
+d1_compression_h4_expansion_v0,v0,DRAFT,hypotheses/hypothesis_d1_compression_h4_expansion_v0.md,ddcb0c4e2e47c5dcef762b5091b4ae2006b2480190aa4a0d5b8583e34918a896,2026-06-02T18:35:00.145133Z,codex,draft separate Phase 0R lane registration
+h4_trend_pullback_d1_bias_v0,v0,DRAFT,hypotheses/hypothesis_h4_trend_pullback_d1_bias_v0.md,1e3db3dfb855f4feeb23646d81dc34c125cedecf52f5a162e9f81f99fc467a9a,2026-06-02T18:35:00.145133Z,codex,draft separate Phase 0R lane registration
+weekly_level_h4_rejection_v0,v0,DRAFT,hypotheses/hypothesis_weekly_level_h4_rejection_v0.md,d05996ca4de81797599f12a49209b1600a4112c3c07c162cc497e2e5c647345c,2026-06-02T18:35:00.145133Z,codex,draft separate Phase 0R lane registration

@@ -7,7 +7,12 @@ Mechanic family: H4/D1 volatility contraction then expansion
 Entry / decision timeframe: D1 state with H4 completed-candle decision
 M5 usage: execution sequencing only inside the Phase 0 simulator
 Expected median hold hours: 12-96
-Expected trades per year: 15-80
+Expected trade count per year: 15-80
+Expected cost-adjusted PF: 1.10-1.45
+Expected losing-month percentage: 40%-60%
+Expected worst single month: -6R to -14R
+Expected max consecutive zero months: 2
+Expected R-multiple distribution: sparse wide-stop continuation entries, frequent full-risk invalidations, and fewer 1.60R trend-release wins
 Expected median stop distance: 400 points
 Measured median spread assumption: 50 points
 Measured P95 spread assumption: 75 points

@@ -34,11 +34,11 @@ Phase 2 implementation is blocked by at least one failing readiness gate.
 | Phase 1 review index | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_REVIEW_INDEX.md` status is PASS. |
 | Phase 1 observer parity | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_OBSERVER_PARITY_REPORT.md` status is PASS. |
 | Phase 1 summary health | PASS | Core summary checks are PASS in `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_STATUS_SUMMARY.json`. |
-| Five trading day soak | PASS | Progress 100.00%; observed 10.9722 of 5.00 required days. |
-| Active-market soak (owner-accepted 56h) | PASS | Active-market soak: PASS via owner-accepted 56h threshold; original 72h target waived for Phase 1 dry-run closure only. Longest active streak 56.08h; current active streak 33.25h; required 56h; original target 72h; owner acceptance C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE1_ACTIVE_MARKET_SOAK_ACCEPTANCE.md; weekend policy expected_market_breaks_pause_active_market_streak. |
-| Code-freeze 96-hour gate | PASS | Code-freeze 143.71h; required 96h; current process uptime after restart 35.12h; marker 2026-05-27T10:41:50Z. Current gate is code-freeze marker age only; process uptime after restart is informational. Phase 2 still needs fresh VPS-specific process/first-day verification if relevant. |
-| Latest dry-run boundary | PASS | bar_time=2026.06.02 10:20:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
-| Would-signal evidence | PASS | Rows: 201; clusters: 201. |
+| Five trading day soak | PASS | Progress 100.00%; observed 11.1285 of 5.00 required days. |
+| Active-market soak (owner-accepted 56h) | PASS | Active-market soak: PASS via owner-accepted 56h threshold; original 72h target waived for Phase 1 dry-run closure only. Longest active streak 56.08h; current active streak 37.0h; required 56h; original target 72h; owner acceptance C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE1_ACTIVE_MARKET_SOAK_ACCEPTANCE.md; weekend policy expected_market_breaks_pause_active_market_streak. |
+| Code-freeze 96-hour gate | PASS | Code-freeze 147.45h; required 96h; current process uptime after restart 38.85h; marker 2026-05-27T10:41:50Z. Current gate is code-freeze marker age only; process uptime after restart is informational. Phase 2 still needs fresh VPS-specific process/first-day verification if relevant. |
+| Latest dry-run boundary | PASS | bar_time=2026.06.02 14:05:00; dry_run=true; permission=false; server_time=CLOCK_OK. |
+| Would-signal evidence | PASS | Rows: 203; clusters: 203. |
 | Project owner approval | PENDING | No approval file found at `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_OWNER_APPROVAL.md`. |
 
 ## D2 Authority
@@ -56,7 +56,7 @@ Phase 2 implementation is blocked by at least one failing readiness gate.
 
 | Decision Rows | Latest Bar | Dry Run | Permission | Server Time | Soak Progress |
 | --- | --- | --- | --- | --- | --- |
-| 1819 | 2026.06.02 10:20:00 | true | false | CLOCK_OK | 100.0% |
+| 1864 | 2026.06.02 14:05:00 | true | false | CLOCK_OK | 100.0% |
 
 ## Boundary
 

@@ -6,7 +6,7 @@ This audit checks experimental demo executor source/governance parity only. It d
 
 Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5`
 Governance doc: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\EXPERIMENTAL_DEMO_EXECUTOR_GOVERNANCE.md`
-Repo commit hash: `f257bed9c8f20550b911b463663f0b8250e7c01c`
+Repo commit hash: `6d2cb4ecc34a11ba1271e516fcce1cf6bdefd79f`
 Source SHA256: `765c66be2ad026e02625edf6a779884ab80a2cfd71cbe9d97256d5219972a451`
 Governance doc SHA256: `fbf8ab5c25721ba62844dbfcf5142c1a50ad1109169a376b4448c5b7b7de06d3`
 Failed checks: 0

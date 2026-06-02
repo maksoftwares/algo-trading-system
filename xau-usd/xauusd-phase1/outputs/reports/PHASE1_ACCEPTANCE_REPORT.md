@@ -13,15 +13,15 @@ Files directory: `C:\MT5PortableGoldMission\MQL5\Files`
 | Runtime log verification | PASS | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_DRY_RUN_LOG_REPORT.md` |
 | Soak/drift analysis | PASS | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_DRIFT_REPORT.md` |
 | Runtime health | PASS | Report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_RUNTIME_HEALTH_REPORT.md` |
-| Would-signal evidence | PASS | Rows: 201; clusters: 201; report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`; csv: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` |
+| Would-signal evidence | PASS | Rows: 203; clusters: 203; report: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REPORT.md`; csv: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_WOULD_SIGNAL_REVIEW.csv` |
 | Soak history ledger | WARN | History report has warnings: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE1_SOAK_HISTORY_REPORT.md` |
 | Dry-run state | PASS | All decision rows are in dry-run state. |
 | Permission lock | PASS | All decision rows keep permission false. |
-| Runtime freshness | PASS | Latest row age is 4.7 minute(s); limit 240. |
-| Latest runtime row | PASS | run_id=phase1-dry-run-v0.7; bar_time=2026.06.02 10:20:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/LONG; would_signal=false |
-| Active-market soak (owner-accepted 56h) | PASS | Longest active streak: 56.08h; current active streak: 33.25h; original target: 72h; owner-accepted Phase 1 threshold: 56h; acceptance: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE1_ACTIVE_MARKET_SOAK_ACCEPTANCE.md`; last restart UTC: 2026-05-31T23:17:38Z; weekend policy: expected_market_breaks_pause_active_market_streak. Active-market soak: PASS via owner-accepted 56h threshold; original 72h target waived for Phase 1 dry-run closure only. |
-| Code-freeze 96-hour gate | PASS | Code-freeze hours: 143.71h; required: 96h; current process uptime after restart: 35.12h; marker: 2026-05-27T10:41:50Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. Current gate is code-freeze marker age only; process uptime after restart is informational. Phase 2 still needs fresh VPS-specific process/first-day verification if relevant. |
-| Five trading day soak | PASS | Observed unique-bar span: 10.97 calendar day(s), from 2026-05-22 11:00:00 to 2026-06-02 10:20:00. |
+| Runtime freshness | PASS | Latest row age is 3.7 minute(s); limit 15. |
+| Latest runtime row | PASS | run_id=phase1-dry-run-v0.7; bar_time=2026.06.02 14:05:00; risk=NORMAL; server_time=CLOCK_OK; observer=WAIT_LEVEL_BREAK_RETEST/SHORT; would_signal=false |
+| Active-market soak (owner-accepted 56h) | PASS | Longest active streak: 56.08h; current active streak: 37.00h; original target: 72h; owner-accepted Phase 1 threshold: 56h; acceptance: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE1_ACTIVE_MARKET_SOAK_ACCEPTANCE.md`; last restart UTC: 2026-05-31T23:17:38Z; weekend policy: expected_market_breaks_pause_active_market_streak. Active-market soak: PASS via owner-accepted 56h threshold; original 72h target waived for Phase 1 dry-run closure only. |
+| Code-freeze 96-hour gate | PASS | Code-freeze hours: 147.45h; required: 96h; current process uptime after restart: 38.85h; marker: 2026-05-27T10:41:50Z; marker path: `C:\MT5PortableGoldMission\MQL5\Files\phase1_code_freeze_started_at.txt`. Current gate is code-freeze marker age only; process uptime after restart is informational. Phase 2 still needs fresh VPS-specific process/first-day verification if relevant. |
+| Five trading day soak | PASS | Observed unique-bar span: 11.13 calendar day(s), from 2026-05-22 11:00:00 to 2026-06-02 14:05:00. |
 
 ## Decision
 
@@ -29,5 +29,5 @@ Phase 1 acceptance evidence is complete for the current dry-run scope.
 
 ## Runtime Rows
 
-- Decision rows analyzed: 1819
+- Decision rows analyzed: 1864
 - Unique run IDs: 6

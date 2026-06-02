@@ -1,7 +1,7 @@
 # Candidate Cost Feasibility
 
 Overall status: PASS
-Generated at UTC: 2026-06-02T11:44:05Z
+Generated at UTC: 2026-06-02T13:49:45Z
 Candidate: `h4_d1_volatility_contraction_expansion_v0`
 
 | Field | Value |

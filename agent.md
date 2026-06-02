@@ -28,6 +28,8 @@ Last updated: 2026-06-02
 ## Current Research Goal
 
 - Active hunt: find a valid independent higher-timeframe EA, especially H1/H4, to reduce cost pressure and diversify beyond the breakout/retest family.
+- Latest Phase 0R lower-cost attempt: `h4_d1_volatility_contraction_expansion_v0` is REJECTED_FIRST_PASS. It was SHA256-locked (`8f53ce44081df552078c49f0a45af18f37e92a4e7035dd88b1816c7a0adcefe9`), passed the 400-point stop measured-cost precheck at P95 cost_R 0.1875, passed synthetic smoke, and produced 75-165 trades per real matrix cell, but 0/9 PF cells reached 1.30 and Dukascopy was negative across costs. Do not tune v0.
+- Latest Phase 0R lower-cost trend attempt: `h4_d1_contraction_trend_continuation_v0` is REJECTED_FIRST_PASS. It was SHA256-locked (`488d318272b23bedb1b5f9706f1371a357be59319bf0c389a83a4bf07d45ecd1`), passed the 425-point stop measured-cost precheck at P95 cost_R 0.1765, passed synthetic smoke, and produced 50-87 trades per real matrix cell, but every cell had PF below 1.0. Do not tune v0.
 - Latest result-producing H4/D1 attempt: `h4_xle_xlu_energy_defensive_rotation_reversal_v0` is REJECTED_FIRST_PASS with 453 total cost-cell trades and 9/9 trade-count cells, but only 3/9 PF cells; all PF-threshold cells were Pepperstone-only while Capital.com/Dukascopy were negative.
 - Latest new data-class lane: `h4_cme_cvol_skew_reversal_v0` uses official CME Gold CVOL/skew, is SHA256-locked (`5fc5ca963bbafb312b411eb80695346c38ed8e752d78f418ffe60e940aa81389`), and synthetic smoke is PASS.
 - `h4_cme_cvol_skew_reversal_v0` real matrix is intentionally BLOCKED_DATA_SOURCE until licensed CME Gold CVOL history is supplied at `xau-usd\xauusd-phase0\data\reference\options\cme_cvol_gold_daily.csv` with columns `timestamp_utc,gold_cvol,gold_upvar,gold_downvar,gold_skew,gold_atm,gold_convexity`.
@@ -43,7 +45,7 @@ Last updated: 2026-06-02
 - Newly rejected higher-timeframe SLV/GLD precious-beta lane: `h4_slv_gld_precious_beta_reversal_v0` was SHA256-locked (`7580b26105964bc4f184b54c623f0f05a2589545392bd1885b9dcebc0540df23`) and smoke PASS before the real matrix; do not tune v0.
 - Newly rejected higher-timeframe month-turn flow lane: `h4_month_turn_flow_reversion_v0` was SHA256-locked (`72a3078605a7010fea9301ee92f0adb44dfd86b15a6925b150654446b1ba4a93`) and smoke PASS before the real matrix; do not tune v0.
 - Newly rejected higher-timeframe XLE/XLU energy-defensive lane: `h4_xle_xlu_energy_defensive_rotation_reversal_v0` was SHA256-locked (`5914340f8d6f75959d6fac431c511033419eee210d39f5710578b5cb6aa03e04`) and smoke PASS before the real matrix; do not tune v0.
-- Do not run a partial CVOL matrix with proxy or incomplete data. Keep searching, but prefer primary order-flow/options-skew data over more OHLC-only variants.
+- Do not run a partial CVOL matrix with proxy or incomplete data. Keep searching, but prefer primary order-flow/options-skew data over more OHLC-only variants; the latest two OHLC-only lower-cost H4/D1 contraction tests were cost-viable but rejected on edge.
 
 ## Current State
 

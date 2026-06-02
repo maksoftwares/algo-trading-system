@@ -1,6 +1,6 @@
 {
   "status": "BLOCKED_BY_MEASURED_COST",
-  "created_at_utc": "2026-06-02T13:01:18Z",
+  "created_at_utc": "2026-06-02T14:08:45Z",
   "canonical_phase2_status": "BLOCKED_BY_MEASURED_COST",
   "breakout_retest_family_status": "COST_SUSPENDED_CANONICAL",
   "measured_cost_model_status": "PASS",
