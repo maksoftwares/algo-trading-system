@@ -91,6 +91,21 @@ CANDIDATES: tuple[Candidate, ...] = (
         timeframe_diversification_qualifies=True,
         hypothesis_filename="hypothesis_weekly_level_h4_rejection_v0.md",
     ),
+    Candidate(
+        candidate_id="session_extreme_retest_v1_htf_confirmed",
+        version="v1",
+        status="DRAFT",
+        mechanic_family="session extreme rejection / higher-timeframe confirmed retest",
+        decision_timeframe="D1/H4/M15",
+        entry_timeframe="M15",
+        expected_median_hold_hours="6-48",
+        expected_decisions_per_week="1-5",
+        expected_trades_per_year="<120",
+        expected_median_stop_points=500.0,
+        same_family_as_breakout_retest=True,
+        timeframe_diversification_qualifies=False,
+        hypothesis_filename="hypothesis_session_extreme_retest_v1_htf_confirmed.md",
+    ),
 )
 
 

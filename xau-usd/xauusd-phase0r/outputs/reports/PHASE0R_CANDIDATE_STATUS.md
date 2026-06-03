@@ -7,3 +7,4 @@ These candidates are separate research candidates. They are not canonical EAs an
 | d1_compression_h4_expansion_v0 | v0 | DRAFT | false | false | PASS_PREFERRED | NOT_RUN | NOT_RUN | OBSERVER_ONLY_DRAFT | BLOCKED | hypothesis_not_locked_and_phase0r_not_run |
 | h4_trend_pullback_d1_bias_v0 | v0 | DRAFT | false | false | PASS_PREFERRED | NOT_RUN | NOT_RUN | OBSERVER_ONLY_DRAFT | BLOCKED | hypothesis_not_locked_and_phase0r_not_run |
 | weekly_level_h4_rejection_v0 | v0 | DRAFT | false | false | PASS_PREFERRED | NOT_RUN | NOT_RUN | OBSERVER_ONLY_DRAFT | BLOCKED | hypothesis_not_locked_and_phase0r_not_run |
+| session_extreme_retest_v1_htf_confirmed | v1 | DRAFT | true | false | PASS_PREFERRED | NOT_RUN | NOT_RUN | OBSERVER_ONLY_DRAFT | BLOCKED | hypothesis_not_locked_and_phase0r_not_run |

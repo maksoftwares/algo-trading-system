@@ -23,7 +23,7 @@ def test_hypothesis_template_contains_required_fields():
 def test_candidate_hypotheses_contain_required_fields():
     validations = validate_hypotheses_complete(ROOT)
 
-    assert len(validations) == 3
+    assert len(validations) == 4
     assert all(validation.status == "PASS" for validation in validations)
 
 

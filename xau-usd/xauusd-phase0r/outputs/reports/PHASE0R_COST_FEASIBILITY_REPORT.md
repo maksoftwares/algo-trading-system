@@ -15,5 +15,6 @@ Hard rule: measured P95 spread divided by expected median stop points must be <=
 | d1_compression_h4_expansion_v0 | 500 | 0.100 | 0.150 | 0.360 | PASS_PREFERRED | none |
 | h4_trend_pullback_d1_bias_v0 | 375 | 0.133 | 0.200 | 0.480 | PASS_PREFERRED | none |
 | weekly_level_h4_rejection_v0 | 425 | 0.118 | 0.176 | 0.424 | PASS_PREFERRED | none |
+| session_extreme_retest_v1_htf_confirmed | 500 | 0.100 | 0.150 | 0.360 | PASS_PREFERRED | none |
 
 No candidate has passed Phase 0R. This report is a structural precheck only.

@@ -18,6 +18,7 @@ Current status:
 | d1_compression_h4_expansion_v0 | DRAFT | volatility expansion / compression-release | false | 500 |
 | h4_trend_pullback_d1_bias_v0 | DRAFT | trend continuation / pullback | false | 375 |
 | weekly_level_h4_rejection_v0 | DRAFT | higher-timeframe rejection / mean reversion | false | 425 |
+| session_extreme_retest_v1_htf_confirmed | DRAFT | session extreme rejection / higher-timeframe confirmed retest | true | 500 |
 
 ## Commands
 

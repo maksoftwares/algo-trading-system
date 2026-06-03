@@ -28,6 +28,11 @@ POINT_SIZE = 0.01
 FIXED_RISK_USD = 50.0
 MEASURED_MEDIAN_SPREAD_POINTS = DEFAULT_SPREAD_ASSUMPTIONS.measured_median_spread_points
 MEASURED_P95_SPREAD_POINTS = DEFAULT_SPREAD_ASSUMPTIONS.measured_p95_spread_points
+ESTIMATE_SUPPORTED_CANDIDATES = {
+    "d1_compression_h4_expansion_v0",
+    "h4_trend_pullback_d1_bias_v0",
+    "weekly_level_h4_rejection_v0",
+}
 
 
 @dataclass(frozen=True)
@@ -55,6 +60,23 @@ def run_phase0r_estimates(
     summary_rows: list[dict[str, Any]] = []
     trade_paths: list[Path] = []
     for candidate in selected_candidates(candidate_id):
+        if candidate.candidate_id not in ESTIMATE_SUPPORTED_CANDIDATES:
+            trade_path = output_dir / f"{candidate.candidate_id}_estimate_trades.csv"
+            _write_trades(trade_path, [])
+            trade_paths.append(trade_path)
+            summary_rows.append(
+                _summary_row(
+                    candidate.candidate_id,
+                    [],
+                    cell_id="all",
+                    broker="not_implemented",
+                    cost_model="not_implemented",
+                    period="not run",
+                    measured_cost=measured_cost,
+                    level="overall",
+                )
+            )
+            continue
         candidate_trades: list[dict[str, Any]] = []
         for cell_id, (start_text, end_text, broker, cost_model) in CELL_WINDOWS.items():
             start = pd.Timestamp(start_text)

@@ -34,6 +34,17 @@ def test_candidate_status_cannot_move_directly_from_draft_to_paper_approved():
     assert validate_status_transition("PHASE0R_PASS", "PAPER_APPROVED")
 
 
+def test_session_extreme_v1_is_registered_as_passive_research_only():
+    registered = {candidate.candidate_id: candidate for candidate in CANDIDATES}
+
+    candidate = registered["session_extreme_retest_v1_htf_confirmed"]
+
+    assert candidate.status == "DRAFT"
+    assert candidate.same_family_as_breakout_retest is True
+    assert candidate.timeframe_diversification_qualifies is False
+    assert candidate.expected_median_stop_points >= 500.0
+
+
 def test_current_canonical_ea_logic_files_are_not_modified():
     repo_root = Path(__file__).resolve().parents[3]
     protected_paths = [
