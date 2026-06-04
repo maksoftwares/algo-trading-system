@@ -19,6 +19,7 @@ DEFAULT_OUTPUT_NAME = "demo-observer-dashboard.html"
 DEFAULT_LIVE_REFRESH_URL = "http://127.0.0.1:8777/demo-observer-dashboard.html"
 DEFAULT_MARGIN_AED = 100.0
 DEFAULT_LEVERAGE = 50.0
+DEFAULT_ACTUAL_HISTORY_START = "2026-06-01 00:00:00"
 DEMO_MAGIC_MIN = 920000
 DEMO_MAGIC_MAX = 929999
 CANDIDATE_MAGIC_CODES = {
@@ -85,6 +86,7 @@ def generate_demo_observer_dashboard(
     focus_date: str | None = None,
     terminal_exe: Path = DEFAULT_TERMINAL_EXE,
     include_broker_history: bool = True,
+    actual_history_start: str = DEFAULT_ACTUAL_HISTORY_START,
 ) -> DashboardOutput:
     repo_root = repo_root.resolve()
     terminal_data_dir = terminal_data_dir.resolve()
@@ -104,8 +106,10 @@ def generate_demo_observer_dashboard(
     latest_date = focus_date or _latest_broker_date(logs)
     notional_aed = margin_aed * leverage
     ledger = _build_signal_ledger(logs, margin_aed=margin_aed, leverage=leverage, notional_aed=notional_aed)
-    actual_broker = _read_actual_broker_trades(terminal_exe, latest_date) if include_broker_history else _actual_unavailable(
-        "disabled_by_cli"
+    actual_broker = (
+        _read_actual_broker_trades(terminal_exe, latest_date, actual_history_start=actual_history_start)
+        if include_broker_history
+        else _actual_unavailable("disabled_by_cli")
     )
     summary_rows = _build_summary_rows(logs, ledger, latest_date)
     symbol_rows = _build_symbol_rows(ledger, latest_date)
@@ -210,7 +214,7 @@ def _read_order_logs(paths: list[Path]) -> list[dict[str, Any]]:
     return rows
 
 
-def _read_actual_broker_trades(terminal_exe: Path, focus_date: str) -> dict[str, Any]:
+def _read_actual_broker_trades(terminal_exe: Path, focus_date: str, actual_history_start: str = DEFAULT_ACTUAL_HISTORY_START) -> dict[str, Any]:
     terminal_exe = terminal_exe.resolve()
     if not terminal_exe.exists():
         return _actual_unavailable(f"terminal_exe_missing:{terminal_exe}")
@@ -224,7 +228,7 @@ def _read_actual_broker_trades(terminal_exe: Path, focus_date: str) -> dict[str,
 
     try:  # pragma: no cover - exercised against the user's local demo terminal
         account = mt5.account_info()
-        start = _focus_date_start(focus_date)
+        start = _actual_history_start(focus_date=focus_date, actual_history_start=actual_history_start)
         end = datetime.now()
         deals = list(mt5.history_deals_get(start, end) or [])
         orders = list(mt5.history_orders_get(start, end) or [])
@@ -238,6 +242,8 @@ def _read_actual_broker_trades(terminal_exe: Path, focus_date: str) -> dict[str,
             "reason": "",
             "terminal_exe": str(terminal_exe),
             "focus_date": focus_date,
+            "history_start": start.strftime("%Y-%m-%d %H:%M:%S"),
+            "history_end": end.strftime("%Y-%m-%d %H:%M:%S"),
             "account": {
                 "login": getattr(account, "login", ""),
                 "server": getattr(account, "server", ""),
@@ -393,6 +399,8 @@ def _actual_unavailable(reason: str, terminal_exe: Path | None = None) -> dict[s
         "reason": reason,
         "terminal_exe": str(terminal_exe) if terminal_exe else "",
         "focus_date": "",
+        "history_start": "",
+        "history_end": "",
         "account": {},
         "summary": _actual_broker_summary([]),
         "deduped_summary": _actual_broker_summary([]),
@@ -406,6 +414,13 @@ def _focus_date_start(focus_date: str) -> datetime:
         return datetime.strptime(focus_date, "%Y.%m.%d")
     except ValueError:
         return datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def _actual_history_start(focus_date: str, actual_history_start: str) -> datetime:
+    try:
+        return datetime.strptime(actual_history_start, "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        return _focus_date_start(focus_date)
 
 
 def _is_demo_magic(magic: Any, comment: Any) -> bool:
@@ -1191,7 +1206,7 @@ def _actual_broker_table(actual_broker: dict[str, Any]) -> str:
         reason = html.escape(str(actual_broker.get("reason", "unknown")))
         return f'<p class="muted">Actual MT5 broker history is unavailable for this refresh: {reason}</p>'
     if not rows:
-        return '<p class="muted">No actual MT5 demo trades were found for the focus date.</p>'
+        return '<p class="muted">No actual MT5 demo trades were found for the configured history window.</p>'
     body = "\n".join(
         f'<tr data-status="{html.escape(str(row.get("status", "")))}" data-candidate="{html.escape(str(row.get("candidate", "")))}" data-symbol="{html.escape(str(row.get("symbol", "")))}" data-state="{html.escape(str(row.get("state", "")))}" data-duplicate="{html.escape(str(row.get("is_duplicate", "false")).lower())}" data-pnl="{html.escape(str(row.get("profit_aed", "0")))}">'
         f"<td>{html.escape(str(row.get('entry_time', '')))}</td>"
@@ -1215,8 +1230,16 @@ def _actual_broker_table(actual_broker: dict[str, Any]) -> str:
     )
     summary = actual_broker.get("summary", _actual_broker_summary([]))
     deduped = actual_broker.get("deduped_summary", _actual_broker_summary([]))
+    history_start = html.escape(str(actual_broker.get("history_start", "")))
+    history_end = html.escape(str(actual_broker.get("history_end", "")))
+    history_line = (
+        f"<p class=\"hint\">Actual MT5 history window: {history_start} to {history_end}.</p>"
+        if history_start or history_end
+        else ""
+    )
     summary_line = (
-        f"<p class=\"hint\">Actual MT5 summary: {html.escape(str(summary.get('actual_trades', 0)))} trades, "
+        history_line
+        + f"<p class=\"hint\">Actual MT5 summary: {html.escape(str(summary.get('actual_trades', 0)))} trades, "
         f"{html.escape(str(summary.get('closed_trades', 0)))} closed, "
         f"{html.escape(str(summary.get('open_trades', 0)))} open, "
         f"closed win rate {html.escape(str(summary.get('closed_win_rate_pct', 'n/a')))}%, "
@@ -1372,6 +1395,11 @@ def main() -> int:
     parser.add_argument("--focus-date", default=None, help="Broker date in YYYY.MM.DD format; defaults to latest log date.")
     parser.add_argument("--terminal-exe", type=Path, default=DEFAULT_TERMINAL_EXE)
     parser.add_argument("--skip-broker-history", action="store_true")
+    parser.add_argument(
+        "--actual-history-start",
+        default=DEFAULT_ACTUAL_HISTORY_START,
+        help="Actual MT5 broker history start in YYYY-MM-DD HH:MM:SS format.",
+    )
     args = parser.parse_args()
     output = generate_demo_observer_dashboard(
         repo_root=args.repo_root,
@@ -1382,6 +1410,7 @@ def main() -> int:
         focus_date=args.focus_date,
         terminal_exe=args.terminal_exe,
         include_broker_history=not args.skip_broker_history,
+        actual_history_start=args.actual_history_start,
     )
     print(f"Dashboard: {output.html_path}")
     print(f"JSON: {output.json_path}")

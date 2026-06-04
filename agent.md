@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-06-02
+Last updated: 2026-06-04
 
 ## Workspace
 
@@ -24,6 +24,7 @@ Last updated: 2026-06-02
 - Prefer generated manifests, snapshots, and hashable artifacts over informal notes.
 - Always keep the root `status.html` dashboard up to date. After any status-affecting Phase 0, Phase 1, soak, cost, report, or candidate change, regenerate it directly or through `run_phase1_periodic_checks.py` before committing or pushing.
 - Do not push unless explicitly asked.
+- Experimental demo trade reviews must use direct MT5 history from `C:\Program Files\MetaTrader 5\terminal64.exe` / `1025742 Capital.ComMena-Demo` when judging broker trades. The dashboard actual-trades section now defaults to the configured full history window from `2026-06-01 00:00:00`, not just a single focus date.
 
 ## Current Research Goal
 
@@ -49,6 +50,14 @@ Last updated: 2026-06-02
 
 ## Current State
 
+- 2026-06-04 direct-MT5 loss case study:
+  - New repeatable generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_demo_loss_case_study.py`.
+  - Latest direct-MT5 source: `C:\Program Files\MetaTrader 5\terminal64.exe`, account `1025742 / Capital.ComMena-Demo / AED`, history start `2026-06-01 00:00:00`.
+  - Latest reports: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_CASE_STUDY_2026_06_04.md`, `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FILTER_REPORT_2026_06_04.md`, `xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv`, `PHASE2_DEMO_SHADOW_FILTER_REPORT.json`, and `PHASE2_DEMO_SHADOW_FILTER_TRADES.csv`.
+  - Latest reviewer trade packet: `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04.zip`, with extracted README at `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\README_REVIEW_EXPORT.md`.
+  - Latest duplicate-hidden baseline at generation time: 116 closed trades, 43 wins, 73 losses, 37.07% win rate, -135.38 AED closed PnL, PF 0.90.
+  - Shadow-only policy measured but not enforced: hypothetically block `session_extreme_retest_v0` and XAUUSD trades entered during Morning `06:00-11:59` or Afternoon `12:00-15:59`; keep execution unchanged while collecting more sample.
+  - Shadow-only result at generation time: would-keep subset had 57 closed trades, 47.37% win rate, +279.86 AED closed PnL, PF 1.55; would-block subset had 59 closed trades, 27.12% win rate, -415.24 AED closed PnL. Shadow delta versus baseline: +415.24 AED. This is retrospective analysis only and does not authorize router/session-filter enforcement.
 - 2026-06-02 Phase 2 owner/VPS readiness package:
   - Tracked owner handoff package added at `xau-usd\xauusd-phase1\docs\PHASE2_OWNER_VPS_READINESS_PACKAGE.md`.
   - `PHASE2_OWNER_APPROVAL_DRAFT.md` now reflects current closed Phase 1 gates: Phase 1 acceptance PASS, Phase 1 review index PASS, and Phase 1 observer parity PASS.
