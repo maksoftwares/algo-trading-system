@@ -24,7 +24,7 @@ Last updated: 2026-06-04
 - Prefer generated manifests, snapshots, and hashable artifacts over informal notes.
 - Always keep the root `status.html` dashboard up to date. After any status-affecting Phase 0, Phase 1, soak, cost, report, or candidate change, regenerate it directly or through `run_phase1_periodic_checks.py` before committing or pushing.
 - Do not push unless explicitly asked.
-- Experimental demo trade reviews must use direct MT5 history from `C:\Program Files\MetaTrader 5\terminal64.exe` / `1025742 Capital.ComMena-Demo` when judging broker trades. The dashboard actual-trades section now defaults to the configured full history window from `2026-06-01 00:00:00`, not just a single focus date.
+- Experimental demo trade reviews normally use direct broker history from the `1025742 Capital.ComMena-Demo` terminal when judging broker trades, but a no-runtime-touch instruction overrides that: use only committed repo CSV/report artifacts, do not query terminal history, and do not touch demo-running EAs. The dashboard actual-trades section defaults to the configured full history window from `2026-06-01 00:00:00`, not just a single focus date.
 
 ## Current Research Goal
 
@@ -50,6 +50,13 @@ Last updated: 2026-06-04
 
 ## Current State
 
+- 2026-06-04 no-runtime-touch demo loss review:
+  - Repo-only verdict: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_REVIEW_VERDICT_2026_06_04.md`; status `EXPERIMENTAL_LOSS_PATTERN_FOUND`.
+  - Shadow forward-test plan: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FORWARD_TEST_PLAN_2026_06_04.md`; status `SHADOW_FORWARD_TEST_PLAN_ONLY`.
+  - Duplicate-family analysis: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_DUPLICATE_FAMILY_ANALYSIS_2026_06_04.md`; status `DUPLICATE_FAMILY_RISK_FOUND`.
+  - No-runtime checklist: `xau-usd\xauusd-phase1\docs\NO_RUNTIME_TOUCH_CHECKLIST_2026_06_04.md`; confirms no terminal restart/open, no chart attach/detach, no EA input change, no compile/deploy/copy, no MQL5 source change, no kill-switch touch, no order/position change, no terminal bridge script, no runtime folder write, and current demo EAs left untouched.
+  - Future-only runtime change note: `xau-usd\xauusd-phase1\docs\FUTURE_EXPERIMENTAL_DEMO_RUNTIME_CHANGE_REQUESTS.md`; status `FUTURE_OWNER_DECISION_REQUIRED`.
+  - The shadow filter remains measurement-only, the same-family guard is not implemented, canonical Phase 2 remains `BLOCKED_BY_MEASURED_COST`, and the breakout-retest family remains `COST_SUSPENDED_CANONICAL`.
 - 2026-06-04 direct-MT5 loss case study:
   - New repeatable generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_demo_loss_case_study.py`.
   - Latest direct-MT5 source: `C:\Program Files\MetaTrader 5\terminal64.exe`, account `1025742 / Capital.ComMena-Demo / AED`, history start `2026-06-01 00:00:00`.
@@ -183,7 +190,7 @@ Last updated: 2026-06-04
   - Multisymbol summaries: 3.
   - Adversarial packets: 3.
   - Aggregation files: 3.
-- Latest verdict: `breakout_retest` has a full final PASS and is the only approved future expert.
+- Latest historical Phase 0 verdict: `breakout_retest` has a full final PASS, but current lifecycle is `COST_SUSPENDED_CANONICAL` and execution eligibility is `BLOCKED`.
   - `breakout_retest` passed automated 9-cell, decile, multisymbol, hash, and Gate 9 manual adversarial gates.
   - `trend_pullback` and `range_mr` are rejected by the current Phase 0 verdict.
 - Audit correction: the previous real-data run is exploratory evidence only because the registered hypothesis files still contained placeholder text when the run was produced.
@@ -298,7 +305,7 @@ Last updated: 2026-06-04
 - Compression retest continuation hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_compression_retest_continuation_v0.md`.
 - Compression retest continuation matrix summary: `xau-usd\xauusd-phase0\docs\COMPRESSION_RETEST_CONTINUATION_V0_FIRST_PASS.md`.
 - Latest compression retest continuation result-producing run status: rejected. Real 9-cell matrix produced 0 trades in every cell, so do not proceed to deciles or tune v0.
-- Original 10-candidate research bench status: 1 approved future expert (`breakout_retest`) and 9 rejected v0 candidates.
+- Original 10-candidate research bench status: 1 historical Phase-0-passed candidate (`breakout_retest`, currently `COST_SUSPENDED_CANONICAL` / execution `BLOCKED`) and 9 rejected v0 candidates.
 - Extended bench candidate `asia_range_london_breakout_v0` is REJECTED_FIRST_PASS.
 - Asia range London breakout hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_asia_range_london_breakout_v0.md`.
 - Asia range London breakout matrix summary: `xau-usd\xauusd-phase0\docs\ASIA_RANGE_LONDON_BREAKOUT_V0_FIRST_PASS.md`.
@@ -326,7 +333,7 @@ Last updated: 2026-06-04
 - Extended bench candidate `swing_breakout_retest_v0` is `APPROVED_FUTURE_EXPERT_CANDIDATE`.
 - Swing breakout-retest hypothesis file: `xau-usd\xauusd-phase0\docs\hypothesis_swing_breakout_retest_v0.md`.
 - Swing breakout-retest matrix summary: `xau-usd\xauusd-phase0\docs\SWING_BREAKOUT_RETEST_V0_FIRST_PASS.md`.
-- Latest swing breakout-retest result-producing run status: approved future expert candidate, but same-family with `breakout_retest`. Real 9-cell matrix produced 6,281-6,600 trades per cell, 7/9 cells reached PF >= 1.30, deciles passed 10/10 with median PF 1.450, multisymbol passed with EURUSD PF 1.375 and USDJPY PF 1.668, intrabar ambiguity was 342/57,897 trades (0.59%), and Gate 9 scored PASS with 120/120 reviewed losses and 0 logic gaps.
+- Latest swing breakout-retest result-producing run status: historical same-family research PASS, but not independent diversification and not execution-eligible while the breakout-retest family remains `COST_SUSPENDED_CANONICAL`. Real 9-cell matrix produced 6,281-6,600 trades per cell, 7/9 cells reached PF >= 1.30, deciles passed 10/10 with median PF 1.450, multisymbol passed with EURUSD PF 1.375 and USDJPY PF 1.668, intrabar ambiguity was 342/57,897 trades (0.59%), and Gate 9 scored PASS with 120/120 reviewed losses and 0 logic gaps.
 - Latest independent candidate `liquidity_sweep_reversal_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 393-482 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Latest independent candidate `daily_pivot_reclaim_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 486-558 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.
 - Latest independent candidate `m15_inside_bar_breakout_v0` was registered, hash-locked, smoke-tested, and rejected first-pass. Real 9-cell matrix produced 727-854 trades per cell, but 0/9 cells reached PF >= 1.30, so do not proceed to deciles or tune v0.

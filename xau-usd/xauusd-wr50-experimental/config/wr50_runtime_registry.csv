@@ -1,0 +1,5 @@
+ea_id,ea_name,version,short_code,magic_start,magic_end,active_magic,experiment_status,symbol,comment_prefix,enabled,live_authorized,canonical_phase2_authorized
+wr50_bev0,WR50_BreakoutEvening_v0,v0,BEV0,930000,930099,930000,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|BEV0,true,false,false
+wr50_bqv0,WR50_BreakoutQuality_v0,v0,BQV0,930100,930199,930100,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|BQV0,true,false,false
+wr50_e1r0,WR50_BreakoutExit1R_v0,v0,E1R0,930200,930299,930200,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|E1R0,true,false,false
+

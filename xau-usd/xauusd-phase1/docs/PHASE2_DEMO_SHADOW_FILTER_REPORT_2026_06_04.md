@@ -6,7 +6,7 @@ This report measures a proposed filter without changing MT5, EA settings, orders
 
 Source terminal: `C:\Program Files\MetaTrader 5\terminal64.exe`
 Account: `1025742 / Capital.ComMena-Demo / AED`
-History window: `2026-06-01 00:00:00` to `2026-06-04 11:03:11`
+History window: `2026-06-01 00:00:00` to `2026-06-04 17:46:50`
 
 ## Shadow Policy
 
@@ -19,34 +19,34 @@ History window: `2026-06-01 00:00:00` to `2026-06-04 11:03:11`
 
 | View | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Baseline duplicate-hidden | 116 | 3 | 43 | 73 | 37.07% | -135.38 | 0.90 | 27.02 | -17.77 |
-| Would keep | 57 | 2 | 27 | 30 | 47.37% | 279.86 | 1.55 | 29.26 | -17.01 |
-| Would block | 59 | 1 | 16 | 43 | 27.12% | -415.24 | 0.47 | 23.23 | -18.30 |
+| Baseline duplicate-hidden | 125 | 2 | 48 | 77 | 38.40% | -56.41 | 0.96 | 27.12 | -17.64 |
+| Would keep | 61 | 2 | 29 | 32 | 47.54% | 318.11 | 1.62 | 28.73 | -16.10 |
+| Would block | 64 | 0 | 19 | 45 | 29.69% | -374.52 | 0.56 | 24.65 | -18.73 |
 
-Shadow delta versus baseline: `415.24 AED`.
+Shadow delta versus baseline: `374.52 AED`.
 
 ## Block Reason Counts
 
 | Reason | Count |
 |---|---:|
-| BLOCK_PROVISIONAL_SESSION_EXTREME_RETEST | 31 |
-| BLOCK_XAUUSD_MORNING_AFTERNOON | 29 |
+| BLOCK_PROVISIONAL_SESSION_EXTREME_RETEST | 32 |
+| BLOCK_XAUUSD_MORNING_AFTERNOON | 32 |
 
 ## Would Keep by EA
 
 | candidate | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| breakout_retest | 29 | 1 | 14 | 15 | 48.28% | 247.07 | 2.78 | 27.56 | -9.25 |
-| swing_breakout_retest_v0 | 2 | 0 | 1 | 1 | 50.00% | 61.95 | 32.45 | 63.92 | -1.97 |
-| symbol_normalized_round_retest_v0 | 26 | 1 | 12 | 14 | 46.15% | -29.16 | 0.92 | 28.37 | -26.40 |
+| breakout_retest | 31 | 2 | 15 | 16 | 48.39% | 281.37 | 2.98 | 28.25 | -8.90 |
+| swing_breakout_retest_v0 | 3 | 0 | 1 | 2 | 33.33% | 60.80 | 20.49 | 63.92 | -1.56 |
+| symbol_normalized_round_retest_v0 | 27 | 0 | 13 | 14 | 48.15% | -24.06 | 0.93 | 26.58 | -26.40 |
 
 ## Would Block by EA
 
 | candidate | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| session_extreme_retest_v0 | 31 | 0 | 10 | 21 | 32.26% | -66.47 | 0.76 | 21.07 | -13.20 |
-| breakout_retest | 8 | 0 | 2 | 6 | 25.00% | -67.14 | 0.44 | 26.58 | -20.05 |
-| symbol_normalized_round_retest_v0 | 20 | 1 | 4 | 16 | 20.00% | -281.63 | 0.28 | 26.94 | -24.34 |
+| session_extreme_retest_v0 | 32 | 0 | 11 | 21 | 34.38% | -28.21 | 0.90 | 22.63 | -13.20 |
+| breakout_retest | 9 | 0 | 3 | 6 | 33.33% | -32.92 | 0.73 | 29.13 | -20.05 |
+| symbol_normalized_round_retest_v0 | 23 | 0 | 5 | 18 | 21.74% | -313.39 | 0.30 | 26.40 | -24.74 |
 
 ## Would Block by Symbol and Time
 
@@ -59,8 +59,8 @@ Shadow delta versus baseline: `415.24 AED`.
 | USDJPY | Afternoon 12:00-15:59 | 3 | 0 | 1 | 2 | 33.33% | -2.58 | 0.40 | 1.72 | -2.15 |
 | EURUSD | Evening 16:00-19:59 | 1 | 0 | 0 | 1 | 0.00% | -3.64 | 0.00 | n/a | -3.64 |
 | XAUUSD | Night 20:00-05:59 | 7 | 0 | 1 | 6 | 14.29% | -64.71 | 0.44 | 50.19 | -19.15 |
-| XAUUSD | Afternoon 12:00-15:59 | 19 | 0 | 4 | 15 | 21.05% | -152.38 | 0.41 | 26.85 | -17.32 |
-| XAUUSD | Morning 06:00-11:59 | 19 | 1 | 5 | 14 | 26.32% | -213.27 | 0.38 | 26.24 | -24.60 |
+| XAUUSD | Afternoon 12:00-15:59 | 21 | 0 | 6 | 15 | 28.57% | -79.90 | 0.69 | 29.98 | -17.32 |
+| XAUUSD | Morning 06:00-11:59 | 22 | 0 | 6 | 16 | 27.27% | -245.03 | 0.39 | 25.90 | -25.03 |
 
 ## Boundary
 

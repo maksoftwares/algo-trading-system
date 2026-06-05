@@ -10,7 +10,7 @@ This package is intentionally passive:
 - no live expert module yet
 - CSV telemetry only
 
-Phase 0 historical validation is closed for the reduced first package, but execution eligibility is blocked while fresh measured-cost revalidation is pending. The breakout-retest family is `COST_REVALIDATION_PENDING`, and `swing_breakout_retest_v0` is approved only as a same-family future expert candidate after Gate 9 closure. This phase remains dry-run only: lifecycle, magic-number planning, router/risk contracts, simulated risk caps, spread gating, dashboard state, startup/shutdown logging, and decision logging.
+Phase 0 historical validation is closed for the reduced first package, but execution eligibility is blocked by confirmed measured-cost evidence. The breakout-retest family is `COST_SUSPENDED_CANONICAL`; same-family variants such as `swing_breakout_retest_v0` and `symbol_normalized_round_retest_v0` are historical/provisional research evidence, not independent diversification and not execution-eligible while the family lock is active. This phase remains dry-run only: lifecycle, magic-number planning, router/risk contracts, simulated risk caps, spread gating, dashboard state, startup/shutdown logging, and decision logging.
 
 ## Scope
 
@@ -30,10 +30,10 @@ Phase 1 dry-run authorization is now satisfied for telemetry only:
 
 - `breakout_retest` Gate 9 is scored as `PASS`.
 - `swing_breakout_retest_v0` Gate 9 is scored as `PASS`, with same-family concentration noted.
-- `swing_breakout_retest_v0` is approved as a same-family future expert candidate, not as independent diversification.
+- `swing_breakout_retest_v0` has historical same-family PASS evidence, but it is not independent diversification and inherits the `COST_SUSPENDED_CANONICAL` execution block.
 - `outputs/reports/PHASE0_VERDICT.md` marks `breakout_retest` as `PASS`.
 - `phase0 verify-real-artifacts` returns `PASS`.
-- `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` remains `PENDING` until `MEASURED_COST_MODEL.md` reaches `PASS` from fresh `tick_fresh=true` spread rows, so no Phase 2 paper-mode implementation is authorized.
+- `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` is `FAIL`, `MEASURED_COST_ASSUMPTION_DELTA.md` is `FAIL`, and the sanity check is `CALCULATION_CONFIRMED`, so no canonical Phase 2 paper-mode implementation is authorized.
 
 The next milestone is clean dry-run infrastructure evidence plus measured-cost audit review, not paper execution.
 
