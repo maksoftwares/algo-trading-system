@@ -115,7 +115,8 @@ def test_phase1_docs_record_gate9_boundary():
 
     assert "Phase 1 dry-run authorization is now satisfied" in text
     assert "Expert modules | Dry-run contracts only" in text
-    assert "`swing_breakout_retest_v0` is approved as a same-family future expert candidate" in text
+    assert "`swing_breakout_retest_v0` has historical same-family PASS evidence" in text
+    assert "inherits the `COST_SUSPENDED_CANONICAL` execution block" in text
 
 
 def test_phase1_spec_keeps_first_build_observation_only():

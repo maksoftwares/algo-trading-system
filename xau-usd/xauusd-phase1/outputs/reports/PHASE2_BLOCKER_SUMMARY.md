@@ -1,7 +1,7 @@
 # Phase 2 Blocker Summary
 
 Overall status: BLOCKED_BY_MEASURED_COST
-Generated at UTC: 2026-06-04T08:03:06Z
+Generated at UTC: 2026-06-05T14:01:04Z
 
 Canonical Phase 2 is blocked because the measured-cost model is PASS but breakout-retest measured-cost revalidation and assumption delta are FAIL.
 

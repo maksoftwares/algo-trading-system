@@ -11,6 +11,8 @@ broker_state_touched: false
 
 This checklist records the boundary for the 2026-06-04 demo loss review task. The task was limited to repo documentation, committed CSV analysis, and safe repo-local validation.
 
+Scope note: this checklist applies to the no-runtime-touch loss-review task only. Later owner-requested MT5 history refreshes are separate reporting actions and must not be used as evidence that this checklist changed runtime behavior.
+
 - [x] No MT5 terminal opened/restarted
 - [x] No chart attached/detached
 - [x] No EA inputs changed

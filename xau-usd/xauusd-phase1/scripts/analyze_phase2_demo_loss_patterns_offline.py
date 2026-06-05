@@ -21,32 +21,26 @@ class OfflineAnalysisOutput:
 
 def analyze_loss_patterns_offline(
     trades_csv: Path,
-    actual_trades_csv: Path | None,
     output_dir: Path,
 ) -> OfflineAnalysisOutput:
     trades_csv = trades_csv.resolve()
-    actual_trades_csv = actual_trades_csv.resolve() if actual_trades_csv else trades_csv
     output_dir = output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    trades = read_csv(trades_csv)
-    actual_rows = read_csv(actual_trades_csv)
+    trades = [normalize_row(row) for row in read_csv(trades_csv)]
     dedup_rows = [row for row in trades if not is_true(row.get("is_duplicate"))]
     shadow_rows = [with_shadow_rule(row) for row in dedup_rows]
     kept_rows = [row for row in shadow_rows if row["shadow_action"] == "KEEP"]
     blocked_rows = [row for row in shadow_rows if row["shadow_action"] == "BLOCK"]
-    duplicate_groups = build_duplicate_groups(actual_rows)
+    duplicate_groups = build_duplicate_groups(trades)
 
     raw_summary = summarize(trades)
     dedup_summary = summarize(dedup_rows)
     kept_summary = summarize(kept_rows)
     blocked_summary = summarize(blocked_rows)
-    duplicate_summary = summarize(actual_rows)
+    duplicate_summary = summarize(trades)
 
-    source_artifacts = [
-        str(trades_csv),
-        str(actual_trades_csv),
-    ]
+    source_artifacts = related_source_artifacts(trades_csv)
     loss_review_path = output_dir / LOSS_REVIEW_VERDICT
     shadow_plan_path = output_dir / SHADOW_FORWARD_TEST_PLAN
     duplicate_analysis_path = output_dir / DUPLICATE_FAMILY_ANALYSIS
@@ -91,6 +85,43 @@ def analyze_loss_patterns_offline(
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def normalize_row(row: dict[str, str]) -> dict[str, str]:
+    normalized = dict(row)
+    normalized.setdefault("time_bucket", time_bucket(normalized.get("entry_time", "")))
+    if not normalized.get("time_bucket"):
+        normalized["time_bucket"] = time_bucket(normalized.get("entry_time", ""))
+    normalized.setdefault("outcome", outcome(normalized))
+    if not normalized.get("outcome"):
+        normalized["outcome"] = outcome(normalized)
+    normalized.setdefault("volume", "n/a")
+    return normalized
+
+
+def time_bucket(entry_time: str) -> str:
+    try:
+        hour = int(entry_time[11:13])
+    except (TypeError, ValueError):
+        return "UNKNOWN"
+    if hour >= 20 or hour < 6:
+        return "Night 20:00-05:59"
+    if hour < 12:
+        return "Morning 06:00-11:59"
+    if hour < 16:
+        return "Afternoon 12:00-15:59"
+    return "Evening 16:00-19:59"
+
+
+def outcome(row: dict[str, str]) -> str:
+    if row.get("state") == "OPEN":
+        return "OPEN"
+    pnl = to_float(row.get("profit_aed"))
+    if pnl > 0.0:
+        return "WIN"
+    if pnl < 0.0:
+        return "LOSS"
+    return "FLAT"
 
 
 def is_true(value: Any) -> bool:
@@ -257,6 +288,25 @@ def source_artifact_list(paths: list[str]) -> str:
     return "\n".join(f"- `{path}`" for path in paths)
 
 
+def related_source_artifacts(trades_csv: Path) -> list[str]:
+    review_dir = trades_csv.parent
+    phase1_docs = review_dir.parents[1] if review_dir.name.startswith("PHASE2_DEMO_ACTUAL_TRADES_REVIEW") else None
+    artifacts = [
+        str(trades_csv),
+    ]
+    if phase1_docs is not None:
+        artifacts.extend(
+            [
+                str(phase1_docs / "PHASE2_DEMO_LOSS_CASE_STUDY_2026_06_04.md"),
+                str(phase1_docs / "PHASE2_DEMO_SHADOW_FILTER_REPORT_2026_06_04.md"),
+                str(review_dir.parent / "PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04.zip"),
+                str(review_dir / "PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv"),
+                str(review_dir / "PHASE2_DEMO_SHADOW_FILTER_TRADES.csv"),
+            ]
+        )
+    return artifacts
+
+
 def render_loss_review_verdict(
     source_artifacts: list[str],
     raw_summary: dict[str, Any],
@@ -267,7 +317,7 @@ def render_loss_review_verdict(
 ) -> str:
     return "\n".join(
         [
-            "# Phase 2 Demo Loss Review Verdict - 2026-06-04",
+            "# Phase 2 Demo Loss Review Verdict - No Runtime Touch",
             "",
             "```text",
             "status: EXPERIMENTAL_LOSS_PATTERN_FOUND",
@@ -284,9 +334,9 @@ def render_loss_review_verdict(
             "",
             "## Boundary",
             "",
-            "This is a repo-only review of already committed CSV artifacts. It is experimental demo evidence only. It does not authorize canonical Phase 2, paper-mode execution, live trading, router changes, chart changes, EA input changes, or any broker-side action.",
+            "This is a repo-only review of already committed CSV artifacts. It is experimental demo evidence only. It does not authorize canonical Phase 2, paper-mode execution, live trading, router/session-filter enforcement, touching currently running demo EAs, chart changes, EA input changes, position/order changes, attached-EA changes, or any broker-side action.",
             "",
-            "The shadow filter is a measurement only. It was not enforced. The current demo-running EAs were not touched by this review task.",
+            "The shadow filter is a measurement only. It was not enforced. MT5, charts, inputs, positions, orders, and attached EAs were not modified by this review task.",
             "",
             "## Source Artifacts",
             "",
@@ -309,6 +359,12 @@ def render_loss_review_verdict(
             "",
             "## Main Loss Drivers",
             "",
+            "1. `symbol_normalized_round_retest_v0` loss concentration.",
+            "2. XAUUSD Morning/Afternoon weakness.",
+            "3. `session_extreme_retest_v0` weakness.",
+            "4. Same-family duplicate/correlated exposure.",
+            "5. Missing spread/slippage/cost_R decomposition in current trade rows.",
+            "",
             "### By Candidate",
             "",
             group_summary(dedup_rows, ["candidate"], reverse=False),
@@ -327,14 +383,20 @@ def render_loss_review_verdict(
             "",
             "## Recommended Future Fixes",
             "",
-            "- Treat `session_extreme_retest_v0` as quarantine-review-only until it has a larger independent sample.",
-            "- Continue measuring a possible XAUUSD morning/afternoon block, but do not enforce it until it survives the forward-test plan.",
-            "- Design a family-level one-event-one-trade guard so same-family variants cannot stack duplicate entries on the same symbol, direction, minute, and volume.",
-            "- Keep same-family candidates under the `COST_SUSPENDED_CANONICAL` lock for canonical Phase 2 until measured-cost revalidation is repaired by new evidence, not by this demo result.",
+            "- Future family-level duplicate guard. Not implemented in this task; requires explicit owner authorization if it affects runtime.",
+            "- Future passive-only demotion for weak variants. Not implemented in this task; requires explicit owner authorization if it affects runtime.",
+            "- Future pre-registered shadow filter forward test. Not implemented in this task; requires explicit owner authorization if it affects runtime.",
+            "- Future enhanced trade ledger fields for spread, slippage, and cost_R decomposition. Not implemented in this task; requires explicit owner authorization if it affects runtime.",
+            "- Future Phase 0R lower-cost independent research. Not implemented in this task; requires explicit owner authorization if it affects runtime.",
             "",
             "## Decision",
             "",
             "`EXPERIMENTAL_LOSS_PATTERN_FOUND`. The review found a plausible selection/timing and same-family duplication problem. The fix remains future-only and owner-reviewed. No runtime change is authorized by this document.",
+            "",
+            "- Keep current demo EAs untouched.",
+            "- Keep shadow filter as measurement only.",
+            "- Do not treat demo PnL as canonical evidence.",
+            "- Continue Phase 0R replacement research.",
             "",
         ]
     )
@@ -489,12 +551,10 @@ def fmt(value: Any, pct: bool = False) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Analyze committed demo trade CSVs without touching runtime state.")
     parser.add_argument("--trades-csv", type=Path, required=True)
-    parser.add_argument("--actual-trades-csv", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     output = analyze_loss_patterns_offline(
         trades_csv=args.trades_csv,
-        actual_trades_csv=args.actual_trades_csv,
         output_dir=args.output_dir,
     )
     print(f"Loss review verdict: {output.loss_review_path}")

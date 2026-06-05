@@ -14,8 +14,12 @@ This is a plan for measurement only. It does not enforce a router/session filter
 
 ## Source Artifacts
 
-- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv`
 - `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_ACTUAL_BROKER_TRADES_DIRECT_MT5_2026_06_04.csv`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_CASE_STUDY_2026_06_04.md`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FILTER_REPORT_2026_06_04.md`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04.zip`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_SHADOW_FILTER_TRADES.csv`
 
 ## Hypothetical Rule Under Test
 
@@ -28,9 +32,9 @@ This is a plan for measurement only. It does not enforce a router/session filter
 
 | View | Total | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | Floating AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Baseline duplicate-hidden | 119 | 116 | 3 | 43 | 73 | 37.07% | -135.38 | 14.10 | 0.90 | 27.02 | -17.77 |
-| Would keep | 59 | 57 | 2 | 27 | 30 | 47.37% | 279.86 | 6.87 | 1.55 | 29.26 | -17.01 |
-| Would block | 60 | 59 | 1 | 16 | 43 | 27.12% | -415.24 | 7.23 | 0.47 | 23.23 | -18.30 |
+| Baseline duplicate-hidden | 119 | 116 | 3 | 43 | 73 | 37.07% | -135.38 | 13.34 | 0.90 | 27.02 | -17.77 |
+| Would keep | 59 | 57 | 2 | 27 | 30 | 47.37% | 279.86 | 6.80 | 1.55 | 29.26 | -17.01 |
+| Would block | 60 | 59 | 1 | 16 | 43 | 27.12% | -415.24 | 6.54 | 0.47 | 23.23 | -18.30 |
 
 Current shadow delta: `415.24 AED` versus the duplicate-hidden baseline.
 

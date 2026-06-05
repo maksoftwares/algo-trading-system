@@ -14,8 +14,12 @@ This analysis is generated from committed CSV artifacts only. It does not read t
 
 ## Source Artifacts
 
-- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv`
 - `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_ACTUAL_BROKER_TRADES_DIRECT_MT5_2026_06_04.csv`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_CASE_STUDY_2026_06_04.md`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FILTER_REPORT_2026_06_04.md`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04.zip`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_LOSS_CASE_STUDY_TRADES_2026_06_04.csv`
+- `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_ACTUAL_TRADES_REVIEW_2026_06_04\PHASE2_DEMO_SHADOW_FILTER_TRADES.csv`
 
 ## Duplicate Definition
 
@@ -26,7 +30,7 @@ A duplicate family is defined as the same entry minute, same symbol, same direct
 | View | Total | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | Floating AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Raw grouped actual trades | 202 | 197 | 5 | 72 | 125 | 36.55% | -299.67 | 25.02 | 0.87 | 28.37 | -18.74 |
-| Duplicate-hidden decision view | 119 | 116 | 3 | 43 | 73 | 37.07% | -135.38 | 14.10 | 0.90 | 27.02 | -17.77 |
+| Duplicate-hidden decision view | 119 | 116 | 3 | 43 | 73 | 37.07% | -135.38 | 13.34 | 0.90 | 27.02 | -17.77 |
 
 - Duplicate groups found: `77`.
 - Duplicate rows beyond the first kept event: `83`.

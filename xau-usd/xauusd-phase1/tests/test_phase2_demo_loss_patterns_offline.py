@@ -33,17 +33,18 @@ def test_offline_analyzer_generates_required_docs_without_runtime_bridge(tmp_pat
     )
     actual_csv.write_text(
         "\n".join(
-            [
-                "entry_time,exit_time,candidate,status,symbol,direction,volume,state,profit_aed,position_ticket,duplicate_key,duplicate_role,is_duplicate",
-                "2026-06-04 18:00:00,2026-06-04 18:30:00,breakout_retest,ACCEPTED,XAUUSD,BUY,0.01,CLOSED,30.00,2,2026-06-04 18:00|XAUUSD|BUY|0.01,kept,false",
-                "2026-06-04 18:00:01,2026-06-04 18:31:00,round_number_retest_v0,PROVISIONAL,XAUUSD,BUY,0.01,CLOSED,28.00,4,2026-06-04 18:00|XAUUSD|BUY|0.01,duplicate,true",
-                "2026-06-04 09:00:00,2026-06-04 09:30:00,breakout_retest,ACCEPTED,XAUUSD,BUY,0.01,CLOSED,-10.00,1,2026-06-04 09:00|XAUUSD|BUY|0.01,unique,false",
-            ]
-        ),
+                [
+                    "entry_time,exit_time,candidate,status,symbol,direction,volume,state,profit_aed,position_ticket,duplicate_key,duplicate_role,is_duplicate",
+                    "2026-06-04 18:00:00,2026-06-04 18:30:00,breakout_retest,ACCEPTED,XAUUSD,BUY,0.01,CLOSED,30.00,2,2026-06-04 18:00|XAUUSD|BUY|0.01,kept,false",
+                    "2026-06-04 18:00:01,2026-06-04 18:31:00,round_number_retest_v0,PROVISIONAL,XAUUSD,BUY,0.01,CLOSED,28.00,4,2026-06-04 18:00|XAUUSD|BUY|0.01,duplicate,true",
+                    "2026-06-04 09:00:00,2026-06-04 09:30:00,breakout_retest,ACCEPTED,XAUUSD,BUY,0.01,CLOSED,-10.00,1,2026-06-04 09:00|XAUUSD|BUY|0.01,unique,false",
+                    "2026-06-04 21:00:00,2026-06-04 21:30:00,session_extreme_retest_v0,PROVISIONAL,EURUSD,SELL,0.01,CLOSED,-4.00,3,2026-06-04 21:00|EURUSD|SELL|0.01,unique,false",
+                ]
+            ),
         encoding="utf-8",
     )
 
-    output = module.analyze_loss_patterns_offline(trades_csv, actual_csv, tmp_path)
+    output = module.analyze_loss_patterns_offline(actual_csv, tmp_path)
 
     loss_review = output.loss_review_path.read_text(encoding="utf-8")
     shadow_plan = output.shadow_plan_path.read_text(encoding="utf-8")
@@ -51,6 +52,8 @@ def test_offline_analyzer_generates_required_docs_without_runtime_bridge(tmp_pat
 
     assert "status: EXPERIMENTAL_LOSS_PATTERN_FOUND" in loss_review
     assert "runtime_change_authorized: false" in loss_review
+    assert "# Phase 2 Demo Loss Review Verdict - No Runtime Touch" in loss_review
+    assert "Missing spread/slippage/cost_R decomposition" in loss_review
     assert "BLOCK_XAUUSD_MORNING_AFTERNOON" in shadow_plan
     assert "BLOCK_PROVISIONAL_SESSION_EXTREME_RETEST" in shadow_plan
     assert "status: DUPLICATE_FAMILY_RISK_FOUND" in duplicate_analysis
