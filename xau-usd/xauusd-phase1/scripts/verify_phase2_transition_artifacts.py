@@ -414,6 +414,11 @@ def _normalize_json(value: Any) -> Any:
 
 def _normalize_text(value: str) -> str:
     normalized = value.replace("\r\n", "\n").replace("\r", "\n").replace("\\", "/")
+    normalized = re.sub(
+        r"Repository commit hash captured: [0-9a-f]{7,40}\.",
+        "Repository commit hash captured: <commit>.",
+        normalized,
+    )
     return re.sub(r"(?:[A-Za-z]:/|/)[^`|\n]*?(xau-usd/)", r"<repo>/\1", normalized)
 
 

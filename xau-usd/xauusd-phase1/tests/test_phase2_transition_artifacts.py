@@ -95,6 +95,22 @@ def test_phase2_transition_artifact_verifier_normalizes_machine_local_markdown_p
     assert module._compare_text("sample.md", committed, generated) == []
 
 
+def test_phase2_transition_artifact_verifier_ignores_generated_commit_hash(tmp_path: Path):
+    module = _load_module()
+    committed = tmp_path / "committed.md"
+    generated = tmp_path / "generated.md"
+    committed.write_text(
+        "Repository commit hash captured: 1111111111111111111111111111111111111111.\n",
+        encoding="utf-8",
+    )
+    generated.write_text(
+        "Repository commit hash captured: 2222222222222222222222222222222222222222.\n",
+        encoding="utf-8",
+    )
+
+    assert module._compare_text("sample.md", committed, generated) == []
+
+
 def test_phase2_transition_artifact_verifier_detects_stale_payload(tmp_path: Path):
     module = _load_module()
     committed = tmp_path / "committed.json"

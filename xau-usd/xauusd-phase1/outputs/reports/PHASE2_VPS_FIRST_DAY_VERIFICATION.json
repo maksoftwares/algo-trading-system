@@ -1,6 +1,6 @@
 {
   "status": "PENDING",
-  "created_at_utc": "2026-06-02T14:08:44.048157Z",
+  "created_at_utc": "2026-06-05T14:04:52.807309Z",
   "phase2_paper_mode_authorized": false,
   "demo_trading_authorized": false,
   "live_trading_authorized": false,
@@ -8,7 +8,7 @@
     {
       "name": "repo_commit_hash",
       "status": "PASS",
-      "evidence": "Repository commit hash captured: 6d2cb4ecc34a11ba1271e516fcce1cf6bdefd79f."
+      "evidence": "Repository commit hash captured: d146a1e7ff05f1a66fa36d183367ecfc3f17dde9."
     },
     {
       "name": "mt5_terminal_path",
