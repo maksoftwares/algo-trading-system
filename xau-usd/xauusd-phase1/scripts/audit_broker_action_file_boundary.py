@@ -21,6 +21,8 @@ BROKER_ACTION_TERMS = (
 )
 EXPERIMENTAL_RELATIVE_PATHS = {
     Path("xau-usd") / "xauusd-phase1" / "mt5" / "Experts" / "Phase2ExperimentalDemoExecutor.mq5",
+    Path("xau-usd") / "xauusd-phase1" / "mt5" / "Experts" / "Phase2WeaknessBreakoutRetestExecutor.mq5",
+    Path("xau-usd") / "xauusd-wr50-experimental" / "mt5" / "Include" / "WR50_OrderExecutor.mqh",
 }
 REQUIRED_EXPERIMENTAL_TOKENS = (
     "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2",
@@ -37,6 +39,41 @@ REQUIRED_EXPERIMENTAL_TOKENS = (
     "InpMaxEstimatedCostR",
     "InpMaxMeasuredSpreadPoints",
     "experimental_demo_executor_order_log",
+)
+WEAKNESS_EXECUTOR_REQUIRED_TOKENS = (
+    "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2",
+    "P2WEAKNESS_BR_V1",
+    "InpExpectedServerMarker",
+    "InpAllowedAccountLoginsCsv",
+    "InpExperimentalAuthorizationToken",
+    "InpCandidateStatus",
+    "InpFamilyLifecycleStatus",
+    "InpKillSwitchFileName",
+    "InpMaxAccountOrdersPerDay",
+    "InpMaxFamilyOpenPositions",
+    "InpDuplicateLockBars",
+    "InpMaxEstimatedCostR",
+    "InpMaxMeasuredSpreadPoints",
+    "Order" + "Send(request, result)",
+    "InpMagicNumber < 930000",
+    "InpMagicNumber >= 931000",
+    "p2weakness_br_v1_order_log",
+)
+WR50_ORDER_EXECUTOR_REQUIRED_TOKENS = (
+    "WR50_ORDER_EXECUTOR_MQH",
+    "WR50_SendPendingOrder",
+    "WR50Signal",
+    "TRADE_ACTION_PENDING",
+    "hard_sl_tp_required",
+    "comment_invalid",
+    "StringFind(comment, \"WR50|\")",
+    "ORDER_TYPE_BUY_STOP",
+    "ORDER_TYPE_SELL_STOP",
+    "ORDER_FILLING_RETURN",
+    "ORDER_TIME_SPECIFIED",
+    "Order" + "Send(request, result)",
+    "TRADE_RETCODE_PLACED",
+    "TRADE_RETCODE_DONE",
 )
 
 
@@ -102,7 +139,13 @@ def _classify_file(repo_root: Path, path: Path) -> BrokerActionFile:
     if not terms:
         return BrokerActionFile(str(rel), "canonical_or_passive_no_broker_action", terms, "PASS", "No broker-action tokens.")
     if rel in EXPERIMENTAL_RELATIVE_PATHS:
-        missing = [token for token in REQUIRED_EXPERIMENTAL_TOKENS if token not in text]
+        if rel.name == "Phase2WeaknessBreakoutRetestExecutor.mq5":
+            required = WEAKNESS_EXECUTOR_REQUIRED_TOKENS
+        elif rel.name == "WR50_OrderExecutor.mqh":
+            required = WR50_ORDER_EXECUTOR_REQUIRED_TOKENS
+        else:
+            required = REQUIRED_EXPERIMENTAL_TOKENS
+        missing = [token for token in required if token not in text]
         status = "PASS" if not missing else "FAIL"
         evidence = "guarded experimental broker-action file" if not missing else "missing guard token(s): " + ", ".join(missing)
         return BrokerActionFile(str(rel), "approved_experimental_quarantined", terms, status, evidence)

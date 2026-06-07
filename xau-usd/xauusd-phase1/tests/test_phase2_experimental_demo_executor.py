@@ -118,6 +118,7 @@ def test_phase1_safety_audit_allowlist_names_only_executor():
 
     assert "ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES" in audit
     assert '"Phase2ExperimentalDemoExecutor.mq5"' in audit
+    assert '"Phase2WeaknessBreakoutRetestExecutor.mq5"' in audit
     assert '"Phase1DryRunShell.mq5"' not in audit
 
 

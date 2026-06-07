@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-06-04
+Last updated: 2026-06-07
 
 ## Workspace
 
@@ -29,6 +29,8 @@ Last updated: 2026-06-04
 ## Current Research Goal
 
 - Active hunt: find a valid independent higher-timeframe EA, especially H1/H4, to reduce cost pressure and diversify beyond the breakout/retest family.
+- Latest BTC research status: BTC still has no approval-worthy EA. `h4_btc_gvz_dual_vol_reversal_v0` is the newest useful BTC clue, but only as `REJECTED_FIRST_PASS_SPARSE_PF_LEAD`: 6/9 PF cells >= 1.30 and 8/9 non-negative cells, but only 10-21 trades per cell, 0/9 trade-count cells, max zero-trade months 11, concentration failure, and Dukascopy failed threshold. `h1_btc_gvz_dual_vol_reversal_v0` lost that lead: 3/9 PF cells, 11-25 trades per cell, 0/9 trade-count cells, negative Pepperstone/Dukascopy. Current worthy inventory: `xau-usd\xauusd-phase0\docs\WORTHY_EA_CANDIDATE_INVENTORY_2026_06_07.md`.
+- Latest Phase 0 research commit: `0654bd9` added the Phase0 BTC research candidate set, first-pass verdict docs, hypotheses, tests, and updated backlog/inventory.
 - Latest Phase 0R lower-cost attempt: `h4_d1_volatility_contraction_expansion_v0` is REJECTED_FIRST_PASS. It was SHA256-locked (`8f53ce44081df552078c49f0a45af18f37e92a4e7035dd88b1816c7a0adcefe9`), passed the 400-point stop measured-cost precheck at P95 cost_R 0.1875, passed synthetic smoke, and produced 75-165 trades per real matrix cell, but 0/9 PF cells reached 1.30 and Dukascopy was negative across costs. Do not tune v0.
 - Latest Phase 0R lower-cost trend attempt: `h4_d1_contraction_trend_continuation_v0` is REJECTED_FIRST_PASS. It was SHA256-locked (`488d318272b23bedb1b5f9706f1371a357be59319bf0c389a83a4bf07d45ecd1`), passed the 425-point stop measured-cost precheck at P95 cost_R 0.1765, passed synthetic smoke, and produced 50-87 trades per real matrix cell, but every cell had PF below 1.0. Do not tune v0.
 - Latest result-producing H4/D1 attempt: `h4_xle_xlu_energy_defensive_rotation_reversal_v0` is REJECTED_FIRST_PASS with 453 total cost-cell trades and 9/9 trade-count cells, but only 3/9 PF cells; all PF-threshold cells were Pepperstone-only while Capital.com/Dukascopy were negative.
@@ -50,6 +52,15 @@ Last updated: 2026-06-04
 
 ## Current State
 
+- 2026-06-06 direct-MT5 weekly/weakness review:
+  - Latest reviewer packet: `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_TRADE_WEAKNESS_REVIEW_2026_06_06.zip`, extracted at `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_TRADE_WEAKNESS_REVIEW_2026_06_06\`.
+  - Review request: `README_REVIEW_REQUEST.md`; asks for diagnosis of winning/losing trade drivers, duplicate/same-family exposure, viable EA-symbol-time buckets, and whether any trade families should be suspended, narrowed, or researched further.
+  - Weekly raw/unique trade views and summary are included in the export. Boundary: experimental demo evidence only; does not override official Phase 2 readiness gates.
+- `P2WEAKNESS_BR_V1` experimental demo package:
+  - Runtime notes: `xau-usd\xauusd-phase1\docs\P2WEAKNESS_BR_V1_RUNTIME_NOTES.md`.
+  - EA source: `xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5`.
+  - Helper scripts: `deploy_phase2_weakness_breakout_executor.py`, `launch_phase2_weakness_breakout_executor.py`, and `setup_phase2_weakness_portable_demo_terminal.py`.
+  - Boundary: separate owner-requested experimental demo only; does not authorize canonical Phase 2, live trading, or modification/replacement of existing running EAs. Same-family duplicate exposure is suppressed against known demo-family magic ranges.
 - 2026-06-04 no-runtime-touch demo loss review:
   - Repo-only verdict: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_REVIEW_VERDICT_2026_06_04.md`; status `EXPERIMENTAL_LOSS_PATTERN_FOUND`.
   - Shadow forward-test plan: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FORWARD_TEST_PLAN_2026_06_04.md`; status `SHADOW_FORWARD_TEST_PLAN_ONLY`.

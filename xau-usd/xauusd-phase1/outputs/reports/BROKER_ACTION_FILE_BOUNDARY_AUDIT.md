@@ -15,6 +15,7 @@ Findings: 0
 | xau-usd\xauusd-phase1\mt5\Experts\Phase1DryRunShell.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1BreakoutRetest.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Dashboard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Execution.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
@@ -29,6 +30,28 @@ Findings: 0
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1ServerTime.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Session.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Types.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Experts\Phase2B_D1CompressionH4Expansion_Observer.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Experts\Phase2B_H4TrendPullbackD1Bias_Observer.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Experts\Phase2B_WeeklyLevelH4Rejection_Observer.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Include\CandidateCostProjection.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Include\CandidateCsvLogger.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Include\CandidateObserverCommon.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Include\CandidateSafetyGuard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase2b-passive-observers\mt5\Include\CandidateSessionClock.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Experts\WR50_BreakoutEvening_v0.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Experts\WR50_BreakoutExit1R_v0.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Experts\WR50_BreakoutQuality_v0.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_AccountGuard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_BreakoutRetestSignal.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_Common.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_FileUtil.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_MagicNumbers.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_OrderExecutor.mqh | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_RiskGuard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_SessionFilter.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_SpreadGuard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_TradeLogger.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-wr50-experimental\mt5\Include\WR50_Types.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 
 ## Packaging Checks
 
