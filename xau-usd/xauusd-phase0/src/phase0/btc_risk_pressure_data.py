@@ -8,7 +8,29 @@ from phase0.config import ConfigError, ProjectConfig
 
 
 EXPERT_NAME = "h1_btc_risk_pressure_gold_followthrough_v0"
-EXPERT_NAMES = ("h1_btc_risk_pressure_gold_followthrough_v0",)
+EXPERT_NAMES = (
+    "h1_btc_risk_pressure_gold_followthrough_v0",
+    "h1_btc_risk_pressure_gold_followthrough_v1",
+    "h1_btc_risk_pressure_gold_followthrough_v2",
+    "h1_btc_risk_pressure_gold_reversal_v0",
+    "h1_btc_gvz_dual_vol_reversal_v0",
+    "h4_btc_failed_trend_gold_reversal_v0",
+    "h4_btc_gvz_dual_vol_reversal_v0",
+    "h4_btc_crash_gold_safe_haven_continuation_v0",
+    "h4_btc_rally_gold_risk_on_continuation_v0",
+    "h4_btc_volatility_compression_gold_expansion_v0",
+    "h4_btc_volatility_regime_gold_breakout_v0",
+    "h4_btc_volatility_regime_gold_pullback_v0",
+    "h4_btc_volatility_regime_gold_reversal_v0",
+    "h4_btc_whipsaw_gold_reversal_v0",
+    "h4_btc_volume_climax_gold_reversal_v0",
+    "h4_gld_btc_vol_flow_reversal_v0",
+    "h1_gld_btc_vol_flow_reversal_v0",
+    "h4_btc_risk_pressure_gold_reversal_v0",
+    "h4_btc_risk_pressure_gold_reversal_v1",
+    "h4_btc_risk_pressure_gold_reversal_v2",
+    "h4_btc_risk_pressure_gold_reversal_v3",
+)
 BTC_RISK_PRESSURE_FRAME_KEY = "btc_risk_pressure"
 BTC_RISK_PRESSURE_REFERENCE_PATH = Path("data/reference/crypto/btc_usd_daily_yahoo_2015_2025.csv")
 

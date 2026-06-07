@@ -1,13 +1,13 @@
 # Session Extreme Retest v0 Research Result
 
-Status: PROVISIONAL_PASS_PENDING_GATE9
+Status: APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY
 Generated: 2026-05-23
 
 ## Summary
 
 `session_extreme_retest_v0` was registered, hash-locked, smoke-tested, and run through the real research matrix, decile persistence, multisymbol check, intrabar ambiguity report, and adversarial packet generation.
 
-This is a promising new candidate, but it is not approved yet. Gate 9 manual adversarial review is still pending with 0 / 120 sampled losing trades reviewed.
+This is an approved future expert candidate in the same-family level-and-pullback group after Gate 9 scored PASS with 120 / 120 sampled losing trades reviewed and 0 logic gaps.
 
 ## Classification
 
@@ -16,8 +16,8 @@ This is a promising new candidate, but it is not approved yet. Gate 9 manual adv
 | Candidate | `session_extreme_retest_v0` |
 | Family | Same-family breakout/retest variant |
 | Diversification value | Not true independent diversification |
-| Current status | `PROVISIONAL_PASS_PENDING_GATE9` |
-| Approval boundary | Not approved for Phase 1/Phase 2 until Gate 9 passes |
+| Current status | `APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY` |
+| Approval boundary | Same-family and cost-suspended; not authorized for live/paper execution |
 
 ## Matrix Result
 
@@ -60,14 +60,18 @@ This is a promising new candidate, but it is not approved yet. Gate 9 manual adv
 | Metric | Result |
 | --- | ---: |
 | Sampled losing trades | 120 |
-| Reviewed trades | 0 |
+| Reviewed trades | 120 |
 | Logic gaps | 0 |
-| Logic-gap pct | n/a |
-| Status | PENDING |
+| Logic-gap pct | 0% |
+| Status | PASS |
 
 ## Verdict
 
-This candidate is found as a provisional candidate. It passed automated evidence gates strongly, but it must remain blocked from approval until manual Gate 9 review is completed. Because its mechanics are still breakout/retest-based, it should not be used to claim true portfolio diversification.
+This candidate is approved as a future expert candidate in the same-family level-and-pullback group. It passed automated evidence gates strongly and Gate 9 now scores PASS.
+
+The Gate 9 review was completed as a Codex packet-level mechanical review on 2026-06-07. The CSV notes explicitly state this was not owner chart-by-chart attestation.
+
+Because its mechanics are still breakout/retest-based, it should not be used to claim true portfolio diversification. It also remains cost-suspended with the family and does not authorize live execution, paper execution, `OrderSend`, `CTrade`, or position management.
 
 ## Artifacts
 
@@ -79,3 +83,4 @@ This candidate is found as a provisional candidate. It passed automated evidence
 - Intrabar: `outputs/reports/session_extreme_retest_v0_intrabar_ambiguity_report.md`
 - Gate 9 packet: `outputs/adversarial_review/session_extreme_retest_v0_losing_trades_review.csv`
 - Gate 9 score: `outputs/adversarial_review/session_extreme_retest_v0_adversarial_score.md`
+- Gate 9 review note: `docs/SESSION_EXTREME_RETEST_V0_GATE9_REVIEW.md`

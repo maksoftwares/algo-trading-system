@@ -12,6 +12,9 @@ EXPERT_NAMES = (
     "h4_vix_risk_off_reversal_v0",
     "h4_vix_risk_off_followthrough_v0",
     "h4_gvz_vix_vol_premium_reversal_v0",
+    "h4_gld_gvz_vol_flow_reversal_v0",
+    "h4_btc_gvz_dual_vol_reversal_v0",
+    "h1_btc_gvz_dual_vol_reversal_v0",
 )
 VIX_FRAME_KEY = "vix_risk"
 VIX_RAW_DIR = Path("data/raw/risk")

@@ -16,6 +16,7 @@ from phase0.fxf_uup_safe_haven_fx_rotation_data import FXF_UUP_SAFE_HAVEN_FX_ROT
 from phase0.fxe_uup_euro_dollar_fx_rotation_data import FXE_UUP_EURO_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.cyb_uup_yuan_dollar_fx_rotation_data import CYB_UUP_YUAN_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.cny_dollar_pressure_data import CNY_DOLLAR_PRESSURE_FRAME_KEY
+from phase0.cot_gold_data import COT_FRAME_KEY
 from phase0.fxa_uup_aussie_dollar_fx_rotation_data import FXA_UUP_AUSSIE_DOLLAR_FX_ROTATION_FRAME_KEY
 from phase0.gc_futures_volume_data import GC_FUTURES_VOLUME_FRAME_KEY
 from phase0.gdx_gld_relative_data import GDX_GLD_RELATIVE_FRAME_KEY
@@ -26,6 +27,7 @@ from phase0.hyg_ief_credit_risk_rotation_data import HYG_IEF_CREDIT_RISK_ROTATIO
 from phase0.inflation_expectations_data import INFLATION_EXPECTATIONS_FRAME_KEY
 from phase0.iwm_spy_size_rotation_data import IWM_SPY_SIZE_ROTATION_FRAME_KEY
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
+from phase0.macro_liquidity_data import MACRO_LIQUIDITY_FRAME_KEY
 from phase0.macro_event_calendar import MACRO_EVENT_FRAME_KEY
 from phase0.move_bond_vol_data import MOVE_BOND_VOL_FRAME_KEY
 from phase0.qqq_spy_growth_rotation_data import QQQ_SPY_GROWTH_ROTATION_FRAME_KEY
@@ -57,6 +59,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _compression_retest_continuation_context()
     if expert == "cot_gold_positioning_reversal_v0":
         return _cot_gold_positioning_reversal_context()
+    if expert == "h4_cot_gc_volume_capitulation_reversal_v0":
+        return _h4_cot_gc_volume_capitulation_reversal_context()
     if expert == "h1_dbc_uup_commodity_dollar_followthrough_v0":
         return _h1_dbc_uup_commodity_dollar_followthrough_context()
     if expert == "h1_dbb_uup_industrial_metals_followthrough_v0":
@@ -69,6 +73,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_credit_spread_stress_momentum_context()
     if expert == "h4_daily_range_extension_reversal_v0":
         return _h4_daily_range_extension_reversal_context()
+    if expert == "h4_daily_range_extension_continuation_v0":
+        return _h4_daily_range_extension_continuation_context()
     if expert == "h1_credit_spread_shock_reversal_v0":
         return _h1_credit_spread_shock_reversal_context()
     if expert == "h1_credit_spread_shock_followthrough_v0":
@@ -77,6 +83,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _d1_compression_h4_expansion_context()
     if expert == "d1_inside_day_breakout_v0":
         return _d1_inside_day_breakout_context()
+    if expert == "d1_macro_liquidity_regime_v0":
+        return _d1_macro_liquidity_regime_context()
     if expert == "d1_momentum_h4_pullback_v0":
         return _d1_momentum_h4_pullback_context()
     if expert == "d1_multi_day_exhaustion_reversion_v0":
@@ -119,6 +127,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_gvz_vix_vol_premium_followthrough_context()
     if expert == "h4_gvz_vix_vol_premium_reversal_v0":
         return _h4_gvz_vix_vol_premium_reversal_context()
+    if expert == "h4_weekly_level_rejection_v0":
+        return _h4_weekly_level_rejection_context()
     if expert == "h1_gvz_realized_vol_spread_reversal_v0":
         return _h1_gvz_realized_vol_spread_reversal_context()
     if expert == "h1_gvz_realized_vol_spread_followthrough_v0":
@@ -187,6 +197,8 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_uso_uup_oil_dollar_followthrough_context()
     if expert == "h1_volatility_squeeze_breakout_v0":
         return _h1_volatility_squeeze_breakout_context()
+    if expert == "h1_volatility_expansion_pullback_continuation_v0":
+        return _h1_volatility_expansion_pullback_continuation_context()
     if expert == "h1_walk_forward_linear_state_v0":
         return _h1_walk_forward_linear_state_context()
     if expert == "h1_audjpy_usdjpy_fx_carry_rotation_followthrough_v0":
@@ -221,6 +233,42 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_broker_fx_usd_pressure_conflict_reversion_context()
     if expert == "h1_btc_risk_pressure_gold_followthrough_v0":
         return _h1_btc_risk_pressure_gold_followthrough_context()
+    if expert == "h1_btc_risk_pressure_gold_followthrough_v1":
+        return _h1_btc_risk_pressure_gold_followthrough_v1_context()
+    if expert == "h1_btc_risk_pressure_gold_followthrough_v2":
+        return _h1_btc_risk_pressure_gold_followthrough_v2_context()
+    if expert == "h1_btc_risk_pressure_gold_reversal_v0":
+        return _h1_btc_risk_pressure_gold_reversal_context()
+    if expert == "h1_btc_gvz_dual_vol_reversal_v0":
+        return _h1_btc_gvz_dual_vol_reversal_context()
+    if expert == "h4_btc_failed_trend_gold_reversal_v0":
+        return _h4_btc_failed_trend_gold_reversal_context()
+    if expert == "h4_btc_gvz_dual_vol_reversal_v0":
+        return _h4_btc_gvz_dual_vol_reversal_context()
+    if expert == "h4_btc_crash_gold_safe_haven_continuation_v0":
+        return _h4_btc_crash_gold_safe_haven_continuation_context()
+    if expert == "h4_btc_rally_gold_risk_on_continuation_v0":
+        return _h4_btc_rally_gold_risk_on_continuation_context()
+    if expert == "h4_btc_volatility_compression_gold_expansion_v0":
+        return _h4_btc_volatility_compression_gold_expansion_context()
+    if expert == "h4_btc_volatility_regime_gold_breakout_v0":
+        return _h4_btc_volatility_regime_gold_breakout_context()
+    if expert == "h4_btc_volatility_regime_gold_pullback_v0":
+        return _h4_btc_volatility_regime_gold_pullback_context()
+    if expert == "h4_btc_volatility_regime_gold_reversal_v0":
+        return _h4_btc_volatility_regime_gold_reversal_context()
+    if expert == "h4_btc_whipsaw_gold_reversal_v0":
+        return _h4_btc_whipsaw_gold_reversal_context()
+    if expert == "h4_btc_volume_climax_gold_reversal_v0":
+        return _h4_btc_volume_climax_gold_reversal_context()
+    if expert == "h4_btc_risk_pressure_gold_reversal_v0":
+        return _h4_btc_risk_pressure_gold_reversal_context()
+    if expert == "h4_btc_risk_pressure_gold_reversal_v1":
+        return _h4_btc_risk_pressure_gold_reversal_context()
+    if expert == "h4_btc_risk_pressure_gold_reversal_v2":
+        return _h4_btc_risk_pressure_gold_reversal_context()
+    if expert == "h4_btc_risk_pressure_gold_reversal_v3":
+        return _h4_btc_risk_pressure_gold_reversal_context()
     if expert == "h4_cme_cvol_skew_reversal_v0":
         return _h4_cme_cvol_skew_reversal_context()
     if expert == "h1_qqq_spy_growth_risk_rotation_followthrough_v0":
@@ -269,6 +317,14 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_gld_etf_flow_reversal_context()
     if expert == "h4_gld_etf_flow_reversal_v2":
         return _h4_gld_etf_flow_reversal_context()
+    if expert == "h4_gld_etf_flow_reversal_v3":
+        return _h4_gld_etf_flow_reversal_context()
+    if expert == "h4_gld_gvz_vol_flow_reversal_v0":
+        return _h4_gld_gvz_vol_flow_reversal_context()
+    if expert == "h4_gld_btc_vol_flow_reversal_v0":
+        return _h4_gld_btc_vol_flow_reversal_context()
+    if expert == "h1_gld_btc_vol_flow_reversal_v0":
+        return _h1_gld_btc_vol_flow_reversal_context()
     if expert == "h1_gld_flow_momentum_pullback_v0":
         return _h1_gld_flow_momentum_pullback_context()
     if expert == "h1_gld_flow_stress_followthrough_v0":
@@ -287,6 +343,16 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_macro_composite_risk_state_context()
     if expert == "h4_macro_composite_risk_state_v1":
         return _h4_macro_composite_risk_state_context()
+    if expert == "h4_macro_pullback_reclaim_v0":
+        return _h4_macro_momentum_confluence_context()
+    if expert == "h4_macro_momentum_confluence_v0":
+        return _h4_macro_momentum_confluence_context()
+    if expert == "h4_macro_momentum_confluence_v1":
+        return _h4_macro_momentum_confluence_context()
+    if expert == "h4_macro_momentum_confluence_v2":
+        return _h4_macro_momentum_confluence_context()
+    if expert == "h4_macro_pause_continuation_v0":
+        return _h4_macro_pause_continuation_context()
     if expert == "h4_policy_uncertainty_safe_haven_v0":
         return _h4_policy_uncertainty_safe_haven_context()
     if expert == "h4_real_yield_proxy_momentum_v0":
@@ -983,6 +1049,164 @@ def _d1_compression_h4_expansion_context() -> dict:
             "high": [102.4] * 680,
             "low": [101.2] * 680,
             "close": [101.8] * 680,
+        }
+    )
+    return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _d1_macro_liquidity_regime_context() -> dict:
+    macro_dates = pd.date_range("2021-01-01", periods=900, freq="1D", tz="UTC")
+    fed_assets: list[float] = []
+    dollar_index: list[float] = []
+    fed_current = 7_000_000.0
+    dollar_current = 106.0
+    for index in range(900):
+        if index < 700:
+            fed_current *= 1.00005 if index % 2 else 0.99998
+            dollar_current *= 1.00004 if index % 3 else 0.99995
+        else:
+            fed_current *= 1.00055
+            dollar_current *= 0.99935
+        fed_assets.append(fed_current)
+        dollar_index.append(dollar_current)
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": macro_dates,
+            "fed_total_assets": fed_assets,
+            "dollar_index_broad": dollar_index,
+        }
+    )
+
+    d1_times = pd.date_range(macro_dates[700], periods=150, freq="1D")
+    d1_returns = [0.00015 if index % 3 else -0.00005 for index in range(150)]
+    d1_close = _price_path(2000.0, d1_returns)
+    d1 = _ohlc_from_closes(d1_times, d1_close, "capital_com", "XAUUSD", "D1")
+    _widen_ohlc_ranges(d1, 7.5)
+
+    h4_periods = 260
+    signal_index = 190
+    h4_times = pd.date_range(macro_dates[785], periods=h4_periods, freq="4h")
+    h4_returns = [0.00005 if index % 3 else -0.00002 for index in range(h4_periods)]
+    h4_close = _price_path(2020.0, h4_returns)
+    h4 = _ohlc_from_closes(h4_times, h4_close, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 4.2)
+    h4.loc[signal_index - 2, ["open", "high", "low", "close"]] = [2018.0, 2020.0, 2014.0, 2015.5]
+    h4.loc[signal_index - 1, ["open", "high", "low", "close"]] = [2015.5, 2018.0, 2012.5, 2014.0]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2014.0, 2024.5, 2010.0, 2022.5]
+
+    last_close = float(h4["close"].iloc[-1])
+    h1_times = pd.date_range(h4_times[-1] + pd.Timedelta(hours=1), periods=1040, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "open": [last_close] * 1040,
+            "high": [last_close + 3.0] * 1040,
+            "low": [last_close - 3.0] * 1040,
+            "close": [last_close] * 1040,
+        }
+    )
+    m15_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=15), periods=4160, freq="15min")
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "open": [last_close] * 4160,
+            "high": [last_close + 3.0] * 4160,
+            "low": [last_close - 3.0] * 4160,
+            "close": [last_close] * 4160,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=12000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 12000,
+            "high": [last_close + 3.0] * 12000,
+            "low": [last_close - 3.0] * 12000,
+            "close": [last_close] * 12000,
+            "mid_open": [last_close] * 12000,
+            "mid_close": [last_close] * 12000,
+            "bid_open": [last_close - 0.1] * 12000,
+            "ask_open": [last_close + 0.1] * 12000,
+            "bid_close": [last_close - 0.1] * 12000,
+            "ask_close": [last_close + 0.1] * 12000,
+        }
+    )
+    return {
+        "M5": m5,
+        "M15": m15,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        MACRO_LIQUIDITY_FRAME_KEY: macro,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_weekly_level_rejection_context() -> dict:
+    d1_times = pd.date_range("2024-01-01T00:00:00Z", periods=110, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [2025.0] * 110,
+            "high": [2050.0] * 110,
+            "low": [2000.0] * 110,
+            "close": [2024.0] * 110,
+        }
+    )
+
+    h4_periods = 130
+    signal_index = 85
+    h4_times = pd.date_range("2024-03-18T00:00:00Z", periods=h4_periods, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [2030.0] * h4_periods,
+            "high": [2034.0] * h4_periods,
+            "low": [2026.0] * h4_periods,
+            "close": [2030.0] * h4_periods,
+        }
+    )
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2056.0, 2060.0, 2038.0, 2044.0]
+
+    h1_times = pd.date_range("2024-03-18T00:00:00Z", periods=520, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "open": [2044.0] * 520,
+            "high": [2048.0] * 520,
+            "low": [2040.0] * 520,
+            "close": [2044.0] * 520,
+        }
+    )
+    m15_times = pd.date_range("2024-03-18T00:15:00Z", periods=2080, freq="15min")
+    m15 = pd.DataFrame(
+        {
+            "timestamp_utc": m15_times,
+            "open": [2044.0] * 2080,
+            "high": [2048.0] * 2080,
+            "low": [2040.0] * 2080,
+            "close": [2044.0] * 2080,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1600, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [2044.0] * 1600,
+            "high": [2048.0] * 1600,
+            "low": [2040.0] * 1600,
+            "close": [2044.0] * 1600,
+            "mid_open": [2044.0] * 1600,
+            "mid_close": [2044.0] * 1600,
+            "bid_open": [2043.9] * 1600,
+            "ask_open": [2044.1] * 1600,
+            "bid_close": [2043.9] * 1600,
+            "ask_close": [2044.1] * 1600,
         }
     )
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
@@ -5018,6 +5242,818 @@ def _h1_btc_risk_pressure_gold_followthrough_context() -> dict:
     }
 
 
+def _h1_btc_risk_pressure_gold_followthrough_v1_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=560, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(560):
+        if index < 210:
+            current_btc *= 1.0006 if index % 2 else 0.9994
+            btc_volume.append(18_000_000_000.0 + 1_000_000.0 * (index % 7))
+        elif index < 250:
+            current_btc *= 1.0180
+            btc_volume.append(45_000_000_000.0 + 2_500_000.0 * ((index - 210) % 7))
+        elif index < 290:
+            current_btc *= 0.9500
+            btc_volume.append(38_000_000_000.0 + 1_500_000.0 * ((index - 250) % 8))
+        elif index < 330:
+            current_btc *= 0.9900
+            btc_volume.append(30_000_000_000.0 + 800_000.0 * ((index - 290) % 5))
+        elif index < 370:
+            current_btc *= 1.0200
+            btc_volume.append(48_000_000_000.0 + 2_200_000.0 * ((index - 330) % 6))
+        else:
+            current_btc *= 1.0005 if index % 2 else 0.9996
+            btc_volume.append(24_000_000_000.0 + 900_000.0 * (index % 6))
+        btc_close.append(current_btc)
+
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 264
+    h1_times = pd.date_range(dates[330] + pd.Timedelta(hours=8), periods=h1_periods, freq="1h")
+    xau_returns: list[float] = []
+    for index in range(h1_periods):
+        if index < 60:
+            xau_returns.append(0.00018 if index % 4 else -0.00007)
+        elif index < 150:
+            xau_returns.append(-0.0040 if index < signal_index and index % 5 < 3 else -0.0019)
+        elif index < signal_index:
+            xau_returns.append(0.0048 if index == signal_index - 1 else 0.0004)
+        elif index == signal_index:
+            xau_returns.append(-0.0007)
+        elif index < signal_index + 40:
+            xau_returns.append(-0.0015 if index % 3 else -0.0002)
+        elif index < signal_index + 120:
+            xau_returns.append(0.0052)
+        elif index < signal_index + 190:
+            xau_returns.append(0.0002 if index % 2 else -0.0001)
+        else:
+            xau_returns.append(0.00018 if index % 5 else -0.00004)
+
+    xau_close = _price_path(2000.0, xau_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.3)
+
+    # Force a long-friendly continuation structure around the first stress event.
+    h1.loc[signal_index - 2 : signal_index + 6, "close"] -= 1.4
+    h1.loc[signal_index - 2 : signal_index + 6, "open"] -= 1.4
+    h1.loc[signal_index - 2 : signal_index + 6, "high"] = h1.loc[signal_index - 2 : signal_index + 6, "open"] + 0.9
+    h1.loc[signal_index - 2 : signal_index + 6, "low"] = h1.loc[signal_index - 2 : signal_index + 6, "close"] - 0.55
+    h1.loc[signal_index - 14, ["open", "high", "low", "close"]] = [1567.2, 1568.1, 1566.6, 1567.4]
+    h1.loc[signal_index + 95 : signal_index + 110, "close"] += 1.6
+    h1.loc[signal_index + 95 : signal_index + 110, "open"] += 1.6
+    h1.loc[signal_index + 95 : signal_index + 110, "high"] = h1.loc[signal_index + 95 : signal_index + 110, "close"] + 0.9
+    h1.loc[signal_index + 95 : signal_index + 110, "low"] = h1.loc[signal_index + 95 : signal_index + 110, "open"] - 0.55
+
+    last_close = xau_close[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_btc_risk_pressure_gold_followthrough_v2_context() -> dict:
+    # Reuse the BTC profile from v1 but align H1 around the stress window so BTC shocks are visible.
+    dates = pd.date_range("2021-01-01", periods=560, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(560):
+        if index < 210:
+            current_btc *= 1.0006 if index % 2 else 0.9994
+            btc_volume.append(18_000_000_000.0 + 1_000_000.0 * (index % 7))
+        elif index < 250:
+            current_btc *= 1.0180
+            btc_volume.append(45_000_000_000.0 + 2_500_000.0 * ((index - 210) % 7))
+        elif index < 290:
+            current_btc *= 0.9500
+            btc_volume.append(38_000_000_000.0 + 1_500_000.0 * ((index - 250) % 8))
+        elif index < 330:
+            current_btc *= 0.9900
+            btc_volume.append(30_000_000_000.0 + 800_000.0 * ((index - 290) % 5))
+        elif index < 370:
+            current_btc *= 1.0200
+            btc_volume.append(48_000_000_000.0 + 2_200_000.0 * ((index - 330) % 6))
+        else:
+            current_btc *= 1.0005 if index % 2 else 0.9996
+            btc_volume.append(24_000_000_000.0 + 900_000.0 * (index % 6))
+        btc_close.append(current_btc)
+
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 264
+    # Start around first high-volatility BTC region (index 330) so pressure regime is active.
+    h1_times = pd.date_range(dates[330] + pd.Timedelta(hours=8), periods=h1_periods, freq="1h")
+    xau_returns: list[float] = []
+    for index in range(h1_periods):
+        if index < 45:
+            xau_returns.append(0.00024 if index % 4 else -0.00011)
+        elif index < 130:
+            xau_returns.append(-0.0036 if index < signal_index and index % 5 < 3 else -0.0018)
+        elif index < signal_index:
+            xau_returns.append(0.0046 if index == signal_index - 1 else 0.0003)
+        elif index == signal_index:
+            xau_returns.append(-0.0008)
+        elif index < signal_index + 36:
+            xau_returns.append(-0.0012 if index % 3 else -0.0001)
+        elif index < signal_index + 102:
+            xau_returns.append(0.0050)
+        elif index < signal_index + 170:
+            xau_returns.append(0.0002 if index % 2 else -0.0001)
+        else:
+            xau_returns.append(0.00018 if index % 5 else -0.00004)
+
+    xau_close = _price_path(1980.0, xau_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.3)
+
+    # Force a long and a short response around the BTC stress and reversal events.
+    h1.loc[signal_index - 2 : signal_index + 5, "close"] -= 1.5
+    h1.loc[signal_index - 2 : signal_index + 5, "open"] -= 1.5
+    h1.loc[signal_index - 2 : signal_index + 5, "high"] = h1.loc[signal_index - 2 : signal_index + 5, "open"] + 0.9
+    h1.loc[signal_index - 2 : signal_index + 5, "low"] = h1.loc[signal_index - 2 : signal_index + 5, "close"] - 0.55
+    h1.loc[signal_index + 92 : signal_index + 112, "close"] += 1.7
+    h1.loc[signal_index + 92 : signal_index + 112, "open"] += 1.7
+    h1.loc[signal_index + 92 : signal_index + 112, "high"] = h1.loc[signal_index + 92 : signal_index + 112, "close"] + 0.9
+    h1.loc[signal_index + 92 : signal_index + 112, "low"] = h1.loc[signal_index + 92 : signal_index + 112, "open"] - 0.55
+
+    last_close = xau_close[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h1_btc_risk_pressure_gold_reversal_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=560, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(560):
+        if index < 330:
+            current_btc *= 1.0006 if index % 2 else 0.9994
+            btc_volume.append(18_000_000_000.0 + 1_000_000.0 * (index % 7))
+        elif index < 390:
+            current_btc *= 1.0185
+            btc_volume.append(46_000_000_000.0 + 2_000_000.0 * ((index - 330) % 6))
+        else:
+            current_btc *= 1.0004 if index % 2 else 0.9995
+            btc_volume.append(24_000_000_000.0 + 1_000_000.0 * (index % 5))
+        btc_close.append(current_btc)
+
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h1_periods = 420
+    signal_index = 240
+    h1_times = pd.date_range(dates[366] + pd.Timedelta(hours=8), periods=h1_periods, freq="1h")
+    xau_returns: list[float] = []
+    for index in range(h1_periods):
+        if index < signal_index - 18:
+            xau_returns.append(0.0001 if index % 3 else -0.00005)
+        elif index < signal_index:
+            xau_returns.append(-0.00065)
+        elif index == signal_index:
+            xau_returns.append(0.00045)
+        else:
+            xau_returns.append(0.00008 if index % 4 else -0.00003)
+
+    xau_close = _price_path(2000.0, xau_returns)
+    h1 = _ohlc_from_closes(h1_times, xau_close, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.4)
+
+    h1.loc[signal_index, "open"] = h1.loc[signal_index, "close"] - 0.85
+    h1.loc[signal_index, "high"] = h1.loc[signal_index, "close"] + 0.50
+    h1.loc[signal_index, "low"] = h1.loc[signal_index, "open"] - 3.00
+
+    last_close = xau_close[-1]
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close + 0.5] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close + 0.5] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close + 0.4] * 1200,
+            "ask_close": [last_close + 0.6] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_volatility_regime_gold_breakout_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=620, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(620):
+        if index < 470:
+            current_btc *= 1.0004 if index % 2 else 0.9997
+            btc_volume.append(20_000_000_000.0 + 1_000_000.0 * (index % 5))
+        else:
+            current_btc *= 1.045 if index % 2 else 0.955
+            btc_volume.append(44_000_000_000.0 + 3_000_000.0 * (index % 7))
+        btc_close.append(current_btc)
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h4_periods = 280
+    signal_index = 200
+    h4_times = pd.date_range(dates[450] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    xau_returns: list[float] = []
+    for index in range(h4_periods):
+        if index < signal_index - 12:
+            xau_returns.append(0.00005 if index % 4 else -0.00003)
+        elif index < signal_index:
+            xau_returns.append(0.00018)
+        elif index == signal_index:
+            xau_returns.append(0.0040)
+        else:
+            xau_returns.append(0.00008 if index % 3 else -0.00002)
+    xau_close = _price_path(2000.0, xau_returns)
+    h4 = _ohlc_from_closes(h4_times, xau_close, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 4.0)
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2010.0, 2025.0, 2008.5, 2023.5]
+
+    last_close = float(h4["close"].iloc[-1])
+    h1_times = pd.date_range(h4_times[-1] + pd.Timedelta(hours=1), periods=1040, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "open": [last_close] * 1040,
+            "high": [last_close + 3.0] * 1040,
+            "low": [last_close - 3.0] * 1040,
+            "close": [last_close] * 1040,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=12000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 12000,
+            "high": [last_close + 3.0] * 12000,
+            "low": [last_close - 3.0] * 12000,
+            "close": [last_close] * 12000,
+            "mid_open": [last_close] * 12000,
+            "mid_close": [last_close] * 12000,
+            "bid_open": [last_close - 0.1] * 12000,
+            "ask_open": [last_close + 0.1] * 12000,
+            "bid_close": [last_close - 0.1] * 12000,
+            "ask_close": [last_close + 0.1] * 12000,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_volatility_regime_gold_pullback_context() -> dict:
+    context = _h4_btc_volatility_regime_gold_breakout_context()
+    h4 = context["H4"].copy()
+    signal_index = 205
+    for row_index in range(signal_index - 30, signal_index - 8):
+        close = 2000.0 + 0.55 * (row_index - (signal_index - 30))
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close - 0.20,
+            close + 3.20,
+            close - 3.00,
+            close,
+        ]
+    for row_index in range(signal_index - 14, signal_index - 11):
+        close = 2002.5 + 0.20 * (row_index - (signal_index - 14))
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close - 0.15,
+            close + 3.00,
+            close - 3.00,
+            close,
+        ]
+    for offset, close in enumerate([2011.6, 2010.8, 2010.2, 2009.8, 2010.1, 2010.6, 2011.1, 2011.8]):
+        row_index = signal_index - 8 + offset
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close + 0.20,
+            close + 2.80,
+            close - 3.10,
+            close,
+        ]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2011.1, 2017.0, 2008.0, 2013.2]
+    context["H4"] = h4
+    return context
+
+
+def _h4_btc_volatility_compression_gold_expansion_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=620, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(620):
+        if index < 460:
+            current_btc *= 1.018 if index % 2 else 0.982
+            btc_volume.append(34_000_000_000.0 + 2_000_000.0 * (index % 7))
+        elif index < 500:
+            current_btc *= 1.006 if index % 2 else 0.994
+            btc_volume.append(26_000_000_000.0 + 1_000_000.0 * (index % 6))
+        else:
+            current_btc *= 1.00035 if index % 2 else 0.99975
+            btc_volume.append(18_000_000_000.0 + 500_000.0 * (index % 5))
+        btc_close.append(current_btc)
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h4_periods = 280
+    signal_index = 210
+    h4_times = pd.date_range(dates[475] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current_xau = 2000.0
+    for index in range(h4_periods):
+        if index < signal_index - 12:
+            current_xau += 0.18 if index % 4 else -0.05
+        elif index < signal_index:
+            current_xau += 0.20
+        elif index == signal_index:
+            current_xau += 8.50
+        else:
+            current_xau += 0.12 if index % 3 else -0.03
+        closes.append(current_xau)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 4.2)
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2026.0, 2042.0, 2023.0, 2039.0]
+
+    last_close = float(h4["close"].iloc[-1])
+    h1_times = pd.date_range(h4_times[-1] + pd.Timedelta(hours=1), periods=1040, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [last_close] * 1040,
+            "high": [last_close + 2.0] * 1040,
+            "low": [last_close - 2.0] * 1040,
+            "close": [last_close] * 1040,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close - 0.1] * 1200,
+            "ask_close": [last_close + 0.1] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_volatility_regime_gold_reversal_context() -> dict:
+    context = _h4_btc_volatility_regime_gold_breakout_context()
+    h4 = context["H4"].copy()
+    signal_index = 210
+
+    closes = list(pd.to_numeric(h4["close"], errors="coerce"))
+    base = float(closes[signal_index - 8])
+    for offset in range(8):
+        closes[signal_index - 8 + offset] = base - 1.35 * offset
+    closes[signal_index] = closes[signal_index - 1] + 5.40
+    h4 = _ohlc_from_closes(
+        pd.to_datetime(h4["timestamp_utc"], utc=True),
+        closes,
+        "capital_com",
+        "XAUUSD",
+        "H4",
+    )
+    _widen_ohlc_ranges(h4, 4.2)
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2007.0, 2016.0, 2002.0, 2013.0]
+    context["H4"] = h4
+    return context
+
+
+def _h4_btc_whipsaw_gold_reversal_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=620, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(620):
+        if index < 470:
+            current_btc *= 1.0003 if index % 2 else 0.9996
+        else:
+            current_btc *= 1.055 if index % 2 else 0.948
+        btc_close.append(current_btc)
+        btc_volume.append(32_000_000_000.0 + 2_000_000.0 * (index % 9))
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h4_periods = 290
+    signal_index = 215
+    h4_times = pd.date_range(dates[500] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current_xau = 2025.0
+    for index in range(h4_periods):
+        if index < signal_index - 9:
+            current_xau += 0.06 if index % 3 else -0.03
+        elif index < signal_index:
+            current_xau -= 1.05
+        elif index == signal_index:
+            current_xau += 5.50
+        else:
+            current_xau += 0.08 if index % 4 else -0.02
+        closes.append(current_xau)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 4.0)
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2014.0, 2022.0, 2009.0, 2018.0]
+
+    last_close = float(h4["close"].iloc[-1])
+    h1_times = pd.date_range(h4_times[-1] + pd.Timedelta(hours=1), periods=1040, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "open": [last_close] * 1040,
+            "high": [last_close + 3.0] * 1040,
+            "low": [last_close - 3.0] * 1040,
+            "close": [last_close] * 1040,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=12000, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 12000,
+            "high": [last_close + 3.0] * 12000,
+            "low": [last_close - 3.0] * 12000,
+            "close": [last_close] * 12000,
+            "mid_open": [last_close] * 12000,
+            "mid_close": [last_close] * 12000,
+            "bid_open": [last_close - 0.1] * 12000,
+            "ask_open": [last_close + 0.1] * 12000,
+            "bid_close": [last_close - 0.1] * 12000,
+            "ask_close": [last_close + 0.1] * 12000,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_failed_trend_gold_reversal_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=620, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(620):
+        if index < 510:
+            current_btc *= 1.0007 if index % 2 else 0.9996
+        elif index < 530:
+            current_btc *= 1.0120
+        else:
+            current_btc *= 0.9900
+        btc_close.append(current_btc)
+        btc_volume.append(28_000_000_000.0 + 2_000_000.0 * (index % 7))
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h4_periods = 280
+    signal_index = 210
+    h4_times = pd.date_range(dates[500] + pd.Timedelta(hours=4), periods=h4_periods, freq="4h")
+    closes: list[float] = []
+    current_xau = 2020.0
+    for index in range(h4_periods):
+        if index < signal_index - 8:
+            current_xau += 0.08 if index % 3 else -0.04
+        elif index < signal_index:
+            current_xau -= 1.15
+        elif index == signal_index:
+            current_xau += 5.80
+        else:
+            current_xau += 0.08 if index % 4 else -0.02
+        closes.append(current_xau)
+    h4 = _ohlc_from_closes(h4_times, closes, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 4.0)
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2012.0, 2020.0, 2007.0, 2016.0]
+
+    last_close = float(h4["close"].iloc[-1])
+    h1_times = pd.date_range(h4_times[-1] + pd.Timedelta(hours=1), periods=1040, freq="1h")
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": [last_close] * 1040,
+            "high": [last_close + 2.0] * 1040,
+            "low": [last_close - 2.0] * 1040,
+            "close": [last_close] * 1040,
+        }
+    )
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.0] * 1200,
+            "low": [last_close - 2.0] * 1200,
+            "close": [last_close] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close - 0.1] * 1200,
+            "ask_close": [last_close + 0.1] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_volume_climax_gold_reversal_context() -> dict:
+    context = _h4_btc_volatility_regime_gold_breakout_context()
+    h4 = context["H4"].copy()
+    btc = context[BTC_RISK_PRESSURE_FRAME_KEY].copy()
+    signal_index = 200
+    signal_day = pd.Timestamp(h4["timestamp_utc"].iloc[signal_index]).floor("D")
+
+    btc_dates = pd.to_datetime(btc["timestamp_utc"], utc=True)
+    climax_day = signal_day - pd.Timedelta(days=1)
+    matches = btc_dates[btc_dates == climax_day]
+    if not matches.empty:
+        climax_index = int(matches.index[0])
+        btc_close = list(pd.to_numeric(btc["btc_close"], errors="coerce"))
+        btc_volume = list(pd.to_numeric(btc["btc_volume"], errors="coerce"))
+        base_close = float(btc_close[climax_index - 4])
+        btc_close[climax_index - 3] = base_close * 0.990
+        btc_close[climax_index - 2] = base_close * 0.975
+        btc_close[climax_index - 1] = base_close * 0.965
+        btc_close[climax_index] = base_close * 0.955
+        for row_index in range(climax_index - 45, climax_index - 5):
+            if row_index >= 0:
+                btc_volume[row_index] = 18_000_000_000.0 + 1_000_000.0 * (row_index % 5)
+        for row_index in range(climax_index - 4, climax_index + 1):
+            btc_volume[row_index] = 58_000_000_000.0 + 3_000_000.0 * (row_index % 7)
+        btc["btc_close"] = btc_close
+        btc["btc_volume"] = btc_volume
+
+    h4.loc[signal_index - 6, ["open", "high", "low", "close"]] = [2006.0, 2008.0, 2000.0, 2002.0]
+    h4.loc[signal_index - 5, ["open", "high", "low", "close"]] = [2002.0, 2004.0, 1995.0, 1997.0]
+    h4.loc[signal_index - 4, ["open", "high", "low", "close"]] = [1997.0, 1999.0, 1989.0, 1991.0]
+    h4.loc[signal_index - 3, ["open", "high", "low", "close"]] = [1991.0, 1993.0, 1983.0, 1985.0]
+    h4.loc[signal_index - 2, ["open", "high", "low", "close"]] = [1985.0, 1987.0, 1979.0, 1981.0]
+    h4.loc[signal_index - 1, ["open", "high", "low", "close"]] = [1981.0, 1983.0, 1976.0, 1979.0]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [1982.0, 1990.0, 1978.0, 1988.0]
+
+    context["H4"] = h4
+    context[BTC_RISK_PRESSURE_FRAME_KEY] = btc
+    return context
+
+
+def _h4_btc_risk_pressure_gold_reversal_context() -> dict:
+    dates = pd.date_range("2021-01-01", periods=560, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(560):
+        if index < 300:
+            current_btc *= 1.0004 if index % 2 else 0.9995
+            btc_volume.append(20_000_000_000.0 + 1_000_000.0 * (index % 7))
+        elif index < 336:
+            current_btc *= 0.9580
+            btc_volume.append(48_000_000_000.0 + 2_000_000.0 * ((index - 300) % 8))
+        elif index < 380:
+            current_btc *= 1.0020 if index % 2 else 0.9985
+            btc_volume.append(30_000_000_000.0 + 1_000_000.0 * ((index - 336) % 5))
+        elif index < 416:
+            current_btc *= 1.0420
+            btc_volume.append(52_000_000_000.0 + 2_000_000.0 * ((index - 380) % 8))
+        else:
+            current_btc *= 1.0003 if index % 2 else 0.9996
+            btc_volume.append(24_000_000_000.0 + 900_000.0 * (index % 6))
+        btc_close.append(current_btc)
+
+    btc = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+
+    h4_periods = 260
+    signal_index = 174
+    h4_times = pd.date_range(dates[305], periods=h4_periods, freq="4h")
+    h4_returns = [0.0002 if index % 3 else -0.0001 for index in range(h4_periods)]
+    h4_close = _price_path(1930.0, h4_returns)
+    h4 = _ohlc_from_closes(h4_times, h4_close, "capital_com", "XAUUSD", "H4")
+    _widen_ohlc_ranges(h4, 2.8)
+
+    h4.loc[signal_index - 3, ["open", "high", "low", "close"]] = [1965.0, 1968.0, 1962.0, 1966.0]
+    h4.loc[signal_index - 2, ["open", "high", "low", "close"]] = [1966.0, 1973.0, 1964.0, 1971.0]
+    h4.loc[signal_index - 1, ["open", "high", "low", "close"]] = [1971.0, 1979.0, 1969.0, 1977.0]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [1988.0, 1990.0, 1978.0, 1982.0]
+
+    last_close = float(h4["close"].iloc[-1])
+    m5_times = pd.date_range(h4_times[-1] + pd.Timedelta(minutes=5), periods=1200, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 1200,
+            "high": [last_close + 2.5] * 1200,
+            "low": [last_close - 2.5] * 1200,
+            "close": [last_close - 0.4] * 1200,
+            "mid_open": [last_close] * 1200,
+            "mid_close": [last_close - 0.4] * 1200,
+            "bid_open": [last_close - 0.1] * 1200,
+            "ask_open": [last_close + 0.1] * 1200,
+            "bid_close": [last_close - 0.5] * 1200,
+            "ask_close": [last_close - 0.3] * 1200,
+        }
+    )
+    return {
+        "M5": m5,
+        "H4": h4,
+        BTC_RISK_PRESSURE_FRAME_KEY: btc,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
+def _h4_btc_crash_gold_safe_haven_continuation_context() -> dict:
+    context = _h4_btc_risk_pressure_gold_reversal_context()
+    h4 = context["H4"].copy()
+    signal_index = 185
+    for row_index in range(signal_index - 13, signal_index - 3):
+        close = 1958.0 + 0.35 * (row_index - (signal_index - 13))
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close - 0.20,
+            close + 2.00,
+            close - 2.00,
+            close,
+        ]
+    h4.loc[signal_index - 3, ["open", "high", "low", "close"]] = [1958.0, 1961.0, 1955.0, 1959.0]
+    h4.loc[signal_index - 2, ["open", "high", "low", "close"]] = [1959.0, 1966.0, 1958.0, 1964.0]
+    h4.loc[signal_index - 1, ["open", "high", "low", "close"]] = [1964.0, 1970.0, 1962.0, 1968.0]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [1972.0, 1985.0, 1970.0, 1982.0]
+    context["H4"] = h4
+    return context
+
+
+def _h4_btc_rally_gold_risk_on_continuation_context() -> dict:
+    context = _h4_btc_risk_pressure_gold_reversal_context()
+    btc = context[BTC_RISK_PRESSURE_FRAME_KEY].copy()
+    btc_close = list(pd.to_numeric(btc["btc_close"], errors="coerce"))
+    btc_volume = list(pd.to_numeric(btc["btc_volume"], errors="coerce"))
+    for row_index in range(300, 340):
+        btc_close[row_index] = btc_close[row_index - 1] * 1.0420
+        btc_volume[row_index] = 52_000_000_000.0 + 2_000_000.0 * ((row_index - 300) % 8)
+    btc["btc_close"] = btc_close
+    btc["btc_volume"] = btc_volume
+
+    h4 = context["H4"].copy()
+    signal_index = 185
+    for row_index in range(signal_index - 13, signal_index - 3):
+        close = 1964.0 - 0.25 * (row_index - (signal_index - 13))
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close + 0.15,
+            close + 2.00,
+            close - 2.00,
+            close,
+        ]
+    h4.loc[signal_index - 3, ["open", "high", "low", "close"]] = [1961.0, 1963.0, 1958.0, 1960.0]
+    h4.loc[signal_index - 2, ["open", "high", "low", "close"]] = [1960.0, 1961.0, 1954.0, 1956.0]
+    h4.loc[signal_index - 1, ["open", "high", "low", "close"]] = [1956.0, 1958.0, 1950.0, 1953.0]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [1952.0, 1956.0, 1941.0, 1944.0]
+    context["H4"] = h4
+    context[BTC_RISK_PRESSURE_FRAME_KEY] = btc
+    return context
+
+
 def _h1_qqq_spy_growth_risk_rotation_followthrough_context() -> dict:
     dates = pd.bdate_range("2021-01-04", periods=560, tz="UTC")
     qqq_close: list[float] = []
@@ -6264,6 +7300,49 @@ def _h4_macro_composite_risk_state_context() -> dict:
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
+
+
+def _h4_macro_momentum_confluence_context() -> dict:
+    context = _h4_macro_composite_risk_state_context()
+    d1 = context["D1"].copy()
+    d1_closes = [1990.0 + 0.85 * index for index in range(len(d1))]
+    d1["close"] = d1_closes
+    d1["open"] = [value - 0.30 for value in d1_closes]
+    d1["high"] = [value + 1.80 for value in d1_closes]
+    d1["low"] = [value - 1.80 for value in d1_closes]
+
+    h4 = context["H4"].copy()
+    signal_index = 205
+    baseline = 2038.0
+    for row_index in range(signal_index - 60, signal_index - 12):
+        close = baseline + 0.22 * (row_index - (signal_index - 60))
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close - 0.18,
+            close + 1.30,
+            close - 1.10,
+            close,
+        ]
+    for offset, close in enumerate([2047.0, 2046.1, 2045.2, 2044.4, 2043.8, 2044.1]):
+        row_index = signal_index - 6 + offset
+        h4.loc[row_index, ["open", "high", "low", "close"]] = [
+            close + 0.20,
+            close + 1.20,
+            close - 1.60,
+            close,
+        ]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [2044.0, 2048.8, 2042.2, 2048.0]
+
+    context["D1"] = d1
+    context["H4"] = h4
+    return context
+
+
+def _h4_macro_pause_continuation_context() -> dict:
+    context = _h4_macro_momentum_confluence_context()
+    h4 = context["H4"].copy()
+    h4.loc[205, "high"] = 2051.0
+    context["H4"] = h4
+    return context
 
 
 def _h1_macro_composite_pullback_context() -> dict:
@@ -8010,6 +9089,85 @@ def _h4_gvz_vix_vol_premium_reversal_context() -> dict:
     }
 
 
+def _h4_btc_gvz_dual_vol_reversal_context() -> dict:
+    context = _h4_gvz_vix_vol_premium_reversal_context()
+    h4 = context["H4"]
+    signal_time = pd.Timestamp(h4["timestamp_utc"].iloc[210])
+    dates = pd.date_range(signal_time.normalize() - pd.Timedelta(days=760), periods=820, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(len(dates)):
+        if index < 650:
+            current_btc *= 1.0004 if index % 2 else 0.9997
+        elif index < 745:
+            current_btc *= 1.018 if index % 2 else 0.982
+        else:
+            current_btc *= 1.060 if index % 2 else 0.940
+        btc_close.append(current_btc)
+        btc_volume.append(34_000_000_000.0 + 2_000_000.0 * (index % 8))
+    context[BTC_RISK_PRESSURE_FRAME_KEY] = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+    return context
+
+
+def _h1_btc_gvz_dual_vol_reversal_context() -> dict:
+    context = _h1_gvz_vix_vol_premium_reversal_context()
+    h1 = context["H1"].copy()
+    signal_index = 174
+    closes = list(pd.to_numeric(h1["close"], errors="coerce"))
+    base = float(closes[signal_index - 8])
+    for offset in range(8):
+        closes[signal_index - 8 + offset] = base - 0.80 * offset
+    closes[signal_index] = closes[signal_index - 1] + 2.10
+    h1 = _ohlc_from_closes(
+        pd.to_datetime(h1["timestamp_utc"], utc=True),
+        closes,
+        "capital_com",
+        "XAUUSD",
+        "H1",
+    )
+    h1["high"] = h1[["open", "close"]].max(axis=1) + 1.8
+    h1["low"] = h1[["open", "close"]].min(axis=1) - 1.8
+    h1.loc[signal_index, ["open", "high", "low", "close"]] = [
+        closes[signal_index - 1] - 1.45,
+        closes[signal_index - 1] + 0.35,
+        closes[signal_index - 1] - 1.85,
+        closes[signal_index - 1] - 0.25,
+    ]
+    context["H1"] = h1
+
+    signal_time = pd.Timestamp(h1["timestamp_utc"].iloc[signal_index])
+    dates = pd.date_range(signal_time.normalize() - pd.Timedelta(days=760), periods=820, freq="1D", tz="UTC")
+    btc_close: list[float] = []
+    btc_volume: list[float] = []
+    current_btc = 30000.0
+    for index in range(len(dates)):
+        if index < 650:
+            current_btc *= 1.0004 if index % 2 else 0.9997
+        elif index < 745:
+            current_btc *= 1.018 if index % 2 else 0.982
+        else:
+            current_btc *= 1.060 if index % 2 else 0.940
+        btc_close.append(current_btc)
+        btc_volume.append(34_000_000_000.0 + 2_000_000.0 * (index % 8))
+    context[BTC_RISK_PRESSURE_FRAME_KEY] = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "btc_close": btc_close,
+            "btc_volume": btc_volume,
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+    return context
+
+
 def _h1_gvz_realized_vol_spread_reversal_context() -> dict:
     dates = pd.bdate_range("2022-01-03", periods=360, tz="UTC")
     gvz_close: list[float] = []
@@ -8679,6 +9837,122 @@ def _cot_gold_positioning_reversal_context() -> dict:
     }
 
 
+def _h4_cot_gc_volume_capitulation_reversal_context() -> dict:
+    cot_dates = pd.date_range("2020-01-07", periods=240, freq="7D", tz="UTC")
+    open_interest = [420000.0] * len(cot_dates)
+    mm_net: list[float] = []
+    producer_net: list[float] = []
+    for index in range(len(cot_dates)):
+        if index < 168:
+            mm_net.append(0.08 + 0.001 * (index % 20))
+            producer_net.append(-0.08 - 0.001 * (index % 20))
+        else:
+            mm_net.append(-0.26 + 0.0030 * (index - 167))
+            producer_net.append(0.26 - 0.0010 * (index - 167))
+    cot = pd.DataFrame(
+        {
+            "report_date": cot_dates,
+            "market": ["GOLD - COMMODITY EXCHANGE INC."] * len(cot_dates),
+            "cftc_contract_market_code": ["088691"] * len(cot_dates),
+            "open_interest_all": open_interest,
+            "producer_long_all": [165000.0 + max(value, 0) * 420000.0 for value in producer_net],
+            "producer_short_all": [165000.0 + max(-value, 0) * 420000.0 for value in producer_net],
+            "managed_money_long_all": [155000.0 + max(value, 0) * 420000.0 for value in mm_net],
+            "managed_money_short_all": [155000.0 + max(-value, 0) * 420000.0 for value in mm_net],
+        }
+    )
+
+    h4_periods = 340
+    signal_index = 280
+    h4_times = pd.date_range(cot_dates[176] + pd.Timedelta(days=6, hours=4), periods=h4_periods, freq="4h")
+    h4 = pd.DataFrame(
+        {
+            "timestamp_utc": h4_times,
+            "bar_start_utc": h4_times - pd.Timedelta(hours=4),
+            "open": [100.0] * h4_periods,
+            "high": [100.7] * h4_periods,
+            "low": [99.3] * h4_periods,
+            "close": [100.0] * h4_periods,
+        }
+    )
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [97.8, 100.2, 97.0, 99.9]
+
+    m5_periods = h4_periods * 48 + 384
+    m5_times = pd.date_range(h4_times[0] + pd.Timedelta(minutes=5), periods=m5_periods, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [99.9] * m5_periods,
+            "high": [100.4] * m5_periods,
+            "low": [99.4] * m5_periods,
+            "close": [99.9] * m5_periods,
+            "mid_open": [99.9] * m5_periods,
+            "mid_close": [99.9] * m5_periods,
+            "bid_open": [99.8] * m5_periods,
+            "ask_open": [100.0] * m5_periods,
+            "bid_close": [99.8] * m5_periods,
+            "ask_close": [100.0] * m5_periods,
+        }
+    )
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h"),
+            "bar_start_utc": pd.date_range(h4_times[0], periods=h4_periods * 4, freq="1h")
+            - pd.Timedelta(hours=1),
+            "open": [99.9] * (h4_periods * 4),
+            "high": [100.4] * (h4_periods * 4),
+            "low": [99.4] * (h4_periods * 4),
+            "close": [99.9] * (h4_periods * 4),
+        }
+    )
+
+    d1_periods = 100
+    d1_start = h4_times[0].normalize()
+    d1_times = pd.date_range(d1_start, periods=d1_periods, freq="1D")
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [100.0] * d1_periods,
+            "high": [101.0] * d1_periods,
+            "low": [99.0] * d1_periods,
+            "close": [100.0] * d1_periods,
+        }
+    )
+    prior_day = pd.Timestamp(h4_times[signal_index]).normalize() - pd.Timedelta(days=1)
+    prior_index = d1.index[d1["timestamp_utc"] == prior_day][0]
+    d1.loc[prior_index, ["open", "high", "low", "close"]] = [102.0, 104.5, 95.8, 97.6]
+
+    gc_days = 520
+    gc_times = pd.date_range(d1_start - pd.Timedelta(days=360), periods=gc_days, freq="1D")
+    gc_volume = pd.DataFrame(
+        {
+            "timestamp_utc": gc_times,
+            "open": [1800.0] * gc_days,
+            "high": [1810.0] * gc_days,
+            "low": [1790.0] * gc_days,
+            "close": [1800.0] * gc_days,
+            "volume": [120000] * gc_days,
+            "source_symbol": ["GC=F"] * gc_days,
+            "source": ["synthetic"] * gc_days,
+        }
+    )
+    gc_index = gc_volume.index[gc_volume["timestamp_utc"] == prior_day][0]
+    gc_volume.loc[gc_index, ["close", "volume"]] = [1775.0, 460000]
+
+    return {
+        "M5": m5,
+        "H1": h1,
+        "H4": h4,
+        "D1": d1,
+        COT_FRAME_KEY: cot,
+        GC_FUTURES_VOLUME_FRAME_KEY: gc_volume,
+        "symbol": "XAUUSD",
+        "point_size": 0.01,
+    }
+
+
 def _h1_cot_positioning_continuation_context() -> dict:
     cot_dates = pd.date_range("2020-01-07", periods=215, freq="7D", tz="UTC")
     open_interest = [420000.0] * 215
@@ -9101,6 +10375,13 @@ def _h4_daily_range_extension_reversal_context() -> dict:
     return {"M5": m5, "M15": m15, "H1": h1, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
 
 
+def _h4_daily_range_extension_continuation_context() -> dict:
+    context = _h4_daily_range_extension_reversal_context()
+    h4 = context["H4"]
+    h4.loc[40, ["open", "high", "low", "close"]] = [106.7, 109.0, 106.2, 108.6]
+    return context
+
+
 def _h4_gold_futures_volume_climax_context() -> dict:
     h4_periods = 320
     h4_times = pd.date_range("2024-01-01T00:00:00Z", periods=h4_periods, freq="4h")
@@ -9296,6 +10577,133 @@ def _h4_gld_etf_flow_reversal_context() -> dict:
         "symbol": "XAUUSD",
         "point_size": 0.01,
     }
+
+
+def _h4_gld_gvz_vol_flow_reversal_context() -> dict:
+    context = _h4_gld_etf_flow_reversal_context()
+    h4 = context["H4"]
+    signal_index = 261
+    signal_day = pd.Timestamp(h4["timestamp_utc"].iloc[signal_index]).floor("D")
+
+    dates = pd.bdate_range(signal_day - pd.offsets.BDay(540), periods=560, tz="UTC")
+    gvz_close: list[float] = []
+    vix_close: list[float] = []
+    for index in range(len(dates)):
+        if index < 430:
+            gvz_close.append(18.0 + 0.02 * (index % 9))
+            vix_close.append(20.0 + 0.02 * (index % 7))
+        else:
+            step = index - 429
+            gvz_close.append(18.0 + 0.28 * step)
+            vix_close.append(20.0 + 0.03 * step)
+
+    context[GVZ_FRAME_KEY] = pd.DataFrame({"timestamp_utc": dates, "gvz_close": gvz_close})
+    context[VIX_FRAME_KEY] = pd.DataFrame({"timestamp_utc": dates, "vix_close": vix_close})
+    return context
+
+
+def _h4_gld_btc_vol_flow_reversal_context() -> dict:
+    context = _h4_btc_volatility_regime_gold_breakout_context()
+    h4 = context["H4"].copy()
+    signal_index = 261
+    h4.loc[signal_index - 12 : signal_index - 1, ["open", "high", "low", "close"]] = [100.6, 101.0, 99.9, 100.2]
+    h4.loc[signal_index, ["open", "high", "low", "close"]] = [98.0, 100.0, 97.0, 99.7]
+    context["H4"] = h4
+
+    dates = pd.date_range(h4["timestamp_utc"].iloc[0].floor("D") - pd.Timedelta(days=280), periods=360, freq="1D", tz="UTC")
+    close_values: list[float] = []
+    volume_values: list[float] = []
+    current = 180.0
+    stress_day = pd.Timestamp(h4["timestamp_utc"].iloc[signal_index]).floor("D") - pd.Timedelta(days=1)
+    for index, timestamp in enumerate(dates):
+        if timestamp.normalize() == stress_day:
+            current *= 0.990
+            volume_values.append(70_000_000.0)
+        else:
+            current *= 1.0003 if index % 2 else 0.9998
+            volume_values.append(28_000_000.0 + 100_000.0 * (index % 7))
+        close_values.append(current)
+    context[GLD_ETF_FLOW_FRAME_KEY] = pd.DataFrame(
+        {
+            "timestamp_utc": dates,
+            "open": close_values,
+            "high": [value + 0.4 for value in close_values],
+            "low": [value - 0.4 for value in close_values],
+            "close": close_values,
+            "volume": volume_values,
+            "source_symbol": ["GLD"] * len(dates),
+            "source": ["synthetic"] * len(dates),
+        }
+    )
+    return context
+
+
+def _h1_gld_btc_vol_flow_reversal_context() -> dict:
+    context = _h4_gld_btc_vol_flow_reversal_context()
+    h4 = context["H4"]
+    signal_day = pd.Timestamp(h4["timestamp_utc"].iloc[261]).floor("D")
+    h1_periods = 420
+    signal_index = 264
+    h1_times = pd.date_range(signal_day - pd.Timedelta(days=7) + pd.Timedelta(hours=8), periods=h1_periods, freq="1h")
+    closes: list[float] = []
+    current = 100.0
+    for index in range(h1_periods):
+        if index < signal_index - 24:
+            current += 0.01 if index % 3 else -0.02
+        elif index < signal_index:
+            current -= 0.10
+        elif index == signal_index:
+            current += 0.60
+        else:
+            current += 0.02 if index % 4 else -0.01
+        closes.append(current)
+    opens = [closes[0] - 0.03, *closes[:-1]]
+    highs = [max(open_price, close) + 0.16 for open_price, close in zip(opens, closes)]
+    lows = [min(open_price, close) - 0.16 for open_price, close in zip(opens, closes)]
+    opens[signal_index] = closes[signal_index] - 0.28
+    highs[signal_index] = closes[signal_index] + 0.18
+    lows[signal_index] = opens[signal_index] - 0.26
+    h1 = pd.DataFrame(
+        {
+            "timestamp_utc": h1_times,
+            "bar_start_utc": h1_times - pd.Timedelta(hours=1),
+            "open": opens,
+            "high": highs,
+            "low": lows,
+            "close": closes,
+        }
+    )
+    context["H1"] = h1
+    gld_flow = context[GLD_ETF_FLOW_FRAME_KEY].copy()
+    stress_day = pd.Timestamp(h1["timestamp_utc"].iloc[signal_index]).floor("D") - pd.Timedelta(days=1)
+    stress_mask = pd.to_datetime(gld_flow["timestamp_utc"], utc=True).dt.floor("D") == stress_day
+    if stress_mask.any():
+        stress_position = int(gld_flow.index[stress_mask][0])
+        previous_close = float(gld_flow["close"].iloc[max(0, stress_position - 1)])
+        stress_close = previous_close * 0.990
+        gld_flow.loc[stress_mask, ["open", "close", "volume"]] = [previous_close, stress_close, 70_000_000.0]
+        gld_flow.loc[stress_mask, "high"] = previous_close + 0.4
+        gld_flow.loc[stress_mask, "low"] = stress_close - 0.4
+        context[GLD_ETF_FLOW_FRAME_KEY] = gld_flow
+    last_close = float(h1["close"].iloc[-1])
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=12000, freq="5min")
+    context["M5"] = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 12000,
+            "high": [last_close + 0.50] * 12000,
+            "low": [last_close - 0.50] * 12000,
+            "close": [last_close] * 12000,
+            "mid_open": [last_close] * 12000,
+            "mid_close": [last_close] * 12000,
+            "bid_open": [last_close - 0.05] * 12000,
+            "ask_open": [last_close + 0.05] * 12000,
+            "bid_close": [last_close - 0.05] * 12000,
+            "ask_close": [last_close + 0.05] * 12000,
+        }
+    )
+    return context
 
 
 def _h1_gld_flow_momentum_pullback_context() -> dict:
@@ -10977,6 +12385,58 @@ def _h1_volatility_squeeze_breakout_context() -> dict:
             h1.loc[h1.index[index], column] = h1.loc[h1.index[index], "open"]
         for column in ("mid_close", "bid_close", "ask_close"):
             h1.loc[h1.index[index], column] = h1.loc[h1.index[index], "close"]
+
+    last_close = float(h1["close"].iloc[-1])
+    m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": m5_times,
+            "bar_start_utc": m5_times - pd.Timedelta(minutes=5),
+            "open": [last_close] * 180,
+            "high": [last_close + 1.0] * 180,
+            "low": [last_close - 1.0] * 180,
+            "close": [last_close + 0.2] * 180,
+            "mid_open": [last_close] * 180,
+            "mid_close": [last_close + 0.2] * 180,
+            "bid_open": [last_close - 0.1] * 180,
+            "ask_open": [last_close + 0.1] * 180,
+            "bid_close": [last_close + 0.1] * 180,
+            "ask_close": [last_close + 0.3] * 180,
+        }
+    )
+    return {"M5": m5, "H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _h1_volatility_expansion_pullback_continuation_context() -> dict:
+    periods = 380
+    signal_index = 330
+    h1_times = pd.date_range("2024-01-01T01:00:00Z", periods=periods, freq="1h")
+    closes = [2000.0]
+    for index in range(1, periods):
+        if index < 230:
+            change = 0.05 if index % 2 else -0.04
+        elif index < signal_index - 3:
+            change = 0.90 if index % 5 else 0.45
+        elif index < signal_index:
+            change = -0.55
+        elif index == signal_index:
+            change = 0.75
+        else:
+            change = 0.08 if index % 3 else -0.03
+        closes.append(closes[-1] + change)
+
+    h1 = _ohlc_from_closes(h1_times, closes, "capital_com", "XAUUSD", "H1")
+    _widen_ohlc_ranges(h1, 1.2)
+
+    row = h1.index[signal_index]
+    h1.loc[row, "open"] = float(h1.loc[h1.index[signal_index - 1], "close"]) - 0.50
+    h1.loc[row, "close"] = float(h1.loc[row, "open"]) + 0.75
+    h1.loc[row, "high"] = float(h1.loc[row, "close"]) + 0.18
+    h1.loc[row, "low"] = float(h1.loc[row, "open"]) - 0.14
+    for column in ("mid_open", "bid_open", "ask_open"):
+        h1.loc[row, column] = h1.loc[row, "open"]
+    for column in ("mid_close", "bid_close", "ask_close"):
+        h1.loc[row, column] = h1.loc[row, "close"]
 
     last_close = float(h1["close"].iloc[-1])
     m5_times = pd.date_range(h1_times[-1] + pd.Timedelta(minutes=5), periods=180, freq="5min")

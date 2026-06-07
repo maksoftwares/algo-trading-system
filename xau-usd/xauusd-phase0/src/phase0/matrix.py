@@ -160,6 +160,9 @@ from phase0.macro_event_calendar import load_macro_event_calendar_context
 from phase0.macro_real_yield_data import EXPERT_NAMES as MACRO_REAL_YIELD_EXPERT_NAMES
 from phase0.macro_real_yield_data import MACRO_FRAME_KEY
 from phase0.macro_real_yield_data import load_macro_real_yield_context
+from phase0.macro_liquidity_data import EXPERT_NAMES as MACRO_LIQUIDITY_EXPERT_NAMES
+from phase0.macro_liquidity_data import MACRO_LIQUIDITY_FRAME_KEY
+from phase0.macro_liquidity_data import load_macro_liquidity_context
 from phase0.policy_uncertainty_data import EXPERT_NAMES as POLICY_UNCERTAINTY_EXPERT_NAMES
 from phase0.policy_uncertainty_data import POLICY_UNCERTAINTY_FRAME_KEY
 from phase0.policy_uncertainty_data import load_policy_uncertainty_context
@@ -214,6 +217,11 @@ BROKER_FX_PROXY_EXPERT_NAMES = (
 MACRO_COMPOSITE_EXPERT_NAMES = (
     "h4_macro_composite_risk_state_v0",
     "h4_macro_composite_risk_state_v1",
+    "h4_macro_pullback_reclaim_v0",
+    "h4_macro_momentum_confluence_v0",
+    "h4_macro_momentum_confluence_v1",
+    "h4_macro_momentum_confluence_v2",
+    "h4_macro_pause_continuation_v0",
     "h1_macro_composite_pullback_v0",
     "h1_macro_composite_trend_continuation_v0",
     "h1_macro_composite_state_reversion_v0",
@@ -222,6 +230,9 @@ GVZ_VIX_VOL_PREMIUM_EXPERT_NAMES = (
     "h1_gvz_vix_vol_premium_reversal_v0",
     "h1_gvz_vix_vol_premium_followthrough_v0",
     "h4_gvz_vix_vol_premium_reversal_v0",
+    "h4_gld_gvz_vol_flow_reversal_v0",
+    "h4_btc_gvz_dual_vol_reversal_v0",
+    "h1_btc_gvz_dual_vol_reversal_v0",
 )
 
 
@@ -418,6 +429,15 @@ def run_phase0_matrix(
                     data_context = {
                         **data_context,
                         MACRO_FRAME_KEY: load_macro_real_yield_context(
+                            config,
+                            cell.start_utc,
+                            cell.end_utc,
+                        ),
+                    }
+                if expert_name in MACRO_LIQUIDITY_EXPERT_NAMES:
+                    data_context = {
+                        **data_context,
+                        MACRO_LIQUIDITY_FRAME_KEY: load_macro_liquidity_context(
                             config,
                             cell.start_utc,
                             cell.end_utc,

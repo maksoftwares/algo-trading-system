@@ -1,7 +1,7 @@
 # Research Candidate Smoke Report
 
 Status: PASS
-Generated at UTC: 2026-05-23T16:07:44+00:00
+Generated at UTC: 2026-06-07T12:57:48+00:00
 Expert: `session_extreme_retest_v0`
 Hypothesis SHA256: `3c2dc7bfb26462c0b04b86bd035d5e573937195d82ed27b39c7c6213191c84e1`
 

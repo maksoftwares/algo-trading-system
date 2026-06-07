@@ -10,6 +10,7 @@ from phase0.config import ConfigError, ProjectConfig
 EXPERT_NAME = "h4_gold_futures_volume_climax_v0"
 EXPERT_NAMES = (
     "h4_gold_futures_volume_climax_v0",
+    "h4_cot_gc_volume_capitulation_reversal_v0",
     "h1_gc_xau_basis_reversion_v0",
     "h1_gc_momentum_pullback_v0",
 )

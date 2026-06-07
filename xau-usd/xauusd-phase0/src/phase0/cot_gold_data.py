@@ -10,6 +10,7 @@ from phase0.config import ConfigError, ProjectConfig
 EXPERT_NAME = "cot_gold_positioning_reversal_v0"
 EXPERT_NAMES = (
     "cot_gold_positioning_reversal_v0",
+    "h4_cot_gc_volume_capitulation_reversal_v0",
     "h1_cot_positioning_continuation_v0",
 )
 COT_FRAME_KEY = "cot_gold"

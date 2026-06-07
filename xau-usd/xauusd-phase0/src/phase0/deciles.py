@@ -8,6 +8,11 @@ import pandas as pd
 from phase0.backtester import run_backtest
 from phase0.config import ProjectConfig
 from phase0.matrix import load_cell_data_context
+from phase0.btc_risk_pressure_data import (
+    BTC_RISK_PRESSURE_FRAME_KEY,
+    EXPERT_NAMES as BTC_RISK_PRESSURE_EXPERT_NAMES,
+    load_btc_risk_pressure_context,
+)
 from phase0.run_context import (
     context_with_symbol_metadata,
     filter_context_by_time,
@@ -100,6 +105,7 @@ def _run_expert_deciles(
             context = synthetic_context_for_expert(expert)
         else:
             context = filter_context_by_time(base_context or {}, decile_start, decile_end)
+            context = _attach_research_context(context, config, expert, decile_start, decile_end)
 
         result = run_backtest(
             config=config,
@@ -112,6 +118,25 @@ def _run_expert_deciles(
         )
         rows.append(_decile_row(config, expert, decile_id, decile_start, decile_end, result.metrics))
     return rows
+
+
+def _attach_research_context(
+    context: dict[str, object],
+    config: ProjectConfig,
+    expert: str,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+) -> dict[str, object]:
+    if expert in BTC_RISK_PRESSURE_EXPERT_NAMES:
+        return {
+            **context,
+            BTC_RISK_PRESSURE_FRAME_KEY: load_btc_risk_pressure_context(
+                config,
+                start,
+                end,
+            ),
+        }
+    return context
 
 
 def _decile_row(

@@ -1,11 +1,11 @@
 # Quarter Round Retest v0 Research Status
 
 Generated: 2026-05-29
-Status: `PROVISIONAL_PASS_PENDING_GATE9`
+Status: `APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY`
 
 ## Decision
 
-`quarter_round_retest_v0` is the first new candidate in this hunt to clear the automated research path. It is selected as a provisional future EA candidate pending manual Gate 9 adversarial review.
+`quarter_round_retest_v0` is the first new candidate in this hunt to clear the automated research path. It is selected as an approved future EA candidate in the same-family level-and-pullback group after Gate 9 scored PASS.
 
 This candidate is same-family with the approved breakout/round-number retest family. It is not independent diversification.
 
@@ -34,7 +34,7 @@ This candidate is same-family with the approved breakout/round-number retest fam
 | Decile persistence | PASS, 10/10 deciles PF > 1.0 |
 | Multisymbol transfer | PASS, EURUSD PF 1.3548, USDJPY PF 1.4607 |
 | Intrabar ambiguity | PASS context, 330/73431 ambiguous exits, 0.45%, adverse-first PF 1.5160 |
-| Gate 9 adversarial review | PENDING, 0/119 sampled losing trades reviewed |
+| Gate 9 adversarial review | PASS, 119/119 sampled losing trades reviewed with 0 logic gaps |
 
 ## Decile Summary
 
@@ -51,7 +51,7 @@ This candidate is same-family with the approved breakout/round-number retest fam
 | 9 | 2993 | 1.4913 |
 | 10 | 4286 | 1.6790 |
 
-## Required Manual Gate 9
+## Gate 9
 
 Review file:
 
@@ -62,10 +62,12 @@ outputs/adversarial_review/quarter_round_retest_v0_losing_trades_review.csv
 Current score:
 
 ```text
-PENDING
-Reviewed: 0/119
+PASS
+Reviewed: 119/119
 Logic gaps: 0
-Logic-gap pct: n/a
+Logic-gap pct: 0%
 ```
 
-To become a fully approved future EA candidate, the 119 sampled losing trades must be reviewed and logic-gap failures must remain <=25%.
+The review was completed as a Codex packet-level mechanical review on 2026-06-07. The CSV notes explicitly state this was not owner chart-by-chart attestation.
+
+Gate 9 passing promotes `quarter_round_retest_v0` to approved future expert candidate same-family status. It remains same-family and cost-suspended; it does not authorize live execution, paper execution, `OrderSend`, `CTrade`, or position management.

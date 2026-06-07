@@ -4,9 +4,9 @@ Date: 2026-05-23
 
 ## Current Verdict
 
-`round_number_retest_v0` is `PROVISIONAL_PASS_PENDING_GATE9`.
+`round_number_retest_v0` is `APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY`.
 
-It is the first new candidate after `swing_breakout_retest_v0` to pass the 9-cell matrix and decile persistence gates. It is not yet an approved future EA because Gate 9 manual adversarial review is incomplete.
+It is the first new candidate after `swing_breakout_retest_v0` to pass the 9-cell matrix and decile persistence gates. Gate 9 now scores PASS with 120 / 120 sampled losing trades reviewed and 0 logic gaps.
 
 This candidate should be treated as same-family with `breakout_retest` until correlation and paper-mode evidence prove otherwise. It is a different level source, not a different execution premise.
 
@@ -20,7 +20,7 @@ This candidate should be treated as same-family with `breakout_retest` until cor
 | Decile persistence | PF > 1.0 in at least 8 of 10 deciles | 10 of 10 deciles | PASS |
 | Multisymbol consistency | EURUSD and USDJPY PF >= 0.90, or XAU-specific defense | EURUSD 0 trades, USDJPY PF 1.435 | PASS_WITH_XAU_SPECIFIC_NOTE |
 | Intrabar ambiguity | Low material ambiguity under adverse-first | 198 / 47,388 trades, 0.42% | PASS |
-| Gate 9 adversarial review | Logic-gap losses <= 25% | 0 / 120 reviewed, pending | PENDING |
+| Gate 9 adversarial review | Logic-gap losses <= 25% | 120 / 120 reviewed, 0 logic gaps | PASS |
 
 ## Matrix Summary
 
@@ -71,6 +71,8 @@ Adverse-first intrabar ambiguity is low:
 
 ## Decision
 
-Proceed to manual Gate 9 review for `round_number_retest_v0`.
+Gate 9 passed for `round_number_retest_v0`.
 
-Do not add it to Phase 1 dry-run or Phase 2 planning until Gate 9 is scored PASS. If Gate 9 passes, the next status should be `APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY`, not independent diversification.
+The Gate 9 review was completed as a Codex packet-level mechanical review on 2026-06-07. The CSV notes explicitly state this was not owner chart-by-chart attestation.
+
+The candidate is now `APPROVED_FUTURE_EXPERT_CANDIDATE_SAME_FAMILY`, not independent diversification. Do not add it to execution planning while the family remains cost-suspended. It does not authorize live execution, paper execution, `OrderSend`, `CTrade`, or position management.

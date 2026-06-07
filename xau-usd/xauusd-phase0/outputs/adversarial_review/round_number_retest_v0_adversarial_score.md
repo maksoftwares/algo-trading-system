@@ -5,11 +5,11 @@ Review file: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd
 | Metric | Value |
 | --- | --- |
 | Total sampled losing trades | 120 |
-| Reviewed trades | 0 |
+| Reviewed trades | 120 |
 | Logic-gap failures | 0 |
-| Logic-gap failure pct | n/a |
+| Logic-gap failure pct | 0% |
 | Threshold | <= 25.0% |
-| Status | PENDING |
+| Status | PASS |
 
 Allowed manual_failure_class values:
 

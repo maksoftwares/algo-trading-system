@@ -9,6 +9,11 @@ from phase0.backtester import run_backtest
 from phase0.config import ProjectConfig
 from phase0.constants import COMPARISON_SYMBOLS
 from phase0.matrix import load_cell_data_context
+from phase0.btc_risk_pressure_data import (
+    BTC_RISK_PRESSURE_FRAME_KEY,
+    EXPERT_NAMES as BTC_RISK_PRESSURE_EXPERT_NAMES,
+    load_btc_risk_pressure_context,
+)
 from phase0.run_context import (
     context_with_symbol_metadata,
     filter_context_by_time,
@@ -135,6 +140,7 @@ def _run_symbol_check(
                 symbol,
             )
             context = filter_context_by_time(context, start, end)
+        context = _attach_research_context(context, config, expert, start, end)
 
     return run_backtest(
         config=config,
@@ -169,3 +175,18 @@ def _summary_row(
         "avg_trade_R": metrics["avg_trade_R"],
         "verdict": "PASS" if profit_factor >= min_pf else "FAIL",
     }
+
+
+def _attach_research_context(
+    context: dict[str, object],
+    config: ProjectConfig,
+    expert: str,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+) -> dict[str, object]:
+    if expert in BTC_RISK_PRESSURE_EXPERT_NAMES:
+        return {
+            **context,
+            BTC_RISK_PRESSURE_FRAME_KEY: load_btc_risk_pressure_context(config, start, end),
+        }
+    return context
