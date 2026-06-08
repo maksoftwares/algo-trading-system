@@ -1,11 +1,13 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T11:37:00.090234Z",
+  "created_at_utc": "2026-06-08T11:48:36.517473Z",
   "authority": "Phase 2X evidence bundle. Experimental demo evidence only; no canonical Phase 2, live trading, or real capital authorization.",
   "zip_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2X_EVIDENCE_BUNDLE_20260608.zip",
   "included_members": [
     "reports/PHASE2X_DEMO_PREFLIGHT_REPORT.md",
     "reports/PHASE2X_NO_TOUCH_STAGING_REPORT.md",
+    "reports/PHASE2X_DRY_RUN_PROOF_PORTABLE_TERMINAL.md",
+    "reports/PHASE2X_KILL_SWITCH_PROOF_PORTABLE_TERMINAL.md",
     "reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.md",
     "reports/PHASE2X_RUNTIME_RECONCILIATION.md",
     "reports/PHASE2X_RUNTIME_CLEANUP_REPORT.md",

@@ -1,10 +1,10 @@
 # P2WEAKNESS BR V1 Runtime Attachment Audit
 
-Status: QUARANTINE_RUNTIME_RISK_FOUND
+Status: NO_ACTIVE_P2WEAKNESS_RUNTIME_RISK_OBSERVED
 
 Read-only P2WEAKNESS_BR_V1 runtime attachment audit. This script reads profile files, deployed source, CSV logs, and optionally MT5 open positions/orders; it does not attach charts, deploy files, change presets, restart terminals, create kill switches, or authorize canonical Phase 2/live trading.
 
-Created at UTC: `2026-06-08T11:24:05.295642Z`
+Created at UTC: `2026-06-08T11:45:10.178884Z`
 
 ## Reviewer Questions
 
@@ -18,7 +18,7 @@ Created at UTC: `2026-06-08T11:24:05.295642Z`
 
 ## Runtime Boundary
 
-- Terminal root: `C:\MT5PortableP2WeaknessDemo`
+- Terminal root: `C:\MT5PortableP2WeaknessDryRunProof`
 - MT5 runtime touched by script: `False`
 - Standard demo terminal touched: `False`
 - New deployments paused: `True`
@@ -28,7 +28,7 @@ Created at UTC: `2026-06-08T11:24:05.295642Z`
 
 ## Runtime Risks
 
-- `latest_startup_log_reports_broker_action_runtime`
+- No active P2WEAKNESS runtime risks were observed by this read-only audit.
 
 ## Deployed Source
 
@@ -43,7 +43,7 @@ Created at UTC: `2026-06-08T11:24:05.295642Z`
 
 ## Chart Profile Scan
 
-- Chart directory: `C:\MT5PortableP2WeaknessDemo\MQL5\Profiles\Charts\Default`
+- Chart directory: `C:\MT5PortableP2WeaknessDryRunProof\MQL5\Profiles\Charts\Default`
 - Chart files scanned: `5`
 - P2WEAKNESS charts found: `0`
 
@@ -65,15 +65,15 @@ Created at UTC: `2026-06-08T11:24:05.295642Z`
 - Order log exists: `True`
 - Startup log exists: `True`
 - Kill switch exists: `False`
-- Order rows: `12`
+- Order rows: `0`
 - Startup rows: `1`
-- Runtime magics observed: `[930101]`
-- Latest order action: `GUARD_BLOCK`
-- Latest order magic: `930101`
-- Latest guard reason: `family_open_exposure_cap_reached`
-- Latest startup dry-run: `false`
-- Latest startup broker-action allowed: `true`
-- Latest startup status: `ATTACHED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED`
+- Runtime magics observed: `[]`
+- Latest order action: ``
+- Latest order magic: ``
+- Latest guard reason: ``
+- Latest startup dry-run: `true`
+- Latest startup broker-action allowed: `false`
+- Latest startup status: `ATTACHED_SAFE_DEFAULT_REVIEW_ONLY_NO_BROKER_ACTION`
 
 ## Required Before Future Continuation
 

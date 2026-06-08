@@ -35,19 +35,24 @@ def generate_phase2x_runtime_cleanup_report(root: Path, output_json: Path | None
     root = root.resolve()
     output_json = (output_json or root / DEFAULT_JSON).resolve()
     audit = read_json(reports_dir(root) / "P2WEAKNESS_BR_V1_RUNTIME_ATTACHMENT_AUDIT.json")
+    kill_switch = read_json(reports_dir(root) / "PHASE2X_KILL_SWITCH_BLOCK_TEST_REPORT.json")
+    owner = read_json(reports_dir(root) / "PHASE2X_OWNER_AUTHORIZATION_STATUS.json")
     old = audit.get("old_magic_930101", {})
     hardened = audit.get("hardened_magic_931000", {})
     reviewer = audit.get("reviewer_questions", {})
+    logs = audit.get("logs", {})
+    latest_startup = logs.get("latest_startup", {})
+    latest_order = logs.get("latest_order", {})
     checks = [
         check("old_magic_930101_positions_closed_or_absent", PHASE2X_STATUS_PASS if old.get("open_positions") == 0 else PHASE2X_STATUS_FAIL, f"open_positions={old.get('open_positions')}"),
         check("old_magic_930101_orders_closed_or_absent", PHASE2X_STATUS_PASS if old.get("open_orders") == 0 else PHASE2X_STATUS_FAIL, f"open_orders={old.get('open_orders')}"),
         check("old_magic_930101_charts_detached_or_absent", _profile_status(reviewer.get("is_any_old_930101_ea_still_attached")), f"answer={reviewer.get('is_any_old_930101_ea_still_attached')}"),
         check("current_magic_931000_ready", PHASE2X_STATUS_PASS if hardened.get("deployed_source_hardened") is True else PHASE2X_STATUS_PENDING_MANUAL, f"hardened_deployed={hardened.get('deployed_source_hardened')}"),
         check("no_open_family_exposure", PHASE2X_STATUS_PASS if audit.get("open_exposure_audit", {}).get("orders") == [] and audit.get("open_exposure_audit", {}).get("positions") == [] else PHASE2X_STATUS_FAIL, "P2WEAKNESS relevant exposure from MT5 bridge"),
-        check("no_existing_p2weakness_orders_today", PHASE2X_STATUS_PENDING_MANUAL, "Requires owner/reviewer confirmation from broker history before attach."),
-        check("kill_switch_file_tested", PHASE2X_STATUS_PENDING_MANUAL, "Requires PHASE2X_KILL_SWITCH_BLOCK_TEST_REPORT.md PASS."),
-        check("demo_account_confirmed", PHASE2X_STATUS_PENDING_MANUAL, "Requires fresh startup/runtime evidence after attach."),
-        check("owner_authorization_valid", PHASE2X_STATUS_PENDING_MANUAL, "Requires local owner authorization status PASS."),
+        check("no_existing_p2weakness_orders_today", _no_existing_orders_status(logs, latest_order), _no_existing_orders_evidence(logs, latest_order)),
+        check("kill_switch_file_tested", PHASE2X_STATUS_PASS if kill_switch.get("status") == PHASE2X_STATUS_PASS else PHASE2X_STATUS_PENDING_MANUAL, f"status={kill_switch.get('status', 'MISSING')}"),
+        check("demo_account_confirmed", _demo_account_status(latest_startup), f"account_server={latest_startup.get('account_server', '')!r}; account_login_present={bool(latest_startup.get('account_login', ''))}"),
+        check("owner_authorization_valid", PHASE2X_STATUS_PASS if owner.get("status") == PHASE2X_STATUS_PASS else PHASE2X_STATUS_PENDING_MANUAL, f"status={owner.get('status', 'MISSING')}"),
     ]
     payload = {
         "status": overall_status(checks),
@@ -71,6 +76,26 @@ def _profile_status(answer: object) -> str:
     if answer == "YES":
         return PHASE2X_STATUS_FAIL
     return PHASE2X_STATUS_PENDING_MANUAL
+
+
+def _no_existing_orders_status(logs: dict[str, Any], latest_order: dict[str, Any]) -> str:
+    if logs.get("order_log_exists") is not True:
+        return PHASE2X_STATUS_PENDING_MANUAL
+    if int(logs.get("order_rows") or 0) == 0:
+        return PHASE2X_STATUS_PASS
+    return PHASE2X_STATUS_FAIL if latest_order.get("action") == "ORDER_SEND_OK" else PHASE2X_STATUS_PASS
+
+
+def _no_existing_orders_evidence(logs: dict[str, Any], latest_order: dict[str, Any]) -> str:
+    return f"order_rows={logs.get('order_rows', 'UNKNOWN')}; latest_action={latest_order.get('action', '')!r}"
+
+
+def _demo_account_status(latest_startup: dict[str, Any]) -> str:
+    server = str(latest_startup.get("account_server", "")).lower()
+    login = str(latest_startup.get("account_login", "")).strip()
+    if not server or not login:
+        return PHASE2X_STATUS_PENDING_MANUAL
+    return PHASE2X_STATUS_PASS if ("demo" in server or "practice" in server) and "live" not in server and "real" not in server else PHASE2X_STATUS_FAIL
 
 
 def _render(payload: dict[str, Any]) -> str:

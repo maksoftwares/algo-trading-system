@@ -2164,6 +2164,8 @@ def _artifact_links() -> str:
         ("Phase 2X owner authorization template", "xau-usd/xauusd-phase1/docs/PHASE2X_OWNER_AUTHORIZATION_TEMPLATE.md"),
         ("Phase 2X safe defaults", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_SAFE_DEFAULTS_REPORT.md"),
         ("Phase 2X no-touch staging", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_NO_TOUCH_STAGING_REPORT.md"),
+        ("Phase 2X dry-run proof terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DRY_RUN_PROOF_PORTABLE_TERMINAL.md"),
+        ("Phase 2X kill-switch proof terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_KILL_SWITCH_PROOF_PORTABLE_TERMINAL.md"),
         ("Phase 2X demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DEMO_PREFLIGHT_REPORT.md"),
         ("Phase 2X owner authorization status", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.md"),
         ("Phase 2X runtime reconciliation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2X_RUNTIME_RECONCILIATION.md"),

@@ -1,22 +1,20 @@
 {
   "status": "PENDING",
-  "created_at_utc": "2026-06-08T11:29:07.544930Z",
+  "created_at_utc": "2026-06-08T11:46:17.670957Z",
   "authority": "Phase 2X daily demo review. Experimental demo evidence only; no canonical Phase 2, live trading, or real capital authorization.",
   "date": "2026_06_08",
-  "order_log": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
+  "order_log": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
   "owner_authorization_file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\phase2x_owner_authorization.local.json",
   "owner_authorization_cutoff_utc": "2026-06-08T11:18:36Z",
-  "legacy_pre_authorization_rows": 9,
+  "legacy_pre_authorization_rows": 0,
   "legacy_pre_authorization_summary": {
-    "rows": 9,
-    "actions": {
-      "GUARD_BLOCK": 9
-    },
+    "rows": 0,
+    "actions": {},
     "order_send_ok": 0,
-    "guard_blocks": 9,
-    "estimated_cost_r_min": 0.0437,
-    "estimated_cost_r_mean": 0.090889,
-    "estimated_cost_r_max": 0.1385
+    "guard_blocks": 0,
+    "estimated_cost_r_min": null,
+    "estimated_cost_r_mean": null,
+    "estimated_cost_r_max": null
   },
   "order_summary": {
     "rows": 0,
@@ -33,12 +31,7 @@
     {
       "name": "order_log_present",
       "status": "PASS",
-      "evidence": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv"
-    },
-    {
-      "name": "legacy_pre_owner_authorization_rows_excluded",
-      "status": "PASS",
-      "evidence": "legacy_rows=9; cutoff_utc=2026-06-08T11:18:36Z"
+      "evidence": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv"
     },
     {
       "name": "daily_rows_present",

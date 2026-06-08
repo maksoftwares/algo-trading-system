@@ -4,7 +4,7 @@ Overall status: PENDING
 
 Phase 2X daily demo review. Experimental demo evidence only; no canonical Phase 2, live trading, or real capital authorization.
 
-Created at UTC: `2026-06-08T11:29:07.544930Z`
+Created at UTC: `2026-06-08T11:46:17.670957Z`
 
 ## Boundary
 
@@ -15,8 +15,8 @@ Created at UTC: `2026-06-08T11:29:07.544930Z`
 - Phase 2X cannot create same-family diversification claims.
 
 - Owner authorization cutoff UTC: `2026-06-08T11:18:36Z`
-- Legacy pre-authorization rows excluded: `9`
-- Legacy pre-authorization summary: `{'rows': 9, 'actions': {'GUARD_BLOCK': 9}, 'order_send_ok': 0, 'guard_blocks': 9, 'estimated_cost_r_min': 0.0437, 'estimated_cost_r_mean': 0.090889, 'estimated_cost_r_max': 0.1385}`
+- Legacy pre-authorization rows excluded: `0`
+- Legacy pre-authorization summary: `{'rows': 0, 'actions': {}, 'order_send_ok': 0, 'guard_blocks': 0, 'estimated_cost_r_min': None, 'estimated_cost_r_mean': None, 'estimated_cost_r_max': None}`
 - Order summary: `{'rows': 0, 'actions': {}, 'order_send_ok': 0, 'guard_blocks': 0, 'estimated_cost_r_min': None, 'estimated_cost_r_mean': None, 'estimated_cost_r_max': None}`
 - Continue tomorrow: `OWNER REVIEW REQUIRED`
 - Reason: Owner/runtime evidence incomplete or hard-stop condition found.
@@ -25,6 +25,5 @@ Created at UTC: `2026-06-08T11:29:07.544930Z`
 
 | Check | Status | Evidence |
 |---|---|---|
-| order_log_present | PASS | C:\MT5PortableP2WeaknessDemo\MQL5\Files\p2weakness_br_v1_order_log_xauusd.csv |
-| legacy_pre_owner_authorization_rows_excluded | PASS | legacy_rows=9; cutoff_utc=2026-06-08T11:18:36Z |
+| order_log_present | PASS | C:\MT5PortableP2WeaknessDryRunProof\MQL5\Files\p2weakness_br_v1_order_log_xauusd.csv |
 | daily_rows_present | PENDING_RUNTIME_EVIDENCE | No rows for review date. |

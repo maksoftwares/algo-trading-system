@@ -4,7 +4,7 @@ Overall status: PASS
 
 Phase 2X evidence bundle. Experimental demo evidence only; no canonical Phase 2, live trading, or real capital authorization.
 
-Created at UTC: `2026-06-08T11:37:00.090234Z`
+Created at UTC: `2026-06-08T11:48:36.517473Z`
 
 ## Boundary
 
@@ -29,6 +29,8 @@ Created at UTC: `2026-06-08T11:37:00.090234Z`
 
 - `reports/PHASE2X_DEMO_PREFLIGHT_REPORT.md`
 - `reports/PHASE2X_NO_TOUCH_STAGING_REPORT.md`
+- `reports/PHASE2X_DRY_RUN_PROOF_PORTABLE_TERMINAL.md`
+- `reports/PHASE2X_KILL_SWITCH_PROOF_PORTABLE_TERMINAL.md`
 - `reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.md`
 - `reports/PHASE2X_RUNTIME_RECONCILIATION.md`
 - `reports/PHASE2X_RUNTIME_CLEANUP_REPORT.md`

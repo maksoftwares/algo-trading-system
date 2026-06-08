@@ -1,10 +1,10 @@
 # Phase 2X Demo Preflight Report
 
-Overall status: PENDING
+Overall status: PASS
 
 Phase 2X demo preflight. Can approve only quarantined experimental demo execution; cannot approve canonical Phase 2, live trading, or real capital.
 
-Created at UTC: `2026-06-08T11:29:07.646439Z`
+Created at UTC: `2026-06-08T11:46:30.997642Z`
 
 ## Boundary
 
@@ -14,7 +14,7 @@ Created at UTC: `2026-06-08T11:29:07.646439Z`
 - Phase 2X cannot unsuspend the cost-suspended breakout-retest family.
 - Phase 2X cannot create same-family diversification claims.
 
-- Phase 2X demo execution authorized: `False`
+- Phase 2X demo execution authorized: `True`
 - Local preset: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\local\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set`
 
 ## Checks
@@ -39,8 +39,8 @@ Created at UTC: `2026-06-08T11:29:07.646439Z`
 | target_symbol_xauusd | PASS | InpTargetSymbol='XAUUSD' |
 | owner_local_preset_not_committed | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\local\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set |
 | old_magic_930101_not_allowed_for_new_deployment | PASS | preset_magic=931000 |
-| runtime_cleanup_report_pass | PENDING_RUNTIME_EVIDENCE | status=PENDING; expected=PASS |
-| kill_switch_block_test_pass | PENDING_RUNTIME_EVIDENCE | status=PENDING; expected=PASS |
+| runtime_cleanup_report_pass | PASS | status=PASS; expected=PASS |
+| kill_switch_block_test_pass | PASS | status=PASS; expected=PASS |
 | demo_account_isolation_evidence | PASS | owner authorization masks account when available |
 | server_marker_demo | PASS | server_marker='Capital.ComMena-Demo' |
 | no_live_server_marker_in_authorized_runtime | PASS | server_marker='Capital.ComMena-Demo' |

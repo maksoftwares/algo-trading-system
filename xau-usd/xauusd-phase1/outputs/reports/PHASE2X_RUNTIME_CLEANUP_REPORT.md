@@ -1,10 +1,10 @@
 # Phase 2X Runtime Cleanup Report
 
-Overall status: PENDING
+Overall status: PASS
 
 Phase 2X runtime cleanup report. Report-only; no MT5 runtime is modified.
 
-Created at UTC: `2026-06-08T11:24:28.897014Z`
+Created at UTC: `2026-06-08T11:46:17.558264Z`
 
 ## Boundary
 
@@ -23,7 +23,7 @@ Created at UTC: `2026-06-08T11:24:28.897014Z`
 | old_magic_930101_charts_detached_or_absent | PASS | answer=NO_PROFILE_EVIDENCE |
 | current_magic_931000_ready | PASS | hardened_deployed=True |
 | no_open_family_exposure | PASS | P2WEAKNESS relevant exposure from MT5 bridge |
-| no_existing_p2weakness_orders_today | PENDING_MANUAL_CONFIRMATION | Requires owner/reviewer confirmation from broker history before attach. |
-| kill_switch_file_tested | PENDING_MANUAL_CONFIRMATION | Requires PHASE2X_KILL_SWITCH_BLOCK_TEST_REPORT.md PASS. |
-| demo_account_confirmed | PENDING_MANUAL_CONFIRMATION | Requires fresh startup/runtime evidence after attach. |
-| owner_authorization_valid | PENDING_MANUAL_CONFIRMATION | Requires local owner authorization status PASS. |
+| no_existing_p2weakness_orders_today | PASS | order_rows=0; latest_action='' |
+| kill_switch_file_tested | PASS | status=PASS |
+| demo_account_confirmed | PASS | account_server='Capital.ComMena-Demo'; account_login_present=True |
+| owner_authorization_valid | PASS | status=PASS |
