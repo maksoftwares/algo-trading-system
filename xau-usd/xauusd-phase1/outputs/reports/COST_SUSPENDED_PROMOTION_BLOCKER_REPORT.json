@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-05T14:06:32Z",
+  "created_at_utc": "2026-06-08T06:16:56Z",
   "checks": [
     {
       "name": "canonical_phase2_status",

@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-06-07
+Last updated: 2026-06-08
 
 ## Workspace
 
@@ -52,6 +52,12 @@ Last updated: 2026-06-07
 
 ## Current State
 
+- 2026-06-08 actual demo cost reconciliation:
+  - New generated report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md`; status PASS, resolution `RESOLVED_FOR_ACTUAL_DEMO_COST_REVIEW`.
+  - Refreshed direct-MT5 demo broker table: duplicate-hidden unique trades are positive after broker costs, while the latest `breakout_retest` slice is weak/negative; that points to win-rate/setup quality rather than cost_R as the practical issue.
+  - `P2WEAKNESS_BR_V1` order log shows actual cost_R below the +0.15R floor: executed cost 0.0472R, signal cost range 0.0472R to 0.1332R.
+  - Interpretation: cost is no longer the active practical blocker for the actual demo/wider-stop evidence lane. The active practical questions are now win rate, setup quality, session/time filtering, duplicate-family exposure, sample size, and whether to formalize a new locked cost-aware hypothesis.
+  - Boundary: this does not change the historical old-ledger `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` or `MEASURED_COST_ASSUMPTION_DELTA.md` FAIL states to PASS, does not authorize live capital, and does not make experimental demo fills canonical Phase 2 evidence.
 - 2026-06-06 direct-MT5 weekly/weakness review:
   - Latest reviewer packet: `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_TRADE_WEAKNESS_REVIEW_2026_06_06.zip`, extracted at `xau-usd\xauusd-phase1\docs\review_exports\PHASE2_DEMO_TRADE_WEAKNESS_REVIEW_2026_06_06\`.
   - Review request: `README_REVIEW_REQUEST.md`; asks for diagnosis of winning/losing trade drivers, duplicate/same-family exposure, viable EA-symbol-time buckets, and whether any trade families should be suspended, narrowed, or researched further.

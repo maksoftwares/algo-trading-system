@@ -31,6 +31,8 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_EXECUTOR_SOURCE_GOVERNANCE_PARITY.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2A_COST_CLOSURE_REPORT.md

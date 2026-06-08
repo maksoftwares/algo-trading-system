@@ -34,6 +34,24 @@ That means the current failure is treated as real unless a future reproducible f
 
 The experimental demo broker ledger now has an early review note: `xau-usd/xauusd-phase1/docs/PHASE2_ACTUAL_BROKER_TRADE_REVIEW_2026_06_02.md`. The accepted-only deduplicated broker sample is positive, while `session_extreme_retest_v0` is the main drag. This is review-only evidence and does not reopen canonical Phase 2 by itself.
 
+## 2026-06-08 Actual Demo Cost Reconciliation
+
+Status: RESOLVED_FOR_ACTUAL_DEMO_COST_REVIEW
+
+The current actual demo evidence says cost is not the active practical blocker for the wider-stop demo/weakness-review lane. The refreshed direct-MT5 broker table is positive after broker-inclusive costs, and `P2WEAKNESS_BR_V1` logged estimated cost_R below the +0.15R floor.
+
+| Evidence | Result |
+| --- | --- |
+| Duplicate-hidden actual demo trades | 20 closed, +31.46 AED, PF 1.12 in the latest refreshed MT5 export |
+| Duplicate-hidden `breakout_retest` trades | 9 closed, -36.15 AED, PF 0.64; this is win-rate/setup evidence, not cost_R evidence |
+| `P2WEAKNESS_BR_V1` executed cost_R | 0.0472R |
+| `P2WEAKNESS_BR_V1` signal cost_R range | 0.0472R to 0.1332R |
+| Formal reconciliation report | `outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md` |
+
+Interpretation: the old Phase 0 measured-cost failure was driven by tight historical stop distances. The old ledger had a median stop around 109.79 points, so a 75-point P95 spread became a large share of risk. The current demo/weakness-review lane is using much wider stop distances, so the same spread is materially smaller in R.
+
+Boundary: this resolves the current actual-demo cost concern only. It does not change the old `BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md` or `MEASURED_COST_ASSUMPTION_DELTA.md` reports to PASS, does not authorize live capital, and does not make experimental demo fills canonical Phase 2 evidence. Any formal promotion still requires a new locked cost-aware hypothesis or a corrected cost bug plus fresh revalidation.
+
 ## Resolution Tracks
 
 | Track | Purpose | Boundary |

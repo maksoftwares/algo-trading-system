@@ -39,6 +39,9 @@ def generate_phase2_blocker_summary(root: Path, output_json: Path | None = None)
     )
     phase1_acceptance_status = _read_markdown_status(phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md")
     phase2_readiness_status = _read_markdown_status(phase1_reports / "PHASE2_READINESS_REPORT.md")
+    actual_demo_cost = _read_json(phase1_reports / "PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.json")
+    actual_demo_cost_status = str(actual_demo_cost.get("status", "NOT_GENERATED"))
+    actual_demo_cost_resolution = str(actual_demo_cost.get("resolution_status", "NOT_GENERATED"))
 
     canonical_blocked = (
         measured_cost_model_status == "PASS"
@@ -58,20 +61,23 @@ def generate_phase2_blocker_summary(root: Path, output_json: Path | None = None)
         "measured_cost_sanity_status": measured_cost_sanity_status or "UNKNOWN",
         "phase1_acceptance_status": phase1_acceptance_status or "UNKNOWN",
         "phase2_readiness_status": phase2_readiness_status or "UNKNOWN",
+        "actual_demo_cost_reconciliation_status": actual_demo_cost_status,
+        "actual_demo_cost_resolution_status": actual_demo_cost_resolution,
+        "actual_demo_cost_current_practical_blocker": actual_demo_cost_status != "PASS",
         "experimental_demo_executor_status": "QUARANTINE_REVIEW_ONLY",
         "demo_execution_as_phase2_evidence": False,
         "live_trading_authorized": False,
         "canonical_broker_side_execution": False,
         "paper_mode_execution_allowed": False,
-        "decision": (
-            "Canonical Phase 2 is blocked because the measured-cost model is PASS but "
-            "breakout-retest measured-cost revalidation and assumption delta are FAIL."
-        ),
+        "decision": _decision(canonical_blocked, actual_demo_cost_status),
         "source_reports": {
             "measured_cost_model": str(phase0_reports / "MEASURED_COST_MODEL.md"),
             "measured_cost_revalidation": str(phase0_reports / "BREAKOUT_RETEST_MEASURED_COST_REVALIDATION.md"),
             "assumption_delta": str(phase0_reports / "MEASURED_COST_ASSUMPTION_DELTA.md"),
             "sanity_check": str(phase0_reports / "MEASURED_COST_REVALIDATION_SANITY_CHECK.md"),
+            "actual_demo_cost_reconciliation": str(
+                phase1_reports / "PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md"
+            ),
             "phase2_readiness": str(phase1_reports / "PHASE2_READINESS_REPORT.md"),
         },
     }
@@ -88,6 +94,9 @@ def _render_markdown(payload: dict[str, object]) -> str:
         ("Measured-cost revalidation", payload["measured_cost_revalidation_status"]),
         ("Measured-cost assumption delta", payload["measured_cost_assumption_delta_status"]),
         ("Measured-cost sanity", payload["measured_cost_sanity_status"]),
+        ("Actual demo cost reconciliation", payload["actual_demo_cost_reconciliation_status"]),
+        ("Actual demo cost resolution", payload["actual_demo_cost_resolution_status"]),
+        ("Actual demo cost current practical blocker", str(payload["actual_demo_cost_current_practical_blocker"]).lower()),
         ("Phase 1 acceptance", payload["phase1_acceptance_status"]),
         ("Phase 2 readiness", payload["phase2_readiness_status"]),
         ("Experimental demo executor", payload["experimental_demo_executor_status"]),
@@ -107,10 +116,27 @@ def _render_markdown(payload: dict[str, object]) -> str:
             "",
             "## Boundary",
             "",
-            "This summary preserves the current NO-GO state. It does not authorize canonical Phase 2, demo execution as Phase 2 evidence, broker-side execution, or live capital.",
+            "This summary preserves the current NO-GO state for canonical Phase 2. The actual demo cost reconciliation can remove cost as the current practical demo concern, but it does not authorize canonical Phase 2, demo execution as Phase 2 evidence, broker-side execution, or live capital.",
             "",
         ]
     )
+
+
+def _decision(canonical_blocked: bool, actual_demo_cost_status: str) -> str:
+    if canonical_blocked and actual_demo_cost_status == "PASS":
+        return (
+            "Canonical Phase 2 is still blocked for the old tight-stop Phase 0 ledger because measured-cost "
+            "revalidation and assumption delta are FAIL. However, actual demo cost reconciliation is PASS, "
+            "so cost is no longer treated as the current practical blocker for the demo/wider-stop evidence lane; "
+            "the active concern shifts to edge quality, win rate, duplicate exposure, sample size, and formal "
+            "cost-aware hypothesis promotion."
+        )
+    if canonical_blocked:
+        return (
+            "Canonical Phase 2 is blocked because the measured-cost model is PASS but breakout-retest "
+            "measured-cost revalidation and assumption delta are FAIL."
+        )
+    return "Canonical Phase 2 cost status needs review because the measured-cost block signature was not found."
 
 
 def _read_markdown_status(path: Path) -> str:
@@ -120,6 +146,15 @@ def _read_markdown_status(path: Path) -> str:
         if line.startswith("Overall status:") or line.startswith("Status:"):
             return line.split(":", 1)[1].strip()
     return ""
+
+
+def _read_json(path: Path) -> dict[str, object]:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
 
 
 def _table(rows: list[tuple[str, object]]) -> str:

@@ -33,6 +33,12 @@ Measured-cost revalidation failed and the measured-cost sanity check confirmed t
 - measured-cost revalidation PASS
 - owner approval
 
+## 2026-06-08 Actual Demo Cost Note
+
+`PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md` is PASS and marks the current actual-demo cost concern as resolved for the wider-stop demo/weakness-review lane. Current direct-MT5 broker-inclusive demo trades are positive after duplicate hiding, and `P2WEAKNESS_BR_V1` observed estimated cost_R below the +0.15R floor.
+
+This does not reactivate the old tight-stop canonical v1.0 ledger. It means the practical demo question has shifted from "is cost fatal?" to "does the edge quality, win rate, session behavior, duplicate exposure, and sample size justify a new locked cost-aware hypothesis?"
+
 ## Boundary
 
 Canonical Phase 2 paper-mode implementation, broker-side execution, demo trading as Phase 2 evidence, and live/real-capital use remain NO-GO while this lock is active.

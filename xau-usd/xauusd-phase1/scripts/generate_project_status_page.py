@@ -1174,6 +1174,18 @@ def _phase2_blocker_panel(report: dict[str, Any]) -> str:
         ("Measured-cost revalidation", _status_badge(_cell(report.get("measured_cost_revalidation_status", "UNKNOWN")))),
         ("Assumption delta", _status_badge(_cell(report.get("measured_cost_assumption_delta_status", "UNKNOWN")))),
         ("Sanity status", _status_badge(_cell(report.get("measured_cost_sanity_status", "UNKNOWN")))),
+        (
+            "Actual demo cost reconciliation",
+            _status_badge(_cell(report.get("actual_demo_cost_reconciliation_status", "UNKNOWN"))),
+        ),
+        (
+            "Actual demo cost resolution",
+            _status_badge(_cell(report.get("actual_demo_cost_resolution_status", "UNKNOWN"))),
+        ),
+        (
+            "Actual demo cost still blocker",
+            _status_badge(str(report.get("actual_demo_cost_current_practical_blocker", "UNKNOWN")).lower()),
+        ),
         ("Experimental executor", _status_badge(_cell(report.get("experimental_demo_executor_status", "UNKNOWN")))),
         ("Demo as Phase 2 evidence", _status_badge(str(report.get("demo_execution_as_phase2_evidence", "UNKNOWN")).lower())),
         ("Live trading authorized", _status_badge(str(report.get("live_trading_authorized", "UNKNOWN")).lower())),
@@ -2118,6 +2130,7 @@ def _artifact_links() -> str:
         ("Phase 2 resolution plan", "xau-usd/xauusd-phase1/docs/PHASE2_RESOLUTION_PLAN.md"),
         ("Phase 2 canonical block policy", "xau-usd/xauusd-phase1/docs/PHASE2_CANONICAL_BLOCK_POLICY.md"),
         ("Phase 2 blocker summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md"),
+        ("Phase 2 actual demo cost reconciliation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md"),
         ("Phase 2 canonical block verification", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md"),
         ("Passive paper observer spec", "xau-usd/xauusd-phase1/docs/PASSIVE_PAPER_OBSERVER_SPEC.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),

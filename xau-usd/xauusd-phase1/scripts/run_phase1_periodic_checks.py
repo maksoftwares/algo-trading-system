@@ -31,6 +31,7 @@ from generate_phase2_demo_account_isolation_report import generate_phase2_demo_a
 from generate_phase2_demo_next_actions_report import generate_phase2_demo_next_actions_report
 from generate_phase2_demo_preflight_report import generate_phase2_demo_preflight_report
 from generate_phase2_blocker_summary import generate_phase2_blocker_summary
+from generate_phase2_actual_demo_cost_reconciliation import generate_phase2_actual_demo_cost_reconciliation
 from generate_phase2_mt5_network_baseline import generate_phase2_mt5_network_baseline
 from generate_phase2_owner_action_packet import generate_phase2_owner_action_packet
 from generate_phase2_paper_ledger_schema_report import generate_phase2_paper_ledger_schema_report
@@ -65,6 +66,7 @@ class PeriodicCheckOutput:
     phase2_readiness_status: str
     phase2_demo_preflight_status: str
     phase2_demo_account_isolation_status: str
+    phase2_actual_demo_cost_reconciliation_status: str
     experimental_executor_governance_status: str
     cost_suspension_enforcement_status: str
     broker_action_boundary_status: str
@@ -218,6 +220,7 @@ def run_phase1_periodic_checks(
     experimental_governance = audit_experimental_executor_governance(root)
     cost_suspension = assert_cost_suspension(root)
     broker_action_boundary = audit_broker_action_file_boundary(root.parents[1])
+    actual_demo_cost_reconciliation = generate_phase2_actual_demo_cost_reconciliation(root)
     phase2_blocker_summary = generate_phase2_blocker_summary(root)
     canonical_block_status = "PASS" if verify_canonical_phase2_block(root) == 0 else "FAIL"
     experimental_quarantine_status = "PASS" if verify_experimental_quarantine(root) == 0 else "FAIL"
@@ -270,6 +273,7 @@ def run_phase1_periodic_checks(
         phase2_readiness_status=phase2_readiness.status,
         phase2_demo_preflight_status=phase2_preflight.status,
         phase2_demo_account_isolation_status=demo_account_isolation.status,
+        phase2_actual_demo_cost_reconciliation_status=actual_demo_cost_reconciliation.status,
         experimental_executor_governance_status=experimental_governance.status,
         cost_suspension_enforcement_status=cost_suspension.status,
         broker_action_boundary_status=broker_action_boundary.status,
