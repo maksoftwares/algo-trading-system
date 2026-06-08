@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T07:17:07.102538Z",
+  "created_at_utc": "2026-06-08T08:24:30.265166Z",
   "authority": "Magic collision audit for experimental namespaces. PASS does not authorize deployment or trading.",
   "p2weakness_namespace": "931000-931099",
   "p2weakness_active_magic": 931000,
   "source_magic": 931000,
   "safe_preset_magic": 931000,
-  "owner_preset_magic": 931000,
+  "owner_template_magic": 931000,
   "known_active_assignments": {
     "WR50_BreakoutEvening_v0": 930000,
     "WR50_BreakoutQuality_v0": 930100,
@@ -29,7 +29,7 @@
       "evidence": "value=931000; allowed=931000-931099"
     },
     {
-      "name": "owner_preset_magic_in_p2weakness_namespace",
+      "name": "owner_template_magic_in_p2weakness_namespace",
       "status": "PASS",
       "evidence": "value=931000; allowed=931000-931099"
     },

@@ -41,13 +41,18 @@ def test_p2weakness_governance_reports_pass_and_warn_on_old_runtime_magic(tmp_pa
     parity = json.loads((tmp_path / "P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.json").read_text(encoding="utf-8"))
     magic = json.loads((tmp_path / "P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.json").read_text(encoding="utf-8"))
     risk = json.loads((tmp_path / "EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json").read_text(encoding="utf-8"))
+    runtime = json.loads((tmp_path / "P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.json").read_text(encoding="utf-8"))
 
     assert parity["status"] == "PASS"
+    assert parity["owner_authorized_template"].endswith("owner_authorized_demo_xauusd.template.set")
     assert magic["status"] == "PASS"
     assert magic["p2weakness_active_magic"] == 931000
     assert magic["runtime_previous_magic_warning"] is True
     assert risk["status"] == "REVIEW_ONLY"
     assert risk["executed_orders"] == 1
+    assert runtime["status"] == "REVIEW_ONLY_RUNTIME_RECONCILED"
+    assert runtime["latest_order_magic"] == "930101"
+    assert runtime["chart_attachment_evidence"] == "NOT_OBSERVABLE_FROM_CSV_LOGS"
 
 
 def _write_csv(path: Path, rows: list[dict[str, str]]) -> None:

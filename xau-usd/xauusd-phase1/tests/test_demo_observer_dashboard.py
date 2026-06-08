@@ -156,6 +156,22 @@ def test_actual_duplicate_marking_keeps_canonical_row():
     assert by_candidate["session_extreme_retest_v0"]["duplicate_role"] == "unique"
 
 
+def test_actual_broker_magic_parser_includes_p2weakness_and_wr50_experiments():
+    module = _load_module()
+
+    assert module._is_demo_magic(931000, "") is True
+    assert module._is_demo_magic(930101, "") is True
+    assert module._is_demo_magic(930100, "") is True
+    assert module._is_demo_magic(0, "P2WEAKNESS_BR_V1") is True
+    assert module._candidate_status_from_magic(931000, "") == ("p2weakness_br_v1", "EXPERIMENTAL")
+    assert module._candidate_status_from_magic(930101, "") == ("p2weakness_br_v1", "EXPERIMENTAL")
+    assert module._candidate_status_from_magic(930100, "") == ("WR50_BreakoutQuality_v0", "EXPERIMENTAL")
+
+    filters = module._filters("actual")
+    assert "Experimental" in filters
+    assert "p2weakness_br_v1" in filters
+
+
 def _write_log(path: Path, candidate: str, status: str, symbol: str, rows: list[tuple[str, str, str, str, str, str, str, str]]):
     fieldnames = [
         "timestamp_broker",

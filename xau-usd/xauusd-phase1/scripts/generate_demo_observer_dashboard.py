@@ -22,12 +22,22 @@ DEFAULT_LEVERAGE = 50.0
 DEFAULT_ACTUAL_HISTORY_START = "2026-06-01 00:00:00"
 DEMO_MAGIC_MIN = 920000
 DEMO_MAGIC_MAX = 929999
+P2WEAKNESS_LEGACY_MAGIC = 930101
+P2WEAKNESS_MAGIC_MIN = 931000
+P2WEAKNESS_MAGIC_MAX = 931099
 CANDIDATE_MAGIC_CODES = {
     10: ("breakout_retest", "ACCEPTED"),
     20: ("swing_breakout_retest_v0", "ACCEPTED"),
     30: ("symbol_normalized_round_retest_v0", "ACCEPTED"),
     40: ("round_number_retest_v0", "PROVISIONAL"),
     50: ("session_extreme_retest_v0", "PROVISIONAL"),
+}
+EXPERIMENTAL_MAGIC_CODES = {
+    930000: ("WR50_BreakoutEvening_v0", "EXPERIMENTAL"),
+    930100: ("WR50_BreakoutQuality_v0", "EXPERIMENTAL"),
+    930200: ("WR50_BreakoutExit1R_v0", "EXPERIMENTAL"),
+    P2WEAKNESS_LEGACY_MAGIC: ("p2weakness_br_v1", "EXPERIMENTAL"),
+    P2WEAKNESS_MAGIC_MIN: ("p2weakness_br_v1", "EXPERIMENTAL"),
 }
 SYMBOL_MAGIC_CODES = {1: "XAUUSD", 2: "EURUSD", 3: "USDJPY"}
 ACTUAL_BROKER_TRADE_FIELDS = [
@@ -62,6 +72,10 @@ DEDUP_KEEP_PRIORITY = {
     "swing_breakout_retest_v0": 30,
     "session_extreme_retest_v0": 40,
     "round_number_retest_v0": 50,
+    "p2weakness_br_v1": 60,
+    "WR50_BreakoutEvening_v0": 70,
+    "WR50_BreakoutQuality_v0": 80,
+    "WR50_BreakoutExit1R_v0": 90,
 }
 
 
@@ -428,10 +442,26 @@ def _is_demo_magic(magic: Any, comment: Any) -> bool:
         magic_int = int(magic)
     except (TypeError, ValueError):
         magic_int = 0
-    return DEMO_MAGIC_MIN <= magic_int <= DEMO_MAGIC_MAX or str(comment).startswith("P2DEMO_")
+    comment_text = str(comment)
+    return (
+        DEMO_MAGIC_MIN <= magic_int <= DEMO_MAGIC_MAX
+        or magic_int in EXPERIMENTAL_MAGIC_CODES
+        or P2WEAKNESS_MAGIC_MIN <= magic_int <= P2WEAKNESS_MAGIC_MAX
+        or comment_text.startswith("P2DEMO_")
+        or comment_text.startswith("P2WEAKNESS_BR_V1")
+        or comment_text.startswith("WR50_")
+    )
 
 
 def _candidate_status_from_magic(magic: int, comment: str) -> tuple[str, str]:
+    if magic in EXPERIMENTAL_MAGIC_CODES:
+        return EXPERIMENTAL_MAGIC_CODES[magic]
+    if P2WEAKNESS_MAGIC_MIN <= magic <= P2WEAKNESS_MAGIC_MAX:
+        return "p2weakness_br_v1", "EXPERIMENTAL"
+    if comment.startswith("P2WEAKNESS_BR_V1"):
+        return "p2weakness_br_v1", "EXPERIMENTAL"
+    if comment.startswith("WR50_"):
+        return comment.split("|", 1)[0], "EXPERIMENTAL"
     candidate_code = (magic - DEMO_MAGIC_MIN) // 10
     if candidate_code in CANDIDATE_MAGIC_CODES:
         return CANDIDATE_MAGIC_CODES[candidate_code]
@@ -858,7 +888,7 @@ def _render_html(payload: dict[str, Any]) -> str:
     tr[hidden] {{ display: none; }}
     .pill {{ display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 8px; font-size: 12px; font-weight: 700; border: 1px solid var(--line); }}
     .accepted, .win {{ color: var(--green); }}
-    .provisional, .open {{ color: var(--amber); }}
+    .provisional, .open, .experimental {{ color: var(--amber); }}
     .loss, .negative {{ color: var(--red); }}
     .flat {{ color: var(--muted); }}
     .note-grid {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }}
@@ -1092,6 +1122,7 @@ def _filters(prefix: str) -> str:
             '<option value="all">All statuses</option>',
             '<option value="ACCEPTED">Accepted</option>',
             '<option value="PROVISIONAL">Provisional</option>',
+            '<option value="EXPERIMENTAL">Experimental</option>',
             "</select>",
             f'<select id="{prefix}Candidate" aria-label="Candidate filter">{_candidate_options()}</select>',
             f'<select id="{prefix}Symbol" aria-label="Symbol filter">',
@@ -1112,6 +1143,10 @@ def _candidate_options() -> str:
         "symbol_normalized_round_retest_v0",
         "round_number_retest_v0",
         "session_extreme_retest_v0",
+        "p2weakness_br_v1",
+        "WR50_BreakoutEvening_v0",
+        "WR50_BreakoutQuality_v0",
+        "WR50_BreakoutExit1R_v0",
     ]
     return '<option value="all">All EAs</option>' + "".join(
         f'<option value="{html.escape(item)}">{html.escape(item)}</option>' for item in candidates
@@ -1306,7 +1341,16 @@ def _status_dot(row: dict[str, Any]) -> str:
 
 def _pill(value: Any) -> str:
     label = str(value)
-    css = "accepted" if label.upper() == "ACCEPTED" else "provisional" if label.upper() == "PROVISIONAL" else "flat"
+    upper = label.upper()
+    css = (
+        "accepted"
+        if upper == "ACCEPTED"
+        else "provisional"
+        if upper == "PROVISIONAL"
+        else "experimental"
+        if upper == "EXPERIMENTAL"
+        else "flat"
+    )
     return f'<span class="pill {css}">{html.escape(label)}</span>'
 
 

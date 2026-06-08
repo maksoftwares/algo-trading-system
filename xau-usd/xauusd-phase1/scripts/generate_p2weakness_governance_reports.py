@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -15,11 +16,12 @@ from typing import Any
 
 EA_REL = Path("mt5") / "Experts" / "Phase2WeaknessBreakoutRetestExecutor.mq5"
 SAFE_PRESET_REL = Path("mt5") / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set"
-OWNER_PRESET_REL = Path("mt5") / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set"
+OWNER_TEMPLATE_REL = Path("mt5") / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.template.set"
 RUNTIME_NOTES_REL = Path("docs") / "P2WEAKNESS_BR_V1_RUNTIME_NOTES.md"
 REGISTRY_REL = Path("docs") / "MAGIC_NUMBER_EXTERNAL_REGISTRY.md"
 DEFAULT_ORDER_LOG = Path("C:/MT5PortableP2WeaknessDemo/MQL5/Files/p2weakness_br_v1_order_log_xauusd.csv")
 DEFAULT_STARTUP_LOG = Path("C:/MT5PortableP2WeaknessDemo/MQL5/Files/p2weakness_br_v1_startup_xauusd.csv")
+DEFAULT_KILL_SWITCH = Path("C:/MT5PortableP2WeaknessDemo/MQL5/Files/p2weakness_br_v1_kill_switch.txt")
 REPORTS_DIR = Path("outputs") / "reports"
 P2_MAGIC_START = 931000
 P2_MAGIC_END = 931099
@@ -38,6 +40,10 @@ def generate_p2weakness_governance_reports(
     output_dir: Path | None = None,
     order_log: Path = DEFAULT_ORDER_LOG,
     startup_log: Path = DEFAULT_STARTUP_LOG,
+    kill_switch: Path = DEFAULT_KILL_SWITCH,
+    prove_clean_clone: bool = False,
+    clean_clone_repo_url: str | None = None,
+    clean_clone_branch: str = "main",
 ) -> ReportOutput:
     phase1_root = phase1_root.resolve()
     output_dir = (output_dir or phase1_root / REPORTS_DIR).resolve()
@@ -45,27 +51,40 @@ def generate_p2weakness_governance_reports(
 
     source = _read(phase1_root / EA_REL)
     safe_preset = _preset(phase1_root / SAFE_PRESET_REL)
-    owner_preset = _preset(phase1_root / OWNER_PRESET_REL)
+    owner_template = _preset(phase1_root / OWNER_TEMPLATE_REL)
     runtime_notes = _read(phase1_root / RUNTIME_NOTES_REL)
     registry = _read(phase1_root / REGISTRY_REL)
     source_inputs = _source_inputs(source)
     created_at = _utc_now()
 
-    parity = _parity_payload(phase1_root, source, source_inputs, safe_preset, owner_preset, runtime_notes, registry, created_at)
-    magic = _magic_payload(source_inputs, safe_preset, owner_preset, registry, order_log, created_at)
-    deployment = _deployment_payload(phase1_root, safe_preset, owner_preset, created_at)
-    clean_clone = _clean_clone_payload(phase1_root, parity, magic, created_at)
+    parity = _parity_payload(phase1_root, source, source_inputs, safe_preset, owner_template, runtime_notes, registry, created_at)
+    magic = _magic_payload(source_inputs, safe_preset, owner_template, registry, order_log, created_at)
+    deployment = _deployment_payload(phase1_root, safe_preset, owner_template, created_at)
+    clean_clone = (
+        _clean_clone_proof_payload(
+            phase1_root,
+            clean_clone_repo_url or _default_repo_url(phase1_root),
+            clean_clone_branch,
+            parity,
+            magic,
+            created_at,
+        )
+        if prove_clean_clone
+        else _clean_clone_payload(phase1_root, parity, magic, created_at)
+    )
     daily_risk = _daily_risk_payload(order_log, startup_log, magic, created_at)
+    runtime = _runtime_reconciliation_payload(order_log, startup_log, kill_switch, magic, created_at)
 
     outputs = (
         _write_pair(output_dir, "P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY", parity, _render_parity),
         _write_pair(output_dir, "P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT", magic, _render_magic),
         _write_pair(output_dir, "P2WEAKNESS_BR_V1_DEPLOYMENT", deployment, _render_deployment),
         _write_pair(output_dir, "P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION", clean_clone, _render_clean_clone),
+        _write_pair(output_dir, "P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION", runtime, _render_runtime_reconciliation),
         _write_pair(output_dir, "EXPERIMENTAL_DEMO_DAILY_RISK_REPORT", daily_risk, _render_daily_risk),
     )
     flat_paths = tuple(path for pair in outputs for path in pair)
-    status = "PASS" if parity["status"] == "PASS" and magic["status"] == "PASS" else "FAIL"
+    status = "PASS" if parity["status"] == "PASS" and magic["status"] == "PASS" and (not prove_clean_clone or clean_clone["status"] == "PASS") else "FAIL"
     return ReportOutput(status=status, paths=flat_paths)
 
 
@@ -74,7 +93,7 @@ def _parity_payload(
     source: str,
     source_inputs: dict[str, str],
     safe_preset: dict[str, str],
-    owner_preset: dict[str, str],
+    owner_template: dict[str, str],
     runtime_notes: str,
     registry: str,
     created_at: str,
@@ -91,7 +110,12 @@ def _parity_payload(
         _input_check(source_inputs, "InpMagicNumber", str(P2_ACTIVE_MAGIC)),
         _preset_check(safe_preset, "safe_preset_dry_run", "InpDryRunOnly", "true"),
         _preset_check(safe_preset, "safe_preset_broker_action_disabled", "InpBrokerActionAllowed", "false"),
-        _preset_check(owner_preset, "owner_preset_magic", "InpMagicNumber", str(P2_ACTIVE_MAGIC)),
+        _preset_check(owner_template, "owner_template_dry_run", "InpDryRunOnly", "true"),
+        _preset_check(owner_template, "owner_template_broker_action_disabled", "InpBrokerActionAllowed", "false"),
+        _preset_check(owner_template, "owner_template_account_placeholder", "InpAllowedAccountLoginsCsv", "<OWNER_TO_FILL>"),
+        _preset_check(owner_template, "owner_template_auth_placeholder", "InpExperimentalAuthorizationToken", "<OWNER_TO_FILL>"),
+        _preset_check(owner_template, "owner_template_cost_ack_placeholder", "InpCostSuspensionAcknowledgementToken", "<OWNER_TO_FILL>"),
+        _preset_check(owner_template, "owner_template_magic", "InpMagicNumber", str(P2_ACTIVE_MAGIC)),
         _token_check("cost_suspension_ack_guard", source, "CostSuspensionAcknowledgementTokenValid", "cost_suspension_acknowledgement_token_missing_or_invalid"),
         _token_check("kill_switch_present", source, "KillSwitchActive", "InpKillSwitchFileName"),
         _token_check("demo_server_refusal", source, 'ContainsText(server, "live")', 'ContainsText(server, "real")'),
@@ -100,7 +124,7 @@ def _parity_payload(
         _token_check("market_proxy_logged", source, "MARKET_PROXY", "order_mode"),
         _token_check("duplicate_family_suppression", source, "SameDirectionFamilyExposureExists", "DuplicateFamilyLockActive"),
         _token_check("startup_safe_default_flags", source, "source_default_safe", "owner_authorized_set_used", "cost_suspension_acknowledged"),
-        _token_check("runtime_notes_updated", runtime_notes, "931000-931099", "owner_authorized_demo_xauusd.set"),
+        _token_check("runtime_notes_updated", runtime_notes, "931000-931099", "owner_authorized_demo_xauusd.template.set"),
         _token_check("registry_updated", registry, "P2WEAKNESS_BR_V1", "931000-931099"),
         _fixed_lot_check(source_inputs),
     ]
@@ -110,10 +134,10 @@ def _parity_payload(
         "created_at_utc": created_at,
         "source": str(phase1_root / EA_REL),
         "safe_preset": str(phase1_root / SAFE_PRESET_REL),
-        "owner_authorized_preset": str(phase1_root / OWNER_PRESET_REL),
+        "owner_authorized_template": str(phase1_root / OWNER_TEMPLATE_REL),
         "source_sha256": _sha256(phase1_root / EA_REL),
         "safe_preset_sha256": _sha256(phase1_root / SAFE_PRESET_REL),
-        "owner_authorized_preset_sha256": _sha256(phase1_root / OWNER_PRESET_REL),
+        "owner_authorized_template_sha256": _sha256(phase1_root / OWNER_TEMPLATE_REL),
         "authority": "P2WEAKNESS_BR_V1 governance parity only; no canonical Phase 2, paper-mode, live, or real-capital authorization.",
         "checks": checks,
         "failed_count": sum(1 for check in checks if check["status"] != "PASS"),
@@ -124,14 +148,14 @@ def _parity_payload(
 def _magic_payload(
     source_inputs: dict[str, str],
     safe_preset: dict[str, str],
-    owner_preset: dict[str, str],
+    owner_template: dict[str, str],
     registry: str,
     order_log: Path,
     created_at: str,
 ) -> dict[str, Any]:
     source_magic = _to_int(source_inputs.get("InpMagicNumber"))
     safe_magic = _to_int(safe_preset.get("InpMagicNumber"))
-    owner_magic = _to_int(owner_preset.get("InpMagicNumber"))
+    owner_magic = _to_int(owner_template.get("InpMagicNumber"))
     runtime_magics = sorted(_runtime_magics(order_log))
     active = {
         "WR50_BreakoutEvening_v0": 930000,
@@ -143,7 +167,7 @@ def _magic_payload(
     checks = [
         _range_check("source_magic_in_p2weakness_namespace", source_magic, P2_MAGIC_START, P2_MAGIC_END),
         _range_check("safe_preset_magic_in_p2weakness_namespace", safe_magic, P2_MAGIC_START, P2_MAGIC_END),
-        _range_check("owner_preset_magic_in_p2weakness_namespace", owner_magic, P2_MAGIC_START, P2_MAGIC_END),
+        _range_check("owner_template_magic_in_p2weakness_namespace", owner_magic, P2_MAGIC_START, P2_MAGIC_END),
         _equality_check("active_magic_is_931000", source_magic, P2_ACTIVE_MAGIC),
         _bool_check("p2weakness_not_inside_wr50_namespace", not _range_overlaps((P2_MAGIC_START, P2_MAGIC_END), (930000, 930999)), "P2WEAKNESS=931000-931099; WR50=930000-930999"),
         _bool_check("active_magic_values_unique", not duplicate_values, f"duplicates={duplicate_values or 'none'}"),
@@ -158,7 +182,7 @@ def _magic_payload(
         "p2weakness_active_magic": P2_ACTIVE_MAGIC,
         "source_magic": source_magic,
         "safe_preset_magic": safe_magic,
-        "owner_preset_magic": owner_magic,
+        "owner_template_magic": owner_magic,
         "known_active_assignments": active,
         "runtime_log_magics_observed": runtime_magics,
         "runtime_previous_magic_warning": 930101 in runtime_magics,
@@ -167,19 +191,21 @@ def _magic_payload(
     }
 
 
-def _deployment_payload(phase1_root: Path, safe_preset: dict[str, str], owner_preset: dict[str, str], created_at: str) -> dict[str, Any]:
+def _deployment_payload(phase1_root: Path, safe_preset: dict[str, str], owner_template: dict[str, str], created_at: str) -> dict[str, Any]:
     return {
         "status": "REPORT_ONLY_NO_NEW_DEPLOYMENT",
         "created_at_utc": created_at,
         "authority": "Reviewer-requested deployment-boundary summary. No MT5 terminal was closed, restarted, attached, detached, or redeployed by this report generator.",
         "source": str(phase1_root / EA_REL),
         "safe_preset": str(phase1_root / SAFE_PRESET_REL),
-        "owner_authorized_preset": str(phase1_root / OWNER_PRESET_REL),
+        "owner_authorized_template": str(phase1_root / OWNER_TEMPLATE_REL),
         "source_sha256": _sha256(phase1_root / EA_REL),
         "safe_preset_sha256": _sha256(phase1_root / SAFE_PRESET_REL),
-        "owner_authorized_preset_sha256": _sha256(phase1_root / OWNER_PRESET_REL),
+        "owner_authorized_template_sha256": _sha256(phase1_root / OWNER_TEMPLATE_REL),
         "safe_preset_broker_action_allowed": safe_preset.get("InpBrokerActionAllowed", ""),
-        "owner_preset_broker_action_allowed": owner_preset.get("InpBrokerActionAllowed", ""),
+        "owner_template_broker_action_allowed": owner_template.get("InpBrokerActionAllowed", ""),
+        "owner_template_dry_run": owner_template.get("InpDryRunOnly", ""),
+        "deployment_attempted": False,
         "terminal_closed_or_restarted": False,
         "charts_attached_or_modified": False,
         "profiles_modified": False,
@@ -201,6 +227,87 @@ def _clean_clone_payload(phase1_root: Path, parity: dict[str, Any], magic: dict[
         "local_parity_status": parity["status"],
         "local_magic_collision_status": magic["status"],
         "required_post_push_action": "Clone origin/main after push, rerun this generator, and expect source/magic parity to remain PASS.",
+    }
+
+
+def _clean_clone_proof_payload(
+    phase1_root: Path,
+    repo_url: str,
+    branch: str,
+    local_parity: dict[str, Any],
+    local_magic: dict[str, Any],
+    created_at: str,
+) -> dict[str, Any]:
+    repo_root = phase1_root.parents[1]
+    with tempfile.TemporaryDirectory(prefix="ats-p2weakness-clean-clone-") as temp_dir:
+        clone_root = Path(temp_dir) / "origin-main-clean-clone"
+        _run(["git", "clone", "--depth", "1", "--branch", branch, repo_url, str(clone_root)], cwd=Path(temp_dir))
+        clone_commit = _run(["git", "rev-parse", "HEAD"], cwd=clone_root).strip()
+        clone_status = _run(["git", "status", "--short"], cwd=clone_root).strip()
+        clone_phase1 = clone_root / "xau-usd" / "xauusd-phase1"
+        clone_source = _read(clone_phase1 / EA_REL)
+        clone_safe = _preset(clone_phase1 / SAFE_PRESET_REL)
+        clone_template = _preset(clone_phase1 / OWNER_TEMPLATE_REL)
+        clone_runtime_notes = _read(clone_phase1 / RUNTIME_NOTES_REL)
+        clone_registry = _read(clone_phase1 / REGISTRY_REL)
+        clone_inputs = _source_inputs(clone_source)
+        clone_parity = _parity_payload(
+            clone_phase1,
+            clone_source,
+            clone_inputs,
+            clone_safe,
+            clone_template,
+            clone_runtime_notes,
+            clone_registry,
+            created_at,
+        )
+        clone_magic = _magic_payload(clone_inputs, clone_safe, clone_template, clone_registry, Path(temp_dir) / "missing_order_log.csv", created_at)
+        clone_source_sha = _sha256(clone_phase1 / EA_REL)
+        clone_safe_sha = _sha256(clone_phase1 / SAFE_PRESET_REL)
+        clone_template_sha = _sha256(clone_phase1 / OWNER_TEMPLATE_REL)
+        deploy_text = _read(clone_phase1 / "scripts" / "deploy_phase2_weakness_breakout_executor.py")
+        setup_text = _read(clone_phase1 / "scripts" / "setup_phase2_weakness_portable_demo_terminal.py")
+        dashboard_text = _read(clone_phase1 / "scripts" / "generate_demo_observer_dashboard.py")
+        checks = [
+            _bool_check("clone_working_tree_clean", clone_status == "", f"git status --short={clone_status!r}"),
+            _bool_check("clone_parity_pass", clone_parity["status"] == "PASS", f"clone parity={clone_parity['status']}"),
+            _bool_check("clone_magic_pass", clone_magic["status"] == "PASS", f"clone magic={clone_magic['status']}"),
+            _bool_check("legacy_owner_authorized_set_absent", not (clone_phase1 / "mt5" / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set").exists(), "legacy executing preset absent"),
+            _bool_check("owner_template_committed_non_executing", clone_template.get("InpDryRunOnly") == "true" and clone_template.get("InpBrokerActionAllowed") == "false", "template dry-run=true; broker action=false"),
+            _token_check("deploy_script_report_only_default", deploy_text, "allow_deploy: bool = False", "REPORT_ONLY_NO_NEW_DEPLOYMENT"),
+            _token_check("deploy_script_requires_preconditions", deploy_text, "_require_deploy_preconditions", "clean_clone_reconciliation", "owner_authorized_template_not_non_executing"),
+            _token_check("portable_setup_no_runtime_defaults", setup_text, "prepare: bool = False", "launch: bool = False", "deploy: bool = False", "--allow-prepare", "--allow-launch", "--allow-deploy"),
+            _token_check("dashboard_includes_p2weakness_actual_trades", dashboard_text, "P2WEAKNESS_MAGIC_MIN", "p2weakness_br_v1", "WR50_BreakoutQuality_v0"),
+        ]
+    status = "PASS" if all(check["status"] == "PASS" for check in checks) else "FAIL"
+    return {
+        "status": status,
+        "created_at_utc": created_at,
+        "authority": (
+            "Remote clean-clone proof for P2WEAKNESS_BR_V1. This clones the configured branch and validates "
+            "the pushed source, presets, scripts, and parser boundaries. It does not deploy, attach charts, "
+            "touch MT5 runtime, authorize canonical Phase 2, or authorize real capital."
+        ),
+        "repo_url": repo_url,
+        "branch": branch,
+        "clone_commit_hash": clone_commit,
+        "local_repo_head": _git_head(phase1_root),
+        "local_working_tree_has_pending_changes_after_report_generation": bool(_git_status(phase1_root)),
+        "clone_working_tree_status_short": clone_status,
+        "local_parity_status": local_parity["status"],
+        "local_magic_collision_status": local_magic["status"],
+        "clone_parity_status": clone_parity["status"],
+        "clone_magic_collision_status": clone_magic["status"],
+        "source_path": (Path("xau-usd") / "xauusd-phase1" / EA_REL).as_posix(),
+        "source_file_sha256": _sha256(phase1_root / EA_REL),
+        "clone_source_file_sha256": clone_source_sha,
+        "safe_preset_sha256": _sha256(phase1_root / SAFE_PRESET_REL),
+        "clone_safe_preset_sha256": clone_safe_sha,
+        "owner_template_sha256": _sha256(phase1_root / OWNER_TEMPLATE_REL),
+        "clone_owner_template_sha256": clone_template_sha,
+        "source_input_declaration_block": _input_declaration_block(clone_source),
+        "checks": checks,
+        "failed_count": sum(1 for check in checks if check["status"] != "PASS"),
     }
 
 
@@ -241,6 +348,61 @@ def _daily_risk_payload(order_log: Path, startup_log: Path, magic: dict[str, Any
     }
 
 
+def _runtime_reconciliation_payload(
+    order_log: Path,
+    startup_log: Path,
+    kill_switch: Path,
+    magic: dict[str, Any],
+    created_at: str,
+) -> dict[str, Any]:
+    order_rows = _csv_rows(order_log)
+    startup_rows = _csv_rows(startup_log)
+    latest_order = order_rows[-1] if order_rows else {}
+    latest_startup = startup_rows[-1] if startup_rows else {}
+    runtime_magics = sorted(_runtime_magics(order_log))
+    return {
+        "status": "REVIEW_ONLY_RUNTIME_RECONCILED",
+        "created_at_utc": created_at,
+        "authority": (
+            "Runtime reconciliation for existing P2WEAKNESS_BR_V1 evidence. This report reads CSV/log files only; "
+            "it does not attach charts, change presets, deploy files, close terminals, or authorize canonical Phase 2."
+        ),
+        "new_deployments_paused": True,
+        "order_log": str(order_log),
+        "startup_log": str(startup_log),
+        "kill_switch_file": str(kill_switch),
+        "order_log_exists": order_log.exists(),
+        "startup_log_exists": startup_log.exists(),
+        "kill_switch_exists": kill_switch.exists(),
+        "kill_switch_text": _read(kill_switch).strip() if kill_switch.exists() else "",
+        "order_rows": len(order_rows),
+        "startup_rows": len(startup_rows),
+        "latest_order_timestamp_broker": latest_order.get("timestamp_broker", ""),
+        "latest_order_action": latest_order.get("action", ""),
+        "latest_order_magic": latest_order.get("magic", ""),
+        "latest_order_comment": latest_order.get("comment", latest_order.get("order_comment", "")),
+        "latest_order_symbol": latest_order.get("symbol", ""),
+        "latest_guard_reason": latest_order.get("guard_reason", ""),
+        "latest_family_open_exposure": latest_order.get("family_open_exposure", ""),
+        "latest_account_orders_today": latest_order.get("account_orders_today", ""),
+        "latest_startup_timestamp_broker": latest_startup.get("timestamp_broker", ""),
+        "latest_startup_status": latest_startup.get("startup_status", ""),
+        "latest_startup_account": latest_startup.get("account_login", latest_startup.get("account", "")),
+        "latest_startup_server": latest_startup.get("account_server", latest_startup.get("server", "")),
+        "runtime_magics_observed": runtime_magics,
+        "runtime_previous_magic_warning": magic.get("runtime_previous_magic_warning", False),
+        "current_source_magic": P2_ACTIVE_MAGIC,
+        "chart_attachment_observable_from_csv": False,
+        "chart_attachment_evidence": "NOT_OBSERVABLE_FROM_CSV_LOGS",
+        "runtime_preset_snapshot_observable_from_csv": False,
+        "runtime_preset_snapshot_evidence": "NOT_OBSERVABLE_FROM_CSV_LOGS",
+        "interpretation": (
+            "If runtime logs still show 930101, that is historical/runtime evidence from before the repo hardening; "
+            "the committed source and presets now use 931000 and remain non-executing by default."
+        ),
+    }
+
+
 def _write_pair(output_dir: Path, stem: str, payload: dict[str, Any], renderer) -> tuple[Path, Path]:
     json_path = output_dir / f"{stem}.json"
     md_path = output_dir / f"{stem}.md"
@@ -254,7 +416,7 @@ def _render_parity(payload: dict[str, Any]) -> str:
     lines.extend([
         f"- Source: `{payload['source']}`",
         f"- Safe preset: `{payload['safe_preset']}`",
-        f"- Owner-authorized preset: `{payload['owner_authorized_preset']}`",
+        f"- Owner-authorized template: `{payload['owner_authorized_template']}`",
         f"- Failed checks: `{payload['failed_count']}`",
         "",
         "| Check | Status | Evidence |",
@@ -290,7 +452,10 @@ def _render_deployment(payload: dict[str, Any]) -> str:
     lines.extend([
         f"- Source SHA256: `{payload['source_sha256']}`",
         f"- Safe preset SHA256: `{payload['safe_preset_sha256']}`",
-        f"- Owner-authorized preset SHA256: `{payload['owner_authorized_preset_sha256']}`",
+        f"- Owner-authorized template SHA256: `{payload['owner_authorized_template_sha256']}`",
+        f"- Owner template dry-run: `{payload['owner_template_dry_run']}`",
+        f"- Owner template broker action allowed: `{payload['owner_template_broker_action_allowed']}`",
+        f"- Deployment attempted: `{payload['deployment_attempted']}`",
         f"- Terminal closed/restarted: `{payload['terminal_closed_or_restarted']}`",
         f"- Charts attached/modified: `{payload['charts_attached_or_modified']}`",
         f"- Profiles modified: `{payload['profiles_modified']}`",
@@ -303,6 +468,48 @@ def _render_deployment(payload: dict[str, Any]) -> str:
 
 def _render_clean_clone(payload: dict[str, Any]) -> str:
     lines = _report_header("P2WEAKNESS BR V1 Clean-Clone Reconciliation", payload)
+    if "clone_commit_hash" in payload:
+        lines.extend([
+            f"- Repo URL: `{payload['repo_url']}`",
+            f"- Branch: `{payload['branch']}`",
+            f"- Clean-clone commit hash: `{payload['clone_commit_hash']}`",
+            f"- Local repo HEAD: `{payload['local_repo_head']}`",
+            f"- Clone working tree status: `{payload['clone_working_tree_status_short']}`",
+            f"- Local parity status: `{payload['local_parity_status']}`",
+            f"- Local magic collision status: `{payload['local_magic_collision_status']}`",
+            f"- Clone parity status: `{payload['clone_parity_status']}`",
+            f"- Clone magic collision status: `{payload['clone_magic_collision_status']}`",
+            f"- Source path: `{payload['source_path']}`",
+            f"- Source SHA256: `{payload['source_file_sha256']}`",
+            f"- Clone source SHA256: `{payload['clone_source_file_sha256']}`",
+            f"- Owner template SHA256: `{payload['owner_template_sha256']}`",
+            f"- Clone owner template SHA256: `{payload['clone_owner_template_sha256']}`",
+            f"- Failed checks: `{payload['failed_count']}`",
+            "",
+            "## Checks",
+            "",
+            "| Check | Status | Evidence |",
+            "|---|---|---|",
+        ])
+        for check in payload["checks"]:
+            lines.append(f"| {check['name']} | {check['status']} | {_escape(check['evidence'])} |")
+        lines.extend(
+            [
+                "",
+                "## Input Declaration Block",
+                "",
+                "```mql5",
+                payload["source_input_declaration_block"].rstrip(),
+                "```",
+                "",
+                "## Boundary",
+                "",
+                "This proof validates the pushed clean clone only. It does not deploy, attach charts, touch MT5 runtime, authorize canonical Phase 2, or authorize real capital.",
+                "",
+            ]
+        )
+        return "\n".join(lines)
+
     lines.extend([
         f"- Repo HEAD: `{payload['repo_head']}`",
         f"- Working tree has pending changes: `{payload['working_tree_has_pending_changes']}`",
@@ -316,6 +523,38 @@ def _render_clean_clone(payload: dict[str, Any]) -> str:
     for path in payload["pending_paths"]:
         lines.append(f"- `{path}`")
     lines.append("")
+    return "\n".join(lines)
+
+
+def _render_runtime_reconciliation(payload: dict[str, Any]) -> str:
+    lines = _report_header("P2WEAKNESS BR V1 Runtime Reconciliation", payload)
+    lines.extend([
+        f"- New deployments paused: `{payload['new_deployments_paused']}`",
+        f"- Order log exists: `{payload['order_log_exists']}`",
+        f"- Startup log exists: `{payload['startup_log_exists']}`",
+        f"- Kill switch exists: `{payload['kill_switch_exists']}`",
+        f"- Order rows: `{payload['order_rows']}`",
+        f"- Startup rows: `{payload['startup_rows']}`",
+        f"- Latest order broker time: `{payload['latest_order_timestamp_broker']}`",
+        f"- Latest order action: `{payload['latest_order_action']}`",
+        f"- Latest order symbol: `{payload['latest_order_symbol']}`",
+        f"- Latest order magic: `{payload['latest_order_magic']}`",
+        f"- Latest guard reason: `{payload['latest_guard_reason']}`",
+        f"- Latest family open exposure: `{payload['latest_family_open_exposure']}`",
+        f"- Latest account orders today: `{payload['latest_account_orders_today']}`",
+        f"- Latest startup status: `{payload['latest_startup_status']}`",
+        f"- Latest startup account/server: `{payload['latest_startup_account']}` / `{payload['latest_startup_server']}`",
+        f"- Runtime magics observed: `{payload['runtime_magics_observed']}`",
+        f"- Runtime previous-magic warning: `{payload['runtime_previous_magic_warning']}`",
+        f"- Current committed source magic: `{payload['current_source_magic']}`",
+        f"- Chart attachment evidence: `{payload['chart_attachment_evidence']}`",
+        f"- Runtime preset snapshot evidence: `{payload['runtime_preset_snapshot_evidence']}`",
+        "",
+        "## Interpretation",
+        "",
+        payload["interpretation"],
+        "",
+    ])
     return "\n".join(lines)
 
 
@@ -482,6 +721,17 @@ def _run_git(repo_root: Path, args: list[str]) -> str:
     return completed.stdout.strip()
 
 
+def _run(command: list[str], cwd: Path) -> str:
+    completed = subprocess.run(command, cwd=cwd, check=False, capture_output=True, text=True)
+    if completed.returncode != 0:
+        raise RuntimeError(f"{' '.join(command)} failed: {completed.stderr.strip()}")
+    return completed.stdout.strip()
+
+
+def _default_repo_url(phase1_root: Path) -> str:
+    return _run_git(phase1_root.parents[1], ["config", "--get", "remote.origin.url"]) or "https://github.com/maksoftwares/algo-trading-system.git"
+
+
 def _sha256(path: Path) -> str:
     if not path.exists():
         return "MISSING"
@@ -508,12 +758,20 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--order-log", type=Path, default=DEFAULT_ORDER_LOG)
     parser.add_argument("--startup-log", type=Path, default=DEFAULT_STARTUP_LOG)
+    parser.add_argument("--kill-switch", type=Path, default=DEFAULT_KILL_SWITCH)
+    parser.add_argument("--prove-clean-clone", action="store_true", help="Clone the configured remote branch and generate a real PASS/FAIL clean-clone proof.")
+    parser.add_argument("--repo-url", default=None, help="Repository URL for --prove-clean-clone; defaults to remote.origin.url.")
+    parser.add_argument("--branch", default="main", help="Remote branch for --prove-clean-clone.")
     args = parser.parse_args(argv)
     output = generate_p2weakness_governance_reports(
         args.phase1_root,
         output_dir=args.output_dir,
         order_log=args.order_log,
         startup_log=args.startup_log,
+        kill_switch=args.kill_switch,
+        prove_clean_clone=args.prove_clean_clone,
+        clean_clone_repo_url=args.repo_url,
+        clean_clone_branch=args.branch,
     )
     print(f"P2WEAKNESS governance reports: {output.status}")
     for path in output.paths:

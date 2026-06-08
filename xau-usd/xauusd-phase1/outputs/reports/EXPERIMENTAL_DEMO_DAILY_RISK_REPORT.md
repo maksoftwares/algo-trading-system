@@ -4,14 +4,14 @@ Status: REVIEW_ONLY
 
 Experimental demo daily risk report. It does not authorize canonical Phase 2, deployment, live trading, or real capital.
 
-Created at UTC: `2026-06-08T07:17:07.102538Z`
+Created at UTC: `2026-06-08T08:24:30.265166Z`
 
 - Order log exists: `True`
 - Startup log exists: `True`
-- Rows: `10`
+- Rows: `11`
 - Executed orders: `1`
-- Guard blocks: `9`
-- Cost R min/median/max: `0.0437` / `0.0797` / `0.1332`
+- Guard blocks: `10`
+- Cost R min/median/max: `0.0437` / `0.0787` / `0.1332`
 - Latest action: `GUARD_BLOCK`
 - Latest guard reason: `family_open_exposure_cap_reached`
 - Runtime previous-magic warning: `True`

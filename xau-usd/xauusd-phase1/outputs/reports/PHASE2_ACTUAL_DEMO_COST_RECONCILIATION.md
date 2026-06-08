@@ -2,7 +2,7 @@
 
 Overall status: PASS
 Resolution status: RESOLVED_FOR_ACTUAL_DEMO_COST_REVIEW
-Generated at UTC: 2026-06-08T06:14:49Z
+Generated at UTC: 2026-06-08T08:15:36Z
 
 Actual demo cost reconciliation is RESOLVED for the current demo/wider-stop evidence lane: direct MT5 broker-inclusive outcomes are available and P2WEAKNESS_BR_V1 cost_R is below the +0.15R floor. The canonical old tight-stop Phase 0 revalidation remains unchanged as historical FAIL.
 
@@ -28,39 +28,41 @@ Actual demo cost reconciliation is RESOLVED for the current demo/wider-stop evid
 | Check | Status | Evidence |
 |---|---|---|
 | actual_broker_csv_present | PASS | source=C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv |
-| actual_unique_sample_available | PASS | unique_closed=20; broker-inclusive closed_pnl_aed=31.46 |
-| actual_unique_broker_inclusive_pnl_available | PASS | unique_closed_pnl_aed=31.46; unique_pf=1.12; used as outcome context, not as the cost-resolution gate |
-| breakout_retest_actual_sample_available | PASS | breakout_closed=9; breakout_closed_pnl_aed=-36.15; breakout_pf=0.64; negative or weak outcome here is win-rate/setup evidence, not cost_R evidence |
+| actual_unique_sample_available | PASS | unique_closed=204; broker-inclusive closed_pnl_aed=-69.06 |
+| actual_unique_broker_inclusive_pnl_available | PASS | unique_closed_pnl_aed=-69.06; unique_pf=0.97; used as outcome context, not as the cost-resolution gate |
+| breakout_retest_actual_sample_available | PASS | breakout_closed=77; breakout_closed_pnl_aed=358.83; breakout_pf=1.65; negative or weak outcome here is win-rate/setup evidence, not cost_R evidence |
 | p2weakness_order_log_present | PASS | source=C:\MT5PortableP2WeaknessDemo\MQL5\Files\p2weakness_br_v1_order_log_xauusd.csv |
 | p2weakness_executed_cost_r_below_floor | PASS | order_send_ok=1; executed_cost_r_max=0.0472; threshold<=0.15 |
-| p2weakness_signal_cost_r_below_floor | PASS | cost_observations=8; signal_cost_r_max=0.1332; threshold<=0.15 |
+| p2weakness_signal_cost_r_below_floor | PASS | cost_observations=11; signal_cost_r_max=0.1332; threshold<=0.15 |
 
 ## Actual Broker Trades
 
 | View | Closed | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---|---|---|---|---|---|---|---|
-| Raw broker trades | 34 | 16 | 18 | 47.06% | 134.41 | 1.3 | 36.86 | -25.3 |
-| Duplicate-hidden unique trades | 20 | 8 | 12 | 40.00% | 31.46 | 1.12 | 36.86 | -21.95 |
-| Breakout-retest unique trades | 9 | 2 | 7 | 22.22% | -36.15 | 0.64 | 32.05 | -14.32 |
+| Raw broker trades | 353 | 140 | 213 | 39.66% | 96.36 | 1.02 | 30.41 | -19.53 |
+| Duplicate-hidden unique trades | 204 | 78 | 126 | 38.24% | -69.06 | 0.97 | 28.4 | -18.13 |
+| Breakout-retest unique trades | 77 | 34 | 43 | 44.16% | 358.83 | 1.65 | 26.89 | -12.92 |
 
 ## Unique Trades By Candidate
 
 | Candidate | Closed | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---|---|---|---|---|---|---|---|
-| symbol_normalized_round_retest_v0 | 10 | 6 | 4 | 60.00% | 71.28 | 1.45 | 38.46 | -39.88 |
-| swing_breakout_retest_v0 | 1 | 0 | 1 | 0.00% | -3.67 | 0.0 | 0.0 | -3.67 |
-| breakout_retest | 9 | 2 | 7 | 22.22% | -36.15 | 0.64 | 32.05 | -14.32 |
+| breakout_retest | 77 | 34 | 43 | 44.16% | 358.83 | 1.65 | 26.89 | -12.92 |
+| swing_breakout_retest_v0 | 9 | 3 | 6 | 33.33% | 56.7 | 5.0 | 23.62 | -2.36 |
+| WR50_BreakoutEvening_v0 | 2 | 0 | 2 | 0.00% | -74.0 | 0.0 | 0.0 | -37.0 |
+| session_extreme_retest_v0 | 39 | 12 | 27 | 30.77% | -81.73 | 0.76 | 21.21 | -12.45 |
+| symbol_normalized_round_retest_v0 | 77 | 29 | 48 | 37.66% | -328.86 | 0.75 | 33.65 | -27.18 |
 
 ## P2WEAKNESS BR V1 Cost Log
 
 | Metric | Value |
 |---|---|
-| Rows | 8 |
+| Rows | 11 |
 | OrderSend OK | 1 |
-| Guard blocks | 7 |
-| Cost observations | 8 |
+| Guard blocks | 10 |
+| Cost observations | 11 |
 | Signal cost R min | 0.04 |
-| Signal cost R mean | 0.0832 |
+| Signal cost R mean | 0.08 |
 | Signal cost R max | 0.1332 |
 | Executed cost R mean | 0.0472 |
 | Executed cost R max | 0.0472 |

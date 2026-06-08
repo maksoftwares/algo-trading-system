@@ -4,7 +4,7 @@ Status: PASS
 
 Magic collision audit for experimental namespaces. PASS does not authorize deployment or trading.
 
-Created at UTC: `2026-06-08T07:17:07.102538Z`
+Created at UTC: `2026-06-08T08:24:30.265166Z`
 
 - P2WEAKNESS namespace: `931000-931099`
 - Active magic: `931000`
@@ -14,7 +14,7 @@ Created at UTC: `2026-06-08T07:17:07.102538Z`
 |---|---|---|
 | source_magic_in_p2weakness_namespace | PASS | value=931000; allowed=931000-931099 |
 | safe_preset_magic_in_p2weakness_namespace | PASS | value=931000; allowed=931000-931099 |
-| owner_preset_magic_in_p2weakness_namespace | PASS | value=931000; allowed=931000-931099 |
+| owner_template_magic_in_p2weakness_namespace | PASS | value=931000; allowed=931000-931099 |
 | active_magic_is_931000 | PASS | value=931000; expected=931000 |
 | p2weakness_not_inside_wr50_namespace | PASS | P2WEAKNESS=931000-931099; WR50=930000-930999 |
 | active_magic_values_unique | PASS | duplicates=none |

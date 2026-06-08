@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T07:17:07.102538Z",
+  "created_at_utc": "2026-06-08T08:24:30.265166Z",
   "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
   "safe_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set",
-  "owner_authorized_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set",
+  "owner_authorized_template": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.template.set",
   "source_sha256": "aa92344a8b3e8c74a21443073333a2381e939187b4a5b874287c65fb5f4ec2a7",
   "safe_preset_sha256": "e5950f41ea1fc4e560f27062142487e5a2ead389bfe367b5f3f2886fc4051ec1",
-  "owner_authorized_preset_sha256": "97be3126b5f1afc48fcd2930a38ccae434e218e7a988ddff7f31879227a093ad",
+  "owner_authorized_template_sha256": "018ec324bfdf8904998d927adc7654da8fb22ef5529ec71fea24f5cab9c3ee66",
   "authority": "P2WEAKNESS_BR_V1 governance parity only; no canonical Phase 2, paper-mode, live, or real-capital authorization.",
   "checks": [
     {
@@ -65,7 +65,32 @@
       "evidence": "InpBrokerActionAllowed='false'; expected='false'"
     },
     {
-      "name": "owner_preset_magic",
+      "name": "owner_template_dry_run",
+      "status": "PASS",
+      "evidence": "InpDryRunOnly='true'; expected='true'"
+    },
+    {
+      "name": "owner_template_broker_action_disabled",
+      "status": "PASS",
+      "evidence": "InpBrokerActionAllowed='false'; expected='false'"
+    },
+    {
+      "name": "owner_template_account_placeholder",
+      "status": "PASS",
+      "evidence": "InpAllowedAccountLoginsCsv='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>'"
+    },
+    {
+      "name": "owner_template_auth_placeholder",
+      "status": "PASS",
+      "evidence": "InpExperimentalAuthorizationToken='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>'"
+    },
+    {
+      "name": "owner_template_cost_ack_placeholder",
+      "status": "PASS",
+      "evidence": "InpCostSuspensionAcknowledgementToken='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>'"
+    },
+    {
+      "name": "owner_template_magic",
       "status": "PASS",
       "evidence": "InpMagicNumber='931000'; expected='931000'"
     },

@@ -33,8 +33,9 @@ def setup_phase2_weakness_portable_demo_terminal(
     source_data_dir: Path = DEFAULT_SOURCE_DATA_DIR,
     portable_root: Path = DEFAULT_PORTABLE_ROOT,
     output_json: Path | None = None,
-    launch: bool = True,
-    deploy: bool = True,
+    prepare: bool = False,
+    launch: bool = False,
+    deploy: bool = False,
     wait_seconds: int = 60,
 ) -> Path:
     phase1_root = phase1_root.resolve()
@@ -45,19 +46,20 @@ def setup_phase2_weakness_portable_demo_terminal(
     output_md = output_json.with_suffix(".md") if output_json.name != DEFAULT_OUTPUT_JSON.name else phase1_root / DEFAULT_OUTPUT_MD
     output_json.parent.mkdir(parents=True, exist_ok=True)
 
-    copied = _prepare_portable_root(phase1_root, install_root, source_data_dir, portable_root)
+    copied = _prepare_portable_root(phase1_root, install_root, source_data_dir, portable_root) if prepare else []
     if deploy:
         deploy_output = deploy_phase2_weakness_breakout_executor(
             phase1_root,
             terminal_data_dir=portable_root,
             metaeditor_exe=install_root / "MetaEditor64.exe",
-            output_json=phase1_root / "outputs" / "reports" / "PHASE2_WEAKNESS_BR_V1_PORTABLE_DEPLOYMENT.json",
+            output_json=phase1_root / "outputs" / "reports" / "P2WEAKNESS_BR_V1_PORTABLE_DEPLOYMENT.json",
+            allow_deploy=True,
         )
         deployment_report = str(deploy_output.markdown_path)
         compile_log = str(deploy_output.compile_log)
         deployed_ex5 = str(deploy_output.deployed_ex5)
     else:
-        deployment_report = str(phase1_root / "outputs" / "reports" / "PHASE2_WEAKNESS_BR_V1_PORTABLE_DEPLOYMENT.md")
+        deployment_report = str(phase1_root / "outputs" / "reports" / "P2WEAKNESS_BR_V1_PORTABLE_DEPLOYMENT.md")
         compile_log = str(portable_root / "MQL5" / "Logs" / "compile_Phase2WeaknessBreakoutRetestExecutor.log")
         deployed_ex5 = str(portable_root / "MQL5" / "Experts" / "Phase2WeaknessBreakoutRetestExecutor.ex5")
 
@@ -81,8 +83,14 @@ def setup_phase2_weakness_portable_demo_terminal(
             time.sleep(1)
 
     logs = _log_state(portable_root)
+    if launch_started and _attached_log_detected(logs):
+        status = "PORTABLE_LAUNCHED_WITH_LOG"
+    elif launch_started:
+        status = "PORTABLE_READY_LAUNCH_SENT"
+    else:
+        status = "PORTABLE_REPORT_ONLY_NO_PREPARE_NO_DEPLOY_NO_LAUNCH"
     payload: dict[str, Any] = {
-        "status": "PORTABLE_LAUNCHED_WITH_LOG" if _attached_log_detected(logs) else "PORTABLE_READY_LAUNCH_SENT",
+        "status": status,
         "created_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "authority": (
             "Isolated owner-requested demo terminal for P2WEAKNESS_BR_V1. It does not touch the current "
@@ -92,6 +100,7 @@ def setup_phase2_weakness_portable_demo_terminal(
         "source_install_root": str(install_root),
         "source_demo_data_dir": str(source_data_dir),
         "copied_paths": copied,
+        "prepare_attempted": prepare,
         "deploy_attempted": deploy,
         "launch_started": launch_started,
         "terminal_exe": str(portable_root / "terminal64.exe"),
@@ -192,6 +201,8 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         f"- Portable root: `{payload['portable_root']}`",
         f"- Terminal exe: `{payload['terminal_exe']}`",
         f"- Startup config: `{payload['startup_config']}`",
+        f"- Prepare attempted: `{payload['prepare_attempted']}`",
+        f"- Deploy attempted: `{payload['deploy_attempted']}`",
         f"- Launch started: `{payload['launch_started']}`",
         f"- Deployment report: `{payload['deployment_report']}`",
         f"- Compile log: `{payload['compile_log']}`",
@@ -209,14 +220,15 @@ def _render_markdown(payload: dict[str, Any]) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Create and launch an isolated P2WEAKNESS_BR_V1 portable demo terminal.")
+    parser = argparse.ArgumentParser(description="Report on, or explicitly prepare, an isolated P2WEAKNESS_BR_V1 portable demo terminal.")
     parser.add_argument("--phase1-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--install-root", type=Path, default=DEFAULT_INSTALL_ROOT)
     parser.add_argument("--source-data-dir", type=Path, default=DEFAULT_SOURCE_DATA_DIR)
     parser.add_argument("--portable-root", type=Path, default=DEFAULT_PORTABLE_ROOT)
     parser.add_argument("--output-json", type=Path, default=None)
-    parser.add_argument("--no-launch", action="store_true")
-    parser.add_argument("--skip-deploy", action="store_true")
+    parser.add_argument("--allow-prepare", action="store_true", help="Copy terminal/config files into the isolated portable root.")
+    parser.add_argument("--allow-launch", action="store_true", help="Launch the isolated portable terminal after explicit preparation.")
+    parser.add_argument("--allow-deploy", action="store_true", help="Deploy/copy/compile the P2WEAKNESS EA after all deploy preconditions pass.")
     parser.add_argument("--wait-seconds", type=int, default=60)
     args = parser.parse_args(argv)
     output = setup_phase2_weakness_portable_demo_terminal(
@@ -225,8 +237,9 @@ def main(argv: list[str] | None = None) -> int:
         source_data_dir=args.source_data_dir,
         portable_root=args.portable_root,
         output_json=args.output_json,
-        launch=not args.no_launch,
-        deploy=not args.skip_deploy,
+        prepare=args.allow_prepare,
+        launch=args.allow_launch,
+        deploy=args.allow_deploy,
         wait_seconds=args.wait_seconds,
     )
     print(output.read_text(encoding="utf-8"))

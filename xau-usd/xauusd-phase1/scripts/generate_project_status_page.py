@@ -2151,6 +2151,7 @@ def _artifact_links() -> str:
         ("P2WEAKNESS magic audit", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md"),
         ("P2WEAKNESS deployment boundary", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md"),
         ("P2WEAKNESS clean-clone marker", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md"),
+        ("P2WEAKNESS runtime reconciliation", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.md"),
         ("Passive paper observer spec", "xau-usd/xauusd-phase1/docs/PASSIVE_PAPER_OBSERVER_SPEC.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),

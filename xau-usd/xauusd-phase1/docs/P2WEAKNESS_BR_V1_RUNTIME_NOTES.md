@@ -10,7 +10,7 @@
 - Does not modify or replace the existing running EAs.
 - New deployments are paused until governance fixes are reviewed.
 - Source defaults and the normal demo preset are review-only and non-executing.
-- Owner-authorized demo execution, if ever resumed, must use the separate owner-authorized preset and remain demo-only.
+- Owner-authorized demo execution, if ever resumed, must be generated from the separate owner-authorized template after owner authorization is complete.
 
 ## Identity
 
@@ -25,7 +25,7 @@
 | Symbol | `XAUUSD` |
 | Default lot | `0.01` |
 | Safe default preset | `Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set` |
-| Owner-authorized preset | `Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set` |
+| Owner-authorized template | `Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.template.set` |
 | Signal log | `p2weakness_br_v1_signal_log_xauusd.csv` |
 | Startup log | `p2weakness_br_v1_startup_xauusd.csv` |
 | Order log | `p2weakness_br_v1_order_log_xauusd.csv` |
@@ -57,7 +57,7 @@ The committed source defaults are intentionally non-executing:
 
 The committed deployment-boundary summary is:
 
-`xau-usd/xauusd-phase1/outputs/reports/PHASE2_WEAKNESS_BR_V1_DEPLOYMENT.md`
+`xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md`
 
 The P2WEAKNESS-specific governance artifacts are:
 
@@ -66,4 +66,4 @@ The P2WEAKNESS-specific governance artifacts are:
 - `xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md`
 - `xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md`
 
-The deployment script copies and compiles the safe source/preset without closing MT5, restarting MT5, replacing profiles, or attaching charts. It does not make the owner-authorized preset active.
+The deployment script defaults to report-only/no-copy/no-compile mode. If an explicit future deploy is authorized, it must still avoid closing MT5, restarting MT5, replacing profiles, or attaching charts. The owner-authorized template is not active and is not execution-enabled in the committed repo.

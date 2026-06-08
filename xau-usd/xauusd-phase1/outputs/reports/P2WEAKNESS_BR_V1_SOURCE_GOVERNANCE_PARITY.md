@@ -4,11 +4,11 @@ Status: PASS
 
 P2WEAKNESS_BR_V1 governance parity only; no canonical Phase 2, paper-mode, live, or real-capital authorization.
 
-Created at UTC: `2026-06-08T07:17:07.102538Z`
+Created at UTC: `2026-06-08T08:24:30.265166Z`
 
 - Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5`
 - Safe preset: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Presets\Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set`
-- Owner-authorized preset: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Presets\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set`
+- Owner-authorized template: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Presets\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.template.set`
 - Failed checks: `0`
 
 | Check | Status | Evidence |
@@ -24,7 +24,12 @@ Created at UTC: `2026-06-08T07:17:07.102538Z`
 | InpMagicNumber_default | PASS | actual='931000'; expected='931000' |
 | safe_preset_dry_run | PASS | InpDryRunOnly='true'; expected='true' |
 | safe_preset_broker_action_disabled | PASS | InpBrokerActionAllowed='false'; expected='false' |
-| owner_preset_magic | PASS | InpMagicNumber='931000'; expected='931000' |
+| owner_template_dry_run | PASS | InpDryRunOnly='true'; expected='true' |
+| owner_template_broker_action_disabled | PASS | InpBrokerActionAllowed='false'; expected='false' |
+| owner_template_account_placeholder | PASS | InpAllowedAccountLoginsCsv='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>' |
+| owner_template_auth_placeholder | PASS | InpExperimentalAuthorizationToken='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>' |
+| owner_template_cost_ack_placeholder | PASS | InpCostSuspensionAcknowledgementToken='<OWNER_TO_FILL>'; expected='<OWNER_TO_FILL>' |
+| owner_template_magic | PASS | InpMagicNumber='931000'; expected='931000' |
 | cost_suspension_ack_guard | PASS | all required tokens present |
 | kill_switch_present | PASS | all required tokens present |
 | demo_server_refusal | PASS | all required tokens present |

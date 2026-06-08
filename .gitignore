@@ -44,5 +44,7 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.json
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.md
 !xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json
 !xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md
