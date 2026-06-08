@@ -1,11 +1,11 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T11:46:17.577794Z",
+  "created_at_utc": "2026-06-08T12:00:07.987010Z",
   "authority": "Phase 2X runtime reconciliation. Report-only; no MT5 runtime is modified.",
   "canonical_phase2_authorized": false,
   "live_trading_authorized": false,
   "real_capital_authorized": false,
-  "signal_rows": 2,
+  "signal_rows": 3,
   "startup_rows": 1,
   "order_summary": {
     "rows": 0,
@@ -16,22 +16,22 @@
     "estimated_cost_r_mean": null,
     "estimated_cost_r_max": null
   },
-  "runtime_attachment_status": "NO_ACTIVE_P2WEAKNESS_RUNTIME_RISK_OBSERVED",
+  "runtime_attachment_status": "QUARANTINE_RUNTIME_RISK_FOUND",
   "checks": [
     {
       "name": "signal_log_present",
       "status": "PASS",
-      "evidence": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_signal_log_xauusd.csv"
+      "evidence": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_signal_log_xauusd.csv"
     },
     {
       "name": "order_log_present",
       "status": "PASS",
-      "evidence": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv"
+      "evidence": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv"
     },
     {
       "name": "startup_log_present",
       "status": "PASS",
-      "evidence": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv"
+      "evidence": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv"
     },
     {
       "name": "new_runtime_magic_931000",

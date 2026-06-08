@@ -73,6 +73,10 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DRY_RUN_PROOF_PORTABLE_TERMINAL.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_KILL_SWITCH_PROOF_PORTABLE_TERMINAL.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_KILL_SWITCH_PROOF_PORTABLE_TERMINAL.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_EXEC_PORTABLE_TERMINAL.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_EXEC_PORTABLE_TERMINAL.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_EXECUTION_STATUS_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_EXECUTION_STATUS_REPORT.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DEMO_PREFLIGHT_REPORT.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DEMO_PREFLIGHT_REPORT.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.json

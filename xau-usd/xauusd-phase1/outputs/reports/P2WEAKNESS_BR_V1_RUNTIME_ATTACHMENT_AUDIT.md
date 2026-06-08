@@ -1,10 +1,10 @@
 # P2WEAKNESS BR V1 Runtime Attachment Audit
 
-Status: NO_ACTIVE_P2WEAKNESS_RUNTIME_RISK_OBSERVED
+Status: QUARANTINE_RUNTIME_RISK_FOUND
 
 Read-only P2WEAKNESS_BR_V1 runtime attachment audit. This script reads profile files, deployed source, CSV logs, and optionally MT5 open positions/orders; it does not attach charts, deploy files, change presets, restart terminals, create kill switches, or authorize canonical Phase 2/live trading.
 
-Created at UTC: `2026-06-08T11:45:10.178884Z`
+Created at UTC: `2026-06-08T12:00:07.925487Z`
 
 ## Reviewer Questions
 
@@ -18,7 +18,7 @@ Created at UTC: `2026-06-08T11:45:10.178884Z`
 
 ## Runtime Boundary
 
-- Terminal root: `C:\MT5PortableP2WeaknessDryRunProof`
+- Terminal root: `C:\MT5PortableP2WeaknessOwnerExec`
 - MT5 runtime touched by script: `False`
 - Standard demo terminal touched: `False`
 - New deployments paused: `True`
@@ -28,7 +28,7 @@ Created at UTC: `2026-06-08T11:45:10.178884Z`
 
 ## Runtime Risks
 
-- No active P2WEAKNESS runtime risks were observed by this read-only audit.
+- `latest_startup_log_reports_broker_action_runtime`
 
 ## Deployed Source
 
@@ -43,7 +43,7 @@ Created at UTC: `2026-06-08T11:45:10.178884Z`
 
 ## Chart Profile Scan
 
-- Chart directory: `C:\MT5PortableP2WeaknessDryRunProof\MQL5\Profiles\Charts\Default`
+- Chart directory: `C:\MT5PortableP2WeaknessOwnerExec\MQL5\Profiles\Charts\Default`
 - Chart files scanned: `5`
 - P2WEAKNESS charts found: `0`
 
@@ -71,9 +71,9 @@ Created at UTC: `2026-06-08T11:45:10.178884Z`
 - Latest order action: ``
 - Latest order magic: ``
 - Latest guard reason: ``
-- Latest startup dry-run: `true`
-- Latest startup broker-action allowed: `false`
-- Latest startup status: `ATTACHED_SAFE_DEFAULT_REVIEW_ONLY_NO_BROKER_ACTION`
+- Latest startup dry-run: `false`
+- Latest startup broker-action allowed: `true`
+- Latest startup status: `ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED`
 
 ## Required Before Future Continuation
 

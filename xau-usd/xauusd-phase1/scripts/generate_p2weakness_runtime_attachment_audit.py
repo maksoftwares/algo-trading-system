@@ -178,8 +178,8 @@ def build_audit_payload(
             "order_rows": len(order_rows),
             "startup_rows": len(startup_rows),
             "runtime_magics_observed": runtime_magics,
-            "latest_order": latest_order,
-            "latest_startup": latest_startup,
+            "latest_order": _mask_sensitive_row(latest_order),
+            "latest_startup": _mask_sensitive_row(latest_startup),
         },
         "required_before_future_continuation": [
             "Owner authorization fields completed out-of-band.",
@@ -509,6 +509,21 @@ def _yes_no_unknown(value: bool, observable: bool) -> str:
     if not observable:
         return "UNKNOWN"
     return "YES" if value else "NO"
+
+
+def _mask_sensitive_row(row: dict[str, Any]) -> dict[str, Any]:
+    masked = dict(row)
+    for key in ("account_login", "account", "login", "allowed_account_logins"):
+        if key in masked:
+            masked[key] = _mask_account(masked[key])
+    return masked
+
+
+def _mask_account(value: object) -> str:
+    text = str(value or "")
+    if len(text) <= 3:
+        return "***"
+    return "*" * (len(text) - 3) + text[-3:]
 
 
 def _is_truthy(value: object) -> bool:

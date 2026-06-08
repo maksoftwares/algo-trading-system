@@ -1,10 +1,10 @@
 {
-  "status": "NO_ACTIVE_P2WEAKNESS_RUNTIME_RISK_OBSERVED",
-  "created_at_utc": "2026-06-08T11:45:10.178884Z",
+  "status": "QUARANTINE_RUNTIME_RISK_FOUND",
+  "created_at_utc": "2026-06-08T12:00:07.925487Z",
   "authority": "Read-only P2WEAKNESS_BR_V1 runtime attachment audit. This script reads profile files, deployed source, CSV logs, and optionally MT5 open positions/orders; it does not attach charts, deploy files, change presets, restart terminals, create kill switches, or authorize canonical Phase 2/live trading.",
-  "terminal_root": "C:\\MT5PortableP2WeaknessDryRunProof",
+  "terminal_root": "C:\\MT5PortableP2WeaknessOwnerExec",
   "terminal_exists": true,
-  "terminal_exe": "C:\\MT5PortableP2WeaknessDryRunProof\\terminal64.exe",
+  "terminal_exe": "C:\\MT5PortableP2WeaknessOwnerExec\\terminal64.exe",
   "mt5_runtime_touched_by_script": false,
   "standard_demo_terminal_touched": false,
   "new_deployments_paused": true,
@@ -19,7 +19,9 @@
     "are_there_open_orders_by_old_magic": "NO",
     "was_hardened_931000_source_deployed": "YES"
   },
-  "runtime_risks": [],
+  "runtime_risks": [
+    "latest_startup_log_reports_broker_action_runtime"
+  ],
   "old_magic_930101": {
     "attached_in_chart_profile": false,
     "observed_in_runtime_logs": false,
@@ -35,8 +37,8 @@
   },
   "source_audit": {
     "repo_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
-    "deployed_source": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
-    "deployed_ex5": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.ex5",
+    "deployed_source": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
+    "deployed_ex5": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.ex5",
     "repo_source_exists": true,
     "deployed_source_exists": true,
     "deployed_ex5_exists": true,
@@ -109,13 +111,13 @@
     }
   },
   "chart_audit": {
-    "chart_dir": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default",
+    "chart_dir": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default",
     "chart_dir_exists": true,
     "chart_files_scanned": 5,
     "p2weakness_charts": [],
     "charts": [
       {
-        "path": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+        "path": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
         "symbol": "",
         "expert_name": "",
         "expert_path": "",
@@ -130,7 +132,7 @@
         "evidence": "NO_EXPERT_BLOCK"
       },
       {
-        "path": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+        "path": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
         "symbol": "",
         "expert_name": "",
         "expert_path": "",
@@ -145,7 +147,7 @@
         "evidence": "NO_EXPERT_BLOCK"
       },
       {
-        "path": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+        "path": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
         "symbol": "",
         "expert_name": "",
         "expert_path": "",
@@ -160,7 +162,7 @@
         "evidence": "NO_EXPERT_BLOCK"
       },
       {
-        "path": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+        "path": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
         "symbol": "",
         "expert_name": "",
         "expert_path": "",
@@ -175,7 +177,7 @@
         "evidence": "NO_EXPERT_BLOCK"
       },
       {
-        "path": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
+        "path": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
         "symbol": "",
         "expert_name": "",
         "expert_path": "",
@@ -200,9 +202,9 @@
     "total_orders": 0
   },
   "logs": {
-    "order_log": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
-    "startup_log": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv",
-    "kill_switch_file": "C:\\MT5PortableP2WeaknessDryRunProof\\MQL5\\Files\\p2weakness_br_v1_kill_switch.txt",
+    "order_log": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
+    "startup_log": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv",
+    "kill_switch_file": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_kill_switch.txt",
     "order_log_exists": true,
     "startup_log_exists": true,
     "kill_switch_exists": false,
@@ -211,34 +213,34 @@
     "runtime_magics_observed": [],
     "latest_order": {},
     "latest_startup": {
-      "timestamp_broker": "2026.06.08 11:41:46",
-      "timestamp_utc": "2026.06.08 11:41:42",
-      "timestamp_local": "2026.06.08 15:41:42",
+      "timestamp_broker": "2026.06.08 11:53:45",
+      "timestamp_utc": "2026.06.08 11:53:40",
+      "timestamp_local": "2026.06.08 15:53:40",
       "run_id": "P2WEAKNESS_BR_V1",
       "account_server": "Capital.ComMena-Demo",
-      "account_login": "1025742",
+      "account_login": "****742",
       "symbol": "XAUUSD",
       "candidate": "breakout_retest",
       "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
       "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
       "magic": "931000",
       "order_comment": "P2WEAKNESS_BR_V1",
-      "dry_run": "true",
-      "broker_action_allowed": "false",
-      "allowed_account_logins": "",
-      "authorization_token_present": "false",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "allowed_account_logins": "****742",
+      "authorization_token_present": "true",
       "source_default_safe": "true",
-      "owner_authorized_set_used": "false",
-      "experimental_authorization_token_present": "false",
-      "cost_suspension_acknowledged": "false",
-      "max_orders_per_day": "6",
-      "max_account_orders_per_day": "12",
-      "max_family_open_positions": "3",
+      "owner_authorized_set_used": "true",
+      "experimental_authorization_token_present": "true",
+      "cost_suspension_acknowledged": "true",
+      "max_orders_per_day": "2",
+      "max_account_orders_per_day": "3",
+      "max_family_open_positions": "1",
       "duplicate_lock_bars": "12",
-      "max_estimated_cost_R": "0.3000",
+      "max_estimated_cost_R": "0.1500",
       "max_measured_spread_points": "75.00",
       "kill_switch_file": "p2weakness_br_v1_kill_switch.txt",
-      "startup_status": "ATTACHED_SAFE_DEFAULT_REVIEW_ONLY_NO_BROKER_ACTION"
+      "startup_status": "ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED"
     }
   },
   "required_before_future_continuation": [

@@ -1,0 +1,160 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T12:00:07.987010Z",
+  "authority": "Phase 2X owner-execution status. Experimental demo only; no canonical Phase 2, no live trading, and no real capital authorization.",
+  "run_id": "P2WEAKNESS_BR_V1",
+  "owner_exec_root": "C:\\MT5PortableP2WeaknessOwnerExec",
+  "startup_log": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv",
+  "signal_log": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_signal_log_xauusd.csv",
+  "order_log": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
+  "latest_startup": {
+    "timestamp_broker": "2026.06.08 11:53:45",
+    "timestamp_utc": "2026.06.08 11:53:40",
+    "timestamp_local": "2026.06.08 15:53:40",
+    "run_id": "P2WEAKNESS_BR_V1",
+    "account_server": "Capital.ComMena-Demo",
+    "account_login": "****742",
+    "symbol": "XAUUSD",
+    "candidate": "breakout_retest",
+    "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+    "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+    "magic": "931000",
+    "order_comment": "P2WEAKNESS_BR_V1",
+    "dry_run": "false",
+    "broker_action_allowed": "true",
+    "allowed_account_logins": "****742",
+    "authorization_token_present": "true",
+    "source_default_safe": "true",
+    "owner_authorized_set_used": "true",
+    "experimental_authorization_token_present": "true",
+    "cost_suspension_acknowledged": "true",
+    "max_orders_per_day": "2",
+    "max_account_orders_per_day": "3",
+    "max_family_open_positions": "1",
+    "duplicate_lock_bars": "12",
+    "max_estimated_cost_R": "0.1500",
+    "max_measured_spread_points": "75.00",
+    "kill_switch_file": "p2weakness_br_v1_kill_switch.txt",
+    "startup_status": "ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED"
+  },
+  "latest_signal": {
+    "timestamp_broker": "2026.06.08 12:00:00",
+    "timestamp_utc": "2026.06.08 11:59:55",
+    "timestamp_local": "2026.06.08 15:59:55",
+    "run_id": "P2WEAKNESS_BR_V1",
+    "account_server": "Capital.ComMena-Demo",
+    "account_login": "****742",
+    "symbol": "XAUUSD",
+    "candidate": "breakout_retest",
+    "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+    "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+    "magic": "931000",
+    "order_comment": "P2WEAKNESS_BR_V1",
+    "m5_bar_time": "2026.06.08 12:00:00",
+    "bid": "4330.84",
+    "ask": "4331.34",
+    "spread_points": "50.00",
+    "stage": "WAIT_LEVEL_BREAK_RETEST",
+    "direction": "LONG",
+    "would_signal": "false",
+    "reason_code": "no_long_breakout_retest_candidate",
+    "level_kind": "none",
+    "level_price": "0.00",
+    "entry_price": "0.00",
+    "stop_loss": "0.00",
+    "take_profit": "0.00",
+    "stop_distance_points": "0.00",
+    "duplicate_lock_key": ""
+  },
+  "order_summary": {
+    "rows": 0,
+    "actions": {},
+    "order_send_ok": 0,
+    "guard_blocks": 0,
+    "estimated_cost_r_min": null,
+    "estimated_cost_r_mean": null,
+    "estimated_cost_r_max": null
+  },
+  "sent_orders": 0,
+  "phase2x_demo_execution_attached": true,
+  "canonical_phase2_authorized": false,
+  "live_trading_authorized": false,
+  "real_capital_authorized": false,
+  "checks": [
+    {
+      "name": "owner_exec_terminal_root_present",
+      "status": "PASS",
+      "evidence": "C:\\MT5PortableP2WeaknessOwnerExec"
+    },
+    {
+      "name": "startup_log_present",
+      "status": "PASS",
+      "evidence": "C:\\MT5PortableP2WeaknessOwnerExec\\MQL5\\Files\\p2weakness_br_v1_startup_xauusd.csv"
+    },
+    {
+      "name": "attached_owner_authorized",
+      "status": "PASS",
+      "evidence": "startup_status='ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED'"
+    },
+    {
+      "name": "broker_action_enabled_for_demo",
+      "status": "PASS",
+      "evidence": "dry_run='false'; broker_action_allowed='true'"
+    },
+    {
+      "name": "demo_server_only",
+      "status": "PASS",
+      "evidence": "account_server='Capital.ComMena-Demo'"
+    },
+    {
+      "name": "account_login_present_masked",
+      "status": "PASS",
+      "evidence": "****742"
+    },
+    {
+      "name": "magic_931000",
+      "status": "PASS",
+      "evidence": "magic='931000'"
+    },
+    {
+      "name": "symbol_xauusd",
+      "status": "PASS",
+      "evidence": "symbol='XAUUSD'"
+    },
+    {
+      "name": "fixed_lot_guard",
+      "status": "PASS",
+      "evidence": "max_estimated_cost_R='0.1500'"
+    },
+    {
+      "name": "family_exposure_guard",
+      "status": "PASS",
+      "evidence": "max_family_open_positions='1'"
+    },
+    {
+      "name": "signal_log_active",
+      "status": "PASS",
+      "evidence": "signal_rows=3"
+    },
+    {
+      "name": "all_order_rows_magic_931000",
+      "status": "PASS",
+      "evidence": "order_rows=0"
+    },
+    {
+      "name": "all_order_rows_symbol_xauusd",
+      "status": "PASS",
+      "evidence": "order_rows=0"
+    },
+    {
+      "name": "sent_lots_lte_0_01",
+      "status": "PASS",
+      "evidence": "sent_orders=0"
+    },
+    {
+      "name": "sent_cost_r_lte_0_15",
+      "status": "PASS",
+      "evidence": "sent_orders=0"
+    }
+  ]
+}
