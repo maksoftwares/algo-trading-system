@@ -8,6 +8,12 @@ __pycache__/
 dist/
 build/
 
+# Phase 2X owner authorization and execution-enabled presets are local/private.
+xau-usd/xauusd-phase1/local/
+*.owner_authorized_demo_xauusd.local.set
+*owner_authorized*.local.*
+PHASE2X_OWNER_APPROVAL.local.*
+
 # Market data and generated research outputs should be controlled by package-level ignores.
 outputs/
 data/processed/
@@ -55,5 +61,26 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.json
 !xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_ATTACHMENT_AUDIT.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_ATTACHMENT_AUDIT.md
 !xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json
 !xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_SAFE_DEFAULTS_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_SAFE_DEFAULTS_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_NO_TOUCH_STAGING_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_NO_TOUCH_STAGING_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DEMO_PREFLIGHT_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DEMO_PREFLIGHT_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_OWNER_AUTHORIZATION_STATUS.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_RUNTIME_RECONCILIATION.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_RUNTIME_RECONCILIATION.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_RUNTIME_CLEANUP_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_RUNTIME_CLEANUP_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_KILL_SWITCH_BLOCK_TEST_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_KILL_SWITCH_BLOCK_TEST_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_EVIDENCE_BUNDLE_MANIFEST.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_EVIDENCE_BUNDLE_MANIFEST.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_EVIDENCE_BUNDLE_*.zip
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DAILY_DEMO_REVIEW_*.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DAILY_DEMO_REVIEW_*.md

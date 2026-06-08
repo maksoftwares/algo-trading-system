@@ -1,0 +1,137 @@
+{
+  "status": "PENDING",
+  "created_at_utc": "2026-06-08T11:29:07.646439Z",
+  "authority": "Phase 2X demo preflight. Can approve only quarantined experimental demo execution; cannot approve canonical Phase 2, live trading, or real capital.",
+  "phase2x_demo_execution_authorized": false,
+  "canonical_phase2_authorized": false,
+  "live_trading_authorized": false,
+  "real_capital_authorized": false,
+  "local_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set",
+  "checks": [
+    {
+      "name": "canonical_phase2_readiness_is_fail_or_blocked",
+      "status": "PASS",
+      "evidence": "PHASE2_READINESS_REPORT.md status=FAIL"
+    },
+    {
+      "name": "cost_suspended_lifecycle_acknowledged",
+      "status": "PASS",
+      "evidence": "status=COST_SUSPENDED_CANONICAL; expected=COST_SUSPENDED_CANONICAL"
+    },
+    {
+      "name": "source_governance_parity",
+      "status": "PASS",
+      "evidence": "status=PASS"
+    },
+    {
+      "name": "magic_collision_audit",
+      "status": "PASS",
+      "evidence": "status=PASS"
+    },
+    {
+      "name": "clean_clone_reconciliation",
+      "status": "PASS",
+      "evidence": "status=PASS"
+    },
+    {
+      "name": "safe_preset_non_executing",
+      "status": "PASS",
+      "evidence": "status=PASS; expected=PASS"
+    },
+    {
+      "name": "owner_authorization_status",
+      "status": "PASS",
+      "evidence": "status=PASS; expected=PASS"
+    },
+    {
+      "name": "owner_authorization_local_file_present",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set"
+    },
+    {
+      "name": "owner_local_preset_uses_931000",
+      "status": "PASS",
+      "evidence": "InpMagicNumber='931000'"
+    },
+    {
+      "name": "owner_local_preset_fixed_lot_lte_0_01",
+      "status": "PASS",
+      "evidence": "InpFixedLot='0.01'"
+    },
+    {
+      "name": "owner_local_preset_max_orders_per_day_lte_3",
+      "status": "PASS",
+      "evidence": "InpMaxOrdersPerDay='2'"
+    },
+    {
+      "name": "owner_local_preset_max_account_orders_per_day_lte_3",
+      "status": "PASS",
+      "evidence": "InpMaxAccountOrdersPerDay='3'"
+    },
+    {
+      "name": "owner_local_preset_max_family_open_positions_eq_1",
+      "status": "PASS",
+      "evidence": "InpMaxFamilyOpenPositions='1'"
+    },
+    {
+      "name": "owner_local_preset_cost_r_lte_0_15",
+      "status": "PASS",
+      "evidence": "InpMaxEstimatedCostR='0.15'"
+    },
+    {
+      "name": "owner_local_preset_spread_lte_75",
+      "status": "PASS",
+      "evidence": "InpMaxMeasuredSpreadPoints='75.0'"
+    },
+    {
+      "name": "target_symbol_xauusd",
+      "status": "PASS",
+      "evidence": "InpTargetSymbol='XAUUSD'"
+    },
+    {
+      "name": "owner_local_preset_not_committed",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set"
+    },
+    {
+      "name": "old_magic_930101_not_allowed_for_new_deployment",
+      "status": "PASS",
+      "evidence": "preset_magic=931000"
+    },
+    {
+      "name": "runtime_cleanup_report_pass",
+      "status": "PENDING_RUNTIME_EVIDENCE",
+      "evidence": "status=PENDING; expected=PASS"
+    },
+    {
+      "name": "kill_switch_block_test_pass",
+      "status": "PENDING_RUNTIME_EVIDENCE",
+      "evidence": "status=PENDING; expected=PASS"
+    },
+    {
+      "name": "demo_account_isolation_evidence",
+      "status": "PASS",
+      "evidence": "owner authorization masks account when available"
+    },
+    {
+      "name": "server_marker_demo",
+      "status": "PASS",
+      "evidence": "server_marker='Capital.ComMena-Demo'"
+    },
+    {
+      "name": "no_live_server_marker_in_authorized_runtime",
+      "status": "PASS",
+      "evidence": "server_marker='Capital.ComMena-Demo'"
+    },
+    {
+      "name": "no_canonical_promotion",
+      "status": "PASS",
+      "evidence": "Phase 2X does not change PHASE2_READINESS_REPORT.md or cost-suspension reports."
+    },
+    {
+      "name": "runtime_attachment_audit_available",
+      "status": "PASS",
+      "evidence": "P2WEAKNESS runtime attachment audit is used as evidence."
+    }
+  ]
+}

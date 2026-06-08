@@ -1,0 +1,28 @@
+{
+  "status": "PENDING",
+  "created_at_utc": "2026-06-08T11:24:29.148199Z",
+  "authority": "Phase 2X kill-switch block-test report. Report-only; it does not create files, send orders, or modify MT5 state.",
+  "kill_switch_file": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_kill_switch.txt",
+  "kill_switch_file_currently_exists": false,
+  "order_log": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",
+  "canonical_phase2_authorized": false,
+  "live_trading_authorized": false,
+  "real_capital_authorized": false,
+  "checks": [
+    {
+      "name": "order_log_present",
+      "status": "PASS",
+      "evidence": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv"
+    },
+    {
+      "name": "kill_switch_block_observed",
+      "status": "PENDING_RUNTIME_EVIDENCE",
+      "evidence": "kill_block_rows=0"
+    },
+    {
+      "name": "no_broker_action_during_block",
+      "status": "PENDING_RUNTIME_EVIDENCE",
+      "evidence": "sent_during_kill=0"
+    }
+  ]
+}

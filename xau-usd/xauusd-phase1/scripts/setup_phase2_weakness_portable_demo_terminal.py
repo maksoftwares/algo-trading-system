@@ -87,6 +87,12 @@ def setup_phase2_weakness_portable_demo_terminal(
         status = "PORTABLE_LAUNCHED_WITH_LOG"
     elif launch_started:
         status = "PORTABLE_READY_LAUNCH_SENT"
+    elif prepare and deploy:
+        status = "PORTABLE_PREPARED_AND_DEPLOYED_NO_LAUNCH"
+    elif prepare:
+        status = "PORTABLE_PREPARED_NO_DEPLOY_NO_LAUNCH"
+    elif deploy:
+        status = "PORTABLE_DEPLOYED_NO_LAUNCH"
     else:
         status = "PORTABLE_REPORT_ONLY_NO_PREPARE_NO_DEPLOY_NO_LAUNCH"
     payload: dict[str, Any] = {

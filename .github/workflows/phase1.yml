@@ -36,6 +36,9 @@ jobs:
       - name: Generate P2WEAKNESS governance reports
         run: python scripts/generate_p2weakness_governance_reports.py
 
+      - name: Validate Phase 2X safe defaults
+        run: python scripts/phase2x_validate_safe_defaults.py
+
       - name: Verify Phase 2 transition artifacts and dashboard freshness
         run: python scripts/verify_phase2_transition_artifacts.py --root . --repo-root ../.. --status-path ../../status.html
 

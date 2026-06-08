@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T11:36:59.921404Z",
+  "authority": "Phase 2X no-touch staging report. Report-only; it does not touch existing running MT5 terminals, attach charts, launch terminals, or authorize broker execution.",
+  "phase2x_demo_execution_authorized": false,
+  "canonical_phase2_authorized": false,
+  "live_trading_authorized": false,
+  "real_capital_authorized": false,
+  "startup_config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Config\\p2weakness_br_v1_startup.ini",
+  "safe_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set",
+  "local_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set",
+  "local_preset_sha256": "c85299972f4a9449dccaddd63e69dafe8a2e843c063a62a22fb7f02f6a8ee84c",
+  "portable_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_WEAKNESS_BR_V1_PORTABLE_DEMO_TERMINAL.json",
+  "checks": [
+    {
+      "name": "script_is_report_only",
+      "status": "PASS",
+      "evidence": "No launch, attach, close, restart, order, or file-copy action is performed."
+    },
+    {
+      "name": "startup_config_exists",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Config\\p2weakness_br_v1_startup.ini"
+    },
+    {
+      "name": "startup_live_trading_disabled",
+      "status": "PASS",
+      "evidence": "AllowLiveTrading='0'"
+    },
+    {
+      "name": "startup_uses_committed_safe_preset",
+      "status": "PASS",
+      "evidence": "ExpertParameters='Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set'"
+    },
+    {
+      "name": "startup_symbol_xauusd_m5",
+      "status": "PASS",
+      "evidence": "Symbol='XAUUSD'; Period='M5'"
+    },
+    {
+      "name": "safe_preset_non_executing",
+      "status": "PASS",
+      "evidence": "InpDryRunOnly='true'; InpBrokerActionAllowed='false'"
+    },
+    {
+      "name": "safe_preset_private_tokens_blank",
+      "status": "PASS",
+      "evidence": "account whitelist, auth token, and cost acknowledgement must be blank in committed safe preset."
+    },
+    {
+      "name": "safe_preset_magic_931000",
+      "status": "PASS",
+      "evidence": "InpMagicNumber='931000'"
+    },
+    {
+      "name": "owner_local_preset_present",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set"
+    },
+    {
+      "name": "owner_local_preset_private_path",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\local\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.local.set"
+    },
+    {
+      "name": "owner_local_preset_sha256_only",
+      "status": "PASS",
+      "evidence": "c85299972f4a9449dccaddd63e69dafe8a2e843c063a62a22fb7f02f6a8ee84c"
+    },
+    {
+      "name": "owner_local_preset_strict_values",
+      "status": "PASS",
+      "evidence": "InpRunId='P2WEAKNESS_BR_V1'; InpMagicNumber='931000'; InpFixedLot='0.01'; InpMaxFamilyOpenPositions='1'; InpMaxEstimatedCostR='0.15'; InpMaxMeasuredSpreadPoints='75.0'"
+    },
+    {
+      "name": "portable_report_available",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_WEAKNESS_BR_V1_PORTABLE_DEMO_TERMINAL.json"
+    },
+    {
+      "name": "portable_not_launched_by_staging",
+      "status": "PASS",
+      "evidence": "status='PORTABLE_PREPARED_AND_DEPLOYED_NO_LAUNCH'; launch_started=False"
+    },
+    {
+      "name": "portable_old_terminal_not_touched",
+      "status": "PASS",
+      "evidence": "old_terminal_profile_touched=False; old_terminal_closed_or_restarted=False"
+    },
+    {
+      "name": "preflight_not_forced_to_pass",
+      "status": "PASS",
+      "evidence": "preflight_status='PENDING'"
+    },
+    {
+      "name": "canonical_phase2_not_promoted",
+      "status": "PASS",
+      "evidence": "No canonical Phase 2 readiness report is changed by this no-touch staging report."
+    }
+  ]
+}

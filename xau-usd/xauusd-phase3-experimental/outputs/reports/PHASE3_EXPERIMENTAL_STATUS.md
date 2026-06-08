@@ -20,8 +20,8 @@ Overall status: EXPERIMENTAL_COST_SUSPEND_SCENARIO
 | Phase 2 readiness | FAIL |
 | Authority status | NON_AUTHORITATIVE_EXPERIMENTAL |
 | Real Phase 2 source | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_READINESS_REPORT.md |
-| Snapshot created | 2026-06-02T11:21:33.242893Z |
-| Latest Phase 1 bar | 2026.06.02 10:20:00 |
+| Snapshot created | 2026-06-08T10:53:27.277264Z |
+| Latest Phase 1 bar | 2026.06.02 14:05:00 |
 | Latest Phase 1 dry run | true |
 | Latest Phase 1 trade permission | false |
 
