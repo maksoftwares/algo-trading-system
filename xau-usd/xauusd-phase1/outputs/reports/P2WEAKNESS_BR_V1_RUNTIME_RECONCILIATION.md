@@ -4,7 +4,7 @@ Status: REVIEW_ONLY_RUNTIME_RECONCILED
 
 Runtime reconciliation for existing P2WEAKNESS_BR_V1 evidence. This report reads CSV/log files only; it does not attach charts, change presets, deploy files, close terminals, or authorize canonical Phase 2.
 
-Created at UTC: `2026-06-08T08:24:30.265166Z`
+Created at UTC: `2026-06-08T08:26:01.892626Z`
 
 - New deployments paused: `True`
 - Order log exists: `True`

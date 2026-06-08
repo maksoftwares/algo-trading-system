@@ -4,7 +4,7 @@ Status: PASS
 
 P2WEAKNESS_BR_V1 governance parity only; no canonical Phase 2, paper-mode, live, or real-capital authorization.
 
-Created at UTC: `2026-06-08T08:24:30.265166Z`
+Created at UTC: `2026-06-08T08:26:01.892626Z`
 
 - Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5`
 - Safe preset: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Presets\Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set`

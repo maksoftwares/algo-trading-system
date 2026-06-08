@@ -239,9 +239,10 @@ def _clean_clone_proof_payload(
     created_at: str,
 ) -> dict[str, Any]:
     repo_root = phase1_root.parents[1]
-    with tempfile.TemporaryDirectory(prefix="ats-p2weakness-clean-clone-") as temp_dir:
+    temp_parent = Path("C:/") if Path("C:/").exists() else None
+    with tempfile.TemporaryDirectory(prefix="p2w-", dir=str(temp_parent) if temp_parent else None) as temp_dir:
         clone_root = Path(temp_dir) / "origin-main-clean-clone"
-        _run(["git", "clone", "--depth", "1", "--branch", branch, repo_url, str(clone_root)], cwd=Path(temp_dir))
+        _run(["git", "-c", "core.longpaths=true", "clone", "--depth", "1", "--branch", branch, repo_url, str(clone_root)], cwd=Path(temp_dir))
         clone_commit = _run(["git", "rev-parse", "HEAD"], cwd=clone_root).strip()
         clone_status = _run(["git", "status", "--short"], cwd=clone_root).strip()
         clone_phase1 = clone_root / "xau-usd" / "xauusd-phase1"

@@ -1,6 +1,6 @@
 {
   "status": "REVIEW_ONLY_RUNTIME_RECONCILED",
-  "created_at_utc": "2026-06-08T08:24:30.265166Z",
+  "created_at_utc": "2026-06-08T08:26:01.892626Z",
   "authority": "Runtime reconciliation for existing P2WEAKNESS_BR_V1 evidence. This report reads CSV/log files only; it does not attach charts, change presets, deploy files, close terminals, or authorize canonical Phase 2.",
   "new_deployments_paused": true,
   "order_log": "C:\\MT5PortableP2WeaknessDemo\\MQL5\\Files\\p2weakness_br_v1_order_log_xauusd.csv",

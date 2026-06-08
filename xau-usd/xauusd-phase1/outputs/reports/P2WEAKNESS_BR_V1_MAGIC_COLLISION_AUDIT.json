@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T08:24:30.265166Z",
+  "created_at_utc": "2026-06-08T08:26:01.892626Z",
   "authority": "Magic collision audit for experimental namespaces. PASS does not authorize deployment or trading.",
   "p2weakness_namespace": "931000-931099",
   "p2weakness_active_magic": 931000,

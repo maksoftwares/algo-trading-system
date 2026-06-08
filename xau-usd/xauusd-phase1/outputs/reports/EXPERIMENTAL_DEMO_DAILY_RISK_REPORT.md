@@ -4,7 +4,7 @@ Status: REVIEW_ONLY
 
 Experimental demo daily risk report. It does not authorize canonical Phase 2, deployment, live trading, or real capital.
 
-Created at UTC: `2026-06-08T08:24:30.265166Z`
+Created at UTC: `2026-06-08T08:26:01.892626Z`
 
 - Order log exists: `True`
 - Startup log exists: `True`

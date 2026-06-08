@@ -1,43 +1,71 @@
 {
-  "status": "PENDING_AFTER_COMMIT_AND_PUSH",
-  "created_at_utc": "2026-06-08T08:24:30.265166Z",
-  "authority": "Clean-clone reconciliation marker for P2WEAKNESS_BR_V1. A true remote clean-clone proof should be regenerated after commit/push.",
-  "repo_head": "807c17f7c434ac7a30a39a05c65560f25c64498f",
-  "working_tree_has_pending_changes": true,
-  "pending_paths": [
-    "M .gitignore",
-    "M README.md",
-    "M agent.md",
-    "M demo-observer-dashboard.html",
-    "M status.html",
-    "M xau-usd/xauusd-phase1/docs/P2WEAKNESS_BR_V1_RUNTIME_NOTES.md",
-    "D xau-usd/xauusd-phase1/mt5/Presets/Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set",
-    "M xau-usd/xauusd-phase1/outputs/reports/BROKER_ACTION_FILE_BOUNDARY_AUDIT.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.md",
-    "M xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.json",
-    "M xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md",
-    "M xau-usd/xauusd-phase1/scripts/deploy_phase2_weakness_breakout_executor.py",
-    "M xau-usd/xauusd-phase1/scripts/generate_demo_observer_dashboard.py",
-    "M xau-usd/xauusd-phase1/scripts/generate_p2weakness_governance_reports.py",
-    "M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py",
-    "M xau-usd/xauusd-phase1/scripts/setup_phase2_weakness_portable_demo_terminal.py",
-    "M xau-usd/xauusd-phase1/tests/test_demo_observer_dashboard.py",
-    "M xau-usd/xauusd-phase1/tests/test_p2weakness_governance_reports.py",
-    "M xau-usd/xauusd-phase1/tests/test_phase2_weakness_breakout_executor.py",
-    "?? xau-usd/xauusd-phase1/mt5/Presets/Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.template.set",
-    "?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.json",
-    "?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_RUNTIME_RECONCILIATION.md"
-  ],
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T08:26:01.892626Z",
+  "authority": "Remote clean-clone proof for P2WEAKNESS_BR_V1. This clones the configured branch and validates the pushed source, presets, scripts, and parser boundaries. It does not deploy, attach charts, touch MT5 runtime, authorize canonical Phase 2, or authorize real capital.",
+  "repo_url": "https://github.com/maksoftwares/algo-trading-system.git",
+  "branch": "main",
+  "clone_commit_hash": "3290211102f59f8002dd73f21a39bc91a9b3cfec",
+  "local_repo_head": "3290211102f59f8002dd73f21a39bc91a9b3cfec",
+  "local_working_tree_has_pending_changes_after_report_generation": true,
+  "clone_working_tree_status_short": "",
   "local_parity_status": "PASS",
   "local_magic_collision_status": "PASS",
-  "required_post_push_action": "Clone origin/main after push, rerun this generator, and expect source/magic parity to remain PASS."
+  "clone_parity_status": "PASS",
+  "clone_magic_collision_status": "PASS",
+  "source_path": "xau-usd/xauusd-phase1/mt5/Experts/Phase2WeaknessBreakoutRetestExecutor.mq5",
+  "source_file_sha256": "aa92344a8b3e8c74a21443073333a2381e939187b4a5b874287c65fb5f4ec2a7",
+  "clone_source_file_sha256": "aa92344a8b3e8c74a21443073333a2381e939187b4a5b874287c65fb5f4ec2a7",
+  "safe_preset_sha256": "e5950f41ea1fc4e560f27062142487e5a2ead389bfe367b5f3f2886fc4051ec1",
+  "clone_safe_preset_sha256": "e5950f41ea1fc4e560f27062142487e5a2ead389bfe367b5f3f2886fc4051ec1",
+  "owner_template_sha256": "018ec324bfdf8904998d927adc7654da8fb22ef5529ec71fea24f5cab9c3ee66",
+  "clone_owner_template_sha256": "018ec324bfdf8904998d927adc7654da8fb22ef5529ec71fea24f5cab9c3ee66",
+  "source_input_declaration_block": "11: input string InpRunId = \"P2WEAKNESS_BR_V1\";\n12: input bool InpDryRunOnly = true;\n13: input bool InpBrokerActionAllowed = false;\n14: input string InpTargetSymbol = \"XAUUSD\";\n15: input string InpExpectedServerMarker = \"Demo\";\n16: input string InpAllowedAccountLoginsCsv = \"\";\n17: input string InpExperimentalAuthorizationToken = \"\";\n18: input string InpRequiredExperimentalAuthorizationToken = \"EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY\";\n19: input string InpCostSuspensionAcknowledgementToken = \"\";\n20: input string InpRequiredCostSuspensionAcknowledgementToken = \"I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT\";\n21: input string InpCandidateStatus = \"EXPERIMENTAL_QUARANTINE_REVIEW_ONLY\";\n22: input string InpFamilyLifecycleStatus = \"COST_SUSPENDED_CANONICAL\";\n23: input string InpKillSwitchFileName = \"p2weakness_br_v1_kill_switch.txt\";\n24: input string InpSignalLogFileName = \"p2weakness_br_v1_signal_log_xauusd.csv\";\n25: input string InpStartupLogFileName = \"p2weakness_br_v1_startup_xauusd.csv\";\n26: input string InpOrderLogFileName = \"p2weakness_br_v1_order_log_xauusd.csv\";\n27: input double InpFixedLot = 0.01;\n28: input int InpMagicNumber = 931000;\n29: input int InpMaxOrdersPerDay = 6;\n30: input int InpMaxAccountOrdersPerDay = 12;\n31: input int InpMinSecondsBetweenOrders = 300;\n32: input int InpMaxOpenPositionsPerInstance = 1;\n33: input int InpMaxFamilyOpenPositions = 3;\n34: input int InpDuplicateLockBars = 12;\n35: input int InpDeviationPoints = 50;\n36: input double InpMaxEstimatedCostR = 0.30;\n37: input double InpMaxMeasuredSpreadPoints = 75.0;",
+  "checks": [
+    {
+      "name": "clone_working_tree_clean",
+      "status": "PASS",
+      "evidence": "git status --short=''"
+    },
+    {
+      "name": "clone_parity_pass",
+      "status": "PASS",
+      "evidence": "clone parity=PASS"
+    },
+    {
+      "name": "clone_magic_pass",
+      "status": "PASS",
+      "evidence": "clone magic=PASS"
+    },
+    {
+      "name": "legacy_owner_authorized_set_absent",
+      "status": "PASS",
+      "evidence": "legacy executing preset absent"
+    },
+    {
+      "name": "owner_template_committed_non_executing",
+      "status": "PASS",
+      "evidence": "template dry-run=true; broker action=false"
+    },
+    {
+      "name": "deploy_script_report_only_default",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "deploy_script_requires_preconditions",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "portable_setup_no_runtime_defaults",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "dashboard_includes_p2weakness_actual_trades",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    }
+  ],
+  "failed_count": 0
 }
