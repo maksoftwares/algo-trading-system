@@ -40,6 +40,11 @@ def test_demo_executor_is_demo_scoped_and_explicitly_armed():
     assert 'ContainsText(server, "live")' in text
     assert 'ContainsText(server, "real")' in text
     assert "InpFixedLot = 0.01" in text
+    assert "InpEURUSDFixedLot = 0.05" in text
+    assert "EffectiveFixedLot()" in text
+    assert 'if(_Symbol == "EURUSD")' in text
+    assert 'input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";' in text
+    assert 'if(symbol_name == "GBPUSD")' in text
     assert "InpMaxOpenPositionsPerInstance = 1" in text
     assert "InpMaxOrdersPerDay = 12" in text
     assert "MARKET_PROXY" in text
@@ -75,6 +80,7 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpRequiredCostSuspensionAcknowledgementToken=I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT" in chart
     assert "InpAuthorizedCandidatesCsv=breakout_retest" in chart
     assert "InpFixedLot=0.01" in chart
+    assert "InpEURUSDFixedLot=0.05" in chart
     assert "InpMaxAccountOrdersPerDay=24" in chart
     assert "InpMaxOpenPositionsPerInstance=1" in chart
     assert "InpMaxAccountOpenPositions=3" in chart
@@ -82,6 +88,41 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpMaxMeasuredSpreadPoints=75.0" in chart
     assert "InpKillSwitchFileName=experimental_demo_kill_switch.txt" in chart
     assert "InpOrderLogFileName=experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv" in chart
+
+
+def test_demo_executor_attach_script_uses_eurusd_lot_override():
+    module = _load_module()
+    row = module.AttachmentRow(
+        candidate="breakout_retest",
+        status="EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+        symbol="EURUSD",
+        qualification_source="test",
+        observer_supported=True,
+    )
+
+    chart = module._render_chart(row, 1)
+
+    assert "InpTargetSymbol=EURUSD" in chart
+    assert "InpFixedLot=0.05" in chart
+    assert "InpEURUSDFixedLot=0.05" in chart
+    assert module.fixed_lot_for_symbol("EURUSD") == 0.05
+    assert module.fixed_lot_for_symbol("XAUUSD") == 0.01
+    assert module.fixed_lot_for_symbol("GBPUSD") == 0.01
+
+
+def test_demo_executor_attachment_plan_replaces_usdjpy_with_gbpusd():
+    module = _load_module()
+
+    plan = module.build_attachment_plan(ROOT)
+    pairs = {(row.candidate, row.symbol) for row in plan}
+
+    assert ("breakout_retest", "GBPUSD") in pairs
+    assert ("swing_breakout_retest_v0", "GBPUSD") in pairs
+    assert ("symbol_normalized_round_retest_v0", "GBPUSD") in pairs
+    assert ("round_number_retest_v0", "GBPUSD") in pairs
+    assert ("session_extreme_retest_v0", "GBPUSD") in pairs
+    assert all(symbol != "USDJPY" for _, symbol in pairs)
+    assert module.demo_portfolio_symbol("USDJPY") == "GBPUSD"
 
 
 def test_demo_executor_attach_script_discloses_cost_and_spread_guards():

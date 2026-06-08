@@ -1,0 +1,237 @@
+{
+  "status": "EXECUTORS_ATTACHED_TO_DEMO_TERMINAL",
+  "created_at_utc": "2026-06-08T12:43:10.099835Z",
+  "authority": "Experimental demo executor setup only. Attachments may place small orders only on a demo server after broker_action_allowed=true; this does not authorize live trading.",
+  "run_id": "phase2-experimental-demo-executor-v0.2",
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile": "Default",
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_demo_attach_20260608_124303",
+    "wr50_charts_restored_from": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_eurusd_lot_update_20260608_122634",
+    "wr50_charts_restored": [
+      "chart15.chr",
+      "chart16.chr",
+      "chart17.chr"
+    ],
+    "executor_log_backup_dir": "none",
+    "terminal_closed_before_profile_replace": true,
+    "terminal_relaunched": true
+  },
+  "ea": {
+    "name": "Phase2ExperimentalDemoExecutor",
+    "deployed_sources": [
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1Types.mqh",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1BreakoutRetest.mqh"
+    ],
+    "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor.log",
+    "dry_run_only": false,
+    "broker_action_allowed": true,
+    "fixed_lot": 0.01,
+    "symbol_fixed_lots": {
+      "EURUSD": 0.05,
+      "GBPUSD": 0.01
+    },
+    "experimental_symbol_replacements": {
+      "USDJPY": "GBPUSD"
+    },
+    "max_orders_per_day_per_instance": 12,
+    "max_orders_per_day_account": 24,
+    "max_open_positions_per_instance": 1,
+    "max_open_positions_account": 3,
+    "max_estimated_cost_R": 0.3,
+    "max_measured_spread_points": 75.0,
+    "allowed_account_logins_configured": true,
+    "authorized_candidates_csv": "breakout_retest,swing_breakout_retest_v0,symbol_normalized_round_retest_v0,round_number_retest_v0,session_extreme_retest_v0",
+    "authorization_token_configured": true,
+    "cost_suspension_acknowledgement_token_configured": true,
+    "default_candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+    "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+    "kill_switch_file_name": "experimental_demo_kill_switch.txt"
+  },
+  "attachment_count": 14,
+  "attachments": [
+    {
+      "candidate": "breakout_retest",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "EURUSD",
+      "qualification_source": "breakout_retest_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_breakout_retest_eurusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_breakout_retest_eurusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_breakout_retest_eurusd.csv",
+      "fixed_lot": 0.05
+    },
+    {
+      "candidate": "breakout_retest",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "GBPUSD",
+      "qualification_source": "experimental_replacement_for_USDJPY:breakout_retest_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_breakout_retest_gbpusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_breakout_retest_gbpusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_breakout_retest_gbpusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "breakout_retest",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_breakout_retest_xauusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_breakout_retest_xauusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "EURUSD",
+      "qualification_source": "swing_breakout_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_eurusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_eurusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_eurusd.csv",
+      "fixed_lot": 0.05
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "GBPUSD",
+      "qualification_source": "experimental_replacement_for_USDJPY:swing_breakout_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_gbpusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_gbpusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_gbpusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_xauusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "EURUSD",
+      "qualification_source": "symbol_normalized_round_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_eurusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_eurusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_eurusd.csv",
+      "fixed_lot": 0.05
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "GBPUSD",
+      "qualification_source": "experimental_replacement_for_USDJPY:symbol_normalized_round_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_gbpusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_gbpusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_gbpusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "research_status": "ACCEPTED",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "GBPUSD",
+      "qualification_source": "experimental_replacement_for_USDJPY:round_number_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "PROVISIONAL",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_round_number_retest_v0_gbpusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_round_number_retest_v0_gbpusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_round_number_retest_v0_gbpusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "research_status": "PROVISIONAL",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_round_number_retest_v0_xauusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "EURUSD",
+      "qualification_source": "session_extreme_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "PROVISIONAL",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_session_extreme_retest_v0_eurusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_session_extreme_retest_v0_eurusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_session_extreme_retest_v0_eurusd.csv",
+      "fixed_lot": 0.05
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "GBPUSD",
+      "qualification_source": "experimental_replacement_for_USDJPY:session_extreme_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "research_status": "PROVISIONAL",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_session_extreme_retest_v0_gbpusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_session_extreme_retest_v0_gbpusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_session_extreme_retest_v0_gbpusd.csv",
+      "fixed_lot": 0.01
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "research_status": "PROVISIONAL",
+      "attachment_log_file": "experimental_demo_executor_signal_log_v02_session_extreme_retest_v0_xauusd.csv",
+      "startup_log_file": "experimental_demo_executor_startup_v02_session_extreme_retest_v0_xauusd.csv",
+      "order_log_file": "experimental_demo_executor_order_log_v02_session_extreme_retest_v0_xauusd.csv",
+      "fixed_lot": 0.01
+    }
+  ],
+  "observer_limitations": [
+    "All attachments must refuse live/real server names at EA startup.",
+    "All attachments must refuse non-whitelisted account logins at EA startup.",
+    "All attachments require the experimental authorization token; no token is written by default.",
+    "All attachments require a separate cost-suspension acknowledgement token before startup.",
+    "Same-family/provisional candidates require explicit inclusion in InpAuthorizedCandidatesCsv.",
+    "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
+    "USDJPY is removed from this experimental demo portfolio and replaced by GBPUSD for measurement only; this is not canonical GBPUSD Phase 0 approval.",
+    "Each candidate-symbol instance uses fixed 0.01 lot except EURUSD, which uses fixed 0.05 lot; hard SL/TP and one open exposure per instance still apply.",
+    "Account-level daily order and open-position caps apply across chart instances.",
+    "Current spread and estimated cost in R must remain below configured thresholds before any order is sent.",
+    "This is an experimental demo execution run, not canonical live authorization."
+  ]
+}

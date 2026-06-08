@@ -28,6 +28,9 @@ REQUIRED_COST_SUSPENSION_ACKNOWLEDGEMENT_TOKEN = "I_ACKNOWLEDGE_COST_SUSPENDED_N
 EXECUTOR_CANDIDATE_STATUS = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY"
 FAMILY_LIFECYCLE_STATUS = "COST_SUSPENDED_CANONICAL"
 DEFAULT_AUTHORIZED_CANDIDATES_CSV = "breakout_retest"
+DEFAULT_FIXED_LOT = 0.01
+EURUSD_FIXED_LOT = 0.05
+EXPERIMENTAL_SYMBOL_REPLACEMENTS = {"USDJPY": "GBPUSD"}
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
     "swing_breakout_retest_v0",
@@ -71,7 +74,11 @@ def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
                     symbol = (item.get("symbol") or "").strip()
                     verdict = (item.get("verdict") or "").strip().upper()
                     if symbol and verdict == "PASS":
-                        qualified[symbol] = f"{summary.name}:PASS"
+                        portfolio_symbol = demo_portfolio_symbol(symbol)
+                        source = f"{summary.name}:PASS"
+                        if portfolio_symbol != symbol:
+                            source = f"experimental_replacement_for_{symbol}:{source}"
+                        qualified[portfolio_symbol] = source
         for symbol in sorted(qualified):
             rows.append(
                 AttachmentRow(
@@ -84,6 +91,14 @@ def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
                 )
             )
     return rows
+
+
+def fixed_lot_for_symbol(symbol: str) -> float:
+    return EURUSD_FIXED_LOT if symbol.upper() == "EURUSD" else DEFAULT_FIXED_LOT
+
+
+def demo_portfolio_symbol(symbol: str) -> str:
+    return EXPERIMENTAL_SYMBOL_REPLACEMENTS.get(symbol.upper(), symbol.upper())
 
 
 def attach_phase2_experimental_demo_executors(
@@ -166,7 +181,8 @@ def attach_phase2_experimental_demo_executors(
             "compile_log": str(compile_log),
             "dry_run_only": False,
             "broker_action_allowed": True,
-            "fixed_lot": 0.01,
+            "fixed_lot": DEFAULT_FIXED_LOT,
+            "symbol_fixed_lots": {"EURUSD": EURUSD_FIXED_LOT},
             "max_orders_per_day_per_instance": 12,
             "max_orders_per_day_account": max_account_orders_per_day,
             "max_open_positions_per_instance": 1,
@@ -192,7 +208,7 @@ def attach_phase2_experimental_demo_executors(
             "All attachments require a separate cost-suspension acknowledgement token before startup.",
             "Same-family/provisional candidates require explicit inclusion in InpAuthorizedCandidatesCsv.",
             "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
-            "Each candidate-symbol instance uses fixed 0.01 lot, hard SL/TP, and one open exposure per instance.",
+            "Each candidate-symbol instance uses fixed 0.01 lot except EURUSD, which uses fixed 0.05 lot; hard SL/TP and one open exposure per instance still apply.",
             "Account-level daily order and open-position caps apply across chart instances.",
             "Current spread and estimated cost in R must remain below configured thresholds before any order is sent.",
             "This is an experimental demo execution run, not canonical live authorization.",
@@ -423,7 +439,8 @@ def _render_chart(
             f"InpStartupLogFileName={_startup_log_name(row)}",
             f"InpOrderLogFileName={_order_log_name(row)}",
             f"InpKillSwitchFileName={kill_switch_file_name}",
-            "InpFixedLot=0.01",
+            f"InpFixedLot={fixed_lot_for_symbol(row.symbol):.2f}",
+            f"InpEURUSDFixedLot={EURUSD_FIXED_LOT:.2f}",
             "InpMaxOrdersPerDay=12",
             f"InpMaxAccountOrdersPerDay={max_account_orders_per_day}",
             "InpMinSecondsBetweenOrders=300",
@@ -455,6 +472,7 @@ def _attachment_payload(row: AttachmentRow) -> dict[str, Any]:
     payload["attachment_log_file"] = _attachment_log_name(row)
     payload["startup_log_file"] = _startup_log_name(row)
     payload["order_log_file"] = _order_log_name(row)
+    payload["fixed_lot"] = fixed_lot_for_symbol(row.symbol)
     return payload
 
 
@@ -524,17 +542,18 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         f"Max estimated cost R: `{payload['ea']['max_estimated_cost_R']}`",
         f"Max measured spread points: `{payload['ea']['max_measured_spread_points']}`",
         "",
-        "| Candidate | Research status | Executor status | Family lifecycle | Symbol | Executor | Qualification |",
-        "|---|---|---|---|---|---|---|",
+        "| Candidate | Research status | Executor status | Family lifecycle | Symbol | Lot | Executor | Qualification |",
+        "|---|---|---|---|---:|---:|---|---|",
     ]
     for item in attachments:
         lines.append(
-            "| {candidate} | {research_status} | {status} | {family_lifecycle} | {symbol} | {executor} | {qualification} |".format(
+            "| {candidate} | {research_status} | {status} | {family_lifecycle} | {symbol} | {fixed_lot:.2f} | {executor} | {qualification} |".format(
                 candidate=item["candidate"],
                 research_status=item.get("research_status", "UNKNOWN"),
                 status=item["status"],
                 family_lifecycle=payload["ea"]["family_lifecycle_status"],
                 symbol=item["symbol"],
+                fixed_lot=float(item.get("fixed_lot", fixed_lot_for_symbol(item["symbol"]))),
                 executor="demo_order_executor" if item["observer_supported"] else "unsupported",
                 qualification=item["qualification_source"],
             )

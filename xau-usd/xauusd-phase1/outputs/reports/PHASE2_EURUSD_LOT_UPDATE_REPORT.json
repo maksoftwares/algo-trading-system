@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T12:26:47.911005Z",
+  "scope": "Standard Capital.com demo terminal Phase2ExperimentalDemoExecutor attachments only; Phase2X isolated owner terminal untouched.",
+  "requested_change": "Set EURUSD lot size to 0.05 for all attached experimental demo executor EAs; keep other symbols at 0.01.",
+  "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+  "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+  "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_eurusd_lot_update_20260608_122634",
+  "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor.log",
+  "terminal_closed_before_update": true,
+  "terminal_relaunched": true,
+  "updated_chart_count": 14,
+  "eurusd_chart_count": 4,
+  "non_eurusd_chart_count": 10,
+  "updated_charts": [
+    {
+      "chart": "chart01.chr",
+      "symbol": "EURUSD",
+      "candidate": "breakout_retest",
+      "fixed_lot": 0.05
+    },
+    {
+      "chart": "chart02.chr",
+      "symbol": "USDJPY",
+      "candidate": "breakout_retest",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart03.chr",
+      "symbol": "XAUUSD",
+      "candidate": "breakout_retest",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart04.chr",
+      "symbol": "EURUSD",
+      "candidate": "swing_breakout_retest_v0",
+      "fixed_lot": 0.05
+    },
+    {
+      "chart": "chart05.chr",
+      "symbol": "USDJPY",
+      "candidate": "swing_breakout_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart06.chr",
+      "symbol": "XAUUSD",
+      "candidate": "swing_breakout_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart07.chr",
+      "symbol": "EURUSD",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "fixed_lot": 0.05
+    },
+    {
+      "chart": "chart08.chr",
+      "symbol": "USDJPY",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart09.chr",
+      "symbol": "XAUUSD",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart10.chr",
+      "symbol": "USDJPY",
+      "candidate": "round_number_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart11.chr",
+      "symbol": "XAUUSD",
+      "candidate": "round_number_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart12.chr",
+      "symbol": "EURUSD",
+      "candidate": "session_extreme_retest_v0",
+      "fixed_lot": 0.05
+    },
+    {
+      "chart": "chart13.chr",
+      "symbol": "USDJPY",
+      "candidate": "session_extreme_retest_v0",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart14.chr",
+      "symbol": "XAUUSD",
+      "candidate": "session_extreme_retest_v0",
+      "fixed_lot": 0.01
+    }
+  ]
+}

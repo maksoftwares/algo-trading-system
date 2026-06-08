@@ -166,6 +166,7 @@ def test_actual_broker_magic_parser_includes_p2weakness_and_wr50_experiments():
     assert module._candidate_status_from_magic(931000, "") == ("p2weakness_br_v1", "EXPERIMENTAL")
     assert module._candidate_status_from_magic(930101, "") == ("p2weakness_br_v1", "EXPERIMENTAL")
     assert module._candidate_status_from_magic(930100, "") == ("WR50_BreakoutQuality_v0", "EXPERIMENTAL")
+    assert module.SYMBOL_MAGIC_CODES[4] == "GBPUSD"
 
     filters = module._filters("actual")
     assert "Experimental" in filters

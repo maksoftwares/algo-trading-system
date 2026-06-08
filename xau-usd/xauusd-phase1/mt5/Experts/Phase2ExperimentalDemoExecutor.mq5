@@ -16,7 +16,7 @@ input string InpCandidate = "breakout_retest";
 input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
 input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
 input string InpTargetSymbol = "XAUUSD";
-input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,USDJPY";
+input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "";
 input string InpExperimentalAuthorizationToken = "";
@@ -29,6 +29,7 @@ input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv
 input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
+input double InpEURUSDFixedLot = 0.05;
 input int InpMaxOrdersPerDay = 12;
 input int InpMaxAccountOrdersPerDay = 24;
 input int InpMinSecondsBetweenOrders = 300;
@@ -823,6 +824,8 @@ int SymbolMagicOffset(const string symbol_name)
       return 2;
    if(symbol_name == "USDJPY")
       return 3;
+   if(symbol_name == "GBPUSD")
+      return 4;
    return 9;
 }
 
@@ -861,6 +864,13 @@ double NormalizeVolumeForSymbol(const double requested)
    if(step > 0.0 && step < 0.001)
       digits = 4;
    return NormalizeDouble(volume, digits);
+}
+
+double EffectiveFixedLot()
+{
+   if(_Symbol == "EURUSD")
+      return InpEURUSDFixedLot;
+   return InpFixedLot;
 }
 
 ENUM_ORDER_TYPE_FILLING FillPolicy()
@@ -1143,7 +1153,7 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
    sl = NormalizeDouble(sl, digits);
    tp = NormalizeDouble(tp, digits);
    price = NormalizeDouble(price, digits);
-   double volume = NormalizeVolumeForSymbol(InpFixedLot);
+   double volume = NormalizeVolumeForSymbol(EffectiveFixedLot());
    if(volume <= 0.0)
    {
       guard_reason = "invalid_volume";
