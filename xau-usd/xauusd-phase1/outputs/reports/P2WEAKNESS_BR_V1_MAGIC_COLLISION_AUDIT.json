@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T07:17:07.102538Z",
+  "authority": "Magic collision audit for experimental namespaces. PASS does not authorize deployment or trading.",
+  "p2weakness_namespace": "931000-931099",
+  "p2weakness_active_magic": 931000,
+  "source_magic": 931000,
+  "safe_preset_magic": 931000,
+  "owner_preset_magic": 931000,
+  "known_active_assignments": {
+    "WR50_BreakoutEvening_v0": 930000,
+    "WR50_BreakoutQuality_v0": 930100,
+    "WR50_BreakoutExit1R_v0": 930200,
+    "P2WEAKNESS_BR_V1": 931000
+  },
+  "runtime_log_magics_observed": [
+    930101
+  ],
+  "runtime_previous_magic_warning": true,
+  "checks": [
+    {
+      "name": "source_magic_in_p2weakness_namespace",
+      "status": "PASS",
+      "evidence": "value=931000; allowed=931000-931099"
+    },
+    {
+      "name": "safe_preset_magic_in_p2weakness_namespace",
+      "status": "PASS",
+      "evidence": "value=931000; allowed=931000-931099"
+    },
+    {
+      "name": "owner_preset_magic_in_p2weakness_namespace",
+      "status": "PASS",
+      "evidence": "value=931000; allowed=931000-931099"
+    },
+    {
+      "name": "active_magic_is_931000",
+      "status": "PASS",
+      "evidence": "value=931000; expected=931000"
+    },
+    {
+      "name": "p2weakness_not_inside_wr50_namespace",
+      "status": "PASS",
+      "evidence": "P2WEAKNESS=931000-931099; WR50=930000-930999"
+    },
+    {
+      "name": "active_magic_values_unique",
+      "status": "PASS",
+      "evidence": "duplicates=none"
+    },
+    {
+      "name": "registry_mentions_p2weakness_namespace",
+      "status": "PASS",
+      "evidence": "registry updated"
+    }
+  ],
+  "failed_count": 0
+}

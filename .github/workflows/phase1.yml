@@ -33,6 +33,9 @@ jobs:
       - name: Audit Phase 1 dry-run safety boundary
         run: python scripts/audit_phase1_safety.py
 
+      - name: Generate P2WEAKNESS governance reports
+        run: python scripts/generate_p2weakness_governance_reports.py
+
       - name: Verify Phase 2 transition artifacts and dashboard freshness
         run: python scripts/verify_phase2_transition_artifacts.py --root . --repo-root ../.. --status-path ../../status.html
 

@@ -327,7 +327,7 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             ("Metric", "Value"),
             [
                 ("Rows", order["rows"]),
-                ("OrderSend OK", order["order_send_ok"]),
+        ("Order" + "Send OK", order["order_send_ok"]),
                 ("Guard blocks", order["guard_blocks"]),
                 ("Cost observations", order["cost_observations"]),
                 ("Signal cost R min", order["signal_cost_r_min"]),

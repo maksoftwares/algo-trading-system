@@ -9,21 +9,23 @@
 #include <Phase1/Phase1BreakoutRetest.mqh>
 
 input string InpRunId = "P2WEAKNESS_BR_V1";
-input bool InpDryRunOnly = false;
-input bool InpBrokerActionAllowed = true;
+input bool InpDryRunOnly = true;
+input bool InpBrokerActionAllowed = false;
 input string InpTargetSymbol = "XAUUSD";
 input string InpExpectedServerMarker = "Demo";
-input string InpAllowedAccountLoginsCsv = "1025742";
-input string InpExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
+input string InpAllowedAccountLoginsCsv = "";
+input string InpExperimentalAuthorizationToken = "";
 input string InpRequiredExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
-input string InpCandidateStatus = "CONTROLLED_DEMO_ONLY";
-input string InpFamilyLifecycleStatus = "WEAKNESS_REVIEW_EXPERIMENTAL";
+input string InpCostSuspensionAcknowledgementToken = "";
+input string InpRequiredCostSuspensionAcknowledgementToken = "I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT";
+input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
+input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
 input string InpKillSwitchFileName = "p2weakness_br_v1_kill_switch.txt";
 input string InpSignalLogFileName = "p2weakness_br_v1_signal_log_xauusd.csv";
 input string InpStartupLogFileName = "p2weakness_br_v1_startup_xauusd.csv";
 input string InpOrderLogFileName = "p2weakness_br_v1_order_log_xauusd.csv";
 input double InpFixedLot = 0.01;
-input int InpMagicNumber = 930101;
+input int InpMagicNumber = 931000;
 input int InpMaxOrdersPerDay = 6;
 input int InpMaxAccountOrdersPerDay = 12;
 input int InpMinSecondsBetweenOrders = 300;
@@ -84,6 +86,32 @@ bool AccountLoginWhitelisted()
 bool ExperimentalAuthorizationTokenValid()
 {
    return TrimToken(InpExperimentalAuthorizationToken) == TrimToken(InpRequiredExperimentalAuthorizationToken);
+}
+
+bool CostSuspensionAcknowledgementTokenValid()
+{
+   if(!ContainsText(InpFamilyLifecycleStatus, "COST_SUSPENDED"))
+      return true;
+   return TrimToken(InpCostSuspensionAcknowledgementToken) == TrimToken(InpRequiredCostSuspensionAcknowledgementToken);
+}
+
+bool BrokerActionModeRequested()
+{
+   return !InpDryRunOnly && InpBrokerActionAllowed;
+}
+
+bool SourceDefaultSafe()
+{
+   return true;
+}
+
+bool OwnerAuthorizedSetUsed()
+{
+   return BrokerActionModeRequested()
+      && StringLen(TrimToken(InpAllowedAccountLoginsCsv)) > 0
+      && StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0
+      && ExperimentalAuthorizationTokenValid()
+      && CostSuspensionAcknowledgementTokenValid();
 }
 
 double CurrentSpreadPoints()
@@ -185,7 +213,9 @@ void IncrementAccountOrdersToday()
 
 bool IsDemoFamilyMagic(const long magic)
 {
-   return (magic >= 920000 && magic < 921000) || (magic >= 930000 && magic < 931000);
+   return (magic >= 920000 && magic < 921000)
+      || (magic >= 930000 && magic < 931000)
+      || (magic >= 931000 && magic < 931100);
 }
 
 bool DirectionMatchesPosition(const bool is_long)
@@ -396,6 +426,10 @@ bool EnsureStartupLogHeader()
       "broker_action_allowed",
       "allowed_account_logins",
       "authorization_token_present",
+      "source_default_safe",
+      "owner_authorized_set_used",
+      "experimental_authorization_token_present",
+      "cost_suspension_acknowledged",
       "max_orders_per_day",
       "max_account_orders_per_day",
       "max_family_open_positions",
@@ -484,6 +518,10 @@ bool WriteStartupRow(const string status_text)
       BoolText(InpBrokerActionAllowed),
       InpAllowedAccountLoginsCsv,
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      BoolText(SourceDefaultSafe()),
+      BoolText(OwnerAuthorizedSetUsed()),
+      BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
+      BoolText(CostSuspensionAcknowledgementTokenValid()),
       IntegerToString(InpMaxOrdersPerDay),
       IntegerToString(InpMaxAccountOrdersPerDay),
       IntegerToString(InpMaxFamilyOpenPositions),
@@ -626,6 +664,11 @@ bool TradingGuardsPass(
    if(!ExperimentalAuthorizationTokenValid())
    {
       guard_reason = "experimental_authorization_token_missing_or_invalid";
+      return false;
+   }
+   if(!CostSuspensionAcknowledgementTokenValid())
+   {
+      guard_reason = "cost_suspension_acknowledgement_token_missing_or_invalid";
       return false;
    }
    if(!AccountLoginWhitelisted())
@@ -790,48 +833,57 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
 
 int OnInit()
 {
-   if(InpDryRunOnly || !InpBrokerActionAllowed)
-   {
-      Print("P2WEAKNESS_BR_V1 refused to start because broker-action mode was not explicitly enabled.");
-      return INIT_FAILED;
-   }
    if(_Symbol != InpTargetSymbol || _Symbol != "XAUUSD")
    {
       Print("P2WEAKNESS_BR_V1 attached to ", _Symbol, " but target is XAUUSD.");
       return INIT_FAILED;
    }
-   if(InpMagicNumber < 930000 || InpMagicNumber >= 931000)
+   if(InpMagicNumber < 931000 || InpMagicNumber >= 931100)
    {
-      Print("P2WEAKNESS_BR_V1 refused magic number outside 930000-930999: ", InpMagicNumber);
-      return INIT_FAILED;
-   }
-   string server = AccountInfoString(ACCOUNT_SERVER);
-   if(server == "" || !ContainsText(server, InpExpectedServerMarker) || ContainsText(server, "live") || ContainsText(server, "real"))
-   {
-      Print("P2WEAKNESS_BR_V1 refused to start outside expected demo server. Server=", server);
-      return INIT_FAILED;
-   }
-   if(!ExperimentalAuthorizationTokenValid())
-   {
-      Print("P2WEAKNESS_BR_V1 refused to start without a valid experimental authorization token.");
-      return INIT_FAILED;
-   }
-   if(!AccountLoginWhitelisted())
-   {
-      Print("P2WEAKNESS_BR_V1 refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
-      return INIT_FAILED;
-   }
-   if(KillSwitchActive())
-   {
-      Print("P2WEAKNESS_BR_V1 refused to start because kill switch is active.");
+      Print("P2WEAKNESS_BR_V1 refused magic number outside 931000-931099: ", InpMagicNumber);
       return INIT_FAILED;
    }
    if(!EnsureSignalLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader())
       return INIT_FAILED;
 
+   if(BrokerActionModeRequested())
+   {
+      string server = AccountInfoString(ACCOUNT_SERVER);
+      if(server == "" || !ContainsText(server, InpExpectedServerMarker) || ContainsText(server, "live") || ContainsText(server, "real"))
+      {
+         WriteStartupRow("REFUSED_NOT_DEMO_SERVER");
+         Print("P2WEAKNESS_BR_V1 refused to start outside expected demo server. Server=", server);
+         return INIT_FAILED;
+      }
+      if(!ExperimentalAuthorizationTokenValid())
+      {
+         WriteStartupRow("REFUSED_INVALID_EXPERIMENTAL_AUTHORIZATION_TOKEN");
+         Print("P2WEAKNESS_BR_V1 refused to start without a valid experimental authorization token.");
+         return INIT_FAILED;
+      }
+      if(!CostSuspensionAcknowledgementTokenValid())
+      {
+         WriteStartupRow("REFUSED_MISSING_COST_SUSPENSION_ACKNOWLEDGEMENT");
+         Print("P2WEAKNESS_BR_V1 refused to start without a valid cost-suspension acknowledgement token.");
+         return INIT_FAILED;
+      }
+      if(!AccountLoginWhitelisted())
+      {
+         WriteStartupRow("REFUSED_ACCOUNT_LOGIN_NOT_WHITELISTED");
+         Print("P2WEAKNESS_BR_V1 refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
+         return INIT_FAILED;
+      }
+      if(KillSwitchActive())
+      {
+         WriteStartupRow("REFUSED_KILL_SWITCH_ACTIVE");
+         Print("P2WEAKNESS_BR_V1 refused to start because kill switch is active.");
+         return INIT_FAILED;
+      }
+   }
+
    g_breakout_observer.Configure(false);
    ResetDailyOrderCounterIfNeeded();
-   WriteStartupRow("ATTACHED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED");
+   WriteStartupRow(BrokerActionModeRequested() ? "ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED" : "ATTACHED_SAFE_DEFAULT_REVIEW_ONLY_NO_BROKER_ACTION");
    EventSetTimer(1);
    return INIT_SUCCEEDED;
 }

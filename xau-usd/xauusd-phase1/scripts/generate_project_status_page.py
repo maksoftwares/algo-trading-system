@@ -92,6 +92,15 @@ def generate_project_status_page(
     measured_cost["sanity_check_status"] = _read_markdown_status(
         phase0_reports / "MEASURED_COST_REVALIDATION_SANITY_CHECK.md"
     ) or "UNKNOWN"
+    measured_cost["actual_demo_cost_reconciliation_status"] = _cell(
+        phase2_blocker_summary.get("actual_demo_cost_reconciliation_status", "UNKNOWN")
+    )
+    measured_cost["actual_demo_cost_resolution_status"] = _cell(
+        phase2_blocker_summary.get("actual_demo_cost_resolution_status", "UNKNOWN")
+    )
+    measured_cost["actual_demo_cost_current_practical_blocker"] = str(
+        phase2_blocker_summary.get("actual_demo_cost_current_practical_blocker", "UNKNOWN")
+    ).lower()
     reality_check_status = _read_markdown_status(phase0_reports / "PHASE0_REALITY_CHECK.md") or "UNKNOWN"
     d2_decision = _resolve_d2_decision(phase0_reports, reality_check_status)
     candidates = _candidate_rows(
@@ -850,7 +859,7 @@ def _timeline(
         (
             "Measured cost",
             cost_rollup,
-            f"Model {measured_cost.get('status', 'UNKNOWN')}; revalidation {measured_cost.get('revalidation_status', 'UNKNOWN')}",
+            _measured_cost_timeline_detail(measured_cost),
         ),
         ("Phase 2 paper", phase2_status, "Paper-mode readiness and owner approval"),
         (
@@ -1090,6 +1099,12 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ("Measured-cost revalidation", measured.get("revalidation_status", "n/a")),
         ("Measured-cost assumption delta", measured.get("assumption_delta_status", "n/a")),
         ("Measured-cost sanity check", measured.get("sanity_check_status", "n/a")),
+        ("Actual demo cost reconciliation", measured.get("actual_demo_cost_reconciliation_status", "n/a")),
+        ("Actual demo cost resolution", measured.get("actual_demo_cost_resolution_status", "n/a")),
+        (
+            "Actual demo cost still practical blocker",
+            measured.get("actual_demo_cost_current_practical_blocker", "n/a"),
+        ),
         ("Measured rows/days", f"{measured.get('observed_rows', 'n/a')} rows / {measured.get('observed_days', 'n/a')} days"),
         ("Breakout family lifecycle", lifecycle),
         (
@@ -2132,6 +2147,10 @@ def _artifact_links() -> str:
         ("Phase 2 blocker summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md"),
         ("Phase 2 actual demo cost reconciliation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md"),
         ("Phase 2 canonical block verification", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md"),
+        ("P2WEAKNESS source governance", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.md"),
+        ("P2WEAKNESS magic audit", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md"),
+        ("P2WEAKNESS deployment boundary", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md"),
+        ("P2WEAKNESS clean-clone marker", "xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md"),
         ("Passive paper observer spec", "xau-usd/xauusd-phase1/docs/PASSIVE_PAPER_OBSERVER_SPEC.md"),
         ("Phase 2 demo countdown", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_COUNTDOWN.md"),
         ("Phase 2 demo preflight", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_PREFLIGHT_REPORT.md"),
@@ -2146,6 +2165,8 @@ def _artifact_links() -> str:
         ("Experimental demo quarantine verification", "xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_QUARANTINE_VERIFICATION.md"),
         ("Experimental demo owner authorization", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_OWNER_AUTHORIZATION.md"),
         ("Experimental demo daily review template", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_DAILY_REVIEW_TEMPLATE.md"),
+        ("Experimental demo daily risk report", "xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md"),
+        ("Experimental demo deployment freeze", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_DEPLOYMENT_FREEZE_POLICY.md"),
         ("Experimental demo kill-switch test", "xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_KILL_SWITCH_TEST.md"),
         ("Cost-suspended lifecycle report", "xau-usd/xauusd-phase1/outputs/reports/COST_SUSPENDED_LIFECYCLE_REPORT.md"),
         ("Phase 2A cost closure report", "xau-usd/xauusd-phase1/outputs/reports/PHASE2A_COST_CLOSURE_REPORT.md"),
@@ -2198,8 +2219,12 @@ def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
     model = measured_cost.get("status", "UNKNOWN")
     revalidation = measured_cost.get("revalidation_status", "UNKNOWN")
     delta = measured_cost.get("assumption_delta_status", "UNKNOWN")
+    actual_demo = measured_cost.get("actual_demo_cost_reconciliation_status", "UNKNOWN")
+    actual_blocker = measured_cost.get("actual_demo_cost_current_practical_blocker", "UNKNOWN")
     if model != "PASS":
         return model
+    if actual_demo == "PASS" and actual_blocker == "false":
+        return "RESOLVED"
     if "FAIL" in {revalidation, delta}:
         return "FAIL"
     if revalidation != "PASS":
@@ -2207,6 +2232,17 @@ def _measured_cost_rollup(measured_cost: dict[str, str]) -> str:
     if delta != "PASS":
         return delta
     return "PASS"
+
+
+def _measured_cost_timeline_detail(measured_cost: dict[str, str]) -> str:
+    actual_demo = measured_cost.get("actual_demo_cost_reconciliation_status", "UNKNOWN")
+    actual_blocker = measured_cost.get("actual_demo_cost_current_practical_blocker", "UNKNOWN")
+    if actual_demo == "PASS" and actual_blocker == "false":
+        return "Actual demo cost resolved; old ledger revalidation remains FAIL"
+    return (
+        f"Model {measured_cost.get('status', 'UNKNOWN')}; "
+        f"revalidation {measured_cost.get('revalidation_status', 'UNKNOWN')}"
+    )
 
 
 def _breakout_family_lifecycle(measured_cost: dict[str, str]) -> str:
@@ -2616,6 +2652,8 @@ def _status_class(value: str) -> str:
         return "pass"
     if "EXPERIMENTAL" in upper:
         return "pending"
+    if "RESOLVED" in upper:
+        return "pass"
     if "PASS" in upper or "ACCEPTED" in upper or "ACTIVE" in upper or "GREEN" in upper:
         return "pass"
     if "DATA_BLOCKED" in upper:

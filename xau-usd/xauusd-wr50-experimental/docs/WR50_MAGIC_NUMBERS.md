@@ -4,6 +4,8 @@ Document date: 2026-06-04
 
 The WR50 experimental namespace is separate from the Phase 1 `910000-910999` namespace.
 
+It is also separate from the P2WEAKNESS namespace `931000-931099`.
+
 | Range | Assignment |
 | --- | --- |
 | `930000-930099` | `WR50_BreakoutEvening_v0` |
@@ -21,5 +23,4 @@ The WR50 experimental namespace is separate from the Phase 1 `910000-910999` nam
 | `WR50_BreakoutQuality_v0` | `BQV0` | `930100` | `WR50\|BQV0` |
 | `WR50_BreakoutExit1R_v0` | `E1R0` | `930200` | `WR50\|E1R0` |
 
-Every WR50 order must use a magic number inside `930000-930999`. No WR50 EA may share an active magic number.
-
+Every WR50 order must use a magic number inside `930000-930999`. No WR50 EA may share an active magic number. Non-WR50 experimental EAs must not use `930000-930999`.

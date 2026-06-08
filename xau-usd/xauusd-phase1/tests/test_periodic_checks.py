@@ -24,6 +24,7 @@ def test_periodic_check_output_shape(tmp_path: Path):
         phase2_readiness_status="PENDING",
         phase2_demo_preflight_status="PENDING",
         phase2_demo_account_isolation_status="PASS",
+        phase2_actual_demo_cost_reconciliation_status="PASS",
         experimental_executor_governance_status="PASS",
         cost_suspension_enforcement_status="PASS",
         broker_action_boundary_status="PASS",

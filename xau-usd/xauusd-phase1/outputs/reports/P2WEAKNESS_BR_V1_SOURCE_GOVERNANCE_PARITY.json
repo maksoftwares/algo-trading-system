@@ -1,0 +1,130 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-08T07:17:07.102538Z",
+  "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
+  "safe_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set",
+  "owner_authorized_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set",
+  "source_sha256": "aa92344a8b3e8c74a21443073333a2381e939187b4a5b874287c65fb5f4ec2a7",
+  "safe_preset_sha256": "e5950f41ea1fc4e560f27062142487e5a2ead389bfe367b5f3f2886fc4051ec1",
+  "owner_authorized_preset_sha256": "97be3126b5f1afc48fcd2930a38ccae434e218e7a988ddff7f31879227a093ad",
+  "authority": "P2WEAKNESS_BR_V1 governance parity only; no canonical Phase 2, paper-mode, live, or real-capital authorization.",
+  "checks": [
+    {
+      "name": "non_canonical_banner",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "InpDryRunOnly_default",
+      "status": "PASS",
+      "evidence": "actual='true'; expected='true'"
+    },
+    {
+      "name": "InpBrokerActionAllowed_default",
+      "status": "PASS",
+      "evidence": "actual='false'; expected='false'"
+    },
+    {
+      "name": "InpAllowedAccountLoginsCsv_default",
+      "status": "PASS",
+      "evidence": "actual=''; expected=''"
+    },
+    {
+      "name": "InpExperimentalAuthorizationToken_default",
+      "status": "PASS",
+      "evidence": "actual=''; expected=''"
+    },
+    {
+      "name": "InpCostSuspensionAcknowledgementToken_default",
+      "status": "PASS",
+      "evidence": "actual=''; expected=''"
+    },
+    {
+      "name": "InpCandidateStatus_default",
+      "status": "PASS",
+      "evidence": "actual='EXPERIMENTAL_QUARANTINE_REVIEW_ONLY'; expected='EXPERIMENTAL_QUARANTINE_REVIEW_ONLY'"
+    },
+    {
+      "name": "InpFamilyLifecycleStatus_default",
+      "status": "PASS",
+      "evidence": "actual='COST_SUSPENDED_CANONICAL'; expected='COST_SUSPENDED_CANONICAL'"
+    },
+    {
+      "name": "InpMagicNumber_default",
+      "status": "PASS",
+      "evidence": "actual='931000'; expected='931000'"
+    },
+    {
+      "name": "safe_preset_dry_run",
+      "status": "PASS",
+      "evidence": "InpDryRunOnly='true'; expected='true'"
+    },
+    {
+      "name": "safe_preset_broker_action_disabled",
+      "status": "PASS",
+      "evidence": "InpBrokerActionAllowed='false'; expected='false'"
+    },
+    {
+      "name": "owner_preset_magic",
+      "status": "PASS",
+      "evidence": "InpMagicNumber='931000'; expected='931000'"
+    },
+    {
+      "name": "cost_suspension_ack_guard",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "kill_switch_present",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "demo_server_refusal",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "cost_r_guard",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "spread_guard",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "market_proxy_logged",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "duplicate_family_suppression",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "startup_safe_default_flags",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "runtime_notes_updated",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "registry_updated",
+      "status": "PASS",
+      "evidence": "all required tokens present"
+    },
+    {
+      "name": "fixed_lot_lte_0_01",
+      "status": "PASS",
+      "evidence": "InpFixedLot=0.01"
+    }
+  ],
+  "failed_count": 0,
+  "input_declaration_block": "11: input string InpRunId = \"P2WEAKNESS_BR_V1\";\n12: input bool InpDryRunOnly = true;\n13: input bool InpBrokerActionAllowed = false;\n14: input string InpTargetSymbol = \"XAUUSD\";\n15: input string InpExpectedServerMarker = \"Demo\";\n16: input string InpAllowedAccountLoginsCsv = \"\";\n17: input string InpExperimentalAuthorizationToken = \"\";\n18: input string InpRequiredExperimentalAuthorizationToken = \"EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY\";\n19: input string InpCostSuspensionAcknowledgementToken = \"\";\n20: input string InpRequiredCostSuspensionAcknowledgementToken = \"I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT\";\n21: input string InpCandidateStatus = \"EXPERIMENTAL_QUARANTINE_REVIEW_ONLY\";\n22: input string InpFamilyLifecycleStatus = \"COST_SUSPENDED_CANONICAL\";\n23: input string InpKillSwitchFileName = \"p2weakness_br_v1_kill_switch.txt\";\n24: input string InpSignalLogFileName = \"p2weakness_br_v1_signal_log_xauusd.csv\";\n25: input string InpStartupLogFileName = \"p2weakness_br_v1_startup_xauusd.csv\";\n26: input string InpOrderLogFileName = \"p2weakness_br_v1_order_log_xauusd.csv\";\n27: input double InpFixedLot = 0.01;\n28: input int InpMagicNumber = 931000;\n29: input int InpMaxOrdersPerDay = 6;\n30: input int InpMaxAccountOrdersPerDay = 12;\n31: input int InpMinSecondsBetweenOrders = 300;\n32: input int InpMaxOpenPositionsPerInstance = 1;\n33: input int InpMaxFamilyOpenPositions = 3;\n34: input int InpDuplicateLockBars = 12;\n35: input int InpDeviationPoints = 50;\n36: input double InpMaxEstimatedCostR = 0.30;\n37: input double InpMaxMeasuredSpreadPoints = 75.0;"
+}

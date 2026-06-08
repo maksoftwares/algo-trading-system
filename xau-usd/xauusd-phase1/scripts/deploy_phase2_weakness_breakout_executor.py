@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -20,6 +21,8 @@ EA_NAME = "Phase2WeaknessBreakoutRetestExecutor"
 EA_SOURCE = Path("mt5") / "Experts" / f"{EA_NAME}.mq5"
 INCLUDE_NAMES = ("Phase1Types.mqh", "Phase1BreakoutRetest.mqh")
 PRESET_NAME = "Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set"
+OWNER_AUTHORIZED_PRESET_NAME = "Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set"
+P2WEAKNESS_MAGIC = 931000
 
 
 @dataclass(frozen=True)
@@ -58,12 +61,15 @@ def deploy_phase2_weakness_breakout_executor(
             "name": EA_NAME,
             "run_id": "P2WEAKNESS_BR_V1",
             "order_comment": "P2WEAKNESS_BR_V1",
-            "magic_number": 930101,
+            "magic_number": P2WEAKNESS_MAGIC,
             "symbol": "XAUUSD",
             "candidate": "breakout_retest",
             "deployed_sources": [str(path) for path in deployed_sources],
             "deployed_ex5": str(deployed_ex5),
             "compile_log": str(compile_log),
+            "source_sha256": _sha256(phase1_root / EA_SOURCE),
+            "safe_preset_sha256": _sha256(phase1_root / "mt5" / "Presets" / PRESET_NAME),
+            "owner_authorized_preset_sha256": _sha256(phase1_root / "mt5" / "Presets" / OWNER_AUTHORIZED_PRESET_NAME),
         },
         "terminal": {
             "terminal_data_dir": str(terminal_data_dir),
@@ -73,12 +79,15 @@ def deploy_phase2_weakness_breakout_executor(
         },
         "runtime_boundary": {
             "demo_only": True,
-            "default_allowed_account_login": "1025742",
+            "source_defaults_safe": True,
+            "default_broker_action_allowed": False,
+            "default_allowed_account_login": "",
             "expected_server_marker": "Demo",
             "live_or_real_server_refusal": True,
             "fixed_lot": 0.01,
             "duplicate_family_suppression": True,
-            "known_demo_family_magic_ranges": "920000-920999,930000-930999",
+            "known_demo_family_magic_ranges": "920000-920999,930000-930999,931000-931099",
+            "owner_authorized_preset": OWNER_AUTHORIZED_PRESET_NAME,
         },
     }
     output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -161,6 +170,12 @@ def _read_text(path: Path) -> str:
     return path.read_text(errors="replace")
 
 
+def _sha256(path: Path) -> str:
+    if not path.exists():
+        return "MISSING"
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def _render_markdown(payload: dict[str, Any]) -> str:
     ea = payload["ea"]
     terminal = payload["terminal"]
@@ -180,6 +195,9 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         f"- Magic number: `{ea['magic_number']}`",
         f"- Candidate: `{ea['candidate']}`",
         f"- Symbol: `{ea['symbol']}`",
+        f"- Source SHA256: `{ea['source_sha256']}`",
+        f"- Safe preset SHA256: `{ea['safe_preset_sha256']}`",
+        f"- Owner-authorized preset SHA256: `{ea['owner_authorized_preset_sha256']}`",
         "",
         "## Deployment",
         "",
@@ -192,12 +210,15 @@ def _render_markdown(payload: dict[str, Any]) -> str:
         "## Runtime Boundary",
         "",
         f"- Demo only: `{boundary['demo_only']}`",
+        f"- Source defaults safe: `{boundary['source_defaults_safe']}`",
+        f"- Default broker action allowed: `{boundary['default_broker_action_allowed']}`",
         f"- Default allowed account login: `{boundary['default_allowed_account_login']}`",
         f"- Expected server marker: `{boundary['expected_server_marker']}`",
         f"- Refuses live/real server markers: `{boundary['live_or_real_server_refusal']}`",
         f"- Fixed lot: `{boundary['fixed_lot']}`",
         f"- Duplicate-family suppression: `{boundary['duplicate_family_suppression']}`",
         f"- Known demo family magic ranges: `{boundary['known_demo_family_magic_ranges']}`",
+        f"- Owner-authorized preset: `{boundary['owner_authorized_preset']}`",
         "",
         "## Boundary",
         "",

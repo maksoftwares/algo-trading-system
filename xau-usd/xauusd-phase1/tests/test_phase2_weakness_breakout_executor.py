@@ -13,9 +13,9 @@ def test_weakness_executor_has_distinct_demo_order_identity():
 
     assert 'input string InpRunId = "P2WEAKNESS_BR_V1";' in text
     assert 'return "P2WEAKNESS_BR_V1";' in text
-    assert "input int InpMagicNumber = 930101;" in text
-    assert "InpMagicNumber < 930000" in text
-    assert "InpMagicNumber >= 931000" in text
+    assert "input int InpMagicNumber = 931000;" in text
+    assert "InpMagicNumber < 931000" in text
+    assert "InpMagicNumber >= 931100" in text
     assert "request.magic = InpMagicNumber;" in text
     assert "request.comment = InstanceComment();" in text
     assert "p2weakness_br_v1_order_log_xauusd.csv" in text
@@ -31,9 +31,17 @@ def test_weakness_executor_is_xauusd_breakout_only_and_demo_scoped():
     assert 'ContainsText(server, "live")' in text
     assert 'ContainsText(server, "real")' in text
     assert 'input string InpExpectedServerMarker = "Demo";' in text
-    assert 'input string InpAllowedAccountLoginsCsv = "1025742";' in text
+    assert 'input string InpAllowedAccountLoginsCsv = "";' in text
+    assert 'input bool InpDryRunOnly = true;' in text
+    assert 'input bool InpBrokerActionAllowed = false;' in text
+    assert 'input string InpExperimentalAuthorizationToken = "";' in text
+    assert 'input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";' in text
+    assert 'input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";' in text
     assert "AccountLoginWhitelisted()" in text
     assert "ExperimentalAuthorizationTokenValid()" in text
+    assert "InpCostSuspensionAcknowledgementToken" in text
+    assert "CostSuspensionAcknowledgementTokenValid()" in text
+    assert "cost_suspension_acknowledgement_token_missing_or_invalid" in text
     assert "OrderSend(request, result)" in text
 
 
@@ -44,6 +52,7 @@ def test_weakness_executor_suppresses_same_family_duplicates():
     assert "IsDemoFamilyMagic" in text
     assert "magic >= 920000 && magic < 921000" in text
     assert "magic >= 930000 && magic < 931000" in text
+    assert "magic >= 931000 && magic < 931100" in text
     assert "SameDirectionFamilyExposureExists" in text
     assert "DuplicateFamilyLockActive" in text
     assert "SetDuplicateFamilyLock(observation)" in text
@@ -57,6 +66,8 @@ def test_weakness_deploy_script_does_not_touch_profiles_or_restart_terminal():
     assert "Phase2WeaknessBreakoutRetestExecutor" in text
     assert '"terminal_profile_touched": False' in text
     assert '"terminal_closed_or_restarted": False' in text
+    assert "P2WEAKNESS_MAGIC = 931000" in text
+    assert "OWNER_AUTHORIZED_PRESET_NAME" in text
     assert "_deploy_sources" in text
     assert "_compile_ea" in text
     assert "_replace_default_profile" not in text
@@ -74,8 +85,28 @@ def test_weakness_launch_script_uses_startup_config_without_profile_replacement(
     assert "_close_terminal" not in text
     assert "Expert=Phase2WeaknessBreakoutRetestExecutor" in config
     assert "ExpertParameters=Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set" in config
+    assert "AllowLiveTrading=0" in config
     assert "Symbol=XAUUSD" in config
     assert "Period=M5" in config
+
+
+def test_weakness_presets_split_safe_default_from_owner_authorized():
+    safe = (ROOT / "mt5" / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set").read_text(encoding="utf-8")
+    owner = (ROOT / "mt5" / "Presets" / "Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set").read_text(encoding="utf-8")
+
+    assert "InpDryRunOnly=true" in safe
+    assert "InpBrokerActionAllowed=false" in safe
+    assert "InpAllowedAccountLoginsCsv=" in safe
+    assert "InpExperimentalAuthorizationToken=" in safe
+    assert "InpCostSuspensionAcknowledgementToken=" in safe
+    assert "InpMagicNumber=931000" in safe
+
+    assert "InpDryRunOnly=false" in owner
+    assert "InpBrokerActionAllowed=true" in owner
+    assert "InpAllowedAccountLoginsCsv=1025742" in owner
+    assert "InpExperimentalAuthorizationToken=EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY" in owner
+    assert "InpCostSuspensionAcknowledgementToken=I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT" in owner
+    assert "InpMagicNumber=931000" in owner
 
 
 def test_weakness_portable_setup_keeps_current_terminal_untouched():

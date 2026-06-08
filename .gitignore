@@ -36,3 +36,13 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2A_COST_CLOSURE_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.json
+!xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md
+!xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md

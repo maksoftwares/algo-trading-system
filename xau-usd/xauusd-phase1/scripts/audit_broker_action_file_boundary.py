@@ -46,6 +46,7 @@ WEAKNESS_EXECUTOR_REQUIRED_TOKENS = (
     "InpExpectedServerMarker",
     "InpAllowedAccountLoginsCsv",
     "InpExperimentalAuthorizationToken",
+    "InpCostSuspensionAcknowledgementToken",
     "InpCandidateStatus",
     "InpFamilyLifecycleStatus",
     "InpKillSwitchFileName",
@@ -55,8 +56,8 @@ WEAKNESS_EXECUTOR_REQUIRED_TOKENS = (
     "InpMaxEstimatedCostR",
     "InpMaxMeasuredSpreadPoints",
     "Order" + "Send(request, result)",
-    "InpMagicNumber < 930000",
-    "InpMagicNumber >= 931000",
+    "InpMagicNumber < 931000",
+    "InpMagicNumber >= 931100",
     "p2weakness_br_v1_order_log",
 )
 WR50_ORDER_EXECUTOR_REQUIRED_TOKENS = (

@@ -52,6 +52,13 @@ Last updated: 2026-06-08
 
 ## Current State
 
+- 2026-06-08 reviewer-governance response:
+  - Reviewer verdict accepted: Phase 1 dry-run remains PASS, canonical Phase 2 remains NO-GO, broker-side execution remains NO-GO, live/real capital remains ABSOLUTE NO-GO, Phase 2B passive observer work may continue, and experimental demo lanes are paused for new deployments until governance fixes are reviewed.
+  - `P2WEAKNESS_BR_V1` repo source is hardened without touching MT5 runtime: source/default preset now use `InpDryRunOnly=true`, `InpBrokerActionAllowed=false`, blank account whitelist, blank experimental authorization token, blank cost-suspension acknowledgement token, `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY`, and `COST_SUSPENDED_CANONICAL`.
+  - `P2WEAKNESS_BR_V1` magic moved out of WR50 namespace: reserved namespace `931000-931099`, active magic `931000`. WR50 remains `930000-930999`.
+  - Owner-authorized demo execution is separated into `xau-usd\xauusd-phase1\mt5\Presets\Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set`; the normal `demo_xauusd.set` preset is safe/review-only.
+  - New governance artifacts: `P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.md`, `P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md`, `P2WEAKNESS_BR_V1_DEPLOYMENT.md`, `P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md`, `EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md`, and `docs\EXPERIMENTAL_DEMO_DEPLOYMENT_FREEZE_POLICY.md`.
+  - Important runtime nuance: old P2WEAKNESS runtime logs may still show previous magic `930101`; that is historical/runtime evidence from before this repo hardening and was not rewritten. No MT5 deploy, chart attach/detach, terminal restart, kill switch change, or runtime preset change was performed during this governance cleanup.
 - 2026-06-08 actual demo cost reconciliation:
   - New generated report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md`; status PASS, resolution `RESOLVED_FOR_ACTUAL_DEMO_COST_REVIEW`.
   - Refreshed direct-MT5 demo broker table: duplicate-hidden unique trades are positive after broker costs, while the latest `breakout_retest` slice is weak/negative; that points to win-rate/setup quality rather than cost_R as the practical issue.
@@ -66,7 +73,7 @@ Last updated: 2026-06-08
   - Runtime notes: `xau-usd\xauusd-phase1\docs\P2WEAKNESS_BR_V1_RUNTIME_NOTES.md`.
   - EA source: `xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5`.
   - Helper scripts: `deploy_phase2_weakness_breakout_executor.py`, `launch_phase2_weakness_breakout_executor.py`, and `setup_phase2_weakness_portable_demo_terminal.py`.
-  - Boundary: separate owner-requested experimental demo only; does not authorize canonical Phase 2, live trading, or modification/replacement of existing running EAs. Same-family duplicate exposure is suppressed against known demo-family magic ranges.
+  - Boundary: separate owner-requested experimental demo only; does not authorize canonical Phase 2, live trading, or modification/replacement of existing running EAs. Same-family duplicate exposure is suppressed against known demo-family magic ranges. New deploys are paused until reviewer-requested governance fixes are reviewed.
 - 2026-06-04 no-runtime-touch demo loss review:
   - Repo-only verdict: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_LOSS_REVIEW_VERDICT_2026_06_04.md`; status `EXPERIMENTAL_LOSS_PATTERN_FOUND`.
   - Shadow forward-test plan: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_SHADOW_FORWARD_TEST_PLAN_2026_06_04.md`; status `SHADOW_FORWARD_TEST_PLAN_ONLY`.

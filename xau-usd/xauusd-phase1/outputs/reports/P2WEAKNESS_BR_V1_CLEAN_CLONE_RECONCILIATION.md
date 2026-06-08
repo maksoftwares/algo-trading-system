@@ -1,0 +1,47 @@
+# P2WEAKNESS BR V1 Clean-Clone Reconciliation
+
+Status: PENDING_AFTER_COMMIT_AND_PUSH
+
+Clean-clone reconciliation marker for P2WEAKNESS_BR_V1. A true remote clean-clone proof should be regenerated after commit/push.
+
+Created at UTC: `2026-06-08T07:17:07.102538Z`
+
+- Repo HEAD: `0e230ad71becaa36aa75385cb6e256320305842f`
+- Working tree has pending changes: `True`
+- Local parity status: `PASS`
+- Local magic collision status: `PASS`
+- Required post-push action: Clone origin/main after push, rerun this generator, and expect source/magic parity to remain PASS.
+
+## Pending Paths
+
+- `M .github/workflows/phase1.yml`
+- `M .gitignore`
+- `M README.md`
+- `M agent.md`
+- `M status.html`
+- `M xau-usd/xauusd-phase1/docs/MAGIC_NUMBER_EXTERNAL_REGISTRY.md`
+- `M xau-usd/xauusd-phase1/docs/P2WEAKNESS_BR_V1_RUNTIME_NOTES.md`
+- `M xau-usd/xauusd-phase1/mt5/Config/p2weakness_br_v1_startup.ini`
+- `M xau-usd/xauusd-phase1/mt5/Experts/Phase2WeaknessBreakoutRetestExecutor.mq5`
+- `M xau-usd/xauusd-phase1/mt5/Presets/Phase2WeaknessBreakoutRetestExecutor.demo_xauusd.set`
+- `M xau-usd/xauusd-phase1/outputs/reports/BROKER_ACTION_FILE_BOUNDARY_AUDIT.json`
+- `M xau-usd/xauusd-phase1/scripts/audit_broker_action_file_boundary.py`
+- `M xau-usd/xauusd-phase1/scripts/deploy_phase2_weakness_breakout_executor.py`
+- `M xau-usd/xauusd-phase1/scripts/generate_phase2_actual_demo_cost_reconciliation.py`
+- `M xau-usd/xauusd-phase1/scripts/generate_project_status_page.py`
+- `M xau-usd/xauusd-phase1/tests/test_phase2_weakness_breakout_executor.py`
+- `M xau-usd/xauusd-wr50-experimental/docs/WR50_MAGIC_NUMBERS.md`
+- `?? xau-usd/xauusd-phase1/docs/EXPERIMENTAL_DEMO_DEPLOYMENT_FREEZE_POLICY.md`
+- `?? xau-usd/xauusd-phase1/mt5/Presets/Phase2WeaknessBreakoutRetestExecutor.owner_authorized_demo_xauusd.set`
+- `?? xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.json`
+- `?? xau-usd/xauusd-phase1/outputs/reports/EXPERIMENTAL_DEMO_DAILY_RISK_REPORT.md`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.json`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_CLEAN_CLONE_RECONCILIATION.md`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.json`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_DEPLOYMENT.md`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.json`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_MAGIC_COLLISION_AUDIT.md`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.json`
+- `?? xau-usd/xauusd-phase1/outputs/reports/P2WEAKNESS_BR_V1_SOURCE_GOVERNANCE_PARITY.md`
+- `?? xau-usd/xauusd-phase1/scripts/generate_p2weakness_governance_reports.py`
+- `?? xau-usd/xauusd-phase1/tests/test_p2weakness_governance_reports.py`
