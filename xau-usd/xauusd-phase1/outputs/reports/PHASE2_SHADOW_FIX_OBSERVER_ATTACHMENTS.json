@@ -1,0 +1,164 @@
+{
+  "status": "SHADOW_FIX_OBSERVERS_ATTACHED_TO_ISOLATED_TERMINAL",
+  "created_at_utc": "2026-06-08T09:07:12.758888Z",
+  "authority": "Shadow-fix observer setup only. Attachments log telemetry and explicitly set broker_action_allowed=false. This does not touch current demo trading EAs, does not place orders, and does not mark canonical Phase 2 as passed.",
+  "run_id": "phase2-shadow-fix-observer-v0.1",
+  "terminal": {
+    "terminal_exe": "C:\\MT5PortableShadowFixObservers\\terminal64.exe",
+    "terminal_data_dir": "C:\\MT5PortableShadowFixObservers",
+    "profile": "Default",
+    "profile_backup_dir": "C:\\MT5PortableShadowFixObservers\\_codex_quarantine\\profile_backups\\default_profile_before_shadow_fix_attach_20260608_090702",
+    "observer_log_backup_dir": "none",
+    "terminal_closed_before_profile_replace": true,
+    "terminal_relaunched": true,
+    "standard_demo_terminal_touched": false,
+    "standard_demo_terminal_closed_or_restarted": false
+  },
+  "ea": {
+    "name": "Phase2ShadowFixObserver",
+    "deployed_sources": [
+      "C:\\MT5PortableShadowFixObservers\\MQL5\\Experts\\Phase2ShadowFixObserver.mq5",
+      "C:\\MT5PortableShadowFixObservers\\MQL5\\Include\\Phase1\\Phase1Types.mqh",
+      "C:\\MT5PortableShadowFixObservers\\MQL5\\Include\\Phase1\\Phase1BreakoutRetest.mqh"
+    ],
+    "compile_log": "C:\\MT5PortableShadowFixObservers\\MQL5\\Logs\\compile_Phase2ShadowFixObserver.log",
+    "dry_run_only": true,
+    "broker_action_allowed": false,
+    "shadow_policy_version": "shadow_fix_policy_20260608_v1"
+  },
+  "attachment_count": 14,
+  "attachments": [
+    {
+      "candidate": "breakout_retest",
+      "status": "ACCEPTED",
+      "symbol": "EURUSD",
+      "qualification_source": "breakout_retest_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_breakout_retest_eurusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_breakout_retest_eurusd.csv"
+    },
+    {
+      "candidate": "breakout_retest",
+      "status": "ACCEPTED",
+      "symbol": "USDJPY",
+      "qualification_source": "breakout_retest_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_breakout_retest_usdjpy.csv",
+      "startup_log_file": "shadow_fix_observer_startup_breakout_retest_usdjpy.csv"
+    },
+    {
+      "candidate": "breakout_retest",
+      "status": "ACCEPTED",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_breakout_retest_xauusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_breakout_retest_xauusd.csv"
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "EURUSD",
+      "qualification_source": "swing_breakout_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_eurusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_swing_breakout_retest_v0_eurusd.csv"
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "USDJPY",
+      "qualification_source": "swing_breakout_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_usdjpy.csv",
+      "startup_log_file": "shadow_fix_observer_startup_swing_breakout_retest_v0_usdjpy.csv"
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_xauusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_swing_breakout_retest_v0_xauusd.csv"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "EURUSD",
+      "qualification_source": "symbol_normalized_round_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_eurusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_symbol_normalized_round_retest_v0_eurusd.csv"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "USDJPY",
+      "qualification_source": "symbol_normalized_round_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_usdjpy.csv",
+      "startup_log_file": "shadow_fix_observer_startup_symbol_normalized_round_retest_v0_usdjpy.csv"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "status": "ACCEPTED",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_xauusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_symbol_normalized_round_retest_v0_xauusd.csv"
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "status": "PROVISIONAL",
+      "symbol": "USDJPY",
+      "qualification_source": "round_number_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_round_number_retest_v0_usdjpy.csv",
+      "startup_log_file": "shadow_fix_observer_startup_round_number_retest_v0_usdjpy.csv"
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "status": "PROVISIONAL",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_round_number_retest_v0_xauusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_round_number_retest_v0_xauusd.csv"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "PROVISIONAL",
+      "symbol": "EURUSD",
+      "qualification_source": "session_extreme_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_session_extreme_retest_v0_eurusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_session_extreme_retest_v0_eurusd.csv"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "PROVISIONAL",
+      "symbol": "USDJPY",
+      "qualification_source": "session_extreme_retest_v0_multisymbol_summary.csv:PASS",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_session_extreme_retest_v0_usdjpy.csv",
+      "startup_log_file": "shadow_fix_observer_startup_session_extreme_retest_v0_usdjpy.csv"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "status": "PROVISIONAL",
+      "symbol": "XAUUSD",
+      "qualification_source": "primary_xau_matrix_or_candidate_status",
+      "observer_supported": true,
+      "attachment_log_file": "shadow_fix_observer_signal_log_session_extreme_retest_v0_xauusd.csv",
+      "startup_log_file": "shadow_fix_observer_startup_session_extreme_retest_v0_xauusd.csv"
+    }
+  ],
+  "observer_limitations": [
+    "Runs only in the isolated C:/MT5PortableShadowFixObservers terminal.",
+    "The standard Capital.com demo trading terminal and its executor charts are not modified.",
+    "All observers remain dry-run and explicitly set broker_action_allowed=false.",
+    "Rows include shadow_action and shadow_reason for the proposed session/quarantine policy."
+  ]
+}

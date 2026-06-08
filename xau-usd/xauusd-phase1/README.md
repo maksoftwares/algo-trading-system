@@ -141,3 +141,7 @@ From the repo root, the existing Phase 0 checks should still pass.
 `generate_phase1_review_index.py` writes `outputs/reports/PHASE1_REVIEW_INDEX.md` as the single reviewer entry point.
 `generate_phase2_readiness_report.py` writes `outputs/reports/PHASE2_READINESS_REPORT.md` as a preflight gate report for paper-mode preparation.
 `run_phase1_periodic_checks.py` can read Phase 1 dry-run logs from one terminal and passive spread logs from a separate logger terminal with `--spread-files-dir`.
+
+The experimental demo observer dashboard also writes `outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.md`, `PHASE2_EA_WEAKNESS_SHADOW_REPORT.json`, and `PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv`. These are shadow-only measurements for duplicate-family mutex, XAUUSD morning/afternoon filtering, and weak-EA quarantine candidates; they must not be treated as deployed router behavior.
+
+The replacement logger lane uses `mt5/Experts/Phase2ShadowFixObserver.mq5` and `scripts/setup_phase2_shadow_fix_observer_terminal.py` to run 14 dry-run observer charts in `C:\MT5PortableShadowFixObservers`. It is separate from the standard demo terminal that hosts actual demo-trading EAs.

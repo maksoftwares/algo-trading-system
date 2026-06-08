@@ -1,0 +1,42 @@
+{
+  "status": "SHADOW_FIX_OBSERVER_TERMINAL_RUNNING",
+  "created_at_utc": "2026-06-08T09:07:12.761993Z",
+  "authority": "Isolated observer-only terminal for Phase 2 shadow-fix measurement. It does not touch the standard Capital.com demo trading terminal, its profile, charts, orders, or executor EAs.",
+  "portable_root": "C:\\MT5PortableShadowFixObservers",
+  "source_install_root": "C:\\Program Files\\MetaTrader 5",
+  "source_demo_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+  "prepare_attempted": true,
+  "attach_attempted": true,
+  "launch_started": true,
+  "attachment_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.md",
+  "attachment_count": 14,
+  "terminal_exe": "C:\\MT5PortableShadowFixObservers\\terminal64.exe",
+  "copied_paths": [
+    "C:\\MT5PortableShadowFixObservers\\terminal64.exe",
+    "C:\\MT5PortableShadowFixObservers\\MetaEditor64.exe",
+    "C:\\MT5PortableShadowFixObservers\\metatester64.exe",
+    "C:\\MT5PortableShadowFixObservers\\Terminal.ico",
+    "C:\\MT5PortableShadowFixObservers\\Bases",
+    "C:\\MT5PortableShadowFixObservers\\Profiles",
+    "C:\\MT5PortableShadowFixObservers\\Sounds",
+    "C:\\MT5PortableShadowFixObservers\\Config\\accounts.dat",
+    "C:\\MT5PortableShadowFixObservers\\Config\\agents.dat",
+    "C:\\MT5PortableShadowFixObservers\\Config\\certificates",
+    "C:\\MT5PortableShadowFixObservers\\Config\\common.ini",
+    "C:\\MT5PortableShadowFixObservers\\Config\\dnsperf.dat",
+    "C:\\MT5PortableShadowFixObservers\\Config\\hotkeys.ini",
+    "C:\\MT5PortableShadowFixObservers\\Config\\servers.dat",
+    "C:\\MT5PortableShadowFixObservers\\Config\\settings.ini",
+    "C:\\MT5PortableShadowFixObservers\\Config\\terminal.ini"
+  ],
+  "logs": {
+    "startup_log_count": 14,
+    "signal_log_count": 14,
+    "latest_signal_log": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_session_extreme_retest_v0_xauusd.csv",
+    "latest_signal_log_mtime": "2026-06-08T13:07:12.221985"
+  },
+  "standard_demo_terminal_touched": false,
+  "standard_demo_terminal_closed_or_restarted": false,
+  "trading_eas_touched": false,
+  "broker_action_allowed": false
+}

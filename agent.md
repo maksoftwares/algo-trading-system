@@ -25,6 +25,8 @@ Last updated: 2026-06-08
 - Always keep the root `status.html` dashboard up to date. After any status-affecting Phase 0, Phase 1, soak, cost, report, or candidate change, regenerate it directly or through `run_phase1_periodic_checks.py` before committing or pushing.
 - Do not push unless explicitly asked.
 - Experimental demo trade reviews normally use direct broker history from the `1025742 Capital.ComMena-Demo` terminal when judging broker trades, but a no-runtime-touch instruction overrides that: use only committed repo CSV/report artifacts, do not query terminal history, and do not touch demo-running EAs. The dashboard actual-trades section defaults to the configured full history window from `2026-06-01 00:00:00`, not just a single focus date.
+- Keep the weakness-fix layer shadow-first: measure proposed duplicate/session/quarantine blocks in reports before any demo guard/router deployment. Do not modify running EAs, presets, charts, orders, or MT5 runtime to enforce those rules without explicit owner/reviewer approval.
+- Shadow-fix observer replacement lane runs separately at `C:\MT5PortableShadowFixObservers`. It uses `Phase2ShadowFixObserver`, is dry-run/logging-only, writes `shadow_fix_observer_*` CSV files, and must not be confused with the standard demo terminal's actual trading EAs.
 
 ## Current Research Goal
 
@@ -53,6 +55,8 @@ Last updated: 2026-06-08
 ## Current State
 
 - 2026-06-08 reviewer-governance response:
+  - Current EA weakness-fix plan implemented as shadow-only reporting. Latest generated report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_EA_WEAKNESS_SHADOW_REPORT.md`; per-trade annotations: `PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv`; future-only spec: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_GUARD_ROUTER_SPEC.md`. This measures duplicate-family mutex, XAUUSD morning/afternoon filtering, and EA quarantine for `session_extreme_retest_v0` plus `symbol_normalized_round_retest_v0`; it does not touch MT5 runtime.
+  - Old active observer/logging charts were not present in the standard demo profile; the profile contains actual demo-trading executor/WR50 charts, so they were intentionally not removed. Replacement logging is now isolated in `C:\MT5PortableShadowFixObservers` with 14 `Phase2ShadowFixObserver` charts and `broker_action_allowed=false`. Reports: `PHASE2_SHADOW_FIX_OBSERVER_TERMINAL.md` and `PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.md`.
   - Reviewer verdict accepted: Phase 1 dry-run remains PASS, canonical Phase 2 remains NO-GO, broker-side execution remains NO-GO, live/real capital remains ABSOLUTE NO-GO, Phase 2B passive observer work may continue, and experimental demo lanes are paused for new deployments until governance fixes are reviewed.
   - `P2WEAKNESS_BR_V1` repo source is hardened without touching MT5 runtime: source/default preset now use `InpDryRunOnly=true`, `InpBrokerActionAllowed=false`, blank account whitelist, blank experimental authorization token, blank cost-suspension acknowledgement token, `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY`, and `COST_SUSPENDED_CANONICAL`.
   - `P2WEAKNESS_BR_V1` magic moved out of WR50 namespace: reserved namespace `931000-931099`, active magic `931000`. WR50 remains `930000-930999`.

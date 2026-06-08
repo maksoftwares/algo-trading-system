@@ -172,6 +172,61 @@ def test_actual_broker_magic_parser_includes_p2weakness_and_wr50_experiments():
     assert "p2weakness_br_v1" in filters
 
 
+def test_weakness_shadow_report_measures_duplicates_sessions_and_ea_quarantine(tmp_path):
+    module = _load_module()
+    rows = [
+        _actual_row("2026-06-01 09:00:00", "breakout_retest", "ACCEPTED", "XAUUSD", "BUY", "-10.00", "1"),
+        _actual_row("2026-06-01 17:00:00", "breakout_retest", "ACCEPTED", "XAUUSD", "BUY", "30.00", "2"),
+        _actual_row("2026-06-01 17:00:01", "round_number_retest_v0", "PROVISIONAL", "XAUUSD", "BUY", "28.00", "3"),
+        _actual_row("2026-06-01 21:00:00", "session_extreme_retest_v0", "PROVISIONAL", "EURUSD", "SELL", "-4.00", "4"),
+        _actual_row(
+            "2026-06-01 21:05:00",
+            "symbol_normalized_round_retest_v0",
+            "ACCEPTED",
+            "XAUUSD",
+            "SELL",
+            "-12.00",
+            "5",
+        ),
+    ]
+
+    module._mark_duplicate_actual_trades(rows)
+    module._apply_weakness_shadow_annotations(rows)
+    weakness = module._actual_weakness_shadow(rows)
+
+    by_ticket = {row["position_ticket"]: row for row in rows}
+    assert by_ticket["1"]["time_bucket"] == "Morning 06:00-11:59"
+    assert by_ticket["1"]["weakness_shadow_reason"] == "BLOCK_XAUUSD_MORNING_AFTERNOON"
+    assert by_ticket["3"]["is_duplicate"] == "true"
+    assert by_ticket["3"]["weakness_shadow_reason"] == "BLOCK_DUPLICATE_FAMILY_MUTEX"
+    assert by_ticket["4"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST"
+    assert by_ticket["5"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND"
+
+    combined = {row["id"]: row for row in weakness["scenarios"]}["combined_shadow_policy"]
+    assert weakness["duplicate_hidden_summary"]["closed_pnl_aed"] == "4.00"
+    assert combined["kept"]["closed_pnl_aed"] == "30.00"
+    assert combined["blocked"]["closed_pnl_aed"] == "-26.00"
+    assert combined["delta_closed_pnl_aed"] == "26.00"
+    assert combined["promotion_status"] == "FAIL_TRADE_COUNT"
+
+    actual_broker = {
+        "status": "CONNECTED",
+        "history_start": "2026-06-01 00:00:00",
+        "history_end": "2026-06-01 22:00:00",
+        "account": {"login": "1", "server": "Demo", "currency": "AED"},
+        "weakness_shadow": weakness,
+        "trades": rows,
+    }
+    module._write_weakness_shadow_outputs(tmp_path, actual_broker)
+    report = (tmp_path / "PHASE2_EA_WEAKNESS_SHADOW_REPORT.md").read_text(encoding="utf-8")
+    trades = list(csv.DictReader((tmp_path / "PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv").open("r", encoding="utf-8", newline="")))
+
+    assert "Status: SHADOW_ONLY_NOT_ENFORCED" in report
+    assert "Combined proposed shadow policy" in report
+    assert "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND" in report
+    assert trades[0]["weakness_shadow_reason"] == "BLOCK_XAUUSD_MORNING_AFTERNOON"
+
+
 def _write_log(path: Path, candidate: str, status: str, symbol: str, rows: list[tuple[str, str, str, str, str, str, str, str]]):
     fieldnames = [
         "timestamp_broker",
@@ -235,6 +290,43 @@ def _write_log(path: Path, candidate: str, status: str, symbol: str, rows: list[
                     "stop_distance_points": "100.00",
                 }
             )
+
+
+def _actual_row(
+    entry_time: str,
+    candidate: str,
+    status: str,
+    symbol: str,
+    direction: str,
+    pnl: str,
+    ticket: str,
+) -> dict[str, str]:
+    return {
+        "entry_time": entry_time,
+        "exit_time": entry_time,
+        "candidate": candidate,
+        "status": status,
+        "symbol": symbol,
+        "direction": direction,
+        "volume": "0.01",
+        "entry_price": "100.00",
+        "exit_price": "101.00",
+        "sl": "99.00",
+        "tp": "102.00",
+        "state": "CLOSED",
+        "profit_aed": pnl,
+        "position_ticket": ticket,
+        "magic": "920101",
+        "entry_order": ticket,
+        "exit_order": ticket,
+        "entry_deal": ticket,
+        "exit_deal": ticket,
+        "duplicate_key": "",
+        "duplicate_role": "unique",
+        "is_duplicate": "false",
+        "entry_comment": "",
+        "exit_comment": "[tp]" if float(pnl) > 0 else "[sl]",
+    }
 
 
 def _load_module():

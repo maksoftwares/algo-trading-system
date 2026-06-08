@@ -1,0 +1,80 @@
+{
+  "status": "SHADOW_FIX_OBSERVER_LOGS_READY",
+  "created_at_utc": "2026-06-08T09:11:44.145760Z",
+  "authority": "Read-only summary of isolated shadow-fix observer logs. It does not touch MT5 runtime, orders, positions, charts, or the standard demo trading terminal.",
+  "files_dir": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files",
+  "file_count": 14,
+  "row_count": 28,
+  "signal_count": 2,
+  "latest_row": "2026.06.08 09:10:00",
+  "by_shadow_action": [
+    {
+      "shadow_action": "KEEP_NO_SIGNAL",
+      "count": 26
+    },
+    {
+      "shadow_action": "KEEP",
+      "count": 1
+    },
+    {
+      "shadow_action": "BLOCK",
+      "count": 1
+    }
+  ],
+  "signal_by_shadow_action": [
+    {
+      "shadow_action": "KEEP",
+      "count": 1
+    },
+    {
+      "shadow_action": "BLOCK",
+      "count": 1
+    }
+  ],
+  "signal_by_shadow_reason": [
+    {
+      "shadow_reason": "KEEP",
+      "count": 1
+    },
+    {
+      "shadow_reason": "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND",
+      "count": 1
+    }
+  ],
+  "signal_by_candidate": [
+    {
+      "candidate": "round_number_retest_v0",
+      "count": 1
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "count": 1
+    }
+  ],
+  "signal_by_symbol": [
+    {
+      "symbol": "USDJPY",
+      "count": 2
+    }
+  ],
+  "signal_by_time_bucket": [
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 2
+    }
+  ],
+  "signal_by_candidate_symbol_time": [
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 1
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 1
+    }
+  ]
+}

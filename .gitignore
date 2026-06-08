@@ -33,6 +33,15 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_TERMINAL.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_TERMINAL.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_LIVE_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_LIVE_REPORT.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_CANONICAL_BLOCK_VERIFICATION.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2A_COST_CLOSURE_REPORT.md

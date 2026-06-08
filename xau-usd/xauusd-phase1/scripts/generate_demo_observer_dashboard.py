@@ -63,13 +63,16 @@ ACTUAL_BROKER_TRADE_FIELDS = [
     "duplicate_key",
     "duplicate_role",
     "is_duplicate",
+    "time_bucket",
+    "weakness_shadow_action",
+    "weakness_shadow_reason",
     "entry_comment",
     "exit_comment",
 ]
 DEDUP_KEEP_PRIORITY = {
     "breakout_retest": 10,
-    "symbol_normalized_round_retest_v0": 20,
-    "swing_breakout_retest_v0": 30,
+    "swing_breakout_retest_v0": 20,
+    "symbol_normalized_round_retest_v0": 30,
     "session_extreme_retest_v0": 40,
     "round_number_retest_v0": 50,
     "p2weakness_br_v1": 60,
@@ -77,6 +80,11 @@ DEDUP_KEEP_PRIORITY = {
     "WR50_BreakoutQuality_v0": 80,
     "WR50_BreakoutExit1R_v0": 90,
 }
+WEAKNESS_SHADOW_REPORT_JSON = "PHASE2_EA_WEAKNESS_SHADOW_REPORT.json"
+WEAKNESS_SHADOW_REPORT_MD = "PHASE2_EA_WEAKNESS_SHADOW_REPORT.md"
+WEAKNESS_SHADOW_TRADES_CSV = "PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv"
+WEAKNESS_TIME_BLOCKS = {"Morning 06:00-11:59", "Afternoon 12:00-15:59"}
+WEAKNESS_QUARANTINE_CANDIDATES = {"session_extreme_retest_v0", "symbol_normalized_round_retest_v0"}
 
 
 @dataclass(frozen=True)
@@ -177,6 +185,7 @@ def generate_demo_observer_dashboard(
     _write_csv(summary_csv_path, summary_rows)
     _write_csv(ledger_csv_path, ledger)
     _write_csv(actual_broker_csv_path, actual_broker["trades"], ACTUAL_BROKER_TRADE_FIELDS)
+    _write_weakness_shadow_outputs(phase1_reports, actual_broker)
     output_path.write_text(_render_html(payload), encoding="utf-8")
 
     return DashboardOutput(
@@ -249,8 +258,10 @@ def _read_actual_broker_trades(terminal_exe: Path, focus_date: str, actual_histo
         positions = list(mt5.positions_get() or [])
         trades = _build_actual_broker_trade_rows(mt5, deals, orders, positions)
         _mark_duplicate_actual_trades(trades)
+        _apply_weakness_shadow_annotations(trades)
         summary = _actual_broker_summary(trades)
         deduped_trades = [row for row in trades if str(row.get("is_duplicate", "")).lower() != "true"]
+        weakness_shadow = _actual_weakness_shadow(trades)
         return {
             "status": "CONNECTED",
             "reason": "",
@@ -270,6 +281,7 @@ def _read_actual_broker_trades(terminal_exe: Path, focus_date: str, actual_histo
             "summary": summary,
             "deduped_summary": _actual_broker_summary(deduped_trades),
             "duplicate_count": len(trades) - len(deduped_trades),
+            "weakness_shadow": weakness_shadow,
             "trades": trades,
         }
     except Exception as exc:
@@ -392,6 +404,8 @@ def _actual_broker_summary(trades: list[dict[str, Any]]) -> dict[str, Any]:
     open_rows = [row for row in trades if row.get("state") == "OPEN"]
     wins = [row for row in closed if (_to_float(row.get("profit_aed")) or 0.0) > 0.0]
     losses = [row for row in closed if (_to_float(row.get("profit_aed")) or 0.0) < 0.0]
+    gross_win = sum(_to_float(row.get("profit_aed")) or 0.0 for row in wins)
+    gross_loss = sum(_to_float(row.get("profit_aed")) or 0.0 for row in losses)
     closed_pnl = sum(_to_float(row.get("profit_aed")) or 0.0 for row in closed)
     floating_pnl = sum(_to_float(row.get("profit_aed")) or 0.0 for row in open_rows)
     return {
@@ -404,6 +418,219 @@ def _actual_broker_summary(trades: list[dict[str, Any]]) -> dict[str, Any]:
         "closed_pnl_aed": f"{closed_pnl:.2f}",
         "floating_pnl_aed": f"{floating_pnl:.2f}",
         "total_pnl_aed": f"{closed_pnl + floating_pnl:.2f}",
+        "profit_factor": f"{(gross_win / abs(gross_loss)):.2f}" if gross_loss else ("inf" if gross_win else "n/a"),
+        "avg_win_aed": f"{(gross_win / len(wins)):.2f}" if wins else "n/a",
+        "avg_loss_aed": f"{(gross_loss / len(losses)):.2f}" if losses else "n/a",
+    }
+
+
+def _apply_weakness_shadow_annotations(rows: list[dict[str, Any]]) -> None:
+    for row in rows:
+        row["time_bucket"] = _actual_time_bucket(row.get("entry_time", ""))
+        action, reason = _weakness_shadow_action(row)
+        row["weakness_shadow_action"] = action
+        row["weakness_shadow_reason"] = reason
+
+
+def _actual_time_bucket(entry_time: Any) -> str:
+    text = str(entry_time or "")
+    try:
+        hour = int(text[11:13])
+    except (TypeError, ValueError):
+        return "UNKNOWN"
+    if hour >= 20 or hour < 6:
+        return "Night 20:00-05:59"
+    if hour < 12:
+        return "Morning 06:00-11:59"
+    if hour < 16:
+        return "Afternoon 12:00-15:59"
+    return "Evening 16:00-19:59"
+
+
+def _weakness_shadow_action(row: dict[str, Any]) -> tuple[str, str]:
+    if str(row.get("is_duplicate", "")).lower() == "true":
+        return "BLOCK", "BLOCK_DUPLICATE_FAMILY_MUTEX"
+    candidate = str(row.get("candidate", ""))
+    if candidate in WEAKNESS_QUARANTINE_CANDIDATES:
+        if candidate == "session_extreme_retest_v0":
+            return "BLOCK", "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST"
+        return "BLOCK", "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND"
+    if str(row.get("symbol", "")).upper() == "XAUUSD" and str(row.get("time_bucket", "")) in WEAKNESS_TIME_BLOCKS:
+        return "BLOCK", "BLOCK_XAUUSD_MORNING_AFTERNOON"
+    return "KEEP", "KEEP"
+
+
+def _actual_weakness_shadow(trades: list[dict[str, Any]]) -> dict[str, Any]:
+    raw_rows = list(trades)
+    deduped_rows = [row for row in raw_rows if str(row.get("is_duplicate", "")).lower() != "true"]
+    duplicate_rows = [row for row in raw_rows if str(row.get("is_duplicate", "")).lower() == "true"]
+    combined_keep = [row for row in deduped_rows if row.get("weakness_shadow_action") == "KEEP"]
+    combined_block = [row for row in deduped_rows if row.get("weakness_shadow_action") == "BLOCK"]
+    scenarios = [
+        _shadow_scenario(
+            "duplicate_family_mutex",
+            "Duplicate family mutex",
+            raw_rows,
+            deduped_rows,
+            duplicate_rows,
+            "One kept event per same entry minute, symbol, direction, and volume.",
+        ),
+        _scenario_by_block_predicate(
+            "block_session_extreme_retest_v0",
+            "EA quarantine: session_extreme_retest_v0",
+            deduped_rows,
+            lambda row: row.get("candidate") == "session_extreme_retest_v0",
+            "Measures disabling only session_extreme_retest_v0.",
+        ),
+        _scenario_by_block_predicate(
+            "block_symbol_normalized_round_retest_v0",
+            "EA quarantine: symbol_normalized_round_retest_v0",
+            deduped_rows,
+            lambda row: row.get("candidate") == "symbol_normalized_round_retest_v0",
+            "Measures disabling only symbol_normalized_round_retest_v0.",
+        ),
+        _scenario_by_block_predicate(
+            "block_xauusd_morning_afternoon",
+            "Session filter: XAUUSD morning/afternoon",
+            deduped_rows,
+            lambda row: str(row.get("symbol", "")).upper() == "XAUUSD" and row.get("time_bucket") in WEAKNESS_TIME_BLOCKS,
+            "Measures blocking XAUUSD entries from 06:00 through 15:59 Dubai time.",
+        ),
+        _shadow_scenario(
+            "combined_shadow_policy",
+            "Combined proposed shadow policy",
+            deduped_rows,
+            combined_keep,
+            combined_block,
+            "Weak-EA quarantine + XAUUSD morning/afternoon block on the duplicate-hidden decision view.",
+        ),
+    ]
+    return {
+        "status": "SHADOW_ONLY_NOT_ENFORCED",
+        "boundary": "Measurement only. Does not change MT5 charts, EA inputs, orders, positions, presets, or runtime behavior.",
+        "policy": [
+            "Use duplicate-hidden actual trades as the main decision view.",
+            "Measure one-event-per-family duplicate mutex.",
+            "Keep duplicate priority: breakout_retest, swing_breakout_retest_v0, symbol_normalized_round_retest_v0, then provisional/experimental EAs.",
+            "Measure separate EA quarantine for session_extreme_retest_v0 and symbol_normalized_round_retest_v0.",
+            "Measure XAUUSD morning/afternoon session block.",
+            "Promote only after owner/reviewer approval and at least one fresh forward week.",
+        ],
+        "raw_summary": _actual_broker_summary(raw_rows),
+        "duplicate_hidden_summary": _actual_broker_summary(deduped_rows),
+        "combined_keep_summary": _actual_broker_summary(combined_keep),
+        "combined_block_summary": _actual_broker_summary(combined_block),
+        "scenarios": scenarios,
+        "block_reason_counts": _actual_count_by(combined_block, "weakness_shadow_reason"),
+        "by_ea": _actual_group_summary(deduped_rows, ["candidate"]),
+        "by_symbol": _actual_group_summary(deduped_rows, ["symbol"]),
+        "by_time_bucket": _actual_group_summary(deduped_rows, ["time_bucket"]),
+        "by_ea_symbol_time": _actual_group_summary(deduped_rows, ["candidate", "symbol", "time_bucket"]),
+        "worst_clusters": _actual_group_summary(deduped_rows, ["candidate", "symbol", "time_bucket"], reverse=False, limit=12),
+    }
+
+
+def _scenario_by_block_predicate(
+    scenario_id: str,
+    label: str,
+    baseline_rows: list[dict[str, Any]],
+    predicate,
+    note: str,
+) -> dict[str, Any]:
+    blocked = [row for row in baseline_rows if predicate(row)]
+    kept = [row for row in baseline_rows if not predicate(row)]
+    return _shadow_scenario(scenario_id, label, baseline_rows, kept, blocked, note)
+
+
+def _shadow_scenario(
+    scenario_id: str,
+    label: str,
+    baseline_rows: list[dict[str, Any]],
+    kept_rows: list[dict[str, Any]],
+    blocked_rows: list[dict[str, Any]],
+    note: str,
+) -> dict[str, Any]:
+    baseline = _actual_broker_summary(baseline_rows)
+    kept = _actual_broker_summary(kept_rows)
+    blocked = _actual_broker_summary(blocked_rows)
+    baseline_closed = _to_float(baseline.get("closed_pnl_aed")) or 0.0
+    kept_closed = _to_float(kept.get("closed_pnl_aed")) or 0.0
+    baseline_count = int(baseline.get("closed_trades") or 0)
+    kept_count = int(kept.get("closed_trades") or 0)
+    return {
+        "id": scenario_id,
+        "label": label,
+        "note": note,
+        "baseline": baseline,
+        "kept": kept,
+        "blocked": blocked,
+        "delta_closed_pnl_aed": f"{kept_closed - baseline_closed:.2f}",
+        "kept_closed_trade_pct": f"{(kept_count / baseline_count * 100.0):.2f}" if baseline_count else "n/a",
+        "promotion_status": _promotion_status(baseline, kept),
+    }
+
+
+def _promotion_status(baseline: dict[str, Any], kept: dict[str, Any]) -> str:
+    baseline_pnl = _to_float(baseline.get("closed_pnl_aed")) or 0.0
+    kept_pnl = _to_float(kept.get("closed_pnl_aed")) or 0.0
+    baseline_pf = _to_float(baseline.get("profit_factor")) or 0.0
+    kept_pf = _to_float(kept.get("profit_factor")) or 0.0
+    baseline_wr = _to_float(baseline.get("closed_win_rate_pct")) or 0.0
+    kept_wr = _to_float(kept.get("closed_win_rate_pct")) or 0.0
+    baseline_closed = int(baseline.get("closed_trades") or 0)
+    kept_closed = int(kept.get("closed_trades") or 0)
+    if kept_closed == 0 or (baseline_closed and kept_closed / baseline_closed < 0.35):
+        return "FAIL_TRADE_COUNT"
+    if kept_pnl > baseline_pnl and kept_pf >= baseline_pf and kept_wr >= baseline_wr:
+        return "SHADOW_CANDIDATE_NEEDS_FORWARD_WEEK"
+    return "REJECT_OR_KEEP_MEASURING"
+
+
+def _actual_count_by(rows: list[dict[str, Any]], field: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        key = str(row.get(field, "") or "UNKNOWN")
+        counts[key] = counts.get(key, 0) + 1
+    return dict(sorted(counts.items(), key=lambda item: (-item[1], item[0])))
+
+
+def _actual_group_summary(
+    rows: list[dict[str, Any]],
+    keys: list[str],
+    reverse: bool = True,
+    limit: int | None = None,
+) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, ...], list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        grouped[tuple(str(row.get(key, "")) for key in keys)].append(row)
+    items = []
+    for key_values, group_rows in grouped.items():
+        summary = _actual_broker_summary(group_rows)
+        row = {keys[index]: key_values[index] for index in range(len(keys))}
+        row.update(summary)
+        items.append(row)
+    items.sort(key=lambda row: _to_float(row.get("closed_pnl_aed")) or 0.0, reverse=reverse)
+    return items[:limit] if limit else items
+
+
+def _empty_weakness_shadow(reason: str = "") -> dict[str, Any]:
+    empty = _actual_broker_summary([])
+    return {
+        "status": "UNAVAILABLE",
+        "reason": reason,
+        "boundary": "Measurement unavailable; no MT5 runtime mutation was attempted.",
+        "policy": [],
+        "raw_summary": empty,
+        "duplicate_hidden_summary": empty,
+        "combined_keep_summary": empty,
+        "combined_block_summary": empty,
+        "scenarios": [],
+        "block_reason_counts": {},
+        "by_ea": [],
+        "by_symbol": [],
+        "by_time_bucket": [],
+        "by_ea_symbol_time": [],
+        "worst_clusters": [],
     }
 
 
@@ -419,8 +646,146 @@ def _actual_unavailable(reason: str, terminal_exe: Path | None = None) -> dict[s
         "summary": _actual_broker_summary([]),
         "deduped_summary": _actual_broker_summary([]),
         "duplicate_count": 0,
+        "weakness_shadow": _empty_weakness_shadow(reason),
         "trades": [],
     }
+
+
+def _write_weakness_shadow_outputs(reports_dir: Path, actual_broker: dict[str, Any]) -> None:
+    weakness = actual_broker.get("weakness_shadow", _empty_weakness_shadow("missing_payload"))
+    report_json = reports_dir / WEAKNESS_SHADOW_REPORT_JSON
+    report_md = reports_dir / WEAKNESS_SHADOW_REPORT_MD
+    trades_csv = reports_dir / WEAKNESS_SHADOW_TRADES_CSV
+    payload = {
+        "status": weakness.get("status", "UNKNOWN"),
+        "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "history_start": actual_broker.get("history_start", ""),
+        "history_end": actual_broker.get("history_end", ""),
+        "account": actual_broker.get("account", {}),
+        "weakness_shadow": weakness,
+    }
+    report_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    report_md.write_text(_render_weakness_shadow_report(payload), encoding="utf-8")
+    _write_csv(trades_csv, actual_broker.get("trades", []), ACTUAL_BROKER_TRADE_FIELDS)
+
+
+def _render_weakness_shadow_report(payload: dict[str, Any]) -> str:
+    weakness = payload.get("weakness_shadow", _empty_weakness_shadow("missing_payload"))
+    account = payload.get("account", {})
+    lines = [
+        "# Phase 2 EA Weakness Shadow Report",
+        "",
+        f"Status: {weakness.get('status', 'UNKNOWN')}",
+        "",
+        str(weakness.get("boundary", "")),
+        "",
+        f"Generated at UTC: `{payload.get('generated_at_utc', '')}`",
+        f"History window: `{payload.get('history_start', '')}` to `{payload.get('history_end', '')}`",
+        f"Account: `{account.get('login', 'n/a')}` / `{account.get('server', 'n/a')}` / `{account.get('currency', 'n/a')}`",
+        "",
+        "## Policy Under Measurement",
+        "",
+    ]
+    for item in weakness.get("policy", []):
+        lines.append(f"- {item}")
+    lines.extend(
+        [
+            "",
+            "## Main Decision Views",
+            "",
+            _actual_metrics_table(
+                [
+                    ("Raw broker trades", weakness.get("raw_summary", _actual_broker_summary([]))),
+                    ("Duplicate-hidden decision view", weakness.get("duplicate_hidden_summary", _actual_broker_summary([]))),
+                    ("Combined shadow would keep", weakness.get("combined_keep_summary", _actual_broker_summary([]))),
+                    ("Combined shadow would block", weakness.get("combined_block_summary", _actual_broker_summary([]))),
+                ]
+            ),
+            "",
+            "## Shadow Scenarios",
+            "",
+            _shadow_scenarios_table(weakness.get("scenarios", [])),
+            "",
+            "## Block Reason Counts",
+            "",
+            _count_markdown_table(weakness.get("block_reason_counts", {}), "Reason"),
+            "",
+            "## Duplicate-Hidden By EA",
+            "",
+            _actual_group_markdown_table(weakness.get("by_ea", []), ["candidate"]),
+            "",
+            "## Duplicate-Hidden By Symbol",
+            "",
+            _actual_group_markdown_table(weakness.get("by_symbol", []), ["symbol"]),
+            "",
+            "## Duplicate-Hidden By Time Bucket",
+            "",
+            _actual_group_markdown_table(weakness.get("by_time_bucket", []), ["time_bucket"]),
+            "",
+            "## Worst EA x Symbol x Time Clusters",
+            "",
+            _actual_group_markdown_table(weakness.get("worst_clusters", []), ["candidate", "symbol", "time_bucket"]),
+            "",
+            "## Promotion Rule",
+            "",
+            "- A rule may be promoted only after it improves duplicate-hidden PF and PnL, preserves or improves win rate, keeps enough trade count, survives at least one fresh week, and receives owner/reviewer approval.",
+            "- This report is measurement-only and does not deploy a guard/router or change running EAs.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def _actual_metrics_table(rows: list[tuple[str, dict[str, Any]]]) -> str:
+    lines = [
+        "| View | Trades | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | Floating AED | Total AED | PF | Avg Win | Avg Loss |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for label, summary in rows:
+        lines.append(
+            f"| {label} | {summary.get('actual_trades', 0)} | {summary.get('closed_trades', 0)} | {summary.get('open_trades', 0)} | "
+            f"{summary.get('wins', 0)} | {summary.get('losses', 0)} | {summary.get('closed_win_rate_pct', 'n/a')}% | "
+            f"{summary.get('closed_pnl_aed', '0.00')} | {summary.get('floating_pnl_aed', '0.00')} | {summary.get('total_pnl_aed', '0.00')} | "
+            f"{summary.get('profit_factor', 'n/a')} | {summary.get('avg_win_aed', 'n/a')} | {summary.get('avg_loss_aed', 'n/a')} |"
+        )
+    return "\n".join(lines)
+
+
+def _shadow_scenarios_table(scenarios: list[dict[str, Any]]) -> str:
+    lines = [
+        "| Scenario | Baseline Closed | Kept Closed | Kept % | Delta PnL AED | Kept PF | Kept Win Rate | Promotion Status |",
+        "|---|---:|---:|---:|---:|---:|---:|---|",
+    ]
+    for scenario in scenarios:
+        baseline = scenario.get("baseline", {})
+        kept = scenario.get("kept", {})
+        lines.append(
+            f"| {scenario.get('label', '')} | {baseline.get('closed_trades', 0)} | {kept.get('closed_trades', 0)} | "
+            f"{scenario.get('kept_closed_trade_pct', 'n/a')}% | {scenario.get('delta_closed_pnl_aed', '0.00')} | "
+            f"{kept.get('profit_factor', 'n/a')} | {kept.get('closed_win_rate_pct', 'n/a')}% | {scenario.get('promotion_status', '')} |"
+        )
+    return "\n".join(lines)
+
+
+def _count_markdown_table(counts: dict[str, int], label: str) -> str:
+    lines = [f"| {label} | Count |", "|---|---:|"]
+    for key, count in counts.items():
+        lines.append(f"| {key} | {count} |")
+    return "\n".join(lines)
+
+
+def _actual_group_markdown_table(rows: list[dict[str, Any]], keys: list[str]) -> str:
+    header = "| " + " | ".join(keys) + " | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |"
+    divider = "|" + "|".join(["---"] * len(keys)) + "|---:|---:|---:|---:|---:|---:|---:|---:|---:|"
+    lines = [header, divider]
+    for row in rows:
+        key_values = " | ".join(str(row.get(key, "")) for key in keys)
+        lines.append(
+            f"| {key_values} | {row.get('closed_trades', 0)} | {row.get('open_trades', 0)} | {row.get('wins', 0)} | "
+            f"{row.get('losses', 0)} | {row.get('closed_win_rate_pct', 'n/a')}% | {row.get('closed_pnl_aed', '0.00')} | "
+            f"{row.get('profit_factor', 'n/a')} | {row.get('avg_win_aed', 'n/a')} | {row.get('avg_loss_aed', 'n/a')} |"
+        )
+    return "\n".join(lines)
 
 
 def _focus_date_start(focus_date: str) -> datetime:
@@ -736,6 +1101,7 @@ def _render_html(payload: dict[str, Any]) -> str:
     actual_broker = payload.get("actual_broker", _actual_unavailable("payload_missing"))
     actual_rows = list(actual_broker.get("trades", []))
     actual_summary = actual_broker.get("summary", _actual_broker_summary([]))
+    weakness_shadow = actual_broker.get("weakness_shadow", _empty_weakness_shadow("payload_missing"))
     actual_account = actual_broker.get("account", {})
     ledger = payload["ledger"]
     candidate_rows = payload["candidate_summary"]
@@ -941,6 +1307,7 @@ def _render_html(payload: dict[str, Any]) -> str:
       <a href="#coverage">Coverage</a>
       <a href="#summary">EA Summary</a>
       <a href="#actual-broker">Actual Broker Trades</a>
+      <a href="#weakness-shadow">Weakness Shadow</a>
       <a href="#orders">Orders</a>
       <a href="#candidate">Candidate Rollup</a>
       <a href="#symbol">Symbol Rollup</a>
@@ -956,6 +1323,8 @@ def _render_html(payload: dict[str, Any]) -> str:
       {_metric_card("Est. PnL today", f"{total_pnl:+.2f} AED", "Includes open mark-to-market")}
       {_metric_card("Actual trades", actual_summary.get("actual_trades", 0), f"{actual_summary.get('closed_trades', 0)} closed / {actual_summary.get('open_trades', 0)} open")}
       {_metric_card("Actual PnL", f"{actual_summary.get('total_pnl_aed', '0.00')} AED", "Direct MT5 realized + floating PnL")}
+      {_metric_card("Dedup PnL", f"{weakness_shadow.get('duplicate_hidden_summary', {}).get('total_pnl_aed', '0.00')} AED", "Duplicate-hidden actual-trade decision view")}
+      {_metric_card("Shadow keep", f"{weakness_shadow.get('combined_keep_summary', {}).get('total_pnl_aed', '0.00')} AED", "Hypothetical combined policy; not enforced")}
     </section>
     <section class="panel">
       <div class="note-grid">
@@ -985,6 +1354,12 @@ def _render_html(payload: dict[str, Any]) -> str:
         {_filters("actual")}
       </div>
       {_actual_broker_table(actual_broker)}
+    </section>
+    <section id="weakness-shadow" class="panel">
+      <div class="panel-head">
+        <div><h2>Weakness Shadow Fixes</h2><div class="hint">Measurement-only view: duplicate mutex, weak-EA quarantine, and XAUUSD morning/afternoon filter. This does not change MT5 or running EAs.</div></div>
+      </div>
+      {_weakness_shadow_panel(weakness_shadow)}
     </section>
     <section id="orders" class="panel">
       <div class="panel-head">
@@ -1252,6 +1627,7 @@ def _actual_broker_table(actual_broker: dict[str, Any]) -> str:
         f"<td>{html.escape(str(row.get('direction', '')))}</td>"
         f"<td class=\"num\">{html.escape(str(row.get('volume', '')))}</td>"
         f"<td>{_outcome_pill(row.get('state', ''))}</td>"
+        f"<td>{html.escape(str(row.get('time_bucket', '')))}</td>"
         f"<td class=\"num\">{html.escape(str(row.get('entry_price', '')))}</td>"
         f"<td class=\"num\">{html.escape(str(row.get('exit_price', '')))}</td>"
         f"<td class=\"num\">{html.escape(str(row.get('sl', '')))}</td>"
@@ -1259,6 +1635,8 @@ def _actual_broker_table(actual_broker: dict[str, Any]) -> str:
         f"<td class=\"num {_money_class(row.get('profit_aed', ''))}\">{_signed(row.get('profit_aed', ''))}</td>"
         f"<td>{html.escape(str(row.get('position_ticket', '')))}</td>"
         f"<td>{html.escape(str(row.get('duplicate_role', 'unique')))}</td>"
+        f"<td>{html.escape(str(row.get('weakness_shadow_action', '')))}</td>"
+        f"<td>{html.escape(str(row.get('weakness_shadow_reason', '')))}</td>"
         f"<td>{html.escape(str(row.get('exit_comment', '')))}</td>"
         "</tr>"
         for row in rows
@@ -1289,8 +1667,98 @@ def _actual_broker_table(actual_broker: dict[str, Any]) -> str:
         summary_line
         + '<div class="table-wrap"><table id="actualTable"><thead><tr>'
         "<th>Entry Time</th><th>Exit Time</th><th>Candidate</th><th>Status</th><th>Symbol</th><th>Side</th>"
-        "<th class=\"num\">Lot</th><th>State</th><th class=\"num\">Entry</th><th class=\"num\">Exit</th>"
-        "<th class=\"num\">SL</th><th class=\"num\">TP</th><th class=\"num\">PnL AED</th><th>Position</th><th>Duplicate</th><th>Exit Note</th>"
+        "<th class=\"num\">Lot</th><th>State</th><th>Time Bucket</th><th class=\"num\">Entry</th><th class=\"num\">Exit</th>"
+        "<th class=\"num\">SL</th><th class=\"num\">TP</th><th class=\"num\">PnL AED</th><th>Position</th><th>Duplicate</th><th>Shadow</th><th>Shadow Reason</th><th>Exit Note</th>"
+        f"</tr></thead><tbody>{body}</tbody></table></div>"
+    )
+
+
+def _weakness_shadow_panel(weakness: dict[str, Any]) -> str:
+    if weakness.get("status") == "UNAVAILABLE":
+        return f'<p class="muted">Weakness shadow report unavailable: {html.escape(str(weakness.get("reason", "unknown")))}</p>'
+    scenario_rows = "\n".join(
+        "<tr>"
+        f"<td>{html.escape(str(row.get('label', '')))}</td>"
+        f"<td class=\"num\">{html.escape(str(row.get('baseline', {}).get('closed_trades', 0)))}</td>"
+        f"<td class=\"num\">{html.escape(str(row.get('kept', {}).get('closed_trades', 0)))}</td>"
+        f"<td class=\"num\">{html.escape(str(row.get('kept_closed_trade_pct', 'n/a')))}%</td>"
+        f"<td class=\"num {_money_class(row.get('delta_closed_pnl_aed', ''))}\">{_signed(row.get('delta_closed_pnl_aed', ''))}</td>"
+        f"<td class=\"num\">{html.escape(str(row.get('kept', {}).get('profit_factor', 'n/a')))}</td>"
+        f"<td class=\"num\">{html.escape(str(row.get('kept', {}).get('closed_win_rate_pct', 'n/a')))}%</td>"
+        f"<td>{_pill(row.get('promotion_status', ''))}</td>"
+        "</tr>"
+        for row in weakness.get("scenarios", [])
+    )
+    views = _weakness_view_cards(weakness)
+    return (
+        views
+        + '<div class="table-wrap"><table><thead><tr>'
+        "<th>Scenario</th><th class=\"num\">Baseline Closed</th><th class=\"num\">Kept Closed</th><th class=\"num\">Kept %</th>"
+        "<th class=\"num\">Delta PnL</th><th class=\"num\">Kept PF</th><th class=\"num\">Kept Win Rate</th><th>Status</th>"
+        f"</tr></thead><tbody>{scenario_rows}</tbody></table></div>"
+        '<div class="note-grid">'
+        f'<div class="note"><strong>Block reasons</strong><br>{_inline_counts(weakness.get("block_reason_counts", {}))}</div>'
+        f'<div class="note"><strong>Worst clusters</strong><br>{_inline_worst_clusters(weakness.get("worst_clusters", []))}</div>'
+        '<div class="note"><strong>Boundary</strong><br>Shadow only. No MT5 chart, EA input, order, position, preset, or runtime behavior is changed.</div>'
+        "</div>"
+        "<h2 style=\"margin-top:16px\">Duplicate-Hidden EA View</h2>"
+        + _mini_group_table(weakness.get("by_ea", []), ["candidate"])
+        + "<h2 style=\"margin-top:16px\">Duplicate-Hidden Time View</h2>"
+        + _mini_group_table(weakness.get("by_time_bucket", []), ["time_bucket"])
+    )
+
+
+def _weakness_view_cards(weakness: dict[str, Any]) -> str:
+    rows = [
+        ("Raw", weakness.get("raw_summary", {}), "Broker-account view, includes duplicates"),
+        ("Duplicate-hidden", weakness.get("duplicate_hidden_summary", {}), "Primary decision view"),
+        ("Shadow keep", weakness.get("combined_keep_summary", {}), "Would remain tradable"),
+        ("Shadow block", weakness.get("combined_block_summary", {}), "Would be blocked"),
+    ]
+    return '<div class="cards" style="grid-template-columns: repeat(4, minmax(0, 1fr));">' + "".join(
+        _metric_card(
+            label,
+            f"{summary.get('total_pnl_aed', '0.00')} AED",
+            f"{summary.get('closed_trades', 0)} closed, PF {summary.get('profit_factor', 'n/a')}, WR {summary.get('closed_win_rate_pct', 'n/a')}%. {hint}",
+        )
+        for label, summary, hint in rows
+    ) + "</div>"
+
+
+def _inline_counts(counts: dict[str, int]) -> str:
+    if not counts:
+        return "No block reasons yet."
+    return "<br>".join(f"{html.escape(str(key))}: {value}" for key, value in counts.items())
+
+
+def _inline_worst_clusters(rows: list[dict[str, Any]], limit: int = 4) -> str:
+    if not rows:
+        return "No clusters yet."
+    values = []
+    for row in rows[:limit]:
+        label = " / ".join(str(row.get(key, "")) for key in ("candidate", "symbol", "time_bucket") if row.get(key, ""))
+        values.append(f"{html.escape(label)}: {_signed(row.get('closed_pnl_aed', '0.00'))} AED")
+    return "<br>".join(values)
+
+
+def _mini_group_table(rows: list[dict[str, Any]], keys: list[str], limit: int = 10) -> str:
+    body = "\n".join(
+        "<tr>"
+        + "".join(f"<td>{html.escape(str(row.get(key, '')))}</td>" for key in keys)
+        + f"<td class=\"num\">{html.escape(str(row.get('closed_trades', 0)))}</td>"
+        + f"<td class=\"num\">{html.escape(str(row.get('wins', 0)))}</td>"
+        + f"<td class=\"num\">{html.escape(str(row.get('losses', 0)))}</td>"
+        + f"<td class=\"num\">{html.escape(str(row.get('closed_win_rate_pct', 'n/a')))}%</td>"
+        + f"<td class=\"num {_money_class(row.get('closed_pnl_aed', ''))}\">{_signed(row.get('closed_pnl_aed', ''))}</td>"
+        + f"<td class=\"num\">{html.escape(str(row.get('profit_factor', 'n/a')))}</td>"
+        + "</tr>"
+        for row in rows[:limit]
+    )
+    header = "".join(f"<th>{html.escape(key)}</th>" for key in keys)
+    return (
+        '<div class="table-wrap"><table><thead><tr>'
+        f"{header}<th class=\"num\">Closed</th><th class=\"num\">Wins</th><th class=\"num\">Losses</th>"
+        "<th class=\"num\">Win Rate</th><th class=\"num\">PnL AED</th><th class=\"num\">PF</th>"
         f"</tr></thead><tbody>{body}</tbody></table></div>"
     )
 
