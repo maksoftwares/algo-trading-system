@@ -2147,6 +2147,8 @@ def _artifact_links() -> str:
         ("Phase 2 blocker summary", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_BLOCKER_SUMMARY.md"),
         ("Phase 2 actual demo cost reconciliation", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_ACTUAL_DEMO_COST_RECONCILIATION.md"),
         ("Phase 2 EA weakness shadow report", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.md"),
+        ("Phase 2 repair candidate research", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_REPAIR_CANDIDATE_RESEARCH.md"),
+        ("Phase 2 repair candidate rules", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_REPAIR_CANDIDATE_RULES.csv"),
         ("Phase 2 demo guard router spec", "xau-usd/xauusd-phase1/docs/PHASE2_DEMO_GUARD_ROUTER_SPEC.md"),
         ("Phase 2 shadow-fix observer terminal", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_TERMINAL.md"),
         ("Phase 2 shadow-fix observer attachments", "xau-usd/xauusd-phase1/outputs/reports/PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.md"),

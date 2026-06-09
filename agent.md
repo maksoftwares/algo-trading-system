@@ -1,6 +1,6 @@
 # Agent Handoff
 
-Last updated: 2026-06-08
+Last updated: 2026-06-09
 
 ## Workspace
 
@@ -54,6 +54,12 @@ Last updated: 2026-06-08
 
 ## Current State
 
+- 2026-06-09 repair-candidate research lane:
+  - New repo-only generator: `xau-usd\xauusd-phase1\scripts\generate_phase2_repair_candidate_research.py`.
+  - New generated outputs: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_REPAIR_CANDIDATE_RESEARCH.md`, `PHASE2_REPAIR_CANDIDATE_RESEARCH.json`, and `PHASE2_REPAIR_CANDIDATE_RULES.csv`.
+  - Scope: analyze repair potential for `session_extreme_retest_v0`, `symbol_normalized_round_retest_v0`, and `round_number_retest_v0` from actual demo broker rows without touching MT5 runtime.
+  - Boundary: rules are `NONE_SHADOW_ONLY`; no EA inputs, presets, charts, orders, open positions, canonical Phase 2 status, or live-capital permissions are changed.
+  - Current conclusion: `session_extreme_retest_v0` is the clearest observer-forward repair candidate; `symbol_normalized_round_retest_v0` has a profitable keep slice but is too narrow until fresh observer evidence confirms trade count; `round_number_retest_v0` has raw losing/duplicate broker rows but no unique duplicate-hidden decision evidence under current priority, so it requires a rebuild-style observer before any execution promotion.
 - 2026-06-08 reviewer-governance response:
   - Current EA weakness-fix plan implemented as shadow-only reporting. Latest generated report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_EA_WEAKNESS_SHADOW_REPORT.md`; per-trade annotations: `PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv`; future-only spec: `xau-usd\xauusd-phase1\docs\PHASE2_DEMO_GUARD_ROUTER_SPEC.md`. This measures duplicate-family mutex, XAUUSD morning/afternoon filtering, and EA quarantine for `session_extreme_retest_v0` plus `symbol_normalized_round_retest_v0`; it does not touch MT5 runtime.
   - Old active observer/logging charts were not present in the standard demo profile; the profile contains actual demo-trading executor/WR50 charts, so they were intentionally not removed. Replacement logging is now isolated in `C:\MT5PortableShadowFixObservers` with 14 `Phase2ShadowFixObserver` charts and `broker_action_allowed=false`. Reports: `PHASE2_SHADOW_FIX_OBSERVER_TERMINAL.md` and `PHASE2_SHADOW_FIX_OBSERVER_ATTACHMENTS.md`.
@@ -474,6 +480,7 @@ Last updated: 2026-06-08
 - Latest experimental demo attachment report: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_EXPERIMENTAL_DEMO_ATTACHMENTS.md`, status `ATTACHED_TO_DEMO_TERMINAL`.
 - Demo observer dashboard generator: `xau-usd\xauusd-phase1\scripts\generate_demo_observer_dashboard.py`; latest page is `demo-observer-dashboard.html` and mirrors are `xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_OBSERVER_DASHBOARD.json`, `PHASE2_DEMO_OBSERVER_DASHBOARD_SUMMARY.csv`, and `PHASE2_DEMO_OBSERVER_DASHBOARD_LEDGER.csv`.
 - Latest actual broker trade review: `xau-usd\xauusd-phase1\docs\PHASE2_ACTUAL_BROKER_TRADE_REVIEW_2026_06_02.md`. Early deduplicated broker evidence says the accepted set is positive but small-sample, while provisional `session_extreme_retest_v0` is the main drag and should be treated as a pause/review candidate. This is experimental review-only evidence and does not reopen canonical Phase 2.
+- 2026-06-08 standard demo executor update: the owner requested no account-level open-position cap. `Phase2ExperimentalDemoExecutor.mq5` no longer defines `InpMaxAccountOpenPositions` and no longer has an account-level open-exposure guard. Startup telemetry writes `UNLIMITED`; per-instance one-open-exposure, account daily-order, cost, spread, demo/account/token, and kill-switch guards remain active. Evidence: `xau-usd\xauusd-phase1\outputs\reports\PHASE2_ACCOUNT_OPEN_POSITION_CAP_REMOVAL_REPORT.md`.
 - Capital.com demo standard MT5 profile currently has 14 `Phase2ExperimentalDemoObserver` chart attachments: three accepted candidates across qualifying symbols plus two provisional candidates across qualifying symbols. `round_number_retest_v0` is intentionally not attached to EURUSD because its multisymbol summary failed there.
 - The experimental demo attachments are telemetry-only and compile to `Phase2ExperimentalDemoObserver.ex5`; `broker_action_allowed=false`, `dry_run_only=true`, and no canonical Phase 2/live authorization is implied.
 - Planned one-day shutdown checkpoint: `xau-usd\xauusd-phase1\docs\SHUTDOWN_RESUME_CHECKPOINT_2026_05_22.md`.
