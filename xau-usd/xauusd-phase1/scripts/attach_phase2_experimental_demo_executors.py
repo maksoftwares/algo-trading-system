@@ -113,7 +113,6 @@ def attach_phase2_experimental_demo_executors(
     cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
-    max_account_open_positions: int = 3,
     max_estimated_cost_r: float = 0.30,
     max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
@@ -149,7 +148,6 @@ def attach_phase2_experimental_demo_executors(
         cost_suspension_acknowledgement_token=cost_suspension_acknowledgement_token,
         authorized_candidates_csv=authorized_candidates_csv,
         max_account_orders_per_day=max_account_orders_per_day,
-        max_account_open_positions=max_account_open_positions,
         max_estimated_cost_r=max_estimated_cost_r,
         max_measured_spread_points=max_measured_spread_points,
         kill_switch_file_name=kill_switch_file_name,
@@ -186,7 +184,7 @@ def attach_phase2_experimental_demo_executors(
             "max_orders_per_day_per_instance": 12,
             "max_orders_per_day_account": max_account_orders_per_day,
             "max_open_positions_per_instance": 1,
-            "max_open_positions_account": max_account_open_positions,
+            "max_open_positions_account": "UNLIMITED",
             "max_estimated_cost_R": max_estimated_cost_r,
             "max_measured_spread_points": max_measured_spread_points,
             "allowed_account_logins_configured": bool(allowed_account_logins_csv.strip()),
@@ -327,7 +325,6 @@ def _replace_default_profile(
     cost_suspension_acknowledgement_token: str,
     authorized_candidates_csv: str,
     max_account_orders_per_day: int,
-    max_account_open_positions: int,
     max_estimated_cost_r: float,
     max_measured_spread_points: float,
     kill_switch_file_name: str,
@@ -354,7 +351,6 @@ def _replace_default_profile(
                 cost_suspension_acknowledgement_token=cost_suspension_acknowledgement_token,
                 authorized_candidates_csv=authorized_candidates_csv,
                 max_account_orders_per_day=max_account_orders_per_day,
-                max_account_open_positions=max_account_open_positions,
                 max_estimated_cost_r=max_estimated_cost_r,
                 max_measured_spread_points=max_measured_spread_points,
                 kill_switch_file_name=kill_switch_file_name,
@@ -373,7 +369,6 @@ def _render_chart(
     cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
     max_account_orders_per_day: int = 24,
-    max_account_open_positions: int = 3,
     max_estimated_cost_r: float = 0.30,
     max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
@@ -445,7 +440,6 @@ def _render_chart(
             f"InpMaxAccountOrdersPerDay={max_account_orders_per_day}",
             "InpMinSecondsBetweenOrders=300",
             "InpMaxOpenPositionsPerInstance=1",
-            f"InpMaxAccountOpenPositions={max_account_open_positions}",
             "InpDeviationPoints=50",
             f"InpMaxEstimatedCostR={max_estimated_cost_r:.2f}",
             f"InpMaxMeasuredSpreadPoints={max_measured_spread_points:.1f}",
@@ -584,7 +578,6 @@ def main() -> int:
     parser.add_argument("--cost-suspension-acknowledgement-token", default="")
     parser.add_argument("--authorized-candidates-csv", default=DEFAULT_AUTHORIZED_CANDIDATES_CSV)
     parser.add_argument("--max-account-orders-per-day", type=int, default=24)
-    parser.add_argument("--max-account-open-positions", type=int, default=3)
     parser.add_argument("--max-estimated-cost-r", type=float, default=0.30)
     parser.add_argument("--max-measured-spread-points", type=float, default=75.0)
     parser.add_argument("--kill-switch-file-name", default="experimental_demo_kill_switch.txt")
@@ -602,7 +595,6 @@ def main() -> int:
         cost_suspension_acknowledgement_token=args.cost_suspension_acknowledgement_token,
         authorized_candidates_csv=args.authorized_candidates_csv,
         max_account_orders_per_day=args.max_account_orders_per_day,
-        max_account_open_positions=args.max_account_open_positions,
         max_estimated_cost_r=args.max_estimated_cost_r,
         max_measured_spread_points=args.max_measured_spread_points,
         kill_switch_file_name=args.kill_switch_file_name,

@@ -34,7 +34,6 @@ input int InpMaxOrdersPerDay = 12;
 input int InpMaxAccountOrdersPerDay = 24;
 input int InpMinSecondsBetweenOrders = 300;
 input int InpMaxOpenPositionsPerInstance = 1;
-input int InpMaxAccountOpenPositions = 3;
 input int InpDeviationPoints = 50;
 input double InpMaxEstimatedCostR = 0.30;
 input double InpMaxMeasuredSpreadPoints = 75.0;
@@ -740,7 +739,7 @@ bool WriteStartupRow(const string status_text)
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
       BoolText(StringLen(TrimToken(InpCostSuspensionAcknowledgementToken)) > 0),
       IntegerToString(InpMaxAccountOrdersPerDay),
-      IntegerToString(InpMaxAccountOpenPositions),
+      "UNLIMITED",
       DoubleToString(InpMaxEstimatedCostR, 4),
       DoubleToString(InpMaxMeasuredSpreadPoints, 2),
       InpKillSwitchFileName,
@@ -1084,11 +1083,6 @@ bool TradingGuardsPass(
       guard_reason = "open_instance_exposure_exists";
       return false;
    }
-   if(InpMaxAccountOpenPositions > 0 && CountOpenExposureForAccount() >= InpMaxAccountOpenPositions)
-   {
-      guard_reason = "account_open_exposure_cap_reached";
-      return false;
-   }
    guard_reason = "pass";
    return true;
 }
@@ -1302,7 +1296,7 @@ void OnDeinit(const int reason)
       BoolText(StringLen(TrimToken(InpExperimentalAuthorizationToken)) > 0),
       BoolText(StringLen(TrimToken(InpCostSuspensionAcknowledgementToken)) > 0),
       IntegerToString(InpMaxAccountOrdersPerDay),
-      IntegerToString(InpMaxAccountOpenPositions),
+      "UNLIMITED",
       InpKillSwitchFileName,
       "REMOVED_REASON_" + IntegerToString(reason)
    };

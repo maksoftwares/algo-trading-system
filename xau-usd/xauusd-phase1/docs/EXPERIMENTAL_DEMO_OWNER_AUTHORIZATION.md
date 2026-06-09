@@ -13,7 +13,7 @@ This document is a fillable owner authorization record for the quarantined exper
 | What candidate status will be logged? | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
 | What family lifecycle status will be logged? | `COST_SUSPENDED_CANONICAL` |
 | What daily account-level order cap is allowed? | PENDING_OWNER_INPUT |
-| What account-level open exposure cap is allowed? | PENDING_OWNER_INPUT |
+| What account-level open exposure cap is allowed? | No account-level open exposure cap; owner requested unlimited demo-account positions on 2026-06-08. |
 | Where is the kill-switch file? | `experimental_demo_kill_switch.txt` in the MT5 Files directory selected by runtime input |
 | Who reviews order logs daily? | PENDING_OWNER_INPUT |
 | What exact condition stops the experiment? | PENDING_OWNER_INPUT |

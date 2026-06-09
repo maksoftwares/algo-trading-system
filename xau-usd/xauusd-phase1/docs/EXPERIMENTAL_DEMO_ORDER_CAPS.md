@@ -1,6 +1,6 @@
 # Experimental Demo Order Caps
 
-Last updated: 2026-06-02
+Last updated: 2026-06-08
 
 Overall status: ACTIVE_GUARDRAILS
 
@@ -12,7 +12,7 @@ Overall status: ACTIVE_GUARDRAILS
 | Orders per day | 12 | Per chart instance |
 | Orders per day | 24 | Account-level experimental cap |
 | Open exposure | 1 | Per chart instance |
-| Open exposure | 3 | Account-level experimental cap |
+| Open exposure | Unlimited | Account-level experimental demo policy; no account-level open-position cap is enforced |
 | Minimum seconds between orders | 300 | Per chart instance |
 | Deviation | 50 points | Per order |
 
@@ -28,7 +28,7 @@ This counter is used only for experimental demo governance. It is not a broker-s
 
 ## Exposure Counting
 
-Account-level open exposure counts positions and orders with experimental magic numbers in the `920000-920999` namespace.
+Account-level open exposure is still counted and logged for review, but it is no longer used as a blocking cap in the standard demo executor.
 
 ## Change Rule
 

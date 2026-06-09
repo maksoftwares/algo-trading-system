@@ -76,7 +76,7 @@ def _checks(root: Path, source: str, governance: str) -> list[GovernanceCheck]:
         _input_default_check("family_lifecycle_default_cost_suspended", source, "InpFamilyLifecycleStatus", {"COST_SUSPENDED_CANONICAL"}),
         _contains_both("candidate_runtime_allowlist_input", governance, source, "InpAuthorizedCandidatesCsv"),
         _contains_both("account_daily_order_cap_input", governance, source, "InpMaxAccountOrdersPerDay"),
-        _contains_both("account_open_exposure_cap_input", governance, source, "InpMaxAccountOpenPositions"),
+        _source_absent("account_open_exposure_cap_removed", source, "InpMaxAccountOpenPositions", "account_open_exposure_cap_reached"),
         _contains_both("kill_switch_input", governance, source, "InpKillSwitchFileName"),
         _source_contains("globalvariable_account_counter_logic", source, "GlobalVariableSet", "AccountOrdersToday", "IncrementAccountOrdersToday"),
         _source_contains("account_level_exposure_counter_logic", source, "CountOpenExposureForAccount", "IsExperimentalMagic", "PositionsTotal", "OrdersTotal"),
@@ -120,6 +120,13 @@ def _source_contains(name: str, source: str, *tokens: str) -> GovernanceCheck:
     missing = [token for token in tokens if token not in source]
     status = "PASS" if not missing else "FAIL"
     evidence = "all required source tokens present" if not missing else "missing: " + ", ".join(missing)
+    return GovernanceCheck(name, status, evidence)
+
+
+def _source_absent(name: str, source: str, *tokens: str) -> GovernanceCheck:
+    present = [token for token in tokens if token in source]
+    status = "PASS" if not present else "FAIL"
+    evidence = "all forbidden source tokens absent" if not present else "present: " + ", ".join(present)
     return GovernanceCheck(name, status, evidence)
 
 

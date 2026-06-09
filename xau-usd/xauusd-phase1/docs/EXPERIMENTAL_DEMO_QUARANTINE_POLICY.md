@@ -23,7 +23,7 @@ candidate_family_status=COST_SUSPENDED_CANONICAL
 - Explicit cost-suspension acknowledgement token.
 - Candidate allowlist.
 - Account daily order cap.
-- Account open exposure cap.
+- No account-level open exposure cap; exposure count remains logged for review.
 - Kill switch file.
 - Cost_R pre-order guard.
 - Spread pre-order guard.

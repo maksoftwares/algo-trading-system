@@ -34,7 +34,6 @@ REQUIRED_EXPERIMENTAL_TOKENS = (
     "InpFamilyLifecycleStatus",
     "InpAuthorizedCandidatesCsv",
     "InpMaxAccountOrdersPerDay",
-    "InpMaxAccountOpenPositions",
     "InpKillSwitchFileName",
     "InpMaxEstimatedCostR",
     "InpMaxMeasuredSpreadPoints",

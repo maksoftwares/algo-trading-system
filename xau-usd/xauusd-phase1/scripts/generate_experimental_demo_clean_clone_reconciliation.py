@@ -25,7 +25,6 @@ REQUIRED_SOURCE_TOKENS = (
     "InpFamilyLifecycleStatus",
     "InpAuthorizedCandidatesCsv",
     "InpMaxAccountOrdersPerDay",
-    "InpMaxAccountOpenPositions",
     "InpKillSwitchFileName",
     "InpMaxEstimatedCostR",
     "InpMaxMeasuredSpreadPoints",

@@ -6,9 +6,9 @@ This audit checks experimental demo executor source/governance parity only. It d
 
 Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5`
 Governance doc: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\EXPERIMENTAL_DEMO_EXECUTOR_GOVERNANCE.md`
-Repo commit hash: `6d2cb4ecc34a11ba1271e516fcce1cf6bdefd79f`
-Source SHA256: `765c66be2ad026e02625edf6a779884ab80a2cfd71cbe9d97256d5219972a451`
-Governance doc SHA256: `fbf8ab5c25721ba62844dbfcf5142c1a50ad1109169a376b4448c5b7b7de06d3`
+Repo commit hash: `aa74c28788ed281297191f0fcef9acdf820022c0`
+Source SHA256: `40ee8fbd1e80b435b581fd23b2f62445e0963ff1e6f0640111c8ab6dfd3e3257`
+Governance doc SHA256: `eb4b933db56d0de8d45706bb30aabd1e68177d028721ad57529e96ed0bcf2d05`
 Failed checks: 0
 
 | Check | Status | Evidence |
@@ -22,7 +22,7 @@ Failed checks: 0
 | family_lifecycle_default_cost_suspended | PASS | InpFamilyLifecycleStatus=COST_SUSPENDED_CANONICAL; allowed=COST_SUSPENDED_CANONICAL |
 | candidate_runtime_allowlist_input | PASS | doc_has=True; source_has=True; token=InpAuthorizedCandidatesCsv |
 | account_daily_order_cap_input | PASS | doc_has=True; source_has=True; token=InpMaxAccountOrdersPerDay |
-| account_open_exposure_cap_input | PASS | doc_has=True; source_has=True; token=InpMaxAccountOpenPositions |
+| account_open_exposure_cap_removed | PASS | all forbidden source tokens absent |
 | kill_switch_input | PASS | doc_has=True; source_has=True; token=InpKillSwitchFileName |
 | globalvariable_account_counter_logic | PASS | all required source tokens present |
 | account_level_exposure_counter_logic | PASS | all required source tokens present |
@@ -56,7 +56,7 @@ Failed checks: 0
 16: input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
 17: input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
 18: input string InpTargetSymbol = "XAUUSD";
-19: input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,USDJPY";
+19: input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";
 20: input string InpExpectedServerMarker = "Demo";
 21: input string InpAllowedAccountLoginsCsv = "";
 22: input string InpExperimentalAuthorizationToken = "";
@@ -69,11 +69,11 @@ Failed checks: 0
 29: input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
 30: input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 31: input double InpFixedLot = 0.01;
-32: input int InpMaxOrdersPerDay = 12;
-33: input int InpMaxAccountOrdersPerDay = 24;
-34: input int InpMinSecondsBetweenOrders = 300;
-35: input int InpMaxOpenPositionsPerInstance = 1;
-36: input int InpMaxAccountOpenPositions = 3;
+32: input double InpEURUSDFixedLot = 0.05;
+33: input int InpMaxOrdersPerDay = 12;
+34: input int InpMaxAccountOrdersPerDay = 24;
+35: input int InpMinSecondsBetweenOrders = 300;
+36: input int InpMaxOpenPositionsPerInstance = 1;
 37: input int InpDeviationPoints = 50;
 38: input double InpMaxEstimatedCostR = 0.30;
 39: input double InpMaxMeasuredSpreadPoints = 75.0;

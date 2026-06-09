@@ -1,6 +1,6 @@
 # Experimental Demo Executor Governance
 
-Last updated: 2026-06-02
+Last updated: 2026-06-08
 
 Overall status: QUARANTINE_REVIEW_ONLY
 
@@ -28,7 +28,7 @@ Overall status: QUARANTINE_REVIEW_ONLY
 | Family lifecycle status | `InpFamilyLifecycleStatus` defaults to `COST_SUSPENDED_CANONICAL` and is logged with startup, signal, and order rows. |
 | Candidate execution allowlist | `InpAuthorizedCandidatesCsv`; default generated charts authorize only `breakout_retest`. |
 | Account daily order cap | `InpMaxAccountOrdersPerDay`; tracked across chart instances with MT5 GlobalVariables. |
-| Account open exposure cap | `InpMaxAccountOpenPositions`; counts experimental magic-number positions/orders across symbols. |
+| Account open exposure policy | No account-level open-position cap is enforced in the standard demo executor. Startup/order telemetry still logs account open exposure for review. |
 | Per-instance caps | Fixed lot, one open exposure per instance, min seconds between orders, and per-instance order cap. |
 | Kill switch | `InpKillSwitchFileName`; if the file contains `KILL`, new orders are blocked immediately. |
 | Cost-R pre-order guard | `InpMaxEstimatedCostR`; estimated spread cost in R must remain below the configured threshold before `OrderSend`. |

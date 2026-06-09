@@ -46,6 +46,9 @@ def test_demo_executor_is_demo_scoped_and_explicitly_armed():
     assert 'input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";' in text
     assert 'if(symbol_name == "GBPUSD")' in text
     assert "InpMaxOpenPositionsPerInstance = 1" in text
+    assert "InpMaxAccountOpenPositions" not in text
+    assert "account_open_exposure_cap_reached" not in text
+    assert '"UNLIMITED"' in text
     assert "InpMaxOrdersPerDay = 12" in text
     assert "MARKET_PROXY" in text
     assert "estimated_cost_R" in text
@@ -83,7 +86,7 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpEURUSDFixedLot=0.05" in chart
     assert "InpMaxAccountOrdersPerDay=24" in chart
     assert "InpMaxOpenPositionsPerInstance=1" in chart
-    assert "InpMaxAccountOpenPositions=3" in chart
+    assert "InpMaxAccountOpenPositions" not in chart
     assert "InpMaxEstimatedCostR=0.30" in chart
     assert "InpMaxMeasuredSpreadPoints=75.0" in chart
     assert "InpKillSwitchFileName=experimental_demo_kill_switch.txt" in chart
