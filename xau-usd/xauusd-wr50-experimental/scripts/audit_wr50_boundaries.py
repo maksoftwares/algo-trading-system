@@ -22,11 +22,12 @@ BROKER_ACTION_TERMS = (
 
 OBSERVED_EA_PATHS = (
     "xau-usd/xauusd-phase1/mt5/Experts/Phase1DryRunShell.mq5",
-    "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5",
 )
 
 KNOWN_PREEXISTING_QUARANTINED_PATHS = {
-    "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5"
+    "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5",
+    "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoRepairExecutor.mq5",
+    "xau-usd/xauusd-phase1/mt5/Experts/Phase2WeaknessBreakoutRetestExecutor.mq5",
 }
 
 
@@ -116,9 +117,13 @@ def validate_wr50_magic_files(root: Path) -> list[str]:
     wr50_root = root / "xau-usd" / "xauusd-wr50-experimental"
     for path in [*wr50_root.rglob("*.mq5"), *wr50_root.rglob("*.mqh"), *wr50_root.rglob("*.md"), *wr50_root.rglob("*.csv")]:
         rel_path = _normalize(path, root)
+        if rel_path.startswith("xau-usd/xauusd-wr50-experimental/outputs/"):
+            continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for value in re.findall(r"\b93\d{4}\b", text):
             magic = int(value)
+            if 931000 <= magic <= 931099 and "P2WEAKNESS" in text:
+                continue
             if not (930000 <= magic <= 930999):
                 errors.append(f"{rel_path}: WR50-like magic {magic} outside 930000-930999")
     return errors
@@ -211,4 +216,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -17,10 +17,11 @@ defaults:
   max_open_wr50_positions_total: 3
   max_daily_loss_account_currency: 100.0
   rollover_blackout_server_time: "22:00-23:15"
+  max_cost_r: 0.15
+  wide_stop_min_points: 375
 success_gates:
-  minimum_closed_trades: 100
+  minimum_closed_trades: 150
   preferred_closed_trades: 200
   win_rate_min: 0.50
   profit_factor_min: 1.20
   net_expectancy_r_min: 0.15
-

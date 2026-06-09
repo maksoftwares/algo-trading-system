@@ -30,6 +30,7 @@ FAMILY_LIFECYCLE_STATUS = "COST_SUSPENDED_CANONICAL"
 DEFAULT_AUTHORIZED_CANDIDATES_CSV = "breakout_retest"
 DEFAULT_FIXED_LOT = 0.01
 EURUSD_FIXED_LOT = 0.05
+GBPUSD_FIXED_LOT = 0.05
 EXPERIMENTAL_SYMBOL_REPLACEMENTS = {"USDJPY": "GBPUSD"}
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
@@ -94,7 +95,12 @@ def build_attachment_plan(phase1_root: Path) -> list[AttachmentRow]:
 
 
 def fixed_lot_for_symbol(symbol: str) -> float:
-    return EURUSD_FIXED_LOT if symbol.upper() == "EURUSD" else DEFAULT_FIXED_LOT
+    symbol = symbol.upper()
+    if symbol == "EURUSD":
+        return EURUSD_FIXED_LOT
+    if symbol == "GBPUSD":
+        return GBPUSD_FIXED_LOT
+    return DEFAULT_FIXED_LOT
 
 
 def demo_portfolio_symbol(symbol: str) -> str:
@@ -112,7 +118,7 @@ def attach_phase2_experimental_demo_executors(
     experimental_authorization_token: str = "",
     cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
-    max_account_orders_per_day: int = 24,
+    max_account_orders_per_day: int = 0,
     max_estimated_cost_r: float = 0.30,
     max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
@@ -180,7 +186,7 @@ def attach_phase2_experimental_demo_executors(
             "dry_run_only": False,
             "broker_action_allowed": True,
             "fixed_lot": DEFAULT_FIXED_LOT,
-            "symbol_fixed_lots": {"EURUSD": EURUSD_FIXED_LOT},
+            "symbol_fixed_lots": {"EURUSD": EURUSD_FIXED_LOT, "GBPUSD": GBPUSD_FIXED_LOT},
             "max_orders_per_day_per_instance": 12,
             "max_orders_per_day_account": max_account_orders_per_day,
             "max_open_positions_per_instance": 1,
@@ -368,7 +374,7 @@ def _render_chart(
     experimental_authorization_token: str = "",
     cost_suspension_acknowledgement_token: str = "",
     authorized_candidates_csv: str = DEFAULT_AUTHORIZED_CANDIDATES_CSV,
-    max_account_orders_per_day: int = 24,
+    max_account_orders_per_day: int = 0,
     max_estimated_cost_r: float = 0.30,
     max_measured_spread_points: float = 75.0,
     kill_switch_file_name: str = "experimental_demo_kill_switch.txt",
@@ -436,13 +442,14 @@ def _render_chart(
             f"InpKillSwitchFileName={kill_switch_file_name}",
             f"InpFixedLot={fixed_lot_for_symbol(row.symbol):.2f}",
             f"InpEURUSDFixedLot={EURUSD_FIXED_LOT:.2f}",
-            "InpMaxOrdersPerDay=12",
+            f"InpGBPUSDFixedLot={GBPUSD_FIXED_LOT:.2f}",
+            "InpMaxOrdersPerDay=0",
             f"InpMaxAccountOrdersPerDay={max_account_orders_per_day}",
-            "InpMinSecondsBetweenOrders=300",
-            "InpMaxOpenPositionsPerInstance=1",
+            "InpMinSecondsBetweenOrders=0",
+            "InpMaxOpenPositionsPerInstance=0",
             "InpDeviationPoints=50",
-            f"InpMaxEstimatedCostR={max_estimated_cost_r:.2f}",
-            f"InpMaxMeasuredSpreadPoints={max_measured_spread_points:.1f}",
+            "InpMaxEstimatedCostR=0.00",
+            "InpMaxMeasuredSpreadPoints=0.0",
             "</inputs>",
             "</expert>",
             "",
@@ -577,7 +584,7 @@ def main() -> int:
     parser.add_argument("--experimental-authorization-token", default="")
     parser.add_argument("--cost-suspension-acknowledgement-token", default="")
     parser.add_argument("--authorized-candidates-csv", default=DEFAULT_AUTHORIZED_CANDIDATES_CSV)
-    parser.add_argument("--max-account-orders-per-day", type=int, default=24)
+    parser.add_argument("--max-account-orders-per-day", type=int, default=0)
     parser.add_argument("--max-estimated-cost-r", type=float, default=0.30)
     parser.add_argument("--max-measured-spread-points", type=float, default=75.0)
     parser.add_argument("--kill-switch-file-name", default="experimental_demo_kill_switch.txt")

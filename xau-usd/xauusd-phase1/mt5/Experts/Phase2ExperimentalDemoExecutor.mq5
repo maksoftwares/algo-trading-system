@@ -30,13 +30,14 @@ input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
 input double InpEURUSDFixedLot = 0.05;
-input int InpMaxOrdersPerDay = 12;
-input int InpMaxAccountOrdersPerDay = 24;
-input int InpMinSecondsBetweenOrders = 300;
-input int InpMaxOpenPositionsPerInstance = 1;
+input double InpGBPUSDFixedLot = 0.05;
+input int InpMaxOrdersPerDay = 0;
+input int InpMaxAccountOrdersPerDay = 0;
+input int InpMinSecondsBetweenOrders = 0;
+input int InpMaxOpenPositionsPerInstance = 0;
 input int InpDeviationPoints = 50;
-input double InpMaxEstimatedCostR = 0.30;
-input double InpMaxMeasuredSpreadPoints = 75.0;
+input double InpMaxEstimatedCostR = 0.00;
+input double InpMaxMeasuredSpreadPoints = 0.0;
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
 datetime g_last_m5_bar_time = 0;
@@ -869,6 +870,8 @@ double EffectiveFixedLot()
 {
    if(_Symbol == "EURUSD")
       return InpEURUSDFixedLot;
+   if(_Symbol == "GBPUSD")
+      return InpGBPUSDFixedLot;
    return InpFixedLot;
 }
 

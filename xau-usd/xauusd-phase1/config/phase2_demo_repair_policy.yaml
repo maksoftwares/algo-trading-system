@@ -1,0 +1,37 @@
+policy_id: phase2_demo_repair_policy_2026_06_09_v1
+canonical_phase2_authorized: false
+live_trading_authorized: false
+experimental_demo_only: true
+effective_at_dubai: null
+
+suspend_candidates:
+  - symbol_normalized_round_retest_v0
+  - session_extreme_retest_v0
+
+disable_symbols:
+  - USDJPY
+
+observer_only_candidates:
+  - swing_breakout_retest_v0
+  - round_number_retest_v0
+  - WR50_BreakoutEvening_v0
+
+conditional_session_blocks_shadow:
+  - symbol: XAUUSD
+    start_dubai: "06:00"
+    end_dubai: "15:59"
+    status: shadow_forward_week_required
+
+keep_candidates:
+  - breakout_retest
+
+p2weakness:
+  candidate: breakout_retest
+  symbol: XAUUSD
+  magic: 931000
+  max_orders_per_day: 2
+  max_account_orders_per_day: 3
+  max_family_positions: 1
+  fixed_lot: 0.01
+  max_cost_r: 0.15
+  status: owner_authorized_demo_quarantine_only

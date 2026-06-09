@@ -16,6 +16,18 @@
 #define WR50_E1R0_MAGIC_END 930299
 #define WR50_E1R0_ACTIVE_MAGIC 930200
 
+#define WR50_WST12_MAGIC_START 930300
+#define WR50_WST12_MAGIC_END 930399
+#define WR50_WST12_ACTIVE_MAGIC 930300
+
+#define WR50_WST15_MAGIC_START 930400
+#define WR50_WST15_MAGIC_END 930499
+#define WR50_WST15_ACTIVE_MAGIC 930400
+
+#define WR50_PBE0_MAGIC_START 930500
+#define WR50_PBE0_MAGIC_END 930599
+#define WR50_PBE0_ACTIVE_MAGIC 930500
+
 bool WR50_ValidateAssignedMagic(const int active_magic,
                                 const int magic_start,
                                 const int magic_end,
@@ -54,4 +66,3 @@ string WR50_BuildShortComment(const string short_ea_code, const string run_id)
 }
 
 #endif
-

@@ -20,7 +20,7 @@ This folder is a quarantined WR50 research lane for demo-only win-rate experimen
 | --- | --- |
 | `docs/` | Lane rules, registry, magic numbers, kill rules, reporting policy, deployment checklist, and owner templates. |
 | `config/` | YAML lane config, blackout windows, account allowlist example, and runtime registry CSV for MT5 file-sandbox use. |
-| `mt5/Experts/` | Three first WR50 experimental demo EAs. |
+| `mt5/Experts/` | WR50 experimental demo EAs and safe-by-default review presets. |
 | `mt5/Include/` | Shared MQL5 guards, signal module, logger, and order executor. |
 | `scripts/` | Boundary audit, registry validation, log validation, and reporting scripts. |
 | `tests/` | Focused pytest coverage for the WR50 lane. |
@@ -33,6 +33,19 @@ This folder is a quarantined WR50 research lane for demo-only win-rate experimen
 | `WR50_BreakoutEvening_v0` | `BEV0` | `930000` | Evening/night breakout-retest subset, TP 1.5R. |
 | `WR50_BreakoutQuality_v0` | `BQV0` | `930100` | Stricter breakout/retest quality filter, TP 1.5R. |
 | `WR50_BreakoutExit1R_v0` | `E1R0` | `930200` | Baseline breakout-retest with shorter TP 1.0R. |
+| `WR50_BreakoutWideStop_v0` | `WST12` | `930300` | Same breakout-retest entries, minimum 375-point stop, TP 1.2R. |
+| `WR50_BreakoutWideStop_v0` | `WST15` | `930400` | Same breakout-retest entries, minimum 375-point stop, TP 1.5R. |
+| `WR50_BreakoutPartialBE_v0` | `PBE0` | `930500` | Reserved and disabled pending partial-close safety review. |
+
+## 2026-06-09 Improvement Brief
+
+The active improvement experiment is de-dilution plus wide-stop A/B testing:
+
+- Existing demo EAs remain the control and must not be edited to produce the treatment result.
+- `WST12` and `WST15` reuse the shared `WR50_BreakoutRetestSignal.mqh` entry logic, then widen only the stop and recompute the target.
+- The promotion KPI is net R after measured cost, not win rate alone.
+- No variant can be promoted before at least 150 fresh closed trades.
+- `PartialBE` is reserved but not enabled in this slice because 0.01 fixed-lot partial close may be broker-volume-infeasible and introduces `PositionModify` / partial `PositionClose` behavior.
 
 ## Safe Defaults
 
@@ -77,4 +90,3 @@ cd xau-usd\xauusd-wr50-experimental
 ## Human Review Required
 
 Only after human review should any WR50 EA be copied to MT5 and attached to a demo chart. The reviewer must confirm no existing observed EA changed, the account is demo-only, magic/comment attribution is correct, every order has hard SL/TP, and reports can separate each EA.
-

@@ -173,6 +173,14 @@ def test_actual_broker_magic_parser_includes_p2weakness_and_wr50_experiments():
     assert "p2weakness_br_v1" in filters
 
 
+def test_dashboard_log_filename_parser_includes_gbpusd():
+    module = _load_module()
+
+    name = "experimental_demo_executor_signal_log_v02_breakout_retest_gbpusd.csv"
+    assert module._candidate_from_file(name) == "breakout_retest"
+    assert module._symbol_from_file(name) == "GBPUSD"
+
+
 def test_weakness_shadow_report_measures_duplicates_sessions_and_ea_quarantine(tmp_path):
     module = _load_module()
     rows = [

@@ -1,0 +1,98 @@
+{
+  "status": "REPAIRED_EXECUTORS_APPENDED_TO_DEMO_TERMINAL",
+  "created_at_utc": "2026-06-09T08:53:21.821064Z",
+  "authority": "Owner-requested experimental demo repair lane. Existing demo executor charts are preserved; only prior repair-lane charts are replaced to avoid duplicates.",
+  "boundary": "Demo only; no live trading; does not authorize canonical Phase 2 or real capital.",
+  "run_id": "phase2-demo-repair-executor-v1",
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile": "Default",
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_repair_append_20260609_085316",
+    "terminal_closed_before_profile_append": true,
+    "terminal_relaunched": true
+  },
+  "ea": {
+    "name": "Phase2ExperimentalDemoRepairExecutor",
+    "deployed_sources": [
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1Types.mqh",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1BreakoutRetest.mqh"
+    ],
+    "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoRepairExecutor.log",
+    "dry_run_only": false,
+    "broker_action_allowed": true,
+    "magic_namespace": "921000-921999",
+    "comment_prefix": "P2REPAIR",
+    "authorized_candidates_csv": "symbol_normalized_round_retest_v0_repair_v1,session_extreme_retest_v0_repair_v1",
+    "authorization_token_configured": true,
+    "cost_suspension_acknowledgement_token_configured": true,
+    "max_orders_per_day_per_instance": 12,
+    "max_orders_per_day_account": "UNLIMITED",
+    "max_open_positions_per_instance": 1,
+    "max_open_positions_account": "UNLIMITED",
+    "max_estimated_cost_R": 0.3,
+    "max_measured_spread_points": 75.0,
+    "repair_time_bucket_clock": "UTC+240 minutes (Dubai)",
+    "kill_switch_file_name": "phase2_demo_repair_kill_switch.txt",
+    "kill_switch_state": "ABSENT"
+  },
+  "profile_changes": {
+    "existing_profile_preserved": true,
+    "removed_prior_repair_charts": [
+      "chart18.chr",
+      "chart19.chr",
+      "chart20.chr"
+    ],
+    "added_charts": [
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr"
+    ]
+  },
+  "attachment_count": 3,
+  "attachments": [
+    {
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "status": "REPAIRED_EXPERIMENTAL_DEMO_V1",
+      "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+      "symbol": "XAUUSD",
+      "fixed_lot": 0.01,
+      "magic": 921101,
+      "comment_prefix": "P2REPAIR",
+      "qualification_source": "PHASE2_REPAIR_CANDIDATE_RULES.csv:PREFERRED_CLUSTER",
+      "active_filter": "XAUUSD Evening 16:00-19:59 SHORT only",
+      "signal_log_file": "phase2_demo_repair_executor_signal_log_v1_symbol_normalized_round_retest_v0_repair_v1_xauusd.csv",
+      "startup_log_file": "phase2_demo_repair_executor_startup_v1_symbol_normalized_round_retest_v0_repair_v1_xauusd.csv",
+      "order_log_file": "phase2_demo_repair_executor_order_log_v1_symbol_normalized_round_retest_v0_repair_v1_xauusd.csv"
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "status": "REPAIRED_EXPERIMENTAL_DEMO_V1",
+      "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+      "symbol": "XAUUSD",
+      "fixed_lot": 0.01,
+      "magic": 921201,
+      "comment_prefix": "P2REPAIR",
+      "qualification_source": "PHASE2_REPAIR_CANDIDATE_RULES.csv:PREFERRED_CLUSTER",
+      "active_filter": "XAUUSD Afternoon 12:00-15:59 or Evening 16:00-19:59 SHORT only",
+      "signal_log_file": "phase2_demo_repair_executor_signal_log_v1_session_extreme_retest_v0_repair_v1_xauusd.csv",
+      "startup_log_file": "phase2_demo_repair_executor_startup_v1_session_extreme_retest_v0_repair_v1_xauusd.csv",
+      "order_log_file": "phase2_demo_repair_executor_order_log_v1_session_extreme_retest_v0_repair_v1_xauusd.csv"
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "status": "REPAIRED_EXPERIMENTAL_DEMO_V1",
+      "family_lifecycle_status": "COST_SUSPENDED_CANONICAL",
+      "symbol": "EURUSD",
+      "fixed_lot": 0.05,
+      "magic": 921202,
+      "comment_prefix": "P2REPAIR",
+      "qualification_source": "PHASE2_REPAIR_CANDIDATE_RULES.csv:PREFERRED_CLUSTER",
+      "active_filter": "EURUSD Night 20:00-05:59 SHORT only",
+      "signal_log_file": "phase2_demo_repair_executor_signal_log_v1_session_extreme_retest_v0_repair_v1_eurusd.csv",
+      "startup_log_file": "phase2_demo_repair_executor_startup_v1_session_extreme_retest_v0_repair_v1_eurusd.csv",
+      "order_log_file": "phase2_demo_repair_executor_order_log_v1_session_extreme_retest_v0_repair_v1_eurusd.csv"
+    }
+  ]
+}

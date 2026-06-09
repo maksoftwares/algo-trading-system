@@ -14,7 +14,8 @@ def test_actual_wr50_registry_passes() -> None:
     result = validate_registry_file(ROOT / "docs" / "WR50_EA_REGISTRY.md")
     assert result.ok, result.errors
     rows = parse_registry_markdown(ROOT / "docs" / "WR50_EA_REGISTRY.md")
-    assert {row["active_magic"] for row in rows} == {"930000", "930100", "930200"}
+    assert {row["active_magic"] for row in rows} == {"930000", "930100", "930200", "930300", "930400", "930500"}
+    assert {row["ea_id"] for row in rows if row["experiment_status"] == "DISABLED"} == {"wr50_pbe0"}
 
 
 def test_magic_outside_range_fails() -> None:
@@ -68,4 +69,3 @@ def test_duplicate_magic_fails() -> None:
     result = validate_rows(rows)
     assert not result.ok
     assert any("duplicate active_magic" in error for error in result.errors)
-

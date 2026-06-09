@@ -2,4 +2,6 @@ ea_id,ea_name,version,short_code,magic_start,magic_end,active_magic,experiment_s
 wr50_bev0,WR50_BreakoutEvening_v0,v0,BEV0,930000,930099,930000,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|BEV0,true,false,false
 wr50_bqv0,WR50_BreakoutQuality_v0,v0,BQV0,930100,930199,930100,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|BQV0,true,false,false
 wr50_e1r0,WR50_BreakoutExit1R_v0,v0,E1R0,930200,930299,930200,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|E1R0,true,false,false
-
+wr50_wst12,WR50_BreakoutWideStop12_v0,v0,WST12,930300,930399,930300,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|WST12,true,false,false
+wr50_wst15,WR50_BreakoutWideStop15_v0,v0,WST15,930400,930499,930400,DEMO_EXPERIMENT_ONLY,XAUUSD,WR50|WST15,true,false,false
+wr50_pbe0,WR50_BreakoutPartialBE_v0,v0,PBE0,930500,930599,930500,DISABLED,XAUUSD,WR50|PBE0,false,false,false

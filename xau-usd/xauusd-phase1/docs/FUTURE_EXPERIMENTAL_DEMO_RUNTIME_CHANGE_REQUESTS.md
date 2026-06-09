@@ -8,6 +8,12 @@ not_implemented: true
 
 This note lists possible future runtime changes suggested by the 2026-06-04 demo loss review. It is not an implementation ticket and does not authorize any change to currently running demo EAs.
 
+## Current Owner Override
+
+As of 2026-06-09, the owner instruction is that active experimental demo EAs should not be stopped from placing trades. Future runtime changes that would suppress valid signal-based demo orders are not allowed unless the owner explicitly asks for that exact runtime change.
+
+See `DEMO_EA_EXECUTION_CONTINUITY_NOTE_2026_06_09.md`.
+
 ## Future-Only Requests
 
 | Request | Purpose | Current State |

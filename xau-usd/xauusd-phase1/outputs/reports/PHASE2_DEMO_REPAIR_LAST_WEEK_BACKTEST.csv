@@ -1,0 +1,4 @@
+candidate,baseline_closed,baseline_win_rate_pct,baseline_closed_pnl_aed,baseline_profit_factor,repair_keep_closed,repair_keep_win_rate_pct,repair_keep_closed_pnl_aed,repair_keep_profit_factor,repair_delta_closed_pnl_aed,quarantine_delta_closed_pnl_aed
+session_extreme_retest_v0,42,28.57,-133.23,0.66,23,39.13,5.9,1.04,139.13,133.23
+symbol_normalized_round_retest_v0,82,39.02,-293.57,0.78,28,53.57,162.39,1.46,455.96,293.57
+round_number_retest_v0,0,,0,,0,,0,,0.0,0.0

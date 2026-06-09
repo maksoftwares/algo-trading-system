@@ -1,0 +1,189 @@
+{
+  "status": "BASELINE_READY_NO_RUNTIME_CHANGE",
+  "generated_at_utc": "2026-06-09T07:15:09.031297Z",
+  "policy_id": "phase2_demo_repair_policy_2026_06_09_v1",
+  "account": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo",
+    "currency": "AED",
+    "balance": "3288.73",
+    "equity": "3311.49",
+    "floating_profit": "22.76",
+    "trade_allowed": true
+  },
+  "trade_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+  "profile_backup_path": "NOT_CREATED_DRY_RUN",
+  "profile_backup_exists": false,
+  "raw_summary": {
+    "actual_trades": 384,
+    "closed_trades": 377,
+    "open_trades": 7,
+    "wins": 150,
+    "losses": 227,
+    "closed_win_rate_pct": 39.79,
+    "closed_pnl_aed": 288.73,
+    "floating_pnl_aed": 22.76,
+    "total_pnl_aed": 311.49,
+    "profit_factor": 1.07,
+    "profit_factor_value": 1.0663892114369804,
+    "avg_win_aed": 30.92,
+    "avg_loss_aed": -19.16,
+    "max_volume": 0.05
+  },
+  "duplicate_hidden_summary": {
+    "actual_trades": 225,
+    "closed_trades": 220,
+    "open_trades": 5,
+    "wins": 85,
+    "losses": 135,
+    "closed_win_rate_pct": 38.64,
+    "closed_pnl_aed": 9.04,
+    "floating_pnl_aed": 16.32,
+    "total_pnl_aed": 25.36,
+    "profit_factor": 1.0,
+    "profit_factor_value": 1.003754511435893,
+    "avg_win_aed": 28.43,
+    "avg_loss_aed": -17.84,
+    "max_volume": 0.05
+  },
+  "open_positions": [
+    {
+      "entry_time": "2026-06-08 18:45:00",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "10.61",
+      "position_ticket": "3869613",
+      "magic": "920501"
+    },
+    {
+      "entry_time": "2026-06-08 18:30:00",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "volume": "0.05",
+      "profit_aed": "-1.65",
+      "position_ticket": "3869280",
+      "magic": "920502"
+    },
+    {
+      "entry_time": "2026-06-08 18:20:00",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "0.92",
+      "position_ticket": "3868990",
+      "magic": "920304"
+    },
+    {
+      "entry_time": "2026-06-08 17:52:39",
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "4.08",
+      "position_ticket": "3868295",
+      "magic": "920204"
+    },
+    {
+      "entry_time": "2026-06-08 17:52:39",
+      "candidate": "breakout_retest",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "4.08",
+      "position_ticket": "3868298",
+      "magic": "920104"
+    },
+    {
+      "entry_time": "2026-06-08 13:05:03",
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "2.36",
+      "position_ticket": "3862984",
+      "magic": "920403"
+    },
+    {
+      "entry_time": "2026-06-08 13:05:03",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "2.36",
+      "position_ticket": "3862985",
+      "magic": "920303"
+    }
+  ],
+  "open_position_summary": {
+    "actual_trades": 7,
+    "closed_trades": 0,
+    "open_trades": 7,
+    "wins": 0,
+    "losses": 0,
+    "closed_win_rate_pct": null,
+    "closed_pnl_aed": 0,
+    "floating_pnl_aed": 22.76,
+    "total_pnl_aed": 22.76,
+    "profit_factor": null,
+    "profit_factor_value": 0.0,
+    "avg_win_aed": null,
+    "avg_loss_aed": null,
+    "max_volume": 0.05
+  },
+  "active_candidates": [
+    "WR50_BreakoutEvening_v0",
+    "WR50_BreakoutExit1R_v0",
+    "WR50_BreakoutQuality_v0",
+    "breakout_retest",
+    "p2weakness_br_v1",
+    "round_number_retest_v0",
+    "session_extreme_retest_v0",
+    "swing_breakout_retest_v0",
+    "symbol_normalized_round_retest_v0"
+  ],
+  "active_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "XAUUSD"
+  ],
+  "active_magics": [
+    "920101",
+    "920102",
+    "920103",
+    "920104",
+    "920201",
+    "920202",
+    "920203",
+    "920204",
+    "920301",
+    "920302",
+    "920303",
+    "920304",
+    "920401",
+    "920403",
+    "920501",
+    "920502",
+    "920503",
+    "930000",
+    "930100",
+    "930101",
+    "930200"
+  ],
+  "target_suspend_candidates": [
+    "symbol_normalized_round_retest_v0",
+    "session_extreme_retest_v0"
+  ],
+  "target_disable_symbols": [
+    "USDJPY"
+  ],
+  "target_observer_only_candidates": [
+    "swing_breakout_retest_v0",
+    "round_number_retest_v0",
+    "WR50_BreakoutEvening_v0"
+  ]
+}

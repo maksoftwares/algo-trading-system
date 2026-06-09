@@ -240,4 +240,64 @@ void WR50_LogError(const string ea_id,
                      values);
 }
 
+void WR50_LogImprovementOrder(const string ea_id,
+                              const string short_code,
+                              const string version,
+                              const string strategy_family,
+                              const string experiment_id,
+                              const string run_id,
+                              const int magic,
+                              const WR50Signal &signal,
+                              const double lot,
+                              const double target_r,
+                              const double stop_distance_points,
+                              const double spread_points,
+                              const double estimated_cost_r,
+                              const ulong order_ticket,
+                              const ulong deal_ticket,
+                              const uint retcode,
+                              const string comment,
+                              const string decision,
+                              const string reason)
+{
+   string values[34];
+   values[0] = WR50_TimeBroker();
+   values[1] = WR50_TimeUtc();
+   values[2] = WR50_TimeLocal();
+   values[3] = IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN));
+   values[4] = AccountInfoString(ACCOUNT_SERVER);
+   values[5] = _Symbol;
+   values[6] = ea_id;
+   values[7] = short_code;
+   values[8] = version;
+   values[9] = strategy_family;
+   values[10] = experiment_id;
+   values[11] = run_id;
+   values[12] = IntegerToString(magic);
+   values[13] = WR50_DirectionText(signal.direction);
+   values[14] = signal.entry_type;
+   values[15] = DoubleToString(lot, 2);
+   values[16] = DoubleToString(signal.entry_price, _Digits);
+   values[17] = DoubleToString(signal.sl_price, _Digits);
+   values[18] = DoubleToString(signal.tp_price, _Digits);
+   values[19] = DoubleToString(target_r, 2);
+   values[20] = DoubleToString(stop_distance_points, 1);
+   values[21] = DoubleToString(spread_points, 1);
+   values[22] = DoubleToString(estimated_cost_r, 4);
+   values[23] = signal.session_bucket;
+   values[24] = signal.reason_code;
+   values[25] = IntegerToString((int)order_ticket);
+   values[26] = IntegerToString((int)deal_ticket);
+   values[27] = IntegerToString((int)retcode);
+   values[28] = comment;
+   values[29] = decision;
+   values[30] = reason;
+   values[31] = "false";
+   values[32] = "false";
+   values[33] = "COST_SUSPENDED_CANONICAL";
+   WR50_WriteCsvLine("WR50\\wr50_improvement_order_log.csv",
+                     "timestamp_broker,timestamp_utc,timestamp_local,account,server,symbol,ea_id,ea_short_code,ea_version,strategy_family,experiment_id,run_id,magic,direction,entry_type,lot,entry_price,sl_price,tp_price,target_r,stop_distance_points,spread_at_signal_points,estimated_cost_r,session_bucket,reason_code,order_ticket,deal_ticket,retcode,comment,decision,reason,canonical_phase2_evidence,live_authorized,family_lifecycle_status",
+                     values);
+}
+
 #endif

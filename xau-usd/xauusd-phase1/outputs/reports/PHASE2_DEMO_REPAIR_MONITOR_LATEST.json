@@ -1,0 +1,129 @@
+{
+  "status": "SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED",
+  "generated_at_utc": "2026-06-09T08:07:38.838266Z",
+  "since": "2026-06-09 00:00:00",
+  "policy_id": "phase2_demo_repair_policy_2026_06_09_v1",
+  "policy_enforced": false,
+  "policy_effective_at_dubai": null,
+  "trade_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+  "boundary": "Monitor/report only. No MT5 runtime is modified.",
+  "rows_checked": 32,
+  "findings": [
+    {
+      "severity": "SHADOW",
+      "type": "P2WEAKNESS_WRONG_MAGIC",
+      "magic": 930101,
+      "expected_magic": 931000,
+      "ticket": "3881817"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3880437"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3880080"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3879909"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3879584"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3879390"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3878718"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "P2WEAKNESS_WRONG_MAGIC",
+      "magic": 930101,
+      "expected_magic": 931000,
+      "ticket": "3878351"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3877792"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3877538"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3877349"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "P2WEAKNESS_WRONG_MAGIC",
+      "magic": 930101,
+      "expected_magic": 931000,
+      "ticket": "3877302"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3877018"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3876902"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "3876817"
+    }
+  ],
+  "summary": {
+    "weak_variant_order_attempts": 12,
+    "blocked_by_repair_policy": 15,
+    "orders_after_quarantine_by_candidate": {
+      "symbol_normalized_round_retest_v0": 10,
+      "session_extreme_retest_v0": 2
+    },
+    "symbol_normalized_new_orders_after_suspend": 10,
+    "session_extreme_new_orders_after_suspend": 2,
+    "usdjpy_new_orders_after_disable": 0
+  }
+}

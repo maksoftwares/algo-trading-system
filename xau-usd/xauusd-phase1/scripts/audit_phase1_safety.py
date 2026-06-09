@@ -18,6 +18,7 @@ SOURCE_PARTS = ("mt5", "scripts")
 IGNORED_PARTS = {"__pycache__", ".pytest_cache", ".venv", "outputs", "docs"}
 ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES = {
     "Phase2ExperimentalDemoExecutor.mq5",
+    "Phase2ExperimentalDemoRepairExecutor.mq5",
     "Phase2WeaknessBreakoutRetestExecutor.mq5",
 }
 

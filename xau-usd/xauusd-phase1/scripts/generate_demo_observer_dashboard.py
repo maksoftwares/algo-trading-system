@@ -22,6 +22,8 @@ DEFAULT_LEVERAGE = 50.0
 DEFAULT_ACTUAL_HISTORY_START = "2026-06-01 00:00:00"
 DEMO_MAGIC_MIN = 920000
 DEMO_MAGIC_MAX = 929999
+REPAIR_MAGIC_MIN = 921000
+REPAIR_MAGIC_MAX = 921999
 P2WEAKNESS_LEGACY_MAGIC = 930101
 P2WEAKNESS_MAGIC_MIN = 931000
 P2WEAKNESS_MAGIC_MAX = 931099
@@ -31,6 +33,10 @@ CANDIDATE_MAGIC_CODES = {
     30: ("symbol_normalized_round_retest_v0", "ACCEPTED"),
     40: ("round_number_retest_v0", "PROVISIONAL"),
     50: ("session_extreme_retest_v0", "PROVISIONAL"),
+}
+REPAIR_CANDIDATE_MAGIC_CODES = {
+    10: ("symbol_normalized_round_retest_v0_repair_v1", "REPAIRED_EXPERIMENTAL"),
+    20: ("session_extreme_retest_v0_repair_v1", "REPAIRED_EXPERIMENTAL"),
 }
 EXPERIMENTAL_MAGIC_CODES = {
     930000: ("WR50_BreakoutEvening_v0", "EXPERIMENTAL"),
@@ -76,6 +82,8 @@ DEDUP_KEEP_PRIORITY = {
     "session_extreme_retest_v0": 40,
     "round_number_retest_v0": 50,
     "p2weakness_br_v1": 60,
+    "symbol_normalized_round_retest_v0_repair_v1": 65,
+    "session_extreme_retest_v0_repair_v1": 66,
     "WR50_BreakoutEvening_v0": 70,
     "WR50_BreakoutQuality_v0": 80,
     "WR50_BreakoutExit1R_v0": 90,
@@ -119,9 +127,15 @@ def generate_demo_observer_dashboard(
         [
             *files_dir.glob("experimental_demo_attachment_log_*.csv"),
             *files_dir.glob("experimental_demo_executor_signal_log_*.csv"),
+            *files_dir.glob("phase2_demo_repair_executor_signal_log_*.csv"),
         ]
     )
-    order_log_paths = sorted(files_dir.glob("experimental_demo_executor_order_log_*.csv"))
+    order_log_paths = sorted(
+        [
+            *files_dir.glob("experimental_demo_executor_order_log_*.csv"),
+            *files_dir.glob("phase2_demo_repair_executor_order_log_*.csv"),
+        ]
+    )
 
     logs = [_read_observer_log(path) for path in log_paths]
     order_rows = _read_order_logs(order_log_paths)
@@ -813,6 +827,7 @@ def _is_demo_magic(magic: Any, comment: Any) -> bool:
         or magic_int in EXPERIMENTAL_MAGIC_CODES
         or P2WEAKNESS_MAGIC_MIN <= magic_int <= P2WEAKNESS_MAGIC_MAX
         or comment_text.startswith("P2DEMO_")
+        or comment_text.startswith("P2REPAIR_")
         or comment_text.startswith("P2WEAKNESS_BR_V1")
         or comment_text.startswith("WR50_")
     )
@@ -823,6 +838,14 @@ def _candidate_status_from_magic(magic: int, comment: str) -> tuple[str, str]:
         return EXPERIMENTAL_MAGIC_CODES[magic]
     if P2WEAKNESS_MAGIC_MIN <= magic <= P2WEAKNESS_MAGIC_MAX:
         return "p2weakness_br_v1", "EXPERIMENTAL"
+    if REPAIR_MAGIC_MIN <= magic <= REPAIR_MAGIC_MAX:
+        candidate_code = (magic - REPAIR_MAGIC_MIN) // 10
+        if candidate_code in REPAIR_CANDIDATE_MAGIC_CODES:
+            return REPAIR_CANDIDATE_MAGIC_CODES[candidate_code]
+    if comment.startswith("P2REPAIR_snr_fix"):
+        return "symbol_normalized_round_retest_v0_repair_v1", "REPAIRED_EXPERIMENTAL"
+    if comment.startswith("P2REPAIR_sess_fix"):
+        return "session_extreme_retest_v0_repair_v1", "REPAIRED_EXPERIMENTAL"
     if comment.startswith("P2WEAKNESS_BR_V1"):
         return "p2weakness_br_v1", "EXPERIMENTAL"
     if comment.startswith("WR50_"):
@@ -1881,9 +1904,16 @@ def _format_mtime(path: Path) -> str:
 
 
 def _candidate_from_file(name: str) -> str:
-    text = name.removeprefix("experimental_demo_attachment_log_")
-    text = text.removeprefix("experimental_demo_executor_signal_log_").removesuffix(".csv")
-    for suffix in ("_xauusd", "_eurusd", "_usdjpy"):
+    text = name.removesuffix(".csv")
+    for prefix in (
+        "experimental_demo_attachment_log_",
+        "experimental_demo_executor_signal_log_v02_",
+        "experimental_demo_executor_order_log_v02_",
+        "experimental_demo_executor_signal_log_",
+        "experimental_demo_executor_order_log_",
+    ):
+        text = text.removeprefix(prefix)
+    for suffix in ("_xauusd", "_eurusd", "_gbpusd", "_usdjpy"):
         if text.endswith(suffix):
             return text[: -len(suffix)]
     return text
@@ -1891,7 +1921,7 @@ def _candidate_from_file(name: str) -> str:
 
 def _symbol_from_file(name: str) -> str:
     text = name.removesuffix(".csv").upper()
-    for symbol in ("XAUUSD", "EURUSD", "USDJPY"):
+    for symbol in ("XAUUSD", "EURUSD", "GBPUSD", "USDJPY"):
         if text.endswith(symbol):
             return symbol
     return "UNKNOWN"

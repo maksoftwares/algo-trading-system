@@ -179,6 +179,43 @@ bool WR50_MarginSufficient(const string symbol,
    return true;
 }
 
+double WR50_StopDistancePoints(const string symbol, const WR50Signal &signal)
+{
+   double point = SymbolInfoDouble(symbol, SYMBOL_POINT);
+   if(point <= 0.0 || !signal.has_signal)
+      return 0.0;
+   if(signal.direction == WR50_DIRECTION_LONG)
+      return MathAbs(signal.entry_price - signal.sl_price) / point;
+   if(signal.direction == WR50_DIRECTION_SHORT)
+      return MathAbs(signal.sl_price - signal.entry_price) / point;
+   return 0.0;
+}
+
+double WR50_EstimatedCostR(const string symbol, const WR50Signal &signal, const double spread_points)
+{
+   double stop_distance_points = WR50_StopDistancePoints(symbol, signal);
+   if(stop_distance_points <= 0.0)
+      return 0.0;
+   return spread_points / stop_distance_points;
+}
+
+bool WR50_CostRAllowed(const string symbol,
+                       const WR50Signal &signal,
+                       const double spread_points,
+                       const double max_cost_r,
+                       double &estimated_cost_r,
+                       string &reason)
+{
+   estimated_cost_r = WR50_EstimatedCostR(symbol, signal, spread_points);
+   if(max_cost_r > 0.0 && estimated_cost_r > max_cost_r)
+   {
+      reason = "estimated_cost_r_exceeds_threshold";
+      return false;
+   }
+   reason = "cost_r_ok";
+   return true;
+}
+
 bool WR50_EntryPricePendingSideValid(const string symbol, const int direction, const double entry, string &reason)
 {
    double ask = 0.0;

@@ -1,0 +1,87 @@
+{
+  "status": "RECONCILIATION_REPORT_ONLY_NO_RUNTIME_CHANGE",
+  "generated_at_utc": "2026-06-09T07:15:09.032307Z",
+  "policy_id": "phase2_demo_repair_policy_2026_06_09_v1",
+  "applier_status": "DRY_RUN_ONLY_NO_RUNTIME_CHANGE",
+  "weak_variants_cannot_send_new_orders": "NOT_PROVEN_DRY_RUN_ONLY",
+  "existing_positions_closed": false,
+  "profile_backup_path": "NOT_CREATED_DRY_RUN",
+  "profile_backup_exists": false,
+  "breakout_retest_remains_active_if_intended": "NO_RUNTIME_CHANGE_MADE",
+  "p2weakness_remains_isolated": "NO_RUNTIME_CHANGE_MADE",
+  "magic_collision_check": "REPORT_ONLY",
+  "live_account_touched": false,
+  "logs_continued_after_change": "NO_RUNTIME_CHANGE_MADE",
+  "open_positions_after": [
+    {
+      "entry_time": "2026-06-08 18:45:00",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "10.61",
+      "position_ticket": "3869613",
+      "magic": "920501"
+    },
+    {
+      "entry_time": "2026-06-08 18:30:00",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "direction": "BUY",
+      "volume": "0.05",
+      "profit_aed": "-1.65",
+      "position_ticket": "3869280",
+      "magic": "920502"
+    },
+    {
+      "entry_time": "2026-06-08 18:20:00",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "0.92",
+      "position_ticket": "3868990",
+      "magic": "920304"
+    },
+    {
+      "entry_time": "2026-06-08 17:52:39",
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "4.08",
+      "position_ticket": "3868295",
+      "magic": "920204"
+    },
+    {
+      "entry_time": "2026-06-08 17:52:39",
+      "candidate": "breakout_retest",
+      "symbol": "GBPUSD",
+      "direction": "SELL",
+      "volume": "0.01",
+      "profit_aed": "4.08",
+      "position_ticket": "3868298",
+      "magic": "920104"
+    },
+    {
+      "entry_time": "2026-06-08 13:05:03",
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "2.36",
+      "position_ticket": "3862984",
+      "magic": "920403"
+    },
+    {
+      "entry_time": "2026-06-08 13:05:03",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "direction": "BUY",
+      "volume": "0.01",
+      "profit_aed": "2.36",
+      "position_ticket": "3862985",
+      "magic": "920303"
+    }
+  ]
+}

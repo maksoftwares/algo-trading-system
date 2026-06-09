@@ -120,6 +120,11 @@ def test_project_status_page_renders_milestones_and_candidates(tmp_path: Path):
     assert "Phase 2 experimental demo attachments" in html
     assert "Phase 2 repair candidate research" in html
     assert "PHASE2_REPAIR_CANDIDATE_RULES.csv" in html
+    assert "Experimental demo EA lifecycle" in html
+    assert "Phase 2 demo repair policy" in html
+    assert "Phase 2 demo repair monitor" in html
+    assert "Phase 2 demo repair last-week backtest" in html
+    assert "Phase 2 repaired demo executor attachments" in html
     assert "Paper mode authorized" in html
     assert "Active-market 72-hour soak" in html
     assert "After VPS is provisioned, run scripts/capture_phase2_vps_latency_evidence.ps1" in html

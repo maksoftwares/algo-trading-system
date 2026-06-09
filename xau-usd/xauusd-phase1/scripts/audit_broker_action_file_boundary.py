@@ -21,6 +21,7 @@ BROKER_ACTION_TERMS = (
 )
 EXPERIMENTAL_RELATIVE_PATHS = {
     Path("xau-usd") / "xauusd-phase1" / "mt5" / "Experts" / "Phase2ExperimentalDemoExecutor.mq5",
+    Path("xau-usd") / "xauusd-phase1" / "mt5" / "Experts" / "Phase2ExperimentalDemoRepairExecutor.mq5",
     Path("xau-usd") / "xauusd-phase1" / "mt5" / "Experts" / "Phase2WeaknessBreakoutRetestExecutor.mq5",
     Path("xau-usd") / "xauusd-wr50-experimental" / "mt5" / "Include" / "WR50_OrderExecutor.mqh",
 }
@@ -38,6 +39,26 @@ REQUIRED_EXPERIMENTAL_TOKENS = (
     "InpMaxEstimatedCostR",
     "InpMaxMeasuredSpreadPoints",
     "experimental_demo_executor_order_log",
+)
+REPAIR_EXECUTOR_REQUIRED_TOKENS = (
+    "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2",
+    "InpExpectedServerMarker",
+    "InpAllowedAccountLoginsCsv",
+    "InpExperimentalAuthorizationToken",
+    "InpCostSuspensionAcknowledgementToken",
+    "InpCandidateStatus",
+    "InpFamilyLifecycleStatus",
+    "InpAuthorizedCandidatesCsv",
+    "InpMaxAccountOrdersPerDay",
+    "InpKillSwitchFileName",
+    "InpMaxEstimatedCostR",
+    "InpMaxMeasuredSpreadPoints",
+    "RepairFilterPass",
+    "symbol_normalized_round_retest_v0_repair_v1",
+    "session_extreme_retest_v0_repair_v1",
+    "P2REPAIR_",
+    "return 921000 + CandidateMagicOffset",
+    "phase2_demo_repair_executor_order_log",
 )
 WEAKNESS_EXECUTOR_REQUIRED_TOKENS = (
     "NON_CANONICAL / EXPERIMENTAL DEMO ONLY / DO NOT DEPLOY AS PHASE2",
@@ -141,6 +162,8 @@ def _classify_file(repo_root: Path, path: Path) -> BrokerActionFile:
     if rel in EXPERIMENTAL_RELATIVE_PATHS:
         if rel.name == "Phase2WeaknessBreakoutRetestExecutor.mq5":
             required = WEAKNESS_EXECUTOR_REQUIRED_TOKENS
+        elif rel.name == "Phase2ExperimentalDemoRepairExecutor.mq5":
+            required = REPAIR_EXECUTOR_REQUIRED_TOKENS
         elif rel.name == "WR50_OrderExecutor.mqh":
             required = WR50_ORDER_EXECUTOR_REQUIRED_TOKENS
         else:
@@ -161,7 +184,13 @@ def _packaging_checks(repo_root: Path) -> list[dict[str, str]]:
     checks.append(
         {
             "check": "canonical_deploy_excludes_experimental_executor",
-            "status": "PASS" if "EXPERT_NAME = \"Phase1DryRunShell.mq5\"" in deploy_text and "Phase2ExperimentalDemoExecutor" not in deploy_text else "FAIL",
+            "status": (
+                "PASS"
+                if "EXPERT_NAME = \"Phase1DryRunShell.mq5\"" in deploy_text
+                and "Phase2ExperimentalDemoExecutor" not in deploy_text
+                and "Phase2ExperimentalDemoRepairExecutor" not in deploy_text
+                else "FAIL"
+            ),
             "evidence": str(deploy_script),
         }
     )

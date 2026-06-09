@@ -9,6 +9,9 @@ Default status for all new EAs is `DEMO_EXPERIMENT_ONLY`. No WR50 EA is live-aut
 | wr50_bev0 | WR50_BreakoutEvening_v0 | v0 | 930000 | 930099 | 930000 | breakout_retest_wr50_experimental | DEMO_EXPERIMENT_ONLY | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | fixed_or_min_lot_no_compounding | WR50\|BEV0 | false | false | false | 0.01 |
 | wr50_bqv0 | WR50_BreakoutQuality_v0 | v0 | 930100 | 930199 | 930100 | breakout_retest_wr50_experimental | DEMO_EXPERIMENT_ONLY | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | fixed_or_min_lot_no_compounding | WR50\|BQV0 | false | false | false | 0.01 |
 | wr50_e1r0 | WR50_BreakoutExit1R_v0 | v0 | 930200 | 930299 | 930200 | breakout_retest_wr50_experimental | DEMO_EXPERIMENT_ONLY | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | fixed_or_min_lot_no_compounding | WR50\|E1R0 | false | false | false | 0.01 |
+| wr50_wst12 | WR50_BreakoutWideStop12_v0 | v0 | 930300 | 930399 | 930300 | breakout_retest_wr50_experimental | DEMO_EXPERIMENT_ONLY | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | fixed_lot_wide_stop_1_2r | WR50\|WST12 | false | false | false | 0.01 |
+| wr50_wst15 | WR50_BreakoutWideStop15_v0 | v0 | 930400 | 930499 | 930400 | breakout_retest_wr50_experimental | DEMO_EXPERIMENT_ONLY | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | fixed_lot_wide_stop_1_5r | WR50\|WST15 | false | false | false | 0.01 |
+| wr50_pbe0 | WR50_BreakoutPartialBE_v0 | v0 | 930500 | 930599 | 930500 | breakout_retest_wr50_experimental | DISABLED | OWNER_AUTHORIZATION_REQUIRED | XAUUSD | M5 | partial_be_exit_management_pending | WR50\|PBE0 | false | false | false | 0.01 |
 
 ## Interpretation
 
@@ -16,4 +19,3 @@ Default status for all new EAs is `DEMO_EXPERIMENT_ONLY`. No WR50 EA is live-aut
 - `live_authorized=false` is mandatory.
 - `canonical_phase2_authorized=false` is mandatory.
 - `allowed_account=OWNER_AUTHORIZATION_REQUIRED` means the runtime account must match the filled owner authorization and optional allowlist before demo trading is enabled.
-

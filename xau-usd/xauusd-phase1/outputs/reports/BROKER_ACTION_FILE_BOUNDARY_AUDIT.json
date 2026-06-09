@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-08T14:06:01.175433Z",
+  "created_at_utc": "2026-06-09T12:52:16.503322Z",
   "authority": "This audit classifies broker-action MQL files. A PASS does not authorize Phase 2, demo execution, broker execution, or live capital.",
   "files": [
     {
@@ -39,6 +39,15 @@
       "broker_action_terms": [],
       "status": "PASS",
       "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+      "classification": "approved_experimental_quarantined",
+      "broker_action_terms": [
+        "OrderSend"
+      ],
+      "status": "PASS",
+      "evidence": "guarded experimental broker-action file"
     },
     {
       "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ShadowFixObserver.mq5",
@@ -226,6 +235,13 @@
     },
     {
       "path": "xau-usd\\xauusd-wr50-experimental\\mt5\\Experts\\WR50_BreakoutQuality_v0.mq5",
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
+    },
+    {
+      "path": "xau-usd\\xauusd-wr50-experimental\\mt5\\Experts\\WR50_BreakoutWideStop_v0.mq5",
       "classification": "canonical_or_passive_no_broker_action",
       "broker_action_terms": [],
       "status": "PASS",

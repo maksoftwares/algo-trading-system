@@ -1,0 +1,22 @@
+{
+  "status": "DRY_RUN_ONLY_NO_RUNTIME_CHANGE",
+  "generated_at_utc": "2026-06-09T07:15:09.032307Z",
+  "policy_id": "phase2_demo_repair_policy_2026_06_09_v1",
+  "boundary": "This script does not edit MT5 charts, profiles, EA inputs, orders, or positions. It produces operator evidence and target lists only.",
+  "owner_approved_runtime_change_flag": false,
+  "runtime_mutation_performed": false,
+  "target_suspend_candidates": [
+    "symbol_normalized_round_retest_v0",
+    "session_extreme_retest_v0"
+  ],
+  "target_disable_symbols": [
+    "USDJPY"
+  ],
+  "target_observer_only_candidates": [
+    "swing_breakout_retest_v0",
+    "round_number_retest_v0",
+    "WR50_BreakoutEvening_v0"
+  ],
+  "baseline_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_REPAIR_BASELINE_2026_06_09.md",
+  "reconciliation_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_REPAIR_RECONCILIATION_2026_06_09.md"
+}
