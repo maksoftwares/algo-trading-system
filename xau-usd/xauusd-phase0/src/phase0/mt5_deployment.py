@@ -34,7 +34,7 @@ def check_passive_spread_logger_deployment(
     files_dir = mt5_root / "MQL5" / "Files"
 
     local_logs = sorted(files_dir.glob("spread_log_*.csv")) if files_dir.exists() else []
-    common_logs = sorted(_common_files_dir().glob("spread_log_*.csv")) if _common_files_dir().exists() else []
+    common_logs: list[Path] = []
     checks = [
         _file_check("MT5 root", mt5_root),
         _file_check("Logger source", mq5_path),
@@ -180,11 +180,6 @@ def _markdown_table(rows: list[dict[str, str]], columns: list[str]) -> str:
     for row in rows:
         lines.append("| " + " | ".join(row.get(column, "") for column in columns) + " |")
     return "\n".join(lines)
-
-
-def _common_files_dir() -> Path:
-    return Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Terminal" / "Common" / "Files"
-
 
 def _read_text(path: Path) -> str:
     raw = path.read_bytes()

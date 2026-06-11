@@ -54,6 +54,11 @@ Last updated: 2026-06-09
 
 ## Current State
 
+- 2026-06-09 dynamic-exit / guard re-arm note:
+  - Reviewer note `CODEX_NOTE_REARM_EXPERIMENT_GUARDS_AND_DEDILUTE_2026_06_09.md` was reviewed. Repo-side documents were added without touching MT5 runtime: `xau-usd\xauusd-phase1\docs\DYNAMIC_EXIT_DEPLOYMENT_VERDICT_2026_06_09.md`, `xau-usd\xauusd-phase1\docs\EXPERIMENT_GUARD_REARM_AND_DEDILUTION_PLAN_2026_06_09.md`, `xau-usd\xauusd-phase1\outputs\reports\DYNAMIC_EXIT_ATR_TRAIL_BACKTEST_STATUS_2026_06_09.md`, and `xau-usd\xauusd-phase1\outputs\reports\EXPERIMENT_GUARD_REARM_RECONCILIATION_PENDING_2026_06_09.md`.
+  - Dynamic-exit verdict: Partial+BE is `REJECTED_FOR_DEPLOYMENT` because the exact logged-path replay reduced duplicate-hidden XAUUSD PnL by `134.14` AED, dragged `21` winners, and saved `0` logged losers. BE-only is also `REJECTED_FOR_DEPLOYMENT` because it saved `0` logged losers and produced `0.00` AED improvement. Do not attach either variant as broker-action.
+  - ATR-trail remains `BLOCKED_PENDING_BAR_ATR_DATA`; the available signal logs have bid/ask snapshots but no M5 high/low candles or ATR values. Do not deploy ATR-trail unless a bar+ATR backtest beats the plain 1.5R hold on net-R-after-measured-cost.
+  - Runtime guard re-arm is prepared but not applied. The requested values are documented, but changing live chart inputs requires a profile backup and reconciliation. De-dilution path A would set `symbol_normalized_round_retest_v0`, `round_number_retest_v0`, and `session_extreme_retest_v0` observer-only, which conflicts with the earlier owner instruction to keep EAs placing demo orders; path B keeps them trading and requires breakout_retest-only virtual reporting. Ask/confirm before any runtime change.
 - 2026-06-09 WR50 EA improvement lane:
   - Reviewer brief `FINAL_EA_IMPROVEMENT_PLAN_AND_CODEX_BRIEF_2026_06_09.md` was implemented repo-side without attaching new charts or changing the existing running demo EA/profile controls.
   - New source: `xau-usd\xauusd-wr50-experimental\mt5\Experts\WR50_BreakoutWideStop_v0.mq5`; it reuses the WR50 breakout-retest entry module and changes only stop/target geometry. Two safe review presets are committed for the intended treatment instances: `WR50_WST12_SAFE_REVIEW_ONLY.set` (magic `930300`, target `1.2R`) and `WR50_WST15_SAFE_REVIEW_ONLY.set` (magic `930400`, target `1.5R`).

@@ -9,7 +9,7 @@ from phase0.aggregation import aggregate_matrix_results
 from phase0.bar_builder import build_bars_for_latest_ticks, parse_timeframes
 from phase0.config import ConfigError, build_cell_configs, load_project_config
 from phase0.concentration_audit import generate_concentration_frequency_audit
-from phase0.constants import EXPERTS, RESEARCH_EXPERTS
+from phase0.constants import EXPERTS, RESEARCH_EXPERTS, SECOND_EA_CAMPAIGN_CANDIDATES
 from phase0.cpcv import run_cpcv_validation
 from phase0.data_availability import (
     assert_processed_data_available,
@@ -63,6 +63,7 @@ from phase0.research_hypotheses import register_research_hypothesis
 from phase0.research_smoke import run_research_candidate_smoke
 from phase0.review_bundle import generate_review_bundle
 from phase0.safety import audit_no_live_trading_calls
+from phase0.second_ea_preflight import evaluate_second_ea_preflight, render_preflight_report
 from phase0.snapshot import generate_snapshot
 from phase0.spread_analysis import analyze_spread_logs
 from phase0.utils import configure_run_logging, log_command_failure, log_command_success
@@ -559,6 +560,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("C:/MT5PortableGoldMission"),
     )
     spread_logger_deployment.set_defaults(func=_cmd_check_passive_spread_logger)
+
+    second_ea_preflight = subparsers.add_parser(
+        "second-ea-run-preflight",
+        help="Fail closed unless second-EA result-producing runs are allowed.",
+    )
+    second_ea_preflight.set_defaults(func=_cmd_second_ea_run_preflight)
 
     run_all = subparsers.add_parser("run-all", help="Run the full Phase 0 workflow.")
     run_all.add_argument("--synthetic-sample", action="store_true")
@@ -1111,6 +1118,8 @@ def _cmd_run_research_candidate_smoke(args: argparse.Namespace) -> int:
 
 
 def _cmd_run_research_matrix(args: argparse.Namespace) -> int:
+    if _block_second_ea_campaign_result_run(args.root, args.expert) != 0:
+        return 1
     config = load_project_config(args.root)
     smoke = run_research_candidate_smoke(
         config,
@@ -1230,6 +1239,8 @@ def _cmd_generate_research_intrabar_ambiguity_report(args: argparse.Namespace) -
 
 
 def _validate_research_candidate(config, expert: str, hypothesis_file: str) -> int:
+    if _block_second_ea_campaign_result_run(config.root, expert) != 0:
+        return 1
     smoke = run_research_candidate_smoke(
         config,
         expert=expert,
@@ -1415,6 +1426,35 @@ def _cmd_check_passive_spread_logger(args: argparse.Namespace) -> int:
     print(f"MT5 root: {output.mt5_root}")
     print(f"Spread logs: {output.spread_log_count}")
     return 0
+
+
+def _cmd_second_ea_run_preflight(args: argparse.Namespace) -> int:
+    root = Path(args.root)
+    result, report_path = _write_second_ea_preflight_report(root)
+    print(f"Second EA run preflight: {result.status}")
+    print(report_path)
+    print(f"Matrix runs allowed: {str(result.matrix_runs_allowed).lower()}")
+    return 0 if result.matrix_runs_allowed else 1
+
+
+def _block_second_ea_campaign_result_run(root: Path, expert: str) -> int:
+    if expert not in SECOND_EA_CAMPAIGN_CANDIDATES:
+        return 0
+    result, report_path = _write_second_ea_preflight_report(Path(root))
+    if result.matrix_runs_allowed:
+        return 0
+    print(f"Second EA campaign result run blocked: {result.status}")
+    print(report_path)
+    print(result.message)
+    return 1
+
+
+def _write_second_ea_preflight_report(root: Path):
+    result = evaluate_second_ea_preflight(root)
+    report_path = root / "outputs" / "reports" / "SECOND_EA_RUN_PREFLIGHT.md"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(render_preflight_report(result), encoding="utf-8")
+    return result, report_path
 
 
 def _cmd_run_all(args: argparse.Namespace) -> int:

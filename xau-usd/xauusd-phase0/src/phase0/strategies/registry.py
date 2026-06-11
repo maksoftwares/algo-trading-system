@@ -153,6 +153,7 @@ from phase0.strategies.d1_compression_h4_expansion_v0 import D1CompressionH4Expa
 from phase0.strategies.d1_inside_day_breakout_v0 import D1InsideDayBreakoutV0Strategy
 from phase0.strategies.d1_macro_liquidity_regime_v0 import D1MacroLiquidityRegimeV0Strategy
 from phase0.strategies.d1_momentum_h4_pullback_v0 import D1MomentumH4PullbackV0Strategy
+from phase0.strategies.d1_momentum_h4_pullback_v1_fullhist import D1MomentumH4PullbackV1FullhistStrategy
 from phase0.strategies.d1_multi_day_exhaustion_reversion_v0 import D1MultiDayExhaustionReversionV0Strategy
 from phase0.strategies.d1_outside_day_followthrough_v0 import D1OutsideDayFollowthroughV0Strategy
 from phase0.strategies.d1_volatility_expansion_reversal_v0 import D1VolatilityExpansionReversalV0Strategy
@@ -326,6 +327,9 @@ from phase0.strategies.h4_financial_conditions_stress_reversal_v0 import (
     H4FinancialConditionsStressReversalV0Strategy,
 )
 from phase0.strategies.h4_gdx_gld_miner_divergence_v0 import H4GdxGldMinerDivergenceV0Strategy
+from phase0.strategies.h4_gld_etf_flow_reversal_v1_fullhist import (
+    H4GldEtfFlowReversalV1FullhistStrategy,
+)
 from phase0.strategies.h4_gld_etf_flow_reversal_v0 import H4GldEtfFlowReversalV0Strategy
 from phase0.strategies.h4_gld_etf_flow_reversal_v1 import H4GldEtfFlowReversalV1Strategy
 from phase0.strategies.h4_gld_etf_flow_reversal_v2 import H4GldEtfFlowReversalV2Strategy
@@ -344,6 +348,9 @@ from phase0.strategies.h4_gvz_volatility_panic_reversal_v0 import (
     H4GvzVolatilityPanicReversalV0Strategy,
 )
 from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v0 import H4InsideBarD1MomentumBreakoutV0Strategy
+from phase0.strategies.h4_inside_bar_d1_momentum_breakout_v1_fullhist import (
+    H4InsideBarD1MomentumBreakoutV1FullhistStrategy,
+)
 from phase0.strategies.h4_macro_composite_risk_state_v0 import H4MacroCompositeRiskStateV0Strategy
 from phase0.strategies.h4_macro_composite_risk_state_v1 import H4MacroCompositeRiskStateV1Strategy
 from phase0.strategies.h4_macro_pullback_reclaim_v0 import H4MacroPullbackReclaimV0Strategy
@@ -399,10 +406,28 @@ from phase0.strategies.symbol_normalized_round_retest_v0 import SymbolNormalized
 from phase0.strategies.symbol_round_sweep_reversal_v0 import SymbolRoundSweepReversalV0Strategy
 from phase0.strategies.trend_pullback import TrendPullbackStrategy
 from phase0.strategies.w1_d1_momentum_continuation_v0 import W1D1MomentumContinuationV0Strategy
+from phase0.strategies.w1_d1_momentum_m5_continuation_experimental import (
+    W1D1MomentumM5ContinuationExperimentalStrategy,
+)
+from phase0.strategies.w1_d1_momentum_continuation_v1_fullhist import W1D1MomentumContinuationV1FullhistStrategy
 from phase0.strategies.weekend_gap_reversion_v0 import WeekendGapReversionV0Strategy
 from phase0.strategies.weekly_level_reclaim_v0 import WeeklyLevelReclaimV0Strategy
 from phase0.strategies.weekly_open_reversion_v0 import WeeklyOpenReversionV0Strategy
+from phase0.strategies.eur_dual_session_d1_trend_continuation_v0 import (
+    EurDualSessionD1TrendContinuationV0Strategy,
+)
 from phase0.strategies.xag_lead_xau_followthrough_v0 import XagLeadXauFollowthroughV0Strategy
+from phase0.strategies.xau_comex_open_drive_continuation_v0 import XauComexOpenDriveContinuationV0Strategy
+from phase0.strategies.xau_comex_settlement_flow_v0 import XauComexSettlementFlowV0Strategy
+from phase0.strategies.xau_cot_managed_money_flush_v0 import XauCotManagedMoneyFlushV0Strategy
+from phase0.strategies.xau_d1_trend_ny_window_continuation_v0 import (
+    XauD1TrendNyWindowContinuationV0Strategy,
+)
+from phase0.strategies.xau_ny_m5_momentum_ignition_v0 import XauNyM5MomentumIgnitionV0Strategy
+from phase0.strategies.xau_ny_morning_trend_pullback_v0 import XauNyMorningTrendPullbackV0Strategy
+from phase0.strategies.xau_real_yield_regime_d1_trend_v0 import XauRealYieldRegimeD1TrendV0Strategy
+from phase0.strategies.xau_lbma_am_fix_flow_v0 import XauLbmaAmFixFlowV0Strategy
+from phase0.strategies.xau_london_open_expansion_flow_v0 import XauLondonOpenExpansionFlowV0Strategy
 from phase0.strategies.xau_xag_fx_composite_reversion_v0 import (
     XauXagFxCompositeReversionV0Strategy,
 )
@@ -475,6 +500,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     D1InsideDayBreakoutV0Strategy.name: D1InsideDayBreakoutV0Strategy,
     D1MacroLiquidityRegimeV0Strategy.name: D1MacroLiquidityRegimeV0Strategy,
     D1MomentumH4PullbackV0Strategy.name: D1MomentumH4PullbackV0Strategy,
+    D1MomentumH4PullbackV1FullhistStrategy.name: D1MomentumH4PullbackV1FullhistStrategy,
     D1MultiDayExhaustionReversionV0Strategy.name: D1MultiDayExhaustionReversionV0Strategy,
     D1OutsideDayFollowthroughV0Strategy.name: D1OutsideDayFollowthroughV0Strategy,
     D1VolatilityExpansionReversalV0Strategy.name: D1VolatilityExpansionReversalV0Strategy,
@@ -550,6 +576,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4FinancialConditionsStressReversalV0Strategy.name: H4FinancialConditionsStressReversalV0Strategy,
     H4GdxGldMinerDivergenceV0Strategy.name: H4GdxGldMinerDivergenceV0Strategy,
     H4GldEtfFlowReversalV0Strategy.name: H4GldEtfFlowReversalV0Strategy,
+    H4GldEtfFlowReversalV1FullhistStrategy.name: H4GldEtfFlowReversalV1FullhistStrategy,
     H4GldEtfFlowReversalV1Strategy.name: H4GldEtfFlowReversalV1Strategy,
     H4GldEtfFlowReversalV2Strategy.name: H4GldEtfFlowReversalV2Strategy,
     H4GldEtfFlowReversalV3Strategy.name: H4GldEtfFlowReversalV3Strategy,
@@ -563,6 +590,7 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     H4GoldFuturesVolumeClimaxV0Strategy.name: H4GoldFuturesVolumeClimaxV0Strategy,
     H4GvzVolatilityPanicReversalV0Strategy.name: H4GvzVolatilityPanicReversalV0Strategy,
     H4InsideBarD1MomentumBreakoutV0Strategy.name: H4InsideBarD1MomentumBreakoutV0Strategy,
+    H4InsideBarD1MomentumBreakoutV1FullhistStrategy.name: H4InsideBarD1MomentumBreakoutV1FullhistStrategy,
     H4MacroCompositeRiskStateV0Strategy.name: H4MacroCompositeRiskStateV0Strategy,
     H4MacroCompositeRiskStateV1Strategy.name: H4MacroCompositeRiskStateV1Strategy,
     H4MacroPullbackReclaimV0Strategy.name: H4MacroPullbackReclaimV0Strategy,
@@ -600,10 +628,22 @@ RESEARCH_STRATEGY_CLASSES: dict[str, type[StrategyBase]] = {
     SymbolNormalizedRoundRetestV0Strategy.name: SymbolNormalizedRoundRetestV0Strategy,
     SymbolRoundSweepReversalV0Strategy.name: SymbolRoundSweepReversalV0Strategy,
     W1D1MomentumContinuationV0Strategy.name: W1D1MomentumContinuationV0Strategy,
+    W1D1MomentumM5ContinuationExperimentalStrategy.name: W1D1MomentumM5ContinuationExperimentalStrategy,
+    W1D1MomentumContinuationV1FullhistStrategy.name: W1D1MomentumContinuationV1FullhistStrategy,
     WeekendGapReversionV0Strategy.name: WeekendGapReversionV0Strategy,
     WeeklyLevelReclaimV0Strategy.name: WeeklyLevelReclaimV0Strategy,
     WeeklyOpenReversionV0Strategy.name: WeeklyOpenReversionV0Strategy,
+    EurDualSessionD1TrendContinuationV0Strategy.name: EurDualSessionD1TrendContinuationV0Strategy,
     XagLeadXauFollowthroughV0Strategy.name: XagLeadXauFollowthroughV0Strategy,
+    XauComexOpenDriveContinuationV0Strategy.name: XauComexOpenDriveContinuationV0Strategy,
+    XauComexSettlementFlowV0Strategy.name: XauComexSettlementFlowV0Strategy,
+    XauCotManagedMoneyFlushV0Strategy.name: XauCotManagedMoneyFlushV0Strategy,
+    XauD1TrendNyWindowContinuationV0Strategy.name: XauD1TrendNyWindowContinuationV0Strategy,
+    XauNyM5MomentumIgnitionV0Strategy.name: XauNyM5MomentumIgnitionV0Strategy,
+    XauNyMorningTrendPullbackV0Strategy.name: XauNyMorningTrendPullbackV0Strategy,
+    XauRealYieldRegimeD1TrendV0Strategy.name: XauRealYieldRegimeD1TrendV0Strategy,
+    XauLbmaAmFixFlowV0Strategy.name: XauLbmaAmFixFlowV0Strategy,
+    XauLondonOpenExpansionFlowV0Strategy.name: XauLondonOpenExpansionFlowV0Strategy,
     XauXagFxCompositeReversionV0Strategy.name: XauXagFxCompositeReversionV0Strategy,
     XauXagRelativeValueV0Strategy.name: XauXagRelativeValueV0Strategy,
 }

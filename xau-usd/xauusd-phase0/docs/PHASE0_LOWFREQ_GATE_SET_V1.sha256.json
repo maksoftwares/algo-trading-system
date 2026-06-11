@@ -1,0 +1,8 @@
+{
+  "document": "docs/PHASE0_LOWFREQ_GATE_SET_V1.md",
+  "sha256": "9619bc85c79a369a5e93fe64ad331067b222d11e1f98f589ee64f149d03309e2",
+  "algorithm": "SHA256",
+  "locked_at_utc": "2026-06-10T00:00:00Z",
+  "status": "LOCKED",
+  "scope": "second_ea_low_frequency_gate_set_v1"
+}

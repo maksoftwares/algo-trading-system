@@ -1,0 +1,8 @@
+{
+  "candidate_id": "h4_inside_bar_d1_momentum_breakout_v1_fullhist",
+  "created_utc": "2026-06-10T10:30:00+00:00",
+  "sha256_hash": "bb703aba5d264464e3f6d80deb9a54ec328ec802a87889872af541ae11ac7052",
+  "source_v0_hypothesis_sha256": "93fd61822f0b4a0dc15699de3b46b9735cdd0bba64db08b16389094188144e0f",
+  "source_v0_strategy_sha256": "0810a7ac958eb1e4742d00fce1e1608b1872b56e39483da519a5b04a8bee1640",
+  "status": "LOCKED"
+}

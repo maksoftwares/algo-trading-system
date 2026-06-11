@@ -1,0 +1,27 @@
+event_clocks:
+  - event_id: xau_london_open
+    market_timezone: Europe/London
+    canonical_local_time: "08:00"
+    utc_conversion_rule: Convert 08:00 Europe/London to UTC with IANA timezone rules for the trade date.
+    server_time_conversion_rule: Use UTC-normalized offline bar timestamps only; no MT5 server-time or runtime query is authorized.
+    dst_handling_note: Europe/London is UTC+0 in GMT and UTC+1 in British Summer Time.
+    source_rationale_note: Mechanism anchor for London institutional arrival; common London session convention is 08:00 local London time.
+    linked_candidate_id: xau_london_open_expansion_flow_v0
+  - event_id: xau_lbma_am_fix
+    market_timezone: Europe/London
+    canonical_local_time: "10:30"
+    utc_conversion_rule: Convert 10:30 Europe/London to UTC with IANA timezone rules for the auction date.
+    server_time_conversion_rule: Use UTC-normalized offline bar timestamps only; no MT5 server-time or runtime query is authorized.
+    dst_handling_note: Europe/London is UTC+0 in GMT and UTC+1 in British Summer Time.
+    source_rationale_note: LBMA Gold Price AM auction is run at 10:30 London time.
+    source_url: https://www.lbma.org.uk/prices-and-data/precious-metal-prices
+    linked_candidate_id: xau_lbma_am_fix_flow_v0
+  - event_id: xau_comex_gold_settlement
+    market_timezone: America/New_York
+    canonical_local_time: "13:30"
+    utc_conversion_rule: Convert the 13:30 ET settlement boundary to UTC with IANA timezone rules for the settlement date.
+    server_time_conversion_rule: Use UTC-normalized offline bar timestamps only; no MT5 server-time or runtime query is authorized.
+    dst_handling_note: America/New_York is UTC-5 in Eastern Standard Time and UTC-4 in Eastern Daylight Time.
+    source_rationale_note: CME gold settlement period ends at 13:30 ET; use the boundary as the event anchor.
+    source_url: https://cmegroupclientsite.atlassian.net/wiki/display/EPICSANDBOX/Daily%2BSettlement%2BTime%2BDetails
+    linked_candidate_id: xau_comex_settlement_flow_v0

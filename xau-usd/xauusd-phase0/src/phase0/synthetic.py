@@ -51,6 +51,26 @@ from phase0.xle_xlu_energy_defensive_rotation_data import XLE_XLU_ENERGY_DEFENSI
 
 
 def synthetic_context_for_expert(expert: str) -> dict:
+    if expert == "xau_ny_m5_momentum_ignition_v0":
+        return _xau_ny_m5_momentum_ignition_context()
+    if expert == "eur_dual_session_d1_trend_continuation_v0":
+        return _eur_dual_session_d1_trend_continuation_context()
+    if expert == "xau_real_yield_regime_d1_trend_v0":
+        return _xau_real_yield_regime_d1_trend_context()
+    if expert == "xau_cot_managed_money_flush_v0":
+        return _xau_cot_managed_money_flush_context()
+    if expert == "xau_ny_morning_trend_pullback_v0":
+        return _xau_ny_morning_trend_pullback_context()
+    if expert == "xau_comex_open_drive_continuation_v0":
+        return _xau_comex_open_drive_continuation_context()
+    if expert == "xau_d1_trend_ny_window_continuation_v0":
+        return _xau_d1_trend_ny_window_continuation_context()
+    if expert == "xau_london_open_expansion_flow_v0":
+        return _xau_london_open_expansion_flow_context()
+    if expert == "xau_lbma_am_fix_flow_v0":
+        return _xau_lbma_am_fix_flow_context()
+    if expert == "xau_comex_settlement_flow_v0":
+        return _xau_comex_settlement_flow_context()
     if expert == "asia_range_london_breakout_v0":
         return _asia_range_london_breakout_context()
     if expert == "asia_range_london_failed_break_reversal_v0":
@@ -85,7 +105,7 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _d1_inside_day_breakout_context()
     if expert == "d1_macro_liquidity_regime_v0":
         return _d1_macro_liquidity_regime_context()
-    if expert == "d1_momentum_h4_pullback_v0":
+    if expert in {"d1_momentum_h4_pullback_v0", "d1_momentum_h4_pullback_v1_fullhist"}:
         return _d1_momentum_h4_pullback_context()
     if expert == "d1_multi_day_exhaustion_reversion_v0":
         return _d1_multi_day_exhaustion_reversion_context()
@@ -311,7 +331,7 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h1_financial_conditions_shock_followthrough_context()
     if expert == "h4_gdx_gld_miner_divergence_v0":
         return _h4_gdx_gld_miner_divergence_context()
-    if expert == "h4_gld_etf_flow_reversal_v0":
+    if expert in {"h4_gld_etf_flow_reversal_v0", "h4_gld_etf_flow_reversal_v1_fullhist"}:
         return _h4_gld_etf_flow_reversal_context()
     if expert == "h4_gld_etf_flow_reversal_v1":
         return _h4_gld_etf_flow_reversal_context()
@@ -337,7 +357,10 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _h4_gold_futures_volume_climax_context()
     if expert == "h4_gvz_volatility_panic_reversal_v0":
         return _h4_gvz_volatility_panic_reversal_context()
-    if expert == "h4_inside_bar_d1_momentum_breakout_v0":
+    if expert in {
+        "h4_inside_bar_d1_momentum_breakout_v0",
+        "h4_inside_bar_d1_momentum_breakout_v1_fullhist",
+    }:
         return _h4_inside_bar_d1_momentum_breakout_context()
     if expert == "h4_macro_composite_risk_state_v0":
         return _h4_macro_composite_risk_state_context()
@@ -429,7 +452,7 @@ def synthetic_context_for_expert(expert: str) -> dict:
         return _squeeze_breakout_long_context()
     if expert == "swing_breakout_retest_v0":
         return _swing_breakout_retest_context()
-    if expert == "w1_d1_momentum_continuation_v0":
+    if expert in {"w1_d1_momentum_continuation_v0", "w1_d1_momentum_continuation_v1_fullhist"}:
         return _w1_d1_momentum_continuation_context()
     if expert == "weekly_level_reclaim_v0":
         return _weekly_level_reclaim_context()
@@ -12872,3 +12895,188 @@ def _d1_outside_day_followthrough_context() -> dict:
 
     m5 = _base_m5("2024-01-17T12:00:00Z", 240)
     return {"M5": m5, "H4": h4, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _lane_b_h1_frame(rows: list[tuple[str, float, float, float, float]]) -> pd.DataFrame:
+    times = pd.to_datetime([row[0] for row in rows], utc=True)
+    frame = pd.DataFrame(
+        {
+            "timestamp_utc": times,
+            "bar_start_utc": times - pd.Timedelta(hours=1),
+            "open": [row[1] for row in rows],
+            "high": [row[2] for row in rows],
+            "low": [row[3] for row in rows],
+            "close": [row[4] for row in rows],
+        }
+    )
+    return frame
+
+
+def _lane_b_warmup_rows(start_utc: str, count: int, price: float) -> list[tuple[str, float, float, float, float]]:
+    times = pd.date_range(start_utc, periods=count, freq="1h")
+    return [
+        (ts.strftime("%Y-%m-%dT%H:%M:%SZ"), price, price + 0.5, price - 0.5, price)
+        for ts in times
+    ]
+
+
+def _xau_london_open_expansion_flow_context() -> dict:
+    # Winter date: Europe/London == UTC. Warmup Mon 2024-01-08; signal Tue 2024-01-09.
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 24, 2000.0)
+    # Asia bars on Jan 9 (London bar-end 01:00-08:00): contained range 1999.7-2000.7.
+    asia_times = pd.date_range("2024-01-09T01:00:00Z", periods=8, freq="1h")
+    for ts in asia_times:
+        rows.append((ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 2000.0, 2000.7, 1999.7, 2000.2))
+    # Trigger bar (London bar-end 09:00): decisive close above the Asia high.
+    rows.append(("2024-01-09T09:00:00Z", 2000.2, 2003.2, 2000.1, 2003.0))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_lbma_am_fix_flow_context() -> dict:
+    # Winter date: Europe/London == UTC. Pre-fix bars end 07:00-10:00; fix bar ends 11:00.
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 24, 2000.0)
+    early_times = pd.date_range("2024-01-09T01:00:00Z", periods=6, freq="1h")
+    for ts in early_times:
+        rows.append((ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 2000.0, 2000.5, 1999.5, 2000.1))
+    prefix_times = pd.date_range("2024-01-09T07:00:00Z", periods=4, freq="1h")
+    for ts in prefix_times:
+        rows.append((ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 2000.0, 2000.6, 1999.6, 2000.2))
+    # Fix bar (contains the 10:30 London auction): decisive close above the pre-fix high.
+    rows.append(("2024-01-09T11:00:00Z", 2000.2, 2003.2, 2000.1, 2003.0))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_comex_settlement_flow_context() -> dict:
+    # Winter date: America/New_York == UTC-5. Bar ending 10:00 ET == 15:00 UTC;
+    # settlement bar ending 14:00 ET == 19:00 UTC.
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 36, 2000.0)
+    # Impulse leg: steady rise from the 09:00 ET open into settlement (~3.0 price units).
+    impulse = [
+        ("2024-01-09T15:00:00Z", 2000.0, 2000.9, 1999.9, 2000.8),
+        ("2024-01-09T16:00:00Z", 2000.8, 2001.7, 2000.7, 2001.6),
+        ("2024-01-09T17:00:00Z", 2001.6, 2002.5, 2001.5, 2002.4),
+        ("2024-01-09T18:00:00Z", 2002.4, 2002.9, 2002.3, 2002.8),
+        ("2024-01-09T19:00:00Z", 2002.8, 2003.2, 2002.7, 2003.0),
+    ]
+    rows.extend(impulse)
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_ny_morning_trend_pullback_context() -> dict:
+    # Winter date: America/New_York == UTC-5. Bar ending 09:00 ET == 14:00 UTC;
+    # 10:00 ET == 15:00 UTC; pullback trigger bars end 16:00-18:00 UTC.
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 36, 2000.0)
+    rows.append(("2024-01-09T14:00:00Z", 2000.0, 2000.9, 1999.9, 2000.8))
+    rows.append(("2024-01-09T15:00:00Z", 2000.8, 2001.7, 2000.7, 2001.5))
+    # Pullback bar: counter-directional close that holds above the impulse origin.
+    rows.append(("2024-01-09T16:00:00Z", 2001.5, 2001.6, 2000.9, 2001.1))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_comex_open_drive_continuation_context() -> dict:
+    # Winter date: drive bar ends 10:00 ET == 15:00 UTC with range expansion,
+    # dominant body, and close at the directional extreme.
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 36, 2000.0)
+    rows.append(("2024-01-09T15:00:00Z", 2000.0, 2001.5, 1999.9, 2001.4))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_d1_trend_ny_window_continuation_context() -> dict:
+    # Rising D1 series puts EMA20 above EMA50; the H1 trigger bar ends 10:00 ET
+    # (15:00 UTC), closes bullish beyond the prior bar's high with a strong body.
+    d1_times = pd.date_range("2023-11-01T00:00:00Z", periods=70, freq="1D")
+    d1_closes = [1980.0 + 0.5 * index for index in range(len(d1_times))]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [close - 0.3 for close in d1_closes],
+            "high": [close + 0.8 for close in d1_closes],
+            "low": [close - 1.0 for close in d1_closes],
+            "close": d1_closes,
+        }
+    )
+    rows = _lane_b_warmup_rows("2024-01-08T01:00:00Z", 37, 2000.0)
+    rows.append(("2024-01-09T15:00:00Z", 2000.1, 2001.4, 2000.0, 2001.3))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "D1": d1, "symbol": "XAUUSD", "point_size": 0.01}
+
+
+def _xau_real_yield_regime_d1_trend_context() -> dict:
+    base = _xau_d1_trend_ny_window_continuation_context()
+    macro_times = pd.date_range("2023-11-15T00:00:00Z", periods=40, freq="1D")
+    macro = pd.DataFrame(
+        {
+            "timestamp_utc": macro_times,
+            "real_yield_10y": [2.20 - 0.01 * index for index in range(len(macro_times))],
+            "dollar_index_broad": [120.0] * len(macro_times),
+        }
+    )
+    return {**base, "macro_proxy": macro}
+
+
+def _xau_cot_managed_money_flush_context() -> dict:
+    base = _xau_d1_trend_ny_window_continuation_context()
+    base.pop("D1", None)
+    report_dates = pd.date_range("2022-11-15T00:00:00Z", periods=60, freq="7D")
+    nets = [98000.0 if index % 2 == 0 else 102000.0 for index in range(59)] + [20000.0]
+    cot = pd.DataFrame(
+        {
+            "report_date": report_dates,
+            "managed_money_long_all": [net + 50000.0 for net in nets],
+            "managed_money_short_all": [50000.0] * len(nets),
+        }
+    )
+    return {**base, "cot_gold": cot}
+
+
+def _eur_dual_session_d1_trend_continuation_context() -> dict:
+    d1_times = pd.date_range("2023-11-01T00:00:00Z", periods=70, freq="1D")
+    d1_closes = [1.0500 + 0.0004 * index for index in range(len(d1_times))]
+    d1 = pd.DataFrame(
+        {
+            "timestamp_utc": d1_times,
+            "bar_start_utc": d1_times - pd.Timedelta(days=1),
+            "open": [c - 0.0002 for c in d1_closes],
+            "high": [c + 0.0006 for c in d1_closes],
+            "low": [c - 0.0008 for c in d1_closes],
+            "close": d1_closes,
+        }
+    )
+    times = pd.date_range("2024-01-08T01:00:00Z", periods=37, freq="1h")
+    rows = [
+        (ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 1.0800, 1.0805, 1.0795, 1.0800)
+        for ts in times
+    ]
+    rows.append(("2024-01-09T15:00:00Z", 1.0801, 1.0815, 1.0800, 1.0814))
+    h1 = _lane_b_h1_frame(rows)
+    return {"H1": h1, "D1": d1, "symbol": "EURUSD", "point_size": 0.00001}
+
+
+def _xau_ny_m5_momentum_ignition_context() -> dict:
+    times = pd.date_range("2024-01-09T12:00:00Z", periods=30, freq="5min")
+    rows = []
+    for ts in times:
+        rows.append((ts.strftime("%Y-%m-%dT%H:%M:%SZ"), 2000.0, 2000.25, 1999.75, 2000.0))
+    for offset, (o, h, l, c) in zip(
+        ("14:40", "14:45", "14:50"),
+        ((2000.0, 2000.9, 1999.95, 2000.8), (2000.8, 2001.7, 2000.75, 2001.6), (2001.6, 2002.5, 2001.55, 2002.4)),
+    ):
+        rows.append((f"2024-01-09T{offset}:00Z", o, h, l, c))
+    times2 = pd.to_datetime([r[0] for r in rows], utc=True)
+    m5 = pd.DataFrame(
+        {
+            "timestamp_utc": times2,
+            "bar_start_utc": times2 - pd.Timedelta(minutes=5),
+            "open": [r[1] for r in rows],
+            "high": [r[2] for r in rows],
+            "low": [r[3] for r in rows],
+            "close": [r[4] for r in rows],
+        }
+    )
+    return {"M5": m5, "symbol": "XAUUSD", "point_size": 0.01}

@@ -1,0 +1,8 @@
+{
+  "candidate_id": "w1_d1_momentum_continuation_v1_fullhist",
+  "created_utc": "2026-06-10T10:30:00+00:00",
+  "sha256_hash": "aa4c662d67a4304de85d179181b06767ddcfaf81450dd1c1f8ebe780a303808c",
+  "source_v0_hypothesis_sha256": "a1f62130384e9b1adb6f156cfb6ff64771556dce55f75575f7a44d5bde4df459",
+  "source_v0_strategy_sha256": "3064645a67ee043d8a72a5103712b2054c6452739f566e87702e9962036af355",
+  "status": "LOCKED"
+}

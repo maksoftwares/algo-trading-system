@@ -38,6 +38,9 @@ input int InpMaxOpenPositionsPerInstance = 0;
 input int InpDeviationPoints = 50;
 input double InpMaxEstimatedCostR = 0.00;
 input double InpMaxMeasuredSpreadPoints = 0.0;
+input bool InpTradeSessionGateEnabled = false;
+input int InpTradeSessionStartHour = 0;
+input int InpTradeSessionEndHour = 23;
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
 datetime g_last_m5_bar_time = 0;
@@ -579,6 +582,35 @@ bool KillSwitchActive()
    return ContainsText(content, "KILL");
 }
 
+int ServerHourNow()
+{
+   MqlDateTime parts;
+   TimeToStruct(TimeCurrent(), parts);
+   return parts.hour;
+}
+
+bool ServerHourInTradeSession()
+{
+   if(!InpTradeSessionGateEnabled)
+      return true;
+
+   int start_hour = InpTradeSessionStartHour;
+   int end_hour = InpTradeSessionEndHour;
+   if(start_hour < 0)
+      start_hour = 0;
+   if(start_hour > 23)
+      start_hour = 23;
+   if(end_hour < 0)
+      end_hour = 0;
+   if(end_hour > 23)
+      end_hour = 23;
+
+   int hour = ServerHourNow();
+   if(start_hour <= end_hour)
+      return hour >= start_hour && hour <= end_hour;
+   return hour >= start_hour || hour <= end_hour;
+}
+
 string CompactDateKey()
 {
    string key = TimeToString(TimeCurrent(), TIME_DATE);
@@ -1049,6 +1081,11 @@ bool TradingGuardsPass(
    if(!observation.would_signal)
    {
       guard_reason = "no_signal";
+      return false;
+   }
+   if(!ServerHourInTradeSession())
+   {
+      guard_reason = "server_hour_session_gate";
       return false;
    }
    if(observation.entry_price <= 0.0 || observation.stop_loss <= 0.0 || observation.take_profit <= 0.0)

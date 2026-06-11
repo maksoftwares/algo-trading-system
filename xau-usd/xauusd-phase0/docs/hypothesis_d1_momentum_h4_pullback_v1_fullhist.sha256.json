@@ -1,0 +1,8 @@
+{
+  "candidate_id": "d1_momentum_h4_pullback_v1_fullhist",
+  "created_utc": "2026-06-10T10:30:00+00:00",
+  "sha256_hash": "d2f1aafffa2651ce2b392b4e66b1c27e7963e7aa69fd1b722e57ccce9beb38e2",
+  "source_v0_hypothesis_sha256": "076b9b78412f9b272b0821e8abe82b64ce706815efca17a573a52767e0ee36bd",
+  "source_v0_strategy_sha256": "61710b735d93ff018487322d20a607e88db209393e8f64a3583543f6f44b92ce",
+  "status": "LOCKED"
+}

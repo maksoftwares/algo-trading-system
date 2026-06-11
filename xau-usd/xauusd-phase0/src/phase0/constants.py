@@ -8,7 +8,19 @@ DEFAULT_PHASE0_CONFIG = CONFIG_DIR / "phase0.yaml"
 DEFAULT_TRUE_HOLDOUT_CONFIG = CONFIG_DIR / "true_holdout_period.yaml"
 
 EXPERTS = ("trend_pullback", "breakout_retest", "range_mr")
+SECOND_EA_LANE_A_CANDIDATES = (
+    "d1_momentum_h4_pullback_v1_fullhist",
+    "w1_d1_momentum_continuation_v1_fullhist",
+    "h4_inside_bar_d1_momentum_breakout_v1_fullhist",
+)
+SECOND_EA_LANE_B_CANDIDATES = (
+    "xau_london_open_expansion_flow_v0",
+    "xau_lbma_am_fix_flow_v0",
+    "xau_comex_settlement_flow_v0",
+)
+SECOND_EA_CAMPAIGN_CANDIDATES = (*SECOND_EA_LANE_A_CANDIDATES, *SECOND_EA_LANE_B_CANDIDATES)
 RESEARCH_EXPERTS = (
+    *SECOND_EA_CAMPAIGN_CANDIDATES,
     "asia_range_london_breakout_v0",
     "asia_range_london_failed_break_reversal_v0",
     "compression_retest_continuation_v0",
@@ -196,7 +208,15 @@ RESEARCH_EXPERTS = (
     "weekend_gap_reversion_v0",
     "weekly_level_reclaim_v0",
     "weekly_open_reversion_v0",
+    "eur_dual_session_d1_trend_continuation_v0",
+    "h4_gld_etf_flow_reversal_v1_fullhist",
+    "xau_ny_m5_momentum_ignition_v0",
     "xag_lead_xau_followthrough_v0",
+    "xau_comex_open_drive_continuation_v0",
+    "xau_cot_managed_money_flush_v0",
+    "xau_d1_trend_ny_window_continuation_v0",
+    "xau_ny_morning_trend_pullback_v0",
+    "xau_real_yield_regime_d1_trend_v0",
     "xau_xag_fx_composite_reversion_v0",
     "xau_xag_relative_value_v0",
 )

@@ -10,6 +10,7 @@ from phase0.config import ConfigError, ProjectConfig
 EXPERT_NAME = "h4_gld_etf_flow_reversal_v0"
 EXPERT_NAMES = (
     "h4_gld_etf_flow_reversal_v0",
+    "h4_gld_etf_flow_reversal_v1_fullhist",
     "h4_gld_etf_flow_reversal_v1",
     "h4_gld_etf_flow_reversal_v2",
     "h4_gld_etf_flow_reversal_v3",

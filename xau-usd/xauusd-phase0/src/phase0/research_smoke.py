@@ -6,7 +6,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from phase0.config import ConfigError, ProjectConfig
+from phase0.constants import SECOND_EA_CAMPAIGN_CANDIDATES
 from phase0.research_hypotheses import validate_research_hypothesis
+from phase0.second_ea_hypotheses import validate_second_ea_hypothesis
 from phase0.strategies.registry import RESEARCH_STRATEGY_CLASSES, STRATEGY_CLASSES, get_research_strategy
 from phase0.synthetic import synthetic_context_for_expert
 
@@ -34,7 +36,7 @@ def run_research_candidate_smoke(
     if expert not in RESEARCH_STRATEGY_CLASSES:
         raise ConfigError(f"{expert!r} is not in the research strategy registry.")
 
-    validation = validate_research_hypothesis(config, expert, hypothesis_file)
+    validation = _validate_candidate_hypothesis(config, expert, hypothesis_file)
     strategy = get_research_strategy(expert)
     context = synthetic_context_for_expert(expert)
     signals = strategy.generate_signals(context)
@@ -114,6 +116,42 @@ def run_research_candidate_smoke(
         signal_count=len(signals),
         phase0_result_run_allowed=False,
     )
+
+
+def _validate_candidate_hypothesis(config: ProjectConfig, expert: str, hypothesis_file: str):
+    if expert not in SECOND_EA_CAMPAIGN_CANDIDATES:
+        return validate_research_hypothesis(config, expert, hypothesis_file)
+
+    relative_path = Path(hypothesis_file)
+    if relative_path.is_absolute():
+        raise ConfigError("Research hypothesis file must be relative to the Phase 0 root.")
+    hypothesis_path = config.root / relative_path
+    lock_path = hypothesis_path.with_suffix(".sha256.json")
+    result = validate_second_ea_hypothesis(hypothesis_path, lock_path, raise_on_error=True)
+    return ResearchHypothesisSmokeValidation(
+        status=result.status,
+        expert=expert,
+        hypothesis_file=hypothesis_path,
+        sha256=_locked_sha256(hypothesis_path, lock_path),
+        message="Second-EA hypothesis is complete and hash-locked.",
+    )
+
+
+@dataclass(frozen=True)
+class ResearchHypothesisSmokeValidation:
+    status: str
+    expert: str
+    hypothesis_file: Path
+    sha256: str
+    message: str
+
+
+def _locked_sha256(hypothesis_path: Path, lock_path: Path) -> str:
+    payload = json.loads(lock_path.read_text(encoding="utf-8"))
+    locked_hash = str(payload.get("sha256_hash") or payload.get("sha256") or "")
+    if not locked_hash:
+        raise ConfigError(f"Second-EA lock file does not include sha256_hash: {lock_path}")
+    return locked_hash
 
 
 def _render_report(
