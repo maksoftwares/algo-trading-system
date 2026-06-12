@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-12T09:21:17.983997Z",
+  "created_at_utc": "2026-06-12T22:58:39.244588Z",
   "authority": "Read-only heartbeat report. It checks observer CSV freshness and row counts only; it does not touch MT5 terminals, charts, EA inputs, orders, or positions.",
   "lanes": [
     {
@@ -14,7 +14,7 @@
       "warn_after_minutes": 15,
       "file_count": 14,
       "latest_file": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_breakout_retest_xauusd.csv",
-      "latest_age_minutes": 1.35,
+      "latest_age_minutes": 3.74,
       "checks": [
         {
           "name": "files_present",
@@ -24,121 +24,121 @@
         {
           "name": "latest_file_fresh",
           "status": "PASS",
-          "detail": "latest age 1.3 minutes; threshold 15 minutes"
+          "detail": "latest age 3.7 minutes; threshold 15 minutes"
         }
       ],
       "files": [
         {
           "name": "shadow_fix_observer_signal_log_breakout_retest_eurusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_breakout_retest_eurusd.csv",
-          "bytes": 496323,
-          "mtime_utc": "2026-06-12T09:19:57.203407Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 556668,
+          "mtime_utc": "2026-06-12T22:54:54.745576Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_breakout_retest_usdjpy.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_breakout_retest_usdjpy.csv",
-          "bytes": 488097,
-          "mtime_utc": "2026-06-12T09:19:57.222934Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 547513,
+          "mtime_utc": "2026-06-12T22:54:54.745576Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_breakout_retest_xauusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_breakout_retest_xauusd.csv",
-          "bytes": 467096,
-          "mtime_utc": "2026-06-12T09:19:57.232917Z",
-          "age_minutes": 1.35,
-          "row_count": 1109
+          "bytes": 525946,
+          "mtime_utc": "2026-06-12T22:54:54.761245Z",
+          "age_minutes": 3.74,
+          "row_count": 1249
         },
         {
           "name": "shadow_fix_observer_signal_log_round_number_retest_v0_usdjpy.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_round_number_retest_v0_usdjpy.csv",
-          "bytes": 508176,
-          "mtime_utc": "2026-06-12T09:19:57.201406Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 570040,
+          "mtime_utc": "2026-06-12T22:54:54.715196Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_round_number_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_round_number_retest_v0_xauusd.csv",
-          "bytes": 488096,
-          "mtime_utc": "2026-06-12T09:19:57.171033Z",
-          "age_minutes": 1.35,
-          "row_count": 1109
+          "bytes": 550792,
+          "mtime_utc": "2026-06-12T22:54:54.698585Z",
+          "age_minutes": 3.74,
+          "row_count": 1249
         },
         {
           "name": "shadow_fix_observer_signal_log_session_extreme_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_session_extreme_retest_v0_eurusd.csv",
-          "bytes": 523943,
-          "mtime_utc": "2026-06-12T09:19:57.203407Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 587534,
+          "mtime_utc": "2026-06-12T22:54:54.715196Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_session_extreme_retest_v0_usdjpy.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_session_extreme_retest_v0_usdjpy.csv",
-          "bytes": 515365,
-          "mtime_utc": "2026-06-12T09:19:57.172032Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 578022,
+          "mtime_utc": "2026-06-12T22:54:54.698585Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_session_extreme_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_session_extreme_retest_v0_xauusd.csv",
-          "bytes": 492838,
-          "mtime_utc": "2026-06-12T09:19:57.171033Z",
-          "age_minutes": 1.35,
-          "row_count": 1109
+          "bytes": 554954,
+          "mtime_utc": "2026-06-12T22:54:54.705550Z",
+          "age_minutes": 3.74,
+          "row_count": 1249
         },
         {
           "name": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_swing_breakout_retest_v0_eurusd.csv",
-          "bytes": 513607,
-          "mtime_utc": "2026-06-12T09:19:57.232917Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 576034,
+          "mtime_utc": "2026-06-12T22:54:54.698585Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_usdjpy.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_swing_breakout_retest_v0_usdjpy.csv",
-          "bytes": 505318,
-          "mtime_utc": "2026-06-12T09:19:57.201406Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 566828,
+          "mtime_utc": "2026-06-12T22:54:54.715196Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_swing_breakout_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_swing_breakout_retest_v0_xauusd.csv",
-          "bytes": 483690,
-          "mtime_utc": "2026-06-12T09:19:57.201406Z",
-          "age_minutes": 1.35,
-          "row_count": 1109
+          "bytes": 544640,
+          "mtime_utc": "2026-06-12T22:54:54.715196Z",
+          "age_minutes": 3.74,
+          "row_count": 1249
         },
         {
           "name": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_eurusd.csv",
-          "bytes": 539157,
-          "mtime_utc": "2026-06-12T09:19:57.232917Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 604544,
+          "mtime_utc": "2026-06-12T22:54:54.715196Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_usdjpy.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_usdjpy.csv",
-          "bytes": 531030,
-          "mtime_utc": "2026-06-12T09:19:57.203407Z",
-          "age_minutes": 1.35,
-          "row_count": 1153
+          "bytes": 595541,
+          "mtime_utc": "2026-06-12T22:54:54.698585Z",
+          "age_minutes": 3.74,
+          "row_count": 1293
         },
         {
           "name": "shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files\\shadow_fix_observer_signal_log_symbol_normalized_round_retest_v0_xauusd.csv",
-          "bytes": 517228,
-          "mtime_utc": "2026-06-12T09:19:57.185032Z",
-          "age_minutes": 1.35,
-          "row_count": 1109
+          "bytes": 582584,
+          "mtime_utc": "2026-06-12T22:54:54.698585Z",
+          "age_minutes": 3.74,
+          "row_count": 1249
         }
       ]
     },
@@ -152,8 +152,8 @@
       "expected_min_files": 14,
       "warn_after_minutes": 15,
       "file_count": 14,
-      "latest_file": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_xauusd.csv",
-      "latest_age_minutes": 0.57,
+      "latest_file": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_breakout_retest_xauusd.csv",
+      "latest_age_minutes": 2.95,
       "checks": [
         {
           "name": "files_present",
@@ -163,121 +163,121 @@
         {
           "name": "latest_file_fresh",
           "status": "PASS",
-          "detail": "latest age 0.6 minutes; threshold 15 minutes"
+          "detail": "latest age 3.0 minutes; threshold 15 minutes"
         }
       ],
       "files": [
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_breakout_retest_eurusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_breakout_retest_eurusd.csv",
-          "bytes": 11194,
-          "mtime_utc": "2026-06-12T09:19:57.174033Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 92567,
+          "mtime_utc": "2026-06-12T22:54:55.152716Z",
+          "age_minutes": 3.73,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_breakout_retest_gbpusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_breakout_retest_gbpusd.csv",
-          "bytes": 11176,
-          "mtime_utc": "2026-06-12T09:19:57.186050Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 92476,
+          "mtime_utc": "2026-06-12T22:54:55.152716Z",
+          "age_minutes": 3.73,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_breakout_retest_xauusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_breakout_retest_xauusd.csv",
-          "bytes": 11380,
-          "mtime_utc": "2026-06-12T09:20:43.845286Z",
-          "age_minutes": 0.57,
-          "row_count": 18
+          "bytes": 94460,
+          "mtime_utc": "2026-06-12T22:55:41.983263Z",
+          "age_minutes": 2.95,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_round_number_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_round_number_retest_v0_xauusd.csv",
-          "bytes": 11774,
-          "mtime_utc": "2026-06-12T09:20:43.900852Z",
-          "age_minutes": 0.57,
-          "row_count": 18
+          "bytes": 97499,
+          "mtime_utc": "2026-06-12T22:55:41.873923Z",
+          "age_minutes": 2.96,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_eurusd.csv",
-          "bytes": 11608,
-          "mtime_utc": "2026-06-12T09:19:57.177033Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 95771,
+          "mtime_utc": "2026-06-12T22:54:55.105397Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_gbpusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_gbpusd.csv",
-          "bytes": 11548,
-          "mtime_utc": "2026-06-12T09:19:57.173032Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 95726,
+          "mtime_utc": "2026-06-12T22:54:55.105397Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_repair_v1_eurusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_repair_v1_eurusd.csv",
-          "bytes": 11869,
-          "mtime_utc": "2026-06-12T09:19:57.186050Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 98802,
+          "mtime_utc": "2026-06-12T22:54:55.089038Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_session_extreme_retest_v0_xauusd.csv",
-          "bytes": 11740,
-          "mtime_utc": "2026-06-12T09:20:43.901854Z",
-          "age_minutes": 0.57,
-          "row_count": 18
+          "bytes": 97548,
+          "mtime_utc": "2026-06-12T22:55:41.873923Z",
+          "age_minutes": 2.96,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_eurusd.csv",
-          "bytes": 11464,
-          "mtime_utc": "2026-06-12T09:19:57.174033Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 94919,
+          "mtime_utc": "2026-06-12T22:54:55.136974Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_gbpusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_gbpusd.csv",
-          "bytes": 11446,
-          "mtime_utc": "2026-06-12T09:19:57.172032Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 94828,
+          "mtime_utc": "2026-06-12T22:54:55.105397Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_swing_breakout_retest_v0_xauusd.csv",
-          "bytes": 11650,
-          "mtime_utc": "2026-06-12T09:20:43.604393Z",
-          "age_minutes": 0.57,
-          "row_count": 18
+          "bytes": 96830,
+          "mtime_utc": "2026-06-12T22:55:41.873923Z",
+          "age_minutes": 2.96,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_eurusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_eurusd.csv",
-          "bytes": 11848,
-          "mtime_utc": "2026-06-12T09:19:57.173032Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 98227,
+          "mtime_utc": "2026-06-12T22:54:55.105397Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_gbpusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_gbpusd.csv",
-          "bytes": 11892,
-          "mtime_utc": "2026-06-12T09:19:57.186050Z",
-          "age_minutes": 1.35,
-          "row_count": 18
+          "bytes": 98332,
+          "mtime_utc": "2026-06-12T22:54:55.105397Z",
+          "age_minutes": 3.74,
+          "row_count": 158
         },
         {
           "name": "trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_xauusd.csv",
           "path": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files\\trend_guarded_fix_observer_v2_signal_log_symbol_normalized_round_retest_v0_xauusd.csv",
-          "bytes": 12198,
-          "mtime_utc": "2026-06-12T09:20:43.604393Z",
-          "age_minutes": 0.57,
-          "row_count": 18
+          "bytes": 102200,
+          "mtime_utc": "2026-06-12T22:55:41.982399Z",
+          "age_minutes": 2.95,
+          "row_count": 158
         }
       ]
     },
@@ -292,45 +292,53 @@
       ],
       "expected_min_files": 3,
       "warn_after_minutes": 15,
-      "file_count": 3,
-      "latest_file": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_log_20260612.csv",
-      "latest_age_minutes": 0.02,
+      "file_count": 4,
+      "latest_file": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_log_20260613.csv",
+      "latest_age_minutes": 0.12,
       "checks": [
         {
           "name": "files_present",
           "status": "PASS",
-          "detail": "3 files found, expected at least 3"
+          "detail": "4 files found, expected at least 3"
         },
         {
           "name": "latest_file_fresh",
           "status": "PASS",
-          "detail": "latest age 0.0 minutes; threshold 15 minutes"
+          "detail": "latest age 0.1 minutes; threshold 15 minutes"
         }
       ],
       "files": [
         {
           "name": "position_path_log_20260612.csv",
           "path": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_log_20260612.csv",
-          "bytes": 6059805,
-          "mtime_utc": "2026-06-12T09:21:16.737832Z",
-          "age_minutes": 0.02,
-          "row_count": 13566
+          "bytes": 31804226,
+          "mtime_utc": "2026-06-12T19:59:50.975660Z",
+          "age_minutes": 178.8,
+          "row_count": 70466
+        },
+        {
+          "name": "position_path_log_20260613.csv",
+          "path": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_log_20260613.csv",
+          "bytes": 3844854,
+          "mtime_utc": "2026-06-12T22:58:32.025367Z",
+          "age_minutes": 0.12,
+          "row_count": 8685
         },
         {
           "name": "position_path_observer_startup.csv",
           "path": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_observer_startup.csv",
-          "bytes": 369,
-          "mtime_utc": "2026-06-12T06:24:16.711602Z",
-          "age_minutes": 177.02,
-          "row_count": 1
+          "bytes": 759,
+          "mtime_utc": "2026-06-12T22:54:51.998814Z",
+          "age_minutes": 3.79,
+          "row_count": 3
         },
         {
           "name": "position_path_summary.csv",
           "path": "C:\\MT5PortablePositionPathObserver\\MQL5\\Files\\position_path_summary.csv",
-          "bytes": 14564,
-          "mtime_utc": "2026-06-12T08:29:46.707527Z",
-          "age_minutes": 51.52,
-          "row_count": 37
+          "bytes": 70471,
+          "mtime_utc": "2026-06-12T20:57:30.950398Z",
+          "age_minutes": 121.14,
+          "row_count": 183
         }
       ]
     }
