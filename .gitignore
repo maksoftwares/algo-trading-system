@@ -43,6 +43,9 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_REPORT.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_REPORT.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_REPORT.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_ROWS.csv
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_REPAIR_CANDIDATE_RESEARCH.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_REPAIR_CANDIDATE_RESEARCH.md
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2_REPAIR_CANDIDATE_RULES.csv

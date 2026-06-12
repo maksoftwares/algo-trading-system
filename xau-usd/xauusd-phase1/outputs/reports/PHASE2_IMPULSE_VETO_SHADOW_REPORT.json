@@ -1,0 +1,1872 @@
+{
+  "status": "SHADOW_READY",
+  "created_at_utc": "2026-06-12T17:22:42.026606Z",
+  "authority": "Shadow-only impulse-veto evidence. Reads broker-trade CSV and exported M5 bars only; does not read or modify terminals, charts, presets, orders, positions, or running EAs.",
+  "source_actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+  "source_bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
+  "hypothesis_doc": "docs/FORWARD_WEEK_IMPULSE_VETO_HYPOTHESIS_2026_06_15.md",
+  "thresholds": [
+    -1.0,
+    -1.5,
+    -2.0
+  ],
+  "target_families": [
+    "round_retest_family",
+    "session_extreme_family"
+  ],
+  "non_target_policy": "breakout_retest family is scored as a control and is not blocked by this shadow rule.",
+  "row_counts": {
+    "raw_rows": 1372,
+    "closed_rows": 1356,
+    "resolved_closed_rows": 1356,
+    "target_resolved_closed_rows": 949,
+    "unresolved_rows": 0
+  },
+  "bar_quality": [
+    {
+      "symbol": "EURUSD",
+      "rows": 2696,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0000",
+      "duplicate_bar_times": 0,
+      "status": "WARN_GAPS_OR_DUPLICATES"
+    },
+    {
+      "symbol": "GBPUSD",
+      "rows": 2696,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0000",
+      "duplicate_bar_times": 0,
+      "status": "WARN_GAPS_OR_DUPLICATES"
+    },
+    {
+      "symbol": "USDJPY",
+      "rows": 1611,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-08 14:30:00",
+      "gap_count_gt_5m": 5,
+      "max_gap_minutes": "2885.0000",
+      "duplicate_bar_times": 0,
+      "status": "WARN_GAPS_OR_DUPLICATES"
+    },
+    {
+      "symbol": "XAUUSD",
+      "rows": 2596,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2945.0000",
+      "duplicate_bar_times": 0,
+      "status": "WARN_GAPS_OR_DUPLICATES"
+    }
+  ],
+  "dose_response_all": [
+    {
+      "bucket": "hard_against_lt_-1_5",
+      "closed": 351,
+      "wins": 101,
+      "losses": 236,
+      "win_rate_pct": "28.77",
+      "closed_pnl_aed": "-2681.2900",
+      "avg_pnl_aed": "-7.6390",
+      "profit_factor": "0.6029"
+    },
+    {
+      "bucket": "mild_against_-1_5_to_-0_5",
+      "closed": 218,
+      "wins": 84,
+      "losses": 134,
+      "win_rate_pct": "38.53",
+      "closed_pnl_aed": "1216.2300",
+      "avg_pnl_aed": "5.5790",
+      "profit_factor": "1.3460"
+    },
+    {
+      "bucket": "fresh_flat_abs_lt_0_5",
+      "closed": 272,
+      "wins": 103,
+      "losses": 162,
+      "win_rate_pct": "37.87",
+      "closed_pnl_aed": "-493.9100",
+      "avg_pnl_aed": "-1.8158",
+      "profit_factor": "0.8833"
+    },
+    {
+      "bucket": "mild_with_0_5_to_1_5",
+      "closed": 193,
+      "wins": 76,
+      "losses": 113,
+      "win_rate_pct": "39.38",
+      "closed_pnl_aed": "493.7000",
+      "avg_pnl_aed": "2.5580",
+      "profit_factor": "1.1728"
+    },
+    {
+      "bucket": "extended_with_gt_1_5",
+      "closed": 322,
+      "wins": 135,
+      "losses": 179,
+      "win_rate_pct": "41.93",
+      "closed_pnl_aed": "1527.2000",
+      "avg_pnl_aed": "4.7429",
+      "profit_factor": "1.3435"
+    }
+  ],
+  "dose_response_by_family": [
+    {
+      "family": "breakout_retest_family",
+      "bucket": "hard_against_lt_-1_5",
+      "closed": 112,
+      "wins": 41,
+      "losses": 67,
+      "win_rate_pct": "36.61",
+      "closed_pnl_aed": "245.2400",
+      "avg_pnl_aed": "2.1896",
+      "profit_factor": "1.2022"
+    },
+    {
+      "family": "breakout_retest_family",
+      "bucket": "mild_against_-1_5_to_-0_5",
+      "closed": 66,
+      "wins": 25,
+      "losses": 41,
+      "win_rate_pct": "37.88",
+      "closed_pnl_aed": "999.5600",
+      "avg_pnl_aed": "15.1448",
+      "profit_factor": "2.4926"
+    },
+    {
+      "family": "breakout_retest_family",
+      "bucket": "fresh_flat_abs_lt_0_5",
+      "closed": 80,
+      "wins": 28,
+      "losses": 52,
+      "win_rate_pct": "35.00",
+      "closed_pnl_aed": "-525.4700",
+      "avg_pnl_aed": "-6.5684",
+      "profit_factor": "0.5064"
+    },
+    {
+      "family": "breakout_retest_family",
+      "bucket": "mild_with_0_5_to_1_5",
+      "closed": 58,
+      "wins": 19,
+      "losses": 39,
+      "win_rate_pct": "32.76",
+      "closed_pnl_aed": "-277.7500",
+      "avg_pnl_aed": "-4.7888",
+      "profit_factor": "0.6538"
+    },
+    {
+      "family": "breakout_retest_family",
+      "bucket": "extended_with_gt_1_5",
+      "closed": 84,
+      "wins": 34,
+      "losses": 46,
+      "win_rate_pct": "40.48",
+      "closed_pnl_aed": "427.4200",
+      "avg_pnl_aed": "5.0883",
+      "profit_factor": "1.5120"
+    },
+    {
+      "family": "round_retest_family",
+      "bucket": "hard_against_lt_-1_5",
+      "closed": 200,
+      "wins": 47,
+      "losses": 149,
+      "win_rate_pct": "23.50",
+      "closed_pnl_aed": "-2840.4800",
+      "avg_pnl_aed": "-14.2024",
+      "profit_factor": "0.4420"
+    },
+    {
+      "family": "round_retest_family",
+      "bucket": "mild_against_-1_5_to_-0_5",
+      "closed": 131,
+      "wins": 48,
+      "losses": 83,
+      "win_rate_pct": "36.64",
+      "closed_pnl_aed": "-65.7900",
+      "avg_pnl_aed": "-0.5022",
+      "profit_factor": "0.9753"
+    },
+    {
+      "family": "round_retest_family",
+      "bucket": "fresh_flat_abs_lt_0_5",
+      "closed": 157,
+      "wins": 64,
+      "losses": 88,
+      "win_rate_pct": "40.76",
+      "closed_pnl_aed": "94.0400",
+      "avg_pnl_aed": "0.5990",
+      "profit_factor": "1.0346"
+    },
+    {
+      "family": "round_retest_family",
+      "bucket": "mild_with_0_5_to_1_5",
+      "closed": 105,
+      "wins": 43,
+      "losses": 59,
+      "win_rate_pct": "40.95",
+      "closed_pnl_aed": "367.8200",
+      "avg_pnl_aed": "3.5030",
+      "profit_factor": "1.2060"
+    },
+    {
+      "family": "round_retest_family",
+      "bucket": "extended_with_gt_1_5",
+      "closed": 218,
+      "wins": 98,
+      "losses": 117,
+      "win_rate_pct": "44.95",
+      "closed_pnl_aed": "1159.3500",
+      "avg_pnl_aed": "5.3181",
+      "profit_factor": "1.3475"
+    },
+    {
+      "family": "session_extreme_family",
+      "bucket": "hard_against_lt_-1_5",
+      "closed": 37,
+      "wins": 13,
+      "losses": 18,
+      "win_rate_pct": "35.14",
+      "closed_pnl_aed": "19.6900",
+      "avg_pnl_aed": "0.5322",
+      "profit_factor": "1.0574"
+    },
+    {
+      "family": "session_extreme_family",
+      "bucket": "mild_against_-1_5_to_-0_5",
+      "closed": 19,
+      "wins": 9,
+      "losses": 10,
+      "win_rate_pct": "47.37",
+      "closed_pnl_aed": "143.6900",
+      "avg_pnl_aed": "7.5626",
+      "profit_factor": "1.7725"
+    },
+    {
+      "family": "session_extreme_family",
+      "bucket": "fresh_flat_abs_lt_0_5",
+      "closed": 35,
+      "wins": 11,
+      "losses": 22,
+      "win_rate_pct": "31.43",
+      "closed_pnl_aed": "-62.4800",
+      "avg_pnl_aed": "-1.7851",
+      "profit_factor": "0.8609"
+    },
+    {
+      "family": "session_extreme_family",
+      "bucket": "mild_with_0_5_to_1_5",
+      "closed": 30,
+      "wins": 14,
+      "losses": 15,
+      "win_rate_pct": "46.67",
+      "closed_pnl_aed": "403.6300",
+      "avg_pnl_aed": "13.4543",
+      "profit_factor": "2.5025"
+    },
+    {
+      "family": "session_extreme_family",
+      "bucket": "extended_with_gt_1_5",
+      "closed": 17,
+      "wins": 3,
+      "losses": 13,
+      "win_rate_pct": "17.65",
+      "closed_pnl_aed": "3.8200",
+      "avg_pnl_aed": "0.2247",
+      "profit_factor": "1.0180"
+    },
+    {
+      "family": "wr50_family",
+      "bucket": "hard_against_lt_-1_5",
+      "closed": 2,
+      "wins": 0,
+      "losses": 2,
+      "win_rate_pct": "0.00",
+      "closed_pnl_aed": "-105.7400",
+      "avg_pnl_aed": "-52.8700",
+      "profit_factor": "0.0000"
+    },
+    {
+      "family": "wr50_family",
+      "bucket": "mild_against_-1_5_to_-0_5",
+      "closed": 2,
+      "wins": 2,
+      "losses": 0,
+      "win_rate_pct": "100.00",
+      "closed_pnl_aed": "138.7700",
+      "avg_pnl_aed": "69.3850",
+      "profit_factor": "inf"
+    },
+    {
+      "family": "wr50_family",
+      "bucket": "fresh_flat_abs_lt_0_5",
+      "closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate_pct": "n/a",
+      "closed_pnl_aed": "0.0000",
+      "avg_pnl_aed": "n/a",
+      "profit_factor": "n/a"
+    },
+    {
+      "family": "wr50_family",
+      "bucket": "mild_with_0_5_to_1_5",
+      "closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate_pct": "n/a",
+      "closed_pnl_aed": "0.0000",
+      "avg_pnl_aed": "n/a",
+      "profit_factor": "n/a"
+    },
+    {
+      "family": "wr50_family",
+      "bucket": "extended_with_gt_1_5",
+      "closed": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate_pct": "0.00",
+      "closed_pnl_aed": "-63.3900",
+      "avg_pnl_aed": "-21.1300",
+      "profit_factor": "0.0000"
+    }
+  ],
+  "threshold_scoreboard": [
+    {
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 949,
+        "wins": 350,
+        "losses": 574,
+        "win_rate_pct": "36.88",
+        "closed_pnl_aed": "-776.7100",
+        "avg_pnl_aed": "-0.8185",
+        "profit_factor": "0.9544"
+      },
+      "kept": {
+        "closed": 635,
+        "wins": 264,
+        "losses": 356,
+        "win_rate_pct": "41.57",
+        "closed_pnl_aed": "2222.2400",
+        "avg_pnl_aed": "3.4996",
+        "profit_factor": "1.2207"
+      },
+      "blocked": {
+        "closed": 314,
+        "wins": 86,
+        "losses": 218,
+        "win_rate_pct": "27.39",
+        "closed_pnl_aed": "-2998.9500",
+        "avg_pnl_aed": "-9.5508",
+        "profit_factor": "0.5703"
+      },
+      "shadow_net_delta_aed": "2998.9500",
+      "kept_share_pct": "66.91",
+      "duplicate_hidden_baseline": {
+        "closed": 492,
+        "wins": 171,
+        "losses": 309,
+        "win_rate_pct": "34.76",
+        "closed_pnl_aed": "-1378.7700",
+        "avg_pnl_aed": "-2.8024",
+        "profit_factor": "0.8389"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 327,
+        "wins": 129,
+        "losses": 193,
+        "win_rate_pct": "39.45",
+        "closed_pnl_aed": "416.6800",
+        "avg_pnl_aed": "1.2743",
+        "profit_factor": "1.0814"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 165,
+        "wins": 42,
+        "losses": 116,
+        "win_rate_pct": "25.45",
+        "closed_pnl_aed": "-1795.4500",
+        "avg_pnl_aed": "-10.8815",
+        "profit_factor": "0.4776"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1795.4500",
+      "duplicate_hidden_kept_share_pct": "66.46"
+    },
+    {
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 949,
+        "wins": 350,
+        "losses": 574,
+        "win_rate_pct": "36.88",
+        "closed_pnl_aed": "-776.7100",
+        "avg_pnl_aed": "-0.8185",
+        "profit_factor": "0.9544"
+      },
+      "kept": {
+        "closed": 712,
+        "wins": 290,
+        "losses": 407,
+        "win_rate_pct": "40.73",
+        "closed_pnl_aed": "2044.0800",
+        "avg_pnl_aed": "2.8709",
+        "profit_factor": "1.1760"
+      },
+      "blocked": {
+        "closed": 237,
+        "wins": 60,
+        "losses": 167,
+        "win_rate_pct": "25.32",
+        "closed_pnl_aed": "-2820.7900",
+        "avg_pnl_aed": "-11.9021",
+        "profit_factor": "0.4809"
+      },
+      "shadow_net_delta_aed": "2820.7900",
+      "kept_share_pct": "75.03",
+      "duplicate_hidden_baseline": {
+        "closed": 492,
+        "wins": 171,
+        "losses": 309,
+        "win_rate_pct": "34.76",
+        "closed_pnl_aed": "-1378.7700",
+        "avg_pnl_aed": "-2.8024",
+        "profit_factor": "0.8389"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 367,
+        "wins": 141,
+        "losses": 221,
+        "win_rate_pct": "38.42",
+        "closed_pnl_aed": "45.9900",
+        "avg_pnl_aed": "0.1253",
+        "profit_factor": "1.0078"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 125,
+        "wins": 30,
+        "losses": 88,
+        "win_rate_pct": "24.00",
+        "closed_pnl_aed": "-1424.7600",
+        "avg_pnl_aed": "-11.3981",
+        "profit_factor": "0.4592"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1424.7600",
+      "duplicate_hidden_kept_share_pct": "74.59"
+    },
+    {
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 949,
+        "wins": 350,
+        "losses": 574,
+        "win_rate_pct": "36.88",
+        "closed_pnl_aed": "-776.7100",
+        "avg_pnl_aed": "-0.8185",
+        "profit_factor": "0.9544"
+      },
+      "kept": {
+        "closed": 768,
+        "wins": 303,
+        "losses": 450,
+        "win_rate_pct": "39.45",
+        "closed_pnl_aed": "1189.7000",
+        "avg_pnl_aed": "1.5491",
+        "profit_factor": "1.0924"
+      },
+      "blocked": {
+        "closed": 181,
+        "wins": 47,
+        "losses": 124,
+        "win_rate_pct": "25.97",
+        "closed_pnl_aed": "-1966.4100",
+        "avg_pnl_aed": "-10.8641",
+        "profit_factor": "0.5298"
+      },
+      "shadow_net_delta_aed": "1966.4100",
+      "kept_share_pct": "80.93",
+      "duplicate_hidden_baseline": {
+        "closed": 492,
+        "wins": 171,
+        "losses": 309,
+        "win_rate_pct": "34.76",
+        "closed_pnl_aed": "-1378.7700",
+        "avg_pnl_aed": "-2.8024",
+        "profit_factor": "0.8389"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 398,
+        "wins": 148,
+        "losses": 245,
+        "win_rate_pct": "37.19",
+        "closed_pnl_aed": "-387.6100",
+        "avg_pnl_aed": "-0.9739",
+        "profit_factor": "0.9409"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 94,
+        "wins": 23,
+        "losses": 64,
+        "win_rate_pct": "24.47",
+        "closed_pnl_aed": "-991.1600",
+        "avg_pnl_aed": "-10.5443",
+        "profit_factor": "0.5039"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "991.1600",
+      "duplicate_hidden_kept_share_pct": "80.89"
+    }
+  ],
+  "threshold_scoreboard_by_family": [
+    {
+      "family": "round_retest_family",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 811,
+        "wins": 300,
+        "losses": 496,
+        "win_rate_pct": "36.99",
+        "closed_pnl_aed": "-1285.0600",
+        "avg_pnl_aed": "-1.5845",
+        "profit_factor": "0.9176"
+      },
+      "kept": {
+        "closed": 543,
+        "wins": 232,
+        "losses": 300,
+        "win_rate_pct": "42.73",
+        "closed_pnl_aed": "1862.7800",
+        "avg_pnl_aed": "3.4305",
+        "profit_factor": "1.2069"
+      },
+      "blocked": {
+        "closed": 268,
+        "wins": 68,
+        "losses": 196,
+        "win_rate_pct": "25.37",
+        "closed_pnl_aed": "-3147.8400",
+        "avg_pnl_aed": "-11.7457",
+        "profit_factor": "0.5221"
+      },
+      "shadow_net_delta_aed": "3147.8400",
+      "kept_share_pct": "66.95",
+      "duplicate_hidden_baseline": {
+        "closed": 405,
+        "wins": 145,
+        "losses": 254,
+        "win_rate_pct": "35.80",
+        "closed_pnl_aed": "-1208.1700",
+        "avg_pnl_aed": "-2.9831",
+        "profit_factor": "0.8425"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 272,
+        "wins": 113,
+        "losses": 156,
+        "win_rate_pct": "41.54",
+        "closed_pnl_aed": "554.4400",
+        "avg_pnl_aed": "2.0384",
+        "profit_factor": "1.1232"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 133,
+        "wins": 32,
+        "losses": 98,
+        "win_rate_pct": "24.06",
+        "closed_pnl_aed": "-1762.6100",
+        "avg_pnl_aed": "-13.2527",
+        "profit_factor": "0.4442"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1762.6100",
+      "duplicate_hidden_kept_share_pct": "67.16"
+    },
+    {
+      "family": "round_retest_family",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 811,
+        "wins": 300,
+        "losses": 496,
+        "win_rate_pct": "36.99",
+        "closed_pnl_aed": "-1285.0600",
+        "avg_pnl_aed": "-1.5845",
+        "profit_factor": "0.9176"
+      },
+      "kept": {
+        "closed": 611,
+        "wins": 253,
+        "losses": 347,
+        "win_rate_pct": "41.41",
+        "closed_pnl_aed": "1555.4200",
+        "avg_pnl_aed": "2.5457",
+        "profit_factor": "1.1481"
+      },
+      "blocked": {
+        "closed": 200,
+        "wins": 47,
+        "losses": 149,
+        "win_rate_pct": "23.50",
+        "closed_pnl_aed": "-2840.4800",
+        "avg_pnl_aed": "-14.2024",
+        "profit_factor": "0.4420"
+      },
+      "shadow_net_delta_aed": "2840.4800",
+      "kept_share_pct": "75.34",
+      "duplicate_hidden_baseline": {
+        "closed": 405,
+        "wins": 145,
+        "losses": 254,
+        "win_rate_pct": "35.80",
+        "closed_pnl_aed": "-1208.1700",
+        "avg_pnl_aed": "-2.9831",
+        "profit_factor": "0.8425"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 306,
+        "wins": 122,
+        "losses": 181,
+        "win_rate_pct": "39.87",
+        "closed_pnl_aed": "175.8400",
+        "avg_pnl_aed": "0.5746",
+        "profit_factor": "1.0334"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 99,
+        "wins": 23,
+        "losses": 73,
+        "win_rate_pct": "23.23",
+        "closed_pnl_aed": "-1384.0100",
+        "avg_pnl_aed": "-13.9799",
+        "profit_factor": "0.4233"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1384.0100",
+      "duplicate_hidden_kept_share_pct": "75.56"
+    },
+    {
+      "family": "round_retest_family",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 811,
+        "wins": 300,
+        "losses": 496,
+        "win_rate_pct": "36.99",
+        "closed_pnl_aed": "-1285.0600",
+        "avg_pnl_aed": "-1.5845",
+        "profit_factor": "0.9176"
+      },
+      "kept": {
+        "closed": 658,
+        "wins": 262,
+        "losses": 385,
+        "win_rate_pct": "39.82",
+        "closed_pnl_aed": "671.3900",
+        "avg_pnl_aed": "1.0203",
+        "profit_factor": "1.0575"
+      },
+      "blocked": {
+        "closed": 153,
+        "wins": 38,
+        "losses": 111,
+        "win_rate_pct": "24.84",
+        "closed_pnl_aed": "-1956.4500",
+        "avg_pnl_aed": "-12.7873",
+        "profit_factor": "0.5009"
+      },
+      "shadow_net_delta_aed": "1956.4500",
+      "kept_share_pct": "81.13",
+      "duplicate_hidden_baseline": {
+        "closed": 405,
+        "wins": 145,
+        "losses": 254,
+        "win_rate_pct": "35.80",
+        "closed_pnl_aed": "-1208.1700",
+        "avg_pnl_aed": "-2.9831",
+        "profit_factor": "0.8425"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 330,
+        "wins": 127,
+        "losses": 200,
+        "win_rate_pct": "38.48",
+        "closed_pnl_aed": "-233.1700",
+        "avg_pnl_aed": "-0.7066",
+        "profit_factor": "0.9600"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 75,
+        "wins": 18,
+        "losses": 54,
+        "win_rate_pct": "24.00",
+        "closed_pnl_aed": "-975.0000",
+        "avg_pnl_aed": "-13.0000",
+        "profit_factor": "0.4714"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "975.0000",
+      "duplicate_hidden_kept_share_pct": "81.48"
+    },
+    {
+      "family": "session_extreme_family",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 138,
+        "wins": 50,
+        "losses": 78,
+        "win_rate_pct": "36.23",
+        "closed_pnl_aed": "508.3500",
+        "avg_pnl_aed": "3.6837",
+        "profit_factor": "1.3483"
+      },
+      "kept": {
+        "closed": 92,
+        "wins": 32,
+        "losses": 56,
+        "win_rate_pct": "34.78",
+        "closed_pnl_aed": "359.4600",
+        "avg_pnl_aed": "3.9072",
+        "profit_factor": "1.3368"
+      },
+      "blocked": {
+        "closed": 46,
+        "wins": 18,
+        "losses": 22,
+        "win_rate_pct": "39.13",
+        "closed_pnl_aed": "148.8900",
+        "avg_pnl_aed": "3.2367",
+        "profit_factor": "1.3796"
+      },
+      "shadow_net_delta_aed": "-148.8900",
+      "kept_share_pct": "66.67",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 55,
+        "wins": 16,
+        "losses": 37,
+        "win_rate_pct": "29.09",
+        "closed_pnl_aed": "-137.7600",
+        "avg_pnl_aed": "-2.5047",
+        "profit_factor": "0.7779"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 32,
+        "wins": 10,
+        "losses": 18,
+        "win_rate_pct": "31.25",
+        "closed_pnl_aed": "-32.8400",
+        "avg_pnl_aed": "-1.0263",
+        "profit_factor": "0.8764"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "32.8400",
+      "duplicate_hidden_kept_share_pct": "63.22"
+    },
+    {
+      "family": "session_extreme_family",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 138,
+        "wins": 50,
+        "losses": 78,
+        "win_rate_pct": "36.23",
+        "closed_pnl_aed": "508.3500",
+        "avg_pnl_aed": "3.6837",
+        "profit_factor": "1.3483"
+      },
+      "kept": {
+        "closed": 101,
+        "wins": 37,
+        "losses": 60,
+        "win_rate_pct": "36.63",
+        "closed_pnl_aed": "488.6600",
+        "avg_pnl_aed": "4.8382",
+        "profit_factor": "1.4378"
+      },
+      "blocked": {
+        "closed": 37,
+        "wins": 13,
+        "losses": 18,
+        "win_rate_pct": "35.14",
+        "closed_pnl_aed": "19.6900",
+        "avg_pnl_aed": "0.5322",
+        "profit_factor": "1.0574"
+      },
+      "shadow_net_delta_aed": "-19.6900",
+      "kept_share_pct": "73.19",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 61,
+        "wins": 19,
+        "losses": 40,
+        "win_rate_pct": "31.15",
+        "closed_pnl_aed": "-129.8500",
+        "avg_pnl_aed": "-2.1287",
+        "profit_factor": "0.8005"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 26,
+        "wins": 7,
+        "losses": 15,
+        "win_rate_pct": "26.92",
+        "closed_pnl_aed": "-40.7500",
+        "avg_pnl_aed": "-1.5673",
+        "profit_factor": "0.8266"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "40.7500",
+      "duplicate_hidden_kept_share_pct": "70.11"
+    },
+    {
+      "family": "session_extreme_family",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 138,
+        "wins": 50,
+        "losses": 78,
+        "win_rate_pct": "36.23",
+        "closed_pnl_aed": "508.3500",
+        "avg_pnl_aed": "3.6837",
+        "profit_factor": "1.3483"
+      },
+      "kept": {
+        "closed": 110,
+        "wins": 41,
+        "losses": 65,
+        "win_rate_pct": "37.27",
+        "closed_pnl_aed": "518.3100",
+        "avg_pnl_aed": "4.7119",
+        "profit_factor": "1.4328"
+      },
+      "blocked": {
+        "closed": 28,
+        "wins": 9,
+        "losses": 13,
+        "win_rate_pct": "32.14",
+        "closed_pnl_aed": "-9.9600",
+        "avg_pnl_aed": "-0.3557",
+        "profit_factor": "0.9620"
+      },
+      "shadow_net_delta_aed": "9.9600",
+      "kept_share_pct": "79.71",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 68,
+        "wins": 21,
+        "losses": 45,
+        "win_rate_pct": "30.88",
+        "closed_pnl_aed": "-154.4400",
+        "avg_pnl_aed": "-2.2712",
+        "profit_factor": "0.7891"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 19,
+        "wins": 5,
+        "losses": 10,
+        "win_rate_pct": "26.32",
+        "closed_pnl_aed": "-16.1600",
+        "avg_pnl_aed": "-0.8505",
+        "profit_factor": "0.8948"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "16.1600",
+      "duplicate_hidden_kept_share_pct": "78.16"
+    }
+  ],
+  "threshold_scoreboard_by_candidate": [
+    {
+      "candidate": "round_number_retest_v0",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 350,
+        "wins": 128,
+        "losses": 217,
+        "win_rate_pct": "36.57",
+        "closed_pnl_aed": "-709.3300",
+        "avg_pnl_aed": "-2.0267",
+        "profit_factor": "0.8990"
+      },
+      "kept": {
+        "closed": 237,
+        "wins": 101,
+        "losses": 132,
+        "win_rate_pct": "42.62",
+        "closed_pnl_aed": "820.9100",
+        "avg_pnl_aed": "3.4638",
+        "profit_factor": "1.2020"
+      },
+      "blocked": {
+        "closed": 113,
+        "wins": 27,
+        "losses": 85,
+        "win_rate_pct": "23.89",
+        "closed_pnl_aed": "-1530.2400",
+        "avg_pnl_aed": "-13.5419",
+        "profit_factor": "0.4824"
+      },
+      "shadow_net_delta_aed": "1530.2400",
+      "kept_share_pct": "67.71",
+      "duplicate_hidden_baseline": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 350,
+        "wins": 128,
+        "losses": 217,
+        "win_rate_pct": "36.57",
+        "closed_pnl_aed": "-709.3300",
+        "avg_pnl_aed": "-2.0267",
+        "profit_factor": "0.8990"
+      },
+      "kept": {
+        "closed": 265,
+        "wins": 109,
+        "losses": 152,
+        "win_rate_pct": "41.13",
+        "closed_pnl_aed": "585.8000",
+        "avg_pnl_aed": "2.2106",
+        "profit_factor": "1.1236"
+      },
+      "blocked": {
+        "closed": 85,
+        "wins": 19,
+        "losses": 65,
+        "win_rate_pct": "22.35",
+        "closed_pnl_aed": "-1295.1300",
+        "avg_pnl_aed": "-15.2368",
+        "profit_factor": "0.4325"
+      },
+      "shadow_net_delta_aed": "1295.1300",
+      "kept_share_pct": "75.71",
+      "duplicate_hidden_baseline": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 350,
+        "wins": 128,
+        "losses": 217,
+        "win_rate_pct": "36.57",
+        "closed_pnl_aed": "-709.3300",
+        "avg_pnl_aed": "-2.0267",
+        "profit_factor": "0.8990"
+      },
+      "kept": {
+        "closed": 287,
+        "wins": 113,
+        "losses": 170,
+        "win_rate_pct": "39.37",
+        "closed_pnl_aed": "153.2600",
+        "avg_pnl_aed": "0.5340",
+        "profit_factor": "1.0289"
+      },
+      "blocked": {
+        "closed": 63,
+        "wins": 15,
+        "losses": 47,
+        "win_rate_pct": "23.81",
+        "closed_pnl_aed": "-862.5900",
+        "avg_pnl_aed": "-13.6919",
+        "profit_factor": "0.4953"
+      },
+      "shadow_net_delta_aed": "862.5900",
+      "kept_share_pct": "82.00",
+      "duplicate_hidden_baseline": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_pct": "33.33",
+        "closed_pnl_aed": "11.7600",
+        "avg_pnl_aed": "3.9200",
+        "profit_factor": "1.3814"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 118,
+        "wins": 39,
+        "losses": 70,
+        "win_rate_pct": "33.05",
+        "closed_pnl_aed": "123.0200",
+        "avg_pnl_aed": "1.0425",
+        "profit_factor": "1.0975"
+      },
+      "kept": {
+        "closed": 75,
+        "wins": 24,
+        "losses": 48,
+        "win_rate_pct": "32.00",
+        "closed_pnl_aed": "101.6300",
+        "avg_pnl_aed": "1.3551",
+        "profit_factor": "1.1169"
+      },
+      "blocked": {
+        "closed": 43,
+        "wins": 15,
+        "losses": 22,
+        "win_rate_pct": "34.88",
+        "closed_pnl_aed": "21.3900",
+        "avg_pnl_aed": "0.4974",
+        "profit_factor": "1.0545"
+      },
+      "shadow_net_delta_aed": "-21.3900",
+      "kept_share_pct": "63.56",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 55,
+        "wins": 16,
+        "losses": 37,
+        "win_rate_pct": "29.09",
+        "closed_pnl_aed": "-137.7600",
+        "avg_pnl_aed": "-2.5047",
+        "profit_factor": "0.7779"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 32,
+        "wins": 10,
+        "losses": 18,
+        "win_rate_pct": "31.25",
+        "closed_pnl_aed": "-32.8400",
+        "avg_pnl_aed": "-1.0263",
+        "profit_factor": "0.8764"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "32.8400",
+      "duplicate_hidden_kept_share_pct": "63.22"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 118,
+        "wins": 39,
+        "losses": 70,
+        "win_rate_pct": "33.05",
+        "closed_pnl_aed": "123.0200",
+        "avg_pnl_aed": "1.0425",
+        "profit_factor": "1.0975"
+      },
+      "kept": {
+        "closed": 83,
+        "wins": 28,
+        "losses": 52,
+        "win_rate_pct": "33.73",
+        "closed_pnl_aed": "161.0000",
+        "avg_pnl_aed": "1.9398",
+        "profit_factor": "1.1752"
+      },
+      "blocked": {
+        "closed": 35,
+        "wins": 11,
+        "losses": 18,
+        "win_rate_pct": "31.43",
+        "closed_pnl_aed": "-37.9800",
+        "avg_pnl_aed": "-1.0851",
+        "profit_factor": "0.8894"
+      },
+      "shadow_net_delta_aed": "37.9800",
+      "kept_share_pct": "70.34",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 61,
+        "wins": 19,
+        "losses": 40,
+        "win_rate_pct": "31.15",
+        "closed_pnl_aed": "-129.8500",
+        "avg_pnl_aed": "-2.1287",
+        "profit_factor": "0.8005"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 26,
+        "wins": 7,
+        "losses": 15,
+        "win_rate_pct": "26.92",
+        "closed_pnl_aed": "-40.7500",
+        "avg_pnl_aed": "-1.5673",
+        "profit_factor": "0.8266"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "40.7500",
+      "duplicate_hidden_kept_share_pct": "70.11"
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 118,
+        "wins": 39,
+        "losses": 70,
+        "win_rate_pct": "33.05",
+        "closed_pnl_aed": "123.0200",
+        "avg_pnl_aed": "1.0425",
+        "profit_factor": "1.0975"
+      },
+      "kept": {
+        "closed": 91,
+        "wins": 31,
+        "losses": 57,
+        "win_rate_pct": "34.07",
+        "closed_pnl_aed": "163.5300",
+        "avg_pnl_aed": "1.7970",
+        "profit_factor": "1.1635"
+      },
+      "blocked": {
+        "closed": 27,
+        "wins": 8,
+        "losses": 13,
+        "win_rate_pct": "29.63",
+        "closed_pnl_aed": "-40.5100",
+        "avg_pnl_aed": "-1.5004",
+        "profit_factor": "0.8453"
+      },
+      "shadow_net_delta_aed": "40.5100",
+      "kept_share_pct": "77.12",
+      "duplicate_hidden_baseline": {
+        "closed": 87,
+        "wins": 26,
+        "losses": 55,
+        "win_rate_pct": "29.89",
+        "closed_pnl_aed": "-170.6000",
+        "avg_pnl_aed": "-1.9609",
+        "profit_factor": "0.8075"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 68,
+        "wins": 21,
+        "losses": 45,
+        "win_rate_pct": "30.88",
+        "closed_pnl_aed": "-154.4400",
+        "avg_pnl_aed": "-2.2712",
+        "profit_factor": "0.7891"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 19,
+        "wins": 5,
+        "losses": 10,
+        "win_rate_pct": "26.32",
+        "closed_pnl_aed": "-16.1600",
+        "avg_pnl_aed": "-0.8505",
+        "profit_factor": "0.8948"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "16.1600",
+      "duplicate_hidden_kept_share_pct": "78.16"
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 20,
+        "wins": 11,
+        "losses": 8,
+        "win_rate_pct": "55.00",
+        "closed_pnl_aed": "385.3300",
+        "avg_pnl_aed": "19.2665",
+        "profit_factor": "2.9504"
+      },
+      "kept": {
+        "closed": 17,
+        "wins": 8,
+        "losses": 8,
+        "win_rate_pct": "47.06",
+        "closed_pnl_aed": "257.8300",
+        "avg_pnl_aed": "15.1665",
+        "profit_factor": "2.3051"
+      },
+      "blocked": {
+        "closed": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": "100.00",
+        "closed_pnl_aed": "127.5000",
+        "avg_pnl_aed": "42.5000",
+        "profit_factor": "inf"
+      },
+      "shadow_net_delta_aed": "-127.5000",
+      "kept_share_pct": "85.00",
+      "duplicate_hidden_baseline": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "n/a"
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 20,
+        "wins": 11,
+        "losses": 8,
+        "win_rate_pct": "55.00",
+        "closed_pnl_aed": "385.3300",
+        "avg_pnl_aed": "19.2665",
+        "profit_factor": "2.9504"
+      },
+      "kept": {
+        "closed": 18,
+        "wins": 9,
+        "losses": 8,
+        "win_rate_pct": "50.00",
+        "closed_pnl_aed": "327.6600",
+        "avg_pnl_aed": "18.2033",
+        "profit_factor": "2.6585"
+      },
+      "blocked": {
+        "closed": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": "100.00",
+        "closed_pnl_aed": "57.6700",
+        "avg_pnl_aed": "28.8350",
+        "profit_factor": "inf"
+      },
+      "shadow_net_delta_aed": "-57.6700",
+      "kept_share_pct": "90.00",
+      "duplicate_hidden_baseline": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "n/a"
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 20,
+        "wins": 11,
+        "losses": 8,
+        "win_rate_pct": "55.00",
+        "closed_pnl_aed": "385.3300",
+        "avg_pnl_aed": "19.2665",
+        "profit_factor": "2.9504"
+      },
+      "kept": {
+        "closed": 19,
+        "wins": 10,
+        "losses": 8,
+        "win_rate_pct": "52.63",
+        "closed_pnl_aed": "354.7800",
+        "avg_pnl_aed": "18.6726",
+        "profit_factor": "2.7958"
+      },
+      "blocked": {
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": "100.00",
+        "closed_pnl_aed": "30.5500",
+        "avg_pnl_aed": "30.5500",
+        "profit_factor": "inf"
+      },
+      "shadow_net_delta_aed": "-30.5500",
+      "kept_share_pct": "95.00",
+      "duplicate_hidden_baseline": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "n/a"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 426,
+        "wins": 157,
+        "losses": 262,
+        "win_rate_pct": "36.85",
+        "closed_pnl_aed": "-845.6800",
+        "avg_pnl_aed": "-1.9852",
+        "profit_factor": "0.8928"
+      },
+      "kept": {
+        "closed": 282,
+        "wins": 121,
+        "losses": 157,
+        "win_rate_pct": "42.91",
+        "closed_pnl_aed": "827.1400",
+        "avg_pnl_aed": "2.9331",
+        "profit_factor": "1.1814"
+      },
+      "blocked": {
+        "closed": 144,
+        "wins": 36,
+        "losses": 105,
+        "win_rate_pct": "25.00",
+        "closed_pnl_aed": "-1672.8200",
+        "avg_pnl_aed": "-11.6168",
+        "profit_factor": "0.4978"
+      },
+      "shadow_net_delta_aed": "1672.8200",
+      "kept_share_pct": "66.20",
+      "duplicate_hidden_baseline": {
+        "closed": 401,
+        "wins": 144,
+        "losses": 251,
+        "win_rate_pct": "35.91",
+        "closed_pnl_aed": "-1197.7000",
+        "avg_pnl_aed": "-2.9868",
+        "profit_factor": "0.8428"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 268,
+        "wins": 112,
+        "losses": 153,
+        "win_rate_pct": "41.79",
+        "closed_pnl_aed": "564.9100",
+        "avg_pnl_aed": "2.1079",
+        "profit_factor": "1.1271"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 133,
+        "wins": 32,
+        "losses": 98,
+        "win_rate_pct": "24.06",
+        "closed_pnl_aed": "-1762.6100",
+        "avg_pnl_aed": "-13.2527",
+        "profit_factor": "0.4442"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1762.6100",
+      "duplicate_hidden_kept_share_pct": "66.83"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 426,
+        "wins": 157,
+        "losses": 262,
+        "win_rate_pct": "36.85",
+        "closed_pnl_aed": "-845.6800",
+        "avg_pnl_aed": "-1.9852",
+        "profit_factor": "0.8928"
+      },
+      "kept": {
+        "closed": 318,
+        "wins": 131,
+        "losses": 183,
+        "win_rate_pct": "41.19",
+        "closed_pnl_aed": "537.7100",
+        "avg_pnl_aed": "1.6909",
+        "profit_factor": "1.1005"
+      },
+      "blocked": {
+        "closed": 108,
+        "wins": 26,
+        "losses": 79,
+        "win_rate_pct": "24.07",
+        "closed_pnl_aed": "-1383.3900",
+        "avg_pnl_aed": "-12.8092",
+        "profit_factor": "0.4551"
+      },
+      "shadow_net_delta_aed": "1383.3900",
+      "kept_share_pct": "74.65",
+      "duplicate_hidden_baseline": {
+        "closed": 401,
+        "wins": 144,
+        "losses": 251,
+        "win_rate_pct": "35.91",
+        "closed_pnl_aed": "-1197.7000",
+        "avg_pnl_aed": "-2.9868",
+        "profit_factor": "0.8428"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 302,
+        "wins": 121,
+        "losses": 178,
+        "win_rate_pct": "40.07",
+        "closed_pnl_aed": "186.3100",
+        "avg_pnl_aed": "0.6169",
+        "profit_factor": "1.0357"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 99,
+        "wins": 23,
+        "losses": 73,
+        "win_rate_pct": "23.23",
+        "closed_pnl_aed": "-1384.0100",
+        "avg_pnl_aed": "-13.9799",
+        "profit_factor": "0.4233"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "1384.0100",
+      "duplicate_hidden_kept_share_pct": "75.31"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 426,
+        "wins": 157,
+        "losses": 262,
+        "win_rate_pct": "36.85",
+        "closed_pnl_aed": "-845.6800",
+        "avg_pnl_aed": "-1.9852",
+        "profit_factor": "0.8928"
+      },
+      "kept": {
+        "closed": 343,
+        "wins": 136,
+        "losses": 203,
+        "win_rate_pct": "39.65",
+        "closed_pnl_aed": "86.2200",
+        "avg_pnl_aed": "0.2514",
+        "profit_factor": "1.0145"
+      },
+      "blocked": {
+        "closed": 83,
+        "wins": 21,
+        "losses": 59,
+        "win_rate_pct": "25.30",
+        "closed_pnl_aed": "-931.9000",
+        "avg_pnl_aed": "-11.2277",
+        "profit_factor": "0.5198"
+      },
+      "shadow_net_delta_aed": "931.9000",
+      "kept_share_pct": "80.52",
+      "duplicate_hidden_baseline": {
+        "closed": 401,
+        "wins": 144,
+        "losses": 251,
+        "win_rate_pct": "35.91",
+        "closed_pnl_aed": "-1197.7000",
+        "avg_pnl_aed": "-2.9868",
+        "profit_factor": "0.8428"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 326,
+        "wins": 126,
+        "losses": 197,
+        "win_rate_pct": "38.65",
+        "closed_pnl_aed": "-222.7000",
+        "avg_pnl_aed": "-0.6831",
+        "profit_factor": "0.9614"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 75,
+        "wins": 18,
+        "losses": 54,
+        "win_rate_pct": "24.00",
+        "closed_pnl_aed": "-975.0000",
+        "avg_pnl_aed": "-13.0000",
+        "profit_factor": "0.4714"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "975.0000",
+      "duplicate_hidden_kept_share_pct": "81.30"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "threshold": -1.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 35,
+        "wins": 15,
+        "losses": 17,
+        "win_rate_pct": "42.86",
+        "closed_pnl_aed": "269.9500",
+        "avg_pnl_aed": "7.7129",
+        "profit_factor": "1.3969"
+      },
+      "kept": {
+        "closed": 24,
+        "wins": 10,
+        "losses": 11,
+        "win_rate_pct": "41.67",
+        "closed_pnl_aed": "214.7300",
+        "avg_pnl_aed": "8.9471",
+        "profit_factor": "1.5638"
+      },
+      "blocked": {
+        "closed": 11,
+        "wins": 5,
+        "losses": 6,
+        "win_rate_pct": "45.45",
+        "closed_pnl_aed": "55.2200",
+        "avg_pnl_aed": "5.0200",
+        "profit_factor": "1.1845"
+      },
+      "shadow_net_delta_aed": "-55.2200",
+      "kept_share_pct": "68.57",
+      "duplicate_hidden_baseline": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "threshold": -1.5,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 35,
+        "wins": 15,
+        "losses": 17,
+        "win_rate_pct": "42.86",
+        "closed_pnl_aed": "269.9500",
+        "avg_pnl_aed": "7.7129",
+        "profit_factor": "1.3969"
+      },
+      "kept": {
+        "closed": 28,
+        "wins": 13,
+        "losses": 12,
+        "win_rate_pct": "46.43",
+        "closed_pnl_aed": "431.9100",
+        "avg_pnl_aed": "15.4254",
+        "profit_factor": "2.0527"
+      },
+      "blocked": {
+        "closed": 7,
+        "wins": 2,
+        "losses": 5,
+        "win_rate_pct": "28.57",
+        "closed_pnl_aed": "-161.9600",
+        "avg_pnl_aed": "-23.1371",
+        "profit_factor": "0.3999"
+      },
+      "shadow_net_delta_aed": "161.9600",
+      "kept_share_pct": "80.00",
+      "duplicate_hidden_baseline": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "threshold": -2.0,
+      "scope": "raw_all_target_rows",
+      "baseline": {
+        "closed": 35,
+        "wins": 15,
+        "losses": 17,
+        "win_rate_pct": "42.86",
+        "closed_pnl_aed": "269.9500",
+        "avg_pnl_aed": "7.7129",
+        "profit_factor": "1.3969"
+      },
+      "kept": {
+        "closed": 28,
+        "wins": 13,
+        "losses": 12,
+        "win_rate_pct": "46.43",
+        "closed_pnl_aed": "431.9100",
+        "avg_pnl_aed": "15.4254",
+        "profit_factor": "2.0527"
+      },
+      "blocked": {
+        "closed": 7,
+        "wins": 2,
+        "losses": 5,
+        "win_rate_pct": "28.57",
+        "closed_pnl_aed": "-161.9600",
+        "avg_pnl_aed": "-23.1371",
+        "profit_factor": "0.3999"
+      },
+      "shadow_net_delta_aed": "161.9600",
+      "kept_share_pct": "80.00",
+      "duplicate_hidden_baseline": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_kept": {
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": "0.00",
+        "closed_pnl_aed": "-22.2300",
+        "avg_pnl_aed": "-22.2300",
+        "profit_factor": "0.0000"
+      },
+      "duplicate_hidden_blocked": {
+        "closed": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": "n/a",
+        "closed_pnl_aed": "0.0000",
+        "avg_pnl_aed": "n/a",
+        "profit_factor": "n/a"
+      },
+      "duplicate_hidden_shadow_net_delta_aed": "0.0000",
+      "duplicate_hidden_kept_share_pct": "100.00"
+    }
+  ],
+  "breakout_control": {
+    "closed": 400,
+    "wins": 147,
+    "losses": 245,
+    "win_rate_pct": "36.75",
+    "closed_pnl_aed": "869.0000",
+    "avg_pnl_aed": "2.1725",
+    "profit_factor": "1.1896"
+  },
+  "notes": [
+    "ret12_atr = (last closed M5 close - close 12 completed M5 bars earlier) / ATR14.",
+    "impulse_alignment = direction_sign * ret12_atr; negative values mean the trade fights the latest impulse.",
+    "Thresholds are pre-registered for weak families only: round_retest_family and session_extreme_family.",
+    "Open trades are enriched in the row CSV but excluded from threshold PnL scoreboards.",
+    "Duplicate rows are retained in the raw row export; scoreboard rows also include duplicate-hidden summaries."
+  ]
+}
