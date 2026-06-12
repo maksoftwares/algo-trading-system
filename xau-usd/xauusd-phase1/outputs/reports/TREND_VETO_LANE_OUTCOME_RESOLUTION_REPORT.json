@@ -1,0 +1,433 @@
+{
+  "status": "PARTIAL_REVIEW_BARS_SUPPLIED",
+  "created_at_utc": "2026-06-12T10:28:36.046395Z",
+  "authority": "Read-only outcome resolution for observer signals. It joins to exported broker trades and optionally replays executor-faithful synthetic SL/TP against supplied M5 bars. It does not touch MT5 runtime, orders, positions, profiles, charts, or running EAs.",
+  "replay_model": "executor_v2",
+  "scoreboard_mode": "broker_joined_only",
+  "shadow_files_dir": "C:\\MT5PortableTrendGuardedFixObservers\\MQL5\\Files",
+  "signal_glob": "trend_guarded_fix_observer_v2_signal_log_*.csv",
+  "actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+  "bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
+  "cost_model_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+  "signal_count": 45,
+  "actual_trade_rows": 1372,
+  "resolved_count": 4,
+  "broker_join_resolved_count": 4,
+  "replay_resolved_count": 0,
+  "unresolved_count": 41,
+  "by_resolution_status": [
+    {
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 25
+    },
+    {
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 16
+    },
+    {
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 4
+    }
+  ],
+  "by_resolution_source": [
+    {
+      "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 25
+    },
+    {
+      "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 16
+    },
+    {
+      "resolution_source": "broker_trade_join",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 4
+    }
+  ],
+  "by_candidate": [
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "count": 14
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "count": 12
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "count": 6
+    },
+    {
+      "candidate": "breakout_retest",
+      "count": 5
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "count": 5
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "count": 3
+    }
+  ],
+  "by_candidate_status": [
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 7
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 7
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 5
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 4
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 3
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 3
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 3
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 2
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 2
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 2
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 2
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    },
+    {
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 1
+    }
+  ],
+  "by_proposed_v2_action": [
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 18
+    },
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 10
+    },
+    {
+      "proposed_v2_shadow_action": "KEEP",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 7
+    },
+    {
+      "proposed_v2_shadow_action": "KEEP",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 6
+    },
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 4
+    }
+  ],
+  "by_time_bucket": [
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 25
+    },
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 14
+    },
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 4
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 2
+    }
+  ],
+  "bar_quality": [
+    {
+      "symbol": "EURUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2696,
+      "unique_bar_times": 2696,
+      "first_bar": "2026-06-01 00:00:00",
+      "last_bar": "2026-06-12 09:15:00",
+      "expected_rows_from_first_to_last": 3280,
+      "continuity_pct": "82.20",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0",
+      "duplicate_bar_times": 0
+    },
+    {
+      "symbol": "GBPUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2696,
+      "unique_bar_times": 2696,
+      "first_bar": "2026-06-01 00:00:00",
+      "last_bar": "2026-06-12 09:15:00",
+      "expected_rows_from_first_to_last": 3280,
+      "continuity_pct": "82.20",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0",
+      "duplicate_bar_times": 0
+    },
+    {
+      "symbol": "XAUUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2596,
+      "unique_bar_times": 2596,
+      "first_bar": "2026-06-01 00:00:00",
+      "last_bar": "2026-06-12 09:15:00",
+      "expected_rows_from_first_to_last": 3280,
+      "continuity_pct": "79.15",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2945.0",
+      "duplicate_bar_times": 0
+    }
+  ],
+  "scoreboard_rows": [
+    {
+      "aggregation_level": "candidate",
+      "group": "round_number_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "KEEP",
+      "fixed_shadow_action": "KEEP",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-39.90",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5000",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "round_number_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "SHORT",
+      "normalized_direction": "SELL",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "BLOCK",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-19.44",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4990",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "symbol_normalized_round_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "KEEP",
+      "fixed_shadow_action": "KEEP",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-40.16",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5000",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "symbol_normalized_round_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "SHORT",
+      "normalized_direction": "SELL",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "BLOCK",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-19.44",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4990",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "family",
+      "group": "round",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "KEEP",
+      "fixed_shadow_action": "KEEP",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-40.16",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5000",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "family",
+      "group": "round",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "direction": "SHORT",
+      "normalized_direction": "SELL",
+      "legacy_shadow_action": "",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "BLOCK",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-19.44",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4990",
+      "net_breakeven_wr_pct": ""
+    }
+  ],
+  "scoreboard_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\TREND_VETO_LANE_SCOREBOARD.json",
+  "scoreboard_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\TREND_VETO_LANE_SCOREBOARD.md",
+  "scoreboard_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\TREND_VETO_LANE_SCOREBOARD.csv",
+  "notes": [
+    "Broker-trade join is the preferred proof when the demo EA actually took the same signal.",
+    "M5 replay is only used when a bars_dir is provided and matching June 2026 bars exist.",
+    "Replay model executor_v2 simulates Phase2ExperimentalDemoExecutor.SendDemoMarketOrder: next-M5-open entry, measured spread adjustment, stop floor, synthetic SL/TP, and adverse-first same-bar exits.",
+    "Replay uses adverse-first same-bar ordering, so if SL and TP are both touched in the same M5 bar the row is scored as SL.",
+    "Rows without broker match or bars are left unresolved; no outcome is guessed.",
+    "Observer LONG/SHORT directions are normalized to broker BUY/SELL only for matching and replay; the original direction is preserved.",
+    "Replay rows include gross R, estimated cost R, and net R. v1 plan-replay columns are retained only for calibration diffing.",
+    "Portfolio-level totals must use the family rollup because clone EAs can emit duplicate same-family signals.",
+    "Proposed v2 shadow policy blocks the round-retest clone family: symbol_normalized_round_retest_v0 and round_number_retest_v0."
+  ]
+}

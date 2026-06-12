@@ -61,10 +61,12 @@ def test_outcome_resolution_matches_broker_trade_with_one_minute_tolerance(tmp_p
     assert rows[0]["matched_position_ticket"] == "123"
     assert rows[0]["actual_profit_aed"] == "25.00"
     scoreboard = json.loads(
-        (tmp_path / "outputs" / "reports" / "OBSERVER_TREND_VETO_SCOREBOARD.json").read_text(encoding="utf-8")
+        (tmp_path / "outputs" / "reports" / "OBSERVER_SHADOW_POLICY_SCOREBOARD.json").read_text(encoding="utf-8")
     )
     assert scoreboard["broker_join_resolved_count"] == 1
     assert scoreboard["replay_resolved_count"] == 0
+    assert scoreboard["rows"][0]["aggregation_level"] == "candidate"
+    assert scoreboard["rows"][0]["family"] == "breakout"
 
 
 def test_outcome_resolution_marks_round_retest_clone_family_as_proposed_block(tmp_path: Path):
@@ -128,7 +130,15 @@ def test_outcome_resolution_replays_m5_bars_when_supplied(tmp_path: Path):
             {
                 "bar_start_utc": "2026-06-12 18:05:00",
                 "bar_end_utc": "2026-06-12 18:10:00",
-                "high": "111.00",
+                "open": "100.00",
+                "high": "100.50",
+                "low": "99.50",
+            },
+            {
+                "bar_start_utc": "2026-06-12 18:10:00",
+                "bar_end_utc": "2026-06-12 18:15:00",
+                "open": "100.00",
+                "high": "109.00",
                 "low": "99.00",
             }
         ],
@@ -146,12 +156,14 @@ def test_outcome_resolution_replays_m5_bars_when_supplied(tmp_path: Path):
 
     assert payload["status"] == "PASS_ALL_SIGNALS_RESOLVED"
     assert rows[0]["resolution_status"] == "REPLAY_TP"
-    assert rows[0]["resolution_source"] == "m5_bar_replay_adverse_first"
+    assert rows[0]["resolution_source"] == "m5_bar_replay_executor_v2_adverse_first"
+    assert rows[0]["replay_model"] == "executor_v2"
     assert rows[0]["normalized_direction"] == "BUY"
-    assert rows[0]["replay_exit_price"] == "110.0"
+    assert rows[0]["replay_entry_price"] == "100.250000"
+    assert rows[0]["replay_exit_price"] == "108.125000"
     assert payload["replay_resolved_count"] == 1
     assert payload["bar_quality"][0]["symbol"] == "XAUUSD"
-    assert payload["bar_quality"][0]["rows"] == 1
+    assert payload["bar_quality"][0]["rows"] == 2
 
 
 def test_outcome_resolution_uses_adverse_first_when_bar_hits_stop_and_target(tmp_path: Path):
@@ -182,7 +194,15 @@ def test_outcome_resolution_uses_adverse_first_when_bar_hits_stop_and_target(tmp
             {
                 "bar_start_utc": "2026-06-12 18:05:00",
                 "bar_end_utc": "2026-06-12 18:10:00",
-                "high": "111.00",
+                "open": "100.00",
+                "high": "100.50",
+                "low": "99.50",
+            },
+            {
+                "bar_start_utc": "2026-06-12 18:10:00",
+                "bar_end_utc": "2026-06-12 18:15:00",
+                "open": "100.00",
+                "high": "109.00",
                 "low": "94.00",
             }
         ],
@@ -198,7 +218,7 @@ def test_outcome_resolution_uses_adverse_first_when_bar_hits_stop_and_target(tmp
     rows = _read_rows(tmp_path / "out.csv")
 
     assert rows[0]["resolution_status"] == "REPLAY_SL"
-    assert rows[0]["replay_exit_price"] == "95.0"
+    assert rows[0]["replay_exit_price"] == "95.000000"
 
 
 def test_outcome_resolution_replays_short_as_sell(tmp_path: Path):
@@ -229,8 +249,16 @@ def test_outcome_resolution_replays_short_as_sell(tmp_path: Path):
             {
                 "bar_start_utc": "2026-06-12 18:05:00",
                 "bar_end_utc": "2026-06-12 18:10:00",
+                "open": "100.00",
                 "high": "101.00",
-                "low": "89.00",
+                "low": "99.00",
+            },
+            {
+                "bar_start_utc": "2026-06-12 18:10:00",
+                "bar_end_utc": "2026-06-12 18:15:00",
+                "open": "100.00",
+                "high": "101.00",
+                "low": "91.50",
             }
         ],
     )
@@ -248,7 +276,8 @@ def test_outcome_resolution_replays_short_as_sell(tmp_path: Path):
     assert rows[0]["direction"] == "SHORT"
     assert rows[0]["normalized_direction"] == "SELL"
     assert rows[0]["resolution_status"] == "REPLAY_TP"
-    assert rows[0]["replay_exit_price"] == "90.0"
+    assert rows[0]["replay_entry_price"] == "99.750000"
+    assert rows[0]["replay_exit_price"] == "91.875000"
     assert payload["replay_resolved_count"] == 1
 
 
@@ -353,6 +382,7 @@ def _shadow_row(
         "entry_price": entry_price,
         "stop_loss": stop_loss,
         "take_profit": take_profit,
+        "spread_points": "50",
     }
 
 
@@ -372,6 +402,7 @@ def _write_shadow_rows(path: Path, rows: list[dict[str, str]]) -> None:
             "entry_price",
             "stop_loss",
             "take_profit",
+            "spread_points",
         ],
         rows,
     )
@@ -396,7 +427,7 @@ def _write_actual_rows(path: Path, rows: list[dict[str, str]]) -> None:
 
 
 def _write_m5_bars(path: Path, rows: list[dict[str, str]]) -> None:
-    _write_rows(path, ["bar_start_utc", "bar_end_utc", "high", "low"], rows)
+    _write_rows(path, ["bar_start_utc", "bar_end_utc", "open", "high", "low"], rows)
 
 
 def _write_rows(path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:

@@ -1,0 +1,7 @@
+aggregation_level,group,family,symbol,time_bucket,direction,normalized_direction,legacy_shadow_action,proposed_v2_shadow_action,proposed_v2_shadow_reason,trend_veto_action,fixed_shadow_action,signals,broker_join,replay,unresolved,wins,losses,open,flat,closed_win_rate_pct,broker_profit_aed,replay_gross_win_rate_pct,replay_net_win_rate_pct,replay_net_r_sum,avg_cost_r,avg_rr,net_breakeven_wr_pct
+candidate,round_number_retest_v0,round,XAUUSD,Afternoon 12:00-15:59,LONG,BUY,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,KEEP,KEEP,1,1,0,0,0,1,0,0,0.00,-39.90,0.00,0.00,,,1.5000,
+candidate,round_number_retest_v0,round,XAUUSD,Afternoon 12:00-15:59,SHORT,SELL,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,BLOCK,BLOCK,1,1,0,0,0,1,0,0,0.00,-19.44,0.00,0.00,,,1.4990,
+candidate,symbol_normalized_round_retest_v0,round,XAUUSD,Afternoon 12:00-15:59,LONG,BUY,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,KEEP,KEEP,1,1,0,0,0,1,0,0,0.00,-40.16,0.00,0.00,,,1.5000,
+candidate,symbol_normalized_round_retest_v0,round,XAUUSD,Afternoon 12:00-15:59,SHORT,SELL,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,BLOCK,BLOCK,1,1,0,0,0,1,0,0,0.00,-19.44,0.00,0.00,,,1.4990,
+family,round,round,XAUUSD,Afternoon 12:00-15:59,LONG,BUY,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,KEEP,KEEP,1,1,0,0,0,1,0,0,0.00,-40.16,0.00,0.00,,,1.5000,
+family,round,round,XAUUSD,Afternoon 12:00-15:59,SHORT,SELL,,BLOCK,BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY,BLOCK,BLOCK,1,1,0,0,0,1,0,0,0.00,-19.44,0.00,0.00,,,1.4990,

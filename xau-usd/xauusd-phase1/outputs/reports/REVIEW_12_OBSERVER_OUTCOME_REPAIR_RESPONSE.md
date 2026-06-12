@@ -14,27 +14,39 @@ This response addresses Review 12 priority items 1, 2, and 4 without changing ru
   - broker-trade join
   - M5 bar replay
   - unresolved
-- Replay uses adverse-first same-bar ordering.
+- Replay v2 uses executor-faithful next-M5-open entry, measured spread adjustment, synthetic SL/TP, and adverse-first same-bar ordering.
+- Replay v1 plan columns are preserved only for calibration diffing.
 - M5 replay bars are exported read-only for the pinned `2026-06-01 00:00:00` through latest available window.
 - Bar export continuity reports row count, first/last bar, gaps, max gap, duplicates, and continuity percentage.
 - New scoreboard summarizes observer evidence by EA, symbol, session bucket, direction, old shadow action, proposed v2 action, broker joins, replays, unresolved rows, wins, losses, win rate, and broker PnL.
+- Because executor_v2 replay calibration remained below the 75% floor, scoreboards are generated in `broker_joined_only` mode and replay rows are descriptive only.
 
 ## Latest Evidence
 
 - Outcome report: `xau-usd/xauusd-phase1/outputs/reports/OBSERVER_OUTCOME_RESOLUTION_REPORT.md`
-- Scoreboard: `xau-usd/xauusd-phase1/outputs/reports/OBSERVER_TREND_VETO_SCOREBOARD.md`
+- Scoreboard: `xau-usd/xauusd-phase1/outputs/reports/OBSERVER_SHADOW_POLICY_SCOREBOARD.md`
+- Replay calibration: `xau-usd/xauusd-phase1/outputs/reports/OBSERVER_REPLAY_CALIBRATION_REPORT.md`
 - Bar export report: `xau-usd/xauusd-phase1/outputs/reports/PHASE2_M5_REPLAY_BAR_EXPORT_REPORT.md`
 
 Latest generated counts:
 
 | Metric | Count |
 | --- | ---: |
-| Observer would-signal rows | 1,283 |
+| Observer would-signal rows | 1,308 |
 | Actual broker trade rows | 1,372 |
-| Resolved rows | 1,021 |
-| Broker-joined rows | 77 |
-| M5 replay rows | 944 |
-| Unresolved rows | 262 |
+| Resolved rows | 1,007 |
+| Broker-joined rows | 81 |
+| M5 replay rows | 926 |
+| Unresolved rows | 301 |
+
+Replay calibration:
+
+| Metric | Value |
+| --- | ---: |
+| Calibration status | PERMANENTLY_QUARANTINED_PENDING_NEW_DESIGN |
+| v1 outcome agreement | 53.09% |
+| v2 outcome agreement | 60.49% |
+| Scoreboard mode | broker_joined_only |
 
 ## Boundary
 

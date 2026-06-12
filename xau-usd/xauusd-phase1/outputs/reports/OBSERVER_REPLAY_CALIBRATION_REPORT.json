@@ -1,0 +1,96 @@
+{
+  "status": "PERMANENTLY_QUARANTINED_PENDING_NEW_DESIGN",
+  "created_at_utc": "2026-06-12T10:27:46.357333Z",
+  "authority": "Read-only replay calibration. It compares broker-joined outcomes against M5 replay and does not touch MT5 runtime.",
+  "replay_model_under_test": "executor_v2",
+  "resolution_rows_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\OBSERVER_OUTCOME_RESOLUTION_ROWS.csv",
+  "bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
+  "cost_model_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+  "broker_joined_rows": 81,
+  "closed_broker_rows": 81,
+  "v1_outcome_match_count": 43,
+  "v1_outcome_match_pct": 53.09,
+  "v1_pnl_sign_match_count": 43,
+  "v1_pnl_sign_match_pct": 53.09,
+  "outcome_match_count": 49,
+  "outcome_match_pct": 60.49,
+  "pnl_sign_match_count": 49,
+  "pnl_sign_match_pct": 60.49,
+  "by_symbol_bucket": [
+    {
+      "symbol": "EURUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "rows": 2,
+      "closed": 2,
+      "outcome_match_count": 0,
+      "outcome_match_pct": 0.0
+    },
+    {
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "rows": 13,
+      "closed": 13,
+      "outcome_match_count": 7,
+      "outcome_match_pct": 53.85
+    },
+    {
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "rows": 10,
+      "closed": 10,
+      "outcome_match_count": 8,
+      "outcome_match_pct": 80.0
+    },
+    {
+      "symbol": "XAUUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "rows": 24,
+      "closed": 24,
+      "outcome_match_count": 14,
+      "outcome_match_pct": 58.33
+    },
+    {
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "rows": 32,
+      "closed": 32,
+      "outcome_match_count": 20,
+      "outcome_match_pct": 62.5
+    }
+  ],
+  "by_candidate": [
+    {
+      "candidate": "breakout_retest",
+      "rows": 1,
+      "closed": 1,
+      "outcome_match_count": 0,
+      "outcome_match_pct": 0.0
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "rows": 40,
+      "closed": 40,
+      "outcome_match_count": 25,
+      "outcome_match_pct": 62.5
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "rows": 1,
+      "closed": 1,
+      "outcome_match_count": 0,
+      "outcome_match_pct": 0.0
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "rows": 39,
+      "closed": 39,
+      "outcome_match_count": 24,
+      "outcome_match_pct": 61.54
+    }
+  ],
+  "notes": [
+    "executor_v2 is judged against the same rule: >=90% usable, 75-90% usable with error bar, <75% quarantined.",
+    "If executor_v2 remains below 75%, replay is marked PERMANENTLY_QUARANTINED_PENDING_NEW_DESIGN and scoreboards must be broker-joined-only.",
+    "Per-row CSV preserves v1 plan replay, v2 executor replay, and actual broker outcome for audit diffing."
+  ]
+}
