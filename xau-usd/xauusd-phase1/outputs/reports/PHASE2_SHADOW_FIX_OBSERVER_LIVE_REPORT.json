@@ -1,79 +1,417 @@
 {
   "status": "SHADOW_FIX_OBSERVER_LOGS_READY",
-  "created_at_utc": "2026-06-08T09:11:44.145760Z",
+  "created_at_utc": "2026-06-12T07:22:37.824467Z",
   "authority": "Read-only summary of isolated shadow-fix observer logs. It does not touch MT5 runtime, orders, positions, charts, or the standard demo trading terminal.",
   "files_dir": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files",
   "file_count": 14,
-  "row_count": 28,
-  "signal_count": 2,
-  "latest_row": "2026.06.08 09:10:00",
+  "row_count": 15586,
+  "signal_count": 1253,
+  "latest_row": "2026.06.12 07:21:50",
   "by_shadow_action": [
     {
       "shadow_action": "KEEP_NO_SIGNAL",
-      "count": 26
-    },
-    {
-      "shadow_action": "KEEP",
-      "count": 1
+      "count": 14333
     },
     {
       "shadow_action": "BLOCK",
-      "count": 1
+      "count": 688
+    },
+    {
+      "shadow_action": "KEEP",
+      "count": 565
     }
   ],
   "signal_by_shadow_action": [
     {
-      "shadow_action": "KEEP",
-      "count": 1
+      "shadow_action": "BLOCK",
+      "count": 688
     },
     {
-      "shadow_action": "BLOCK",
-      "count": 1
+      "shadow_action": "KEEP",
+      "count": 565
     }
   ],
   "signal_by_shadow_reason": [
     {
       "shadow_reason": "KEEP",
-      "count": 1
+      "count": 565
     },
     {
       "shadow_reason": "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND",
-      "count": 1
+      "count": 438
+    },
+    {
+      "shadow_reason": "BLOCK_XAUUSD_MORNING_AFTERNOON",
+      "count": 152
+    },
+    {
+      "shadow_reason": "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST",
+      "count": 96
+    },
+    {
+      "shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "count": 2
     }
   ],
   "signal_by_candidate": [
     {
-      "candidate": "round_number_retest_v0",
-      "count": 1
+      "candidate": "symbol_normalized_round_retest_v0",
+      "count": 439
     },
     {
-      "candidate": "symbol_normalized_round_retest_v0",
-      "count": 1
+      "candidate": "round_number_retest_v0",
+      "count": 349
+    },
+    {
+      "candidate": "breakout_retest",
+      "count": 209
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "count": 160
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "count": 96
     }
   ],
   "signal_by_symbol": [
     {
+      "symbol": "XAUUSD",
+      "count": 777
+    },
+    {
       "symbol": "USDJPY",
-      "count": 2
+      "count": 264
+    },
+    {
+      "symbol": "EURUSD",
+      "count": 212
     }
   ],
   "signal_by_time_bucket": [
     {
+      "time_bucket": "Night 20:00-05:59",
+      "count": 523
+    },
+    {
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 288
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 253
+    },
+    {
       "time_bucket": "Afternoon 12:00-15:59",
-      "count": 2
+      "count": 189
     }
   ],
   "signal_by_candidate_symbol_time": [
     {
       "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 132
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 132
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 80
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 80
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 76
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 76
+    },
+    {
+      "candidate": "breakout_retest",
       "symbol": "USDJPY",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 54
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
       "time_bucket": "Afternoon 12:00-15:59",
-      "count": 1
+      "count": 47
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 47
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 35
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "EURUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 23
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 22
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 22
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 22
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 22
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "USDJPY",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 20
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 20
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 20
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "EURUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 18
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "USDJPY",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 18
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 16
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 15
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "EURUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 14
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 14
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 13
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 13
     },
     {
       "candidate": "symbol_normalized_round_retest_v0",
       "symbol": "USDJPY",
       "time_bucket": "Afternoon 12:00-15:59",
+      "count": 13
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "EURUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 12
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 12
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 12
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 12
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 11
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 11
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 11
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "XAUUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 10
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 10
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 10
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 8
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Morning 06:00-11:59",
+      "count": 8
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "USDJPY",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 7
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 7
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 7
+    },
+    {
+      "candidate": "breakout_retest",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 6
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 6
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 6
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "symbol": "XAUUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 6
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Night 20:00-05:59",
+      "count": 5
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Afternoon 12:00-15:59",
+      "count": 4
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 4
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Evening 16:00-19:59",
+      "count": 3
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "symbol": "USDJPY",
+      "time_bucket": "Evening 16:00-19:59",
       "count": 1
     }
   ]

@@ -1,10 +1,10 @@
 # Broker Action File Boundary Audit
 
-Overall status: PASS
+Overall status: FAIL
 
 This audit classifies broker-action MQL files. A PASS does not authorize Phase 2, demo execution, broker execution, or live capital.
 
-Findings: 0
+Findings: 3
 
 ## MQL File Classification
 
@@ -12,12 +12,17 @@ Findings: 0
 | --- | --- | --- | --- | --- |
 | xau-usd\xauusd-phase0\mt5\PassiveBarExporter_Phase0.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase0\mt5\PassiveSpreadLogger_XAUUSD.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\AccountEquityGuardianShadow.mq5 | forbidden_broker_action_in_canonical_path | OrderSend, PositionModify, PositionClose | FAIL | Broker-action token outside approved experimental path. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase1DryRunShell.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoRepairExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
+| xau-usd\xauusd-phase1\mt5\Experts\Phase2PositionPathObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ShadowFixObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Phase2TrendGuardedFixObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
+| xau-usd\xauusd-phase1\mt5\Experts\W1D1MomentumContinuationExperimental.mq5 | forbidden_broker_action_in_canonical_path | CTrade, trade.Buy, trade.Sell | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\W1D1MomentumM5ContinuationExperimental.mq5 | forbidden_broker_action_in_canonical_path | CTrade, trade.Buy, trade.Sell | FAIL | Broker-action token outside approved experimental path. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1BreakoutRetest.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Dashboard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Execution.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |

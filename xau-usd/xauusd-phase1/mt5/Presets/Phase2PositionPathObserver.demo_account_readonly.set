@@ -1,0 +1,8 @@
+InpRunId=phase2-position-path-observer-v0.1
+InpDryRunOnly=true
+InpExpectedServerMarker=Demo
+InpSnapshotSeconds=10
+InpDubaiUtcOffsetMinutes=240
+InpSnapshotFilePrefix=position_path_log
+InpSummaryFileName=position_path_summary.csv
+InpStartupFileName=position_path_observer_startup.csv

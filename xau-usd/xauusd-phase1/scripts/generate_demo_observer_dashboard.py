@@ -92,7 +92,8 @@ WEAKNESS_SHADOW_REPORT_JSON = "PHASE2_EA_WEAKNESS_SHADOW_REPORT.json"
 WEAKNESS_SHADOW_REPORT_MD = "PHASE2_EA_WEAKNESS_SHADOW_REPORT.md"
 WEAKNESS_SHADOW_TRADES_CSV = "PHASE2_EA_WEAKNESS_SHADOW_TRADES.csv"
 WEAKNESS_TIME_BLOCKS = {"Morning 06:00-11:59", "Afternoon 12:00-15:59"}
-WEAKNESS_QUARANTINE_CANDIDATES = {"session_extreme_retest_v0", "symbol_normalized_round_retest_v0"}
+ROUND_RETEST_CLONE_CANDIDATES = {"symbol_normalized_round_retest_v0", "round_number_retest_v0"}
+WEAKNESS_QUARANTINE_CANDIDATES = {"session_extreme_retest_v0", *ROUND_RETEST_CLONE_CANDIDATES}
 
 
 @dataclass(frozen=True)
@@ -468,7 +469,7 @@ def _weakness_shadow_action(row: dict[str, Any]) -> tuple[str, str]:
     if candidate in WEAKNESS_QUARANTINE_CANDIDATES:
         if candidate == "session_extreme_retest_v0":
             return "BLOCK", "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST"
-        return "BLOCK", "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND"
+        return "BLOCK", "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY"
     if str(row.get("symbol", "")).upper() == "XAUUSD" and str(row.get("time_bucket", "")) in WEAKNESS_TIME_BLOCKS:
         return "BLOCK", "BLOCK_XAUUSD_MORNING_AFTERNOON"
     return "KEEP", "KEEP"
@@ -504,6 +505,20 @@ def _actual_weakness_shadow(trades: list[dict[str, Any]]) -> dict[str, Any]:
             "Measures disabling only symbol_normalized_round_retest_v0.",
         ),
         _scenario_by_block_predicate(
+            "block_round_number_retest_v0",
+            "EA quarantine: round_number_retest_v0",
+            deduped_rows,
+            lambda row: row.get("candidate") == "round_number_retest_v0",
+            "Measures disabling only round_number_retest_v0.",
+        ),
+        _scenario_by_block_predicate(
+            "block_round_retest_clone_family",
+            "Family quarantine: round-retest clone family",
+            deduped_rows,
+            lambda row: row.get("candidate") in ROUND_RETEST_CLONE_CANDIDATES,
+            "Measures disabling symbol_normalized_round_retest_v0 and round_number_retest_v0 as one clone family.",
+        ),
+        _scenario_by_block_predicate(
             "block_xauusd_morning_afternoon",
             "Session filter: XAUUSD morning/afternoon",
             deduped_rows,
@@ -525,8 +540,9 @@ def _actual_weakness_shadow(trades: list[dict[str, Any]]) -> dict[str, Any]:
         "policy": [
             "Use duplicate-hidden actual trades as the main decision view.",
             "Measure one-event-per-family duplicate mutex.",
-            "Keep duplicate priority: breakout_retest, swing_breakout_retest_v0, symbol_normalized_round_retest_v0, then provisional/experimental EAs.",
-            "Measure separate EA quarantine for session_extreme_retest_v0 and symbol_normalized_round_retest_v0.",
+            "Keep duplicate priority: breakout_retest, swing_breakout_retest_v0, then non-round provisional/experimental EAs.",
+            "Measure family-level quarantine for symbol_normalized_round_retest_v0 and round_number_retest_v0 as the round-retest clone family.",
+            "Measure separate EA quarantine for session_extreme_retest_v0.",
             "Measure XAUUSD morning/afternoon session block.",
             "Promote only after owner/reviewer approval and at least one fresh forward week.",
         ],

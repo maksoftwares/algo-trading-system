@@ -1,0 +1,56 @@
+# Observer Trend-Veto Scoreboard
+
+Status: `PARTIAL_REVIEW_BARS_SUPPLIED`
+
+This report is analysis-only. It does not touch MT5 runtime, orders, charts, or running EAs.
+
+## Resolution Strength
+
+- Broker-joined rows: `77`
+- M5 replay rows: `944`
+- Unresolved rows: `262`
+
+## Top Groups
+
+| candidate | symbol | time_bucket | direction | normalized_direction | legacy_shadow_action | proposed_v2_shadow_action | proposed_v2_shadow_reason | signals | broker_join | replay | unresolved | wins | losses | open | flat | closed_win_rate_pct | broker_profit_aed |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| round_number_retest_v0 | XAUUSD | Night 20:00-05:59 | SHORT | SELL | KEEP | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 69 | 11 | 58 | 0 | 36 | 33 | 0 | 0 | 52.17 | 157.41 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Night 20:00-05:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 69 | 11 | 58 | 0 | 36 | 33 | 0 | 0 | 52.17 | 160.71 |
+| round_number_retest_v0 | XAUUSD | Morning 06:00-11:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 41 | 9 | 32 | 0 | 13 | 28 | 0 | 0 | 31.71 | -180.30 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 41 | 9 | 32 | 0 | 13 | 28 | 0 | 0 | 31.71 | -181.02 |
+| round_number_retest_v0 | XAUUSD | Night 20:00-05:59 | LONG | BUY | KEEP | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 63 | 5 | 58 | 0 | 24 | 39 | 0 | 0 | 38.10 | -81.22 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Night 20:00-05:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 63 | 5 | 58 | 0 | 24 | 39 | 0 | 0 | 38.10 | -78.53 |
+| round_number_retest_v0 | XAUUSD | Evening 16:00-19:59 | SHORT | SELL | KEEP | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 44 | 4 | 40 | 0 | 23 | 21 | 0 | 0 | 52.27 | 98.87 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 44 | 4 | 40 | 0 | 23 | 21 | 0 | 0 | 52.27 | 102.20 |
+| round_number_retest_v0 | XAUUSD | Morning 06:00-11:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 40 | 3 | 37 | 0 | 15 | 25 | 0 | 0 | 37.50 | -28.85 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 40 | 3 | 37 | 0 | 15 | 25 | 0 | 0 | 37.50 | -24.30 |
+| round_number_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 25 | 3 | 22 | 0 | 11 | 14 | 0 | 0 | 44.00 | -42.15 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 25 | 2 | 23 | 0 | 11 | 14 | 0 | 0 | 44.00 | -29.76 |
+| round_number_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 24 | 2 | 21 | 1 | 11 | 12 | 0 | 0 | 47.83 | -56.62 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 24 | 2 | 21 | 1 | 11 | 12 | 0 | 0 | 47.83 | -56.80 |
+| round_number_retest_v0 | XAUUSD | Evening 16:00-19:59 | LONG | BUY | KEEP | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 36 | 1 | 35 | 0 | 13 | 23 | 0 | 0 | 36.11 | -18.00 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 36 | 1 | 35 | 0 | 13 | 23 | 0 | 0 | 36.11 | -16.17 |
+| breakout_retest | EURUSD | Night 20:00-05:59 | SHORT | SELL | KEEP | KEEP | KEEP | 15 | 1 | 14 | 0 | 13 | 2 | 0 | 0 | 86.67 | 27.86 |
+| swing_breakout_retest_v0 | EURUSD | Night 20:00-05:59 | SHORT | SELL | KEEP | KEEP | KEEP | 15 | 1 | 14 | 0 | 13 | 2 | 0 | 0 | 86.67 | 27.86 |
+| breakout_retest | EURUSD | Afternoon 12:00-15:59 | LONG | BUY | KEEP | KEEP | KEEP | 14 | 0 | 14 | 0 | 6 | 8 | 0 | 0 | 42.86 | 0.00 |
+| symbol_normalized_round_retest_v0 | EURUSD | Night 20:00-05:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 13 | 0 | 13 | 0 | 2 | 11 | 0 | 0 | 15.38 | 0.00 |
+| session_extreme_retest_v0 | EURUSD | Evening 16:00-19:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 12 | 0 | 12 | 0 | 3 | 9 | 0 | 0 | 25.00 | 0.00 |
+| swing_breakout_retest_v0 | EURUSD | Afternoon 12:00-15:59 | LONG | BUY | KEEP | KEEP | KEEP | 11 | 0 | 11 | 0 | 4 | 7 | 0 | 0 | 36.36 | 0.00 |
+| breakout_retest | XAUUSD | Evening 16:00-19:59 | SHORT | SELL | KEEP | KEEP | KEEP | 10 | 0 | 10 | 0 | 8 | 2 | 0 | 0 | 80.00 | 0.00 |
+| breakout_retest | XAUUSD | Night 20:00-05:59 | SHORT | SELL | KEEP | KEEP | KEEP | 10 | 0 | 10 | 0 | 4 | 6 | 0 | 0 | 40.00 | 0.00 |
+| session_extreme_retest_v0 | EURUSD | Evening 16:00-19:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 10 | 0 | 10 | 0 | 10 | 0 | 0 | 0 | 100.00 | 0.00 |
+| session_extreme_retest_v0 | EURUSD | Night 20:00-05:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 10 | 0 | 10 | 0 | 1 | 9 | 0 | 0 | 10.00 | 0.00 |
+| session_extreme_retest_v0 | EURUSD | Night 20:00-05:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 10 | 0 | 10 | 0 | 4 | 6 | 0 | 0 | 40.00 | 0.00 |
+| swing_breakout_retest_v0 | XAUUSD | Evening 16:00-19:59 | SHORT | SELL | KEEP | KEEP | KEEP | 10 | 0 | 10 | 0 | 8 | 2 | 0 | 0 | 80.00 | 0.00 |
+| breakout_retest | EURUSD | Evening 16:00-19:59 | SHORT | SELL | KEEP | KEEP | KEEP | 9 | 0 | 9 | 0 | 7 | 2 | 0 | 0 | 77.78 | 0.00 |
+| session_extreme_retest_v0 | XAUUSD | Evening 16:00-19:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 9 | 0 | 9 | 0 | 4 | 5 | 0 | 0 | 44.44 | 0.00 |
+| swing_breakout_retest_v0 | XAUUSD | Night 20:00-05:59 | SHORT | SELL | KEEP | KEEP | KEEP | 9 | 0 | 9 | 0 | 3 | 6 | 0 | 0 | 33.33 | 0.00 |
+| symbol_normalized_round_retest_v0 | EURUSD | Morning 06:00-11:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 9 | 0 | 9 | 0 | 8 | 1 | 0 | 0 | 88.89 | 0.00 |
+| symbol_normalized_round_retest_v0 | EURUSD | Night 20:00-05:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 9 | 0 | 9 | 0 | 6 | 3 | 0 | 0 | 66.67 | 0.00 |
+| breakout_retest | EURUSD | Morning 06:00-11:59 | SHORT | SELL | KEEP | KEEP | KEEP | 8 | 0 | 8 | 0 | 3 | 5 | 0 | 0 | 37.50 | 0.00 |
+| breakout_retest | EURUSD | Night 20:00-05:59 | LONG | BUY | KEEP | KEEP | KEEP | 8 | 0 | 8 | 0 | 5 | 3 | 0 | 0 | 62.50 | 0.00 |
+| swing_breakout_retest_v0 | EURUSD | Morning 06:00-11:59 | SHORT | SELL | KEEP | KEEP | KEEP | 8 | 0 | 8 | 0 | 3 | 5 | 0 | 0 | 37.50 | 0.00 |
+| session_extreme_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 7 | 0 | 7 | 0 | 2 | 5 | 0 | 0 | 28.57 | 0.00 |
+| symbol_normalized_round_retest_v0 | EURUSD | Afternoon 12:00-15:59 | LONG | BUY | BLOCK | BLOCK | BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 7 | 0 | 7 | 0 | 4 | 3 | 0 | 0 | 57.14 | 0.00 |
+| breakout_retest | XAUUSD | Morning 06:00-11:59 | SHORT | SELL | BLOCK | BLOCK | BLOCK_XAUUSD_MORNING_AFTERNOON | 6 | 0 | 6 | 0 | 4 | 2 | 0 | 0 | 66.67 | 0.00 |
+| breakout_retest | XAUUSD | Night 20:00-05:59 | LONG | BUY | KEEP | KEEP | KEEP | 6 | 0 | 6 | 0 | 4 | 2 | 0 | 0 | 66.67 | 0.00 |

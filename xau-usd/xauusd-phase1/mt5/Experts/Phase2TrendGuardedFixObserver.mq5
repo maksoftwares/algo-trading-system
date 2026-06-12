@@ -1,23 +1,32 @@
 #property strict
 #property version   "1.000"
-#property description "Shadow fix observer. Telemetry only; no broker actions or order placement."
+#property description "Trend-guarded fix observer. Telemetry only; no broker actions or order placement."
 
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 
-input string InpRunId = "phase2-shadow-fix-observer-v0.1";
+input string InpRunId = "phase2-trend-guarded-fix-observer-v0.1";
 input bool InpDryRunOnly = true;
 input string InpCandidate = "breakout_retest";
-input string InpCandidateStatus = "ACCEPTED";
+input string InpCandidateStatus = "TREND_GUARDED_FIX_OBSERVER_V2";
 input string InpTargetSymbol = "XAUUSD";
-input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,USDJPY";
+input string InpQualifiedSymbolsCsv = "XAUUSD";
 input string InpExpectedServerMarker = "Demo";
-input string InpShadowPolicyVersion = "shadow_fix_policy_20260612_v2";
-input string InpAttachmentLogFileName = "shadow_fix_observer_signal_log.csv";
-input string InpStartupLogFileName = "shadow_fix_observer_startup.csv";
+input string InpShadowPolicyVersion = "trend_guarded_fix_policy_20260612_v2";
+input string InpAttachmentLogFileName = "trend_guarded_fix_observer_v2_signal_log.csv";
+input string InpStartupLogFileName = "trend_guarded_fix_observer_v2_startup.csv";
+input bool InpTrendVetoEnabled = true;
+input int InpTrendSlopeLookbackBars = 3;
+input double InpMinSlopePoints = 50.0;
+input int InpDubaiUtcOffsetMinutes = 240;
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
 datetime g_last_m5_bar_time = 0;
+const bool BROKER_ACTION_ALLOWED = false;
+int g_m15_ema20_handle = INVALID_HANDLE;
+int g_h1_ema20_handle = INVALID_HANDLE;
+int g_d1_ema20_handle = INVALID_HANDLE;
+int g_d1_ema50_handle = INVALID_HANDLE;
 
 string BoolText(const bool value)
 {
@@ -60,7 +69,8 @@ bool IsAllowedCandidate(const string candidate)
       || candidate == "swing_breakout_retest_v0"
       || candidate == "symbol_normalized_round_retest_v0"
       || candidate == "round_number_retest_v0"
-      || candidate == "session_extreme_retest_v0";
+      || candidate == "session_extreme_retest_v0"
+      || candidate == "session_extreme_retest_v0_repair_v1";
 }
 
 bool CandidateHasNativeObserver(const string candidate)
@@ -85,7 +95,7 @@ bool CandidateUsesRoundObserver(const string candidate)
 
 bool CandidateUsesSessionExtremeObserver(const string candidate)
 {
-   return candidate == "session_extreme_retest_v0";
+   return candidate == "session_extreme_retest_v0" || candidate == "session_extreme_retest_v0_repair_v1";
 }
 
 string DubaiTimeBucket(const datetime value)
@@ -101,9 +111,179 @@ string DubaiTimeBucket(const datetime value)
    return "Night 20:00-05:59";
 }
 
+datetime DubaiNow()
+{
+   return TimeGMT() + InpDubaiUtcOffsetMinutes * 60;
+}
+
 bool IsXauSymbol(const string symbol_name)
 {
    return StringFind(LowerText(symbol_name), "xauusd") >= 0;
+}
+
+bool ConfigureIndicatorHandles()
+{
+   g_m15_ema20_handle = iMA(_Symbol, PERIOD_M15, 20, 0, MODE_EMA, PRICE_CLOSE);
+   g_h1_ema20_handle = iMA(_Symbol, PERIOD_H1, 20, 0, MODE_EMA, PRICE_CLOSE);
+   g_d1_ema20_handle = iMA(_Symbol, PERIOD_D1, 20, 0, MODE_EMA, PRICE_CLOSE);
+   g_d1_ema50_handle = iMA(_Symbol, PERIOD_D1, 50, 0, MODE_EMA, PRICE_CLOSE);
+   return g_m15_ema20_handle != INVALID_HANDLE
+      && g_h1_ema20_handle != INVALID_HANDLE
+      && g_d1_ema20_handle != INVALID_HANDLE
+      && g_d1_ema50_handle != INVALID_HANDLE;
+}
+
+void ReleaseIndicatorHandles()
+{
+   if(g_m15_ema20_handle != INVALID_HANDLE)
+      IndicatorRelease(g_m15_ema20_handle);
+   if(g_h1_ema20_handle != INVALID_HANDLE)
+      IndicatorRelease(g_h1_ema20_handle);
+   if(g_d1_ema20_handle != INVALID_HANDLE)
+      IndicatorRelease(g_d1_ema20_handle);
+   if(g_d1_ema50_handle != INVALID_HANDLE)
+      IndicatorRelease(g_d1_ema50_handle);
+
+   g_m15_ema20_handle = INVALID_HANDLE;
+   g_h1_ema20_handle = INVALID_HANDLE;
+   g_d1_ema20_handle = INVALID_HANDLE;
+   g_d1_ema50_handle = INVALID_HANDLE;
+}
+
+bool CopyEmaValue(const int handle, const int shift, double &value)
+{
+   value = 0.0;
+   if(handle == INVALID_HANDLE)
+      return false;
+   double buffer[];
+   ArraySetAsSeries(buffer, true);
+   int copied = CopyBuffer(handle, 0, shift, 1, buffer);
+   if(copied != 1)
+      return false;
+   value = buffer[0];
+   return value > 0.0;
+}
+
+bool EmaSlopePointsFromHandle(
+   const int handle,
+   const int lookback_bars,
+   const double point,
+   double &slope_points
+)
+{
+   slope_points = 0.0;
+   if(point <= 0.0 || lookback_bars <= 0)
+      return false;
+
+   double current_value = 0.0;
+   double previous_value = 0.0;
+   if(!CopyEmaValue(handle, 1, current_value))
+      return false;
+   if(!CopyEmaValue(handle, 1 + lookback_bars, previous_value))
+      return false;
+   slope_points = (current_value - previous_value) / point;
+   return true;
+}
+
+string DailyBiasText(const string symbol_name, bool &bias_available)
+{
+   bias_available = false;
+   double close_price = iClose(symbol_name, PERIOD_D1, 1);
+   double ema20 = 0.0;
+   double ema50 = 0.0;
+   if(close_price <= 0.0 || !CopyEmaValue(g_d1_ema20_handle, 1, ema20) || !CopyEmaValue(g_d1_ema50_handle, 1, ema50))
+      return "UNKNOWN";
+   bias_available = true;
+   if(close_price > ema20 && ema20 > ema50)
+      return "BULLISH";
+   if(close_price < ema20 && ema20 < ema50)
+      return "BEARISH";
+   return "MIXED";
+}
+
+string TrendVetoActionForObservation(
+   const string symbol_name,
+   const string direction,
+   const bool would_signal,
+   const bool m15_slope_available,
+   const bool h1_slope_available,
+   const double m15_ema20_slope_points,
+   const double h1_ema20_slope_points
+)
+{
+   if(!would_signal)
+      return "KEEP_NO_SIGNAL";
+   if(!InpTrendVetoEnabled)
+      return "KEEP";
+   if(!IsXauSymbol(symbol_name))
+      return "KEEP";
+   if(!m15_slope_available || !h1_slope_available)
+      return "SLOPE_UNAVAILABLE";
+   if(direction == "SHORT"
+      && m15_ema20_slope_points >= InpMinSlopePoints
+      && h1_ema20_slope_points >= InpMinSlopePoints)
+      return "BLOCK";
+   if(direction == "LONG"
+      && m15_ema20_slope_points <= -InpMinSlopePoints
+      && h1_ema20_slope_points <= -InpMinSlopePoints)
+      return "BLOCK";
+   return "KEEP";
+}
+
+string TrendVetoReasonForObservation(
+   const string symbol_name,
+   const string direction,
+   const bool would_signal,
+   const bool m15_slope_available,
+   const bool h1_slope_available,
+   const double m15_ema20_slope_points,
+   const double h1_ema20_slope_points
+)
+{
+   if(!would_signal)
+      return "NO_SIGNAL";
+   if(!InpTrendVetoEnabled)
+      return "TREND_VETO_DISABLED";
+   if(!IsXauSymbol(symbol_name))
+      return "NON_XAU_NOT_TREND_GUARDED";
+   if(!m15_slope_available && !h1_slope_available)
+      return "SLOPE_UNAVAILABLE_M15_H1";
+   if(!m15_slope_available)
+      return "SLOPE_UNAVAILABLE_M15";
+   if(!h1_slope_available)
+      return "SLOPE_UNAVAILABLE_H1";
+   if(direction == "SHORT"
+      && m15_ema20_slope_points >= InpMinSlopePoints
+      && h1_ema20_slope_points >= InpMinSlopePoints)
+      return "BLOCK_XAUUSD_SHORT_UPTREND_M15_H1";
+   if(direction == "LONG"
+      && m15_ema20_slope_points <= -InpMinSlopePoints
+      && h1_ema20_slope_points <= -InpMinSlopePoints)
+      return "BLOCK_XAUUSD_LONG_DOWNTREND_M15_H1";
+   return "KEEP_TREND_NOT_OPPOSED";
+}
+
+string FixedShadowActionForObservation(const bool would_signal, const string trend_veto_action)
+{
+   if(!would_signal)
+      return "KEEP_NO_SIGNAL";
+   if(trend_veto_action == "BLOCK")
+      return "BLOCK";
+   if(trend_veto_action == "SLOPE_UNAVAILABLE")
+      return "SLOPE_UNAVAILABLE";
+   return "KEEP";
+}
+
+string FixedShadowReasonForObservation(const bool would_signal, const string trend_veto_reason)
+{
+   if(!would_signal)
+      return "NO_SIGNAL";
+   return trend_veto_reason;
+}
+
+string AvailabilityText(const bool value)
+{
+   return value ? "OK" : "SLOPE_UNAVAILABLE";
 }
 
 string ShadowActionForObservation(
@@ -116,8 +296,6 @@ string ShadowActionForObservation(
    if(!would_signal)
       return "KEEP_NO_SIGNAL";
    if(candidate == "symbol_normalized_round_retest_v0")
-      return "BLOCK";
-   if(candidate == "round_number_retest_v0")
       return "BLOCK";
    if(candidate == "session_extreme_retest_v0")
       return "BLOCK";
@@ -136,9 +314,7 @@ string ShadowReasonForObservation(
    if(!would_signal)
       return "NO_SIGNAL";
    if(candidate == "symbol_normalized_round_retest_v0")
-      return "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY";
-   if(candidate == "round_number_retest_v0")
-      return "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY";
+      return "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND";
    if(candidate == "session_extreme_retest_v0")
       return "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST";
    if(IsXauSymbol(symbol_name) && (time_bucket == "Morning 06:00-11:59" || time_bucket == "Afternoon 12:00-15:59"))
@@ -395,6 +571,8 @@ string CandidateReasonPrefix(const string candidate)
       return "ROUND_NUMBER_RETEST";
    if(candidate == "session_extreme_retest_v0")
       return "SESSION_EXTREME_RETEST";
+   if(candidate == "session_extreme_retest_v0_repair_v1")
+      return "SESSION_EXTREME_RETEST_REPAIR_V1";
    return "EXPERIMENTAL_RETEST";
 }
 
@@ -558,6 +736,7 @@ bool EnsureAttachmentLogHeader()
       "timestamp_broker",
       "timestamp_utc",
       "timestamp_local",
+      "timestamp_dubai",
       "run_id",
       "account_server",
       "symbol",
@@ -576,8 +755,21 @@ bool EnsureAttachmentLogHeader()
       "stage",
       "direction",
       "would_signal",
-      "shadow_action",
-      "shadow_reason",
+      "legacy_shadow_action",
+      "legacy_shadow_reason",
+      "d1_bias",
+      "d1_bias_status",
+      "m15_ema20_slope_points",
+      "m15_ema20_slope_status",
+      "h1_ema20_slope_points",
+      "h1_ema20_slope_status",
+      "atr14_m5_points",
+      "estimated_cost_r",
+      "m15_ema20_distance_points",
+      "trend_veto_action",
+      "trend_veto_reason",
+      "fixed_shadow_action",
+      "fixed_shadow_reason",
       "shadow_decision_view",
       "reason_code",
       "level_kind",
@@ -599,6 +791,7 @@ bool EnsureStartupLogHeader()
       "timestamp_broker",
       "timestamp_utc",
       "timestamp_local",
+      "timestamp_dubai",
       "run_id",
       "account_server",
       "symbol",
@@ -608,6 +801,7 @@ bool EnsureStartupLogHeader()
       "dry_run",
       "broker_action_allowed",
       "shadow_policy_version",
+      "dubai_utc_offset_minutes",
       "observer_supported",
       "startup_status"
    };
@@ -620,6 +814,7 @@ bool WriteStartupRow(const string status_text)
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
+      TimeToString(DubaiNow(), TIME_DATE | TIME_SECONDS),
       InpRunId,
       AccountInfoString(ACCOUNT_SERVER),
       _Symbol,
@@ -627,8 +822,9 @@ bool WriteStartupRow(const string status_text)
       InpCandidateStatus,
       InpQualifiedSymbolsCsv,
       BoolText(InpDryRunOnly),
-      "false",
+      BoolText(BROKER_ACTION_ALLOWED),
       InpShadowPolicyVersion,
+      IntegerToString(InpDubaiUtcOffsetMinutes),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
       status_text
    };
@@ -639,40 +835,50 @@ int OnInit()
 {
    if(!InpDryRunOnly)
    {
-      Print("Phase2ShadowFixObserver refused to start because dry-run mode is locked.");
+      Print("Phase2TrendGuardedFixObserver refused to start because dry-run mode is locked.");
       return INIT_FAILED;
    }
 
    string server = AccountInfoString(ACCOUNT_SERVER);
    if(server == "" || !ContainsText(server, InpExpectedServerMarker) || ContainsText(server, "live") || ContainsText(server, "real"))
    {
-      Print("Phase2ShadowFixObserver refused to start outside the expected demo server. Server=", server);
+      Print("Phase2TrendGuardedFixObserver refused to start outside the expected demo server. Server=", server);
       return INIT_FAILED;
    }
 
    if(_Symbol != InpTargetSymbol)
    {
-      Print("Phase2ShadowFixObserver attached to ", _Symbol, " but target is ", InpTargetSymbol);
+      Print("Phase2TrendGuardedFixObserver attached to ", _Symbol, " but target is ", InpTargetSymbol);
       return INIT_FAILED;
    }
 
    if(!CsvContainsSymbol(InpQualifiedSymbolsCsv, _Symbol))
    {
-      Print("Phase2ShadowFixObserver refused symbol ", _Symbol, " because it is not qualified for ", InpCandidate);
+      Print("Phase2TrendGuardedFixObserver refused symbol ", _Symbol, " because it is not qualified for ", InpCandidate);
       return INIT_FAILED;
    }
 
    if(!IsAllowedCandidate(InpCandidate))
    {
-      Print("Phase2ShadowFixObserver refused unknown candidate ", InpCandidate);
+      Print("Phase2TrendGuardedFixObserver refused unknown candidate ", InpCandidate);
+      return INIT_FAILED;
+   }
+
+   if(!ConfigureIndicatorHandles())
+   {
+      Print("Phase2TrendGuardedFixObserver refused to start because trend indicator handles could not be created.");
+      ReleaseIndicatorHandles();
       return INIT_FAILED;
    }
 
    if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader())
+   {
+      ReleaseIndicatorHandles();
       return INIT_FAILED;
+   }
 
    g_breakout_observer.Configure(CandidateUsesSwingObserver(InpCandidate));
-   WriteStartupRow("ATTACHED_SHADOW_FIX_TELEMETRY_ONLY");
+   WriteStartupRow("ATTACHED_TREND_GUARDED_FIX_TELEMETRY_ONLY");
    EventSetTimer(1);
    return INIT_SUCCEEDED;
 }
@@ -680,10 +886,12 @@ int OnInit()
 void OnDeinit(const int reason)
 {
    EventKillTimer();
+   ReleaseIndicatorHandles();
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
+      TimeToString(DubaiNow(), TIME_DATE | TIME_SECONDS),
       InpRunId,
       AccountInfoString(ACCOUNT_SERVER),
       _Symbol,
@@ -691,8 +899,9 @@ void OnDeinit(const int reason)
       InpCandidateStatus,
       InpQualifiedSymbolsCsv,
       BoolText(InpDryRunOnly),
-      "false",
+      BoolText(BROKER_ACTION_ALLOWED),
       InpShadowPolicyVersion,
+      IntegerToString(InpDubaiUtcOffsetMinutes),
       BoolText(CandidateHasNativeObserver(InpCandidate)),
       "REMOVED_REASON_" + IntegerToString(reason)
    };
@@ -710,7 +919,8 @@ void OnTimer()
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    double spread_points = point > 0.0 ? (ask - bid) / point : 0.0;
-   string time_bucket = DubaiTimeBucket(TimeLocal());
+   datetime dubai_time = DubaiNow();
+   string time_bucket = DubaiTimeBucket(dubai_time);
 
    Phase1BreakoutRetestObservation observation;
    Phase1ResetBreakoutRetestObservation(observation);
@@ -729,13 +939,58 @@ void OnTimer()
       observation.reason_code = "candidate_attached_no_mql_observer_yet";
       observation.direction_text = "NONE";
    }
-   string shadow_action = ShadowActionForObservation(InpCandidate, _Symbol, time_bucket, observation.would_signal);
-   string shadow_reason = ShadowReasonForObservation(InpCandidate, _Symbol, time_bucket, observation.would_signal);
+   double m15_ema20_slope_points = 0.0;
+   double h1_ema20_slope_points = 0.0;
+   bool m15_slope_available = EmaSlopePointsFromHandle(
+      g_m15_ema20_handle,
+      InpTrendSlopeLookbackBars,
+      point,
+      m15_ema20_slope_points
+   );
+   bool h1_slope_available = EmaSlopePointsFromHandle(
+      g_h1_ema20_handle,
+      InpTrendSlopeLookbackBars,
+      point,
+      h1_ema20_slope_points
+   );
+   bool d1_bias_available = false;
+   string d1_bias = DailyBiasText(_Symbol, d1_bias_available);
+   double atr14_m5_points = point > 0.0 ? AverageRangePrice(_Symbol, PERIOD_M5, 14, 1) / point : 0.0;
+   double estimated_cost_r = observation.stop_distance_points > 0.0 ? spread_points / observation.stop_distance_points : 0.0;
+   double m15_ema20_value = 0.0;
+   bool m15_ema20_value_available = CopyEmaValue(g_m15_ema20_handle, 1, m15_ema20_value);
+   double closed_m5_price = iClose(_Symbol, PERIOD_M5, 1);
+   double m15_ema20_distance_points = (m15_ema20_value_available && closed_m5_price > 0.0 && point > 0.0)
+      ? (closed_m5_price - m15_ema20_value) / point
+      : 0.0;
+   string legacy_shadow_action = ShadowActionForObservation(InpCandidate, _Symbol, time_bucket, observation.would_signal);
+   string legacy_shadow_reason = ShadowReasonForObservation(InpCandidate, _Symbol, time_bucket, observation.would_signal);
+   string trend_veto_action = TrendVetoActionForObservation(
+      _Symbol,
+      observation.direction_text,
+      observation.would_signal,
+      m15_slope_available,
+      h1_slope_available,
+      m15_ema20_slope_points,
+      h1_ema20_slope_points
+   );
+   string trend_veto_reason = TrendVetoReasonForObservation(
+      _Symbol,
+      observation.direction_text,
+      observation.would_signal,
+      m15_slope_available,
+      h1_slope_available,
+      m15_ema20_slope_points,
+      h1_ema20_slope_points
+   );
+   string fixed_shadow_action = FixedShadowActionForObservation(observation.would_signal, trend_veto_action);
+   string fixed_shadow_reason = FixedShadowReasonForObservation(observation.would_signal, trend_veto_reason);
 
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
+      TimeToString(dubai_time, TIME_DATE | TIME_SECONDS),
       InpRunId,
       AccountInfoString(ACCOUNT_SERVER),
       _Symbol,
@@ -743,7 +998,7 @@ void OnTimer()
       InpCandidateStatus,
       BoolText(CsvContainsSymbol(InpQualifiedSymbolsCsv, _Symbol)),
       BoolText(InpDryRunOnly),
-      "false",
+      BoolText(BROKER_ACTION_ALLOWED),
       InpShadowPolicyVersion,
       BoolText(observer_supported),
       TimeToString(m5_bar_time, TIME_DATE | TIME_SECONDS),
@@ -754,9 +1009,22 @@ void OnTimer()
       observation.stage,
       observation.direction_text,
       BoolText(observation.would_signal),
-      shadow_action,
-      shadow_reason,
-      "duplicate_hidden_shadow_forward_view",
+      legacy_shadow_action,
+      legacy_shadow_reason,
+      d1_bias,
+      d1_bias_available ? "OK" : "D1_BIAS_UNAVAILABLE",
+      DoubleToString(m15_ema20_slope_points, 2),
+      AvailabilityText(m15_slope_available),
+      DoubleToString(h1_ema20_slope_points, 2),
+      AvailabilityText(h1_slope_available),
+      DoubleToString(atr14_m5_points, 2),
+      DoubleToString(estimated_cost_r, 4),
+      m15_ema20_value_available ? DoubleToString(m15_ema20_distance_points, 2) : "EMA_UNAVAILABLE",
+      trend_veto_action,
+      trend_veto_reason,
+      fixed_shadow_action,
+      fixed_shadow_reason,
+      "trend_guarded_shadow_forward_view",
       observation.reason_code,
       observation.level_kind,
       DoubleToString(observation.level_price, (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS)),

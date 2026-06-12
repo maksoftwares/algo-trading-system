@@ -197,6 +197,7 @@ def test_weakness_shadow_report_measures_duplicates_sessions_and_ea_quarantine(t
             "-12.00",
             "5",
         ),
+        _actual_row("2026-06-01 18:05:00", "round_number_retest_v0", "PROVISIONAL", "XAUUSD", "SELL", "6.00", "6"),
     ]
 
     module._mark_duplicate_actual_trades(rows)
@@ -209,14 +210,18 @@ def test_weakness_shadow_report_measures_duplicates_sessions_and_ea_quarantine(t
     assert by_ticket["3"]["is_duplicate"] == "true"
     assert by_ticket["3"]["weakness_shadow_reason"] == "BLOCK_DUPLICATE_FAMILY_MUTEX"
     assert by_ticket["4"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_SESSION_EXTREME_RETEST"
-    assert by_ticket["5"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND"
+    assert by_ticket["5"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY"
+    assert by_ticket["6"]["is_duplicate"] == "false"
+    assert by_ticket["6"]["weakness_shadow_reason"] == "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY"
 
     combined = {row["id"]: row for row in weakness["scenarios"]}["combined_shadow_policy"]
-    assert weakness["duplicate_hidden_summary"]["closed_pnl_aed"] == "4.00"
+    round_family = {row["id"]: row for row in weakness["scenarios"]}["block_round_retest_clone_family"]
+    assert weakness["duplicate_hidden_summary"]["closed_pnl_aed"] == "10.00"
     assert combined["kept"]["closed_pnl_aed"] == "30.00"
-    assert combined["blocked"]["closed_pnl_aed"] == "-26.00"
-    assert combined["delta_closed_pnl_aed"] == "26.00"
+    assert combined["blocked"]["closed_pnl_aed"] == "-20.00"
+    assert combined["delta_closed_pnl_aed"] == "20.00"
     assert combined["promotion_status"] == "FAIL_TRADE_COUNT"
+    assert round_family["blocked"]["actual_trades"] == 2
 
     actual_broker = {
         "status": "CONNECTED",
@@ -232,7 +237,7 @@ def test_weakness_shadow_report_measures_duplicates_sessions_and_ea_quarantine(t
 
     assert "Status: SHADOW_ONLY_NOT_ENFORCED" in report
     assert "Combined proposed shadow policy" in report
-    assert "BLOCK_WEAK_EA_SYMBOL_NORMALIZED_ROUND" in report
+    assert "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY" in report
     assert trades[0]["weakness_shadow_reason"] == "BLOCK_XAUUSD_MORNING_AFTERNOON"
 
 

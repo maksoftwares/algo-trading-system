@@ -4,12 +4,12 @@ Overall status: PENDING_FORWARD_WEEK_IN_PROGRESS
 
 Forward-week report only. It does not authorize canonical Phase 2 or runtime promotion.
 
-Generated at UTC: `2026-06-11T04:06:50.393894Z`
+Generated at UTC: `2026-06-12T04:03:30.868518Z`
 Policy ID: `phase2_demo_repair_policy_2026_06_09_v1`
 Forward window starts: `2026-06-09 00:00:00`
 Expected window end: `2026-06-16 00:00:00`
-Latest post-start entry: `2026-06-10 00:45:00`
-Elapsed days: `1.0312` / `7.0`
+Latest post-start entry: `2026-06-11 21:35:12`
+Elapsed days: `2.8994` / `7.0`
 Promotion decision: `NOT_ELIGIBLE_FORWARD_WEEK_PENDING`
 
 ## Required Comparison
@@ -18,19 +18,19 @@ Promotion decision: `NOT_ELIGIBLE_FORWARD_WEEK_PENDING`
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Pre-repair baseline | 228 | 228 | 0 | 87 | 140 | 38.33% | -25.44 | 0.00 | -25.44 | 0.99 | 28.43 | -17.85 |
 | Pre-repair target baseline | 129 | 129 | 0 | 45 | 83 | 35.16% | -444.36 | 0.00 | -444.36 | 0.76 | 30.46 | -21.87 |
-| Post-repair actual | 90 | 77 | 13 | 23 | 54 | 29.87% | -304.21 | -18.77 | -322.98 | 0.76 | 42.41 | -23.70 |
-| Post target baseline | 67 | 57 | 10 | 15 | 42 | 26.32% | -394.62 | -2.09 | -396.71 | 0.61 | 41.58 | -24.24 |
-| Post repair-rule v1 would keep | 42 | 34 | 8 | 9 | 25 | 26.47% | -123.27 | 3.50 | -119.77 | 0.76 | 43.60 | -20.63 |
-| Post repair-rule v1 would block | 25 | 23 | 2 | 6 | 17 | 26.09% | -271.35 | -5.59 | -276.94 | 0.46 | 38.54 | -29.56 |
-| Post whole portfolio after repair-rule v1 | 65 | 54 | 11 | 17 | 37 | 31.48% | -32.86 | -13.18 | -46.04 | 0.96 | 43.77 | -21.00 |
+| Post-repair actual | 400 | 399 | 1 | 131 | 253 | 34.11% | -1315.44 | 64.15 | -1251.29 | 0.82 | 44.25 | -28.11 |
+| Post target baseline | 292 | 292 | 0 | 96 | 185 | 34.16% | -1117.27 | 0.00 | -1117.27 | 0.80 | 46.60 | -30.22 |
+| Post repair-rule v1 would keep | 171 | 171 | 0 | 58 | 102 | 36.25% | -338.55 | 0.00 | -338.55 | 0.88 | 42.59 | -27.54 |
+| Post repair-rule v1 would block | 121 | 121 | 0 | 38 | 83 | 31.40% | -778.72 | 0.00 | -778.72 | 0.72 | 52.72 | -33.52 |
+| Post whole portfolio after repair-rule v1 | 279 | 278 | 1 | 93 | 170 | 35.36% | -536.72 | 64.15 | -472.57 | 0.88 | 40.79 | -25.47 |
 | Post strict quarantine would keep | 0 | 0 | 0 | 0 | 0 | n/a | 0.00 | 0.00 | 0.00 | n/a | n/a | n/a |
-| Post strict quarantine would block | 67 | 57 | 10 | 15 | 42 | 26.32% | -394.62 | -2.09 | -396.71 | 0.61 | 41.58 | -24.24 |
-| Shadow would keep | 102 | 99 | 3 | 45 | 54 | 45.45 | 584.86 | -16.68 | 568.18 | 1.89 | 27.57 | -12.14 |
-| Shadow would block | 216 | 206 | 10 | 65 | 140 | 31.55 | -914.51 | -2.09 | -916.60 | 0.71 | 33.97 | -22.30 |
+| Post strict quarantine would block | 292 | 292 | 0 | 96 | 185 | 34.16% | -1117.27 | 0.00 | -1117.27 | 0.80 | 46.60 | -30.22 |
+| Shadow would keep | 178 | 177 | 1 | 68 | 105 | 38.42 | 275.70 | 64.15 | 339.85 | 1.15 | 30.63 | -17.21 |
+| Shadow would block | 450 | 450 | 0 | 150 | 288 | 33.33 | -1616.58 | 0.00 | -1616.58 | 0.79 | 41.24 | -27.09 |
 
-Post repair-rule target PnL delta: `271.35` AED
-Post repair-rule whole-portfolio PnL delta: `271.35` AED
-Post strict-quarantine target PnL delta: `394.62` AED
+Post repair-rule target PnL delta: `778.72` AED
+Post repair-rule whole-portfolio PnL delta: `778.72` AED
+Post strict-quarantine target PnL delta: `1117.27` AED
 
 ## Confirmation Checks
 
@@ -41,7 +41,7 @@ Post strict-quarantine target PnL delta: `394.62` AED
 | repair_closed_pnl_improves | `True` |
 | repair_pf_preserved_or_improves | `True` |
 | repair_win_rate_preserved_or_improves | `True` |
-| retained_trade_pct | `59.65` |
+| retained_trade_pct | `58.56` |
 | required_target_closed_trades | `30` |
 
 ## Promotion Requirement

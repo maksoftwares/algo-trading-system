@@ -25,6 +25,7 @@ DEFAULT_OUTPUT_MD = Path("outputs") / "reports" / "PHASE2_SHADOW_FIX_OBSERVER_AT
 EA_NAME = "Phase2ShadowFixObserver"
 EA_SOURCE = Path("mt5") / "Experts" / f"{EA_NAME}.mq5"
 RUN_ID = "phase2-shadow-fix-observer-v0.1"
+SHADOW_POLICY_VERSION = "shadow_fix_policy_20260612_v2"
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
     "swing_breakout_retest_v0",
@@ -137,7 +138,7 @@ def attach_phase2_shadow_fix_observers(
             "compile_log": str(compile_log),
             "dry_run_only": True,
             "broker_action_allowed": False,
-            "shadow_policy_version": "shadow_fix_policy_20260608_v1",
+            "shadow_policy_version": SHADOW_POLICY_VERSION,
         },
         "attachment_count": len(attachments),
         "attachments": [_attachment_payload(row) for row in attachments],
@@ -326,7 +327,7 @@ def _render_chart(row: AttachmentRow, index: int) -> str:
             f"InpTargetSymbol={row.symbol}",
             f"InpQualifiedSymbolsCsv={qualified_csv}",
             "InpExpectedServerMarker=Demo",
-            "InpShadowPolicyVersion=shadow_fix_policy_20260608_v1",
+            f"InpShadowPolicyVersion={SHADOW_POLICY_VERSION}",
             f"InpAttachmentLogFileName={_attachment_log_name(row)}",
             f"InpStartupLogFileName={_startup_log_name(row)}",
             "</inputs>",

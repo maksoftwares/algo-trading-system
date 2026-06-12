@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-12T09:19:14.011544Z",
+  "authority": "Read-only M5 replay-bar export for observer outcome scoring. It copies history rates only and does not touch MT5 charts, profiles, orders, positions, or EA settings.",
+  "requested_start_utc": "2026-06-01 00:00:00",
+  "requested_end_utc": "2026-06-12 09:19:13",
+  "output_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
+  "source": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "mode": "read_only_history_copy_rates_range",
+    "symbol_select_used": false,
+    "chart_or_order_changes": false,
+    "terminal_data_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "account_login_masked": "10***42",
+    "account_server": "Capital.ComMena-Demo"
+  },
+  "symbols": [
+    {
+      "symbol": "XAUUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2596,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "requested_start_utc": "2026-06-01 00:00:00",
+      "requested_end_utc": "2026-06-12 09:19:13",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2945.0",
+      "duplicate_bar_times": 0,
+      "continuity_pct_from_first_to_last": "79.15"
+    },
+    {
+      "symbol": "EURUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2696,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "requested_start_utc": "2026-06-01 00:00:00",
+      "requested_end_utc": "2026-06-12 09:19:13",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0",
+      "duplicate_bar_times": 0,
+      "continuity_pct_from_first_to_last": "82.20"
+    },
+    {
+      "symbol": "GBPUSD",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 2696,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 09:15:00",
+      "requested_start_utc": "2026-06-01 00:00:00",
+      "requested_end_utc": "2026-06-12 09:19:13",
+      "gap_count_gt_5m": 9,
+      "max_gap_minutes": "2885.0",
+      "duplicate_bar_times": 0,
+      "continuity_pct_from_first_to_last": "82.20"
+    },
+    {
+      "symbol": "USDJPY",
+      "status": "WARN_GAPS_OR_DUPLICATES",
+      "rows": 1611,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-08 14:30:00",
+      "requested_start_utc": "2026-06-01 00:00:00",
+      "requested_end_utc": "2026-06-12 09:19:13",
+      "gap_count_gt_5m": 5,
+      "max_gap_minutes": "2885.0",
+      "duplicate_bar_times": 0,
+      "continuity_pct_from_first_to_last": "73.53"
+    }
+  ]
+}
