@@ -41,6 +41,13 @@ Fail metric:
 
 Hypothesis: after a family duplicate mutex is applied, duplicate rate drops to approximately zero and portfolio unique-view PF is at least `1.20`.
 
+Pre-week configuration note:
+
+- Owner approved only A3 for the standard demo account. A1 weak-family quarantine, A4 quantitative guard re-arm, and A5 EURUSD/GBPUSD lot normalization were declined, so H3's portfolio PF `>= 1.20` leg now tests the active owner-approved noisy configuration rather than the originally assumed fully tightened floor configuration.
+- The A3 mutex applies to `Phase2ExperimentalDemoExecutor` magic families only: breakout family `920100-920299`, round family `920300-920499`, and session family `920500-920599`.
+- Repair executor lanes use separate `921xxx` magics and were intentionally left trading by the A2 decline, so they are outside this mutex and may still duplicate parent-family behavior. Score repair-lane duplication separately instead of treating residual repair duplicates as A3 mutex failure.
+- If broker rows show same-second same-family duplicates without `WOULD_DUPLICATE_FAMILY_EVENT` guard rows, record it as a race-condition finding for a future GlobalVariable check-and-send lock. Do not change the runtime during the locked week for that unless the owner opens a new maintenance window.
+
 Pass metric:
 
 - Duplicate rate target: `<= 2%` duplicate rows in actual broker CSV.
