@@ -1,0 +1,646 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-12T11:19:10.256056Z",
+  "authority": "Owner-approved Block A maintenance window: A3 family duplicate mutex, A6 USDJPY broker-action off, A7 AccountEquityGuardianShadow Stage A attach. Declined A1/A2/A4/A5 were not changed.",
+  "boundary": "Demo only; no canonical Phase 2 approval; no live trading or real-capital authorization.",
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "terminal_closed_before_profile_change": true,
+    "terminal_relaunched": true,
+    "profile_backup": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_floor_decisions_20260612_111909"
+  },
+  "approved_items": {
+    "A3_family_duplicate_mutex": {
+      "status": "APPLIED",
+      "guard_reason": "WOULD_DUPLICATE_FAMILY_EVENT",
+      "scope": "Phase2ExperimentalDemoExecutor only; entry/stop/target logic untouched."
+    },
+    "A6_usdjpy_broker_action_off": {
+      "status": "OFF",
+      "changed_charts": [],
+      "remaining_usdjpy_broker_action": [],
+      "evidence": "No USDJPY charts with broker action were found."
+    },
+    "A7_guardian_stage_a": {
+      "status": "ATTACHED",
+      "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart24.chr",
+      "observer_only": true
+    }
+  },
+  "declined_items_not_touched": [
+    "A1_weak_family_quarantine",
+    "A2_repair_off",
+    "A4_guard_rearm",
+    "A5_lot_revert"
+  ],
+  "compiled": {
+    "executor": {
+      "name": "Phase2ExperimentalDemoExecutor",
+      "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "scratch_source": "C:\\MT5CompileScratchFloorDecisions\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "scratch_ex5": "C:\\MT5CompileScratchFloorDecisions\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+      "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_floor_decisions.log",
+      "returncode": 1,
+      "compile_pass": true
+    },
+    "guardian": {
+      "name": "AccountEquityGuardianShadow",
+      "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\AccountEquityGuardianShadow.mq5",
+      "scratch_source": "C:\\MT5CompileScratchFloorDecisions\\MQL5\\Experts\\AccountEquityGuardianShadow.mq5",
+      "scratch_ex5": "C:\\MT5CompileScratchFloorDecisions\\MQL5\\Experts\\AccountEquityGuardianShadow.ex5",
+      "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_AccountEquityGuardianShadow_floor_decisions.log",
+      "returncode": 1,
+      "compile_pass": true
+    }
+  },
+  "deployed": [
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1Types.mqh",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1BreakoutRetest.mqh",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\AccountEquityGuardianShadow.mq5",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\AccountEquityGuardianShadow.ex5"
+  ],
+  "before_charts": [
+    {
+      "chart": "chart01.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart02.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart04.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart05.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart06.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart07.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart08.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart09.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart10.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "round_number_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart11.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "round_number_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart12.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart13.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart14.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart15.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart16.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart17.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutExit1R_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart18.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart19.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart20.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart21.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutWideStop_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart22.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutWideStop_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart23.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart24.chr",
+      "symbol": "XAUUSD",
+      "expert": "AccountEquityGuardianShadow",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    }
+  ],
+  "after_charts": [
+    {
+      "chart": "chart01.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart02.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "breakout_retest",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart04.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart05.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart06.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "swing_breakout_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart07.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart08.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart09.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart10.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "round_number_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart11.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "round_number_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart12.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart13.chr",
+      "symbol": "GBPUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart14.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "candidate": "session_extreme_retest_v0",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart15.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart16.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart17.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutExit1R_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart18.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "symbol_normalized_round_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart19.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart20.chr",
+      "symbol": "EURUSD",
+      "expert": "Phase2ExperimentalDemoRepairExecutor",
+      "candidate": "session_extreme_retest_v0_repair_v1",
+      "broker_action_allowed": "true",
+      "dry_run_only": "false",
+      "fixed_lot": "0.05",
+      "eurusd_lot": "0.05",
+      "gbpusd_lot": "0.05"
+    },
+    {
+      "chart": "chart21.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutWideStop_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart22.chr",
+      "symbol": "XAUUSD",
+      "expert": "WR50_BreakoutWideStop_v0",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "0.01",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart23.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    },
+    {
+      "chart": "chart24.chr",
+      "symbol": "XAUUSD",
+      "expert": "AccountEquityGuardianShadow",
+      "candidate": "",
+      "broker_action_allowed": "",
+      "dry_run_only": "",
+      "fixed_lot": "",
+      "eurusd_lot": "",
+      "gbpusd_lot": ""
+    }
+  ],
+  "broker_action_chart_count_after": 17,
+  "log_state_before_wait": {
+    "guardian_startup": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\EQUITY_GUARDIAN_SHADOW_STARTUP.csv",
+    "guardian_startup_exists": true,
+    "guardian_startup_mtime": "2026-06-12T11:11:46.138591Z",
+    "guardian_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\EQUITY_GUARDIAN_SHADOW_LOG.csv",
+    "guardian_log_exists": true,
+    "guardian_log_mtime": "2026-06-12T11:18:56.145858Z"
+  },
+  "log_state_after_wait": {
+    "guardian_startup": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\EQUITY_GUARDIAN_SHADOW_STARTUP.csv",
+    "guardian_startup_exists": true,
+    "guardian_startup_mtime": "2026-06-12T11:11:46.138591Z",
+    "guardian_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\EQUITY_GUARDIAN_SHADOW_LOG.csv",
+    "guardian_log_exists": true,
+    "guardian_log_mtime": "2026-06-12T11:18:56.145858Z"
+  },
+  "checks": [
+    {
+      "name": "A3_family_mutex_source_deployed",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_floor_decisions.log"
+    },
+    {
+      "name": "A7_guardian_source_deployed",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_AccountEquityGuardianShadow_floor_decisions.log"
+    },
+    {
+      "name": "A6_usdjpy_broker_action_off",
+      "status": "PASS",
+      "evidence": "No USDJPY charts with broker action were found."
+    },
+    {
+      "name": "A7_guardian_stage_a_attached",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart24.chr"
+    },
+    {
+      "name": "guardian_startup_log",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\EQUITY_GUARDIAN_SHADOW_STARTUP.csv"
+    },
+    {
+      "name": "declined_items_untouched",
+      "status": "PASS",
+      "evidence": "A1/A2/A4/A5 were not changed by this script."
+    }
+  ]
+}

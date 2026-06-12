@@ -1,6 +1,6 @@
 {
   "status": "FAIL",
-  "created_at_utc": "2026-06-12T09:21:34.685674Z",
+  "created_at_utc": "2026-06-12T11:07:55.448481Z",
   "authority": "This audit classifies broker-action MQL files. A PASS does not authorize Phase 2, demo execution, broker execution, or live capital.",
   "files": [
     {
@@ -19,14 +19,10 @@
     },
     {
       "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\AccountEquityGuardianShadow.mq5",
-      "classification": "forbidden_broker_action_in_canonical_path",
-      "broker_action_terms": [
-        "OrderSend",
-        "PositionModify",
-        "PositionClose"
-      ],
-      "status": "FAIL",
-      "evidence": "Broker-action token outside approved experimental path."
+      "classification": "canonical_or_passive_no_broker_action",
+      "broker_action_terms": [],
+      "status": "PASS",
+      "evidence": "No broker-action tokens."
     },
     {
       "path": "xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase1DryRunShell.mq5",
@@ -386,5 +382,5 @@
       "evidence": "Phase 1 review bundle is evidence-only; canonical deploy script is the deploy authority."
     }
   ],
-  "finding_count": 3
+  "finding_count": 2
 }

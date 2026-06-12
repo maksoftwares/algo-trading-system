@@ -1,0 +1,53 @@
+{
+  "status": "POSITION_PATH_OBSERVER_TERMINAL_RUNNING",
+  "created_at_utc": "2026-06-12T11:16:10.955751Z",
+  "authority": "Position path observer is telemetry-only. It reads open demo positions and writes CSV snapshots. It does not place orders, modify positions, close positions, or change canonical Phase 2 status.",
+  "portable_root": "C:\\MT5PortableTier1PathObserver",
+  "terminal_exe": "C:\\MT5PortableTier1PathObserver\\terminal64.exe",
+  "prepare_attempted": true,
+  "attach_attempted": true,
+  "launch_started": true,
+  "allow_standard_demo_terminal": false,
+  "standard_demo_terminal_path_requested": false,
+  "broker_action_allowed": false,
+  "existing_trading_eas_touched": false,
+  "copied_paths": [
+    "C:\\MT5PortableTier1PathObserver\\terminal64.exe",
+    "C:\\MT5PortableTier1PathObserver\\MetaEditor64.exe",
+    "C:\\MT5PortableTier1PathObserver\\metatester64.exe",
+    "C:\\MT5PortableTier1PathObserver\\Terminal.ico",
+    "C:\\MT5PortableTier1PathObserver\\Config\\accounts.dat",
+    "C:\\MT5PortableTier1PathObserver\\Config\\agents.dat",
+    "C:\\MT5PortableTier1PathObserver\\Config\\common.ini",
+    "C:\\MT5PortableTier1PathObserver\\Config\\dnsperf.dat",
+    "C:\\MT5PortableTier1PathObserver\\Config\\hotkeys.ini",
+    "C:\\MT5PortableTier1PathObserver\\Config\\servers.dat",
+    "C:\\MT5PortableTier1PathObserver\\Config\\settings.ini",
+    "C:\\MT5PortableTier1PathObserver\\Config\\terminal.ini"
+  ],
+  "deployed_sources": [
+    "C:\\MT5PortableTier1PathObserver\\MQL5\\Experts\\Phase2PositionPathObserver.mq5",
+    "C:\\MT5PortableTier1PathObserver\\MQL5\\Presets\\Phase2PositionPathObserver.demo_account_readonly.set"
+  ],
+  "compile_log": "C:\\MT5PortableTier1PathObserver\\MQL5\\Logs\\compile_Phase2PositionPathObserver.log",
+  "profile_backup_dir": "C:\\MT5PortableTier1PathObserver\\_codex_quarantine\\profile_backups\\default_profile_before_position_path_observer_20260612_111559",
+  "observer_log_backup_dir": "C:\\MT5PortableTier1PathObserver\\_codex_quarantine\\observer_logs\\position_path_logs_20260612_111559",
+  "startup_config": "C:\\MT5PortableTier1PathObserver\\Config\\position_path_observer_startup.ini",
+  "startup_login_supplied": true,
+  "startup_server_supplied": true,
+  "terminal_closed_before_profile_replace": true,
+  "logs": {
+    "startup_log_exists": true,
+    "summary_log_exists": true,
+    "snapshot_log_count": 1,
+    "latest_snapshot_log": "C:\\MT5PortableTier1PathObserver\\MQL5\\Files\\position_path_log_20260612.csv",
+    "latest_snapshot_log_mtime": "2026-06-12T15:16:10.512946",
+    "latest_startup_line": "2026.06.12 11:16:10,2026.06.12 11:16:14,2026.06.12 15:16:10,2026.06.12 15:16:10,phase2-position-path-observer-v0.1,Capital.ComMena-Demo,1033030,true,false,10,240,ATTACHED_POSITION_PATH_OBSERVER_TELEMETRY_ONLY"
+  },
+  "chart": {
+    "symbol": "XAUUSD",
+    "timeframe": "M5",
+    "ea": "Phase2PositionPathObserver",
+    "instances": 1
+  }
+}

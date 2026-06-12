@@ -4,14 +4,14 @@
 //| Spec: Downloads/CODEX_BRIEF_ACCOUNT_EQUITY_GUARDIAN_2026_06_09.md |
 //|                                                                   |
 //| Watches TOTAL account equity/floating PnL and LOGS what rules     |
-//| R1-R5 WOULD do. Contains no OrderSend / PositionClose /           |
-//| PositionModify / trade-action calls of any kind by design.        |
+//| R1-R5 WOULD do. Contains no broker order submission or             |
+//| position-changing calls of any kind by design.                    |
 //| Demo-only guard + account allowlist + kill-switch file.           |
 //| Rule parameters below are locked config v0 (2026-06-11);          |
 //| changing them after results = new locked config vN.               |
 //+------------------------------------------------------------------+
 #property copyright "maksoftwares - experimental demo lane"
-#property version   "0.10"
+#property version   "1.000"
 #property strict
 
 input bool   InpEnableShadowLogging      = true;
@@ -25,12 +25,22 @@ input double InpProfitTargetAed          = 300.0;   // R3 (locked v0)
 input int    InpMaxSameDirectionCount    = 2;       // R5 correlation cap (locked v0)
 input string InpKillSwitchFileName       = "GUARDIAN_SHADOW_KILL.txt";
 input string InpLogFileName              = "EQUITY_GUARDIAN_SHADOW_LOG.csv";
+input string InpStartupFileName          = "EQUITY_GUARDIAN_SHADOW_STARTUP.csv";
 
 double   g_session_peak_floating = 0.0;
 datetime g_session_start         = 0;
 string   g_log_header = "timestamp,balance,equity,total_floating,session_peak_floating,day_realized,"
                         "open_positions,max_same_dir_count,rule_fired,would_action,"
                         "hypothetical_locked_pnl_at_trigger";
+string   g_startup_header = "timestamp_broker,timestamp_utc,account_login,server,trade_mode,"
+                            "enable_shadow_logging,timer_seconds,daily_loss_limit_aed,"
+                            "peak_arm_at_aed,giveback_pct,profit_target_aed,"
+                            "max_same_direction_count,kill_switch_file,log_file,status";
+
+string BoolText(const bool value)
+  {
+   return value ? "true" : "false";
+  }
 
 int OnInit()
   {
@@ -49,6 +59,7 @@ int OnInit()
    g_session_start = TimeCurrent();
    g_session_peak_floating = 0.0;
    WriteHeaderIfNeeded();
+   WriteStartupRow("ATTACHED_GUARDIAN_SHADOW_STAGE_A");
    EventSetTimer(MathMax(InpTimerSeconds, 5));
    Print("GuardianShadow: Stage A observer started (closes nothing).");
    return(INIT_SUCCEEDED);
@@ -79,6 +90,33 @@ void WriteHeaderIfNeeded()
    if(handle == INVALID_HANDLE) return;
    FileSeek(handle, 0, SEEK_END);
    FileWrite(handle, g_log_header);
+   FileClose(handle);
+  }
+
+void WriteStartupRow(const string status)
+  {
+   bool new_file = !FileIsExist(InpStartupFileName);
+   int handle = FileOpen(InpStartupFileName, FILE_WRITE|FILE_READ|FILE_CSV|FILE_ANSI, ',');
+   if(handle == INVALID_HANDLE) return;
+   FileSeek(handle, 0, SEEK_END);
+   if(new_file)
+      FileWrite(handle, g_startup_header);
+   FileWrite(handle,
+             TimeToString(TimeCurrent(), TIME_DATE|TIME_SECONDS),
+             TimeToString(TimeGMT(), TIME_DATE|TIME_SECONDS),
+             IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
+             AccountInfoString(ACCOUNT_SERVER),
+             IntegerToString((int)AccountInfoInteger(ACCOUNT_TRADE_MODE)),
+             BoolText(InpEnableShadowLogging),
+             IntegerToString(InpTimerSeconds),
+             DoubleToString(InpDailyLossLimitAed, 2),
+             DoubleToString(InpPeakArmAtAed, 2),
+             DoubleToString(InpGivebackPct, 4),
+             DoubleToString(InpProfitTargetAed, 2),
+             IntegerToString(InpMaxSameDirectionCount),
+             InpKillSwitchFileName,
+             InpLogFileName,
+             status);
    FileClose(handle);
   }
 

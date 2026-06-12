@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
 
 from phase2x_test_helpers import load_script, write_csv
@@ -174,7 +175,8 @@ def test_tier1_preflight_flags_active_source_spread_logger(tmp_path):
     source_terminal = tmp_path / "spread_logger"
     files = source_terminal / "MQL5" / "Files"
     files.mkdir(parents=True)
-    (files / "spread_log_1033030_Capital.ComMena-Demo_XAUUSD_20260610.csv").write_text("active", encoding="utf-8")
+    today = datetime.now(timezone.utc).strftime("%Y%m%d")
+    (files / f"spread_log_1033030_Capital.ComMena-Demo_XAUUSD_{today}.csv").write_text("active", encoding="utf-8")
     module = load_script("tier1_breakout_retest_preflight")
 
     payload = module.generate_tier1_preflight(root, portable_root=portable, source_terminal_root=source_terminal)

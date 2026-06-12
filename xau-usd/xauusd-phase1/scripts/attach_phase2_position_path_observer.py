@@ -38,6 +38,8 @@ def attach_phase2_position_path_observer(
     launch: bool = False,
     wait_seconds: int = 45,
     allow_standard_demo_terminal: bool = False,
+    startup_login: str = "",
+    startup_server: str = "",
 ) -> Path:
     phase1_root = phase1_root.resolve()
     install_root = install_root.resolve()
@@ -61,17 +63,23 @@ def attach_phase2_position_path_observer(
     profile_backup_dir = "not_requested"
     terminal_closed = False
     observer_log_backup_dir = "not_requested"
+    startup_config = "not_requested"
     if attach:
         deployed_sources = [str(path) for path in _deploy_sources(phase1_root, portable_root)]
         compile_log = str(_compile_ea(metaeditor_exe, portable_root))
         terminal_closed = _close_terminal(terminal_exe)
         observer_log_backup_dir = _archive_existing_observer_logs(portable_root)
         profile_backup_dir = str(_replace_default_profile(portable_root, phase1_root))
+        if startup_login or startup_server:
+            startup_config = str(_write_startup_config(portable_root, startup_login, startup_server))
 
     if launch:
         if not terminal_exe.exists():
             raise FileNotFoundError(f"Terminal not found: {terminal_exe}")
-        subprocess.Popen([str(terminal_exe), "/portable"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        command = [str(terminal_exe), "/portable"]
+        if startup_config != "not_requested":
+            command.append(f"/config:{startup_config}")
+        subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if wait_seconds > 0:
             deadline = time.time() + wait_seconds
             while time.time() < deadline:
@@ -109,6 +117,9 @@ def attach_phase2_position_path_observer(
         "compile_log": compile_log,
         "profile_backup_dir": profile_backup_dir,
         "observer_log_backup_dir": observer_log_backup_dir,
+        "startup_config": startup_config,
+        "startup_login_supplied": bool(startup_login),
+        "startup_server_supplied": bool(startup_server),
         "terminal_closed_before_profile_replace": terminal_closed,
         "logs": logs,
         "chart": {
@@ -283,6 +294,40 @@ def _replace_default_profile(portable_root: Path, phase1_root: Path) -> Path:
     return backup_dir
 
 
+def _write_startup_config(portable_root: Path, login: str, server: str) -> Path:
+    config_path = portable_root / "Config" / "position_path_observer_startup.ini"
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["[Common]"]
+    if login:
+        lines.append(f"Login={login}")
+    if server:
+        lines.append(f"Server={server}")
+    lines.extend(
+        [
+            "ProxyEnable=0",
+            "NewsEnable=0",
+            "",
+            "[Charts]",
+            "MaxBars=999999999",
+            "",
+            "[Experts]",
+            "AllowLiveTrading=0",
+            "AllowDllImport=0",
+            "Enabled=1",
+            "Account=0",
+            "Profile=0",
+            "",
+            "[StartUp]",
+            "Symbol=XAUUSD",
+            "Period=M5",
+            "ShutdownTerminal=0",
+            "",
+        ]
+    )
+    config_path.write_text("\n".join(lines), encoding="utf-8")
+    return config_path
+
+
 def _render_chart(phase1_root: Path) -> str:
     preset_inputs = [
         line.strip()
@@ -354,6 +399,7 @@ def _log_state(portable_root: Path) -> dict[str, Any]:
         "snapshot_log_count": len(snapshots),
         "latest_snapshot_log": str(latest_snapshot) if latest_snapshot else "missing",
         "latest_snapshot_log_mtime": datetime.fromtimestamp(latest_snapshot.stat().st_mtime).isoformat() if latest_snapshot else "missing",
+        "latest_startup_line": _latest_nonempty_line(startup),
     }
 
 
@@ -366,6 +412,12 @@ def _read_text(path: Path) -> str:
         except UnicodeError:
             continue
     return path.read_text(errors="replace")
+
+
+def _latest_nonempty_line(path: Path) -> str:
+    text = _read_text(path)
+    lines = [line for line in text.splitlines() if line.strip()]
+    return lines[-1] if lines else ""
 
 
 def _render_markdown(payload: dict[str, Any]) -> str:
@@ -385,10 +437,12 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             f"Broker action allowed: `{payload['broker_action_allowed']}`",
             f"Compile log: `{payload['compile_log']}`",
             f"Profile backup: `{payload['profile_backup_dir']}`",
+            f"Startup config: `{payload['startup_config']}`",
             "",
             "## Logs",
             "",
             f"- Startup log exists: `{payload['logs']['startup_log_exists']}`",
+            f"- Latest startup line: `{payload['logs']['latest_startup_line']}`",
             f"- Summary log exists: `{payload['logs']['summary_log_exists']}`",
             f"- Snapshot log count: `{payload['logs']['snapshot_log_count']}`",
             f"- Latest snapshot log: `{payload['logs']['latest_snapshot_log']}`",
@@ -409,6 +463,8 @@ def main() -> int:
     parser.add_argument("--allow-attach", action="store_true")
     parser.add_argument("--allow-launch", action="store_true")
     parser.add_argument("--allow-standard-demo-terminal", action="store_true")
+    parser.add_argument("--startup-login", default="")
+    parser.add_argument("--startup-server", default="")
     parser.add_argument("--wait-seconds", type=int, default=45)
     args = parser.parse_args()
 
@@ -424,6 +480,8 @@ def main() -> int:
         launch=args.allow_launch,
         wait_seconds=args.wait_seconds,
         allow_standard_demo_terminal=args.allow_standard_demo_terminal,
+        startup_login=args.startup_login,
+        startup_server=args.startup_server,
     )
     print(output)
     return 0

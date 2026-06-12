@@ -866,6 +866,82 @@ long InstanceMagic()
    return 920000 + CandidateMagicOffset(InpCandidate) * 10 + SymbolMagicOffset(_Symbol);
 }
 
+int FamilyCodeForMagic(const long magic)
+{
+   if(magic >= 920100 && magic < 920300)
+      return 1; // breakout-retest family
+   if(magic >= 920300 && magic < 920500)
+      return 2; // round-retest family
+   if(magic >= 920500 && magic < 920600)
+      return 3; // session-extreme family
+   return 0;
+}
+
+int DirectionCodeFromObservation(const string direction_text)
+{
+   if(direction_text == "LONG" || direction_text == "BUY")
+      return POSITION_TYPE_BUY;
+   if(direction_text == "SHORT" || direction_text == "SELL")
+      return POSITION_TYPE_SELL;
+   return -1;
+}
+
+bool SameFamilySameDirectionOpenOnCurrentM5Bar(const Phase1BreakoutRetestObservation &observation)
+{
+   int wanted_direction = DirectionCodeFromObservation(observation.direction_text);
+   if(wanted_direction < 0)
+      return false;
+   int wanted_family = FamilyCodeForMagic(InstanceMagic());
+   if(wanted_family <= 0)
+      return false;
+
+   datetime bar_start = iTime(_Symbol, PERIOD_M5, 0);
+   int bar_seconds = PeriodSeconds(PERIOD_M5);
+   if(bar_start <= 0 || bar_seconds <= 0)
+      return false;
+   datetime bar_end = bar_start + bar_seconds;
+
+   for(int index = 0; index < PositionsTotal(); index++)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(!PositionSelectByTicket(ticket))
+         continue;
+      if(PositionGetString(POSITION_SYMBOL) != _Symbol)
+         continue;
+      if((int)PositionGetInteger(POSITION_TYPE) != wanted_direction)
+         continue;
+      if(FamilyCodeForMagic(PositionGetInteger(POSITION_MAGIC)) != wanted_family)
+         continue;
+      datetime open_time = (datetime)PositionGetInteger(POSITION_TIME);
+      if(open_time >= bar_start && open_time < bar_end)
+         return true;
+   }
+
+   for(int index = 0; index < OrdersTotal(); index++)
+   {
+      ulong ticket = OrderGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(!OrderSelect(ticket))
+         continue;
+      if(OrderGetString(ORDER_SYMBOL) != _Symbol)
+         continue;
+      long order_type = OrderGetInteger(ORDER_TYPE);
+      bool buy_order = order_type == ORDER_TYPE_BUY || order_type == ORDER_TYPE_BUY_LIMIT || order_type == ORDER_TYPE_BUY_STOP || order_type == ORDER_TYPE_BUY_STOP_LIMIT;
+      bool sell_order = order_type == ORDER_TYPE_SELL || order_type == ORDER_TYPE_SELL_LIMIT || order_type == ORDER_TYPE_SELL_STOP || order_type == ORDER_TYPE_SELL_STOP_LIMIT;
+      if((wanted_direction == POSITION_TYPE_BUY && !buy_order) || (wanted_direction == POSITION_TYPE_SELL && !sell_order))
+         continue;
+      if(FamilyCodeForMagic(OrderGetInteger(ORDER_MAGIC)) != wanted_family)
+         continue;
+      datetime setup_time = (datetime)OrderGetInteger(ORDER_TIME_SETUP);
+      if(setup_time >= bar_start && setup_time < bar_end)
+         return true;
+   }
+   return false;
+}
+
 string InstanceComment()
 {
    string candidate = InpCandidate;
@@ -1116,6 +1192,11 @@ bool TradingGuardsPass(
    if(InpMinSecondsBetweenOrders > 0 && g_last_order_submit_time > 0 && TimeCurrent() - g_last_order_submit_time < InpMinSecondsBetweenOrders)
    {
       guard_reason = "min_seconds_between_orders";
+      return false;
+   }
+   if(SameFamilySameDirectionOpenOnCurrentM5Bar(observation))
+   {
+      guard_reason = "WOULD_DUPLICATE_FAMILY_EVENT";
       return false;
    }
    if(InpMaxOpenPositionsPerInstance > 0 && CountOpenExposureForInstance() >= InpMaxOpenPositionsPerInstance)

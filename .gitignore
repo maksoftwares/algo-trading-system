@@ -116,3 +116,9 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_EVIDENCE_BUNDLE_*.zip
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DAILY_DEMO_REVIEW_*.json
 !xau-usd/xauusd-phase1/outputs/reports/PHASE2X_DAILY_DEMO_REVIEW_*.md
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_FLOOR_DECISIONS_APPLIED.json
+!xau-usd/xauusd-phase1/outputs/reports/PHASE2_FLOOR_DECISIONS_APPLIED.md
+!xau-usd/xauusd-phase1/outputs/reports/TIER1_POSITION_PATH_OBSERVER_ATTACHMENT.json
+!xau-usd/xauusd-phase1/outputs/reports/TIER1_POSITION_PATH_OBSERVER_ATTACHMENT.md
+!xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.json
+!xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.md
