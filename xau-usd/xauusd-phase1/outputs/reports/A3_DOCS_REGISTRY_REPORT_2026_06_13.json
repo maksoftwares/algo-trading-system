@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "task": "T3_DOCS_REGISTRY_AND_T17_HYPOTHESIS_LOCKS",
+  "created_at_utc": "2026-06-13T20:34:00Z",
+  "global_boundaries": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a2_1033030_untouched": true,
+    "a1_1025742_not_touched_by_t3": true,
+    "committed_defaults_non_executing": true,
+    "locked_hypotheses_edited": false
+  },
+  "docs_created": [
+    "docs/A3_ROUND_RETEST_GUARDED_HYPOTHESIS_2026_06_13.md",
+    "docs/A3_ROUND_RETEST_STRUCTURED_HYPOTHESIS_2026_06_13.md",
+    "docs/A3_HYPOTHESIS_HASH_MANIFEST.json",
+    "docs/A3_OWNER_AUTHORIZATION_PACKET_TEMPLATE.md",
+    "docs/A3_DEMO_BOUNDARY.md",
+    "docs/A3_DEPLOYMENT_RUNBOOK.md",
+    "docs/A3_MANUAL_EMERGENCY_FLATTEN_PROCEDURE.md"
+  ],
+  "registries_updated": [
+    "docs/MAGIC_NUMBERS.md",
+    "docs/EXPERT_LIFECYCLE.md"
+  ],
+  "hypothesis_hashes": {
+    "A3_ROUND_RETEST_GUARDED_HYPOTHESIS_2026_06_13.md": "952f3b4a0ac324008e0bc3f3ed9ae03fcdff2be31c6de19d4d485620a82df2f4",
+    "A3_ROUND_RETEST_STRUCTURED_HYPOTHESIS_2026_06_13.md": "15336b33cb6ac9e8ea5162327ed1e6ad612ca898937a17caf70e0dcf2cc525d7"
+  }
+}

@@ -14,6 +14,7 @@ Expert states are versioned independently from the shell.
 | `COST_SUSPENDED_CANONICAL` | Measured-cost revalidation failed and the sanity check confirmed the conversion path; canonical execution is blocked for this family. |
 | `COST_REVALIDATION_REGENERATED_PENDING_REVIEW` | A cost-model bug was found and fixed; regenerated cost evidence needs reviewer sign-off before eligibility can change. |
 | `DEMO_APPROVED` | Expert may enter demo pilot after dry-run validation. |
+| `DEMO_REPAIR_PREFLIGHT_PENDING` | Owner-approved demo repair lane exists, but combined preflight and owner packet must pass before arming. |
 | `RETIRED` | Expert is blocked until a new version is researched. |
 
 Current lifecycle:
@@ -26,6 +27,9 @@ Current lifecycle:
 | `quarter_round_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
 | `round_number_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
 | `session_extreme_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
+| `a3_round_retest_guarded_v1` | `DEMO_REPAIR_PREFLIGHT_PENDING` | EA-T1 A3-only repair lane, magic `933000`, dry-run committed default, requires combined preflight and owner packet before any demo arming. |
+| `a3_round_retest_structured_v1` | `DEMO_REPAIR_PREFLIGHT_PENDING` | EA-T2 A3-only structural repair lane, magic `933100`, dry-run committed default, requires combined preflight and owner packet before any demo arming. |
+| `a3_session_extreme_repair_tbd` | `RESEARCH_ONLY` | EA-T3 does not exist; magic band `933200-933299` is reserved pending T14 forensics and separate pre-registration. |
 | `trend_pullback` | `RETIRED` | Failed Phase 0 gates. |
 | `range_mr` | `RETIRED` | Failed Phase 0 gates. |
 
