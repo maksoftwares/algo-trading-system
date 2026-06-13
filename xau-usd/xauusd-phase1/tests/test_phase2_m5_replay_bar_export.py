@@ -28,6 +28,7 @@ def test_m5_replay_bar_export_continuity_reports_gaps_and_duplicates():
     )
 
     assert result["status"] == "WARN_GAPS_OR_DUPLICATES"
+    assert result["timeframe"] == "M5"
     assert result["rows"] == 4
     assert result["gap_count_gt_5m"] == 1
     assert result["max_gap_minutes"] == "15.0"
@@ -45,6 +46,7 @@ def test_m5_replay_bar_export_markdown_states_read_only_boundary():
         "symbols": [
             {
                 "symbol": "XAUUSD",
+                "timeframe": "M5",
                 "status": "PASS",
                 "rows": 3,
                 "first_bar_utc": "2026-06-01 00:00:00",

@@ -21,61 +21,61 @@ Shadow-only impulse-veto evidence. Reads broker-trade CSV and exported M5 bars o
 
 | Metric | Value |
 |---|---:|
-| raw_rows | 1372 |
-| closed_rows | 1356 |
-| resolved_closed_rows | 1356 |
-| target_resolved_closed_rows | 949 |
+| raw_rows | 1510 |
+| closed_rows | 1502 |
+| resolved_closed_rows | 1502 |
+| target_resolved_closed_rows | 1065 |
 | unresolved_rows | 0 |
 
 ## Bar Export Quality
 
 | symbol | status | rows | first_bar_utc | last_bar_utc | gap_count_gt_5m | max_gap_minutes | duplicate_bar_times |
 |---|---|---|---|---|---|---|---|
-| EURUSD | WARN_GAPS_OR_DUPLICATES | 2696 | 2026-06-01 00:00:00 | 2026-06-12 09:15:00 | 9 | 2885.0000 | 0 |
-| GBPUSD | WARN_GAPS_OR_DUPLICATES | 2696 | 2026-06-01 00:00:00 | 2026-06-12 09:15:00 | 9 | 2885.0000 | 0 |
-| USDJPY | WARN_GAPS_OR_DUPLICATES | 1611 | 2026-06-01 00:00:00 | 2026-06-08 14:30:00 | 5 | 2885.0000 | 0 |
-| XAUUSD | WARN_GAPS_OR_DUPLICATES | 2596 | 2026-06-01 00:00:00 | 2026-06-12 09:15:00 | 9 | 2945.0000 | 0 |
+| EURUSD | WARN_GAPS_OR_DUPLICATES | 2836 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2885.0000 | 0 |
+| GBPUSD | WARN_GAPS_OR_DUPLICATES | 2836 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2885.0000 | 0 |
+| USDJPY | WARN_GAPS_OR_DUPLICATES | 2702 | 2026-06-01 00:00:00 | 2026-06-12 09:45:00 | 9 | 2885.0000 | 0 |
+| XAUUSD | WARN_GAPS_OR_DUPLICATES | 2736 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2945.0000 | 0 |
 
 ## Dose Response - All Resolved Closed Rows
 
 | bucket | closed | wins | losses | win_rate_pct | closed_pnl_aed | avg_pnl_aed | profit_factor |
 |---|---|---|---|---|---|---|---|
-| hard_against_lt_-1_5 | 351 | 101 | 236 | 28.77 | -2681.2900 | -7.6390 | 0.6029 |
-| mild_against_-1_5_to_-0_5 | 218 | 84 | 134 | 38.53 | 1216.2300 | 5.5790 | 1.3460 |
-| fresh_flat_abs_lt_0_5 | 272 | 103 | 162 | 37.87 | -493.9100 | -1.8158 | 0.8833 |
-| mild_with_0_5_to_1_5 | 193 | 76 | 113 | 39.38 | 493.7000 | 2.5580 | 1.1728 |
-| extended_with_gt_1_5 | 322 | 135 | 179 | 41.93 | 1527.2000 | 4.7429 | 1.3435 |
+| hard_against_lt_-1_5 | 387 | 110 | 263 | 28.42 | -3254.0200 | -8.4083 | 0.5711 |
+| mild_against_-1_5_to_-0_5 | 246 | 86 | 160 | 34.96 | 410.8400 | 1.6701 | 1.0939 |
+| fresh_flat_abs_lt_0_5 | 309 | 109 | 193 | 35.28 | -1348.0700 | -4.3627 | 0.7458 |
+| mild_with_0_5_to_1_5 | 215 | 91 | 120 | 42.33 | 832.1600 | 3.8705 | 1.2734 |
+| extended_with_gt_1_5 | 345 | 140 | 197 | 40.58 | 1395.2200 | 4.0441 | 1.2835 |
 
 ## Threshold Scoreboard - Target Families
 
 | Threshold | Baseline PnL | Kept PnL | Blocked PnL | Delta | Kept Share | Dedup Baseline | Dedup Kept | Dedup Blocked | Dedup Delta |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| -1.0 | -776.7100 | 2222.2400 | -2998.9500 | 2998.9500 | 66.91 | -1378.7700 | 416.6800 | -1795.4500 | 1795.4500 |
-| -1.5 | -776.7100 | 2044.0800 | -2820.7900 | 2820.7900 | 75.03 | -1378.7700 | 45.9900 | -1424.7600 | 1424.7600 |
-| -2.0 | -776.7100 | 1189.7000 | -1966.4100 | 1966.4100 | 80.93 | -1378.7700 | -387.6100 | -991.1600 | 991.1600 |
+| -1.0 | -2392.7300 | 1400.2000 | -3792.9300 | 3792.9300 | 66.85 | -2059.5100 | 73.1500 | -2132.6600 | 2132.6600 |
+| -1.5 | -2392.7300 | 744.5500 | -3137.2800 | 3137.2800 | 75.12 | -2059.5100 | -545.6700 | -1513.8400 | 1513.8400 |
+| -2.0 | -2392.7300 | -487.5200 | -1905.2100 | 1905.2100 | 81.69 | -2059.5100 | -1080.0000 | -979.5100 | 979.5100 |
 
 ## Threshold Scoreboard By Family
 
 | family | Threshold | Closed | Kept | Blocked | Baseline PnL | Kept PnL | Blocked PnL | Delta |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| round_retest_family | -1.0 | 811 | 543 | 268 | -1285.0600 | 1862.7800 | -3147.8400 | 3147.8400 |
-| round_retest_family | -1.5 | 811 | 611 | 200 | -1285.0600 | 1555.4200 | -2840.4800 | 2840.4800 |
-| round_retest_family | -2.0 | 811 | 658 | 153 | -1285.0600 | 671.3900 | -1956.4500 | 1956.4500 |
-| session_extreme_family | -1.0 | 138 | 92 | 46 | 508.3500 | 359.4600 | 148.8900 | -148.8900 |
-| session_extreme_family | -1.5 | 138 | 101 | 37 | 508.3500 | 488.6600 | 19.6900 | -19.6900 |
-| session_extreme_family | -2.0 | 138 | 110 | 28 | 508.3500 | 518.3100 | -9.9600 | 9.9600 |
+| round_retest_family | -1.0 | 918 | 616 | 302 | -2734.6300 | 1115.3300 | -3849.9600 | 3849.9600 |
+| round_retest_family | -1.5 | 918 | 695 | 223 | -2734.6300 | 330.4800 | -3065.1100 | 3065.1100 |
+| round_retest_family | -2.0 | 918 | 756 | 162 | -2734.6300 | -931.2400 | -1803.3900 | 1803.3900 |
+| session_extreme_family | -1.0 | 147 | 96 | 51 | 341.9000 | 284.8700 | 57.0300 | -57.0300 |
+| session_extreme_family | -1.5 | 147 | 105 | 42 | 341.9000 | 414.0700 | -72.1700 | 72.1700 |
+| session_extreme_family | -2.0 | 147 | 114 | 33 | 341.9000 | 443.7200 | -101.8200 | 101.8200 |
 
 ## Breakout Control
 
 | Metric | Value |
 |---|---:|
-| closed | 400 |
-| wins | 147 |
-| losses | 245 |
-| win_rate_pct | 36.75 |
-| closed_pnl_aed | 869.0000 |
-| avg_pnl_aed | 2.1725 |
-| profit_factor | 1.1896 |
+| closed | 430 |
+| wins | 153 |
+| losses | 269 |
+| win_rate_pct | 35.58 |
+| closed_pnl_aed | 459.2200 |
+| avg_pnl_aed | 1.0680 |
+| profit_factor | 1.0896 |
 
 ## Notes
 
