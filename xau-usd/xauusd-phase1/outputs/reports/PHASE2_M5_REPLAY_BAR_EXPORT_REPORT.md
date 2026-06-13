@@ -4,7 +4,7 @@ Status: `PASS`
 
 Read-only M5 replay-bar export for observer outcome scoring. It copies history rates only and does not touch MT5 charts, profiles, orders, positions, or EA settings.
 
-Requested window UTC: `2026-06-01 00:00:00` to `2026-06-13 21:51:43`
+Requested window UTC: `2026-06-01 00:00:00` to `2026-06-13 22:04:21`
 Output dir: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\m5_replay_bars`
 
 ## Continuity
