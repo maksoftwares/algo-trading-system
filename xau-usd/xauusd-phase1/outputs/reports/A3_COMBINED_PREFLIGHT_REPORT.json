@@ -1,0 +1,50 @@
+{
+  "title": "A3 Combined Preflight Report",
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a1_control_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "committed_defaults_non_executing": true,
+    "broker_action_requires_local_owner_preset_after_all_gates_pass": true
+  },
+  "checks": [
+    {
+      "name": "t4_equivalent_source_tests_both_eas",
+      "status": "PASS",
+      "evidence": "============================= 22 passed in 0.12s =============================="
+    },
+    {
+      "name": "mandatory_source_safety_both_eas",
+      "status": "PASS",
+      "evidence": "source/preset checks"
+    },
+    {
+      "name": "hypotheses_hash_locked_both_eas",
+      "status": "PASS",
+      "evidence": "LOCKED_BEFORE_FIRST_TRADE"
+    },
+    {
+      "name": "decommission_pass",
+      "status": "PASS",
+      "evidence": "WR50/P2WEAKNESS decommission gate."
+    },
+    {
+      "name": "dry_run_session_both_eas_pass",
+      "status": "PENDING",
+      "evidence": "Both EAs require dry-run logs before arming."
+    },
+    {
+      "name": "owner_signature_and_local_preset",
+      "status": "PENDING",
+      "evidence": "Owner must sign and supply local execution preset."
+    }
+  ],
+  "evidence": {},
+  "attach_decision": "DO_NOT_ATTACH",
+  "monday_attach_gate": "CLOSED_UNTIL_ALL_CHECKS_PASS",
+  "target_account": "1033669"
+}
