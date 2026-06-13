@@ -1,0 +1,32 @@
+{
+  "title": "A3 vs A1 Treatment Control Report",
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a1_control_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "committed_defaults_non_executing": true,
+    "broker_action_requires_local_owner_preset_after_all_gates_pass": true
+  },
+  "checks": [
+    {
+      "name": "a1_control_login_documented",
+      "status": "PASS",
+      "evidence": "1025742"
+    },
+    {
+      "name": "a3_trade_sample_available",
+      "status": "PENDING",
+      "evidence": "No A3 trades/signals exist yet for same-period matching."
+    },
+    {
+      "name": "duplicate_hidden_matching_available",
+      "status": "PENDING",
+      "evidence": "Will populate after dry-run/execution signal rows exist."
+    }
+  ],
+  "evidence": {}
+}

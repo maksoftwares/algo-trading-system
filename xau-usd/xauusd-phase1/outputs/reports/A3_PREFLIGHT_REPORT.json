@@ -1,0 +1,87 @@
+{
+  "title": "A3 Preflight Report",
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a1_control_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "committed_defaults_non_executing": true,
+    "broker_action_requires_local_owner_preset_after_all_gates_pass": true
+  },
+  "checks": [
+    {
+      "name": "a3_login_documented",
+      "status": "PASS",
+      "evidence": "1033669"
+    },
+    {
+      "name": "server_marker_demo_practice_required",
+      "status": "PASS",
+      "evidence": "EA source refuses live/real and expects Demo marker."
+    },
+    {
+      "name": "login_allowlist_exact",
+      "status": "PASS",
+      "evidence": "1033669"
+    },
+    {
+      "name": "safe_presets_committed_non_executing",
+      "status": "PASS",
+      "evidence": "T1/T2 safe presets"
+    },
+    {
+      "name": "owner_preset_local_only",
+      "status": "PENDING",
+      "evidence": "See A3_OWNER_AUTHORIZATION_STATUS."
+    },
+    {
+      "name": "magic_no_collision",
+      "status": "PASS",
+      "evidence": "933000 and 933100"
+    },
+    {
+      "name": "hypothesis_hash_locked",
+      "status": "PASS",
+      "evidence": "LOCKED_BEFORE_FIRST_TRADE"
+    },
+    {
+      "name": "source_tests_pass",
+      "status": "PASS",
+      "evidence": "============================= 22 passed in 0.12s =============================="
+    },
+    {
+      "name": "kill_switch_drill_pass",
+      "status": "PENDING",
+      "evidence": "See A3_KILL_SWITCH_DRILL_REPORT."
+    },
+    {
+      "name": "dry_run_session_pass",
+      "status": "PENDING",
+      "evidence": "See A3_DRY_RUN_SESSION_REPORT."
+    },
+    {
+      "name": "guardian_stage_a_startup_pass",
+      "status": "PENDING",
+      "evidence": "No A3 startup log yet."
+    },
+    {
+      "name": "decommission_report_pass",
+      "status": "PASS",
+      "evidence": "See A3_DECOMMISSION_REPORT."
+    },
+    {
+      "name": "a1_a2_state_snapshot_documented",
+      "status": "PASS",
+      "evidence": "A1=1025742; A2=1033030; A2 untouched."
+    },
+    {
+      "name": "owner_signed_demo_packet",
+      "status": "PENDING",
+      "evidence": "See A3_OWNER_AUTHORIZATION_STATUS."
+    }
+  ],
+  "evidence": {}
+}

@@ -1,0 +1,32 @@
+{
+  "title": "A3 Owner Authorization Status",
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a1_control_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "committed_defaults_non_executing": true,
+    "broker_action_requires_local_owner_preset_after_all_gates_pass": true
+  },
+  "checks": [
+    {
+      "name": "owner_packet_template_exists",
+      "status": "PASS",
+      "evidence": "template file"
+    },
+    {
+      "name": "owner_signature_recorded",
+      "status": "PENDING",
+      "evidence": "No signed owner packet found in repo-local evidence."
+    },
+    {
+      "name": "owner_execution_preset_local_only",
+      "status": "PENDING",
+      "evidence": "No local owner execution preset was supplied to Codex; committed presets remain safe."
+    }
+  ],
+  "evidence": {}
+}

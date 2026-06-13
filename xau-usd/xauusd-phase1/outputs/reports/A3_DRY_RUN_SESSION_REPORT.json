@@ -1,0 +1,42 @@
+{
+  "title": "A3 Dry Run Session Report",
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a1_control_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "committed_defaults_non_executing": true,
+    "broker_action_requires_local_owner_preset_after_all_gates_pass": true
+  },
+  "checks": [
+    {
+      "name": "ea_t1_dry_run_logs_present",
+      "status": "PENDING",
+      "evidence": "logs=[]"
+    },
+    {
+      "name": "ea_t2_dry_run_logs_present",
+      "status": "PENDING",
+      "evidence": "logs=[]"
+    },
+    {
+      "name": "zero_a3_orders_observed",
+      "status": "PASS",
+      "evidence": "No A3 order logs or broker rows with magics 933000/933100 observed."
+    },
+    {
+      "name": "active_session_verified",
+      "status": "PENDING",
+      "evidence": "A3 terminal was prepared but not launched; owner login credentials/signature still required."
+    }
+  ],
+  "evidence": {
+    "guarded_signal_logs": [],
+    "structured_signal_logs": [],
+    "guarded_startup_logs": [],
+    "structured_startup_logs": []
+  }
+}

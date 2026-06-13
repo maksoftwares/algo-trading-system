@@ -1,0 +1,27 @@
+{
+  "status": "PENDING",
+  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "a3_login": "1033669",
+  "report_statuses": {
+    "decommission": "PASS",
+    "dry_run": "PENDING",
+    "owner": "PENDING",
+    "runtime": "PASS",
+    "kill": "PENDING",
+    "cost": "PENDING",
+    "vs_a1": "PENDING",
+    "preflight": "PENDING",
+    "combined": "PENDING"
+  },
+  "reports": {
+    "decommission": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_DECOMMISSION_REPORT.md",
+    "dry_run": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_DRY_RUN_SESSION_REPORT.md",
+    "owner": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_OWNER_AUTHORIZATION_STATUS.md",
+    "runtime": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_RUNTIME_RECONCILIATION.md",
+    "kill": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_KILL_SWITCH_DRILL_REPORT.md",
+    "cost": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_COST_CAP_BLOCK_REPORT.md",
+    "vs_a1": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_VS_A1_TREATMENT_CONTROL_REPORT.md",
+    "preflight": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_PREFLIGHT_REPORT.md",
+    "combined": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_COMBINED_PREFLIGHT_REPORT.md"
+  }
+}
