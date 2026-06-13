@@ -1,0 +1,56 @@
+{
+  "status": "PENDING_T17_RUNTIME_AND_OWNER_GATES",
+  "created_at_utc": "2026-06-13T21:03:00Z",
+  "a3_login": "1033669",
+  "demo_only": true,
+  "canonical_phase2_status_unchanged": true,
+  "a2_untouched": true,
+  "steps": [
+    {
+      "step": "compile_ea_t1_ea_t2",
+      "status": "PASS",
+      "evidence": "Both A3 EAs compiled cleanly during T11/T13 work."
+    },
+    {
+      "step": "source_tests",
+      "status": "PASS",
+      "evidence": "A3_COMBINED_PREFLIGHT_REPORT.md records 22 passed."
+    },
+    {
+      "step": "hypothesis_lock_manifest",
+      "status": "PASS",
+      "evidence": "docs/A3_HYPOTHESIS_HASH_MANIFEST.json status LOCKED_BEFORE_FIRST_TRADE."
+    },
+    {
+      "step": "decommission_gate",
+      "status": "PASS",
+      "evidence": "A3_DECOMMISSION_REPORT.md PASS."
+    },
+    {
+      "step": "combined_preflight",
+      "status": "PENDING",
+      "evidence": "A3_COMBINED_PREFLIGHT_REPORT.md PENDING."
+    },
+    {
+      "step": "dry_run_active_session",
+      "status": "PENDING",
+      "evidence": "No EA-T1/EA-T2 startup or signal logs yet."
+    },
+    {
+      "step": "owner_authorization_local_preset",
+      "status": "PENDING",
+      "evidence": "No signed owner packet or local owner execution preset evidence."
+    },
+    {
+      "step": "attach_ea_t1_ea_t2",
+      "status": "NOT_STARTED",
+      "evidence": "Attach gate remains closed."
+    },
+    {
+      "step": "locked_two_week_window",
+      "status": "NOT_STARTED",
+      "evidence": "Starts only after owner arming and successful attach."
+    }
+  ],
+  "attach_decision": "DO_NOT_ATTACH"
+}
