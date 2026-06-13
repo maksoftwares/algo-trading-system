@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "title": "GV Self-Test Parity Report",
+  "created_at_utc": "2026-06-13T23:02:31Z",
+  "created_at_dubai_local": "2026-06-14T03:02:31+04:00",
+  "boundary": {
+    "a3_demo_login": "1033669",
+    "a1_untouched_login": "1025742",
+    "a2_untouched_login": "1033030",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "hypothesis_manifest_unchanged": true,
+    "committed_defaults_remain_non_executing": true
+  },
+  "source_changes": {
+    "EA-T1": "Added RunFamilyMutexNamespaceSelfTest with FAMMUX_SELFTEST_RD_<login>_<gmt> and OnInit startup gate before ATTACHED_A3_RDGUARD_V1.",
+    "EA-T2": "Added RunFamilyMutexNamespaceSelfTest with FAMMUX_SELFTEST_RDSTRUCT_<login>_<gmt> and OnInit startup gate before ATTACHED_A3_RDSTRUCT_V1.",
+    "tests": "Added test_a3_executors_write_startup_gv_mutex_self_test_rows."
+  },
+  "verification": {
+    "pytest": "23 passed",
+    "compile_EA_T1": "0 errors, 0 warnings",
+    "compile_EA_T2": "0 errors, 0 warnings",
+    "startup_order_EA_T1": [
+      "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RD_1033669_20260613_230229",
+      "ATTACHED_A3_RDGUARD_V1"
+    ],
+    "startup_order_EA_T2": [
+      "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RDSTRUCT_1033669_20260613_230229",
+      "ATTACHED_A3_RDSTRUCT_V1"
+    ],
+    "m5_rows_before": 2736,
+    "m5_rows_after": 2736,
+    "m5_last_bar_start_utc": "2026-06-12 20:55:00",
+    "order_log_rows_before_detach": {
+      "EA-T1": 0,
+      "EA-T2": 0
+    },
+    "order_log_rows_after_reattach": {
+      "EA-T1": 0,
+      "EA-T2": 0
+    },
+    "mt5_query": {
+      "account_login": 1033669,
+      "account_server": "Capital.ComMena-Demo",
+      "balance": 4000.0,
+      "positions_total": 0,
+      "orders_total": 0,
+      "target_positions": [],
+      "target_orders": []
+    }
+  },
+  "terminal": {
+    "portable_root": "C:\\MT5PortableRepairLane",
+    "process_id": 21660,
+    "command_line": "\"C:\\MT5PortableRepairLane\\terminal64.exe\" /portable /config:C:\\MT5PortableRepairLane\\Config\\a3_arm_attach_startup.ini "
+  },
+  "reports_updated": [
+    "xau-usd/xauusd-phase1/outputs/reports/A3_COMBINED_PREFLIGHT_REPORT.md",
+    "xau-usd/xauusd-phase1/outputs/reports/A3_ARM_AND_ATTACH_REPORT_2026_06_14.md"
+  ]
+}

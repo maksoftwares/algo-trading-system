@@ -15,7 +15,7 @@
     {
       "name": "t4_equivalent_source_tests_both_eas",
       "status": "PASS",
-      "evidence": "Prior A3 source tests passed; committed source unchanged in this work order."
+      "evidence": "A3 source/preset/report pytest set passed after GV self-test parity patch: 23 passed."
     },
     {
       "name": "mandatory_source_safety_both_eas",
@@ -46,62 +46,131 @@
       "name": "ea_t1_ea_t2_attached_to_a3",
       "status": "PASS",
       "evidence": "Startup rows show ATTACHED_A3_RDGUARD_V1 and ATTACHED_A3_RDSTRUCT_V1 on account 1033669 with dry_run=false and broker_action_allowed=true."
+    },
+    {
+      "name": "gv_mutex_selftest_parity",
+      "status": "PASS",
+      "evidence": "Startup rows now show GV_MUTEX_NAMESPACE_SELF_TEST_PASS before ATTACHED for EA-T1 and EA-T2; see GV_SELFTEST_PARITY_REPORT_2026_06_14.md."
     }
   ],
   "evidence": {
-    "latest_guarded_startup": {
-      "timestamp_broker": "2026.06.12 20:59:57",
-      "timestamp_utc": "2026.06.13 22:31:19",
-      "timestamp_local": "2026.06.14 02:31:19",
-      "run_id": "A3_RDGUARD_V1_SAFE",
+    "latest_guarded_startup_rows": [
+      {
+        "timestamp_broker": "2026.06.12 20:59:57",
+        "timestamp_utc": "2026.06.13 23:02:29",
+        "timestamp_local": "2026.06.14 03:02:29",
+        "run_id": "A3_RDGUARD_V1_SAFE",
+        "account_server": "Capital.ComMena-Demo",
+        "account_login": "1033669",
+        "symbol": "XAUUSD",
+        "magic": "933000",
+        "comment": "RDGUARD_V1",
+        "allowed_account_logins": "1033669",
+        "dry_run": "false",
+        "broker_action_allowed": "true",
+        "fixed_lot": "0.01",
+        "max_open_positions_per_magic": "1",
+        "max_estimated_cost_R": "0.1500",
+        "cost_warn_R": "0.2000",
+        "absolute_reject_cost_R": "0.3000",
+        "max_measured_spread_points": "75.00",
+        "min_seconds_between_orders": "60",
+        "kill_switch_file": "A3_KILL.txt",
+        "startup_status": "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RD_1033669_20260613_230229"
+      },
+      {
+        "timestamp_broker": "2026.06.12 20:59:57",
+        "timestamp_utc": "2026.06.13 23:02:29",
+        "timestamp_local": "2026.06.14 03:02:29",
+        "run_id": "A3_RDGUARD_V1_SAFE",
+        "account_server": "Capital.ComMena-Demo",
+        "account_login": "1033669",
+        "symbol": "XAUUSD",
+        "magic": "933000",
+        "comment": "RDGUARD_V1",
+        "allowed_account_logins": "1033669",
+        "dry_run": "false",
+        "broker_action_allowed": "true",
+        "fixed_lot": "0.01",
+        "max_open_positions_per_magic": "1",
+        "max_estimated_cost_R": "0.1500",
+        "cost_warn_R": "0.2000",
+        "absolute_reject_cost_R": "0.3000",
+        "max_measured_spread_points": "75.00",
+        "min_seconds_between_orders": "60",
+        "kill_switch_file": "A3_KILL.txt",
+        "startup_status": "ATTACHED_A3_RDGUARD_V1"
+      }
+    ],
+    "latest_structured_startup_rows": [
+      {
+        "timestamp_broker": "2026.06.12 20:59:57",
+        "timestamp_utc": "2026.06.13 23:02:29",
+        "timestamp_local": "2026.06.14 03:02:29",
+        "run_id": "A3_RDSTRUCT_V1_SAFE",
+        "account_server": "Capital.ComMena-Demo",
+        "account_login": "1033669",
+        "symbol": "XAUUSD",
+        "magic": "933100",
+        "comment": "RDSTRUCT_V1",
+        "allowed_account_logins": "1033669",
+        "dry_run": "false",
+        "broker_action_allowed": "true",
+        "fixed_lot": "0.01",
+        "max_open_positions_per_magic": "1",
+        "max_estimated_cost_R": "0.1500",
+        "cost_warn_R": "0.2000",
+        "absolute_reject_cost_R": "0.3000",
+        "max_measured_spread_points": "75.00",
+        "min_seconds_between_orders": "60",
+        "kill_switch_file": "A3_KILL.txt",
+        "startup_status": "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RDSTRUCT_1033669_20260613_230229"
+      },
+      {
+        "timestamp_broker": "2026.06.12 20:59:57",
+        "timestamp_utc": "2026.06.13 23:02:29",
+        "timestamp_local": "2026.06.14 03:02:29",
+        "run_id": "A3_RDSTRUCT_V1_SAFE",
+        "account_server": "Capital.ComMena-Demo",
+        "account_login": "1033669",
+        "symbol": "XAUUSD",
+        "magic": "933100",
+        "comment": "RDSTRUCT_V1",
+        "allowed_account_logins": "1033669",
+        "dry_run": "false",
+        "broker_action_allowed": "true",
+        "fixed_lot": "0.01",
+        "max_open_positions_per_magic": "1",
+        "max_estimated_cost_R": "0.1500",
+        "cost_warn_R": "0.2000",
+        "absolute_reject_cost_R": "0.3000",
+        "max_measured_spread_points": "75.00",
+        "min_seconds_between_orders": "60",
+        "kill_switch_file": "A3_KILL.txt",
+        "startup_status": "ATTACHED_A3_RDSTRUCT_V1"
+      }
+    ],
+    "mt5_query": {
+      "account_login": 1033669,
       "account_server": "Capital.ComMena-Demo",
-      "account_login": "1033669",
-      "symbol": "XAUUSD",
-      "magic": "933000",
-      "comment": "RDGUARD_V1",
-      "allowed_account_logins": "1033669",
-      "dry_run": "false",
-      "broker_action_allowed": "true",
-      "fixed_lot": "0.01",
-      "max_open_positions_per_magic": "1",
-      "max_estimated_cost_R": "0.1500",
-      "cost_warn_R": "0.2000",
-      "absolute_reject_cost_R": "0.3000",
-      "max_measured_spread_points": "75.00",
-      "min_seconds_between_orders": "60",
-      "kill_switch_file": "A3_KILL.txt",
-      "startup_status": "ATTACHED_A3_RDGUARD_V1"
+      "balance": 4000.0,
+      "positions_total": 0,
+      "orders_total": 0,
+      "target_positions": [],
+      "target_orders": []
     },
-    "latest_structured_startup": {
-      "timestamp_broker": "2026.06.12 20:59:57",
-      "timestamp_utc": "2026.06.13 22:31:19",
-      "timestamp_local": "2026.06.14 02:31:19",
-      "run_id": "A3_RDSTRUCT_V1_SAFE",
-      "account_server": "Capital.ComMena-Demo",
-      "account_login": "1033669",
-      "symbol": "XAUUSD",
-      "magic": "933100",
-      "comment": "RDSTRUCT_V1",
-      "allowed_account_logins": "1033669",
-      "dry_run": "false",
-      "broker_action_allowed": "true",
-      "fixed_lot": "0.01",
-      "max_open_positions_per_magic": "1",
-      "max_estimated_cost_R": "0.1500",
-      "cost_warn_R": "0.2000",
-      "absolute_reject_cost_R": "0.3000",
-      "max_measured_spread_points": "75.00",
-      "min_seconds_between_orders": "60",
-      "kill_switch_file": "A3_KILL.txt",
-      "startup_status": "ATTACHED_A3_RDSTRUCT_V1"
+    "m5_replay_export": {
+      "rows": 2736,
+      "last_bar_start_utc": "2026-06-12 20:55:00"
     },
     "repair_processes": [
       {
-        "ProcessId": 12928,
+        "ProcessId": 21660,
         "ExecutablePath": "C:\\MT5PortableRepairLane\\terminal64.exe",
-        "CommandLine": "C:\\MT5PortableRepairLane\\terminal64.exe /portable /config:C:\\MT5PortableRepairLane\\Config\\a3_arm_attach_startup.ini"
+        "CommandLine": "\"C:\\MT5PortableRepairLane\\terminal64.exe\" /portable /config:C:\\MT5PortableRepairLane\\Config\\a3_arm_attach_startup.ini "
       }
-    ]
+    ],
+    "gv_selftest_parity_report": "xau-usd/xauusd-phase1/outputs/reports/GV_SELFTEST_PARITY_REPORT_2026_06_14.md"
   },
   "attach_decision": "ATTACHED",
   "monday_attach_gate": "CLOSED_BY_OWNER_WAIVER_THEN_ATTACHED_TO_A3_DEMO",

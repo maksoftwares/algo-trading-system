@@ -1,6 +1,6 @@
 # A3 Arm And Attach Report - 2026-06-14
 
-Status: **ATTACHED_WITH_GV_SELFTEST_LIMITATION_RECORDED**
+Status: **ATTACHED_WITH_GV_SELFTEST_PARITY_CLOSED**
 
 ## Boundary
 
@@ -13,11 +13,11 @@ Status: **ATTACHED_WITH_GV_SELFTEST_LIMITATION_RECORDED**
 
 ## Result
 
-EA-T1 and EA-T2 are attached to A3 via `C:\MT5PortableRepairLane\terminal64.exe` on XAUUSD M5. Latest startup rows show account `1033669`, server `Capital.ComMena-Demo`, `dry_run=false`, and `broker_action_allowed=true` for both EAs. Attached at UTC `2026.06.13 22:31:19` / Dubai local `2026.06.14 02:31:19`.
+EA-T1 and EA-T2 are attached to A3 via `C:\MT5PortableRepairLane\terminal64.exe` on XAUUSD M5. Latest startup rows show account `1033669`, server `Capital.ComMena-Demo`, `dry_run=false`, and `broker_action_allowed=true` for both EAs. Reattached after GV self-test parity at UTC `2026.06.13 23:02:29` / Dubai local `2026.06.14 03:02:29`.
 
-## GV Self-Test Limitation
+## GV Self-Test Addendum
 
-The work order requested startup-log confirmation of a GV mutex namespace self-test. The A3 EA sources do not implement `GV_MUTEX_NAMESPACE_SELF_TEST_PASS` or `FAMMUX_SELFTEST` rows. They do implement distinct namespaces `FAMMUX_RD_XAUUSD_...` and `FAMMUX_RDSTRUCT_XAUUSD_...` plus `GlobalVariableSetOnCondition` before `OrderSend`. I did not change source during this attach window; this limitation is recorded here for reviewer follow-up.
+The earlier GV self-test limitation is now closed by `GV_SELFTEST_PARITY_REPORT_2026_06_14.md`. EA-T1 logs `GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RD_1033669_...` before `ATTACHED_A3_RDGUARD_V1`; EA-T2 logs `GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_RDSTRUCT_1033669_...` before `ATTACHED_A3_RDSTRUCT_V1`. MetaEditor compile was 0 errors / 0 warnings for both, pytest was 23/23 passing, and the read-only MT5 query showed login `1033669`, balance `4000.0` AED, 0 positions, and 0 orders.
 
 ## How To Pause
 

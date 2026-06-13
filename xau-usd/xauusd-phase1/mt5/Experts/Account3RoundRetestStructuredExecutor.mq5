@@ -972,6 +972,33 @@ bool ClaimMutexBeforeOrder(const A3RoundRetestObservation &observation, string &
    return false;
 }
 
+bool RunFamilyMutexNamespaceSelfTest(string &status_text)
+{
+   string test_name = "FAMMUX_SELFTEST_RDSTRUCT_" + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)) + "_" + CompactDateTimeForGlobalVariable(TimeGMT());
+   if(GlobalVariableCheck(test_name))
+      GlobalVariableDel(test_name);
+   bool created = EnsureMutexSlot(test_name);
+   bool claimed = false;
+   bool deleted = false;
+   double stored_value = 0.0;
+   if(created)
+   {
+      ResetLastError();
+      claimed = GlobalVariableSetOnCondition(test_name, (double)InpMagicNumber, 0.0);
+      if(GlobalVariableCheck(test_name))
+         stored_value = GlobalVariableGet(test_name);
+      deleted = GlobalVariableDel(test_name);
+   }
+   bool passed = created && claimed && ((int)stored_value == InpMagicNumber) && deleted;
+   status_text = passed
+      ? "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=" + test_name
+      : "GV_MUTEX_NAMESPACE_SELF_TEST_FAIL name=" + test_name
+         + " created=" + BoolText(created)
+         + " claimed=" + BoolText(claimed)
+         + " deleted=" + BoolText(deleted);
+   return passed;
+}
+
 bool TradingGuardsPass(
    const A3RoundRetestObservation &observation,
    const A3StructureState &structure_state,
@@ -1235,6 +1262,13 @@ int OnInit()
       WriteStartupRow("SCOPE_LOCK_BLOCK");
       return INIT_FAILED;
    }
+   string gv_mutex_self_test_status = "";
+   if(!RunFamilyMutexNamespaceSelfTest(gv_mutex_self_test_status))
+   {
+      WriteStartupRow(gv_mutex_self_test_status);
+      return INIT_FAILED;
+   }
+   WriteStartupRow(gv_mutex_self_test_status);
    WriteStartupRow("ATTACHED_A3_RDSTRUCT_V1");
    EventSetTimer(1);
    return INIT_SUCCEEDED;

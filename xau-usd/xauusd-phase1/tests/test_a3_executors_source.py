@@ -132,6 +132,25 @@ def test_a3_gv_mutex_claim_occurs_before_order_send():
         assert "GlobalVariableSetOnCondition" in text
 
 
+def test_a3_executors_write_startup_gv_mutex_self_test_rows():
+    cases = (
+        (EA_T1, "FAMMUX_SELFTEST_RD_", "ATTACHED_A3_RDGUARD_V1"),
+        (EA_T2, "FAMMUX_SELFTEST_RDSTRUCT_", "ATTACHED_A3_RDSTRUCT_V1"),
+    )
+    for path, prefix, attached_status in cases:
+        text = _text(path)
+        self_test_call = text.index("RunFamilyMutexNamespaceSelfTest(gv_mutex_self_test_status)")
+        attached_row = text.index(f'WriteStartupRow("{attached_status}")')
+
+        assert self_test_call < attached_row
+        assert "RunFamilyMutexNamespaceSelfTest" in text
+        assert prefix in text
+        assert "GV_MUTEX_NAMESPACE_SELF_TEST_PASS" in text
+        assert "GV_MUTEX_NAMESPACE_SELF_TEST_FAIL" in text
+        assert "WriteStartupRow(gv_mutex_self_test_status);" in text
+        assert "GlobalVariableSetOnCondition(test_name, (double)InpMagicNumber, 0.0)" in text
+
+
 def test_a3_eas_have_no_position_management_or_order_deletion_calls():
     for path in (EA_T1, EA_T2):
         text = _text(path)
