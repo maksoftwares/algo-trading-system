@@ -1,10 +1,10 @@
 # P2WEAKNESS BR V1 Runtime Attachment Audit
 
-Status: QUARANTINE_RUNTIME_RISK_FOUND
+Status: NO_ACTIVE_P2WEAKNESS_RUNTIME_RISK_OBSERVED
 
 Read-only P2WEAKNESS_BR_V1 runtime attachment audit. This script reads profile files, deployed source, CSV logs, and optionally MT5 open positions/orders; it does not attach charts, deploy files, change presets, restart terminals, create kill switches, or authorize canonical Phase 2/live trading.
 
-Created at UTC: `2026-06-08T12:00:07.925487Z`
+Created at UTC: `2026-06-13T20:56:30.403273Z`
 
 ## Reviewer Questions
 
@@ -12,13 +12,13 @@ Created at UTC: `2026-06-08T12:00:07.925487Z`
 |---|---|
 | Is any old `930101` EA still attached? | `NO_PROFILE_EVIDENCE` |
 | Is any broker-action-capable P2WEAKNESS chart active? | `NO_PROFILE_EVIDENCE` |
-| Are there open positions by old magic `930101`? | `NO` |
-| Are there open orders by old magic `930101`? | `NO` |
+| Are there open positions by old magic `930101`? | `UNKNOWN` |
+| Are there open orders by old magic `930101`? | `UNKNOWN` |
 | Was the hardened `931000` source deployed? | `YES` |
 
 ## Runtime Boundary
 
-- Terminal root: `C:\MT5PortableP2WeaknessOwnerExec`
+- Terminal root: `C:\MT5PortableP2WeaknessDemo`
 - MT5 runtime touched by script: `False`
 - Standard demo terminal touched: `False`
 - New deployments paused: `True`
@@ -28,7 +28,7 @@ Created at UTC: `2026-06-08T12:00:07.925487Z`
 
 ## Runtime Risks
 
-- `latest_startup_log_reports_broker_action_runtime`
+- No active P2WEAKNESS runtime risks were observed by this read-only audit.
 
 ## Deployed Source
 
@@ -43,8 +43,8 @@ Created at UTC: `2026-06-08T12:00:07.925487Z`
 
 ## Chart Profile Scan
 
-- Chart directory: `C:\MT5PortableP2WeaknessOwnerExec\MQL5\Profiles\Charts\Default`
-- Chart files scanned: `5`
+- Chart directory: `C:\MT5PortableP2WeaknessDemo\MQL5\Profiles\Charts\Default`
+- Chart files scanned: `4`
 - P2WEAKNESS charts found: `0`
 
 | Chart | Symbol | Expert | Magic | Dry run | Broker action | Evidence |
@@ -53,8 +53,8 @@ Created at UTC: `2026-06-08T12:00:07.925487Z`
 
 ## Open Exposure
 
-- MT5 bridge status: `PASS`
-- MT5 bridge note: `Read-only MT5 positions_get/orders_get query completed.`
+- MT5 bridge status: `SKIPPED_BY_ARGUMENT`
+- MT5 bridge note: `MT5 bridge query disabled by argument.`
 - Positions with magic `930101`: `0`
 - Orders with magic `930101`: `0`
 - Positions with magic `931000`: `0`
@@ -62,18 +62,18 @@ Created at UTC: `2026-06-08T12:00:07.925487Z`
 
 ## Log Evidence
 
-- Order log exists: `True`
-- Startup log exists: `True`
+- Order log exists: `False`
+- Startup log exists: `False`
 - Kill switch exists: `False`
 - Order rows: `0`
-- Startup rows: `1`
+- Startup rows: `0`
 - Runtime magics observed: `[]`
 - Latest order action: ``
 - Latest order magic: ``
 - Latest guard reason: ``
-- Latest startup dry-run: `false`
-- Latest startup broker-action allowed: `true`
-- Latest startup status: `ATTACHED_OWNER_AUTHORIZED_WEAKNESS_REVIEW_DEMO_EXECUTOR_ENABLED`
+- Latest startup dry-run: ``
+- Latest startup broker-action allowed: ``
+- Latest startup status: ``
 
 ## Required Before Future Continuation
 

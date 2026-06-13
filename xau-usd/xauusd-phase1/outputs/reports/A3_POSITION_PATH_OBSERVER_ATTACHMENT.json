@@ -1,0 +1,57 @@
+{
+  "status": "POSITION_PATH_OBSERVER_ATTACHED_NOT_VERIFIED_RUNNING",
+  "created_at_utc": "2026-06-13T20:56:03.469623Z",
+  "authority": "Position path observer is telemetry-only. It reads open demo positions and writes CSV snapshots. It does not place orders, modify positions, close positions, or change canonical Phase 2 status.",
+  "portable_root": "C:\\MT5PortableRepairLane",
+  "terminal_exe": "C:\\MT5PortableRepairLane\\terminal64.exe",
+  "prepare_attempted": true,
+  "attach_attempted": true,
+  "launch_started": false,
+  "allow_standard_demo_terminal": false,
+  "standard_demo_terminal_path_requested": false,
+  "broker_action_allowed": false,
+  "existing_trading_eas_touched": false,
+  "copied_paths": [
+    "C:\\MT5PortableRepairLane\\terminal64.exe",
+    "C:\\MT5PortableRepairLane\\MetaEditor64.exe",
+    "C:\\MT5PortableRepairLane\\metatester64.exe",
+    "C:\\MT5PortableRepairLane\\Terminal.ico",
+    "C:\\MT5PortableRepairLane\\Bases",
+    "C:\\MT5PortableRepairLane\\Profiles",
+    "C:\\MT5PortableRepairLane\\Sounds",
+    "C:\\MT5PortableRepairLane\\Config\\accounts.dat",
+    "C:\\MT5PortableRepairLane\\Config\\agents.dat",
+    "C:\\MT5PortableRepairLane\\Config\\certificates",
+    "C:\\MT5PortableRepairLane\\Config\\common.ini",
+    "C:\\MT5PortableRepairLane\\Config\\dnsperf.dat",
+    "C:\\MT5PortableRepairLane\\Config\\hotkeys.ini",
+    "C:\\MT5PortableRepairLane\\Config\\servers.dat",
+    "C:\\MT5PortableRepairLane\\Config\\settings.ini",
+    "C:\\MT5PortableRepairLane\\Config\\terminal.ini"
+  ],
+  "deployed_sources": [
+    "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Phase2PositionPathObserver.mq5",
+    "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Phase2PositionPathObserver.demo_account_readonly.set"
+  ],
+  "compile_log": "C:\\MT5PortableRepairLane\\MQL5\\Logs\\compile_Phase2PositionPathObserver.log",
+  "profile_backup_dir": "C:\\MT5PortableRepairLane\\_codex_quarantine\\profile_backups\\default_profile_before_position_path_observer_20260613_205603",
+  "observer_log_backup_dir": "none",
+  "startup_config": "C:\\MT5PortableRepairLane\\Config\\position_path_observer_startup.ini",
+  "startup_login_supplied": true,
+  "startup_server_supplied": true,
+  "terminal_closed_before_profile_replace": true,
+  "logs": {
+    "startup_log_exists": false,
+    "summary_log_exists": false,
+    "snapshot_log_count": 0,
+    "latest_snapshot_log": "missing",
+    "latest_snapshot_log_mtime": "missing",
+    "latest_startup_line": ""
+  },
+  "chart": {
+    "symbol": "XAUUSD",
+    "timeframe": "M5",
+    "ea": "Phase2PositionPathObserver",
+    "instances": 1
+  }
+}
