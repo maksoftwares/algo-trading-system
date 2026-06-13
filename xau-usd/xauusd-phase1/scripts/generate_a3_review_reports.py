@@ -38,6 +38,7 @@ def generate_a3_review_reports(
     today = report_date or datetime.now(timezone.utc).strftime("%Y_%m_%d")
 
     trades = [_normalize_trade(row) for row in _read_csv(trades_csv)]
+    signal_rows = _load_a3_signal_rows(output_dir)
     evening = _evening_session_pnl(trades)
     payload: dict[str, Any] = {
         "status": "PASS",
@@ -53,6 +54,7 @@ def generate_a3_review_reports(
         "report_date": today,
         "evening_session_pnl": evening,
         "T10_evening_standdown_shadow": _evening_standdown_shadow(trades),
+        "confluence_breakdown": _confluence_breakdown(signal_rows),
         "a3_trade_summary": _summarize([row for row in trades if str(row.get("magic", "")) in A3_MAGICS]),
         "portfolio_summary": _summarize(trades),
     }
@@ -71,6 +73,14 @@ def _read_csv(path: Path) -> list[dict[str, str]]:
         return []
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def _load_a3_signal_rows(output_dir: Path) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    for pattern in ("a3_rdguard_v1_signal_log*.csv", "a3_rdstruct_v1_signal_log*.csv"):
+        for path in sorted(output_dir.glob(pattern)):
+            rows.extend(_read_csv(path))
+    return rows
 
 
 def _normalize_trade(row: dict[str, str]) -> dict[str, Any]:
@@ -126,6 +136,27 @@ def _evening_standdown_shadow(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "shadow_only": True,
         "reason_code": "EVENING_STANDDOWN_WOULD_FIRE",
     }
+
+
+def _confluence_breakdown(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
+    counts: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        count = str(row.get("confluence_count", "") or "missing")
+        families = str(row.get("confluence_families", "") or "")
+        bucket = counts.setdefault(count, {"confluence_count": count, "rows": 0, "families_examples": set()})
+        bucket["rows"] += 1
+        if families:
+            bucket["families_examples"].add(families)
+    result = []
+    for count, bucket in sorted(counts.items(), key=lambda item: item[0]):
+        result.append(
+            {
+                "confluence_count": count,
+                "rows": bucket["rows"],
+                "families_examples": ", ".join(sorted(bucket["families_examples"])) if bucket["families_examples"] else "",
+            }
+        )
+    return result
 
 
 def _summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -208,6 +239,10 @@ def _render_weekly(payload: dict[str, Any]) -> str:
             "",
             _standdown_line(payload),
             "",
+            "## Confluence Breakdown",
+            "",
+            _confluence_table(payload["confluence_breakdown"]),
+            "",
             "## A3 Trade Summary",
             "",
             _dict_table(payload["a3_trade_summary"]),
@@ -257,6 +292,15 @@ def _dict_table(row: dict[str, Any]) -> str:
     lines = ["| Metric | Value |", "|---|---:|"]
     for key, value in row.items():
         lines.append(f"| {key} | {value} |")
+    return "\n".join(lines)
+
+
+def _confluence_table(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "_No A3 confluence signal rows available yet._"
+    lines = ["| Confluence Count | Rows | Families examples |", "|---:|---:|---|"]
+    for row in rows:
+        lines.append(f"| {row['confluence_count']} | {row['rows']} | {row['families_examples']} |")
     return "\n".join(lines)
 
 

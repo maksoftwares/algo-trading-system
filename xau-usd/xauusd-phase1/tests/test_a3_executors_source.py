@@ -114,6 +114,15 @@ def test_a3_required_reason_codes_present():
         assert token in t2
 
 
+def test_a3_signal_rows_include_confluence_fields():
+    for path in (EA_T1, EA_T2):
+        text = _text(path)
+        assert '"confluence_families"' in text
+        assert '"confluence_count"' in text
+        assert "ConfluenceFamiliesForSignal" in text
+        assert "ConfluenceCountForSignal" in text
+
+
 def test_a3_gv_mutex_claim_occurs_before_order_send():
     for path in (EA_T1, EA_T2):
         text = _text(path)

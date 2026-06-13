@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "created_at_utc": "2026-06-13T20:38:49.640356Z",
+  "created_at_utc": "2026-06-13T20:40:50.207202Z",
   "global_boundaries": {
     "a3_demo_login": "1033669",
     "demo_only": true,
@@ -29,6 +29,7 @@
     "shadow_only": true,
     "reason_code": "EVENING_STANDDOWN_WOULD_FIRE"
   },
+  "confluence_breakdown": [],
   "a3_trade_summary": {
     "closed": 0,
     "wins": 0,

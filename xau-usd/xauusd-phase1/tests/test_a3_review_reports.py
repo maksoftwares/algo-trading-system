@@ -54,6 +54,31 @@ def test_a3_review_reports_summarize_evening_standdown_shadow(tmp_path: Path):
     assert "EVENING_STANDDOWN_WOULD_FIRE would fire" in output.daily_markdown.read_text(encoding="utf-8")
 
 
+def test_a3_review_reports_include_confluence_breakdown(tmp_path: Path):
+    module = _load_module()
+    trades = tmp_path / "trades.csv"
+    reports = tmp_path / "reports"
+    _write_trades(trades)
+    _write_signal_log(reports / "a3_rdguard_v1_signal_log.csv")
+
+    output = module.generate_a3_review_reports(
+        tmp_path,
+        trades_csv=trades,
+        report_date="2026_06_13",
+        output_dir=reports,
+    )
+
+    payload = json.loads(output.json_path.read_text(encoding="utf-8"))
+    weekly = output.weekly_markdown.read_text(encoding="utf-8")
+
+    assert payload["confluence_breakdown"] == [
+        {"confluence_count": "1", "rows": 1, "families_examples": "ROUND"},
+        {"confluence_count": "2", "rows": 1, "families_examples": "BREAKOUT;ROUND"},
+    ]
+    assert "Confluence Breakdown" in weekly
+    assert "| 2 | 1 | BREAKOUT;ROUND |" in weekly
+
+
 def _write_trades(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = ["entry_time", "candidate", "symbol", "state", "profit_aed", "magic", "time_bucket"]
@@ -75,6 +100,19 @@ def _write_standdown_trades(path: Path) -> None:
         {"entry_time": "2026-06-13 16:00:00", "candidate": "round", "symbol": "XAUUSD", "state": "CLOSED", "profit_aed": "-120", "magic": "920301", "time_bucket": "Evening 16:00-19:59"},
         {"entry_time": "2026-06-13 16:20:00", "candidate": "round", "symbol": "XAUUSD", "state": "CLOSED", "profit_aed": "-90", "magic": "920301", "time_bucket": "Evening 16:00-19:59"},
         {"entry_time": "2026-06-13 17:00:00", "candidate": "breakout", "symbol": "XAUUSD", "state": "CLOSED", "profit_aed": "40", "magic": "920101", "time_bucket": "Evening 16:00-19:59"},
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _write_signal_log(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = ["timestamp_utc", "confluence_families", "confluence_count"]
+    rows = [
+        {"timestamp_utc": "2026-06-13 16:00:00", "confluence_families": "ROUND", "confluence_count": "1"},
+        {"timestamp_utc": "2026-06-13 16:05:00", "confluence_families": "BREAKOUT;ROUND", "confluence_count": "2"},
     ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)

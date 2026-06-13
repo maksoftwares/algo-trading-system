@@ -211,6 +211,8 @@ bool EnsureSignalLogHeader()
       "daily_realized_pnl_aed",
       "daily_pause_until",
       "mutex_name",
+      "confluence_families",
+      "confluence_count",
       "dry_run",
       "broker_action_allowed"
    };
@@ -819,6 +821,20 @@ string MutexNameForObservation(const A3RoundRetestObservation &observation)
    return "FAMMUX_RD_XAUUSD_" + direction + "_" + CompactDateTimeForGlobalVariable(bar_time);
 }
 
+string ConfluenceFamiliesForSignal(const A3RoundRetestObservation &observation)
+{
+   if(!observation.would_signal)
+      return "";
+   return "ROUND";
+}
+
+int ConfluenceCountForSignal(const A3RoundRetestObservation &observation)
+{
+   if(!observation.would_signal)
+      return 0;
+   return 1;
+}
+
 bool EnsureMutexSlot(const string mutex_name)
 {
    if(mutex_name == "")
@@ -1101,6 +1117,8 @@ void WriteSignalRow(
       DoubleToString(daily_pnl, 2),
       TimeToString(g_daily_pause_until, TIME_DATE | TIME_SECONDS),
       mutex_name,
+      ConfluenceFamiliesForSignal(observation),
+      IntegerToString(ConfluenceCountForSignal(observation)),
       BoolText(InpDryRunOnly),
       BoolText(InpBrokerActionAllowed)
    };
