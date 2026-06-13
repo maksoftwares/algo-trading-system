@@ -1,6 +1,6 @@
 {
   "status": "SHADOW_READY",
-  "created_at_utc": "2026-06-13T20:42:15.374051Z",
+  "created_at_utc": "2026-06-13T21:51:44.276286Z",
   "authority": "Shadow-only impulse-veto evidence. Reads broker-trade CSV and exported M5 bars only; does not read or modify terminals, charts, presets, orders, positions, or running EAs.",
   "source_actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
   "source_bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
@@ -45,9 +45,9 @@
     },
     {
       "symbol": "USDJPY",
-      "rows": 2702,
+      "rows": 2836,
       "first_bar_utc": "2026-06-01 00:00:00",
-      "last_bar_utc": "2026-06-12 09:45:00",
+      "last_bar_utc": "2026-06-12 20:55:00",
       "gap_count_gt_5m": 9,
       "max_gap_minutes": "2885.0000",
       "duplicate_bar_times": 0,

@@ -1,0 +1,76 @@
+{
+  "status": "PASS_NO_REGRESSION_WITH_CURRENT_HISTORY_CEILING",
+  "task": "T12_BAR_SHADOW_REFRESH_REVERIFY_AFTER_NO_GO_REVIEW",
+  "created_at_utc": "2026-06-13T21:52:49Z",
+  "review_stop_issue": {
+    "claim": "XAUUSD M5 regressed to 2026-06-12 09:15:00 and PHASE2_IMPULSE_VETO_SHADOW_ROWS.csv dropped to 1370 rows starting 2026-06-03 13:20:00.",
+    "current_workspace_result": "Not reproduced after guarded scratch export and actual repo re-export. XAUUSD M5 and impulse shadow rows are non-regressed."
+  },
+  "guarded_scratch_export": {
+    "scratch_dir": "C:\\MT5CompileScratch\\T12Reexport_20260614_015040",
+    "requested_end_utc": "2026-06-13 21:50:40",
+    "xauusd_m5_rows": 2736,
+    "xauusd_m5_first_bar_utc": "2026-06-01 00:00:00",
+    "xauusd_m5_last_bar_utc": "2026-06-12 20:55:00",
+    "scratch_result": "Did not regress XAUUSD M5 coverage before the actual repo export was rerun."
+  },
+  "actual_repo_reexport": {
+    "bar_export_report_json": "xau-usd/xauusd-phase1/outputs/reports/PHASE2_M5_REPLAY_BAR_EXPORT_REPORT.json",
+    "bar_export_report_md": "xau-usd/xauusd-phase1/outputs/reports/PHASE2_M5_REPLAY_BAR_EXPORT_REPORT.md",
+    "impulse_shadow_report_json": "xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_REPORT.json",
+    "impulse_shadow_report_md": "xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_REPORT.md",
+    "impulse_shadow_rows_csv": "xau-usd/xauusd-phase1/outputs/reports/PHASE2_IMPULSE_VETO_SHADOW_ROWS.csv",
+    "requested_end_utc": "2026-06-13 21:51:43",
+    "status": "SHADOW_READY"
+  },
+  "bar_coverage": {
+    "XAUUSD_M5": {
+      "rows": 2736,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 20:55:00",
+      "non_regressed_against_review_threshold": true
+    },
+    "XAUUSD_H1": {
+      "rows": 228,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 20:00:00"
+    },
+    "XAUUSD_H4": {
+      "rows": 61,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 20:00:00"
+    },
+    "XAUUSD_D1": {
+      "rows": 11,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 00:00:00"
+    },
+    "USDJPY_M5": {
+      "rows": 2836,
+      "first_bar_utc": "2026-06-01 00:00:00",
+      "last_bar_utc": "2026-06-12 20:55:00",
+      "note": "Fresh export advanced USDJPY M5 from the prior 2026-06-12 09:45:00 endpoint to 2026-06-12 20:55:00."
+    }
+  },
+  "impulse_shadow_rows": {
+    "rows": 1510,
+    "min_entry_time": "2026-06-01 15:10:00",
+    "max_entry_time": "2026-06-13 00:15:01",
+    "first_row_entry_time": "2026-06-13 00:15:01",
+    "last_row_entry_time": "2026-06-01 15:10:00",
+    "non_regressed_against_review_threshold": true
+  },
+  "current_history_ceiling": {
+    "xauusd_m5_requested_end_utc": "2026-06-13 21:51:43",
+    "xauusd_m5_last_available_bar_utc": "2026-06-12 20:55:00",
+    "can_claim_bars_past_2026_06_12_20_55": false,
+    "note": "The fresh Sunday MT5 history export did not provide XAUUSD M5 bars after Friday 2026-06-12 20:55:00 UTC. The report therefore treats 20:55 as the current broker-history ceiling, not a successful advance beyond that timestamp."
+  },
+  "boundary": {
+    "read_only_history_export": true,
+    "orders_or_positions_changed": false,
+    "charts_profiles_presets_or_ea_settings_changed": false,
+    "attach_gate_opened": false
+  },
+  "result": "T12 was rerun without the reported M5/shadow regression. The repository now carries refreshed export metadata and USDJPY M5 catch-up rows; XAUUSD M5 remains capped at the latest broker-provided Friday close bar."
+}

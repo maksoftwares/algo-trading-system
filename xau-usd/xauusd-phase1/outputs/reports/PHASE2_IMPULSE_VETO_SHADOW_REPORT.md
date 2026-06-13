@@ -33,7 +33,7 @@ Shadow-only impulse-veto evidence. Reads broker-trade CSV and exported M5 bars o
 |---|---|---|---|---|---|---|---|
 | EURUSD | WARN_GAPS_OR_DUPLICATES | 2836 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2885.0000 | 0 |
 | GBPUSD | WARN_GAPS_OR_DUPLICATES | 2836 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2885.0000 | 0 |
-| USDJPY | WARN_GAPS_OR_DUPLICATES | 2702 | 2026-06-01 00:00:00 | 2026-06-12 09:45:00 | 9 | 2885.0000 | 0 |
+| USDJPY | WARN_GAPS_OR_DUPLICATES | 2836 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2885.0000 | 0 |
 | XAUUSD | WARN_GAPS_OR_DUPLICATES | 2736 | 2026-06-01 00:00:00 | 2026-06-12 20:55:00 | 9 | 2945.0000 | 0 |
 
 ## Dose Response - All Resolved Closed Rows
