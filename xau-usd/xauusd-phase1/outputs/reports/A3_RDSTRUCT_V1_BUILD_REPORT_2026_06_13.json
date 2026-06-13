@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "task": "T13_EA_T2_SOURCE_WITH_T15_PER_MAGIC_G5",
+  "created_at_utc": "2026-06-13T20:28:40Z",
+  "global_boundaries": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a2_1033030_untouched": true,
+    "a1_1025742_not_touched_by_t13": true,
+    "committed_defaults_non_executing": true,
+    "locked_hypotheses_edited": false,
+    "ea_t3_code_written": false
+  },
+  "source": "xau-usd/xauusd-phase1/mt5/Experts/Account3RoundRetestStructuredExecutor.mq5",
+  "identity": {
+    "magic": 933100,
+    "magic_band": "933100-933199",
+    "comment": "RDSTRUCT_V1",
+    "target_symbol": "XAUUSD"
+  },
+  "committed_defaults": {
+    "InpDryRunOnly": true,
+    "InpBrokerActionAllowed": false,
+    "InpAllowedAccountLoginsCsv": "1033669",
+    "InpFixedLot": 0.01
+  },
+  "kernel": {
+    "source_basis": "same self-contained symbol_normalized_round_retest_v0 mechanics as EA-T1",
+    "source_sharing_with_a1_or_ea_t1": false,
+    "preserved_rules": [
+      "symbol-normalized round increments",
+      "20-bar M5 break search via shifts 3-22",
+      "0.30 ATR break threshold",
+      "5 point retest tolerance",
+      "0.10 ATR stop pad",
+      "1.50R take-profit"
+    ]
+  },
+  "structural_confirmation": {
+    "reason_code_on_block": "STRUCT_FILTER_BLOCK",
+    "timeframe": "M15",
+    "lookback_bars": 20,
+    "swing_left_bars": 4,
+    "swing_right_bars": 4,
+    "definition": "confirmed same-direction M15 swing break inside lookback; LONG requires break close above confirmed swing high, SHORT requires break close below confirmed swing low",
+    "carried_from_existing_logic": "swing_breakout_retest_v0 / CPhase1BreakoutRetestObserver confirmed swing left/right=4 definition"
+  },
+  "guards": {
+    "G1": "not present by design",
+    "G2": "GlobalVariableSetOnCondition FAMMUX_RDSTRUCT_XAUUSD_<dir>_<barTime> before OrderSend",
+    "G3": "3 own-magic SL closes inside rolling 2h pauses to next 4h boundary",
+    "G4": "own-magic Dubai-day realized PnL <= -150 AED pauses entries until next Dubai day; no position-closing calls",
+    "G5": "T15 baked in: max 1 open position per magic, cost cap 0.15R, COST_WARN above 0.20R, reject above 0.30R, spread cap 75 points, min 60s, fixed 0.01 lot",
+    "G6": "XAUUSD only, demo marker required, live/real refused, login allowlist 1033669, shared A3_KILL.txt"
+  },
+  "would_signal_logging": {
+    "log": "a3_rdstruct_v1_signal_log.csv",
+    "vetoed_or_blocked_rows": true,
+    "fields": [
+      "structure_confirmed",
+      "structure_swing_bar_index",
+      "structure_swing_time",
+      "structure_break_direction",
+      "structure_level",
+      "structure_break_close",
+      "structure_distance_from_level_points",
+      "estimated_cost_R",
+      "cost_warn",
+      "open_positions_for_magic",
+      "streak_sl_count",
+      "daily_realized_pnl_aed",
+      "mutex_name"
+    ]
+  },
+  "compile": {
+    "scratch": "C:/MT5CompileScratch/A3RdStruct_20260614_002840",
+    "log": "C:/MT5CompileScratch/A3RdStruct_20260614_002840/Logs/compile_Account3RoundRetestStructuredExecutor.log",
+    "result": "Result: 0 errors, 0 warnings, 713 ms elapsed, cpu='X64 Regular'"
+  },
+  "runtime_attachment": "not_attached_in_T13; T17 combined preflight gates owner arming"
+}
