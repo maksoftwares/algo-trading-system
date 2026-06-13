@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-13T20:37:40.689783Z",
+  "global_boundaries": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a2_1033030_untouched": true,
+    "a1_1025742_not_touched_by_report": true
+  },
+  "source_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+  "report_date": "2026_06_13",
+  "evening_session_pnl": {
+    "window_dubai": "16:00-19:59",
+    "realized_pnl_aed": 906.65,
+    "floating_pnl_aed": 0,
+    "total_pnl_aed": 906.65,
+    "status": "closed for the day",
+    "rows": 410,
+    "open_rows": 0
+  },
+  "a3_trade_summary": {
+    "closed": 0,
+    "wins": 0,
+    "losses": 0,
+    "closed_pnl_aed": 0,
+    "win_rate_pct": null,
+    "profit_factor": null
+  },
+  "portfolio_summary": {
+    "closed": 1502,
+    "wins": 536,
+    "losses": 933,
+    "closed_pnl_aed": -1963.87,
+    "win_rate_pct": 35.69,
+    "profit_factor": 0.9222
+  }
+}
