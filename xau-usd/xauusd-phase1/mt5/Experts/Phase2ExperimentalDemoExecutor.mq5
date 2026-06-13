@@ -47,6 +47,8 @@ datetime g_last_m5_bar_time = 0;
 datetime g_last_order_submit_time = 0;
 string g_order_day_key = "";
 int g_orders_today = 0;
+string g_family_mutex_claim_name = "";
+datetime g_family_mutex_claim_bar_time = 0;
 
 string BoolText(const bool value)
 {
@@ -886,6 +888,127 @@ int DirectionCodeFromObservation(const string direction_text)
    return -1;
 }
 
+string CompactDateTimeForGlobalVariable(const datetime value)
+{
+   string text = TimeToString(value, TIME_DATE | TIME_SECONDS);
+   StringReplace(text, ".", "");
+   StringReplace(text, "-", "");
+   StringReplace(text, ":", "");
+   StringReplace(text, " ", "_");
+   return text;
+}
+
+datetime CurrentM5BarStart()
+{
+   datetime bar_time = iTime(_Symbol, PERIOD_M5, 0);
+   if(bar_time > 0)
+      return bar_time;
+   int period_seconds = PeriodSeconds(PERIOD_M5);
+   if(period_seconds <= 0)
+      period_seconds = 300;
+   return (datetime)((long)(TimeCurrent() / period_seconds) * period_seconds);
+}
+
+string FamilyMutexDirectionToken(const string direction_text)
+{
+   int direction_code = DirectionCodeFromObservation(direction_text);
+   if(direction_code == POSITION_TYPE_BUY)
+      return "BUY";
+   if(direction_code == POSITION_TYPE_SELL)
+      return "SELL";
+   return "NONE";
+}
+
+string FamilyMutexNameForObservation(const Phase1BreakoutRetestObservation &observation)
+{
+   int family = FamilyCodeForMagic(InstanceMagic());
+   string direction = FamilyMutexDirectionToken(observation.direction_text);
+   datetime bar_time = CurrentM5BarStart();
+   if(family <= 0 || direction == "NONE" || bar_time <= 0)
+      return "";
+   return "FAMMUX_" + IntegerToString(family) + _Symbol + direction + CompactDateTimeForGlobalVariable(bar_time);
+}
+
+bool EnsureFamilyMutexSlot(const string mutex_name)
+{
+   if(mutex_name == "")
+      return false;
+   if(GlobalVariableCheck(mutex_name))
+      return true;
+   ResetLastError();
+   if(GlobalVariableTemp(mutex_name))
+      return true;
+   if(GlobalVariableCheck(mutex_name))
+      return true;
+   Print("Could not create family mutex global variable ", mutex_name, " error=", GetLastError());
+   return false;
+}
+
+void ExpireFamilyMutexClaim()
+{
+   if(g_family_mutex_claim_name == "")
+      return;
+   int period_seconds = PeriodSeconds(PERIOD_M5);
+   if(period_seconds <= 0)
+      period_seconds = 300;
+   if(TimeCurrent() < g_family_mutex_claim_bar_time + period_seconds)
+      return;
+   if(GlobalVariableCheck(g_family_mutex_claim_name))
+   {
+      double owner = GlobalVariableGet(g_family_mutex_claim_name);
+      if((long)owner == InstanceMagic())
+         GlobalVariableDel(g_family_mutex_claim_name);
+   }
+   g_family_mutex_claim_name = "";
+   g_family_mutex_claim_bar_time = 0;
+}
+
+bool ClaimFamilyMutexBeforeOrder(const Phase1BreakoutRetestObservation &observation, string &mutex_name)
+{
+   ExpireFamilyMutexClaim();
+   mutex_name = FamilyMutexNameForObservation(observation);
+   if(!EnsureFamilyMutexSlot(mutex_name))
+      return false;
+   long magic = InstanceMagic();
+   ResetLastError();
+   if(GlobalVariableSetOnCondition(mutex_name, (double)magic, 0.0))
+   {
+      g_family_mutex_claim_name = mutex_name;
+      g_family_mutex_claim_bar_time = CurrentM5BarStart();
+      return true;
+   }
+   double owner = GlobalVariableCheck(mutex_name) ? GlobalVariableGet(mutex_name) : 0.0;
+   Print("Family mutex already claimed: ", mutex_name, " owner=", DoubleToString(owner, 0), " magic=", magic);
+   return false;
+}
+
+bool RunFamilyMutexNamespaceSelfTest(string &status_text)
+{
+   string test_name = "FAMMUX_SELFTEST_" + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)) + "_" + CompactDateTimeForGlobalVariable(TimeGMT());
+   if(GlobalVariableCheck(test_name))
+      GlobalVariableDel(test_name);
+   bool created = EnsureFamilyMutexSlot(test_name);
+   bool claimed = false;
+   bool deleted = false;
+   double stored_value = 0.0;
+   if(created)
+   {
+      ResetLastError();
+      claimed = GlobalVariableSetOnCondition(test_name, (double)InstanceMagic(), 0.0);
+      if(GlobalVariableCheck(test_name))
+         stored_value = GlobalVariableGet(test_name);
+      deleted = GlobalVariableDel(test_name);
+   }
+   bool passed = created && claimed && ((long)stored_value == InstanceMagic()) && deleted;
+   status_text = passed
+      ? "GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=" + test_name
+      : "GV_MUTEX_NAMESPACE_SELF_TEST_FAIL name=" + test_name
+         + " created=" + BoolText(created)
+         + " claimed=" + BoolText(claimed)
+         + " deleted=" + BoolText(deleted);
+   return passed;
+}
+
 bool SameFamilySameDirectionOpenOnCurrentM5Bar(const Phase1BreakoutRetestObservation &observation)
 {
    int wanted_direction = DirectionCodeFromObservation(observation.direction_text);
@@ -1276,6 +1399,14 @@ bool SendDemoMarketOrder(const Phase1BreakoutRetestObservation &observation)
       return false;
    }
 
+   string mutex_name = "";
+   if(!ClaimFamilyMutexBeforeOrder(observation, mutex_name))
+   {
+      guard_reason = mutex_name == "" ? "family_mutex_context_unavailable" : "WOULD_DUPLICATE_FAMILY_EVENT";
+      WriteOrderLogRow("GUARD_BLOCK", observation.direction_text, 0.0, price, sl, tp, result, observation.reason_code, guard_reason, "MARKET_PROXY", spread_at_signal_points, spread_at_signal_points, observation.entry_price, estimated_cost_r_signal, stop_distance_points);
+      return false;
+   }
+
    MqlTradeRequest request;
    ZeroMemory(request);
    request.action = TRADE_ACTION_DEAL;
@@ -1387,6 +1518,14 @@ int OnInit()
    if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader())
       return INIT_FAILED;
 
+   string gv_mutex_self_test_status = "";
+   if(!RunFamilyMutexNamespaceSelfTest(gv_mutex_self_test_status))
+   {
+      WriteStartupRow(gv_mutex_self_test_status);
+      return INIT_FAILED;
+   }
+   WriteStartupRow(gv_mutex_self_test_status);
+
    g_breakout_observer.Configure(CandidateUsesSwingObserver(InpCandidate));
    ResetDailyOrderCounterIfNeeded();
    WriteStartupRow("ATTACHED_DEMO_EXECUTOR_ENABLED");
@@ -1397,6 +1536,7 @@ int OnInit()
 void OnDeinit(const int reason)
 {
    EventKillTimer();
+   ExpireFamilyMutexClaim();
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
@@ -1426,6 +1566,7 @@ void OnDeinit(const int reason)
 
 void OnTimer()
 {
+   ExpireFamilyMutexClaim();
    datetime m5_bar_time = iTime(_Symbol, PERIOD_M5, 0);
    if(m5_bar_time <= 0 || m5_bar_time == g_last_m5_bar_time)
       return;

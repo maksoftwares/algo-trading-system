@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "task": "T0_A1_GV_MUTEX_RACE_FIX",
+  "created_at_utc": "2026-06-13T20:18:52Z",
+  "global_boundaries": {
+    "a3_demo_login": "1033669",
+    "demo_only": true,
+    "canonical_phase2_status_unchanged": true,
+    "a2_1033030_untouched": true,
+    "a1_1025742_touched_only_for_t0_mutex_fix": true,
+    "committed_defaults_non_executing": true,
+    "locked_hypotheses_edited": false
+  },
+  "source_change": {
+    "file": "xau-usd/xauusd-phase1/mt5/Experts/Phase2ExperimentalDemoExecutor.mq5",
+    "mutex_pattern": "FAMMUX_<family><symbol><direction><m5_bar_time>",
+    "atomic_claim": "GlobalVariableSetOnCondition(mutex_name, (double)magic, 0.0)",
+    "claim_position": "after all ordinary guards and request validation, immediately before OrderSend",
+    "release_policy": "own claim is deleted only after the M5 bar expires; bar timestamp is part of the mutex name",
+    "guard_reason_on_claim_failure": "WOULD_DUPLICATE_FAMILY_EVENT",
+    "startup_self_test": "GV_MUTEX_NAMESPACE_SELF_TEST_PASS / GV_MUTEX_NAMESPACE_SELF_TEST_FAIL rows in experimental_demo_executor_startup_v02*.csv"
+  },
+  "runtime_maintenance": {
+    "terminal": "C:/Program Files/MetaTrader 5/terminal64.exe",
+    "terminal_data_dir": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075",
+    "account_login": "1025742",
+    "server": "Capital.ComMena-Demo",
+    "backup": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/_codex_quarantine/a1_gv_mutex_fix_20260614_001832",
+    "terminal_closed_before_deploy": true,
+    "terminal_relaunched": true,
+    "compile_log": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Logs/compile_Phase2ExperimentalDemoExecutor_a1_gv_mutex.log",
+    "compile_result": "Result: 0 errors, 0 warnings, 997 ms elapsed, cpu='X64 Regular'",
+    "before_self_test_rows": 0,
+    "after_self_test_rows": 14,
+    "new_self_test_detected": true,
+    "latest_self_test_row": "2026.06.12 20:59:57,2026.06.13 20:18:52,2026.06.14 00:18:52,phase2-experimental-demo-executor-v0.2,Capital.ComMena-Demo,XAUUSD,symbol_normalized_round_retest_v0,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,\"EURUSD,GBPUSD,XAUUSD\",1025742,1025742,\"breakout_retest,swing_breakout_retest_v0,symbol_normalized_round_retest_v0,round_number_retest_v0,session_extreme_retest_v0\",false,true,true,true,true,0,UNLIMITED,0.0000,0.00,experimental_demo_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1025742_20260613_201852"
+  },
+  "verification": {
+    "focused_pytest": "tests/test_phase2_experimental_demo_mutex.py - 3 passed",
+    "scratch_compile_log": "C:/MT5CompileScratch/A1GvMutex_20260614_001736/Logs/compile_Phase2ExperimentalDemoExecutor.log",
+    "scratch_compile_result": "Result: 0 errors, 0 warnings, 997 ms elapsed, cpu='X64 Regular'"
+  },
+  "result": "A1 control data should no longer be duplicate-contaminated by same-family same-direction races within an M5 bar."
+}
