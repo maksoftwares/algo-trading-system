@@ -1,0 +1,80 @@
+{
+  "status": "ATTACHED_WITH_GV_SELFTEST_LIMITATION_RECORDED",
+  "created_at_utc": "2026-06-13T22:34:24.624543Z",
+  "attached_at_utc": "2026.06.13 22:31:19",
+  "attached_at_dubai_local": "2026.06.14 02:31:19",
+  "portable_root": "C:\\MT5PortableRepairLane",
+  "local_presets": {
+    "EA-T1": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestGuardedExecutor.armed_owner_20260614.set",
+    "EA-T2": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestStructuredExecutor.armed_owner_20260614.set"
+  },
+  "startup_logs": {
+    "EA-T1": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_rdguard_v1_startup.csv",
+    "EA-T2": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_rdstruct_v1_startup.csv"
+  },
+  "signal_logs": {
+    "EA-T1": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_rdguard_v1_signal_log.csv",
+    "EA-T2": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_rdstruct_v1_signal_log.csv"
+  },
+  "mt5_query": {
+    "account": {
+      "login": 1033669,
+      "trade_mode": 0,
+      "leverage": 100,
+      "limit_orders": 0,
+      "margin_so_mode": 0,
+      "trade_allowed": true,
+      "trade_expert": true,
+      "margin_mode": 2,
+      "currency_digits": 2,
+      "fifo_close": false,
+      "balance": 4000.0,
+      "credit": 0.0,
+      "profit": 0.0,
+      "equity": 4000.0,
+      "margin": 0.0,
+      "margin_free": 4000.0,
+      "margin_level": 0.0,
+      "margin_so_call": 100.0,
+      "margin_so_so": 50.0,
+      "margin_initial": 0.0,
+      "margin_maintenance": 0.0,
+      "assets": 0.0,
+      "liabilities": 0.0,
+      "commission_blocked": 0.0,
+      "name": "MUHAMMAD ALI KHAN",
+      "server": "Capital.ComMena-Demo",
+      "currency": "AED",
+      "company": "Capital Com Mena Securities Trading L.L.C"
+    },
+    "terminal": {
+      "community_account": false,
+      "community_connection": false,
+      "connected": true,
+      "dlls_allowed": false,
+      "trade_allowed": true,
+      "tradeapi_disabled": false,
+      "email_enabled": false,
+      "ftp_enabled": false,
+      "notifications_enabled": true,
+      "mqid": true,
+      "build": 5833,
+      "maxbars": 100000000,
+      "codepage": 0,
+      "ping_last": 130829,
+      "community_balance": 0.0,
+      "retransmission": 0.08493290300662477,
+      "company": "MetaQuotes Ltd.",
+      "name": "MetaTrader 5",
+      "language": "English",
+      "path": "C:\\MT5PortableRepairLane",
+      "data_path": "C:\\MT5PortableRepairLane",
+      "commondata_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common"
+    },
+    "positions_total": 0,
+    "orders_total": 0,
+    "target_positions": [],
+    "target_orders": []
+  },
+  "gv_selftest_limitation": "A3 EAs contain FAMMUX_RD/FAMMUX_RDSTRUCT namespaces and GlobalVariableSetOnCondition but do not implement a dedicated GV_MUTEX_NAMESPACE_SELF_TEST_PASS startup row; source was not changed during this attach work order."
+}

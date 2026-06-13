@@ -1,0 +1,59 @@
+{
+  "status": "ATTACHED",
+  "created_at_utc": "2026-06-13T22:34:24.624543Z",
+  "attached_at_utc": "2026.06.13 22:31:19",
+  "attached_at_dubai_local": "2026.06.14 02:31:19",
+  "a3_login": "1033669",
+  "demo_only": true,
+  "canonical_phase2_status_unchanged": true,
+  "a1_untouched": true,
+  "a2_untouched": true,
+  "steps": [
+    {
+      "step": "compile_ea_t1_ea_t2",
+      "status": "PASS",
+      "evidence": "MetaEditor compile logs report 0 errors, 0 warnings for both EAs."
+    },
+    {
+      "step": "source_tests",
+      "status": "PASS",
+      "evidence": "Prior A3 source tests passed; committed source unchanged."
+    },
+    {
+      "step": "hypothesis_lock_manifest",
+      "status": "PASS",
+      "evidence": "docs/A3_HYPOTHESIS_HASH_MANIFEST.json unchanged."
+    },
+    {
+      "step": "decommission_gate",
+      "status": "PASS",
+      "evidence": "A3_DECOMMISSION_REPORT.md PASS."
+    },
+    {
+      "step": "dry_run_active_session",
+      "status": "WAIVED_BY_OWNER",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\CODEX_WORK_ORDER_A3_ARM_AND_ATTACH_2026_06_14.md"
+    },
+    {
+      "step": "owner_authorization_local_preset",
+      "status": "RECORDED",
+      "evidence": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestGuardedExecutor.armed_owner_20260614.set; C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestStructuredExecutor.armed_owner_20260614.set"
+    },
+    {
+      "step": "kill_switch_drill",
+      "status": "PASS",
+      "evidence": "With A3_KILL.txt present, both EAs wrote SCOPE_LOCK_BLOCK and were removed; final attach occurred only after removing the kill file."
+    },
+    {
+      "step": "attach_ea_t1_ea_t2",
+      "status": "PASS",
+      "evidence": "Startup rows ATTACHED_A3_RDGUARD_V1 / ATTACHED_A3_RDSTRUCT_V1; process C:/MT5PortableRepairLane/terminal64.exe remains running."
+    },
+    {
+      "step": "locked_two_week_window",
+      "status": "STARTED",
+      "evidence": "Starts at 2026.06.13 22:31:19 UTC / 2026.06.14 02:31:19 Dubai local."
+    }
+  ],
+  "attach_decision": "ATTACHED"
+}

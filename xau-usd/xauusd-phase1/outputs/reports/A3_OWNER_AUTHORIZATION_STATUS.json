@@ -1,7 +1,7 @@
 {
   "title": "A3 Owner Authorization Status",
-  "status": "PENDING",
-  "created_at_utc": "2026-06-13T21:03:26.004528Z",
+  "status": "RECORDED",
+  "created_at_utc": "2026-06-13T22:34:24.624543Z",
   "boundary": {
     "a3_demo_login": "1033669",
     "demo_only": true,
@@ -19,14 +19,21 @@
     },
     {
       "name": "owner_signature_recorded",
-      "status": "PENDING",
-      "evidence": "No signed owner packet found in repo-local evidence."
+      "status": "RECORDED",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\CODEX_WORK_ORDER_A3_ARM_AND_ATTACH_2026_06_14.md"
     },
     {
       "name": "owner_execution_preset_local_only",
-      "status": "PENDING",
-      "evidence": "No local owner execution preset was supplied to Codex; committed presets remain safe."
+      "status": "RECORDED",
+      "evidence": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestGuardedExecutor.armed_owner_20260614.set; C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestStructuredExecutor.armed_owner_20260614.set"
     }
   ],
-  "evidence": {}
+  "evidence": {
+    "work_order": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\CODEX_WORK_ORDER_A3_ARM_AND_ATTACH_2026_06_14.md",
+    "local_presets": {
+      "EA-T1": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestGuardedExecutor.armed_owner_20260614.set",
+      "EA-T2": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3RoundRetestStructuredExecutor.armed_owner_20260614.set"
+    },
+    "preset_scope": "local-only under C:/MT5PortableRepairLane/MQL5/Presets; not committed canonical defaults"
+  }
 }
