@@ -12,6 +12,10 @@ Status: `PASS`
 
 Evening session PnL (16:00-19:59 Dubai): 906.65 AED, status: closed for the day
 
+## T10 Evening Stand-Down Shadow
+
+EVENING_STANDDOWN_WOULD_FIRE did not fire; shadow-only threshold was not reached.
+
 ## A3 Trade Summary
 
 | Metric | Value |

@@ -13,6 +13,7 @@ DEFAULT_TRADES = Path("outputs") / "reports" / "PHASE2_DEMO_ACTUAL_BROKER_TRADES
 DEFAULT_REPORT_DIR = Path("outputs") / "reports"
 A3_MAGICS = {"933000", "933100"}
 EVENING_BUCKET = "Evening 16:00-19:59"
+EVENING_STANDDOWN_THRESHOLD_AED = -200.0
 
 
 @dataclass(frozen=True)
@@ -51,6 +52,7 @@ def generate_a3_review_reports(
         "source_trades_csv": str(trades_csv),
         "report_date": today,
         "evening_session_pnl": evening,
+        "T10_evening_standdown_shadow": _evening_standdown_shadow(trades),
         "a3_trade_summary": _summarize([row for row in trades if str(row.get("magic", "")) in A3_MAGICS]),
         "portfolio_summary": _summarize(trades),
     }
@@ -92,6 +94,37 @@ def _evening_session_pnl(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "status": "open" if open_rows else "closed for the day",
         "rows": len(evening_rows),
         "open_rows": len(open_rows),
+    }
+
+
+def _evening_standdown_shadow(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    evening_rows = [
+        row
+        for row in rows
+        if row.get("time_bucket") == EVENING_BUCKET and row.get("state") == "CLOSED"
+    ]
+    evening_rows = sorted(evening_rows, key=lambda row: _parse_dt(row.get("entry_time")) or datetime.min)
+    running = 0.0
+    trigger_index: int | None = None
+    trigger_time = ""
+    running_at_trigger: float | None = None
+    for index, row in enumerate(evening_rows):
+        running += float(row.get("profit_value", 0.0))
+        if trigger_index is None and running <= EVENING_STANDDOWN_THRESHOLD_AED:
+            trigger_index = index
+            trigger_time = str(row.get("entry_time", ""))
+            running_at_trigger = running
+    post_trigger_rows = evening_rows[trigger_index + 1 :] if trigger_index is not None else []
+    post_trigger_pnl = sum(float(row.get("profit_value", 0.0)) for row in post_trigger_rows)
+    return {
+        "threshold_aed": EVENING_STANDDOWN_THRESHOLD_AED,
+        "would_fire": trigger_index is not None,
+        "trigger_time": trigger_time,
+        "running_pnl_at_trigger_aed": round(running_at_trigger, 2) if running_at_trigger is not None else None,
+        "post_trigger_closed_rows": len(post_trigger_rows),
+        "post_trigger_realized_pnl_aed": round(post_trigger_pnl, 2),
+        "shadow_only": True,
+        "reason_code": "EVENING_STANDDOWN_WOULD_FIRE",
     }
 
 
@@ -171,6 +204,10 @@ def _render_weekly(payload: dict[str, Any]) -> str:
             "",
             _evening_line(payload),
             "",
+            "## T10 Evening Stand-Down Shadow",
+            "",
+            _standdown_line(payload),
+            "",
             "## A3 Trade Summary",
             "",
             _dict_table(payload["a3_trade_summary"]),
@@ -192,11 +229,27 @@ def _render_daily(payload: dict[str, Any]) -> str:
             "",
             _evening_line(payload),
             "",
+            "## T10_evening_standdown_shadow",
+            "",
+            _standdown_line(payload),
+            "",
             "## Guard Attribution",
             "",
             "No A3 guard-attribution rows are available until EA-T1/EA-T2 dry-run or execution logs exist.",
             "",
         ]
+    )
+
+
+def _standdown_line(payload: dict[str, Any]) -> str:
+    shadow = payload["T10_evening_standdown_shadow"]
+    if not shadow["would_fire"]:
+        return "EVENING_STANDDOWN_WOULD_FIRE did not fire; shadow-only threshold was not reached."
+    return (
+        "EVENING_STANDDOWN_WOULD_FIRE would fire at "
+        f"{shadow['trigger_time']} with post-trigger realized PnL "
+        f"{shadow['post_trigger_realized_pnl_aed']:.2f} AED across "
+        f"{shadow['post_trigger_closed_rows']} closed rows."
     )
 
 

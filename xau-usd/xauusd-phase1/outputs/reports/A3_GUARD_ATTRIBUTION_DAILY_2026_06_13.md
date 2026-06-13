@@ -4,6 +4,10 @@ Status: `PASS`
 
 Evening session PnL (16:00-19:59 Dubai): 906.65 AED, status: closed for the day
 
+## T10_evening_standdown_shadow
+
+EVENING_STANDDOWN_WOULD_FIRE did not fire; shadow-only threshold was not reached.
+
 ## Guard Attribution
 
 No A3 guard-attribution rows are available until EA-T1/EA-T2 dry-run or execution logs exist.
