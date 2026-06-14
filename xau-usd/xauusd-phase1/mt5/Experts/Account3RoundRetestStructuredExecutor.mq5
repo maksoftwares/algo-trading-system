@@ -4,6 +4,8 @@
 #property version   "1.000"
 #property description "A3 round-retest guarded executor. Demo-only, dry-run by committed default."
 
+#include <DirectionStateShadow.mqh>
+
 input string InpRunId = "A3_RDSTRUCT_V1";
 input bool InpDryRunOnly = true;
 input bool InpBrokerActionAllowed = false;
@@ -16,6 +18,7 @@ input string InpOrderComment = "RDSTRUCT_V1";
 input string InpSignalLogFileName = "a3_rdstruct_v1_signal_log.csv";
 input string InpStartupLogFileName = "a3_rdstruct_v1_startup.csv";
 input string InpOrderLogFileName = "a3_rdstruct_v1_order_log.csv";
+input string InpDirectionStateFileName = "dirstate_xauusd.csv";
 input int InpM15StructureLookbackBars = 20;
 input int InpSwingConfirmLeftBars = 4;
 input int InpSwingConfirmRightBars = 4;
@@ -232,7 +235,10 @@ bool EnsureSignalLogHeader()
       "confluence_families",
       "confluence_count",
       "dry_run",
-      "broker_action_allowed"
+      "broker_action_allowed",
+      "dirstate_direction",
+      "dirstate_regime",
+      "dirstate_strength"
    };
    return AppendCsvRow(InpSignalLogFileName, header);
 }
@@ -268,7 +274,10 @@ bool EnsureOrderLogHeader()
       "stop_distance_points",
       "reason_code",
       "guard_reason",
-      "mutex_name"
+      "mutex_name",
+      "dirstate_direction",
+      "dirstate_regime",
+      "dirstate_strength"
    };
    return AppendCsvRow(InpOrderLogFileName, header);
 }
@@ -1098,6 +1107,10 @@ void WriteOrderLogRow(
 )
 {
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   string dirstate_direction = "0";
+   string dirstate_regime = "UNKNOWN";
+   string dirstate_strength = "0.000";
+   DirectionStateShadowFieldsForLog(dirstate_direction, dirstate_regime, dirstate_strength, InpDirectionStateFileName);
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
@@ -1125,7 +1138,10 @@ void WriteOrderLogRow(
       DoubleToString(stop_distance_points, 2),
       observation.reason_code,
       guard_reason,
-      mutex_name
+      mutex_name,
+      dirstate_direction,
+      dirstate_regime,
+      dirstate_strength
    };
    AppendCsvRow(InpOrderLogFileName, row);
 }
@@ -1198,6 +1214,10 @@ void WriteSignalRow(
 )
 {
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   string dirstate_direction = "0";
+   string dirstate_regime = "UNKNOWN";
+   string dirstate_strength = "0.000";
+   DirectionStateShadowFieldsForLog(dirstate_direction, dirstate_regime, dirstate_strength, InpDirectionStateFileName);
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
@@ -1242,7 +1262,10 @@ void WriteSignalRow(
       ConfluenceFamiliesForSignal(observation),
       IntegerToString(ConfluenceCountForSignal(observation)),
       BoolText(InpDryRunOnly),
-      BoolText(InpBrokerActionAllowed)
+      BoolText(InpBrokerActionAllowed),
+      dirstate_direction,
+      dirstate_regime,
+      dirstate_strength
    };
    AppendCsvRow(InpSignalLogFileName, row);
 }

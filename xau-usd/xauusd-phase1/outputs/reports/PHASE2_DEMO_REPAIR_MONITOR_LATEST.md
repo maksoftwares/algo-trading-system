@@ -4,7 +4,7 @@ Overall status: SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED
 
 Monitor/report only. No MT5 runtime is modified.
 
-Generated at UTC: `2026-06-13T04:03:54.223391Z`
+Generated at UTC: `2026-06-14T04:03:32.212894Z`
 Policy ID: `phase2_demo_repair_policy_2026_06_12_v2`
 Policy enforced: `false`
 Policy effective at Dubai: `None`

@@ -8,6 +8,7 @@
 
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
+#include <DirectionStateShadow.mqh>
 
 input string InpRunId = "phase2-experimental-demo-executor-v0.2";
 input bool InpDryRunOnly = false;
@@ -27,6 +28,7 @@ input string InpAuthorizedCandidatesCsv = "breakout_retest";
 input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v02.csv";
 input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
 input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
+input string InpDirectionStateFileName = "dirstate_xauusd.csv";
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
 input double InpEURUSDFixedLot = 0.05;
@@ -713,7 +715,10 @@ bool EnsureAttachmentLogHeader()
       "entry_price",
       "stop_loss",
       "take_profit",
-      "stop_distance_points"
+      "stop_distance_points",
+      "dirstate_direction",
+      "dirstate_regime",
+      "dirstate_strength"
    };
    return AppendCsvRow(InpAttachmentLogFileName, header);
 }
@@ -830,7 +835,10 @@ bool EnsureOrderLogHeader()
       "account_orders_today",
       "account_open_exposure",
       "reason_code",
-      "guard_reason"
+      "guard_reason",
+      "dirstate_direction",
+      "dirstate_regime",
+      "dirstate_strength"
    };
    return AppendCsvRow(InpOrderLogFileName, header);
 }
@@ -1172,6 +1180,10 @@ void WriteOrderLogRow(
 )
 {
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   string dirstate_direction = "0";
+   string dirstate_regime = "UNKNOWN";
+   string dirstate_strength = "0.000";
+   DirectionStateShadowFieldsForLog(dirstate_direction, dirstate_regime, dirstate_strength, InpDirectionStateFileName);
    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    double slippage_points = (point > 0.0 && result.price > 0.0 && request_price > 0.0)
       ? MathAbs(result.price - request_price) / point
@@ -1218,7 +1230,10 @@ void WriteOrderLogRow(
       IntegerToString(AccountOrdersToday()),
       IntegerToString(CountOpenExposureForAccount()),
       reason_code,
-      guard_reason
+      guard_reason,
+      dirstate_direction,
+      dirstate_regime,
+      dirstate_strength
    };
    AppendCsvRow(InpOrderLogFileName, row);
 }
@@ -1595,6 +1610,11 @@ void OnTimer()
       observation.direction_text = "NONE";
    }
 
+   string dirstate_direction = "0";
+   string dirstate_regime = "UNKNOWN";
+   string dirstate_strength = "0.000";
+   DirectionStateShadowFieldsForLog(dirstate_direction, dirstate_regime, dirstate_strength, InpDirectionStateFileName);
+
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
       TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
@@ -1622,7 +1642,10 @@ void OnTimer()
       DoubleToString(observation.entry_price, (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS)),
       DoubleToString(observation.stop_loss, (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS)),
       DoubleToString(observation.take_profit, (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS)),
-      DoubleToString(observation.stop_distance_points, 2)
+      DoubleToString(observation.stop_distance_points, 2),
+      dirstate_direction,
+      dirstate_regime,
+      dirstate_strength
    };
    AppendCsvRow(InpAttachmentLogFileName, row);
    if(observation.would_signal)

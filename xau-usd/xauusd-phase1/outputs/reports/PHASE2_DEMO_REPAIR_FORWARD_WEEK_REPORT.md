@@ -4,7 +4,7 @@ Overall status: PENDING_FORWARD_WEEK_IN_PROGRESS
 
 Forward-week report only. It does not authorize canonical Phase 2 or runtime promotion.
 
-Generated at UTC: `2026-06-13T04:03:54.375063Z`
+Generated at UTC: `2026-06-14T04:03:32.212894Z`
 Policy ID: `phase2_demo_repair_policy_2026_06_12_v2`
 Forward window starts: `2026-06-09 00:00:00`
 Expected window end: `2026-06-16 00:00:00`
