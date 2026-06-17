@@ -15,6 +15,7 @@ Phase 1 reserves the `910000-910999` magic-number range for the XAUUSD Master EA
 | Older demo experimental family | Demo-only experimental / non-canonical | `920000-920999` | Same-family duplicate suppression only; not canonical Phase 2. |
 | WR50 experimental family | Demo-only experimental / non-canonical | `930000-930999` | Reserved by `xauusd-wr50-experimental`; P2WEAKNESS must not use this range. |
 | P2WEAKNESS_BR_V1 | Owner-requested weakness-review experimental demo lane | `931000-931099`; active magic `931000` | Separate from WR50. Source defaults are non-executing; owner-authorized preset required for any future demo broker action. |
+| A3 experimental repair lanes | Demo-only A3 account `1033669`; non-canonical | `933000-933499`; active `933000`, `933100`, `933200`, `933300`, reserved `933400` | Separate A3 namespace. `933400` is repo-side only until owner packet, compile proof, and observer/dry-run attach approval. |
 
 ## Paper-Mode Rule
 
@@ -33,5 +34,6 @@ Experimental demo broker-action lanes must keep active magic numbers non-overlap
 | `920000-920999` | Older demo family |
 | `930000-930999` | WR50 experimental family |
 | `931000-931099` | P2WEAKNESS_BR_V1 |
+| `933000-933499` | A3 experimental repair lanes |
 
 No experimental assignment in this registry authorizes canonical Phase 2, broker-side paper mode, live trading, or real capital.

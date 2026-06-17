@@ -4,28 +4,135 @@ Overall status: SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED
 
 Monitor/report only. No MT5 runtime is modified.
 
-Generated at UTC: `2026-06-14T04:03:32.212894Z`
+Generated at UTC: `2026-06-17T04:03:47.811135Z`
 Policy ID: `phase2_demo_repair_policy_2026_06_12_v2`
 Policy enforced: `false`
 Policy effective at Dubai: `None`
 Since: `2026-06-09 00:00:00`
-Rows checked: `1121`
+Rows checked: `1307`
 
 ## Counters
 
 | Counter | Value |
 |---|---:|
-| weak_variant_order_attempts | `777` |
-| blocked_by_repair_policy | `783` |
-| orders_after_quarantine_by_candidate | `{'symbol_normalized_round_retest_v0': 388, 'round_number_retest_v0': 311, 'session_extreme_retest_v0': 78}` |
-| symbol_normalized_new_orders_after_suspend | `388` |
-| session_extreme_new_orders_after_suspend | `78` |
+| weak_variant_order_attempts | `884` |
+| blocked_by_repair_policy | `890` |
+| orders_after_quarantine_by_candidate | `{'symbol_normalized_round_retest_v0': 458, 'round_number_retest_v0': 333, 'session_extreme_retest_v0': 93}` |
+| symbol_normalized_new_orders_after_suspend | `458` |
+| session_extreme_new_orders_after_suspend | `93` |
 | usdjpy_new_orders_after_disable | `0` |
 
 ## Findings
 
 | Severity | Type | Candidate | Symbol | Ticket | Detail |
 |---|---|---|---|---|---|
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4097006 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4096876 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4096675 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4096444 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4096256 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4096088 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4096041 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095982 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095942 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095861 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4095570 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095498 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095204 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4095111 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095110 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4095060 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4094215 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4093740 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4093607 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4092063 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4091736 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4091601 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4091086 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4090994 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4090796 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | EURUSD | 4089715 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4089437 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4087561 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4087518 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4087348 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4087306 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4087307 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4087123 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4087124 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4086914 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4086472 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4086196 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4086199 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4086168 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4086016 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4085972 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4084916 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4084497 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4084227 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4084036 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4083622 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4081398 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | EURUSD | 4081000 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4080856 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4079365 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4077943 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4077845 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4077455 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4077263 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4076661 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4076351 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4076291 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4076205 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4076184 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4076140 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4076107 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4076026 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4075913 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4075912 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4075818 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4075674 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4075572 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4074623 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4074569 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4074532 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4074449 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4074415 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4073954 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4073917 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4073893 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4073477 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4072648 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4072598 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4072341 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4072202 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4072176 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4072050 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4071998 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4071763 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4071634 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4071471 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4071350 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4071301 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4071218 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4071107 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4070994 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4070865 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4070861 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4070593 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4069750 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4069617 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4069582 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4069476 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4069311 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4069063 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4067981 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4067581 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4067120 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4066936 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4066684 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4066595 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4066155 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | XAUUSD | 4056901 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4056902 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | round_number_retest_v0 | XAUUSD | 4056791 |  |

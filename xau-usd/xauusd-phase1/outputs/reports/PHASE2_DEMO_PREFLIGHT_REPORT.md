@@ -26,7 +26,7 @@ Overall status: FAIL
 | demo_account_isolation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_DEMO_ACCOUNT_ISOLATION_REPORT.md` contains demo/practice server marker(s) and no live/real server markers: Capital.ComMena-Demo. |
 | local_network_baseline_context | WARN | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\PHASE2_LOCAL_MT5_NETWORK_BASELINE.md` is PASS and contains live/real server marker(s) used only as local network baseline context: Capital.ComMena-Live. This must not be read as demo account isolation. |
 | phase3_separation | PASS | `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase3-experimental\outputs\reports\PHASE3_EXPERIMENTAL_STATUS.json` does not promote the side experiment into real demo. |
-| phase1_safety_audit | FAIL | Found 7 forbidden broker-action finding(s). |
+| phase1_safety_audit | FAIL | Found 13 forbidden broker-action finding(s). |
 
 ## Source Reports
 

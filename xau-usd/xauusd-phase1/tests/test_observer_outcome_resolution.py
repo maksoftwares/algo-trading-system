@@ -56,6 +56,7 @@ def test_outcome_resolution_matches_broker_trade_with_one_minute_tolerance(tmp_p
     assert payload["resolved_count"] == 1
     assert rows[0]["resolution_status"] == "BROKER_CLOSED_WIN"
     assert rows[0]["resolution_source"] == "broker_trade_join"
+    assert rows[0]["evidence_tier"] == "BROKER"
     assert rows[0]["direction"] == "LONG"
     assert rows[0]["normalized_direction"] == "BUY"
     assert rows[0]["matched_position_ticket"] == "123"
@@ -157,6 +158,7 @@ def test_outcome_resolution_replays_m5_bars_when_supplied(tmp_path: Path):
     assert payload["status"] == "PASS_ALL_SIGNALS_RESOLVED"
     assert rows[0]["resolution_status"] == "REPLAY_TP"
     assert rows[0]["resolution_source"] == "m5_bar_replay_executor_v2_adverse_first"
+    assert rows[0]["evidence_tier"] == "REPLAY"
     assert rows[0]["replay_model"] == "executor_v2"
     assert rows[0]["normalized_direction"] == "BUY"
     assert rows[0]["replay_entry_price"] == "100.250000"
@@ -164,6 +166,81 @@ def test_outcome_resolution_replays_m5_bars_when_supplied(tmp_path: Path):
     assert payload["replay_resolved_count"] == 1
     assert payload["bar_quality"][0]["symbol"] == "XAUUSD"
     assert payload["bar_quality"][0]["rows"] == 2
+
+
+def test_broker_joined_only_scoreboard_uses_broker_evidence_tier(tmp_path: Path):
+    module = _load_module()
+    shadow_dir = tmp_path / "shadow"
+    shadow_dir.mkdir()
+    _write_shadow_rows(
+        shadow_dir / "shadow_fix_observer_signal_log_xauusd.csv",
+        [
+            _shadow_row(
+                candidate="breakout_retest",
+                m5_bar_time="2026.06.12 18:05:00",
+                time_bucket="Evening 16:00-20:59",
+                direction="BUY",
+                entry_price="100.00",
+                stop_loss="95.00",
+                take_profit="110.00",
+            ),
+            _shadow_row(
+                candidate="breakout_retest",
+                m5_bar_time="2026.06.12 18:10:00",
+                time_bucket="Evening 16:00-20:59",
+                direction="BUY",
+                entry_price="100.00",
+                stop_loss="95.00",
+                take_profit="110.00",
+            ),
+        ],
+    )
+    actual_csv = tmp_path / "actual.csv"
+    _write_actual_rows(
+        actual_csv,
+        [
+            {
+                "entry_time": "2026-06-12 18:05:30",
+                "exit_time": "2026-06-12 18:20:00",
+                "candidate": "breakout_retest",
+                "symbol": "XAUUSD",
+                "direction": "BUY",
+                "state": "CLOSED",
+                "profit_aed": "10.00",
+                "position_ticket": "777",
+                "exit_price": "101.00",
+            }
+        ],
+    )
+    bars_dir = tmp_path / "bars"
+    bars_dir.mkdir()
+    _write_m5_bars(
+        bars_dir / "XAUUSD_test_M5.csv",
+        [
+            {"bar_start_utc": "2026-06-12 18:10:00", "bar_end_utc": "2026-06-12 18:15:00", "open": "100.00", "high": "100.50", "low": "99.50"},
+            {"bar_start_utc": "2026-06-12 18:15:00", "bar_end_utc": "2026-06-12 18:20:00", "open": "100.00", "high": "109.00", "low": "99.00"},
+        ],
+    )
+
+    output = module.generate_observer_outcome_resolution(
+        tmp_path,
+        shadow_files_dir=shadow_dir,
+        actual_trades_csv=actual_csv,
+        bars_dir=bars_dir,
+        output_json=tmp_path / "out.json",
+        scoreboard_mode="broker_joined_only",
+    )
+    rows = _read_rows(tmp_path / "out.csv")
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    scoreboard = json.loads(
+        (tmp_path / "outputs" / "reports" / "OBSERVER_SHADOW_POLICY_SCOREBOARD.json").read_text(encoding="utf-8")
+    )
+
+    assert [row["evidence_tier"] for row in rows] == ["BROKER", "REPLAY"]
+    assert payload["broker_join_resolved_count"] == 1
+    assert payload["replay_resolved_count"] == 1
+    assert scoreboard["scoreboard_mode"] == "broker_joined_only"
+    assert all(row["broker_join"] == "1" for row in scoreboard["rows"])
 
 
 def test_outcome_resolution_uses_adverse_first_when_bar_hits_stop_and_target(tmp_path: Path):

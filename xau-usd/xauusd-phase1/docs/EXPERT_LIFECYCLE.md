@@ -29,7 +29,9 @@ Current lifecycle:
 | `session_extreme_retest_v0` | `COST_SUSPENDED_CANONICAL` | Same-family level-and-retest candidate; provisional research evidence cannot override the family-level measured-cost suspension. |
 | `a3_round_retest_guarded_v1` | `DEMO_REPAIR_PREFLIGHT_PENDING` | EA-T1 A3-only repair lane, magic `933000`, dry-run committed default, requires combined preflight and owner packet before any demo arming. |
 | `a3_round_retest_structured_v1` | `DEMO_REPAIR_PREFLIGHT_PENDING` | EA-T2 A3-only structural repair lane, magic `933100`, dry-run committed default, requires combined preflight and owner packet before any demo arming. |
-| `a3_session_extreme_repair_tbd` | `RESEARCH_ONLY` | EA-T3 does not exist; magic band `933200-933299` is reserved pending T14 forensics and separate pre-registration. |
+| `a3_breakout_plain` | `DEMO_REPAIR_PREFLIGHT_PENDING` | A3 breakout control lane, magic `933200`, already separated from A2 and the improved lane. |
+| `a3_breakout_improved` | `DEMO_REPAIR_PREFLIGHT_PENDING` | A3 breakout guarded treatment lane, magic `933300`, already separated from A2 and the plain lane. |
+| `a3_breakout_tier1_compat_v1` | `DEMO_REPAIR_PREFLIGHT_PENDING` | New A3 Tier1-compatible breakout copy, magic `933400`, repo-side PASS_WITH_CONDITIONS only; requires owner packet, compile proof, and observer/dry-run attach before any broker-action decision. |
 | `trend_pullback` | `RETIRED` | Failed Phase 0 gates. |
 | `range_mr` | `RETIRED` | Failed Phase 0 gates. |
 

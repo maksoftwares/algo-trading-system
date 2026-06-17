@@ -1,6 +1,6 @@
 {
   "status": "PARTIAL_REVIEW_BARS_SUPPLIED",
-  "created_at_utc": "2026-06-12T10:30:23.021379Z",
+  "created_at_utc": "2026-06-16T06:47:40.801725Z",
   "authority": "Read-only outcome resolution for observer signals. It joins to exported broker trades and optionally replays executor-faithful synthetic SL/TP against supplied M5 bars. It does not touch MT5 runtime, orders, positions, profiles, charts, or running EAs.",
   "replay_model": "executor_v2",
   "scoreboard_mode": "broker_joined_only",
@@ -9,202 +9,1404 @@
   "actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
   "bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars",
   "cost_model_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
-  "signal_count": 1308,
-  "actual_trade_rows": 1372,
-  "resolved_count": 1007,
-  "broker_join_resolved_count": 81,
-  "replay_resolved_count": 926,
-  "unresolved_count": 301,
+  "signal_count": 1775,
+  "actual_trade_rows": 1696,
+  "resolved_count": 1657,
+  "broker_join_resolved_count": 105,
+  "replay_resolved_count": 1552,
+  "unresolved_count": 118,
+  "by_evidence_tier": [
+    {
+      "evidence_tier": "REPLAY",
+      "resolution_status": "REPLAY_SL",
+      "count": 1030
+    },
+    {
+      "evidence_tier": "REPLAY",
+      "resolution_status": "REPLAY_TP",
+      "count": 522
+    },
+    {
+      "evidence_tier": "UNKNOWN",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 77
+    },
+    {
+      "evidence_tier": "BROKER",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 74
+    },
+    {
+      "evidence_tier": "UNKNOWN",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 41
+    },
+    {
+      "evidence_tier": "BROKER",
+      "resolution_status": "BROKER_CLOSED_WIN",
+      "count": 31
+    }
+  ],
   "by_resolution_status": [
     {
       "resolution_status": "REPLAY_SL",
-      "count": 622
+      "count": 1030
     },
     {
       "resolution_status": "REPLAY_TP",
-      "count": 304
+      "count": 522
     },
     {
       "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 281
+      "count": 77
     },
     {
       "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 55
-    },
-    {
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 26
+      "count": 74
     },
     {
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 20
+      "count": 41
+    },
+    {
+      "resolution_status": "BROKER_CLOSED_WIN",
+      "count": 31
     }
   ],
   "by_resolution_source": [
     {
       "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
       "resolution_status": "REPLAY_SL",
-      "count": 622
+      "count": 1030
     },
     {
       "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
       "resolution_status": "REPLAY_TP",
-      "count": 304
+      "count": 522
     },
     {
       "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
       "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 281
+      "count": 77
     },
     {
       "resolution_source": "broker_trade_join",
       "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 55
-    },
-    {
-      "resolution_source": "broker_trade_join",
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 26
+      "count": 74
     },
     {
       "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 20
+      "count": 41
+    },
+    {
+      "resolution_source": "broker_trade_join",
+      "resolution_status": "BROKER_CLOSED_WIN",
+      "count": 31
     }
   ],
+  "broker_fill_scoreboards": {
+    "session": [
+      {
+        "group": "Afternoon 12:00-15:59",
+        "rows": "20",
+        "closed": "20",
+        "wins": "0",
+        "losses": "20",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-461.46",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "Evening 16:00-19:59",
+        "rows": "13",
+        "closed": "13",
+        "wins": "4",
+        "losses": "9",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "30.77",
+        "broker_profit_aed": "110.28",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "Morning 06:00-11:59",
+        "rows": "27",
+        "closed": "27",
+        "wins": "7",
+        "losses": "20",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "25.93",
+        "broker_profit_aed": "-409.18",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "Night 20:00-05:59",
+        "rows": "45",
+        "closed": "45",
+        "wins": "20",
+        "losses": "25",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "44.44",
+        "broker_profit_aed": "368.66",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "cost": [
+      {
+        "group": "HIGH_51_75pt",
+        "rows": "32",
+        "closed": "32",
+        "wins": "8",
+        "losses": "24",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "25.00",
+        "broker_profit_aed": "-370.97",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "LOW_<=30pt",
+        "rows": "2",
+        "closed": "2",
+        "wins": "2",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "55.72",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "MEDIUM_31_50pt",
+        "rows": "71",
+        "closed": "71",
+        "wins": "21",
+        "losses": "50",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "29.58",
+        "broker_profit_aed": "-76.45",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "direction": [
+      {
+        "group": "BUY",
+        "rows": "36",
+        "closed": "36",
+        "wins": "6",
+        "losses": "30",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "16.67",
+        "broker_profit_aed": "-443.93",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "SELL",
+        "rows": "69",
+        "closed": "69",
+        "wins": "25",
+        "losses": "44",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "36.23",
+        "broker_profit_aed": "52.23",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "regime": [
+      {
+        "group": "WOULD_SIGNAL",
+        "rows": "105",
+        "closed": "105",
+        "wins": "31",
+        "losses": "74",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "29.52",
+        "broker_profit_aed": "-391.70",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "family": [
+      {
+        "group": "breakout",
+        "rows": "2",
+        "closed": "2",
+        "wins": "2",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "55.72",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "round",
+        "rows": "103",
+        "closed": "103",
+        "wins": "29",
+        "losses": "74",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "28.16",
+        "broker_profit_aed": "-447.42",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "lane": [
+      {
+        "group": "accepted_round_family",
+        "rows": "103",
+        "closed": "103",
+        "wins": "29",
+        "losses": "74",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "28.16",
+        "broker_profit_aed": "-447.42",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "accepted_same_family",
+        "rows": "2",
+        "closed": "2",
+        "wins": "2",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "55.72",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "ea_symbol_session": [
+      {
+        "group": "breakout_retest | EURUSD | Night 20:00-05:59",
+        "rows": "1",
+        "closed": "1",
+        "wins": "1",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "27.86",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "9",
+        "closed": "9",
+        "wins": "0",
+        "losses": "9",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-206.10",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "6",
+        "closed": "6",
+        "wins": "2",
+        "losses": "4",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.33",
+        "broker_profit_aed": "57.83",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Morning 06:00-11:59",
+        "rows": "13",
+        "closed": "13",
+        "wins": "3",
+        "losses": "10",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "23.08",
+        "broker_profit_aed": "-235.13",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "21",
+        "closed": "21",
+        "wins": "9",
+        "losses": "12",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "42.86",
+        "broker_profit_aed": "167.62",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "swing_breakout_retest_v0 | EURUSD | Night 20:00-05:59",
+        "rows": "1",
+        "closed": "1",
+        "wins": "1",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "27.86",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "11",
+        "closed": "11",
+        "wins": "0",
+        "losses": "11",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-255.36",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "7",
+        "closed": "7",
+        "wins": "2",
+        "losses": "5",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "28.57",
+        "broker_profit_aed": "52.45",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59",
+        "rows": "14",
+        "closed": "14",
+        "wins": "4",
+        "losses": "10",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "28.57",
+        "broker_profit_aed": "-174.05",
+        "replay_net_r_sum": ""
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "22",
+        "closed": "22",
+        "wins": "9",
+        "losses": "13",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "40.91",
+        "broker_profit_aed": "145.32",
+        "replay_net_r_sum": ""
+      }
+    ]
+  },
+  "replay_reference_scoreboards": {
+    "session": [
+      {
+        "group": "Afternoon 12:00-15:59",
+        "rows": "251",
+        "closed": "251",
+        "wins": "86",
+        "losses": "165",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.26",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-65.8878"
+      },
+      {
+        "group": "Evening 16:00-19:59",
+        "rows": "361",
+        "closed": "361",
+        "wins": "140",
+        "losses": "221",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "38.78",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-41.7565"
+      },
+      {
+        "group": "Morning 06:00-11:59",
+        "rows": "317",
+        "closed": "317",
+        "wins": "106",
+        "losses": "211",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.44",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-92.0414"
+      },
+      {
+        "group": "Night 20:00-05:59",
+        "rows": "623",
+        "closed": "623",
+        "wins": "190",
+        "losses": "433",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "30.50",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-220.9879"
+      }
+    ],
+    "cost": [
+      {
+        "group": "EXTREME_>75pt",
+        "rows": "4",
+        "closed": "4",
+        "wins": "0",
+        "losses": "4",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-5.3333"
+      },
+      {
+        "group": "HIGH_51_75pt",
+        "rows": "234",
+        "closed": "234",
+        "wins": "72",
+        "losses": "162",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "30.77",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-82.7245"
+      },
+      {
+        "group": "LOW_<=30pt",
+        "rows": "558",
+        "closed": "558",
+        "wins": "153",
+        "losses": "405",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "27.42",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-227.1411"
+      },
+      {
+        "group": "MEDIUM_31_50pt",
+        "rows": "756",
+        "closed": "756",
+        "wins": "297",
+        "losses": "459",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "39.29",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-105.4747"
+      }
+    ],
+    "direction": [
+      {
+        "group": "BUY",
+        "rows": "823",
+        "closed": "823",
+        "wins": "254",
+        "losses": "569",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "30.86",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-280.9375"
+      },
+      {
+        "group": "SELL",
+        "rows": "729",
+        "closed": "729",
+        "wins": "268",
+        "losses": "461",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "36.76",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-139.7361"
+      }
+    ],
+    "regime": [
+      {
+        "group": "WOULD_SIGNAL",
+        "rows": "1552",
+        "closed": "1552",
+        "wins": "522",
+        "losses": "1030",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.63",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-420.6736"
+      }
+    ],
+    "family": [
+      {
+        "group": "breakout",
+        "rows": "480",
+        "closed": "480",
+        "wins": "149",
+        "losses": "331",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "31.04",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-161.3092"
+      },
+      {
+        "group": "round",
+        "rows": "953",
+        "closed": "953",
+        "wins": "332",
+        "losses": "621",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.84",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-230.9978"
+      },
+      {
+        "group": "session",
+        "rows": "119",
+        "closed": "119",
+        "wins": "41",
+        "losses": "78",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.45",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-28.3666"
+      }
+    ],
+    "lane": [
+      {
+        "group": "accepted_round_family",
+        "rows": "953",
+        "closed": "953",
+        "wins": "332",
+        "losses": "621",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.84",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-230.9978"
+      },
+      {
+        "group": "accepted_same_family",
+        "rows": "480",
+        "closed": "480",
+        "wins": "149",
+        "losses": "331",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "31.04",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-161.3092"
+      },
+      {
+        "group": "provisional_session_family",
+        "rows": "119",
+        "closed": "119",
+        "wins": "41",
+        "losses": "78",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.45",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-28.3666"
+      }
+    ],
+    "ea_symbol_session": [
+      {
+        "group": "breakout_retest | EURUSD | Afternoon 12:00-15:59",
+        "rows": "23",
+        "closed": "23",
+        "wins": "4",
+        "losses": "19",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "17.39",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-14.6054"
+      },
+      {
+        "group": "breakout_retest | EURUSD | Evening 16:00-19:59",
+        "rows": "23",
+        "closed": "23",
+        "wins": "9",
+        "losses": "14",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "39.13",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.0310"
+      },
+      {
+        "group": "breakout_retest | EURUSD | Morning 06:00-11:59",
+        "rows": "17",
+        "closed": "17",
+        "wins": "4",
+        "losses": "13",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "23.53",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-8.1900"
+      },
+      {
+        "group": "breakout_retest | EURUSD | Night 20:00-05:59",
+        "rows": "38",
+        "closed": "38",
+        "wins": "6",
+        "losses": "32",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "15.79",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-27.7366"
+      },
+      {
+        "group": "breakout_retest | USDJPY | Afternoon 12:00-15:59",
+        "rows": "9",
+        "closed": "9",
+        "wins": "3",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.33",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.4467"
+      },
+      {
+        "group": "breakout_retest | USDJPY | Evening 16:00-19:59",
+        "rows": "18",
+        "closed": "18",
+        "wins": "12",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "66.67",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "9.8636"
+      },
+      {
+        "group": "breakout_retest | USDJPY | Morning 06:00-11:59",
+        "rows": "24",
+        "closed": "24",
+        "wins": "7",
+        "losses": "17",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "29.17",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-9.3800"
+      },
+      {
+        "group": "breakout_retest | USDJPY | Night 20:00-05:59",
+        "rows": "54",
+        "closed": "54",
+        "wins": "10",
+        "losses": "44",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "18.52",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-36.0886"
+      },
+      {
+        "group": "breakout_retest | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "7",
+        "closed": "7",
+        "wins": "4",
+        "losses": "3",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "57.14",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "1.6665"
+      },
+      {
+        "group": "breakout_retest | XAUUSD | Evening 16:00-19:59",
+        "rows": "18",
+        "closed": "18",
+        "wins": "10",
+        "losses": "8",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "55.56",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "5.5349"
+      },
+      {
+        "group": "breakout_retest | XAUUSD | Morning 06:00-11:59",
+        "rows": "14",
+        "closed": "14",
+        "wins": "7",
+        "losses": "7",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "50.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "1.8571"
+      },
+      {
+        "group": "breakout_retest | XAUUSD | Night 20:00-05:59",
+        "rows": "32",
+        "closed": "32",
+        "wins": "13",
+        "losses": "19",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "40.62",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-4.3316"
+      },
+      {
+        "group": "round_number_retest_v0 | USDJPY | Afternoon 12:00-15:59",
+        "rows": "10",
+        "closed": "10",
+        "wins": "3",
+        "losses": "7",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "30.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-3.6314"
+      },
+      {
+        "group": "round_number_retest_v0 | USDJPY | Evening 16:00-19:59",
+        "rows": "1",
+        "closed": "1",
+        "wins": "1",
+        "losses": "0",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "100.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "1.3800"
+      },
+      {
+        "group": "round_number_retest_v0 | USDJPY | Night 20:00-05:59",
+        "rows": "5",
+        "closed": "5",
+        "wins": "4",
+        "losses": "1",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "80.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "4.4468"
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "64",
+        "closed": "64",
+        "wins": "28",
+        "losses": "36",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "43.75",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.6926"
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "99",
+        "closed": "99",
+        "wins": "31",
+        "losses": "68",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "31.31",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-29.8716"
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Morning 06:00-11:59",
+        "rows": "96",
+        "closed": "96",
+        "wins": "37",
+        "losses": "59",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "38.54",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-17.3815"
+      },
+      {
+        "group": "round_number_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "149",
+        "closed": "149",
+        "wins": "50",
+        "losses": "99",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.56",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-40.6518"
+      },
+      {
+        "group": "session_extreme_retest_v0 | EURUSD | Afternoon 12:00-15:59",
+        "rows": "7",
+        "closed": "7",
+        "wins": "1",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "14.29",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-4.9900"
+      },
+      {
+        "group": "session_extreme_retest_v0 | EURUSD | Evening 16:00-19:59",
+        "rows": "23",
+        "closed": "23",
+        "wins": "6",
+        "losses": "17",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "26.09",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-9.5085"
+      },
+      {
+        "group": "session_extreme_retest_v0 | EURUSD | Night 20:00-05:59",
+        "rows": "29",
+        "closed": "29",
+        "wins": "14",
+        "losses": "15",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "48.28",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "3.9724"
+      },
+      {
+        "group": "session_extreme_retest_v0 | USDJPY | Afternoon 12:00-15:59",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.2400"
+      },
+      {
+        "group": "session_extreme_retest_v0 | USDJPY | Evening 16:00-19:59",
+        "rows": "3",
+        "closed": "3",
+        "wins": "1",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.33",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-0.8588"
+      },
+      {
+        "group": "session_extreme_retest_v0 | USDJPY | Morning 06:00-11:59",
+        "rows": "1",
+        "closed": "1",
+        "wins": "0",
+        "losses": "1",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-1.1200"
+      },
+      {
+        "group": "session_extreme_retest_v0 | USDJPY | Night 20:00-05:59",
+        "rows": "22",
+        "closed": "22",
+        "wins": "4",
+        "losses": "18",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "18.18",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-15.0295"
+      },
+      {
+        "group": "session_extreme_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "10",
+        "closed": "10",
+        "wins": "4",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "40.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-1.5234"
+      },
+      {
+        "group": "session_extreme_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "15",
+        "closed": "15",
+        "wins": "9",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "60.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "6.0727"
+      },
+      {
+        "group": "session_extreme_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "7",
+        "closed": "7",
+        "wins": "2",
+        "losses": "5",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "28.57",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-3.1415"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | EURUSD | Afternoon 12:00-15:59",
+        "rows": "18",
+        "closed": "18",
+        "wins": "1",
+        "losses": "17",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "5.56",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-16.7554"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | EURUSD | Evening 16:00-19:59",
+        "rows": "19",
+        "closed": "19",
+        "wins": "6",
+        "losses": "13",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "31.58",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-5.2510"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | EURUSD | Morning 06:00-11:59",
+        "rows": "17",
+        "closed": "17",
+        "wins": "4",
+        "losses": "13",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "23.53",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-8.1900"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | EURUSD | Night 20:00-05:59",
+        "rows": "23",
+        "closed": "23",
+        "wins": "6",
+        "losses": "17",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "26.09",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-10.8966"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | USDJPY | Afternoon 12:00-15:59",
+        "rows": "8",
+        "closed": "8",
+        "wins": "3",
+        "losses": "5",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "37.50",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-1.3267"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | USDJPY | Evening 16:00-19:59",
+        "rows": "12",
+        "closed": "12",
+        "wins": "9",
+        "losses": "3",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "75.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "9.0600"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | USDJPY | Morning 06:00-11:59",
+        "rows": "13",
+        "closed": "13",
+        "wins": "0",
+        "losses": "13",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-14.5600"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | USDJPY | Night 20:00-05:59",
+        "rows": "35",
+        "closed": "35",
+        "wins": "6",
+        "losses": "29",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "17.14",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-24.6642"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "7",
+        "closed": "7",
+        "wins": "4",
+        "losses": "3",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "57.14",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "1.6665"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "18",
+        "closed": "18",
+        "wins": "10",
+        "losses": "8",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "55.56",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "5.5349"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | XAUUSD | Morning 06:00-11:59",
+        "rows": "9",
+        "closed": "9",
+        "wins": "3",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.33",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.5352"
+      },
+      {
+        "group": "swing_breakout_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "24",
+        "closed": "24",
+        "wins": "8",
+        "losses": "16",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.33",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-7.5039"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | EURUSD | Afternoon 12:00-15:59",
+        "rows": "9",
+        "closed": "9",
+        "wins": "1",
+        "losses": "8",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "11.11",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-7.1228"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | EURUSD | Evening 16:00-19:59",
+        "rows": "4",
+        "closed": "4",
+        "wins": "1",
+        "losses": "3",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "25.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-1.7617"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | EURUSD | Morning 06:00-11:59",
+        "rows": "16",
+        "closed": "16",
+        "wins": "7",
+        "losses": "9",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "43.75",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "0.3800"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | EURUSD | Night 20:00-05:59",
+        "rows": "35",
+        "closed": "35",
+        "wins": "12",
+        "losses": "23",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "34.29",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-7.4413"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | USDJPY | Afternoon 12:00-15:59",
+        "rows": "15",
+        "closed": "15",
+        "wins": "3",
+        "losses": "12",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "20.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-9.2314"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | USDJPY | Evening 16:00-19:59",
+        "rows": "10",
+        "closed": "10",
+        "wins": "4",
+        "losses": "6",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "40.00",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-1.2000"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | USDJPY | Morning 06:00-11:59",
+        "rows": "15",
+        "closed": "15",
+        "wins": "1",
+        "losses": "14",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "6.67",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-14.3000"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | USDJPY | Night 20:00-05:59",
+        "rows": "22",
+        "closed": "22",
+        "wins": "5",
+        "losses": "17",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "22.73",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-12.5198"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59",
+        "rows": "62",
+        "closed": "62",
+        "wins": "27",
+        "losses": "35",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "43.55",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-2.6551"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59",
+        "rows": "98",
+        "closed": "98",
+        "wins": "31",
+        "losses": "67",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "31.63",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-28.7200"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59",
+        "rows": "95",
+        "closed": "95",
+        "wins": "36",
+        "losses": "59",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "37.89",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-18.6219"
+      },
+      {
+        "group": "symbol_normalized_round_retest_v0 | XAUUSD | Night 20:00-05:59",
+        "rows": "148",
+        "closed": "148",
+        "wins": "50",
+        "losses": "98",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "33.78",
+        "broker_profit_aed": "0.00",
+        "replay_net_r_sum": "-39.4018"
+      }
+    ]
+  },
   "by_candidate": [
     {
       "candidate": "symbol_normalized_round_retest_v0",
-      "count": 458
+      "count": 591
     },
     {
       "candidate": "round_number_retest_v0",
-      "count": 368
+      "count": 481
     },
     {
       "candidate": "breakout_retest",
-      "count": 217
+      "count": 327
     },
     {
       "candidate": "swing_breakout_retest_v0",
-      "count": 164
+      "count": 247
     },
     {
       "candidate": "session_extreme_retest_v0",
-      "count": 101
+      "count": 129
     }
   ],
   "by_candidate_status": [
     {
       "candidate": "symbol_normalized_round_retest_v0",
       "resolution_status": "REPLAY_SL",
-      "count": 232
+      "count": 351
     },
     {
       "candidate": "round_number_retest_v0",
       "resolution_status": "REPLAY_SL",
-      "count": 202
+      "count": 270
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "REPLAY_SL",
+      "count": 188
     },
     {
       "candidate": "symbol_normalized_round_retest_v0",
       "resolution_status": "REPLAY_TP",
-      "count": 118
-    },
-    {
-      "candidate": "breakout_retest",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 107
+      "count": 178
     },
     {
       "candidate": "round_number_retest_v0",
       "resolution_status": "REPLAY_TP",
-      "count": 103
-    },
-    {
-      "candidate": "breakout_retest",
-      "resolution_status": "REPLAY_SL",
-      "count": 74
-    },
-    {
-      "candidate": "swing_breakout_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 70
+      "count": 154
     },
     {
       "candidate": "swing_breakout_retest_v0",
       "resolution_status": "REPLAY_SL",
-      "count": 67
-    },
-    {
-      "candidate": "symbol_normalized_round_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 61
-    },
-    {
-      "candidate": "session_extreme_retest_v0",
-      "resolution_status": "REPLAY_SL",
-      "count": 47
+      "count": 143
     },
     {
       "candidate": "breakout_retest",
       "resolution_status": "REPLAY_TP",
-      "count": 34
-    },
-    {
-      "candidate": "round_number_retest_v0",
-      "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 28
+      "count": 89
     },
     {
       "candidate": "session_extreme_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 28
+      "resolution_status": "REPLAY_SL",
+      "count": 78
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "resolution_status": "REPLAY_TP",
+      "count": 60
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "resolution_status": "REPLAY_TP",
+      "count": 41
     },
     {
       "candidate": "symbol_normalized_round_retest_v0",
       "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 39
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 35
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 33
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
       "count": 27
     },
     {
+      "candidate": "breakout_retest",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 16
+    },
+    {
       "candidate": "swing_breakout_retest_v0",
-      "resolution_status": "REPLAY_TP",
-      "count": 25
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 16
     },
     {
-      "candidate": "session_extreme_retest_v0",
-      "resolution_status": "REPLAY_TP",
-      "count": 24
-    },
-    {
-      "candidate": "round_number_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "BROKER_CLOSED_WIN",
       "count": 15
     },
     {
       "candidate": "round_number_retest_v0",
       "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 12
+      "count": 14
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 7
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 5
     },
     {
       "candidate": "symbol_normalized_round_retest_v0",
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 12
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 5
     },
     {
       "candidate": "round_number_retest_v0",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 8
-    },
-    {
-      "candidate": "symbol_normalized_round_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 8
+      "count": 3
     },
     {
       "candidate": "session_extreme_retest_v0",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 2
+      "count": 3
+    },
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 3
     },
     {
       "candidate": "breakout_retest",
@@ -212,18 +1414,8 @@
       "count": 1
     },
     {
-      "candidate": "breakout_retest",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 1
-    },
-    {
       "candidate": "swing_breakout_retest_v0",
       "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 1
-    },
-    {
-      "candidate": "swing_breakout_retest_v0",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
       "count": 1
     }
   ],
@@ -231,56 +1423,56 @@
     {
       "proposed_v2_shadow_action": "BLOCK",
       "resolution_status": "REPLAY_SL",
-      "count": 497
+      "count": 718
     },
     {
       "proposed_v2_shadow_action": "BLOCK",
       "resolution_status": "REPLAY_TP",
-      "count": 259
-    },
-    {
-      "proposed_v2_shadow_action": "KEEP",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 177
+      "count": 391
     },
     {
       "proposed_v2_shadow_action": "KEEP",
       "resolution_status": "REPLAY_SL",
-      "count": 125
-    },
-    {
-      "proposed_v2_shadow_action": "BLOCK",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 104
-    },
-    {
-      "proposed_v2_shadow_action": "BLOCK",
-      "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 55
+      "count": 312
     },
     {
       "proposed_v2_shadow_action": "KEEP",
       "resolution_status": "REPLAY_TP",
-      "count": 45
+      "count": 131
     },
     {
       "proposed_v2_shadow_action": "BLOCK",
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 24
-    },
-    {
-      "proposed_v2_shadow_action": "BLOCK",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 18
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 74
     },
     {
       "proposed_v2_shadow_action": "KEEP",
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 2
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 60
     },
     {
       "proposed_v2_shadow_action": "KEEP",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 32
+    },
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "BROKER_CLOSED_WIN",
+      "count": 29
+    },
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 17
+    },
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 9
+    },
+    {
+      "proposed_v2_shadow_action": "KEEP",
+      "resolution_status": "BROKER_CLOSED_WIN",
       "count": 2
     }
   ],
@@ -288,102 +1480,97 @@
     {
       "time_bucket": "Night 20:00-05:59",
       "resolution_status": "REPLAY_SL",
-      "count": 252
+      "count": 433
     },
     {
       "time_bucket": "Evening 16:00-19:59",
       "resolution_status": "REPLAY_SL",
-      "count": 147
-    },
-    {
-      "time_bucket": "Night 20:00-05:59",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 138
+      "count": 221
     },
     {
       "time_bucket": "Morning 06:00-11:59",
       "resolution_status": "REPLAY_SL",
-      "count": 118
-    },
-    {
-      "time_bucket": "Afternoon 12:00-15:59",
-      "resolution_status": "REPLAY_SL",
-      "count": 105
+      "count": 211
     },
     {
       "time_bucket": "Night 20:00-05:59",
       "resolution_status": "REPLAY_TP",
-      "count": 91
+      "count": 190
+    },
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "REPLAY_SL",
+      "count": 165
     },
     {
       "time_bucket": "Evening 16:00-19:59",
       "resolution_status": "REPLAY_TP",
-      "count": 87
+      "count": 140
     },
     {
       "time_bucket": "Morning 06:00-11:59",
       "resolution_status": "REPLAY_TP",
-      "count": 71
+      "count": 106
     },
     {
       "time_bucket": "Afternoon 12:00-15:59",
       "resolution_status": "REPLAY_TP",
-      "count": 55
+      "count": 86
+    },
+    {
+      "time_bucket": "Night 20:00-05:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 35
     },
     {
       "time_bucket": "Morning 06:00-11:59",
       "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 53
-    },
-    {
-      "time_bucket": "Afternoon 12:00-15:59",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 48
-    },
-    {
-      "time_bucket": "Evening 16:00-19:59",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
-      "count": 42
-    },
-    {
-      "time_bucket": "Morning 06:00-11:59",
-      "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 18
+      "count": 34
     },
     {
       "time_bucket": "Night 20:00-05:59",
       "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 18
+      "count": 25
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
+      "count": 22
     },
     {
       "time_bucket": "Night 20:00-05:59",
       "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 16
+      "count": 20
     },
     {
       "time_bucket": "Afternoon 12:00-15:59",
       "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 13
+      "count": 20
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 20
     },
     {
       "time_bucket": "Night 20:00-05:59",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 8
-    },
-    {
-      "time_bucket": "Afternoon 12:00-15:59",
-      "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
-      "count": 8
-    },
-    {
-      "time_bucket": "Morning 06:00-11:59",
-      "resolution_status": "BROKER_CLOSED_WIN",
-      "count": 6
+      "count": 15
     },
     {
       "time_bucket": "Evening 16:00-19:59",
       "resolution_status": "BROKER_CLOSED_LOSS",
-      "count": 6
+      "count": 9
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "resolution_status": "BROKER_CLOSED_WIN",
+      "count": 7
+    },
+    {
+      "time_bucket": "Evening 16:00-19:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 5
     },
     {
       "time_bucket": "Evening 16:00-19:59",
@@ -391,12 +1578,17 @@
       "count": 4
     },
     {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "UNRESOLVED_REPLAY_NO_EXECUTOR_ENTRY_BAR",
+      "count": 3
+    },
+    {
       "time_bucket": "Evening 16:00-19:59",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
       "count": 2
     },
     {
-      "time_bucket": "Morning 06:00-11:59",
+      "time_bucket": "Afternoon 12:00-15:59",
       "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
       "count": 2
     }
@@ -405,39 +1597,39 @@
     {
       "symbol": "EURUSD",
       "status": "WARN_GAPS_OR_DUPLICATES",
-      "rows": 2696,
-      "unique_bar_times": 2696,
+      "rows": 3240,
+      "unique_bar_times": 3240,
       "first_bar": "2026-06-01 00:00:00",
-      "last_bar": "2026-06-12 09:15:00",
-      "expected_rows_from_first_to_last": 3280,
-      "continuity_pct": "82.20",
-      "gap_count_gt_5m": 9,
+      "last_bar": "2026-06-16 06:40:00",
+      "expected_rows_from_first_to_last": 4401,
+      "continuity_pct": "73.62",
+      "gap_count_gt_5m": 11,
       "max_gap_minutes": "2885.0",
       "duplicate_bar_times": 0
     },
     {
       "symbol": "USDJPY",
       "status": "WARN_GAPS_OR_DUPLICATES",
-      "rows": 1611,
-      "unique_bar_times": 1611,
+      "rows": 2836,
+      "unique_bar_times": 2836,
       "first_bar": "2026-06-01 00:00:00",
-      "last_bar": "2026-06-08 14:30:00",
-      "expected_rows_from_first_to_last": 2191,
-      "continuity_pct": "73.53",
-      "gap_count_gt_5m": 5,
+      "last_bar": "2026-06-12 20:55:00",
+      "expected_rows_from_first_to_last": 3420,
+      "continuity_pct": "82.92",
+      "gap_count_gt_5m": 9,
       "max_gap_minutes": "2885.0",
       "duplicate_bar_times": 0
     },
     {
       "symbol": "XAUUSD",
       "status": "WARN_GAPS_OR_DUPLICATES",
-      "rows": 2596,
-      "unique_bar_times": 2596,
+      "rows": 3117,
+      "unique_bar_times": 3117,
       "first_bar": "2026-06-01 00:00:00",
-      "last_bar": "2026-06-12 09:15:00",
-      "expected_rows_from_first_to_last": 3280,
-      "continuity_pct": "79.15",
-      "gap_count_gt_5m": 9,
+      "last_bar": "2026-06-16 06:40:00",
+      "expected_rows_from_first_to_last": 4401,
+      "continuity_pct": "70.82",
+      "gap_count_gt_5m": 11,
       "max_gap_minutes": "2945.0",
       "duplicate_bar_times": 0
     }
@@ -486,16 +1678,16 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "4",
+      "broker_join": "4",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "3",
+      "losses": "4",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-96.52",
+      "broker_profit_aed": "-119.45",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
@@ -516,21 +1708,51 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "4",
-      "broker_join": "4",
+      "signals": "5",
+      "broker_join": "5",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "4",
+      "losses": "5",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-61.59",
+      "broker_profit_aed": "-86.65",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
       "avg_rr": "1.5003",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "round_number_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "BLOCK",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "1",
+      "broker_join": "1",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-23.04",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4996",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -636,21 +1858,51 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "9",
-      "broker_join": "9",
+      "signals": "10",
+      "broker_join": "10",
       "replay": "0",
       "unresolved": "0",
       "wins": "2",
-      "losses": "7",
+      "losses": "8",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "22.22",
-      "broker_profit_aed": "-180.30",
+      "closed_win_rate_pct": "20.00",
+      "broker_profit_aed": "-206.28",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.4999",
+      "avg_rr": "1.5001",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "round_number_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "BLOCK",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "3",
+      "broker_join": "3",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "1",
+      "losses": "2",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "33.33",
+      "broker_profit_aed": "65.79",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5003",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -681,6 +1933,36 @@
       "replay_net_r_sum": "",
       "avg_cost_r": "",
       "avg_rr": "1.4999",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "round_number_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "direction": "SHORT",
+      "normalized_direction": "SELL",
+      "legacy_shadow_action": "BLOCK",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "2",
+      "broker_join": "2",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "1",
+      "losses": "1",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "50.00",
+      "broker_profit_aed": "25.64",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5009",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -756,16 +2038,16 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "4",
+      "broker_join": "4",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "3",
+      "losses": "4",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-96.96",
+      "broker_profit_aed": "-119.89",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
@@ -786,21 +2068,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "7",
+      "broker_join": "7",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "3",
+      "losses": "7",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-49.20",
+      "broker_profit_aed": "-135.47",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5001",
+      "avg_rr": "1.5000",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -816,16 +2098,16 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "1",
-      "broker_join": "1",
+      "signals": "2",
+      "broker_join": "2",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "1",
+      "losses": "2",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-16.17",
+      "broker_profit_aed": "-39.21",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
@@ -846,21 +2128,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "4",
-      "broker_join": "4",
+      "signals": "5",
+      "broker_join": "5",
       "replay": "0",
       "unresolved": "0",
       "wins": "2",
-      "losses": "2",
+      "losses": "3",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "50.00",
-      "broker_profit_aed": "102.20",
+      "closed_win_rate_pct": "40.00",
+      "broker_profit_aed": "91.66",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5000",
+      "avg_rr": "1.4999",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -876,21 +2158,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "4",
+      "broker_join": "4",
       "replay": "0",
       "unresolved": "0",
       "wins": "1",
-      "losses": "2",
+      "losses": "3",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "33.33",
-      "broker_profit_aed": "-24.30",
+      "closed_win_rate_pct": "25.00",
+      "broker_profit_aed": "-39.03",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5005",
+      "avg_rr": "1.5001",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -901,6 +2183,36 @@
       "time_bucket": "Morning 06:00-11:59",
       "direction": "SHORT",
       "normalized_direction": "SELL",
+      "legacy_shadow_action": "BLOCK",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "10",
+      "broker_join": "10",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "3",
+      "losses": "7",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "30.00",
+      "broker_profit_aed": "-135.02",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4998",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "candidate",
+      "group": "symbol_normalized_round_retest_v0",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
       "legacy_shadow_action": "BLOCK",
       "proposed_v2_shadow_action": "BLOCK",
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
@@ -915,42 +2227,12 @@
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "22.22",
-      "broker_profit_aed": "-181.02",
+      "broker_profit_aed": "-41.03",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.4999",
-      "net_breakeven_wr_pct": ""
-    },
-    {
-      "aggregation_level": "candidate",
-      "group": "symbol_normalized_round_retest_v0",
-      "family": "round",
-      "symbol": "XAUUSD",
-      "time_bucket": "Night 20:00-05:59",
-      "direction": "LONG",
-      "normalized_direction": "BUY",
-      "legacy_shadow_action": "BLOCK",
-      "proposed_v2_shadow_action": "BLOCK",
-      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
-      "trend_veto_action": "",
-      "fixed_shadow_action": "BLOCK",
-      "signals": "5",
-      "broker_join": "5",
-      "replay": "0",
-      "unresolved": "0",
-      "wins": "1",
-      "losses": "4",
-      "open": "0",
-      "flat": "0",
-      "closed_win_rate_pct": "20.00",
-      "broker_profit_aed": "-78.53",
-      "replay_gross_win_rate_pct": "0.00",
-      "replay_net_win_rate_pct": "0.00",
-      "replay_net_r_sum": "",
-      "avg_cost_r": "",
-      "avg_rr": "1.4999",
+      "avg_rr": "1.5002",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -966,21 +2248,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "11",
-      "broker_join": "11",
+      "signals": "13",
+      "broker_join": "13",
       "replay": "0",
       "unresolved": "0",
-      "wins": "6",
-      "losses": "5",
+      "wins": "7",
+      "losses": "6",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "54.55",
-      "broker_profit_aed": "160.71",
+      "closed_win_rate_pct": "53.85",
+      "broker_profit_aed": "186.35",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5000",
+      "avg_rr": "1.5002",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -1026,16 +2308,16 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "4",
+      "broker_join": "4",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "3",
+      "losses": "4",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-96.96",
+      "broker_profit_aed": "-119.89",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
@@ -1056,21 +2338,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "4",
-      "broker_join": "4",
+      "signals": "8",
+      "broker_join": "8",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "4",
+      "losses": "8",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-60.48",
+      "broker_profit_aed": "-146.75",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5003",
+      "avg_rr": "1.5001",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -1086,16 +2368,16 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "1",
-      "broker_join": "1",
+      "signals": "2",
+      "broker_join": "2",
       "replay": "0",
       "unresolved": "0",
       "wins": "0",
-      "losses": "1",
+      "losses": "2",
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "0.00",
-      "broker_profit_aed": "-16.17",
+      "broker_profit_aed": "-39.21",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
@@ -1116,21 +2398,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "4",
-      "broker_join": "4",
+      "signals": "5",
+      "broker_join": "5",
       "replay": "0",
       "unresolved": "0",
       "wins": "2",
-      "losses": "2",
+      "losses": "3",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "50.00",
-      "broker_profit_aed": "102.20",
+      "closed_win_rate_pct": "40.00",
+      "broker_profit_aed": "91.66",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5000",
+      "avg_rr": "1.4999",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -1146,21 +2428,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "3",
-      "broker_join": "3",
+      "signals": "4",
+      "broker_join": "4",
       "replay": "0",
       "unresolved": "0",
       "wins": "1",
-      "losses": "2",
+      "losses": "3",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "33.33",
-      "broker_profit_aed": "-24.30",
+      "closed_win_rate_pct": "25.00",
+      "broker_profit_aed": "-39.03",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5005",
+      "avg_rr": "1.5001",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -1171,6 +2453,36 @@
       "time_bucket": "Morning 06:00-11:59",
       "direction": "SHORT",
       "normalized_direction": "SELL",
+      "legacy_shadow_action": "BLOCK",
+      "proposed_v2_shadow_action": "BLOCK",
+      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "BLOCK",
+      "signals": "11",
+      "broker_join": "11",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "3",
+      "losses": "8",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "27.27",
+      "broker_profit_aed": "-161.00",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.5000",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "family",
+      "group": "round",
+      "family": "round",
+      "symbol": "XAUUSD",
+      "time_bucket": "Night 20:00-05:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
       "legacy_shadow_action": "BLOCK",
       "proposed_v2_shadow_action": "BLOCK",
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
@@ -1185,42 +2497,12 @@
       "open": "0",
       "flat": "0",
       "closed_win_rate_pct": "22.22",
-      "broker_profit_aed": "-181.02",
+      "broker_profit_aed": "-41.03",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.4999",
-      "net_breakeven_wr_pct": ""
-    },
-    {
-      "aggregation_level": "family",
-      "group": "round",
-      "family": "round",
-      "symbol": "XAUUSD",
-      "time_bucket": "Night 20:00-05:59",
-      "direction": "LONG",
-      "normalized_direction": "BUY",
-      "legacy_shadow_action": "BLOCK",
-      "proposed_v2_shadow_action": "BLOCK",
-      "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
-      "trend_veto_action": "",
-      "fixed_shadow_action": "BLOCK",
-      "signals": "5",
-      "broker_join": "5",
-      "replay": "0",
-      "unresolved": "0",
-      "wins": "1",
-      "losses": "4",
-      "open": "0",
-      "flat": "0",
-      "closed_win_rate_pct": "20.00",
-      "broker_profit_aed": "-78.53",
-      "replay_gross_win_rate_pct": "0.00",
-      "replay_net_win_rate_pct": "0.00",
-      "replay_net_r_sum": "",
-      "avg_cost_r": "",
-      "avg_rr": "1.4999",
+      "avg_rr": "1.5002",
       "net_breakeven_wr_pct": ""
     },
     {
@@ -1236,21 +2518,21 @@
       "proposed_v2_shadow_reason": "BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY",
       "trend_veto_action": "",
       "fixed_shadow_action": "BLOCK",
-      "signals": "11",
-      "broker_join": "11",
+      "signals": "13",
+      "broker_join": "13",
       "replay": "0",
       "unresolved": "0",
-      "wins": "6",
-      "losses": "5",
+      "wins": "7",
+      "losses": "6",
       "open": "0",
       "flat": "0",
-      "closed_win_rate_pct": "54.55",
-      "broker_profit_aed": "160.71",
+      "closed_win_rate_pct": "53.85",
+      "broker_profit_aed": "186.35",
       "replay_gross_win_rate_pct": "0.00",
       "replay_net_win_rate_pct": "0.00",
       "replay_net_r_sum": "",
       "avg_cost_r": "",
-      "avg_rr": "1.5000",
+      "avg_rr": "1.5002",
       "net_breakeven_wr_pct": ""
     }
   ],
@@ -1259,6 +2541,8 @@
   "scoreboard_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\OBSERVER_SHADOW_POLICY_SCOREBOARD.csv",
   "notes": [
     "Broker-trade join is the preferred proof when the demo EA actually took the same signal.",
+    "Rows with evidence_tier=BROKER use actual broker state, profit, and exit data as the authoritative outcome.",
+    "Rows with evidence_tier=REPLAY are secondary reference evidence only; broker-tier scoreboards should be used for current decisions.",
     "M5 replay is only used when a bars_dir is provided and matching June 2026 bars exist.",
     "Replay model executor_v2 simulates Phase2ExperimentalDemoExecutor.SendDemoMarketOrder: next-M5-open entry, measured spread adjustment, stop floor, synthetic SL/TP, and adverse-first same-bar exits.",
     "Replay uses adverse-first same-bar ordering, so if SL and TP are both touched in the same M5 bar the row is scored as SL.",

@@ -1,0 +1,987 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-17T10:52:34.327141Z",
+  "boundary": "Analysis only. Reads exported CSV artifacts and writes reports. Does not touch MT5 runtime, EAs, presets, orders, positions, charts, profiles, or accounts.",
+  "source_files": {
+    "canonical_rows_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\XAUUSD_DEDUPED_REAL_FILL_EVIDENCE_2026_06_16_ROWS.csv",
+    "actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
+    "cost_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\COST_GATE_REAL_FILL_TRADES_2026_06_16.csv"
+  },
+  "universe": {
+    "canonical_rows": 586,
+    "ticket_matched_rows": 586,
+    "cost_matched_rows": 586,
+    "cost_known_rows": 435,
+    "cost_missing_rows": 151
+  },
+  "baseline": {
+    "rows": 586,
+    "wins": 220,
+    "losses": 362,
+    "flats": 4,
+    "win_rate_pct": "37.80%",
+    "pnl_aed": "-554.52",
+    "profit_factor": "0.95",
+    "avg_win_aed": "45.10",
+    "avg_loss_aed": "-28.94"
+  },
+  "family": [
+    {
+      "group": "round_family",
+      "rows": "432",
+      "win_rate_pct": "36.60%",
+      "pnl_aed": "-1359.41",
+      "pf": "0.84",
+      "best_day_removed_pnl_aed": "-1424.53",
+      "best_two_days_removed_pnl_aed": "-1484.72"
+    },
+    {
+      "group": "session_extreme",
+      "rows": "38",
+      "win_rate_pct": "26.32%",
+      "pnl_aed": "-143.78",
+      "pf": "0.71",
+      "best_day_removed_pnl_aed": "-192.68",
+      "best_two_days_removed_pnl_aed": "-215.40"
+    },
+    {
+      "group": "wr50",
+      "rows": "2",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-74.00",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "-52.87",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "repair",
+      "rows": "1",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-22.23",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "0.00",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "p2weakness",
+      "rows": "1",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-14.44",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "0.00",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "breakout_core",
+      "rows": "112",
+      "win_rate_pct": "47.75%",
+      "pnl_aed": "1059.34",
+      "pf": "1.82",
+      "best_day_removed_pnl_aed": "772.49",
+      "best_two_days_removed_pnl_aed": "506.22"
+    }
+  ],
+  "candidate": [
+    {
+      "group": "symbol_normalized_round_retest_v0",
+      "rows": "410",
+      "win_rate_pct": "36.61%",
+      "pnl_aed": "-1270.55",
+      "pf": "0.85",
+      "best_day_removed_pnl_aed": "-1335.67",
+      "best_two_days_removed_pnl_aed": "-1395.86"
+    },
+    {
+      "group": "session_extreme_retest_v0",
+      "rows": "38",
+      "win_rate_pct": "26.32%",
+      "pnl_aed": "-143.78",
+      "pf": "0.71",
+      "best_day_removed_pnl_aed": "-192.68",
+      "best_two_days_removed_pnl_aed": "-215.40"
+    },
+    {
+      "group": "round_number_retest_v0",
+      "rows": "22",
+      "win_rate_pct": "36.36%",
+      "pnl_aed": "-88.86",
+      "pf": "0.67",
+      "best_day_removed_pnl_aed": "-77.88",
+      "best_two_days_removed_pnl_aed": "-58.11"
+    },
+    {
+      "group": "WR50_BreakoutEvening_v0",
+      "rows": "2",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-74.00",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "-52.87",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "symbol_normalized_round_retest_v0_repair_v1",
+      "rows": "1",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-22.23",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "0.00",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "p2weakness_br_v1",
+      "rows": "1",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-14.44",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "0.00",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "swing_breakout_retest_v0",
+      "rows": "11",
+      "win_rate_pct": "54.55%",
+      "pnl_aed": "166.45",
+      "pf": "3.07",
+      "best_day_removed_pnl_aed": "-3.02",
+      "best_two_days_removed_pnl_aed": "-66.94"
+    },
+    {
+      "group": "breakout_retest",
+      "rows": "101",
+      "win_rate_pct": "47.00%",
+      "pnl_aed": "892.89",
+      "pf": "1.74",
+      "best_day_removed_pnl_aed": "606.04",
+      "best_two_days_removed_pnl_aed": "468.63"
+    }
+  ],
+  "session": [
+    {
+      "group": "Afternoon 12:00-15:59",
+      "rows": "82",
+      "win_rate_pct": "28.05%",
+      "pnl_aed": "-523.03",
+      "pf": "0.62",
+      "best_day_removed_pnl_aed": "-595.51",
+      "best_two_days_removed_pnl_aed": "-639.45"
+    },
+    {
+      "group": "Morning 06:00-11:59",
+      "rows": "136",
+      "win_rate_pct": "36.03%",
+      "pnl_aed": "-210.96",
+      "pf": "0.90",
+      "best_day_removed_pnl_aed": "-425.64",
+      "best_two_days_removed_pnl_aed": "-514.64"
+    },
+    {
+      "group": "Night 20:00-05:59",
+      "rows": "241",
+      "win_rate_pct": "39.17%",
+      "pnl_aed": "-159.99",
+      "pf": "0.96",
+      "best_day_removed_pnl_aed": "-393.53",
+      "best_two_days_removed_pnl_aed": "-569.86"
+    },
+    {
+      "group": "Evening 16:00-19:59",
+      "rows": "127",
+      "win_rate_pct": "43.55%",
+      "pnl_aed": "339.46",
+      "pf": "1.13",
+      "best_day_removed_pnl_aed": "117.25",
+      "best_two_days_removed_pnl_aed": "-64.24"
+    }
+  ],
+  "afternoon_round_family_diagnosis": {
+    "session": "Afternoon 12:00-15:59",
+    "dedup_universe_rows": 586,
+    "afternoon_rows": 82,
+    "afternoon_pnl_aed": "-523.03",
+    "round_family_afternoon_rows": 55,
+    "round_family_afternoon_pnl_aed": "-452.13",
+    "round_family_loss_share_of_afternoon_loss_pct": "86.44%",
+    "residual_after_round_quarantine_rows": 27,
+    "residual_after_round_quarantine_pnl_aed": "-70.90",
+    "protected_evening_night_rows_removed": "0",
+    "protected_evening_night_pnl_removed_aed": "0.00",
+    "decision": "Round-family quarantine is the first measurable fix. Avoid a broad afternoon ban until the non-round residual has more evidence.",
+    "runtime_authorized": false,
+    "rows": [
+      {
+        "segment": "all_afternoon",
+        "rows": "82",
+        "win_rate_pct": "28.05%",
+        "pnl_aed": "-523.03",
+        "pf": "0.62",
+        "loss_share_of_afternoon_loss_pct": "100.00%",
+        "best_day_removed_pnl_aed": "-595.51",
+        "best_two_days_removed_pnl_aed": "-639.45",
+        "interpretation": "Baseline afternoon exposure."
+      },
+      {
+        "segment": "round_family_afternoon",
+        "rows": "55",
+        "win_rate_pct": "27.27%",
+        "pnl_aed": "-452.13",
+        "pf": "0.58",
+        "loss_share_of_afternoon_loss_pct": "86.44%",
+        "best_day_removed_pnl_aed": "-501.82",
+        "best_two_days_removed_pnl_aed": "-483.67",
+        "interpretation": "Primary loss source to quarantine first."
+      },
+      {
+        "segment": "non_round_residual_after_round_quarantine",
+        "rows": "27",
+        "win_rate_pct": "29.63%",
+        "pnl_aed": "-70.90",
+        "pf": "0.77",
+        "loss_share_of_afternoon_loss_pct": "13.56%",
+        "best_day_removed_pnl_aed": "-143.38",
+        "best_two_days_removed_pnl_aed": "-162.99",
+        "interpretation": "Remaining afternoon exposure after removing round-family rows."
+      },
+      {
+        "segment": "breakout_core_afternoon",
+        "rows": "11",
+        "win_rate_pct": "27.27%",
+        "pnl_aed": "-53.09",
+        "pf": "0.63",
+        "loss_share_of_afternoon_loss_pct": "10.15%",
+        "best_day_removed_pnl_aed": "-87.31",
+        "best_two_days_removed_pnl_aed": "-81.56",
+        "interpretation": "Small residual; do not block breakout core solely because it is afternoon."
+      },
+      {
+        "segment": "session_extreme_afternoon",
+        "rows": "16",
+        "win_rate_pct": "31.25%",
+        "pnl_aed": "-17.81",
+        "pf": "0.89",
+        "loss_share_of_afternoon_loss_pct": "3.41%",
+        "best_day_removed_pnl_aed": "-56.07",
+        "best_two_days_removed_pnl_aed": "-81.45",
+        "interpretation": "Residual weak-family slice; keep measuring separately."
+      }
+    ]
+  },
+  "direction_session": [
+    {
+      "group": "BUY | Afternoon 12:00-15:59",
+      "rows": "38",
+      "win_rate_pct": "15.79%",
+      "pnl_aed": "-592.07",
+      "pf": "0.26",
+      "best_day_removed_pnl_aed": "-664.55",
+      "best_two_days_removed_pnl_aed": "-645.31"
+    },
+    {
+      "group": "SELL | Night 20:00-05:59",
+      "rows": "129",
+      "win_rate_pct": "36.72%",
+      "pnl_aed": "-486.57",
+      "pf": "0.80",
+      "best_day_removed_pnl_aed": "-638.68",
+      "best_two_days_removed_pnl_aed": "-748.31"
+    },
+    {
+      "group": "BUY | Evening 16:00-19:59",
+      "rows": "52",
+      "win_rate_pct": "36.54%",
+      "pnl_aed": "-339.51",
+      "pf": "0.75",
+      "best_day_removed_pnl_aed": "-542.00",
+      "best_two_days_removed_pnl_aed": "-642.86"
+    },
+    {
+      "group": "SELL | Morning 06:00-11:59",
+      "rows": "76",
+      "win_rate_pct": "31.58%",
+      "pnl_aed": "-252.83",
+      "pf": "0.78",
+      "best_day_removed_pnl_aed": "-381.58",
+      "best_two_days_removed_pnl_aed": "-423.68"
+    },
+    {
+      "group": "BUY | Morning 06:00-11:59",
+      "rows": "60",
+      "win_rate_pct": "41.67%",
+      "pnl_aed": "41.87",
+      "pf": "1.05",
+      "best_day_removed_pnl_aed": "-45.59",
+      "best_two_days_removed_pnl_aed": "-131.52"
+    },
+    {
+      "group": "SELL | Afternoon 12:00-15:59",
+      "rows": "44",
+      "win_rate_pct": "38.64%",
+      "pnl_aed": "69.04",
+      "pf": "1.12",
+      "best_day_removed_pnl_aed": "-88.95",
+      "best_two_days_removed_pnl_aed": "-167.24"
+    },
+    {
+      "group": "BUY | Night 20:00-05:59",
+      "rows": "112",
+      "win_rate_pct": "41.96%",
+      "pnl_aed": "326.58",
+      "pf": "1.17",
+      "best_day_removed_pnl_aed": "-491.29",
+      "best_two_days_removed_pnl_aed": "-708.46"
+    },
+    {
+      "group": "SELL | Evening 16:00-19:59",
+      "rows": "75",
+      "win_rate_pct": "48.61%",
+      "pnl_aed": "678.97",
+      "pf": "1.52",
+      "best_day_removed_pnl_aed": "263.60",
+      "best_two_days_removed_pnl_aed": "-91.53"
+    }
+  ],
+  "candidate_session": [
+    {
+      "group": "symbol_normalized_round_retest_v0 | Evening 16:00-19:59",
+      "rows": "87",
+      "win_rate_pct": "36.47%",
+      "pnl_aed": "-419.88",
+      "pf": "0.82",
+      "best_day_removed_pnl_aed": "-572.62",
+      "best_two_days_removed_pnl_aed": "-671.23"
+    },
+    {
+      "group": "symbol_normalized_round_retest_v0 | Afternoon 12:00-15:59",
+      "rows": "52",
+      "win_rate_pct": "28.85%",
+      "pnl_aed": "-373.39",
+      "pf": "0.63",
+      "best_day_removed_pnl_aed": "-423.08",
+      "best_two_days_removed_pnl_aed": "-442.53"
+    },
+    {
+      "group": "symbol_normalized_round_retest_v0 | Morning 06:00-11:59",
+      "rows": "101",
+      "win_rate_pct": "34.65%",
+      "pnl_aed": "-286.93",
+      "pf": "0.82",
+      "best_day_removed_pnl_aed": "-425.09",
+      "best_two_days_removed_pnl_aed": "-555.69"
+    },
+    {
+      "group": "symbol_normalized_round_retest_v0 | Night 20:00-05:59",
+      "rows": "170",
+      "win_rate_pct": "40.24%",
+      "pnl_aed": "-190.35",
+      "pf": "0.94",
+      "best_day_removed_pnl_aed": "-314.10",
+      "best_two_days_removed_pnl_aed": "-426.51"
+    },
+    {
+      "group": "session_extreme_retest_v0 | Night 20:00-05:59",
+      "rows": "14",
+      "win_rate_pct": "14.29%",
+      "pnl_aed": "-131.92",
+      "pf": "0.40",
+      "best_day_removed_pnl_aed": "-148.47",
+      "best_two_days_removed_pnl_aed": "-132.93"
+    },
+    {
+      "group": "round_number_retest_v0 | Afternoon 12:00-15:59",
+      "rows": "3",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-78.74",
+      "pf": "0.00",
+      "best_day_removed_pnl_aed": "-42.29",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "breakout_retest | Afternoon 12:00-15:59",
+      "rows": "11",
+      "win_rate_pct": "27.27%",
+      "pnl_aed": "-53.09",
+      "pf": "0.63",
+      "best_day_removed_pnl_aed": "-87.31",
+      "best_two_days_removed_pnl_aed": "-81.56"
+    },
+    {
+      "group": "round_number_retest_v0 | Night 20:00-05:59",
+      "rows": "6",
+      "win_rate_pct": "33.33%",
+      "pnl_aed": "-40.13",
+      "pf": "0.59",
+      "best_day_removed_pnl_aed": "-82.72",
+      "best_two_days_removed_pnl_aed": "-56.74"
+    },
+    {
+      "group": "session_extreme_retest_v0 | Afternoon 12:00-15:59",
+      "rows": "16",
+      "win_rate_pct": "31.25%",
+      "pnl_aed": "-17.81",
+      "pf": "0.89",
+      "best_day_removed_pnl_aed": "-56.07",
+      "best_two_days_removed_pnl_aed": "-81.45"
+    },
+    {
+      "group": "round_number_retest_v0 | Morning 06:00-11:59",
+      "rows": "12",
+      "win_rate_pct": "41.67%",
+      "pnl_aed": "5.30",
+      "pf": "1.06",
+      "best_day_removed_pnl_aed": "-12.65",
+      "best_two_days_removed_pnl_aed": "-11.28"
+    },
+    {
+      "group": "session_extreme_retest_v0 | Evening 16:00-19:59",
+      "rows": "8",
+      "win_rate_pct": "37.50%",
+      "pnl_aed": "5.95",
+      "pf": "1.05",
+      "best_day_removed_pnl_aed": "-23.34",
+      "best_two_days_removed_pnl_aed": "-26.33"
+    },
+    {
+      "group": "swing_breakout_retest_v0 | Night 20:00-05:59",
+      "rows": "5",
+      "win_rate_pct": "40.00%",
+      "pnl_aed": "10.17",
+      "pf": "1.21",
+      "best_day_removed_pnl_aed": "-49.42",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "breakout_retest | Morning 06:00-11:59",
+      "rows": "21",
+      "win_rate_pct": "42.86%",
+      "pnl_aed": "102.63",
+      "pf": "1.40",
+      "best_day_removed_pnl_aed": "7.27",
+      "best_two_days_removed_pnl_aed": "-40.19"
+    },
+    {
+      "group": "swing_breakout_retest_v0 | Evening 16:00-19:59",
+      "rows": "5",
+      "win_rate_pct": "80.00%",
+      "pnl_aed": "173.80",
+      "pf": "13.82",
+      "best_day_removed_pnl_aed": "63.92",
+      "best_two_days_removed_pnl_aed": "0.00"
+    },
+    {
+      "group": "breakout_retest | Night 20:00-05:59",
+      "rows": "44",
+      "win_rate_pct": "45.45%",
+      "pnl_aed": "266.24",
+      "pf": "1.48",
+      "best_day_removed_pnl_aed": "139.95",
+      "best_two_days_removed_pnl_aed": "75.91"
+    },
+    {
+      "group": "breakout_retest | Evening 16:00-19:59",
+      "rows": "25",
+      "win_rate_pct": "62.50%",
+      "pnl_aed": "577.11",
+      "pf": "3.26",
+      "best_day_removed_pnl_aed": "384.36",
+      "best_two_days_removed_pnl_aed": "229.09"
+    }
+  ],
+  "cost_by_bucket": [
+    {
+      "bucket": "<=0.05",
+      "rows": "100",
+      "win_rate_pct": "39.58%",
+      "pnl_aed": "-96.22",
+      "pf": "0.97",
+      "median_cost_r": "0.04",
+      "mean_cost_r": "0.04",
+      "best_day_removed_pnl_aed": "-270.05"
+    },
+    {
+      "bucket": "0.05-0.07",
+      "rows": "101",
+      "win_rate_pct": "42.57%",
+      "pnl_aed": "35.73",
+      "pf": "1.02",
+      "median_cost_r": "0.06",
+      "mean_cost_r": "0.06",
+      "best_day_removed_pnl_aed": "-327.91"
+    },
+    {
+      "bucket": "0.07-0.09",
+      "rows": "82",
+      "win_rate_pct": "42.68%",
+      "pnl_aed": "128.45",
+      "pf": "1.11",
+      "median_cost_r": "0.08",
+      "mean_cost_r": "0.08",
+      "best_day_removed_pnl_aed": "46.73"
+    },
+    {
+      "bucket": "0.09-0.11",
+      "rows": "56",
+      "win_rate_pct": "32.14%",
+      "pnl_aed": "-196.06",
+      "pf": "0.76",
+      "median_cost_r": "0.10",
+      "mean_cost_r": "0.10",
+      "best_day_removed_pnl_aed": "-262.45"
+    },
+    {
+      "bucket": "0.11-0.13",
+      "rows": "32",
+      "win_rate_pct": "34.38%",
+      "pnl_aed": "-117.51",
+      "pf": "0.72",
+      "median_cost_r": "0.12",
+      "mean_cost_r": "0.12",
+      "best_day_removed_pnl_aed": "-168.62"
+    },
+    {
+      "bucket": ">0.13",
+      "rows": "64",
+      "win_rate_pct": "28.12%",
+      "pnl_aed": "-315.52",
+      "pf": "0.54",
+      "median_cost_r": "0.16",
+      "mean_cost_r": "0.17",
+      "best_day_removed_pnl_aed": "-348.45"
+    }
+  ],
+  "cost_cutoffs": [
+    {
+      "cutoff": "0.04",
+      "kept_rows": "53",
+      "kept_wr": "42.00%",
+      "kept_pnl_aed": "193.18",
+      "blocked_rows": "382",
+      "blocked_pnl_aed": "-754.31",
+      "kept_best_day_removed_pnl_aed": "-21.41"
+    },
+    {
+      "cutoff": "0.05",
+      "kept_rows": "100",
+      "kept_wr": "39.58%",
+      "kept_pnl_aed": "-96.22",
+      "blocked_rows": "335",
+      "blocked_pnl_aed": "-464.91",
+      "kept_best_day_removed_pnl_aed": "-270.05"
+    },
+    {
+      "cutoff": "0.06",
+      "kept_rows": "155",
+      "kept_wr": "39.07%",
+      "kept_pnl_aed": "-309.56",
+      "blocked_rows": "280",
+      "blocked_pnl_aed": "-251.57",
+      "kept_best_day_removed_pnl_aed": "-600.66"
+    },
+    {
+      "cutoff": "0.07",
+      "kept_rows": "201",
+      "kept_wr": "41.12%",
+      "kept_pnl_aed": "-60.49",
+      "blocked_rows": "234",
+      "blocked_pnl_aed": "-500.64",
+      "kept_best_day_removed_pnl_aed": "-426.45"
+    },
+    {
+      "cutoff": "0.08",
+      "kept_rows": "241",
+      "kept_wr": "42.19%",
+      "kept_pnl_aed": "129.93",
+      "blocked_rows": "194",
+      "blocked_pnl_aed": "-691.06",
+      "kept_best_day_removed_pnl_aed": "-227.37"
+    },
+    {
+      "cutoff": "0.09",
+      "kept_rows": "283",
+      "kept_wr": "41.58%",
+      "kept_pnl_aed": "67.96",
+      "blocked_rows": "152",
+      "blocked_pnl_aed": "-629.09",
+      "kept_best_day_removed_pnl_aed": "-332.05"
+    },
+    {
+      "cutoff": "0.10",
+      "kept_rows": "315",
+      "kept_wr": "41.16%",
+      "kept_pnl_aed": "41.67",
+      "blocked_rows": "120",
+      "blocked_pnl_aed": "-602.80",
+      "kept_best_day_removed_pnl_aed": "-400.18"
+    },
+    {
+      "cutoff": "0.11",
+      "kept_rows": "339",
+      "kept_wr": "40.00%",
+      "kept_pnl_aed": "-128.10",
+      "blocked_rows": "96",
+      "blocked_pnl_aed": "-433.03",
+      "kept_best_day_removed_pnl_aed": "-479.59"
+    },
+    {
+      "cutoff": "0.12",
+      "kept_rows": "361",
+      "kept_wr": "39.50%",
+      "kept_pnl_aed": "-242.15",
+      "blocked_rows": "74",
+      "blocked_pnl_aed": "-318.98",
+      "kept_best_day_removed_pnl_aed": "-560.30"
+    },
+    {
+      "cutoff": "0.13",
+      "kept_rows": "371",
+      "kept_wr": "39.51%",
+      "kept_pnl_aed": "-245.61",
+      "blocked_rows": "64",
+      "blocked_pnl_aed": "-315.52",
+      "kept_best_day_removed_pnl_aed": "-563.76"
+    },
+    {
+      "cutoff": "0.15",
+      "kept_rows": "394",
+      "kept_wr": "38.97%",
+      "kept_pnl_aed": "-358.98",
+      "blocked_rows": "41",
+      "blocked_pnl_aed": "-202.15",
+      "kept_best_day_removed_pnl_aed": "-606.37"
+    }
+  ],
+  "cost_by_family": [
+    {
+      "group": "round_family",
+      "rows": "357",
+      "win_rate_pct": "36.72%",
+      "pnl_aed": "-1025.95",
+      "pf": "0.86",
+      "median_cost_r": "0.07",
+      "mean_cost_r": "0.08"
+    },
+    {
+      "group": "session_extreme",
+      "rows": "13",
+      "win_rate_pct": "23.08%",
+      "pnl_aed": "-66.17",
+      "pf": "0.64",
+      "median_cost_r": "0.10",
+      "mean_cost_r": "0.10"
+    },
+    {
+      "group": "repair",
+      "rows": "1",
+      "win_rate_pct": "0.00%",
+      "pnl_aed": "-22.23",
+      "pf": "0.00",
+      "median_cost_r": "0.08",
+      "mean_cost_r": "0.08"
+    },
+    {
+      "group": "breakout_core",
+      "rows": "64",
+      "win_rate_pct": "47.62%",
+      "pnl_aed": "553.22",
+      "pf": "1.69",
+      "median_cost_r": "0.09",
+      "mean_cost_r": "0.09"
+    }
+  ],
+  "account_focus": {
+    "views": [
+      {
+        "view": "A1 lab observation",
+        "rows": "586",
+        "win_rate_pct": "37.80%",
+        "pnl_aed": "-554.52",
+        "pf": "0.95",
+        "no_round_rows": "154",
+        "no_round_pnl_aed": "804.89",
+        "breakout_core_rows": "112",
+        "breakout_core_pnl_aed": "1059.34",
+        "protected_breakout_en_rows": "79",
+        "protected_breakout_en_pnl_aed": "1027.32",
+        "no_afternoon_pnl_aed": "-31.49"
+      },
+      {
+        "view": "A2+A3 production-style",
+        "rows": "0",
+        "win_rate_pct": "n/a",
+        "pnl_aed": "0.00",
+        "pf": "n/a",
+        "no_round_rows": "0",
+        "no_round_pnl_aed": "0.00",
+        "breakout_core_rows": "0",
+        "breakout_core_pnl_aed": "0.00",
+        "protected_breakout_en_rows": "0",
+        "protected_breakout_en_pnl_aed": "0.00",
+        "no_afternoon_pnl_aed": "0.00"
+      },
+      {
+        "view": "A2 clean account",
+        "rows": "0",
+        "win_rate_pct": "n/a",
+        "pnl_aed": "0.00",
+        "pf": "n/a",
+        "no_round_rows": "0",
+        "no_round_pnl_aed": "0.00",
+        "breakout_core_rows": "0",
+        "breakout_core_pnl_aed": "0.00",
+        "protected_breakout_en_rows": "0",
+        "protected_breakout_en_pnl_aed": "0.00",
+        "no_afternoon_pnl_aed": "0.00"
+      },
+      {
+        "view": "A3 experiment account",
+        "rows": "0",
+        "win_rate_pct": "n/a",
+        "pnl_aed": "0.00",
+        "pf": "n/a",
+        "no_round_rows": "0",
+        "no_round_pnl_aed": "0.00",
+        "breakout_core_rows": "0",
+        "breakout_core_pnl_aed": "0.00",
+        "protected_breakout_en_rows": "0",
+        "protected_breakout_en_pnl_aed": "0.00",
+        "no_afternoon_pnl_aed": "0.00"
+      }
+    ],
+    "by_account": [
+      {
+        "group": "1025742",
+        "rows": "586",
+        "win_rate_pct": "37.80%",
+        "pnl_aed": "-554.52",
+        "pf": "0.95",
+        "best_day_removed_pnl_aed": "-737.02",
+        "best_two_days_removed_pnl_aed": "-839.47"
+      }
+    ],
+    "by_account_family": [
+      {
+        "group": "1025742 | round_family",
+        "rows": "432",
+        "win_rate_pct": "36.60%",
+        "pnl_aed": "-1359.41",
+        "pf": "0.84",
+        "best_day_removed_pnl_aed": "-1424.53",
+        "best_two_days_removed_pnl_aed": "-1484.72"
+      },
+      {
+        "group": "1025742 | session_extreme",
+        "rows": "38",
+        "win_rate_pct": "26.32%",
+        "pnl_aed": "-143.78",
+        "pf": "0.71",
+        "best_day_removed_pnl_aed": "-192.68",
+        "best_two_days_removed_pnl_aed": "-215.40"
+      },
+      {
+        "group": "1025742 | wr50",
+        "rows": "2",
+        "win_rate_pct": "0.00%",
+        "pnl_aed": "-74.00",
+        "pf": "0.00",
+        "best_day_removed_pnl_aed": "-52.87",
+        "best_two_days_removed_pnl_aed": "0.00"
+      },
+      {
+        "group": "1025742 | repair",
+        "rows": "1",
+        "win_rate_pct": "0.00%",
+        "pnl_aed": "-22.23",
+        "pf": "0.00",
+        "best_day_removed_pnl_aed": "0.00",
+        "best_two_days_removed_pnl_aed": "0.00"
+      },
+      {
+        "group": "1025742 | p2weakness",
+        "rows": "1",
+        "win_rate_pct": "0.00%",
+        "pnl_aed": "-14.44",
+        "pf": "0.00",
+        "best_day_removed_pnl_aed": "0.00",
+        "best_two_days_removed_pnl_aed": "0.00"
+      },
+      {
+        "group": "1025742 | breakout_core",
+        "rows": "112",
+        "win_rate_pct": "47.75%",
+        "pnl_aed": "1059.34",
+        "pf": "1.82",
+        "best_day_removed_pnl_aed": "772.49",
+        "best_two_days_removed_pnl_aed": "506.22"
+      }
+    ],
+    "by_account_session": [
+      {
+        "group": "1025742 | Afternoon 12:00-15:59",
+        "rows": "82",
+        "win_rate_pct": "28.05%",
+        "pnl_aed": "-523.03",
+        "pf": "0.62",
+        "best_day_removed_pnl_aed": "-595.51",
+        "best_two_days_removed_pnl_aed": "-639.45"
+      },
+      {
+        "group": "1025742 | Morning 06:00-11:59",
+        "rows": "136",
+        "win_rate_pct": "36.03%",
+        "pnl_aed": "-210.96",
+        "pf": "0.90",
+        "best_day_removed_pnl_aed": "-425.64",
+        "best_two_days_removed_pnl_aed": "-514.64"
+      },
+      {
+        "group": "1025742 | Night 20:00-05:59",
+        "rows": "241",
+        "win_rate_pct": "39.17%",
+        "pnl_aed": "-159.99",
+        "pf": "0.96",
+        "best_day_removed_pnl_aed": "-393.53",
+        "best_two_days_removed_pnl_aed": "-569.86"
+      },
+      {
+        "group": "1025742 | Evening 16:00-19:59",
+        "rows": "127",
+        "win_rate_pct": "43.55%",
+        "pnl_aed": "339.46",
+        "pf": "1.13",
+        "best_day_removed_pnl_aed": "117.25",
+        "best_two_days_removed_pnl_aed": "-64.24"
+      }
+    ],
+    "note": "A1 is treated as a broad/noisy lab account. A2 and A3 are treated as the production-style evidence lane. In this canonical XAU export, A2 has no closed XAU rows, so A2+A3 currently equals A3 only."
+  },
+  "rule_scorecard": [
+    {
+      "scenario": "round_family_quarantine",
+      "kept_rows": "154",
+      "kept_wr": "41.18%",
+      "kept_pnl_aed": "804.89",
+      "delta_vs_baseline_aed": "1359.41",
+      "blocked_rows": "432",
+      "blocked_winners": "157",
+      "blocked_losses": "272",
+      "blocked_pnl_aed": "-1359.41",
+      "kept_best_day_removed_pnl_aed": "534.54",
+      "protected_rows_removed": "0",
+      "protected_pnl_removed_aed": "0.00",
+      "note": "Block selected round-family broker action; keep non-round selected rows."
+    },
+    {
+      "scenario": "breakout_core_only",
+      "kept_rows": "112",
+      "kept_wr": "47.75%",
+      "kept_pnl_aed": "1059.34",
+      "delta_vs_baseline_aed": "1613.86",
+      "blocked_rows": "474",
+      "blocked_winners": "167",
+      "blocked_losses": "304",
+      "blocked_pnl_aed": "-1613.86",
+      "kept_best_day_removed_pnl_aed": "772.49",
+      "protected_rows_removed": "0",
+      "protected_pnl_removed_aed": "0.00",
+      "note": "Only selected breakout_retest and swing_breakout_retest_v0 rows."
+    },
+    {
+      "scenario": "protect_breakout_evening_night_cluster",
+      "kept_rows": "79",
+      "kept_wr": "52.56%",
+      "kept_pnl_aed": "1027.32",
+      "delta_vs_baseline_aed": "1581.84",
+      "blocked_rows": "507",
+      "blocked_winners": "179",
+      "blocked_losses": "325",
+      "blocked_pnl_aed": "-1581.84",
+      "kept_best_day_removed_pnl_aed": "708.28",
+      "protected_rows_removed": "0",
+      "protected_pnl_removed_aed": "0.00",
+      "note": "Protected cluster view only; not a routing recommendation by itself."
+    },
+    {
+      "scenario": "no_afternoon",
+      "kept_rows": "504",
+      "kept_wr": "39.40%",
+      "kept_pnl_aed": "-31.49",
+      "delta_vs_baseline_aed": "523.03",
+      "blocked_rows": "82",
+      "blocked_winners": "23",
+      "blocked_losses": "59",
+      "blocked_pnl_aed": "-523.03",
+      "kept_best_day_removed_pnl_aed": "-411.47",
+      "protected_rows_removed": "0",
+      "protected_pnl_removed_aed": "0.00",
+      "note": "Remove all afternoon rows."
+    },
+    {
+      "scenario": "no_morning_afternoon",
+      "kept_rows": "368",
+      "kept_wr": "40.66%",
+      "kept_pnl_aed": "179.47",
+      "delta_vs_baseline_aed": "733.99",
+      "blocked_rows": "218",
+      "blocked_winners": "72",
+      "blocked_losses": "146",
+      "blocked_pnl_aed": "-733.99",
+      "kept_best_day_removed_pnl_aed": "-219.07",
+      "protected_rows_removed": "0",
+      "protected_pnl_removed_aed": "0.00",
+      "note": "Evening/night only across all selected rows."
+    },
+    {
+      "scenario": "cost_known_keep_lte_0_13",
+      "kept_rows": "522",
+      "kept_wr": "39.00%",
+      "kept_pnl_aed": "-239.00",
+      "delta_vs_baseline_aed": "315.52",
+      "blocked_rows": "64",
+      "blocked_winners": "18",
+      "blocked_losses": "46",
+      "blocked_pnl_aed": "-315.52",
+      "kept_best_day_removed_pnl_aed": "-557.15",
+      "protected_rows_removed": "11",
+      "protected_pnl_removed_aed": "-21.49",
+      "note": "Keep unknown-cost rows; block only known cost_r > 0.13."
+    },
+    {
+      "scenario": "round_quarantine_plus_cost_gt_0_13",
+      "kept_rows": "139",
+      "kept_wr": "42.03%",
+      "kept_pnl_aed": "834.75",
+      "delta_vs_baseline_aed": "1389.27",
+      "blocked_rows": "447",
+      "blocked_winners": "162",
+      "blocked_losses": "282",
+      "blocked_pnl_aed": "-1389.27",
+      "kept_best_day_removed_pnl_aed": "550.84",
+      "protected_rows_removed": "11",
+      "protected_pnl_removed_aed": "-21.49",
+      "note": "Round quarantine plus worst-tier known cost veto."
+    }
+  ],
+  "protected_cluster": {
+    "definition": "selected breakout_retest or swing_breakout_retest_v0 in Evening/Night",
+    "rows": "79",
+    "win_rate_pct": "52.56%",
+    "pnl_aed": "1027.32",
+    "pf": "2.17",
+    "best_day_removed_pnl_aed": "708.28",
+    "best_two_days_removed_pnl_aed": "483.97"
+  },
+  "duplicate_exposure": {
+    "multirow_groups": 461,
+    "multirow_group_pnl_aed": "-356.95",
+    "mixed_family_groups": 81,
+    "mixed_family_pnl_aed": "500.88",
+    "breakout_round_mixed_groups": 26,
+    "breakout_round_mixed_pnl_aed": "290.46",
+    "note": "Canonical rows already collapse same-minute symbol/direction/volume duplicates. Runtime exposure guard should still catch cross-family and adjacent-bar stacks before order send."
+  },
+  "conclusions": [
+    "Round-family quarantine remains the strongest first promotion candidate.",
+    "Evening/night breakout should be protected, but not converted into evening/night-only routing yet.",
+    "Cost is useful as a worst-tier veto, but the exact threshold remains fragile and should stay shadow-only.",
+    "Exposure control should use symbol + direction + bar + level band; family should remain an attribution field, not the exposure key.",
+    "Hard short-block is still unproven until a down or range day is observed."
+  ]
+}

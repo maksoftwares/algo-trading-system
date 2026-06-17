@@ -55,6 +55,12 @@ def generate_observer_outcome_resolution(
         for row in signals
     ]
     scoreboard_rows = _scoreboard_rows(resolved_rows, mode=scoreboard_mode)
+    broker_fill_scoreboards = _dimension_scoreboards(
+        [row for row in resolved_rows if row.get("evidence_tier") == "BROKER"]
+    )
+    replay_reference_scoreboards = _dimension_scoreboards(
+        [row for row in resolved_rows if row.get("evidence_tier") == "REPLAY"]
+    )
     bar_quality = _bar_quality_report(bars_dir.resolve(), signals) if bars_dir else []
     payload: dict[str, Any] = {
         "status": _status(resolved_rows, bool(bars_dir)),
@@ -73,12 +79,15 @@ def generate_observer_outcome_resolution(
         "cost_model_csv": str(cost_model_csv),
         "signal_count": len(signals),
         "actual_trade_rows": len(actual_rows),
-        "resolved_count": sum(1 for row in resolved_rows if row["resolution_status"].startswith(("BROKER_", "REPLAY_"))),
-        "broker_join_resolved_count": sum(1 for row in resolved_rows if row["resolution_status"].startswith("BROKER_")),
-        "replay_resolved_count": sum(1 for row in resolved_rows if row["resolution_status"].startswith("REPLAY_")),
+        "resolved_count": sum(1 for row in resolved_rows if row.get("evidence_tier") in {"BROKER", "REPLAY"}),
+        "broker_join_resolved_count": sum(1 for row in resolved_rows if row.get("evidence_tier") == "BROKER"),
+        "replay_resolved_count": sum(1 for row in resolved_rows if row.get("evidence_tier") == "REPLAY"),
         "unresolved_count": sum(1 for row in resolved_rows if row["resolution_status"].startswith("UNRESOLVED")),
+        "by_evidence_tier": _counter(resolved_rows, "evidence_tier", "resolution_status"),
         "by_resolution_status": _counter(resolved_rows, "resolution_status"),
         "by_resolution_source": _counter(resolved_rows, "resolution_source", "resolution_status"),
+        "broker_fill_scoreboards": broker_fill_scoreboards,
+        "replay_reference_scoreboards": replay_reference_scoreboards,
         "by_candidate": _counter(resolved_rows, "candidate"),
         "by_candidate_status": _counter(resolved_rows, "candidate", "resolution_status"),
         "by_proposed_v2_action": _counter(resolved_rows, "proposed_v2_shadow_action", "resolution_status"),
@@ -90,6 +99,8 @@ def generate_observer_outcome_resolution(
         "scoreboard_csv": str(scoreboard_json.with_suffix(".csv")),
         "notes": [
             "Broker-trade join is the preferred proof when the demo EA actually took the same signal.",
+            "Rows with evidence_tier=BROKER use actual broker state, profit, and exit data as the authoritative outcome.",
+            "Rows with evidence_tier=REPLAY are secondary reference evidence only; broker-tier scoreboards should be used for current decisions.",
             "M5 replay is only used when a bars_dir is provided and matching June 2026 bars exist.",
             "Replay model executor_v2 simulates Phase2ExperimentalDemoExecutor.SendDemoMarketOrder: next-M5-open entry, measured spread adjustment, stop floor, synthetic SL/TP, and adverse-first same-bar exits.",
             "Replay uses adverse-first same-bar ordering, so if SL and TP are both touched in the same M5 bar the row is scored as SL.",
@@ -182,12 +193,16 @@ def _base_resolved_row(row: dict[str, str]) -> dict[str, str]:
     proposed_action, proposed_reason = _proposed_v2_action(row)
     fixed_action = row.get("fixed_shadow_action") or proposed_action
     fixed_reason = row.get("fixed_shadow_reason") or proposed_reason
+    spread_points = row.get("spread_points", "")
+    candidate = row.get("candidate", "")
     return {
         "timestamp_broker": row.get("timestamp_broker", ""),
         "m5_bar_time": row.get("m5_bar_time", ""),
         "time_bucket": row.get("time_bucket", ""),
-        "candidate": row.get("candidate", ""),
-        "family": _family_for_candidate(row.get("candidate", "")),
+        "candidate": candidate,
+        "family": _family_for_candidate(candidate),
+        "lane": _lane_for_candidate(candidate),
+        "regime": row.get("regime", "") or row.get("dirstate_regime", "") or row.get("stage", "") or "UNKNOWN",
         "symbol": row.get("symbol", ""),
         "direction": row.get("direction", ""),
         "normalized_direction": _normalise_trade_direction(row.get("direction", "")),
@@ -203,7 +218,9 @@ def _base_resolved_row(row: dict[str, str]) -> dict[str, str]:
         "stop_loss": row.get("stop_loss", ""),
         "take_profit": row.get("take_profit", ""),
         "stop_distance_points": row.get("stop_distance_points", ""),
-        "spread_points": row.get("spread_points", ""),
+        "spread_points": spread_points,
+        "cost_bucket": _cost_bucket(spread_points),
+        "evidence_tier": "",
         "resolution_status": "UNRESOLVED",
         "resolution_source": "",
         "matched_position_ticket": "",
@@ -266,6 +283,36 @@ def _family_for_candidate(candidate: str) -> str:
     return "other"
 
 
+def _lane_for_candidate(candidate: str) -> str:
+    value = str(candidate or "").strip()
+    if value in {"breakout_retest", "swing_breakout_retest_v0"}:
+        return "accepted_same_family"
+    if value in ROUND_RETEST_CLONE_CANDIDATES:
+        return "accepted_round_family"
+    if value.startswith("session_extreme_retest_v0"):
+        return "provisional_session_family"
+    if "repair_v1" in value:
+        return "repair_experiment"
+    if value.startswith("WR50_"):
+        return "wr50_experiment"
+    if value == "p2weakness_br_v1":
+        return "phase2x_experiment"
+    return "other"
+
+
+def _cost_bucket(spread_points: str | None) -> str:
+    spread = _float(spread_points)
+    if spread is None:
+        return "UNKNOWN"
+    if spread <= 30.0:
+        return "LOW_<=30pt"
+    if spread <= 50.0:
+        return "MEDIUM_31_50pt"
+    if spread <= 75.0:
+        return "HIGH_51_75pt"
+    return "EXTREME_>75pt"
+
+
 def _find_broker_match(
     row: dict[str, str],
     actual_index: dict[tuple[str, str, str, str], list[dict[str, str]]],
@@ -301,6 +348,7 @@ def _broker_resolution(row: dict[str, str]) -> dict[str, str]:
     return {
         "resolution_status": status,
         "resolution_source": "broker_trade_join",
+        "evidence_tier": "BROKER",
         "matched_position_ticket": row.get("position_ticket", ""),
         "actual_state": state,
         "actual_profit_aed": row.get("profit_aed", ""),
@@ -395,6 +443,7 @@ def _replay_resolution_plan_v1(
             return {
                 "resolution_status": adverse_first_status,
                 "resolution_source": "m5_bar_replay_plan_v1_adverse_first",
+                "evidence_tier": "REPLAY",
                 "replay_bars_scanned": str(scanned),
                 "replay_exit_time": bar.get("bar_end_utc") or bar.get("timestamp_utc") or "",
                 "replay_exit_price": str(stop if adverse_first_status == "REPLAY_SL" else target),
@@ -406,6 +455,7 @@ def _replay_resolution_plan_v1(
     return {
         "resolution_status": "UNRESOLVED_REPLAY_NO_SL_TP_HIT",
         "resolution_source": "m5_bar_replay_plan_v1_adverse_first",
+        "evidence_tier": "",
         "replay_bars_scanned": str(scanned),
     }
 
@@ -492,6 +542,7 @@ def _replay_resolution_executor_v2(
             return {
                 "resolution_status": adverse_first_status,
                 "resolution_source": "m5_bar_replay_executor_v2_adverse_first",
+                "evidence_tier": "REPLAY",
                 "replay_model": "executor_v2",
                 "replay_entry_time": _format_time(entry_time),
                 "replay_entry_price": _fmt_float(synthetic_entry),
@@ -731,10 +782,53 @@ def _bar_quality_report(bars_dir: Path, signals: list[dict[str, str]]) -> list[d
 
 def _scoreboard_rows(rows: list[dict[str, str]], *, mode: str = "all_resolved") -> list[dict[str, str]]:
     if mode == "broker_joined_only":
-        rows = [row for row in rows if row.get("resolution_status", "").startswith("BROKER_")]
+        rows = [row for row in rows if row.get("evidence_tier") == "BROKER"]
     return _group_scoreboard_rows(rows, level="candidate") + _group_scoreboard_rows(
         _dedupe_family_rows(rows), level="family"
     )
+
+
+def _dimension_scoreboards(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
+    dimensions = {
+        "session": ("time_bucket",),
+        "cost": ("cost_bucket",),
+        "direction": ("normalized_direction",),
+        "regime": ("regime",),
+        "family": ("family",),
+        "lane": ("lane",),
+        "ea_symbol_session": ("candidate", "symbol", "time_bucket"),
+    }
+    return {name: _dimension_rows(rows, keys) for name, keys in dimensions.items()}
+
+
+def _dimension_rows(rows: list[dict[str, str]], keys: tuple[str, ...]) -> list[dict[str, str]]:
+    grouped: dict[tuple[str, ...], list[dict[str, str]]] = {}
+    for row in rows:
+        grouped.setdefault(tuple(row.get(key, "") or "UNKNOWN" for key in keys), []).append(row)
+    output: list[dict[str, str]] = []
+    for key, items in sorted(grouped.items()):
+        wins = sum(1 for item in items if _outcome_class(item) == "WIN")
+        losses = sum(1 for item in items if _outcome_class(item) == "LOSS")
+        open_rows = sum(1 for item in items if _outcome_class(item) == "OPEN")
+        flat = sum(1 for item in items if _outcome_class(item) == "FLAT")
+        closed = wins + losses + flat
+        pnl = sum(_float(item.get("actual_profit_aed")) or 0.0 for item in items)
+        replay_net = sum(_float(item.get("net_outcome_r")) or 0.0 for item in items)
+        output.append(
+            {
+                "group": " | ".join(key),
+                "rows": str(len(items)),
+                "closed": str(closed),
+                "wins": str(wins),
+                "losses": str(losses),
+                "open": str(open_rows),
+                "flat": str(flat),
+                "win_rate_pct": f"{(wins / (wins + losses) * 100.0):.2f}" if wins + losses else "n/a",
+                "broker_profit_aed": f"{pnl:.2f}",
+                "replay_net_r_sum": f"{replay_net:.4f}" if any(item.get("net_outcome_r") for item in items) else "",
+            }
+        )
+    return output
 
 
 def _group_scoreboard_rows(rows: list[dict[str, str]], *, level: str) -> list[dict[str, str]]:
@@ -909,6 +1003,21 @@ def _scoreboard_fields() -> list[str]:
     ]
 
 
+def _dimension_fields() -> list[str]:
+    return [
+        "group",
+        "rows",
+        "closed",
+        "wins",
+        "losses",
+        "open",
+        "flat",
+        "win_rate_pct",
+        "broker_profit_aed",
+        "replay_net_r_sum",
+    ]
+
+
 def _write_scoreboard(json_path: Path, rows: list[dict[str, str]], payload: dict[str, Any]) -> None:
     md_path = json_path.with_suffix(".md")
     csv_path = json_path.with_suffix(".csv")
@@ -1041,6 +1150,8 @@ def _resolved_fields() -> list[str]:
         "time_bucket",
         "candidate",
         "family",
+        "lane",
+        "regime",
         "symbol",
         "direction",
         "normalized_direction",
@@ -1057,6 +1168,8 @@ def _resolved_fields() -> list[str]:
         "take_profit",
         "stop_distance_points",
         "spread_points",
+        "cost_bucket",
+        "evidence_tier",
         "resolution_status",
         "resolution_source",
         "matched_position_ticket",
@@ -1124,9 +1237,53 @@ def _render_markdown(payload: dict[str, Any]) -> str:
             "",
             _table(payload["by_resolution_status"], ["resolution_status", "count"]),
             "",
+            "## By Evidence Tier",
+            "",
+            _table(payload["by_evidence_tier"], ["evidence_tier", "resolution_status", "count"]),
+            "",
             "## By Resolution Source",
             "",
             _table(payload["by_resolution_source"], ["resolution_source", "resolution_status", "count"]),
+            "",
+            "## Broker-Fill Scoreboards",
+            "",
+            "These tables use only `evidence_tier=BROKER` rows. They are the authoritative observer outcome view.",
+            "",
+            "### By Session",
+            "",
+            _table(payload["broker_fill_scoreboards"]["session"], _dimension_fields()),
+            "",
+            "### By Cost Bucket",
+            "",
+            _table(payload["broker_fill_scoreboards"]["cost"], _dimension_fields()),
+            "",
+            "### By Direction",
+            "",
+            _table(payload["broker_fill_scoreboards"]["direction"], _dimension_fields()),
+            "",
+            "### By Regime",
+            "",
+            _table(payload["broker_fill_scoreboards"]["regime"], _dimension_fields()),
+            "",
+            "### By Family",
+            "",
+            _table(payload["broker_fill_scoreboards"]["family"], _dimension_fields()),
+            "",
+            "### By Lane",
+            "",
+            _table(payload["broker_fill_scoreboards"]["lane"], _dimension_fields()),
+            "",
+            "### By EA / Symbol / Session",
+            "",
+            _table(payload["broker_fill_scoreboards"]["ea_symbol_session"], _dimension_fields()),
+            "",
+            "## Replay Reference Scoreboards",
+            "",
+            "These tables use only `evidence_tier=REPLAY` rows. Treat them as secondary reference evidence.",
+            "",
+            "### Replay By Session",
+            "",
+            _table(payload["replay_reference_scoreboards"]["session"], _dimension_fields()),
             "",
             "## By Proposed V2 Action",
             "",

@@ -1,0 +1,251 @@
+{
+  "status": "ROUND_FAMILY_QUARANTINE_APPLIED",
+  "created_at_utc": "2026-06-17T11:22:35.078853Z",
+  "boundary": "Demo-only controlled maintenance window. No live/real-capital authorization and no canonical Phase 2 approval.",
+  "owner": {
+    "name": "Muhammad Ali Khan",
+    "decision": "APPROVE_BOTH_ITEMS",
+    "approved_candidates": [
+      "round_number_retest_v0",
+      "symbol_normalized_round_retest_v0"
+    ],
+    "decision_doc": "xau-usd/xauusd-phase1/docs/XAUUSD_ROUND_FAMILY_QUARANTINE_OWNER_DECISION_2026_06_17.md",
+    "reviewer_signoff": "XAUUSD_REVIEWER_SIGNOFF_ROUND_QUARANTINE_2026_06_17.md"
+  },
+  "scope": {
+    "symbol": "XAUUSD",
+    "target_candidates": [
+      "round_number_retest_v0",
+      "symbol_normalized_round_retest_v0"
+    ],
+    "explicitly_out_of_scope": [
+      "broad afternoon ban",
+      "direction-only rule",
+      "cost-threshold runtime rule",
+      "breakout_retest changes",
+      "swing_breakout_retest_v0 changes",
+      "EURUSD/GBPUSD round-family changes",
+      "repair-v1 lane changes",
+      "live trading",
+      "real capital"
+    ]
+  },
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default",
+    "terminal_closed_before_edit": true,
+    "terminal_relaunched": true,
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_round_family_quarantine_20260617_112219"
+  },
+  "pre_close_target_charts": [
+    {
+      "chart": "chart09.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart09.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv"
+    },
+    {
+      "chart": "chart11.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart11.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "round_number_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_round_number_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv"
+    }
+  ],
+  "before_target_charts": [
+    {
+      "chart": "chart09.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart09.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv"
+    },
+    {
+      "chart": "chart11.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart11.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "round_number_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_round_number_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv"
+    }
+  ],
+  "after_target_charts": [
+    {
+      "chart": "chart09.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart09.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "true",
+      "broker_action_allowed": "false",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv"
+    },
+    {
+      "chart": "chart11.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart11.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "true",
+      "broker_action_allowed": "false",
+      "candidate": "round_number_retest_v0",
+      "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_round_number_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv"
+    }
+  ],
+  "before_protected_charts": [
+    {
+      "chart": "chart03.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "breakout_retest",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_breakout_retest_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_breakout_retest_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv"
+    },
+    {
+      "chart": "chart06.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "swing_breakout_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_xauusd.csv"
+    }
+  ],
+  "after_protected_charts": [
+    {
+      "chart": "chart03.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "breakout_retest",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_breakout_retest_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_breakout_retest_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv"
+    },
+    {
+      "chart": "chart06.chr",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
+      "symbol": "XAUUSD",
+      "expert": "Phase2ExperimentalDemoExecutor",
+      "dry_run": "false",
+      "broker_action_allowed": "true",
+      "candidate": "swing_breakout_retest_v0",
+      "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+      "target_symbol": "XAUUSD",
+      "qualified_symbols": "EURUSD,GBPUSD,XAUUSD",
+      "signal_log": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "startup_log": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_xauusd.csv",
+      "order_log": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_xauusd.csv"
+    }
+  ],
+  "changed_charts": [
+    "chart09.chr",
+    "chart11.chr"
+  ],
+  "order_log_counts_before": {
+    "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv": 518,
+    "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv": 518
+  },
+  "order_log_counts_after": {
+    "experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv": 518,
+    "experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv": 518
+  },
+  "startup_log_counts_after": {
+    "experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv": 36,
+    "experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv": 36
+  },
+  "verification": {
+    "status": "PASS",
+    "checks": [
+      {
+        "check": "round_number_retest_v0_quarantined",
+        "status": "PASS",
+        "detail": "{\"broker_action_allowed\": \"false\", \"candidate\": \"round_number_retest_v0\", \"candidate_status\": \"OWNER_APPROVED_ROUND_FAMILY_QUARANTINED\", \"chart\": \"chart11.chr\", \"dry_run\": \"true\", \"expert\": \"Phase2ExperimentalDemoExecutor\", \"order_log\": \"experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv\", \"path\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart11.chr\", \"qualified_symbols\": \"GBPUSD,XAUUSD\", \"signal_log\": \"experimental_demo_executor_signal_log_v02_round_number_retest_v0_xauusd.csv\", \"startup_log\": \"experimental_demo_executor_startup_v02_round_number_retest_v0_xauusd.csv\", \"symbol\": \"XAUUSD\", \"target_symbol\": \"XAUUSD\"}"
+      },
+      {
+        "check": "symbol_normalized_round_retest_v0_quarantined",
+        "status": "PASS",
+        "detail": "{\"broker_action_allowed\": \"false\", \"candidate\": \"symbol_normalized_round_retest_v0\", \"candidate_status\": \"OWNER_APPROVED_ROUND_FAMILY_QUARANTINED\", \"chart\": \"chart09.chr\", \"dry_run\": \"true\", \"expert\": \"Phase2ExperimentalDemoExecutor\", \"order_log\": \"experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv\", \"path\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart09.chr\", \"qualified_symbols\": \"EURUSD,GBPUSD,XAUUSD\", \"signal_log\": \"experimental_demo_executor_signal_log_v02_symbol_normalized_round_retest_v0_xauusd.csv\", \"startup_log\": \"experimental_demo_executor_startup_v02_symbol_normalized_round_retest_v0_xauusd.csv\", \"symbol\": \"XAUUSD\", \"target_symbol\": \"XAUUSD\"}"
+      },
+      {
+        "check": "protected_breakout_core_unchanged",
+        "status": "PASS",
+        "detail": "before=[{'chart': 'chart03.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'dry_run': 'false', 'broker_action_allowed': 'true', 'candidate': 'breakout_retest', 'candidate_status': 'EXPERIMENTAL_QUARANTINE_REVIEW_ONLY', 'target_symbol': 'XAUUSD', 'qualified_symbols': 'EURUSD,GBPUSD,XAUUSD'}, {'chart': 'chart06.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'dry_run': 'false', 'broker_action_allowed': 'true', 'candidate': 'swing_breakout_retest_v0', 'candidate_status': 'EXPERIMENTAL_QUARANTINE_REVIEW_ONLY', 'target_symbol': 'XAUUSD', 'qualified_symbols': 'EURUSD,GBPUSD,XAUUSD'}]; after=[{'chart': 'chart03.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'dry_run': 'false', 'broker_action_allowed': 'true', 'candidate': 'breakout_retest', 'candidate_status': 'EXPERIMENTAL_QUARANTINE_REVIEW_ONLY', 'target_symbol': 'XAUUSD', 'qualified_symbols': 'EURUSD,GBPUSD,XAUUSD'}, {'chart': 'chart06.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'dry_run': 'false', 'broker_action_allowed': 'true', 'candidate': 'swing_breakout_retest_v0', 'candidate_status': 'EXPERIMENTAL_QUARANTINE_REVIEW_ONLY', 'target_symbol': 'XAUUSD', 'qualified_symbols': 'EURUSD,GBPUSD,XAUUSD'}]"
+      },
+      {
+        "check": "only_target_charts_changed_by_script",
+        "status": "PASS",
+        "detail": "changed=['chart09.chr', 'chart11.chr'] expected=['chart09.chr', 'chart11.chr']"
+      },
+      {
+        "check": "target_order_logs_no_new_rows_during_window",
+        "status": "PASS",
+        "detail": "before={'experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv': 518, 'experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv': 518}; after={'experimental_demo_executor_order_log_v02_symbol_normalized_round_retest_v0_xauusd.csv': 518, 'experimental_demo_executor_order_log_v02_round_number_retest_v0_xauusd.csv': 518}"
+      }
+    ]
+  },
+  "rollback": {
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_round_family_quarantine_20260617_112219",
+    "instruction": "Close the standard MT5 terminal, replace the Default profile with this backup, then relaunch."
+  }
+}
