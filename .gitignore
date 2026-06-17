@@ -125,3 +125,7 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/TIER1_POSITION_PATH_OBSERVER_ATTACHMENT.md
 !xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.json
 !xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.md
+
+# Local scratch/temp files.
+.~lock.*#
+_tmp_*.py
