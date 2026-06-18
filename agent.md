@@ -58,6 +58,15 @@ Last updated: 2026-06-18
 
 ## Current State
 
+- 2026-06-18 final-review follow-up for commit `d5dd2de`:
+  - Reviewer file: `FINAL_REVIEW_D5DD2DE_A3_RUNTIME_AND_GOVERNANCE_2026_06_18.md`.
+  - Exact local pytest capture: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_PYTEST_D5DD2DE_2026_06_18.txt`; result remains `399 passed, 6 failed`.
+  - Test-failure triage is committed at `xau-usd\xauusd-phase1\outputs\reports\PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md`. Classifications: safety-audit scope update required for owner-authorized demo broker-action/SLTP files; acceptance/status-summary expectations need taxonomy reconciliation; EURUSD fixed-lot contract drift must be decided; preflight JSON is stale until safety taxonomy is updated.
+  - Fresh read-only A3 evidence is committed: `A3_DIRECT_HISTORY_1033669_2026_06_18.md/csv`, `A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md/csv`, `A3_DUPLICATE_FAMILY_EVENTS_2026_06_18.md/csv`, `A3_PROFIT_LOCK_MANAGER_STATUS_2026_06_18.md`, and `A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json`.
+  - A3 evidence window `2026-06-16T00:00:00Z` through generation time shows 23 closed XAUUSD trades: 1 win, 22 losses, net `-758.79` AED, 5 duplicate same-minute/same-direction events, and 0 profit-lock actions.
+  - Per-magic A3 state: `933200` plain is stopped (`dry_run_now=true`, `broker_action_allowed_now=false`, 14 losses / `-510.44` AED); `933300` improved remains active but conditional (8 closed, 1 tiny win, 7 losses / `-156.04` AED); `933400` Tier1 compat remains active but conditional (1 loss / `-92.31` AED). No open A3 XAUUSD positions/orders at generation time.
+  - Profit-lock manager remains attached and armed for `933200,933400`, excludes `933300`, and has not moved any SL yet. This is expected because no managed trade logged a `+1.25R` trigger/action after attachment.
+  - Compact status artifacts were regenerated from local `main`: `status_summary.json`, `status_summary.md`, and `status.html`. Phase 2 remains `FAIL`; no live/real-capital authorization exists.
 - 2026-06-18 A1 BTCUSD breakout experiment:
   - Owner requested BTCUSD be added to A1 with the breakout EA for demo observation/execution. This is an owner-requested experimental demo lane only: BTC still has no approved Phase 0 edge, this is not canonical Phase 2 approval, not live trading, and not real capital.
   - Standard Capital.com demo MT5 account `1025742 / Capital.ComMena-Demo` was updated append-only: existing charts were preserved, the Default profile was backed up, and one BTCUSD M5 `Phase2ExperimentalDemoExecutor` chart was appended.

@@ -1,0 +1,1 @@
+timestamp,run_id,account_server,account_login,symbol,ticket,magic,position_type,volume,open_price,initial_sl,current_sl,desired_sl,tp,unrealized_r,trigger_r,lock_r,rung_name,dry_run,manage_action_allowed,action,retcode,reason

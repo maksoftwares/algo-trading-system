@@ -26,9 +26,11 @@ def generate_project_status_summary(
     phase1_reports = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     quarantine_report = phase1_reports / "XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json"
     a3_attachment_report = phase1_reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
+    a3_review_followup_report = phase1_reports / "A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json"
 
     quarantine = _read_json(quarantine_report)
     a3_attachment = _read_json(a3_attachment_report)
+    a3_review_followup = _read_json(a3_review_followup_report)
     repo = _repo_state(repo_root)
     profile_backup = quarantine.get("terminal", {}).get("profile_backup_dir", "")
 
@@ -60,6 +62,9 @@ def generate_project_status_summary(
             "round_quarantine_applied": _rel(repo_root, quarantine_report),
             "a3_tier1_attachment": _rel(repo_root, a3_attachment_report),
             "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
+            "a3_review_followup": _rel(repo_root, a3_review_followup_report),
+            "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
+            "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
         },
         "accounts": {
             "A1": {
@@ -86,6 +91,9 @@ def generate_project_status_summary(
                 "touched_by_round_quarantine": False,
                 "tier1_compat_demo_broker_action": _a3_broker_action_status(a3_attachment),
                 "tier1_compat_attachment_status": a3_attachment.get("status", "MISSING"),
+                "review_followup_status": a3_review_followup.get("status", "MISSING"),
+                "review_followup_summary": a3_review_followup.get("summary", {}),
+                "plain_933200_stopped": _a3_plain_stopped(a3_review_followup),
             },
         },
         "quarantine": {
@@ -105,6 +113,7 @@ def generate_project_status_summary(
             "owner_authorized_demo_broker_action": _a3_broker_action_status(a3_attachment) == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
             "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
             "lane": a3_attachment.get("lane", {}),
+            "review_followup_summary": a3_review_followup.get("summary", {}),
         },
         "authorization": {
             "canonical_phase2_pass": False,
@@ -120,6 +129,8 @@ def generate_project_status_summary(
             "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
             "XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md",
             "A1/A2/A3 direct-history reconciliation after the forward week",
+            "PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup",
+            "A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up",
             "A3 Tier-1 compat order delta, PnL, and shadow trend-guard report",
         ],
     }
@@ -186,6 +197,13 @@ def _a3_broker_action_status(report: dict[str, Any]) -> str:
     return "PENDING_OR_NOT_VISIBLE"
 
 
+def _a3_plain_stopped(report: dict[str, Any]) -> bool:
+    for row in report.get("per_magic", []):
+        if str(row.get("magic", "")) == "933200":
+            return str(row.get("dry_run_now", "")).lower() == "true" and str(row.get("broker_action_allowed_now", "")).lower() == "false"
+    return False
+
+
 def _rel(repo_root: Path, path: Path) -> str:
     try:
         return path.resolve().relative_to(repo_root.resolve()).as_posix()
@@ -250,6 +268,26 @@ def _render_markdown(summary: dict[str, Any]) -> str:
             f"| `{chart['chart']}` | `{chart['candidate']}` | `{chart['dry_run']}` | "
             f"`{chart['broker_action_allowed']}` | `{chart['candidate_status']}` |"
         )
+    a3 = accounts["A3"]
+    a3_summary = a3.get("review_followup_summary", {})
+    lines.extend(
+        [
+            "",
+            "## A3 Review Follow-Up",
+            "",
+            f"Status: `{a3.get('review_followup_status', 'MISSING')}`",
+            f"Plain `933200` stopped: `{str(a3.get('plain_933200_stopped', False)).lower()}`",
+            "",
+            "| Metric | Value |",
+            "| --- | ---: |",
+            f"| Closed trades | `{a3_summary.get('closed_trades', 'n/a')}` |",
+            f"| Wins | `{a3_summary.get('wins', 'n/a')}` |",
+            f"| Losses | `{a3_summary.get('losses', 'n/a')}` |",
+            f"| Net PnL AED | `{a3_summary.get('net_pnl_aed', 'n/a')}` |",
+            f"| Duplicate events | `{a3_summary.get('duplicate_event_count', 'n/a')}` |",
+            f"| Profit-lock actions | `{a3_summary.get('profit_lock_actions', 'n/a')}` |",
+        ]
+    )
     lines.extend(
         [
             "",

@@ -1,8 +1,8 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T04:03:12.171209Z`
-Commit: `bf6fbff3c8eaddb7bb33509b1c606ab37d8542ee`
-Branch: `codex/a3-repair-lane-2026-06-13`
+Generated UTC: `2026-06-18T07:07:04.043662Z`
+Commit: `d5dd2de6508a812424b12eb248b6409fcf689968`
+Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
 
@@ -33,6 +33,20 @@ Rollback required now: `false`
 | `chart03.chr` | `breakout_retest` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
 | `chart06.chr` | `swing_breakout_retest_v0` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
 
+## A3 Review Follow-Up
+
+Status: `PASS`
+Plain `933200` stopped: `true`
+
+| Metric | Value |
+| --- | ---: |
+| Closed trades | `23` |
+| Wins | `1` |
+| Losses | `22` |
+| Net PnL AED | `-758.79` |
+| Duplicate events | `5` |
+| Profit-lock actions | `0` |
+
 ## Authorization Boundary
 
 | Item | Value |
@@ -48,4 +62,6 @@ Rollback required now: `false`
 - XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md
 - XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md
 - A1/A2/A3 direct-history reconciliation after the forward week
+- PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup
+- A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up
 - A3 Tier-1 compat order delta, PnL, and shadow trend-guard report
