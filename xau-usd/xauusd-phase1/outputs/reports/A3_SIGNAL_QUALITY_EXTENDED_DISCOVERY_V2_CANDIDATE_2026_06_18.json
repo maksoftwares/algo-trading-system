@@ -5,6 +5,7 @@
   "candidate_metrics": [
     {
       "accepted_signals": 1453,
+      "avg_cost_r": 0.0,
       "bad_signal_loss_share_improvement_pct": 0.0,
       "bad_signal_loss_share_pct": 50.1,
       "best_day_contribution_pct": 2.74,
@@ -15,6 +16,7 @@
       "candidate_id": "B0_RAW_ALL_SESSION",
       "candidate_role": "BASELINE",
       "closed_trades": 885,
+      "cost_model": "net_r = gross_final_r - cost_r",
       "data_limitation": "Historical phase0 Dukascopy M5-bar replay only; requires fresh validation.",
       "direction_counts": {
         "LONG": 499,
@@ -23,6 +25,9 @@
       "expectancy_delta_vs_b0": 0.0,
       "expectancy_r": 0.1356,
       "giveback_loss_share_pct": 33.33,
+      "gross_expectancy_r": 0.1356,
+      "gross_net_r": 120.0,
+      "gross_profit_factor": 1.2484,
       "kept_bucket_expectancy_r": 0.1356,
       "largest_trade_contribution_pct": 1.25,
       "losses": 483,
@@ -174,6 +179,7 @@
     },
     {
       "accepted_signals": 586,
+      "avg_cost_r": 0.0,
       "bad_signal_loss_share_improvement_pct": 28.52,
       "bad_signal_loss_share_pct": 35.81,
       "best_day_contribution_pct": 2.55,
@@ -184,6 +190,7 @@
       "candidate_id": "A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2",
       "candidate_role": "SELECTED_V2_DISCOVERY_CANDIDATE",
       "closed_trades": 490,
+      "cost_model": "net_r = gross_final_r - cost_r",
       "data_limitation": "Historical phase0 Dukascopy M5-bar replay only; requires fresh validation.",
       "direction_counts": {
         "LONG": 281,
@@ -192,6 +199,9 @@
       "expectancy_delta_vs_b0": 0.2675,
       "expectancy_r": 0.4031,
       "giveback_loss_share_pct": 46.05,
+      "gross_expectancy_r": 0.4031,
+      "gross_net_r": 197.5,
+      "gross_profit_factor": 1.9186,
       "kept_bucket_expectancy_r": 0.4031,
       "largest_trade_contribution_pct": 0.76,
       "losses": 215,
@@ -350,10 +360,11 @@
     "exit_model": "fixed 1.50R, unchanged",
     "family": "breakout_retest",
     "position_model": "one virtual position per candidate",
+    "retest_atr_window": "14 completed M5 bars from the retest bar back through 13 older bars; this includes the completed retest bar.",
     "retest_close_margin": "LONG retest close >= level + 0.05 ATR; SHORT retest close <= level - 0.05 ATR"
   },
   "data_manifest": {
-    "created_at_utc": "2026-06-18T13:16:44.988612Z",
+    "created_at_utc": "2026-06-18T13:58:36.875455Z",
     "extra": {
       "candidate_id": "A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2",
       "discovery_end_utc": "2025-07-01 00:00:00",

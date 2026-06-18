@@ -16,8 +16,11 @@ Candidate: `A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2`
 | Opened virtual trades | 885 | 490 |
 | Trade retention vs B0 | 100.0% | 55.37% |
 | Median weekly trade retention | 100.0% | 59.38% |
-| Profit factor | 1.2484 | 1.9186 |
-| Expectancy R | 0.1356 | 0.4031 |
+| Net profit factor | 1.2484 | 1.9186 |
+| Gross profit factor | 1.2484 | 1.9186 |
+| Net expectancy R | 0.1356 | 0.4031 |
+| Gross expectancy R | 0.1356 | 0.4031 |
+| P95 cost R | 0.0 | 0.0 |
 | Win rate | 45.42% | 56.12% |
 | Bad-signal loss share | 50.1% | 35.81% |
 | Bad-signal improvement | 0.0% | 28.52% |
@@ -29,6 +32,7 @@ Candidate: `A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2`
 - `candidate_id`: A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2
 - `family`: breakout_retest
 - `bars_after_break`: 1..15 completed M5 bars
+- `retest_atr_window`: 14 completed M5 bars from the retest bar back through 13 older bars; this includes the completed retest bar.
 - `retest_close_margin`: LONG retest close >= level + 0.05 ATR; SHORT retest close <= level - 0.05 ATR
 - `confirmation_body_to_range`: >= 0.45
 - `confirmation_directional_close_location`: LONG close location >= 0.60; SHORT close location <= 0.40
@@ -39,6 +43,7 @@ Candidate: `A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2`
 
 - This selects a V2 hypothesis candidate for a fresh validation window.
 - This is not promotion evidence and does not authorize A3 reactivation.
+- PF, expectancy, net R, drawdown, and eligibility are computed on net R after subtracting `cost_r`; if a source has zero/unavailable spread, that source is not cost-validating.
 - The June 2026 SQ-03 window remains too small for the 100-trade gate; its maximum one-position schedule is below 100.
 
 ## Outputs

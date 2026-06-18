@@ -30,6 +30,7 @@ from run_a3_signal_quality_offline_discovery import (
     render_markdown,
     sha256,
     simulate_trade,
+    trade_net_r,
     with_indicators,
     write_csv,
     write_json,
@@ -149,6 +150,7 @@ def candidate_rule() -> dict[str, Any]:
         "candidate_id": CANDIDATE_ID,
         "family": "breakout_retest",
         "bars_after_break": "1..15 completed M5 bars",
+        "retest_atr_window": "14 completed M5 bars from the retest bar back through 13 older bars; this includes the completed retest bar.",
         "retest_close_margin": "LONG retest close >= level + 0.05 ATR; SHORT retest close <= level - 0.05 ATR",
         "confirmation_body_to_range": ">= 0.45",
         "confirmation_directional_close_location": "LONG close location >= 0.60; SHORT close location <= 0.40",
@@ -182,7 +184,7 @@ def evaluate_candidate_predicates(
                     all_trades.append(clone)
                     available_at_index = exit_index_for_trade(raw_trade, m5)
             elif raw_trade is not None:
-                blocked_raw_final_rs.append(raw_trade.final_r)
+                blocked_raw_final_rs.append(trade_net_r(raw_trade))
         metrics = candidate_metrics(
             candidate_id,
             raw_signals,
@@ -266,8 +268,11 @@ def render_extended_markdown(payload: dict[str, Any]) -> str:
         f"| Opened virtual trades | {b0['opened_virtual_trades']} | {selected['opened_virtual_trades']} |",
         f"| Trade retention vs B0 | {b0['virtual_trade_retention_pct']}% | {selected['virtual_trade_retention_pct']}% |",
         f"| Median weekly trade retention | {b0['median_weekly_trade_retention_pct']}% | {selected['median_weekly_trade_retention_pct']}% |",
-        f"| Profit factor | {b0['profit_factor']} | {selected['profit_factor']} |",
-        f"| Expectancy R | {b0['expectancy_r']} | {selected['expectancy_r']} |",
+        f"| Net profit factor | {b0['profit_factor']} | {selected['profit_factor']} |",
+        f"| Gross profit factor | {b0['gross_profit_factor']} | {selected['gross_profit_factor']} |",
+        f"| Net expectancy R | {b0['expectancy_r']} | {selected['expectancy_r']} |",
+        f"| Gross expectancy R | {b0['gross_expectancy_r']} | {selected['gross_expectancy_r']} |",
+        f"| P95 cost R | {b0['p95_cost_r']} | {selected['p95_cost_r']} |",
         f"| Win rate | {b0['win_rate_pct']}% | {selected['win_rate_pct']}% |",
         f"| Bad-signal loss share | {b0['bad_signal_loss_share_pct']}% | {selected['bad_signal_loss_share_pct']}% |",
         f"| Bad-signal improvement | {b0['bad_signal_loss_share_improvement_pct']}% | {selected['bad_signal_loss_share_improvement_pct']}% |",
@@ -286,6 +291,7 @@ def render_extended_markdown(payload: dict[str, Any]) -> str:
             "",
             "- This selects a V2 hypothesis candidate for a fresh validation window.",
             "- This is not promotion evidence and does not authorize A3 reactivation.",
+            "- PF, expectancy, net R, drawdown, and eligibility are computed on net R after subtracting `cost_r`; if a source has zero/unavailable spread, that source is not cost-validating.",
             "- The June 2026 SQ-03 window remains too small for the 100-trade gate; its maximum one-position schedule is below 100.",
             "",
             "## Outputs",

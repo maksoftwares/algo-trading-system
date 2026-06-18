@@ -57,14 +57,38 @@ def test_soft_retest_v2_blocks_retest_close_without_margin() -> None:
     assert not module.soft_retest_v2(_signal(module), bars)
 
 
+def test_soft_retest_v2_atr_window_includes_completed_retest_bar() -> None:
+    module = load_script("run_a3_signal_quality_extended_discovery")
+    bars = _bars(module)
+    bars[19] = module.Bar(bars[19].start, bars[19].end, 99.90, 110.00, 90.00, 100.10, 0.0)
+
+    assert not module.soft_retest_v2(_signal(module), bars)
+
+
 def test_soft_retest_v2_manifest_hash_matches_locked_doc() -> None:
-    doc = ROOT / "docs" / "A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md"
     manifest = ROOT / "outputs" / "manifests" / "A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05.sha256.json"
     payload = json.loads(manifest.read_text(encoding="utf-8"))
+    files = {row["file"]: row["sha256"] for row in payload["files"]}
 
     assert payload["status"] == "LOCKED"
-    assert payload["files"][0]["file"] == "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md"
-    assert payload["files"][0]["sha256"] == hashlib.sha256(doc.read_bytes()).hexdigest()
+    expected_files = [
+        "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md",
+        "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_THRESHOLD_PROVENANCE_2026_06_18.md",
+    ]
+    assert sorted(files) == sorted(expected_files)
+    for file_name in expected_files:
+        assert files[file_name] == hashlib.sha256((ROOT / file_name).read_bytes()).hexdigest()
+
+
+def test_soft_retest_v2_docs_disclose_cost_and_threshold_provenance() -> None:
+    doc = (ROOT / "docs" / "A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md").read_text(encoding="utf-8")
+    provenance = (ROOT / "docs" / "A3_SIGNAL_QUALITY_V2_SOFT_RETEST_THRESHOLD_PROVENANCE_2026_06_18.md").read_text(encoding="utf-8")
+
+    assert "after subtracting `cost_r`" in doc
+    assert "zero promotion evidence" in doc
+    assert "ATR window includes the completed retest bar" in doc
+    assert "18,000 possible combinations" in provenance
+    assert "14,112 possible combinations" in provenance
 
 
 def _bars(module):

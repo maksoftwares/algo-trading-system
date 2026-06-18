@@ -51,6 +51,23 @@ def test_loss_class_separates_bad_signal_from_giveback() -> None:
     assert module.loss_class(-1.0, mfe_r=1.30, mae_r=1.00) == "NEAR_TP_GIVEBACK"
 
 
+def test_candidate_metrics_use_net_r_after_cost() -> None:
+    module = load_script("run_a3_signal_quality_offline_discovery")
+    trades = [
+        module.VirtualTrade("s1", "CANDIDATE", "LONG", "2026-06-01 00:00:00", "2026-06-01 00:05:00", 1, 0, 2, 1.5, "WIN", 1.5, 0, 0.5, "WIN", "Night 20:00-05:59", "RISING"),
+        module.VirtualTrade("s2", "CANDIDATE", "LONG", "2026-06-01 00:10:00", "2026-06-01 00:15:00", 1, 0, 2, -1.0, "LOSS", 0, 1, 0.25, "BAD_SIGNAL", "Night 20:00-05:59", "FALLING"),
+    ]
+
+    metrics = module.candidate_metrics("CANDIDATE", [object(), object()], 2, trades, [], None, None, None)
+
+    assert metrics["cost_model"] == "net_r = gross_final_r - cost_r"
+    assert metrics["gross_profit_factor"] == 1.5
+    assert metrics["profit_factor"] == 0.8
+    assert metrics["gross_expectancy_r"] == 0.25
+    assert metrics["expectancy_r"] == -0.125
+    assert metrics["net_r"] == -0.25
+
+
 def test_v2_registration_keeps_frequency_floor_and_quality_gate() -> None:
     module = load_script("run_a3_signal_quality_offline_discovery")
     eligible = {

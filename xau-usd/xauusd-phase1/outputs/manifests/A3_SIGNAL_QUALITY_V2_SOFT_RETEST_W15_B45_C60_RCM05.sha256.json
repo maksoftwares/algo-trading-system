@@ -4,7 +4,11 @@
   "files": [
     {
       "file": "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md",
-      "sha256": "c0acedb1bf12edd2936507d20ffd7a999b6caad13256df026137fe67d6d845ed"
+      "sha256": "a60809c521e8af13b76927d1aa299f4a99f56550421ce799239a878a7f093946"
+    },
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_THRESHOLD_PROVENANCE_2026_06_18.md",
+      "sha256": "c11a7687912cee8331f414b7e5a4494dfb0e6c27d374f9b81047f83cbeecc251"
     }
   ]
 }

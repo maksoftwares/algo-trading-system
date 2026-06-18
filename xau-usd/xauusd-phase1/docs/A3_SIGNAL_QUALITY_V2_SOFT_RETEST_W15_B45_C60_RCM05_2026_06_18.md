@@ -1,6 +1,6 @@
 # A3 Signal Quality V2 Soft Retest W15 B45 C60 RCM05
 
-Status: `LOCKED_FOR_FRESH_VALIDATION`
+Status: `LOCKED_FOR_COST_APPLIED_FRESH_VALIDATION_ONLY`
 
 Date locked: `2026-06-18`
 
@@ -30,7 +30,7 @@ At the completed confirmation bar, keep the raw `breakout_retest` signal only wh
 bars_after_break = retest_index - break_index
 1 <= bars_after_break <= 15
 
-retest_atr = average M5 high-low range over the 14 completed bars ending before the retest bar
+retest_atr = average M5 high-low range over the 14 completed bars from the retest bar back through 13 older bars
 
 LONG:
   retest.close >= level_price + 0.05 * retest_atr
@@ -45,7 +45,7 @@ SHORT:
 confirmation body / confirmation range >= 0.45
 ```
 
-Close location is `(close - low) / (high - low)` for long signals and `(high - close) / (high - low)` for short signals. If the confirmation range or ATR is unavailable or non-positive, the signal is blocked.
+Close location is `(close - low) / (high - low)` for long signals and `(high - close) / (high - low)` for short signals. The ATR window includes the completed retest bar. If the confirmation range or ATR is unavailable or non-positive, the signal is blocked.
 
 ## What This Fix Targets
 
@@ -59,9 +59,15 @@ The previous evidence showed many A3 losses were not just exit-management proble
 
 Report: `outputs/reports/A3_SIGNAL_QUALITY_EXTENDED_DISCOVERY_V2_CANDIDATE_2026_06_18.md`
 
+Threshold provenance: `docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_THRESHOLD_PROVENANCE_2026_06_18.md`
+
 Data source: phase0 offline Dukascopy XAUUSD bars, `2025-01-02` through `2025-07-01`.
 
 This is discovery evidence only. It must not be reused as promotion evidence.
+
+PF, expectancy, net R, drawdown, and eligibility are computed on net R after subtracting `cost_r`. This historical Dukascopy source has zero/unavailable spread fields, so the discovery table is not cost-validating edge evidence; it only justifies carrying the candidate into a fresh measured-cost validation window.
+
+The thresholds were selected through a targeted discovery search. Because the selected values were not pre-registered before that search, all discovery and June replay figures are treated as zero promotion evidence.
 
 | Metric | B0 raw one-position baseline | V2 candidate |
 | --- | ---: | ---: |
@@ -70,8 +76,9 @@ This is discovery evidence only. It must not be reused as promotion evidence.
 | Opened virtual trades | 885 | 490 |
 | Trade retention vs B0 | 100.00% | 55.37% |
 | Median weekly trade retention | 100.00% | 59.38% |
-| Profit factor | 1.2484 | 1.9186 |
-| Expectancy | +0.1356R | +0.4031R |
+| Net profit factor | 1.2484 | 1.9186 |
+| Net expectancy | +0.1356R | +0.4031R |
+| P95 cost_R in source | 0.0000 | 0.0000 |
 | Win rate | 45.42% | 56.12% |
 | Bad-signal loss share | 50.10% | 35.81% |
 | Bad-signal loss share improvement | 0.00% | 28.52% |

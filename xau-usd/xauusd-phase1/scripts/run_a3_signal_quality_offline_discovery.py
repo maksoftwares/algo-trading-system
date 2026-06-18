@@ -297,7 +297,7 @@ def evaluate_candidates(
         for signal in raw_signals:
             keep, reason = candidate_decision(candidate_id, signal, m5, h1, m15, d1)
             raw_trade = raw_outcomes.get(signal.signal_id)
-            raw_final_r = raw_trade.final_r if raw_trade else None
+            raw_final_r = trade_net_r(raw_trade) if raw_trade else None
             opened = False
             if keep:
                 accepted += 1
@@ -390,7 +390,8 @@ def candidate_metrics(
     b0_expectancy: float | None,
     b0_bad_share: float | None,
 ) -> dict[str, Any]:
-    final_rs = [trade.final_r for trade in opened_trades]
+    gross_final_rs = [trade.final_r for trade in opened_trades]
+    final_rs = [trade_net_r(trade) for trade in opened_trades]
     closed = len(final_rs)
     wins = sum(1 for value in final_rs if value > 0)
     losses = sum(1 for value in final_rs if value < 0)
@@ -405,10 +406,11 @@ def candidate_metrics(
     for trade in opened_trades:
         dt = parse_time(trade.entry_time)
         week = f"{dt.isocalendar().year}-W{dt.isocalendar().week:02d}" if dt else "UNKNOWN"
-        by_week.setdefault(week, []).append(trade.final_r)
+        by_week.setdefault(week, []).append(trade_net_r(trade))
         day = trade.entry_time[:10]
-        if trade.final_r > 0:
-            by_day_positive[day] = by_day_positive.get(day, 0.0) + trade.final_r
+        trade_value = trade_net_r(trade)
+        if trade_value > 0:
+            by_day_positive[day] = by_day_positive.get(day, 0.0) + trade_value
     positive = [value for value in final_rs if value > 0]
     largest = max(positive, default=0.0)
     top5 = sum(sorted(positive, reverse=True)[:5])
@@ -426,6 +428,10 @@ def candidate_metrics(
         "wins": wins,
         "losses": losses,
         "win_rate_pct": pct(wins, closed) if closed else None,
+        "cost_model": "net_r = gross_final_r - cost_r",
+        "gross_profit_factor": round(profit_factor(gross_final_rs), 4) if gross_final_rs else None,
+        "gross_expectancy_r": round(avg(gross_final_rs), 4) if gross_final_rs else None,
+        "gross_net_r": round(sum(gross_final_rs), 4),
         "profit_factor": round(pf, 4) if pf is not None else None,
         "profit_factor_delta_vs_b0": round(pf - b0_pf, 4) if pf is not None and b0_pf is not None else None,
         "expectancy_r": round(expectancy, 4) if expectancy is not None else None,
@@ -435,6 +441,7 @@ def candidate_metrics(
         "max_consecutive_losses": max_consecutive_losses(final_rs),
         "p50_cost_r": percentile([trade.cost_r for trade in opened_trades], 50),
         "p95_cost_r": percentile([trade.cost_r for trade in opened_trades], 95),
+        "avg_cost_r": round(avg([trade.cost_r for trade in opened_trades]) or 0.0, 4) if opened_trades else None,
         "largest_trade_contribution_pct": pct(largest, net) if net > 0 else None,
         "top_five_contribution_pct": pct(top5, net) if net > 0 else None,
         "best_day_contribution_pct": pct(best_day, positive_sum) if positive_sum > 0 else None,
@@ -659,6 +666,11 @@ def loss_class(final_r: float, mfe_r: float, mae_r: float) -> str:
     if mfe_r >= 1.25:
         return "NEAR_TP_GIVEBACK"
     return "BAD_EXIT_GIVEBACK"
+
+
+def trade_net_r(trade: VirtualTrade) -> float:
+    cost = trade.cost_r if math.isfinite(trade.cost_r) else 0.0
+    return trade.final_r - max(0.0, cost)
 
 
 def v2_registration_eligible(metrics: dict[str, Any]) -> bool:
@@ -1116,14 +1128,14 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         "## Candidate Metrics",
         "",
-        "| Candidate | Role | Signals | Signal Ret. | Trades | Trade Ret. | Closed | WR | PF | Exp R | Net R | Bad Signal | Giveback | Eligible |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+        "| Candidate | Role | Signals | Signal Ret. | Trades | Trade Ret. | Closed | WR | Net PF | Net Exp R | Net R | P95 Cost R | Bad Signal | Giveback | Eligible |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
     ]
     for row in payload["candidate_metrics"]:
         lines.append(
             "| {candidate_id} | {candidate_role} | {accepted_signals} | {signal_retention_pct} | "
             "{opened_virtual_trades} | {virtual_trade_retention_pct} | {closed_trades} | {win_rate_pct} | "
-            "{profit_factor} | {expectancy_r} | {net_r} | {bad_signal_loss_share_pct} | "
+            "{profit_factor} | {expectancy_r} | {net_r} | {p95_cost_r} | {bad_signal_loss_share_pct} | "
             "{giveback_loss_share_pct} | {v2_registration_eligible} |".format(**row)
         )
     lines.extend(
@@ -1132,6 +1144,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "## Interpretation",
             "",
             "- This is a cheap offline discovery screen, not promotion evidence.",
+            "- PF, expectancy, net R, drawdown, and eligibility are computed on net R after subtracting `cost_r`.",
             "- M5 bar replay is conservative/coarse and does not replace forward tick-level validation.",
             "- Any selected diagnostic would need a new locked V2 and a fresh validation window.",
             "- If the decision is `STOP_NO_CANDIDATE`, A3 remains paused and the MQL5 forward apparatus should not be built from this discovery window.",
