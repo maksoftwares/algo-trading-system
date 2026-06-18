@@ -17,7 +17,7 @@ input string InpCandidate = "breakout_retest";
 input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
 input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
 input string InpTargetSymbol = "XAUUSD";
-input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";
+input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD,BTCUSD";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "";
 input string InpExperimentalAuthorizationToken = "";
@@ -868,6 +868,8 @@ int SymbolMagicOffset(const string symbol_name)
       return 3;
    if(symbol_name == "GBPUSD")
       return 4;
+   if(symbol_name == "BTCUSD")
+      return 5;
    return 9;
 }
 
@@ -1541,7 +1543,7 @@ int OnInit()
    }
    WriteStartupRow(gv_mutex_self_test_status);
 
-   g_breakout_observer.Configure(CandidateUsesSwingObserver(InpCandidate));
+   g_breakout_observer.ConfigureForSymbol(_Symbol, CandidateUsesSwingObserver(InpCandidate));
    ResetDailyOrderCounterIfNeeded();
    WriteStartupRow("ATTACHED_DEMO_EXECUTOR_ENABLED");
    EventSetTimer(1);

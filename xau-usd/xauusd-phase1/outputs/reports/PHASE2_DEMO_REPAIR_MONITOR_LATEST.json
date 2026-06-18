@@ -1,14 +1,1043 @@
 {
   "status": "SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED",
-  "generated_at_utc": "2026-06-17T04:03:47.811135Z",
+  "generated_at_utc": "2026-06-18T04:03:11.921119Z",
   "since": "2026-06-09 00:00:00",
   "policy_id": "phase2_demo_repair_policy_2026_06_12_v2",
   "policy_enforced": false,
   "policy_effective_at_dubai": null,
   "trade_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
   "boundary": "Monitor/report only. No MT5 runtime is modified.",
-  "rows_checked": 1307,
+  "rows_checked": 1553,
   "findings": [
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136689"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136602"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136513"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136496"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136443"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136422"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4136211"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4132278"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4132284"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4132028"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4131314"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4131312"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4130323"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4129816"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4129815"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4129180"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4128333"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4125817"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4125176"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4125122"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4124281"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4124110"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4123617"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4123495"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4123427"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4123428"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4122934"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4122820"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4122760"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4122714"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4120263"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4120190"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4119805"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4119768"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4119718"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4119131"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4119033"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4119012"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4118818"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4118749"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4118362"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4118293"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4118210"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4117919"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4117793"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4117461"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4117460"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4117193"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4116754"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4116619"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115819"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115646"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115546"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115528"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115382"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115280"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115229"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115113"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4115000"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114707"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114619"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114546"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114261"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114166"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114120"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4114017"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4113999"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4113926"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4113821"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4113053"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4113050"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4113038"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112684"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112573"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4112194"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4112181"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112165"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112166"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112128"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4112001"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4111928"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4111902"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4111807"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4111786"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4111726"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4111040"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4110214"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4110192"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4110141"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4109343"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4109275"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4109130"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4108827"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4108829"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4108730"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4108306"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4107277"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4106886"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4106434"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4106229"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4105888"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4105621"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4105622"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4105493"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4105277"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4105136"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4104845"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4104670"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4104178"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4103890"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4103674"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4103556"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4103396"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4103113"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4103112"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102916"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102730"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102488"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4102479"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102076"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102023"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4102005"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4102003"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4101902"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4101856"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4101660"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4101401"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4101029"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4101001"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4100780"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4100301"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4100281"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4100282"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4100261"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4099951"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4099496"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4099497"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4099413"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4099402"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4099368"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4099363"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4099009"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4099007"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4098739"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "round_number_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4097925"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4097737"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4097577"
+    },
     {
       "severity": "SHADOW",
       "type": "SUSPENDED_CANDIDATE_ORDER",
@@ -6241,15 +7270,15 @@
     }
   ],
   "summary": {
-    "weak_variant_order_attempts": 884,
-    "blocked_by_repair_policy": 890,
+    "weak_variant_order_attempts": 1031,
+    "blocked_by_repair_policy": 1037,
     "orders_after_quarantine_by_candidate": {
-      "symbol_normalized_round_retest_v0": 458,
-      "round_number_retest_v0": 333,
-      "session_extreme_retest_v0": 93
+      "symbol_normalized_round_retest_v0": 552,
+      "session_extreme_retest_v0": 128,
+      "round_number_retest_v0": 351
     },
-    "symbol_normalized_new_orders_after_suspend": 458,
-    "session_extreme_new_orders_after_suspend": 93,
+    "symbol_normalized_new_orders_after_suspend": 552,
+    "session_extreme_new_orders_after_suspend": 128,
     "usdjpy_new_orders_after_disable": 0
   }
 }

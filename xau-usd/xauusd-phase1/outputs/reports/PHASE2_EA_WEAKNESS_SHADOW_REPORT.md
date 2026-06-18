@@ -4,8 +4,8 @@ Status: SHADOW_ONLY_NOT_ENFORCED
 
 Measurement only. Does not change MT5 charts, EA inputs, orders, positions, presets, or runtime behavior.
 
-Generated at UTC: `2026-06-16T06:40:05.729423Z`
-History window: `2026-06-01 00:00:00` to `2026-06-16 10:40:05`
+Generated at UTC: `2026-06-17T22:23:02.808810Z`
+History window: `2026-06-01 00:00:00` to `2026-06-18 02:23:02`
 Account: `1025742` / `Capital.ComMena-Demo` / `AED`
 
 ## Policy Under Measurement
@@ -22,78 +22,78 @@ Account: `1025742` / `Capital.ComMena-Demo` / `AED`
 
 | View | Trades | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | Floating AED | Total AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Raw broker trades | 1696 | 1692 | 4 | 599 | 1044 | 35.40% | -2207.89 | -72.34 | -2280.23 | 0.92 | 42.23 | -26.34 |
-| Duplicate-hidden decision view | 970 | 966 | 4 | 325 | 609 | 33.64% | -2497.85 | -72.34 | -2570.19 | 0.83 | 37.72 | -24.23 |
-| Combined shadow would keep | 290 | 288 | 2 | 101 | 174 | 35.07% | -94.01 | -24.98 | -118.99 | 0.97 | 31.25 | -18.68 |
-| Combined shadow would block | 680 | 678 | 2 | 224 | 435 | 33.04% | -2403.84 | -47.36 | -2451.20 | 0.79 | 40.64 | -26.45 |
+| Raw broker trades | 1942 | 1932 | 10 | 665 | 1217 | 34.42% | -2795.79 | 37.88 | -2757.91 | 0.91 | 40.29 | -24.31 |
+| Duplicate-hidden decision view | 1192 | 1183 | 9 | 385 | 765 | 32.54% | -2954.02 | 22.31 | -2931.71 | 0.82 | 35.19 | -21.57 |
+| Combined shadow would keep | 367 | 366 | 1 | 113 | 240 | 30.87% | -598.26 | 10.90 | -587.36 | 0.85 | 29.60 | -16.43 |
+| Combined shadow would block | 825 | 817 | 8 | 272 | 525 | 33.29% | -2355.76 | 11.41 | -2344.35 | 0.81 | 37.51 | -23.92 |
 
 ## Shadow Scenarios
 
 | Scenario | Baseline Closed | Kept Closed | Kept % | Delta PnL AED | Kept PF | Kept Win Rate | Promotion Status |
 |---|---:|---:|---:|---:|---:|---:|---|
-| Duplicate family mutex | 1692 | 966 | 57.09% | -289.96 | 0.83 | 33.64% | REJECT_OR_KEEP_MEASURING |
-| EA quarantine: session_extreme_retest_v0 | 966 | 858 | 88.82% | 373.23 | 0.84 | 34.62% | SHADOW_CANDIDATE_NEEDS_FORWARD_WEEK |
-| EA quarantine: symbol_normalized_round_retest_v0 | 966 | 451 | 46.69% | 1982.07 | 0.90 | 33.04% | REJECT_OR_KEEP_MEASURING |
-| EA quarantine: round_number_retest_v0 | 966 | 945 | 97.83% | 66.12 | 0.83 | 33.54% | REJECT_OR_KEEP_MEASURING |
-| Family quarantine: round-retest clone family | 966 | 430 | 44.51% | 2048.19 | 0.91 | 32.79% | REJECT_OR_KEEP_MEASURING |
-| Session filter: XAUUSD morning/afternoon | 966 | 748 | 77.43% | 733.99 | 0.84 | 33.82% | SHADOW_CANDIDATE_NEEDS_FORWARD_WEEK |
-| Combined proposed shadow policy | 966 | 288 | 29.81% | 2403.84 | 0.97 | 35.07% | FAIL_TRADE_COUNT |
+| Duplicate family mutex | 1932 | 1183 | 61.23% | -158.23 | 0.82 | 32.54% | REJECT_OR_KEEP_MEASURING |
+| EA quarantine: session_extreme_retest_v0 | 1183 | 1045 | 88.33% | 222.83 | 0.82 | 33.01% | SHADOW_CANDIDATE_NEEDS_FORWARD_WEEK |
+| EA quarantine: symbol_normalized_round_retest_v0 | 1183 | 589 | 49.79% | 2142.22 | 0.87 | 31.58% | REJECT_OR_KEEP_MEASURING |
+| EA quarantine: round_number_retest_v0 | 1183 | 1143 | 96.62% | -16.86 | 0.81 | 32.20% | REJECT_OR_KEEP_MEASURING |
+| Family quarantine: round-retest clone family | 1183 | 549 | 46.41% | 2125.36 | 0.86 | 30.78% | REJECT_OR_KEEP_MEASURING |
+| Session filter: XAUUSD morning/afternoon | 1183 | 914 | 77.26% | 1036.68 | 0.85 | 32.82% | SHADOW_CANDIDATE_NEEDS_FORWARD_WEEK |
+| Combined proposed shadow policy | 1183 | 366 | 30.94% | 2355.76 | 0.85 | 30.87% | FAIL_TRADE_COUNT |
 
 ## Block Reason Counts
 
 | Reason | Count |
 |---|---:|
-| BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 538 |
-| BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 108 |
-| BLOCK_XAUUSD_MORNING_AFTERNOON | 34 |
+| BLOCK_WEAK_EA_ROUND_RETEST_CLONE_FAMILY | 641 |
+| BLOCK_WEAK_EA_SESSION_EXTREME_RETEST | 139 |
+| BLOCK_XAUUSD_MORNING_AFTERNOON | 45 |
 
 ## Duplicate-Hidden By EA
 
 | candidate | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| swing_breakout_retest_v0 | 33 | 0 | 10 | 20 | 30.30% | 97.37 | 1.51 | 28.73 | -9.50 |
+| round_number_retest_v0 | 40 | 0 | 17 | 23 | 42.50% | 16.86 | 1.04 | 28.29 | -20.17 |
 | p2weakness_br_v1 | 1 | 0 | 0 | 1 | 0.00% | -14.44 | 0.00 | n/a | -14.44 |
-| symbol_normalized_round_retest_v0_repair_v1 | 1 | 0 | 0 | 1 | 0.00% | -22.23 | 0.00 | n/a | -22.23 |
-| breakout_retest | 285 | 2 | 103 | 172 | 36.14% | -63.13 | 0.98 | 32.22 | -19.66 |
-| round_number_retest_v0 | 21 | 1 | 8 | 13 | 38.10% | -66.12 | 0.73 | 22.26 | -18.78 |
+| symbol_normalized_round_retest_v0_repair_v1 | 4 | 0 | 1 | 3 | 25.00% | -17.35 | 0.78 | 62.71 | -26.69 |
 | WR50_BreakoutEvening_v0 | 2 | 0 | 0 | 2 | 0.00% | -74.00 | 0.00 | n/a | -37.00 |
-| session_extreme_retest_v0 | 108 | 0 | 28 | 69 | 25.93% | -373.23 | 0.67 | 27.53 | -16.58 |
-| symbol_normalized_round_retest_v0 | 515 | 1 | 176 | 331 | 34.17% | -1982.07 | 0.80 | 43.78 | -29.26 |
+| swing_breakout_retest_v0 | 75 | 0 | 15 | 57 | 20.00% | -222.76 | 0.61 | 23.43 | -10.07 |
+| session_extreme_retest_v0 | 138 | 1 | 40 | 87 | 28.99% | -222.83 | 0.82 | 26.05 | -14.54 |
+| breakout_retest | 329 | 1 | 113 | 206 | 34.35% | -277.28 | 0.93 | 30.53 | -18.09 |
+| symbol_normalized_round_retest_v0 | 594 | 7 | 199 | 386 | 33.50% | -2142.22 | 0.79 | 41.01 | -26.69 |
 
 ## Duplicate-Hidden By Symbol
 
 | symbol | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | USDJPY | 21 | 0 | 4 | 16 | 19.05% | -24.94 | 0.45 | 5.14 | -2.84 |
-| XAUUSD | 586 | 1 | 220 | 362 | 37.54% | -554.52 | 0.95 | 45.10 | -28.94 |
-| EURUSD | 202 | 0 | 61 | 129 | 30.20% | -838.88 | 0.59 | 19.87 | -15.90 |
-| GBPUSD | 157 | 3 | 40 | 102 | 25.48% | -1079.51 | 0.51 | 27.65 | -21.43 |
+| XAUUSD | 691 | 1 | 259 | 428 | 37.48% | -706.57 | 0.94 | 42.79 | -27.54 |
+| EURUSD | 267 | 8 | 78 | 177 | 29.21% | -925.91 | 0.59 | 16.79 | -12.63 |
+| GBPUSD | 204 | 0 | 44 | 144 | 21.57% | -1296.60 | 0.47 | 25.80 | -16.89 |
 
 ## Duplicate-Hidden By Time Bucket
 
 | time_bucket | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Evening 16:00-19:59 | 224 | 0 | 81 | 132 | 36.16% | -159.86 | 0.96 | 44.35 | -28.43 |
-| Morning 06:00-11:59 | 213 | 3 | 72 | 139 | 33.80% | -474.59 | 0.83 | 32.89 | -20.45 |
-| Night 20:00-05:59 | 386 | 1 | 137 | 238 | 35.49% | -909.23 | 0.85 | 38.64 | -26.06 |
-| Afternoon 12:00-15:59 | 143 | 0 | 35 | 100 | 24.48% | -954.17 | 0.51 | 28.72 | -19.59 |
+| Evening 16:00-19:59 | 289 | 0 | 105 | 173 | 36.33% | 5.05 | 1.00 | 40.12 | -24.32 |
+| Morning 06:00-11:59 | 254 | 0 | 81 | 171 | 31.89% | -763.86 | 0.77 | 31.03 | -19.16 |
+| Afternoon 12:00-15:59 | 191 | 0 | 49 | 134 | 25.65% | -1069.05 | 0.53 | 24.56 | -16.96 |
+| Night 20:00-05:59 | 449 | 9 | 150 | 287 | 33.41% | -1126.16 | 0.83 | 37.45 | -23.50 |
 
 ## Worst EA x Symbol x Time Clusters
 
 | candidate | symbol | time_bucket | Closed | Open | Wins | Losses | Win Rate | Closed PnL AED | PF | Avg Win | Avg Loss |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59 | 87 | 0 | 31 | 54 | 35.63% | -419.88 | 0.82 | 60.65 | -42.59 |
-| symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | 52 | 0 | 15 | 37 | 28.85% | -373.39 | 0.63 | 42.14 | -27.18 |
-| symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59 | 101 | 0 | 35 | 66 | 34.65% | -286.93 | 0.82 | 38.47 | -24.75 |
-| symbol_normalized_round_retest_v0 | GBPUSD | Evening 16:00-19:59 | 22 | 0 | 3 | 18 | 13.64% | -270.39 | 0.24 | 28.70 | -19.80 |
-| breakout_retest | GBPUSD | Night 20:00-05:59 | 31 | 0 | 10 | 16 | 32.26% | -267.45 | 0.49 | 25.91 | -32.91 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Morning 06:00-11:59 | 120 | 0 | 38 | 82 | 31.67% | -442.43 | 0.76 | 37.45 | -22.75 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Afternoon 12:00-15:59 | 64 | 0 | 18 | 46 | 28.12% | -442.11 | 0.62 | 39.52 | -25.08 |
+| symbol_normalized_round_retest_v0 | XAUUSD | Evening 16:00-19:59 | 93 | 0 | 34 | 57 | 36.56% | -384.38 | 0.84 | 58.17 | -41.44 |
+| symbol_normalized_round_retest_v0 | GBPUSD | Evening 16:00-19:59 | 24 | 0 | 3 | 20 | 12.50% | -278.51 | 0.24 | 28.70 | -18.23 |
+| breakout_retest | GBPUSD | Night 20:00-05:59 | 33 | 0 | 10 | 18 | 30.30% | -274.83 | 0.49 | 25.91 | -29.66 |
 | symbol_normalized_round_retest_v0 | GBPUSD | Morning 06:00-11:59 | 11 | 0 | 0 | 11 | 0.00% | -196.22 | 0.00 | n/a | -17.84 |
-| symbol_normalized_round_retest_v0 | XAUUSD | Night 20:00-05:59 | 170 | 0 | 68 | 101 | 40.00% | -190.35 | 0.94 | 46.78 | -33.38 |
-| breakout_retest | EURUSD | Night 20:00-05:59 | 36 | 0 | 10 | 25 | 27.78% | -169.47 | 0.56 | 21.91 | -15.54 |
-| symbol_normalized_round_retest_v0 | EURUSD | Night 20:00-05:59 | 33 | 0 | 10 | 23 | 30.30% | -150.22 | 0.65 | 28.15 | -18.77 |
-| session_extreme_retest_v0 | EURUSD | Evening 16:00-19:59 | 13 | 0 | 0 | 8 | 0.00% | -135.20 | 0.00 | n/a | -16.90 |
-| breakout_retest | GBPUSD | Evening 16:00-19:59 | 20 | 0 | 5 | 14 | 25.00% | -134.54 | 0.46 | 23.23 | -17.91 |
-| session_extreme_retest_v0 | XAUUSD | Night 20:00-05:59 | 14 | 0 | 2 | 12 | 14.29% | -131.92 | 0.40 | 44.16 | -18.35 |
+| breakout_retest | EURUSD | Night 20:00-05:59 | 42 | 0 | 10 | 31 | 23.81% | -194.15 | 0.53 | 21.91 | -13.33 |
+| symbol_normalized_round_retest_v0 | EURUSD | Night 20:00-05:59 | 37 | 7 | 11 | 26 | 29.73% | -157.61 | 0.65 | 26.45 | -17.25 |
+| breakout_retest | GBPUSD | Evening 16:00-19:59 | 24 | 0 | 5 | 18 | 20.83% | -149.86 | 0.44 | 23.23 | -14.78 |
+| breakout_retest | GBPUSD | Afternoon 12:00-15:59 | 11 | 0 | 0 | 10 | 0.00% | -129.94 | 0.00 | n/a | -12.99 |
+| breakout_retest | EURUSD | Afternoon 12:00-15:59 | 20 | 0 | 5 | 15 | 25.00% | -125.81 | 0.28 | 9.92 | -11.69 |
+| session_extreme_retest_v0 | EURUSD | Evening 16:00-19:59 | 20 | 0 | 4 | 11 | 20.00% | -124.18 | 0.15 | 5.52 | -13.30 |
 
 ## Promotion Rule
 

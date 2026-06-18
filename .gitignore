@@ -125,6 +125,21 @@ xau-usd/xauusd-phase1/outputs/reports/**
 !xau-usd/xauusd-phase1/outputs/reports/TIER1_POSITION_PATH_OBSERVER_ATTACHMENT.md
 !xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.json
 !xau-usd/xauusd-phase1/outputs/reports/TWO_ACCOUNT_LOCKED_WEEK_READINESS_2026_06_13.md
+!xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json
+!xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.md
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_*.md
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_*.md
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_*.md
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_QUARANTINE_ROLLBACK_READINESS_*.md
+!xau-usd/xauusd-phase1/outputs/reports/A1_DIRECT_HISTORY_RECONCILIATION_*.md
+!xau-usd/xauusd-phase1/outputs/reports/A2_DIRECT_HISTORY_RECONCILIATION_*.md
+!xau-usd/xauusd-phase1/outputs/reports/A3_DIRECT_HISTORY_RECONCILIATION_*.md
+!xau-usd/xauusd-phase1/outputs/reports/GOLD_DAILY_SCAN_*.md
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_DAILY_ROWS_*.csv
+!xau-usd/xauusd-phase1/outputs/reports/XAUUSD_DYNAMIC_PROFIT_LOCK_PROPOSAL_*.md
+!xau-usd/xauusd-phase1/outputs/reports/A1_BTC_BREAKOUT_EXECUTOR_ATTACHMENT_*.json
+!xau-usd/xauusd-phase1/outputs/reports/A1_BTC_BREAKOUT_EXECUTOR_ATTACHMENT_*.md
+!xau-usd/xauusd-phase1/outputs/reports/A1_BTC_BREAKOUT_RELAXED_FILTER_UPDATE_*.md
 
 # Local scratch/temp files.
 .~lock.*#

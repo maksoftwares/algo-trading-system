@@ -9,9 +9,11 @@ private:
    int m_break_window_bars;
    double m_break_atr_multiplier;
    double m_retest_tolerance_points;
+   double m_retest_atr_multiplier;
    double m_stop_atr_multiplier;
    double m_reward_multiple;
    bool m_swing_only;
+   bool m_btc_relaxed_profile;
 
 public:
    void Configure(const bool swing_only)
@@ -19,9 +21,24 @@ public:
       m_break_window_bars = 20;
       m_break_atr_multiplier = 0.30;
       m_retest_tolerance_points = 5.0;
+      m_retest_atr_multiplier = 0.0;
       m_stop_atr_multiplier = 0.10;
       m_reward_multiple = 1.50;
       m_swing_only = swing_only;
+      m_btc_relaxed_profile = false;
+   }
+
+   void ConfigureForSymbol(const string symbol_name, const bool swing_only)
+   {
+      Configure(swing_only);
+      if(symbol_name == "BTCUSD")
+      {
+         m_break_window_bars = 48;
+         m_break_atr_multiplier = 0.10;
+         m_retest_tolerance_points = 5000.0;
+         m_retest_atr_multiplier = 0.25;
+         m_btc_relaxed_profile = true;
+      }
    }
 
    bool Evaluate(
@@ -104,7 +121,8 @@ private:
             candidate.break_shift = shift;
             if(!BreakValid(break_close, break_atr, candidate.level_price, is_long))
                continue;
-            if(!RetestValid(retest_high, retest_low, retest_close, candidate.level_price, point, is_long))
+            double retest_tolerance_price = EffectiveRetestTolerancePrice(point, retest_atr);
+            if(!RetestValid(retest_high, retest_low, retest_close, candidate.level_price, retest_tolerance_price, is_long))
                continue;
 
             BuildPlan(retest_high, retest_low, retest_atr, point, is_long, candidate);
@@ -121,6 +139,8 @@ private:
          observation.stage = "WAIT_LEVEL_BREAK_RETEST";
          if(m_swing_only)
             observation.reason_code = is_long ? "no_long_swing_breakout_retest_candidate" : "no_short_swing_breakout_retest_candidate";
+         else if(m_btc_relaxed_profile)
+            observation.reason_code = is_long ? "no_long_btc_relaxed_breakout_retest_candidate" : "no_short_btc_relaxed_breakout_retest_candidate";
          else
             observation.reason_code = is_long ? "no_long_breakout_retest_candidate" : "no_short_breakout_retest_candidate";
          return false;
@@ -131,6 +151,8 @@ private:
       observation.stage = "WOULD_SIGNAL";
       if(m_swing_only)
          observation.reason_code = is_long ? "SWING_BREAKOUT_RETEST_LONG_DRY_RUN" : "SWING_BREAKOUT_RETEST_SHORT_DRY_RUN";
+      else if(m_btc_relaxed_profile)
+         observation.reason_code = is_long ? "BTC_RELAXED_BREAKOUT_RETEST_LONG_DEMO" : "BTC_RELAXED_BREAKOUT_RETEST_SHORT_DEMO";
       else
          observation.reason_code = is_long ? "BREAKOUT_RETEST_LONG_DRY_RUN" : "BREAKOUT_RETEST_SHORT_DRY_RUN";
       observation.would_signal = true;
@@ -259,13 +281,28 @@ private:
       const double retest_low,
       const double retest_close,
       const double level_price,
-      const double point,
+      const double retest_tolerance_price,
       const bool is_long
    ) const
    {
       if(is_long)
-         return retest_low <= level_price + m_retest_tolerance_points * point && retest_close >= level_price;
-      return retest_high >= level_price - m_retest_tolerance_points * point && retest_close <= level_price;
+         return retest_low <= level_price + retest_tolerance_price && retest_close >= level_price;
+      return retest_high >= level_price - retest_tolerance_price && retest_close <= level_price;
+   }
+
+   double EffectiveRetestTolerancePrice(
+      const double point,
+      const double retest_atr
+   ) const
+   {
+      double tolerance = m_retest_tolerance_points * point;
+      if(m_retest_atr_multiplier > 0.0 && retest_atr > 0.0)
+      {
+         double atr_tolerance = m_retest_atr_multiplier * retest_atr;
+         if(atr_tolerance > tolerance)
+            tolerance = atr_tolerance;
+      }
+      return tolerance;
    }
 
    void BuildPlan(

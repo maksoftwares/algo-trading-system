@@ -1,0 +1,60 @@
+{
+  "status": "A1_BTC_BREAKOUT_EXECUTOR_APPENDED",
+  "created_at_utc": "2026-06-17T22:21:18.892764Z",
+  "authority": "Owner-requested A1 demo-only BTCUSD breakout experiment. This is not a canonical Phase 2 approval, not live trading, and not real capital.",
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile": "Default",
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_btc_breakout_append_20260617_222111",
+    "terminal_closed_before_profile_append": true,
+    "terminal_relaunched": true
+  },
+  "ea": {
+    "name": "Phase2ExperimentalDemoExecutor",
+    "run_id": "phase2-a1-btc-breakout-experiment-v0.1",
+    "candidate": "breakout_retest",
+    "symbol": "BTCUSD",
+    "magic": 920105,
+    "fixed_lot": 0.01,
+    "dry_run_only": false,
+    "broker_action_allowed": true,
+    "demo_account_login": "1025742",
+    "demo_server": "Capital.ComMena-Demo",
+    "deployed_sources": [
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1Types.mqh",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\Phase1\\Phase1BreakoutRetest.mqh",
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\DirectionStateShadow.mqh"
+    ],
+    "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_a1_btc.log",
+    "startup_log_file": "experimental_demo_executor_startup_v02_breakout_retest_btcusd.csv",
+    "signal_log_file": "experimental_demo_executor_signal_log_v02_breakout_retest_btcusd.csv",
+    "order_log_file": "experimental_demo_executor_order_log_v02_breakout_retest_btcusd.csv"
+  },
+  "symbol_info": {
+    "status": "SYMBOL_AVAILABLE",
+    "account_login": 1025742,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "BTCUSD",
+    "trade_mode": 4,
+    "digits": 2,
+    "point": 0.01,
+    "volume_min": 0.01,
+    "volume_step": 0.01,
+    "visible_after_select": true,
+    "tick_present": true,
+    "bid": 0.0,
+    "ask": 0.0
+  },
+  "profile_changes": {
+    "existing_profile_preserved": true,
+    "appended_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart25.chr",
+    "existing_charts_removed": 0
+  },
+  "startup_tail": [
+    "timestamp_broker,timestamp_utc,timestamp_local,run_id,account_server,symbol,candidate,candidate_status,family_lifecycle_status,qualified_symbols,account_login,allowed_account_logins,authorized_candidates,dry_run,broker_action_allowed,observer_supported,authorization_token_present,cost_suspension_ack_token_present,account_max_orders_per_day,account_max_open_positions,max_estimated_cost_R,max_measured_spread_points,kill_switch_file,startup_status",
+    "2026.06.17 22:21:16,2026.06.17 22:21:14,2026.06.18 02:21:14,phase2-a1-btc-breakout-experiment-v0.1,Capital.ComMena-Demo,BTCUSD,breakout_retest,BTC_EXPERIMENTAL_DEMO_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,BTCUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.0000,0.00,experimental_demo_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1025742_20260617_222114",
+    "2026.06.17 22:21:16,2026.06.17 22:21:14,2026.06.18 02:21:14,phase2-a1-btc-breakout-experiment-v0.1,Capital.ComMena-Demo,BTCUSD,breakout_retest,BTC_EXPERIMENTAL_DEMO_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,BTCUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.0000,0.00,experimental_demo_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED"
+  ]
+}

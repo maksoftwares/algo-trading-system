@@ -45,7 +45,13 @@ EXPERIMENTAL_MAGIC_CODES = {
     P2WEAKNESS_LEGACY_MAGIC: ("p2weakness_br_v1", "EXPERIMENTAL"),
     P2WEAKNESS_MAGIC_MIN: ("p2weakness_br_v1", "EXPERIMENTAL"),
 }
-SYMBOL_MAGIC_CODES = {1: "XAUUSD", 2: "EURUSD", 3: "USDJPY", 4: "GBPUSD"}
+SYMBOL_MAGIC_CODES = {
+    1: "XAUUSD",
+    2: "EURUSD",
+    3: "USDJPY",
+    4: "GBPUSD",
+    5: "BTCUSD",
+}
 ACTUAL_BROKER_TRADE_FIELDS = [
     "entry_time",
     "exit_time",

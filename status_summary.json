@@ -1,0 +1,166 @@
+{
+  "a3_tier1": {
+    "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
+    "lane": {
+      "account_login": "1033669",
+      "broker_action_allowed": "true",
+      "comment": "A3_BREAKOUT_TIER1_COMPAT",
+      "dry_run": "false",
+      "ea": "Account3BreakoutTier1CompatExecutor",
+      "fixed_lot": "0.01",
+      "magic": "933400",
+      "session_gate_server_hours": "12-15",
+      "symbol": "XAUUSD",
+      "timeframe": "M5",
+      "trend_guard_enabled": "false",
+      "trend_shadow_only": "true",
+      "xau_stop_floor_enabled": "true"
+    },
+    "owner_authorized_demo_broker_action": true,
+    "status": "PASS"
+  },
+  "accounts": {
+    "A1": {
+      "login": "1025742",
+      "protected_charts": [
+        {
+          "broker_action_allowed": "true",
+          "candidate": "breakout_retest",
+          "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+          "chart": "chart03.chr",
+          "dry_run": "false",
+          "symbol": "XAUUSD"
+        },
+        {
+          "broker_action_allowed": "true",
+          "candidate": "swing_breakout_retest_v0",
+          "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+          "chart": "chart06.chr",
+          "dry_run": "false",
+          "symbol": "XAUUSD"
+        }
+      ],
+      "role": "standard/noisy demo account",
+      "round_quarantine_active": true,
+      "server": "Capital.ComMena-Demo",
+      "target_charts": [
+        {
+          "broker_action_allowed": "false",
+          "candidate": "symbol_normalized_round_retest_v0",
+          "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+          "chart": "chart09.chr",
+          "dry_run": "true",
+          "symbol": "XAUUSD"
+        },
+        {
+          "broker_action_allowed": "false",
+          "candidate": "round_number_retest_v0",
+          "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+          "chart": "chart11.chr",
+          "dry_run": "true",
+          "symbol": "XAUUSD"
+        }
+      ],
+      "touched_by_round_quarantine": true
+    },
+    "A2": {
+      "login": "1033030",
+      "role": "Tier-1 clean breakout account",
+      "round_quarantine_active": false,
+      "server": "Capital.ComMena-Demo",
+      "touched_by_round_quarantine": false
+    },
+    "A3": {
+      "login": "1033669",
+      "role": "repair / Tier-1 compatibility demo account",
+      "round_quarantine_active": false,
+      "server": "Capital.ComMena-Demo",
+      "tier1_compat_attachment_status": "PASS",
+      "tier1_compat_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
+      "touched_by_round_quarantine": false
+    }
+  },
+  "authorization": {
+    "a3_tier1_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
+    "broad_afternoon_ban_authorized": false,
+    "canonical_phase2_pass": false,
+    "cost_threshold_runtime_rule_authorized": false,
+    "direction_only_rule_authorized": false,
+    "live_trading_authorized": false,
+    "real_capital_authorized": false
+  },
+  "generated_at_utc": "2026-06-18T04:03:12.171209Z",
+  "next_evidence_required": [
+    "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
+    "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
+    "XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md",
+    "A1/A2/A3 direct-history reconciliation after the forward week",
+    "A3 Tier-1 compat order delta, PnL, and shadow trend-guard report"
+  ],
+  "quarantine": {
+    "keep_active_through_forward_week": true,
+    "profile_backup_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_round_family_quarantine_20260617_112219",
+    "protected_candidates": [
+      "breakout_retest",
+      "swing_breakout_retest_v0"
+    ],
+    "protected_charts": [
+      {
+        "broker_action_allowed": "true",
+        "candidate": "breakout_retest",
+        "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+        "chart": "chart03.chr",
+        "dry_run": "false",
+        "symbol": "XAUUSD"
+      },
+      {
+        "broker_action_allowed": "true",
+        "candidate": "swing_breakout_retest_v0",
+        "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+        "chart": "chart06.chr",
+        "dry_run": "false",
+        "symbol": "XAUUSD"
+      }
+    ],
+    "rollback_backup_exists": true,
+    "rollback_required_now": false,
+    "scope": "A1 XAUUSD round-family only",
+    "status": "ROUND_FAMILY_QUARANTINE_APPLIED",
+    "target_candidates": [
+      "round_number_retest_v0",
+      "symbol_normalized_round_retest_v0"
+    ],
+    "target_charts": [
+      {
+        "broker_action_allowed": "false",
+        "candidate": "symbol_normalized_round_retest_v0",
+        "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+        "chart": "chart09.chr",
+        "dry_run": "true",
+        "symbol": "XAUUSD"
+      },
+      {
+        "broker_action_allowed": "false",
+        "candidate": "round_number_retest_v0",
+        "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+        "chart": "chart11.chr",
+        "dry_run": "true",
+        "symbol": "XAUUSD"
+      }
+    ]
+  },
+  "repo": {
+    "branch": "codex/a3-repair-lane-2026-06-13",
+    "commit": "bf6fbff3c8eaddb7bb33509b1c606ab37d8542ee",
+    "main_remote_commit": "bf6fbff3c8eaddb7bb33509b1c606ab37d8542ee"
+  },
+  "schema_version": "project_status_summary_v1",
+  "source_artifacts": {
+    "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
+    "a3_tier1_attachment": "xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json",
+    "round_quarantine_applied": "xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json",
+    "status_html": "status.html",
+    "status_summary_json": "status_summary.json",
+    "status_summary_md": "status_summary.md"
+  }
+}

@@ -1,0 +1,143 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+import sys
+from datetime import date, datetime, timezone
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_project_status_summary_records_account_boundaries(tmp_path: Path):
+    repo = _repo_with_reports(tmp_path)
+    module = _load_script("generate_project_status_summary")
+
+    json_path, md_path = module.generate_project_status_summary(
+        repo,
+        now=datetime(2026, 6, 17, 12, 0, tzinfo=timezone.utc),
+    )
+
+    summary = json.loads(json_path.read_text(encoding="utf-8"))
+    markdown = md_path.read_text(encoding="utf-8")
+    assert summary["accounts"]["A1"]["round_quarantine_active"] is True
+    assert summary["accounts"]["A1"]["touched_by_round_quarantine"] is True
+    assert summary["accounts"]["A2"]["touched_by_round_quarantine"] is False
+    assert summary["accounts"]["A3"]["touched_by_round_quarantine"] is False
+    assert summary["quarantine"]["target_candidates"] == [
+        "round_number_retest_v0",
+        "symbol_normalized_round_retest_v0",
+    ]
+    assert summary["a3_tier1"]["owner_authorized_demo_broker_action"] is True
+    assert summary["authorization"]["canonical_phase2_pass"] is False
+    assert summary["authorization"]["live_trading_authorized"] is False
+    assert "audit-friendly companion" in markdown
+    assert "OWNER_AUTHORIZED_DEMO_BROKER_ACTION" in markdown
+
+
+def test_forward_week_templates_are_pending_and_non_runtime(tmp_path: Path):
+    repo = _repo_with_reports(tmp_path)
+    module = _load_script("generate_xauusd_forward_week_evidence_templates")
+
+    paths = module.generate_forward_week_evidence_templates(repo, report_date=date(2026, 6, 17))
+
+    names = {path.name for path in paths}
+    assert "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_17.md" in names
+    assert "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_17.md" in names
+    assert "XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_17.md" in names
+    assert "XAUUSD_ROUND_QUARANTINE_ROLLBACK_READINESS_2026_06_17.md" in names
+    assert "A1_DIRECT_HISTORY_RECONCILIATION_2026_06_17.md" in names
+    assert "A2_DIRECT_HISTORY_RECONCILIATION_2026_06_17.md" in names
+    assert "A3_DIRECT_HISTORY_RECONCILIATION_2026_06_17.md" in names
+    combined = "\n".join(path.read_text(encoding="utf-8") for path in paths)
+    assert "PENDING_FORWARD_WEEK" in combined
+    assert "No runtime change is authorized" in combined
+    assert "PENDING_DIRECT_MT5_REFRESH" in combined
+
+
+def _repo_with_reports(tmp_path: Path) -> Path:
+    repo = tmp_path / "repo"
+    reports = repo / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    reports.mkdir(parents=True)
+    (reports / "XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json").write_text(
+        json.dumps(
+            {
+                "status": "ROUND_FAMILY_QUARANTINE_APPLIED",
+                "scope": {
+                    "target_candidates": [
+                        "round_number_retest_v0",
+                        "symbol_normalized_round_retest_v0",
+                    ]
+                },
+                "terminal": {"profile_backup_dir": "C:/backup"},
+                "after_target_charts": [
+                    {
+                        "chart": "chart09.chr",
+                        "symbol": "XAUUSD",
+                        "candidate": "symbol_normalized_round_retest_v0",
+                        "dry_run": "true",
+                        "broker_action_allowed": "false",
+                        "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+                    },
+                    {
+                        "chart": "chart11.chr",
+                        "symbol": "XAUUSD",
+                        "candidate": "round_number_retest_v0",
+                        "dry_run": "true",
+                        "broker_action_allowed": "false",
+                        "candidate_status": "OWNER_APPROVED_ROUND_FAMILY_QUARANTINED",
+                    },
+                ],
+                "after_protected_charts": [
+                    {
+                        "chart": "chart03.chr",
+                        "symbol": "XAUUSD",
+                        "candidate": "breakout_retest",
+                        "dry_run": "false",
+                        "broker_action_allowed": "true",
+                        "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+                    },
+                    {
+                        "chart": "chart06.chr",
+                        "symbol": "XAUUSD",
+                        "candidate": "swing_breakout_retest_v0",
+                        "dry_run": "false",
+                        "broker_action_allowed": "true",
+                        "candidate_status": "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY",
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json").write_text(
+        json.dumps(
+            {
+                "status": "PASS",
+                "lane": {
+                    "account_login": "1033669",
+                    "broker_action_allowed": "true",
+                    "dry_run": "false",
+                    "symbol": "XAUUSD",
+                    "magic": "933400",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    return repo
+
+
+def _load_script(name: str):
+    scripts_dir = ROOT / "scripts"
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    path = scripts_dir / f"{name}.py"
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module

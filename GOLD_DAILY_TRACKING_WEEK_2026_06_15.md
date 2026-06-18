@@ -36,12 +36,16 @@ is a root cause. If it flips with the day, it was coincidence.
 
 ## Regime watch — guard against over-claiming direction-dependent hypotheses
 
-**Regime coverage:** Day 1 (06-15) UP · Day 2 (06-16) UP · Day 3 — · Day 4 — · Day 5 —
-→ so far **2/2 up-days, 0 down-days, 0 range-days.**
+**Regime coverage:** Day 1 (06-15) UP · Day 2 (06-16) UP · Day 3 (06-17) **DOWN** · Day 4 — · Day 5 —
+→ so far **2 up-days, 1 down-day, 0 range-days.**
 
-H3 (counter-trend loses) and H4 (cost predicts losers) are **direction-sensitive and cannot be
-confirmed inside a single regime.** Both tracked days were up-trends, so "shorts lose" and
-"counter-trend loses" are indistinguishable right now — the losing side has had no chance to flip.
+**Day 3 (DOWN) — the flip occurred as H3 predicts.** Gold fell hard (≈ −106 pts open→close) and the
+losing side flipped to **longs**: BUY 60 / 21.7% win / −728 vs SELL 22 / 40.9% / −114 (breakout lanes:
+counter-trend longs won just 8.7%). Shorts lost on the two up-days; longs lost on the down-day — the
+signature of **counter-trend-loses**, and it rules out the "shorts always lose" alternative. This is
+H3's first non-up evidence and it flipped correctly → upgrade H3 from "up-regime only — UNPROVEN" to
+**"supported across regimes, 1 down-day observed."** Not yet *confirmed* (one down day, small; with-trend
+shorts only lost-less rather than profited) — needs ≥1 more down/range day. H4 (cost) still pending.
 
 **Hard rule for Friday:** do **not** mark H3 confirmed unless a **non-up day** shows the losing side
 flip (down-day → longs lose / shorts win). If all five days come in up-trending, H3 stays
@@ -121,8 +125,28 @@ _(The partial 21:48 snapshot read +649; the day faded late — A3 gave back roug
 
 **Notes:** See `xau-usd/xauusd-phase1/outputs/reports/GOLD_DAILY_SCAN_2026_06_16.md` and `XAUUSD_DAILY_ROWS_2026_06_16.csv`. Single day only; no edge conclusion upgraded.
 
-## Day 3 — Wednesday 2026-06-17
-_(same template)_
+## Day 3 - Wednesday 2026-06-17
+
+**Gold:** DOWN day from scan context: open 4333.76 -> latest/close 4227.41 (-10635 points), high 4382.10, low 4226.27.
+
+**Regime update:** this is the first DOWN day in the forward-week tracker. Current coverage is Day 1 UP, Day 2 UP, Day 3 DOWN, Day 4 pending, Day 5 pending. H3 gets directional support today, but one down day is still too small to confirm it.
+
+**Per account (gold only, normalized to 0.01 lot, closed broker fills):** see `xau-usd/xauusd-phase1/outputs/reports/GOLD_DAILY_SCAN_2026_06_17.md` and `XAUUSD_DAILY_ROWS_2026_06_17.csv`.
+
+- A1: 71 raw closed rows, -344.60 AED_001, 30.99% win rate.
+- A2: 1 raw closed row, -92.42 AED_001, 0.00% win rate.
+- A3: 10 raw closed rows, -404.90 AED_001, 0.00% win rate.
+- Whole-book raw: 82 rows, -841.92 AED_001.
+
+**Round quarantine:** using the applied report timestamp (`2026-06-17 11:22 UTC` / `15:22 Dubai`), post-quarantine target rows were 0 = CLEAN. Using the work-order's `11:22 Dubai` wording, there are 11 target rows and the time basis needs owner/reviewer clarification.
+
+**A3 Tier-1 compat:** magic `933400` fired 1 closed trade, inside server-hour gate 12-15, PnL -92.31 AED_001. Shadow trend guard remained shadow-only.
+
+**A3 A/B:** plain `933200` lost materially more than improved `933300`; no plain-vs-improved same-signal cofire was observed in the daily rows.
+
+**Hypothesis scorecard (one-day tags only):** H1 `support`; H2 `support but weaker`; H3 `support on first down day`; H4 `n/a`; H5 `support, tiny sample`.
+
+**No edge upgrade:** this is one near-EOD day and is reported as measurement only.
 
 ## Day 4 — Thursday 2026-06-18
 _(same template)_
