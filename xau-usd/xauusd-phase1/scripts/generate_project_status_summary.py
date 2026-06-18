@@ -27,10 +27,12 @@ def generate_project_status_summary(
     quarantine_report = phase1_reports / "XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json"
     a3_attachment_report = phase1_reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
     a3_review_followup_report = phase1_reports / "A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json"
+    a3_pause_report = phase1_reports / "A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json"
 
     quarantine = _read_json(quarantine_report)
     a3_attachment = _read_json(a3_attachment_report)
     a3_review_followup = _read_json(a3_review_followup_report)
+    a3_pause = _read_json(a3_pause_report)
     repo = _repo_state(repo_root)
     profile_backup = quarantine.get("terminal", {}).get("profile_backup_dir", "")
 
@@ -63,6 +65,8 @@ def generate_project_status_summary(
             "a3_tier1_attachment": _rel(repo_root, a3_attachment_report),
             "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
             "a3_review_followup": _rel(repo_root, a3_review_followup_report),
+            "a3_emergency_pause": _rel(repo_root, a3_pause_report),
+            "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
             "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
             "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
         },
@@ -92,8 +96,16 @@ def generate_project_status_summary(
                 "tier1_compat_demo_broker_action": _a3_broker_action_status(a3_attachment),
                 "tier1_compat_attachment_status": a3_attachment.get("status", "MISSING"),
                 "review_followup_status": a3_review_followup.get("status", "MISSING"),
+                "artifact_integrity_status": a3_review_followup.get("artifact_integrity_status", "MISSING"),
+                "runtime_performance_status": a3_review_followup.get("runtime_performance_status", "MISSING"),
+                "runtime_authorization_status": a3_review_followup.get("runtime_authorization_status", "MISSING"),
                 "review_followup_summary": a3_review_followup.get("summary", {}),
-                "plain_933200_stopped": _a3_plain_stopped(a3_review_followup),
+                "plain_933200_stopped": _a3_lane_paused(a3_review_followup, "933200"),
+                "improved_933300_paused": _a3_lane_paused(a3_review_followup, "933300"),
+                "tier1_933400_paused": _a3_lane_paused(a3_review_followup, "933400"),
+                "profit_lock_dryrun_disarmed": _profit_lock_disarmed(a3_review_followup),
+                "emergency_pause_status": a3_pause.get("status", "MISSING"),
+                "emergency_pause_report": _rel(repo_root, a3_pause_report),
             },
         },
         "quarantine": {
@@ -114,6 +126,8 @@ def generate_project_status_summary(
             "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
             "lane": a3_attachment.get("lane", {}),
             "review_followup_summary": a3_review_followup.get("summary", {}),
+            "runtime_authorization_status": a3_review_followup.get("runtime_authorization_status", "MISSING"),
+            "emergency_pause_status": a3_pause.get("status", "MISSING"),
         },
         "authorization": {
             "canonical_phase2_pass": False,
@@ -123,6 +137,7 @@ def generate_project_status_summary(
             "direction_only_rule_authorized": False,
             "cost_threshold_runtime_rule_authorized": False,
             "a3_tier1_demo_broker_action": _a3_broker_action_status(a3_attachment),
+            "a3_current_runtime_authorization": a3_review_followup.get("runtime_authorization_status", "MISSING"),
         },
         "next_evidence_required": [
             "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
@@ -131,7 +146,7 @@ def generate_project_status_summary(
             "A1/A2/A3 direct-history reconciliation after the forward week",
             "PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup",
             "A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up",
-            "A3 Tier-1 compat order delta, PnL, and shadow trend-guard report",
+            "A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation",
         ],
     }
 
@@ -197,10 +212,17 @@ def _a3_broker_action_status(report: dict[str, Any]) -> str:
     return "PENDING_OR_NOT_VISIBLE"
 
 
-def _a3_plain_stopped(report: dict[str, Any]) -> bool:
+def _a3_lane_paused(report: dict[str, Any], magic: str) -> bool:
     for row in report.get("per_magic", []):
-        if str(row.get("magic", "")) == "933200":
+        if str(row.get("magic", "")) == magic:
             return str(row.get("dry_run_now", "")).lower() == "true" and str(row.get("broker_action_allowed_now", "")).lower() == "false"
+    return False
+
+
+def _profit_lock_disarmed(report: dict[str, Any]) -> bool:
+    for row in report.get("chart_state", {}).values():
+        if row.get("expert") == "Account3ProfitLockExitManager":
+            return str(row.get("dry_run", "")).lower() == "true" and str(row.get("manage_action_allowed", "")).lower() == "false"
     return False
 
 
@@ -219,7 +241,7 @@ def _render_markdown(summary: dict[str, Any]) -> str:
         "# Project Status Summary",
         "",
         f"Generated UTC: `{summary['generated_at_utc']}`",
-        f"Commit: `{summary['repo']['commit']}`",
+        f"Artifact generation base commit: `{summary['repo']['commit']}`",
         f"Branch: `{summary['repo']['branch']}`",
         "",
         "This small file is the audit-friendly companion to the large `status.html` dashboard.",
@@ -273,10 +295,16 @@ def _render_markdown(summary: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "## A3 Review Follow-Up",
+            "## A3 Runtime Decision",
             "",
-            f"Status: `{a3.get('review_followup_status', 'MISSING')}`",
+            f"Artifact integrity: `{a3.get('artifact_integrity_status', 'MISSING')}`",
+            f"Runtime performance: `{a3.get('runtime_performance_status', 'MISSING')}`",
+            f"Runtime authorization: `{a3.get('runtime_authorization_status', 'MISSING')}`",
+            f"Emergency pause report: `{a3.get('emergency_pause_status', 'MISSING')}`",
             f"Plain `933200` stopped: `{str(a3.get('plain_933200_stopped', False)).lower()}`",
+            f"Improved `933300` paused: `{str(a3.get('improved_933300_paused', False)).lower()}`",
+            f"Tier1 compat `933400` paused: `{str(a3.get('tier1_933400_paused', False)).lower()}`",
+            f"Profit-lock dry-run/disarmed: `{str(a3.get('profit_lock_dryrun_disarmed', False)).lower()}`",
             "",
             "| Metric | Value |",
             "| --- | ---: |",
@@ -299,6 +327,7 @@ def _render_markdown(summary: dict[str, Any]) -> str:
             f"| Live trading authorized | `{str(auth['live_trading_authorized']).lower()}` |",
             f"| Real capital authorized | `{str(auth['real_capital_authorized']).lower()}` |",
             f"| A3 Tier-1 demo broker action | `{auth['a3_tier1_demo_broker_action']}` |",
+            f"| A3 current runtime authorization | `{auth['a3_current_runtime_authorization']}` |",
             "",
             "## Next Evidence Required",
             "",

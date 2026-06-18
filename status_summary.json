@@ -1,5 +1,6 @@
 {
   "a3_tier1": {
+    "emergency_pause_status": "PASS",
     "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
     "lane": {
       "account_login": "1033669",
@@ -25,6 +26,7 @@
       "profit_lock_actions": 0,
       "wins": 1
     },
+    "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
     "status": "PASS"
   },
   "accounts": {
@@ -79,9 +81,14 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
+      "artifact_integrity_status": "PASS",
+      "emergency_pause_report": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
+      "emergency_pause_status": "PASS",
+      "improved_933300_paused": true,
       "login": "1033669",
       "plain_933200_stopped": true,
-      "review_followup_status": "PASS",
+      "profit_lock_dryrun_disarmed": true,
+      "review_followup_status": "ARTIFACT_INTEGRITY_PASS",
       "review_followup_summary": {
         "closed_trades": 23,
         "duplicate_event_count": 5,
@@ -92,13 +99,17 @@
       },
       "role": "repair / Tier-1 compatibility demo account",
       "round_quarantine_active": false,
+      "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+      "runtime_performance_status": "FAIL",
       "server": "Capital.ComMena-Demo",
+      "tier1_933400_paused": true,
       "tier1_compat_attachment_status": "PASS",
       "tier1_compat_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
       "touched_by_round_quarantine": false
     }
   },
   "authorization": {
+    "a3_current_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
     "a3_tier1_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
     "broad_afternoon_ban_authorized": false,
     "canonical_phase2_pass": false,
@@ -107,7 +118,7 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-18T07:07:04.043662Z",
+  "generated_at_utc": "2026-06-18T07:44:36.784892Z",
   "next_evidence_required": [
     "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
     "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
@@ -115,7 +126,7 @@
     "A1/A2/A3 direct-history reconciliation after the forward week",
     "PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup",
     "A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up",
-    "A3 Tier-1 compat order delta, PnL, and shadow trend-guard report"
+    "A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation"
   ],
   "quarantine": {
     "keep_active_through_forward_week": true,
@@ -171,14 +182,16 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "d5dd2de6508a812424b12eb248b6409fcf689968",
-    "main_remote_commit": "d5dd2de6508a812424b12eb248b6409fcf689968"
+    "commit": "c9889cb2e7585be8c64cdea6800fb05726af3f52",
+    "main_remote_commit": "c9889cb2e7585be8c64cdea6800fb05726af3f52"
   },
   "schema_version": "project_status_summary_v1",
   "source_artifacts": {
+    "a3_emergency_pause": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
     "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
     "a3_review_followup": "xau-usd/xauusd-phase1/outputs/reports/A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json",
     "a3_tier1_attachment": "xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json",
+    "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
     "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
     "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
     "round_quarantine_applied": "xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json",

@@ -1,0 +1,421 @@
+{
+  "status": "PASS",
+  "artifact_integrity_status": "PASS",
+  "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+  "runtime_performance_status": "FAIL_PRIOR_TO_PAUSE",
+  "created_at_utc": "2026-06-18T07:41:59.049960Z",
+  "authority": "Reviewer FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md recommended emergency risk-reducing pause.",
+  "boundary": "Demo-only maintenance. No trade close, no order send, no EA source change, no signal-filter deployment, no live/real-capital authorization.",
+  "terminal": {
+    "portable_root": "C:\\MT5PortableRepairLane",
+    "terminal_exe": "C:\\MT5PortableRepairLane\\terminal64.exe",
+    "profile_dir": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default",
+    "files_dir": "C:\\MT5PortableRepairLane\\MQL5\\Files",
+    "terminal_closed_before_profile_change": true,
+    "terminal_relaunched": true,
+    "launch_started_at_utc": "2026-06-18T07:41:44.038789Z",
+    "profile_backup": "C:\\MT5PortableRepairLane\\_codex_quarantine\\profile_backups\\default_profile_before_a3_emergency_pause_20260618_074144"
+  },
+  "pause_targets": {
+    "Account3BreakoutImprovedExecutor": {
+      "InpRunId": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618",
+      "InpDryRunOnly": "true",
+      "InpBrokerActionAllowed": "false"
+    },
+    "Account3BreakoutTier1CompatExecutor": {
+      "InpRunId": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618",
+      "InpDryRunOnly": "true",
+      "InpBrokerActionAllowed": "false"
+    },
+    "Account3ProfitLockExitManager": {
+      "InpRunId": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618",
+      "InpDryRunOnly": "true",
+      "InpManageActionAllowed": "false"
+    }
+  },
+  "before_broker": {
+    "status": "PASS",
+    "account": {
+      "login": 1033669,
+      "trade_mode": 0,
+      "leverage": 100,
+      "limit_orders": 0,
+      "margin_so_mode": 0,
+      "trade_allowed": true,
+      "trade_expert": true,
+      "margin_mode": 2,
+      "currency_digits": 2,
+      "fifo_close": false,
+      "balance": 3237.98,
+      "credit": 0.0,
+      "profit": 0.0,
+      "equity": 3237.98,
+      "margin": 0.0,
+      "margin_free": 3237.98,
+      "margin_level": 0.0,
+      "margin_so_call": 100.0,
+      "margin_so_so": 50.0,
+      "margin_initial": 0.0,
+      "margin_maintenance": 0.0,
+      "assets": 0.0,
+      "liabilities": 0.0,
+      "commission_blocked": 0.0,
+      "name": "MUHAMMAD ALI KHAN",
+      "server": "Capital.ComMena-Demo",
+      "currency": "AED",
+      "company": "Capital Com Mena Securities Trading L.L.C"
+    },
+    "a3_positions_total": 0,
+    "a3_orders_total": 0,
+    "all_xau_positions_total": 0,
+    "all_xau_orders_total": 0,
+    "a3_positions": [],
+    "a3_orders": []
+  },
+  "after_broker": {
+    "status": "PASS",
+    "account": {
+      "login": 1033669,
+      "trade_mode": 0,
+      "leverage": 100,
+      "limit_orders": 0,
+      "margin_so_mode": 0,
+      "trade_allowed": true,
+      "trade_expert": true,
+      "margin_mode": 2,
+      "currency_digits": 2,
+      "fifo_close": false,
+      "balance": 3237.98,
+      "credit": 0.0,
+      "profit": 0.0,
+      "equity": 3237.98,
+      "margin": 0.0,
+      "margin_free": 3237.98,
+      "margin_level": 0.0,
+      "margin_so_call": 100.0,
+      "margin_so_so": 50.0,
+      "margin_initial": 0.0,
+      "margin_maintenance": 0.0,
+      "assets": 0.0,
+      "liabilities": 0.0,
+      "commission_blocked": 0.0,
+      "name": "MUHAMMAD ALI KHAN",
+      "server": "Capital.ComMena-Demo",
+      "currency": "AED",
+      "company": "Capital Com Mena Securities Trading L.L.C"
+    },
+    "a3_positions_total": 0,
+    "a3_orders_total": 0,
+    "all_xau_positions_total": 0,
+    "all_xau_orders_total": 0,
+    "a3_positions": [],
+    "a3_orders": []
+  },
+  "before_charts": [
+    {
+      "chart": "chart01.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutPlainExecutor",
+      "magic": "933200",
+      "managed_magics": "",
+      "dry_run_only": "true",
+      "broker_action_allowed": "false",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_PLAIN_V1_STOPPED_20260618",
+      "order_comment": "A3_BREAKOUT_PLAIN"
+    },
+    {
+      "chart": "chart02.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutImprovedExecutor",
+      "magic": "933300",
+      "managed_magics": "",
+      "dry_run_only": "false",
+      "broker_action_allowed": "true",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_IMPROVED_V1_ARMED_20260616",
+      "order_comment": "A3_BREAKOUT_IMPROVED"
+    },
+    {
+      "chart": "chart03.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "magic": "",
+      "managed_magics": "",
+      "dry_run_only": "",
+      "broker_action_allowed": "",
+      "manage_action_allowed": "",
+      "run_id": "",
+      "order_comment": ""
+    },
+    {
+      "chart": "chart04.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutTier1CompatExecutor",
+      "magic": "933400",
+      "managed_magics": "",
+      "dry_run_only": "false",
+      "broker_action_allowed": "true",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617",
+      "order_comment": "A3_BREAKOUT_TIER1_COMPAT"
+    },
+    {
+      "chart": "chart05.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3ProfitLockExitManager",
+      "magic": "",
+      "managed_magics": "933200,933400",
+      "dry_run_only": "false",
+      "broker_action_allowed": "",
+      "manage_action_allowed": "true",
+      "run_id": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618",
+      "order_comment": ""
+    }
+  ],
+  "changed_charts": [
+    {
+      "chart": "chart02.chr",
+      "expert": "Account3BreakoutImprovedExecutor",
+      "before": {
+        "chart": "chart02.chr",
+        "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+        "symbol": "XAUUSD",
+        "expert": "Account3BreakoutImprovedExecutor",
+        "magic": "933300",
+        "managed_magics": "",
+        "dry_run_only": "false",
+        "broker_action_allowed": "true",
+        "manage_action_allowed": "",
+        "run_id": "A3_BREAKOUT_IMPROVED_V1_ARMED_20260616",
+        "order_comment": "A3_BREAKOUT_IMPROVED"
+      },
+      "after_inputs": {
+        "InpRunId": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618",
+        "InpDryRunOnly": "true",
+        "InpBrokerActionAllowed": "false"
+      },
+      "changed": true
+    },
+    {
+      "chart": "chart04.chr",
+      "expert": "Account3BreakoutTier1CompatExecutor",
+      "before": {
+        "chart": "chart04.chr",
+        "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+        "symbol": "XAUUSD",
+        "expert": "Account3BreakoutTier1CompatExecutor",
+        "magic": "933400",
+        "managed_magics": "",
+        "dry_run_only": "false",
+        "broker_action_allowed": "true",
+        "manage_action_allowed": "",
+        "run_id": "A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617",
+        "order_comment": "A3_BREAKOUT_TIER1_COMPAT"
+      },
+      "after_inputs": {
+        "InpRunId": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618",
+        "InpDryRunOnly": "true",
+        "InpBrokerActionAllowed": "false"
+      },
+      "changed": true
+    },
+    {
+      "chart": "chart05.chr",
+      "expert": "Account3ProfitLockExitManager",
+      "before": {
+        "chart": "chart05.chr",
+        "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
+        "symbol": "XAUUSD",
+        "expert": "Account3ProfitLockExitManager",
+        "magic": "",
+        "managed_magics": "933200,933400",
+        "dry_run_only": "false",
+        "broker_action_allowed": "",
+        "manage_action_allowed": "true",
+        "run_id": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618",
+        "order_comment": ""
+      },
+      "after_inputs": {
+        "InpRunId": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618",
+        "InpDryRunOnly": "true",
+        "InpManageActionAllowed": "false"
+      },
+      "changed": true
+    }
+  ],
+  "after_charts": [
+    {
+      "chart": "chart01.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutPlainExecutor",
+      "magic": "933200",
+      "managed_magics": "",
+      "dry_run_only": "true",
+      "broker_action_allowed": "false",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_PLAIN_V1_STOPPED_20260618",
+      "order_comment": "A3_BREAKOUT_PLAIN"
+    },
+    {
+      "chart": "chart02.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutImprovedExecutor",
+      "magic": "933300",
+      "managed_magics": "",
+      "dry_run_only": "true",
+      "broker_action_allowed": "false",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618",
+      "order_comment": "A3_BREAKOUT_IMPROVED"
+    },
+    {
+      "chart": "chart03.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+      "symbol": "XAUUSD",
+      "expert": "NO_EA",
+      "magic": "",
+      "managed_magics": "",
+      "dry_run_only": "",
+      "broker_action_allowed": "",
+      "manage_action_allowed": "",
+      "run_id": "",
+      "order_comment": ""
+    },
+    {
+      "chart": "chart04.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3BreakoutTier1CompatExecutor",
+      "magic": "933400",
+      "managed_magics": "",
+      "dry_run_only": "true",
+      "broker_action_allowed": "false",
+      "manage_action_allowed": "",
+      "run_id": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618",
+      "order_comment": "A3_BREAKOUT_TIER1_COMPAT"
+    },
+    {
+      "chart": "chart05.chr",
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
+      "symbol": "XAUUSD",
+      "expert": "Account3ProfitLockExitManager",
+      "magic": "",
+      "managed_magics": "933200,933400",
+      "dry_run_only": "true",
+      "broker_action_allowed": "",
+      "manage_action_allowed": "false",
+      "run_id": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618",
+      "order_comment": ""
+    }
+  ],
+  "startup_logs": {
+    "plain": {
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_breakout_plain_startup.csv",
+      "exists": true,
+      "mtime_utc": "2026-06-18T07:41:46.920631Z",
+      "line_count": 11,
+      "last_line": "2026.06.18 07:41:50,2026.06.18 07:41:46,2026.06.18 11:41:46,A3_BREAKOUT_PLAIN_V1_STOPPED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,933200,A3_BREAKOUT_PLAIN,1033669,true,false,0.01,1,0.1500,0.2000,0.3000,75.00,60,A3_KILL.txt,false,false,false,ATTACHED_A3_BREAKOUT_PLAIN"
+    },
+    "improved": {
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_breakout_improved_startup.csv",
+      "exists": true,
+      "mtime_utc": "2026-06-18T07:41:46.934819Z",
+      "line_count": 11,
+      "last_line": "2026.06.18 07:41:50,2026.06.18 07:41:46,2026.06.18 11:41:46,A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,933300,A3_BREAKOUT_IMPROVED,1033669,true,false,0.01,1,0.1500,0.2000,0.3000,75.00,60,A3_KILL.txt,true,true,true,ATTACHED_A3_BREAKOUT_IMPROVED"
+    },
+    "tier1_compat": {
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_breakout_tier1_compat_startup.csv",
+      "exists": true,
+      "mtime_utc": "2026-06-18T07:41:46.929541Z",
+      "line_count": 9,
+      "last_line": "2026.06.18 07:41:50,2026.06.18 07:41:46,2026.06.18 11:41:46,A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,933400,A3_BREAKOUT_TIER1_COMPAT,1033669,true,false,0.01,1,0.1500,0.2000,0.3000,75.00,true,12,15,60,true,A3_KILL.txt,false,true,false,false,ATTACHED_A3_BREAKOUT_TIER1_COMPAT"
+    },
+    "profit_lock": {
+      "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_profit_lock_exit_manager_startup.csv",
+      "exists": true,
+      "mtime_utc": "2026-06-18T07:41:46.918620Z",
+      "line_count": 6,
+      "last_line": "2026.06.18 07:41:50,A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,XAUUSD,\"933200,933400\",true,false,A3_KILL.txt,true,1.25,0.80,false,false,ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER,OK"
+    }
+  },
+  "checks": [
+    {
+      "name": "reviewer_pause_authority_recorded",
+      "status": "PASS",
+      "evidence": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md"
+    },
+    {
+      "name": "no_a3_open_positions_before_pause",
+      "status": "PASS",
+      "evidence": "a3_positions=0; a3_orders=0; all_xau_positions=0; all_xau_orders=0"
+    },
+    {
+      "name": "profile_backup_created",
+      "status": "PASS",
+      "evidence": "C:\\MT5PortableRepairLane\\_codex_quarantine\\profile_backups\\default_profile_before_a3_emergency_pause_20260618_074144"
+    },
+    {
+      "name": "terminal_closed_before_profile_change",
+      "status": "PASS",
+      "evidence": "terminal64.exe close/force-stop attempted"
+    },
+    {
+      "name": "terminal_relaunched",
+      "status": "PASS",
+      "evidence": "C:\\MT5PortableRepairLane\\terminal64.exe"
+    },
+    {
+      "name": "no_a3_open_positions_after_pause",
+      "status": "PASS",
+      "evidence": "a3_positions=0; a3_orders=0; all_xau_positions=0; all_xau_orders=0"
+    },
+    {
+      "name": "Account3BreakoutImprovedExecutor_profile_inputs_paused",
+      "status": "PASS",
+      "evidence": "{\"broker_action_allowed\": \"false\", \"chart\": \"chart02.chr\", \"dry_run_only\": \"true\", \"expert\": \"Account3BreakoutImprovedExecutor\", \"magic\": \"933300\", \"manage_action_allowed\": \"\", \"managed_magics\": \"\", \"order_comment\": \"A3_BREAKOUT_IMPROVED\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr\", \"run_id\": \"A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618\", \"symbol\": \"XAUUSD\"}"
+    },
+    {
+      "name": "Account3BreakoutTier1CompatExecutor_profile_inputs_paused",
+      "status": "PASS",
+      "evidence": "{\"broker_action_allowed\": \"false\", \"chart\": \"chart04.chr\", \"dry_run_only\": \"true\", \"expert\": \"Account3BreakoutTier1CompatExecutor\", \"magic\": \"933400\", \"manage_action_allowed\": \"\", \"managed_magics\": \"\", \"order_comment\": \"A3_BREAKOUT_TIER1_COMPAT\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart04.chr\", \"run_id\": \"A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618\", \"symbol\": \"XAUUSD\"}"
+    },
+    {
+      "name": "Account3ProfitLockExitManager_profile_inputs_paused",
+      "status": "PASS",
+      "evidence": "{\"broker_action_allowed\": \"\", \"chart\": \"chart05.chr\", \"dry_run_only\": \"true\", \"expert\": \"Account3ProfitLockExitManager\", \"magic\": \"\", \"manage_action_allowed\": \"false\", \"managed_magics\": \"933200,933400\", \"order_comment\": \"\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart05.chr\", \"run_id\": \"A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618\", \"symbol\": \"XAUUSD\"}"
+    },
+    {
+      "name": "plain_933200_still_stopped",
+      "status": "PASS",
+      "evidence": "933200 dry-run/no-broker-action expected"
+    },
+    {
+      "name": "changed_only_expected_pause_targets",
+      "status": "PASS",
+      "evidence": "[{\"after_inputs\": {\"InpBrokerActionAllowed\": \"false\", \"InpDryRunOnly\": \"true\", \"InpRunId\": \"A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618\"}, \"before\": {\"broker_action_allowed\": \"true\", \"chart\": \"chart02.chr\", \"dry_run_only\": \"false\", \"expert\": \"Account3BreakoutImprovedExecutor\", \"magic\": \"933300\", \"manage_action_allowed\": \"\", \"managed_magics\": \"\", \"order_comment\": \"A3_BREAKOUT_IMPROVED\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr\", \"run_id\": \"A3_BREAKOUT_IMPROVED_V1_ARMED_20260616\", \"symbol\": \"XAUUSD\"}, \"changed\": true, \"chart\": \"chart02.chr\", \"expert\": \"Account3BreakoutImprovedExecutor\"}, {\"after_inputs\": {\"InpBrokerActionAllowed\": \"false\", \"InpDryRunOnly\": \"true\", \"InpRunId\": \"A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618\"}, \"before\": {\"broker_action_allowed\": \"true\", \"chart\": \"chart04.chr\", \"dry_run_only\": \"false\", \"expert\": \"Account3BreakoutTier1CompatExecutor\", \"magic\": \"933400\", \"manage_action_allowed\": \"\", \"managed_magics\": \"\", \"order_comment\": \"A3_BREAKOUT_TIER1_COMPAT\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart04.chr\", \"run_id\": \"A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617\", \"symbol\": \"XAUUSD\"}, \"changed\": true, \"chart\": \"chart04.chr\", \"expert\": \"Account3BreakoutTier1CompatExecutor\"}, {\"after_inputs\": {\"InpDryRunOnly\": \"true\", \"InpManageActionAllowed\": \"false\", \"InpRunId\": \"A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618\"}, \"before\": {\"broker_action_allowed\": \"\", \"chart\": \"chart05.chr\", \"dry_run_only\": \"false\", \"expert\": \"Account3ProfitLockExitManager\", \"magic\": \"\", \"manage_action_allowed\": \"true\", \"managed_magics\": \"933200,933400\", \"order_comment\": \"\", \"path\": \"C:\\\\MT5PortableRepairLane\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart05.chr\", \"run_id\": \"A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618\", \"symbol\": \"XAUUSD\"}, \"changed\": true, \"chart\": \"chart05.chr\", \"expert\": \"Account3ProfitLockExitManager\"}]"
+    },
+    {
+      "name": "improved_startup_log_paused",
+      "status": "PASS",
+      "evidence": "2026.06.18 07:41:50,2026.06.18 07:41:46,2026.06.18 11:41:46,A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,933300,A3_BREAKOUT_IMPROVED,1033669,true,false,0.01,1,0.1500,0.2000,0.3000,75.00,60,A3_KILL.txt,true,true,true,ATTACHED_A3_BREAKOUT_IMPROVED"
+    },
+    {
+      "name": "tier1_compat_startup_log_paused",
+      "status": "PASS",
+      "evidence": "2026.06.18 07:41:50,2026.06.18 07:41:46,2026.06.18 11:41:46,A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,933400,A3_BREAKOUT_TIER1_COMPAT,1033669,true,false,0.01,1,0.1500,0.2000,0.3000,75.00,true,12,15,60,true,A3_KILL.txt,false,true,false,false,ATTACHED_A3_BREAKOUT_TIER1_COMPAT"
+    },
+    {
+      "name": "profit_lock_startup_log_paused",
+      "status": "PASS",
+      "evidence": "2026.06.18 07:41:50,A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,XAUUSD,\"933200,933400\",true,false,A3_KILL.txt,true,1.25,0.80,false,false,ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER,OK"
+    }
+  ]
+}

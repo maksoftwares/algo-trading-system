@@ -58,6 +58,14 @@ Last updated: 2026-06-18
 
 ## Current State
 
+- 2026-06-18 A3 emergency pause after `c9889cb` review:
+  - Reviewer file: `FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md`; verdict: A3 broker-action runtime as configured is `NO-GO`, keep `933200` stopped, pause `933300`, pause/return `933400` to dry-run, and keep profit-lock only dry-run/disarmed unless separately reauthorized.
+  - Applied risk-reducing maintenance with `xau-usd\xauusd-phase1\scripts\apply_a3_emergency_pause.py`; report: `xau-usd\xauusd-phase1\outputs\reports\A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.md/json`, status `PASS`.
+  - `C:\MT5PortableRepairLane\MQL5\Profiles\Charts\Default` was backed up to `C:\MT5PortableRepairLane\_codex_quarantine\profile_backups\default_profile_before_a3_emergency_pause_20260618_074144`; terminal was closed before profile edit and relaunched after.
+  - Broker exposure check before and after pause: 0 A3 XAUUSD positions, 0 A3 XAUUSD pending orders, 0 total XAUUSD positions/orders. No trade was closed and no order was sent by the maintenance action.
+  - Runtime chart inputs now show: `933200` plain remains `InpDryRunOnly=true` / `InpBrokerActionAllowed=false`; `933300` improved is `A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618` with dry-run/no-broker-action; `933400` Tier1 compat is `A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618` with dry-run/no-broker-action; profit-lock manager is `A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618` with `InpDryRunOnly=true` / `InpManageActionAllowed=false`.
+  - A3 follow-up reports were regenerated after the pause. They now split artifact integrity from trading health: artifact integrity `PASS`, runtime performance `FAIL`, runtime authorization `A3_ENTRY_LANES_PAUSED`. Per-magic remains 23 closed trades, 1 win, 22 losses, net `-758.79` AED, 5 duplicate events, 0 profit-lock actions.
+  - Compact status artifacts and `status.html` were regenerated/updated to link the new review and pause reports. No new signal filter, EA source change, runtime feature, live authorization, or real-capital authorization was added.
 - 2026-06-18 final-review follow-up for commit `d5dd2de`:
   - Reviewer file: `FINAL_REVIEW_D5DD2DE_A3_RUNTIME_AND_GOVERNANCE_2026_06_18.md`.
   - Exact local pytest capture: `xau-usd\xauusd-phase1\outputs\reports\PHASE1_PYTEST_D5DD2DE_2026_06_18.txt`; result remains `399 passed, 6 failed`.

@@ -71,6 +71,14 @@ def generate_reports(
     per_magic = summarize_per_magic(trade_rows, open_positions, open_orders, chart_state)
     duplicate_rows = duplicate_family_events(trade_rows)
     profit_lock = profit_lock_status(files_dir, trade_rows, open_positions)
+    summary = {
+        "closed_trades": len(trade_rows),
+        "wins": sum(1 for row in trade_rows if row["outcome"] == "WIN"),
+        "losses": sum(1 for row in trade_rows if row["outcome"] == "LOSS"),
+        "net_pnl_aed": round(sum(fnum(row["net_pnl_aed"]) for row in trade_rows), 2),
+        "duplicate_event_count": len(duplicate_rows),
+        "profit_lock_actions": len(profit_lock["action_rows"]),
+    }
 
     direct_csv = report_dir / f"A3_DIRECT_HISTORY_1033669_{STAMP}.csv"
     direct_md = report_dir / f"A3_DIRECT_HISTORY_1033669_{STAMP}.md"
@@ -88,23 +96,19 @@ def generate_reports(
     write_csv(profit_lock_csv, profit_lock["action_rows"], profit_lock_action_fields())
 
     context = {
-        "status": "PASS",
+        "status": "ARTIFACT_INTEGRITY_PASS",
+        "artifact_integrity_status": "PASS",
+        "runtime_performance_status": runtime_performance_status(summary),
+        "runtime_authorization_status": runtime_authorization_status(chart_state),
         "created_at_utc": iso(end_utc),
-        "boundary": "Read-only A3 review follow-up. No MT5 runtime, EA, chart, preset, order, position, or profile setting was changed.",
+        "boundary": "Read-only A3 review follow-up. It reads broker history, profile inputs, and logs; it does not change MT5 runtime, EA source, charts, presets, orders, or positions.",
         "terminal": str(terminal),
         "account": account._asdict() if account else None,
         "terminal_info": terminal_info._asdict() if terminal_info else None,
         "window_start_utc": iso(start_utc),
         "window_end_utc": iso(end_utc),
         "chart_state": chart_state,
-        "summary": {
-            "closed_trades": len(trade_rows),
-            "wins": sum(1 for row in trade_rows if row["outcome"] == "WIN"),
-            "losses": sum(1 for row in trade_rows if row["outcome"] == "LOSS"),
-            "net_pnl_aed": round(sum(fnum(row["net_pnl_aed"]) for row in trade_rows), 2),
-            "duplicate_event_count": len(duplicate_rows),
-            "profit_lock_actions": len(profit_lock["action_rows"]),
-        },
+        "summary": summary,
     }
     direct_md.write_text(render_direct_history(context, trade_rows, direct_csv), encoding="utf-8")
     per_magic_md.write_text(render_per_magic(context, per_magic, per_magic_csv), encoding="utf-8")
@@ -274,12 +278,41 @@ def profit_lock_status(files_dir: Path, trade_rows: list[dict[str, Any]], open_p
     }
 
 
+def runtime_performance_status(summary: dict[str, Any]) -> str:
+    if fnum(summary.get("net_pnl_aed")) < 0 and int(summary.get("losses", 0)) > int(summary.get("wins", 0)):
+        return "FAIL"
+    return "PASS"
+
+
+def runtime_authorization_status(chart_state: dict[str, dict[str, str]]) -> str:
+    lanes = {row.get("magic", ""): row for row in chart_state.values() if row.get("magic")}
+    plain_stopped = lane_paused(lanes.get("933200", {}))
+    improved_paused = lane_paused(lanes.get("933300", {}))
+    tier1_paused = lane_paused(lanes.get("933400", {}))
+    manager = next((row for row in chart_state.values() if row.get("expert") == "Account3ProfitLockExitManager"), {})
+    manager_disarmed = (
+        str(manager.get("dry_run", "")).lower() == "true"
+        and str(manager.get("manage_action_allowed", "")).lower() == "false"
+    )
+    if plain_stopped and improved_paused and tier1_paused and manager_disarmed:
+        return "A3_ENTRY_LANES_PAUSED"
+    if plain_stopped and (not improved_paused or not tier1_paused):
+        return "PAUSE_REQUIRED"
+    return "UNKNOWN"
+
+
+def lane_paused(row: dict[str, str]) -> bool:
+    return str(row.get("dry_run", "")).lower() == "true" and str(row.get("broker_action_allowed", "")).lower() == "false"
+
+
 def render_direct_history(context: dict[str, Any], rows: list[dict[str, Any]], csv_path: Path) -> str:
     return "\n".join(
         [
             "# A3 Direct History - Account 1033669 - 2026-06-18",
             "",
-            f"Status: `{context['status']}`",
+            f"Artifact integrity status: `{context['artifact_integrity_status']}`",
+            f"Runtime performance status: `{context['runtime_performance_status']}`",
+            f"Runtime authorization status: `{context['runtime_authorization_status']}`",
             "",
             context["boundary"],
             "",
@@ -303,7 +336,9 @@ def render_per_magic(context: dict[str, Any], rows: list[dict[str, Any]], csv_pa
         [
             "# A3 Per-Magic Attribution - 2026-06-18",
             "",
-            f"Status: `{context['status']}`",
+            f"Artifact integrity status: `{context['artifact_integrity_status']}`",
+            f"Runtime performance status: `{context['runtime_performance_status']}`",
+            f"Runtime authorization status: `{context['runtime_authorization_status']}`",
             "",
             context["boundary"],
             "",
@@ -311,7 +346,7 @@ def render_per_magic(context: dict[str, Any], rows: list[dict[str, Any]], csv_pa
             "",
             table(rows, per_magic_fields()),
             "",
-            "Interpretation: `933200` is expected to remain stopped with `dry_run_now=true` and `broker_action_allowed_now=false`. `933300` and `933400` remain conditional demo lanes pending fresh forward evidence.",
+            "Interpretation: `933200`, `933300`, and `933400` should all show `dry_run_now=true` and `broker_action_allowed_now=false` after the emergency pause. The poor trading result remains a runtime-performance failure, not an artifact-generation failure.",
             "",
         ]
     )
@@ -322,7 +357,9 @@ def render_duplicates(context: dict[str, Any], rows: list[dict[str, Any]], csv_p
         [
             "# A3 Duplicate Family Events - 2026-06-18",
             "",
-            f"Status: `{context['status']}`",
+            f"Artifact integrity status: `{context['artifact_integrity_status']}`",
+            f"Runtime performance status: `{context['runtime_performance_status']}`",
+            f"Runtime authorization status: `{context['runtime_authorization_status']}`",
             "",
             f"Rows CSV: `{csv_path}`",
             "",
@@ -350,7 +387,9 @@ def render_profit_lock(context: dict[str, Any], status: dict[str, Any], csv_path
         [
             "# A3 Profit-Lock Manager Status - 2026-06-18",
             "",
-            f"Status: `{context['status']}`",
+            f"Artifact integrity status: `{context['artifact_integrity_status']}`",
+            f"Runtime performance status: `{context['runtime_performance_status']}`",
+            f"Runtime authorization status: `{context['runtime_authorization_status']}`",
             "",
             context["boundary"],
             "",
@@ -360,7 +399,7 @@ def render_profit_lock(context: dict[str, Any], status: dict[str, Any], csv_path
             "",
             table(rows, list(rows[0].keys())),
             "",
-            "Interpretation: no profit-lock SLTP move has been logged yet. That is expected when managed trades do not reach the `+1.25R` trigger before closing.",
+            "Interpretation: no profit-lock SLTP move has been logged yet. After the emergency pause, the manager should remain attached only as dry-run/disarmed evidence unless separately reauthorized.",
             "",
         ]
     )

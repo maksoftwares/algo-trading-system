@@ -1,7 +1,10 @@
 {
-  "status": "PASS",
-  "created_at_utc": "2026-06-18T07:02:19.240455Z",
-  "boundary": "Read-only A3 review follow-up. No MT5 runtime, EA, chart, preset, order, position, or profile setting was changed.",
+  "status": "ARTIFACT_INTEGRITY_PASS",
+  "artifact_integrity_status": "PASS",
+  "runtime_performance_status": "FAIL",
+  "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+  "created_at_utc": "2026-06-18T07:44:27.604179Z",
+  "boundary": "Read-only A3 review follow-up. It reads broker history, profile inputs, and logs; it does not change MT5 runtime, EA source, charts, presets, orders, or positions.",
   "terminal": "C:\\MT5PortableRepairLane\\terminal64.exe",
   "account": {
     "login": 1033669,
@@ -49,7 +52,7 @@
     "codepage": 0,
     "ping_last": 134324,
     "community_balance": 0.0,
-    "retransmission": 0.049359060462421576,
+    "retransmission": 0.0,
     "company": "MetaQuotes Ltd.",
     "name": "MetaTrader 5",
     "language": "English",
@@ -58,7 +61,7 @@
     "commondata_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common"
   },
   "window_start_utc": "2026-06-16T00:00:00Z",
-  "window_end_utc": "2026-06-18T07:02:19.240455Z",
+  "window_end_utc": "2026-06-18T07:44:27.604179Z",
   "chart_state": {
     "chart01.chr": {
       "expert": "Account3BreakoutPlainExecutor",
@@ -73,28 +76,28 @@
       "expert": "Account3BreakoutImprovedExecutor",
       "magic": "933300",
       "managed_magics": "",
-      "dry_run": "false",
-      "broker_action_allowed": "true",
+      "dry_run": "true",
+      "broker_action_allowed": "false",
       "manage_action_allowed": "",
-      "run_id": "A3_BREAKOUT_IMPROVED_V1_ARMED_20260616"
+      "run_id": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618"
     },
     "chart04.chr": {
       "expert": "Account3BreakoutTier1CompatExecutor",
       "magic": "933400",
       "managed_magics": "",
-      "dry_run": "false",
-      "broker_action_allowed": "true",
+      "dry_run": "true",
+      "broker_action_allowed": "false",
       "manage_action_allowed": "",
-      "run_id": "A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617"
+      "run_id": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618"
     },
     "chart05.chr": {
       "expert": "Account3ProfitLockExitManager",
       "magic": "",
       "managed_magics": "933200,933400",
-      "dry_run": "false",
+      "dry_run": "true",
       "broker_action_allowed": "",
-      "manage_action_allowed": "true",
-      "run_id": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618"
+      "manage_action_allowed": "false",
+      "run_id": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618"
     }
   },
   "summary": {
@@ -140,9 +143,9 @@
       "consecutive_losses": 7,
       "open_positions": 0,
       "open_orders": 0,
-      "dry_run_now": "false",
-      "broker_action_allowed_now": "true",
-      "run_id_now": "A3_BREAKOUT_IMPROVED_V1_ARMED_20260616"
+      "dry_run_now": "true",
+      "broker_action_allowed_now": "false",
+      "run_id_now": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618"
     },
     {
       "magic": "933400",
@@ -159,15 +162,15 @@
       "consecutive_losses": 1,
       "open_positions": 0,
       "open_orders": 0,
-      "dry_run_now": "false",
-      "broker_action_allowed_now": "true",
-      "run_id_now": "A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617"
+      "dry_run_now": "true",
+      "broker_action_allowed_now": "false",
+      "run_id_now": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618"
     }
   ],
   "profit_lock": {
     "startup_log": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_profit_lock_exit_manager_startup.csv",
     "startup_log_exists": true,
-    "startup_last_line": "2026.06.18 05:47:37,A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,XAUUSD,\"933200,933400\",false,true,A3_KILL.txt,true,1.25,0.80,false,false,ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER,OK",
+    "startup_last_line": "2026.06.18 07:41:50,A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618,Capital.ComMena-Demo,1033669,XAUUSD,XAUUSD,\"933200,933400\",true,false,A3_KILL.txt,true,1.25,0.80,false,false,ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER,OK",
     "action_log": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_profit_lock_exit_manager_log.csv",
     "action_log_exists": false,
     "action_rows": [],

@@ -1,7 +1,7 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T07:07:04.043662Z`
-Commit: `d5dd2de6508a812424b12eb248b6409fcf689968`
+Generated UTC: `2026-06-18T07:44:36.784892Z`
+Artifact generation base commit: `c9889cb2e7585be8c64cdea6800fb05726af3f52`
 Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
@@ -33,10 +33,16 @@ Rollback required now: `false`
 | `chart03.chr` | `breakout_retest` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
 | `chart06.chr` | `swing_breakout_retest_v0` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
 
-## A3 Review Follow-Up
+## A3 Runtime Decision
 
-Status: `PASS`
+Artifact integrity: `PASS`
+Runtime performance: `FAIL`
+Runtime authorization: `A3_ENTRY_LANES_PAUSED`
+Emergency pause report: `PASS`
 Plain `933200` stopped: `true`
+Improved `933300` paused: `true`
+Tier1 compat `933400` paused: `true`
+Profit-lock dry-run/disarmed: `true`
 
 | Metric | Value |
 | --- | ---: |
@@ -55,6 +61,7 @@ Plain `933200` stopped: `true`
 | Live trading authorized | `false` |
 | Real capital authorized | `false` |
 | A3 Tier-1 demo broker action | `OWNER_AUTHORIZED_DEMO_BROKER_ACTION` |
+| A3 current runtime authorization | `A3_ENTRY_LANES_PAUSED` |
 
 ## Next Evidence Required
 
@@ -64,4 +71,4 @@ Plain `933200` stopped: `true`
 - A1/A2/A3 direct-history reconciliation after the forward week
 - PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup
 - A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up
-- A3 Tier-1 compat order delta, PnL, and shadow trend-guard report
+- A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation

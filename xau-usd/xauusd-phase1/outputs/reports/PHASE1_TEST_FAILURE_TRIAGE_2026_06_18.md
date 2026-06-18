@@ -15,7 +15,19 @@ Captured output:
 xau-usd/xauusd-phase1/outputs/reports/PHASE1_PYTEST_D5DD2DE_2026_06_18.txt
 ```
 
+Post A3-emergency-pause captured output:
+
+```text
+xau-usd/xauusd-phase1/outputs/reports/PHASE1_PYTEST_A3_PAUSE_2026_06_18.txt
+```
+
 Result:
+
+```text
+399 passed, 6 failed
+```
+
+The post-pause run has the same result:
 
 ```text
 399 passed, 6 failed

@@ -1,6 +1,8 @@
 # A3 Duplicate Family Events - 2026-06-18
 
-Status: `PASS`
+Artifact integrity status: `PASS`
+Runtime performance status: `FAIL`
+Runtime authorization status: `A3_ENTRY_LANES_PAUSED`
 
 Rows CSV: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_DUPLICATE_FAMILY_EVENTS_2026_06_18.csv`
 
