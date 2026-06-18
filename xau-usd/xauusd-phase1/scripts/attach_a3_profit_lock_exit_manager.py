@@ -32,7 +32,8 @@ ARMED_INPUTS = {
     "InpTargetSymbol": SYMBOL,
     "InpExpectedServerMarker": "Demo",
     "InpAllowedAccountLoginsCsv": ACCOUNT_LOGIN,
-    "InpKillSwitchFileName": "A3_KILL.txt",
+    "InpExecutionKillSwitchFileName": "A3_EXECUTION_KILL.txt",
+    "InpFullStopFileName": "A3_FULL_STOP.txt",
     "InpManagedMagicsCsv": MANAGED_MAGICS,
     "InpPrimaryRungEnabled": "true",
     "InpPrimaryTriggerR": "1.25",
@@ -134,7 +135,7 @@ def attach_a3_profit_lock_exit_manager(
         check("startup_log_present", "PASS" if startup_after["exists"] else "PENDING_RUNTIME_EVIDENCE", startup_after["path"]),
         check("startup_log_armed", startup_armed_status(startup_after), startup_after.get("last_line", "")),
         check("runtime_account_1033669_demo", runtime_account_status(runtime_after), json.dumps(runtime_after.get("account", {}), sort_keys=True)),
-        check("kill_switch_absent_at_attach", kill_switch_status(files_dir), str(files_dir / ARMED_INPUTS["InpKillSwitchFileName"])),
+        check("execution_kill_switch_absent_at_attach", kill_switch_status(files_dir), str(files_dir / ARMED_INPUTS["InpExecutionKillSwitchFileName"])),
     ]
     status = "PASS" if all(item["status"] in {"PASS", "SKIPPED"} for item in checks) else "PENDING"
     payload: dict[str, Any] = {
@@ -548,7 +549,7 @@ def runtime_account_status(state: dict[str, Any]) -> str:
 
 
 def kill_switch_status(files_dir: Path) -> str:
-    return "PASS" if not (files_dir / ARMED_INPUTS["InpKillSwitchFileName"]).exists() else "FAIL"
+    return "PASS" if not (files_dir / ARMED_INPUTS["InpExecutionKillSwitchFileName"]).exists() else "FAIL"
 
 
 def gate_summary(payload: dict[str, Any]) -> str:

@@ -1,0 +1,20 @@
+{
+  "status": "LOCKED",
+  "created_at_utc": "2026-06-18T00:00:00Z",
+  "contract_id": "A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_CONTRACT",
+  "boundary": "Shadow-only A3 signal-quality implementation contract and threshold provenance. No broker action, runtime attach, profile edit, preset arming, or reactivation authorization.",
+  "files": [
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_CONTRACT.md",
+      "sha256": "9cb051d29f67f6efc3e4c6c3c61e19be985c40cc4bda1f04022e6a08b532dfe5"
+    },
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V1_THRESHOLD_PROVENANCE.md",
+      "sha256": "2daac6409c9c8b5c321d7cee6fb0b2bdcbe17ba30dcd447f42d3807f82228163"
+    },
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V1_LOCK_NOTE_2026_06_18.md",
+      "sha256": "88ae7d198ca32510f02a89147b27366151ffe07f2c24b0b3472e3de915769ce8"
+    }
+  ]
+}

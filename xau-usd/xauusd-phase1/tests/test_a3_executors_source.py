@@ -45,7 +45,7 @@ def test_no_committed_a3_execution_enabled_preset_anywhere():
     assert offenders == []
 
 
-def test_a3_login_allowlist_demo_server_live_real_refusal_and_kill_switch():
+def test_a3_login_allowlist_demo_server_live_real_refusal_and_two_tier_kill_switch():
     for path in (EA_T1, EA_T2):
         text = _text(path)
         assert 'input string InpAllowedAccountLoginsCsv = "1033669";' in text
@@ -53,8 +53,11 @@ def test_a3_login_allowlist_demo_server_live_real_refusal_and_kill_switch():
         assert "InpExpectedServerMarker" in text
         assert 'ContainsText(server, "live")' in text
         assert 'ContainsText(server, "real")' in text
-        assert 'input string InpKillSwitchFileName = "A3_KILL.txt";' in text
-        assert "KillSwitchActive()" in text
+        assert 'input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";' in text
+        assert 'input string InpFullStopFileName = "A3_FULL_STOP.txt";' in text
+        assert "FullStopActive()" in text
+        assert "ExecutionKillSwitchActive()" in text
+        assert "EXECUTION_KILL_SWITCH_BLOCK" in text
         assert 'guard_reason = "SCOPE_LOCK_BLOCK";' in text
 
 

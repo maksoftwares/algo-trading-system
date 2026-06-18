@@ -44,6 +44,11 @@ def test_a3_breakout_committed_defaults_are_non_executing_and_a3_scoped():
     assert 'input string InpAllowedAccountLoginsCsv = "1033669";' in base
     assert 'input string InpTargetSymbol = "XAUUSD";' in base
     assert 'input string InpExpectedServerMarker = "Demo";' in base
+    assert 'input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";' in base
+    assert 'input string InpFullStopFileName = "A3_FULL_STOP.txt";' in base
+    assert "FullStopActive()" in base
+    assert "ExecutionKillSwitchActive()" in base
+    assert "EXECUTION_KILL_SWITCH_BLOCK" in base
     assert 'ContainsText(server, "live") || ContainsText(server, "real")' in base
     assert "SCOPE_LOCK_LOGIN_BLOCK" in base
     assert "SCOPE_LOCK_SYMBOL_BLOCK" in base
@@ -103,6 +108,8 @@ def test_a3_breakout_safe_presets_match_magic_and_do_not_arm():
         assert values["InpBrokerActionAllowed"] == "false"
         assert values["InpAllowedAccountLoginsCsv"] == "1033669"
         assert values["InpTargetSymbol"] == "XAUUSD"
+        assert values["InpExecutionKillSwitchFileName"] == "A3_EXECUTION_KILL.txt"
+        assert values["InpFullStopFileName"] == "A3_FULL_STOP.txt"
         assert values["InpMagicNumber"] == magic
         assert values["InpOrderComment"] == comment
         assert values["InpFixedLot"] == "0.01"
@@ -116,6 +123,7 @@ def test_a3_tier1_compat_copies_a2_gate_and_floor_but_keeps_trend_shadow_only():
     compat = _text(EXPERTS / "Account3BreakoutTier1CompatExecutor.mq5")
     base = _text(INCLUDE)
     values = _values(PRESETS / "Account3BreakoutTier1CompatExecutor.safe_xauusd.set")
+    attach_script = _text(ROOT / "scripts" / "attach_a3_tier1_compat_broker_action.py")
 
     assert "#define A3_BREAKOUT_SESSION_GATE_DEFAULT true" in compat
     assert "#define A3_BREAKOUT_STOP_FLOOR_DEFAULT true" in compat
@@ -133,3 +141,5 @@ def test_a3_tier1_compat_copies_a2_gate_and_floor_but_keeps_trend_shadow_only():
     assert values["InpXauStopDistanceFloorEnabled"] == "true"
     assert values["InpTrendGuardEnabled"] == "false"
     assert values["InpTrendGuardShadowOnly"] == "true"
+    assert '"InpExecutionKillSwitchFileName": "A3_EXECUTION_KILL.txt"' in attach_script
+    assert '"InpFullStopFileName": "A3_FULL_STOP.txt"' in attach_script

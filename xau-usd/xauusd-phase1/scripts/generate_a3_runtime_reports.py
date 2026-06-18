@@ -133,8 +133,10 @@ def _source_checks(root: Path) -> dict[str, Any]:
         "ea_t2_no_position_closing_calls": not any(token in t2 for token in ("PositionClose", "PositionModify", "OrderDelete")),
         "ea_t1_mutex_before_order_send": _order(t1, "GlobalVariableSetOnCondition", "OrderSend"),
         "ea_t2_mutex_before_order_send": _order(t2, "GlobalVariableSetOnCondition", "OrderSend"),
-        "ea_t1_kill_switch": _contains(t1, "A3_KILL.txt"),
-        "ea_t2_kill_switch": _contains(t2, "A3_KILL.txt"),
+        "ea_t1_execution_kill_switch": _contains(t1, "A3_EXECUTION_KILL.txt") and _contains(t1, "ExecutionKillSwitchActive()"),
+        "ea_t1_full_stop": _contains(t1, "A3_FULL_STOP.txt") and _contains(t1, "FullStopActive()"),
+        "ea_t2_execution_kill_switch": _contains(t2, "A3_EXECUTION_KILL.txt") and _contains(t2, "ExecutionKillSwitchActive()"),
+        "ea_t2_full_stop": _contains(t2, "A3_FULL_STOP.txt") and _contains(t2, "FullStopActive()"),
         "ea_t1_per_magic_cap": _per_magic_cap_present(t1),
         "ea_t2_per_magic_cap": _per_magic_cap_present(t2),
         "preset_t1_safe": preset_t1.get("InpDryRunOnly") == "true" and preset_t1.get("InpBrokerActionAllowed") == "false",
@@ -221,8 +223,10 @@ def _runtime_report(context: dict[str, Any]) -> dict[str, Any]:
 def _kill_switch_report(context: dict[str, Any]) -> dict[str, Any]:
     source = context["source_checks"]
     checks = [
-        _check("ea_t1_kill_switch_source_guard", PASS if source["ea_t1_kill_switch"] else FAIL, "A3_KILL.txt"),
-        _check("ea_t2_kill_switch_source_guard", PASS if source["ea_t2_kill_switch"] else FAIL, "A3_KILL.txt"),
+        _check("ea_t1_execution_kill_switch_source_guard", PASS if source["ea_t1_execution_kill_switch"] else FAIL, "A3_EXECUTION_KILL.txt"),
+        _check("ea_t1_full_stop_source_guard", PASS if source["ea_t1_full_stop"] else FAIL, "A3_FULL_STOP.txt"),
+        _check("ea_t2_execution_kill_switch_source_guard", PASS if source["ea_t2_execution_kill_switch"] else FAIL, "A3_EXECUTION_KILL.txt"),
+        _check("ea_t2_full_stop_source_guard", PASS if source["ea_t2_full_stop"] else FAIL, "A3_FULL_STOP.txt"),
         _check("runtime_kill_switch_drill", PENDING, "No A3 dry-run terminal startup rows exist yet; drill must run before arming."),
     ]
     return _payload("A3 Kill Switch Drill Report", context, checks)

@@ -1,7 +1,7 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T08:50:42.669652Z`
-Artifact generation base commit: `b7ea9823ff6c6a78c05a01034498eaeeaccc2d98`
+Generated UTC: `2026-06-18T10:42:49.179639Z`
+Artifact generation base commit: `e3e3e7a49f279bc22c14b5cf44e49a98fab20434`
 Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
@@ -41,6 +41,8 @@ Open positions: `0`
 Pending orders: `0`
 Artifact integrity: `PASS`
 Runtime performance: `FAIL`
+Shadow candidate performance: `NOT_EVALUATED`
+Pause artifact/runtime consistency: `PASS`
 Emergency pause report: `PASS`
 Test suite: `PASS` (415 passed, 0 failed)
 Family mutex: `NOT_IMPLEMENTED`

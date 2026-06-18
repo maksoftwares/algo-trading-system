@@ -31,8 +31,11 @@ def test_profit_lock_manager_safe_defaults_and_scope_locks():
     assert 'input string InpExpectedServerMarker = "Demo";' in text
     assert 'input string InpAllowedAccountLoginsCsv = "1033669";' in text
     assert 'input string InpManagedMagicsCsv = "933200,933400";' in text
-    assert 'input string InpKillSwitchFileName = "A3_KILL.txt";' in text
-    assert "KillSwitchActive()" in text
+    assert 'input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";' in text
+    assert 'input string InpFullStopFileName = "A3_FULL_STOP.txt";' in text
+    assert "FullStopActive()" in text
+    assert "ExecutionKillSwitchActive()" in text
+    assert "EXECUTION_KILL_WOULD_BLOCK_SLTP" in text
     assert 'CsvContainsTextToken(InpManagedMagicsCsv, "933300")' in text
     assert "if(magic == 933300)" in text
 
@@ -72,6 +75,8 @@ def test_profit_lock_safe_preset_is_non_executing_and_excludes_improved_lane():
     assert values["InpDryRunOnly"] == "true"
     assert values["InpManageActionAllowed"] == "false"
     assert values["InpAllowedAccountLoginsCsv"] == "1033669"
+    assert values["InpExecutionKillSwitchFileName"] == "A3_EXECUTION_KILL.txt"
+    assert values["InpFullStopFileName"] == "A3_FULL_STOP.txt"
     assert values["InpManagedMagicsCsv"] == "933200,933400"
     assert "933300" not in values["InpManagedMagicsCsv"]
     assert values["InpPrimaryRungEnabled"] == "true"
@@ -88,6 +93,8 @@ def test_profit_lock_attach_script_requires_gate_and_arms_only_manager():
     assert "Profit-lock replay gate is not PASS" in text
     assert '"InpDryRunOnly": "false"' in text
     assert '"InpManageActionAllowed": "true"' in text
+    assert '"InpExecutionKillSwitchFileName": "A3_EXECUTION_KILL.txt"' in text
+    assert '"InpFullStopFileName": "A3_FULL_STOP.txt"' in text
     assert '"InpManagedMagicsCsv": MANAGED_MAGICS' in text
     assert 'EXCLUDED_MAGIC = "933300"' in text
     assert "TRADE_ACTION_DEAL" not in text

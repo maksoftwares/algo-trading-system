@@ -72,8 +72,11 @@ def _source(magic: str, namespace: str) -> str:
     return f'''
 input long InpMagicNumber = {magic};
 input string InpAllowedAccountLoginsCsv = "1033669";
-input string InpKillSwitchFileName = "A3_KILL.txt";
+input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";
+input string InpFullStopFileName = "A3_FULL_STOP.txt";
 input double InpMaxEstimatedCostR = 0.15;
+bool FullStopActive() {{ return true; }}
+bool ExecutionKillSwitchActive() {{ return false; }}
 bool PositionMagicMatches(long magic) {{ return magic == InpMagicNumber; }}
 void OnTick() {{
   if((int)PositionGetInteger(POSITION_MAGIC) == InpMagicNumber) {{}}

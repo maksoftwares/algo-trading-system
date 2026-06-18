@@ -1,5 +1,6 @@
 {
   "a3_tier1": {
+    "authorization_status": "A3_ENTRY_LANES_PAUSED",
     "containment_status": "NOT_IMPLEMENTED",
     "current_runtime_state": {
       "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
@@ -17,6 +18,7 @@
     "emergency_pause_status": "PASS",
     "family_mutex_status": "NOT_IMPLEMENTED",
     "governance_note": "Historical owner override is preserved as audit evidence only; current runtime authorization is paused.",
+    "historical_attach_status": "PASS",
     "historical_owner_authorization": {
       "933400_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
       "attachment_status": "PASS",
@@ -41,8 +43,16 @@
       "wins": 1
     },
     "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
-    "shadow_hypothesis_status": "REGISTERED_LOCKED",
-    "status": "PASS"
+    "runtime_performance_status": "FAIL",
+    "shadow_candidate_performance_status": "NOT_EVALUATED",
+    "shadow_hypothesis_manifest": {
+      "doc": "docs/A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md",
+      "manifest": "outputs/manifests/A3_SIGNAL_QUALITY_HYPOTHESES_V1.sha256.json",
+      "note": "Doc header still says PRE_REGISTERED_LOCK_PENDING_MANIFEST while manifest is LOCKED; discrepancy recorded without modifying locked file.",
+      "sha256": "9cb1f1003ca471d60438d95a30c6fc6d0a8cb83fedcda27017421fb522f77229",
+      "status": "REGISTERED_LOCKED"
+    },
+    "shadow_hypothesis_status": "REGISTERED_LOCKED"
   },
   "accounts": {
     "A1": {
@@ -96,9 +106,10 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
-      "artifact_commit_or_release_id": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
-      "artifact_generation_base_commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
+      "artifact_commit_or_release_id": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
+      "artifact_generation_base_commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
       "artifact_integrity_status": "PASS",
+      "authorization_status": "A3_ENTRY_LANES_PAUSED",
       "containment_status": "NOT_IMPLEMENTED",
       "current_runtime_state": {
         "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
@@ -115,9 +126,11 @@
       "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
       "emergency_pause_report": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
       "emergency_pause_status": "PASS",
+      "emergency_pause_verify_only_report": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_VERIFY_ONLY_2026_06_18.json",
       "evidence_window_end_utc": "2026-06-18T07:44:27.604179Z",
       "evidence_window_start_utc": "2026-06-16T00:00:00Z",
       "family_mutex_status": "NOT_IMPLEMENTED",
+      "historical_attach_status": "PASS",
       "historical_owner_authorization": {
         "933400_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
         "attachment_status": "PASS",
@@ -134,6 +147,7 @@
       "improved_933300_paused": true,
       "login": "1033669",
       "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
+      "pause_artifact_runtime_consistency_status": "PASS",
       "plain_933200_stopped": true,
       "profit_lock_dryrun_disarmed": true,
       "reactivation_gate_status": "BLOCKED",
@@ -152,8 +166,15 @@
       "runtime_performance_status": "FAIL",
       "runtime_snapshot_at_utc": "2026-06-18T07:44:27.604179Z",
       "server": "Capital.ComMena-Demo",
+      "shadow_candidate_performance_status": "NOT_EVALUATED",
+      "shadow_hypothesis_manifest": {
+        "doc": "docs/A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md",
+        "manifest": "outputs/manifests/A3_SIGNAL_QUALITY_HYPOTHESES_V1.sha256.json",
+        "note": "Doc header still says PRE_REGISTERED_LOCK_PENDING_MANIFEST while manifest is LOCKED; discrepancy recorded without modifying locked file.",
+        "sha256": "9cb1f1003ca471d60438d95a30c6fc6d0a8cb83fedcda27017421fb522f77229",
+        "status": "REGISTERED_LOCKED"
+      },
       "shadow_hypothesis_status": "REGISTERED_LOCKED",
-      "source_runtime_parity_status": "PASS",
       "test_suite_status": {
         "failed": 0,
         "passed": 415,
@@ -177,7 +198,7 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-18T08:50:42.669652Z",
+  "generated_at_utc": "2026-06-18T10:42:49.179639Z",
   "next_evidence_required": [
     "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
     "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
@@ -241,13 +262,15 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
-    "main_remote_commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98"
+    "commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
+    "main_remote_commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434"
   },
   "schema_version": "project_status_summary_v2",
   "source_artifacts": {
     "a3_emergency_pause": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
+    "a3_emergency_pause_verify_only": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_VERIFY_ONLY_2026_06_18.json",
     "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
+    "a3_repair_p1_p2_implementation": "xau-usd/xauusd-phase1/outputs/reports/A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json",
     "a3_review_followup": "xau-usd/xauusd-phase1/outputs/reports/A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json",
     "a3_tier1_attachment": "xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json",
     "final_review_b7ea982": "FINAL_REVIEW_B7EA982_A3_REPAIR_IMPLEMENTATION_PLAN_2026_06_18.md",

@@ -1,0 +1,28 @@
+{
+  "status": "PASS_REPO_ONLY_P1_P2",
+  "created_at_utc": "2026-06-18T00:00:00Z",
+  "boundary": "Repo-only/shadow-only. No MT5 chart, terminal profile, order, lot, SLTP, preset arming, or account change.",
+  "completed": {
+    "p1_1_pause_script_hardened": "PASS",
+    "p1_1_verify_only_status": "ALREADY_PAUSED",
+    "p1_2_two_tier_kill_semantics": "PASS",
+    "p1_3_arming_audit": "PASS",
+    "p1_4_status_semantics": "PASS",
+    "p2_contract_and_provenance_locked": "PASS"
+  },
+  "verification": {
+    "phase1_pytest": "425 passed",
+    "phase1_safety_audit": "PASS",
+    "phase1_arming_audit": "PASS",
+    "py_compile_changed_scripts": "PASS",
+    "phase0r_pytest": "24 passed",
+    "phase2b_pytest": "2 passed",
+    "phase3_pytest": "37 passed",
+    "wr50_pytest": "15 passed",
+    "phase0_pytest": "520 passed, 1 failed: unrelated h1_btc_risk_pressure_gold_followthrough_v1 synthetic-signal failure; no phase0 files changed"
+  },
+  "not_done": [
+    "P3 tick engine, shadow observer, and parity tooling",
+    "P4 mutex and containment, gated on a future passing P3 shadow edge"
+  ]
+}

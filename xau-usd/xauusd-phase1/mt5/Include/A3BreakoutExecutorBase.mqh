@@ -54,7 +54,8 @@ input bool InpBrokerActionAllowed = false;
 input string InpTargetSymbol = "XAUUSD";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "1033669";
-input string InpKillSwitchFileName = "A3_KILL.txt";
+input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";
+input string InpFullStopFileName = "A3_FULL_STOP.txt";
 input int InpMagicNumber = A3_BREAKOUT_DEFAULT_MAGIC;
 input string InpOrderComment = A3_BREAKOUT_DEFAULT_COMMENT;
 input string InpSignalLogFileName = A3_BREAKOUT_SIGNAL_LOG;
@@ -179,11 +180,11 @@ double EstimatedCostRForObservation(const Phase1BreakoutRetestObservation &obser
    return spread_points * point / risk_price;
 }
 
-bool KillSwitchActive()
+bool KillSwitchFileContainsKill(const string file_name)
 {
-   if(!FileIsExist(InpKillSwitchFileName))
+   if(!FileIsExist(file_name))
       return false;
-   int handle = FileOpen(InpKillSwitchFileName, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
+   int handle = FileOpen(file_name, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
    if(handle == INVALID_HANDLE)
       return false;
    string content = "";
@@ -191,6 +192,16 @@ bool KillSwitchActive()
       content += " " + FileReadString(handle);
    FileClose(handle);
    return ContainsText(content, "KILL");
+}
+
+bool FullStopActive()
+{
+   return KillSwitchFileContainsKill(InpFullStopFileName);
+}
+
+bool ExecutionKillSwitchActive()
+{
+   return KillSwitchFileContainsKill(InpExecutionKillSwitchFileName);
 }
 
 bool AccountLoginWhitelisted()
@@ -245,9 +256,9 @@ bool ScopeLocksPass(string &guard_reason)
       guard_reason = "SCOPE_LOCK_LOGIN_BLOCK";
       return false;
    }
-   if(KillSwitchActive())
+   if(FullStopActive())
    {
-      guard_reason = "SCOPE_LOCK_KILL_SWITCH_BLOCK";
+      guard_reason = "SCOPE_LOCK_FULL_STOP_BLOCK";
       return false;
    }
    guard_reason = "PASS";
@@ -282,7 +293,8 @@ bool EnsureStartupLogHeader()
       "trade_session_end_hour",
       "min_seconds_between_orders",
       "xau_stop_distance_floor_enabled",
-      "kill_switch_file",
+      "execution_kill_switch_file",
+      "full_stop_file",
       "trend_guard_enabled",
       "trend_guard_shadow_only",
       "breakeven_enabled",
@@ -439,7 +451,8 @@ bool WriteStartupRow(const string status_text)
       IntegerToString(InpTradeSessionEndHour),
       IntegerToString(InpMinSecondsBetweenOrders),
       BoolText(InpXauStopDistanceFloorEnabled),
-      InpKillSwitchFileName,
+      InpExecutionKillSwitchFileName,
+      InpFullStopFileName,
       BoolText(InpTrendGuardEnabled),
       BoolText(InpTrendGuardShadowOnly),
       BoolText(InpBreakevenEnabled),
@@ -604,6 +617,11 @@ bool TradingGuardsPass(
    }
    if(!ScopeLocksPass(guard_reason))
       return false;
+   if(ExecutionKillSwitchActive())
+   {
+      guard_reason = "EXECUTION_KILL_SWITCH_BLOCK";
+      return false;
+   }
    if(InpDryRunOnly || !InpBrokerActionAllowed)
    {
       guard_reason = "ARMING_DISABLED";
@@ -711,6 +729,11 @@ bool SendMarketOrder(const Phase1BreakoutRetestObservation &observation, const d
 {
    MqlTradeResult result;
    ZeroMemory(result);
+   if(ExecutionKillSwitchActive())
+   {
+      WriteOrderLogRow("GUARD_BLOCK", observation, 0.0, 0.0, 0.0, 0.0, result, "EXECUTION_KILL_SWITCH_BLOCK", spread_points, estimated_cost_r, observation.stop_distance_points);
+      return false;
+   }
    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
@@ -913,6 +936,11 @@ bool MoveStopToBreakeven(const ulong ticket, const ENUM_POSITION_TYPE type, cons
    MqlTradeResult result;
    ZeroMemory(request);
    ZeroMemory(result);
+   if(ExecutionKillSwitchActive())
+   {
+      WriteManagementRow("BREAKEVEN_EXECUTION_KILL_BLOCK", ticket, type, volume, 0.0, open_price, 0.0, current_sl, new_sl, tp, trigger_r, result, "EXECUTION_KILL_SWITCH_BLOCK");
+      return false;
+   }
    request.action = TRADE_ACTION_SLTP;
    request.position = ticket;
    request.symbol = _Symbol;
@@ -934,6 +962,11 @@ bool TakePartialProfit(const ulong ticket, const ENUM_POSITION_TYPE type, const 
    double requested_volume = NormalizePartialVolume(volume * InpPartialCloseFraction);
    MqlTradeResult result;
    ZeroMemory(result);
+   if(ExecutionKillSwitchActive())
+   {
+      WriteManagementRow("PARTIAL_EXECUTION_KILL_BLOCK", ticket, type, volume, requested_volume, open_price, 0.0, current_sl, current_sl, tp, trigger_r, result, "EXECUTION_KILL_SWITCH_BLOCK");
+      return false;
+   }
    if(requested_volume < min_volume || volume - requested_volume < min_volume)
    {
       GlobalVariableSet(state_name, 1.0);

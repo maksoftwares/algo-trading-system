@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 from datetime import datetime, timezone
@@ -29,6 +30,8 @@ def generate_project_status_summary(
     a3_attachment_report = phase1_reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
     a3_review_followup_report = phase1_reports / "A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json"
     a3_pause_report = phase1_reports / "A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json"
+    a3_pause_verify_report = phase1_reports / "A3_EMERGENCY_PAUSE_VERIFY_ONLY_2026_06_18.json"
+    a3_p1_p2_report = phase1_reports / "A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json"
 
     quarantine = _read_json(quarantine_report)
     a3_attachment = _read_json(a3_attachment_report)
@@ -42,7 +45,8 @@ def generate_project_status_summary(
     a3_artifact_integrity = a3_review_followup.get("artifact_integrity_status", a3_pause.get("artifact_integrity_status", "MISSING"))
     a3_runtime_performance = a3_review_followup.get("runtime_performance_status", a3_pause.get("runtime_performance_status", "MISSING"))
     test_suite_status = _test_suite_status(phase1_reports)
-    shadow_hypothesis_status = _shadow_hypothesis_status(phase1_root)
+    shadow_hypothesis = _shadow_hypothesis_status(phase1_root)
+    shadow_hypothesis_status = shadow_hypothesis["status"]
 
     target_charts = _chart_summary(quarantine.get("after_target_charts", quarantine.get("target_charts", [])))
     protected_charts = _chart_summary(quarantine.get("after_protected_charts", quarantine.get("protected_charts", [])))
@@ -74,6 +78,8 @@ def generate_project_status_summary(
             "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
             "a3_review_followup": _rel(repo_root, a3_review_followup_report),
             "a3_emergency_pause": _rel(repo_root, a3_pause_report),
+            "a3_emergency_pause_verify_only": _rel(repo_root, a3_pause_verify_report),
+            "a3_repair_p1_p2_implementation": _rel(repo_root, a3_p1_p2_report),
             "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
             "final_review_b7ea982": "FINAL_REVIEW_B7EA982_A3_REPAIR_IMPLEMENTATION_PLAN_2026_06_18.md",
             "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
@@ -108,10 +114,13 @@ def generate_project_status_summary(
                 "effective_runtime_authorization": effective_a3_authorization,
                 "tier1_compat_demo_broker_action": historical_a3_authorization["933400_demo_broker_action"],
                 "tier1_compat_attachment_status": a3_attachment.get("status", "MISSING"),
+                "historical_attach_status": a3_attachment.get("status", "MISSING"),
                 "review_followup_status": a3_review_followup.get("status", "MISSING"),
                 "artifact_integrity_status": a3_artifact_integrity,
                 "runtime_performance_status": a3_runtime_performance,
+                "authorization_status": effective_a3_authorization,
                 "runtime_authorization_status": effective_a3_authorization,
+                "shadow_candidate_performance_status": "NOT_EVALUATED",
                 "review_followup_summary": a3_review_followup.get("summary", {}),
                 "plain_933200_stopped": _a3_lane_paused(a3_review_followup, "933200"),
                 "improved_933300_paused": _a3_lane_paused(a3_review_followup, "933300"),
@@ -119,16 +128,18 @@ def generate_project_status_summary(
                 "profit_lock_dryrun_disarmed": _profit_lock_disarmed(a3_review_followup),
                 "emergency_pause_status": a3_pause.get("status", "MISSING"),
                 "emergency_pause_report": _rel(repo_root, a3_pause_report),
+                "emergency_pause_verify_only_report": _rel(repo_root, a3_pause_verify_report),
                 "evidence_window_start_utc": a3_review_followup.get("window_start_utc", ""),
                 "evidence_window_end_utc": a3_review_followup.get("window_end_utc", ""),
                 "runtime_snapshot_at_utc": current_a3_runtime.get("verified_at_utc", ""),
                 "artifact_generation_base_commit": repo.get("commit", ""),
                 "artifact_commit_or_release_id": repo.get("commit", ""),
-                "source_runtime_parity_status": _source_runtime_parity_status(a3_review_followup, a3_pause),
+                "pause_artifact_runtime_consistency_status": _pause_artifact_runtime_consistency_status(a3_review_followup, a3_pause),
                 "test_suite_status": test_suite_status,
                 "family_mutex_status": "NOT_IMPLEMENTED",
                 "containment_status": "NOT_IMPLEMENTED",
                 "shadow_hypothesis_status": shadow_hypothesis_status,
+                "shadow_hypothesis_manifest": shadow_hypothesis,
                 "reactivation_gate_status": "BLOCKED",
                 "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
             },
@@ -146,7 +157,10 @@ def generate_project_status_summary(
             "rollback_required_now": False,
         },
         "a3_tier1": {
-            "status": a3_attachment.get("status", "MISSING"),
+            "historical_attach_status": a3_attachment.get("status", "MISSING"),
+            "runtime_performance_status": a3_runtime_performance,
+            "authorization_status": effective_a3_authorization,
+            "shadow_candidate_performance_status": "NOT_EVALUATED",
             "historical_owner_authorization": historical_a3_authorization,
             "owner_authorized_demo_broker_action": (
                 historical_a3_authorization["933400_demo_broker_action"] == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION"
@@ -160,6 +174,7 @@ def generate_project_status_summary(
             "family_mutex_status": "NOT_IMPLEMENTED",
             "containment_status": "NOT_IMPLEMENTED",
             "shadow_hypothesis_status": shadow_hypothesis_status,
+            "shadow_hypothesis_manifest": shadow_hypothesis,
             "reactivation_gate_status": "BLOCKED",
         },
         "authorization": {
@@ -350,16 +365,41 @@ def _test_suite_status(report_dir: Path) -> dict[str, Any]:
     }
 
 
-def _shadow_hypothesis_status(phase1_root: Path) -> str:
+def _shadow_hypothesis_status(phase1_root: Path) -> dict[str, Any]:
     doc = phase1_root / "docs" / "A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md"
     manifest = phase1_root / "outputs" / "manifests" / "A3_SIGNAL_QUALITY_HYPOTHESES_V1.sha256.json"
-    if doc.exists() and manifest.exists():
-        return "REGISTERED_LOCKED"
-    return "NOT_REGISTERED"
+    if not doc.exists() or not manifest.exists():
+        return {"status": "NOT_REGISTERED", "doc": str(doc), "manifest": str(manifest), "reason": "doc_or_manifest_missing"}
+    payload = _read_json(manifest)
+    if payload.get("status") != "LOCKED":
+        return {"status": "MANIFEST_NOT_LOCKED", "doc": str(doc), "manifest": str(manifest), "manifest_status": payload.get("status", "MISSING")}
+    digest = hashlib.sha256(doc.read_bytes()).hexdigest()
+    expected = str(payload.get("sha256", ""))
+    if digest != expected:
+        return {
+            "status": "HASH_MISMATCH",
+            "doc": str(doc),
+            "manifest": str(manifest),
+            "sha256": digest,
+            "expected_sha256": expected,
+        }
+    text_head = "\n".join(doc.read_text(encoding="utf-8", errors="replace").splitlines()[:8])
+    note = ""
+    if "PRE_REGISTERED_LOCK_PENDING_MANIFEST" in text_head:
+        note = "Doc header still says PRE_REGISTERED_LOCK_PENDING_MANIFEST while manifest is LOCKED; discrepancy recorded without modifying locked file."
+    return {
+        "status": "REGISTERED_LOCKED",
+        "doc": "docs/A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md",
+        "manifest": "outputs/manifests/A3_SIGNAL_QUALITY_HYPOTHESES_V1.sha256.json",
+        "sha256": digest,
+        "note": note,
+    }
 
 
-def _source_runtime_parity_status(review: dict[str, Any], pause: dict[str, Any]) -> str:
+def _pause_artifact_runtime_consistency_status(review: dict[str, Any], pause: dict[str, Any]) -> str:
     if review.get("artifact_integrity_status") == "PASS" and pause.get("status") == "PASS":
+        return "PASS"
+    if review.get("artifact_integrity_status") == "PASS" and pause.get("status") == "ALREADY_PAUSED":
         return "PASS"
     if not review and not pause:
         return "MISSING"
@@ -458,6 +498,8 @@ def _render_markdown(summary: dict[str, Any]) -> str:
             f"Pending orders: `{runtime_state.get('pending_orders', 'n/a') if isinstance(runtime_state, dict) else 'n/a'}`",
             f"Artifact integrity: `{a3.get('artifact_integrity_status', 'MISSING')}`",
             f"Runtime performance: `{a3.get('runtime_performance_status', 'MISSING')}`",
+            f"Shadow candidate performance: `{a3.get('shadow_candidate_performance_status', 'MISSING')}`",
+            f"Pause artifact/runtime consistency: `{a3.get('pause_artifact_runtime_consistency_status', 'MISSING')}`",
             f"Emergency pause report: `{a3.get('emergency_pause_status', 'MISSING')}`",
             f"Test suite: `{test_suite.get('status', 'UNKNOWN')}` ({test_suite.get('passed', 'n/a')} passed, {test_suite.get('failed', 'n/a')} failed)",
             f"Family mutex: `{a3.get('family_mutex_status', 'MISSING')}`",

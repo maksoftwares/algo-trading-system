@@ -12,7 +12,8 @@ input bool InpBrokerActionAllowed = false;
 input string InpTargetSymbol = "XAUUSD";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "1033669";
-input string InpKillSwitchFileName = "A3_KILL.txt";
+input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";
+input string InpFullStopFileName = "A3_FULL_STOP.txt";
 input int InpMagicNumber = 933100;
 input string InpOrderComment = "RDSTRUCT_V1";
 input string InpSignalLogFileName = "a3_rdstruct_v1_signal_log.csv";
@@ -181,7 +182,8 @@ bool EnsureStartupLogHeader()
       "absolute_reject_cost_R",
       "max_measured_spread_points",
       "min_seconds_between_orders",
-      "kill_switch_file",
+      "execution_kill_switch_file",
+      "full_stop_file",
       "startup_status"
    };
    return AppendCsvRow(InpStartupLogFileName, header);
@@ -304,7 +306,8 @@ bool WriteStartupRow(const string status_text)
       DoubleToString(InpAbsoluteRejectCostR, 4),
       DoubleToString(InpMaxMeasuredSpreadPoints, 2),
       IntegerToString(InpMinSecondsBetweenOrders),
-      InpKillSwitchFileName,
+      InpExecutionKillSwitchFileName,
+      InpFullStopFileName,
       status_text
    };
    return AppendCsvRow(InpStartupLogFileName, row);
@@ -716,11 +719,11 @@ double EstimatedCostRForObservation(const A3RoundRetestObservation &observation,
    return spread_points * point / risk_price;
 }
 
-bool KillSwitchActive()
+bool KillSwitchFileContainsKill(const string file_name)
 {
-   if(!FileIsExist(InpKillSwitchFileName))
+   if(!FileIsExist(file_name))
       return false;
-   int handle = FileOpen(InpKillSwitchFileName, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
+   int handle = FileOpen(file_name, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
    if(handle == INVALID_HANDLE)
       return false;
    string content = "";
@@ -728,6 +731,16 @@ bool KillSwitchActive()
       content += " " + FileReadString(handle);
    FileClose(handle);
    return ContainsText(content, "KILL");
+}
+
+bool FullStopActive()
+{
+   return KillSwitchFileContainsKill(InpFullStopFileName);
+}
+
+bool ExecutionKillSwitchActive()
+{
+   return KillSwitchFileContainsKill(InpExecutionKillSwitchFileName);
 }
 
 bool AccountLoginWhitelisted()
@@ -753,7 +766,7 @@ bool ScopeLocksPass(string &guard_reason)
       guard_reason = "SCOPE_LOCK_BLOCK";
       return false;
    }
-   if(KillSwitchActive())
+   if(FullStopActive())
    {
       guard_reason = "SCOPE_LOCK_BLOCK";
       return false;
@@ -1062,6 +1075,11 @@ bool TradingGuardsPass(
    }
    if(!ScopeLocksPass(guard_reason))
       return false;
+   if(ExecutionKillSwitchActive())
+   {
+      guard_reason = "EXECUTION_KILL_SWITCH_BLOCK";
+      return false;
+   }
    guard_reason = "PASS";
    return true;
 }
@@ -1150,6 +1168,11 @@ bool SendMarketOrder(const A3RoundRetestObservation &observation, const double s
 {
    MqlTradeResult result;
    ZeroMemory(result);
+   if(ExecutionKillSwitchActive())
+   {
+      WriteOrderLogRow("GUARD_BLOCK", observation, 0.0, 0.0, 0.0, 0.0, result, "EXECUTION_KILL_SWITCH_BLOCK", "", spread_points, estimated_cost_r, observation.stop_distance_points);
+      return false;
+   }
    double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);

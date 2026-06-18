@@ -6,7 +6,8 @@ input bool InpManageActionAllowed = false;
 input string InpTargetSymbol = "XAUUSD";
 input string InpExpectedServerMarker = "Demo";
 input string InpAllowedAccountLoginsCsv = "1033669";
-input string InpKillSwitchFileName = "A3_KILL.txt";
+input string InpExecutionKillSwitchFileName = "A3_EXECUTION_KILL.txt";
+input string InpFullStopFileName = "A3_FULL_STOP.txt";
 input string InpManagedMagicsCsv = "933200,933400";
 input bool InpPrimaryRungEnabled = true;
 input double InpPrimaryTriggerR = 1.25;
@@ -95,11 +96,11 @@ bool AppendCsvRow(const string file_name, const string &values[])
    return true;
 }
 
-bool KillSwitchActive()
+bool KillSwitchFileContainsKill(const string file_name)
 {
-   if(!FileIsExist(InpKillSwitchFileName))
+   if(!FileIsExist(file_name))
       return false;
-   int handle = FileOpen(InpKillSwitchFileName, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
+   int handle = FileOpen(file_name, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
    if(handle == INVALID_HANDLE)
       return false;
    string content = "";
@@ -107,6 +108,16 @@ bool KillSwitchActive()
       content += " " + FileReadString(handle);
    FileClose(handle);
    return ContainsText(content, "KILL");
+}
+
+bool FullStopActive()
+{
+   return KillSwitchFileContainsKill(InpFullStopFileName);
+}
+
+bool ExecutionKillSwitchActive()
+{
+   return KillSwitchFileContainsKill(InpExecutionKillSwitchFileName);
 }
 
 bool AccountLoginWhitelisted()
@@ -234,7 +245,8 @@ void WriteStartupRow(const string status, const string reason)
       InpManagedMagicsCsv,
       BoolText(InpDryRunOnly),
       BoolText(InpManageActionAllowed),
-      InpKillSwitchFileName,
+      InpExecutionKillSwitchFileName,
+      InpFullStopFileName,
       BoolText(InpPrimaryRungEnabled),
       DoubleToString(InpPrimaryTriggerR, 2),
       DoubleToString(InpPrimaryLockR, 2),
@@ -354,6 +366,12 @@ void ManagePosition()
       return;
    }
 
+   if(ExecutionKillSwitchActive())
+   {
+      WriteManagementRow("EXECUTION_KILL_WOULD_BLOCK_SLTP", ticket, magic, type, volume, open_price, initial_sl, current_sl, desired_sl, tp, unrealized_r, trigger_r, lock_r, rung_name, 0, "execution kill switch active");
+      return;
+   }
+
    if(InpDryRunOnly || !InpManageActionAllowed)
    {
       string dry_state = PositionStateName("A3PL_DRYRUN_LOGGED", ticket);
@@ -392,9 +410,9 @@ bool ScopeLocksPass(string &reason)
       reason = "magic 933300 is excluded while internal exit logic is enabled";
       return false;
    }
-   if(KillSwitchActive())
+   if(FullStopActive())
    {
-      reason = "kill switch is active";
+      reason = "full stop is active";
       return false;
    }
    reason = "OK";
@@ -434,7 +452,7 @@ void OnDeinit(const int reason)
 
 void OnTimer()
 {
-   if(KillSwitchActive())
+   if(FullStopActive())
       return;
    for(int index = PositionsTotal() - 1; index >= 0; index--)
    {

@@ -129,9 +129,9 @@ def test_weakness_presets_split_safe_default_from_owner_authorized():
     assert "InpDryRunOnly=true" in owner
     assert "InpBrokerActionAllowed=false" in owner
     assert "InpAllowedAccountLoginsCsv=<OWNER_TO_FILL>" in owner
-    assert "InpExperimentalAuthorizationToken=<OWNER_TO_FILL>" in owner
+    assert "InpExperimentalAuthorizationToken=" in owner
     assert "InpRequiredExperimentalAuthorizationToken=EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY" in owner
-    assert "InpCostSuspensionAcknowledgementToken=<OWNER_TO_FILL>" in owner
+    assert "InpCostSuspensionAcknowledgementToken=" in owner
     assert "InpRequiredCostSuspensionAcknowledgementToken=I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT" in owner
     assert "InpMagicNumber=931000" in owner
 

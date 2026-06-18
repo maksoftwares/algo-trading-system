@@ -1,15 +1,16 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import shutil
 import subprocess
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 
 DEFAULT_PORTABLE_ROOT = Path("C:/MT5PortableRepairLane")
@@ -17,24 +18,18 @@ DEFAULT_OUTPUT_JSON = Path("outputs") / "reports" / "A3_EMERGENCY_PAUSE_APPLIED_
 STAMP = "20260618"
 ACCOUNT_LOGIN = 1033669
 SYMBOL = "XAUUSD"
-A3_ENTRY_MAGICS = {933200, 933300, 933400}
+A3_MAGIC_LOW = 933000
+A3_MAGIC_HIGH = 933999
+A3_ENTRY_MAGICS = {933000, 933100, 933200, 933300, 933400}
+Mode = Literal["verify-only", "dry-run", "apply"]
 
-PAUSE_TARGETS = {
-    "Account3BreakoutImprovedExecutor": {
-        "InpRunId": f"A3_BREAKOUT_IMPROVED_V1_PAUSED_{STAMP}",
-        "InpDryRunOnly": "true",
-        "InpBrokerActionAllowed": "false",
-    },
-    "Account3BreakoutTier1CompatExecutor": {
-        "InpRunId": f"A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_{STAMP}",
-        "InpDryRunOnly": "true",
-        "InpBrokerActionAllowed": "false",
-    },
-    "Account3ProfitLockExitManager": {
-        "InpRunId": f"A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_{STAMP}",
-        "InpDryRunOnly": "true",
-        "InpManageActionAllowed": "false",
-    },
+KNOWN_PAUSED_RUN_IDS = {
+    "Account3BreakoutPlainExecutor": f"A3_BREAKOUT_PLAIN_V1_PAUSED_{STAMP}",
+    "Account3BreakoutImprovedExecutor": f"A3_BREAKOUT_IMPROVED_V1_PAUSED_{STAMP}",
+    "Account3BreakoutTier1CompatExecutor": f"A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_{STAMP}",
+    "Account3RoundRetestGuardedExecutor": f"A3_RDGUARD_V1_PAUSED_{STAMP}",
+    "Account3RoundRetestStructuredExecutor": f"A3_RDSTRUCT_V1_PAUSED_{STAMP}",
+    "Account3ProfitLockExitManager": f"A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_{STAMP}",
 }
 
 
@@ -51,13 +46,26 @@ class ChartRow:
     manage_action_allowed: str
     run_id: str
     order_comment: str
+    inputs: dict[str, str]
+
+
+@dataclass(frozen=True)
+class PlannedChartChange:
+    chart: str
+    expert: str
+    before: dict[str, Any]
+    replacements: dict[str, str]
+    changed: bool
+    before_sha256: str
+    after_sha256: str
 
 
 def apply_a3_emergency_pause(
     phase1_root: Path,
     portable_root: Path = DEFAULT_PORTABLE_ROOT,
     output_json: Path | None = None,
-    launch: bool = True,
+    mode: Mode = "verify-only",
+    launch: bool = False,
     wait_seconds: int = 45,
 ) -> dict[str, Any]:
     phase1_root = phase1_root.resolve()
@@ -74,89 +82,129 @@ def apply_a3_emergency_pause(
 
     before_broker = broker_state(terminal_exe)
     before_charts = chart_inventory(profile_dir)
-    target_errors = required_targets_status(before_charts)
-    if target_errors:
-        raise RuntimeError("; ".join(target_errors))
+    before_hashes = chart_hashes(profile_dir)
+    targets = discover_a3_action_targets(before_charts)
+    plans = plan_pause_changes(targets)
 
-    terminal_closed = close_terminal(terminal_exe)
-    profile_backup = backup_profile(profile_dir, portable_root)
-
-    changed_charts: list[dict[str, Any]] = []
-    for row in before_charts:
-        if row.expert not in PAUSE_TARGETS:
-            continue
-        path = Path(row.path)
-        before_text = read_text_any(path)
-        after_text = update_chart_inputs(before_text, PAUSE_TARGETS[row.expert])
-        if after_text != before_text:
-            path.write_text(after_text, encoding="utf-8")
-        changed_charts.append(
-            {
-                "chart": row.chart,
-                "expert": row.expert,
-                "before": row.__dict__,
-                "after_inputs": dict(PAUSE_TARGETS[row.expert]),
-                "changed": after_text != before_text,
-            }
-        )
-
-    after_profile_edit = chart_inventory(profile_dir)
-    launch_started_at = now_utc()
-    relaunched = False
-    if launch:
-        subprocess.Popen([str(terminal_exe), "/portable"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        relaunched = True
-        time.sleep(max(0, min(wait_seconds, 15)))
-        wait_for_safe_startup(files_dir, wait_seconds)
-
-    after_launch_charts = chart_inventory(profile_dir)
-    after_broker = broker_state(terminal_exe)
-    startup_logs = {
-        "plain": log_state(files_dir / "a3_breakout_plain_startup.csv"),
-        "improved": log_state(files_dir / "a3_breakout_improved_startup.csv"),
-        "tier1_compat": log_state(files_dir / "a3_breakout_tier1_compat_startup.csv"),
-        "profit_lock": log_state(files_dir / "a3_profit_lock_exit_manager_startup.csv"),
+    terminal_close: dict[str, Any] = {
+        "attempted": False,
+        "close_result": None,
+        "stopped_before_profile_write": None,
+        "process_snapshot_before_write": None,
     }
-    checks = build_checks(
+    profile_backup: Path | None = None
+    changed_charts: list[dict[str, Any]] = []
+    rollback: dict[str, Any] = {"attempted": False, "status": "NOT_NEEDED", "path": ""}
+    relaunched = False
+    launch_started_at = ""
+    after_broker = before_broker
+    after_charts = before_charts
+    after_hashes = before_hashes
+    startup_logs = startup_log_states(files_dir)
+    status = "PENDING"
+
+    preflight_checks = preflight_checks_for(before_broker, before_charts, targets, plans)
+    if mode == "verify-only":
+        if before_broker.get("status") != "PASS":
+            status = "FAIL_EXPOSURE_OR_UNKNOWN"
+        else:
+            status = "ALREADY_PAUSED" if all_targets_already_paused(targets) else "NEEDS_PAUSE"
+    elif mode == "dry-run":
+        if before_broker.get("status") != "PASS":
+            status = "FAIL_EXPOSURE_OR_UNKNOWN"
+        else:
+            status = "ALREADY_PAUSED" if all_targets_already_paused(targets) else "DRY_RUN_READY"
+    else:
+        if all_targets_already_paused(targets):
+            status = "ALREADY_PAUSED"
+        elif before_broker.get("status") != "PASS":
+            status = "FAIL_EXPOSURE_OR_UNKNOWN"
+        else:
+            terminal_close = stop_terminal_for_profile_write(terminal_exe)
+            if terminal_close.get("stopped_before_profile_write") is not True:
+                status = "FAIL_TERMINAL_STILL_RUNNING"
+            else:
+                profile_backup = backup_profile(profile_dir, portable_root)
+                for plan in plans:
+                    if not plan.changed:
+                        continue
+                    path = Path(plan.before["path"])
+                    path.write_text(update_chart_inputs(read_text_any(path), plan.replacements), encoding="utf-8")
+                    changed_charts.append(asdict(plan))
+                after_charts = chart_inventory(profile_dir)
+                after_hashes = chart_hashes(profile_dir)
+
+                launch_started_at = now_utc()
+                if launch:
+                    subprocess.Popen([str(terminal_exe), "/portable"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    relaunched = True
+                    time.sleep(max(0, min(wait_seconds, 15)))
+                    wait_for_safe_startup(files_dir, wait_seconds)
+
+                after_broker = broker_state(terminal_exe)
+                startup_logs = startup_log_states(files_dir)
+                interim = payload_for_report(
+                    mode=mode,
+                    status="PENDING",
+                    phase1_root=phase1_root,
+                    portable_root=portable_root,
+                    terminal_exe=terminal_exe,
+                    profile_dir=profile_dir,
+                    files_dir=files_dir,
+                    before_broker=before_broker,
+                    after_broker=after_broker,
+                    before_charts=before_charts,
+                    after_charts=after_charts,
+                    targets=targets,
+                    plans=plans,
+                    changed_charts=changed_charts,
+                    before_hashes=before_hashes,
+                    after_hashes=after_hashes,
+                    profile_backup=profile_backup,
+                    terminal_close=terminal_close,
+                    relaunched=relaunched,
+                    launch_started_at=launch_started_at,
+                    startup_logs=startup_logs,
+                    rollback=rollback,
+                    checks=[],
+                )
+                checks = build_checks(interim)
+                status = "PASS" if all_check_statuses_good(checks) else "FAIL_POST_VERIFY"
+                if status != "PASS" and profile_backup is not None:
+                    rollback = rollback_profile(profile_dir, profile_backup)
+                    after_charts = chart_inventory(profile_dir)
+                    after_hashes = chart_hashes(profile_dir)
+                    status = "FAIL_ROLLED_BACK" if rollback.get("status") == "PASS" else "FAIL_ROLLBACK_FAILED"
+                elif status == "PASS" and not changed_charts:
+                    status = "ALREADY_PAUSED"
+
+    payload = payload_for_report(
+        mode=mode,
+        status=status,
+        phase1_root=phase1_root,
+        portable_root=portable_root,
+        terminal_exe=terminal_exe,
+        profile_dir=profile_dir,
+        files_dir=files_dir,
         before_broker=before_broker,
         after_broker=after_broker,
         before_charts=before_charts,
-        after_charts=after_launch_charts,
+        after_charts=after_charts,
+        targets=targets,
+        plans=plans,
         changed_charts=changed_charts,
+        before_hashes=before_hashes,
+        after_hashes=after_hashes,
         profile_backup=profile_backup,
-        terminal_closed=terminal_closed,
+        terminal_close=terminal_close,
         relaunched=relaunched,
+        launch_started_at=launch_started_at,
         startup_logs=startup_logs,
+        rollback=rollback,
+        checks=[],
     )
-    status = "PASS" if all(row["status"] in {"PASS", "INFO"} for row in checks) else "FAIL"
-    payload: dict[str, Any] = {
-        "status": status,
-        "artifact_integrity_status": "PASS",
-        "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
-        "runtime_performance_status": "FAIL_PRIOR_TO_PAUSE",
-        "created_at_utc": now_utc(),
-        "authority": "Reviewer FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md recommended emergency risk-reducing pause.",
-        "boundary": "Demo-only maintenance. No trade close, no order send, no EA source change, no signal-filter deployment, no live/real-capital authorization.",
-        "terminal": {
-            "portable_root": str(portable_root),
-            "terminal_exe": str(terminal_exe),
-            "profile_dir": str(profile_dir),
-            "files_dir": str(files_dir),
-            "terminal_closed_before_profile_change": terminal_closed,
-            "terminal_relaunched": relaunched,
-            "launch_started_at_utc": launch_started_at,
-            "profile_backup": str(profile_backup),
-        },
-        "pause_targets": PAUSE_TARGETS,
-        "before_broker": before_broker,
-        "after_broker": after_broker,
-        "before_charts": [row.__dict__ for row in before_charts],
-        "changed_charts": changed_charts,
-        "after_charts": [row.__dict__ for row in after_launch_charts],
-        "startup_logs": startup_logs,
-        "checks": checks,
-    }
-    output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    payload["checks"] = [*preflight_checks, *build_checks(payload)]
+    output_json.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     output_json.with_suffix(".md").write_text(render_markdown(payload), encoding="utf-8")
     return payload
 
@@ -170,13 +218,24 @@ def broker_state(terminal_exe: Path) -> dict[str, Any]:
         return {"status": "UNKNOWN", "reason": f"MT5 initialize failed: {mt5.last_error()}"}
     try:
         account = mt5.account_info()
+        account_payload = account._asdict() if account else {}
+        if "name" in account_payload:
+            account_payload["name"] = "REDACTED"
         positions = list(mt5.positions_get(symbol=SYMBOL) or [])
         orders = list(mt5.orders_get(symbol=SYMBOL) or [])
-        a3_positions = [item._asdict() for item in positions if int(getattr(item, "magic", 0)) in A3_ENTRY_MAGICS]
-        a3_orders = [item._asdict() for item in orders if int(getattr(item, "magic", 0)) in A3_ENTRY_MAGICS]
+        a3_positions = [
+            item._asdict()
+            for item in positions
+            if A3_MAGIC_LOW <= int(getattr(item, "magic", 0)) <= A3_MAGIC_HIGH
+        ]
+        a3_orders = [
+            item._asdict()
+            for item in orders
+            if A3_MAGIC_LOW <= int(getattr(item, "magic", 0)) <= A3_MAGIC_HIGH
+        ]
         return {
             "status": "PASS" if not a3_positions and not a3_orders else "FAIL",
-            "account": account._asdict() if account else {},
+            "account": account_payload,
             "a3_positions_total": len(a3_positions),
             "a3_orders_total": len(a3_orders),
             "all_xau_positions_total": len(positions),
@@ -224,6 +283,7 @@ def parse_chart(path: Path) -> ChartRow:
         manage_action_allowed=inputs.get("InpManageActionAllowed", ""),
         run_id=inputs.get("InpRunId", ""),
         order_comment=inputs.get("InpOrderComment", ""),
+        inputs=inputs,
     )
 
 
@@ -244,21 +304,115 @@ def parse_inputs(text: str) -> dict[str, str]:
     return inputs
 
 
-def required_targets_status(rows: list[ChartRow]) -> list[str]:
-    errors: list[str] = []
-    experts = {row.expert: row for row in rows}
-    for expert in PAUSE_TARGETS:
-        if expert not in experts:
-            errors.append(f"Missing required pause target chart for {expert}")
-    plain = next((row for row in rows if row.magic == "933200"), None)
-    if not plain:
-        errors.append("Missing plain 933200 chart")
-    elif plain.dry_run_only.lower() != "true" or plain.broker_action_allowed.lower() != "false":
-        errors.append(f"Plain 933200 not already stopped: {plain}")
-    return errors
+def discover_a3_action_targets(rows: list[ChartRow]) -> list[ChartRow]:
+    return [
+        row
+        for row in rows
+        if row.symbol == SYMBOL
+        and row.expert != "NO_EA"
+        and chart_has_a3_identity(row)
+        and chart_has_action_surface(row)
+    ]
+
+
+def chart_has_a3_identity(row: ChartRow) -> bool:
+    if row.expert.startswith("Account3"):
+        return True
+    if magic_in_a3_band(row.magic):
+        return True
+    return any(magic_in_a3_band(token) for token in split_csv(row.managed_magics))
+
+
+def chart_has_action_surface(row: ChartRow) -> bool:
+    action_inputs = {"InpBrokerActionAllowed", "InpManageActionAllowed", "InpAllowDemoTrading"}
+    if action_inputs.intersection(row.inputs):
+        return True
+    return "Executor" in row.expert or "ExitManager" in row.expert
+
+
+def magic_in_a3_band(value: str) -> bool:
+    try:
+        magic = int(str(value).strip())
+    except ValueError:
+        return False
+    return A3_MAGIC_LOW <= magic <= A3_MAGIC_HIGH
+
+
+def split_csv(value: str) -> list[str]:
+    return [token.strip() for token in str(value).split(",") if token.strip()]
+
+
+def plan_pause_changes(rows: list[ChartRow]) -> list[PlannedChartChange]:
+    plans: list[PlannedChartChange] = []
+    for row in rows:
+        before_text = read_text_any(Path(row.path))
+        replacements = paused_replacements(row)
+        after_text = update_chart_inputs(before_text, replacements)
+        plans.append(
+            PlannedChartChange(
+                chart=row.chart,
+                expert=row.expert,
+                before=chart_to_dict(row),
+                replacements=replacements,
+                changed=after_text != before_text,
+                before_sha256=sha256_bytes(before_text.encode("utf-8")),
+                after_sha256=sha256_bytes(after_text.encode("utf-8")),
+            )
+        )
+    return plans
+
+
+def paused_replacements(row: ChartRow) -> dict[str, str]:
+    replacements: dict[str, str] = {}
+    if "InpRunId" in row.inputs:
+        replacements["InpRunId"] = paused_run_id(row)
+    if "InpDryRunOnly" in row.inputs:
+        replacements["InpDryRunOnly"] = "true"
+    if "InpBrokerActionAllowed" in row.inputs:
+        replacements["InpBrokerActionAllowed"] = "false"
+    if "InpManageActionAllowed" in row.inputs:
+        replacements["InpManageActionAllowed"] = "false"
+    if "InpAllowDemoTrading" in row.inputs:
+        replacements["InpAllowDemoTrading"] = "false"
+    if "InpAllowNonDemoAccounts" in row.inputs:
+        replacements["InpAllowNonDemoAccounts"] = "false"
+    if "InpExecutionKillSwitchFileName" in row.inputs:
+        replacements["InpExecutionKillSwitchFileName"] = "A3_EXECUTION_KILL.txt"
+    if "InpFullStopFileName" in row.inputs:
+        replacements["InpFullStopFileName"] = "A3_FULL_STOP.txt"
+    return replacements
+
+
+def paused_run_id(row: ChartRow) -> str:
+    if row.expert in KNOWN_PAUSED_RUN_IDS:
+        return KNOWN_PAUSED_RUN_IDS[row.expert]
+    base = row.run_id or row.expert or row.chart
+    if re.search(r"(PAUSED|DISARMED|STOPPED)", base, flags=re.IGNORECASE):
+        return base
+    return f"{base}_PAUSED_{STAMP}"
+
+
+def all_targets_already_paused(rows: list[ChartRow]) -> bool:
+    return bool(rows) and all(chart_is_disarmed(row) for row in rows)
+
+
+def chart_is_disarmed(row: ChartRow) -> bool:
+    if "InpDryRunOnly" in row.inputs and row.dry_run_only.lower() != "true":
+        return False
+    if "InpBrokerActionAllowed" in row.inputs and row.broker_action_allowed.lower() != "false":
+        return False
+    if "InpManageActionAllowed" in row.inputs and row.manage_action_allowed.lower() != "false":
+        return False
+    if "InpAllowDemoTrading" in row.inputs and row.inputs.get("InpAllowDemoTrading", "").lower() != "false":
+        return False
+    if "InpAllowNonDemoAccounts" in row.inputs and row.inputs.get("InpAllowNonDemoAccounts", "").lower() != "false":
+        return False
+    return True
 
 
 def update_chart_inputs(text: str, replacements: dict[str, str]) -> str:
+    if not replacements:
+        return text
     lines: list[str] = []
     in_inputs = False
     seen: set[str] = set()
@@ -285,45 +439,114 @@ def update_chart_inputs(text: str, replacements: dict[str, str]) -> str:
     return "\n".join(lines) + suffix
 
 
-def close_terminal(terminal_exe: Path) -> bool:
+def stop_terminal_for_profile_write(terminal_exe: Path) -> dict[str, Any]:
+    before = terminal_process_snapshot(terminal_exe)
+    close_result = close_terminal(terminal_exe)
+    after = terminal_process_snapshot(terminal_exe)
+    return {
+        "attempted": True,
+        "process_snapshot_before_write": before,
+        "close_result": close_result,
+        "stopped_before_profile_write": after.get("running") is False,
+        "process_snapshot_after_close": after,
+    }
+
+
+def terminal_process_snapshot(terminal_exe: Path) -> dict[str, Any]:
+    command = f"""
+$target = (Resolve-Path -LiteralPath '{terminal_exe}' -ErrorAction SilentlyContinue).Path
+if(-not $target) {{ ConvertTo-Json @{{running=$false;pids=@();reason='terminal_missing'}} -Compress; exit 0 }}
+$procs = Get-CimInstance Win32_Process | Where-Object {{ $_.ExecutablePath -eq $target }}
+$pids = @($procs | ForEach-Object {{ $_.ProcessId }})
+ConvertTo-Json @{{running=($pids.Count -gt 0);pids=$pids;reason='OK'}} -Compress
+"""
+    try:
+        result = subprocess.run(
+            ["powershell", "-NoProfile", "-Command", command],
+            text=True,
+            capture_output=True,
+            timeout=20,
+        )
+    except (subprocess.SubprocessError, OSError) as exc:
+        return {"running": None, "pids": [], "reason": str(exc)}
+    try:
+        payload = json.loads(result.stdout.strip() or "{}")
+    except json.JSONDecodeError:
+        payload = {"running": None, "pids": [], "reason": result.stdout.strip()}
+    payload["returncode"] = result.returncode
+    return payload
+
+
+def close_terminal(terminal_exe: Path) -> dict[str, Any]:
     command = f"""
 $target = (Resolve-Path -LiteralPath '{terminal_exe}').Path
 $procs = Get-CimInstance Win32_Process | Where-Object {{ $_.ExecutablePath -eq $target }}
-if(-not $procs) {{ exit 0 }}
+if(-not $procs) {{ ConvertTo-Json @{{returncode=0;closed=0;forced=0;reason='not_running'}} -Compress; exit 0 }}
+$closed = 0
+$forced = 0
 foreach($proc in $procs) {{
   $p = Get-Process -Id $proc.ProcessId -ErrorAction SilentlyContinue
-  if($p) {{ [void]$p.CloseMainWindow() }}
+  if($p) {{ [void]$p.CloseMainWindow(); $closed++ }}
 }}
 Start-Sleep -Seconds 5
 foreach($proc in $procs) {{
   $p = Get-Process -Id $proc.ProcessId -ErrorAction SilentlyContinue
-  if($p) {{ Stop-Process -Id $proc.ProcessId -Force }}
+  if($p) {{ Stop-Process -Id $proc.ProcessId -Force; $forced++ }}
 }}
-exit 0
+ConvertTo-Json @{{returncode=0;closed=$closed;forced=$forced;reason='closed_or_forced'}} -Compress
 """
-    result = subprocess.run(["powershell", "-NoProfile", "-Command", command], text=True, capture_output=True, timeout=45)
-    return result.returncode == 0
+    try:
+        result = subprocess.run(["powershell", "-NoProfile", "-Command", command], text=True, capture_output=True, timeout=45)
+    except (subprocess.SubprocessError, OSError) as exc:
+        return {"returncode": 1, "closed": 0, "forced": 0, "reason": str(exc)}
+    try:
+        payload = json.loads(result.stdout.strip() or "{}")
+    except json.JSONDecodeError:
+        payload = {"closed": 0, "forced": 0, "reason": result.stdout.strip()}
+    payload["returncode"] = result.returncode
+    return payload
 
 
 def backup_profile(profile_dir: Path, portable_root: Path) -> Path:
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
     backup = portable_root / "_codex_quarantine" / "profile_backups" / f"default_profile_before_a3_emergency_pause_{stamp}"
     backup.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(profile_dir, backup)
     return backup
 
 
+def rollback_profile(profile_dir: Path, backup: Path) -> dict[str, Any]:
+    if not backup.exists():
+        return {"attempted": True, "status": "FAIL", "path": str(backup), "reason": "backup_missing"}
+    for source in backup.rglob("*"):
+        if not source.is_file():
+            continue
+        target = profile_dir / source.relative_to(backup)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+    return {"attempted": True, "status": "PASS", "path": str(backup), "reason": "profile_restored_from_backup"}
+
+
 def wait_for_safe_startup(files_dir: Path, wait_seconds: int) -> None:
     deadline = time.time() + max(0, wait_seconds)
-    required = {
-        "a3_breakout_improved_startup.csv": "A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618",
-        "a3_breakout_tier1_compat_startup.csv": "A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618",
-        "a3_profit_lock_exit_manager_startup.csv": "A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618",
-    }
+    expected_tokens = set(KNOWN_PAUSED_RUN_IDS.values())
     while time.time() < deadline:
-        if all(token in log_state(files_dir / name).get("last_line", "") for name, token in required.items()):
+        latest_lines = [state.get("last_line", "") for state in startup_log_states(files_dir).values()]
+        if expected_tokens.intersection(" ".join(latest_lines)):
             return
         time.sleep(1.0)
+
+
+def startup_log_states(files_dir: Path) -> dict[str, dict[str, Any]]:
+    names = {
+        "plain": "a3_breakout_plain_startup.csv",
+        "improved": "a3_breakout_improved_startup.csv",
+        "tier1_compat": "a3_breakout_tier1_compat_startup.csv",
+        "rdguard": "a3_rdguard_v1_startup.csv",
+        "rdstruct": "a3_rdstruct_v1_startup.csv",
+        "profit_lock": "a3_profit_lock_exit_manager_startup.csv",
+    }
+    return {key: log_state(files_dir / name) for key, name in names.items()}
 
 
 def log_state(path: Path) -> dict[str, Any]:
@@ -338,73 +561,151 @@ def log_state(path: Path) -> dict[str, Any]:
     }
 
 
-def build_checks(
+def preflight_checks_for(
+    before_broker: dict[str, Any],
+    before_charts: list[ChartRow],
+    targets: list[ChartRow],
+    plans: list[PlannedChartChange],
+) -> list[dict[str, str]]:
+    checks = [
+        check("reviewer_pause_authority_recorded", "PASS", "CODEX_A3_REPAIR_BUILD_PLAN_CANONICAL_2026_06_18.md"),
+        check("a3_profile_charts_discovered", "PASS" if before_charts else "FAIL", f"chart_count={len(before_charts)}"),
+        check("dynamic_a3_action_targets_discovered", "PASS" if targets else "FAIL", ",".join(row.chart for row in targets)),
+        check("before_a3_exposure_zero", before_broker.get("status", "UNKNOWN"), broker_summary(before_broker)),
+    ]
+    armed_targets = [row.chart for row in targets if not chart_is_disarmed(row)]
+    checks.append(check("armed_targets_identified", "INFO" if armed_targets else "PASS", ",".join(armed_targets) or "none"))
+    checks.append(check("planned_changes_built", "PASS" if plans else "FAIL", f"plan_count={len(plans)}"))
+    return checks
+
+
+def build_checks(payload: dict[str, Any]) -> list[dict[str, str]]:
+    mode = payload["mode"]
+    already_paused = payload["status"] == "ALREADY_PAUSED"
+    target_charts = {row["chart"] for row in payload["target_charts"]}
+    after_by_chart = {row["chart"]: row for row in payload["after_charts"]}
+    checks = [
+        check("report_mode_recorded", "PASS", mode),
+        check("no_runtime_mutation_in_readonly_mode", "PASS" if mode in {"verify-only", "dry-run"} and not payload["changed_charts"] or mode == "apply" else "FAIL", mode),
+        check("after_a3_exposure_zero", payload["after_broker"].get("status", "UNKNOWN"), broker_summary(payload["after_broker"])),
+        check("target_charts_safe_after", "PASS" if all(chart_dict_is_disarmed(after_by_chart.get(chart, {})) for chart in target_charts) else "FAIL", ",".join(sorted(target_charts))),
+        check("non_target_hashes_unchanged", "PASS" if non_target_hashes_unchanged(payload) else "FAIL", "all chart*.chr hashes compared"),
+        check("profile_backup_created_for_apply", "PASS" if mode != "apply" or already_paused or payload["terminal"]["profile_backup"] else "FAIL", payload["terminal"]["profile_backup"]),
+        check("terminal_fully_stopped_before_apply_write", "PASS" if mode != "apply" or already_paused or payload["terminal"]["stopped_before_profile_write"] is True else "FAIL", json.dumps(payload["terminal"].get("process_snapshot_before_write"), sort_keys=True)),
+        check("rollback_path_recorded", "PASS" if mode != "apply" or payload["terminal"]["profile_backup"] or payload["status"] == "ALREADY_PAUSED" else "FAIL", payload["terminal"]["profile_backup"] or payload["rollback"].get("path", "")),
+    ]
+    if mode == "apply" and payload["terminal"]["terminal_relaunched"]:
+        checks.append(check("startup_rows_collected", "PASS" if any(row.get("line_count", 0) for row in payload["startup_logs"].values()) else "FAIL", "startup logs inspected"))
+    else:
+        checks.append(check("startup_rows_collected", "INFO", "launch skipped or readonly mode"))
+    return checks
+
+
+def chart_dict_is_disarmed(row: dict[str, Any]) -> bool:
+    if not row:
+        return False
+    inputs = row.get("inputs", {})
+    if "InpDryRunOnly" in inputs and str(row.get("dry_run_only", "")).lower() != "true":
+        return False
+    if "InpBrokerActionAllowed" in inputs and str(row.get("broker_action_allowed", "")).lower() != "false":
+        return False
+    if "InpManageActionAllowed" in inputs and str(row.get("manage_action_allowed", "")).lower() != "false":
+        return False
+    return True
+
+
+def non_target_hashes_unchanged(payload: dict[str, Any]) -> bool:
+    target_charts = {row["chart"] for row in payload["target_charts"]}
+    before = payload["profile_hashes"]["before"]
+    after = payload["profile_hashes"]["after"]
+    for chart, digest in before.items():
+        if chart in target_charts:
+            continue
+        if after.get(chart) != digest:
+            return False
+    return True
+
+
+def all_check_statuses_good(checks: list[dict[str, str]]) -> bool:
+    return all(row["status"] in {"PASS", "INFO"} for row in checks)
+
+
+def payload_for_report(
     *,
+    mode: Mode,
+    status: str,
+    phase1_root: Path,
+    portable_root: Path,
+    terminal_exe: Path,
+    profile_dir: Path,
+    files_dir: Path,
     before_broker: dict[str, Any],
     after_broker: dict[str, Any],
     before_charts: list[ChartRow],
     after_charts: list[ChartRow],
+    targets: list[ChartRow],
+    plans: list[PlannedChartChange],
     changed_charts: list[dict[str, Any]],
-    profile_backup: Path,
-    terminal_closed: bool,
+    before_hashes: dict[str, str],
+    after_hashes: dict[str, str],
+    profile_backup: Path | None,
+    terminal_close: dict[str, Any],
     relaunched: bool,
+    launch_started_at: str,
     startup_logs: dict[str, dict[str, Any]],
-) -> list[dict[str, str]]:
-    after_by_expert = {row.expert: row for row in after_charts}
-    checks = [
-        check("reviewer_pause_authority_recorded", "PASS", "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md"),
-        check("no_a3_open_positions_before_pause", before_broker.get("status", "UNKNOWN"), broker_summary(before_broker)),
-        check("profile_backup_created", "PASS" if profile_backup.exists() else "FAIL", str(profile_backup)),
-        check("terminal_closed_before_profile_change", "PASS" if terminal_closed else "FAIL", "terminal64.exe close/force-stop attempted"),
-        check("terminal_relaunched", "PASS" if relaunched else "INFO", str(DEFAULT_PORTABLE_ROOT / "terminal64.exe")),
-        check("no_a3_open_positions_after_pause", after_broker.get("status", "UNKNOWN"), broker_summary(after_broker)),
-    ]
-    for expert, expected in PAUSE_TARGETS.items():
-        row = after_by_expert.get(expert)
-        if not row:
-            checks.append(check(f"{expert}_chart_present", "FAIL", "missing"))
-            continue
-        details = row.__dict__
-        ok = all(str(details.get(input_to_field(key), "")).lower() == value.lower() for key, value in expected.items())
-        checks.append(check(f"{expert}_profile_inputs_paused", "PASS" if ok else "FAIL", json.dumps(details, sort_keys=True)))
-    checks.append(
-        check(
-            "plain_933200_still_stopped",
-            "PASS" if any(row.magic == "933200" and row.dry_run_only == "true" and row.broker_action_allowed == "false" for row in after_charts) else "FAIL",
-            "933200 dry-run/no-broker-action expected",
-        )
-    )
-    checks.append(
-        check(
-            "changed_only_expected_pause_targets",
-            "PASS" if sorted(row["expert"] for row in changed_charts) == sorted(PAUSE_TARGETS) else "FAIL",
-            json.dumps(changed_charts, sort_keys=True),
-        )
-    )
-    checks.extend(startup_checks(startup_logs))
-    return checks
-
-
-def startup_checks(startup_logs: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
-    expectations = {
-        "improved": ["A3_BREAKOUT_IMPROVED_V1_PAUSED_20260618", "true", "false", "ATTACHED_A3_BREAKOUT_IMPROVED"],
-        "tier1_compat": ["A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_20260618", "true", "false", "ATTACHED_A3_BREAKOUT_TIER1_COMPAT"],
-        "profit_lock": ["A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_20260618", "true", "false", "ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER"],
-    }
-    rows = []
-    for key, tokens in expectations.items():
-        line = startup_logs.get(key, {}).get("last_line", "")
-        rows.append(check(f"{key}_startup_log_paused", "PASS" if all(token in line for token in tokens) else "FAIL", line))
-    return rows
-
-
-def input_to_field(key: str) -> str:
+    rollback: dict[str, Any],
+    checks: list[dict[str, str]],
+) -> dict[str, Any]:
     return {
-        "InpRunId": "run_id",
-        "InpDryRunOnly": "dry_run_only",
-        "InpBrokerActionAllowed": "broker_action_allowed",
-        "InpManageActionAllowed": "manage_action_allowed",
-    }[key]
+        "status": status,
+        "mode": mode,
+        "artifact_integrity_status": "PASS",
+        "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+        "runtime_performance_status": "FAIL",
+        "created_at_utc": now_utc(),
+        "authority": "CODEX_A3_REPAIR_BUILD_PLAN_CANONICAL_2026_06_18.md P1.1 repo-only emergency-pause hardening.",
+        "boundary": "Repo/tooling verification only unless --apply is explicitly selected. No trade close, no order send, no live/real-capital authorization.",
+        "terminal": {
+            "portable_root": str(portable_root),
+            "terminal_exe": str(terminal_exe),
+            "profile_dir": str(profile_dir),
+            "files_dir": str(files_dir),
+            "terminal_close_attempted": bool(terminal_close.get("attempted")),
+            "stopped_before_profile_write": terminal_close.get("stopped_before_profile_write"),
+            "process_snapshot_before_write": terminal_close.get("process_snapshot_before_write"),
+            "close_result": terminal_close.get("close_result"),
+            "terminal_relaunched": relaunched,
+            "launch_started_at_utc": launch_started_at,
+            "profile_backup": str(profile_backup) if profile_backup else "",
+        },
+        "before_broker": before_broker,
+        "after_broker": after_broker,
+        "before_charts": [chart_to_dict(row) for row in before_charts],
+        "target_charts": [chart_to_dict(row) for row in targets],
+        "planned_changes": [asdict(plan) for plan in plans],
+        "changed_charts": changed_charts,
+        "after_charts": [chart_to_dict(row) for row in after_charts],
+        "profile_hashes": {"before": before_hashes, "after": after_hashes},
+        "startup_logs": startup_logs,
+        "rollback": rollback,
+        "checks": checks,
+    }
+
+
+def chart_to_dict(row: ChartRow) -> dict[str, Any]:
+    return asdict(row)
+
+
+def chart_hashes(profile_dir: Path) -> dict[str, str]:
+    return {path.name: sha256_file(path) for path in sorted(profile_dir.glob("chart*.chr"))}
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_bytes(payload: bytes) -> str:
+    return hashlib.sha256(payload).hexdigest()
 
 
 def broker_summary(state: dict[str, Any]) -> str:
@@ -412,15 +713,17 @@ def broker_summary(state: dict[str, Any]) -> str:
         f"a3_positions={state.get('a3_positions_total')}; "
         f"a3_orders={state.get('a3_orders_total')}; "
         f"all_xau_positions={state.get('all_xau_positions_total')}; "
-        f"all_xau_orders={state.get('all_xau_orders_total')}"
+        f"all_xau_orders={state.get('all_xau_orders_total')}; "
+        f"reason={state.get('reason', '')}"
     )
 
 
 def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
-        "# A3 Emergency Pause Applied - 2026-06-18",
+        "# A3 Emergency Pause Verification - 2026-06-18",
         "",
         f"Overall status: `{payload['status']}`",
+        f"Mode: `{payload['mode']}`",
         "",
         str(payload["authority"]),
         "",
@@ -436,31 +739,35 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         "## Broker Exposure",
         "",
-        "| Moment | A3 positions | A3 orders | All XAU positions | All XAU orders |",
-        "| --- | ---: | ---: | ---: | ---: |",
+        "| Moment | A3 positions | A3 orders | All XAU positions | All XAU orders | Status |",
+        "| --- | ---: | ---: | ---: | ---: | --- |",
         broker_row("before", payload["before_broker"]),
         broker_row("after", payload["after_broker"]),
         "",
         "## Profile Change",
         "",
-        f"- Profile backup: `{payload['terminal']['profile_backup']}`",
-        f"- Terminal closed before edit: `{payload['terminal']['terminal_closed_before_profile_change']}`",
+        f"- Profile backup: `{payload['terminal']['profile_backup'] or 'n/a'}`",
+        f"- Terminal stopped before apply write: `{payload['terminal']['stopped_before_profile_write']}`",
         f"- Terminal relaunched: `{payload['terminal']['terminal_relaunched']}`",
+        f"- Rollback: `{payload['rollback']['status']}` `{payload['rollback']['path']}`",
         "",
-        "| Chart | Expert | New run id | Dry-run | Broker action | Manage action |",
-        "| --- | --- | --- | ---: | ---: | ---: |",
+        "| Chart | Expert | Run id | Dry-run | Broker action | Manage action | Planned change |",
+        "| --- | --- | --- | ---: | ---: | ---: | ---: |",
     ]
+    plan_by_chart = {row["chart"]: row for row in payload["planned_changes"]}
     for row in payload["after_charts"]:
-        if row["expert"] not in {"Account3BreakoutPlainExecutor", *PAUSE_TARGETS.keys()}:
+        if row["chart"] not in plan_by_chart:
             continue
+        plan = plan_by_chart[row["chart"]]
         lines.append(
-            "| {chart} | `{expert}` | `{run_id}` | `{dry}` | `{broker}` | `{manage}` |".format(
+            "| {chart} | `{expert}` | `{run_id}` | `{dry}` | `{broker}` | `{manage}` | `{changed}` |".format(
                 chart=row["chart"],
                 expert=escape_md(row["expert"]),
                 run_id=escape_md(row["run_id"]),
                 dry=escape_md(row["dry_run_only"]),
                 broker=escape_md(row["broker_action_allowed"]),
                 manage=escape_md(row["manage_action_allowed"]),
+                changed=str(plan["changed"]).lower(),
             )
         )
     lines.extend(["", "## Checks", "", "| Check | Status | Evidence |", "| --- | --- | --- |"])
@@ -469,7 +776,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "No trade was closed and no order was sent by this maintenance action. The change only disables future A3 broker-action entries and disarms the profit-lock manager into dry-run.",
+            "No trade close, order send, lot, SL/TP, account, preset arming, or chart attachment change is authorized by this report.",
             "",
         ]
     )
@@ -479,12 +786,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
 def broker_row(label: str, state: dict[str, Any]) -> str:
     return (
         f"| {label} | `{state.get('a3_positions_total')}` | `{state.get('a3_orders_total')}` | "
-        f"`{state.get('all_xau_positions_total')}` | `{state.get('all_xau_orders_total')}` |"
+        f"`{state.get('all_xau_positions_total')}` | `{state.get('all_xau_orders_total')}` | `{state.get('status')}` |"
     )
 
 
 def check(name: str, status: str, evidence: str) -> dict[str, str]:
-    return {"name": name, "status": status, "evidence": str(evidence)}
+    return {"name": name, "status": str(status), "evidence": str(evidence)}
 
 
 def read_text_any(path: Path) -> str:
@@ -524,22 +831,37 @@ def require_dir(path: Path) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Apply the A3 emergency broker-action pause.")
+    parser = argparse.ArgumentParser(description="Verify, dry-run, or apply the A3 emergency broker-action pause.")
     parser.add_argument("--phase1-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--portable-root", type=Path, default=DEFAULT_PORTABLE_ROOT)
     parser.add_argument("--output-json", type=Path, default=None)
-    parser.add_argument("--no-launch", action="store_true")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--verify-only", action="store_true")
+    modes.add_argument("--dry-run", action="store_true")
+    modes.add_argument("--apply", action="store_true")
+    parser.add_argument("--launch", action="store_true", help="Only valid with --apply; relaunch terminal after profile writes.")
     parser.add_argument("--wait-seconds", type=int, default=45)
     args = parser.parse_args(argv)
+
+    mode: Mode = "verify-only"
+    if args.dry_run:
+        mode = "dry-run"
+    if args.apply:
+        mode = "apply"
+    if args.launch and mode != "apply":
+        parser.error("--launch is only valid with --apply")
+
     payload = apply_a3_emergency_pause(
         args.phase1_root,
         portable_root=args.portable_root,
         output_json=args.output_json,
-        launch=not args.no_launch,
+        mode=mode,
+        launch=args.launch,
         wait_seconds=args.wait_seconds,
     )
-    print(json.dumps({"status": payload["status"], "output": str(args.output_json or args.phase1_root / DEFAULT_OUTPUT_JSON)}, indent=2))
-    return 0 if payload["status"] == "PASS" else 1
+    output_path = args.output_json or args.phase1_root / DEFAULT_OUTPUT_JSON
+    print(json.dumps({"status": payload["status"], "mode": mode, "output": str(output_path)}, indent=2))
+    return 0 if payload["status"] in {"PASS", "ALREADY_PAUSED", "DRY_RUN_READY"} else 1
 
 
 if __name__ == "__main__":

@@ -32,9 +32,15 @@ def test_project_status_summary_records_account_boundaries(tmp_path: Path):
     ]
     assert summary["a3_tier1"]["owner_authorized_demo_broker_action"] is True
     assert "lane" not in summary["a3_tier1"]
+    assert "status" not in summary["a3_tier1"]
+    assert summary["a3_tier1"]["historical_attach_status"] == "PASS"
+    assert summary["a3_tier1"]["runtime_performance_status"] == "FAIL"
+    assert summary["a3_tier1"]["authorization_status"] == "A3_ENTRY_LANES_PAUSED"
+    assert summary["a3_tier1"]["shadow_candidate_performance_status"] == "NOT_EVALUATED"
     assert summary["a3_tier1"]["historical_owner_authorization"]["933400_demo_broker_action"] == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION"
     assert summary["a3_tier1"]["current_runtime_state"]["lanes"]["933400"] == "PAUSED"
     assert summary["a3_tier1"]["effective_runtime_authorization"] == "A3_ENTRY_LANES_PAUSED"
+    assert summary["accounts"]["A3"]["pause_artifact_runtime_consistency_status"] == "PASS"
     assert summary["authorization"]["canonical_phase2_pass"] is False
     assert summary["authorization"]["live_trading_authorized"] is False
     assert "audit-friendly companion" in markdown
