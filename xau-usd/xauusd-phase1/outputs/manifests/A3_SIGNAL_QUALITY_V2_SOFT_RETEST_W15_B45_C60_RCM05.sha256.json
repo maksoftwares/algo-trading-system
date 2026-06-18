@@ -1,0 +1,10 @@
+{
+  "created_at_utc": "2026-06-18T00:00:00Z",
+  "status": "LOCKED",
+  "files": [
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V2_SOFT_RETEST_W15_B45_C60_RCM05_2026_06_18.md",
+      "sha256": "c0acedb1bf12edd2936507d20ffd7a999b6caad13256df026137fe67d6d845ed"
+    }
+  ]
+}
