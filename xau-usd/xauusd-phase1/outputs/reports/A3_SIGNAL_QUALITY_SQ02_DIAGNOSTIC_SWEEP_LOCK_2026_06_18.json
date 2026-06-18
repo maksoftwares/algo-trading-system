@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "task": "SQ-02 diagnostic sweep registration",
+  "created_at_utc": "2026-06-18T12:38:00Z",
+  "boundary": "Offline discovery / shadow-only. No promotion evidence, MT5 runtime, terminal profile, preset arming, order, position, or broker action touched.",
+  "base_commit": "c257dd6",
+  "artifacts": {
+    "sweep": "docs/A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
+    "manifest": "outputs/manifests/A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1.sha256.json",
+    "sha256": "abe95ebcdddb14f710b911dbe93bb12d6603a24b3475df06a8e473bc1763dc58"
+  },
+  "registered_candidates": [
+    "B0_RAW_ALL_SESSION",
+    "B1_EVENING_BASELINE",
+    "F_LOOSE_CT_VETO",
+    "F_H1_ALIGN",
+    "F_H1_M15_ALIGN",
+    "F_RETEST_LIGHT",
+    "F_LOOSE_CT_PLUS_RETEST_LIGHT",
+    "A3_SQ_MTF_ONLY_V1",
+    "A3_SQ_RETEST_ONLY_V1",
+    "A3_SQ_COMBINED_V1"
+  ],
+  "frequency_floor": {
+    "signal_retention_vs_b0": ">=40%",
+    "virtual_trade_retention_vs_b0": ">=35%",
+    "closed_virtual_trades": ">=100",
+    "median_weekly_trades_vs_b0": ">=40%"
+  },
+  "verification": {
+    "focused_pytest": "8 passed",
+    "arming_audit": "PASS",
+    "hash_recheck": "PASS"
+  },
+  "next": "SQ-03 offline Python discovery sweep; stop if no candidate clears the V2 registration eligibility bar."
+}

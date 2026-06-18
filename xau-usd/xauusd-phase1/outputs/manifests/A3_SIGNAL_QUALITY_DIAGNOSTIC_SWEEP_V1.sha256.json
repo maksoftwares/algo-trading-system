@@ -1,0 +1,12 @@
+{
+  "status": "LOCKED",
+  "created_at_utc": "2026-06-18T12:38:00Z",
+  "sweep_id": "A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1",
+  "boundary": "Offline discovery / shadow-only A3 signal-quality diagnostic sweep. Not promotion evidence, broker-action authorization, runtime attach permission, profile edit permission, preset arming permission, or reactivation authorization.",
+  "files": [
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
+      "sha256": "abe95ebcdddb14f710b911dbe93bb12d6603a24b3475df06a8e473bc1763dc58"
+    }
+  ]
+}

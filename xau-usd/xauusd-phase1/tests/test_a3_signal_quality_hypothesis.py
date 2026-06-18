@@ -79,6 +79,40 @@ def test_a3_signal_quality_v1_addendum_resolves_implementation_seams() -> None:
         assert token in text
 
 
+def test_a3_signal_quality_diagnostic_sweep_manifest_hashes_match() -> None:
+    manifest = ROOT / "outputs" / "manifests" / "A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1.sha256.json"
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+
+    assert payload["status"] == "LOCKED"
+    for row in payload["files"]:
+        path = ROOT / row["file"]
+        assert path.exists()
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row["sha256"]
+
+
+def test_a3_signal_quality_diagnostic_sweep_registers_frequency_preserving_candidates() -> None:
+    text = (ROOT / "docs" / "A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md").read_text(encoding="utf-8")
+
+    for token in (
+        "B0_RAW_ALL_SESSION",
+        "B1_EVENING_BASELINE",
+        "F_LOOSE_CT_VETO",
+        "F_H1_ALIGN",
+        "F_H1_M15_ALIGN",
+        "F_RETEST_LIGHT",
+        "F_LOOSE_CT_PLUS_RETEST_LIGHT",
+        "A3_SQ_MTF_ONLY_V1",
+        "A3_SQ_RETEST_ONLY_V1",
+        "A3_SQ_COMBINED_V1",
+        "signal retention >= 40% of B0",
+        "virtual-trade retention >= 35% of B0",
+        "not promotion evidence",
+        "STOP_NO_CANDIDATE",
+        "A3 remains paused",
+    ):
+        assert token in text
+
+
 def test_a3_signal_quality_v1_lock_note_records_header_manifest_discrepancy() -> None:
     note = (ROOT / "docs" / "A3_SIGNAL_QUALITY_V1_LOCK_NOTE_2026_06_18.md").read_text(encoding="utf-8")
 
