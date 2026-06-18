@@ -24,16 +24,19 @@ def test_a3_breakout_wrappers_use_shared_breakout_kernel_and_separate_magics():
     plain = _text(EXPERTS / "Account3BreakoutPlainExecutor.mq5")
     improved = _text(EXPERTS / "Account3BreakoutImprovedExecutor.mq5")
     compat = _text(EXPERTS / "Account3BreakoutTier1CompatExecutor.mq5")
+    soft = _text(EXPERTS / "Account3SoftRetestExecutor.mq5")
     base = _text(INCLUDE)
 
     assert "#include <A3BreakoutExecutorBase.mqh>" in plain
     assert "#include <A3BreakoutExecutorBase.mqh>" in improved
     assert "#include <A3BreakoutExecutorBase.mqh>" in compat
+    assert "#include <A3BreakoutExecutorBase.mqh>" in soft
     assert "#include <Phase1/Phase1BreakoutRetest.mqh>" in base
     assert "g_breakout_observer.Evaluate(_Symbol, point, observation);" in base
     assert '#define A3_BREAKOUT_DEFAULT_MAGIC 933200' in plain
     assert '#define A3_BREAKOUT_DEFAULT_MAGIC 933300' in improved
     assert '#define A3_BREAKOUT_DEFAULT_MAGIC 933400' in compat
+    assert '#define A3_BREAKOUT_DEFAULT_MAGIC 933500' in soft
     assert "InpMagicNumber != A3_BREAKOUT_EXPECTED_MAGIC" in base
 
 
@@ -70,11 +73,14 @@ def test_a3_breakout_new_base_macro_defaults_protect_existing_lanes():
     assert "#define A3_BREAKOUT_STOP_FLOOR_DEFAULT false" in base
     assert "#ifndef A3_BREAKOUT_TREND_SHADOW_DEFAULT" in base
     assert "#define A3_BREAKOUT_TREND_SHADOW_DEFAULT false" in base
+    assert "#ifndef A3_BREAKOUT_SOFT_RETEST_DEFAULT" in base
+    assert "#define A3_BREAKOUT_SOFT_RETEST_DEFAULT false" in base
 
     for wrapper in (plain, improved):
         assert "A3_BREAKOUT_SESSION_GATE_DEFAULT" not in wrapper
         assert "A3_BREAKOUT_STOP_FLOOR_DEFAULT" not in wrapper
         assert "A3_BREAKOUT_TREND_SHADOW_DEFAULT" not in wrapper
+        assert "A3_BREAKOUT_SOFT_RETEST_DEFAULT" not in wrapper
 
 
 def test_a3_breakout_lane_b_only_enables_guard_and_exit_defaults():
@@ -101,6 +107,7 @@ def test_a3_breakout_safe_presets_match_magic_and_do_not_arm():
         ("Account3BreakoutPlainExecutor.safe_xauusd.set", "933200", "A3_BREAKOUT_PLAIN", "false", "false"),
         ("Account3BreakoutImprovedExecutor.safe_xauusd.set", "933300", "A3_BREAKOUT_IMPROVED", "true", "true"),
         ("Account3BreakoutTier1CompatExecutor.safe_xauusd.set", "933400", "A3_BREAKOUT_TIER1_COMPAT", "false", "false"),
+        ("Account3SoftRetestExecutor.safe_xauusd.set", "933500", "A3_SOFT_RETEST_V2", "false", "false"),
     ]
     for preset_name, magic, comment, trend_guard, exit_protection in cases:
         values = _values(PRESETS / preset_name)
@@ -117,6 +124,31 @@ def test_a3_breakout_safe_presets_match_magic_and_do_not_arm():
         assert values["InpTrendGuardEnabled"] == trend_guard
         assert values["InpBreakevenEnabled"] == exit_protection
         assert values["InpPartialTakeProfitEnabled"] == exit_protection
+
+
+def test_a3_soft_retest_wrapper_enables_candidate_filter_only():
+    soft = _text(EXPERTS / "Account3SoftRetestExecutor.mq5")
+    base = _text(INCLUDE)
+    values = _values(PRESETS / "Account3SoftRetestExecutor.safe_xauusd.set")
+    attach_script = _text(ROOT / "scripts" / "attach_a3_soft_retest_broker_action.py")
+
+    assert "#define A3_BREAKOUT_SOFT_RETEST_DEFAULT true" in soft
+    assert "#define A3_BREAKOUT_STOP_FLOOR_DEFAULT true" in soft
+    assert "#define A3_BREAKOUT_SESSION_GATE_DEFAULT false" in soft
+    assert "ApplySoftRetestFilter(observation);" in base
+    assert "bars_after_break = observation.break_shift - 2" in base
+    assert "AverageM5RangePrice(2, 14)" in base
+    assert "SOFT_RETEST_WOULD_SIGNAL" in base
+
+    assert values["InpSoftRetestFilterEnabled"] == "true"
+    assert values["InpSoftRetestMaxBarsAfterBreak"] == "15"
+    assert values["InpSoftRetestMinBodyToRange"] == "0.45"
+    assert values["InpSoftRetestMinDirectionalCloseLocation"] == "0.60"
+    assert values["InpSoftRetestRetestCloseMarginAtr"] == "0.05"
+    assert values["InpTradeSessionGateEnabled"] == "false"
+    assert values["InpXauStopDistanceFloorEnabled"] == "true"
+    assert '"InpMagicNumber": MAGIC' in attach_script
+    assert 'MAGIC = "933500"' in attach_script
 
 
 def test_a3_tier1_compat_copies_a2_gate_and_floor_but_keeps_trend_shadow_only():

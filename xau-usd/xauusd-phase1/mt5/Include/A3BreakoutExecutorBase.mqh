@@ -43,6 +43,9 @@
 #ifndef A3_BREAKOUT_TREND_SHADOW_DEFAULT
 #define A3_BREAKOUT_TREND_SHADOW_DEFAULT false
 #endif
+#ifndef A3_BREAKOUT_SOFT_RETEST_DEFAULT
+#define A3_BREAKOUT_SOFT_RETEST_DEFAULT false
+#endif
 
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
@@ -80,6 +83,11 @@ input bool InpTrendGuardShadowOnly = A3_BREAKOUT_TREND_SHADOW_DEFAULT;
 input int InpTrendH1LookbackBars = 12;
 input int InpTrendH4LookbackBars = 6;
 input double InpTrendMinMovePoints = 100.0;
+input bool InpSoftRetestFilterEnabled = A3_BREAKOUT_SOFT_RETEST_DEFAULT;
+input int InpSoftRetestMaxBarsAfterBreak = 15;
+input double InpSoftRetestMinBodyToRange = 0.45;
+input double InpSoftRetestMinDirectionalCloseLocation = 0.60;
+input double InpSoftRetestRetestCloseMarginAtr = 0.05;
 input bool InpBreakevenEnabled = A3_BREAKOUT_EXIT_PROTECTION_DEFAULT;
 input double InpBreakevenTriggerR = 0.50;
 input bool InpPartialTakeProfitEnabled = A3_BREAKOUT_EXIT_PROTECTION_DEFAULT;
@@ -297,6 +305,11 @@ bool EnsureStartupLogHeader()
       "full_stop_file",
       "trend_guard_enabled",
       "trend_guard_shadow_only",
+      "soft_retest_filter_enabled",
+      "soft_retest_max_bars_after_break",
+      "soft_retest_min_body_to_range",
+      "soft_retest_min_directional_close_location",
+      "soft_retest_retest_close_margin_atr",
       "breakeven_enabled",
       "partial_take_profit_enabled",
       "startup_status"
@@ -455,6 +468,11 @@ bool WriteStartupRow(const string status_text)
       InpFullStopFileName,
       BoolText(InpTrendGuardEnabled),
       BoolText(InpTrendGuardShadowOnly),
+      BoolText(InpSoftRetestFilterEnabled),
+      IntegerToString(InpSoftRetestMaxBarsAfterBreak),
+      DoubleToString(InpSoftRetestMinBodyToRange, 2),
+      DoubleToString(InpSoftRetestMinDirectionalCloseLocation, 2),
+      DoubleToString(InpSoftRetestRetestCloseMarginAtr, 2),
       BoolText(InpBreakevenEnabled),
       BoolText(InpPartialTakeProfitEnabled),
       status_text
@@ -556,6 +574,129 @@ string TrendText(const int trend)
    if(trend < 0)
       return "DOWN";
    return "NEUTRAL";
+}
+
+double AverageM5RangePrice(const int start_shift, const int periods)
+{
+   double total = 0.0;
+   int counted = 0;
+   for(int shift = start_shift; shift < start_shift + periods; shift++)
+   {
+      double high_price = iHigh(_Symbol, PERIOD_M5, shift);
+      double low_price = iLow(_Symbol, PERIOD_M5, shift);
+      if(high_price <= 0.0 || low_price <= 0.0 || high_price < low_price)
+         continue;
+      total += high_price - low_price;
+      counted++;
+   }
+   if(counted <= 0)
+      return 0.0;
+   return total / counted;
+}
+
+void BlockSoftRetestObservation(Phase1BreakoutRetestObservation &observation, const string reason_code)
+{
+   observation.would_signal = false;
+   observation.stage = "SOFT_RETEST_FILTER_BLOCK";
+   observation.reason_code = reason_code;
+}
+
+bool ApplySoftRetestFilter(Phase1BreakoutRetestObservation &observation)
+{
+   if(!InpSoftRetestFilterEnabled || !observation.would_signal)
+      return true;
+
+   bool is_long = observation.direction_text == "LONG";
+   bool is_short = observation.direction_text == "SHORT";
+   if(!is_long && !is_short)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_NO_DIRECTION");
+      return false;
+   }
+
+   int bars_after_break = observation.break_shift - 2;
+   if(bars_after_break < 1 || bars_after_break > InpSoftRetestMaxBarsAfterBreak)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_BARS_AFTER_BREAK_BLOCK");
+      return false;
+   }
+
+   double retest_atr = AverageM5RangePrice(2, 14);
+   if(retest_atr <= 0.0)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_ATR_UNAVAILABLE");
+      return false;
+   }
+
+   double retest_close = iClose(_Symbol, PERIOD_M5, 2);
+   double confirmation_open = iOpen(_Symbol, PERIOD_M5, 1);
+   double confirmation_high = iHigh(_Symbol, PERIOD_M5, 1);
+   double confirmation_low = iLow(_Symbol, PERIOD_M5, 1);
+   double confirmation_close = iClose(_Symbol, PERIOD_M5, 1);
+   if(retest_close <= 0.0 || confirmation_open <= 0.0 || confirmation_high <= 0.0 || confirmation_low <= 0.0 || confirmation_close <= 0.0)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_BAR_DATA_UNAVAILABLE");
+      return false;
+   }
+
+   double level = observation.level_price;
+   double margin = InpSoftRetestRetestCloseMarginAtr * retest_atr;
+   if(is_long)
+   {
+      if(retest_close < level + margin)
+      {
+         BlockSoftRetestObservation(observation, "SOFT_RETEST_RETEST_MARGIN_BLOCK");
+         return false;
+      }
+      if(confirmation_close <= level)
+      {
+         BlockSoftRetestObservation(observation, "SOFT_RETEST_CONFIRMATION_CLOSE_BLOCK");
+         return false;
+      }
+   }
+   else
+   {
+      if(retest_close > level - margin)
+      {
+         BlockSoftRetestObservation(observation, "SOFT_RETEST_RETEST_MARGIN_BLOCK");
+         return false;
+      }
+      if(confirmation_close >= level)
+      {
+         BlockSoftRetestObservation(observation, "SOFT_RETEST_CONFIRMATION_CLOSE_BLOCK");
+         return false;
+      }
+   }
+
+   double range = confirmation_high - confirmation_low;
+   if(range <= 0.0)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_CONFIRMATION_RANGE_BLOCK");
+      return false;
+   }
+
+   double body_to_range = MathAbs(confirmation_close - confirmation_open) / range;
+   if(body_to_range < InpSoftRetestMinBodyToRange)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_BODY_BLOCK");
+      return false;
+   }
+
+   double close_location = (confirmation_close - confirmation_low) / range;
+   if(is_long && close_location < InpSoftRetestMinDirectionalCloseLocation)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_DIRECTIONAL_CLOSE_BLOCK");
+      return false;
+   }
+   if(is_short && close_location > 1.0 - InpSoftRetestMinDirectionalCloseLocation)
+   {
+      BlockSoftRetestObservation(observation, "SOFT_RETEST_DIRECTIONAL_CLOSE_BLOCK");
+      return false;
+   }
+
+   observation.stage = "SOFT_RETEST_WOULD_SIGNAL";
+   observation.reason_code = observation.reason_code + "_SOFT_RETEST_V2";
+   return true;
 }
 
 int SignalDirectionCode(const Phase1BreakoutRetestObservation &observation)
@@ -1060,6 +1201,7 @@ void OnTimer()
    Phase1BreakoutRetestObservation observation;
    Phase1ResetBreakoutRetestObservation(observation);
    g_breakout_observer.Evaluate(_Symbol, point, observation);
+   ApplySoftRetestFilter(observation);
 
    double spread_points = CurrentSpreadPoints();
    double estimated_cost_r = EstimatedCostRForObservation(observation, spread_points);
