@@ -289,10 +289,6 @@ def evaluate_candidates(
     decisions: list[DecisionRow] = []
     trades: list[VirtualTrade] = []
     metrics_rows: list[dict[str, Any]] = []
-    b0_closed = [trade for trade in raw_outcomes.values() if trade is not None]
-    b0_expectancy = avg([trade.final_r for trade in b0_closed])
-    b0_pf = profit_factor([trade.final_r for trade in b0_closed])
-    b0_bad_share = bad_signal_share(b0_closed)
     for candidate_id in CANDIDATE_IDS:
         opened_trades: list[VirtualTrade] = []
         accepted = 0
@@ -338,9 +334,9 @@ def evaluate_candidates(
             accepted,
             opened_trades,
             blocked_raw_final_rs,
-            b0_pf,
-            b0_expectancy,
-            b0_bad_share,
+            None,
+            None,
+            None,
         )
         trades_for_candidate = [trade for trade in opened_trades if trade.candidate_id == candidate_id]
         metrics["sample_rows"] = [asdict(row) for row in trades_for_candidate[:5]]
@@ -351,16 +347,37 @@ def evaluate_candidates(
             and metrics["expectancy_r"] is not None
             and metrics["blocked_bucket_expectancy_r"] < metrics["expectancy_r"]
         )
-        metrics["bad_signal_loss_share_improvement_pct"] = improvement_pct(
-            b0_bad_share,
-            metrics["bad_signal_loss_share_pct"],
-        )
-        metrics["v2_registration_eligible"] = v2_registration_eligible(metrics)
         metrics["candidate_role"] = candidate_role(candidate_id)
         metrics["promotion_evidence"] = False
         metrics["data_limitation"] = "M5 bar replay only; not forward tick-level promotion evidence."
         metrics_rows.append(metrics)
+    apply_b0_comparisons(metrics_rows)
     return decisions, trades, metrics_rows
+
+
+def apply_b0_comparisons(metrics_rows: list[dict[str, Any]]) -> None:
+    b0 = next(row for row in metrics_rows if row["candidate_id"] == "B0_RAW_ALL_SESSION")
+    b0_pf = b0.get("profit_factor")
+    b0_expectancy = b0.get("expectancy_r")
+    b0_bad_share = b0.get("bad_signal_loss_share_pct")
+    b0_opened = b0.get("opened_virtual_trades") or 0
+    b0_median_weekly = b0.get("median_weekly_trades") or 0
+    for metrics in metrics_rows:
+        pf = metrics.get("profit_factor")
+        expectancy = metrics.get("expectancy_r")
+        metrics["profit_factor_delta_vs_b0"] = round(pf - b0_pf, 4) if pf is not None and b0_pf is not None else None
+        metrics["expectancy_delta_vs_b0"] = (
+            round(expectancy - b0_expectancy, 4)
+            if expectancy is not None and b0_expectancy is not None
+            else None
+        )
+        metrics["bad_signal_loss_share_improvement_pct"] = improvement_pct(
+            b0_bad_share,
+            metrics["bad_signal_loss_share_pct"],
+        )
+        metrics["virtual_trade_retention_pct"] = pct(metrics["opened_virtual_trades"], b0_opened)
+        metrics["median_weekly_trade_retention_pct"] = pct(metrics["median_weekly_trades"] or 0, b0_median_weekly)
+        metrics["v2_registration_eligible"] = v2_registration_eligible(metrics)
 
 
 def candidate_metrics(
@@ -403,7 +420,8 @@ def candidate_metrics(
         "accepted_signals": accepted,
         "signal_retention_pct": pct(accepted, len(raw_signals)),
         "opened_virtual_trades": len(opened_trades),
-        "virtual_trade_retention_pct": pct(len(opened_trades), len(raw_signals)),
+        "raw_signal_open_rate_pct": pct(len(opened_trades), len(raw_signals)),
+        "virtual_trade_retention_pct": None,
         "closed_trades": closed,
         "wins": wins,
         "losses": losses,
@@ -652,6 +670,7 @@ def v2_registration_eligible(metrics: dict[str, Any]) -> bool:
         metrics.get("signal_retention_pct", 0.0) >= 40.0
         and metrics.get("virtual_trade_retention_pct", 0.0) >= 35.0
         and metrics.get("closed_trades", 0) >= 100
+        and metrics.get("median_weekly_trade_retention_pct", 0.0) >= 40.0
         and pf is not None
         and pf >= 1.20
         and exp is not None

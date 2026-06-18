@@ -57,6 +57,7 @@ def test_v2_registration_keeps_frequency_floor_and_quality_gate() -> None:
         "signal_retention_pct": 40.0,
         "virtual_trade_retention_pct": 35.0,
         "closed_trades": 100,
+        "median_weekly_trade_retention_pct": 40.0,
         "profit_factor": 1.25,
         "expectancy_r": 0.15,
         "profit_factor_delta_vs_b0": 0.16,
@@ -69,6 +70,7 @@ def test_v2_registration_keeps_frequency_floor_and_quality_gate() -> None:
     assert module.v2_registration_eligible(eligible)
     assert not module.v2_registration_eligible({**eligible, "signal_retention_pct": 39.99})
     assert not module.v2_registration_eligible({**eligible, "virtual_trade_retention_pct": 34.99})
+    assert not module.v2_registration_eligible({**eligible, "median_weekly_trade_retention_pct": 39.99})
     assert not module.v2_registration_eligible({**eligible, "bad_signal_loss_share_improvement_pct": 19.99})
 
 
@@ -82,3 +84,43 @@ def test_ema_seeds_from_simple_average_then_recurses() -> None:
     assert ema20[18] is None
     assert ema20[19] == 10.5
     assert ema20[20] == (21.0 - 10.5) * multiplier + 10.5
+
+
+def test_apply_b0_comparisons_uses_one_position_b0_denominators() -> None:
+    module = load_script("run_a3_signal_quality_offline_discovery")
+    rows = [
+        {
+            "candidate_id": "B0_RAW_ALL_SESSION",
+            "profit_factor": 1.50,
+            "expectancy_r": 0.25,
+            "bad_signal_loss_share_pct": 40.0,
+            "opened_virtual_trades": 80,
+            "median_weekly_trades": 20,
+            "signal_retention_pct": 100.0,
+            "closed_trades": 80,
+            "blocked_bucket_worse_than_kept": False,
+            "both_rising_and_falling_regimes": True,
+        },
+        {
+            "candidate_id": "CANDIDATE",
+            "profit_factor": 1.70,
+            "expectancy_r": 0.32,
+            "bad_signal_loss_share_pct": 30.0,
+            "opened_virtual_trades": 40,
+            "median_weekly_trades": 10,
+            "signal_retention_pct": 60.0,
+            "closed_trades": 40,
+            "blocked_bucket_worse_than_kept": True,
+            "both_rising_and_falling_regimes": True,
+        },
+    ]
+
+    module.apply_b0_comparisons(rows)
+
+    assert rows[0]["profit_factor_delta_vs_b0"] == 0.0
+    assert rows[0]["virtual_trade_retention_pct"] == 100.0
+    assert rows[1]["profit_factor_delta_vs_b0"] == 0.2
+    assert rows[1]["expectancy_delta_vs_b0"] == 0.07
+    assert rows[1]["bad_signal_loss_share_improvement_pct"] == 25.0
+    assert rows[1]["virtual_trade_retention_pct"] == 50.0
+    assert rows[1]["median_weekly_trade_retention_pct"] == 50.0
