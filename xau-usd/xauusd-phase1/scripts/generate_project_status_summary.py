@@ -141,7 +141,7 @@ def generate_project_status_summary(
                 "shadow_hypothesis_status": shadow_hypothesis_status,
                 "shadow_hypothesis_manifest": shadow_hypothesis,
                 "reactivation_gate_status": "BLOCKED",
-                "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
+                "next_allowed_transition": "P3 offline A3 signal-quality discovery screen; repo-only and no broker action.",
             },
         },
         "quarantine": {
@@ -189,13 +189,11 @@ def generate_project_status_summary(
             "a3_effective_runtime_authorization": effective_a3_authorization,
         },
         "next_evidence_required": [
-            "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
-            "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
-            "XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md",
-            "A1/A2/A3 direct-history reconciliation after the forward week",
-            "PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup",
-            "A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up",
-            "A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation",
+            "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
+            "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
+            "SQ-03 offline Python discovery sweep with frequency-quality and loss-attribution table",
+            "Green CI run tied to the exact source commit before any shadow-terminal attachment",
+            "A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass",
         ],
     }
 
@@ -340,6 +338,18 @@ def _profit_lock_disarmed(report: dict[str, Any]) -> bool:
 
 
 def _test_suite_status(report_dir: Path) -> dict[str, Any]:
+    p1_p2 = report_dir / "A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json"
+    payload = _read_json(p1_p2)
+    phase1_result = str(payload.get("verification", {}).get("phase1_pytest", ""))
+    if phase1_result:
+        passed = _to_int(phase1_result.split()[0])
+        failed = 0 if "failed" not in phase1_result.lower() else None
+        return {
+            "status": "PASS" if passed and failed == 0 else "UNKNOWN",
+            "passed": passed,
+            "failed": failed,
+            "source": "xau-usd/xauusd-phase1/outputs/reports/A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json",
+        }
     closure = report_dir / "PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md"
     if not closure.exists():
         return {"status": "UNKNOWN", "passed": None, "failed": None, "source": ""}

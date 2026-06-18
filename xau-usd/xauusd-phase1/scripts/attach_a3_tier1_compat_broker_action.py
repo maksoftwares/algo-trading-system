@@ -15,6 +15,8 @@ from typing import Any
 
 DEFAULT_PORTABLE_ROOT = Path("C:/MT5PortableRepairLane")
 DEFAULT_OUTPUT_JSON = Path("outputs") / "reports" / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
+DEFAULT_OWNER_PACKET = Path("docs") / "A3_TIER1_COMPAT_BROKER_ACTION_OWNER_AUTHORIZATION_2026_06_17.md"
+CURRENT_A3_PAUSE_ACK = "A3_ENTRY_LANES_PAUSED"
 
 EA_NAME = "Account3BreakoutTier1CompatExecutor"
 RUN_ID = "A3_BREAKOUT_TIER1_COMPAT_V1_ARMED_20260617"
@@ -22,6 +24,7 @@ MAGIC = "933400"
 COMMENT = "A3_BREAKOUT_TIER1_COMPAT"
 ACCOUNT_LOGIN = "1033669"
 SYMBOL = "XAUUSD"
+A3_ENTRY_MAGICS = {933200, 933300, 933400}
 
 ARMED_INPUTS = {
     "InpRunId": RUN_ID,
@@ -106,6 +109,9 @@ def attach_a3_tier1_compat(
     if duplicate_charts and not allow_existing_chart:
         raise RuntimeError(f"A3 Tier1 compat is already attached or magic {MAGIC} is already present: {duplicate_charts}")
 
+    broker_a3_exposure_before = broker_a3_exposure_state(terminal_exe)
+    if broker_a3_exposure_before.get("status") != "PASS":
+        raise RuntimeError(f"A3 broker exposure must be zero and verifiable before attachment: {broker_a3_exposure_before}")
     broker_magic_state_before = broker_magic_state(terminal_exe)
     if broker_magic_state_before.get("status") == "PASS" and broker_magic_state_before.get("matching_total", 0) > 0:
         raise RuntimeError(f"Existing open/pending broker exposure with magic {MAGIC}: {broker_magic_state_before}")
@@ -140,6 +146,7 @@ def attach_a3_tier1_compat(
             "PASS" if not duplicate_charts or allow_existing_chart else "FAIL",
             ", ".join(duplicate_charts) if duplicate_charts else "none",
         ),
+        check("preexisting_a3_broker_exposure_zero", broker_a3_exposure_before.get("status", "UNKNOWN"), json.dumps(broker_a3_exposure_before, sort_keys=True)),
         check("preexisting_933400_broker_exposure_absent", broker_magic_state_before.get("status", "UNKNOWN"), json.dumps(broker_magic_state_before, sort_keys=True)),
         check("local_armed_preset_written", "PASS" if Path(armed_preset["path"]).exists() else "FAIL", armed_preset["path"]),
         check("new_chart_added", "PASS" if any(row.expert == EA_NAME and row.magic == MAGIC for row in after_profile_edit) else "FAIL", str(new_chart)),
@@ -185,6 +192,7 @@ def attach_a3_tier1_compat(
         "new_chart": str(new_chart),
         "startup_log_before": startup_before,
         "startup_log_after": startup_after,
+        "broker_a3_exposure_before": broker_a3_exposure_before,
         "broker_magic_state_before": broker_magic_state_before,
         "before_charts": [row.__dict__ for row in before],
         "after_charts": [row.__dict__ for row in after_launch],
@@ -398,6 +406,39 @@ def broker_magic_state(terminal_exe: Path) -> dict[str, Any]:
         matching_orders = [item.ticket for item in orders if int(getattr(item, "magic", 0)) == int(MAGIC)]
         return {
             "status": "PASS" if not matching_positions and not matching_orders else "FAIL",
+            "positions_total": len(positions),
+            "orders_total": len(orders),
+            "matching_positions": matching_positions,
+            "matching_orders": matching_orders,
+            "matching_total": len(matching_positions) + len(matching_orders),
+        }
+    finally:
+        mt5.shutdown()
+
+
+def broker_a3_exposure_state(terminal_exe: Path) -> dict[str, Any]:
+    try:
+        import MetaTrader5 as mt5  # type: ignore
+    except Exception as exc:  # pragma: no cover - depends on local MT5 package
+        return {"status": "UNKNOWN", "reason": f"MetaTrader5 import failed: {exc}"}
+    if not mt5.initialize(path=str(terminal_exe)):
+        return {"status": "UNKNOWN", "reason": f"MetaTrader5 initialize failed: {mt5.last_error()}"}
+    try:
+        positions = mt5.positions_get(symbol=SYMBOL) or []
+        orders = mt5.orders_get(symbol=SYMBOL) or []
+        matching_positions = [
+            int(item.ticket)
+            for item in positions
+            if int(getattr(item, "magic", 0)) in A3_ENTRY_MAGICS
+        ]
+        matching_orders = [
+            int(item.ticket)
+            for item in orders
+            if int(getattr(item, "magic", 0)) in A3_ENTRY_MAGICS
+        ]
+        return {
+            "status": "PASS" if not matching_positions and not matching_orders else "FAIL",
+            "checked_magics": sorted(A3_ENTRY_MAGICS),
             "positions_total": len(positions),
             "orders_total": len(orders),
             "matching_positions": matching_positions,
@@ -643,15 +684,55 @@ def escape_md(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", "<br>")
 
 
+def validate_apply_authority(
+    owner_packet: Path,
+    owner_packet_sha256: str,
+    review_hash: str,
+    acknowledge_current_a3_pause: str,
+) -> dict[str, str]:
+    require_file(owner_packet)
+    actual_owner_packet_sha256 = hashlib.sha256(owner_packet.read_bytes()).hexdigest()
+    if not owner_packet_sha256 or actual_owner_packet_sha256.lower() != owner_packet_sha256.lower():
+        raise RuntimeError(
+            "Owner packet SHA256 mismatch or missing: "
+            f"expected={owner_packet_sha256 or 'MISSING'} actual={actual_owner_packet_sha256}"
+        )
+    if len(review_hash.strip()) < 7:
+        raise RuntimeError("Review hash is required before --apply.")
+    if acknowledge_current_a3_pause.strip() != CURRENT_A3_PAUSE_ACK:
+        raise RuntimeError(f"--acknowledge-current-a3-pause must equal {CURRENT_A3_PAUSE_ACK}.")
+    return {
+        "owner_packet": str(owner_packet),
+        "owner_packet_sha256": actual_owner_packet_sha256,
+        "review_hash": review_hash.strip(),
+        "acknowledge_current_a3_pause": acknowledge_current_a3_pause.strip(),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Attach A3 Tier1 compat broker-action lane to the A3 demo portable terminal.")
     parser.add_argument("--phase1-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--portable-root", type=Path, default=DEFAULT_PORTABLE_ROOT)
     parser.add_argument("--output-json", type=Path, default=None)
+    parser.add_argument("--apply", action="store_true", help="Required for any terminal/profile mutation.")
+    parser.add_argument("--owner-packet", type=Path, default=None)
+    parser.add_argument("--owner-packet-sha256", default="")
+    parser.add_argument("--review-hash", default="")
+    parser.add_argument("--acknowledge-current-a3-pause", default="")
     parser.add_argument("--no-launch", action="store_true")
     parser.add_argument("--wait-seconds", type=int, default=90)
     parser.add_argument("--allow-existing-chart", action="store_true")
     args = parser.parse_args(argv)
+    if not args.apply:
+        print("NOOP: A3 Tier1 compat attachment requires --apply plus owner packet/hash, review hash, zero exposure, profile backup, and current A3 pause acknowledgement.")
+        return 0
+    owner_packet = args.owner_packet or args.phase1_root / DEFAULT_OWNER_PACKET
+    validate_apply_authority(
+        owner_packet=owner_packet,
+        owner_packet_sha256=args.owner_packet_sha256,
+        review_hash=args.review_hash,
+        acknowledge_current_a3_pause=args.acknowledge_current_a3_pause,
+    )
     payload = attach_a3_tier1_compat(
         phase1_root=args.phase1_root,
         portable_root=args.portable_root,

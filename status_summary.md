@@ -1,7 +1,7 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T10:42:49.179639Z`
-Artifact generation base commit: `e3e3e7a49f279bc22c14b5cf44e49a98fab20434`
+Generated UTC: `2026-06-18T12:21:01.116422Z`
+Artifact generation base commit: `ab95b3def4888921dae4861fb9398cdaf26ea4c0`
 Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
@@ -44,7 +44,7 @@ Runtime performance: `FAIL`
 Shadow candidate performance: `NOT_EVALUATED`
 Pause artifact/runtime consistency: `PASS`
 Emergency pause report: `PASS`
-Test suite: `PASS` (415 passed, 0 failed)
+Test suite: `PASS` (425 passed, 0 failed)
 Family mutex: `NOT_IMPLEMENTED`
 Containment: `NOT_IMPLEMENTED`
 Shadow hypothesis: `REGISTERED_LOCKED`
@@ -83,10 +83,8 @@ Current permission of that authorization: `SUPERSEDED_BY_EMERGENCY_PAUSE`
 
 ## Next Evidence Required
 
-- XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md
-- XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md
-- XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md
-- A1/A2/A3 direct-history reconciliation after the forward week
-- PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup
-- A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up
-- A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation
+- SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md
+- SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md
+- SQ-03 offline Python discovery sweep with frequency-quality and loss-attribution table
+- Green CI run tied to the exact source commit before any shadow-terminal attachment
+- A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass

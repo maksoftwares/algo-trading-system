@@ -41,6 +41,16 @@ def test_project_status_summary_records_account_boundaries(tmp_path: Path):
     assert summary["a3_tier1"]["current_runtime_state"]["lanes"]["933400"] == "PAUSED"
     assert summary["a3_tier1"]["effective_runtime_authorization"] == "A3_ENTRY_LANES_PAUSED"
     assert summary["accounts"]["A3"]["pause_artifact_runtime_consistency_status"] == "PASS"
+    assert summary["accounts"]["A3"]["next_allowed_transition"] == "P3 offline A3 signal-quality discovery screen; repo-only and no broker action."
+    assert summary["accounts"]["A3"]["test_suite_status"]["passed"] == 425
+    assert "A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json" in summary["accounts"]["A3"]["test_suite_status"]["source"]
+    assert summary["next_evidence_required"] == [
+        "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
+        "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
+        "SQ-03 offline Python discovery sweep with frequency-quality and loss-attribution table",
+        "Green CI run tied to the exact source commit before any shadow-terminal attachment",
+        "A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass",
+    ]
     assert summary["authorization"]["canonical_phase2_pass"] is False
     assert summary["authorization"]["live_trading_authorized"] is False
     assert "audit-friendly companion" in markdown
@@ -182,6 +192,17 @@ def _repo_with_reports(tmp_path: Path) -> Path:
                     "status": "PASS",
                     "a3_positions_total": 0,
                     "a3_orders_total": 0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json").write_text(
+        json.dumps(
+            {
+                "status": "PASS",
+                "verification": {
+                    "phase1_pytest": "425 passed",
                 },
             }
         ),

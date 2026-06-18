@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "task": "SQ-00 status and arming-audit cleanup",
+  "created_at_utc": "2026-06-18T12:21:01Z",
+  "boundary": "Repo-only. No MT5 runtime, terminal profile, preset arming, order, position, or broker action touched.",
+  "base_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
+  "changes": [
+    "Regenerated status_summary.json and status_summary.md against ab95b3def4888921dae4861fb9398cdaf26ea4c0.",
+    "Status summary now reports Phase 1 pytest as 425 passed from A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json.",
+    "Status summary next_allowed_transition now points to P3 offline A3 signal-quality discovery screen with no broker action.",
+    "Expanded audit_phase1_arming.py to scan committed executable deployment script suffixes.",
+    "Added policy-gated A3 executable script checks for explicit --apply, owner packet/hash, review hash, zero-exposure check, profile backup, and current A3 pause acknowledgement.",
+    "Hardened dormant A3 attachment helpers so default execution is no-op and --apply requires authority parameters."
+  ],
+  "scope_notes": [
+    "Untracked/dirty A1 daily profit-floor guardian files existed before SQ-00 and were not staged.",
+    "agent.md and status.html already had unrelated A1 guardian working-tree edits; they were not staged in this A3 SQ-00 commit.",
+    "status.html and agent.md were checked for stale e3e3e7a / 415 passed references; none were found."
+  ],
+  "verification": {
+    "focused_pytest": "7 passed",
+    "arming_audit": "PASS",
+    "py_compile": "PASS"
+  },
+  "next": [
+    "SQ-01 hash-lock A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md.",
+    "SQ-02 hash-lock A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md.",
+    "SQ-03 run offline Python discovery screen before any MQL5 forward apparatus."
+  ]
+}

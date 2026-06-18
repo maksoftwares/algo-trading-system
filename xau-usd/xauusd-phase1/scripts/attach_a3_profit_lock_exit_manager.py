@@ -16,6 +16,8 @@ from typing import Any
 DEFAULT_PORTABLE_ROOT = Path("C:/MT5PortableRepairLane")
 DEFAULT_GATE_JSON = Path("outputs") / "reports" / "A3_PROFIT_LOCK_EXIT_MANAGER_GATE_2026_06_17.json"
 DEFAULT_OUTPUT_JSON = Path("A3_PROFIT_LOCK_EXIT_MANAGER_ATTACHMENT_2026_06_17.json")
+DEFAULT_OWNER_PACKET = Path("CODEX_WORK_ORDER_A3_PROFIT_LOCK_EXIT_MANAGER_LIVE_2026_06_17.md")
+CURRENT_A3_PAUSE_ACK = "A3_ENTRY_LANES_PAUSED"
 
 EA_NAME = "Account3ProfitLockExitManager"
 RUN_ID = "A3_PROFIT_LOCK_EXIT_MANAGER_V1_ARMED_20260618"
@@ -24,6 +26,7 @@ SYMBOL = "XAUUSD"
 MANAGED_MAGICS = "933200,933400"
 EXCLUDED_MAGIC = "933300"
 ATTACHED_STATUS = "ATTACHED_A3_PROFIT_LOCK_EXIT_MANAGER"
+A3_ENTRY_MAGICS = {933200, 933300, 933400}
 
 ARMED_INPUTS = {
     "InpRunId": RUN_ID,
@@ -95,6 +98,9 @@ def attach_a3_profit_lock_exit_manager(
         raise RuntimeError(f"Profit-lock replay gate is not PASS: {gate_payload.get('status')}")
 
     runtime_before = broker_runtime_state(terminal_exe)
+    broker_a3_exposure_before = broker_a3_exposure_state(terminal_exe)
+    if broker_a3_exposure_before.get("status") != "PASS":
+        raise RuntimeError(f"A3 broker exposure must be zero and verifiable before attachment: {broker_a3_exposure_before}")
     before = chart_inventory(profile_dir)
     duplicate_charts = [row.chart for row in before if row.expert == EA_NAME]
     if duplicate_charts and not allow_existing_chart:
@@ -124,6 +130,7 @@ def attach_a3_profit_lock_exit_manager(
 
     checks = [
         check("step0_replay_gate_pass", "PASS", gate_summary(gate_payload)),
+        check("preexisting_a3_broker_exposure_zero", broker_a3_exposure_before.get("status", "UNKNOWN"), json.dumps(broker_a3_exposure_before, sort_keys=True)),
         check("compile_0_errors_0_warnings", "PASS" if compiled["compile_pass"] else "FAIL", compiled["compile_log"]),
         check("profile_backup_created", "PASS" if Path(profile_backup).exists() else "FAIL", str(profile_backup)),
         check("local_armed_preset_written", "PASS" if Path(armed_preset["path"]).exists() else "FAIL", armed_preset["path"]),
@@ -174,6 +181,7 @@ def attach_a3_profit_lock_exit_manager(
         "startup_log_before": startup_before,
         "startup_log_after": startup_after,
         "runtime_before": runtime_before,
+        "broker_a3_exposure_before": broker_a3_exposure_before,
         "runtime_after": runtime_after,
         "before_charts": [row.__dict__ for row in before],
         "after_charts": [row.__dict__ for row in after_launch],
@@ -405,6 +413,29 @@ def broker_runtime_state(terminal_exe: Path) -> dict[str, Any]:
         }
     finally:
         mt5.shutdown()
+
+
+def broker_a3_exposure_state(terminal_exe: Path) -> dict[str, Any]:
+    state = broker_runtime_state(terminal_exe)
+    if state.get("status") != "PASS":
+        return {"status": state.get("status", "UNKNOWN"), "reason": state.get("reason", "account_state_not_verified")}
+    matching_positions = [
+        int(row["ticket"])
+        for row in state.get("xauusd_positions", [])
+        if int(row.get("magic", 0)) in A3_ENTRY_MAGICS
+    ]
+    matching_orders = [
+        int(row["ticket"])
+        for row in state.get("xauusd_orders", [])
+        if int(row.get("magic", 0)) in A3_ENTRY_MAGICS
+    ]
+    return {
+        "status": "PASS" if not matching_positions and not matching_orders else "FAIL",
+        "checked_magics": sorted(A3_ENTRY_MAGICS),
+        "matching_positions": matching_positions,
+        "matching_orders": matching_orders,
+        "matching_total": len(matching_positions) + len(matching_orders),
+    }
 
 
 def chart_inventory(profile_dir: Path) -> list[ChartInventoryRow]:
@@ -682,16 +713,56 @@ def escape_md(value: object) -> str:
     return str(value).replace("|", "\\|").replace("\n", "<br>")
 
 
+def validate_apply_authority(
+    owner_packet: Path,
+    owner_packet_sha256: str,
+    review_hash: str,
+    acknowledge_current_a3_pause: str,
+) -> dict[str, str]:
+    require_file(owner_packet)
+    actual_owner_packet_sha256 = hashlib.sha256(owner_packet.read_bytes()).hexdigest()
+    if not owner_packet_sha256 or actual_owner_packet_sha256.lower() != owner_packet_sha256.lower():
+        raise RuntimeError(
+            "Owner packet SHA256 mismatch or missing: "
+            f"expected={owner_packet_sha256 or 'MISSING'} actual={actual_owner_packet_sha256}"
+        )
+    if len(review_hash.strip()) < 7:
+        raise RuntimeError("Review hash is required before --apply.")
+    if acknowledge_current_a3_pause.strip() != CURRENT_A3_PAUSE_ACK:
+        raise RuntimeError(f"--acknowledge-current-a3-pause must equal {CURRENT_A3_PAUSE_ACK}.")
+    return {
+        "owner_packet": str(owner_packet),
+        "owner_packet_sha256": actual_owner_packet_sha256,
+        "review_hash": review_hash.strip(),
+        "acknowledge_current_a3_pause": acknowledge_current_a3_pause.strip(),
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Attach A3 profit-lock exit manager to the A3 demo portable terminal.")
     parser.add_argument("--phase1-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--portable-root", type=Path, default=DEFAULT_PORTABLE_ROOT)
     parser.add_argument("--gate-json", type=Path, default=None)
     parser.add_argument("--output-json", type=Path, default=None)
+    parser.add_argument("--apply", action="store_true", help="Required for any terminal/profile mutation.")
+    parser.add_argument("--owner-packet", type=Path, default=None)
+    parser.add_argument("--owner-packet-sha256", default="")
+    parser.add_argument("--review-hash", default="")
+    parser.add_argument("--acknowledge-current-a3-pause", default="")
     parser.add_argument("--no-launch", action="store_true")
     parser.add_argument("--wait-seconds", type=int, default=90)
     parser.add_argument("--allow-existing-chart", action="store_true")
     args = parser.parse_args(argv)
+    if not args.apply:
+        print("NOOP: A3 profit-lock attachment requires --apply plus owner packet/hash, review hash, zero exposure, profile backup, and current A3 pause acknowledgement.")
+        return 0
+    owner_packet = args.owner_packet or args.phase1_root.parents[1] / DEFAULT_OWNER_PACKET
+    validate_apply_authority(
+        owner_packet=owner_packet,
+        owner_packet_sha256=args.owner_packet_sha256,
+        review_hash=args.review_hash,
+        acknowledge_current_a3_pause=args.acknowledge_current_a3_pause,
+    )
     payload = attach_a3_profit_lock_exit_manager(
         phase1_root=args.phase1_root,
         portable_root=args.portable_root,

@@ -106,8 +106,8 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
-      "artifact_commit_or_release_id": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
-      "artifact_generation_base_commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
+      "artifact_commit_or_release_id": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
+      "artifact_generation_base_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
       "artifact_integrity_status": "PASS",
       "authorization_status": "A3_ENTRY_LANES_PAUSED",
       "containment_status": "NOT_IMPLEMENTED",
@@ -146,7 +146,7 @@
       },
       "improved_933300_paused": true,
       "login": "1033669",
-      "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
+      "next_allowed_transition": "P3 offline A3 signal-quality discovery screen; repo-only and no broker action.",
       "pause_artifact_runtime_consistency_status": "PASS",
       "plain_933200_stopped": true,
       "profit_lock_dryrun_disarmed": true,
@@ -177,8 +177,8 @@
       "shadow_hypothesis_status": "REGISTERED_LOCKED",
       "test_suite_status": {
         "failed": 0,
-        "passed": 415,
-        "source": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
+        "passed": 425,
+        "source": "xau-usd/xauusd-phase1/outputs/reports/A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json",
         "status": "PASS"
       },
       "tier1_933400_paused": true,
@@ -198,15 +198,13 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-18T10:42:49.179639Z",
+  "generated_at_utc": "2026-06-18T12:21:01.116422Z",
   "next_evidence_required": [
-    "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
-    "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
-    "XAUUSD_NON_ROUND_AFTERNOON_RESIDUAL_2026_06_xx.md",
-    "A1/A2/A3 direct-history reconciliation after the forward week",
-    "PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md review/cleanup",
-    "A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md reviewer follow-up",
-    "A3 shadow-only signal-quality hypothesis with account-wide family mutex before any reactivation"
+    "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
+    "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
+    "SQ-03 offline Python discovery sweep with frequency-quality and loss-attribution table",
+    "Green CI run tied to the exact source commit before any shadow-terminal attachment",
+    "A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass"
   ],
   "quarantine": {
     "keep_active_through_forward_week": true,
@@ -262,8 +260,8 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434",
-    "main_remote_commit": "e3e3e7a49f279bc22c14b5cf44e49a98fab20434"
+    "commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
+    "main_remote_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0"
   },
   "schema_version": "project_status_summary_v2",
   "source_artifacts": {
