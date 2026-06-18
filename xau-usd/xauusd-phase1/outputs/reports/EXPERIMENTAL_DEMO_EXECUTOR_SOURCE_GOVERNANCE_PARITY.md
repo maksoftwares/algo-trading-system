@@ -6,8 +6,8 @@ This audit checks experimental demo executor source/governance parity only. It d
 
 Source: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5`
 Governance doc: `C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\docs\EXPERIMENTAL_DEMO_EXECUTOR_GOVERNANCE.md`
-Repo commit hash: `aa74c28788ed281297191f0fcef9acdf820022c0`
-Source SHA256: `40ee8fbd1e80b435b581fd23b2f62445e0963ff1e6f0640111c8ab6dfd3e3257`
+Repo commit hash: `b7ea9823ff6c6a78c05a01034498eaeeaccc2d98`
+Source SHA256: `5d67933fa6673ac21488a98b3be780cf671781846e22238f27783af7b5a582a0`
 Governance doc SHA256: `eb4b933db56d0de8d45706bb30aabd1e68177d028721ad57529e96ed0bcf2d05`
 Failed checks: 0
 
@@ -49,34 +49,39 @@ Failed checks: 0
 ## Input Declaration Block
 
 ```mql5
-12: input string InpRunId = "phase2-experimental-demo-executor-v0.2";
-13: input bool InpDryRunOnly = false;
-14: input bool InpBrokerActionAllowed = false;
-15: input string InpCandidate = "breakout_retest";
-16: input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
-17: input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
-18: input string InpTargetSymbol = "XAUUSD";
-19: input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";
-20: input string InpExpectedServerMarker = "Demo";
-21: input string InpAllowedAccountLoginsCsv = "";
-22: input string InpExperimentalAuthorizationToken = "";
-23: input string InpRequiredExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
-24: input string InpCostSuspensionAcknowledgementToken = "";
-25: input string InpRequiredCostSuspensionAcknowledgementToken = "I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT";
-26: input string InpAuthorizedCandidatesCsv = "breakout_retest";
-27: input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v02.csv";
-28: input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
-29: input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
-30: input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
-31: input double InpFixedLot = 0.01;
-32: input double InpEURUSDFixedLot = 0.05;
-33: input int InpMaxOrdersPerDay = 12;
-34: input int InpMaxAccountOrdersPerDay = 24;
-35: input int InpMinSecondsBetweenOrders = 300;
-36: input int InpMaxOpenPositionsPerInstance = 1;
-37: input int InpDeviationPoints = 50;
-38: input double InpMaxEstimatedCostR = 0.30;
-39: input double InpMaxMeasuredSpreadPoints = 75.0;
+13: input string InpRunId = "phase2-experimental-demo-executor-v0.2";
+14: input bool InpDryRunOnly = false;
+15: input bool InpBrokerActionAllowed = false;
+16: input string InpCandidate = "breakout_retest";
+17: input string InpCandidateStatus = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY";
+18: input string InpFamilyLifecycleStatus = "COST_SUSPENDED_CANONICAL";
+19: input string InpTargetSymbol = "XAUUSD";
+20: input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD,BTCUSD";
+21: input string InpExpectedServerMarker = "Demo";
+22: input string InpAllowedAccountLoginsCsv = "";
+23: input string InpExperimentalAuthorizationToken = "";
+24: input string InpRequiredExperimentalAuthorizationToken = "EXPERIMENTAL_DEMO_AUTHORIZED_REVIEW_ONLY";
+25: input string InpCostSuspensionAcknowledgementToken = "";
+26: input string InpRequiredCostSuspensionAcknowledgementToken = "I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT";
+27: input string InpAuthorizedCandidatesCsv = "breakout_retest";
+28: input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v02.csv";
+29: input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
+30: input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
+31: input string InpDirectionStateFileName = "dirstate_xauusd.csv";
+32: input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
+33: input double InpFixedLot = 0.01;
+34: input double InpEURUSDFixedLot = 0.01;
+35: input double InpGBPUSDFixedLot = 0.01;
+36: input int InpMaxOrdersPerDay = 0;
+37: input int InpMaxAccountOrdersPerDay = 0;
+38: input int InpMinSecondsBetweenOrders = 0;
+39: input int InpMaxOpenPositionsPerInstance = 0;
+40: input int InpDeviationPoints = 50;
+41: input double InpMaxEstimatedCostR = 0.00;
+42: input double InpMaxMeasuredSpreadPoints = 0.0;
+43: input bool InpTradeSessionGateEnabled = false;
+44: input int InpTradeSessionStartHour = 0;
+45: input int InpTradeSessionEndHour = 23;
 ```
 
 ## Boundary

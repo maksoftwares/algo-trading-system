@@ -1,0 +1,9 @@
+{
+  "status": "LOCKED",
+  "created_at_utc": "2026-06-18T08:50:00Z",
+  "hypothesis_id": "A3_SIGNAL_QUALITY_HYPOTHESES_V1",
+  "version": "2026_06_18",
+  "file": "docs/A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md",
+  "sha256": "9cb1f1003ca471d60438d95a30c6fc6d0a8cb83fedcda27017421fb522f77229",
+  "boundary": "Shadow-only A3 signal-quality research. No broker action, no runtime attach, no reactivation authorization."
+}

@@ -29,8 +29,8 @@ EXECUTOR_CANDIDATE_STATUS = "EXPERIMENTAL_QUARANTINE_REVIEW_ONLY"
 FAMILY_LIFECYCLE_STATUS = "COST_SUSPENDED_CANONICAL"
 DEFAULT_AUTHORIZED_CANDIDATES_CSV = "breakout_retest"
 DEFAULT_FIXED_LOT = 0.01
-EURUSD_FIXED_LOT = 0.05
-GBPUSD_FIXED_LOT = 0.05
+EURUSD_FIXED_LOT = 0.01
+GBPUSD_FIXED_LOT = 0.01
 EXPERIMENTAL_SYMBOL_REPLACEMENTS = {"USDJPY": "GBPUSD"}
 ACCEPTED_CANDIDATES = (
     "breakout_retest",
@@ -212,7 +212,7 @@ def attach_phase2_experimental_demo_executors(
             "All attachments require a separate cost-suspension acknowledgement token before startup.",
             "Same-family/provisional candidates require explicit inclusion in InpAuthorizedCandidatesCsv.",
             "A central kill-switch file named by InpKillSwitchFileName blocks new orders when it contains KILL.",
-            "Each candidate-symbol instance uses fixed 0.01 lot except EURUSD, which uses fixed 0.05 lot; hard SL/TP and one open exposure per instance still apply.",
+            "Each candidate-symbol instance uses fixed 0.01 lot; hard SL/TP and one open exposure per instance still apply.",
             "Account-level daily order and open-position caps apply across chart instances.",
             "Current spread and estimated cost in R must remain below configured thresholds before any order is sent.",
             "This is an experimental demo execution run, not canonical live authorization.",

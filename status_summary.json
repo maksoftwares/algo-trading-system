@@ -1,23 +1,37 @@
 {
   "a3_tier1": {
+    "containment_status": "NOT_IMPLEMENTED",
+    "current_runtime_state": {
+      "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
+      "lanes": {
+        "933200": "PAUSED",
+        "933300": "PAUSED",
+        "933400": "PAUSED",
+        "profit_lock": "DRY_RUN_DISARMED"
+      },
+      "open_positions": 0,
+      "pending_orders": 0,
+      "verified_at_utc": "2026-06-18T07:44:27.604179Z"
+    },
+    "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
     "emergency_pause_status": "PASS",
-    "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
-    "lane": {
-      "account_login": "1033669",
-      "broker_action_allowed": "true",
-      "comment": "A3_BREAKOUT_TIER1_COMPAT",
-      "dry_run": "false",
-      "ea": "Account3BreakoutTier1CompatExecutor",
-      "fixed_lot": "0.01",
-      "magic": "933400",
-      "session_gate_server_hours": "12-15",
-      "symbol": "XAUUSD",
-      "timeframe": "M5",
-      "trend_guard_enabled": "false",
-      "trend_shadow_only": "true",
-      "xau_stop_floor_enabled": "true"
+    "family_mutex_status": "NOT_IMPLEMENTED",
+    "governance_note": "Historical owner override is preserved as audit evidence only; current runtime authorization is paused.",
+    "historical_owner_authorization": {
+      "933400_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
+      "attachment_status": "PASS",
+      "authorized_at_source": "A3_TIER1_COMPAT_BROKER_ACTION_OWNER_AUTHORIZATION_2026_06_17.md",
+      "current_permission": "SUPERSEDED_BY_EMERGENCY_PAUSE",
+      "lane": {
+        "broker_action_allowed_at_attachment": "true",
+        "dry_run_at_attachment": "false",
+        "fixed_lot": "0.01",
+        "magic": "933400",
+        "symbol": "XAUUSD"
+      }
     },
     "owner_authorized_demo_broker_action": true,
+    "reactivation_gate_status": "BLOCKED",
     "review_followup_summary": {
       "closed_trades": 23,
       "duplicate_event_count": 5,
@@ -27,6 +41,7 @@
       "wins": 1
     },
     "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+    "shadow_hypothesis_status": "REGISTERED_LOCKED",
     "status": "PASS"
   },
   "accounts": {
@@ -81,13 +96,47 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
+      "artifact_commit_or_release_id": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
+      "artifact_generation_base_commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
       "artifact_integrity_status": "PASS",
+      "containment_status": "NOT_IMPLEMENTED",
+      "current_runtime_state": {
+        "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
+        "lanes": {
+          "933200": "PAUSED",
+          "933300": "PAUSED",
+          "933400": "PAUSED",
+          "profit_lock": "DRY_RUN_DISARMED"
+        },
+        "open_positions": 0,
+        "pending_orders": 0,
+        "verified_at_utc": "2026-06-18T07:44:27.604179Z"
+      },
+      "effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
       "emergency_pause_report": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
       "emergency_pause_status": "PASS",
+      "evidence_window_end_utc": "2026-06-18T07:44:27.604179Z",
+      "evidence_window_start_utc": "2026-06-16T00:00:00Z",
+      "family_mutex_status": "NOT_IMPLEMENTED",
+      "historical_owner_authorization": {
+        "933400_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
+        "attachment_status": "PASS",
+        "authorized_at_source": "A3_TIER1_COMPAT_BROKER_ACTION_OWNER_AUTHORIZATION_2026_06_17.md",
+        "current_permission": "SUPERSEDED_BY_EMERGENCY_PAUSE",
+        "lane": {
+          "broker_action_allowed_at_attachment": "true",
+          "dry_run_at_attachment": "false",
+          "fixed_lot": "0.01",
+          "magic": "933400",
+          "symbol": "XAUUSD"
+        }
+      },
       "improved_933300_paused": true,
       "login": "1033669",
+      "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
       "plain_933200_stopped": true,
       "profit_lock_dryrun_disarmed": true,
+      "reactivation_gate_status": "BLOCKED",
       "review_followup_status": "ARTIFACT_INTEGRITY_PASS",
       "review_followup_summary": {
         "closed_trades": 23,
@@ -101,7 +150,16 @@
       "round_quarantine_active": false,
       "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
       "runtime_performance_status": "FAIL",
+      "runtime_snapshot_at_utc": "2026-06-18T07:44:27.604179Z",
       "server": "Capital.ComMena-Demo",
+      "shadow_hypothesis_status": "REGISTERED_LOCKED",
+      "source_runtime_parity_status": "PASS",
+      "test_suite_status": {
+        "failed": 0,
+        "passed": 415,
+        "source": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
+        "status": "PASS"
+      },
       "tier1_933400_paused": true,
       "tier1_compat_attachment_status": "PASS",
       "tier1_compat_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
@@ -110,6 +168,7 @@
   },
   "authorization": {
     "a3_current_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
+    "a3_effective_runtime_authorization": "A3_ENTRY_LANES_PAUSED",
     "a3_tier1_demo_broker_action": "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
     "broad_afternoon_ban_authorized": false,
     "canonical_phase2_pass": false,
@@ -118,7 +177,7 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-18T07:44:36.784892Z",
+  "generated_at_utc": "2026-06-18T08:50:42.669652Z",
   "next_evidence_required": [
     "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
     "XAUUSD_PROTECTED_BREAKOUT_CORE_FORWARD_WEEK_2026_06_xx.md",
@@ -182,17 +241,19 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "c9889cb2e7585be8c64cdea6800fb05726af3f52",
-    "main_remote_commit": "c9889cb2e7585be8c64cdea6800fb05726af3f52"
+    "commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98",
+    "main_remote_commit": "b7ea9823ff6c6a78c05a01034498eaeeaccc2d98"
   },
-  "schema_version": "project_status_summary_v1",
+  "schema_version": "project_status_summary_v2",
   "source_artifacts": {
     "a3_emergency_pause": "xau-usd/xauusd-phase1/outputs/reports/A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json",
     "a3_governance_override": "xau-usd/xauusd-phase1/docs/A3_TIER1_COMPAT_GOVERNANCE_OVERRIDE_2026_06_17.md",
     "a3_review_followup": "xau-usd/xauusd-phase1/outputs/reports/A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json",
     "a3_tier1_attachment": "xau-usd/xauusd-phase1/outputs/reports/A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json",
+    "final_review_b7ea982": "FINAL_REVIEW_B7EA982_A3_REPAIR_IMPLEMENTATION_PLAN_2026_06_18.md",
     "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
     "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
+    "phase1_test_failure_closure": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
     "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
     "round_quarantine_applied": "xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json",
     "status_html": "status.html",

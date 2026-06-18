@@ -21,6 +21,7 @@ def test_project_status_summary_records_account_boundaries(tmp_path: Path):
 
     summary = json.loads(json_path.read_text(encoding="utf-8"))
     markdown = md_path.read_text(encoding="utf-8")
+    assert summary["schema_version"] == "project_status_summary_v2"
     assert summary["accounts"]["A1"]["round_quarantine_active"] is True
     assert summary["accounts"]["A1"]["touched_by_round_quarantine"] is True
     assert summary["accounts"]["A2"]["touched_by_round_quarantine"] is False
@@ -30,10 +31,15 @@ def test_project_status_summary_records_account_boundaries(tmp_path: Path):
         "symbol_normalized_round_retest_v0",
     ]
     assert summary["a3_tier1"]["owner_authorized_demo_broker_action"] is True
+    assert "lane" not in summary["a3_tier1"]
+    assert summary["a3_tier1"]["historical_owner_authorization"]["933400_demo_broker_action"] == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION"
+    assert summary["a3_tier1"]["current_runtime_state"]["lanes"]["933400"] == "PAUSED"
+    assert summary["a3_tier1"]["effective_runtime_authorization"] == "A3_ENTRY_LANES_PAUSED"
     assert summary["authorization"]["canonical_phase2_pass"] is False
     assert summary["authorization"]["live_trading_authorized"] is False
     assert "audit-friendly companion" in markdown
     assert "OWNER_AUTHORIZED_DEMO_BROKER_ACTION" in markdown
+    assert "Effective runtime authorization: `A3_ENTRY_LANES_PAUSED`" in markdown
 
 
 def test_forward_week_templates_are_pending_and_non_runtime(tmp_path: Path):
@@ -121,6 +127,55 @@ def _repo_with_reports(tmp_path: Path) -> Path:
                     "dry_run": "false",
                     "symbol": "XAUUSD",
                     "magic": "933400",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json").write_text(
+        json.dumps(
+            {
+                "status": "ARTIFACT_INTEGRITY_PASS",
+                "artifact_integrity_status": "PASS",
+                "runtime_performance_status": "FAIL",
+                "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+                "created_at_utc": "2026-06-18T07:44:27Z",
+                "window_start_utc": "2026-06-16T00:00:00Z",
+                "window_end_utc": "2026-06-18T07:44:27Z",
+                "summary": {
+                    "closed_trades": 23,
+                    "wins": 1,
+                    "losses": 22,
+                    "net_pnl_aed": -758.79,
+                    "duplicate_event_count": 5,
+                    "profit_lock_actions": 0,
+                },
+                "per_magic": [
+                    {"magic": "933200", "dry_run_now": "true", "broker_action_allowed_now": "false"},
+                    {"magic": "933300", "dry_run_now": "true", "broker_action_allowed_now": "false"},
+                    {"magic": "933400", "dry_run_now": "true", "broker_action_allowed_now": "false"},
+                ],
+                "chart_state": {
+                    "chart05.chr": {
+                        "expert": "Account3ProfitLockExitManager",
+                        "dry_run": "true",
+                        "manage_action_allowed": "false",
+                    }
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    (reports / "A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json").write_text(
+        json.dumps(
+            {
+                "status": "PASS",
+                "created_at_utc": "2026-06-18T07:41:59Z",
+                "runtime_authorization_status": "A3_ENTRY_LANES_PAUSED",
+                "after_broker": {
+                    "status": "PASS",
+                    "a3_positions_total": 0,
+                    "a3_orders_total": 0,
                 },
             }
         ),

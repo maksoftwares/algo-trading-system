@@ -23,7 +23,8 @@ def generate_project_status_summary(
     output_md = (output_md or repo_root / DEFAULT_MD).resolve()
     now = now or datetime.now(timezone.utc)
 
-    phase1_reports = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
+    phase1_root = repo_root / "xau-usd" / "xauusd-phase1"
+    phase1_reports = phase1_root / "outputs" / "reports"
     quarantine_report = phase1_reports / "XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json"
     a3_attachment_report = phase1_reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
     a3_review_followup_report = phase1_reports / "A3_REVIEW_FOLLOWUP_STATUS_2026_06_18.json"
@@ -35,6 +36,13 @@ def generate_project_status_summary(
     a3_pause = _read_json(a3_pause_report)
     repo = _repo_state(repo_root)
     profile_backup = quarantine.get("terminal", {}).get("profile_backup_dir", "")
+    historical_a3_authorization = _a3_historical_owner_authorization(a3_attachment)
+    current_a3_runtime = _a3_current_runtime_state(a3_review_followup, a3_pause)
+    effective_a3_authorization = current_a3_runtime.get("effective_runtime_authorization", "MISSING")
+    a3_artifact_integrity = a3_review_followup.get("artifact_integrity_status", a3_pause.get("artifact_integrity_status", "MISSING"))
+    a3_runtime_performance = a3_review_followup.get("runtime_performance_status", a3_pause.get("runtime_performance_status", "MISSING"))
+    test_suite_status = _test_suite_status(phase1_reports)
+    shadow_hypothesis_status = _shadow_hypothesis_status(phase1_root)
 
     target_charts = _chart_summary(quarantine.get("after_target_charts", quarantine.get("target_charts", [])))
     protected_charts = _chart_summary(quarantine.get("after_protected_charts", quarantine.get("protected_charts", [])))
@@ -54,7 +62,7 @@ def generate_project_status_summary(
     ) or ["breakout_retest", "swing_breakout_retest_v0"]
 
     summary: dict[str, Any] = {
-        "schema_version": "project_status_summary_v1",
+        "schema_version": "project_status_summary_v2",
         "generated_at_utc": now.isoformat().replace("+00:00", "Z"),
         "repo": repo,
         "source_artifacts": {
@@ -67,8 +75,10 @@ def generate_project_status_summary(
             "a3_review_followup": _rel(repo_root, a3_review_followup_report),
             "a3_emergency_pause": _rel(repo_root, a3_pause_report),
             "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
+            "final_review_b7ea982": "FINAL_REVIEW_B7EA982_A3_REPAIR_IMPLEMENTATION_PLAN_2026_06_18.md",
             "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
             "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
+            "phase1_test_failure_closure": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
         },
         "accounts": {
             "A1": {
@@ -93,12 +103,15 @@ def generate_project_status_summary(
                 "role": "repair / Tier-1 compatibility demo account",
                 "round_quarantine_active": False,
                 "touched_by_round_quarantine": False,
-                "tier1_compat_demo_broker_action": _a3_broker_action_status(a3_attachment),
+                "historical_owner_authorization": historical_a3_authorization,
+                "current_runtime_state": current_a3_runtime,
+                "effective_runtime_authorization": effective_a3_authorization,
+                "tier1_compat_demo_broker_action": historical_a3_authorization["933400_demo_broker_action"],
                 "tier1_compat_attachment_status": a3_attachment.get("status", "MISSING"),
                 "review_followup_status": a3_review_followup.get("status", "MISSING"),
-                "artifact_integrity_status": a3_review_followup.get("artifact_integrity_status", "MISSING"),
-                "runtime_performance_status": a3_review_followup.get("runtime_performance_status", "MISSING"),
-                "runtime_authorization_status": a3_review_followup.get("runtime_authorization_status", "MISSING"),
+                "artifact_integrity_status": a3_artifact_integrity,
+                "runtime_performance_status": a3_runtime_performance,
+                "runtime_authorization_status": effective_a3_authorization,
                 "review_followup_summary": a3_review_followup.get("summary", {}),
                 "plain_933200_stopped": _a3_lane_paused(a3_review_followup, "933200"),
                 "improved_933300_paused": _a3_lane_paused(a3_review_followup, "933300"),
@@ -106,6 +119,18 @@ def generate_project_status_summary(
                 "profit_lock_dryrun_disarmed": _profit_lock_disarmed(a3_review_followup),
                 "emergency_pause_status": a3_pause.get("status", "MISSING"),
                 "emergency_pause_report": _rel(repo_root, a3_pause_report),
+                "evidence_window_start_utc": a3_review_followup.get("window_start_utc", ""),
+                "evidence_window_end_utc": a3_review_followup.get("window_end_utc", ""),
+                "runtime_snapshot_at_utc": current_a3_runtime.get("verified_at_utc", ""),
+                "artifact_generation_base_commit": repo.get("commit", ""),
+                "artifact_commit_or_release_id": repo.get("commit", ""),
+                "source_runtime_parity_status": _source_runtime_parity_status(a3_review_followup, a3_pause),
+                "test_suite_status": test_suite_status,
+                "family_mutex_status": "NOT_IMPLEMENTED",
+                "containment_status": "NOT_IMPLEMENTED",
+                "shadow_hypothesis_status": shadow_hypothesis_status,
+                "reactivation_gate_status": "BLOCKED",
+                "next_allowed_transition": "Shadow-only A3 signal-quality hypothesis registration; no broker action.",
             },
         },
         "quarantine": {
@@ -122,12 +147,20 @@ def generate_project_status_summary(
         },
         "a3_tier1": {
             "status": a3_attachment.get("status", "MISSING"),
-            "owner_authorized_demo_broker_action": _a3_broker_action_status(a3_attachment) == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
-            "governance_note": "Owner explicitly overrode the reviewer observer-first recommendation for demo-only broker action.",
-            "lane": a3_attachment.get("lane", {}),
+            "historical_owner_authorization": historical_a3_authorization,
+            "owner_authorized_demo_broker_action": (
+                historical_a3_authorization["933400_demo_broker_action"] == "OWNER_AUTHORIZED_DEMO_BROKER_ACTION"
+            ),
+            "governance_note": "Historical owner override is preserved as audit evidence only; current runtime authorization is paused.",
+            "current_runtime_state": current_a3_runtime,
+            "effective_runtime_authorization": effective_a3_authorization,
             "review_followup_summary": a3_review_followup.get("summary", {}),
-            "runtime_authorization_status": a3_review_followup.get("runtime_authorization_status", "MISSING"),
+            "runtime_authorization_status": effective_a3_authorization,
             "emergency_pause_status": a3_pause.get("status", "MISSING"),
+            "family_mutex_status": "NOT_IMPLEMENTED",
+            "containment_status": "NOT_IMPLEMENTED",
+            "shadow_hypothesis_status": shadow_hypothesis_status,
+            "reactivation_gate_status": "BLOCKED",
         },
         "authorization": {
             "canonical_phase2_pass": False,
@@ -136,8 +169,9 @@ def generate_project_status_summary(
             "broad_afternoon_ban_authorized": False,
             "direction_only_rule_authorized": False,
             "cost_threshold_runtime_rule_authorized": False,
-            "a3_tier1_demo_broker_action": _a3_broker_action_status(a3_attachment),
-            "a3_current_runtime_authorization": a3_review_followup.get("runtime_authorization_status", "MISSING"),
+            "a3_tier1_demo_broker_action": historical_a3_authorization["933400_demo_broker_action"],
+            "a3_current_runtime_authorization": effective_a3_authorization,
+            "a3_effective_runtime_authorization": effective_a3_authorization,
         },
         "next_evidence_required": [
             "XAUUSD_ROUND_FAMILY_FORWARD_WEEK_IMPACT_2026_06_xx.md",
@@ -212,6 +246,70 @@ def _a3_broker_action_status(report: dict[str, Any]) -> str:
     return "PENDING_OR_NOT_VISIBLE"
 
 
+def _a3_historical_owner_authorization(report: dict[str, Any]) -> dict[str, Any]:
+    lane = report.get("lane", {})
+    return {
+        "933400_demo_broker_action": _a3_broker_action_status(report),
+        "authorized_at_source": "A3_TIER1_COMPAT_BROKER_ACTION_OWNER_AUTHORIZATION_2026_06_17.md",
+        "attachment_status": report.get("status", "MISSING"),
+        "lane": {
+            "magic": str(lane.get("magic", "")),
+            "symbol": str(lane.get("symbol", "")),
+            "dry_run_at_attachment": str(lane.get("dry_run", "")).lower(),
+            "broker_action_allowed_at_attachment": str(lane.get("broker_action_allowed", "")).lower(),
+            "fixed_lot": str(lane.get("fixed_lot", "")),
+        },
+        "current_permission": "SUPERSEDED_BY_EMERGENCY_PAUSE",
+    }
+
+
+def _a3_current_runtime_state(review: dict[str, Any], pause: dict[str, Any]) -> dict[str, Any]:
+    after_broker = _mapping(pause.get("after_broker"))
+    return {
+        "effective_runtime_authorization": review.get(
+            "runtime_authorization_status",
+            pause.get("runtime_authorization_status", "MISSING"),
+        ),
+        "verified_at_utc": review.get("created_at_utc", pause.get("created_at_utc", "")),
+        "open_positions": _to_int(after_broker.get("a3_positions_total")) or 0,
+        "pending_orders": _to_int(after_broker.get("a3_orders_total")) or 0,
+        "lanes": {
+            "933200": _a3_lane_runtime_state(review, "933200"),
+            "933300": _a3_lane_runtime_state(review, "933300"),
+            "933400": _a3_lane_runtime_state(review, "933400"),
+            "profit_lock": _profit_lock_runtime_state(review),
+        },
+    }
+
+
+def _a3_lane_runtime_state(report: dict[str, Any], magic: str) -> str:
+    for row in report.get("per_magic", []):
+        if str(row.get("magic", "")) != magic:
+            continue
+        dry_run = str(row.get("dry_run_now", "")).lower()
+        broker_action = str(row.get("broker_action_allowed_now", "")).lower()
+        if dry_run == "true" and broker_action == "false":
+            return "PAUSED"
+        if dry_run == "false" and broker_action == "true":
+            return "BROKER_ACTION_ENABLED"
+        return f"UNKNOWN_DRY_RUN_{dry_run}_BROKER_{broker_action}"
+    return "MISSING"
+
+
+def _profit_lock_runtime_state(report: dict[str, Any]) -> str:
+    for row in report.get("chart_state", {}).values():
+        if row.get("expert") != "Account3ProfitLockExitManager":
+            continue
+        dry_run = str(row.get("dry_run", "")).lower()
+        manage_action = str(row.get("manage_action_allowed", "")).lower()
+        if dry_run == "true" and manage_action == "false":
+            return "DRY_RUN_DISARMED"
+        if dry_run == "false" and manage_action == "true":
+            return "ARMED"
+        return f"UNKNOWN_DRY_RUN_{dry_run}_MANAGE_{manage_action}"
+    return "MISSING"
+
+
 def _a3_lane_paused(report: dict[str, Any], magic: str) -> bool:
     for row in report.get("per_magic", []):
         if str(row.get("magic", "")) == magic:
@@ -224,6 +322,59 @@ def _profit_lock_disarmed(report: dict[str, Any]) -> bool:
         if row.get("expert") == "Account3ProfitLockExitManager":
             return str(row.get("dry_run", "")).lower() == "true" and str(row.get("manage_action_allowed", "")).lower() == "false"
     return False
+
+
+def _test_suite_status(report_dir: Path) -> dict[str, Any]:
+    closure = report_dir / "PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md"
+    if not closure.exists():
+        return {"status": "UNKNOWN", "passed": None, "failed": None, "source": ""}
+    text = closure.read_text(encoding="utf-8", errors="replace")
+    passed = None
+    failed = None
+    for line in text.splitlines():
+        if "passed" in line and "failed" in line:
+            parts = line.replace("`", "").replace(",", "").split()
+            for index, part in enumerate(parts):
+                if part == "passed" and index > 0:
+                    passed = _to_int(parts[index - 1])
+                if part == "failed" and index > 0:
+                    failed = _to_int(parts[index - 1])
+            if passed is not None and failed is not None:
+                break
+    status = "PASS" if failed == 0 and passed else "FAIL" if failed else "UNKNOWN"
+    return {
+        "status": status,
+        "passed": passed,
+        "failed": failed,
+        "source": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
+    }
+
+
+def _shadow_hypothesis_status(phase1_root: Path) -> str:
+    doc = phase1_root / "docs" / "A3_SIGNAL_QUALITY_HYPOTHESES_V1_2026_06_18.md"
+    manifest = phase1_root / "outputs" / "manifests" / "A3_SIGNAL_QUALITY_HYPOTHESES_V1.sha256.json"
+    if doc.exists() and manifest.exists():
+        return "REGISTERED_LOCKED"
+    return "NOT_REGISTERED"
+
+
+def _source_runtime_parity_status(review: dict[str, Any], pause: dict[str, Any]) -> str:
+    if review.get("artifact_integrity_status") == "PASS" and pause.get("status") == "PASS":
+        return "PASS"
+    if not review and not pause:
+        return "MISSING"
+    return "REVIEW_REQUIRED"
+
+
+def _mapping(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
+def _to_int(value: Any) -> int | None:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _rel(repo_root: Path, path: Path) -> str:
@@ -292,19 +443,39 @@ def _render_markdown(summary: dict[str, Any]) -> str:
         )
     a3 = accounts["A3"]
     a3_summary = a3.get("review_followup_summary", {})
+    runtime_state = a3.get("current_runtime_state", {})
+    runtime_lanes = runtime_state.get("lanes", {}) if isinstance(runtime_state, dict) else {}
+    historical_authorization = a3.get("historical_owner_authorization", {})
+    test_suite = a3.get("test_suite_status", {})
     lines.extend(
         [
             "",
             "## A3 Runtime Decision",
             "",
+            f"Effective runtime authorization: `{a3.get('effective_runtime_authorization', 'MISSING')}`",
+            f"Runtime snapshot UTC: `{a3.get('runtime_snapshot_at_utc', 'MISSING')}`",
+            f"Open positions: `{runtime_state.get('open_positions', 'n/a') if isinstance(runtime_state, dict) else 'n/a'}`",
+            f"Pending orders: `{runtime_state.get('pending_orders', 'n/a') if isinstance(runtime_state, dict) else 'n/a'}`",
             f"Artifact integrity: `{a3.get('artifact_integrity_status', 'MISSING')}`",
             f"Runtime performance: `{a3.get('runtime_performance_status', 'MISSING')}`",
-            f"Runtime authorization: `{a3.get('runtime_authorization_status', 'MISSING')}`",
             f"Emergency pause report: `{a3.get('emergency_pause_status', 'MISSING')}`",
-            f"Plain `933200` stopped: `{str(a3.get('plain_933200_stopped', False)).lower()}`",
-            f"Improved `933300` paused: `{str(a3.get('improved_933300_paused', False)).lower()}`",
-            f"Tier1 compat `933400` paused: `{str(a3.get('tier1_933400_paused', False)).lower()}`",
-            f"Profit-lock dry-run/disarmed: `{str(a3.get('profit_lock_dryrun_disarmed', False)).lower()}`",
+            f"Test suite: `{test_suite.get('status', 'UNKNOWN')}` ({test_suite.get('passed', 'n/a')} passed, {test_suite.get('failed', 'n/a')} failed)",
+            f"Family mutex: `{a3.get('family_mutex_status', 'MISSING')}`",
+            f"Containment: `{a3.get('containment_status', 'MISSING')}`",
+            f"Shadow hypothesis: `{a3.get('shadow_hypothesis_status', 'MISSING')}`",
+            f"Reactivation gate: `{a3.get('reactivation_gate_status', 'MISSING')}`",
+            "",
+            "| Runtime lane | Current state |",
+            "| --- | --- |",
+            f"| `933200` plain | `{runtime_lanes.get('933200', 'MISSING')}` |",
+            f"| `933300` improved | `{runtime_lanes.get('933300', 'MISSING')}` |",
+            f"| `933400` Tier1 compat | `{runtime_lanes.get('933400', 'MISSING')}` |",
+            f"| Profit-lock manager | `{runtime_lanes.get('profit_lock', 'MISSING')}` |",
+            "",
+            "## A3 Historical Authorization",
+            "",
+            f"Tier1 `933400` owner authorization: `{historical_authorization.get('933400_demo_broker_action', 'MISSING')}`",
+            f"Current permission of that authorization: `{historical_authorization.get('current_permission', 'MISSING')}`",
             "",
             "| Metric | Value |",
             "| --- | ---: |",

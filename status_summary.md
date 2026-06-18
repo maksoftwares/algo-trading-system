@@ -1,7 +1,7 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T07:44:36.784892Z`
-Artifact generation base commit: `c9889cb2e7585be8c64cdea6800fb05726af3f52`
+Generated UTC: `2026-06-18T08:50:42.669652Z`
+Artifact generation base commit: `b7ea9823ff6c6a78c05a01034498eaeeaccc2d98`
 Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
@@ -35,14 +35,30 @@ Rollback required now: `false`
 
 ## A3 Runtime Decision
 
+Effective runtime authorization: `A3_ENTRY_LANES_PAUSED`
+Runtime snapshot UTC: `2026-06-18T07:44:27.604179Z`
+Open positions: `0`
+Pending orders: `0`
 Artifact integrity: `PASS`
 Runtime performance: `FAIL`
-Runtime authorization: `A3_ENTRY_LANES_PAUSED`
 Emergency pause report: `PASS`
-Plain `933200` stopped: `true`
-Improved `933300` paused: `true`
-Tier1 compat `933400` paused: `true`
-Profit-lock dry-run/disarmed: `true`
+Test suite: `PASS` (415 passed, 0 failed)
+Family mutex: `NOT_IMPLEMENTED`
+Containment: `NOT_IMPLEMENTED`
+Shadow hypothesis: `REGISTERED_LOCKED`
+Reactivation gate: `BLOCKED`
+
+| Runtime lane | Current state |
+| --- | --- |
+| `933200` plain | `PAUSED` |
+| `933300` improved | `PAUSED` |
+| `933400` Tier1 compat | `PAUSED` |
+| Profit-lock manager | `DRY_RUN_DISARMED` |
+
+## A3 Historical Authorization
+
+Tier1 `933400` owner authorization: `OWNER_AUTHORIZED_DEMO_BROKER_ACTION`
+Current permission of that authorization: `SUPERSEDED_BY_EMERGENCY_PAUSE`
 
 | Metric | Value |
 | --- | ---: |

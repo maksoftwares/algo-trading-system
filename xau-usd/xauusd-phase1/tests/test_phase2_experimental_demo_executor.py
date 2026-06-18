@@ -40,12 +40,12 @@ def test_demo_executor_is_demo_scoped_and_explicitly_armed():
     assert 'ContainsText(server, "live")' in text
     assert 'ContainsText(server, "real")' in text
     assert "InpFixedLot = 0.01" in text
-    assert "InpEURUSDFixedLot = 0.05" in text
-    assert "InpGBPUSDFixedLot = 0.05" in text
+    assert "InpEURUSDFixedLot = 0.01" in text
+    assert "InpGBPUSDFixedLot = 0.01" in text
     assert "EffectiveFixedLot()" in text
     assert 'if(_Symbol == "EURUSD")' in text
     assert 'if(_Symbol == "GBPUSD")' in text
-    assert 'input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD";' in text
+    assert 'input string InpQualifiedSymbolsCsv = "XAUUSD,EURUSD,GBPUSD,BTCUSD";' in text
     assert 'if(symbol_name == "GBPUSD")' in text
     assert "InpMaxOpenPositionsPerInstance = 0" in text
     assert "InpMaxAccountOpenPositions" not in text
@@ -85,8 +85,8 @@ def test_demo_executor_attach_script_arms_only_demo_profile():
     assert "InpRequiredCostSuspensionAcknowledgementToken=I_ACKNOWLEDGE_COST_SUSPENDED_NON_CANONICAL_EXPERIMENT" in chart
     assert "InpAuthorizedCandidatesCsv=breakout_retest" in chart
     assert "InpFixedLot=0.01" in chart
-    assert "InpEURUSDFixedLot=0.05" in chart
-    assert "InpGBPUSDFixedLot=0.05" in chart
+    assert "InpEURUSDFixedLot=0.01" in chart
+    assert "InpGBPUSDFixedLot=0.01" in chart
     assert "InpMaxAccountOrdersPerDay=0" in chart
     assert "InpMaxOpenPositionsPerInstance=0" in chart
     assert "InpMaxAccountOpenPositions" not in chart
@@ -109,12 +109,12 @@ def test_demo_executor_attach_script_uses_eurusd_lot_override():
     chart = module._render_chart(row, 1)
 
     assert "InpTargetSymbol=EURUSD" in chart
-    assert "InpFixedLot=0.05" in chart
-    assert "InpEURUSDFixedLot=0.05" in chart
-    assert "InpGBPUSDFixedLot=0.05" in chart
-    assert module.fixed_lot_for_symbol("EURUSD") == 0.05
+    assert "InpFixedLot=0.01" in chart
+    assert "InpEURUSDFixedLot=0.01" in chart
+    assert "InpGBPUSDFixedLot=0.01" in chart
+    assert module.fixed_lot_for_symbol("EURUSD") == 0.01
     assert module.fixed_lot_for_symbol("XAUUSD") == 0.01
-    assert module.fixed_lot_for_symbol("GBPUSD") == 0.05
+    assert module.fixed_lot_for_symbol("GBPUSD") == 0.01
 
     gbpusd_row = module.AttachmentRow(
         candidate="breakout_retest",
@@ -125,8 +125,8 @@ def test_demo_executor_attach_script_uses_eurusd_lot_override():
     )
     gbpusd_chart = module._render_chart(gbpusd_row, 2)
     assert "InpTargetSymbol=GBPUSD" in gbpusd_chart
-    assert "InpFixedLot=0.05" in gbpusd_chart
-    assert "InpGBPUSDFixedLot=0.05" in gbpusd_chart
+    assert "InpFixedLot=0.01" in gbpusd_chart
+    assert "InpGBPUSDFixedLot=0.01" in gbpusd_chart
 
 
 def test_demo_executor_attachment_plan_replaces_usdjpy_with_gbpusd():
