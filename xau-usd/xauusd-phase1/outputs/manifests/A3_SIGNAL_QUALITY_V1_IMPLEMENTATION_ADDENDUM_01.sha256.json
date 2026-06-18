@@ -1,0 +1,12 @@
+{
+  "status": "LOCKED",
+  "created_at_utc": "2026-06-18T12:30:00Z",
+  "addendum_id": "A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01",
+  "boundary": "Shadow-only A3 signal-quality implementation clarification. No threshold change, broker action, runtime attach, profile edit, preset arming, or reactivation authorization.",
+  "files": [
+    {
+      "file": "docs/A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
+      "sha256": "85ca63fd899c999e5c0c322b511836781bd426d2bcd03c39700677cae6f79d8c"
+    }
+  ]
+}

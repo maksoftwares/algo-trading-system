@@ -46,6 +46,39 @@ def test_a3_signal_quality_v1_contract_manifest_hashes_match() -> None:
         assert hashlib.sha256(path.read_bytes()).hexdigest() == row["sha256"]
 
 
+def test_a3_signal_quality_v1_addendum_manifest_hashes_match() -> None:
+    manifest = ROOT / "outputs" / "manifests" / "A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.sha256.json"
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+
+    assert payload["status"] == "LOCKED"
+    for row in payload["files"]:
+        path = ROOT / row["file"]
+        assert path.exists()
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row["sha256"]
+
+
+def test_a3_signal_quality_v1_addendum_resolves_implementation_seams() -> None:
+    text = (ROOT / "docs" / "A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md").read_text(encoding="utf-8")
+
+    for token in (
+        "First-Retest Definition",
+        "Signal Timestamp",
+        "Entry Tick Eligibility",
+        "Indicator Seeding And Warm-Up",
+        "Timezone And DST Mapping",
+        "Weekend And Gap Behavior",
+        "Restart Recovery",
+        "Tick Freshness",
+        "Rounding And Points",
+        "Holding Duration",
+        "Gap Exit Pricing",
+        "one-trading-week language is an implementation-validation minimum only",
+        "At least 4 calendar weeks",
+        "does not authorize A3 reactivation",
+    ):
+        assert token in text
+
+
 def test_a3_signal_quality_v1_lock_note_records_header_manifest_discrepancy() -> None:
     note = (ROOT / "docs" / "A3_SIGNAL_QUALITY_V1_LOCK_NOTE_2026_06_18.md").read_text(encoding="utf-8")
 

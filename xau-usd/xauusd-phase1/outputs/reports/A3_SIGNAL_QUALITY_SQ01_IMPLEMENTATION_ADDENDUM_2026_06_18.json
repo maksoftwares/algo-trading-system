@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "task": "SQ-01 implementation addendum",
+  "created_at_utc": "2026-06-18T12:30:00Z",
+  "boundary": "Repo-only. No threshold change, MT5 runtime, terminal profile, preset arming, order, position, or broker action touched.",
+  "base_commit": "3a42a4c",
+  "artifacts": {
+    "addendum": "docs/A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
+    "manifest": "outputs/manifests/A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.sha256.json",
+    "sha256": "85ca63fd899c999e5c0c322b511836781bd426d2bcd03c39700677cae6f79d8c"
+  },
+  "resolved_seams": [
+    "completed-bar indexing",
+    "first-retest definition",
+    "signal timestamp",
+    "entry-tick eligibility and expiry",
+    "EMA and Wilder ATR seeding",
+    "warm-up",
+    "timezone and DST mapping",
+    "weekend and gap behavior",
+    "restart recovery",
+    "tick freshness",
+    "rounding and points",
+    "holding duration",
+    "gap-exit pricing",
+    "one-week implementation validation versus full four-week promotion evidence"
+  ],
+  "verification": {
+    "focused_pytest": "6 passed",
+    "arming_audit": "PASS",
+    "hash_recheck": "PASS"
+  }
+}
