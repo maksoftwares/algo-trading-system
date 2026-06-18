@@ -1,0 +1,45 @@
+{
+  "created_at_utc": "2026-06-18T12:40:55.922120Z",
+  "extra": {
+    "derived_m15_rows": 1039,
+    "derived_weekly_rows": 2,
+    "mfe_mae_path_snapshot_rows": 356,
+    "mfe_mae_rows": 1282
+  },
+  "files": [
+    {
+      "exists": true,
+      "first_timestamp": "2026-06-01 00:00:00",
+      "last_timestamp": "2026-06-16 06:40:00",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars\\XAUUSD_M5_20260601_to_latest.csv",
+      "rows": 3117,
+      "sha256": "8127c342e8f8fcc2738bf58d09929702eb1621faaabd5b4573b4fccce3238e0e"
+    },
+    {
+      "exists": true,
+      "first_timestamp": "2026-06-01 00:00:00",
+      "last_timestamp": "2026-06-12 20:00:00",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars\\XAUUSD_H1_20260601_to_latest.csv",
+      "rows": 228,
+      "sha256": "0413fbdeec717cc412d8d5f48c51f116cf6dfe22450413583a598228666daa10"
+    },
+    {
+      "exists": true,
+      "first_timestamp": "2026-06-01 00:00:00",
+      "last_timestamp": "2026-06-12 00:00:00",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\m5_replay_bars\\XAUUSD_D1_20260601_to_latest.csv",
+      "rows": 11,
+      "sha256": "57247de3bfe4c0e65c19aed5fe1a36d21f1e2bf62cab9b2a2235184f29419815"
+    },
+    {
+      "exists": true,
+      "first_timestamp": "2026-06-01 15:10:00",
+      "last_timestamp": "2026-06-17 23:00:00",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\MFE_MAE_2026_06_16.csv",
+      "rows": 1282,
+      "sha256": "292331a1bf87a003e213a355fab507e30937a3c89db0aabb51ce9abe4bc83744"
+    }
+  ],
+  "status": "PASS",
+  "timezone": "Input bar timestamps treated as UTC; Dubai session = UTC+04:00 fixed."
+}
