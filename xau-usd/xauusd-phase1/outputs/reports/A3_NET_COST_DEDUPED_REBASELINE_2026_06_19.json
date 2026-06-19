@@ -1,0 +1,437 @@
+{
+  "acceptance_thresholds": {
+    "discovery_min_net_expectancy_r": 0.1,
+    "discovery_min_net_profit_factor": 1.25,
+    "max_drawdown_r": 8.0,
+    "max_p95_cost_r": 0.1,
+    "max_trade_cost_r": 0.12,
+    "min_closed_net_trades": 100,
+    "min_long_trades": 25,
+    "min_short_trades": 25,
+    "min_t_stat": 2.0,
+    "min_trade_retention_vs_b0_pct": 40.0,
+    "min_weeks": 4,
+    "min_weeks_with_15_trades": 3,
+    "promotion_min_net_expectancy_r": 0.15,
+    "promotion_min_net_profit_factor": 1.3,
+    "robustness": "positive after best 1 and best 2 days removed; positive after worst day removed; worst day > -4R; positive aggregate on both up and down market days"
+  },
+  "boundary": "Analysis-only net-of-cost deduped rebaseline. No MT5 terminal, profile, chart, preset, order, position, or broker runtime state was touched.",
+  "candidate_metrics": [
+    {
+      "best_1_day_removed_net_r": 79.1802,
+      "best_1_day_removed_pf": 6.1321,
+      "best_2_days_removed_net_r": 74.5688,
+      "best_2_days_removed_pf": 6.205,
+      "best_days": [
+        {
+          "day": "2025-04-16",
+          "net_r": 5.6813
+        },
+        {
+          "day": "2025-04-04",
+          "net_r": 4.6114
+        },
+        {
+          "day": "2025-04-22",
+          "net_r": 4.5741
+        },
+        {
+          "day": "2025-05-08",
+          "net_r": 4.2728
+        },
+        {
+          "day": "2025-04-28",
+          "net_r": 4.1826
+        }
+      ],
+      "candidate_id": "B0_RAW_ALL_SESSION",
+      "cost_gate_pass": false,
+      "dedupe_model": "one virtual open position per candidate; raw book first, cost-guard survivor slice shown only as diagnostic unless pre-registered",
+      "description": "Original breakout-retest signal book, one virtual position at a time.",
+      "discovery_screen_pass": false,
+      "drawdown_gate_pass": true,
+      "failure_reasons": [
+        "raw_deduped_net_gate_failed",
+        "raw_cost_discipline_failed",
+        "raw_p95_spread_50pt_stop_slip_stress_failed",
+        "raw_max_drawdown_above_8R",
+        "raw_robustness_failed",
+        "raw_significance_t_below_2",
+        "sample_or_direction_floor_failed",
+        "week_coverage_failed",
+        "cost_gate_failed"
+      ],
+      "promotion_threshold_pass": false,
+      "raw_best_2_days_removed_net_r": -199.7186,
+      "raw_closed_trades": 885,
+      "raw_cost_gate_pass": false,
+      "raw_cost_reject_rate_pct": 90.4,
+      "raw_cost_rejected_trades": 800,
+      "raw_down_day_net_r": -87.515,
+      "raw_drawdown_gate_pass": false,
+      "raw_gross_expectancy_r": 0.1356,
+      "raw_long_trades": 499,
+      "raw_max_charged_cost_r": 1.8254,
+      "raw_max_drawdown_r": 193.3555,
+      "raw_net_expectancy_r": -0.2069,
+      "raw_net_gate_pass": false,
+      "raw_net_pf": 0.7357,
+      "raw_net_r": -183.0996,
+      "raw_p95_charged_cost_r": 0.828,
+      "raw_robustness_gate_pass": false,
+      "raw_short_trades": 386,
+      "raw_significance": {
+        "mean_r": -0.2069,
+        "n": 885,
+        "passes_t_ge_2": false,
+        "std_r": 1.364,
+        "t_stat": -4.5125
+      },
+      "raw_stress_gate_pass": false,
+      "raw_stress_net_expectancy_r": -0.3028,
+      "raw_stress_net_pf": 0.6375,
+      "raw_stress_net_r": -267.9571,
+      "raw_up_day_net_r": -96.5383,
+      "raw_worst_day_gate_pass": false,
+      "raw_worst_day_net_r": -12.5157,
+      "risk_floor_points": 0.0,
+      "robustness_gate_pass": true,
+      "sample_gate_pass": false,
+      "screen_closed_trades": 85,
+      "screen_down_day_net_r": 38.13,
+      "screen_gross_expectancy_r": 1.0882,
+      "screen_gross_r": 92.5,
+      "screen_long_trades": 41,
+      "screen_max_charged_cost_r": 0.1198,
+      "screen_max_drawdown_r": 3.3283,
+      "screen_net_expectancy_r": 0.9984,
+      "screen_net_profit_factor": 6.5003,
+      "screen_net_r": 84.8615,
+      "screen_p50_charged_cost_r": 0.0922,
+      "screen_p95_charged_cost_r": 0.1179,
+      "screen_p95_spread_sensitivity_cost_r": 0.1655,
+      "screen_short_trades": 44,
+      "screen_trade_retention_vs_b0_pct": 100.0,
+      "screen_up_day_net_r": 46.7315,
+      "screen_weeks": 21,
+      "screen_weeks_with_15_trades": 0,
+      "screen_win_rate_pct": 83.53,
+      "significance": {
+        "mean_r": 0.9984,
+        "n": 85,
+        "passes_t_ge_2": true,
+        "std_r": 0.9384,
+        "t_stat": 9.8085
+      },
+      "stress_gate_pass": true,
+      "stress_net_expectancy_r": 0.9641,
+      "stress_net_profit_factor": 6.2021,
+      "stress_net_r": 81.9493,
+      "week_gate_pass": false,
+      "worst_1_day_removed_net_r": 87.0778,
+      "worst_1_day_removed_pf": 7.5907,
+      "worst_day_gate_pass": true,
+      "worst_day_net_r": -2.2164
+    },
+    {
+      "best_1_day_removed_net_r": 60.7198,
+      "best_1_day_removed_pf": 12.0536,
+      "best_2_days_removed_net_r": 56.4694,
+      "best_2_days_removed_pf": 11.2799,
+      "best_days": [
+        {
+          "day": "2025-04-22",
+          "net_r": 4.603
+        },
+        {
+          "day": "2025-05-08",
+          "net_r": 4.2505
+        },
+        {
+          "day": "2025-04-16",
+          "net_r": 2.8583
+        },
+        {
+          "day": "2025-06-12",
+          "net_r": 2.8479
+        },
+        {
+          "day": "2025-04-04",
+          "net_r": 2.8343
+        }
+      ],
+      "candidate_id": "A3_SQ_SOFT_RETEST_W15_B45_C60_RCM05_V2",
+      "cost_gate_pass": false,
+      "dedupe_model": "one virtual open position per candidate; raw book first, cost-guard survivor slice shown only as diagnostic unless pre-registered",
+      "description": "Soft-retest V2 filter from the A3 signal-quality repair screen, original stop plan.",
+      "discovery_screen_pass": false,
+      "drawdown_gate_pass": true,
+      "failure_reasons": [
+        "raw_deduped_net_gate_failed",
+        "raw_cost_discipline_failed",
+        "raw_p95_spread_50pt_stop_slip_stress_failed",
+        "raw_max_drawdown_above_8R",
+        "raw_robustness_failed",
+        "raw_significance_t_below_2",
+        "sample_or_direction_floor_failed",
+        "week_coverage_failed",
+        "cost_gate_failed"
+      ],
+      "promotion_threshold_pass": false,
+      "raw_best_2_days_removed_net_r": 22.4375,
+      "raw_closed_trades": 490,
+      "raw_cost_gate_pass": false,
+      "raw_cost_reject_rate_pct": 88.37,
+      "raw_cost_rejected_trades": 433,
+      "raw_down_day_net_r": 5.6152,
+      "raw_drawdown_gate_pass": false,
+      "raw_gross_expectancy_r": 0.4031,
+      "raw_long_trades": 281,
+      "raw_max_charged_cost_r": 1.6579,
+      "raw_max_drawdown_r": 22.5077,
+      "raw_net_expectancy_r": 0.0778,
+      "raw_net_gate_pass": false,
+      "raw_net_pf": 1.1242,
+      "raw_net_r": 38.1202,
+      "raw_p95_charged_cost_r": 0.7595,
+      "raw_robustness_gate_pass": false,
+      "raw_short_trades": 209,
+      "raw_significance": {
+        "mean_r": 0.0778,
+        "n": 490,
+        "passes_t_ge_2": false,
+        "std_r": 1.3458,
+        "t_stat": 1.2796
+      },
+      "raw_stress_gate_pass": false,
+      "raw_stress_net_expectancy_r": -0.0199,
+      "raw_stress_net_pf": 0.9701,
+      "raw_stress_net_r": -9.773,
+      "raw_up_day_net_r": 31.5512,
+      "raw_worst_day_gate_pass": false,
+      "raw_worst_day_net_r": -6.5572,
+      "risk_floor_points": 0.0,
+      "robustness_gate_pass": true,
+      "sample_gate_pass": false,
+      "screen_closed_trades": 57,
+      "screen_down_day_net_r": 31.2005,
+      "screen_gross_expectancy_r": 1.2368,
+      "screen_gross_r": 70.5,
+      "screen_long_trades": 23,
+      "screen_max_charged_cost_r": 0.1185,
+      "screen_max_drawdown_r": 2.229,
+      "screen_net_expectancy_r": 1.146,
+      "screen_net_profit_factor": 10.8919,
+      "screen_net_r": 65.3228,
+      "screen_p50_charged_cost_r": 0.0922,
+      "screen_p95_charged_cost_r": 0.1174,
+      "screen_p95_spread_sensitivity_cost_r": 0.1659,
+      "screen_short_trades": 34,
+      "screen_trade_retention_vs_b0_pct": 67.06,
+      "screen_up_day_net_r": 34.1223,
+      "screen_weeks": 18,
+      "screen_weeks_with_15_trades": 0,
+      "screen_win_rate_pct": 89.47,
+      "significance": {
+        "mean_r": 1.146,
+        "n": 57,
+        "passes_t_ge_2": true,
+        "std_r": 0.7777,
+        "t_stat": 11.1259
+      },
+      "stress_gate_pass": true,
+      "stress_net_expectancy_r": 1.1102,
+      "stress_net_profit_factor": 10.3875,
+      "stress_net_r": 63.28,
+      "week_gate_pass": false,
+      "worst_1_day_removed_net_r": 66.4356,
+      "worst_1_day_removed_pf": 13.0991,
+      "worst_day_gate_pass": true,
+      "worst_day_net_r": -1.1127
+    },
+    {
+      "best_1_day_removed_net_r": 197.2957,
+      "best_1_day_removed_pf": 30.8766,
+      "best_2_days_removed_net_r": 191.5947,
+      "best_2_days_removed_pf": 30.0133,
+      "best_days": [
+        {
+          "day": "2025-04-04",
+          "net_r": 5.7277
+        },
+        {
+          "day": "2025-05-08",
+          "net_r": 5.701
+        },
+        {
+          "day": "2025-05-14",
+          "net_r": 5.7
+        },
+        {
+          "day": "2025-06-05",
+          "net_r": 5.7
+        },
+        {
+          "day": "2025-04-22",
+          "net_r": 4.6133
+        }
+      ],
+      "candidate_id": "A3_WIDE_STOP_800PT_SOFT_RETEST_V0",
+      "cost_gate_pass": true,
+      "dedupe_model": "one virtual open position per candidate; raw book first, cost-guard survivor slice shown only as diagnostic unless pre-registered",
+      "description": "Soft-retest V2 entries with an A2-style 800-point minimum stop floor and unchanged 1.5R target.",
+      "discovery_screen_pass": false,
+      "drawdown_gate_pass": true,
+      "failure_reasons": [
+        "raw_deduped_net_gate_failed",
+        "raw_cost_discipline_failed",
+        "raw_p95_spread_50pt_stop_slip_stress_failed",
+        "raw_max_drawdown_above_8R",
+        "raw_robustness_failed",
+        "raw_significance_t_below_2",
+        "week_coverage_failed"
+      ],
+      "promotion_threshold_pass": false,
+      "raw_best_2_days_removed_net_r": 21.0249,
+      "raw_closed_trades": 303,
+      "raw_cost_gate_pass": false,
+      "raw_cost_reject_rate_pct": 49.5,
+      "raw_cost_rejected_trades": 150,
+      "raw_down_day_net_r": 10.7153,
+      "raw_drawdown_gate_pass": false,
+      "raw_gross_expectancy_r": 0.2129,
+      "raw_long_trades": 175,
+      "raw_max_charged_cost_r": 0.1375,
+      "raw_max_drawdown_r": 10.1525,
+      "raw_net_expectancy_r": 0.107,
+      "raw_net_gate_pass": false,
+      "raw_net_pf": 1.183,
+      "raw_net_r": 32.4259,
+      "raw_p95_charged_cost_r": 0.1375,
+      "raw_robustness_gate_pass": false,
+      "raw_short_trades": 128,
+      "raw_significance": {
+        "mean_r": 0.107,
+        "n": 303,
+        "passes_t_ge_2": false,
+        "std_r": 1.2825,
+        "t_stat": 1.4524
+      },
+      "raw_stress_gate_pass": false,
+      "raw_stress_net_expectancy_r": 0.0765,
+      "raw_stress_net_pf": 1.1273,
+      "raw_stress_net_r": 23.1708,
+      "raw_up_day_net_r": 20.2856,
+      "raw_worst_day_gate_pass": false,
+      "raw_worst_day_net_r": -4.55,
+      "risk_floor_points": 800.0,
+      "robustness_gate_pass": true,
+      "sample_gate_pass": true,
+      "screen_closed_trades": 153,
+      "screen_down_day_net_r": 85.7686,
+      "screen_gross_expectancy_r": 1.402,
+      "screen_gross_r": 214.5,
+      "screen_long_trades": 89,
+      "screen_max_charged_cost_r": 0.1185,
+      "screen_max_drawdown_r": 2.229,
+      "screen_net_expectancy_r": 1.3269,
+      "screen_net_profit_factor": 31.7439,
+      "screen_net_r": 203.0233,
+      "screen_p50_charged_cost_r": 0.075,
+      "screen_p95_charged_cost_r": 0.075,
+      "screen_p95_spread_sensitivity_cost_r": 0.1062,
+      "screen_short_trades": 64,
+      "screen_trade_retention_vs_b0_pct": 180.0,
+      "screen_up_day_net_r": 115.8297,
+      "screen_weeks": 27,
+      "screen_weeks_with_15_trades": 0,
+      "screen_win_rate_pct": 96.08,
+      "significance": {
+        "mean_r": 1.3269,
+        "n": 153,
+        "passes_t_ge_2": true,
+        "std_r": 0.4921,
+        "t_stat": 33.355
+      },
+      "stress_gate_pass": true,
+      "stress_net_expectancy_r": 1.2966,
+      "stress_net_profit_factor": 30.4304,
+      "stress_net_r": 198.387,
+      "week_gate_pass": false,
+      "worst_1_day_removed_net_r": 204.1361,
+      "worst_1_day_removed_pf": 38.1768,
+      "worst_day_gate_pass": true,
+      "worst_day_net_r": -1.1127
+    }
+  ],
+  "cost_model": {
+    "charged_spread_points": "max(realized bar spread, measured median spread for entry UTC hour)",
+    "cost_guard": "trade rejected from screen metrics when charged_cost_R > 0.12",
+    "cost_r_note": "Winning trades pay spread + entry slippage; losing trades also pay stop-exit slippage. Default stop-exit slippage is conservative at 50 points after Claude Round 3.",
+    "entry_slippage_points": 10.0,
+    "p95_sensitivity_points": "max(realized bar spread, measured P95 spread for entry UTC hour)",
+    "source_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+    "stop_exit_slippage_points": 50.0,
+    "stress_model": "P95 spread plus the same 50-point stop-exit slippage."
+  },
+  "created_at_utc": "2026-06-19T07:13:37.286017Z",
+  "data_manifest": {
+    "created_at_utc": "2026-06-19T07:13:37.893840Z",
+    "extra": {
+      "raw_signals": 1453
+    },
+    "files": [
+      {
+        "exists": true,
+        "first_timestamp": "2025-01-02T00:00:00Z",
+        "last_timestamp": "2025-06-30T23:55:00Z",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\dukascopy\\XAUUSD\\M5\\XAUUSD_dukascopy_M5_20250102_20250701.csv",
+        "rows": 38304,
+        "sha256": "ef314aa85be55405fb14ab4f0348dbaf58a5ca196e226444eb3bd39ec3a3da67"
+      },
+      {
+        "exists": true,
+        "first_timestamp": "2016-01-01T00:00:00Z",
+        "last_timestamp": "2025-06-30T23:00:00Z",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\dukascopy\\XAUUSD\\H1\\XAUUSD_dukascopy_H1_20160101_20250701_derived_from_m5.csv",
+        "rows": 82032,
+        "sha256": "11f4483570eab129fabe271367d6de29eba2e7b23adf37134ec43e2977b53e8b"
+      },
+      {
+        "exists": true,
+        "first_timestamp": "2016-01-01T00:00:00Z",
+        "last_timestamp": "2025-06-30T00:00:00Z",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\dukascopy\\XAUUSD\\D1\\XAUUSD_dukascopy_D1_20160101_20250701_derived_from_m5.csv",
+        "rows": 3418,
+        "sha256": "019bdb11c4d2d25be7314ecd1a3a025da54d45e213a948f11cb93d0d45d6cf34"
+      },
+      {
+        "exists": true,
+        "first_timestamp": "",
+        "last_timestamp": "",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+        "rows": 31,
+        "sha256": "8f0c6c37eeff14f18ca1550cd0cecd119613a1bcc82d8aaa18737b7c2fb9a684"
+      }
+    ],
+    "status": "PASS",
+    "timezone": "Input bar timestamps treated as UTC; Dubai session = UTC+04:00 fixed."
+  },
+  "data_window": {
+    "end_utc": "2025-07-01 00:00:00",
+    "source": "Phase0 Dukascopy XAUUSD bars",
+    "start_utc": "2025-01-02 00:00:00"
+  },
+  "decision": "NO_CANDIDATE_CLEARS_NET_COST_DISCOVERY_SCREEN",
+  "outputs": {
+    "json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_NET_COST_DEDUPED_REBASELINE_2026_06_19.json",
+    "markdown": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_NET_COST_DEDUPED_REBASELINE_2026_06_19.md",
+    "trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_NET_COST_DEDUPED_REBASELINE_TRADES_2026_06_19.csv"
+  },
+  "provenance": {
+    "A3_WIDE_STOP_800PT_SOFT_RETEST_V0": "POST_HOC_EXPLORATORY_ONLY. No pre-registration or hash-lock evidence was found before this 2026-06-19 screen; the 800-point floor was introduced as an A2-style exploratory cost-feasibility floor."
+  },
+  "raw_signals": 1453,
+  "status": "PASS"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "LOCKED_NEGATIVE_FINDING",
+  "created_at_utc": "2026-06-19T07:35:00Z",
+  "scope": "A3 XAUUSD breakout-retest entry family net-of-cost falsification",
+  "boundary": "Analysis-only. No MT5 terminal, profile, chart, preset, order, position, or broker runtime state was touched.",
+  "decision": "XAU_BREAK_RETEST_ENTRY_FALSIFIED_NET_OF_COST_ON_THIS_DATA",
+  "source_artifacts": [
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_DEDUPED_REBASELINE_2026_06_19.json",
+      "sha256": "D3C3461006BC71B93FE5A3723737807494473E2E78BA79511A1860030B19E607"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_DEDUPED_REBASELINE_2026_06_19.md",
+      "sha256": "26985F4EA8B162CE9C23DD140CCE649424AB2EB32CAE9E2B753C3D9B6B0BFE9B"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_DEDUPED_REBASELINE_TRADES_2026_06_19.csv",
+      "sha256": "DFEEDE1E63AB9980F00352F8D4619EDD5C0375670F719FE007007FB4E101DCC0"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a3_net_cost_deduped_rebaseline.py",
+      "sha256": "ACE6F9A1AF1442F0848634F03EB225F3053B70D8A4B047A4E0E1377F66248464"
+    }
+  ]
+}
