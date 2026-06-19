@@ -1,0 +1,99 @@
+{
+  "boundary": "Offline Phase 0R screen only. No MT5 terminal, profile, chart, preset, order, position, or broker runtime state was touched.",
+  "candidate_id": "xau_h1_h4_trend_continuation_pullback_v0_1",
+  "cost_model": {
+    "charged_spread_points": "max(realized entry-bar spread, measured median spread for entry UTC hour)",
+    "entry_cost_gate": "estimated (spread + entry slippage + stop-exit slippage) / risk <= 0.12",
+    "entry_slippage_points": 10.0,
+    "source_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+    "stop_exit_slippage_points": 50.0,
+    "stress_spread_points": "max(realized entry-bar spread, measured P95 spread for entry UTC hour)"
+  },
+  "created_at_utc": "2026-06-19T11:47:46.476745Z",
+  "data_window": {
+    "end_utc": "2025-07-01 00:00:00",
+    "source": "Phase0 Dukascopy XAUUSD bars",
+    "start_utc": "2025-01-02 00:00:00"
+  },
+  "decision": "FAIL_INSUFFICIENT_BOTH_DIRECTION_SAMPLE",
+  "hypothesis": {
+    "lock": {
+      "candidate_id": "`xau_h1_h4_trend_continuation_pullback_v0_1`",
+      "hypothesis_path": "hypotheses/hypothesis_xau_h1_h4_trend_continuation_pullback_v0_1.md",
+      "notes": "Claude Round 6 locked trend-continuation v0.1 for offline screen",
+      "registered_at_utc": "2026-06-19T11:43:07.451028Z",
+      "registered_by": "codex",
+      "sha256": "5af38049a3c511732a9efc2bdaa3f238ad68dceb5b105b59aad1700a0233b672",
+      "status": "FOUND",
+      "version": "`v0.1`"
+    },
+    "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0r\\hypotheses\\hypothesis_xau_h1_h4_trend_continuation_pullback_v0_1.md"
+  },
+  "metrics": {
+    "best_1_day_removed_r": -4.0513,
+    "best_2_days_removed_r": -5.494,
+    "best_days_removed_gate_pass": false,
+    "both_regime_gate_pass": false,
+    "closed_trades": 7,
+    "cost_gate_pass": false,
+    "decision": "FAIL_INSUFFICIENT_BOTH_DIRECTION_SAMPLE",
+    "down_day_net_r": -2.9299,
+    "drawdown_gate_pass": true,
+    "failure_reasons": [
+      "sample_gate_pass",
+      "net_gate_pass",
+      "stress_gate_pass",
+      "cost_gate_pass",
+      "worst_day_gate_pass",
+      "best_days_removed_gate_pass",
+      "both_regime_gate_pass",
+      "significance_gate_pass"
+    ],
+    "hypothesis_lock": {
+      "candidate_id": "`xau_h1_h4_trend_continuation_pullback_v0_1`",
+      "hypothesis_path": "hypotheses/hypothesis_xau_h1_h4_trend_continuation_pullback_v0_1.md",
+      "notes": "Claude Round 6 locked trend-continuation v0.1 for offline screen",
+      "registered_at_utc": "2026-06-19T11:43:07.451028Z",
+      "registered_by": "codex",
+      "sha256": "5af38049a3c511732a9efc2bdaa3f238ad68dceb5b105b59aad1700a0233b672",
+      "status": "FOUND",
+      "version": "`v0.1`"
+    },
+    "hypothesis_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0r\\hypotheses\\hypothesis_xau_h1_h4_trend_continuation_pullback_v0_1.md",
+    "long_trades": 6,
+    "max_cost_r": 0.1189,
+    "max_drawdown_r": 4.0488,
+    "net_expectancy_r": -0.3723,
+    "net_gate_pass": false,
+    "net_profit_factor": 0.5256,
+    "over_012_cost_share_pct": 0.0,
+    "p95_cost_r": 0.1174,
+    "sample_gate_pass": false,
+    "screen_window_status": "INSUFFICIENT_BOTH_DIRECTION_SAMPLE",
+    "short_trades": 1,
+    "significance": {
+      "mean_r": -0.3723,
+      "n": 7,
+      "passes_t_ge_2": false,
+      "std_r": 1.2409,
+      "t_stat": -0.7938
+    },
+    "significance_gate_pass": false,
+    "stress_expectancy_r": -0.395,
+    "stress_gate_pass": false,
+    "stress_profit_factor": 0.5068,
+    "total_net_r": -2.6061,
+    "total_stress_r": -2.7651,
+    "up_day_net_r": 0.3238,
+    "win_rate_pct": 28.57,
+    "worst_1_day_removed_r": -1.4872,
+    "worst_day_gate_pass": false,
+    "worst_day_r": -1.1189
+  },
+  "outputs": {
+    "json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0r\\outputs\\reports\\XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_SCREEN_2026_06_19.json",
+    "markdown": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0r\\outputs\\reports\\XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_SCREEN_2026_06_19.md",
+    "trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0r\\outputs\\reports\\XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_TRADES_2026_06_19.csv"
+  },
+  "status": "PASS"
+}

@@ -20,6 +20,15 @@ outputs/
 data/processed/
 data/raw/
 
+# Small reviewer-facing Phase 0R lock/screen artifacts are intentionally committed.
+!xau-usd/xauusd-phase0r/outputs/
+xau-usd/xauusd-phase0r/outputs/**
+!xau-usd/xauusd-phase0r/outputs/hypothesis_hash_manifest.csv
+!xau-usd/xauusd-phase0r/outputs/reports/
+!xau-usd/xauusd-phase0r/outputs/reports/XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_SCREEN_*.json
+!xau-usd/xauusd-phase0r/outputs/reports/XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_SCREEN_*.md
+!xau-usd/xauusd-phase0r/outputs/reports/XAU_H1_H4_TREND_CONTINUATION_PULLBACK_V0_1_TRADES_*.csv
+
 # Small reviewer-facing Phase 1 closure artifacts are intentionally committed.
 !xau-usd/xauusd-phase1/outputs/
 xau-usd/xauusd-phase1/outputs/**
