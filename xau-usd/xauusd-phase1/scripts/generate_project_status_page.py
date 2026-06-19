@@ -2217,7 +2217,7 @@ def _artifact_links() -> str:
         ("A3 net-cost falsification", "xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_FALSIFICATION_2026_06_19.md"),
         ("A3 net-cost falsification manifest", "xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_FALSIFICATION_MANIFEST_2026_06_19.json"),
         ("Entry acceptance bar V1", "xau-usd/xauusd-phase0r/docs/ENTRY_ACCEPTANCE_BAR_V1_2026_06_19.md"),
-        ("XAU trend-continuation pullback V0 draft", "xau-usd/xauusd-phase0r/hypotheses/hypothesis_xau_h1_h4_trend_continuation_pullback_v0.md"),
+        ("XAU trend-continuation pullback V0.1 draft", "xau-usd/xauusd-phase0r/hypotheses/hypothesis_xau_h1_h4_trend_continuation_pullback_v0_1.md"),
         ("A3 direct history follow-up", "xau-usd/xauusd-phase1/outputs/reports/A3_DIRECT_HISTORY_1033669_2026_06_18.md"),
         ("A3 per-magic follow-up", "xau-usd/xauusd-phase1/outputs/reports/A3_PER_MAGIC_ATTRIBUTION_2026_06_18.md"),
         ("A3 duplicate-family follow-up", "xau-usd/xauusd-phase1/outputs/reports/A3_DUPLICATE_FAMILY_EVENTS_2026_06_18.md"),

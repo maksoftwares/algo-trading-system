@@ -2,7 +2,7 @@
 
 Expert candidate ID: `xau_h1_h4_trend_continuation_pullback_v0`
 Version: `v0`
-Status: `DRAFT_FOR_REVIEW_LOCK_PENDING`
+Status: DRAFT
 Mechanic family: `trend_continuation_pullback`
 Entry / decision timeframe: `M5`
 Reference timeframe: `M15`, `H1`, `H4`, `D1`
@@ -20,6 +20,10 @@ Expected win rate range: `42%-55%`
 Expected worst month R: `>= -8R`
 Expected losing-month percentage: `<= 40%`
 Expected max zero-trade months: `1`
+Why this behavior should exist on XAUUSD: See detailed section below.
+What would falsify this hypothesis: See detailed section below.
+Forbidden changes after lock: See detailed section below.
+Allowed bug fixes after lock: See detailed section below.
 
 ## Why This Behavior Should Exist On XAUUSD
 

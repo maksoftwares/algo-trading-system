@@ -9,7 +9,7 @@ Boundary: analysis-only. No MT5 terminal, profile, chart, preset, order, positio
 Manifest:
 
 - File: `xau-usd/xauusd-phase1/outputs/reports/A3_NET_COST_FALSIFICATION_MANIFEST_2026_06_19.json`
-- SHA256: `1D56960EE04C5DAC02D56B1A194298387C842FCB54D950A2CE05AE09C6C877CE`
+- SHA256: `870DF4B624BEA738918ACA6E4B62227644AFB2D9B8F3289C3B140BB996E31E94`
 
 ## Methodology
 
