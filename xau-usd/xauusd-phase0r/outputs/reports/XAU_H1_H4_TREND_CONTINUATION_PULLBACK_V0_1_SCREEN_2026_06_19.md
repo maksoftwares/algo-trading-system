@@ -31,6 +31,27 @@ Offline Phase 0R screen only. No MT5 terminal, profile, chart, preset, order, po
 | Up-day / Down-day R | 0.3238 / -2.9299 |
 | t-stat | -0.7938 |
 
+## Stage Funnel
+
+Counts are direction-candidate checks through the locked V0.1 rule, ordered by the reviewer-requested funnel. `Cost-passed` should match the unscheduled signal count; `opened` is after the one-position scheduling rule.
+
+| Stage | Count |
+| --- | ---: |
+| Candidate direction checks | 76446 |
+| Trend-eligible | 31875 |
+| Pullback-eligible | 210 |
+| M5-trigger-eligible | 31 |
+| Cost-passed raw signals | 19 |
+| Opened after one-position scheduling | 7 |
+| Scheduled out by one-position rule | 12 |
+
+| Direction Split | Cost-Passed | Opened |
+| --- | ---: | ---: |
+| LONG | 18 | 6 |
+| SHORT | 1 | 1 |
+
+- Cost-passed count matches signal count: `True`.
+
 ## Gates
 
 | Gate | Status |
@@ -50,7 +71,8 @@ Offline Phase 0R screen only. No MT5 terminal, profile, chart, preset, order, po
 - Screen-window status: `INSUFFICIENT_BOTH_DIRECTION_SAMPLE`.
 - Failure reasons: `sample_gate_pass, net_gate_pass, stress_gate_pass, cost_gate_pass, worst_day_gate_pass, best_days_removed_gate_pass, both_regime_gate_pass, significance_gate_pass`.
 - This is an offline Phase 0R screen only. Passing would not authorize broker action.
-- V0.1 fails discovery and is not forward-validation eligible. Because the sample is only seven trades, this should be read primarily as an insufficient-frequency failure, not as a mature statistical expectancy estimate.
+- V0.1 fails discovery and is not forward-validation eligible. Because the sample is only seven opened trades, this is recorded as an insufficient-frequency/both-direction failure, not as a mature trend-continuation expectancy falsification.
+- Per the locked no-tuning rule, do not loosen V0.1 after seeing this screen just to increase trade count.
 
 ## Outputs
 

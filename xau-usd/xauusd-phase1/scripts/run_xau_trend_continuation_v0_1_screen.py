@@ -129,6 +129,21 @@ class CandidateTrade:
     close_location: float
 
 
+@dataclass(frozen=True)
+class FunnelCounts:
+    candidate_direction_checks: int
+    trend_eligible: int
+    pullback_eligible: int
+    m5_trigger_eligible: int
+    cost_passed: int
+    opened_after_one_position_scheduling: int
+    scheduled_out_by_one_position: int
+    long_cost_passed: int
+    short_cost_passed: int
+    long_opened: int
+    short_opened: int
+
+
 def run_screen(
     phase1_root: Path,
     *,
@@ -162,6 +177,7 @@ def run_screen(
     signals = generate_signals(m5, m5_series, m15, h1, h4, h1_atr, m15_atr, cost_model, day_directions)
     trades = schedule_and_simulate(signals, m5, cost_model)
     metrics = summarize(trades)
+    funnel = build_funnel_counts(m5, m5_series, m15, h1, h4, h1_atr, m15_atr, cost_model, trades)
     hypothesis_lock = hypothesis_lock_row(hash_manifest, CANDIDATE_ID)
     metrics["hypothesis_lock"] = hypothesis_lock
     metrics["hypothesis_path"] = str(hypothesis_path)
@@ -171,6 +187,8 @@ def run_screen(
         else "INSUFFICIENT_BOTH_DIRECTION_SAMPLE"
     )
     metrics["decision"] = decision(metrics)
+    metrics["stage_funnel"] = asdict(funnel)
+    metrics["stage_funnel"]["cost_passed_matches_signal_count"] = funnel.cost_passed == len(signals)
 
     payload = {
         "status": "PASS",
@@ -207,6 +225,192 @@ def run_screen(
     output_md.parent.mkdir(parents=True, exist_ok=True)
     output_md.write_text(render_markdown(payload), encoding="utf-8")
     return payload
+
+
+def build_funnel_counts(
+    m5: list[Bar],
+    m5_series: dict[str, Any],
+    m15: dict[str, Any],
+    h1: dict[str, Any],
+    h4: dict[str, Any],
+    h1_atr: list[float | None],
+    m15_atr: list[float | None],
+    cost_model: dict[tuple[str, str], dict[str, float]],
+    trades: list[CandidateTrade],
+) -> FunnelCounts:
+    counts = {
+        "candidate_direction_checks": 0,
+        "trend_eligible": 0,
+        "pullback_eligible": 0,
+        "m5_trigger_eligible": 0,
+        "cost_passed": 0,
+        "long_cost_passed": 0,
+        "short_cost_passed": 0,
+    }
+    m5_ema20 = m5_series["ema20"]
+    for i in range(80, len(m5) - 1):
+        decision_time = m5[i].end
+        entry_bar = m5[i + 1]
+        m5_now = m5[i]
+        if i - 3 < 0 or m5_ema20[i] is None or m5_ema20[i - 3] is None:
+            continue
+        body = body_to_range(m5_now)
+        loc = close_location(m5_now)
+        for direction in ("LONG", "SHORT"):
+            counts["candidate_direction_checks"] += 1
+            stage = evaluate_funnel_stage(
+                direction,
+                i,
+                decision_time,
+                entry_bar,
+                m5,
+                m5_ema20,
+                body,
+                loc,
+                m15,
+                h1,
+                h4,
+                h1_atr,
+                m15_atr,
+                cost_model,
+            )
+            if stage["trend_eligible"]:
+                counts["trend_eligible"] += 1
+            if stage["pullback_eligible"]:
+                counts["pullback_eligible"] += 1
+            if stage["m5_trigger_eligible"]:
+                counts["m5_trigger_eligible"] += 1
+            if stage["cost_passed"]:
+                counts["cost_passed"] += 1
+                if direction == "LONG":
+                    counts["long_cost_passed"] += 1
+                else:
+                    counts["short_cost_passed"] += 1
+    opened = len(trades)
+    long_opened = sum(1 for trade in trades if trade.direction == "LONG")
+    short_opened = sum(1 for trade in trades if trade.direction == "SHORT")
+    return FunnelCounts(
+        candidate_direction_checks=counts["candidate_direction_checks"],
+        trend_eligible=counts["trend_eligible"],
+        pullback_eligible=counts["pullback_eligible"],
+        m5_trigger_eligible=counts["m5_trigger_eligible"],
+        cost_passed=counts["cost_passed"],
+        opened_after_one_position_scheduling=opened,
+        scheduled_out_by_one_position=max(0, counts["cost_passed"] - opened),
+        long_cost_passed=counts["long_cost_passed"],
+        short_cost_passed=counts["short_cost_passed"],
+        long_opened=long_opened,
+        short_opened=short_opened,
+    )
+
+
+def evaluate_funnel_stage(
+    direction: str,
+    i: int,
+    decision_time: datetime,
+    entry_bar: Bar,
+    m5: list[Bar],
+    m5_ema20: list[float | None],
+    body: float | None,
+    loc: float | None,
+    m15: dict[str, Any],
+    h1: dict[str, Any],
+    h4: dict[str, Any],
+    h1_atr: list[float | None],
+    m15_atr: list[float | None],
+    cost_model: dict[tuple[str, str], dict[str, float]],
+) -> dict[str, bool]:
+    stage = {
+        "trend_eligible": False,
+        "pullback_eligible": False,
+        "m5_trigger_eligible": False,
+        "cost_passed": False,
+    }
+    is_long = direction == "LONG"
+    h4_idx = completed_index(h4["bars"], decision_time)
+    h1_idx = completed_index(h1["bars"], decision_time)
+    m15_idx = completed_index(m15["bars"], decision_time)
+    if h4_idx is None or h1_idx is None or m15_idx is None or h4_idx < 3 or h1_idx < 11 or m15_idx < 5:
+        return stage
+    h4_ema50 = h4["ema50"]
+    h1_ema20 = h1["ema20"]
+    h1_ema50 = h1["ema50"]
+    if (
+        h4_ema50[h4_idx] is None
+        or h4_ema50[h4_idx - 3] is None
+        or h1_ema20[h1_idx] is None
+        or h1_ema50[h1_idx] is None
+        or h1_atr[h1_idx] is None
+        or m15_atr[m15_idx] is None
+    ):
+        return stage
+    h4_slope_points = (float(h4_ema50[h4_idx]) - float(h4_ema50[h4_idx - 3])) / POINT
+    h1_ema20_value = float(h1_ema20[h1_idx])
+    h1_ema50_value = float(h1_ema50[h1_idx])
+    if is_long:
+        trend_ok = h4_slope_points > 0 and h1_ema20_value > h1_ema50_value
+    else:
+        trend_ok = h4_slope_points < 0 and h1_ema20_value < h1_ema50_value
+    if not trend_ok:
+        return stage
+    stage["trend_eligible"] = True
+
+    h1_atr_price = float(h1_atr[h1_idx])
+    m15_atr_price = float(m15_atr[m15_idx])
+    if h1_atr_price <= 0 or m15_atr_price <= 0:
+        return stage
+    m15_bars = m15["bars"]
+    last6_m15 = m15_bars[m15_idx - 5 : m15_idx + 1]
+    last3_m15 = m15_bars[m15_idx - 2 : m15_idx + 1]
+    h1_bars = h1["bars"]
+    last12_h1 = h1_bars[h1_idx - 11 : h1_idx + 1]
+    if is_long:
+        pullback_extreme = min(bar.low for bar in last6_m15)
+        recent_reference = max(bar.high for bar in last12_h1)
+        pullback_depth = recent_reference - pullback_extreme
+        pullback_ok = (
+            m15_bars[m15_idx].close > h1_ema50_value
+            and any(bar.low <= h1_ema20_value + 0.20 * m15_atr_price for bar in last6_m15)
+            and not any(bar.close < h1_ema50_value for bar in last3_m15)
+        )
+    else:
+        pullback_extreme = max(bar.high for bar in last6_m15)
+        recent_reference = min(bar.low for bar in last12_h1)
+        pullback_depth = pullback_extreme - recent_reference
+        pullback_ok = (
+            m15_bars[m15_idx].close < h1_ema50_value
+            and any(bar.high >= h1_ema20_value - 0.20 * m15_atr_price for bar in last6_m15)
+            and not any(bar.close > h1_ema50_value for bar in last3_m15)
+        )
+    if not pullback_ok or pullback_depth < 0.25 * h1_atr_price or pullback_depth > 1.25 * h1_atr_price:
+        return stage
+    stage["pullback_eligible"] = True
+
+    if body is None or loc is None or body < 0.35:
+        return stage
+    m5_ema_now = float(m5_ema20[i] or 0.0)
+    m5_ema_prev3 = float(m5_ema20[i - 3] or 0.0)
+    if is_long:
+        m5_trigger_ok = m5[i].close > m5_ema_now and m5_ema_now - m5_ema_prev3 > 0 and loc >= 0.65
+    else:
+        m5_trigger_ok = m5[i].close < m5_ema_now and m5_ema_now - m5_ema_prev3 < 0 and loc <= 0.35
+    if not m5_trigger_ok:
+        return stage
+    stage["m5_trigger_eligible"] = True
+
+    median_spread = spread_from_model(cost_model, "median_spread_points", entry_bar.start)
+    charged_spread = max(0.0, entry_bar.spread, median_spread)
+    entry = entry_bar.open + charged_spread * POINT / 2.0 if is_long else entry_bar.open - charged_spread * POINT / 2.0
+    if is_long:
+        pullback_extreme_risk = max(0.0, (entry - pullback_extreme) / POINT + 50.0)
+    else:
+        pullback_extreme_risk = max(0.0, (pullback_extreme - entry) / POINT + 50.0)
+    risk_points = max(0.85 * h1_atr_price / POINT, pullback_extreme_risk, 3.0 * charged_spread)
+    if risk_points <= 0:
+        return stage
+    estimated_cost_r = (charged_spread + ENTRY_SLIPPAGE_POINTS + STOP_EXIT_SLIPPAGE_POINTS) / risk_points
+    stage["cost_passed"] = estimated_cost_r <= MAX_TRADE_COST_R
+    return stage
 
 
 def generate_signals(
@@ -556,6 +760,7 @@ def decision(metrics: dict[str, Any]) -> str:
 
 def render_markdown(payload: dict[str, Any]) -> str:
     metrics = payload["metrics"]
+    funnel = metrics.get("stage_funnel", {})
     lines = [
         "# XAU H1/H4 Trend Continuation Pullback V0.1 Screen - 2026-06-19",
         "",
@@ -590,6 +795,27 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"| Up-day / Down-day R | {metrics['up_day_net_r']} / {metrics['down_day_net_r']} |",
         f"| t-stat | {metrics['significance'].get('t_stat')} |",
         "",
+        "## Stage Funnel",
+        "",
+        "Counts are direction-candidate checks through the locked V0.1 rule, ordered by the reviewer-requested funnel. `Cost-passed` should match the unscheduled signal count; `opened` is after the one-position scheduling rule.",
+        "",
+        "| Stage | Count |",
+        "| --- | ---: |",
+        f"| Candidate direction checks | {funnel.get('candidate_direction_checks', 0)} |",
+        f"| Trend-eligible | {funnel.get('trend_eligible', 0)} |",
+        f"| Pullback-eligible | {funnel.get('pullback_eligible', 0)} |",
+        f"| M5-trigger-eligible | {funnel.get('m5_trigger_eligible', 0)} |",
+        f"| Cost-passed raw signals | {funnel.get('cost_passed', 0)} |",
+        f"| Opened after one-position scheduling | {funnel.get('opened_after_one_position_scheduling', 0)} |",
+        f"| Scheduled out by one-position rule | {funnel.get('scheduled_out_by_one_position', 0)} |",
+        "",
+        "| Direction Split | Cost-Passed | Opened |",
+        "| --- | ---: | ---: |",
+        f"| LONG | {funnel.get('long_cost_passed', 0)} | {funnel.get('long_opened', 0)} |",
+        f"| SHORT | {funnel.get('short_cost_passed', 0)} | {funnel.get('short_opened', 0)} |",
+        "",
+        f"- Cost-passed count matches signal count: `{funnel.get('cost_passed_matches_signal_count', False)}`.",
+        "",
         "## Gates",
         "",
         "| Gate | Status |",
@@ -615,7 +841,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
             f"- Screen-window status: `{metrics['screen_window_status']}`.",
             f"- Failure reasons: `{', '.join(metrics.get('failure_reasons', [])) or 'none'}`.",
             "- This is an offline Phase 0R screen only. Passing would not authorize broker action.",
-            "- V0.1 fails discovery and is not forward-validation eligible. Because the sample is only seven trades, this should be read primarily as an insufficient-frequency failure, not as a mature statistical expectancy estimate.",
+            "- V0.1 fails discovery and is not forward-validation eligible. Because the sample is only seven opened trades, this is recorded as an insufficient-frequency/both-direction failure, not as a mature trend-continuation expectancy falsification.",
+            "- Per the locked no-tuning rule, do not loosen V0.1 after seeing this screen just to increase trade count.",
             "",
             "## Outputs",
             "",

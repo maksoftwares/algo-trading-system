@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import html
 import json
 from pathlib import Path
@@ -26,6 +27,8 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "phase2_vps_selection_check": phase1_reports / "PHASE2_VPS_SELECTION_DECISION_CHECK.json",
         "phase2_vps_bootstrap": phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json",
         "phase2_readiness": phase1_reports / "PHASE2_READINESS_REPORT.md",
+        "project_status_summary_md": repo_root / "status_summary.md",
+        "runtime_chart_inventory": phase1_reports / "RUNTIME_CHART_INVENTORY_FORENSIC_2026_06_21.csv",
         "phase3_status": phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
         "phase3_handoff": phase3_reports / "PHASE3_TO_DEMO_HANDOFF.json",
     }
@@ -51,6 +54,10 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase3_handoff = _read_json(canonical_paths["phase3_handoff"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])
     phase2_status = _markdown_status(canonical_paths["phase2_readiness"])
+    project_status_summary_md = canonical_paths["project_status_summary_md"].read_text(
+        encoding="utf-8", errors="replace"
+    )
+    runtime_inventory = _read_runtime_inventory(canonical_paths["runtime_chart_inventory"])
 
     runtime = _mapping(phase1_summary.get("runtime"))
     latest = _mapping(runtime.get("latest_row"))
@@ -251,11 +258,51 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         fragment = f'VPS decision check</td><td><span class="pill {_status_class(str(vps_check_status))}">{status_text}</span>'
         if fragment not in actual:
             errors.append(f"status.html is missing vps selection decision check status: {vps_check_status}")
+    _verify_protected_breakout_core_summary(errors, project_status_summary_md, runtime_inventory)
     return errors
 
 
 def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _read_runtime_inventory(path: Path) -> list[dict[str, str]]:
+    data = path.read_bytes()
+    if b"\x00" in data[:200]:
+        text = data.decode("utf-16", errors="replace")
+    else:
+        text = data.decode("utf-8-sig", errors="replace")
+    return list(csv.DictReader(text.splitlines()))
+
+
+def _verify_protected_breakout_core_summary(
+    errors: list[str],
+    status_summary_md: str,
+    runtime_inventory: list[dict[str, str]],
+) -> None:
+    active_rows = [
+        row
+        for row in runtime_inventory
+        if row.get("expert") == "Phase2ExperimentalDemoExecutor"
+        and row.get("symbol") == "XAUUSD"
+        and row.get("InpCandidate") == "breakout_retest"
+        and row.get("derived_magic") == "920101"
+        and row.get("broker_action_state") == "BROKER_ACTION_ENABLED"
+    ]
+    if "Source: `runtime_inventory`" not in status_summary_md:
+        errors.append("status_summary.md Protected Breakout Core is not sourced from runtime_inventory")
+    for row in active_rows:
+        expected = (
+            f"| `{row.get('lane')} {row.get('chart')}` | `breakout_retest` | "
+            f"`{row.get('InpAllowedAccountLoginsCsv')}` | `920101` | "
+            f"`{row.get('InpTradeSessionStartHour')}->{row.get('InpTradeSessionEndHour')}` | "
+            f"`{row.get('InpDryRunOnly')}` | `{row.get('InpBrokerActionAllowed')}` | `BROKER_ACTION_ENABLED` |"
+        )
+        if expected not in status_summary_md:
+            errors.append(f"status_summary.md missing runtime protected breakout row: {expected}")
+    stale_fragment = "| `chart06.chr` | `swing_breakout_retest_v0` |"
+    if stale_fragment in status_summary_md:
+        errors.append("status_summary.md still lists stale chart06 swing_breakout_retest_v0 as protected core")
 
 
 def _markdown_status(path: Path) -> str:

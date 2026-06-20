@@ -27,6 +27,7 @@ KNOWN_PAUSED_RUN_IDS = {
     "Account3BreakoutPlainExecutor": f"A3_BREAKOUT_PLAIN_V1_PAUSED_{STAMP}",
     "Account3BreakoutImprovedExecutor": f"A3_BREAKOUT_IMPROVED_V1_PAUSED_{STAMP}",
     "Account3BreakoutTier1CompatExecutor": f"A3_BREAKOUT_TIER1_COMPAT_V1_PAUSED_{STAMP}",
+    "Account3SoftRetestExecutor": f"A3_SOFT_RETEST_V2_PAUSED_{STAMP}",
     "Account3RoundRetestGuardedExecutor": f"A3_RDGUARD_V1_PAUSED_{STAMP}",
     "Account3RoundRetestStructuredExecutor": f"A3_RDSTRUCT_V1_PAUSED_{STAMP}",
     "Account3ProfitLockExitManager": f"A3_PROFIT_LOCK_EXIT_MANAGER_V1_DRYRUN_PAUSED_{STAMP}",
@@ -129,7 +130,7 @@ def apply_a3_emergency_pause(
                     if not plan.changed:
                         continue
                     path = Path(plan.before["path"])
-                    path.write_text(update_chart_inputs(read_text_any(path), plan.replacements), encoding="utf-8")
+                    write_text_preserving_encoding(path, update_chart_inputs(read_text_any(path), plan.replacements))
                     changed_charts.append(asdict(plan))
                 after_charts = chart_inventory(profile_dir)
                 after_hashes = chart_hashes(profile_dir)
@@ -346,7 +347,7 @@ def plan_pause_changes(rows: list[ChartRow]) -> list[PlannedChartChange]:
     plans: list[PlannedChartChange] = []
     for row in rows:
         before_text = read_text_any(Path(row.path))
-        replacements = paused_replacements(row)
+        replacements = {} if chart_is_disarmed(row) else paused_replacements(row)
         after_text = update_chart_inputs(before_text, replacements)
         plans.append(
             PlannedChartChange(
@@ -542,6 +543,7 @@ def startup_log_states(files_dir: Path) -> dict[str, dict[str, Any]]:
         "plain": "a3_breakout_plain_startup.csv",
         "improved": "a3_breakout_improved_startup.csv",
         "tier1_compat": "a3_breakout_tier1_compat_startup.csv",
+        "soft_retest": "a3_soft_retest_v2_startup.csv",
         "rdguard": "a3_rdguard_v1_startup.csv",
         "rdstruct": "a3_rdstruct_v1_startup.csv",
         "profit_lock": "a3_profit_lock_exit_manager_startup.csv",
@@ -804,6 +806,16 @@ def read_text_any(path: Path) -> str:
         except UnicodeError:
             continue
     return payload.decode(errors="replace")
+
+
+def write_text_preserving_encoding(path: Path, text: str) -> None:
+    payload = path.read_bytes() if path.exists() else b""
+    encoding = "utf-8"
+    if payload.startswith(b"\xff\xfe") or payload.startswith(b"\xfe\xff"):
+        encoding = "utf-16"
+    elif b"\x00" in payload[:200]:
+        encoding = "utf-16-le"
+    path.write_bytes(text.encode(encoding))
 
 
 def mtime_text(path: Path) -> str:

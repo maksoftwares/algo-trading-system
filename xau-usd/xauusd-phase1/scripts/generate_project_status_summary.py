@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import subprocess
@@ -32,6 +33,7 @@ def generate_project_status_summary(
     a3_pause_report = phase1_reports / "A3_EMERGENCY_PAUSE_APPLIED_2026_06_18.json"
     a3_pause_verify_report = phase1_reports / "A3_EMERGENCY_PAUSE_VERIFY_ONLY_2026_06_18.json"
     a3_p1_p2_report = phase1_reports / "A3_REPAIR_P1_P2_IMPLEMENTATION_REPORT_2026_06_18.json"
+    runtime_inventory_csv = phase1_reports / "RUNTIME_CHART_INVENTORY_FORENSIC_2026_06_21.csv"
 
     quarantine = _read_json(quarantine_report)
     a3_attachment = _read_json(a3_attachment_report)
@@ -49,7 +51,9 @@ def generate_project_status_summary(
     shadow_hypothesis_status = shadow_hypothesis["status"]
 
     target_charts = _chart_summary(quarantine.get("after_target_charts", quarantine.get("target_charts", [])))
-    protected_charts = _chart_summary(quarantine.get("after_protected_charts", quarantine.get("protected_charts", [])))
+    historical_protected_charts = _chart_summary(quarantine.get("after_protected_charts", quarantine.get("protected_charts", [])))
+    runtime_inventory = _read_runtime_inventory(runtime_inventory_csv)
+    protected_charts = _protected_breakout_runtime_charts(runtime_inventory) or historical_protected_charts
     target_candidates = sorted(
         {
             str(item.get("candidate", ""))
@@ -57,13 +61,9 @@ def generate_project_status_summary(
             if item.get("candidate")
         }
     ) or quarantine.get("scope", {}).get("target_candidates", [])
-    protected_candidates = sorted(
-        {
-            str(item.get("candidate", ""))
-            for item in quarantine.get("after_protected_charts", quarantine.get("protected_charts", []))
-            if item.get("candidate")
-        }
-    ) or ["breakout_retest", "swing_breakout_retest_v0"]
+    protected_candidates = sorted({item["candidate"] for item in protected_charts if item.get("candidate")}) or [
+        "breakout_retest"
+    ]
 
     summary: dict[str, Any] = {
         "schema_version": "project_status_summary_v2",
@@ -80,6 +80,7 @@ def generate_project_status_summary(
             "a3_emergency_pause": _rel(repo_root, a3_pause_report),
             "a3_emergency_pause_verify_only": _rel(repo_root, a3_pause_verify_report),
             "a3_repair_p1_p2_implementation": _rel(repo_root, a3_p1_p2_report),
+            "runtime_chart_inventory": _rel(repo_root, runtime_inventory_csv),
             "final_review_c9889cb": "FINAL_REVIEW_C9889CB_A3_FOLLOWUP_2026_06_18.md",
             "final_review_b7ea982": "FINAL_REVIEW_B7EA982_A3_REPAIR_IMPLEMENTATION_PLAN_2026_06_18.md",
             "final_review_response": "xau-usd/xauusd-phase1/outputs/reports/FINAL_REVIEW_D5DD2DE_RESPONSE_2026_06_18.md",
@@ -95,6 +96,8 @@ def generate_project_status_summary(
                 "touched_by_round_quarantine": True,
                 "target_charts": target_charts,
                 "protected_charts": protected_charts,
+                "protected_charts_source": "runtime_inventory" if runtime_inventory else "historical_quarantine_report",
+                "historical_protected_charts": historical_protected_charts,
             },
             "A2": {
                 "login": "1033030",
@@ -151,6 +154,8 @@ def generate_project_status_summary(
             "target_charts": target_charts,
             "protected_candidates": protected_candidates,
             "protected_charts": protected_charts,
+            "protected_charts_source": "runtime_inventory" if runtime_inventory else "historical_quarantine_report",
+            "historical_protected_charts": historical_protected_charts,
             "profile_backup_path": profile_backup,
             "rollback_backup_exists": bool(profile_backup),
             "keep_active_through_forward_week": True,
@@ -206,6 +211,43 @@ def _read_json(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def _read_runtime_inventory(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    data = path.read_bytes()
+    if b"\x00" in data[:200]:
+        text = data.decode("utf-16", errors="replace")
+    else:
+        text = data.decode("utf-8-sig", errors="replace")
+    return list(csv.DictReader(text.splitlines()))
+
+
+def _protected_breakout_runtime_charts(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    output: list[dict[str, str]] = []
+    for row in rows:
+        if (
+            row.get("expert") == "Phase2ExperimentalDemoExecutor"
+            and row.get("symbol") == "XAUUSD"
+            and row.get("InpCandidate") == "breakout_retest"
+            and row.get("derived_magic") == "920101"
+            and row.get("broker_action_state") == "BROKER_ACTION_ENABLED"
+        ):
+            output.append(
+                {
+                    "chart": f"{row.get('lane', '')} {row.get('chart', '')}".strip(),
+                    "symbol": row.get("symbol", ""),
+                    "candidate": row.get("InpCandidate", ""),
+                    "dry_run": row.get("InpDryRunOnly", "").lower(),
+                    "broker_action_allowed": row.get("InpBrokerActionAllowed", "").lower(),
+                    "candidate_status": row.get("broker_action_state", ""),
+                    "account": row.get("InpAllowedAccountLoginsCsv", ""),
+                    "derived_magic": row.get("derived_magic", ""),
+                    "session": f"{row.get('InpTradeSessionStartHour', '')}->{row.get('InpTradeSessionEndHour', '')}",
+                }
+            )
+    return output
 
 
 def _repo_state(repo_root: Path) -> dict[str, str]:
@@ -482,13 +524,16 @@ def _render_markdown(summary: dict[str, Any]) -> str:
             "",
             "## Protected Breakout Core",
             "",
-            "| Chart | Candidate | Dry run | Broker action | Status |",
-            "| --- | --- | ---: | ---: | --- |",
+            f"Source: `{quarantine.get('protected_charts_source', 'historical_quarantine_report')}`",
+            "",
+            "| Chart | Candidate | Account | Magic | Session | Dry run | Broker action | Status |",
+            "| --- | --- | ---: | ---: | --- | ---: | ---: | --- |",
         ]
     )
     for chart in quarantine["protected_charts"]:
         lines.append(
-            f"| `{chart['chart']}` | `{chart['candidate']}` | `{chart['dry_run']}` | "
+            f"| `{chart['chart']}` | `{chart['candidate']}` | `{chart.get('account', '')}` | "
+            f"`{chart.get('derived_magic', '')}` | `{chart.get('session', '')}` | `{chart['dry_run']}` | "
             f"`{chart['broker_action_allowed']}` | `{chart['candidate_status']}` |"
         )
     a3 = accounts["A3"]

@@ -149,8 +149,9 @@ def _group(rows: list[dict[str, str]], key: str) -> list[dict[str, str]]:
 
 def _render_markdown(payload: dict[str, Any], rows_path: Path) -> str:
     summary = payload["summary"]
+    report_date = str(payload.get("window_end_utc", ""))[:10] or "latest"
     lines = [
-        "# A2 Tier-1 Account History Reconciliation - 2026-06-17",
+        f"# A2 Tier-1 Account History Reconciliation - {report_date}",
         "",
         f"Status: `{payload['status']}`",
         "",
@@ -162,7 +163,11 @@ def _render_markdown(payload: dict[str, Any], rows_path: Path) -> str:
         "",
         _table([summary], ["balance_aed", "equity_aed", "floating_profit_aed", "balance_ops_aed", "closed_trade_profit_aed", "closed_positions", "wins", "losses", "win_rate_pct", "open_positions"]),
         "",
-        "Interpretation: `balance = balance_ops + closed_trade_profit`. Current A2 balance `4104.92` equals `4000.00` demo deposit plus `104.92` closed trade PnL.",
+        (
+            "Interpretation: `balance = balance_ops + closed_trade_profit`. "
+            f"Current A2 balance `{summary['balance_aed']}` equals `{summary['balance_ops_aed']}` "
+            f"demo deposit/balance operations plus `{summary['closed_trade_profit_aed']}` closed trade PnL."
+        ),
         "",
         "## By Symbol",
         "",

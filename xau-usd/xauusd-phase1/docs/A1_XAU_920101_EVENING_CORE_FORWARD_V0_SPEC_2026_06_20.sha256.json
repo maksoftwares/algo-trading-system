@@ -1,0 +1,15 @@
+{
+  "status": "RELOCKED_AFTER_REVIEW",
+  "locked_at_dubai_date": "2026-06-20",
+  "boundary": "Offline specification only. No MT5 runtime, EA, preset, chart, order, position, profile, or broker setting change is authorized by this manifest.",
+  "files": [
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_920101_EVENING_CORE_FORWARD_V0_SPEC_2026_06_20.md",
+      "sha256": "1CDBC8282D9B738FAAE616E31F5E7AF9DB5B3FEE15B7E755C0D1ADE416460035"
+    }
+  ],
+  "source_reconciliation_report": "xau-usd/xauusd-phase1/outputs/reports/XAU_920101_EVENING_CORE_RECONCILIATION_2026_06_20.md",
+  "rule_identity_report": "xau-usd/xauusd-phase1/outputs/reports/A1_A2_920101_RULE_IDENTITY_RECONCILIATION_2026_06_20.md",
+  "current_runtime_instruction": "Do not touch MT5 runtime until owner approves a maintenance window after this spec is reviewed and the A1/A2 rule-identity gate is closed.",
+  "a3_runtime_instruction": "A3 remains paused."
+}

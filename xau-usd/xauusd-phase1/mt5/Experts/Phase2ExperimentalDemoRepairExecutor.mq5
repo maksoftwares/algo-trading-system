@@ -28,6 +28,9 @@ input string InpAttachmentLogFileName = "phase2_demo_repair_executor_signal_log_
 input string InpStartupLogFileName = "phase2_demo_repair_executor_startup_v1.csv";
 input string InpOrderLogFileName = "phase2_demo_repair_executor_order_log_v1.csv";
 input string InpKillSwitchFileName = "phase2_demo_repair_kill_switch.txt";
+input bool InpTradeSessionGateEnabled = false;
+input int InpTradeSessionStartHour = 0;
+input int InpTradeSessionEndHour = 23;
 input double InpFixedLot = 0.01;
 input double InpEURUSDFixedLot = 0.01;
 input double InpGBPUSDFixedLot = 0.01;
@@ -596,6 +599,35 @@ bool KillSwitchActive()
    return ContainsText(content, "KILL");
 }
 
+int ServerHourNow()
+{
+   MqlDateTime parts;
+   TimeToStruct(TimeCurrent(), parts);
+   return parts.hour;
+}
+
+bool ServerHourInTradeSession()
+{
+   if(!InpTradeSessionGateEnabled)
+      return true;
+
+   int start_hour = InpTradeSessionStartHour;
+   int end_hour = InpTradeSessionEndHour;
+   if(start_hour < 0)
+      start_hour = 0;
+   if(start_hour > 23)
+      start_hour = 23;
+   if(end_hour < 0)
+      end_hour = 0;
+   if(end_hour > 23)
+      end_hour = 23;
+
+   int hour = ServerHourNow();
+   if(start_hour <= end_hour)
+      return hour >= start_hour && hour <= end_hour;
+   return hour >= start_hour || hour <= end_hour;
+}
+
 string CompactDateKey()
 {
    string key = TimeToString(TimeCurrent(), TIME_DATE);
@@ -1132,6 +1164,11 @@ bool TradingGuardsPass(
       guard_reason = "no_signal";
       return false;
    }
+   if(!ServerHourInTradeSession())
+   {
+      guard_reason = "server_hour_session_gate";
+      return false;
+   }
    if(!RepairFilterPass(observation, guard_reason))
       return false;
    if(observation.entry_price <= 0.0 || observation.stop_loss <= 0.0 || observation.take_profit <= 0.0)
@@ -1316,12 +1353,6 @@ int OnInit()
    if(!AccountLoginWhitelisted())
    {
       Print("Phase2ExperimentalDemoExecutor refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
-      return INIT_FAILED;
-   }
-
-   if(KillSwitchActive())
-   {
-      Print("Phase2ExperimentalDemoExecutor refused to start because kill switch is active.");
       return INIT_FAILED;
    }
 

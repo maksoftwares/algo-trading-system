@@ -1,0 +1,171 @@
+{
+  "status": "PASS",
+  "boundary": "Read-only MT5 query against A3 portable terminal. No runtime, EA, preset, chart, order, or position change.",
+  "terminal": "C:\\MT5PortableRepairLane\\terminal64.exe",
+  "window_start_utc": "2026-06-01T00:00:00+00:00",
+  "window_end_utc": "2026-06-19T19:43:57.479493+00:00",
+  "account": {
+    "login": 1033669,
+    "trade_mode": 0,
+    "leverage": 100,
+    "limit_orders": 0,
+    "margin_so_mode": 0,
+    "trade_allowed": true,
+    "trade_expert": true,
+    "margin_mode": 2,
+    "currency_digits": 2,
+    "fifo_close": false,
+    "balance": 3261.62,
+    "credit": 0.0,
+    "profit": 0.0,
+    "equity": 3261.62,
+    "margin": 0.0,
+    "margin_free": 3261.62,
+    "margin_level": 0.0,
+    "margin_so_call": 100.0,
+    "margin_so_so": 50.0,
+    "margin_initial": 0.0,
+    "margin_maintenance": 0.0,
+    "assets": 0.0,
+    "liabilities": 0.0,
+    "commission_blocked": 0.0,
+    "name": "MUHAMMAD ALI KHAN",
+    "server": "Capital.ComMena-Demo",
+    "currency": "AED",
+    "company": "Capital Com Mena Securities Trading L.L.C"
+  },
+  "terminal_info": {
+    "community_account": false,
+    "community_connection": false,
+    "connected": true,
+    "dlls_allowed": false,
+    "trade_allowed": true,
+    "tradeapi_disabled": false,
+    "email_enabled": false,
+    "ftp_enabled": false,
+    "notifications_enabled": true,
+    "mqid": true,
+    "build": 5833,
+    "maxbars": 100000,
+    "codepage": 0,
+    "ping_last": 134044,
+    "community_balance": 0.0,
+    "retransmission": 0.16909233649374963,
+    "company": "MetaQuotes Ltd.",
+    "name": "MetaTrader 5",
+    "language": "English",
+    "path": "C:\\MT5PortableRepairLane",
+    "data_path": "C:\\MT5PortableRepairLane",
+    "commondata_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common"
+  },
+  "summary": {
+    "balance_aed": "3261.62",
+    "equity_aed": "3261.62",
+    "floating_profit_aed": "0.00",
+    "balance_ops_aed": "4000.00",
+    "closed_trade_gross_profit_aed": "-738.28",
+    "closed_trade_net_profit_aed": "-738.38",
+    "closed_positions": 75,
+    "wins": 22,
+    "losses": 53,
+    "win_rate_pct": "29.33%",
+    "open_positions": 0
+  },
+  "by_symbol": [
+    {
+      "group": "XAUUSD",
+      "rows": "75",
+      "wins": "22",
+      "losses": "53",
+      "win_rate_pct": "29.33%",
+      "gross_profit_aed": "-738.28",
+      "net_profit_aed": "-738.38"
+    }
+  ],
+  "by_candidate": [
+    {
+      "group": "UNKNOWN",
+      "rows": "2",
+      "wins": "1",
+      "losses": "1",
+      "win_rate_pct": "50.00%",
+      "gross_profit_aed": "-68.67",
+      "net_profit_aed": "-68.67"
+    },
+    {
+      "group": "a3_breakout_improved",
+      "rows": "8",
+      "wins": "1",
+      "losses": "7",
+      "win_rate_pct": "12.50%",
+      "gross_profit_aed": "-157.26",
+      "net_profit_aed": "-156.04"
+    },
+    {
+      "group": "a3_breakout_plain",
+      "rows": "14",
+      "wins": "0",
+      "losses": "14",
+      "win_rate_pct": "0.00%",
+      "gross_profit_aed": "-509.12",
+      "net_profit_aed": "-510.44"
+    },
+    {
+      "group": "a3_round_retest_guarded_v1",
+      "rows": "26",
+      "wins": "10",
+      "losses": "16",
+      "win_rate_pct": "38.46%",
+      "gross_profit_aed": "-38.20",
+      "net_profit_aed": "-38.20"
+    },
+    {
+      "group": "a3_round_retest_structured_v1",
+      "rows": "25",
+      "wins": "10",
+      "losses": "15",
+      "win_rate_pct": "40.00%",
+      "gross_profit_aed": "34.97",
+      "net_profit_aed": "34.97"
+    }
+  ],
+  "by_session": [
+    {
+      "group": "Afternoon 12:00-15:59",
+      "rows": "16",
+      "wins": "2",
+      "losses": "14",
+      "win_rate_pct": "12.50%",
+      "gross_profit_aed": "-234.30",
+      "net_profit_aed": "-234.30"
+    },
+    {
+      "group": "Evening 16:00-19:59",
+      "rows": "9",
+      "wins": "3",
+      "losses": "6",
+      "win_rate_pct": "33.33%",
+      "gross_profit_aed": "-161.79",
+      "net_profit_aed": "-161.79"
+    },
+    {
+      "group": "Morning 06:00-11:59",
+      "rows": "27",
+      "wins": "7",
+      "losses": "20",
+      "win_rate_pct": "25.93%",
+      "gross_profit_aed": "-180.14",
+      "net_profit_aed": "-180.14"
+    },
+    {
+      "group": "Night 20:00-05:59",
+      "rows": "23",
+      "wins": "10",
+      "losses": "13",
+      "win_rate_pct": "43.48%",
+      "gross_profit_aed": "-162.05",
+      "net_profit_aed": "-162.15"
+    }
+  ],
+  "trade_deal_rows": 150
+}

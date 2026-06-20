@@ -1,0 +1,269 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-18T16:04:31.290733Z",
+  "purpose": "A1 runtime update: halt entries immediately when +100 AED daily goal arms, and block standard executor entries during Dubai morning/afternoon sessions.",
+  "boundaries": {
+    "account": "1025742 / Capital.ComMena-Demo",
+    "a2_touched": false,
+    "a3_touched": false,
+    "canonical_phase2_changed": false,
+    "live_real_capital": false
+  },
+  "guardian_update": {
+    "source_deployed": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.mq5",
+    "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_goal_lock_20260618.log",
+    "halt_entries_when_armed": true,
+    "effect": "When day_pnl reaches +100 AED, the guardian writes experimental_demo_kill_switch.txt immediately so entry EAs stop opening new positions for the rest of the Dubai day."
+  },
+  "entry_lane_updates": {
+    "standard_executor_source": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+    "repair_executor_source": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+    "wr50_widestop_source": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutWideStop_v0.mq5",
+    "compile_logs": {
+      "guardian": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_goal_lock_20260618.log",
+      "standard_executor": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_a1_goal_lock_20260618.log",
+      "repair_executor": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoRepairExecutor_a1_goal_lock_20260618.log",
+      "wr50_widestop": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_WR50_BreakoutWideStop_a1_goal_lock_20260618.log"
+    },
+    "shared_entry_halt_file": "experimental_demo_kill_switch.txt",
+    "effect": "Standard, repair, and WR50 A1 entry lanes now either read the same halt file or have chart inputs pointed at it, so the +100 AED lock is account-wide."
+  },
+  "session_guard_update": {
+    "executors": [
+      "Phase2ExperimentalDemoExecutor",
+      "Phase2ExperimentalDemoRepairExecutor",
+      "WR50_BreakoutWideStop_v0"
+    ],
+    "server_hour_window": "12->1",
+    "dubai_interpretation": "Allows Dubai 16:00-05:59; blocks Dubai 06:00-15:59 morning/afternoon.",
+    "reason": "Owner requested bad-session trading stop after evidence showed non-evening windows were weaker."
+  },
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_goal_lock_session_guard_20260618_160422",
+    "terminal_closed_before_profile_edit": true,
+    "terminal_relaunched": true
+  },
+  "account_before": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo",
+    "balance": 1707.71,
+    "equity": 1707.71,
+    "trade_allowed": true,
+    "trade_expert": true,
+    "positions_total": 0,
+    "orders_total": 0,
+    "position_tickets": []
+  },
+  "account_after": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo",
+    "balance": 1707.71,
+    "equity": 1707.71,
+    "trade_allowed": true,
+    "trade_expert": true,
+    "positions_total": 0,
+    "orders_total": 0,
+    "position_tickets": []
+  },
+  "chart_updates": {
+    "guardian_charts_updated": 1,
+    "executor_charts_updated": 2,
+    "repair_charts_updated": 3,
+    "wr50_charts_updated": 1,
+    "updated_charts": [
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+        "symbol": "EURUSD",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "experimental_demo_kill_switch.txt",
+        "entry_halt_file": "",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+        "symbol": "GBPUSD",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "experimental_demo_kill_switch.txt",
+        "entry_halt_file": "",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
+        "symbol": "XAUUSD",
+        "expert": "Phase2ExperimentalDemoRepairExecutor",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "experimental_demo_kill_switch.txt",
+        "entry_halt_file": "",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
+        "symbol": "XAUUSD",
+        "expert": "Phase2ExperimentalDemoRepairExecutor",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "experimental_demo_kill_switch.txt",
+        "entry_halt_file": "",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr",
+        "symbol": "EURUSD",
+        "expert": "Phase2ExperimentalDemoRepairExecutor",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "experimental_demo_kill_switch.txt",
+        "entry_halt_file": "",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart21.chr",
+        "symbol": "XAUUSD",
+        "expert": "WR50_BreakoutWideStop_v0",
+        "session_gate": "true",
+        "session_start": "12",
+        "session_end": "1",
+        "kill_switch_file": "",
+        "entry_halt_file": "experimental_demo_kill_switch.txt",
+        "halt_entries_when_armed": ""
+      },
+      {
+        "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr",
+        "symbol": "XAUUSD",
+        "expert": "Account1DailyProfitFloorGuardian",
+        "session_gate": "",
+        "session_start": "",
+        "session_end": "",
+        "kill_switch_file": "",
+        "entry_halt_file": "experimental_demo_kill_switch.txt",
+        "halt_entries_when_armed": "true"
+      }
+    ]
+  },
+  "standard_executor_restore": {
+    "needed": true,
+    "restored": 1,
+    "source_backup": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_goal_lock_session_guard_20260618_154543",
+    "token": "Phase2ExperimentalDemoExecutor",
+    "current_count_before": 1,
+    "backup_count": 2,
+    "restored_charts": [
+      "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart02.chr"
+    ]
+  },
+  "repair_executor_restore": {
+    "needed": false,
+    "restored": 0,
+    "source_backup": "",
+    "token": "Phase2ExperimentalDemoRepairExecutor"
+  },
+  "checks": [
+    {
+      "name": "a1_account_login",
+      "status": "PASS",
+      "evidence": "{'login': 1025742, 'server': 'Capital.ComMena-Demo', 'balance': 1707.71, 'equity': 1707.71, 'trade_allowed': True, 'trade_expert': True, 'positions_total': 0, 'orders_total': 0, 'position_tickets': []}"
+    },
+    {
+      "name": "profile_backup_created",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_goal_lock_session_guard_20260618_160422"
+    },
+    {
+      "name": "updated_sources_compile_0_errors_0_warnings",
+      "status": "PASS",
+      "evidence": "{'guardian': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_Account1DailyProfitFloorGuardian_goal_lock_20260618.log', 'standard_executor': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_Phase2ExperimentalDemoExecutor_a1_goal_lock_20260618.log', 'repair_executor': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_Phase2ExperimentalDemoRepairExecutor_a1_goal_lock_20260618.log', 'wr50_widestop': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_WR50_BreakoutWideStop_a1_goal_lock_20260618.log'}"
+    },
+    {
+      "name": "standard_executor_charts_present_or_restored",
+      "status": "PASS",
+      "evidence": "{'needed': True, 'restored': 1, 'source_backup': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\_codex_quarantine\\\\profile_backups\\\\default_profile_before_a1_goal_lock_session_guard_20260618_154543', 'token': 'Phase2ExperimentalDemoExecutor', 'current_count_before': 1, 'backup_count': 2, 'restored_charts': ['C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr']}"
+    },
+    {
+      "name": "repair_executor_charts_present_or_restored",
+      "status": "PASS",
+      "evidence": "{'needed': False, 'restored': 0, 'source_backup': '', 'token': 'Phase2ExperimentalDemoRepairExecutor'}"
+    },
+    {
+      "name": "guardian_chart_updated",
+      "status": "PASS",
+      "evidence": "{'guardian_charts_updated': 1, 'executor_charts_updated': 2, 'repair_charts_updated': 3, 'wr50_charts_updated': 1, 'updated_charts': [{'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart01.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr', 'symbol': 'GBPUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart18.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart19.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart20.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart21.chr', 'symbol': 'XAUUSD', 'expert': 'WR50_BreakoutWideStop_v0', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart26.chr', 'symbol': 'XAUUSD', 'expert': 'Account1DailyProfitFloorGuardian', 'session_gate': '', 'session_start': '', 'session_end': '', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': 'true'}]}"
+    },
+    {
+      "name": "executor_session_gate_updated",
+      "status": "PASS",
+      "evidence": "{'guardian_charts_updated': 1, 'executor_charts_updated': 2, 'repair_charts_updated': 3, 'wr50_charts_updated': 1, 'updated_charts': [{'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart01.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr', 'symbol': 'GBPUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart18.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart19.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart20.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart21.chr', 'symbol': 'XAUUSD', 'expert': 'WR50_BreakoutWideStop_v0', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart26.chr', 'symbol': 'XAUUSD', 'expert': 'Account1DailyProfitFloorGuardian', 'session_gate': '', 'session_start': '', 'session_end': '', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': 'true'}]}"
+    },
+    {
+      "name": "repair_session_and_halt_updated",
+      "status": "PASS",
+      "evidence": "{'guardian_charts_updated': 1, 'executor_charts_updated': 2, 'repair_charts_updated': 3, 'wr50_charts_updated': 1, 'updated_charts': [{'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart01.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr', 'symbol': 'GBPUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart18.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart19.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart20.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart21.chr', 'symbol': 'XAUUSD', 'expert': 'WR50_BreakoutWideStop_v0', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart26.chr', 'symbol': 'XAUUSD', 'expert': 'Account1DailyProfitFloorGuardian', 'session_gate': '', 'session_start': '', 'session_end': '', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': 'true'}]}"
+    },
+    {
+      "name": "wr50_session_and_halt_updated",
+      "status": "PASS",
+      "evidence": "{'guardian_charts_updated': 1, 'executor_charts_updated': 2, 'repair_charts_updated': 3, 'wr50_charts_updated': 1, 'updated_charts': [{'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart01.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart02.chr', 'symbol': 'GBPUSD', 'expert': 'Phase2ExperimentalDemoExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart18.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart19.chr', 'symbol': 'XAUUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart20.chr', 'symbol': 'EURUSD', 'expert': 'Phase2ExperimentalDemoRepairExecutor', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': 'experimental_demo_kill_switch.txt', 'entry_halt_file': '', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart21.chr', 'symbol': 'XAUUSD', 'expert': 'WR50_BreakoutWideStop_v0', 'session_gate': 'true', 'session_start': '12', 'session_end': '1', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': ''}, {'chart': 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Profiles\\\\Charts\\\\Default\\\\chart26.chr', 'symbol': 'XAUUSD', 'expert': 'Account1DailyProfitFloorGuardian', 'session_gate': '', 'session_start': '', 'session_end': '', 'kill_switch_file': '', 'entry_halt_file': 'experimental_demo_kill_switch.txt', 'halt_entries_when_armed': 'true'}]}"
+    },
+    {
+      "name": "a2_a3_untouched",
+      "status": "PASS",
+      "evidence": "Only standard A1 terminal/profile path was modified."
+    }
+  ],
+  "startup_tail": [
+    "2026.06.18 15:53:29,2026.06.18 15:53:29,2026.06.18 19:53:29,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+    "2026.06.18 15:53:38,2026.06.18 15:53:37,2026.06.18 19:53:37,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+    "2026.06.18 15:56:38,2026.06.18 15:56:37,2026.06.18 19:56:37,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+    "2026.06.18 15:56:46,2026.06.18 15:56:45,2026.06.18 19:56:45,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+    "2026.06.18 15:57:41,2026.06.18 15:57:41,2026.06.18 19:57:41,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+    "2026.06.18 15:57:50,2026.06.18 15:57:49,2026.06.18 19:57:49,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+    "2026.06.18 16:02:21,2026.06.18 16:02:20,2026.06.18 20:02:20,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+    "2026.06.18 16:02:37,2026.06.18 16:02:36,2026.06.18 20:02:36,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+    "2026.06.18 16:04:18,2026.06.18 16:04:17,2026.06.18 20:04:17,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+    "2026.06.18 16:04:27,2026.06.18 16:04:26,2026.06.18 20:04:26,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored"
+  ],
+  "event_tail": [
+    "2026.06.18 15:41:42,2026.06.18 15:41:41,2026.06.18 19:41:41,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:44,2026.06.18 15:41:43,2026.06.18 19:41:43,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:46,2026.06.18 15:41:45,2026.06.18 19:41:45,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:48,2026.06.18 15:41:47,2026.06.18 19:41:47,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:50,2026.06.18 15:41:49,2026.06.18 19:41:49,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:52,2026.06.18 15:41:51,2026.06.18 19:41:51,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:54,2026.06.18 15:41:53,2026.06.18 19:41:53,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:56,2026.06.18 15:41:55,2026.06.18 19:41:55,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:41:58,2026.06.18 15:41:57,2026.06.18 19:41:57,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true",
+    "2026.06.18 15:42:00,2026.06.18 15:41:59,2026.06.18 19:41:59,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,ENTRY_HALT_WRITTEN,keep_flat_locked_today,2026.06.18,1617.22,1707.71,90.49,119.79,true,true,0,15,0,0,,,0.00,0.00000,0,,false,true"
+  ],
+  "state_tail": [
+    "peak_day_pnl=119.79",
+    "armed=true",
+    "locked=true",
+    "armed_time=2026.06.18 17:47:51",
+    "trigger_time=2026.06.18 17:48:01",
+    "trigger_reason=DAILY_PROFIT_FLOOR_RETURN",
+    "positions_closed_today=15",
+    "close_failures_today=0",
+    "locked_equity=1713.70",
+    "locked_day_pnl=96.48"
+  ],
+  "halt_file_tail": [
+    "KILL",
+    "A1_DAILY_PROFIT_FLOOR_GUARDIAN",
+    "reason=keep_flat_locked_today",
+    "timestamp_broker=2026.06.18 15:42:00",
+    "timestamp_utc=2026.06.18 15:41:59",
+    "timestamp_dubai=2026.06.18 19:41:59",
+    "account_login=1025742"
+  ]
+}

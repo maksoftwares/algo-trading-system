@@ -9,7 +9,7 @@
     "stop_exit_slippage_points": 50.0,
     "stress_spread_points": "max(realized entry-bar spread, measured P95 spread for entry UTC hour)"
   },
-  "created_at_utc": "2026-06-19T11:47:46.476745Z",
+  "created_at_utc": "2026-06-19T12:06:11.562498Z",
   "data_window": {
     "end_utc": "2025-07-01 00:00:00",
     "source": "Phase0 Dukascopy XAUUSD bars",
@@ -79,6 +79,20 @@
       "t_stat": -0.7938
     },
     "significance_gate_pass": false,
+    "stage_funnel": {
+      "candidate_direction_checks": 76446,
+      "cost_passed": 19,
+      "cost_passed_matches_signal_count": true,
+      "long_cost_passed": 18,
+      "long_opened": 6,
+      "m5_trigger_eligible": 31,
+      "opened_after_one_position_scheduling": 7,
+      "pullback_eligible": 210,
+      "scheduled_out_by_one_position": 12,
+      "short_cost_passed": 1,
+      "short_opened": 1,
+      "trend_eligible": 31875
+    },
     "stress_expectancy_r": -0.395,
     "stress_gate_pass": false,
     "stress_profit_factor": 0.5068,

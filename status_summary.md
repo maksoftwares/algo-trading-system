@@ -1,7 +1,7 @@
 # Project Status Summary
 
-Generated UTC: `2026-06-18T12:21:01.116422Z`
-Artifact generation base commit: `ab95b3def4888921dae4861fb9398cdaf26ea4c0`
+Generated UTC: `2026-06-20T22:42:05.794613Z`
+Artifact generation base commit: `077184ed501001748ef0e5c372f4ae2fecde5520`
 Branch: `main`
 
 This small file is the audit-friendly companion to the large `status.html` dashboard.
@@ -28,10 +28,12 @@ Rollback required now: `false`
 
 ## Protected Breakout Core
 
-| Chart | Candidate | Dry run | Broker action | Status |
-| --- | --- | ---: | ---: | --- |
-| `chart03.chr` | `breakout_retest` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
-| `chart06.chr` | `swing_breakout_retest_v0` | `false` | `true` | `EXPERIMENTAL_QUARANTINE_REVIEW_ONLY` |
+Source: `runtime_inventory`
+
+| Chart | Candidate | Account | Magic | Session | Dry run | Broker action | Status |
+| --- | --- | ---: | ---: | --- | ---: | ---: | --- |
+| `A1 chart03.chr` | `breakout_retest` | `1025742` | `920101` | `12->15` | `false` | `true` | `BROKER_ACTION_ENABLED` |
+| `A2 chart02.chr` | `breakout_retest` | `1033030` | `920101` | `12->15` | `false` | `true` | `BROKER_ACTION_ENABLED` |
 
 ## A3 Runtime Decision
 

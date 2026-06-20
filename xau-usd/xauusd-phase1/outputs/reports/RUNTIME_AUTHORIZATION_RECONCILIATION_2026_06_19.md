@@ -12,17 +12,18 @@ Decision: `CURRENT_RUNTIME_SAFE; PRIOR_A3_DRIFT_REMEDIATED; KEEP_RECONCILIATION_
 
 | Account | Chart | Symbol | Expert | Magic | Candidate | Dry-run | Broker | Manage | Demo | Classification | Reason |
 | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| A1 | chart01.chr | EURUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
-| A1 | chart02.chr | GBPUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
-| A1 | chart18.chr | XAUUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `symbol_normalized_round_retest_v0_repair_v1` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
-| A1 | chart19.chr | XAUUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `session_extreme_retest_v0_repair_v1` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
-| A1 | chart20.chr | EURUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `session_extreme_retest_v0_repair_v1` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
-| A1 | chart21.chr | XAUUSD | `WR50_BreakoutWideStop_v0` | `930300` | `` | `` | `` | `` | `true` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart01.chr | EURUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `true` | `false` | `` | `` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart02.chr | GBPUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `true` | `false` | `` | `` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart03.chr | XAUUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `false` | `true` | `` | `` | `AUTHORIZED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart18.chr | XAUUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `symbol_normalized_round_retest_v0_repair_v1` | `true` | `false` | `` | `` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart19.chr | XAUUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `session_extreme_retest_v0_repair_v1` | `true` | `false` | `` | `` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart20.chr | EURUSD | `Phase2ExperimentalDemoRepairExecutor` | `` | `session_extreme_retest_v0_repair_v1` | `true` | `false` | `` | `` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
+| A1 | chart21.chr | XAUUSD | `WR50_BreakoutWideStop_v0` | `930300` | `` | `` | `` | `` | `false` | `AUTHORIZED_BUT_NOT_ARMED` | A1 experimental demo entry lane; governed by A1 goal/session controls. |
 | A1 | chart24.chr | XAUUSD | `AccountEquityGuardianShadow` | `` | `` | `` | `` | `` | `` | `AUTHORIZED_SHADOW` | A1 support/guardian/observer lane. |
 | A1 | chart26.chr | XAUUSD | `Account1DailyProfitFloorGuardian` | `` | `` | `false` | `` | `` | `` | `AUTHORIZED_SHADOW` | A1 support/guardian/observer lane. |
 | A2 | chart01.chr | XAUUSD | `AccountEquityGuardianShadow` | `` | `` | `` | `` | `` | `` | `AUTHORIZED_SHADOW` | Non-entry support/observer lane. |
 | A2 | chart02.chr | XAUUSD | `Phase2ExperimentalDemoExecutor` | `` | `breakout_retest` | `false` | `true` | `` | `` | `AUTHORIZED` | A2 is the tier-1 breakout-only demo lane. |
-| A2 | chart03.chr | XAUUSD | `DirectionStatePublisher` | `` | `` | `` | `` | `` | `` | `AUTHORIZED_SHADOW` | Non-entry support/observer lane. |
+| A2 | chart03.chr | XAUUSD | `Account1DailyProfitFloorGuardian` | `` | `` | `false` | `` | `` | `` | `AUTHORIZED_SHADOW` | Non-entry support/observer lane. |
 | A3 | chart01.chr | XAUUSD | `Account3BreakoutPlainExecutor` | `933200` | `` | `true` | `false` | `` | `` | `PAUSED` | A3 chart is disarmed as expected. |
 | A3 | chart02.chr | XAUUSD | `Account3BreakoutImprovedExecutor` | `933300` | `` | `true` | `false` | `` | `` | `PAUSED` | A3 chart is disarmed as expected. |
 | A3 | chart04.chr | XAUUSD | `Account3BreakoutTier1CompatExecutor` | `933400` | `` | `true` | `false` | `` | `` | `PAUSED` | A3 chart is disarmed as expected. |

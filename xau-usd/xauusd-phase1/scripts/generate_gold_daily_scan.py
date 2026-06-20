@@ -68,20 +68,18 @@ def generate_gold_daily_scan(phase1_root: Path, scan_date: str = "2026-06-17") -
         writer.writeheader()
         writer.writerows(rows)
 
-    report_path.write_text(
-        _render_report(
-            scan_date=scan_date,
-            rows=rows,
-            context=context,
-            a3_signal_rows=a3_signal_rows,
-            a3_order_rows=a3_order_rows,
-            applied=applied,
-            eod_report=eod_report,
-            rows_path=rows_path,
-        ),
-        encoding="utf-8",
+    report_text = _render_report(
+        scan_date=scan_date,
+        rows=rows,
+        context=context,
+        a3_signal_rows=a3_signal_rows,
+        a3_order_rows=a3_order_rows,
+        applied=applied,
+        eod_report=eod_report,
+        rows_path=rows_path,
     )
-    _append_or_replace_day3(repo_root / "GOLD_DAILY_TRACKING_WEEK_2026_06_15.md", report_path.read_text(encoding="utf-8"))
+    report_path.write_text(report_text, encoding="utf-8")
+    _append_or_replace_day(repo_root / "GOLD_DAILY_TRACKING_WEEK_2026_06_15.md", scan_date, rows, context)
     return {"report": report_path, "rows": rows_path}
 
 
@@ -166,6 +164,9 @@ def _render_report(
     eod_report: Path,
     rows_path: Path,
 ) -> str:
+    scan_day = datetime.strptime(scan_date, "%Y-%m-%d").date()
+    scan_log_prefix = scan_day.strftime("%Y.%m.%d")
+    day_number = _tracking_day_number(scan_date)
     global_unique_rows = _unique_representatives(rows, "unique_signal")
     account_unique_rows = _unique_representatives(rows, "account_unique_signal")
     threshold_work_order = datetime(2026, 6, 17, 11, 22)
@@ -177,20 +178,27 @@ def _render_report(
     target_pre_applied = [r for r in target_rows if _parse_dt(r["entry_time_dubai"]) and _parse_dt(r["entry_time_dubai"]) < threshold_applied_dubai]
     target_post_applied = [r for r in target_rows if _parse_dt(r["entry_time_dubai"]) and _parse_dt(r["entry_time_dubai"]) >= threshold_applied_dubai]
     protected = [r for r in rows if r["account"] == "1025742" and r["magic"] in {"920101", "920201"}]
+    a2_rows = [r for r in rows if r["account"] == "1033030"]
+    a3_rows = [r for r in rows if r["account"] == "1033669"]
     compat_rows = [r for r in rows if r["account"] == "1033669" and r["magic"] == "933400"]
     a3_plain = [r for r in rows if r["account"] == "1033669" and r["magic"] == "933200"]
     a3_improved = [r for r in rows if r["account"] == "1033669" and r["magic"] == "933300"]
-    a3_compat_signal_today = [r for r in a3_signal_rows if r.get("timestamp_local", "").startswith("2026.06.17")]
-    a3_compat_orders_today = [r for r in a3_order_rows if r.get("timestamp_local", "").startswith("2026.06.17")]
+    a3_compat_signal_today = [r for r in a3_signal_rows if r.get("timestamp_local", "").startswith(scan_log_prefix)]
+    a3_compat_orders_today = [r for r in a3_order_rows if r.get("timestamp_local", "").startswith(scan_log_prefix)]
+    a3_pause_status = "PAUSE_HELD" if not a3_rows else "PAUSE_FAIL"
     shadow_counts = Counter(r.get("trend_shadow_pass", "") for r in a3_compat_signal_today)
     shadow_reasons = Counter(r.get("trend_shadow_reason", "") for r in a3_compat_signal_today)
     would_shadow = Counter(r.get("trend_shadow_reason", "") for r in a3_compat_signal_today if r.get("would_signal", "").lower() == "true")
     compat_gate_rows = _compat_gate_rows(a3_compat_orders_today)
+    afternoon_rows = [r for r in account_unique_rows if r["session"].startswith("Afternoon")]
+    h1_tag = "n/a" if not target_rows else _tag(_pnl(target_rows) < 0)
+    h2_tag = "n/a" if not afternoon_rows else _tag(_pnl(afternoon_rows) < 0)
+    h5_tag = "n/a" if not (a3_plain or a3_improved) else _tag(_pnl(a3_improved) > _pnl(a3_plain))
 
     lines = [
         f"# Gold Daily Scan - {scan_date}",
         "",
-        "Status: `READ_ONLY_SCAN_COMPLETE_NEAR_EOD`",
+        "Status: `READ_ONLY_SCAN_COMPLETE`",
         "",
         "No EA, preset, chart, cap, arming, profile, order, or position was changed by this scan.",
         "",
@@ -214,7 +222,7 @@ def _render_report(
             [[context.get("gold_open", ""), context.get("gold_high", ""), context.get("gold_low", ""), context.get("gold_close", ""), context.get("net_move_pts", ""), context.get("day_type", ""), context.get("bar_rows", "")]],
         ),
         "",
-        "Day-3 regime: `DOWN`. H3 is no longer only up-regime evidence, but one down day still is not enough for final confirmation.",
+        f"Day-{day_number} regime: `{context.get('day_type', 'unknown').upper()}`. Single-day evidence only; no hypothesis is upgraded from this one scan.",
         "",
         "## T1 - Authoritative Trade Set Summary",
         "",
@@ -238,14 +246,24 @@ def _render_report(
         ),
         "",
         "Report-based chart state: chart09/chart11 are recorded as `dry_run=true`, `broker_action_allowed=false`; runtime verification remains forward-week evidence.",
+        f"- Full-day exact target result for `{scan_date}`: `{'CLEAN' if not target_rows else 'FAIL'}`; exact chart09/chart11-family broker rows: `{len(target_rows)}`.",
         "",
         "## T3 - A1 Protected Breakout-Core",
         "",
         _summary_table(protected, ["magic", "candidate", "session"]),
         "",
-        "Protected core continued producing rows today, so no halt is visible in direct broker history.",
+        "Protected core produced broker rows today. A1 later shows `kill_switch_active` guard blocks in the source EOD report; that is the owner-authorized A1 daily profit-floor lock, not round-quarantine damage.",
         "",
-        "## T4 - A3 Tier-1 Compat 933400",
+        "## T4 - A3 Pause Verification",
+        "",
+        f"- A3 pause status: `{a3_pause_status}`.",
+        f"- A3 closed XAUUSD rows today: `{len(a3_rows)}`.",
+        f"- A3 closed PnL AED_001: `{_pnl(a3_rows):.2f}`.",
+        "- Open/pending exposure: see the source EOD scan report; it reported zero open XAUUSD positions at scan time.",
+        "",
+        _summary_table(a3_rows, ["magic", "candidate", "session"]),
+        "",
+        "## T4 Detail - A3 Tier-1 Compat 933400",
         "",
         _compat_table(compat_rows, compat_gate_rows),
         "",
@@ -265,20 +283,28 @@ def _render_report(
         "",
         f"A3 plain/improved co-fired same unique signal count: `{_cofire_count(a3_plain, a3_improved)}`.",
         "",
+        "## T5 - A2 Breakout",
+        "",
+        _summary_table(a2_rows, ["magic", "candidate", "session"]),
+        "",
+        "## T6 - Direction Split",
+        "",
+        _summary_table(account_unique_rows, ["direction"]),
+        "",
         "## Per Account / Magic / Session",
         "",
         _summary_table(account_unique_rows, ["account", "magic", "candidate", "session"]),
         "",
-        "## Hypothesis Tags - Day 3 Only",
+        f"## Hypothesis Tags - Day {day_number} Only",
         "",
         _table(
             ["Hypothesis", "Tag", "Reason"],
             [
-                ["H1 round-no-edge", _tag(_pnl(target_rows) < 0 and len(target_rows) > 0), f"Round-family target rows today: {len(target_rows)}, PnL {_pnl(target_rows):.2f} AED_001."],
-                ["H2 afternoon-weak", _tag(_pnl([r for r in account_unique_rows if r['session'].startswith('Afternoon')]) < 0), "Afternoon account-scoped unique PnL remains negative, but not necessarily worst today."],
-                ["H3 counter-trend-loses", _tag(context.get("day_type") == "down" and _pnl([r for r in account_unique_rows if r['direction'] == 'BUY']) < _pnl([r for r in account_unique_rows if r['direction'] == 'SELL'])), "Gold was down; long side carried most losses."],
+                ["H1 round-no-edge", h1_tag, f"Exact chart09/chart11 target rows today: {len(target_rows)}. Zero rows proves quarantine compliance, not edge behavior."],
+                ["H2 afternoon-weak", h2_tag, f"Afternoon account-scoped unique rows: {len(afternoon_rows)}, PnL {_pnl(afternoon_rows):.2f} AED_001."],
+                ["H3 counter-trend-loses", _tag(context.get("day_type") == "down" and _pnl([r for r in account_unique_rows if r['direction'] == 'BUY']) < _pnl([r for r in account_unique_rows if r['direction'] == 'SELL'])), f"Gold day type was {context.get('day_type', 'unknown')}; compare BUY vs SELL in T6."],
                 ["H4 cost-predicts-losers", "n/a", "Needs multi-day cost aggregation; single-day cells are too small."],
-                ["H5 structure-beats-veto", _tag(_pnl(a3_improved) > _pnl(a3_plain)), "A3 improved 933300 outperformed plain 933200 today, but sample is small."],
+                ["H5 structure-beats-veto", h5_tag, "A3 improved 933300 outperformed plain 933200 today, but sample is small."],
             ],
         ),
         "",
@@ -352,40 +378,77 @@ def _cofire_count(left: list[dict[str, str]], right: list[dict[str, str]]) -> in
     return len({r["unique_signal"] for r in left} & {r["unique_signal"] for r in right})
 
 
-def _append_or_replace_day3(tracker: Path, report_text: str) -> None:
+def _tracking_day_number(scan_date: str) -> int:
+    scan_day = datetime.strptime(scan_date, "%Y-%m-%d").date()
+    week_start = datetime(2026, 6, 15).date()
+    return (scan_day - week_start).days + 1
+
+
+def _append_or_replace_day(tracker: Path, scan_date: str, rows: list[dict[str, str]], context: dict[str, str]) -> None:
     if not tracker.exists():
         return
     text = tracker.read_text(encoding="utf-8")
-    start = text.find("## Day 3")
-    end = text.find("## Day 4")
+    day_number = _tracking_day_number(scan_date)
+    start = text.find(f"## Day {day_number}")
+    next_day = text.find(f"## Day {day_number + 1}")
+    end_marker = text.find("---\n\n## End-of-Week Synthesis")
+    end = next_day if next_day != -1 else end_marker
     if start == -1 or end == -1 or end <= start:
         return
-    replacement = _tracker_day3(report_text)
+    replacement = _tracker_day(scan_date, rows, context)
     tracker.write_text(text[:start] + replacement + "\n" + text[end:], encoding="utf-8")
 
 
-def _tracker_day3(report_text: str) -> str:
+def _tracker_day(scan_date: str, rows: list[dict[str, str]], context: dict[str, str]) -> str:
+    scan_day = datetime.strptime(scan_date, "%Y-%m-%d").date()
+    day_number = _tracking_day_number(scan_date)
+    label = scan_day.strftime("%A %Y-%m-%d")
+    label_file = scan_day.strftime("%Y_%m_%d")
+    account_unique_rows = _unique_representatives(rows, "account_unique_signal")
+    round_targets = [
+        row
+        for row in rows
+        if row["account"] == "1025742"
+        and row["candidate"] in {"symbol_normalized_round_retest_v0", "round_number_retest_v0"}
+    ]
+    a3_rows = [row for row in rows if row["account"] == "1033669"]
+    buy_rows = [row for row in account_unique_rows if row["direction"] == "BUY"]
+    sell_rows = [row for row in account_unique_rows if row["direction"] == "SELL"]
+    account_lines = []
+    for account in ("1025742", "1033030", "1033669"):
+        items = [row for row in rows if row["account"] == account]
+        account_lines.append(
+            f"- {account}: {len(items)} raw closed rows, {_pnl(items):.2f} AED_001, {_win_rate(items)} win rate."
+        )
+    afternoon_rows = [r for r in account_unique_rows if r["session"].startswith("Afternoon")]
+    a3_plain = [r for r in rows if r["account"] == "1033669" and r["magic"] == "933200"]
+    a3_improved = [r for r in rows if r["account"] == "1033669" and r["magic"] == "933300"]
+    h1 = "n/a" if not round_targets else _tag(_pnl(round_targets) < 0)
+    h2 = "n/a" if not afternoon_rows else _tag(_pnl(afternoon_rows) < 0)
+    h3 = _tag(
+        context.get("day_type") == "down"
+        and _pnl(buy_rows) < _pnl(sell_rows)
+    )
+    h5 = "n/a" if not (a3_plain or a3_improved) else _tag(_pnl(a3_improved) > _pnl(a3_plain))
     lines = [
-        "## Day 3 - Wednesday 2026-06-17",
+        f"## Day {day_number} - {label}",
         "",
-        "**Gold:** DOWN day from scan context: open 4333.76 -> latest/close 4227.41 (-10635 points), high 4382.10, low 4226.27.",
+        f"**Gold:** {context.get('day_type', 'unknown').upper()} day from scan context: open {context.get('gold_open', '')} -> close {context.get('gold_close', '')} ({context.get('net_move_pts', '')} points), high {context.get('gold_high', '')}, low {context.get('gold_low', '')}.",
         "",
-        "**Per account (gold only, normalized to 0.01 lot, closed broker fills):** see `xau-usd/xauusd-phase1/outputs/reports/GOLD_DAILY_SCAN_2026_06_17.md` and `XAUUSD_DAILY_ROWS_2026_06_17.csv`.",
+        f"**Per account (gold only, normalized to 0.01 lot, closed broker fills):** see `xau-usd/xauusd-phase1/outputs/reports/GOLD_DAILY_SCAN_{label_file}.md` and `XAUUSD_DAILY_ROWS_{label_file}.csv`.",
         "",
-        "- A1: 71 raw closed rows, -344.60 AED_001, 30.99% win rate.",
-        "- A2: 1 raw closed row, -92.42 AED_001, 0.00% win rate.",
-        "- A3: 10 raw closed rows, -404.90 AED_001, 0.00% win rate.",
-        "- Whole-book raw: 82 rows, -841.92 AED_001.",
+        *account_lines,
+        f"- Whole-book raw: {len(rows)} rows, {_pnl(rows):.2f} AED_001.",
         "",
-        "**Round quarantine:** using the applied report timestamp (`2026-06-17 11:22 UTC` / `15:22 Dubai`), post-quarantine target rows were 0 = CLEAN. Using the work-order's `11:22 Dubai` wording, there are 11 target rows and the time basis needs owner/reviewer clarification.",
+        f"**Round quarantine:** chart09/chart11 target rows `{len(round_targets)}` = `{'CLEAN' if not round_targets else 'FAIL'}`.",
         "",
-        "**A3 Tier-1 compat:** magic `933400` fired 1 closed trade, inside server-hour gate 12-15, PnL -92.31 AED_001. Shadow trend guard remained shadow-only.",
+        f"**A3 pause:** `{ 'PAUSE_HELD' if not a3_rows else 'PAUSE_FAIL' }`; A3 closed rows `{len(a3_rows)}`, PnL `{_pnl(a3_rows):.2f}` AED_001.",
         "",
-        "**A3 A/B:** plain `933200` lost materially more than improved `933300`; no plain-vs-improved same-signal cofire was observed in the daily rows.",
+        f"**Direction split (account-scoped unique):** BUY {len(buy_rows)} / {_win_rate(buy_rows)} / {_pnl(buy_rows):.2f}; SELL {len(sell_rows)} / {_win_rate(sell_rows)} / {_pnl(sell_rows):.2f}.",
         "",
-        "**Hypothesis scorecard (one-day tags only):** H1 `support`; H2 `support but weaker`; H3 `support on first down day`; H4 `n/a`; H5 `support, tiny sample`.",
+        f"**Hypothesis scorecard (one-day tags only):** H1 `{h1}`; H2 `{h2}`; H3 `{h3}`; H4 `n/a`; H5 `{h5}`.",
         "",
-        "**No edge upgrade:** this is one near-EOD day and is reported as measurement only.",
+        "**No edge upgrade:** this is one day and is reported as measurement only.",
         "",
     ]
     return "\n".join(lines)
@@ -460,6 +523,13 @@ def _num(value: str | None) -> float:
 
 def _pnl(rows: list[dict[str, str]]) -> float:
     return sum(_num(row.get("profit_aed_001")) for row in rows)
+
+
+def _win_rate(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        return "n/a"
+    wins = sum(1 for row in rows if _num(row.get("profit_aed_001")) > 0)
+    return f"{wins / len(rows) * 100:.2f}%"
 
 
 def _tag(condition: bool) -> str:

@@ -205,8 +205,9 @@ def _group(rows: list[dict[str, str]], key: str) -> list[dict[str, str]]:
 
 def _render_markdown(payload: dict[str, Any], closed_rows_path: Path, open_rows_path: Path) -> str:
     summary = payload["summary"]
+    report_date = str(payload.get("window_end_utc", ""))[:10] or "latest"
     lines = [
-        "# A3 Repair-Lane Account History Reconciliation - 2026-06-17",
+        f"# A3 Repair-Lane Account History Reconciliation - {report_date}",
         "",
         f"Status: `{payload['status']}`",
         "",

@@ -1,0 +1,338 @@
+{
+  "status": "PARTIAL_REVIEW_NEEDS_FRESH_M5_BARS",
+  "created_at_utc": "2026-06-19T19:31:21.480883Z",
+  "authority": "Read-only outcome resolution for observer signals. It joins to exported broker trades and optionally replays executor-faithful synthetic SL/TP against supplied M5 bars. It does not touch MT5 runtime, orders, positions, profiles, charts, or running EAs.",
+  "replay_model": "executor_v2",
+  "scoreboard_mode": "broker_joined_only",
+  "shadow_files_dir": "C:\\MT5PortableShadowFixObservers\\MQL5\\Files",
+  "signal_glob": "shadow_fix_observer_signal_log_*.csv",
+  "actual_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\EOD_GOLD_OBSERVER_JOIN_INPUT_20260619.csv",
+  "bars_dir": "",
+  "cost_model_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\outputs\\reports\\cost_model_measured.csv",
+  "signal_count": 2643,
+  "actual_trade_rows": 5,
+  "resolved_count": 2,
+  "broker_join_resolved_count": 2,
+  "replay_resolved_count": 0,
+  "unresolved_count": 2641,
+  "by_evidence_tier": [
+    {
+      "evidence_tier": "UNKNOWN",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 2641
+    },
+    {
+      "evidence_tier": "BROKER",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "by_resolution_status": [
+    {
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 2641
+    },
+    {
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "by_resolution_source": [
+    {
+      "resolution_source": "UNKNOWN",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 2641
+    },
+    {
+      "resolution_source": "broker_trade_join",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "broker_fill_scoreboards": {
+    "session": [
+      {
+        "group": "Evening 16:00-19:59",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "cost": [
+      {
+        "group": "MEDIUM_31_50pt",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "direction": [
+      {
+        "group": "BUY",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "regime": [
+      {
+        "group": "WOULD_SIGNAL",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "family": [
+      {
+        "group": "breakout",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "lane": [
+      {
+        "group": "accepted_same_family",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ],
+    "ea_symbol_session": [
+      {
+        "group": "breakout_retest | XAUUSD | Evening 16:00-19:59",
+        "rows": "2",
+        "closed": "2",
+        "wins": "0",
+        "losses": "2",
+        "open": "0",
+        "flat": "0",
+        "win_rate_pct": "0.00",
+        "broker_profit_aed": "-23.47",
+        "replay_net_r_sum": ""
+      }
+    ]
+  },
+  "replay_reference_scoreboards": {
+    "session": [],
+    "cost": [],
+    "direction": [],
+    "regime": [],
+    "family": [],
+    "lane": [],
+    "ea_symbol_session": []
+  },
+  "by_candidate": [
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "count": 832
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "count": 684
+    },
+    {
+      "candidate": "breakout_retest",
+      "count": 529
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "count": 399
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "count": 199
+    }
+  ],
+  "by_candidate_status": [
+    {
+      "candidate": "symbol_normalized_round_retest_v0",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 832
+    },
+    {
+      "candidate": "round_number_retest_v0",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 684
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 527
+    },
+    {
+      "candidate": "swing_breakout_retest_v0",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 399
+    },
+    {
+      "candidate": "session_extreme_retest_v0",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 199
+    },
+    {
+      "candidate": "breakout_retest",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "by_proposed_v2_action": [
+    {
+      "proposed_v2_shadow_action": "BLOCK",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 1788
+    },
+    {
+      "proposed_v2_shadow_action": "KEEP",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 853
+    },
+    {
+      "proposed_v2_shadow_action": "KEEP",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "by_time_bucket": [
+    {
+      "time_bucket": "Night 20:00-05:59",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 1062
+    },
+    {
+      "time_bucket": "Evening 16:00-19:59",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 623
+    },
+    {
+      "time_bucket": "Morning 06:00-11:59",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 565
+    },
+    {
+      "time_bucket": "Afternoon 12:00-15:59",
+      "resolution_status": "UNRESOLVED_NO_BROKER_MATCH_NO_REPLAY_BARS",
+      "count": 391
+    },
+    {
+      "time_bucket": "Evening 16:00-19:59",
+      "resolution_status": "BROKER_CLOSED_LOSS",
+      "count": 2
+    }
+  ],
+  "bar_quality": [],
+  "scoreboard_rows": [
+    {
+      "aggregation_level": "candidate",
+      "group": "breakout_retest",
+      "family": "breakout",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "KEEP",
+      "proposed_v2_shadow_action": "KEEP",
+      "proposed_v2_shadow_reason": "KEEP",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "KEEP",
+      "signals": "2",
+      "broker_join": "2",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "2",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-23.47",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4992",
+      "net_breakeven_wr_pct": ""
+    },
+    {
+      "aggregation_level": "family",
+      "group": "breakout",
+      "family": "breakout",
+      "symbol": "XAUUSD",
+      "time_bucket": "Evening 16:00-19:59",
+      "direction": "LONG",
+      "normalized_direction": "BUY",
+      "legacy_shadow_action": "KEEP",
+      "proposed_v2_shadow_action": "KEEP",
+      "proposed_v2_shadow_reason": "KEEP",
+      "trend_veto_action": "",
+      "fixed_shadow_action": "KEEP",
+      "signals": "2",
+      "broker_join": "2",
+      "replay": "0",
+      "unresolved": "0",
+      "wins": "0",
+      "losses": "2",
+      "open": "0",
+      "flat": "0",
+      "closed_win_rate_pct": "0.00",
+      "broker_profit_aed": "-23.47",
+      "replay_gross_win_rate_pct": "0.00",
+      "replay_net_win_rate_pct": "0.00",
+      "replay_net_r_sum": "",
+      "avg_cost_r": "",
+      "avg_rr": "1.4992",
+      "net_breakeven_wr_pct": ""
+    }
+  ],
+  "scoreboard_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\OBSERVER_SHADOW_POLICY_SCOREBOARD_2026_06_19.json",
+  "scoreboard_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\OBSERVER_SHADOW_POLICY_SCOREBOARD_2026_06_19.md",
+  "scoreboard_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\OBSERVER_SHADOW_POLICY_SCOREBOARD_2026_06_19.csv",
+  "notes": [
+    "Broker-trade join is the preferred proof when the demo EA actually took the same signal.",
+    "Rows with evidence_tier=BROKER use actual broker state, profit, and exit data as the authoritative outcome.",
+    "Rows with evidence_tier=REPLAY are secondary reference evidence only; broker-tier scoreboards should be used for current decisions.",
+    "M5 replay is only used when a bars_dir is provided and matching June 2026 bars exist.",
+    "Replay model executor_v2 simulates Phase2ExperimentalDemoExecutor.SendDemoMarketOrder: next-M5-open entry, measured spread adjustment, stop floor, synthetic SL/TP, and adverse-first same-bar exits.",
+    "Replay uses adverse-first same-bar ordering, so if SL and TP are both touched in the same M5 bar the row is scored as SL.",
+    "Rows without broker match or bars are left unresolved; no outcome is guessed.",
+    "Observer LONG/SHORT directions are normalized to broker BUY/SELL only for matching and replay; the original direction is preserved.",
+    "Replay rows include gross R, estimated cost R, and net R. v1 plan-replay columns are retained only for calibration diffing.",
+    "Portfolio-level totals must use the family rollup because clone EAs can emit duplicate same-family signals.",
+    "Proposed v2 shadow policy blocks the round-retest clone family: symbol_normalized_round_retest_v0 and round_number_retest_v0."
+  ]
+}

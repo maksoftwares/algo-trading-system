@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "boundary": "Read-only MT5 query against A2 portable terminal. No runtime, EA, preset, chart, order, or position change.",
+  "terminal": "C:\\MT5PortableTier1BestEA\\terminal64.exe",
+  "window_start_utc": "2026-06-01T00:00:00+00:00",
+  "window_end_utc": "2026-06-19T19:36:17.834808+00:00",
+  "account": {
+    "login": 1033030,
+    "trade_mode": 0,
+    "leverage": 100,
+    "limit_orders": 0,
+    "margin_so_mode": 0,
+    "trade_allowed": true,
+    "trade_expert": true,
+    "margin_mode": 2,
+    "currency_digits": 2,
+    "fifo_close": false,
+    "balance": 3944.91,
+    "credit": 0.0,
+    "profit": 0.0,
+    "equity": 3944.91,
+    "margin": 0.0,
+    "margin_free": 3944.91,
+    "margin_level": 0.0,
+    "margin_so_call": 100.0,
+    "margin_so_so": 50.0,
+    "margin_initial": 0.0,
+    "margin_maintenance": 0.0,
+    "assets": 0.0,
+    "liabilities": 0.0,
+    "commission_blocked": 0.0,
+    "name": "MUHAMMAD ALI KHAN",
+    "server": "Capital.ComMena-Demo",
+    "currency": "AED",
+    "company": "Capital Com Mena Securities Trading L.L.C"
+  },
+  "terminal_info": {
+    "community_account": false,
+    "community_connection": false,
+    "connected": true,
+    "dlls_allowed": false,
+    "trade_allowed": true,
+    "tradeapi_disabled": false,
+    "email_enabled": false,
+    "ftp_enabled": false,
+    "notifications_enabled": false,
+    "mqid": true,
+    "build": 5833,
+    "maxbars": 100000,
+    "codepage": 0,
+    "ping_last": 129078,
+    "community_balance": 0.0,
+    "retransmission": 0.09517297231787646,
+    "company": "MetaQuotes Ltd.",
+    "name": "MetaTrader 5",
+    "language": "English",
+    "path": "C:\\MT5PortableTier1BestEA",
+    "data_path": "C:\\MT5PortableTier1BestEA",
+    "commondata_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common"
+  },
+  "summary": {
+    "balance_aed": "3944.91",
+    "equity_aed": "3944.91",
+    "floating_profit_aed": "0.00",
+    "balance_ops_aed": "4000.00",
+    "closed_trade_profit_aed": "-55.09",
+    "closed_positions": 12,
+    "wins": 4,
+    "losses": 8,
+    "win_rate_pct": "33.33%",
+    "open_positions": 0
+  },
+  "by_symbol": [
+    {
+      "group": "XAUUSD",
+      "rows": "12",
+      "wins": "4",
+      "losses": "8",
+      "win_rate_pct": "33.33%",
+      "pnl_aed": "-55.09"
+    }
+  ],
+  "by_candidate": [
+    {
+      "group": "breakout_retest",
+      "rows": "12",
+      "wins": "4",
+      "losses": "8",
+      "win_rate_pct": "33.33%",
+      "pnl_aed": "-55.09"
+    }
+  ]
+}

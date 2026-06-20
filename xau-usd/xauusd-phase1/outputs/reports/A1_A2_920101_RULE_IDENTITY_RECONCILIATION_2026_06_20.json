@@ -1,0 +1,66 @@
+{
+  "status": "MISMATCH_REQUIRES_MAINTENANCE_REPORT",
+  "created_at_dubai_date": "2026-06-20",
+  "boundary": "Read-only/offline profile inspection only. No MT5 terminal, EA, preset, chart, order, position, profile, or broker setting was changed. A3 remains paused.",
+  "scope": {
+    "candidate": "breakout_retest",
+    "derived_magic": 920101,
+    "target_symbol": "XAUUSD",
+    "a1_account": "1025742",
+    "a2_account": "1033030"
+  },
+  "profiles_inspected": {
+    "a1_standard": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default",
+    "a2_tier1_clean": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default"
+  },
+  "a1_phase2_experimental_charts_found": [
+    {
+      "chart": "chart01.chr",
+      "symbol": "EURUSD",
+      "candidate": "breakout_retest",
+      "target_symbol": "EURUSD",
+      "account_allowlist": "1025742",
+      "broker_action_allowed": true,
+      "dry_run_only": false,
+      "trade_session_gate_enabled": true,
+      "server_hours": "12->1",
+      "fixed_lot": 0.01
+    },
+    {
+      "chart": "chart02.chr",
+      "symbol": "GBPUSD",
+      "candidate": "breakout_retest",
+      "target_symbol": "GBPUSD",
+      "account_allowlist": "1025742",
+      "broker_action_allowed": true,
+      "dry_run_only": false,
+      "trade_session_gate_enabled": true,
+      "server_hours": "12->1",
+      "fixed_lot": 0.01
+    }
+  ],
+  "a1_xau_920101_chart_found": false,
+  "a2_xau_920101_chart": {
+    "chart": "chart02.chr",
+    "symbol": "XAUUSD",
+    "candidate": "breakout_retest",
+    "target_symbol": "XAUUSD",
+    "account_allowlist": "1033030",
+    "broker_action_allowed": true,
+    "dry_run_only": false,
+    "trade_session_gate_enabled": true,
+    "server_hours": "12->15",
+    "fixed_lot": 0.01,
+    "max_open_positions_per_instance": 1,
+    "max_estimated_cost_r": 0.3,
+    "max_measured_spread_points": 75.0
+  },
+  "required_before_runtime": [
+    "Owner-approved maintenance packet",
+    "Before/after chart-profile report for A1 and A2",
+    "Startup-log proof for both accounts",
+    "Confirmation that the A1 XAU 920101 chart exists and matches A2's shared rule",
+    "Confirmation that A2 remains clean and runs the same shared XAU evening rule"
+  ],
+  "decision": "Do not start the next-week forward test from the current evidence alone. Promotion requires both accounts and the combined book to be positive."
+}

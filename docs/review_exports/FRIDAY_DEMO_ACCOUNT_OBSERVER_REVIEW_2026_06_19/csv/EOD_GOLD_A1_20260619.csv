@@ -1,0 +1,4 @@
+account,entry_time_utc,entry_time_dubai,exit_time_utc,candidate,magic,direction,lots,entry_price,exit_price,sl,tp,stop_distance_points,spread_points,cost_r,exit_reason,profit_aed,dirstate_regime
+1025742,2026-06-19 12:20:01,2026-06-19 16:20:01,2026-06-19 12:51:01,symbol_normalized_round_retest_v0_repair_v1,921101,SELL,0.01000,4154.41000,4159.96000,4159.63000,4146.59000,521.54000,50.00000,0.0959,SL,-20.39,
+1025742,2026-06-19 13:50:00,2026-06-19 17:50:00,2026-06-19 14:18:01,symbol_normalized_round_retest_v0_repair_v1,921101,SELL,0.01000,4157.28000,4145.91000,4164.45000,4145.21000,769.59000,50.00000,0.0650,other,41.74,
+1025742,2026-06-19 13:20:00,2026-06-19 17:20:00,2026-06-19 14:18:02,symbol_normalized_round_retest_v0_repair_v1,921101,SELL,0.01000,4164.67000,4145.89000,4178.71000,4143.26000,1418.12000,50.00000,0.0353,other,68.95,

@@ -56,8 +56,7 @@
   },
   "accounts": {
     "A1": {
-      "login": "1025742",
-      "protected_charts": [
+      "historical_protected_charts": [
         {
           "broker_action_allowed": "true",
           "candidate": "breakout_retest",
@@ -75,6 +74,32 @@
           "symbol": "XAUUSD"
         }
       ],
+      "login": "1025742",
+      "protected_charts": [
+        {
+          "account": "1025742",
+          "broker_action_allowed": "true",
+          "candidate": "breakout_retest",
+          "candidate_status": "BROKER_ACTION_ENABLED",
+          "chart": "A1 chart03.chr",
+          "derived_magic": "920101",
+          "dry_run": "false",
+          "session": "12->15",
+          "symbol": "XAUUSD"
+        },
+        {
+          "account": "1033030",
+          "broker_action_allowed": "true",
+          "candidate": "breakout_retest",
+          "candidate_status": "BROKER_ACTION_ENABLED",
+          "chart": "A2 chart02.chr",
+          "derived_magic": "920101",
+          "dry_run": "false",
+          "session": "12->15",
+          "symbol": "XAUUSD"
+        }
+      ],
+      "protected_charts_source": "runtime_inventory",
       "role": "standard/noisy demo account",
       "round_quarantine_active": true,
       "server": "Capital.ComMena-Demo",
@@ -106,8 +131,8 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
-      "artifact_commit_or_release_id": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
-      "artifact_generation_base_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
+      "artifact_commit_or_release_id": "077184ed501001748ef0e5c372f4ae2fecde5520",
+      "artifact_generation_base_commit": "077184ed501001748ef0e5c372f4ae2fecde5520",
       "artifact_integrity_status": "PASS",
       "authorization_status": "A3_ENTRY_LANES_PAUSED",
       "containment_status": "NOT_IMPLEMENTED",
@@ -198,7 +223,7 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-18T12:21:01.116422Z",
+  "generated_at_utc": "2026-06-20T22:42:05.794613Z",
   "next_evidence_required": [
     "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
     "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
@@ -207,13 +232,7 @@
     "A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass"
   ],
   "quarantine": {
-    "keep_active_through_forward_week": true,
-    "profile_backup_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_round_family_quarantine_20260617_112219",
-    "protected_candidates": [
-      "breakout_retest",
-      "swing_breakout_retest_v0"
-    ],
-    "protected_charts": [
+    "historical_protected_charts": [
       {
         "broker_action_allowed": "true",
         "candidate": "breakout_retest",
@@ -231,6 +250,36 @@
         "symbol": "XAUUSD"
       }
     ],
+    "keep_active_through_forward_week": true,
+    "profile_backup_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_round_family_quarantine_20260617_112219",
+    "protected_candidates": [
+      "breakout_retest"
+    ],
+    "protected_charts": [
+      {
+        "account": "1025742",
+        "broker_action_allowed": "true",
+        "candidate": "breakout_retest",
+        "candidate_status": "BROKER_ACTION_ENABLED",
+        "chart": "A1 chart03.chr",
+        "derived_magic": "920101",
+        "dry_run": "false",
+        "session": "12->15",
+        "symbol": "XAUUSD"
+      },
+      {
+        "account": "1033030",
+        "broker_action_allowed": "true",
+        "candidate": "breakout_retest",
+        "candidate_status": "BROKER_ACTION_ENABLED",
+        "chart": "A2 chart02.chr",
+        "derived_magic": "920101",
+        "dry_run": "false",
+        "session": "12->15",
+        "symbol": "XAUUSD"
+      }
+    ],
+    "protected_charts_source": "runtime_inventory",
     "rollback_backup_exists": true,
     "rollback_required_now": false,
     "scope": "A1 XAUUSD round-family only",
@@ -260,7 +309,7 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0",
+    "commit": "077184ed501001748ef0e5c372f4ae2fecde5520",
     "main_remote_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0"
   },
   "schema_version": "project_status_summary_v2",
@@ -277,6 +326,7 @@
     "phase1_test_failure_closure": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_CLOSURE_2026_06_18.md",
     "phase1_test_failure_triage": "xau-usd/xauusd-phase1/outputs/reports/PHASE1_TEST_FAILURE_TRIAGE_2026_06_18.md",
     "round_quarantine_applied": "xau-usd/xauusd-phase1/outputs/reports/XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json",
+    "runtime_chart_inventory": "xau-usd/xauusd-phase1/outputs/reports/RUNTIME_CHART_INVENTORY_FORENSIC_2026_06_21.csv",
     "status_html": "status.html",
     "status_summary_json": "status_summary.json",
     "status_summary_md": "status_summary.md"

@@ -994,7 +994,11 @@ bool ClaimFamilyMutexBeforeOrder(const Phase1BreakoutRetestObservation &observat
 
 bool RunFamilyMutexNamespaceSelfTest(string &status_text)
 {
-   string test_name = "FAMMUX_SELFTEST_" + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)) + "_" + CompactDateTimeForGlobalVariable(TimeGMT());
+   string test_name = "FAMMUX_SELFTEST_"
+      + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN))
+      + "_" + _Symbol
+      + "_" + IntegerToString((int)InstanceMagic())
+      + "_" + CompactDateTimeForGlobalVariable(TimeGMT());
    if(GlobalVariableCheck(test_name))
       GlobalVariableDel(test_name);
    bool created = EnsureFamilyMutexSlot(test_name);
@@ -1499,12 +1503,6 @@ int OnInit()
    if(!AccountLoginWhitelisted())
    {
       Print("Phase2ExperimentalDemoExecutor refused account login ", (int)AccountInfoInteger(ACCOUNT_LOGIN), " because it is not in InpAllowedAccountLoginsCsv.");
-      return INIT_FAILED;
-   }
-
-   if(KillSwitchActive())
-   {
-      Print("Phase2ExperimentalDemoExecutor refused to start because kill switch is active.");
       return INIT_FAILED;
    }
 

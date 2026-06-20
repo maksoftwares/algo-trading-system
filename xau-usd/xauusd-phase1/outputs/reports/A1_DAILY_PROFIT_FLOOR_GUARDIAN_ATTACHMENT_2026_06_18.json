@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-18T10:59:06.707856Z",
+  "authority": "Owner-authorized A1 live-demo close-only daily +100 AED profit-floor guardian. Demo only; no canonical Phase 2/3 change; no live/real capital.",
+  "boundaries": {
+    "account": "1025742 / Capital.ComMena-Demo",
+    "a2_touched": false,
+    "a3_touched": false,
+    "entry_eas_edited": false,
+    "opens_trades": false,
+    "close_only": true,
+    "daily_loss_stop_enabled": false
+  },
+  "terminal": {
+    "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+    "terminal_data_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+    "profile": "Default",
+    "profile_backup_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_profit_floor_guardian_20260618_105858",
+    "terminal_closed_before_profile_append": true,
+    "terminal_relaunched": true
+  },
+  "guardian": {
+    "ea_name": "Account1DailyProfitFloorGuardian",
+    "chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr",
+    "chart_symbol": "XAUUSD",
+    "source_deployed": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.mq5",
+    "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_20260618.log",
+    "local_armed_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Account1DailyProfitFloorGuardian.armed_owner_20260618.set",
+    "committed_defaults_non_executing": true,
+    "runtime_dry_run": false,
+    "runtime_close_action_allowed": true,
+    "daily_floor_aed": 100.0,
+    "daily_loss_stop_enabled": false,
+    "entry_halt_file": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\experimental_demo_kill_switch.txt",
+    "state_file": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt",
+    "event_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv",
+    "daily_summary_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv",
+    "startup_log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A1_DAILY_PROFIT_FLOOR_GUARDIAN_STARTUP.csv"
+  },
+  "entry_halt_verification": {
+    "entry_ea_kill_file": "experimental_demo_kill_switch.txt",
+    "verified_entry_time_guard": "Phase2ExperimentalDemoExecutor checks KillSwitchActive() inside TradingGuardsPass() before sending orders, so the halt file blocks future entries without editing entry EAs.",
+    "keep_flat_backstop": true
+  },
+  "account_before": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo",
+    "balance": 1613.48,
+    "equity": 1617.34,
+    "trade_allowed": true,
+    "positions_total": 1,
+    "orders_total": 0,
+    "position_tickets": [
+      4146010
+    ]
+  },
+  "account_after": {
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo",
+    "balance": 1613.48,
+    "equity": 1617.3,
+    "trade_allowed": true,
+    "positions_total": 1,
+    "orders_total": 0,
+    "position_tickets": [
+      4146010
+    ]
+  },
+  "checks": [
+    {
+      "name": "a1_account_login",
+      "status": "PASS",
+      "evidence": "{'login': 1025742, 'server': 'Capital.ComMena-Demo', 'balance': 1613.48, 'equity': 1617.34, 'trade_allowed': True, 'positions_total': 1, 'orders_total': 0, 'position_tickets': [4146010]}"
+    },
+    {
+      "name": "profile_backup_created",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\default_profile_before_a1_profit_floor_guardian_20260618_105858"
+    },
+    {
+      "name": "chart_appended",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr"
+    },
+    {
+      "name": "compile_0_errors_0_warnings",
+      "status": "PASS",
+      "evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_20260618.log"
+    },
+    {
+      "name": "startup_log_attached",
+      "status": "PASS",
+      "evidence": ",state_file,event_log,daily_summary_log,startup_status,detail\n2026.06.18 10:59:05,2026.06.18 10:59:01,2026.06.18 14:59:01,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_initialized"
+    },
+    {
+      "name": "guardian_does_not_open_on_attach",
+      "status": "PASS",
+      "evidence": "before={'login': 1025742, 'server': 'Capital.ComMena-Demo', 'balance': 1613.48, 'equity': 1617.34, 'trade_allowed': True, 'positions_total': 1, 'orders_total': 0, 'position_tickets': [4146010]}; after={'login': 1025742, 'server': 'Capital.ComMena-Demo', 'balance': 1613.48, 'equity': 1617.3, 'trade_allowed': True, 'positions_total': 1, 'orders_total': 0, 'position_tickets': [4146010]}"
+    }
+  ],
+  "startup_tail": [
+    "timestamp_broker,timestamp_utc,timestamp_dubai,run_id,account_login,server,dry_run,close_action_allowed,owner_token_present,daily_floor_aed,daily_loss_stop_enabled,daily_loss_stop_aed,guardian_kill_switch_file,entry_halt_file,state_file,event_log,daily_summary_log,startup_status,detail",
+    "2026.06.18 10:59:05,2026.06.18 10:59:01,2026.06.18 14:59:01,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,false,true,true,100.00,false,-150.00,A1_DAILY_PROFIT_FLOOR_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_FLOOR_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_FLOOR_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_initialized"
+  ],
+  "event_tail": [
+    "timestamp_broker,timestamp_utc,timestamp_dubai,run_id,account_login,server,event,reason,dubai_date,day_start_equity,equity,day_pnl,peak_day_pnl,armed,locked,positions_total,positions_closed_today,close_failures_today,ticket,symbol,direction,volume,price,retcode,retcode_description,dry_run,close_action_allowed",
+    "2026.06.18 10:59:05,2026.06.18 10:59:01,2026.06.18 14:59:01,A1_DAILY_PROFIT_FLOOR_GUARDIAN_V1_ARMED_20260618,1025742,Capital.ComMena-Demo,DAY_RESET,dubai_day_start,2026.06.18,1617.22,1617.22,0.00,0.00,false,false,1,0,0,0,,,0.00,0.00000,0,,false,true"
+  ],
+  "state_tail": [
+    "peak_day_pnl=0.04",
+    "armed=false",
+    "locked=false",
+    "armed_time=",
+    "trigger_time=",
+    "trigger_reason=",
+    "positions_closed_today=0",
+    "close_failures_today=0",
+    "locked_equity=0.00",
+    "locked_day_pnl=0.00"
+  ]
+}

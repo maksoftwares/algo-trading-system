@@ -42,12 +42,61 @@ input int    InpRolloverStartMinute = 0;
 input int    InpRolloverEndHour = 23;
 input int    InpRolloverEndMinute = 15;
 input string InpManualBlackoutFile = "WR50\\wr50_blackout_windows.csv";
+input string InpEntryHaltFileName = "experimental_demo_kill_switch.txt";
+input bool   InpTradeSessionGateEnabled = false;
+input int    InpTradeSessionStartHour = 0;
+input int    InpTradeSessionEndHour = 23;
 input int    InpPendingExpiryM5Bars = 5;
 
 const string EA_NAME = "WR50_BreakoutWideStop_v0";
 const string EA_VERSION = "v0";
 const string STRATEGY_FAMILY = "breakout_retest_wr50_experimental";
 datetime g_last_completed_m5_bar = 0;
+
+bool WR50_FileContainsText(const string file_name, const string needle)
+{
+   if(file_name == "" || !FileIsExist(file_name))
+      return false;
+   int handle = FileOpen(file_name, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
+   if(handle == INVALID_HANDLE)
+      return false;
+   string content = "";
+   while(!FileIsEnding(handle))
+      content += " " + FileReadString(handle);
+   FileClose(handle);
+   string content_lower = content;
+   string needle_lower = needle;
+   StringToLower(content_lower);
+   StringToLower(needle_lower);
+   return StringFind(content_lower, needle_lower) >= 0;
+}
+
+bool WR50_EntryHaltActive()
+{
+   return WR50_FileContainsText(InpEntryHaltFileName, "KILL");
+}
+
+bool WR50_ServerHourInTradeSession()
+{
+   if(!InpTradeSessionGateEnabled)
+      return true;
+
+   MqlDateTime parts;
+   TimeToStruct(TimeCurrent(), parts);
+   int start_hour = InpTradeSessionStartHour;
+   int end_hour = InpTradeSessionEndHour;
+   if(start_hour < 0)
+      start_hour = 0;
+   if(start_hour > 23)
+      start_hour = 23;
+   if(end_hour < 0)
+      end_hour = 0;
+   if(end_hour > 23)
+      end_hour = 23;
+   if(start_hour <= end_hour)
+      return parts.hour >= start_hour && parts.hour <= end_hour;
+   return parts.hour >= start_hour || parts.hour <= end_hour;
+}
 
 bool WR50_ApplyWideStop(WR50Signal &signal,
                         const double target_r,
@@ -148,6 +197,20 @@ void OnTick()
 
    double spread_points = WR50_CurrentSpreadPoints(_Symbol);
    string comment_text = WR50_BuildShortComment(InpEaShortCode, InpRunId);
+
+   if(WR50_EntryHaltActive())
+   {
+      WR50_LogBlock(InpEaId, InpEaShortCode, EA_VERSION, STRATEGY_FAMILY, InpExperimentId, InpRunId, InpMagicNumber,
+                    "WR50_WIDESTOP_ENTRY_HALT", "entry_halt_file_active", spread_points, InpMaxSpreadPoints);
+      return;
+   }
+
+   if(!WR50_ServerHourInTradeSession())
+   {
+      WR50_LogBlock(InpEaId, InpEaShortCode, EA_VERSION, STRATEGY_FAMILY, InpExperimentId, InpRunId, InpMagicNumber,
+                    "WR50_WIDESTOP_SESSION", "server_hour_session_gate", spread_points, InpMaxSpreadPoints);
+      return;
+   }
 
    WR50Signal signal;
    WR50_ResetSignal(signal);
