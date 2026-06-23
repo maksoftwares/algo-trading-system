@@ -1,0 +1,668 @@
+{
+  "status": "DEPLOYED_SAFE_PASSIVE_PRESETS",
+  "stage": "C30-BROKER-SHADOW-PRESET-DEPLOY",
+  "created_at_utc": "2026-06-21T18:03:44Z",
+  "schema_version": "a3_ml_broker_shadow_preset_deploy_v1",
+  "mode": "DEPLOY",
+  "dataset_version": "xauusd_c02_multiacct_202606211549_geffebb6d_c9221d066",
+  "authorization": {
+    "broker_shadow_preset_deploy_requested": true,
+    "broker_shadow_preset_deploy_attempted": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "c17_broker_shadow_consumer_deploy": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_SHADOW_CONSUMER_DEPLOY_STATUS.json",
+    "experts_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts",
+    "include_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include",
+    "required_inputs": [
+      "InpDryRunOnly",
+      "InpBrokerActionAllowed",
+      "InpMlShadowReadEnabled",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpTargetSymbol",
+      "InpExpectedServerMarker",
+      "InpAllowedAccountLoginsCsv"
+    ]
+  },
+  "targets": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+      "presets_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets",
+      "presets": [
+        {
+          "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "preset_name": "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1025742"
+          },
+          "content_safe": true,
+          "content_sha256": "69c865abbcba6434aec5786db6ca58e63c5982d50c3a9ed94289f7be0bfa6601"
+        },
+        {
+          "source_name": "Phase2ExperimentalDemoRepairExecutor.mq5",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "preset_name": "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1025742"
+          },
+          "content_safe": true,
+          "content_sha256": "69c865abbcba6434aec5786db6ca58e63c5982d50c3a9ed94289f7be0bfa6601"
+        }
+      ]
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "data_root": "C:\\MT5PortableTier1BestEA",
+      "presets_dir": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets",
+      "presets": [
+        {
+          "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "preset_name": "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1033030"
+          },
+          "content_safe": true,
+          "content_sha256": "d62f5a89901561aa933c43c1ce1779d36510946e262ca2065a3915ad2915bbfe"
+        }
+      ]
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "data_root": "C:\\MT5PortableRepairLane",
+      "presets_dir": "C:\\MT5PortableRepairLane\\MQL5\\Presets",
+      "presets": [
+        {
+          "source_name": "Account3BreakoutImprovedExecutor.mq5",
+          "expert_name": "Account3BreakoutImprovedExecutor",
+          "preset_name": "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1033669"
+          },
+          "content_safe": true,
+          "content_sha256": "038ae097e1645d04d6ff5d213438ecb452c25d7ce5514224af0f2b1bb634053b"
+        },
+        {
+          "source_name": "Account3BreakoutPlainExecutor.mq5",
+          "expert_name": "Account3BreakoutPlainExecutor",
+          "preset_name": "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1033669"
+          },
+          "content_safe": true,
+          "content_sha256": "038ae097e1645d04d6ff5d213438ecb452c25d7ce5514224af0f2b1bb634053b"
+        },
+        {
+          "source_name": "Account3BreakoutTier1CompatExecutor.mq5",
+          "expert_name": "Account3BreakoutTier1CompatExecutor",
+          "preset_name": "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1033669"
+          },
+          "content_safe": true,
+          "content_sha256": "038ae097e1645d04d6ff5d213438ecb452c25d7ce5514224af0f2b1bb634053b"
+        },
+        {
+          "source_name": "Account3SoftRetestExecutor.mq5",
+          "expert_name": "Account3SoftRetestExecutor",
+          "preset_name": "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+          "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+          "settings": {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpMlShadowReadEnabled": "true",
+            "InpMlHandoffFileName": "A3_ML_EA_HANDOFF.csv",
+            "InpMlShadowLogFileName": "a3_ml_broker_shadow_tap.csv",
+            "InpTargetSymbol": "XAUUSD",
+            "InpExpectedServerMarker": "Demo",
+            "InpAllowedAccountLoginsCsv": "1033669"
+          },
+          "content_safe": true,
+          "content_sha256": "038ae097e1645d04d6ff5d213438ecb452c25d7ce5514224af0f2b1bb634053b"
+        }
+      ]
+    }
+  ],
+  "source_inputs": {
+    "Account3BreakoutImprovedExecutor.mq5": [
+      "InpAbsoluteRejectCostR",
+      "InpAllowedAccountLoginsCsv",
+      "InpBreakevenEnabled",
+      "InpBreakevenTriggerR",
+      "InpBrokerActionAllowed",
+      "InpCostWarnR",
+      "InpDeviationPoints",
+      "InpDirectionStateFileName",
+      "InpDryRunOnly",
+      "InpExecutionKillSwitchFileName",
+      "InpExpectedServerMarker",
+      "InpFixedLot",
+      "InpFullStopFileName",
+      "InpMagicNumber",
+      "InpManagementLogFileName",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerMagic",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderComment",
+      "InpOrderLogFileName",
+      "InpPartialCloseFraction",
+      "InpPartialTakeProfitEnabled",
+      "InpPartialTriggerR",
+      "InpRunId",
+      "InpSignalLogFileName",
+      "InpSoftRetestFilterEnabled",
+      "InpSoftRetestMaxBarsAfterBreak",
+      "InpSoftRetestMinBodyToRange",
+      "InpSoftRetestMinDirectionalCloseLocation",
+      "InpSoftRetestRetestCloseMarginAtr",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour",
+      "InpTrendGuardEnabled",
+      "InpTrendGuardShadowOnly",
+      "InpTrendH1LookbackBars",
+      "InpTrendH4LookbackBars",
+      "InpTrendMinMovePoints",
+      "InpXauStopDistanceFloorEnabled"
+    ],
+    "Account3BreakoutPlainExecutor.mq5": [
+      "InpAbsoluteRejectCostR",
+      "InpAllowedAccountLoginsCsv",
+      "InpBreakevenEnabled",
+      "InpBreakevenTriggerR",
+      "InpBrokerActionAllowed",
+      "InpCostWarnR",
+      "InpDeviationPoints",
+      "InpDirectionStateFileName",
+      "InpDryRunOnly",
+      "InpExecutionKillSwitchFileName",
+      "InpExpectedServerMarker",
+      "InpFixedLot",
+      "InpFullStopFileName",
+      "InpMagicNumber",
+      "InpManagementLogFileName",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerMagic",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderComment",
+      "InpOrderLogFileName",
+      "InpPartialCloseFraction",
+      "InpPartialTakeProfitEnabled",
+      "InpPartialTriggerR",
+      "InpRunId",
+      "InpSignalLogFileName",
+      "InpSoftRetestFilterEnabled",
+      "InpSoftRetestMaxBarsAfterBreak",
+      "InpSoftRetestMinBodyToRange",
+      "InpSoftRetestMinDirectionalCloseLocation",
+      "InpSoftRetestRetestCloseMarginAtr",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour",
+      "InpTrendGuardEnabled",
+      "InpTrendGuardShadowOnly",
+      "InpTrendH1LookbackBars",
+      "InpTrendH4LookbackBars",
+      "InpTrendMinMovePoints",
+      "InpXauStopDistanceFloorEnabled"
+    ],
+    "Account3BreakoutTier1CompatExecutor.mq5": [
+      "InpAbsoluteRejectCostR",
+      "InpAllowedAccountLoginsCsv",
+      "InpBreakevenEnabled",
+      "InpBreakevenTriggerR",
+      "InpBrokerActionAllowed",
+      "InpCostWarnR",
+      "InpDeviationPoints",
+      "InpDirectionStateFileName",
+      "InpDryRunOnly",
+      "InpExecutionKillSwitchFileName",
+      "InpExpectedServerMarker",
+      "InpFixedLot",
+      "InpFullStopFileName",
+      "InpMagicNumber",
+      "InpManagementLogFileName",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerMagic",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderComment",
+      "InpOrderLogFileName",
+      "InpPartialCloseFraction",
+      "InpPartialTakeProfitEnabled",
+      "InpPartialTriggerR",
+      "InpRunId",
+      "InpSignalLogFileName",
+      "InpSoftRetestFilterEnabled",
+      "InpSoftRetestMaxBarsAfterBreak",
+      "InpSoftRetestMinBodyToRange",
+      "InpSoftRetestMinDirectionalCloseLocation",
+      "InpSoftRetestRetestCloseMarginAtr",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour",
+      "InpTrendGuardEnabled",
+      "InpTrendGuardShadowOnly",
+      "InpTrendH1LookbackBars",
+      "InpTrendH4LookbackBars",
+      "InpTrendMinMovePoints",
+      "InpXauStopDistanceFloorEnabled"
+    ],
+    "Account3SoftRetestExecutor.mq5": [
+      "InpAbsoluteRejectCostR",
+      "InpAllowedAccountLoginsCsv",
+      "InpBreakevenEnabled",
+      "InpBreakevenTriggerR",
+      "InpBrokerActionAllowed",
+      "InpCostWarnR",
+      "InpDeviationPoints",
+      "InpDirectionStateFileName",
+      "InpDryRunOnly",
+      "InpExecutionKillSwitchFileName",
+      "InpExpectedServerMarker",
+      "InpFixedLot",
+      "InpFullStopFileName",
+      "InpMagicNumber",
+      "InpManagementLogFileName",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerMagic",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderComment",
+      "InpOrderLogFileName",
+      "InpPartialCloseFraction",
+      "InpPartialTakeProfitEnabled",
+      "InpPartialTriggerR",
+      "InpRunId",
+      "InpSignalLogFileName",
+      "InpSoftRetestFilterEnabled",
+      "InpSoftRetestMaxBarsAfterBreak",
+      "InpSoftRetestMinBodyToRange",
+      "InpSoftRetestMinDirectionalCloseLocation",
+      "InpSoftRetestRetestCloseMarginAtr",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour",
+      "InpTrendGuardEnabled",
+      "InpTrendGuardShadowOnly",
+      "InpTrendH1LookbackBars",
+      "InpTrendH4LookbackBars",
+      "InpTrendMinMovePoints",
+      "InpXauStopDistanceFloorEnabled"
+    ],
+    "Phase2ExperimentalDemoExecutor.mq5": [
+      "InpAllowedAccountLoginsCsv",
+      "InpAttachmentLogFileName",
+      "InpAuthorizedCandidatesCsv",
+      "InpBrokerActionAllowed",
+      "InpCandidate",
+      "InpCandidateStatus",
+      "InpCostSuspensionAcknowledgementToken",
+      "InpDeviationPoints",
+      "InpDirectionStateFileName",
+      "InpDryRunOnly",
+      "InpEURUSDFixedLot",
+      "InpExpectedServerMarker",
+      "InpExperimentalAuthorizationToken",
+      "InpFamilyLifecycleStatus",
+      "InpFixedLot",
+      "InpGBPUSDFixedLot",
+      "InpKillSwitchFileName",
+      "InpMaxAccountOrdersPerDay",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerInstance",
+      "InpMaxOrdersPerDay",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderLogFileName",
+      "InpQualifiedSymbolsCsv",
+      "InpRequiredCostSuspensionAcknowledgementToken",
+      "InpRequiredExperimentalAuthorizationToken",
+      "InpRunId",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour"
+    ],
+    "Phase2ExperimentalDemoRepairExecutor.mq5": [
+      "InpAllowedAccountLoginsCsv",
+      "InpAttachmentLogFileName",
+      "InpAuthorizedCandidatesCsv",
+      "InpBrokerActionAllowed",
+      "InpCandidate",
+      "InpCandidateStatus",
+      "InpCostSuspensionAcknowledgementToken",
+      "InpDeviationPoints",
+      "InpDryRunOnly",
+      "InpDubaiUtcOffsetMinutes",
+      "InpEURUSDFixedLot",
+      "InpExpectedServerMarker",
+      "InpExperimentalAuthorizationToken",
+      "InpFamilyLifecycleStatus",
+      "InpFixedLot",
+      "InpGBPUSDFixedLot",
+      "InpKillSwitchFileName",
+      "InpMaxAccountOrdersPerDay",
+      "InpMaxEstimatedCostR",
+      "InpMaxMeasuredSpreadPoints",
+      "InpMaxOpenPositionsPerInstance",
+      "InpMaxOrdersPerDay",
+      "InpMinSecondsBetweenOrders",
+      "InpMlHandoffFileName",
+      "InpMlShadowLogFileName",
+      "InpMlShadowReadEnabled",
+      "InpOrderLogFileName",
+      "InpQualifiedSymbolsCsv",
+      "InpRequiredCostSuspensionAcknowledgementToken",
+      "InpRequiredExperimentalAuthorizationToken",
+      "InpRunId",
+      "InpStartupLogFileName",
+      "InpTargetSymbol",
+      "InpTradeSessionEndHour",
+      "InpTradeSessionGateEnabled",
+      "InpTradeSessionStartHour"
+    ]
+  },
+  "deployed_presets": [
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+      "expert_name": "Phase2ExperimentalDemoExecutor",
+      "preset_name": "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "0dc751540c7312bf89a276bc7d1046e61f3abc4dd2fd43dc2d573d5f0b965595"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "source_name": "Phase2ExperimentalDemoRepairExecutor.mq5",
+      "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+      "preset_name": "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "0dc751540c7312bf89a276bc7d1046e61f3abc4dd2fd43dc2d573d5f0b965595"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+      "expert_name": "Phase2ExperimentalDemoExecutor",
+      "preset_name": "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "9fcfafd9588aa8a08bda32ecc3e2945a9de23142ae1b5eed080b8c4d41224589"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "source_name": "Account3BreakoutImprovedExecutor.mq5",
+      "expert_name": "Account3BreakoutImprovedExecutor",
+      "preset_name": "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "27e380fe7786fd5c630e794171434e46a505d1af5e99dfa218a0b5f0d5cf724a"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "source_name": "Account3BreakoutPlainExecutor.mq5",
+      "expert_name": "Account3BreakoutPlainExecutor",
+      "preset_name": "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "27e380fe7786fd5c630e794171434e46a505d1af5e99dfa218a0b5f0d5cf724a"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "source_name": "Account3BreakoutTier1CompatExecutor.mq5",
+      "expert_name": "Account3BreakoutTier1CompatExecutor",
+      "preset_name": "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "27e380fe7786fd5c630e794171434e46a505d1af5e99dfa218a0b5f0d5cf724a"
+    },
+    {
+      "artifact": "broker_shadow_safe_preset",
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "source_name": "Account3SoftRetestExecutor.mq5",
+      "expert_name": "Account3SoftRetestExecutor",
+      "preset_name": "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+      "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+      "bytes": 264,
+      "sha256": "27e380fe7786fd5c630e794171434e46a505d1af5e99dfa218a0b5f0d5cf724a"
+    }
+  ],
+  "validations": [
+    {
+      "check": "registry_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml"
+    },
+    {
+      "check": "registry_parses",
+      "passed": true,
+      "detail": "A1,A2,A3"
+    },
+    {
+      "check": "c17_compiled_shadow_consumers_deployed",
+      "passed": true,
+      "detail": "DEPLOYED_COMPILED_SHADOW_CONSUMERS"
+    },
+    {
+      "check": "repo_experts_dir_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts"
+    },
+    {
+      "check": "repo_include_dir_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include"
+    },
+    {
+      "check": "source_exists_Account3BreakoutImprovedExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutImprovedExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Account3BreakoutImprovedExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "source_exists_Account3BreakoutPlainExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutPlainExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Account3BreakoutPlainExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "source_exists_Account3BreakoutTier1CompatExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Account3BreakoutTier1CompatExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "source_exists_Account3SoftRetestExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3SoftRetestExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Account3SoftRetestExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "source_exists_Phase2ExperimentalDemoExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Phase2ExperimentalDemoExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "source_exists_Phase2ExperimentalDemoRepairExecutor.mq5",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5"
+    },
+    {
+      "check": "source_supports_safe_inputs_Phase2ExperimentalDemoRepairExecutor.mq5",
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "check": "all_target_paths_safe",
+      "passed": true,
+      "detail": "A1=True; A2=True; A3=True"
+    },
+    {
+      "check": "preset_content_safe_A1_Phase2ExperimentalDemoExecutor",
+      "passed": true,
+      "detail": "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A1_Phase2ExperimentalDemoRepairExecutor",
+      "passed": true,
+      "detail": "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A2_Phase2ExperimentalDemoExecutor",
+      "passed": true,
+      "detail": "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A3_Account3BreakoutImprovedExecutor",
+      "passed": true,
+      "detail": "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A3_Account3BreakoutPlainExecutor",
+      "passed": true,
+      "detail": "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A3_Account3BreakoutTier1CompatExecutor",
+      "passed": true,
+      "detail": "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set"
+    },
+    {
+      "check": "preset_content_safe_A3_Account3SoftRetestExecutor",
+      "passed": true,
+      "detail": "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "preset_file_deploy_attempted": true,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_SHADOW_PRESET_DEPLOY_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_SHADOW_PRESET_DEPLOY_STATUS.md"
+  },
+  "next_allowed_stage": "Safe broker-shadow presets are deployed. In MT5, load the account-specific preset for the attached broker-shadow expert, then run C28."
+}

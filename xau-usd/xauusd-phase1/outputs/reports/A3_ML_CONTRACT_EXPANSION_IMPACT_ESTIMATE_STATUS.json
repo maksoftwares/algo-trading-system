@@ -1,0 +1,135 @@
+{
+  "status": "APPROVAL_ALONE_NOT_SUFFICIENT",
+  "stage": "C37-CONTRACT-EXPANSION-IMPACT-ESTIMATE",
+  "created_at_utc": "2026-06-22T06:38:38Z",
+  "schema_version": "a3_ml_contract_expansion_impact_estimate_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "inputs": {
+    "c01_data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+    "c03_training_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+    "c11_readiness_gap": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_READINESS_GAP_REPORT.json",
+    "c34_decision_backfill_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DECISION_BACKFILL_AUDIT_STATUS.json",
+    "c36_config_proposal": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_CONFIG_PROPOSAL_STATUS.json"
+  },
+  "summary": {
+    "c03_status": "NO_GO",
+    "c34_status": "CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND",
+    "c36_status": "WAITING_FOR_REVIEW_APPROVAL",
+    "candidate_files": 13,
+    "candidate_would_signal_rows": 2747,
+    "candidate_estimated_groups": 1381,
+    "approval_alone_authorizes_demo_python": false
+  },
+  "gate_projection": [
+    {
+      "gate": "dataset_status",
+      "current_passed": false,
+      "current_observed": "PIPELINE_ONLY",
+      "required": "EXPLORATORY_MODEL or higher",
+      "projected_observed": "PIPELINE_ONLY",
+      "projected_passed": false,
+      "projection_reason": "extra families do not change trainable-label status by themselves"
+    },
+    {
+      "gate": "market_setup_groups",
+      "current_passed": false,
+      "current_observed": "223",
+      "required": ">=300",
+      "projected_observed": "1604",
+      "projected_passed": true,
+      "projection_reason": "adds C34 estimated out-of-scope groups=1381"
+    },
+    {
+      "gate": "minority_labels",
+      "current_passed": true,
+      "current_observed": "172",
+      "required": ">=90",
+      "projected_observed": "172",
+      "projected_passed": true,
+      "projection_reason": "current minority-label gate already reflects approved contract only; C34 has no validated labels"
+    },
+    {
+      "gate": "active_weeks",
+      "current_passed": false,
+      "current_observed": "3.37",
+      "required": ">=8",
+      "projected_observed": "3.37",
+      "projected_passed": false,
+      "projection_reason": "C34 candidate dates do not extend active decision span enough"
+    },
+    {
+      "gate": "both_directions",
+      "current_passed": true,
+      "current_observed": "LONG,SHORT",
+      "required": "LONG and SHORT",
+      "projected_observed": "LONG,SHORT",
+      "projected_passed": true,
+      "projection_reason": "current gate already passes; C34 does not reduce coverage"
+    },
+    {
+      "gate": "at_least_two_regimes",
+      "current_passed": false,
+      "current_observed": "FALLING",
+      "required": ">=2 non-UNKNOWN regimes",
+      "projected_observed": "FALLING",
+      "projected_passed": false,
+      "projection_reason": "C34 candidates have no proven second-regime C01 feature evidence yet"
+    },
+    {
+      "gate": "feature_budget",
+      "current_passed": false,
+      "current_observed": "0",
+      "required": ">=6",
+      "projected_observed": "0",
+      "projected_passed": false,
+      "projection_reason": "candidate_trainable_groups=0; extra rows remain non-trainable until label promotion"
+    },
+    {
+      "gate": "slippage_readiness",
+      "current_passed": false,
+      "current_observed": "INSUFFICIENT",
+      "required": "ADEQUATE",
+      "projected_observed": "INSUFFICIENT",
+      "projected_passed": false,
+      "projection_reason": "extra signal rows do not create broker fill/request-price coverage for A2/A3"
+    },
+    {
+      "gate": "leakage",
+      "current_passed": true,
+      "current_observed": "0",
+      "required": "0",
+      "projected_observed": "0",
+      "projected_passed": true,
+      "projection_reason": "leakage must be rechecked after any approved rebuild"
+    }
+  ],
+  "approval_alone_result": "Approval alone is not enough for demo Python predictions. Remaining projected blockers: dataset_status, active_weeks, at_least_two_regimes, feature_budget, slippage_readiness.",
+  "required_follow_up_after_approval": [
+    "If reviewer approves expansion, run C36 with explicit allowed families and review reference, then rerun C08/C07/C03.",
+    "Collect more active market weeks or approved older data that extends the actual decision-date span.",
+    "Promote labels/trainability only through reviewed C02/C01 rules; current rows remain diagnostic/non-trainable.",
+    "Improve A2/A3 broker fill and request-price coverage before official demo Python authorization.",
+    "Collect or approve data that proves at least two non-UNKNOWN regimes in C01.",
+    "Keep broker_action_authorized=false through all rebuilds."
+  ],
+  "authorization": {
+    "contract_expansion_authorized": false,
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "config_write_attempted": false,
+    "model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_IMPACT_ESTIMATE_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_IMPACT_ESTIMATE_STATUS.md"
+  },
+  "next_allowed_stage": "Do not expect reviewer approval alone to authorize demo Python. Continue collecting data and address remaining C03 blockers."
+}

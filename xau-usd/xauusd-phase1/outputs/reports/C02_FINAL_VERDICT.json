@@ -1,0 +1,49 @@
+{
+  "status": "CONTINUE_DATASET_BUILD",
+  "stage": "C02-FINAL-VERDICT",
+  "created_at_utc": "2026-06-22T05:59:27Z",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "c02_pipeline_status": {
+    "account_verification": "PASS",
+    "bar_tick_export": "PASS",
+    "history_log_snapshot": "PASS",
+    "normalization": "PASS",
+    "signal_grouping_audit": "PASS",
+    "diagnostic_labels": null,
+    "c01_ingestion_status": "PIPELINE_ONLY"
+  },
+  "counts": {
+    "c01_decisions": 574,
+    "exact_unique_signals": 349,
+    "snapshot_rows": 349,
+    "market_setup_groups": 223,
+    "diagnostic_labels": {},
+    "class_balance": {
+      "positive": 117,
+      "negative": 232
+    },
+    "direction_balance": {
+      "LONG": 155,
+      "SHORT": 194
+    },
+    "regime_balance": {
+      "FALLING": 113,
+      "UNKNOWN": 236
+    },
+    "global_feature_budget": 0
+  },
+  "authorization": {
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "blockers": [
+    "dataset_status=PIPELINE_ONLY is not CANDIDATE_MODEL",
+    "global_feature_budget=0 is below the contract minimum of 5",
+    "slippage readiness is INSUFFICIENT",
+    "diagnostic label minority count is below 90",
+    "market_setup_groups below EXPLORATORY minimum of 300"
+  ],
+  "next_allowed_stage": "C03/C04 label, slippage, leakage, and walk-forward readiness validation before training"
+}

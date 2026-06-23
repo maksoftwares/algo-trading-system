@@ -1,0 +1,187 @@
+{
+  "status": "PUBLISHED_RESEARCH_PREVIEW_FAIL_CLOSED",
+  "stage": "C26-RESEARCH-PREVIEW-HANDOFF-REHEARSAL",
+  "created_at_utc": "2026-06-22T06:38:39Z",
+  "schema_version": "a3_ml_research_preview_handoff_rehearsal_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "authorization": {
+    "official_model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "mt5_file_publish_requested": true,
+    "mt5_file_publish_attempted": true,
+    "broker_action_authorized": false
+  },
+  "quarantine": {
+    "official_model_artifact": false,
+    "eligible_for_c04_shadow_bridge": false,
+    "eligible_for_c06_ea_handoff": false,
+    "handoff_rows_force_abstain": true,
+    "reason": "C26 only lets MT5 prove it can read Python-produced research preview rows while official C03/C05/C04/C06 gates remain closed."
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "c18_exploratory_training_rehearsal": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_TRAINING_REHEARSAL_STATUS.json",
+    "preview_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_SHADOW_PREVIEW.csv",
+    "artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_MODEL_REHEARSAL_ARTIFACT.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RESEARCH_PREVIEW_HANDOFF_REHEARSAL_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RESEARCH_PREVIEW_HANDOFF_REHEARSAL_STATUS.md",
+    "staging_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff_research_preview",
+    "terminal_file_name": "A3_ML_EA_HANDOFF.csv",
+    "handoff_rows": 349,
+    "staged_files": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff_research_preview\\A1_A3_ML_EA_HANDOFF.csv",
+        "rows": 207,
+        "sha256": "cd2740489a5d952383f0c70f8f55490d72a500180531b94050ce20d5c95bc166"
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff_research_preview\\A2_A3_ML_EA_HANDOFF.csv",
+        "rows": 94,
+        "sha256": "7ded05e02f735f4c65d1d3d6d55d5a2ba49dd4ef45dc45868123207cb8b58d02"
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff_research_preview\\A3_A3_ML_EA_HANDOFF.csv",
+        "rows": 48,
+        "sha256": "c24a8ba4a33458acfb43bfbfa93768cfedcf441200e40ce4c5a40daf19403ba3"
+      }
+    ],
+    "published_files": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "rows": 207,
+        "sha256": "cd2740489a5d952383f0c70f8f55490d72a500180531b94050ce20d5c95bc166"
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "rows": 94,
+        "sha256": "7ded05e02f735f4c65d1d3d6d55d5a2ba49dd4ef45dc45868123207cb8b58d02"
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "rows": 48,
+        "sha256": "c24a8ba4a33458acfb43bfbfa93768cfedcf441200e40ce4c5a40daf19403ba3"
+      }
+    ]
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "role": "standard_experimental_demo",
+      "files_roots": [
+        "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+      ]
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "role": "tier1_breakout_only",
+      "files_roots": [
+        "C:/MT5PortableTier1BestEA/MQL5/Files"
+      ]
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "role": "paused_repair_lane",
+      "files_roots": [
+        "C:/MT5PortableRepairLane/MQL5/Files"
+      ]
+    }
+  ],
+  "validations": [
+    {
+      "check": "c18_rehearsed_research_only",
+      "passed": true,
+      "detail": "REHEARSED_RESEARCH_ONLY"
+    },
+    {
+      "check": "c18_keeps_demo_authorization_false",
+      "passed": true,
+      "detail": "C18 authorization must remain false"
+    },
+    {
+      "check": "artifact_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_MODEL_REHEARSAL_ARTIFACT.json"
+    },
+    {
+      "check": "artifact_is_research_only",
+      "passed": true,
+      "detail": "REHEARSED_RESEARCH_ONLY"
+    },
+    {
+      "check": "preview_csv_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_SHADOW_PREVIEW.csv"
+    },
+    {
+      "check": "preview_rows_not_empty",
+      "passed": true,
+      "detail": "rows=349"
+    },
+    {
+      "check": "preview_rows_force_abstain",
+      "passed": true,
+      "detail": "observed=ABSTAIN required=ABSTAIN"
+    },
+    {
+      "check": "preview_broker_action_false",
+      "passed": true,
+      "detail": "observed=false required=false"
+    },
+    {
+      "check": "expected_accounts_configured",
+      "passed": true,
+      "detail": "configured=1025742,1033030,1033669"
+    },
+    {
+      "check": "preview_accounts_allowed",
+      "passed": true,
+      "detail": "observed=1025742,1033030,1033669 allowed=1025742,1033030,1033669"
+    },
+    {
+      "check": "preview_covers_all_accounts",
+      "passed": true,
+      "detail": "observed=1025742,1033030,1033669 required=1025742,1033030,1033669"
+    },
+    {
+      "check": "all_accounts_have_files_roots",
+      "passed": true,
+      "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files; A2=C:/MT5PortableTier1BestEA/MQL5/Files; A3=C:/MT5PortableRepairLane/MQL5/Files"
+    },
+    {
+      "check": "files_roots_are_mql5_files",
+      "passed": true,
+      "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files; A2=C:/MT5PortableTier1BestEA/MQL5/Files; A3=C:/MT5PortableRepairLane/MQL5/Files"
+    },
+    {
+      "check": "terminal_file_name_safe",
+      "passed": true,
+      "detail": "A3_ML_EA_HANDOFF.csv"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "profile_or_chart_file_write_attempted": false,
+    "ea_file_drop_authorized": true,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Attach or reload the dry-run broker shadow consumers on XAUUSD M5. They should log ml_available=true with ABSTAIN research-preview rows; official Python demo prediction authority remains closed."
+}

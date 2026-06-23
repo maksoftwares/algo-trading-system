@@ -1,0 +1,62 @@
+{
+  "status": "DEMO_SHADOW_RUNTIME_CONFIRMED_ALL_ACCOUNTS",
+  "stage": "C28-DEMO-SHADOW-POST-ATTACH-MONITOR",
+  "created_at_utc": "2026-06-21T23:19:13Z",
+  "started_at_utc": "2026-06-21T23:19:13Z",
+  "schema_version": "a3_ml_demo_shadow_post_attach_monitor_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606212303_geffebb6d_c9221d066",
+  "monitor": {
+    "timeout_seconds": 5,
+    "poll_seconds": 1,
+    "elapsed_seconds": 0.094,
+    "attempt_count": 1,
+    "timed_out": false
+  },
+  "authorization": {
+    "official_model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "upstream_statuses": {
+    "c22_post_attach_runtime_monitor": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+    "c27_research_preview_runtime_verifier": "RESEARCH_PREVIEW_READ_PATH_CONFIRMED_ALL_ACCOUNTS"
+  },
+  "runtime_evidence": {
+    "post_attach_runtime_evidence_all_accounts": true,
+    "research_preview_read_path_confirmed_all_accounts": true,
+    "handoff_research_preview_ready_all_accounts": true,
+    "broker_shadow_tap_exists_all_accounts": true
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0.094,
+      "c22_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "c27_status": "RESEARCH_PREVIEW_READ_PATH_CONFIRMED_ALL_ACCOUNTS",
+      "status": "DEMO_SHADOW_RUNTIME_CONFIRMED_ALL_ACCOUNTS",
+      "post_attach_runtime_evidence_all_accounts": true,
+      "research_preview_read_path_confirmed_all_accounts": true,
+      "handoff_research_preview_ready_all_accounts": true,
+      "broker_shadow_tap_exists_all_accounts": true
+    }
+  ],
+  "inputs": {
+    "c22_post_attach_runtime_monitor": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.json",
+    "c27_research_preview_runtime_verifier": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RESEARCH_PREVIEW_RUNTIME_VERIFIER_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_SHADOW_POST_ATTACH_MONITOR_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_SHADOW_POST_ATTACH_MONITOR_STATUS.md"
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Demo-shadow runtime is confirmed: MT5 is logging observers and broker-shadow EAs can read Python preview rows. Continue collecting/exporting data until official C03/C05/C04/C06 gates pass."
+}

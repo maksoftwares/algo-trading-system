@@ -1,0 +1,150 @@
+{
+  "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+  "stage": "C21-ML-RUNTIME-LAUNCH-DIAGNOSTIC",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "schema_version": "a3_ml_runtime_launch_diagnostic_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "upstream_statuses": {
+    "c14_observer_runtime_attach": "RUNTIME_LOGS_DETECTED_ALL_ACCOUNTS",
+    "c20_runtime_evidence": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+  },
+  "diagnostic_summary": {
+    "startup_configs_safe_all_accounts": true,
+    "observer_log_mentions_all_accounts": false,
+    "observer_log_mentions_any_account": false,
+    "error_mentions_any_account": false
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "c14_runtime_attach": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_RUNTIME_ATTACH_STATUS.json",
+    "c20_runtime_evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_EVIDENCE_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_LAUNCH_DIAGNOSTIC_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_LAUNCH_DIAGNOSTIC_STATUS.md"
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "role": "standard_experimental_demo",
+      "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+      "startup_config": {
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini",
+        "exists": true,
+        "bytes": 348,
+        "safe_passive_config": true,
+        "checks": {
+          "allow_live_trading_disabled": true,
+          "observer_expert_set": true,
+          "passive_preset_set": true,
+          "symbol_xauusd": true,
+          "period_m5": true
+        }
+      },
+      "log_scan": {
+        "files_checked": 10,
+        "observer_mentions": 0,
+        "error_mentions": 0,
+        "matched_lines": []
+      }
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "role": "tier1_breakout_only",
+      "data_root": "C:\\MT5PortableTier1BestEA",
+      "startup_config": {
+        "path": "C:\\MT5PortableTier1BestEA\\Config\\a3_ml_prediction_observer_startup.ini",
+        "exists": true,
+        "bytes": 348,
+        "safe_passive_config": true,
+        "checks": {
+          "allow_live_trading_disabled": true,
+          "observer_expert_set": true,
+          "passive_preset_set": true,
+          "symbol_xauusd": true,
+          "period_m5": true
+        }
+      },
+      "log_scan": {
+        "files_checked": 10,
+        "observer_mentions": 0,
+        "error_mentions": 0,
+        "matched_lines": []
+      }
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "role": "paused_repair_lane",
+      "data_root": "C:\\MT5PortableRepairLane",
+      "startup_config": {
+        "path": "C:\\MT5PortableRepairLane\\Config\\a3_ml_prediction_observer_startup.ini",
+        "exists": true,
+        "bytes": 348,
+        "safe_passive_config": true,
+        "checks": {
+          "allow_live_trading_disabled": true,
+          "observer_expert_set": true,
+          "passive_preset_set": true,
+          "symbol_xauusd": true,
+          "period_m5": true
+        }
+      },
+      "log_scan": {
+        "files_checked": 10,
+        "observer_mentions": 0,
+        "error_mentions": 0,
+        "matched_lines": []
+      }
+    }
+  ],
+  "validations": [
+    {
+      "check": "A1_startup_config_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini"
+    },
+    {
+      "check": "A1_startup_config_safe_passive",
+      "passed": true,
+      "detail": "{\"allow_live_trading_disabled\": true, \"observer_expert_set\": true, \"passive_preset_set\": true, \"period_m5\": true, \"symbol_xauusd\": true}"
+    },
+    {
+      "check": "A2_startup_config_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\Config\\a3_ml_prediction_observer_startup.ini"
+    },
+    {
+      "check": "A2_startup_config_safe_passive",
+      "passed": true,
+      "detail": "{\"allow_live_trading_disabled\": true, \"observer_expert_set\": true, \"passive_preset_set\": true, \"period_m5\": true, \"symbol_xauusd\": true}"
+    },
+    {
+      "check": "A3_startup_config_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\Config\\a3_ml_prediction_observer_startup.ini"
+    },
+    {
+      "check": "A3_startup_config_safe_passive",
+      "passed": true,
+      "detail": "{\"allow_live_trading_disabled\": true, \"observer_expert_set\": true, \"passive_preset_set\": true, \"period_m5\": true, \"symbol_xauusd\": true}"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Runtime evidence is present. Continue data collection and rerun C19 after market data advances."
+}

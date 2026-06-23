@@ -1,0 +1,60 @@
+{
+  "status": "INSUFFICIENT",
+  "stage": "C02-06",
+  "created_at_utc": "2026-06-22T06:03:11Z",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "model_training_authorized": false,
+    "broker_action_authorized": false
+  },
+  "requirements": {
+    "entry_fills": 200,
+    "sl_exits": 100,
+    "tp_exits": 50,
+    "request_price_resolved": 200
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "entry_fills": 1307,
+      "sl_exits": 783,
+      "tp_exits": 497,
+      "timeout_or_other_exits": 27,
+      "request_price_resolved": 215,
+      "p50_adverse_slippage_points": "0",
+      "p95_adverse_slippage_points": "39",
+      "slippage_status": "ADEQUATE"
+    },
+    {
+      "account_label": "A2",
+      "entry_fills": 12,
+      "sl_exits": 8,
+      "tp_exits": 4,
+      "timeout_or_other_exits": 0,
+      "request_price_resolved": 12,
+      "p50_adverse_slippage_points": "2",
+      "p95_adverse_slippage_points": "33",
+      "slippage_status": "INSUFFICIENT"
+    },
+    {
+      "account_label": "A3",
+      "entry_fills": 75,
+      "sl_exits": 54,
+      "tp_exits": 21,
+      "timeout_or_other_exits": 0,
+      "request_price_resolved": 24,
+      "p50_adverse_slippage_points": "0",
+      "p95_adverse_slippage_points": "28",
+      "slippage_status": "INSUFFICIENT"
+    }
+  ],
+  "outputs": {
+    "fill_reconciliation_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\fills\\fill_reconciliation.csv",
+    "fill_reconciliation_sha256": "20a944c941fa6711dc8b50132ccf78ae71cbb52166b081288d34f75cad54b527"
+  },
+  "notes": [
+    "Request/result prices are mapped from configured runtime order logs where available.",
+    "Final fold-causal P50/P95 slippage remains blocked until every account has adequate request-price coverage inside train-only folds."
+  ]
+}

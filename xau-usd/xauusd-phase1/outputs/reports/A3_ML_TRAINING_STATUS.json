@@ -1,0 +1,40 @@
+{
+  "status": "REFUSED_NOT_READY",
+  "stage": "C05-MODEL-TRAINING",
+  "created_at_utc": "2026-06-22T06:03:15Z",
+  "schema_version": "a3_ml_training_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "readiness_status": "NO_GO",
+  "c01_status": "PIPELINE_ONLY",
+  "authorization": {
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_training_contract.json",
+    "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+    "data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+    "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv"
+  },
+  "outputs": {
+    "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+    "model_artifact_sha256": "",
+    "model_card_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_CARD.md"
+  },
+  "refusal_reasons": [
+    "C03 readiness is NO_GO, required PASS",
+    "C01 supervised training is false: global_feature_budget=0 is below the contract minimum of 5",
+    "selected_features=0, required >= 5",
+    "candidate training rows=0, required >= 120",
+    "minority labels=0, required >= 60"
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Continue data collection, rerun C01/C02/C03, then rerun C05."
+}

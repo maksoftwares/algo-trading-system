@@ -1,0 +1,267 @@
+{
+  "status": "DEPLOYED_PASSIVE_OBSERVER",
+  "stage": "C09-ML-OBSERVER-DEPLOY",
+  "created_at_utc": "2026-06-21T18:20:11Z",
+  "schema_version": "a3_ml_observer_deploy_status_v1",
+  "mode": "DEPLOY",
+  "authorization": {
+    "passive_observer_deploy_requested": true,
+    "passive_observer_deploy_attempted": true,
+    "ea_attachment_authorized": false,
+    "chart_or_profile_change_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "observer_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5",
+    "handoff_include": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh",
+    "passive_preset": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_DEPLOY_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_DEPLOY_STATUS.md",
+    "deployed_files": [
+      {
+        "artifact": "observer_source",
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5",
+        "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+        "bytes": 5650,
+        "sha256": "b87cef2b619dfb7003abc0a3bc42efd29a42746bc8b5f964e44409ffccdd96ea"
+      },
+      {
+        "artifact": "handoff_include",
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh",
+        "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "bytes": 6751,
+        "sha256": "7e8d85595ad8355722892b9475398dad5d7743ce5271bdec0722533cc00cea3f"
+      },
+      {
+        "artifact": "passive_preset",
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "bytes": 335,
+        "sha256": "e2f19173546cfa339fb07d8c0b0d68e88668dee07727834a0dfecade8f34f9aa"
+      },
+      {
+        "artifact": "compiled_ex5",
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "source_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "bytes": 29992,
+        "sha256": "c8d3eb6e1772d82d058a22e6bb88ced89971bcd91bbb7fdc062da1d9c0518208"
+      },
+      {
+        "artifact": "observer_source",
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5",
+        "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+        "bytes": 5650,
+        "sha256": "b87cef2b619dfb7003abc0a3bc42efd29a42746bc8b5f964e44409ffccdd96ea"
+      },
+      {
+        "artifact": "handoff_include",
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh",
+        "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "bytes": 6751,
+        "sha256": "7e8d85595ad8355722892b9475398dad5d7743ce5271bdec0722533cc00cea3f"
+      },
+      {
+        "artifact": "passive_preset",
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "bytes": 335,
+        "sha256": "e2f19173546cfa339fb07d8c0b0d68e88668dee07727834a0dfecade8f34f9aa"
+      },
+      {
+        "artifact": "compiled_ex5",
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "source_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "bytes": 29992,
+        "sha256": "c8d3eb6e1772d82d058a22e6bb88ced89971bcd91bbb7fdc062da1d9c0518208"
+      },
+      {
+        "artifact": "observer_source",
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5",
+        "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+        "bytes": 5650,
+        "sha256": "b87cef2b619dfb7003abc0a3bc42efd29a42746bc8b5f964e44409ffccdd96ea"
+      },
+      {
+        "artifact": "handoff_include",
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh",
+        "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "bytes": 6751,
+        "sha256": "7e8d85595ad8355722892b9475398dad5d7743ce5271bdec0722533cc00cea3f"
+      },
+      {
+        "artifact": "passive_preset",
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "bytes": 335,
+        "sha256": "e2f19173546cfa339fb07d8c0b0d68e88668dee07727834a0dfecade8f34f9aa"
+      },
+      {
+        "artifact": "compiled_ex5",
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "source_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "bytes": 29992,
+        "sha256": "c8d3eb6e1772d82d058a22e6bb88ced89971bcd91bbb7fdc062da1d9c0518208"
+      }
+    ]
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "role": "standard_experimental_demo",
+      "expected_data_path": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075",
+      "files_roots": [
+        "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+      ]
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "role": "tier1_breakout_only",
+      "expected_data_path": "C:/MT5PortableTier1BestEA",
+      "files_roots": [
+        "C:/MT5PortableTier1BestEA/MQL5/Files"
+      ]
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "role": "paused_repair_lane",
+      "expected_data_path": "C:/MT5PortableRepairLane",
+      "files_roots": [
+        "C:/MT5PortableRepairLane/MQL5/Files"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+      "experts_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts",
+      "include_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include",
+      "presets_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets",
+      "source_target": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "ex5_target": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "include_target": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "preset_target": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "data_root": "C:\\MT5PortableTier1BestEA",
+      "experts_dir": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts",
+      "include_dir": "C:\\MT5PortableTier1BestEA\\MQL5\\Include",
+      "presets_dir": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets",
+      "source_target": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "ex5_target": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "include_target": "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "preset_target": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "data_root": "C:\\MT5PortableRepairLane",
+      "experts_dir": "C:\\MT5PortableRepairLane\\MQL5\\Experts",
+      "include_dir": "C:\\MT5PortableRepairLane\\MQL5\\Include",
+      "presets_dir": "C:\\MT5PortableRepairLane\\MQL5\\Presets",
+      "source_target": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "ex5_target": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "include_target": "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "preset_target": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    }
+  ],
+  "compile": {
+    "attempted": true,
+    "passed": true,
+    "status": "PASS",
+    "detail": "scratch compile produced EX5 with 0 errors",
+    "metaeditor_path": "C:\\Program Files\\MetaTrader 5\\MetaEditor64.exe",
+    "scratch_source_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+    "scratch_include_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlEaHandoff.mqh",
+    "log_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\compile_A3MlPredictionObserver.log",
+    "ex5_path": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+    "returncode": 1,
+    "stdout_tail": "",
+    "stderr_tail": "",
+    "log_tail": "C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.mq5 : information: compiling C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.mq5\nC:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlPredictionObserver.mq5 : information: including C:\\MT5CompileScratch\\A3MlPredictionObserverC09\\run_2026_06_21T18_20_10Z\\MQL5\\Experts\\A3MlEaHandoff.mqh\n : information: generating code\n : information: generating code 3%\n : information: generating code 6%\n : information: generating code 9%\n : information: generating code 12%\n : information: generating code 15%\n : information: generating code 18%\n : information: generating code 21%\n : information: generating code 24%\n : information: generating code 27%\n : information: generating code 30%\n : information: generating code 33%\n : information: generating code 36%\n : information: generating code 39%\n : information: generating code 42%\n : information: generating code 45%\n : information: generating code 48%\n : information: generating code 51%\n : information: generating code 54%\n : information: generating code 57%\n : information: generating code 60%\n : information: generating code 63%\n : information: generating code 66%\n : information: generating code 69%\n : information: generating code 72%\n : information: generating code 75%\n : information: generating code 78%\n : information: generating code 81%\n : information: generating code 84%\n : information: generating code 87%\n : information: generating code 90%\n : information: generating code 93%\n : information: generating code 95%\n : information: generating code 100%\n : information: code generated\nResult: 0 errors, 0 warnings, 601 ms elapsed, cpu='X64 Regular'"
+  },
+  "validations": [
+    {
+      "check": "registry_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml"
+    },
+    {
+      "check": "registry_parses",
+      "passed": true,
+      "detail": "accounts=A1,A2,A3"
+    },
+    {
+      "check": "all_accounts_have_data_roots",
+      "passed": true,
+      "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075; A2=C:/MT5PortableTier1BestEA; A3=C:/MT5PortableRepairLane"
+    },
+    {
+      "check": "all_target_paths_safe",
+      "passed": true,
+      "detail": "A1=True; A2=True; A3=True"
+    },
+    {
+      "check": "observer_source_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5"
+    },
+    {
+      "check": "handoff_include_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+    },
+    {
+      "check": "passive_preset_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "check": "scratch_compile_passed",
+      "passed": true,
+      "detail": "scratch compile produced EX5 with 0 errors"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "profile_or_chart_change_authorized": false,
+    "ea_source_deploy_attempted": true,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Passive observer files are copied. Attach only with the passive preset; Python predictions still require C03 PASS, C05 trained model, C04 shadow bridge, and C06 handoff."
+}

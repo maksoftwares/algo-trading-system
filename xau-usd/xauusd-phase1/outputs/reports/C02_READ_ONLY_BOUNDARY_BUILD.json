@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "created_at_utc": "2026-06-21T13:25:09Z",
+  "stage": "C02-00",
+  "boundary": {
+    "read_only_scaffold_only": true,
+    "mt5_connection_attempted": false,
+    "data_exported": false,
+    "model_training_authorized": false,
+    "broker_action_authorized": false,
+    "terminal_runtime_change_authorized": false
+  },
+  "registry": {
+    "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "schema_version": "mt5_multi_account_registry_v1",
+    "common": {
+      "symbol": "XAUUSD",
+      "expected_server_regex": "^Capital\\.ComMena-Demo$",
+      "require_demo_trade_mode": true,
+      "require_existing_terminal_process": true,
+      "allow_mt5_login_call": false,
+      "allow_symbol_select_call": false,
+      "export_timezone": "UTC",
+      "snapshot_safety_lag_minutes": 5
+    },
+    "accounts": [
+      {
+        "account_scope": "1025742",
+        "account_label": "A1",
+        "expected_login": "1025742",
+        "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+        "expected_data_path": null,
+        "portable": false,
+        "role": "standard_experimental_demo",
+        "symbol": "XAUUSD",
+        "files_roots_count": 0,
+        "log_catalog": "config/ml/log_catalog_a1.yaml"
+      },
+      {
+        "account_scope": "1033030",
+        "account_label": "A2",
+        "expected_login": "1033030",
+        "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+        "expected_data_path": "C:/MT5PortableTier1BestEA",
+        "portable": true,
+        "role": "tier1_breakout_only",
+        "symbol": "XAUUSD",
+        "files_roots_count": 1,
+        "log_catalog": "config/ml/log_catalog_a2.yaml"
+      },
+      {
+        "account_scope": "1033669",
+        "account_label": "A3",
+        "expected_login": "1033669",
+        "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+        "expected_data_path": "C:/MT5PortableRepairLane",
+        "portable": true,
+        "role": "paused_repair_lane",
+        "symbol": "XAUUSD",
+        "files_roots_count": 1,
+        "log_catalog": "config/ml/log_catalog_a3.yaml"
+      }
+    ]
+  },
+  "safety_findings": [],
+  "next_allowed_stage": "C02-01 account verification workers after review",
+  "prohibited_in_c02_00": [
+    "MT5 connection",
+    "data export",
+    "model training",
+    "broker action",
+    "terminal launch",
+    "account switching",
+    "symbol selection",
+    "chart/profile/preset mutation"
+  ]
+}

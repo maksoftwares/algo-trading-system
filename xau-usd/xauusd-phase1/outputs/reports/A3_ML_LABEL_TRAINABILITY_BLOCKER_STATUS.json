@@ -1,0 +1,115 @@
+{
+  "status": "LABEL_PROMOTION_REVIEW_REQUIRED_SLIPPAGE_BLOCKED",
+  "stage": "C38-LABEL-TRAINABILITY-BLOCKER-AUDIT",
+  "created_at_utc": "2026-06-22T06:38:38Z",
+  "schema_version": "a3_ml_label_trainability_blocker_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "summary": {
+    "c02_label_status": "PASS",
+    "c02_diagnostic_labels_only": true,
+    "c02_labels": 574,
+    "c02_mature_labels": 424,
+    "c02_positive_labels": 172,
+    "c02_negative_labels": 252,
+    "c02_labeled_decision_rows": 574,
+    "c01_snapshot_rows": 349,
+    "c01_candidate_trainable_rows": 0,
+    "c01_candidate_trainable_groups": 0,
+    "c01_label_status_counts": {
+      "OPTIMISTIC_DIAGNOSTIC_ONLY": 349
+    },
+    "c01_global_feature_budget": 0,
+    "slippage_status": "INSUFFICIENT"
+  },
+  "label_status_counts": {
+    "c02_labeled_decisions": {
+      "CANCELLED_NO_FRESH_TICK": 150,
+      "SL": 250,
+      "TP": 174
+    },
+    "c01_snapshot": {
+      "OPTIMISTIC_DIAGNOSTIC_ONLY": 349
+    }
+  },
+  "slippage_deficits": [
+    {
+      "account_label": "A1",
+      "entry_fills": 1307,
+      "sl_exits": 783,
+      "tp_exits": 497,
+      "timeout_or_other_exits": 27,
+      "request_price_resolved": 215,
+      "p50_adverse_slippage_points": "0",
+      "p95_adverse_slippage_points": "39",
+      "slippage_status": "ADEQUATE",
+      "entry_fills_deficit": 0,
+      "sl_exits_deficit": 0,
+      "tp_exits_deficit": 0,
+      "request_price_resolved_deficit": 0
+    },
+    {
+      "account_label": "A2",
+      "entry_fills": 12,
+      "sl_exits": 8,
+      "tp_exits": 4,
+      "timeout_or_other_exits": 0,
+      "request_price_resolved": 12,
+      "p50_adverse_slippage_points": "2",
+      "p95_adverse_slippage_points": "33",
+      "slippage_status": "INSUFFICIENT",
+      "entry_fills_deficit": 188,
+      "sl_exits_deficit": 92,
+      "tp_exits_deficit": 46,
+      "request_price_resolved_deficit": 188
+    },
+    {
+      "account_label": "A3",
+      "entry_fills": 75,
+      "sl_exits": 54,
+      "tp_exits": 21,
+      "timeout_or_other_exits": 0,
+      "request_price_resolved": 24,
+      "p50_adverse_slippage_points": "0",
+      "p95_adverse_slippage_points": "28",
+      "slippage_status": "INSUFFICIENT",
+      "entry_fills_deficit": 125,
+      "sl_exits_deficit": 46,
+      "tp_exits_deficit": 29,
+      "request_price_resolved_deficit": 176
+    }
+  ],
+  "blockers": [
+    "C02 labels are explicitly diagnostic-only.",
+    "C01 snapshot has zero candidate_trainable=true rows.",
+    "C01 global_feature_budget is 0 because trainable groups are 0.",
+    "Slippage readiness is not ADEQUATE for A2, A3."
+  ],
+  "required_changes_before_trainable_labels": [
+    "Reviewer must approve a label-promotion rule before C01 may treat diagnostic tick labels as trainable.",
+    "C01 must consume C02 label_status/y_net_R fields only under that reviewed promotion rule.",
+    "C03 must rerun after label promotion and still keep python_demo_predictions_authorized=false until all gates pass.",
+    "A2 needs entry=188, SL=92, TP=46, request-price=188 more slippage-ready records.",
+    "A3 needs entry=125, SL=46, TP=29, request-price=176 more slippage-ready records.",
+    "Keep broker_action_authorized=false."
+  ],
+  "authorization": {
+    "label_promotion_authorized": false,
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "model_training_authorized": false,
+    "label_promotion_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_LABEL_TRAINABILITY_BLOCKER_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_LABEL_TRAINABILITY_BLOCKER_STATUS.md"
+  },
+  "next_allowed_stage": "Ask reviewer for a label-promotion decision; continue slippage collection for weak accounts; keep demo Python unauthorized."
+}

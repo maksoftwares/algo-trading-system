@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "stage": "C02-04",
+  "created_at_utc": "2026-06-22T05:59:27Z",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "normalized_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized",
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "model_training_authorized": false,
+    "broker_action_authorized": false,
+    "terminal_runtime_change_authorized": false,
+    "normalization_only": true
+  },
+  "counts": {
+    "source_files": 113,
+    "signal_instances": 13259,
+    "c01_decisions": 574,
+    "would_signal_instances": 574,
+    "by_account": {
+      "A1": {
+        "signal_instances": 7982,
+        "would_signals": 347,
+        "c01_decisions": 347
+      },
+      "A2": {
+        "signal_instances": 2138,
+        "would_signals": 95,
+        "c01_decisions": 95
+      },
+      "A3": {
+        "signal_instances": 3139,
+        "would_signals": 132,
+        "c01_decisions": 132
+      }
+    }
+  },
+  "contract_scope": {
+    "scope_name": "breakout_retest_only",
+    "contract_expansion_authorized": false,
+    "active_families": [
+      "breakout_retest"
+    ],
+    "review_reference": ""
+  },
+  "outputs": {
+    "normalization_manifest": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\NORMALIZATION_MANIFEST.json",
+    "source_files_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\source_files.csv",
+    "signal_instances_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\signals\\signal_instances.csv",
+    "decisions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZED_DECISIONS.csv",
+    "trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZED_TRADES.csv",
+    "bars_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars"
+  },
+  "notes": [
+    "C02 normalized decisions are staging rows only; no model training is authorized.",
+    "Signal component times are reconstructed from the completed M5 bar before decision time for C01 compatibility and remain diagnostic until C03 grouping/label promotion.",
+    "Trades CSV is intentionally empty until C02 fill reconciliation can map broker fills to source signal ids."
+  ],
+  "next_allowed_stage": "C02-05 signal grouping and C01 ingestion audit"
+}

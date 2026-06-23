@@ -1,0 +1,74 @@
+{
+  "status": "WAITING_FOR_REVIEW_APPROVAL",
+  "stage": "C36-CONTRACT-EXPANSION-CONFIG-PROPOSAL",
+  "created_at_utc": "2026-06-22T06:38:38Z",
+  "schema_version": "a3_ml_contract_expansion_config_proposal_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "c34_status": "CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND",
+  "c35_status": "CONTRACT_EXPANSION_REVIEW_REQUIRED",
+  "selected_families": [],
+  "review_reference": "",
+  "candidate_summary": {
+    "candidate_files": 13,
+    "candidate_would_signal_rows": 2747,
+    "selected_files": 0,
+    "selected_would_signal_rows": 0
+  },
+  "family_summary": [
+    {
+      "family": "rdguard",
+      "candidate_would_signal_rows": 78,
+      "candidate_files": 1,
+      "selected_would_signal_rows": 0
+    },
+    {
+      "family": "rdstruct",
+      "candidate_would_signal_rows": 78,
+      "candidate_files": 1,
+      "selected_would_signal_rows": 0
+    },
+    {
+      "family": "round_number_retest",
+      "candidate_would_signal_rows": 2455,
+      "candidate_files": 7,
+      "selected_would_signal_rows": 0
+    },
+    {
+      "family": "session_extreme_retest",
+      "candidate_would_signal_rows": 136,
+      "candidate_files": 4,
+      "selected_would_signal_rows": 0
+    }
+  ],
+  "selected_entries": [],
+  "proposed_config_if_approved": {
+    "schema_version": "a3_ml_contract_expansion_v1",
+    "contract_expansion_authorized": false,
+    "review_reference": "",
+    "allowed_families": [],
+    "accounts": {}
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_CONFIG_PROPOSAL_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_CONFIG_PROPOSAL_STATUS.md",
+    "target_config_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_contract_expansion.json"
+  },
+  "authorization": {
+    "contract_expansion_config_authorized": false,
+    "config_write_attempted": false,
+    "config_written": false,
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Send C35 to reviewer. After approval, rerun C36 with explicit allowed families and review reference."
+}

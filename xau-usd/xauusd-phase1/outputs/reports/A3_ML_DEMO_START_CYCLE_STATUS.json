@@ -1,0 +1,93 @@
+{
+  "status": "WAITING_FOR_DATA",
+  "stage": "C19-DEMO-START-CYCLE",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "schema_version": "a3_ml_demo_start_cycle_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "requested_actions": {
+    "run_pipeline": false,
+    "refresh_live_readonly": false,
+    "auto_publish": false,
+    "run_rehearsal": true,
+    "run_runtime_audit": true,
+    "run_runtime_diagnostic": true,
+    "run_post_attach_monitor": true,
+    "post_attach_timeout_seconds": 0,
+    "post_attach_poll_seconds": 5,
+    "requested_start_utc": "",
+    "max_tick_days": null
+  },
+  "actions": [
+    {
+      "action": "C10 activation gate",
+      "status": "WAITING_FOR_DATA",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTIVATION_STATUS.json",
+      "detail": ""
+    },
+    {
+      "action": "C18 exploratory training rehearsal",
+      "status": "REHEARSED_RESEARCH_ONLY",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_TRAINING_REHEARSAL_STATUS.json",
+      "detail": ""
+    },
+    {
+      "action": "C20 runtime evidence audit",
+      "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_EVIDENCE_STATUS.json",
+      "detail": ""
+    },
+    {
+      "action": "C21 runtime launch diagnostic",
+      "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_LAUNCH_DIAGNOSTIC_STATUS.json",
+      "detail": ""
+    },
+    {
+      "action": "C22 post-attach runtime monitor",
+      "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.json",
+      "detail": ""
+    },
+    {
+      "action": "C10 final activation summary",
+      "status": "WAITING_FOR_DATA",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTIVATION_STATUS.json",
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "stage_statuses": {
+      "C03 readiness": "NO_GO",
+      "C05 official training": "REFUSED_NOT_READY",
+      "C04 shadow bridge": "DISABLED_FAIL_CLOSED",
+      "C06 EA handoff": "REFUSED_NOT_READY",
+      "C10 activation": "WAITING_FOR_DATA",
+      "C18 rehearsal": "REHEARSED_RESEARCH_ONLY",
+      "C20 runtime evidence": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C21 runtime launch diagnostic": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C22 post-attach runtime monitor": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+    },
+    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066"
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "mt5_file_publish_requested": false,
+    "mt5_file_publish_attempted": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "profile_or_chart_change_authorized": false,
+    "ea_file_drop_authorized": false,
+    "official_model_artifact_written": false,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_START_CYCLE_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_START_CYCLE_STATUS.md"
+  },
+  "next_allowed_stage": "Keep A1/A2/A3 collecting data, then rerun C19 with --refresh-live-readonly after market data advances."
+}

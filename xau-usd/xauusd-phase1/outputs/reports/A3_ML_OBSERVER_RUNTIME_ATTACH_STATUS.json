@@ -1,0 +1,261 @@
+{
+  "status": "RUNTIME_LOGS_DETECTED_ALL_ACCOUNTS",
+  "stage": "C14-ML-OBSERVER-RUNTIME-ATTACH",
+  "created_at_utc": "2026-06-21T22:40:57Z",
+  "schema_version": "a3_ml_observer_runtime_attach_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066",
+  "authorization": {
+    "runtime_launch_requested": true,
+    "runtime_launch_attempted": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "observer_deploy_status": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_DEPLOY_STATUS.json",
+    "fail_closed_handoff_rehearsal": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_FAIL_CLOSED_HANDOFF_REHEARSAL_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_RUNTIME_ATTACH_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_RUNTIME_ATTACH_STATUS.md",
+    "configs_written": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini",
+        "bytes": 348,
+        "allow_live_trading": false,
+        "expert": "A3MlPredictionObserver",
+        "preset": "A3MlPredictionObserver.passive_xauusd.set"
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "path": "C:\\MT5PortableTier1BestEA\\Config\\a3_ml_prediction_observer_startup.ini",
+        "bytes": 348,
+        "allow_live_trading": false,
+        "expert": "A3MlPredictionObserver",
+        "preset": "A3MlPredictionObserver.passive_xauusd.set"
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "path": "C:\\MT5PortableRepairLane\\Config\\a3_ml_prediction_observer_startup.ini",
+        "bytes": 348,
+        "allow_live_trading": false,
+        "expert": "A3MlPredictionObserver",
+        "preset": "A3MlPredictionObserver.passive_xauusd.set"
+      }
+    ],
+    "launch_records": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "status": "LAUNCH_SENT",
+        "pid": 21672,
+        "command": [
+          "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+          "/config:C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini"
+        ],
+        "detail": ""
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "status": "LAUNCH_SENT",
+        "pid": 25260,
+        "command": [
+          "C:\\MT5PortableTier1BestEA\\terminal64.exe",
+          "/portable",
+          "/config:C:\\MT5PortableTier1BestEA\\Config\\a3_ml_prediction_observer_startup.ini"
+        ],
+        "detail": ""
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "status": "LAUNCH_SENT",
+        "pid": 22768,
+        "command": [
+          "C:\\MT5PortableRepairLane\\terminal64.exe",
+          "/portable",
+          "/config:C:\\MT5PortableRepairLane\\Config\\a3_ml_prediction_observer_startup.ini"
+        ],
+        "detail": ""
+      }
+    ],
+    "logs": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "startup_log_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": true,
+        "startup_log_size": 219,
+        "startup_log_last_write_utc": "2026-06-21T22:40:47Z",
+        "startup_log_fresh_after_launch": true,
+        "prediction_log_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": true,
+        "prediction_log_size": 700,
+        "prediction_log_last_write_utc": "2026-06-21T22:40:57Z",
+        "prediction_log_fresh_after_launch": true
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "startup_log_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": true,
+        "startup_log_size": 219,
+        "startup_log_last_write_utc": "2026-06-21T22:40:44Z",
+        "startup_log_fresh_after_launch": true,
+        "prediction_log_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": true,
+        "prediction_log_size": 700,
+        "prediction_log_last_write_utc": "2026-06-21T22:40:54Z",
+        "prediction_log_fresh_after_launch": true
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "startup_log_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": true,
+        "startup_log_size": 219,
+        "startup_log_last_write_utc": "2026-06-21T22:40:45Z",
+        "startup_log_fresh_after_launch": true,
+        "prediction_log_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": true,
+        "prediction_log_size": 700,
+        "prediction_log_last_write_utc": "2026-06-21T22:40:55Z",
+        "prediction_log_fresh_after_launch": true
+      }
+    ]
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "terminal_exe": "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+      "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+      "startup_config": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini",
+      "files_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files"
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "terminal_exe": "C:\\MT5PortableTier1BestEA\\terminal64.exe",
+      "data_root": "C:\\MT5PortableTier1BestEA",
+      "startup_config": "C:\\MT5PortableTier1BestEA\\Config\\a3_ml_prediction_observer_startup.ini",
+      "files_root": "C:\\MT5PortableTier1BestEA\\MQL5\\Files"
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "terminal_exe": "C:\\MT5PortableRepairLane\\terminal64.exe",
+      "data_root": "C:\\MT5PortableRepairLane",
+      "startup_config": "C:\\MT5PortableRepairLane\\Config\\a3_ml_prediction_observer_startup.ini",
+      "files_root": "C:\\MT5PortableRepairLane\\MQL5\\Files"
+    }
+  ],
+  "validations": [
+    {
+      "check": "A1_terminal_exe_exists",
+      "passed": true,
+      "detail": "C:\\Program Files\\MetaTrader 5\\terminal64.exe"
+    },
+    {
+      "check": "A1_data_root_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075"
+    },
+    {
+      "check": "A1_observer_ex5_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5"
+    },
+    {
+      "check": "A1_passive_preset_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "check": "A1_handoff_file_exists",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv"
+    },
+    {
+      "check": "A1_files_root_safe",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files"
+    },
+    {
+      "check": "A2_terminal_exe_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\terminal64.exe"
+    },
+    {
+      "check": "A2_data_root_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA"
+    },
+    {
+      "check": "A2_observer_ex5_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5"
+    },
+    {
+      "check": "A2_passive_preset_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "check": "A2_handoff_file_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv"
+    },
+    {
+      "check": "A2_files_root_safe",
+      "passed": true,
+      "detail": "C:\\MT5PortableTier1BestEA\\MQL5\\Files"
+    },
+    {
+      "check": "A3_terminal_exe_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\terminal64.exe"
+    },
+    {
+      "check": "A3_data_root_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane"
+    },
+    {
+      "check": "A3_observer_ex5_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5"
+    },
+    {
+      "check": "A3_passive_preset_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set"
+    },
+    {
+      "check": "A3_handoff_file_exists",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv"
+    },
+    {
+      "check": "A3_files_root_safe",
+      "passed": true,
+      "detail": "C:\\MT5PortableRepairLane\\MQL5\\Files"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_launch_attempted": true,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "startup_config_write_attempted": true,
+    "allow_live_trading_in_startup_config": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Passive observer runtime is logging on all three accounts. Keep collecting data; real Python predictions still require C03 PASS and C05/C04/C06 readiness."
+}

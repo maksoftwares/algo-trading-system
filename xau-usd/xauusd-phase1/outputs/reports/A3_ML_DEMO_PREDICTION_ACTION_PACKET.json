@@ -1,0 +1,931 @@
+{
+  "status": "WAITING_FOR_DATA",
+  "stage": "C24-ML-DEMO-PREDICTION-ACTION-PACKET",
+  "created_at_utc": "2026-06-22T06:38:41Z",
+  "schema_version": "a3_ml_demo_prediction_action_packet_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "requested_actions": {
+    "refresh_live_readonly": false,
+    "requested_start_utc": "",
+    "max_tick_days": null,
+    "post_attach_timeout_seconds": 0,
+    "post_attach_poll_seconds": 5
+  },
+  "summary": {
+    "c23_status": "WAITING_FOR_DATA",
+    "c11_status": "WAITING_FOR_DECISION_HISTORY",
+    "c15_status": "MANUAL_ATTACH_REQUIRED",
+    "c18_status": "REHEARSED_RESEARCH_ONLY",
+    "c20_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+    "c22_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+    "c25_status": "BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS",
+    "c26_status": "PUBLISHED_RESEARCH_PREVIEW_FAIL_CLOSED",
+    "c27_status": "RESEARCH_PREVIEW_READ_PATH_CONFIRMED_ALL_ACCOUNTS",
+    "c28_status": "DEMO_SHADOW_RUNTIME_CONFIRMED_ALL_ACCOUNTS",
+    "c29_status": "DEMO_SHADOW_RUNTIME_CONFIRMED_WAITING_FOR_DATA",
+    "c30_status": "DEPLOYED_SAFE_PASSIVE_PRESETS",
+    "c31_status": "ATTACH_RUNTIME_FILES_PRESENT_ALL_ACCOUNTS",
+    "c32_status": "READY_OPERATOR_ATTACH_KIT"
+  },
+  "readiness": {
+    "data_ready": false,
+    "official_model_trained": false,
+    "python_shadow_bridge_ready": false,
+    "ea_handoff_ready_or_published": false,
+    "runtime_evidence_all_accounts": true,
+    "runtime_launch_diagnostic_all_accounts": true,
+    "post_attach_monitor_ready": true,
+    "activation_authorizes_python": false,
+    "activation_authorizes_ea_consumption": false
+  },
+  "data_gaps": {
+    "status": "WAITING_FOR_DECISION_HISTORY",
+    "failed_gates": [
+      {
+        "gate": "dataset_status",
+        "passed": false,
+        "observed": "PIPELINE_ONLY",
+        "required": "EXPLORATORY_MODEL or higher",
+        "gap_value": null,
+        "gap_text": "needs different category/state"
+      },
+      {
+        "gate": "market_setup_groups",
+        "passed": false,
+        "observed": "223",
+        "required": ">=300",
+        "gap_value": 77.0,
+        "gap_text": "77"
+      },
+      {
+        "gate": "active_weeks",
+        "passed": false,
+        "observed": "3.37",
+        "required": ">=8",
+        "gap_value": 4.63,
+        "gap_text": "4.63 weeks"
+      },
+      {
+        "gate": "at_least_two_regimes",
+        "passed": false,
+        "observed": "FALLING",
+        "required": ">=2 non-UNKNOWN regimes",
+        "gap_value": null,
+        "gap_text": "needs different category/state"
+      },
+      {
+        "gate": "feature_budget",
+        "passed": false,
+        "observed": "0",
+        "required": ">=6",
+        "gap_value": 6.0,
+        "gap_text": "6"
+      },
+      {
+        "gate": "slippage_readiness",
+        "passed": false,
+        "observed": "INSUFFICIENT",
+        "required": "ADEQUATE",
+        "gap_value": null,
+        "gap_text": "needs different category/state"
+      }
+    ],
+    "remaining_active_weeks": 4.63,
+    "estimated_active_weeks_pass_date_utc": "2026-07-24T10:10:22Z",
+    "market_setup_groups_gap": 77.0,
+    "active_weeks_gap": 4.63
+  },
+  "manual_attach": {
+    "status": "MANUAL_ATTACH_REQUIRED",
+    "manual_attach_required": true,
+    "accounts": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "role": "standard_experimental_demo",
+        "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+        "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+        "files_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files",
+        "expert_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "expert_exists": true,
+        "preset_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "preset_exists": true,
+        "handoff_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "startup_log_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": false,
+        "prediction_log_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": false
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "role": "tier1_breakout_only",
+        "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+        "data_root": "C:\\MT5PortableTier1BestEA",
+        "files_root": "C:\\MT5PortableTier1BestEA\\MQL5\\Files",
+        "expert_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "expert_exists": true,
+        "preset_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "preset_exists": true,
+        "handoff_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "startup_log_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": false,
+        "prediction_log_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": false
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "role": "paused_repair_lane",
+        "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+        "data_root": "C:\\MT5PortableRepairLane",
+        "files_root": "C:\\MT5PortableRepairLane\\MQL5\\Files",
+        "expert_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+        "expert_exists": true,
+        "preset_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+        "preset_exists": true,
+        "handoff_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "startup_log_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_startup.csv",
+        "startup_log_exists": false,
+        "prediction_log_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
+        "prediction_log_exists": false
+      }
+    ],
+    "steps": [
+      "Open each MT5 terminal for A1, A2, and A3.",
+      "Open or select an XAUUSD M5 chart.",
+      "Attach the Expert Advisor named A3MlPredictionObserver.",
+      "Load preset A3MlPredictionObserver.passive_xauusd.set.",
+      "Confirm InpDryRunOnly=true, InpTargetSymbol=XAUUSD, and InpHandoffFileName=A3_ML_EA_HANDOFF.csv.",
+      "Click OK only with those passive settings.",
+      "Wait for a tick or new M5 bar, then run C28 to wait for observer logs and demo-shadow read-path evidence."
+    ]
+  },
+  "broker_shadow_attach": {
+    "status": "BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS",
+    "manual_attach_required": false,
+    "runtime_all_accounts": true,
+    "accounts": [
+      {
+        "account_label": "A1",
+        "account_scope": "1025742",
+        "role": "standard_experimental_demo",
+        "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+        "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+        "files_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files",
+        "files_root_exists": true,
+        "files_root_safe": true,
+        "handoff_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "shadow_tap_include_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlShadowTap.mqh",
+        "shadow_tap_include_exists": true,
+        "handoff_include_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "handoff_include_exists": true,
+        "broker_shadow_tap_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
+        "broker_shadow_tap_exists": true,
+        "broker_shadow_tap_rows": 97,
+        "active_profile_entries": [
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart02.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart02.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart03.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart03.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart04.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart04.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart05.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart05.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart06.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart06.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart07.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart07.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart08.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart08.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart09.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart09.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart10.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart10.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart11.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart11.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart12.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart12.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart13.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart13.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart14.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart14.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart18.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart18.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart19.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart19.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart20.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart20.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart01.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart01.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart02.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart02.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart03.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart03.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart04.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart04.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart05.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart05.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart06.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart06.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart07.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart07.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart08.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart08.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart09.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart09.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart10.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart10.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart11.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart11.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart12.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart12.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart13.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart13.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart14.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart14.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart18.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart18.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart19.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart19.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart20.chr",
+            "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart20.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+            "profile_relative_path": "Default\\chart03.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          }
+        ],
+        "active_broker_executors": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          }
+        ],
+        "active_broker_executor_count": 1,
+        "active_broker_executors_ml_ready": true,
+        "expected_broker_experts": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+            "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          },
+          {
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "source_name": "Phase2ExperimentalDemoRepairExecutor.mq5",
+            "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          }
+        ],
+        "expected_compiled_ex5_all_exist": true,
+        "recommended_experts": [
+          "Phase2ExperimentalDemoExecutor"
+        ],
+        "safe_presets": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+            "preset_name": "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1025742"
+          },
+          {
+            "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+            "source_name": "Phase2ExperimentalDemoRepairExecutor.mq5",
+            "preset_name": "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1025742"
+          }
+        ],
+        "safe_preset_names": [
+          "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+          "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_paths": [
+          "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+          "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_deployed_all": true
+      },
+      {
+        "account_label": "A2",
+        "account_scope": "1033030",
+        "role": "tier1_breakout_only",
+        "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+        "data_root": "C:\\MT5PortableTier1BestEA",
+        "files_root": "C:\\MT5PortableTier1BestEA\\MQL5\\Files",
+        "files_root_exists": true,
+        "files_root_safe": true,
+        "handoff_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "shadow_tap_include_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlShadowTap.mqh",
+        "shadow_tap_include_exists": true,
+        "handoff_include_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "handoff_include_exists": true,
+        "broker_shadow_tap_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
+        "broker_shadow_tap_exists": true,
+        "broker_shadow_tap_rows": 97,
+        "active_profile_entries": [
+          {
+            "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+            "profile_relative_path": "Default\\chart02.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          }
+        ],
+        "active_broker_executors": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          }
+        ],
+        "active_broker_executor_count": 1,
+        "active_broker_executors_ml_ready": true,
+        "expected_broker_experts": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+            "source_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          }
+        ],
+        "expected_compiled_ex5_all_exist": true,
+        "recommended_experts": [
+          "Phase2ExperimentalDemoExecutor"
+        ],
+        "safe_presets": [
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_name": "Phase2ExperimentalDemoExecutor.mq5",
+            "preset_name": "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1033030"
+          }
+        ],
+        "safe_preset_names": [
+          "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_paths": [
+          "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_deployed_all": true
+      },
+      {
+        "account_label": "A3",
+        "account_scope": "1033669",
+        "role": "paused_repair_lane",
+        "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+        "data_root": "C:\\MT5PortableRepairLane",
+        "files_root": "C:\\MT5PortableRepairLane\\MQL5\\Files",
+        "files_root_exists": true,
+        "files_root_safe": true,
+        "handoff_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+        "handoff_exists": true,
+        "shadow_tap_include_path": "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlShadowTap.mqh",
+        "shadow_tap_include_exists": true,
+        "handoff_include_path": "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh",
+        "handoff_include_exists": true,
+        "broker_shadow_tap_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
+        "broker_shadow_tap_exists": true,
+        "broker_shadow_tap_rows": 383,
+        "active_profile_entries": [
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+            "profile_relative_path": "Default\\chart01.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Account3BreakoutPlainExecutor",
+            "expert_path": "Experts\\Account3BreakoutPlainExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+            "profile_relative_path": "Default\\chart02.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Account3BreakoutImprovedExecutor",
+            "expert_path": "Experts\\Account3BreakoutImprovedExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+            "profile_relative_path": "Default\\chart04.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Account3BreakoutTier1CompatExecutor",
+            "expert_path": "Experts\\Account3BreakoutTier1CompatExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
+            "profile_relative_path": "Default\\chart06.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Account3SoftRetestExecutor",
+            "expert_path": "Experts\\Account3SoftRetestExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default_direction_state_backup_20260614_203344\\chart01.chr",
+            "profile_relative_path": "Default_direction_state_backup_20260614_203344\\chart01.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Account3RoundRetestGuardedExecutor",
+            "expert_path": "Experts\\Account3RoundRetestGuardedExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default_direction_state_backup_20260614_203344\\chart02.chr",
+            "profile_relative_path": "Default_direction_state_backup_20260614_203344\\chart02.chr",
+            "profile_kind": "backup_or_quarantine",
+            "expert_name": "Account3RoundRetestStructuredExecutor",
+            "expert_path": "Experts\\Account3RoundRetestStructuredExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          }
+        ],
+        "active_broker_executors": [
+          {
+            "expert_name": "Account3BreakoutImprovedExecutor",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          },
+          {
+            "expert_name": "Account3BreakoutPlainExecutor",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          },
+          {
+            "expert_name": "Account3BreakoutTier1CompatExecutor",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          },
+          {
+            "expert_name": "Account3SoftRetestExecutor",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
+          }
+        ],
+        "active_broker_executor_count": 4,
+        "active_broker_executors_ml_ready": true,
+        "expected_broker_experts": [
+          {
+            "expert_name": "Account3BreakoutImprovedExecutor",
+            "source_name": "Account3BreakoutImprovedExecutor.mq5",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          },
+          {
+            "expert_name": "Account3BreakoutPlainExecutor",
+            "source_name": "Account3BreakoutPlainExecutor.mq5",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          },
+          {
+            "expert_name": "Account3BreakoutTier1CompatExecutor",
+            "source_name": "Account3BreakoutTier1CompatExecutor.mq5",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          },
+          {
+            "expert_name": "Account3SoftRetestExecutor",
+            "source_name": "Account3SoftRetestExecutor.mq5",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.mq5",
+            "source_exists": true,
+            "ex5_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.ex5",
+            "ex5_exists": true,
+            "source_reported_deployed": true,
+            "compiled_ex5_reported_deployed": true
+          }
+        ],
+        "expected_compiled_ex5_all_exist": true,
+        "recommended_experts": [
+          "Account3BreakoutImprovedExecutor",
+          "Account3BreakoutPlainExecutor",
+          "Account3BreakoutTier1CompatExecutor",
+          "Account3SoftRetestExecutor"
+        ],
+        "safe_presets": [
+          {
+            "expert_name": "Account3BreakoutImprovedExecutor",
+            "source_name": "Account3BreakoutImprovedExecutor.mq5",
+            "preset_name": "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1033669"
+          },
+          {
+            "expert_name": "Account3BreakoutPlainExecutor",
+            "source_name": "Account3BreakoutPlainExecutor.mq5",
+            "preset_name": "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1033669"
+          },
+          {
+            "expert_name": "Account3BreakoutTier1CompatExecutor",
+            "source_name": "Account3BreakoutTier1CompatExecutor.mq5",
+            "preset_name": "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1033669"
+          },
+          {
+            "expert_name": "Account3SoftRetestExecutor",
+            "source_name": "Account3SoftRetestExecutor.mq5",
+            "preset_name": "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+            "target_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set",
+            "exists": true,
+            "content_safe": true,
+            "account_scope": "1033669"
+          }
+        ],
+        "safe_preset_names": [
+          "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+          "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+          "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+          "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_paths": [
+          "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+          "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+          "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+          "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set"
+        ],
+        "safe_preset_deployed_all": true
+      }
+    ],
+    "steps": [
+      "Open each MT5 terminal for A1, A2, and A3.",
+      "Use a separate XAUUSD M5 chart for the broker-shadow check when you do not want to disturb any existing chart.",
+      "Attach or reload the recommended broker-shadow expert for that account from the Account Details section.",
+      "Load the matching C30 safe preset for that account and expert before clicking OK.",
+      "Confirm InpDryRunOnly=true and InpBrokerActionAllowed=false before clicking OK.",
+      "Confirm InpMlShadowReadEnabled=true, InpMlHandoffFileName=A3_ML_EA_HANDOFF.csv, and InpMlShadowLogFileName=a3_ml_broker_shadow_tap.csv.",
+      "Wait for a3_ml_broker_shadow_tap.csv to appear in each account's MQL5/Files folder.",
+      "Run C28 with --timeout-seconds 300 to wait for observer logs and Python preview read-path proof, then rerun C24."
+    ]
+  },
+  "runtime_evidence": {
+    "handoff_files_all_accounts": true,
+    "passive_observer_runtime_all_accounts": true,
+    "broker_shadow_tap_runtime_all_accounts": true,
+    "any_runtime_evidence": true
+  },
+  "operator_actions": [
+    "Attach A3MlPredictionObserver on XAUUSD M5 for A1, A2, and A3 using the passive preset.",
+    "C26 research-preview ABSTAIN handoff is published; after attach, broker-shadow taps should log ml_available=true.",
+    "Import older compatible EA decision/observer logs if available; market bars/ticks alone cannot satisfy active decision weeks.",
+    "Keep A1/A2/A3 terminals collecting passive observer data and rerun C10 with --refresh-live-readonly after new market sessions.",
+    "Need about 4.63 more active weeks unless older compatible decisions are imported.",
+    "Need about 77 more market setup groups."
+  ],
+  "commands": {
+    "check_now": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c24_generate_demo_prediction_action_packet.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "operator_runbook": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c29_generate_demo_shadow_operator_runbook.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "generate_operator_launch_kit": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c32_generate_demo_operator_launch_kit.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "run_operator_launch_kit": "powershell -ExecutionPolicy Bypass -File 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT.ps1'",
+    "broker_shadow_preset_deploy": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c30_deploy_broker_shadow_presets.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --deploy",
+    "broker_shadow_attach_packet": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c25_generate_broker_shadow_manual_attach_packet.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "demo_attach_watch": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c31_watch_demo_attach.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --timeout-seconds 300 --poll-seconds 5",
+    "research_preview_handoff_publish": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c26_publish_research_preview_handoff_rehearsal.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --publish",
+    "research_preview_runtime_verify": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c27_verify_research_preview_runtime_read_path.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "demo_shadow_post_attach_wait": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c28_wait_for_demo_shadow_post_attach.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --timeout-seconds 300 --poll-seconds 5",
+    "post_attach_wait": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c23_run_demo_python_launch_controller.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --post-attach-timeout-seconds 300 --post-attach-poll-seconds 5",
+    "refresh_after_market_data": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c23_run_demo_python_launch_controller.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --refresh-live-readonly --post-attach-timeout-seconds 300 --post-attach-poll-seconds 5"
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "c23_demo_python_launch_controller": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PYTHON_LAUNCH_CONTROLLER_STATUS.json",
+    "c11_readiness_gap": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_READINESS_GAP_REPORT.json",
+    "c15_manual_attach_packet": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OBSERVER_MANUAL_ATTACH_PACKET.json",
+    "c18_exploratory_training_rehearsal": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_TRAINING_REHEARSAL_STATUS.json",
+    "c20_runtime_evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_EVIDENCE_STATUS.json",
+    "c22_post_attach_runtime_monitor": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.json",
+    "c25_broker_shadow_manual_attach_packet": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_SHADOW_MANUAL_ATTACH_PACKET.json",
+    "c26_research_preview_handoff_rehearsal": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RESEARCH_PREVIEW_HANDOFF_REHEARSAL_STATUS.json",
+    "c27_research_preview_runtime_verifier": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RESEARCH_PREVIEW_RUNTIME_VERIFIER_STATUS.json",
+    "c28_demo_shadow_post_attach_monitor": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_SHADOW_POST_ATTACH_MONITOR_STATUS.json",
+    "c29_demo_shadow_operator_runbook": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_SHADOW_OPERATOR_RUNBOOK_STATUS.json",
+    "c30_broker_shadow_preset_deploy": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_SHADOW_PRESET_DEPLOY_STATUS.json",
+    "c31_demo_attach_watch": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_ATTACH_WATCH_STATUS.json",
+    "c32_demo_operator_launch_kit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTION_PACKET.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTION_PACKET.md"
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "model_training_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Continue collecting/exporting A1/A2/A3 data and rerun C24 after new market sessions."
+}

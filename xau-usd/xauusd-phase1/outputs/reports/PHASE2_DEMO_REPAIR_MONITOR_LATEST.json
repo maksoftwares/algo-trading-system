@@ -1,14 +1,98 @@
 {
   "status": "SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED",
-  "generated_at_utc": "2026-06-18T04:03:11.921119Z",
+  "generated_at_utc": "2026-06-21T04:03:28.757243Z",
   "since": "2026-06-09 00:00:00",
   "policy_id": "phase2_demo_repair_policy_2026_06_12_v2",
   "policy_enforced": false,
   "policy_effective_at_dubai": null,
   "trade_source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\PHASE2_DEMO_ACTUAL_BROKER_TRADES.csv",
   "boundary": "Monitor/report only. No MT5 runtime is modified.",
-  "rows_checked": 1553,
+  "rows_checked": 1670,
   "findings": [
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4152116"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "XAUUSD",
+      "ticket": "4150115"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4144786"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "EURUSD",
+      "ticket": "4144561"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "session_extreme_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4143342"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4143344"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4143077"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4142189"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4137439"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4137308"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4137210"
+    },
+    {
+      "severity": "SHADOW",
+      "type": "SUSPENDED_CANDIDATE_ORDER",
+      "candidate": "symbol_normalized_round_retest_v0",
+      "symbol": "GBPUSD",
+      "ticket": "4137125"
+    },
     {
       "severity": "SHADOW",
       "type": "SUSPENDED_CANDIDATE_ORDER",
@@ -7270,15 +7354,15 @@
     }
   ],
   "summary": {
-    "weak_variant_order_attempts": 1031,
-    "blocked_by_repair_policy": 1037,
+    "weak_variant_order_attempts": 1043,
+    "blocked_by_repair_policy": 1049,
     "orders_after_quarantine_by_candidate": {
-      "symbol_normalized_round_retest_v0": 552,
-      "session_extreme_retest_v0": 128,
+      "symbol_normalized_round_retest_v0": 560,
+      "session_extreme_retest_v0": 132,
       "round_number_retest_v0": 351
     },
-    "symbol_normalized_new_orders_after_suspend": 552,
-    "session_extreme_new_orders_after_suspend": 128,
+    "symbol_normalized_new_orders_after_suspend": 560,
+    "session_extreme_new_orders_after_suspend": 132,
     "usdjpy_new_orders_after_disable": 0
   }
 }

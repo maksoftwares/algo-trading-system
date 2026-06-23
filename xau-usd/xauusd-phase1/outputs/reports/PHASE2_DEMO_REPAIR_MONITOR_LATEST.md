@@ -4,28 +4,40 @@ Overall status: SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED
 
 Monitor/report only. No MT5 runtime is modified.
 
-Generated at UTC: `2026-06-18T04:03:11.921119Z`
+Generated at UTC: `2026-06-21T04:03:28.757243Z`
 Policy ID: `phase2_demo_repair_policy_2026_06_12_v2`
 Policy enforced: `false`
 Policy effective at Dubai: `None`
 Since: `2026-06-09 00:00:00`
-Rows checked: `1553`
+Rows checked: `1670`
 
 ## Counters
 
 | Counter | Value |
 |---|---:|
-| weak_variant_order_attempts | `1031` |
-| blocked_by_repair_policy | `1037` |
-| orders_after_quarantine_by_candidate | `{'symbol_normalized_round_retest_v0': 552, 'session_extreme_retest_v0': 128, 'round_number_retest_v0': 351}` |
-| symbol_normalized_new_orders_after_suspend | `552` |
-| session_extreme_new_orders_after_suspend | `128` |
+| weak_variant_order_attempts | `1043` |
+| blocked_by_repair_policy | `1049` |
+| orders_after_quarantine_by_candidate | `{'symbol_normalized_round_retest_v0': 560, 'session_extreme_retest_v0': 132, 'round_number_retest_v0': 351}` |
+| symbol_normalized_new_orders_after_suspend | `560` |
+| session_extreme_new_orders_after_suspend | `132` |
 | usdjpy_new_orders_after_disable | `0` |
 
 ## Findings
 
 | Severity | Type | Candidate | Symbol | Ticket | Detail |
 |---|---|---|---|---|---|
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4152116 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | XAUUSD | 4150115 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | EURUSD | 4144786 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | EURUSD | 4144561 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | session_extreme_retest_v0 | GBPUSD | 4143342 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4143344 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4143077 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4142189 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4137439 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4137308 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4137210 |  |
+| SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | GBPUSD | 4137125 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4136689 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4136602 |  |
 | SHADOW | SUSPENDED_CANDIDATE_ORDER | symbol_normalized_round_retest_v0 | EURUSD | 4136513 |  |

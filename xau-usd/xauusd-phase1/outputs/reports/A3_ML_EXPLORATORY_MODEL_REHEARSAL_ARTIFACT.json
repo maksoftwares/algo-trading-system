@@ -1,0 +1,164 @@
+{
+  "schema_version": "a3_ml_exploratory_model_rehearsal_artifact_v1",
+  "status": "REHEARSED_RESEARCH_ONLY",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
+  "model_family": "M0_DIAGNOSTIC_BASE_RATE_REHEARSAL",
+  "official_model_artifact": false,
+  "eligible_for_c04_shadow_bridge": false,
+  "eligible_for_c06_ea_handoff": false,
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "feature_schema_hash": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
+  "official_selected_features": [],
+  "contract_model_family": "M0_BASE_RATE_FIRST",
+  "training_summary": {
+    "snapshot_rows": 349,
+    "diagnostic_labeled_rows": 349,
+    "official_candidate_trainable_rows": 0,
+    "positive": 110,
+    "negative": 239,
+    "minority": 110,
+    "global_positive_rate": 0.3157142857,
+    "in_sample_preview_only": true
+  },
+  "rates": {
+    "global": 0.3157142857,
+    "by_account": {
+      "1025742": {
+        "rows": 207,
+        "positive": 49,
+        "negative": 158,
+        "p_win": 0.2379807692
+      },
+      "1033030": {
+        "rows": 94,
+        "positive": 43,
+        "negative": 51,
+        "p_win": 0.4578947368
+      },
+      "1033669": {
+        "rows": 48,
+        "positive": 18,
+        "negative": 30,
+        "p_win": 0.3775510204
+      }
+    },
+    "by_direction": {
+      "LONG": {
+        "rows": 155,
+        "positive": 50,
+        "negative": 105,
+        "p_win": 0.3237179487
+      },
+      "SHORT": {
+        "rows": 194,
+        "positive": 60,
+        "negative": 134,
+        "p_win": 0.3102564103
+      }
+    },
+    "by_account_direction": {
+      "1025742|LONG": {
+        "rows": 79,
+        "positive": 21,
+        "negative": 58,
+        "p_win": 0.26875
+      },
+      "1025742|SHORT": {
+        "rows": 128,
+        "positive": 28,
+        "negative": 100,
+        "p_win": 0.2209302326
+      },
+      "1033030|LONG": {
+        "rows": 50,
+        "positive": 20,
+        "negative": 30,
+        "p_win": 0.4019607843
+      },
+      "1033030|SHORT": {
+        "rows": 44,
+        "positive": 23,
+        "negative": 21,
+        "p_win": 0.5222222222
+      },
+      "1033669|LONG": {
+        "rows": 26,
+        "positive": 9,
+        "negative": 17,
+        "p_win": 0.3518518519
+      },
+      "1033669|SHORT": {
+        "rows": 22,
+        "positive": 9,
+        "negative": 13,
+        "p_win": 0.4130434783
+      }
+    },
+    "by_regime": {
+      "FALLING": {
+        "rows": 349,
+        "positive": 110,
+        "negative": 239,
+        "p_win": 0.3157142857
+      }
+    },
+    "by_session": {
+      "Afternoon 12:00-15:59": {
+        "rows": 72,
+        "positive": 32,
+        "negative": 40,
+        "p_win": 0.4452054795
+      },
+      "Evening 16:00-19:59": {
+        "rows": 60,
+        "positive": 19,
+        "negative": 41,
+        "p_win": 0.3196721311
+      },
+      "Morning 06:00-11:59": {
+        "rows": 87,
+        "positive": 31,
+        "negative": 56,
+        "p_win": 0.3579545455
+      },
+      "Night 20:00-05:59": {
+        "rows": 130,
+        "positive": 28,
+        "negative": 102,
+        "p_win": 0.2175572519
+      }
+    }
+  },
+  "official_gate_snapshot": {
+    "readiness_status": "NO_GO",
+    "c01_status": "PIPELINE_ONLY",
+    "official_gate_blockers": [
+      "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
+      "market_setup_groups observed 223 required >=300",
+      "active_weeks observed 3.37 required >=8",
+      "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
+      "feature_budget observed 0 required >=6",
+      "slippage_readiness observed INSUFFICIENT required ADEQUATE",
+      "C01 supervised_training_allowed=false: global_feature_budget=0 is below the contract minimum of 5"
+    ]
+  },
+  "action_policy": {
+    "preview_action": "ABSTAIN",
+    "reason": "EXPLORATORY_REHEARSAL_NOT_AUTHORIZED_FOR_DEMO",
+    "broker_action_authorized": false
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "shadow_only": true,
+    "research_only": true,
+    "mt5_connection_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "official_model_artifact_written": false,
+    "broker_action_authorized": false
+  }
+}

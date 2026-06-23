@@ -1,0 +1,75 @@
+{
+  "status": "NO_GO",
+  "stage": "C03-READINESS",
+  "created_at_utc": "2026-06-22T07:53:28Z",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "authorization": {
+    "training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "source_scope": {
+    "source_counts": {},
+    "non_live_source_present": false,
+    "non_live_source_counts": {},
+    "gate_counts_source": "aggregate"
+  },
+  "checks": [
+    {
+      "gate": "dataset_status",
+      "passed": false,
+      "observed": "PIPELINE_ONLY",
+      "required": "EXPLORATORY_MODEL or higher"
+    },
+    {
+      "gate": "market_setup_groups",
+      "passed": false,
+      "observed": "223",
+      "required": ">=300"
+    },
+    {
+      "gate": "minority_labels",
+      "passed": true,
+      "observed": "172",
+      "required": ">=90"
+    },
+    {
+      "gate": "active_weeks",
+      "passed": false,
+      "observed": "3.37",
+      "required": ">=8"
+    },
+    {
+      "gate": "both_directions",
+      "passed": true,
+      "observed": "LONG,SHORT",
+      "required": "LONG and SHORT"
+    },
+    {
+      "gate": "at_least_two_regimes",
+      "passed": false,
+      "observed": "FALLING",
+      "required": ">=2 non-UNKNOWN regimes"
+    },
+    {
+      "gate": "feature_budget",
+      "passed": false,
+      "observed": "0",
+      "required": ">=6"
+    },
+    {
+      "gate": "slippage_readiness",
+      "passed": false,
+      "observed": "INSUFFICIENT",
+      "required": "ADEQUATE"
+    },
+    {
+      "gate": "leakage",
+      "passed": true,
+      "observed": "0",
+      "required": "0"
+    }
+  ],
+  "next_allowed_stage": "continue evidence collection and rerun C02/C03 after more signals/fills"
+}

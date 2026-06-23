@@ -1,0 +1,2977 @@
+{
+  "status": "NOT_READY",
+  "stage": "C08-LIVE-REFRESH",
+  "created_at_utc": "2026-06-22T01:33:02Z",
+  "schema_version": "a3_ml_live_refresh_status_v1",
+  "mode": "EXECUTE_LIVE_READONLY",
+  "requested_start_utc": "2026-06-01T00:00:00Z",
+  "max_tick_days": null,
+  "publish_requested": false,
+  "steps": [
+    {
+      "step": "C02-01 account verification",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_ACCOUNT_VERIFICATION_MATRIX.json",
+      "detail": "report_status=PASS"
+    },
+    {
+      "step": "C02-02 bars/ticks export",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_BAR_TICK_EXPORT_REPORT.json",
+      "detail": "report_status=PASS"
+    },
+    {
+      "step": "C02-03 history/log snapshot",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_HISTORY_LOG_SNAPSHOT_REPORT.json",
+      "detail": "report_status=PASS"
+    },
+    {
+      "step": "C07 offline readiness pipeline",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_PIPELINE_RUN_STATUS.json",
+      "detail": "report_status=NOT_READY"
+    }
+  ],
+  "summary": {
+    "c02_account_verification": {
+      "status": "PASS",
+      "stage": "C02-01",
+      "created_at_utc": "2026-06-22T01:23:09Z",
+      "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+      "boundary": {
+        "mt5_connection_attempted": true,
+        "data_exported": false,
+        "model_training_authorized": false,
+        "broker_action_authorized": false,
+        "terminal_runtime_change_authorized": false,
+        "worker_process_isolation": true
+      },
+      "accounts_requested": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "account_records": [
+        {
+          "account_label": "A1",
+          "account_scope": "1025742",
+          "expected_login": "1025742",
+          "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+          "portable": false,
+          "role": "standard_experimental_demo",
+          "symbol": "XAUUSD",
+          "status": "PASS",
+          "code": "ACCOUNT_VERIFICATION_PASS",
+          "detail": "account, terminal, symbol, and runtime audit verified",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "terminal_exe='C:/Program Files/MetaTrader 5/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "matching_pids=21672"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "matching_pids=21672"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "warnings": [],
+          "terminal_process_pids_before": [
+            21672
+          ],
+          "terminal_process_pids_after_initialize": [
+            21672
+          ],
+          "terminal_process_pids_after_shutdown": [],
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": false,
+          "broker_action_authorized": false,
+          "model_training_authorized": false,
+          "runtime_audit": {
+            "before_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            },
+            "after_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            }
+          },
+          "metadata": {
+            "mt5_package_version": [
+              500,
+              5833,
+              "25 Apr 2026"
+            ],
+            "account": {
+              "login": 1025742,
+              "server": "Capital.ComMena-Demo",
+              "trade_mode": 0,
+              "currency": "AED",
+              "leverage": 100,
+              "margin_mode": 2,
+              "company": "Capital Com Mena Securities Trading L.L.C"
+            },
+            "terminal": {
+              "path": "C:\\Program Files\\MetaTrader 5",
+              "data_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+              "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
+              "connected": true,
+              "build": 5833,
+              "maxbars": 100000000,
+              "trade_allowed": true
+            },
+            "symbol": {
+              "name": "XAUUSD",
+              "visible": true,
+              "point": 0.01,
+              "digits": 2,
+              "trade_tick_size": 0.01,
+              "trade_tick_value": 3.6715,
+              "trade_contract_size": 100.0,
+              "trade_stops_level": 0,
+              "trade_freeze_level": 0,
+              "volume_min": 0.01,
+              "volume_step": 0.01
+            }
+          }
+        },
+        {
+          "account_label": "A2",
+          "account_scope": "1033030",
+          "expected_login": "1033030",
+          "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+          "portable": true,
+          "role": "tier1_breakout_only",
+          "symbol": "XAUUSD",
+          "status": "PASS",
+          "code": "ACCOUNT_VERIFICATION_PASS",
+          "detail": "account, terminal, symbol, and runtime audit verified",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "terminal_exe='C:/MT5PortableTier1BestEA/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "matching_pids=25260"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "matching_pids=25260"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "warnings": [],
+          "terminal_process_pids_before": [
+            25260
+          ],
+          "terminal_process_pids_after_initialize": [
+            25260
+          ],
+          "terminal_process_pids_after_shutdown": [],
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": false,
+          "broker_action_authorized": false,
+          "model_training_authorized": false,
+          "runtime_audit": {
+            "before_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            },
+            "after_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            }
+          },
+          "metadata": {
+            "mt5_package_version": [
+              500,
+              5833,
+              "25 Apr 2026"
+            ],
+            "account": {
+              "login": 1033030,
+              "server": "Capital.ComMena-Demo",
+              "trade_mode": 0,
+              "currency": "AED",
+              "leverage": 100,
+              "margin_mode": 2,
+              "company": "Capital Com Mena Securities Trading L.L.C"
+            },
+            "terminal": {
+              "path": "C:\\MT5PortableTier1BestEA",
+              "data_path": "C:\\MT5PortableTier1BestEA",
+              "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
+              "connected": true,
+              "build": 5833,
+              "maxbars": 100000000,
+              "trade_allowed": true
+            },
+            "symbol": {
+              "name": "XAUUSD",
+              "visible": true,
+              "point": 0.01,
+              "digits": 2,
+              "trade_tick_size": 0.01,
+              "trade_tick_value": 3.6715,
+              "trade_contract_size": 100.0,
+              "trade_stops_level": 0,
+              "trade_freeze_level": 0,
+              "volume_min": 0.01,
+              "volume_step": 0.01
+            }
+          }
+        },
+        {
+          "account_label": "A3",
+          "account_scope": "1033669",
+          "expected_login": "1033669",
+          "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+          "portable": true,
+          "role": "paused_repair_lane",
+          "symbol": "XAUUSD",
+          "status": "PASS",
+          "code": "ACCOUNT_VERIFICATION_PASS",
+          "detail": "account, terminal, symbol, and runtime audit verified",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "terminal_exe='C:/MT5PortableRepairLane/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "matching_pids=22768"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "matching_pids=22768"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "warnings": [],
+          "terminal_process_pids_before": [
+            22768
+          ],
+          "terminal_process_pids_after_initialize": [
+            22768
+          ],
+          "terminal_process_pids_after_shutdown": [],
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": false,
+          "broker_action_authorized": false,
+          "model_training_authorized": false,
+          "runtime_audit": {
+            "before_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            },
+            "after_identity": {
+              "position_tickets": {
+                "available": true,
+                "tickets": []
+              },
+              "pending_order_tickets": {
+                "available": true,
+                "tickets": []
+              }
+            }
+          },
+          "metadata": {
+            "mt5_package_version": [
+              500,
+              5833,
+              "25 Apr 2026"
+            ],
+            "account": {
+              "login": 1033669,
+              "server": "Capital.ComMena-Demo",
+              "trade_mode": 0,
+              "currency": "AED",
+              "leverage": 100,
+              "margin_mode": 2,
+              "company": "Capital Com Mena Securities Trading L.L.C"
+            },
+            "terminal": {
+              "path": "C:\\MT5PortableRepairLane",
+              "data_path": "C:\\MT5PortableRepairLane",
+              "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
+              "connected": true,
+              "build": 5833,
+              "maxbars": 100000000,
+              "trade_allowed": true
+            },
+            "symbol": {
+              "name": "XAUUSD",
+              "visible": true,
+              "point": 0.01,
+              "digits": 2,
+              "trade_tick_size": 0.01,
+              "trade_tick_value": 3.6715,
+              "trade_contract_size": 100.0,
+              "trade_stops_level": 0,
+              "trade_freeze_level": 0,
+              "volume_min": 0.01,
+              "volume_step": 0.01
+            }
+          }
+        }
+      ],
+      "next_allowed_stage": "C02-02 bars/ticks export only if every account record is PASS"
+    },
+    "c02_bar_tick_export": {
+      "status": "PASS",
+      "stage": "C02-02",
+      "created_at_utc": "2026-06-22T01:29:13Z",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "requested_start_utc": "2026-06-01T00:00:00Z",
+      "snapshot_cutoff_utc": "2026-06-22T01:18:00Z",
+      "output_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "root_manifest": {
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\ROOT_BAR_TICK_EXPORT_MANIFEST.json",
+        "relative_path": "ROOT_BAR_TICK_EXPORT_MANIFEST.json",
+        "bytes": 85701,
+        "sha256": "2dbaa53711b8c40ef9cbe8941cf357208c8b153ad41ac21de9e79a9024f863be",
+        "row_count": null
+      },
+      "boundary": {
+        "data_exported": true,
+        "model_training_authorized": false,
+        "broker_action_authorized": false,
+        "terminal_runtime_change_authorized": false,
+        "worker_process_isolation": true,
+        "exported_sources": [
+          "bars",
+          "ticks",
+          "mt5_metadata"
+        ]
+      },
+      "account_records": [
+        {
+          "account_label": "A1",
+          "account_scope": "1025742",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "status": "PASS",
+          "code": "BAR_TICK_EXPORT_PASS",
+          "detail": "bars and tick chunks exported read-only",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "terminal_exe='C:/Program Files/MetaTrader 5/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "matching_pids=21672"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "matching_pids=21672"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "files": [
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\metadata\\mt5_metadata.json",
+              "relative_path": "mt5_metadata.json",
+              "bytes": 814,
+              "sha256": "003bf7c9abc8705bfc669f5f1a1ef4a9e00b02250696eea2c0c462283b464fb0",
+              "row_count": null
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\bars\\XAUUSD_M5.csv",
+              "relative_path": "XAUUSD_M5.csv",
+              "bytes": 654986,
+              "sha256": "2a81e04161145aeed181ce51a4727bcd740639e443eb7b7d6ca11fbfdf9ff9e4",
+              "row_count": 4108
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\bars\\XAUUSD_M15.csv",
+              "relative_path": "XAUUSD_M15.csv",
+              "bytes": 220279,
+              "sha256": "571f8cdefa5d9b4fe7a72e1baa51963e2e6bb9dee53ef4f3924f4470e40f0dbb",
+              "row_count": 1370
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\bars\\XAUUSD_H1.csv",
+              "relative_path": "XAUUSD_H1.csv",
+              "bytes": 55186,
+              "sha256": "5627350a423ac4d82d6cfaa5eb1d3afea290eb0e9ef6210d22ad1834c2d596b4",
+              "row_count": 343
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\bars\\XAUUSD_H4.csv",
+              "relative_path": "XAUUSD_H4.csv",
+              "bytes": 15085,
+              "sha256": "9d6584d0e2ff8b8d56e35c1de1fa884f757c7850a79165fb1c600a0ebde39941",
+              "row_count": 93
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\bars\\XAUUSD_D1.csv",
+              "relative_path": "XAUUSD_D1.csv",
+              "bytes": 3202,
+              "sha256": "e4b659c5da9770818910463c26964100382018ca3ce9477d989d7f9d09c5f369",
+              "row_count": 19
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260601.csv",
+              "relative_path": "XAUUSD_ticks_20260601.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260602.csv",
+              "relative_path": "XAUUSD_ticks_20260602.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260603.csv",
+              "relative_path": "XAUUSD_ticks_20260603.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260604.csv",
+              "relative_path": "XAUUSD_ticks_20260604.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260605.csv",
+              "relative_path": "XAUUSD_ticks_20260605.csv",
+              "bytes": 73622535,
+              "sha256": "15549641d32c53449e025071f2a2f0e91a97fcd4b786c99d40c279ad89f4f737",
+              "row_count": 500747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260606.csv",
+              "relative_path": "XAUUSD_ticks_20260606.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260607.csv",
+              "relative_path": "XAUUSD_ticks_20260607.csv",
+              "bytes": 5538925,
+              "sha256": "d4157b7581b03b74cb3b9e20cff9233bd28bcf54116f7e7b518874796ba619cc",
+              "row_count": 37469
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260608.csv",
+              "relative_path": "XAUUSD_ticks_20260608.csv",
+              "bytes": 75992567,
+              "sha256": "bc798554be3c6c81c06005f9cd03abc543cac51ea152233860e1c234e84960d5",
+              "row_count": 516865
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260609.csv",
+              "relative_path": "XAUUSD_ticks_20260609.csv",
+              "bytes": 75734002,
+              "sha256": "46040d8dd02dda6211d43206914369429b80cae4e796130149779c92ea55d1b9",
+              "row_count": 515016
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260610.csv",
+              "relative_path": "XAUUSD_ticks_20260610.csv",
+              "bytes": 101326308,
+              "sha256": "4b19f7dc81b7bc75febd68e4bf2658b40784ed54d7c77ef46c5b31a6a829a37e",
+              "row_count": 689125
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260611.csv",
+              "relative_path": "XAUUSD_ticks_20260611.csv",
+              "bytes": 103639528,
+              "sha256": "c245408c2c4104f424d814c8a8d1ee8e387909d5f2189c3a30869ca59e8c7e31",
+              "row_count": 704375
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260612.csv",
+              "relative_path": "XAUUSD_ticks_20260612.csv",
+              "bytes": 73553631,
+              "sha256": "9c7300eb34c056541c8a612524e7eeacbf3073ade3504a3fd62adef2ad837b7f",
+              "row_count": 500386
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260613.csv",
+              "relative_path": "XAUUSD_ticks_20260613.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260614.csv",
+              "relative_path": "XAUUSD_ticks_20260614.csv",
+              "bytes": 4257282,
+              "sha256": "a179318d1ee24d394ce5cbfb650b2c18543882f84dfd9c49ddf6adab75ec9659",
+              "row_count": 28834
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260615.csv",
+              "relative_path": "XAUUSD_ticks_20260615.csv",
+              "bytes": 54871921,
+              "sha256": "1505cd7072303a6d6c521021090449a9cd838fab8ce1ddaf2b220a3899ac2f60",
+              "row_count": 373192
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260616.csv",
+              "relative_path": "XAUUSD_ticks_20260616.csv",
+              "bytes": 49692692,
+              "sha256": "3ae3a433609bb54443a534adab61db0520b76e0a025c973ef7a33e4ccf0ccbe8",
+              "row_count": 338000
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260617.csv",
+              "relative_path": "XAUUSD_ticks_20260617.csv",
+              "bytes": 72710062,
+              "sha256": "fbeeb177354657d88fbcdd99929d31c8f7f60ce5fe0b79ae233be24002cf4391",
+              "row_count": 494440
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260618.csv",
+              "relative_path": "XAUUSD_ticks_20260618.csv",
+              "bytes": 67529005,
+              "sha256": "3b064772ea22018043452b1ac2d93c4d1a89dd697ead18366f6b39ea37c6d9eb",
+              "row_count": 459274
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260619.csv",
+              "relative_path": "XAUUSD_ticks_20260619.csv",
+              "bytes": 41340860,
+              "sha256": "92493e09eb4ba79d71154cd870897bdafbf0b130859ca7648e6fd94f4346589a",
+              "row_count": 281155
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260620.csv",
+              "relative_path": "XAUUSD_ticks_20260620.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260621.csv",
+              "relative_path": "XAUUSD_ticks_20260621.csv",
+              "bytes": 4095761,
+              "sha256": "478bb2e434b54f5cba519a7606633c8ec051472d6b8a40e98c9908d4c5437e97",
+              "row_count": 28072
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260622.csv",
+              "relative_path": "XAUUSD_ticks_20260622.csv",
+              "bytes": 5765070,
+              "sha256": "dc4f87b8df1a828924ce94817cd7e00682d60acc38e7918669d1f0beabc73861",
+              "row_count": 39747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\manifest\\BAR_TICK_MANIFEST.json",
+              "relative_path": "BAR_TICK_MANIFEST.json",
+              "bytes": 25023,
+              "sha256": "9af46e39826fbf4efe447138c68f92a92032b12925f62f07dc6b16f2e3a5aef3",
+              "row_count": null
+            }
+          ],
+          "coverage": {
+            "bars": {
+              "M5": {
+                "row_count": 4108,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "M15": {
+                "row_count": 1370,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H1": {
+                "row_count": 343,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H4": {
+                "row_count": 93,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "D1": {
+                "row_count": 19,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              }
+            },
+            "ticks": {
+              "chunks": [
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-01T00:00:00Z",
+                  "chunk_end_utc": "2026-06-02T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260601.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-02T00:00:00Z",
+                  "chunk_end_utc": "2026-06-03T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260602.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-03T00:00:00Z",
+                  "chunk_end_utc": "2026-06-04T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260603.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-04T00:00:00Z",
+                  "chunk_end_utc": "2026-06-05T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260604.csv"
+                },
+                {
+                  "row_count": 500747,
+                  "min_time_utc": "2026-06-05T00:00:00Z",
+                  "max_time_utc": "2026-06-05T20:58:57Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-05T00:00:00Z",
+                  "chunk_end_utc": "2026-06-06T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260605.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-06T00:00:00Z",
+                  "chunk_end_utc": "2026-06-07T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260606.csv"
+                },
+                {
+                  "row_count": 37469,
+                  "min_time_utc": "2026-06-07T22:00:00Z",
+                  "max_time_utc": "2026-06-07T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-07T00:00:00Z",
+                  "chunk_end_utc": "2026-06-08T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260607.csv"
+                },
+                {
+                  "row_count": 516865,
+                  "min_time_utc": "2026-06-08T00:00:00Z",
+                  "max_time_utc": "2026-06-08T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-08T00:00:00Z",
+                  "chunk_end_utc": "2026-06-09T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260608.csv"
+                },
+                {
+                  "row_count": 515016,
+                  "min_time_utc": "2026-06-09T00:00:00Z",
+                  "max_time_utc": "2026-06-09T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-09T00:00:00Z",
+                  "chunk_end_utc": "2026-06-10T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260609.csv"
+                },
+                {
+                  "row_count": 689125,
+                  "min_time_utc": "2026-06-10T00:00:00Z",
+                  "max_time_utc": "2026-06-10T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-10T00:00:00Z",
+                  "chunk_end_utc": "2026-06-11T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260610.csv"
+                },
+                {
+                  "row_count": 704375,
+                  "min_time_utc": "2026-06-11T00:00:00Z",
+                  "max_time_utc": "2026-06-11T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-11T00:00:00Z",
+                  "chunk_end_utc": "2026-06-12T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260611.csv"
+                },
+                {
+                  "row_count": 500386,
+                  "min_time_utc": "2026-06-12T00:00:00Z",
+                  "max_time_utc": "2026-06-12T20:58:56Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-12T00:00:00Z",
+                  "chunk_end_utc": "2026-06-13T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260612.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-13T00:00:00Z",
+                  "chunk_end_utc": "2026-06-14T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260613.csv"
+                },
+                {
+                  "row_count": 28834,
+                  "min_time_utc": "2026-06-14T22:00:24Z",
+                  "max_time_utc": "2026-06-14T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-14T00:00:00Z",
+                  "chunk_end_utc": "2026-06-15T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260614.csv"
+                },
+                {
+                  "row_count": 373192,
+                  "min_time_utc": "2026-06-15T00:00:00Z",
+                  "max_time_utc": "2026-06-15T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-15T00:00:00Z",
+                  "chunk_end_utc": "2026-06-16T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260615.csv"
+                },
+                {
+                  "row_count": 338000,
+                  "min_time_utc": "2026-06-16T00:00:00Z",
+                  "max_time_utc": "2026-06-16T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-16T00:00:00Z",
+                  "chunk_end_utc": "2026-06-17T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260616.csv"
+                },
+                {
+                  "row_count": 494440,
+                  "min_time_utc": "2026-06-17T00:00:00Z",
+                  "max_time_utc": "2026-06-17T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-17T00:00:00Z",
+                  "chunk_end_utc": "2026-06-18T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260617.csv"
+                },
+                {
+                  "row_count": 459274,
+                  "min_time_utc": "2026-06-18T00:00:00Z",
+                  "max_time_utc": "2026-06-18T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-18T00:00:00Z",
+                  "chunk_end_utc": "2026-06-19T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260618.csv"
+                },
+                {
+                  "row_count": 281155,
+                  "min_time_utc": "2026-06-19T00:00:00Z",
+                  "max_time_utc": "2026-06-19T16:59:58Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-19T00:00:00Z",
+                  "chunk_end_utc": "2026-06-20T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260619.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-20T00:00:00Z",
+                  "chunk_end_utc": "2026-06-21T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260620.csv"
+                },
+                {
+                  "row_count": 28072,
+                  "min_time_utc": "2026-06-21T22:00:00Z",
+                  "max_time_utc": "2026-06-21T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-21T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260621.csv"
+                },
+                {
+                  "row_count": 39747,
+                  "min_time_utc": "2026-06-22T00:00:00Z",
+                  "max_time_utc": "2026-06-22T01:17:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-22T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T01:18:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1\\ticks\\XAUUSD_ticks_20260622.csv"
+                }
+              ]
+            }
+          },
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": true,
+          "model_training_authorized": false,
+          "broker_action_authorized": false,
+          "output_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A1"
+        },
+        {
+          "account_label": "A2",
+          "account_scope": "1033030",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "status": "PASS",
+          "code": "BAR_TICK_EXPORT_PASS",
+          "detail": "bars and tick chunks exported read-only",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "terminal_exe='C:/MT5PortableTier1BestEA/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "matching_pids=25260"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "matching_pids=25260"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "files": [
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\metadata\\mt5_metadata.json",
+              "relative_path": "mt5_metadata.json",
+              "bytes": 730,
+              "sha256": "92595676c6a187148c8088ab2d0bd1d99a2c10bb8bb384d1f356fe9dc38ddaa7",
+              "row_count": null
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\bars\\XAUUSD_M5.csv",
+              "relative_path": "XAUUSD_M5.csv",
+              "bytes": 654986,
+              "sha256": "5e98b228c49dae5ef83f4bb32f77a5966771794673fa891a60c1bf0693702cf6",
+              "row_count": 4108
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\bars\\XAUUSD_M15.csv",
+              "relative_path": "XAUUSD_M15.csv",
+              "bytes": 220279,
+              "sha256": "68473118ac890d8f4b8c6a549276240d5313995e4543ead18027ee0aaba44e42",
+              "row_count": 1370
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\bars\\XAUUSD_H1.csv",
+              "relative_path": "XAUUSD_H1.csv",
+              "bytes": 55186,
+              "sha256": "19abb153cbf685d7621125357b52855a98b339ddf347a9dac9d4b42a1a6534a2",
+              "row_count": 343
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\bars\\XAUUSD_H4.csv",
+              "relative_path": "XAUUSD_H4.csv",
+              "bytes": 15085,
+              "sha256": "fb18eac1e649ce5b007f0ad810ca3eca7eded954a41dfe092a42c88249b062eb",
+              "row_count": 93
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\bars\\XAUUSD_D1.csv",
+              "relative_path": "XAUUSD_D1.csv",
+              "bytes": 3202,
+              "sha256": "e10a05dcb5f1aa992a685c20f48ad51ded27f4278c207c404d3ae32fc3a72a55",
+              "row_count": 19
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260601.csv",
+              "relative_path": "XAUUSD_ticks_20260601.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260602.csv",
+              "relative_path": "XAUUSD_ticks_20260602.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260603.csv",
+              "relative_path": "XAUUSD_ticks_20260603.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260604.csv",
+              "relative_path": "XAUUSD_ticks_20260604.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260605.csv",
+              "relative_path": "XAUUSD_ticks_20260605.csv",
+              "bytes": 73622535,
+              "sha256": "fd51aa8d6dd8b76436d8b8e89061774a98582d6129d45059f23e0ca7f0b6512e",
+              "row_count": 500747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260606.csv",
+              "relative_path": "XAUUSD_ticks_20260606.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260607.csv",
+              "relative_path": "XAUUSD_ticks_20260607.csv",
+              "bytes": 5538925,
+              "sha256": "6f4a16f26b6e41c1931cec597ba55655c48b24a3dc9cbe47080d395e0404ed5f",
+              "row_count": 37469
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260608.csv",
+              "relative_path": "XAUUSD_ticks_20260608.csv",
+              "bytes": 75992567,
+              "sha256": "58fb1af4dd101bc3050f8bd22f2b209739863d3fb1741adcb095e0965c6ef772",
+              "row_count": 516865
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260609.csv",
+              "relative_path": "XAUUSD_ticks_20260609.csv",
+              "bytes": 75734002,
+              "sha256": "33247c5ad2b98a73f7cf35c92ace14957ba42aad2a26f4ddd5b4cfee8327dab6",
+              "row_count": 515016
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260610.csv",
+              "relative_path": "XAUUSD_ticks_20260610.csv",
+              "bytes": 101326308,
+              "sha256": "b4713bc3ed496a415399a3738c443c8ed161dabc9be04d238e0508b8c9c64449",
+              "row_count": 689125
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260611.csv",
+              "relative_path": "XAUUSD_ticks_20260611.csv",
+              "bytes": 103639528,
+              "sha256": "14c4b357b10cd6d2d13d0db22e8d6fed986cfbff56e5c5c93f585556dd272c1f",
+              "row_count": 704375
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260612.csv",
+              "relative_path": "XAUUSD_ticks_20260612.csv",
+              "bytes": 73553631,
+              "sha256": "5d1d7fd6fd5678069fd488760ffa89771fa77bd271184e7c62d62b6e031d6d2f",
+              "row_count": 500386
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260613.csv",
+              "relative_path": "XAUUSD_ticks_20260613.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260614.csv",
+              "relative_path": "XAUUSD_ticks_20260614.csv",
+              "bytes": 4257282,
+              "sha256": "19fea45579d93a124fe54279b3653fa8482e19c5e3c2a82cae28d134168f826e",
+              "row_count": 28834
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260615.csv",
+              "relative_path": "XAUUSD_ticks_20260615.csv",
+              "bytes": 54871921,
+              "sha256": "6168233733ed2b3d04cfcb3946dfedb311886a26662ce24c476f279d1f4868df",
+              "row_count": 373192
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260616.csv",
+              "relative_path": "XAUUSD_ticks_20260616.csv",
+              "bytes": 49692692,
+              "sha256": "3136da9ca7e2d8ef7dd27d9fe4a25a2e387a3970997e1dc80cbb15165ba4c37d",
+              "row_count": 338000
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260617.csv",
+              "relative_path": "XAUUSD_ticks_20260617.csv",
+              "bytes": 72710062,
+              "sha256": "9570ee17cdc676ad1326c3cb104e5a239b8621298feb9a3746f542e0b3f1f043",
+              "row_count": 494440
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260618.csv",
+              "relative_path": "XAUUSD_ticks_20260618.csv",
+              "bytes": 67529005,
+              "sha256": "ba014fd743956d3b9fe17656b7e7aa2a7f54b84bc8b4a37181fea1c20a1270d8",
+              "row_count": 459274
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260619.csv",
+              "relative_path": "XAUUSD_ticks_20260619.csv",
+              "bytes": 41340860,
+              "sha256": "fe4bfc1e4e17be377a01ae0b539049424e2808c609436885b5a2205f33a9f539",
+              "row_count": 281155
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260620.csv",
+              "relative_path": "XAUUSD_ticks_20260620.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260621.csv",
+              "relative_path": "XAUUSD_ticks_20260621.csv",
+              "bytes": 4095761,
+              "sha256": "a873517af39ab5ae54f5f04996a0ec6a6d61d2dce5e4e75ba659d2e49ebcf58b",
+              "row_count": 28072
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260622.csv",
+              "relative_path": "XAUUSD_ticks_20260622.csv",
+              "bytes": 5765070,
+              "sha256": "83482f19ed3e4bbc0c1dd0c65234abe0a6d6b766193aad91fa4a28407935ba53",
+              "row_count": 39747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\manifest\\BAR_TICK_MANIFEST.json",
+              "relative_path": "BAR_TICK_MANIFEST.json",
+              "bytes": 25023,
+              "sha256": "78f1975d667d585392465aabe655f302bbc109f3bd807602d95da1f429e75b9a",
+              "row_count": null
+            }
+          ],
+          "coverage": {
+            "bars": {
+              "M5": {
+                "row_count": 4108,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "M15": {
+                "row_count": 1370,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H1": {
+                "row_count": 343,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H4": {
+                "row_count": 93,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "D1": {
+                "row_count": 19,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              }
+            },
+            "ticks": {
+              "chunks": [
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-01T00:00:00Z",
+                  "chunk_end_utc": "2026-06-02T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260601.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-02T00:00:00Z",
+                  "chunk_end_utc": "2026-06-03T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260602.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-03T00:00:00Z",
+                  "chunk_end_utc": "2026-06-04T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260603.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-04T00:00:00Z",
+                  "chunk_end_utc": "2026-06-05T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260604.csv"
+                },
+                {
+                  "row_count": 500747,
+                  "min_time_utc": "2026-06-05T00:00:00Z",
+                  "max_time_utc": "2026-06-05T20:58:57Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-05T00:00:00Z",
+                  "chunk_end_utc": "2026-06-06T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260605.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-06T00:00:00Z",
+                  "chunk_end_utc": "2026-06-07T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260606.csv"
+                },
+                {
+                  "row_count": 37469,
+                  "min_time_utc": "2026-06-07T22:00:00Z",
+                  "max_time_utc": "2026-06-07T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-07T00:00:00Z",
+                  "chunk_end_utc": "2026-06-08T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260607.csv"
+                },
+                {
+                  "row_count": 516865,
+                  "min_time_utc": "2026-06-08T00:00:00Z",
+                  "max_time_utc": "2026-06-08T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-08T00:00:00Z",
+                  "chunk_end_utc": "2026-06-09T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260608.csv"
+                },
+                {
+                  "row_count": 515016,
+                  "min_time_utc": "2026-06-09T00:00:00Z",
+                  "max_time_utc": "2026-06-09T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-09T00:00:00Z",
+                  "chunk_end_utc": "2026-06-10T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260609.csv"
+                },
+                {
+                  "row_count": 689125,
+                  "min_time_utc": "2026-06-10T00:00:00Z",
+                  "max_time_utc": "2026-06-10T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-10T00:00:00Z",
+                  "chunk_end_utc": "2026-06-11T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260610.csv"
+                },
+                {
+                  "row_count": 704375,
+                  "min_time_utc": "2026-06-11T00:00:00Z",
+                  "max_time_utc": "2026-06-11T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-11T00:00:00Z",
+                  "chunk_end_utc": "2026-06-12T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260611.csv"
+                },
+                {
+                  "row_count": 500386,
+                  "min_time_utc": "2026-06-12T00:00:00Z",
+                  "max_time_utc": "2026-06-12T20:58:56Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-12T00:00:00Z",
+                  "chunk_end_utc": "2026-06-13T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260612.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-13T00:00:00Z",
+                  "chunk_end_utc": "2026-06-14T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260613.csv"
+                },
+                {
+                  "row_count": 28834,
+                  "min_time_utc": "2026-06-14T22:00:24Z",
+                  "max_time_utc": "2026-06-14T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-14T00:00:00Z",
+                  "chunk_end_utc": "2026-06-15T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260614.csv"
+                },
+                {
+                  "row_count": 373192,
+                  "min_time_utc": "2026-06-15T00:00:00Z",
+                  "max_time_utc": "2026-06-15T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-15T00:00:00Z",
+                  "chunk_end_utc": "2026-06-16T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260615.csv"
+                },
+                {
+                  "row_count": 338000,
+                  "min_time_utc": "2026-06-16T00:00:00Z",
+                  "max_time_utc": "2026-06-16T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-16T00:00:00Z",
+                  "chunk_end_utc": "2026-06-17T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260616.csv"
+                },
+                {
+                  "row_count": 494440,
+                  "min_time_utc": "2026-06-17T00:00:00Z",
+                  "max_time_utc": "2026-06-17T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-17T00:00:00Z",
+                  "chunk_end_utc": "2026-06-18T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260617.csv"
+                },
+                {
+                  "row_count": 459274,
+                  "min_time_utc": "2026-06-18T00:00:00Z",
+                  "max_time_utc": "2026-06-18T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-18T00:00:00Z",
+                  "chunk_end_utc": "2026-06-19T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260618.csv"
+                },
+                {
+                  "row_count": 281155,
+                  "min_time_utc": "2026-06-19T00:00:00Z",
+                  "max_time_utc": "2026-06-19T16:59:58Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-19T00:00:00Z",
+                  "chunk_end_utc": "2026-06-20T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260619.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-20T00:00:00Z",
+                  "chunk_end_utc": "2026-06-21T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260620.csv"
+                },
+                {
+                  "row_count": 28072,
+                  "min_time_utc": "2026-06-21T22:00:00Z",
+                  "max_time_utc": "2026-06-21T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-21T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260621.csv"
+                },
+                {
+                  "row_count": 39747,
+                  "min_time_utc": "2026-06-22T00:00:00Z",
+                  "max_time_utc": "2026-06-22T01:17:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-22T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T01:18:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2\\ticks\\XAUUSD_ticks_20260622.csv"
+                }
+              ]
+            }
+          },
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": true,
+          "model_training_authorized": false,
+          "broker_action_authorized": false,
+          "output_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A2"
+        },
+        {
+          "account_label": "A3",
+          "account_scope": "1033669",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "status": "PASS",
+          "code": "BAR_TICK_EXPORT_PASS",
+          "detail": "bars and tick chunks exported read-only",
+          "checks": [
+            {
+              "status": "PASS",
+              "code": "TERMINAL_EXECUTABLE_EXISTS",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "terminal_exe='C:/MT5PortableRepairLane/terminal64.exe'"
+            },
+            {
+              "status": "PASS",
+              "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "matching_pids=22768"
+            },
+            {
+              "status": "PASS",
+              "code": "NO_NEW_TERMINAL_PROCESS",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "matching_pids=22768"
+            },
+            {
+              "status": "PASS",
+              "code": "ACCOUNT_TERMINAL_SYMBOL_VERIFIED",
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "detail": "read-only identity checks passed"
+            }
+          ],
+          "files": [
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\metadata\\mt5_metadata.json",
+              "relative_path": "mt5_metadata.json",
+              "bytes": 728,
+              "sha256": "abae14f5abf095cd3830e836060d43b99b29da76901112d577b21c0bc1e737b4",
+              "row_count": null
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\bars\\XAUUSD_M5.csv",
+              "relative_path": "XAUUSD_M5.csv",
+              "bytes": 654986,
+              "sha256": "a7ddfc5b1050db9e4a929bfb370a303066080b1377bb2e4899ae9b714933f496",
+              "row_count": 4108
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\bars\\XAUUSD_M15.csv",
+              "relative_path": "XAUUSD_M15.csv",
+              "bytes": 220279,
+              "sha256": "17361eb310bb8631527b1a11e742103de723c650db6d7155841c534989bc1b0f",
+              "row_count": 1370
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\bars\\XAUUSD_H1.csv",
+              "relative_path": "XAUUSD_H1.csv",
+              "bytes": 55186,
+              "sha256": "fe2beb1734d31beafcae0a0542da73a567cee0ff006478eb451b70b09f8d263a",
+              "row_count": 343
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\bars\\XAUUSD_H4.csv",
+              "relative_path": "XAUUSD_H4.csv",
+              "bytes": 15085,
+              "sha256": "90c34767a0cd0211ec4ea5de708820b2416fda599a6440518671e8e1be6f6736",
+              "row_count": 93
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\bars\\XAUUSD_D1.csv",
+              "relative_path": "XAUUSD_D1.csv",
+              "bytes": 3202,
+              "sha256": "130dde31304f82737ab22248e5cccce7e78e95ac29719e9bfb9221f05691c2af",
+              "row_count": 19
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260601.csv",
+              "relative_path": "XAUUSD_ticks_20260601.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260602.csv",
+              "relative_path": "XAUUSD_ticks_20260602.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260603.csv",
+              "relative_path": "XAUUSD_ticks_20260603.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260604.csv",
+              "relative_path": "XAUUSD_ticks_20260604.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260605.csv",
+              "relative_path": "XAUUSD_ticks_20260605.csv",
+              "bytes": 73622535,
+              "sha256": "97aa0f89076b80ac57d7495c729243d092e09368054c9120633950b2a2d8dd1e",
+              "row_count": 500747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260606.csv",
+              "relative_path": "XAUUSD_ticks_20260606.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260607.csv",
+              "relative_path": "XAUUSD_ticks_20260607.csv",
+              "bytes": 5538925,
+              "sha256": "cb4daecbf399728f08e8ae1ab8ca551e8bea9498c83701b08e63388814d6964d",
+              "row_count": 37469
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260608.csv",
+              "relative_path": "XAUUSD_ticks_20260608.csv",
+              "bytes": 75992567,
+              "sha256": "79818426ad048c528e9bf34f87b36e71fe5534cc94e131cb925a7a34a4fb4f31",
+              "row_count": 516865
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260609.csv",
+              "relative_path": "XAUUSD_ticks_20260609.csv",
+              "bytes": 75734002,
+              "sha256": "19ec202f0fc94e7b992ed0405bf6d01168377e18af94479e433c50d07bd609f2",
+              "row_count": 515016
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260610.csv",
+              "relative_path": "XAUUSD_ticks_20260610.csv",
+              "bytes": 101326308,
+              "sha256": "a55309aa3af5dad7c1ebcde75cc030c4f840a0ac2e369fc862cc9c415c39e4d3",
+              "row_count": 689125
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260611.csv",
+              "relative_path": "XAUUSD_ticks_20260611.csv",
+              "bytes": 103639528,
+              "sha256": "254570e794494aef35b146327849b904e8a6380d05978bb16e70af85028550e6",
+              "row_count": 704375
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260612.csv",
+              "relative_path": "XAUUSD_ticks_20260612.csv",
+              "bytes": 73553631,
+              "sha256": "e0e3f28bde02f484965ab78c2abe019c4294413b2954ff94d4a5776a8fdc189b",
+              "row_count": 500386
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260613.csv",
+              "relative_path": "XAUUSD_ticks_20260613.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260614.csv",
+              "relative_path": "XAUUSD_ticks_20260614.csv",
+              "bytes": 4257282,
+              "sha256": "830e6e9cb480254bdc3a2db89e275f408de335aa92d0fa02295ff39e23512ecb",
+              "row_count": 28834
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260615.csv",
+              "relative_path": "XAUUSD_ticks_20260615.csv",
+              "bytes": 54871921,
+              "sha256": "2b3c8ca63f035b7a31d51a36e8414e0ba54304b5e49672491cbe7147d1f0df97",
+              "row_count": 373192
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260616.csv",
+              "relative_path": "XAUUSD_ticks_20260616.csv",
+              "bytes": 49692692,
+              "sha256": "78f772ce83523a142cbaa6516139da5be9f9a7d55cd75597e04ab68d5ce91564",
+              "row_count": 338000
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260617.csv",
+              "relative_path": "XAUUSD_ticks_20260617.csv",
+              "bytes": 72710062,
+              "sha256": "f9451d21a5471759cd5a5a0256fa6cb5b413b175360345573af2a4e8488036f0",
+              "row_count": 494440
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260618.csv",
+              "relative_path": "XAUUSD_ticks_20260618.csv",
+              "bytes": 67529005,
+              "sha256": "10982c5813047fac43a43e3035f86a0cb69b8635cf90771453c933a21d8b5ef4",
+              "row_count": 459274
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260619.csv",
+              "relative_path": "XAUUSD_ticks_20260619.csv",
+              "bytes": 41340860,
+              "sha256": "abc1a14a90bce22d08caf20109184cdcbb39b71f732cd92122931302361c3d72",
+              "row_count": 281155
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260620.csv",
+              "relative_path": "XAUUSD_ticks_20260620.csv",
+              "bytes": 135,
+              "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022",
+              "row_count": 0
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260621.csv",
+              "relative_path": "XAUUSD_ticks_20260621.csv",
+              "bytes": 4095761,
+              "sha256": "cbf8e134c656258b3e0d7f133e197b217ba232bf0ccd7ddedf11967868fc178f",
+              "row_count": 28072
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260622.csv",
+              "relative_path": "XAUUSD_ticks_20260622.csv",
+              "bytes": 5765070,
+              "sha256": "464dcb96ddecec0aed9f8e0a0050667821bc2d4fc874fb3b73c52b37ef4042ee",
+              "row_count": 39747
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\manifest\\BAR_TICK_MANIFEST.json",
+              "relative_path": "BAR_TICK_MANIFEST.json",
+              "bytes": 25023,
+              "sha256": "10314d207700cb3877cab984f0d04cbc5099b8f5c4ae46b44d47dd9005303cef",
+              "row_count": null
+            }
+          ],
+          "coverage": {
+            "bars": {
+              "M5": {
+                "row_count": 4108,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "M15": {
+                "row_count": 1370,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:15:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H1": {
+                "row_count": 343,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T01:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "H4": {
+                "row_count": 93,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              },
+              "D1": {
+                "row_count": 19,
+                "min_time_utc": "2026-06-01T00:00:00Z",
+                "max_time_utc": "2026-06-22T00:00:00Z",
+                "coverage_status": "HAS_ROWS"
+              }
+            },
+            "ticks": {
+              "chunks": [
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-01T00:00:00Z",
+                  "chunk_end_utc": "2026-06-02T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260601.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-02T00:00:00Z",
+                  "chunk_end_utc": "2026-06-03T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260602.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-03T00:00:00Z",
+                  "chunk_end_utc": "2026-06-04T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260603.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-04T00:00:00Z",
+                  "chunk_end_utc": "2026-06-05T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260604.csv"
+                },
+                {
+                  "row_count": 500747,
+                  "min_time_utc": "2026-06-05T00:00:00Z",
+                  "max_time_utc": "2026-06-05T20:58:57Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-05T00:00:00Z",
+                  "chunk_end_utc": "2026-06-06T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260605.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-06T00:00:00Z",
+                  "chunk_end_utc": "2026-06-07T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260606.csv"
+                },
+                {
+                  "row_count": 37469,
+                  "min_time_utc": "2026-06-07T22:00:00Z",
+                  "max_time_utc": "2026-06-07T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-07T00:00:00Z",
+                  "chunk_end_utc": "2026-06-08T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260607.csv"
+                },
+                {
+                  "row_count": 516865,
+                  "min_time_utc": "2026-06-08T00:00:00Z",
+                  "max_time_utc": "2026-06-08T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-08T00:00:00Z",
+                  "chunk_end_utc": "2026-06-09T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260608.csv"
+                },
+                {
+                  "row_count": 515016,
+                  "min_time_utc": "2026-06-09T00:00:00Z",
+                  "max_time_utc": "2026-06-09T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-09T00:00:00Z",
+                  "chunk_end_utc": "2026-06-10T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260609.csv"
+                },
+                {
+                  "row_count": 689125,
+                  "min_time_utc": "2026-06-10T00:00:00Z",
+                  "max_time_utc": "2026-06-10T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-10T00:00:00Z",
+                  "chunk_end_utc": "2026-06-11T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260610.csv"
+                },
+                {
+                  "row_count": 704375,
+                  "min_time_utc": "2026-06-11T00:00:00Z",
+                  "max_time_utc": "2026-06-11T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-11T00:00:00Z",
+                  "chunk_end_utc": "2026-06-12T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260611.csv"
+                },
+                {
+                  "row_count": 500386,
+                  "min_time_utc": "2026-06-12T00:00:00Z",
+                  "max_time_utc": "2026-06-12T20:58:56Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-12T00:00:00Z",
+                  "chunk_end_utc": "2026-06-13T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260612.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-13T00:00:00Z",
+                  "chunk_end_utc": "2026-06-14T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260613.csv"
+                },
+                {
+                  "row_count": 28834,
+                  "min_time_utc": "2026-06-14T22:00:24Z",
+                  "max_time_utc": "2026-06-14T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-14T00:00:00Z",
+                  "chunk_end_utc": "2026-06-15T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260614.csv"
+                },
+                {
+                  "row_count": 373192,
+                  "min_time_utc": "2026-06-15T00:00:00Z",
+                  "max_time_utc": "2026-06-15T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-15T00:00:00Z",
+                  "chunk_end_utc": "2026-06-16T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260615.csv"
+                },
+                {
+                  "row_count": 338000,
+                  "min_time_utc": "2026-06-16T00:00:00Z",
+                  "max_time_utc": "2026-06-16T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-16T00:00:00Z",
+                  "chunk_end_utc": "2026-06-17T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260616.csv"
+                },
+                {
+                  "row_count": 494440,
+                  "min_time_utc": "2026-06-17T00:00:00Z",
+                  "max_time_utc": "2026-06-17T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-17T00:00:00Z",
+                  "chunk_end_utc": "2026-06-18T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260617.csv"
+                },
+                {
+                  "row_count": 459274,
+                  "min_time_utc": "2026-06-18T00:00:00Z",
+                  "max_time_utc": "2026-06-18T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-18T00:00:00Z",
+                  "chunk_end_utc": "2026-06-19T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260618.csv"
+                },
+                {
+                  "row_count": 281155,
+                  "min_time_utc": "2026-06-19T00:00:00Z",
+                  "max_time_utc": "2026-06-19T16:59:58Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-19T00:00:00Z",
+                  "chunk_end_utc": "2026-06-20T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260619.csv"
+                },
+                {
+                  "row_count": 0,
+                  "min_time_utc": "",
+                  "max_time_utc": "",
+                  "coverage_status": "NO_ROWS",
+                  "chunk_start_utc": "2026-06-20T00:00:00Z",
+                  "chunk_end_utc": "2026-06-21T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260620.csv"
+                },
+                {
+                  "row_count": 28072,
+                  "min_time_utc": "2026-06-21T22:00:00Z",
+                  "max_time_utc": "2026-06-21T23:59:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-21T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T00:00:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260621.csv"
+                },
+                {
+                  "row_count": 39747,
+                  "min_time_utc": "2026-06-22T00:00:00Z",
+                  "max_time_utc": "2026-06-22T01:17:59Z",
+                  "coverage_status": "HAS_ROWS",
+                  "chunk_start_utc": "2026-06-22T00:00:00Z",
+                  "chunk_end_utc": "2026-06-22T01:18:00Z",
+                  "file": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3\\ticks\\XAUUSD_ticks_20260622.csv"
+                }
+              ]
+            }
+          },
+          "mt5_initialize_attempted": true,
+          "mt5_initialized": true,
+          "data_exported": true,
+          "model_training_authorized": false,
+          "broker_action_authorized": false,
+          "output_root": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\raw\\A3"
+        }
+      ],
+      "next_allowed_stage": "C02-03 history/log snapshots after bars/ticks review"
+    },
+    "c03": {
+      "status": "NO_GO",
+      "stage": "C03-READINESS",
+      "created_at_utc": "2026-06-22T01:33:02Z",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "checks": [
+        {
+          "gate": "dataset_status",
+          "passed": false,
+          "observed": "PIPELINE_ONLY",
+          "required": "EXPLORATORY_MODEL or higher"
+        },
+        {
+          "gate": "market_setup_groups",
+          "passed": false,
+          "observed": "223",
+          "required": ">=300"
+        },
+        {
+          "gate": "minority_labels",
+          "passed": true,
+          "observed": "185",
+          "required": ">=90"
+        },
+        {
+          "gate": "active_weeks",
+          "passed": false,
+          "observed": "3.37",
+          "required": ">=8"
+        },
+        {
+          "gate": "both_directions",
+          "passed": true,
+          "observed": "LONG,SHORT",
+          "required": "LONG and SHORT"
+        },
+        {
+          "gate": "at_least_two_regimes",
+          "passed": false,
+          "observed": "FALLING",
+          "required": ">=2 non-UNKNOWN regimes"
+        },
+        {
+          "gate": "feature_budget",
+          "passed": false,
+          "observed": "0",
+          "required": ">=6"
+        },
+        {
+          "gate": "slippage_readiness",
+          "passed": false,
+          "observed": "INSUFFICIENT",
+          "required": "ADEQUATE"
+        },
+        {
+          "gate": "leakage",
+          "passed": true,
+          "observed": "0",
+          "required": "0"
+        }
+      ],
+      "next_allowed_stage": "continue evidence collection and rerun C02/C03 after more signals/fills"
+    },
+    "c05": {
+      "status": "REFUSED_NOT_READY",
+      "stage": "C05-MODEL-TRAINING",
+      "created_at_utc": "2026-06-22T01:33:02Z",
+      "schema_version": "a3_ml_training_status_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "readiness_status": "NO_GO",
+      "c01_status": "PIPELINE_ONLY",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_training_contract.json",
+        "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+        "data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+        "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv"
+      },
+      "outputs": {
+        "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+        "model_artifact_sha256": "",
+        "model_card_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_CARD.md"
+      },
+      "refusal_reasons": [
+        "C03 readiness is NO_GO, required PASS",
+        "C01 supervised training is false: global_feature_budget=0 is below the contract minimum of 5",
+        "selected_features=0, required >= 5",
+        "candidate training rows=0, required >= 120",
+        "minority labels=0, required >= 60"
+      ],
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Continue data collection, rerun C01/C02/C03, then rerun C05."
+    },
+    "c04": {
+      "status": "DISABLED_FAIL_CLOSED",
+      "stage": "A3-ML-SHADOW-BRIDGE",
+      "created_at_utc": "2026-06-22T01:33:02Z",
+      "schema_version": "a3_ml_shadow_predictions_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "readiness_status": "NO_GO",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_shadow_bridge_contract.json",
+        "input_scores_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\a3_ml_offline_scores.csv",
+        "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+        "training_status_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_TRAINING_STATUS.json",
+        "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json"
+      },
+      "outputs": {
+        "predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+        "predictions_sha256": "96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95",
+        "rows": 349
+      },
+      "readiness_failures": [
+        "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
+        "market_setup_groups observed 223 required >=300",
+        "active_weeks observed 3.37 required >=8",
+        "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
+        "feature_budget observed 0 required >=6",
+        "slippage_readiness observed INSUFFICIENT required ADEQUATE"
+      ],
+      "model_artifact": {
+        "present": false,
+        "training_status_valid": false,
+        "model_id": "",
+        "model_hash": ""
+      },
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Generate real TAKE/SKIP shadow scores only after C03 PASS and a locked reviewed model artifact exists."
+    },
+    "c06": {
+      "status": "REFUSED_NOT_READY",
+      "stage": "C06-EA-HANDOFF",
+      "created_at_utc": "2026-06-22T01:33:02Z",
+      "schema_version": "a3_ml_ea_handoff_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "authorization": {
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "mt5_file_publish_requested": false,
+        "mt5_file_publish_attempted": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_ea_handoff_contract.json",
+        "shadow_bridge_status": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
+        "shadow_predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+        "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml"
+      },
+      "outputs": {
+        "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
+        "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.md",
+        "staging_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff",
+        "terminal_file_name": "A3_ML_EA_HANDOFF.csv",
+        "staged_files": [],
+        "published_files": []
+      },
+      "accounts": [
+        {
+          "account_label": "A1",
+          "account_scope": "1025742",
+          "role": "standard_experimental_demo",
+          "files_roots": [
+            "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+          ]
+        },
+        {
+          "account_label": "A2",
+          "account_scope": "1033030",
+          "role": "tier1_breakout_only",
+          "files_roots": [
+            "C:/MT5PortableTier1BestEA/MQL5/Files"
+          ]
+        },
+        {
+          "account_label": "A3",
+          "account_scope": "1033669",
+          "role": "paused_repair_lane",
+          "files_roots": [
+            "C:/MT5PortableRepairLane/MQL5/Files"
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "check": "shadow_bridge_ready",
+          "passed": false,
+          "detail": "observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY"
+        },
+        {
+          "check": "bridge_authorizes_ea_consumption",
+          "passed": false,
+          "detail": "observed=False required=true"
+        },
+        {
+          "check": "bridge_blocks_broker_action",
+          "passed": true,
+          "detail": "observed=False required=false"
+        },
+        {
+          "check": "predictions_file_exists",
+          "passed": true,
+          "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv"
+        },
+        {
+          "check": "predictions_hash_matches_bridge",
+          "passed": true,
+          "detail": "observed=96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95 expected=96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95"
+        },
+        {
+          "check": "predictions_not_empty",
+          "passed": true,
+          "detail": "rows=349"
+        },
+        {
+          "check": "prediction_actions_allowed",
+          "passed": true,
+          "detail": "observed=ABSTAIN"
+        },
+        {
+          "check": "prediction_accounts_allowed",
+          "passed": true,
+          "detail": "observed=1025742,1033030,1033669"
+        },
+        {
+          "check": "all_allowed_accounts_configured",
+          "passed": true,
+          "detail": "configured=1025742,1033030,1033669"
+        },
+        {
+          "check": "all_accounts_have_files_roots",
+          "passed": true,
+          "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files; A2=C:/MT5PortableTier1BestEA/MQL5/Files; A3=C:/MT5PortableRepairLane/MQL5/Files"
+        },
+        {
+          "check": "terminal_file_name_safe",
+          "passed": true,
+          "detail": "A3_ML_EA_HANDOFF.csv"
+        }
+      ],
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Wait for C03 PASS, C05 TRAINED_SHADOW_ONLY, and C04 READY_SHADOW_ONLY, then rerun C06."
+    },
+    "c07": {
+      "status": "NOT_READY",
+      "stage": "C07-PIPELINE-ORCHESTRATOR",
+      "created_at_utc": "2026-06-22T01:33:02Z",
+      "schema_version": "a3_ml_pipeline_run_status_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+      "publish_requested": false,
+      "steps": [
+        {
+          "step": "C02-04 normalize snapshots",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZATION_REPORT.json",
+          "detail": ""
+        },
+        {
+          "step": "C02-05 grouping audit",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_SIGNAL_GROUPING_AUDIT.json",
+          "detail": ""
+        },
+        {
+          "step": "C02-05 final verdict",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_FINAL_VERDICT.json",
+          "detail": ""
+        },
+        {
+          "step": "C02-06 diagnostic labels",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABEL_AUDIT.json",
+          "detail": ""
+        },
+        {
+          "step": "C01 feature/data audit",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+          "detail": ""
+        },
+        {
+          "step": "C03 readiness",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+          "detail": ""
+        },
+        {
+          "step": "C05 train or refuse",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_TRAINING_STATUS.json",
+          "detail": ""
+        },
+        {
+          "step": "C04 shadow bridge",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
+          "detail": ""
+        },
+        {
+          "step": "C06 EA handoff",
+          "status": "PASS",
+          "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
+          "detail": ""
+        }
+      ],
+      "summary": {
+        "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+        "c01": {
+          "status": "PIPELINE_ONLY",
+          "created_at_utc": "2026-06-22T01:33:02Z",
+          "authority": "C01 Python ML pipeline bootstrap only for configured A1/A2/A3 account scopes. It reads frozen local data and writes offline shadow artifacts. It does not touch MT5 runtime, orders, positions, profiles, charts, presets, or running EAs.",
+          "scope": {
+            "account_scopes": [
+              "1025742",
+              "1033030",
+              "1033669"
+            ],
+            "account_labels": {
+              "1025742": "A1",
+              "1033030": "A2",
+              "1033669": "A3"
+            },
+            "symbol": "XAUUSD",
+            "base_family": "breakout_retest",
+            "allowed_families": [
+              "breakout_retest"
+            ],
+            "contract_scope": "breakout_retest_only",
+            "contract_expansion_authorized": false,
+            "raw_candidate_id": "B0_RAW_ALL_SESSION"
+          },
+          "label_promotion_scope": {
+            "schema_version": "a3_ml_label_promotion_v1",
+            "scope_name": "label_promotion_locked",
+            "label_promotion_authorized": false,
+            "review_reference": "",
+            "allowed_label_statuses": [
+              "TP",
+              "SL",
+              "TIMEOUT_POSITIVE",
+              "TIMEOUT_NEGATIVE",
+              "TIMEOUT_FLAT"
+            ],
+            "minimum_mature_labels": 300,
+            "minimum_minority_labels": 90,
+            "require_slippage_adequate": true,
+            "slippage_model_status": "INSUFFICIENT",
+            "promotion_active": false
+          },
+          "source_manifest": [
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
+              "exists": true,
+              "rows": 574,
+              "sha256": "ab89d7985ad727ae5dfc503f470f045657c1be4265ec8adb94cd587068dd0f2d"
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZED_TRADES.csv",
+              "exists": true,
+              "rows": 0,
+              "sha256": "61797d899c6671272ba4e35593261ba2a59b2d0e66d1af657a8c89f401e453c8"
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\A3_ML_FEATURE_REGISTRY_V1.csv",
+              "exists": true,
+              "rows": 17,
+              "sha256": "92c41e60c5c8de4effe96f792a4118613be9878a4d01e8d497444cbf01aab87b"
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_M5_20260601_to_latest.csv",
+              "exists": true,
+              "rows": 4108,
+              "sha256": "8675fa925c44b76d32c997e5fd9952b0722082ab9e8d802e152724d74e43dd48"
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_H1_20260601_to_latest.csv",
+              "exists": true,
+              "rows": 343,
+              "sha256": "cc08649742d5586f651e953aa6beeb31a2ce1b750d2bc10146851a2a2a5fe283"
+            },
+            {
+              "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_D1_20260601_to_latest.csv",
+              "exists": true,
+              "rows": 19,
+              "sha256": "278fbfd19d7ad021aa08b5a909ee0819d8560d67bad0105f6f418e60c3a2737d"
+            }
+          ],
+          "raw_source_row_counts": {
+            "decisions_rows": 574,
+            "trades_rows": 0,
+            "scoped_raw_rows": 574,
+            "rejected_rows": 0,
+            "parse_errors": 0,
+            "exact_unique_signals": 349,
+            "snapshot_rows": 349
+          },
+          "per_account_counts": {
+            "1025742": {
+              "account_label": "A1",
+              "snapshot_rows": 207,
+              "setup_groups": 164,
+              "positive": 56,
+              "negative": 151,
+              "long": 79,
+              "short": 128
+            },
+            "1033030": {
+              "account_label": "A2",
+              "snapshot_rows": 94,
+              "setup_groups": 72,
+              "positive": 43,
+              "negative": 51,
+              "long": 50,
+              "short": 44
+            },
+            "1033669": {
+              "account_label": "A3",
+              "snapshot_rows": 48,
+              "setup_groups": 33,
+              "positive": 18,
+              "negative": 30,
+              "long": 26,
+              "short": 22
+            }
+          },
+          "exact_signal_counts": {
+            "LONG": 155,
+            "SHORT": 194
+          },
+          "fuzzy_setup_group_counts": {
+            "groups": 269,
+            "max_group_size": 3
+          },
+          "labeled_and_trainable_setup_groups": {
+            "diagnostic_labeled_groups": 269,
+            "candidate_trainable_groups": 0
+          },
+          "class_balance": {
+            "positive": 117,
+            "negative": 232
+          },
+          "direction_balance": {
+            "LONG": 155,
+            "SHORT": 194
+          },
+          "regime_balance": {
+            "FALLING": 113,
+            "UNKNOWN": 236
+          },
+          "event_duration_distribution": {
+            "count": 349,
+            "min_seconds": 86399,
+            "median_seconds": 86399,
+            "p95_seconds": 86399,
+            "max_seconds": 86399
+          },
+          "missingness": {
+            "break_distance_atr": 22,
+            "confirmation_body_ratio": 19,
+            "confirmation_close_location_aligned": 19,
+            "cost_R": 301,
+            "d1_trend_score_aligned": 236,
+            "h1_ema20_slope_aligned_atr": 23,
+            "impulse_alignment_12": 12,
+            "m15_ema20_slope_aligned_atr": 13,
+            "m5_atr_percentile_trailing_20d": 13,
+            "price_h1_ema20_distance_aligned_atr": 23,
+            "range_compression_ratio_20": 13,
+            "retest_penetration_atr": 349,
+            "spread_percentile_session_trailing_20d": 17,
+            "tick_volume_ratio_20": 13,
+            "y_MAE_R": 349,
+            "y_MFE_R": 349,
+            "y_net_R_expected": 70,
+            "y_net_R_p95_stress": 70
+          },
+          "unresolved_label_counts": {
+            "OPTIMISTIC_DIAGNOSTIC_ONLY": 349
+          },
+          "duplicate_and_fuzzy_duplicate_rates": {
+            "raw_rows": 574,
+            "exact_unique_signals": 349,
+            "fuzzy_setup_groups": 269,
+            "exact_duplicate_rate": 0.391986,
+            "fuzzy_duplicate_rate": 0.229226
+          },
+          "slippage_adequacy_status": {
+            "slippage_model_status": "INSUFFICIENT",
+            "entry_fills": 0,
+            "sl_exits": 0,
+            "tp_exits": 0,
+            "by_account": {
+              "1025742": {
+                "account_label": "A1",
+                "entry_fills": 0,
+                "sl_exits": 0,
+                "tp_exits": 0
+              },
+              "1033030": {
+                "account_label": "A2",
+                "entry_fills": 0,
+                "sl_exits": 0,
+                "tp_exits": 0
+              },
+              "1033669": {
+                "account_label": "A3",
+                "entry_fills": 0,
+                "sl_exits": 0,
+                "tp_exits": 0
+              }
+            },
+            "required_entry_fills": 200,
+            "required_sl_exits": 100,
+            "required_tp_exits": 50
+          },
+          "feature_availability": [
+            {
+              "feature_name": "h1_ema20_slope_aligned_atr",
+              "present_rows": 326,
+              "missing_rows": 23,
+              "present_pct": 0.934097
+            },
+            {
+              "feature_name": "retest_penetration_atr",
+              "present_rows": 0,
+              "missing_rows": 349,
+              "present_pct": 0.0
+            },
+            {
+              "feature_name": "confirmation_body_ratio",
+              "present_rows": 330,
+              "missing_rows": 19,
+              "present_pct": 0.945559
+            },
+            {
+              "feature_name": "cost_R",
+              "present_rows": 48,
+              "missing_rows": 301,
+              "present_pct": 0.137536
+            },
+            {
+              "feature_name": "confirmation_close_location_aligned",
+              "present_rows": 330,
+              "missing_rows": 19,
+              "present_pct": 0.945559
+            },
+            {
+              "feature_name": "break_distance_atr",
+              "present_rows": 327,
+              "missing_rows": 22,
+              "present_pct": 0.936963
+            },
+            {
+              "feature_name": "m15_ema20_slope_aligned_atr",
+              "present_rows": 336,
+              "missing_rows": 13,
+              "present_pct": 0.962751
+            },
+            {
+              "feature_name": "bars_break_to_retest_scaled",
+              "present_rows": 349,
+              "missing_rows": 0,
+              "present_pct": 1.0
+            },
+            {
+              "feature_name": "impulse_alignment_12",
+              "present_rows": 337,
+              "missing_rows": 12,
+              "present_pct": 0.965616
+            },
+            {
+              "feature_name": "price_h1_ema20_distance_aligned_atr",
+              "present_rows": 326,
+              "missing_rows": 23,
+              "present_pct": 0.934097
+            },
+            {
+              "feature_name": "m5_atr_percentile_trailing_20d",
+              "present_rows": 336,
+              "missing_rows": 13,
+              "present_pct": 0.962751
+            },
+            {
+              "feature_name": "spread_percentile_session_trailing_20d",
+              "present_rows": 332,
+              "missing_rows": 17,
+              "present_pct": 0.951289
+            },
+            {
+              "feature_name": "d1_trend_score_aligned",
+              "present_rows": 113,
+              "missing_rows": 236,
+              "present_pct": 0.323782
+            },
+            {
+              "feature_name": "range_compression_ratio_20",
+              "present_rows": 336,
+              "missing_rows": 13,
+              "present_pct": 0.962751
+            },
+            {
+              "feature_name": "tick_volume_ratio_20",
+              "present_rows": 336,
+              "missing_rows": 13,
+              "present_pct": 0.962751
+            },
+            {
+              "feature_name": "minutes_from_session_start_scaled",
+              "present_rows": 349,
+              "missing_rows": 0,
+              "present_pct": 1.0
+            }
+          ],
+          "selected_features": [],
+          "leakage_violations": [],
+          "fold_diagnostics": [
+            {
+              "fold_id": "outer_1",
+              "train_start_utc": "2026-05-29 09:39:56Z",
+              "train_end_utc": "2026-06-03 15:25:00Z",
+              "test_start_utc": "2026-06-03 22:04:58Z",
+              "test_end_utc": "2026-06-09 14:00:00Z",
+              "pre_grouping_rows": 53,
+              "exact_unique_signals": 53,
+              "fuzzy_setup_groups": 45,
+              "outer_train_groups_before_purge": 45,
+              "purged_overlap_groups": 12,
+              "purge_loss_pct": 0.266667,
+              "embargo_excluded_groups": 0,
+              "unresolved_label_groups": 33,
+              "eligible_outer_train_groups": 0,
+              "calibration_groups": 0,
+              "calibration_positive": 0,
+              "calibration_negative": 0,
+              "model_fit_groups": 0,
+              "model_fit_positive": 0,
+              "model_fit_negative": 0,
+              "minority_events_fit_fold": 0,
+              "feature_budget_fold": 0
+            },
+            {
+              "fold_id": "outer_2",
+              "train_start_utc": "2026-05-29 09:39:56Z",
+              "train_end_utc": "2026-06-09 14:00:00Z",
+              "test_start_utc": "2026-06-09 14:10:00Z",
+              "test_end_utc": "2026-06-12 00:54:59Z",
+              "pre_grouping_rows": 109,
+              "exact_unique_signals": 109,
+              "fuzzy_setup_groups": 90,
+              "outer_train_groups_before_purge": 90,
+              "purged_overlap_groups": 7,
+              "purge_loss_pct": 0.077778,
+              "embargo_excluded_groups": 0,
+              "unresolved_label_groups": 83,
+              "eligible_outer_train_groups": 0,
+              "calibration_groups": 0,
+              "calibration_positive": 0,
+              "calibration_negative": 0,
+              "model_fit_groups": 0,
+              "model_fit_positive": 0,
+              "model_fit_negative": 0,
+              "minority_events_fit_fold": 0,
+              "feature_budget_fold": 0
+            },
+            {
+              "fold_id": "outer_3",
+              "train_start_utc": "2026-05-29 09:39:56Z",
+              "train_end_utc": "2026-06-12 00:54:59Z",
+              "test_start_utc": "2026-06-12 00:54:59Z",
+              "test_end_utc": "2026-06-16 11:19:55Z",
+              "pre_grouping_rows": 166,
+              "exact_unique_signals": 166,
+              "fuzzy_setup_groups": 134,
+              "outer_train_groups_before_purge": 134,
+              "purged_overlap_groups": 23,
+              "purge_loss_pct": 0.171642,
+              "embargo_excluded_groups": 0,
+              "unresolved_label_groups": 111,
+              "eligible_outer_train_groups": 0,
+              "calibration_groups": 0,
+              "calibration_positive": 0,
+              "calibration_negative": 0,
+              "model_fit_groups": 0,
+              "model_fit_positive": 0,
+              "model_fit_negative": 0,
+              "minority_events_fit_fold": 0,
+              "feature_budget_fold": 0
+            },
+            {
+              "fold_id": "outer_4",
+              "train_start_utc": "2026-05-29 09:39:56Z",
+              "train_end_utc": "2026-06-16 11:19:55Z",
+              "test_start_utc": "2026-06-16 11:19:56Z",
+              "test_end_utc": "2026-06-18 03:14:57Z",
+              "pre_grouping_rows": 222,
+              "exact_unique_signals": 222,
+              "fuzzy_setup_groups": 179,
+              "outer_train_groups_before_purge": 179,
+              "purged_overlap_groups": 25,
+              "purge_loss_pct": 0.139665,
+              "embargo_excluded_groups": 0,
+              "unresolved_label_groups": 154,
+              "eligible_outer_train_groups": 0,
+              "calibration_groups": 0,
+              "calibration_positive": 0,
+              "calibration_negative": 0,
+              "model_fit_groups": 0,
+              "model_fit_positive": 0,
+              "model_fit_negative": 0,
+              "minority_events_fit_fold": 0,
+              "feature_budget_fold": 0
+            },
+            {
+              "fold_id": "outer_5",
+              "train_start_utc": "2026-05-29 09:39:56Z",
+              "train_end_utc": "2026-06-18 03:14:57Z",
+              "test_start_utc": "2026-06-18 03:14:57Z",
+              "test_end_utc": "2026-06-22 00:19:58Z",
+              "pre_grouping_rows": 292,
+              "exact_unique_signals": 292,
+              "fuzzy_setup_groups": 224,
+              "outer_train_groups_before_purge": 224,
+              "purged_overlap_groups": 37,
+              "purge_loss_pct": 0.165179,
+              "embargo_excluded_groups": 0,
+              "unresolved_label_groups": 187,
+              "eligible_outer_train_groups": 0,
+              "calibration_groups": 0,
+              "calibration_positive": 0,
+              "calibration_negative": 0,
+              "model_fit_groups": 0,
+              "model_fit_positive": 0,
+              "model_fit_negative": 0,
+              "minority_events_fit_fold": 0,
+              "feature_budget_fold": 0
+            }
+          ],
+          "minority_events_min": 0,
+          "global_feature_budget": 0,
+          "budget_binding_fold_id": "outer_1",
+          "training_decision": {
+            "supervised_training_allowed": false,
+            "model_family": "",
+            "reason": "global_feature_budget=0 is below the contract minimum of 5"
+          },
+          "outputs": {
+            "data_audit_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+            "data_audit_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.md",
+            "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv",
+            "feature_matrix_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_FEATURE_MATRIX.csv",
+            "offline_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OFFLINE_REPORT.json",
+            "offline_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OFFLINE_REPORT.md",
+            "offline_scores_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\a3_ml_offline_scores.csv"
+          },
+          "notes": [
+            "Current labels are discovery labels and are marked OPTIMISTIC_DIAGNOSTIC_ONLY until tick labels and an adequate slippage model exist.",
+            "Label promotion is reviewer gated by config/ml/a3_ml_label_promotion.json and defaults to false.",
+            "No supervised candidate training is allowed while dataset_status is PIPELINE_ONLY.",
+            "Blocked raw signals are retained in the snapshot, matching the data contract's source-universe rule.",
+            "Feature columns are computed from completed bars only and the feature matrix excludes prohibited label/outcome fields."
+          ]
+        },
+        "c03": {
+          "status": "NO_GO",
+          "stage": "C03-READINESS",
+          "created_at_utc": "2026-06-22T01:33:02Z",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "authorization": {
+            "training_authorized": false,
+            "python_demo_predictions_authorized": false,
+            "ea_consumption_authorized": false,
+            "broker_action_authorized": false
+          },
+          "checks": [
+            {
+              "gate": "dataset_status",
+              "passed": false,
+              "observed": "PIPELINE_ONLY",
+              "required": "EXPLORATORY_MODEL or higher"
+            },
+            {
+              "gate": "market_setup_groups",
+              "passed": false,
+              "observed": "223",
+              "required": ">=300"
+            },
+            {
+              "gate": "minority_labels",
+              "passed": true,
+              "observed": "185",
+              "required": ">=90"
+            },
+            {
+              "gate": "active_weeks",
+              "passed": false,
+              "observed": "3.37",
+              "required": ">=8"
+            },
+            {
+              "gate": "both_directions",
+              "passed": true,
+              "observed": "LONG,SHORT",
+              "required": "LONG and SHORT"
+            },
+            {
+              "gate": "at_least_two_regimes",
+              "passed": false,
+              "observed": "FALLING",
+              "required": ">=2 non-UNKNOWN regimes"
+            },
+            {
+              "gate": "feature_budget",
+              "passed": false,
+              "observed": "0",
+              "required": ">=6"
+            },
+            {
+              "gate": "slippage_readiness",
+              "passed": false,
+              "observed": "INSUFFICIENT",
+              "required": "ADEQUATE"
+            },
+            {
+              "gate": "leakage",
+              "passed": true,
+              "observed": "0",
+              "required": "0"
+            }
+          ],
+          "next_allowed_stage": "continue evidence collection and rerun C02/C03 after more signals/fills"
+        },
+        "c05": {
+          "status": "REFUSED_NOT_READY",
+          "stage": "C05-MODEL-TRAINING",
+          "created_at_utc": "2026-06-22T01:33:02Z",
+          "schema_version": "a3_ml_training_status_v1",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "readiness_status": "NO_GO",
+          "c01_status": "PIPELINE_ONLY",
+          "authorization": {
+            "training_authorized": false,
+            "python_demo_predictions_authorized": false,
+            "ea_consumption_authorized": false,
+            "broker_action_authorized": false
+          },
+          "inputs": {
+            "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_training_contract.json",
+            "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+            "data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+            "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv"
+          },
+          "outputs": {
+            "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+            "model_artifact_sha256": "",
+            "model_card_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_CARD.md"
+          },
+          "refusal_reasons": [
+            "C03 readiness is NO_GO, required PASS",
+            "C01 supervised training is false: global_feature_budget=0 is below the contract minimum of 5",
+            "selected_features=0, required >= 5",
+            "candidate training rows=0, required >= 120",
+            "minority labels=0, required >= 60"
+          ],
+          "boundary": {
+            "mt5_connection_attempted": false,
+            "terminal_runtime_change_authorized": false,
+            "ea_file_drop_authorized": false,
+            "broker_action_authorized": false
+          },
+          "next_allowed_stage": "Continue data collection, rerun C01/C02/C03, then rerun C05."
+        },
+        "c04": {
+          "status": "DISABLED_FAIL_CLOSED",
+          "stage": "A3-ML-SHADOW-BRIDGE",
+          "created_at_utc": "2026-06-22T01:33:02Z",
+          "schema_version": "a3_ml_shadow_predictions_v1",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "readiness_status": "NO_GO",
+          "authorization": {
+            "training_authorized": false,
+            "python_demo_predictions_authorized": false,
+            "ea_consumption_authorized": false,
+            "broker_action_authorized": false
+          },
+          "inputs": {
+            "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_shadow_bridge_contract.json",
+            "input_scores_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\a3_ml_offline_scores.csv",
+            "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+            "training_status_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_TRAINING_STATUS.json",
+            "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json"
+          },
+          "outputs": {
+            "predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+            "predictions_sha256": "96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95",
+            "rows": 349
+          },
+          "readiness_failures": [
+            "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
+            "market_setup_groups observed 223 required >=300",
+            "active_weeks observed 3.37 required >=8",
+            "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
+            "feature_budget observed 0 required >=6",
+            "slippage_readiness observed INSUFFICIENT required ADEQUATE"
+          ],
+          "model_artifact": {
+            "present": false,
+            "training_status_valid": false,
+            "model_id": "",
+            "model_hash": ""
+          },
+          "boundary": {
+            "mt5_connection_attempted": false,
+            "terminal_runtime_change_authorized": false,
+            "ea_file_drop_authorized": false,
+            "broker_action_authorized": false
+          },
+          "next_allowed_stage": "Generate real TAKE/SKIP shadow scores only after C03 PASS and a locked reviewed model artifact exists."
+        },
+        "c06": {
+          "status": "REFUSED_NOT_READY",
+          "stage": "C06-EA-HANDOFF",
+          "created_at_utc": "2026-06-22T01:33:02Z",
+          "schema_version": "a3_ml_ea_handoff_v1",
+          "dataset_version": "xauusd_c02_multiacct_202606220118_geffebb6d_c9221d066",
+          "authorization": {
+            "python_demo_predictions_authorized": false,
+            "ea_consumption_authorized": false,
+            "mt5_file_publish_requested": false,
+            "mt5_file_publish_attempted": false,
+            "broker_action_authorized": false
+          },
+          "inputs": {
+            "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_ea_handoff_contract.json",
+            "shadow_bridge_status": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
+            "shadow_predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+            "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml"
+          },
+          "outputs": {
+            "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
+            "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.md",
+            "staging_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff",
+            "terminal_file_name": "A3_ML_EA_HANDOFF.csv",
+            "staged_files": [],
+            "published_files": []
+          },
+          "accounts": [
+            {
+              "account_label": "A1",
+              "account_scope": "1025742",
+              "role": "standard_experimental_demo",
+              "files_roots": [
+                "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+              ]
+            },
+            {
+              "account_label": "A2",
+              "account_scope": "1033030",
+              "role": "tier1_breakout_only",
+              "files_roots": [
+                "C:/MT5PortableTier1BestEA/MQL5/Files"
+              ]
+            },
+            {
+              "account_label": "A3",
+              "account_scope": "1033669",
+              "role": "paused_repair_lane",
+              "files_roots": [
+                "C:/MT5PortableRepairLane/MQL5/Files"
+              ]
+            }
+          ],
+          "validations": [
+            {
+              "check": "shadow_bridge_ready",
+              "passed": false,
+              "detail": "observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY"
+            },
+            {
+              "check": "bridge_authorizes_ea_consumption",
+              "passed": false,
+              "detail": "observed=False required=true"
+            },
+            {
+              "check": "bridge_blocks_broker_action",
+              "passed": true,
+              "detail": "observed=False required=false"
+            },
+            {
+              "check": "predictions_file_exists",
+              "passed": true,
+              "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv"
+            },
+            {
+              "check": "predictions_hash_matches_bridge",
+              "passed": true,
+              "detail": "observed=96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95 expected=96951faf7423911ab28ecb981f621d1f638fc0943cfd41b5376f06af6738ae95"
+            },
+            {
+              "check": "predictions_not_empty",
+              "passed": true,
+              "detail": "rows=349"
+            },
+            {
+              "check": "prediction_actions_allowed",
+              "passed": true,
+              "detail": "observed=ABSTAIN"
+            },
+            {
+              "check": "prediction_accounts_allowed",
+              "passed": true,
+              "detail": "observed=1025742,1033030,1033669"
+            },
+            {
+              "check": "all_allowed_accounts_configured",
+              "passed": true,
+              "detail": "configured=1025742,1033030,1033669"
+            },
+            {
+              "check": "all_accounts_have_files_roots",
+              "passed": true,
+              "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files; A2=C:/MT5PortableTier1BestEA/MQL5/Files; A3=C:/MT5PortableRepairLane/MQL5/Files"
+            },
+            {
+              "check": "terminal_file_name_safe",
+              "passed": true,
+              "detail": "A3_ML_EA_HANDOFF.csv"
+            }
+          ],
+          "boundary": {
+            "mt5_connection_attempted": false,
+            "terminal_runtime_change_authorized": false,
+            "ea_file_drop_authorized": false,
+            "broker_action_authorized": false
+          },
+          "next_allowed_stage": "Wait for C03 PASS, C05 TRAINED_SHADOW_ONLY, and C04 READY_SHADOW_ONLY, then rerun C06."
+        }
+      },
+      "next_blocker": "C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE",
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Collect more live data on A1/A2/A3, rerun C02 live export when market data advances, then rerun C07."
+    }
+  },
+  "boundary": {
+    "mt5_connection_attempted": true,
+    "data_export_attempted": true,
+    "terminal_runtime_change_authorized": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Continue collecting A1/A2/A3 live data, then rerun C08."
+}

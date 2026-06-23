@@ -1,0 +1,127 @@
+{
+  "status": "WAITING_FOR_DATA",
+  "stage": "C10-DEMO-PREDICTION-ACTIVATION",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "schema_version": "a3_ml_demo_prediction_activation_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "requested_actions": {
+    "run_pipeline": false,
+    "refresh_live_readonly": false,
+    "publish": false,
+    "deploy_observer": false
+  },
+  "actions": [],
+  "summary": {
+    "stage_statuses": {
+      "C03 readiness": "NO_GO",
+      "C05 training": "REFUSED_NOT_READY",
+      "C04 shadow bridge": "DISABLED_FAIL_CLOSED",
+      "C06 EA handoff": "REFUSED_NOT_READY",
+      "C09 observer deploy": "DEPLOYED_PASSIVE_OBSERVER",
+      "C13 fail-closed rehearsal": "PUBLISHED_FAIL_CLOSED_REHEARSAL",
+      "C14 observer runtime": "RUNTIME_LOGS_DETECTED_ALL_ACCOUNTS",
+      "C15 manual attach packet": "MANUAL_ATTACH_REQUIRED",
+      "C16 EA consumer readiness": "BROKER_EXECUTOR_CONSUMERS_READY",
+      "C17 broker shadow consumer deploy": "DEPLOYED_COMPILED_SHADOW_CONSUMERS",
+      "C18 exploratory training rehearsal": "REHEARSED_RESEARCH_ONLY",
+      "C20 runtime evidence": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C21 runtime launch diagnostic": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C22 post-attach runtime monitor": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+    },
+    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066"
+  },
+  "validations": [
+    {
+      "check": "c03_readiness_pass",
+      "passed": false,
+      "detail": "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE"
+    },
+    {
+      "check": "c05_model_trained",
+      "passed": false,
+      "detail": "observed=REFUSED_NOT_READY required=TRAINED_SHADOW_ONLY"
+    },
+    {
+      "check": "c04_shadow_bridge_ready",
+      "passed": false,
+      "detail": "observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY"
+    },
+    {
+      "check": "c04_python_predictions_authorized",
+      "passed": false,
+      "detail": "observed=False required=true"
+    },
+    {
+      "check": "c06_ea_handoff_ready_or_published",
+      "passed": false,
+      "detail": "observed=REFUSED_NOT_READY required=READY_DRY_RUN or PUBLISHED_TO_MT5_FILES"
+    },
+    {
+      "check": "c09_observer_deployed",
+      "passed": true,
+      "detail": "observed=DEPLOYED_PASSIVE_OBSERVER required=DEPLOYED_PASSIVE_OBSERVER"
+    },
+    {
+      "check": "observer_files_exist_all_accounts",
+      "passed": true,
+      "detail": "all observer artifacts exist"
+    },
+    {
+      "check": "c16_passive_ea_consumer_ready",
+      "passed": true,
+      "detail": "observed=True c16_status=BROKER_EXECUTOR_CONSUMERS_READY required=true"
+    },
+    {
+      "check": "c16_active_broker_executor_consumers_ready",
+      "passed": true,
+      "detail": "observed=True c16_status=BROKER_EXECUTOR_CONSUMERS_READY required=true"
+    },
+    {
+      "check": "handoff_files_published_all_accounts",
+      "passed": false,
+      "detail": "c06_status=REFUSED_NOT_READY not published"
+    },
+    {
+      "check": "c20_runtime_evidence_all_accounts",
+      "passed": true,
+      "detail": "observed=RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS required=RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+    },
+    {
+      "check": "c21_runtime_launch_diagnostic_all_accounts",
+      "passed": true,
+      "detail": "observed=RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS required=RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+    },
+    {
+      "check": "broker_action_false_everywhere",
+      "passed": true,
+      "detail": "broker action false in all checked reports"
+    }
+  ],
+  "blockers": [
+    "c03_readiness_pass: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE",
+    "c05_model_trained: observed=REFUSED_NOT_READY required=TRAINED_SHADOW_ONLY",
+    "c04_shadow_bridge_ready: observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY",
+    "c04_python_predictions_authorized: observed=False required=true",
+    "c06_ea_handoff_ready_or_published: observed=REFUSED_NOT_READY required=READY_DRY_RUN or PUBLISHED_TO_MT5_FILES",
+    "handoff_files_published_all_accounts: c06_status=REFUSED_NOT_READY not published"
+  ],
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "handoff_publish_requested": false,
+    "broker_action_authorized": false
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "profile_or_chart_change_authorized": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTIVATION_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTIVATION_STATUS.md"
+  },
+  "next_allowed_stage": "Collect/export more A1/A2/A3 data, rerun C18 for research-only Python training rehearsal as needed, then rerun C10 with --refresh-live-readonly when MT5 terminals and market data are available."
+}

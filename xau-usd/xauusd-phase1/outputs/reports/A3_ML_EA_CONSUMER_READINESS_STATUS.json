@@ -1,0 +1,2362 @@
+{
+  "status": "BROKER_EXECUTOR_CONSUMERS_READY",
+  "stage": "C16-EA-ML-CONSUMER-READINESS-AUDIT",
+  "created_at_utc": "2026-06-22T06:38:38Z",
+  "schema_version": "a3_ml_ea_consumer_readiness_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "passive_observer_ml_consumer_ready": true,
+    "broker_executor_ml_consumer_ready": true,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "repo_experts_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_CONSUMER_READINESS_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_CONSUMER_READINESS_STATUS.md"
+  },
+  "repo_sources": [
+    {
+      "expert_name": "A3MlPredictionObserver",
+      "role": "ml_passive_observer",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A3MlPredictionObserver.mq5",
+      "relative_path": "A3MlPredictionObserver.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account1DailyProfitFloorGuardian",
+      "role": "account_guardian_or_manager",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account1DailyProfitFloorGuardian.mq5",
+      "relative_path": "Account1DailyProfitFloorGuardian.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3BreakoutImprovedExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutImprovedExecutor.mq5",
+      "relative_path": "Account3BreakoutImprovedExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3BreakoutExecutorBase.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3BreakoutPlainExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutPlainExecutor.mq5",
+      "relative_path": "Account3BreakoutPlainExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3BreakoutExecutorBase.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3BreakoutTier1CompatExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5",
+      "relative_path": "Account3BreakoutTier1CompatExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3BreakoutExecutorBase.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3ProfitLockExitManager",
+      "role": "account_guardian_or_manager",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3ProfitLockExitManager.mq5",
+      "relative_path": "Account3ProfitLockExitManager.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3RoundRetestGuardedExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3RoundRetestGuardedExecutor.mq5",
+      "relative_path": "Account3RoundRetestGuardedExecutor.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh"
+      ],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3RoundRetestStructuredExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3RoundRetestStructuredExecutor.mq5",
+      "relative_path": "Account3RoundRetestStructuredExecutor.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh"
+      ],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Account3SoftRetestExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Account3SoftRetestExecutor.mq5",
+      "relative_path": "Account3SoftRetestExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3BreakoutExecutorBase.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "AccountEquityGuardianShadow",
+      "role": "account_guardian_or_manager",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\AccountEquityGuardianShadow.mq5",
+      "relative_path": "AccountEquityGuardianShadow.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "DirectionStatePublisher",
+      "role": "observer_or_publisher",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\DirectionStatePublisher.mq5",
+      "relative_path": "DirectionStatePublisher.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase1DryRunShell",
+      "role": "other_ea",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase1DryRunShell.mq5",
+      "relative_path": "Phase1DryRunShell.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2ExperimentalDemoExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+      "relative_path": "Phase2ExperimentalDemoExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\DirectionStateShadow.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2ExperimentalDemoObserver",
+      "role": "observer_or_publisher",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoObserver.mq5",
+      "relative_path": "Phase2ExperimentalDemoObserver.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+      "relative_path": "Phase2ExperimentalDemoRepairExecutor.mq5",
+      "uses_handoff_include_or_file": true,
+      "uses_handoff_reader": true,
+      "can_consume_ml_handoff": true,
+      "resolved_includes": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlShadowTap.mqh",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Include\\A3MlEaHandoff.mqh"
+      ],
+      "read_error": "",
+      "detail": "uses A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2PositionPathObserver",
+      "role": "observer_or_publisher",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2PositionPathObserver.mq5",
+      "relative_path": "Phase2PositionPathObserver.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2ShadowFixObserver",
+      "role": "observer_or_publisher",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2ShadowFixObserver.mq5",
+      "relative_path": "Phase2ShadowFixObserver.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2TrendGuardedFixObserver",
+      "role": "observer_or_publisher",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2TrendGuardedFixObserver.mq5",
+      "relative_path": "Phase2TrendGuardedFixObserver.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "Phase2WeaknessBreakoutRetestExecutor",
+      "role": "broker_executor_candidate",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
+      "relative_path": "Phase2WeaknessBreakoutRetestExecutor.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "W1D1MomentumContinuationExperimental",
+      "role": "other_ea",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\W1D1MomentumContinuationExperimental.mq5",
+      "relative_path": "W1D1MomentumContinuationExperimental.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    },
+    {
+      "expert_name": "W1D1MomentumM5ContinuationExperimental",
+      "role": "other_ea",
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\W1D1MomentumM5ContinuationExperimental.mq5",
+      "relative_path": "W1D1MomentumM5ContinuationExperimental.mq5",
+      "uses_handoff_include_or_file": false,
+      "uses_handoff_reader": false,
+      "can_consume_ml_handoff": false,
+      "resolved_includes": [],
+      "read_error": "",
+      "detail": "does not call A3 ML handoff reader"
+    }
+  ],
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "role": "standard_experimental_demo",
+      "data_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075",
+      "files_root": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files",
+      "include_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "include_exists": true,
+      "handoff_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+      "handoff_exists": true,
+      "observer_ex5_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "observer_ex5_exists": true,
+      "observer_source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "observer_consumer_ready": true,
+      "source_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "role": "ml_passive_observer",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+          "relative_path": "A3MlPredictionObserver.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "role": "account_guardian_or_manager",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.mq5",
+          "relative_path": "Account1DailyProfitFloorGuardian.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "AccountEquityGuardianShadow",
+          "role": "account_guardian_or_manager",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\AccountEquityGuardianShadow.mq5",
+          "relative_path": "AccountEquityGuardianShadow.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ExpertMACD",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMACD.mq5",
+          "relative_path": "Advisors\\ExpertMACD.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ExpertMAMA",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAMA.mq5",
+          "relative_path": "Advisors\\ExpertMAMA.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ExpertMAPSAR",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAPSAR.mq5",
+          "relative_path": "Advisors\\ExpertMAPSAR.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ExpertMAPSARSizeOptimized",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAPSARSizeOptimized.mq5",
+          "relative_path": "Advisors\\ExpertMAPSARSizeOptimized.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldMissionSignals",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\SignalIndicator\\GoldMissionSignals.mq5",
+          "relative_path": "Claude Strategies\\SignalIndicator\\GoldMissionSignals.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldMission_v3_TrendPullback_Indicator",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v3\\GoldMission_v3_TrendPullback_Indicator.mq5",
+          "relative_path": "Claude Strategies\\v3\\GoldMission_v3_TrendPullback_Indicator.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldMission_v4_RangeFade_Indicator",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v4\\GoldMission_v4_RangeFade_Indicator.mq5",
+          "relative_path": "Claude Strategies\\v4\\GoldMission_v4_RangeFade_Indicator.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldMission_v5_SqueezeBreakout_Indicator",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v5\\GoldMission_v5_SqueezeBreakout_Indicator.mq5",
+          "relative_path": "Claude Strategies\\v5\\GoldMission_v5_SqueezeBreakout_Indicator.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Claude_V2",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude_V2.mq5",
+          "relative_path": "Claude_V2.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Claude_V3",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude_V3.mq5",
+          "relative_path": "Claude_V3.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ClaudeCombined",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\ClaudeCombined.mq5",
+          "relative_path": "ClaudeCombined.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "AdaptiveStrategy",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\AdaptiveStrategy.mq5",
+          "relative_path": "CodexStrategies\\AdaptiveStrategy.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "CodexBreakoutRetestLab",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\CodexBreakoutRetestLab.mq5",
+          "relative_path": "CodexStrategies\\CodexBreakoutRetestLab.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "CodexStrategyLab",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\CodexStrategyLab.mq5",
+          "relative_path": "CodexStrategies\\CodexStrategyLab.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DataQualityProbe",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\DataQualityProbe.mq5",
+          "relative_path": "DataQualityProbe.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "ChartInChart",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\ChartInChart\\ChartInChart.mq5",
+          "relative_path": "Examples\\ChartInChart\\ChartInChart.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Controls",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Controls\\Controls.mq5",
+          "relative_path": "Examples\\Controls\\Controls.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Correlation Matrix 3D",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Correlation Matrix 3D\\Correlation Matrix 3D.mq5",
+          "relative_path": "Examples\\Correlation Matrix 3D\\Correlation Matrix 3D.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "MACD Sample",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\MACD\\MACD Sample.mq5",
+          "relative_path": "Examples\\MACD\\MACD Sample.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Math 3D",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Math 3D\\Math 3D.mq5",
+          "relative_path": "Examples\\Math 3D\\Math 3D.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Math 3D Morpher",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Math 3D Morpher\\Math 3D Morpher.mq5",
+          "relative_path": "Examples\\Math 3D Morpher\\Math 3D Morpher.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Moving Average",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Moving Average\\Moving Average.mq5",
+          "relative_path": "Examples\\Moving Average\\Moving Average.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers CCI.mq5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers MFI.mq5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers RSI.mq5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers Stoch.mq5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing CCI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing MFI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing RSI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing Stoch.mq5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Harami CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami CCI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Harami CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Harami MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami MFI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Harami MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Harami RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami RSI.mq5",
+          "relative_path": "Free Robots\\BullishBearish Harami RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish Harami Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami Stoch.mq5",
+          "relative_path": "Free Robots\\BullishBearish Harami Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines CCI.mq5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines MFI.mq5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines RSI.mq5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines Stoch.mq5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine CCI.mq5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine MFI.mq5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine RSI.mq5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine Stoch.mq5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "HangingMan Hammer CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer CCI.mq5",
+          "relative_path": "Free Robots\\HangingMan Hammer CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "HangingMan Hammer MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer MFI.mq5",
+          "relative_path": "Free Robots\\HangingMan Hammer MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "HangingMan Hammer RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer RSI.mq5",
+          "relative_path": "Free Robots\\HangingMan Hammer RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "HangingMan Hammer Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer Stoch.mq5",
+          "relative_path": "Free Robots\\HangingMan Hammer Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji CCI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji CCI.mq5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji CCI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji MFI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji MFI.mq5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji MFI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji RSI",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji RSI.mq5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji RSI.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji Stoch",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji Stoch.mq5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji Stoch.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldDonchianPyramidV1",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GoldDonchianPyramidV1.mq5",
+          "relative_path": "GoldDonchianPyramidV1.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GoldXAUUSDLeverageEA",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GoldMission\\GoldXAUUSDLeverageEA.mq5",
+          "relative_path": "GoldMission\\GoldXAUUSDLeverageEA.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "GptExpert",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GptExpert.mq5",
+          "relative_path": "GptExpert.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+          "relative_path": "Phase2ExperimentalDemoExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoObserver",
+          "role": "observer_or_publisher",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoObserver.mq5",
+          "relative_path": "Phase2ExperimentalDemoObserver.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.mq5",
+          "relative_path": "Phase2ExperimentalDemoRepairExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2WeaknessBreakoutRetestExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.mq5",
+          "relative_path": "Phase2WeaknessBreakoutRetestExecutor.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "WR50_BreakoutEvening_v0",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutEvening_v0.mq5",
+          "relative_path": "WR50\\WR50_BreakoutEvening_v0.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "WR50_BreakoutExit1R_v0",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutExit1R_v0.mq5",
+          "relative_path": "WR50\\WR50_BreakoutExit1R_v0.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "WR50_BreakoutQuality_v0",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutQuality_v0.mq5",
+          "relative_path": "WR50\\WR50_BreakoutQuality_v0.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "WR50_BreakoutWideStop_v0",
+          "role": "other_ea",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutWideStop_v0.mq5",
+          "relative_path": "WR50\\WR50_BreakoutWideStop_v0.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        }
+      ],
+      "compiled_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+          "relative_path": "A3MlPredictionObserver.ex5"
+        },
+        {
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.ex5",
+          "relative_path": "Account1DailyProfitFloorGuardian.ex5"
+        },
+        {
+          "expert_name": "AccountEquityGuardianShadow",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\AccountEquityGuardianShadow.ex5",
+          "relative_path": "AccountEquityGuardianShadow.ex5"
+        },
+        {
+          "expert_name": "ExpertMACD",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMACD.ex5",
+          "relative_path": "Advisors\\ExpertMACD.ex5"
+        },
+        {
+          "expert_name": "ExpertMAMA",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAMA.ex5",
+          "relative_path": "Advisors\\ExpertMAMA.ex5"
+        },
+        {
+          "expert_name": "ExpertMAPSAR",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAPSAR.ex5",
+          "relative_path": "Advisors\\ExpertMAPSAR.ex5"
+        },
+        {
+          "expert_name": "ExpertMAPSARSizeOptimized",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Advisors\\ExpertMAPSARSizeOptimized.ex5",
+          "relative_path": "Advisors\\ExpertMAPSARSizeOptimized.ex5"
+        },
+        {
+          "expert_name": "GoldMissionSignals",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\SignalIndicator\\GoldMissionSignals.ex5",
+          "relative_path": "Claude Strategies\\SignalIndicator\\GoldMissionSignals.ex5"
+        },
+        {
+          "expert_name": "GoldMission_v3_TrendPullback_Indicator",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v3\\GoldMission_v3_TrendPullback_Indicator.ex5",
+          "relative_path": "Claude Strategies\\v3\\GoldMission_v3_TrendPullback_Indicator.ex5"
+        },
+        {
+          "expert_name": "GoldMission_v4_RangeFade_Indicator",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v4\\GoldMission_v4_RangeFade_Indicator.ex5",
+          "relative_path": "Claude Strategies\\v4\\GoldMission_v4_RangeFade_Indicator.ex5"
+        },
+        {
+          "expert_name": "GoldMission_v5_SqueezeBreakout_Indicator",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude Strategies\\v5\\GoldMission_v5_SqueezeBreakout_Indicator.ex5",
+          "relative_path": "Claude Strategies\\v5\\GoldMission_v5_SqueezeBreakout_Indicator.ex5"
+        },
+        {
+          "expert_name": "Claude_V2",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude_V2.ex5",
+          "relative_path": "Claude_V2.ex5"
+        },
+        {
+          "expert_name": "Claude_V3",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Claude_V3.ex5",
+          "relative_path": "Claude_V3.ex5"
+        },
+        {
+          "expert_name": "ClaudeCombined",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\ClaudeCombined.ex5",
+          "relative_path": "ClaudeCombined.ex5"
+        },
+        {
+          "expert_name": "AdaptiveStrategy",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\AdaptiveStrategy.ex5",
+          "relative_path": "CodexStrategies\\AdaptiveStrategy.ex5"
+        },
+        {
+          "expert_name": "CodexBreakoutRetestLab",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\CodexBreakoutRetestLab.ex5",
+          "relative_path": "CodexStrategies\\CodexBreakoutRetestLab.ex5"
+        },
+        {
+          "expert_name": "CodexStrategyLab",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\CodexStrategyLab.ex5",
+          "relative_path": "CodexStrategies\\CodexStrategyLab.ex5"
+        },
+        {
+          "expert_name": "EURUSDM15LondonBreakoutUTCV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\EURUSDM15LondonBreakoutUTCV1\\EURUSDM15LondonBreakoutUTCV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\EURUSDM15LondonBreakoutUTCV1\\EURUSDM15LondonBreakoutUTCV1.ex5"
+        },
+        {
+          "expert_name": "EURUSDM15LondonBreakoutV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\EURUSDM15LondonBreakoutV1\\EURUSDM15LondonBreakoutV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\EURUSDM15LondonBreakoutV1\\EURUSDM15LondonBreakoutV1.ex5"
+        },
+        {
+          "expert_name": "EURUSDM15PriorDayBiasContinuationV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\EURUSDM15PriorDayBiasContinuationV1\\EURUSDM15PriorDayBiasContinuationV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\EURUSDM15PriorDayBiasContinuationV1\\EURUSDM15PriorDayBiasContinuationV1.ex5"
+        },
+        {
+          "expert_name": "EURUSDM15VolCompressionBreakoutUTCV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\EURUSDM15VolCompressionBreakoutUTCV1\\EURUSDM15VolCompressionBreakoutUTCV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\EURUSDM15VolCompressionBreakoutUTCV1\\EURUSDM15VolCompressionBreakoutUTCV1.ex5"
+        },
+        {
+          "expert_name": "EURUSDM15VolCompressionBreakoutV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\EURUSDM15VolCompressionBreakoutV1\\EURUSDM15VolCompressionBreakoutV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\EURUSDM15VolCompressionBreakoutV1\\EURUSDM15VolCompressionBreakoutV1.ex5"
+        },
+        {
+          "expert_name": "GoldMissionForexDelayedLondonFalseBreakGuardV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\GoldMissionForexDelayedLondonFalseBreakGuardV1\\GoldMissionForexDelayedLondonFalseBreakGuardV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\GoldMissionForexDelayedLondonFalseBreakGuardV1\\GoldMissionForexDelayedLondonFalseBreakGuardV1.ex5"
+        },
+        {
+          "expert_name": "GoldMissionForexLondonBreakoutGuardedV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\GoldMissionForexLondonBreakoutGuardedV1\\GoldMissionForexLondonBreakoutGuardedV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\GoldMissionForexLondonBreakoutGuardedV1\\GoldMissionForexLondonBreakoutGuardedV1.ex5"
+        },
+        {
+          "expert_name": "GoldMissionForexRSIReversionV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\GoldMissionForexRSIReversionV1\\GoldMissionForexRSIReversionV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\GoldMissionForexRSIReversionV1\\GoldMissionForexRSIReversionV1.ex5"
+        },
+        {
+          "expert_name": "GoldMissionForexVolCompressionBreakoutV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\EURUSDM15Research\\GoldMissionForexVolCompressionBreakoutV1\\GoldMissionForexVolCompressionBreakoutV1.ex5",
+          "relative_path": "CodexStrategies\\EURUSDM15Research\\GoldMissionForexVolCompressionBreakoutV1\\GoldMissionForexVolCompressionBreakoutV1.ex5"
+        },
+        {
+          "expert_name": "LineTrendFollowing",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\LineTrendFollowing.ex5",
+          "relative_path": "CodexStrategies\\LineTrendFollowing.ex5"
+        },
+        {
+          "expert_name": "SwingTrader_EA",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\CodexStrategies\\SwingTrader_EA.ex5",
+          "relative_path": "CodexStrategies\\SwingTrader_EA.ex5"
+        },
+        {
+          "expert_name": "DataQualityProbe",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\DataQualityProbe.ex5",
+          "relative_path": "DataQualityProbe.ex5"
+        },
+        {
+          "expert_name": "ChartInChart",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\ChartInChart\\ChartInChart.ex5",
+          "relative_path": "Examples\\ChartInChart\\ChartInChart.ex5"
+        },
+        {
+          "expert_name": "Controls",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Controls\\Controls.ex5",
+          "relative_path": "Examples\\Controls\\Controls.ex5"
+        },
+        {
+          "expert_name": "Correlation Matrix 3D",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Correlation Matrix 3D\\Correlation Matrix 3D.ex5",
+          "relative_path": "Examples\\Correlation Matrix 3D\\Correlation Matrix 3D.ex5"
+        },
+        {
+          "expert_name": "MACD Sample",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\MACD\\MACD Sample.ex5",
+          "relative_path": "Examples\\MACD\\MACD Sample.ex5"
+        },
+        {
+          "expert_name": "Math 3D",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Math 3D\\Math 3D.ex5",
+          "relative_path": "Examples\\Math 3D\\Math 3D.ex5"
+        },
+        {
+          "expert_name": "Math 3D Morpher",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Math 3D Morpher\\Math 3D Morpher.ex5",
+          "relative_path": "Examples\\Math 3D Morpher\\Math 3D Morpher.ex5"
+        },
+        {
+          "expert_name": "Moving Average",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Examples\\Moving Average\\Moving Average.ex5",
+          "relative_path": "Examples\\Moving Average\\Moving Average.ex5"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers CCI.ex5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers CCI.ex5"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers MFI.ex5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers MFI.ex5"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers RSI.ex5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers RSI.ex5"
+        },
+        {
+          "expert_name": "BlackCrows WhiteSoldiers Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BlackCrows WhiteSoldiers Stoch.ex5",
+          "relative_path": "Free Robots\\BlackCrows WhiteSoldiers Stoch.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing CCI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing CCI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing MFI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing MFI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing RSI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing RSI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Engulfing Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Engulfing Stoch.ex5",
+          "relative_path": "Free Robots\\BullishBearish Engulfing Stoch.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Harami CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami CCI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Harami CCI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Harami MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami MFI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Harami MFI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Harami RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami RSI.ex5",
+          "relative_path": "Free Robots\\BullishBearish Harami RSI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish Harami Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish Harami Stoch.ex5",
+          "relative_path": "Free Robots\\BullishBearish Harami Stoch.ex5"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines CCI.ex5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines CCI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines MFI.ex5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines MFI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines RSI.ex5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines RSI.ex5"
+        },
+        {
+          "expert_name": "BullishBearish MeetingLines Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\BullishBearish MeetingLines Stoch.ex5",
+          "relative_path": "Free Robots\\BullishBearish MeetingLines Stoch.ex5"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine CCI.ex5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine CCI.ex5"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine MFI.ex5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine MFI.ex5"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine RSI.ex5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine RSI.ex5"
+        },
+        {
+          "expert_name": "DarkCloud PiercingLine Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\DarkCloud PiercingLine Stoch.ex5",
+          "relative_path": "Free Robots\\DarkCloud PiercingLine Stoch.ex5"
+        },
+        {
+          "expert_name": "HangingMan Hammer CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer CCI.ex5",
+          "relative_path": "Free Robots\\HangingMan Hammer CCI.ex5"
+        },
+        {
+          "expert_name": "HangingMan Hammer MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer MFI.ex5",
+          "relative_path": "Free Robots\\HangingMan Hammer MFI.ex5"
+        },
+        {
+          "expert_name": "HangingMan Hammer RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer RSI.ex5",
+          "relative_path": "Free Robots\\HangingMan Hammer RSI.ex5"
+        },
+        {
+          "expert_name": "HangingMan Hammer Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\HangingMan Hammer Stoch.ex5",
+          "relative_path": "Free Robots\\HangingMan Hammer Stoch.ex5"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji CCI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji CCI.ex5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji CCI.ex5"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji MFI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji MFI.ex5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji MFI.ex5"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji RSI",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji RSI.ex5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji RSI.ex5"
+        },
+        {
+          "expert_name": "MorningEvening StarDoji Stoch",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Free Robots\\MorningEvening StarDoji Stoch.ex5",
+          "relative_path": "Free Robots\\MorningEvening StarDoji Stoch.ex5"
+        },
+        {
+          "expert_name": "GoldDonchianPyramidV1",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GoldDonchianPyramidV1.ex5",
+          "relative_path": "GoldDonchianPyramidV1.ex5"
+        },
+        {
+          "expert_name": "GoldXAUUSDLeverageEA",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GoldMission\\GoldXAUUSDLeverageEA.ex5",
+          "relative_path": "GoldMission\\GoldXAUUSDLeverageEA.ex5"
+        },
+        {
+          "expert_name": "GptExpert",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\GptExpert.ex5",
+          "relative_path": "GptExpert.ex5"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "relative_path": "Phase2ExperimentalDemoExecutor.ex5"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoObserver",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoObserver.ex5",
+          "relative_path": "Phase2ExperimentalDemoObserver.ex5"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "relative_path": "Phase2ExperimentalDemoRepairExecutor.ex5"
+        },
+        {
+          "expert_name": "Phase2WeaknessBreakoutRetestExecutor",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2WeaknessBreakoutRetestExecutor.ex5",
+          "relative_path": "Phase2WeaknessBreakoutRetestExecutor.ex5"
+        },
+        {
+          "expert_name": "WR50_BreakoutEvening_v0",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutEvening_v0.ex5",
+          "relative_path": "WR50\\WR50_BreakoutEvening_v0.ex5"
+        },
+        {
+          "expert_name": "WR50_BreakoutExit1R_v0",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutExit1R_v0.ex5",
+          "relative_path": "WR50\\WR50_BreakoutExit1R_v0.ex5"
+        },
+        {
+          "expert_name": "WR50_BreakoutQuality_v0",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutQuality_v0.ex5",
+          "relative_path": "WR50\\WR50_BreakoutQuality_v0.ex5"
+        },
+        {
+          "expert_name": "WR50_BreakoutWideStop_v0",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\WR50\\WR50_BreakoutWideStop_v0.ex5",
+          "relative_path": "WR50\\WR50_BreakoutWideStop_v0.ex5"
+        }
+      ],
+      "attached_profiles": [
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart02.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart02.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart03.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart03.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart04.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart04.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart05.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart05.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart06.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart06.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart07.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart07.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart08.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart08.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart09.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart09.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart10.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart10.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart11.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart11.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart12.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart12.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart13.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart13.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart14.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart14.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart17.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart17.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "WR50_BreakoutExit1R_v0",
+          "expert_path": "Experts\\WR50\\WR50_BreakoutExit1R_v0.ex5",
+          "enabled": true,
+          "role": "other_ea"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart18.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart18.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart19.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart19.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart20.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart20.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart21.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart21.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "WR50_BreakoutWideStop_v0",
+          "expert_path": "Experts\\WR50\\WR50_BreakoutWideStop_v0.ex5",
+          "enabled": true,
+          "role": "other_ea"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart22.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart22.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "WR50_BreakoutWideStop_v0",
+          "expert_path": "Experts\\WR50\\WR50_BreakoutWideStop_v0.ex5",
+          "enabled": true,
+          "role": "other_ea"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart24.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart24.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "AccountEquityGuardianShadow",
+          "expert_path": "Experts\\AccountEquityGuardianShadow.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart01.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart01.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart02.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart02.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart03.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart03.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart04.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart04.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart05.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart05.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart06.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart06.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart07.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart07.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart08.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart08.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart09.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart09.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart10.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart10.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart11.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart11.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart12.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart12.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart13.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart13.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart14.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart14.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart17.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart17.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "WR50_BreakoutExit1R_v0",
+          "expert_path": "Experts\\WR50\\WR50_BreakoutExit1R_v0.ex5",
+          "enabled": true,
+          "role": "other_ea"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart18.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart18.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart19.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart19.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart20.chr",
+          "profile_relative_path": "_codex_quarantine\\profile_backups\\default_profile_before_old_order_cap_zero_20260609_130407\\chart20.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Phase2ExperimentalDemoRepairExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoRepairExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+          "profile_relative_path": "Default\\chart03.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart24.chr",
+          "profile_relative_path": "Default\\chart24.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "AccountEquityGuardianShadow",
+          "expert_path": "Experts\\AccountEquityGuardianShadow.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr",
+          "profile_relative_path": "Default\\chart26.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "expert_path": "Experts\\Account1DailyProfitFloorGuardian.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        }
+      ],
+      "active_broker_executors": [
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "source_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        }
+      ]
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "role": "tier1_breakout_only",
+      "data_root": "C:\\MT5PortableTier1BestEA",
+      "files_root": "C:\\MT5PortableTier1BestEA\\MQL5\\Files",
+      "include_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "include_exists": true,
+      "handoff_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+      "handoff_exists": true,
+      "observer_ex5_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "observer_ex5_exists": true,
+      "observer_source_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "observer_consumer_ready": true,
+      "source_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "role": "ml_passive_observer",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+          "relative_path": "A3MlPredictionObserver.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "role": "account_guardian_or_manager",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.mq5",
+          "relative_path": "Account1DailyProfitFloorGuardian.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "AccountEquityGuardianShadow",
+          "role": "account_guardian_or_manager",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\AccountEquityGuardianShadow.mq5",
+          "relative_path": "AccountEquityGuardianShadow.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "DirectionStatePublisher",
+          "role": "observer_or_publisher",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\DirectionStatePublisher.mq5",
+          "relative_path": "DirectionStatePublisher.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+          "relative_path": "Phase2ExperimentalDemoExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\MT5PortableTier1BestEA\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        }
+      ],
+      "compiled_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+          "relative_path": "A3MlPredictionObserver.ex5"
+        },
+        {
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.ex5",
+          "relative_path": "Account1DailyProfitFloorGuardian.ex5"
+        },
+        {
+          "expert_name": "AccountEquityGuardianShadow",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\AccountEquityGuardianShadow.ex5",
+          "relative_path": "AccountEquityGuardianShadow.ex5"
+        },
+        {
+          "expert_name": "DirectionStatePublisher",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\DirectionStatePublisher.ex5",
+          "relative_path": "DirectionStatePublisher.ex5"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "relative_path": "Phase2ExperimentalDemoExecutor.ex5"
+        }
+      ],
+      "attached_profiles": [
+        {
+          "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+          "profile_relative_path": "Default\\chart01.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "AccountEquityGuardianShadow",
+          "expert_path": "Experts\\AccountEquityGuardianShadow.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+          "profile_relative_path": "Default\\chart02.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
+          "profile_relative_path": "Default\\chart03.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account1DailyProfitFloorGuardian",
+          "expert_path": "Experts\\Account1DailyProfitFloorGuardian.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default_direction_state_backup_20260614_203344\\chart01.chr",
+          "profile_relative_path": "Default_direction_state_backup_20260614_203344\\chart01.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "AccountEquityGuardianShadow",
+          "expert_path": "Experts\\AccountEquityGuardianShadow.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        }
+      ],
+      "active_broker_executors": [
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "source_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        }
+      ]
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "role": "paused_repair_lane",
+      "data_root": "C:\\MT5PortableRepairLane",
+      "files_root": "C:\\MT5PortableRepairLane\\MQL5\\Files",
+      "include_path": "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh",
+      "include_exists": true,
+      "handoff_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
+      "handoff_exists": true,
+      "observer_ex5_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+      "observer_ex5_exists": true,
+      "observer_source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+      "observer_consumer_ready": true,
+      "source_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "role": "ml_passive_observer",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.mq5",
+          "relative_path": "A3MlPredictionObserver.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3BreakoutImprovedExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.mq5",
+          "relative_path": "Account3BreakoutImprovedExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3BreakoutExecutorBase.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3BreakoutPlainExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.mq5",
+          "relative_path": "Account3BreakoutPlainExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3BreakoutExecutorBase.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3BreakoutTier1CompatExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5",
+          "relative_path": "Account3BreakoutTier1CompatExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3BreakoutExecutorBase.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3ProfitLockExitManager",
+          "role": "account_guardian_or_manager",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3ProfitLockExitManager.mq5",
+          "relative_path": "Account3ProfitLockExitManager.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3RoundRetestGuardedExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3RoundRetestGuardedExecutor.mq5",
+          "relative_path": "Account3RoundRetestGuardedExecutor.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh"
+          ],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3RoundRetestStructuredExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3RoundRetestStructuredExecutor.mq5",
+          "relative_path": "Account3RoundRetestStructuredExecutor.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh"
+          ],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3SoftRetestExecutor",
+          "role": "broker_executor_candidate",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.mq5",
+          "relative_path": "Account3SoftRetestExecutor.mq5",
+          "uses_handoff_include_or_file": true,
+          "uses_handoff_reader": true,
+          "can_consume_ml_handoff": true,
+          "resolved_includes": [
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3BreakoutExecutorBase.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\DirectionStateShadow.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlShadowTap.mqh",
+            "C:\\MT5PortableRepairLane\\MQL5\\Include\\A3MlEaHandoff.mqh"
+          ],
+          "read_error": "",
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2PositionPathObserver",
+          "role": "observer_or_publisher",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Phase2PositionPathObserver.mq5",
+          "relative_path": "Phase2PositionPathObserver.mq5",
+          "uses_handoff_include_or_file": false,
+          "uses_handoff_reader": false,
+          "can_consume_ml_handoff": false,
+          "resolved_includes": [],
+          "read_error": "",
+          "detail": "does not call A3 ML handoff reader"
+        }
+      ],
+      "compiled_experts": [
+        {
+          "expert_name": "A3MlPredictionObserver",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\A3MlPredictionObserver.ex5",
+          "relative_path": "A3MlPredictionObserver.ex5"
+        },
+        {
+          "expert_name": "Account3BreakoutImprovedExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.ex5",
+          "relative_path": "Account3BreakoutImprovedExecutor.ex5"
+        },
+        {
+          "expert_name": "Account3BreakoutPlainExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.ex5",
+          "relative_path": "Account3BreakoutPlainExecutor.ex5"
+        },
+        {
+          "expert_name": "Account3BreakoutTier1CompatExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.ex5",
+          "relative_path": "Account3BreakoutTier1CompatExecutor.ex5"
+        },
+        {
+          "expert_name": "Account3ProfitLockExitManager",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3ProfitLockExitManager.ex5",
+          "relative_path": "Account3ProfitLockExitManager.ex5"
+        },
+        {
+          "expert_name": "Account3RoundRetestGuardedExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3RoundRetestGuardedExecutor.ex5",
+          "relative_path": "Account3RoundRetestGuardedExecutor.ex5"
+        },
+        {
+          "expert_name": "Account3RoundRetestStructuredExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3RoundRetestStructuredExecutor.ex5",
+          "relative_path": "Account3RoundRetestStructuredExecutor.ex5"
+        },
+        {
+          "expert_name": "Account3SoftRetestExecutor",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.ex5",
+          "relative_path": "Account3SoftRetestExecutor.ex5"
+        },
+        {
+          "expert_name": "Phase2PositionPathObserver",
+          "path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Phase2PositionPathObserver.ex5",
+          "relative_path": "Phase2PositionPathObserver.ex5"
+        }
+      ],
+      "attached_profiles": [
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
+          "profile_relative_path": "Default\\chart01.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account3BreakoutPlainExecutor",
+          "expert_path": "Experts\\Account3BreakoutPlainExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+          "profile_relative_path": "Default\\chart02.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account3BreakoutImprovedExecutor",
+          "expert_path": "Experts\\Account3BreakoutImprovedExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+          "profile_relative_path": "Default\\chart04.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account3BreakoutTier1CompatExecutor",
+          "expert_path": "Experts\\Account3BreakoutTier1CompatExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
+          "profile_relative_path": "Default\\chart05.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account3ProfitLockExitManager",
+          "expert_path": "Experts\\Account3ProfitLockExitManager.ex5",
+          "enabled": true,
+          "role": "account_guardian_or_manager"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
+          "profile_relative_path": "Default\\chart06.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Account3SoftRetestExecutor",
+          "expert_path": "Experts\\Account3SoftRetestExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default_direction_state_backup_20260614_203344\\chart01.chr",
+          "profile_relative_path": "Default_direction_state_backup_20260614_203344\\chart01.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Account3RoundRetestGuardedExecutor",
+          "expert_path": "Experts\\Account3RoundRetestGuardedExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default_direction_state_backup_20260614_203344\\chart02.chr",
+          "profile_relative_path": "Default_direction_state_backup_20260614_203344\\chart02.chr",
+          "profile_kind": "backup_or_quarantine",
+          "expert_name": "Account3RoundRetestStructuredExecutor",
+          "expert_path": "Experts\\Account3RoundRetestStructuredExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        }
+      ],
+      "active_broker_executors": [
+        {
+          "expert_name": "Account3BreakoutImprovedExecutor",
+          "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutImprovedExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3BreakoutPlainExecutor",
+          "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutPlainExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3BreakoutTier1CompatExecutor",
+          "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3BreakoutTier1CompatExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Account3SoftRetestExecutor",
+          "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Account3SoftRetestExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
+        }
+      ]
+    }
+  ],
+  "validations": [
+    {
+      "check": "three_accounts_configured",
+      "passed": true,
+      "detail": "observed=3 required=3"
+    },
+    {
+      "check": "passive_observer_consumer_ready_all_accounts",
+      "passed": true,
+      "detail": "observer can read handoff on A1/A2/A3"
+    },
+    {
+      "check": "handoff_file_exists_all_accounts",
+      "passed": true,
+      "detail": "handoff file exists on A1/A2/A3"
+    },
+    {
+      "check": "handoff_include_exists_all_accounts",
+      "passed": true,
+      "detail": "handoff include exists on A1/A2/A3"
+    },
+    {
+      "check": "active_broker_executor_consumers_ready",
+      "passed": true,
+      "detail": "no active broker executor gaps"
+    },
+    {
+      "check": "broker_action_false",
+      "passed": true,
+      "detail": "audit is read-only and does not authorize broker action"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "expert_file_write_attempted": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "EA consumer plumbing is present. Keep broker action disabled, then use C10 readiness gates before any demo prediction handoff is trusted."
+}

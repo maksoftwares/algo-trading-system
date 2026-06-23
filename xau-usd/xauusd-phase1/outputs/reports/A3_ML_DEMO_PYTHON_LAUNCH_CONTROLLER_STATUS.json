@@ -1,0 +1,65 @@
+{
+  "status": "WAITING_FOR_DATA",
+  "stage": "C23-ML-DEMO-PYTHON-LAUNCH-CONTROLLER",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "schema_version": "a3_ml_demo_python_launch_controller_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "requested_actions": {
+    "run_pipeline": false,
+    "refresh_live_readonly": false,
+    "auto_publish": false,
+    "post_attach_timeout_seconds": 0,
+    "post_attach_poll_seconds": 5,
+    "requested_start_utc": "",
+    "max_tick_days": null
+  },
+  "summary": {
+    "stage_statuses": {
+      "C03 readiness": "NO_GO",
+      "C05 official training": "REFUSED_NOT_READY",
+      "C04 shadow bridge": "DISABLED_FAIL_CLOSED",
+      "C06 EA handoff": "REFUSED_NOT_READY",
+      "C10 activation": "WAITING_FOR_DATA",
+      "C19 demo start cycle": "WAITING_FOR_DATA",
+      "C20 runtime evidence": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C21 runtime launch diagnostic": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "C22 post-attach runtime monitor": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+    },
+    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066"
+  },
+  "readiness": {
+    "data_ready": false,
+    "official_model_trained": false,
+    "python_shadow_bridge_ready": false,
+    "ea_handoff_ready_or_published": false,
+    "runtime_evidence_all_accounts": true,
+    "runtime_launch_diagnostic_all_accounts": true,
+    "post_attach_monitor_ready": true,
+    "activation_authorizes_python": false,
+    "activation_authorizes_ea_consumption": false
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "inputs": {
+    "c19_demo_start_cycle": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_START_CYCLE_STATUS.json",
+    "c10_activation": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PREDICTION_ACTIVATION_STATUS.json",
+    "c22_post_attach_runtime_monitor": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PYTHON_LAUNCH_CONTROLLER_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_PYTHON_LAUNCH_CONTROLLER_STATUS.md"
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Keep A1/A2/A3 collecting data, then rerun C23 with --refresh-live-readonly after market data advances."
+}

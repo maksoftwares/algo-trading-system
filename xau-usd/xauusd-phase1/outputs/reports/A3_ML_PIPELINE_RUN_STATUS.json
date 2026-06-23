@@ -1,0 +1,794 @@
+{
+  "status": "NOT_READY",
+  "stage": "C07-PIPELINE-ORCHESTRATOR",
+  "created_at_utc": "2026-06-22T06:03:15Z",
+  "schema_version": "a3_ml_pipeline_run_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "publish_requested": false,
+  "steps": [
+    {
+      "step": "C02-04 normalize snapshots",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZATION_REPORT.json",
+      "detail": ""
+    },
+    {
+      "step": "C02-05 grouping audit",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_SIGNAL_GROUPING_AUDIT.json",
+      "detail": ""
+    },
+    {
+      "step": "C02-05 final verdict",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_FINAL_VERDICT.json",
+      "detail": ""
+    },
+    {
+      "step": "C02-06 diagnostic labels",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABEL_AUDIT.json",
+      "detail": ""
+    },
+    {
+      "step": "C01 feature/data audit",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+      "detail": ""
+    },
+    {
+      "step": "C03 readiness",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+      "detail": ""
+    },
+    {
+      "step": "C05 train or refuse",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_TRAINING_STATUS.json",
+      "detail": ""
+    },
+    {
+      "step": "C04 shadow bridge",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
+      "detail": ""
+    },
+    {
+      "step": "C06 EA handoff",
+      "status": "PASS",
+      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+    "c01": {
+      "status": "PIPELINE_ONLY",
+      "created_at_utc": "2026-06-22T06:03:15Z",
+      "authority": "C01 Python ML pipeline bootstrap only for configured A1/A2/A3 account scopes. It reads frozen local data and writes offline shadow artifacts. It does not touch MT5 runtime, orders, positions, profiles, charts, presets, or running EAs.",
+      "scope": {
+        "account_scopes": [
+          "1025742",
+          "1033030",
+          "1033669"
+        ],
+        "account_labels": {
+          "1025742": "A1",
+          "1033030": "A2",
+          "1033669": "A3"
+        },
+        "symbol": "XAUUSD",
+        "base_family": "breakout_retest",
+        "allowed_families": [
+          "breakout_retest"
+        ],
+        "contract_scope": "breakout_retest_only",
+        "contract_expansion_authorized": false,
+        "raw_candidate_id": "B0_RAW_ALL_SESSION"
+      },
+      "label_promotion_scope": {
+        "schema_version": "a3_ml_label_promotion_v1",
+        "scope_name": "label_promotion_locked",
+        "label_promotion_authorized": false,
+        "review_reference": "",
+        "allowed_label_statuses": [
+          "TP",
+          "SL",
+          "TIMEOUT_POSITIVE",
+          "TIMEOUT_NEGATIVE",
+          "TIMEOUT_FLAT"
+        ],
+        "minimum_mature_labels": 300,
+        "minimum_minority_labels": 90,
+        "require_slippage_adequate": true,
+        "slippage_model_status": "INSUFFICIENT",
+        "promotion_active": false
+      },
+      "source_manifest": [
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
+          "exists": true,
+          "rows": 574,
+          "sha256": "7b82f2747222c15d0bdb4512cc3c1f35cf86de3ff7ba8fa54092a411841c9a5e"
+        },
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZED_TRADES.csv",
+          "exists": true,
+          "rows": 0,
+          "sha256": "61797d899c6671272ba4e35593261ba2a59b2d0e66d1af657a8c89f401e453c8"
+        },
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\A3_ML_FEATURE_REGISTRY_V1.csv",
+          "exists": true,
+          "rows": 17,
+          "sha256": "92c41e60c5c8de4effe96f792a4118613be9878a4d01e8d497444cbf01aab87b"
+        },
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_M5_20260601_to_latest.csv",
+          "exists": true,
+          "rows": 23193,
+          "sha256": "e9627c049c28e350bbb58c2fd5f037dbb724aeeb3d253ba5ecf4f1fa48574c4f"
+        },
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_H1_20260601_to_latest.csv",
+          "exists": true,
+          "rows": 1934,
+          "sha256": "562cca6d38721bc980c8e3d43f6d0c82b921c7647989720a54820977242b781f"
+        },
+        {
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_D1_20260601_to_latest.csv",
+          "exists": true,
+          "rows": 102,
+          "sha256": "26ae784d17ac4936edd3feeb3df9a2ac1d4c0aa61f87cdf3210e3cdc43b51f95"
+        }
+      ],
+      "raw_source_row_counts": {
+        "decisions_rows": 574,
+        "trades_rows": 0,
+        "scoped_raw_rows": 574,
+        "rejected_rows": 0,
+        "parse_errors": 0,
+        "exact_unique_signals": 349,
+        "snapshot_rows": 349
+      },
+      "per_account_counts": {
+        "1025742": {
+          "account_label": "A1",
+          "snapshot_rows": 207,
+          "setup_groups": 161,
+          "positive": 49,
+          "negative": 158,
+          "long": 79,
+          "short": 128
+        },
+        "1033030": {
+          "account_label": "A2",
+          "snapshot_rows": 94,
+          "setup_groups": 72,
+          "positive": 43,
+          "negative": 51,
+          "long": 50,
+          "short": 44
+        },
+        "1033669": {
+          "account_label": "A3",
+          "snapshot_rows": 48,
+          "setup_groups": 33,
+          "positive": 18,
+          "negative": 30,
+          "long": 26,
+          "short": 22
+        }
+      },
+      "exact_signal_counts": {
+        "LONG": 155,
+        "SHORT": 194
+      },
+      "fuzzy_setup_group_counts": {
+        "groups": 266,
+        "max_group_size": 3
+      },
+      "labeled_and_trainable_setup_groups": {
+        "diagnostic_labeled_groups": 266,
+        "candidate_trainable_groups": 0
+      },
+      "class_balance": {
+        "positive": 110,
+        "negative": 239
+      },
+      "direction_balance": {
+        "LONG": 155,
+        "SHORT": 194
+      },
+      "regime_balance": {
+        "FALLING": 349
+      },
+      "event_duration_distribution": {
+        "count": 349,
+        "min_seconds": 86399,
+        "median_seconds": 86399,
+        "p95_seconds": 86399,
+        "max_seconds": 86399
+      },
+      "missingness": {
+        "break_distance_atr": 10,
+        "confirmation_body_ratio": 7,
+        "confirmation_close_location_aligned": 7,
+        "cost_R": 301,
+        "retest_penetration_atr": 349,
+        "y_MAE_R": 349,
+        "y_MFE_R": 349,
+        "y_net_R_expected": 92,
+        "y_net_R_p95_stress": 92
+      },
+      "unresolved_label_counts": {
+        "OPTIMISTIC_DIAGNOSTIC_ONLY": 349
+      },
+      "duplicate_and_fuzzy_duplicate_rates": {
+        "raw_rows": 574,
+        "exact_unique_signals": 349,
+        "fuzzy_setup_groups": 266,
+        "exact_duplicate_rate": 0.391986,
+        "fuzzy_duplicate_rate": 0.237822
+      },
+      "slippage_adequacy_status": {
+        "slippage_model_status": "INSUFFICIENT",
+        "entry_fills": 0,
+        "sl_exits": 0,
+        "tp_exits": 0,
+        "by_account": {
+          "1025742": {
+            "account_label": "A1",
+            "entry_fills": 0,
+            "sl_exits": 0,
+            "tp_exits": 0
+          },
+          "1033030": {
+            "account_label": "A2",
+            "entry_fills": 0,
+            "sl_exits": 0,
+            "tp_exits": 0
+          },
+          "1033669": {
+            "account_label": "A3",
+            "entry_fills": 0,
+            "sl_exits": 0,
+            "tp_exits": 0
+          }
+        },
+        "required_entry_fills": 200,
+        "required_sl_exits": 100,
+        "required_tp_exits": 50
+      },
+      "feature_availability": [
+        {
+          "feature_name": "h1_ema20_slope_aligned_atr",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "retest_penetration_atr",
+          "present_rows": 0,
+          "missing_rows": 349,
+          "present_pct": 0.0
+        },
+        {
+          "feature_name": "confirmation_body_ratio",
+          "present_rows": 342,
+          "missing_rows": 7,
+          "present_pct": 0.979943
+        },
+        {
+          "feature_name": "cost_R",
+          "present_rows": 48,
+          "missing_rows": 301,
+          "present_pct": 0.137536
+        },
+        {
+          "feature_name": "confirmation_close_location_aligned",
+          "present_rows": 342,
+          "missing_rows": 7,
+          "present_pct": 0.979943
+        },
+        {
+          "feature_name": "break_distance_atr",
+          "present_rows": 339,
+          "missing_rows": 10,
+          "present_pct": 0.971347
+        },
+        {
+          "feature_name": "m15_ema20_slope_aligned_atr",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "bars_break_to_retest_scaled",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "impulse_alignment_12",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "price_h1_ema20_distance_aligned_atr",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "m5_atr_percentile_trailing_20d",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "spread_percentile_session_trailing_20d",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "d1_trend_score_aligned",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "range_compression_ratio_20",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "tick_volume_ratio_20",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        },
+        {
+          "feature_name": "minutes_from_session_start_scaled",
+          "present_rows": 349,
+          "missing_rows": 0,
+          "present_pct": 1.0
+        }
+      ],
+      "selected_features": [],
+      "leakage_violations": [],
+      "fold_diagnostics": [
+        {
+          "fold_id": "outer_1",
+          "train_start_utc": "2026-05-29 09:39:56Z",
+          "train_end_utc": "2026-06-03 22:19:58Z",
+          "test_start_utc": "2026-06-04 00:19:58Z",
+          "test_end_utc": "2026-06-09 16:09:59Z",
+          "pre_grouping_rows": 55,
+          "exact_unique_signals": 55,
+          "fuzzy_setup_groups": 44,
+          "outer_train_groups_before_purge": 44,
+          "purged_overlap_groups": 13,
+          "purge_loss_pct": 0.295455,
+          "embargo_excluded_groups": 0,
+          "unresolved_label_groups": 31,
+          "eligible_outer_train_groups": 0,
+          "calibration_groups": 0,
+          "calibration_positive": 0,
+          "calibration_negative": 0,
+          "model_fit_groups": 0,
+          "model_fit_positive": 0,
+          "model_fit_negative": 0,
+          "minority_events_fit_fold": 0,
+          "feature_budget_fold": 0
+        },
+        {
+          "fold_id": "outer_2",
+          "train_start_utc": "2026-05-29 09:39:56Z",
+          "train_end_utc": "2026-06-09 16:09:59Z",
+          "test_start_utc": "2026-06-09 16:39:59Z",
+          "test_end_utc": "2026-06-12 12:54:56Z",
+          "pre_grouping_rows": 111,
+          "exact_unique_signals": 111,
+          "fuzzy_setup_groups": 89,
+          "outer_train_groups_before_purge": 89,
+          "purged_overlap_groups": 9,
+          "purge_loss_pct": 0.101124,
+          "embargo_excluded_groups": 0,
+          "unresolved_label_groups": 80,
+          "eligible_outer_train_groups": 0,
+          "calibration_groups": 0,
+          "calibration_positive": 0,
+          "calibration_negative": 0,
+          "model_fit_groups": 0,
+          "model_fit_positive": 0,
+          "model_fit_negative": 0,
+          "minority_events_fit_fold": 0,
+          "feature_budget_fold": 0
+        },
+        {
+          "fold_id": "outer_3",
+          "train_start_utc": "2026-05-29 09:39:56Z",
+          "train_end_utc": "2026-06-12 12:54:56Z",
+          "test_start_utc": "2026-06-12 13:00:00Z",
+          "test_end_utc": "2026-06-16 11:19:56Z",
+          "pre_grouping_rows": 168,
+          "exact_unique_signals": 168,
+          "fuzzy_setup_groups": 133,
+          "outer_train_groups_before_purge": 133,
+          "purged_overlap_groups": 11,
+          "purge_loss_pct": 0.082707,
+          "embargo_excluded_groups": 0,
+          "unresolved_label_groups": 122,
+          "eligible_outer_train_groups": 0,
+          "calibration_groups": 0,
+          "calibration_positive": 0,
+          "calibration_negative": 0,
+          "model_fit_groups": 0,
+          "model_fit_positive": 0,
+          "model_fit_negative": 0,
+          "minority_events_fit_fold": 0,
+          "feature_budget_fold": 0
+        },
+        {
+          "fold_id": "outer_4",
+          "train_start_utc": "2026-05-29 09:39:56Z",
+          "train_end_utc": "2026-06-16 11:19:56Z",
+          "test_start_utc": "2026-06-16 11:23:33Z",
+          "test_end_utc": "2026-06-18 03:14:57Z",
+          "pre_grouping_rows": 223,
+          "exact_unique_signals": 223,
+          "fuzzy_setup_groups": 177,
+          "outer_train_groups_before_purge": 177,
+          "purged_overlap_groups": 26,
+          "purge_loss_pct": 0.146893,
+          "embargo_excluded_groups": 0,
+          "unresolved_label_groups": 151,
+          "eligible_outer_train_groups": 0,
+          "calibration_groups": 0,
+          "calibration_positive": 0,
+          "calibration_negative": 0,
+          "model_fit_groups": 0,
+          "model_fit_positive": 0,
+          "model_fit_negative": 0,
+          "minority_events_fit_fold": 0,
+          "feature_budget_fold": 0
+        },
+        {
+          "fold_id": "outer_5",
+          "train_start_utc": "2026-05-29 09:39:56Z",
+          "train_end_utc": "2026-06-18 03:14:57Z",
+          "test_start_utc": "2026-06-18 03:14:58Z",
+          "test_end_utc": "2026-06-22 00:19:58Z",
+          "pre_grouping_rows": 293,
+          "exact_unique_signals": 293,
+          "fuzzy_setup_groups": 222,
+          "outer_train_groups_before_purge": 222,
+          "purged_overlap_groups": 38,
+          "purge_loss_pct": 0.171171,
+          "embargo_excluded_groups": 0,
+          "unresolved_label_groups": 184,
+          "eligible_outer_train_groups": 0,
+          "calibration_groups": 0,
+          "calibration_positive": 0,
+          "calibration_negative": 0,
+          "model_fit_groups": 0,
+          "model_fit_positive": 0,
+          "model_fit_negative": 0,
+          "minority_events_fit_fold": 0,
+          "feature_budget_fold": 0
+        }
+      ],
+      "minority_events_min": 0,
+      "global_feature_budget": 0,
+      "budget_binding_fold_id": "outer_1",
+      "training_decision": {
+        "supervised_training_allowed": false,
+        "model_family": "",
+        "reason": "global_feature_budget=0 is below the contract minimum of 5"
+      },
+      "outputs": {
+        "data_audit_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+        "data_audit_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.md",
+        "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv",
+        "feature_matrix_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_FEATURE_MATRIX.csv",
+        "offline_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OFFLINE_REPORT.json",
+        "offline_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_OFFLINE_REPORT.md",
+        "offline_scores_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\a3_ml_offline_scores.csv"
+      },
+      "notes": [
+        "Current labels are discovery labels and are marked OPTIMISTIC_DIAGNOSTIC_ONLY until tick labels and an adequate slippage model exist.",
+        "Label promotion is reviewer gated by config/ml/a3_ml_label_promotion.json and defaults to false.",
+        "No supervised candidate training is allowed while dataset_status is PIPELINE_ONLY.",
+        "Blocked raw signals are retained in the snapshot, matching the data contract's source-universe rule.",
+        "Feature columns are computed from completed bars only and the feature matrix excludes prohibited label/outcome fields."
+      ]
+    },
+    "c03": {
+      "status": "NO_GO",
+      "stage": "C03-READINESS",
+      "created_at_utc": "2026-06-22T06:03:15Z",
+      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "checks": [
+        {
+          "gate": "dataset_status",
+          "passed": false,
+          "observed": "PIPELINE_ONLY",
+          "required": "EXPLORATORY_MODEL or higher"
+        },
+        {
+          "gate": "market_setup_groups",
+          "passed": false,
+          "observed": "223",
+          "required": ">=300"
+        },
+        {
+          "gate": "minority_labels",
+          "passed": true,
+          "observed": "172",
+          "required": ">=90"
+        },
+        {
+          "gate": "active_weeks",
+          "passed": false,
+          "observed": "3.37",
+          "required": ">=8"
+        },
+        {
+          "gate": "both_directions",
+          "passed": true,
+          "observed": "LONG,SHORT",
+          "required": "LONG and SHORT"
+        },
+        {
+          "gate": "at_least_two_regimes",
+          "passed": false,
+          "observed": "FALLING",
+          "required": ">=2 non-UNKNOWN regimes"
+        },
+        {
+          "gate": "feature_budget",
+          "passed": false,
+          "observed": "0",
+          "required": ">=6"
+        },
+        {
+          "gate": "slippage_readiness",
+          "passed": false,
+          "observed": "INSUFFICIENT",
+          "required": "ADEQUATE"
+        },
+        {
+          "gate": "leakage",
+          "passed": true,
+          "observed": "0",
+          "required": "0"
+        }
+      ],
+      "next_allowed_stage": "continue evidence collection and rerun C02/C03 after more signals/fills"
+    },
+    "c05": {
+      "status": "REFUSED_NOT_READY",
+      "stage": "C05-MODEL-TRAINING",
+      "created_at_utc": "2026-06-22T06:03:15Z",
+      "schema_version": "a3_ml_training_status_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "readiness_status": "NO_GO",
+      "c01_status": "PIPELINE_ONLY",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_training_contract.json",
+        "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
+        "data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
+        "snapshot_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_C01_SNAPSHOT_ROWS.csv"
+      },
+      "outputs": {
+        "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+        "model_artifact_sha256": "",
+        "model_card_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_CARD.md"
+      },
+      "refusal_reasons": [
+        "C03 readiness is NO_GO, required PASS",
+        "C01 supervised training is false: global_feature_budget=0 is below the contract minimum of 5",
+        "selected_features=0, required >= 5",
+        "candidate training rows=0, required >= 120",
+        "minority labels=0, required >= 60"
+      ],
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Continue data collection, rerun C01/C02/C03, then rerun C05."
+    },
+    "c04": {
+      "status": "DISABLED_FAIL_CLOSED",
+      "stage": "A3-ML-SHADOW-BRIDGE",
+      "created_at_utc": "2026-06-22T06:03:15Z",
+      "schema_version": "a3_ml_shadow_predictions_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "readiness_status": "NO_GO",
+      "authorization": {
+        "training_authorized": false,
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_shadow_bridge_contract.json",
+        "input_scores_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\a3_ml_offline_scores.csv",
+        "model_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MODEL_ARTIFACT.json",
+        "training_status_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_TRAINING_STATUS.json",
+        "readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json"
+      },
+      "outputs": {
+        "predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+        "predictions_sha256": "ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7",
+        "rows": 349
+      },
+      "readiness_failures": [
+        "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
+        "market_setup_groups observed 223 required >=300",
+        "active_weeks observed 3.37 required >=8",
+        "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
+        "feature_budget observed 0 required >=6",
+        "slippage_readiness observed INSUFFICIENT required ADEQUATE"
+      ],
+      "model_artifact": {
+        "present": false,
+        "training_status_valid": false,
+        "model_id": "",
+        "model_hash": ""
+      },
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Generate real TAKE/SKIP shadow scores only after C03 PASS and a locked reviewed model artifact exists."
+    },
+    "c06": {
+      "status": "REFUSED_NOT_READY",
+      "stage": "C06-EA-HANDOFF",
+      "created_at_utc": "2026-06-22T06:03:15Z",
+      "schema_version": "a3_ml_ea_handoff_v1",
+      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "authorization": {
+        "python_demo_predictions_authorized": false,
+        "ea_consumption_authorized": false,
+        "mt5_file_publish_requested": false,
+        "mt5_file_publish_attempted": false,
+        "broker_action_authorized": false
+      },
+      "inputs": {
+        "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_ea_handoff_contract.json",
+        "shadow_bridge_status": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
+        "shadow_predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
+        "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml"
+      },
+      "outputs": {
+        "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
+        "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.md",
+        "staging_dir": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\ea_handoff",
+        "terminal_file_name": "A3_ML_EA_HANDOFF.csv",
+        "staged_files": [],
+        "published_files": []
+      },
+      "accounts": [
+        {
+          "account_label": "A1",
+          "account_scope": "1025742",
+          "role": "standard_experimental_demo",
+          "files_roots": [
+            "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+          ]
+        },
+        {
+          "account_label": "A2",
+          "account_scope": "1033030",
+          "role": "tier1_breakout_only",
+          "files_roots": [
+            "C:/MT5PortableTier1BestEA/MQL5/Files"
+          ]
+        },
+        {
+          "account_label": "A3",
+          "account_scope": "1033669",
+          "role": "paused_repair_lane",
+          "files_roots": [
+            "C:/MT5PortableRepairLane/MQL5/Files"
+          ]
+        }
+      ],
+      "validations": [
+        {
+          "check": "shadow_bridge_ready",
+          "passed": false,
+          "detail": "observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY"
+        },
+        {
+          "check": "bridge_authorizes_ea_consumption",
+          "passed": false,
+          "detail": "observed=False required=true"
+        },
+        {
+          "check": "bridge_blocks_broker_action",
+          "passed": true,
+          "detail": "observed=False required=false"
+        },
+        {
+          "check": "predictions_file_exists",
+          "passed": true,
+          "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv"
+        },
+        {
+          "check": "predictions_hash_matches_bridge",
+          "passed": true,
+          "detail": "observed=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7 expected=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7"
+        },
+        {
+          "check": "predictions_not_empty",
+          "passed": true,
+          "detail": "rows=349"
+        },
+        {
+          "check": "prediction_actions_allowed",
+          "passed": true,
+          "detail": "observed=ABSTAIN"
+        },
+        {
+          "check": "prediction_accounts_allowed",
+          "passed": true,
+          "detail": "observed=1025742,1033030,1033669"
+        },
+        {
+          "check": "all_allowed_accounts_configured",
+          "passed": true,
+          "detail": "configured=1025742,1033030,1033669"
+        },
+        {
+          "check": "all_accounts_have_files_roots",
+          "passed": true,
+          "detail": "A1=C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files; A2=C:/MT5PortableTier1BestEA/MQL5/Files; A3=C:/MT5PortableRepairLane/MQL5/Files"
+        },
+        {
+          "check": "terminal_file_name_safe",
+          "passed": true,
+          "detail": "A3_ML_EA_HANDOFF.csv"
+        }
+      ],
+      "boundary": {
+        "mt5_connection_attempted": false,
+        "terminal_runtime_change_authorized": false,
+        "ea_file_drop_authorized": false,
+        "broker_action_authorized": false
+      },
+      "next_allowed_stage": "Wait for C03 PASS, C05 TRAINED_SHADOW_ONLY, and C04 READY_SHADOW_ONLY, then rerun C06."
+    }
+  },
+  "next_blocker": "C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE",
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Collect more live data on A1/A2/A3, rerun C02 live export when market data advances, then rerun C07."
+}

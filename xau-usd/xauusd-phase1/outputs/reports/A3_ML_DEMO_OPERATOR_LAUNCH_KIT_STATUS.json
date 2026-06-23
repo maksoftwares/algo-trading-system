@@ -1,0 +1,160 @@
+{
+  "status": "READY_OPERATOR_ATTACH_KIT",
+  "stage": "C32-DEMO-OPERATOR-LAUNCH-KIT",
+  "created_at_utc": "2026-06-21T22:34:28Z",
+  "schema_version": "a3_ml_demo_operator_launch_kit_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066",
+  "authorization": {
+    "official_model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "summary": {
+    "c29_demo_shadow_operator_runbook": "ACTION_REQUIRED_MANUAL_ATTACH",
+    "c31_demo_attach_watch": "WAITING_FOR_MANUAL_ATTACH",
+    "account_count": 3
+  },
+  "accounts": [
+    {
+      "account_label": "A1",
+      "account_scope": "1025742",
+      "role": "standard_experimental_demo",
+      "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+      "files_root": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files",
+      "observer_runtime_logging": false,
+      "observer_expert_exists": true,
+      "observer_preset_exists": true,
+      "observer_expert_name": "A3MlPredictionObserver",
+      "observer_preset_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+      "handoff_exists": true,
+      "broker_shadow_tap_exists": false,
+      "recommended_broker_shadow_experts": [
+        "Phase2ExperimentalDemoExecutor",
+        "Phase2ExperimentalDemoRepairExecutor"
+      ],
+      "safe_broker_shadow_presets": true,
+      "safe_broker_shadow_preset_names": [
+        "Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+        "Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set"
+      ],
+      "safe_broker_shadow_preset_paths": [
+        "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A1.a3_ml_shadow_readonly.set",
+        "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Presets\\Phase2ExperimentalDemoRepairExecutor.A1.a3_ml_shadow_readonly.set"
+      ],
+      "broker_shadow_tap_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv"
+    },
+    {
+      "account_label": "A2",
+      "account_scope": "1033030",
+      "role": "tier1_breakout_only",
+      "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+      "files_root": "C:/MT5PortableTier1BestEA/MQL5/Files",
+      "observer_runtime_logging": false,
+      "observer_expert_exists": true,
+      "observer_preset_exists": true,
+      "observer_expert_name": "A3MlPredictionObserver",
+      "observer_preset_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+      "handoff_exists": true,
+      "broker_shadow_tap_exists": false,
+      "recommended_broker_shadow_experts": [
+        "Phase2ExperimentalDemoExecutor"
+      ],
+      "safe_broker_shadow_presets": true,
+      "safe_broker_shadow_preset_names": [
+        "Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set"
+      ],
+      "safe_broker_shadow_preset_paths": [
+        "C:\\MT5PortableTier1BestEA\\MQL5\\Presets\\Phase2ExperimentalDemoExecutor.A2.a3_ml_shadow_readonly.set"
+      ],
+      "broker_shadow_tap_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv"
+    },
+    {
+      "account_label": "A3",
+      "account_scope": "1033669",
+      "role": "paused_repair_lane",
+      "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+      "files_root": "C:/MT5PortableRepairLane/MQL5/Files",
+      "observer_runtime_logging": false,
+      "observer_expert_exists": true,
+      "observer_preset_exists": true,
+      "observer_expert_name": "A3MlPredictionObserver",
+      "observer_preset_path": "C:\\MT5PortableRepairLane\\MQL5\\Presets\\A3MlPredictionObserver.passive_xauusd.set",
+      "handoff_exists": true,
+      "broker_shadow_tap_exists": false,
+      "recommended_broker_shadow_experts": [
+        "Account3BreakoutImprovedExecutor",
+        "Account3BreakoutPlainExecutor",
+        "Account3BreakoutTier1CompatExecutor",
+        "Account3SoftRetestExecutor"
+      ],
+      "safe_broker_shadow_presets": true,
+      "safe_broker_shadow_preset_names": [
+        "Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+        "Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+        "Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+        "Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set"
+      ],
+      "safe_broker_shadow_preset_paths": [
+        "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set",
+        "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set",
+        "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set",
+        "C:\\MT5PortableRepairLane\\MQL5\\Presets\\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set"
+      ],
+      "broker_shadow_tap_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv"
+    }
+  ],
+  "commands": {
+    "regenerate_operator_launch_kit": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c32_generate_demo_operator_launch_kit.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",
+    "run_operator_launch_kit": "powershell -ExecutionPolicy Bypass -File 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT.ps1'",
+    "demo_attach_watch": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c31_watch_demo_attach.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --timeout-seconds 300 --poll-seconds 5",
+    "post_attach_demo_shadow_wait": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c28_wait_for_demo_shadow_post_attach.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1' --timeout-seconds 300 --poll-seconds 5"
+  },
+  "inputs": {
+    "c29_demo_shadow_operator_runbook": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_SHADOW_OPERATOR_RUNBOOK_STATUS.json",
+    "c31_demo_attach_watch": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_ATTACH_WATCH_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT_STATUS.md",
+    "operator_kit_script": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT.ps1"
+  },
+  "validations": [
+    {
+      "check": "accounts_present",
+      "passed": true,
+      "detail": "accounts=3"
+    },
+    {
+      "check": "kit_script_target_safe",
+      "passed": true,
+      "detail": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DEMO_OPERATOR_LAUNCH_KIT.ps1"
+    },
+    {
+      "check": "script_contains_c31_watch",
+      "passed": true,
+      "detail": "C31 watcher command"
+    },
+    {
+      "check": "script_contains_c28_proof_command",
+      "passed": true,
+      "detail": "C28 proof command"
+    },
+    {
+      "check": "script_has_no_broker_action_tokens",
+      "passed": true,
+      "detail": "ok"
+    }
+  ],
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "operator_script_generated": true,
+    "operator_script_executed": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Run the generated operator kit while attaching/reloading MT5 EAs, then run C28 after C31 passes."
+}

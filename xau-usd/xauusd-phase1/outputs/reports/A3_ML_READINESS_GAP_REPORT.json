@@ -1,0 +1,230 @@
+{
+  "status": "WAITING_FOR_DECISION_HISTORY",
+  "stage": "C11-READINESS-GAP",
+  "created_at_utc": "2026-06-22T06:38:41Z",
+  "schema_version": "a3_ml_readiness_gap_report_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "c03_status": "NO_GO",
+  "decision_coverage": {
+    "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
+    "rows": 574,
+    "min_decision_utc": "2026-05-29T09:39:56Z",
+    "max_decision_utc": "2026-06-22T00:19:58Z",
+    "active_span_days": 23.6111,
+    "active_span_weeks": 3.373
+  },
+  "c01_snapshot": {
+    "status": "PIPELINE_ONLY",
+    "snapshot_rows": 349,
+    "exact_unique_signals": 349,
+    "candidate_trainable_groups": 0,
+    "selected_features": 0,
+    "regime_balance": {
+      "FALLING": 349
+    }
+  },
+  "gate_gaps": [
+    {
+      "gate": "dataset_status",
+      "passed": false,
+      "observed": "PIPELINE_ONLY",
+      "required": "EXPLORATORY_MODEL or higher",
+      "gap_value": null,
+      "gap_text": "needs different category/state"
+    },
+    {
+      "gate": "market_setup_groups",
+      "passed": false,
+      "observed": "223",
+      "required": ">=300",
+      "gap_value": 77.0,
+      "gap_text": "77"
+    },
+    {
+      "gate": "minority_labels",
+      "passed": true,
+      "observed": "172",
+      "required": ">=90",
+      "gap_value": 0.0,
+      "gap_text": "0"
+    },
+    {
+      "gate": "active_weeks",
+      "passed": false,
+      "observed": "3.37",
+      "required": ">=8",
+      "gap_value": 4.63,
+      "gap_text": "4.63 weeks"
+    },
+    {
+      "gate": "both_directions",
+      "passed": true,
+      "observed": "LONG,SHORT",
+      "required": "LONG and SHORT",
+      "gap_value": null,
+      "gap_text": "needs different category/state"
+    },
+    {
+      "gate": "at_least_two_regimes",
+      "passed": false,
+      "observed": "FALLING",
+      "required": ">=2 non-UNKNOWN regimes",
+      "gap_value": null,
+      "gap_text": "needs different category/state"
+    },
+    {
+      "gate": "feature_budget",
+      "passed": false,
+      "observed": "0",
+      "required": ">=6",
+      "gap_value": 6.0,
+      "gap_text": "6"
+    },
+    {
+      "gate": "slippage_readiness",
+      "passed": false,
+      "observed": "INSUFFICIENT",
+      "required": "ADEQUATE",
+      "gap_value": null,
+      "gap_text": "needs different category/state"
+    },
+    {
+      "gate": "leakage",
+      "passed": true,
+      "observed": "0",
+      "required": "0",
+      "gap_value": null,
+      "gap_text": "none"
+    }
+  ],
+  "slippage_gap": {
+    "status": "INSUFFICIENT",
+    "requirements": {
+      "entry_fills": 200,
+      "sl_exits": 100,
+      "tp_exits": 50,
+      "request_price_resolved": 200
+    },
+    "totals": {
+      "entry_fills": 1394,
+      "sl_exits": 845,
+      "tp_exits": 522,
+      "request_price_resolved": 251
+    },
+    "total_deficits": {
+      "entry_fills": 0,
+      "sl_exits": 0,
+      "tp_exits": 0,
+      "request_price_resolved": 0
+    },
+    "accounts": [
+      {
+        "account_label": "A1",
+        "entry_fills": 1307,
+        "sl_exits": 783,
+        "tp_exits": 497,
+        "timeout_or_other_exits": 27,
+        "request_price_resolved": 215,
+        "p50_adverse_slippage_points": "0",
+        "p95_adverse_slippage_points": "39",
+        "slippage_status": "ADEQUATE",
+        "deficits_if_per_account": {
+          "entry_fills": 0,
+          "sl_exits": 0,
+          "tp_exits": 0,
+          "request_price_resolved": 0
+        }
+      },
+      {
+        "account_label": "A2",
+        "entry_fills": 12,
+        "sl_exits": 8,
+        "tp_exits": 4,
+        "timeout_or_other_exits": 0,
+        "request_price_resolved": 12,
+        "p50_adverse_slippage_points": "2",
+        "p95_adverse_slippage_points": "33",
+        "slippage_status": "INSUFFICIENT",
+        "deficits_if_per_account": {
+          "entry_fills": 188,
+          "sl_exits": 92,
+          "tp_exits": 46,
+          "request_price_resolved": 188
+        }
+      },
+      {
+        "account_label": "A3",
+        "entry_fills": 75,
+        "sl_exits": 54,
+        "tp_exits": 21,
+        "timeout_or_other_exits": 0,
+        "request_price_resolved": 24,
+        "p50_adverse_slippage_points": "0",
+        "p95_adverse_slippage_points": "28",
+        "slippage_status": "INSUFFICIENT",
+        "deficits_if_per_account": {
+          "entry_fills": 125,
+          "sl_exits": 46,
+          "tp_exits": 29,
+          "request_price_resolved": 176
+        }
+      }
+    ]
+  },
+  "export_coverage": {
+    "status": "PASS",
+    "requested_start_utc": "2026-02-22T02:19:00Z",
+    "snapshot_cutoff_utc": "2026-06-22T05:47:00Z",
+    "accounts": [
+      {
+        "account_label": "A1",
+        "status": "PASS",
+        "bar_range": "2026-02-22T23:00:00Z to 2026-06-22T05:45:00Z",
+        "m5_rows": 23193,
+        "tick_days_with_rows": 13,
+        "tick_rows": 4906823
+      },
+      {
+        "account_label": "A2",
+        "status": "PASS",
+        "bar_range": "2026-02-22T23:00:00Z to 2026-06-22T05:45:00Z",
+        "m5_rows": 23193,
+        "tick_days_with_rows": 13,
+        "tick_rows": 4906823
+      },
+      {
+        "account_label": "A3",
+        "status": "PASS",
+        "bar_range": "2026-02-22T23:00:00Z to 2026-06-22T05:45:00Z",
+        "m5_rows": 23193,
+        "tick_days_with_rows": 13,
+        "tick_rows": 4906823
+      }
+    ]
+  },
+  "backfill_assessment": {
+    "verdict": "OLDER_MARKET_HISTORY_EXISTS_BUT_NO_OLDER_USABLE_DECISIONS",
+    "detail": "MT5 market history begins before the first labeled decision, so bars/ticks alone are not enough; older EA decision logs or more live observer time are needed.",
+    "remaining_active_weeks": 4.63,
+    "estimated_active_weeks_pass_date_utc": "2026-07-24T10:10:22Z",
+    "older_market_history_before_first_decision": true
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_change_authorized": false,
+    "model_training_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "broker_action_authorized": false
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_READINESS_GAP_REPORT.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_READINESS_GAP_REPORT.md"
+  },
+  "next_actions": [
+    "Import older compatible EA decision/observer logs if available; market bars/ticks alone cannot satisfy active decision weeks.",
+    "Keep A1/A2/A3 terminals collecting passive observer data and rerun C10 with --refresh-live-readonly after new market sessions.",
+    "Need about 4.63 more active weeks unless older compatible decisions are imported.",
+    "Need about 77 more market setup groups."
+  ]
+}

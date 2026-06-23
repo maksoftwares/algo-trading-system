@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "stage": "C02-06",
+  "created_at_utc": "2026-06-22T06:03:11Z",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "model_training_authorized": false,
+    "broker_action_authorized": false,
+    "terminal_runtime_change_authorized": false,
+    "diagnostic_labels_only": true
+  },
+  "counts": {
+    "labels": 574,
+    "mature": 424,
+    "positive": 172,
+    "negative": 252,
+    "unresolved": 150,
+    "outcomes": {
+      "CANCELLED_NO_FRESH_TICK": 150,
+      "TP": 172,
+      "SL": 252
+    }
+  },
+  "by_account": {
+    "A1": {
+      "labels": 347,
+      "mature": 197,
+      "positive": 79,
+      "negative": 118,
+      "timeouts": 0,
+      "unresolved": 150,
+      "outcomes": {
+        "CANCELLED_NO_FRESH_TICK": 150,
+        "TP": 79,
+        "SL": 118
+      }
+    },
+    "A2": {
+      "labels": 95,
+      "mature": 95,
+      "positive": 43,
+      "negative": 52,
+      "timeouts": 0,
+      "unresolved": 0,
+      "outcomes": {
+        "TP": 43,
+        "SL": 52
+      }
+    },
+    "A3": {
+      "labels": 132,
+      "mature": 132,
+      "positive": 50,
+      "negative": 82,
+      "timeouts": 0,
+      "unresolved": 0,
+      "outcomes": {
+        "SL": 82,
+        "TP": 50
+      }
+    }
+  },
+  "outputs": {
+    "labels_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\labels\\diagnostic_tick_labels.csv",
+    "labels_sha256": "4b11ab32e92d15a1e972d4d29b78f22bbcaaa1d64897a66ac033830bc568ec57",
+    "labeled_decisions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
+    "labeled_decisions_sha256": "7b82f2747222c15d0bdb4512cc3c1f35cf86de3ff7ba8fa54092a411841c9a5e",
+    "slippage_readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_SLIPPAGE_READINESS.json"
+  },
+  "next_allowed_stage": "C03 label/slippage promotion and leakage validation before training"
+}

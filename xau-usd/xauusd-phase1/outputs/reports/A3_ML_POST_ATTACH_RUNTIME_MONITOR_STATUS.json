@@ -1,0 +1,69 @@
+{
+  "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+  "stage": "C22-ML-POST-ATTACH-RUNTIME-MONITOR",
+  "created_at_utc": "2026-06-22T06:38:40Z",
+  "started_at_utc": "2026-06-22T06:38:40Z",
+  "schema_version": "a3_ml_post_attach_runtime_monitor_status_v1",
+  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "monitor": {
+    "timeout_seconds": 0,
+    "poll_seconds": 5,
+    "elapsed_seconds": 0.11,
+    "attempt_count": 1,
+    "timed_out": false
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "upstream_statuses": {
+    "c20_runtime_evidence": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+    "c21_runtime_launch_diagnostic": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
+  },
+  "runtime_evidence": {
+    "handoff_files_all_accounts": true,
+    "passive_observer_runtime_all_accounts": true,
+    "broker_shadow_tap_runtime_all_accounts": true,
+    "any_runtime_evidence": true
+  },
+  "diagnostic_summary": {
+    "startup_configs_safe_all_accounts": true,
+    "observer_log_mentions_all_accounts": false,
+    "observer_log_mentions_any_account": false,
+    "error_mentions_any_account": false
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "elapsed_seconds": 0.11,
+      "c20_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "c21_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
+      "handoff_files_all_accounts": true,
+      "passive_observer_runtime_all_accounts": true,
+      "broker_shadow_tap_runtime_all_accounts": true,
+      "startup_configs_safe_all_accounts": true,
+      "observer_log_mentions_all_accounts": false
+    }
+  ],
+  "inputs": {
+    "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
+    "c20_runtime_evidence": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_EVIDENCE_STATUS.json",
+    "c21_runtime_launch_diagnostic": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_RUNTIME_LAUNCH_DIAGNOSTIC_STATUS.json"
+  },
+  "outputs": {
+    "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.json",
+    "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_POST_ATTACH_RUNTIME_MONITOR_STATUS.md"
+  },
+  "boundary": {
+    "mt5_connection_attempted": false,
+    "data_export_attempted": false,
+    "terminal_runtime_launch_attempted": false,
+    "terminal_shutdown_attempted": false,
+    "profile_or_chart_file_write_attempted": false,
+    "ea_file_drop_authorized": false,
+    "broker_action_authorized": false
+  },
+  "next_allowed_stage": "Runtime evidence is present on all accounts. Rerun C19 with --no-run-pipeline, then continue collecting data until C03 passes."
+}
