@@ -1,6 +1,6 @@
 # A1/A2/A3 Runtime Repair - 2026-06-23
 
-Status: `PASS_WITH_ORDER_LOG_PENDING`
+Status: `PASS_ORDER_LOG_PROOF_CLOSED`
 
 Purpose: repair the runtime drift found on 2026-06-22, where A1/A2 were no longer running the locked `920101` evening forward-test identity and A3 had a broker-enabled fill-collection executor.
 
@@ -42,7 +42,12 @@ Current broker-action inventory:
 
 A3 verification: no broker-action-enabled rows remain in the inspected A3 profile.
 
-## Remaining Pending Item
+## Order-Log Proof Closure
 
-`a1_first_order_log_proof` and `a2_first_order_log_proof` remain pending until the next valid `breakout_retest` signal occurs inside the allowed server-hour window. This is expected wall-clock/runtime evidence, not a current configuration failure.
+`a1_first_order_log_proof` and `a2_first_order_log_proof` are now closed.
 
+Closure artifact:
+
+`xau-usd/xauusd-phase1/outputs/reports/A1_A2_920101_ORDER_LOG_PROOF_CLOSED_2026_06_23.md`
+
+Both A1 and A2 produced post-repair `ORDER_SEND_OK` rows for `XAUUSD`, magic `920101`, during the allowed `12->15` server-hour window on 2026-06-23. The runtime repair is therefore no longer waiting on first-order proof.
