@@ -240,6 +240,7 @@ def apply_a1_profile(profile: Path) -> list[dict[str, Any]]:
             })
             write_text_preserving_encoding(path, text)
             changes.append({"path": str(path), "before_sha256": before, "after_sha256": sha256_file(path), "action": "disabled_non_spec_broker_action"})
+    changes.extend(disable_extra_phase2_executors(profile, keep_chart="chart03.chr"))
     wr50 = profile / "chart21.chr"
     if wr50.exists():
         before = sha256_file(wr50)
@@ -263,11 +264,33 @@ def apply_a1_profile(profile: Path) -> list[dict[str, Any]]:
 def apply_a2_profile(profile: Path) -> list[dict[str, Any]]:
     changes: list[dict[str, Any]] = []
     chart = profile / "chart02.chr"
-    before = sha256_file(chart)
-    text = update_inputs(read_text_any(chart), executor_inputs("A2", A2_ACCOUNT, "tier1_bestea_kill_switch.txt", "a2_920101_evening"))
-    write_text_preserving_encoding(chart, text)
-    changes.append({"path": str(chart), "before_sha256": before, "after_sha256": sha256_file(chart), "action": "aligned_a2_xau_executor"})
+    changes.append(write_chart(chart, render_executor_chart("A2", A2_ACCOUNT, "tier1_bestea_kill_switch.txt", "a2_920101_evening")))
+    changes.extend(disable_extra_phase2_executors(profile, keep_chart="chart02.chr"))
     changes.append(write_chart(profile / "chart03.chr", render_guardian_chart("A2", A2_ACCOUNT, "tier1_bestea_kill_switch.txt", "919200")))
+    return changes
+
+
+def disable_extra_phase2_executors(profile: Path, *, keep_chart: str) -> list[dict[str, Any]]:
+    changes: list[dict[str, Any]] = []
+    for path in sorted(profile.glob("chart*.chr")):
+        if path.name == keep_chart:
+            continue
+        text = read_text_any(path)
+        if parse_expert(text) != EXECUTOR_EA:
+            continue
+        before = sha256_file(path)
+        text = update_inputs(text, {
+            "InpDryRunOnly": "true",
+            "InpBrokerActionAllowed": "false",
+            "InpRunId": f"DISABLED_EXTRA_PHASE2_EXECUTOR_{path.stem.upper()}_20260623",
+        })
+        write_text_preserving_encoding(path, text)
+        changes.append({
+            "path": str(path),
+            "before_sha256": before,
+            "after_sha256": sha256_file(path),
+            "action": "disabled_extra_phase2_executor",
+        })
     return changes
 
 

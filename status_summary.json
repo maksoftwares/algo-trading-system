@@ -131,8 +131,8 @@
       "touched_by_round_quarantine": false
     },
     "A3": {
-      "artifact_commit_or_release_id": "077184ed501001748ef0e5c372f4ae2fecde5520",
-      "artifact_generation_base_commit": "077184ed501001748ef0e5c372f4ae2fecde5520",
+      "artifact_commit_or_release_id": "effebb6d121c2b3af403cc1bdc26cbdfd9dfaf64",
+      "artifact_generation_base_commit": "effebb6d121c2b3af403cc1bdc26cbdfd9dfaf64",
       "artifact_integrity_status": "PASS",
       "authorization_status": "A3_ENTRY_LANES_PAUSED",
       "containment_status": "NOT_IMPLEMENTED",
@@ -223,7 +223,7 @@
     "live_trading_authorized": false,
     "real_capital_authorized": false
   },
-  "generated_at_utc": "2026-06-20T22:42:05.794613Z",
+  "generated_at_utc": "2026-06-22T20:54:57.471115Z",
   "next_evidence_required": [
     "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
     "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
@@ -309,8 +309,8 @@
   },
   "repo": {
     "branch": "main",
-    "commit": "077184ed501001748ef0e5c372f4ae2fecde5520",
-    "main_remote_commit": "ab95b3def4888921dae4861fb9398cdaf26ea4c0"
+    "commit": "effebb6d121c2b3af403cc1bdc26cbdfd9dfaf64",
+    "main_remote_commit": "e74fe61ea2c6bacb6aa5c3e5d54f7ee49ba5e462"
   },
   "schema_version": "project_status_summary_v2",
   "source_artifacts": {

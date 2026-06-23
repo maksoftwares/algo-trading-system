@@ -3,74 +3,74 @@
     "A1": [
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "false",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "true",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "EURUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart01.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
-        "sha256": "8866cf1988bf759f7528dcff53d3fb52d3b4269aea967105164dc616ea7dda85",
+        "sha256": "528a65e708b320838cddb8be8caf3194f570864770afb9bcd145e096062a7c2c",
         "symbol": "EURUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "false",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "true",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "GBPUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart02.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
-        "sha256": "f859b5e1348b3dee7270add190fd7446b517491e7d26a0adb1a83e2dd1b453e8",
+        "sha256": "7a822abcb1dfca8112fc3de204726bd8f63379b73cdc4b07a7eadd81ee41e3d6",
         "symbol": "GBPUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.30",
-        "InpMaxMeasuredSpreadPoints": "75.0",
-        "InpMaxOpenPositionsPerInstance": "1",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "15",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart03.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
-        "sha256": "519b056e237d740957f825b92a55cb5fd82e54b59886ce7b735bbd4223eedc72",
+        "sha256": "3a2e809a66afaafaa9a03636622d94581f52522ec991101970b7d0ba7733a3b6",
         "symbol": "XAUUSD"
       },
       {
@@ -94,7 +94,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
-        "sha256": "47328ed4d636dd53352c90461ab53dad8e191fbb957b598125160ede83863c2f",
+        "sha256": "c7a9ecc0e8f24e68c657fdb055d71f9a57b264910e5f06e977363af32f0a573f",
         "symbol": "EURUSD"
       },
       {
@@ -118,7 +118,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
-        "sha256": "4533f4d7045b44e2506b01fd94d6e75997b4d0099ba982d08bb20d385990290a",
+        "sha256": "6a71adbe86829276f33ba482e1db20f8ebd132e41082ee56740cf02451983172",
         "symbol": "GBPUSD"
       },
       {
@@ -142,7 +142,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
-        "sha256": "f7b716ea668c39d38193ba2e32b11d9362feeea2f00d78740ce8c4ec2a9ee572",
+        "sha256": "b2158a84deefdaaaae98812b15db7ce3cb01d19e450adcdd46527d2f618b3173",
         "symbol": "XAUUSD"
       },
       {
@@ -166,7 +166,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart07.chr",
-        "sha256": "1fd440ddcb30b72ff847a871c6b2be41d6d369677951e696b768b6624f89108d",
+        "sha256": "4a7e8e4e4ffb81b3ada6d7ca60fae622c1b6f082dc5e52d9ccc5f273f11b64da",
         "symbol": "EURUSD"
       },
       {
@@ -190,7 +190,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart08.chr",
-        "sha256": "8e649dcebfc5ce9d58970b4a2b830c6032d4f9bf1a8b0fee546b151339f122d4",
+        "sha256": "c5e5078007cd2cb05c4af063122fba5931dc5622126574ea73772d94cc65a125",
         "symbol": "GBPUSD"
       },
       {
@@ -214,7 +214,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart09.chr",
-        "sha256": "a075178cb42c6266deb6cce4a63c6bc753e2792d9d1848971d45367892b272d5",
+        "sha256": "59c5dff66a9d92c561d232280c1a8f33b8ee35cb94fb40233c613dfb93ebf753",
         "symbol": "XAUUSD"
       },
       {
@@ -238,7 +238,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart10.chr",
-        "sha256": "7930881600bce066b63158b8fa8e54367af1615348a6128ffc5591dcdd5ee14f",
+        "sha256": "24a78bd995ef6ad1b67bb3ccd323e60a3570752624ac49944e02b0f6c84a2273",
         "symbol": "GBPUSD"
       },
       {
@@ -262,7 +262,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart11.chr",
-        "sha256": "af357e524ad94baac83ca18e83dd26edb23245ba111d9371c14c1e3410030f1c",
+        "sha256": "2bf49645870a95fd5a58f820ab19ae2e0707ebe4ed05eb039f2d3b6cb524719d",
         "symbol": "XAUUSD"
       },
       {
@@ -286,7 +286,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart12.chr",
-        "sha256": "8df6f1a77f379d138ddb26d1648a5adc3a6f2c499ed8be0959043ca7225f5f03",
+        "sha256": "ea152e3e0f4da338e58ec18b702f94306a20ab2e419e4587e24cf9df957eec45",
         "symbol": "EURUSD"
       },
       {
@@ -310,7 +310,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart13.chr",
-        "sha256": "eac1ba25efc515894e884f80c4135268de9042a326430d3d0488f2729c358b78",
+        "sha256": "82c41b4939bf4c724c98b77d26fb413597bbe37f23b239de30fb12de3e6e03e1",
         "symbol": "GBPUSD"
       },
       {
@@ -334,7 +334,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart14.chr",
-        "sha256": "99380c8d505835a4c2316713f616e5fbaaafc458d259b4a5e826d187a5b3f202",
+        "sha256": "cb77c465d6800cfcec30df4cfebdd2ae7939d7968712a560b093918ba1a82a77",
         "symbol": "XAUUSD"
       },
       {
@@ -358,7 +358,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart15.chr",
-        "sha256": "5a50ce6222367337f3e15876d645527120a457d12a4dc6dd66e8c2e70cf9c2e0",
+        "sha256": "02ff3d0fe63286c7d64ff5981d774db9b0a263b11c63b273c2fda61408a0bcfe",
         "symbol": "XAUUSD"
       },
       {
@@ -382,7 +382,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart16.chr",
-        "sha256": "907654d261a958d13e5612a0e02ee5d27406f0603c90e2096947cc9e4b6b2a9f",
+        "sha256": "c355b5538c505e0e584c396b70c03544a003be71ff9614ddb4688c8e29b9cf1c",
         "symbol": "XAUUSD"
       },
       {
@@ -406,83 +406,11 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart17.chr",
-        "sha256": "cb4af5b1568c1a754716b3850eac919c2e92085ef6ff39dd2e9e41b27efac07a",
+        "sha256": "56c27feea1b93ac0f368b99a4e9f01a20c08b792ebfe6922d47020f033ed84b6",
         "symbol": "XAUUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "false",
-        "InpCandidate": "symbol_normalized_round_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "true",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart18.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
-        "sha256": "2317eaf7ba6e4218c086cdb3564b63e1f001e3ee880b80dfa72183ee86863b20",
-        "symbol": "XAUUSD"
-      },
-      {
-        "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "false",
-        "InpCandidate": "session_extreme_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "true",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart19.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
-        "sha256": "8afac8d5736ccd57048392a057713d25e5301b0e65674a2938756d13662dc141",
-        "symbol": "XAUUSD"
-      },
-      {
-        "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "false",
-        "InpCandidate": "session_extreme_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "true",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "EURUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart20.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr",
-        "sha256": "f4c062ed1ed96483794f07c12fff61138784d6d854cc4bf83252dbf2e45d83d5",
-        "symbol": "EURUSD"
-      },
-      {
-        "InpAllowDemoTrading": "false",
         "InpAllowedAccountLoginsCsv": "",
         "InpBrokerActionAllowed": "",
         "InpCandidate": "",
@@ -490,19 +418,91 @@
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
         "InpDryRunOnly": "",
-        "InpEntryHaltFileName": "experimental_demo_kill_switch.txt",
+        "InpEntryHaltFileName": "",
         "InpMaxEstimatedCostR": "",
         "InpMaxMeasuredSpreadPoints": "",
         "InpMaxOpenPositionsPerInstance": "",
         "InpTargetSymbol": "",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart18.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
+        "sha256": "1bdaf1570c41659d00a06a403554dca8dde623ad2973df95354d86aa72ecd802",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart19.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
+        "sha256": "c20f6c6b2a6fbe0f194310e8228b620ac61b520d3f290e209bf9e3fff78cbbd9",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart20.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr",
+        "sha256": "9cfb002273d3b95a4b1a1ceab257d0ad19fd1b6f02567055057761cbd9c6bf96",
+        "symbol": "EURUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart21.chr",
-        "expert": "WR50_BreakoutWideStop_v0",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart21.chr",
-        "sha256": "cc06731e2616fa64c05d33f80c8a3ea39feb5ee9c6b3c450203f2e2632917860",
+        "sha256": "61b2fd82e73baa8ce13289426e8ba2d180b77f6ada2ecc807f713bb94a87d1b4",
         "symbol": "XAUUSD"
       },
       {
@@ -526,7 +526,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart22.chr",
-        "sha256": "817c297558870450447b3840df4b3369b30c2de36566efb04da436a15aff4bd9",
+        "sha256": "032b8c70f101d474369eade28e2d9300ea1b747d6e583dafb7e849b125eb8763",
         "symbol": "XAUUSD"
       },
       {
@@ -550,7 +550,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart23.chr",
-        "sha256": "d66ea513d8683813b31943d3eb6147f2a1b13990acbf2a5e7cd081b37569a467",
+        "sha256": "c932eceff39e649d9d9170574cf14422008212548d9650a013ca505d6a4176d8",
         "symbol": "XAUUSD"
       },
       {
@@ -574,7 +574,7 @@
         "expert": "AccountEquityGuardianShadow",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart24.chr",
-        "sha256": "ec7699361dc6bdaaa326372976ed91587b5b4eab74067e1f096944861ea75e29",
+        "sha256": "ef632ae4145cc80ed13ba46ba8a7a7e0984a71b9419611c460c9c784851618a0",
         "symbol": "XAUUSD"
       },
       {
@@ -598,7 +598,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart25.chr",
-        "sha256": "568bb0b9dde8e0c404ad039a779ed527ecaa9adb3f8aab64cc415f966b9cede8",
+        "sha256": "ac71c80dbf95fc82c19ea23225f487d220e0bc7079805768f0f61d0cbd0cf91d",
         "symbol": "BTCUSD"
       },
       {
@@ -622,7 +622,31 @@
         "expert": "Account1DailyProfitFloorGuardian",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr",
-        "sha256": "a4d1cfdc253da8a0dbe319bba605d3b18b4c2e4fdda0b836176ac727c65b8a6b",
+        "sha256": "d6889eeeae76aee6a4b74caddbdc30b2bda5fe3270e65dfde207f7373eab3cf5",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "1025742",
+        "InpBrokerActionAllowed": "true",
+        "InpCandidate": "breakout_retest",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "false",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "0.15",
+        "InpMaxMeasuredSpreadPoints": "75.0",
+        "InpMaxOpenPositionsPerInstance": "1",
+        "InpTargetSymbol": "XAUUSD",
+        "InpTradeSessionEndHour": "23",
+        "InpTradeSessionGateEnabled": "false",
+        "InpTradeSessionStartHour": "0",
+        "chart": "chart27.chr",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart27.chr",
+        "sha256": "6898785fa8472329e300cf623af94ea464445ee1ce5bad13a05197770499039f",
         "symbol": "XAUUSD"
       }
     ],
@@ -648,31 +672,31 @@
         "expert": "AccountEquityGuardianShadow",
         "lane": "A2",
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
-        "sha256": "80fed30aea6c7c38805d0518c38b5a26f49b78306b78e87d6ec5cc01b716110a",
+        "sha256": "be330e40392746a5da9b2405f75c270b93c521800421c36d13633a7a786c165c",
         "symbol": "XAUUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1033030",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.30",
-        "InpMaxMeasuredSpreadPoints": "75.0",
-        "InpMaxOpenPositionsPerInstance": "1",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "15",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart02.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A2",
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
-        "sha256": "5e13a695d54a345a34406cbc1f61376b54a66e7e205117eec4a3e0f392f1cb37",
+        "sha256": "3ab07db9261f25e687a64a7fde7352d3ab73f745176228f07ba4eddcff81b4a5",
         "symbol": "XAUUSD"
       },
       {
@@ -696,7 +720,31 @@
         "expert": "Account1DailyProfitFloorGuardian",
         "lane": "A2",
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
-        "sha256": "22c46896c3261ffb330aa6140c0637801bdad301311b93a4d1c2d59074afa28d",
+        "sha256": "5a28c4ead8a152a1cd88cff0cfc3e16e7982aedc92db9e4d170d9da62c202aed",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "1033030",
+        "InpBrokerActionAllowed": "true",
+        "InpCandidate": "breakout_retest",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "false",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "0.15",
+        "InpMaxMeasuredSpreadPoints": "75.0",
+        "InpMaxOpenPositionsPerInstance": "1",
+        "InpTargetSymbol": "XAUUSD",
+        "InpTradeSessionEndHour": "23",
+        "InpTradeSessionGateEnabled": "false",
+        "InpTradeSessionStartHour": "0",
+        "chart": "chart04.chr",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "lane": "A2",
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+        "sha256": "27858fde3316669876ed2685f29d3b12167f7c191185346cf8ec6524d0ea0fc0",
         "symbol": "XAUUSD"
       }
     ]
@@ -706,50 +754,50 @@
     "A1": [
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "EURUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart01.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
-        "sha256": "d38733caa40b656d35dcab1efe79a43f47bb0bc810980a89f73990ffe51c23ef",
+        "sha256": "528a65e708b320838cddb8be8caf3194f570864770afb9bcd145e096062a7c2c",
         "symbol": "EURUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "breakout_retest",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
         "InpCloseActionAllowed": "",
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
+        "InpDryRunOnly": "",
         "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "GBPUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart02.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
-        "sha256": "3d5106baa225fe94033f80326329eaf2b3d1e894edfaf06e00728b8529a041b5",
+        "sha256": "7a822abcb1dfca8112fc3de204726bd8f63379b73cdc4b07a7eadd81ee41e3d6",
         "symbol": "GBPUSD"
       },
       {
@@ -773,7 +821,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
-        "sha256": "ef2f2960503eb98af6fc1224a8ba80ac69293542fcc54d1d8adc2f681c70d2c6",
+        "sha256": "3a2e809a66afaafaa9a03636622d94581f52522ec991101970b7d0ba7733a3b6",
         "symbol": "XAUUSD"
       },
       {
@@ -797,7 +845,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
-        "sha256": "c25fdafa4ccd770b045f226099d13100884c22d2a4dca40d57f9e994fb8ec428",
+        "sha256": "c7a9ecc0e8f24e68c657fdb055d71f9a57b264910e5f06e977363af32f0a573f",
         "symbol": "EURUSD"
       },
       {
@@ -821,7 +869,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart05.chr",
-        "sha256": "f308e57f31e6b6c7668b20670d60d494546992288b215deb866032e00caee736",
+        "sha256": "6a71adbe86829276f33ba482e1db20f8ebd132e41082ee56740cf02451983172",
         "symbol": "GBPUSD"
       },
       {
@@ -845,7 +893,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart06.chr",
-        "sha256": "8650f5bc86739340dc885ab8c61fc03e3dc5ae985803c3073f8623911d1d31cd",
+        "sha256": "b2158a84deefdaaaae98812b15db7ce3cb01d19e450adcdd46527d2f618b3173",
         "symbol": "XAUUSD"
       },
       {
@@ -869,7 +917,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart07.chr",
-        "sha256": "71f2cc0ecf147eeeddf625d37197458c3196d1f0a0f3650dcfc38bbe03f9c335",
+        "sha256": "4a7e8e4e4ffb81b3ada6d7ca60fae622c1b6f082dc5e52d9ccc5f273f11b64da",
         "symbol": "EURUSD"
       },
       {
@@ -893,7 +941,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart08.chr",
-        "sha256": "8deffe372b6e11458ac759330563ae7235f61c7a6ea2fa338ba81313799c7cf9",
+        "sha256": "c5e5078007cd2cb05c4af063122fba5931dc5622126574ea73772d94cc65a125",
         "symbol": "GBPUSD"
       },
       {
@@ -917,7 +965,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart09.chr",
-        "sha256": "92f34f604a64bcdcc6a615c62871bc7f7462c864e1d8e2fcb248667dd9024f5c",
+        "sha256": "59c5dff66a9d92c561d232280c1a8f33b8ee35cb94fb40233c613dfb93ebf753",
         "symbol": "XAUUSD"
       },
       {
@@ -941,7 +989,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart10.chr",
-        "sha256": "1c4bf22a7364077aa98df73162fedc4c7a7716665d30b7492d5eb26a22191b4d",
+        "sha256": "24a78bd995ef6ad1b67bb3ccd323e60a3570752624ac49944e02b0f6c84a2273",
         "symbol": "GBPUSD"
       },
       {
@@ -965,7 +1013,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart11.chr",
-        "sha256": "c6fece2e2e39f67f5ffaca68c1beb98125aff32bb434d040e34f275b8f6a41a9",
+        "sha256": "2bf49645870a95fd5a58f820ab19ae2e0707ebe4ed05eb039f2d3b6cb524719d",
         "symbol": "XAUUSD"
       },
       {
@@ -989,7 +1037,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart12.chr",
-        "sha256": "8cf15bce034d00ff6a7f2bbcfc460092b5051f168cb58f949e1579a878d24a4f",
+        "sha256": "ea152e3e0f4da338e58ec18b702f94306a20ab2e419e4587e24cf9df957eec45",
         "symbol": "EURUSD"
       },
       {
@@ -1013,7 +1061,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart13.chr",
-        "sha256": "5db9fff4a7d69e11b0002f5e55529417ddcd70946095790f3b5293282f7d22dc",
+        "sha256": "82c41b4939bf4c724c98b77d26fb413597bbe37f23b239de30fb12de3e6e03e1",
         "symbol": "GBPUSD"
       },
       {
@@ -1037,7 +1085,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart14.chr",
-        "sha256": "a9b1bb8fa110391361c754b754772b8a6f149129e43a4ec0ae267ead1949aaad",
+        "sha256": "cb77c465d6800cfcec30df4cfebdd2ae7939d7968712a560b093918ba1a82a77",
         "symbol": "XAUUSD"
       },
       {
@@ -1061,7 +1109,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart15.chr",
-        "sha256": "7c082a05ff11f99207f4edffe329be93d2500896a18e42b695da7b7d01f299c3",
+        "sha256": "02ff3d0fe63286c7d64ff5981d774db9b0a263b11c63b273c2fda61408a0bcfe",
         "symbol": "XAUUSD"
       },
       {
@@ -1085,7 +1133,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart16.chr",
-        "sha256": "c416666776876e3c644fff0292cfd64bb71f1234016307488ac0e18d55f48d34",
+        "sha256": "c355b5538c505e0e584c396b70c03544a003be71ff9614ddb4688c8e29b9cf1c",
         "symbol": "XAUUSD"
       },
       {
@@ -1109,83 +1157,11 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart17.chr",
-        "sha256": "d49c0e2023662a622819b1fa19bf1b47a38497ac6c8560fb4441b79bdcc2c45b",
+        "sha256": "56c27feea1b93ac0f368b99a4e9f01a20c08b792ebfe6922d47020f033ed84b6",
         "symbol": "XAUUSD"
       },
       {
         "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "symbol_normalized_round_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart18.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
-        "sha256": "c785e7fbd354ba4c7ad049706d3946325a1b776d355620fb3660d0a08dd4dee8",
-        "symbol": "XAUUSD"
-      },
-      {
-        "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "session_extreme_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart19.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
-        "sha256": "8e8d4665b105861a09e8b20736df6b99ca2719faacbbb03dd75bc1fa136bdba8",
-        "symbol": "XAUUSD"
-      },
-      {
-        "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1025742",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "session_extreme_retest_v0_repair_v1",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.00",
-        "InpMaxMeasuredSpreadPoints": "0.0",
-        "InpMaxOpenPositionsPerInstance": "0",
-        "InpTargetSymbol": "EURUSD",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart20.chr",
-        "expert": "Phase2ExperimentalDemoRepairExecutor",
-        "lane": "A1",
-        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr",
-        "sha256": "650bf2076598a3c1cf9c870ea3e37c46ecc3f09d835acb91dcaf66319975622c",
-        "symbol": "EURUSD"
-      },
-      {
-        "InpAllowDemoTrading": "true",
         "InpAllowedAccountLoginsCsv": "",
         "InpBrokerActionAllowed": "",
         "InpCandidate": "",
@@ -1193,19 +1169,91 @@
         "InpDailyLossStopAed": "",
         "InpDailyLossStopEnabled": "",
         "InpDryRunOnly": "",
-        "InpEntryHaltFileName": "experimental_demo_kill_switch.txt",
+        "InpEntryHaltFileName": "",
         "InpMaxEstimatedCostR": "",
         "InpMaxMeasuredSpreadPoints": "",
         "InpMaxOpenPositionsPerInstance": "",
         "InpTargetSymbol": "",
-        "InpTradeSessionEndHour": "1",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart18.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr",
+        "sha256": "1bdaf1570c41659d00a06a403554dca8dde623ad2973df95354d86aa72ecd802",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart19.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr",
+        "sha256": "c20f6c6b2a6fbe0f194310e8228b620ac61b520d3f290e209bf9e3fff78cbbd9",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
+        "chart": "chart20.chr",
+        "expert": "NO_EA",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr",
+        "sha256": "9cfb002273d3b95a4b1a1ceab257d0ad19fd1b6f02567055057761cbd9c6bf96",
+        "symbol": "EURUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart21.chr",
-        "expert": "WR50_BreakoutWideStop_v0",
+        "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart21.chr",
-        "sha256": "4486aaf25e2ca81ccf7f4c176ee555f2b60aaf6327e120c0354dce8c38a5fa9c",
+        "sha256": "61b2fd82e73baa8ce13289426e8ba2d180b77f6ada2ecc807f713bb94a87d1b4",
         "symbol": "XAUUSD"
       },
       {
@@ -1229,7 +1277,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart22.chr",
-        "sha256": "e4b54db78f7cbe6562ae4d5af557d5e829481f369b8d498593b5c53489117e7d",
+        "sha256": "032b8c70f101d474369eade28e2d9300ea1b747d6e583dafb7e849b125eb8763",
         "symbol": "XAUUSD"
       },
       {
@@ -1253,7 +1301,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart23.chr",
-        "sha256": "f40ace697af3b75f0630ff264f966d6cbdcbba7094d3c0c4edec3a996eb16fbe",
+        "sha256": "c932eceff39e649d9d9170574cf14422008212548d9650a013ca505d6a4176d8",
         "symbol": "XAUUSD"
       },
       {
@@ -1277,7 +1325,7 @@
         "expert": "AccountEquityGuardianShadow",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart24.chr",
-        "sha256": "84124371cec8900add9ba9afa31f275d7d8abe280536dcff5fab34c433f562ee",
+        "sha256": "ef632ae4145cc80ed13ba46ba8a7a7e0984a71b9419611c460c9c784851618a0",
         "symbol": "XAUUSD"
       },
       {
@@ -1301,7 +1349,7 @@
         "expert": "NO_EA",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart25.chr",
-        "sha256": "ac03d54252f59704f83920521bc7fc17f56016602f4843041daacc85f0431ef9",
+        "sha256": "ac71c80dbf95fc82c19ea23225f487d220e0bc7079805768f0f61d0cbd0cf91d",
         "symbol": "BTCUSD"
       },
       {
@@ -1310,8 +1358,8 @@
         "InpBrokerActionAllowed": "",
         "InpCandidate": "",
         "InpCloseActionAllowed": "true",
-        "InpDailyLossStopAed": "-150.0",
-        "InpDailyLossStopEnabled": "false",
+        "InpDailyLossStopAed": "-100.0",
+        "InpDailyLossStopEnabled": "true",
         "InpDryRunOnly": "false",
         "InpEntryHaltFileName": "experimental_demo_kill_switch.txt",
         "InpMaxEstimatedCostR": "",
@@ -1325,7 +1373,31 @@
         "expert": "Account1DailyProfitFloorGuardian",
         "lane": "A1",
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr",
-        "sha256": "4bef14ce53a3e09bc1d64d55d9429e0753ec28e651d70206c62a3aefc57f4884",
+        "sha256": "d6889eeeae76aee6a4b74caddbdc30b2bda5fe3270e65dfde207f7373eab3cf5",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "1025742",
+        "InpBrokerActionAllowed": "true",
+        "InpCandidate": "breakout_retest",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "false",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "0.15",
+        "InpMaxMeasuredSpreadPoints": "75.0",
+        "InpMaxOpenPositionsPerInstance": "1",
+        "InpTargetSymbol": "XAUUSD",
+        "InpTradeSessionEndHour": "23",
+        "InpTradeSessionGateEnabled": "false",
+        "InpTradeSessionStartHour": "0",
+        "chart": "chart27.chr",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "lane": "A1",
+        "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart27.chr",
+        "sha256": "6898785fa8472329e300cf623af94ea464445ee1ce5bad13a05197770499039f",
         "symbol": "XAUUSD"
       }
     ],
@@ -1351,31 +1423,7 @@
         "expert": "AccountEquityGuardianShadow",
         "lane": "A2",
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
-        "sha256": "32df069a1911aa913f615254824e1fe7df3e47aab19f459d4b35f7c18f481b62",
-        "symbol": "XAUUSD"
-      },
-      {
-        "InpAllowDemoTrading": "",
-        "InpAllowedAccountLoginsCsv": "1033030",
-        "InpBrokerActionAllowed": "true",
-        "InpCandidate": "breakout_retest",
-        "InpCloseActionAllowed": "",
-        "InpDailyLossStopAed": "",
-        "InpDailyLossStopEnabled": "",
-        "InpDryRunOnly": "false",
-        "InpEntryHaltFileName": "",
-        "InpMaxEstimatedCostR": "0.30",
-        "InpMaxMeasuredSpreadPoints": "75.0",
-        "InpMaxOpenPositionsPerInstance": "1",
-        "InpTargetSymbol": "XAUUSD",
-        "InpTradeSessionEndHour": "15",
-        "InpTradeSessionGateEnabled": "true",
-        "InpTradeSessionStartHour": "12",
-        "chart": "chart02.chr",
-        "expert": "Phase2ExperimentalDemoExecutor",
-        "lane": "A2",
-        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
-        "sha256": "9c586dfb4e5fad1aefcbf537f0c2a66eb506df85ad28b8b1cc209ebd7407679c",
+        "sha256": "be330e40392746a5da9b2405f75c270b93c521800421c36d13633a7a786c165c",
         "symbol": "XAUUSD"
       },
       {
@@ -1395,87 +1443,74 @@
         "InpTradeSessionEndHour": "",
         "InpTradeSessionGateEnabled": "",
         "InpTradeSessionStartHour": "",
+        "chart": "chart02.chr",
+        "expert": "NO_EA",
+        "lane": "A2",
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
+        "sha256": "3ab07db9261f25e687a64a7fde7352d3ab73f745176228f07ba4eddcff81b4a5",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "",
+        "InpBrokerActionAllowed": "",
+        "InpCandidate": "",
+        "InpCloseActionAllowed": "true",
+        "InpDailyLossStopAed": "-100.0",
+        "InpDailyLossStopEnabled": "true",
+        "InpDryRunOnly": "false",
+        "InpEntryHaltFileName": "tier1_bestea_kill_switch.txt",
+        "InpMaxEstimatedCostR": "",
+        "InpMaxMeasuredSpreadPoints": "",
+        "InpMaxOpenPositionsPerInstance": "",
+        "InpTargetSymbol": "",
+        "InpTradeSessionEndHour": "",
+        "InpTradeSessionGateEnabled": "",
+        "InpTradeSessionStartHour": "",
         "chart": "chart03.chr",
-        "expert": "DirectionStatePublisher",
+        "expert": "Account1DailyProfitFloorGuardian",
         "lane": "A2",
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
-        "sha256": "941c85e3c0d3c341871fb12a1dbf41ad2fd79f0af52b411ff157de556c52ca2c",
+        "sha256": "5a28c4ead8a152a1cd88cff0cfc3e16e7982aedc92db9e4d170d9da62c202aed",
+        "symbol": "XAUUSD"
+      },
+      {
+        "InpAllowDemoTrading": "",
+        "InpAllowedAccountLoginsCsv": "1033030",
+        "InpBrokerActionAllowed": "true",
+        "InpCandidate": "breakout_retest",
+        "InpCloseActionAllowed": "",
+        "InpDailyLossStopAed": "",
+        "InpDailyLossStopEnabled": "",
+        "InpDryRunOnly": "false",
+        "InpEntryHaltFileName": "",
+        "InpMaxEstimatedCostR": "0.15",
+        "InpMaxMeasuredSpreadPoints": "75.0",
+        "InpMaxOpenPositionsPerInstance": "1",
+        "InpTargetSymbol": "XAUUSD",
+        "InpTradeSessionEndHour": "23",
+        "InpTradeSessionGateEnabled": "false",
+        "InpTradeSessionStartHour": "0",
+        "chart": "chart04.chr",
+        "expert": "Phase2ExperimentalDemoExecutor",
+        "lane": "A2",
+        "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+        "sha256": "27858fde3316669876ed2685f29d3b12167f7c191185346cf8ec6524d0ea0fc0",
         "symbol": "XAUUSD"
       }
     ]
   },
-  "changed_files": [
-    {
-      "action": "write_chart",
-      "after_sha256": "519b056e237d740957f825b92a55cb5fd82e54b59886ce7b735bbd4223eedc72",
-      "before_sha256": "b006f642e480daff72432872e58433e13e71ee809bf9980fa23917233ba275d4",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr"
-    },
-    {
-      "action": "disabled_non_spec_broker_action",
-      "after_sha256": "8866cf1988bf759f7528dcff53d3fb52d3b4269aea967105164dc616ea7dda85",
-      "before_sha256": "065a48415e33de489243eed0fb03828c94045267b25caa9332aba5a90b87e9b6",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart01.chr"
-    },
-    {
-      "action": "disabled_non_spec_broker_action",
-      "after_sha256": "f859b5e1348b3dee7270add190fd7446b517491e7d26a0adb1a83e2dd1b453e8",
-      "before_sha256": "f47e5a5aa609643422e796133b6e05e41d1052c2410d98a01e55a78b91ab0f73",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart02.chr"
-    },
-    {
-      "action": "disabled_non_spec_broker_action",
-      "after_sha256": "2317eaf7ba6e4218c086cdb3564b63e1f001e3ee880b80dfa72183ee86863b20",
-      "before_sha256": "578984ba75fcc80100110999cd55a4dbf010f9a0d8828a316755672f3d389935",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart18.chr"
-    },
-    {
-      "action": "disabled_non_spec_broker_action",
-      "after_sha256": "8afac8d5736ccd57048392a057713d25e5301b0e65674a2938756d13662dc141",
-      "before_sha256": "55abb5ab5afbe3eee59f62fd2f973a928eb2e9ca031ee428963921087964f97b",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart19.chr"
-    },
-    {
-      "action": "disabled_non_spec_broker_action",
-      "after_sha256": "f4c062ed1ed96483794f07c12fff61138784d6d854cc4bf83252dbf2e45d83d5",
-      "before_sha256": "cdf6750f2f29d1a6aa89a03969e3d4a5d0ad9f61267d8671b67833c22850b419",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart20.chr"
-    },
-    {
-      "action": "disabled_wr50_broker_action",
-      "after_sha256": "cc06731e2616fa64c05d33f80c8a3ea39feb5ee9c6b3c450203f2e2632917860",
-      "before_sha256": "9c56d2f795431edcb00cd784396dc1d2d29c3f9c08dee8a336f969803b5eb0a7",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart21.chr"
-    },
-    {
-      "action": "updated_a1_guardian_daily_lock_loss",
-      "after_sha256": "a4d1cfdc253da8a0dbe319bba605d3b18b4c2e4fdda0b836176ac727c65b8a6b",
-      "before_sha256": "c4a56a7e0d1de6b6fa4cfec9bc9303197233afd4ef59d5d4466949f38657e872",
-      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart26.chr"
-    },
-    {
-      "action": "aligned_a2_xau_executor",
-      "after_sha256": "5e13a695d54a345a34406cbc1f61376b54a66e7e205117eec4a3e0f392f1cb37",
-      "before_sha256": "9abdd7bab7217e3e0d6d2744dd5d3bbb9b8b02d560c6fff62d98120bce3b8baa",
-      "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr"
-    },
-    {
-      "action": "write_chart",
-      "after_sha256": "22c46896c3261ffb330aa6140c0637801bdad301311b93a4d1c2d59074afa28d",
-      "before_sha256": "c98147cf799f6c9c11fd05c9b9f172122f41cc213b711740a86e8de61f9fa145",
-      "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart03.chr"
-    }
-  ],
+  "changed_files": [],
   "checks": [
     {
-      "detail": "chart03.chr",
+      "detail": "chart27.chr",
       "name": "a1_has_one_active_xau_920101_chart",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
-      "detail": "chart02.chr",
+      "detail": "chart04.chr",
       "name": "a2_has_one_active_xau_920101_chart",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "detail": "A1 non-spec broker action false/dry-run true",
@@ -1501,21 +1536,6 @@
       "detail": "A3 profile hash map unchanged",
       "name": "a3_profile_untouched",
       "status": "PASS"
-    },
-    {
-      "detail": "{\"A1\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\_codex_quarantine\\\\profile_backups\\\\a1_a2_920101_maintenance_a1_20260620_220714\", \"A2\": \"C:\\\\MT5PortableTier1BestEA\\\\_codex_quarantine\\\\profile_backups\\\\a1_a2_920101_maintenance_a2_20260620_220714\"}",
-      "name": "profile_backups_created",
-      "status": "PASS"
-    },
-    {
-      "detail": "[{\"action\": \"stop\", \"after\": {\"pids\": [], \"running\": false}, \"before\": {\"pids\": [21676], \"running\": true}, \"lane\": \"A1\", \"status\": \"PASS\"}, {\"action\": \"stop\", \"after\": {\"pids\": [], \"running\": false}, \"before\": {\"pids\": [17524], \"running\": true}, \"lane\": \"A2\", \"status\": \"PASS\"}, {\"action\": \"launch\", \"lane\": \"A1\", \"portable\": \"False\", \"status\": \"PASS\", \"terminal\": \"C:\\\\Program Files\\\\MetaTrader 5\\\\terminal64.exe\"}, {\"action\": \"launch\", \"lane\": \"A2\", \"portable\": \"True\", \"status\": \"PASS\", \"terminal\": \"C:\\\\MT5PortableTier1BestEA\\\\terminal64.exe\"}]",
-      "name": "terminals_stopped_before_write",
-      "status": "PASS"
-    },
-    {
-      "detail": "[{\"ea\": \"Phase2ExperimentalDemoExecutor\", \"ex5\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Experts\\\\Phase2ExperimentalDemoExecutor.ex5\", \"log\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_Phase2ExperimentalDemoExecutor_a1_a2_920101_20260621.log\", \"log_tail\": [\" : information: generating code 72%\", \" : information: generating code 75%\", \" : information: generating code 78%\", \" : information: generating code 81%\", \" : information: generating code 84%\", \" : information: generating code 87%\", \" : information: generating code 90%\", \" : information: generating code 93%\", \" : information: generating code 95%\", \" : information: generating code 100%\", \" : information: code generated\", \"Result: 0 errors, 0 warnings, 1035 ms elapsed, cpu='X64 Regular'\"], \"status\": \"PASS\", \"terminal_data\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\"}, {\"ea\": \"Account1DailyProfitFloorGuardian\", \"ex5\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Experts\\\\Account1DailyProfitFloorGuardian.ex5\", \"log\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\\\\MQL5\\\\Logs\\\\compile_Account1DailyProfitFloorGuardian_a1_a2_920101_20260621.log\", \"log_tail\": [\" : information: generating code 72%\", \" : information: generating code 75%\", \" : information: generating code 78%\", \" : information: generating code 81%\", \" : information: generating code 84%\", \" : information: generating code 87%\", \" : information: generating code 90%\", \" : information: generating code 93%\", \" : information: generating code 95%\", \" : information: generating code 100%\", \" : information: code generated\", \"Result: 0 errors, 0 warnings, 764 ms elapsed, cpu='X64 Regular'\"], \"status\": \"PASS\", \"terminal_data\": \"C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\AppData\\\\Roaming\\\\MetaQuotes\\\\Terminal\\\\D0E8209F77C8CF37AD8BF550E51FF075\"}, {\"ea\": \"Phase2ExperimentalDemoExecutor\", \"ex5\": \"C:\\\\MT5PortableTier1BestEA\\\\MQL5\\\\Experts\\\\Phase2ExperimentalDemoExecutor.ex5\", \"log\": \"C:\\\\MT5PortableTier1BestEA\\\\MQL5\\\\Logs\\\\compile_Phase2ExperimentalDemoExecutor_a1_a2_920101_20260621.log\", \"log_tail\": [\" : information: generating code 72%\", \" : information: generating code 75%\", \" : information: generating code 78%\", \" : information: generating code 81%\", \" : information: generating code 84%\", \" : information: generating code 87%\", \" : information: generating code 90%\", \" : information: generating code 93%\", \" : information: generating code 95%\", \" : information: generating code 100%\", \" : information: code generated\", \"Result: 0 errors, 0 warnings, 1056 ms elapsed, cpu='X64 Regular'\"], \"status\": \"PASS\", \"terminal_data\": \"C:\\\\MT5PortableTier1BestEA\"}, {\"ea\": \"Account1DailyProfitFloorGuardian\", \"ex5\": \"C:\\\\MT5PortableTier1BestEA\\\\MQL5\\\\Experts\\\\Account1DailyProfitFloorGuardian.ex5\", \"log\": \"C:\\\\MT5PortableTier1BestEA\\\\MQL5\\\\Logs\\\\compile_Account1DailyProfitFloorGuardian_a1_a2_920101_20260621.log\", \"log_tail\": [\" : information: generating code 72%\", \" : information: generating code 75%\", \" : information: generating code 78%\", \" : information: generating code 81%\", \" : information: generating code 84%\", \" : information: generating code 87%\", \" : information: generating code 90%\", \" : information: generating code 93%\", \" : information: generating code 95%\", \" : information: generating code 100%\", \" : information: code generated\", \"Result: 0 errors, 0 warnings, 934 ms elapsed, cpu='X64 Regular'\"], \"status\": \"PASS\", \"terminal_data\": \"C:\\\\MT5PortableTier1BestEA\"}]",
-      "name": "compile_reports_pass",
-      "status": "PASS"
     }
   ],
   "claude_verification_focus": [
@@ -1525,94 +1545,9 @@
     "Confirm A1 and A2 both have active daily profit/loss guardians using their account-specific halt files.",
     "Confirm A3 profile hashes did not change and A3 remains paused."
   ],
-  "compile_reports": [
-    {
-      "ea": "Phase2ExperimentalDemoExecutor",
-      "ex5": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
-      "log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_a1_a2_920101_20260621.log",
-      "log_tail": [
-        " : information: generating code 72%",
-        " : information: generating code 75%",
-        " : information: generating code 78%",
-        " : information: generating code 81%",
-        " : information: generating code 84%",
-        " : information: generating code 87%",
-        " : information: generating code 90%",
-        " : information: generating code 93%",
-        " : information: generating code 95%",
-        " : information: generating code 100%",
-        " : information: code generated",
-        "Result: 0 errors, 0 warnings, 1035 ms elapsed, cpu='X64 Regular'"
-      ],
-      "status": "PASS",
-      "terminal_data": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075"
-    },
-    {
-      "ea": "Account1DailyProfitFloorGuardian",
-      "ex5": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.ex5",
-      "log": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_a1_a2_920101_20260621.log",
-      "log_tail": [
-        " : information: generating code 72%",
-        " : information: generating code 75%",
-        " : information: generating code 78%",
-        " : information: generating code 81%",
-        " : information: generating code 84%",
-        " : information: generating code 87%",
-        " : information: generating code 90%",
-        " : information: generating code 93%",
-        " : information: generating code 95%",
-        " : information: generating code 100%",
-        " : information: code generated",
-        "Result: 0 errors, 0 warnings, 764 ms elapsed, cpu='X64 Regular'"
-      ],
-      "status": "PASS",
-      "terminal_data": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075"
-    },
-    {
-      "ea": "Phase2ExperimentalDemoExecutor",
-      "ex5": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.ex5",
-      "log": "C:\\MT5PortableTier1BestEA\\MQL5\\Logs\\compile_Phase2ExperimentalDemoExecutor_a1_a2_920101_20260621.log",
-      "log_tail": [
-        " : information: generating code 72%",
-        " : information: generating code 75%",
-        " : information: generating code 78%",
-        " : information: generating code 81%",
-        " : information: generating code 84%",
-        " : information: generating code 87%",
-        " : information: generating code 90%",
-        " : information: generating code 93%",
-        " : information: generating code 95%",
-        " : information: generating code 100%",
-        " : information: code generated",
-        "Result: 0 errors, 0 warnings, 1056 ms elapsed, cpu='X64 Regular'"
-      ],
-      "status": "PASS",
-      "terminal_data": "C:\\MT5PortableTier1BestEA"
-    },
-    {
-      "ea": "Account1DailyProfitFloorGuardian",
-      "ex5": "C:\\MT5PortableTier1BestEA\\MQL5\\Experts\\Account1DailyProfitFloorGuardian.ex5",
-      "log": "C:\\MT5PortableTier1BestEA\\MQL5\\Logs\\compile_Account1DailyProfitFloorGuardian_a1_a2_920101_20260621.log",
-      "log_tail": [
-        " : information: generating code 72%",
-        " : information: generating code 75%",
-        " : information: generating code 78%",
-        " : information: generating code 81%",
-        " : information: generating code 84%",
-        " : information: generating code 87%",
-        " : information: generating code 90%",
-        " : information: generating code 93%",
-        " : information: generating code 95%",
-        " : information: generating code 100%",
-        " : information: code generated",
-        "Result: 0 errors, 0 warnings, 934 ms elapsed, cpu='X64 Regular'"
-      ],
-      "status": "PASS",
-      "terminal_data": "C:\\MT5PortableTier1BestEA"
-    }
-  ],
-  "created_at_utc": "2026-06-20T22:07:26.361909Z",
-  "mode": "apply",
+  "compile_reports": [],
+  "created_at_utc": "2026-06-22T20:51:27.673430Z",
+  "mode": "dry-run",
   "planned_changes": {
     "A1": [
       "Restore A1 XAU 920101 broker-action chart at C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart03.chr",
@@ -1626,10 +1561,7 @@
       "Attach/update A2 active daily profit/loss guardian at C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart03.chr"
     ]
   },
-  "profile_backups": {
-    "A1": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\_codex_quarantine\\profile_backups\\a1_a2_920101_maintenance_a1_20260620_220714",
-    "A2": "C:\\MT5PortableTier1BestEA\\_codex_quarantine\\profile_backups\\a1_a2_920101_maintenance_a2_20260620_220714"
-  },
+  "profile_backups": {},
   "scope": {
     "a1_account": "1025742",
     "a2_account": "1033030",
@@ -1639,72 +1571,37 @@
     "session_server_hours": "12->15",
     "symbol": "XAUUSD"
   },
-  "started_at_utc": "2026-06-20T22:06:46.899281Z",
+  "started_at_utc": "2026-06-22T20:51:27.373081Z",
   "startup_log_tails": {
     "A1_920101": [
-      "timestamp_broker,timestamp_utc,timestamp_local,run_id,account_server,symbol,candidate,candidate_status,family_lifecycle_status,qualified_symbols,account_login,allowed_account_logins,authorized_candidates,dry_run,broker_action_allowed,observer_supported,authorization_token_present,cost_suspension_ack_token_present,account_max_orders_per_day,account_max_open_positions,max_estimated_cost_R,max_measured_spread_points,kill_switch_file,startup_status",
-      "2026.06.20 22:07:25,2026.06.20 22:07:19,2026.06.21 02:07:19,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,experimental_demo_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1025742_XAUUSD_920101_20260620_220719",
-      "2026.06.20 22:07:25,2026.06.20 22:07:19,2026.06.21 02:07:19,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,experimental_demo_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED"
+      "2026.06.21 22:40:48,2026.06.21 22:40:47,2026.06.22 02:40:47,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,experimental_demo_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED",
+      "2026.06.22 11:13:02,2026.06.22 11:12:58,2026.06.22 15:12:58,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,experimental_demo_kill_switch.txt,REMOVED_REASON_9",
+      "2026.06.22 11:13:22,2026.06.22 11:13:18,2026.06.22 15:13:18,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,experimental_demo_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1025742_XAUUSD_920101_20260622_111318",
+      "2026.06.22 11:13:22,2026.06.22 11:13:18,2026.06.22 15:13:18,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,experimental_demo_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED",
+      "2026.06.22 11:18:23,2026.06.22 11:18:19,2026.06.22 15:18:19,A1_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1025742,1025742,breakout_retest,false,true,true,true,true,0,UNLIMITED,experimental_demo_kill_switch.txt,REMOVED_REASON_9"
     ],
     "A1_guardian": [
-      "timestamp_broker,timestamp_utc,timestamp_dubai,run_id,account_login,server,dry_run,close_action_allowed,owner_token_present,daily_floor_aed,daily_loss_stop_enabled,daily_loss_stop_aed,guardian_kill_switch_file,entry_halt_file,state_file,event_log,daily_summary_log,startup_status,detail",
-      "2026.06.20 22:07:25,2026.06.20 22:07:19,2026.06.21 02:07:19,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_initialized"
+      "2026.06.22 11:13:22,2026.06.22 11:13:18,2026.06.22 15:13:18,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+      "2026.06.22 11:18:23,2026.06.22 11:18:19,2026.06.22 15:18:19,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+      "2026.06.22 11:18:40,2026.06.22 11:18:36,2026.06.22 15:18:36,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+      "2026.06.22 11:29:16,2026.06.22 11:29:12,2026.06.22 15:29:12,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+      "2026.06.22 11:29:34,2026.06.22 11:29:29,2026.06.22 15:29:29,A1_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1025742,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A1_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,experimental_demo_kill_switch.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A1_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A1_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored"
     ],
     "A2_920101": [
-      "timestamp_broker,timestamp_utc,timestamp_local,run_id,account_server,symbol,candidate,candidate_status,family_lifecycle_status,qualified_symbols,account_login,allowed_account_logins,authorized_candidates,dry_run,broker_action_allowed,observer_supported,authorization_token_present,cost_suspension_ack_token_present,account_max_orders_per_day,account_max_open_positions,max_estimated_cost_R,max_measured_spread_points,kill_switch_file,startup_status",
-      "2026.06.19 20:58:59,2026.06.20 22:07:21,2026.06.21 02:07:21,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,tier1_bestea_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1033030_XAUUSD_920101_20260620_220721",
-      "2026.06.19 20:58:59,2026.06.20 22:07:21,2026.06.21 02:07:21,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,tier1_bestea_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED"
+      "2026.06.21 22:40:44,2026.06.21 22:40:43,2026.06.22 02:40:43,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,tier1_bestea_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED",
+      "2026.06.22 11:15:16,2026.06.22 11:15:12,2026.06.22 15:15:12,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,tier1_bestea_kill_switch.txt,REMOVED_REASON_9",
+      "2026.06.22 11:15:25,2026.06.22 11:15:21,2026.06.22 15:15:21,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,tier1_bestea_kill_switch.txt,GV_MUTEX_NAMESPACE_SELF_TEST_PASS name=FAMMUX_SELFTEST_1033030_XAUUSD_920101_20260622_111521",
+      "2026.06.22 11:15:25,2026.06.22 11:15:21,2026.06.22 15:15:21,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,0.3000,75.00,tier1_bestea_kill_switch.txt,ATTACHED_DEMO_EXECUTOR_ENABLED",
+      "2026.06.22 11:20:33,2026.06.22 11:20:28,2026.06.22 15:20:28,A2_XAU_920101_EVENING_FORWARD_V0_20260621,Capital.ComMena-Demo,XAUUSD,breakout_retest,EXPERIMENTAL_QUARANTINE_REVIEW_ONLY,COST_SUSPENDED_CANONICAL,XAUUSD,1033030,1033030,breakout_retest,false,true,true,true,true,0,UNLIMITED,tier1_bestea_kill_switch.txt,REMOVED_REASON_9"
     ],
     "A2_guardian": [
-      "timestamp_broker,timestamp_utc,timestamp_dubai,run_id,account_login,server,dry_run,close_action_allowed,owner_token_present,daily_floor_aed,daily_loss_stop_enabled,daily_loss_stop_aed,guardian_kill_switch_file,entry_halt_file,state_file,event_log,daily_summary_log,startup_status,detail",
-      "2026.06.19 20:58:59,2026.06.20 22:07:21,2026.06.21 02:07:21,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_initialized"
+      "2026.06.22 11:15:25,2026.06.22 11:15:21,2026.06.22 15:15:21,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+      "2026.06.22 11:20:33,2026.06.22 11:20:28,2026.06.22 15:20:28,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+      "2026.06.22 11:20:40,2026.06.22 11:20:36,2026.06.22 15:20:36,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored",
+      "2026.06.22 11:29:35,2026.06.22 11:29:31,2026.06.22 15:29:31,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,REMOVED_REASON_9,guardian_deinit",
+      "2026.06.22 11:29:43,2026.06.22 11:29:39,2026.06.22 15:29:39,A2_DAILY_PROFIT_LOSS_GUARDIAN_V1_ARMED_20260621,1033030,Capital.ComMena-Demo,false,true,true,100.00,true,-100.00,A2_DAILY_PROFIT_LOSS_GUARDIAN_KILL.txt,tier1_bestea_kill_switch.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_STATE.txt,A2_DAILY_PROFIT_LOSS_GUARDIAN_EVENTS.csv,A2_DAILY_PROFIT_LOSS_GUARDIAN_DAILY_SUMMARY.csv,ATTACHED_A1_DAILY_PROFIT_FLOOR_GUARDIAN,state_restored"
     ]
   },
-  "status": "PASS_APPLIED",
-  "terminal_actions": [
-    {
-      "action": "stop",
-      "after": {
-        "pids": [],
-        "running": false
-      },
-      "before": {
-        "pids": [
-          21676
-        ],
-        "running": true
-      },
-      "lane": "A1",
-      "status": "PASS"
-    },
-    {
-      "action": "stop",
-      "after": {
-        "pids": [],
-        "running": false
-      },
-      "before": {
-        "pids": [
-          17524
-        ],
-        "running": true
-      },
-      "lane": "A2",
-      "status": "PASS"
-    },
-    {
-      "action": "launch",
-      "lane": "A1",
-      "portable": "False",
-      "status": "PASS",
-      "terminal": "C:\\Program Files\\MetaTrader 5\\terminal64.exe"
-    },
-    {
-      "action": "launch",
-      "lane": "A2",
-      "portable": "True",
-      "status": "PASS",
-      "terminal": "C:\\MT5PortableTier1BestEA\\terminal64.exe"
-    }
-  ]
+  "status": "DRY_RUN_READY",
+  "terminal_actions": []
 }

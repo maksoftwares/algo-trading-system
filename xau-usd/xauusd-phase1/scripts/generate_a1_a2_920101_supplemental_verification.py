@@ -252,8 +252,8 @@ def build_checks(rows: list[ChartRow]) -> list[dict[str, str]]:
 
     check("a1_chart03_920101_active", len(a1_chart03) == 1 and executor_ok(a1_chart03[0], "1025742", "experimental_demo_kill_switch.txt"), summarize_rows(a1_chart03))
     check("a2_chart02_920101_active", len(a2_chart02) == 1 and executor_ok(a2_chart02[0], "1033030", "tier1_bestea_kill_switch.txt"), summarize_rows(a2_chart02))
-    check("a1_non_spec_lanes_disarmed", len(a1_disabled) == 5 and all(row.broker_action_state == "DISARMED_DRY_RUN" for row in a1_disabled), summarize_rows(a1_disabled))
-    check("a1_wr50_disarmed", len(a1_wr50) == 1 and a1_wr50[0].broker_action_state == "DISARMED_DEMO_TRADING_FALSE", summarize_rows(a1_wr50))
+    check("a1_non_spec_lanes_disarmed", len(a1_disabled) == 5 and all(row_is_disarmed_or_absent(row) for row in a1_disabled), summarize_rows(a1_disabled))
+    check("a1_wr50_disarmed", len(a1_wr50) == 1 and row_is_disarmed_or_absent(a1_wr50[0]), summarize_rows(a1_wr50))
     check("a1_guardian_active", len(a1_guardian) == 1 and guardian_ok(a1_guardian[0], "1025742", "experimental_demo_kill_switch.txt"), summarize_rows(a1_guardian))
     check("a2_guardian_active", len(a2_guardian) == 1 and guardian_ok(a2_guardian[0], "1033030", "tier1_bestea_kill_switch.txt"), summarize_rows(a2_guardian))
 
@@ -313,6 +313,10 @@ def guardian_ok(row: ChartRow, account: str, halt_file: str) -> bool:
     )
 
 
+def row_is_disarmed_or_absent(row: ChartRow) -> bool:
+    return row.broker_action_state in {"DISARMED_DRY_RUN", "DISARMED_DEMO_TRADING_FALSE", "NO_EA"}
+
+
 def summarize_rows(rows: list[ChartRow]) -> str:
     return "; ".join(
         f"{row.lane} {row.chart} {row.symbol} {row.expert} {row.broker_action_state} magic={row.derived_magic}"
@@ -336,16 +340,19 @@ def startup_log_evidence() -> dict[str, dict[str, Any]]:
             "exists": path.exists(),
             "tail": tail,
             "contains_920101": "920101" in joined,
-            "contains_active_guardian": guardian_startup_tail_is_active(tail),
+            "contains_active_guardian": guardian_startup_file_is_active(path),
         }
     return evidence
 
 
-def guardian_startup_tail_is_active(tail: list[str]) -> bool:
-    if len(tail) < 2:
+def guardian_startup_file_is_active(path: Path) -> bool:
+    if not path.exists():
         return False
-    header = tail[0].split(",")
-    row = tail[-1].split(",")
+    lines = [line for line in read_text_any(path).splitlines() if line.strip()]
+    if len(lines) < 2:
+        return False
+    header = lines[0].split(",")
+    row = lines[-1].split(",")
     if len(row) != len(header):
         return False
     values = dict(zip(header, row))
