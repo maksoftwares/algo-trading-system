@@ -2,9 +2,9 @@
 
 Status: PRELOCK_CONTRACT
 
-Scope: A3 account 1033669, XAUUSD only, breakout_retest only.
+Scope: configured A1 account 1025742, A2 account 1033030, and A3 account 1033669; XAUUSD only; breakout_retest only.
 
-This contract defines the research question and the shadow-only boundary for the A3 Python ML signal-quality program.
+This contract defines the research question and the shadow-only boundary for the Python ML signal-quality program across the configured A1/A2/A3 account scopes.
 
 ## Research Question
 
@@ -22,6 +22,8 @@ The deterministic engine owns:
 - stop construction;
 - 1.50R target;
 - lot, risk, account, and position-management contract.
+
+account_scope is required metadata for audit isolation. It is not a model feature in V1 unless a future reviewed contract explicitly admits account-scope effects.
 
 Python may output only:
 
@@ -62,6 +64,8 @@ The ML layer is retired when it fails to:
 - pass leakage, grouping, feature-budget, and safety audits.
 
 ## Runtime Boundary
+
+A1, A2, and A3 data may be analyzed only inside the offline/live-shadow boundary.
 
 A3 lanes 933200, 933300, and 933400 remain paused.
 

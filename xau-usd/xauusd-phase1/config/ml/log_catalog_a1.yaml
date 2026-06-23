@@ -1,0 +1,166 @@
+{
+  "schema_version": "c02_log_catalog_v1",
+  "account_label": "A1",
+  "entries": [
+    {
+      "logical_source_name": "a1_920101_evening_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a1_920101_evening_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a1_920101_evening_order",
+      "source_type": "runtime_order_log",
+      "filename": "a1_920101_evening_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a1_920101_evening_startup",
+      "source_type": "startup_log",
+      "filename": "a1_920101_evening_startup_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_breakout_xauusd_signal",
+      "source_type": "experimental_executor_signal_log",
+      "filename": "experimental_demo_executor_signal_log_v02_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_breakout_xauusd_signal",
+      "source_type": "experimental_executor_signal_log",
+      "filename": "experimental_demo_executor_signal_log_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_attachment_v01_breakout_xauusd_signal",
+      "source_type": "observer_signal_log",
+      "filename": "experimental_demo_attachment_log_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_attachment_v01_swing_breakout_xauusd_signal",
+      "source_type": "observer_signal_log",
+      "filename": "experimental_demo_attachment_log_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_swing_breakout_xauusd_signal",
+      "source_type": "experimental_executor_signal_log",
+      "filename": "experimental_demo_executor_signal_log_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_swing_breakout_xauusd_signal",
+      "source_type": "experimental_executor_signal_log",
+      "filename": "experimental_demo_executor_signal_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_breakout_xauusd_order",
+      "source_type": "runtime_order_log",
+      "filename": "experimental_demo_executor_order_log_v02_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_breakout_xauusd_order",
+      "source_type": "runtime_order_log",
+      "filename": "experimental_demo_executor_order_log_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_swing_breakout_xauusd_order",
+      "source_type": "runtime_order_log",
+      "filename": "experimental_demo_executor_order_log_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_swing_breakout_xauusd_order",
+      "source_type": "runtime_order_log",
+      "filename": "experimental_demo_executor_order_log_v02_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_executor_startup_v02_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_executor_startup_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_attachment_v01_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_attachment_startup_breakout_retest_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_attachment_v01_swing_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_attachment_startup_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v01_swing_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_executor_startup_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_experimental_v02_swing_breakout_xauusd_startup",
+      "source_type": "startup_log",
+      "filename": "experimental_demo_executor_startup_v02_swing_breakout_retest_v0_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a1_equity_guardian_shadow",
+      "source_type": "risk_shadow_log",
+      "filename": "EQUITY_GUARDIAN_SHADOW_LOG.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "risk_guardian",
+      "append_active": true
+    }
+  ]
+}

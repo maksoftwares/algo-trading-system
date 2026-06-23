@@ -9,6 +9,7 @@
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 #include <DirectionStateShadow.mqh>
+#include <A3MlShadowTap.mqh>
 
 input string InpRunId = "phase2-experimental-demo-executor-v0.2";
 input bool InpDryRunOnly = false;
@@ -37,6 +38,7 @@ input int InpMaxOrdersPerDay = 0;
 input int InpMaxAccountOrdersPerDay = 0;
 input int InpMinSecondsBetweenOrders = 0;
 input int InpMaxOpenPositionsPerInstance = 0;
+input int InpMaxOpenPositionsPerMagic = 1;
 input int InpDeviationPoints = 50;
 input double InpMaxEstimatedCostR = 0.00;
 input double InpMaxMeasuredSpreadPoints = 0.0;
@@ -577,13 +579,14 @@ bool KillSwitchActive()
    if(!FileIsExist(InpKillSwitchFileName))
       return false;
    int handle = FileOpen(InpKillSwitchFileName, FILE_READ | FILE_TXT | FILE_ANSI | FILE_SHARE_READ | FILE_SHARE_WRITE);
-   if(handle == INVALID_HANDLE)
-      return false;
-   string content = "";
-   while(!FileIsEnding(handle))
-      content += " " + FileReadString(handle);
-   FileClose(handle);
-   return ContainsText(content, "KILL");
+   if(handle != INVALID_HANDLE)
+      FileClose(handle);
+   return true; // Presence is enough; operators should not need to type KILL during an emergency.
+}
+
+bool AccountTradeModeDemo()
+{
+   return AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO;
 }
 
 int ServerHourNow()
@@ -1293,6 +1296,11 @@ bool TradingGuardsPass(
       guard_reason = "not_demo_server";
       return false;
    }
+   if(!AccountTradeModeDemo())
+   {
+      guard_reason = "account_trade_mode_not_demo";
+      return false;
+   }
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !MQLInfoInteger(MQL_TRADE_ALLOWED) || !AccountInfoInteger(ACCOUNT_TRADE_ALLOWED))
    {
       guard_reason = "terminal_or_account_trading_disabled";
@@ -1346,6 +1354,11 @@ bool TradingGuardsPass(
    if(InpMaxOpenPositionsPerInstance > 0 && CountOpenExposureForInstance() >= InpMaxOpenPositionsPerInstance)
    {
       guard_reason = "open_instance_exposure_exists";
+      return false;
+   }
+   if(InpMaxOpenPositionsPerMagic > 0 && CountOpenExposureForInstance() >= InpMaxOpenPositionsPerMagic)
+   {
+      guard_reason = "open_magic_exposure_exists";
       return false;
    }
    guard_reason = "pass";
@@ -1530,6 +1543,12 @@ int OnInit()
       return INIT_FAILED;
    }
 
+   if(KillSwitchActive())
+   {
+      Print("Phase2ExperimentalDemoExecutor refused to start because the kill switch is active.");
+      return INIT_FAILED;
+   }
+
    if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader())
       return INIT_FAILED;
 
@@ -1544,6 +1563,7 @@ int OnInit()
    g_breakout_observer.ConfigureForSymbol(_Symbol, CandidateUsesSwingObserver(InpCandidate));
    ResetDailyOrderCounterIfNeeded();
    WriteStartupRow("ATTACHED_DEMO_EXECUTOR_ENABLED");
+   A3MlShadowTapWriteRow("STARTUP", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpCandidate, "ON_INIT", "NONE", false, "ATTACHED_DEMO_EXECUTOR_ENABLED", "PASS");
    EventSetTimer(1);
    return INIT_SUCCEEDED;
 }
@@ -1614,6 +1634,8 @@ void OnTimer()
    string dirstate_regime = "UNKNOWN";
    string dirstate_strength = "0.000";
    DirectionStateShadowFieldsForLog(dirstate_direction, dirstate_regime, dirstate_strength, InpDirectionStateFileName);
+   string ml_shadow_guard_reason = observation.would_signal ? "PENDING_TRADING_GUARDS" : "NO_SIGNAL";
+   A3MlShadowTapWriteRow("SIGNAL", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpCandidate, observation.stage, observation.direction_text, observation.would_signal, observation.reason_code, ml_shadow_guard_reason);
 
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),

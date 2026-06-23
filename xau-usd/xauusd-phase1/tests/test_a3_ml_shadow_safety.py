@@ -6,6 +6,10 @@ from phase2x_test_helpers import ROOT
 def test_shadow_contract_keeps_a3_paused_and_shadow_only() -> None:
     text = (ROOT / "docs" / "A3_ML_SHADOW_GOVERNANCE_V1.md").read_text(encoding="utf-8")
     for token in (
+        "A1 account 1025742",
+        "A2 account 1033030",
+        "A3 account 1033669",
+        "no authority to arm, disarm, attach, detach, alter, close, or place broker actions",
         "A3 account 1033669 remains paused",
         "A3 lanes 933200, 933300, and 933400 remain paused",
         "Profit-lock remains DRY_RUN_DISARMED",
@@ -25,6 +29,11 @@ def test_shadow_contract_blocks_broker_write_surfaces() -> None:
 def test_meta_hypothesis_does_not_authorize_execution_outputs() -> None:
     text = (ROOT / "docs" / "A3_ML_META_LABEL_HYPOTHESIS_V1.md").read_text(encoding="utf-8")
     for token in (
+        "A1 account 1025742",
+        "A2 account 1033030",
+        "A3 account 1033669",
+        "account_scope is required metadata",
+        "not a model feature in V1",
         "Python must never output or control",
         "BUY or SELL",
         "entry price",

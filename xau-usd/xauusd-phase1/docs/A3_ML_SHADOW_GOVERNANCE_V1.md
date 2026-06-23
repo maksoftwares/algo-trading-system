@@ -6,13 +6,17 @@ This contract owns offline/live shadow operation, safety, and runtime authorizat
 
 ## Runtime Boundary
 
+C01 may evaluate frozen A1 account 1025742, A2 account 1033030, and A3 account 1033669 data.
+
+The ML layer has no authority to arm, disarm, attach, detach, alter, close, or place broker actions on any account.
+
 A3 account 1033669 remains paused.
 
 A3 lanes 933200, 933300, and 933400 remain paused.
 
 Profit-lock remains DRY_RUN_DISARMED.
 
-No broker action, reactivation, armed EA attach, armed preset, live trading, or real capital is authorized.
+No broker action, reactivation, armed EA attach, armed preset, live trading, real capital, account setting change, or runtime state change is authorized by the ML layer.
 
 ## Offline Shadow
 

@@ -1,0 +1,57 @@
+{
+  "schema_version": "mt5_multi_account_registry_v1",
+  "common": {
+    "symbol": "XAUUSD",
+    "expected_server_regex": "^Capital\\.ComMena-Demo$",
+    "require_demo_trade_mode": true,
+    "require_existing_terminal_process": true,
+    "allow_mt5_login_call": false,
+    "allow_symbol_select_call": false,
+    "export_timezone": "UTC",
+    "snapshot_safety_lag_minutes": 5
+  },
+  "accounts": {
+    "A1": {
+      "account_scope": "1025742",
+      "account_label": "A1",
+      "expected_login": "1025742",
+      "terminal_exe": "C:/Program Files/MetaTrader 5/terminal64.exe",
+      "expected_data_path": "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075",
+      "portable": false,
+      "role": "standard_experimental_demo",
+      "symbol": "XAUUSD",
+      "files_roots": [
+        "C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075/MQL5/Files"
+      ],
+      "log_catalog": "config/ml/log_catalog_a1.yaml"
+    },
+    "A2": {
+      "account_scope": "1033030",
+      "account_label": "A2",
+      "expected_login": "1033030",
+      "terminal_exe": "C:/MT5PortableTier1BestEA/terminal64.exe",
+      "expected_data_path": "C:/MT5PortableTier1BestEA",
+      "portable": true,
+      "role": "tier1_breakout_only",
+      "symbol": "XAUUSD",
+      "files_roots": [
+        "C:/MT5PortableTier1BestEA/MQL5/Files"
+      ],
+      "log_catalog": "config/ml/log_catalog_a2.yaml"
+    },
+    "A3": {
+      "account_scope": "1033669",
+      "account_label": "A3",
+      "expected_login": "1033669",
+      "terminal_exe": "C:/MT5PortableRepairLane/terminal64.exe",
+      "expected_data_path": "C:/MT5PortableRepairLane",
+      "portable": true,
+      "role": "paused_repair_lane",
+      "symbol": "XAUUSD",
+      "files_roots": [
+        "C:/MT5PortableRepairLane/MQL5/Files"
+      ],
+      "log_catalog": "config/ml/log_catalog_a3.yaml"
+    }
+  }
+}

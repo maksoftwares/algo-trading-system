@@ -1,0 +1,94 @@
+{
+  "schema_version": "c02_log_catalog_v1",
+  "account_label": "A3",
+  "entries": [
+    {
+      "logical_source_name": "a3_breakout_plain_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a3_breakout_plain_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_plain_order",
+      "source_type": "runtime_order_log",
+      "filename": "a3_breakout_plain_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_plain_management",
+      "source_type": "position_path_log",
+      "filename": "a3_breakout_plain_management_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_improved_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a3_breakout_improved_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_improved_order",
+      "source_type": "runtime_order_log",
+      "filename": "a3_breakout_improved_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_improved_management",
+      "source_type": "position_path_log",
+      "filename": "a3_breakout_improved_management_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_tier1_compat_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a3_breakout_tier1_compat_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_tier1_compat_order",
+      "source_type": "runtime_order_log",
+      "filename": "a3_breakout_tier1_compat_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_breakout_tier1_compat_management",
+      "source_type": "position_path_log",
+      "filename": "a3_breakout_tier1_compat_management_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_soft_retest_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a3_soft_retest_v2_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a3_soft_retest_order",
+      "source_type": "runtime_order_log",
+      "filename": "a3_soft_retest_v2_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    }
+  ]
+}

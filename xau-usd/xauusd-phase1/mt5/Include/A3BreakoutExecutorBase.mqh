@@ -50,6 +50,7 @@
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
 #include <DirectionStateShadow.mqh>
+#include <A3MlShadowTap.mqh>
 
 input string InpRunId = A3_BREAKOUT_DEFAULT_RUN_ID;
 input bool InpDryRunOnly = true;
@@ -1178,6 +1179,7 @@ int OnInit()
    }
    g_breakout_observer.Configure(false);
    WriteStartupRow(A3_BREAKOUT_ATTACHED_STATUS);
+   A3MlShadowTapWriteRow("STARTUP", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpOrderComment, "ON_INIT", "NONE", false, A3_BREAKOUT_ATTACHED_STATUS, "PASS");
    EventSetTimer(1);
    return INIT_SUCCEEDED;
 }
@@ -1214,6 +1216,7 @@ void OnTimer()
    if(InpTrendGuardShadowOnly)
       trend_shadow_pass = TrendGuardDecision(observation, h1_trend, h4_trend, trend_shadow_reason);
    bool guard_pass = TradingGuardsPass(observation, spread_points, estimated_cost_r, h1_trend, h4_trend, guard_reason, trend_reason);
+   A3MlShadowTapWriteRow("SIGNAL", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpOrderComment, observation.stage, observation.direction_text, observation.would_signal, observation.reason_code, guard_reason);
    WriteSignalRow(observation, spread_points, estimated_cost_r, guard_reason, guard_pass, h1_trend, h4_trend, trend_reason, trend_shadow_pass, trend_shadow_reason);
    if(guard_pass)
       SendMarketOrder(observation, spread_points, estimated_cost_r);

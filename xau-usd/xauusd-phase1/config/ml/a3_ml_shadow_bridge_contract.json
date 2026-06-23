@@ -1,0 +1,25 @@
+{
+  "schema_version": "a3_ml_shadow_bridge_contract_v1",
+  "mode": "fail_closed_shadow_only",
+  "symbol": "XAUUSD",
+  "allowed_accounts": [
+    "1025742",
+    "1033030",
+    "1033669"
+  ],
+  "input_scores_csv": "outputs/reports/a3_ml_offline_scores.csv",
+  "model_artifact_json": "outputs/reports/A3_ML_MODEL_ARTIFACT.json",
+  "training_status_json": "outputs/reports/A3_ML_TRAINING_STATUS.json",
+  "output_predictions_csv": "outputs/reports/A3_ML_SHADOW_PREDICTIONS.csv",
+  "status_report_json": "outputs/reports/A3_ML_SHADOW_BRIDGE_STATUS.json",
+  "stale_after_minutes": 15,
+  "allowed_actions": [
+    "TAKE",
+    "SKIP",
+    "ABSTAIN"
+  ],
+  "default_action_when_not_ready": "ABSTAIN",
+  "broker_action_authorized": false,
+  "ea_consumption_authorized": false,
+  "python_demo_predictions_authorized": false
+}

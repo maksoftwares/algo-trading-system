@@ -2,7 +2,7 @@
 
 Status: PRELOCK_CONTRACT
 
-Scope: A3 account 1033669, XAUUSD only, breakout_retest only.
+Scope: configured A1 account 1025742, A2 account 1033030, and A3 account 1033669; XAUUSD only; breakout_retest only.
 
 This contract owns the source universe, row schema, feature-time ordering, trainable-label rules, data audit schema, and per-fold class-count schema.
 
@@ -32,6 +32,14 @@ Allowed source classes:
 - session and time metadata.
 
 Actual broker history is used only to validate reconstruction, build empirical slippage, and audit execution realism.
+
+Every row must carry account_scope. The initial configured account scopes are:
+
+- A1: 1025742;
+- A2: 1033030;
+- A3: 1033669.
+
+account_scope, lane, magic, source row IDs, and duplicate count are metadata only. They are not model features in V1.
 
 ## Prohibited Decision-Time Inputs
 

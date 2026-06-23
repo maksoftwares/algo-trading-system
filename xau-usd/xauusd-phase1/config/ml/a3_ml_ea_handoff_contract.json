@@ -1,0 +1,24 @@
+{
+  "schema_version": "a3_ml_ea_handoff_contract_v1",
+  "mode": "gated_mt5_files_publish",
+  "symbol": "XAUUSD",
+  "allowed_accounts": [
+    "1025742",
+    "1033030",
+    "1033669"
+  ],
+  "registry_path": "config/ml/mt5_accounts.yaml",
+  "shadow_bridge_status_json": "outputs/reports/A3_ML_SHADOW_BRIDGE_STATUS.json",
+  "shadow_predictions_csv": "outputs/reports/A3_ML_SHADOW_PREDICTIONS.csv",
+  "status_report_json": "outputs/reports/A3_ML_EA_HANDOFF_STATUS.json",
+  "staging_dir": "outputs/reports/ea_handoff",
+  "terminal_file_name": "A3_ML_EA_HANDOFF.csv",
+  "allowed_actions": [
+    "TAKE",
+    "SKIP",
+    "ABSTAIN"
+  ],
+  "publish_requires_ready_shadow_bridge": true,
+  "publish_requires_all_accounts_have_files_roots": true,
+  "broker_action_authorized": false
+}

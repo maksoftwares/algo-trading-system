@@ -1,0 +1,9 @@
+InpRunId=a3-ml-prediction-observer-v1
+InpDryRunOnly=true
+InpTargetSymbol=XAUUSD
+InpExpectedServerMarker=Demo
+InpAllowedAccountLoginsCsv=1025742,1033030,1033669
+InpHandoffFileName=A3_ML_EA_HANDOFF.csv
+InpObserverLogFileName=a3_ml_prediction_observer_log.csv
+InpStartupLogFileName=a3_ml_prediction_observer_startup.csv
+InpPollSeconds=10

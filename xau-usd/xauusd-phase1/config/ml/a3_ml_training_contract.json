@@ -1,0 +1,24 @@
+{
+  "schema_version": "a3_ml_training_contract_v1",
+  "mode": "gated_shadow_training_only",
+  "symbol": "XAUUSD",
+  "allowed_accounts": [
+    "1025742",
+    "1033030",
+    "1033669"
+  ],
+  "readiness_report_json": "outputs/reports/C03_TRAINING_READINESS_REPORT.json",
+  "data_audit_json": "outputs/reports/C02_C01_DATA_AUDIT.json",
+  "snapshot_csv": "outputs/reports/A3_ML_C01_SNAPSHOT_ROWS.csv",
+  "model_artifact_json": "outputs/reports/A3_ML_MODEL_ARTIFACT.json",
+  "model_card_md": "outputs/reports/A3_ML_MODEL_CARD.md",
+  "training_status_json": "outputs/reports/A3_ML_TRAINING_STATUS.json",
+  "model_family": "M0_BASE_RATE_FIRST",
+  "minimum_train_rows": 120,
+  "minimum_minority_labels": 60,
+  "minimum_selected_features": 5,
+  "decision_threshold": 0.5,
+  "broker_action_authorized": false,
+  "ea_consumption_authorized": false,
+  "python_demo_predictions_authorized": false
+}

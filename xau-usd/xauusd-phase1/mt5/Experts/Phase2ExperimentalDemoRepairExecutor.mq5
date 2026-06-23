@@ -8,6 +8,7 @@
 
 #include <Phase1/Phase1Types.mqh>
 #include <Phase1/Phase1BreakoutRetest.mqh>
+#include <A3MlShadowTap.mqh>
 
 input string InpRunId = "phase2-demo-repair-executor-v1";
 input bool InpDryRunOnly = false;
@@ -1386,6 +1387,7 @@ int OnInit()
    g_breakout_observer.Configure(CandidateUsesSwingObserver(InpCandidate));
    ResetDailyOrderCounterIfNeeded();
    WriteStartupRow("ATTACHED_DEMO_EXECUTOR_ENABLED");
+   A3MlShadowTapWriteRow("STARTUP", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpCandidate, "ON_INIT", "NONE", false, "ATTACHED_DEMO_EXECUTOR_ENABLED", "PASS");
    EventSetTimer(1);
    return INIT_SUCCEEDED;
 }
@@ -1449,6 +1451,9 @@ void OnTimer()
       observation.reason_code = "candidate_attached_no_mql_observer_yet";
       observation.direction_text = "NONE";
    }
+
+   string ml_shadow_guard_reason = observation.would_signal ? "PENDING_TRADING_GUARDS" : "NO_SIGNAL";
+   A3MlShadowTapWriteRow("SIGNAL", InpRunId, InpDryRunOnly, InpBrokerActionAllowed, InpCandidate, observation.stage, observation.direction_text, observation.would_signal, observation.reason_code, ml_shadow_guard_reason);
 
    string row[] = {
       TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),

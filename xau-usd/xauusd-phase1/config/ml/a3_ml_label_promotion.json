@@ -1,0 +1,15 @@
+{
+  "schema_version": "a3_ml_label_promotion_v1",
+  "label_promotion_authorized": false,
+  "review_reference": "",
+  "allowed_label_statuses": [
+    "TP",
+    "SL",
+    "TIMEOUT_POSITIVE",
+    "TIMEOUT_NEGATIVE",
+    "TIMEOUT_FLAT"
+  ],
+  "minimum_mature_labels": 300,
+  "minimum_minority_labels": 90,
+  "require_slippage_adequate": true
+}

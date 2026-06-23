@@ -1,0 +1,62 @@
+{
+  "schema_version": "c02_log_catalog_v1",
+  "account_label": "A2",
+  "entries": [
+    {
+      "logical_source_name": "a2_920101_evening_signal",
+      "source_type": "observer_signal_log",
+      "filename": "a2_920101_evening_signal_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a2_920101_evening_order",
+      "source_type": "runtime_order_log",
+      "filename": "a2_920101_evening_order_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a2_920101_evening_startup",
+      "source_type": "startup_log",
+      "filename": "a2_920101_evening_startup_log.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a2_tier1_bestea_signal_xauusd",
+      "source_type": "tier1_signal_log",
+      "filename": "tier1_bestea_signal_log_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a2_tier1_bestea_order_xauusd",
+      "source_type": "runtime_order_log",
+      "filename": "tier1_bestea_order_log_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": false
+    },
+    {
+      "logical_source_name": "a2_tier1_bestea_startup_xauusd",
+      "source_type": "startup_log",
+      "filename": "tier1_bestea_startup_xauusd.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "breakout_retest",
+      "append_active": true
+    },
+    {
+      "logical_source_name": "a2_equity_guardian_shadow",
+      "source_type": "risk_shadow_log",
+      "filename": "A2_EQUITY_GUARDIAN_SHADOW_LOG.csv",
+      "schema_version": "csv_runtime_log_v1",
+      "family": "risk_guardian",
+      "append_active": true
+    }
+  ]
+}
