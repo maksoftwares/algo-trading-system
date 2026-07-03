@@ -27,11 +27,12 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         "phase2_vps_selection_check": phase1_reports / "PHASE2_VPS_SELECTION_DECISION_CHECK.json",
         "phase2_vps_bootstrap": phase1_reports / "PHASE2_VPS_BOOTSTRAP_PACKET.json",
         "phase2_readiness": phase1_reports / "PHASE2_READINESS_REPORT.md",
-        "project_status_summary_md": repo_root / "status_summary.md",
-        "runtime_chart_inventory": phase1_reports / "RUNTIME_CHART_INVENTORY_FORENSIC_2026_06_21.csv",
         "phase3_status": phase3_reports / "PHASE3_EXPERIMENTAL_STATUS.json",
         "phase3_handoff": phase3_reports / "PHASE3_TO_DEMO_HANDOFF.json",
     }
+    project_status_summary_path = repo_root / "status_summary.md"
+    runtime_chart_inventory_path = phase1_reports / "RUNTIME_CHART_INVENTORY_FORENSIC_2026_06_21.csv"
+    a1_momentum_report_path = phase1_reports / "A1_XAU_M5_MOMENTUM_RR2_LONG_ONLY_FORWARD_ATTACHMENT_2026_07_02.json"
     errors = [f"missing status dashboard: {status_path}"] if not status_path.exists() else []
     for label, path in canonical_paths.items():
         if not path.exists():
@@ -54,10 +55,13 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     phase3_handoff = _read_json(canonical_paths["phase3_handoff"])
     measured_cost = _parse_measured_cost(canonical_paths["measured_cost"])
     phase2_status = _markdown_status(canonical_paths["phase2_readiness"])
-    project_status_summary_md = canonical_paths["project_status_summary_md"].read_text(
-        encoding="utf-8", errors="replace"
+    project_status_summary_md = (
+        project_status_summary_path.read_text(encoding="utf-8", errors="replace")
+        if project_status_summary_path.exists()
+        else ""
     )
-    runtime_inventory = _read_runtime_inventory(canonical_paths["runtime_chart_inventory"])
+    runtime_inventory = _read_runtime_inventory(runtime_chart_inventory_path) if runtime_chart_inventory_path.exists() else []
+    a1_momentum_report = _read_json(a1_momentum_report_path) if a1_momentum_report_path.exists() else {}
 
     runtime = _mapping(phase1_summary.get("runtime"))
     latest = _mapping(runtime.get("latest_row"))
@@ -258,7 +262,10 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         fragment = f'VPS decision check</td><td><span class="pill {_status_class(str(vps_check_status))}">{status_text}</span>'
         if fragment not in actual:
             errors.append(f"status.html is missing vps selection decision check status: {vps_check_status}")
-    _verify_protected_breakout_core_summary(errors, project_status_summary_md, runtime_inventory)
+    if project_status_summary_md or runtime_inventory:
+        _verify_protected_breakout_core_summary(errors, project_status_summary_md, runtime_inventory)
+    if a1_momentum_report:
+        _verify_a1_momentum_summary(errors, actual, project_status_summary_md, a1_momentum_report)
     return errors
 
 
@@ -288,6 +295,9 @@ def _verify_protected_breakout_core_summary(
         and row.get("InpCandidate") == "breakout_retest"
         and row.get("derived_magic") == "920101"
         and row.get("broker_action_state") == "BROKER_ACTION_ENABLED"
+        and row.get("InpAllowedAccountLoginsCsv") in {"1025742", "1033030"}
+        and row.get("InpTradeSessionStartHour") == "0"
+        and row.get("InpTradeSessionEndHour") == "23"
     ]
     if "Source: `runtime_inventory`" not in status_summary_md:
         errors.append("status_summary.md Protected Breakout Core is not sourced from runtime_inventory")
@@ -296,6 +306,9 @@ def _verify_protected_breakout_core_summary(
             f"| `{row.get('lane')} {row.get('chart')}` | `breakout_retest` | "
             f"`{row.get('InpAllowedAccountLoginsCsv')}` | `920101` | "
             f"`{row.get('InpTradeSessionStartHour')}->{row.get('InpTradeSessionEndHour')}` | "
+            f"`enabled={row.get('InpSmartTrendFilterEnabled')} shadow={row.get('InpSmartTrendFilterShadowOnly')} "
+            f"D1_required={row.get('InpSmartTrendRequireD1')} D1={row.get('InpSmartTrendMinD1Aligned')} "
+            f"H1_required={row.get('InpSmartTrendRequireH1')} H1={row.get('InpSmartTrendMinH1Aligned')}` | "
             f"`{row.get('InpDryRunOnly')}` | `{row.get('InpBrokerActionAllowed')}` | `BROKER_ACTION_ENABLED` |"
         )
         if expected not in status_summary_md:
@@ -303,6 +316,29 @@ def _verify_protected_breakout_core_summary(
     stale_fragment = "| `chart06.chr` | `swing_breakout_retest_v0` |"
     if stale_fragment in status_summary_md:
         errors.append("status_summary.md still lists stale chart06 swing_breakout_retest_v0 as protected core")
+
+
+def _verify_a1_momentum_summary(
+    errors: list[str],
+    status_html: str,
+    status_summary_md: str,
+    report: dict[str, Any],
+) -> None:
+    ea = report.get("ea", {})
+    required_summary_fragments = [
+        "## A1 Momentum Continuation Lane",
+        f"| Status | `{report.get('status', '')}` |",
+        f"| EA | `{ea.get('name', '')}` |",
+        f"| Magic | `{ea.get('magic', '')}` |",
+        f"| Run ID | `{ea.get('run_id', '')}` |",
+        "| Dedicated kill switch | `a1_xau_m5_momentum_rr2_kill_switch.txt` |",
+    ]
+    for fragment in required_summary_fragments:
+        if fragment not in status_summary_md:
+            errors.append(f"status_summary.md missing A1 momentum lane fragment: {fragment}")
+    report_link = "A1 XAU M5 momentum RR2 long-only attachment"
+    if report_link not in status_html:
+        errors.append("status.html missing A1 XAU M5 momentum-continuation attachment link")
 
 
 def _markdown_status(path: Path) -> str:

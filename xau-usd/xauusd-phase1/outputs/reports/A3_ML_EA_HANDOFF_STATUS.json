@@ -1,9 +1,9 @@
 {
   "status": "REFUSED_NOT_READY",
   "stage": "C06-EA-HANDOFF",
-  "created_at_utc": "2026-06-22T06:38:38Z",
+  "created_at_utc": "2026-06-25T23:16:27Z",
   "schema_version": "a3_ml_ea_handoff_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606252300_g0a9823b0_c9221d066",
   "authorization": {
     "python_demo_predictions_authorized": false,
     "ea_consumption_authorized": false,
@@ -75,12 +75,12 @@
     {
       "check": "predictions_hash_matches_bridge",
       "passed": true,
-      "detail": "observed=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7 expected=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7"
+      "detail": "observed=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d expected=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d"
     },
     {
       "check": "predictions_not_empty",
       "passed": true,
-      "detail": "rows=349"
+      "detail": "rows=564"
     },
     {
       "check": "prediction_actions_allowed",

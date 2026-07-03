@@ -1,7 +1,7 @@
 # A3 ML Research Preview Runtime Verifier Status
 
 Overall status: RESEARCH_PREVIEW_READ_PATH_CONFIRMED_ALL_ACCOUNTS
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Meaning
 
@@ -23,9 +23,9 @@ This verifies the EA runtime read path for Python-produced research-preview rows
 
 | Account | Handoff | Tap log | Read path | Rows |
 | --- | --- | --- | --- | --- |
-| A1 | true | true | true | 97 |
-| A2 | true | true | true | 97 |
-| A3 | true | true | true | 378 |
+| A1 | true | true | true | 849 |
+| A2 | true | true | true | 850 |
+| A3 | true | true | true | 3480 |
 
 ## Validations
 
@@ -36,15 +36,15 @@ This verifies the EA runtime read path for Python-produced research-preview rows
 | A1_files_root_exists | true | C:\Users\ZHAO ZHU INFORMATION\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Files |
 | A1_files_root_safe | true | C:\Users\ZHAO ZHU INFORMATION\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Files |
 | A1_handoff_exists | true | C:\Users\ZHAO ZHU INFORMATION\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Files\A3_ML_EA_HANDOFF.csv |
-| A1_handoff_research_preview_ready | true | matching_rows=207 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
+| A1_handoff_research_preview_ready | true | matching_rows=259 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
 | A2_files_root_exists | true | C:\MT5PortableTier1BestEA\MQL5\Files |
 | A2_files_root_safe | true | C:\MT5PortableTier1BestEA\MQL5\Files |
 | A2_handoff_exists | true | C:\MT5PortableTier1BestEA\MQL5\Files\A3_ML_EA_HANDOFF.csv |
-| A2_handoff_research_preview_ready | true | matching_rows=94 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
+| A2_handoff_research_preview_ready | true | matching_rows=146 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
 | A3_files_root_exists | true | C:\MT5PortableRepairLane\MQL5\Files |
 | A3_files_root_safe | true | C:\MT5PortableRepairLane\MQL5\Files |
 | A3_handoff_exists | true | C:\MT5PortableRepairLane\MQL5\Files\A3_ML_EA_HANDOFF.csv |
-| A3_handoff_research_preview_ready | true | matching_rows=48 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
+| A3_handoff_research_preview_ready | true | matching_rows=107 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED |
 
 ## Authorization
 

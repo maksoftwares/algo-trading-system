@@ -1,8 +1,8 @@
 {
   "status": "PASS",
   "stage": "C02-06",
-  "created_at_utc": "2026-06-22T06:03:11Z",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "created_at_utc": "2026-06-26T23:04:10Z",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "boundary": {
     "mt5_connection_attempted": false,
     "model_training_authorized": false,
@@ -11,61 +11,63 @@
     "diagnostic_labels_only": true
   },
   "counts": {
-    "labels": 574,
-    "mature": 424,
-    "positive": 172,
-    "negative": 252,
-    "unresolved": 150,
+    "labels": 1087,
+    "mature": 844,
+    "positive": 302,
+    "negative": 542,
+    "unresolved": 243,
     "outcomes": {
-      "CANCELLED_NO_FRESH_TICK": 150,
-      "TP": 172,
-      "SL": 252
+      "CANCELLED_NO_FRESH_TICK": 243,
+      "SL": 542,
+      "TP": 302
     }
   },
   "by_account": {
     "A1": {
-      "labels": 347,
-      "mature": 197,
-      "positive": 79,
-      "negative": 118,
+      "labels": 439,
+      "mature": 298,
+      "positive": 112,
+      "negative": 186,
       "timeouts": 0,
-      "unresolved": 150,
+      "unresolved": 141,
       "outcomes": {
-        "CANCELLED_NO_FRESH_TICK": 150,
-        "TP": 79,
-        "SL": 118
+        "CANCELLED_NO_FRESH_TICK": 141,
+        "SL": 186,
+        "TP": 112
       }
     },
     "A2": {
-      "labels": 95,
-      "mature": 95,
-      "positive": 43,
-      "negative": 52,
+      "labels": 187,
+      "mature": 163,
+      "positive": 63,
+      "negative": 100,
       "timeouts": 0,
-      "unresolved": 0,
+      "unresolved": 24,
       "outcomes": {
-        "TP": 43,
-        "SL": 52
+        "TP": 63,
+        "SL": 100,
+        "CANCELLED_NO_FRESH_TICK": 24
       }
     },
     "A3": {
-      "labels": 132,
-      "mature": 132,
-      "positive": 50,
-      "negative": 82,
+      "labels": 461,
+      "mature": 383,
+      "positive": 127,
+      "negative": 256,
       "timeouts": 0,
-      "unresolved": 0,
+      "unresolved": 78,
       "outcomes": {
-        "SL": 82,
-        "TP": 50
+        "SL": 256,
+        "TP": 127,
+        "CANCELLED_NO_FRESH_TICK": 78
       }
     }
   },
   "outputs": {
-    "labels_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\labels\\diagnostic_tick_labels.csv",
-    "labels_sha256": "4b11ab32e92d15a1e972d4d29b78f22bbcaaa1d64897a66ac033830bc568ec57",
+    "labels_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\\normalized\\labels\\diagnostic_tick_labels.csv",
+    "labels_sha256": "f069e694211cb821583068c568ba3b01edba41c391fc4b44fbcb1378fb3e8a65",
     "labeled_decisions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
-    "labeled_decisions_sha256": "7b82f2747222c15d0bdb4512cc3c1f35cf86de3ff7ba8fa54092a411841c9a5e",
+    "labeled_decisions_sha256": "e491d97887b85d6d0c3dd76802ecc46276c53df6a6eb28a4df5e66ff4c8a18f0",
     "slippage_readiness_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_SLIPPAGE_READINESS.json"
   },
   "next_allowed_stage": "C03 label/slippage promotion and leakage validation before training"

@@ -1,7 +1,7 @@
 # A3 ML EA Consumer Readiness Status
 
 Overall status: BROKER_EXECUTOR_CONSUMERS_READY
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Authorization
 
@@ -17,7 +17,7 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 | --- | --- | --- | --- | --- |
 | A1 | true | Phase2ExperimentalDemoExecutor | Phase2ExperimentalDemoExecutor | - |
 | A2 | true | Phase2ExperimentalDemoExecutor | Phase2ExperimentalDemoExecutor | - |
-| A3 | true | Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor | Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor | - |
+| A3 | true | Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor, +1 more | Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor, +1 more | - |
 
 ## Broker Executor Gaps
 

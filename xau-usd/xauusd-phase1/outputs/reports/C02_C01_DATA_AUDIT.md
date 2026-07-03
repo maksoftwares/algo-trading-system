@@ -20,19 +20,19 @@ C01 Python ML pipeline bootstrap only for configured A1/A2/A3 account scopes. It
 
 ## Per-Account Counts
 
-- A1 1025742: snapshot_rows=207, setup_groups=161, positive=49, negative=158
-- A2 1033030: snapshot_rows=94, setup_groups=72, positive=43, negative=51
-- A3 1033669: snapshot_rows=48, setup_groups=33, positive=18, negative=30
+- A1 1025742: snapshot_rows=299, setup_groups=246, positive=76, negative=223
+- A2 1033030: snapshot_rows=186, setup_groups=154, positive=63, negative=123
+- A3 1033669: snapshot_rows=148, setup_groups=119, positive=40, negative=108
 
 ## Counts
 
-- decisions_rows: 574
+- decisions_rows: 1087
 - trades_rows: 0
-- scoped_raw_rows: 574
+- scoped_raw_rows: 1087
 - rejected_rows: 0
 - parse_errors: 0
-- exact_unique_signals: 349
-- snapshot_rows: 349
+- exact_unique_signals: 633
+- snapshot_rows: 633
 
 ## Training Gate
 

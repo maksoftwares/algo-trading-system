@@ -1,12 +1,12 @@
 # A3 ML Contract Expansion Config Proposal
 
 Overall status: WAITING_FOR_REVIEW_APPROVAL
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
-- C34 status: CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND.
-- C35 status: CONTRACT_EXPANSION_REVIEW_REQUIRED.
+- C34 status: CURRENT_SCOPE_UNCATALOGED_BACKFILL_FOUND.
+- C35 status: CURRENT_SCOPE_IMPORT_REVIEW_REQUIRED.
 - Selected families: none.
 - Candidate files: 13.
 - Selected files: 0.

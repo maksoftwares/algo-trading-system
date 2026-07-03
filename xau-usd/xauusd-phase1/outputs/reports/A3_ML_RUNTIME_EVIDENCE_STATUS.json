@@ -1,9 +1,9 @@
 {
   "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
   "stage": "C20-ML-RUNTIME-EVIDENCE",
-  "created_at_utc": "2026-06-22T06:38:40Z",
+  "created_at_utc": "2026-06-24T23:58:09Z",
   "schema_version": "a3_ml_runtime_evidence_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "authorization": {
     "python_demo_predictions_authorized": false,
     "ea_consumption_authorized": false,
@@ -35,8 +35,8 @@
       "handoff": {
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
         "exists": true,
-        "size": 127010,
-        "last_write_utc": "2026-06-22T06:38:39Z",
+        "size": 158866,
+        "last_write_utc": "2026-06-24T23:55:19Z",
         "csv_header": [
           "schema_version",
           "generated_at_utc",
@@ -59,26 +59,26 @@
           "drift_status",
           "broker_action_authorized"
         ],
-        "csv_rows": 207,
+        "csv_rows": 259,
         "tail": {
           "schema_version": "a3_ml_ea_handoff_v1",
-          "generated_at_utc": "2026-06-22T06:38:39Z",
-          "expires_at_utc": "2026-06-29T06:38:39Z",
-          "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+          "generated_at_utc": "2026-06-24T23:55:19Z",
+          "expires_at_utc": "2026-07-01T23:55:19Z",
+          "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
           "account_scope": "1025742",
           "account_label": "A1",
           "symbol": "XAUUSD",
-          "exact_signal_id": "1025742|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
-          "setup_group_id": "A3_ML_C01_G00265",
-          "decision_time_utc": "2026-06-22 00:19:58Z",
+          "exact_signal_id": "1025742|XAUUSD|breakout_retest|LONG|2026-06-24 20:10:00Z|2026-06-24 20:15:00Z|2026-06-24 20:20:00Z|3994.13",
+          "setup_group_id": "A3_ML_C01_G00416",
+          "decision_time_utc": "2026-06-24 20:29:59Z",
           "direction": "LONG",
-          "p_win_calibrated": "0.2687500000",
+          "p_win_calibrated": "0.2722222222",
           "threshold": "",
           "action": "ABSTAIN",
           "reason": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
-          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "model_hash": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
-          "feature_schema_hash": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
+          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066_21622d3f",
+          "model_hash": "96d3aa3f88d946fc5b00559c509384c107d8910ac0d613993b7e692244fcfb42",
+          "feature_schema_hash": "21622d3f16a0382b4f5ba4264d6458e2a457c0fdc63af0d67b2c480d0779434f",
           "drift_status": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "broker_action_authorized": "false"
         }
@@ -108,8 +108,8 @@
       "observer_prediction": {
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "exists": true,
-        "size": 2006900,
-        "last_write_utc": "2026-06-22T06:38:38Z",
+        "size": 3159100,
+        "last_write_utc": "2026-06-22T11:12:57Z",
         "csv_header": [
           "a3_ml_prediction_observer_log_v1",
           "2026.06.21 22:40:57",
@@ -135,17 +135,17 @@
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false"
         ],
-        "csv_rows": 2866,
+        "csv_rows": 4512,
         "tail": {
           "a3_ml_prediction_observer_log_v1": "a3_ml_prediction_observer_log_v1",
-          "2026.06.21 22:40:57": "2026.06.22 06:38:38",
+          "2026.06.21 22:40:57": "2026.06.22 11:12:57",
           "a3-ml-prediction-observer-v1": "a3-ml-prediction-observer-v1",
           "1025742": "1025742",
           "Capital.ComMena-Demo": "Capital.ComMena-Demo",
           "XAUUSD": "XAUUSD",
           "true": "true",
-          "2026-06-21T22:33:44Z": "2026-06-22T06:31:30Z",
-          "2026-06-28T22:33:44Z": "2026-06-29T06:31:30Z",
+          "2026-06-21T22:33:44Z": "2026-06-22T06:38:39Z",
+          "2026-06-28T22:33:44Z": "2026-06-29T06:38:39Z",
           "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
           "1025742|XAUUSD|breakout_retest|LONG|2026-06-21 21:45:00Z|2026-06-21 21:50:00Z|2026-06-21 21:55:00Z|4153.38": "1025742|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
           "A3_ML_C01_G00261": "A3_ML_C01_G00265",
@@ -156,7 +156,7 @@
           "ABSTAIN": "ABSTAIN",
           "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
           "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066_22f02349": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "cc0c63f06cb6fa6b64c3cdcec57090b4f11ad990546d9cffb7d7d4e0f327a779",
+          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
           "22f02349eb544af49064d735fe3121e885a68d1135de40c25a229a6e92e05134": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false": "false"
@@ -165,8 +165,8 @@
       "broker_shadow_tap": {
         "path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "exists": true,
-        "size": 47796,
-        "last_write_utc": "2026-06-22T06:34:57Z",
+        "size": 413883,
+        "last_write_utc": "2026-06-24T23:54:59Z",
         "csv_header": [
           "timestamp_broker",
           "timestamp_utc",
@@ -196,11 +196,11 @@
           "reason_code",
           "guard_reason"
         ],
-        "csv_rows": 97,
+        "csv_rows": 849,
         "tail": {
-          "timestamp_broker": "2026.06.22 06:35:00",
-          "timestamp_utc": "2026.06.22 06:34:57",
-          "timestamp_local": "2026.06.22 10:34:57",
+          "timestamp_broker": "2026.06.24 23:55:01",
+          "timestamp_utc": "2026.06.24 23:54:59",
+          "timestamp_local": "2026.06.25 03:54:59",
           "account_server": "Capital.ComMena-Demo",
           "account_login": "1025742",
           "symbol": "XAUUSD",
@@ -221,9 +221,9 @@
           "ml_broker_action_authorized": "false",
           "candidate_or_comment": "breakout_retest",
           "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-          "signal_direction": "LONG",
+          "signal_direction": "SHORT",
           "signal_would_signal": "false",
-          "reason_code": "no_long_breakout_retest_candidate",
+          "reason_code": "no_short_breakout_retest_candidate",
           "guard_reason": "NO_SIGNAL"
         }
       }
@@ -238,8 +238,8 @@
       "handoff": {
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
         "exists": true,
-        "size": 57799,
-        "last_write_utc": "2026-06-22T06:38:39Z",
+        "size": 89655,
+        "last_write_utc": "2026-06-24T23:55:19Z",
         "csv_header": [
           "schema_version",
           "generated_at_utc",
@@ -262,26 +262,26 @@
           "drift_status",
           "broker_action_authorized"
         ],
-        "csv_rows": 94,
+        "csv_rows": 146,
         "tail": {
           "schema_version": "a3_ml_ea_handoff_v1",
-          "generated_at_utc": "2026-06-22T06:38:39Z",
-          "expires_at_utc": "2026-06-29T06:38:39Z",
-          "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+          "generated_at_utc": "2026-06-24T23:55:19Z",
+          "expires_at_utc": "2026-07-01T23:55:19Z",
+          "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
           "account_scope": "1033030",
           "account_label": "A2",
           "symbol": "XAUUSD",
-          "exact_signal_id": "1033030|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
-          "setup_group_id": "A3_ML_C01_G00264",
-          "decision_time_utc": "2026-06-22 00:19:57Z",
+          "exact_signal_id": "1033030|XAUUSD|breakout_retest|LONG|2026-06-24 20:10:00Z|2026-06-24 20:15:00Z|2026-06-24 20:20:00Z|3994.13",
+          "setup_group_id": "A3_ML_C01_G00417",
+          "decision_time_utc": "2026-06-24 20:29:59Z",
           "direction": "LONG",
-          "p_win_calibrated": "0.4019607843",
+          "p_win_calibrated": "0.3360655738",
           "threshold": "",
           "action": "ABSTAIN",
           "reason": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
-          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "model_hash": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
-          "feature_schema_hash": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
+          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066_21622d3f",
+          "model_hash": "96d3aa3f88d946fc5b00559c509384c107d8910ac0d613993b7e692244fcfb42",
+          "feature_schema_hash": "21622d3f16a0382b4f5ba4264d6458e2a457c0fdc63af0d67b2c480d0779434f",
           "drift_status": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "broker_action_authorized": "false"
         }
@@ -311,8 +311,8 @@
       "observer_prediction": {
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "exists": true,
-        "size": 2006900,
-        "last_write_utc": "2026-06-22T06:38:34Z",
+        "size": 3168200,
+        "last_write_utc": "2026-06-22T11:15:04Z",
         "csv_header": [
           "a3_ml_prediction_observer_log_v1",
           "2026.06.21 22:40:54",
@@ -338,17 +338,17 @@
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false"
         ],
-        "csv_rows": 2866,
+        "csv_rows": 4525,
         "tail": {
           "a3_ml_prediction_observer_log_v1": "a3_ml_prediction_observer_log_v1",
-          "2026.06.21 22:40:54": "2026.06.22 06:38:34",
+          "2026.06.21 22:40:54": "2026.06.22 11:15:04",
           "a3-ml-prediction-observer-v1": "a3-ml-prediction-observer-v1",
           "1033030": "1033030",
           "Capital.ComMena-Demo": "Capital.ComMena-Demo",
           "XAUUSD": "XAUUSD",
           "true": "true",
-          "2026-06-21T22:33:44Z": "2026-06-22T06:31:30Z",
-          "2026-06-28T22:33:44Z": "2026-06-29T06:31:30Z",
+          "2026-06-21T22:33:44Z": "2026-06-22T06:38:39Z",
+          "2026-06-28T22:33:44Z": "2026-06-29T06:38:39Z",
           "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
           "1033030|XAUUSD|breakout_retest|LONG|2026-06-21 21:45:00Z|2026-06-21 21:50:00Z|2026-06-21 21:55:00Z|4153.38": "1033030|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
           "A3_ML_C01_G00262": "A3_ML_C01_G00264",
@@ -359,7 +359,7 @@
           "ABSTAIN": "ABSTAIN",
           "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
           "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066_22f02349": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "cc0c63f06cb6fa6b64c3cdcec57090b4f11ad990546d9cffb7d7d4e0f327a779",
+          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
           "22f02349eb544af49064d735fe3121e885a68d1135de40c25a229a6e92e05134": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false": "false"
@@ -368,8 +368,8 @@
       "broker_shadow_tap": {
         "path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "exists": true,
-        "size": 47796,
-        "last_write_utc": "2026-06-22T06:34:57Z",
+        "size": 414373,
+        "last_write_utc": "2026-06-24T23:54:59Z",
         "csv_header": [
           "timestamp_broker",
           "timestamp_utc",
@@ -399,11 +399,11 @@
           "reason_code",
           "guard_reason"
         ],
-        "csv_rows": 97,
+        "csv_rows": 850,
         "tail": {
-          "timestamp_broker": "2026.06.22 06:35:01",
-          "timestamp_utc": "2026.06.22 06:34:57",
-          "timestamp_local": "2026.06.22 10:34:57",
+          "timestamp_broker": "2026.06.24 23:55:01",
+          "timestamp_utc": "2026.06.24 23:54:59",
+          "timestamp_local": "2026.06.25 03:54:59",
           "account_server": "Capital.ComMena-Demo",
           "account_login": "1033030",
           "symbol": "XAUUSD",
@@ -424,9 +424,9 @@
           "ml_broker_action_authorized": "false",
           "candidate_or_comment": "breakout_retest",
           "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-          "signal_direction": "LONG",
+          "signal_direction": "SHORT",
           "signal_would_signal": "false",
-          "reason_code": "no_long_breakout_retest_candidate",
+          "reason_code": "no_short_breakout_retest_candidate",
           "guard_reason": "NO_SIGNAL"
         }
       }
@@ -441,8 +441,8 @@
       "handoff": {
         "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
         "exists": true,
-        "size": 29649,
-        "last_write_utc": "2026-06-22T06:38:39Z",
+        "size": 65796,
+        "last_write_utc": "2026-06-24T23:55:19Z",
         "csv_header": [
           "schema_version",
           "generated_at_utc",
@@ -465,26 +465,26 @@
           "drift_status",
           "broker_action_authorized"
         ],
-        "csv_rows": 48,
+        "csv_rows": 107,
         "tail": {
           "schema_version": "a3_ml_ea_handoff_v1",
-          "generated_at_utc": "2026-06-22T06:38:39Z",
-          "expires_at_utc": "2026-06-29T06:38:39Z",
-          "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+          "generated_at_utc": "2026-06-24T23:55:19Z",
+          "expires_at_utc": "2026-07-01T23:55:19Z",
+          "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
           "account_scope": "1033669",
           "account_label": "A3",
           "symbol": "XAUUSD",
-          "exact_signal_id": "1033669|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
-          "setup_group_id": "A3_ML_C01_G00266",
-          "decision_time_utc": "2026-06-22 00:19:58Z",
+          "exact_signal_id": "1033669|XAUUSD|breakout_retest|LONG|2026-06-24 20:10:00Z|2026-06-24 20:15:00Z|2026-06-24 20:20:00Z|3994.13",
+          "setup_group_id": "A3_ML_C01_G00415",
+          "decision_time_utc": "2026-06-24 20:29:58Z",
           "direction": "LONG",
-          "p_win_calibrated": "0.3518518519",
+          "p_win_calibrated": "0.2567567568",
           "threshold": "",
           "action": "ABSTAIN",
           "reason": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
-          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "model_hash": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
-          "feature_schema_hash": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
+          "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066_21622d3f",
+          "model_hash": "96d3aa3f88d946fc5b00559c509384c107d8910ac0d613993b7e692244fcfb42",
+          "feature_schema_hash": "21622d3f16a0382b4f5ba4264d6458e2a457c0fdc63af0d67b2c480d0779434f",
           "drift_status": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "broker_action_authorized": "false"
         }
@@ -514,8 +514,8 @@
       "observer_prediction": {
         "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "exists": true,
-        "size": 2006900,
-        "last_write_utc": "2026-06-22T06:38:36Z",
+        "size": 3177300,
+        "last_write_utc": "2026-06-22T11:17:15Z",
         "csv_header": [
           "a3_ml_prediction_observer_log_v1",
           "2026.06.21 22:40:55",
@@ -541,17 +541,17 @@
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false"
         ],
-        "csv_rows": 2866,
+        "csv_rows": 4538,
         "tail": {
           "a3_ml_prediction_observer_log_v1": "a3_ml_prediction_observer_log_v1",
-          "2026.06.21 22:40:55": "2026.06.22 06:38:36",
+          "2026.06.21 22:40:55": "2026.06.22 11:17:15",
           "a3-ml-prediction-observer-v1": "a3-ml-prediction-observer-v1",
           "1033669": "1033669",
           "Capital.ComMena-Demo": "Capital.ComMena-Demo",
           "XAUUSD": "XAUUSD",
           "true": "true",
-          "2026-06-21T22:33:44Z": "2026-06-22T06:31:30Z",
-          "2026-06-28T22:33:44Z": "2026-06-29T06:31:30Z",
+          "2026-06-21T22:33:44Z": "2026-06-22T06:38:39Z",
+          "2026-06-28T22:33:44Z": "2026-06-29T06:38:39Z",
           "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
           "1033669|XAUUSD|breakout_retest|LONG|2026-06-21 21:45:00Z|2026-06-21 21:50:00Z|2026-06-21 21:55:00Z|4153.38": "1033669|XAUUSD|breakout_retest|LONG|2026-06-22 00:00:00Z|2026-06-22 00:05:00Z|2026-06-22 00:10:00Z|4159.28",
           "A3_ML_C01_G00263": "A3_ML_C01_G00266",
@@ -562,7 +562,7 @@
           "ABSTAIN": "ABSTAIN",
           "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO": "C26_RESEARCH_PREVIEW_NOT_AUTHORIZED_FOR_DEMO",
           "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066_22f02349": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
-          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "cc0c63f06cb6fa6b64c3cdcec57090b4f11ad990546d9cffb7d7d4e0f327a779",
+          "ff610a9b1a48e308fa51a56c8c4873959b67e39776ca8d05d01362c6eb20e89e": "10b44f1a411fb133d374cb9b18326c34f49c0c7af2b951c5138b78e71ab7644f",
           "22f02349eb544af49064d735fe3121e885a68d1135de40c25a229a6e92e05134": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
           "ML_RESEARCH_PREVIEW_FAIL_CLOSED": "ML_RESEARCH_PREVIEW_FAIL_CLOSED",
           "false": "false"
@@ -571,8 +571,8 @@
       "broker_shadow_tap": {
         "path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "exists": true,
-        "size": 185538,
-        "last_write_utc": "2026-06-22T06:34:57Z",
+        "size": 1702858,
+        "last_write_utc": "2026-06-24T23:54:58Z",
         "csv_header": [
           "timestamp_broker",
           "timestamp_utc",
@@ -602,11 +602,11 @@
           "reason_code",
           "guard_reason"
         ],
-        "csv_rows": 383,
+        "csv_rows": 3522,
         "tail": {
-          "timestamp_broker": "2026.06.22 06:35:01",
-          "timestamp_utc": "2026.06.22 06:34:57",
-          "timestamp_local": "2026.06.22 10:34:57",
+          "timestamp_broker": "2026.06.24 23:55:00",
+          "timestamp_utc": "2026.06.24 23:54:58",
+          "timestamp_local": "2026.06.25 03:54:58",
           "account_server": "Capital.ComMena-Demo",
           "account_login": "1033669",
           "symbol": "XAUUSD",
@@ -627,9 +627,9 @@
           "ml_broker_action_authorized": "false",
           "candidate_or_comment": "A3_BREAKOUT_PLAIN",
           "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-          "signal_direction": "LONG",
+          "signal_direction": "SHORT",
           "signal_would_signal": "false",
-          "reason_code": "no_long_breakout_retest_candidate",
+          "reason_code": "no_short_breakout_retest_candidate",
           "guard_reason": "NO_SIGNAL"
         }
       }

@@ -1,9 +1,9 @@
 {
-  "status": "RUNTIME_LOGS_DETECTED_ALL_ACCOUNTS",
+  "status": "LAUNCH_SENT_WAITING_FOR_LOGS",
   "stage": "C14-ML-OBSERVER-RUNTIME-ATTACH",
-  "created_at_utc": "2026-06-21T22:40:57Z",
+  "created_at_utc": "2026-06-24T23:57:28Z",
   "schema_version": "a3_ml_observer_runtime_attach_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "authorization": {
     "runtime_launch_requested": true,
     "runtime_launch_attempted": true,
@@ -53,7 +53,7 @@
         "account_label": "A1",
         "account_scope": "1025742",
         "status": "LAUNCH_SENT",
-        "pid": 21672,
+        "pid": 2852,
         "command": [
           "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
           "/config:C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\Config\\a3_ml_prediction_observer_startup.ini"
@@ -64,7 +64,7 @@
         "account_label": "A2",
         "account_scope": "1033030",
         "status": "LAUNCH_SENT",
-        "pid": 25260,
+        "pid": 9112,
         "command": [
           "C:\\MT5PortableTier1BestEA\\terminal64.exe",
           "/portable",
@@ -76,7 +76,7 @@
         "account_label": "A3",
         "account_scope": "1033669",
         "status": "LAUNCH_SENT",
-        "pid": 22768,
+        "pid": 19368,
         "command": [
           "C:\\MT5PortableRepairLane\\terminal64.exe",
           "/portable",
@@ -93,12 +93,12 @@
         "startup_log_exists": true,
         "startup_log_size": 219,
         "startup_log_last_write_utc": "2026-06-21T22:40:47Z",
-        "startup_log_fresh_after_launch": true,
+        "startup_log_fresh_after_launch": false,
         "prediction_log_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "prediction_log_exists": true,
-        "prediction_log_size": 700,
-        "prediction_log_last_write_utc": "2026-06-21T22:40:57Z",
-        "prediction_log_fresh_after_launch": true
+        "prediction_log_size": 3159100,
+        "prediction_log_last_write_utc": "2026-06-22T11:12:57Z",
+        "prediction_log_fresh_after_launch": false
       },
       {
         "account_label": "A2",
@@ -107,12 +107,12 @@
         "startup_log_exists": true,
         "startup_log_size": 219,
         "startup_log_last_write_utc": "2026-06-21T22:40:44Z",
-        "startup_log_fresh_after_launch": true,
+        "startup_log_fresh_after_launch": false,
         "prediction_log_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "prediction_log_exists": true,
-        "prediction_log_size": 700,
-        "prediction_log_last_write_utc": "2026-06-21T22:40:54Z",
-        "prediction_log_fresh_after_launch": true
+        "prediction_log_size": 3168200,
+        "prediction_log_last_write_utc": "2026-06-22T11:15:04Z",
+        "prediction_log_fresh_after_launch": false
       },
       {
         "account_label": "A3",
@@ -121,12 +121,12 @@
         "startup_log_exists": true,
         "startup_log_size": 219,
         "startup_log_last_write_utc": "2026-06-21T22:40:45Z",
-        "startup_log_fresh_after_launch": true,
+        "startup_log_fresh_after_launch": false,
         "prediction_log_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_prediction_observer_log.csv",
         "prediction_log_exists": true,
-        "prediction_log_size": 700,
-        "prediction_log_last_write_utc": "2026-06-21T22:40:55Z",
-        "prediction_log_fresh_after_launch": true
+        "prediction_log_size": 3177300,
+        "prediction_log_last_write_utc": "2026-06-22T11:17:15Z",
+        "prediction_log_fresh_after_launch": false
       }
     ]
   },
@@ -257,5 +257,5 @@
     "allow_live_trading_in_startup_config": false,
     "broker_action_authorized": false
   },
-  "next_allowed_stage": "Passive observer runtime is logging on all three accounts. Keep collecting data; real Python predictions still require C03 PASS and C05/C04/C06 readiness."
+  "next_allowed_stage": "Launch was sent, but logs were not fresh on all accounts. Confirm the terminal accepted the startup config or attach the passive preset manually."
 }

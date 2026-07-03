@@ -1,9 +1,9 @@
 {
   "status": "REFUSED_NOT_READY",
   "stage": "C05-MODEL-TRAINING",
-  "created_at_utc": "2026-06-22T06:03:15Z",
+  "created_at_utc": "2026-06-26T23:04:13Z",
   "schema_version": "a3_ml_training_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "readiness_status": "NO_GO",
   "c01_status": "PIPELINE_ONLY",
   "authorization": {

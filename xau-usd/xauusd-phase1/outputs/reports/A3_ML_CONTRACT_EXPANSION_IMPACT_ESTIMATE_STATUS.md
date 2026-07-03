@@ -1,7 +1,7 @@
 # A3 ML Contract Expansion Impact Estimate
 
 Overall status: APPROVAL_ALONE_NOT_SUFFICIENT
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
@@ -16,9 +16,9 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 | Gate | Current | Projected | Pass | Why |
 | --- | --- | --- | --- | --- |
 | dataset_status | PIPELINE_ONLY | PIPELINE_ONLY | false | extra families do not change trainable-label status by themselves |
-| market_setup_groups | 223 | 1604 | true | adds C34 estimated out-of-scope groups=1381 |
-| minority_labels | 172 | 172 | true | current minority-label gate already reflects approved contract only; C34 has no validated labels |
-| active_weeks | 3.37 | 3.37 | false | C34 candidate dates do not extend active decision span enough |
+| market_setup_groups | 282 | 1663 | true | adds C34 estimated out-of-scope groups=1381 |
+| minority_labels | 246 | 246 | true | current minority-label gate already reflects approved contract only; C34 has no validated labels |
+| active_weeks | 3.78 | 3.78 | false | C34 candidate dates do not extend active decision span enough |
 | both_directions | LONG,SHORT | LONG,SHORT | true | current gate already passes; C34 does not reduce coverage |
 | at_least_two_regimes | FALLING | FALLING | false | C34 candidates have no proven second-regime C01 feature evidence yet |
 | feature_budget | 0 | 0 | false | candidate_trainable_groups=0; extra rows remain non-trainable until label promotion |

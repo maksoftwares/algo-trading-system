@@ -1,7 +1,7 @@
 {
   "status": "PASS",
   "stage": "C02-01",
-  "created_at_utc": "2026-06-22T05:52:04Z",
+  "created_at_utc": "2026-07-03T08:50:21Z",
   "registry_path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\mt5_accounts.yaml",
   "boundary": {
     "mt5_connection_attempted": true,
@@ -41,14 +41,14 @@
           "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
           "account_label": "A1",
           "account_scope": "1025742",
-          "detail": "matching_pids=21672"
+          "detail": "matching_pids=7024"
         },
         {
           "status": "PASS",
           "code": "NO_NEW_TERMINAL_PROCESS",
           "account_label": "A1",
           "account_scope": "1025742",
-          "detail": "matching_pids=21672"
+          "detail": "matching_pids=7024"
         },
         {
           "status": "PASS",
@@ -60,10 +60,10 @@
       ],
       "warnings": [],
       "terminal_process_pids_before": [
-        21672
+        7024
       ],
       "terminal_process_pids_after_initialize": [
-        21672
+        7024
       ],
       "terminal_process_pids_after_shutdown": [],
       "mt5_initialize_attempted": true,
@@ -114,7 +114,7 @@
           "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
           "connected": true,
           "build": 5833,
-          "maxbars": 100000000,
+          "maxbars": 100000,
           "trade_allowed": true
         },
         "symbol": {
@@ -156,14 +156,14 @@
           "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
           "account_label": "A2",
           "account_scope": "1033030",
-          "detail": "matching_pids=25260"
+          "detail": "matching_pids=24112"
         },
         {
           "status": "PASS",
           "code": "NO_NEW_TERMINAL_PROCESS",
           "account_label": "A2",
           "account_scope": "1033030",
-          "detail": "matching_pids=25260"
+          "detail": "matching_pids=24112"
         },
         {
           "status": "PASS",
@@ -175,10 +175,10 @@
       ],
       "warnings": [],
       "terminal_process_pids_before": [
-        25260
+        24112
       ],
       "terminal_process_pids_after_initialize": [
-        25260
+        24112
       ],
       "terminal_process_pids_after_shutdown": [],
       "mt5_initialize_attempted": true,
@@ -229,7 +229,7 @@
           "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
           "connected": true,
           "build": 5833,
-          "maxbars": 100000000,
+          "maxbars": 100000,
           "trade_allowed": true
         },
         "symbol": {
@@ -271,14 +271,14 @@
           "code": "TERMINAL_PROCESS_ALREADY_RUNNING",
           "account_label": "A3",
           "account_scope": "1033669",
-          "detail": "matching_pids=22768"
+          "detail": "matching_pids=9684"
         },
         {
           "status": "PASS",
           "code": "NO_NEW_TERMINAL_PROCESS",
           "account_label": "A3",
           "account_scope": "1033669",
-          "detail": "matching_pids=22768"
+          "detail": "matching_pids=9684"
         },
         {
           "status": "PASS",
@@ -290,10 +290,10 @@
       ],
       "warnings": [],
       "terminal_process_pids_before": [
-        22768
+        9684
       ],
       "terminal_process_pids_after_initialize": [
-        22768
+        9684
       ],
       "terminal_process_pids_after_shutdown": [],
       "mt5_initialize_attempted": true,
@@ -344,7 +344,7 @@
           "commondata_path": "C:\\Users\\<USER>\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common",
           "connected": true,
           "build": 5833,
-          "maxbars": 100000000,
+          "maxbars": 100000,
           "trade_allowed": true
         },
         "symbol": {

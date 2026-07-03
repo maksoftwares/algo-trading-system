@@ -1,9 +1,9 @@
 {
   "status": "DEMO_SHADOW_RUNTIME_CONFIRMED_WAITING_FOR_DATA",
   "stage": "C29-DEMO-SHADOW-OPERATOR-RUNBOOK",
-  "created_at_utc": "2026-06-22T06:38:41Z",
+  "created_at_utc": "2026-06-24T23:53:49Z",
   "schema_version": "a3_ml_demo_shadow_operator_runbook_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "authorization": {
     "official_model_training_authorized": false,
     "python_demo_predictions_authorized": false,
@@ -11,7 +11,7 @@
     "broker_action_authorized": false
   },
   "summary": {
-    "c11_readiness_gap": "WAITING_FOR_DECISION_HISTORY",
+    "c11_readiness_gap": "GAP_REMAINS",
     "c15_observer_manual_attach": "MANUAL_ATTACH_REQUIRED",
     "c25_broker_shadow_manual_attach": "BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS",
     "c26_research_preview_handoff": "PUBLISHED_RESEARCH_PREVIEW_FAIL_CLOSED",
@@ -90,7 +90,8 @@
         "Account3BreakoutImprovedExecutor",
         "Account3BreakoutPlainExecutor",
         "Account3BreakoutTier1CompatExecutor",
-        "Account3SoftRetestExecutor"
+        "Account3SoftRetestExecutor",
+        "Phase2ExperimentalDemoExecutor"
       ],
       "safe_broker_shadow_presets": true,
       "safe_broker_shadow_preset_names": [
@@ -120,18 +121,18 @@
     {
       "gate": "market_setup_groups",
       "passed": false,
-      "observed": "223",
+      "observed": "282",
       "required": ">=300",
-      "gap_value": 77.0,
-      "gap_text": "77"
+      "gap_value": 18.0,
+      "gap_text": "18"
     },
     {
       "gate": "active_weeks",
       "passed": false,
-      "observed": "3.37",
+      "observed": "3.78",
       "required": ">=8",
-      "gap_value": 4.63,
-      "gap_text": "4.63 weeks"
+      "gap_value": 4.220000000000001,
+      "gap_text": "4.22 weeks"
     },
     {
       "gate": "at_least_two_regimes",

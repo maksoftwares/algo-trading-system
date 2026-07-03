@@ -1,9 +1,9 @@
 {
-  "status": "NOT_READY",
+  "status": "FAIL_CLOSED",
   "stage": "C07-PIPELINE-ORCHESTRATOR",
-  "created_at_utc": "2026-06-22T06:03:15Z",
+  "created_at_utc": "2026-06-26T23:04:13Z",
   "schema_version": "a3_ml_pipeline_run_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "publish_requested": false,
   "steps": [
     {
@@ -50,22 +50,23 @@
     },
     {
       "step": "C04 shadow bridge",
-      "status": "PASS",
-      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_BRIDGE_STATUS.json",
-      "detail": ""
+      "status": "FAIL_CLOSED",
+      "output": "",
+      "detail": "PermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\Downloads\\\\algo-trading-system\\\\xau-usd\\\\xauusd-phase1\\\\outputs\\\\reports\\\\C02_DATASET_POINTER.json.26160.tmp' -> 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\Downloads\\\\algo-trading-system\\\\xau-usd\\\\xauusd-phase1\\\\outputs\\\\reports\\\\C02_DATASET_POINTER.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\ml\\a3_meta_v1\\pipeline_orchestrator.py\", line 36, in run_offline_prediction_readiness_pipeline\n    output = runner()\n             ^^^^^^^^\n  File \"C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\ml\\a3_meta_v1\\pipeline_orchestrator.py\", line 149, in <lambda>\n    (\"C04 shadow bridge\", lambda: generate_shadow_bridge_outputs(root)),\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\ml\\a3_meta_v1\\shadow_bridge.py\", line 102, in generate_shadow_bridge_outputs\n    _write_json_atomic(root / \"outputs\" / \"reports\" / \"C02_DATASET_POINTER.json\", pointer)\n  File \"C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\ml\\a3_meta_v1\\market_data_export.py\", line 525, in _write_json_atomic\n    os.replace(tmp, path)\nPermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\Downloads\\\\algo-trading-system\\\\xau-usd\\\\xauusd-phase1\\\\outputs\\\\reports\\\\C02_DATASET_POINTER.json.26160.tmp' -> 'C:\\\\Users\\\\ZHAO ZHU INFORMATION\\\\Downloads\\\\algo-trading-system\\\\xau-usd\\\\xauusd-phase1\\\\outputs\\\\reports\\\\C02_DATASET_POINTER.json'\n"
     },
     {
       "step": "C06 EA handoff",
-      "status": "PASS",
-      "output": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EA_HANDOFF_STATUS.json",
-      "detail": ""
+      "status": "SKIPPED",
+      "output": "",
+      "detail": "previous step failed"
     }
   ],
   "summary": {
-    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+    "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
     "c01": {
       "status": "PIPELINE_ONLY",
-      "created_at_utc": "2026-06-22T06:03:15Z",
+      "created_at_utc": "2026-06-26T23:04:13Z",
       "authority": "C01 Python ML pipeline bootstrap only for configured A1/A2/A3 account scopes. It reads frozen local data and writes offline shadow artifacts. It does not touch MT5 runtime, orders, positions, profiles, charts, presets, or running EAs.",
       "scope": {
         "account_scopes": [
@@ -109,8 +110,8 @@
         {
           "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_LABELED_DECISIONS.csv",
           "exists": true,
-          "rows": 574,
-          "sha256": "7b82f2747222c15d0bdb4512cc3c1f35cf86de3ff7ba8fa54092a411841c9a5e"
+          "rows": 1087,
+          "sha256": "e491d97887b85d6d0c3dd76802ecc46276c53df6a6eb28a4df5e66ff4c8a18f0"
         },
         {
           "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_NORMALIZED_TRADES.csv",
@@ -125,112 +126,122 @@
           "sha256": "92c41e60c5c8de4effe96f792a4118613be9878a4d01e8d497444cbf01aab87b"
         },
         {
-          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_M5_20260601_to_latest.csv",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\\normalized\\c01_bars\\XAUUSD_M5_20260601_to_latest.csv",
           "exists": true,
-          "rows": 23193,
-          "sha256": "e9627c049c28e350bbb58c2fd5f037dbb724aeeb3d253ba5ecf4f1fa48574c4f"
+          "rows": 5448,
+          "sha256": "8c029b1945022ac41d9b0ef567651587a923c3a2535eb584c6167fdd8f7b9950"
         },
         {
-          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_H1_20260601_to_latest.csv",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\\normalized\\c01_bars\\XAUUSD_H1_20260601_to_latest.csv",
           "exists": true,
-          "rows": 1934,
-          "sha256": "562cca6d38721bc980c8e3d43f6d0c82b921c7647989720a54820977242b781f"
+          "rows": 454,
+          "sha256": "7f4572d6b822bbd664848972a3bd27d01d08a0427d3a7dcb31a3f5fb27e6a0c2"
         },
         {
-          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\c01_bars\\XAUUSD_D1_20260601_to_latest.csv",
+          "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\\normalized\\c01_bars\\XAUUSD_D1_20260601_to_latest.csv",
           "exists": true,
-          "rows": 102,
-          "sha256": "26ae784d17ac4936edd3feeb3df9a2ac1d4c0aa61f87cdf3210e3cdc43b51f95"
+          "rows": 23,
+          "sha256": "1af3801119ecede8ed0e1b53fc0a7f9328e05c704c998a466ebdfa1791089d58"
         }
       ],
       "raw_source_row_counts": {
-        "decisions_rows": 574,
+        "decisions_rows": 1087,
         "trades_rows": 0,
-        "scoped_raw_rows": 574,
+        "scoped_raw_rows": 1087,
         "rejected_rows": 0,
         "parse_errors": 0,
-        "exact_unique_signals": 349,
-        "snapshot_rows": 349
+        "exact_unique_signals": 633,
+        "snapshot_rows": 633
       },
       "per_account_counts": {
         "1025742": {
           "account_label": "A1",
-          "snapshot_rows": 207,
-          "setup_groups": 161,
-          "positive": 49,
-          "negative": 158,
-          "long": 79,
-          "short": 128
+          "snapshot_rows": 299,
+          "setup_groups": 246,
+          "positive": 76,
+          "negative": 223,
+          "long": 108,
+          "short": 191
         },
         "1033030": {
           "account_label": "A2",
-          "snapshot_rows": 94,
-          "setup_groups": 72,
-          "positive": 43,
-          "negative": 51,
-          "long": 50,
-          "short": 44
+          "snapshot_rows": 186,
+          "setup_groups": 154,
+          "positive": 63,
+          "negative": 123,
+          "long": 79,
+          "short": 107
         },
         "1033669": {
           "account_label": "A3",
-          "snapshot_rows": 48,
-          "setup_groups": 33,
-          "positive": 18,
-          "negative": 30,
-          "long": 26,
-          "short": 22
+          "snapshot_rows": 148,
+          "setup_groups": 119,
+          "positive": 40,
+          "negative": 108,
+          "long": 55,
+          "short": 93
         }
       },
       "exact_signal_counts": {
-        "LONG": 155,
-        "SHORT": 194
+        "LONG": 242,
+        "SHORT": 391
       },
       "fuzzy_setup_group_counts": {
-        "groups": 266,
+        "groups": 519,
         "max_group_size": 3
       },
       "labeled_and_trainable_setup_groups": {
-        "diagnostic_labeled_groups": 266,
+        "diagnostic_labeled_groups": 519,
         "candidate_trainable_groups": 0
       },
       "class_balance": {
-        "positive": 110,
-        "negative": 239
+        "positive": 179,
+        "negative": 454
       },
       "direction_balance": {
-        "LONG": 155,
-        "SHORT": 194
+        "LONG": 242,
+        "SHORT": 391
       },
       "regime_balance": {
-        "FALLING": 349
+        "FALLING": 397,
+        "UNKNOWN": 236
       },
       "event_duration_distribution": {
-        "count": 349,
+        "count": 633,
         "min_seconds": 86399,
         "median_seconds": 86399,
         "p95_seconds": 86399,
         "max_seconds": 86399
       },
       "missingness": {
-        "break_distance_atr": 10,
-        "confirmation_body_ratio": 7,
-        "confirmation_close_location_aligned": 7,
-        "cost_R": 301,
-        "retest_penetration_atr": 349,
-        "y_MAE_R": 349,
-        "y_MFE_R": 349,
-        "y_net_R_expected": 92,
-        "y_net_R_p95_stress": 92
+        "break_distance_atr": 28,
+        "confirmation_body_ratio": 19,
+        "confirmation_close_location_aligned": 19,
+        "cost_R": 485,
+        "d1_trend_score_aligned": 236,
+        "h1_ema20_slope_aligned_atr": 23,
+        "impulse_alignment_12": 12,
+        "m15_ema20_slope_aligned_atr": 13,
+        "m5_atr_percentile_trailing_20d": 13,
+        "price_h1_ema20_distance_aligned_atr": 23,
+        "range_compression_ratio_20": 13,
+        "retest_penetration_atr": 633,
+        "spread_percentile_session_trailing_20d": 17,
+        "tick_volume_ratio_20": 13,
+        "y_MAE_R": 633,
+        "y_MFE_R": 633,
+        "y_net_R_expected": 141,
+        "y_net_R_p95_stress": 141
       },
       "unresolved_label_counts": {
-        "OPTIMISTIC_DIAGNOSTIC_ONLY": 349
+        "OPTIMISTIC_DIAGNOSTIC_ONLY": 633
       },
       "duplicate_and_fuzzy_duplicate_rates": {
-        "raw_rows": 574,
-        "exact_unique_signals": 349,
-        "fuzzy_setup_groups": 266,
-        "exact_duplicate_rate": 0.391986,
-        "fuzzy_duplicate_rate": 0.237822
+        "raw_rows": 1087,
+        "exact_unique_signals": 633,
+        "fuzzy_setup_groups": 519,
+        "exact_duplicate_rate": 0.417663,
+        "fuzzy_duplicate_rate": 0.180095
       },
       "slippage_adequacy_status": {
         "slippage_model_status": "INSUFFICIENT",
@@ -264,97 +275,97 @@
       "feature_availability": [
         {
           "feature_name": "h1_ema20_slope_aligned_atr",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 610,
+          "missing_rows": 23,
+          "present_pct": 0.963665
         },
         {
           "feature_name": "retest_penetration_atr",
           "present_rows": 0,
-          "missing_rows": 349,
+          "missing_rows": 633,
           "present_pct": 0.0
         },
         {
           "feature_name": "confirmation_body_ratio",
-          "present_rows": 342,
-          "missing_rows": 7,
-          "present_pct": 0.979943
+          "present_rows": 614,
+          "missing_rows": 19,
+          "present_pct": 0.969984
         },
         {
           "feature_name": "cost_R",
-          "present_rows": 48,
-          "missing_rows": 301,
-          "present_pct": 0.137536
+          "present_rows": 148,
+          "missing_rows": 485,
+          "present_pct": 0.233807
         },
         {
           "feature_name": "confirmation_close_location_aligned",
-          "present_rows": 342,
-          "missing_rows": 7,
-          "present_pct": 0.979943
+          "present_rows": 614,
+          "missing_rows": 19,
+          "present_pct": 0.969984
         },
         {
           "feature_name": "break_distance_atr",
-          "present_rows": 339,
-          "missing_rows": 10,
-          "present_pct": 0.971347
+          "present_rows": 605,
+          "missing_rows": 28,
+          "present_pct": 0.955766
         },
         {
           "feature_name": "m15_ema20_slope_aligned_atr",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 620,
+          "missing_rows": 13,
+          "present_pct": 0.979463
         },
         {
           "feature_name": "bars_break_to_retest_scaled",
-          "present_rows": 349,
+          "present_rows": 633,
           "missing_rows": 0,
           "present_pct": 1.0
         },
         {
           "feature_name": "impulse_alignment_12",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 621,
+          "missing_rows": 12,
+          "present_pct": 0.981043
         },
         {
           "feature_name": "price_h1_ema20_distance_aligned_atr",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 610,
+          "missing_rows": 23,
+          "present_pct": 0.963665
         },
         {
           "feature_name": "m5_atr_percentile_trailing_20d",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 620,
+          "missing_rows": 13,
+          "present_pct": 0.979463
         },
         {
           "feature_name": "spread_percentile_session_trailing_20d",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 616,
+          "missing_rows": 17,
+          "present_pct": 0.973144
         },
         {
           "feature_name": "d1_trend_score_aligned",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 397,
+          "missing_rows": 236,
+          "present_pct": 0.627172
         },
         {
           "feature_name": "range_compression_ratio_20",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 620,
+          "missing_rows": 13,
+          "present_pct": 0.979463
         },
         {
           "feature_name": "tick_volume_ratio_20",
-          "present_rows": 349,
-          "missing_rows": 0,
-          "present_pct": 1.0
+          "present_rows": 620,
+          "missing_rows": 13,
+          "present_pct": 0.979463
         },
         {
           "feature_name": "minutes_from_session_start_scaled",
-          "present_rows": 349,
+          "present_rows": 633,
           "missing_rows": 0,
           "present_pct": 1.0
         }
@@ -365,17 +376,17 @@
         {
           "fold_id": "outer_1",
           "train_start_utc": "2026-05-29 09:39:56Z",
-          "train_end_utc": "2026-06-03 22:19:58Z",
-          "test_start_utc": "2026-06-04 00:19:58Z",
-          "test_end_utc": "2026-06-09 16:09:59Z",
-          "pre_grouping_rows": 55,
-          "exact_unique_signals": 55,
-          "fuzzy_setup_groups": 44,
-          "outer_train_groups_before_purge": 44,
-          "purged_overlap_groups": 13,
-          "purge_loss_pct": 0.295455,
+          "train_end_utc": "2026-06-09 01:29:58Z",
+          "test_start_utc": "2026-06-09 07:34:57Z",
+          "test_end_utc": "2026-06-16 00:44:58Z",
+          "pre_grouping_rows": 104,
+          "exact_unique_signals": 104,
+          "fuzzy_setup_groups": 86,
+          "outer_train_groups_before_purge": 86,
+          "purged_overlap_groups": 5,
+          "purge_loss_pct": 0.05814,
           "embargo_excluded_groups": 0,
-          "unresolved_label_groups": 31,
+          "unresolved_label_groups": 81,
           "eligible_outer_train_groups": 0,
           "calibration_groups": 0,
           "calibration_positive": 0,
@@ -389,17 +400,17 @@
         {
           "fold_id": "outer_2",
           "train_start_utc": "2026-05-29 09:39:56Z",
-          "train_end_utc": "2026-06-09 16:09:59Z",
-          "test_start_utc": "2026-06-09 16:39:59Z",
-          "test_end_utc": "2026-06-12 12:54:56Z",
-          "pre_grouping_rows": 111,
-          "exact_unique_signals": 111,
-          "fuzzy_setup_groups": 89,
-          "outer_train_groups_before_purge": 89,
-          "purged_overlap_groups": 9,
-          "purge_loss_pct": 0.101124,
+          "train_end_utc": "2026-06-16 00:44:58Z",
+          "test_start_utc": "2026-06-16 00:44:58Z",
+          "test_end_utc": "2026-06-19 16:50:00Z",
+          "pre_grouping_rows": 216,
+          "exact_unique_signals": 216,
+          "fuzzy_setup_groups": 173,
+          "outer_train_groups_before_purge": 173,
+          "purged_overlap_groups": 27,
+          "purge_loss_pct": 0.156069,
           "embargo_excluded_groups": 0,
-          "unresolved_label_groups": 80,
+          "unresolved_label_groups": 146,
           "eligible_outer_train_groups": 0,
           "calibration_groups": 0,
           "calibration_positive": 0,
@@ -413,17 +424,17 @@
         {
           "fold_id": "outer_3",
           "train_start_utc": "2026-05-29 09:39:56Z",
-          "train_end_utc": "2026-06-12 12:54:56Z",
-          "test_start_utc": "2026-06-12 13:00:00Z",
-          "test_end_utc": "2026-06-16 11:19:56Z",
-          "pre_grouping_rows": 168,
-          "exact_unique_signals": 168,
-          "fuzzy_setup_groups": 133,
-          "outer_train_groups_before_purge": 133,
-          "purged_overlap_groups": 11,
-          "purge_loss_pct": 0.082707,
+          "train_end_utc": "2026-06-19 16:50:00Z",
+          "test_start_utc": "2026-06-21 22:04:58Z",
+          "test_end_utc": "2026-06-23 17:04:59Z",
+          "pre_grouping_rows": 337,
+          "exact_unique_signals": 337,
+          "fuzzy_setup_groups": 260,
+          "outer_train_groups_before_purge": 260,
+          "purged_overlap_groups": 0,
+          "purge_loss_pct": 0.0,
           "embargo_excluded_groups": 0,
-          "unresolved_label_groups": 122,
+          "unresolved_label_groups": 260,
           "eligible_outer_train_groups": 0,
           "calibration_groups": 0,
           "calibration_positive": 0,
@@ -437,17 +448,17 @@
         {
           "fold_id": "outer_4",
           "train_start_utc": "2026-05-29 09:39:56Z",
-          "train_end_utc": "2026-06-16 11:19:56Z",
-          "test_start_utc": "2026-06-16 11:23:33Z",
-          "test_end_utc": "2026-06-18 03:14:57Z",
-          "pre_grouping_rows": 223,
-          "exact_unique_signals": 223,
-          "fuzzy_setup_groups": 177,
-          "outer_train_groups_before_purge": 177,
-          "purged_overlap_groups": 26,
-          "purge_loss_pct": 0.146893,
+          "train_end_utc": "2026-06-23 17:04:59Z",
+          "test_start_utc": "2026-06-23 16:59:59Z",
+          "test_end_utc": "2026-06-25 05:24:57Z",
+          "pre_grouping_rows": 433,
+          "exact_unique_signals": 433,
+          "fuzzy_setup_groups": 346,
+          "outer_train_groups_before_purge": 346,
+          "purged_overlap_groups": 65,
+          "purge_loss_pct": 0.187861,
           "embargo_excluded_groups": 0,
-          "unresolved_label_groups": 151,
+          "unresolved_label_groups": 281,
           "eligible_outer_train_groups": 0,
           "calibration_groups": 0,
           "calibration_positive": 0,
@@ -461,17 +472,17 @@
         {
           "fold_id": "outer_5",
           "train_start_utc": "2026-05-29 09:39:56Z",
-          "train_end_utc": "2026-06-18 03:14:57Z",
-          "test_start_utc": "2026-06-18 03:14:58Z",
-          "test_end_utc": "2026-06-22 00:19:58Z",
-          "pre_grouping_rows": 293,
-          "exact_unique_signals": 293,
-          "fuzzy_setup_groups": 222,
-          "outer_train_groups_before_purge": 222,
-          "purged_overlap_groups": 38,
-          "purge_loss_pct": 0.171171,
+          "train_end_utc": "2026-06-25 05:24:57Z",
+          "test_start_utc": "2026-06-25 06:59:56Z",
+          "test_end_utc": "2026-06-26 20:39:59Z",
+          "pre_grouping_rows": 527,
+          "exact_unique_signals": 527,
+          "fuzzy_setup_groups": 432,
+          "outer_train_groups_before_purge": 432,
+          "purged_overlap_groups": 42,
+          "purge_loss_pct": 0.097222,
           "embargo_excluded_groups": 0,
-          "unresolved_label_groups": 184,
+          "unresolved_label_groups": 390,
           "eligible_outer_train_groups": 0,
           "calibration_groups": 0,
           "calibration_positive": 0,
@@ -511,13 +522,19 @@
     "c03": {
       "status": "NO_GO",
       "stage": "C03-READINESS",
-      "created_at_utc": "2026-06-22T06:03:15Z",
-      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "created_at_utc": "2026-06-26T23:04:13Z",
+      "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
       "authorization": {
         "training_authorized": false,
         "python_demo_predictions_authorized": false,
         "ea_consumption_authorized": false,
         "broker_action_authorized": false
+      },
+      "source_scope": {
+        "source_counts": {},
+        "non_live_source_present": false,
+        "non_live_source_counts": {},
+        "gate_counts_source": "aggregate"
       },
       "checks": [
         {
@@ -528,20 +545,20 @@
         },
         {
           "gate": "market_setup_groups",
-          "passed": false,
-          "observed": "223",
+          "passed": true,
+          "observed": "323",
           "required": ">=300"
         },
         {
           "gate": "minority_labels",
           "passed": true,
-          "observed": "172",
+          "observed": "302",
           "required": ">=90"
         },
         {
           "gate": "active_weeks",
           "passed": false,
-          "observed": "3.37",
+          "observed": "4.07",
           "required": ">=8"
         },
         {
@@ -580,9 +597,9 @@
     "c05": {
       "status": "REFUSED_NOT_READY",
       "stage": "C05-MODEL-TRAINING",
-      "created_at_utc": "2026-06-22T06:03:15Z",
+      "created_at_utc": "2026-06-26T23:04:13Z",
       "schema_version": "a3_ml_training_status_v1",
-      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
       "readiness_status": "NO_GO",
       "c01_status": "PIPELINE_ONLY",
       "authorization": {
@@ -620,9 +637,9 @@
     "c04": {
       "status": "DISABLED_FAIL_CLOSED",
       "stage": "A3-ML-SHADOW-BRIDGE",
-      "created_at_utc": "2026-06-22T06:03:15Z",
+      "created_at_utc": "2026-06-26T23:04:13Z",
       "schema_version": "a3_ml_shadow_predictions_v1",
-      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
       "readiness_status": "NO_GO",
       "authorization": {
         "training_authorized": false,
@@ -639,13 +656,12 @@
       },
       "outputs": {
         "predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
-        "predictions_sha256": "ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7",
-        "rows": 349
+        "predictions_sha256": "e508214111f82817912f15f6c9506ffa75d632d909985426354a39c83cb59a05",
+        "rows": 633
       },
       "readiness_failures": [
         "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
-        "market_setup_groups observed 223 required >=300",
-        "active_weeks observed 3.37 required >=8",
+        "active_weeks observed 4.07 required >=8",
         "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
         "feature_budget observed 0 required >=6",
         "slippage_readiness observed INSUFFICIENT required ADEQUATE"
@@ -667,9 +683,9 @@
     "c06": {
       "status": "REFUSED_NOT_READY",
       "stage": "C06-EA-HANDOFF",
-      "created_at_utc": "2026-06-22T06:03:15Z",
+      "created_at_utc": "2026-06-25T23:16:27Z",
       "schema_version": "a3_ml_ea_handoff_v1",
-      "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+      "dataset_version": "xauusd_c02_multiacct_202606252300_g0a9823b0_c9221d066",
       "authorization": {
         "python_demo_predictions_authorized": false,
         "ea_consumption_authorized": false,
@@ -741,12 +757,12 @@
         {
           "check": "predictions_hash_matches_bridge",
           "passed": true,
-          "detail": "observed=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7 expected=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7"
+          "detail": "observed=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d expected=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d"
         },
         {
           "check": "predictions_not_empty",
           "passed": true,
-          "detail": "rows=349"
+          "detail": "rows=564"
         },
         {
           "check": "prediction_actions_allowed",
@@ -783,7 +799,7 @@
       "next_allowed_stage": "Wait for C03 PASS, C05 TRAINED_SHADOW_ONLY, and C04 READY_SHADOW_ONLY, then rerun C06."
     }
   },
-  "next_blocker": "C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE",
+  "next_blocker": "C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; active_weeks observed 4.07 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE",
   "boundary": {
     "mt5_connection_attempted": false,
     "terminal_runtime_change_authorized": false,

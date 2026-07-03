@@ -1,0 +1,16 @@
+{
+  "generated_at_dubai": "2026-07-03T17:05:00+04:00",
+  "status": "APPROVED_FOR_A1_SMALL_DEMO_ATTACH",
+  "spec_path": "xau-usd/xauusd-phase1/docs/A1_XAU_M5_MOMENTUM_SPLIT_ENTRY_BE_TP1_FORWARD_V0_2026_07_03.md",
+  "spec_sha256": "e55cf920c68cb070965529f1f426856bb61627920e5f3d31dae790e7a52cd824",
+  "ea_source_path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+  "ea_source_sha256": "a4d75f617ef4864fd6e28fa210ec02ce4b0b6e87171382534f51dbbecdc016c4",
+  "signal_claim_smoke_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_SPLIT_BE_SIGNAL_CLAIM_SMOKE_2026_07_03.md",
+  "signal_claim_smoke_sha256": "e8e47719fa8483c2deb498d67bba9b7d4004b1031a28e8ec9bd45ff08effe452",
+  "compile_proof_log": "C:/MT5CompileScratchA1M5Momentum/SignalClaimCheck/compile_signal_claim_check.log",
+  "compile_result": "0 errors, 0 warnings",
+  "forward_magic": 932280,
+  "order_comment_prefix": "A1_XAU_M5_MOM_SPLIT_BE",
+  "kill_switch_file": "a1_xau_m5_momentum_split_be_tp1_kill_switch.txt",
+  "anti_overfit": "No May-only repair; no post-hoc tuning; fresh forward evidence required."
+}

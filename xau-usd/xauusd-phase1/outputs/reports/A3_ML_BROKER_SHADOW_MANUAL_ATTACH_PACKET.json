@@ -1,9 +1,9 @@
 {
   "status": "BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS",
   "stage": "C25-ML-BROKER-SHADOW-MANUAL-ATTACH-PACKET",
-  "created_at_utc": "2026-06-22T06:38:41Z",
+  "created_at_utc": "2026-06-24T23:53:49Z",
   "schema_version": "a3_ml_broker_shadow_manual_attach_packet_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "authorization": {
     "python_demo_predictions_authorized": false,
     "ea_consumption_authorized": false,
@@ -49,7 +49,7 @@
       "handoff_include_exists": true,
       "broker_shadow_tap_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 97,
+      "broker_shadow_tap_rows": 848,
       "active_profile_entries": [
         {
           "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
@@ -365,6 +365,15 @@
           "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
           "enabled": true,
           "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart27.chr",
+          "profile_relative_path": "Default\\chart27.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
         }
       ],
       "active_broker_executors": [
@@ -451,11 +460,20 @@
       "handoff_include_exists": true,
       "broker_shadow_tap_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 97,
+      "broker_shadow_tap_rows": 849,
       "active_profile_entries": [
         {
           "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
           "profile_relative_path": "Default\\chart02.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+          "profile_relative_path": "Default\\chart04.chr",
           "profile_kind": "current_profile_file",
           "expert_name": "Phase2ExperimentalDemoExecutor",
           "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
@@ -526,7 +544,7 @@
       "handoff_include_exists": true,
       "broker_shadow_tap_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 383,
+      "broker_shadow_tap_rows": 3517,
       "active_profile_entries": [
         {
           "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
@@ -561,6 +579,15 @@
           "profile_kind": "current_profile_file",
           "expert_name": "Account3SoftRetestExecutor",
           "expert_path": "Experts\\Account3SoftRetestExecutor.ex5",
+          "enabled": true,
+          "role": "broker_executor_candidate"
+        },
+        {
+          "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart07.chr",
+          "profile_relative_path": "Default\\chart07.chr",
+          "profile_kind": "current_profile_file",
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
           "enabled": true,
           "role": "broker_executor_candidate"
         },
@@ -611,9 +638,16 @@
           "source_found": true,
           "can_consume_ml_handoff": true,
           "detail": "uses A3 ML handoff reader"
+        },
+        {
+          "expert_name": "Phase2ExperimentalDemoExecutor",
+          "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+          "source_found": true,
+          "can_consume_ml_handoff": true,
+          "detail": "uses A3 ML handoff reader"
         }
       ],
-      "active_broker_executor_count": 4,
+      "active_broker_executor_count": 5,
       "active_broker_executors_ml_ready": true,
       "expected_broker_experts": [
         {
@@ -662,7 +696,8 @@
         "Account3BreakoutImprovedExecutor",
         "Account3BreakoutPlainExecutor",
         "Account3BreakoutTier1CompatExecutor",
-        "Account3SoftRetestExecutor"
+        "Account3SoftRetestExecutor",
+        "Phase2ExperimentalDemoExecutor"
       ],
       "safe_presets": [
         {

@@ -26,8 +26,8 @@ Overall status: REFUSED_NOT_READY
 | bridge_authorizes_ea_consumption | false | observed=False required=true |
 | bridge_blocks_broker_action | true | observed=False required=false |
 | predictions_file_exists | true | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_SHADOW_PREDICTIONS.csv |
-| predictions_hash_matches_bridge | true | observed=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7 expected=ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7 |
-| predictions_not_empty | true | rows=349 |
+| predictions_hash_matches_bridge | true | observed=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d expected=a52cbe2fc3816c4286f81a29f820dfb3fc98e656c223617c8a5eb21d8606355d |
+| predictions_not_empty | true | rows=564 |
 | prediction_actions_allowed | true | observed=ABSTAIN |
 | prediction_accounts_allowed | true | observed=1025742,1033030,1033669 |
 | all_allowed_accounts_configured | true | configured=1025742,1033030,1033669 |

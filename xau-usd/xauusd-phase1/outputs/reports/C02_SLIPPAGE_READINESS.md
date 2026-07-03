@@ -12,13 +12,13 @@ Overall status: INSUFFICIENT
 
 | Account | Status | Entry | SL | TP | Request Price | P95 Adv |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | ADEQUATE | 1307 | 783 | 497 | 215 | 39 |
-| A2 | INSUFFICIENT | 12 | 8 | 4 | 12 | 33 |
-| A3 | INSUFFICIENT | 75 | 54 | 21 | 24 | 28 |
+| A1 | ADEQUATE | 1320 | 791 | 502 | 225 | 39 |
+| A2 | INSUFFICIENT | 25 | 16 | 9 | 22 | 28 |
+| A3 | INSUFFICIENT | 84 | 61 | 23 | 24 | 28 |
 
 ## Outputs
 
-- Fill reconciliation CSV: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\data\ml\a3_meta_v1\c02\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\normalized\fills\fill_reconciliation.csv
+- Fill reconciliation CSV: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\data\ml\a3_meta_v1\c02\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\normalized\fills\fill_reconciliation.csv
 
 ## Notes
 

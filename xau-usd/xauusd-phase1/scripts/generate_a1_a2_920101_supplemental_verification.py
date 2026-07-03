@@ -70,11 +70,11 @@ def build_payload() -> dict[str, Any]:
     return {
         "status": status,
         "created_at_utc": now_utc(),
-        "purpose": "Supplement Claude's runtime-state review after the A1/A2 920101 maintenance by refreshing the stale chart inventory and surfacing startup identity proof.",
+        "purpose": "Supplement Claude's runtime-state review after the A1/A2 920101 maintenance by refreshing the chart inventory and surfacing startup identity proof for the current H1-only smart-trend / 50-100 floor configuration.",
         "boundaries": [
             "Read-only verification.",
             "No MT5 terminal, chart, preset, order, or position state is modified by this script.",
-            "A3 remains paused and is not changed.",
+            "A3 is outside the A1/A2 smart-trend update scope and is reported separately if broker-action rows are present.",
         ],
         "inventory_csv": str(INVENTORY_CSV),
         "inventory_rows": [row_to_dict(row) for row in inventory],
@@ -87,7 +87,8 @@ def build_payload() -> dict[str, Any]:
             "Confirm A1 chart03 is the restored XAU breakout_retest executor with broker action enabled.",
             "Confirm A1 chart01/chart02/chart18/chart19/chart20 and chart21 are disarmed.",
             "Confirm A2 chart02 is the aligned XAU breakout_retest executor with broker action enabled.",
-            "Confirm A1/A2 guardians are active with +100 AED daily floor and -100 AED daily loss stop.",
+            "Confirm A1/A2 guardians are active with +50 AED first daily floor, +100 AED next daily floor, and -100 AED daily loss stop.",
+            "Confirm any A3 broker-action rows are treated as outside the protected A1/A2 920101 forward-test scope.",
             "Confirm 920101 is derived from source formula plus startup mutex proof, while order-log proof is pending until the first post-maintenance order.",
         ],
     }
@@ -188,8 +189,16 @@ def row_to_dict(row: ChartRow) -> dict[str, str]:
         "InpTradeSessionGateEnabled": inputs.get("InpTradeSessionGateEnabled", ""),
         "InpTradeSessionStartHour": inputs.get("InpTradeSessionStartHour", ""),
         "InpTradeSessionEndHour": inputs.get("InpTradeSessionEndHour", ""),
+        "InpSmartTrendFilterEnabled": inputs.get("InpSmartTrendFilterEnabled", ""),
+        "InpSmartTrendFilterShadowOnly": inputs.get("InpSmartTrendFilterShadowOnly", ""),
+        "InpSmartTrendRequireD1": inputs.get("InpSmartTrendRequireD1", ""),
+        "InpSmartTrendRequireH1": inputs.get("InpSmartTrendRequireH1", ""),
+        "InpSmartTrendMinD1Aligned": inputs.get("InpSmartTrendMinD1Aligned", ""),
+        "InpSmartTrendMinH1Aligned": inputs.get("InpSmartTrendMinH1Aligned", ""),
         "InpCloseActionAllowed": inputs.get("InpCloseActionAllowed", ""),
         "InpDailyFloorAed": inputs.get("InpDailyFloorAed", ""),
+        "InpNextDailyFloorEnabled": inputs.get("InpNextDailyFloorEnabled", ""),
+        "InpNextDailyFloorAed": inputs.get("InpNextDailyFloorAed", ""),
         "InpDailyLossStopEnabled": inputs.get("InpDailyLossStopEnabled", ""),
         "InpDailyLossStopAed": inputs.get("InpDailyLossStopAed", ""),
         "InpEntryHaltFileName": inputs.get("InpEntryHaltFileName", ""),
@@ -220,8 +229,16 @@ def write_inventory_csv(rows: list[dict[str, str]]) -> None:
         "InpTradeSessionGateEnabled",
         "InpTradeSessionStartHour",
         "InpTradeSessionEndHour",
+        "InpSmartTrendFilterEnabled",
+        "InpSmartTrendFilterShadowOnly",
+        "InpSmartTrendRequireD1",
+        "InpSmartTrendRequireH1",
+        "InpSmartTrendMinD1Aligned",
+        "InpSmartTrendMinH1Aligned",
         "InpCloseActionAllowed",
         "InpDailyFloorAed",
+        "InpNextDailyFloorEnabled",
+        "InpNextDailyFloorAed",
         "InpDailyLossStopEnabled",
         "InpDailyLossStopAed",
         "InpEntryHaltFileName",
@@ -263,7 +280,14 @@ def build_checks(rows: list[ChartRow]) -> list[dict[str, str]]:
         and row.expert != "NO_EA"
         and row.broker_action_state in {"BROKER_ACTION_ENABLED", "GUARDIAN_CLOSE_ACTION_ENABLED"}
     ]
-    check("a3_no_broker_action_enabled", not a3_broker_action, summarize_rows(a3_broker_action) or "A3 has no broker-action enabled rows in inspected profile.")
+    if a3_broker_action:
+        pending(
+            "a3_out_of_scope_broker_action_detected",
+            summarize_rows(a3_broker_action)
+            + " -- outside this A1/A2 smart-trend update; requires separate A3 owner/reviewer decision.",
+        )
+    else:
+        check("a3_no_broker_action_enabled", True, "A3 has no broker-action enabled rows in inspected profile.")
 
     startup = startup_log_evidence()
     check("a1_startup_mentions_920101", startup["A1_920101"]["contains_920101"], startup["A1_920101"]["path"])
@@ -293,9 +317,15 @@ def executor_ok(row: ChartRow, account: str, kill_switch: str) -> bool:
         and inputs.get("InpMaxOpenPositionsPerInstance") == "1"
         and inputs.get("InpMaxEstimatedCostR") == "0.30"
         and inputs.get("InpMaxMeasuredSpreadPoints") == "75.0"
-        and inputs.get("InpTradeSessionGateEnabled") == "true"
-        and inputs.get("InpTradeSessionStartHour") == "12"
-        and inputs.get("InpTradeSessionEndHour") == "15"
+        and inputs.get("InpTradeSessionGateEnabled") == "false"
+        and inputs.get("InpTradeSessionStartHour") == "0"
+        and inputs.get("InpTradeSessionEndHour") == "23"
+        and inputs.get("InpSmartTrendFilterEnabled") == "true"
+        and inputs.get("InpSmartTrendFilterShadowOnly") == "false"
+        and inputs.get("InpSmartTrendRequireD1") == "false"
+        and inputs.get("InpSmartTrendRequireH1") == "true"
+        and inputs.get("InpSmartTrendMinD1Aligned") == "0.25"
+        and inputs.get("InpSmartTrendMinH1Aligned") == "0.15"
         and inputs.get("InpKillSwitchFileName") == kill_switch
     )
 
@@ -306,7 +336,9 @@ def guardian_ok(row: ChartRow, account: str, halt_file: str) -> bool:
         row.expert == GUARDIAN_EA
         and row.broker_action_state == "GUARDIAN_CLOSE_ACTION_ENABLED"
         and inputs.get("InpAllowedAccountLogin") == account
-        and inputs.get("InpDailyFloorAed") == "100.0"
+        and inputs.get("InpDailyFloorAed") == "50.0"
+        and inputs.get("InpNextDailyFloorEnabled") == "true"
+        and inputs.get("InpNextDailyFloorAed") == "100.0"
         and inputs.get("InpDailyLossStopEnabled") == "true"
         and inputs.get("InpDailyLossStopAed") == "-100.0"
         and inputs.get("InpEntryHaltFileName") == halt_file
@@ -353,13 +385,18 @@ def guardian_startup_file_is_active(path: Path) -> bool:
         return False
     header = lines[0].split(",")
     row = lines[-1].split(",")
+    if len(row) == len(header) + 2 and "next_daily_floor_enabled" not in header:
+        insert_at = header.index("daily_floor_aed") + 1
+        header = header[:insert_at] + ["next_daily_floor_enabled", "next_daily_floor_aed"] + header[insert_at:]
     if len(row) != len(header):
         return False
     values = dict(zip(header, row))
     return (
         values.get("dry_run") == "false"
         and values.get("close_action_allowed") == "true"
-        and values.get("daily_floor_aed") in {"100.0", "100.00"}
+        and values.get("daily_floor_aed") in {"50.0", "50.00"}
+        and values.get("next_daily_floor_enabled", "true") == "true"
+        and values.get("next_daily_floor_aed", "100.00") in {"100.0", "100.00"}
         and values.get("daily_loss_stop_enabled") == "true"
         and values.get("daily_loss_stop_aed") in {"-100.0", "-100.00"}
         and values.get("startup_status", "").startswith("ATTACHED_")
@@ -420,7 +457,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         }
     ]
     inventory_table = "\n".join(
-        "| {lane} | {chart} | {symbol} | `{expert}` | `{state}` | `{magic}` | `{dry}` | `{broker}` | `{demo}` | `{start}->{end}` | `{account}` |".format(
+        "| {lane} | {chart} | {symbol} | `{expert}` | `{state}` | `{magic}` | `{dry}` | `{broker}` | `{demo}` | `{start}->{end}` | `{smart}` | `{account}` |".format(
             lane=row["lane"],
             chart=row["chart"],
             symbol=row["symbol"],
@@ -432,6 +469,11 @@ def render_markdown(payload: dict[str, Any]) -> str:
             demo=row["InpAllowDemoTrading"],
             start=row["InpTradeSessionStartHour"],
             end=row["InpTradeSessionEndHour"],
+            smart=(
+                f"enabled={row['InpSmartTrendFilterEnabled']} shadow={row['InpSmartTrendFilterShadowOnly']} "
+                f"D1_required={row['InpSmartTrendRequireD1']} D1={row['InpSmartTrendMinD1Aligned']} "
+                f"H1_required={row['InpSmartTrendRequireH1']} H1={row['InpSmartTrendMinH1Aligned']}"
+            ),
             account=row["InpAllowedAccountLoginsCsv"],
         )
         for row in key_rows
@@ -443,13 +485,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
     order_sections = []
     for key, item in payload["order_log_evidence"].items():
         order_sections.append(f"### {key}\n\nPath: `{item['path']}`\n\nStatus: `{'ORDER_ROW_FOUND' if item['has_post_maintenance_order_rows'] else 'PENDING_FIRST_ORDER'}`\n\n```text\n{chr(10).join(item['tail'])}\n```")
-    return f"""# A1/A2 920101 Maintenance Supplemental Verification - 2026-06-21
+    return f"""# A1/A2 920101 H1-Only Smart Trend Supplemental Verification - 2026-06-29
 
 Status: `{payload['status']}`
 
 Created UTC: `{payload['created_at_utc']}`
 
-This is a read-only verification report. It refreshes the stale runtime chart inventory and surfaces startup identity proof after the A1/A2 920101 maintenance. It does not change MT5 runtime state.
+This is a read-only verification report. It refreshes the runtime chart inventory and surfaces startup identity proof after the A1/A2 920101 H1-only smart-trend / 50-100 floor update. It does not change MT5 runtime state.
 
 ## Checks
 
@@ -461,8 +503,8 @@ This is a read-only verification report. It refreshes the stale runtime chart in
 
 Full refreshed inventory CSV: `{payload['inventory_csv']}`
 
-| Lane | Chart | Symbol | Expert | State | Derived magic | Dry-run | Broker action | Demo trading | Session | Account |
-|---|---|---|---|---|---:|---|---|---|---|---|
+| Lane | Chart | Symbol | Expert | State | Derived magic | Dry-run | Broker action | Demo trading | Session | Smart trend | Account |
+|---|---|---|---|---|---:|---|---|---|---|---|---|
 {inventory_table}
 
 ## Derived Magic Proof
@@ -488,7 +530,7 @@ Source: `{source['source']}`
 
 ## Order Log Evidence
 
-No post-maintenance order is required yet because the market/session/signal may not have fired after the relaunch. The first Monday order should add order-log proof with magic `920101`.
+No post-maintenance order is required yet because the market/session/signal may not have fired after the relaunch. The first qualifying order should add order-log proof with magic `920101`.
 
 {chr(10).join(order_sections)}
 

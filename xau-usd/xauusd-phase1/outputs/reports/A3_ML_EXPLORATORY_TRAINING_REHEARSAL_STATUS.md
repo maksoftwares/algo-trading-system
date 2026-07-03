@@ -10,12 +10,12 @@ This is a quarantined research rehearsal only. It does not create the official C
 
 | Metric | Value |
 | --- | --- |
-| snapshot_rows | 349 |
-| diagnostic_labeled_rows | 349 |
+| snapshot_rows | 512 |
+| diagnostic_labeled_rows | 512 |
 | official_candidate_trainable_rows | 0 |
-| positive | 110 |
-| negative | 239 |
-| minority | 110 |
+| positive | 149 |
+| negative | 363 |
+| minority | 149 |
 
 ## Inputs
 
@@ -26,15 +26,15 @@ This is a quarantined research rehearsal only. It does not create the official C
 ## Outputs
 
 - Rehearsal artifact: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_EXPLORATORY_MODEL_REHEARSAL_ARTIFACT.json
-- Artifact SHA256: 8dbdec9bd5d968f3b1d7e131d5378f7a3c22d5764338ef0045be49ce9ef8541e
+- Artifact SHA256: 96d3aa3f88d946fc5b00559c509384c107d8910ac0d613993b7e692244fcfb42
 - Shadow preview CSV: C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_EXPLORATORY_SHADOW_PREVIEW.csv
-- Shadow preview rows: 349
+- Shadow preview rows: 512
 
 ## Official Gate Blockers
 
 - dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher
-- market_setup_groups observed 223 required >=300
-- active_weeks observed 3.37 required >=8
+- market_setup_groups observed 282 required >=300
+- active_weeks observed 3.78 required >=8
 - at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes
 - feature_budget observed 0 required >=6
 - slippage_readiness observed INSUFFICIENT required ADEQUATE

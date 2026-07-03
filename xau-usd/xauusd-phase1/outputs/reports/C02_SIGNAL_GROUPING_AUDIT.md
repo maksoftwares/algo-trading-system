@@ -10,9 +10,9 @@ Overall status: PASS
 
 ## Counts
 
-- Decision rows: 574
-- Market setup groups: 223
-- Cross-account groups: 93
+- Decision rows: 1087
+- Market setup groups: 323
+- Cross-account groups: 186
 - Max account count per group: 3
 
 ## Next

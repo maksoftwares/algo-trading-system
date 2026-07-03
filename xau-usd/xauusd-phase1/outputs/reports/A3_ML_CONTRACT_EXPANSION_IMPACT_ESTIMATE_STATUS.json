@@ -1,9 +1,9 @@
 {
   "status": "APPROVAL_ALONE_NOT_SUFFICIENT",
   "stage": "C37-CONTRACT-EXPANSION-IMPACT-ESTIMATE",
-  "created_at_utc": "2026-06-22T06:38:38Z",
+  "created_at_utc": "2026-06-24T23:53:46Z",
   "schema_version": "a3_ml_contract_expansion_impact_estimate_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "inputs": {
     "c01_data_audit": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C02_C01_DATA_AUDIT.json",
     "c03_training_readiness": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\C03_TRAINING_READINESS_REPORT.json",
@@ -13,7 +13,7 @@
   },
   "summary": {
     "c03_status": "NO_GO",
-    "c34_status": "CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND",
+    "c34_status": "CURRENT_SCOPE_UNCATALOGED_BACKFILL_FOUND",
     "c36_status": "WAITING_FOR_REVIEW_APPROVAL",
     "candidate_files": 13,
     "candidate_would_signal_rows": 2747,
@@ -33,27 +33,27 @@
     {
       "gate": "market_setup_groups",
       "current_passed": false,
-      "current_observed": "223",
+      "current_observed": "282",
       "required": ">=300",
-      "projected_observed": "1604",
+      "projected_observed": "1663",
       "projected_passed": true,
       "projection_reason": "adds C34 estimated out-of-scope groups=1381"
     },
     {
       "gate": "minority_labels",
       "current_passed": true,
-      "current_observed": "172",
+      "current_observed": "246",
       "required": ">=90",
-      "projected_observed": "172",
+      "projected_observed": "246",
       "projected_passed": true,
       "projection_reason": "current minority-label gate already reflects approved contract only; C34 has no validated labels"
     },
     {
       "gate": "active_weeks",
       "current_passed": false,
-      "current_observed": "3.37",
+      "current_observed": "3.78",
       "required": ">=8",
-      "projected_observed": "3.37",
+      "projected_observed": "3.78",
       "projected_passed": false,
       "projection_reason": "C34 candidate dates do not extend active decision span enough"
     },

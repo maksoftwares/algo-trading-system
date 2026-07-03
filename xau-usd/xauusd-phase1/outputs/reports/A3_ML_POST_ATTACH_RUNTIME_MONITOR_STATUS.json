@@ -1,14 +1,14 @@
 {
   "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
   "stage": "C22-ML-POST-ATTACH-RUNTIME-MONITOR",
-  "created_at_utc": "2026-06-22T06:38:40Z",
-  "started_at_utc": "2026-06-22T06:38:40Z",
+  "created_at_utc": "2026-06-24T23:53:49Z",
+  "started_at_utc": "2026-06-24T23:53:48Z",
   "schema_version": "a3_ml_post_attach_runtime_monitor_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "monitor": {
     "timeout_seconds": 0,
     "poll_seconds": 5,
-    "elapsed_seconds": 0.11,
+    "elapsed_seconds": 0.156,
     "attempt_count": 1,
     "timed_out": false
   },
@@ -36,7 +36,7 @@
   "attempts": [
     {
       "attempt": 1,
-      "elapsed_seconds": 0.11,
+      "elapsed_seconds": 0.156,
       "c20_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
       "c21_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
       "status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",

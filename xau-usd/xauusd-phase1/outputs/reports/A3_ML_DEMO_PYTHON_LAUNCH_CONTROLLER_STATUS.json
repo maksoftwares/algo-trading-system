@@ -1,9 +1,9 @@
 {
   "status": "WAITING_FOR_DATA",
   "stage": "C23-ML-DEMO-PYTHON-LAUNCH-CONTROLLER",
-  "created_at_utc": "2026-06-22T06:38:40Z",
+  "created_at_utc": "2026-06-24T23:53:49Z",
   "schema_version": "a3_ml_demo_python_launch_controller_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "requested_actions": {
     "run_pipeline": false,
     "refresh_live_readonly": false,
@@ -25,7 +25,7 @@
       "C21 runtime launch diagnostic": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
       "C22 post-attach runtime monitor": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS"
     },
-    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066"
+    "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066"
   },
   "readiness": {
     "data_ready": false,

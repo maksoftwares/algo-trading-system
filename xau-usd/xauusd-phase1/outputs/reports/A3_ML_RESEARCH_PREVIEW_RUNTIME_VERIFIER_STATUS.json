@@ -1,9 +1,9 @@
 {
   "status": "RESEARCH_PREVIEW_READ_PATH_CONFIRMED_ALL_ACCOUNTS",
   "stage": "C27-RESEARCH-PREVIEW-RUNTIME-READ-PATH-VERIFIER",
-  "created_at_utc": "2026-06-22T06:38:39Z",
+  "created_at_utc": "2026-06-24T23:58:09Z",
   "schema_version": "a3_ml_research_preview_runtime_verifier_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "authorization": {
     "official_model_training_authorized": false,
     "python_demo_predictions_authorized": false,
@@ -31,8 +31,8 @@
       "files_root_safe": true,
       "handoff_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
       "handoff_exists": true,
-      "handoff_rows": 207,
-      "matching_handoff_rows": 207,
+      "handoff_rows": 259,
+      "matching_handoff_rows": 259,
       "handoff_actions": [
         "ABSTAIN"
       ],
@@ -45,13 +45,13 @@
       "handoff_research_preview_ready": true,
       "broker_shadow_tap_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 97,
-      "matching_broker_shadow_tap_rows": 97,
-      "research_preview_tap_rows": 97,
+      "broker_shadow_tap_rows": 849,
+      "matching_broker_shadow_tap_rows": 849,
+      "research_preview_tap_rows": 849,
       "latest_matching_broker_shadow_tap": {
-        "timestamp_broker": "2026.06.22 06:35:00",
-        "timestamp_utc": "2026.06.22 06:34:57",
-        "timestamp_local": "2026.06.22 10:34:57",
+        "timestamp_broker": "2026.06.24 23:55:01",
+        "timestamp_utc": "2026.06.24 23:54:59",
+        "timestamp_local": "2026.06.25 03:54:59",
         "account_server": "Capital.ComMena-Demo",
         "account_login": "1025742",
         "symbol": "XAUUSD",
@@ -72,9 +72,9 @@
         "ml_broker_action_authorized": "false",
         "candidate_or_comment": "breakout_retest",
         "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-        "signal_direction": "LONG",
+        "signal_direction": "SHORT",
         "signal_would_signal": "false",
-        "reason_code": "no_long_breakout_retest_candidate",
+        "reason_code": "no_short_breakout_retest_candidate",
         "guard_reason": "NO_SIGNAL"
       },
       "research_preview_read_path_confirmed": true
@@ -88,8 +88,8 @@
       "files_root_safe": true,
       "handoff_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
       "handoff_exists": true,
-      "handoff_rows": 94,
-      "matching_handoff_rows": 94,
+      "handoff_rows": 146,
+      "matching_handoff_rows": 146,
       "handoff_actions": [
         "ABSTAIN"
       ],
@@ -102,13 +102,13 @@
       "handoff_research_preview_ready": true,
       "broker_shadow_tap_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 97,
-      "matching_broker_shadow_tap_rows": 97,
-      "research_preview_tap_rows": 97,
+      "broker_shadow_tap_rows": 850,
+      "matching_broker_shadow_tap_rows": 850,
+      "research_preview_tap_rows": 850,
       "latest_matching_broker_shadow_tap": {
-        "timestamp_broker": "2026.06.22 06:35:01",
-        "timestamp_utc": "2026.06.22 06:34:57",
-        "timestamp_local": "2026.06.22 10:34:57",
+        "timestamp_broker": "2026.06.24 23:55:01",
+        "timestamp_utc": "2026.06.24 23:54:59",
+        "timestamp_local": "2026.06.25 03:54:59",
         "account_server": "Capital.ComMena-Demo",
         "account_login": "1033030",
         "symbol": "XAUUSD",
@@ -129,9 +129,9 @@
         "ml_broker_action_authorized": "false",
         "candidate_or_comment": "breakout_retest",
         "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-        "signal_direction": "LONG",
+        "signal_direction": "SHORT",
         "signal_would_signal": "false",
-        "reason_code": "no_long_breakout_retest_candidate",
+        "reason_code": "no_short_breakout_retest_candidate",
         "guard_reason": "NO_SIGNAL"
       },
       "research_preview_read_path_confirmed": true
@@ -145,8 +145,8 @@
       "files_root_safe": true,
       "handoff_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\A3_ML_EA_HANDOFF.csv",
       "handoff_exists": true,
-      "handoff_rows": 48,
-      "matching_handoff_rows": 48,
+      "handoff_rows": 107,
+      "matching_handoff_rows": 107,
       "handoff_actions": [
         "ABSTAIN"
       ],
@@ -159,13 +159,13 @@
       "handoff_research_preview_ready": true,
       "broker_shadow_tap_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
       "broker_shadow_tap_exists": true,
-      "broker_shadow_tap_rows": 383,
-      "matching_broker_shadow_tap_rows": 378,
-      "research_preview_tap_rows": 378,
+      "broker_shadow_tap_rows": 3522,
+      "matching_broker_shadow_tap_rows": 3480,
+      "research_preview_tap_rows": 3480,
       "latest_matching_broker_shadow_tap": {
-        "timestamp_broker": "2026.06.22 06:35:01",
-        "timestamp_utc": "2026.06.22 06:34:57",
-        "timestamp_local": "2026.06.22 10:34:57",
+        "timestamp_broker": "2026.06.24 23:55:00",
+        "timestamp_utc": "2026.06.24 23:54:58",
+        "timestamp_local": "2026.06.25 03:54:58",
         "account_server": "Capital.ComMena-Demo",
         "account_login": "1033669",
         "symbol": "XAUUSD",
@@ -186,9 +186,9 @@
         "ml_broker_action_authorized": "false",
         "candidate_or_comment": "A3_BREAKOUT_PLAIN",
         "signal_stage": "WAIT_LEVEL_BREAK_RETEST",
-        "signal_direction": "LONG",
+        "signal_direction": "SHORT",
         "signal_would_signal": "false",
-        "reason_code": "no_long_breakout_retest_candidate",
+        "reason_code": "no_short_breakout_retest_candidate",
         "guard_reason": "NO_SIGNAL"
       },
       "research_preview_read_path_confirmed": true
@@ -223,7 +223,7 @@
     {
       "check": "A1_handoff_research_preview_ready",
       "passed": true,
-      "detail": "matching_rows=207 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
+      "detail": "matching_rows=259 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
     },
     {
       "check": "A2_files_root_exists",
@@ -243,7 +243,7 @@
     {
       "check": "A2_handoff_research_preview_ready",
       "passed": true,
-      "detail": "matching_rows=94 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
+      "detail": "matching_rows=146 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
     },
     {
       "check": "A3_files_root_exists",
@@ -263,7 +263,7 @@
     {
       "check": "A3_handoff_research_preview_ready",
       "passed": true,
-      "detail": "matching_rows=48 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
+      "detail": "matching_rows=107 actions=ABSTAIN broker_auth=false drift=ML_RESEARCH_PREVIEW_FAIL_CLOSED"
     }
   ],
   "inputs": {

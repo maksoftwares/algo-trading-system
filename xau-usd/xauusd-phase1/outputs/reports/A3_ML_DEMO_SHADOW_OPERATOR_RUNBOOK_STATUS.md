@@ -1,13 +1,13 @@
 # A3 ML Demo Shadow Operator Runbook
 
 Overall status: DEMO_SHADOW_RUNTIME_CONFIRMED_WAITING_FOR_DATA
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
 | Item | Status |
 | --- | --- |
-| c11_readiness_gap | WAITING_FOR_DECISION_HISTORY |
+| c11_readiness_gap | GAP_REMAINS |
 | c15_observer_manual_attach | MANUAL_ATTACH_REQUIRED |
 | c25_broker_shadow_manual_attach | BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS |
 | c26_research_preview_handoff | PUBLISHED_RESEARCH_PREVIEW_FAIL_CLOSED |
@@ -44,7 +44,7 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 
 - Terminal: C:/MT5PortableRepairLane/terminal64.exe
 - Observer: A3MlPredictionObserver using C:\MT5PortableRepairLane\MQL5\Presets\A3MlPredictionObserver.passive_xauusd.set
-- Broker-shadow: Account3BreakoutImprovedExecutor using Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set), Account3BreakoutPlainExecutor using Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set), Account3BreakoutTier1CompatExecutor using Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set), Account3SoftRetestExecutor using Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set)
+- Broker-shadow: Account3BreakoutImprovedExecutor using Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set), Account3BreakoutPlainExecutor using Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set), Account3BreakoutTier1CompatExecutor using Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set), Account3SoftRetestExecutor using Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set (C:\MT5PortableRepairLane\MQL5\Presets\Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set), Phase2ExperimentalDemoExecutor
 - Broker-shadow log to confirm: C:\MT5PortableRepairLane\MQL5\Files\a3_ml_broker_shadow_tap.csv
 
 ## Operator Steps
@@ -82,8 +82,8 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 | Gate | Gap |
 | --- | --- |
 | dataset_status | needs different category/state |
-| market_setup_groups | 77 |
-| active_weeks | 4.63 weeks |
+| market_setup_groups | 18 |
+| active_weeks | 4.22 weeks |
 | at_least_two_regimes | needs different category/state |
 | feature_budget | 6 |
 | slippage_readiness | needs different category/state |

@@ -1,8 +1,8 @@
 {
   "status": "PASS",
   "stage": "C02-05",
-  "created_at_utc": "2026-06-22T05:59:27Z",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "created_at_utc": "2026-06-26T23:00:14Z",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "boundary": {
     "mt5_connection_attempted": false,
     "model_training_authorized": false,
@@ -10,19 +10,19 @@
     "terminal_runtime_change_authorized": false
   },
   "counts": {
-    "decision_rows": 574,
-    "market_setup_groups": 223,
-    "cross_account_groups": 93,
+    "decision_rows": 1087,
+    "market_setup_groups": 323,
+    "cross_account_groups": 186,
     "max_account_count": 3,
     "by_account_count": {
-      "1025742": 347,
-      "1033030": 95,
-      "1033669": 132
+      "1025742": 439,
+      "1033030": 187,
+      "1033669": 461
     }
   },
   "outputs": {
-    "market_setup_groups_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066\\normalized\\signals\\market_setup_groups.csv",
-    "market_setup_groups_sha256": "8c42bb04e20d92ed88dc240154f60bd554ec764d9151364aaece2c607b1bff45"
+    "market_setup_groups_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\data\\ml\\a3_meta_v1\\c02\\xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066\\normalized\\signals\\market_setup_groups.csv",
+    "market_setup_groups_sha256": "576de2491995578b9231c21ce0c0ae09260fa27fca023bc3b7d621a6852bb0de"
   },
   "notes": [
     "market_setup_group_id intentionally excludes account_scope.",

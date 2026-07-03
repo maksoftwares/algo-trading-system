@@ -11,12 +11,12 @@ Overall status: CONTINUE_DATASET_BUILD
 
 ## Counts
 
-- C01 decisions: 574
-- Exact unique signals: 349
-- Snapshot rows: 349
-- Market setup groups: 223
+- C01 decisions: 963
+- Exact unique signals: 564
+- Snapshot rows: 564
+- Market setup groups: 323
 - Diagnostic labels: {}
-- Class balance: {'positive': 117, 'negative': 232}
+- Class balance: {'positive': 170, 'negative': 394}
 - Global feature budget: 0
 
 ## Blockers
@@ -25,7 +25,6 @@ Overall status: CONTINUE_DATASET_BUILD
 - global_feature_budget=0 is below the contract minimum of 5
 - slippage readiness is INSUFFICIENT
 - diagnostic label minority count is below 90
-- market_setup_groups below EXPLORATORY minimum of 300
 
 ## Next
 

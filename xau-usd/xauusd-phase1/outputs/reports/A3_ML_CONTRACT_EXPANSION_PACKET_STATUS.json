@@ -1,9 +1,9 @@
 {
-  "status": "CONTRACT_EXPANSION_REVIEW_REQUIRED",
+  "status": "CURRENT_SCOPE_IMPORT_REVIEW_REQUIRED",
   "stage": "C35-CONTRACT-EXPANSION-PACKET",
-  "created_at_utc": "2026-06-22T06:38:38Z",
+  "created_at_utc": "2026-06-24T23:53:46Z",
   "schema_version": "a3_ml_contract_expansion_packet_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "locked_contract": {
     "symbol": "XAUUSD",
     "family_scope": "breakout_retest_only",
@@ -11,22 +11,22 @@
     "expansion_authorized": false
   },
   "summary": {
-    "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+    "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
     "c03_status": "NO_GO",
-    "market_setup_groups_observed": "223",
-    "active_weeks_observed": "3.37",
+    "market_setup_groups_observed": "282",
+    "active_weeks_observed": "3.78",
     "feature_budget_observed": "0",
     "slippage_readiness_observed": "INSUFFICIENT",
-    "readiness_gap_status": "WAITING_FOR_DECISION_HISTORY",
-    "remaining_active_weeks": "4.63",
-    "c34_status": "CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND",
-    "current_scope_would_signal_rows": 574,
-    "uncataloged_current_scope_files": 0,
+    "readiness_gap_status": "GAP_REMAINS",
+    "remaining_active_weeks": "4.22",
+    "c34_status": "CURRENT_SCOPE_UNCATALOGED_BACKFILL_FOUND",
+    "current_scope_would_signal_rows": 887,
+    "uncataloged_current_scope_files": 3,
     "out_of_scope_would_signal_rows": 2747,
     "out_of_scope_estimated_groups": 1381,
     "all_accounts_collecting": true,
-    "observer_prediction_rows": 8469,
-    "broker_shadow_tap_rows": 571
+    "observer_prediction_rows": 8598,
+    "broker_shadow_tap_rows": 577
   },
   "candidate_families": [
     {
@@ -80,7 +80,7 @@
     "Update C05/C04/C06/C23 so model artifacts, shadow predictions, and EA handoff include model scope/family hashes.",
     "Regenerate C08, C03, C05, C04, C06, C23, C33 and keep broker_action_authorized=false."
   ],
-  "reviewer_prompt": "You are reviewing an A3 Python ML contract-expansion proposal for an MT5 demo trading system.\n\nCurrent locked contract:\n- XAUUSD only\n- accounts 1025742, 1033030, 1033669\n- breakout_retest only\n- broker_action_authorized must remain false\n\nCurrent readiness:\n- C03 status: NO_GO\n- active weeks: 3.37 / >=8\n- market setup groups: 223 / >=300\n- feature budget: 0 / >=6\n- slippage readiness: INSUFFICIENT / ADEQUATE\n- all three demo accounts collecting: True\n\nBackfill audit:\n- uncataloged current-scope files: 0\n- current-scope would-signal rows: 574\n- out-of-scope would-signal rows: 2747\n- out-of-scope estimated groups: 1381\n\nOut-of-scope families found:\n- rdguard: 78 rows, 78 estimated groups, 2026-06-14T22:39:59Z to 2026-06-16T11:14:56Z\n- rdstruct: 78 rows, 78 estimated groups, 2026-06-14T22:39:59Z to 2026-06-16T11:14:56Z\n- round_number_retest: 2455 rows, 1127 estimated groups, 2026-05-29T09:34:56Z to 2026-06-19T16:10:00Z\n- session_extreme_retest: 136 rows, 98 estimated groups, 2026-05-29T13:05:00Z to 2026-06-19T16:14:59Z\n\nPlease decide whether to approve a versioned contract expansion. If approved, specify:\n1. allowed families\n2. whether to use one global model with family as a feature or separate per-family models\n3. family-aware C03 gate thresholds\n4. whether 288-bar diagnostic labels are valid for each family\n5. slippage readiness requirements\n6. exact conditions before Python demo predictions may be authorized\n\nIf not approved, say so clearly and require continued live collection under the current breakout_retest-only contract.",
+  "reviewer_prompt": "You are reviewing an A3 Python ML contract-expansion proposal for an MT5 demo trading system.\n\nCurrent locked contract:\n- XAUUSD only\n- accounts 1025742, 1033030, 1033669\n- breakout_retest only\n- broker_action_authorized must remain false\n\nCurrent readiness:\n- C03 status: NO_GO\n- active weeks: 3.78 / >=8\n- market setup groups: 282 / >=300\n- feature budget: 0 / >=6\n- slippage readiness: INSUFFICIENT / ADEQUATE\n- all three demo accounts collecting: True\n\nBackfill audit:\n- uncataloged current-scope files: 3\n- current-scope would-signal rows: 887\n- out-of-scope would-signal rows: 2747\n- out-of-scope estimated groups: 1381\n\nOut-of-scope families found:\n- rdguard: 78 rows, 78 estimated groups, 2026-06-14T22:39:59Z to 2026-06-16T11:14:56Z\n- rdstruct: 78 rows, 78 estimated groups, 2026-06-14T22:39:59Z to 2026-06-16T11:14:56Z\n- round_number_retest: 2455 rows, 1127 estimated groups, 2026-05-29T09:34:56Z to 2026-06-19T16:10:00Z\n- session_extreme_retest: 136 rows, 98 estimated groups, 2026-05-29T13:05:00Z to 2026-06-19T16:14:59Z\n\nPlease decide whether to approve a versioned contract expansion. If approved, specify:\n1. allowed families\n2. whether to use one global model with family as a feature or separate per-family models\n3. family-aware C03 gate thresholds\n4. whether 288-bar diagnostic labels are valid for each family\n5. slippage readiness requirements\n6. exact conditions before Python demo predictions may be authorized\n\nIf not approved, say so clearly and require continued live collection under the current breakout_retest-only contract.",
   "authorization": {
     "contract_expansion_authorized": false,
     "training_authorized": false,
@@ -109,5 +109,5 @@
     "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_PACKET_STATUS.json",
     "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CONTRACT_EXPANSION_PACKET_STATUS.md"
   },
-  "next_allowed_stage": "Send this packet to the reviewer. Do not import out-of-scope rows or authorize Python demo predictions without an approved versioned contract expansion."
+  "next_allowed_stage": "Review uncataloged current-scope files before changing C02 catalogs, then rerun C08/C03."
 }

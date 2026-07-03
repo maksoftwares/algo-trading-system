@@ -1,7 +1,7 @@
 # A3 ML Demo Shadow Collection Health
 
-Overall status: COLLECTING_LIVE_WAITING_FOR_DATA
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Overall status: STALE_OR_PARTIAL_COLLECTION
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 Max stale seconds: 86400
 
 ## Upstream Status
@@ -15,9 +15,9 @@ Max stale seconds: 86400
 
 | Account | Handoff rows | Handoff current | Observer rows | Observer age | Broker tap rows | Collecting |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | 207 | yes | 2866 | 0s | 97 | yes |
-| A2 | 94 | yes | 2866 | 4s | 97 | yes |
-| A3 | 48 | yes | 2866 | 2s | 383 | yes |
+| A1 | 259 | yes | 4512 | 218711s | 849 | no |
+| A2 | 146 | yes | 4525 | 218584s | 850 | no |
+| A3 | 107 | yes | 4538 | 218453s | 3523 | no |
 
 ## Collection Checks
 
@@ -31,11 +31,11 @@ Max stale seconds: 86400
 | handoff_unexpired_all_accounts | true |
 | observer_startup_present_all_accounts | true |
 | observer_prediction_present_all_accounts | true |
-| observer_prediction_fresh_all_accounts | true |
+| observer_prediction_fresh_all_accounts | false |
 | broker_shadow_tap_present_all_accounts | true |
 | research_preview_read_path_confirmed_all_accounts | true |
 | demo_shadow_post_attach_confirmed_all_accounts | true |
-| all_accounts_collecting | true |
+| all_accounts_collecting | false |
 
 ## Authorization
 
@@ -55,4 +55,4 @@ Max stale seconds: 86400
 
 ## Next
 
-Keep A1/A2/A3 terminals running, continue passive data collection, then rerun C08/C23 after more market data advances.
+Observer logs are stale or missing. Reload/attach the observers, wait for fresh rows, then rerun C33 and C23.

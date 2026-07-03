@@ -1,7 +1,7 @@
 # A3 ML Demo Start Cycle Status
 
 Overall status: WAITING_FOR_DATA
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Stage Summary
 

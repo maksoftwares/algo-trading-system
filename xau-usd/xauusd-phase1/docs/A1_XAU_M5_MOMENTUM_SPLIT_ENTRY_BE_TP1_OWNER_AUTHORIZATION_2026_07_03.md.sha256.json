@@ -1,0 +1,20 @@
+{
+  "generated_at_dubai": "2026-07-03T17:05:00+04:00",
+  "status": "APPROVED_FOR_A1_SMALL_DEMO_ATTACH",
+  "owner": "Muhammad Ali Khan",
+  "approval_source": "Project thread owner message: I am fine with this approach. You already have the owner approval now. Nothing wrong in it.",
+  "authorization_path": "xau-usd/xauusd-phase1/docs/A1_XAU_M5_MOMENTUM_SPLIT_ENTRY_BE_TP1_OWNER_AUTHORIZATION_2026_07_03.md",
+  "authorization_sha256": "2aa181ce9346b3e40c946ccf2167852dbb03c8c3e558fcb62fa293a2cb50e200",
+  "frozen_spec_path": "xau-usd/xauusd-phase1/docs/A1_XAU_M5_MOMENTUM_SPLIT_ENTRY_BE_TP1_FORWARD_V0_2026_07_03.md",
+  "frozen_spec_sha256": "e55cf920c68cb070965529f1f426856bb61627920e5f3d31dae790e7a52cd824",
+  "ea_source_path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+  "ea_source_sha256": "a4d75f617ef4864fd6e28fa210ec02ce4b0b6e87171382534f51dbbecdc016c4",
+  "signal_claim_smoke_path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_SPLIT_BE_SIGNAL_CLAIM_SMOKE_2026_07_03.md",
+  "signal_claim_smoke_sha256": "e8e47719fa8483c2deb498d67bba9b7d4004b1031a28e8ec9bd45ff08effe452",
+  "approved_exposure": "2 x 0.01 minimum-lot same-direction split-entry tickets per signal",
+  "quantified_exposure_acceptance": "ACCEPTED_BY_OWNER_2026_07_03",
+  "worst_case_per_failed_signal_usd": -36,
+  "typical_loss_per_failed_signal_usd": "-20 to -30",
+  "runtime_touched": false,
+  "next_status": "pre_attach_checks_then_a1_demo_attach"
+}

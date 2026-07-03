@@ -1,0 +1,15 @@
+{
+  "status": "LOCKED_FOR_SMALL_DEMO_FORWARD_TEST",
+  "locked_at_utc": "2026-07-01T15:55:00Z",
+  "documents": [
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_M5_MOMENTUM_DIRECTIONAL_HTF_FORWARD_V0_2026_07_01.md",
+      "sha256": "f5ca46f87e186e136d40b147a932f5d621825e647e2b8cfc25bb060a0e4ddf9b"
+    }
+  ],
+  "evidence": [
+    "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_Q2_2026.md",
+    "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_LONG_FAILURE_DIAGNOSIS_Q2_2026.md"
+  ],
+  "boundary": "Demo-only A1 XAUUSD M5 momentum lane, magic 932200, fixed 0.01 lot. No canonical Phase 2/live approval."
+}

@@ -1,7 +1,7 @@
 # A3 ML Contract Expansion Packet
 
-Overall status: CONTRACT_EXPANSION_REVIEW_REQUIRED
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Overall status: CURRENT_SCOPE_IMPORT_REVIEW_REQUIRED
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Current Lock
 
@@ -14,9 +14,9 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 ## Evidence Summary
 
 - C03 readiness: NO_GO.
-- Active weeks: 3.37 / >=8.
-- Market setup groups: 223 / >=300.
-- Current-scope uncataloged files: 0.
+- Active weeks: 3.78 / >=8.
+- Market setup groups: 282 / >=300.
+- Current-scope uncataloged files: 3.
 - Out-of-scope would-signal rows: 2747.
 - Out-of-scope estimated groups: 1381.
 - All demo accounts collecting: true.
@@ -63,15 +63,15 @@ Current locked contract:
 
 Current readiness:
 - C03 status: NO_GO
-- active weeks: 3.37 / >=8
-- market setup groups: 223 / >=300
+- active weeks: 3.78 / >=8
+- market setup groups: 282 / >=300
 - feature budget: 0 / >=6
 - slippage readiness: INSUFFICIENT / ADEQUATE
 - all three demo accounts collecting: True
 
 Backfill audit:
-- uncataloged current-scope files: 0
-- current-scope would-signal rows: 574
+- uncataloged current-scope files: 3
+- current-scope would-signal rows: 887
 - out-of-scope would-signal rows: 2747
 - out-of-scope estimated groups: 1381
 
@@ -103,4 +103,4 @@ If not approved, say so clearly and require continued live collection under the 
 
 ## Next
 
-Send this packet to the reviewer. Do not import out-of-scope rows or authorize Python demo predictions without an approved versioned contract expansion.
+Review uncataloged current-scope files before changing C02 catalogs, then rerun C08/C03.

@@ -1,11 +1,11 @@
 {
   "status": "WAITING_FOR_REVIEW_APPROVAL",
   "stage": "C36-CONTRACT-EXPANSION-CONFIG-PROPOSAL",
-  "created_at_utc": "2026-06-22T06:38:38Z",
+  "created_at_utc": "2026-06-24T23:53:46Z",
   "schema_version": "a3_ml_contract_expansion_config_proposal_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
-  "c34_status": "CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND",
-  "c35_status": "CONTRACT_EXPANSION_REVIEW_REQUIRED",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
+  "c34_status": "CURRENT_SCOPE_UNCATALOGED_BACKFILL_FOUND",
+  "c35_status": "CURRENT_SCOPE_IMPORT_REVIEW_REQUIRED",
   "selected_families": [],
   "review_reference": "",
   "candidate_summary": {

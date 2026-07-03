@@ -1,9 +1,9 @@
 {
   "status": "WAITING_FOR_DATA",
   "stage": "C24-ML-DEMO-PREDICTION-ACTION-PACKET",
-  "created_at_utc": "2026-06-22T06:38:41Z",
+  "created_at_utc": "2026-06-24T23:53:49Z",
   "schema_version": "a3_ml_demo_prediction_action_packet_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "requested_actions": {
     "refresh_live_readonly": false,
     "requested_start_utc": "",
@@ -13,7 +13,7 @@
   },
   "summary": {
     "c23_status": "WAITING_FOR_DATA",
-    "c11_status": "WAITING_FOR_DECISION_HISTORY",
+    "c11_status": "GAP_REMAINS",
     "c15_status": "MANUAL_ATTACH_REQUIRED",
     "c18_status": "REHEARSED_RESEARCH_ONLY",
     "c20_status": "RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS",
@@ -39,7 +39,7 @@
     "activation_authorizes_ea_consumption": false
   },
   "data_gaps": {
-    "status": "WAITING_FOR_DECISION_HISTORY",
+    "status": "GAP_REMAINS",
     "failed_gates": [
       {
         "gate": "dataset_status",
@@ -52,18 +52,18 @@
       {
         "gate": "market_setup_groups",
         "passed": false,
-        "observed": "223",
+        "observed": "282",
         "required": ">=300",
-        "gap_value": 77.0,
-        "gap_text": "77"
+        "gap_value": 18.0,
+        "gap_text": "18"
       },
       {
         "gate": "active_weeks",
         "passed": false,
-        "observed": "3.37",
+        "observed": "3.78",
         "required": ">=8",
-        "gap_value": 4.63,
-        "gap_text": "4.63 weeks"
+        "gap_value": 4.220000000000001,
+        "gap_text": "4.22 weeks"
       },
       {
         "gate": "at_least_two_regimes",
@@ -90,10 +90,10 @@
         "gap_text": "needs different category/state"
       }
     ],
-    "remaining_active_weeks": 4.63,
-    "estimated_active_weeks_pass_date_utc": "2026-07-24T10:10:22Z",
-    "market_setup_groups_gap": 77.0,
-    "active_weeks_gap": 4.63
+    "remaining_active_weeks": 4.22,
+    "estimated_active_weeks_pass_date_utc": "2026-07-24T09:27:35Z",
+    "market_setup_groups_gap": 18.0,
+    "active_weeks_gap": 4.220000000000001
   },
   "manual_attach": {
     "status": "MANUAL_ATTACH_REQUIRED",
@@ -186,7 +186,7 @@
         "handoff_include_exists": true,
         "broker_shadow_tap_path": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "broker_shadow_tap_exists": true,
-        "broker_shadow_tap_rows": 97,
+        "broker_shadow_tap_rows": 848,
         "active_profile_entries": [
           {
             "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\_codex_quarantine\\profile_backups\\default_profile_before_forex_lot_revert_001_20260616_094629\\chart01.chr",
@@ -502,6 +502,15 @@
             "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
             "enabled": true,
             "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\Users\\ZHAO ZHU INFORMATION\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Profiles\\Charts\\Default\\chart27.chr",
+            "profile_relative_path": "Default\\chart27.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
           }
         ],
         "active_broker_executors": [
@@ -588,11 +597,20 @@
         "handoff_include_exists": true,
         "broker_shadow_tap_path": "C:\\MT5PortableTier1BestEA\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "broker_shadow_tap_exists": true,
-        "broker_shadow_tap_rows": 97,
+        "broker_shadow_tap_rows": 849,
         "active_profile_entries": [
           {
             "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart02.chr",
             "profile_relative_path": "Default\\chart02.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableTier1BestEA\\MQL5\\Profiles\\Charts\\Default\\chart04.chr",
+            "profile_relative_path": "Default\\chart04.chr",
             "profile_kind": "current_profile_file",
             "expert_name": "Phase2ExperimentalDemoExecutor",
             "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
@@ -663,7 +681,7 @@
         "handoff_include_exists": true,
         "broker_shadow_tap_path": "C:\\MT5PortableRepairLane\\MQL5\\Files\\a3_ml_broker_shadow_tap.csv",
         "broker_shadow_tap_exists": true,
-        "broker_shadow_tap_rows": 383,
+        "broker_shadow_tap_rows": 3517,
         "active_profile_entries": [
           {
             "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart01.chr",
@@ -698,6 +716,15 @@
             "profile_kind": "current_profile_file",
             "expert_name": "Account3SoftRetestExecutor",
             "expert_path": "Experts\\Account3SoftRetestExecutor.ex5",
+            "enabled": true,
+            "role": "broker_executor_candidate"
+          },
+          {
+            "profile_chart": "C:\\MT5PortableRepairLane\\MQL5\\Profiles\\Charts\\Default\\chart07.chr",
+            "profile_relative_path": "Default\\chart07.chr",
+            "profile_kind": "current_profile_file",
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "expert_path": "Experts\\Phase2ExperimentalDemoExecutor.ex5",
             "enabled": true,
             "role": "broker_executor_candidate"
           },
@@ -748,9 +775,16 @@
             "source_found": true,
             "can_consume_ml_handoff": true,
             "detail": "uses A3 ML handoff reader"
+          },
+          {
+            "expert_name": "Phase2ExperimentalDemoExecutor",
+            "source_path": "C:\\MT5PortableRepairLane\\MQL5\\Experts\\Phase2ExperimentalDemoExecutor.mq5",
+            "source_found": true,
+            "can_consume_ml_handoff": true,
+            "detail": "uses A3 ML handoff reader"
           }
         ],
-        "active_broker_executor_count": 4,
+        "active_broker_executor_count": 5,
         "active_broker_executors_ml_ready": true,
         "expected_broker_experts": [
           {
@@ -799,7 +833,8 @@
           "Account3BreakoutImprovedExecutor",
           "Account3BreakoutPlainExecutor",
           "Account3BreakoutTier1CompatExecutor",
-          "Account3SoftRetestExecutor"
+          "Account3SoftRetestExecutor",
+          "Phase2ExperimentalDemoExecutor"
         ],
         "safe_presets": [
           {
@@ -874,10 +909,9 @@
   "operator_actions": [
     "Attach A3MlPredictionObserver on XAUUSD M5 for A1, A2, and A3 using the passive preset.",
     "C26 research-preview ABSTAIN handoff is published; after attach, broker-shadow taps should log ml_available=true.",
-    "Import older compatible EA decision/observer logs if available; market bars/ticks alone cannot satisfy active decision weeks.",
     "Keep A1/A2/A3 terminals collecting passive observer data and rerun C10 with --refresh-live-readonly after new market sessions.",
-    "Need about 4.63 more active weeks unless older compatible decisions are imported.",
-    "Need about 77 more market setup groups."
+    "Need about 4.22 more active weeks unless older compatible decisions are imported.",
+    "Need about 18 more market setup groups."
   ],
   "commands": {
     "check_now": "'C:\\Users\\ZHAO ZHU INFORMATION\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe' 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\scripts\\c24_generate_demo_prediction_action_packet.py' --root 'C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1'",

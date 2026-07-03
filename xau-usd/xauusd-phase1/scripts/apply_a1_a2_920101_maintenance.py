@@ -13,7 +13,7 @@ from typing import Any
 
 
 PHASE1_ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_JSON = PHASE1_ROOT / "outputs" / "reports" / "A1_A2_920101_MAINTENANCE_APPLIED_2026_06_21.json"
+OUTPUT_JSON = PHASE1_ROOT / "outputs" / "reports" / "A1_A2_920101_H1_ONLY_SMART_TREND_UPDATE_2026_06_29.json"
 
 A1_TERMINAL_DATA = Path("C:/Users/ZHAO ZHU INFORMATION/AppData/Roaming/MetaQuotes/Terminal/D0E8209F77C8CF37AD8BF550E51FF075")
 A1_TERMINAL_EXE = Path("C:/Program Files/MetaTrader 5/terminal64.exe")
@@ -39,6 +39,16 @@ FIXED_LOT = "0.01"
 MAX_OPEN = "1"
 MAX_COST_R = "0.30"
 MAX_SPREAD = "75.0"
+DAILY_FLOOR_AED = "50.0"
+NEXT_DAILY_FLOOR_AED = "100.0"
+SMART_TREND_ENABLED = "true"
+SMART_TREND_SHADOW_ONLY = "false"
+SMART_TREND_D1_LAG = "5"
+SMART_TREND_H1_LAG = "3"
+SMART_TREND_REQUIRE_D1 = "false"
+SMART_TREND_REQUIRE_H1 = "true"
+SMART_TREND_MIN_D1 = "0.25"
+SMART_TREND_MIN_H1 = "0.15"
 
 
 @dataclass(frozen=True)
@@ -95,8 +105,8 @@ def run(*, mode: str, launch: bool) -> dict[str, Any]:
         terminal_actions.append(stop_terminal("A1", A1_TERMINAL_EXE))
         terminal_actions.append(stop_terminal("A2", A2_TERMINAL_EXE))
 
-        backups["A1"] = str(backup_profile(a1_profile, A1_TERMINAL_DATA, "a1_a2_920101_maintenance_a1"))
-        backups["A2"] = str(backup_profile(a2_profile, A2_TERMINAL_DATA, "a1_a2_920101_maintenance_a2"))
+        backups["A1"] = str(backup_profile(a1_profile, A1_TERMINAL_DATA, "a1_a2_920101_h1_only_smart_trend_a1"))
+        backups["A2"] = str(backup_profile(a2_profile, A2_TERMINAL_DATA, "a1_a2_920101_h1_only_smart_trend_a2"))
 
         changed_files.extend(apply_a1_profile(a1_profile))
         changed_files.extend(apply_a2_profile(a2_profile))
@@ -128,7 +138,7 @@ def run(*, mode: str, launch: bool) -> dict[str, Any]:
         "mode": mode,
         "created_at_utc": now_utc(),
         "started_at_utc": started_at,
-        "authority": "Owner requested fixing runtime drift after forensic confirmation. Demo accounts only; no canonical Phase 2/live-capital approval.",
+        "authority": "Owner approved replacing the strict D1+H1 smart trend gate with an H1-only broker-action trend gate for the A1/A2 920101 XAU evening forward test. D1 remains diagnostic/logged only. Demo accounts only; no canonical Phase 2/live-capital approval.",
         "scope": {
             "a1_account": A1_ACCOUNT,
             "a2_account": A2_ACCOUNT,
@@ -136,6 +146,16 @@ def run(*, mode: str, launch: bool) -> dict[str, Any]:
             "candidate": CANDIDATE,
             "session_server_hours": f"{SESSION_START}->{SESSION_END}",
             "lot": FIXED_LOT,
+            "smart_trend_filter": {
+                "enabled": SMART_TREND_ENABLED,
+                "shadow_only": SMART_TREND_SHADOW_ONLY,
+                "d1_required": SMART_TREND_REQUIRE_D1,
+                "h1_required": SMART_TREND_REQUIRE_H1,
+                "d1_trend_score_aligned_min": SMART_TREND_MIN_D1,
+                "h1_ema20_slope_aligned_atr_min": SMART_TREND_MIN_H1,
+            },
+            "daily_floor_aed": DAILY_FLOOR_AED,
+            "next_daily_floor_aed": NEXT_DAILY_FLOOR_AED,
             "a3_touched": False,
         },
         "before": {
@@ -176,6 +196,10 @@ def deploy_and_compile(terminal_data: Path) -> list[dict[str, Any]]:
         source = PHASE1_ROOT / "mt5" / "Include" / "Phase1" / include
         target = mql5 / "Include" / "Phase1" / include
         shutil.copy2(source, target)
+    for include in ("DirectionStateShadow.mqh", "A3MlShadowTap.mqh", "A3MlEaHandoff.mqh"):
+        source = PHASE1_ROOT / "mt5" / "Include" / include
+        target = mql5 / "Include" / include
+        shutil.copy2(source, target)
 
     for name in (EXECUTOR_EA, GUARDIAN_EA):
         source = PHASE1_ROOT / "mt5" / "Experts" / f"{name}.mq5"
@@ -199,11 +223,16 @@ def compile_one(name: str, terminal_data: Path) -> dict[str, Any]:
         source = terminal_data / "MQL5" / "Include" / "Phase1" / include
         if source.exists():
             shutil.copy2(source, scratch_include / include)
+    scratch_include_root = scratch_mql5 / "Include"
+    for include in ("DirectionStateShadow.mqh", "A3MlShadowTap.mqh", "A3MlEaHandoff.mqh"):
+        source = terminal_data / "MQL5" / "Include" / include
+        if source.exists():
+            shutil.copy2(source, scratch_include_root / include)
     log = scratch / f"compile_{name}.log"
     subprocess.run([str(METAEDITOR_EXE), f"/compile:{scratch_experts / (name + '.mq5')}", f"/log:{log}"], text=True, capture_output=True, timeout=120)
     ex5 = scratch_experts / f"{name}.ex5"
     target_ex5 = terminal_data / "MQL5" / "Experts" / f"{name}.ex5"
-    target_log = terminal_data / "MQL5" / "Logs" / f"compile_{name}_a1_a2_920101_20260621.log"
+    target_log = terminal_data / "MQL5" / "Logs" / f"compile_{name}_a1_a2_920101_20260629.log"
     target_log.parent.mkdir(parents=True, exist_ok=True)
     if log.exists():
         shutil.copy2(log, target_log)
@@ -296,24 +325,24 @@ def disable_extra_phase2_executors(profile: Path, *, keep_chart: str) -> list[di
 
 def apply_a1_profile_preview(profile: Path) -> list[str]:
     return [
-        f"Restore A1 XAU 920101 broker-action chart at {profile / 'chart03.chr'}",
+        f"Restore/update A1 XAU 920101 broker-action chart at {profile / 'chart03.chr'} with H1-only smart trend gate",
         "Disable A1 EURUSD/GBPUSD standard breakout broker action",
         "Disable A1 repair broker action charts",
         "Disable A1 WR50 broker action",
-        "Enable A1 guardian daily profit +100 and daily loss -100 entry halt/close control",
+        "Enable A1 guardian daily profit +50 / next +100 and daily loss -100 entry halt/close control",
     ]
 
 
 def apply_a2_profile_preview(profile: Path) -> list[str]:
     return [
-        f"Align A2 XAU 920101 chart at {profile / 'chart02.chr'}",
+        f"Align/update A2 XAU 920101 chart at {profile / 'chart02.chr'} with H1-only smart trend gate",
         f"Attach/update A2 active daily profit/loss guardian at {profile / 'chart03.chr'}",
     ]
 
 
 def executor_inputs(lane: str, account: str, kill_switch: str, log_slug: str) -> dict[str, str]:
     return {
-        "InpRunId": f"{lane}_XAU_920101_EVENING_FORWARD_V0_20260621",
+        "InpRunId": f"{lane}_XAU_920101_EVENING_H1_ONLY_TREND_V2_20260629",
         "InpDryRunOnly": "false",
         "InpBrokerActionAllowed": "true",
         "InpCandidate": CANDIDATE,
@@ -346,6 +375,14 @@ def executor_inputs(lane: str, account: str, kill_switch: str, log_slug: str) ->
         "InpTradeSessionGateEnabled": "true",
         "InpTradeSessionStartHour": SESSION_START,
         "InpTradeSessionEndHour": SESSION_END,
+        "InpSmartTrendFilterEnabled": SMART_TREND_ENABLED,
+        "InpSmartTrendFilterShadowOnly": SMART_TREND_SHADOW_ONLY,
+        "InpSmartTrendD1LagBars": SMART_TREND_D1_LAG,
+        "InpSmartTrendH1LagBars": SMART_TREND_H1_LAG,
+        "InpSmartTrendRequireD1": SMART_TREND_REQUIRE_D1,
+        "InpSmartTrendRequireH1": SMART_TREND_REQUIRE_H1,
+        "InpSmartTrendMinD1Aligned": SMART_TREND_MIN_D1,
+        "InpSmartTrendMinH1Aligned": SMART_TREND_MIN_H1,
     }
 
 
@@ -360,7 +397,9 @@ def guardian_inputs(lane: str, account: str, halt_file: str, magic: str) -> dict
         "InpExpectedServerMarker": "Demo",
         "InpOwnerAuthorizationToken": token,
         "InpRequiredOwnerAuthorizationToken": token,
-        "InpDailyFloorAed": "100.0",
+        "InpDailyFloorAed": DAILY_FLOOR_AED,
+        "InpNextDailyFloorEnabled": "true",
+        "InpNextDailyFloorAed": NEXT_DAILY_FLOOR_AED,
         "InpHaltEntriesWhenArmed": "true",
         "InpDailyLossStopEnabled": "true",
         "InpDailyLossStopAed": "-100.0",
@@ -577,8 +616,17 @@ def row_to_dict(row: ChartRow) -> dict[str, Any]:
         "InpMaxOpenPositionsPerInstance": row.inputs.get("InpMaxOpenPositionsPerInstance", ""),
         "InpMaxEstimatedCostR": row.inputs.get("InpMaxEstimatedCostR", ""),
         "InpMaxMeasuredSpreadPoints": row.inputs.get("InpMaxMeasuredSpreadPoints", ""),
+        "InpSmartTrendFilterEnabled": row.inputs.get("InpSmartTrendFilterEnabled", ""),
+        "InpSmartTrendFilterShadowOnly": row.inputs.get("InpSmartTrendFilterShadowOnly", ""),
+        "InpSmartTrendRequireD1": row.inputs.get("InpSmartTrendRequireD1", ""),
+        "InpSmartTrendRequireH1": row.inputs.get("InpSmartTrendRequireH1", ""),
+        "InpSmartTrendMinD1Aligned": row.inputs.get("InpSmartTrendMinD1Aligned", ""),
+        "InpSmartTrendMinH1Aligned": row.inputs.get("InpSmartTrendMinH1Aligned", ""),
         "InpAllowDemoTrading": row.inputs.get("InpAllowDemoTrading", ""),
         "InpCloseActionAllowed": row.inputs.get("InpCloseActionAllowed", ""),
+        "InpDailyFloorAed": row.inputs.get("InpDailyFloorAed", ""),
+        "InpNextDailyFloorEnabled": row.inputs.get("InpNextDailyFloorEnabled", ""),
+        "InpNextDailyFloorAed": row.inputs.get("InpNextDailyFloorAed", ""),
         "InpDailyLossStopEnabled": row.inputs.get("InpDailyLossStopEnabled", ""),
         "InpDailyLossStopAed": row.inputs.get("InpDailyLossStopAed", ""),
         "InpEntryHaltFileName": row.inputs.get("InpEntryHaltFileName", ""),
@@ -606,15 +654,17 @@ def build_checks(
         if row.expert == EXECUTOR_EA
         and row.inputs.get("InpTargetSymbol") == SYMBOL
         and row.inputs.get("InpAllowedAccountLoginsCsv") == A1_ACCOUNT
+        and executor_row_is_active(row)
     ]
     a2_xau = [
         row for row in after_a2
         if row.expert == EXECUTOR_EA
         and row.inputs.get("InpTargetSymbol") == SYMBOL
         and row.inputs.get("InpAllowedAccountLoginsCsv") == A2_ACCOUNT
+        and executor_row_is_active(row)
     ]
-    check("a1_has_one_active_xau_920101_chart", len(a1_xau) == 1 and executor_row_is_active(a1_xau[0]), ",".join(row.chart for row in a1_xau))
-    check("a2_has_one_active_xau_920101_chart", len(a2_xau) == 1 and executor_row_is_active(a2_xau[0]), ",".join(row.chart for row in a2_xau))
+    check("a1_has_one_active_xau_920101_chart", len(a1_xau) == 1, ",".join(row.chart for row in a1_xau))
+    check("a2_has_one_active_xau_920101_chart", len(a2_xau) == 1, ",".join(row.chart for row in a2_xau))
     check("a1_non_spec_executors_disarmed", all(non_spec_ok(row) for row in after_a1), "A1 non-spec broker action false/dry-run true")
     check("a1_wr50_disarmed", all(row.expert != "WR50_BreakoutWideStop_v0" or row.inputs.get("InpAllowDemoTrading") == "false" for row in after_a1), "WR50 demo trading disabled")
     check("a1_guardian_active_loss_stop", any(guardian_row_ok(row, A1_ACCOUNT, "experimental_demo_kill_switch.txt") for row in after_a1), "A1 guardian active with -100 loss stop")
@@ -641,6 +691,12 @@ def executor_row_is_active(row: ChartRow) -> bool:
         and inputs.get("InpMaxEstimatedCostR") == MAX_COST_R
         and inputs.get("InpMaxMeasuredSpreadPoints") == MAX_SPREAD
         and inputs.get("InpFixedLot") == FIXED_LOT
+        and inputs.get("InpSmartTrendFilterEnabled") == SMART_TREND_ENABLED
+        and inputs.get("InpSmartTrendFilterShadowOnly") == SMART_TREND_SHADOW_ONLY
+        and inputs.get("InpSmartTrendRequireD1") == SMART_TREND_REQUIRE_D1
+        and inputs.get("InpSmartTrendRequireH1") == SMART_TREND_REQUIRE_H1
+        and inputs.get("InpSmartTrendMinD1Aligned") == SMART_TREND_MIN_D1
+        and inputs.get("InpSmartTrendMinH1Aligned") == SMART_TREND_MIN_H1
     )
 
 
@@ -658,7 +714,9 @@ def guardian_row_ok(row: ChartRow, account: str, halt_file: str) -> bool:
         and row.inputs.get("InpAllowedAccountLogin") == account
         and row.inputs.get("InpDryRunOnly") == "false"
         and row.inputs.get("InpCloseActionAllowed") == "true"
-        and row.inputs.get("InpDailyFloorAed") == "100.0"
+        and row.inputs.get("InpDailyFloorAed") == DAILY_FLOOR_AED
+        and row.inputs.get("InpNextDailyFloorEnabled") == "true"
+        and row.inputs.get("InpNextDailyFloorAed") == NEXT_DAILY_FLOOR_AED
         and row.inputs.get("InpDailyLossStopEnabled") == "true"
         and row.inputs.get("InpDailyLossStopAed") == "-100.0"
         and row.inputs.get("InpEntryHaltFileName") == halt_file
@@ -760,7 +818,7 @@ def now_utc() -> str:
 
 def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
-        "# A1/A2 920101 Maintenance Applied - 2026-06-21",
+        "# A1/A2 920101 H1-Only Smart Trend Update - 2026-06-29",
         "",
         f"Status: `{payload['status']}`",
         f"Mode: `{payload['mode']}`",
@@ -774,6 +832,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol/candidate: `{payload['scope']['symbol']} / {payload['scope']['candidate']}`",
         f"- Session server hours: `{payload['scope']['session_server_hours']}`",
         f"- Lot: `{payload['scope']['lot']}`",
+        f"- Smart trend filter: `enabled={payload['scope']['smart_trend_filter']['enabled']} shadow_only={payload['scope']['smart_trend_filter']['shadow_only']} require_D1={payload['scope']['smart_trend_filter']['d1_required']} D1>={payload['scope']['smart_trend_filter']['d1_trend_score_aligned_min']} require_H1={payload['scope']['smart_trend_filter']['h1_required']} H1>={payload['scope']['smart_trend_filter']['h1_ema20_slope_aligned_atr_min']}`",
+        f"- Daily floor / next floor: `{payload['scope']['daily_floor_aed']} / {payload['scope']['next_daily_floor_aed']}`",
         f"- A3 touched: `{payload['scope']['a3_touched']}`",
         "",
         "## Checks",
@@ -791,12 +851,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lines.append(f"| {item.get('action', '')} | `{item.get('path', '')}` |")
     lines.extend(["", "## After Runtime-Relevant Charts", ""])
     for lane in ("A1", "A2"):
-        lines.extend([f"### {lane}", "", "| Chart | Symbol | Expert | Candidate | Account | Dry-run | Broker | Session | Max open | Cost | Spread | Guardian loss | Halt file |", "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- |"])
+        lines.extend([f"### {lane}", "", "| Chart | Symbol | Expert | Candidate | Account | Dry-run | Broker | Session | Smart trend | Max open | Cost | Spread | Guardian floor | Guardian loss | Halt file |", "| --- | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- | --- |"])
         for row in payload["after"][lane]:
             if row["expert"] == "NO_EA":
                 continue
             lines.append(
-                "| {chart} | {symbol} | `{expert}` | `{candidate}` | `{account}` | `{dry}` | `{broker}` | `{session}` | `{max_open}` | `{cost}` | `{spread}` | `{loss}` | `{halt}` |".format(
+                "| {chart} | {symbol} | `{expert}` | `{candidate}` | `{account}` | `{dry}` | `{broker}` | `{session}` | `{smart}` | `{max_open}` | `{cost}` | `{spread}` | `{floor}` | `{loss}` | `{halt}` |".format(
                     chart=row["chart"],
                     symbol=row["symbol"],
                     expert=row["expert"],
@@ -805,9 +865,11 @@ def render_markdown(payload: dict[str, Any]) -> str:
                     dry=row["InpDryRunOnly"],
                     broker=row["InpBrokerActionAllowed"],
                     session=f"{row['InpTradeSessionStartHour']}->{row['InpTradeSessionEndHour']}" if row["InpTradeSessionStartHour"] else "",
+                    smart=f"{row['InpSmartTrendFilterEnabled']} shadow={row['InpSmartTrendFilterShadowOnly']} require_D1={row['InpSmartTrendRequireD1']} D1={row['InpSmartTrendMinD1Aligned']} require_H1={row['InpSmartTrendRequireH1']} H1={row['InpSmartTrendMinH1Aligned']}",
                     max_open=row["InpMaxOpenPositionsPerInstance"],
                     cost=row["InpMaxEstimatedCostR"],
                     spread=row["InpMaxMeasuredSpreadPoints"],
+                    floor=f"{row['InpDailyFloorAed']} next={row['InpNextDailyFloorAed']}".strip(),
                     loss=f"{row['InpDailyLossStopEnabled']} {row['InpDailyLossStopAed']}".strip(),
                     halt=row["InpEntryHaltFileName"],
                 )

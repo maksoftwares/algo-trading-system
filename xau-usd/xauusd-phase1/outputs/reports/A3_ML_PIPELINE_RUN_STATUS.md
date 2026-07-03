@@ -1,7 +1,7 @@
 # A3 ML Pipeline Run Status
 
-Overall status: NOT_READY
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Overall status: FAIL_CLOSED
+Dataset version: xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066
 Publish requested: false
 
 ## Stage Summary
@@ -25,18 +25,17 @@ Publish requested: false
 | C01 feature/data audit | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\C02_C01_DATA_AUDIT.json |
 | C03 readiness | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\C03_TRAINING_READINESS_REPORT.json |
 | C05 train or refuse | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_TRAINING_STATUS.json |
-| C04 shadow bridge | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_SHADOW_BRIDGE_STATUS.json |
-| C06 EA handoff | PASS | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_EA_HANDOFF_STATUS.json |
+| C04 shadow bridge | FAIL_CLOSED |  |
+| C06 EA handoff | SKIPPED |  |
 
 ## Current Blocker
 
-C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE
+C03 readiness is not PASS: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; active_weeks observed 4.07 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE
 
 ## Failed C03 Gates
 
 - dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher
-- market_setup_groups observed 223 required >=300
-- active_weeks observed 3.37 required >=8
+- active_weeks observed 4.07 required >=8
 - at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes
 - feature_budget observed 0 required >=6
 - slippage_readiness observed INSUFFICIENT required ADEQUATE

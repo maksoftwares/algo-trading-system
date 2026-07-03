@@ -27,6 +27,8 @@ SOURCE_PARTS = ("mt5", "scripts")
 IGNORED_PARTS = {"__pycache__", ".pytest_cache", ".venv", "outputs", "docs"}
 
 ALLOWED_EXPERIMENTAL_DEMO_EXECUTION_FILES = {
+    "A1XauM5MomentumContinuationExecutor.mq5",
+    "Account1DailyProfitFloorGuardian.mq5",
     "Account3ProfitLockExitManager.mq5",
     "Account3RoundRetestGuardedExecutor.mq5",
     "Account3RoundRetestStructuredExecutor.mq5",
@@ -56,7 +58,7 @@ class BrokerActionPolicy:
 
 EXPERIMENTAL_POLICIES: dict[str, BrokerActionPolicy] = {
     "mt5/Experts/Phase2ExperimentalDemoExecutor.mq5": BrokerActionPolicy(
-        allowed_terms=("Order" + "Send", "TRADE_ACTION_" + "DEAL"),
+        allowed_terms=("Order" + "Send", "TRADE_ACTION_" + "DEAL", "TRADE_ACTION_" + "SLTP"),
         required_tokens=(
             "input bool InpBrokerActionAllowed = false;",
             "InpDryRunOnly || !InpBrokerActionAllowed",
@@ -73,6 +75,49 @@ EXPERIMENTAL_POLICIES: dict[str, BrokerActionPolicy] = {
             "ContainsText(server, \"real\")",
             "InpMaxEstimatedCostR = 0.00",
             "InpMaxMeasuredSpreadPoints = 0.0",
+        ),
+    ),
+    "mt5/Experts/Account1DailyProfitFloorGuardian.mq5": BrokerActionPolicy(
+        allowed_terms=("Order" + "Send", "TRADE_ACTION_" + "DEAL"),
+        required_tokens=(
+            "input bool InpDryRunOnly = true;",
+            "input bool InpCloseActionAllowed = false;",
+            "input long InpAllowedAccountLogin = 1025742;",
+            "input string InpExpectedServerMarker = \"Demo\";",
+            "input string InpOwnerAuthorizationToken = \"\";",
+            "input string InpRequiredOwnerAuthorizationToken = \"A1_DAILY_PROFIT_FLOOR_OWNER_AUTHORIZED_20260618\";",
+            "InpDryRunOnly || !InpCloseActionAllowed",
+            "OwnerTokenValid()",
+            "GuardianKillSwitchActive()",
+            "ContainsText(server, \"live\")",
+            "ContainsText(server, \"real\")",
+            "InpEntryHaltFileName",
+            "InpGuardianMagic = 919100",
+        ),
+    ),
+    "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5": BrokerActionPolicy(
+        allowed_terms=(
+            "C" + "Trade",
+            "trade" + ".Buy",
+            "trade" + ".Sell",
+            "Order" + "Send",
+            "TRADE_ACTION_" + "SLTP",
+        ),
+        required_tokens=(
+            "input bool   InpAllowDemoTrading              = false;",
+            "input bool   InpAllowNonDemoAccounts          = false;",
+            "input long   InpAllowedAccountLogin           = 0;",
+            "input string InpExpectedServerMarker          = \"Demo\";",
+            "input long   InpMagicNumber                   = 932200;",
+            "input double InpFixedLots                     = 0.01;",
+            "input MomentumSignalMode InpSignalMode        = SIGNAL_BREAK_AND_RUN;",
+            "input bool   InpProfitProtectionEnabled       = false;",
+            "input bool   InpProfitProtectionShadowOnly    = true;",
+            "ACCOUNT_TRADE_MODE_DEMO",
+            "_Symbol != InpTargetSymbol",
+            "KillSwitchPresent()",
+            "InpMaxEstimatedCostR",
+            "InpMaxSpreadPoints",
         ),
     ),
     "mt5/Experts/Phase2ExperimentalDemoRepairExecutor.mq5": BrokerActionPolicy(

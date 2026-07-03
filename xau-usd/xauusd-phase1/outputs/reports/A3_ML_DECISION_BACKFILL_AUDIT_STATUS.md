@@ -1,13 +1,13 @@
 # A3 ML Decision Backfill Audit
 
-Overall status: CURRENT_SCOPE_EXHAUSTED_OUT_OF_SCOPE_BACKFILL_FOUND
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Overall status: CURRENT_SCOPE_UNCATALOGED_BACKFILL_FOUND
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
-- Signal-like CSV files scanned: 113
-- Current-scope would-signal rows: 574
-- Uncataloged current-scope files: 0
+- Signal-like CSV files scanned: 119
+- Current-scope would-signal rows: 887
+- Uncataloged current-scope files: 3
 - Out-of-scope would-signal rows: 2747
 - Out-of-scope estimated groups: 1381
 
@@ -22,7 +22,11 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 
 ## Uncataloged Current Scope
 
-No uncataloged current-scope files found.
+| Account | File | Rows | Min | Max |
+| --- | --- | --- | --- | --- |
+| A1 | a3_demo_fill_collection_a1_signal_log_xauusd.csv | 4 | 2026-06-22T14:04:55Z | 2026-06-22T17:34:55Z |
+| A2 | a3_demo_fill_collection_a2_signal_log_xauusd.csv | 4 | 2026-06-22T14:04:55Z | 2026-06-22T17:34:55Z |
+| A3 | a3_demo_fill_collection_a3_signal_log_xauusd.csv | 4 | 2026-06-22T14:04:55Z | 2026-06-22T17:34:55Z |
 
 ## Out-Of-Scope Candidates
 
@@ -53,4 +57,4 @@ No uncataloged current-scope files found.
 
 ## Next
 
-Do not import out-of-scope rows into the locked model. Ask reviewer to approve or reject a multi-family C02/C03 contract expansion.
+Review uncataloged current-scope files, add only contract-compatible logs to the C02 catalogs, then rerun C08/C03.

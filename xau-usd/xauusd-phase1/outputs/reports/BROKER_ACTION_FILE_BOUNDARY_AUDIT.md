@@ -4,7 +4,7 @@ Overall status: FAIL
 
 This audit classifies broker-action MQL files. A PASS does not authorize Phase 2, demo execution, broker execution, or live capital.
 
-Findings: 2
+Findings: 8
 
 ## MQL File Classification
 
@@ -12,7 +12,18 @@ Findings: 2
 | --- | --- | --- | --- | --- |
 | xau-usd\xauusd-phase0\mt5\PassiveBarExporter_Phase0.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase0\mt5\PassiveSpreadLogger_XAUUSD.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\A1XauM5MomentumContinuationExecutor.mq5 | forbidden_broker_action_in_canonical_path | OrderSend, CTrade, trade.Buy, trade.Sell | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\A3MlPredictionObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account1DailyProfitFloorGuardian.mq5 | forbidden_broker_action_in_canonical_path | OrderSend | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3BreakoutImprovedExecutor.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3BreakoutPlainExecutor.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3BreakoutTier1CompatExecutor.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3ProfitLockExitManager.mq5 | forbidden_broker_action_in_canonical_path | OrderSend | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3RoundRetestGuardedExecutor.mq5 | forbidden_broker_action_in_canonical_path | OrderSend | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3RoundRetestStructuredExecutor.mq5 | forbidden_broker_action_in_canonical_path | OrderSend | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Experts\Account3SoftRetestExecutor.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\AccountEquityGuardianShadow.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Experts\DirectionStatePublisher.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase1DryRunShell.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2ExperimentalDemoObserver.mq5 | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
@@ -23,6 +34,10 @@ Findings: 2
 | xau-usd\xauusd-phase1\mt5\Experts\Phase2WeaknessBreakoutRetestExecutor.mq5 | approved_experimental_quarantined | OrderSend | PASS | guarded experimental broker-action file |
 | xau-usd\xauusd-phase1\mt5\Experts\W1D1MomentumContinuationExperimental.mq5 | forbidden_broker_action_in_canonical_path | CTrade, trade.Buy, trade.Sell | FAIL | Broker-action token outside approved experimental path. |
 | xau-usd\xauusd-phase1\mt5\Experts\W1D1MomentumM5ContinuationExperimental.mq5 | forbidden_broker_action_in_canonical_path | CTrade, trade.Buy, trade.Sell | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Include\A3BreakoutExecutorBase.mqh | forbidden_broker_action_in_canonical_path | OrderSend | FAIL | Broker-action token outside approved experimental path. |
+| xau-usd\xauusd-phase1\mt5\Include\A3MlEaHandoff.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Include\A3MlShadowTap.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
+| xau-usd\xauusd-phase1\mt5\Include\DirectionStateShadow.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1BreakoutRetest.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Dashboard.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |
 | xau-usd\xauusd-phase1\mt5\Include\Phase1\Phase1Execution.mqh | canonical_or_passive_no_broker_action | none | PASS | No broker-action tokens. |

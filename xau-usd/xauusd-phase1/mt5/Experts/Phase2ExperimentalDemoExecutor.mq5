@@ -29,6 +29,7 @@ input string InpAuthorizedCandidatesCsv = "breakout_retest";
 input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v02.csv";
 input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
 input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
+input string InpManagementLogFileName = "experimental_demo_executor_management_log_v02.csv";
 input string InpDirectionStateFileName = "dirstate_xauusd.csv";
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
@@ -45,6 +46,24 @@ input double InpMaxMeasuredSpreadPoints = 0.0;
 input bool InpTradeSessionGateEnabled = false;
 input int InpTradeSessionStartHour = 0;
 input int InpTradeSessionEndHour = 23;
+input bool InpSmartTrendFilterEnabled = false;
+input bool InpSmartTrendFilterShadowOnly = true;
+input int InpSmartTrendD1LagBars = 5;
+input int InpSmartTrendH1LagBars = 3;
+input bool InpSmartTrendRequireD1 = true;
+input bool InpSmartTrendRequireH1 = true;
+input double InpSmartTrendMinD1Aligned = 0.25;
+input double InpSmartTrendMinH1Aligned = 0.35;
+input bool InpFastStopoutFilterEnabled = false;
+input bool InpFastStopoutFilterShadowOnly = true;
+input double InpFastStopoutMinStopPoints = 0.0;
+input double InpFastStopoutMinConfirmationBodyRange = 0.0;
+input double InpFastStopoutMinCloseLocation = 0.0;
+input bool InpProfitProtectionEnabled = false;
+input bool InpProfitProtectionShadowOnly = true;
+input double InpProfitProtectionTriggerR = 1.25;
+input double InpProfitProtectionLockR = 0.80;
+input string InpDirectionMode = "BOTH"; // BOTH, LONG_ONLY, SHORT_ONLY
 
 CPhase1BreakoutRetestObserver g_breakout_observer;
 datetime g_last_m5_bar_time = 0;
@@ -102,6 +121,20 @@ bool CsvContainsTextToken(const string csv, const string wanted)
    return false;
 }
 
+bool DirectionModeAllows(const string direction_text)
+{
+   string mode = InpDirectionMode;
+   StringToUpper(mode);
+   int direction = SignalDirectionSign(direction_text);
+   if(mode == "" || mode == "BOTH" || mode == "ALL")
+      return true;
+   if((mode == "LONG_ONLY" || mode == "BUY_ONLY" || mode == "LONG") && direction > 0)
+      return true;
+   if((mode == "SHORT_ONLY" || mode == "SELL_ONLY" || mode == "SHORT") && direction < 0)
+      return true;
+   return false;
+}
+
 bool AccountLoginWhitelisted()
 {
    return CsvContainsTextToken(InpAllowedAccountLoginsCsv, IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)));
@@ -144,6 +177,179 @@ double EstimatedCostRForObservation(const Phase1BreakoutRetestObservation &obser
    if(point <= 0.0 || risk_price <= 0.0)
       return 0.0;
    return spread_points * point / risk_price;
+}
+
+int SignalDirectionSign(const string direction_text)
+{
+   if(direction_text == "LONG" || direction_text == "BUY")
+      return 1;
+   if(direction_text == "SHORT" || direction_text == "SELL")
+      return -1;
+   return 0;
+}
+
+bool CopyIndicatorValue(const int handle, const int shift, double &value)
+{
+   if(handle == INVALID_HANDLE)
+      return false;
+   double buffer[];
+   ArraySetAsSeries(buffer, true);
+   int copied = CopyBuffer(handle, 0, shift, 1, buffer);
+   if(copied != 1)
+      return false;
+   value = buffer[0];
+   return value != EMPTY_VALUE && MathIsValidNumber(value);
+}
+
+bool Ema20Value(const ENUM_TIMEFRAMES timeframe, const int shift, double &value)
+{
+   int handle = iMA(_Symbol, timeframe, 20, 0, MODE_EMA, PRICE_CLOSE);
+   bool ok = CopyIndicatorValue(handle, shift, value);
+   if(handle != INVALID_HANDLE)
+      IndicatorRelease(handle);
+   return ok;
+}
+
+bool Atr14Value(const ENUM_TIMEFRAMES timeframe, const int shift, double &value)
+{
+   int handle = iATR(_Symbol, timeframe, 14);
+   bool ok = CopyIndicatorValue(handle, shift, value);
+   if(handle != INVALID_HANDLE)
+      IndicatorRelease(handle);
+   return ok && value > 0.0;
+}
+
+bool AlignedEmaSlopeAtr(
+   const ENUM_TIMEFRAMES timeframe,
+   const int lag_bars,
+   const int direction_sign,
+   double &score
+)
+{
+   score = 0.0;
+   if(lag_bars < 1 || direction_sign == 0)
+      return false;
+   if(Bars(_Symbol, timeframe) <= lag_bars + 20)
+      return false;
+
+   double current_ema = 0.0;
+   double previous_ema = 0.0;
+   double atr = 0.0;
+   if(!Ema20Value(timeframe, 1, current_ema))
+      return false;
+   if(!Ema20Value(timeframe, 1 + lag_bars, previous_ema))
+      return false;
+   if(!Atr14Value(timeframe, 1, atr))
+      return false;
+
+   score = direction_sign * (current_ema - previous_ema) / atr;
+   return MathIsValidNumber(score);
+}
+
+bool SmartTrendFilterPass(const Phase1BreakoutRetestObservation &observation, string &guard_reason)
+{
+   if(!InpSmartTrendFilterEnabled)
+      return true;
+   int direction_sign = SignalDirectionSign(observation.direction_text);
+   if(direction_sign == 0)
+   {
+      guard_reason = "SMART_TREND_NO_DIRECTION";
+      return false;
+   }
+
+   double d1_score = 0.0;
+   double h1_score = 0.0;
+   bool d1_available = AlignedEmaSlopeAtr(PERIOD_D1, InpSmartTrendD1LagBars, direction_sign, d1_score);
+   bool h1_available = AlignedEmaSlopeAtr(PERIOD_H1, InpSmartTrendH1LagBars, direction_sign, h1_score);
+   string d1_text = d1_available ? DoubleToString(d1_score, 4) : "NA";
+   string h1_text = h1_available ? DoubleToString(h1_score, 4) : "NA";
+
+   if(InpSmartTrendRequireD1 && !d1_available)
+   {
+      guard_reason = "SMART_TREND_D1_UNAVAILABLE";
+      return false;
+   }
+   if(InpSmartTrendRequireH1 && !h1_available)
+   {
+      guard_reason = "SMART_TREND_H1_UNAVAILABLE";
+      return false;
+   }
+   if(InpSmartTrendRequireD1 && d1_score < InpSmartTrendMinD1Aligned)
+   {
+      guard_reason = "SMART_TREND_D1_BLOCK_d1=" + DoubleToString(d1_score, 4) + "_min=" + DoubleToString(InpSmartTrendMinD1Aligned, 4);
+      return false;
+   }
+   if(InpSmartTrendRequireH1 && h1_score < InpSmartTrendMinH1Aligned)
+   {
+      guard_reason = "SMART_TREND_H1_BLOCK_h1=" + DoubleToString(h1_score, 4) + "_min=" + DoubleToString(InpSmartTrendMinH1Aligned, 4);
+      return false;
+   }
+   guard_reason = "SMART_TREND_PASS_d1=" + d1_text + "_h1=" + h1_text + "_require_d1=" + BoolText(InpSmartTrendRequireD1) + "_require_h1=" + BoolText(InpSmartTrendRequireH1);
+   return true;
+}
+
+bool FastStopoutFilterPass(const Phase1BreakoutRetestObservation &observation, string &guard_reason)
+{
+   if(!InpFastStopoutFilterEnabled)
+      return true;
+
+   if(InpFastStopoutMinStopPoints > 0.0 && observation.stop_distance_points < InpFastStopoutMinStopPoints)
+   {
+      guard_reason = "FAST_STOPOUT_MIN_STOP_BLOCK_stop="
+         + DoubleToString(observation.stop_distance_points, 2)
+         + "_min=" + DoubleToString(InpFastStopoutMinStopPoints, 2);
+      return false;
+   }
+
+   int shift = observation.confirmation_shift;
+   if(shift < 1)
+      shift = 1;
+   double open_price = iOpen(_Symbol, PERIOD_M5, shift);
+   double high_price = iHigh(_Symbol, PERIOD_M5, shift);
+   double low_price = iLow(_Symbol, PERIOD_M5, shift);
+   double close_price = iClose(_Symbol, PERIOD_M5, shift);
+   if(open_price <= 0.0 || high_price <= 0.0 || low_price <= 0.0 || close_price <= 0.0 || high_price <= low_price)
+   {
+      guard_reason = "FAST_STOPOUT_CONFIRMATION_CONTEXT_UNAVAILABLE";
+      return false;
+   }
+
+   double range = high_price - low_price;
+   double body_ratio = range > 0.0 ? MathAbs(close_price - open_price) / range : 0.0;
+   double close_location = range > 0.0 ? (close_price - low_price) / range : 0.5;
+
+   if(InpFastStopoutMinConfirmationBodyRange > 0.0 && body_ratio < InpFastStopoutMinConfirmationBodyRange)
+   {
+      guard_reason = "FAST_STOPOUT_BODY_BLOCK_body="
+         + DoubleToString(body_ratio, 4)
+         + "_min=" + DoubleToString(InpFastStopoutMinConfirmationBodyRange, 4);
+      return false;
+   }
+
+   if(InpFastStopoutMinCloseLocation > 0.0)
+   {
+      int direction = SignalDirectionSign(observation.direction_text);
+      if(direction > 0 && close_location < InpFastStopoutMinCloseLocation)
+      {
+         guard_reason = "FAST_STOPOUT_LONG_CLOSE_LOCATION_BLOCK_loc="
+            + DoubleToString(close_location, 4)
+            + "_min=" + DoubleToString(InpFastStopoutMinCloseLocation, 4);
+         return false;
+      }
+      if(direction < 0 && close_location > 1.0 - InpFastStopoutMinCloseLocation)
+      {
+         guard_reason = "FAST_STOPOUT_SHORT_CLOSE_LOCATION_BLOCK_loc="
+            + DoubleToString(close_location, 4)
+            + "_max=" + DoubleToString(1.0 - InpFastStopoutMinCloseLocation, 4);
+         return false;
+      }
+   }
+
+   guard_reason = "FAST_STOPOUT_PASS_stop="
+      + DoubleToString(observation.stop_distance_points, 2)
+      + "_body=" + DoubleToString(body_ratio, 4)
+      + "_close_loc=" + DoubleToString(close_location, 4);
+   return true;
 }
 
 bool IsAllowedCandidate(const string candidate)
@@ -846,6 +1052,41 @@ bool EnsureOrderLogHeader()
    return AppendCsvRow(InpOrderLogFileName, header);
 }
 
+bool EnsureManagementLogHeader()
+{
+   if(FileIsExist(InpManagementLogFileName))
+      return true;
+
+   string header[] = {
+      "timestamp_broker",
+      "timestamp_utc",
+      "timestamp_local",
+      "run_id",
+      "account_server",
+      "account_login",
+      "symbol",
+      "candidate",
+      "magic",
+      "action",
+      "position_ticket",
+      "direction",
+      "volume",
+      "open_price",
+      "initial_sl",
+      "current_sl",
+      "desired_sl",
+      "tp",
+      "unrealized_r",
+      "trigger_r",
+      "lock_r",
+      "shadow_only",
+      "retcode",
+      "retcode_description",
+      "reason"
+   };
+   return AppendCsvRow(InpManagementLogFileName, header);
+}
+
 int CandidateMagicOffset(const string candidate)
 {
    if(candidate == "breakout_retest")
@@ -879,6 +1120,238 @@ int SymbolMagicOffset(const string symbol_name)
 long InstanceMagic()
 {
    return 920000 + CandidateMagicOffset(InpCandidate) * 10 + SymbolMagicOffset(_Symbol);
+}
+
+string ProfitProtectionStateName(const string prefix, const ulong ticket)
+{
+   return prefix
+      + "_"
+      + IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN))
+      + "_"
+      + IntegerToString((int)InstanceMagic())
+      + "_"
+      + IntegerToString((int)ticket);
+}
+
+double InitialStopForPosition(const ulong ticket, const double current_sl)
+{
+   string name = ProfitProtectionStateName("P2EXP_INITIAL_SL", ticket);
+   if(GlobalVariableCheck(name))
+      return GlobalVariableGet(name);
+   if(current_sl > 0.0)
+      GlobalVariableSet(name, current_sl);
+   return current_sl;
+}
+
+double PositionRiskPrice(const ENUM_POSITION_TYPE type, const double open_price, const double initial_sl)
+{
+   if(initial_sl <= 0.0)
+      return 0.0;
+   if(type == POSITION_TYPE_BUY && initial_sl >= open_price)
+      return 0.0;
+   if(type == POSITION_TYPE_SELL && initial_sl <= open_price)
+      return 0.0;
+   return MathAbs(open_price - initial_sl);
+}
+
+double PositionUnrealizedR(
+   const ENUM_POSITION_TYPE type,
+   const double open_price,
+   const double risk_price,
+   const double bid,
+   const double ask
+)
+{
+   if(risk_price <= 0.0)
+      return 0.0;
+   if(type == POSITION_TYPE_BUY)
+      return (bid - open_price) / risk_price;
+   if(type == POSITION_TYPE_SELL)
+      return (open_price - ask) / risk_price;
+   return 0.0;
+}
+
+bool StopImprovesOnly(const ENUM_POSITION_TYPE type, const double current_sl, const double desired_sl)
+{
+   if(desired_sl <= 0.0)
+      return false;
+   if(type == POSITION_TYPE_BUY)
+      return current_sl <= 0.0 || desired_sl > current_sl;
+   if(type == POSITION_TYPE_SELL)
+      return current_sl <= 0.0 || desired_sl < current_sl;
+   return false;
+}
+
+bool StopRespectsBrokerDistance(const ENUM_POSITION_TYPE type, const string symbol, const double desired_sl, string &reason)
+{
+   double point = SymbolInfoDouble(symbol, SYMBOL_POINT);
+   if(point <= 0.0)
+   {
+      reason = "NO_SYMBOL_POINT";
+      return false;
+   }
+   double stop_level = (double)SymbolInfoInteger(symbol, SYMBOL_TRADE_STOPS_LEVEL) * point;
+   double freeze_level = (double)SymbolInfoInteger(symbol, SYMBOL_TRADE_FREEZE_LEVEL) * point;
+   double min_distance = MathMax(stop_level, freeze_level);
+   double bid = SymbolInfoDouble(symbol, SYMBOL_BID);
+   double ask = SymbolInfoDouble(symbol, SYMBOL_ASK);
+   if(type == POSITION_TYPE_BUY && desired_sl > bid - min_distance)
+   {
+      reason = "BUY_SL_TOO_CLOSE_TO_BID";
+      return false;
+   }
+   if(type == POSITION_TYPE_SELL && desired_sl < ask + min_distance)
+   {
+      reason = "SELL_SL_TOO_CLOSE_TO_ASK";
+      return false;
+   }
+   reason = "OK";
+   return true;
+}
+
+void WriteManagementRow(
+   const string action,
+   const ulong ticket,
+   const ENUM_POSITION_TYPE type,
+   const double volume,
+   const double open_price,
+   const double initial_sl,
+   const double current_sl,
+   const double desired_sl,
+   const double tp,
+   const double unrealized_r,
+   const double trigger_r,
+   const double lock_r,
+   const uint retcode,
+   const string retcode_description,
+   const string reason
+)
+{
+   int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   string row[] = {
+      TimeToString(TimeCurrent(), TIME_DATE | TIME_SECONDS),
+      TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
+      TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
+      InpRunId,
+      AccountInfoString(ACCOUNT_SERVER),
+      IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
+      _Symbol,
+      InpCandidate,
+      IntegerToString((int)InstanceMagic()),
+      action,
+      IntegerToString((int)ticket),
+      type == POSITION_TYPE_BUY ? "BUY" : "SELL",
+      DoubleToString(volume, 2),
+      DoubleToString(open_price, digits),
+      DoubleToString(initial_sl, digits),
+      DoubleToString(current_sl, digits),
+      DoubleToString(desired_sl, digits),
+      DoubleToString(tp, digits),
+      DoubleToString(unrealized_r, 4),
+      DoubleToString(trigger_r, 2),
+      DoubleToString(lock_r, 2),
+      BoolText(InpProfitProtectionShadowOnly),
+      IntegerToString((int)retcode),
+      retcode_description,
+      reason
+   };
+   AppendCsvRow(InpManagementLogFileName, row);
+}
+
+bool ModifyStopLossOnly(const ulong ticket, const double desired_sl, const double tp, MqlTradeResult &result)
+{
+   MqlTradeRequest request;
+   ZeroMemory(request);
+   ZeroMemory(result);
+   request.action = TRADE_ACTION_SLTP;
+   request.position = ticket;
+   request.symbol = _Symbol;
+   request.magic = InstanceMagic();
+   request.sl = desired_sl;
+   request.tp = tp;
+   request.deviation = InpDeviationPoints;
+   return OrderSend(request, result);
+}
+
+void ManageProfitProtectionForCurrentPosition()
+{
+   if(!InpProfitProtectionEnabled)
+      return;
+   if(PositionGetString(POSITION_SYMBOL) != _Symbol)
+      return;
+   if(PositionGetInteger(POSITION_MAGIC) != InstanceMagic())
+      return;
+
+   ulong ticket = (ulong)PositionGetInteger(POSITION_TICKET);
+   ENUM_POSITION_TYPE type = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
+   double volume = PositionGetDouble(POSITION_VOLUME);
+   double open_price = PositionGetDouble(POSITION_PRICE_OPEN);
+   double current_sl = PositionGetDouble(POSITION_SL);
+   double tp = PositionGetDouble(POSITION_TP);
+   double initial_sl = InitialStopForPosition(ticket, current_sl);
+   double risk_price = PositionRiskPrice(type, open_price, initial_sl);
+   if(risk_price <= 0.0)
+   {
+      WriteManagementRow("PROFIT_PROTECTION_SKIP_INVALID_INITIAL_RISK", ticket, type, volume, open_price, initial_sl, current_sl, current_sl, tp, 0.0, InpProfitProtectionTriggerR, InpProfitProtectionLockR, 0, "initial SL missing or invalid", "invalid_initial_risk");
+      return;
+   }
+
+   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   double unrealized_r = PositionUnrealizedR(type, open_price, risk_price, bid, ask);
+   if(unrealized_r < InpProfitProtectionTriggerR)
+      return;
+
+   int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   double desired_sl = type == POSITION_TYPE_BUY
+      ? open_price + InpProfitProtectionLockR * risk_price
+      : open_price - InpProfitProtectionLockR * risk_price;
+   desired_sl = NormalizeDouble(desired_sl, digits);
+   if(!StopImprovesOnly(type, current_sl, desired_sl))
+      return;
+
+   string distance_reason = "";
+   if(!StopRespectsBrokerDistance(type, _Symbol, desired_sl, distance_reason))
+   {
+      WriteManagementRow("PROFIT_PROTECTION_DEFER_STOPS_LEVEL", ticket, type, volume, open_price, initial_sl, current_sl, desired_sl, tp, unrealized_r, InpProfitProtectionTriggerR, InpProfitProtectionLockR, 0, distance_reason, "broker_distance");
+      return;
+   }
+
+   if(KillSwitchActive())
+   {
+      WriteManagementRow("PROFIT_PROTECTION_KILL_SWITCH_BLOCK", ticket, type, volume, open_price, initial_sl, current_sl, desired_sl, tp, unrealized_r, InpProfitProtectionTriggerR, InpProfitProtectionLockR, 0, "kill switch active", "kill_switch_active");
+      return;
+   }
+
+   if(InpProfitProtectionShadowOnly)
+   {
+      string shadow_state = ProfitProtectionStateName("P2EXP_PROTECTION_SHADOW_LOGGED", ticket);
+      if(!GlobalVariableCheck(shadow_state))
+      {
+         GlobalVariableSet(shadow_state, TimeCurrent());
+         WriteManagementRow("PROFIT_PROTECTION_SHADOW_WOULD_MOVE_SL", ticket, type, volume, open_price, initial_sl, current_sl, desired_sl, tp, unrealized_r, InpProfitProtectionTriggerR, InpProfitProtectionLockR, 0, "shadow only", "shadow_only");
+      }
+      return;
+   }
+
+   MqlTradeResult result;
+   bool sent = ModifyStopLossOnly(ticket, desired_sl, tp, result);
+   WriteManagementRow(sent ? "PROFIT_PROTECTION_SLTP_SENT" : "PROFIT_PROTECTION_SLTP_FAILED", ticket, type, volume, open_price, initial_sl, current_sl, desired_sl, tp, unrealized_r, InpProfitProtectionTriggerR, InpProfitProtectionLockR, result.retcode, result.comment, "profit_lock_triggered");
+}
+
+void ManageOpenPositions()
+{
+   if(!InpProfitProtectionEnabled)
+      return;
+   for(int index = PositionsTotal() - 1; index >= 0; index--)
+   {
+      ulong ticket = PositionGetTicket(index);
+      if(ticket == 0)
+         continue;
+      if(!PositionSelectByTicket(ticket))
+         continue;
+      ManageProfitProtectionForCurrentPosition();
+   }
 }
 
 int FamilyCodeForMagic(const long magic)
@@ -1311,9 +1784,21 @@ bool TradingGuardsPass(
       guard_reason = "no_signal";
       return false;
    }
+   if(!DirectionModeAllows(observation.direction_text))
+   {
+      guard_reason = "direction_mode_block";
+      return false;
+   }
    if(!ServerHourInTradeSession())
    {
       guard_reason = "server_hour_session_gate";
+      return false;
+   }
+   string smart_trend_reason = "";
+   bool smart_trend_pass = SmartTrendFilterPass(observation, smart_trend_reason);
+   if(InpSmartTrendFilterEnabled && !InpSmartTrendFilterShadowOnly && !smart_trend_pass)
+   {
+      guard_reason = smart_trend_reason;
       return false;
    }
    if(observation.entry_price <= 0.0 || observation.stop_loss <= 0.0 || observation.take_profit <= 0.0)
@@ -1329,6 +1814,13 @@ bool TradingGuardsPass(
    if(InpMaxEstimatedCostR > 0.0 && estimated_cost_r > InpMaxEstimatedCostR)
    {
       guard_reason = "estimated_cost_r_exceeds_threshold";
+      return false;
+   }
+   string fast_stopout_reason = "";
+   bool fast_stopout_pass = FastStopoutFilterPass(observation, fast_stopout_reason);
+   if(InpFastStopoutFilterEnabled && !InpFastStopoutFilterShadowOnly && !fast_stopout_pass)
+   {
+      guard_reason = fast_stopout_reason;
       return false;
    }
    if(InpMaxOrdersPerDay > 0 && g_orders_today >= InpMaxOrdersPerDay)
@@ -1549,7 +2041,7 @@ int OnInit()
       return INIT_FAILED;
    }
 
-   if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader())
+   if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader() || !EnsureManagementLogHeader())
       return INIT_FAILED;
 
    string gv_mutex_self_test_status = "";
@@ -1599,8 +2091,14 @@ void OnDeinit(const int reason)
    AppendCsvRow(InpStartupLogFileName, row);
 }
 
+void OnTick()
+{
+   ManageOpenPositions();
+}
+
 void OnTimer()
 {
+   ManageOpenPositions();
    ExpireFamilyMutexClaim();
    datetime m5_bar_time = iTime(_Symbol, PERIOD_M5, 0);
    if(m5_bar_time <= 0 || m5_bar_time == g_last_m5_bar_time)

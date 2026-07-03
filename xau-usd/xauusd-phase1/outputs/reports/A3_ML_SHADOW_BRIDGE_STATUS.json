@@ -1,9 +1,9 @@
 {
   "status": "DISABLED_FAIL_CLOSED",
   "stage": "A3-ML-SHADOW-BRIDGE",
-  "created_at_utc": "2026-06-22T06:03:15Z",
+  "created_at_utc": "2026-06-26T23:04:13Z",
   "schema_version": "a3_ml_shadow_predictions_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "readiness_status": "NO_GO",
   "authorization": {
     "training_authorized": false,
@@ -20,13 +20,12 @@
   },
   "outputs": {
     "predictions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHADOW_PREDICTIONS.csv",
-    "predictions_sha256": "ef4560a069ee9a280e133251b331208b3f8d681a973694ebe032bb3ac3f1eed7",
-    "rows": 349
+    "predictions_sha256": "e508214111f82817912f15f6c9506ffa75d632d909985426354a39c83cb59a05",
+    "rows": 633
   },
   "readiness_failures": [
     "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
-    "market_setup_groups observed 223 required >=300",
-    "active_weeks observed 3.37 required >=8",
+    "active_weeks observed 4.07 required >=8",
     "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
     "feature_budget observed 0 required >=6",
     "slippage_readiness observed INSUFFICIENT required ADEQUATE"

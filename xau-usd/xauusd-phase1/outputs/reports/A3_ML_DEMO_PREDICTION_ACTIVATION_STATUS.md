@@ -1,7 +1,7 @@
 # A3 ML Demo Prediction Activation Status
 
 Overall status: WAITING_FOR_DATA
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Stage Summary
 
@@ -30,7 +30,7 @@ No actions ran.
 
 | Check | Passed | Detail |
 | --- | --- | --- |
-| c03_readiness_pass | false | dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE |
+| c03_readiness_pass | false | dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 282 required >=300; active_weeks observed 3.78 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE |
 | c05_model_trained | false | observed=REFUSED_NOT_READY required=TRAINED_SHADOW_ONLY |
 | c04_shadow_bridge_ready | false | observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY |
 | c04_python_predictions_authorized | false | observed=False required=true |
@@ -46,7 +46,7 @@ No actions ran.
 
 ## Blockers
 
-- c03_readiness_pass: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 223 required >=300; active_weeks observed 3.37 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE
+- c03_readiness_pass: dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher; market_setup_groups observed 282 required >=300; active_weeks observed 3.78 required >=8; at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes; feature_budget observed 0 required >=6; slippage_readiness observed INSUFFICIENT required ADEQUATE
 - c05_model_trained: observed=REFUSED_NOT_READY required=TRAINED_SHADOW_ONLY
 - c04_shadow_bridge_ready: observed=DISABLED_FAIL_CLOSED required=READY_SHADOW_ONLY
 - c04_python_predictions_authorized: observed=False required=true

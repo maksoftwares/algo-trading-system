@@ -1,14 +1,14 @@
 # A3 ML Demo Prediction Action Packet
 
 Overall status: WAITING_FOR_DATA
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
 | Item | Status |
 | --- | --- |
 | c23_status | WAITING_FOR_DATA |
-| c11_status | WAITING_FOR_DECISION_HISTORY |
+| c11_status | GAP_REMAINS |
 | c15_status | MANUAL_ATTACH_REQUIRED |
 | c18_status | REHEARSED_RESEARCH_ONLY |
 | c20_status | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS |
@@ -27,8 +27,8 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 | Gate | Observed | Required | Gap |
 | --- | --- | --- | --- |
 | dataset_status | PIPELINE_ONLY | EXPLORATORY_MODEL or higher | needs different category/state |
-| market_setup_groups | 223 | >=300 | 77 |
-| active_weeks | 3.37 | >=8 | 4.63 weeks |
+| market_setup_groups | 282 | >=300 | 18 |
+| active_weeks | 3.78 | >=8 | 4.22 weeks |
 | at_least_two_regimes | FALLING | >=2 non-UNKNOWN regimes | needs different category/state |
 | feature_budget | 0 | >=6 | 6 |
 | slippage_readiness | INSUFFICIENT | ADEQUATE | needs different category/state |
@@ -53,10 +53,9 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 
 1. Attach A3MlPredictionObserver on XAUUSD M5 for A1, A2, and A3 using the passive preset.
 2. C26 research-preview ABSTAIN handoff is published; after attach, broker-shadow taps should log ml_available=true.
-3. Import older compatible EA decision/observer logs if available; market bars/ticks alone cannot satisfy active decision weeks.
-4. Keep A1/A2/A3 terminals collecting passive observer data and rerun C10 with --refresh-live-readonly after new market sessions.
-5. Need about 4.63 more active weeks unless older compatible decisions are imported.
-6. Need about 77 more market setup groups.
+3. Keep A1/A2/A3 terminals collecting passive observer data and rerun C10 with --refresh-live-readonly after new market sessions.
+4. Need about 4.22 more active weeks unless older compatible decisions are imported.
+5. Need about 18 more market setup groups.
 
 ## Commands
 

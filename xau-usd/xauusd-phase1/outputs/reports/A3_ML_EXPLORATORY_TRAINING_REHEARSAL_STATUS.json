@@ -1,18 +1,18 @@
 {
   "status": "REHEARSED_RESEARCH_ONLY",
   "stage": "C18-EXPLORATORY-TRAINING-REHEARSAL",
-  "created_at_utc": "2026-06-22T06:38:40Z",
+  "created_at_utc": "2026-06-24T23:53:48Z",
   "schema_version": "a3_ml_exploratory_training_rehearsal_status_v1",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
   "readiness_status": "NO_GO",
   "c01_status": "PIPELINE_ONLY",
   "training_population": {
-    "snapshot_rows": 349,
-    "diagnostic_labeled_rows": 349,
+    "snapshot_rows": 512,
+    "diagnostic_labeled_rows": 512,
     "official_candidate_trainable_rows": 0,
-    "positive": 110,
-    "negative": 239,
-    "minority": 110
+    "positive": 149,
+    "negative": 363,
+    "minority": 149
   },
   "authorization": {
     "exploratory_rehearsal_executed": true,
@@ -38,14 +38,14 @@
     "status_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_TRAINING_REHEARSAL_STATUS.json",
     "status_report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_TRAINING_REHEARSAL_STATUS.md",
     "rehearsal_artifact_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_MODEL_REHEARSAL_ARTIFACT.json",
-    "rehearsal_artifact_sha256": "8dbdec9bd5d968f3b1d7e131d5378f7a3c22d5764338ef0045be49ce9ef8541e",
+    "rehearsal_artifact_sha256": "96d3aa3f88d946fc5b00559c509384c107d8910ac0d613993b7e692244fcfb42",
     "shadow_preview_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXPLORATORY_SHADOW_PREVIEW.csv",
-    "shadow_preview_rows": 349
+    "shadow_preview_rows": 512
   },
   "official_gate_blockers": [
     "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
-    "market_setup_groups observed 223 required >=300",
-    "active_weeks observed 3.37 required >=8",
+    "market_setup_groups observed 282 required >=300",
+    "active_weeks observed 3.78 required >=8",
     "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
     "feature_budget observed 0 required >=6",
     "slippage_readiness observed INSUFFICIENT required ADEQUATE",

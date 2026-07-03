@@ -1,8 +1,8 @@
 {
   "status": "NO_GO",
   "stage": "C03-READINESS",
-  "created_at_utc": "2026-06-22T07:53:28Z",
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
+  "created_at_utc": "2026-06-26T23:04:13Z",
+  "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
   "authorization": {
     "training_authorized": false,
     "python_demo_predictions_authorized": false,
@@ -24,20 +24,20 @@
     },
     {
       "gate": "market_setup_groups",
-      "passed": false,
-      "observed": "223",
+      "passed": true,
+      "observed": "323",
       "required": ">=300"
     },
     {
       "gate": "minority_labels",
       "passed": true,
-      "observed": "172",
+      "observed": "302",
       "required": ">=90"
     },
     {
       "gate": "active_weeks",
       "passed": false,
-      "observed": "3.37",
+      "observed": "4.07",
       "required": ">=8"
     },
     {

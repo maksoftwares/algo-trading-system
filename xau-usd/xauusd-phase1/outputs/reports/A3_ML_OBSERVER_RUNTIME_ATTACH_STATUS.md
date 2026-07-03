@@ -1,7 +1,7 @@
 # A3 ML Observer Runtime Attach Status
 
-Overall status: RUNTIME_LOGS_DETECTED_ALL_ACCOUNTS
-Dataset version: xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066
+Overall status: LAUNCH_SENT_WAITING_FOR_LOGS
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Authorization
 
@@ -46,9 +46,9 @@ Dataset version: xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066
 
 | Account | Startup | Prediction | Fresh startup | Fresh prediction |
 | --- | --- | --- | --- | --- |
-| A1 | true | true | true | true |
-| A2 | true | true | true | true |
-| A3 | true | true | true | true |
+| A1 | true | true | false | false |
+| A2 | true | true | false | false |
+| A3 | true | true | false | false |
 
 ## Boundary
 
@@ -62,4 +62,4 @@ Dataset version: xauusd_c02_multiacct_202606212216_geffebb6d_c9221d066
 
 ## Next
 
-Passive observer runtime is logging on all three accounts. Keep collecting data; real Python predictions still require C03 PASS and C05/C04/C06 readiness.
+Launch was sent, but logs were not fresh on all accounts. Confirm the terminal accepted the startup config or attach the passive preset manually.

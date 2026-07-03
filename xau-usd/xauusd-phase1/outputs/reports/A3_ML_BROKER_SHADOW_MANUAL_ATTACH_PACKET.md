@@ -1,7 +1,7 @@
 # A3 ML Broker Shadow Manual Attach Packet
 
 Overall status: BROKER_SHADOW_RUNTIME_PRESENT_ALL_ACCOUNTS
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Authorization
 
@@ -63,12 +63,12 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 
 - Terminal: C:/MT5PortableRepairLane/terminal64.exe
 - Files root: C:\MT5PortableRepairLane\MQL5\Files
-- Recommended broker-shadow expert(s): Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor
+- Recommended broker-shadow expert(s): Account3BreakoutImprovedExecutor, Account3BreakoutPlainExecutor, Account3BreakoutTier1CompatExecutor, Account3SoftRetestExecutor, Phase2ExperimentalDemoExecutor
 - Safe preset(s): Account3BreakoutImprovedExecutor.A3.a3_ml_shadow_readonly.set, Account3BreakoutPlainExecutor.A3.a3_ml_shadow_readonly.set, Account3BreakoutTier1CompatExecutor.A3.a3_ml_shadow_readonly.set, Account3SoftRetestExecutor.A3.a3_ml_shadow_readonly.set
 - Handoff file: C:\MT5PortableRepairLane\MQL5\Files\A3_ML_EA_HANDOFF.csv
 - Shadow tap log to watch: C:\MT5PortableRepairLane\MQL5\Files\a3_ml_broker_shadow_tap.csv
 - Shadow tap include: C:\MT5PortableRepairLane\MQL5\Include\A3MlShadowTap.mqh
-- Current active broker executor count: 4
+- Current active broker executor count: 5
 
 ## Validations
 

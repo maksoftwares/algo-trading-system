@@ -1,132 +1,138 @@
 {
   "schema_version": "a3_ml_exploratory_model_rehearsal_artifact_v1",
   "status": "REHEARSED_RESEARCH_ONLY",
-  "created_at_utc": "2026-06-22T06:38:40Z",
-  "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066_8d1ae1b8",
+  "created_at_utc": "2026-06-24T23:53:48Z",
+  "model_id": "a3_m0_exploratory_rehearsal_xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066_21622d3f",
   "model_family": "M0_DIAGNOSTIC_BASE_RATE_REHEARSAL",
   "official_model_artifact": false,
   "eligible_for_c04_shadow_bridge": false,
   "eligible_for_c06_ea_handoff": false,
-  "dataset_version": "xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066",
-  "feature_schema_hash": "8d1ae1b85dfb49ce82791c535ff87aa5217b8f78de1a3d83503374497c292adc",
+  "dataset_version": "xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066",
+  "feature_schema_hash": "21622d3f16a0382b4f5ba4264d6458e2a457c0fdc63af0d67b2c480d0779434f",
   "official_selected_features": [],
   "contract_model_family": "M0_BASE_RATE_FIRST",
   "training_summary": {
-    "snapshot_rows": 349,
-    "diagnostic_labeled_rows": 349,
+    "snapshot_rows": 512,
+    "diagnostic_labeled_rows": 512,
     "official_candidate_trainable_rows": 0,
-    "positive": 110,
-    "negative": 239,
-    "minority": 110,
-    "global_positive_rate": 0.3157142857,
+    "positive": 149,
+    "negative": 363,
+    "minority": 149,
+    "global_positive_rate": 0.2914230019,
     "in_sample_preview_only": true
   },
   "rates": {
-    "global": 0.3157142857,
+    "global": 0.2914230019,
     "by_account": {
       "1025742": {
-        "rows": 207,
-        "positive": 49,
-        "negative": 158,
-        "p_win": 0.2379807692
+        "rows": 259,
+        "positive": 66,
+        "negative": 193,
+        "p_win": 0.2557692308
       },
       "1033030": {
-        "rows": 94,
-        "positive": 43,
-        "negative": 51,
-        "p_win": 0.4578947368
+        "rows": 146,
+        "positive": 53,
+        "negative": 93,
+        "p_win": 0.3639455782
       },
       "1033669": {
-        "rows": 48,
-        "positive": 18,
-        "negative": 30,
-        "p_win": 0.3775510204
+        "rows": 107,
+        "positive": 30,
+        "negative": 77,
+        "p_win": 0.2824074074
       }
     },
     "by_direction": {
       "LONG": {
-        "rows": 155,
-        "positive": 50,
-        "negative": 105,
-        "p_win": 0.3237179487
+        "rows": 185,
+        "positive": 53,
+        "negative": 132,
+        "p_win": 0.2876344086
       },
       "SHORT": {
-        "rows": 194,
-        "positive": 60,
-        "negative": 134,
-        "p_win": 0.3102564103
+        "rows": 327,
+        "positive": 96,
+        "negative": 231,
+        "p_win": 0.2942073171
       }
     },
     "by_account_direction": {
       "1025742|LONG": {
-        "rows": 79,
-        "positive": 21,
-        "negative": 58,
-        "p_win": 0.26875
+        "rows": 89,
+        "positive": 24,
+        "negative": 65,
+        "p_win": 0.2722222222
       },
       "1025742|SHORT": {
-        "rows": 128,
-        "positive": 28,
-        "negative": 100,
-        "p_win": 0.2209302326
+        "rows": 170,
+        "positive": 42,
+        "negative": 128,
+        "p_win": 0.2485380117
       },
       "1033030|LONG": {
-        "rows": 50,
+        "rows": 60,
         "positive": 20,
-        "negative": 30,
-        "p_win": 0.4019607843
+        "negative": 40,
+        "p_win": 0.3360655738
       },
       "1033030|SHORT": {
-        "rows": 44,
-        "positive": 23,
-        "negative": 21,
-        "p_win": 0.5222222222
+        "rows": 86,
+        "positive": 33,
+        "negative": 53,
+        "p_win": 0.3850574713
       },
       "1033669|LONG": {
-        "rows": 26,
+        "rows": 36,
         "positive": 9,
-        "negative": 17,
-        "p_win": 0.3518518519
+        "negative": 27,
+        "p_win": 0.2567567568
       },
       "1033669|SHORT": {
-        "rows": 22,
-        "positive": 9,
-        "negative": 13,
-        "p_win": 0.4130434783
+        "rows": 71,
+        "positive": 21,
+        "negative": 50,
+        "p_win": 0.2986111111
       }
     },
     "by_regime": {
       "FALLING": {
-        "rows": 349,
-        "positive": 110,
-        "negative": 239,
-        "p_win": 0.3157142857
+        "rows": 276,
+        "positive": 72,
+        "negative": 204,
+        "p_win": 0.261732852
+      },
+      "UNKNOWN": {
+        "rows": 236,
+        "positive": 77,
+        "negative": 159,
+        "p_win": 0.3270042194
       }
     },
     "by_session": {
       "Afternoon 12:00-15:59": {
-        "rows": 72,
-        "positive": 32,
-        "negative": 40,
-        "p_win": 0.4452054795
+        "rows": 102,
+        "positive": 38,
+        "negative": 64,
+        "p_win": 0.3737864078
       },
       "Evening 16:00-19:59": {
-        "rows": 60,
-        "positive": 19,
-        "negative": 41,
-        "p_win": 0.3196721311
+        "rows": 79,
+        "positive": 27,
+        "negative": 52,
+        "p_win": 0.34375
       },
       "Morning 06:00-11:59": {
-        "rows": 87,
-        "positive": 31,
-        "negative": 56,
-        "p_win": 0.3579545455
+        "rows": 144,
+        "positive": 37,
+        "negative": 107,
+        "p_win": 0.2586206897
       },
       "Night 20:00-05:59": {
-        "rows": 130,
-        "positive": 28,
-        "negative": 102,
-        "p_win": 0.2175572519
+        "rows": 187,
+        "positive": 47,
+        "negative": 140,
+        "p_win": 0.2526595745
       }
     }
   },
@@ -135,8 +141,8 @@
     "c01_status": "PIPELINE_ONLY",
     "official_gate_blockers": [
       "dataset_status observed PIPELINE_ONLY required EXPLORATORY_MODEL or higher",
-      "market_setup_groups observed 223 required >=300",
-      "active_weeks observed 3.37 required >=8",
+      "market_setup_groups observed 282 required >=300",
+      "active_weeks observed 3.78 required >=8",
       "at_least_two_regimes observed FALLING required >=2 non-UNKNOWN regimes",
       "feature_budget observed 0 required >=6",
       "slippage_readiness observed INSUFFICIENT required ADEQUATE",

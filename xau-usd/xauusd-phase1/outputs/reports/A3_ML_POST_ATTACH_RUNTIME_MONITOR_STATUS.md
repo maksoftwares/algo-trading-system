@@ -1,13 +1,13 @@
 # A3 ML Post-Attach Runtime Monitor Status
 
 Overall status: RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Monitor
 
 - Timeout seconds: 0.
 - Poll seconds: 5.
-- Elapsed seconds: 0.11.
+- Elapsed seconds: 0.156.
 - Attempt count: 1.
 - Timed out: false.
 
@@ -28,7 +28,7 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 
 | Attempt | Elapsed | C20 | C21 | Status |
 | --- | --- | --- | --- | --- |
-| 1 | 0.11 | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS |
+| 1 | 0.156 | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS | RUNTIME_EVIDENCE_PRESENT_ALL_ACCOUNTS |
 
 ## Authorization
 

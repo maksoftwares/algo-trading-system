@@ -1,7 +1,7 @@
 # A3 ML Research Preview Handoff Rehearsal Status
 
 Overall status: PUBLISHED_RESEARCH_PREVIEW_FAIL_CLOSED
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Meaning
 
@@ -33,7 +33,7 @@ This publishes only research-preview ABSTAIN rows. It is not the official model 
 | artifact_exists | true | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_EXPLORATORY_MODEL_REHEARSAL_ARTIFACT.json |
 | artifact_is_research_only | true | REHEARSED_RESEARCH_ONLY |
 | preview_csv_exists | true | C:\Users\ZHAO ZHU INFORMATION\Downloads\algo-trading-system\xau-usd\xauusd-phase1\outputs\reports\A3_ML_EXPLORATORY_SHADOW_PREVIEW.csv |
-| preview_rows_not_empty | true | rows=349 |
+| preview_rows_not_empty | true | rows=512 |
 | preview_rows_force_abstain | true | observed=ABSTAIN required=ABSTAIN |
 | preview_broker_action_false | true | observed=false required=false |
 | expected_accounts_configured | true | configured=1025742,1033030,1033669 |

@@ -1,13 +1,13 @@
 # A3 ML Label Trainability Blocker Audit
 
 Overall status: LABEL_PROMOTION_REVIEW_REQUIRED_SLIPPAGE_BLOCKED
-Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
+Dataset version: xauusd_c02_multiacct_202606242335_g0a9823b0_c9221d066
 
 ## Summary
 
-- C02 mature labels: 424.
-- C02 positive/negative: 172 / 252.
-- C01 snapshot rows: 349.
+- C02 mature labels: 664.
+- C02 positive/negative: 246 / 418.
+- C01 snapshot rows: 512.
 - C01 candidate-trainable rows: 0.
 - C01 candidate-trainable groups: 0.
 - C01 feature budget: 0.
@@ -18,8 +18,8 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 | Account | Status | Entry Deficit | SL Deficit | TP Deficit | Request Deficit |
 | --- | --- | --- | --- | --- | --- |
 | A1 | ADEQUATE | 0 | 0 | 0 | 0 |
-| A2 | INSUFFICIENT | 188 | 92 | 46 | 188 |
-| A3 | INSUFFICIENT | 125 | 46 | 29 | 176 |
+| A2 | INSUFFICIENT | 181 | 88 | 43 | 184 |
+| A3 | INSUFFICIENT | 122 | 44 | 28 | 176 |
 
 ## Blockers
 
@@ -33,8 +33,8 @@ Dataset version: xauusd_c02_multiacct_202606220547_geffebb6d_c9221d066
 - Reviewer must approve a label-promotion rule before C01 may treat diagnostic tick labels as trainable.
 - C01 must consume C02 label_status/y_net_R fields only under that reviewed promotion rule.
 - C03 must rerun after label promotion and still keep python_demo_predictions_authorized=false until all gates pass.
-- A2 needs entry=188, SL=92, TP=46, request-price=188 more slippage-ready records.
-- A3 needs entry=125, SL=46, TP=29, request-price=176 more slippage-ready records.
+- A2 needs entry=181, SL=88, TP=43, request-price=184 more slippage-ready records.
+- A3 needs entry=122, SL=44, TP=28, request-price=176 more slippage-ready records.
 - Keep broker_action_authorized=false.
 
 ## Boundary

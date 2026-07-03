@@ -7,7 +7,9 @@ input long InpAllowedAccountLogin = 1025742;
 input string InpExpectedServerMarker = "Demo";
 input string InpOwnerAuthorizationToken = "";
 input string InpRequiredOwnerAuthorizationToken = "A1_DAILY_PROFIT_FLOOR_OWNER_AUTHORIZED_20260618";
-input double InpDailyFloorAed = 100.0;
+input double InpDailyFloorAed = 50.0;
+input bool InpNextDailyFloorEnabled = false;
+input double InpNextDailyFloorAed = 100.0;
 input bool InpHaltEntriesWhenArmed = true;
 input bool InpDailyLossStopEnabled = false;
 input double InpDailyLossStopAed = -150.0;
@@ -28,6 +30,7 @@ string g_dubai_date = "";
 double g_day_start_equity = 0.0;
 double g_peak_day_pnl = 0.0;
 bool g_armed = false;
+bool g_next_floor_armed = false;
 bool g_locked = false;
 string g_armed_time = "";
 string g_trigger_time = "";
@@ -210,6 +213,8 @@ void EnsureStartupHeader()
       "close_action_allowed",
       "owner_token_present",
       "daily_floor_aed",
+      "next_daily_floor_enabled",
+      "next_daily_floor_aed",
       "daily_loss_stop_enabled",
       "daily_loss_stop_aed",
       "guardian_kill_switch_file",
@@ -263,6 +268,8 @@ void WriteStartupRow(const string status, const string detail)
       BoolText(InpCloseActionAllowed),
       BoolText(StringLen(TrimToken(InpOwnerAuthorizationToken)) > 0),
       DoubleToString(InpDailyFloorAed, 2),
+      BoolText(InpNextDailyFloorEnabled),
+      DoubleToString(InpNextDailyFloorAed, 2),
       BoolText(InpDailyLossStopEnabled),
       DoubleToString(InpDailyLossStopAed, 2),
       InpGuardianKillSwitchFileName,
@@ -341,6 +348,7 @@ void SaveState()
    content += StateLine("day_start_equity", DoubleToString(g_day_start_equity, 2));
    content += StateLine("peak_day_pnl", DoubleToString(g_peak_day_pnl, 2));
    content += StateLine("armed", BoolText(g_armed));
+   content += StateLine("next_floor_armed", BoolText(g_next_floor_armed));
    content += StateLine("locked", BoolText(g_locked));
    content += StateLine("armed_time", g_armed_time);
    content += StateLine("trigger_time", g_trigger_time);
@@ -373,6 +381,7 @@ void ApplyStateLine(const string line)
    else if(key == "day_start_equity") g_day_start_equity = StringToDouble(value);
    else if(key == "peak_day_pnl") g_peak_day_pnl = StringToDouble(value);
    else if(key == "armed") g_armed = ContainsText(value, "true");
+   else if(key == "next_floor_armed") g_next_floor_armed = ContainsText(value, "true");
    else if(key == "locked") g_locked = ContainsText(value, "true");
    else if(key == "armed_time") g_armed_time = value;
    else if(key == "trigger_time") g_trigger_time = value;
@@ -436,6 +445,7 @@ void ResetForNewDubaiDay(const string new_date, const bool write_summary)
    g_day_start_equity = AccountInfoDouble(ACCOUNT_EQUITY);
    g_peak_day_pnl = 0.0;
    g_armed = false;
+   g_next_floor_armed = false;
    g_locked = false;
    g_armed_time = "";
    g_trigger_time = "";
@@ -629,6 +639,13 @@ void TriggerLock(const string reason)
    SaveState();
 }
 
+double ActiveProfitFloorAed()
+{
+   if(InpNextDailyFloorEnabled && g_next_floor_armed && InpNextDailyFloorAed > InpDailyFloorAed)
+      return InpNextDailyFloorAed;
+   return InpDailyFloorAed;
+}
+
 void EvaluateFloor()
 {
    double equity = AccountInfoDouble(ACCOUNT_EQUITY);
@@ -662,11 +679,19 @@ void EvaluateFloor()
          WriteEntryHaltFile("daily_profit_floor_armed_no_new_entries");
    }
 
+   if(g_armed && InpNextDailyFloorEnabled && !g_next_floor_armed && InpNextDailyFloorAed > InpDailyFloorAed && day_pnl >= InpNextDailyFloorAed)
+   {
+      g_next_floor_armed = true;
+      SaveState();
+      WriteEvent("NEXT_FLOOR_ARMED", "day_pnl_reached_next_floor");
+   }
+
    if(g_armed && InpHaltEntriesWhenArmed)
       WriteEntryHaltFile("daily_profit_floor_armed_no_new_entries");
 
-   if(g_armed && !just_armed && day_pnl <= InpDailyFloorAed && g_peak_day_pnl > InpDailyFloorAed)
-      TriggerLock("DAILY_PROFIT_FLOOR_RETURN");
+   double active_floor = ActiveProfitFloorAed();
+   if(g_armed && !just_armed && day_pnl <= active_floor && g_peak_day_pnl > active_floor)
+      TriggerLock("DAILY_PROFIT_FLOOR_RETURN_" + DoubleToString(active_floor, 2));
    else
       SaveState();
 }
