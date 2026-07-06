@@ -1,0 +1,74 @@
+{
+  "status": "EXACT_LEDGER_CORE_FRONTIER_ACTIVITY_GAP_NO_REVIEW",
+  "generated_at_utc": "2026-07-05T13:24:09Z",
+  "preregistration": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_PREREG_2026_07_05.md",
+  "input_raw_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_EXACT_REPAIR_202207_202606_HYBRID_RAW.csv",
+  "boundary": "exact_mt5_ledgers_reused_no_runtime_touch",
+  "removed_source": "step1_f33_r30_be_never",
+  "raw_rows_before_removal": 5854,
+  "removed_f33_raw_rows": 1885,
+  "raw_rows_after_removal": 3969,
+  "dropped_overlap_signals": 218,
+  "metrics": {
+    "signals": 3751,
+    "wins": 1884,
+    "losses": 1853,
+    "win_rate_pct": 50.23,
+    "avg_win_usd": 23.2821,
+    "avg_loss_usd": 11.6401,
+    "avg_win_loss": 2.0002,
+    "gross_profit_usd": 43863.53,
+    "gross_loss_usd": 21569.07,
+    "profit_factor": 2.0336,
+    "net_usd": 22294.46,
+    "active_weekdays": 901,
+    "market_weekdays": 1043,
+    "active_weekday_pct": 86.39,
+    "signals_per_active_day": 4.16,
+    "positive_active_days": 473,
+    "negative_active_days": 464,
+    "positive_months": 29,
+    "negative_months": 19,
+    "worst_day_usd": -506.12,
+    "best_day_usd": 1108.33,
+    "worst_month_usd": -1055.98,
+    "best_month_usd": 5212.22,
+    "max_closed_drawdown_usd": 1583.72,
+    "top10_removed_net_usd": 19204.14,
+    "top25_removed_net_usd": 15788.07,
+    "top50_removed_net_usd": 11153.79,
+    "top100_removed_net_usd": 4843.13,
+    "source_contributions": {
+      "freq_step3_frontier": {
+        "signals": 3417,
+        "net_usd": 6161.63
+      },
+      "h4_d1_long_best_box2_atr80": {
+        "signals": 332,
+        "net_usd": 15613.96
+      },
+      "h4_d1_long_broad_box3_atr60": {
+        "signals": 2,
+        "net_usd": 518.87
+      }
+    },
+    "decision": "EXACT_LEDGER_CORE_FRONTIER_ACTIVITY_GAP_NO_REVIEW",
+    "last12_signals": 840,
+    "last12_win_rate_pct": 52.86,
+    "last12_avg_win_loss": 2.2118,
+    "last12_active_weekday_pct": 80.84,
+    "last12_net_usd": 13438.24,
+    "stress_010_net_usd": 21711.26,
+    "stress_010_avg_win_loss": 1.9783,
+    "stress_030_net_usd": 20544.86,
+    "stress_030_avg_win_loss": 1.9029
+  },
+  "interpretation": "The exact-ledger composition clears WR and W/L by a razor-thin margin but remains below the 90% active-day threshold and fails the +0.30/ticket W/L stress. Keep as frontier evidence; do not draft a demo spec.",
+  "outputs": {
+    "kept_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_202207_202606_KEPT.csv",
+    "dropped_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_202207_202606_DROPPED.csv",
+    "removed_f33_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_202207_202606_REMOVED_F33.csv",
+    "json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_202207_202606.json",
+    "md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_HYBRID_F67_H16_NO_F33_COMPOSITION_202207_202606.md"
+  }
+}

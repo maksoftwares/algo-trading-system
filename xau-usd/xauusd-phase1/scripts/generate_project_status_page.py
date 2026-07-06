@@ -60,6 +60,7 @@ def generate_project_status_page(
     phase3_reports = phase3_root / "outputs" / "reports"
 
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
+    project_summary = _read_json(repo_root / "status_summary.json")
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
     phase2_demo_account_isolation = _read_json(phase1_reports / "PHASE2_DEMO_ACCOUNT_ISOLATION.json")
@@ -127,6 +128,7 @@ def generate_project_status_page(
             phase1_status=phase1_acceptance or "UNKNOWN",
             phase2_status=phase2_readiness or "UNKNOWN",
             summary=phase1_summary,
+            project_summary=project_summary,
             fixed_notional=fixed_notional,
             measured_cost=measured_cost,
             d2_decision=d2_decision,
@@ -212,6 +214,7 @@ def _render_html(
     phase1_status: str,
     phase2_status: str,
     summary: dict[str, Any],
+    project_summary: dict[str, Any],
     fixed_notional: dict[str, str],
     measured_cost: dict[str, str],
     d2_decision: D2Decision,
@@ -301,6 +304,7 @@ def _render_html(
             ),
             "",
             '      <section class="grid focus-grid">',
+            _panel("Primary Gold Goal", _primary_gold_goal_panel(project_summary.get("primary_gold_goal_current", {}))),
             _panel(
                 "Milestone Rail",
                 _timeline(
@@ -1121,6 +1125,67 @@ def _cost_table(fixed: dict[str, str], measured: dict[str, str]) -> str:
         ),
     ]
     return _key_value_table(rows)
+
+
+def _primary_gold_goal_panel(goal: dict[str, Any]) -> str:
+    goal = _mapping(goal)
+    if not goal:
+        return _list(["Primary Gold goal summary is unavailable."])
+
+    latest = _mapping(goal.get("latest_findings"))
+    branch_key = _cell(goal.get("current_branch_key", "daily_extreme_reclaim_prereg_probe"))
+    branch = _mapping(latest.get(branch_key))
+    if not branch:
+        branch_key = "daily_extreme_reclaim_prereg_probe"
+        branch = _mapping(latest.get(branch_key))
+    best = _mapping(branch.get("best_row") or branch.get("best_design_row") or branch.get("best_exam") or branch.get("best_result"))
+    reports = _mapping(goal.get("reports"))
+    status = _cell(goal.get("status", "UNKNOWN"))
+    reviewer_spend = _cell(goal.get("reviewer_spend", "UNKNOWN"))
+    best_text = "n/a"
+    if best:
+        variant_name = best.get("variant") or best.get("name") or best.get("row")
+        if variant_name:
+            trade_count = best.get("trades") or best.get("signals")
+            win_loss = best.get("avg_win_to_avg_loss") or best.get("avg_win_loss")
+            pnl = best.get("manual_pnl_usd") or best.get("net_usd") or best.get("net_usd_001lot")
+            best_text = (
+                f"{_cell(variant_name)}: {_cell(trade_count)} trades, "
+                f"WR {_cell(best.get('win_rate_pct'))}%, W/L {_cell(win_loss)}, "
+                f"PF {_cell(best.get('profit_factor'))}, P&L {_cell(pnl)} USD"
+            )
+        else:
+            best_text = (
+                f"{_cell(best.get('base'))} / {_cell(best.get('rule'))}: "
+                f"{_cell(best.get('signals'))} signals, WR {_cell(best.get('win_rate_pct'))}%, "
+                f"W/L {_cell(best.get('avg_win_loss'))}, PF {_cell(best.get('profit_factor'))}, "
+                f"net {_cell(best.get('net_usd'))} USD"
+            )
+
+    link_items = []
+    report = _cell(branch.get("report") or reports.get(f"{branch_key}_report") or reports.get("daily_extreme_reclaim_combined"))
+    prereg = _cell(
+        branch.get("preregistration")
+        or branch.get("prereg")
+        or reports.get(f"{branch_key}_prereg")
+        or reports.get("daily_extreme_reclaim_prereg")
+    )
+    if report and report != "None":
+        link_items.append(f'<a href="{_esc(_link(report))}">Latest report</a>')
+    if prereg and prereg != "None":
+        link_items.append(f'<a href="{_esc(_link(prereg))}">Preregistration</a>')
+    link_items.append(f'<a href="{_esc(_link("status_summary.md"))}">Full summary</a>')
+
+    rows = [
+        ("Status", _status_badge(status)),
+        ("Reviewer spend", _status_badge(reviewer_spend)),
+        ("Current branch", _esc(branch_key)),
+        ("Branch status", _esc(_cell(branch.get("status", "n/a")))),
+        ("Best row", _esc(best_text)),
+        ("Next action", _esc(_cell(goal.get("next_action", "See status_summary.md")))),
+        ("Artifacts", " / ".join(link_items)),
+    ]
+    return _raw_key_value_table(rows)
 
 
 def _demo_countdown_panel(

@@ -23,6 +23,7 @@ input string InpDirectionStateFileName = "dirstate_xauusd.csv";
 input int InpM15StructureLookbackBars = 20;
 input int InpSwingConfirmLeftBars = 4;
 input int InpSwingConfirmRightBars = 4;
+input double InpTargetR = 1.50;
 input int InpStreakLossCount = 3;
 input int InpStreakWindowMinutes = 120;
 input int InpDubaiUtcOffsetMinutes = 240;
@@ -397,7 +398,7 @@ void BuildDemoPlan(
       candidate.entry_price = retest_high + point;
       candidate.stop_loss = retest_low - 0.10 * retest_atr;
       double risk_price = candidate.entry_price - candidate.stop_loss;
-      candidate.take_profit = candidate.entry_price + 1.50 * risk_price;
+      candidate.take_profit = candidate.entry_price + InpTargetR * risk_price;
       candidate.stop_distance_points = risk_price / point;
    }
    else
@@ -405,7 +406,7 @@ void BuildDemoPlan(
       candidate.entry_price = retest_low - point;
       candidate.stop_loss = retest_high + 0.10 * retest_atr;
       double risk_price = candidate.stop_loss - candidate.entry_price;
-      candidate.take_profit = candidate.entry_price - 1.50 * risk_price;
+      candidate.take_profit = candidate.entry_price - InpTargetR * risk_price;
       candidate.stop_distance_points = risk_price / point;
    }
 }
@@ -1186,7 +1187,7 @@ bool SendMarketOrder(const A3RoundRetestObservation &observation, const double s
    }
    int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
    double sl = NormalizeDouble(is_long ? price - signal_risk : price + signal_risk, digits);
-   double tp = NormalizeDouble(is_long ? price + 1.50 * signal_risk : price - 1.50 * signal_risk, digits);
+   double tp = NormalizeDouble(is_long ? price + InpTargetR * signal_risk : price - InpTargetR * signal_risk, digits);
    price = NormalizeDouble(price, digits);
    double volume = NormalizeVolumeForSymbol(InpFixedLot);
    if(volume <= 0.0)

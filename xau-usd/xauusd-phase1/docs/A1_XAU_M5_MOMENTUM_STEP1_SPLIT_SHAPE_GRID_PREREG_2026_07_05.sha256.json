@@ -1,0 +1,27 @@
+{
+  "generated_at_utc": "2026-07-05T00:36:00Z",
+  "purpose": "Hash manifest for the owner-goal Step 1 XAUUSD split-shape grid pre-registration and tooling.",
+  "files": [
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_M5_MOMENTUM_STEP1_SPLIT_SHAPE_GRID_PREREG_2026_07_05.md",
+      "sha256": "fd5113027ef72010c80ef16ea4433d3d5f6372097972c4375bd614675d011c83"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "6190b81b966e1c5fd0982d4c76aba31302f503d28ab4c383405e03054dc542ac"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a1_xau_m5_momentum_backtest_variants.py",
+      "sha256": "170452e2af1aa93284b9dc49bfcf1e33ba6991f9475e8ba6c75271ecc4e6ec29"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/analyze_a1_momentum_step1_split_shape_grid.py",
+      "sha256": "91eccafc8dd516c08bdbe29963cf4f077303905f0ded1528652fa6599412de40"
+    }
+  ],
+  "status": "PARTIAL_GRID_IN_PROGRESS",
+  "completed_cells_at_manifest_time": 3,
+  "expected_cells": 27,
+  "completed_mt5_components_at_manifest_time": 9,
+  "expected_mt5_components": 81
+}

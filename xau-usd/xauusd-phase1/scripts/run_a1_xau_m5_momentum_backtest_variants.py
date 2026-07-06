@@ -46,13 +46,20 @@ def partial_runner_inputs(runner_target_r: str) -> dict[str, str]:
     }
 
 
-def split_runner_inputs(runner_target_r: str) -> dict[str, str]:
+def split_runner_inputs(
+    runner_target_r: str,
+    first_target_r: str = "0.70",
+    first_lot_fraction: str = "0.50",
+    break_even_mode: str = "1",
+) -> dict[str, str]:
     return {
         "InpSplitEntryEnabled": "true",
         "InpSplitEntryShadowOnly": "false",
-        "InpSplitEntryFirstTargetR": "0.70",
+        "InpSplitEntryFirstTargetR": first_target_r,
+        "InpSplitEntryFirstLotFraction": first_lot_fraction,
         "InpSplitEntryRunnerTargetR": runner_target_r,
         "InpSplitEntryMoveRunnerSLToBE": "true",
+        "InpSplitEntryBreakEvenMode": break_even_mode,
         "InpSplitEntryUseMinLotPair": "true",
     }
 
@@ -3539,6 +3546,69 @@ VARIANTS = [
 ]
 
 
+GOAL_SPLIT_GRID_COMPONENTS = [
+    ("v6", "risk_norm_split20_v6_max2_all8", 1),
+    ("weak", "risk_norm_split20_freq_weak_hours_all8", 2),
+    ("v13", "risk_norm_split20_v13_rr0p7_all8_22", 3),
+]
+
+GOAL_SPLIT_TP1_FRACTIONS = [
+    ("f33", "0.333333", "1/3"),
+    ("f50", "0.500000", "1/2"),
+    ("f67", "0.666667", "2/3"),
+]
+
+GOAL_SPLIT_RUNNER_TARGETS = [
+    ("r20", "2.00"),
+    ("r25", "2.50"),
+    ("r30", "3.00"),
+]
+
+GOAL_SPLIT_BE_MODES = [
+    ("be_tp1", "1", "on TP1 fill"),
+    ("be_1r", "2", "at +1.0R"),
+    ("be_never", "0", "never"),
+]
+
+
+def build_goal_split_grid_variants() -> list[Variant]:
+    base_by_name = {variant.name: variant for variant in VARIANTS}
+    generated: list[Variant] = []
+    for fraction_code, fraction_value, fraction_label in GOAL_SPLIT_TP1_FRACTIONS:
+        for runner_code, runner_value in GOAL_SPLIT_RUNNER_TARGETS:
+            for be_code, be_value, be_label in GOAL_SPLIT_BE_MODES:
+                cell_id = f"{fraction_code}_{runner_code}_{be_code}"
+                for component_code, base_name, priority in GOAL_SPLIT_GRID_COMPONENTS:
+                    base = base_by_name[base_name]
+                    generated.append(
+                        Variant(
+                            name=f"goal_split_{cell_id}_{component_code}",
+                            label=(
+                                "Goal Step 1 split grid "
+                                f"{cell_id}: {base.label}; TP1 fraction {fraction_label}, "
+                                f"runner {runner_value}R, BE {be_label}, priority {priority}"
+                            ),
+                            run_id=(
+                                "BT_A1_XAU_M5_GOAL_SPLIT_"
+                                f"{cell_id}_{component_code}_JUNE2026"
+                            ).upper(),
+                            tester_inputs={
+                                **base.tester_inputs,
+                                **split_runner_inputs(
+                                    runner_target_r=runner_value,
+                                    first_lot_fraction=fraction_value,
+                                    break_even_mode=be_value,
+                                ),
+                                "InpManagementLogMode": "0",
+                            },
+                        )
+                    )
+    return generated
+
+
+VARIANTS.extend(build_goal_split_grid_variants())
+
+
 COMMON_TESTER_INPUTS = {
     "InpAllowDemoTrading": "true",
     "InpAllowNonDemoAccounts": "false",
@@ -3629,9 +3699,16 @@ COMMON_TESTER_INPUTS = {
     "InpSplitEntryEnabled": "false",
     "InpSplitEntryShadowOnly": "true",
     "InpSplitEntryFirstTargetR": "0.70",
+    "InpSplitEntryFirstLotFraction": "0.50",
     "InpSplitEntryRunnerTargetR": "2.00",
     "InpSplitEntryMoveRunnerSLToBE": "true",
+    "InpSplitEntryBreakEvenMode": "1",
     "InpSplitEntryUseMinLotPair": "false",
+    "InpEarlyAdverseExitEnabled": "false",
+    "InpEarlyAdverseExitShadowOnly": "true",
+    "InpEarlyAdverseExitAfterMinutes": "60",
+    "InpEarlyAdverseExitR": "0.50",
+    "InpManagementLogMode": "1",
 }
 
 

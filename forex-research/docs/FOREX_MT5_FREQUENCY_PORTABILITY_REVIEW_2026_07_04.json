@@ -1,0 +1,114 @@
+{
+  "generated_at_local": "2026-07-04 01:44:00",
+  "status": "PORTABILITY_FAILS_NO_NEW_FOREX_CANDIDATE",
+  "candidate_under_test": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+  "rule_frozen": true,
+  "symbols_tested": [
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "windows": {
+    "full": [
+      {
+        "symbol": "GBPUSD",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+        "trades": 1380,
+        "win_rate_pct": 54.57,
+        "net_profit": -38.75,
+        "profit_factor": 0.9597,
+        "avg_pnl": -0.0281,
+        "mt5_profit_factor": "0.96",
+        "mt5_total_trades": "1380",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      },
+      {
+        "symbol": "USDJPY",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+        "trades": 1465,
+        "win_rate_pct": 52.56,
+        "net_profit": -122.4,
+        "profit_factor": 0.8838,
+        "avg_pnl": -0.0835,
+        "mt5_profit_factor": "0.89",
+        "mt5_total_trades": "1465",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      }
+    ],
+    "oos_2022_2024": [
+      {
+        "symbol": "GBPUSD",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_THIN_EDGE_WATCH",
+        "trades": 676,
+        "win_rate_pct": 56.8,
+        "net_profit": 9.4,
+        "profit_factor": 1.0188,
+        "avg_pnl": 0.0139,
+        "mt5_profit_factor": "1.01",
+        "mt5_total_trades": "676",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      },
+      {
+        "symbol": "USDJPY",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+        "trades": 707,
+        "win_rate_pct": 55.02,
+        "net_profit": -20.17,
+        "profit_factor": 0.9602,
+        "avg_pnl": -0.0285,
+        "mt5_profit_factor": "0.97",
+        "mt5_total_trades": "707",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      }
+    ],
+    "current_2024_2026": [
+      {
+        "symbol": "GBPUSD",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+        "trades": 704,
+        "win_rate_pct": 52.41,
+        "net_profit": -48.15,
+        "profit_factor": 0.8959,
+        "avg_pnl": -0.0684,
+        "mt5_profit_factor": "0.89",
+        "mt5_total_trades": "704",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      },
+      {
+        "symbol": "USDJPY",
+        "variant": "rsi_extreme_fade_m15_long_blockh1_7_21_rr0p80",
+        "status": "FREQUENT_BUT_NEGATIVE_SKIP_TUNING",
+        "trades": 758,
+        "win_rate_pct": 50.26,
+        "net_profit": -102.23,
+        "profit_factor": 0.8128,
+        "avg_pnl": -0.1349,
+        "mt5_profit_factor": "0.82",
+        "mt5_total_trades": "758",
+        "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.md",
+        "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+        "tuning_attempted": true
+      }
+    ]
+  },
+  "source_reports": {
+    "full": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_FULL_2022_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+    "oos_2022_2024": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_OOS_2022_2024_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json",
+    "current_2024_2026": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\forex-research\\outputs\\reports\\mt5_backtests\\mean_reversion_scout\\FOREX_MT5_FREQUENCY_SCOUT_PORTABILITY_CURRENT_2024_2026_M15_RSI_EXTREME_LONG_BLOCKH1_7_21_RR0P8.json"
+  },
+  "interpretation": "The tuned EURUSD lead does not port to GBPUSD or USDJPY. Current 2024-2026 portability is negative on both symbols, so this weakens promotion confidence and produces no additional candidate."
+}

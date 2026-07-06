@@ -28,7 +28,13 @@ enum MomentumSignalMode
    SIGNAL_COMPRESSION_EXPANSION = 2,
    SIGNAL_SWEEP_RECLAIM = 3,
    SIGNAL_OPENING_RANGE_CONTINUATION = 4,
-   SIGNAL_M5_EMA_TREND_CONTINUATION = 5
+   SIGNAL_M5_EMA_TREND_CONTINUATION = 5,
+   SIGNAL_OPENING_RANGE_REVERSAL = 6,
+   SIGNAL_D1_COMPRESSION_H4_EXPANSION = 7,
+   SIGNAL_H4_TREND_PULLBACK_D1_BIAS = 8,
+   SIGNAL_WEEKLY_LEVEL_H4_REJECTION = 9,
+   SIGNAL_D1_COMPRESSION_H1_EXPANSION = 10,
+   SIGNAL_DAILY_EXTREME_RECLAIM = 11
   };
 
 input string InpRunId                         = "A1_XAU_M5_MOMENTUM_CONTINUATION_SAFE_DEFAULT";
@@ -90,7 +96,21 @@ input double InpLongCloseLocation             = 0.72;
 input double InpShortCloseLocation            = 0.28;
 input double InpMinThreeBarMoveAtr            = 0.70;
 input double InpMaxThreeBarMoveAtr            = 0.00;   // 0 disables exhaustion cap
+input double InpMinBreakDistanceAtr           = 0.00;   // 0 disables minimum break-distance guard
+input double InpMaxBreakDistanceAtr           = 0.00;   // 0 disables maximum break-distance guard
 input double InpMinAtrAbsoluteForEntry        = 0.00;   // 0 disables absolute ATR floor
+input double InpD1CompressionAtrPercentileMax = 30.00;
+input int    InpD1CompressionBoxDays          = 5;
+input double InpD1CompressionRangeMedianMax   = 1.00;
+input double InpD1CompressionH4MinBodyFraction = 0.50;
+input double InpDailyExtremeMinMoveAtr        = 1.00;
+input double InpDailyExtremeTouchAtr          = 0.05;
+input double InpDailyExtremeReclaimAtr        = 0.10;
+input double InpDailyExtremeStopBufferAtr     = 0.10;
+input double InpDailyExtremeMinBodyFraction   = 0.25;
+input int    InpDailyExtremeMinBarsSinceOpen  = 24;
+input int    InpDailyExtremeStartHour         = 0;
+input int    InpDailyExtremeEndHour           = 24;
 input double InpStopAtrMultiple               = 2.50;
 input int    InpStopFloorPoints               = 350;
 input int    InpStopCeilingPoints             = 1800;
@@ -138,9 +158,16 @@ input bool   InpMoveSLToBEOnPartial           = true;
 input bool   InpSplitEntryEnabled             = false;
 input bool   InpSplitEntryShadowOnly          = true;
 input double InpSplitEntryFirstTargetR        = 0.70;
+input double InpSplitEntryFirstLotFraction    = 0.50;
 input double InpSplitEntryRunnerTargetR       = 2.00;
 input bool   InpSplitEntryMoveRunnerSLToBE    = true;
+input int    InpSplitEntryBreakEvenMode       = 1;     // 0=never, 1=on TP1 fill, 2=at +1.0R.
 input bool   InpSplitEntryUseMinLotPair       = false;
+input bool   InpEarlyAdverseExitEnabled       = false;
+input bool   InpEarlyAdverseExitShadowOnly    = true;
+input int    InpEarlyAdverseExitAfterMinutes  = 60;
+input double InpEarlyAdverseExitR             = 0.50;
+input int    InpManagementLogMode             = 1;     // 0=off, 1=normal.
 input bool   InpSignalClaimEnabled            = false;
 input string InpSignalClaimNamespace          = "A1MOM_SPLIT_BE";
 input int    InpSignalClaimPriority           = 0;     // 1 is highest priority; lower-priority charts skip when a higher claim exists.
@@ -157,6 +184,8 @@ int      g_h1_ema_slow_handle = INVALID_HANDLE;
 int      g_h4_ema_fast_handle = INVALID_HANDLE;
 int      g_h4_ema_slow_handle = INVALID_HANDLE;
 datetime g_last_m5_bar = 0;
+datetime g_last_h4_decision_bar = 0;
+datetime g_last_h1_decision_bar = 0;
 datetime g_last_trade_time = 0;
 string   g_trade_day = "";
 int      g_trades_today = 0;
@@ -354,6 +383,9 @@ void LogManagement(
    const double lock_r = -1.0
 )
   {
+   if(InpManagementLogMode <= 0)
+      return;
+
    string values[];
    ArrayResize(values, 21);
    values[0] = Timestamp();
@@ -486,6 +518,8 @@ void OnTradeTransaction(
 )
   {
    if(!InpSplitEntryEnabled || InpSplitEntryShadowOnly || !InpSplitEntryMoveRunnerSLToBE)
+      return;
+   if(InpSplitEntryBreakEvenMode != 1)
       return;
    if(trans.type != TRADE_TRANSACTION_DEAL_ADD || trans.deal == 0)
       return;
@@ -695,12 +729,23 @@ bool CalculateSplitEntryLots(const double total_lots, double &first_lots, double
       return false;
      }
 
+   double first_fraction = InpSplitEntryFirstLotFraction;
+   if(first_fraction < 0.01)
+      first_fraction = 0.01;
+   if(first_fraction > 0.99)
+      first_fraction = 0.99;
+
    if(total_lots >= 2.0 * min_lots)
      {
-      first_lots = MathFloor((total_lots * 0.5) / step + 0.0000001) * step;
+      first_lots = MathFloor((total_lots * first_fraction) / step + 0.0000001) * step;
       if(first_lots < min_lots)
          first_lots = min_lots;
       runner_lots = NormalizeDouble(total_lots - first_lots, 2);
+      if(runner_lots < min_lots)
+        {
+         runner_lots = min_lots;
+         first_lots = NormalizeDouble(total_lots - runner_lots, 2);
+        }
       first_lots = NormalizeDouble(first_lots, 2);
       if(first_lots >= min_lots && runner_lots >= min_lots)
          return true;
@@ -708,9 +753,24 @@ bool CalculateSplitEntryLots(const double total_lots, double &first_lots, double
 
    if(InpSplitEntryUseMinLotPair)
      {
-      first_lots = NormalizeDouble(min_lots, 2);
-      runner_lots = NormalizeDouble(min_lots, 2);
-      reason = "min_lot_pair_doubles_small_position";
+      if(first_fraction < 0.45)
+        {
+         first_lots = NormalizeDouble(min_lots, 2);
+         runner_lots = NormalizeDouble(2.0 * min_lots, 2);
+         reason = "min_lot_fraction_pair_1_to_2";
+        }
+      else if(first_fraction > 0.55)
+        {
+         first_lots = NormalizeDouble(2.0 * min_lots, 2);
+         runner_lots = NormalizeDouble(min_lots, 2);
+         reason = "min_lot_fraction_pair_2_to_1";
+        }
+      else
+        {
+         first_lots = NormalizeDouble(min_lots, 2);
+         runner_lots = NormalizeDouble(min_lots, 2);
+         reason = "min_lot_pair_doubles_small_position";
+        }
       return true;
      }
 
@@ -744,6 +804,32 @@ bool SendPartialClose(const ulong ticket, const ENUM_POSITION_TYPE type, const d
    request.magic = InpMagicNumber;
    request.deviation = InpDeviationPoints;
    request.comment = InpOrderComment + "_PARTIAL";
+   if(type == POSITION_TYPE_BUY)
+     {
+      request.type = ORDER_TYPE_SELL;
+      request.price = bid;
+     }
+   else
+     {
+      request.type = ORDER_TYPE_BUY;
+      request.price = ask;
+     }
+   const bool sent = OrderSend(request, result);
+   retcode = (long)result.retcode;
+   return sent && (result.retcode == TRADE_RETCODE_DONE || result.retcode == TRADE_RETCODE_PLACED);
+  }
+
+bool SendManagedClose(const ulong ticket, const ENUM_POSITION_TYPE type, const double close_volume, const double bid, const double ask, const string suffix, long &retcode)
+  {
+   MqlTradeRequest request = {};
+   MqlTradeResult result = {};
+   request.action = TRADE_ACTION_DEAL;
+   request.position = ticket;
+   request.symbol = InpTargetSymbol;
+   request.volume = close_volume;
+   request.magic = InpMagicNumber;
+   request.deviation = InpDeviationPoints;
+   request.comment = InpOrderComment + suffix;
    if(type == POSITION_TYPE_BUY)
      {
       request.type = ORDER_TYPE_SELL;
@@ -883,7 +969,7 @@ void MoveMatchingSplitRunnerToBreakEvenOnTp1(
 
 void ManageOpenPositions()
   {
-   if(!InpProfitProtectionEnabled && !InpPartialCloseEnabled && !InpSplitEntryEnabled)
+   if(!InpProfitProtectionEnabled && !InpPartialCloseEnabled && !InpSplitEntryEnabled && !InpEarlyAdverseExitEnabled)
       return;
 
    const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
@@ -945,8 +1031,35 @@ void ManageOpenPositions()
       const double unrealized_r = move / risk;
       const double risk_points = risk / point;
       const string position_comment = PositionGetString(POSITION_COMMENT);
+      const datetime position_time = (datetime)PositionGetInteger(POSITION_TIME);
+      const double age_minutes = (position_time > 0) ? ((double)(TimeCurrent() - position_time) / 60.0) : 0.0;
+      double split_break_even_trigger_r = 0.0;
+      if(InpSplitEntryBreakEvenMode == 2)
+         split_break_even_trigger_r = 1.0;
+
+      if(InpEarlyAdverseExitEnabled &&
+         InpEarlyAdverseExitAfterMinutes >= 0 &&
+         InpEarlyAdverseExitR > 0.0 &&
+         age_minutes >= (double)InpEarlyAdverseExitAfterMinutes &&
+         unrealized_r <= -InpEarlyAdverseExitR)
+        {
+         if(InpEarlyAdverseExitShadowOnly)
+           {
+            LogManagement("EARLY_ADVERSE_EXIT_SHADOW", direction, ticket, volume, entry_price, current_price, current_sl, current_sl, tp, risk_points, unrealized_r, 0, "shadow_only", InpEarlyAdverseExitR, age_minutes);
+           }
+         else
+           {
+            long early_close_retcode = 0;
+            const bool close_ok = SendManagedClose(ticket, type, volume, bid, ask, "_EARLY", early_close_retcode);
+            LogManagement(close_ok ? "EARLY_ADVERSE_EXIT_OK" : "EARLY_ADVERSE_EXIT_FAIL", direction, ticket, volume, entry_price, current_price, current_sl, current_sl, tp, risk_points, unrealized_r, early_close_retcode, close_ok ? "pass" : "early_adverse_close_failed", InpEarlyAdverseExitR, age_minutes);
+            if(close_ok)
+               continue;
+           }
+        }
+
       if(InpSplitEntryEnabled && !InpSplitEntryShadowOnly && InpSplitEntryMoveRunnerSLToBE &&
-         TextContains(position_comment, "_RUN") && unrealized_r >= InpSplitEntryFirstTargetR &&
+         InpSplitEntryBreakEvenMode == 2 &&
+         TextContains(position_comment, "_RUN") && unrealized_r >= split_break_even_trigger_r &&
          !GlobalVariableCheck(SplitRunnerStateKey(ticket)))
         {
          const double break_even_sl = NormalizeDouble(entry_price, digits);
@@ -966,7 +1079,7 @@ void ManageOpenPositions()
             const bool split_be_ok = ModifyPositionStops(ticket, break_even_sl, tp, split_be_retcode);
             if(split_be_ok)
                GlobalVariableSet(SplitRunnerStateKey(ticket), 1.0);
-            LogManagement(split_be_ok ? "SPLIT_RUNNER_BE_MODIFY_OK" : "SPLIT_RUNNER_BE_MODIFY_FAIL", direction, ticket, volume, entry_price, current_price, current_sl, break_even_sl, tp, risk_points, unrealized_r, split_be_retcode, split_be_ok ? "pass" : "split_runner_be_failed", InpSplitEntryFirstTargetR, InpSplitEntryRunnerTargetR);
+            LogManagement(split_be_ok ? "SPLIT_RUNNER_BE_MODIFY_OK" : "SPLIT_RUNNER_BE_MODIFY_FAIL", direction, ticket, volume, entry_price, current_price, current_sl, break_even_sl, tp, risk_points, unrealized_r, split_be_retcode, split_be_ok ? "pass" : "split_runner_be_failed", split_break_even_trigger_r, InpSplitEntryRunnerTargetR);
            }
         }
 
@@ -1512,9 +1625,521 @@ bool FeatureLossFilterBlocks(
    return false;
   }
 
+bool IsH4DecisionSignalMode()
+  {
+   return InpSignalMode == SIGNAL_D1_COMPRESSION_H4_EXPANSION ||
+          InpSignalMode == SIGNAL_H4_TREND_PULLBACK_D1_BIAS ||
+          InpSignalMode == SIGNAL_WEEKLY_LEVEL_H4_REJECTION;
+  }
+
+bool IsH1DecisionSignalMode()
+  {
+   return InpSignalMode == SIGNAL_D1_COMPRESSION_H1_EXPANSION;
+  }
+
+double TimeframeHigh(const ENUM_TIMEFRAMES timeframe, const int start_shift, const int count)
+  {
+   double value = 0.0;
+   for(int i = 0; i < count; i++)
+     {
+      const double high = iHigh(InpTargetSymbol, timeframe, start_shift + i);
+      if(high <= 0.0)
+         return 0.0;
+      if(value == 0.0 || high > value)
+         value = high;
+     }
+   return value;
+  }
+
+double TimeframeLow(const ENUM_TIMEFRAMES timeframe, const int start_shift, const int count)
+  {
+   double value = 0.0;
+   for(int i = 0; i < count; i++)
+     {
+      const double low = iLow(InpTargetSymbol, timeframe, start_shift + i);
+      if(low <= 0.0)
+         return 0.0;
+      if(value == 0.0 || low < value)
+         value = low;
+     }
+   return value;
+  }
+
+double TimeframeMedianRange(const ENUM_TIMEFRAMES timeframe, const int count, const int start_shift)
+  {
+   double ranges[];
+   ArrayResize(ranges, count);
+   int found = 0;
+   for(int i = 0; i < count; i++)
+     {
+      const double high = iHigh(InpTargetSymbol, timeframe, start_shift + i);
+      const double low = iLow(InpTargetSymbol, timeframe, start_shift + i);
+      if(high <= 0.0 || low <= 0.0 || high <= low)
+         continue;
+      ranges[found] = high - low;
+      found++;
+     }
+   if(found <= 0)
+      return 0.0;
+   ArrayResize(ranges, found);
+   ArraySort(ranges);
+   if((found % 2) == 1)
+      return ranges[found / 2];
+   return 0.5 * (ranges[(found / 2) - 1] + ranges[found / 2]);
+  }
+
+double IndicatorAtrPrice(const ENUM_TIMEFRAMES timeframe, const int period, const int shift)
+  {
+   const int handle = iATR(InpTargetSymbol, timeframe, period);
+   if(handle == INVALID_HANDLE)
+      return 0.0;
+   double buffer[1];
+   const int copied = CopyBuffer(handle, 0, shift, 1, buffer);
+   IndicatorRelease(handle);
+   if(copied != 1 || buffer[0] <= 0.0)
+      return 0.0;
+   return buffer[0];
+  }
+
+double IndicatorEmaClose(const ENUM_TIMEFRAMES timeframe, const int period, const int shift)
+  {
+   const int handle = iMA(InpTargetSymbol, timeframe, period, 0, MODE_EMA, PRICE_CLOSE);
+   if(handle == INVALID_HANDLE)
+      return 0.0;
+   double buffer[1];
+   const int copied = CopyBuffer(handle, 0, shift, 1, buffer);
+   IndicatorRelease(handle);
+   if(copied != 1 || buffer[0] <= 0.0)
+      return 0.0;
+   return buffer[0];
+  }
+
+double IndicatorAtrPercentile(const ENUM_TIMEFRAMES timeframe, const int period, const int lookback, const int shift)
+  {
+   const double current_atr = IndicatorAtrPrice(timeframe, period, shift);
+   if(current_atr <= 0.0)
+      return 100.0;
+
+   const int handle = iATR(InpTargetSymbol, timeframe, period);
+   if(handle == INVALID_HANDLE)
+      return 100.0;
+   double values[];
+   ArrayResize(values, lookback);
+   const int copied = CopyBuffer(handle, 0, shift, lookback, values);
+   IndicatorRelease(handle);
+   if(copied <= 0)
+      return 100.0;
+
+   int valid = 0;
+   int less_or_equal = 0;
+   for(int i = 0; i < copied; i++)
+     {
+      if(values[i] <= 0.0)
+         continue;
+      valid++;
+      if(values[i] <= current_atr)
+         less_or_equal++;
+     }
+   if(valid <= 0)
+      return 100.0;
+   return 100.0 * (double)less_or_equal / (double)valid;
+  }
+
+double ClosePositionInRange(const double high, const double low, const double close)
+  {
+   const double range = high - low;
+   if(range <= 0.0)
+      return 0.5;
+   return (close - low) / range;
+  }
+
+bool CurrentBrokerDayStateFromM5(
+   const datetime signal_time,
+   double &day_open,
+   double &day_high,
+   double &day_low,
+   int &bars_found
+)
+  {
+   day_open = 0.0;
+   day_high = 0.0;
+   day_low = 0.0;
+   bars_found = 0;
+
+   MqlDateTime parts;
+   TimeToStruct(signal_time, parts);
+   parts.hour = 0;
+   parts.min = 0;
+   parts.sec = 0;
+   const datetime day_start = StructToTime(parts);
+   const int bars = iBars(InpTargetSymbol, PERIOD_M5);
+
+   for(int shift = 1; shift < bars && shift < 400; shift++)
+     {
+      const datetime bar_time = iTime(InpTargetSymbol, PERIOD_M5, shift);
+      if(bar_time == 0)
+         break;
+      if(bar_time > signal_time)
+         continue;
+      if(bar_time < day_start)
+         break;
+
+      const double bar_open = iOpen(InpTargetSymbol, PERIOD_M5, shift);
+      const double bar_high = iHigh(InpTargetSymbol, PERIOD_M5, shift);
+      const double bar_low = iLow(InpTargetSymbol, PERIOD_M5, shift);
+      if(bar_open <= 0.0 || bar_high <= 0.0 || bar_low <= 0.0)
+         continue;
+
+      if(bars_found == 0)
+        {
+         day_high = bar_high;
+         day_low = bar_low;
+        }
+      else
+        {
+         day_high = MathMax(day_high, bar_high);
+         day_low = MathMin(day_low, bar_low);
+        }
+      day_open = bar_open;
+      bars_found++;
+     }
+
+   return bars_found >= MathMax(1, InpDailyExtremeMinBarsSinceOpen) &&
+          day_open > 0.0 &&
+          day_high > day_low;
+  }
+
+bool TryDailyExtremeReclaimSignal(
+   const datetime signal_time,
+   const double open,
+   const double high,
+   const double low,
+   const double close,
+   const double range,
+   const double m5_atr,
+   const double body_fraction,
+   const double close_location,
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   MqlDateTime parts;
+   TimeToStruct(signal_time, parts);
+   if(!HourInWindow(parts.hour, InpDailyExtremeStartHour, InpDailyExtremeEndHour))
+      return false;
+
+   const double d1_atr = IndicatorAtrPrice(PERIOD_D1, MathMax(1, InpAtrPeriod), 1);
+   if(d1_atr <= 0.0 || m5_atr <= 0.0 || range <= 0.0)
+      return false;
+
+   double day_open = 0.0;
+   double day_high = 0.0;
+   double day_low = 0.0;
+   int bars_found = 0;
+   if(!CurrentBrokerDayStateFromM5(signal_time, day_open, day_high, day_low, bars_found))
+      return false;
+
+   if(range < InpMinRangeAtr * m5_atr || body_fraction < InpDailyExtremeMinBodyFraction)
+      return false;
+
+   const double up_move_atr = (day_high - day_open) / d1_atr;
+   const double down_move_atr = (day_open - day_low) / d1_atr;
+   const bool short_reclaim =
+      up_move_atr >= InpDailyExtremeMinMoveAtr &&
+      high >= day_high - InpDailyExtremeTouchAtr * d1_atr &&
+      close <= day_high - InpDailyExtremeReclaimAtr * d1_atr &&
+      close < open &&
+      close_location <= InpShortCloseLocation;
+   const bool long_reclaim =
+      down_move_atr >= InpDailyExtremeMinMoveAtr &&
+      low <= day_low + InpDailyExtremeTouchAtr * d1_atr &&
+      close >= day_low + InpDailyExtremeReclaimAtr * d1_atr &&
+      close > open &&
+      close_location >= InpLongCloseLocation;
+
+   if(!short_reclaim && !long_reclaim)
+      return false;
+
+   const bool choose_short = short_reclaim && (!long_reclaim || up_move_atr >= down_move_atr);
+   if(choose_short)
+     {
+      const double projected_sl = day_high + InpDailyExtremeStopBufferAtr * d1_atr;
+      direction = "SHORT";
+      reason = "M5_DAILY_EXTREME_RECLAIM_SHORT";
+      stop_distance = projected_sl - close;
+      break_distance_atr = (day_high - close) / d1_atr;
+     }
+   else
+     {
+      const double projected_sl = day_low - InpDailyExtremeStopBufferAtr * d1_atr;
+      direction = "LONG";
+      reason = "M5_DAILY_EXTREME_RECLAIM_LONG";
+      stop_distance = close - projected_sl;
+      break_distance_atr = (close - day_low) / d1_atr;
+     }
+   return stop_distance > 0.0;
+  }
+
+bool TryD1CompressionH4ExpansionSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   if(iBars(InpTargetSymbol, PERIOD_D1) < 280 || iBars(InpTargetSymbol, PERIOD_H4) < 60)
+      return false;
+
+   const int box_days = MathMax(2, InpD1CompressionBoxDays);
+   const double d1_atr_percentile = IndicatorAtrPercentile(PERIOD_D1, 14, 252, 1);
+   const double box_high = TimeframeHigh(PERIOD_D1, 1, box_days);
+   const double box_low = TimeframeLow(PERIOD_D1, 1, box_days);
+   const double d1_median_range = TimeframeMedianRange(PERIOD_D1, 20, 1);
+   const double box_width = box_high - box_low;
+   const double box_average = box_width / (double)box_days;
+   if(box_high <= 0.0 || box_low <= 0.0 || d1_median_range <= 0.0 || box_width <= 0.0)
+      return false;
+   if(d1_atr_percentile > InpD1CompressionAtrPercentileMax || box_average > InpD1CompressionRangeMedianMax * d1_median_range)
+      return false;
+
+   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_high = iHigh(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_low = iLow(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_close = iClose(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_range = h4_high - h4_low;
+   const double h4_body = MathAbs(h4_close - h4_open);
+   const double h4_atr = IndicatorAtrPrice(PERIOD_H4, 14, 1);
+   if(h4_open <= 0.0 || h4_high <= 0.0 || h4_low <= 0.0 || h4_close <= 0.0 || h4_range <= 0.0 || h4_atr <= 0.0)
+      return false;
+   if(h4_body / h4_range < InpD1CompressionH4MinBodyFraction)
+      return false;
+
+   const bool is_long = h4_close > box_high && h4_close > h4_open;
+   const bool is_short = h4_close < box_low && h4_close < h4_open;
+   if(!is_long && !is_short)
+      return false;
+
+   if(is_long)
+     {
+      direction = "LONG";
+      stop_distance = MathMax(h4_close - box_low, h4_atr);
+      break_distance_atr = (h4_close - box_high) / h4_atr;
+      reason = "D1_COMPRESSION_H4_EXPANSION_LONG";
+     }
+   else
+     {
+      direction = "SHORT";
+      stop_distance = MathMax(box_high - h4_close, h4_atr);
+      break_distance_atr = (box_low - h4_close) / h4_atr;
+      reason = "D1_COMPRESSION_H4_EXPANSION_SHORT";
+     }
+   return stop_distance > 0.0;
+  }
+
+bool TryD1CompressionH1ExpansionSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   if(iBars(InpTargetSymbol, PERIOD_D1) < 280 || iBars(InpTargetSymbol, PERIOD_H1) < 240)
+      return false;
+
+   const int box_days = MathMax(2, InpD1CompressionBoxDays);
+   const double d1_atr_percentile = IndicatorAtrPercentile(PERIOD_D1, 14, 252, 1);
+   const double box_high = TimeframeHigh(PERIOD_D1, 1, box_days);
+   const double box_low = TimeframeLow(PERIOD_D1, 1, box_days);
+   const double d1_median_range = TimeframeMedianRange(PERIOD_D1, 20, 1);
+   const double box_width = box_high - box_low;
+   const double box_average = box_width / (double)box_days;
+   if(box_high <= 0.0 || box_low <= 0.0 || d1_median_range <= 0.0 || box_width <= 0.0)
+      return false;
+   if(d1_atr_percentile > InpD1CompressionAtrPercentileMax || box_average > InpD1CompressionRangeMedianMax * d1_median_range)
+      return false;
+
+   const double h1_open = iOpen(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_high = iHigh(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_low = iLow(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_close = iClose(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_range = h1_high - h1_low;
+   const double h1_body = MathAbs(h1_close - h1_open);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, 14, 1);
+   if(h1_open <= 0.0 || h1_high <= 0.0 || h1_low <= 0.0 || h1_close <= 0.0 || h1_range <= 0.0 || h1_atr <= 0.0)
+      return false;
+   if(h1_body / h1_range < InpD1CompressionH4MinBodyFraction)
+      return false;
+
+   const bool is_long = h1_close > box_high && h1_close > h1_open;
+   const bool is_short = h1_close < box_low && h1_close < h1_open;
+   if(!is_long && !is_short)
+      return false;
+
+   if(is_long)
+     {
+      direction = "LONG";
+      stop_distance = MathMax(h1_close - box_low, h1_atr);
+      break_distance_atr = (h1_close - box_high) / h1_atr;
+      reason = "D1_COMPRESSION_H1_EXPANSION_LONG";
+     }
+   else
+     {
+      direction = "SHORT";
+      stop_distance = MathMax(box_high - h1_close, h1_atr);
+      break_distance_atr = (box_low - h1_close) / h1_atr;
+      reason = "D1_COMPRESSION_H1_EXPANSION_SHORT";
+     }
+   return stop_distance > 0.0;
+  }
+
+bool TryH4TrendPullbackD1BiasSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   if(iBars(InpTargetSymbol, PERIOD_D1) < 230 || iBars(InpTargetSymbol, PERIOD_H4) < 80)
+      return false;
+
+   const double d1_ema50 = IndicatorEmaClose(PERIOD_D1, 50, 1);
+   const double d1_ema200 = IndicatorEmaClose(PERIOD_D1, 200, 1);
+   const double d1_ema50_prior = IndicatorEmaClose(PERIOD_D1, 50, 21);
+   const double h4_ema21 = IndicatorEmaClose(PERIOD_H4, 21, 1);
+   const double h4_ema50 = IndicatorEmaClose(PERIOD_H4, 50, 1);
+   const double h4_atr = IndicatorAtrPrice(PERIOD_H4, 14, 1);
+   if(d1_ema50 <= 0.0 || d1_ema200 <= 0.0 || d1_ema50_prior <= 0.0 || h4_ema21 <= 0.0 || h4_ema50 <= 0.0 || h4_atr <= 0.0)
+      return false;
+
+   const bool long_bias = d1_ema50 > d1_ema200 && d1_ema50 > d1_ema50_prior;
+   const bool short_bias = d1_ema50 < d1_ema200 && d1_ema50 < d1_ema50_prior;
+   if(!long_bias && !short_bias)
+      return false;
+
+   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_high = iHigh(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_low = iLow(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_close = iClose(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_range = h4_high - h4_low;
+   if(h4_open <= 0.0 || h4_high <= 0.0 || h4_low <= 0.0 || h4_close <= 0.0 || h4_range <= 0.0)
+      return false;
+
+   const double pullback_reference = long_bias ? h4_low : h4_high;
+   const double distance_to_ema21 = MathAbs(pullback_reference - h4_ema21);
+   const double distance_to_ema50 = MathAbs(pullback_reference - h4_ema50);
+   const bool pullback_near_average = MathMin(distance_to_ema21, distance_to_ema50) <= 0.5 * h4_atr;
+   const bool trend_structure_ok = long_bias ? h4_close > d1_ema200 : h4_close < d1_ema200;
+   if(!pullback_near_average || !trend_structure_ok)
+      return false;
+
+   const double close_position = ClosePositionInRange(h4_high, h4_low, h4_close);
+   const bool long_confirmation = long_bias && h4_close > h4_open && close_position >= 0.65;
+   const bool short_confirmation = short_bias && h4_close < h4_open && close_position <= 0.35;
+   if(!long_confirmation && !short_confirmation)
+      return false;
+
+   if(long_confirmation)
+     {
+      const double swing_low = TimeframeLow(PERIOD_H4, 1, 5);
+      const double projected_sl = swing_low - 0.25 * h4_atr;
+      direction = "LONG";
+      stop_distance = h4_close - projected_sl;
+      break_distance_atr = (h4_close - MathMin(h4_ema21, h4_ema50)) / h4_atr;
+      reason = "H4_TREND_PULLBACK_D1_BIAS_LONG";
+     }
+   else
+     {
+      const double swing_high = TimeframeHigh(PERIOD_H4, 1, 5);
+      const double projected_sl = swing_high + 0.25 * h4_atr;
+      direction = "SHORT";
+      stop_distance = projected_sl - h4_close;
+      break_distance_atr = (MathMax(h4_ema21, h4_ema50) - h4_close) / h4_atr;
+      reason = "H4_TREND_PULLBACK_D1_BIAS_SHORT";
+     }
+   return stop_distance > 0.0;
+  }
+
+bool TryWeeklyLevel(
+   const double level_price,
+   const bool resistance_level,
+   const string level_name,
+   const double h4_atr,
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_high = iHigh(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_low = iLow(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_close = iClose(InpTargetSymbol, PERIOD_H4, 1);
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   double body = MathAbs(h4_close - h4_open);
+   if(body < point)
+      body = point;
+   const double upper_wick = h4_high - MathMax(h4_open, h4_close);
+   const double lower_wick = MathMin(h4_open, h4_close) - h4_low;
+   const double zone = 0.25 * h4_atr;
+   if(level_price <= 0.0 || h4_atr <= 0.0 || point <= 0.0 || h4_high <= 0.0 || h4_low <= 0.0 || h4_close <= 0.0)
+      return false;
+
+   if(resistance_level)
+     {
+      const bool touched = h4_high >= level_price - zone && h4_low <= level_price + zone;
+      const bool rejected = upper_wick >= 1.5 * body && h4_close < level_price;
+      if(!touched || !rejected)
+         return false;
+      direction = "SHORT";
+      stop_distance = (h4_high + 0.25 * h4_atr) - h4_close;
+      break_distance_atr = (level_price - h4_close) / h4_atr;
+      reason = "WEEKLY_LEVEL_H4_REJECTION_SHORT_" + level_name;
+      return stop_distance > 0.0;
+     }
+
+   const bool touched = h4_low <= level_price + zone && h4_high >= level_price - zone;
+   const bool rejected = lower_wick >= 1.5 * body && h4_close > level_price;
+   if(!touched || !rejected)
+      return false;
+   direction = "LONG";
+   stop_distance = h4_close - (h4_low - 0.25 * h4_atr);
+   break_distance_atr = (h4_close - level_price) / h4_atr;
+   reason = "WEEKLY_LEVEL_H4_REJECTION_LONG_" + level_name;
+   return stop_distance > 0.0;
+  }
+
+bool TryWeeklyLevelH4RejectionSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   if(iBars(InpTargetSymbol, PERIOD_W1) < 10 || iBars(InpTargetSymbol, PERIOD_H4) < 60)
+      return false;
+
+   const double h4_atr = IndicatorAtrPrice(PERIOD_H4, 14, 1);
+   if(h4_atr <= 0.0)
+      return false;
+
+   const double previous_week_high = iHigh(InpTargetSymbol, PERIOD_W1, 1);
+   const double previous_week_low = iLow(InpTargetSymbol, PERIOD_W1, 1);
+   const double four_week_high = TimeframeHigh(PERIOD_W1, 1, 4);
+   const double four_week_low = TimeframeLow(PERIOD_W1, 1, 4);
+
+   if(TryWeeklyLevel(previous_week_high, true, "previous_week_high", h4_atr, direction, reason, stop_distance, break_distance_atr))
+      return true;
+   if(TryWeeklyLevel(previous_week_low, false, "previous_week_low", h4_atr, direction, reason, stop_distance, break_distance_atr))
+      return true;
+   if(TryWeeklyLevel(four_week_high, true, "prior_4_week_high", h4_atr, direction, reason, stop_distance, break_distance_atr))
+      return true;
+   if(TryWeeklyLevel(four_week_low, false, "prior_4_week_low", h4_atr, direction, reason, stop_distance, break_distance_atr))
+      return true;
+   return false;
+  }
+
 void EvaluateCompletedM5Bar()
   {
    ResetDailyCounterIfNeeded();
+
+   const bool h4_decision_signal_mode = IsH4DecisionSignalMode();
+   const bool h1_decision_signal_mode = IsH1DecisionSignalMode();
+   if(h4_decision_signal_mode)
+     {
+      const datetime h4_decision_bar = iTime(InpTargetSymbol, PERIOD_H4, 1);
+      if(h4_decision_bar <= 0 || h4_decision_bar == g_last_h4_decision_bar)
+         return;
+      g_last_h4_decision_bar = h4_decision_bar;
+     }
+   if(h1_decision_signal_mode)
+     {
+      const datetime h1_decision_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+      if(h1_decision_bar <= 0 || h1_decision_bar == g_last_h1_decision_bar)
+         return;
+      g_last_h1_decision_bar = h1_decision_bar;
+     }
 
    if(iBars(InpTargetSymbol, PERIOD_M5) < InpBreakLookbackBars + InpAtrPeriod + 5)
       return;
@@ -1583,7 +2208,7 @@ void EvaluateCompletedM5Bar()
       if(pullback_ema <= 0.0)
          return;
      }
-   else if(InpSignalMode == SIGNAL_OPENING_RANGE_CONTINUATION)
+   else if(InpSignalMode == SIGNAL_OPENING_RANGE_CONTINUATION || InpSignalMode == SIGNAL_OPENING_RANGE_REVERSAL)
      {
       if(!OpeningRangeForSignal(signal_time, opening_high, opening_low))
         {
@@ -1613,6 +2238,7 @@ void EvaluateCompletedM5Bar()
    string direction = "";
    string reason = "";
    double break_distance_atr = 0.0;
+   double htf_stop_distance = 0.0;
 
    if(InpSignalMode == SIGNAL_BREAK_AND_RUN)
      {
@@ -1765,6 +2391,35 @@ void EvaluateCompletedM5Bar()
          break_distance_atr = (opening_low - close) / atr;
         }
      }
+   else if(InpSignalMode == SIGNAL_OPENING_RANGE_REVERSAL)
+     {
+      const bool long_opening_reversal =
+         low <= opening_low - InpOpeningBreakAtrMultiple * atr &&
+         close >= opening_low + InpReclaimAtrMultiple * atr &&
+         close > open &&
+         range >= InpMinRangeAtr * atr &&
+         body_fraction >= InpMinBodyFraction &&
+         close_location >= InpLongCloseLocation;
+      const bool short_opening_reversal =
+         high >= opening_high + InpOpeningBreakAtrMultiple * atr &&
+         close <= opening_high - InpReclaimAtrMultiple * atr &&
+         close < open &&
+         range >= InpMinRangeAtr * atr &&
+         body_fraction >= InpMinBodyFraction &&
+         close_location <= InpShortCloseLocation;
+      if(long_opening_reversal)
+        {
+         direction = "LONG";
+         reason = "M5_OPENING_RANGE_REVERSAL_LONG";
+         break_distance_atr = (close - opening_low) / atr;
+        }
+      else if(short_opening_reversal)
+        {
+         direction = "SHORT";
+         reason = "M5_OPENING_RANGE_REVERSAL_SHORT";
+         break_distance_atr = (opening_high - close) / atr;
+        }
+     }
    else if(InpSignalMode == SIGNAL_M5_EMA_TREND_CONTINUATION)
      {
       const double slope_atr = (m5_trend_fast - m5_trend_fast_prior) / atr;
@@ -1803,10 +2458,31 @@ void EvaluateCompletedM5Bar()
          break_distance_atr = short_distance_atr;
         }
      }
+   else if(InpSignalMode == SIGNAL_D1_COMPRESSION_H4_EXPANSION)
+     {
+      TryD1CompressionH4ExpansionSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_D1_COMPRESSION_H1_EXPANSION)
+     {
+      TryD1CompressionH1ExpansionSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_H4_TREND_PULLBACK_D1_BIAS)
+     {
+      TryH4TrendPullbackD1BiasSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_WEEKLY_LEVEL_H4_REJECTION)
+     {
+      TryWeeklyLevelH4RejectionSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_DAILY_EXTREME_RECLAIM)
+     {
+      TryDailyExtremeReclaimSignal(signal_time, open, high, low, close, range, atr, body_fraction, close_location, direction, reason, htf_stop_distance, break_distance_atr);
+     }
 
    if(direction == "")
      {
-      LogSignal("NO_SIGNAL", "NONE", "no_m5_momentum_candidate", bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
+      const string no_signal_reason = h4_decision_signal_mode ? "no_h4_independent_candidate" : (h1_decision_signal_mode ? "no_h1_independent_candidate" : "no_m5_momentum_candidate");
+      LogSignal("NO_SIGNAL", "NONE", no_signal_reason, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
       return;
      }
 
@@ -1815,8 +2491,19 @@ void EvaluateCompletedM5Bar()
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "three_bar_move_atr_exceeds_cap");
       return;
      }
+   if(InpMinBreakDistanceAtr > 0.0 && break_distance_atr < InpMinBreakDistanceAtr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "break_distance_atr_below_floor");
+      return;
+     }
+   if(InpMaxBreakDistanceAtr > 0.0 && break_distance_atr > InpMaxBreakDistanceAtr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "break_distance_atr_exceeds_cap");
+      return;
+     }
 
-   double stop_distance = MathMax(InpStopAtrMultiple * atr, InpStopFloorPoints * point);
+   double stop_distance = htf_stop_distance > 0.0 ? htf_stop_distance : InpStopAtrMultiple * atr;
+   stop_distance = MathMax(stop_distance, InpStopFloorPoints * point);
    const double stop_points = stop_distance / point;
    const double estimated_cost_r = (stop_points > 0.0) ? (double)spread_points / stop_points : 999.0;
 

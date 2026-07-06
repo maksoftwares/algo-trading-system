@@ -1,0 +1,281 @@
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+import run_a1_xau_m5_momentum_backtest_variants as a1
+from run_a1_v9_v10_rr2_stretch_probe import (
+    last12_metrics,
+    owner_metrics,
+    read_trade_csv,
+)
+
+
+PHASE1_ROOT = Path(__file__).resolve().parents[1]
+REPORTS = PHASE1_ROOT / "outputs" / "reports"
+PREREG = PHASE1_ROOT / "docs" / "A1_XAU_H1_D1_LONG_EXPANSION_FREQUENCY_STRESS_PREREG_2026_07_05.md"
+BASELINE_JSON = REPORTS / "A1_XAU_H4_D1_LONG_ONLY_FREQUENCY_STRESS_202207_202606.json"
+FROM_DATE = "2022.07.01"
+TO_DATE = "2026.06.30"
+TAG = "OWNER_GOAL_H1_D1_LONG_EXPANSION_FREQ_STRESS_202207_202606"
+
+
+def variant(name: str, atr_cap: str, box_days: str, range_max: str, body_min: str) -> a1.Variant:
+    return a1.Variant(
+        name=name,
+        label=(
+            "H1 D1 long expansion frequency stress, "
+            f"ATR cap {atr_cap}, box days {box_days}, range max {range_max}, body min {body_min}"
+        ),
+        run_id=f"BT_A1_XAU_H1_D1_LONG_FREQ_{name.upper()}_OWNER_GOAL",
+        tester_inputs={
+            "InpSignalMode": "10",
+            "InpDirectionMode": "1",
+            "InpUseH1TrendFilter": "false",
+            "InpUseH4TrendFilter": "false",
+            "InpRiskReward": "2.00",
+            "InpMaxEstimatedCostR": "0.15",
+            "InpStopCeilingPoints": "0",
+            "InpMaxTradesPerDay": "6",
+            "InpCooldownMinutes": "0",
+            "InpOnePositionPerMagic": "false",
+            "InpMaxOpenPositionsPerMagic": "32",
+            "InpD1CompressionAtrPercentileMax": atr_cap,
+            "InpD1CompressionBoxDays": box_days,
+            "InpD1CompressionRangeMedianMax": range_max,
+            "InpD1CompressionH4MinBodyFraction": body_min,
+        },
+    )
+
+
+VARIANTS = [
+    variant("h1_long_box2_atr80_range150_body035", "80.00", "2", "1.50", "0.35"),
+    variant("h1_long_box2_atr60_range125_body035", "60.00", "2", "1.25", "0.35"),
+    variant("h1_long_box3_atr60_range125_body035", "60.00", "3", "1.25", "0.35"),
+    variant("h1_long_box2_atr80_range200_body025", "80.00", "2", "2.00", "0.25"),
+    variant("h1_long_box2_atr100_range200_body025", "100.00", "2", "2.00", "0.25"),
+]
+
+
+def require_file(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError(path)
+
+
+def read_tsv(path: Path) -> list[dict[str, str]]:
+    if not path.exists() or path.stat().st_size == 0:
+        return []
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def ledger_counts(result: dict[str, Any]) -> dict[str, Any]:
+    orders = read_tsv(Path(result["order_csv"]))
+    signals = read_tsv(Path(result["signal_csv"]))
+    return {
+        "orders_rows": len(orders),
+        "order_action_counts": dict(Counter(row.get("action", "") for row in orders)),
+        "order_reason_counts": dict(Counter(row.get("reason", "") for row in orders)),
+        "order_direction_counts": dict(Counter(row.get("direction", "") for row in orders)),
+        "signals_rows": len(signals),
+        "signal_stage_counts": dict(Counter(row.get("stage", "") for row in signals)),
+        "signal_direction_counts": dict(
+            Counter(row.get("direction", "") for row in signals if row.get("stage") != "NO_SIGNAL")
+        ),
+    }
+
+
+def load_baseline_context() -> dict[str, Any]:
+    payload = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    baseline = next(
+        item for item in payload["variants"] if item["name"] == "long_box2_atr80_range150_body035"
+    )
+    baseline["ledger_counts"] = ledger_counts(baseline)
+    return baseline
+
+
+def enrich_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    for result in payload["variants"]:
+        rows = read_trade_csv(Path(result["trade_csv"]))
+        result["owner_goal_metrics"] = owner_metrics(rows, FROM_DATE, TO_DATE)
+        result["last12_owner_goal_metrics"] = last12_metrics(rows, TO_DATE)
+        result["ledger_counts"] = ledger_counts(result)
+    payload["baseline_context"] = load_baseline_context()
+    payload["winner"] = choose_winner(payload["variants"])
+    payload["status"] = payload["winner"]["status"]
+    payload["generated_at_utc"] = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    payload["scope"]["family"] = "A1 H1 D1 long expansion frequency stress"
+    payload["scope"]["period"] = f"{FROM_DATE} -> {TO_DATE}"
+    payload["scope"]["anti_overfit_boundary"] = "Five preregistered H1 frequency cells only; no optimizer."
+    payload["scope"]["review_spend_rule"] = (
+        "Do not spend reviewer unless H1 materially improves frequency while WR >= 50% and W/L >= 2.0 survive."
+    )
+    payload["scope"]["preregistration"] = str(PREREG)
+    payload["scope"]["baseline_probe"] = str(BASELINE_JSON)
+    return payload
+
+
+def choose_winner(results: list[dict[str, Any]]) -> dict[str, Any]:
+    core_hits = [result for result in results if result["owner_goal_metrics"]["owner_core_shape_pass"]]
+    if core_hits:
+        best = max(core_hits, key=lambda item: (item["owner_goal_metrics"]["active_day_pct"], item["owner_goal_metrics"]["manual_pnl"]))
+        if best["owner_goal_metrics"]["owner_daily_frequency_pass"]:
+            return {"status": "OWNER_GOAL_HIT_REVIEW_REQUIRED", "best_variant": best["name"]}
+        return {"status": "H1_LONG_CORE_SHAPE_FREQUENCY_GAP", "best_variant": best["name"]}
+    near = [
+        result
+        for result in results
+        if result["owner_goal_metrics"]["win_rate_pct"] >= 48.0
+        and (result["owner_goal_metrics"]["avg_win_loss_ratio"] or 0.0) >= 1.9
+    ]
+    if near:
+        best = max(near, key=lambda item: (item["owner_goal_metrics"]["active_day_pct"], item["owner_goal_metrics"]["manual_pnl"]))
+        return {"status": "H1_LONG_NEAR_MISS_FREQUENCY_STRESS", "best_variant": best["name"]}
+    best = max(results, key=lambda item: item["owner_goal_metrics"]["manual_pnl"]) if results else None
+    return {"status": "REJECT_H1_LONG_FREQUENCY_STRESS_BREAKS_CORE_SHAPE", "best_variant": best["name"] if best else ""}
+
+
+def row_decision(metrics: dict[str, Any]) -> str:
+    if metrics["owner_core_shape_pass"] and metrics["owner_daily_frequency_pass"]:
+        return "OWNER_GOAL"
+    if metrics["owner_core_shape_pass"]:
+        return "CORE_SHAPE"
+    if metrics["win_rate_pct"] >= 48.0 and (metrics["avg_win_loss_ratio"] or 0.0) >= 1.9:
+        return "NEAR"
+    return "FAIL_SHAPE"
+
+
+def render_metric_row(name: str, metrics: dict[str, Any], last12: dict[str, Any] | None, decision: str) -> str:
+    last12_cell = "n/a"
+    if last12 is not None:
+        last12_cell = f"{last12['win_rate_pct']:.2f}/{last12['avg_win_loss_ratio'] or 0.0:.2f}"
+    return (
+        f"| `{name}` | {metrics['trades']} | {metrics['win_rate_pct']:.2f} | "
+        f"{metrics['avg_win_loss_ratio'] or 0.0:.4f} | {metrics['active_day_pct']:.2f} | "
+        f"{metrics['profit_factor'] or 0.0:.4f} | {metrics['manual_pnl']:.2f} | "
+        f"{metrics['max_closed_dd']:.2f} | {last12_cell} | `{decision}` |"
+    )
+
+
+def render_counts(result: dict[str, Any]) -> list[str]:
+    counts = result["ledger_counts"]
+    return [
+        f"- Order actions: `{json.dumps(counts['order_action_counts'], sort_keys=True)}`",
+        f"- Order reasons: `{json.dumps(counts['order_reason_counts'], sort_keys=True)}`",
+        f"- Signal stages: `{json.dumps(counts['signal_stage_counts'], sort_keys=True)}`",
+        f"- Signal directions: `{json.dumps(counts['signal_direction_counts'], sort_keys=True)}`",
+    ]
+
+
+def render(payload: dict[str, Any]) -> str:
+    baseline = payload["baseline_context"]
+    baseline_metrics = baseline["owner_goal_metrics"]
+    baseline_last12 = baseline["last12_owner_goal_metrics"]
+    lines = [
+        "# A1 XAU H1 D1 Long Expansion Frequency Stress Exact Probe",
+        "",
+        f"Generated UTC: `{payload['generated_at_utc']}`",
+        "",
+        "Scope: exact MT5 Strategy Tester probe in isolated root. No live/demo runtime, chart, preset, order, position, or broker state was changed.",
+        "",
+        f"Status: `{payload['status']}`",
+        "",
+        f"- Preregistration: `{payload['scope']['preregistration']}`",
+        f"- Baseline probe JSON: `{payload['scope']['baseline_probe']}`",
+        f"- Period: `{payload['scope']['period']}`",
+        f"- Tester currency: `{payload['scope'].get('tester_currency', 'USD')}`",
+        f"- Variant count: `{payload['scope']['variant_count']}`",
+        "",
+        "## Owner Frontier",
+        "",
+        "| Variant | Trades | WR% | W/L | Active% | PF | Manual P&L USD | Max DD USD | Last12 WR/WL | Decision |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |",
+        render_metric_row(
+            "baseline_h4_long_best_prior_exact",
+            baseline_metrics,
+            baseline_last12,
+            row_decision(baseline_metrics),
+        ),
+    ]
+    for result in payload["variants"]:
+        metrics = result["owner_goal_metrics"]
+        last12 = result["last12_owner_goal_metrics"]
+        lines.append(render_metric_row(result["name"], metrics, last12, row_decision(metrics)))
+
+    lines.extend(["", "## Ledger Counts", ""])
+    for result in payload["variants"]:
+        lines.extend(["", f"### `{result['name']}`", ""])
+        lines.extend(render_counts(result))
+
+    lines.extend(["", "## Artifacts", ""])
+    for result in payload["variants"]:
+        lines.extend(
+            [
+                f"### `{result['name']}`",
+                "",
+                f"- Label: {result['label']}",
+                f"- Config: `{result['tester_config']}`",
+                f"- MT5 report: `{result['html_report']}`",
+                f"- Trade CSV: `{result['trade_csv']}`",
+                f"- Order CSV: `{result['order_csv']}`",
+                f"- Signal CSV: `{result['signal_csv']}`",
+                f"- Summary JSON: `{result['summary_json']}`",
+                "",
+            ]
+        )
+
+    lines.extend(["## Verdict", ""])
+    if payload["status"] == "H1_LONG_CORE_SHAPE_FREQUENCY_GAP":
+        lines.append(
+            "An H1 row preserved the core WR/W-L shape, but active-day frequency still misses the owner goal. Keep as a component clue pending robustness."
+        )
+    elif payload["status"] == "OWNER_GOAL_HIT_REVIEW_REQUIRED":
+        lines.append(
+            "An exact MT5 H1 row reached the owner goal. Freeze artifacts and prepare a reviewer package before any demo specification."
+        )
+    elif payload["status"] == "H1_LONG_NEAR_MISS_FREQUENCY_STRESS":
+        lines.append(
+            "The H1 stress produced only a near miss. Do not spend the reviewer token on this result."
+        )
+    else:
+        lines.append(
+            "The H1 frequency stress did not preserve WR >= 50% and W/L >= 2.0. Reject this branch."
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Run exact MT5 H1 D1 long expansion frequency stress.")
+    parser.add_argument("--variant-timeout-seconds", type=int, default=900)
+    args = parser.parse_args()
+
+    require_file(PREREG)
+    require_file(BASELINE_JSON)
+    a1.VARIANTS = VARIANTS
+    report_md = REPORTS / "A1_XAU_H1_D1_LONG_EXPANSION_FREQUENCY_STRESS_202207_202606.md"
+    report_json = report_md.with_suffix(".json")
+    payload = a1.run_variants(
+        from_date=FROM_DATE,
+        to_date=TO_DATE,
+        tag=a1.safe_name(TAG),
+        report_md=report_md,
+        report_json=report_json,
+        variant_timeout_seconds=args.variant_timeout_seconds,
+        deposit="1000",
+        currency="USD",
+    )
+    payload = enrich_payload(payload)
+    report_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    report_md.write_text(render(payload), encoding="utf-8")
+    print(json.dumps({"status": payload["status"], "winner": payload["winner"], "report": str(report_md)}, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

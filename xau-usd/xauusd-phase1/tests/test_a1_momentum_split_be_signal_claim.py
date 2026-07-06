@@ -1,10 +1,12 @@
 import importlib.util
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EA = ROOT / "mt5" / "Experts" / "A1XauM5MomentumContinuationExecutor.mq5"
 ATTACH = ROOT / "scripts" / "attach_a1_xau_m5_momentum_continuation.py"
+RUNNER = ROOT / "scripts" / "run_a1_xau_m5_momentum_backtest_variants.py"
 
 
 def _text(path: Path) -> str:
@@ -13,6 +15,16 @@ def _text(path: Path) -> str:
 
 def _attach_module():
     spec = importlib.util.spec_from_file_location("attach_a1_momentum", ATTACH)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _runner_module():
+    spec = importlib.util.spec_from_file_location("run_a1_momentum_variants", RUNNER)
     assert spec is not None
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
@@ -45,6 +57,12 @@ def test_signal_claim_defaults_are_safe_and_guard_is_before_order_send() -> None
     assert evaluation.index("ClaimSignalSlot") < evaluation.index("g_trade.Buy(first_lots")
     assert evaluation.index("ClaimSignalSlot") < evaluation.index("g_trade.Sell(first_lots")
 
+    assert "input double InpSplitEntryFirstLotFraction    = 0.50;" in text
+    assert "input int    InpSplitEntryBreakEvenMode       = 1;" in text
+    assert "input int    InpManagementLogMode             = 1;" in text
+    assert "InpSplitEntryBreakEvenMode != 1" in text
+    assert "InpSplitEntryBreakEvenMode == 2" in text
+
 
 def test_split_be_tp1_attach_configs_render_priority_claim_stack() -> None:
     module = _attach_module()
@@ -74,3 +92,26 @@ def test_split_be_tp1_attach_configs_render_priority_claim_stack() -> None:
         assert f"InpSignalClaimPriority={priority}" in chart
         assert "InpSignalClaimWindowMinutes=4" in chart
         assert "InpSignalClaimGraceSeconds=2" in chart
+
+
+def test_goal_split_grid_variants_are_predeclared_once() -> None:
+    module = _runner_module()
+    variants = [variant for variant in module.VARIANTS if variant.name.startswith("goal_split_")]
+
+    assert len(variants) == 81
+
+    cell_ids = {
+        "_".join(variant.name.split("_")[2:-1])
+        for variant in variants
+    }
+    assert len(cell_ids) == 27
+
+    for variant in variants:
+        inputs = variant.tester_inputs
+        assert inputs["InpSplitEntryEnabled"] == "true"
+        assert inputs["InpSplitEntryShadowOnly"] == "false"
+        assert inputs["InpSplitEntryFirstTargetR"] == "0.70"
+        assert inputs["InpSplitEntryFirstLotFraction"] in {"0.333333", "0.500000", "0.666667"}
+        assert inputs["InpSplitEntryRunnerTargetR"] in {"2.00", "2.50", "3.00"}
+        assert inputs["InpSplitEntryBreakEvenMode"] in {"0", "1", "2"}
+        assert inputs["InpManagementLogMode"] == "0"

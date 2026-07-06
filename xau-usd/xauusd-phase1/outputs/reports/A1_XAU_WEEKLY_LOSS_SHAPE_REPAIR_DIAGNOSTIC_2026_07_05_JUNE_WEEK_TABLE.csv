@@ -1,0 +1,16 @@
+week,trades,wins,losses,net_usd,row
+2026-06-01,11,6,5,72.36,baseline
+2026-06-08,8,6,2,196.81,baseline
+2026-06-15,8,3,5,-522.85,baseline
+2026-06-22,12,7,5,30.84,baseline
+2026-06-29,0,0,0,0.0,baseline
+2026-06-01,11,6,5,72.36,h4_max_1_per_week
+2026-06-08,8,6,2,196.81,h4_max_1_per_week
+2026-06-15,6,3,3,-171.58,h4_max_1_per_week
+2026-06-22,12,7,5,30.84,h4_max_1_per_week
+2026-06-29,0,0,0,0.0,h4_max_1_per_week
+2026-06-01,11,6,5,72.36,all_loss_cap_50_sensitivity
+2026-06-08,8,6,2,196.81,all_loss_cap_50_sensitivity
+2026-06-15,8,3,5,-166.73,all_loss_cap_50_sensitivity
+2026-06-22,12,7,5,66.4,all_loss_cap_50_sensitivity
+2026-06-29,0,0,0,0.0,all_loss_cap_50_sensitivity
