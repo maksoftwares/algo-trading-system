@@ -1,0 +1,182 @@
+//@version=5
+indicator("A1 XAU M5 Momentum Split BE TP1 Visualizer", overlay=true, max_labels_count=500, max_lines_count=500)
+
+// TradingView visual translation of:
+// A1XauM5MomentumContinuationExecutor.mq5
+// A1_XAU_M5_MOMENTUM_SPLIT_ENTRY_BE_TP1_FORWARD_V0_2026_07_03
+//
+// This is for visual review only. MT5 uses bid/ask, spread, broker fills,
+// signal-claim globals, and account guards. This overlay approximates those
+// rules on chart bars so the signal, TP1, runner TP, and SL geometry can be
+// inspected on XAUUSD M5.
+
+groupCore = "Core"
+showV6 = input.bool(true, "Component 1: V6 max2 long", group=groupCore)
+showWeak = input.bool(true, "Component 2: weak-hours long", group=groupCore)
+showV13 = input.bool(true, "Component 3: V13 M5 trend both", group=groupCore)
+showLevels = input.bool(true, "Draw entry / SL / TP levels", group=groupCore)
+showStatusTable = input.bool(true, "Show status table", group=groupCore)
+levelBars = input.int(36, "Level line length, bars", minval=5, maxval=200, group=groupCore)
+
+groupCost = "Execution approximation"
+pointSize = input.float(0.01, "Point size", step=0.01, group=groupCost)
+estimatedSpreadPoints = input.float(30.0, "Estimated spread, points", minval=0.0, group=groupCost)
+useCostFilter = input.bool(true, "Apply cost_R <= 0.05 filter", group=groupCost)
+maxCostR = input.float(0.05, "Max estimated cost_R", minval=0.0, step=0.01, group=groupCost)
+
+groupSignal = "Shared M5 signal settings"
+breakLookbackBars = input.int(12, "Break lookback bars", minval=2, group=groupSignal)
+atrPeriod = input.int(14, "ATR period", minval=1, group=groupSignal)
+breakAtrMultiple = input.float(0.20, "Break ATR multiple", step=0.01, group=groupSignal)
+minRangeAtrBreak = input.float(0.60, "Break mode min range ATR", step=0.01, group=groupSignal)
+minBodyBreak = input.float(0.45, "Break mode min body fraction", step=0.01, group=groupSignal)
+longCloseBreak = input.float(0.72, "Break mode long close location", step=0.01, group=groupSignal)
+shortCloseBreak = input.float(0.28, "Break mode short close location", step=0.01, group=groupSignal)
+minThreeBarBreak = input.float(0.70, "Break mode min 3-bar move ATR", step=0.01, group=groupSignal)
+
+groupV13 = "V13 M5 EMA trend settings"
+m5FastPeriod = input.int(8, "M5 fast EMA", minval=1, group=groupV13)
+m5SlowPeriod = input.int(21, "M5 slow EMA", minval=1, group=groupV13)
+m5SlopeBars = input.int(3, "M5 slope bars", minval=1, group=groupV13)
+m5MinSlopeAtr = input.float(0.03, "M5 min slope ATR", step=0.01, group=groupV13)
+m5MaxDistanceAtr = input.float(1.20, "M5 max distance ATR", step=0.01, group=groupV13)
+minRangeAtrV13 = input.float(0.35, "V13 min range ATR", step=0.01, group=groupV13)
+minBodyV13 = input.float(0.30, "V13 min body fraction", step=0.01, group=groupV13)
+longCloseV13 = input.float(0.58, "V13 long close location", step=0.01, group=groupV13)
+shortCloseV13 = input.float(0.42, "V13 short close location", step=0.01, group=groupV13)
+minThreeBarV13 = input.float(0.10, "V13 min 3-bar move ATR", step=0.01, group=groupV13)
+
+groupTrend = "H1/H4 trend filters"
+h1FastPeriod = input.int(20, "H1 fast EMA", minval=1, group=groupTrend)
+h1SlowPeriod = input.int(50, "H1 slow EMA", minval=1, group=groupTrend)
+h4FastPeriod = input.int(20, "H4 fast EMA", minval=1, group=groupTrend)
+h4SlowPeriod = input.int(50, "H4 slow EMA", minval=1, group=groupTrend)
+htfSlopeBars = input.int(3, "HTF slope bars", minval=1, group=groupTrend)
+
+groupRisk = "Split-entry geometry"
+stopAtrMultiple = input.float(2.50, "Stop ATR multiple", step=0.05, group=groupRisk)
+stopFloorPoints = input.float(350.0, "Stop floor, points", minval=0.0, group=groupRisk)
+stopCeilingPoints = input.float(1800.0, "Stop ceiling, points", minval=0.0, group=groupRisk)
+tp1R = input.float(0.70, "TP1 R", step=0.05, group=groupRisk)
+runnerR = input.float(2.00, "Runner TP R", step=0.05, group=groupRisk)
+
+groupHours = "Frozen Dubai-hour masks"
+v6BlockedHours = input.string("2,8,9,10,11,12,13,17,19,21,23", "V6 blocked hours", group=groupHours)
+weakBlockedHours = input.string("2,8,9,10,11,12,17,22,23", "Weak-hours blocked hours", group=groupHours)
+v13BlockedHours = input.string("0,2,4,8,9,10,11,12,16,19,20,22", "V13 blocked hours", group=groupHours)
+v13BlockedShortHours = input.string("13,14,15,17,18", "V13 blocked short hours", group=groupHours)
+
+hourInCsv(string csv, int h) =>
+    clean = str.replace_all(csv, " ", "")
+    str.contains("," + clean + ",", "," + str.tostring(h) + ",")
+
+trendAllows(int dir, string tf, int fastPeriod, int slowPeriod, int slopeBars) =>
+    fastNow = request.security(syminfo.tickerid, tf, ta.ema(close, fastPeriod)[1], barmerge.gaps_off, barmerge.lookahead_off)
+    fastPrior = request.security(syminfo.tickerid, tf, ta.ema(close, fastPeriod)[1 + slopeBars], barmerge.gaps_off, barmerge.lookahead_off)
+    slowNow = request.security(syminfo.tickerid, tf, ta.ema(close, slowPeriod)[1], barmerge.gaps_off, barmerge.lookahead_off)
+    tfClose = request.security(syminfo.tickerid, tf, close[1], barmerge.gaps_off, barmerge.lookahead_off)
+    slope = fastNow - fastPrior
+    dir == 1 ? (tfClose > fastNow and fastNow > slowNow and slope >= 0) : (tfClose < fastNow and fastNow < slowNow and slope <= 0)
+
+drawSignal(int dir, string component, float entry, float risk) =>
+    isLong = dir == 1
+    signalColor = isLong ? color.lime : color.red
+    entryColor = color.new(color.silver, 0)
+    sl = isLong ? entry - risk : entry + risk
+    tp1 = isLong ? entry + tp1R * risk : entry - tp1R * risk
+    tp2 = isLong ? entry + runnerR * risk : entry - runnerR * risk
+    labelStyle = isLong ? label.style_label_up : label.style_label_down
+    y = isLong ? low : high
+    side = isLong ? "BUY" : "SELL"
+    label.new(bar_index, y, side + "\n" + component, style=labelStyle, color=signalColor, textcolor=color.black, size=size.small)
+    if showLevels
+        line.new(bar_index, entry, bar_index + levelBars, entry, color=entryColor, width=1)
+        line.new(bar_index, sl, bar_index + levelBars, sl, color=color.red, width=1)
+        line.new(bar_index, tp1, bar_index + levelBars, tp1, color=color.new(color.lime, 0), width=1)
+        line.new(bar_index, tp2, bar_index + levelBars, tp2, color=color.new(color.teal, 0), width=1)
+        label.new(bar_index + levelBars, entry, "ENTRY\n" + str.tostring(entry, format.mintick), style=label.style_label_left, color=entryColor, textcolor=color.black, size=size.tiny)
+        label.new(bar_index + levelBars, sl, "SL\n" + str.tostring(sl, format.mintick), style=label.style_label_left, color=color.red, textcolor=color.white, size=size.tiny)
+        label.new(bar_index + levelBars, tp1, "TP1 0.70R\n" + str.tostring(tp1, format.mintick), style=label.style_label_left, color=color.lime, textcolor=color.black, size=size.tiny)
+        label.new(bar_index + levelBars, tp2, "RUN 2.00R\n" + str.tostring(tp2, format.mintick), style=label.style_label_left, color=color.teal, textcolor=color.white, size=size.tiny)
+
+atr = ta.atr(atrPeriod)
+barRange = high - low
+bodyFraction = barRange > 0 ? math.abs(close - open) / barRange : na
+closeLocation = barRange > 0 ? (close - low) / barRange : na
+threeBarMoveAtr = atr > 0 ? (close - close[3]) / atr : na
+recentHigh = ta.highest(high[1], breakLookbackBars)
+recentLow = ta.lowest(low[1], breakLookbackBars)
+longBreakDistanceAtr = atr > 0 ? (close - recentHigh) / atr : na
+shortBreakDistanceAtr = atr > 0 ? (recentLow - close) / atr : na
+
+stopDistance = math.max(stopAtrMultiple * atr, stopFloorPoints * pointSize)
+stopPoints = pointSize > 0 ? stopDistance / pointSize : na
+costR = stopPoints > 0 ? estimatedSpreadPoints / stopPoints : na
+costOk = not useCostFilter or (not na(costR) and costR <= maxCostR)
+stopOk = stopCeilingPoints <= 0 or (not na(stopPoints) and stopPoints <= stopCeilingPoints)
+
+dubaiHour = hour(time_close, "Asia/Dubai")
+h1Long = trendAllows(1, "60", h1FastPeriod, h1SlowPeriod, htfSlopeBars)
+h1Short = trendAllows(-1, "60", h1FastPeriod, h1SlowPeriod, htfSlopeBars)
+h4Long = trendAllows(1, "240", h4FastPeriod, h4SlowPeriod, htfSlopeBars)
+h4Short = trendAllows(-1, "240", h4FastPeriod, h4SlowPeriod, htfSlopeBars)
+longHtfOk = h1Long and h4Long
+shortHtfOk = h1Short and h4Short
+
+breakLong = close >= recentHigh + breakAtrMultiple * atr and close > open and barRange >= minRangeAtrBreak * atr and bodyFraction >= minBodyBreak and closeLocation >= longCloseBreak and threeBarMoveAtr >= minThreeBarBreak
+
+m5Fast = ta.ema(close, m5FastPeriod)
+m5Slow = ta.ema(close, m5SlowPeriod)
+m5SlopeAtr = atr > 0 ? (m5Fast - m5Fast[m5SlopeBars]) / atr : na
+longDistanceAtr = atr > 0 ? (close - m5Fast) / atr : na
+shortDistanceAtr = atr > 0 ? (m5Fast - close) / atr : na
+v13LongRaw = m5Fast > m5Slow and m5SlopeAtr >= m5MinSlopeAtr and close > m5Fast and longDistanceAtr <= m5MaxDistanceAtr and close > open and barRange >= minRangeAtrV13 * atr and bodyFraction >= minBodyV13 and closeLocation >= longCloseV13 and threeBarMoveAtr >= minThreeBarV13
+v13ShortRaw = m5Fast < m5Slow and m5SlopeAtr <= -m5MinSlopeAtr and close < m5Fast and shortDistanceAtr <= m5MaxDistanceAtr and close < open and barRange >= minRangeAtrV13 * atr and bodyFraction >= minBodyV13 and closeLocation <= shortCloseV13 and threeBarMoveAtr <= -minThreeBarV13
+
+sharedOk = barstate.isconfirmed and costOk and stopOk
+v6Long = showV6 and sharedOk and breakLong and longHtfOk and not hourInCsv(v6BlockedHours, dubaiHour)
+weakLong = showWeak and sharedOk and breakLong and longHtfOk and not hourInCsv(weakBlockedHours, dubaiHour)
+v13Long = showV13 and sharedOk and v13LongRaw and longHtfOk and not hourInCsv(v13BlockedHours, dubaiHour)
+v13Short = showV13 and sharedOk and v13ShortRaw and shortHtfOk and not hourInCsv(v13BlockedHours, dubaiHour) and not hourInCsv(v13BlockedShortHours, dubaiHour)
+
+// Priority stack: V6 first, weak-hours second, V13 third.
+chosenDir = 0
+chosenComponent = ""
+if v6Long
+    chosenDir := 1
+    chosenComponent := "P1 V6 split"
+else if weakLong
+    chosenDir := 1
+    chosenComponent := "P2 weak-hours split"
+else if v13Long
+    chosenDir := 1
+    chosenComponent := "P3 V13 split"
+else if v13Short
+    chosenDir := -1
+    chosenComponent := "P3 V13 split"
+
+if chosenDir != 0
+    drawSignal(chosenDir, chosenComponent, close, stopDistance)
+
+plotshape(v6Long, title="P1 V6 raw", style=shape.circle, location=location.belowbar, color=color.new(color.lime, 70), size=size.tiny)
+plotshape(weakLong and not v6Long, title="P2 weak raw", style=shape.circle, location=location.belowbar, color=color.new(color.yellow, 70), size=size.tiny)
+plotshape(v13Long and not v6Long and not weakLong, title="P3 V13 long raw", style=shape.circle, location=location.belowbar, color=color.new(color.aqua, 70), size=size.tiny)
+plotshape(v13Short and not v6Long and not weakLong, title="P3 V13 short raw", style=shape.circle, location=location.abovebar, color=color.new(color.aqua, 70), size=size.tiny)
+
+var table statusTable = table.new(position.top_right, 2, 7, bgcolor=color.new(color.black, 80), border_width=1)
+if showStatusTable and barstate.islast
+    tfText = timeframe.isminutes and timeframe.multiplier == 5 ? "M5 OK" : "Use M5 chart"
+    table.cell(statusTable, 0, 0, "A1 Split Visual", text_color=color.white)
+    table.cell(statusTable, 1, 0, tfText, text_color=timeframe.isminutes and timeframe.multiplier == 5 ? color.lime : color.orange)
+    table.cell(statusTable, 0, 1, "Dubai hour", text_color=color.white)
+    table.cell(statusTable, 1, 1, str.tostring(dubaiHour), text_color=color.white)
+    table.cell(statusTable, 0, 2, "Cost_R est", text_color=color.white)
+    table.cell(statusTable, 1, 2, str.tostring(costR, "#.####"), text_color=costOk ? color.lime : color.red)
+    table.cell(statusTable, 0, 3, "Stop points", text_color=color.white)
+    table.cell(statusTable, 1, 3, str.tostring(stopPoints, "#"), text_color=stopOk ? color.lime : color.red)
+    table.cell(statusTable, 0, 4, "H1/H4 long", text_color=color.white)
+    table.cell(statusTable, 1, 4, str.tostring(longHtfOk), text_color=longHtfOk ? color.lime : color.red)
+    table.cell(statusTable, 0, 5, "H1/H4 short", text_color=color.white)
+    table.cell(statusTable, 1, 5, str.tostring(shortHtfOk), text_color=shortHtfOk ? color.lime : color.red)
+    table.cell(statusTable, 0, 6, "Chosen", text_color=color.white)
+    table.cell(statusTable, 1, 6, chosenComponent == "" ? "none" : chosenComponent, text_color=chosenComponent == "" ? color.gray : color.lime)

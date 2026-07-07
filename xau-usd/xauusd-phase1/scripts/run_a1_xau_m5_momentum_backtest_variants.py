@@ -4,6 +4,7 @@ import argparse
 import csv
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -19,6 +20,13 @@ PHASE1_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = PHASE1_ROOT.parents[1]
 EA_NAME = "A1XauM5MomentumContinuationExecutor"
 EA_SOURCE = PHASE1_ROOT / "mt5" / "Experts" / f"{EA_NAME}.mq5"
+EVENT_REACTION_CALENDAR_CSV = (
+    PHASE1_ROOT
+    / "data"
+    / "external"
+    / "event_reaction_calendar"
+    / "A1_XAU_EVENT_REACTION_CALENDAR_202207_202606.csv"
+)
 DEFAULT_BACKTEST_ROOT = Path("C:/MT5A1M5MomentumBacktest")
 DEFAULT_METAEDITOR = Path("C:/Program Files/MetaTrader 5/MetaEditor64.exe")
 DEFAULT_OUTPUT_DIR = PHASE1_ROOT / "outputs" / "reports" / "mt5_backtests"
@@ -3608,6 +3616,552 @@ def build_goal_split_grid_variants() -> list[Variant]:
 
 VARIANTS.extend(build_goal_split_grid_variants())
 
+VARIANTS.extend(
+    [
+        Variant(
+            name="v14_weekly_damage_reversal_rr2_move10",
+            label="V14 weekly-damage H1 source: Wed-Fri reversal after >=1.0 D1 ATR weekly extension, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_REV_RR2_MOVE10_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "1.00",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14_weekly_damage_reversal_rr15_move08",
+            label="V14 weekly-damage H1 source: Wed-Fri reversal after >=0.8 D1 ATR weekly extension, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_REV_RR15_MOVE08_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "0.80",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14_weekly_damage_reversal_rr2_move12",
+            label="V14 weekly-damage H1 source: Wed-Fri reversal after >=1.2 D1 ATR weekly extension, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_REV_RR2_MOVE12_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "1.20",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14_weekly_damage_continuation_rr2_move10",
+            label="V14 weekly-damage H1 source: Wed-Fri continuation after >=1.0 D1 ATR weekly extension, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_CONT_RR2_MOVE10_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "1",
+                "InpWeeklyDamageMinMoveAtr": "1.00",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14_weekly_damage_continuation_rr15_move08",
+            label="V14 weekly-damage H1 source: Wed-Fri continuation after >=0.8 D1 ATR weekly extension, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_CONT_RR15_MOVE08_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "1",
+                "InpWeeklyDamageMinMoveAtr": "0.80",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14_weekly_damage_continuation_rr2_move12",
+            label="V14 weekly-damage H1 source: Wed-Fri continuation after >=1.2 D1 ATR weekly extension, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V14_WEEKLY_DAMAGE_CONT_RR2_MOVE12_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "1",
+                "InpWeeklyDamageMinMoveAtr": "1.20",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+    ]
+)
+
+VARIANTS.extend(
+    [
+        Variant(
+            name="v14b_weekly_damage_reversal_rr2_move10_long_only",
+            label="V14B failure-anatomy split: weekly-damage H1 reversal >=1.0 D1 ATR, 2.0R, long-only",
+            run_id="BT_A1_XAU_M5_MOM_V14B_WEEKLY_DAMAGE_REV_RR2_MOVE10_LONG_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "1.00",
+                "InpDirectionMode": "1",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14b_weekly_damage_reversal_rr2_move10_short_only",
+            label="V14B failure-anatomy split: weekly-damage H1 reversal >=1.0 D1 ATR, 2.0R, short-only",
+            run_id="BT_A1_XAU_M5_MOM_V14B_WEEKLY_DAMAGE_REV_RR2_MOVE10_SHORT_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "1.00",
+                "InpDirectionMode": "2",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14b_weekly_damage_reversal_rr15_move08_long_only",
+            label="V14B failure-anatomy split: weekly-damage H1 reversal >=0.8 D1 ATR, 1.5R, long-only",
+            run_id="BT_A1_XAU_M5_MOM_V14B_WEEKLY_DAMAGE_REV_RR15_MOVE08_LONG_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "0.80",
+                "InpDirectionMode": "1",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v14b_weekly_damage_reversal_rr15_move08_short_only",
+            label="V14B failure-anatomy split: weekly-damage H1 reversal >=0.8 D1 ATR, 1.5R, short-only",
+            run_id="BT_A1_XAU_M5_MOM_V14B_WEEKLY_DAMAGE_REV_RR15_MOVE08_SHORT_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "12",
+                "InpWeeklyDamageMode": "0",
+                "InpWeeklyDamageMinMoveAtr": "0.80",
+                "InpDirectionMode": "2",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "4",
+                "InpCooldownMinutes": "60",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+    ]
+)
+
+VARIANTS.extend(
+    [
+        Variant(
+            name="v15_prior_day_level_cont_rr2_break10",
+            label="V15 prior-day level M5 source: continuation beyond prior D1 high/low, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V15_PRIOR_DAY_CONT_RR2_BREAK10_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "0",
+                "InpPriorDayLevelBreakAtr": "0.10",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15_prior_day_level_cont_rr15_break05",
+            label="V15 prior-day level M5 source: continuation beyond prior D1 high/low, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V15_PRIOR_DAY_CONT_RR15_BREAK05_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "0",
+                "InpPriorDayLevelBreakAtr": "0.05",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15_prior_day_level_reversal_rr2_reclaim10",
+            label="V15 prior-day level M5 source: rejection/reclaim of prior D1 high/low, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V15_PRIOR_DAY_REV_RR2_RECLAIM10_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "1",
+                "InpPriorDayLevelReclaimAtr": "0.10",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15_prior_day_level_reversal_rr15_reclaim05",
+            label="V15 prior-day level M5 source: rejection/reclaim of prior D1 high/low, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V15_PRIOR_DAY_REV_RR15_RECLAIM05_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "1",
+                "InpPriorDayLevelReclaimAtr": "0.05",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+    ]
+)
+
+VARIANTS.extend(
+    [
+        Variant(
+            name="v15b_prior_day_level_cont_rr15_long_only",
+            label="V15B direction split: prior-day level continuation 1.5R, long-only",
+            run_id="BT_A1_XAU_M5_MOM_V15B_PRIOR_DAY_CONT_RR15_LONG_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "0",
+                "InpPriorDayLevelBreakAtr": "0.05",
+                "InpDirectionMode": "1",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15b_prior_day_level_cont_rr15_short_only",
+            label="V15B direction split: prior-day level continuation 1.5R, short-only",
+            run_id="BT_A1_XAU_M5_MOM_V15B_PRIOR_DAY_CONT_RR15_SHORT_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "0",
+                "InpPriorDayLevelBreakAtr": "0.05",
+                "InpDirectionMode": "2",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15b_prior_day_level_reversal_rr15_long_only",
+            label="V15B direction split: prior-day level reversal 1.5R, long-only",
+            run_id="BT_A1_XAU_M5_MOM_V15B_PRIOR_DAY_REV_RR15_LONG_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "1",
+                "InpPriorDayLevelReclaimAtr": "0.05",
+                "InpDirectionMode": "1",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v15b_prior_day_level_reversal_rr15_short_only",
+            label="V15B direction split: prior-day level reversal 1.5R, short-only",
+            run_id="BT_A1_XAU_M5_MOM_V15B_PRIOR_DAY_REV_RR15_SHORT_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "13",
+                "InpPriorDayLevelMode": "1",
+                "InpPriorDayLevelReclaimAtr": "0.05",
+                "InpDirectionMode": "2",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+    ]
+)
+
+VARIANTS.extend(
+    [
+        Variant(
+            name="v16_asia_range_cont_rr2",
+            label="V16 Asian-range source: 00-06 range continuation, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V16_ASIA_RANGE_CONT_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "4",
+                "InpOpeningRangeStartHour": "0",
+                "InpOpeningRangeMinutes": "360",
+                "InpOpeningTradeWindowHours": "16",
+                "InpOpeningBreakAtrMultiple": "0.10",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v16_asia_range_cont_rr15",
+            label="V16 Asian-range source: 00-06 range continuation, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V16_ASIA_RANGE_CONT_RR15_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "4",
+                "InpOpeningRangeStartHour": "0",
+                "InpOpeningRangeMinutes": "360",
+                "InpOpeningTradeWindowHours": "16",
+                "InpOpeningBreakAtrMultiple": "0.05",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v16_asia_range_reversal_rr2",
+            label="V16 Asian-range source: 00-06 range reversal, 2.0R",
+            run_id="BT_A1_XAU_M5_MOM_V16_ASIA_RANGE_REV_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "6",
+                "InpOpeningRangeStartHour": "0",
+                "InpOpeningRangeMinutes": "360",
+                "InpOpeningTradeWindowHours": "16",
+                "InpOpeningBreakAtrMultiple": "0.10",
+                "InpRiskReward": "2.00",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+        Variant(
+            name="v16_asia_range_reversal_rr15",
+            label="V16 Asian-range source: 00-06 range reversal, 1.5R",
+            run_id="BT_A1_XAU_M5_MOM_V16_ASIA_RANGE_REV_RR15_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "6",
+                "InpOpeningRangeStartHour": "0",
+                "InpOpeningRangeMinutes": "360",
+                "InpOpeningTradeWindowHours": "16",
+                "InpOpeningBreakAtrMultiple": "0.05",
+                "InpRiskReward": "1.50",
+                "InpMaxEstimatedCostR": "0.08",
+                "InpMaxTradesPerDay": "8",
+                "InpCooldownMinutes": "15",
+                "InpUseRiskNormalizedLots": "true",
+                "InpRiskAmountUsd": "10.00",
+                "InpMaxRiskLots": "0.05",
+            },
+        ),
+    ]
+)
+
+VARIANTS.extend(
+    [
+        Variant(
+            name="event_impulse_nfp_rr2",
+            label="Event reaction v0: NFP 15m impulse continuation, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_NFP_IMPULSE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "0",
+                "InpEventReactionMode": "0",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "15",
+                "InpEventReactionStartMinutes": "5",
+                "InpEventReactionEndMinutes": "60",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+        Variant(
+            name="event_fade_nfp_rr2",
+            label="Event reaction v0: NFP 15m spike fade, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_NFP_FADE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "0",
+                "InpEventReactionMode": "1",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "15",
+                "InpEventReactionStartMinutes": "15",
+                "InpEventReactionEndMinutes": "90",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+        Variant(
+            name="event_impulse_cpi_rr2",
+            label="Event reaction v0: CPI 15m impulse continuation, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_CPI_IMPULSE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "1",
+                "InpEventReactionMode": "0",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "15",
+                "InpEventReactionStartMinutes": "5",
+                "InpEventReactionEndMinutes": "60",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+        Variant(
+            name="event_fade_cpi_rr2",
+            label="Event reaction v0: CPI 15m spike fade, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_CPI_FADE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "1",
+                "InpEventReactionMode": "1",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "15",
+                "InpEventReactionStartMinutes": "15",
+                "InpEventReactionEndMinutes": "90",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+        Variant(
+            name="event_impulse_fomc_rr2",
+            label="Event reaction v0: FOMC 15m impulse continuation, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_FOMC_IMPULSE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "2",
+                "InpEventReactionMode": "0",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "15",
+                "InpEventReactionStartMinutes": "5",
+                "InpEventReactionEndMinutes": "90",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+        Variant(
+            name="event_fade_fomc_rr2",
+            label="Event reaction v0: FOMC 30m spike fade, fixed 2R",
+            run_id="BT_A1_XAU_EVENT_REACTION_FOMC_FADE_RR2_JUNE2026",
+            tester_inputs={
+                "InpSignalMode": "14",
+                "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+                "InpEventReactionEventType": "2",
+                "InpEventReactionMode": "1",
+                "InpEventReactionServerUtcOffsetMinutes": "0",
+                "InpEventReactionImpulseMinutes": "30",
+                "InpEventReactionStartMinutes": "30",
+                "InpEventReactionEndMinutes": "150",
+                "InpEventReactionBreakAtr": "0.10",
+                "InpEventReactionStopBufferAtr": "0.10",
+                "InpEventReactionMinBodyFraction": "0.35",
+                "InpRiskReward": "2.00",
+                "InpMaxTradesPerDay": "3",
+                "InpCooldownMinutes": "0",
+            },
+        ),
+    ]
+)
+
 
 COMMON_TESTER_INPUTS = {
     "InpAllowDemoTrading": "true",
@@ -3666,9 +4220,44 @@ COMMON_TESTER_INPUTS = {
     "InpMinThreeBarMoveAtr": "0.70",
     "InpMaxThreeBarMoveAtr": "0.0",
     "InpMinAtrAbsoluteForEntry": "0.0",
+    "InpDailyExtremeMinMoveAtr": "1.00",
+    "InpDailyExtremeTouchAtr": "0.05",
+    "InpDailyExtremeReclaimAtr": "0.10",
+    "InpDailyExtremeStopBufferAtr": "0.10",
+    "InpDailyExtremeMinBodyFraction": "0.25",
+    "InpDailyExtremeMinBarsSinceOpen": "24",
+    "InpDailyExtremeStartHour": "0",
+    "InpDailyExtremeEndHour": "24",
+    "InpWeeklyDamageMode": "0",
+    "InpWeeklyDamageStartDay": "3",
+    "InpWeeklyDamageEndDay": "5",
+    "InpWeeklyDamageMinMoveAtr": "1.00",
+    "InpWeeklyDamageTouchAtr": "0.10",
+    "InpWeeklyDamageReclaimAtr": "0.15",
+    "InpWeeklyDamageStopBufferAtr": "0.20",
+    "InpWeeklyDamageMinBodyFraction": "0.25",
+    "InpPriorDayLevelMode": "0",
+    "InpPriorDayLevelStartHour": "6",
+    "InpPriorDayLevelEndHour": "22",
+    "InpPriorDayLevelBreakAtr": "0.10",
+    "InpPriorDayLevelTouchAtr": "0.05",
+    "InpPriorDayLevelReclaimAtr": "0.10",
+    "InpPriorDayLevelStopBufferAtr": "0.25",
+    "InpPriorDayLevelMinBodyFraction": "0.35",
+    "InpEventReactionCalendarFileName": EVENT_REACTION_CALENDAR_CSV.name,
+    "InpEventReactionEventType": "0",
+    "InpEventReactionMode": "0",
+    "InpEventReactionServerUtcOffsetMinutes": "0",
+    "InpEventReactionImpulseMinutes": "15",
+    "InpEventReactionStartMinutes": "5",
+    "InpEventReactionEndMinutes": "60",
+    "InpEventReactionBreakAtr": "0.10",
+    "InpEventReactionStopBufferAtr": "0.10",
+    "InpEventReactionMinBodyFraction": "0.35",
     "InpStopAtrMultiple": "2.50",
     "InpStopFloorPoints": "350",
     "InpStopCeilingPoints": "1800",
+    "InpStopCapPoints": "0",
     "InpRiskReward": "1.50",
     "InpBlockedEntryHoursCsv": "",
     "InpBlockedLongEntryHoursCsv": "",
@@ -3733,17 +4322,19 @@ def run_variants(
     require_file(terminal)
     require_file(metaeditor)
 
-    compile_log = compile_ea(backtest_root, metaeditor)
-    safe_tag = safe_name(tag)
-    variant_dir = output_dir / f"a1_momentum_variants_{safe_tag.lower()}_20260701"
-    variant_dir.mkdir(parents=True, exist_ok=True)
-
     selected_variants = [variant for variant in VARIANTS if variant_names is None or variant.name in variant_names]
     missing_variants = sorted((variant_names or set()) - {variant.name for variant in selected_variants})
     if missing_variants:
         raise ValueError(f"Unknown variant name(s): {', '.join(missing_variants)}")
     if not selected_variants:
         raise ValueError("No variants selected.")
+    if any(variant_uses_event_reaction(variant) for variant in selected_variants):
+        require_file(EVENT_REACTION_CALENDAR_CSV)
+
+    compile_log = compile_ea(backtest_root, metaeditor)
+    safe_tag = safe_name(tag)
+    variant_dir = output_dir / f"a1_momentum_variants_{safe_tag.lower()}_20260701"
+    variant_dir.mkdir(parents=True, exist_ok=True)
 
     results = []
     for variant in selected_variants:
@@ -3780,7 +4371,7 @@ def run_variants(
             "variant_timeout_seconds": variant_timeout_seconds,
             "tester_deposit": deposit,
             "tester_currency": currency,
-            "anti_overfit_boundary": "Only pre-declared direction/HTF-confirmation variants; no threshold sweep.",
+            "anti_overfit_boundary": "Only pre-declared variants; no post-result threshold sweep.",
         },
         "compile_log": str(compile_log),
         "variants": results,
@@ -3831,7 +4422,10 @@ def run_variant(
     signal_log = f"a1_xau_m5_momentum_{variant.name}_signal_log.csv"
     order_log = f"a1_xau_m5_momentum_{variant.name}_order_log.csv"
     management_log = f"a1_xau_m5_momentum_{variant.name}_management_log.csv"
-    remove_old_variant_files(backtest_root, report_base, startup_log, signal_log, order_log, management_log)
+    deal_log = f"a1_xau_m5_momentum_{variant.name}_deal_log.csv"
+    remove_old_variant_files(backtest_root, report_base, startup_log, signal_log, order_log, management_log, deal_log)
+    if variant_uses_event_reaction(variant):
+        copy_event_reaction_calendar(backtest_root)
     config = write_config(
         backtest_root,
         variant,
@@ -3840,6 +4434,7 @@ def run_variant(
         signal_log,
         order_log,
         management_log,
+        deal_log,
         from_date,
         to_date,
         tag,
@@ -3886,12 +4481,14 @@ def run_variant(
     copied_order_csv = variant_dir / f"{report_base}_orders.csv"
     copied_signal_csv = variant_dir / f"{report_base}_signals.csv"
     copied_management_csv = variant_dir / f"{report_base}_management.csv"
+    copied_deal_csv = variant_dir / f"{report_base}_deals.csv"
     copied_json = variant_dir / f"{report_base}_summary.json"
     shutil.copy2(html_report, copied_html)
     write_trades(copied_csv, trades)
     copy_tester_file(backtest_root, order_log, copied_order_csv)
     copy_tester_file(backtest_root, signal_log, copied_signal_csv)
     copy_tester_file(backtest_root, management_log, copied_management_csv)
+    copy_tester_file(backtest_root, deal_log, copied_deal_csv)
 
     order_actions = Counter(row.get("action", "") for row in order_rows)
     guard_reasons = Counter((row.get("reason") or "pass") for row in order_rows)
@@ -3906,6 +4503,7 @@ def run_variant(
         "order_csv": str(copied_order_csv),
         "signal_csv": str(copied_signal_csv),
         "management_csv": str(copied_management_csv),
+        "deal_csv": str(copied_deal_csv),
         "summary_json": str(copied_json),
         "mt5_report_metrics": metrics,
         "summary": summary,
@@ -3927,6 +4525,7 @@ def write_config(
     signal_log: str,
     order_log: str,
     management_log: str,
+    deal_log: str,
     from_date: str,
     to_date: str,
     tag: str,
@@ -3941,6 +4540,7 @@ def write_config(
         "InpSignalLogFileName": signal_log,
         "InpOrderLogFileName": order_log,
         "InpManagementLogFileName": management_log,
+        "InpDealLogFileName": deal_log,
         "InpOrderComment": f"A1_M5_MOM_{variant.name.upper()[:10]}",
     }
     lines = [
@@ -4001,6 +4601,23 @@ def copy_tester_file(backtest_root: Path, log_name: str, destination: Path) -> N
         shutil.copy2(source, destination)
     else:
         destination.write_text("", encoding="utf-8")
+
+
+def variant_uses_event_reaction(variant: Variant) -> bool:
+    return str(variant.tester_inputs.get("InpSignalMode", "")) == "14"
+
+
+def copy_event_reaction_calendar(backtest_root: Path) -> None:
+    candidate_roots = [
+        backtest_root / "MQL5" / "Files",
+        backtest_root / "Tester" / "Agent-127.0.0.1-3000" / "MQL5" / "Files",
+    ]
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        candidate_roots.append(Path(appdata) / "MetaQuotes" / "Terminal" / "Common" / "Files")
+    for files_root in candidate_roots:
+        files_root.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(EVENT_REACTION_CALENDAR_CSV, files_root / EVENT_REACTION_CALENDAR_CSV.name)
 
 
 def parse_mt5_report(path: Path) -> tuple[list[dict[str, Any]], dict[str, str]]:
@@ -4174,7 +4791,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         "- Offline MT5 Strategy Tester only.",
         "- No chart, preset, order, or live/demo runtime change was made by this script.",
-        "- Variants were limited to pre-declared direction and higher-timeframe confirmation switches.",
+        "- Variants were limited to pre-declared cells and fixed inputs; no post-result threshold sweep.",
         "- Any positive result here is diagnostic only and requires fresh forward confirmation.",
         f"- Profit/loss table values are in tester currency `{currency}`.",
         "",

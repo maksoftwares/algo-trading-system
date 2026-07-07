@@ -1,0 +1,59 @@
+{
+  "generated_at_utc": "2026-07-06T11:03:15Z",
+  "purpose": "Hash manifest for the owner-goal H4/D1 partial-ladder exact MT5 probe, position-ID deal logging, reports, and status refresh.",
+  "status": "NO_PARTIAL_LADDER_SURVIVOR_NO_DEMO_SPEC",
+  "files": [
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_PREREG_2026_07_06.md",
+      "sha256": "1cab0333c93348d564f7ab298a483dbb3c34d6b386b3930223cca7c12d9bcacd"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_FRONTIER_EXHAUSTION_AUDIT_2026_07_06.md",
+      "sha256": "1e7df3c6d483ee9a94f3537e4ad602d0df04e1bd0e8c8aa620d43988081a7721"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_WEEKLY90_PROGRESS_STATUS_2026_07_06.md",
+      "sha256": "aef6aa8884d7c8d7784954093e344362ebad3f921cfa0f6e2e33bc41ad52cc29"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "972b73a5c70dac1b891848d836094cb681397b8439c1bad078d473733ad50115"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a1_h4_d1_partial_ladder_exact_probe.py",
+      "sha256": "9b8372153cfcd74a45c6391c6d7892baa96bd29791f3b507deb8a1a5fb769a00"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a1_xau_m5_momentum_backtest_variants.py",
+      "sha256": "504aa42466b8cad776ceb95eb6bd1283d0bc0c3c3515a3ea3c86e0d1f3afc613"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/attach_a1_xau_m5_momentum_continuation.py",
+      "sha256": "caa96a5b71900e85ae160f3f7114e8f51c8c72b036a068326c4698911c83db12"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_202207_202606.md",
+      "sha256": "54490d8b9712681da4b8c262f5064dc61a456bff6d9443c460d164f57bf42db8"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_202207_202606.json",
+      "sha256": "3d5e4a787d6238b9ae33486c4faf4f0ab7eec6320c4b2c690ea3bb6dac71b7c6"
+    },
+    {
+      "path": "status_summary.json",
+      "sha256": "b7117737bf436a02eed93074e44c7dc4753de8cee6b1734c954983b0347d07dd"
+    },
+    {
+      "path": "status_summary.md",
+      "sha256": "cb225ef1a729bd80a21276d1437aa06bc14827057edaaa788eb6b4a8b4ddff38"
+    },
+    {
+      "path": "status.html",
+      "sha256": "b80b643264950190e980a567969eab171c23a4f1c2c1d11dc9c48a15631933b9"
+    },
+    {
+      "path": "agent.md",
+      "sha256": "362f92a6a5d694febe2355f020a5c0b7f3342d98074d9982887c01921154f611"
+    }
+  ]
+}

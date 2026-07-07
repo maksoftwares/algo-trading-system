@@ -1,0 +1,71 @@
+{
+  "generated_at_utc": "2026-07-06T10:43:36Z",
+  "purpose": "Hash manifest for the owner-goal H4/D1 geometry-v2 weekly-shape pre-registration, exact MT5 tooling, reports, and status refresh.",
+  "status": "NO_GEOMETRY_V2_SURVIVOR_NO_DEMO_SPEC",
+  "files": [
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_PREREG_2026_07_06.md",
+      "sha256": "24d0280b250ccc325b3c791340fc8088e3be4336156307dc4db40c6aee379f85"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_FRONTIER_EXHAUSTION_AUDIT_2026_07_06.md",
+      "sha256": "15856d2965a9c535d41f756b69d0162b8bf75654b78926661bc0c3e05ac699bd"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_WEEKLY90_PROGRESS_STATUS_2026_07_06.md",
+      "sha256": "fc3ad3c401553f4050012789bd3aac2e66987696c4808ccffd6ff88607bfbfd2"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "e2ea829d9e9b0f35986da7d9bc9c883688316b9b28c91ef5561409f0f0117369"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a1_xau_m5_momentum_backtest_variants.py",
+      "sha256": "688ac5f3e0661d63ea300a3c847b10d0daa594aba9a57c92e4243c147d3aa8db"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/attach_a1_xau_m5_momentum_continuation.py",
+      "sha256": "aaf6ff4951fe71e5bc406fd6bddec3dbe5261049d915b6dc962a2f6c93a88b64"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/analyze_a1_hybrid_weekly_exit_anatomy.py",
+      "sha256": "f1b701182d3e3a37bace2aa62b82b955e0126856581b9e2171e302a81a429a0d"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/scripts/run_a1_h4_d1_geometry_v2_weekly_shape.py",
+      "sha256": "886d07f1050b1afa5adc1c76d64d737c978c5db82ac9d1f62ca2186f5447d40d"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_202207_202606.md",
+      "sha256": "497cc1797dbe1d5b35bdf6e91ef9d6e6d205ee8c4df849421cdd19c7cc708be0"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_202207_202606.json",
+      "sha256": "0ba202b13aca837a5607453cf429a77329bd0dd542b44b7aa9b416ff546f66d7"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_HYBRID_WEEKLY_EXIT_ANATOMY_202207_202606.md",
+      "sha256": "ad5554482dbdce1a34946cf88a5f682bf17f2e1bd5454386d043c2b278d772c0"
+    },
+    {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_HYBRID_WEEKLY_EXIT_ANATOMY_202207_202606.json",
+      "sha256": "6148892b2fdd8f68af5a5934d5a50aa8b751af603560cf5499e71ff0ee50cc3e"
+    },
+    {
+      "path": "status_summary.json",
+      "sha256": "85bf49ab0f14a14911ba63416b6f615f6dcf0dee8d88f6ea4caf316c741f5d8a"
+    },
+    {
+      "path": "status_summary.md",
+      "sha256": "533e483c5aae0f0faed3ffeb1937d1438b500a8121b6ceefe6cc38747132feff"
+    },
+    {
+      "path": "status.html",
+      "sha256": "c8c373155641f354ec466ab9b281e9e6311d71f9e93ddb83183d4c760db5332e"
+    },
+    {
+      "path": "agent.md",
+      "sha256": "71ff5acaa8bd08d6156052db36859d426921d39b37b8003003ff7cecd8b7abf8"
+    }
+  ]
+}

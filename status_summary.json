@@ -9411,7 +9411,7 @@
       }
     }
   },
-  "generated_at_utc": "2026-07-05T15:47:49Z",
+  "generated_at_utc": "2026-07-07T08:32:00Z",
   "next_evidence_required": [
     "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
     "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
@@ -9649,8 +9649,8 @@
     "forex_mt5_extra_major_meanrev_extension_reject_json": "forex-research/outputs/reports/mt5_backtests/FOREX_MT5_EXTRA_MAJOR_MEANREV_EXTENSION_REJECT_2026_07_04.json"
   },
   "primary_gold_goal_current": {
-    "status": "EXACT_LEDGER_CORE_FRONTIER_ACTIVITY_GAP_NO_REVIEW",
-    "generated_at_utc": "2026-07-05T14:29:21Z",
+    "status": "DEADLINE_MISSED_NO_DEMO_READY_OWNER_GOAL_STRATEGY",
+    "generated_at_utc": "2026-07-07T08:32:00Z",
     "runtime_touched": false,
     "live_or_demo_runtime_touched": false,
     "isolated_tester_root": "C:\\MT5A1M5MomentumBacktest",
@@ -9661,6 +9661,26 @@
       "daily_activity_target_pct": 100.0,
       "daily_activity_showable_if_core_hits_pct": 90.0,
       "metric_level": "signal-level; one decision equals one signal even when multiple tickets are used"
+    },
+    "current_final_audit": {
+      "report": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_FRONTIER_EXHAUSTION_AUDIT_2026_07_06.md",
+      "status": "NO_DEMO_READY_OWNER_GOAL_STRATEGY_FOUND",
+      "best_frontier": "F67-H16 no-f33 exact-ledger composition: 3751 signals, WR 50.23%, W/L 2.0002, active 86.39%, stress -0.30/ticket W/L 1.9029, exit-time positive weeks 54.81%, worst exit week -878.18 USD.",
+      "decision_point": "Do not draft a demo spec. Owner/reviewer must choose which corner to relax, or approve a new research cycle with a materially different strategy class."
+    },
+    "h4_d1_partial_ladder_exact_probe": {
+      "status": "NO_PARTIAL_LADDER_SURVIVOR",
+      "report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_202207_202606.md",
+      "best_row": "p33_t2_run4_be",
+      "signals": 3618,
+      "win_rate_pct": 50.08,
+      "avg_win_loss": 1.9213,
+      "stress_030_avg_win_loss": 1.8106,
+      "active_weekday_pct": 85.71,
+      "positive_week_pct": 57.21,
+      "worst_week_usd": -867.9,
+      "june_2026_net_usd": 164.14,
+      "decision": "REJECT_BREAKS_CORE_WR_WL"
     },
     "latest_findings": {
       "step1_split_shape_grid": {
@@ -10946,6 +10966,262 @@
         "csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_LOSS_SHAPE_REPAIR_DIAGNOSTIC_2026_07_05.csv",
         "best_causal_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_LOSS_SHAPE_REPAIR_DIAGNOSTIC_2026_07_05_BEST_CAUSAL_KEPT.csv",
         "june_week_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_LOSS_SHAPE_REPAIR_DIAGNOSTIC_2026_07_05_JUNE_WEEK_TABLE.csv"
+      },
+      "prior_day_level_m5_v15_v15b": {
+        "status": "FREEZE_PRIOR_DAY_LEVEL_M5_SOURCE_CLASS",
+        "exact_mt5_variants_complete": 8,
+        "best_baseline_hybrid": {
+          "variant": "v15b_prior_day_level_reversal_rr15_short_only",
+          "hybrid_positive_week_pct": 57.69,
+          "hybrid_active_weekday_pct": 89.26,
+          "red_weeks_flipped": 12,
+          "red_weeks_worsened": 36,
+          "standalone_pf": 0.9093,
+          "standalone_net_usd": -269.09
+        },
+        "best_weekly_state_combo": {
+          "positive_week_pct": 59.05,
+          "active_weekday_pct": 90.41,
+          "win_rate_pct": 49.17,
+          "avg_win_to_avg_loss": 1.8148
+        },
+        "interpretation": "Active prior-day level trades did not repair baseline red weeks enough; best row was standalone-negative."
+      },
+      "asia_range_m5_v16": {
+        "status": "FREEZE_ASIA_RANGE_M5_SOURCE_CLASS",
+        "exact_mt5_variants_complete": 4,
+        "best_baseline_hybrid": {
+          "variant": "v16_asia_range_cont_rr2",
+          "standalone_trades": 2658,
+          "standalone_pf": 1.0596,
+          "standalone_net_usd": 904.53,
+          "hybrid_positive_week_pct": 56.73,
+          "hybrid_active_weekday_pct": 96.84,
+          "red_weeks_flipped": 15,
+          "red_weeks_worsened": 52
+        },
+        "best_weekly_state_combo": {
+          "positive_week_pct": 57.14,
+          "active_weekday_pct": 96.84,
+          "win_rate_pct": 44.35,
+          "avg_win_to_avg_loss": 1.9636
+        },
+        "interpretation": "Asian-range continuation buys activity but worsens weekly consistency; do not hour-mask or threshold-tune."
+      },
+      "post_v16_risk_off_premise_audit": {
+        "status": "NO_SIMPLE_RISK_OFF_PATH",
+        "source": "exact reconstructed exit-time signal table",
+        "red_week_anatomy": {
+          "red_weeks": 94,
+          "frequency_dominated_red_weeks": 51,
+          "h4_d1_dominated_red_weeks": 43,
+          "large_red_weeks_below_minus100_usd": 24,
+          "large_red_weeks_h4_d1_dominated": 22
+        },
+        "best_single_blocks": [
+          {
+            "name": "block_bucket_h4_d1",
+            "positive_week_pct": 57.69,
+            "win_rate_pct": 49.49,
+            "avg_win_to_avg_loss": 1.4545,
+            "profit_factor": 1.4366,
+            "worst_week_usd": -148.52
+          },
+          {
+            "name": "block_entry_hour_08",
+            "positive_week_pct": 57.69,
+            "win_rate_pct": 52.2,
+            "avg_win_to_avg_loss": 1.789,
+            "profit_factor": 1.971,
+            "worst_week_usd": -750.24
+          }
+        ],
+        "best_pair": {
+          "name": "block_bucket_h4_d1 + block_entry_hour_08",
+          "positive_week_pct": 60.58,
+          "win_rate_pct": 51.79,
+          "avg_win_to_avg_loss": 1.3591,
+          "profit_factor": 1.4738,
+          "worst_week_usd": -138.61
+        },
+        "interpretation": "Simple source/weekday/hour blocks smooth weeks only by deleting edge or breaking payoff; no exact-MT5 implementation justified."
+      },
+      "deadline_1220_goal_audit": {
+        "status": "DEADLINE_MISSED_NO_DEMO_READY_OWNER_GOAL_STRATEGY",
+        "deadline": "2026-07-07 12:20 Asia/Dubai",
+        "best_serious_frontier": {
+          "name": "weekly_state_plus_v14_weekly_damage",
+          "positive_week_pct": 59.52,
+          "active_weekday_pct": 90.03,
+          "avg_win_to_avg_loss": 1.7708
+        },
+        "best_smoother_diagnostic": {
+          "name": "simple_risk_off_pair",
+          "positive_week_pct": 60.58,
+          "avg_win_to_avg_loss": 1.3591
+        },
+        "decision": "No demo spec; next action requires new strategy class, explicit target relaxation, or reviewer challenge."
+      },
+      "owner_goal_exhaustion_review_prompt": {
+        "status": "PREPARED_NOT_SPENT",
+        "prompt": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_EXHAUSTION_REVIEW_PROMPT_2026_07_07.md",
+        "requested_verdicts": [
+          "EXHAUSTION_CONFIRMED",
+          "EXHAUSTION_REJECTED_WITH_NEXT_TEST",
+          "TARGET_RELAXATION_REQUIRED"
+        ],
+        "purpose": "Challenge current A1 XAU owner-goal exhaustion conclusion and identify a genuinely different exact-MT5 next test or target relaxation."
+      },
+      "anti_overfit_decision_matrix": {
+        "status": "CURRENT_FAMILY_OVERFIT_RISK_HIGH_NO_DEMO_SPEC",
+        "document": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+        "report": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+        "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+        "interpretation": "No overfit result has been promoted, but continuing to tune the same A1 XAU trade pool is now high overfit risk.",
+        "blocked_actions": [
+          "more current-family source/hour/weekday/threshold masks",
+          "V14-V16 micro-tuning after class freeze",
+          "H4/D1 stop-cap or partial-ladder retries without materially different premise",
+          "demo spec from diagnostic-only rows"
+        ],
+        "valid_next_actions": [
+          "reviewer challenge to the exhaustion conclusion",
+          "genuinely different preregistered exact-MT5 strategy class",
+          "explicit target relaxation",
+          "retire current family for weekly-positive owner target"
+        ],
+        "key_upper_bound": {
+          "current_pool_non_causal_oracle_positive_week_pct": 65.24,
+          "current_pool_non_causal_oracle_active_weekday_pct": 88.59,
+          "minimum_positive_weeks_for_70pct": 147,
+          "baseline_positive_weeks": 114
+        }
+      },
+      "event_reaction_new_class_prereg": {
+        "status": "PREREG_EXECUTED_EXACT_MT5_NO_DEMO",
+        "document": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+        "report": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+        "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+        "strategy_class": "scheduled_macro_event_reaction",
+        "cells": [
+          "event_impulse_nfp_rr2",
+          "event_fade_nfp_rr2",
+          "event_impulse_cpi_rr2",
+          "event_fade_cpi_rr2",
+          "event_impulse_fomc_rr2",
+          "event_fade_fomc_rr2"
+        ],
+        "calendar_boundary": "Approximate deterministic event windows may reject only; acceptance requires real event-calendar provenance and SHA256.",
+        "decision": "Predeclared cells were implemented and run in exact MT5. Result is diagnostic-only because activity is far below the owner target."
+      },
+      "event_reaction_calendar_provenance": {
+        "status": "EVENT_CALENDAR_OFFICIAL_PROVENANCE_USED_IN_EXACT_MT5_V0",
+        "report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606_PROVENANCE.md",
+        "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+        "calendar_csv": "xau-usd/xauusd-phase1/data/external/event_reaction_calendar/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606.csv",
+        "manifest": "xau-usd/xauusd-phase1/data/external/event_reaction_calendar/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606.manifest.json",
+        "builder": "xau-usd/xauusd-phase1/scripts/build_a1_xau_event_reaction_calendar.py",
+        "calendar_csv_sha256": "39ebfd218ff3910643963f87b64de4431a35ad390a1862e82fe516203b4b69a1",
+        "event_counts": {
+          "nfp_bls_official": 47,
+          "cpi_bls_official": 47,
+          "fomc_fed_official": 32,
+          "total": 126
+        },
+        "acceptance_ready": true,
+        "mt5_run_status": "RUN_COMPLETE_EVENT_REACTION_V0",
+        "decision": "Calendar provenance blocker removed and used in exact MT5. The event-reaction v0 result is diagnostic-only and not demo-ready."
+      },
+      "event_reaction_v0_exact_mt5": {
+        "status": "DIAGNOSTIC_CLUE_LOW_ACTIVITY_NO_DEMO_SPEC",
+        "report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_EVENT_REACTION_V0_202207_202606.md",
+        "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+        "result_note": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_V0_EXACT_MT5_RESULT_2026_07_07.md",
+        "runner_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_EVENT_REACTION_V0_202207_202606.json",
+        "compile_log": "C:/MT5A1M5MomentumBacktest/Logs/compile_A1XauM5MomentumContinuationExecutor_variants_20260701.log",
+        "period": "2022-07-01 -> 2026-06-30",
+        "tester_root": "C:/MT5A1M5MomentumBacktest",
+        "total_calendar_weeks": 210,
+        "variants": [
+          {
+            "name": "event_impulse_nfp_rr2",
+            "trades": 17,
+            "win_rate_pct": 47.06,
+            "net_usd": 46.71,
+            "profit_factor": 1.46,
+            "active_week_pct": 8.1,
+            "positive_active_week_pct": 47.06,
+            "positive_all_week_pct": 3.81
+          },
+          {
+            "name": "event_fade_nfp_rr2",
+            "trades": 23,
+            "win_rate_pct": 30.43,
+            "net_usd": -15.71,
+            "profit_factor": 0.8,
+            "active_week_pct": 10.95,
+            "positive_active_week_pct": 30.43,
+            "positive_all_week_pct": 3.33
+          },
+          {
+            "name": "event_impulse_cpi_rr2",
+            "trades": 18,
+            "win_rate_pct": 38.89,
+            "net_usd": 22.75,
+            "profit_factor": 1.19,
+            "active_week_pct": 8.57,
+            "positive_active_week_pct": 38.89,
+            "positive_all_week_pct": 3.33
+          },
+          {
+            "name": "event_fade_cpi_rr2",
+            "trades": 28,
+            "win_rate_pct": 46.43,
+            "net_usd": 40.73,
+            "profit_factor": 1.45,
+            "active_week_pct": 13.33,
+            "positive_active_week_pct": 46.43,
+            "positive_all_week_pct": 6.19
+          },
+          {
+            "name": "event_impulse_fomc_rr2",
+            "trades": 16,
+            "win_rate_pct": 56.25,
+            "net_usd": 68.52,
+            "profit_factor": 1.81,
+            "active_week_pct": 7.62,
+            "positive_active_week_pct": 56.25,
+            "positive_all_week_pct": 4.29
+          },
+          {
+            "name": "event_fade_fomc_rr2",
+            "trades": 9,
+            "win_rate_pct": 33.33,
+            "net_usd": 5.64,
+            "profit_factor": 1.16,
+            "active_week_pct": 4.29,
+            "positive_active_week_pct": 33.33,
+            "positive_all_week_pct": 1.43
+          }
+        ],
+        "best_quality_clue": {
+          "name": "event_impulse_fomc_rr2",
+          "trades": 16,
+          "win_rate_pct": 56.25,
+          "net_usd": 68.52,
+          "profit_factor": 1.81,
+          "active_week_pct": 7.62
+        },
+        "best_row": {
+          "variant": "event_impulse_fomc_rr2",
+          "trades": 16,
+          "win_rate_pct": 56.25,
+          "avg_win_loss": 1.4095,
+          "profit_factor": 1.81,
+          "manual_pnl_usd": 68.52
+        },
+        "activity_verdict": "Standalone event-reaction activity is far below the 70-90% weekly/activity target; best active-week coverage is only 13.33%.",
+        "decision": "Do not tune event thresholds in place and do not draft a demo spec. Use only as a small scheduled add-on clue for a preregistered composition/red-week rescue audit."
       }
     },
     "reports": {
@@ -11081,12 +11357,60 @@
       "weekly_loss_shape_repair_june_week_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_LOSS_SHAPE_REPAIR_DIAGNOSTIC_2026_07_05_JUNE_WEEK_TABLE.csv",
       "h4_d1_stopceil3000_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_STOPCEIL3000_ONE_ITERATION_PREREG_2026_07_06.md",
       "h4_d1_stopceil3000_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_STOPCEIL3000_ONE_ITERATION_202207_202606.md",
-      "h4_d1_stopceil3000_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_STOPCEIL3000_ONE_ITERATION_202207_202606.json"
+      "h4_d1_stopceil3000_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_STOPCEIL3000_ONE_ITERATION_202207_202606.json",
+      "h4_d1_geometry_v2_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_PREREG_2026_07_06.md",
+      "h4_d1_geometry_v2_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_202207_202606.md",
+      "h4_d1_geometry_v2_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_202207_202606.json",
+      "h4_d1_geometry_v2_manifest": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_GEOMETRY_V2_WEEKLY_SHAPE_PREREG_2026_07_06.sha256.json",
+      "h4_d1_partial_ladder_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_PREREG_2026_07_06.md",
+      "h4_d1_partial_ladder_manifest": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_PREREG_2026_07_06.sha256.json",
+      "h4_d1_partial_ladder_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_202207_202606.md",
+      "h4_d1_partial_ladder_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_PARTIAL_LADDER_EXACT_PROBE_202207_202606.json",
+      "smooth_second_book_weekly_diagnostic_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SMOOTH_SECOND_BOOK_WEEKLY_TARGET_DIAGNOSTIC_202207_202606.md",
+      "smooth_second_book_weekly_diagnostic_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SMOOTH_SECOND_BOOK_WEEKLY_TARGET_DIAGNOSTIC_202207_202606.json",
+      "smooth_second_book_weekly_diagnostic_results": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SMOOTH_SECOND_BOOK_WEEKLY_TARGET_DIAGNOSTIC_202207_202606_RESULTS.csv",
+      "weekly_state_red_week_rescue_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_STATE_RED_WEEK_RESCUE_DIAGNOSTIC_202207_202606.md",
+      "weekly_state_red_week_rescue_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_STATE_RED_WEEK_RESCUE_DIAGNOSTIC_202207_202606.json",
+      "weekly_state_red_week_rescue_results": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_STATE_RED_WEEK_RESCUE_DIAGNOSTIC_202207_202606_RESULTS.csv",
+      "red_week_oracle_upper_bound_note": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RED_WEEK_ORACLE_UPPER_BOUND_NOTE_2026_07_06.md",
+      "weekly_target_gap_quantification": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_TARGET_GAP_QUANTIFICATION_2026_07_06.md",
+      "built_in_signal_mode_inventory_status": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_BUILT_IN_SIGNAL_MODE_INVENTORY_STATUS_2026_07_06.md",
+      "next_red_week_source_plan": "xau-usd/xauusd-phase1/docs/A1_XAU_NEXT_RED_WEEK_SOURCE_PLAN_2026_07_06.md",
+      "weekly_damage_h1_v0_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_WEEKLY_DAMAGE_H1_V0_PREREG_2026_07_07.md",
+      "weekly_damage_h1_v14_freeze_note": "xau-usd/xauusd-phase1/docs/A1_XAU_WEEKLY_DAMAGE_H1_V14_FREEZE_NOTE_2026_07_07.md",
+      "weekly_damage_h1_v14_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_V14_WEEKLY_DAMAGE_H1_202207_202606.md",
+      "weekly_damage_h1_v14_review": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_DAMAGE_H1_V0_EXACT_MT5_REVIEW_202207_202606.md",
+      "weekly_damage_h1_v14b_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_V14B_WEEKLY_DAMAGE_H1_DIRECTION_SPLIT_202207_202606.md",
+      "weekly_damage_h1_v14b_review": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_WEEKLY_DAMAGE_H1_V14B_DIRECTION_SPLIT_EXACT_MT5_REVIEW_202207_202606.md",
+      "owner_goal_frontier_exhaustion_audit": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_FRONTIER_EXHAUSTION_AUDIT_2026_07_06.md",
+      "prior_day_level_m5_v15_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_PRIOR_DAY_LEVEL_M5_V15_PREREG_2026_07_07.md",
+      "prior_day_asia_range_freeze_note": "xau-usd/xauusd-phase1/docs/A1_XAU_PRIOR_DAY_AND_ASIA_RANGE_SOURCE_FREEZE_NOTE_2026_07_07.md",
+      "prior_day_level_m5_v15_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_V15_PRIOR_DAY_LEVEL_M5_202207_202606.md",
+      "prior_day_level_m5_v15_review": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_PRIOR_DAY_LEVEL_M5_V15_EXACT_MT5_REVIEW_202207_202606.md",
+      "prior_day_level_m5_v15b_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_V15B_PRIOR_DAY_LEVEL_M5_DIRECTION_SPLIT_202207_202606.md",
+      "prior_day_level_m5_v15b_review": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_PRIOR_DAY_LEVEL_M5_V15B_DIRECTION_SPLIT_EXACT_MT5_REVIEW_202207_202606.md",
+      "asia_range_m5_v16_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_ASIA_RANGE_M5_V16_PREREG_2026_07_07.md",
+      "asia_range_m5_v16_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_V16_ASIA_RANGE_M5_202207_202606.md",
+      "asia_range_m5_v16_review": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_ASIA_RANGE_M5_V16_EXACT_MT5_REVIEW_202207_202606.md",
+      "post_v16_risk_off_premise_audit": "xau-usd/xauusd-phase1/docs/A1_XAU_POST_V16_RISK_OFF_PREMISE_AUDIT_2026_07_07.md",
+      "deadline_1220_goal_audit": "xau-usd/xauusd-phase1/docs/A1_XAU_1220_DEADLINE_GOAL_AUDIT_2026_07_07.md",
+      "owner_goal_exhaustion_review_prompt": "xau-usd/xauusd-phase1/docs/A1_XAU_OWNER_GOAL_EXHAUSTION_REVIEW_PROMPT_2026_07_07.md",
+      "anti_overfit_decision_matrix": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+      "anti_overfit_decision_matrix_report": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+      "anti_overfit_decision_matrix_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_ANTI_OVERFIT_DECISION_MATRIX_2026_07_07.md",
+      "event_reaction_new_class_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+      "event_reaction_new_class_prereg_report": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_NEW_CLASS_PREREG_2026_07_07.md",
+      "event_reaction_calendar_provenance_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606_PROVENANCE.md",
+      "event_reaction_calendar_csv": "xau-usd/xauusd-phase1/data/external/event_reaction_calendar/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606.csv",
+      "event_reaction_calendar_manifest": "xau-usd/xauusd-phase1/data/external/event_reaction_calendar/A1_XAU_EVENT_REACTION_CALENDAR_202207_202606.manifest.json",
+      "event_reaction_v0_exact_mt5_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_EVENT_REACTION_V0_202207_202606.md",
+      "event_reaction_v0_exact_mt5_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_M5_MOMENTUM_VARIANT_BACKTEST_EVENT_REACTION_V0_202207_202606.json",
+      "event_reaction_v0_exact_mt5_result_note": "xau-usd/xauusd-phase1/docs/A1_XAU_EVENT_REACTION_V0_EXACT_MT5_RESULT_2026_07_07.md"
     },
-    "reviewer_spend": "NO_REVIEWER_SPEND_STOPCEIL3000_REJECTED",
-    "next_action": "Best full-window frontier remains exact-ledger F67-H16 no-F33 composition: 3751 signals, WR 50.23%, W/L 2.0002, active weekdays 86.39%, PF 2.0336, but weekly loss shape is weak. One exact-MT5 H4/D1 stop-ceiling iteration improved drawdown, worst week, positive months, and June 2026, but recomposed W/L fell to 1.9408. Simple stop-ceiling filtering is not the fast path. No demo spec and no reviewer spend; next useful direction is true exact-MT5 stop/risk geometry, not more ceiling filters.",
-    "current_branch_key": "h4_d1_stopceil3000_one_iteration"
+    "reviewer_spend": "NO_REVIEWER_SPEND_PROMPT_PREPARED",
+    "next_action": "Event-reaction v0 exact-MT5 pass is complete and diagnostic-only: FOMC impulse is the best quality clue at 16 trades, WR 56.25%, PF 1.81, net +68.52 USD, but standalone activity is far below target at 7.62% active weeks. Do not tune event thresholds in place or draft a demo spec. Next useful action is a preregistered composition/red-week rescue audit using only profitable event cells, or reviewer challenge/target relaxation.",
+    "current_branch_key": "event_reaction_v0_exact_mt5"
   },
-  "reviewer_spend": "NO_REVIEWER_SPEND_STOPCEIL3000_REJECTED",
-  "next_action": "Best full-window frontier remains exact-ledger F67-H16 no-F33 composition: 3751 signals, WR 50.23%, W/L 2.0002, active weekdays 86.39%, PF 2.0336, but weekly loss shape is weak. One exact-MT5 H4/D1 stop-ceiling iteration improved drawdown, worst week, positive months, and June 2026, but recomposed W/L fell to 1.9408. Simple stop-ceiling filtering is not the fast path. No demo spec and no reviewer spend; next useful direction is true exact-MT5 stop/risk geometry, not more ceiling filters."
+  "reviewer_spend": "NO_REVIEWER_SPEND_PROMPT_PREPARED",
+  "next_action": "Event-reaction v0 exact-MT5 pass is complete and diagnostic-only: FOMC impulse is the best quality clue at 16 trades, WR 56.25%, PF 1.81, net +68.52 USD, but standalone activity is far below target at 7.62% active weeks. Do not tune event thresholds in place or draft a demo spec. Next useful action is a preregistered composition/red-week rescue audit using only profitable event cells, or reviewer challenge/target relaxation."
 }
