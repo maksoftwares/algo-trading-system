@@ -1,0 +1,6 @@
+combo,signals,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,positive_week_delta_pp,worst_week,recent3_net,may_net,new_trades_kept,new_net_kept,red_weeks_touched,red_weeks_flipped,red_weeks_worsened,new_net_in_red_weeks,new_net_in_green_weeks,decision
+down_h4_d1_short_box2_atr80_only,3747,49.77,1.9477,86.39,1.9446,19710.14,1.8472,51.92,-5.77,-878.18,279.22,-142.12,103,-993.77,16,6,10,44.74,-1038.51,REJECT_BREAKS_CORE_SHAPE
+down_h1_d1_short_box2_atr80_only,3820,49.45,1.9187,86.1,1.8907,19783.87,1.8235,54.33,-3.36,-878.18,279.22,-142.12,179,-936.09,11,5,6,492.01,-1428.1,REJECT_BREAKS_CORE_SHAPE
+down_m5_ema_h1h4_short_rr2_only,3993,48.74,2.1343,87.82,2.0429,20681.85,2.0127,57.42,-0.27,-878.18,414.85,-201.1,350,11.86,38,8,24,25.35,-16.14,REJECT_BREAKS_CORE_SHAPE
+down_prior_day_cont_short_rr2_only,3987,48.68,2.1583,87.15,2.0616,20557.96,2.0327,56.94,-0.75,-878.18,452.34,-136.87,343,-152.23,34,4,26,-137.92,-33.47,REJECT_BREAKS_CORE_SHAPE
+down_all_short_engines,4538,46.56,1.9582,88.11,1.7161,19116.02,1.86,51.67,-6.02,-878.18,618.02,-195.85,901,-1583.8,41,10,28,371.4,-1977.01,REJECT_BREAKS_CORE_SHAPE

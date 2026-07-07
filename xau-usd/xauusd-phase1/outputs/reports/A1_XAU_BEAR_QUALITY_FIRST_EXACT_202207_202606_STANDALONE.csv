@@ -1,0 +1,7 @@
+variant,trades,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,worst_week,recent3_net,may_net,decision
+bear_quality_m5_ema_slope50,209,30.14,1.9311,12.56,0.8333,-114.17,1.7549,40.35,-29.13,0,0,QUALITY_REJECT
+bear_quality_m5_ema_slope100,134,28.36,1.8855,8.72,0.7464,-113.67,1.7113,29.17,-17.8,0,0,QUALITY_REJECT
+bear_quality_break_run_tight,192,27.6,2.0058,11.41,0.7648,-145.26,1.8156,36.84,-21.14,0,0,PAYOFF_OK_WR_FAIL
+bear_quality_compression_break,0,0.0,,0.0,,0,,0.0,0.0,0,0,LOW_SAMPLE_REJECT
+bear_quality_h4_pullback_d1bias,18,33.33,2.6756,1.44,1.3378,51.4,2.5907,42.86,-24.34,0,0,PAYOFF_OK_WR_FAIL
+bear_quality_weekly_rejection,8,12.5,1.7972,0.77,0.2567,-49.91,1.7123,14.29,-13.39,0,0,LOW_SAMPLE_REJECT

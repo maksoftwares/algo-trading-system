@@ -1,3 +1,3 @@
 variant,signals,wr,wl,active,pf,net,dd,stress_030_wl,positive_week_pct,worst_week,rolling4_positive_pct,positive_month_pct,worst_month,june_2026,decision,recent3_signals,recent3_wr,recent3_wl,recent3_net,may_net
-supportive_guard,3653,50.4,2.0892,85.71,2.1392,20921.07,841.98,1.973,57.21,-878.18,68.78,60.42,-362.45,368.84,FAIL_WEEKLY_SHAPE,139,45.32,1.4481,279.22,-142.12
-weekly_loss_governor,3763,50.23,1.9913,86.48,2.0245,22367.87,1583.72,1.8953,54.33,-878.18,63.41,58.33,-679.26,-599.56,FAIL_CORE_WR_WL,147,42.86,0.7395,-1226.32,-1055.98
+supportive_guard,3645,50.4,2.0895,85.71,2.1395,20701.41,841.98,1.972,57.69,-878.18,68.78,60.42,-392.46,368.84,FAIL_WEEKLY_SHAPE,139,45.32,1.4481,279.22,-142.12
+weekly_loss_governor,3748,50.19,1.973,86.39,2.0028,21629.18,1583.72,1.8764,54.81,-878.18,63.41,58.33,-679.26,-599.56,FAIL_CORE_WR_WL,147,42.86,0.7395,-1226.32,-1055.98

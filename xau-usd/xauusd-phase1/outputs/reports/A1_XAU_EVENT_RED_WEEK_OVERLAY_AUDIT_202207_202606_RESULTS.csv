@@ -1,0 +1,6 @@
+combo,signals,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,positive_week_delta_pp,worst_week,event_trades_kept,event_net_kept,red_weeks_touched,red_weeks_flipped,red_weeks_worsened,event_net_in_red_weeks,event_net_in_green_weeks,decision
+event_impulse_fomc_rr2_only,3659,50.42,2.0859,85.91,2.138,20757.31,1.9688,57.21,-0.48,-878.18,15,79.91,6,0,4,-21.79,101.7,REJECT_WEEKLY_NOT_IMPROVED
+event_fade_cpi_rr2_only,3672,50.35,2.0886,85.91,2.1348,20718.94,1.971,57.21,-0.48,-878.18,28,40.73,11,0,8,-19.12,59.85,REJECT_WEEKLY_NOT_IMPROVED
+event_fomc_impulse_plus_cpi_fade,3686,50.38,2.0851,86.1,2.1334,20774.84,1.9678,56.73,-0.96,-878.18,43,120.64,16,0,11,-40.91,161.55,REJECT_WEEKLY_NOT_IMPROVED
+event_all_v0_positive_net,3729,50.25,2.0839,86.58,2.1212,20838.83,1.9668,57.69,0.0,-878.18,86,184.63,28,3,19,-102.59,287.22,REJECT_WEEKLY_NOT_IMPROVED
+event_all_v0_including_negative_control,3750,50.13,2.089,86.67,2.116,20820.57,1.9714,57.69,0.0,-878.18,107,166.37,33,3,23,-102.01,268.38,REJECT_WEEKLY_NOT_IMPROVED

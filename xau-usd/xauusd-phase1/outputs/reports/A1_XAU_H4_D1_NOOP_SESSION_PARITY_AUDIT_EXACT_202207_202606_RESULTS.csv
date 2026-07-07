@@ -1,0 +1,3 @@
+variant,signals,wr,wl,active,pf,net,dd,stress_030_wl,positive_week_pct,worst_week,rolling4_positive_pct,positive_month_pct,worst_month,june_2026,decision,recent3_signals,recent3_wr,recent3_wl,recent3_net,may_net
+baseline_f67_h16_no_f33,3751,50.23,2.0002,86.39,2.0336,22294.46,1583.72,1.9029,54.81,-878.18,63.41,58.33,-679.26,-599.56,BASELINE,147,42.86,0.7395,-1226.32,-1055.98
+noop_parity,3751,50.23,1.9998,86.39,2.0333,22286.32,1583.72,1.9025,54.81,-878.18,63.41,58.33,-679.26,-599.56,H4_D1_NOOP_SIGNAL_SHAPE_PARITY_PASS_MINOR_FILL_DRIFT,147,42.86,0.7395,-1226.32,-1055.98

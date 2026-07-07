@@ -1,0 +1,8 @@
+combo,signals,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,positive_week_delta_pp,worst_week,recent3_net,may_net,new_trades_kept,new_net_kept,red_weeks_touched,red_weeks_flipped,red_weeks_worsened,new_net_in_red_weeks,decision
+bear_quality_m5_ema_slope50_only,3830,49.37,2.1346,87.06,2.0969,20591.76,2.0119,56.25,-1.44,-878.18,279.22,-142.12,186,-99.17,30,2,18,-85.63,REJECT_COMBINED_WR
+bear_quality_m5_ema_slope100_only,3763,49.67,2.1225,86.77,2.1101,20596.25,2.0013,56.73,-0.96,-878.18,279.22,-142.12,119,-94.68,23,2,15,-79.85,REJECT_COMBINED_WR
+bear_quality_break_run_tight_only,3829,49.28,2.1415,86.86,2.096,20559.86,2.0182,57.21,-0.48,-878.18,279.22,-142.12,184,-141.55,29,3,18,-87.65,REJECT_COMBINED_WR
+bear_quality_compression_break_only,3645,50.4,2.0895,85.71,2.1395,20701.41,1.972,57.69,0.0,-878.18,279.22,-142.12,0,0,0,0,0,0.0,REJECT_COMBINED_WEEKLY_SHAPE
+bear_quality_h4_pullback_d1bias_only,3663,50.31,2.0901,85.71,2.1329,20752.81,1.9729,57.21,-0.48,-878.18,279.22,-142.12,18,51.4,6,3,3,33.51,REJECT_COMBINED_WEEKLY_SHAPE
+bear_quality_weekly_rejection_only,3653,50.31,2.0897,85.81,2.1326,20651.5,1.9722,57.69,0.0,-878.18,279.22,-142.12,8,-49.91,2,0,1,-7.0,REJECT_COMBINED_WEEKLY_SHAPE
+bear_quality_all_cells,4062,48.08,2.187,87.15,2.0388,20422.41,2.0587,54.81,-2.88,-878.18,279.22,-142.12,418,-268.52,32,3,23,-186.51,REJECT_COMBINED_WR

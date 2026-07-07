@@ -62,6 +62,7 @@ BASE_H4_INPUTS = {
     "InpCooldownMinutes": "0",
     "InpOnePositionPerMagic": "false",
     "InpMaxOpenPositionsPerMagic": "32",
+    "InpBlockedEntryDayHoursCsv": "5:20",
     "InpBlockedLongEntryHoursCsv": "3,10,13,14",
 }
 

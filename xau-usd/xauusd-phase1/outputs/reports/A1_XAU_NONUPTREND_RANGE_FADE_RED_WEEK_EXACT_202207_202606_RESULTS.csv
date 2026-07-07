@@ -1,0 +1,5 @@
+combo,signals,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,positive_week_delta_pp,worst_week,recent3_net,may_net,new_trades_kept,new_net_kept,red_weeks_touched,red_weeks_flipped,red_weeks_worsened,new_net_in_red_weeks,new_net_in_green_weeks,decision
+nonup_daily_extreme_rr2_only,3866,49.43,2.07,87.34,2.038,20405.12,1.9547,57.21,-0.48,-878.18,79.86,-295.37,222,-300.32,35,6,18,78.9,-379.22,REJECT_BREAKS_CORE_SHAPE
+nonup_prior_day_reversal_rr2_only,4125,48.51,2.1772,88.4,2.0648,20727.62,2.0474,58.65,0.96,-880.97,237.86,-75.42,481,21.76,58,8,32,30.61,-8.85,REJECT_BREAKS_CORE_SHAPE
+nonup_orrev_london_rr2_only,3702,50.22,2.0955,85.91,2.1298,20721.6,1.9769,57.21,-0.48,-878.18,257.94,-149.85,58,17.68,22,1,14,-7.04,24.72,REJECT_WEEKLY_NOT_IMPROVED
+nonup_all_range_fade_rr2,4395,47.62,2.1516,89.55,1.9682,20439.99,2.0244,58.65,0.96,-880.97,17.22,-236.4,753,-272.41,60,12,31,101.39,-373.8,REJECT_BREAKS_CORE_SHAPE

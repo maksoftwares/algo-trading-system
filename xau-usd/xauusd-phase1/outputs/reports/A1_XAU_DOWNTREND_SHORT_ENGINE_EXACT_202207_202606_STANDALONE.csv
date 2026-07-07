@@ -1,0 +1,5 @@
+variant,trades,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,worst_week,recent3_net,may_net,diagnostic
+down_h4_d1_short_box2_atr80,103,27.18,1.6934,6.23,0.6322,-993.77,1.6711,28.21,-239.18,0,0,STANDALONE_REJECT
+down_h1_d1_short_box2_atr80,181,29.28,1.8366,4.99,0.7605,-986.04,1.8104,33.33,-489.46,0,0,STANDALONE_REJECT
+down_m5_ema_h1h4_short_rr2,438,33.11,2.1595,18.5,1.0687,137.34,2.0264,42.86,-49.81,258.45,-34.32,STANDALONE_SHORT_CLUE
+down_prior_day_cont_short_rr2,354,30.23,1.9871,13.52,0.8608,-175.48,1.8212,25.35,-40.96,159.62,-8.25,STANDALONE_REJECT

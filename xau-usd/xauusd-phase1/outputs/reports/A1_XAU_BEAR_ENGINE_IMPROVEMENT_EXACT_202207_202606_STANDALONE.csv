@@ -1,0 +1,6 @@
+variant,trades,wr,wl,active,pf,net,stress_030_wl,positive_week_pct,worst_week,recent3_net,may_net,decision
+bear_m5_ema_h1_only_rr2_morefreq,438,33.11,2.1599,19.18,1.0689,139.24,2.0282,41.77,-49.81,286.25,-34.32,NO_BEAR_IMPROVEMENT
+bear_m5_ema_h1h4_rr2_strict_body,432,31.71,2.1173,18.89,0.9833,-32.25,1.9806,36.36,-36.01,158.44,-2.77,NO_BEAR_IMPROVEMENT
+bear_m5_ema_h1h4_rr2_fast_slope,406,33.0,2.1388,18.22,1.0537,98.8,2.0056,39.47,-49.51,181.56,-63.77,NO_BEAR_IMPROVEMENT
+bear_ema_pullback_h1h4_rr2,487,31.42,2.0018,19.18,0.917,-186.96,1.8739,35.0,-61.84,115.62,-91.68,MORE_TRADES_BUT_WR_NOT_UP
+bear_break_run_h1h4_rr2,445,32.13,2.3536,17.55,1.1144,208.0,2.1943,38.67,-66.56,182.17,58.31,MORE_TRADES_BUT_WR_NOT_UP

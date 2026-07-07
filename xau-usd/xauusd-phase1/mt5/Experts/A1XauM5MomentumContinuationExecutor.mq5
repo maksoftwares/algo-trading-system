@@ -110,6 +110,9 @@ input double InpD1CompressionH4MinBodyFraction = 0.50;
 input bool   InpH4D1SupportiveStateGuardEnabled = false;
 input int    InpH4D1SupportiveEmaPeriod      = 20;
 input int    InpH4D1SupportiveSlopeLagBars   = 5;
+input int    InpD1SupportStateGateMode       = 0;      // 0=off, 1=require supportive, 2=require non-supportive, 3=require bearish
+input int    InpD1SupportStateEmaPeriod      = 20;
+input int    InpD1SupportStateSlopeLagBars   = 5;
 input bool   InpH4D1WeeklyLossGovernorEnabled = false;
 input double InpH4D1WeeklyLossLimitUsd       = 150.00;
 input double InpDailyExtremeMinMoveAtr        = 1.00;
@@ -152,6 +155,7 @@ input int    InpStopCeilingPoints             = 1800;
 input int    InpStopCapPoints                 = 0;     // 0 disables; caps effective stop distance instead of filtering.
 input double InpRiskReward                    = 1.50;
 input string InpBlockedEntryHoursCsv          = "";     // comma-separated server hours, e.g. "9,10"
+input string InpBlockedEntryDayHoursCsv       = "";     // comma-separated MQL day:hour pairs, e.g. "5:20"
 input string InpBlockedLongEntryHoursCsv      = "";     // optional direction-specific server-hour block list
 input string InpBlockedShortEntryHoursCsv     = "";     // optional direction-specific server-hour block list
 input MomentumDirectionMode InpDirectionMode  = MOMENTUM_BOTH_DIRECTIONS;
@@ -1760,17 +1764,11 @@ bool TrendAllows(
    return false;
   }
 
-bool H4D1SupportiveStateAllows(const string direction)
+bool D1SupportiveState(const int ema_period_input, const int slope_lag_input, bool &available)
   {
-   if(!InpH4D1SupportiveStateGuardEnabled)
-      return true;
-   if(!IsH4DecisionSignalMode())
-      return true;
-   if(direction != "LONG")
-      return true;
-
-   const int ema_period = MathMax(1, InpH4D1SupportiveEmaPeriod);
-   const int slope_lag = MathMax(1, InpH4D1SupportiveSlopeLagBars);
+   available = false;
+   const int ema_period = MathMax(1, ema_period_input);
+   const int slope_lag = MathMax(1, slope_lag_input);
    if(iBars(InpTargetSymbol, PERIOD_D1) < ema_period + slope_lag + 5)
       return false;
 
@@ -1780,7 +1778,68 @@ bool H4D1SupportiveStateAllows(const string direction)
    if(d1_close <= 0.0 || ema_now <= 0.0 || ema_prior <= 0.0)
       return false;
 
+   available = true;
    return d1_close > ema_now && ema_now >= ema_prior;
+  }
+
+bool D1BearishState(const int ema_period_input, const int slope_lag_input, bool &available)
+  {
+   available = false;
+   const int ema_period = MathMax(1, ema_period_input);
+   const int slope_lag = MathMax(1, slope_lag_input);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < ema_period + slope_lag + 5)
+      return false;
+
+   const double d1_close = iClose(InpTargetSymbol, PERIOD_D1, 1);
+   const double ema_now = IndicatorEmaClose(PERIOD_D1, ema_period, 1);
+   const double ema_prior = IndicatorEmaClose(PERIOD_D1, ema_period, 1 + slope_lag);
+   if(d1_close <= 0.0 || ema_now <= 0.0 || ema_prior <= 0.0)
+      return false;
+
+   available = true;
+   return d1_close < ema_now && ema_now <= ema_prior;
+  }
+
+bool H4D1SupportiveStateAllows(const string direction)
+  {
+   if(!InpH4D1SupportiveStateGuardEnabled)
+      return true;
+   if(!IsH4DecisionSignalMode())
+      return true;
+   if(direction != "LONG")
+      return true;
+
+   bool available = false;
+   const bool supportive = D1SupportiveState(InpH4D1SupportiveEmaPeriod, InpH4D1SupportiveSlopeLagBars, available);
+   if(!available)
+      return false;
+   return supportive;
+  }
+
+bool D1SupportStateGateAllows()
+  {
+   if(InpD1SupportStateGateMode <= 0)
+      return true;
+
+   if(InpD1SupportStateGateMode == 1 || InpD1SupportStateGateMode == 2)
+     {
+      bool available = false;
+      const bool supportive = D1SupportiveState(InpD1SupportStateEmaPeriod, InpD1SupportStateSlopeLagBars, available);
+      if(!available)
+         return false;
+      if(InpD1SupportStateGateMode == 1)
+         return supportive;
+      return !supportive;
+     }
+   if(InpD1SupportStateGateMode == 3)
+     {
+      bool available = false;
+      const bool bearish = D1BearishState(InpD1SupportStateEmaPeriod, InpD1SupportStateSlopeLagBars, available);
+      if(!available)
+         return false;
+      return bearish;
+     }
+   return false;
   }
 
 double OwnClosedPnlBetween(const datetime from_time, const datetime to_time)
@@ -1863,6 +1922,32 @@ bool CurrentHourInCsv(const string csv_hours)
 bool EntryHourBlocked()
   {
    return CurrentHourInCsv(InpBlockedEntryHoursCsv);
+  }
+
+bool EntryDayHourBlocked()
+  {
+   if(InpBlockedEntryDayHoursCsv == "")
+      return false;
+   MqlDateTime parts;
+   TimeToStruct(TimeCurrent(), parts);
+   string tokens[];
+   const int count = StringSplit(InpBlockedEntryDayHoursCsv, ',', tokens);
+   for(int i = 0; i < count; i++)
+     {
+      string token = tokens[i];
+      StringTrimLeft(token);
+      StringTrimRight(token);
+      if(token == "")
+         continue;
+      const int colon = StringFind(token, ":");
+      if(colon <= 0)
+         continue;
+      const int day = (int)StringToInteger(StringSubstr(token, 0, colon));
+      const int hour = (int)StringToInteger(StringSubstr(token, colon + 1));
+      if(day == parts.day_of_week && hour == parts.hour)
+         return true;
+     }
+   return false;
   }
 
 bool DirectionEntryHourBlocked(const string direction)
@@ -3274,6 +3359,11 @@ void EvaluateCompletedM5Bar()
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "blocked_entry_hour");
       return;
      }
+   if(EntryDayHourBlocked())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "blocked_entry_day_hour");
+      return;
+     }
    if(DirectionEntryHourBlocked(direction))
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "direction_blocked_entry_hour");
@@ -3307,6 +3397,11 @@ void EvaluateCompletedM5Bar()
    if(!H4D1WeeklyLossGovernorAllows())
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_weekly_loss_governor");
+      return;
+     }
+   if(!D1SupportStateGateAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "d1_support_state_gate");
       return;
      }
    double close_to_recent_extreme = 0.0;
