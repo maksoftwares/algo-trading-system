@@ -107,6 +107,11 @@ input double InpD1CompressionAtrPercentileMax = 30.00;
 input int    InpD1CompressionBoxDays          = 5;
 input double InpD1CompressionRangeMedianMax   = 1.00;
 input double InpD1CompressionH4MinBodyFraction = 0.50;
+input bool   InpH4D1SupportiveStateGuardEnabled = false;
+input int    InpH4D1SupportiveEmaPeriod      = 20;
+input int    InpH4D1SupportiveSlopeLagBars   = 5;
+input bool   InpH4D1WeeklyLossGovernorEnabled = false;
+input double InpH4D1WeeklyLossLimitUsd       = 150.00;
 input double InpDailyExtremeMinMoveAtr        = 1.00;
 input double InpDailyExtremeTouchAtr          = 0.05;
 input double InpDailyExtremeReclaimAtr        = 0.10;
@@ -1755,6 +1760,73 @@ bool TrendAllows(
    return false;
   }
 
+bool H4D1SupportiveStateAllows(const string direction)
+  {
+   if(!InpH4D1SupportiveStateGuardEnabled)
+      return true;
+   if(!IsH4DecisionSignalMode())
+      return true;
+   if(direction != "LONG")
+      return true;
+
+   const int ema_period = MathMax(1, InpH4D1SupportiveEmaPeriod);
+   const int slope_lag = MathMax(1, InpH4D1SupportiveSlopeLagBars);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < ema_period + slope_lag + 5)
+      return false;
+
+   const double d1_close = iClose(InpTargetSymbol, PERIOD_D1, 1);
+   const double ema_now = IndicatorEmaClose(PERIOD_D1, ema_period, 1);
+   const double ema_prior = IndicatorEmaClose(PERIOD_D1, ema_period, 1 + slope_lag);
+   if(d1_close <= 0.0 || ema_now <= 0.0 || ema_prior <= 0.0)
+      return false;
+
+   return d1_close > ema_now && ema_now >= ema_prior;
+  }
+
+double OwnClosedPnlBetween(const datetime from_time, const datetime to_time)
+  {
+   if(from_time <= 0 || to_time <= from_time)
+      return 0.0;
+   if(!HistorySelect(from_time, to_time))
+      return 0.0;
+
+   double pnl = 0.0;
+   const int total = HistoryDealsTotal();
+   for(int i = 0; i < total; i++)
+     {
+      const ulong ticket = HistoryDealGetTicket(i);
+      if(ticket == 0)
+         continue;
+      if(HistoryDealGetString(ticket, DEAL_SYMBOL) != InpTargetSymbol)
+         continue;
+      if((long)HistoryDealGetInteger(ticket, DEAL_MAGIC) != InpMagicNumber)
+         continue;
+
+      const long entry = (long)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      if(entry != DEAL_ENTRY_OUT && entry != DEAL_ENTRY_INOUT && entry != DEAL_ENTRY_OUT_BY)
+         continue;
+
+      pnl += HistoryDealGetDouble(ticket, DEAL_PROFIT);
+      pnl += HistoryDealGetDouble(ticket, DEAL_SWAP);
+      pnl += HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+     }
+   return pnl;
+  }
+
+bool H4D1WeeklyLossGovernorAllows()
+  {
+   if(!InpH4D1WeeklyLossGovernorEnabled)
+      return true;
+   if(!IsH4DecisionSignalMode())
+      return true;
+   if(InpH4D1WeeklyLossLimitUsd <= 0.0)
+      return true;
+
+   const datetime week_start = BrokerWeekStart(TimeCurrent());
+   const double week_pnl = OwnClosedPnlBetween(week_start, TimeCurrent());
+   return week_pnl > -InpH4D1WeeklyLossLimitUsd;
+  }
+
 bool HourInWindow(const int hour, const int start_hour_input, const int end_hour_input)
   {
    const int start_hour = MathMax(0, MathMin(23, start_hour_input));
@@ -3225,6 +3297,16 @@ void EvaluateCompletedM5Bar()
    if(!H4TrendAllows(direction))
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_trend_filter_block");
+      return;
+     }
+   if(!H4D1SupportiveStateAllows(direction))
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_supportive_state_guard");
+      return;
+     }
+   if(!H4D1WeeklyLossGovernorAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_weekly_loss_governor");
       return;
      }
    double close_to_recent_extreme = 0.0;
