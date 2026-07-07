@@ -9411,7 +9411,7 @@
       }
     }
   },
-  "generated_at_utc": "2026-07-07T08:32:00Z",
+  "generated_at_utc": "2026-07-07T20:50:00Z",
   "next_evidence_required": [
     "SQ-01 hash-locked A3_SIGNAL_QUALITY_V1_IMPLEMENTATION_ADDENDUM_01.md",
     "SQ-02 hash-locked A3_SIGNAL_QUALITY_DIAGNOSTIC_SWEEP_V1_2026_06_18.md",
@@ -9646,11 +9646,16 @@
     "forex_dukascopy_usdjpy_direct_tick_bidask_replay_json": "forex-research/outputs/reports/mt5_backtests/session_breakout_scout/FOREX_DUKASCOPY_USDJPY_LONDON120_M15_D1ATR20_DIRECT_TICK_BIDASK_REPLAY_RECENT_2025_2026_2026_07_04.json",
     "forex_dukascopy_usdjpy_direct_tick_bidask_trades": "forex-research/outputs/reports/mt5_backtests/session_breakout_scout/FOREX_DUKASCOPY_USDJPY_LONDON120_M15_D1ATR20_DIRECT_TICK_BIDASK_TRADES_RECENT_2025_2026_2026_07_04.csv",
     "forex_mt5_extra_major_meanrev_extension_reject": "forex-research/outputs/reports/mt5_backtests/FOREX_MT5_EXTRA_MAJOR_MEANREV_EXTENSION_REJECT_2026_07_04.md",
-    "forex_mt5_extra_major_meanrev_extension_reject_json": "forex-research/outputs/reports/mt5_backtests/FOREX_MT5_EXTRA_MAJOR_MEANREV_EXTENSION_REJECT_2026_07_04.json"
+    "forex_mt5_extra_major_meanrev_extension_reject_json": "forex-research/outputs/reports/mt5_backtests/FOREX_MT5_EXTRA_MAJOR_MEANREV_EXTENSION_REJECT_2026_07_04.json",
+    "short_hedge_prereg": "xau-usd/xauusd-phase1/docs/A1_XAU_SHORT_HEDGE_PREREG_2026_07_08.md",
+    "short_hedge_freeze_note": "xau-usd/xauusd-phase1/docs/A1_XAU_BEAR_CONTINUATION_FAMILY_FREEZE_2026_07_08.md",
+    "short_hedge_report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SHORT_HEDGE_EXACT_202207_202606.md",
+    "short_hedge_runner": "xau-usd/xauusd-phase1/scripts/run_a1_short_hedge_probe.py",
+    "short_hedge_review_packet": "xau-usd/xauusd-phase1/docs/reviewer_audit_2026_07_08_short_hedge/README.md"
   },
   "primary_gold_goal_current": {
     "status": "DEADLINE_MISSED_NO_DEMO_READY_OWNER_GOAL_STRATEGY",
-    "generated_at_utc": "2026-07-07T08:32:00Z",
+    "generated_at_utc": "2026-07-07T20:50:00Z",
     "runtime_touched": false,
     "live_or_demo_runtime_touched": false,
     "isolated_tester_root": "C:\\MT5A1M5MomentumBacktest",
@@ -11222,6 +11227,45 @@
         },
         "activity_verdict": "Standalone event-reaction activity is far below the 70-90% weekly/activity target; best active-week coverage is only 13.33%.",
         "decision": "Do not tune event thresholds in place and do not draft a demo spec. Use only as a small scheduled add-on clue for a preregistered composition/red-week rescue audit."
+      },
+      "short_hedge_exact_probe": {
+        "status": "SHORT_HEDGE_COMBINED_REVIEW_CANDIDATE",
+        "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_SHORT_HEDGE_PREREG_2026_07_08.md",
+        "freeze_note": "xau-usd/xauusd-phase1/docs/A1_XAU_BEAR_CONTINUATION_FAMILY_FREEZE_2026_07_08.md",
+        "report": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SHORT_HEDGE_EXACT_202207_202606.md",
+        "runner": "xau-usd/xauusd-phase1/scripts/run_a1_short_hedge_probe.py",
+        "best_variant": {
+          "name": "short_hedge_v2_breakdown_retest",
+          "standalone_trades": 329,
+          "standalone_win_rate_pct": 32.83,
+          "standalone_avg_win_loss": 2.8332,
+          "standalone_profit_factor": 1.3846,
+          "standalone_net_usd": 441.42,
+          "stress_030_profit_factor": 1.2823,
+          "stress_030_avg_win_loss": 2.6239,
+          "stress_030_net_usd": 342.72,
+          "q2_net_usd": 283.39,
+          "top1_share_pct": 8.06,
+          "top_day_share_pct": 28.42
+        },
+        "combined_with_supportive_guard": {
+          "signals": 3953,
+          "win_rate_pct": 49.0,
+          "avg_win_loss": 2.1637,
+          "active_weekday_pct": 87.54,
+          "profit_factor": 2.0934,
+          "net_usd": 21064.67,
+          "stress_030_avg_win_loss": 2.039,
+          "positive_week_pct": 58.17,
+          "positive_week_delta_pp": 0.48,
+          "recent3_net_usd": 494.57,
+          "new_kept_net_usd": 381.0,
+          "red_weeks_flipped": 6,
+          "red_weeks_worsened": 25
+        },
+        "q2_defense_basis": "current guarded long-box baseline has no Q2-2026 long-box loss; defense recorded as positive Q2 addition, not loss reduction",
+        "decision": "Research-only pending reviewer approval; no demo spec.",
+        "review_packet": "xau-usd/xauusd-phase1/docs/reviewer_audit_2026_07_08_short_hedge/README.md"
       }
     },
     "reports": {
@@ -11412,5 +11456,6 @@
     "current_branch_key": "event_reaction_v0_exact_mt5"
   },
   "reviewer_spend": "NO_REVIEWER_SPEND_PROMPT_PREPARED",
-  "next_action": "Event-reaction v0 exact-MT5 pass is complete and diagnostic-only: FOMC impulse is the best quality clue at 16 trades, WR 56.25%, PF 1.81, net +68.52 USD, but standalone activity is far below target at 7.62% active weeks. Do not tune event thresholds in place or draft a demo spec. Next useful action is a preregistered composition/red-week rescue audit using only profitable event cells, or reviewer challenge/target relaxation."
+  "next_action": "Short hedge V2 breakdown-retest is the current best short-side hedge candidate: it passed standalone hedge checks and combined supportive-guard book shape in exact MT5, but remains research-only pending reviewer approval. Do not draft a demo spec; next action is reviewer review of V2, then only small preregistered robustness checks if accepted.",
+  "current_branch_key": "short_hedge_v2_breakdown_retest"
 }

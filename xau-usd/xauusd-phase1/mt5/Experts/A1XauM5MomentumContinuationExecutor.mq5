@@ -37,7 +37,9 @@ enum MomentumSignalMode
    SIGNAL_DAILY_EXTREME_RECLAIM = 11,
    SIGNAL_WEEKLY_DAMAGE_H1 = 12,
    SIGNAL_PRIOR_DAY_LEVEL_M5 = 13,
-   SIGNAL_EVENT_REACTION_M5 = 14
+   SIGNAL_EVENT_REACTION_M5 = 14,
+   SIGNAL_BEAR_BREAKDOWN_RETEST = 15,
+   SIGNAL_BEAR_SWEEP_RECLAIM = 16
   };
 
 input string InpRunId                         = "A1_XAU_M5_MOMENTUM_CONTINUATION_SAFE_DEFAULT";
@@ -110,7 +112,7 @@ input double InpD1CompressionH4MinBodyFraction = 0.50;
 input bool   InpH4D1SupportiveStateGuardEnabled = false;
 input int    InpH4D1SupportiveEmaPeriod      = 20;
 input int    InpH4D1SupportiveSlopeLagBars   = 5;
-input int    InpD1SupportStateGateMode       = 0;      // 0=off, 1=require supportive, 2=require non-supportive, 3=require bearish
+input int    InpD1SupportStateGateMode       = 0;      // 0=off, 1=require supportive, 2=require non-supportive, 3=require bearish, 4=require non-up
 input int    InpD1SupportStateEmaPeriod      = 20;
 input int    InpD1SupportStateSlopeLagBars   = 5;
 input bool   InpH4D1WeeklyLossGovernorEnabled = false;
@@ -149,6 +151,18 @@ input int    InpEventReactionEndMinutes       = 60;
 input double InpEventReactionBreakAtr         = 0.10;
 input double InpEventReactionStopBufferAtr    = 0.10;
 input double InpEventReactionMinBodyFraction  = 0.35;
+input int    InpBearRetestLookbackBars        = 10;
+input int    InpBearRetestSupportLookbackBars = 12;
+input double InpBearRetestBreakAtr            = 0.10;
+input double InpBearRetestTouchAtr            = 0.05;
+input double InpBearRetestReclaimAtr          = 0.05;
+input double InpBearRetestStopBufferAtr       = 0.25;
+input double InpBearRetestMinBodyFraction     = 0.30;
+input int    InpBearSweepReclaimBars          = 2;
+input double InpBearSweepTouchAtr             = 0.05;
+input double InpBearSweepReclaimAtr           = 0.05;
+input double InpBearSweepStopBufferAtr        = 0.25;
+input double InpBearSweepMinBodyFraction      = 0.20;
 input double InpStopAtrMultiple               = 2.50;
 input int    InpStopFloorPoints               = 350;
 input int    InpStopCeilingPoints             = 1800;
@@ -1800,6 +1814,24 @@ bool D1BearishState(const int ema_period_input, const int slope_lag_input, bool 
    return d1_close < ema_now && ema_now <= ema_prior;
   }
 
+bool D1NonUpState(const int ema_period_input, const int slope_lag_input, bool &available)
+  {
+   available = false;
+   const int ema_period = MathMax(1, ema_period_input);
+   const int slope_lag = MathMax(1, slope_lag_input);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < ema_period + slope_lag + 5)
+      return false;
+
+   const double d1_close = iClose(InpTargetSymbol, PERIOD_D1, 1);
+   const double ema_now = IndicatorEmaClose(PERIOD_D1, ema_period, 1);
+   const double ema_prior = IndicatorEmaClose(PERIOD_D1, ema_period, 1 + slope_lag);
+   if(d1_close <= 0.0 || ema_now <= 0.0 || ema_prior <= 0.0)
+      return false;
+
+   available = true;
+   return d1_close <= ema_now || ema_now < ema_prior;
+  }
+
 bool H4D1SupportiveStateAllows(const string direction)
   {
    if(!InpH4D1SupportiveStateGuardEnabled)
@@ -1838,6 +1870,14 @@ bool D1SupportStateGateAllows()
       if(!available)
          return false;
       return bearish;
+     }
+   if(InpD1SupportStateGateMode == 4)
+     {
+      bool available = false;
+      const bool non_up = D1NonUpState(InpD1SupportStateEmaPeriod, InpD1SupportStateSlopeLagBars, available);
+      if(!available)
+         return false;
+      return non_up;
      }
    return false;
   }
@@ -2833,6 +2873,139 @@ bool TryPriorDayLevelM5Signal(
    return stop_distance > 0.0;
   }
 
+bool TryBearBreakdownRetestSignal(
+   const double open,
+   const double high,
+   const double close,
+   const double range,
+   const double m5_atr,
+   const double body_fraction,
+   const double close_location,
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   const int break_lookback = MathMax(2, InpBearRetestLookbackBars);
+   const int support_lookback = MathMax(3, InpBearRetestSupportLookbackBars);
+   if(iBars(InpTargetSymbol, PERIOD_M5) < break_lookback + support_lookback + InpAtrPeriod + 10)
+      return false;
+   if(m5_atr <= 0.0 || range <= 0.0)
+      return false;
+   if(body_fraction < InpBearRetestMinBodyFraction)
+      return false;
+   if(close >= open || close_location > InpShortCloseLocation)
+      return false;
+
+   const double break_zone = InpBearRetestBreakAtr * m5_atr;
+   const double touch_zone = InpBearRetestTouchAtr * m5_atr;
+   const double reclaim_zone = InpBearRetestReclaimAtr * m5_atr;
+   const double stop_buffer = InpBearRetestStopBufferAtr * m5_atr;
+
+   for(int break_shift = 2; break_shift <= break_lookback + 1; break_shift++)
+     {
+      double support = 0.0;
+      for(int support_shift = break_shift + 1; support_shift <= break_shift + support_lookback; support_shift++)
+        {
+         const double prior_low = iLow(InpTargetSymbol, PERIOD_M5, support_shift);
+         if(prior_low <= 0.0)
+            return false;
+         if(support <= 0.0 || prior_low < support)
+            support = prior_low;
+        }
+      if(support <= 0.0)
+         continue;
+
+      const double break_close = iClose(InpTargetSymbol, PERIOD_M5, break_shift);
+      if(break_close <= 0.0 || break_close > support - break_zone)
+         continue;
+
+      double retest_high = high;
+      bool reclaimed_above_support = false;
+      for(int retest_shift = 1; retest_shift < break_shift; retest_shift++)
+        {
+         const double candidate_high = iHigh(InpTargetSymbol, PERIOD_M5, retest_shift);
+         const double candidate_close = iClose(InpTargetSymbol, PERIOD_M5, retest_shift);
+         if(candidate_high <= 0.0 || candidate_close <= 0.0)
+            return false;
+         if(candidate_high > retest_high)
+            retest_high = candidate_high;
+         if(candidate_close >= support + reclaim_zone)
+           {
+            reclaimed_above_support = true;
+            break;
+           }
+        }
+      if(reclaimed_above_support)
+         continue;
+      if(retest_high < support - touch_zone)
+         continue;
+      if(close > support - reclaim_zone)
+         continue;
+
+      direction = "SHORT";
+      reason = "BEAR_BREAKDOWN_RETEST_SHORT";
+      stop_distance = (retest_high + stop_buffer) - close;
+      break_distance_atr = (support - close) / m5_atr;
+      return stop_distance > 0.0;
+     }
+
+   return false;
+  }
+
+bool TryBearSweepReclaimSignal(
+   const double high,
+   const double close,
+   const double range,
+   const double m5_atr,
+   const double body_fraction,
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   const int reclaim_bars = MathMax(1, InpBearSweepReclaimBars);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < 5 || iBars(InpTargetSymbol, PERIOD_M5) < reclaim_bars + InpAtrPeriod + 10)
+      return false;
+   if(m5_atr <= 0.0 || range <= 0.0)
+      return false;
+   if(body_fraction < InpBearSweepMinBodyFraction)
+      return false;
+
+   const double previous_day_high = iHigh(InpTargetSymbol, PERIOD_D1, 1);
+   if(previous_day_high <= 0.0)
+      return false;
+
+   const double touch_zone = InpBearSweepTouchAtr * m5_atr;
+   const double reclaim_zone = InpBearSweepReclaimAtr * m5_atr;
+   const double stop_buffer = InpBearSweepStopBufferAtr * m5_atr;
+   if(close > previous_day_high - reclaim_zone)
+      return false;
+
+   double sweep_high = high;
+   bool swept_high = high >= previous_day_high + touch_zone;
+   for(int shift = 2; shift <= reclaim_bars + 1; shift++)
+     {
+      const double candidate_high = iHigh(InpTargetSymbol, PERIOD_M5, shift);
+      if(candidate_high <= 0.0)
+         return false;
+      if(candidate_high > sweep_high)
+         sweep_high = candidate_high;
+      if(candidate_high >= previous_day_high + touch_zone)
+         swept_high = true;
+     }
+   if(!swept_high)
+      return false;
+
+   direction = "SHORT";
+   reason = "BEAR_PRIOR_DAY_HIGH_SWEEP_RECLAIM_SHORT";
+   stop_distance = (sweep_high + stop_buffer) - close;
+   break_distance_atr = (sweep_high - close) / m5_atr;
+   return stop_distance > 0.0;
+  }
+
 bool TryEventReactionM5Signal(
    const datetime signal_time,
    const double open,
@@ -3316,6 +3489,14 @@ void EvaluateCompletedM5Bar()
    else if(InpSignalMode == SIGNAL_EVENT_REACTION_M5)
      {
       TryEventReactionM5Signal(signal_time, open, high, low, close, range, atr, body_fraction, direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_BEAR_BREAKDOWN_RETEST)
+     {
+      TryBearBreakdownRetestSignal(open, high, close, range, atr, body_fraction, close_location, direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_BEAR_SWEEP_RECLAIM)
+     {
+      TryBearSweepReclaimSignal(high, close, range, atr, body_fraction, direction, reason, htf_stop_distance, break_distance_atr);
      }
 
    if(direction == "")
