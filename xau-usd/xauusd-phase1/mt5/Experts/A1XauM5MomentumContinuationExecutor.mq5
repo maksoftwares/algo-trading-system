@@ -43,7 +43,8 @@ enum MomentumSignalMode
    SIGNAL_BEAR_LOWER_HIGH_REJECTION = 17,
    SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18,
    SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST = 19,
-   SIGNAL_R1_H1_PULLBACK_LONG = 20
+   SIGNAL_R1_H1_PULLBACK_LONG = 20,
+   SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT = 21
   };
 
 enum RegimeRouterMode
@@ -111,6 +112,14 @@ input double InpR1PullbackTouchAtr            = 0.25;
 input double InpR1PullbackStopBufferAtr       = 0.25;
 input double InpR1PullbackMinBodyFraction     = 0.35;
 input double InpR1PullbackCloseLocation       = 0.65;
+input int    InpR2PullbackConfirmTimeframe    = 15;    // 15=M15 confirmation, 60=H1 confirmation.
+input int    InpR2PullbackLookbackBars        = 6;
+input int    InpR2PullbackH1FastEmaPeriod     = 20;
+input int    InpR2PullbackH1SlowEmaPeriod     = 50;
+input double InpR2PullbackTouchAtr            = 0.25;
+input double InpR2PullbackStopBufferAtr       = 0.25;
+input double InpR2PullbackMinBodyFraction     = 0.35;
+input double InpR2PullbackCloseLocation       = 0.35;
 input int    InpCompressionLookbackBars       = 8;
 input double InpCompressionMaxRangeAtr        = 1.20;
 input double InpCompressionBreakAtrMultiple   = 0.10;
@@ -2521,13 +2530,15 @@ bool IsH4DecisionSignalMode()
 bool IsM15DecisionSignalMode()
   {
    return InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP ||
-          (InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG && InpR1PullbackConfirmTimeframe == 15);
+          (InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG && InpR1PullbackConfirmTimeframe == 15) ||
+          (InpSignalMode == SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT && InpR2PullbackConfirmTimeframe == 15);
   }
 
 bool IsH1DecisionSignalMode()
   {
    return InpSignalMode == SIGNAL_D1_COMPRESSION_H1_EXPANSION ||
-          InpSignalMode == SIGNAL_WEEKLY_DAMAGE_H1;
+          InpSignalMode == SIGNAL_WEEKLY_DAMAGE_H1 ||
+          (InpSignalMode == SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT && InpR2PullbackConfirmTimeframe == 60);
   }
 
 double TimeframeHigh(const ENUM_TIMEFRAMES timeframe, const int start_shift, const int count)
@@ -3005,6 +3016,77 @@ bool TryR1H1PullbackLongSignal(string &direction, string &reason, double &stop_d
    direction = "LONG";
    reason = "R1_H1_EMA_PULLBACK_LONG_" + confirmation_name;
    break_distance_atr = (close - h1_fast) / h1_atr;
+   return true;
+  }
+
+bool TryR2H1PullbackRejectionShortSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   const ENUM_TIMEFRAMES confirmation_tf = (InpR2PullbackConfirmTimeframe == 60) ? PERIOD_H1 : PERIOD_M15;
+   const string confirmation_name = (confirmation_tf == PERIOD_H1) ? "H1" : "M15";
+   const int lookback = MathMax(1, InpR2PullbackLookbackBars);
+   const int h1_fast_period = MathMax(1, InpR2PullbackH1FastEmaPeriod);
+   const int h1_slow_period = MathMax(h1_fast_period + 1, InpR2PullbackH1SlowEmaPeriod);
+   const int slope_lag = MathMax(1, InpRegimeSlopeLagBars);
+
+   if(iBars(InpTargetSymbol, PERIOD_H1) < h1_slow_period + slope_lag + 10 ||
+      iBars(InpTargetSymbol, confirmation_tf) < lookback + MathMax(20, InpAtrPeriod + 5))
+      return false;
+
+   const double h1_close = iClose(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_fast = IndicatorEmaClose(PERIOD_H1, h1_fast_period, 1);
+   const double h1_slow = IndicatorEmaClose(PERIOD_H1, h1_slow_period, 1);
+   const double h1_fast_prior = IndicatorEmaClose(PERIOD_H1, h1_fast_period, 1 + slope_lag);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, MathMax(1, InpAtrPeriod), 1);
+   const double confirmation_atr = IndicatorAtrPrice(confirmation_tf, MathMax(1, InpAtrPeriod), 1);
+   if(h1_close <= 0.0 || h1_fast <= 0.0 || h1_slow <= 0.0 || h1_fast_prior <= 0.0 || h1_atr <= 0.0 || confirmation_atr <= 0.0)
+      return false;
+
+   if(!(h1_close < h1_fast && h1_fast < h1_slow && h1_fast <= h1_fast_prior))
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, confirmation_tf, 1);
+   const double high = iHigh(InpTargetSymbol, confirmation_tf, 1);
+   const double low = iLow(InpTargetSymbol, confirmation_tf, 1);
+   const double close = iClose(InpTargetSymbol, confirmation_tf, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   if(close >= open ||
+      close >= h1_fast ||
+      body_fraction < InpR2PullbackMinBodyFraction ||
+      close_location > InpR2PullbackCloseLocation)
+      return false;
+
+   const double touch_zone = MathMax(0.0, InpR2PullbackTouchAtr) * h1_atr;
+   bool touched_zone = false;
+   double swing_high = 0.0;
+   for(int shift = 1; shift <= lookback; shift++)
+     {
+      const double bar_high = iHigh(InpTargetSymbol, confirmation_tf, shift);
+      const double bar_low = iLow(InpTargetSymbol, confirmation_tf, shift);
+      if(bar_high <= 0.0 || bar_low <= 0.0)
+         return false;
+      if(swing_high == 0.0 || bar_high > swing_high)
+         swing_high = bar_high;
+      const bool touched_fast = bar_high >= h1_fast - touch_zone && bar_low <= h1_fast + touch_zone;
+      const bool touched_slow = bar_high >= h1_slow - touch_zone && bar_low <= h1_slow + touch_zone;
+      if(touched_fast || touched_slow)
+         touched_zone = true;
+     }
+   if(!touched_zone || swing_high <= 0.0)
+      return false;
+
+   const double projected_sl = swing_high + MathMax(0.0, InpR2PullbackStopBufferAtr) * confirmation_atr;
+   stop_distance = projected_sl - close;
+   if(stop_distance <= 0.0)
+      return false;
+
+   direction = "SHORT";
+   reason = "R2_H1_EMA_PULLBACK_REJECTION_SHORT_" + confirmation_name;
+   break_distance_atr = (h1_fast - close) / h1_atr;
    return true;
   }
 
@@ -4237,6 +4319,10 @@ void EvaluateCompletedM5Bar()
    else if(InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG)
      {
       TryR1H1PullbackLongSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT)
+     {
+      TryR2H1PullbackRejectionShortSignal(direction, reason, htf_stop_distance, break_distance_atr);
      }
 
    if(direction == "")
