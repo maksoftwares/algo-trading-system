@@ -1,0 +1,256 @@
+{
+    "generated_local":  "2026-07-04 11:29:32 +04:00",
+    "generated_utc":  "2026-07-04 07:29:32Z",
+    "workspace":  "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system",
+    "purpose":  "Shutdown preparation checkpoint: record open MT5 terminals and visible applications for restart.",
+    "mt5_terminal_count":  9,
+    "mt5_terminals":  [
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  21248,
+                              "parent_pid":  11212,
+                              "executable":  "C:\\MT5PortableGoldMission\\terminal64.exe",
+                              "command_line":  "\"C:\\MT5PortableGoldMission\\terminal64.exe\" /portable /config:C:\\MT5PortableGoldMission\\Config\\phase1_dry_run_startup.ini ",
+                              "start_time":  "2026-06-13 02:54:44",
+                              "window_title":  "1033669 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  24620,
+                              "parent_pid":  12992,
+                              "executable":  "C:\\MT5PortablePositionPathObserver\\terminal64.exe",
+                              "command_line":  "C:\\MT5PortablePositionPathObserver\\terminal64.exe /portable /config:C:\\MT5PortablePositionPathObserver\\Config\\position_path_observer_startup.ini",
+                              "start_time":  "2026-07-01 04:13:03",
+                              "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  9684,
+                              "parent_pid":  11156,
+                              "executable":  "C:\\MT5PortableRepairLane\\terminal64.exe",
+                              "command_line":  "\"C:\\MT5PortableRepairLane\\terminal64.exe\" /portable ",
+                              "start_time":  "2026-07-03 12:49:01",
+                              "window_title":  "1033669 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  3144,
+                              "parent_pid":  11212,
+                              "executable":  "C:\\MT5PortableShadowFixObservers\\terminal64.exe",
+                              "command_line":  "\"C:\\MT5PortableShadowFixObservers\\terminal64.exe\" /portable ",
+                              "start_time":  "2026-06-13 02:54:46",
+                              "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  16092,
+                              "parent_pid":  11212,
+                              "executable":  "C:\\MT5PortableSpreadLogger\\terminal64.exe",
+                              "command_line":  "\"C:\\MT5PortableSpreadLogger\\terminal64.exe\" /portable /config:C:\\MT5PortableSpreadLogger\\Config\\phase0_spread_logger_startup.ini ",
+                              "start_time":  "2026-06-13 02:54:46",
+                              "window_title":  "121409 - Capital.ComMena-Live - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  24112,
+                              "parent_pid":  12460,
+                              "executable":  "C:\\MT5PortableTier1BestEA\\terminal64.exe",
+                              "command_line":  "C:\\MT5PortableTier1BestEA\\terminal64.exe /portable",
+                              "start_time":  "2026-07-01 04:28:51",
+                              "window_title":  "1033030 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  16448,
+                              "parent_pid":  2100,
+                              "executable":  "C:\\MT5PortableTier1PathObserver\\terminal64.exe",
+                              "command_line":  "C:\\MT5PortableTier1PathObserver\\terminal64.exe /portable /config:C:\\MT5PortableTier1PathObserver\\Config\\position_path_observer_startup.ini",
+                              "start_time":  "2026-07-01 04:13:25",
+                              "window_title":  "1033030 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  17200,
+                              "parent_pid":  11212,
+                              "executable":  "C:\\MT5PortableTrendGuardedFixObservers\\terminal64.exe",
+                              "command_line":  "\"C:\\MT5PortableTrendGuardedFixObservers\\terminal64.exe\" /portable ",
+                              "start_time":  "2026-06-13 02:54:46",
+                              "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          },
+                          {
+                              "name":  "terminal64.exe",
+                              "pid":  7024,
+                              "parent_pid":  11528,
+                              "executable":  "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+                              "command_line":  "\"C:\\Program Files\\MetaTrader 5\\terminal64.exe\"",
+                              "start_time":  "2026-07-03 12:33:04",
+                              "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                          }
+                      ],
+    "visible_window_count":  16,
+    "visible_windows":  [
+                            {
+                                "process":  "ApplicationFrameHost",
+                                "pid":  2624,
+                                "path":  "C:\\Windows\\system32\\ApplicationFrameHost.exe",
+                                "start_time":  "2026-06-13 23:29:08",
+                                "window_title":  "Realtek Audio Console"
+                            },
+                            {
+                                "process":  "ChatGPT",
+                                "pid":  15896,
+                                "path":  "C:\\Program Files\\WindowsApps\\OpenAI.ChatGPT-Desktop_1.2026.133.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe",
+                                "start_time":  "2026-06-13 02:49:53",
+                                "window_title":  "XAUUSD Algo Strategy"
+                            },
+                            {
+                                "process":  "chrome",
+                                "pid":  20076,
+                                "path":  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+                                "start_time":  "2026-06-13 02:50:27",
+                                "window_title":  "Chrome Remote Desktop - Remote Access - Chrome Remote Desktop"
+                            },
+                            {
+                                "process":  "claude",
+                                "pid":  13040,
+                                "path":  "C:\\Program Files\\WindowsApps\\Claude_1.18286.0.0_x64__pzs8sxrjxfjjc\\app\\claude.exe",
+                                "start_time":  "2026-07-03 05:44:10",
+                                "window_title":  "Claude"
+                            },
+                            {
+                                "process":  "Codex",
+                                "pid":  30300,
+                                "path":  "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\\app\\Codex.exe",
+                                "start_time":  "2026-07-03 12:54:38",
+                                "window_title":  "Codex"
+                            },
+                            {
+                                "process":  "RtkUWP",
+                                "pid":  7928,
+                                "path":  "C:\\Program Files\\WindowsApps\\RealtekSemiconductorCorp.RealtekAudioControl_1.1.137.0_x64__dt26b99r8h8gj\\RtkUWP.exe",
+                                "start_time":  "2026-06-24 09:24:39",
+                                "window_title":  "Realtek Audio Console"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  3144,
+                                "path":  "C:\\MT5PortableShadowFixObservers\\terminal64.exe",
+                                "start_time":  "2026-06-13 02:54:46",
+                                "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  7024,
+                                "path":  "C:\\Program Files\\MetaTrader 5\\terminal64.exe",
+                                "start_time":  "2026-07-03 12:33:04",
+                                "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  9684,
+                                "path":  "C:\\MT5PortableRepairLane\\terminal64.exe",
+                                "start_time":  "2026-07-03 12:49:01",
+                                "window_title":  "1033669 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  16092,
+                                "path":  "C:\\MT5PortableSpreadLogger\\terminal64.exe",
+                                "start_time":  "2026-06-13 02:54:46",
+                                "window_title":  "121409 - Capital.ComMena-Live - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  16448,
+                                "path":  "C:\\MT5PortableTier1PathObserver\\terminal64.exe",
+                                "start_time":  "2026-07-01 04:13:25",
+                                "window_title":  "1033030 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  17200,
+                                "path":  "C:\\MT5PortableTrendGuardedFixObservers\\terminal64.exe",
+                                "start_time":  "2026-06-13 02:54:46",
+                                "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  21248,
+                                "path":  "C:\\MT5PortableGoldMission\\terminal64.exe",
+                                "start_time":  "2026-06-13 02:54:44",
+                                "window_title":  "1033669 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  24112,
+                                "path":  "C:\\MT5PortableTier1BestEA\\terminal64.exe",
+                                "start_time":  "2026-07-01 04:28:51",
+                                "window_title":  "1033030 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "terminal64",
+                                "pid":  24620,
+                                "path":  "C:\\MT5PortablePositionPathObserver\\terminal64.exe",
+                                "start_time":  "2026-07-01 04:13:03",
+                                "window_title":  "1025742 - Capital.ComMena-Demo: Demo Account - Hedge - Capital Com Mena Securities Trading L.L.C"
+                            },
+                            {
+                                "process":  "TextInputHost",
+                                "pid":  2228,
+                                "path":  "C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe",
+                                "start_time":  "2026-06-18 09:39:50",
+                                "window_title":  "Windows Input Experience"
+                            }
+                        ],
+    "main_visible_apps":  [
+                              {
+                                  "process":  "ApplicationFrameHost",
+                                  "pid":  2624,
+                                  "path":  "C:\\Windows\\system32\\ApplicationFrameHost.exe",
+                                  "start_time":  "2026-06-13 23:29:08",
+                                  "window_title":  "Realtek Audio Console"
+                              },
+                              {
+                                  "process":  "ChatGPT",
+                                  "pid":  15896,
+                                  "path":  "C:\\Program Files\\WindowsApps\\OpenAI.ChatGPT-Desktop_1.2026.133.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe",
+                                  "start_time":  "2026-06-13 02:49:53",
+                                  "window_title":  "XAUUSD Algo Strategy"
+                              },
+                              {
+                                  "process":  "chrome",
+                                  "pid":  20076,
+                                  "path":  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+                                  "start_time":  "2026-06-13 02:50:27",
+                                  "window_title":  "Chrome Remote Desktop - Remote Access - Chrome Remote Desktop"
+                              },
+                              {
+                                  "process":  "claude",
+                                  "pid":  13040,
+                                  "path":  "C:\\Program Files\\WindowsApps\\Claude_1.18286.0.0_x64__pzs8sxrjxfjjc\\app\\claude.exe",
+                                  "start_time":  "2026-07-03 05:44:10",
+                                  "window_title":  "Claude"
+                              },
+                              {
+                                  "process":  "Codex",
+                                  "pid":  30300,
+                                  "path":  "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\\app\\Codex.exe",
+                                  "start_time":  "2026-07-03 12:54:38",
+                                  "window_title":  "Codex"
+                              },
+                              {
+                                  "process":  "RtkUWP",
+                                  "pid":  7928,
+                                  "path":  "C:\\Program Files\\WindowsApps\\RealtekSemiconductorCorp.RealtekAudioControl_1.1.137.0_x64__dt26b99r8h8gj\\RtkUWP.exe",
+                                  "start_time":  "2026-06-24 09:24:39",
+                                  "window_title":  "Realtek Audio Console"
+                              }
+                          ],
+    "restart_helper":  "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\shutdown-prep\\restart_open_apps_2026_07_04_1127_DUBAI.ps1",
+    "notes":  [
+                  "Do not assume this script preserves unsaved in-app state; it relaunches known executables/command lines only.",
+                  "Chrome was running with --restore-last-session; relaunching Chrome should offer/restore tabs from the browser profile.",
+                  "Windows Store apps such as Codex/ChatGPT/Claude may need manual opening from Start if direct executable launch fails.",
+                  "No shutdown command was executed by Codex."
+              ]
+}
