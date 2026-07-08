@@ -40,7 +40,8 @@ enum MomentumSignalMode
    SIGNAL_EVENT_REACTION_M5 = 14,
    SIGNAL_BEAR_BREAKDOWN_RETEST = 15,
    SIGNAL_BEAR_SWEEP_RECLAIM = 16,
-   SIGNAL_BEAR_LOWER_HIGH_REJECTION = 17
+   SIGNAL_BEAR_LOWER_HIGH_REJECTION = 17,
+   SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18
   };
 
 input string InpRunId                         = "A1_XAU_M5_MOMENTUM_CONTINUATION_SAFE_DEFAULT";
@@ -121,6 +122,15 @@ input int    InpD1StructuralDownEmaPeriod    = 50;
 input int    InpD1StructuralDownSlopeLagBars = 5;
 input bool   InpH4D1WeeklyLossGovernorEnabled = false;
 input double InpH4D1WeeklyLossLimitUsd       = 150.00;
+input bool   InpH4D1PrevMonthHealthGateEnabled = false;
+input double InpH4D1PrevMonthNetMinUsd       = -50.00;
+input bool   InpH4D1NegativeStackGuardEnabled = false;
+input int    InpH4D1NegativeStackMaxOpenPositions = 2;
+input double InpH4D1NegativeStackMinFloatingUsd = 0.00;
+input bool   InpH4D1ThirdEntryQualityGateEnabled = false;
+input int    InpH4D1ThirdEntryQualityNormalEntries = 2;
+input double InpH4D1ThirdEntryMinH4BodyFraction = 0.50;
+input double InpH4D1ThirdEntryMinBreakDistanceAtr = 0.10;
 input double InpDailyExtremeMinMoveAtr        = 1.00;
 input double InpDailyExtremeTouchAtr          = 0.05;
 input double InpDailyExtremeReclaimAtr        = 0.10;
@@ -175,6 +185,13 @@ input double InpBearLowerHighEmaTouchAtr      = 0.20;
 input double InpBearLowerHighReclaimAtr       = 0.05;
 input double InpBearLowerHighStopBufferAtr    = 0.25;
 input double InpBearLowerHighMinBodyFraction  = 0.45;
+input int    InpBearHtfResistanceH4LookbackBars = 30;
+input int    InpBearHtfResistanceReclaimBars  = 6;
+input int    InpBearHtfResistanceH4AtrPeriod  = 14;
+input double InpBearHtfResistanceSweepH4Atr   = 0.10;
+input double InpBearHtfResistanceStopH4Atr    = 0.10;
+input double InpBearHtfResistanceMinBodyFraction = 0.35;
+input double InpBearHtfResistanceCloseLocation = 0.35;
 input double InpStopAtrMultiple               = 2.50;
 input int    InpStopFloorPoints               = 350;
 input int    InpStopCeilingPoints             = 1800;
@@ -250,6 +267,7 @@ int      g_h1_ema_slow_handle = INVALID_HANDLE;
 int      g_h4_ema_fast_handle = INVALID_HANDLE;
 int      g_h4_ema_slow_handle = INVALID_HANDLE;
 datetime g_last_m5_bar = 0;
+datetime g_last_m15_decision_bar = 0;
 datetime g_last_h4_decision_bar = 0;
 datetime g_last_h1_decision_bar = 0;
 datetime g_last_trade_time = 0;
@@ -1519,6 +1537,23 @@ int CountOwnOpenPositions()
    return count;
   }
 
+double OwnOpenFloatingPnlUsd()
+  {
+   double pnl = 0.0;
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      ulong ticket = PositionGetTicket(i);
+      if(ticket == 0 || !PositionSelectByTicket(ticket))
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber ||
+         PositionGetString(POSITION_SYMBOL) != InpTargetSymbol)
+         continue;
+      pnl += PositionGetDouble(POSITION_PROFIT);
+      pnl += PositionGetDouble(POSITION_SWAP);
+     }
+   return pnl;
+  }
+
 double NormalizeLotsForSymbol(const double requested_lots)
   {
    const double min_lots = SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN);
@@ -1590,6 +1625,79 @@ double RecentRangeHigh(const int start_shift, const int count)
 double RecentRangeLow(const int start_shift, const int count)
   {
    return RecentLow(start_shift, count);
+  }
+
+double LastConfirmedH4SwingHigh(const int lookback_bars)
+  {
+   const int lookback = MathMax(5, lookback_bars);
+   if(iBars(InpTargetSymbol, PERIOD_H4) < lookback + 5)
+      return 0.0;
+
+   for(int shift = 3; shift <= lookback; shift++)
+     {
+      const double high = iHigh(InpTargetSymbol, PERIOD_H4, shift);
+      if(high <= 0.0)
+         return 0.0;
+
+      bool swing = true;
+      for(int offset = 1; offset <= 2; offset++)
+        {
+         const double newer_high = iHigh(InpTargetSymbol, PERIOD_H4, shift - offset);
+         const double older_high = iHigh(InpTargetSymbol, PERIOD_H4, shift + offset);
+         if(newer_high <= 0.0 || older_high <= 0.0)
+            return 0.0;
+         if(high <= newer_high || high <= older_high)
+           {
+            swing = false;
+            break;
+           }
+        }
+      if(swing)
+         return high;
+     }
+   return 0.0;
+  }
+
+bool NearestHtfResistanceAbove(const double reference_price, double &level, string &source)
+  {
+   level = 0.0;
+   source = "";
+   if(reference_price <= 0.0)
+      return false;
+
+   const double previous_day_high = iHigh(InpTargetSymbol, PERIOD_D1, 1);
+   const double previous_week_high = iHigh(InpTargetSymbol, PERIOD_W1, 1);
+   const double h4_swing_high = LastConfirmedH4SwingHigh(InpBearHtfResistanceH4LookbackBars);
+
+   double best_distance = 0.0;
+   if(previous_day_high > reference_price)
+     {
+      level = previous_day_high;
+      source = "PREVIOUS_DAY_HIGH";
+      best_distance = previous_day_high - reference_price;
+     }
+   if(previous_week_high > reference_price)
+     {
+      const double distance = previous_week_high - reference_price;
+      if(level <= 0.0 || distance < best_distance)
+        {
+         level = previous_week_high;
+         source = "PREVIOUS_WEEK_HIGH";
+         best_distance = distance;
+        }
+     }
+   if(h4_swing_high > reference_price)
+     {
+      const double distance = h4_swing_high - reference_price;
+      if(level <= 0.0 || distance < best_distance)
+        {
+         level = h4_swing_high;
+         source = "H4_SWING_HIGH";
+         best_distance = distance;
+        }
+     }
+
+   return level > 0.0;
   }
 
 bool OpeningRangeForSignal(
@@ -1965,6 +2073,94 @@ bool H4D1WeeklyLossGovernorAllows()
    return week_pnl > -InpH4D1WeeklyLossLimitUsd;
   }
 
+bool PreviousBrokerMonthBounds(const datetime now, datetime &from_time, datetime &to_time)
+  {
+   if(now <= 0)
+      return false;
+
+   MqlDateTime parts;
+   TimeToStruct(now, parts);
+   parts.day = 1;
+   parts.hour = 0;
+   parts.min = 0;
+   parts.sec = 0;
+   to_time = StructToTime(parts);
+   if(to_time <= 0)
+      return false;
+
+   parts.mon -= 1;
+   if(parts.mon <= 0)
+     {
+      parts.mon = 12;
+      parts.year -= 1;
+     }
+   from_time = StructToTime(parts);
+   return from_time > 0 && to_time > from_time;
+  }
+
+bool H4D1PreviousMonthHealthGateAllows()
+  {
+   if(!InpH4D1PrevMonthHealthGateEnabled)
+      return true;
+   if(!IsH4DecisionSignalMode())
+      return true;
+
+   datetime from_time = 0;
+   datetime to_time = 0;
+   if(!PreviousBrokerMonthBounds(TimeCurrent(), from_time, to_time))
+      return true;
+
+   const double previous_month_pnl = OwnClosedPnlBetween(from_time, to_time);
+   return previous_month_pnl >= InpH4D1PrevMonthNetMinUsd;
+  }
+
+bool H4D1NegativeStackGuardAllows()
+  {
+   if(!InpH4D1NegativeStackGuardEnabled)
+      return true;
+   if(!IsH4DecisionSignalMode())
+      return true;
+   if(InpH4D1NegativeStackMaxOpenPositions <= 0)
+      return true;
+
+   const int own_open_positions = CountOwnOpenPositions();
+   if(own_open_positions < InpH4D1NegativeStackMaxOpenPositions)
+      return true;
+
+   return OwnOpenFloatingPnlUsd() >= InpH4D1NegativeStackMinFloatingUsd;
+  }
+
+bool H4D1ThirdEntryQualityGateAllows(const string direction, const double break_distance_atr)
+  {
+   if(!InpH4D1ThirdEntryQualityGateEnabled)
+      return true;
+   if(InpSignalMode != SIGNAL_D1_COMPRESSION_H4_EXPANSION)
+      return true;
+   if(InpH4D1ThirdEntryQualityNormalEntries < 0)
+      return true;
+   if(g_trades_today < InpH4D1ThirdEntryQualityNormalEntries)
+      return true;
+
+   if(InpH4D1ThirdEntryMinBreakDistanceAtr > 0.0 && break_distance_atr < InpH4D1ThirdEntryMinBreakDistanceAtr)
+      return false;
+
+   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_high = iHigh(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_low = iLow(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_close = iClose(InpTargetSymbol, PERIOD_H4, 1);
+   const double h4_range = h4_high - h4_low;
+   if(h4_open <= 0.0 || h4_high <= 0.0 || h4_low <= 0.0 || h4_close <= 0.0 || h4_range <= 0.0)
+      return false;
+
+   if(direction == "LONG" && h4_close <= h4_open)
+      return false;
+   if(direction == "SHORT" && h4_close >= h4_open)
+      return false;
+
+   const double h4_body_fraction = MathAbs(h4_close - h4_open) / h4_range;
+   return h4_body_fraction >= InpH4D1ThirdEntryMinH4BodyFraction;
+  }
+
 bool HourInWindow(const int hour, const int start_hour_input, const int end_hour_input)
   {
    const int start_hour = MathMax(0, MathMin(23, start_hour_input));
@@ -2099,6 +2295,11 @@ bool IsH4DecisionSignalMode()
    return InpSignalMode == SIGNAL_D1_COMPRESSION_H4_EXPANSION ||
           InpSignalMode == SIGNAL_H4_TREND_PULLBACK_D1_BIAS ||
           InpSignalMode == SIGNAL_WEEKLY_LEVEL_H4_REJECTION;
+  }
+
+bool IsM15DecisionSignalMode()
+  {
+   return InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP;
   }
 
 bool IsH1DecisionSignalMode()
@@ -3104,6 +3305,96 @@ bool TryBearLowerHighRejectionSignal(
    return stop_distance > 0.0;
   }
 
+bool TryBearHtfResistanceSweepSignal(
+   const double m5_atr,
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   const int reclaim_bars = MathMax(1, InpBearHtfResistanceReclaimBars);
+   const int h4_lookback = MathMax(5, InpBearHtfResistanceH4LookbackBars);
+   if(iBars(InpTargetSymbol, PERIOD_M15) < reclaim_bars + 10 ||
+      iBars(InpTargetSymbol, PERIOD_H4) < h4_lookback + 5 ||
+      iBars(InpTargetSymbol, PERIOD_D1) < 30 ||
+      iBars(InpTargetSymbol, PERIOD_W1) < 3)
+      return false;
+   if(m5_atr <= 0.0)
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0)
+      return false;
+
+   const double range = high - low;
+   if(range <= 0.0)
+      return false;
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = (close - low) / range;
+   if(close >= open ||
+      body_fraction < InpBearHtfResistanceMinBodyFraction ||
+      close_location > InpBearHtfResistanceCloseLocation)
+      return false;
+
+   double resistance = 0.0;
+   string resistance_source = "";
+   if(!NearestHtfResistanceAbove(close, resistance, resistance_source))
+      return false;
+   if(close >= resistance)
+      return false;
+
+   const double h4_atr = IndicatorAtrPrice(PERIOD_H4, InpBearHtfResistanceH4AtrPeriod, 1);
+   if(h4_atr <= 0.0)
+      return false;
+   const double sweep_zone = InpBearHtfResistanceSweepH4Atr * h4_atr;
+
+   int sweep_shift = 0;
+   for(int shift = 1; shift <= reclaim_bars; shift++)
+     {
+      const double candidate_high = iHigh(InpTargetSymbol, PERIOD_M15, shift);
+      if(candidate_high <= 0.0)
+         return false;
+      if(candidate_high >= resistance + sweep_zone)
+        {
+         sweep_shift = shift;
+         break;
+        }
+     }
+   if(sweep_shift <= 0)
+      return false;
+
+   for(int shift = sweep_shift - 1; shift >= 2; shift--)
+     {
+      const double candidate_close = iClose(InpTargetSymbol, PERIOD_M15, shift);
+      if(candidate_close <= 0.0)
+         return false;
+      if(candidate_close > resistance + sweep_zone)
+         return false;
+     }
+
+   double sweep_high = 0.0;
+   for(int shift = 1; shift <= sweep_shift; shift++)
+     {
+      const double candidate_high = iHigh(InpTargetSymbol, PERIOD_M15, shift);
+      if(candidate_high <= 0.0)
+         return false;
+      if(sweep_high <= 0.0 || candidate_high > sweep_high)
+         sweep_high = candidate_high;
+     }
+   if(sweep_high <= 0.0)
+      return false;
+
+   direction = "SHORT";
+   reason = "BEAR_HTF_RESISTANCE_SWEEP_" + resistance_source + "_SHORT";
+   stop_distance = (sweep_high + InpBearHtfResistanceStopH4Atr * h4_atr) - close;
+   break_distance_atr = (resistance - close) / m5_atr;
+   return stop_distance > 0.0;
+  }
+
 bool TryEventReactionM5Signal(
    const datetime signal_time,
    const double open,
@@ -3223,6 +3514,7 @@ void EvaluateCompletedM5Bar()
    ResetDailyCounterIfNeeded();
 
    const bool h4_decision_signal_mode = IsH4DecisionSignalMode();
+   const bool m15_decision_signal_mode = IsM15DecisionSignalMode();
    const bool h1_decision_signal_mode = IsH1DecisionSignalMode();
    if(h4_decision_signal_mode)
      {
@@ -3237,6 +3529,13 @@ void EvaluateCompletedM5Bar()
       if(h1_decision_bar <= 0 || h1_decision_bar == g_last_h1_decision_bar)
          return;
       g_last_h1_decision_bar = h1_decision_bar;
+     }
+   if(m15_decision_signal_mode)
+     {
+      const datetime m15_decision_bar = iTime(InpTargetSymbol, PERIOD_M15, 1);
+      if(m15_decision_bar <= 0 || m15_decision_bar == g_last_m15_decision_bar)
+         return;
+      g_last_m15_decision_bar = m15_decision_bar;
      }
 
    if(iBars(InpTargetSymbol, PERIOD_M5) < InpBreakLookbackBars + InpAtrPeriod + 5)
@@ -3600,10 +3899,14 @@ void EvaluateCompletedM5Bar()
      {
       TryBearLowerHighRejectionSignal(open, high, low, close, range, atr, body_fraction, close_location, direction, reason, htf_stop_distance, break_distance_atr);
      }
+   else if(InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP)
+     {
+      TryBearHtfResistanceSweepSignal(atr, direction, reason, htf_stop_distance, break_distance_atr);
+     }
 
    if(direction == "")
      {
-      const string no_signal_reason = h4_decision_signal_mode ? "no_h4_independent_candidate" : (h1_decision_signal_mode ? "no_h1_independent_candidate" : (InpSignalMode == SIGNAL_EVENT_REACTION_M5 ? "no_event_reaction_candidate" : "no_m5_momentum_candidate"));
+      const string no_signal_reason = h4_decision_signal_mode ? "no_h4_independent_candidate" : (h1_decision_signal_mode ? "no_h1_independent_candidate" : (m15_decision_signal_mode ? "no_m15_independent_candidate" : (InpSignalMode == SIGNAL_EVENT_REACTION_M5 ? "no_event_reaction_candidate" : "no_m5_momentum_candidate")));
       LogSignal("NO_SIGNAL", "NONE", no_signal_reason, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
       return;
      }
@@ -3680,6 +3983,21 @@ void EvaluateCompletedM5Bar()
    if(!H4D1WeeklyLossGovernorAllows())
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_weekly_loss_governor");
+      return;
+     }
+   if(!H4D1PreviousMonthHealthGateAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_previous_month_health_gate");
+      return;
+     }
+   if(!H4D1NegativeStackGuardAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_negative_stack_guard");
+      return;
+     }
+   if(!H4D1ThirdEntryQualityGateAllows(direction, break_distance_atr))
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "h4_d1_third_entry_quality_gate");
       return;
      }
    if(!D1SupportStateGateAllows())

@@ -1,0 +1,360 @@
+{
+  "status": "H4_COMPOSITION_REVIEW_CANDIDATE",
+  "generated_at_utc": "2026-07-08T07:35:54Z",
+  "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_PREREG_2026_07_08.md",
+  "preregistration_sha256": "10d29c07e3f7178a9303139aff35f3f11309f31b3fab7076f77dbe757465441e",
+  "inputs": {
+    "baseline_raw": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_HYBRID_F67_H16_EXACT_REPAIR_202207_202606_HYBRID_RAW.csv",
+    "baseline_long_plus_v2": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SHORT_HEDGE_EXACT_202207_202606_short_hedge_v2_breakdown_retest_KEPT.csv",
+    "supportive_components_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_D1_REVIEW_REPAIR_EXACT_202207_202606_MT5_COMPONENTS.json",
+    "prev_health_components_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_PREVIOUS_MONTH_HEALTH_GATE_EXACT_202207_202606_MT5_COMPONENTS.json",
+    "short_v2_kept": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SHORT_HEDGE_EXACT_202207_202606_short_hedge_v2_breakdown_retest_KEPT.csv",
+    "short_v2_dropped": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_SHORT_HEDGE_EXACT_202207_202606_short_hedge_v2_breakdown_retest_DROPPED.csv"
+  },
+  "removal_counts": {
+    "removed_f33": 1885,
+    "removed_h4_d1": 549
+  },
+  "short_v2_raw_rows": 329,
+  "component_row_counts": {
+    "supportive_box2": 233,
+    "supportive_broad": 158,
+    "prevhealth_box2": 216,
+    "prevhealth_broad": 145
+  },
+  "baseline": {
+    "name": "long_plus_short_v2_no_source_health_gate",
+    "signals": 3953,
+    "wins": 1937,
+    "losses": 2002,
+    "wr": 49.0,
+    "wl": 2.1637,
+    "pf": 2.0934,
+    "net": 21064.67,
+    "stress_030_wl": 2.039,
+    "stress_030_net": 19254.77,
+    "active_weekday_pct": 87.54,
+    "max_closed_dd": 958.86,
+    "positive_week_pct": 57.62,
+    "worst_week": -878.18,
+    "blocked_signals": 0,
+    "exit_stats": {
+      "source_csvs_indexed": 8,
+      "missing_source_csvs": [],
+      "match_failures": 0,
+      "fallback_entry_time_rows": 0
+    },
+    "closing_months": 48,
+    "positive_months": 29,
+    "negative_months": 19,
+    "flat_months": 0,
+    "positive_month_pct": 60.42,
+    "worst_month": "2023-02",
+    "worst_month_net": -405.08,
+    "best_month": "2025-10",
+    "best_month_net": 4716.88,
+    "decision": "BASELINE"
+  },
+  "results": [
+    {
+      "name": "control_supportive_box2_supportive_broad",
+      "signals": 3953,
+      "wins": 1937,
+      "losses": 2002,
+      "wr": 49.0,
+      "wl": 2.1637,
+      "pf": 2.0934,
+      "net": 21064.67,
+      "stress_030_wl": 2.039,
+      "stress_030_net": 19254.77,
+      "active_weekday_pct": 87.54,
+      "max_closed_dd": 958.86,
+      "positive_week_pct": 57.62,
+      "worst_week": -878.18,
+      "blocked_signals": 187,
+      "exit_stats": {
+        "source_csvs_indexed": 8,
+        "missing_source_csvs": [],
+        "match_failures": 0,
+        "fallback_entry_time_rows": 0
+      },
+      "closing_months": 48,
+      "positive_months": 29,
+      "negative_months": 19,
+      "flat_months": 0,
+      "positive_month_pct": 60.42,
+      "worst_month": "2023-02",
+      "worst_month_net": -405.08,
+      "best_month": "2025-10",
+      "best_month_net": 4716.88,
+      "decision": "H4_COMPOSITION_CORE_ONLY"
+    },
+    {
+      "name": "prevhealth_box2_supportive_broad",
+      "signals": 3948,
+      "wins": 1935,
+      "losses": 1999,
+      "wr": 49.01,
+      "wl": 2.1554,
+      "pf": 2.0864,
+      "net": 20911.77,
+      "stress_030_wl": 2.0311,
+      "stress_030_net": 19103.37,
+      "active_weekday_pct": 87.54,
+      "max_closed_dd": 1032.27,
+      "positive_week_pct": 57.62,
+      "worst_week": -878.18,
+      "blocked_signals": 175,
+      "exit_stats": {
+        "source_csvs_indexed": 8,
+        "missing_source_csvs": [],
+        "match_failures": 0,
+        "fallback_entry_time_rows": 0
+      },
+      "closing_months": 48,
+      "positive_months": 30,
+      "negative_months": 18,
+      "flat_months": 0,
+      "positive_month_pct": 62.5,
+      "worst_month": "2025-07",
+      "worst_month_net": -495.22,
+      "best_month": "2025-10",
+      "best_month_net": 4716.88,
+      "decision": "REJECT_CORE_OR_SHAPE"
+    },
+    {
+      "name": "prevhealth_box2_broad_quarantined",
+      "signals": 3934,
+      "wins": 1931,
+      "losses": 1989,
+      "wr": 49.08,
+      "wl": 2.1793,
+      "pf": 2.1157,
+      "net": 20858.29,
+      "stress_030_wl": 2.0507,
+      "stress_030_net": 19054.09,
+      "active_weekday_pct": 87.44,
+      "max_closed_dd": 958.86,
+      "positive_week_pct": 58.1,
+      "worst_week": -878.18,
+      "blocked_signals": 31,
+      "exit_stats": {
+        "source_csvs_indexed": 7,
+        "missing_source_csvs": [],
+        "match_failures": 0,
+        "fallback_entry_time_rows": 0
+      },
+      "closing_months": 48,
+      "positive_months": 31,
+      "negative_months": 17,
+      "flat_months": 0,
+      "positive_month_pct": 64.58,
+      "worst_month": "2023-02",
+      "worst_month_net": -405.08,
+      "best_month": "2025-10",
+      "best_month_net": 4716.88,
+      "decision": "H4_COMPOSITION_REVIEW_CANDIDATE"
+    },
+    {
+      "name": "supportive_box2_broad_quarantined",
+      "signals": 3951,
+      "wins": 1935,
+      "losses": 2002,
+      "wr": 48.97,
+      "wl": 2.138,
+      "pf": 2.0665,
+      "net": 20545.8,
+      "stress_030_wl": 2.0143,
+      "stress_030_net": 18736.5,
+      "active_weekday_pct": 87.54,
+      "max_closed_dd": 958.86,
+      "positive_week_pct": 57.62,
+      "worst_week": -878.18,
+      "blocked_signals": 31,
+      "exit_stats": {
+        "source_csvs_indexed": 7,
+        "missing_source_csvs": [],
+        "match_failures": 0,
+        "fallback_entry_time_rows": 0
+      },
+      "closing_months": 48,
+      "positive_months": 29,
+      "negative_months": 19,
+      "flat_months": 0,
+      "positive_month_pct": 60.42,
+      "worst_month": "2023-02",
+      "worst_month_net": -405.08,
+      "best_month": "2025-10",
+      "best_month_net": 4716.88,
+      "decision": "H4_COMPOSITION_CORE_ONLY"
+    },
+    {
+      "name": "prevhealth_box2_prevhealth_broad",
+      "signals": 3944,
+      "wins": 1935,
+      "losses": 1995,
+      "wr": 49.06,
+      "wl": 2.1636,
+      "pf": 2.0985,
+      "net": 21022.69,
+      "stress_030_wl": 2.0385,
+      "stress_030_net": 19215.49,
+      "active_weekday_pct": 87.54,
+      "max_closed_dd": 1032.27,
+      "positive_week_pct": 58.1,
+      "worst_week": -878.18,
+      "blocked_signals": 166,
+      "exit_stats": {
+        "source_csvs_indexed": 8,
+        "missing_source_csvs": [],
+        "match_failures": 0,
+        "fallback_entry_time_rows": 0
+      },
+      "closing_months": 48,
+      "positive_months": 31,
+      "negative_months": 17,
+      "flat_months": 0,
+      "positive_month_pct": 64.58,
+      "worst_month": "2025-07",
+      "worst_month_net": -495.22,
+      "best_month": "2025-10",
+      "best_month_net": 4716.88,
+      "decision": "H4_COMPOSITION_WATCHLIST_DD_OR_MONTH_RISK"
+    }
+  ],
+  "best": {
+    "name": "prevhealth_box2_broad_quarantined",
+    "signals": 3934,
+    "wins": 1931,
+    "losses": 1989,
+    "wr": 49.08,
+    "wl": 2.1793,
+    "pf": 2.1157,
+    "net": 20858.29,
+    "stress_030_wl": 2.0507,
+    "stress_030_net": 19054.09,
+    "active_weekday_pct": 87.44,
+    "max_closed_dd": 958.86,
+    "positive_week_pct": 58.1,
+    "worst_week": -878.18,
+    "blocked_signals": 31,
+    "exit_stats": {
+      "source_csvs_indexed": 7,
+      "missing_source_csvs": [],
+      "match_failures": 0,
+      "fallback_entry_time_rows": 0
+    },
+    "closing_months": 48,
+    "positive_months": 31,
+    "negative_months": 17,
+    "flat_months": 0,
+    "positive_month_pct": 64.58,
+    "worst_month": "2023-02",
+    "worst_month_net": -405.08,
+    "best_month": "2025-10",
+    "best_month_net": 4716.88,
+    "decision": "H4_COMPOSITION_REVIEW_CANDIDATE"
+  },
+  "best_source_contributions": {
+    "freq_step3_frontier": {
+      "signals": 3417,
+      "net_usd": 6127.72
+    },
+    "h4_d1_long_best_box2_atr80": {
+      "signals": 208,
+      "net_usd": 14349.57
+    },
+    "short_hedge_v2_breakdown_retest": {
+      "signals": 309,
+      "net_usd": 381.0
+    }
+  },
+  "component_details": [
+    {
+      "name": "supportive_guard_box2",
+      "rows": 233,
+      "guard_counts": {
+        "order_rows": 633,
+        "actions": {
+          "GUARD_BLOCK": 397,
+          "ORDER_SEND_OK": 233,
+          "ORDER_SEND_FAIL": 3
+        },
+        "guard_reasons": {
+          "direction_mode_block": 261,
+          "h4_d1_supportive_state_guard": 112,
+          "blocked_entry_day_hour": 24
+        }
+      }
+    },
+    {
+      "name": "supportive_guard_broad",
+      "rows": 158,
+      "guard_counts": {
+        "order_rows": 359,
+        "actions": {
+          "GUARD_BLOCK": 199,
+          "ORDER_SEND_OK": 158,
+          "ORDER_SEND_FAIL": 2
+        },
+        "guard_reasons": {
+          "direction_mode_block": 139,
+          "h4_d1_supportive_state_guard": 47,
+          "blocked_entry_day_hour": 13
+        }
+      }
+    },
+    {
+      "name": "h4_prev_month_health_gate_box2",
+      "rows": 216,
+      "guard_counts": {
+        "order_rows": 633,
+        "actions": {
+          "GUARD_BLOCK": 414,
+          "ORDER_SEND_OK": 216,
+          "ORDER_SEND_FAIL": 3
+        },
+        "guard_reasons": {
+          "direction_mode_block": 261,
+          "h4_d1_supportive_state_guard": 112,
+          "blocked_entry_day_hour": 24,
+          "h4_d1_previous_month_health_gate": 17
+        }
+      }
+    },
+    {
+      "name": "h4_prev_month_health_gate_broad",
+      "rows": 145,
+      "guard_counts": {
+        "order_rows": 359,
+        "actions": {
+          "GUARD_BLOCK": 212,
+          "ORDER_SEND_OK": 145,
+          "ORDER_SEND_FAIL": 2
+        },
+        "guard_reasons": {
+          "direction_mode_block": 139,
+          "h4_d1_supportive_state_guard": 47,
+          "blocked_entry_day_hour": 13,
+          "h4_d1_previous_month_health_gate": 13
+        }
+      }
+    }
+  ],
+  "interpretation": "A broad-quarantine/box2-health composition repaired monthly consistency without worsening drawdown or worst month. It is still research-only, but this is now a reviewer-grade candidate.",
+  "outputs": {
+    "report_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606.md",
+    "report_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606.json",
+    "results_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_RESULTS.csv",
+    "control_supportive_box2_supportive_broad_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_control_supportive_box2_supportive_broad_KEPT.csv",
+    "prevhealth_box2_supportive_broad_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_supportive_broad_KEPT.csv",
+    "prevhealth_box2_broad_quarantined_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_broad_quarantined_KEPT.csv",
+    "supportive_box2_broad_quarantined_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_supportive_box2_broad_quarantined_KEPT.csv",
+    "prevhealth_box2_prevhealth_broad_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_prevhealth_broad_KEPT.csv",
+    "control_supportive_box2_supportive_broad_dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_control_supportive_box2_supportive_broad_DROPPED.csv",
+    "prevhealth_box2_supportive_broad_dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_supportive_broad_DROPPED.csv",
+    "prevhealth_box2_broad_quarantined_dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_broad_quarantined_DROPPED.csv",
+    "supportive_box2_broad_quarantined_dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_supportive_box2_broad_quarantined_DROPPED.csv",
+    "prevhealth_box2_prevhealth_broad_dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_prevhealth_broad_DROPPED.csv"
+  }
+}

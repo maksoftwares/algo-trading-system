@@ -1,0 +1,140 @@
+{
+  "status": "NO_H4_BOX2_DAILY_STACK_CAP_SURVIVOR",
+  "generated_at_utc": "2026-07-08T07:55:29Z",
+  "preregistration": "xau-usd/xauusd-phase1/docs/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_PREREG_2026_07_08.md",
+  "preregistration_sha256": "5ea746893ef0920db79ccdfe4e39e784053dd8c57bce3ff3c3e810866ed7f47a",
+  "inputs": {
+    "baseline_candidate_kept": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_BROAD_QUARANTINE_202207_202606_prevhealth_box2_broad_quarantined_KEPT.csv",
+    "baseline_raw": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_HYBRID_F67_H16_EXACT_REPAIR_202207_202606_HYBRID_RAW.csv"
+  },
+  "removal_counts": {
+    "removed_f33": 1885,
+    "removed_h4_d1": 549
+  },
+  "short_v2_raw_rows": 329,
+  "box2_replacement_rows": 191,
+  "baseline": {
+    "name": "prevhealth_box2_broad_quarantined",
+    "signals": 3934,
+    "wins": 1931,
+    "losses": 1989,
+    "wr": 49.08,
+    "wl": 2.1793,
+    "pf": 2.1157,
+    "net": 20858.29,
+    "stress_030_wl": 2.0507,
+    "stress_030_net": 19054.09,
+    "active_weekday_pct": 87.44,
+    "max_closed_dd": 958.86,
+    "positive_week_pct": 58.1,
+    "worst_week": -878.18,
+    "blocked_signals": 0,
+    "exit_stats": {
+      "source_csvs_indexed": 7,
+      "missing_source_csvs": [],
+      "match_failures": 0,
+      "fallback_entry_time_rows": 0
+    },
+    "closing_months": 48,
+    "positive_months": 31,
+    "negative_months": 17,
+    "flat_months": 0,
+    "positive_month_pct": 64.58,
+    "worst_month": "2023-02",
+    "worst_month_net": -405.08,
+    "best_month": "2025-10",
+    "best_month_net": 4716.88,
+    "decision": "BASELINE"
+  },
+  "result": {
+    "name": "prevhealth_box2_daily_stack_cap_broad_quarantined",
+    "signals": 3911,
+    "wins": 1911,
+    "losses": 1986,
+    "wr": 48.86,
+    "wl": 2.0546,
+    "pf": 1.977,
+    "net": 17942.3,
+    "stress_030_wl": 1.928,
+    "stress_030_net": 16145.0,
+    "active_weekday_pct": 87.44,
+    "max_closed_dd": 683.45,
+    "positive_week_pct": 58.1,
+    "worst_week": -602.77,
+    "blocked_signals": 29,
+    "exit_stats": {
+      "source_csvs_indexed": 7,
+      "missing_source_csvs": [],
+      "match_failures": 0,
+      "fallback_entry_time_rows": 0
+    },
+    "closing_months": 48,
+    "positive_months": 31,
+    "negative_months": 17,
+    "flat_months": 0,
+    "positive_month_pct": 64.58,
+    "worst_month": "2023-02",
+    "worst_month_net": -405.08,
+    "best_month": "2026-01",
+    "best_month_net": 3633.37,
+    "decision": "REJECT_CORE_BREAK"
+  },
+  "source_contributions": {
+    "freq_step3_frontier": {
+      "signals": 3417,
+      "net_usd": 6127.72
+    },
+    "h4_d1_long_best_box2_atr80": {
+      "signals": 185,
+      "net_usd": 11433.58
+    },
+    "short_hedge_v2_breakdown_retest": {
+      "signals": 309,
+      "net_usd": 381.0
+    }
+  },
+  "guard_counts": {
+    "order_rows": 633,
+    "actions": {
+      "GUARD_BLOCK": 440,
+      "ORDER_SEND_OK": 191,
+      "ORDER_SEND_FAIL": 2
+    },
+    "guard_reasons": {
+      "direction_mode_block": 261,
+      "h4_d1_supportive_state_guard": 112,
+      "blocked_entry_day_hour": 24,
+      "daily_trade_cap_reached": 26,
+      "h4_d1_previous_month_health_gate": 17
+    }
+  },
+  "mt5_scope": {
+    "ea": "A1XauM5MomentumContinuationExecutor",
+    "symbol": "XAUUSD",
+    "timeframe": "M5",
+    "period": "2022.07.01 -> 2026.06.30",
+    "account_context": "1025742 / Capital.ComMena-Demo",
+    "terminal_sandbox": "C:\\MT5A1M5MomentumBacktest",
+    "model": "MT5 every tick / history quality from report",
+    "no_live_runtime_change": true,
+    "variant_count": 1,
+    "selected_variants": [
+      "prevhealth_box2_daily_stack_cap2"
+    ],
+    "variant_timeout_seconds": 900,
+    "tester_deposit": "1000",
+    "tester_currency": "USD",
+    "anti_overfit_boundary": "Only pre-declared variants; no post-result threshold sweep."
+  },
+  "compile_log": "C:\\MT5A1M5MomentumBacktest\\Logs\\compile_A1XauM5MomentumContinuationExecutor_variants_20260701.log",
+  "interpretation": "The daily stack cap broke the core candidate. Do not promote.",
+  "outputs": {
+    "report_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606.md",
+    "report_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606.json",
+    "results_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606_RESULTS.csv",
+    "kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606_KEPT.csv",
+    "dropped_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606_DROPPED.csv",
+    "mt5_component_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606_MT5_COMPONENT.md",
+    "mt5_component_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_H4_BOX2_HEALTH_DAILY_STACK_CAP_EXACT_202207_202606_MT5_COMPONENT.json"
+  }
+}
