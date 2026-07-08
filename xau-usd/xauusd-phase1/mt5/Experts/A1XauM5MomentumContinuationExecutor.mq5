@@ -42,7 +42,8 @@ enum MomentumSignalMode
    SIGNAL_BEAR_SWEEP_RECLAIM = 16,
    SIGNAL_BEAR_LOWER_HIGH_REJECTION = 17,
    SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18,
-   SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST = 19
+   SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST = 19,
+   SIGNAL_R1_H1_PULLBACK_LONG = 20
   };
 
 enum RegimeRouterMode
@@ -50,7 +51,8 @@ enum RegimeRouterMode
    REGIME_ROUTER_OFF = 0,
    REGIME_ROUTER_LONG_R1_UPTREND_ONLY = 1,
    REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY = 2,
-   REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3
+   REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3,
+   REGIME_ROUTER_R4_CHOP_ONLY = 4
   };
 
 enum XauRegimeState
@@ -101,6 +103,14 @@ input int    InpBreakLookbackBars             = 12;    // previous 60 minutes on
 input int    InpAtrPeriod                     = 14;
 input int    InpPullbackEmaPeriod             = 20;
 input double InpPullbackTouchAtr              = 0.25;
+input int    InpR1PullbackConfirmTimeframe    = 5;     // 5=M5 confirmation, 15=M15 confirmation.
+input int    InpR1PullbackLookbackBars        = 6;
+input int    InpR1PullbackH1FastEmaPeriod     = 20;
+input int    InpR1PullbackH1SlowEmaPeriod     = 50;
+input double InpR1PullbackTouchAtr            = 0.25;
+input double InpR1PullbackStopBufferAtr       = 0.25;
+input double InpR1PullbackMinBodyFraction     = 0.35;
+input double InpR1PullbackCloseLocation       = 0.65;
 input int    InpCompressionLookbackBars       = 8;
 input double InpCompressionMaxRangeAtr        = 1.20;
 input double InpCompressionBreakAtrMultiple   = 0.10;
@@ -151,6 +161,7 @@ input int    InpRegimeShockD1AtrLookback     = 60;
 input double InpRegimeCompressionD1AtrPercentileMax = 30.00;
 input int    InpRegimeCompressionBoxDays     = 5;
 input double InpRegimeCompressionRangeMedianMax = 1.00;
+input bool   InpRegimeSnapshotLogEnabled     = false;
 input bool   InpH4D1WeeklyLossGovernorEnabled = false;
 input double InpH4D1WeeklyLossLimitUsd       = 150.00;
 input bool   InpH4D1PrevMonthHealthGateEnabled = false;
@@ -2071,6 +2082,8 @@ string RegimeRouterModeName()
       return "short_r2_downtrend_only";
    if(InpRegimeRouterMode == REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT)
       return "directional_r1_long_r2_short";
+   if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
+      return "r4_chop_only";
    return "off";
   }
 
@@ -2220,6 +2233,14 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
       if(direction == "LONG" && regime == XAU_REGIME_UPTREND)
          return true;
       if(direction == "SHORT" && regime == XAU_REGIME_DOWNTREND)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
+     {
+      if(regime == XAU_REGIME_CHOP)
          return true;
       block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
       return false;
@@ -2499,7 +2520,8 @@ bool IsH4DecisionSignalMode()
 
 bool IsM15DecisionSignalMode()
   {
-   return InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP;
+   return InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP ||
+          (InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG && InpR1PullbackConfirmTimeframe == 15);
   }
 
 bool IsH1DecisionSignalMode()
@@ -2915,6 +2937,75 @@ bool TryH4TrendPullbackD1BiasSignal(string &direction, string &reason, double &s
       reason = "H4_TREND_PULLBACK_D1_BIAS_SHORT";
      }
    return stop_distance > 0.0;
+  }
+
+bool TryR1H1PullbackLongSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   const ENUM_TIMEFRAMES confirmation_tf = (InpR1PullbackConfirmTimeframe == 15) ? PERIOD_M15 : PERIOD_M5;
+   const string confirmation_name = (confirmation_tf == PERIOD_M15) ? "M15" : "M5";
+   const int lookback = MathMax(1, InpR1PullbackLookbackBars);
+   const int h1_fast_period = MathMax(1, InpR1PullbackH1FastEmaPeriod);
+   const int h1_slow_period = MathMax(h1_fast_period + 1, InpR1PullbackH1SlowEmaPeriod);
+   const int slope_lag = MathMax(1, InpRegimeSlopeLagBars);
+
+   if(iBars(InpTargetSymbol, PERIOD_H1) < h1_slow_period + slope_lag + 10 ||
+      iBars(InpTargetSymbol, confirmation_tf) < lookback + MathMax(20, InpAtrPeriod + 5))
+      return false;
+
+   const double h1_close = iClose(InpTargetSymbol, PERIOD_H1, 1);
+   const double h1_fast = IndicatorEmaClose(PERIOD_H1, h1_fast_period, 1);
+   const double h1_slow = IndicatorEmaClose(PERIOD_H1, h1_slow_period, 1);
+   const double h1_fast_prior = IndicatorEmaClose(PERIOD_H1, h1_fast_period, 1 + slope_lag);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, MathMax(1, InpAtrPeriod), 1);
+   const double confirmation_atr = IndicatorAtrPrice(confirmation_tf, MathMax(1, InpAtrPeriod), 1);
+   if(h1_close <= 0.0 || h1_fast <= 0.0 || h1_slow <= 0.0 || h1_fast_prior <= 0.0 || h1_atr <= 0.0 || confirmation_atr <= 0.0)
+      return false;
+
+   if(!(h1_close > h1_fast && h1_fast > h1_slow && h1_fast >= h1_fast_prior))
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, confirmation_tf, 1);
+   const double high = iHigh(InpTargetSymbol, confirmation_tf, 1);
+   const double low = iLow(InpTargetSymbol, confirmation_tf, 1);
+   const double close = iClose(InpTargetSymbol, confirmation_tf, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   if(close <= open ||
+      close <= h1_fast ||
+      body_fraction < InpR1PullbackMinBodyFraction ||
+      close_location < InpR1PullbackCloseLocation)
+      return false;
+
+   const double touch_zone = MathMax(0.0, InpR1PullbackTouchAtr) * h1_atr;
+   bool touched_zone = false;
+   double swing_low = 0.0;
+   for(int shift = 1; shift <= lookback; shift++)
+     {
+      const double bar_high = iHigh(InpTargetSymbol, confirmation_tf, shift);
+      const double bar_low = iLow(InpTargetSymbol, confirmation_tf, shift);
+      if(bar_high <= 0.0 || bar_low <= 0.0)
+         return false;
+      if(swing_low == 0.0 || bar_low < swing_low)
+         swing_low = bar_low;
+      if(bar_low <= h1_fast + touch_zone && bar_high >= h1_fast - touch_zone)
+         touched_zone = true;
+     }
+   if(!touched_zone || swing_low <= 0.0)
+      return false;
+
+   const double projected_sl = swing_low - MathMax(0.0, InpR1PullbackStopBufferAtr) * confirmation_atr;
+   stop_distance = close - projected_sl;
+   if(stop_distance <= 0.0)
+      return false;
+
+   direction = "LONG";
+   reason = "R1_H1_EMA_PULLBACK_LONG_" + confirmation_name;
+   break_distance_atr = (close - h1_fast) / h1_atr;
+   return true;
   }
 
 bool TryWeeklyLevel(
@@ -3816,6 +3907,12 @@ void EvaluateCompletedM5Bar()
    const double three_bar_move_atr = (close - close_3_back) / atr;
    const double long_break_distance_atr = (close - recent_high) / atr;
    const double short_break_distance_atr = (recent_low - close) / atr;
+   if(InpRegimeSnapshotLogEnabled)
+     {
+      const string regime_name = RegimeStateName(CurrentXauRegime());
+      LogSignal("REGIME_SNAPSHOT", "NONE", regime_name, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
+      return;
+     }
    const int compression_bars = MathMax(2, InpCompressionLookbackBars);
    const double compression_high = RecentRangeHigh(2, compression_bars);
    const double compression_low = RecentRangeLow(2, compression_bars);
@@ -4136,6 +4233,10 @@ void EvaluateCompletedM5Bar()
    else if(InpSignalMode == SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST)
      {
       TryBearBreakdownRetestSignal(open, high, close, range, atr, body_fraction, close_location, true, direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG)
+     {
+      TryR1H1PullbackLongSignal(direction, reason, htf_stop_distance, break_distance_atr);
      }
 
    if(direction == "")

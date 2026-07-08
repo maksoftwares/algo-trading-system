@@ -1,0 +1,2600 @@
+{
+  "status": "R4_CHOP_SPECIALIST_NEXT",
+  "generated_at_utc": "2026-07-08T17:39:11Z",
+  "mt5_scope": {
+    "ea": "A1XauM5MomentumContinuationExecutor",
+    "symbol": "XAUUSD",
+    "timeframe": "M5",
+    "period": "2026.01.01 -> 2026.06.30",
+    "account_context": "1025742 / Capital.ComMena-Demo",
+    "terminal_sandbox": "C:\\MT5A1M5MomentumBacktest",
+    "model": "MT5 every tick / history quality from report",
+    "no_live_runtime_change": true,
+    "variant_count": 1,
+    "selected_variants": [
+      "recent_regime_snapshot_m5"
+    ],
+    "variant_timeout_seconds": 900,
+    "tester_deposit": "1000",
+    "tester_currency": "USD",
+    "anti_overfit_boundary": "Only pre-declared variants; no post-result threshold sweep."
+  },
+  "compile_log": "C:\\MT5A1M5MomentumBacktest\\Logs\\compile_A1XauM5MomentumContinuationExecutor_variants_20260701.log",
+  "mt5_result": {
+    "name": "recent_regime_snapshot_m5",
+    "label": "Recent router regime snapshot, one row per completed M5 bar",
+    "run_id": "BT_A1_XAU_RECENT_REGIME_SNAPSHOT_M5",
+    "elapsed_seconds": 20.04,
+    "tester_config": "C:\\MT5A1M5MomentumBacktest\\Config\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5.ini",
+    "html_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5.htm",
+    "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_trades.csv",
+    "order_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_orders.csv",
+    "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_signals.csv",
+    "management_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_management.csv",
+    "deal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_deals.csv",
+    "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_summary.json",
+    "mt5_report_metrics": {
+      "History Quality": "100%",
+      "Bars": "34655",
+      "Ticks": "61699195",
+      "Total Net Profit": "0.00",
+      "Gross Profit": "0.00",
+      "Balance Drawdown Maximal": "0.00 (0.00%)",
+      "Equity Drawdown Maximal": "0.00 (0.00%)",
+      "Gross Loss": "0.00",
+      "Balance Drawdown Relative": "0.00% (0.00)",
+      "Equity Drawdown Relative": "0.00% (0.00)",
+      "Profit Factor": "0.00",
+      "Expected Payoff": "0.00",
+      "Recovery Factor": "0.00",
+      "Sharpe Ratio": "0.00",
+      "Total Trades": "0",
+      "Short Trades (won %)": "0 (0.00%)",
+      "Long Trades (won %)": "0 (0.00%)",
+      "Total Deals": "0",
+      "Profit Trades (% of total)": "0 (0.00%)",
+      "Loss Trades (% of total)": "0 (0.00%)"
+    },
+    "summary": {
+      "overall": {
+        "trades": 0,
+        "wins": 0,
+        "losses": 0,
+        "win_rate_pct": 0.0,
+        "pnl_aed": 0,
+        "gross_profit": 0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 0.0
+      },
+      "direction": {},
+      "session": {},
+      "date": {},
+      "hour": {}
+    },
+    "order_activity": {
+      "rows": 0,
+      "actions": {},
+      "guard_reasons": {}
+    }
+  },
+  "mt5_signal_sha256": "46eb1b35d14277eaf91f9df8bfb2dfc930f8a44977525a1878e883c2c1dcd569",
+  "periods": [
+    {
+      "name": "last_6_months_2026_01_01_to_2026_06_30",
+      "start": "2026-01-01",
+      "end": "2026-06-30",
+      "bars": 34655,
+      "active_days": 153,
+      "dominant_bar_regime": "chop",
+      "dominant_bar_share_pct": 49.98,
+      "dominant_day_regime": "chop",
+      "dominant_day_share_pct": 50.98,
+      "bar_distribution": [
+        {
+          "regime": "shock",
+          "bars": 4920,
+          "bar_pct": 14.2
+        },
+        {
+          "regime": "uptrend",
+          "bars": 5094,
+          "bar_pct": 14.7
+        },
+        {
+          "regime": "downtrend",
+          "bars": 7320,
+          "bar_pct": 21.12
+        },
+        {
+          "regime": "compression",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "chop",
+          "bars": 17321,
+          "bar_pct": 49.98
+        },
+        {
+          "regime": "unknown",
+          "bars": 0,
+          "bar_pct": 0.0
+        }
+      ],
+      "day_distribution": [
+        {
+          "regime": "shock",
+          "bars": 20,
+          "bar_pct": 13.07
+        },
+        {
+          "regime": "uptrend",
+          "bars": 22,
+          "bar_pct": 14.38
+        },
+        {
+          "regime": "downtrend",
+          "bars": 33,
+          "bar_pct": 21.57
+        },
+        {
+          "regime": "compression",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "chop",
+          "bars": 78,
+          "bar_pct": 50.98
+        },
+        {
+          "regime": "unknown",
+          "bars": 0,
+          "bar_pct": 0.0
+        }
+      ],
+      "day_rows": [
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-07",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-09",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-11",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-12",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-13",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-14",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-15",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-16",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 54.55,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-18",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-19",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 246
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-20",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-21",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-22",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-23",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-25",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-26",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-27",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-28",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-29",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-01-30",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-01",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-02",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-03",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-04",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-05",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-06",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-08",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-09",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-10",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-11",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-12",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-13",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 246
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 91.3,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-18",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-19",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 54.55,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-22",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-23",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-24",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-25",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-26",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-02-27",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 95.45,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-01",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 100.0,
+          "bars": 12
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-02",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-03",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 52.17,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 264
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-09",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-10",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-11",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.24,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-18",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-19",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-22",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-23",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-24",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-25",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-26",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 76.19,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-30",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-03-31",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.24,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-07",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-09",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-10",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 269
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-19",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-21",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-22",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-23",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 91.3,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-24",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-26",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-28",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-29",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-04-30",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 52.17,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.14,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-03",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-04",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-05",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-07",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-10",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-11",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-19",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-20",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-21",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 80.95,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-24",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-25",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 246
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-26",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 52.17,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-28",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-05-31",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-03",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-04",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-05",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.24,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-07",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-08",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-09",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-10",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-11",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-19",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 204
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-21",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-23",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-24",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-25",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-26",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 76.19,
+          "bars": 252
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-28",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "date": "2026-06-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        }
+      ],
+      "week_rows": [
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2025-12-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 288
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-01-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 53.04,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-01-12",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 70.43,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-01-19",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 79.56,
+          "bars": 1350
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-01-26",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 80.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-02-02",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-02-09",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 99.13,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-02-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 88.44,
+          "bars": 1350
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-02-23",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 99.13,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-03-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 68.1,
+          "bars": 1392
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-03-09",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 82.61,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-03-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 99.13,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-03-23",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 53.04,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-03-30",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 98.91,
+          "bars": 1104
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-04-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-04-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1373
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-04-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 96.52,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-04-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 73.91,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-05-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 66.96,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-05-11",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-05-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 86.09,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-05-25",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 1350
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-06-01",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 59.13,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-06-08",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 76.52,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-06-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 68.47,
+          "bars": 1332
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-06-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 73.91,
+          "bars": 1380
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "week_start": "2026-06-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        }
+      ],
+      "month_rows": [
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-01",
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 51.51,
+          "bars": 5766,
+          "shock_pct": 28.72,
+          "uptrend_pct": 51.51,
+          "downtrend_pct": 0.0,
+          "compression_pct": 0.0,
+          "chop_pct": 19.77,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-02",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 51.15,
+          "bars": 5490,
+          "shock_pct": 51.15,
+          "uptrend_pct": 26.89,
+          "downtrend_pct": 0.0,
+          "compression_pct": 0.0,
+          "chop_pct": 21.97,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-03",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 77.76,
+          "bars": 6096,
+          "shock_pct": 0.98,
+          "uptrend_pct": 10.63,
+          "downtrend_pct": 10.63,
+          "compression_pct": 0.0,
+          "chop_pct": 77.76,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 83.0,
+          "bars": 5789,
+          "shock_pct": 0.83,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 16.17,
+          "compression_pct": 0.0,
+          "chop_pct": 83.0,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 58.79,
+          "bars": 5766,
+          "shock_pct": 0.42,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 40.79,
+          "compression_pct": 0.0,
+          "chop_pct": 58.79,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "month": "2026-06",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 58.87,
+          "bars": 5748,
+          "shock_pct": 5.64,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 58.87,
+          "compression_pct": 0.0,
+          "chop_pct": 35.49,
+          "unknown_pct": 0.0
+        }
+      ],
+      "hour_rows": [
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 0,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 52.38,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 1,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.79,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 2,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 51.59,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 3,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 52.38,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 4,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 51.59,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 5,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 51.59,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 6,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.79,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 7,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.79,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 8,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 47.62,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 9,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 47.62,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 10,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 47.62,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 11,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 47.48,
+          "bars": 1508
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 12,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 46.72,
+          "bars": 1509
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 13,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 47.62,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 14,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 46.03,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 15,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 46.83,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 16,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.0,
+          "bars": 1512
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 17,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 51.2,
+          "bars": 1500
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 18,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.2,
+          "bars": 1494
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 19,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 50.0,
+          "bars": 1476
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 20,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 52.46,
+          "bars": 1464
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 21,
+          "dominant_regime": "uptrend",
+          "dominant_share_pct": 36.36,
+          "bars": 528
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 22,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 66.67,
+          "bars": 972
+        },
+        {
+          "period": "last_6_months_2026_01_01_to_2026_06_30",
+          "hour": 23,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 53.54,
+          "bars": 1524
+        }
+      ]
+    },
+    {
+      "name": "last_3_months_2026_04_01_to_2026_06_30",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "bars": 17303,
+      "active_days": 76,
+      "dominant_bar_regime": "chop",
+      "dominant_bar_share_pct": 59.15,
+      "dominant_day_regime": "chop",
+      "dominant_day_share_pct": 59.21,
+      "bar_distribution": [
+        {
+          "regime": "shock",
+          "bars": 396,
+          "bar_pct": 2.29
+        },
+        {
+          "regime": "uptrend",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "downtrend",
+          "bars": 6672,
+          "bar_pct": 38.56
+        },
+        {
+          "regime": "compression",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "chop",
+          "bars": 10235,
+          "bar_pct": 59.15
+        },
+        {
+          "regime": "unknown",
+          "bars": 0,
+          "bar_pct": 0.0
+        }
+      ],
+      "day_distribution": [
+        {
+          "regime": "shock",
+          "bars": 1,
+          "bar_pct": 1.32
+        },
+        {
+          "regime": "uptrend",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "downtrend",
+          "bars": 30,
+          "bar_pct": 39.47
+        },
+        {
+          "regime": "compression",
+          "bars": 0,
+          "bar_pct": 0.0
+        },
+        {
+          "regime": "chop",
+          "bars": 45,
+          "bar_pct": 59.21
+        },
+        {
+          "regime": "unknown",
+          "bars": 0,
+          "bar_pct": 0.0
+        }
+      ],
+      "day_rows": [
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.24,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-07",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-09",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-10",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 269
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-19",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-21",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-22",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-23",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 91.3,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-24",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-26",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-28",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-29",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-04-30",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 52.17,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.14,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-03",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-04",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-05",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-07",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-08",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-10",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-11",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-19",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-20",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-21",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 80.95,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-24",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-25",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 246
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-26",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 52.17,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-28",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-05-31",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-01",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-02",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-03",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-04",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-05",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 95.24,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-07",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-08",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-09",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-10",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-11",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 82.61,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-12",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-14",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-16",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-17",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 95.65,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 65.22,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-19",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 204
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-21",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-23",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-24",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-25",
+          "dominant_regime": "shock",
+          "dominant_share_pct": 100.0,
+          "bars": 276
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-26",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 76.19,
+          "bars": 252
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-28",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 24
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "date": "2026-06-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        }
+      ],
+      "week_rows": [
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-03-30",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 97.83,
+          "bars": 552
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-04-06",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-04-13",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1373
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-04-20",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 96.52,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-04-27",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 73.91,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-05-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 66.96,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-05-11",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 100.0,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-05-18",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 86.09,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-05-25",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 1350
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-06-01",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 59.13,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-06-08",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 76.52,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-06-15",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 68.47,
+          "bars": 1332
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-06-22",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 73.91,
+          "bars": 1380
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "week_start": "2026-06-29",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 69.57,
+          "bars": 276
+        }
+      ],
+      "month_rows": [
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "month": "2026-04",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 83.0,
+          "bars": 5789,
+          "shock_pct": 0.83,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 16.17,
+          "compression_pct": 0.0,
+          "chop_pct": 83.0,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "month": "2026-05",
+          "dominant_regime": "chop",
+          "dominant_share_pct": 58.79,
+          "bars": 5766,
+          "shock_pct": 0.42,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 40.79,
+          "compression_pct": 0.0,
+          "chop_pct": 58.79,
+          "unknown_pct": 0.0
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "month": "2026-06",
+          "dominant_regime": "downtrend",
+          "dominant_share_pct": 58.87,
+          "bars": 5748,
+          "shock_pct": 5.64,
+          "uptrend_pct": 0.0,
+          "downtrend_pct": 58.87,
+          "compression_pct": 0.0,
+          "chop_pct": 35.49,
+          "unknown_pct": 0.0
+        }
+      ],
+      "hour_rows": [
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 0,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 63.49,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 1,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 61.9,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 2,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 61.9,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 3,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 63.49,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 4,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 60.32,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 5,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 60.32,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 6,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 60.32,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 7,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 60.32,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 8,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 9,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 10,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 11,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.32,
+          "bars": 752
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 12,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 56.97,
+          "bars": 753
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 13,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.14,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 14,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 55.56,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 15,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.14,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 16,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 58.73,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 17,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 59.68,
+          "bars": 744
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 18,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.72,
+          "bars": 738
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 19,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 57.38,
+          "bars": 732
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 20,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 62.3,
+          "bars": 732
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 22,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 61.9,
+          "bars": 756
+        },
+        {
+          "period": "last_3_months_2026_04_01_to_2026_06_30",
+          "hour": 23,
+          "dominant_regime": "chop",
+          "dominant_share_pct": 61.9,
+          "bars": 756
+        }
+      ]
+    }
+  ],
+  "interpretation": "Recent market days are dominated by chop. Next test should be a range-fade or failed-break specialist with strict cost and top-winner robustness.",
+  "outputs": {
+    "report_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708.md",
+    "report_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708.json",
+    "snapshots_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_SNAPSHOTS.csv",
+    "period_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_PERIOD_SUMMARY.csv",
+    "days_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_DAYS.csv",
+    "weeks_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_WEEKS.csv",
+    "months_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_MONTHS.csv",
+    "hours_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_HOURS.csv",
+    "mt5_report_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_MT5.md",
+    "mt5_report_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_RECENT_REGIME_SNAPSHOT_AUDIT_20260708_MT5.json",
+    "mt5_signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_recent_regime_snapshot_audit_202601_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_RECENT_REGIME_SNAPSHOT_AUDIT_202601_202606_XAUUSD_M5_recent_regime_snapshot_m5_signals.csv"
+  }
+}
