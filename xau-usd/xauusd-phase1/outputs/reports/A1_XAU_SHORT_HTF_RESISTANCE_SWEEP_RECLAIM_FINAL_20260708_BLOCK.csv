@@ -1,0 +1,9 @@
+variant,period,start,end,trades,wins,losses,wr,wl,pf,net
+short_htf_resistance_sweep_reclaim_rr2,B1,2022-07-01,2022-12-31,57,20,37,35.09,2.3827,1.288,54.87
+short_htf_resistance_sweep_reclaim_rr2,B2,2023-01-01,2023-06-30,40,17,23,42.5,2.2815,1.6863,79.69
+short_htf_resistance_sweep_reclaim_rr2,B3,2023-07-01,2023-12-31,41,10,31,24.39,1.6781,0.5413,-72.13
+short_htf_resistance_sweep_reclaim_rr2,B4,2024-01-01,2024-06-30,46,9,37,19.57,1.3278,0.323,-190.15
+short_htf_resistance_sweep_reclaim_rr2,B5,2024-07-01,2024-12-31,23,4,19,17.39,1.8859,0.397,-88.75
+short_htf_resistance_sweep_reclaim_rr2,B6,2025-01-01,2025-06-30,29,6,23,20.69,2.3021,0.6005,-83.19
+short_htf_resistance_sweep_reclaim_rr2,B7,2025-07-01,2025-12-31,29,11,18,37.93,2.0196,1.2342,41.2
+short_htf_resistance_sweep_reclaim_rr2,B8,2026-01-01,2026-06-30,34,11,23,32.35,2.1099,1.0091,3.35
