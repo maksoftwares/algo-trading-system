@@ -19,6 +19,7 @@ PHASE2X_OWNER_APPROVAL.local.*
 outputs/
 data/processed/
 data/raw/
+forex-research/data/
 xau-usd/xauusd-phase1/data/ml/
 
 # Small reviewer-facing Phase 0R lock/screen artifacts are intentionally committed.
@@ -271,3 +272,4 @@ xau-usd/xauusd-phase1/outputs/reports/**
 # Local scratch/temp files.
 .~lock.*#
 _tmp_*.py
+_tmp_*.js
