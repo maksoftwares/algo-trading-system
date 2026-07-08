@@ -41,7 +41,26 @@ enum MomentumSignalMode
    SIGNAL_BEAR_BREAKDOWN_RETEST = 15,
    SIGNAL_BEAR_SWEEP_RECLAIM = 16,
    SIGNAL_BEAR_LOWER_HIGH_REJECTION = 17,
-   SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18
+   SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18,
+   SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST = 19
+  };
+
+enum RegimeRouterMode
+  {
+   REGIME_ROUTER_OFF = 0,
+   REGIME_ROUTER_LONG_R1_UPTREND_ONLY = 1,
+   REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY = 2,
+   REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3
+  };
+
+enum XauRegimeState
+  {
+   XAU_REGIME_UNKNOWN = 0,
+   XAU_REGIME_SHOCK = 1,
+   XAU_REGIME_UPTREND = 2,
+   XAU_REGIME_DOWNTREND = 3,
+   XAU_REGIME_COMPRESSION = 4,
+   XAU_REGIME_CHOP = 5
   };
 
 input string InpRunId                         = "A1_XAU_M5_MOMENTUM_CONTINUATION_SAFE_DEFAULT";
@@ -120,6 +139,18 @@ input int    InpD1SupportStateSlopeLagBars   = 5;
 input bool   InpD1StructuralDownGateEnabled  = false;
 input int    InpD1StructuralDownEmaPeriod    = 50;
 input int    InpD1StructuralDownSlopeLagBars = 5;
+input RegimeRouterMode InpRegimeRouterMode   = REGIME_ROUTER_OFF;
+input int    InpRegimeFastEmaPeriod          = 20;
+input int    InpRegimeSlowEmaPeriod          = 50;
+input int    InpRegimeSlopeLagBars           = 5;
+input int    InpRegimePersistenceD1Bars      = 2;
+input bool   InpRegimeRequireH4Confirm       = true;
+input double InpRegimeShockH1RangeAtrMultiple = 3.00;
+input double InpRegimeShockD1AtrPercentileMin = 95.00;
+input int    InpRegimeShockD1AtrLookback     = 60;
+input double InpRegimeCompressionD1AtrPercentileMax = 30.00;
+input int    InpRegimeCompressionBoxDays     = 5;
+input double InpRegimeCompressionRangeMedianMax = 1.00;
 input bool   InpH4D1WeeklyLossGovernorEnabled = false;
 input double InpH4D1WeeklyLossLimitUsd       = 150.00;
 input bool   InpH4D1PrevMonthHealthGateEnabled = false;
@@ -172,6 +203,9 @@ input double InpBearRetestTouchAtr            = 0.05;
 input double InpBearRetestReclaimAtr          = 0.05;
 input double InpBearRetestStopBufferAtr       = 0.25;
 input double InpBearRetestMinBodyFraction     = 0.30;
+input int    InpBearImpulseRetestImpulseBars  = 3;
+input double InpBearImpulseRetestMinImpulseAtr = 1.20;
+input double InpBearImpulseRetestBreakMinBodyFraction = 0.45;
 input int    InpBearSweepReclaimBars          = 2;
 input double InpBearSweepTouchAtr             = 0.05;
 input double InpBearSweepReclaimAtr           = 0.05;
@@ -2029,6 +2063,172 @@ bool D1SupportStateGateAllows()
    return false;
   }
 
+string RegimeRouterModeName()
+  {
+   if(InpRegimeRouterMode == REGIME_ROUTER_LONG_R1_UPTREND_ONLY)
+      return "long_r1_uptrend_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY)
+      return "short_r2_downtrend_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT)
+      return "directional_r1_long_r2_short";
+   return "off";
+  }
+
+string RegimeStateName(const XauRegimeState state)
+  {
+   if(state == XAU_REGIME_SHOCK)
+      return "shock";
+   if(state == XAU_REGIME_UPTREND)
+      return "uptrend";
+   if(state == XAU_REGIME_DOWNTREND)
+      return "downtrend";
+   if(state == XAU_REGIME_COMPRESSION)
+      return "compression";
+   if(state == XAU_REGIME_CHOP)
+      return "chop";
+   return "unknown";
+  }
+
+bool RegimeTrendStackAtShift(const ENUM_TIMEFRAMES timeframe, const int shift, const bool uptrend)
+  {
+   const int fast_period = MathMax(1, InpRegimeFastEmaPeriod);
+   const int slow_period = MathMax(fast_period + 1, InpRegimeSlowEmaPeriod);
+   const int slope_lag = MathMax(1, InpRegimeSlopeLagBars);
+   if(iBars(InpTargetSymbol, timeframe) < slow_period + slope_lag + shift + 5)
+      return false;
+
+   const double close = iClose(InpTargetSymbol, timeframe, shift);
+   const double fast_now = IndicatorEmaClose(timeframe, fast_period, shift);
+   const double slow_now = IndicatorEmaClose(timeframe, slow_period, shift);
+   const double fast_prior = IndicatorEmaClose(timeframe, fast_period, shift + slope_lag);
+   const double slow_prior = IndicatorEmaClose(timeframe, slow_period, shift + slope_lag);
+   if(close <= 0.0 || fast_now <= 0.0 || slow_now <= 0.0 || fast_prior <= 0.0 || slow_prior <= 0.0)
+      return false;
+
+   if(uptrend)
+      return close > fast_now && fast_now > slow_now && fast_now >= fast_prior && slow_now >= slow_prior;
+   return close < fast_now && fast_now < slow_now && fast_now <= fast_prior && slow_now <= slow_prior;
+  }
+
+bool RegimeD1TrendPersists(const bool uptrend)
+  {
+   const int bars = MathMax(1, InpRegimePersistenceD1Bars);
+   for(int shift = 1; shift <= bars; shift++)
+     {
+      if(!RegimeTrendStackAtShift(PERIOD_D1, shift, uptrend))
+         return false;
+     }
+   return true;
+  }
+
+bool RegimeH4TrendConfirms(const bool uptrend)
+  {
+   if(!InpRegimeRequireH4Confirm)
+      return true;
+   return RegimeTrendStackAtShift(PERIOD_H4, 1, uptrend);
+  }
+
+bool RegimeShockState()
+  {
+   if(InpRegimeShockH1RangeAtrMultiple > 0.0 && iBars(InpTargetSymbol, PERIOD_H1) > InpAtrPeriod + 10)
+     {
+      const double h1_high = iHigh(InpTargetSymbol, PERIOD_H1, 1);
+      const double h1_low = iLow(InpTargetSymbol, PERIOD_H1, 1);
+      const double h1_atr = IndicatorAtrPrice(PERIOD_H1, MathMax(1, InpAtrPeriod), 1);
+      if(h1_high > 0.0 && h1_low > 0.0 && h1_high > h1_low && h1_atr > 0.0)
+        {
+         if((h1_high - h1_low) >= InpRegimeShockH1RangeAtrMultiple * h1_atr)
+            return true;
+        }
+     }
+
+   const int d1_lookback = MathMax(20, InpRegimeShockD1AtrLookback);
+   if(InpRegimeShockD1AtrPercentileMin > 0.0 && iBars(InpTargetSymbol, PERIOD_D1) > d1_lookback + InpAtrPeriod + 10)
+     {
+      const double d1_atr_percentile = IndicatorAtrPercentile(PERIOD_D1, MathMax(1, InpAtrPeriod), d1_lookback, 1);
+      if(d1_atr_percentile >= InpRegimeShockD1AtrPercentileMin)
+         return true;
+     }
+   return false;
+  }
+
+bool RegimeCompressionState()
+  {
+   const int box_days = MathMax(2, InpRegimeCompressionBoxDays);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < MathMax(80, box_days + 30))
+      return false;
+
+   const double d1_atr_percentile = IndicatorAtrPercentile(PERIOD_D1, MathMax(1, InpAtrPeriod), 252, 1);
+   const double box_high = TimeframeHigh(PERIOD_D1, 1, box_days);
+   const double box_low = TimeframeLow(PERIOD_D1, 1, box_days);
+   const double d1_median_range = TimeframeMedianRange(PERIOD_D1, 20, 1);
+   const double box_width = box_high - box_low;
+   const double box_average = box_width / (double)box_days;
+   if(box_high <= 0.0 || box_low <= 0.0 || box_width <= 0.0 || d1_median_range <= 0.0)
+      return false;
+   return d1_atr_percentile <= InpRegimeCompressionD1AtrPercentileMax &&
+          box_average <= InpRegimeCompressionRangeMedianMax * d1_median_range;
+  }
+
+XauRegimeState CurrentXauRegime()
+  {
+   if(RegimeShockState())
+      return XAU_REGIME_SHOCK;
+   if(RegimeD1TrendPersists(true) && RegimeH4TrendConfirms(true))
+      return XAU_REGIME_UPTREND;
+   if(RegimeD1TrendPersists(false) && RegimeH4TrendConfirms(false))
+      return XAU_REGIME_DOWNTREND;
+   if(RegimeCompressionState())
+      return XAU_REGIME_COMPRESSION;
+   return XAU_REGIME_CHOP;
+  }
+
+bool RegimeRouterAllows(const string direction, string &block_reason)
+  {
+   block_reason = "";
+   if(InpRegimeRouterMode == REGIME_ROUTER_OFF)
+      return true;
+
+   const XauRegimeState regime = CurrentXauRegime();
+   const string regime_name = RegimeStateName(regime);
+   const string mode_name = RegimeRouterModeName();
+
+   if(regime == XAU_REGIME_SHOCK)
+     {
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_LONG_R1_UPTREND_ONLY)
+     {
+      if(direction == "LONG" && regime == XAU_REGIME_UPTREND)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY)
+     {
+      if(direction == "SHORT" && regime == XAU_REGIME_DOWNTREND)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT)
+     {
+      if(direction == "LONG" && regime == XAU_REGIME_UPTREND)
+         return true;
+      if(direction == "SHORT" && regime == XAU_REGIME_DOWNTREND)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   block_reason = "regime_router_block_unknown_mode_state_" + regime_name;
+   return false;
+  }
+
 double OwnClosedPnlBetween(const datetime from_time, const datetime to_time)
   {
    if(from_time <= 0 || to_time <= from_time)
@@ -3121,6 +3321,7 @@ bool TryBearBreakdownRetestSignal(
    const double m5_atr,
    const double body_fraction,
    const double close_location,
+   const bool require_impulse_break,
    string &direction,
    string &reason,
    double &stop_distance,
@@ -3160,6 +3361,8 @@ bool TryBearBreakdownRetestSignal(
       const double break_close = iClose(InpTargetSymbol, PERIOD_M5, break_shift);
       if(break_close <= 0.0 || break_close > support - break_zone)
          continue;
+      if(require_impulse_break && !BearImpulseBeforeRetestBreak(break_shift, m5_atr))
+         continue;
 
       double retest_high = high;
       bool reclaimed_above_support = false;
@@ -3185,13 +3388,40 @@ bool TryBearBreakdownRetestSignal(
          continue;
 
       direction = "SHORT";
-      reason = "BEAR_BREAKDOWN_RETEST_SHORT";
+      reason = require_impulse_break ? "BEAR_DOWNSIDE_IMPULSE_RETEST_SHORT" : "BEAR_BREAKDOWN_RETEST_SHORT";
       stop_distance = (retest_high + stop_buffer) - close;
       break_distance_atr = (support - close) / m5_atr;
       return stop_distance > 0.0;
      }
 
    return false;
+  }
+
+bool BearImpulseBeforeRetestBreak(const int break_shift, const double m5_atr)
+  {
+   const int impulse_bars = MathMax(1, InpBearImpulseRetestImpulseBars);
+   const int start_shift = break_shift + impulse_bars;
+   if(m5_atr <= 0.0 || iBars(InpTargetSymbol, PERIOD_M5) <= start_shift + InpAtrPeriod + 2)
+      return false;
+
+   const double start_close = iClose(InpTargetSymbol, PERIOD_M5, start_shift);
+   const double break_open = iOpen(InpTargetSymbol, PERIOD_M5, break_shift);
+   const double break_high = iHigh(InpTargetSymbol, PERIOD_M5, break_shift);
+   const double break_low = iLow(InpTargetSymbol, PERIOD_M5, break_shift);
+   const double break_close = iClose(InpTargetSymbol, PERIOD_M5, break_shift);
+   if(start_close <= 0.0 || break_open <= 0.0 || break_high <= 0.0 || break_low <= 0.0 || break_close <= 0.0)
+      return false;
+   if(break_close >= break_open)
+      return false;
+
+   const double break_range = break_high - break_low;
+   if(break_range <= 0.0)
+      return false;
+
+   const double impulse_atr = (start_close - break_close) / m5_atr;
+   const double break_body_fraction = MathAbs(break_close - break_open) / break_range;
+   return impulse_atr >= InpBearImpulseRetestMinImpulseAtr &&
+          break_body_fraction >= InpBearImpulseRetestBreakMinBodyFraction;
   }
 
 bool TryBearSweepReclaimSignal(
@@ -3889,7 +4119,7 @@ void EvaluateCompletedM5Bar()
      }
    else if(InpSignalMode == SIGNAL_BEAR_BREAKDOWN_RETEST)
      {
-      TryBearBreakdownRetestSignal(open, high, close, range, atr, body_fraction, close_location, direction, reason, htf_stop_distance, break_distance_atr);
+      TryBearBreakdownRetestSignal(open, high, close, range, atr, body_fraction, close_location, false, direction, reason, htf_stop_distance, break_distance_atr);
      }
    else if(InpSignalMode == SIGNAL_BEAR_SWEEP_RECLAIM)
      {
@@ -3902,6 +4132,10 @@ void EvaluateCompletedM5Bar()
    else if(InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP)
      {
       TryBearHtfResistanceSweepSignal(atr, direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST)
+     {
+      TryBearBreakdownRetestSignal(open, high, close, range, atr, body_fraction, close_location, true, direction, reason, htf_stop_distance, break_distance_atr);
      }
 
    if(direction == "")
@@ -3963,6 +4197,12 @@ void EvaluateCompletedM5Bar()
    if(!DirectionalSessionAllows(direction))
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "directional_session_filter_block");
+      return;
+     }
+   string regime_block_reason = "";
+   if(!RegimeRouterAllows(direction, regime_block_reason))
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, regime_block_reason);
       return;
      }
    if(!H1TrendAllows(direction))

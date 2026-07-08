@@ -1,0 +1,3 @@
+name,signals,wins,losses,wr,wl,pf,net,stress_030_wl,stress_030_pf,stress_030_net,active_weekday_pct,max_closed_dd,positive_week_pct,worst_week,q2_signals,q2_wr,q2_wl,q2_net,closing_months,positive_months,negative_months,flat_months,positive_month_pct,worst_month,worst_month_net,best_month,best_month_net,router_blocks
+router_v1_r1_long_box2_prevhealth,145,86,59,59.31,2.1804,3.1782,7050.42,2.1631,3.153,7006.92,7.96,866.37,13.33,-866.37,0,0.0,,0,25,15,10,0,60.0,2024-11,-312.73,2026-01,2673.15,171
+router_v1_r2_short_v4_structural,0,0,0,0.0,,,0,,,0,0.0,0.0,0.0,0.0,0,0.0,,0,0,0,0,0,0.0,,0.0,,0.0,4307
