@@ -1,0 +1,4 @@
+variant,trades,wins,losses,wr,wl,pf,net,stress_030_pf,stress_030_wl,stress_030_net,positive_week_pct,worst_week,net_2023_2024,top10_removed_net,top3_days_removed_net,best_day_share_pct,pass,check_wr_ge_50,check_wl_ge_1p90,check_trades_ge_100,check_net_gt_0,check_stress_net_gt_0,check_stress_pf_ge_1p15,check_y2023_2024_net_ge_0,check_top10_removed_net_gt_0,check_top3_days_removed_net_gt_0
+lower_high_lh1_base,302,101,201,33.44,2.1168,1.0637,119.96,1.0151,2.0202,29.36,45.76,-169.72,-14.75,-281.76,-176.97,94.71,False,False,True,True,True,True,False,False,False,False
+lower_high_lh2_deeper_drop,279,94,185,33.69,1.9995,1.016,29.83,0.972,1.913,-53.87,45.76,-140.49,-32.86,-373.5,-210.51,288.94,False,False,True,True,True,False,False,False,False,False
+lower_high_lh3_tighter_reject,316,107,209,33.86,2.0307,1.0396,71.98,0.9879,1.9295,-22.82,50.85,-109.74,58.47,-327.49,-126.31,93.21,False,False,True,True,True,False,False,True,False,False

@@ -1,0 +1,546 @@
+{
+  "name": "wr50_s2_prior_day_sweep_structural",
+  "label": "WR50 S2: prior-day-high sweep/reclaim, D1 structural down, H1/H4 down",
+  "run_id": "BT_A1_XAU_SHORT_WR50_S2_PRIOR_DAY_SWEEP_STRUCTURAL",
+  "elapsed_seconds": 76.67,
+  "tester_config": "C:\\MT5A1M5MomentumBacktest\\Config\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural.ini",
+  "html_report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural.htm",
+  "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_trades.csv",
+  "order_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_orders.csv",
+  "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_signals.csv",
+  "management_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_management.csv",
+  "deal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_deals.csv",
+  "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_short_wr50_rr2_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_SHORT_WR50_RR2_202207_202606_XAUUSD_M5_wr50_s2_prior_day_sweep_structural_summary.json",
+  "mt5_report_metrics": {
+    "History Quality": "98%",
+    "Bars": "282644",
+    "Ticks": "204204660",
+    "Total Net Profit": "-17.08",
+    "Gross Profit": "126.14",
+    "Balance Drawdown Maximal": "62.88 (6.16%)",
+    "Equity Drawdown Maximal": "84.21 (8.11%)",
+    "Gross Loss": "-143.22",
+    "Balance Drawdown Relative": "6.16% (62.88)",
+    "Equity Drawdown Relative": "8.11% (84.21)",
+    "Profit Factor": "0.88",
+    "Expected Payoff": "-0.57",
+    "Recovery Factor": "-0.20",
+    "Sharpe Ratio": "-1.63",
+    "Total Trades": "30",
+    "Short Trades (won %)": "30 (33.33%)",
+    "Long Trades (won %)": "0 (0.00%)",
+    "Total Deals": "60",
+    "Profit Trades (% of total)": "10 (33.33%)",
+    "Loss Trades (% of total)": "20 (66.67%)"
+  },
+  "summary": {
+    "overall": {
+      "trades": 30,
+      "wins": 10,
+      "losses": 20,
+      "win_rate_pct": 33.33,
+      "pnl_aed": -17.08,
+      "gross_profit": 126.14,
+      "gross_loss": 143.22,
+      "profit_factor": 0.88,
+      "avg_pnl_aed": -0.57
+    },
+    "direction": {
+      "SHORT": {
+        "trades": 30,
+        "wins": 10,
+        "losses": 20,
+        "win_rate_pct": 33.33,
+        "pnl_aed": -17.08,
+        "gross_profit": 126.14,
+        "gross_loss": 143.22,
+        "profit_factor": 0.88,
+        "avg_pnl_aed": -0.57
+      }
+    },
+    "session": {
+      "afternoon": {
+        "trades": 5,
+        "wins": 2,
+        "losses": 3,
+        "win_rate_pct": 40.0,
+        "pnl_aed": 18.94,
+        "gross_profit": 37.94,
+        "gross_loss": 19.0,
+        "profit_factor": 2.0,
+        "avg_pnl_aed": 3.79
+      },
+      "evening": {
+        "trades": 4,
+        "wins": 0,
+        "losses": 4,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -31.66,
+        "gross_profit": 0,
+        "gross_loss": 31.66,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -7.91
+      },
+      "morning": {
+        "trades": 6,
+        "wins": 2,
+        "losses": 4,
+        "win_rate_pct": 33.33,
+        "pnl_aed": -18.35,
+        "gross_profit": 20.74,
+        "gross_loss": 39.09,
+        "profit_factor": 0.53,
+        "avg_pnl_aed": -3.06
+      },
+      "night": {
+        "trades": 15,
+        "wins": 6,
+        "losses": 9,
+        "win_rate_pct": 40.0,
+        "pnl_aed": 13.99,
+        "gross_profit": 67.46,
+        "gross_loss": 53.47,
+        "profit_factor": 1.26,
+        "avg_pnl_aed": 0.93
+      }
+    },
+    "date": {
+      "2022-07-08": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 12.94,
+        "gross_profit": 12.94,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 12.94
+      },
+      "2022-07-12": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -13.36,
+        "gross_profit": 0,
+        "gross_loss": 13.36,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -13.36
+      },
+      "2022-07-18": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.51,
+        "gross_profit": 0,
+        "gross_loss": 3.51,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.51
+      },
+      "2022-08-22": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.0,
+        "gross_profit": 7.0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.0
+      },
+      "2022-09-26": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 13.74,
+        "gross_profit": 13.74,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 13.74
+      },
+      "2022-10-17": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.5,
+        "gross_profit": 0,
+        "gross_loss": 3.5,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.5
+      },
+      "2022-10-31": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.0,
+        "gross_profit": 7.0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.0
+      },
+      "2023-02-27": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.5,
+        "gross_profit": 0,
+        "gross_loss": 3.5,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.5
+      },
+      "2023-05-29": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -7.03,
+        "gross_profit": 0,
+        "gross_loss": 7.03,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.51
+      },
+      "2023-06-30": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.52,
+        "gross_profit": 0,
+        "gross_loss": 3.52,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.52
+      },
+      "2023-08-14": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.0,
+        "gross_profit": 7.0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.0
+      },
+      "2023-08-21": {
+        "trades": 3,
+        "wins": 0,
+        "losses": 3,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -11.86,
+        "gross_profit": 0,
+        "gross_loss": 11.86,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.95
+      },
+      "2023-09-08": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -6.13,
+        "gross_profit": 0,
+        "gross_loss": 6.13,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -6.13
+      },
+      "2023-09-11": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.5,
+        "gross_profit": 0,
+        "gross_loss": 3.5,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.5
+      },
+      "2023-10-02": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.0,
+        "gross_profit": 7.0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.0
+      },
+      "2024-01-28": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -5.16,
+        "gross_profit": 0,
+        "gross_loss": 5.16,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -5.16
+      },
+      "2024-12-08": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 13.35,
+        "gross_profit": 13.35,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 13.35
+      },
+      "2024-12-09": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.62,
+        "gross_profit": 7.62,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.62
+      },
+      "2025-06-30": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -13.31,
+        "gross_profit": 0,
+        "gross_loss": 13.31,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -6.65
+      },
+      "2026-04-27": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate_pct": 50.0,
+        "pnl_aed": 11.54,
+        "gross_profit": 25.0,
+        "gross_loss": 13.46,
+        "profit_factor": 1.86,
+        "avg_pnl_aed": 5.77
+      },
+      "2026-05-18": {
+        "trades": 4,
+        "wins": 0,
+        "losses": 4,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -55.38,
+        "gross_profit": 0,
+        "gross_loss": 55.38,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -13.84
+      },
+      "2026-06-08": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 25.49,
+        "gross_profit": 25.49,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 25.49
+      }
+    },
+    "hour": {
+      "0": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 3,
+        "win_rate_pct": 50.0,
+        "pnl_aed": 29.6,
+        "gross_profit": 40.11,
+        "gross_loss": 10.51,
+        "profit_factor": 3.82,
+        "avg_pnl_aed": 4.93
+      },
+      "1": {
+        "trades": 4,
+        "wins": 0,
+        "losses": 4,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -33.84,
+        "gross_profit": 0,
+        "gross_loss": 33.84,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -8.46
+      },
+      "11": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -18.04,
+        "gross_profit": 0,
+        "gross_loss": 18.04,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -18.04
+      },
+      "12": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate_pct": 50.0,
+        "pnl_aed": 21.48,
+        "gross_profit": 25.0,
+        "gross_loss": 3.52,
+        "profit_factor": 7.1,
+        "avg_pnl_aed": 10.74
+      },
+      "13": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -15.48,
+        "gross_profit": 0,
+        "gross_loss": 15.48,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -7.74
+      },
+      "14": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 12.94,
+        "gross_profit": 12.94,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 12.94
+      },
+      "16": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.5,
+        "gross_profit": 0,
+        "gross_loss": 3.5,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.5
+      },
+      "17": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -11.28,
+        "gross_profit": 0,
+        "gross_loss": 11.28,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -11.28
+      },
+      "18": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.51,
+        "gross_profit": 0,
+        "gross_loss": 3.51,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.51
+      },
+      "19": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -13.37,
+        "gross_profit": 0,
+        "gross_loss": 13.37,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -13.37
+      },
+      "2": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate_pct": 50.0,
+        "pnl_aed": 3.04,
+        "gross_profit": 7.0,
+        "gross_loss": 3.96,
+        "profit_factor": 1.77,
+        "avg_pnl_aed": 1.52
+      },
+      "22": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate_pct": 50.0,
+        "pnl_aed": 8.19,
+        "gross_profit": 13.35,
+        "gross_loss": 5.16,
+        "profit_factor": 2.59,
+        "avg_pnl_aed": 4.09
+      },
+      "3": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "pnl_aed": 7.0,
+        "gross_profit": 7.0,
+        "gross_loss": 0,
+        "profit_factor": null,
+        "avg_pnl_aed": 7.0
+      },
+      "6": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -4.85,
+        "gross_profit": 0,
+        "gross_loss": 4.85,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -4.85
+      },
+      "7": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate_pct": 66.67,
+        "pnl_aed": 8.05,
+        "gross_profit": 20.74,
+        "gross_loss": 12.69,
+        "profit_factor": 1.63,
+        "avg_pnl_aed": 2.68
+      },
+      "9": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate_pct": 0.0,
+        "pnl_aed": -3.51,
+        "gross_profit": 0,
+        "gross_loss": 3.51,
+        "profit_factor": 0.0,
+        "avg_pnl_aed": -3.51
+      }
+    }
+  },
+  "order_activity": {
+    "rows": 6125,
+    "actions": {
+      "GUARD_BLOCK": 6095,
+      "ORDER_SEND_OK": 30
+    },
+    "guard_reasons": {
+      "h1_trend_filter_block": 5636,
+      "pass": 30,
+      "own_position_exists": 95,
+      "h4_trend_filter_block": 251,
+      "d1_support_state_gate": 97,
+      "estimated_cost_r_too_high": 15,
+      "stop_ceiling_exceeded": 1
+    }
+  }
+}
