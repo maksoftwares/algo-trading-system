@@ -179,6 +179,8 @@ class R1BoxR3OverlapPriorityAuditTests(unittest.TestCase):
         kill_report = audit.render(base)
         self.assertIn("portfolio use is killed by the triggered hard rule", kill_report)
         self.assertIn("exceeds the hard cap", kill_report)
+        self.assertIn("Window P/L deterioration", kill_report)
+        self.assertIn("full-book DD increase", kill_report)
 
         passed = deepcopy(base)
         passed["status"] = "R1_BOX_R3_OVERLAP_PRIORITY_PASS"
@@ -204,6 +206,13 @@ class R1BoxR3OverlapPriorityAuditTests(unittest.TestCase):
         no_pass_report = audit.render(no_pass)
         self.assertIn("audit did not clear every pass gate", no_pass_report)
         self.assertNotIn("portfolio use is killed", no_pass_report)
+
+        favorable_window = deepcopy(passed)
+        favorable_window["dd_window_attribution"]["r3_minus_box_net_in_window"] = 20.0
+        favorable_window["dd_window_attribution"]["replacement_minus_control_dd"] = -20.0
+        favorable_report = audit.render(favorable_window)
+        self.assertIn("Window P/L improvement", favorable_report)
+        self.assertIn("full-book DD decrease", favorable_report)
 
 
 if __name__ == "__main__":

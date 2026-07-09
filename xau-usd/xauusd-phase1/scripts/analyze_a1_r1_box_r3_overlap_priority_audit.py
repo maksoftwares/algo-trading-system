@@ -844,8 +844,10 @@ def render(payload: dict[str, Any]) -> str:
             f"`{money(dd_window['replaced_box_net_in_window'])}`.",
             f"- R3 replacement rows closing in window: `{dd_window['replacement_r3_trades_closing_in_window']}` / "
             f"`{money(dd_window['replacement_r3_net_in_window'])}`.",
-            f"- Window P/L deterioration: `{money(dd_window['r3_minus_box_net_in_window'])}`; "
-            f"full-book DD increase: `{money(dd_window['replacement_minus_control_dd'])}`.",
+            f"- Window P/L {'improvement' if dd_window['r3_minus_box_net_in_window'] >= 0.0 else 'deterioration'}: "
+            f"`{money(dd_window['r3_minus_box_net_in_window'])}`; full-book DD "
+            f"{'increase' if dd_window['replacement_minus_control_dd'] >= 0.0 else 'decrease'}: "
+            f"`{money(dd_window['replacement_minus_control_dd'])}`.",
             "",
             "## Pass Gates",
             "",
