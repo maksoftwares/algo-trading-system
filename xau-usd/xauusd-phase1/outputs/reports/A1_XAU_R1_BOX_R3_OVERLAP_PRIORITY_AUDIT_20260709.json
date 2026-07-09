@@ -1,0 +1,609 @@
+{
+  "audit_name": "A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709",
+  "generated_at_utc": "2026-07-09T20:20:44Z",
+  "status": "R1_BOX_R3_OVERLAP_PRIORITY_KILL_PORTFOLIO_USE",
+  "decision": "KILLED_FOR_PORTFOLIO_USE_KEEP_STANDALONE_SHADOW_ONLY",
+  "interpretation": "At least one preregistered kill rule triggered. Do not run the conditional exact-MT5 source-priority test or tune R3.",
+  "evidence_boundary": "Diagnostic recomposition of existing exact-MT5 ledgers only. Not promotion evidence; no new MT5 run or runtime change.",
+  "rules": {
+    "control": "Keep existing baseline priority; h4_d1_long_best_box2_atr80 owns validated same-direction overlaps.",
+    "replacement": "Replace only the validated overlapping h4_d1_long_best_box2_atr80 row with r1_long_expansion_r3_reclass_strict_r1.",
+    "nonoverlap": "Unchanged.",
+    "same_direction_window_seconds": 300,
+    "selection_uses_profit_or_outcome": false,
+    "forbidden_filters_used": [],
+    "stress_cost_per_ticket": 0.3,
+    "wl_materiality": {
+      "absolute_improvement": 0.2,
+      "relative_improvement": 0.1,
+      "rule": "R3 W/L must meet the greater of baseline W/L + 0.20 or baseline W/L x 1.10."
+    },
+    "r3_replaces_baseline_delta_dd_definition": "replacement combined max closed DD minus current baseline-priority control combined max closed DD"
+  },
+  "inputs": {
+    "A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv",
+      "sha256": "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
+    },
+    "A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_r1_long_expansion_r3_reclass_strict_r1_NORMALIZED_TRADES.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_r1_long_expansion_r3_reclass_strict_r1_NORMALIZED_TRADES.csv",
+      "sha256": "af69cee52d2e8e5b0c1b45d506dfce9ccb71edbf6305305cbb9802f5d3d51c8a"
+    },
+    "A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_current_r1_r2_plus_r1_long_expansion_r3_reclass_strict_r1_KEPT.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_current_r1_r2_plus_r1_long_expansion_r3_reclass_strict_r1_KEPT.csv",
+      "sha256": "e71dac2cd86f35108f0792ab593370415138ed5b206d35ec98cf60d3fa06092b"
+    },
+    "A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_current_r1_r2_plus_r1_long_expansion_r3_reclass_strict_r1_DROPPED.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_current_r1_r2_plus_r1_long_expansion_r3_reclass_strict_r1_DROPPED.csv",
+      "sha256": "a330c5ef482c1f0792513a89595fe83f64c0f8d2a8862606c9ff57f2f1969d86"
+    },
+    "A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_MT5.json": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_LONG_EXPANSION_R3_RECLASS_EXACT_20260709_MT5.json",
+      "sha256": "ace68c11d079ce68ab17c62815a040023ef5de1c4cfe37580b8204c2aaf93293"
+    },
+    "A1XauM5Momentum_OWNER_GOAL_R1_LONG_EXPANSION_R3_RECLASS_EXACT_202207_202606_XAUUSD_M5_r1_long_expansion_r3_reclass_strict_r1_orders.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_long_expansion_r3_reclass_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_LONG_EXPANSION_R3_RECLASS_EXACT_202207_202606_XAUUSD_M5_r1_long_expansion_r3_reclass_strict_r1_orders.csv",
+      "sha256": "9fac9e28f7a9a020ea65bae2192e73b8fc1a1a5988cda8f655f3443a8decfe8f"
+    },
+    "A1XauM5Momentum_OWNER_GOAL_R1_LONG_EXPANSION_R3_RECLASS_EXACT_202207_202606_XAUUSD_M5_r1_long_expansion_r3_reclass_strict_r1_signals.csv": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_long_expansion_r3_reclass_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_LONG_EXPANSION_R3_RECLASS_EXACT_202207_202606_XAUUSD_M5_r1_long_expansion_r3_reclass_strict_r1_signals.csv",
+      "sha256": "1cd9e92073e079b33da425aceb30543254bafdbd7f951194e9cb47e9335041c8"
+    }
+  },
+  "input_rows": {
+    "baseline": 678,
+    "r3_normalized": 139,
+    "control_kept": 707,
+    "control_dropped": 110
+  },
+  "integrity_checks": {
+    "control_full_partition_reconciles": true,
+    "control_kept_contains_all_baseline_rows": true,
+    "r3_partitions_into_nonoverlap_and_dropped": true,
+    "all_control_drops_are_r3": true,
+    "all_control_drops_point_to_box": true,
+    "overlap_pairs_are_one_to_one": true,
+    "all_pairs_within_5_minutes": true,
+    "no_r3_overlap_with_other_baseline_sources": true,
+    "replacement_trade_count_reconciles": true,
+    "control_and_replacement_share_max_dd_window": true,
+    "dd_window_attribution_reconciles_swap_delta": true
+  },
+  "other_baseline_source_overlap_count": 0,
+  "metrics": {
+    "overlap_count": 110,
+    "r3_dropped_count": 110,
+    "baseline_trade_kept_count": 110,
+    "baseline_total_trade_count": 678,
+    "nonoverlap_r3_count": 29,
+    "r3_overlap_net": 6618.92,
+    "baseline_overlap_net": 4236.9,
+    "r3_overlap_wr": 66.36,
+    "baseline_overlap_wr": 58.18,
+    "r3_overlap_wl": 1.8062,
+    "baseline_overlap_wl": 1.914,
+    "r3_overlap_pf": 3.5635,
+    "baseline_overlap_pf": 2.663,
+    "r3_overlap_max_closed_dd_subset": 856.09,
+    "baseline_overlap_max_closed_dd_subset": 866.37,
+    "overlap_subset_delta_dd": -10.28,
+    "r3_replaces_baseline_delta_net": 2382.02,
+    "r3_replaces_baseline_delta_dd": 140.57,
+    "replacement_vs_r1_r2_baseline_delta_net": 5905.82,
+    "replacement_vs_r1_r2_baseline_delta_dd": 327.44,
+    "nonoverlap_r3_net": 3523.8,
+    "replacement_combined_net": 15545.87,
+    "replacement_stress_net": 15333.77,
+    "replacement_wr": 53.18,
+    "replacement_wl": 3.0911,
+    "replacement_pf": 3.5113,
+    "replacement_max_closed_dd": 1217.13,
+    "replacement_recent3_trades": 59,
+    "replacement_recent3_net": 764.92,
+    "top10_removed_net": 12055.93,
+    "top3_days_removed_net": 12566.55,
+    "best_month_share_pct": 21.71,
+    "positive_months": 27,
+    "replacement_dd_cap_115pct_baseline": 1023.1435,
+    "replacement_dd_minus_cap": 193.99,
+    "overlap_wl_material_threshold": 2.114,
+    "max_pair_entry_delta_seconds": 0.0
+  },
+  "dd_window_attribution": {
+    "peak_exit_time": "2025-04-02 23:46:32",
+    "trough_exit_time": "2025-08-11 11:31:42",
+    "control_max_closed_dd": 1076.56,
+    "replacement_max_closed_dd": 1217.13,
+    "replacement_minus_control_dd": 140.57,
+    "replaced_box_trades_closing_in_window": 5,
+    "replacement_r3_trades_closing_in_window": 5,
+    "replaced_box_net_in_window": -305.37,
+    "replacement_r3_net_in_window": -445.94,
+    "r3_minus_box_net_in_window": -140.57,
+    "interpretation": "The control and replacement share the same peak-to-trough window. 5 R3 replacements close $140.57 worse than 5 box counterparts inside that window, matching the $140.57 full-book DD increase."
+  },
+  "baseline": {
+    "name": "current_r1_r2_baseline",
+    "signals": 678,
+    "wins": 346,
+    "losses": 332,
+    "wr": 51.03,
+    "wl": 2.6082,
+    "pf": 2.7182,
+    "net": 9640.05,
+    "stress_030_wr": 51.03,
+    "stress_030_wl": 2.5453,
+    "stress_030_pf": 2.6526,
+    "stress_030_net": 9436.65,
+    "max_closed_dd": 889.69,
+    "recent3_signals": 59,
+    "recent3_wr": 62.71,
+    "recent3_wl": 2.2077,
+    "recent3_pf": 3.713,
+    "recent3_net": 764.92,
+    "positive_months": 26,
+    "negative_months": 19,
+    "closing_months": 45,
+    "best_month": "2026-01",
+    "best_month_net": 2695.08,
+    "worst_month": "2024-11",
+    "worst_month_net": -312.73,
+    "positive_week_pct": 31.43,
+    "worst_week": -866.37,
+    "top10_removed_net": 6731.4,
+    "top3_days_removed_net": 7275.75,
+    "best_month_share_pct": 27.96,
+    "top3_days": [
+      {
+        "date": "2026-01-20",
+        "net": 851.91
+      },
+      {
+        "date": "2026-01-21",
+        "net": 811.21
+      },
+      {
+        "date": "2026-01-12",
+        "net": 701.18
+      }
+    ],
+    "source_contributions": {
+      "h4_d1_long_best_box2_atr80": {
+        "trades": 145,
+        "net": 7050.42
+      },
+      "r1_h1_pullback_long_v1": {
+        "trades": 413,
+        "net": 1665.94
+      },
+      "r2_continuation_short_v1": {
+        "trades": 57,
+        "net": 589.46
+      },
+      "r2_pullback_rejection_short_v1": {
+        "trades": 63,
+        "net": 334.23
+      }
+    }
+  },
+  "control_combined": {
+    "name": "current_baseline_priority_control",
+    "signals": 707,
+    "wins": 367,
+    "losses": 340,
+    "wr": 51.91,
+    "wl": 2.9075,
+    "pf": 3.1384,
+    "net": 13163.85,
+    "stress_030_wr": 51.91,
+    "stress_030_wl": 2.8438,
+    "stress_030_pf": 3.0696,
+    "stress_030_net": 12951.75,
+    "max_closed_dd": 1076.56,
+    "recent3_signals": 59,
+    "recent3_wr": 62.71,
+    "recent3_wl": 2.2077,
+    "recent3_pf": 3.713,
+    "recent3_net": 764.92,
+    "positive_months": 27,
+    "negative_months": 19,
+    "closing_months": 46,
+    "best_month": "2025-09",
+    "best_month_net": 2815.33,
+    "worst_month": "2025-07",
+    "worst_month_net": -407.75,
+    "positive_week_pct": 33.33,
+    "worst_week": -866.37,
+    "top10_removed_net": 10087.27,
+    "top3_days_removed_net": 10532.25,
+    "best_month_share_pct": 21.39,
+    "top3_days": [
+      {
+        "date": "2025-09-22",
+        "net": 968.48
+      },
+      {
+        "date": "2026-01-20",
+        "net": 851.91
+      },
+      {
+        "date": "2026-01-21",
+        "net": 811.21
+      }
+    ],
+    "source_contributions": {
+      "h4_d1_long_best_box2_atr80": {
+        "trades": 145,
+        "net": 7050.42
+      },
+      "r1_h1_pullback_long_v1": {
+        "trades": 413,
+        "net": 1665.94
+      },
+      "r1_long_expansion_r3_reclass_strict_r1": {
+        "trades": 29,
+        "net": 3523.8
+      },
+      "r2_continuation_short_v1": {
+        "trades": 57,
+        "net": 589.46
+      },
+      "r2_pullback_rejection_short_v1": {
+        "trades": 63,
+        "net": 334.23
+      }
+    }
+  },
+  "baseline_overlap": {
+    "name": "baseline_box_overlap_subset",
+    "signals": 110,
+    "wins": 64,
+    "losses": 46,
+    "wr": 58.18,
+    "wl": 1.914,
+    "pf": 2.663,
+    "net": 4236.9,
+    "stress_030_wr": 58.18,
+    "stress_030_wl": 1.8983,
+    "stress_030_pf": 2.6412,
+    "stress_030_net": 4203.9,
+    "max_closed_dd": 866.37,
+    "recent3_signals": 0,
+    "recent3_wr": 0.0,
+    "recent3_wl": null,
+    "recent3_pf": null,
+    "recent3_net": 0,
+    "positive_months": 12,
+    "negative_months": 6,
+    "closing_months": 18,
+    "best_month": "2025-02",
+    "best_month_net": 871.11,
+    "worst_month": "2024-11",
+    "worst_month_net": -312.73,
+    "positive_week_pct": 10.48,
+    "worst_week": -866.37,
+    "top10_removed_net": 2098.03,
+    "top3_days_removed_net": 2459.85,
+    "best_month_share_pct": 20.56,
+    "top3_days": [
+      {
+        "date": "2026-01-20",
+        "net": 851.91
+      },
+      {
+        "date": "2025-01-30",
+        "net": 497.01
+      },
+      {
+        "date": "2025-12-11",
+        "net": 428.13
+      }
+    ],
+    "source_contributions": {
+      "h4_d1_long_best_box2_atr80": {
+        "trades": 110,
+        "net": 4236.9
+      }
+    }
+  },
+  "r3_overlap": {
+    "name": "r3_overlap_subset",
+    "signals": 110,
+    "wins": 73,
+    "losses": 37,
+    "wr": 66.36,
+    "wl": 1.8062,
+    "pf": 3.5635,
+    "net": 6618.92,
+    "stress_030_wr": 66.36,
+    "stress_030_wl": 1.7941,
+    "stress_030_pf": 3.5398,
+    "stress_030_net": 6585.92,
+    "max_closed_dd": 856.09,
+    "recent3_signals": 0,
+    "recent3_wr": 0.0,
+    "recent3_wl": null,
+    "recent3_pf": null,
+    "recent3_net": 0,
+    "positive_months": 13,
+    "negative_months": 6,
+    "closing_months": 19,
+    "best_month": "2026-01",
+    "best_month_net": 1532.27,
+    "worst_month": "2024-11",
+    "worst_month_net": -564.89,
+    "positive_week_pct": 13.33,
+    "worst_week": -856.09,
+    "top10_removed_net": 3928.25,
+    "top3_days_removed_net": 4429.76,
+    "best_month_share_pct": 23.15,
+    "top3_days": [
+      {
+        "date": "2026-01-20",
+        "net": 1199.63
+      },
+      {
+        "date": "2025-01-30",
+        "net": 540.98
+      },
+      {
+        "date": "2024-09-20",
+        "net": 448.55
+      }
+    ],
+    "source_contributions": {
+      "r1_long_expansion_r3_reclass_strict_r1": {
+        "trades": 110,
+        "net": 6618.92
+      }
+    }
+  },
+  "nonoverlap_r3": {
+    "name": "r3_nonoverlap_subset",
+    "signals": 29,
+    "wins": 21,
+    "losses": 8,
+    "wr": 72.41,
+    "wl": 2.8415,
+    "pf": 7.4588,
+    "net": 3523.8,
+    "stress_030_wr": 72.41,
+    "stress_030_wl": 2.8246,
+    "stress_030_pf": 7.4147,
+    "stress_030_net": 3515.1,
+    "max_closed_dd": 461.41,
+    "recent3_signals": 0,
+    "recent3_wr": 0.0,
+    "recent3_wl": null,
+    "recent3_pf": null,
+    "recent3_net": 0,
+    "positive_months": 5,
+    "negative_months": 4,
+    "closing_months": 9,
+    "best_month": "2025-09",
+    "best_month_net": 1914.24,
+    "worst_month": "2025-07",
+    "worst_month_net": -403.02,
+    "positive_week_pct": 4.29,
+    "worst_week": -208.32,
+    "top10_removed_net": 1093.85,
+    "top3_days_removed_net": 1162.06,
+    "best_month_share_pct": 54.32,
+    "top3_days": [
+      {
+        "date": "2025-09-22",
+        "net": 968.48
+      },
+      {
+        "date": "2025-09-29",
+        "net": 758.88
+      },
+      {
+        "date": "2025-09-02",
+        "net": 634.38
+      }
+    ],
+    "source_contributions": {
+      "r1_long_expansion_r3_reclass_strict_r1": {
+        "trades": 29,
+        "net": 3523.8
+      }
+    }
+  },
+  "replacement_combined": {
+    "name": "r3_priority_replacement_combined",
+    "signals": 707,
+    "wins": 376,
+    "losses": 331,
+    "wr": 53.18,
+    "wl": 3.0911,
+    "pf": 3.5113,
+    "net": 15545.87,
+    "stress_030_wr": 53.18,
+    "stress_030_wl": 3.0265,
+    "stress_030_pf": 3.438,
+    "stress_030_net": 15333.77,
+    "max_closed_dd": 1217.13,
+    "recent3_signals": 59,
+    "recent3_wr": 62.71,
+    "recent3_wl": 2.2077,
+    "recent3_pf": 3.713,
+    "recent3_net": 764.92,
+    "positive_months": 27,
+    "negative_months": 19,
+    "closing_months": 46,
+    "best_month": "2026-01",
+    "best_month_net": 3375.44,
+    "worst_month": "2024-11",
+    "worst_month_net": -623.28,
+    "positive_week_pct": 34.76,
+    "worst_week": -856.09,
+    "top10_removed_net": 12055.93,
+    "top3_days_removed_net": 12566.55,
+    "best_month_share_pct": 21.71,
+    "top3_days": [
+      {
+        "date": "2026-01-20",
+        "net": 1199.63
+      },
+      {
+        "date": "2025-09-22",
+        "net": 968.48
+      },
+      {
+        "date": "2026-01-21",
+        "net": 811.21
+      }
+    ],
+    "source_contributions": {
+      "h4_d1_long_best_box2_atr80": {
+        "trades": 35,
+        "net": 2813.52
+      },
+      "r1_h1_pullback_long_v1": {
+        "trades": 413,
+        "net": 1665.94
+      },
+      "r1_long_expansion_r3_reclass_strict_r1": {
+        "trades": 139,
+        "net": 10142.72
+      },
+      "r2_continuation_short_v1": {
+        "trades": 57,
+        "net": 589.46
+      },
+      "r2_pullback_rejection_short_v1": {
+        "trades": 63,
+        "net": 334.23
+      }
+    }
+  },
+  "gate_checks": {
+    "overlap_count_ge_80": true,
+    "r3_overlap_net_gt_baseline_overlap_net": true,
+    "r3_overlap_pf_gte_baseline_overlap_pf": true,
+    "r3_overlap_wr_gte_baseline_or_wl_materially_higher": true,
+    "replacement_net_ge_baseline_plus_2000": true,
+    "replacement_stress_net_ge_baseline_plus_2000": true,
+    "replacement_wr_ge_50": true,
+    "replacement_wl_ge_2": true,
+    "replacement_pf_ge_2p50": true,
+    "replacement_dd_lte_115pct_baseline": false,
+    "replacement_recent3_ge_baseline_minus_50": true,
+    "replacement_top10_removed_net_gt_0": true,
+    "replacement_top3_days_removed_net_gt_0": true,
+    "replacement_best_month_share_lte_30pct": true,
+    "replacement_positive_months_gte_baseline": true
+  },
+  "failed_gates": [
+    "replacement_dd_lte_115pct_baseline"
+  ],
+  "kill_checks": {
+    "r3_overlap_net_lte_baseline_overlap_net": false,
+    "replacement_dd_gt_115pct_baseline": true,
+    "replacement_recent3_lt_baseline_minus_50": false,
+    "replacement_wr_lt_50": false,
+    "replacement_pf_lt_2p50": false,
+    "replacement_top10_concentration_fails": false,
+    "replacement_top3_day_concentration_fails": false
+  },
+  "triggered_kill_rules": [
+    "replacement_dd_gt_115pct_baseline"
+  ],
+  "ORDER_SEND_FAIL_RECONCILIATION": {
+    "order_send_ok_count": 139,
+    "order_send_fail_count": 2,
+    "normalized_trade_count": 139,
+    "count_reconciles": true,
+    "all_failures_have_would_signal": true,
+    "all_failures_unexecuted": true,
+    "interpretation": "Both failures were valid long signals rejected because the tester returned MT5 retcode 10018 (market closed). The raw evidence cannot distinguish a genuine broker-session closure from a tester session-calendar artifact. They are unexecuted entry opportunities, not members of the 139-trade normalized ledger; no retry or outcome is imputed.",
+    "failures": [
+      {
+        "timestamp_broker": "2024.10.29 21:00:00",
+        "symbol": "XAUUSD",
+        "direction": "LONG",
+        "lots": 0.01,
+        "entry_reference": 2774.21,
+        "sl": 2716.79,
+        "tp": 2889.05,
+        "retcode": 10018,
+        "retcode_description": "market closed",
+        "reason": "order_send_failed",
+        "would_signal_present": true,
+        "signal_reason": "D1_COMPRESSION_H4_EXPANSION_LONG",
+        "executed_trade_at_same_timestamp": false,
+        "previous_order_send_ok": "2024.10.29 16:00:00",
+        "next_order_send_ok": "2025.01.15 20:00:00",
+        "same_timestamp_retry_observed": false,
+        "missed_opportunity_classification": "UNEXECUTED_SIGNAL_MARKET_CLOSED_HYPOTHETICAL_PNL_UNKNOWN",
+        "hypothetical_pnl_imputed": false
+      },
+      {
+        "timestamp_broker": "2025.03.27 21:00:00",
+        "symbol": "XAUUSD",
+        "direction": "LONG",
+        "lots": 0.01,
+        "entry_reference": 3056.81,
+        "sl": 3002.85,
+        "tp": 3164.73,
+        "retcode": 10018,
+        "retcode_description": "market closed",
+        "reason": "order_send_failed",
+        "would_signal_present": true,
+        "signal_reason": "D1_COMPRESSION_H4_EXPANSION_LONG",
+        "executed_trade_at_same_timestamp": false,
+        "previous_order_send_ok": "2025.03.27 12:00:00",
+        "next_order_send_ok": "2025.03.28 04:00:00",
+        "same_timestamp_retry_observed": false,
+        "missed_opportunity_classification": "UNEXECUTED_SIGNAL_MARKET_CLOSED_HYPOTHETICAL_PNL_UNKNOWN",
+        "hypothetical_pnl_imputed": false
+      }
+    ],
+    "r3_exact_mt5_drawdown": {
+      "max_closed_dd": 856.09,
+      "mt5_balance_dd_maximal": 856.09,
+      "mt5_equity_dd_maximal": 1720.1,
+      "mt5_balance_dd_maximal_raw": "856.09 (8.18%)",
+      "mt5_equity_dd_maximal_raw": "1 720.10 (15.27%)",
+      "mt5_balance_dd_relative_raw": "15.98% (329.61)",
+      "mt5_equity_dd_relative_raw": "28.85% (696.92)"
+    }
+  },
+  "drawdown_evidence": {
+    "baseline": {
+      "max_closed_dd": 889.69,
+      "mt5_balance_dd": null,
+      "mt5_equity_dd": null,
+      "note": "Recomposed portfolio ledger; no single portfolio MT5 run in this audit."
+    },
+    "r3_standalone_exact_mt5": {
+      "max_closed_dd": 856.09,
+      "mt5_balance_dd_maximal": 856.09,
+      "mt5_equity_dd_maximal": 1720.1,
+      "mt5_balance_dd_maximal_raw": "856.09 (8.18%)",
+      "mt5_equity_dd_maximal_raw": "1 720.10 (15.27%)",
+      "mt5_balance_dd_relative_raw": "15.98% (329.61)",
+      "mt5_equity_dd_relative_raw": "28.85% (696.92)"
+    },
+    "control_combined": {
+      "max_closed_dd": 1076.56,
+      "mt5_balance_dd": null,
+      "mt5_equity_dd": null,
+      "note": "Recomposed portfolio ledger; no single portfolio MT5 run in this audit."
+    },
+    "replacement_combined": {
+      "max_closed_dd": 1217.13,
+      "mt5_balance_dd": null,
+      "mt5_equity_dd": null,
+      "note": "Unavailable by design until an exact-MT5 source-priority run is authorized; this audit did not run MT5."
+    }
+  },
+  "outputs": {
+    "report_md": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709.md",
+    "report_json": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709.json",
+    "summary_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709_SUMMARY.csv",
+    "overlap_pairs_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709_OVERLAP_PAIRS.csv",
+    "replacement_kept_csv": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R1_BOX_R3_OVERLAP_PRIORITY_AUDIT_20260709_REPLACEMENT_KEPT.csv"
+  }
+}
