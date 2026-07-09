@@ -120,6 +120,8 @@ input double InpR2PullbackTouchAtr            = 0.25;
 input double InpR2PullbackStopBufferAtr       = 0.25;
 input double InpR2PullbackMinBodyFraction     = 0.35;
 input double InpR2PullbackCloseLocation       = 0.35;
+input bool   InpR2PullbackM5ExecutionBodyFilterEnabled = false;
+input double InpR2PullbackM5MinBodyFraction   = 0.00;
 input int    InpCompressionLookbackBars       = 8;
 input double InpCompressionMaxRangeAtr        = 1.20;
 input double InpCompressionBreakAtrMultiple   = 0.10;
@@ -3059,6 +3061,20 @@ bool TryR2H1PullbackRejectionShortSignal(string &direction, string &reason, doub
       body_fraction < InpR2PullbackMinBodyFraction ||
       close_location > InpR2PullbackCloseLocation)
       return false;
+
+   if(InpR2PullbackM5ExecutionBodyFilterEnabled)
+     {
+      const double m5_open = iOpen(InpTargetSymbol, PERIOD_M5, 1);
+      const double m5_high = iHigh(InpTargetSymbol, PERIOD_M5, 1);
+      const double m5_low = iLow(InpTargetSymbol, PERIOD_M5, 1);
+      const double m5_close = iClose(InpTargetSymbol, PERIOD_M5, 1);
+      const double m5_range = m5_high - m5_low;
+      if(m5_open <= 0.0 || m5_high <= 0.0 || m5_low <= 0.0 || m5_close <= 0.0 || m5_range <= 0.0)
+         return false;
+      const double m5_body_fraction = MathAbs(m5_close - m5_open) / m5_range;
+      if(m5_body_fraction < MathMax(0.0, InpR2PullbackM5MinBodyFraction))
+         return false;
+     }
 
    const double touch_zone = MathMax(0.0, InpR2PullbackTouchAtr) * h1_atr;
    bool touched_zone = false;
