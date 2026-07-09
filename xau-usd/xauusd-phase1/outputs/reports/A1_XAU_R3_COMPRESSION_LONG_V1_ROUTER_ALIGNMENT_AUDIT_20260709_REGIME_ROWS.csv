@@ -1,0 +1,8 @@
+ea_router_regime,name,signals,wins,losses,wr,wl,pf,net,stress_030_wl,stress_030_pf,stress_030_net,active_weekday_pct,max_closed_dd,positive_week_pct,worst_week,q2_signals,q2_net,top10_removed_net,top3_days_removed_net,best_month_share_pct,positive_year_buckets,closing_months,positive_months,negative_months,flat_months,positive_month_pct,worst_month,worst_month_net,best_month,best_month_net,dropped_data,dropped_signals,recent3_signals,recent3_net,net_2023_2024
+shock,r3_router_shock,8,8,0,100.0,,,584.16,,,581.76,0.38,0.0,1.43,0.0,0,0,0.0,47.52,75.22,1,2,2,0,0,100.0,2023-11,144.74,2023-10,439.42,[],0,0,0,584.16
+uptrend,r3_router_uptrend,139,95,44,68.35,2.0342,4.3921,10534.09,2.0214,4.3644,10492.39,7.38,856.09,15.24,-856.09,0,0,7455.16,7607.1,24.68,5,21,14,7,0,66.67,2024-11,-623.28,2025-09,2599.88,[],0,0,0,2037.97
+downtrend,r3_router_downtrend,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0,0,0,0,0,0.0,,0.0,,0.0,,0,0,0.0,0.0
+compression,r3_router_compression,45,20,25,44.44,2.6899,2.1519,915.92,2.6554,2.1244,902.42,3.07,635.38,3.81,-209.84,0,0,-174.99,106.92,84.75,2,11,4,7,0,36.36,2023-09,-295.68,2025-01,776.26,[],0,0,0,-60.06
+chop,r3_router_chop,23,9,14,39.13,1.9355,1.2442,159.91,1.9168,1.2322,153.01,1.82,300.01,2.86,-204.7,1,-204.7,-654.74,-347.84,191.92,2,11,4,7,0,36.36,2026-06,-204.7,2023-12,306.9,[],0,1,-204.7,578.05
+unknown,r3_router_unknown,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0,0,0,0,0,0.0,,0.0,,0.0,,0,0,0.0,0.0
+no_snapshot,r3_router_no_snapshot,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0.0,0.0,0,0,0,0,0,0.0,,0.0,,0.0,,0,0,0.0,0.0
