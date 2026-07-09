@@ -1,0 +1,11 @@
+name,trades,wins,losses,wr_pct,wl,pf,net,stress_net_030,stress_pf_030,max_closed_dd,recent3_trades,recent3_net,positive_months,negative_months,test,source,allowed_regimes,base_trades,base_net,net_delta
+R1_prev_uptrend_only,412,204,208,49.51,2.4037,2.3574,6003.83,5880.23,2.311,951.63,0,0.0,14,13,R1_prev_uptrend_only,R1_current_long_book,uptrend,558,8716.36,-2712.53
+R1_prev_uptrend_or_shock,431,215,216,49.88,2.3735,2.3626,6076.04,5946.74,2.3145,951.63,0,0.0,14,14,R1_prev_uptrend_or_shock,R1_current_long_book,"shock,uptrend",558,8716.36,-2640.32
+R2_pullback_prev_downtrend_only,31,13,18,41.94,2.1471,1.5507,76.43,67.13,1.4656,37.21,1,31.7,3,3,R2_pullback_prev_downtrend_only,R2_pullback_short_v2_hours05_18,downtrend,63,334.23,-257.8
+R2_pullback_prev_downtrend_or_transition,33,14,19,42.42,2.4173,1.7811,113.14,103.24,1.6858,38.79,2,74.46,4,4,R2_pullback_prev_downtrend_or_transition,R2_pullback_short_v2_hours05_18,"downtrend,transition",63,334.23,-221.09
+R2_cont_prev_downtrend_only,14,10,4,71.43,1.8128,4.5321,203.66,199.46,4.3887,41.85,14,203.66,1,0,R2_cont_prev_downtrend_only,R2_continuation_short_v4_atr45_daily_loss10,downtrend,57,589.46,-385.8
+R2_cont_prev_downtrend_or_transition,44,27,17,61.36,2.3196,3.684,543.22,530.02,3.5544,41.85,44,543.22,2,0,R2_cont_prev_downtrend_or_transition,R2_continuation_short_v4_atr45_daily_loss10,"downtrend,transition",57,589.46,-46.24
+R3_prev_compression_only,54,37,17,68.52,3.0782,6.6995,3288.68,3272.48,6.6218,577.01,0,0.0,7,3,R3_prev_compression_only,R3_compression_long_v1,compression,215,12194.08,-8905.4
+R3_prev_compression_or_chop,89,54,35,60.67,2.2178,3.4218,3657.85,3631.15,3.3875,709.71,1,-204.7,10,9,R3_prev_compression_or_chop,R3_compression_long_v1,"chop,compression",215,12194.08,-8536.23
+R4_prev_chop_only,164,50,114,30.49,1.9366,0.8494,-60.53,-109.73,0.7483,111.91,6,-43.89,7,9,R4_prev_chop_only,R4_chop_prior_day_reclaim_both,chop,526,95.06,-155.59
+R4_prev_chop_or_compression,166,50,116,30.12,1.9287,0.8313,-69.24,-119.04,0.7327,111.91,6,-43.89,7,11,R4_prev_chop_or_compression,R4_chop_prior_day_reclaim_both,"chop,compression",526,95.06,-164.3

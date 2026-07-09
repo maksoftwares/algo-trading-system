@@ -1,0 +1,5 @@
+name,trades,wins,losses,wr_pct,wl,pf,net,stress_net_030,stress_pf_030,max_closed_dd,recent3_trades,recent3_net,positive_months,negative_months,portfolio,components
+baseline_R1_plus_R2_current_best,678,346,332,51.03,2.6082,2.7182,9640.05,9436.65,2.6526,889.69,59,764.92,24,18,baseline_R1_plus_R2_current_best,existing exact-MT5 combined R1+R2 pullback+R2 continuation
+overlay_strict_named_regimes,675,314,361,46.52,3.1031,2.6991,9512.07,9309.57,2.6314,951.63,21,191.47,24,20,overlay_strict_named_regimes,R1 uptrend + R2 downtrend + R3 compression + R4 chop
+overlay_transition_tolerant,742,349,393,47.04,2.8546,2.535,10257.51,10034.91,2.4757,951.63,53,369.09,21,23,overlay_transition_tolerant,R1 uptrend + R2 downtrend/transition + R3 compression/chop + R4 chop
+overlay_no_R4_transition_tolerant,578,299,279,51.73,2.4661,2.6429,10318.04,10144.64,2.594,951.63,47,412.98,21,20,overlay_no_R4_transition_tolerant,R1 uptrend + R2 downtrend/transition + R3 compression/chop
