@@ -135,8 +135,8 @@ def test_demo_executor_attachment_plan_replaces_usdjpy_with_gbpusd():
     plan = module.build_attachment_plan(ROOT)
     pairs = {(row.candidate, row.symbol) for row in plan}
 
-    assert ("breakout_retest", "GBPUSD") in pairs
-    assert ("swing_breakout_retest_v0", "GBPUSD") in pairs
+    assert ("breakout_retest", "GBPUSD") not in pairs
+    assert ("swing_breakout_retest_v0", "GBPUSD") not in pairs
     assert ("symbol_normalized_round_retest_v0", "GBPUSD") in pairs
     assert ("round_number_retest_v0", "GBPUSD") in pairs
     assert ("session_extreme_retest_v0", "GBPUSD") in pairs

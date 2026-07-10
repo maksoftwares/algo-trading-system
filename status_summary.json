@@ -36,6 +36,8 @@
     "overall_status": "NO_GO_RESEARCH_ONLY",
     "portfolio_control": {
       "admission_status": "RESEARCH_CONTROL_NOT_DEPLOYMENT_AUTHORIZED",
+      "checkout_representation": "git_lf_checkout_of_frozen_crlf_artifact",
+      "checkout_sha256": "b49a13594bb8146790d433598ad5b195486c4dc113e5c9a2b898b2a4c1309580",
       "id": "current_r1_r2_baseline",
       "ledger": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv",
       "ledger_sha256": "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52",
@@ -117,10 +119,10 @@
       }
     }
   },
-  "generated_at_utc": "2026-07-10T14:52:49.828621Z",
+  "generated_at_utc": "2026-07-10T15:11:59.001734Z",
   "repo": {
-    "base_commit": "006824cde421ea61a0bcdb074804f9ccf95c17a9",
-    "branch": "codex/xau-profitable-system-governance"
+    "base_commit": "c12f024802135bdb61e817db4fe4f8e10ba0a683",
+    "branch": "codex/xau-router-entry-hold-audit"
   },
   "schema_version": "a1_xau_governance_status_v1",
   "source_documents": {

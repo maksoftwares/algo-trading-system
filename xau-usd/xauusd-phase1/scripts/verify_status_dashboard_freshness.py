@@ -501,8 +501,25 @@ def _verify_governance_status_dashboard(
     ledger_path = repo_root / str(control.get("ledger", ""))
     if not ledger_path.is_file():
         errors.append(f"missing frozen current-control ledger: {ledger_path}")
-    elif hashlib.sha256(ledger_path.read_bytes()).hexdigest() != CURRENT_CONTROL_LEDGER_SHA256:
-        errors.append(f"frozen current-control ledger hash mismatch: {ledger_path}")
+    else:
+        ledger_bytes = ledger_path.read_bytes()
+        checkout_sha256 = hashlib.sha256(ledger_bytes).hexdigest()
+        crlf_sha256 = (
+            hashlib.sha256(ledger_bytes.replace(b"\n", b"\r\n")).hexdigest()
+            if b"\r" not in ledger_bytes
+            else ""
+        )
+        if checkout_sha256 != CURRENT_CONTROL_LEDGER_SHA256 and crlf_sha256 != CURRENT_CONTROL_LEDGER_SHA256:
+            errors.append(f"frozen current-control ledger hash mismatch: {ledger_path}")
+        if control.get("checkout_sha256") != checkout_sha256:
+            errors.append("frozen current-control checkout hash does not match status provenance")
+        expected_representation = (
+            "exact_frozen_bytes"
+            if checkout_sha256 == CURRENT_CONTROL_LEDGER_SHA256
+            else "git_lf_checkout_of_frozen_crlf_artifact"
+        )
+        if control.get("checkout_representation") != expected_representation:
+            errors.append("frozen current-control checkout representation is incorrect")
 
     markdown = markdown_path.read_text(encoding="utf-8", errors="replace")
     dashboard = status_path.read_text(encoding="utf-8", errors="replace")

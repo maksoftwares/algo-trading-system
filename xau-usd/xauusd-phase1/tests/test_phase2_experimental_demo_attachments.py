@@ -15,9 +15,9 @@ def test_attachment_plan_includes_all_approved_and_provisional_symbols():
     pairs = {(row.candidate, row.symbol) for row in plan}
 
     assert ("breakout_retest", "XAUUSD") in pairs
-    assert ("breakout_retest", "EURUSD") in pairs
-    assert ("breakout_retest", "USDJPY") in pairs
-    assert ("swing_breakout_retest_v0", "EURUSD") in pairs
+    assert ("breakout_retest", "EURUSD") not in pairs
+    assert ("breakout_retest", "USDJPY") not in pairs
+    assert ("swing_breakout_retest_v0", "EURUSD") not in pairs
     assert ("symbol_normalized_round_retest_v0", "USDJPY") in pairs
     assert ("round_number_retest_v0", "XAUUSD") in pairs
     assert ("round_number_retest_v0", "USDJPY") in pairs

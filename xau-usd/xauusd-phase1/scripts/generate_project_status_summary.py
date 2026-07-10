@@ -1239,11 +1239,20 @@ def _generate_governance_status(
     if not ledger_path.is_file():
         raise FileNotFoundError(f"Frozen current-control ledger is missing: {ledger_path}")
     actual_ledger_sha256 = _sha256_file(ledger_path)
+    ledger_representation = "exact_frozen_bytes"
     if actual_ledger_sha256 != CURRENT_CONTROL_LEDGER_SHA256:
-        raise ValueError(
-            "Frozen current-control ledger SHA256 mismatch: "
-            f"expected={CURRENT_CONTROL_LEDGER_SHA256}; actual={actual_ledger_sha256}; path={ledger_path}"
-        )
+        raw = ledger_path.read_bytes()
+        # Git stores this tracked CSV with LF endings, while the immutable MT5/Python
+        # artifact named by the preregistration was hashed with CRLF endings. Accept
+        # only the exact Git-normalized byte representation of that same artifact.
+        crlf_sha256 = hashlib.sha256(raw.replace(b"\n", b"\r\n")).hexdigest() if b"\r" not in raw else ""
+        if crlf_sha256 == CURRENT_CONTROL_LEDGER_SHA256:
+            ledger_representation = "git_lf_checkout_of_frozen_crlf_artifact"
+        else:
+            raise ValueError(
+                "Frozen current-control ledger SHA256 mismatch: "
+                f"expected={CURRENT_CONTROL_LEDGER_SHA256}; actual={actual_ledger_sha256}; path={ledger_path}"
+            )
     source_documents = {
         key: {
             "path": _rel(repo_root, path),
@@ -1260,7 +1269,9 @@ def _generate_governance_status(
             "status": "CURRENT_RESEARCH_CONTROL",
             "admission_status": "RESEARCH_CONTROL_NOT_DEPLOYMENT_AUTHORIZED",
             "ledger": CURRENT_CONTROL_LEDGER_PATH,
-            "ledger_sha256": actual_ledger_sha256,
+            "ledger_sha256": CURRENT_CONTROL_LEDGER_SHA256,
+            "checkout_sha256": actual_ledger_sha256,
+            "checkout_representation": ledger_representation,
             "metrics": {
                 "trades": 678,
                 "win_rate_pct": 51.03,

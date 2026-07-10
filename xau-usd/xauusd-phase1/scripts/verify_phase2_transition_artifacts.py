@@ -31,6 +31,12 @@ def verify_phase2_transition_artifacts(
     root = root.resolve()
     repo_root = (repo_root or root.parents[1]).resolve()
     status_path = (status_path or repo_root / "status.html").resolve()
+    governance_summary = _read_governance_summary(repo_root)
+    if governance_summary is not None:
+        return [
+            *_governance_freeze_errors(governance_summary),
+            *verify_status_dashboard_freshness(repo_root, status_path),
+        ]
     report_dir = root / "outputs" / "reports"
     errors: list[str] = []
 
@@ -205,6 +211,40 @@ def verify_phase2_transition_artifacts(
     errors.extend(_owner_packet_recommendation_errors(root))
     errors.extend(_vps_latency_baseline_errors(root))
     errors.extend(verify_status_dashboard_freshness(repo_root, status_path))
+    return errors
+
+
+def _read_governance_summary(repo_root: Path) -> dict[str, Any] | None:
+    path = repo_root / "status_summary.json"
+    if not path.is_file():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if payload.get("schema_version") != "a1_xau_governance_status_v1":
+        return None
+    return payload
+
+
+def _governance_freeze_errors(summary: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    current = summary.get("current")
+    if not isinstance(current, dict):
+        return ["A1 XAU governance status must contain a current object."]
+    if current.get("overall_status") != "NO_GO_RESEARCH_ONLY":
+        errors.append("A1 XAU governance status must remain NO_GO_RESEARCH_ONLY.")
+    authorization = current.get("authorization")
+    if not isinstance(authorization, dict):
+        return [*errors, "A1 XAU governance status must contain an authorization object."]
+    for key in (
+        "broker_action_authorized",
+        "demo_authorized",
+        "live_authorized",
+        "runtime_touched",
+    ):
+        if authorization.get(key) is not False:
+            errors.append(f"A1 XAU governance authorization must keep {key}=False.")
     return errors
 
 

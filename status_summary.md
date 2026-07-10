@@ -2,9 +2,9 @@
 
 Status: `NO_GO_RESEARCH_ONLY`
 Schema: `a1_xau_governance_status_v1`
-Generated UTC: `2026-07-10T14:52:49.828621Z`
-Branch: `codex/xau-profitable-system-governance`
-Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
+Generated UTC: `2026-07-10T15:11:59.001734Z`
+Branch: `codex/xau-router-entry-hold-audit`
+Base commit: `c12f024802135bdb61e817db4fe4f8e10ba0a683`
 
 This is the only authoritative current status surface. Historical phase/runtime summaries are non-authorizing.
 

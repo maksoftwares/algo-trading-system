@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import shutil
@@ -103,6 +104,12 @@ def test_governance_summary_is_single_current_truth_and_writes_phase_local_point
     assert control["id"] == "current_r1_r2_baseline"
     assert control["status"] == "CURRENT_RESEARCH_CONTROL"
     assert control["ledger_sha256"] == "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
+    fixture_ledger = repo / LEDGER_RELATIVE
+    assert control["checkout_sha256"] == hashlib.sha256(fixture_ledger.read_bytes()).hexdigest()
+    assert control["checkout_representation"] in {
+        "exact_frozen_bytes",
+        "git_lf_checkout_of_frozen_crlf_artifact",
+    }
     assert control["metrics"] == {
         "active_weekdays_pct_approx": 21.28,
         "max_closed_drawdown_usd": 889.69,

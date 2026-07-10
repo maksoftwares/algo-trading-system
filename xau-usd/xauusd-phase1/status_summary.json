@@ -2,7 +2,7 @@
   "authoritative_schema": "a1_xau_governance_status_v1",
   "canonical_json": "../../status_summary.json",
   "canonical_markdown": "../../status_summary.md",
-  "generated_at_utc": "2026-07-10T14:52:49.828621Z",
+  "generated_at_utc": "2026-07-10T15:11:59.001734Z",
   "message": "This phase-local status location is a pointer only and carries no current authorization claim.",
   "schema_version": "a1_xau_status_pointer_v1",
   "status": "LEGACY_LOCATION_NOT_CANONICAL"
