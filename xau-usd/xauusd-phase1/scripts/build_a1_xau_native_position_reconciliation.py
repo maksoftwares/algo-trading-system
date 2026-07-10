@@ -319,6 +319,16 @@ def _resolve_recorded_source(recorded: str, *, raw_root: Path | None) -> Path:
             add(root / suffix)
             if root.name.lower() == "xauusd-phase1":
                 add(root / Path(*recorded_path.parts[marker + 2 :]))
+        # A structured rebase under the explicit authority root is deterministic;
+        # avoid recursively rescanning a large raw tree for every baseline row.
+        if len(candidates) == 1:
+            return candidates[0]
+        if len(candidates) > 1:
+            _fail(
+                "recorded source_csv structured resolution is ambiguous",
+                source_csv=recorded,
+                candidates=[str(path) for path in candidates],
+            )
         add(root / recorded_path.name)
         for candidate in sorted(root.rglob(recorded_path.name), key=lambda item: str(item).lower()):
             add(candidate)
@@ -830,6 +840,7 @@ def build_native_position_reconciliation(
         )
 
     source_cache: dict[Path, _SourceEvidence] = {}
+    source_resolution_cache: dict[str, Path] = {}
     source_id_paths: defaultdict[str, set[Path]] = defaultdict(set)
     mapped: list[_IdentityMapping] = []
     source_row_owners: set[tuple[Path, str]] = set()
@@ -840,7 +851,11 @@ def build_native_position_reconciliation(
     # Pass 1 performs identity mapping only.  P/L and legacy exit values are not
     # inspected until every entry-deal-to-position mapping has been locked.
     for ordinal, baseline in enumerate(baseline_rows, start=2):
-        path = _resolve_recorded_source(baseline["source_csv"], raw_root=raw_root)
+        recorded_source = baseline["source_csv"]
+        path = source_resolution_cache.get(recorded_source)
+        if path is None:
+            path = _resolve_recorded_source(recorded_source, raw_root=raw_root)
+            source_resolution_cache[recorded_source] = path
         evidence = source_cache.get(path)
         if evidence is None:
             evidence = _load_source_evidence(path)

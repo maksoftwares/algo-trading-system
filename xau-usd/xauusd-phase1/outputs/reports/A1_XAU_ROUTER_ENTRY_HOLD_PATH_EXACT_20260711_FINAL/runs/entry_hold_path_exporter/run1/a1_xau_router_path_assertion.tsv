@@ -1,0 +1,9 @@
+schema_version	run_id	tester_time_msc	callback_sequence	event_sequence	timestamp_broker	assertion	status	detail
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		tester_only	PASS	MQL_TESTER=true
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		frozen_router_inputs	PASS	14/20/50/5/2/true/3/95/60/30/5/1
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		trade_sessions	PASS	SymbolInfoSessionTrade intervals loaded
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		indicator_handles	PASS	D1/H4/H1/M15/M5 EMA20/EMA50/ATR14
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		schedule_header_exact	PASS	27 outcome-free fields
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	0	0	0		schedule_source_counts	PASS	145/413/57/63 total=678
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	1782777599290	204204660	445316	2026.06.29 23:59:59	all_678_schedule_rows_complete	PASS	signal=678,entry=678,exit=678,h1_hold=35221
+a1_xau_router_entry_hold_path_export_v1	A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260710	1782777599290	204204660	445316	2026.06.29 23:59:59	zero_execution_surface_runtime	PASS	virtual positions only
