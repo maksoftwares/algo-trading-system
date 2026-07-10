@@ -13,6 +13,59 @@ from typing import Any
 DEFAULT_JSON = Path("status_summary.json")
 DEFAULT_MD = Path("status_summary.md")
 
+GOVERNANCE_SCHEMA = "a1_xau_governance_status_v1"
+GOVERNANCE_POINTER_SCHEMA = "a1_xau_status_pointer_v1"
+GOVERNANCE_NORTH_STAR = (
+    "Build an automated XAUUSD system that produces positive net returns over rolling 6- and 12-month "
+    "periods, survives realistic costs and regime changes, limits portfolio equity drawdown, and can "
+    "eventually support controlled withdrawals from accumulated profits."
+)
+GOVERNANCE_DOCUMENT_NAMES = {
+    "master_direction": "A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
+    "current_research_freeze": "A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md",
+    "router_entry_hold_path_audit_prereg": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md",
+}
+GOVERNANCE_REQUIRED_STATEMENTS = [
+    "R1+R2 = current research control",
+    "R3 = standalone shadow only",
+    "R3 portfolio use = killed by DD gate",
+    "R4 = no survivor",
+    "no demo/live authorization",
+    "next task = router entry/hold path audit",
+]
+CURRENT_CONTROL_LEDGER_SHA256 = "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
+CURRENT_CONTROL_LEDGER_PATH = (
+    "xau-usd/xauusd-phase1/outputs/reports/"
+    "A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_"
+    "current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv"
+)
+GOVERNANCE_RULE_ADMISSIBILITY_SOURCES = [
+    {
+        "source_id": "h4_d1_long_best_box2_atr80",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "PREVIOUS_MONTH_PNL_HEALTH_GATE",
+        "retained_rule": "Previous-month P/L health gate (enabled; minimum net -$50)",
+    },
+    {
+        "source_id": "r1_h1_pullback_long_v1",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "R1_DIRECTIONAL_SESSION_GATE",
+        "retained_rule": "R1 directional session 09 <= hour < 15",
+    },
+    {
+        "source_id": "r2_pullback_rejection_short_v1",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "R2_DIRECTIONAL_SESSION_GATE",
+        "retained_rule": "R2 directional session 05 <= hour < 19",
+    },
+    {
+        "source_id": "r2_continuation_short_v1",
+        "admissibility_issue_type": "SOURCE_LOCAL_CONTAINMENT_NOT_ADMISSION_EVIDENCE",
+        "retained_rule_type": "R2_DAILY_LOSS_STOP",
+        "retained_rule": "R2 $10 daily-loss stop",
+    },
+]
+
 
 def generate_project_status_summary(
     repo_root: Path,
@@ -26,6 +79,19 @@ def generate_project_status_summary(
     now = now or datetime.now(timezone.utc)
 
     phase1_root = repo_root / "xau-usd" / "xauusd-phase1"
+    governance_documents = {
+        key: phase1_root / "docs" / filename for key, filename in GOVERNANCE_DOCUMENT_NAMES.items()
+    }
+    if all(path.is_file() for path in governance_documents.values()):
+        return _generate_governance_status(
+            repo_root=repo_root,
+            phase1_root=phase1_root,
+            output_json=output_json,
+            output_md=output_md,
+            now=now,
+            documents=governance_documents,
+        )
+
     phase1_reports = phase1_root / "outputs" / "reports"
     quarantine_report = phase1_reports / "XAUUSD_ROUND_FAMILY_QUARANTINE_APPLIED_2026_06_17.json"
     a3_attachment_report = phase1_reports / "A3_TIER1_COMPAT_BROKER_ACTION_ATTACHMENT_2026_06_17.json"
@@ -1157,6 +1223,314 @@ def generate_project_status_summary(
     output_json.write_text(json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8")
     output_md.write_text(_render_markdown(summary), encoding="utf-8")
     return output_json, output_md
+
+
+def _generate_governance_status(
+    *,
+    repo_root: Path,
+    phase1_root: Path,
+    output_json: Path,
+    output_md: Path,
+    now: datetime,
+    documents: dict[str, Path],
+) -> tuple[Path, Path]:
+    generated_at = now.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    ledger_path = repo_root / CURRENT_CONTROL_LEDGER_PATH
+    if not ledger_path.is_file():
+        raise FileNotFoundError(f"Frozen current-control ledger is missing: {ledger_path}")
+    actual_ledger_sha256 = _sha256_file(ledger_path)
+    if actual_ledger_sha256 != CURRENT_CONTROL_LEDGER_SHA256:
+        raise ValueError(
+            "Frozen current-control ledger SHA256 mismatch: "
+            f"expected={CURRENT_CONTROL_LEDGER_SHA256}; actual={actual_ledger_sha256}; path={ledger_path}"
+        )
+    source_documents = {
+        key: {
+            "path": _rel(repo_root, path),
+            "sha256": _sha256_file(path),
+        }
+        for key, path in documents.items()
+    }
+    current = {
+        "overall_status": "NO_GO_RESEARCH_ONLY",
+        "north_star": GOVERNANCE_NORTH_STAR,
+        "required_current_statements": list(GOVERNANCE_REQUIRED_STATEMENTS),
+        "portfolio_control": {
+            "id": "current_r1_r2_baseline",
+            "status": "CURRENT_RESEARCH_CONTROL",
+            "admission_status": "RESEARCH_CONTROL_NOT_DEPLOYMENT_AUTHORIZED",
+            "ledger": CURRENT_CONTROL_LEDGER_PATH,
+            "ledger_sha256": actual_ledger_sha256,
+            "metrics": {
+                "trades": 678,
+                "win_rate_pct": 51.03,
+                "realized_win_loss": 2.6082,
+                "profit_factor": 2.7182,
+                "net_usd": 9640.05,
+                "stress_net_minus_0_30_per_ticket_usd": 9436.65,
+                "recent_three_month_net_usd": 764.92,
+                "max_closed_drawdown_usd": 889.69,
+                "positive_months": 26,
+                "active_weekdays_pct_approx": 21.28,
+            },
+        },
+        "specialists": {
+            "R1": {
+                "status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+                "role": "Primary bullish/uptrend profit engine",
+            },
+            "R2": {
+                "status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+                "role": "Strict downtrend hedge and secondary profit source",
+            },
+            "R3": {
+                "standalone_status": "STANDALONE_SHADOW_ONLY",
+                "portfolio_status": "KILLED_BY_DD_GATE",
+            },
+            "R4": {
+                "status": "NO_SURVIVOR",
+                "chop_default": "NO_TRADE",
+            },
+        },
+        "rule_admissibility": {
+            "status": "BLOCKED_LEGACY_RULE_ADMISSIBILITY",
+            "identity_scope": "PRESERVES_678_ROW_AUDIT_IDENTITY_ONLY",
+            "audit_identity_rows": 678,
+            "rules_endorsed_for_integrated_admission": False,
+            "sources": [dict(item) for item in GOVERNANCE_RULE_ADMISSIBILITY_SOURCES],
+            "integrated_admission_requirement": (
+                "Independently qualified rule-clean sources or later reviewed governance"
+            ),
+            "future_containment_requirement": "SHARED_PREREGISTERED_INTEGRATED_RISK_POLICY",
+            "source_local_containment_reusable_for_standalone_admission": False,
+            "otherwise": "NO_GO",
+            "router_audit_rule_change_authorized": False,
+        },
+        "attribution_status": "REPAIR_REQUIRED_NATIVE_POSITION_JOIN",
+        "attribution_repair": {
+            "total_rows": 678,
+            "legacy_pairing_method": "FIFO_BY_DIRECTION",
+            "non_native_exit_deal_rows": 388,
+            "non_native_individual_pnl_rows": 387,
+            "aggregate_exit_pnl_multiset_exact": True,
+            "source_totals_exact": True,
+            "portfolio_totals_exact": True,
+            "native_positions_recoverable": True,
+            "native_position_count": 678,
+            "required_before_classification": (
+                "OUTCOME_BLIND_ENTRY_DEAL_TO_NATIVE_POSITION_ID_JOIN_AND_RECONCILIATION"
+            ),
+            "fifo_fallback_authorized": False,
+            "strategy_change_authorized": False,
+        },
+        "historical_evidence": {
+            "through": "2026-06-30",
+            "classification": "DEVELOPMENT_DATA",
+            "untouched_holdout": False,
+        },
+        "authorization": {
+            "demo_authorized": False,
+            "live_authorized": False,
+            "broker_action_authorized": False,
+            "runtime_touched": False,
+        },
+        "next_task": {
+            "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+            "status": "PREREGISTERED_NOT_RUN",
+            "strategy_change_authorized": False,
+            "ea_trading_logic_change": "NONE",
+        },
+    }
+    summary: dict[str, Any] = {
+        "schema_version": GOVERNANCE_SCHEMA,
+        "generated_at_utc": generated_at,
+        "repo": {
+            "branch": _git(repo_root, "branch", "--show-current"),
+            "base_commit": _git(repo_root, "rev-parse", "HEAD"),
+        },
+        "source_documents": source_documents,
+        "current": current,
+    }
+
+    output_json.parent.mkdir(parents=True, exist_ok=True)
+    output_md.parent.mkdir(parents=True, exist_ok=True)
+    output_json.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    output_md.write_text(_render_governance_markdown(summary), encoding="utf-8")
+    _write_phase_local_status_pointers(phase1_root, generated_at)
+    return output_json, output_md
+
+
+def _render_governance_markdown(summary: dict[str, Any]) -> str:
+    current = _mapping(summary.get("current"))
+    control = _mapping(current.get("portfolio_control"))
+    metrics = _mapping(control.get("metrics"))
+    specialists = _mapping(current.get("specialists"))
+    r1 = _mapping(specialists.get("R1"))
+    r2 = _mapping(specialists.get("R2"))
+    r3 = _mapping(specialists.get("R3"))
+    r4 = _mapping(specialists.get("R4"))
+    rule_admissibility = _mapping(current.get("rule_admissibility"))
+    attribution_repair = _mapping(current.get("attribution_repair"))
+    history = _mapping(current.get("historical_evidence"))
+    authorization = _mapping(current.get("authorization"))
+    next_task = _mapping(current.get("next_task"))
+    repo = _mapping(summary.get("repo"))
+    documents = _mapping(summary.get("source_documents"))
+
+    lines = [
+        "# A1 XAUUSD Current Governance Status",
+        "",
+        f"Status: `{current.get('overall_status', 'UNKNOWN')}`",
+        f"Schema: `{summary.get('schema_version', '')}`",
+        f"Generated UTC: `{summary.get('generated_at_utc', '')}`",
+        f"Branch: `{repo.get('branch', '')}`",
+        f"Base commit: `{repo.get('base_commit', '')}`",
+        "",
+        "This is the only authoritative current status surface. Historical phase/runtime summaries are non-authorizing.",
+        "",
+        "## North star",
+        "",
+        f"> {current.get('north_star', '')}",
+        "",
+        "## Required current statements",
+        "",
+        "```text",
+        *[str(item) for item in current.get("required_current_statements", [])],
+        "```",
+        "",
+        "## Current research control",
+        "",
+        f"Control: `{control.get('id', '')}`",
+        f"Standing: `{control.get('status', '')}`; `{control.get('admission_status', '')}`",
+        f"Ledger SHA256: `{control.get('ledger_sha256', '')}`",
+        "",
+        "| Metric | Value |",
+        "| --- | ---: |",
+        f"| Trades | `{metrics.get('trades', '')}` |",
+        f"| Win rate | `{metrics.get('win_rate_pct', '')}%` |",
+        f"| Realized W/L | `{metrics.get('realized_win_loss', '')}` |",
+        f"| Profit factor | `{metrics.get('profit_factor', '')}` |",
+        f"| Net | `+${metrics.get('net_usd', 0):,.2f}` |",
+        f"| Stress net at -$0.30/ticket | `+${metrics.get('stress_net_minus_0_30_per_ticket_usd', 0):,.2f}` |",
+        f"| Recent-three-month net | `+${metrics.get('recent_three_month_net_usd', 0):,.2f}` |",
+        f"| Maximum closed drawdown | `${metrics.get('max_closed_drawdown_usd', 0):,.2f}` |",
+        f"| Positive months | `{metrics.get('positive_months', '')}` |",
+        f"| Active weekdays | `approximately {metrics.get('active_weekdays_pct_approx', '')}%` |",
+        "",
+        "## Specialist ownership",
+        "",
+        "| Specialist | Current standing | Role / default |",
+        "| --- | --- | --- |",
+        f"| R1 | `{r1.get('status', '')}` | {r1.get('role', '')} |",
+        f"| R2 | `{r2.get('status', '')}` | {r2.get('role', '')} |",
+        f"| R3 | `{r3.get('standalone_status', '')}`; `{r3.get('portfolio_status', '')}` | Portfolio use killed by DD gate |",
+        f"| R4 | `{r4.get('status', '')}` | Chop default `{r4.get('chop_default', '')}` |",
+        "",
+        "## Post-audit rule admissibility",
+        "",
+        f"Status: `{rule_admissibility.get('status', '')}`",
+        f"Identity scope: `{rule_admissibility.get('identity_scope', '')}`",
+        "",
+        "The four retained rules below preserve the 678-row audit identity only; they are not endorsed for integration.",
+        "The first three are forbidden selection rules. The R2 $10 daily-loss stop is source-local containment, not standalone alpha/admission evidence, and cannot be reused as such.",
+        "Future containment must be a shared preregistered integrated risk policy.",
+        "Integrated admission requires independently qualified rule-clean sources or later reviewed governance.",
+        "Otherwise the result is `NO_GO`. The router audit cannot remove or repair these rules.",
+        "",
+        "| Frozen source | Admissibility issue | Retained rule type | Retained rule |",
+        "| --- | --- | --- | --- |",
+    ]
+    for source in rule_admissibility.get("sources", []):
+        source = _mapping(source)
+        lines.append(
+            f"| `{source.get('source_id', '')}` | `{source.get('admissibility_issue_type', '')}` | "
+            f"`{source.get('retained_rule_type', '')}` | {source.get('retained_rule', '')} |"
+        )
+    lines.extend(
+        [
+        "",
+        "## Native-position attribution repair",
+        "",
+        f"Attribution status: `{current.get('attribution_status', '')}`",
+        "",
+        (
+            f"The legacy direction-FIFO parser assigned a non-native exit deal to "
+            f"`{attribution_repair.get('non_native_exit_deal_rows', '')}/"
+            f"{attribution_repair.get('total_rows', '')}` rows and non-native individual P/L to "
+            f"`{attribution_repair.get('non_native_individual_pnl_rows', '')}/"
+            f"{attribution_repair.get('total_rows', '')}` rows."
+        ),
+        "The aggregate exit/P&L multiset and source/portfolio totals remain exact, and all 678 native positions are recoverable.",
+        "The audit must complete the outcome-blind native position join and reconcile it before any router classification.",
+        "FIFO fallback is prohibited. This is evidence-attribution repair only; no strategy change is authorized.",
+        "",
+        "## Evidence and authorization boundary",
+        "",
+        f"All inspected history through `{history.get('through', '')}` is `{history.get('classification', '')}`.",
+        "It is not an untouched holdout.",
+        "",
+        "| Authorization fact | Value |",
+        "| --- | ---: |",
+        f"| Demo authorized | `{str(authorization.get('demo_authorized', False)).lower()}` |",
+        f"| Live authorized | `{str(authorization.get('live_authorized', False)).lower()}` |",
+        f"| Broker action authorized | `{str(authorization.get('broker_action_authorized', False)).lower()}` |",
+        f"| Runtime touched | `{str(authorization.get('runtime_touched', False)).lower()}` |",
+        "",
+        "## Immediate next task",
+        "",
+        f"Next task: `{next_task.get('id', '')}`",
+        f"Status: `{next_task.get('status', '')}`",
+        f"Strategy change authorized: `{str(next_task.get('strategy_change_authorized', False)).lower()}`",
+        f"EA trading-logic change: `{next_task.get('ea_trading_logic_change', '')}`",
+        "",
+        "## Governing documents",
+        "",
+        "| Document | SHA256 |",
+        "| --- | --- |",
+        ]
+    )
+    for key in GOVERNANCE_DOCUMENT_NAMES:
+        document = _mapping(documents.get(key))
+        path = str(document.get("path", ""))
+        lines.append(f"| [{key}]({path}) | `{document.get('sha256', '')}` |")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _write_phase_local_status_pointers(phase1_root: Path, generated_at: str) -> None:
+    pointer_json = phase1_root / DEFAULT_JSON
+    pointer_md = phase1_root / DEFAULT_MD
+    pointer = {
+        "schema_version": GOVERNANCE_POINTER_SCHEMA,
+        "status": "LEGACY_LOCATION_NOT_CANONICAL",
+        "generated_at_utc": generated_at,
+        "authoritative_schema": GOVERNANCE_SCHEMA,
+        "canonical_json": "../../status_summary.json",
+        "canonical_markdown": "../../status_summary.md",
+        "message": "This phase-local status location is a pointer only and carries no current authorization claim.",
+    }
+    pointer_json.parent.mkdir(parents=True, exist_ok=True)
+    pointer_json.write_text(json.dumps(pointer, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    pointer_md.write_text(
+        "\n".join(
+            [
+                "# Legacy Phase-Local Status Pointer",
+                "",
+                "Status: `LEGACY_LOCATION_NOT_CANONICAL`",
+                "",
+                "This phase-local path is non-authoritative and carries no current trading or authorization claim.",
+                "",
+                "Use the repository-root [status_summary.md](../../status_summary.md) and "
+                "[status_summary.json](../../status_summary.json).",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _read_json(path: Path) -> dict[str, Any]:

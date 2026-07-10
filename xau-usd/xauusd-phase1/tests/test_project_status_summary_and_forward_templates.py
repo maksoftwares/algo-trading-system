@@ -50,6 +50,7 @@ def test_project_status_summary_records_account_boundaries(tmp_path: Path):
         "SQ-03 offline Python discovery sweep with frequency-quality and loss-attribution table",
         "Green CI run tied to the exact source commit before any shadow-terminal attachment",
         "A3 remains paused; no broker action, profile arming, or runtime attach before evidence gates pass",
+        "A1 XAU M5 momentum-continuation lane: capture first magic 932200 order-log row or guard-block row after a valid break-and-run signal",
     ]
     assert summary["authorization"]["canonical_phase2_pass"] is False
     assert summary["authorization"]["live_trading_authorized"] is False

@@ -2,15 +2,71 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import html
 import json
 from pathlib import Path
 from typing import Any
 
 
+GOVERNANCE_SCHEMA = "a1_xau_governance_status_v1"
+GOVERNANCE_NORTH_STAR = (
+    "Build an automated XAUUSD system that produces positive net returns over rolling 6- and 12-month "
+    "periods, survives realistic costs and regime changes, limits portfolio equity drawdown, and can "
+    "eventually support controlled withdrawals from accumulated profits."
+)
+GOVERNANCE_DOCUMENTS = {
+    "master_direction": "xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
+    "current_research_freeze": "xau-usd/xauusd-phase1/docs/A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md",
+    "router_entry_hold_path_audit_prereg": (
+        "xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md"
+    ),
+}
+GOVERNANCE_REQUIRED_STATEMENTS = [
+    "R1+R2 = current research control",
+    "R3 = standalone shadow only",
+    "R3 portfolio use = killed by DD gate",
+    "R4 = no survivor",
+    "no demo/live authorization",
+    "next task = router entry/hold path audit",
+]
+CURRENT_CONTROL_LEDGER_SHA256 = "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
+GOVERNANCE_RULE_ADMISSIBILITY_SOURCES = [
+    {
+        "source_id": "h4_d1_long_best_box2_atr80",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "PREVIOUS_MONTH_PNL_HEALTH_GATE",
+        "retained_rule": "Previous-month P/L health gate (enabled; minimum net -$50)",
+    },
+    {
+        "source_id": "r1_h1_pullback_long_v1",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "R1_DIRECTIONAL_SESSION_GATE",
+        "retained_rule": "R1 directional session 09 <= hour < 15",
+    },
+    {
+        "source_id": "r2_pullback_rejection_short_v1",
+        "admissibility_issue_type": "FORBIDDEN_SELECTION_RULE",
+        "retained_rule_type": "R2_DIRECTIONAL_SESSION_GATE",
+        "retained_rule": "R2 directional session 05 <= hour < 19",
+    },
+    {
+        "source_id": "r2_continuation_short_v1",
+        "admissibility_issue_type": "SOURCE_LOCAL_CONTAINMENT_NOT_ADMISSION_EVIDENCE",
+        "retained_rule_type": "R2_DAILY_LOSS_STOP",
+        "retained_rule": "R2 $10 daily-loss stop",
+    },
+]
+
+
 def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None = None) -> list[str]:
     repo_root = repo_root.resolve()
     status_path = (status_path or repo_root / "status.html").resolve()
+    project_status_json_path = repo_root / "status_summary.json"
+    project_status = _read_json(project_status_json_path) if project_status_json_path.exists() else {}
+    if project_status.get("schema_version") == GOVERNANCE_SCHEMA:
+        return _verify_governance_status_dashboard(repo_root, status_path, project_status)
+
     phase0_reports = repo_root / "xau-usd" / "xauusd-phase0" / "outputs" / "reports"
     phase1_reports = repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports"
     phase3_reports = repo_root / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports"
@@ -256,6 +312,12 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         text = html.escape(str(value), quote=True)
         if text not in actual:
             errors.append(f"status.html is missing {label}: {value}")
+    observed_days = _to_float(soak.get("observed_days"))
+    required_days = _to_float(soak.get("required_days"))
+    if observed_days is not None and required_days is not None:
+        soak_fragment = f"{observed_days:g} of {required_days:g} trading days"
+        if soak_fragment not in actual:
+            errors.append(f"status.html is missing soak observed days: {soak.get('observed_days')}")
     vps_check_status = phase2_vps_selection_check.get("status")
     if vps_check_status:
         status_text = html.escape(str(vps_check_status), quote=True)
@@ -266,6 +328,239 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
         _verify_protected_breakout_core_summary(errors, project_status_summary_md, runtime_inventory)
     if a1_momentum_report:
         _verify_a1_momentum_summary(errors, actual, project_status_summary_md, a1_momentum_report)
+    return errors
+
+
+def _verify_governance_status_dashboard(
+    repo_root: Path,
+    status_path: Path,
+    summary: dict[str, Any],
+) -> list[str]:
+    errors: list[str] = []
+    markdown_path = repo_root / "status_summary.md"
+    if not status_path.exists():
+        errors.append(f"missing status dashboard: {status_path}")
+    if not markdown_path.exists():
+        errors.append(f"missing governance status markdown: {markdown_path}")
+    if errors:
+        return errors
+
+    current = _mapping(summary.get("current"))
+    repo = _mapping(summary.get("repo"))
+    control = _mapping(current.get("portfolio_control"))
+    metrics = _mapping(control.get("metrics"))
+    specialists = _mapping(current.get("specialists"))
+    r1 = _mapping(specialists.get("R1"))
+    r2 = _mapping(specialists.get("R2"))
+    r3 = _mapping(specialists.get("R3"))
+    r4 = _mapping(specialists.get("R4"))
+    rule_admissibility = _mapping(current.get("rule_admissibility"))
+    attribution_repair = _mapping(current.get("attribution_repair"))
+    history = _mapping(current.get("historical_evidence"))
+    authorization = _mapping(current.get("authorization"))
+    next_task = _mapping(current.get("next_task"))
+
+    if "commit" in repo:
+        errors.append("governance repo provenance must use base_commit, not ambiguous commit")
+    if "base_commit" not in repo:
+        errors.append("governance repo provenance is missing base_commit")
+
+    expected_values = [
+        ("overall status", current.get("overall_status"), "NO_GO_RESEARCH_ONLY"),
+        ("north star", current.get("north_star"), GOVERNANCE_NORTH_STAR),
+        ("control id", control.get("id"), "current_r1_r2_baseline"),
+        ("control status", control.get("status"), "CURRENT_RESEARCH_CONTROL"),
+        (
+            "control admission status",
+            control.get("admission_status"),
+            "RESEARCH_CONTROL_NOT_DEPLOYMENT_AUTHORIZED",
+        ),
+        ("control ledger SHA256", control.get("ledger_sha256"), CURRENT_CONTROL_LEDGER_SHA256),
+        ("control trades", metrics.get("trades"), 678),
+        ("control win rate", metrics.get("win_rate_pct"), 51.03),
+        ("control realized W/L", metrics.get("realized_win_loss"), 2.6082),
+        ("control PF", metrics.get("profit_factor"), 2.7182),
+        ("control net", metrics.get("net_usd"), 9640.05),
+        ("control stressed net", metrics.get("stress_net_minus_0_30_per_ticket_usd"), 9436.65),
+        ("control recent-three-month net", metrics.get("recent_three_month_net_usd"), 764.92),
+        ("control max closed DD", metrics.get("max_closed_drawdown_usd"), 889.69),
+        ("control positive months", metrics.get("positive_months"), 26),
+        ("control active weekdays", metrics.get("active_weekdays_pct_approx"), 21.28),
+        ("R1 status", r1.get("status"), "CURRENT_RESEARCH_CONTROL_COMPONENT"),
+        ("R1 role", r1.get("role"), "Primary bullish/uptrend profit engine"),
+        ("R2 status", r2.get("status"), "CURRENT_RESEARCH_CONTROL_COMPONENT"),
+        ("R2 role", r2.get("role"), "Strict downtrend hedge and secondary profit source"),
+        ("R3 standalone status", r3.get("standalone_status"), "STANDALONE_SHADOW_ONLY"),
+        ("R3 portfolio status", r3.get("portfolio_status"), "KILLED_BY_DD_GATE"),
+        ("R4 status", r4.get("status"), "NO_SURVIVOR"),
+        ("R4 chop default", r4.get("chop_default"), "NO_TRADE"),
+        (
+            "rule admissibility status",
+            rule_admissibility.get("status"),
+            "BLOCKED_LEGACY_RULE_ADMISSIBILITY",
+        ),
+        (
+            "rule admissibility identity scope",
+            rule_admissibility.get("identity_scope"),
+            "PRESERVES_678_ROW_AUDIT_IDENTITY_ONLY",
+        ),
+        ("rule admissibility audit rows", rule_admissibility.get("audit_identity_rows"), 678),
+        (
+            "integrated admission requirement",
+            rule_admissibility.get("integrated_admission_requirement"),
+            "Independently qualified rule-clean sources or later reviewed governance",
+        ),
+        (
+            "future containment requirement",
+            rule_admissibility.get("future_containment_requirement"),
+            "SHARED_PREREGISTERED_INTEGRATED_RISK_POLICY",
+        ),
+        ("rule admissibility failure status", rule_admissibility.get("otherwise"), "NO_GO"),
+        (
+            "attribution status",
+            current.get("attribution_status"),
+            "REPAIR_REQUIRED_NATIVE_POSITION_JOIN",
+        ),
+        ("attribution total rows", attribution_repair.get("total_rows"), 678),
+        ("attribution legacy pairing", attribution_repair.get("legacy_pairing_method"), "FIFO_BY_DIRECTION"),
+        ("non-native exit-deal rows", attribution_repair.get("non_native_exit_deal_rows"), 388),
+        ("non-native individual-P/L rows", attribution_repair.get("non_native_individual_pnl_rows"), 387),
+        ("native position count", attribution_repair.get("native_position_count"), 678),
+        (
+            "attribution repair required before classification",
+            attribution_repair.get("required_before_classification"),
+            "OUTCOME_BLIND_ENTRY_DEAL_TO_NATIVE_POSITION_ID_JOIN_AND_RECONCILIATION",
+        ),
+        ("development cutoff", history.get("through"), "2026-06-30"),
+        ("development classification", history.get("classification"), "DEVELOPMENT_DATA"),
+        ("next task", next_task.get("id"), "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1"),
+        ("next task status", next_task.get("status"), "PREREGISTERED_NOT_RUN"),
+        ("EA trading logic change", next_task.get("ea_trading_logic_change"), "NONE"),
+    ]
+    for label, actual, expected in expected_values:
+        if actual != expected:
+            errors.append(f"governance status {label} mismatch: actual={actual!r}; expected={expected!r}")
+
+    if current.get("required_current_statements") != GOVERNANCE_REQUIRED_STATEMENTS:
+        errors.append("governance required current statements are missing, reordered, or stale")
+    if rule_admissibility.get("sources") != GOVERNANCE_RULE_ADMISSIBILITY_SOURCES:
+        errors.append("governance rule-admissibility source list is missing, reordered, or stale")
+    for label, value in (
+        ("untouched holdout", history.get("untouched_holdout")),
+        ("demo authorization", authorization.get("demo_authorized")),
+        ("live authorization", authorization.get("live_authorized")),
+        ("broker action authorization", authorization.get("broker_action_authorized")),
+        ("runtime touched", authorization.get("runtime_touched")),
+        ("strategy change authorization", next_task.get("strategy_change_authorized")),
+        (
+            "legacy rules endorsed for integrated admission",
+            rule_admissibility.get("rules_endorsed_for_integrated_admission"),
+        ),
+        (
+            "router-audit rule change authorization",
+            rule_admissibility.get("router_audit_rule_change_authorized"),
+        ),
+        (
+            "source-local containment reusable for standalone admission",
+            rule_admissibility.get("source_local_containment_reusable_for_standalone_admission"),
+        ),
+        ("FIFO fallback authorization", attribution_repair.get("fifo_fallback_authorized")),
+        ("attribution strategy change authorization", attribution_repair.get("strategy_change_authorized")),
+    ):
+        if value is not False:
+            errors.append(f"governance status {label} must be boolean false; actual={value!r}")
+    for label, value in (
+        ("aggregate exit/P&L multiset exact", attribution_repair.get("aggregate_exit_pnl_multiset_exact")),
+        ("source totals exact", attribution_repair.get("source_totals_exact")),
+        ("portfolio totals exact", attribution_repair.get("portfolio_totals_exact")),
+        ("native positions recoverable", attribution_repair.get("native_positions_recoverable")),
+    ):
+        if value is not True:
+            errors.append(f"governance status {label} must be boolean true; actual={value!r}")
+
+    documents = _mapping(summary.get("source_documents"))
+    for key, expected_relative in GOVERNANCE_DOCUMENTS.items():
+        document = _mapping(documents.get(key))
+        if document.get("path") != expected_relative:
+            errors.append(
+                f"governance document path mismatch for {key}: "
+                f"actual={document.get('path')!r}; expected={expected_relative!r}"
+            )
+            continue
+        source_path = repo_root / expected_relative
+        if not source_path.is_file():
+            errors.append(f"missing governance source document {key}: {source_path}")
+            continue
+        actual_hash = hashlib.sha256(source_path.read_bytes()).hexdigest()
+        if document.get("sha256") != actual_hash:
+            errors.append(
+                f"governance source hash mismatch for {key}: "
+                f"status={document.get('sha256')!r}; actual={actual_hash!r}"
+            )
+
+    ledger_path = repo_root / str(control.get("ledger", ""))
+    if not ledger_path.is_file():
+        errors.append(f"missing frozen current-control ledger: {ledger_path}")
+    elif hashlib.sha256(ledger_path.read_bytes()).hexdigest() != CURRENT_CONTROL_LEDGER_SHA256:
+        errors.append(f"frozen current-control ledger hash mismatch: {ledger_path}")
+
+    markdown = markdown_path.read_text(encoding="utf-8", errors="replace")
+    dashboard = status_path.read_text(encoding="utf-8", errors="replace")
+    required_surface_fragments = [
+        GOVERNANCE_NORTH_STAR,
+        *GOVERNANCE_REQUIRED_STATEMENTS,
+        "current_r1_r2_baseline",
+        "STANDALONE_SHADOW_ONLY",
+        "KILLED_BY_DD_GATE",
+        "NO_SURVIVOR",
+        "NO_TRADE",
+        "BLOCKED_LEGACY_RULE_ADMISSIBILITY",
+        "PRESERVES_678_ROW_AUDIT_IDENTITY_ONLY",
+        "FORBIDDEN_SELECTION_RULE",
+        "SOURCE_LOCAL_CONTAINMENT_NOT_ADMISSION_EVIDENCE",
+        "PREVIOUS_MONTH_PNL_HEALTH_GATE",
+        "R1_DIRECTIONAL_SESSION_GATE",
+        "R2_DIRECTIONAL_SESSION_GATE",
+        "R2_DAILY_LOSS_STOP",
+        "h4_d1_long_best_box2_atr80",
+        "r1_h1_pullback_long_v1",
+        "r2_pullback_rejection_short_v1",
+        "r2_continuation_short_v1",
+        "preserve the 678-row audit identity only",
+        "Future containment must be a shared preregistered integrated risk policy.",
+        "Integrated admission requires independently qualified rule-clean sources or later reviewed governance.",
+        "Otherwise the result is",
+        "REPAIR_REQUIRED_NATIVE_POSITION_JOIN",
+        "388/678",
+        "387/678",
+        "source/portfolio totals remain exact",
+        "all 678 native positions are recoverable",
+        "before any router classification",
+        "no strategy change is authorized",
+        "2026-06-30",
+        "DEVELOPMENT_DATA",
+        "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+    ]
+    for name, surface in (("status_summary.md", markdown), ("status.html", dashboard)):
+        for fragment in required_surface_fragments:
+            if fragment not in surface:
+                errors.append(f"{name} is missing governance fragment: {fragment}")
+        for stale in (
+            "BROKER_ACTION_ENABLED",
+            "PASS_ATTACHED",
+            "OWNER_AUTHORIZED_DEMO_BROKER_ACTION",
+            "event_reaction_v0_exact_mt5",
+            "short_hedge_v2_breakdown_retest",
+        ):
+            if stale in surface:
+                errors.append(f"{name} contains stale non-governance status: {stale}")
+    for expected_relative in GOVERNANCE_DOCUMENTS.values():
+        if expected_relative not in markdown:
+            errors.append(f"status_summary.md is missing governance document link: {expected_relative}")
+        if f'href="{html.escape(expected_relative, quote=True)}"' not in dashboard:
+            errors.append(f"status.html is missing governance document link: {expected_relative}")
+    if len(dashboard.encode("utf-8")) > 100_000:
+        errors.append("status.html governance surface is not compact (exceeds 100000 UTF-8 bytes)")
     return errors
 
 
