@@ -87,3 +87,32 @@ def test_locate_run_files_dir_rejects_ambiguous_agent_output(tmp_path: Path) -> 
         assert "exactly one local tester agent" in str(exc)
     else:
         raise AssertionError("ambiguous tester-agent output was accepted")
+
+
+def test_committed_rule_clean_native_report_fails_effective_input_lock(tmp_path: Path) -> None:
+    run_dir = (
+        ROOT
+        / "outputs"
+        / "reports"
+        / "A1_XAU_H4_EPISODE_IDENTITY_REPAIR_EXACT_20260711_FINAL2"
+        / "runs"
+        / "rule_clean_common_risk"
+        / "ten_year"
+    )
+    report = run_dir / "A1_XAU_H4_EPISODE_REPAIR_RULE_CLEAN_COMMON_RISK_TEN_YEAR.htm"
+    config = run_dir / "tester.ini"
+    try:
+        R.verify_effective_contract(
+            variant=R.VARIANTS[1],
+            horizon=R.extended.HORIZONS[1],
+            config=config,
+            report=report,
+            run_dir=tmp_path,
+        )
+    except R.effective_inputs.EffectiveInputError as exc:
+        assert "effective-input verification failed" in str(exc)
+    else:
+        raise AssertionError("mask-contaminated native report passed the effective-input lock")
+    payload = (tmp_path / "effective_inputs.json").read_text(encoding="utf-8")
+    assert '"status": "EFFECTIVE_INPUTS_MISMATCH"' in payload
+    assert '"actual": "5:20"' in payload

@@ -1,9 +1,8 @@
-from __future__ import annotations
-
 """Run the preregistered H4 episode-identity repair in isolated exact MT5."""
 
+from __future__ import annotations
+
 import argparse
-import csv
 import html
 import json
 import re
@@ -14,15 +13,26 @@ from pathlib import Path
 from typing import Any, Sequence
 
 import build_a1_xau_h4_episode_repair_source as repair
+import parse_mt5_effective_inputs as effective_inputs
 import run_a1_xau_extended_horizon_exact as extended
 import run_a1_xau_fee_native_replays_exact as fee
 import run_a1_xau_router_entry_hold_path_exact as exact
+import verify_a1_xau_effective_inputs as effective_verifier
 
 
 PHASE1_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = PHASE1_ROOT.parents[1]
 SCHEMA_VERSION = "a1_xau_h4_episode_identity_repair_exact_v1"
 H4_SPEC = next(item for item in fee.SOURCE_SPECS if item.source_id == "h4_d1_long_best_box2_atr80")
+EFFECTIVE_INPUT_LOCK = PHASE1_ROOT / "docs" / "A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_LOCK_V2.json"
+EXPECTED_NATIVE_ENVIRONMENT = {
+    "server": "Capital.ComMena-Demo",
+    "build": "5833",
+    "company": "Capital Com Mena Securities Trading L.L.C",
+    "currency": "USD",
+    "leverage": "1:50",
+    "symbol": "XAUUSD",
+}
 
 
 @dataclass(frozen=True)
@@ -229,6 +239,53 @@ def locate_run_files_dir(sandbox: Path, startup_name: str) -> Path:
     return matches[0]
 
 
+def verify_effective_contract(
+    *, variant: Variant, horizon: extended.Horizon, config: Path, report: Path, run_dir: Path,
+) -> dict[str, Any]:
+    if variant.rule_clean:
+        payload = effective_verifier.verify(
+            report=report,
+            lock=EFFECTIVE_INPUT_LOCK,
+            horizon=horizon.name,
+            tester_config=config,
+        )
+    else:
+        intended = effective_inputs.parse_tester_ini_inputs(config)
+        native = effective_inputs.parse_effective_inputs(report)
+        comparison = effective_inputs.compare_inputs(intended, native)
+        payload = {
+            "schema_version": "a1_xau_effective_mt5_input_verification_v1",
+            "status": "EFFECTIVE_INPUTS_MATCH" if comparison["pass"] else "EFFECTIVE_INPUTS_MISMATCH",
+            "horizon": horizon.name,
+            "expected_inputs": intended,
+            "intended_inputs": intended,
+            "native_effective_inputs": native,
+            "intended_comparison": comparison,
+            "native_comparison": comparison,
+            "native_environment": effective_inputs.parse_native_environment(report),
+        }
+    environment = payload["native_environment"]
+    environment_mismatches = {
+        key: {"expected": expected, "actual": environment.get(key)}
+        for key, expected in EXPECTED_NATIVE_ENVIRONMENT.items()
+        if environment.get(key) != expected
+    }
+    payload["environment_mismatches"] = environment_mismatches
+    payload["status"] = (
+        "EFFECTIVE_INPUTS_MATCH"
+        if payload["status"] == "EFFECTIVE_INPUTS_MATCH" and not environment_mismatches
+        else "EFFECTIVE_INPUTS_MISMATCH"
+    )
+    destination = run_dir / "effective_inputs.json"
+    destination.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if payload["status"] != "EFFECTIVE_INPUTS_MATCH":
+        raise effective_inputs.EffectiveInputError(
+            f"{variant.name}/{horizon.name} effective-input verification failed: "
+            f"{payload['native_comparison']}; environment={environment_mismatches}"
+        )
+    return payload
+
+
 def run_one(
     *, variant: Variant, horizon: extended.Horizon, frozen_config: Path, sandbox: Path,
     terminal: Path, output_dir: Path, timeout_seconds: int,
@@ -258,6 +315,13 @@ def run_one(
     run_dir.mkdir(parents=True, exist_ok=True)
     copied_config = fee.copy_required(config, run_dir / "tester.ini")
     copied_report = fee.copy_required(report, run_dir / report.name)
+    effective_input_verification = verify_effective_contract(
+        variant=variant,
+        horizon=horizon,
+        config=copied_config,
+        report=copied_report,
+        run_dir=run_dir,
+    )
     logs: dict[str, Path] = {}
     for input_name, name in log_names.items():
         source = files_dir / name
@@ -294,6 +358,7 @@ def run_one(
         "yearly": yearly,
         "config_sha256": exact.sha256_file(copied_config),
         "report_sha256": exact.sha256_file(copied_report),
+        "effective_input_verification": effective_input_verification,
         "artifacts": {key: value.relative_to(output_dir).as_posix() for key, value in logs.items()},
     }
 

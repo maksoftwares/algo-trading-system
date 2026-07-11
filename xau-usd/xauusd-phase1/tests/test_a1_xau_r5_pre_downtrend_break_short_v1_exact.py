@@ -235,3 +235,10 @@ def test_r5_valid_signal_coverage_uses_only_post_router_risk_eligible_rows() -> 
         datetime(2020, 1, 2, 1),
         datetime(2020, 1, 3, 1),
     ]
+
+
+def test_r5_reads_effective_inputs_from_native_report_not_generated_ini() -> None:
+    text = RUNNER.read_text(encoding="utf-8")
+    assert 'actual_inputs = effective_inputs.parse_effective_inputs(Path(result["html_report"]))' in text
+    assert 'intended_inputs = parse_tester_inputs(Path(result["tester_config"]))' in text
+    assert '"native_effective_inputs_match_generated_ini": effective_inputs_match' in text

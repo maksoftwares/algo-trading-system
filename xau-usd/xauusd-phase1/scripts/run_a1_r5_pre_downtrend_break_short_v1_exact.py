@@ -20,6 +20,7 @@ from typing import Any, Iterable, Sequence
 import run_a1_r1_pullback_long_v1_exact as r1
 import run_a1_xau_extended_horizon_exact as extended
 import run_a1_xau_m5_momentum_backtest_variants as a1
+import parse_mt5_effective_inputs as effective_inputs
 from analyze_a1_owner_goal_step3_portfolio_composition import REPORTS_DIR
 from run_a1_h4_d1_geometry_v2_weekly_shape import sha256_file
 from run_a1_regime_router_v1_exact import ROUTER_INPUTS
@@ -509,12 +510,18 @@ def horizon_evidence(result: dict[str, Any], horizon: Horizon) -> tuple[dict[str
     management_failures = [row for row in management_rows if row.get("action", "").endswith("_FAIL")]
     tags = sorted({row.get("reason", "") for row in order_successes})
     directions = sorted({row.get("direction", "") for row in order_successes})
-    actual_inputs = parse_tester_inputs(Path(result["tester_config"]))
+    intended_inputs = parse_tester_inputs(Path(result["tester_config"]))
+    actual_inputs = effective_inputs.parse_effective_inputs(Path(result["html_report"]))
     input_mismatches = {
-        key: {"expected": expected, "actual": actual_inputs.get(key)}
-        for key, expected in R5_INPUTS.items()
-        if actual_inputs.get(key) != expected
+        "missing": sorted(set(intended_inputs) - set(actual_inputs)),
+        "extra": sorted(set(actual_inputs) - set(intended_inputs)),
+        "unequal": {
+            key: {"expected": intended_inputs[key], "actual": actual_inputs[key]}
+            for key in sorted(set(intended_inputs) & set(actual_inputs))
+            if intended_inputs[key] != actual_inputs[key]
+        },
     }
+    effective_inputs_match = not any(input_mismatches.values())
     history_quality = percent(report_metrics.get("History Quality", ""))
     equity_dd_pct = percent(report_metrics.get("Equity Drawdown Relative", ""))
     native_net = number(report_metrics.get("Total Net Profit", "0"))
@@ -538,7 +545,8 @@ def horizon_evidence(result: dict[str, Any], horizon: Horizon) -> tuple[dict[str
         "every_execution_short": directions in ([], ["SHORT"]),
         "every_execution_tagged_causal_uptrend_or_chop": bool(order_successes)
         and all(row.get("reason") in ALLOWED_R5_ORDER_TAGS for row in order_successes),
-        "tester_inputs_match_preregistration": not input_mismatches,
+        "tester_inputs_match_preregistration": all(actual_inputs.get(key) == value for key, value in R5_INPUTS.items()),
+        "native_effective_inputs_match_generated_ini": effective_inputs_match,
     }
     return (
         {
@@ -559,7 +567,9 @@ def horizon_evidence(result: dict[str, Any], horizon: Horizon) -> tuple[dict[str
             "successful_order_directions": directions,
             "valid_signal_count": len(valid_signal_times(order_rows)),
             "tester_input_sha256": stable_hash(actual_inputs),
+            "intended_tester_input_sha256": stable_hash(intended_inputs),
             "input_mismatches": input_mismatches,
+            "native_environment": effective_inputs.parse_native_environment(Path(result["html_report"])),
             "checks": checks,
             "artifacts": {
                 key: result[key]
