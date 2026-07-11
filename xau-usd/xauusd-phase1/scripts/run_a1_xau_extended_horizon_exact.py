@@ -212,7 +212,10 @@ def metrics(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
 def grouped_rows(rows: Sequence[dict[str, Any]], period: str) -> list[dict[str, Any]]:
     groups: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
-        timestamp = datetime.fromisoformat(row["entry_time"])
+        # Realized calendar performance belongs to the native position exit.  Using
+        # entry time moves long-held H4 results into the wrong month/year and corrupts
+        # rolling-income claims even though full-window totals remain unchanged.
+        timestamp = datetime.fromisoformat(row["exit_time"])
         key = timestamp.strftime("%Y") if period == "year" else timestamp.strftime("%Y-%m")
         groups[key].append(row)
     return [{period: key, **metrics(group)} for key, group in sorted(groups.items())]

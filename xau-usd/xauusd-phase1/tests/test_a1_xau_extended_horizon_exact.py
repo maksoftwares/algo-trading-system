@@ -64,6 +64,22 @@ def test_metrics_and_rolling_months_are_deterministic() -> None:
     assert rolling == [{"months": 2, "start_month": "2024-01", "end_month": "2024-02", "net_usd": 5.0}]
 
 
+def test_calendar_grouping_uses_realized_exit_time() -> None:
+    rows = [
+        {
+            "entry_time": "2025-01-31 20:00:00",
+            "exit_time": "2025-02-03 08:00:00",
+            "pnl_usd": "12.50",
+            "tickets": 1,
+            "source_priority": 1,
+            "source_id": "h4",
+            "position_id": "1",
+        }
+    ]
+    assert [row["month"] for row in R.grouped_rows(rows, "month")] == ["2025-02"]
+    assert [row["year"] for row in R.grouped_rows(rows, "year")] == ["2025"]
+
+
 def test_cli_has_no_runtime_attachment_or_live_surface() -> None:
     destinations = {action.dest for action in R.build_parser()._actions}
     assert destinations.isdisjoint({"live", "demo", "account", "server", "attach", "profile"})
