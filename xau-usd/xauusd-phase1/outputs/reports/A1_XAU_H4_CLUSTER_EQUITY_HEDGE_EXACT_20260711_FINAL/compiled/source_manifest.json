@@ -1,0 +1,15 @@
+{
+  "broker_action_authorized": false,
+  "fee_instrumented_base_sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+  "fixed_rule": {
+    "equal_total_volume": true,
+    "release_balance_pct": 2.0,
+    "trigger_balance_pct": 5.0
+  },
+  "generated_expert_name": "A1XauH4ClusterEquityHedgeV1",
+  "pinned_commit": "d15fc9a6b3ff18d1748428ea6519fbe58ab30721",
+  "pinned_source_sha256": "bc61515d51b9414760ebe7d4d8e6bbf11fdfe760fd21d91246c0aae017449a51",
+  "purpose": "h4_cluster_equity_hedge_exact_mt5",
+  "repaired_source_sha256": "e8422866977ff223e848c88a760a180809ee5b9b6a665675335ffd0da0922c41",
+  "schema_version": "a1_xau_h4_cluster_equity_hedge_source_v1"
+}

@@ -1,0 +1,16 @@
+{
+  "broker_action_authorized": false,
+  "fee_instrumented_base_sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+  "fixed_rule": {
+    "equal_volume": true,
+    "maximum_cycles_per_primary": 1,
+    "recovery_r": 0.0,
+    "trigger_r": -0.25
+  },
+  "generated_expert_name": "A1XauH4AdverseRHedgeV1",
+  "pinned_commit": "d15fc9a6b3ff18d1748428ea6519fbe58ab30721",
+  "pinned_source_sha256": "bc61515d51b9414760ebe7d4d8e6bbf11fdfe760fd21d91246c0aae017449a51",
+  "purpose": "h4_per_position_adverse_r_hedge_exact_mt5",
+  "repaired_source_sha256": "f669e6da3721406b5228effe14971ee533500f07080921950d813ffcc34cb067",
+  "schema_version": "a1_xau_h4_adverse_r_hedge_source_v1"
+}
