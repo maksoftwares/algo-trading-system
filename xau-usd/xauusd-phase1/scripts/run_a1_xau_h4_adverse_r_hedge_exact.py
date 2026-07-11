@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Run the preregistered per-position H4 adverse-R hedge in isolated exact MT5."""
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -13,6 +13,8 @@ from typing import Any, Sequence
 import build_a1_xau_h4_adverse_r_hedge_source as hedge
 import build_a1_xau_h4_cluster_equity_hedge_source as cluster_hedge
 import build_a1_xau_h4_cluster_highwater_hedge_source as highwater_hedge
+import build_a1_xau_h4_cluster_highwater_rearm_source as rearm_highwater_hedge
+import build_a1_xau_h4_cluster_highwater_total_mtm_source as total_mtm_highwater_hedge
 import run_a1_xau_extended_horizon_exact as extended
 import run_a1_xau_fee_native_replays_exact as fee
 import run_a1_xau_h4_episode_repair_exact as h4
@@ -26,19 +28,35 @@ H4_SPEC = h4.H4_SPEC
 PRIMARY_MAGIC = "932200"
 HEDGE_MAGIC = "932201"
 CLUSTER_HEDGE_MAGIC = "932202"
+EXPECTED_PRIMARY_ENTRIES = {"five_year": 156, "ten_year": 307}
 
 
 def derive_config(
     original_text: str, horizon: extended.Horizon, cluster: bool = False,
-    highwater: bool = False,
+    highwater: bool = False, scaled_highwater: bool = False,
+    rearm_highwater: bool = False, total_mtm_highwater: bool = False,
 ) -> tuple[str, dict[str, str]]:
     base_text, _ = fee.derive_replay_config(original_text, H4_SPEC)
     sections = exact.parse_ini(base_text)
     tester, inputs = sections["Tester"], sections["TesterInputs"]
-    cluster_mode = cluster or highwater
-    mode = "cluster_highwater" if highwater else "cluster_equity" if cluster else "adverse_r"
+    cluster_mode = cluster or highwater or scaled_highwater or rearm_highwater or total_mtm_highwater
+    highwater_mode = highwater or scaled_highwater or rearm_highwater or total_mtm_highwater
+    mode = (
+        "cluster_highwater_total_mtm_v3" if total_mtm_highwater
+        else "cluster_highwater_rearm_v2" if rearm_highwater
+        else "cluster_highwater_scaled_2p0_0p8" if scaled_highwater
+        else "cluster_highwater" if highwater
+        else "cluster_equity" if cluster
+        else "adverse_r"
+    )
     stem = f"h4_{mode}_hedge_{horizon.name}"
-    expert_name = highwater_hedge.EXPERT_NAME if highwater else cluster_hedge.EXPERT_NAME if cluster else hedge.EXPERT_NAME
+    expert_name = (
+        total_mtm_highwater_hedge.EXPERT_NAME if total_mtm_highwater
+        else rearm_highwater_hedge.EXPERT_NAME if rearm_highwater
+        else highwater_hedge.EXPERT_NAME if highwater_mode
+        else cluster_hedge.EXPERT_NAME if cluster
+        else hedge.EXPERT_NAME
+    )
     tester.update({
         "Expert": f"A1Audit\\{expert_name}.ex5",
         "FromDate": horizon.from_date,
@@ -58,8 +76,8 @@ def derive_config(
         inputs.update({
             "InpClusterEquityHedgeEnabled": "true",
             "InpClusterEquityHedgeMagicNumber": CLUSTER_HEDGE_MAGIC,
-            "InpClusterEquityHedgeTriggerPct": "5.00",
-            "InpClusterEquityHedgeReleasePct": "2.00",
+            "InpClusterEquityHedgeTriggerPct": "2.00" if scaled_highwater else "5.00",
+            "InpClusterEquityHedgeReleasePct": "0.80" if scaled_highwater else "2.00",
         })
     else:
         inputs.update({
@@ -81,6 +99,66 @@ def read_optional_tsv(path: Path) -> list[dict[str, str]]:
     if not path.exists() or path.stat().st_size == 0:
         return []
     return fee.read_tsv(path)[1]
+
+
+def control_deal_log(control_report: Path, horizon: extended.Horizon) -> Path:
+    runs_dir = control_report.resolve().parents[2]
+    evidence_dir = runs_dir / horizon.name / H4_SPEC.source_id
+    candidates = sorted(evidence_dir.glob("*deals_with_fee.csv"))
+    if len(candidates) != 1:
+        raise RuntimeError(
+            f"expected one control deal ledger for {horizon.name}, found {len(candidates)} in {evidence_dir}"
+        )
+    return candidates[0]
+
+
+def primary_entry_identity(control_log: Path, candidate_log: Path) -> dict[str, Any]:
+    identity_fields = ("timestamp_broker", "direction", "volume", "price")
+
+    def rows(path: Path) -> list[tuple[str, ...]]:
+        _, ledger = fee.read_tsv(path)
+        return [
+            tuple(row[field] for field in identity_fields)
+            for row in ledger
+            if row.get("entry_code") == "0" and row.get("magic") == PRIMARY_MAGIC
+        ]
+
+    expected, actual = rows(control_log), rows(candidate_log)
+    common = min(len(expected), len(actual))
+    mismatch_indices = [index for index in range(common) if expected[index] != actual[index]]
+    mismatch_count = len(mismatch_indices) + abs(len(expected) - len(actual))
+    return {
+        "control_deal_log_sha256": exact.sha256_file(control_log),
+        "identity_fields": list(identity_fields),
+        "expected_primary_entries": len(expected),
+        "actual_primary_entries": len(actual),
+        "mismatch_count": mismatch_count,
+        "first_mismatch_indices": mismatch_indices[:10],
+        "exact_match": mismatch_count == 0,
+    }
+
+
+def normalize_source_manifest(
+    source_manifest: Path, *, scaled_highwater: bool = False,
+    rearm_highwater: bool = False, total_mtm_highwater: bool = False,
+) -> dict[str, Any]:
+    payload = json.loads(source_manifest.read_text(encoding="utf-8"))
+    if scaled_highwater:
+        trigger, release = 2.0, 0.8
+    else:
+        trigger, release = 5.0, 2.0
+    if scaled_highwater or rearm_highwater or total_mtm_highwater:
+        fixed_rule = payload.setdefault("fixed_rule", {})
+        fixed_rule["primary_highwater_trigger_pct"] = trigger
+        fixed_rule["primary_highwater_release_pct"] = release
+        payload["runtime_tester_rule"] = {
+            "InpClusterEquityHedgeTriggerPct": f"{trigger:.2f}",
+            "InpClusterEquityHedgeReleasePct": f"{release:.2f}",
+        }
+        source_manifest.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+        )
+    return payload
 
 
 def build_position_trades(deal_log: Path) -> list[dict[str, Any]]:
@@ -188,10 +266,21 @@ def reconciliation(
 def run_one(
     *, horizon: extended.Horizon, frozen_config: Path, sandbox: Path,
     terminal: Path, output_dir: Path, timeout_seconds: int, cluster: bool = False,
-    highwater: bool = False,
+    highwater: bool = False, scaled_highwater: bool = False,
+    rearm_highwater: bool = False, total_mtm_highwater: bool = False,
+    control_deals: Path | None = None,
 ) -> dict[str, Any]:
-    config_text, log_names = derive_config(exact.read_text(frozen_config), horizon, cluster, highwater)
-    config = sandbox / "Config" / f"A1_XAU_H4_ADVERSE_R_HEDGE_{horizon.name}.ini"
+    config_text, log_names = derive_config(
+        exact.read_text(frozen_config), horizon, cluster, highwater, scaled_highwater,
+        rearm_highwater, total_mtm_highwater,
+    )
+    config_variant = (
+        "TOTAL_MTM_HIGHWATER" if total_mtm_highwater
+        else "REARM_HIGHWATER" if rearm_highwater
+        else "SCALED_HIGHWATER" if scaled_highwater
+        else "ADVERSE_R"
+    )
+    config = sandbox / "Config" / f"A1_XAU_H4_{config_variant}_HEDGE_{horizon.name}.ini"
     config.write_text(config_text, encoding="utf-8", newline="\n")
     parsed = exact.parse_ini(config_text)
     report = sandbox / "Reports" / (parsed["Tester"]["Report"].split("\\")[-1] + ".htm")
@@ -235,9 +324,13 @@ def run_one(
         raise RuntimeError(f"deal ledger/report net mismatch: {metric['net_usd']} vs {report_net}")
     reconcile = reconciliation(
         logs["InpDealLogFileName"], logs["InpManagementLogFileName"],
-        CLUSTER_HEDGE_MAGIC if (cluster or highwater) else HEDGE_MAGIC,
-        cluster or highwater,
+        CLUSTER_HEDGE_MAGIC if (cluster or highwater or scaled_highwater or rearm_highwater or total_mtm_highwater) else HEDGE_MAGIC,
+        cluster or highwater or scaled_highwater or rearm_highwater or total_mtm_highwater,
     )
+    if control_deals is not None:
+        identity = primary_entry_identity(control_deals, logs["InpDealLogFileName"])
+        reconcile["primary_entry_identity"] = identity
+        reconcile["primary_entry_identity_exact"] = identity["exact_match"]
     return {
         "horizon": horizon.name,
         "from_date": horizon.from_date,
@@ -274,6 +367,60 @@ def evaluate(results: Sequence[dict[str, Any]]) -> dict[str, Any]:
     return {"status": "H4_ADVERSE_R_HEDGE_SURVIVOR" if passed else "H4_ADVERSE_R_HEDGE_FAILED", "pass": passed, "gates": gates}
 
 
+def evaluate_scaled_highwater(results: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    """Evaluate the one-shot 2.0%/0.8% risk-scaling addendum.
+
+    Five years is retained as a stability diagnostic.  The predeclared economic
+    decision is the ten-year result; execution and reconciliation must be clean in
+    both horizons.
+    """
+    gates: dict[str, dict[str, bool]] = {}
+    for row in results:
+        metric, rec = row["trade_metrics"], row["reconciliation"]
+        row_gates = {
+            "profit_factor_gte_1p30": (metric["profit_factor"] or 0) >= 1.30,
+            "all_original_primary_entries_retained": (
+                rec["primary_entry_count"] == EXPECTED_PRIMARY_ENTRIES[row["horizon"]]
+                and rec.get("primary_entry_identity_exact", False)
+            ),
+            "zero_order_failures": row["order_failure_count"] == 0,
+            "zero_management_failures": rec["management_failure_count"] == 0,
+            "all_positions_reconciled": not rec["unmatched_position_ids"],
+            "hedges_flat": abs(rec["hedge_entry_volume"] - rec["hedge_exit_volume"]) <= 0.001,
+        }
+        if row["horizon"] == "ten_year":
+            row_gates.update({
+                "net_gte_7000": metric["net_usd"] >= 7000.0,
+                "drawdown_lte_12pct": row["maximum_relative_equity_drawdown_pct"] <= 12.0,
+            })
+        gates[row["horizon"]] = row_gates
+    passed = all(all(values.values()) for values in gates.values())
+    return {
+        "status": "H4_CLUSTER_HIGHWATER_SCALED_RISK_SURVIVOR" if passed else "H4_CLUSTER_HIGHWATER_SCALED_RISK_FAILED",
+        "pass": passed,
+        "gates": gates,
+        "primary_decision_horizon": "ten_year",
+    }
+
+
+def evaluate_rearm_highwater(results: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    decision = evaluate_scaled_highwater(results)
+    decision["status"] = (
+        "H4_CLUSTER_HIGHWATER_REARM_V2_SURVIVOR" if decision["pass"]
+        else "H4_CLUSTER_HIGHWATER_REARM_V2_FAILED"
+    )
+    return decision
+
+
+def evaluate_total_mtm_highwater(results: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    decision = evaluate_scaled_highwater(results)
+    decision["status"] = (
+        "H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_SURVIVOR" if decision["pass"]
+        else "H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_FAILED"
+    )
+    return decision
+
+
 def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
         "# A1 XAUUSD H4 Adverse-R Hedge Exact-MT5 Results", "",
@@ -298,6 +445,9 @@ def run(
     output_dir: Path, control_report: Path, timeout_seconds: int = 3600,
     cluster_hedge_enabled: bool = False,
     cluster_highwater_enabled: bool = False,
+    cluster_highwater_scaled_risk: bool = False,
+    cluster_highwater_rearm_repair: bool = False,
+    cluster_highwater_total_mtm_repair: bool = False,
 ) -> Path:
     sandbox = tester_sandbox.resolve()
     terminal = exact.validate_strategy_tester_sandbox(sandbox)
@@ -307,27 +457,71 @@ def run(
         raise RuntimeError(f"adverse-R hedge output directory must be new or empty: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
     frozen_config = package_dir.resolve() / "immutable_evidence" / H4_SPEC.source_id / "tester.ini"
-    if cluster_hedge_enabled and cluster_highwater_enabled:
+    if sum(bool(value) for value in (
+        cluster_hedge_enabled, cluster_highwater_enabled, cluster_highwater_scaled_risk,
+        cluster_highwater_rearm_repair,
+        cluster_highwater_total_mtm_repair,
+    )) > 1:
         raise RuntimeError("select only one cluster hedge variant")
-    source_builder = highwater_hedge if cluster_highwater_enabled else cluster_hedge if cluster_hedge_enabled else hedge
+    highwater_mode = cluster_highwater_enabled or cluster_highwater_scaled_risk
+    source_builder = (
+        total_mtm_highwater_hedge if cluster_highwater_total_mtm_repair
+        else rearm_highwater_hedge if cluster_highwater_rearm_repair
+        else highwater_hedge if highwater_mode
+        else cluster_hedge if cluster_hedge_enabled
+        else hedge
+    )
     source = sandbox / "MQL5" / "Experts" / "A1Audit" / f"{source_builder.EXPERT_NAME}.mq5"
     source_manifest = output_dir / "compiled" / "source_manifest.json"
     source_builder.build_source(REPO_ROOT, source, source_manifest)
-    compile_label = "CLUSTER_HIGHWATER" if cluster_highwater_enabled else "CLUSTER_EQUITY" if cluster_hedge_enabled else "ADVERSE_R"
+    source_manifest_payload = normalize_source_manifest(
+        source_manifest,
+        scaled_highwater=cluster_highwater_scaled_risk,
+        rearm_highwater=cluster_highwater_rearm_repair,
+        total_mtm_highwater=cluster_highwater_total_mtm_repair,
+    )
+    compile_label = (
+        "CLUSTER_HIGHWATER_TOTAL_MTM_V3" if cluster_highwater_total_mtm_repair
+        else "CLUSTER_HIGHWATER_REARM_V2" if cluster_highwater_rearm_repair
+        else "CLUSTER_HIGHWATER_SCALED_RISK" if cluster_highwater_scaled_risk
+        else "CLUSTER_HIGHWATER" if cluster_highwater_enabled
+        else "CLUSTER_EQUITY" if cluster_hedge_enabled
+        else "ADVERSE_R"
+    )
     compile_log = sandbox / "Logs" / f"compile_A1_XAU_H4_{compile_label}_HEDGE.log"
     ex5 = exact.compile_program(source, editor, sandbox, compile_log, timeout_seconds=timeout_seconds, command_runner=exact.default_command_runner)
     for path in (source, ex5, compile_log):
         fee.copy_required(path, output_dir / "compiled" / path.name)
-    results = [run_one(horizon=horizon, frozen_config=frozen_config, sandbox=sandbox, terminal=terminal, output_dir=output_dir, timeout_seconds=timeout_seconds, cluster=cluster_hedge_enabled, highwater=cluster_highwater_enabled) for horizon in extended.HORIZONS]
+    results = [run_one(
+        horizon=horizon, frozen_config=frozen_config, sandbox=sandbox,
+        terminal=terminal, output_dir=output_dir, timeout_seconds=timeout_seconds,
+        cluster=cluster_hedge_enabled, highwater=cluster_highwater_enabled,
+        scaled_highwater=cluster_highwater_scaled_risk,
+        rearm_highwater=cluster_highwater_rearm_repair,
+        total_mtm_highwater=cluster_highwater_total_mtm_repair,
+        control_deals=control_deal_log(control_report, horizon),
+    ) for horizon in extended.HORIZONS]
     payload = {
         "schema_version": SCHEMA_VERSION,
         "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "boundary": {"strategy_tester_only": True, "broker_action_authorized": False, "development_data_not_holdout": True},
         "control_report_sha256": exact.sha256_file(control_report.resolve()),
-        "source_manifest": json.loads(source_manifest.read_text(encoding="utf-8")),
-        "variant": "cluster_highwater_5pct_2pct" if cluster_highwater_enabled else "cluster_equity_5pct_2pct" if cluster_hedge_enabled else "per_ticket_adverse_0p25r",
+        "source_manifest": source_manifest_payload,
+        "variant": (
+            "cluster_highwater_total_mtm_v3_5pct_2pct" if cluster_highwater_total_mtm_repair
+            else "cluster_highwater_rearm_v2_5pct_2pct" if cluster_highwater_rearm_repair
+            else "cluster_highwater_2pct_0p8pct" if cluster_highwater_scaled_risk
+            else "cluster_highwater_5pct_2pct" if cluster_highwater_enabled
+            else "cluster_equity_5pct_2pct" if cluster_hedge_enabled
+            else "per_ticket_adverse_0p25r"
+        ),
         "results": results,
-        "decision": evaluate(results),
+        "decision": (
+            evaluate_total_mtm_highwater(results) if cluster_highwater_total_mtm_repair
+            else evaluate_rearm_highwater(results) if cluster_highwater_rearm_repair
+            else evaluate_scaled_highwater(results) if cluster_highwater_scaled_risk
+            else evaluate(results)
+        ),
     }
     json_path = output_dir / "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.json"
     md_path = output_dir / "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.md"
@@ -347,6 +541,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timeout-seconds", type=int, default=3600)
     parser.add_argument("--cluster-hedge-enabled", action="store_true")
     parser.add_argument("--cluster-highwater-enabled", action="store_true")
+    parser.add_argument("--cluster-highwater-scaled-risk", action="store_true")
+    parser.add_argument("--cluster-highwater-rearm-repair", action="store_true")
+    parser.add_argument("--cluster-highwater-total-mtm-repair", action="store_true")
     return parser
 
 

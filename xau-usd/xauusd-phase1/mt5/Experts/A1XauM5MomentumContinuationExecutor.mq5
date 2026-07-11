@@ -53,7 +53,8 @@ enum RegimeRouterMode
    REGIME_ROUTER_LONG_R1_UPTREND_ONLY = 1,
    REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY = 2,
    REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3,
-   REGIME_ROUTER_R4_CHOP_ONLY = 4
+   REGIME_ROUTER_R4_CHOP_ONLY = 4,
+   REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY = 5
   };
 
 enum XauRegimeState
@@ -2095,6 +2096,8 @@ string RegimeRouterModeName()
       return "directional_r1_long_r2_short";
    if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
       return "r4_chop_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
+      return "short_r5_uptrend_chop_only";
    return "off";
   }
 
@@ -2111,6 +2114,57 @@ string RegimeStateName(const XauRegimeState state)
    if(state == XAU_REGIME_CHOP)
       return "chop";
    return "unknown";
+  }
+
+bool RegimeTrendDataAvailableAtShift(const ENUM_TIMEFRAMES timeframe, const int shift)
+  {
+   const int fast_period = MathMax(1, InpRegimeFastEmaPeriod);
+   const int slow_period = MathMax(fast_period + 1, InpRegimeSlowEmaPeriod);
+   const int slope_lag = MathMax(1, InpRegimeSlopeLagBars);
+   if(iBars(InpTargetSymbol, timeframe) < slow_period + slope_lag + shift + 5)
+      return false;
+   return iClose(InpTargetSymbol, timeframe, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, fast_period, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, slow_period, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, fast_period, shift + slope_lag) > 0.0 &&
+          IndicatorEmaClose(timeframe, slow_period, shift + slope_lag) > 0.0;
+  }
+
+bool RegimeRouterDataAvailable()
+  {
+   const int persistence = MathMax(1, InpRegimePersistenceD1Bars);
+   for(int shift = 1; shift <= persistence; shift++)
+     {
+      if(!RegimeTrendDataAvailableAtShift(PERIOD_D1, shift))
+         return false;
+     }
+   if(InpRegimeRequireH4Confirm && !RegimeTrendDataAvailableAtShift(PERIOD_H4, 1))
+      return false;
+
+   const int atr_period = MathMax(1, InpAtrPeriod);
+   if(InpRegimeShockH1RangeAtrMultiple > 0.0)
+     {
+      if(iBars(InpTargetSymbol, PERIOD_H1) <= atr_period + 10 ||
+         iHigh(InpTargetSymbol, PERIOD_H1, 1) <= iLow(InpTargetSymbol, PERIOD_H1, 1) ||
+         IndicatorAtrPrice(PERIOD_H1, atr_period, 1) <= 0.0)
+         return false;
+     }
+   if(InpRegimeShockD1AtrPercentileMin > 0.0)
+     {
+      const int shock_lookback = MathMax(20, InpRegimeShockD1AtrLookback);
+      if(iBars(InpTargetSymbol, PERIOD_D1) <= shock_lookback + atr_period + 10 ||
+         IndicatorAtrPrice(PERIOD_D1, atr_period, 1) <= 0.0)
+         return false;
+     }
+
+   const int box_days = MathMax(2, InpRegimeCompressionBoxDays);
+   if(iBars(InpTargetSymbol, PERIOD_D1) <= 252 + atr_period + 10 ||
+      TimeframeHigh(PERIOD_D1, 1, box_days) <= 0.0 ||
+      TimeframeLow(PERIOD_D1, 1, box_days) <= 0.0 ||
+      TimeframeMedianRange(PERIOD_D1, 20, 1) <= 0.0 ||
+      IndicatorAtrPrice(PERIOD_D1, atr_period, 1) <= 0.0)
+      return false;
+   return true;
   }
 
 bool RegimeTrendStackAtShift(const ENUM_TIMEFRAMES timeframe, const int shift, const bool uptrend)
@@ -2213,9 +2267,15 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
    if(InpRegimeRouterMode == REGIME_ROUTER_OFF)
       return true;
 
+   const string mode_name = RegimeRouterModeName();
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY && !RegimeRouterDataAvailable())
+     {
+      block_reason = "regime_router_block_" + mode_name + "_state_unknown";
+      return false;
+     }
+
    const XauRegimeState regime = CurrentXauRegime();
    const string regime_name = RegimeStateName(regime);
-   const string mode_name = RegimeRouterModeName();
 
    if(regime == XAU_REGIME_SHOCK)
      {
@@ -2253,6 +2313,19 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
      {
       if(regime == XAU_REGIME_CHOP)
          return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
+     {
+      if(direction == "SHORT" && (regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_CHOP))
+        {
+         // Preserve the causal state on every successful R5 order so the exact
+         // evidence can prove that no DOWNTREND/SHOCK/COMPRESSION state leaked.
+         block_reason = "regime_router_allow_" + mode_name + "_state_" + regime_name;
+         return true;
+        }
       block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
       return false;
      }
@@ -4632,7 +4705,8 @@ void EvaluateCompletedM5Bar()
      {
       g_trades_today++;
       g_last_trade_time = TimeCurrent();
-      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "pass");
+      const string pass_reason = (InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY) ? regime_block_reason : "pass";
+      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), pass_reason);
      }
    else
       LogOrder("ORDER_SEND_FAIL", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "order_send_failed");
