@@ -51,7 +51,34 @@ def test_repair_blocks_minimum_lot_risk_excess() -> None:
     assert "minimum_lot_risk_excess" in text
 
 
+def test_repair_uses_explicit_legacy_mask_authority() -> None:
+    text = repaired_text()
+    assert "input bool   InpLegacySelectionMasksEnabled   = true;" in text
+    assert text.count("if(!InpLegacySelectionMasksEnabled)") == 3
+    assert "__DISABLED__" not in text
+
+
 def test_repair_retains_tester_only_fee_instrumentation() -> None:
     text = repaired_text()
     assert "MQL_TESTER" in text
     assert "DEAL_FEE" in text
+
+
+def test_repair_captures_native_account_and_symbol_contract() -> None:
+    text = repaired_text()
+    for token in (
+        "ACCOUNT_CURRENCY",
+        "ACCOUNT_LEVERAGE",
+        "ACCOUNT_MARGIN_MODE",
+        "SYMBOL_VOLUME_MIN",
+        "SYMBOL_VOLUME_STEP",
+        "SYMBOL_VOLUME_MAX",
+        "SYMBOL_TRADE_CONTRACT_SIZE",
+        "SYMBOL_TRADE_TICK_SIZE",
+        "SYMBOL_TRADE_TICK_VALUE",
+        "SYMBOL_TRADE_TICK_VALUE_LOSS",
+        "SYMBOL_TRADE_STOPS_LEVEL",
+        "SYMBOL_TRADE_FREEZE_LEVEL",
+    ):
+        assert token in text
+    assert "ArrayResize(values, 21);" in text

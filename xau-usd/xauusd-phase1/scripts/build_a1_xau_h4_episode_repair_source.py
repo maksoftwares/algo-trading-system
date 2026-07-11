@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Build the preregistered H4 episode-identity repair from the pinned source blob."""
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -62,6 +62,62 @@ SESSION_HELPER = r'''bool CurrentTradeSessionOpen()
   }
 
 '''
+
+
+MASK_INPUT_ANCHOR = r'''input string InpBlockedEntryHoursCsv          = "";     // comma-separated server hours, e.g. "9,10"
+input string InpBlockedEntryDayHoursCsv       = "";     // comma-separated MQL day:hour pairs, e.g. "5:20"
+input string InpBlockedLongEntryHoursCsv      = "";     // optional direction-specific server-hour block list
+input string InpBlockedShortEntryHoursCsv     = "";     // optional direction-specific server-hour block list'''
+
+
+MASK_INPUT_REPLACEMENT = MASK_INPUT_ANCHOR + r'''
+input bool   InpLegacySelectionMasksEnabled   = true;   // explicit authority; never rely on empty-string reset semantics'''
+
+
+ORIGINAL_STARTUP_HEADER = r'''FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status");'''
+
+
+REPAIRED_STARTUP_HEADER = r'''FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status", "account_currency", "account_leverage", "margin_mode", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_loss", "stops_level", "freeze_level");'''
+
+
+ORIGINAL_STARTUP_VALUES = r'''   string values[];
+   ArrayResize(values, 9);
+   values[0] = Timestamp();
+   values[1] = InpRunId;
+   values[2] = AccountInfoString(ACCOUNT_SERVER);
+   values[3] = IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN));
+   values[4] = _Symbol;
+   values[5] = IntegerToString((int)InpMagicNumber);
+   values[6] = BoolText(AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO);
+   values[7] = BoolText(InpAllowDemoTrading);
+   values[8] = status;
+   AppendCsv(InpStartupLogFileName, values);'''
+
+
+REPAIRED_STARTUP_VALUES = r'''   string values[];
+   ArrayResize(values, 21);
+   values[0] = Timestamp();
+   values[1] = InpRunId;
+   values[2] = AccountInfoString(ACCOUNT_SERVER);
+   values[3] = IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN));
+   values[4] = _Symbol;
+   values[5] = IntegerToString((int)InpMagicNumber);
+   values[6] = BoolText(AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO);
+   values[7] = BoolText(InpAllowDemoTrading);
+   values[8] = status;
+   values[9] = AccountInfoString(ACCOUNT_CURRENCY);
+   values[10] = IntegerToString((long)AccountInfoInteger(ACCOUNT_LEVERAGE));
+   values[11] = IntegerToString((long)AccountInfoInteger(ACCOUNT_MARGIN_MODE));
+   values[12] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN), 8);
+   values[13] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_STEP), 8);
+   values[14] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MAX), 8);
+   values[15] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_CONTRACT_SIZE), 8);
+   values[16] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_SIZE), 8);
+   values[17] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE), 8);
+   values[18] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE_LOSS), 8);
+   values[19] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_STOPS_LEVEL));
+   values[20] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_FREEZE_LEVEL));
+   AppendCsv(InpStartupLogFileName, values);'''
 
 
 ORIGINAL_CROSS_DATA = r'''   const double h4_open = iOpen(InpTargetSymbol, PERIOD_H4, 1);
@@ -136,12 +192,25 @@ SESSION_GUARD_REPLACEMENT = r'''   if(!CurrentTradeSessionOpen())
 
 def apply_episode_repair(instrumented_source: bytes) -> bytes:
     text = instrumented_source.decode("utf-8")
+    text = _replace_once(text, MASK_INPUT_ANCHOR, MASK_INPUT_REPLACEMENT, "legacy-mask authority input")
+    text = _replace_once(text, ORIGINAL_STARTUP_HEADER, REPAIRED_STARTUP_HEADER, "startup contract header")
+    text = _replace_once(text, ORIGINAL_STARTUP_VALUES, REPAIRED_STARTUP_VALUES, "startup contract values")
     text = _replace_once(text, "void OnTick()\n", SESSION_HELPER + "void OnTick()\n", "session helper")
     text = _replace_once(text, ORIGINAL_CROSS_DATA, REPAIRED_CROSS_DATA, "H4 prior close")
     text = _replace_once(text, ORIGINAL_CROSS_CONDITION, REPAIRED_CROSS_CONDITION, "H4 transition")
     text = _replace_once(text, ORIGINAL_LOTS_RETURN, REPAIRED_LOTS_RETURN, "minimum-lot risk block")
     text = _replace_once(text, ORIGINAL_INVALID_LOTS_REASON, REPAIRED_INVALID_LOTS_REASON, "risk-block reason")
     text = _replace_once(text, SESSION_GUARD_ANCHOR, SESSION_GUARD_REPLACEMENT, "market-session guard")
+    for function_name in ("EntryHourBlocked", "EntryDayHourBlocked", "DirectionEntryHourBlocked"):
+        anchor = f"bool {function_name}(" if function_name == "DirectionEntryHourBlocked" else f"bool {function_name}()"
+        start = text.find(anchor)
+        if start < 0:
+            raise H4EpisodeRepairSourceError(f"{function_name} was not found")
+        brace = text.find("  {\n", start)
+        if brace < 0:
+            raise H4EpisodeRepairSourceError(f"{function_name} body was not found")
+        insertion = "  {\n   if(!InpLegacySelectionMasksEnabled)\n      return false;\n"
+        text = text[:brace] + insertion + text[brace + len("  {\n") :]
     return text.encode("utf-8")
 
 
@@ -165,6 +234,8 @@ def build_source(repo_root: Path, output_source: Path, manifest_path: Path) -> d
             "single_open_position_by_config",
             "market_session_permanent_expiry",
             "minimum_lot_risk_excess_block",
+            "explicit_legacy_selection_mask_authority",
+            "native_account_and_symbol_contract_capture",
         ],
         "broker_action_authorized": False,
     }

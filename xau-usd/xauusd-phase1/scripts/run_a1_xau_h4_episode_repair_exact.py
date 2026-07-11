@@ -76,16 +76,17 @@ def derive_config(original_text: str, variant: Variant, horizon: extended.Horizo
             "InpUseRiskNormalizedLots": "true" if variant.risk_normalized else "false",
             "InpRiskAmountUsd": variant.risk_amount,
             "InpRunId": f"A1_XAU_{stem.upper()}",
+            "InpLegacySelectionMasksEnabled": "false" if variant.rule_clean else "true",
         }
     )
     if variant.rule_clean:
         inputs.update(
             {
                 "InpH4D1PrevMonthHealthGateEnabled": "false",
-                "InpBlockedEntryHoursCsv": "",
-                "InpBlockedLongEntryHoursCsv": "",
-                "InpBlockedShortEntryHoursCsv": "",
-                "InpBlockedEntryDayHoursCsv": "",
+                "InpBlockedEntryHoursCsv": "__DISABLED__",
+                "InpBlockedLongEntryHoursCsv": "__DISABLED__",
+                "InpBlockedShortEntryHoursCsv": "__DISABLED__",
+                "InpBlockedEntryDayHoursCsv": "__DISABLED__",
             }
         )
     log_names = {

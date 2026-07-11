@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
@@ -46,6 +47,7 @@ def test_structural_parity_changes_only_locked_exposure_inputs() -> None:
     assert parsed["TesterInputs"]["InpUseRiskNormalizedLots"] == "false"
     assert parsed["TesterInputs"]["InpOnePositionPerMagic"] == "true"
     assert parsed["TesterInputs"]["InpH4D1PrevMonthHealthGateEnabled"] == "true"
+    assert parsed["TesterInputs"]["InpLegacySelectionMasksEnabled"] == "true"
 
 
 def test_rule_clean_common_risk_is_fixed() -> None:
@@ -55,8 +57,17 @@ def test_rule_clean_common_risk_is_fixed() -> None:
     assert parsed["Tester"]["Currency"] == "USD"
     assert parsed["TesterInputs"]["InpRiskAmountUsd"] == "25.00"
     assert parsed["TesterInputs"]["InpH4D1PrevMonthHealthGateEnabled"] == "false"
-    assert parsed["TesterInputs"]["InpBlockedLongEntryHoursCsv"] == ""
-    assert parsed["TesterInputs"]["InpBlockedEntryDayHoursCsv"] == ""
+    assert parsed["TesterInputs"]["InpLegacySelectionMasksEnabled"] == "false"
+    assert parsed["TesterInputs"]["InpBlockedLongEntryHoursCsv"] == "__DISABLED__"
+    assert parsed["TesterInputs"]["InpBlockedEntryDayHoursCsv"] == "__DISABLED__"
+
+
+def test_rule_clean_derived_inputs_exactly_match_preregistered_lock() -> None:
+    contract = json.loads(R.EFFECTIVE_INPUT_LOCK.read_text(encoding="utf-8"))
+    for horizon in R.extended.HORIZONS:
+        text, _ = R.derive_config(frozen_config(), R.VARIANTS[1], horizon)
+        parsed = R.exact.parse_ini(text)
+        assert parsed["TesterInputs"] == contract["horizons"][horizon.name]["tester_inputs"]
 
 
 def test_small_account_variant_uses_owner_aed_basis() -> None:

@@ -4467,11 +4467,11 @@ def run_variant(
 
     intended_inputs = effective_inputs.parse_tester_ini_inputs(config)
     native_effective_inputs = effective_inputs.parse_effective_inputs(html_report)
-    input_comparison = effective_inputs.require_equal_inputs(
-        intended_inputs,
-        native_effective_inputs,
-        label=f"{variant.name} generated INI versus native MT5 report",
-    )
+    input_comparison = effective_inputs.compare_inputs(intended_inputs, native_effective_inputs)
+    if input_comparison["missing"] or input_comparison["unequal"]:
+        raise effective_inputs.EffectiveInputError(
+            f"{variant.name} configured inputs differ from native MT5 report: {input_comparison}"
+        )
     native_environment = effective_inputs.parse_native_environment(html_report)
 
     trades, metrics = parse_mt5_report(html_report)

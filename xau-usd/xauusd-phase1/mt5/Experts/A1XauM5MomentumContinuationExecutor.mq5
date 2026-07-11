@@ -258,6 +258,7 @@ input string InpBlockedEntryHoursCsv          = "";     // comma-separated serve
 input string InpBlockedEntryDayHoursCsv       = "";     // comma-separated MQL day:hour pairs, e.g. "5:20"
 input string InpBlockedLongEntryHoursCsv      = "";     // optional direction-specific server-hour block list
 input string InpBlockedShortEntryHoursCsv     = "";     // optional direction-specific server-hour block list
+input bool   InpLegacySelectionMasksEnabled   = true;   // explicit authority; never rely on empty-string reset semantics
 input MomentumDirectionMode InpDirectionMode  = MOMENTUM_BOTH_DIRECTIONS;
 input bool   InpUseH1TrendFilter              = false;
 input bool   InpH1TrendApplyToLong            = true;
@@ -364,7 +365,7 @@ void AppendCsv(
    if(!exists)
      {
       if(file_name == InpStartupLogFileName)
-         FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status");
+         FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status", "account_currency", "account_leverage", "margin_mode", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_loss", "stops_level", "freeze_level");
       else if(file_name == InpSignalLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "stage", "direction", "reason", "bid", "ask", "spread_points", "recent_high", "recent_low", "signal_open", "signal_high", "signal_low", "signal_close", "atr", "body_fraction", "close_location", "three_bar_move_atr", "break_distance_atr", "estimated_cost_r");
       else if(file_name == InpOrderLogFileName)
@@ -372,7 +373,7 @@ void AppendCsv(
       else if(file_name == InpManagementLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "action", "direction", "position_ticket", "volume", "entry_price", "current_price", "current_sl", "new_sl", "tp", "risk_points", "unrealized_r", "trigger_r", "lock_r", "retcode", "reason");
       else if(file_name == InpDealLogFileName)
-         FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "deal_ticket", "position_id", "entry_code", "type_code", "reason_code", "direction", "volume", "price", "profit", "commission", "swap", "order_ticket", "comment");
+         FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "deal_ticket", "position_id", "entry_code", "type_code", "reason_code", "direction", "volume", "price", "profit", "commission", "swap", "fee", "order_ticket", "comment");
      }
    const int n = ArraySize(values);
    switch(n)
@@ -400,7 +401,7 @@ void AppendCsv(
 void LogStartup(const string status)
   {
    string values[];
-   ArrayResize(values, 9);
+   ArrayResize(values, 21);
    values[0] = Timestamp();
    values[1] = InpRunId;
    values[2] = AccountInfoString(ACCOUNT_SERVER);
@@ -410,6 +411,18 @@ void LogStartup(const string status)
    values[6] = BoolText(AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO);
    values[7] = BoolText(InpAllowDemoTrading);
    values[8] = status;
+   values[9] = AccountInfoString(ACCOUNT_CURRENCY);
+   values[10] = IntegerToString((long)AccountInfoInteger(ACCOUNT_LEVERAGE));
+   values[11] = IntegerToString((long)AccountInfoInteger(ACCOUNT_MARGIN_MODE));
+   values[12] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN), 8);
+   values[13] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_STEP), 8);
+   values[14] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MAX), 8);
+   values[15] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_CONTRACT_SIZE), 8);
+   values[16] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_SIZE), 8);
+   values[17] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE), 8);
+   values[18] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE_LOSS), 8);
+   values[19] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_STOPS_LEVEL));
+   values[20] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_FREEZE_LEVEL));
    AppendCsv(InpStartupLogFileName, values);
   }
 
@@ -584,7 +597,7 @@ void LogDealTransaction(const ulong deal_ticket)
    const ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(deal_ticket, DEAL_ENTRY);
    const ENUM_DEAL_TYPE type = (ENUM_DEAL_TYPE)HistoryDealGetInteger(deal_ticket, DEAL_TYPE);
    string values[];
-   ArrayResize(values, 19);
+   ArrayResize(values, 20);
    values[0] = Timestamp();
    values[1] = TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS);
    values[2] = InpRunId;
@@ -602,8 +615,9 @@ void LogDealTransaction(const ulong deal_ticket)
    values[14] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_PROFIT), 2);
    values[15] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_COMMISSION), 2);
    values[16] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_SWAP), 2);
-   values[17] = IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_ORDER));
-   values[18] = HistoryDealGetString(deal_ticket, DEAL_COMMENT);
+   values[17] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_FEE), 2);
+   values[18] = IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_ORDER));
+   values[19] = HistoryDealGetString(deal_ticket, DEAL_COMMENT);
    AppendCsv(InpDealLogFileName, values);
   }
 
@@ -1643,7 +1657,11 @@ double LotsForStopDistance(const double stop_distance)
    const double risk_per_lot = (stop_distance / tick_size) * tick_value_loss;
    if(risk_per_lot <= 0.0)
       return fixed_lots;
-   return NormalizeLotsForSymbol(InpRiskAmountUsd / risk_per_lot);
+   const double requested_lots = InpRiskAmountUsd / risk_per_lot;
+   const double min_lots = SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN);
+   if(min_lots <= 0.0 || requested_lots + 0.0000001 < min_lots)
+      return 0.0;
+   return NormalizeLotsForSymbol(requested_lots);
   }
 
 double RecentHigh(const int start_shift, const int count)
@@ -2501,11 +2519,15 @@ bool CurrentHourInCsv(const string csv_hours)
 
 bool EntryHourBlocked()
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    return CurrentHourInCsv(InpBlockedEntryHoursCsv);
   }
 
 bool EntryDayHourBlocked()
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    if(InpBlockedEntryDayHoursCsv == "")
       return false;
    MqlDateTime parts;
@@ -2532,6 +2554,8 @@ bool EntryDayHourBlocked()
 
 bool DirectionEntryHourBlocked(const string direction)
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    if(direction == "LONG")
       return CurrentHourInCsv(InpBlockedLongEntryHoursCsv);
    if(direction == "SHORT")
@@ -4622,7 +4646,7 @@ void EvaluateCompletedM5Bar()
    const double order_lots = LotsForStopDistance(stop_distance);
    if(order_lots <= 0.0)
      {
-      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "invalid_order_lots");
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, InpUseRiskNormalizedLots ? "minimum_lot_risk_excess" : "invalid_order_lots");
       return;
      }
 

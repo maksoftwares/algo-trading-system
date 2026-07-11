@@ -50,6 +50,7 @@ def test_momentum_executor_defaults_are_observer_safe_and_a1_scoped() -> None:
     assert "input bool   InpShortCloseToRecentExtremeBlockMaxEnabled = false;" in text
     assert "input double InpShortCloseToRecentExtremeBlockMax = -2.51;" in text
     assert 'input string InpBlockedEntryHoursCsv          = "";' in text
+    assert "input bool   InpLegacySelectionMasksEnabled   = true;" in text
     assert "input double InpMinAtrAbsoluteForEntry        = 0.00;" in text
     assert "input double InpMaxThreeBarMoveAtr            = 0.00;" in text
     assert "input bool   InpPortfolioDailyGuardEnabled    = false;" in text
@@ -83,6 +84,16 @@ def test_momentum_executor_variant_switches_are_auditable() -> None:
     assert "max_open_positions_reached" in text
     assert "LotsForStopDistance(stop_distance)" in text
     assert "NormalizeLotsForSymbol" in text
+    assert "requested_lots + 0.0000001 < min_lots" in text
+    assert 'InpUseRiskNormalizedLots ? "minimum_lot_risk_excess" : "invalid_order_lots"' in text
+    assert '"swap", "fee", "order_ticket"' in text
+    assert "HistoryDealGetDouble(deal_ticket, DEAL_FEE)" in text
+    assert text.count("if(!InpLegacySelectionMasksEnabled)") == 3
+    assert "ACCOUNT_CURRENCY" in text
+    assert "ACCOUNT_LEVERAGE" in text
+    assert "ACCOUNT_MARGIN_MODE" in text
+    assert "SYMBOL_TRADE_CONTRACT_SIZE" in text
+    assert "SYMBOL_TRADE_TICK_VALUE_LOSS" in text
     assert "H1TrendAllows" in text
     assert "H4TrendAllows" in text
     assert "TrendAllows" in text

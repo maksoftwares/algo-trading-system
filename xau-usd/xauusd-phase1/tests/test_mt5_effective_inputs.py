@@ -121,5 +121,6 @@ def test_duplicate_effective_input_fails_closed(tmp_path: Path) -> None:
 def test_shared_m5_runner_fails_on_generated_versus_native_input_mismatch() -> None:
     text = (SCRIPTS / "run_a1_xau_m5_momentum_backtest_variants.py").read_text(encoding="utf-8")
     assert "native_effective_inputs = effective_inputs.parse_effective_inputs(html_report)" in text
-    assert "effective_inputs.require_equal_inputs(" in text
+    assert "input_comparison = effective_inputs.compare_inputs(intended_inputs, native_effective_inputs)" in text
+    assert 'if input_comparison["missing"] or input_comparison["unequal"]' in text
     assert '"effective_input_comparison": input_comparison' in text
