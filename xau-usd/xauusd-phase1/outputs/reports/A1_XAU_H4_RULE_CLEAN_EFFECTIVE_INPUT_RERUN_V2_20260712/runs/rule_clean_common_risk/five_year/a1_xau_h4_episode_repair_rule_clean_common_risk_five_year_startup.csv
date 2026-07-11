@@ -1,0 +1,2 @@
+timestamp_broker	run_id	server	account	symbol	magic	demo_trading	broker_action	status	account_currency	account_leverage	margin_mode	volume_min	volume_step	volume_max	contract_size	tick_size	tick_value	tick_value_loss	stops_level	freeze_level
+2021.07.01 00:00:00	A1_XAU_H4_EPISODE_REPAIR_RULE_CLEAN_COMMON_RISK_FIVE_YEAR	Capital.ComMena-Demo	1025742	XAUUSD	932200	true	true	INIT_OK	USD	50	2	0.01000000	0.01000000	1000.00000000	100.00000000	0.01000000	1.00000000	1.00000000	0	0

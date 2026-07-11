@@ -15,7 +15,10 @@ def verify(
 ) -> dict[str, Any]:
     contract = json.loads(lock.read_text(encoding="utf-8"))
     try:
-        expected = contract["horizons"][horizon]["tester_inputs"]
+        expected = {
+            **contract.get("native_defaults", {}),
+            **contract["horizons"][horizon]["tester_inputs"],
+        }
     except KeyError as exc:
         raise effective.EffectiveInputError(f"Unknown locked horizon {horizon!r}") from exc
     native = effective.parse_effective_inputs(report)

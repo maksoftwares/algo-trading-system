@@ -11,7 +11,7 @@ Boundary: research-only Strategy Tester work. No live/demo broker action, chart 
 - Independent review: `A1_XAU_H4_PROFIT_PRESERVING_HEDGE_INDEPENDENT_REVIEW_ADDF272A_2026_07_11.md`.
 - Independent-review SHA-256: `909ca9d69599a52b418e0445956b518e896f4adc6790c0f0ae83f75e0590b2e2`.
 - Locked effective-input contract: `A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_LOCK_V2.json`.
-- Locked-contract SHA-256: `75b9a709862b94c5738b60bc05d26de0b8b03163a833671d94f41eaa79c09d10`.
+- Locked-contract SHA-256 after the pre-result completeness amendment below: `73e59226bd447a9e6648493479cf2fc73d2c51b2fe4d906b5b4d1869dd55e0ad`.
 
 The previous `rule_clean_common_risk` result is withdrawn as a qualification result. Its generated INI contained empty legacy-mask values, but the native MT5 report showed effective values `InpBlockedEntryDayHoursCsv=5:20` and `InpBlockedLongEntryHoursCsv=3,10,13,14`. The existing verifier checked the intended INI rather than the effective native-report inputs.
 
@@ -142,3 +142,18 @@ Any valid economic failure closes this H4 family under the current contract and 
 ## Next research dependency
 
 `R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1` is not authorized until this experiment has a valid reviewed status. No R6 P/L test may be run in this batch.
+
+## Pre-result completeness amendment — 2026-07-12
+
+The first execution attempt stopped at the effective-input gate before its native
+performance report was accepted or analyzed. MT5 exposed 224 native inputs while the
+initial lock enumerated only the 166 values inherited by the tester INI. The omitted
+58 values were unchanged EA defaults, but the stated policy requires a complete native
+surface and therefore treated them as disallowed extras.
+
+Before rerunning, those 58 defaults were added once to `native_defaults` in the lock
+and explicitly emitted into the tester INI. The verifier now merges that block with
+the 166 horizon-specific values and requires exact equality for all 224 inputs in both
+the intended INI and native MT5 HTML. No signal, sizing, management, date, risk, stress,
+or decision-gate value changed. The rejected partial output is not evidence and will
+be replaced by the complete rerun packet.

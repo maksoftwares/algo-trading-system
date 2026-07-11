@@ -1,0 +1,19 @@
+{
+  "broker_action_authorized": false,
+  "fee_instrumented_base_sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+  "fixed_repairs": [
+    "completed_h4_first_cross_required",
+    "single_open_position_by_config",
+    "market_session_permanent_expiry",
+    "minimum_lot_risk_excess_block",
+    "explicit_legacy_selection_mask_authority",
+    "native_account_and_symbol_contract_capture"
+  ],
+  "generated_expert_name": "A1XauH4EpisodeIdentityRepairV1",
+  "pinned_commit": "d15fc9a6b3ff18d1748428ea6519fbe58ab30721",
+  "pinned_source_sha256": "bc61515d51b9414760ebe7d4d8e6bbf11fdfe760fd21d91246c0aae017449a51",
+  "purpose": "h4_breakout_episode_identity_repair_exact_mt5",
+  "repaired_source_sha256": "52e7b3b9258c650635c782069e7abf135cda074ddb64ea8afbad3163d3821c05",
+  "schema_version": "a1_xau_h4_episode_identity_repair_source_v1",
+  "strategy_change": true
+}

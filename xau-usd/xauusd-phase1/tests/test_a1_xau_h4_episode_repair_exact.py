@@ -67,7 +67,12 @@ def test_rule_clean_derived_inputs_exactly_match_preregistered_lock() -> None:
     for horizon in R.extended.HORIZONS:
         text, _ = R.derive_config(frozen_config(), R.VARIANTS[1], horizon)
         parsed = R.exact.parse_ini(text)
-        assert parsed["TesterInputs"] == contract["horizons"][horizon.name]["tester_inputs"]
+        expected = {
+            **contract["native_defaults"],
+            **contract["horizons"][horizon.name]["tester_inputs"],
+        }
+        assert parsed["TesterInputs"] == expected
+        assert len(expected) == 224
 
 
 def test_small_account_variant_uses_owner_aed_basis() -> None:
