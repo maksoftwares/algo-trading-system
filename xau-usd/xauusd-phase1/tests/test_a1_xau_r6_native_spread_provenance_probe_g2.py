@@ -149,7 +149,7 @@ def test_automatic_stop_packet_preserves_ledger_inventories_logs_and_outputs(tmp
     stop = G.preserve_stop_packet(stop=tmp_path / "stop", root=root, ledger=ledger.path, preflight={"pre": True}, reports_attestation={"writable": True}, commands=[{"exit_code": 0}], run_ids=["warmup"], error=RuntimeError("missing report"))
     assert json.loads((stop / "result.json").read_text(encoding="utf-8"))["status"] == "NP1_G2_EVIDENCE_INVALID"
     assert (stop / "invocation_ledger.json").is_file() and (stop / "preflight_root_inventory.json").is_file() and (stop / "post_stop_root_inventory.json").is_file()
-    assert (stop / "logs" / "log_inventory.json").is_file() and (stop / "runs" / "warmup" / "assertions.tsv").is_file()
+    assert (stop / "logs" / "log_inventory.json").is_file() and (stop / "searched_location_inventory.json").is_file()
     assert (stop / "manifest.json").is_file() and (stop / "manifest.sha256").is_file()
 
 
@@ -172,6 +172,8 @@ def test_closed_review_parser_exact_hash_fields_and_no_go(tmp_path: Path, monkey
     assert G.parse_future_authorization(path, G.sha256_file(path), commit, tree) == fields
     path.write_text("NO-GO\n" + block, encoding="utf-8")
     with pytest.raises(PermissionError): G.parse_future_authorization(path, G.sha256_file(path), commit, tree)
+    path.write_text(block.replace("REVIEW_VERDICT: PASS","REVIEW_VERDICT: FAIL\nREVIEW_VERDICT: PASS"),encoding="utf-8")
+    with pytest.raises(PermissionError,match="duplicate"): G.parse_future_authorization(path,G.sha256_file(path),commit,tree)
 
 
 def test_end_to_end_warmup_failure_automatically_creates_stop(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -211,6 +213,14 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     monkeypatch.setattr(AN,"build_packet",lambda out:{"status":"old","flags":[]}); done=type("D",(),{"returncode":0,"stdout":b"","stderr":b""})()
     complete=G.execute_future(authorization=G.ACTIVATION,review_artifact=review,review_sha256=G.sha256_file(review),reviewed_commit=commit,reviewed_tree=tree,root=root,reports_root=reports,metadata_receipt=receipt,command_runner=lambda *a:done,compile_runner=lambda *a:done,version_reader=lambda p:G.G1.EXPECTED_VERSION)
     assert complete.name==G.COMPLETE_NAME and json.loads((complete/"result.json").read_text())["status"]=="NP1_G2_DIAGNOSTIC_COMPLETE" and not (reports/G.STOP_NAME).exists(); G.verify_manifest(complete)
+    assert json.loads((complete/"manifest.json").read_text())["schema_version"]=="a1_xau_r6_np1_g2_complete_manifest_v1"
+
+
+def test_metadata_relabelled_source_rejected(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    root=_root(tmp_path,monkeypatch); old=tmp_path/"old"; (old/"Config").mkdir(parents=True); monkeypatch.setattr(G,"QUARANTINED_ROOTS",(old,tmp_path/"x")); (root/"Config").mkdir()
+    source=old/"Config"/"servers.dat"; source.write_bytes(b'x'); destination=root/"Config"/"accounts.dat"; destination.write_bytes(b'x')
+    receipt={"copied":[{"source_path":str(source),"destination_relative":"Config/accounts.dat","size_bytes":1,"sha256":G.sha256_file(source)}]}
+    with pytest.raises(RuntimeError,match="identity"): G.validate_metadata_receipt(root,receipt)
 
 
 def test_static_no_normalization_result_research_attach_or_broker_action() -> None:

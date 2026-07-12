@@ -91,6 +91,8 @@ def validate_metadata_receipt(root: Path, receipt: dict[str, Any]) -> None:
             raise RuntimeError("metadata source is not a quarantined approved root")
         if relative not in ALLOWED_METADATA or not destination.is_file():
             raise RuntimeError("metadata receipt destination mismatch")
+        if source.name != destination.name or source.parent.name != "Config":
+            raise RuntimeError("metadata source/destination identity mismatch")
         if not source.is_file() or source.stat().st_size != row["size_bytes"] or sha256_file(source) != row["sha256"]:
             raise RuntimeError("metadata source receipt hash/size mismatch")
         if destination.stat().st_size != row["size_bytes"] or sha256_file(destination) != row["sha256"] or source.read_bytes() != destination.read_bytes():
@@ -191,18 +193,19 @@ def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before
         shutil.copyfile(matches[0], destination / name)
 
 
-def _manifest(root: Path) -> None:
+def _manifest(root: Path, schema: str = "a1_xau_r6_np1_g2_stop_manifest_v1") -> None:
     artifacts = []
     for path in sorted(root.rglob("*")):
         if path.is_file() and path.name not in {"manifest.json", "manifest.sha256"}:
             artifacts.append({"relative_path": path.relative_to(root).as_posix(), "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
-    write_json(root / "manifest.json", {"schema_version": "a1_xau_r6_np1_g2_stop_manifest_v1", "artifacts": artifacts})
+    write_json(root / "manifest.json", {"schema_version": schema, "artifacts": artifacts})
     (root / "manifest.sha256").write_text(sha256_file(root / "manifest.json") + "\n", encoding="ascii", newline="\n")
 
 
 def preserve_stop_packet(
     *, stop: Path, root: Path, ledger: Path, preflight: dict[str, Any], reports_attestation: dict[str, Any],
     commands: list[dict[str, Any]], run_ids: list[str], error: BaseException, compile_workspace: Path | None = None,
+    metadata_receipt: Path | None = None, partial_staging: Path | None = None,
 ) -> Path:
     stop.mkdir(parents=True, exist_ok=False)
     write_json(stop / "result.json", {"status": "NP1_G2_EVIDENCE_INVALID", "error": str(error), "last_authorized_command_reached": json.loads(ledger.read_text(encoding="utf-8"))["last_authorized_command_reached"], "probe1_invoked": "probe1" in run_ids, "probe2_invoked": "probe2" in run_ids, "canonical_np1c_authorized": False, "census_authorized": False, "profitability_authorized": False, "deployment_authorized": False, "broker_action_authorized": False})
@@ -212,13 +215,17 @@ def preserve_stop_packet(
     write_json(stop / "post_stop_root_inventory.json", inventory(root))
     write_json(stop / "reports_directory_attestation.json", reports_attestation)
     write_json(stop / "commands.json", commands)
+    if metadata_receipt is not None: copy_if_present(metadata_receipt, stop / "metadata_receipt.json")
+    searched: list[dict[str, Any]] = []
     for run_id in run_ids:
         run_dir = stop / "runs" / run_id
         copy_if_present(root / "Config" / f"np1_g2_{run_id}.ini", run_dir / "tester.ini")
         copy_if_present(expected_report(root, run_id), run_dir / "native_report.htm")
         for files_dir in (root / "Tester").glob("Agent-*/MQL5/Files"):
             for path in files_dir.glob(f"np1_g2_{run_id}_*"):
-                copy_if_present(path, run_dir / path.name.removeprefix(f"np1_g2_{run_id}_"))
+                relative = path.relative_to(root).as_posix(); searched.append({"run_id":run_id,"source_relative":relative,"size_bytes":path.stat().st_size,"sha256":sha256_file(path)})
+                copy_if_present(path, run_dir / "searched_outputs" / relative)
+    write_json(stop / "searched_location_inventory.json", {"matches": searched})
     log_rows = []
     for path in [*(root / "Logs").glob("*.log"), *(root / "Tester" / "logs").glob("*.log"), *(root / "Tester").glob("Agent-*/logs/*.log")]:
         relative = path.relative_to(root).as_posix(); destination = stop / "logs" / relative
@@ -228,6 +235,8 @@ def preserve_stop_packet(
     if compile_workspace is not None and compile_workspace.exists():
         for path in compile_workspace.glob("*"):
             if path.is_file(): copy_if_present(path, stop / "compiled" / path.name)
+    if partial_staging is not None and partial_staging.exists():
+        shutil.move(str(partial_staging), str(stop / "partial_staging"))
     _manifest(stop)
     verify_manifest(stop)
     return stop
@@ -257,9 +266,12 @@ def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tr
     fields = {}
     for raw in text.split(begin, 1)[1].split(end, 1)[0].splitlines():
         if ":" in raw:
-            key, value = (part.strip().strip("`") for part in raw.split(":", 1)); fields[key] = value
+            key, value = (part.strip().strip("`") for part in raw.split(":", 1))
+            if key in fields: raise PermissionError(f"duplicate authorization field: {key}")
+            fields[key] = value
     expected = {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
-    if fields != expected or "FAIL" in text.split(begin, 1)[0].upper() or "NO-GO" in text.split(begin, 1)[0].upper():
+    outside = (text.split(begin,1)[0] + text.split(end,1)[1]).upper()
+    if fields != expected or "FAIL" in outside or "NO-GO" in outside:
         raise PermissionError("G2-B authorization identity/fields mismatch")
     return fields
 
@@ -275,6 +287,8 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
     ledger_path = root / ".np1_g2_invocation_ledger.json"
     commands: list[dict[str, Any]] = []; invoked: list[str] = []; preflight: dict[str, Any] = {}; report_attestation: dict[str, Any] = {}
     workspace = root / "np1_g2_compile_workspace"
+    staging = reports_root / ".A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_20260712.staging"
+    if staging.exists(): raise RuntimeError("noncanonical staging path already exists")
     try:
         terminal, editor = validate_exact_root(root, initial=True)
         receipt = json.loads(metadata_receipt.read_text(encoding="utf-8")); validate_metadata_receipt(root, receipt)
@@ -284,7 +298,8 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
         workspace.mkdir(); copy_if_present(compiled.source, workspace / B.PROBE_NAME); copy_if_present(compiled.ex5, workspace / compiled.ex5.name); copy_if_present(compiled.log, workspace / "compile.log")
         B.build_probe(workspace / B.PROBE_NAME, workspace / "source_manifest.json")
         commands.append(compiled.command_record)
-        staging = root / "np1_g2_campaign_staging"; staging.mkdir()
+        staging.mkdir()
+        shutil.copytree(workspace, staging / "compiled")
         for run_id in RUN_IDS:
             if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("EX5 drift")
             ini = root / "Config" / f"np1_g2_{run_id}.ini"; ini.write_text(render_ini(run_id), encoding="utf-8", newline="\n")
@@ -294,14 +309,18 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
             if int(getattr(done, "returncode", 1)) != 0: raise RuntimeError(f"tester {run_id} failed")
             import analyze_a1_xau_r6_native_spread_provenance_probe as A
             collect_exact_outputs(root, run_id, staging / "runs" / run_id, started, A.parse_report)
-        complete.mkdir(); shutil.copytree(workspace, complete / "compiled", dirs_exist_ok=True); shutil.copytree(staging / "runs", complete / "runs")
-        write_json(complete / "metadata_receipt.json", receipt); write_json(complete / "preflight_root_inventory.json", preflight); write_json(complete / "post_run_root_inventory.json", inventory(root)); write_json(complete / "reports_directory_attestation.json", report_attestation); write_json(complete / "invocation_ledger.json", ledger.data); write_json(complete / "commands.json", commands)
+        if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("final post-probe2 EX5 drift")
+        write_json(staging / "metadata_receipt.json", receipt); write_json(staging / "preflight_root_inventory.json", preflight); write_json(staging / "post_run_root_inventory.json", inventory(root)); write_json(staging / "reports_directory_attestation.json", report_attestation); write_json(staging / "invocation_ledger.json", ledger.data); write_json(staging / "commands.json", commands)
         import analyze_a1_xau_r6_native_spread_provenance_probe as A
-        result = A.build_packet(complete); result["status"] = "NP1_G2_DIAGNOSTIC_COMPLETE"; A.write_json(complete / "result.json", result); _manifest(complete); verify_manifest(complete)
+        result = A.build_packet(staging); result["status"] = "NP1_G2_DIAGNOSTIC_COMPLETE"; A.write_json(staging / "result.json", result)
+        (staging/"README.md").write_text("# NP1-G2 Native Spread Provenance Probe\n\nStatus: `NP1_G2_DIAGNOSTIC_COMPLETE`. Diagnostic only.\n",encoding="utf-8",newline="\n")
+        (staging/"test_validation.md").write_text("# NP1-G2 Validation\n\nLocked G2 implementation and evidence verification passed.\n",encoding="utf-8",newline="\n")
+        _manifest(staging,"a1_xau_r6_np1_g2_complete_manifest_v1"); verify_manifest(staging)
+        staging.rename(complete)
         return complete
     except BaseException as exc:
         if not ledger_path.exists(): write_json(ledger_path, {"metaeditor_compilations":0,"tester_runs":[],"last_authorized_command_reached":"preflight"})
-        preserve_stop_packet(stop=stop, root=root, ledger=ledger_path, preflight=preflight, reports_attestation=report_attestation, commands=commands, run_ids=invoked, error=exc, compile_workspace=workspace)
+        preserve_stop_packet(stop=stop, root=root, ledger=ledger_path, preflight=preflight, reports_attestation=report_attestation, commands=commands, run_ids=invoked, error=exc, compile_workspace=workspace, metadata_receipt=metadata_receipt, partial_staging=staging)
         raise
 
 

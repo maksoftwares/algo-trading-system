@@ -3,7 +3,7 @@
     "artifact": "A1_XAU_NP1G1_INCOMPLETE_STOP_REVIEW_D612203A_2026_07_12.md",
     "artifact_sha256": "baaf56db8adc84fccca7e178777ba4dc6b95c575ba1deb9430459379e6b9eaba",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A1_REVIEW_GATED_EXECUTOR_AND_PACKET_CLOSURE"
+    "phase": "NP1-G2A2_ATOMIC_COMPLETE_STOP_AND_AUTHORITY_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -13,7 +13,9 @@
   "future_outputs": {
     "complete": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_20260712",
     "mutually_exclusive": true,
-    "stop": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712"
+    "stop": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712",
+    "atomic_staging_then_verified_promotion": true,
+    "partial_staging_preserved_inside_stop": true
   },
   "metadata_copy_allowlist": ["Config/accounts.dat", "Config/servers.dat"],
   "new_root": {
