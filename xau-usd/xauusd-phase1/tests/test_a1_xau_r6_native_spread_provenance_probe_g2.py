@@ -4,6 +4,7 @@ import importlib.util
 import csv
 import hashlib
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -31,7 +32,8 @@ def _write_campaign_outputs(root: Path, run_id: str) -> None:
     report.write_text("<table><tr><td>Period:</td><td>H1</td><td>Bars:</td><td>1</td><td>Ticks:</td><td>1</td><td>Total Trades:</td><td>0</td><td>Total Deals:</td><td>0</td></tr></table>",encoding="utf-8")
     files=root/"Tester"/"Agent-1"/"MQL5"/"Files"; files.mkdir(parents=True,exist_ok=True)
     prefix=f"np1_g2_{run_id}_"
-    _tsv(files/f"{prefix}assertions.tsv",["passed"],[{"passed":"true"}])
+    ids=G.WARMUP_ASSERTIONS if run_id=="warmup" else G.OFFICIAL_ASSERTIONS
+    _tsv(files/f"{prefix}assertions.tsv",["assertion_id","passed","observed","expected"],[{"assertion_id":value,"passed":"true","observed":"pass","expected":"pass"} for value in sorted(ids)])
     (files/f"{prefix}order.zero").write_bytes(b""); (files/f"{prefix}deal.zero").write_bytes(b"")
     if run_id=="warmup": return
     for tf in ("h1","h4","d1"): _tsv(files/f"{prefix}{tf}_bars.tsv",["open_time_broker","spread"],[{"open_time_broker":"2025-06-18T03:00:00","spread":"5"}])
@@ -40,6 +42,11 @@ def _write_campaign_outputs(root: Path, run_id: str) -> None:
     row={"schema_version":"v1","broker_day":"d","time_msc":"1","time":"t","bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"1","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
     for name in G.G1.OFFICIAL_NAMES:
         if name.startswith("ticks_"): _tsv(files/f"{prefix}{name}",columns,[row])
+
+
+def _auth_fields(commit: str, tree: str) -> dict[str,str]:
+    base=G.CANONICAL_REPORTS_RELATIVE
+    return {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_EXECUTOR_COMMIT":commit,"REVIEWED_EXECUTOR_TREE":tree,"NEW_ROOT_PATH":str(G.NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","CANONICAL_REPORTS_ROOT":base,"COMPLETE_OUTPUT_ROOT":f"{base}/{G.COMPLETE_NAME}","STOP_OUTPUT_ROOT":f"{base}/{G.STOP_NAME}","METADATA_RECEIPT_MODES":"COPIED_ALLOWLIST,ZERO_COPY","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","PNL_AUTHORIZED":"false","TARGET_EXIT_MFE_MAE_AUTHORIZED":"false","DEMO_LIVE_ATTACH_AUTHORIZED":"false","PRESET_PROFILE_ARMING_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false","DEPLOYMENT_AUTHORIZED":"false"}
 
 
 def _root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
@@ -171,12 +178,14 @@ def test_automatic_stop_packet_preserves_ledger_inventories_logs_and_outputs(tmp
     agent_logs = root / "Tester" / "Agent-1" / "logs"; agent_logs.mkdir(); (agent_logs / "y.log").write_text("agent", encoding="utf-8")
     ledger = G.Ledger(tmp_path / "ledger.json"); ledger.compilation(); ledger.run("warmup")
     preflight=G.inventory(root)
-    stop = G.preserve_stop_packet(stop=tmp_path / "stop", root=root, ledger=ledger.path, preflight=preflight, reports_attestation={"writable": True}, commands=[{"exit_code": 0}], run_ids=["warmup"], error=RuntimeError("missing report"), authorization_attestation={"artifact":"review.md"}, post_reports_inventory={"exists":True})
+    partial=tmp_path/"staging"; partial.mkdir(); (partial/"late_verifier_marker.txt").write_text("preserve",encoding="utf-8")
+    stop = G.preserve_stop_packet(stop=tmp_path / "stop", root=root, ledger=ledger.path, preflight=preflight, reports_attestation={"writable": True}, commands=[{"exit_code": 0}], run_ids=["warmup"], error=RuntimeError("late packet verifier failure"), authorization_attestation={"artifact":"review.md"}, post_reports_inventory={"exists":True},partial_staging=partial)
     assert json.loads((stop / "result.json").read_text(encoding="utf-8"))["status"] == "NP1_G2_EVIDENCE_INVALID"
     assert (stop / "invocation_ledger.json").is_file() and (stop / "preflight_root_inventory.json").is_file() and (stop / "post_stop_root_inventory.json").is_file()
     assert (stop / "logs" / "log_inventory.json").is_file() and (stop / "searched_location_inventory.json").is_file()
     assert json.loads((stop / "authorization_attestation.json").read_text())["artifact"] == "review.md"
     assert json.loads((stop / "post_reports_creation_inventory.json").read_text())["exists"] is True
+    assert (stop/"partial_staging"/"late_verifier_marker.txt").read_text()=="preserve" and not partial.exists()
     assert (stop / "manifest.json").is_file() and (stop / "manifest.sha256").is_file()
 
 
@@ -197,9 +206,9 @@ def test_wrong_root_rejection_is_read_only(tmp_path: Path, monkeypatch: pytest.M
 
 
 def test_closed_review_parser_exact_hash_fields_and_no_go(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    path = tmp_path / "A1_XAU_NP1G2A4_EXECUTION_AUTHORIZATION_C91D16B6_2026_07_13.md"
+    path = tmp_path / "A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"
     commit, tree = "a" * 40, "b" * 40
-    fields = {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(G.NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
+    fields = _auth_fields(commit,tree)
     block = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n" + "\n".join(f"{k}: {v}" for k,v in fields.items()) + "\nNP1_G2B_AUTHORIZATION_BLOCK_END\n"
     path.write_text(block, encoding="utf-8")
     assert G.parse_future_authorization(path, G.sha256_file(path), commit, tree) == fields
@@ -219,12 +228,12 @@ def test_end_to_end_warmup_failure_automatically_creates_stop(tmp_path: Path, mo
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=config/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8")
     commit,tree="a"*40,"b"*40; monkeypatch.setattr(G.G1,"git",lambda *args: "" if args[0]=="status" else (commit if "rev-parse" in args else tree))
-    review=tmp_path/"A1_XAU_NP1G2A4_EXECUTION_AUTHORIZATION_C91D16B6_2026_07_13.md"
-    fields={"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(root),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
+    review=tmp_path/"A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"
+    fields=_auth_fields(commit,tree)
     review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     class C: pass
     def compile_fake(root,editor,runner,version_reader):
-        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,{"exit_code":0})
+        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,{"command":[str(editor),f"/compile:{source}"],"exit_code":0})
     monkeypatch.setattr(G.G1,"compile_once",compile_fake)
     done=type("Done",(),{"returncode":0,"stdout":b"","stderr":b""})()
     with pytest.raises(RuntimeError,match="report"):
@@ -240,9 +249,9 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     for name in ("accounts.dat","servers.dat"):
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=root/"Config"/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8"); commit,tree="c"*40,"d"*40; monkeypatch.setattr(G.G1,"git",lambda *a:"" if a[0]=="status" else (commit if "rev-parse" in a else tree))
-    review=tmp_path/"A1_XAU_NP1G2A4_EXECUTION_AUTHORIZATION_C91D16B6_2026_07_13.md"; fields={"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(root),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}; review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
+    review=tmp_path/"A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"; fields=_auth_fields(commit,tree); review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     def comp(root,editor,runner,version_reader):
-        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('ok'); return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,{"exit_code":0})
+        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,{"command":[str(editor),f"/compile:{s}"],"exit_code":0})
     monkeypatch.setattr(G.G1,"compile_once",comp)
     import analyze_a1_xau_r6_native_spread_provenance_probe as AN
     prior=tmp_path/"prior.csv"; prior.write_text("run,timeframe,timestamp,raw_signed_spread\nrun1,H1,2025-06-18T03:00:00,-7\n",encoding="utf-8")
@@ -256,8 +265,15 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     assert complete.name==G.COMPLETE_NAME and json.loads((complete/"result.json").read_text())["status"]=="NP1_G2_DIAGNOSTIC_COMPLETE" and not (reports/G.STOP_NAME).exists(); G.verify_manifest(complete)
     assert json.loads((complete/"manifest.json").read_text())["schema_version"]=="a1_xau_r6_np1_g2_complete_manifest_v1"
     verification=json.loads((complete/"packet_verification.json").read_text())
-    assert verification["verifier"]=="temporary_copy_recompute_v1" and not verification["original_packet_mutated"]
+    assert verification["verifier"]=="full_packet_temporary_copy_recompute_v2" and not verification["original_packet_mutated"]
     assert len(json.loads((complete/"searched_location_inventory.json").read_text())["selected_sources"])==31
+    context={"authorization_attestation":json.loads((complete/"authorization_attestation.json").read_text()),"metadata_receipt":json.loads((complete/"metadata_receipt.json").read_text()),"root":root}
+    tampered=tmp_path/"tampered-result"; shutil.copytree(complete,tampered); payload=json.loads((tampered/"result.json").read_text()); payload["flags"].append("STALE"); (tampered/"result.json").write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    with pytest.raises(RuntimeError,match="semantic recomputation"): G.semantic_verify_packet(tampered,tmp_path/"scratch-result",context)
+    tampered_auth=tmp_path/"tampered-auth"; shutil.copytree(complete,tampered_auth); auth=json.loads((tampered_auth/"authorization_attestation.json").read_text()); auth["sha256"]="0"*64; G.write_json(tampered_auth/"authorization_attestation.json",auth)
+    with pytest.raises(RuntimeError,match="authorization attestation"): G.semantic_verify_packet(tampered_auth,tmp_path/"scratch-auth",context)
+    tampered_assert=tmp_path/"tampered-assert"; shutil.copytree(complete,tampered_assert); assertion=tampered_assert/"runs"/"warmup"/"assertions.tsv"; lines=assertion.read_text().splitlines(); assertion.write_text("\n".join(lines[:-1])+"\n",encoding="utf-8"); selected=json.loads((tampered_assert/"searched_location_inventory.json").read_text()); row=next(item for item in selected["selected_sources"] if item["kind"]=="assertions.tsv" and "warmup" in item["source"]); row["size_bytes"]=assertion.stat().st_size; row["sha256"]=G.sha256_file(assertion); G.write_json(tampered_assert/"searched_location_inventory.json",selected)
+    with pytest.raises(RuntimeError,match="assertion set"): G.semantic_verify_packet(tampered_assert,tmp_path/"scratch-assert",context)
 
 
 def test_noncanonical_reports_root_rejected_before_root_mutation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -284,7 +300,8 @@ def test_metadata_relabelled_source_rejected(tmp_path: Path, monkeypatch: pytest
 def test_static_no_normalization_result_research_attach_or_broker_action() -> None:
     source = SCRIPT.read_text(encoding="utf-8")
     lowered = source.lower()
-    assert all(token not in lowered for token in ("abs(spread", "max(spread", "net_profit", "profit_factor", "mfe", "mae", "order.send", "ordersend", "positionopen", "chartopen"))
+    assert all(token not in lowered for token in ("abs(spread", "max(spread", "net_profit", "profit_factor", "order.send", "ordersend", "positionopen", "chartopen"))
+    assert '"TARGET_EXIT_MFE_MAE_AUTHORIZED":"false"' in source
     assert "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY" not in source
     assert '"NP1_G2_EVIDENCE_INVALID"' in source
 

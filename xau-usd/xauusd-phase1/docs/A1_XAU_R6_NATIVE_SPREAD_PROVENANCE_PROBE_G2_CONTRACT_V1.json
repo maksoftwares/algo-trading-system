@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2A3_REVIEW_C91D16B6_2026_07_12.md",
-    "artifact_sha256": "6984b311e9dcce170436174800e7bb53e35ebfcd9ca88386a660065cd6ea13e7",
+    "artifact": "A1_XAU_NP1G2A4_REVIEW_D8699D6E_2026_07_12.md",
+    "artifact_sha256": "1afa02f6dd6ac344f4793746bdb36909ed22dc854b3275dc5572eb5410852220",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A4_READ_ONLY_SEMANTIC_VERIFICATION_AND_EXECUTION_PROVENANCE_CLOSURE"
+    "phase": "NP1-G2A5_FULL_PACKET_ATTESTATION_AND_EXECUTION_AUTHORITY_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -44,9 +44,14 @@
     "canonical_repository_reports_root_only": true
   },
   "review_parser": {
-    "accepted_filename": "A1_XAU_NP1G2A4_EXECUTION_AUTHORIZATION_C91D16B6_2026_07_13.md",
+    "accepted_filename": "A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md",
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
+    "required_bindings": [
+      "reviewed_executor_commit_tree", "canonical_reports_root", "complete_stop_roots",
+      "metadata_modes_allowlist", "one_compile_three_ordered_runs", "all_no_result_runtime_deployment_prohibitions"
+    ],
+    "outside_block_content_allowed": false,
     "reject_competing_fail_or_no_go": true
   },
   "stop_packet": {
@@ -59,7 +64,9 @@
   "semantic_verification": {
     "temporary_copy_only": true,
     "real_analyzer_recomputation": true,
-    "byte_compare_derived_outputs": true,
+    "byte_compare_full_result_analysis_readme_and_validation": true,
+    "validate_all_execution_provenance": true,
+    "require_exact_warmup_and_official_assertion_id_sets": true,
     "original_packet_must_remain_unchanged": true
   },
   "reviewed": {
@@ -69,7 +76,9 @@
     "g1b_tree": "4bf1d8fb662364551ea745b05155aa1dce950b85",
     "g1b_status": "NP1_G1_EVIDENCE_INVALID",
     "g2a3_commit": "c91d16b6adc8b0e3d86f4ab75266da6006dd45f8",
-    "g2a3_tree": "dfa32761e08f2b1968bca4558723d488dee17554"
+    "g2a3_tree": "dfa32761e08f2b1968bca4558723d488dee17554",
+    "g2a4_commit": "d8699d6e31fc5fba82ce1eb046d3d91359511a24",
+    "g2a4_tree": "4e0a6c865ab9c6f8301b3594ab5b19c35f0dec20"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
