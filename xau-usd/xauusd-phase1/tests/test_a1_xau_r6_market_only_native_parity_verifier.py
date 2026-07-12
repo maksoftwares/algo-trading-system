@@ -164,7 +164,7 @@ def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, availa
             "Expert": "A1XauR6MarketOnlyNativeParityOracle", "Symbol": "XAUUSD",
             "Period": "M5 (2015.06.01 - 2026.06.30)",
             "Model": "Every tick based on real ticks", "Initial Deposit": "10000.00 USD", "Leverage": "1:50",
-            "Bars in test": "1000", "Ticks modelled": "10000", "Total Trades": "0", "Total Deals": "0",
+            "Bars": "1000", "Ticks": "10000", "Total Trades": "0", "Total Deals": "0",
         }
         report_html = "<table>" + "".join(f"<tr><td>{key}:</td><td>{value}</td></tr>" for key, value in report_fields.items()) + f"</table><p>{inputs}</p>"
         (run / "native_report.htm").write_text(report_html, encoding="utf-8")
@@ -319,22 +319,71 @@ def test_complete_synthetic_packet_generates_every_artifact_and_passes(tmp_path:
     assert {"state_exact_match_rate", "data_availability_exact_match_rate", "first_mismatch_timestamp", "first_mismatch_field", "mismatch_count_by_native_state"} <= set(summary)
 
 
+def _verbatim_build_5833_report_fragment() -> str:
+    # Verbatim relevant rows from committed Capital.com Build-5833 report:
+    # outputs/reports/A1_XAU_FEE_NATIVE_REPLAYS_EXACT_20260710/runs/
+    # h4_d1_long_best_box2_atr80/A1_XAU_FEE_NATIVE_REPLAY_H4_D1_LONG_BEST_BOX2_ATR80.htm
+    return """<table>
+   <tr align="right">
+      <td nowrap colspan="3">Expert:</td>
+      <td nowrap colspan="10" align="left"><b>A1XauFeeEvidence_d15fc9a6</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3">Symbol:</td>
+      <td nowrap colspan="10" align="left"><b>XAUUSD</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3">Period:</td>
+      <td nowrap colspan="10" align="left"><b>M5 (2022.07.01 - 2026.06.30)</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3" >Initial Deposit:</td>
+      <td nowrap colspan="10" align="left"><b>1 000.00</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3" >Leverage:</td>
+      <td nowrap colspan="10" align="left"><b>1:50</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3">Bars:</td>
+      <td nowrap><b>282644</b></td>
+      <td nowrap colspan="3">Ticks:</td>
+      <td nowrap><b>204204660</b></td>
+      <td nowrap colspan="3">Symbols:</td>
+      <td nowrap colspan="2"><b>1</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3">Total Trades:</td>
+      <td nowrap><b>145</b></td>
+   </tr>
+   <tr align="right">
+      <td nowrap colspan="3">Total Deals:</td>
+      <td nowrap><b>290</b></td>
+   </tr>
+</table>"""
+
+
 def test_real_mt5_report_shape_and_locked_iso_timestamp_contract(tmp_path: Path) -> None:
     report = tmp_path / "native_report.htm"
-    report.write_text(
-        "<table><tr><td>Expert:</td><td><b>A1XauR6MarketOnlyNativeParityOracle</b></td></tr>"
-        "<tr><td>Symbol:</td><td><b>XAUUSD</b></td></tr><tr><td>Period:</td><td><b>M5 (2015.06.01 - 2026.06.30)</b></td></tr>"
-        "<tr><td>Model:</td><td><b>Every tick based on real ticks</b></td></tr><tr><td>Initial Deposit:</td><td><b>10000.00 USD</b></td></tr>"
-        "<tr><td>Leverage:</td><td><b>1:50</b></td></tr><tr><td>Bars in test:</td><td><b>1,000</b></td></tr>"
-        "<tr><td>Ticks modelled:</td><td><b>10,000</b></td></tr><tr><td>Total Trades:</td><td><b>0</b></td></tr>"
-        "<tr><td>Total Deals:</td><td><b>0</b></td></tr></table>", encoding="utf-8",
-    )
+    report.write_text(_verbatim_build_5833_report_fragment(), encoding="utf-8")
     parsed = V.parse_native_report(report)
-    assert parsed["expert"] == "A1XauR6MarketOnlyNativeParityOracle"
-    assert parsed["period"] == "M5 (2015.06.01 - 2026.06.30)"
+    assert parsed["expert"] == "A1XauFeeEvidence_d15fc9a6"
+    assert parsed["period"] == "M5 (2022.07.01 - 2026.06.30)"
+    assert parsed["bars"] == 282644 and parsed["ticks"] == 204204660
+    assert parsed["total_trades"] == 145 and parsed["total_deals"] == 290
+    assert parsed["model"] == ""
     assert V._dt("2016-07-01T00:00:00") == datetime(2016, 7, 1)
     with pytest.raises(ValueError, match="locked ISO"):
         V._dt("2016.07.01 00:00:00")
+
+
+@pytest.mark.parametrize("duplicate_value", ["282644", "999999"])
+def test_native_report_rejects_duplicate_or_conflicting_labels(tmp_path: Path, duplicate_value: str) -> None:
+    report = tmp_path / "native_report.htm"
+    duplicate = f'<tr><td nowrap colspan="3">Bars:</td><td nowrap><b>{duplicate_value}</b></td></tr>'
+    report.write_text(_verbatim_build_5833_report_fragment().replace("</table>", duplicate + "</table>"), encoding="utf-8")
+    with pytest.raises(ValueError, match="duplicate/conflicting Bars"):
+        V.parse_native_report(report)
 
 
 def test_weekend_gap_requires_exact_friday_close_and_monday_reopen_boundaries() -> None:
@@ -437,6 +486,27 @@ def test_malformed_native_router_rows_are_evidence_invalid(
 
 
 @pytest.mark.parametrize(
+    ("data_available", "state_name", "state_code"),
+    [("false", "uptrend", "2"), ("true", "unknown", "0")],
+)
+def test_native_availability_state_coherence_is_evidence_invalid(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    data_available: str, state_name: str, state_code: str,
+) -> None:
+    evidence, _, schema = _synthetic_packet(tmp_path, monkeypatch)
+    for run_id in ("run1", "run2"):
+        path = evidence / "runs" / run_id / "native_router_rows.tsv"
+        rows = V.read_tsv(path, schema["native_router_rows"]["columns"])
+        rows[0].update({"data_available": data_available, "state_name": state_name, "state_code": state_code})
+        _write_tsv(path, schema["native_router_rows"]["columns"], rows)
+    result = _finalize(evidence)
+    assert result.status == "R6_NP1_EVIDENCE_INVALID"
+    payload = json.loads((evidence / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json").read_text(encoding="utf-8"))
+    assert payload["errors"]["parity"] == []
+    assert any("availability/state coherence" in error for error in payload["errors"]["invalid"])
+
+
+@pytest.mark.parametrize(
     "mutation", ["review_tree", "dependency_version", "command_stream", "command_order", "tester_exit", "extra_command"]
 )
 def test_attestation_binds_exact_review_dependencies_and_command_streams(
@@ -492,7 +562,7 @@ def test_explicit_status_precedence_and_missing_gates(
         path = evidence / "runs" / "run1" / "native_router_rows.tsv"
         rows = V.read_tsv(path, schema["native_router_rows"]["columns"])
         if mutation == "parity":
-            rows[0]["state_name"], rows[0]["state_code"] = "shock", "1"
+            rows[0]["data_available"], rows[0]["state_name"], rows[0]["state_code"] = "true", "uptrend", "2"
         else:
             rows.pop()
         _write_tsv(path, schema["native_router_rows"]["columns"], rows)

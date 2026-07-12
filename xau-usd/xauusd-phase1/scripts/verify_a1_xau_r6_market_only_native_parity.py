@@ -18,6 +18,7 @@ import tempfile
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
@@ -192,35 +193,81 @@ def _decode_text(path: Path) -> str:
     return raw.decode("utf-8-sig", errors="replace")
 
 
+class _Mt5CellParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.cells: list[str] = []
+        self._depth = 0
+        self._parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "td":
+            self._depth = 1
+            self._parts = []
+        elif self._depth:
+            self._depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self._depth:
+            return
+        self._depth -= 1
+        if tag.lower() == "td" and self._depth == 0:
+            self.cells.append(" ".join("".join(self._parts).split()))
+
+    def handle_data(self, data: str) -> None:
+        if self._depth:
+            self._parts.append(data)
+
+
+def _native_report_fields(text: str) -> dict[str, list[str]]:
+    parser = _Mt5CellParser()
+    parser.feed(text)
+    fields: dict[str, list[str]] = {}
+    for index, cell in enumerate(parser.cells[:-1]):
+        if cell.endswith(":") and cell[:-1]:
+            fields.setdefault(cell[:-1], []).append(parser.cells[index + 1])
+    return fields
+
+
 def parse_native_report(path: Path) -> dict[str, Any]:
     text = _decode_text(path)
     plain = html.unescape(re.sub(r"<[^>]+>", "\n", text))
+    fields = _native_report_fields(text)
 
-    def field(label: str) -> str:
+    def field(label: str, *, required: bool = True) -> str:
+        values = fields.get(label, [])
+        if len(values) > 1:
+            raise ValueError(f"native report duplicate/conflicting {label} labels")
+        if len(values) == 1:
+            return values[0]
         patterns = (
             rf"{re.escape(label)}\s*:?</td>\s*<td[^>]*>\s*([^<\r\n]+)",
             rf"(?:^|\n)\s*{re.escape(label)}\s*[:=]\s*([^\r\n]+)",
         )
+        matches: list[str] = []
         for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
-            if match:
-                return html.unescape(match.group(1)).strip()
-        match = re.search(rf"(?:^|\n)\s*{re.escape(label)}\s*:?\s*\n+\s*([^\n]+)", plain, re.IGNORECASE)
-        if match:
-            return match.group(1).strip()
+            matches.extend(html.unescape(match).strip() for match in re.findall(pattern, text, re.IGNORECASE | re.MULTILINE))
+        matches.extend(match.strip() for match in re.findall(rf"(?:^|\n)\s*{re.escape(label)}\s*:?\s*\n+\s*([^\n]+)", plain, re.IGNORECASE))
+        unique = list(dict.fromkeys(matches))
+        if len(matches) > 1 or len(unique) > 1:
+            raise ValueError(f"native report duplicate/conflicting {label} labels")
+        if unique:
+            return unique[0]
+        if not required:
+            return ""
         raise ValueError(f"native report missing {label}")
 
     def integer(label: str) -> int:
-        match = re.search(r"[0-9][0-9,]*", field(label))
+        match = re.search(r"[0-9][0-9,\s]*", field(label))
         if not match:
             raise ValueError(f"native report invalid {label}")
-        return int(match.group(0).replace(",", ""))
+        return int(re.sub(r"[\s,]", "", match.group(0)))
 
     return {
         "expert": field("Expert"), "symbol": field("Symbol"), "period": field("Period"),
-        "model": field("Model"), "initial_deposit": field("Initial Deposit"),
-        "leverage": field("Leverage"), "bars": integer("Bars in test"),
-        "ticks": integer("Ticks modelled"), "total_trades": integer("Total Trades"),
+        "model": field("Model", required=False), "initial_deposit": field("Initial Deposit"),
+        "leverage": field("Leverage"), "bars": integer("Bars"),
+        "ticks": integer("Ticks"), "total_trades": integer("Total Trades"),
         "total_deals": integer("Total Deals"), "text": plain,
     }
 
@@ -228,12 +275,13 @@ def parse_native_report(path: Path) -> dict[str, Any]:
 def verify_native_report(path: Path, run_id: str, buckets: Buckets) -> dict[str, Any]:
     report = parse_native_report(path)
     exact = {
-        "expert": "A1XauR6MarketOnlyNativeParityOracle", "symbol": "XAUUSD",
-        "model": "Every tick based on real ticks", "leverage": "1:50",
+        "expert": "A1XauR6MarketOnlyNativeParityOracle", "symbol": "XAUUSD", "leverage": "1:50",
     }
     for key, expected in exact.items():
         if report[key] != expected:
             buckets.invalid.append(f"{run_id}: native report {key} mismatch: {report[key]!r}")
+    if report["model"] not in {"", "Every tick based on real ticks"}:
+        buckets.invalid.append(f"{run_id}: native report model mismatch: {report['model']!r}")
     if re.fullmatch(r"M5\s+\(2015\.06\.01\s+-\s+2026\.06\.30\)", report["period"]) is None:
         buckets.invalid.append(f"{run_id}: native report period mismatch: {report['period']!r}")
     deposit_match = re.search(r"([0-9][0-9,.\s]*)\s*(USD)?", report["initial_deposit"], re.IGNORECASE)
@@ -436,8 +484,13 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
             if row["state_name"] not in NATIVE_TO_CANONICAL:
                 raise ValueError("Router row state_name is not locked")
             native_code = int(row["state_code"])
-            if native_code not in STATE_CODES.values() or native_code != STATE_CODES[NATIVE_TO_CANONICAL[row["state_name"]]]:
+            canonical_state = NATIVE_TO_CANONICAL[row["state_name"]]
+            if native_code not in STATE_CODES.values() or native_code != STATE_CODES[canonical_state]:
                 raise ValueError("Router row state_code/name mismatch")
+            if (row["data_available"] == "false") != (canonical_state == "UNKNOWN" and native_code == 0):
+                raise ValueError("Router row availability/state coherence mismatch")
+            if row["data_available"] == "true" and (canonical_state == "UNKNOWN" or native_code == 0):
+                raise ValueError("Router row available state must be non-UNKNOWN/nonzero")
             if int(row["native_error_code"]) != 0:
                 raise ValueError("Router row native_error_code is nonzero")
             if any(int(row[name]) < 0 for name in ("h1_bar_count", "h4_bar_count", "d1_bar_count")):
