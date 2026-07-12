@@ -5,9 +5,14 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import json
+import os
+import platform
 import re
 import shutil
 import subprocess
+import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Iterable, Sequence
@@ -33,10 +38,17 @@ class CompileResult:
     ex5_sha256: str
     returncode: int
     metaeditor_version: str
+    command: tuple[str, ...]
+    stdout_sha256: str
+    stderr_sha256: str
 
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
 
 
 def read_compile_log(path: Path) -> str:
@@ -113,7 +125,12 @@ def compile_only_safety_check(
         raise RuntimeError(f"MetaEditor executable version must be 5.0.0.5833; found {version!r}")
     normalized_log = f"MetaEditor executable version: {version}\n{text.strip()}\n"
     log.write_text(normalized_log, encoding="utf-8", newline="\n")
-    return CompileResult(source, ex5, log, sha256_file(source), sha256_file(ex5), returncode, version)
+    stdout = bytes(getattr(completed, "stdout", b"") or b"")
+    stderr = bytes(getattr(completed, "stderr", b"") or b"")
+    return CompileResult(
+        source, ex5, log, sha256_file(source), sha256_file(ex5), returncode, version,
+        tuple(command), sha256_bytes(stdout), sha256_bytes(stderr),
+    )
 
 
 def render_tester_ini(*, run_id: str, report_relative: str) -> str:
@@ -153,17 +170,38 @@ InpDealZeroFileName=np1_{run_id}_deal.zero
 """
 
 
-def assert_tester_ini_contract(text: str) -> None:
-    required = (
-        "Expert=A1XauR6MarketOnlyNativeParityOracle.ex5", "Symbol=XAUUSD", "Period=M5",
-        "Model=4", "Optimization=0", "FromDate=2015.06.01", "ToDate=2026.07.01",
-        "Deposit=10000", "Currency=USD", "Leverage=50", "UseRemote=0", "UseCloud=0",
-    )
-    missing = [item for item in required if item not in text]
-    if missing:
-        raise RuntimeError(f"tester INI contract missing: {missing}")
-    forbidden = ("Login=", "Server=", "Profile=", "Chart=", "Visual=1")
-    found = [item for item in forbidden if item in text]
+def parse_ini_exact(text: str) -> dict[str, dict[str, str]]:
+    sections: dict[str, dict[str, str]] = {}
+    current: dict[str, str] | None = None
+    for number, raw in enumerate(text.splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith((";", "#")):
+            continue
+        if line.startswith("[") and line.endswith("]"):
+            name = line[1:-1]
+            if not name or name in sections:
+                raise RuntimeError(f"duplicate/invalid INI section at line {number}")
+            current = sections.setdefault(name, {})
+            continue
+        if current is None or "=" not in line:
+            raise RuntimeError(f"invalid INI line {number}")
+        key, value = line.split("=", 1)
+        if not key or key in current:
+            raise RuntimeError(f"duplicate/invalid INI key {key!r} at line {number}")
+        current[key] = value
+    return sections
+
+
+def assert_tester_ini_contract(text: str, *, run_id: str | None = None) -> None:
+    if run_id is None:
+        parsed = parse_ini_exact(text)
+        run_id = parsed.get("TesterInputs", {}).get("InpRunId", "")
+    expected = parse_ini_exact(render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"))
+    actual = parse_ini_exact(text)
+    if actual != expected:
+        raise RuntimeError("tester INI exact key/value contract mismatch")
+    forbidden = {"Login", "Server", "Profile", "Chart", "Visual"}
+    found = sorted(forbidden & set().union(*(set(values) for values in actual.values())))
     if found:
         raise RuntimeError(f"tester INI contains prohibited runtime setting(s): {found}")
 
@@ -189,20 +227,91 @@ def clear_emitted_outputs(tester_sandbox: Path, run_id: str) -> None:
     for files_dir in (tester_sandbox / "Tester").glob("Agent-*/MQL5/Files"):
         for filename in emitted_names(run_id).values():
             (files_dir / filename).unlink(missing_ok=True)
+    (tester_sandbox / "Reports" / f"np1_{run_id}.htm").unlink(missing_ok=True)
 
 
-def collect_run_outputs(tester_sandbox: Path, run_id: str, ini: Path, run_dir: Path) -> None:
+def collect_run_outputs(
+    tester_sandbox: Path, run_id: str, ini: Path, run_dir: Path, *, not_before_ns: int | None = None
+) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(ini, run_dir / "tester.ini")
     report = tester_sandbox / "Reports" / f"np1_{run_id}.htm"
     if not report.is_file():
         raise RuntimeError(f"Strategy Tester report missing for {run_id}: {report}")
+    if not_before_ns is not None and report.stat().st_mtime_ns + 2_000_000_000 < not_before_ns:
+        raise RuntimeError(f"Strategy Tester report is stale for {run_id}: {report}")
     shutil.copyfile(report, run_dir / "native_report.htm")
     for destination_name, emitted_name in emitted_names(run_id).items():
         matches = list((tester_sandbox / "Tester").glob(f"Agent-*/MQL5/Files/{emitted_name}"))
         if len(matches) != 1:
             raise RuntimeError(f"expected exactly one isolated {run_id} output {emitted_name}; found {len(matches)}")
         shutil.copyfile(matches[0], run_dir / destination_name)
+
+
+def _command_record(command: Sequence[str], completed: object) -> dict[str, object]:
+    stdout = bytes(getattr(completed, "stdout", b"") or b"")
+    stderr = bytes(getattr(completed, "stderr", b"") or b"")
+    return {
+        "command": [str(value) for value in command],
+        "exit_code": int(getattr(completed, "returncode", 1)),
+        "stdout_sha256": sha256_bytes(stdout),
+        "stderr_sha256": sha256_bytes(stderr),
+    }
+
+
+def _git(*args: str) -> str:
+    completed = subprocess.run(["git", *args], cwd=B.ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+    if completed.returncode != 0:
+        raise RuntimeError(f"git attestation command failed: {' '.join(args)}")
+    return completed.stdout.decode("utf-8", errors="strict").strip()
+
+
+def capture_clean_git_identity() -> dict[str, str]:
+    status = _git("status", "--porcelain=v1", "--untracked-files=all")
+    if status:
+        raise RuntimeError("exact-commit attestation requires a clean worktree before evidence generation")
+    return {"git_head": _git("rev-parse", "HEAD"), "git_tree": _git("rev-parse", "HEAD^{tree}"), "git_status_porcelain": ""}
+
+
+def build_campaign_attestation(
+    output_dir: Path, compiled: CompileResult, commands: list[dict[str, object]], git_identity: dict[str, str]
+) -> dict[str, object]:
+    if _git("rev-parse", "HEAD") != git_identity["git_head"] or _git("rev-parse", "HEAD^{tree}") != git_identity["git_tree"]:
+        raise RuntimeError("exact commit/tree changed during evidence generation")
+    tracked = subprocess.run(["git", "diff", "--quiet", "HEAD", "--"], cwd=B.ROOT, check=False)
+    if tracked.returncode != 0:
+        raise RuntimeError("tracked files changed during evidence generation")
+    artifact_hashes = {
+        path.relative_to(output_dir).as_posix(): sha256_file(path)
+        for path in sorted(output_dir.rglob("*")) if path.is_file()
+        and path.name not in {"test_validation.md", "manifest.json", "manifest.sha256"}
+        and path.parent.name != "parity"
+        and not path.name.startswith("A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_")
+    }
+    return {
+        "schema_version": "a1_xau_np1_exact_commit_attestation_v1",
+        **git_identity,
+        "os": platform.platform(),
+        "architecture": platform.machine(),
+        "python_version": platform.python_version(),
+        "python_executable": sys.executable,
+        "mt5_terminal_build": EXPECTED_BUILD,
+        "metaeditor_version": compiled.metaeditor_version,
+        "same_ex5_sha256_run1_run2": compiled.ex5_sha256,
+        "commands": [
+            {
+                "command": list(compiled.command), "exit_code": compiled.returncode,
+                "stdout_sha256": compiled.stdout_sha256, "stderr_sha256": compiled.stderr_sha256,
+            },
+            *commands,
+        ],
+        "artifact_sha256": artifact_hashes,
+        "environment": {
+            "cwd": str(B.ROOT), "timezone": os.environ.get("TZ", "system-local"),
+            "account_login": 1025742, "server": "Capital.ComMena-Demo",
+            "currency": "USD", "leverage": "1:50", "symbol": "XAUUSD",
+        },
+    }
 
 
 def run_historical_evidence_campaign(
@@ -214,12 +323,18 @@ def run_historical_evidence_campaign(
     output_dir: Path,
     timeout_seconds: int = 7200,
     command_runner: CommandRunner = default_command_runner,
+    compile_command_runner: CommandRunner = default_command_runner,
+    metaeditor_version_reader: Callable[[Path], str] = default_metaeditor_version_reader,
 ) -> list[Path]:
     """Future NP1-C hook. It is fail-closed unless exact review authorization is supplied."""
     if authorization != NP1_C_AUTHORIZATION:
         raise PermissionError("real historical Strategy Tester evidence remains prohibited before NP1-C review")
+    git_identity = capture_clean_git_identity()
     terminal = validate_tester_sandbox(tester_sandbox)
-    compiled = compile_only_safety_check(metaeditor=metaeditor, workspace=compile_workspace)
+    compiled = compile_only_safety_check(
+        metaeditor=metaeditor, workspace=compile_workspace, command_runner=compile_command_runner,
+        version_reader=metaeditor_version_reader,
+    )
     compiled_ex5 = compiled.ex5
     experts = tester_sandbox / "MQL5" / "Experts"
     experts.mkdir(parents=True, exist_ok=True)
@@ -234,22 +349,27 @@ def run_historical_evidence_campaign(
     shutil.copyfile(compiled.log, compiled_dir / "compile_A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY.log")
     B.build_oracle(compiled_dir / B.ORACLE_NAME, compiled_dir / "source_equivalence.json")
     produced: list[Path] = []
+    command_records: list[dict[str, object]] = []
     for run_id in ("run1", "run2"):
         run_dir = output_dir / "runs" / run_id
         ini = configs / f"np1_{run_id}.ini"
         text = render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}")
-        assert_tester_ini_contract(text)
+        assert_tester_ini_contract(text, run_id=run_id)
         ini.write_text(text, encoding="utf-8", newline="\n")
         clear_emitted_outputs(tester_sandbox, run_id)
-        completed = command_runner([str(terminal), "/portable", f"/config:{ini}"], tester_sandbox, timeout_seconds)
+        command = [str(terminal), "/portable", f"/config:{ini}"]
+        not_before_ns = time.time_ns()
+        completed = command_runner(command, tester_sandbox, timeout_seconds)
+        command_records.append(_command_record(command, completed))
         if int(getattr(completed, "returncode", 1)) != 0:
             raise RuntimeError(f"Strategy Tester {run_id} failed")
-        collect_run_outputs(tester_sandbox, run_id, ini, run_dir)
+        collect_run_outputs(tester_sandbox, run_id, ini, run_dir, not_before_ns=not_before_ns)
         produced.append(run_dir)
     if sha256_file(compiled_dir / compiled.ex5.name) != compiled.ex5_sha256:
         raise RuntimeError("compiled EX5 changed during evidence assembly")
     import verify_a1_xau_r6_market_only_native_parity as verifier
-    result = verifier.finalize_evidence_directory(output_dir)
+    attestation = build_campaign_attestation(output_dir, compiled, command_records, git_identity)
+    result = verifier.finalize_evidence_directory(output_dir, attestation=attestation)
     if result.status not in {
         "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL",
         "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS",

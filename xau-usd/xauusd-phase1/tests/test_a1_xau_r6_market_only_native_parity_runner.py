@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import os
 import sys
+import time
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -138,3 +140,70 @@ def test_collection_rejects_ambiguous_agent_outputs(tmp_path: Path) -> None:
             (files / emitted_name).write_bytes(b"")
     with pytest.raises(RuntimeError, match="expected exactly one isolated"):
         R.collect_run_outputs(sandbox, "run1", ini, tmp_path / "run")
+
+
+def test_exact_ini_parser_rejects_duplicate_keys_and_stale_report(tmp_path: Path) -> None:
+    ini_text = R.render_tester_ini(run_id="run1", report_relative="Reports/np1_run1")
+    with pytest.raises(RuntimeError, match="duplicate"):
+        R.assert_tester_ini_contract(ini_text.replace("Symbol=XAUUSD", "Symbol=XAUUSD\nSymbol=XAUUSD"))
+
+    sandbox = tmp_path / "tester"
+    files = sandbox / "Tester" / "Agent-a" / "MQL5" / "Files"
+    files.mkdir(parents=True)
+    report = sandbox / "Reports" / "np1_run1.htm"
+    report.parent.mkdir()
+    report.write_text("stale", encoding="utf-8")
+    old = time.time_ns() - 10_000_000_000
+    os.utime(report, ns=(old, old))
+    ini = tmp_path / "run1.ini"
+    ini.write_text(ini_text, encoding="utf-8")
+    for destination_name, emitted_name in R.emitted_names("run1").items():
+        (files / emitted_name).write_bytes(b"" if destination_name.endswith(".zero") else b"fresh")
+    with pytest.raises(RuntimeError, match="stale"):
+        R.collect_run_outputs(sandbox, "run1", ini, tmp_path / "run", not_before_ns=time.time_ns())
+
+
+def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    sandbox = tmp_path / "tester"
+    sandbox.mkdir()
+    (sandbox / ".a1_xau_np1_tester_only").write_text("NP1 TESTER ONLY\n", encoding="utf-8")
+    (sandbox / "terminal64.exe").write_bytes(b"")
+    editor = _metaeditor(tmp_path / "editor" / "MetaEditor64.exe")
+    agent_files = sandbox / "Tester" / "Agent-fake" / "MQL5" / "Files"
+    agent_files.mkdir(parents=True)
+
+    class FakeTerminal:
+        def __init__(self):
+            self.commands = []
+
+        def __call__(self, command, cwd: Path, timeout_seconds: int):
+            self.commands.append(list(command))
+            run_id = Path(next(value for value in command if str(value).startswith("/config:")).split(":", 1)[1]).stem.removeprefix("np1_")
+            reports = sandbox / "Reports"
+            reports.mkdir(exist_ok=True)
+            (reports / f"np1_{run_id}.htm").write_text(f"fresh-{run_id}", encoding="utf-8")
+            for destination_name, emitted_name in R.emitted_names(run_id).items():
+                (agent_files / emitted_name).write_bytes(b"" if destination_name.endswith(".zero") else f"{run_id}:{destination_name}".encode())
+            return SimpleNamespace(returncode=0, stdout=b"terminal-out", stderr=b"")
+
+    captured = {}
+    import verify_a1_xau_r6_market_only_native_parity as verifier
+
+    def fake_finalize(path: Path, *, attestation):
+        captured["path"], captured["attestation"] = path, attestation
+        return SimpleNamespace(status="R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", errors=())
+
+    monkeypatch.setattr(verifier, "finalize_evidence_directory", fake_finalize)
+    monkeypatch.setattr(R, "capture_clean_git_identity", lambda: {"git_head": "a" * 40, "git_tree": "b" * 40, "git_status_porcelain": ""})
+    monkeypatch.setattr(R, "build_campaign_attestation", lambda output_dir, compiled, commands, git_identity: {"commands": commands})
+    terminal = FakeTerminal()
+    output = tmp_path / "evidence"
+    produced = R.run_historical_evidence_campaign(
+        authorization=R.NP1_C_AUTHORIZATION, tester_sandbox=sandbox, metaeditor=editor,
+        compile_workspace=tmp_path / "compile-test", output_dir=output, command_runner=terminal,
+        compile_command_runner=FakeMetaEditor(), metaeditor_version_reader=lambda _: "5.0.0.5833",
+    )
+    assert produced == [output / "runs" / "run1", output / "runs" / "run2"]
+    assert len(terminal.commands) == 2 and len(captured["attestation"]["commands"]) == 2
+    assert (output / "runs" / "run1" / "native_router_rows.tsv").read_text() == "run1:native_router_rows.tsv"
+    assert (output / "runs" / "run2" / "native_router_rows.tsv").read_text() == "run2:native_router_rows.tsv"

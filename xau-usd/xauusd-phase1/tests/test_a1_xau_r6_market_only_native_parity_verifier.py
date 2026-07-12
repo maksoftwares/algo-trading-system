@@ -4,6 +4,9 @@ import csv
 import copy
 import importlib.util
 import json
+import hashlib
+import platform
+import subprocess
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -74,8 +77,8 @@ def test_assertion_contract_requires_open_positions_and_pending_orders(tmp_path:
         if item != "pending_orders_zero"
     ]
     _write_tsv(path, contract["columns"], rows)
-    errors = V.verify_assertions(path, schema)
-    assert errors == ["required assertion did not pass: pending_orders_zero"]
+    errors = V.verify_assertions(path, schema, "run1")
+    assert "required assertion did not pass: pending_orders_zero" in errors
 
 
 def test_manifest_policy_is_nonrecursive_and_sidecar_hashes_manifest(tmp_path: Path) -> None:
@@ -115,11 +118,15 @@ def _bar_rows(schema: dict, timeframe: str, times: list[datetime]) -> list[dict[
     return rows
 
 
-def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, dict, dict]:
-    source, real_schema, manifest = V.load_contracts()
+def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, available: bool = False) -> tuple[Path, dict, dict]:
+    real_source, real_schema, manifest = V.load_contracts()
+    source = copy.deepcopy(real_source)
     schema = copy.deepcopy(real_schema)
     schema["native_router_rows"]["evidence_interval_from_inclusive"] = "2016-07-01T00:00:00"
     schema["native_router_rows"]["evidence_interval_to_exclusive"] = "2016-07-01T08:00:00"
+    synthetic_start = datetime(2016, 7, 1) - (timedelta(weeks=309) if available else timedelta(days=3))
+    source["tester_environment"]["test_from_inclusive_broker_time"] = synthetic_start.isoformat()
+    source["tester_environment"]["test_to_exclusive_broker_time"] = "2016-07-01T08:00:00"
     monkeypatch.setattr(V, "load_contracts", lambda: (source, schema, manifest))
     evidence = tmp_path / "evidence"
     compiled = evidence / "compiled"
@@ -131,37 +138,72 @@ def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[
     )
     eq_sha = V.sha256_file(compiled / "source_equivalence.json")
     base = datetime(2016, 7, 1)
-    h1_rows = _bar_rows(schema, "H1", [base - timedelta(hours=4) + timedelta(hours=i) for i in range(10)])
-    h4_rows = _bar_rows(schema, "H4", [base - timedelta(hours=4), base, base + timedelta(hours=4), base + timedelta(hours=8)])
-    d1_rows = _bar_rows(schema, "D1", [base - timedelta(days=3) + timedelta(days=i) for i in range(5)])
+    if available:
+        weekly = [synthetic_start + timedelta(weeks=i) for i in range(309)]
+        h1_times = [*weekly, *[base - timedelta(hours=1) + timedelta(hours=i) for i in range(9)]]
+        h4_times = [*weekly, base - timedelta(hours=4), base, base + timedelta(hours=4)]
+        d1_times = [*weekly, base - timedelta(days=1), base]
+    else:
+        h1_times = [synthetic_start + timedelta(hours=i) for i in range(80)]
+        h4_times = [synthetic_start + timedelta(hours=4 * i) for i in range(20)]
+        d1_times = [synthetic_start + timedelta(days=i) for i in range(4)]
+    h1_rows = _bar_rows(schema, "H1", h1_times)
+    h4_rows = _bar_rows(schema, "H4", h4_times)
+    d1_rows = _bar_rows(schema, "D1", d1_times)
     decisions = [base, base + timedelta(hours=4)]
     last_times = [
-        (h1_rows[3]["open_time_broker"], h4_rows[0]["open_time_broker"], d1_rows[2]["open_time_broker"]),
-        (h1_rows[7]["open_time_broker"], h4_rows[1]["open_time_broker"], d1_rows[2]["open_time_broker"]),
+        ((base - timedelta(hours=1)).isoformat(), (base - timedelta(hours=4)).isoformat(), (base - timedelta(days=1)).isoformat()),
+        ((base + timedelta(hours=3)).isoformat(), base.isoformat(), (base - timedelta(days=1)).isoformat()),
     ]
     router_columns = schema["native_router_rows"]["columns"]
     for run_id in ("run1", "run2"):
         run = evidence / "runs" / run_id
         run.mkdir(parents=True)
         (run / "tester.ini").write_text(R.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"), encoding="utf-8")
-        (run / "native_report.htm").write_text(
-            "<table><tr><td>Total Trades:</td><td>0</td></tr><tr><td>Total Deals:</td><td>0</td></tr></table>", encoding="utf-8"
-        )
+        inputs = " ".join(f"{key}={value}" for key, value in R.parse_ini_exact(R.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"))["TesterInputs"].items())
+        inputs += " InpTargetSymbol=XAUUSD InpAtrPeriod=14 InpRegimeFastEmaPeriod=20 InpRegimeSlowEmaPeriod=50 InpRegimeSlopeLagBars=5 InpRegimePersistenceD1Bars=2 InpRegimeRequireH4Confirm=true InpRegimeShockH1RangeAtrMultiple=3.0 InpRegimeShockD1AtrLookback=60 InpRegimeShockD1AtrPercentileMin=95.0 InpRegimeCompressionBoxDays=5 InpRegimeCompressionD1AtrPercentileMax=30.0 InpRegimeCompressionRangeMedianMax=1.0"
+        report_fields = {
+            "Expert": "A1XauR6MarketOnlyNativeParityOracle.ex5", "Symbol": "XAUUSD", "Period": "M5",
+            "Model": "Every tick based on real ticks", "Initial Deposit": "10000.00 USD", "Leverage": "1:50",
+            "Bars in test": "1000", "Ticks modelled": "10000", "Total Trades": "0", "Total Deals": "0",
+        }
+        report_html = "<table>" + "".join(f"<tr><td>{key}:</td><td>{value}</td></tr>" for key, value in report_fields.items()) + f"</table><p>{inputs}</p>"
+        (run / "native_report.htm").write_text(report_html, encoding="utf-8")
         _write_tsv(run / "native_h1_bars.tsv", schema["bar_exports"]["columns"], h1_rows)
         _write_tsv(run / "native_h4_bars.tsv", schema["bar_exports"]["columns"], h4_rows)
         _write_tsv(run / "native_d1_bars.tsv", schema["bar_exports"]["columns"], d1_rows)
         native_rows = []
+        router = V.load_python_router(source)
+        h1_bars = [router.Bar(datetime.fromisoformat(row["open_time_broker"]), *(float(row[name]) for name in ("open", "high", "low", "close"))) for row in h1_rows]
+        h4_bars = [router.Bar(datetime.fromisoformat(row["open_time_broker"]), *(float(row[name]) for name in ("open", "high", "low", "close"))) for row in h4_rows]
+        d1_bars = [router.Bar(datetime.fromisoformat(row["open_time_broker"]), *(float(row[name]) for name in ("open", "high", "low", "close"))) for row in d1_rows]
         for decision, (h1_last, h4_last, d1_last) in zip(decisions, last_times):
             row = {column: "" for column in router_columns}
             row.update({
                 "schema_version": "a1_xau_r6_native_router_row_v1", "run_id": run_id,
                 "timestamp_broker": decision.isoformat(), "symbol": "XAUUSD",
                 "router_source_commit": B.SOURCE_COMMIT, "router_source_blob": B.SOURCE_BLOB,
-                "source_equivalence_sha256": eq_sha, "h1_bar_count": str(len(h1_rows)),
-                "h4_bar_count": str(len(h4_rows)), "d1_bar_count": str(len(d1_rows)),
+                "source_equivalence_sha256": eq_sha,
+                "h1_bar_count": str(sum(datetime.fromisoformat(item["open_time_broker"]) <= decision for item in h1_rows)),
+                "h4_bar_count": str(sum(datetime.fromisoformat(item["open_time_broker"]) <= decision for item in h4_rows)),
+                "d1_bar_count": str(sum(datetime.fromisoformat(item["open_time_broker"]) <= decision for item in d1_rows)),
                 "h1_shift1_time": h1_last, "h4_shift1_time": h4_last, "d1_shift1_time": d1_last,
                 "data_available": "false", "state_code": "0", "state_name": "unknown", "native_error_code": "0",
             })
+            if available:
+                state, metrics = V.python_metrics(router, h1_bars, h4_bars, d1_bars, decision)
+                assert state != "UNKNOWN"
+                h1_i, h4_i, d1_i = (router._last_completed_index(bars, decision) for bars in (h1_bars, h4_bars, d1_bars))
+                row.update({key: format(value, ".17g") for key, value in metrics.items()})
+                row.update({
+                    "h1_shift1_high": format(h1_bars[h1_i].high, ".17g"),
+                    "h1_shift1_low": format(h1_bars[h1_i].low, ".17g"),
+                    "h1_shift1_range": format(h1_bars[h1_i].high - h1_bars[h1_i].low, ".17g"),
+                    "h4_close_shift1": format(h4_bars[h4_i].close, ".17g"),
+                    "d1_close_shift1": format(d1_bars[d1_i].close, ".17g"),
+                    "d1_close_shift2": format(d1_bars[d1_i - 1].close, ".17g"),
+                    "data_available": "true", "state_code": str(V.STATE_CODES[state]), "state_name": state.lower(),
+                })
             native_rows.append(row)
         _write_tsv(run / "native_router_rows.tsv", router_columns, native_rows)
         contract_columns = schema["contract_snapshot"]["columns"]
@@ -193,15 +235,53 @@ def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[
             {"assertion_id": name, "passed": "true", "observed": "0", "expected": "0", "detail": "ok"}
             for name in schema["native_assertions"]["required_assertion_ids"]
         ]
+        expected_inputs = R.parse_ini_exact(R.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"))["TesterInputs"]
+        assertions.extend(
+            {"assertion_id": f"effective_input_{key}", "passed": "true", "observed": value, "expected": value, "detail": ""}
+            for key, value in expected_inputs.items()
+        )
+        environment = {
+            "environment_mql_tester": "true", "environment_symbol": "XAUUSD", "environment_period": "PERIOD_M5",
+            "environment_account_login": "1025742", "environment_server": "Capital.ComMena-Demo",
+            "environment_company": "Capital Com Mena Securities Trading L.L.C", "environment_currency": "USD",
+            "environment_leverage": "50", "environment_terminal_build": "5833",
+        }
+        assertions.extend(
+            {"assertion_id": key, "passed": "true", "observed": value, "expected": value, "detail": ""}
+            for key, value in environment.items()
+        )
         _write_tsv(run / "native_assertions.tsv", assertion_columns, assertions)
         (run / "order.zero").write_bytes(b"")
         (run / "deal.zero").write_bytes(b"")
     return evidence, source, schema
 
 
+def _attestation(evidence: Path) -> dict:
+    def git(*args: str) -> str:
+        return subprocess.check_output(["git", *args], cwd=ROOT).decode().strip()
+    empty = hashlib.sha256(b"").hexdigest()
+    artifact_hashes = V._raw_artifact_hashes(evidence)
+    ex5 = evidence / "compiled" / Path(B.ORACLE_NAME).with_suffix(".ex5").name
+    return {
+        "schema_version": "a1_xau_np1_exact_commit_attestation_v1", "git_head": git("rev-parse", "HEAD"),
+        "git_tree": git("rev-parse", "HEAD^{tree}"), "git_status_porcelain": "", "os": platform.platform(),
+        "architecture": platform.machine(), "python_version": platform.python_version(), "python_executable": sys.executable,
+        "mt5_terminal_build": 5833, "metaeditor_version": "5.0.0.5833",
+        "same_ex5_sha256_run1_run2": V.sha256_file(ex5),
+        "commands": [
+            {"command": ["MetaEditor64.exe", "/compile:oracle"], "exit_code": 1, "stdout_sha256": empty, "stderr_sha256": empty},
+            {"command": ["terminal64.exe", "/config:run1"], "exit_code": 0, "stdout_sha256": empty, "stderr_sha256": empty},
+            {"command": ["terminal64.exe", "/config:run2"], "exit_code": 0, "stdout_sha256": empty, "stderr_sha256": empty},
+        ],
+        "artifact_sha256": artifact_hashes,
+        "environment": {"cwd": str(ROOT), "timezone": "test", "account_login": 1025742,
+                        "server": "Capital.ComMena-Demo", "currency": "USD", "leverage": "1:50", "symbol": "XAUUSD"},
+    }
+
+
 def test_complete_synthetic_packet_generates_every_artifact_and_passes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     evidence, _, schema = _synthetic_packet(tmp_path, monkeypatch)
-    result = V.finalize_evidence_directory(evidence)
+    result = V.finalize_evidence_directory(evidence, attestation=_attestation(evidence))
 
     assert result.status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", result.errors
     assert {path.relative_to(evidence).as_posix() for path in evidence.rglob("*") if path.is_file()} == set(schema["exact_tree"])
@@ -209,6 +289,61 @@ def test_complete_synthetic_packet_generates_every_artifact_and_passes(tmp_path:
     assert len(list(csv.DictReader((evidence / "parity" / "router_python_native_parity.csv").open(), delimiter=","))) == 4
     assert len(list(csv.DictReader((evidence / "parity" / "native_prefix_chain_hashes.csv").open(), delimiter=","))) == 4
     assert len(list(csv.DictReader((evidence / "parity" / "ordercalcprofit_python_native_parity.csv").open(), delimiter=","))) == 24
+
+
+def test_available_state_fixture_exercises_numeric_router_parity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    evidence, _, _ = _synthetic_packet(tmp_path, monkeypatch, available=True)
+    result = V.finalize_evidence_directory(evidence, attestation=_attestation(evidence))
+    assert result.status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", result.errors
+    rows = list(csv.DictReader((evidence / "parity" / "router_python_native_parity.csv").open(), delimiter=","))
+    assert rows and all(row["native_data_available"] == "true" for row in rows)
+    assert all(row["state_exact_match"] == "true" for row in rows)
+
+
+def test_postcommit_verifier_is_strictly_read_only_and_does_not_heal_tamper(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    evidence, _, _ = _synthetic_packet(tmp_path, monkeypatch)
+    finalized = V.finalize_evidence_directory(evidence, attestation=_attestation(evidence))
+    assert finalized.status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS"
+    before = {path.relative_to(evidence).as_posix(): path.read_bytes() for path in evidence.rglob("*") if path.is_file()}
+    verified = V.verify_evidence_directory(evidence)
+    after = {path.relative_to(evidence).as_posix(): path.read_bytes() for path in evidence.rglob("*") if path.is_file()}
+    assert verified.status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", verified.errors
+    assert after == before
+
+    derived = evidence / "parity" / "router_state_summary.csv"
+    derived.write_bytes(derived.read_bytes() + b"tamper\n")
+    tampered = derived.read_bytes()
+    rejected = V.verify_evidence_directory(evidence)
+    assert rejected.status == "R6_NP1_EVIDENCE_INVALID"
+    assert derived.read_bytes() == tampered
+
+
+@pytest.mark.parametrize("mutation", ["truncated_history", "native_input", "exact_probe", "malformed_contract"])
+def test_malformed_native_contracts_resolve_to_typed_invalid(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    evidence, _, schema = _synthetic_packet(tmp_path, monkeypatch)
+    if mutation == "truncated_history":
+        path = evidence / "runs" / "run1" / "native_h1_bars.tsv"
+        rows = V.read_tsv(path, schema["bar_exports"]["columns"])[1:]
+        _write_tsv(path, schema["bar_exports"]["columns"], rows)
+    elif mutation == "native_input":
+        path = evidence / "runs" / "run1" / "native_assertions.tsv"
+        rows = V.read_tsv(path, schema["native_assertions"]["columns"])
+        next(row for row in rows if row["assertion_id"] == "effective_input_InpRunId")["observed"] = "wrong"
+        _write_tsv(path, schema["native_assertions"]["columns"], rows)
+    elif mutation == "exact_probe":
+        path = evidence / "runs" / "run1" / "native_ordercalcprofit.tsv"
+        rows = V.read_tsv(path, schema["native_ordercalcprofit"]["columns"])
+        rows[0]["order_type"] = "BUY"
+        _write_tsv(path, schema["native_ordercalcprofit"]["columns"], rows)
+    else:
+        path = evidence / "runs" / "run1" / "native_contract.tsv"
+        rows = V.read_tsv(path, schema["contract_snapshot"]["columns"])
+        rows[0]["tick_size"] = "not-a-number"
+        _write_tsv(path, schema["contract_snapshot"]["columns"], rows)
+    result = V.finalize_evidence_directory(evidence, attestation=_attestation(evidence))
+    assert result.status == "R6_NP1_EVIDENCE_INVALID", result.errors
 
 
 @pytest.mark.parametrize(
@@ -220,7 +355,7 @@ def test_complete_synthetic_packet_generates_every_artifact_and_passes(tmp_path:
         ("parity", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
         ("coverage", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
         ("determinism", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
-        ("ordercalc", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
+        ("ordercalc", "R6_NP1_EVIDENCE_INVALID"),
     ],
 )
 def test_explicit_status_precedence_and_missing_gates(
@@ -235,9 +370,9 @@ def test_explicit_status_precedence_and_missing_gates(
         payload["blocks"][0]["exact_equal"] = False
         path.write_text(json.dumps(payload), encoding="utf-8")
     elif mutation == "zero":
-        (evidence / "runs" / "run1" / "native_report.htm").write_text(
-            "<table><tr><td>Total Trades:</td><td>1</td></tr><tr><td>Total Deals:</td><td>1</td></tr></table>", encoding="utf-8"
-        )
+        path = evidence / "runs" / "run1" / "native_report.htm"
+        text = path.read_text(encoding="utf-8").replace("Total Trades:</td><td>0", "Total Trades:</td><td>1").replace("Total Deals:</td><td>0", "Total Deals:</td><td>1")
+        path.write_text(text, encoding="utf-8")
     elif mutation in {"parity", "coverage"}:
         path = evidence / "runs" / "run1" / "native_router_rows.tsv"
         rows = V.read_tsv(path, schema["native_router_rows"]["columns"])
@@ -257,5 +392,5 @@ def test_explicit_status_precedence_and_missing_gates(
         rows[0]["absolute_loss"] = str(float(rows[0]["absolute_loss"]) + 0.01)
         _write_tsv(path, schema["native_ordercalcprofit"]["columns"], rows)
 
-    result = V.finalize_evidence_directory(evidence)
+    result = V.finalize_evidence_directory(evidence, attestation=_attestation(evidence))
     assert result.status == expected_status

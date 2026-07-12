@@ -67,3 +67,12 @@ def test_builder_fails_closed_on_source_or_generated_drift(tmp_path: Path) -> No
     generated.write_text(generated.read_text(encoding="utf-8") + "\n// drift\n", encoding="utf-8")
     with pytest.raises(RuntimeError, match="stale"):
         B.verify_generated_source(generated)
+
+
+def test_wrapper_emits_reconcilable_counts_and_exact_native_attestations() -> None:
+    text, _ = B.render_oracle()
+    assert "EvidenceBarCount(PERIOD_H1,decision)" in text
+    assert "EvidenceBarCount(PERIOD_H4,decision)" in text
+    assert "EvidenceBarCount(PERIOD_D1,decision)" in text
+    assert text.count('AppendAssertion("effective_input_') == 10
+    assert 'AppendAssertion("environment_terminal_build"' in text

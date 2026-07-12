@@ -5,14 +5,18 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import importlib.util
 import json
 import math
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from collections import Counter
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
@@ -130,33 +134,128 @@ def verify_source_equivalence(path: Path, generated_source: Path) -> list[str]:
     return errors
 
 
-def verify_assertions(path: Path, schema: dict[str, Any]) -> list[str]:
+def verify_assertions(path: Path, schema: dict[str, Any], run_id: str) -> list[str]:
     contract = schema["native_assertions"]
     rows = read_tsv(path, contract["columns"])
     by_id: dict[str, list[dict[str, str]]] = {}
     for row in rows:
         by_id.setdefault(row["assertion_id"], []).append(row)
-    return [
+    errors = [
         f"required assertion did not pass: {assertion_id}"
         for assertion_id in contract["required_assertion_ids"]
         if not by_id.get(assertion_id)
         or any(row["passed"].lower() != "true" for row in by_id[assertion_id])
     ]
+    expected_inputs = {
+        "InpRunId": run_id,
+        "InpRouterRowsFileName": f"np1_{run_id}_native_router_rows.tsv",
+        "InpH1BarsFileName": f"np1_{run_id}_native_h1_bars.tsv",
+        "InpH4BarsFileName": f"np1_{run_id}_native_h4_bars.tsv",
+        "InpD1BarsFileName": f"np1_{run_id}_native_d1_bars.tsv",
+        "InpContractFileName": f"np1_{run_id}_native_contract.tsv",
+        "InpOrderCalcProfitFileName": f"np1_{run_id}_native_ordercalcprofit.tsv",
+        "InpAssertionsFileName": f"np1_{run_id}_native_assertions.tsv",
+        "InpOrderZeroFileName": f"np1_{run_id}_order.zero",
+        "InpDealZeroFileName": f"np1_{run_id}_deal.zero",
+    }
+    expected_environment = {
+        "environment_mql_tester": "true", "environment_symbol": "XAUUSD",
+        "environment_period": "PERIOD_M5", "environment_account_login": "1025742",
+        "environment_server": "Capital.ComMena-Demo",
+        "environment_company": "Capital Com Mena Securities Trading L.L.C",
+        "environment_currency": "USD", "environment_leverage": "50",
+        "environment_terminal_build": "5833",
+    }
+    expected_rows = {f"effective_input_{key}": value for key, value in expected_inputs.items()}
+    expected_rows.update(expected_environment)
+    for key, expected in expected_rows.items():
+        matches = by_id.get(key, [])
+        if len(matches) != 1 or matches[0]["passed"].lower() != "true" or matches[0]["observed"] != expected or matches[0]["expected"] != expected:
+            errors.append(f"native effective input/environment assertion mismatch: {key}")
+    return errors
 
 
-def parse_native_report(path: Path) -> tuple[int, int]:
-    text = path.read_text(encoding="utf-8-sig", errors="replace")
-    def metric(label: str) -> int:
+def _decode_text(path: Path) -> str:
+    raw = path.read_bytes()
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        return raw.decode("utf-16")
+    return raw.decode("utf-8-sig", errors="replace")
+
+
+def parse_native_report(path: Path) -> dict[str, Any]:
+    text = _decode_text(path)
+    plain = html.unescape(re.sub(r"<[^>]+>", "\n", text))
+
+    def field(label: str) -> str:
         patterns = (
-            rf"{re.escape(label)}\s*:?</td>\s*<td[^>]*>\s*([0-9,]+)",
-            rf"{re.escape(label)}\s*[:=]\s*([0-9,]+)",
+            rf"{re.escape(label)}\s*:?</td>\s*<td[^>]*>\s*([^<\r\n]+)",
+            rf"(?:^|\n)\s*{re.escape(label)}\s*[:=]\s*([^\r\n]+)",
         )
         for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
+            match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
             if match:
-                return int(match.group(1).replace(",", ""))
+                return html.unescape(match.group(1)).strip()
+        match = re.search(rf"(?:^|\n)\s*{re.escape(label)}\s*\n+\s*([^\n]+)", plain, re.IGNORECASE)
+        if match:
+            return match.group(1).strip()
         raise ValueError(f"native report missing {label}")
-    return metric("Total Trades"), metric("Total Deals")
+
+    def integer(label: str) -> int:
+        match = re.search(r"[0-9][0-9,]*", field(label))
+        if not match:
+            raise ValueError(f"native report invalid {label}")
+        return int(match.group(0).replace(",", ""))
+
+    return {
+        "expert": field("Expert"), "symbol": field("Symbol"), "period": field("Period"),
+        "model": field("Model"), "initial_deposit": field("Initial Deposit"),
+        "leverage": field("Leverage"), "bars": integer("Bars in test"),
+        "ticks": integer("Ticks modelled"), "total_trades": integer("Total Trades"),
+        "total_deals": integer("Total Deals"), "text": plain,
+    }
+
+
+def verify_native_report(path: Path, run_id: str, buckets: Buckets) -> dict[str, Any]:
+    report = parse_native_report(path)
+    exact = {
+        "expert": "A1XauR6MarketOnlyNativeParityOracle.ex5", "symbol": "XAUUSD",
+        "period": "M5", "model": "Every tick based on real ticks", "leverage": "1:50",
+    }
+    for key, expected in exact.items():
+        if report[key] != expected:
+            buckets.invalid.append(f"{run_id}: native report {key} mismatch: {report[key]!r}")
+    deposit_match = re.search(r"([0-9][0-9,.]*)\s*(USD)?", report["initial_deposit"], re.IGNORECASE)
+    if not deposit_match or float(deposit_match.group(1).replace(",", "")) != 10000.0:
+        buckets.invalid.append(f"{run_id}: native report initial deposit mismatch")
+    if report["bars"] <= 0 or report["ticks"] <= 0:
+        buckets.invalid.append(f"{run_id}: native report bar/tick counts must be positive")
+    expected_inputs = {
+        "InpRunId": run_id,
+        "InpRouterRowsFileName": f"np1_{run_id}_native_router_rows.tsv",
+        "InpH1BarsFileName": f"np1_{run_id}_native_h1_bars.tsv",
+        "InpH4BarsFileName": f"np1_{run_id}_native_h4_bars.tsv",
+        "InpD1BarsFileName": f"np1_{run_id}_native_d1_bars.tsv",
+        "InpContractFileName": f"np1_{run_id}_native_contract.tsv",
+        "InpOrderCalcProfitFileName": f"np1_{run_id}_native_ordercalcprofit.tsv",
+        "InpAssertionsFileName": f"np1_{run_id}_native_assertions.tsv",
+        "InpOrderZeroFileName": f"np1_{run_id}_order.zero",
+        "InpDealZeroFileName": f"np1_{run_id}_deal.zero",
+        "InpTargetSymbol": "XAUUSD", "InpAtrPeriod": "14", "InpRegimeFastEmaPeriod": "20",
+        "InpRegimeSlowEmaPeriod": "50", "InpRegimeSlopeLagBars": "5",
+        "InpRegimePersistenceD1Bars": "2", "InpRegimeRequireH4Confirm": "true",
+        "InpRegimeShockH1RangeAtrMultiple": "3.0", "InpRegimeShockD1AtrLookback": "60",
+        "InpRegimeShockD1AtrPercentileMin": "95.0", "InpRegimeCompressionBoxDays": "5",
+        "InpRegimeCompressionD1AtrPercentileMax": "30.0", "InpRegimeCompressionRangeMedianMax": "1.0",
+    }
+    compact = re.sub(r"\s+", "", report["text"])
+    for key, value in expected_inputs.items():
+        if f"{key}={value}" not in compact:
+            buckets.invalid.append(f"{run_id}: native report effective input missing/mismatch: {key}")
+    if report["total_trades"] != 0 or report["total_deals"] != 0:
+        buckets.zero_action.append(
+            f"{run_id}: native report trades={report['total_trades']} deals={report['total_deals']}"
+        )
+    return report
 
 
 def verify_compile_packet(compiled: Path, buckets: Buckets) -> None:
@@ -184,11 +283,46 @@ def _dt(value: str) -> datetime:
     return datetime.fromisoformat(value)
 
 
-def load_bar_rows(path: Path, schema: dict[str, Any], router: Any) -> tuple[list[dict[str, str]], list[Any]]:
+def load_bar_rows(
+    path: Path, schema: dict[str, Any], router: Any, *, timeframe: str,
+    test_start: datetime, test_end: datetime,
+) -> tuple[list[dict[str, str]], list[Any]]:
     rows = read_tsv(path, schema["bar_exports"]["columns"])
+    if not rows:
+        raise ValueError(f"bar export is empty: {path.name}")
+    if any(row["schema_version"] != "a1_xau_r6_native_bar_v1" or row["timeframe"] != timeframe for row in rows):
+        raise ValueError(f"bar schema/timeframe mismatch: {path.name}")
     times = [_dt(row["open_time_broker"]) for row in rows]
     if times != sorted(set(times)):
         raise ValueError(f"bar timestamps not unique/increasing: {path.name}")
+    step = {"H1": timedelta(hours=1), "H4": timedelta(hours=4), "D1": timedelta(days=1)}[timeframe]
+    if not (test_start <= times[0] < test_start + step):
+        raise ValueError(f"bar warm-up start mismatch: {path.name}: {times[0].isoformat()}")
+    if not (test_end - step <= times[-1] < test_end):
+        raise ValueError(f"bar exclusive-end coverage mismatch: {path.name}: {times[-1].isoformat()}")
+    seconds = int(step.total_seconds())
+    def contains_weekend(first: datetime, second: datetime) -> bool:
+        cursor = first.replace(hour=0, minute=0, second=0)
+        while cursor <= second:
+            if cursor.weekday() >= 5:
+                return True
+            cursor += timedelta(days=1)
+        return False
+
+    for first, second in zip(times, times[1:]):
+        delta = int((second - first).total_seconds())
+        if delta <= 0 or delta % seconds:
+            raise ValueError(f"bar interval mismatch: {path.name}: {first.isoformat()}->{second.isoformat()}")
+        allowed_session_gap = (
+            (timeframe == "H1" and delta <= 2 * seconds)
+            or (timeframe == "H4" and delta <= 2 * seconds)
+            or (timeframe == "D1" and delta <= 3 * seconds)
+        )
+        if delta > seconds and not allowed_session_gap and not contains_weekend(first, second):
+            raise ValueError(f"unexpected market-history gap: {path.name}: {first.isoformat()}->{second.isoformat()}")
+    for row in rows:
+        if any(int(row[name]) < 0 for name in ("tick_volume", "spread", "real_volume")):
+            raise ValueError(f"negative bar volume/spread field: {path.name}")
     bars = [router.Bar(times[i], float(row["open"]), float(row["high"]), float(row["low"]), float(row["close"])) for i, row in enumerate(rows)]
     router.validate_bars(bars)
     return rows, bars
@@ -255,14 +389,21 @@ NUMERIC_RULE = {
     "d1_box_average_5": "compression_metrics", "d1_median_range_20": "compression_metrics",
     "d1_compression_box_to_median_ratio": "compression_metrics",
 }
+RAW_NUMERIC_FIELDS = (
+    "h1_shift1_high", "h1_shift1_low", "h1_shift1_range", "h4_close_shift1",
+    "d1_close_shift1", "d1_close_shift2",
+)
 
 
 def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema: dict[str, Any], buckets: Buckets, source_equivalence_sha256: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     router = load_python_router(source)
     try:
-        h1_rows, h1 = load_bar_rows(run_dir / "native_h1_bars.tsv", schema, router)
-        h4_rows, h4 = load_bar_rows(run_dir / "native_h4_bars.tsv", schema, router)
-        d1_rows, d1 = load_bar_rows(run_dir / "native_d1_bars.tsv", schema, router)
+        environment = source["tester_environment"]
+        test_start = _dt(environment["test_from_inclusive_broker_time"])
+        test_end = _dt(environment["test_to_exclusive_broker_time"])
+        h1_rows, h1 = load_bar_rows(run_dir / "native_h1_bars.tsv", schema, router, timeframe="H1", test_start=test_start, test_end=test_end)
+        h4_rows, h4 = load_bar_rows(run_dir / "native_h4_bars.tsv", schema, router, timeframe="H4", test_start=test_start, test_end=test_end)
+        d1_rows, d1 = load_bar_rows(run_dir / "native_d1_bars.tsv", schema, router, timeframe="D1", test_start=test_start, test_end=test_end)
         native = read_tsv(run_dir / "native_router_rows.tsv", schema["native_router_rows"]["columns"])
     except (FileNotFoundError, ValueError, KeyError) as exc:
         buckets.invalid.append(f"{run_id}: {exc}")
@@ -300,22 +441,47 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
                 mismatch_fields.append("state")
             if not available_match:
                 mismatch_fields.append("data_available")
+            per_row_diff = {name: 0.0 for name in max_diff}
             for field_name, python_value in metrics.items():
                 if not row[field_name]:
                     mismatch_fields.append(field_name)
                     continue
                 rule_name = NUMERIC_RULE[field_name]
                 matched, difference = _close(float(row[field_name]), float(python_value), acceptance[rule_name])
+                per_row_diff[rule_name] = max(per_row_diff[rule_name], difference)
                 max_diff[rule_name] = max(max_diff[rule_name], difference)
                 if not matched:
                     mismatch_fields.append(field_name)
-            if python_state == "UNKNOWN" and any(row[name] for name in NUMERIC_RULE):
+            if python_state == "UNKNOWN" and any(row[name] for name in (*NUMERIC_RULE, *RAW_NUMERIC_FIELDS)):
                 mismatch_fields.append("unavailable_numeric_not_empty")
             h1_last, h1_hash = prefix_sha(h1_rows, schema["bar_exports"]["columns"], decision)
             h4_last, h4_hash = prefix_sha(h4_rows, schema["bar_exports"]["columns"], decision)
             d1_last, d1_hash = prefix_sha(d1_rows, schema["bar_exports"]["columns"], decision)
             if row["h1_shift1_time"] != h1_last or row["h4_shift1_time"] != h4_last or row["d1_shift1_time"] != d1_last:
                 mismatch_fields.append("causal_prefix_last_completed_time")
+            h1_i, h4_i, d1_i = (router._last_completed_index(bars, decision) for bars in (h1, h4, d1))
+            exact_fields = {
+                "schema_version": "a1_xau_r6_native_router_row_v1",
+                "native_error_code": "0",
+                "h1_bar_count": str(sum(bar.time <= decision for bar in h1)),
+                "h4_bar_count": str(sum(bar.time <= decision for bar in h4)),
+                "d1_bar_count": str(sum(bar.time <= decision for bar in d1)),
+            }
+            for field_name, expected_value in exact_fields.items():
+                if row[field_name] != expected_value:
+                    mismatch_fields.append(field_name)
+            raw_values = {
+                "h1_shift1_high": h1[h1_i].high,
+                "h1_shift1_low": h1[h1_i].low,
+                "h1_shift1_range": h1[h1_i].high - h1[h1_i].low,
+                "h4_close_shift1": h4[h4_i].close,
+                "d1_close_shift1": d1[d1_i].close,
+                "d1_close_shift2": d1[d1_i - 1].close,
+            }
+            if python_state != "UNKNOWN":
+                for field_name, expected_value in raw_values.items():
+                    if not row[field_name] or not _close(float(row[field_name]), expected_value, acceptance["compression_metrics"])[0]:
+                        mismatch_fields.append(field_name)
             if mismatch_fields:
                 buckets.parity.append(f"{run_id}: parity mismatch {row['timestamp_broker']}: {','.join(mismatch_fields)}")
                 first_mismatch = first_mismatch or f"{row['timestamp_broker']}:{mismatch_fields[0]}"
@@ -325,9 +491,9 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
                 "native_state_code": native_code, "python_state_code": STATE_CODES[python_state],
                 "native_state_name": canonical_native, "python_state_name": python_state,
                 "state_exact_match": str(state_match).lower(), "data_available_exact_match": str(available_match).lower(),
-                "ema_max_absolute_difference": max_diff["ema"], "atr_max_absolute_difference": max_diff["atr"],
-                "percentile_max_absolute_difference": max_diff["percentile"],
-                "compression_metric_max_absolute_difference": max_diff["compression_metrics"],
+                "ema_max_absolute_difference": per_row_diff["ema"], "atr_max_absolute_difference": per_row_diff["atr"],
+                "percentile_max_absolute_difference": per_row_diff["percentile"],
+                "compression_metric_max_absolute_difference": per_row_diff["compression_metrics"],
                 "first_mismatch_field": mismatch_fields[0] if mismatch_fields else "",
             })
             prefix_rows.append({
@@ -336,8 +502,8 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
                 "h4_last_completed_time": h4_last, "h4_prefix_sha256": h4_hash,
                 "d1_last_completed_time": d1_last, "d1_prefix_sha256": d1_hash,
             })
-        except (ValueError, KeyError, IndexError, ZeroDivisionError) as exc:
-            buckets.parity.append(f"{run_id}: Router parity row invalid: {exc}")
+        except (ValueError, KeyError, IndexError, ZeroDivisionError, TypeError, OverflowError) as exc:
+            buckets.invalid.append(f"{run_id}: Router evidence row malformed: {exc}")
     total = len(native)
     summary = {
         "run_id": run_id, "native_decision_rows": total, "expected_h4_decisions": len(expected),
@@ -368,18 +534,49 @@ def verify_ordercalcprofit(run_id: str, run_dir: Path, schema: dict[str, Any], b
     for key, expected in expected_contract.items():
         if c.get(key) != expected:
             buckets.invalid.append(f"{run_id}: contract environment mismatch {key}={c.get(key)!r}")
+    try:
+        positive_contract = ("point", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_profit", "tick_value_loss")
+        if any(not math.isfinite(float(c[name])) or float(c[name]) <= 0 for name in positive_contract):
+            buckets.invalid.append(f"{run_id}: contract positive finite numeric invariant failed")
+        if float(c["volume_min"]) > float(c["volume_max"]):
+            buckets.invalid.append(f"{run_id}: contract volume bounds invalid")
+        for name in ("digits", "stops_level", "freeze_level", "margin_mode", "trade_calc_mode", "trade_mode"):
+            if int(c[name]) < 0:
+                buckets.invalid.append(f"{run_id}: contract nonnegative integer invariant failed: {name}")
+    except (ValueError, KeyError, TypeError, OverflowError) as exc:
+        buckets.invalid.append(f"{run_id}: malformed native contract: {exc}")
+        return []
     ids = [row["probe_id"] for row in probes]
     if ids != contract["required_probe_ids"] or len(probes) != 12:
         buckets.invalid.append(f"{run_id}: OrderCalcProfit probe identity/order mismatch")
     rows: list[dict[str, Any]] = []
     rule = schema["parity"]["acceptance"]["ordercalcprofit_absolute_loss"]
     tick_size, tick_value_loss = float(c["tick_size"]), float(c["tick_value_loss"])
+    exits = [2002.49, 2002.50, 2002.51, 2024.99, 2025.00, 2025.01, 1997.51, 1997.50, 1997.49, 1975.01, 1975.00, 1974.99]
+    expected_by_id = {
+        probe_id: ("SELL" if probe_id.startswith("SELL") else "BUY", exit_price)
+        for probe_id, exit_price in zip(contract["required_probe_ids"], exits)
+    }
     for probe in probes:
-        if probe["success"].lower() != "true" or probe["evidence_class"] != contract["evidence_class"]:
-            buckets.invalid.append(f"{run_id}: native OrderCalcProfit probe failed {probe['probe_id']}")
+        try:
+            expected_order, expected_exit = expected_by_id[probe["probe_id"]]
+            volume, entry, exit_price = float(probe["volume"]), float(probe["entry_price"]), float(probe["exit_price"])
+            native_profit, native_loss = float(probe["profit_account_currency"]), float(probe["absolute_loss"])
+            exact_ok = (
+                probe["order_type"] == expected_order and probe["symbol"] == "XAUUSD"
+                and volume == float(c["volume_min"]) and entry == 2000.0 and exit_price == expected_exit
+                and probe["success"].lower() == "true" and probe["last_error"] == "0"
+                and probe["evidence_class"] == contract["evidence_class"]
+                and math.isfinite(native_profit) and math.isfinite(native_loss)
+                and native_profit < 0.0 and native_loss == abs(native_profit)
+            )
+            if not exact_ok:
+                buckets.invalid.append(f"{run_id}: exact native OrderCalcProfit probe contract failed {probe['probe_id']}")
+                continue
+            python_loss = abs(exit_price - entry) / tick_size * tick_value_loss * volume
+        except (ValueError, KeyError, TypeError, OverflowError) as exc:
+            buckets.invalid.append(f"{run_id}: malformed native OrderCalcProfit probe: {exc}")
             continue
-        python_loss = abs(float(probe["exit_price"]) - float(probe["entry_price"])) / tick_size * tick_value_loss * float(probe["volume"])
-        native_loss = float(probe["absolute_loss"])
         matched, difference = _close(native_loss, python_loss, {
             "absolute_tolerance": rule["absolute_tolerance_account_currency"], "relative_tolerance": rule["relative_tolerance"]
         })
@@ -392,7 +589,7 @@ def verify_ordercalcprofit(run_id: str, run_dir: Path, schema: dict[str, Any], b
     return rows
 
 
-def normalized_tsv_bytes(path: Path, *, blank_columns: set[str]) -> bytes:
+def normalized_tsv_bytes(path: Path, *, blank_columns: set[str], normalize_run_tokens: bool = False) -> bytes:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
         columns = list(reader.fieldnames or ())
@@ -401,20 +598,26 @@ def normalized_tsv_bytes(path: Path, *, blank_columns: set[str]) -> bytes:
         for column in blank_columns:
             if column in row:
                 row[column] = "<NORMALIZED>"
+        if normalize_run_tokens:
+            for column, value in row.items():
+                row[column] = value.replace("np1_run1_", "np1_<RUN>_").replace("np1_run2_", "np1_<RUN>_")
+                if row[column] in {"run1", "run2"}:
+                    row[column] = "<RUN>"
     lines = ["\t".join(columns), *("\t".join(row[column] for column in columns) for row in rows)]
     return ("\n".join(lines) + "\n").encode()
 
 
 def verify_two_run_determinism(evidence_dir: Path, buckets: Buckets) -> None:
     rules = {
-        "native_router_rows.tsv": {"run_id"}, "native_h1_bars.tsv": set(), "native_h4_bars.tsv": set(),
-        "native_d1_bars.tsv": set(), "native_contract.tsv": {"timestamp_broker"},
-        "native_ordercalcprofit.tsv": set(), "native_assertions.tsv": set(),
+        "native_router_rows.tsv": ({"run_id"}, False), "native_h1_bars.tsv": (set(), False),
+        "native_h4_bars.tsv": (set(), False), "native_d1_bars.tsv": (set(), False),
+        "native_contract.tsv": ({"timestamp_broker"}, False), "native_ordercalcprofit.tsv": (set(), False),
+        "native_assertions.tsv": (set(), True),
     }
-    for filename, blank in rules.items():
+    for filename, (blank, normalize_run_tokens) in rules.items():
         try:
-            first = normalized_tsv_bytes(evidence_dir / "runs" / "run1" / filename, blank_columns=blank)
-            second = normalized_tsv_bytes(evidence_dir / "runs" / "run2" / filename, blank_columns=blank)
+            first = normalized_tsv_bytes(evidence_dir / "runs" / "run1" / filename, blank_columns=blank, normalize_run_tokens=normalize_run_tokens)
+            second = normalized_tsv_bytes(evidence_dir / "runs" / "run2" / filename, blank_columns=blank, normalize_run_tokens=normalize_run_tokens)
             if first != second:
                 buckets.parity.append(f"two-run normalized mismatch: {filename}")
         except (FileNotFoundError, ValueError) as exc:
@@ -427,26 +630,16 @@ def verify_ini(path: Path, run_id: str, buckets: Buckets) -> None:
     except FileNotFoundError:
         buckets.invalid.append(f"{run_id}: tester.ini missing")
         return
-    required = (
-        "Expert=A1XauR6MarketOnlyNativeParityOracle.ex5", "Symbol=XAUUSD", "Period=M5", "Model=4",
-        "FromDate=2015.06.01", "ToDate=2026.07.01", "Deposit=10000", "Currency=USD", "Leverage=50",
-        f"InpRunId={run_id}",
-        f"InpRouterRowsFileName=np1_{run_id}_native_router_rows.tsv",
-        f"InpH1BarsFileName=np1_{run_id}_native_h1_bars.tsv",
-        f"InpH4BarsFileName=np1_{run_id}_native_h4_bars.tsv",
-        f"InpD1BarsFileName=np1_{run_id}_native_d1_bars.tsv",
-        f"InpContractFileName=np1_{run_id}_native_contract.tsv",
-        f"InpOrderCalcProfitFileName=np1_{run_id}_native_ordercalcprofit.tsv",
-        f"InpAssertionsFileName=np1_{run_id}_native_assertions.tsv",
-        f"InpOrderZeroFileName=np1_{run_id}_order.zero",
-        f"InpDealZeroFileName=np1_{run_id}_deal.zero",
-        "UseRemote=0", "UseCloud=0", "Optimization=0",
-    )
-    missing = [value for value in required if value not in text]
-    if missing:
-        buckets.invalid.append(f"{run_id}: tester.ini/effective-input mismatch {missing}")
-    if any(value in text for value in ("Login=", "Server=", "Profile=", "Chart=", "Visual=1")):
-        buckets.invalid.append(f"{run_id}: tester.ini contains prohibited runtime settings")
+    try:
+        import run_a1_xau_r6_market_only_native_parity_exact as runner
+        actual = runner.parse_ini_exact(text)
+        expected = runner.parse_ini_exact(
+            runner.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}")
+        )
+        if actual != expected:
+            buckets.invalid.append(f"{run_id}: tester.ini exact unique key/value contract mismatch")
+    except (RuntimeError, ValueError) as exc:
+        buckets.invalid.append(f"{run_id}: tester.ini malformed: {exc}")
 
 
 def status_for(buckets: Buckets) -> str:
@@ -461,7 +654,86 @@ def status_for(buckets: Buckets) -> str:
     return "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS"
 
 
-def _write_reports(evidence_dir: Path, status: str, buckets: Buckets, metrics: dict[str, Any]) -> None:
+def _raw_artifact_hashes(evidence_dir: Path) -> dict[str, str]:
+    return {
+        path.relative_to(evidence_dir).as_posix(): sha256_file(path)
+        for path in sorted(evidence_dir.rglob("*")) if path.is_file()
+        and path.name not in {"test_validation.md", "manifest.json", "manifest.sha256"}
+        and path.parent.name != "parity"
+        and not path.name.startswith("A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_")
+    }
+
+
+def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required = {
+        "schema_version", "git_head", "git_tree", "git_status_porcelain", "os", "architecture",
+        "python_version", "python_executable", "mt5_terminal_build", "metaeditor_version",
+        "same_ex5_sha256_run1_run2", "commands", "artifact_sha256", "environment",
+    }
+    if set(attestation) != required:
+        return ["exact-commit attestation field set mismatch"]
+    if attestation["schema_version"] != "a1_xau_np1_exact_commit_attestation_v1":
+        errors.append("exact-commit attestation schema mismatch")
+    for name in ("git_head", "git_tree"):
+        if re.fullmatch(r"[0-9a-f]{40}", str(attestation[name])) is None:
+            errors.append(f"exact-commit attestation invalid {name}")
+    if attestation["git_status_porcelain"] != "":
+        errors.append("exact-commit attestation worktree was not clean")
+    if attestation["mt5_terminal_build"] != 5833 or attestation["metaeditor_version"] != "5.0.0.5833":
+        errors.append("exact-commit attestation build mismatch")
+    commands = attestation["commands"]
+    if not isinstance(commands, list) or len(commands) < 3:
+        errors.append("exact-commit attestation requires compile plus two tester commands")
+    else:
+        for index, row in enumerate(commands):
+            if not isinstance(row, dict) or set(row) != {"command", "exit_code", "stdout_sha256", "stderr_sha256"}:
+                errors.append(f"exact-commit command attestation schema mismatch at {index}")
+                continue
+            if not isinstance(row["command"], list) or not row["command"] or not isinstance(row["exit_code"], int):
+                errors.append(f"exact-commit command attestation value mismatch at {index}")
+            if any(re.fullmatch(r"[0-9a-f]{64}", str(row[name])) is None for name in ("stdout_sha256", "stderr_sha256")):
+                errors.append(f"exact-commit command stream hash mismatch at {index}")
+    if attestation["artifact_sha256"] != _raw_artifact_hashes(evidence_dir):
+        errors.append("exact-commit attestation artifact hash set mismatch")
+    ex5 = evidence_dir / "compiled" / Path(B.ORACLE_NAME).with_suffix(".ex5").name
+    if ex5.is_file() and attestation["same_ex5_sha256_run1_run2"] != sha256_file(ex5):
+        errors.append("exact-commit attestation EX5 hash mismatch")
+    environment = attestation["environment"]
+    expected_environment = {
+        "account_login": 1025742, "server": "Capital.ComMena-Demo", "currency": "USD",
+        "leverage": "1:50", "symbol": "XAUUSD",
+    }
+    if not isinstance(environment, dict) or any(environment.get(key) != value for key, value in expected_environment.items()):
+        errors.append("exact-commit attestation environment mismatch")
+    for key in ("os", "architecture", "python_version", "python_executable"):
+        if not isinstance(attestation[key], str) or not attestation[key]:
+            errors.append(f"exact-commit attestation missing dependency/environment value: {key}")
+    return errors
+
+
+def _render_validation(status: str, errors: Sequence[str], attestation: dict[str, Any]) -> str:
+    payload = json.dumps(attestation, indent=2, sort_keys=True)
+    return (
+        f"# NP1 Validation\n\nTerminal status: `{status}`\n\nError count: `{len(errors)}`\n\n"
+        "## Exact commit, environment, commands, and artifacts\n\n```json\n" + payload + "\n```\n"
+    )
+
+
+def parse_validation_attestation(path: Path) -> dict[str, Any]:
+    text = path.read_text(encoding="utf-8")
+    match = re.search(r"## Exact commit, environment, commands, and artifacts\s+```json\s+(\{.*\})\s+```", text, re.DOTALL)
+    if not match:
+        raise ValueError("test_validation.md attestation block missing")
+    value = json.loads(match.group(1))
+    if not isinstance(value, dict):
+        raise ValueError("test_validation.md attestation is not an object")
+    return value
+
+
+def _write_reports(
+    evidence_dir: Path, status: str, buckets: Buckets, metrics: dict[str, Any], attestation: dict[str, Any]
+) -> None:
     payload = {
         "schema_version": "a1_xau_r6_market_only_native_parity_exact_v1", "status": status,
         "boundary": {"census_generated": False, "pnl_calculated": False, "broker_action": False},
@@ -478,8 +750,7 @@ def _write_reports(evidence_dir: Path, status: str, buckets: Buckets, metrics: d
     lines.extend([f"- {error}" for error in errors] if errors else ["- None"])
     (evidence_dir / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     (evidence_dir / "test_validation.md").write_text(
-        f"# NP1 Validation\n\nTerminal status: `{status}`\n\nError count: `{len(errors)}`\n",
-        encoding="utf-8", newline="\n",
+        _render_validation(status, errors, attestation), encoding="utf-8", newline="\n"
     )
 
 
@@ -525,10 +796,20 @@ def verify_nonrecursive_manifest(evidence_dir: Path, schema: dict[str, Any]) -> 
     return errors
 
 
-def finalize_evidence_directory(evidence_dir: Path) -> VerificationResult:
+def finalize_evidence_directory(
+    evidence_dir: Path, *, attestation: dict[str, Any] | None = None
+) -> VerificationResult:
     source, schema, _ = load_contracts()
     buckets = Buckets()
     metrics: dict[str, Any] = {}
+    if attestation is None:
+        try:
+            attestation = parse_validation_attestation(evidence_dir / "test_validation.md")
+        except (FileNotFoundError, ValueError, json.JSONDecodeError) as exc:
+            attestation = {}
+            buckets.invalid.append(f"exact-commit attestation missing/malformed: {exc}")
+    if attestation:
+        buckets.invalid.extend(validate_attestation(evidence_dir, attestation))
     verify_compile_packet(evidence_dir / "compiled", buckets)
     equivalence_path = evidence_dir / "compiled" / "source_equivalence.json"
     source_equivalence_sha256 = sha256_file(equivalence_path) if equivalence_path.is_file() else ""
@@ -540,15 +821,17 @@ def finalize_evidence_directory(evidence_dir: Path) -> VerificationResult:
         run_dir = evidence_dir / "runs" / run_id
         verify_ini(run_dir / "tester.ini", run_id, buckets)
         try:
-            assertion_errors = verify_assertions(run_dir / "native_assertions.tsv", schema)
+            assertion_errors = verify_assertions(run_dir / "native_assertions.tsv", schema, run_id)
             for error in assertion_errors:
                 if any(name in error for name in ("report_zero_trades", "report_zero_deals", "order_zero_bytes", "deal_zero_bytes", "open_positions_zero", "pending_orders_zero")):
                     buckets.zero_action.append(f"{run_id}: {error}")
                 else:
                     buckets.invalid.append(f"{run_id}: {error}")
-            trades, deals = parse_native_report(run_dir / "native_report.htm")
-            if trades != 0 or deals != 0:
-                buckets.zero_action.append(f"{run_id}: native report trades={trades} deals={deals}")
+            report = verify_native_report(run_dir / "native_report.htm", run_id, buckets)
+            metrics.setdefault("native_reports", {})[run_id] = {
+                "bars": report["bars"], "ticks": report["ticks"],
+                "total_trades": report["total_trades"], "total_deals": report["total_deals"],
+            }
             for sentinel in ("order.zero", "deal.zero"):
                 if not (run_dir / sentinel).is_file() or (run_dir / sentinel).stat().st_size != 0:
                     buckets.zero_action.append(f"{run_id}: {sentinel} is missing or nonempty")
@@ -558,6 +841,13 @@ def finalize_evidence_directory(evidence_dir: Path) -> VerificationResult:
         parity_rows.extend(rows); prefix_rows.extend(prefixes); summaries.append(summary)
         ordercalc_rows.extend(verify_ordercalcprofit(run_id, run_dir, schema, buckets))
     verify_two_run_determinism(evidence_dir, buckets)
+    reports = metrics.get("native_reports", {})
+    if set(reports) == {"run1", "run2"} and (
+        reports["run1"].get("bars"), reports["run1"].get("ticks")
+    ) != (
+        reports["run2"].get("bars"), reports["run2"].get("ticks")
+    ):
+        buckets.invalid.append("two-run native report bar/tick count mismatch")
     parity_dir = evidence_dir / "parity"
     router_columns = ["run_id", *schema["parity"]["router_parity_columns"]]
     prefix_columns = ["run_id", *schema["parity"]["native_prefix_chain_hashes_columns"]]
@@ -570,13 +860,13 @@ def finalize_evidence_directory(evidence_dir: Path) -> VerificationResult:
     ])
     metrics["runs"] = summaries
     status = status_for(buckets)
-    _write_reports(evidence_dir, status, buckets, metrics)
+    _write_reports(evidence_dir, status, buckets, metrics, attestation)
     try:
         generate_manifest(evidence_dir, schema)
     except ValueError as exc:
         buckets.invalid.append(str(exc))
         status = status_for(buckets)
-        _write_reports(evidence_dir, status, buckets, metrics)
+        _write_reports(evidence_dir, status, buckets, metrics, attestation)
         try:
             generate_manifest(evidence_dir, schema)
         except ValueError:
@@ -585,13 +875,48 @@ def finalize_evidence_directory(evidence_dir: Path) -> VerificationResult:
 
 
 def verify_evidence_directory(evidence_dir: Path) -> VerificationResult:
-    result = finalize_evidence_directory(evidence_dir)
-    _, schema, _ = load_contracts()
-    manifest_errors = verify_nonrecursive_manifest(evidence_dir, schema)
-    if manifest_errors:
-        errors = (*result.errors, *manifest_errors)
-        return VerificationResult("R6_NP1_EVIDENCE_INVALID", tuple(errors), result.metrics)
-    return result
+    def snapshot() -> dict[str, tuple[int, str]]:
+        return {
+            path.relative_to(evidence_dir).as_posix(): (path.stat().st_size, sha256_file(path))
+            for path in sorted(evidence_dir.rglob("*")) if path.is_file()
+        }
+
+    before = snapshot()
+    errors: list[str] = []
+    metrics: dict[str, Any] = {}
+    verified_result: VerificationResult | None = None
+    try:
+        _, schema, _ = load_contracts()
+        errors.extend(verify_nonrecursive_manifest(evidence_dir, schema))
+        attestation = parse_validation_attestation(evidence_dir / "test_validation.md")
+        errors.extend(validate_attestation(evidence_dir, attestation))
+        with tempfile.TemporaryDirectory(prefix="a1-xau-np1-read-only-verify-") as temporary:
+            recomputed_dir = Path(temporary) / "evidence"
+            shutil.copytree(evidence_dir, recomputed_dir)
+            result = finalize_evidence_directory(recomputed_dir, attestation=attestation)
+            metrics = result.metrics
+            derived = {
+                "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.md",
+                "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json",
+                "test_validation.md", "manifest.json", "manifest.sha256",
+                "parity/router_python_native_parity.csv", "parity/router_state_summary.csv",
+                "parity/native_prefix_chain_hashes.csv", "parity/ordercalcprofit_python_native_parity.csv",
+            }
+            for relative in sorted(derived):
+                original, expected = evidence_dir / relative, recomputed_dir / relative
+                if not original.is_file() or not expected.is_file() or original.read_bytes() != expected.read_bytes():
+                    errors.append(f"read-only derived artifact mismatch: {relative}")
+            if not errors:
+                verified_result = result
+    except (OSError, ValueError, KeyError, TypeError, RuntimeError, json.JSONDecodeError) as exc:
+        errors.append(f"malformed evidence: {exc}")
+    finally:
+        after = snapshot()
+        if after != before:
+            errors.append("read-only verifier mutated the evidence directory")
+    if verified_result is not None and not errors:
+        return verified_result
+    return VerificationResult("R6_NP1_EVIDENCE_INVALID", tuple(errors), metrics)
 
 
 def _main(argv: Iterable[str] | None = None) -> int:

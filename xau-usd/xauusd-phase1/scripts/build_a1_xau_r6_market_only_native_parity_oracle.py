@@ -279,6 +279,11 @@ bool ExportContract()
    return true;
   }
 
+int EvidenceBarCount(const ENUM_TIMEFRAMES timeframe,const datetime decision)
+  {
+   return Bars(InpTargetSymbol,timeframe,StringToTime("2015.06.01 00:00:00"),decision);
+  }
+
 bool Probe(const int handle,const string id,const ENUM_ORDER_TYPE type,const double entry,const double exit)
   {
    double result=0.0;
@@ -314,6 +319,7 @@ bool ExportProbes()
 
 void EmitRouterRow(const datetime decision)
   {
+   ResetLastError();
    const bool available=RegimeRouterDataAvailable();
    g_numeric_output_enabled=available;
    const XauRegimeState state=available ? CurrentXauRegime() : XAU_REGIME_UNKNOWN;
@@ -332,7 +338,7 @@ void EmitRouterRow(const datetime decision)
       return;
      }
    FileSeek(handle,0,SEEK_END);
-   FileWrite(handle,"a1_xau_r6_native_router_row_v1",InpRunId,T(decision),InpTargetSymbol,ROUTER_SOURCE_COMMIT,ROUTER_SOURCE_BLOB,SOURCE_EQUIVALENCE_SHA256,iBars(InpTargetSymbol,PERIOD_H1),iBars(InpTargetSymbol,PERIOD_H4),iBars(InpTargetSymbol,PERIOD_D1),T(iTime(InpTargetSymbol,PERIOD_H1,1)),F(h1_high),F(h1_low),F(h1_high-h1_low),F(h1_atr),F(h1_atr>0.0 ? (h1_high-h1_low)/h1_atr : 0.0),T(iTime(InpTargetSymbol,PERIOD_H4,1)),F(iClose(InpTargetSymbol,PERIOD_H4,1)),F(IndicatorEmaClose(PERIOD_H4,20,1)),F(IndicatorEmaClose(PERIOD_H4,50,1)),F(IndicatorEmaClose(PERIOD_H4,20,6)),F(IndicatorEmaClose(PERIOD_H4,50,6)),T(iTime(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,2)),F(IndicatorEmaClose(PERIOD_D1,20,1)),F(IndicatorEmaClose(PERIOD_D1,50,1)),F(IndicatorEmaClose(PERIOD_D1,20,2)),F(IndicatorEmaClose(PERIOD_D1,50,2)),F(IndicatorEmaClose(PERIOD_D1,20,6)),F(IndicatorEmaClose(PERIOD_D1,50,6)),F(IndicatorEmaClose(PERIOD_D1,20,7)),F(IndicatorEmaClose(PERIOD_D1,50,7)),F(IndicatorAtrPrice(PERIOD_D1,14,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,60,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,252,1)),F(d1_box_high),F(d1_box_low),F(d1_box_width),F(d1_box_average),F(d1_median),F(d1_median>0.0 ? d1_box_average/d1_median : 0.0),available ? "true" : "false",(int)state,RegimeStateName(state),GetLastError());
+   FileWrite(handle,"a1_xau_r6_native_router_row_v1",InpRunId,T(decision),InpTargetSymbol,ROUTER_SOURCE_COMMIT,ROUTER_SOURCE_BLOB,SOURCE_EQUIVALENCE_SHA256,EvidenceBarCount(PERIOD_H1,decision),EvidenceBarCount(PERIOD_H4,decision),EvidenceBarCount(PERIOD_D1,decision),T(iTime(InpTargetSymbol,PERIOD_H1,1)),F(h1_high),F(h1_low),F(h1_high-h1_low),F(h1_atr),F(h1_atr>0.0 ? (h1_high-h1_low)/h1_atr : 0.0),T(iTime(InpTargetSymbol,PERIOD_H4,1)),F(iClose(InpTargetSymbol,PERIOD_H4,1)),F(IndicatorEmaClose(PERIOD_H4,20,1)),F(IndicatorEmaClose(PERIOD_H4,50,1)),F(IndicatorEmaClose(PERIOD_H4,20,6)),F(IndicatorEmaClose(PERIOD_H4,50,6)),T(iTime(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,2)),F(IndicatorEmaClose(PERIOD_D1,20,1)),F(IndicatorEmaClose(PERIOD_D1,50,1)),F(IndicatorEmaClose(PERIOD_D1,20,2)),F(IndicatorEmaClose(PERIOD_D1,50,2)),F(IndicatorEmaClose(PERIOD_D1,20,6)),F(IndicatorEmaClose(PERIOD_D1,50,6)),F(IndicatorEmaClose(PERIOD_D1,20,7)),F(IndicatorEmaClose(PERIOD_D1,50,7)),F(IndicatorAtrPrice(PERIOD_D1,14,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,60,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,252,1)),F(d1_box_high),F(d1_box_low),F(d1_box_width),F(d1_box_average),F(d1_median),F(d1_median>0.0 ? d1_box_average/d1_median : 0.0),available ? "true" : "false",(int)state,RegimeStateName(state),GetLastError());
    FileClose(handle);
    g_numeric_output_enabled=true;
   }
@@ -345,6 +351,15 @@ int OnInit()
       return INIT_FAILED;
    const bool environment=EnvironmentPass();
    AppendAssertion("environment_pass",environment,environment ? "true" : "false","true","locked account/server/build/symbol/period");
+   AppendAssertion("environment_mql_tester",MQLInfoInteger(MQL_TESTER),MQLInfoInteger(MQL_TESTER) ? "true" : "false","true","");
+   AppendAssertion("environment_symbol",_Symbol=="XAUUSD",_Symbol,"XAUUSD","");
+   AppendAssertion("environment_period",_Period==PERIOD_M5,EnumToString((ENUM_TIMEFRAMES)_Period),"PERIOD_M5","");
+   AppendAssertion("environment_account_login",AccountInfoInteger(ACCOUNT_LOGIN)==1025742,IntegerToString(AccountInfoInteger(ACCOUNT_LOGIN)),"1025742","");
+   AppendAssertion("environment_server",AccountInfoString(ACCOUNT_SERVER)=="Capital.ComMena-Demo",AccountInfoString(ACCOUNT_SERVER),"Capital.ComMena-Demo","");
+   AppendAssertion("environment_company",AccountInfoString(ACCOUNT_COMPANY)=="Capital Com Mena Securities Trading L.L.C",AccountInfoString(ACCOUNT_COMPANY),"Capital Com Mena Securities Trading L.L.C","");
+   AppendAssertion("environment_currency",AccountInfoString(ACCOUNT_CURRENCY)=="USD",AccountInfoString(ACCOUNT_CURRENCY),"USD","");
+   AppendAssertion("environment_leverage",AccountInfoInteger(ACCOUNT_LEVERAGE)==50,IntegerToString(AccountInfoInteger(ACCOUNT_LEVERAGE)),"50","");
+   AppendAssertion("environment_terminal_build",TerminalInfoInteger(TERMINAL_BUILD)==5833,IntegerToString(TerminalInfoInteger(TERMINAL_BUILD)),"5833","");
    if(!environment)
       return INIT_FAILED;
    const bool contract=ExportContract();
@@ -354,6 +369,16 @@ int OnInit()
    AppendAssertion("source_static_safety_pass",true,"true","true","compile-time contract");
    AppendAssertion("source_equivalence_pass",true,"true","true",SOURCE_EQUIVALENCE_SHA256);
    AppendAssertion("effective_inputs_pass",true,"true","true","fixed constants");
+   AppendAssertion("effective_input_InpRunId",InpRunId=="run1" || InpRunId=="run2",InpRunId,InpRunId,"");
+   AppendAssertion("effective_input_InpRouterRowsFileName",InpRouterRowsFileName=="np1_"+InpRunId+"_native_router_rows.tsv",InpRouterRowsFileName,"np1_"+InpRunId+"_native_router_rows.tsv","");
+   AppendAssertion("effective_input_InpH1BarsFileName",InpH1BarsFileName=="np1_"+InpRunId+"_native_h1_bars.tsv",InpH1BarsFileName,"np1_"+InpRunId+"_native_h1_bars.tsv","");
+   AppendAssertion("effective_input_InpH4BarsFileName",InpH4BarsFileName=="np1_"+InpRunId+"_native_h4_bars.tsv",InpH4BarsFileName,"np1_"+InpRunId+"_native_h4_bars.tsv","");
+   AppendAssertion("effective_input_InpD1BarsFileName",InpD1BarsFileName=="np1_"+InpRunId+"_native_d1_bars.tsv",InpD1BarsFileName,"np1_"+InpRunId+"_native_d1_bars.tsv","");
+   AppendAssertion("effective_input_InpContractFileName",InpContractFileName=="np1_"+InpRunId+"_native_contract.tsv",InpContractFileName,"np1_"+InpRunId+"_native_contract.tsv","");
+   AppendAssertion("effective_input_InpOrderCalcProfitFileName",InpOrderCalcProfitFileName=="np1_"+InpRunId+"_native_ordercalcprofit.tsv",InpOrderCalcProfitFileName,"np1_"+InpRunId+"_native_ordercalcprofit.tsv","");
+   AppendAssertion("effective_input_InpAssertionsFileName",InpAssertionsFileName=="np1_"+InpRunId+"_native_assertions.tsv",InpAssertionsFileName,"np1_"+InpRunId+"_native_assertions.tsv","");
+   AppendAssertion("effective_input_InpOrderZeroFileName",InpOrderZeroFileName=="np1_"+InpRunId+"_order.zero",InpOrderZeroFileName,"np1_"+InpRunId+"_order.zero","");
+   AppendAssertion("effective_input_InpDealZeroFileName",InpDealZeroFileName=="np1_"+InpRunId+"_deal.zero",InpDealZeroFileName,"np1_"+InpRunId+"_deal.zero","");
    AppendAssertion("router_rows_monotonic",true,"true","true","emitted on new H4 only");
    AppendAssertion("contract_snapshot_complete",contract,contract ? "true" : "false","true","");
    AppendAssertion("ordercalcprofit_all_success",probes,probes ? "true" : "false","true","");
