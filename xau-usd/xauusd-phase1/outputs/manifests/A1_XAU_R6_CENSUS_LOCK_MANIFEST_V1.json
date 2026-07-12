@@ -1,19 +1,22 @@
 {
   "artifacts": {
     "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md": {
-      "sha256": "fcdb88aa8afbe2d372cbb4f82b7d8e9e238f58f285299d7cab2807493952e4d0",
-      "size_bytes": 7637
+      "sha256": "76bc0f5e8ffafed0066b94a5d4b3d22455014272a467986f52f07e1f511c3e7d",
+      "size_bytes": 12583
     },
     "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json": {
-      "sha256": "fdc5977b64a1bd5236f6eda011da283adddee55dad12898c905ebd99d65479ca",
-      "size_bytes": 5569
+      "sha256": "78c7c321e33ec310967e2919bc1fb5ae01d153e7f717aec3e454eb70ebe30a8b",
+      "size_bytes": 9918
     },
     "docs/A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json": {
-      "sha256": "2539b2ffdeb7459c6f7b8ad07b88934fd24204c2d2fef2347c337141e0de0aae",
-      "size_bytes": 4751
+      "sha256": "32e27beeaa9d5bf4967de0d230c801b58b51517d63e907d3c040b2cd7c3bcc51",
+      "size_bytes": 5654
     }
   },
   "authority": {
+    "amendment_review": "docs/A1_XAU_R6_C1_LOCK_AUDIT_D5134057_2026_07_12.md",
+    "amendment_review_sha256": "a40a05050f81c834ff63181a1835efdf251ca73980c1974a11696c831365cacf",
+    "audited_c1_commit": "d51340574d90a39fe0032e54e4a8252370c19058",
     "independent_review": "docs/A1_XAU_H4_RULE_CLEAN_RERUN_V2_INDEPENDENT_REVIEW_51D7191B_2026_07_12.md",
     "independent_review_sha256": "6f3b9e6ba530b2f942a50142f66241cd3743e9f46eae9b692c88b049baa13876",
     "reviewed_commit": "51d7191b050697eb9854c25b092ee5f3c11fad67"
@@ -25,7 +28,7 @@
     "h4_or_portfolio_join_authorized": false,
     "mt5_execution_authorized": false,
     "pnl_authorized": false,
-    "phase": "R6-C1_LOCKS_ONLY"
+    "phase": "R6-C1A_AMENDED_LOCKS_ONLY"
   },
   "experiment": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
   "schema_version": "a1_xau_r6_census_lock_manifest_v1"

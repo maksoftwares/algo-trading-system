@@ -164,3 +164,96 @@ R6-C2 must attest the exact commit and tree hashes, clean status, full command a
 environment, full test output and its SHA-256 (or immutable CI), script/test/data
 hashes, causality, prefix invariance, schema outcome blindness, contract-risk
 parity, and absence of runtime-capable CLI surfaces.
+
+## R6-C1A implementation-semantics amendment
+
+Authority: `A1_XAU_R6_C1_LOCK_AUDIT_D5134057_2026_07_12.md`. This amendment
+removes pre-code ambiguity only; it changes no market threshold or incidence gate.
+
+### Router V1 pin
+
+The only permitted router is the MQL5 source at
+`mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5`, pinned at commit
+`d51340574d90a39fe0032e54e4a8252370c19058` and Git blob
+`d59338facaa01032a47c71186e64e1ba9f1dba8f`. Its exact inputs and state priority
+are in the rule lock. Evaluation is `UNKNOWN` on unavailable/invalid inputs, then
+`SHOCK`, `UPTREND`, `DOWNTREND`, `COMPRESSION`, else `CHOP`. C2 must prove parity
+against immutable market-only Router V1 snapshots without strategy ledgers.
+
+### Broker-time bars and ticks
+
+All timestamps are native broker-server wall clock serialized exactly as
+`YYYY-MM-DDTHH:MM:SS`, with no timezone suffix. A bar completes at the next native
+bar's open; never infer close as open plus nominal duration and never synthesize a
+weekend/session-gap bar. After breakdown completion, the reclaim window is the first
+six native H1 bars whose opens are at or after that boundary. Each completes only
+when its next native H1 bar opens.
+
+Bar fields contain native open timestamps. `decision_time` is the native open of the
+H1 bar immediately after the reclaim bar. `entry_tick_time` is the first tick at or
+after decision time and within 15 minutes; `entry_tick_sequence` is the zero-based
+absolute source-tick row. A same-second tick is eligible only when its sequence is
+strictly after every tick assigned to the reclaim bar. The data interval is
+`[2016-07-01T00:00:00,2026-07-01T00:00:00)` in broker wall clock.
+
+### Normalization and risk
+
+The exact contract adds finite positive `point` and integer `digits`. Normalize up:
+
+`round(ceil(price/tick_size-1e-12)*tick_size,digits)`.
+
+`raw_structural_stop=max(reclaim_bar_high,box_low)+0.25*A_reclaim`;
+`structural_stop=normalize_up(raw_structural_stop)`; and
+`risk_exit_price=normalize_up(structural_stop+tick_size)`. The extra conservative
+tick is included exactly once. `spread_points=(entry_ask-entry_bid)/point` and
+`stop_points=(risk_exit_price-entry_bid)/point`.
+
+Require `entry_ask>=entry_bid>0`, `structural_stop>entry_ask`, and
+`risk_exit_price-entry_ask >= max(stops_level,freeze_level)*point`.
+Minimum-contract risk is absolute `OrderCalcProfit` for `ORDER_TYPE_SELL`, symbol,
+`volume_min`, entry bid, and `risk_exit_price`. A Python equivalent is permitted only
+after captured-contract fixture parity and may not hardcode a dollar-per-point rate.
+
+### Canonical identities
+
+Use UTF-8, literal `|`, uppercase `SHORT`, lowercase SHA-256 hex, fixed-`digits`
+prices, broker-time strings, and no locale formatting. `box_id` hashes rule version,
+symbol, six chronological box opens, normalized box low, and normalized box high.
+`episode_id` hashes rule version, symbol, `SHORT`, box ID, and breakdown open time.
+`candidate_id` hashes rule version, episode ID, reclaim open time, entry tick time,
+and absolute tick sequence, in that order.
+
+### Suppression release ordering
+
+Suppression starts immediately after a valid breakdown. On each later H4 completion,
+first process release: close at or above original box mid, otherwise the twelfth
+additional H4 completion. Then evaluate that same completed bar as a new shift-1
+candidate, so a release bar may seed a candidate. A resolved signal never releases
+suppression early and positions/results are never consulted.
+
+### Calendar gates
+
+Use `entry_tick_time` for raw, reference, and deployment incidence. Early is
+`[2016-07-01,2021-07-01)` and late is `[2021-07-01,2026-07-01)`. A July-June bucket
+has start year equal to the timestamp year when month is at least 7, else year minus
+one. Use exactly ten zero-filled buckets with start years 2016 through 2025.
+
+Use 120 zero-filled calendar months from 2016-07 through 2026-06 and exactly 97
+contiguous 24-month windows `months[i:i+24]` for `i=0..96`. Concentration is maximum
+window count divided by total raw opportunities; it is not a 730-day window.
+
+### Exclusion funnel
+
+The closed row schema contains only `RAW_OPPORTUNITY_AVAILABLE` rows and requires an
+empty exclusion reason. Exclusions are aggregate deterministic funnel counters, not
+partial rows. Every eligible completed-H4 anchor has exactly one terminal pre-risk
+status: `DATA_UNAVAILABLE`, `IMPULSE_REJECTED`, `BOX_REJECTED`,
+`ROUTER_BLOCKED_UNKNOWN`, `ROUTER_BLOCKED_SHOCK`, `ROUTER_BLOCKED_COMPRESSION`,
+`ROUTER_BLOCKED_DOWNTREND`, `BREAKDOWN_REJECTED`, `SUPPRESSION_ACTIVE`,
+`FIRST_RECLAIM_NOT_REJECTED`, `NO_RECLAIM_WITHIN_SIX_H1`,
+`ENTRY_TICK_UNAVAILABLE`, or `RAW_OPPORTUNITY_AVAILABLE`.
+
+Eligible anchors must equal the sum of all terminal funnel statuses. Raw count is
+the number of emitted rows. Reference/deployment counts are sums of their risk flags.
+Prefix invariance applies to rows and to funnel states whose decision horizon ends
+inside the prefix.
