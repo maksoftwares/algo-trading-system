@@ -17,6 +17,7 @@ DOC_NAMES = (
     "A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
     "A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md",
     "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md",
+    "A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md",
 )
 LEDGER_RELATIVE = Path(
     "xau-usd/xauusd-phase1/outputs/reports/"
@@ -29,12 +30,15 @@ NORTH_STAR = (
     "eventually support controlled withdrawals from accumulated profits."
 )
 REQUIRED_STATEMENTS = [
-    "R1+R2 = current research control",
-    "R3 = standalone shadow only",
-    "R3 portfolio use = killed by DD gate",
+    "R6 = primary independent specialist lane",
+    "NP1-A = next action",
+    "R1+R2 = research control only",
+    "R3 = excluded",
     "R4 = no survivor",
-    "no demo/live authorization",
-    "next task = router entry/hold path audit",
+    "router entry/hold audit = deferred control diagnostic",
+    "parallel specialist lane = false",
+    "all history through 2026-06-30 = DEVELOPMENT_DATA",
+    "no demo/live/broker authorization",
 ]
 RULE_ADMISSIBILITY_SOURCES = [
     {
@@ -64,11 +68,11 @@ RULE_ADMISSIBILITY_SOURCES = [
 ]
 
 
-def test_incomplete_governance_document_triplet_preserves_legacy_schema(tmp_path: Path):
+def test_incomplete_governance_document_set_preserves_legacy_schema(tmp_path: Path):
     repo = tmp_path / "repo"
     docs = repo / "xau-usd" / "xauusd-phase1" / "docs"
     docs.mkdir(parents=True)
-    for name in DOC_NAMES[:2]:
+    for name in DOC_NAMES[:3]:
         (docs / name).write_text(f"# {name}\n", encoding="utf-8")
 
     module = _load_script("generate_project_status_summary")
@@ -122,11 +126,20 @@ def test_governance_summary_is_single_current_truth_and_writes_phase_local_point
         "trades": 678,
         "win_rate_pct": 51.03,
     }
-    assert current["specialists"]["R1"]["role"] == "Primary bullish/uptrend profit engine"
-    assert current["specialists"]["R2"]["role"] == "Strict downtrend hedge and secondary profit source"
+    assert current["specialists"]["R1"] == {
+        "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+        "role": "Primary bullish/uptrend profit engine",
+        "status": "RESEARCH_CONTROL_ONLY",
+    }
+    assert current["specialists"]["R2"] == {
+        "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+        "role": "Strict downtrend hedge and secondary profit source",
+        "status": "RESEARCH_CONTROL_ONLY",
+    }
     assert current["specialists"]["R3"] == {
+        "compatibility_frozen_status": "STANDALONE_SHADOW_ONLY",
         "portfolio_status": "KILLED_BY_DD_GATE",
-        "standalone_status": "STANDALONE_SHADOW_ONLY",
+        "standalone_status": "EXCLUDED",
     }
     assert current["specialists"]["R4"] == {"chop_default": "NO_TRADE", "status": "NO_SURVIVOR"}
     assert current["rule_admissibility"] == {
@@ -171,12 +184,32 @@ def test_governance_summary_is_single_current_truth_and_writes_phase_local_point
         "live_authorized": False,
         "runtime_touched": False,
     }
-    assert current["next_task"] == {
+    assert current["primary_next_task"] == {
         "ea_trading_logic_change": "NONE",
-        "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
-        "status": "PREREGISTERED_NOT_RUN",
+        "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+        "status": "AUTHORIZED_NOT_STARTED",
         "strategy_change_authorized": False,
     }
+    assert current["next_task"] == {
+        **current["primary_next_task"],
+        "authority": "ALIAS_OF_PRIMARY_NEXT_TASK",
+    }
+    assert current["authority_map"] == {
+        "authoritative_next_task_key": "primary_next_task",
+        "authoritative_statements_key": "required_current_statements",
+        "compatibility_next_task_key": "control_diagnostic_task",
+        "compatibility_statements_key": "control_diagnostic_compatibility_statements",
+    }
+    assert current["independent_specialist_program"] == {
+        "historical_pnl_authorized": False,
+        "id": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+        "next_action": "NP1-A",
+        "np1_status": "MANDATORY_PREREQUISITE_WITHIN_R6",
+        "parallel_specialist_lane_authorized": False,
+        "range_box_status": "BACKLOG_ONLY_IF_R6_CLOSES",
+        "status": "PRIMARY_INDEPENDENT_SPECIALIST_LANE",
+    }
+    assert current["control_diagnostic_task"]["status"] == "DEFERRED_CONTROL_DIAGNOSTIC"
 
     markdown = md_path.read_text(encoding="utf-8")
     assert NORTH_STAR in markdown
@@ -187,6 +220,9 @@ def test_governance_summary_is_single_current_truth_and_writes_phase_local_point
     assert "Future containment must be a shared preregistered integrated risk policy" in markdown
     assert "Integrated admission requires independently qualified rule-clean sources or later reviewed governance" in markdown
     assert "REPAIR_REQUIRED_NATIVE_POSITION_JOIN" in markdown
+    assert "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1" in markdown
+    assert "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS" in markdown
+    assert "DEFERRED_CONTROL_DIAGNOSTIC" in markdown
     assert "388/678" in markdown
     assert "387/678" in markdown
     assert "before any router classification" in markdown
@@ -228,6 +264,9 @@ def test_governance_dashboard_is_compact_and_both_verifiers_fail_closed_on_tampe
     assert "Future containment must be a shared preregistered integrated risk policy" in dashboard
     assert "Integrated admission requires independently qualified rule-clean sources or later reviewed governance" in dashboard
     assert "REPAIR_REQUIRED_NATIVE_POSITION_JOIN" in dashboard
+    assert "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1" in dashboard
+    assert "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS" in dashboard
+    assert "DEFERRED_CONTROL_DIAGNOSTIC" in dashboard
     assert "388/678" in dashboard
     assert "387/678" in dashboard
     assert "before any router classification" in dashboard

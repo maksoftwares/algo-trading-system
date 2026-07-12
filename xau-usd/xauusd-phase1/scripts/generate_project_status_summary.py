@@ -24,14 +24,28 @@ GOVERNANCE_DOCUMENT_NAMES = {
     "master_direction": "A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
     "current_research_freeze": "A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md",
     "router_entry_hold_path_audit_prereg": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md",
+    "independent_specialist_primary_direction": (
+        "A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md"
+    ),
 }
 GOVERNANCE_REQUIRED_STATEMENTS = [
+    "R6 = primary independent specialist lane",
+    "NP1-A = next action",
+    "R1+R2 = research control only",
+    "R3 = excluded",
+    "R4 = no survivor",
+    "router entry/hold audit = deferred control diagnostic",
+    "parallel specialist lane = false",
+    "all history through 2026-06-30 = DEVELOPMENT_DATA",
+    "no demo/live/broker authorization",
+]
+GOVERNANCE_CONTROL_DIAGNOSTIC_COMPATIBILITY_STATEMENTS = [
     "R1+R2 = current research control",
     "R3 = standalone shadow only",
     "R3 portfolio use = killed by DD gate",
     "R4 = no survivor",
     "no demo/live authorization",
-    "next task = router entry/hold path audit",
+    "router entry/hold path audit preregistration remains frozen",
 ]
 CURRENT_CONTROL_LEDGER_SHA256 = "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
 CURRENT_CONTROL_LEDGER_PATH = (
@@ -1264,6 +1278,24 @@ def _generate_governance_status(
         "overall_status": "NO_GO_RESEARCH_ONLY",
         "north_star": GOVERNANCE_NORTH_STAR,
         "required_current_statements": list(GOVERNANCE_REQUIRED_STATEMENTS),
+        "authority_map": {
+            "authoritative_next_task_key": "primary_next_task",
+            "authoritative_statements_key": "required_current_statements",
+            "compatibility_next_task_key": "control_diagnostic_task",
+            "compatibility_statements_key": "control_diagnostic_compatibility_statements",
+        },
+        "control_diagnostic_compatibility_statements": list(
+            GOVERNANCE_CONTROL_DIAGNOSTIC_COMPATIBILITY_STATEMENTS
+        ),
+        "independent_specialist_program": {
+            "id": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+            "status": "PRIMARY_INDEPENDENT_SPECIALIST_LANE",
+            "next_action": "NP1-A",
+            "np1_status": "MANDATORY_PREREQUISITE_WITHIN_R6",
+            "parallel_specialist_lane_authorized": False,
+            "range_box_status": "BACKLOG_ONLY_IF_R6_CLOSES",
+            "historical_pnl_authorized": False,
+        },
         "portfolio_control": {
             "id": "current_r1_r2_baseline",
             "status": "CURRENT_RESEARCH_CONTROL",
@@ -1287,15 +1319,18 @@ def _generate_governance_status(
         },
         "specialists": {
             "R1": {
-                "status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+                "status": "RESEARCH_CONTROL_ONLY",
+                "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
                 "role": "Primary bullish/uptrend profit engine",
             },
             "R2": {
-                "status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
+                "status": "RESEARCH_CONTROL_ONLY",
+                "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
                 "role": "Strict downtrend hedge and secondary profit source",
             },
             "R3": {
-                "standalone_status": "STANDALONE_SHADOW_ONLY",
+                "standalone_status": "EXCLUDED",
+                "compatibility_frozen_status": "STANDALONE_SHADOW_ONLY",
                 "portfolio_status": "KILLED_BY_DD_GATE",
             },
             "R4": {
@@ -1345,11 +1380,33 @@ def _generate_governance_status(
             "broker_action_authorized": False,
             "runtime_touched": False,
         },
-        "next_task": {
-            "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
-            "status": "PREREGISTERED_NOT_RUN",
+        "primary_next_task": {
+            "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+            "status": "AUTHORIZED_NOT_STARTED",
             "strategy_change_authorized": False,
             "ea_trading_logic_change": "NONE",
+        },
+        "next_task": {
+            "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+            "status": "AUTHORIZED_NOT_STARTED",
+            "strategy_change_authorized": False,
+            "ea_trading_logic_change": "NONE",
+            "authority": "ALIAS_OF_PRIMARY_NEXT_TASK",
+        },
+        "control_diagnostic_task": {
+            "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+            "status": "DEFERRED_CONTROL_DIAGNOSTIC",
+            "original_lock_status": "PREREGISTERED_NOT_RUN",
+            "authoritative_for_primary_program": False,
+            "blocks_r6_standalone_discovery": False,
+            "required_before_old_control_integration": True,
+            "strategy_change_authorized": False,
+            "ea_trading_logic_change": "NONE",
+        },
+        "router_entry_hold_audit": {
+            "status": "DEFERRED_CONTROL_DIAGNOSTIC",
+            "blocks_r6_standalone_discovery": False,
+            "required_before_old_control_integration": True,
         },
     }
     summary: dict[str, Any] = {
@@ -1384,7 +1441,10 @@ def _render_governance_markdown(summary: dict[str, Any]) -> str:
     attribution_repair = _mapping(current.get("attribution_repair"))
     history = _mapping(current.get("historical_evidence"))
     authorization = _mapping(current.get("authorization"))
-    next_task = _mapping(current.get("next_task"))
+    authority_map = _mapping(current.get("authority_map"))
+    program = _mapping(current.get("independent_specialist_program"))
+    next_task = _mapping(current.get("primary_next_task"))
+    control_diagnostic = _mapping(current.get("control_diagnostic_task"))
     repo = _mapping(summary.get("repo"))
     documents = _mapping(summary.get("source_documents"))
 
@@ -1409,6 +1469,24 @@ def _render_governance_markdown(summary: dict[str, Any]) -> str:
         *[str(item) for item in current.get("required_current_statements", [])],
         "```",
         "",
+        "## Primary independent-specialist lane",
+        "",
+        f"Primary lane: `{program.get('id', '')}`",
+        f"Standing: `{program.get('status', '')}`",
+        f"Next action: `{program.get('next_action', '')}` — market-only native Router/contract acquisition locks",
+        f"NP1 standing: `{program.get('np1_status', '')}`",
+        f"Parallel specialist lane authorized: `{str(program.get('parallel_specialist_lane_authorized', False)).lower()}`",
+        f"Historical R6 P/L authorized: `{str(program.get('historical_pnl_authorized', False)).lower()}`",
+        "",
+        "R6 owns the pre-downtrend distribution / failed-reclaim transition while Router V1 is `UPTREND` or `CHOP`.",
+        "The H1/H4 objective range-box family is backlog only if R6 closes and a later owner/reviewer packet selects it.",
+        "",
+        "## Machine-readable authority",
+        "",
+        f"Authoritative task key: `{authority_map.get('authoritative_next_task_key', '')}`",
+        f"Authoritative statements key: `{authority_map.get('authoritative_statements_key', '')}`",
+        f"Compatibility task key: `{authority_map.get('compatibility_next_task_key', '')}`",
+        "",
         "## Current research control",
         "",
         f"Control: `{control.get('id', '')}`",
@@ -1430,12 +1508,12 @@ def _render_governance_markdown(summary: dict[str, Any]) -> str:
         "",
         "## Specialist ownership",
         "",
-        "| Specialist | Current standing | Role / default |",
-        "| --- | --- | --- |",
-        f"| R1 | `{r1.get('status', '')}` | {r1.get('role', '')} |",
-        f"| R2 | `{r2.get('status', '')}` | {r2.get('role', '')} |",
-        f"| R3 | `{r3.get('standalone_status', '')}`; `{r3.get('portfolio_status', '')}` | Portfolio use killed by DD gate |",
-        f"| R4 | `{r4.get('status', '')}` | Chop default `{r4.get('chop_default', '')}` |",
+        "| Specialist | Primary-program standing | Frozen compatibility standing | Role / default |",
+        "| --- | --- | --- | --- |",
+        f"| R1 | `{r1.get('status', '')}` | `{r1.get('compatibility_frozen_status', '')}` | {r1.get('role', '')} |",
+        f"| R2 | `{r2.get('status', '')}` | `{r2.get('compatibility_frozen_status', '')}` | {r2.get('role', '')} |",
+        f"| R3 | `{r3.get('standalone_status', '')}` | `{r3.get('compatibility_frozen_status', '')}`; `{r3.get('portfolio_status', '')}` | Not independent; excluded from portfolio use |",
+        f"| R4 | `{r4.get('status', '')}` | `{r4.get('status', '')}` | Chop default `{r4.get('chop_default', '')}` |",
         "",
         "## Post-audit rule admissibility",
         "",
@@ -1493,6 +1571,19 @@ def _render_governance_markdown(summary: dict[str, Any]) -> str:
         f"Status: `{next_task.get('status', '')}`",
         f"Strategy change authorized: `{str(next_task.get('strategy_change_authorized', False)).lower()}`",
         f"EA trading-logic change: `{next_task.get('ea_trading_logic_change', '')}`",
+        "",
+        "## Deferred control diagnostic",
+        "",
+        f"Control task: `{control_diagnostic.get('id', '')}`",
+        f"Status: `{control_diagnostic.get('status', '')}`",
+        f"Authoritative for primary program: `{str(control_diagnostic.get('authoritative_for_primary_program', False)).lower()}`",
+        "It remains required before the old R1+R2 control can enter an integrated portfolio, but it does not block R6 standalone discovery.",
+        "",
+        "### Frozen compatibility statements",
+        "",
+        "```text",
+        *[str(item) for item in current.get("control_diagnostic_compatibility_statements", [])],
+        "```",
         "",
         "## Governing documents",
         "",

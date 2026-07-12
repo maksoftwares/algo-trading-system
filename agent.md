@@ -16,7 +16,7 @@ Updated: `2026-07-12`
 3. [Router entry/hold-path audit preregistration](xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md)
 4. [Independent-specialist primary direction](xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md)
 
-Read all three before changing code or generating evidence.
+Read all four before changing code or generating evidence.
 
 ## Exact north star
 

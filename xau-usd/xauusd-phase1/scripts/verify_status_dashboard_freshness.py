@@ -21,14 +21,20 @@ GOVERNANCE_DOCUMENTS = {
     "router_entry_hold_path_audit_prereg": (
         "xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md"
     ),
+    "independent_specialist_primary_direction": (
+        "xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md"
+    ),
 }
 GOVERNANCE_REQUIRED_STATEMENTS = [
-    "R1+R2 = current research control",
-    "R3 = standalone shadow only",
-    "R3 portfolio use = killed by DD gate",
+    "R6 = primary independent specialist lane",
+    "NP1-A = next action",
+    "R1+R2 = research control only",
+    "R3 = excluded",
     "R4 = no survivor",
-    "no demo/live authorization",
-    "next task = router entry/hold path audit",
+    "router entry/hold audit = deferred control diagnostic",
+    "parallel specialist lane = false",
+    "all history through 2026-06-30 = DEVELOPMENT_DATA",
+    "no demo/live/broker authorization",
 ]
 CURRENT_CONTROL_LEDGER_SHA256 = "47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52"
 GOVERNANCE_RULE_ADMISSIBILITY_SOURCES = [
@@ -358,7 +364,11 @@ def _verify_governance_status_dashboard(
     attribution_repair = _mapping(current.get("attribution_repair"))
     history = _mapping(current.get("historical_evidence"))
     authorization = _mapping(current.get("authorization"))
-    next_task = _mapping(current.get("next_task"))
+    authority_map = _mapping(current.get("authority_map"))
+    program = _mapping(current.get("independent_specialist_program"))
+    next_task = _mapping(current.get("primary_next_task"))
+    next_task_alias = _mapping(current.get("next_task"))
+    control_diagnostic = _mapping(current.get("control_diagnostic_task"))
 
     if "commit" in repo:
         errors.append("governance repo provenance must use base_commit, not ambiguous commit")
@@ -386,11 +396,11 @@ def _verify_governance_status_dashboard(
         ("control max closed DD", metrics.get("max_closed_drawdown_usd"), 889.69),
         ("control positive months", metrics.get("positive_months"), 26),
         ("control active weekdays", metrics.get("active_weekdays_pct_approx"), 21.28),
-        ("R1 status", r1.get("status"), "CURRENT_RESEARCH_CONTROL_COMPONENT"),
+        ("R1 status", r1.get("status"), "RESEARCH_CONTROL_ONLY"),
         ("R1 role", r1.get("role"), "Primary bullish/uptrend profit engine"),
-        ("R2 status", r2.get("status"), "CURRENT_RESEARCH_CONTROL_COMPONENT"),
+        ("R2 status", r2.get("status"), "RESEARCH_CONTROL_ONLY"),
         ("R2 role", r2.get("role"), "Strict downtrend hedge and secondary profit source"),
-        ("R3 standalone status", r3.get("standalone_status"), "STANDALONE_SHADOW_ONLY"),
+        ("R3 standalone status", r3.get("standalone_status"), "EXCLUDED"),
         ("R3 portfolio status", r3.get("portfolio_status"), "KILLED_BY_DD_GATE"),
         ("R4 status", r4.get("status"), "NO_SURVIVOR"),
         ("R4 chop default", r4.get("chop_default"), "NO_TRADE"),
@@ -433,9 +443,16 @@ def _verify_governance_status_dashboard(
         ),
         ("development cutoff", history.get("through"), "2026-06-30"),
         ("development classification", history.get("classification"), "DEVELOPMENT_DATA"),
-        ("next task", next_task.get("id"), "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1"),
-        ("next task status", next_task.get("status"), "PREREGISTERED_NOT_RUN"),
+        ("next task", next_task.get("id"), "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS"),
+        ("next task status", next_task.get("status"), "AUTHORIZED_NOT_STARTED"),
         ("EA trading logic change", next_task.get("ea_trading_logic_change"), "NONE"),
+        ("primary specialist", program.get("id"), "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1"),
+        ("primary specialist status", program.get("status"), "PRIMARY_INDEPENDENT_SPECIALIST_LANE"),
+        ("primary next action", program.get("next_action"), "NP1-A"),
+        ("deferred control task", control_diagnostic.get("id"), "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1"),
+        ("deferred control task status", control_diagnostic.get("status"), "DEFERRED_CONTROL_DIAGNOSTIC"),
+        ("authoritative task key", authority_map.get("authoritative_next_task_key"), "primary_next_task"),
+        ("compatibility task key", authority_map.get("compatibility_next_task_key"), "control_diagnostic_task"),
     ]
     for label, actual, expected in expected_values:
         if actual != expected:
@@ -443,6 +460,8 @@ def _verify_governance_status_dashboard(
 
     if current.get("required_current_statements") != GOVERNANCE_REQUIRED_STATEMENTS:
         errors.append("governance required current statements are missing, reordered, or stale")
+    if next_task_alias.get("id") != next_task.get("id") or next_task_alias.get("status") != next_task.get("status"):
+        errors.append("governance next_task alias does not point to the authoritative primary task")
     if rule_admissibility.get("sources") != GOVERNANCE_RULE_ADMISSIBILITY_SOURCES:
         errors.append("governance rule-admissibility source list is missing, reordered, or stale")
     for label, value in (
@@ -452,6 +471,10 @@ def _verify_governance_status_dashboard(
         ("broker action authorization", authorization.get("broker_action_authorized")),
         ("runtime touched", authorization.get("runtime_touched")),
         ("strategy change authorization", next_task.get("strategy_change_authorized")),
+        ("parallel specialist authorization", program.get("parallel_specialist_lane_authorized")),
+        ("historical R6 P/L authorization", program.get("historical_pnl_authorized")),
+        ("control task primary authority", control_diagnostic.get("authoritative_for_primary_program")),
+        ("control task blocks R6", control_diagnostic.get("blocks_r6_standalone_discovery")),
         (
             "legacy rules endorsed for integrated admission",
             rule_admissibility.get("rules_endorsed_for_integrated_admission"),
@@ -527,6 +550,14 @@ def _verify_governance_status_dashboard(
         GOVERNANCE_NORTH_STAR,
         *GOVERNANCE_REQUIRED_STATEMENTS,
         "current_r1_r2_baseline",
+        "PRIMARY_INDEPENDENT_SPECIALIST_LANE",
+        "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+        "NP1-A",
+        "RESEARCH_CONTROL_ONLY",
+        "EXCLUDED",
+        "DEFERRED_CONTROL_DIAGNOSTIC",
+        "primary_next_task",
+        "control_diagnostic_task",
         "STANDALONE_SHADOW_ONLY",
         "KILLED_BY_DD_GATE",
         "NO_SURVIVOR",
@@ -557,6 +588,7 @@ def _verify_governance_status_dashboard(
         "2026-06-30",
         "DEVELOPMENT_DATA",
         "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+        "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
     ]
     for name, surface in (("status_summary.md", markdown), ("status.html", dashboard)):
         for fragment in required_surface_fragments:

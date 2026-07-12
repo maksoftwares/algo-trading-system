@@ -235,7 +235,10 @@ def _render_governance_status_html(summary: dict[str, Any]) -> str:
     attribution_repair = _mapping(current.get("attribution_repair"))
     history = _mapping(current.get("historical_evidence"))
     authorization = _mapping(current.get("authorization"))
-    next_task = _mapping(current.get("next_task"))
+    authority_map = _mapping(current.get("authority_map"))
+    program = _mapping(current.get("independent_specialist_program"))
+    next_task = _mapping(current.get("primary_next_task"))
+    control_diagnostic = _mapping(current.get("control_diagnostic_task"))
     repo = _mapping(summary.get("repo"))
     documents = _mapping(summary.get("source_documents"))
 
@@ -262,6 +265,7 @@ def _render_governance_status_html(summary: dict[str, Any]) -> str:
         "master_direction": "Master direction",
         "current_research_freeze": "Current research freeze",
         "router_entry_hold_path_audit_prereg": "Router entry/hold-path audit preregistration",
+        "independent_specialist_primary_direction": "Independent-specialist primary direction",
     }
     for key in labels:
         document = _mapping(documents.get(key))
@@ -317,6 +321,29 @@ def _render_governance_status_html(summary: dict[str, Any]) -> str:
     </section>
 
     <section>
+      <h2>Primary independent-specialist lane</h2>
+      <table>
+        <tbody>
+          <tr><th>Specialist</th><td><code>{esc(program.get('id', ''))}</code></td></tr>
+          <tr><th>Standing</th><td><code>{esc(program.get('status', ''))}</code></td></tr>
+          <tr><th>Next action</th><td><code>{esc(program.get('next_action', ''))}</code> market-only native Router/contract acquisition locks</td></tr>
+          <tr><th>Parallel specialist lane authorized</th><td class="false">{bool_text(program.get('parallel_specialist_lane_authorized', False))}</td></tr>
+          <tr><th>Historical R6 P/L authorized</th><td class="false">{bool_text(program.get('historical_pnl_authorized', False))}</td></tr>
+        </tbody>
+      </table>
+      <p>R6 owns the pre-downtrend distribution / failed-reclaim transition while Router V1 is <code>UPTREND</code> or <code>CHOP</code>. The range-box family is backlog only if R6 closes.</p>
+    </section>
+
+    <section>
+      <h2>Machine-readable authority</h2>
+      <table><tbody>
+        <tr><th>Authoritative task key</th><td><code>{esc(authority_map.get('authoritative_next_task_key', ''))}</code></td></tr>
+        <tr><th>Authoritative statements key</th><td><code>{esc(authority_map.get('authoritative_statements_key', ''))}</code></td></tr>
+        <tr><th>Compatibility task key</th><td><code>{esc(authority_map.get('compatibility_next_task_key', ''))}</code></td></tr>
+      </tbody></table>
+    </section>
+
+    <section>
       <h2>Current research control</h2>
       <table>
         <tbody>
@@ -335,12 +362,12 @@ def _render_governance_status_html(summary: dict[str, Any]) -> str:
     <section>
       <h2>Specialist ownership</h2>
       <table>
-        <thead><tr><th>Specialist</th><th>Standing</th><th>Role / default</th></tr></thead>
+        <thead><tr><th>Specialist</th><th>Primary-program standing</th><th>Frozen compatibility standing</th><th>Role / default</th></tr></thead>
         <tbody>
-          <tr><td>R1</td><td>{esc(r1.get('status', ''))}</td><td>{esc(r1.get('role', ''))}</td></tr>
-          <tr><td>R2</td><td>{esc(r2.get('status', ''))}</td><td>{esc(r2.get('role', ''))}</td></tr>
-          <tr><td>R3</td><td>{esc(r3.get('standalone_status', ''))}; {esc(r3.get('portfolio_status', ''))}</td><td>Portfolio use killed by DD gate</td></tr>
-          <tr><td>R4</td><td>{esc(r4.get('status', ''))}</td><td>Chop default {esc(r4.get('chop_default', ''))}</td></tr>
+          <tr><td>R1</td><td>{esc(r1.get('status', ''))}</td><td>{esc(r1.get('compatibility_frozen_status', ''))}</td><td>{esc(r1.get('role', ''))}</td></tr>
+          <tr><td>R2</td><td>{esc(r2.get('status', ''))}</td><td>{esc(r2.get('compatibility_frozen_status', ''))}</td><td>{esc(r2.get('role', ''))}</td></tr>
+          <tr><td>R3</td><td>{esc(r3.get('standalone_status', ''))}</td><td>{esc(r3.get('compatibility_frozen_status', ''))}; {esc(r3.get('portfolio_status', ''))}</td><td>Not independent; excluded from portfolio use</td></tr>
+          <tr><td>R4</td><td>{esc(r4.get('status', ''))}</td><td>{esc(r4.get('status', ''))}</td><td>Chop default {esc(r4.get('chop_default', ''))}</td></tr>
         </tbody>
       </table>
     </section>
@@ -382,6 +409,13 @@ def _render_governance_status_html(summary: dict[str, Any]) -> str:
       <h2>Immediate next task</h2>
       <p><code>{esc(next_task.get('id', ''))}</code> · {esc(next_task.get('status', ''))}</p>
       <p>Strategy change authorized: <strong>{bool_text(next_task.get('strategy_change_authorized', False))}</strong>. EA trading-logic change: <strong>{esc(next_task.get('ea_trading_logic_change', ''))}</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Deferred control diagnostic</h2>
+      <p><code>{esc(control_diagnostic.get('id', ''))}</code> · {esc(control_diagnostic.get('status', ''))}</p>
+      <p>Authoritative for primary program: <strong>{bool_text(control_diagnostic.get('authoritative_for_primary_program', False))}</strong>. Required before old-control integration: <strong>{bool_text(control_diagnostic.get('required_before_old_control_integration', False))}</strong>.</p>
+      <p>It does not block R6 standalone discovery.</p>
     </section>
 
     <section>

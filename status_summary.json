@@ -15,11 +15,35 @@
       "total_rows": 678
     },
     "attribution_status": "REPAIR_REQUIRED_NATIVE_POSITION_JOIN",
+    "authority_map": {
+      "authoritative_next_task_key": "primary_next_task",
+      "authoritative_statements_key": "required_current_statements",
+      "compatibility_next_task_key": "control_diagnostic_task",
+      "compatibility_statements_key": "control_diagnostic_compatibility_statements"
+    },
     "authorization": {
       "broker_action_authorized": false,
       "demo_authorized": false,
       "live_authorized": false,
       "runtime_touched": false
+    },
+    "control_diagnostic_compatibility_statements": [
+      "R1+R2 = current research control",
+      "R3 = standalone shadow only",
+      "R3 portfolio use = killed by DD gate",
+      "R4 = no survivor",
+      "no demo/live authorization",
+      "router entry/hold path audit preregistration remains frozen"
+    ],
+    "control_diagnostic_task": {
+      "authoritative_for_primary_program": false,
+      "blocks_r6_standalone_discovery": false,
+      "ea_trading_logic_change": "NONE",
+      "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+      "original_lock_status": "PREREGISTERED_NOT_RUN",
+      "required_before_old_control_integration": true,
+      "status": "DEFERRED_CONTROL_DIAGNOSTIC",
+      "strategy_change_authorized": false
     },
     "historical_evidence": {
       "classification": "DEVELOPMENT_DATA",
@@ -36,9 +60,10 @@
       "status": "PRIMARY_INDEPENDENT_SPECIALIST_LANE"
     },
     "next_task": {
+      "authority": "ALIAS_OF_PRIMARY_NEXT_TASK",
       "ea_trading_logic_change": "NONE",
-      "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
-      "status": "PREREGISTERED_NOT_RUN",
+      "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+      "status": "AUTHORIZED_NOT_STARTED",
       "strategy_change_authorized": false
     },
     "north_star": "Build an automated XAUUSD system that produces positive net returns over rolling 6- and 12-month periods, survives realistic costs and regime changes, limits portfolio equity drawdown, and can eventually support controlled withdrawals from accumulated profits.",
@@ -64,15 +89,13 @@
       },
       "status": "CURRENT_RESEARCH_CONTROL"
     },
+    "primary_next_task": {
+      "ea_trading_logic_change": "NONE",
+      "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+      "status": "AUTHORIZED_NOT_STARTED",
+      "strategy_change_authorized": false
+    },
     "required_current_statements": [
-      "R1+R2 = current research control",
-      "R3 = standalone shadow only",
-      "R3 portfolio use = killed by DD gate",
-      "R4 = no survivor",
-      "no demo/live authorization",
-      "next task = router entry/hold path audit"
-    ],
-    "owner_direction_current_statements": [
       "R6 = primary independent specialist lane",
       "NP1-A = next action",
       "R1+R2 = research control only",
@@ -83,12 +106,6 @@
       "all history through 2026-06-30 = DEVELOPMENT_DATA",
       "no demo/live/broker authorization"
     ],
-    "primary_next_task": {
-      "ea_trading_logic_change": "NONE",
-      "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
-      "status": "AUTHORIZED_NOT_STARTED",
-      "strategy_change_authorized": false
-    },
     "router_entry_hold_audit": {
       "blocks_r6_standalone_discovery": false,
       "required_before_old_control_integration": true,
@@ -133,19 +150,19 @@
     },
     "specialists": {
       "R1": {
+        "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
         "role": "Primary bullish/uptrend profit engine",
-        "primary_program_status": "RESEARCH_CONTROL_ONLY",
-        "status": "CURRENT_RESEARCH_CONTROL_COMPONENT"
+        "status": "RESEARCH_CONTROL_ONLY"
       },
       "R2": {
+        "compatibility_frozen_status": "CURRENT_RESEARCH_CONTROL_COMPONENT",
         "role": "Strict downtrend hedge and secondary profit source",
-        "primary_program_status": "RESEARCH_CONTROL_ONLY",
-        "status": "CURRENT_RESEARCH_CONTROL_COMPONENT"
+        "status": "RESEARCH_CONTROL_ONLY"
       },
       "R3": {
+        "compatibility_frozen_status": "STANDALONE_SHADOW_ONLY",
         "portfolio_status": "KILLED_BY_DD_GATE",
-        "primary_program_status": "EXCLUDED",
-        "standalone_status": "STANDALONE_SHADOW_ONLY"
+        "standalone_status": "EXCLUDED"
       },
       "R4": {
         "chop_default": "NO_TRADE",
@@ -153,9 +170,9 @@
       }
     }
   },
-  "generated_at_utc": "2026-07-10T15:11:59.001734Z",
+  "generated_at_utc": "2026-07-12T06:42:24.698893Z",
   "repo": {
-    "base_commit": "c12f024802135bdb61e817db4fe4f8e10ba0a683",
+    "base_commit": "d26c19736a0672a2c74a3062263cd9732a46bb13",
     "branch": "codex/xau-router-entry-hold-audit"
   },
   "schema_version": "a1_xau_governance_status_v1",
@@ -164,13 +181,13 @@
       "path": "xau-usd/xauusd-phase1/docs/A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md",
       "sha256": "e3a7ec680a35bc81b08fbeaf56d12f8b9b3b23cdb068ad41a18aad88f7f060c8"
     },
-    "master_direction": {
-      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
-      "sha256": "d17285d1056c07342bbd4e3ef0d84c5a0999ff9067313076414d66a9b7b90bfb"
-    },
     "independent_specialist_primary_direction": {
       "path": "xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md",
       "sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af"
+    },
+    "master_direction": {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
+      "sha256": "d17285d1056c07342bbd4e3ef0d84c5a0999ff9067313076414d66a9b7b90bfb"
     },
     "router_entry_hold_path_audit_prereg": {
       "path": "xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md",

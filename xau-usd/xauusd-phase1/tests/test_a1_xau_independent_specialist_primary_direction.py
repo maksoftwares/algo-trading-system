@@ -93,7 +93,7 @@ def test_all_authoritative_status_surfaces_agree_on_r6_and_np1a():
     program = current["independent_specialist_program"]
 
     assert current["overall_status"] == "NO_GO_RESEARCH_ONLY"
-    assert set(current["owner_direction_current_statements"]) == REQUIRED_STATEMENTS
+    assert set(current["required_current_statements"]) == REQUIRED_STATEMENTS
     assert program == {
         "historical_pnl_authorized": False,
         "id": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
@@ -106,17 +106,25 @@ def test_all_authoritative_status_surfaces_agree_on_r6_and_np1a():
     assert current["portfolio_control"]["admission_status"] == (
         "RESEARCH_CONTROL_NOT_DEPLOYMENT_AUTHORIZED"
     )
-    assert current["specialists"]["R1"]["primary_program_status"] == "RESEARCH_CONTROL_ONLY"
-    assert current["specialists"]["R2"]["primary_program_status"] == "RESEARCH_CONTROL_ONLY"
-    assert current["specialists"]["R3"]["primary_program_status"] == "EXCLUDED"
+    assert current["specialists"]["R1"]["status"] == "RESEARCH_CONTROL_ONLY"
+    assert current["specialists"]["R2"]["status"] == "RESEARCH_CONTROL_ONLY"
+    assert current["specialists"]["R3"]["standalone_status"] == "EXCLUDED"
     assert current["specialists"]["R4"]["status"] == "NO_SURVIVOR"
     assert current["router_entry_hold_audit"]["status"] == "DEFERRED_CONTROL_DIAGNOSTIC"
+    assert current["authority_map"] == {
+        "authoritative_next_task_key": "primary_next_task",
+        "authoritative_statements_key": "required_current_statements",
+        "compatibility_next_task_key": "control_diagnostic_task",
+        "compatibility_statements_key": "control_diagnostic_compatibility_statements",
+    }
     assert current["primary_next_task"] == {
         "ea_trading_logic_change": "NONE",
         "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
         "status": "AUTHORIZED_NOT_STARTED",
         "strategy_change_authorized": False,
     }
+    assert current["next_task"]["id"] == current["primary_next_task"]["id"]
+    assert current["control_diagnostic_task"]["authoritative_for_primary_program"] is False
     assert current["historical_evidence"] == {
         "classification": "DEVELOPMENT_DATA",
         "through": "2026-06-30",
