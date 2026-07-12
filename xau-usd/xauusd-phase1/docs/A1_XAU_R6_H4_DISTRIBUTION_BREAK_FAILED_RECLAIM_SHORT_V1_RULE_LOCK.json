@@ -86,11 +86,26 @@
     "entry_ask_usage": "spread_evidence_only",
     "entry_reference": "bid",
     "entry_tick_sequence": "zero_based_absolute_source_tick_row",
-    "expiry_minutes_after_scheduled_h1_close": 15,
+    "expiry_minutes_after_decision_time": 15,
     "must_be_first_recorded_tick_at_or_after_decision_time": true,
     "must_be_session_open": true,
     "same_second_tick_must_follow_every_tick_assigned_to_reclaim_bar": true,
     "unavailable_status": "ENTRY_TICK_UNAVAILABLE"
+  },
+  "derived_metrics": {
+    "box_net_drift_atr": "abs(close_h4_shift_2-open_h4_shift_7)/A_box",
+    "box_width_atr": "(box_high-box_low)/A_box",
+    "breakdown_body_fraction": "abs(breakdown_close-breakdown_open)/(breakdown_high-breakdown_low)",
+    "breakdown_close_location": "(breakdown_close-breakdown_low)/(breakdown_high-breakdown_low)",
+    "breakdown_distance_atr": "(box_low-breakdown_close)/A_break",
+    "impulse_final_location": "(close_h4_shift_8-impulse_low)/(impulse_high-impulse_low)",
+    "impulse_net_advance_atr": "(close_h4_shift_8-open_h4_shift_13)/A_impulse",
+    "impulse_range_atr": "(impulse_high-impulse_low)/A_impulse",
+    "reclaim_body_fraction": "abs(reclaim_close-reclaim_open)/(reclaim_high-reclaim_low)",
+    "reclaim_close_location": "(reclaim_close-reclaim_low)/(reclaim_high-reclaim_low)",
+    "reclaim_touch_distance_atr": "(reclaim_high-box_low)/A_reclaim",
+    "spread_points": "(entry_ask-entry_bid)/point",
+    "stop_points": "(risk_exit_price-entry_bid)/point"
   },
   "excluded_candidate_funnel": {
     "eligible_anchor_reconciliation": "eligible_h4_anchors_equals_sum_terminal_pre_risk_statuses",
@@ -157,8 +172,14 @@
       "opportunities_min": 100
     },
     "halves": {
-      "early": ["2016-07-01", "2021-06-30"],
-      "late": ["2021-07-01", "2026-06-30"]
+      "early": {
+        "from_inclusive": "2016-07-01T00:00:00",
+        "to_exclusive": "2021-07-01T00:00:00"
+      },
+      "late": {
+        "from_inclusive": "2021-07-01T00:00:00",
+        "to_exclusive": "2026-07-01T00:00:00"
+      }
     },
     "raw": {
       "best_contiguous_24_month_share_max": 0.4,

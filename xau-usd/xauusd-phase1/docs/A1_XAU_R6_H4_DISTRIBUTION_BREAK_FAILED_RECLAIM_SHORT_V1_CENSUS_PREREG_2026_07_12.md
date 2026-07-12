@@ -257,3 +257,13 @@ Eligible anchors must equal the sum of all terminal funnel statuses. Raw count i
 the number of emitted rows. Reference/deployment counts are sums of their risk flags.
 Prefix invariance applies to rows and to funnel states whose decision horizon ends
 inside the prefix.
+
+### R6-C1A.1 machine-lock reconciliation
+
+The accepted-row schema requires `impulse_bullish_bars` from 4 through 6. The rule
+lock defines every emitted ratio formula, including
+`breakdown_distance_atr=(box_low-breakdown_close)/A_break` and
+`reclaim_touch_distance_atr=(reclaim_high-box_low)/A_reclaim`. Machine-readable
+half boundaries use explicit inclusive start and exclusive end timestamps, identical
+to the prose contract. Entry-tick expiry is measured only from `decision_time`, the
+next native H1 open; no scheduled or nominal bar-close time exists in the contract.

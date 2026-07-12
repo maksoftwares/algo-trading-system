@@ -32,7 +32,7 @@
     "entry_tick_time": {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$", "type": "string"},
     "episode_id": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
     "exclusion_reason": {"const": ""},
-    "impulse_bullish_bars": {"maximum": 6, "minimum": 0, "type": "integer"},
+    "impulse_bullish_bars": {"maximum": 6, "minimum": 4, "type": "integer"},
     "impulse_end_h4_time": {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}$", "type": "string"},
     "impulse_final_location": {"maximum": 1, "minimum": 0, "type": "number"},
     "impulse_high": {"type": "number"},
