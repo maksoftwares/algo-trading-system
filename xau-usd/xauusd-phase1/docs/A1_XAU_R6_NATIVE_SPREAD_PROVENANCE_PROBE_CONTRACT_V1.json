@@ -1,0 +1,63 @@
+{
+  "account": {
+    "company": "Capital Com Mena Securities Trading L.L.C",
+    "currency": "USD",
+    "leverage": 50,
+    "login": 1025742,
+    "server": "Capital.ComMena-Demo"
+  },
+  "affected_broker_days": [
+    "2025-06-18",
+    "2025-09-29",
+    "2025-11-17",
+    "2026-04-14"
+  ],
+  "authorization": {
+    "artifact": "A1_XAU_NP1F1_REVIEW_9A76C1C8_2026_07_12.md",
+    "artifact_sha256": "f288535f1944a25a3a92cc62f8f83a692841093aeea56821b27bbe53f1b9985f",
+    "reviewed_commit": "9a76c1c81714769bbfcdbdfa4b002def5303d02c",
+    "reviewed_tree": "76d438d6c37fa7fc4ec8c7501a0a3c8099081d9a"
+  },
+  "classification_statuses": [
+    "NP1_G1_DIAGNOSTIC_COMPLETE",
+    "NP1_G1_EVIDENCE_INVALID"
+  ],
+  "clean_root": {
+    "marker_bytes": "NP1 SPREAD PROBE ONLY\n",
+    "marker_name": ".a1_xau_np1_spread_probe_only",
+    "path": "C:\\MT5A1NP1SpreadProvenanceClean",
+    "prior_root_read_only": "C:\\MT5A1M5MomentumBacktest"
+  },
+  "environment": {
+    "deposit": 10000,
+    "end_exclusive": "2026-07-01",
+    "metaeditor_version": "5.0.0.5833",
+    "model": 4,
+    "period": "M5",
+    "start": "2015-06-01",
+    "symbol": "XAUUSD",
+    "terminal_build": 5833
+  },
+  "invocation_budget": {
+    "metaeditor_compilations": 1,
+    "strategy_tester_runs": [
+      "warmup",
+      "probe1",
+      "probe2"
+    ],
+    "strategy_tester_runs_maximum": 3
+  },
+  "prohibitions": {
+    "broker_action": true,
+    "canonical_np1c": true,
+    "copy_prior_history_or_cache": true,
+    "normalize_native_spread": true,
+    "profitability_or_census": true
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_contract_v1",
+  "timeframes": [
+    "H1",
+    "H4",
+    "D1"
+  ]
+}

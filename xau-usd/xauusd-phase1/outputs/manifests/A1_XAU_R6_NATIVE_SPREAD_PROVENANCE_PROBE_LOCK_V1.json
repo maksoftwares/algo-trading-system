@@ -1,0 +1,25 @@
+{
+  "authorization_artifact": "A1_XAU_NP1F1_REVIEW_9A76C1C8_2026_07_12.md",
+  "authorization_sha256": "f288535f1944a25a3a92cc62f8f83a692841093aeea56821b27bbe53f1b9985f",
+  "clean_root": "C:\\MT5A1NP1SpreadProvenanceClean",
+  "implementation_sha256": {
+    "docs/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_CONTRACT_V1.json": "a7edef3344edf8d61259519450a64cff8cd7ae4a8e42c657b937e167a845cb44",
+    "mt5/Experts/A1XauR6NativeSpreadProvenanceProbe.mq5": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+    "scripts/analyze_a1_xau_r6_native_spread_provenance_probe.py": "059e50958797785f184e68edf863fba548ba51c3d450de37b074163119b17cfc",
+    "scripts/build_a1_xau_r6_native_spread_provenance_probe.py": "1c3b916a2c880e1ae59630826ae899c3f53ac916891e17ffa9dd726fe8fb8be5",
+    "scripts/run_a1_xau_r6_native_spread_provenance_probe.py": "99893d6e27840cf630ff33eea7c7b6841dee2bed401a6bec04511572b04b05b3",
+    "tests/test_a1_xau_r6_native_spread_provenance_probe.py": "7f9356a8ae53ed13f9a05fe48f7c388ed7ec5f96388cbde371a0509fccdccc9a"
+  },
+  "invocation_budget": {
+    "metaeditor_compilations": 1,
+    "strategy_tester_order": [
+      "warmup",
+      "probe1",
+      "probe2"
+    ],
+    "strategy_tester_runs_maximum": 3
+  },
+  "reviewed_diagnostic_commit": "9a76c1c81714769bbfcdbdfa4b002def5303d02c",
+  "reviewed_diagnostic_tree": "76d438d6c37fa7fc4ec8c7501a0a3c8099081d9a",
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_lock_v1"
+}
