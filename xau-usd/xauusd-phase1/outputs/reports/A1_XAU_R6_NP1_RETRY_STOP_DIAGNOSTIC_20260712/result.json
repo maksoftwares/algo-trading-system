@@ -1,0 +1,98 @@
+{
+  "authorization_sha256": "88ea4593ee3fe30018971c0816a811cf9a60d9044a62e9c9d2dc8f274d4050e5",
+  "contract_sha256": "8834161b97f14dc3c1a5d88e4dd0d4cf2632140d6bfcf10676467d4f25e36c2e",
+  "flags": [
+    "OFFICIAL_HISTORY_STABLE_AFTER_WARMUP",
+    "PRIOR_GAP_CLOSED_BY_CONTIGUOUS_NATIVE_BARS",
+    "CURRENT_GAP_SET_IS_SUBSET_OF_REVIEWED_SUPERSET",
+    "NEGATIVE_MQLRATES_SPREAD_CONFIRMED",
+    "NEGATIVE_SPREAD_IDENTICAL_ACROSS_OFFICIAL_RUNS",
+    "SPREAD_EXPORT_PATH_HAS_NO_TRANSFORMATION",
+    "SPREAD_UPSTREAM_ORIGIN_UNRESOLVED",
+    "CANONICAL_NP1C_RESULT_NOT_AUTHORIZED",
+    "MT5_RERUN_NOT_AUTHORIZED"
+  ],
+  "gap_counts": {
+    "D1": {
+      "closed": 0,
+      "current": 582,
+      "new": 0,
+      "prior": 582
+    },
+    "H1": {
+      "closed": 2,
+      "current": 2864,
+      "new": 0,
+      "prior": 2866
+    },
+    "H4": {
+      "closed": 1,
+      "current": 588,
+      "new": 0,
+      "prior": 589
+    }
+  },
+  "negative_spread_counts": {
+    "D1": 4,
+    "H1": 31,
+    "H4": 12
+  },
+  "official_history_fingerprints": {
+    "D1": {
+      "row_count": 3439,
+      "sha256": "88cc8a3ae2b2f04d809a70942c480632c8648b9b9eeeaa126ba9e5fd1b7f6288"
+    },
+    "H1": {
+      "row_count": 65332,
+      "sha256": "9f79b8e4c844c4d1c64833f90d6d69b8a2ee30a296fafca031c5c01c68d73bff"
+    },
+    "H4": {
+      "row_count": 17673,
+      "sha256": "0f977b7dcb6ed49af135270954d0395c153ba7db9230feece11a17e7b5607f2c"
+    }
+  },
+  "reports": {
+    "run1": {
+      "bars": 779961,
+      "period": "M5 (2015.06.01 - 2026.07.01)",
+      "ticks": 391745965,
+      "total_deals": 0,
+      "total_trades": 0
+    },
+    "run2": {
+      "bars": 779961,
+      "period": "M5 (2015.06.01 - 2026.07.01)",
+      "ticks": 391745965,
+      "total_deals": 0,
+      "total_trades": 0
+    }
+  },
+  "retry_manifest_sha256": "b58a8324e74159240fd8d9e8e71b0ae26a1b5e084e4f8484b74fe793e832c6ee",
+  "reviewed_generator_commit": "40e2b0963f1c52e3f5468291ba4e11ad23ec0567",
+  "reviewed_generator_tree": "7a6568ce038378e192545b0b61f28501eace5d4b",
+  "source_lineage": {
+    "copied_mq5_sha256": "dd4e349a047f4e69dca61b81367134c68973a29fd551709739280e7941b64698",
+    "lineage": {
+      "copyrates_call": {
+        "line": 381,
+        "token": "const int copied=CopyRates(InpTargetSymbol,timeframe,from,until,rates);"
+      },
+      "filewrite_expression": {
+        "line": 389,
+        "token": "(int)rates[i].spread"
+      },
+      "rates_declaration": {
+        "line": 377,
+        "token": "MqlRates rates[];"
+      }
+    },
+    "reviewed_builder_source_sha256": "1e648d24a069ad5a74ac217439cae3e902cdf3fffe48583ccde5bd27ed81208d",
+    "reviewed_mq5_sha256": "dd4e349a047f4e69dca61b81367134c68973a29fd551709739280e7941b64698",
+    "source_blob": "d59338facaa01032a47c71186e64e1ba9f1dba8f",
+    "source_commit": "d51340574d90a39fe0032e54e4a8252370c19058",
+    "source_equivalence_sha256": "9e7b893d4af9d44540117cff2ac0e782b1d535d242f40f2ff61a8156ff5382c1",
+    "spread_type": "MqlRates.spread:int",
+    "transformation": "int_identity_cast_only"
+  },
+  "status": "NP1_F1_DIAGNOSTIC_COMPLETE"
+}

@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "D1": {
+      "closed": 0,
+      "current": 582,
+      "new": 0,
+      "prior": 582
+    },
+    "H1": {
+      "closed": 2,
+      "current": 2864,
+      "new": 0,
+      "prior": 2866
+    },
+    "H4": {
+      "closed": 1,
+      "current": 588,
+      "new": 0,
+      "prior": 589
+    }
+  },
+  "policy": "CURRENT_GAP_SET_SUBSET_WITH_CONSTRUCTIVE_CLOSURE"
+}
