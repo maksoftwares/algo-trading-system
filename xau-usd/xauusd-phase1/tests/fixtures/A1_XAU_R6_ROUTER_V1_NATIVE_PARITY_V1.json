@@ -16,6 +16,17 @@
       "SHOCK": {"timestamp_broker": "2016.11.09 04:00:00", "native_action": "GUARD_BLOCK", "native_reason": "regime_router_block_long_r1_uptrend_only_state_shock"}
     }
   },
+  "native_indicator_state_rows": {
+    "source_path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_signals.csv",
+    "source_sha256": "8c7af52e7e03e27aea9353b53651fe578ef23bf856e6482664c2746be0f8e45e",
+    "rows": [
+      {"timestamp_broker": "2016.07.27 16:00:00", "expected_state": "CHOP", "native_h4_signal_atr": 0.55},
+      {"timestamp_broker": "2016.08.02 08:00:00", "expected_state": "UPTREND", "native_h4_signal_atr": 1.36},
+      {"timestamp_broker": "2016.08.16 04:00:00", "expected_state": "COMPRESSION", "native_h4_signal_atr": 0.55},
+      {"timestamp_broker": "2016.11.09 04:00:00", "expected_state": "SHOCK", "native_h4_signal_atr": 4.24},
+      {"timestamp_broker": "2018.06.19 04:00:00", "expected_state": "DOWNTREND", "native_h4_signal_atr": 0.32}
+    ]
+  },
   "deterministic_fixture_generator": {
     "decision_time": "2024-01-01T00:00:00",
     "base_price": 500.0,

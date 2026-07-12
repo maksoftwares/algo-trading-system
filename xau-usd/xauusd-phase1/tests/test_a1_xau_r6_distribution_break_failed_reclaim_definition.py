@@ -4,6 +4,7 @@ import sys
 import json
 import hashlib
 import dataclasses
+import csv
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -73,6 +74,27 @@ ROUTER_FIXTURE = json.loads(
     (SCRIPTS.parent / "tests" / "fixtures" / "A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json").read_text()
 )
 ROUTER_CASES = {case["id"]: case for case in ROUTER_FIXTURE["cases"]}
+
+
+def test_native_router_state_rows_are_parsed_from_pinned_order_evidence() -> None:
+    evidence = ROUTER_FIXTURE["native_state_evidence"]
+    path = SCRIPTS.parent / evidence["source_path"]
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == evidence["source_sha256"]
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    for state, expected in evidence["states"].items():
+        row = next(value for value in rows if value["timestamp_broker"] == expected["timestamp_broker"])
+        assert row["action"] == expected["native_action"]
+        assert row["reason"] == expected["native_reason"]
+        assert state == "UPTREND" or row["reason"].endswith("state_" + state.lower())
+    indicator_evidence = ROUTER_FIXTURE["native_indicator_state_rows"]
+    indicator_path = SCRIPTS.parent / indicator_evidence["source_path"]
+    assert hashlib.sha256(indicator_path.read_bytes()).hexdigest() == indicator_evidence["source_sha256"]
+    with indicator_path.open(encoding="utf-8", newline="") as handle:
+        signals = list(csv.DictReader(handle, delimiter="\t"))
+    for expected in indicator_evidence["rows"]:
+        row = next(value for value in signals if value["timestamp_broker"] == expected["timestamp_broker"])
+        assert float(row["atr"]) == expected["native_h4_signal_atr"]
 
 
 def mt5_router_fixture(decision: datetime, count: int, spacing: timedelta, state: str, timeframe: str) -> list[R.Bar]:
@@ -203,9 +225,23 @@ def test_exact_shift_detector_emits_one_raw_row(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setattr(V, "classify_router", lambda **_: "CHOP")
     V.validate_row(dict(row), schema, context)
     V.validate_detection(result, schema)
+    raw_anchor = next(anchor for anchor in result.anchors if anchor.status == "RAW_OPPORTUNITY_AVAILABLE")
+    assert raw_anchor.candidate_id == row["candidate_id"]
     serialized = R.serialize_detection(result)
     assert serialized == R.serialize_detection(result)
     assert "contexts" not in json.loads(serialized)
+    provenance = {
+        "generator_commit": "a" * 40, "generator_tree": "b" * 40,
+        "input_manifest_sha256": "c" * 64, "rule_manifest_sha256": "d" * 64,
+    }
+    package = R.serialize_evidence_package(result, provenance)
+    assert set(package) == {
+        "A1_XAU_R6_OUTCOME_BLIND_DETECTION.json", "A1_XAU_R6_OUTCOME_BLIND_ROWS.csv",
+        "A1_XAU_R6_OUTCOME_BLIND_SUMMARY.md", "A1_XAU_R6_EVIDENCE_MANIFEST.json",
+    }
+    manifest = json.loads(package["A1_XAU_R6_EVIDENCE_MANIFEST.json"])
+    for name, metadata in manifest["artifacts"].items():
+        assert hashlib.sha256(package[name].encode()).hexdigest() == metadata["sha256"]
     V.validate_funnel(result.funnel, result.rows, result.anchors, result.incidence)
     bad = dict(row)
     bad["breakdown_distance_atr"] = float(bad["breakdown_distance_atr"]) + 0.01
@@ -282,8 +318,8 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
     monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
     decision = h1[61].time
     ambiguous = [R.Tick(decision, 1000, 102.10, 102.11)]
-    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ambiguous, contract=contract())
-    assert result.funnel["DATA_UNAVAILABLE"] == 1
+    with pytest.raises(ValueError, match="explicit"):
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=ambiguous, contract=contract())
     owned = [
         R.Tick(decision, 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
         R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
@@ -291,7 +327,7 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
     prefix = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned, contract=contract())
     assert len(prefix.rows) == 1
     for late_tick in (
-        R.Tick(decision, 1002, 102.10, 102.11),
+        R.Tick(decision, 1002, 102.10, 102.11, source_h1_bar_time=decision),
         R.Tick(decision, 1002, 102.10, 102.11, source_h1_bar_time=h1[60].time),
     ):
         extended = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned + [late_tick], contract=contract())
@@ -314,24 +350,37 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
         R.detect(h4=h4, h1=h1, d1=d1, ticks=invalid_before_entry, contract=contract())
 
 
-def test_tick_index_scans_local_window_and_context_is_bounded() -> None:
-    decision = datetime(2024, 1, 2)
-    historical = [
-        R.Tick(decision - timedelta(seconds=10_000 - index), index, 100, 100.01)
-        for index in range(10_000)
-    ]
-    local = [
-        R.Tick(decision, 10_000, 100, 100.01, source_h1_bar_time=decision),
-        R.Tick(decision + timedelta(minutes=16), 10_001, 100, 100.01, source_h1_bar_time=decision),
-    ]
-    indexed = R.TickIndex.build(historical + local)
-    window = indexed.decision_window(decision)
-    assert window == tuple(local)
-    entry, status, _, consumed, complete = R.select_entry_tick(
-        window, reclaim_time=decision - timedelta(hours=1), decision_time=decision,
+def test_streaming_resolution_is_single_pass_and_context_is_bounded(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, _ = fixture_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    structural = R.detect_structural_windows(h4=h4, h1=h1, d1=d1, contract=contract())
+    decision = structural.windows[0].decision_time
+
+    class SinglePass:
+        used = False
+
+        def __iter__(self):
+            if self.used:
+                raise AssertionError("tick stream iterated twice")
+            self.used = True
+            for index in range(10_000):
+                tick_time = decision - timedelta(seconds=10_000 - index)
+                yield R.Tick(tick_time, index, 100, 100.01, source_h1_bar_time=tick_time)
+            yield R.Tick(decision, 10_000, 102.10, 102.11, source_h1_bar_time=decision)
+
+    result = R.resolve_tick_stream(
+        structural, SinglePass(), stream_contract=R.TickStreamContract(10_001, 0, 10_000),
     )
-    assert status == "RAW_OPPORTUNITY_AVAILABLE" and entry == local[0] and complete
-    assert consumed == (local[0],)
+    assert len(result.rows) == 1
+    context = result.contexts[str(result.rows[0]["candidate_id"])]
+    assert len(context.causal_ticks) == 1
+    gap_ticks = [
+        R.Tick(decision - timedelta(seconds=2), 10, 100, 100.01, source_h1_bar_time=decision - timedelta(hours=1)),
+        R.Tick(decision - timedelta(seconds=1), 12, 100, 100.01, source_h1_bar_time=decision - timedelta(hours=1)),
+    ]
+    with pytest.raises(ValueError, match="sequence gap"):
+        R.resolve_tick_stream(structural, iter(gap_ticks))
 
 
 def test_c3_market_payload_parser_is_deterministic_and_in_memory() -> None:
@@ -339,14 +388,19 @@ def test_c3_market_payload_parser_is_deterministic_and_in_memory() -> None:
     bar_row = {"time": now.isoformat(), "open": 100, "high": 101, "low": 99, "close": 100.5}
     payload = json.dumps({
         "h4": [bar_row], "h1": [bar_row], "d1": [bar_row],
-        "ticks": [{"time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01, "source_h1_bar_time": now.isoformat()}],
         "contract": dataclasses.asdict(contract()), "symbol": "XAUUSD",
     }, sort_keys=True)
     first = R.parse_c3_market_payload(payload)
     second = R.parse_c3_market_payload(payload)
     assert first == second
     assert first["h4"] == (R.Bar(now, 100, 101, 99, 100.5),)
-    assert first["ticks"][0].sequence == 1
+    tick_line = json.dumps({
+        "time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01,
+        "session_open": True, "source_h1_bar_time": now.isoformat(),
+    })
+    assert list(R.iter_c3_ticks([tick_line]))[0].sequence == 1
+    with pytest.raises(ValueError, match="explicit"):
+        R.parse_c3_tick_line(json.dumps({"time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01}))
     bad = json.loads(payload)
     bad["pnl"] = 1
     with pytest.raises(ValueError, match="keys"):
@@ -365,7 +419,10 @@ def test_native_weekend_gap_and_fifteen_minute_entry_expiry(monkeypatch: pytest.
     result = R.detect(h4=h4, h1=h1, d1=d1, ticks=at_expiry, contract=contract())
     assert result.rows[0]["decision_time"] == R.broker_time(decision)
     too_late = [R.Tick(decision + timedelta(minutes=15, seconds=1), 1000, 102.10, 102.11, source_h1_bar_time=decision)]
-    assert R.detect(h4=h4, h1=h1, d1=d1, ticks=too_late, contract=contract()).funnel["ENTRY_TICK_UNAVAILABLE"] == 1
+    no_entry = R.detect(h4=h4, h1=h1, d1=d1, ticks=too_late, contract=contract())
+    assert no_entry.funnel["ENTRY_TICK_UNAVAILABLE"] == 1
+    terminal = next(anchor for anchor in no_entry.anchors if anchor.status == "ENTRY_TICK_UNAVAILABLE")
+    assert (terminal.horizon_end, terminal.horizon_sequence) == (too_late[0].time, too_late[0].sequence)
 
 
 def test_suppression_releases_on_twelfth_completed_h4_and_reuses_release_bar(monkeypatch: pytest.MonkeyPatch) -> None:

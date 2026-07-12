@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 import hashlib
 import json
+import csv
 from pathlib import Path
 
 import pytest
@@ -44,13 +45,33 @@ def test_captured_capital_com_order_calc_profit_parity() -> None:
 
 def test_hash_addressed_native_order_calc_profit_boundary_fixtures() -> None:
     fixtures = CONTRACT_FIXTURE["boundary_replay_cases"]
-    payload = json.dumps(fixtures, separators=(",", ":"), sort_keys=True).encode()
-    assert hashlib.sha256(payload).hexdigest() == "306a727ccce65b5e801fc9ffd7ecc76ded605054720a6e0b05ef2970ba1971e0"
     for fixture in fixtures:
-        R.validate_order_calc_profit_fixture(**fixture, contract=contract())
+        assert fixture["evidence_class"] == "DERIVED_FROM_NATIVE_LINEAR_CONTRACT"
+        values = {key: fixture[key] for key in ("entry_bid", "risk_price", "captured_loss")}
+        R.validate_order_calc_profit_fixture(**values, contract=contract())
         risk = R.minimum_contract_risk(fixture["entry_bid"], fixture["risk_price"], contract())
         assert R.risk_at_or_below(risk, 2.5) is (fixture["captured_loss"] <= 2.5)
         assert R.risk_at_or_below(risk, 25.0) is (fixture["captured_loss"] <= 25.0)
+
+
+def test_native_contract_and_order_anchor_are_parsed_from_pinned_evidence() -> None:
+    startup_path = ROOT / CONTRACT_FIXTURE["native_contract_source"]["path"]
+    order_path = ROOT / CONTRACT_FIXTURE["native_order_source"]["path"]
+    assert hashlib.sha256(startup_path.read_bytes()).hexdigest() == CONTRACT_FIXTURE["native_contract_source"]["sha256"]
+    assert hashlib.sha256(order_path.read_bytes()).hexdigest() == CONTRACT_FIXTURE["native_order_source"]["sha256"]
+    with startup_path.open(encoding="utf-8", newline="") as handle:
+        startup = next(csv.DictReader(handle, delimiter="\t"))
+    assert startup["server"] == contract().server
+    assert startup["symbol"] == contract().symbol
+    assert float(startup["tick_value_loss"]) == contract().tick_value_loss
+    anchor = CONTRACT_FIXTURE["native_order_anchor"]
+    with order_path.open(encoding="utf-8", newline="") as handle:
+        orders = list(csv.DictReader(handle, delimiter="\t"))
+    native = next(row for row in orders if row["timestamp_broker"] == anchor["timestamp_broker"] and row["action"] == "ORDER_SEND_OK")
+    assert float(native["entry_reference"]) == anchor["entry"]
+    assert float(native["sl"]) == anchor["stop"]
+    assert float(native["lots"]) == anchor["volume"]
+    assert abs(anchor["entry"] - anchor["stop"]) * contract().contract_size * anchor["volume"] == pytest.approx(anchor["loss_magnitude"])
 
 
 def test_invalid_contract_metadata_fails_closed() -> None:

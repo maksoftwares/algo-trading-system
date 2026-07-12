@@ -7,9 +7,11 @@ The real evidence build belongs to the separately reviewed R6-C3 phase.
 from __future__ import annotations
 
 import hashlib
+import csv
+import io
 import json
 import math
-from bisect import bisect_left, bisect_right
+from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -95,34 +97,13 @@ class TerminalAnchor:
     horizon_end: datetime | None
     status: str
     horizon_sequence: int | None = None
+    candidate_id: str | None = None
 
 
 @dataclass(frozen=True)
 class PrefixCutoff:
     time: datetime
     sequence: int
-
-
-@dataclass(frozen=True)
-class TickIndex:
-    ticks: tuple[Tick, ...]
-    times: tuple[datetime, ...]
-
-    @classmethod
-    def build(cls, ticks: Sequence[Tick]) -> "TickIndex":
-        previous: Tick | None = None
-        rows = tuple(ticks)
-        for tick in rows:
-            _validate_tick_row(tick, previous)
-            previous = tick
-        return cls(rows, tuple(tick.time for tick in rows))
-
-    def decision_window(self, decision_time: datetime) -> tuple[Tick, ...]:
-        """Return only [decision, expiry] plus one proof-of-horizon tick."""
-        start = bisect_left(self.times, decision_time)
-        end = bisect_right(self.times, decision_time + timedelta(minutes=15))
-        proof_end = min(len(self.ticks), end + 1)
-        return self.ticks[start:proof_end]
 
 
 @dataclass(frozen=True)
@@ -142,6 +123,40 @@ class RowContext:
     router_h1: tuple[Bar, ...] = ()
     router_h4: tuple[Bar, ...] = ()
     router_d1: tuple[Bar, ...] = ()
+
+
+@dataclass(frozen=True)
+class StructuralWindow:
+    anchor_time: datetime
+    boundary: datetime
+    impulse: tuple[Bar, ...]
+    distribution: tuple[Bar, ...]
+    breakdown: Bar
+    reclaim: Bar
+    decision_time: datetime
+    router_state: str
+    a_impulse: float
+    a_box: float
+    a_reclaim: float
+    router_h1: tuple[Bar, ...]
+    router_h4: tuple[Bar, ...]
+    router_d1: tuple[Bar, ...]
+
+
+@dataclass(frozen=True)
+class StructuralDetection:
+    windows: tuple[StructuralWindow, ...]
+    funnel: dict[str, int]
+    anchors: tuple[TerminalAnchor, ...]
+    contract: Contract
+    symbol: str
+
+
+@dataclass(frozen=True)
+class TickStreamContract:
+    count: int
+    first_sequence: int
+    last_sequence: int
 
 
 def broker_time(value: datetime) -> str:
@@ -504,9 +519,9 @@ def _causal_bars(bars: Sequence[Bar], decision_time: datetime) -> tuple[Bar, ...
 
 
 def parse_c3_market_payload(payload: str) -> dict[str, object]:
-    """Parse a reviewed in-memory C3 payload without opening or writing files."""
+    """Parse bars and contract only; the tick stream is never materialized."""
     raw = json.loads(payload)
-    if set(raw) != {"h4", "h1", "d1", "ticks", "contract", "symbol"}:
+    if set(raw) != {"h4", "h1", "d1", "contract", "symbol"}:
         raise ValueError("C3 market payload keys mismatch")
     contract_fields = set(Contract.__dataclass_fields__)
     if set(raw["contract"]) != contract_fields:
@@ -520,20 +535,39 @@ def parse_c3_market_payload(payload: str) -> dict[str, object]:
             for row in raw[name]
         )
 
-    allowed_tick_fields = {"time", "sequence", "bid", "ask", "session_open", "source_h1_bar_time"}
-    required_tick_fields = {"time", "sequence", "bid", "ask"}
-    if any(not required_tick_fields <= set(row) or not set(row) <= allowed_tick_fields for row in raw["ticks"]):
-        raise ValueError("C3 tick row keys mismatch")
-    ticks = tuple(
-        Tick(
-            datetime.fromisoformat(row["time"]), row["sequence"], row["bid"], row["ask"],
-            row.get("session_open", True),
-            datetime.fromisoformat(row["source_h1_bar_time"]) if row.get("source_h1_bar_time") else None,
-        )
-        for row in raw["ticks"]
-    )
     contract = Contract(**raw["contract"])
-    return {"h4": bars("h4"), "h1": bars("h1"), "d1": bars("d1"), "ticks": ticks, "contract": contract, "symbol": raw.get("symbol", "XAUUSD")}
+    return {"h4": bars("h4"), "h1": bars("h1"), "d1": bars("d1"), "contract": contract, "symbol": raw["symbol"]}
+
+
+def parse_c3_tick_line(line: str) -> Tick:
+    row = json.loads(line)
+    required = {"time", "sequence", "bid", "ask", "session_open", "source_h1_bar_time"}
+    if set(row) != required or not isinstance(row["session_open"], bool) or not row["source_h1_bar_time"]:
+        raise ValueError("C3 tick row must contain explicit session and H1 ownership")
+    return Tick(
+        datetime.fromisoformat(row["time"]), row["sequence"], row["bid"], row["ask"],
+        row["session_open"], datetime.fromisoformat(row["source_h1_bar_time"]),
+    )
+
+
+def iter_c3_ticks(lines: Iterable[str]) -> Iterable[Tick]:
+    for line in lines:
+        if not line.strip():
+            raise ValueError("blank C3 tick line")
+        yield parse_c3_tick_line(line)
+
+
+def iter_attested_c3_ticks(
+    lines: Iterable[bytes], *, expected_sha256: str, expected_size_bytes: int,
+) -> Iterable[Tick]:
+    digest = hashlib.sha256()
+    size = 0
+    for raw_line in lines:
+        digest.update(raw_line)
+        size += len(raw_line)
+        yield parse_c3_tick_line(raw_line.decode("utf-8").rstrip("\r\n"))
+    if digest.hexdigest() != expected_sha256 or size != expected_size_bytes:
+        raise ValueError("streamed C3 tick attestation mismatch")
 
 
 def serialize_detection(detection: Detection) -> str:
@@ -547,6 +581,7 @@ def serialize_detection(detection: Detection) -> str:
                 "anchor_time": broker_time(anchor.anchor_time),
                 "horizon_end": broker_time(anchor.horizon_end) if anchor.horizon_end else None,
                 "horizon_sequence": anchor.horizon_sequence,
+                "candidate_id": anchor.candidate_id,
                 "status": anchor.status,
             }
             for anchor in detection.anchors
@@ -557,11 +592,72 @@ def serialize_detection(detection: Detection) -> str:
     return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
 
-def detect(
-    *, h4: Sequence[Bar], h1: Sequence[Bar], d1: Sequence[Bar], ticks: Sequence[Tick],
-    contract: Contract, symbol: str = "XAUUSD",
-) -> Detection:
-    """Detect raw available opportunities and a deterministic terminal funnel."""
+def serialize_detection_csv(detection: Detection, fieldnames: Sequence[str] | None = None) -> str:
+    fields = list(fieldnames or (list(detection.rows[0]) if detection.rows else ()))
+    if not fields:
+        raise ValueError("CSV row field contract unavailable")
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=fields, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(detection.rows)
+    return output.getvalue()
+
+
+def serialize_detection_markdown(detection: Detection) -> str:
+    lines = [
+        "# A1 XAU R6 outcome-blind census evidence",
+        "",
+        f"- Final status: `{detection.final_status}`",
+        f"- Eligible H4 anchors: {len(detection.anchors)}",
+        f"- Raw opportunities: {len(detection.rows)}",
+        f"- Reference-risk feasible: {detection.incidence['reference_risk']['opportunities']}",
+        f"- Deployment-risk feasible: {detection.incidence['deployment_risk']['opportunities']}",
+        "- Outcome fields: prohibited",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def serialize_evidence_package(
+    detection: Detection, provenance: dict[str, str], *, row_fields: Sequence[str] | None = None,
+) -> dict[str, str]:
+    required = {"generator_commit", "generator_tree", "input_manifest_sha256", "rule_manifest_sha256"}
+    hex_lengths = {
+        "generator_commit": 40, "generator_tree": 40,
+        "input_manifest_sha256": 64, "rule_manifest_sha256": 64,
+    }
+    if set(provenance) != required or any(
+        len(provenance[key]) != length or any(char not in "0123456789abcdef" for char in provenance[key])
+        for key, length in hex_lengths.items()
+    ):
+        raise ValueError("evidence provenance contract mismatch")
+    package = {
+        "A1_XAU_R6_OUTCOME_BLIND_DETECTION.json": serialize_detection(detection),
+        "A1_XAU_R6_OUTCOME_BLIND_ROWS.csv": serialize_detection_csv(detection, row_fields),
+        "A1_XAU_R6_OUTCOME_BLIND_SUMMARY.md": serialize_detection_markdown(detection),
+    }
+    manifest = {
+        "schema_version": "a1_xau_r6_evidence_package_manifest_v1",
+        "provenance": provenance,
+        "artifacts": {
+            name: {
+                "sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+                "size_bytes": len(content.encode("utf-8")),
+            }
+            for name, content in package.items()
+        },
+    }
+    package["A1_XAU_R6_EVIDENCE_MANIFEST.json"] = json.dumps(
+        manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    )
+    return package
+
+
+def detect_structural_windows(
+    *, h4: Sequence[Bar], h1: Sequence[Bar], d1: Sequence[Bar], contract: Contract,
+    symbol: str = "XAUUSD",
+) -> StructuralDetection:
+    """Stage one: detect bars-only decision windows without reading any tick."""
     validate_bars(h4)
     validate_bars(h1)
     validate_bars(d1)
@@ -569,11 +665,9 @@ def detect(
     if symbol != contract.symbol:
         raise ValueError("detector symbol does not match contract snapshot")
     h4_atr, h1_atr = wilder_atr(h4), wilder_atr(h1)
-    tick_index = TickIndex.build(ticks)
     funnel = {status: 0 for status in TERMINAL_STATUSES}
-    rows: list[dict[str, object]] = []
-    contexts: dict[str, RowContext] = {}
     anchors: list[TerminalAnchor] = []
+    windows: list[StructuralWindow] = []
 
     def finish(
         anchor_time: datetime, status: str, horizon_end: datetime | None, horizon_sequence: int | None = None,
@@ -664,44 +758,56 @@ def detect(
         if decision >= TO_EXCLUSIVE:
             finish(bar.time, "DATA_UNAVAILABLE", decision)
             continue
-        local_ticks = tick_index.decision_window(decision)
-        entry, tick_status, last_reclaim_sequence, causal_ticks, tick_horizon_complete = select_entry_tick(
-            local_ticks, reclaim_time=reclaim.time, decision_time=decision,
-        )
-        if entry is None:
-            terminal_sequence = causal_ticks[-1].sequence if tick_horizon_complete and causal_ticks else None
-            finish(
-                bar.time, tick_status,
-                decision + timedelta(minutes=15) if tick_status == "ENTRY_TICK_UNAVAILABLE"
-                else decision if tick_horizon_complete else None,
-                terminal_sequence,
-            )
-            continue
-        if not (FROM_INCLUSIVE <= entry.time < TO_EXCLUSIVE):
-            finish(bar.time, "DATA_UNAVAILABLE", entry.time)
-            continue
-        raw_stop = max(reclaim.high, box_low) + 0.25 * a_reclaim
-        structural_stop = normalize_up(raw_stop, contract)
-        risk_price = normalize_up(structural_stop + contract.tick_size, contract)
-        if structural_stop <= entry.ask or risk_price - entry.ask < max(contract.stops_level, contract.freeze_level) * contract.point:
-            finish(bar.time, "DATA_UNAVAILABLE", entry.time)
-            continue
-        risk = minimum_contract_risk(entry.bid, risk_price, contract)
-        box_id, episode_id, candidate_id = canonical_ids(
-            symbol=symbol, distribution=distribution, box_low=normalize_up(box_low, contract),
-            box_high=normalize_up(box_high, contract), breakdown_time=bar.time,
-            reclaim_time=reclaim.time, entry_tick=entry, contract=contract,
-        )
-        row = {
+        windows.append(StructuralWindow(
+            bar.time, boundary, tuple(impulse), tuple(distribution), bar, reclaim, decision, router,
+            a_impulse, a_box, a_reclaim, _causal_bars(h1, boundary), _causal_bars(h4, boundary),
+            _causal_bars(d1, boundary),
+        ))
+    return StructuralDetection(tuple(windows), funnel, tuple(anchors), contract, symbol)
+
+
+def _raw_row_and_context(
+    window: StructuralWindow, entry: Tick, causal_ticks: tuple[Tick, ...], last_reclaim_sequence: int,
+    contract: Contract, symbol: str,
+) -> tuple[dict[str, object], RowContext] | None:
+    impulse, distribution = window.impulse, window.distribution
+    bar, reclaim = window.breakdown, window.reclaim
+    a_impulse, a_box, a_reclaim = window.a_impulse, window.a_box, window.a_reclaim
+    impulse_low, impulse_high = min(x.low for x in impulse), max(x.high for x in impulse)
+    impulse_range = impulse_high - impulse_low
+    impulse_net = impulse[-1].close - impulse[0].open
+    bullish = sum(x.close > x.open for x in impulse)
+    location = (impulse[-1].close - impulse_low) / impulse_range
+    box_low, box_high = min(x.low for x in distribution), max(x.high for x in distribution)
+    width = box_high - box_low
+    inner = sum(box_low + 0.2 * width <= x.close <= box_high - 0.2 * width for x in distribution)
+    overlap = sum(_overlap_ratio(a, b) >= 0.25 for a, b in zip(distribution, distribution[1:]))
+    drift = abs(distribution[-1].close - distribution[0].open)
+    raw_stop = max(reclaim.high, box_low) + 0.25 * a_reclaim
+    structural_stop = normalize_up(raw_stop, contract)
+    risk_price = normalize_up(structural_stop + contract.tick_size, contract)
+    if (
+        not (FROM_INCLUSIVE <= entry.time < TO_EXCLUSIVE)
+        or structural_stop <= entry.ask
+        or risk_price - entry.ask < max(contract.stops_level, contract.freeze_level) * contract.point
+    ):
+        return None
+    risk = minimum_contract_risk(entry.bid, risk_price, contract)
+    box_id, episode_id, candidate_id = canonical_ids(
+        symbol=symbol, distribution=distribution, box_low=normalize_up(box_low, contract),
+        box_high=normalize_up(box_high, contract), breakdown_time=bar.time,
+        reclaim_time=reclaim.time, entry_tick=entry, contract=contract,
+    )
+    row = {
             "schema_version": "a1_xau_r6_outcome_blind_census_row_v1",
             "rule_version": RULE_VERSION,
             "rule_sha256": RULE_SHA256,
             "candidate_id": candidate_id, "box_id": box_id, "episode_id": episode_id,
-            "symbol": symbol, "router_state": router, "timestamp_basis": TIMESTAMP_BASIS,
+            "symbol": symbol, "router_state": window.router_state, "timestamp_basis": TIMESTAMP_BASIS,
             "impulse_start_h4_time": broker_time(impulse[0].time), "impulse_end_h4_time": broker_time(impulse[-1].time),
             "box_start_h4_time": broker_time(distribution[0].time), "box_end_h4_time": broker_time(distribution[-1].time),
             "breakdown_h4_time": broker_time(bar.time), "reclaim_h1_time": broker_time(reclaim.time),
-            "decision_time": broker_time(decision), "entry_tick_time": broker_time(entry.time), "entry_tick_sequence": entry.sequence,
+            "decision_time": broker_time(window.decision_time), "entry_tick_time": broker_time(entry.time), "entry_tick_sequence": entry.sequence,
             "A_impulse": a_impulse, "A_box": a_box, "A_reclaim": a_reclaim,
             "impulse_low": impulse_low, "impulse_high": impulse_high,
             "impulse_range_atr": impulse_range / a_impulse, "impulse_net_advance_atr": impulse_net / a_impulse,
@@ -722,13 +828,99 @@ def detect(
             "reference_risk_feasible": risk_at_or_below(risk, 25.0),
             "deployment_risk_feasible": risk_at_or_below(risk, 2.5),
             "availability_status": "RAW_OPPORTUNITY_AVAILABLE", "exclusion_reason": "",
-        }
-        rows.append(row)
-        contexts[candidate_id] = RowContext(
-            tuple(impulse), tuple(distribution), bar, reclaim, decision, entry, contract,
-            a_impulse, a_box, a_reclaim, last_reclaim_sequence, causal_ticks,
-            _causal_bars(h1, boundary), _causal_bars(h4, boundary), _causal_bars(d1, boundary),
-        )
-        finish(bar.time, "RAW_OPPORTUNITY_AVAILABLE", entry.time, entry.sequence)
+    }
+    context = RowContext(
+        impulse, distribution, bar, reclaim, window.decision_time, entry, contract,
+        a_impulse, a_box, a_reclaim, last_reclaim_sequence, causal_ticks,
+        window.router_h1, window.router_h4, window.router_d1,
+    )
+    return row, context
+
+
+def resolve_tick_stream(
+    structural: StructuralDetection, ticks: Iterable[Tick], *, stream_contract: TickStreamContract | None = None,
+) -> Detection:
+    """Stage two: resolve all structural windows in one forward-only tick pass."""
+    windows = sorted(structural.windows, key=lambda item: item.decision_time)
+    pending = deque(windows)
+    active: list[tuple[StructuralWindow, list[Tick], int]] = []
+    funnel = dict(structural.funnel)
+    anchors = list(structural.anchors)
+    rows: list[dict[str, object]] = []
+    contexts: dict[str, RowContext] = {}
+    previous: Tick | None = None
+    first_seen_sequence: int | None = None
+    seen = 0
+
+    def terminal(window: StructuralWindow, status: str, proof: Tick | None) -> None:
+        funnel[status] += 1
+        anchors.append(TerminalAnchor(
+            window.anchor_time, proof.time if proof else None, status, proof.sequence if proof else None,
+        ))
+
+    for tick in ticks:
+        _validate_tick_row(tick, previous)
+        if tick.source_h1_bar_time is None or not isinstance(tick.session_open, bool):
+            raise ValueError("tick session and H1 ownership must be explicit")
+        if previous is not None and tick.sequence != previous.sequence + 1:
+            raise ValueError("absolute tick sequence gap")
+        previous = tick
+        if first_seen_sequence is None:
+            first_seen_sequence = tick.sequence
+        seen += 1
+        while pending and pending[0].decision_time <= tick.time:
+            window = pending.popleft()
+            active.append((window, [], -1))
+        next_active: list[tuple[StructuralWindow, list[Tick], int]] = []
+        for window, causal, last_reclaim in active:
+            expiry = window.decision_time + timedelta(minutes=15)
+            if tick.time > expiry:
+                terminal(window, "ENTRY_TICK_UNAVAILABLE", tick)
+                continue
+            causal.append(tick)
+            if tick.source_h1_bar_time == window.reclaim.time:
+                next_active.append((window, causal, tick.sequence))
+                continue
+            if tick.source_h1_bar_time != window.decision_time:
+                terminal(window, "DATA_UNAVAILABLE", tick)
+                continue
+            if not tick.session_open:
+                terminal(window, "ENTRY_TICK_UNAVAILABLE", tick)
+                continue
+            result = _raw_row_and_context(
+                window, tick, tuple(causal), last_reclaim, structural.contract, structural.symbol,
+            )
+            if result is None:
+                terminal(window, "DATA_UNAVAILABLE", tick)
+                continue
+            row, context = result
+            candidate_id = str(row["candidate_id"])
+            rows.append(row)
+            contexts[candidate_id] = context
+            funnel["RAW_OPPORTUNITY_AVAILABLE"] += 1
+            anchors.append(TerminalAnchor(window.anchor_time, tick.time, "RAW_OPPORTUNITY_AVAILABLE", tick.sequence, candidate_id))
+        active = next_active
+    for window, _, _ in active:
+        terminal(window, "DATA_UNAVAILABLE", None)
+    for window in pending:
+        terminal(window, "DATA_UNAVAILABLE", None)
+    if stream_contract is not None:
+        if (
+            seen != stream_contract.count
+            or previous is None
+            or first_seen_sequence != stream_contract.first_sequence
+            or previous.sequence != stream_contract.last_sequence
+            or stream_contract.last_sequence - stream_contract.first_sequence + 1 != stream_contract.count
+        ):
+            raise ValueError("tick stream contract mismatch")
+    anchors.sort(key=lambda item: item.anchor_time)
     incidence = incidence_report(rows)
     return Detection(tuple(rows), funnel, tuple(anchors), incidence, locked_final_status(incidence), contexts)
+
+
+def detect(
+    *, h4: Sequence[Bar], h1: Sequence[Bar], d1: Sequence[Bar], ticks: Iterable[Tick],
+    contract: Contract, symbol: str = "XAUUSD", stream_contract: TickStreamContract | None = None,
+) -> Detection:
+    structural = detect_structural_windows(h4=h4, h1=h1, d1=d1, contract=contract, symbol=symbol)
+    return resolve_tick_stream(structural, ticks, stream_contract=stream_contract)

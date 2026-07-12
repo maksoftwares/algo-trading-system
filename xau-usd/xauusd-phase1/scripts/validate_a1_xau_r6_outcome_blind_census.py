@@ -5,9 +5,10 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Mapping, Sequence
 
 from jsonschema import Draft202012Validator
 
@@ -21,15 +22,21 @@ from build_a1_xau_r6_distribution_break_failed_reclaim_census import (
     PrefixCutoff,
     RowContext,
     TerminalAnchor,
+    TickStreamContract,
     broker_time,
     canonical_ids,
     classify_router,
+    detect_structural_windows,
     incidence_report,
+    iter_attested_c3_ticks,
     locked_final_status,
     minimum_contract_risk,
     normalize_up,
+    parse_c3_market_payload,
+    resolve_tick_stream,
     risk_at_or_below,
     select_entry_tick,
+    serialize_evidence_package,
 )
 
 
@@ -236,6 +243,12 @@ def validate_funnel(
     for status in TERMINAL_STATUSES:
         if funnel[status] != sum(anchor.status == status for anchor in anchors):
             raise ValueError("terminal anchor status mismatch")
+    raw_anchor_ids = [anchor.candidate_id for anchor in anchors if anchor.status == "RAW_OPPORTUNITY_AVAILABLE"]
+    row_ids = [str(row["candidate_id"]) for row in rows]
+    if raw_anchor_ids != row_ids or any(
+        anchor.candidate_id is not None for anchor in anchors if anchor.status != "RAW_OPPORTUNITY_AVAILABLE"
+    ):
+        raise ValueError("raw row to terminal anchor reconciliation mismatch")
     if dict(incidence) != incidence_report(rows):
         raise ValueError("reference/deployment incidence mismatch")
 
@@ -326,13 +339,130 @@ def validate_native_fixture_manifest(root: Path, manifest: Path) -> dict[str, An
     return payload
 
 
-def validate_c3_input_manifest(manifest: Mapping[str, Any], payloads: Mapping[str, bytes]) -> None:
-    if set(manifest.get("inputs", {})) != set(payloads):
-        raise ValueError("C3 input manifest set mismatch")
-    for name, content in payloads.items():
-        expected = manifest["inputs"][name]
-        if hashlib.sha256(content).hexdigest() != expected["sha256"] or len(content) != expected["size_bytes"]:
-            raise ValueError("C3 input manifest hash mismatch")
+def validate_c3_input_manifest(manifest: Mapping[str, Any], bars_content: bytes) -> None:
+    required_top = {
+        "schema_version", "generator", "timestamp_basis", "warmup", "data", "tick_stream",
+        "contract_identity", "inputs",
+    }
+    if set(manifest) != required_top or manifest["schema_version"] != "a1_xau_r6_c3_input_manifest_v1":
+        raise ValueError("C3 input manifest schema mismatch")
+    if manifest["timestamp_basis"] != "BROKER_SERVER_WALL_CLOCK":
+        raise ValueError("C3 timestamp basis mismatch")
+    generator = manifest["generator"]
+    if set(generator) != {"commit", "tree"} or any(
+        len(generator[key]) != 40 or any(char not in "0123456789abcdef" for char in generator[key])
+        for key in generator
+    ):
+        raise ValueError("C3 generator identity mismatch")
+    warmup = manifest["warmup"]
+    if set(warmup) != {"h1_bars", "h4_bars", "d1_bars", "from_inclusive", "decision_from_inclusive"}:
+        raise ValueError("C3 warm-up contract mismatch")
+    if any(int(warmup[key]) <= 0 for key in ("h1_bars", "h4_bars", "d1_bars")):
+        raise ValueError("C3 warm-up counts invalid")
+    if warmup["h1_bars"] < 25 or warmup["h4_bars"] < 61 or warmup["d1_bars"] < 277:
+        raise ValueError("C3 Router warm-up is insufficient")
+    data = manifest["data"]
+    if set(data) != {
+        "from_inclusive", "to_exclusive", "h1_bar_count", "h4_bar_count", "d1_bar_count",
+        "h1_gap_count", "h4_gap_count", "d1_gap_count",
+    }:
+        raise ValueError("C3 data contract mismatch")
+    if data["from_inclusive"] != "2016-07-01T00:00:00" or data["to_exclusive"] != "2026-07-01T00:00:00":
+        raise ValueError("C3 locked interval mismatch")
+    if any(int(data[key]) <= 0 for key in ("h1_bar_count", "h4_bar_count", "d1_bar_count")):
+        raise ValueError("C3 bar counts invalid")
+    if any(int(data[key]) != 0 for key in ("h1_gap_count", "h4_gap_count", "d1_gap_count")):
+        raise ValueError("C3 source gap audit failed")
+    tick = manifest["tick_stream"]
+    if set(tick) != {
+        "format", "count", "first_sequence", "last_sequence", "gap_count", "session_open_required",
+        "source_h1_bar_time_required", "first_time", "last_time",
+    }:
+        raise ValueError("C3 tick stream contract mismatch")
+    if (
+        tick["format"] != "ndjson_utf8"
+        or tick["count"] <= 0
+        or tick["gap_count"] != 0
+        or not tick["session_open_required"]
+        or not tick["source_h1_bar_time_required"]
+        or tick["last_sequence"] - tick["first_sequence"] + 1 != tick["count"]
+        or datetime.fromisoformat(tick["first_time"]) > datetime.fromisoformat(data["from_inclusive"])
+        or datetime.fromisoformat(tick["last_time"]) < datetime.fromisoformat(data["to_exclusive"])
+    ):
+        raise ValueError("C3 tick completeness mismatch")
+    contract = manifest["contract_identity"]
+    if set(contract) != {"server", "symbol", "account_currency", "snapshot_sha256"} or any(
+        not contract[key] for key in ("server", "symbol", "account_currency")
+    ) or len(contract["snapshot_sha256"]) != 64 or any(
+        char not in "0123456789abcdef" for char in contract["snapshot_sha256"]
+    ):
+        raise ValueError("C3 contract identity mismatch")
+    expected_inputs = {"A1_XAU_R6_C3_BARS_CONTRACT.json", "A1_XAU_R6_C3_TICKS.ndjson"}
+    if set(manifest["inputs"]) != expected_inputs:
+        raise ValueError("C3 input filenames mismatch")
+    for metadata in manifest["inputs"].values():
+        if (
+            set(metadata) != {"sha256", "size_bytes"}
+            or metadata["size_bytes"] <= 0
+            or len(metadata["sha256"]) != 64
+            or any(char not in "0123456789abcdef" for char in metadata["sha256"])
+        ):
+            raise ValueError("C3 input artifact metadata mismatch")
+    bars_expected = manifest["inputs"]["A1_XAU_R6_C3_BARS_CONTRACT.json"]
+    if hashlib.sha256(bars_content).hexdigest() != bars_expected["sha256"] or len(bars_content) != bars_expected["size_bytes"]:
+        raise ValueError("C3 bars input manifest hash mismatch")
+
+
+def validate_c3_parsed_market(market: Mapping[str, object], manifest: Mapping[str, Any]) -> None:
+    data, warmup = manifest["data"], manifest["warmup"]
+    for timeframe in ("h1", "h4", "d1"):
+        bars = market[timeframe]
+        if len(bars) != data[f"{timeframe}_bar_count"]:
+            raise ValueError("C3 parsed bar count mismatch")
+        if sum(bar.time < FROM_INCLUSIVE for bar in bars) < warmup[f"{timeframe}_bars"]:
+            raise ValueError("C3 parsed warm-up mismatch")
+    contract = market["contract"]
+    identity = manifest["contract_identity"]
+    snapshot = json.dumps(asdict(contract), sort_keys=True, separators=(",", ":")).encode("utf-8")
+    if (
+        contract.server != identity["server"]
+        or contract.symbol != identity["symbol"]
+        or contract.account_currency != identity["account_currency"]
+        or hashlib.sha256(snapshot).hexdigest() != identity["snapshot_sha256"]
+    ):
+        raise ValueError("C3 parsed contract identity mismatch")
+
+
+def run_c3_in_memory(
+    *, manifest: Mapping[str, Any], bars_content: bytes, tick_lines: Iterable[bytes],
+    row_schema: dict[str, Any], rule_manifest_sha256: str,
+) -> tuple[Detection, dict[str, str]]:
+    """Reviewed streaming runner. The caller alone decides whether artifacts are persisted."""
+    validate_c3_input_manifest(manifest, bars_content)
+    market = parse_c3_market_payload(bars_content.decode("utf-8"))
+    validate_c3_parsed_market(market, manifest)
+    tick_metadata = manifest["inputs"]["A1_XAU_R6_C3_TICKS.ndjson"]
+    ticks = iter_attested_c3_ticks(
+        tick_lines, expected_sha256=tick_metadata["sha256"],
+        expected_size_bytes=tick_metadata["size_bytes"],
+    )
+    structural = detect_structural_windows(**market)
+    stream = manifest["tick_stream"]
+    detection = resolve_tick_stream(
+        structural, ticks,
+        stream_contract=TickStreamContract(stream["count"], stream["first_sequence"], stream["last_sequence"]),
+    )
+    validate_detection(detection, row_schema)
+    manifest_sha = hashlib.sha256(
+        json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    package = serialize_evidence_package(detection, {
+        "generator_commit": manifest["generator"]["commit"],
+        "generator_tree": manifest["generator"]["tree"],
+        "input_manifest_sha256": manifest_sha,
+        "rule_manifest_sha256": rule_manifest_sha256,
+    }, row_fields=row_schema["required"])
+    return detection, package
 
 
 def validate_lock_manifest(root: Path, manifest: Path) -> None:

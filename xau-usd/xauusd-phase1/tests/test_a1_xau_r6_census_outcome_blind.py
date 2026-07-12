@@ -4,7 +4,8 @@ import json
 import sys
 import ast
 import hashlib
-from datetime import datetime
+import dataclasses
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -113,7 +114,113 @@ def test_scripts_structurally_forbid_writes_subprocesses_and_neighbor_evidence_p
 
 def test_c3_input_manifest_validation_is_hash_and_size_exact() -> None:
     content = b'{"market_only":true}'
-    manifest = {"inputs": {"market.json": {"sha256": hashlib.sha256(content).hexdigest(), "size_bytes": len(content)}}}
-    V.validate_c3_input_manifest(manifest, {"market.json": content})
+    tick_content = b'{"sequence":100}\n'
+    payloads = {
+        "A1_XAU_R6_C3_BARS_CONTRACT.json": content,
+        "A1_XAU_R6_C3_TICKS.ndjson": tick_content,
+    }
+    manifest = {
+        "schema_version": "a1_xau_r6_c3_input_manifest_v1",
+        "generator": {"commit": "a" * 40, "tree": "b" * 40},
+        "timestamp_basis": "BROKER_SERVER_WALL_CLOCK",
+        "warmup": {
+            "h1_bars": 30, "h4_bars": 70, "d1_bars": 277,
+            "from_inclusive": "2015-06-01T00:00:00", "decision_from_inclusive": "2016-07-01T00:00:00",
+        },
+        "data": {
+            "from_inclusive": "2016-07-01T00:00:00", "to_exclusive": "2026-07-01T00:00:00",
+            "h1_bar_count": 60000, "h4_bar_count": 15000, "d1_bar_count": 2600,
+            "h1_gap_count": 0, "h4_gap_count": 0, "d1_gap_count": 0,
+        },
+        "tick_stream": {
+            "format": "ndjson_utf8", "count": 10, "first_sequence": 100, "last_sequence": 109,
+            "gap_count": 0, "session_open_required": True, "source_h1_bar_time_required": True,
+            "first_time": "2016-07-01T00:00:00", "last_time": "2026-07-01T00:00:00",
+        },
+        "contract_identity": {
+            "server": "Capital.ComMena-Demo", "symbol": "XAUUSD", "account_currency": "USD",
+            "snapshot_sha256": "c" * 64,
+        },
+        "inputs": {
+            name: {"sha256": hashlib.sha256(value).hexdigest(), "size_bytes": len(value)}
+            for name, value in payloads.items()
+        },
+    }
+    V.validate_c3_input_manifest(manifest, content)
     with pytest.raises(ValueError, match="hash"):
-        V.validate_c3_input_manifest(manifest, {"market.json": content + b" "})
+        V.validate_c3_input_manifest(manifest, content + b" ")
+    bad = json.loads(json.dumps(manifest))
+    bad["tick_stream"]["gap_count"] = 1
+    with pytest.raises(ValueError, match="completeness"):
+        V.validate_c3_input_manifest(bad, content)
+
+
+def test_reviewed_c3_runner_streams_ticks_and_builds_canonical_package() -> None:
+    contract = R.Contract(
+        account_currency="USD", account_leverage=50, margin_mode=2,
+        server="Capital.ComMena-Demo", symbol="XAUUSD", point=0.01, digits=2,
+        tick_size=0.01, tick_value=1.0, tick_value_loss=1.0,
+        volume_min=0.01, volume_step=0.01, volume_max=1000.0,
+        contract_size=100.0, stops_level=0, freeze_level=0,
+    )
+
+    def bars(count: int, spacing: timedelta) -> list[dict[str, object]]:
+        start = R.FROM_INCLUSIVE - spacing * count
+        rows = [
+            {"time": (start + spacing * index).isoformat(), "open": 100, "high": 101, "low": 99, "close": 100.5}
+            for index in range(count)
+        ]
+        rows.append({"time": R.TO_EXCLUSIVE.isoformat(), "open": 100, "high": 101, "low": 99, "close": 100.5})
+        return rows
+
+    market = {
+        "h1": bars(25, timedelta(hours=1)), "h4": bars(61, timedelta(hours=4)),
+        "d1": bars(277, timedelta(days=1)), "contract": dataclasses.asdict(contract), "symbol": "XAUUSD",
+    }
+    bars_content = json.dumps(market, sort_keys=True, separators=(",", ":")).encode()
+    tick_rows = [
+        {"time": R.FROM_INCLUSIVE.isoformat(), "sequence": 100, "bid": 100, "ask": 100.01, "session_open": True, "source_h1_bar_time": R.FROM_INCLUSIVE.isoformat()},
+        {"time": R.TO_EXCLUSIVE.isoformat(), "sequence": 101, "bid": 100, "ask": 100.01, "session_open": True, "source_h1_bar_time": R.TO_EXCLUSIVE.isoformat()},
+    ]
+    tick_lines = [(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n").encode() for row in tick_rows]
+    tick_content = b"".join(tick_lines)
+    contract_sha = hashlib.sha256(
+        json.dumps(dataclasses.asdict(contract), sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    manifest = {
+        "schema_version": "a1_xau_r6_c3_input_manifest_v1",
+        "generator": {"commit": "a" * 40, "tree": "b" * 40},
+        "timestamp_basis": "BROKER_SERVER_WALL_CLOCK",
+        "warmup": {
+            "h1_bars": 25, "h4_bars": 61, "d1_bars": 277,
+            "from_inclusive": market["d1"][0]["time"], "decision_from_inclusive": R.FROM_INCLUSIVE.isoformat(),
+        },
+        "data": {
+            "from_inclusive": R.FROM_INCLUSIVE.isoformat(), "to_exclusive": R.TO_EXCLUSIVE.isoformat(),
+            "h1_bar_count": len(market["h1"]), "h4_bar_count": len(market["h4"]), "d1_bar_count": len(market["d1"]),
+            "h1_gap_count": 0, "h4_gap_count": 0, "d1_gap_count": 0,
+        },
+        "tick_stream": {
+            "format": "ndjson_utf8", "count": 2, "first_sequence": 100, "last_sequence": 101,
+            "gap_count": 0, "session_open_required": True, "source_h1_bar_time_required": True,
+            "first_time": R.FROM_INCLUSIVE.isoformat(), "last_time": R.TO_EXCLUSIVE.isoformat(),
+        },
+        "contract_identity": {
+            "server": contract.server, "symbol": contract.symbol, "account_currency": contract.account_currency,
+            "snapshot_sha256": contract_sha,
+        },
+        "inputs": {
+            "A1_XAU_R6_C3_BARS_CONTRACT.json": {"sha256": hashlib.sha256(bars_content).hexdigest(), "size_bytes": len(bars_content)},
+            "A1_XAU_R6_C3_TICKS.ndjson": {"sha256": hashlib.sha256(tick_content).hexdigest(), "size_bytes": len(tick_content)},
+        },
+    }
+    detection, package = V.run_c3_in_memory(
+        manifest=manifest, bars_content=bars_content, tick_lines=iter(tick_lines), row_schema=schema(),
+        rule_manifest_sha256="c" * 64,
+    )
+    assert not detection.rows
+    assert set(package) == {
+        "A1_XAU_R6_OUTCOME_BLIND_DETECTION.json", "A1_XAU_R6_OUTCOME_BLIND_ROWS.csv",
+        "A1_XAU_R6_OUTCOME_BLIND_SUMMARY.md", "A1_XAU_R6_EVIDENCE_MANIFEST.json",
+    }
+    assert package["A1_XAU_R6_OUTCOME_BLIND_ROWS.csv"].startswith("schema_version,")
