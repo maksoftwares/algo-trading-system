@@ -1,0 +1,4 @@
+timeframe,first_difference,last_difference,difference_timestamp_count
+H1,2026-04-14T02:00:00,2026-04-14T07:00:00,4
+H4,2026-04-14T00:00:00,2026-04-14T04:00:00,2
+D1,2026-04-14T00:00:00,2026-04-14T00:00:00,1

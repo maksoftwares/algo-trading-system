@@ -1,0 +1,230 @@
+{
+  "artifacts": [
+    {
+      "relative_path": "README.md",
+      "sha256": "7acd7801a6af437aa62822e618d346f88e4422c0e6bc246e65943bee8ff8e1e5",
+      "size_bytes": 468
+    },
+    {
+      "relative_path": "analysis/bar_common_timestamp_value_diff.csv",
+      "sha256": "f1010fea14b577cbde92a677a63c42ccdba5f2ef6319f14ac24bff1b6733601c",
+      "size_bytes": 1512
+    },
+    {
+      "relative_path": "analysis/bar_file_hashes.csv",
+      "sha256": "5825569955b38e1bf009e58f99b6fe1cac982ab3e8edb642965a88459d17b1f6",
+      "size_bytes": 461
+    },
+    {
+      "relative_path": "analysis/bar_first_last_difference.csv",
+      "sha256": "8af928f35a71a70af7e9679fc73497c658e60674c7bbbdb606c1919a06c57fac",
+      "size_bytes": 205
+    },
+    {
+      "relative_path": "analysis/bar_row_count_summary.csv",
+      "sha256": "bc7464d64efe49178835252fbdb36be0f6950ee0f6aade424bace6144d07e4c5",
+      "size_bytes": 377
+    },
+    {
+      "relative_path": "analysis/bar_timestamp_set_diff.csv",
+      "sha256": "11806df5e1fee6a7b0fe6fc6909410189d168206f7e68235b52bb2d5e26faba6",
+      "size_bytes": 25
+    },
+    {
+      "relative_path": "analysis/market_gap_inventory.csv",
+      "sha256": "fb443e6895d3da4cbb06369d26fa9f76cd7f9df7dfdacb60517153116c058ec8",
+      "size_bytes": 294832
+    },
+    {
+      "relative_path": "analysis/native_report_comparison.json",
+      "sha256": "a3ed95a6230908c89d4fa28952266e68a1cc89123bd792593d66235253b36033",
+      "size_bytes": 502
+    },
+    {
+      "relative_path": "analysis/two_run_stability_classification.json",
+      "sha256": "3da484ffce6e8a3c0f5b783be405c2e60317338916256f4003e2908241b795aa",
+      "size_bytes": 3078
+    },
+    {
+      "relative_path": "raw_packet/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json",
+      "sha256": "49d55c77c4d226639bde736a20d18e00ffb5e4861f66d2e9b87927eebbe6a757",
+      "size_bytes": 1263
+    },
+    {
+      "relative_path": "raw_packet/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.md",
+      "sha256": "5be5acac45b5806070bd6d719b4b2c8ca64e28734e7b6aaf1b75d7de75645030",
+      "size_bytes": 724
+    },
+    {
+      "relative_path": "raw_packet/compiled/A1XauR6MarketOnlyNativeParityOracle.ex5",
+      "sha256": "33f8ae50945c52c7f1e81e78a383866650d85145facdddc465ab305b5972ee4e",
+      "size_bytes": 45546
+    },
+    {
+      "relative_path": "raw_packet/compiled/A1XauR6MarketOnlyNativeParityOracle.mq5",
+      "sha256": "dd4e349a047f4e69dca61b81367134c68973a29fd551709739280e7941b64698",
+      "size_bytes": 28804
+    },
+    {
+      "relative_path": "raw_packet/compiled/compile_A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY.log",
+      "sha256": "82251e5691e6ba275e18a9766f50d6ab225d44abf7ff384a2ac7545d2c8d2e62",
+      "size_bytes": 1536
+    },
+    {
+      "relative_path": "raw_packet/compiled/source_equivalence.json",
+      "sha256": "9e7b893d4af9d44540117cff2ac0e782b1d535d242f40f2ff61a8156ff5382c1",
+      "size_bytes": 10557
+    },
+    {
+      "relative_path": "raw_packet/manifest.json",
+      "sha256": "8479fb5dc17ceb1888521fe91344e636c02eac9d756a2dc99ea8d5d72714069c",
+      "size_bytes": 6063
+    },
+    {
+      "relative_path": "raw_packet/manifest.sha256",
+      "sha256": "7787f155ca9f468739b621f584c27e40e56f4f214fd733b665facfd5a924d18f",
+      "size_bytes": 65
+    },
+    {
+      "relative_path": "raw_packet/parity/native_prefix_chain_hashes.csv",
+      "sha256": "847eea3f7acfef897958feeb73f9d2e12a393b111c26d406538facb0171d343b",
+      "size_bytes": 151
+    },
+    {
+      "relative_path": "raw_packet/parity/ordercalcprofit_python_native_parity.csv",
+      "sha256": "02c17f011fd77b2c7523eee5e994300adb64204ab317b29e8fe67b43b1485207",
+      "size_bytes": 1584
+    },
+    {
+      "relative_path": "raw_packet/parity/router_python_native_parity.csv",
+      "sha256": "f3db548cc44a1e88f098f64c4f72a64b2d6beb581b2c3a5026ca7a4253cdcaff",
+      "size_bytes": 347
+    },
+    {
+      "relative_path": "raw_packet/parity/router_state_summary.csv",
+      "sha256": "9d1b1a2ac4a84ffd5763972e7f3e831639dea1665d6ef97eb8acfe59129bf891",
+      "size_bytes": 366
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/deal.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_assertions.tsv",
+      "sha256": "d49ecab0cd4db15bc2fdf55f887c8b8135c8eafdccd0af538bc8af2e8f1914fd",
+      "size_bytes": 2991
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_contract.tsv",
+      "sha256": "f92759a52d68400e031fe289a9adaaa82d58f3f3efb00feba28e40e9fdaf853a",
+      "size_bytes": 421
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_d1_bars.tsv",
+      "sha256": "65a186fcb5e195120de1483c7908ba003f29b98b735ae9b66bd58cc44831a1b5",
+      "size_bytes": 409743
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_h1_bars.tsv",
+      "sha256": "c8aef874a65ec316f47450bd9f058366a16a4e0ebec959ccd380ee10aa8fcf45",
+      "size_bytes": 7699041
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_h4_bars.tsv",
+      "sha256": "08fb0016a07bd00584a111d94096db8bc1be01575efd8a0576b6918522d1e746",
+      "size_bytes": 2096449
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_ordercalcprofit.tsv",
+      "sha256": "1a3a2646cc38265b8488ca86f5b26c6eb13eb797689f0583fed5771fb42f4a46",
+      "size_bytes": 1474
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_report.htm",
+      "sha256": "bd4b3f91c3f236adf25532651aa3b1e0038fdc563fe18442b0a531c61e8aaf65",
+      "size_bytes": 26286
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/native_router_rows.tsv",
+      "sha256": "0faa2b275c174da027016dc024a0daff59b60f62a9ec2b908d0c556934b96934",
+      "size_bytes": 13010097
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/order.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "raw_packet/runs/run1/tester.ini",
+      "sha256": "7d764577ee4d171fbef97ace45c7469151524bf49bf2f811d5cc2320893bce5f",
+      "size_bytes": 770
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/deal.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_assertions.tsv",
+      "sha256": "45926ede7afea31b6bf2758503d98263574e259620cd491724a2ce371517b98e",
+      "size_bytes": 2991
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_contract.tsv",
+      "sha256": "f92759a52d68400e031fe289a9adaaa82d58f3f3efb00feba28e40e9fdaf853a",
+      "size_bytes": 421
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_d1_bars.tsv",
+      "sha256": "d3deb5dc0e128e8bdb56266dae15d2b3deff31d5c0fe52dce937dce4f91ae21d",
+      "size_bytes": 409748
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_h1_bars.tsv",
+      "sha256": "4cff7935627e263e9cc074c8a722dcbc77a9114bf538bf7def9eafaf11df58bc",
+      "size_bytes": 7699061
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_h4_bars.tsv",
+      "sha256": "ef06dabe55fb44c928285d4f82f141431da2ce72ab672f31cd4ba1a71f2ea844",
+      "size_bytes": 2096459
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_ordercalcprofit.tsv",
+      "sha256": "1a3a2646cc38265b8488ca86f5b26c6eb13eb797689f0583fed5771fb42f4a46",
+      "size_bytes": 1474
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_report.htm",
+      "sha256": "45ca5bfd3a96471c82719b8f7836f22f3d5e5bf567197c9f5da765a54068a6bd",
+      "size_bytes": 26286
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/native_router_rows.tsv",
+      "sha256": "e3afdee8d828eca855838d1aa6aa1ed33d09ef38f693d4f9a8e2aa9057cdc0eb",
+      "size_bytes": 13010097
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/order.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "raw_packet/runs/run2/tester.ini",
+      "sha256": "5e24c123e23e18dbab0ab6457c8a68e8febca65166e1ab2bfee71b421bee9644",
+      "size_bytes": 770
+    },
+    {
+      "relative_path": "raw_packet/test_validation.md",
+      "sha256": "6e877c1f62446504f3620a30635a3fc917f8a99b8e071592d970c5c65eb8bf18",
+      "size_bytes": 8331
+    },
+    {
+      "relative_path": "result.json",
+      "sha256": "3ecec27a75f9e6fd6d8e6242d325ca45a066ab2c34fbab753ac5f0bb569a8d43",
+      "size_bytes": 3968
+    }
+  ],
+  "schema_version": "a1_xau_r6_np1c_stop_diagnostic_manifest_v1"
+}

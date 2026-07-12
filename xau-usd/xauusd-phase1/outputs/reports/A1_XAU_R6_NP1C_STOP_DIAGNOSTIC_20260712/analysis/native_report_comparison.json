@@ -1,0 +1,20 @@
+{
+  "bars_delta_run2_minus_run1": 0,
+  "ex5_sha256": "33f8ae50945c52c7f1e81e78a383866650d85145facdddc465ab305b5972ee4e",
+  "run1": {
+    "bars": 779751,
+    "period": "M5 (2015.06.01 - 2026.07.01)",
+    "ticks": 386580353,
+    "total_deals": 0,
+    "total_trades": 0
+  },
+  "run2": {
+    "bars": 779751,
+    "period": "M5 (2015.06.01 - 2026.07.01)",
+    "ticks": 386636287,
+    "total_deals": 0,
+    "total_trades": 0
+  },
+  "source_equivalence_status": "PASS",
+  "tick_delta_run2_minus_run1": 55934
+}
