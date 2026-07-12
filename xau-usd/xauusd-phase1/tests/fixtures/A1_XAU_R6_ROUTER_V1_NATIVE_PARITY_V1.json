@@ -1,0 +1,38 @@
+{
+  "schema_version": "a1_xau_r6_router_v1_native_parity_v1",
+  "router_source": {
+    "commit": "d51340574d90a39fe0032e54e4a8252370c19058",
+    "git_blob_sha": "d59338facaa01032a47c71186e64e1ba9f1dba8f",
+    "path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5"
+  },
+  "native_state_evidence": {
+    "source_path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_orders.csv",
+    "source_sha256": "e85b750df6d0ae72f9e4c16561fa69ddc4490af966c146603fd9ad77c93bf7c3",
+    "states": {
+      "UPTREND": {"timestamp_broker": "2016.08.02 08:00:00", "native_action": "ORDER_SEND_OK", "native_reason": "pass"},
+      "DOWNTREND": {"timestamp_broker": "2018.06.19 04:00:00", "native_action": "GUARD_BLOCK", "native_reason": "regime_router_block_long_r1_uptrend_only_state_downtrend"},
+      "COMPRESSION": {"timestamp_broker": "2016.08.16 04:00:00", "native_action": "GUARD_BLOCK", "native_reason": "regime_router_block_long_r1_uptrend_only_state_compression"},
+      "CHOP": {"timestamp_broker": "2016.07.27 16:00:00", "native_action": "GUARD_BLOCK", "native_reason": "regime_router_block_long_r1_uptrend_only_state_chop"},
+      "SHOCK": {"timestamp_broker": "2016.11.09 04:00:00", "native_action": "GUARD_BLOCK", "native_reason": "regime_router_block_long_r1_uptrend_only_state_shock"}
+    }
+  },
+  "deterministic_fixture_generator": {
+    "decision_time": "2024-01-01T00:00:00",
+    "base_price": 500.0,
+    "trend_step": 0.35,
+    "wide_range": 6.0,
+    "normal_range": 2.0,
+    "wide_every": 11,
+    "quiet_tail_bars": 30,
+    "quiet_range": 1.0
+  },
+  "cases": [
+    {"id": "UPTREND", "base_state": "UPTREND", "expected_state": "UPTREND", "dataset_sha256": "62a7b6f528c41beb4e56260b0967fa8da18950e2be45857b2903c4af92fe6aa5", "h1_atr14": 2.3327889183408757, "d1_atr14": 2.441938199210026, "d1_percentile_60": 80.0, "d1_percentile_252": 81.74603174603175, "d1_ema20": 597.575000000001, "d1_ema50": 592.3250850147854},
+    {"id": "DOWNTREND", "base_state": "DOWNTREND", "expected_state": "DOWNTREND", "dataset_sha256": "94e5055dde6ae69d6d8c2ac83f83aebc118595082c35b41e9a7c2281a34388c7", "h1_atr14": 2.3327889183408757, "d1_atr14": 2.441938199210026, "d1_percentile_60": 80.0, "d1_percentile_252": 81.74603174603175, "d1_ema20": 402.42499999999893, "d1_ema50": 407.67491498521537},
+    {"id": "COMPRESSION", "base_state": "COMPRESSION", "expected_state": "COMPRESSION", "dataset_sha256": "a06d6b92e7db4af7f0f95b4d069362b7d3cc7439b05acabade3279fa35ac380e", "h1_atr14": 1.1977067532874262, "d1_atr14": 1.2432328799007755, "d1_percentile_60": 1.6666666666666667, "d1_percentile_252": 0.3968253968253968, "d1_ema20": 499.98499999999996, "d1_ema50": 499.99399708520787},
+    {"id": "CHOP", "base_state": "CHOP", "expected_state": "CHOP", "dataset_sha256": "ef38a8e2032a3b860e864d09a760aa4d4c1701eea91485540783edc7d6439ef1", "h1_atr14": 1.1977067532874262, "d1_atr14": 2.1101371087934915, "d1_percentile_60": 45.0, "d1_percentile_252": 10.714285714285714, "d1_ema20": 503.472753853296, "d1_ema50": 501.513218700092},
+    {"id": "H1_SHOCK", "base_state": "UPTREND", "mutation": "completed_h1_range_20", "expected_state": "SHOCK", "dataset_sha256": "5d9b05e3da0c333b35d20a1124d89971d2fa741121738cea3bc9ee1f1a05e90a", "h1_atr14": 3.6185032040551617, "d1_atr14": 2.441938199210026, "d1_percentile_60": 80.0, "d1_percentile_252": 81.74603174603175},
+    {"id": "D1_PERCENTILE_SHOCK", "base_state": "UPTREND", "mutation": "completed_d1_range_20", "expected_state": "SHOCK", "dataset_sha256": "7493b6a874f3c610f521de40078a6681540d4b7db7b57d59e357b9711b60c103", "h1_atr14": 2.3327889183408757, "d1_atr14": 3.7276524849243122, "d1_percentile_60": 100.0, "d1_percentile_252": 100.0},
+    {"id": "UNKNOWN_MIN_HISTORY", "base_state": "UPTREND", "d1_bar_count": 276, "expected_state": "UNKNOWN", "dataset_sha256": "daeda8c4b24ec317a01085ec0dab958d3c8772b222b69306a22b2ce8c80e7ebd"}
+  ]
+}

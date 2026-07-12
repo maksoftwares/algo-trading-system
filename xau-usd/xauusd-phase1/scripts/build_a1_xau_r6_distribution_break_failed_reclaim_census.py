@@ -7,7 +7,9 @@ The real evidence build belongs to the separately reviewed R6-C3 phase.
 from __future__ import annotations
 
 import hashlib
+import json
 import math
+from bisect import bisect_left, bisect_right
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -92,6 +94,35 @@ class TerminalAnchor:
     anchor_time: datetime
     horizon_end: datetime | None
     status: str
+    horizon_sequence: int | None = None
+
+
+@dataclass(frozen=True)
+class PrefixCutoff:
+    time: datetime
+    sequence: int
+
+
+@dataclass(frozen=True)
+class TickIndex:
+    ticks: tuple[Tick, ...]
+    times: tuple[datetime, ...]
+
+    @classmethod
+    def build(cls, ticks: Sequence[Tick]) -> "TickIndex":
+        previous: Tick | None = None
+        rows = tuple(ticks)
+        for tick in rows:
+            _validate_tick_row(tick, previous)
+            previous = tick
+        return cls(rows, tuple(tick.time for tick in rows))
+
+    def decision_window(self, decision_time: datetime) -> tuple[Tick, ...]:
+        """Return only [decision, expiry] plus one proof-of-horizon tick."""
+        start = bisect_left(self.times, decision_time)
+        end = bisect_right(self.times, decision_time + timedelta(minutes=15))
+        proof_end = min(len(self.ticks), end + 1)
+        return self.ticks[start:proof_end]
 
 
 @dataclass(frozen=True)
@@ -472,6 +503,60 @@ def _causal_bars(bars: Sequence[Bar], decision_time: datetime) -> tuple[Bar, ...
     return tuple(bar for bar in bars if bar.time <= decision_time)
 
 
+def parse_c3_market_payload(payload: str) -> dict[str, object]:
+    """Parse a reviewed in-memory C3 payload without opening or writing files."""
+    raw = json.loads(payload)
+    if set(raw) != {"h4", "h1", "d1", "ticks", "contract", "symbol"}:
+        raise ValueError("C3 market payload keys mismatch")
+    contract_fields = set(Contract.__dataclass_fields__)
+    if set(raw["contract"]) != contract_fields:
+        raise ValueError("C3 contract snapshot keys mismatch")
+
+    def bars(name: str) -> tuple[Bar, ...]:
+        if any(set(row) != {"time", "open", "high", "low", "close"} for row in raw[name]):
+            raise ValueError("C3 bar row keys mismatch")
+        return tuple(
+            Bar(datetime.fromisoformat(row["time"]), row["open"], row["high"], row["low"], row["close"])
+            for row in raw[name]
+        )
+
+    allowed_tick_fields = {"time", "sequence", "bid", "ask", "session_open", "source_h1_bar_time"}
+    required_tick_fields = {"time", "sequence", "bid", "ask"}
+    if any(not required_tick_fields <= set(row) or not set(row) <= allowed_tick_fields for row in raw["ticks"]):
+        raise ValueError("C3 tick row keys mismatch")
+    ticks = tuple(
+        Tick(
+            datetime.fromisoformat(row["time"]), row["sequence"], row["bid"], row["ask"],
+            row.get("session_open", True),
+            datetime.fromisoformat(row["source_h1_bar_time"]) if row.get("source_h1_bar_time") else None,
+        )
+        for row in raw["ticks"]
+    )
+    contract = Contract(**raw["contract"])
+    return {"h4": bars("h4"), "h1": bars("h1"), "d1": bars("d1"), "ticks": ticks, "contract": contract, "symbol": raw.get("symbol", "XAUUSD")}
+
+
+def serialize_detection(detection: Detection) -> str:
+    """Canonical, outcome-blind C3 evidence serialization; contexts stay internal."""
+    payload = {
+        "schema_version": "a1_xau_r6_outcome_blind_detection_v1",
+        "rows": list(detection.rows),
+        "funnel": detection.funnel,
+        "anchors": [
+            {
+                "anchor_time": broker_time(anchor.anchor_time),
+                "horizon_end": broker_time(anchor.horizon_end) if anchor.horizon_end else None,
+                "horizon_sequence": anchor.horizon_sequence,
+                "status": anchor.status,
+            }
+            for anchor in detection.anchors
+        ],
+        "incidence": detection.incidence,
+        "final_status": detection.final_status,
+    }
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+
+
 def detect(
     *, h4: Sequence[Bar], h1: Sequence[Bar], d1: Sequence[Bar], ticks: Sequence[Tick],
     contract: Contract, symbol: str = "XAUUSD",
@@ -484,15 +569,17 @@ def detect(
     if symbol != contract.symbol:
         raise ValueError("detector symbol does not match contract snapshot")
     h4_atr, h1_atr = wilder_atr(h4), wilder_atr(h1)
-    tick_rows = list(ticks)
+    tick_index = TickIndex.build(ticks)
     funnel = {status: 0 for status in TERMINAL_STATUSES}
     rows: list[dict[str, object]] = []
     contexts: dict[str, RowContext] = {}
     anchors: list[TerminalAnchor] = []
 
-    def finish(anchor_time: datetime, status: str, horizon_end: datetime | None) -> None:
+    def finish(
+        anchor_time: datetime, status: str, horizon_end: datetime | None, horizon_sequence: int | None = None,
+    ) -> None:
         funnel[status] += 1
-        anchors.append(TerminalAnchor(anchor_time, horizon_end, status))
+        anchors.append(TerminalAnchor(anchor_time, horizon_end, status, horizon_sequence))
 
     suppression: tuple[float, datetime, int] | None = None
     for index in range(14, len(h4) - 1):
@@ -577,14 +664,17 @@ def detect(
         if decision >= TO_EXCLUSIVE:
             finish(bar.time, "DATA_UNAVAILABLE", decision)
             continue
+        local_ticks = tick_index.decision_window(decision)
         entry, tick_status, last_reclaim_sequence, causal_ticks, tick_horizon_complete = select_entry_tick(
-            tick_rows, reclaim_time=reclaim.time, decision_time=decision,
+            local_ticks, reclaim_time=reclaim.time, decision_time=decision,
         )
         if entry is None:
+            terminal_sequence = causal_ticks[-1].sequence if tick_horizon_complete and causal_ticks else None
             finish(
                 bar.time, tick_status,
                 decision + timedelta(minutes=15) if tick_status == "ENTRY_TICK_UNAVAILABLE"
                 else decision if tick_horizon_complete else None,
+                terminal_sequence,
             )
             continue
         if not (FROM_INCLUSIVE <= entry.time < TO_EXCLUSIVE):
@@ -639,6 +729,6 @@ def detect(
             a_impulse, a_box, a_reclaim, last_reclaim_sequence, causal_ticks,
             _causal_bars(h1, boundary), _causal_bars(h4, boundary), _causal_bars(d1, boundary),
         )
-        finish(bar.time, "RAW_OPPORTUNITY_AVAILABLE", entry.time)
+        finish(bar.time, "RAW_OPPORTUNITY_AVAILABLE", entry.time, entry.sequence)
     incidence = incidence_report(rows)
     return Detection(tuple(rows), funnel, tuple(anchors), incidence, locked_final_status(incidence), contexts)

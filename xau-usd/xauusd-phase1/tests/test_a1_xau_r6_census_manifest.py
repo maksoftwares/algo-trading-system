@@ -27,6 +27,20 @@ def test_lock_manifest_and_phase_boundary() -> None:
     V.validate_lock_manifest(ROOT, ROOT / "outputs" / "manifests" / "A1_XAU_R6_CENSUS_LOCK_MANIFEST_V1.json")
 
 
+def test_native_fixture_manifest_and_provenance_roots() -> None:
+    payload = V.validate_native_fixture_manifest(
+        ROOT, ROOT / "tests" / "fixtures" / "A1_XAU_R6_NATIVE_FIXTURE_MANIFEST_V1.json",
+    )
+    assert payload["phase_boundary"] == {
+        "market_only": True,
+        "real_census_authorized": False,
+        "pnl_authorized": False,
+        "mt5_execution_authorized": False,
+        "h4_or_portfolio_join_authorized": False,
+        "runtime_or_broker_action_authorized": False,
+    }
+
+
 def test_detector_is_bound_to_locked_rule_hash() -> None:
     manifest = json.loads((ROOT / "outputs" / "manifests" / "A1_XAU_R6_CENSUS_LOCK_MANIFEST_V1.json").read_text())
     key = "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json"

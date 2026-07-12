@@ -69,12 +69,10 @@ def router_market() -> tuple[datetime, list[R.Bar], list[R.Bar], list[R.Bar]]:
     )
 
 
-MT5_ROUTER_FIXTURES = {
-    "UPTREND": ("62a7b6f528c41beb4e56260b0967fa8da18950e2be45857b2903c4af92fe6aa5", 2.3327889183408757, 2.441938199210026, 80.0, 81.74603174603175, 597.575000000001, 592.3250850147854),
-    "DOWNTREND": ("94e5055dde6ae69d6d8c2ac83f83aebc118595082c35b41e9a7c2281a34388c7", 2.3327889183408757, 2.441938199210026, 80.0, 81.74603174603175, 402.42499999999893, 407.67491498521537),
-    "COMPRESSION": ("a06d6b92e7db4af7f0f95b4d069362b7d3cc7439b05acabade3279fa35ac380e", 1.1977067532874262, 1.2432328799007755, 1.6666666666666667, 0.3968253968253968, 499.98499999999996, 499.99399708520787),
-    "CHOP": ("ef38a8e2032a3b860e864d09a760aa4d4c1701eea91485540783edc7d6439ef1", 1.1977067532874262, 2.1101371087934915, 45.0, 10.714285714285714, 503.472753853296, 501.513218700092),
-}
+ROUTER_FIXTURE = json.loads(
+    (SCRIPTS.parent / "tests" / "fixtures" / "A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json").read_text()
+)
+ROUTER_CASES = {case["id"]: case for case in ROUTER_FIXTURE["cases"]}
 
 
 def mt5_router_fixture(decision: datetime, count: int, spacing: timedelta, state: str, timeframe: str) -> list[R.Bar]:
@@ -96,28 +94,40 @@ def mt5_router_fixture(decision: datetime, count: int, spacing: timedelta, state
     return output
 
 
-@pytest.mark.parametrize("state", sorted(MT5_ROUTER_FIXTURES))
-def test_hash_addressed_mt5_router_numerical_parity_without_monkeypatch(state: str) -> None:
+@pytest.mark.parametrize("case_id", sorted(ROUTER_CASES))
+def test_hash_addressed_mt5_router_numerical_parity_without_monkeypatch(case_id: str) -> None:
+    case = ROUTER_CASES[case_id]
     decision = datetime(2024, 1, 1)
+    state = case["base_state"]
     h1 = mt5_router_fixture(decision, 40, timedelta(hours=1), state, "h1")
     h4 = mt5_router_fixture(decision, 80, timedelta(hours=4), state, "h4")
-    d1 = mt5_router_fixture(decision, 290, timedelta(days=1), state, "d1")
+    d1 = mt5_router_fixture(decision, case.get("d1_bar_count", 290), timedelta(days=1), state, "d1")
+    if case.get("mutation") == "completed_h1_range_20":
+        index = R._last_completed_index(h1, decision)
+        source = h1[index]
+        h1[index] = bar(source.time, source.open, source.open + 10, source.open - 10, source.close)
+    if case.get("mutation") == "completed_d1_range_20":
+        index = R._last_completed_index(d1, decision)
+        source = d1[index]
+        d1[index] = bar(source.time, source.open, source.open + 10, source.open - 10, source.close)
     payload = {
         timeframe: [(value.time.isoformat(), value.open, value.high, value.low, value.close) for value in bars]
         for timeframe, bars in (("h1", h1), ("h4", h4), ("d1", d1))
     }
-    expected_hash, h1_atr, d1_atr, pct60, pct252, ema20, ema50 = MT5_ROUTER_FIXTURES[state]
-    assert hashlib.sha256(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()).hexdigest() == expected_hash
+    assert hashlib.sha256(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()).hexdigest() == case["dataset_sha256"]
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == case["expected_state"]
+    if case["expected_state"] == "UNKNOWN":
+        return
     h1_index, d1_index = R._last_completed_index(h1, decision), R._last_completed_index(d1, decision)
     h1_values, d1_values = R.wilder_atr(h1), R.wilder_atr(d1)
-    assert h1_values[h1_index] == pytest.approx(h1_atr)
-    assert d1_values[d1_index] == pytest.approx(d1_atr)
-    assert R.percentile_rank([value for value in d1_values[d1_index - 59 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(pct60)
-    assert R.percentile_rank([value for value in d1_values[d1_index - 251 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(pct252)
-    closes = [value.close for value in d1]
-    assert R.ema(closes, 20)[d1_index] == pytest.approx(ema20)
-    assert R.ema(closes, 50)[d1_index] == pytest.approx(ema50)
-    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == state
+    assert h1_values[h1_index] == pytest.approx(case["h1_atr14"])
+    assert d1_values[d1_index] == pytest.approx(case["d1_atr14"])
+    assert R.percentile_rank([value for value in d1_values[d1_index - 59 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(case["d1_percentile_60"])
+    assert R.percentile_rank([value for value in d1_values[d1_index - 251 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(case["d1_percentile_252"])
+    if "d1_ema20" in case:
+        closes = [value.close for value in d1]
+        assert R.ema(closes, 20)[d1_index] == pytest.approx(case["d1_ema20"])
+        assert R.ema(closes, 50)[d1_index] == pytest.approx(case["d1_ema50"])
 
 
 def test_router_exact_availability_boundary_and_all_states(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -193,6 +203,9 @@ def test_exact_shift_detector_emits_one_raw_row(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setattr(V, "classify_router", lambda **_: "CHOP")
     V.validate_row(dict(row), schema, context)
     V.validate_detection(result, schema)
+    serialized = R.serialize_detection(result)
+    assert serialized == R.serialize_detection(result)
+    assert "contexts" not in json.loads(serialized)
     V.validate_funnel(result.funnel, result.rows, result.anchors, result.incidence)
     bad = dict(row)
     bad["breakdown_distance_atr"] = float(bad["breakdown_distance_atr"]) + 0.01
@@ -289,8 +302,9 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
         R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
     ]
     assert R.detect(h4=h4, h1=h1, d1=d1, ticks=closed_first, contract=contract()).funnel["ENTRY_TICK_UNAVAILABLE"] == 1
-    # Nothing after the consumed entry may retroactively affect the signal.
-    assert len(R.detect(h4=h4, h1=h1, d1=d1, ticks=list(reversed(owned)), contract=contract()).rows) == 1
+    # The one-time source index rejects invalid absolute ordering before detection.
+    with pytest.raises(ValueError, match="monotonic"):
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=list(reversed(owned)), contract=contract())
     invalid_before_entry = [
         R.Tick(decision - timedelta(seconds=2), 1001, 102.10, 102.11, source_h1_bar_time=h1[60].time),
         R.Tick(decision - timedelta(seconds=1), 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
@@ -298,6 +312,45 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
     ]
     with pytest.raises(ValueError, match="monotonic"):
         R.detect(h4=h4, h1=h1, d1=d1, ticks=invalid_before_entry, contract=contract())
+
+
+def test_tick_index_scans_local_window_and_context_is_bounded() -> None:
+    decision = datetime(2024, 1, 2)
+    historical = [
+        R.Tick(decision - timedelta(seconds=10_000 - index), index, 100, 100.01)
+        for index in range(10_000)
+    ]
+    local = [
+        R.Tick(decision, 10_000, 100, 100.01, source_h1_bar_time=decision),
+        R.Tick(decision + timedelta(minutes=16), 10_001, 100, 100.01, source_h1_bar_time=decision),
+    ]
+    indexed = R.TickIndex.build(historical + local)
+    window = indexed.decision_window(decision)
+    assert window == tuple(local)
+    entry, status, _, consumed, complete = R.select_entry_tick(
+        window, reclaim_time=decision - timedelta(hours=1), decision_time=decision,
+    )
+    assert status == "RAW_OPPORTUNITY_AVAILABLE" and entry == local[0] and complete
+    assert consumed == (local[0],)
+
+
+def test_c3_market_payload_parser_is_deterministic_and_in_memory() -> None:
+    now = datetime(2024, 1, 1)
+    bar_row = {"time": now.isoformat(), "open": 100, "high": 101, "low": 99, "close": 100.5}
+    payload = json.dumps({
+        "h4": [bar_row], "h1": [bar_row], "d1": [bar_row],
+        "ticks": [{"time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01, "source_h1_bar_time": now.isoformat()}],
+        "contract": dataclasses.asdict(contract()), "symbol": "XAUUSD",
+    }, sort_keys=True)
+    first = R.parse_c3_market_payload(payload)
+    second = R.parse_c3_market_payload(payload)
+    assert first == second
+    assert first["h4"] == (R.Bar(now, 100, 101, 99, 100.5),)
+    assert first["ticks"][0].sequence == 1
+    bad = json.loads(payload)
+    bad["pnl"] = 1
+    with pytest.raises(ValueError, match="keys"):
+        R.parse_c3_market_payload(json.dumps(bad))
 
 
 def test_native_weekend_gap_and_fifteen_minute_entry_expiry(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -349,4 +402,6 @@ def test_actual_detector_and_terminal_funnel_are_prefix_invariant(monkeypatch: p
     monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
     base = dict(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
     extended = dict(h4=extended_h4, h1=extended_h1, d1=d1, ticks=ticks, contract=contract())
-    V.validate_detector_prefix_invariance(R.detect, base, extended, prefix_end=ticks[0].time)
+    V.validate_detector_prefix_invariance(
+        R.detect, base, extended, prefix_cutoff=R.PrefixCutoff(ticks[0].time, ticks[0].sequence),
+    )

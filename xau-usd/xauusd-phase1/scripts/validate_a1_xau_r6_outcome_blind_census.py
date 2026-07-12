@@ -18,6 +18,7 @@ from build_a1_xau_r6_distribution_break_failed_reclaim_census import (
     FROM_INCLUSIVE,
     TO_EXCLUSIVE,
     Detection,
+    PrefixCutoff,
     RowContext,
     TerminalAnchor,
     broker_time,
@@ -44,6 +45,9 @@ ALLOWED_C2_FILES = {
     "tests/test_a1_xau_r6_census_outcome_blind.py",
     "tests/test_a1_xau_r6_census_contract_risk.py",
     "tests/test_a1_xau_r6_census_manifest.py",
+    "tests/fixtures/A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json",
+    "tests/fixtures/A1_XAU_R6_ORDERCALCPROFIT_PARITY_V1.json",
+    "tests/fixtures/A1_XAU_R6_NATIVE_FIXTURE_MANIFEST_V1.json",
 }
 
 
@@ -237,17 +241,20 @@ def validate_funnel(
 
 
 def validate_prefix_invariance(
-    prefix_rows: Sequence[dict[str, Any]], extended_rows: Sequence[dict[str, Any]], *, prefix_end: datetime | None = None,
+    prefix_rows: Sequence[dict[str, Any]], extended_rows: Sequence[dict[str, Any]], *, prefix_cutoff: PrefixCutoff | None = None,
 ) -> None:
     """All previously emitted identities and fields must survive an appended market suffix."""
     by_id = {row["candidate_id"]: row for row in extended_rows}
     for row in prefix_rows:
         if by_id.get(row["candidate_id"]) != row:
             raise ValueError("prefix invariance failure")
-    if prefix_end is not None:
+    if prefix_cutoff is not None:
         prefix_ids = {row["candidate_id"] for row in prefix_rows}
         if any(
-            datetime.fromisoformat(str(row["entry_tick_time"])) <= prefix_end and row["candidate_id"] not in prefix_ids
+            (
+                datetime.fromisoformat(str(row["entry_tick_time"])), int(row["entry_tick_sequence"])
+            ) <= (prefix_cutoff.time, prefix_cutoff.sequence)
+            and row["candidate_id"] not in prefix_ids
             for row in extended_rows
         ):
             raise ValueError("extension created an opportunity inside the prefix horizon")
@@ -255,32 +262,77 @@ def validate_prefix_invariance(
 
 def validate_detector_prefix_invariance(
     detector: Callable[..., Detection], prefix_inputs: Mapping[str, object], extended_inputs: Mapping[str, object],
-    *, prefix_end: datetime,
+    *, prefix_cutoff: PrefixCutoff,
 ) -> None:
     """Rerun the detector and compare every terminal decision fully owned by the prefix."""
     prefix = detector(**prefix_inputs)
     extended = detector(**extended_inputs)
     stable_prefix = tuple(
-        anchor for anchor in prefix.anchors if anchor.horizon_end is not None and anchor.horizon_end <= prefix_end
+        anchor for anchor in prefix.anchors if _anchor_owned_by_cutoff(anchor, prefix_cutoff)
     )
     stable_extended = tuple(
-        anchor for anchor in extended.anchors if anchor.horizon_end is not None and anchor.horizon_end <= prefix_end
+        anchor for anchor in extended.anchors if _anchor_owned_by_cutoff(anchor, prefix_cutoff)
     )
     if stable_prefix != stable_extended:
         raise ValueError("detector terminal prefix invariance failure")
-    stable_rows = [row for row in prefix.rows if datetime.fromisoformat(str(row["entry_tick_time"])) <= prefix_end]
-    validate_prefix_invariance(stable_rows, extended.rows, prefix_end=prefix_end)
+    stable_rows = [
+        row for row in prefix.rows
+        if (datetime.fromisoformat(str(row["entry_tick_time"])), int(row["entry_tick_sequence"]))
+        <= (prefix_cutoff.time, prefix_cutoff.sequence)
+    ]
+    validate_prefix_invariance(stable_rows, extended.rows, prefix_cutoff=prefix_cutoff)
+
+
+def _anchor_owned_by_cutoff(anchor: TerminalAnchor, cutoff: PrefixCutoff) -> bool:
+    if anchor.horizon_end is None:
+        return False
+    if anchor.horizon_end != cutoff.time:
+        return anchor.horizon_end < cutoff.time
+    return anchor.horizon_sequence is None or anchor.horizon_sequence <= cutoff.sequence
 
 
 def validate_detection(detection: Detection, schema: dict[str, Any]) -> None:
     candidate_ids = [str(row["candidate_id"]) for row in detection.rows]
     if len(candidate_ids) != len(set(candidate_ids)) or set(candidate_ids) != set(detection.contexts):
         raise ValueError("detection context reconciliation mismatch")
+    for field in ("box_id", "episode_id"):
+        values = [str(row[field]) for row in detection.rows]
+        if len(values) != len(set(values)):
+            raise ValueError(f"duplicate {field} ownership")
     for row in detection.rows:
         validate_row(dict(row), schema, detection.contexts[str(row["candidate_id"])])
     validate_funnel(detection.funnel, detection.rows, detection.anchors, detection.incidence)
     if detection.final_status != locked_final_status(detection.incidence):
         raise ValueError("locked final status mismatch")
+
+
+def validate_native_fixture_manifest(root: Path, manifest: Path) -> dict[str, Any]:
+    payload = json.loads(manifest.read_text(encoding="utf-8"))
+    expected = {
+        "tests/fixtures/A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json",
+        "tests/fixtures/A1_XAU_R6_ORDERCALCPROFIT_PARITY_V1.json",
+    }
+    if set(payload.get("fixtures", {})) != expected:
+        raise ValueError("native fixture set mismatch")
+    for relative, metadata in payload["fixtures"].items():
+        path = root / relative
+        normalized = path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
+        if hashlib.sha256(normalized).hexdigest() != metadata["sha256"] or len(normalized) != metadata["size_bytes"]:
+            raise ValueError("native fixture hash mismatch")
+    for evidence in payload.get("native_evidence_roots", []):
+        path = root / evidence["path"]
+        if sha256(path) != evidence["sha256"]:
+            raise ValueError("native provenance root mismatch")
+    return payload
+
+
+def validate_c3_input_manifest(manifest: Mapping[str, Any], payloads: Mapping[str, bytes]) -> None:
+    if set(manifest.get("inputs", {})) != set(payloads):
+        raise ValueError("C3 input manifest set mismatch")
+    for name, content in payloads.items():
+        expected = manifest["inputs"][name]
+        if hashlib.sha256(content).hexdigest() != expected["sha256"] or len(content) != expected["size_bytes"]:
+            raise ValueError("C3 input manifest hash mismatch")
 
 
 def validate_lock_manifest(root: Path, manifest: Path) -> None:

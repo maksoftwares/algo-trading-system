@@ -1,0 +1,20 @@
+{
+  "schema_version": "a1_xau_r6_native_fixture_manifest_v1",
+  "fixtures": {
+    "tests/fixtures/A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json": {"sha256": "c5a007fff127df6a06bab89d354fbafcba9ead48d8cdade654fa0e40235d8a8b", "size_bytes": 4011},
+    "tests/fixtures/A1_XAU_R6_ORDERCALCPROFIT_PARITY_V1.json": {"sha256": "0195c850dbc63d834cb99af4bea6da255e0ddfc6dc1d31571a8121cf25dfa5ef", "size_bytes": 1411}
+  },
+  "native_evidence_roots": [
+    {"path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_orders.csv", "sha256": "e85b750df6d0ae72f9e4c16561fa69ddc4490af966c146603fd9ad77c93bf7c3"},
+    {"path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_startup.csv", "sha256": "be9290169183a6ac9ba3c2ea99541b7fd6295d264ef2b9b54c54b36abd45a174"},
+    {"path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5", "sha256": "43c5795a3c0206447446f488ee38e23006bf59a0df1575fc81744294c0ba1a53"}
+  ],
+  "phase_boundary": {
+    "market_only": true,
+    "real_census_authorized": false,
+    "pnl_authorized": false,
+    "mt5_execution_authorized": false,
+    "h4_or_portfolio_join_authorized": false,
+    "runtime_or_broker_action_authorized": false
+  }
+}

@@ -11,15 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_a1_xau_r6_distribution_break_failed_reclaim_census as R  # noqa: E402
 
+CONTRACT_FIXTURE = json.loads(
+    (ROOT / "tests" / "fixtures" / "A1_XAU_R6_ORDERCALCPROFIT_PARITY_V1.json").read_text()
+)
+
 
 def contract(**overrides: object) -> R.Contract:
-    values = dict(
-        account_currency="USD", account_leverage=50, margin_mode=2,
-        server="Capital.ComMena-Demo", symbol="XAUUSD", point=0.01, digits=2,
-        tick_size=0.01, tick_value=1.0, tick_value_loss=1.0,
-        volume_min=0.01, volume_step=0.01, volume_max=1000.0,
-        contract_size=100.0, stops_level=0, freeze_level=0,
-    )
+    values = dict(CONTRACT_FIXTURE["contract"])
     values.update(overrides)
     return R.Contract(**values)
 
@@ -45,14 +43,7 @@ def test_captured_capital_com_order_calc_profit_parity() -> None:
 
 
 def test_hash_addressed_native_order_calc_profit_boundary_fixtures() -> None:
-    fixtures = [
-        {"entry_bid": 2000.0, "risk_price": 2002.49, "captured_loss": 2.49},
-        {"entry_bid": 2000.0, "risk_price": 2002.5, "captured_loss": 2.5},
-        {"entry_bid": 2000.0, "risk_price": 2002.51, "captured_loss": 2.51},
-        {"entry_bid": 2000.0, "risk_price": 2024.99, "captured_loss": 24.99},
-        {"entry_bid": 2000.0, "risk_price": 2025.0, "captured_loss": 25.0},
-        {"entry_bid": 2000.0, "risk_price": 2025.01, "captured_loss": 25.01},
-    ]
+    fixtures = CONTRACT_FIXTURE["boundary_replay_cases"]
     payload = json.dumps(fixtures, separators=(",", ":"), sort_keys=True).encode()
     assert hashlib.sha256(payload).hexdigest() == "306a727ccce65b5e801fc9ffd7ecc76ded605054720a6e0b05ef2970ba1971e0"
     for fixture in fixtures:

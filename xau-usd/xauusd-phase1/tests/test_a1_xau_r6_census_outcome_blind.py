@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 import ast
+import hashlib
 from datetime import datetime
 from pathlib import Path
 
@@ -47,9 +48,11 @@ def test_prefix_invariance_rejects_changed_prior_row() -> None:
     V.validate_prefix_invariance([original], [original, {"candidate_id": "b"}])
     with pytest.raises(ValueError, match="prefix"):
         V.validate_prefix_invariance([original], [{"candidate_id": "a", "entry_tick_sequence": 11, "entry_tick_time": "2020-01-01T00:00:00"}])
-    new_inside_prefix = {"candidate_id": "b", "entry_tick_time": "2020-01-01T00:30:00"}
+    new_inside_prefix = {"candidate_id": "b", "entry_tick_time": "2020-01-01T00:30:00", "entry_tick_sequence": 11}
     with pytest.raises(ValueError, match="inside"):
-        V.validate_prefix_invariance([original], [original, new_inside_prefix], prefix_end=datetime(2020, 1, 1, 1))
+        V.validate_prefix_invariance(
+            [original], [original, new_inside_prefix], prefix_cutoff=R.PrefixCutoff(datetime(2020, 1, 1, 1), 99),
+        )
 
 
 def test_detector_prefix_invariance_is_bidirectional_for_exclusions() -> None:
@@ -63,7 +66,20 @@ def test_detector_prefix_invariance_is_bidirectional_for_exclusions() -> None:
 
     with pytest.raises(ValueError, match="terminal prefix"):
         V.validate_detector_prefix_invariance(
-            detector, {"extended": False}, {"extended": True}, prefix_end=datetime(2020, 1, 1, 4),
+            detector, {"extended": False}, {"extended": True},
+            prefix_cutoff=R.PrefixCutoff(datetime(2020, 1, 1, 4), 99),
+        )
+
+
+def test_prefix_cutoff_uses_absolute_sequence_within_same_second() -> None:
+    original = {"candidate_id": "a", "entry_tick_time": "2020-01-01T00:00:00", "entry_tick_sequence": 10}
+    later = {"candidate_id": "b", "entry_tick_time": "2020-01-01T00:00:00", "entry_tick_sequence": 11}
+    V.validate_prefix_invariance(
+        [original], [original, later], prefix_cutoff=R.PrefixCutoff(datetime(2020, 1, 1), 10),
+    )
+    with pytest.raises(ValueError, match="inside"):
+        V.validate_prefix_invariance(
+            [original], [original, later], prefix_cutoff=R.PrefixCutoff(datetime(2020, 1, 1), 11),
         )
 
 
@@ -93,3 +109,11 @@ def test_scripts_structurally_forbid_writes_subprocesses_and_neighbor_evidence_p
             if isinstance(node, ast.Constant) and isinstance(node.value, str):
                 assert not any(token in node.value.lower() for token in forbidden_path_tokens)
         assert not any(isinstance(node, ast.If) and isinstance(node.test, ast.Compare) and "__name__" in ast.unparse(node.test) for node in ast.walk(tree))
+
+
+def test_c3_input_manifest_validation_is_hash_and_size_exact() -> None:
+    content = b'{"market_only":true}'
+    manifest = {"inputs": {"market.json": {"sha256": hashlib.sha256(content).hexdigest(), "size_bytes": len(content)}}}
+    V.validate_c3_input_manifest(manifest, {"market.json": content})
+    with pytest.raises(ValueError, match="hash"):
+        V.validate_c3_input_manifest(manifest, {"market.json": content + b" "})
