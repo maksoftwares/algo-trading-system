@@ -58,6 +58,7 @@ def test_compile_only_accepts_build_5833_exit_one_in_temp_workspace(tmp_path: Pa
         metaeditor=_metaeditor(tmp_path / "editor" / "MetaEditor64.exe"),
         workspace=tmp_path / "compile-test",
         command_runner=fake,
+        version_reader=lambda _: "5.0.0.5833",
     )
 
     assert result.ex5.is_file()
@@ -70,10 +71,15 @@ def test_compile_only_accepts_build_5833_exit_one_in_temp_workspace(tmp_path: Pa
 def test_compile_only_fails_closed_on_warning_or_non_temp_workspace(tmp_path: Path) -> None:
     editor = _metaeditor(tmp_path / "editor" / "MetaEditor64.exe")
     with pytest.raises(RuntimeError, match="temporary/test/compile"):
-        R.compile_only_safety_check(metaeditor=editor, workspace=tmp_path / "production", command_runner=FakeMetaEditor())
+        R.compile_only_safety_check(metaeditor=editor, workspace=tmp_path / "production", command_runner=FakeMetaEditor(), version_reader=lambda _: "5.0.0.5833")
     with pytest.raises(RuntimeError, match="zero warnings"):
         R.compile_only_safety_check(
-            metaeditor=editor, workspace=tmp_path / "compile-test", command_runner=FakeMetaEditor(warnings=1)
+            metaeditor=editor, workspace=tmp_path / "compile-test", command_runner=FakeMetaEditor(warnings=1), version_reader=lambda _: "5.0.0.5833"
+        )
+    with pytest.raises(RuntimeError, match="must be 5.0.0.5833"):
+        R.compile_only_safety_check(
+            metaeditor=editor, workspace=tmp_path / "compile-test-build", command_runner=FakeMetaEditor(),
+            version_reader=lambda _: "5.0.0.9999",
         )
 
 
@@ -82,7 +88,8 @@ def test_historical_campaign_is_review_gated_and_ini_is_isolated(tmp_path: Path)
         R.run_historical_evidence_campaign(
             authorization="NOT_AUTHORIZED",
             tester_sandbox=tmp_path / "tester",
-            compiled_ex5=tmp_path / "oracle.ex5",
+            metaeditor=tmp_path / "MetaEditor64.exe",
+            compile_workspace=tmp_path / "compile-test",
             output_dir=tmp_path / "evidence",
         )
 
@@ -92,3 +99,42 @@ def test_historical_campaign_is_review_gated_and_ini_is_isolated(tmp_path: Path)
     assert "Server=" not in ini
     assert "UseRemote=0" in ini and "UseCloud=0" in ini
     assert "FromDate=2015.06.01" in ini and "ToDate=2026.07.01" in ini
+    assert "InpRouterRowsFileName=np1_run1_native_router_rows.tsv" in ini
+    assert "InpOrderZeroFileName=np1_run1_order.zero" in ini
+
+
+def test_run_outputs_are_collected_by_unique_run_name_without_overwrite(tmp_path: Path) -> None:
+    sandbox = tmp_path / "tester"
+    files = sandbox / "Tester" / "Agent-127.0.0.1-3000" / "MQL5" / "Files"
+    reports = sandbox / "Reports"
+    files.mkdir(parents=True)
+    reports.mkdir()
+    destination = tmp_path / "evidence" / "runs"
+    for run_id in ("run1", "run2"):
+        ini = tmp_path / f"{run_id}.ini"
+        ini.write_text(R.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"), encoding="utf-8")
+        (reports / f"np1_{run_id}.htm").write_text(f"report-{run_id}", encoding="utf-8")
+        for destination_name, emitted_name in R.emitted_names(run_id).items():
+            (files / emitted_name).write_bytes(b"" if destination_name.endswith(".zero") else f"{run_id}:{destination_name}".encode())
+        R.collect_run_outputs(sandbox, run_id, ini, destination / run_id)
+
+    assert (destination / "run1" / "native_router_rows.tsv").read_text() == "run1:native_router_rows.tsv"
+    assert (destination / "run2" / "native_router_rows.tsv").read_text() == "run2:native_router_rows.tsv"
+    assert (destination / "run1" / "order.zero").stat().st_size == 0
+    assert (destination / "run2" / "deal.zero").stat().st_size == 0
+
+
+def test_collection_rejects_ambiguous_agent_outputs(tmp_path: Path) -> None:
+    sandbox = tmp_path / "tester"
+    ini = tmp_path / "run1.ini"
+    ini.write_text("locked", encoding="utf-8")
+    reports = sandbox / "Reports"
+    reports.mkdir(parents=True)
+    (reports / "np1_run1.htm").write_text("report", encoding="utf-8")
+    for agent in ("Agent-a", "Agent-b"):
+        files = sandbox / "Tester" / agent / "MQL5" / "Files"
+        files.mkdir(parents=True)
+        for emitted_name in R.emitted_names("run1").values():
+            (files / emitted_name).write_bytes(b"")
+    with pytest.raises(RuntimeError, match="expected exactly one isolated"):
+        R.collect_run_outputs(sandbox, "run1", ini, tmp_path / "run")

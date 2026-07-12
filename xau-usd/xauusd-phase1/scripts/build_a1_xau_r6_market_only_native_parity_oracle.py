@@ -192,9 +192,12 @@ const string SOURCE_EQUIVALENCE_SHA256 = "{source_equivalence_sha256}";
 WRAPPER = r'''
 
 datetime g_last_h4_open = 0;
+bool g_numeric_output_enabled = true;
 
 string F(const double value)
   {
+   if(!g_numeric_output_enabled)
+      return "";
    if(!MathIsValidNumber(value))
       return "";
    return StringFormat("%.17g",value);
@@ -312,6 +315,7 @@ bool ExportProbes()
 void EmitRouterRow(const datetime decision)
   {
    const bool available=RegimeRouterDataAvailable();
+   g_numeric_output_enabled=available;
    const XauRegimeState state=available ? CurrentXauRegime() : XAU_REGIME_UNKNOWN;
    const double h1_high=iHigh(InpTargetSymbol,PERIOD_H1,1);
    const double h1_low=iLow(InpTargetSymbol,PERIOD_H1,1);
@@ -323,10 +327,14 @@ void EmitRouterRow(const datetime decision)
    const double d1_box_average=d1_box_width/5.0;
    const int handle=FileOpen(InpRouterRowsFileName,FILE_READ|FILE_WRITE|FILE_TXT|FILE_ANSI,'\t');
    if(handle==INVALID_HANDLE)
+     {
+      g_numeric_output_enabled=true;
       return;
+     }
    FileSeek(handle,0,SEEK_END);
    FileWrite(handle,"a1_xau_r6_native_router_row_v1",InpRunId,T(decision),InpTargetSymbol,ROUTER_SOURCE_COMMIT,ROUTER_SOURCE_BLOB,SOURCE_EQUIVALENCE_SHA256,iBars(InpTargetSymbol,PERIOD_H1),iBars(InpTargetSymbol,PERIOD_H4),iBars(InpTargetSymbol,PERIOD_D1),T(iTime(InpTargetSymbol,PERIOD_H1,1)),F(h1_high),F(h1_low),F(h1_high-h1_low),F(h1_atr),F(h1_atr>0.0 ? (h1_high-h1_low)/h1_atr : 0.0),T(iTime(InpTargetSymbol,PERIOD_H4,1)),F(iClose(InpTargetSymbol,PERIOD_H4,1)),F(IndicatorEmaClose(PERIOD_H4,20,1)),F(IndicatorEmaClose(PERIOD_H4,50,1)),F(IndicatorEmaClose(PERIOD_H4,20,6)),F(IndicatorEmaClose(PERIOD_H4,50,6)),T(iTime(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,1)),F(iClose(InpTargetSymbol,PERIOD_D1,2)),F(IndicatorEmaClose(PERIOD_D1,20,1)),F(IndicatorEmaClose(PERIOD_D1,50,1)),F(IndicatorEmaClose(PERIOD_D1,20,2)),F(IndicatorEmaClose(PERIOD_D1,50,2)),F(IndicatorEmaClose(PERIOD_D1,20,6)),F(IndicatorEmaClose(PERIOD_D1,50,6)),F(IndicatorEmaClose(PERIOD_D1,20,7)),F(IndicatorEmaClose(PERIOD_D1,50,7)),F(IndicatorAtrPrice(PERIOD_D1,14,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,60,1)),F(IndicatorAtrPercentile(PERIOD_D1,14,252,1)),F(d1_box_high),F(d1_box_low),F(d1_box_width),F(d1_box_average),F(d1_median),F(d1_median>0.0 ? d1_box_average/d1_median : 0.0),available ? "true" : "false",(int)state,RegimeStateName(state),GetLastError());
    FileClose(handle);
+   g_numeric_output_enabled=true;
   }
 
 int OnInit()

@@ -35,6 +35,7 @@ def test_oracle_has_zero_trading_surface_and_read_only_probe() -> None:
     assert "open_positions_zero" in text
     assert "pending_orders_zero" in text
     assert "FILE_COMMON" not in text
+    assert "g_numeric_output_enabled=available" in text
 
 
 def test_oracle_locks_only_run_id_and_output_names_as_inputs() -> None:

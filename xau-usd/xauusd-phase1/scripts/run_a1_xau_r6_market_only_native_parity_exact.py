@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import re
 import shutil
@@ -16,6 +17,10 @@ import build_a1_xau_r6_market_only_native_parity_oracle as B
 
 EXPECTED_BUILD = 5833
 NP1_C_AUTHORIZATION = "NP1-C_EXACT_COMMIT_REVIEWED_AUTHORIZATION"
+OUTPUT_NAMES = (
+    "native_router_rows.tsv", "native_h1_bars.tsv", "native_h4_bars.tsv", "native_d1_bars.tsv",
+    "native_contract.tsv", "native_ordercalcprofit.tsv", "native_assertions.tsv", "order.zero", "deal.zero",
+)
 CommandRunner = Callable[[Sequence[str], Path, int], object]
 
 
@@ -27,6 +32,7 @@ class CompileResult:
     source_sha256: str
     ex5_sha256: str
     returncode: int
+    metaeditor_version: str
 
 
 def sha256_file(path: Path) -> str:
@@ -47,6 +53,17 @@ def default_command_runner(command: Sequence[str], cwd: Path, timeout_seconds: i
     )
 
 
+def default_metaeditor_version_reader(path: Path) -> str:
+    literal = str(path).replace("'", "''")
+    script = f"(Get-Item -LiteralPath '{literal}').VersionInfo.FileVersion"
+    encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+    command = ["powershell", "-NoProfile", "-EncodedCommand", encoded]
+    completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False, timeout=30)
+    if completed.returncode != 0:
+        raise RuntimeError("could not read MetaEditor executable version")
+    return completed.stdout.decode("utf-8-sig", errors="replace").strip()
+
+
 def validate_metaeditor(path: Path) -> Path:
     path = path.resolve()
     if not path.is_file() or path.name.lower() != "metaeditor64.exe":
@@ -60,6 +77,7 @@ def compile_only_safety_check(
     workspace: Path,
     timeout_seconds: int = 120,
     command_runner: CommandRunner = default_command_runner,
+    version_reader: Callable[[Path], str] = default_metaeditor_version_reader,
 ) -> CompileResult:
     """Build and compile only in an explicit temporary/test workspace."""
     metaeditor = validate_metaeditor(metaeditor)
@@ -90,7 +108,12 @@ def compile_only_safety_check(
     builds = {int(value) for value in re.findall(r"\bbuild\s+(\d{4,6})\b", text, re.IGNORECASE)}
     if builds and builds != {EXPECTED_BUILD}:
         raise RuntimeError(f"compile log build mismatch: {sorted(builds)}")
-    return CompileResult(source, ex5, log, sha256_file(source), sha256_file(ex5), returncode)
+    version = version_reader(metaeditor)
+    if version != "5.0.0.5833":
+        raise RuntimeError(f"MetaEditor executable version must be 5.0.0.5833; found {version!r}")
+    normalized_log = f"MetaEditor executable version: {version}\n{text.strip()}\n"
+    log.write_text(normalized_log, encoding="utf-8", newline="\n")
+    return CompileResult(source, ex5, log, sha256_file(source), sha256_file(ex5), returncode, version)
 
 
 def render_tester_ini(*, run_id: str, report_relative: str) -> str:
@@ -118,15 +141,15 @@ UseCloud=0
 
 [TesterInputs]
 InpRunId={run_id}
-InpRouterRowsFileName=native_router_rows.tsv
-InpH1BarsFileName=native_h1_bars.tsv
-InpH4BarsFileName=native_h4_bars.tsv
-InpD1BarsFileName=native_d1_bars.tsv
-InpContractFileName=native_contract.tsv
-InpOrderCalcProfitFileName=native_ordercalcprofit.tsv
-InpAssertionsFileName=native_assertions.tsv
-InpOrderZeroFileName=order.zero
-InpDealZeroFileName=deal.zero
+InpRouterRowsFileName=np1_{run_id}_native_router_rows.tsv
+InpH1BarsFileName=np1_{run_id}_native_h1_bars.tsv
+InpH4BarsFileName=np1_{run_id}_native_h4_bars.tsv
+InpD1BarsFileName=np1_{run_id}_native_d1_bars.tsv
+InpContractFileName=np1_{run_id}_native_contract.tsv
+InpOrderCalcProfitFileName=np1_{run_id}_native_ordercalcprofit.tsv
+InpAssertionsFileName=np1_{run_id}_native_assertions.tsv
+InpOrderZeroFileName=np1_{run_id}_order.zero
+InpDealZeroFileName=np1_{run_id}_deal.zero
 """
 
 
@@ -156,11 +179,38 @@ def validate_tester_sandbox(path: Path) -> Path:
     return terminal
 
 
+def emitted_names(run_id: str) -> dict[str, str]:
+    if run_id not in {"run1", "run2"}:
+        raise ValueError(run_id)
+    return {name: f"np1_{run_id}_{name}" for name in OUTPUT_NAMES}
+
+
+def clear_emitted_outputs(tester_sandbox: Path, run_id: str) -> None:
+    for files_dir in (tester_sandbox / "Tester").glob("Agent-*/MQL5/Files"):
+        for filename in emitted_names(run_id).values():
+            (files_dir / filename).unlink(missing_ok=True)
+
+
+def collect_run_outputs(tester_sandbox: Path, run_id: str, ini: Path, run_dir: Path) -> None:
+    run_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ini, run_dir / "tester.ini")
+    report = tester_sandbox / "Reports" / f"np1_{run_id}.htm"
+    if not report.is_file():
+        raise RuntimeError(f"Strategy Tester report missing for {run_id}: {report}")
+    shutil.copyfile(report, run_dir / "native_report.htm")
+    for destination_name, emitted_name in emitted_names(run_id).items():
+        matches = list((tester_sandbox / "Tester").glob(f"Agent-*/MQL5/Files/{emitted_name}"))
+        if len(matches) != 1:
+            raise RuntimeError(f"expected exactly one isolated {run_id} output {emitted_name}; found {len(matches)}")
+        shutil.copyfile(matches[0], run_dir / destination_name)
+
+
 def run_historical_evidence_campaign(
     *,
     authorization: str,
     tester_sandbox: Path,
-    compiled_ex5: Path,
+    metaeditor: Path,
+    compile_workspace: Path,
     output_dir: Path,
     timeout_seconds: int = 7200,
     command_runner: CommandRunner = default_command_runner,
@@ -169,26 +219,42 @@ def run_historical_evidence_campaign(
     if authorization != NP1_C_AUTHORIZATION:
         raise PermissionError("real historical Strategy Tester evidence remains prohibited before NP1-C review")
     terminal = validate_tester_sandbox(tester_sandbox)
-    if not compiled_ex5.is_file():
-        raise FileNotFoundError(compiled_ex5)
+    compiled = compile_only_safety_check(metaeditor=metaeditor, workspace=compile_workspace)
+    compiled_ex5 = compiled.ex5
     experts = tester_sandbox / "MQL5" / "Experts"
     experts.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(compiled_ex5, experts / compiled_ex5.name)
     configs = tester_sandbox / "Config"
     configs.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=False)
+    compiled_dir = output_dir / "compiled"
+    compiled_dir.mkdir()
+    shutil.copyfile(compiled.source, compiled_dir / B.ORACLE_NAME)
+    shutil.copyfile(compiled.ex5, compiled_dir / compiled.ex5.name)
+    shutil.copyfile(compiled.log, compiled_dir / "compile_A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY.log")
+    B.build_oracle(compiled_dir / B.ORACLE_NAME, compiled_dir / "source_equivalence.json")
     produced: list[Path] = []
     for run_id in ("run1", "run2"):
         run_dir = output_dir / "runs" / run_id
-        run_dir.mkdir(parents=True)
         ini = configs / f"np1_{run_id}.ini"
         text = render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}")
         assert_tester_ini_contract(text)
         ini.write_text(text, encoding="utf-8", newline="\n")
+        clear_emitted_outputs(tester_sandbox, run_id)
         completed = command_runner([str(terminal), "/portable", f"/config:{ini}"], tester_sandbox, timeout_seconds)
         if int(getattr(completed, "returncode", 1)) != 0:
             raise RuntimeError(f"Strategy Tester {run_id} failed")
-        produced.append(ini)
+        collect_run_outputs(tester_sandbox, run_id, ini, run_dir)
+        produced.append(run_dir)
+    if sha256_file(compiled_dir / compiled.ex5.name) != compiled.ex5_sha256:
+        raise RuntimeError("compiled EX5 changed during evidence assembly")
+    import verify_a1_xau_r6_market_only_native_parity as verifier
+    result = verifier.finalize_evidence_directory(output_dir)
+    if result.status not in {
+        "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL",
+        "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS",
+    }:
+        raise RuntimeError(f"NP1 evidence assembly failed: {result.status}: {result.errors}")
     return produced
 
 

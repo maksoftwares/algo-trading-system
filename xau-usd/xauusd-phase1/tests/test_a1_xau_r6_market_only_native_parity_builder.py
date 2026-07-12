@@ -30,6 +30,10 @@ def test_builder_extracts_every_locked_block_byte_for_byte() -> None:
     source = B.AUTHORITATIVE_SOURCE.read_text(encoding="utf-8")
 
     assert len(equivalence["blocks"]) == len(B.BLOCK_NAMES) == 16
+    assert [row["signature"] for row in equivalence["blocks"]] == list(B.BLOCK_NAMES)
+    assert [row["generated_start_byte_offset"] for row in equivalence["blocks"]] == sorted(
+        row["generated_start_byte_offset"] for row in equivalence["blocks"]
+    )
     assert {row["signature"] for row in equivalence["blocks"]} == set(B.BLOCK_NAMES)
     for row in equivalence["blocks"]:
         source_raw = source.encode()[row["source_start_byte_offset"] : row["source_end_byte_offset"]]
