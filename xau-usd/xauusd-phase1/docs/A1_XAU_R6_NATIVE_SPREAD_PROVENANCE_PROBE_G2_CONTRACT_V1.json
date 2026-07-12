@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G1_INCOMPLETE_STOP_REVIEW_D612203A_2026_07_12.md",
-    "artifact_sha256": "baaf56db8adc84fccca7e178777ba4dc6b95c575ba1deb9430459379e6b9eaba",
+    "artifact": "A1_XAU_NP1G2A3_REVIEW_C91D16B6_2026_07_12.md",
+    "artifact_sha256": "6984b311e9dcce170436174800e7bb53e35ebfcd9ca88386a660065cd6ea13e7",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A3_PREFLIGHT_IMMUTABILITY_AND_COMPLETE_PACKET_ATTESTATION_CLOSURE"
+    "phase": "NP1-G2A4_READ_ONLY_SEMANTIC_VERIFICATION_AND_EXECUTION_PROVENANCE_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -18,6 +18,13 @@
     "partial_staging_preserved_inside_stop": true
   },
   "metadata_copy_allowlist": ["Config/accounts.dat", "Config/servers.dat"],
+  "metadata_receipt_schema": {
+    "closed_top_level_fields": ["mode", "copied"],
+    "closed_row_fields": ["source_path", "source_relative", "destination_relative", "size_bytes", "sha256"],
+    "modes": ["COPIED_ALLOWLIST", "ZERO_COPY"],
+    "reject_symlink_junction_reparse_or_hard_link": true,
+    "source_relative_must_equal_destination_relative": true
+  },
   "new_root": {
     "marker_bytes": "NP1 SPREAD PROBE G2 ONLY\n",
     "marker_name": ".a1_xau_np1_spread_probe_g2_only",
@@ -33,10 +40,11 @@
     "initially_absent": true,
     "runner_creates": true,
     "sentinel_create_read_delete": true,
-    "versioned_prefix": "np1_g2_"
+    "versioned_prefix": "np1_g2_",
+    "canonical_repository_reports_root_only": true
   },
   "review_parser": {
-    "accepted_filename": "A1_XAU_NP1G2A3_EXECUTION_AUTHORIZATION_2FE3B3C2_2026_07_13.md",
+    "accepted_filename": "A1_XAU_NP1G2A4_EXECUTION_AUTHORIZATION_C91D16B6_2026_07_13.md",
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
     "reject_competing_fail_or_no_go": true
@@ -44,15 +52,24 @@
   "stop_packet": {
     "automatic_on_every_failure": true,
     "exact_one_match_output_collection": true,
-    "preserve_root_terminal_tester_and_agent_logs": true,
+    "preserve_only_fresh_or_changed_root_terminal_tester_and_agent_logs": true,
+    "preserve_authority_and_post_reports_precondition_evidence": true,
     "verified_nonrecursive_manifest": true
+  },
+  "semantic_verification": {
+    "temporary_copy_only": true,
+    "real_analyzer_recomputation": true,
+    "byte_compare_derived_outputs": true,
+    "original_packet_must_remain_unchanged": true
   },
   "reviewed": {
     "g1a_commit": "2bc44e1e69b8c3ca904c17db0f1786eb469f461c",
     "g1a_tree": "ab122ac7b667e56a5c3bc38d451b8d2d0e20c535",
     "g1b_commit": "d612203aeba27d8073c089c28dce5840d4a2d9fa",
     "g1b_tree": "4bf1d8fb662364551ea745b05155aa1dce950b85",
-    "g1b_status": "NP1_G1_EVIDENCE_INVALID"
+    "g1b_status": "NP1_G1_EVIDENCE_INVALID",
+    "g2a3_commit": "c91d16b6adc8b0e3d86f4ab75266da6006dd45f8",
+    "g2a3_tree": "dfa32761e08f2b1968bca4558723d488dee17554"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
