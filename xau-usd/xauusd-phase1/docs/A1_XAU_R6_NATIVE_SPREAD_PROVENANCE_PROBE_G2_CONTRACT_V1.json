@@ -1,0 +1,45 @@
+{
+  "authorization": {
+    "artifact": "A1_XAU_NP1G1_INCOMPLETE_STOP_REVIEW_D612203A_2026_07_12.md",
+    "artifact_sha256": "baaf56db8adc84fccca7e178777ba4dc6b95c575ba1deb9430459379e6b9eaba",
+    "mt5_execution_authorized": false,
+    "phase": "NP1-G2A_REPORT_DIRECTORY_PRECONDITION_AND_STOP_PACKET_HARDENING"
+  },
+  "future_budget_reserved_not_activated": {
+    "metaeditor_compilations_maximum": 1,
+    "strategy_tester_order": ["warmup", "probe1", "probe2"],
+    "strategy_tester_runs_maximum": 3
+  },
+  "future_outputs": {
+    "complete": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_20260712",
+    "mutually_exclusive": true,
+    "stop": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712"
+  },
+  "metadata_copy_allowlist": ["Config/accounts.dat", "Config/servers.dat"],
+  "new_root": {
+    "marker_bytes": "NP1 SPREAD PROBE G2 ONLY\n",
+    "marker_name": ".a1_xau_np1_spread_probe_g2_only",
+    "path": "C:\\MT5A1NP1SpreadProvenanceCleanG2",
+    "quarantined_roots": ["C:\\MT5A1NP1SpreadProvenanceClean", "C:\\MT5A1M5MomentumBacktest"]
+  },
+  "prohibitions": [
+    "modify_g1_bytes", "execute_mt5_in_g2a", "execute_metaeditor_in_g2a",
+    "copy_history_cache_reports_logs_profiles_charts_presets_or_mql5_files",
+    "normalize_native_spread", "canonical_np1c", "census", "profitability", "deployment", "broker_action"
+  ],
+  "reports_precondition": {
+    "initially_absent": true,
+    "runner_creates": true,
+    "sentinel_create_read_delete": true,
+    "versioned_prefix": "np1_g2_"
+  },
+  "reviewed": {
+    "g1a_commit": "2bc44e1e69b8c3ca904c17db0f1786eb469f461c",
+    "g1a_tree": "ab122ac7b667e56a5c3bc38d451b8d2d0e20c535",
+    "g1b_commit": "d612203aeba27d8073c089c28dce5840d4a2d9fa",
+    "g1b_tree": "4bf1d8fb662364551ea745b05155aa1dce950b85",
+    "g1b_status": "NP1_G1_EVIDENCE_INVALID"
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
+  "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
+}

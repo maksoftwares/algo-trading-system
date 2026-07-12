@@ -1,0 +1,80 @@
+{
+  "future_budget_reserved_not_activated": {
+    "metaeditor_compilations_maximum": 1,
+    "strategy_tester_order": [
+      "warmup",
+      "probe1",
+      "probe2"
+    ],
+    "strategy_tester_runs_maximum": 3
+  },
+  "mt5_execution_authorized": false,
+  "pinned_files": {
+    "docs/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_CONTRACT_V1.json": {
+      "sha256": "a7edef3344edf8d61259519450a64cff8cd7ae4a8e42c657b937e167a845cb44",
+      "size_bytes": 1671
+    },
+    "docs/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_CONTRACT_V1.json": {
+      "sha256": "a9785b1f21095eadbe2a06fdd30596b07a6c37b78043e1f12bdf965c89b073a7",
+      "size_bytes": 1965
+    },
+    "mt5/Experts/A1XauR6NativeSpreadProvenanceProbe.mq5": {
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_20260712/analysis/provenance_classification.json": {
+      "sha256": "7d0ac3200660a152a388f83ce979e0d3609249584629f736d8c63e482b0c71a6",
+      "size_bytes": 626
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_20260712/manifest.json": {
+      "sha256": "ac5928652f7ca77a77b307a09f666f01d5c61a05e94a6620dcf2a1b2ba39933b",
+      "size_bytes": 2184
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_20260712/manifest.sha256": {
+      "sha256": "0b77c0a32d1807c360e1662add2f3911a885eb476a2836a43b6844e67c6c8185",
+      "size_bytes": 65
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_20260712/result.json": {
+      "sha256": "d95e53bb8c6da79863b8ac3e8d02701e64d37e65acec1d3690e15155267e3f9e",
+      "size_bytes": 1656
+    },
+    "scripts/analyze_a1_xau_r6_native_spread_provenance_probe.py": {
+      "sha256": "059e50958797785f184e68edf863fba548ba51c3d450de37b074163119b17cfc",
+      "size_bytes": 13697
+    },
+    "scripts/build_a1_xau_r6_native_spread_provenance_probe.py": {
+      "sha256": "1c3b916a2c880e1ae59630826ae899c3f53ac916891e17ffa9dd726fe8fb8be5",
+      "size_bytes": 11220
+    },
+    "scripts/run_a1_xau_r6_native_spread_provenance_probe.py": {
+      "sha256": "99893d6e27840cf630ff33eea7c7b6841dee2bed401a6bec04511572b04b05b3",
+      "size_bytes": 13655
+    },
+    "scripts/run_a1_xau_r6_native_spread_provenance_probe_g2.py": {
+      "sha256": "2f3d2dc6fc2f710e62d3666a600cedc9ff127461a6786a5afbc61e0883010640",
+      "size_bytes": 12496
+    },
+    "tests/test_a1_xau_r6_native_spread_provenance_probe.py": {
+      "sha256": "7f9356a8ae53ed13f9a05fe48f7c388ed7ec5f96388cbde371a0509fccdccc9a",
+      "size_bytes": 11987
+    },
+    "tests/test_a1_xau_r6_native_spread_provenance_probe_g2.py": {
+      "sha256": "eeace7368dabc1fbc0addba95fd290fcbf48b5c872eaf0826c83040281a86db6",
+      "size_bytes": 9990
+    }
+  },
+  "review_artifact": {
+    "filename": "A1_XAU_NP1G1_INCOMPLETE_STOP_REVIEW_D612203A_2026_07_12.md",
+    "sha256": "baaf56db8adc84fccca7e178777ba4dc6b95c575ba1deb9430459379e6b9eaba",
+    "size_bytes": 16136
+  },
+  "reviewed_identities": {
+    "g1a_commit": "2bc44e1e69b8c3ca904c17db0f1786eb469f461c",
+    "g1a_tree": "ab122ac7b667e56a5c3bc38d451b8d2d0e20c535",
+    "g1b_commit": "d612203aeba27d8073c089c28dce5840d4a2d9fa",
+    "g1b_tree": "4bf1d8fb662364551ea745b05155aa1dce950b85"
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_lock_v1",
+  "self_canonical_sha256": "7f824bf16f7c6fdec4b2a1661418ea0306fbd224809ec786bd7389625e2f424c",
+  "self_size_bytes": 3461
+}
