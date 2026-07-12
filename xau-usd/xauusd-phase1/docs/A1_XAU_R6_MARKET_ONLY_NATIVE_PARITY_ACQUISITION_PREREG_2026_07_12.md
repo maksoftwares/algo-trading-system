@@ -58,6 +58,20 @@ The NP1-B builder must extract the locked enum/functions and their transitive pu
 
 The generated wrapper may contain only fixed inputs, logging, Strategy Tester lifecycle handlers, new-H4-boundary detection, market-bar export, contract export, read-only `OrderCalcProfit` probes, and source/evidence assertions. It may not contain a trade library, order request, order send, position management, or history-order/deal processing surface.
 
+## 3.1 Pinned Python parity authority
+
+NP1-B must import and call the existing R6 Python Router directly:
+
+```text
+path: xau-usd/xauusd-phase1/scripts/build_a1_xau_r6_distribution_break_failed_reclaim_census.py
+SHA256: 1b79e94d2a1c4a524084c4d6b97e727b74939aa5188fc18c83286843355f60cf
+primary function: classify_router
+numerical/data dependencies: Bar, validate_bars, true_ranges, wilder_atr, ema,
+  percentile_rank, _trend_stack, _last_completed_index
+```
+
+The verifier may use `statistics.median`, as the pinned module does. It must not implement a second Python Router, EMA, ATR, percentile, trend-stack, completed-bar-index, or state-priority path in any NP1-B file. The parity report must describe the output of the pinned implementation actually used by C2, not a verifier-local substitute. Any hash or callable mismatch stops with `PYTHON_ROUTER_AUTHORITY_MISMATCH`.
+
 ## 4. Fixed Router inputs
 
 ```text
@@ -135,6 +149,25 @@ Every native row is classified `NATIVE_ORDERCALCPROFIT_PROBE`. Later Python line
 
 Both runs use the same EX5 and effective inputs. Causal market-only outputs must be byte-identical after normalizing only the explicitly declared run ID and report timestamp fields. The verifier binds every Router row to canonical causal bar prefixes through H1/H4/D1 prefix-chain hashes.
 
+Parity PASS is frozen before evidence:
+
+```text
+native Router decision-row coverage: exactly 100%
+decision key/order equality: exactly 100%
+H1/H4/D1 causal prefix-chain equality: exactly 100%
+data-availability exact-match rate: exactly 100%
+state-code and state-name exact-match rate: exactly 100%
+EMA absolute and relative tolerance: 1e-10
+ATR absolute and relative tolerance: 1e-10
+percentile absolute and relative tolerance: 1e-10
+compression-metric absolute and relative tolerance: 1e-10
+OrderCalcProfit absolute-loss absolute tolerance: USD 1e-9
+OrderCalcProfit absolute-loss relative tolerance: 1e-10
+all twelve OrderCalcProfit probes: required
+```
+
+For a numeric value, parity requires `abs(native-python) <= max(abs_tol, rel_tol * max(abs(native), abs(python)))`. NaN, infinity, a missing required value, an extra/missing row, a duplicate key, or a prefix mismatch is an automatic parity FAIL. Empty native numerics are permitted only where `data_available=false`, and the Python side must be unavailable at the same key.
+
 ## 9. Zero-action contract
 
 Both runs must prove all of:
@@ -149,6 +182,8 @@ no pending order
 compile = 0 errors / 0 warnings
 all copied source blocks exactly match d5134057
 ```
+
+Each run's `native_assertions.tsv` must contain passing `open_positions_zero` and `pending_orders_zero` rows in addition to the zero-trade, zero-deal, and zero-byte sentinel assertions.
 
 The static source scan must reject every forbidden token in the source contract. `OrderCalcProfit` is the only permitted order-related calculation API and is read-only.
 
@@ -169,6 +204,8 @@ Native evidence plus Python parity FAIL is valid diagnostic evidence for a later
 ## 11. Validation and attestation
 
 The NP1-B/NP1-C verifier must check pinned source identity, exact copied blocks, source safety, compile cleanliness, effective inputs, environment, two-run completeness, monotonic/unique rows, causal prefix identity, complete contract fields, successful probes, zero trades/deals/orders/positions, output schema conformance, normalized repetition equality, and every artifact hash/size.
+
+The evidence manifest is nonrecursive. `manifest.json` lists every exact-tree artifact except `manifest.json` and `manifest.sha256`, with each listed path, byte size, and SHA256. `manifest.sha256` contains only the lowercase SHA256 of the exact `manifest.json` bytes plus a terminating newline. Neither manifest file lists or hashes itself.
 
 The attestation records exact HEAD/tree/clean status; OS, architecture, MT5 and MetaEditor builds; Python/dependency versions; exact commands; stdout/stderr; exit codes; command-output hashes; and hashes of every source, EX5, INI, report, log, parity file, and manifest. Run1 and run2 must use the same EX5 hash. No file changes after attestation.
 

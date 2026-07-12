@@ -1,16 +1,16 @@
 {
   "artifacts": {
     "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_PREREG_2026_07_12.md": {
-      "sha256": "eecb09bde35852ef4f3f10f457415b0ea67ea4a5ae52dd0a4f76da3e0ba8252f",
-      "size_bytes": 9015
+      "sha256": "c7922ec677cc3c57035b5e82d51c2aef23d2e2502b28e9d31362582e67920015",
+      "size_bytes": 11449
     },
     "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_OUTPUT_SCHEMA_V1.json": {
-      "sha256": "aba5278e8566283e70504d97d138b31b80036c9746e33dca8ce63d4d97f78851",
-      "size_bytes": 9084
+      "sha256": "5a2357435a39a2f93e5dc530856e5bebc2dd718d2b71ecfe8ea0795a69468277",
+      "size_bytes": 10737
     },
     "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_SOURCE_CONTRACT_V1.json": {
-      "sha256": "8b79efb151027a6c90dc64033dd52691c5a1f7417bea80475f46a0e8c52a6c85",
-      "size_bytes": 7509
+      "sha256": "555e098ddfc46caf6b6d30bd00bfb00698ec814b011646e0e7164a3434ff1945",
+      "size_bytes": 9179
     }
   },
   "authority": {
@@ -20,8 +20,10 @@
     "independent_specialist_direction_sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af",
     "is1_a2_approval_artifact": "A1_XAU_IS1A2_FAIL_CLOSED_GOVERNANCE_REVIEW_CD40A818_2026_07_12.md",
     "is1_a2_approval_sha256": "e7bb6e572120e4092c4e3868a9381d0c49ff708f367ad1d87a2a1c9c1b4ed0da",
-    "predecessor_commit": "cd40a818f9cdce87c5e5f9fef785cad3da39fc20",
-    "predecessor_tree": "17001bc0f3a3ec72e52f9927b820b18112722a4f"
+    "np1_a_review_artifact": "A1_XAU_NP1A_LOCK_REVIEW_C109C51F_2026_07_12.md",
+    "np1_a_review_sha256": "c793fe9db4c84d515b12edbdfd0440b759fbadbf8ff288d9df5e78c899658549",
+    "predecessor_commit": "c109c51f8b128d58db20e1f0ea91b8df0c4a4635",
+    "predecessor_tree": "bc49b13b462a0cecf6f82e1b5be8e04cba2ddf7d"
   },
   "boundary": {
     "broker_action_authorized": false,
@@ -56,6 +58,13 @@
       "sha256": "63f2812e469c4797d1ef3ee904bb25370a9b8fb96a18b8a3cf3c4aa0fc2635a7",
       "size_bytes": 2556
     },
+    "python_router_authority": {
+      "function": "classify_router",
+      "path": "scripts/build_a1_xau_r6_distribution_break_failed_reclaim_census.py",
+      "reimplementation_in_np1_b_authorized": false,
+      "sha256": "1b79e94d2a1c4a524084c4d6b97e727b74939aa5188fc18c83286843355f60cf",
+      "size_bytes": 39085
+    },
     "r6_census_preregistration": {
       "path": "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md",
       "sha256": "a5f10f756faddc8d20a91ba668f03c0ccc43e1d6e253693b256148b296898fa3",
@@ -78,7 +87,7 @@
     "np1_b_file_count": 8,
     "np1_b_result_output_authorized": false
   },
-  "phase": "NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS_ONLY",
+  "phase": "NP1-A1_PARITY_AUTHORITY_AND_EVIDENCE_CONTRACT_CLOSURE",
   "primary_specialist": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
   "schema_version": "a1_xau_r6_market_only_native_parity_lock_manifest_v1",
   "source_lineage": {

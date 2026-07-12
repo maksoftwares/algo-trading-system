@@ -87,9 +87,13 @@
   ],
   "floating_point_format": "%.17g",
   "manifest": {
-    "all_exact_tree_files_required": true,
+    "all_exact_tree_files_required_except_manifest_pair": true,
+    "excluded_from_manifest_json_artifact_rows": ["manifest.json", "manifest.sha256"],
     "fields_per_artifact": ["relative_path", "size_bytes", "sha256"],
+    "manifest_json_must_not_hash_itself": true,
     "manifest_hash_file": "manifest.sha256",
+    "manifest_hash_file_content": "lowercase_sha256_of_exact_manifest_json_bytes_plus_newline",
+    "manifest_hash_file_must_not_hash_itself": true,
     "manifest_json": "manifest.json",
     "unexpected_files_allowed": false
   },
@@ -108,7 +112,9 @@
       "report_zero_trades",
       "report_zero_deals",
       "order_zero_bytes",
-      "deal_zero_bytes"
+      "deal_zero_bytes",
+      "open_positions_zero",
+      "pending_orders_zero"
     ],
     "required_value": true
   },
@@ -206,6 +212,24 @@
     "strictly_increasing_timestamp_per_run_symbol": true
   },
   "parity": {
+    "acceptance": {
+      "atr": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+      "compression_metrics": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+      "data_availability_exact_match_rate": 1.0,
+      "decision_key_and_order_exact_match_rate": 1.0,
+      "ema": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+      "missing_extra_duplicate_or_nonfinite_action": "PYTHON_PARITY_FAIL",
+      "native_decision_row_coverage": 1.0,
+      "ordercalcprofit_absolute_loss": {
+        "absolute_tolerance_account_currency": 1e-9,
+        "relative_tolerance": 1e-10,
+        "required_probe_count": 12
+      },
+      "percentile": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+      "prefix_chain_exact_match_rate": 1.0,
+      "state_code_and_name_exact_match_rate": 1.0,
+      "tolerance_formula": "abs(native-python)<=max(abs_tol,rel_tol*max(abs(native),abs(python)))"
+    },
     "native_prefix_chain_hashes_columns": [
       "timestamp_broker",
       "symbol",
@@ -253,6 +277,13 @@
       "mismatch_count_by_native_state"
     ],
     "two_run_normalized_hash_equality_required": true
+  },
+  "python_router_authority": {
+    "direct_import_and_call_required": true,
+    "function": "classify_router",
+    "module_reimplementation_in_np1_b_forbidden": true,
+    "path": "xau-usd/xauusd-phase1/scripts/build_a1_xau_r6_distribution_break_failed_reclaim_census.py",
+    "sha256": "1b79e94d2a1c4a524084c4d6b97e727b74939aa5188fc18c83286843355f60cf"
   },
   "phase": "R6-NP1_MARKET_ONLY_NATIVE_PARITY_AND_CONTRACT_EVIDENCE_ACQUISITION",
   "report": {

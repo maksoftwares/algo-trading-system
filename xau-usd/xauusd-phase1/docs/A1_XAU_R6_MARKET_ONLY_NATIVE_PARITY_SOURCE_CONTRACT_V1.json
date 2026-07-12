@@ -47,6 +47,7 @@
     "mfe_mae_authorized": false,
     "mt5_execution_authorized_in_np1_a": false,
     "np1_b_authorized_by_np1_a_without_review": false,
+    "np1_b_python_router_reimplementation_authorized": false,
     "r6_detector_change_authorized": false,
     "runtime_change_authorized": false,
     "target_or_exit_simulation_authorized": false
@@ -163,6 +164,43 @@
     }
   },
   "phase": "R6-NP1_MARKET_ONLY_NATIVE_PARITY_AND_CONTRACT_EVIDENCE_ACQUISITION",
+  "parity_acceptance": {
+    "atr": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+    "compression_metrics": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+    "data_availability_exact_match_rate": 1.0,
+    "decision_key_and_order_exact_match_rate": 1.0,
+    "ema": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+    "missing_extra_duplicate_or_nonfinite_action": "PYTHON_PARITY_FAIL",
+    "native_decision_row_coverage": 1.0,
+    "ordercalcprofit_absolute_loss": {
+      "absolute_tolerance_account_currency": 1e-9,
+      "relative_tolerance": 1e-10,
+      "required_probe_count": 12
+    },
+    "percentile": {"absolute_tolerance": 1e-10, "relative_tolerance": 1e-10},
+    "prefix_chain_exact_match_rate": 1.0,
+    "state_code_and_name_exact_match_rate": 1.0,
+    "tolerance_formula": "abs(native-python)<=max(abs_tol,rel_tol*max(abs(native),abs(python)))"
+  },
+  "python_router_authority": {
+    "direct_import_and_call_required": true,
+    "function": "classify_router",
+    "hash_or_callable_mismatch_action": "PYTHON_ROUTER_AUTHORITY_MISMATCH",
+    "module_reimplementation_in_np1_b_forbidden": true,
+    "numerical_and_data_dependencies": [
+      "Bar",
+      "validate_bars",
+      "true_ranges",
+      "wilder_atr",
+      "ema",
+      "percentile_rank",
+      "_trend_stack",
+      "_last_completed_index"
+    ],
+    "path": "xau-usd/xauusd-phase1/scripts/build_a1_xau_r6_distribution_break_failed_reclaim_census.py",
+    "sha256": "1b79e94d2a1c4a524084c4d6b97e727b74939aa5188fc18c83286843355f60cf",
+    "standard_library_dependency": "statistics.median"
+  },
   "repetitions": {
     "causal_outputs_normalized_byte_identical": true,
     "excluded_normalization_fields": ["run_id", "report_timestamp"],
