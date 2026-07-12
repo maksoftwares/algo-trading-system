@@ -162,7 +162,7 @@ def _synthetic_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, availa
         inputs = " ".join(f"{key}={value}" for key, value in R.parse_ini_exact(R.render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}"))["TesterInputs"].items())
         report_fields = {
             "Expert": "A1XauR6MarketOnlyNativeParityOracle", "Symbol": "XAUUSD",
-            "Period": "M5 (2015.06.01 - 2026.06.30)",
+            "Period": "M5 (2015.06.01 - 2026.07.01)",
             "Model": "Every tick based on real ticks", "Initial Deposit": "10000.00 USD", "Leverage": "1:50",
             "Bars": "1000", "Ticks": "10000", "Total Trades": "0", "Total Deals": "0",
         }
@@ -282,8 +282,15 @@ def _attestation(evidence: Path) -> dict:
         "dependency_versions": {"python_implementation": platform.python_implementation(), "pytest": pytest.__version__, "third_party_runtime_dependencies": {}},
         "mt5_terminal_build": 5833, "metaeditor_version": "5.0.0.5833",
         "same_ex5_sha256_run1_run2": V.sha256_file(ex5),
+        "history_stability": {
+            "status": "NP1_RETRY_HISTORY_STABLE",
+            "same_ex5_sha256_warmup_run1_run2": V.sha256_file(ex5),
+            "warmup_artifact_sha256": {"native_report.htm": "d" * 64},
+            "official_fingerprints": {"contract_sha256": V.sha256_file(V.RETRY_CONTRACT), "runs": {}},
+        },
         "commands": [
             command(["MetaEditor64.exe", "/compile:oracle", "/log:compile.log"]),
+            command(["terminal64.exe", "/portable", "/config:np1_warmup.ini"]),
             command(["terminal64.exe", "/portable", "/config:np1_run1.ini"]),
             command(["terminal64.exe", "/portable", "/config:np1_run2.ini"]),
             command([sys.executable, str(SCRIPTS / "verify_a1_xau_r6_market_only_native_parity.py"), str(evidence), "--finalize", "--attestation-json", "attestation.json", "--quiet"]),
@@ -377,6 +384,17 @@ def test_real_mt5_report_shape_and_locked_iso_timestamp_contract(tmp_path: Path)
         V._dt("2016.07.01 00:00:00")
 
 
+def test_native_report_accepts_configured_todate_and_rejects_other_endpoint(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    evidence, _, _ = _synthetic_packet(tmp_path, monkeypatch)
+    assert _finalize(evidence).status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS"
+    for run_id in ("run1", "run2"):
+        path = evidence / "runs" / run_id / "native_report.htm"
+        path.write_text(path.read_text(encoding="utf-8").replace("2026.07.01", "2026.06.30"), encoding="utf-8")
+    result = _finalize(evidence)
+    assert result.status == "R6_NP1_EVIDENCE_INVALID"
+    assert any("native report period mismatch" in error for error in result.errors)
+
+
 @pytest.mark.parametrize("duplicate_value", ["282644", "999999"])
 def test_native_report_rejects_duplicate_or_conflicting_labels(tmp_path: Path, duplicate_value: str) -> None:
     report = tmp_path / "native_report.htm"
@@ -386,13 +404,117 @@ def test_native_report_rejects_duplicate_or_conflicting_labels(tmp_path: Path, d
         V.parse_native_report(report)
 
 
-def test_weekend_gap_requires_exact_friday_close_and_monday_reopen_boundaries() -> None:
-    assert V.expected_weekend_gap("H1", datetime(2026, 7, 10, 19), datetime(2026, 7, 13, 1))
-    assert V.expected_weekend_gap("H4", datetime(2026, 7, 10, 16), datetime(2026, 7, 13, 0))
-    assert V.expected_weekend_gap("D1", datetime(2026, 7, 10, 0), datetime(2026, 7, 13, 0))
-    assert not V.expected_weekend_gap("H1", datetime(2026, 7, 9, 0), datetime(2026, 7, 13, 0))
-    assert not V.expected_weekend_gap("H4", datetime(2026, 7, 10, 8), datetime(2026, 7, 13, 0))
-    assert not V.expected_weekend_gap("D1", datetime(2026, 7, 8, 0), datetime(2026, 7, 13, 0))
+def test_exact_session_whitelist_contains_weekend_maintenance_and_holiday_rows() -> None:
+    contract, allowed = V.load_retry_contracts()
+    assert contract["session_gap_policy"]["mode"] == "EXACT_INTERVAL_WHITELIST"
+    assert ("2015-06-05T20:00:00", "2015-06-07T22:00:00") in allowed["H1"]
+    assert ("2015-06-01T20:00:00", "2015-06-01T22:00:00") in allowed["H1"]
+    assert any(first.startswith("2015-12-2") and (datetime.fromisoformat(second) - datetime.fromisoformat(first)) > timedelta(days=1) for first, second in allowed["H1"])
+
+
+def test_exact_whitelist_accepts_listed_gap_and_rejects_unlisted_or_missing(tmp_path: Path) -> None:
+    _, schema, _ = V.load_contracts()
+    router = V.load_python_router(V.load_contracts()[0])
+    start, end = datetime(2015, 6, 5, 20), datetime(2015, 6, 8, 0)
+    listed = ("2015-06-05T20:00:00", "2015-06-07T22:00:00")
+    rows = _bar_rows(schema, "H1", [start, datetime(2015, 6, 7, 22), datetime(2015, 6, 7, 23)])
+    path = tmp_path / "native_h1_bars.tsv"
+    _write_tsv(path, schema["bar_exports"]["columns"], rows)
+    V.load_bar_rows(path, schema, router, timeframe="H1", test_start=start, test_end=end, allowed_session_gaps={listed}, require_exact_session_gaps=True)
+    with pytest.raises(ValueError, match="unlisted"):
+        V.load_bar_rows(path, schema, router, timeframe="H1", test_start=start, test_end=end, allowed_session_gaps=set())
+    continuous = _bar_rows(schema, "H1", [start + timedelta(hours=i) for i in range(52)])
+    _write_tsv(path, schema["bar_exports"]["columns"], continuous)
+    with pytest.raises(ValueError, match="listed market-history gap missing"):
+        V.load_bar_rows(path, schema, router, timeframe="H1", test_start=start, test_end=end, allowed_session_gaps={listed}, require_exact_session_gaps=True)
+
+
+def test_retry_lock_ignores_occurrence_count_and_fails_closed_on_hash_mismatch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(V, "ROOT", tmp_path)
+    contract_path = tmp_path / "docs" / "contract.json"
+    source_path = tmp_path / "analysis" / "gaps.csv"
+    manifest_path = tmp_path / "outputs" / "manifest.json"
+    contract_path.parent.mkdir(parents=True)
+    source_path.parent.mkdir(parents=True)
+    manifest_path.parent.mkdir(parents=True)
+    source_path.write_text(
+        "timeframe,prior_bar_time,next_bar_time,present_in_run1,present_in_run2,occurrence_count\n"
+        "H1,2020-01-01T00:00:00,2020-01-01T02:00:00,true,true,999\n"
+        "H4,2020-01-01T00:00:00,2020-01-01T08:00:00,true,true,2\n"
+        "D1,2020-01-03T00:00:00,2020-01-06T00:00:00,true,true,2\n",
+        encoding="utf-8",
+    )
+    contract = {
+        "schema_version": "a1_xau_r6_capitalcom_session_and_history_stability_contract_v1",
+        "session_gap_policy": {
+            "mode": "EXACT_INTERVAL_WHITELIST", "allowed_interval_filter": {"ignore_columns": ["occurrence_count"]},
+            "source": {"path": "analysis/gaps.csv", "sha256": V.sha256_file(source_path)},
+        },
+        "source_artifacts": {},
+    }
+    contract_path.write_text(json.dumps(contract), encoding="utf-8")
+    manifest = {
+        "schema_version": "a1_xau_r6_np1_retry_lock_manifest_v1",
+        "artifacts": {"docs/contract.json": {"sha256": V.sha256_file(contract_path), "size_bytes": contract_path.stat().st_size}},
+    }
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    _, allowed = V.load_retry_contracts(contract_path, manifest_path)
+    assert ("2020-01-01T00:00:00", "2020-01-01T02:00:00") in allowed["H1"]
+    source_path.write_text(source_path.read_text(encoding="utf-8").replace(",999", ",1"), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="source hash mismatch"):
+        V.load_retry_contracts(contract_path, manifest_path)
+    source_path.write_text(source_path.read_text(encoding="utf-8").replace(",1", ",999"), encoding="utf-8")
+    manifest["artifacts"]["docs/contract.json"]["sha256"] = "0" * 64
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(RuntimeError, match="retry-manifest mismatch"):
+        V.load_retry_contracts(contract_path, manifest_path)
+
+
+@pytest.mark.parametrize("mutation", ["report_ticks", "bar_hash", "negative_spread"])
+def test_official_history_instability_stops_before_finalization(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mutation: str,
+) -> None:
+    evidence, source, _ = _synthetic_packet(tmp_path, monkeypatch)
+    contract = {
+        "configured_period": {
+            "native_report_period": "M5 (2015.06.01 - 2026.07.01)",
+            "test_from_inclusive_broker_time": source["tester_environment"]["test_from_inclusive_broker_time"],
+            "test_to_exclusive_broker_time": source["tester_environment"]["test_to_exclusive_broker_time"],
+        }
+    }
+    monkeypatch.setattr(V, "load_retry_contracts", lambda: (contract, {"H1": set(), "H4": set(), "D1": set()}))
+    assert V.official_history_fingerprints(evidence)["status"] == "NP1_RETRY_HISTORY_STABLE"
+    if mutation == "report_ticks":
+        path = evidence / "runs" / "run2" / "native_report.htm"
+        path.write_text(path.read_text(encoding="utf-8").replace("Ticks:</td><td>10000", "Ticks:</td><td>10001"), encoding="utf-8")
+    else:
+        path = evidence / "runs" / "run2" / "native_h1_bars.tsv"
+        rows = list(csv.DictReader(path.open(encoding="utf-8"), delimiter="\t"))
+        rows[0]["close" if mutation == "bar_hash" else "spread"] = "999" if mutation == "bar_hash" else "-1"
+        _write_tsv(path, list(rows[0]), rows)
+    with pytest.raises(RuntimeError, match="NP1_RETRY_HISTORY_NOT_STABLE"):
+        V.official_history_fingerprints(evidence)
+
+
+@pytest.mark.parametrize("surface", ["bar", "router"])
+def test_bar_and_router_exclusive_boundary_is_fail_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, surface: str,
+) -> None:
+    evidence, _, schema = _synthetic_packet(tmp_path, monkeypatch)
+    for run_id in ("run1", "run2"):
+        if surface == "bar":
+            path = evidence / "runs" / run_id / "native_h1_bars.tsv"
+            rows = V.read_tsv(path, schema["bar_exports"]["columns"])
+            rows.append({**rows[-1], "open_time_broker": "2016-07-01T08:00:00"})
+            _write_tsv(path, schema["bar_exports"]["columns"], rows)
+        else:
+            path = evidence / "runs" / run_id / "native_router_rows.tsv"
+            rows = V.read_tsv(path, schema["native_router_rows"]["columns"])
+            rows[-1]["timestamp_broker"] = "2016-07-01T08:00:00"
+            _write_tsv(path, schema["native_router_rows"]["columns"], rows)
+    result = _finalize(evidence)
+    assert result.status == "R6_NP1_EVIDENCE_INVALID"
+    assert any("exclusive evidence boundary" in error for error in result.errors)
 
 
 def test_available_state_fixture_exercises_numeric_router_parity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -459,7 +581,7 @@ def test_long_weekend_spanning_history_gap_is_rejected(tmp_path: Path, monkeypat
         _write_tsv(path, schema["bar_exports"]["columns"], rows)
     result = _finalize(evidence)
     assert result.status == "R6_NP1_EVIDENCE_INVALID"
-    assert any("unexpected market-history gap" in error for error in result.errors)
+    assert any("unlisted market-history gap" in error for error in result.errors)
 
 
 @pytest.mark.parametrize(
@@ -539,7 +661,7 @@ def test_attestation_binds_exact_review_dependencies_and_command_streams(
         ("zero", "R6_NP1_ZERO_ACTION_CONTRACT_FAIL"),
         ("parity", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
         ("coverage", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
-        ("determinism", "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL"),
+        ("determinism", "R6_NP1_EVIDENCE_INVALID"),
         ("ordercalc", "R6_NP1_EVIDENCE_INVALID"),
     ],
 )

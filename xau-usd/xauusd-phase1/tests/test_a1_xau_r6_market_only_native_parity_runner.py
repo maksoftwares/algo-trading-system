@@ -163,7 +163,10 @@ def test_exact_ini_parser_rejects_duplicate_keys_and_stale_report(tmp_path: Path
         R.collect_run_outputs(sandbox, "run1", ini, tmp_path / "run", not_before_ns=time.time_ns())
 
 
-def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize("scenario", ["stable", "history_drift", "ex5_drift"])
+def test_end_to_end_fake_campaign_uses_one_warmup_two_official_runs_and_no_fourth(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scenario: str,
+) -> None:
     sandbox = tmp_path / "tester"
     sandbox.mkdir()
     (sandbox / ".a1_xau_np1_tester_only").write_text("NP1 TESTER ONLY\n", encoding="utf-8")
@@ -184,6 +187,8 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
             (reports / f"np1_{run_id}.htm").write_text(f"fresh-{run_id}", encoding="utf-8")
             for destination_name, emitted_name in R.emitted_names(run_id).items():
                 (agent_files / emitted_name).write_bytes(b"" if destination_name.endswith(".zero") else f"{run_id}:{destination_name}".encode())
+            if scenario == "ex5_drift" and run_id == "warmup":
+                (sandbox / "MQL5" / "Experts" / "A1XauR6MarketOnlyNativeParityOracle.ex5").write_bytes(b"changed")
             return SimpleNamespace(returncode=0, stdout=b"terminal-out", stderr=b"")
 
     captured = {}
@@ -197,11 +202,16 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
         return SimpleNamespace(status="R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", errors=())
 
     monkeypatch.setattr(verifier, "finalize_evidence_directory", fake_finalize)
+    def fake_history_fingerprints(path: Path):
+        if scenario == "history_drift":
+            raise RuntimeError("NP1_RETRY_HISTORY_NOT_STABLE: synthetic drift")
+        return {"status": "NP1_RETRY_HISTORY_STABLE", "contract_sha256": "d" * 64, "runs": {}}
+    monkeypatch.setattr(verifier, "official_history_fingerprints", fake_history_fingerprints)
     monkeypatch.setattr(R, "capture_clean_git_identity", lambda: {"git_head": "a" * 40, "git_tree": "b" * 40, "git_status_porcelain": ""})
     monkeypatch.setattr(
         R, "build_campaign_attestation",
-        lambda output_dir, compiled, commands, git_identity, review_authority, finalizer_commands: {
-            "commands": commands, "artifact_sha256": {}
+        lambda output_dir, compiled, commands, git_identity, review_authority, finalizer_commands, history_stability: {
+            "commands": commands, "history_stability": history_stability, "artifact_sha256": {}
         },
     )
     terminal = FakeTerminal()
@@ -213,16 +223,30 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
         f"REVIEWED_GENERATOR_COMMIT: {'a' * 40}\nREVIEWED_GENERATOR_TREE: {'b' * 40}\n"
         "NP1_C_AUTHORIZATION_BLOCK_END\n", encoding="utf-8",
     )
-    produced = R.run_historical_evidence_campaign(
-        authorization=R.NP1_C_AUTHORIZATION, tester_sandbox=sandbox, metaeditor=editor,
-        compile_workspace=tmp_path / "compile-test", output_dir=output, command_runner=terminal,
-        compile_command_runner=FakeMetaEditor(), metaeditor_version_reader=lambda _: "5.0.0.5833",
-        verification_command_runner=lambda command, cwd, timeout: SimpleNamespace(returncode=0, stdout=b"", stderr=b""),
-        review_artifact=review_artifact, review_sha256=R.sha256_file(review_artifact),
-        reviewed_generator_commit="a" * 40, reviewed_generator_tree="b" * 40,
-    )
+    invoke = lambda: R.run_historical_evidence_campaign(
+            authorization=R.NP1_C_AUTHORIZATION, tester_sandbox=sandbox, metaeditor=editor,
+            compile_workspace=tmp_path / "compile-test", output_dir=output, command_runner=terminal,
+            compile_command_runner=FakeMetaEditor(), metaeditor_version_reader=lambda _: "5.0.0.5833",
+            verification_command_runner=lambda command, cwd, timeout: SimpleNamespace(returncode=0, stdout=b"", stderr=b""),
+            review_artifact=review_artifact, review_sha256=R.sha256_file(review_artifact),
+            reviewed_generator_commit="a" * 40, reviewed_generator_tree="b" * 40,
+        )
+    if scenario != "stable":
+        expected = "EX5 identity mismatch" if scenario == "ex5_drift" else "NP1_RETRY_HISTORY_NOT_STABLE"
+        with pytest.raises(RuntimeError, match=expected):
+            invoke()
+        expected_runs = ["np1_warmup"] if scenario == "ex5_drift" else ["np1_warmup", "np1_run1", "np1_run2"]
+        assert [Path(next(value for value in command if str(value).startswith("/config:")).split(":", 1)[1]).stem for command in terminal.commands] == expected_runs
+        assert "path" not in captured
+        return
+    produced = invoke()
     assert produced == [output / "runs" / "run1", output / "runs" / "run2"]
-    assert len(terminal.commands) == 2 and len(captured["attestation"]["commands"]) == 2
+    assert len(terminal.commands) == 3 and len(captured["attestation"]["commands"]) == 3
+    assert [Path(next(value for value in command if str(value).startswith("/config:")).split(":", 1)[1]).stem for command in terminal.commands] == [
+        "np1_warmup", "np1_run1", "np1_run2",
+    ]
+    assert captured["attestation"]["history_stability"]["same_ex5_sha256_warmup_run1_run2"]
+    assert (tmp_path / "compile-test" / "np1_warmup_capture" / "native_h1_bars.tsv").is_file()
     assert (output / "runs" / "run1" / "native_router_rows.tsv").read_text() == "run1:native_router_rows.tsv"
     assert (output / "runs" / "run2" / "native_router_rows.tsv").read_text() == "run2:native_router_rows.tsv"
 

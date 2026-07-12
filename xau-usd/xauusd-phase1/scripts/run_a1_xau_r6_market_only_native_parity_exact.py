@@ -138,8 +138,8 @@ def compile_only_safety_check(
 
 
 def render_tester_ini(*, run_id: str, report_relative: str) -> str:
-    if run_id not in {"run1", "run2"}:
-        raise ValueError("run_id must be run1 or run2")
+    if run_id not in {"warmup", "run1", "run2"}:
+        raise ValueError("run_id must be warmup, run1, or run2")
     return f"""[Tester]
 Expert=A1XauR6MarketOnlyNativeParityOracle.ex5
 Symbol=XAUUSD
@@ -222,7 +222,7 @@ def validate_tester_sandbox(path: Path) -> Path:
 
 
 def emitted_names(run_id: str) -> dict[str, str]:
-    if run_id not in {"run1", "run2"}:
+    if run_id not in {"warmup", "run1", "run2"}:
         raise ValueError(run_id)
     return {name: f"np1_{run_id}_{name}" for name in OUTPUT_NAMES}
 
@@ -313,6 +313,7 @@ def parse_np1_c_review_authorization(path: Path) -> dict[str, str]:
 def build_campaign_attestation(
     output_dir: Path, compiled: CompileResult, commands: list[dict[str, object]], git_identity: dict[str, str],
     review_authority: dict[str, str], finalizer_commands: list[dict[str, object]],
+    history_stability: dict[str, object],
 ) -> dict[str, object]:
     if _git("rev-parse", "HEAD") != git_identity["git_head"] or _git("rev-parse", "HEAD^{tree}") != git_identity["git_tree"]:
         raise RuntimeError("exact commit/tree changed during evidence generation")
@@ -341,6 +342,7 @@ def build_campaign_attestation(
         "mt5_terminal_build": EXPECTED_BUILD,
         "metaeditor_version": compiled.metaeditor_version,
         "same_ex5_sha256_run1_run2": compiled.ex5_sha256,
+        "history_stability": history_stability,
         "commands": [
             {
                 "command": list(compiled.command), "exit_code": compiled.returncode,
@@ -413,6 +415,7 @@ def run_historical_evidence_campaign(
     experts = tester_sandbox / "MQL5" / "Experts"
     experts.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(compiled_ex5, experts / compiled_ex5.name)
+    installed_ex5 = experts / compiled_ex5.name
     configs = tester_sandbox / "Config"
     configs.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -424,8 +427,13 @@ def run_historical_evidence_campaign(
     B.build_oracle(compiled_dir / B.ORACLE_NAME, compiled_dir / "source_equivalence.json")
     produced: list[Path] = []
     command_records: list[dict[str, object]] = []
-    for run_id in ("run1", "run2"):
-        run_dir = output_dir / "runs" / run_id
+    warmup_dir = compile_workspace / "np1_warmup_capture"
+    if warmup_dir.exists():
+        raise RuntimeError("fixed warm-up capture directory must not already exist")
+    for run_id in ("warmup", "run1", "run2"):
+        if sha256_file(installed_ex5) != compiled.ex5_sha256:
+            raise RuntimeError("warm-up/run1/run2 EX5 identity mismatch")
+        run_dir = warmup_dir if run_id == "warmup" else output_dir / "runs" / run_id
         ini = configs / f"np1_{run_id}.ini"
         text = render_tester_ini(run_id=run_id, report_relative=f"Reports/np1_{run_id}")
         assert_tester_ini_contract(text, run_id=run_id)
@@ -438,10 +446,24 @@ def run_historical_evidence_campaign(
         if int(getattr(completed, "returncode", 1)) != 0:
             raise RuntimeError(f"Strategy Tester {run_id} failed")
         collect_run_outputs(tester_sandbox, run_id, ini, run_dir, not_before_ns=not_before_ns)
-        produced.append(run_dir)
+        if run_id != "warmup":
+            produced.append(run_dir)
     if sha256_file(compiled_dir / compiled.ex5.name) != compiled.ex5_sha256:
         raise RuntimeError("compiled EX5 changed during evidence assembly")
+    if sha256_file(installed_ex5) != compiled.ex5_sha256:
+        raise RuntimeError("installed warm-up/run1/run2 EX5 changed during evidence assembly")
     import verify_a1_xau_r6_market_only_native_parity as verifier
+    official_fingerprints = verifier.official_history_fingerprints(output_dir)
+    warmup_hashes = {
+        name: sha256_file(warmup_dir / name)
+        for name in ("native_report.htm", "native_h1_bars.tsv", "native_h4_bars.tsv", "native_d1_bars.tsv")
+    }
+    history_stability = {
+        "status": "NP1_RETRY_HISTORY_STABLE",
+        "same_ex5_sha256_warmup_run1_run2": compiled.ex5_sha256,
+        "warmup_artifact_sha256": warmup_hashes,
+        "official_fingerprints": official_fingerprints,
+    }
     attestation_path = compile_workspace / "np1_campaign_attestation.json"
     finalizer_command = [
         sys.executable, str(Path(verifier.__file__).resolve()), str(output_dir), "--finalize",
@@ -454,7 +476,7 @@ def run_historical_evidence_campaign(
         for command in (finalizer_command, verifier_command)
     ]
     attestation = build_campaign_attestation(
-        output_dir, compiled, command_records, git_identity, review_authority, finalizer_commands
+        output_dir, compiled, command_records, git_identity, review_authority, finalizer_commands, history_stability
     )
     verifier.finalize_evidence_directory(output_dir, attestation=attestation)
     attestation["artifact_sha256"] = verifier.attested_artifact_hashes(output_dir)

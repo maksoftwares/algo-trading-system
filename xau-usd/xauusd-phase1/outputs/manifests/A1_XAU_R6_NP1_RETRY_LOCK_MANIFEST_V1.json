@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "docs/A1_XAU_R6_CAPITALCOM_SESSION_AND_HISTORY_STABILITY_CONTRACT_V1.json": {
+      "sha256": "8834161b97f14dc3c1a5d88e4dd0d4cf2632140d6bfcf10676467d4f25e36c2e",
+      "size_bytes": 3045
+    },
+    "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/bar_common_timestamp_value_diff.csv": {
+      "sha256": "f1010fea14b577cbde92a677a63c42ccdba5f2ef6319f14ac24bff1b6733601c",
+      "size_bytes": 1512
+    },
+    "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/market_gap_inventory.csv": {
+      "sha256": "fb443e6895d3da4cbb06369d26fa9f76cd7f9df7dfdacb60517153116c058ec8",
+      "size_bytes": 294832
+    },
+    "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/native_report_comparison.json": {
+      "sha256": "a3ed95a6230908c89d4fa28952266e68a1cc89123bd792593d66235253b36033",
+      "size_bytes": 502
+    },
+    "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/two_run_stability_classification.json": {
+      "sha256": "3da484ffce6e8a3c0f5b783be405c2e60317338916256f4003e2908241b795aa",
+      "size_bytes": 3078
+    },
+    "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/manifest.json": {
+      "sha256": "0137b38d72c0cdde51d0fbcf99b5b48905a781d5501ae2f773d40819bce0bc47",
+      "size_bytes": 8585
+    },
+    "scripts/run_a1_xau_r6_market_only_native_parity_exact.py": {
+      "sha256": "480e796575e4dd7a9ffca01b53ba2fb0da36acf492ca3410cdfb59af2e847b37",
+      "size_bytes": 25662
+    },
+    "scripts/verify_a1_xau_r6_market_only_native_parity.py": {
+      "sha256": "8f845c0e547238b6a275a63a1690e10b7e277d442a1c2e9399fb6616ac3f136a",
+      "size_bytes": 70642
+    }
+  },
+  "authority": {
+    "diagnostic_outer_manifest_sha256": "0137b38d72c0cdde51d0fbcf99b5b48905a781d5501ae2f773d40819bce0bc47",
+    "np1_d1_review_artifact": "A1_XAU_NP1D1_DIAGNOSTIC_REVIEW_BEAA6603_2026_07_12.md",
+    "np1_d1_review_sha256": "028b885087e5ad9f6e986612c5b7f919752b0c3962f41482e10c7d599970a4ab",
+    "reviewed_diagnostic_commit": "beaa660359df240d7f336d65706f02da0239d7d8",
+    "reviewed_diagnostic_tree": "c72554e97402c8ae89aaa03a88746a9f03fe1c45"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "census_authorized": false,
+    "historical_pnl_authorized": false,
+    "h4_or_portfolio_join_authorized": false,
+    "mt5_rerun_authorized_in_np1_e1": false,
+    "runtime_change_authorized": false,
+    "target_exit_mfe_mae_authorized": false
+  },
+  "phase": "NP1-E1_NATIVE_PERIOD_SESSION_AND_HISTORY_STABILITY_REPAIR",
+  "schema_version": "a1_xau_r6_np1_retry_lock_manifest_v1"
+}

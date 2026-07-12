@@ -29,6 +29,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_CONTRACT = ROOT / "docs" / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_SOURCE_CONTRACT_V1.json"
 OUTPUT_SCHEMA = ROOT / "docs" / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_OUTPUT_SCHEMA_V1.json"
 LOCK_MANIFEST = ROOT / "outputs" / "manifests" / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_LOCK_MANIFEST_V1.json"
+RETRY_CONTRACT = ROOT / "docs" / "A1_XAU_R6_CAPITALCOM_SESSION_AND_HISTORY_STABILITY_CONTRACT_V1.json"
+RETRY_MANIFEST = ROOT / "outputs" / "manifests" / "A1_XAU_R6_NP1_RETRY_LOCK_MANIFEST_V1.json"
 STATE_CODES = {"UNKNOWN": 0, "SHOCK": 1, "UPTREND": 2, "DOWNTREND": 3, "COMPRESSION": 4, "CHOP": 5}
 NATIVE_TO_CANONICAL = {name.lower(): name for name in STATE_CODES}
 
@@ -60,6 +62,61 @@ def read_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"JSON root must be an object: {path}")
     return value
+
+
+def load_retry_contracts(
+    contract_path: Path = RETRY_CONTRACT, manifest_path: Path = RETRY_MANIFEST,
+) -> tuple[dict[str, Any], dict[str, set[tuple[str, str]]]]:
+    """Verify the NP1-E1 lock and materialize the exact native-gap whitelist."""
+    manifest = read_json(manifest_path)
+    if manifest.get("schema_version") != "a1_xau_r6_np1_retry_lock_manifest_v1":
+        raise RuntimeError("NP1 retry-manifest schema mismatch")
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict) or not artifacts:
+        raise RuntimeError("NP1 retry-manifest artifact set mismatch")
+    for relative, expected in artifacts.items():
+        path = ROOT / relative
+        if (
+            not isinstance(expected, dict) or set(expected) != {"sha256", "size_bytes"}
+            or not path.is_file() or path.stat().st_size != expected["size_bytes"]
+            or sha256_file(path) != expected["sha256"]
+        ):
+            raise RuntimeError(f"NP1 retry-manifest mismatch: {relative}")
+    expected_contract_relative = contract_path.relative_to(ROOT).as_posix()
+    if expected_contract_relative not in artifacts:
+        raise RuntimeError("NP1 retry-manifest does not bind the session contract")
+    contract = read_json(contract_path)
+    if contract.get("schema_version") != "a1_xau_r6_capitalcom_session_and_history_stability_contract_v1":
+        raise RuntimeError("NP1 session/history contract schema mismatch")
+    policy = contract.get("session_gap_policy", {})
+    source = policy.get("source", {})
+    if policy.get("mode") != "EXACT_INTERVAL_WHITELIST" or set(policy.get("allowed_interval_filter", {}).get("ignore_columns", [])) != {"occurrence_count"}:
+        raise RuntimeError("NP1 exact session-gap policy mismatch")
+    source_path = ROOT / str(source.get("path", ""))
+    if not source_path.is_file() or sha256_file(source_path) != source.get("sha256"):
+        raise RuntimeError("NP1 session-gap source hash mismatch")
+    for item in contract.get("source_artifacts", {}).values():
+        path = ROOT / str(item.get("path", ""))
+        if not path.is_file() or sha256_file(path) != item.get("sha256"):
+            raise RuntimeError("NP1 diagnostic source artifact hash mismatch")
+    allowed = {timeframe: set() for timeframe in ("H1", "H4", "D1")}
+    with source_path.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {"timeframe", "prior_bar_time", "next_bar_time", "present_in_run1", "present_in_run2", "occurrence_count"}
+        if not required <= set(reader.fieldnames or ()):
+            raise RuntimeError("NP1 session-gap inventory header mismatch")
+        for row in reader:
+            if row["present_in_run1"] == "true" and row["present_in_run2"] == "true":
+                timeframe = row["timeframe"]
+                if timeframe not in allowed:
+                    raise RuntimeError("NP1 session-gap inventory timeframe mismatch")
+                key = (row["prior_bar_time"], row["next_bar_time"])
+                if key in allowed[timeframe]:
+                    raise RuntimeError("NP1 session-gap inventory duplicate interval")
+                allowed[timeframe].add(key)
+    if any(not values for values in allowed.values()):
+        raise RuntimeError("NP1 session-gap whitelist is incomplete")
+    return contract, allowed
 
 
 def load_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -282,7 +339,7 @@ def verify_native_report(path: Path, run_id: str, buckets: Buckets) -> dict[str,
             buckets.invalid.append(f"{run_id}: native report {key} mismatch: {report[key]!r}")
     if report["model"] not in {"", "Every tick based on real ticks"}:
         buckets.invalid.append(f"{run_id}: native report model mismatch: {report['model']!r}")
-    if re.fullmatch(r"M5\s+\(2015\.06\.01\s+-\s+2026\.06\.30\)", report["period"]) is None:
+    if re.fullmatch(r"M5\s+\(2015\.06\.01\s+-\s+2026\.07\.01\)", report["period"]) is None:
         buckets.invalid.append(f"{run_id}: native report period mismatch: {report['period']!r}")
     deposit_match = re.search(r"([0-9][0-9,.\s]*)\s*(USD)?", report["initial_deposit"], re.IGNORECASE)
     if not deposit_match or float(re.sub(r"[\s,]", "", deposit_match.group(1))) != 10000.0:
@@ -339,22 +396,11 @@ def _dt(value: str) -> datetime:
     return datetime.fromisoformat(value)
 
 
-def expected_weekend_gap(timeframe: str, first: datetime, second: datetime) -> bool:
-    if first.weekday() != 4 or second.weekday() != 0:
-        return False
-    delta = int((second - first).total_seconds())
-    if timeframe == "H1":
-        return first.hour in {19, 20} and second.hour in {0, 1} and delta <= 54 * 3600
-    if timeframe == "H4":
-        return first.hour in {16, 20} and second.hour == 0 and delta <= 56 * 3600
-    if timeframe == "D1":
-        return first.hour == second.hour == 0 and delta == 3 * 86400
-    return False
-
-
 def load_bar_rows(
     path: Path, schema: dict[str, Any], router: Any, *, timeframe: str,
     test_start: datetime, test_end: datetime,
+    allowed_session_gaps: set[tuple[str, str]] | None = None,
+    require_exact_session_gaps: bool = False,
 ) -> tuple[list[dict[str, str]], list[Any]]:
     rows = read_tsv(path, schema["bar_exports"]["columns"])
     if not rows:
@@ -364,28 +410,72 @@ def load_bar_rows(
     times = [_dt(row["open_time_broker"]) for row in rows]
     if times != sorted(set(times)):
         raise ValueError(f"bar timestamps not unique/increasing: {path.name}")
+    if any(time >= test_end for time in times):
+        raise ValueError(f"bar timestamp violates exclusive evidence boundary: {path.name}")
     step = {"H1": timedelta(hours=1), "H4": timedelta(hours=4), "D1": timedelta(days=1)}[timeframe]
     if not (test_start <= times[0] < test_start + step):
         raise ValueError(f"bar warm-up start mismatch: {path.name}: {times[0].isoformat()}")
     if not (test_end - step <= times[-1] < test_end):
         raise ValueError(f"bar exclusive-end coverage mismatch: {path.name}: {times[-1].isoformat()}")
     seconds = int(step.total_seconds())
+    allowed_session_gaps = allowed_session_gaps or set()
+    observed_session_gaps: set[tuple[str, str]] = set()
     for first, second in zip(times, times[1:]):
         delta = int((second - first).total_seconds())
         if delta <= 0 or delta % seconds:
             raise ValueError(f"bar interval mismatch: {path.name}: {first.isoformat()}->{second.isoformat()}")
-        allowed_session_gap = (
-            (timeframe == "H1" and delta <= 2 * seconds)
-            or (timeframe == "H4" and delta <= 2 * seconds)
-        )
-        if delta > seconds and not allowed_session_gap and not expected_weekend_gap(timeframe, first, second):
-            raise ValueError(f"unexpected market-history gap: {path.name}: {first.isoformat()}->{second.isoformat()}")
+        if delta > seconds:
+            key = (first.isoformat(), second.isoformat())
+            observed_session_gaps.add(key)
+            if key not in allowed_session_gaps:
+                raise ValueError(f"unlisted market-history gap: {path.name}: {first.isoformat()}->{second.isoformat()}")
+    if require_exact_session_gaps and observed_session_gaps != allowed_session_gaps:
+        missing = sorted(allowed_session_gaps - observed_session_gaps)
+        raise ValueError(f"listed market-history gap missing: {path.name}: {missing[:1]}")
     for row in rows:
         if any(int(row[name]) < 0 for name in ("tick_volume", "spread", "real_volume")):
             raise ValueError(f"negative bar volume/spread field: {path.name}")
     bars = [router.Bar(times[i], float(row["open"]), float(row["high"]), float(row["low"]), float(row["close"])) for i, row in enumerate(rows)]
     router.validate_bars(bars)
     return rows, bars
+
+
+def official_history_fingerprints(evidence_dir: Path) -> dict[str, Any]:
+    """Fail closed unless official run1/run2 satisfy every NP1-E1 stability gate."""
+    contract, allowed_gaps = load_retry_contracts()
+    source, schema, _ = load_contracts()
+    router = load_python_router(source)
+    configured = contract["configured_period"]
+    test_start = _dt(configured["test_from_inclusive_broker_time"])
+    test_end = _dt(configured["test_to_exclusive_broker_time"])
+    fingerprints: dict[str, Any] = {"contract_sha256": sha256_file(RETRY_CONTRACT), "runs": {}}
+    try:
+        for run_id in ("run1", "run2"):
+            run_dir = evidence_dir / "runs" / run_id
+            report = parse_native_report(run_dir / "native_report.htm")
+            if report["period"] != configured["native_report_period"]:
+                raise ValueError(f"{run_id}: configured native report period mismatch")
+            run_fingerprint: dict[str, Any] = {
+                "native_report_bars": report["bars"], "native_report_ticks": report["ticks"],
+                "bar_file_sha256": {},
+            }
+            for timeframe in ("H1", "H4", "D1"):
+                path = run_dir / f"native_{timeframe.lower()}_bars.tsv"
+                load_bar_rows(
+                    path, schema, router, timeframe=timeframe, test_start=test_start, test_end=test_end,
+                    allowed_session_gaps=allowed_gaps[timeframe], require_exact_session_gaps=True,
+                )
+                run_fingerprint["bar_file_sha256"][timeframe] = sha256_file(path)
+            fingerprints["runs"][run_id] = run_fingerprint
+        first, second = fingerprints["runs"]["run1"], fingerprints["runs"]["run2"]
+        if (first["native_report_bars"], first["native_report_ticks"]) != (second["native_report_bars"], second["native_report_ticks"]):
+            raise ValueError("official native report Bars/Ticks drift")
+        if first["bar_file_sha256"] != second["bar_file_sha256"]:
+            raise ValueError("official H1/H4/D1 file hash drift")
+    except (FileNotFoundError, KeyError, RuntimeError, ValueError) as exc:
+        raise RuntimeError(f"NP1_RETRY_HISTORY_NOT_STABLE: {exc}") from exc
+    fingerprints["status"] = "NP1_RETRY_HISTORY_STABLE"
+    return fingerprints
 
 
 def prefix_sha(rows: Sequence[dict[str, str]], columns: Sequence[str], decision: datetime) -> tuple[str, str]:
@@ -461,11 +551,26 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
         environment = source["tester_environment"]
         test_start = _dt(environment["test_from_inclusive_broker_time"])
         test_end = _dt(environment["test_to_exclusive_broker_time"])
-        h1_rows, h1 = load_bar_rows(run_dir / "native_h1_bars.tsv", schema, router, timeframe="H1", test_start=test_start, test_end=test_end)
-        h4_rows, h4 = load_bar_rows(run_dir / "native_h4_bars.tsv", schema, router, timeframe="H4", test_start=test_start, test_end=test_end)
-        d1_rows, d1 = load_bar_rows(run_dir / "native_d1_bars.tsv", schema, router, timeframe="D1", test_start=test_start, test_end=test_end)
+        retry_contract, allowed_gaps = load_retry_contracts()
+        locked_period = retry_contract["configured_period"]
+        require_exact_gaps = (
+            environment["test_from_inclusive_broker_time"] == locked_period["test_from_inclusive_broker_time"]
+            and environment["test_to_exclusive_broker_time"] == locked_period["test_to_exclusive_broker_time"]
+        )
+        h1_rows, h1 = load_bar_rows(
+            run_dir / "native_h1_bars.tsv", schema, router, timeframe="H1", test_start=test_start, test_end=test_end,
+            allowed_session_gaps=allowed_gaps["H1"] if require_exact_gaps else set(), require_exact_session_gaps=require_exact_gaps,
+        )
+        h4_rows, h4 = load_bar_rows(
+            run_dir / "native_h4_bars.tsv", schema, router, timeframe="H4", test_start=test_start, test_end=test_end,
+            allowed_session_gaps=allowed_gaps["H4"] if require_exact_gaps else set(), require_exact_session_gaps=require_exact_gaps,
+        )
+        d1_rows, d1 = load_bar_rows(
+            run_dir / "native_d1_bars.tsv", schema, router, timeframe="D1", test_start=test_start, test_end=test_end,
+            allowed_session_gaps=allowed_gaps["D1"] if require_exact_gaps else set(), require_exact_session_gaps=require_exact_gaps,
+        )
         native = read_tsv(run_dir / "native_router_rows.tsv", schema["native_router_rows"]["columns"])
-    except (FileNotFoundError, ValueError, KeyError) as exc:
+    except (FileNotFoundError, ValueError, KeyError, RuntimeError) as exc:
         buckets.invalid.append(f"{run_id}: {exc}")
         return [], [], {}
     start = _dt(schema["native_router_rows"]["evidence_interval_from_inclusive"])
@@ -497,6 +602,8 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
                 raise ValueError("Router row bar count is negative")
             for name in ("timestamp_broker", "h1_shift1_time", "h4_shift1_time", "d1_shift1_time"):
                 _dt(row[name])
+            if _dt(row["timestamp_broker"]) >= test_end:
+                raise ValueError("Router row violates exclusive evidence boundary")
         except (ValueError, KeyError, TypeError, OverflowError) as exc:
             native_structure_valid = False
             invalid_native_rows.add(row_index)
@@ -721,7 +828,8 @@ def verify_two_run_determinism(evidence_dir: Path, buckets: Buckets) -> None:
             first = normalized_tsv_bytes(evidence_dir / "runs" / "run1" / filename, blank_columns=blank, normalize_run_tokens=normalize_run_tokens)
             second = normalized_tsv_bytes(evidence_dir / "runs" / "run2" / filename, blank_columns=blank, normalize_run_tokens=normalize_run_tokens)
             if first != second:
-                buckets.parity.append(f"two-run normalized mismatch: {filename}")
+                target = buckets.invalid if filename in {"native_h1_bars.tsv", "native_h4_bars.tsv", "native_d1_bars.tsv"} else buckets.parity
+                target.append(f"two-run normalized mismatch: {filename}")
         except (FileNotFoundError, ValueError) as exc:
             buckets.invalid.append(f"two-run determinism input invalid: {exc}")
 
@@ -769,7 +877,7 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
     required = {
         "schema_version", "git_head", "git_tree", "git_status_porcelain", "os", "architecture",
         "python_version", "python_executable", "dependency_versions", "mt5_terminal_build", "metaeditor_version",
-        "same_ex5_sha256_run1_run2", "commands", "artifact_sha256", "environment", "review_authority",
+        "same_ex5_sha256_run1_run2", "history_stability", "commands", "artifact_sha256", "environment", "review_authority",
     }
     if set(attestation) != required:
         return ["exact-commit attestation field set mismatch"]
@@ -814,8 +922,8 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
         errors.append("dependency-version attestation incomplete")
     commands = attestation["commands"]
     command_fields = {"command", "exit_code", "stdout_base64", "stderr_base64", "stdout_sha256", "stderr_sha256"}
-    if not isinstance(commands, list) or len(commands) != 5:
-        errors.append("exact-commit attestation requires compile, two tester, finalizer, and verifier commands")
+    if not isinstance(commands, list) or len(commands) != 6:
+        errors.append("exact-commit attestation requires compile, warm-up, two official tester, finalizer, and verifier commands")
     else:
         for index, row in enumerate(commands):
             if not isinstance(row, dict) or set(row) != command_fields:
@@ -842,7 +950,7 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
             )
             if not compile_ok:
                 errors.append("attested command 1 is not the exact MetaEditor compile contract")
-            for index, run_id in ((1, "run1"), (2, "run2")):
+            for index, run_id in ((1, "warmup"), (2, "run1"), (3, "run2")):
                 tester_ok = (
                     Path(str(command_values[index][0])).name.lower() == "terminal64.exe"
                     and "/portable" in lowered[index]
@@ -851,26 +959,26 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
                 )
                 if not tester_ok:
                     errors.append(f"attested command {index + 1} is not the exact Strategy Tester {run_id} contract")
-            finalizer = lowered[3]
+            finalizer = lowered[4]
             finalizer_ok = (
-                len(finalizer) == 7 and Path(str(command_values[3][0])).resolve() == Path(attestation["python_executable"]).resolve()
-                and Path(str(command_values[3][1])).resolve() == Path(__file__).resolve()
-                and Path(str(command_values[3][2])).is_absolute()
-                and finalizer[3] == "--finalize" and finalizer[4] == "--attestation-json" and finalizer[6] == "--quiet"
-                and commands[3]["exit_code"] == 0
-            )
-            verifier = lowered[4]
-            verifier_ok = (
-                len(verifier) == 4 and Path(str(command_values[4][0])).resolve() == Path(attestation["python_executable"]).resolve()
+                len(finalizer) == 7 and Path(str(command_values[4][0])).resolve() == Path(attestation["python_executable"]).resolve()
                 and Path(str(command_values[4][1])).resolve() == Path(__file__).resolve()
-                and Path(str(command_values[4][2])).resolve() == Path(str(command_values[3][2])).resolve()
-                and verifier[3] == "--quiet" and commands[4]["exit_code"] == 0
+                and Path(str(command_values[4][2])).is_absolute()
+                and finalizer[3] == "--finalize" and finalizer[4] == "--attestation-json" and finalizer[6] == "--quiet"
+                and commands[4]["exit_code"] == 0
+            )
+            verifier = lowered[5]
+            verifier_ok = (
+                len(verifier) == 4 and Path(str(command_values[5][0])).resolve() == Path(attestation["python_executable"]).resolve()
+                and Path(str(command_values[5][1])).resolve() == Path(__file__).resolve()
+                and Path(str(command_values[5][2])).resolve() == Path(str(command_values[4][2])).resolve()
+                and verifier[3] == "--quiet" and commands[5]["exit_code"] == 0
             )
             if not finalizer_ok:
-                errors.append("attested command 4 is not the exact quiet finalizer contract")
+                errors.append("attested command 5 is not the exact quiet finalizer contract")
             if not verifier_ok:
-                errors.append("attested command 5 is not the exact quiet read-only verifier contract")
-            for index in (3, 4):
+                errors.append("attested command 6 is not the exact quiet read-only verifier contract")
+            for index in (4, 5):
                 if commands[index]["stdout_base64"] != "" or commands[index]["stderr_base64"] != "":
                     errors.append(f"attested command {index + 1} finalizer/verifier streams must be empty")
     if attestation["artifact_sha256"] != attested_artifact_hashes(evidence_dir):
@@ -878,6 +986,14 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
     ex5 = evidence_dir / "compiled" / Path(B.ORACLE_NAME).with_suffix(".ex5").name
     if ex5.is_file() and attestation["same_ex5_sha256_run1_run2"] != sha256_file(ex5):
         errors.append("exact-commit attestation EX5 hash mismatch")
+    stability = attestation["history_stability"]
+    if (
+        not isinstance(stability, dict)
+        or stability.get("status") != "NP1_RETRY_HISTORY_STABLE"
+        or stability.get("same_ex5_sha256_warmup_run1_run2") != attestation["same_ex5_sha256_run1_run2"]
+        or stability.get("official_fingerprints", {}).get("contract_sha256") != sha256_file(RETRY_CONTRACT)
+    ):
+        errors.append("exact-commit history-stability attestation mismatch")
     environment = attestation["environment"]
     expected_environment = {
         "account_login": 1025742, "server": "Capital.ComMena-Demo", "currency": "USD",
