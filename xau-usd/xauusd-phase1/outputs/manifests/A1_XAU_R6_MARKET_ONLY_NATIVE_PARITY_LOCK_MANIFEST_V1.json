@@ -1,0 +1,91 @@
+{
+  "artifacts": {
+    "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_PREREG_2026_07_12.md": {
+      "sha256": "eecb09bde35852ef4f3f10f457415b0ea67ea4a5ae52dd0a4f76da3e0ba8252f",
+      "size_bytes": 9015
+    },
+    "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_OUTPUT_SCHEMA_V1.json": {
+      "sha256": "aba5278e8566283e70504d97d138b31b80036c9746e33dca8ce63d4d97f78851",
+      "size_bytes": 9084
+    },
+    "docs/A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_SOURCE_CONTRACT_V1.json": {
+      "sha256": "8b79efb151027a6c90dc64033dd52691c5a1f7417bea80475f46a0e8c52a6c85",
+      "size_bytes": 7509
+    }
+  },
+  "authority": {
+    "acquisition_direction_artifact": "A1_XAU_R6_NATIVE_PARITY_EVIDENCE_ACQUISITION_DIRECTION_2026_07_12.md",
+    "acquisition_direction_sha256": "a2d10661e58e95c516291b7e1d9b07b8b59904b94cff8474e28b16d569f0c1ca",
+    "independent_specialist_direction": "docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md",
+    "independent_specialist_direction_sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af",
+    "is1_a2_approval_artifact": "A1_XAU_IS1A2_FAIL_CLOSED_GOVERNANCE_REVIEW_CD40A818_2026_07_12.md",
+    "is1_a2_approval_sha256": "e7bb6e572120e4092c4e3868a9381d0c49ff708f367ad1d87a2a1c9c1b4ed0da",
+    "predecessor_commit": "cd40a818f9cdce87c5e5f9fef785cad3da39fc20",
+    "predecessor_tree": "17001bc0f3a3ec72e52f9927b820b18112722a4f"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "c2r5_authorized": false,
+    "c3_census_authorized": false,
+    "compile_or_ex5_authorized_in_np1_a": false,
+    "demo_authorized": false,
+    "evidence_output_authorized_in_np1_a": false,
+    "h4_or_portfolio_join_authorized": false,
+    "historical_data_status": "DEVELOPMENT_DATA",
+    "historical_pnl_authorized": false,
+    "live_authorized": false,
+    "mfe_mae_authorized": false,
+    "mq5_or_mqh_authorized_in_np1_a": false,
+    "mt5_execution_authorized_in_np1_a": false,
+    "np1_b_automatically_authorized": false,
+    "parallel_specialist_authorized": false,
+    "python_implementation_authorized_in_np1_a": false,
+    "r6_detector_or_validator_change_authorized": false,
+    "runtime_change_authorized": false,
+    "target_or_exit_simulation_authorized": false,
+    "tests_authorized_in_np1_a": false
+  },
+  "dependencies": {
+    "independent_specialist_direction": {
+      "path": "docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md",
+      "sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af",
+      "size_bytes": 25099
+    },
+    "independent_specialist_direction_lock": {
+      "path": "outputs/manifests/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_LOCK_V1.json",
+      "sha256": "63f2812e469c4797d1ef3ee904bb25370a9b8fb96a18b8a3cf3c4aa0fc2635a7",
+      "size_bytes": 2556
+    },
+    "r6_census_preregistration": {
+      "path": "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md",
+      "sha256": "a5f10f756faddc8d20a91ba668f03c0ccc43e1d6e253693b256148b296898fa3",
+      "size_bytes": 13157
+    },
+    "r6_outcome_blind_schema": {
+      "path": "docs/A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json",
+      "sha256": "f796c281b3539772bab7d7e0fc3af8ee20f69e4512fadda96c95e2673fc5bd1b",
+      "size_bytes": 5654
+    },
+    "r6_rule_lock": {
+      "path": "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json",
+      "sha256": "456b3a1d153110cf55906d1b4ab82c18cf65d733fcdfe8498f0f768ef06a8181",
+      "size_bytes": 11072
+    }
+  },
+  "next_review": {
+    "exact_commit_review_required": true,
+    "next_proposed_phase_after_pass": "NP1-B_MARKET_ONLY_ORACLE_PROBE_IMPLEMENTATION",
+    "np1_b_file_count": 8,
+    "np1_b_result_output_authorized": false
+  },
+  "phase": "NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS_ONLY",
+  "primary_specialist": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_r6_market_only_native_parity_lock_manifest_v1",
+  "source_lineage": {
+    "authoritative_git_blob": "d59338facaa01032a47c71186e64e1ba9f1dba8f",
+    "authoritative_git_commit": "d51340574d90a39fe0032e54e4a8252370c19058",
+    "authoritative_path": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "generated_oracle": "A1XauR6MarketOnlyNativeParityOracle.mq5",
+    "hand_transcription_authorized": false
+  }
+}
