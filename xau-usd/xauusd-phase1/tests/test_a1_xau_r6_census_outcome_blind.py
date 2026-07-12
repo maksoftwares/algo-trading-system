@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+import ast
 from datetime import datetime
 from pathlib import Path
 
@@ -10,6 +11,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import validate_a1_xau_r6_outcome_blind_census as V  # noqa: E402
+import build_a1_xau_r6_distribution_break_failed_reclaim_census as R  # noqa: E402
 
 
 def schema() -> dict:
@@ -50,8 +52,44 @@ def test_prefix_invariance_rejects_changed_prior_row() -> None:
         V.validate_prefix_invariance([original], [original, new_inside_prefix], prefix_end=datetime(2020, 1, 1, 1))
 
 
+def test_detector_prefix_invariance_is_bidirectional_for_exclusions() -> None:
+    first = R.TerminalAnchor(datetime(2020, 1, 1), datetime(2020, 1, 1, 1), "IMPULSE_REJECTED")
+    introduced = R.TerminalAnchor(datetime(2020, 1, 1, 2), datetime(2020, 1, 1, 3), "DATA_UNAVAILABLE")
+    empty_incidence = R.incidence_report([])
+
+    def detector(*, extended: bool) -> R.Detection:
+        anchors = (first, introduced) if extended else (first,)
+        return R.Detection((), {status: 0 for status in R.TERMINAL_STATUSES}, anchors, empty_incidence, R.locked_final_status(empty_incidence), {})
+
+    with pytest.raises(ValueError, match="terminal prefix"):
+        V.validate_detector_prefix_invariance(
+            detector, {"extended": False}, {"extended": True}, prefix_end=datetime(2020, 1, 1, 4),
+        )
+
+
 def test_scripts_have_no_runtime_or_result_surface() -> None:
     paths = [ROOT / path for path in V.ALLOWED_C2_FILES if path.startswith("scripts/")]
     text = "\n".join(path.read_text(encoding="utf-8").lower() for path in paths)
     for forbidden in ("argparse", "metatrader", "order_send", "account_login", "--live", "--demo"):
         assert forbidden not in text
+
+
+def test_scripts_structurally_forbid_writes_subprocesses_and_neighbor_evidence_paths() -> None:
+    paths = [ROOT / path for path in V.ALLOWED_C2_FILES if path.startswith("scripts/")]
+    forbidden_imports = {"argparse", "subprocess", "MetaTrader5", "requests"}
+    forbidden_calls = {"open", "exec", "eval", "compile", "system", "popen", "run", "call", "check_call", "check_output"}
+    forbidden_methods = {"write_text", "write_bytes", "touch", "mkdir", "unlink", "rename", "to_csv", "to_json", "to_parquet"}
+    forbidden_path_tokens = ("portfolio_trades.csv", "h4_trades.csv", "h4_positions.csv", "h4_exposure.csv", "drawdown.csv", "pnl.csv")
+    for path in paths:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                modules = [alias.name.split(".")[0] for alias in node.names] if isinstance(node, ast.Import) else [(node.module or "").split(".")[0]]
+                assert not forbidden_imports.intersection(modules)
+            if isinstance(node, ast.Call):
+                name = node.func.id if isinstance(node.func, ast.Name) else node.func.attr if isinstance(node.func, ast.Attribute) else ""
+                assert name not in forbidden_calls
+                assert name not in forbidden_methods
+            if isinstance(node, ast.Constant) and isinstance(node.value, str):
+                assert not any(token in node.value.lower() for token in forbidden_path_tokens)
+        assert not any(isinstance(node, ast.If) and isinstance(node.test, ast.Compare) and "__name__" in ast.unparse(node.test) for node in ast.walk(tree))

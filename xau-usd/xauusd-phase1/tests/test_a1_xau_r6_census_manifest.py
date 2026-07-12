@@ -91,3 +91,13 @@ def test_all_locked_incidence_gates_and_status_precedence() -> None:
     assert passed["raw"]["largest_july_june_bucket_share"] == pytest.approx(0.1)
     assert passed["raw"]["best_contiguous_24_month_share"] == pytest.approx(0.2)
     assert R.locked_final_status(passed) == "R6_CENSUS_PASS"
+
+
+def test_validate_detection_rejects_unreviewed_final_status() -> None:
+    incidence = R.incidence_report([])
+    detection = R.Detection(
+        (), {status: 0 for status in R.TERMINAL_STATUSES}, (), incidence, "R6_CENSUS_PASS", {},
+    )
+    schema = json.loads((ROOT / "docs" / "A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json").read_text())
+    with pytest.raises(ValueError, match="final status"):
+        V.validate_detection(detection, schema)

@@ -10,6 +10,7 @@ import hashlib
 import math
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from decimal import Decimal
 from statistics import median
 from typing import Iterable, Sequence
 
@@ -83,6 +84,7 @@ class Detection:
     anchors: tuple["TerminalAnchor", ...]
     incidence: dict[str, object]
     final_status: str
+    contexts: dict[str, "RowContext"]
 
 
 @dataclass(frozen=True)
@@ -105,6 +107,10 @@ class RowContext:
     a_box: float
     a_reclaim: float
     last_reclaim_tick_sequence: int = -1
+    causal_ticks: tuple[Tick, ...] = ()
+    router_h1: tuple[Bar, ...] = ()
+    router_h4: tuple[Bar, ...] = ()
+    router_d1: tuple[Bar, ...] = ()
 
 
 def broker_time(value: datetime) -> str:
@@ -266,8 +272,13 @@ def minimum_contract_risk(entry_bid: float, risk_price: float, contract: Contrac
     validate_contract(contract)
     if not (math.isfinite(entry_bid) and math.isfinite(risk_price) and risk_price > entry_bid > 0):
         raise ValueError("invalid risk prices")
-    ticks = (risk_price - entry_bid) / contract.tick_size
-    return ticks * contract.tick_value_loss * contract.volume_min
+    ticks = (Decimal(str(risk_price)) - Decimal(str(entry_bid))) / Decimal(str(contract.tick_size))
+    risk = ticks * Decimal(str(contract.tick_value_loss)) * Decimal(str(contract.volume_min))
+    return float(risk)
+
+
+def risk_at_or_below(value: float, boundary: float) -> bool:
+    return Decimal(str(value)) <= Decimal(str(boundary))
 
 
 def validate_order_calc_profit_fixture(
@@ -409,6 +420,58 @@ def _overlap_ratio(first: Bar, second: Bar) -> float:
     return overlap / min(first.high - first.low, second.high - second.low)
 
 
+def _validate_tick_row(tick: Tick, previous: Tick | None) -> None:
+    if (
+        tick.sequence < 0
+        or not all(math.isfinite(value) and value > 0 for value in (tick.bid, tick.ask))
+        or tick.ask < tick.bid
+        or (tick.source_h1_bar_time is not None and tick.source_h1_bar_time > tick.time)
+    ):
+        raise ValueError("invalid tick source row")
+    if previous is not None and (previous.sequence >= tick.sequence or previous.time > tick.time):
+        raise ValueError("ticks must be monotonic in absolute source sequence and time")
+
+
+def select_entry_tick(
+    ticks: Sequence[Tick], *, reclaim_time: datetime, decision_time: datetime,
+) -> tuple[Tick | None, str, int, tuple[Tick, ...], bool]:
+    """Consume ticks causally and stop at the first non-reclaim tick."""
+    expiry = decision_time + timedelta(minutes=15)
+    previous: Tick | None = None
+    last_reclaim_sequence = -1
+    consumed: list[Tick] = []
+    horizon_proven = False
+    for tick in ticks:
+        _validate_tick_row(tick, previous)
+        previous = tick
+        if tick.time < decision_time:
+            consumed.append(tick)
+            if tick.source_h1_bar_time == reclaim_time:
+                last_reclaim_sequence = tick.sequence
+            continue
+        if tick.time > expiry:
+            horizon_proven = True
+            break
+        consumed.append(tick)
+        if tick.source_h1_bar_time == reclaim_time:
+            last_reclaim_sequence = tick.sequence
+            continue
+        if tick.source_h1_bar_time is not None and tick.source_h1_bar_time != decision_time:
+            return None, "DATA_UNAVAILABLE", last_reclaim_sequence, tuple(consumed), True
+        if tick.time == decision_time and tick.source_h1_bar_time is None:
+            return None, "DATA_UNAVAILABLE", last_reclaim_sequence, tuple(consumed), True
+        if not tick.session_open:
+            return None, "ENTRY_TICK_UNAVAILABLE", last_reclaim_sequence, tuple(consumed), True
+        return tick, "RAW_OPPORTUNITY_AVAILABLE", last_reclaim_sequence, tuple(consumed), True
+    if horizon_proven:
+        return None, "ENTRY_TICK_UNAVAILABLE", last_reclaim_sequence, tuple(consumed), True
+    return None, "DATA_UNAVAILABLE", last_reclaim_sequence, tuple(consumed), False
+
+
+def _causal_bars(bars: Sequence[Bar], decision_time: datetime) -> tuple[Bar, ...]:
+    return tuple(bar for bar in bars if bar.time <= decision_time)
+
+
 def detect(
     *, h4: Sequence[Bar], h1: Sequence[Bar], d1: Sequence[Bar], ticks: Sequence[Tick],
     contract: Contract, symbol: str = "XAUUSD",
@@ -422,21 +485,9 @@ def detect(
         raise ValueError("detector symbol does not match contract snapshot")
     h4_atr, h1_atr = wilder_atr(h4), wilder_atr(h1)
     tick_rows = list(ticks)
-    for tick_index, tick in enumerate(tick_rows):
-        if (
-            tick.sequence < 0
-            or not all(math.isfinite(value) and value > 0 for value in (tick.bid, tick.ask))
-            or tick.ask < tick.bid
-            or (tick.source_h1_bar_time is not None and tick.source_h1_bar_time > tick.time)
-        ):
-            raise ValueError("invalid tick source row")
-        if tick_index and (
-            tick_rows[tick_index - 1].sequence >= tick.sequence
-            or tick_rows[tick_index - 1].time > tick.time
-        ):
-            raise ValueError("ticks must be monotonic in absolute source sequence and time")
     funnel = {status: 0 for status in TERMINAL_STATUSES}
     rows: list[dict[str, object]] = []
+    contexts: dict[str, RowContext] = {}
     anchors: list[TerminalAnchor] = []
 
     def finish(anchor_time: datetime, status: str, horizon_end: datetime | None) -> None:
@@ -496,6 +547,9 @@ def detect(
             continue
         eligible_h1 = eligible_h1[:6]
         six_h1_horizon = h1[eligible_h1[-1] + 1].time
+        if six_h1_horizon >= TO_EXCLUSIVE:
+            finish(bar.time, "DATA_UNAVAILABLE", six_h1_horizon)
+            continue
         attempt: int | None = None
         for h1_index in eligible_h1:
             a_reclaim = h1_atr[h1_index]
@@ -520,28 +574,18 @@ def detect(
             finish(bar.time, "FIRST_RECLAIM_NOT_REJECTED", h1[attempt + 1].time)
             continue
         decision = h1[attempt + 1].time
-        reclaim_sequences = [
-            tick.sequence for tick in tick_rows if tick.source_h1_bar_time == reclaim.time
-        ]
-        ambiguous_same_second = any(
-            tick.time == decision and tick.source_h1_bar_time is None for tick in tick_rows
-        )
-        if ambiguous_same_second:
+        if decision >= TO_EXCLUSIVE:
             finish(bar.time, "DATA_UNAVAILABLE", decision)
             continue
-        last_reclaim_sequence = max(reclaim_sequences, default=-1)
-        eligible_ticks = [
-            tick for tick in tick_rows
-            if tick.time >= decision and tick.time <= decision + timedelta(minutes=15)
-            and tick.sequence > last_reclaim_sequence
-            and tick.source_h1_bar_time != reclaim.time
-        ]
-        if not eligible_ticks:
-            finish(bar.time, "ENTRY_TICK_UNAVAILABLE", decision + timedelta(minutes=15))
-            continue
-        entry = eligible_ticks[0]
-        if not entry.session_open:
-            finish(bar.time, "ENTRY_TICK_UNAVAILABLE", entry.time)
+        entry, tick_status, last_reclaim_sequence, causal_ticks, tick_horizon_complete = select_entry_tick(
+            tick_rows, reclaim_time=reclaim.time, decision_time=decision,
+        )
+        if entry is None:
+            finish(
+                bar.time, tick_status,
+                decision + timedelta(minutes=15) if tick_status == "ENTRY_TICK_UNAVAILABLE"
+                else decision if tick_horizon_complete else None,
+            )
             continue
         if not (FROM_INCLUSIVE <= entry.time < TO_EXCLUSIVE):
             finish(bar.time, "DATA_UNAVAILABLE", entry.time)
@@ -585,10 +629,16 @@ def detect(
             "contract_size": contract.contract_size, "tick_size": contract.tick_size,
             "tick_value_loss": contract.tick_value_loss, "point": contract.point, "digits": contract.digits,
             "minimum_contract_risk_usd": risk,
-            "reference_risk_feasible": risk <= 25.0, "deployment_risk_feasible": risk <= 2.5,
+            "reference_risk_feasible": risk_at_or_below(risk, 25.0),
+            "deployment_risk_feasible": risk_at_or_below(risk, 2.5),
             "availability_status": "RAW_OPPORTUNITY_AVAILABLE", "exclusion_reason": "",
         }
         rows.append(row)
+        contexts[candidate_id] = RowContext(
+            tuple(impulse), tuple(distribution), bar, reclaim, decision, entry, contract,
+            a_impulse, a_box, a_reclaim, last_reclaim_sequence, causal_ticks,
+            _causal_bars(h1, boundary), _causal_bars(h4, boundary), _causal_bars(d1, boundary),
+        )
         finish(bar.time, "RAW_OPPORTUNITY_AVAILABLE", entry.time)
     incidence = incidence_report(rows)
-    return Detection(tuple(rows), funnel, tuple(anchors), incidence, locked_final_status(incidence))
+    return Detection(tuple(rows), funnel, tuple(anchors), incidence, locked_final_status(incidence), contexts)

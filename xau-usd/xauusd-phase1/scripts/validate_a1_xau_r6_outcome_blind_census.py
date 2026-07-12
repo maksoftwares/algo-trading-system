@@ -22,9 +22,13 @@ from build_a1_xau_r6_distribution_break_failed_reclaim_census import (
     TerminalAnchor,
     broker_time,
     canonical_ids,
+    classify_router,
     incidence_report,
+    locked_final_status,
     minimum_contract_risk,
     normalize_up,
+    risk_at_or_below,
+    select_entry_tick,
 )
 
 
@@ -83,9 +87,9 @@ def validate_row(row: dict[str, Any], schema: dict[str, Any], context: RowContex
         raise ValueError("invalid price relation")
     if row["risk_exit_price"] <= row["structural_stop"]:
         raise ValueError("conservative tick missing")
-    if row["reference_risk_feasible"] != (row["minimum_contract_risk_usd"] <= 25.0):
+    if row["reference_risk_feasible"] != risk_at_or_below(float(row["minimum_contract_risk_usd"]), 25.0):
         raise ValueError("reference risk flag mismatch")
-    if row["deployment_risk_feasible"] != (row["minimum_contract_risk_usd"] <= 2.5):
+    if row["deployment_risk_feasible"] != risk_at_or_below(float(row["minimum_contract_risk_usd"]), 2.5):
         raise ValueError("deployment risk flag mismatch")
 
     impulse, distribution = context.impulse, context.distribution
@@ -188,6 +192,31 @@ def validate_row(row: dict[str, Any], schema: dict[str, Any], context: RowContex
     }
     if any(row[key] != expected for key, expected in contract_fields.items()):
         raise ValueError("contract snapshot mismatch")
+    if not (
+        distribution[-1].close >= box_low
+        and breakdown.close <= box_low - 0.1 * a_box
+        and breakdown.close < breakdown.open
+        and reclaim.high >= box_low - 0.1 * a_reclaim
+        and reclaim.close <= box_low - 0.05 * a_reclaim
+        and reclaim.close < reclaim.open
+        and entry.session_open
+    ):
+        raise ValueError("locked directional predicate mismatch")
+    selected, status, last_reclaim, _, complete = select_entry_tick(
+        context.causal_ticks, reclaim_time=reclaim.time, decision_time=decision,
+    )
+    if not complete or status != "RAW_OPPORTUNITY_AVAILABLE" or selected != entry or last_reclaim != context.last_reclaim_tick_sequence:
+        raise ValueError("entry tick was not the first causal eligible tick")
+    # The detector's router decision is the next native H4 open, represented by
+    # the first router H4 bar strictly after the breakdown bar.
+    router_decision = next((bar.time for bar in context.router_h4 if bar.time > breakdown.time), None)
+    if router_decision is None:
+        raise ValueError("router decision boundary unavailable")
+    recomputed_router = classify_router(
+        h1=context.router_h1, h4=context.router_h4, d1=context.router_d1, decision=router_decision,
+    )
+    if row["router_state"] != recomputed_router or recomputed_router not in {"UPTREND", "CHOP"}:
+        raise ValueError("router state mismatch")
 
 
 def validate_funnel(
@@ -231,16 +260,27 @@ def validate_detector_prefix_invariance(
     """Rerun the detector and compare every terminal decision fully owned by the prefix."""
     prefix = detector(**prefix_inputs)
     extended = detector(**extended_inputs)
-    stable_prefix = {
-        anchor.anchor_time: anchor for anchor in prefix.anchors
-        if anchor.horizon_end is not None and anchor.horizon_end <= prefix_end
-    }
-    extended_by_anchor = {anchor.anchor_time: anchor for anchor in extended.anchors}
-    for anchor_time, anchor in stable_prefix.items():
-        if extended_by_anchor.get(anchor_time) != anchor:
-            raise ValueError("detector terminal prefix invariance failure")
+    stable_prefix = tuple(
+        anchor for anchor in prefix.anchors if anchor.horizon_end is not None and anchor.horizon_end <= prefix_end
+    )
+    stable_extended = tuple(
+        anchor for anchor in extended.anchors if anchor.horizon_end is not None and anchor.horizon_end <= prefix_end
+    )
+    if stable_prefix != stable_extended:
+        raise ValueError("detector terminal prefix invariance failure")
     stable_rows = [row for row in prefix.rows if datetime.fromisoformat(str(row["entry_tick_time"])) <= prefix_end]
     validate_prefix_invariance(stable_rows, extended.rows, prefix_end=prefix_end)
+
+
+def validate_detection(detection: Detection, schema: dict[str, Any]) -> None:
+    candidate_ids = [str(row["candidate_id"]) for row in detection.rows]
+    if len(candidate_ids) != len(set(candidate_ids)) or set(candidate_ids) != set(detection.contexts):
+        raise ValueError("detection context reconciliation mismatch")
+    for row in detection.rows:
+        validate_row(dict(row), schema, detection.contexts[str(row["candidate_id"])])
+    validate_funnel(detection.funnel, detection.rows, detection.anchors, detection.incidence)
+    if detection.final_status != locked_final_status(detection.incidence):
+        raise ValueError("locked final status mismatch")
 
 
 def validate_lock_manifest(root: Path, manifest: Path) -> None:

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import sys
 import json
+import hashlib
+import dataclasses
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -65,6 +67,57 @@ def router_market() -> tuple[datetime, list[R.Bar], list[R.Bar], list[R.Bar]]:
         native_bars(decision, 70, timedelta(hours=4)),
         native_bars(decision, 277, timedelta(days=1)),
     )
+
+
+MT5_ROUTER_FIXTURES = {
+    "UPTREND": ("62a7b6f528c41beb4e56260b0967fa8da18950e2be45857b2903c4af92fe6aa5", 2.3327889183408757, 2.441938199210026, 80.0, 81.74603174603175, 597.575000000001, 592.3250850147854),
+    "DOWNTREND": ("94e5055dde6ae69d6d8c2ac83f83aebc118595082c35b41e9a7c2281a34388c7", 2.3327889183408757, 2.441938199210026, 80.0, 81.74603174603175, 402.42499999999893, 407.67491498521537),
+    "COMPRESSION": ("a06d6b92e7db4af7f0f95b4d069362b7d3cc7439b05acabade3279fa35ac380e", 1.1977067532874262, 1.2432328799007755, 1.6666666666666667, 0.3968253968253968, 499.98499999999996, 499.99399708520787),
+    "CHOP": ("ef38a8e2032a3b860e864d09a760aa4d4c1701eea91485540783edc7d6439ef1", 1.1977067532874262, 2.1101371087934915, 45.0, 10.714285714285714, 503.472753853296, 501.513218700092),
+}
+
+
+def mt5_router_fixture(decision: datetime, count: int, spacing: timedelta, state: str, timeframe: str) -> list[R.Bar]:
+    start = decision - spacing * (count - 1)
+    sign = 1 if state == "UPTREND" else -1 if state == "DOWNTREND" else 0
+    output = []
+    for index in range(count):
+        center = 500 + sign * 0.35 * index
+        if sign == 0:
+            center = 500 + (0.3 if index % 2 else -0.3)
+        width = 6.0 if index % 11 == 0 else 2.0
+        if state in {"COMPRESSION", "CHOP"} and index >= count - 30:
+            width = 1.0
+        if state == "CHOP" and timeframe == "d1" and count - 6 <= index <= count - 2:
+            center = 500 + 4 * (index - (count - 6))
+        open_ = center - 0.1 * sign
+        close = center + 0.1 * sign if sign else center
+        output.append(bar(start + spacing * index, open_, center + width / 2, center - width / 2, close))
+    return output
+
+
+@pytest.mark.parametrize("state", sorted(MT5_ROUTER_FIXTURES))
+def test_hash_addressed_mt5_router_numerical_parity_without_monkeypatch(state: str) -> None:
+    decision = datetime(2024, 1, 1)
+    h1 = mt5_router_fixture(decision, 40, timedelta(hours=1), state, "h1")
+    h4 = mt5_router_fixture(decision, 80, timedelta(hours=4), state, "h4")
+    d1 = mt5_router_fixture(decision, 290, timedelta(days=1), state, "d1")
+    payload = {
+        timeframe: [(value.time.isoformat(), value.open, value.high, value.low, value.close) for value in bars]
+        for timeframe, bars in (("h1", h1), ("h4", h4), ("d1", d1))
+    }
+    expected_hash, h1_atr, d1_atr, pct60, pct252, ema20, ema50 = MT5_ROUTER_FIXTURES[state]
+    assert hashlib.sha256(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()).hexdigest() == expected_hash
+    h1_index, d1_index = R._last_completed_index(h1, decision), R._last_completed_index(d1, decision)
+    h1_values, d1_values = R.wilder_atr(h1), R.wilder_atr(d1)
+    assert h1_values[h1_index] == pytest.approx(h1_atr)
+    assert d1_values[d1_index] == pytest.approx(d1_atr)
+    assert R.percentile_rank([value for value in d1_values[d1_index - 59 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(pct60)
+    assert R.percentile_rank([value for value in d1_values[d1_index - 251 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(pct252)
+    closes = [value.close for value in d1]
+    assert R.ema(closes, 20)[d1_index] == pytest.approx(ema20)
+    assert R.ema(closes, 50)[d1_index] == pytest.approx(ema50)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == state
 
 
 def test_router_exact_availability_boundary_and_all_states(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -135,12 +188,11 @@ def test_exact_shift_detector_emits_one_raw_row(monkeypatch: pytest.MonkeyPatch)
     assert row["decision_time"].endswith("13:00:00")
     assert row["availability_status"] == "RAW_OPPORTUNITY_AVAILABLE"
     assert result.funnel["RAW_OPPORTUNITY_AVAILABLE"] == 1
-    context = R.RowContext(
-        tuple(h4[2:8]), tuple(h4[8:14]), h4[14], h1[60], h1[61].time,
-        ticks[0], contract(), 1.0, 1.0, 1.0,
-    )
+    context = result.contexts[str(row["candidate_id"])]
     schema = json.loads((SCRIPTS.parent / "docs" / "A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json").read_text())
+    monkeypatch.setattr(V, "classify_router", lambda **_: "CHOP")
     V.validate_row(dict(row), schema, context)
+    V.validate_detection(result, schema)
     V.validate_funnel(result.funnel, result.rows, result.anchors, result.incidence)
     bad = dict(row)
     bad["breakdown_distance_atr"] = float(bad["breakdown_distance_atr"]) + 0.01
@@ -150,6 +202,13 @@ def test_exact_shift_detector_emits_one_raw_row(monkeypatch: pytest.MonkeyPatch)
     bad["candidate_id"] = "not-a-hash"
     with pytest.raises(Exception, match="pattern"):
         V.validate_row(bad, schema, context)
+    closed_entry = dataclasses.replace(context.entry_tick, session_open=False)
+    closed_context = dataclasses.replace(context, entry_tick=closed_entry, causal_ticks=(closed_entry,))
+    with pytest.raises(ValueError, match="predicate|eligible"):
+        V.validate_row(dict(row), schema, closed_context)
+    monkeypatch.setattr(V, "classify_router", lambda **_: "DOWNTREND")
+    with pytest.raises(ValueError, match="router"):
+        V.validate_row(dict(row), schema, context)
 
 
 def test_first_reclaim_attempt_consumes_episode(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -184,6 +243,26 @@ def test_incomplete_horizon_and_unavailable_reclaim_atr_fail_closed(monkeypatch:
     assert not missing.rows
 
 
+def test_complete_six_h1_decision_horizon_must_remain_inside_locked_interval(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    delta = datetime(2026, 6, 30, 16) - h4[14].time
+    h4 = [dataclasses.replace(value, time=value.time + delta) for value in h4]
+    h1 = [dataclasses.replace(value, time=value.time + delta) for value in h1]
+    d1 = [dataclasses.replace(value, time=value.time + delta) for value in d1]
+    ticks = [
+        dataclasses.replace(
+            value, time=value.time + delta,
+            source_h1_bar_time=value.source_h1_bar_time + delta if value.source_h1_bar_time else None,
+        )
+        for value in ticks
+    ]
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert not result.rows
+    assert result.funnel["DATA_UNAVAILABLE"] == 1
+
+
 def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatch: pytest.MonkeyPatch) -> None:
     h4, h1, d1, ticks = fixture_market()
     monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
@@ -196,14 +275,29 @@ def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatc
         R.Tick(decision, 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
         R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
     ]
-    assert len(R.detect(h4=h4, h1=h1, d1=d1, ticks=owned, contract=contract()).rows) == 1
+    prefix = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned, contract=contract())
+    assert len(prefix.rows) == 1
+    for late_tick in (
+        R.Tick(decision, 1002, 102.10, 102.11),
+        R.Tick(decision, 1002, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+    ):
+        extended = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned + [late_tick], contract=contract())
+        assert extended.rows == prefix.rows
+        assert extended.anchors == prefix.anchors
     closed_first = [
         R.Tick(decision, 1000, 102.10, 102.11, session_open=False, source_h1_bar_time=decision),
         R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
     ]
     assert R.detect(h4=h4, h1=h1, d1=d1, ticks=closed_first, contract=contract()).funnel["ENTRY_TICK_UNAVAILABLE"] == 1
+    # Nothing after the consumed entry may retroactively affect the signal.
+    assert len(R.detect(h4=h4, h1=h1, d1=d1, ticks=list(reversed(owned)), contract=contract()).rows) == 1
+    invalid_before_entry = [
+        R.Tick(decision - timedelta(seconds=2), 1001, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+        R.Tick(decision - timedelta(seconds=1), 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+        owned[1],
+    ]
     with pytest.raises(ValueError, match="monotonic"):
-        R.detect(h4=h4, h1=h1, d1=d1, ticks=list(reversed(owned)), contract=contract())
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=invalid_before_entry, contract=contract())
 
 
 def test_native_weekend_gap_and_fifteen_minute_entry_expiry(monkeypatch: pytest.MonkeyPatch) -> None:

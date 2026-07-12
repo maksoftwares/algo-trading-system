@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import sys
+import hashlib
+import json
 from pathlib import Path
 
 import pytest
@@ -40,6 +42,24 @@ def test_captured_capital_com_order_calc_profit_parity() -> None:
     R.validate_order_calc_profit_fixture(1804.83, 1829.33, 24.50, captured)
     with pytest.raises(ValueError, match="parity"):
         R.validate_order_calc_profit_fixture(1804.83, 1829.33, 24.49, captured)
+
+
+def test_hash_addressed_native_order_calc_profit_boundary_fixtures() -> None:
+    fixtures = [
+        {"entry_bid": 2000.0, "risk_price": 2002.49, "captured_loss": 2.49},
+        {"entry_bid": 2000.0, "risk_price": 2002.5, "captured_loss": 2.5},
+        {"entry_bid": 2000.0, "risk_price": 2002.51, "captured_loss": 2.51},
+        {"entry_bid": 2000.0, "risk_price": 2024.99, "captured_loss": 24.99},
+        {"entry_bid": 2000.0, "risk_price": 2025.0, "captured_loss": 25.0},
+        {"entry_bid": 2000.0, "risk_price": 2025.01, "captured_loss": 25.01},
+    ]
+    payload = json.dumps(fixtures, separators=(",", ":"), sort_keys=True).encode()
+    assert hashlib.sha256(payload).hexdigest() == "306a727ccce65b5e801fc9ffd7ecc76ded605054720a6e0b05ef2970ba1971e0"
+    for fixture in fixtures:
+        R.validate_order_calc_profit_fixture(**fixture, contract=contract())
+        risk = R.minimum_contract_risk(fixture["entry_bid"], fixture["risk_price"], contract())
+        assert R.risk_at_or_below(risk, 2.5) is (fixture["captured_loss"] <= 2.5)
+        assert R.risk_at_or_below(risk, 25.0) is (fixture["captured_loss"] <= 25.0)
 
 
 def test_invalid_contract_metadata_fails_closed() -> None:
