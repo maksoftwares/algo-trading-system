@@ -96,7 +96,23 @@ def generate_project_status_summary(
     governance_documents = {
         key: phase1_root / "docs" / filename for key, filename in GOVERNANCE_DOCUMENT_NAMES.items()
     }
-    if all(path.is_file() for path in governance_documents.values()):
+    present_governance_documents = {
+        key: path for key, path in governance_documents.items() if path.is_file()
+    }
+    if present_governance_documents and len(present_governance_documents) != len(
+        governance_documents
+    ):
+        missing_documents = [
+            path.relative_to(repo_root).as_posix()
+            for key, path in governance_documents.items()
+            if key not in present_governance_documents
+        ]
+        raise FileNotFoundError(
+            "A1 governance document set is incomplete; missing: "
+            + ", ".join(missing_documents)
+        )
+
+    if len(present_governance_documents) == len(governance_documents):
         return _generate_governance_status(
             repo_root=repo_root,
             phase1_root=phase1_root,

@@ -70,6 +70,17 @@ def verify_status_dashboard_freshness(repo_root: Path, status_path: Path | None 
     status_path = (status_path or repo_root / "status.html").resolve()
     project_status_json_path = repo_root / "status_summary.json"
     project_status = _read_json(project_status_json_path) if project_status_json_path.exists() else {}
+    present_governance_documents = [
+        relative_path
+        for relative_path in GOVERNANCE_DOCUMENTS.values()
+        if (repo_root / relative_path).is_file()
+    ]
+    if present_governance_documents and project_status.get("schema_version") != GOVERNANCE_SCHEMA:
+        actual_schema = project_status.get("schema_version", "MISSING")
+        return [
+            "A1 governance documents are present but the canonical status is missing or has been "
+            f"downgraded from {GOVERNANCE_SCHEMA} (actual schema: {actual_schema})"
+        ]
     if project_status.get("schema_version") == GOVERNANCE_SCHEMA:
         return _verify_governance_status_dashboard(repo_root, status_path, project_status)
 

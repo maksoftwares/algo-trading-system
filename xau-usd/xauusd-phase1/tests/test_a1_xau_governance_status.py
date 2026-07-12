@@ -68,12 +68,9 @@ RULE_ADMISSIBILITY_SOURCES = [
 ]
 
 
-def test_incomplete_governance_document_set_preserves_legacy_schema(tmp_path: Path):
+def test_no_governance_documents_uses_legacy_schema(tmp_path: Path):
     repo = tmp_path / "repo"
-    docs = repo / "xau-usd" / "xauusd-phase1" / "docs"
-    docs.mkdir(parents=True)
-    for name in DOC_NAMES[:3]:
-        (docs / name).write_text(f"# {name}\n", encoding="utf-8")
+    repo.mkdir()
 
     module = _load_script("generate_project_status_summary")
     json_path, _ = module.generate_project_status_summary(
@@ -85,6 +82,69 @@ def test_incomplete_governance_document_set_preserves_legacy_schema(tmp_path: Pa
     assert summary["schema_version"] == "project_status_summary_v2"
     assert "current" not in summary
     assert not (repo / "xau-usd" / "xauusd-phase1" / "status_summary.json").exists()
+
+
+@pytest.mark.parametrize("missing_name", DOC_NAMES)
+def test_any_single_missing_governance_document_fails_closed_without_outputs(
+    tmp_path: Path,
+    missing_name: str,
+):
+    repo = tmp_path / "repo"
+    docs = repo / "xau-usd" / "xauusd-phase1" / "docs"
+    docs.mkdir(parents=True)
+    for name in DOC_NAMES:
+        if name != missing_name:
+            (docs / name).write_text(f"# {name}\n", encoding="utf-8")
+
+    module = _load_script("generate_project_status_summary")
+    with pytest.raises(FileNotFoundError, match="A1 governance document set is incomplete") as error:
+        module.generate_project_status_summary(repo)
+
+    assert missing_name in str(error.value)
+    assert not (repo / "status_summary.json").exists()
+    assert not (repo / "status_summary.md").exists()
+    assert not (repo / "xau-usd" / "xauusd-phase1" / "status_summary.json").exists()
+    assert not (repo / "xau-usd" / "xauusd-phase1" / "status_summary.md").exists()
+
+
+def test_partial_governance_document_set_lists_every_missing_document(tmp_path: Path):
+    repo = tmp_path / "repo"
+    docs = repo / "xau-usd" / "xauusd-phase1" / "docs"
+    docs.mkdir(parents=True)
+    (docs / DOC_NAMES[0]).write_text(f"# {DOC_NAMES[0]}\n", encoding="utf-8")
+
+    module = _load_script("generate_project_status_summary")
+    with pytest.raises(FileNotFoundError) as error:
+        module.generate_project_status_summary(repo)
+
+    message = str(error.value)
+    assert all(name in message for name in DOC_NAMES[1:])
+    assert DOC_NAMES[0] not in message
+    assert not (repo / "status_summary.json").exists()
+    assert not (repo / "status_summary.md").exists()
+
+
+@pytest.mark.parametrize("status_payload", [None, {"schema_version": "project_status_summary_v2"}])
+def test_verifier_rejects_missing_or_legacy_schema_when_any_governance_doc_exists(
+    tmp_path: Path,
+    status_payload: dict[str, str] | None,
+):
+    repo = tmp_path / "repo"
+    doc = repo / "xau-usd" / "xauusd-phase1" / "docs" / DOC_NAMES[0]
+    doc.parent.mkdir(parents=True)
+    doc.write_text(f"# {DOC_NAMES[0]}\n", encoding="utf-8")
+    if status_payload is not None:
+        (repo / "status_summary.json").write_text(
+            json.dumps(status_payload),
+            encoding="utf-8",
+        )
+
+    verifier = _load_script("verify_status_dashboard_freshness")
+    errors = verifier.verify_status_dashboard_freshness(repo)
+
+    assert len(errors) == 1
+    assert "A1 governance documents are present" in errors[0]
+    assert "downgraded from a1_xau_governance_status_v1" in errors[0]
 
 
 def test_governance_summary_is_single_current_truth_and_writes_phase_local_pointers(tmp_path: Path):
