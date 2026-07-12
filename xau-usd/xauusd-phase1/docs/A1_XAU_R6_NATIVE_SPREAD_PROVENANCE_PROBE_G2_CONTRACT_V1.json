@@ -3,7 +3,7 @@
     "artifact": "A1_XAU_NP1G1_INCOMPLETE_STOP_REVIEW_D612203A_2026_07_12.md",
     "artifact_sha256": "baaf56db8adc84fccca7e178777ba4dc6b95c575ba1deb9430459379e6b9eaba",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A2_ATOMIC_COMPLETE_STOP_AND_AUTHORITY_CLOSURE"
+    "phase": "NP1-G2A3_PREFLIGHT_IMMUTABILITY_AND_COMPLETE_PACKET_ATTESTATION_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -36,7 +36,7 @@
     "versioned_prefix": "np1_g2_"
   },
   "review_parser": {
-    "accepted_filename": "A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md",
+    "accepted_filename": "A1_XAU_NP1G2A3_EXECUTION_AUTHORIZATION_2FE3B3C2_2026_07_13.md",
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
     "reject_competing_fail_or_no_go": true

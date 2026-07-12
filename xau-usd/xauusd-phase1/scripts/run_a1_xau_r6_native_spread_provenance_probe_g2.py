@@ -81,12 +81,14 @@ def validate_exact_root(root: Path, *, initial: bool) -> tuple[Path, Path]:
 def validate_metadata_receipt(root: Path, receipt: dict[str, Any]) -> None:
     copied = receipt.get("copied", [])
     paths = {row.get("destination_relative") for row in copied}
+    if len(paths) != len(copied): raise RuntimeError("duplicate metadata receipt entry")
     if not paths <= set(ALLOWED_METADATA):
         raise RuntimeError("unexpected copied Config file")
     for row in copied:
         relative = row["destination_relative"]
         destination = root / relative
         source = Path(row["source_path"])
+        if source.is_symlink() or destination.is_symlink(): raise RuntimeError("metadata symlink/reparse point rejected")
         if source.resolve().parent.parent not in tuple(old.resolve() for old in QUARANTINED_ROOTS):
             raise RuntimeError("metadata source is not a quarantined approved root")
         if relative not in ALLOWED_METADATA or not destination.is_file():
@@ -98,7 +100,8 @@ def validate_metadata_receipt(root: Path, receipt: dict[str, Any]) -> None:
         if destination.stat().st_size != row["size_bytes"] or sha256_file(destination) != row["sha256"] or source.read_bytes() != destination.read_bytes():
             raise RuntimeError("metadata receipt hash/size mismatch")
     config = root / "Config"
-    actual = {f"Config/{p.name}" for p in config.iterdir() if p.is_file()} if config.is_dir() else set()
+    if any(p.is_dir() or p.is_symlink() for p in config.rglob("*")): raise RuntimeError("nested Config or reparse point rejected")
+    actual = {p.relative_to(root).as_posix() for p in config.rglob("*") if p.is_file()} if config.is_dir() else set()
     if actual != paths:
         raise RuntimeError(f"actual Config file set differs from receipt: {sorted(actual)}")
 
@@ -181,7 +184,9 @@ def copy_if_present(source: Path, destination: Path) -> None:
 
 def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before_ns: int, parser: Callable[[Path], Any]) -> None:
     destination.mkdir(parents=True, exist_ok=False)
-    copy_if_present(root / "Config" / f"np1_g2_{run_id}.ini", destination / "tester.ini")
+    ini=root / "Config" / f"np1_g2_{run_id}.ini"
+    if not ini.is_file() or ini.read_text(encoding="utf-8") != render_ini(run_id): raise RuntimeError("executed G2 INI missing or not exact")
+    shutil.copyfile(ini,destination/"tester.ini")
     report = expected_report(root, run_id)
     validate_fresh_report(report, not_before_ns, parser)
     shutil.copyfile(report, destination / "native_report.htm")
@@ -196,7 +201,7 @@ def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before
 def _manifest(root: Path, schema: str = "a1_xau_r6_np1_g2_stop_manifest_v1") -> None:
     artifacts = []
     for path in sorted(root.rglob("*")):
-        if path.is_file() and path.name not in {"manifest.json", "manifest.sha256"}:
+        if path.is_file() and path.relative_to(root).as_posix() not in {"manifest.json", "manifest.sha256"}:
             artifacts.append({"relative_path": path.relative_to(root).as_posix(), "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
     write_json(root / "manifest.json", {"schema_version": schema, "artifacts": artifacts})
     (root / "manifest.sha256").write_text(sha256_file(root / "manifest.json") + "\n", encoding="ascii", newline="\n")
@@ -257,11 +262,11 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    if path.name != "A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
+    if path.name != "A1_XAU_NP1G2A3_EXECUTION_AUTHORIZATION_2FE3B3C2_2026_07_13.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")
     begin, end = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN", "NP1_G2B_AUTHORIZATION_BLOCK_END"
-    if text.count(begin) != 1 or text.count(end) != 1:
+    if text.count(begin) != 1 or text.count(end) != 1 or text.index(begin) >= text.index(end):
         raise PermissionError("later exact G2-B authorization required")
     fields = {}
     for raw in text.split(begin, 1)[1].split(end, 1)[0].splitlines():
@@ -271,7 +276,7 @@ def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tr
             fields[key] = value
     expected = {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
     outside = (text.split(begin,1)[0] + text.split(end,1)[1]).upper()
-    if fields != expected or "FAIL" in outside or "NO-GO" in outside:
+    if fields != expected or any(token in outside for token in ("FAIL","NO-GO","NOT AUTHORIZED","REJECTED","CONDITIONAL")):
         raise PermissionError("G2-B authorization identity/fields mismatch")
     return fields
 
@@ -284,15 +289,15 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
         raise PermissionError("clean reviewed G2-A commit/tree required")
     parse_future_authorization(review_artifact, review_sha256, commit, tree)
     complete, stop = assert_mutually_exclusive(reports_root)
+    terminal, editor = validate_exact_root(root, initial=True)
+    receipt = json.loads(metadata_receipt.read_text(encoding="utf-8")); validate_metadata_receipt(root, receipt)
     ledger_path = root / ".np1_g2_invocation_ledger.json"
     commands: list[dict[str, Any]] = []; invoked: list[str] = []; preflight: dict[str, Any] = {}; report_attestation: dict[str, Any] = {}
     workspace = root / "np1_g2_compile_workspace"
     staging = reports_root / ".A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_20260712.staging"
     if staging.exists(): raise RuntimeError("noncanonical staging path already exists")
     try:
-        terminal, editor = validate_exact_root(root, initial=True)
-        receipt = json.loads(metadata_receipt.read_text(encoding="utf-8")); validate_metadata_receipt(root, receipt)
-        preflight, _, report_attestation = prepare_reports_directory(root)
+        preflight, post_reports, report_attestation = prepare_reports_directory(root)
         ledger = Ledger(ledger_path); ledger.compilation()
         compiled = G1.compile_once(root, editor, runner=compile_runner, version_reader=version_reader)
         workspace.mkdir(); copy_if_present(compiled.source, workspace / B.PROBE_NAME); copy_if_present(compiled.ex5, workspace / compiled.ex5.name); copy_if_present(compiled.log, workspace / "compile.log")
@@ -310,12 +315,22 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
             import analyze_a1_xau_r6_native_spread_provenance_probe as A
             collect_exact_outputs(root, run_id, staging / "runs" / run_id, started, A.parse_report)
         if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("final post-probe2 EX5 drift")
-        write_json(staging / "metadata_receipt.json", receipt); write_json(staging / "preflight_root_inventory.json", preflight); write_json(staging / "post_run_root_inventory.json", inventory(root)); write_json(staging / "reports_directory_attestation.json", report_attestation); write_json(staging / "invocation_ledger.json", ledger.data); write_json(staging / "commands.json", commands)
+        write_json(staging / "metadata_receipt.json", receipt); write_json(staging / "authorization_attestation.json", {"artifact":review_artifact.name,"sha256":review_sha256,"parsed_fields":parse_future_authorization(review_artifact,review_sha256,commit,tree)}); write_json(staging / "preflight_root_inventory.json", preflight); write_json(staging/"post_reports_creation_inventory.json",post_reports); write_json(staging / "post_run_root_inventory.json", inventory(root)); write_json(staging / "reports_directory_attestation.json", report_attestation); write_json(staging / "invocation_ledger.json", ledger.data); write_json(staging / "commands.json", commands)
+        searches=[]
+        for rid in RUN_IDS:
+            searches.append({"run_id":rid,"report":str(expected_report(root,rid)),"output_glob":f"Tester/Agent-*/MQL5/Files/np1_g2_{rid}_*"})
+        write_json(staging/"searched_location_inventory.json",{"searched":searches})
+        log_rows=[]
+        for path in [*(root/"Logs").glob("*.log"),*(root/"Tester"/"logs").glob("*.log"),*(root/"Tester").glob("Agent-*/logs/*.log")]:
+            rel=path.relative_to(root).as_posix();copy_if_present(path,staging/"logs"/rel);log_rows.append({"source_relative":rel,"size_bytes":path.stat().st_size,"sha256":sha256_file(path)})
+        write_json(staging/"logs"/"log_inventory.json",{"logs":log_rows})
         import analyze_a1_xau_r6_native_spread_provenance_probe as A
         result = A.build_packet(staging); result["status"] = "NP1_G2_DIAGNOSTIC_COMPLETE"; A.write_json(staging / "result.json", result)
         (staging/"README.md").write_text("# NP1-G2 Native Spread Provenance Probe\n\nStatus: `NP1_G2_DIAGNOSTIC_COMPLETE`. Diagnostic only.\n",encoding="utf-8",newline="\n")
         (staging/"test_validation.md").write_text("# NP1-G2 Validation\n\nLocked G2 implementation and evidence verification passed.\n",encoding="utf-8",newline="\n")
-        _manifest(staging,"a1_xau_r6_np1_g2_complete_manifest_v1"); verify_manifest(staging)
+        write_json(staging/"packet_verification.json",{"scientific_read_only_checks":["official_stability","tick_windows","manifest"],"original_packet_mutated":False})
+        _manifest(staging,"a1_xau_r6_np1_g2_complete_manifest_v1"); before={p.relative_to(staging).as_posix():sha256_file(p) for p in staging.rglob("*") if p.is_file()}; verify_manifest(staging); A.assert_official_stability(staging); after={p.relative_to(staging).as_posix():sha256_file(p) for p in staging.rglob("*") if p.is_file()};
+        if before!=after: raise RuntimeError("read-only semantic verification mutated packet")
         staging.rename(complete)
         return complete
     except BaseException as exc:
