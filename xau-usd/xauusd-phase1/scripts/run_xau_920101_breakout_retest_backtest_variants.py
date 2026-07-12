@@ -504,6 +504,7 @@ def run_variants(
     variant_timeout_seconds: int = 180,
     deposit: str = "1808.13",
     currency: str = "AED",
+    login: str = "1025742",
 ) -> dict[str, Any]:
     backtest_root = backtest_root.resolve()
     output_dir = output_dir.resolve()
@@ -538,6 +539,7 @@ def run_variants(
                 variant_timeout_seconds,
                 deposit,
                 currency,
+                login,
             )
         )
 
@@ -551,7 +553,7 @@ def run_variants(
             "candidate": "breakout_retest",
             "timeframe": "M5",
             "period": f"{from_date} -> {to_date}",
-            "account_context": "1025742 / Capital.ComMena-Demo",
+            "account_context": f"{login} / Capital.ComMena-Demo",
             "tester_deposit": deposit,
             "tester_currency": currency,
             "terminal_sandbox": str(backtest_root),
@@ -618,12 +620,14 @@ def run_variant(
     timeout_seconds: int = 180,
     deposit: str = "1808.13",
     currency: str = "AED",
+    login: str = "1025742",
 ) -> dict[str, Any]:
     report_base = f"XAU920101BreakoutRetest_{tag}_M5_{variant.name}"
     startup_log = f"xau_920101_bt_{variant.name}_startup.csv"
     signal_log = f"xau_920101_bt_{variant.name}_signal.csv"
     order_log = f"xau_920101_bt_{variant.name}_order.csv"
     management_log = f"xau_920101_bt_{variant.name}_management.csv"
+    deal_log = f"xau_920101_bt_{variant.name}_deal.csv"
     config = write_config(
         backtest_root,
         variant,
@@ -632,13 +636,23 @@ def run_variant(
         signal_log,
         order_log,
         management_log,
+        deal_log,
         from_date,
         to_date,
         tag,
         deposit,
         currency,
+        login,
     )
-    remove_old_variant_files(backtest_root, report_base, startup_log, signal_log, order_log, management_log)
+    remove_old_variant_files(
+        backtest_root,
+        report_base,
+        startup_log,
+        signal_log,
+        order_log,
+        management_log,
+        deal_log,
+    )
     stop_backtest_terminal(terminal)
     proc = subprocess.Popen(
         [str(terminal), "/portable", f"/config:{config}"],
@@ -647,7 +661,13 @@ def run_variant(
         stderr=subprocess.PIPE,
     )
     html_report = backtest_root / "Reports" / f"{report_base}.htm"
-    wait_for_file(html_report, timeout_seconds=timeout_seconds)
+    report_timeout_error = ""
+    try:
+        wait_for_report_or_process(html_report, proc, timeout_seconds=timeout_seconds)
+    except TimeoutError as exc:
+        # Some isolated MT5 installs complete the test but omit the requested HTML
+        # export. Preserve the EA evidence logs and mark outcomes unavailable.
+        report_timeout_error = str(exc)
     time.sleep(2)
     stop_backtest_terminal(terminal)
     stdout_tail = ""
@@ -664,31 +684,62 @@ def run_variant(
         stdout_tail = stdout[-1000:] if stdout else ""
         stderr_tail = stderr[-1000:] if stderr else ""
         returncode = proc.returncode
-    trades, metrics = parse_mt5_report(html_report)
+    startup = read_log_rows(backtest_root, startup_log)
+    signals = read_log_rows(backtest_root, signal_log)
     orders = read_order_rows(backtest_root, order_log)
     management = read_log_rows(backtest_root, management_log)
+    deals = read_log_rows(backtest_root, deal_log)
+    if deals:
+        trades = build_trades_from_deals(deals)
+        metrics = {}
+        evidence_status = "POSITION_ID_DEAL_LOG_AND_EA_LOGS_AVAILABLE"
+    elif html_report.exists() and html_report.stat().st_size > 0:
+        trades, metrics = parse_mt5_report(html_report)
+        evidence_status = "HTML_REPORT_AND_EA_LOGS_AVAILABLE"
+    else:
+        trades, metrics = [], {}
+        evidence_status = "EA_LOGS_AVAILABLE_OUTCOMES_MISSING"
     summary = summarize_trades(trades)
     order_summary = summarize_orders(orders)
     management_summary = summarize_management(management)
 
     trade_csv = variant_dir / f"{report_base}_trades.csv"
+    startup_csv = variant_dir / f"{report_base}_startup.csv"
+    signal_csv = variant_dir / f"{report_base}_signals.csv"
     order_csv = variant_dir / f"{report_base}_orders.csv"
     management_csv = variant_dir / f"{report_base}_management.csv"
+    deal_csv = variant_dir / f"{report_base}_deals.csv"
     summary_json = variant_dir / f"{report_base}_summary.json"
     write_dict_rows(trade_csv, trades)
+    write_dict_rows(startup_csv, startup)
+    write_dict_rows(signal_csv, signals)
     write_dict_rows(order_csv, orders)
     write_dict_rows(management_csv, management)
+    write_dict_rows(deal_csv, deals)
     result = {
         "name": variant.name,
         "label": variant.label,
         "note": variant.note,
-        "tester_inputs": {**COMMON_TESTER_INPUTS, **variant.tester_inputs},
+        "tester_inputs": {
+            **COMMON_TESTER_INPUTS,
+            **variant.tester_inputs,
+            "InpAllowedAccountLoginsCsv": login,
+        },
         "config": str(config),
         "html_report": str(html_report),
         "trade_csv": str(trade_csv),
+        "startup_csv": str(startup_csv),
+        "signal_csv": str(signal_csv),
         "order_csv": str(order_csv),
         "management_csv": str(management_csv),
+        "deal_csv": str(deal_csv),
         "summary_json": str(summary_json),
+        "evidence_status": evidence_status,
+        "html_report_available": html_report.exists() and html_report.stat().st_size > 0,
+        "html_report_error": report_timeout_error,
+        "startup_rows": len(startup),
+        "signal_rows": len(signals),
+        "deal_rows": len(deals),
         "mt5_report_metrics": metrics,
         "summary": summary,
         "order_activity": order_summary,
@@ -725,24 +776,28 @@ def write_config(
     signal_log: str,
     order_log: str,
     management_log: str,
+    deal_log: str,
     from_date: str,
     to_date: str,
     tag: str,
     deposit: str = "1808.13",
     currency: str = "AED",
+    login: str = "1025742",
 ) -> Path:
     inputs = {
         **COMMON_TESTER_INPUTS,
         **variant.tester_inputs,
+        "InpAllowedAccountLoginsCsv": login,
         "InpRunId": f"BT_XAU_920101_BR_{safe_name(tag)}_{variant.name.upper()}",
         "InpAttachmentLogFileName": signal_log,
         "InpStartupLogFileName": startup_log,
         "InpOrderLogFileName": order_log,
         "InpManagementLogFileName": management_log,
+        "InpDealLogFileName": deal_log,
     }
     lines = [
         "[Common]",
-        "Login=1025742",
+        f"Login={login}",
         "Server=Capital.ComMena-Demo",
         "KeepPrivate=1",
         "NewsEnable=0",
@@ -847,6 +902,86 @@ def parse_mt5_report(path: Path) -> tuple[list[dict[str, Any]], dict[str, str]]:
         trades.append(trade)
         open_trade = None
     return trades, metrics
+
+
+def build_trades_from_deals(deals: list[dict[str, str]]) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for deal in deals:
+        position_id = deal.get("position_id", "").strip()
+        if position_id:
+            grouped[position_id].append(deal)
+
+    trades: list[dict[str, Any]] = []
+    for position_id, position_deals in grouped.items():
+        ordered = sorted(
+            position_deals,
+            key=lambda row: (row.get("timestamp_broker", ""), _safe_int(row.get("deal_ticket"))),
+        )
+        entries = [row for row in ordered if row.get("entry_code") == "0"]
+        exits = [row for row in ordered if row.get("entry_code") != "0"]
+        if not entries or not exits:
+            continue
+
+        entry = entries[0]
+        exit_deal = exits[-1]
+        entry_time = datetime.strptime(entry["timestamp_broker"], "%Y.%m.%d %H:%M:%S")
+        exit_time = datetime.strptime(exit_deal["timestamp_broker"], "%Y.%m.%d %H:%M:%S")
+        pnl = sum(
+            _safe_float(row.get("profit"))
+            + _safe_float(row.get("commission"))
+            + _safe_float(row.get("swap"))
+            for row in ordered
+        )
+        trades.append(
+            {
+                "position_id": position_id,
+                "entry_time": entry["timestamp_broker"],
+                "entry_date": entry_time.date().isoformat(),
+                "entry_hour": entry_time.hour,
+                "entry_session": server_session(entry_time.hour),
+                "direction": entry.get("direction", ""),
+                "entry_deal": entry.get("deal_ticket", ""),
+                "entry_order": entry.get("order_ticket", ""),
+                "volume": round(sum(_safe_float(row.get("volume")) for row in entries), 4),
+                "entry_price": round(_weighted_deal_price(entries), 5),
+                "entry_comment": entry.get("comment", ""),
+                "exit_time": exit_deal["timestamp_broker"],
+                "exit_date": exit_time.date().isoformat(),
+                "exit_hour": exit_time.hour,
+                "exit_session": server_session(exit_time.hour),
+                "date": entry_time.date().isoformat(),
+                "hour": entry_time.hour,
+                "session": server_session(entry_time.hour),
+                "exit_deal": exit_deal.get("deal_ticket", ""),
+                "exit_order": exit_deal.get("order_ticket", ""),
+                "exit_price": round(_weighted_deal_price(exits), 5),
+                "profit_aed": round(pnl, 2),
+                "exit_reason_code": exit_deal.get("reason_code", ""),
+                "exit_comment": exit_deal.get("comment", ""),
+            }
+        )
+    return sorted(trades, key=lambda trade: (trade["entry_time"], _safe_int(trade["position_id"])))
+
+
+def _weighted_deal_price(rows: list[dict[str, str]]) -> float:
+    volume = sum(_safe_float(row.get("volume")) for row in rows)
+    if volume <= 0:
+        return 0.0
+    return sum(_safe_float(row.get("price")) * _safe_float(row.get("volume")) for row in rows) / volume
+
+
+def _safe_float(value: Any) -> float:
+    try:
+        return float(value or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _safe_int(value: Any) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
 
 
 def parse_metrics(rows: list[list[str]]) -> dict[str, str]:
@@ -1145,6 +1280,17 @@ def wait_for_file(path: Path, timeout_seconds: int = 30) -> None:
     raise TimeoutError(f"Timed out waiting for {path}")
 
 
+def wait_for_report_or_process(path: Path, proc: subprocess.Popen[str], timeout_seconds: int = 30) -> None:
+    deadline = time.time() + timeout_seconds
+    while time.time() < deadline:
+        if path.exists() and path.stat().st_size > 0:
+            return
+        if proc.poll() is not None:
+            return
+        time.sleep(1)
+    raise TimeoutError(f"Timed out waiting for MT5 completion or {path}")
+
+
 def read_text(path: Path) -> str:
     data = path.read_bytes()
     for encoding in ("utf-16", "utf-8-sig", "utf-8"):
@@ -1185,6 +1331,7 @@ def main() -> int:
     )
     parser.add_argument("--deposit", default="1808.13", help="Tester deposit amount.")
     parser.add_argument("--currency", default="AED", help="Tester deposit currency.")
+    parser.add_argument("--login", default="1025742", help="MT5 demo account context for the isolated tester.")
     args = parser.parse_args()
     variant_names = {item.strip() for item in args.variants.split(",") if item.strip()} or None
     safe_tag = safe_name(args.tag)
@@ -1202,6 +1349,7 @@ def main() -> int:
         variant_timeout_seconds=args.variant_timeout_seconds,
         deposit=args.deposit,
         currency=args.currency,
+        login=args.login,
     )
     print(
         json.dumps(
