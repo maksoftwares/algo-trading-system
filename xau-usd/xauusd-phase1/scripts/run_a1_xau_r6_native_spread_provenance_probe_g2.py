@@ -91,8 +91,14 @@ def validate_metadata_receipt(root: Path, receipt: dict[str, Any]) -> None:
             raise RuntimeError("metadata source is not a quarantined approved root")
         if relative not in ALLOWED_METADATA or not destination.is_file():
             raise RuntimeError("metadata receipt destination mismatch")
-        if destination.stat().st_size != row["size_bytes"] or sha256_file(destination) != row["sha256"]:
+        if not source.is_file() or source.stat().st_size != row["size_bytes"] or sha256_file(source) != row["sha256"]:
+            raise RuntimeError("metadata source receipt hash/size mismatch")
+        if destination.stat().st_size != row["size_bytes"] or sha256_file(destination) != row["sha256"] or source.read_bytes() != destination.read_bytes():
             raise RuntimeError("metadata receipt hash/size mismatch")
+    config = root / "Config"
+    actual = {f"Config/{p.name}" for p in config.iterdir() if p.is_file()} if config.is_dir() else set()
+    if actual != paths:
+        raise RuntimeError(f"actual Config file set differs from receipt: {sorted(actual)}")
 
 
 def prepare_reports_directory(root: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -171,6 +177,20 @@ def copy_if_present(source: Path, destination: Path) -> None:
         destination.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(source, destination)
 
 
+def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before_ns: int, parser: Callable[[Path], Any]) -> None:
+    destination.mkdir(parents=True, exist_ok=False)
+    copy_if_present(root / "Config" / f"np1_g2_{run_id}.ini", destination / "tester.ini")
+    report = expected_report(root, run_id)
+    validate_fresh_report(report, not_before_ns, parser)
+    shutil.copyfile(report, destination / "native_report.htm")
+    names = G1.WARMUP_NAMES if run_id == "warmup" else G1.OFFICIAL_NAMES
+    for name in names:
+        matches = list((root / "Tester").glob(f"Agent-*/MQL5/Files/np1_g2_{run_id}_{name}"))
+        if len(matches) != 1:
+            raise RuntimeError(f"expected exactly one {run_id} output {name}; found {len(matches)}")
+        shutil.copyfile(matches[0], destination / name)
+
+
 def _manifest(root: Path) -> None:
     artifacts = []
     for path in sorted(root.rglob("*")):
@@ -200,7 +220,7 @@ def preserve_stop_packet(
             for path in files_dir.glob(f"np1_g2_{run_id}_*"):
                 copy_if_present(path, run_dir / path.name.removeprefix(f"np1_g2_{run_id}_"))
     log_rows = []
-    for path in [*(root / "Tester" / "logs").glob("*.log"), *(root / "Tester").glob("Agent-*/logs/*.log")]:
+    for path in [*(root / "Logs").glob("*.log"), *(root / "Tester" / "logs").glob("*.log"), *(root / "Tester").glob("Agent-*/logs/*.log")]:
         relative = path.relative_to(root).as_posix(); destination = stop / "logs" / relative
         copy_if_present(path, destination)
         log_rows.append({"source_relative": relative, "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
@@ -209,36 +229,97 @@ def preserve_stop_packet(
         for path in compile_workspace.glob("*"):
             if path.is_file(): copy_if_present(path, stop / "compiled" / path.name)
     _manifest(stop)
+    verify_manifest(stop)
     return stop
 
 
-def parse_future_authorization(path: Path, commit: str, tree: str) -> None:
+def verify_manifest(root: Path) -> None:
+    payload = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    if (root / "manifest.sha256").read_text(encoding="ascii").strip() != sha256_file(root / "manifest.json"):
+        raise RuntimeError("manifest sidecar mismatch")
+    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()} - {"manifest.json", "manifest.sha256"}
+    listed = {row["relative_path"] for row in payload["artifacts"]}
+    if actual != listed:
+        raise RuntimeError("manifest tree mismatch")
+    for row in payload["artifacts"]:
+        path = root / row["relative_path"]
+        if path.stat().st_size != row["size_bytes"] or sha256_file(path) != row["sha256"]:
+            raise RuntimeError("manifest artifact mismatch")
+
+
+def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
+    if path.name != "A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
+        raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")
-    if text.count("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN") != 1 or text.count("NP1_G2B_AUTHORIZATION_BLOCK_END") != 1:
+    begin, end = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN", "NP1_G2B_AUTHORIZATION_BLOCK_END"
+    if text.count(begin) != 1 or text.count(end) != 1:
         raise PermissionError("later exact G2-B authorization required")
-    required = ("NP1_G2B_AUTHORIZATION_STATUS: AUTHORIZED", "REVIEW_VERDICT: PASS", f"REVIEWED_G2A_COMMIT: {commit}", f"REVIEWED_G2A_TREE: {tree}", "MT5_EXECUTION_AUTHORIZED: true")
-    if any(value not in text for value in required):
+    fields = {}
+    for raw in text.split(begin, 1)[1].split(end, 1)[0].splitlines():
+        if ":" in raw:
+            key, value = (part.strip().strip("`") for part in raw.split(":", 1)); fields[key] = value
+    expected = {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
+    if fields != expected or "FAIL" in text.split(begin, 1)[0].upper() or "NO-GO" in text.split(begin, 1)[0].upper():
         raise PermissionError("G2-B authorization identity/fields mismatch")
+    return fields
 
 
-def execute_future(*, authorization: str, review_artifact: Path, root: Path, reports_root: Path) -> None:
+def execute_future(*, authorization: str, review_artifact: Path, review_sha256: str, reviewed_commit: str, reviewed_tree: str, root: Path, reports_root: Path, metadata_receipt: Path, command_runner: CommandRunner = G1.command_runner, compile_runner: CommandRunner = G1.command_runner, version_reader: Callable[[Path], str] = G1.executable_version) -> Path:
     if authorization != ACTIVATION:
         raise PermissionError("NP1-G2A is repo-only; future execution is not authorized")
     commit = G1.git("rev-parse", "HEAD"); tree = G1.git("show", "-s", "--format=%T", "HEAD")
-    parse_future_authorization(review_artifact, commit, tree)
-    raise RuntimeError("future G2-B executor remains review-gated at this commit")
+    if commit != reviewed_commit or tree != reviewed_tree or G1.git("status", "--porcelain=v1", "--untracked-files=all"):
+        raise PermissionError("clean reviewed G2-A commit/tree required")
+    parse_future_authorization(review_artifact, review_sha256, commit, tree)
+    complete, stop = assert_mutually_exclusive(reports_root)
+    ledger_path = root / ".np1_g2_invocation_ledger.json"
+    commands: list[dict[str, Any]] = []; invoked: list[str] = []; preflight: dict[str, Any] = {}; report_attestation: dict[str, Any] = {}
+    workspace = root / "np1_g2_compile_workspace"
+    try:
+        terminal, editor = validate_exact_root(root, initial=True)
+        receipt = json.loads(metadata_receipt.read_text(encoding="utf-8")); validate_metadata_receipt(root, receipt)
+        preflight, _, report_attestation = prepare_reports_directory(root)
+        ledger = Ledger(ledger_path); ledger.compilation()
+        compiled = G1.compile_once(root, editor, runner=compile_runner, version_reader=version_reader)
+        workspace.mkdir(); copy_if_present(compiled.source, workspace / B.PROBE_NAME); copy_if_present(compiled.ex5, workspace / compiled.ex5.name); copy_if_present(compiled.log, workspace / "compile.log")
+        B.build_probe(workspace / B.PROBE_NAME, workspace / "source_manifest.json")
+        commands.append(compiled.command_record)
+        staging = root / "np1_g2_campaign_staging"; staging.mkdir()
+        for run_id in RUN_IDS:
+            if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("EX5 drift")
+            ini = root / "Config" / f"np1_g2_{run_id}.ini"; ini.write_text(render_ini(run_id), encoding="utf-8", newline="\n")
+            if expected_report(root, run_id).exists(): raise RuntimeError("stale report before invocation")
+            ledger.run(run_id); invoked.append(run_id)
+            command = [str(terminal), "/portable", f"/config:{ini}"]; started = time.time_ns(); done = command_runner(command, root, 7200); commands.append(G1.record(command, done))
+            if int(getattr(done, "returncode", 1)) != 0: raise RuntimeError(f"tester {run_id} failed")
+            import analyze_a1_xau_r6_native_spread_provenance_probe as A
+            collect_exact_outputs(root, run_id, staging / "runs" / run_id, started, A.parse_report)
+        complete.mkdir(); shutil.copytree(workspace, complete / "compiled", dirs_exist_ok=True); shutil.copytree(staging / "runs", complete / "runs")
+        write_json(complete / "metadata_receipt.json", receipt); write_json(complete / "preflight_root_inventory.json", preflight); write_json(complete / "post_run_root_inventory.json", inventory(root)); write_json(complete / "reports_directory_attestation.json", report_attestation); write_json(complete / "invocation_ledger.json", ledger.data); write_json(complete / "commands.json", commands)
+        import analyze_a1_xau_r6_native_spread_provenance_probe as A
+        result = A.build_packet(complete); result["status"] = "NP1_G2_DIAGNOSTIC_COMPLETE"; A.write_json(complete / "result.json", result); _manifest(complete); verify_manifest(complete)
+        return complete
+    except BaseException as exc:
+        if not ledger_path.exists(): write_json(ledger_path, {"metaeditor_compilations":0,"tester_runs":[],"last_authorized_command_reached":"preflight"})
+        preserve_stop_packet(stop=stop, root=root, ledger=ledger_path, preflight=preflight, reports_attestation=report_attestation, commands=commands, run_ids=invoked, error=exc, compile_workspace=workspace)
+        raise
 
 
 def _main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--authorization", default="")
     parser.add_argument("--review-artifact", type=Path)
+    parser.add_argument("--review-sha256", default="")
+    parser.add_argument("--reviewed-commit", default="")
+    parser.add_argument("--reviewed-tree", default="")
+    parser.add_argument("--metadata-receipt", type=Path)
     parser.add_argument("--root", type=Path, default=NEW_ROOT)
     parser.add_argument("--reports-root", type=Path, default=ROOT / "outputs" / "reports")
     args = parser.parse_args()
     if args.review_artifact is None:
         raise SystemExit("NP1-G2A is repository-only; no MT5 execution authorized")
-    execute_future(authorization=args.authorization, review_artifact=args.review_artifact, root=args.root, reports_root=args.reports_root)
+    if args.metadata_receipt is None: raise SystemExit("--metadata-receipt required")
+    execute_future(authorization=args.authorization, review_artifact=args.review_artifact, review_sha256=args.review_sha256, reviewed_commit=args.reviewed_commit, reviewed_tree=args.reviewed_tree, root=args.root, reports_root=args.reports_root, metadata_receipt=args.metadata_receipt)
     return 0
 
 

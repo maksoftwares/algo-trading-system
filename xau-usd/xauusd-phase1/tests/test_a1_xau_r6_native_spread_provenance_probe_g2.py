@@ -160,7 +160,57 @@ def test_ex5_drift_is_fail_closed(tmp_path: Path) -> None:
 
 def test_g2a_cli_and_executor_are_not_authorized(tmp_path: Path) -> None:
     with pytest.raises(PermissionError, match="repo-only"):
-        G.execute_future(authorization="", review_artifact=tmp_path / "none", root=tmp_path, reports_root=tmp_path)
+        G.execute_future(authorization="", review_artifact=tmp_path / "none", review_sha256="", reviewed_commit="", reviewed_tree="", root=tmp_path, reports_root=tmp_path, metadata_receipt=tmp_path / "receipt")
+
+
+def test_closed_review_parser_exact_hash_fields_and_no_go(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    path = tmp_path / "A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md"
+    commit, tree = "a" * 40, "b" * 40
+    fields = {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(G.NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
+    block = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n" + "\n".join(f"{k}: {v}" for k,v in fields.items()) + "\nNP1_G2B_AUTHORIZATION_BLOCK_END\n"
+    path.write_text(block, encoding="utf-8")
+    assert G.parse_future_authorization(path, G.sha256_file(path), commit, tree) == fields
+    path.write_text("NO-GO\n" + block, encoding="utf-8")
+    with pytest.raises(PermissionError): G.parse_future_authorization(path, G.sha256_file(path), commit, tree)
+
+
+def test_end_to_end_warmup_failure_automatically_creates_stop(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    root = _root(tmp_path, monkeypatch); reports_root = tmp_path / "reports"; reports_root.mkdir()
+    old = tmp_path / "old"; (old / "Config").mkdir(parents=True); monkeypatch.setattr(G,"QUARANTINED_ROOTS",(old,tmp_path/"other"))
+    config = root / "Config"; config.mkdir()
+    copied=[]
+    for name in ("accounts.dat","servers.dat"):
+        src=old/"Config"/name; src.write_bytes(name.encode()); dst=config/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
+    receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"copied":copied}),encoding="utf-8")
+    commit,tree="a"*40,"b"*40; monkeypatch.setattr(G.G1,"git",lambda *args: "" if args[0]=="status" else (commit if "rev-parse" in args else tree))
+    review=tmp_path/"A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md"
+    fields={"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(root),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}
+    review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
+    class C: pass
+    def compile_fake(root,editor,runner,version_reader):
+        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,{"exit_code":0})
+    monkeypatch.setattr(G.G1,"compile_once",compile_fake)
+    done=type("Done",(),{"returncode":0,"stdout":b"","stderr":b""})()
+    with pytest.raises(RuntimeError,match="report"):
+        G.execute_future(authorization=G.ACTIVATION,review_artifact=review,review_sha256=G.sha256_file(review),reviewed_commit=commit,reviewed_tree=tree,root=root,reports_root=reports_root,metadata_receipt=receipt,command_runner=lambda *a:done,compile_runner=lambda *a:done,version_reader=lambda p:G.G1.EXPECTED_VERSION)
+    stop=reports_root/G.STOP_NAME
+    assert stop.is_dir() and (stop/"invocation_ledger.json").is_file() and not (reports_root/G.COMPLETE_NAME).exists()
+
+
+def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    root=_root(tmp_path,monkeypatch); reports=tmp_path/"reports"; reports.mkdir(); old=tmp_path/"old"; (old/"Config").mkdir(parents=True); monkeypatch.setattr(G,"QUARANTINED_ROOTS",(old,tmp_path/"other")); (root/"Config").mkdir()
+    copied=[]
+    for name in ("accounts.dat","servers.dat"):
+        src=old/"Config"/name; src.write_bytes(name.encode()); dst=root/"Config"/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
+    receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"copied":copied}),encoding="utf-8"); commit,tree="c"*40,"d"*40; monkeypatch.setattr(G.G1,"git",lambda *a:"" if a[0]=="status" else (commit if "rev-parse" in a else tree))
+    review=tmp_path/"A1_XAU_NP1G2A1_EXECUTION_AUTHORIZATION_195B5831_2026_07_12.md"; fields={"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_G2A_COMMIT":commit,"REVIEWED_G2A_TREE":tree,"NEW_ROOT_PATH":str(root),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false"}; review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
+    def comp(root,editor,runner,version_reader):
+        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('ok'); return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,{"exit_code":0})
+    monkeypatch.setattr(G.G1,"compile_once",comp); monkeypatch.setattr(G,"collect_exact_outputs",lambda root,run_id,destination,*a:(destination.mkdir(parents=True), (destination/"native_report.htm").write_text("report",encoding="utf-8")))
+    import analyze_a1_xau_r6_native_spread_provenance_probe as AN
+    monkeypatch.setattr(AN,"build_packet",lambda out:{"status":"old","flags":[]}); done=type("D",(),{"returncode":0,"stdout":b"","stderr":b""})()
+    complete=G.execute_future(authorization=G.ACTIVATION,review_artifact=review,review_sha256=G.sha256_file(review),reviewed_commit=commit,reviewed_tree=tree,root=root,reports_root=reports,metadata_receipt=receipt,command_runner=lambda *a:done,compile_runner=lambda *a:done,version_reader=lambda p:G.G1.EXPECTED_VERSION)
+    assert complete.name==G.COMPLETE_NAME and json.loads((complete/"result.json").read_text())["status"]=="NP1_G2_DIAGNOSTIC_COMPLETE" and not (reports/G.STOP_NAME).exists(); G.verify_manifest(complete)
 
 
 def test_static_no_normalization_result_research_attach_or_broker_action() -> None:
