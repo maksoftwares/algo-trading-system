@@ -32,6 +32,9 @@ TERMINAL_STATUSES = (
     "ENTRY_TICK_UNAVAILABLE",
     "RAW_OPPORTUNITY_AVAILABLE",
 )
+FROM_INCLUSIVE = datetime(2016, 7, 1)
+HALF_BOUNDARY = datetime(2021, 7, 1)
+TO_EXCLUSIVE = datetime(2026, 7, 1)
 
 
 @dataclass(frozen=True)
@@ -50,16 +53,24 @@ class Tick:
     bid: float
     ask: float
     session_open: bool = True
+    source_h1_bar_time: datetime | None = None
 
 
 @dataclass(frozen=True)
 class Contract:
+    account_currency: str
+    account_leverage: int
+    margin_mode: int
+    server: str
+    symbol: str
     point: float
     digits: int
     tick_size: float
+    tick_value: float
     tick_value_loss: float
     volume_min: float
     volume_step: float
+    volume_max: float
     contract_size: float
     stops_level: int
     freeze_level: int
@@ -69,6 +80,31 @@ class Contract:
 class Detection:
     rows: tuple[dict[str, object], ...]
     funnel: dict[str, int]
+    anchors: tuple["TerminalAnchor", ...]
+    incidence: dict[str, object]
+    final_status: str
+
+
+@dataclass(frozen=True)
+class TerminalAnchor:
+    anchor_time: datetime
+    horizon_end: datetime | None
+    status: str
+
+
+@dataclass(frozen=True)
+class RowContext:
+    impulse: tuple[Bar, ...]
+    distribution: tuple[Bar, ...]
+    breakdown: Bar
+    reclaim: Bar
+    decision_time: datetime
+    entry_tick: Tick
+    contract: Contract
+    a_impulse: float
+    a_box: float
+    a_reclaim: float
+    last_reclaim_tick_sequence: int = -1
 
 
 def broker_time(value: datetime) -> str:
@@ -82,7 +118,7 @@ def validate_bars(bars: Sequence[Bar]) -> None:
         values = (bar.open, bar.high, bar.low, bar.close)
         if any(not math.isfinite(value) or value <= 0 for value in values):
             raise ValueError("invalid OHLC")
-        if bar.low > min(bar.open, bar.close) or bar.high < max(bar.open, bar.close):
+        if bar.high <= bar.low or bar.low > min(bar.open, bar.close) or bar.high < max(bar.open, bar.close):
             raise ValueError("invalid OHLC range")
         if index and bar.time <= bars[index - 1].time:
             raise ValueError("bar timestamps must be unique and increasing")
@@ -141,14 +177,31 @@ def _trend_stack(bars: Sequence[Bar], index: int, up: bool) -> bool:
     return closes[index] < fast[index] < slow[index] and fast[index] <= fast[index - 5] and slow[index] <= slow[index - 5]
 
 
+def _last_completed_index(bars: Sequence[Bar], decision: datetime) -> int:
+    """Mirror native shift 1: a bar is completed only at the next native open."""
+    return max(index for index in range(len(bars) - 1) if bars[index + 1].time <= decision)
+
+
 def classify_router(*, h1: Sequence[Bar], h4: Sequence[Bar], d1: Sequence[Bar], decision: datetime) -> str:
     """Port the pinned market-only Router V1 priority using completed native bars."""
     try:
-        h1_i = max(index for index in range(len(h1) - 1) if h1[index + 1].time <= decision)
-        h4_i = max(index for index in range(len(h4) - 1) if h4[index + 1].time <= decision)
-        d1_i = max(index for index in range(len(d1) - 1) if d1[index + 1].time <= decision)
+        h1_i = _last_completed_index(h1, decision)
+        h4_i = _last_completed_index(h4, decision)
+        d1_i = _last_completed_index(d1, decision)
+        # MQL iBars includes the current native bar in addition to completed shift 1.
+        h1_available, h4_available, d1_available = h1_i + 2, h4_i + 2, d1_i + 2
         h1_atr, d1_atr = wilder_atr(h1), wilder_atr(d1)
-        if h1_atr[h1_i] is None or d1_atr[d1_i] is None or d1_i < 253:
+        # Exact RegimeRouterDataAvailable guards from the pinned Router V1 source.
+        if (
+            d1_available < 50 + 5 + 2 + 5
+            or h4_available < 50 + 5 + 1 + 5
+            or h1_available <= 14 + 10
+            or d1_available <= 60 + 14 + 10
+            or d1_available <= 252 + 14 + 10
+            or h1_atr[h1_i] is None
+            or d1_atr[d1_i] is None
+            or h1[h1_i].high <= h1[h1_i].low
+        ):
             return "UNKNOWN"
         if h1[h1_i].high - h1[h1_i].low >= 3.0 * h1_atr[h1_i]:
             return "SHOCK"
@@ -163,8 +216,12 @@ def classify_router(*, h1: Sequence[Bar], h4: Sequence[Bar], d1: Sequence[Bar], 
             return "DOWNTREND"
         d1_window_252 = [value for value in d1_atr[d1_i - 251 : d1_i + 1] if value is not None]
         ranges = [bar.high - bar.low for bar in d1]
-        box_average = sum(ranges[d1_i - 4 : d1_i + 1]) / 5
+        five_day = d1[d1_i - 4 : d1_i + 1]
+        box_width = max(bar.high for bar in five_day) - min(bar.low for bar in five_day)
+        box_average = box_width / 5
         range_median = median(ranges[d1_i - 19 : d1_i + 1])
+        if box_width <= 0 or range_median <= 0:
+            return "UNKNOWN"
         if percentile_rank(d1_window_252, d1_atr[d1_i]) <= 30.0 and box_average <= range_median:
             return "COMPRESSION"
         return "CHOP"
@@ -181,14 +238,26 @@ def validate_contract(contract: Contract) -> None:
     finite_positive = (
         contract.point,
         contract.tick_size,
+        contract.tick_value,
         contract.tick_value_loss,
         contract.volume_min,
         contract.volume_step,
+        contract.volume_max,
         contract.contract_size,
     )
     if any(not math.isfinite(value) or value <= 0 for value in finite_positive):
         raise ValueError("invalid contract metadata")
-    if contract.digits < 0 or contract.stops_level < 0 or contract.freeze_level < 0:
+    if (
+        contract.digits < 0
+        or contract.stops_level < 0
+        or contract.freeze_level < 0
+        or contract.account_leverage <= 0
+        or contract.margin_mode < 0
+        or contract.volume_max < contract.volume_min
+        or not contract.account_currency
+        or not contract.server
+        or contract.symbol != "XAUUSD"
+    ):
         raise ValueError("invalid contract metadata")
 
 
@@ -199,6 +268,15 @@ def minimum_contract_risk(entry_bid: float, risk_price: float, contract: Contrac
         raise ValueError("invalid risk prices")
     ticks = (risk_price - entry_bid) / contract.tick_size
     return ticks * contract.tick_value_loss * contract.volume_min
+
+
+def validate_order_calc_profit_fixture(
+    entry_bid: float, risk_price: float, captured_loss: float, contract: Contract, *, tolerance: float = 1e-9,
+) -> None:
+    """Require the Python equivalent to match an immutable broker capture."""
+    calculated = minimum_contract_risk(entry_bid, risk_price, contract)
+    if not math.isfinite(captured_loss) or captured_loss <= 0 or not math.isclose(calculated, captured_loss, abs_tol=tolerance):
+        raise ValueError("captured OrderCalcProfit parity failure")
 
 
 def canonical_hash(fields: Iterable[str]) -> str:
@@ -248,6 +326,76 @@ def concentration(values: Sequence[datetime]) -> dict[str, object]:
     }
 
 
+def _half_counts(values: Sequence[datetime]) -> tuple[int, int]:
+    return (
+        sum(FROM_INCLUSIVE <= value < HALF_BOUNDARY for value in values),
+        sum(HALF_BOUNDARY <= value < TO_EXCLUSIVE for value in values),
+    )
+
+
+def incidence_report(rows: Sequence[dict[str, object]]) -> dict[str, object]:
+    """Evaluate every frozen incidence gate without using post-entry outcomes."""
+    raw_times = [datetime.fromisoformat(str(row["entry_tick_time"])) for row in rows]
+    if any(not (FROM_INCLUSIVE <= value < TO_EXCLUSIVE) for value in raw_times):
+        raise ValueError("entry tick outside locked interval")
+    reference_times = [
+        value for value, row in zip(raw_times, rows) if bool(row["reference_risk_feasible"])
+    ]
+    deployment_times = [
+        value for value, row in zip(raw_times, rows) if bool(row["deployment_risk_feasible"])
+    ]
+
+    def risk_summary(values: Sequence[datetime], minimum: int) -> dict[str, object]:
+        early, late = _half_counts(values)
+        report = concentration(values)
+        buckets_with_events = sum(count > 0 for count in report["july_june"].values())
+        return {
+            "opportunities": len(values),
+            "early_half": early,
+            "late_half": late,
+            "july_june_buckets_with_events": buckets_with_events,
+            "passes": len(values) >= minimum and early >= 35 and late >= 35 and buckets_with_events >= 8,
+        }
+
+    raw_concentration = concentration(raw_times)
+    raw_early, raw_late = _half_counts(raw_times)
+    raw_counts = list(raw_concentration["july_june"].values())
+    raw_total = len(raw_times)
+    raw = {
+        "opportunities": raw_total,
+        "early_half": raw_early,
+        "late_half": raw_late,
+        "qualifying_july_june_buckets": sum(count >= 5 for count in raw_counts),
+        "largest_july_june_bucket_share": max(raw_counts, default=0) / raw_total if raw_total else 0.0,
+        "best_contiguous_24_month_share": raw_concentration["best_24_month_share"],
+    }
+    raw["passes"] = (
+        raw_total >= 120
+        and raw_early >= 40
+        and raw_late >= 40
+        and raw["qualifying_july_june_buckets"] >= 8
+        and raw["largest_july_june_bucket_share"] <= 0.25
+        and raw["best_contiguous_24_month_share"] <= 0.40
+    )
+    reference = risk_summary(reference_times, 100)
+    deployment = risk_summary(deployment_times, 100)
+    deployment["feasible_share"] = len(deployment_times) / raw_total if raw_total else 0.0
+    deployment["passes"] = bool(deployment["passes"] and deployment["feasible_share"] >= 0.80)
+    return {"raw": raw, "reference_risk": reference, "deployment_risk": deployment}
+
+
+def locked_final_status(report: dict[str, object], *, evidence_valid: bool = True) -> str:
+    if not evidence_valid:
+        return "R6_CENSUS_EVIDENCE_INVALID"
+    if not bool(report["raw"]["passes"]):
+        return "R6_CENSUS_INSUFFICIENT_INCIDENCE"
+    if not bool(report["reference_risk"]["passes"]):
+        return "R6_CENSUS_REFERENCE_RISK_UNDERPOWERED"
+    if not bool(report["deployment_risk"]["passes"]):
+        return "R6_SMALL_ACCOUNT_CONTRACT_INFEASIBLE"
+    return "R6_CENSUS_PASS"
+
+
 def _body_fraction(bar: Bar) -> float:
     return abs(bar.close - bar.open) / (bar.high - bar.low)
 
@@ -270,16 +418,36 @@ def detect(
     validate_bars(h1)
     validate_bars(d1)
     validate_contract(contract)
+    if symbol != contract.symbol:
+        raise ValueError("detector symbol does not match contract snapshot")
     h4_atr, h1_atr = wilder_atr(h4), wilder_atr(h1)
-    tick_rows = sorted(ticks, key=lambda item: item.sequence)
-    if any(tick_rows[index].sequence >= tick_rows[index + 1].sequence for index in range(len(tick_rows) - 1)):
-        raise ValueError("tick sequences must be unique and increasing")
+    tick_rows = list(ticks)
+    for tick_index, tick in enumerate(tick_rows):
+        if (
+            tick.sequence < 0
+            or not all(math.isfinite(value) and value > 0 for value in (tick.bid, tick.ask))
+            or tick.ask < tick.bid
+            or (tick.source_h1_bar_time is not None and tick.source_h1_bar_time > tick.time)
+        ):
+            raise ValueError("invalid tick source row")
+        if tick_index and (
+            tick_rows[tick_index - 1].sequence >= tick.sequence
+            or tick_rows[tick_index - 1].time > tick.time
+        ):
+            raise ValueError("ticks must be monotonic in absolute source sequence and time")
     funnel = {status: 0 for status in TERMINAL_STATUSES}
     rows: list[dict[str, object]] = []
+    anchors: list[TerminalAnchor] = []
+
+    def finish(anchor_time: datetime, status: str, horizon_end: datetime | None) -> None:
+        funnel[status] += 1
+        anchors.append(TerminalAnchor(anchor_time, horizon_end, status))
+
     suppression: tuple[float, datetime, int] | None = None
     for index in range(14, len(h4) - 1):
         bar = h4[index]
-        if not (datetime(2016, 7, 1) <= bar.time < datetime(2026, 7, 1)):
+        boundary = h4[index + 1].time
+        if not (FROM_INCLUSIVE <= bar.time < TO_EXCLUSIVE):
             continue
         if suppression is not None:
             box_mid, _, count = suppression
@@ -288,12 +456,12 @@ def detect(
                 suppression = None
             else:
                 suppression = (box_mid, bar.time, count)
-                funnel["SUPPRESSION_ACTIVE"] += 1
+                finish(bar.time, "SUPPRESSION_ACTIVE", boundary)
                 continue
         impulse, distribution = h4[index - 12 : index - 6], h4[index - 6 : index]
         a_impulse, a_box = h4_atr[index - 7], h4_atr[index - 1]
         if a_impulse is None or a_box is None or a_impulse <= 0 or a_box <= 0:
-            funnel["DATA_UNAVAILABLE"] += 1
+            finish(bar.time, "DATA_UNAVAILABLE", boundary)
             continue
         impulse_low, impulse_high = min(x.low for x in impulse), max(x.high for x in impulse)
         impulse_range = impulse_high - impulse_low
@@ -301,7 +469,7 @@ def detect(
         bullish = sum(x.close > x.open for x in impulse)
         location = (impulse[-1].close - impulse_low) / impulse_range
         if not (impulse_net >= 1.5 * a_impulse and impulse_range >= 2 * a_impulse and bullish >= 4 and location >= 0.75):
-            funnel["IMPULSE_REJECTED"] += 1
+            finish(bar.time, "IMPULSE_REJECTED", boundary)
             continue
         box_low, box_high = min(x.low for x in distribution), max(x.high for x in distribution)
         width, box_mid = box_high - box_low, (box_high + box_low) / 2
@@ -309,31 +477,39 @@ def detect(
         overlap = sum(_overlap_ratio(a, b) >= 0.25 for a, b in zip(distribution, distribution[1:]))
         drift = abs(distribution[-1].close - distribution[0].open)
         if not (a_box <= width <= 3 * a_box and inner >= 4 and overlap >= 4 and drift <= 0.75 * a_box):
-            funnel["BOX_REJECTED"] += 1
+            finish(bar.time, "BOX_REJECTED", boundary)
             continue
-        boundary = h4[index + 1].time
         router = classify_router(h1=h1, h4=h4, d1=d1, decision=boundary)
         if router not in {"UPTREND", "CHOP"}:
-            funnel[f"ROUTER_BLOCKED_{router}"] += 1
+            finish(bar.time, f"ROUTER_BLOCKED_{router}", boundary)
             continue
         if not (
             distribution[-1].close >= box_low and bar.close <= box_low - 0.1 * a_box
             and bar.close < bar.open and _body_fraction(bar) >= 0.5 and _close_location(bar) <= 0.25
         ):
-            funnel["BREAKDOWN_REJECTED"] += 1
+            finish(bar.time, "BREAKDOWN_REJECTED", boundary)
             continue
         suppression = (box_mid, bar.time, 0)
-        eligible_h1 = [j for j in range(len(h1) - 1) if h1[j].time >= boundary][:6]
+        eligible_h1 = [j for j in range(len(h1) - 1) if h1[j].time >= boundary]
+        if len(eligible_h1) < 6:
+            finish(bar.time, "DATA_UNAVAILABLE", None)
+            continue
+        eligible_h1 = eligible_h1[:6]
+        six_h1_horizon = h1[eligible_h1[-1] + 1].time
         attempt: int | None = None
         for h1_index in eligible_h1:
             a_reclaim = h1_atr[h1_index]
             if a_reclaim is None or a_reclaim <= 0:
-                continue
+                finish(bar.time, "DATA_UNAVAILABLE", h1[h1_index + 1].time)
+                attempt = -1
+                break
             if h1[h1_index].high >= box_low - 0.1 * a_reclaim:
                 attempt = h1_index
                 break
+        if attempt == -1:
+            continue
         if attempt is None:
-            funnel["NO_RECLAIM_WITHIN_SIX_H1"] += 1
+            finish(bar.time, "NO_RECLAIM_WITHIN_SIX_H1", six_h1_horizon)
             continue
         reclaim, a_reclaim = h1[attempt], h1_atr[attempt]
         assert a_reclaim is not None
@@ -341,23 +517,40 @@ def detect(
             reclaim.close <= box_low - 0.05 * a_reclaim and reclaim.close < reclaim.open
             and _body_fraction(reclaim) >= 0.35 and _close_location(reclaim) <= 0.35
         ):
-            funnel["FIRST_RECLAIM_NOT_REJECTED"] += 1
+            finish(bar.time, "FIRST_RECLAIM_NOT_REJECTED", h1[attempt + 1].time)
             continue
         decision = h1[attempt + 1].time
+        reclaim_sequences = [
+            tick.sequence for tick in tick_rows if tick.source_h1_bar_time == reclaim.time
+        ]
+        ambiguous_same_second = any(
+            tick.time == decision and tick.source_h1_bar_time is None for tick in tick_rows
+        )
+        if ambiguous_same_second:
+            finish(bar.time, "DATA_UNAVAILABLE", decision)
+            continue
+        last_reclaim_sequence = max(reclaim_sequences, default=-1)
         eligible_ticks = [
             tick for tick in tick_rows
             if tick.time >= decision and tick.time <= decision + timedelta(minutes=15)
-            and tick.session_open and tick.ask >= tick.bid > 0
+            and tick.sequence > last_reclaim_sequence
+            and tick.source_h1_bar_time != reclaim.time
         ]
         if not eligible_ticks:
-            funnel["ENTRY_TICK_UNAVAILABLE"] += 1
+            finish(bar.time, "ENTRY_TICK_UNAVAILABLE", decision + timedelta(minutes=15))
             continue
         entry = eligible_ticks[0]
+        if not entry.session_open:
+            finish(bar.time, "ENTRY_TICK_UNAVAILABLE", entry.time)
+            continue
+        if not (FROM_INCLUSIVE <= entry.time < TO_EXCLUSIVE):
+            finish(bar.time, "DATA_UNAVAILABLE", entry.time)
+            continue
         raw_stop = max(reclaim.high, box_low) + 0.25 * a_reclaim
         structural_stop = normalize_up(raw_stop, contract)
         risk_price = normalize_up(structural_stop + contract.tick_size, contract)
         if structural_stop <= entry.ask or risk_price - entry.ask < max(contract.stops_level, contract.freeze_level) * contract.point:
-            funnel["DATA_UNAVAILABLE"] += 1
+            finish(bar.time, "DATA_UNAVAILABLE", entry.time)
             continue
         risk = minimum_contract_risk(entry.bid, risk_price, contract)
         box_id, episode_id, candidate_id = canonical_ids(
@@ -396,5 +589,6 @@ def detect(
             "availability_status": "RAW_OPPORTUNITY_AVAILABLE", "exclusion_reason": "",
         }
         rows.append(row)
-        funnel["RAW_OPPORTUNITY_AVAILABLE"] += 1
-    return Detection(tuple(rows), funnel)
+        finish(bar.time, "RAW_OPPORTUNITY_AVAILABLE", entry.time)
+    incidence = incidence_report(rows)
+    return Detection(tuple(rows), funnel, tuple(anchors), incidence, locked_final_status(incidence))

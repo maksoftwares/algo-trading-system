@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -40,10 +41,13 @@ def test_c2_file_boundary_is_exact() -> None:
 
 
 def test_prefix_invariance_rejects_changed_prior_row() -> None:
-    original = {"candidate_id": "a", "entry_tick_sequence": 10}
+    original = {"candidate_id": "a", "entry_tick_sequence": 10, "entry_tick_time": "2020-01-01T00:00:00"}
     V.validate_prefix_invariance([original], [original, {"candidate_id": "b"}])
     with pytest.raises(ValueError, match="prefix"):
-        V.validate_prefix_invariance([original], [{"candidate_id": "a", "entry_tick_sequence": 11}])
+        V.validate_prefix_invariance([original], [{"candidate_id": "a", "entry_tick_sequence": 11, "entry_tick_time": "2020-01-01T00:00:00"}])
+    new_inside_prefix = {"candidate_id": "b", "entry_tick_time": "2020-01-01T00:30:00"}
+    with pytest.raises(ValueError, match="inside"):
+        V.validate_prefix_invariance([original], [original, new_inside_prefix], prefix_end=datetime(2020, 1, 1, 1))
 
 
 def test_scripts_have_no_runtime_or_result_surface() -> None:
