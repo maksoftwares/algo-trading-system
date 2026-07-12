@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import importlib.metadata
 import json
 import os
 import platform
@@ -41,6 +42,8 @@ class CompileResult:
     command: tuple[str, ...]
     stdout_sha256: str
     stderr_sha256: str
+    stdout_base64: str
+    stderr_base64: str
 
 
 def sha256_file(path: Path) -> str:
@@ -130,6 +133,7 @@ def compile_only_safety_check(
     return CompileResult(
         source, ex5, log, sha256_file(source), sha256_file(ex5), returncode, version,
         tuple(command), sha256_bytes(stdout), sha256_bytes(stderr),
+        base64.b64encode(stdout).decode("ascii"), base64.b64encode(stderr).decode("ascii"),
     )
 
 
@@ -254,6 +258,8 @@ def _command_record(command: Sequence[str], completed: object) -> dict[str, obje
     return {
         "command": [str(value) for value in command],
         "exit_code": int(getattr(completed, "returncode", 1)),
+        "stdout_base64": base64.b64encode(stdout).decode("ascii"),
+        "stderr_base64": base64.b64encode(stderr).decode("ascii"),
         "stdout_sha256": sha256_bytes(stdout),
         "stderr_sha256": sha256_bytes(stderr),
     }
@@ -274,7 +280,8 @@ def capture_clean_git_identity() -> dict[str, str]:
 
 
 def build_campaign_attestation(
-    output_dir: Path, compiled: CompileResult, commands: list[dict[str, object]], git_identity: dict[str, str]
+    output_dir: Path, compiled: CompileResult, commands: list[dict[str, object]], git_identity: dict[str, str],
+    review_authority: dict[str, str], finalizer_commands: list[dict[str, object]],
 ) -> dict[str, object]:
     if _git("rev-parse", "HEAD") != git_identity["git_head"] or _git("rev-parse", "HEAD^{tree}") != git_identity["git_tree"]:
         raise RuntimeError("exact commit/tree changed during evidence generation")
@@ -295,17 +302,25 @@ def build_campaign_attestation(
         "architecture": platform.machine(),
         "python_version": platform.python_version(),
         "python_executable": sys.executable,
+        "dependency_versions": {
+            "python_implementation": platform.python_implementation(),
+            "pytest": importlib.metadata.version("pytest"),
+            "third_party_runtime_dependencies": {},
+        },
         "mt5_terminal_build": EXPECTED_BUILD,
         "metaeditor_version": compiled.metaeditor_version,
         "same_ex5_sha256_run1_run2": compiled.ex5_sha256,
         "commands": [
             {
                 "command": list(compiled.command), "exit_code": compiled.returncode,
+                "stdout_base64": compiled.stdout_base64, "stderr_base64": compiled.stderr_base64,
                 "stdout_sha256": compiled.stdout_sha256, "stderr_sha256": compiled.stderr_sha256,
             },
             *commands,
+            *finalizer_commands,
         ],
         "artifact_sha256": artifact_hashes,
+        "review_authority": review_authority,
         "environment": {
             "cwd": str(B.ROOT), "timezone": os.environ.get("TZ", "system-local"),
             "account_login": 1025742, "server": "Capital.ComMena-Demo",
@@ -325,11 +340,32 @@ def run_historical_evidence_campaign(
     command_runner: CommandRunner = default_command_runner,
     compile_command_runner: CommandRunner = default_command_runner,
     metaeditor_version_reader: Callable[[Path], str] = default_metaeditor_version_reader,
+    verification_command_runner: CommandRunner = default_command_runner,
+    review_artifact: Path | None = None,
+    review_sha256: str | None = None,
+    reviewed_generator_commit: str | None = None,
+    reviewed_generator_tree: str | None = None,
 ) -> list[Path]:
     """Future NP1-C hook. It is fail-closed unless exact review authorization is supplied."""
     if authorization != NP1_C_AUTHORIZATION:
         raise PermissionError("real historical Strategy Tester evidence remains prohibited before NP1-C review")
     git_identity = capture_clean_git_identity()
+    review_path = review_artifact.resolve() if review_artifact is not None else None
+    review_authority = {
+        "controlling_review_artifact": review_path.name if review_path is not None else "",
+        "controlling_review_sha256": review_sha256 or "",
+        "reviewed_generator_commit": reviewed_generator_commit or "",
+        "reviewed_generator_tree": reviewed_generator_tree or "",
+    }
+    if (
+        re.fullmatch(r"A1_XAU_NP1B3_[A-Z0-9_]+\.md", review_authority["controlling_review_artifact"]) is None
+        or review_path is None or not review_path.is_file()
+        or re.fullmatch(r"[0-9a-f]{64}", review_authority["controlling_review_sha256"]) is None
+        or sha256_file(review_path) != review_authority["controlling_review_sha256"]
+        or review_authority["reviewed_generator_commit"] != git_identity["git_head"]
+        or review_authority["reviewed_generator_tree"] != git_identity["git_tree"]
+    ):
+        raise PermissionError("NP1-C requires the exact reviewed NP1-B3 artifact, SHA256, generator commit, and tree")
     terminal = validate_tester_sandbox(tester_sandbox)
     compiled = compile_only_safety_check(
         metaeditor=metaeditor, workspace=compile_workspace, command_runner=compile_command_runner,
@@ -368,13 +404,34 @@ def run_historical_evidence_campaign(
     if sha256_file(compiled_dir / compiled.ex5.name) != compiled.ex5_sha256:
         raise RuntimeError("compiled EX5 changed during evidence assembly")
     import verify_a1_xau_r6_market_only_native_parity as verifier
-    attestation = build_campaign_attestation(output_dir, compiled, command_records, git_identity)
-    result = verifier.finalize_evidence_directory(output_dir, attestation=attestation)
-    if result.status not in {
+    attestation_path = compile_workspace / "np1_campaign_attestation.json"
+    finalizer_command = [
+        sys.executable, str(Path(verifier.__file__).resolve()), str(output_dir), "--finalize",
+        "--attestation-json", str(attestation_path), "--quiet",
+    ]
+    verifier_command = [sys.executable, str(Path(verifier.__file__).resolve()), str(output_dir), "--quiet"]
+    empty = sha256_bytes(b"")
+    finalizer_commands = [
+        {"command": command, "exit_code": 0, "stdout_base64": "", "stderr_base64": "", "stdout_sha256": empty, "stderr_sha256": empty}
+        for command in (finalizer_command, verifier_command)
+    ]
+    attestation = build_campaign_attestation(
+        output_dir, compiled, command_records, git_identity, review_authority, finalizer_commands
+    )
+    verifier.finalize_evidence_directory(output_dir, attestation=attestation)
+    attestation["artifact_sha256"] = verifier.attested_artifact_hashes(output_dir)
+    attestation_path.write_text(json.dumps(attestation, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+    for command in (finalizer_command, verifier_command):
+        completed = verification_command_runner(command, B.ROOT, timeout_seconds)
+        record = _command_record(command, completed)
+        if record["exit_code"] != 0 or record["stdout_base64"] or record["stderr_base64"]:
+            raise RuntimeError(f"finalizer/read-only verifier command failed or emitted unexpected output: {command}")
+    payload = json.loads((output_dir / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json").read_text(encoding="utf-8"))
+    if payload.get("status") not in {
         "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL",
         "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS",
     }:
-        raise RuntimeError(f"NP1 evidence assembly failed: {result.status}: {result.errors}")
+        raise RuntimeError(f"NP1 evidence assembly failed: {payload.get('status')}: {payload.get('errors')}")
     return produced
 
 
@@ -383,9 +440,33 @@ def _main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument("--metaeditor", type=Path)
     parser.add_argument("--compile-workspace", type=Path)
     parser.add_argument("--historical-evidence", action="store_true")
+    parser.add_argument("--authorization")
+    parser.add_argument("--tester-sandbox", type=Path)
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--review-artifact", type=Path)
+    parser.add_argument("--review-sha256")
+    parser.add_argument("--reviewed-generator-commit")
+    parser.add_argument("--reviewed-generator-tree")
     args = parser.parse_args(argv)
     if args.historical_evidence:
-        raise SystemExit("NP1-C historical evidence execution is not authorized in NP1-B")
+        required = {
+            "--metaeditor": args.metaeditor, "--compile-workspace": args.compile_workspace,
+            "--tester-sandbox": args.tester_sandbox, "--output-dir": args.output_dir,
+            "--review-artifact": args.review_artifact, "--review-sha256": args.review_sha256,
+            "--reviewed-generator-commit": args.reviewed_generator_commit,
+            "--reviewed-generator-tree": args.reviewed_generator_tree,
+        }
+        missing = [name for name, value in required.items() if value is None]
+        if missing:
+            raise SystemExit(f"historical evidence command missing required arguments: {missing}")
+        run_historical_evidence_campaign(
+            authorization=args.authorization or "", tester_sandbox=args.tester_sandbox,
+            metaeditor=args.metaeditor, compile_workspace=args.compile_workspace, output_dir=args.output_dir,
+            review_artifact=args.review_artifact, review_sha256=args.review_sha256,
+            reviewed_generator_commit=args.reviewed_generator_commit,
+            reviewed_generator_tree=args.reviewed_generator_tree,
+        )
+        return 0
     if args.metaeditor is None or args.compile_workspace is None:
         raise SystemExit("--metaeditor and --compile-workspace are required for NP1-B compile-only validation")
     result = compile_only_safety_check(metaeditor=args.metaeditor, workspace=args.compile_workspace)

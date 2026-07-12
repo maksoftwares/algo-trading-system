@@ -191,17 +191,30 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
 
     def fake_finalize(path: Path, *, attestation):
         captured["path"], captured["attestation"] = path, attestation
+        (path / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json").write_text(
+            '{"status":"R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS","errors":[]}\n', encoding="utf-8"
+        )
         return SimpleNamespace(status="R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS", errors=())
 
     monkeypatch.setattr(verifier, "finalize_evidence_directory", fake_finalize)
     monkeypatch.setattr(R, "capture_clean_git_identity", lambda: {"git_head": "a" * 40, "git_tree": "b" * 40, "git_status_porcelain": ""})
-    monkeypatch.setattr(R, "build_campaign_attestation", lambda output_dir, compiled, commands, git_identity: {"commands": commands})
+    monkeypatch.setattr(
+        R, "build_campaign_attestation",
+        lambda output_dir, compiled, commands, git_identity, review_authority, finalizer_commands: {
+            "commands": commands, "artifact_sha256": {}
+        },
+    )
     terminal = FakeTerminal()
     output = tmp_path / "evidence"
+    review_artifact = tmp_path / "A1_XAU_NP1B3_PASS_REVIEW_TEST.md"
+    review_artifact.write_text("reviewed\n", encoding="utf-8")
     produced = R.run_historical_evidence_campaign(
         authorization=R.NP1_C_AUTHORIZATION, tester_sandbox=sandbox, metaeditor=editor,
         compile_workspace=tmp_path / "compile-test", output_dir=output, command_runner=terminal,
         compile_command_runner=FakeMetaEditor(), metaeditor_version_reader=lambda _: "5.0.0.5833",
+        verification_command_runner=lambda command, cwd, timeout: SimpleNamespace(returncode=0, stdout=b"", stderr=b""),
+        review_artifact=review_artifact, review_sha256=R.sha256_file(review_artifact),
+        reviewed_generator_commit="a" * 40, reviewed_generator_tree="b" * 40,
     )
     assert produced == [output / "runs" / "run1", output / "runs" / "run2"]
     assert len(terminal.commands) == 2 and len(captured["attestation"]["commands"]) == 2

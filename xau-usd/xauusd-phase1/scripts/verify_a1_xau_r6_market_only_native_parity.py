@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import hashlib
 import html
@@ -167,6 +168,15 @@ def verify_assertions(path: Path, schema: dict[str, Any], run_id: str) -> list[s
         "environment_terminal_build": "5833",
     }
     expected_rows = {f"effective_input_{key}": value for key, value in expected_inputs.items()}
+    fixed_constants = {
+        "InpTargetSymbol": "XAUUSD", "InpAtrPeriod": "14", "InpRegimeFastEmaPeriod": "20",
+        "InpRegimeSlowEmaPeriod": "50", "InpRegimeSlopeLagBars": "5",
+        "InpRegimePersistenceD1Bars": "2", "InpRegimeRequireH4Confirm": "true",
+        "InpRegimeShockH1RangeAtrMultiple": "3", "InpRegimeShockD1AtrLookback": "60",
+        "InpRegimeShockD1AtrPercentileMin": "95", "InpRegimeCompressionBoxDays": "5",
+        "InpRegimeCompressionD1AtrPercentileMax": "30", "InpRegimeCompressionRangeMedianMax": "1",
+    }
+    expected_rows.update({f"fixed_constant_{key}": value for key, value in fixed_constants.items()})
     expected_rows.update(expected_environment)
     for key, expected in expected_rows.items():
         matches = by_id.get(key, [])
@@ -218,14 +228,16 @@ def parse_native_report(path: Path) -> dict[str, Any]:
 def verify_native_report(path: Path, run_id: str, buckets: Buckets) -> dict[str, Any]:
     report = parse_native_report(path)
     exact = {
-        "expert": "A1XauR6MarketOnlyNativeParityOracle.ex5", "symbol": "XAUUSD",
-        "period": "M5", "model": "Every tick based on real ticks", "leverage": "1:50",
+        "expert": "A1XauR6MarketOnlyNativeParityOracle", "symbol": "XAUUSD",
+        "model": "Every tick based on real ticks", "leverage": "1:50",
     }
     for key, expected in exact.items():
         if report[key] != expected:
             buckets.invalid.append(f"{run_id}: native report {key} mismatch: {report[key]!r}")
-    deposit_match = re.search(r"([0-9][0-9,.]*)\s*(USD)?", report["initial_deposit"], re.IGNORECASE)
-    if not deposit_match or float(deposit_match.group(1).replace(",", "")) != 10000.0:
+    if re.fullmatch(r"M5\s+\(2015\.06\.01\s+-\s+2026\.06\.30\)", report["period"]) is None:
+        buckets.invalid.append(f"{run_id}: native report period mismatch: {report['period']!r}")
+    deposit_match = re.search(r"([0-9][0-9,.\s]*)\s*(USD)?", report["initial_deposit"], re.IGNORECASE)
+    if not deposit_match or float(re.sub(r"[\s,]", "", deposit_match.group(1))) != 10000.0:
         buckets.invalid.append(f"{run_id}: native report initial deposit mismatch")
     if report["bars"] <= 0 or report["ticks"] <= 0:
         buckets.invalid.append(f"{run_id}: native report bar/tick counts must be positive")
@@ -240,12 +252,6 @@ def verify_native_report(path: Path, run_id: str, buckets: Buckets) -> dict[str,
         "InpAssertionsFileName": f"np1_{run_id}_native_assertions.tsv",
         "InpOrderZeroFileName": f"np1_{run_id}_order.zero",
         "InpDealZeroFileName": f"np1_{run_id}_deal.zero",
-        "InpTargetSymbol": "XAUUSD", "InpAtrPeriod": "14", "InpRegimeFastEmaPeriod": "20",
-        "InpRegimeSlowEmaPeriod": "50", "InpRegimeSlopeLagBars": "5",
-        "InpRegimePersistenceD1Bars": "2", "InpRegimeRequireH4Confirm": "true",
-        "InpRegimeShockH1RangeAtrMultiple": "3.0", "InpRegimeShockD1AtrLookback": "60",
-        "InpRegimeShockD1AtrPercentileMin": "95.0", "InpRegimeCompressionBoxDays": "5",
-        "InpRegimeCompressionD1AtrPercentileMax": "30.0", "InpRegimeCompressionRangeMedianMax": "1.0",
     }
     compact = re.sub(r"\s+", "", report["text"])
     for key, value in expected_inputs.items():
@@ -280,6 +286,8 @@ def verify_compile_packet(compiled: Path, buckets: Buckets) -> None:
 
 
 def _dt(value: str) -> datetime:
+    if re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}", value) is None:
+        raise ValueError(f"timestamp is not locked ISO broker format: {value!r}")
     return datetime.fromisoformat(value)
 
 
@@ -318,7 +326,8 @@ def load_bar_rows(
             or (timeframe == "H4" and delta <= 2 * seconds)
             or (timeframe == "D1" and delta <= 3 * seconds)
         )
-        if delta > seconds and not allowed_session_gap and not contains_weekend(first, second):
+        maximum_gap = {"H1": 96 * 3600, "H4": 96 * 3600, "D1": 5 * 86400}[timeframe]
+        if delta > maximum_gap or (delta > seconds and not allowed_session_gap and not contains_weekend(first, second)):
             raise ValueError(f"unexpected market-history gap: {path.name}: {first.isoformat()}->{second.isoformat()}")
     for row in rows:
         if any(int(row[name]) < 0 for name in ("tick_volume", "spread", "real_volume")):
@@ -427,6 +436,11 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
     states = Counter()
     max_diff = {name: 0.0 for name in ("ema", "atr", "percentile", "compression_metrics")}
     first_mismatch = ""
+    first_mismatch_timestamp = ""
+    first_mismatch_field = ""
+    state_match_count = 0
+    availability_match_count = 0
+    mismatch_count_by_native_state: Counter[str] = Counter()
     for row in native:
         try:
             decision = _dt(row["timestamp_broker"])
@@ -435,6 +449,8 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
             native_code = int(row["state_code"])
             state_match = canonical_native == python_state and native_code == STATE_CODES[python_state]
             available_match = (row["data_available"].lower() == "true") == (python_state != "UNKNOWN")
+            state_match_count += int(state_match)
+            availability_match_count += int(available_match)
             states[canonical_native] += 1
             mismatch_fields: list[str] = []
             if not state_match:
@@ -485,6 +501,9 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
             if mismatch_fields:
                 buckets.parity.append(f"{run_id}: parity mismatch {row['timestamp_broker']}: {','.join(mismatch_fields)}")
                 first_mismatch = first_mismatch or f"{row['timestamp_broker']}:{mismatch_fields[0]}"
+                first_mismatch_timestamp = first_mismatch_timestamp or row["timestamp_broker"]
+                first_mismatch_field = first_mismatch_field or mismatch_fields[0]
+                mismatch_count_by_native_state[canonical_native] += 1
             parity_rows.append({
                 "run_id": run_id, "timestamp_broker": row["timestamp_broker"], "symbol": row["symbol"],
                 "native_data_available": row["data_available"], "python_data_available": str(python_state != "UNKNOWN").lower(),
@@ -508,6 +527,10 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
     summary = {
         "run_id": run_id, "native_decision_rows": total, "expected_h4_decisions": len(expected),
         "state_counts": dict(sorted(states.items())), "first_mismatch": first_mismatch,
+        "state_exact_match_rate": state_match_count / total if total else 0.0,
+        "data_availability_exact_match_rate": availability_match_count / total if total else 0.0,
+        "first_mismatch_timestamp": first_mismatch_timestamp, "first_mismatch_field": first_mismatch_field,
+        "mismatch_count_by_native_state": dict(sorted(mismatch_count_by_native_state.items())),
         "ema_max_absolute_difference": max_diff["ema"], "atr_max_absolute_difference": max_diff["atr"],
         "percentile_max_absolute_difference": max_diff["percentile"],
         "compression_metric_max_absolute_difference": max_diff["compression_metrics"],
@@ -654,13 +677,11 @@ def status_for(buckets: Buckets) -> str:
     return "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS"
 
 
-def _raw_artifact_hashes(evidence_dir: Path) -> dict[str, str]:
+def attested_artifact_hashes(evidence_dir: Path) -> dict[str, str]:
     return {
         path.relative_to(evidence_dir).as_posix(): sha256_file(path)
         for path in sorted(evidence_dir.rglob("*")) if path.is_file()
         and path.name not in {"test_validation.md", "manifest.json", "manifest.sha256"}
-        and path.parent.name != "parity"
-        and not path.name.startswith("A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_")
     }
 
 
@@ -668,8 +689,8 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
     errors: list[str] = []
     required = {
         "schema_version", "git_head", "git_tree", "git_status_porcelain", "os", "architecture",
-        "python_version", "python_executable", "mt5_terminal_build", "metaeditor_version",
-        "same_ex5_sha256_run1_run2", "commands", "artifact_sha256", "environment",
+        "python_version", "python_executable", "dependency_versions", "mt5_terminal_build", "metaeditor_version",
+        "same_ex5_sha256_run1_run2", "commands", "artifact_sha256", "environment", "review_authority",
     }
     if set(attestation) != required:
         return ["exact-commit attestation field set mismatch"]
@@ -682,19 +703,58 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
         errors.append("exact-commit attestation worktree was not clean")
     if attestation["mt5_terminal_build"] != 5833 or attestation["metaeditor_version"] != "5.0.0.5833":
         errors.append("exact-commit attestation build mismatch")
+    authority = attestation["review_authority"]
+    if not isinstance(authority, dict) or set(authority) != {
+        "controlling_review_artifact", "controlling_review_sha256", "reviewed_generator_commit", "reviewed_generator_tree"
+    }:
+        errors.append("exact review authority attestation schema mismatch")
+    else:
+        if re.fullmatch(r"A1_XAU_NP1B3_[A-Z0-9_]+\.md", authority["controlling_review_artifact"]) is None:
+            errors.append("controlling NP1-B3 review artifact mismatch")
+        if re.fullmatch(r"[0-9a-f]{64}", authority["controlling_review_sha256"]) is None:
+            errors.append("controlling NP1-B3 review SHA256 mismatch")
+        if attestation["git_head"] != authority["reviewed_generator_commit"] or attestation["git_tree"] != authority["reviewed_generator_tree"]:
+            errors.append("attested HEAD/tree do not equal exact reviewed generator commit/tree")
+        try:
+            completed = subprocess.run(
+                ["git", "rev-parse", f"{authority['reviewed_generator_commit']}^{{tree}}"], cwd=ROOT,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+            )
+            resolved_tree = completed.stdout.decode("ascii", errors="strict").strip()
+            if completed.returncode != 0 or resolved_tree != authority["reviewed_generator_tree"]:
+                errors.append("reviewed generator commit/tree is not the exact repository object")
+        except (OSError, UnicodeError):
+            errors.append("reviewed generator commit/tree could not be resolved")
+    dependencies = attestation["dependency_versions"]
+    if not isinstance(dependencies, dict) or set(dependencies) != {"python_implementation", "pytest", "third_party_runtime_dependencies"}:
+        errors.append("dependency-version attestation mismatch")
+    elif not dependencies["python_implementation"] or not dependencies["pytest"] or dependencies["third_party_runtime_dependencies"] != {}:
+        errors.append("dependency-version attestation incomplete")
     commands = attestation["commands"]
-    if not isinstance(commands, list) or len(commands) < 3:
-        errors.append("exact-commit attestation requires compile plus two tester commands")
+    command_fields = {"command", "exit_code", "stdout_base64", "stderr_base64", "stdout_sha256", "stderr_sha256"}
+    if not isinstance(commands, list) or len(commands) < 5:
+        errors.append("exact-commit attestation requires compile, two tester, finalizer, and verifier commands")
     else:
         for index, row in enumerate(commands):
-            if not isinstance(row, dict) or set(row) != {"command", "exit_code", "stdout_sha256", "stderr_sha256"}:
+            if not isinstance(row, dict) or set(row) != command_fields:
                 errors.append(f"exact-commit command attestation schema mismatch at {index}")
                 continue
             if not isinstance(row["command"], list) or not row["command"] or not isinstance(row["exit_code"], int):
                 errors.append(f"exact-commit command attestation value mismatch at {index}")
-            if any(re.fullmatch(r"[0-9a-f]{64}", str(row[name])) is None for name in ("stdout_sha256", "stderr_sha256")):
-                errors.append(f"exact-commit command stream hash mismatch at {index}")
-    if attestation["artifact_sha256"] != _raw_artifact_hashes(evidence_dir):
+            try:
+                stdout = base64.b64decode(row["stdout_base64"], validate=True)
+                stderr = base64.b64decode(row["stderr_base64"], validate=True)
+            except (ValueError, TypeError):
+                errors.append(f"exact-commit command stream encoding mismatch at {index}")
+                continue
+            if hashlib.sha256(stdout).hexdigest() != row["stdout_sha256"] or hashlib.sha256(stderr).hexdigest() != row["stderr_sha256"]:
+                errors.append(f"exact-commit command stream content/hash mismatch at {index}")
+        rendered = [" ".join(str(part) for part in row.get("command", [])) for row in commands if isinstance(row, dict)]
+        if not any("--finalize" in command and "--attestation-json" in command for command in rendered):
+            errors.append("exact finalizer invocation missing from attestation")
+        if not any("verify_a1_xau_r6_market_only_native_parity.py" in command and "--finalize" not in command for command in rendered):
+            errors.append("exact read-only verifier invocation missing from attestation")
+    if attestation["artifact_sha256"] != attested_artifact_hashes(evidence_dir):
         errors.append("exact-commit attestation artifact hash set mismatch")
     ex5 = evidence_dir / "compiled" / Path(B.ORACLE_NAME).with_suffix(".ex5").name
     if ex5.is_file() and attestation["same_ex5_sha256_run1_run2"] != sha256_file(ex5):
@@ -855,8 +915,16 @@ def finalize_evidence_directory(
     write_csv(parity_dir / "router_python_native_parity.csv", router_columns, parity_rows)
     write_csv(parity_dir / "native_prefix_chain_hashes.csv", prefix_columns, prefix_rows)
     write_csv(parity_dir / "ordercalcprofit_python_native_parity.csv", order_columns, ordercalc_rows)
-    write_csv(parity_dir / "router_state_summary.csv", ["run_id", "native_decision_rows", "expected_h4_decisions", "state_counts", "first_mismatch", "ema_max_absolute_difference", "atr_max_absolute_difference", "percentile_max_absolute_difference", "compression_metric_max_absolute_difference"], [
-        {**row, "state_counts": json.dumps(row.get("state_counts", {}), sort_keys=True)} for row in summaries
+    write_csv(parity_dir / "router_state_summary.csv", [
+        "run_id", "native_decision_rows", "expected_h4_decisions", "state_counts",
+        "state_exact_match_rate", "data_availability_exact_match_rate", "first_mismatch_timestamp",
+        "first_mismatch_field", "mismatch_count_by_native_state", "ema_max_absolute_difference",
+        "atr_max_absolute_difference", "percentile_max_absolute_difference", "compression_metric_max_absolute_difference",
+    ], [
+        {
+            **row, "state_counts": json.dumps(row.get("state_counts", {}), sort_keys=True),
+            "mismatch_count_by_native_state": json.dumps(row.get("mismatch_count_by_native_state", {}), sort_keys=True),
+        } for row in summaries
     ])
     metrics["runs"] = summaries
     status = status_for(buckets)
@@ -922,10 +990,24 @@ def verify_evidence_directory(evidence_dir: Path) -> VerificationResult:
 def _main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("evidence_dir", type=Path)
+    parser.add_argument("--finalize", action="store_true")
+    parser.add_argument("--attestation-json", type=Path)
+    parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args(argv)
-    result = verify_evidence_directory(args.evidence_dir.resolve())
-    print(json.dumps({"status": result.status, "errors": result.errors, "metrics": result.metrics}, indent=2))
-    return 0 if result.status == "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS" else 1
+    if args.finalize:
+        if args.attestation_json is None:
+            parser.error("--finalize requires --attestation-json")
+        result = finalize_evidence_directory(args.evidence_dir.resolve(), attestation=read_json(args.attestation_json))
+    else:
+        if args.attestation_json is not None:
+            parser.error("--attestation-json is only valid with --finalize")
+        result = verify_evidence_directory(args.evidence_dir.resolve())
+    if not args.quiet:
+        print(json.dumps({"status": result.status, "errors": result.errors, "metrics": result.metrics}, indent=2))
+    return 0 if result.status in {
+        "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_PASS",
+        "R6_NP1_NATIVE_EVIDENCE_COMPLETE_PYTHON_PARITY_FAIL",
+    } else 1
 
 
 if __name__ == "__main__":

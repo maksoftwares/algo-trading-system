@@ -38,6 +38,8 @@ def test_oracle_has_zero_trading_surface_and_read_only_probe() -> None:
     assert "g_numeric_output_enabled=available" in text
     assert "ResetLastError();" in text
     assert "EvidenceBarCount" in text
+    assert "%04d-%02d-%02dT%02d:%02d:%02d" in text
+    assert "fixed_constant_InpRegimeCompressionRangeMedianMax" in text
     router_write = next(line for line in text.splitlines() if 'FileWrite(handle,"a1_xau_r6_native_router_row_v1"' in line)
     assert "iBars(" not in router_write
 

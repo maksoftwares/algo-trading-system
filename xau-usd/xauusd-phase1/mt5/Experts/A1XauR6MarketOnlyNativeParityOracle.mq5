@@ -326,7 +326,9 @@ string F(const double value)
 
 string T(const datetime value)
   {
-   return TimeToString(value,TIME_DATE|TIME_SECONDS);
+   MqlDateTime parts;
+   TimeToStruct(value,parts);
+   return StringFormat("%04d-%02d-%02dT%02d:%02d:%02d",parts.year,parts.mon,parts.day,parts.hour,parts.min,parts.sec);
   }
 
 bool WriteHeader(const int handle,const string header)
@@ -500,6 +502,19 @@ int OnInit()
    AppendAssertion("effective_input_InpAssertionsFileName",InpAssertionsFileName=="np1_"+InpRunId+"_native_assertions.tsv",InpAssertionsFileName,"np1_"+InpRunId+"_native_assertions.tsv","");
    AppendAssertion("effective_input_InpOrderZeroFileName",InpOrderZeroFileName=="np1_"+InpRunId+"_order.zero",InpOrderZeroFileName,"np1_"+InpRunId+"_order.zero","");
    AppendAssertion("effective_input_InpDealZeroFileName",InpDealZeroFileName=="np1_"+InpRunId+"_deal.zero",InpDealZeroFileName,"np1_"+InpRunId+"_deal.zero","");
+   AppendAssertion("fixed_constant_InpTargetSymbol",InpTargetSymbol=="XAUUSD",InpTargetSymbol,"XAUUSD","");
+   AppendAssertion("fixed_constant_InpAtrPeriod",InpAtrPeriod==14,IntegerToString(InpAtrPeriod),"14","");
+   AppendAssertion("fixed_constant_InpRegimeFastEmaPeriod",InpRegimeFastEmaPeriod==20,IntegerToString(InpRegimeFastEmaPeriod),"20","");
+   AppendAssertion("fixed_constant_InpRegimeSlowEmaPeriod",InpRegimeSlowEmaPeriod==50,IntegerToString(InpRegimeSlowEmaPeriod),"50","");
+   AppendAssertion("fixed_constant_InpRegimeSlopeLagBars",InpRegimeSlopeLagBars==5,IntegerToString(InpRegimeSlopeLagBars),"5","");
+   AppendAssertion("fixed_constant_InpRegimePersistenceD1Bars",InpRegimePersistenceD1Bars==2,IntegerToString(InpRegimePersistenceD1Bars),"2","");
+   AppendAssertion("fixed_constant_InpRegimeRequireH4Confirm",InpRegimeRequireH4Confirm,InpRegimeRequireH4Confirm ? "true" : "false","true","");
+   AppendAssertion("fixed_constant_InpRegimeShockH1RangeAtrMultiple",InpRegimeShockH1RangeAtrMultiple==3.0,F(InpRegimeShockH1RangeAtrMultiple),"3","");
+   AppendAssertion("fixed_constant_InpRegimeShockD1AtrLookback",InpRegimeShockD1AtrLookback==60,IntegerToString(InpRegimeShockD1AtrLookback),"60","");
+   AppendAssertion("fixed_constant_InpRegimeShockD1AtrPercentileMin",InpRegimeShockD1AtrPercentileMin==95.0,F(InpRegimeShockD1AtrPercentileMin),"95","");
+   AppendAssertion("fixed_constant_InpRegimeCompressionBoxDays",InpRegimeCompressionBoxDays==5,IntegerToString(InpRegimeCompressionBoxDays),"5","");
+   AppendAssertion("fixed_constant_InpRegimeCompressionD1AtrPercentileMax",InpRegimeCompressionD1AtrPercentileMax==30.0,F(InpRegimeCompressionD1AtrPercentileMax),"30","");
+   AppendAssertion("fixed_constant_InpRegimeCompressionRangeMedianMax",InpRegimeCompressionRangeMedianMax==1.0,F(InpRegimeCompressionRangeMedianMax),"1","");
    AppendAssertion("router_rows_monotonic",true,"true","true","emitted on new H4 only");
    AppendAssertion("contract_snapshot_complete",contract,contract ? "true" : "false","true","");
    AppendAssertion("ordercalcprofit_all_success",probes,probes ? "true" : "false","true","");

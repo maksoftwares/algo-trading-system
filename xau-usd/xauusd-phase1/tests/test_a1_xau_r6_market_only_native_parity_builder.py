@@ -75,4 +75,7 @@ def test_wrapper_emits_reconcilable_counts_and_exact_native_attestations() -> No
     assert "EvidenceBarCount(PERIOD_H4,decision)" in text
     assert "EvidenceBarCount(PERIOD_D1,decision)" in text
     assert text.count('AppendAssertion("effective_input_') == 10
+    assert text.count('AppendAssertion("fixed_constant_') == 13
     assert 'AppendAssertion("environment_terminal_build"' in text
+    assert 'StringFormat("%04d-%02d-%02dT%02d:%02d:%02d"' in text
+    assert "TimeToString(value,TIME_DATE|TIME_SECONDS)" not in text
