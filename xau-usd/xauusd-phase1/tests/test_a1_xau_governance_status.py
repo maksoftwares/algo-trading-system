@@ -295,6 +295,37 @@ def test_governance_summary_fails_closed_on_frozen_ledger_drift(
     assert not (repo / "status_summary.md").exists()
 
 
+def test_checked_in_governance_status_supersedes_primary_task_without_authorizing_runtime():
+    summary = json.loads((REPO_ROOT / "status_summary.json").read_text(encoding="utf-8"))
+    current = summary["current"]
+
+    assert current["overall_status"] == "NO_GO_RESEARCH_ONLY"
+    assert current["independent_specialist_program"]["status"] == (
+        "PRIMARY_INDEPENDENT_SPECIALIST_LANE"
+    )
+    assert current["independent_specialist_program"]["id"] == (
+        "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1"
+    )
+    assert current["independent_specialist_program"]["next_action"] == "NP1-A"
+    assert current["independent_specialist_program"]["parallel_specialist_lane_authorized"] is False
+    assert current["router_entry_hold_audit"] == {
+        "blocks_r6_standalone_discovery": False,
+        "required_before_old_control_integration": True,
+        "status": "DEFERRED_CONTROL_DIAGNOSTIC",
+    }
+    assert current["authorization"] == {
+        "broker_action_authorized": False,
+        "demo_authorized": False,
+        "live_authorized": False,
+        "runtime_touched": False,
+    }
+    assert current["primary_next_task"]["id"] == (
+        "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS"
+    )
+    assert current["primary_next_task"]["ea_trading_logic_change"] == "NONE"
+    assert current["primary_next_task"]["strategy_change_authorized"] is False
+
+
 def _governance_repo(tmp_path: Path) -> Path:
     repo = tmp_path / "repo"
     docs = repo / "xau-usd" / "xauusd-phase1" / "docs"

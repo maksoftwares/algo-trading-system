@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md": {
+      "sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af",
+      "size_bytes": 25099
+    },
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md": {
+      "sha256": "a5f10f756faddc8d20a91ba668f03c0ccc43e1d6e253693b256148b296898fa3",
+      "size_bytes": 13157
+    },
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json": {
+      "sha256": "456b3a1d153110cf55906d1b4ab82c18cf65d733fcdfe8498f0f768ef06a8181",
+      "size_bytes": 11072
+    },
+    "docs/A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json": {
+      "sha256": "f796c281b3539772bab7d7e0fc3af8ee20f69e4512fadda96c95e2673fc5bd1b",
+      "size_bytes": 5654
+    },
+    "outputs/manifests/A1_XAU_R6_CENSUS_LOCK_MANIFEST_V1.json": {
+      "sha256": "c26b20665830c1913aa5ec665d5efb4bb1b71f31dcab132b11b70184a2245fcb",
+      "size_bytes": 1857
+    },
+    "scripts/build_a1_xau_r6_distribution_break_failed_reclaim_census.py": {
+      "sha256": "1b79e94d2a1c4a524084c4d6b97e727b74939aa5188fc18c83286843355f60cf",
+      "size_bytes": 39085
+    },
+    "scripts/validate_a1_xau_r6_outcome_blind_census.py": {
+      "sha256": "ecffee7438a39b813c620d6f35f2122ec06ffe00cdbd37b95b3c8a5d0f277084",
+      "size_bytes": 24754
+    }
+  },
+  "authority": {
+    "controlling_c2r4_review_sha256": "d7824eca268f3fb2443406d929e7565723e79ec4bafef6b501c3eab49bb4fb7b",
+    "independent_specialist_direction_sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af",
+    "native_parity_acquisition_direction_sha256": "a2d10661e58e95c516291b7e1d9b07b8b59904b94cff8474e28b16d569f0c1ca",
+    "reviewed_head": "c9873c2693872f41ce17c1ee31c35a8a4fc36fcb",
+    "reviewed_tree": "211bba5389e25ba5779dd39663366ac6a871f31f"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "census_authorized_in_this_commit": false,
+    "demo_authorized": false,
+    "detector_change_authorized_in_this_commit": false,
+    "historical_data_status": "DEVELOPMENT_DATA",
+    "live_authorized": false,
+    "mt5_execution_authorized_in_this_commit": false,
+    "pnl_authorized_in_this_commit": false,
+    "separate_parallel_specialist_authorized": false
+  },
+  "next_action": "NP1-A",
+  "phase": "IS1-A_OWNER_DIRECTION_SUPERSESSION_AND_R6_PRIMARY_LANE_LOCK",
+  "primary_lane": "R6",
+  "primary_specialist": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_independent_specialist_primary_direction_lock_v1"
+}

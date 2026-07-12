@@ -15,6 +15,38 @@ This is the only authoritative current status surface. Historical phase/runtime 
 ## Required current statements
 
 ```text
+R6 = primary independent specialist lane
+NP1-A = next action
+R1+R2 = research control only
+R3 = excluded
+R4 = no survivor
+router entry/hold audit = deferred control diagnostic
+parallel specialist lane = false
+all history through 2026-06-30 = DEVELOPMENT_DATA
+no demo/live/broker authorization
+```
+
+## Primary independent-specialist lane
+
+- Primary lane: `R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1`
+- Standing: `PRIMARY_INDEPENDENT_SPECIALIST_LANE`
+- Next action: `NP1-A` — market-only native Router/contract acquisition locks
+NP1 standing: `MANDATORY_PREREQUISITE_WITHIN_R6`
+
+R6 owns the pre-downtrend distribution / failed-reclaim transition while the broad
+Router state remains `UPTREND` or `CHOP`. It must prove standalone incidence,
+contract feasibility, profitability, drawdown control, and independence in that
+order. No historical R6 P/L is authorized at IS1-A.
+
+No parallel specialist family is authorized. The H1/H4 objective range-box family
+is backlog only if R6 closes and a later owner/reviewer packet selects it.
+
+## Frozen control-diagnostic compatibility facts
+
+These statements preserve the existing R1+R2 audit identity and legacy verifier
+contract. They do not override the owner-direction primary task above.
+
+```text
 R1+R2 = current research control
 R3 = standalone shadow only
 R3 portfolio use = killed by DD gate
@@ -44,12 +76,12 @@ Ledger SHA256: `47cbe6a562ba2874d93a97255affbde613566ed06340a149ed2795d69a5dae52
 
 ## Specialist ownership
 
-| Specialist | Current standing | Role / default |
-| --- | --- | --- |
-| R1 | `CURRENT_RESEARCH_CONTROL_COMPONENT` | Primary bullish/uptrend profit engine |
-| R2 | `CURRENT_RESEARCH_CONTROL_COMPONENT` | Strict downtrend hedge and secondary profit source |
-| R3 | `STANDALONE_SHADOW_ONLY`; `KILLED_BY_DD_GATE` | Portfolio use killed by DD gate |
-| R4 | `NO_SURVIVOR` | Chop default `NO_TRADE` |
+| Specialist | Frozen standing | Primary-program disposition | Role / default |
+| --- | --- | --- | --- |
+| R1 | `CURRENT_RESEARCH_CONTROL_COMPONENT` | `RESEARCH_CONTROL_ONLY` | Primary bullish/uptrend profit engine |
+| R2 | `CURRENT_RESEARCH_CONTROL_COMPONENT` | `RESEARCH_CONTROL_ONLY` | Strict downtrend hedge and secondary profit source |
+| R3 | `STANDALONE_SHADOW_ONLY`; `KILLED_BY_DD_GATE` | `EXCLUDED` | Not independent; excluded from portfolio use |
+| R4 | `NO_SURVIVOR` | `NO_SURVIVOR` | Chop default `NO_TRADE` |
 
 ## Post-audit rule admissibility
 
@@ -92,15 +124,27 @@ It is not an untouched holdout.
 
 ## Immediate next task
 
-Next task: `A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1`
-Status: `PREREGISTERED_NOT_RUN`
+Next task: `R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS`
+Status: `AUTHORIZED_NOT_STARTED`
 Strategy change authorized: `false`
 EA trading-logic change: `NONE`
+
+The old `A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1` is now
+`DEFERRED_CONTROL_DIAGNOSTIC`. It remains required before the old R1+R2 control can
+ever enter an integrated portfolio, but it does not block R6 standalone discovery.
+
+Legacy control-task record retained for verifier compatibility:
+
+```text
+Next task: A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1
+Status: PREREGISTERED_NOT_RUN
+```
 
 ## Governing documents
 
 | Document | SHA256 |
 | --- | --- |
+| [independent_specialist_primary_direction](xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md) | `c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af` |
 | [master_direction](xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md) | `d17285d1056c07342bbd4e3ef0d84c5a0999ff9067313076414d66a9b7b90bfb` |
 | [current_research_freeze](xau-usd/xauusd-phase1/docs/A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md) | `e3a7ec680a35bc81b08fbeaf56d12f8b9b3b23cdb068ad41a18aad88f7f060c8` |
 | [router_entry_hold_path_audit_prereg](xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md) | `cc42e7942ae04956c6b94cefa59e3277e4b0db167a02826eb05156e758f92541` |

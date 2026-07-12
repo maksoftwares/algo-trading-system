@@ -26,6 +26,15 @@
       "through": "2026-06-30",
       "untouched_holdout": false
     },
+    "independent_specialist_program": {
+      "historical_pnl_authorized": false,
+      "id": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+      "next_action": "NP1-A",
+      "np1_status": "MANDATORY_PREREQUISITE_WITHIN_R6",
+      "parallel_specialist_lane_authorized": false,
+      "range_box_status": "BACKLOG_ONLY_IF_R6_CLOSES",
+      "status": "PRIMARY_INDEPENDENT_SPECIALIST_LANE"
+    },
     "next_task": {
       "ea_trading_logic_change": "NONE",
       "id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
@@ -63,6 +72,28 @@
       "no demo/live authorization",
       "next task = router entry/hold path audit"
     ],
+    "owner_direction_current_statements": [
+      "R6 = primary independent specialist lane",
+      "NP1-A = next action",
+      "R1+R2 = research control only",
+      "R3 = excluded",
+      "R4 = no survivor",
+      "router entry/hold audit = deferred control diagnostic",
+      "parallel specialist lane = false",
+      "all history through 2026-06-30 = DEVELOPMENT_DATA",
+      "no demo/live/broker authorization"
+    ],
+    "primary_next_task": {
+      "ea_trading_logic_change": "NONE",
+      "id": "R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS",
+      "status": "AUTHORIZED_NOT_STARTED",
+      "strategy_change_authorized": false
+    },
+    "router_entry_hold_audit": {
+      "blocks_r6_standalone_discovery": false,
+      "required_before_old_control_integration": true,
+      "status": "DEFERRED_CONTROL_DIAGNOSTIC"
+    },
     "rule_admissibility": {
       "audit_identity_rows": 678,
       "future_containment_requirement": "SHARED_PREREGISTERED_INTEGRATED_RISK_POLICY",
@@ -103,14 +134,17 @@
     "specialists": {
       "R1": {
         "role": "Primary bullish/uptrend profit engine",
+        "primary_program_status": "RESEARCH_CONTROL_ONLY",
         "status": "CURRENT_RESEARCH_CONTROL_COMPONENT"
       },
       "R2": {
         "role": "Strict downtrend hedge and secondary profit source",
+        "primary_program_status": "RESEARCH_CONTROL_ONLY",
         "status": "CURRENT_RESEARCH_CONTROL_COMPONENT"
       },
       "R3": {
         "portfolio_status": "KILLED_BY_DD_GATE",
+        "primary_program_status": "EXCLUDED",
         "standalone_status": "STANDALONE_SHADOW_ONLY"
       },
       "R4": {
@@ -133,6 +167,10 @@
     "master_direction": {
       "path": "xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md",
       "sha256": "d17285d1056c07342bbd4e3ef0d84c5a0999ff9067313076414d66a9b7b90bfb"
+    },
+    "independent_specialist_primary_direction": {
+      "path": "xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md",
+      "sha256": "c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af"
     },
     "router_entry_hold_path_audit_prereg": {
       "path": "xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md",

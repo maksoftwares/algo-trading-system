@@ -37,6 +37,36 @@
     <section>
       <h2>Required current statements</h2>
       <ul>
+          <li>R6 = primary independent specialist lane</li>
+          <li>NP1-A = next action</li>
+          <li>R1+R2 = research control only</li>
+          <li>R3 = excluded</li>
+          <li>R4 = no survivor</li>
+          <li>router entry/hold audit = deferred control diagnostic</li>
+          <li>parallel specialist lane = false</li>
+          <li>all history through 2026-06-30 = DEVELOPMENT_DATA</li>
+          <li>no demo/live/broker authorization</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Primary independent-specialist lane</h2>
+      <table>
+        <tbody>
+          <tr><th>Specialist</th><td><code>R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1</code></td></tr>
+          <tr><th>Standing</th><td><code>PRIMARY_INDEPENDENT_SPECIALIST_LANE</code></td></tr>
+          <tr><th>Next action</th><td><code>NP1-A</code> market-only native Router/contract acquisition locks</td></tr>
+          <tr><th>Parallel specialist lane</th><td class="false">false</td></tr>
+          <tr><th>Historical R6 P/L authorized</th><td class="false">false</td></tr>
+        </tbody>
+      </table>
+      <p>R6 owns the pre-downtrend distribution / failed-reclaim transition while the broad Router state remains <code>UPTREND</code> or <code>CHOP</code>. The range-box family is backlog only if R6 closes.</p>
+    </section>
+
+    <section>
+      <h2>Frozen control-diagnostic compatibility facts</h2>
+      <p>These preserve the R1+R2 audit identity and legacy verifier contract; they do not override the owner-direction primary task.</p>
+      <ul>
           <li>R1+R2 = current research control</li>
           <li>R3 = standalone shadow only</li>
           <li>R3 portfolio use = killed by DD gate</li>
@@ -65,12 +95,12 @@
     <section>
       <h2>Specialist ownership</h2>
       <table>
-        <thead><tr><th>Specialist</th><th>Standing</th><th>Role / default</th></tr></thead>
+        <thead><tr><th>Specialist</th><th>Frozen standing</th><th>Primary-program disposition</th><th>Role / default</th></tr></thead>
         <tbody>
-          <tr><td>R1</td><td>CURRENT_RESEARCH_CONTROL_COMPONENT</td><td>Primary bullish/uptrend profit engine</td></tr>
-          <tr><td>R2</td><td>CURRENT_RESEARCH_CONTROL_COMPONENT</td><td>Strict downtrend hedge and secondary profit source</td></tr>
-          <tr><td>R3</td><td>STANDALONE_SHADOW_ONLY; KILLED_BY_DD_GATE</td><td>Portfolio use killed by DD gate</td></tr>
-          <tr><td>R4</td><td>NO_SURVIVOR</td><td>Chop default NO_TRADE</td></tr>
+          <tr><td>R1</td><td>CURRENT_RESEARCH_CONTROL_COMPONENT</td><td>RESEARCH_CONTROL_ONLY</td><td>Primary bullish/uptrend profit engine</td></tr>
+          <tr><td>R2</td><td>CURRENT_RESEARCH_CONTROL_COMPONENT</td><td>RESEARCH_CONTROL_ONLY</td><td>Strict downtrend hedge and secondary profit source</td></tr>
+          <tr><td>R3</td><td>STANDALONE_SHADOW_ONLY; KILLED_BY_DD_GATE</td><td>EXCLUDED</td><td>Not independent; excluded from portfolio use</td></tr>
+          <tr><td>R4</td><td>NO_SURVIVOR</td><td>NO_SURVIVOR</td><td>Chop default NO_TRADE</td></tr>
         </tbody>
       </table>
     </section>
@@ -113,8 +143,10 @@
 
     <section>
       <h2>Immediate next task</h2>
-      <p><code>A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1</code> · PREREGISTERED_NOT_RUN</p>
+      <p><code>R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS</code> · AUTHORIZED_NOT_STARTED</p>
       <p>Strategy change authorized: <strong>false</strong>. EA trading-logic change: <strong>NONE</strong>.</p>
+      <p>The old router entry/hold audit is <code>DEFERRED_CONTROL_DIAGNOSTIC</code>. It remains required before the old R1+R2 control can enter an integrated portfolio, but it does not block R6 standalone discovery.</p>
+      <p>Legacy control-task record: <code>A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1</code> · PREREGISTERED_NOT_RUN.</p>
     </section>
 
     <section>
@@ -122,6 +154,7 @@
       <table>
         <thead><tr><th>Document</th><th>SHA256</th></tr></thead>
         <tbody>
+          <tr><td><a href="xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md">Independent-specialist primary direction</a></td><td><code>c68a669f160b7469f8204101d05d38c36cf46f0501ca1f11c77ff3f91659b9af</code></td></tr>
           <tr><td><a href="xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md">Master direction</a></td><td><code>d17285d1056c07342bbd4e3ef0d84c5a0999ff9067313076414d66a9b7b90bfb</code></td></tr>
           <tr><td><a href="xau-usd/xauusd-phase1/docs/A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md">Current research freeze</a></td><td><code>e3a7ec680a35bc81b08fbeaf56d12f8b9b3b23cdb068ad41a18aad88f7f060c8</code></td></tr>
           <tr><td><a href="xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md">Router entry/hold-path audit preregistration</a></td><td><code>cc42e7942ae04956c6b94cefa59e3277e4b0db167a02826eb05156e758f92541</code></td></tr>

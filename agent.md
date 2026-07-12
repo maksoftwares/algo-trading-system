@@ -1,11 +1,11 @@
 # A1 XAUUSD Authoritative Handoff
 
-Updated: `2026-07-10`
+Updated: `2026-07-12`
 
 ## Repository authority
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
-- Current governance branch: `codex/xau-profitable-system-governance`
+- Current governance branch: `codex/xau-router-entry-hold-audit`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -14,6 +14,7 @@ Updated: `2026-07-10`
 1. [Master direction](xau-usd/xauusd-phase1/docs/A1_XAU_PROFITABLE_SYSTEM_MASTER_DIRECTION_2026_07_10.md)
 2. [Current research freeze](xau-usd/xauusd-phase1/docs/A1_XAU_CURRENT_RESEARCH_FREEZE_2026_07_10.md)
 3. [Router entry/hold-path audit preregistration](xau-usd/xauusd-phase1/docs/A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_PREREG_2026_07_10.md)
+4. [Independent-specialist primary direction](xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md)
 
 Read all three before changing code or generating evidence.
 
@@ -21,9 +22,25 @@ Read all three before changing code or generating evidence.
 
 > Build an automated XAUUSD system that produces positive net returns over rolling 6- and 12-month periods, survives realistic costs and regime changes, limits portfolio equity drawdown, and can eventually support controlled withdrawals from accumulated profits.
 
+Authoritative status: `NO_GO_RESEARCH_ONLY`.
+
 Priority is safety, causal correctness, stressed expectancy, equity-drawdown control, robustness, independence, and forward confirmation. Activity is secondary and must never be forced.
 
 ## Frozen research state
+
+### R6 primary independent-specialist lane
+
+- Specialist: `R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1`.
+- Standing: `PRIMARY_INDEPENDENT_SPECIALIST_LANE`.
+- Economic mandate: pre-downtrend H4 distribution / first failed-H1-reclaim short
+  while Router V1 is `UPTREND` or `CHOP`.
+- Immediate action: `NP1-A`, the market-only native Router/contract acquisition
+  lock packet.
+- NP1 is a mandatory bounded prerequisite within R6, not a second program.
+- Historical R6 P/L, census output, MT5 strategy execution, and portfolio evidence
+  remain unauthorized at IS1-A.
+- No parallel specialist family is authorized. H1/H4 range-box research is backlog
+  only if R6 closes and a later owner/reviewer packet selects it.
 
 ### R1+R2
 
@@ -86,7 +103,8 @@ live_authorized: false
 broker_action_authorized: false
 runtime_attach_authorized: false
 strategy_tuning_authorized: false
-new_specialist_authorized: false
+new_specialist_authorized: R6_REPOSITORY_RESEARCH_ONLY
+parallel_specialist_lane_authorized: false
 ```
 
 No demo/live attach or broker order outside the isolated Strategy Tester is allowed.
@@ -95,32 +113,33 @@ production-terminal touch is allowed.
 
 ## Immediate next task
 
-`A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1`
+`R6-NP1-A_MARKET_ONLY_NATIVE_PARITY_ACQUISITION_LOCKS`
 
-Audit every frozen R1+R2 trade using EA-side Router V1 as the authoritative classifier. Determine whether each trade is a correct stable-regime entry, a correct entry followed by a later regime change, a stale tactical entry, a wrong-router entry, a transition entry, a data/timestamp error, or a valid loss in its expected regime.
+Create only the NP1-A acquisition locks after IS1-A passes reviewer audit. NP1-A
+freezes the deterministic market-only Router/contract oracle source contract, output
+schemas, exact tester boundary, hashes, and zero-action gates. It contains no MQ5,
+Python implementation, tests, compiled artifacts, MT5 evidence, census, or P/L.
 
-Required hard evidence includes completed-bar-only router states at signal, entry, every completed H1 bar while open, and exit; causal D1/H4/H1/M15 context; signal/order/risk fields; MFE/MAE and final R; and exact trade/P&L reconciliation.
-
-The audit is invalid if any frozen trade is untraced, a timestamp or snapshot is missing, a join reads the future, bar 0 is used for a regime decision, or source counts/P&L do not reconcile exactly. Ambiguous cases fail closed.
-
-Any `WRONG_ROUTER_ENTRY` count above zero is a defect stop. Fix only routing/configuration, then rerun the frozen exact baseline. It is not permission to add a filter or tune a threshold.
+The old `A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1` is now
+`DEFERRED_CONTROL_DIAGNOSTIC`. It remains required before the old R1+R2 control can
+ever enter an integrated portfolio, but it does not block R6 standalone discovery.
 
 ## Immediate sequence
 
-1. Finish the governance reset and refresh status artifacts without changing trading logic.
-2. Add deterministic router-audit schemas, analyzers, verifiers, and causality/reconciliation/safety tests.
-3. Generate immutable read-only exact-MT5 snapshot/path evidence.
-4. Produce the router audit reports and assign exactly one preregistered status.
-5. Take a conditional router action only if the audit gate justifies it.
-6. Requalify the frozen R1 and R2 sources against the master standalone admission
-   gates; if no source passes independently, assign `NO_GO` and do not run an
-   integrated portfolio.
-7. Only after router closure and standalone admission, build one integrated exact-MT5
-   portfolio from the independently approved R1/R2 sources, with shared exposure,
-   ownership, execution, and equity-DD accounting.
-8. Only after an integrated pass, freeze a genuinely new forward-shadow exam.
+1. IS1-A owner-direction supersession and R6 primary-lane lock.
+2. NP1-A market-only native-parity acquisition locks.
+3. NP1-B oracle/probe implementation and tests.
+4. NP1-C exact zero-action native evidence.
+5. C2R5 native-parity and input-attestation closure.
+6. C3A exact historical-input lock.
+7. C3 outcome-blind incidence and USD 1,000 contract census.
+8. If C3 passes, one standalone exact-MT5 preregistration and one result.
+9. If standalone passes, sealed independence audit.
+10. If independence passes, forward-shadow lock.
 
-Do not start a new specialist, optimization, parameter variation, entry/exit repair, session/hour/month filter, portfolio grid, risk governor, or activity filler during this sequence.
+Do not start a second specialist family, optimization, threshold neighbor, session or
+calendar mask, management variant, portfolio rescue, or historical P/L study outside
+this sequence.
 
 ## Isolated tester boundary
 
