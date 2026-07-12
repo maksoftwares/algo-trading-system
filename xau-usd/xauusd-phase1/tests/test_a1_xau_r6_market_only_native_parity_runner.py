@@ -206,8 +206,13 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
     )
     terminal = FakeTerminal()
     output = tmp_path / "evidence"
-    review_artifact = tmp_path / "A1_XAU_NP1B3_PASS_REVIEW_TEST.md"
-    review_artifact.write_text("reviewed\n", encoding="utf-8")
+    review_artifact = tmp_path / "A1_XAU_NP1B4_PASS_REVIEW_TEST.md"
+    review_artifact.write_text(
+        "NP1-B4: PASS\nNP1_C_AUTHORIZATION_BLOCK_BEGIN\n"
+        "NP1_C_AUTHORIZATION_STATUS: AUTHORIZED\nREVIEW_VERDICT: PASS\n"
+        f"REVIEWED_GENERATOR_COMMIT: {'a' * 40}\nREVIEWED_GENERATOR_TREE: {'b' * 40}\n"
+        "NP1_C_AUTHORIZATION_BLOCK_END\n", encoding="utf-8",
+    )
     produced = R.run_historical_evidence_campaign(
         authorization=R.NP1_C_AUTHORIZATION, tester_sandbox=sandbox, metaeditor=editor,
         compile_workspace=tmp_path / "compile-test", output_dir=output, command_runner=terminal,
@@ -220,3 +225,26 @@ def test_end_to_end_fake_campaign_isolated_collects_and_attests(tmp_path: Path, 
     assert len(terminal.commands) == 2 and len(captured["attestation"]["commands"]) == 2
     assert (output / "runs" / "run1" / "native_router_rows.tsv").read_text() == "run1:native_router_rows.tsv"
     assert (output / "runs" / "run2" / "native_router_rows.tsv").read_text() == "run2:native_router_rows.tsv"
+
+
+@pytest.mark.parametrize("mutation", ["fake", "fail", "duplicate", "commit"])
+def test_review_authorization_parser_rejects_non_authoritative_blocks(tmp_path: Path, mutation: str) -> None:
+    commit, tree = "a" * 40, "b" * 40
+    text = (
+        "NP1-B4: PASS\nNP1_C_AUTHORIZATION_BLOCK_BEGIN\n"
+        "NP1_C_AUTHORIZATION_STATUS: AUTHORIZED\nREVIEW_VERDICT: PASS\n"
+        f"REVIEWED_GENERATOR_COMMIT: {commit}\nREVIEWED_GENERATOR_TREE: {tree}\n"
+        "NP1_C_AUTHORIZATION_BLOCK_END\n"
+    )
+    if mutation == "fake":
+        text = "reviewed\n"
+    elif mutation == "fail":
+        text = text.replace("NP1-B4: PASS", "NP1-B4: FAIL")
+    elif mutation == "duplicate":
+        text = text.replace("REVIEW_VERDICT: PASS", "REVIEW_VERDICT: PASS\nREVIEW_VERDICT: PASS")
+    else:
+        text = text.replace(commit, "not-a-commit")
+    path = tmp_path / "A1_XAU_NP1B4_TEST.md"
+    path.write_text(text, encoding="utf-8")
+    with pytest.raises(PermissionError):
+        R.parse_np1_c_review_authorization(path)

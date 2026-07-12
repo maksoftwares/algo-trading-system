@@ -279,6 +279,37 @@ def capture_clean_git_identity() -> dict[str, str]:
     return {"git_head": _git("rev-parse", "HEAD"), "git_tree": _git("rev-parse", "HEAD^{tree}"), "git_status_porcelain": ""}
 
 
+def parse_np1_c_review_authorization(path: Path) -> dict[str, str]:
+    text = path.read_text(encoding="utf-8")
+    begin, end = "NP1_C_AUTHORIZATION_BLOCK_BEGIN", "NP1_C_AUTHORIZATION_BLOCK_END"
+    if text.count(begin) != 1 or text.count(end) != 1:
+        raise PermissionError("review artifact must contain exactly one NP1-C authorization block")
+    block = text.split(begin, 1)[1].split(end, 1)[0]
+    fields: dict[str, str] = {}
+    for raw in block.splitlines():
+        line = raw.strip().strip("`")
+        if not line:
+            continue
+        if ":" not in line:
+            raise PermissionError("NP1-C authorization block contains an invalid line")
+        key, value = (part.strip() for part in line.split(":", 1))
+        if key in fields:
+            raise PermissionError(f"duplicate NP1-C authorization field: {key}")
+        fields[key] = value
+    required = {
+        "NP1_C_AUTHORIZATION_STATUS", "REVIEW_VERDICT", "REVIEWED_GENERATOR_COMMIT", "REVIEWED_GENERATOR_TREE"
+    }
+    if set(fields) != required:
+        raise PermissionError("NP1-C authorization block field set mismatch")
+    if fields["NP1_C_AUTHORIZATION_STATUS"] != "AUTHORIZED" or fields["REVIEW_VERDICT"] != "PASS":
+        raise PermissionError("review artifact does not authorize NP1-C with a PASS verdict")
+    if re.search(r"NP1-B4\s*:\s*(?:FAIL|NO-GO)|NP1-C\s*:\s*NOT AUTHORIZED", text, re.IGNORECASE):
+        raise PermissionError("review artifact contains a rejecting B4/NP1-C verdict")
+    if re.fullmatch(r"[0-9a-f]{40}", fields["REVIEWED_GENERATOR_COMMIT"]) is None or re.fullmatch(r"[0-9a-f]{40}", fields["REVIEWED_GENERATOR_TREE"]) is None:
+        raise PermissionError("review artifact generator commit/tree is malformed")
+    return fields
+
+
 def build_campaign_attestation(
     output_dir: Path, compiled: CompileResult, commands: list[dict[str, object]], git_identity: dict[str, str],
     review_authority: dict[str, str], finalizer_commands: list[dict[str, object]],
@@ -351,19 +382,26 @@ def run_historical_evidence_campaign(
         raise PermissionError("real historical Strategy Tester evidence remains prohibited before NP1-C review")
     git_identity = capture_clean_git_identity()
     review_path = review_artifact.resolve() if review_artifact is not None else None
+    parsed_review = parse_np1_c_review_authorization(review_path) if review_path is not None and review_path.is_file() else {}
     review_authority = {
         "controlling_review_artifact": review_path.name if review_path is not None else "",
         "controlling_review_sha256": review_sha256 or "",
         "reviewed_generator_commit": reviewed_generator_commit or "",
         "reviewed_generator_tree": reviewed_generator_tree or "",
+        "authorization_status": parsed_review.get("NP1_C_AUTHORIZATION_STATUS", ""),
+        "review_verdict": parsed_review.get("REVIEW_VERDICT", ""),
     }
     if (
-        re.fullmatch(r"A1_XAU_NP1B3_[A-Z0-9_]+\.md", review_authority["controlling_review_artifact"]) is None
+        re.fullmatch(r"A1_XAU_NP1B4_[A-Z0-9_]+\.md", review_authority["controlling_review_artifact"]) is None
         or review_path is None or not review_path.is_file()
         or re.fullmatch(r"[0-9a-f]{64}", review_authority["controlling_review_sha256"]) is None
         or sha256_file(review_path) != review_authority["controlling_review_sha256"]
         or review_authority["reviewed_generator_commit"] != git_identity["git_head"]
         or review_authority["reviewed_generator_tree"] != git_identity["git_tree"]
+        or parsed_review.get("REVIEWED_GENERATOR_COMMIT") != git_identity["git_head"]
+        or parsed_review.get("REVIEWED_GENERATOR_TREE") != git_identity["git_tree"]
+        or review_authority["authorization_status"] != "AUTHORIZED"
+        or review_authority["review_verdict"] != "PASS"
     ):
         raise PermissionError("NP1-C requires the exact reviewed NP1-B3 artifact, SHA256, generator commit, and tree")
     terminal = validate_tester_sandbox(tester_sandbox)

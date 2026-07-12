@@ -205,7 +205,7 @@ def parse_native_report(path: Path) -> dict[str, Any]:
             match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
             if match:
                 return html.unescape(match.group(1)).strip()
-        match = re.search(rf"(?:^|\n)\s*{re.escape(label)}\s*\n+\s*([^\n]+)", plain, re.IGNORECASE)
+        match = re.search(rf"(?:^|\n)\s*{re.escape(label)}\s*:?\s*\n+\s*([^\n]+)", plain, re.IGNORECASE)
         if match:
             return match.group(1).strip()
         raise ValueError(f"native report missing {label}")
@@ -291,6 +291,19 @@ def _dt(value: str) -> datetime:
     return datetime.fromisoformat(value)
 
 
+def expected_weekend_gap(timeframe: str, first: datetime, second: datetime) -> bool:
+    if first.weekday() != 4 or second.weekday() != 0:
+        return False
+    delta = int((second - first).total_seconds())
+    if timeframe == "H1":
+        return first.hour in {19, 20} and second.hour in {0, 1} and delta <= 54 * 3600
+    if timeframe == "H4":
+        return first.hour in {16, 20} and second.hour == 0 and delta <= 56 * 3600
+    if timeframe == "D1":
+        return first.hour == second.hour == 0 and delta == 3 * 86400
+    return False
+
+
 def load_bar_rows(
     path: Path, schema: dict[str, Any], router: Any, *, timeframe: str,
     test_start: datetime, test_end: datetime,
@@ -309,14 +322,6 @@ def load_bar_rows(
     if not (test_end - step <= times[-1] < test_end):
         raise ValueError(f"bar exclusive-end coverage mismatch: {path.name}: {times[-1].isoformat()}")
     seconds = int(step.total_seconds())
-    def contains_weekend(first: datetime, second: datetime) -> bool:
-        cursor = first.replace(hour=0, minute=0, second=0)
-        while cursor <= second:
-            if cursor.weekday() >= 5:
-                return True
-            cursor += timedelta(days=1)
-        return False
-
     for first, second in zip(times, times[1:]):
         delta = int((second - first).total_seconds())
         if delta <= 0 or delta % seconds:
@@ -324,10 +329,8 @@ def load_bar_rows(
         allowed_session_gap = (
             (timeframe == "H1" and delta <= 2 * seconds)
             or (timeframe == "H4" and delta <= 2 * seconds)
-            or (timeframe == "D1" and delta <= 3 * seconds)
         )
-        maximum_gap = {"H1": 96 * 3600, "H4": 96 * 3600, "D1": 5 * 86400}[timeframe]
-        if delta > maximum_gap or (delta > seconds and not allowed_session_gap and not contains_weekend(first, second)):
+        if delta > seconds and not allowed_session_gap and not expected_weekend_gap(timeframe, first, second):
             raise ValueError(f"unexpected market-history gap: {path.name}: {first.isoformat()}->{second.isoformat()}")
     for row in rows:
         if any(int(row[name]) < 0 for name in ("tick_volume", "spread", "real_volume")):
@@ -420,16 +423,38 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
     start = _dt(schema["native_router_rows"]["evidence_interval_from_inclusive"])
     end = _dt(schema["native_router_rows"]["evidence_interval_to_exclusive"])
     expected = [row["open_time_broker"] for row in h4_rows if start <= _dt(row["open_time_broker"]) < end]
-    actual = [row["timestamp_broker"] for row in native]
-    if actual != expected:
-        buckets.parity.append(f"{run_id}: H4 decision-row coverage mismatch expected={len(expected)} actual={len(actual)}")
-    for row in native:
-        if row["run_id"] != run_id or row["symbol"] != "XAUUSD":
-            buckets.invalid.append(f"{run_id}: Router row identity mismatch")
+    native_structure_valid = True
+    invalid_native_rows: set[int] = set()
+    for row_index, row in enumerate(native):
+        try:
+            if row["run_id"] != run_id or row["symbol"] != "XAUUSD":
+                raise ValueError("Router row identity mismatch")
+            if row["schema_version"] != "a1_xau_r6_native_router_row_v1":
+                raise ValueError("Router row schema_version mismatch")
+            if row["data_available"] not in {"true", "false"}:
+                raise ValueError("Router row data_available is not true/false")
+            if row["state_name"] not in NATIVE_TO_CANONICAL:
+                raise ValueError("Router row state_name is not locked")
+            native_code = int(row["state_code"])
+            if native_code not in STATE_CODES.values() or native_code != STATE_CODES[NATIVE_TO_CANONICAL[row["state_name"]]]:
+                raise ValueError("Router row state_code/name mismatch")
+            if int(row["native_error_code"]) != 0:
+                raise ValueError("Router row native_error_code is nonzero")
+            if any(int(row[name]) < 0 for name in ("h1_bar_count", "h4_bar_count", "d1_bar_count")):
+                raise ValueError("Router row bar count is negative")
+            for name in ("timestamp_broker", "h1_shift1_time", "h4_shift1_time", "d1_shift1_time"):
+                _dt(row[name])
+        except (ValueError, KeyError, TypeError, OverflowError) as exc:
+            native_structure_valid = False
+            invalid_native_rows.add(row_index)
+            buckets.invalid.append(f"{run_id}: malformed native Router row: {exc}")
         if row["router_source_commit"] != B.SOURCE_COMMIT or row["router_source_blob"] != B.SOURCE_BLOB:
             buckets.source.append(f"{run_id}: Router row source lineage mismatch")
         if row["source_equivalence_sha256"] != source_equivalence_sha256:
             buckets.source.append(f"{run_id}: Router row source-equivalence hash mismatch")
+    actual = [row["timestamp_broker"] for row in native]
+    if native_structure_valid and actual != expected:
+        buckets.parity.append(f"{run_id}: H4 decision-row coverage mismatch expected={len(expected)} actual={len(actual)}")
     acceptance = schema["parity"]["acceptance"]
     parity_rows: list[dict[str, Any]] = []
     prefix_rows: list[dict[str, Any]] = []
@@ -441,9 +466,19 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
     state_match_count = 0
     availability_match_count = 0
     mismatch_count_by_native_state: Counter[str] = Counter()
-    for row in native:
+    for row_index, row in enumerate(native):
+        if row_index in invalid_native_rows:
+            continue
         try:
             decision = _dt(row["timestamp_broker"])
+            expected_counts = {
+                "h1_bar_count": sum(bar.time <= decision for bar in h1),
+                "h4_bar_count": sum(bar.time <= decision for bar in h4),
+                "d1_bar_count": sum(bar.time <= decision for bar in d1),
+            }
+            if any(int(row[name]) != expected_value for name, expected_value in expected_counts.items()):
+                buckets.invalid.append(f"{run_id}: native Router bar-count reconciliation mismatch at {row['timestamp_broker']}")
+                continue
             python_state, metrics = python_metrics(router, h1, h4, d1, decision)
             canonical_native = NATIVE_TO_CANONICAL.get(row["state_name"], "INVALID")
             native_code = int(row["state_code"])
@@ -476,16 +511,6 @@ def verify_router_run(run_id: str, run_dir: Path, source: dict[str, Any], schema
             if row["h1_shift1_time"] != h1_last or row["h4_shift1_time"] != h4_last or row["d1_shift1_time"] != d1_last:
                 mismatch_fields.append("causal_prefix_last_completed_time")
             h1_i, h4_i, d1_i = (router._last_completed_index(bars, decision) for bars in (h1, h4, d1))
-            exact_fields = {
-                "schema_version": "a1_xau_r6_native_router_row_v1",
-                "native_error_code": "0",
-                "h1_bar_count": str(sum(bar.time <= decision for bar in h1)),
-                "h4_bar_count": str(sum(bar.time <= decision for bar in h4)),
-                "d1_bar_count": str(sum(bar.time <= decision for bar in d1)),
-            }
-            for field_name, expected_value in exact_fields.items():
-                if row[field_name] != expected_value:
-                    mismatch_fields.append(field_name)
             raw_values = {
                 "h1_shift1_high": h1[h1_i].high,
                 "h1_shift1_low": h1[h1_i].low,
@@ -558,6 +583,7 @@ def verify_ordercalcprofit(run_id: str, run_dir: Path, schema: dict[str, Any], b
         if c.get(key) != expected:
             buckets.invalid.append(f"{run_id}: contract environment mismatch {key}={c.get(key)!r}")
     try:
+        _dt(c["timestamp_broker"])
         positive_contract = ("point", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_profit", "tick_value_loss")
         if any(not math.isfinite(float(c[name])) or float(c[name]) <= 0 for name in positive_contract):
             buckets.invalid.append(f"{run_id}: contract positive finite numeric invariant failed")
@@ -705,14 +731,17 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
         errors.append("exact-commit attestation build mismatch")
     authority = attestation["review_authority"]
     if not isinstance(authority, dict) or set(authority) != {
-        "controlling_review_artifact", "controlling_review_sha256", "reviewed_generator_commit", "reviewed_generator_tree"
+        "controlling_review_artifact", "controlling_review_sha256", "reviewed_generator_commit", "reviewed_generator_tree",
+        "authorization_status", "review_verdict",
     }:
         errors.append("exact review authority attestation schema mismatch")
     else:
-        if re.fullmatch(r"A1_XAU_NP1B3_[A-Z0-9_]+\.md", authority["controlling_review_artifact"]) is None:
-            errors.append("controlling NP1-B3 review artifact mismatch")
+        if re.fullmatch(r"A1_XAU_NP1B4_[A-Z0-9_]+\.md", authority["controlling_review_artifact"]) is None:
+            errors.append("controlling NP1-B4 review artifact mismatch")
         if re.fullmatch(r"[0-9a-f]{64}", authority["controlling_review_sha256"]) is None:
-            errors.append("controlling NP1-B3 review SHA256 mismatch")
+            errors.append("controlling NP1-B4 review SHA256 mismatch")
+        if authority["authorization_status"] != "AUTHORIZED" or authority["review_verdict"] != "PASS":
+            errors.append("controlling NP1-B4 review does not explicitly authorize NP1-C with PASS")
         if attestation["git_head"] != authority["reviewed_generator_commit"] or attestation["git_tree"] != authority["reviewed_generator_tree"]:
             errors.append("attested HEAD/tree do not equal exact reviewed generator commit/tree")
         try:
@@ -732,7 +761,7 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
         errors.append("dependency-version attestation incomplete")
     commands = attestation["commands"]
     command_fields = {"command", "exit_code", "stdout_base64", "stderr_base64", "stdout_sha256", "stderr_sha256"}
-    if not isinstance(commands, list) or len(commands) < 5:
+    if not isinstance(commands, list) or len(commands) != 5:
         errors.append("exact-commit attestation requires compile, two tester, finalizer, and verifier commands")
     else:
         for index, row in enumerate(commands):
@@ -749,11 +778,48 @@ def validate_attestation(evidence_dir: Path, attestation: dict[str, Any]) -> lis
                 continue
             if hashlib.sha256(stdout).hexdigest() != row["stdout_sha256"] or hashlib.sha256(stderr).hexdigest() != row["stderr_sha256"]:
                 errors.append(f"exact-commit command stream content/hash mismatch at {index}")
-        rendered = [" ".join(str(part) for part in row.get("command", [])) for row in commands if isinstance(row, dict)]
-        if not any("--finalize" in command and "--attestation-json" in command for command in rendered):
-            errors.append("exact finalizer invocation missing from attestation")
-        if not any("verify_a1_xau_r6_market_only_native_parity.py" in command and "--finalize" not in command for command in rendered):
-            errors.append("exact read-only verifier invocation missing from attestation")
+        if all(isinstance(row, dict) and isinstance(row.get("command"), list) for row in commands):
+            command_values = [row["command"] for row in commands]
+            lowered = [[str(part).replace("\\", "/").lower() for part in command] for command in command_values]
+            compile_ok = (
+                Path(str(command_values[0][0])).name.lower() == "metaeditor64.exe"
+                and any(part.startswith("/compile:") for part in lowered[0])
+                and any(part.startswith("/log:") for part in lowered[0])
+                and commands[0]["exit_code"] in {0, 1}
+            )
+            if not compile_ok:
+                errors.append("attested command 1 is not the exact MetaEditor compile contract")
+            for index, run_id in ((1, "run1"), (2, "run2")):
+                tester_ok = (
+                    Path(str(command_values[index][0])).name.lower() == "terminal64.exe"
+                    and "/portable" in lowered[index]
+                    and any(part.startswith("/config:") and part.endswith(f"np1_{run_id}.ini") for part in lowered[index])
+                    and commands[index]["exit_code"] == 0
+                )
+                if not tester_ok:
+                    errors.append(f"attested command {index + 1} is not the exact Strategy Tester {run_id} contract")
+            finalizer = lowered[3]
+            finalizer_ok = (
+                len(finalizer) == 7 and Path(str(command_values[3][0])).resolve() == Path(attestation["python_executable"]).resolve()
+                and Path(str(command_values[3][1])).resolve() == Path(__file__).resolve()
+                and Path(str(command_values[3][2])).is_absolute()
+                and finalizer[3] == "--finalize" and finalizer[4] == "--attestation-json" and finalizer[6] == "--quiet"
+                and commands[3]["exit_code"] == 0
+            )
+            verifier = lowered[4]
+            verifier_ok = (
+                len(verifier) == 4 and Path(str(command_values[4][0])).resolve() == Path(attestation["python_executable"]).resolve()
+                and Path(str(command_values[4][1])).resolve() == Path(__file__).resolve()
+                and Path(str(command_values[4][2])).resolve() == Path(str(command_values[3][2])).resolve()
+                and verifier[3] == "--quiet" and commands[4]["exit_code"] == 0
+            )
+            if not finalizer_ok:
+                errors.append("attested command 4 is not the exact quiet finalizer contract")
+            if not verifier_ok:
+                errors.append("attested command 5 is not the exact quiet read-only verifier contract")
+            for index in (3, 4):
+                if commands[index]["stdout_base64"] != "" or commands[index]["stderr_base64"] != "":
+                    errors.append(f"attested command {index + 1} finalizer/verifier streams must be empty")
     if attestation["artifact_sha256"] != attested_artifact_hashes(evidence_dir):
         errors.append("exact-commit attestation artifact hash set mismatch")
     ex5 = evidence_dir / "compiled" / Path(B.ORACLE_NAME).with_suffix(".ex5").name

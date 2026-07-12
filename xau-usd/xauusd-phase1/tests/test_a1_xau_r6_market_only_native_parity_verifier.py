@@ -283,14 +283,16 @@ def _attestation(evidence: Path) -> dict:
         "mt5_terminal_build": 5833, "metaeditor_version": "5.0.0.5833",
         "same_ex5_sha256_run1_run2": V.sha256_file(ex5),
         "commands": [
-            command(["MetaEditor64.exe", "/compile:oracle"]), command(["terminal64.exe", "/config:run1"]),
-            command(["terminal64.exe", "/config:run2"]),
-            command([sys.executable, "verify_a1_xau_r6_market_only_native_parity.py", str(evidence), "--finalize", "--attestation-json", "attestation.json", "--quiet"]),
-            command([sys.executable, "verify_a1_xau_r6_market_only_native_parity.py", str(evidence), "--quiet"]),
+            command(["MetaEditor64.exe", "/compile:oracle", "/log:compile.log"]),
+            command(["terminal64.exe", "/portable", "/config:np1_run1.ini"]),
+            command(["terminal64.exe", "/portable", "/config:np1_run2.ini"]),
+            command([sys.executable, str(SCRIPTS / "verify_a1_xau_r6_market_only_native_parity.py"), str(evidence), "--finalize", "--attestation-json", "attestation.json", "--quiet"]),
+            command([sys.executable, str(SCRIPTS / "verify_a1_xau_r6_market_only_native_parity.py"), str(evidence), "--quiet"]),
         ],
         "artifact_sha256": artifact_hashes,
-        "review_authority": {"controlling_review_artifact": "A1_XAU_NP1B3_PASS_REVIEW_TEST.md", "controlling_review_sha256": "c" * 64,
-                             "reviewed_generator_commit": head, "reviewed_generator_tree": tree},
+        "review_authority": {"controlling_review_artifact": "A1_XAU_NP1B4_PASS_REVIEW_TEST.md", "controlling_review_sha256": "c" * 64,
+                             "reviewed_generator_commit": head, "reviewed_generator_tree": tree,
+                             "authorization_status": "AUTHORIZED", "review_verdict": "PASS"},
         "environment": {"cwd": str(ROOT), "timezone": "test", "account_login": 1025742,
                         "server": "Capital.ComMena-Demo", "currency": "USD", "leverage": "1:50", "symbol": "XAUUSD"},
     }
@@ -320,12 +322,12 @@ def test_complete_synthetic_packet_generates_every_artifact_and_passes(tmp_path:
 def test_real_mt5_report_shape_and_locked_iso_timestamp_contract(tmp_path: Path) -> None:
     report = tmp_path / "native_report.htm"
     report.write_text(
-        "<table><tr><td>Expert:</td><td>A1XauR6MarketOnlyNativeParityOracle</td></tr>"
-        "<tr><td>Symbol:</td><td>XAUUSD</td></tr><tr><td>Period:</td><td>M5 (2015.06.01 - 2026.06.30)</td></tr>"
-        "<tr><td>Model:</td><td>Every tick based on real ticks</td></tr><tr><td>Initial Deposit:</td><td>10000.00 USD</td></tr>"
-        "<tr><td>Leverage:</td><td>1:50</td></tr><tr><td>Bars in test:</td><td>1,000</td></tr>"
-        "<tr><td>Ticks modelled:</td><td>10,000</td></tr><tr><td>Total Trades:</td><td>0</td></tr>"
-        "<tr><td>Total Deals:</td><td>0</td></tr></table>", encoding="utf-8",
+        "<table><tr><td>Expert:</td><td><b>A1XauR6MarketOnlyNativeParityOracle</b></td></tr>"
+        "<tr><td>Symbol:</td><td><b>XAUUSD</b></td></tr><tr><td>Period:</td><td><b>M5 (2015.06.01 - 2026.06.30)</b></td></tr>"
+        "<tr><td>Model:</td><td><b>Every tick based on real ticks</b></td></tr><tr><td>Initial Deposit:</td><td><b>10000.00 USD</b></td></tr>"
+        "<tr><td>Leverage:</td><td><b>1:50</b></td></tr><tr><td>Bars in test:</td><td><b>1,000</b></td></tr>"
+        "<tr><td>Ticks modelled:</td><td><b>10,000</b></td></tr><tr><td>Total Trades:</td><td><b>0</b></td></tr>"
+        "<tr><td>Total Deals:</td><td><b>0</b></td></tr></table>", encoding="utf-8",
     )
     parsed = V.parse_native_report(report)
     assert parsed["expert"] == "A1XauR6MarketOnlyNativeParityOracle"
@@ -333,6 +335,15 @@ def test_real_mt5_report_shape_and_locked_iso_timestamp_contract(tmp_path: Path)
     assert V._dt("2016-07-01T00:00:00") == datetime(2016, 7, 1)
     with pytest.raises(ValueError, match="locked ISO"):
         V._dt("2016.07.01 00:00:00")
+
+
+def test_weekend_gap_requires_exact_friday_close_and_monday_reopen_boundaries() -> None:
+    assert V.expected_weekend_gap("H1", datetime(2026, 7, 10, 19), datetime(2026, 7, 13, 1))
+    assert V.expected_weekend_gap("H4", datetime(2026, 7, 10, 16), datetime(2026, 7, 13, 0))
+    assert V.expected_weekend_gap("D1", datetime(2026, 7, 10, 0), datetime(2026, 7, 13, 0))
+    assert not V.expected_weekend_gap("H1", datetime(2026, 7, 9, 0), datetime(2026, 7, 13, 0))
+    assert not V.expected_weekend_gap("H4", datetime(2026, 7, 10, 8), datetime(2026, 7, 13, 0))
+    assert not V.expected_weekend_gap("D1", datetime(2026, 7, 8, 0), datetime(2026, 7, 13, 0))
 
 
 def test_available_state_fixture_exercises_numeric_router_parity(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -402,7 +413,32 @@ def test_long_weekend_spanning_history_gap_is_rejected(tmp_path: Path, monkeypat
     assert any("unexpected market-history gap" in error for error in result.errors)
 
 
-@pytest.mark.parametrize("mutation", ["review_tree", "dependency_version", "command_stream"])
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("schema_version", "wrong"), ("native_error_code", "7"), ("data_available", "yes"),
+        ("state_name", "invalid"), ("state_code", "5"), ("h1_bar_count", "999999"),
+        ("h4_shift1_time", "2016.07.01 00:00:00"),
+    ],
+)
+def test_malformed_native_router_rows_are_evidence_invalid(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, field: str, value: str
+) -> None:
+    evidence, _, schema = _synthetic_packet(tmp_path, monkeypatch)
+    for run_id in ("run1", "run2"):
+        path = evidence / "runs" / run_id / "native_router_rows.tsv"
+        rows = V.read_tsv(path, schema["native_router_rows"]["columns"])
+        rows[0][field] = value
+        _write_tsv(path, schema["native_router_rows"]["columns"], rows)
+    result = _finalize(evidence)
+    assert result.status == "R6_NP1_EVIDENCE_INVALID", result.errors
+    payload = json.loads((evidence / "A1_XAU_R6_MARKET_ONLY_NATIVE_PARITY_EXACT_20260712.json").read_text(encoding="utf-8"))
+    assert payload["errors"]["parity"] == []
+
+
+@pytest.mark.parametrize(
+    "mutation", ["review_tree", "dependency_version", "command_stream", "command_order", "tester_exit", "extra_command"]
+)
 def test_attestation_binds_exact_review_dependencies_and_command_streams(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mutation: str
 ) -> None:
@@ -413,7 +449,14 @@ def test_attestation_binds_exact_review_dependencies_and_command_streams(
     elif mutation == "dependency_version":
         attestation["dependency_versions"]["pytest"] = ""
     else:
-        attestation["commands"][0]["stdout_base64"] = "eA=="
+        if mutation == "command_stream":
+            attestation["commands"][0]["stdout_base64"] = "eA=="
+        elif mutation == "command_order":
+            attestation["commands"][1], attestation["commands"][2] = attestation["commands"][2], attestation["commands"][1]
+        elif mutation == "tester_exit":
+            attestation["commands"][1]["exit_code"] = 1
+        else:
+            attestation["commands"].append(copy.deepcopy(attestation["commands"][-1]))
     result = V.finalize_evidence_directory(evidence, attestation=attestation)
     assert result.status == "R6_NP1_EVIDENCE_INVALID"
 
