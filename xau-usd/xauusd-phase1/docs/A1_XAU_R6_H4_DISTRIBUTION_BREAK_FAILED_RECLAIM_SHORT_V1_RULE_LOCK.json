@@ -1,0 +1,179 @@
+{
+  "account_reference": {
+    "compounding": false,
+    "deployment_equity_usd": 1000.0,
+    "deployment_max_initial_risk_usd": 2.5,
+    "reference_equity_usd": 10000.0,
+    "reference_max_initial_risk_usd": 25.0
+  },
+  "atr": {
+    "insufficient_or_nonpositive": "DATA_UNAVAILABLE",
+    "method": "wilder_rma",
+    "period": 14,
+    "references": {
+      "a_box": "h4_shift_2",
+      "a_break": "h4_shift_2",
+      "a_impulse": "h4_shift_8",
+      "a_reclaim": "h1_first_completed_reclaim_attempt"
+    },
+    "seed": "arithmetic_mean_first_14_valid_true_ranges",
+    "true_range": "max(high-low,abs(high-previous_close),abs(low-previous_close))",
+    "update": "(13*previous_atr+true_range)/14"
+  },
+  "box": {
+    "adjacent_overlap_min_ratio": 0.25,
+    "adjacent_overlap_pairs_min": 4,
+    "bars": 6,
+    "h4_shifts": [7, 6, 5, 4, 3, 2],
+    "inner_band_high_fraction": 0.8,
+    "inner_band_low_fraction": 0.2,
+    "inner_closes_min": 4,
+    "max_abs_net_drift_atr": 0.75,
+    "max_width_atr": 3.0,
+    "min_width_atr": 1.0
+  },
+  "breakdown": {
+    "body_fraction_min": 0.5,
+    "close_location_max": 0.25,
+    "close_must_be_below_open": true,
+    "close_shift_2_must_be_at_or_above_box_low": true,
+    "h4_shift": 1,
+    "min_close_below_box_low_atr": 0.1,
+    "only_immediate_bar_after_box": true
+  },
+  "contract_risk": {
+    "calculation": "abs(OrderCalcProfit(ORDER_TYPE_SELL,symbol,SYMBOL_VOLUME_MIN,entry_bid,normalized_structural_stop_plus_one_tick))",
+    "invalid_metadata_action": "fail_closed",
+    "required_snapshot_fields": [
+      "account_currency",
+      "account_leverage",
+      "margin_mode",
+      "server",
+      "symbol",
+      "volume_min",
+      "volume_step",
+      "volume_max",
+      "contract_size",
+      "tick_size",
+      "tick_value",
+      "tick_value_loss",
+      "stops_level",
+      "freeze_level"
+    ]
+  },
+  "data_boundary": {
+    "from_date": "2016-07-01",
+    "h4_shift_zero_forbidden": true,
+    "missing_bar_policy": "DATA_UNAVAILABLE_NO_FORWARD_FILL",
+    "native_broker_bars_only": true,
+    "to_date": "2026-06-30"
+  },
+  "entry_tick": {
+    "entry_ask_usage": "spread_evidence_only",
+    "entry_reference": "bid",
+    "expiry_minutes_after_scheduled_h1_close": 15,
+    "must_be_first_recorded_tick_of_next_h1_bar": true,
+    "must_be_session_open": true,
+    "must_be_strictly_after_reclaim_bar_sequence": true,
+    "unavailable_status": "ENTRY_TICK_UNAVAILABLE"
+  },
+  "forbidden_dependencies": [
+    "h4_order_ledger",
+    "h4_deal_ledger",
+    "h4_signal_ledger",
+    "h4_magic_or_source_id",
+    "h4_position_or_exposure_intervals",
+    "h4_entry_or_exit_timestamps",
+    "h4_pnl",
+    "h4_drawdown_or_adverse_dates",
+    "portfolio_data",
+    "balance_or_equity",
+    "mfe_or_mae",
+    "win_loss_or_sltp_labels",
+    "future_market_data_after_entry_tick",
+    "known_loss_period_identifiers"
+  ],
+  "impulse": {
+    "bars": 6,
+    "bullish_bars_min": 4,
+    "final_location_min": 0.75,
+    "h4_shifts": [13, 12, 11, 10, 9, 8],
+    "min_net_advance_atr": 1.5,
+    "min_range_atr": 2.0
+  },
+  "incidence_gates": {
+    "deployment_risk": {
+      "early_half_min": 35,
+      "feasible_share_min": 0.8,
+      "july_june_buckets_with_events_min": 8,
+      "late_half_min": 35,
+      "opportunities_min": 100
+    },
+    "halves": {
+      "early": ["2016-07-01", "2021-06-30"],
+      "late": ["2021-07-01", "2026-06-30"]
+    },
+    "raw": {
+      "best_contiguous_24_month_share_max": 0.4,
+      "early_half_min": 40,
+      "july_june_buckets_min": 8,
+      "late_half_min": 40,
+      "opportunities_min": 120,
+      "opportunities_per_qualifying_bucket_min": 5,
+      "single_july_june_bucket_share_max": 0.25
+    },
+    "reference_risk": {
+      "early_half_min": 35,
+      "july_june_buckets_with_events_min": 8,
+      "late_half_min": 35,
+      "opportunities_min": 100
+    }
+  },
+  "outcome_blind": {
+    "prefix_invariance_required": true,
+    "read_after_entry_tick_forbidden": true,
+    "target_or_exit_simulation_forbidden": true
+  },
+  "reclaim": {
+    "attempt_body_fraction_min": 0.35,
+    "attempt_close_below_level_atr": 0.05,
+    "attempt_close_location_max": 0.35,
+    "attempt_close_must_be_below_open": true,
+    "attempt_touch_below_level_atr": 0.1,
+    "first_attempt_only": true,
+    "frozen_level": "box_low",
+    "h1_completed_bars_max": 6,
+    "no_attempt_status": "NO_RECLAIM_WITHIN_SIX_H1",
+    "nonrejection_status": "FIRST_RECLAIM_NOT_REJECTED"
+  },
+  "router": {
+    "allowed_states": ["UPTREND", "CHOP"],
+    "blocked_states": ["SHOCK", "COMPRESSION", "DOWNTREND", "UNKNOWN"],
+    "market_only_completed_data": true,
+    "version": "ROUTER_V1"
+  },
+  "rule_version": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_r6_rule_lock_v1",
+  "status_precedence": [
+    "R6_CENSUS_EVIDENCE_INVALID",
+    "R6_CENSUS_INSUFFICIENT_INCIDENCE",
+    "R6_CENSUS_REFERENCE_RISK_UNDERPOWERED",
+    "R6_SMALL_ACCOUNT_CONTRACT_INFEASIBLE",
+    "R6_CENSUS_PASS"
+  ],
+  "stop": {
+    "base": "max(reclaim_bar_high,box_low)+0.25*A_reclaim",
+    "buffer_atr": 0.25,
+    "normalize": "upward_to_next_symbol_tick",
+    "target_forbidden_in_census": true
+  },
+  "suppression": {
+    "box_id": "sha256(rule_version|symbol|six_distribution_h4_open_times|tick_normalized_box_low|tick_normalized_box_high)",
+    "max_additional_completed_h4_bars": 12,
+    "one_breakdown_per_box": true,
+    "one_signal_per_episode": true,
+    "release_on_completed_h4_close_at_or_above_original_box_mid": true,
+    "result_or_position_state_forbidden": true,
+    "scope": "symbol_and_direction"
+  }
+}

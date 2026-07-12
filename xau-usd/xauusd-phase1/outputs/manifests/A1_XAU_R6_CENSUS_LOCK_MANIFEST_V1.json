@@ -1,0 +1,32 @@
+{
+  "artifacts": {
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md": {
+      "sha256": "fcdb88aa8afbe2d372cbb4f82b7d8e9e238f58f285299d7cab2807493952e4d0",
+      "size_bytes": 7637
+    },
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json": {
+      "sha256": "fdc5977b64a1bd5236f6eda011da283adddee55dad12898c905ebd99d65479ca",
+      "size_bytes": 5569
+    },
+    "docs/A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json": {
+      "sha256": "2539b2ffdeb7459c6f7b8ad07b88934fd24204c2d2fef2347c337141e0de0aae",
+      "size_bytes": 4751
+    }
+  },
+  "authority": {
+    "independent_review": "docs/A1_XAU_H4_RULE_CLEAN_RERUN_V2_INDEPENDENT_REVIEW_51D7191B_2026_07_12.md",
+    "independent_review_sha256": "6f3b9e6ba530b2f942a50142f66241cd3743e9f46eae9b692c88b049baa13876",
+    "reviewed_commit": "51d7191b050697eb9854c25b092ee5f3c11fad67"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "census_output_authorized_in_this_commit": false,
+    "detector_code_authorized_in_this_commit": false,
+    "h4_or_portfolio_join_authorized": false,
+    "mt5_execution_authorized": false,
+    "pnl_authorized": false,
+    "phase": "R6-C1_LOCKS_ONLY"
+  },
+  "experiment": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_r6_census_lock_manifest_v1"
+}
