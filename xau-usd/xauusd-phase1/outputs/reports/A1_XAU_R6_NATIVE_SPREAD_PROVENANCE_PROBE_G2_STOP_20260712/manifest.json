@@ -1,0 +1,125 @@
+{
+  "artifacts": [
+    {
+      "relative_path": "authorization_attestation.json",
+      "sha256": "376859f5a219c54c49c78d2f14e09c32befffd4e9b62f4fa0ad53371315e8b00",
+      "size_bytes": 1935
+    },
+    {
+      "relative_path": "commands.json",
+      "sha256": "e76d61e72a4a51fbe391ea26dde7c71dbdd9772249b233063ca83d5c3df98c75",
+      "size_bytes": 965
+    },
+    {
+      "relative_path": "compiled/A1XauR6NativeSpreadProvenanceProbe.ex5",
+      "sha256": "c23e4cdbc276c641a9367e2f32ae1247edb7ef1a0adace70e65ec5f255023222",
+      "size_bytes": 26148
+    },
+    {
+      "relative_path": "compiled/A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    {
+      "relative_path": "compiled/compile.log",
+      "sha256": "03fc7ef2feced44ddcd6c338d4c059083215e8d0c9ecb9d6afe83dbab9ebcacd",
+      "size_bytes": 1590
+    },
+    {
+      "relative_path": "compiled/source_manifest.json",
+      "sha256": "74b2c5a03e7db6eb80d86bc4d85d7a22fe02b901d76c31532ce7318768c56565",
+      "size_bytes": 348
+    },
+    {
+      "relative_path": "invocation_ledger.json",
+      "sha256": "23d66933e2a19fcd140718180f191e88a1cab4a0870320284a7e167499c6447c",
+      "size_bytes": 119
+    },
+    {
+      "relative_path": "logs/log_inventory.json",
+      "sha256": "825aaad01608e328bd225ee22cf541986f950fa4fd1ae1c15b26b93b64ebda84",
+      "size_bytes": 531
+    },
+    {
+      "relative_path": "logs/Logs/20260713.log",
+      "sha256": "9d6e4f2ae1a30d062df17042ecf646d9fb46dff57825cf99c80cfad1b366a2dc",
+      "size_bytes": 2118
+    },
+    {
+      "relative_path": "logs/Logs/metaeditor.log",
+      "sha256": "058eaa710b42784971d0b68b5e3d83f15f349ee566cea10dbca9f90a9b54a6c0",
+      "size_bytes": 2848
+    },
+    {
+      "relative_path": "logs/Tester/logs/20260713.log",
+      "sha256": "bbf0eb013c220095121d07ef5ec186942578a7bf45b8b1d421199f0829343732",
+      "size_bytes": 272
+    },
+    {
+      "relative_path": "metadata_receipt.json",
+      "sha256": "77b3ed4810e1cf1a05454df265f2d36dad8a0043a8269173c16c7d17d9423907",
+      "size_bytes": 657
+    },
+    {
+      "relative_path": "partial_staging/compiled/A1XauR6NativeSpreadProvenanceProbe.ex5",
+      "sha256": "c23e4cdbc276c641a9367e2f32ae1247edb7ef1a0adace70e65ec5f255023222",
+      "size_bytes": 26148
+    },
+    {
+      "relative_path": "partial_staging/compiled/A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    {
+      "relative_path": "partial_staging/compiled/compile.log",
+      "sha256": "03fc7ef2feced44ddcd6c338d4c059083215e8d0c9ecb9d6afe83dbab9ebcacd",
+      "size_bytes": 1590
+    },
+    {
+      "relative_path": "partial_staging/compiled/source_manifest.json",
+      "sha256": "74b2c5a03e7db6eb80d86bc4d85d7a22fe02b901d76c31532ce7318768c56565",
+      "size_bytes": 348
+    },
+    {
+      "relative_path": "post_reports_creation_inventory.json",
+      "sha256": "2a98c0197094cf2f002f4e5c5897cf23922f10178d5ce96f28cfa484166ebaa9",
+      "size_bytes": 1848
+    },
+    {
+      "relative_path": "post_stop_root_inventory.json",
+      "sha256": "41abf43bdc156755a554fa058bec8c69fc204934c42f1f7698e7bf08e5995512",
+      "size_bytes": 133397
+    },
+    {
+      "relative_path": "preflight_root_inventory.json",
+      "sha256": "2f31d756285f01064371fe509568462f49f804adba309898908bc604c6068c7b",
+      "size_bytes": 1775
+    },
+    {
+      "relative_path": "README.md",
+      "sha256": "31b71fbd8ae6f9ebef5510780f2235175ab3b1fb79c20d65343482c0d36c3a62",
+      "size_bytes": 101
+    },
+    {
+      "relative_path": "reports_directory_attestation.json",
+      "sha256": "01ce240f98526802306d65ee45cf49dffa875c1ad45f99768aadb1a30764208c",
+      "size_bytes": 265
+    },
+    {
+      "relative_path": "result.json",
+      "sha256": "bfd68668c03d6052221da374fe269e727b9939f38c471cef795c8d5ed3b4e45f",
+      "size_bytes": 354
+    },
+    {
+      "relative_path": "runs/warmup/tester.ini",
+      "sha256": "b093d44fc2c2134081d2c0243ca17840abf3dc1c805a8b7e5fef9dce6132970a",
+      "size_bytes": 865
+    },
+    {
+      "relative_path": "searched_location_inventory.json",
+      "sha256": "755d442cf44919879856407fe199e916c770d206e3f6b050d6eb286b7af73782",
+      "size_bytes": 20
+    }
+  ],
+  "schema_version": "a1_xau_r6_np1_g2_stop_manifest_v1"
+}

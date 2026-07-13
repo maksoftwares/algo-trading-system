@@ -1,0 +1,19 @@
+{
+  "mode": "COPIED_ALLOWLIST",
+  "copied": [
+    {
+      "source_path": "C:\\MT5A1NP1SpreadProvenanceClean\\Config\\accounts.dat",
+      "source_relative": "Config/accounts.dat",
+      "destination_relative": "Config/accounts.dat",
+      "size_bytes": 15935,
+      "sha256": "d9b8e87ef41d4a498a34bd7ae2b37b2fea769c820311fdeef0488e0387976b8a"
+    },
+    {
+      "source_path": "C:\\MT5A1NP1SpreadProvenanceClean\\Config\\servers.dat",
+      "source_relative": "Config/servers.dat",
+      "destination_relative": "Config/servers.dat",
+      "size_bytes": 326364,
+      "sha256": "e2cda2f1548c92b168894d74f0959957839a89d8b992be1afc3b3062dfaefb66"
+    }
+  ]
+}

@@ -1,0 +1,3889 @@
+{
+  "entries": [
+    {
+      "kind": "file",
+      "mtime_ns": 1783913633830345600,
+      "relative_path": ".a1_xau_np1_spread_probe_g2_only",
+      "sha256": "fbc9a434339e1b7b6e28273f026fa34d7c78188a7164d87b46a650e286e337b7",
+      "size_bytes": 25
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672362398500,
+      "relative_path": ".np1_g2_invocation_ledger.json",
+      "sha256": "23d66933e2a19fcd140718180f191e88a1cab4a0870320284a7e167499c6447c",
+      "size_bytes": 119
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Config"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783877039937406200,
+      "relative_path": "Config/accounts.dat",
+      "sha256": "d9b8e87ef41d4a498a34bd7ae2b37b2fea769c820311fdeef0488e0387976b8a",
+      "size_bytes": 15935
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "Config/agents.dat",
+      "sha256": "c0754c25aeb0661e04268607441e73fc6b88d2d94db503bc243b9a9dd499f687",
+      "size_bytes": 47148
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Config/certificates"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674304668500,
+      "relative_path": "Config/common.ini",
+      "sha256": "8b99cfea8eac52a9a4d89374919359033ed309c8ad831b32e6bce80e4140b9eb",
+      "size_bytes": 246
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678460927300,
+      "relative_path": "Config/dnsperf.dat",
+      "sha256": "03d5ea56b85f4b27ad63aece21aca28a4df30d1e5a337e4cab8f5074820ecbea",
+      "size_bytes": 388248
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "Config/hotkeys.ini",
+      "sha256": "b3d510ef04275ca8e698e5b3cbb0ece3949ef9252f0cdc839e9ee347409a2209",
+      "size_bytes": 2
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672362398500,
+      "relative_path": "Config/np1_g2_warmup.ini",
+      "sha256": "b093d44fc2c2134081d2c0243ca17840abf3dc1c805a8b7e5fef9dce6132970a",
+      "size_bytes": 865
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913675244329100,
+      "relative_path": "Config/servers.dat",
+      "sha256": "ba16fa3b183cc7e16392e0ec26b50e725a577c9a0eeb19b1b829ac29635cb641",
+      "size_bytes": 326372
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678348701600,
+      "relative_path": "Config/settings.ini",
+      "sha256": "fe40c39277361ed6db22aede47d5a3bf066520f5ce274b5a6793d0723fc31a59",
+      "size_bytes": 5908
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678279126300,
+      "relative_path": "Config/terminal.ini",
+      "sha256": "3ca60b34883637a1aa55b06ea754e01d218be422d39a6f14196de3b336d60af5",
+      "size_bytes": 17138
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672163274700,
+      "relative_path": "MQL5/Experts/A1XauR6NativeSpreadProvenanceProbe.ex5",
+      "sha256": "c23e4cdbc276c641a9367e2f32ae1247edb7ef1a0adace70e65ec5f255023222",
+      "size_bytes": 26148
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913669896755500,
+      "relative_path": "MQL5/Experts/A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Advisors"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913675711176600,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMACD.ex5",
+      "sha256": "acab5cb5dbc74534109334c7a7fbd0cebbb7f80691c48eb9c41cba7bdcc965b5",
+      "size_bytes": 144576
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674182191600,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMACD.mq5",
+      "sha256": "6e74d3e8e90324e5180ec717dc536530d2bcda7cee944b813626211e54b67820",
+      "size_bytes": 6074
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913676392813900,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAMA.ex5",
+      "sha256": "4a5c8989e6183f737804f0fbe67ff2c58e92dedb892414c1e227e2a16e6703a1",
+      "size_bytes": 154164
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674182191600,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAMA.mq5",
+      "sha256": "9d99ed8320d56651ec8b75c41a07c336b58ac265f04598ad5dd2824bcd670e51",
+      "size_bytes": 6427
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913677087690800,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAPSAR.ex5",
+      "sha256": "a703cf7a1093c1b9e377ebe85810477038594a27b9edf9a2fc50b3d192b7c350",
+      "size_bytes": 152894
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674182191600,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAPSAR.mq5",
+      "sha256": "6c5e7b665a766e6e995b673d9b8cd1e4c40e4de885c4413ad8f7e4b8a9a45e62",
+      "size_bytes": 6342
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913677769490600,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAPSARSizeOptimized.ex5",
+      "sha256": "5e318d7fb63728563dfed91ef44fb25e9b1523482710a084b51a9148d7d7fc55",
+      "size_bytes": 157260
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Advisors/ExpertMAPSARSizeOptimized.mq5",
+      "sha256": "7a85019ffe7063656f234629d10423dd4e1661857b787350964bdc0a4e8ae299",
+      "size_bytes": 6710
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/ChartInChart"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678020951500,
+      "relative_path": "MQL5/Experts/Examples/ChartInChart/ChartInChart.ex5",
+      "sha256": "3afd8a1dd869e2a87e6b86bafd47f3b349d9c1cba7f621bdf4023fe7344374ae",
+      "size_bytes": 21128
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/ChartInChart/ChartInChart.mq5",
+      "sha256": "f3e4cb4a68aa5249f081f6e34f0472f6b34a0ece6a10db9e4865613ae55c24ea",
+      "size_bytes": 30556
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Controls"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Controls/Controls.mq5",
+      "sha256": "402a5c589f50a543dc914d1b4687ad4328ea4946beecc312e2ada807a382e457",
+      "size_bytes": 2161
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Controls/ControlsDialog.mqh",
+      "sha256": "ebdc902f8f9b26d6112b04f9d0bc193f743b189d366110f74ad083d009733b2b",
+      "size_bytes": 17723
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Correlation Matrix 3D"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Correlation Matrix 3D/Correlation Matrix 3D.mq5",
+      "sha256": "9153c0a9d64b564f1d2bab0e6354997d5472bfb3847cd9aa5dd1b2d5e4fbcb62",
+      "size_bytes": 77294
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Correlation Matrix 3D/Correlation Matrix 3D.mqproj",
+      "sha256": "5ce875c84d624f85b5996f243fce7a5ce425cbba0132fd3a254a355aad02f4eb",
+      "size_bytes": 8302
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/MACD"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/MACD/MACD Sample.mq5",
+      "sha256": "80e8d2288f265dcac2bb1cd6d2b6f98cde783add43ae9e6c86c7548786bc6035",
+      "size_bytes": 18514
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Math 3D"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher/Functions.mqh",
+      "sha256": "0537d4ec52caaa0bc4d21c9f106e089012be17f4d18762e2f7762207bab83ec0",
+      "size_bytes": 13957
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher/Math 3D Morpher.mq5",
+      "sha256": "f8b9ece9a83e9eb9a940cea2ca43d27a3f733d3f7e3108edeafb1850199867b5",
+      "size_bytes": 35776
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher/Math 3D Morpher.mqproj",
+      "sha256": "938882a475ec00b00bd13b5a2045e923412a1e16596cdc7690f9c0aca153d0c0",
+      "size_bytes": 16042
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher/Textures"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Examples/Math 3D Morpher/Textures/checker.bmp",
+      "sha256": "e08e4a24c8b631dacdd8ef02019fa4ec83bb46c4974b49c2062dbb4b24fc0bdd",
+      "size_bytes": 196662
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Functions.mqh",
+      "sha256": "7e3a3cbbe547bae26aa7e37f7c4bd580b363359a0c77f897f623470ab309b94c",
+      "size_bytes": 16008
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Math 3D.ico",
+      "sha256": "3d7f8730ad0b057096abcaba619484d49e8265afa886b07d5e0fa7f07d07619a",
+      "size_bytes": 16958
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Math 3D.mq5",
+      "sha256": "27fc7ce4a1e8ebad863073f1456d265b904d91ff359b28ddb4d3cc63a7b41ac9",
+      "size_bytes": 6986
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Math 3D.mqproj",
+      "sha256": "6d288383e8f89b82656ad820c57557f97d1e4c242ac8c7da0188e8b8f74a0092",
+      "size_bytes": 6042
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Chomolungma.set",
+      "sha256": "127338edc08d7e8917be3e3c12374ea87292bbf99e48232080883d449194049b",
+      "size_bytes": 684
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/ClimberDream.set",
+      "sha256": "2694ebac06d59a71ddd81e7271ba6967c9a75a1d859541028027bbd5485c88cf",
+      "size_bytes": 696
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/DoubleScrew.set",
+      "sha256": "d1f57e586fe6183d12ef3005250577c3736264c4f78c2e1a7d281c2cbd2f579d",
+      "size_bytes": 684
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Granite.set",
+      "sha256": "f6fff43e9e51df34394355abb5762c67734b16b71d17317d6bf8308620f8dbf1",
+      "size_bytes": 684
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Hedgehog.set",
+      "sha256": "e570c593568c176d70db615ec9332e518f331478ba074fe9a97a2e56d4075821",
+      "size_bytes": 692
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Hill.set",
+      "sha256": "91f64db113aa14e6cb1a11e7b21210ad0a2e6bec01c36044fd1861c251710ba7",
+      "size_bytes": 688
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Josephine.set",
+      "sha256": "b9e296e738cec9399858f0776ec494e85b66b831f8a671ecd595ee5ba2c2c40e",
+      "size_bytes": 688
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/MultyExtremalScrew.set",
+      "sha256": "e675f036fc883d068270faa944c117cc2bc6852c962d47133136a6340c4e79ae",
+      "size_bytes": 684
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Screw.set",
+      "sha256": "39521ca3764d174f76884ff40b11b9d075414401112c8590acd2c0501a3a9358",
+      "size_bytes": 684
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Sink.set",
+      "sha256": "fc14a76be7899185562be8fe8f54198077f0eb00323fe9e7b2ddde29538bc4c3",
+      "size_bytes": 686
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Skin.set",
+      "sha256": "f274ed976510f11069ffcc7a2c0026989e2d83e38de78d54e700a4ed619c82ec",
+      "size_bytes": 686
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674184196400,
+      "relative_path": "MQL5/Experts/Examples/Math 3D/Sets/Trapfall.set",
+      "sha256": "f8fd9cca752b40edb574990a675912b2ea73dc3a13d6b0f77d1d126a091f86e1",
+      "size_bytes": 686
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Examples/Moving Average"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Examples/Moving Average/Moving Average.mq5",
+      "sha256": "8e431b82f8ccef6b361601905762ced7aa1c62beedd0833cfe8e4e795b19dda0",
+      "size_bytes": 8003
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Experts/Free Robots"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BlackCrows WhiteSoldiers CCI.mq5",
+      "sha256": "14636bb7b707ca38cad86c9a91ee9eb6886bf0762394b3392c7518a4ad9570fa",
+      "size_bytes": 23577
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BlackCrows WhiteSoldiers MFI.mq5",
+      "sha256": "6133425758fcca7762ac53cf2dcb34b59465cca433524057de6482dbd4ae7493",
+      "size_bytes": 23582
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BlackCrows WhiteSoldiers RSI.mq5",
+      "sha256": "a88720e2aca390107a147e58a1b3970a39ff11410557eab718c8c002efeb042f",
+      "size_bytes": 23595
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BlackCrows WhiteSoldiers Stoch.mq5",
+      "sha256": "312fdc321fe62dfa11922277b35830f27218874871cb9617cf09f42ecacc7c79",
+      "size_bytes": 24062
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Engulfing CCI.mq5",
+      "sha256": "67dd47aa94469b57beeaa0766918db1ca8a82f164cb412f45f403849148be139",
+      "size_bytes": 25070
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Engulfing MFI.mq5",
+      "sha256": "63a19a554694fa260150f0d0f83a3e7eb4be6ff988067af30d3db96fee34787b",
+      "size_bytes": 25066
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Engulfing RSI.mq5",
+      "sha256": "f31d225aa34323541e4834c4f904d9b3a9d43c695afd04c319d4f3bcfed76313",
+      "size_bytes": 25064
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Engulfing Stoch.mq5",
+      "sha256": "0f7ce4be908faef594d2bf851dcbec2703410b91f0688a168cf47e983109bbaf",
+      "size_bytes": 25559
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Harami CCI.mq5",
+      "sha256": "6513ebf6226a5b8600728ed19e85badb26bc1ceb7298ccd318ed70091883c339",
+      "size_bytes": 25144
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Harami MFI.mq5",
+      "sha256": "83b4f341557e18db80bd1e35bc177b788f1a1b7fbd7c98b72cdd5269536cc818",
+      "size_bytes": 25140
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674189433600,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Harami RSI.mq5",
+      "sha256": "9bbe08876d16a8947fb60b008e4ee632f10fcae1685a130fdc6cff5d7674447e",
+      "size_bytes": 25138
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674192653300,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish Harami Stoch.mq5",
+      "sha256": "e90c647930750ee9055081d26d3117a87b16c836d198c72a5fbbb9d45426fce8",
+      "size_bytes": 25599
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674192653300,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish MeetingLines CCI.mq5",
+      "sha256": "6565afb919929d7dabd80e9c0a570cff35f5ed38ddd12a03d66f866084372198",
+      "size_bytes": 23595
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674192653300,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish MeetingLines MFI.mq5",
+      "sha256": "94598fb0ffd85443a44bbd74270f9c2c214e060f88eaa15cab9b897c44bfcdf8",
+      "size_bytes": 23591
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674192653300,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish MeetingLines RSI.mq5",
+      "sha256": "d605137cf7161a9b3d57645b02a54ce68f5475a3dc940c872615922cf7cb20cd",
+      "size_bytes": 23595
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674192653300,
+      "relative_path": "MQL5/Experts/Free Robots/BullishBearish MeetingLines Stoch.mq5",
+      "sha256": "b9c7006045b611ca49c9f81ea2c7c2c5e3e27d2bebdeeee04ee576c59855a446",
+      "size_bytes": 24047
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674193657900,
+      "relative_path": "MQL5/Experts/Free Robots/DarkCloud PiercingLine CCI.mq5",
+      "sha256": "6a3dd6f9ce218910230e8876f6c544acc1ffc9504cd30efb12d1f330cc20eb4a",
+      "size_bytes": 25013
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674193657900,
+      "relative_path": "MQL5/Experts/Free Robots/DarkCloud PiercingLine MFI.mq5",
+      "sha256": "6be55729601904e68337f6669893562055c5f58fc0f1d4bb4275fb49402783d6",
+      "size_bytes": 25012
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674193657900,
+      "relative_path": "MQL5/Experts/Free Robots/DarkCloud PiercingLine RSI.mq5",
+      "sha256": "2454c82dcbb21566c7df9a9337d444d7cbca7251d7e98fece9a8e20dfff228fd",
+      "size_bytes": 25013
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/DarkCloud PiercingLine Stoch.mq5",
+      "sha256": "850fd17ef346b60b3aa910145c7c91f42672c3dcbe150098b88a44ce3a5bcb8a",
+      "size_bytes": 25492
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/HangingMan Hammer CCI.mq5",
+      "sha256": "36f874930cbf160f817c1908734a0f40ed61b7d324342f4c6d256e8698c03d4d",
+      "size_bytes": 24583
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/HangingMan Hammer MFI.mq5",
+      "sha256": "7599e4b2c907338d2df8d50d0bddc6136c9b391bc37238cc83de17546e7579f5",
+      "size_bytes": 24583
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/HangingMan Hammer RSI.mq5",
+      "sha256": "9f29007ab092e3fa1642d722467fe7d61f668367f19459613859a80315ef851b",
+      "size_bytes": 24592
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/HangingMan Hammer Stoch.mq5",
+      "sha256": "0a5ac3fb2ac0aaabbf2079478721d04f2804b724528076abcfa722da32974f14",
+      "size_bytes": 25084
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/MorningEvening StarDoji CCI.mq5",
+      "sha256": "71885395ddc47a03e84d22e92831024612852020f61042f98a593abf7255686d",
+      "size_bytes": 26197
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/MorningEvening StarDoji MFI.mq5",
+      "sha256": "14e87313fc76a208c562c787f4f4181659bfbd802c48bd290fdd0cf6ed61b1d4",
+      "size_bytes": 26170
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/MorningEvening StarDoji RSI.mq5",
+      "sha256": "a492b4e6c36a9532da62ba1ef38646be2afe966de3a51b23550645e23775ca4b",
+      "size_bytes": 26192
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Experts/Free Robots/MorningEvening StarDoji Stoch.mq5",
+      "sha256": "cb71d970e27ce92c55867cad41aee2688a22ee8c8bd9ddd7d6b2762ede30b136",
+      "size_bytes": 26665
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Files"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Images"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Images/dollar.bmp",
+      "sha256": "e6e7bb78be602e0f3b621e79c4fabf5af2b023d1f55cf6eb1b6d2521e9329c64",
+      "size_bytes": 4152
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674194370300,
+      "relative_path": "MQL5/Images/euro.bmp",
+      "sha256": "706ed8d1d0b1bf75a29d9e31c3195d25f9aad63eec2119ff2fd1563bb6d0322d",
+      "size_bytes": 4152
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Arrays"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/Array.mqh",
+      "sha256": "2945e251c682a6bfe000e530caf0df19cba544c29f4ae0dcc65850f08eb28b35",
+      "size_bytes": 6965
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayChar.mqh",
+      "sha256": "ddc019e880a02a4d7447f81faff08a4d249e3adfda4962d894b2f442904f8d8e",
+      "size_bytes": 24826
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayColor.mqh",
+      "sha256": "1e4109c7a573fa42f9d0989fa7b4da90a82fd90ad79e2a58c49a2ddfe5ad0bbb",
+      "size_bytes": 24841
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayDatetime.mqh",
+      "sha256": "bf5a3583f4a845ca97e7ee5c6c394d2b942269882b69c6432abbf943ac36ba73",
+      "size_bytes": 25106
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayDouble.mqh",
+      "sha256": "88206b8c69b75870b325f6c8ba16510400da344dfe3b8f91ac7ea0c29d86b4e4",
+      "size_bytes": 25433
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayFloat.mqh",
+      "sha256": "ef68904d3e26a98f4435a0bd860bcd53cdd34e9ca5ea4fac0eff081b92f0485d",
+      "size_bytes": 25358
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayInt.mqh",
+      "sha256": "bd486d9be621c0d48704a17d04763eba691ad339606faec63ae339141de309de",
+      "size_bytes": 24704
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayLong.mqh",
+      "sha256": "7cb1150249e8ecda7eeed377df12a18571ddffb911dc4427dbbe735b84ca29e5",
+      "size_bytes": 24776
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayObj.mqh",
+      "sha256": "d372820fcf77c782e54851c896dfe58c46b21fcfc478ddae39ecb42b76663c27",
+      "size_bytes": 25319
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayShort.mqh",
+      "sha256": "cf72dc4ebbd4caaf424acc95351b32b664124c4fbc976cb91b5ec447dc0f7e4b",
+      "size_bytes": 24921
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayString.mqh",
+      "sha256": "05f81d68cd612a6430353fd11c501051a2dfca55544e729e60bf2d26ff4a48dd",
+      "size_bytes": 25106
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674197935000,
+      "relative_path": "MQL5/Include/Arrays/ArrayUChar.mqh",
+      "sha256": "c6e6c3cc74502fdf5b381bb978d9ba9be1105c566bc5f3346e1de53657c239ce",
+      "size_bytes": 24915
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/ArrayUInt.mqh",
+      "sha256": "a5991c2fd273a90aa8eafac0e45ff007733accc8071e97519d22f6e2a7593104",
+      "size_bytes": 24792
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/ArrayULong.mqh",
+      "sha256": "e45738d5eeb5c11653b80c65e05d45e5dd3aee32c8e46107f328a450add2955f",
+      "size_bytes": 24865
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/ArrayUShort.mqh",
+      "sha256": "948281e7440f09b0a23ad8edf8568da77460b83b6d66bca525a455839881d297",
+      "size_bytes": 25009
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/List.mqh",
+      "sha256": "f7657af8a8fcea477d16b24af699bd75e6bf21c2f9de048dfb59a57d4a640a2b",
+      "size_bytes": 21080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/Tree.mqh",
+      "sha256": "b76f9b2318ae548b2e8d1db3a1fa5b847ba5fa49f23d078eeae69a552198f79d",
+      "size_bytes": 14241
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Arrays/TreeNode.mqh",
+      "sha256": "5971ecae6e63fa4364815a7352bddec93e787c0a65f33d7b2760088a202c8cd9",
+      "size_bytes": 6801
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Canvas"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Canvas/Canvas.mqh",
+      "sha256": "d4bd7c6916104ce6ceabd31fe119e1b283658d4c639ec8b62171a2805da84c48",
+      "size_bytes": 156459
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Canvas/Canvas3D.mqh",
+      "sha256": "07f8e9af17e814af9be97503b731c942a2830ab8f0d6e477d9c34a79e6d64bf0",
+      "size_bytes": 34652
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Canvas/Charts"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674200350000,
+      "relative_path": "MQL5/Include/Canvas/Charts/ChartCanvas.mqh",
+      "sha256": "163b4a53c4240ccaaffe6a1850f902caee35913c1e7164a178494f22ffa12967",
+      "size_bytes": 36139
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/Charts/HistogramChart.mqh",
+      "sha256": "c3ca15e2e8da6edde0d463772e7a7446fbfbcb7cca57467d149b7860c3025d04",
+      "size_bytes": 11932
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/Charts/LineChart.mqh",
+      "sha256": "247044265c657f6eca32eaf60a5076b187bc0090bdad80658ac0ac3544f15b0b",
+      "size_bytes": 12605
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/Charts/PieChart.mqh",
+      "sha256": "fab1d97e5a9840cdac8335b47d77139cf8149b77b626fcf7116e1b2dad63a162",
+      "size_bytes": 13713
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Canvas/DX"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXBox.mqh",
+      "sha256": "f8058d5e473e55ee5dec9d95c083867426b84a9fca003236045bc2027220d554",
+      "size_bytes": 3208
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXBuffers.mqh",
+      "sha256": "dcf75ba6cec8df520d857c1484eaef8b95ad7130908f9fab846e06c72210ab25",
+      "size_bytes": 4354
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXData.mqh",
+      "sha256": "30882d38de2c1ead6c2f990e73cb1d0f90c6c502296114795b1aca46e0899993",
+      "size_bytes": 4048
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXDispatcher.mqh",
+      "sha256": "0534b2f6b077652039474f716c1e424ca2f9db936cebd9997f702c36f8b84624",
+      "size_bytes": 13160
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXHandle.mqh",
+      "sha256": "8494e673f328245909fbd090109a8c6f80b567247606b4a13697ea58eb3c03d6",
+      "size_bytes": 8568
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXInput.mqh",
+      "sha256": "e4f6b1ee901cf72b2122addefa361e592ef1472a5b664c2cb20e2e809b4e2cae",
+      "size_bytes": 4968
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXMath.mqh",
+      "sha256": "63a9847f6692ac5826096eed25c13f3f286f6a75b0ff0d268ecc233706e9452c",
+      "size_bytes": 155150
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXMesh.mqh",
+      "sha256": "41fbbff23b778109ada79699978d2e9f12170661ad593c14ff2400429be0b904",
+      "size_bytes": 15738
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXObject.mqh",
+      "sha256": "30d055037af534bfa81a7c0b3c052545027d7c0ab04237fee95b15ab6375ddfb",
+      "size_bytes": 1744
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXObjectBase.mqh",
+      "sha256": "ff5ca88b893fcb83b455e81989c9f79edb1b0e1d0032110817fe6741729e516e",
+      "size_bytes": 2106
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXShader.mqh",
+      "sha256": "9830ea0e5dba10ae6717a35320714b9331ecc146f510da69b8914dbe026ea31a",
+      "size_bytes": 16984
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXSurface.mqh",
+      "sha256": "29ff41205e1985338d831461937dbb307142469f88d16aa8793ea1c96a7e9101",
+      "size_bytes": 6405
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674202354800,
+      "relative_path": "MQL5/Include/Canvas/DX/DXTexture.mqh",
+      "sha256": "02826fc6b28a59b98f0d125a8a7e54836e5386a6d52015660b14a1f047d44418",
+      "size_bytes": 6890
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/Canvas/DX/DXUtils.mqh",
+      "sha256": "937484656aae04f8147f132ee6f46c1542c82817c88631dc312a2d1386209530",
+      "size_bytes": 36695
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Canvas/DX/Shaders"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/Canvas/DX/Shaders/DefaultShaderPixel.hlsl",
+      "sha256": "c8db91d0113d9dfd150428271fed6a40f8dab0c47a567e767ed679e7eb5bec89",
+      "size_bytes": 3307
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/Canvas/DX/Shaders/DefaultShaderVertex.hlsl",
+      "sha256": "12dc0fcd6ea5baf51e56717e2fb9707e8c83720ea44f348152e515b372103da8",
+      "size_bytes": 2805
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/Canvas/FlameCanvas.mqh",
+      "sha256": "e893f0e40b2e40d0050ac35a2fdeb478f18794981eb34fd3781df39fc4615894",
+      "size_bytes": 27042
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/ChartObjects"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObject.mqh",
+      "sha256": "bb93b69aa4e346da15bb0d60dbe9fd1a2e81c71187179d440bbbcd71e467c1a6",
+      "size_bytes": 41365
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectPanel.mqh",
+      "sha256": "2bc1b2a3d3e1aa21a302645246af15f44f2ea0ce46a970326ac00bf810c9080e",
+      "size_bytes": 8273
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectSubChart.mqh",
+      "sha256": "c85237de01f5c403ef7d8ee569fea135bcc07250cfb1a2208ec12dcdbee9de35",
+      "size_bytes": 17330
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsArrows.mqh",
+      "sha256": "2809115487f7bfc068fc74ff7a8910fe1d7a9deca41d8b9bb3ffca35987c5ecd",
+      "size_bytes": 23807
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsBmpControls.mqh",
+      "sha256": "868e79c3743c4f41a9f7ba853a3e7a04498cdc8b1b88c59f141aeff96227e115",
+      "size_bytes": 21277
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsChannels.mqh",
+      "sha256": "8c7bb5067f3cc037ae214be6f37ddda4da96082474568cabbc16fd9513925f8b",
+      "size_bytes": 11883
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsElliott.mqh",
+      "sha256": "dbc104095762a1e89868223817db5714c8a15857a3184d24cabda4110bd5bf05",
+      "size_bytes": 9567
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsFibo.mqh",
+      "sha256": "5ff60ca2ca00776929025dfedcb5efd5025c504569b3893633fc59542d059647",
+      "size_bytes": 17506
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsGann.mqh",
+      "sha256": "258a70a2ef33bf710bb36d6219e3159f973a3cca2b08004200b2f4cf330e74ef",
+      "size_bytes": 17095
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsLines.mqh",
+      "sha256": "31584bb56ba188e5913c1d6d8b0a257d2b62ca24bd5afedbd75ad38bc7a11451",
+      "size_bytes": 15506
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsShapes.mqh",
+      "sha256": "e7279e91b904f54805036592e073c4375ccab5966be27744cd1d31ec0409f5f5",
+      "size_bytes": 7288
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674205545000,
+      "relative_path": "MQL5/Include/ChartObjects/ChartObjectsTxtControls.mqh",
+      "sha256": "261b1a92a84eafdba7cbc605b3eaccb4d8fa2a8a12bd2a9f389c5324e88c7842",
+      "size_bytes": 38305
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Charts"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674209029400,
+      "relative_path": "MQL5/Include/Charts/Chart.mqh",
+      "sha256": "b95980e797f2295711f63e7440a86e5808183dc2832be71cf9a24b33e4325262",
+      "size_bytes": 63640
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Controls"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674209029400,
+      "relative_path": "MQL5/Include/Controls/BmpButton.mqh",
+      "sha256": "079dbe592b71fdd46d9c7becae38f3c933e9c44c01d9a11be3f28073742cf18e",
+      "size_bytes": 11453
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674209029400,
+      "relative_path": "MQL5/Include/Controls/Button.mqh",
+      "sha256": "e47dc47833d03eb8ae8c224732d23cd81ee9098e09cc5e6ee69447b78d8f9dd2",
+      "size_bytes": 6892
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674209029400,
+      "relative_path": "MQL5/Include/Controls/CheckBox.mqh",
+      "sha256": "3e419d229eed2bccfea3a709fca096da902b13b14d79db449111577550c145b5",
+      "size_bytes": 7677
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674210034400,
+      "relative_path": "MQL5/Include/Controls/CheckGroup.mqh",
+      "sha256": "d20af56351531d41efe3857db170f5a415c71d9fb2b730149fd48cdd460785a9",
+      "size_bytes": 14144
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674210034400,
+      "relative_path": "MQL5/Include/Controls/ComboBox.mqh",
+      "sha256": "e630b70f0c5cbca9d5be5c4d52c2d30f3c027d6e1b336c377bc5cf469c917930",
+      "size_bytes": 13397
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674210034400,
+      "relative_path": "MQL5/Include/Controls/DateDropList.mqh",
+      "sha256": "c6ebcef9c0335ccbc3abc67483140008017b5600189a0805264557c2a608d2a1",
+      "size_bytes": 15174
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674210034400,
+      "relative_path": "MQL5/Include/Controls/DatePicker.mqh",
+      "sha256": "90d6d75f31800367edcf9f269c8a7da99d175ca8c78bd0fc7ebef586b03c4b14",
+      "size_bytes": 10702
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674210034400,
+      "relative_path": "MQL5/Include/Controls/Defines.mqh",
+      "sha256": "1d42290c37ed8fd9a9be8ba39cf19bcee233eec695abd3feebd7be0aa2341706",
+      "size_bytes": 12589
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674211115600,
+      "relative_path": "MQL5/Include/Controls/Dialog.mqh",
+      "sha256": "0e90103381318be89d7b9966775540daa6fcc0be3733baf3539288a077cc1fe7",
+      "size_bytes": 38884
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674211115600,
+      "relative_path": "MQL5/Include/Controls/Edit.mqh",
+      "sha256": "c75efd5dcf9a8c3423cda6eeab49c2fe0aa3f1d8ef84249f8450585b4e9955e4",
+      "size_bytes": 8938
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674211115600,
+      "relative_path": "MQL5/Include/Controls/Label.mqh",
+      "sha256": "ef876631599bd0586c23f2b2ac2063707a70d652af285167dd11214faf710228",
+      "size_bytes": 4309
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674211115600,
+      "relative_path": "MQL5/Include/Controls/ListView.mqh",
+      "sha256": "85e328810e90f12af6e147fbb43a60c046c2feca29037513748afa953712460b",
+      "size_bytes": 20099
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674211115600,
+      "relative_path": "MQL5/Include/Controls/Panel.mqh",
+      "sha256": "0f3fcdbb04415ac8de2f9dd703d04f6363e605e22b46c74cbfe495f4a330beb3",
+      "size_bytes": 5871
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674212115900,
+      "relative_path": "MQL5/Include/Controls/Picture.mqh",
+      "sha256": "e792ac271010c3ed998a7aa5ad81969df7a8b964969e9bec352fa78677980098",
+      "size_bytes": 5602
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674212115900,
+      "relative_path": "MQL5/Include/Controls/RadioButton.mqh",
+      "sha256": "2f05666953d81b1080e7133c983cc195b24cd58dfd4025ed3944a1d493902aa4",
+      "size_bytes": 6989
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674212115900,
+      "relative_path": "MQL5/Include/Controls/RadioGroup.mqh",
+      "sha256": "b8f8bea813c9cb759550ee5210d4bbbd376af7674d752f47d6e1bcd69926d083",
+      "size_bytes": 13558
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674213117200,
+      "relative_path": "MQL5/Include/Controls/Rect.mqh",
+      "sha256": "c6a94653554997665b86a3dde619ee5e2e04acf4fc0165abb1022ac858ab9f54",
+      "size_bytes": 11086
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674217115500,
+      "relative_path": "MQL5/Include/Controls/Scrolls.mqh",
+      "sha256": "2b3a553b2ae55b176015e899ca812ad6d25acc343be7393a8ef3a93da7e9e330",
+      "size_bytes": 26735
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674217115500,
+      "relative_path": "MQL5/Include/Controls/SpinEdit.mqh",
+      "sha256": "ce0de9daeca9d8fe8413c3a4cf687ab159593c06c6aebd7df30f114a1931cfed",
+      "size_bytes": 10338
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674217115500,
+      "relative_path": "MQL5/Include/Controls/Wnd.mqh",
+      "sha256": "186cd7db61713817e074c21d398cc1452ce3498c3763b13d6a6e91d4c1935646",
+      "size_bytes": 30356
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674217115500,
+      "relative_path": "MQL5/Include/Controls/WndClient.mqh",
+      "sha256": "c0567d56284337d8f5fb9f14f96bfd8b0e3792503d4b87e5ab464841edaae642",
+      "size_bytes": 12237
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674217115500,
+      "relative_path": "MQL5/Include/Controls/WndContainer.mqh",
+      "sha256": "4231fbd351c1d05916b0f41e45712d573ef8931c63af34a8ac0b6811f13a1284",
+      "size_bytes": 16382
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674218115300,
+      "relative_path": "MQL5/Include/Controls/WndObj.mqh",
+      "sha256": "686a1917b056ea18d0847cdfd53c631ccb52a2e199fa754c84e8ddd79b8302fe",
+      "size_bytes": 10629
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Controls/res"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674213117200,
+      "relative_path": "MQL5/Include/Controls/res/CheckBoxOff.bmp",
+      "sha256": "ec006ccbfc0709c5676f92b6d7a98c9494b345e6effcb8acf2e578bdef19cdf3",
+      "size_bytes": 576
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674213117200,
+      "relative_path": "MQL5/Include/Controls/res/CheckBoxOn.bmp",
+      "sha256": "0e18229efc821139baef5a1d0877853b65385768362c92ebc89ac56caebf94c4",
+      "size_bytes": 576
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674213117200,
+      "relative_path": "MQL5/Include/Controls/res/Close.bmp",
+      "sha256": "30cf53c4fb14809535bbae76681442ba60ecf924a99344af5e59653f7dbbce91",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/DateDropOff.bmp",
+      "sha256": "bab183847f750292dc1b87192c1d15581751d0e907386d7c399fa6f4f017a4b5",
+      "size_bytes": 2104
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/DateDropOn.bmp",
+      "sha256": "6eb4dc480cd579d0e18bb6364d4cf5fc1b373091a274ba1872e56f95bf1e6b53",
+      "size_bytes": 2104
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/Down.bmp",
+      "sha256": "58073fcc8c5c9e6f519c2e204cb64efd2bb88d6d1251d2eb38fdeba184f8bb9b",
+      "size_bytes": 824
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/DownTransp.bmp",
+      "sha256": "a118242c3a439df88d3b76a3fafd346397a0d253117e1809c11187fbafbcea0b",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/DropOff.bmp",
+      "sha256": "a118242c3a439df88d3b76a3fafd346397a0d253117e1809c11187fbafbcea0b",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674214115100,
+      "relative_path": "MQL5/Include/Controls/res/DropOn.bmp",
+      "sha256": "094a229fea23466a4082d85e8560be6587931530d78d3d4b71c8bd9d50bcadf2",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/Left.bmp",
+      "sha256": "3b8d2fcd6e18f269b5120496040ff64278cab5267f5656ed33ce37c8e51af371",
+      "size_bytes": 824
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/LeftTransp.bmp",
+      "sha256": "99272e707d33f20756f68d2c2edf9071ee6b8e81d77668f03f4aad0921b59956",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/RadioButtonOff.bmp",
+      "sha256": "6cc6772ef3dad5ad18856888b93b9956f8fb718c7e5e4ee9ac14b92d46045f92",
+      "size_bytes": 632
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/RadioButtonOn.bmp",
+      "sha256": "009841ca8e69b0c8a30cc075cf277925a70f62882988fe4555a65c1ce61d3fcf",
+      "size_bytes": 632
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/Restore.bmp",
+      "sha256": "a877849271623fa10b9132c251239c28e8a755779ba9f6f31d42485186f4996d",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/Right.bmp",
+      "sha256": "6a34150238b6ae6b47d41d101e231a1bed64912e008f35cd85fc40263c538b01",
+      "size_bytes": 824
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674215115800,
+      "relative_path": "MQL5/Include/Controls/res/RightTransp.bmp",
+      "sha256": "fe2ec3b5b8a2bdf0a91068021e0a45f94a789c636712023aa197ba503a740af4",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/SpinDec.bmp",
+      "sha256": "fd6f0eb884b3d7d7e58cf43e77ef7582001f2b556451211e128b6606b84111e9",
+      "size_bytes": 568
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/SpinInc.bmp",
+      "sha256": "45b7e2554e10c99cf744ed5257f4e30be5d6f766f7b293f66a59338a41e39690",
+      "size_bytes": 568
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/ThumbHor.bmp",
+      "sha256": "9a2b3d347fa1d2d5f1657c77c560e29b62caf8e6dd1f5210d7be049685195653",
+      "size_bytes": 1144
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/ThumbVert.bmp",
+      "sha256": "95cfdb7dcbe29e5dc3a96be329d5f0c550e64ac71918c4fe4ac5b6d2a5f0e6b6",
+      "size_bytes": 1112
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/Turn.bmp",
+      "sha256": "9160e58f61b9d53af6fe1b70253f168a5cd5c9d77e5cdc3a8140d3d93d2711c9",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/Up.bmp",
+      "sha256": "8bc47733e26818b3f00639c05476328fe1d1091ea466ad63f88faf638c2d75fb",
+      "size_bytes": 824
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674216115400,
+      "relative_path": "MQL5/Include/Controls/res/UpTransp.bmp",
+      "sha256": "094a229fea23466a4082d85e8560be6587931530d78d3d4b71c8bd9d50bcadf2",
+      "size_bytes": 1080
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Expert"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674218115300,
+      "relative_path": "MQL5/Include/Expert/Expert.mqh",
+      "sha256": "d0df267fe557981638aa094dd60677d053fa36b7457b9f85061a03cb06c986d4",
+      "size_bytes": 122604
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674218115300,
+      "relative_path": "MQL5/Include/Expert/ExpertBase.mqh",
+      "sha256": "3c560e25f13e2b7cf747fd5901a0b96e43c8ddf2074894922b4f680d8e4ef7a4",
+      "size_bytes": 27603
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674218115300,
+      "relative_path": "MQL5/Include/Expert/ExpertMoney.mqh",
+      "sha256": "4c66ae4baa7d80af3c99249a8bf3a4048ca6491e3ce28fe07a928418e8265bfc",
+      "size_bytes": 4963
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674219115600,
+      "relative_path": "MQL5/Include/Expert/ExpertSignal.mqh",
+      "sha256": "85749f071affa3ff9de1c415b41923494537eecd4d2f61d8a6ca377d6f1fc757",
+      "size_bytes": 20246
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674219115600,
+      "relative_path": "MQL5/Include/Expert/ExpertTrade.mqh",
+      "sha256": "1d408461a19d5c0fb736fe67d84437d4a737ffcb23e439d2b78ef48e94c88e4f",
+      "size_bytes": 6502
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674219115600,
+      "relative_path": "MQL5/Include/Expert/ExpertTrailing.mqh",
+      "sha256": "e95e0fe031681decf912ce396bc2d8b22f1c9870ebec09538cac695c12b8344b",
+      "size_bytes": 1738
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Expert/Money"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674220115400,
+      "relative_path": "MQL5/Include/Expert/Money/MoneyFixedLot.mqh",
+      "sha256": "77410a3a2f036a6c7ca7cc0613bb55cf1c8e6dc364c6bbf7422f6d3925e70c59",
+      "size_bytes": 3531
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674220115400,
+      "relative_path": "MQL5/Include/Expert/Money/MoneyFixedMargin.mqh",
+      "sha256": "65edd54fc05b1c959231936ecd4266a51e22298de42bbf599531c2a044f5cab6",
+      "size_bytes": 3619
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674220115400,
+      "relative_path": "MQL5/Include/Expert/Money/MoneyFixedRisk.mqh",
+      "sha256": "605022d75d892fceb0a8704976588f93b00311148835de3bd2f64c6595f3e521",
+      "size_bytes": 4454
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674220115400,
+      "relative_path": "MQL5/Include/Expert/Money/MoneyNone.mqh",
+      "sha256": "521fe840ebbd4edecd8c4b0ff9292eb62fdd4b3c550913a16e751b71a8e1fb4c",
+      "size_bytes": 3356
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674220115400,
+      "relative_path": "MQL5/Include/Expert/Money/MoneySizeOptimized.mqh",
+      "sha256": "2113329dc000e2a134ac6d5d0aa9cd7f3e212739f00f79df7537d89775cb1bef",
+      "size_bytes": 6231
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Expert/Signal"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674221115300,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalAC.mqh",
+      "sha256": "190c11b999c1d8cf7dc4dabeeca77c418802f5963445793346b2c22574acae66",
+      "size_bytes": 7678
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674221115300,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalAMA.mqh",
+      "sha256": "52a2d3beebb6b4a2fb9edfd84d069e7aecbb3375ce24a1e610010146a3de9543",
+      "size_bytes": 12351
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674221115300,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalAO.mqh",
+      "sha256": "c0e8309b737434fbc57385faf440fb0c8f1014bd2e09dfe349b8d9185aa6df20",
+      "size_bytes": 13681
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674221115300,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalBearsPower.mqh",
+      "sha256": "564abcc0c1a0da4503b0cb5574758b81503156beb613f3bba952af06616d635a",
+      "size_bytes": 11971
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674221115300,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalBullsPower.mqh",
+      "sha256": "7831e5a673c78dacd065022f65b2cf52da677215b701eb6e9394a013677bbba6",
+      "size_bytes": 11979
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalCCI.mqh",
+      "sha256": "9de69efe8a0beb6a48df4a22933f47b0aa1c412213b1d010ec8144c60ed1bf31",
+      "size_bytes": 17541
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalDEMA.mqh",
+      "sha256": "514785fbbbaaf5a39c132062496ff11581b970bdcc8a09187ce12a76652b1bdb",
+      "size_bytes": 11738
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalDeMarker.mqh",
+      "sha256": "d00b349fd40d5455be8031e54af53a87d3eb68fff025ed2f5ae1072020b0bc4b",
+      "size_bytes": 17303
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalEnvelopes.mqh",
+      "sha256": "48f0f4b822f9520f3ad97d85fc546f4d1b38005fb784ae207149749a46393c60",
+      "size_bytes": 9652
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalFrAMA.mqh",
+      "sha256": "7652f6715dd3ae8285b069434a972cab6b76edb4aaf3b080409c2ca0ccf9286c",
+      "size_bytes": 11764
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674222115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalITF.mqh",
+      "sha256": "3f20ab4415af9e95fb7e7f88cbf0016cc32c2e3458a1b88090dca9070fc7e723",
+      "size_bytes": 4646
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalMA.mqh",
+      "sha256": "e6f6ad95efe46f656cbcb8180d10d22e14c964309b8696e131c752391394c762",
+      "size_bytes": 12007
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalMACD.mqh",
+      "sha256": "91b9cb77c8620d6c76f85629d854bc27ed38c6569caeabb73698111f61477a43",
+      "size_bytes": 19863
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalRSI.mqh",
+      "sha256": "848f84402a8e62ca9aa439fcdc7c4186c108136b8d283cbc480993f0e719f2f1",
+      "size_bytes": 18757
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalRVI.mqh",
+      "sha256": "5a7348ad0d579f62703af346bc0d16a3f18f74f780c4f3f481fe0994edeaf828",
+      "size_bytes": 8156
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalSAR.mqh",
+      "sha256": "90c1866597599de75e2676ed59b9071aa49d872873934c0fc9327ea83020f023",
+      "size_bytes": 7834
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674223115600,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalStoch.mqh",
+      "sha256": "a1f82e4f7832218c90dba1cd664cd6dc264ef0ac783bcf5e29650deef43f88c9",
+      "size_bytes": 20197
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674224115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalTEMA.mqh",
+      "sha256": "83531fa8d0980a880509d02d6e08c187edbdb2fb4c0d4c847d2051c82f1dddba",
+      "size_bytes": 11732
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674224115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalTRIX.mqh",
+      "sha256": "5fb364f8038ccc7d9ce3995f856637ae01e4b7e54eb1e513502c7211a26032de",
+      "size_bytes": 18103
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674224115500,
+      "relative_path": "MQL5/Include/Expert/Signal/SignalWPR.mqh",
+      "sha256": "08f71df2443c4e7503437b334cbc27623c069f111b4bdbdb3d3d1763a09f8129",
+      "size_bytes": 16579
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Expert/Trailing"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674224115500,
+      "relative_path": "MQL5/Include/Expert/Trailing/TrailingFixedPips.mqh",
+      "sha256": "df2078e0d24c620b342bc6baa1c51370b82452309f836f58d830bd400477bfd3",
+      "size_bytes": 5639
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674224115500,
+      "relative_path": "MQL5/Include/Expert/Trailing/TrailingMA.mqh",
+      "sha256": "b30e686285235b5ba4a37ba8b4049ca8e12961055eb304c82722e71a1a38911f",
+      "size_bytes": 6725
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674225115600,
+      "relative_path": "MQL5/Include/Expert/Trailing/TrailingNone.mqh",
+      "sha256": "75a79819f396fc05f07cf284ee9cd6d17663ecd1e6f8f4e616dbe243e7806f14",
+      "size_bytes": 2139
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674225115600,
+      "relative_path": "MQL5/Include/Expert/Trailing/TrailingParabolicSAR.mqh",
+      "sha256": "ae4e7b09534ca4df0d8df1a5dc9864fe718c45295a94b22094786edef1ed9e2b",
+      "size_bytes": 5527
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Files"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674225115600,
+      "relative_path": "MQL5/Include/Files/File.mqh",
+      "sha256": "8d61e0e660e008d87d686d5b20fcd7ec2d294eb3b6152022d214d55386fbf25f",
+      "size_bytes": 12206
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674225115600,
+      "relative_path": "MQL5/Include/Files/FileBMP.mqh",
+      "sha256": "63f1f94e087e7fa10ed8f79a5f045306662c0fffc5a32883c68218d248f6a783",
+      "size_bytes": 6995
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674225115600,
+      "relative_path": "MQL5/Include/Files/FileBin.mqh",
+      "sha256": "18ea9c6a3734d19e456c49594255b75417a63dcea1265219a0373b46aa197b12",
+      "size_bytes": 20944
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674226115600,
+      "relative_path": "MQL5/Include/Files/FilePipe.mqh",
+      "sha256": "d9d3e9d696f7258007081b9f2701636e53bcb2712f23a9b6bb820e44f8737cbc",
+      "size_bytes": 12882
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674226115600,
+      "relative_path": "MQL5/Include/Files/FileTxt.mqh",
+      "sha256": "91c9f05699fb4e1e68d65f658d0c1a3ef0d136ba30b4c301037cecf5bbc731f6",
+      "size_bytes": 2825
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Generic"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674226115600,
+      "relative_path": "MQL5/Include/Generic/ArrayList.mqh",
+      "sha256": "85b52eca54320867ef280f3e13ea31ef9d87126b463db24fd46c329b49e6cc9b",
+      "size_bytes": 50384
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674226115600,
+      "relative_path": "MQL5/Include/Generic/HashMap.mqh",
+      "sha256": "f4e0bfbe3034e36a3d3bc8e4c1367508a1ba868ed6bd374c698a9a47a13f4ae6",
+      "size_bytes": 25714
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674227115700,
+      "relative_path": "MQL5/Include/Generic/HashSet.mqh",
+      "sha256": "510523e910aae545708cc7c0f29265b46afa1ed317c9c952fb38404dcbfe46e3",
+      "size_bytes": 37086
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Generic/Interfaces"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674227115700,
+      "relative_path": "MQL5/Include/Generic/Interfaces/ICollection.mqh",
+      "sha256": "e14762bec9ff9f59b7fc82b05bc015ce376e704047b1d7f90bbfb56453ce2886",
+      "size_bytes": 1142
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674227115700,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IComparable.mqh",
+      "sha256": "de5e0ee72ea0f4ef177b20b5810c131c743f97749cfe3c9a4c365b7d648a3c88",
+      "size_bytes": 1057
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674227115700,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IComparer.mqh",
+      "sha256": "def9e6c22a00c5f42af7c11ae421cae066d4942ac06e1f18567cda92d9b63127",
+      "size_bytes": 998
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674227115700,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IEqualityComparable.mqh",
+      "sha256": "03171bfb29c7ca36823d978f32dab4bb4b9240426f8b0fbe3b9d5a7751a472c9",
+      "size_bytes": 1012
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674228115900,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IEqualityComparer.mqh",
+      "sha256": "d4c744f2740dbd7d2fb5d1fee4f6cda03231af6837d350f8024eda6473d530fd",
+      "size_bytes": 1027
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674228115900,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IList.mqh",
+      "sha256": "b50c9708e6ee9b63453a998c50667e1c7cb49d2f2dd0a159d2354e8957133068",
+      "size_bytes": 1352
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674228115900,
+      "relative_path": "MQL5/Include/Generic/Interfaces/IMap.mqh",
+      "sha256": "ab0e8c7ae3e5d34e43d6cd2f9623e56b7020897192541c42220b3d53d813c312",
+      "size_bytes": 1391
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674228115900,
+      "relative_path": "MQL5/Include/Generic/Interfaces/ISet.mqh",
+      "sha256": "d491b2b5af32c7f285fb8355bdaee3c3df51d497d62c5b26183aeb64f6cb4ccf",
+      "size_bytes": 2031
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Generic/Internal"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674229117300,
+      "relative_path": "MQL5/Include/Generic/Internal/ArrayFunction.mqh",
+      "sha256": "fb4ddb10c53bb6d0c4bb6e541b28a2ed574d988d77bfe396f7ea6b5f242a3513",
+      "size_bytes": 4695
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674229117300,
+      "relative_path": "MQL5/Include/Generic/Internal/CompareFunction.mqh",
+      "sha256": "354707af082c7bed145986db1f48823068ff6f3cc109741d043efe3a8174738d",
+      "size_bytes": 7190
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674230116300,
+      "relative_path": "MQL5/Include/Generic/Internal/DefaultComparer.mqh",
+      "sha256": "a3a1175946c9d137a6b0270403aa3e7268371406b7ad1da2646ef8a1c17acb51",
+      "size_bytes": 1253
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674230116300,
+      "relative_path": "MQL5/Include/Generic/Internal/DefaultEqualityComparer.mqh",
+      "sha256": "5ffbc048e31ac3b71eb6ce82e4a923fe293addb7e4d4993fa8eb3d770e64c5f0",
+      "size_bytes": 1457
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674230116300,
+      "relative_path": "MQL5/Include/Generic/Internal/EqualFunction.mqh",
+      "sha256": "e8c7e159146abcea19e5718756032c3da87c2906ed5b5e484efb3b9f1d63da4d",
+      "size_bytes": 1103
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674230116300,
+      "relative_path": "MQL5/Include/Generic/Internal/HashFunction.mqh",
+      "sha256": "ac863b158c3013c9180a09ebfb1ac03fb263cd8cc5370cec511aebfd8c82c2b0",
+      "size_bytes": 7249
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674230116300,
+      "relative_path": "MQL5/Include/Generic/Internal/Introsort.mqh",
+      "sha256": "e02880c7e024e7495645ee32a2c20bd0d19e266675996a2417f3dfc18f779dca",
+      "size_bytes": 8348
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674231116700,
+      "relative_path": "MQL5/Include/Generic/Internal/PrimeGenerator.mqh",
+      "sha256": "64a22c31fd927e23df497fcad3b3d7c958a30a59b9e7c4db2f5e5d1aba33cdf4",
+      "size_bytes": 3601
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674231116700,
+      "relative_path": "MQL5/Include/Generic/LinkedList.mqh",
+      "sha256": "8fac6ea3d808592bed0054d4cf0825340f5c3997ae67e415ee61afe4546d2b72",
+      "size_bytes": 21261
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674231116700,
+      "relative_path": "MQL5/Include/Generic/Queue.mqh",
+      "sha256": "c71082b35723a2d7b70512844c6bbf02a8ac602dedc05ddf3bfee7dd136f4654",
+      "size_bytes": 29814
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674231116700,
+      "relative_path": "MQL5/Include/Generic/RedBlackTree.mqh",
+      "sha256": "5ad010d4b40cec07fe6537c240219948c8ee62b090a6a94ea669c249f97ccf66",
+      "size_bytes": 74814
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674231116700,
+      "relative_path": "MQL5/Include/Generic/SortedMap.mqh",
+      "sha256": "1f5f6bedfa7829bcfc703ef5bb89d2187a991dc6f49936fbbe292e289e110278",
+      "size_bytes": 14431
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674232115700,
+      "relative_path": "MQL5/Include/Generic/SortedSet.mqh",
+      "sha256": "0764233bfe27e43327b38e969d71af947cd86c64571a316dbe9141b6d22b3ba6",
+      "size_bytes": 25573
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674232115700,
+      "relative_path": "MQL5/Include/Generic/Stack.mqh",
+      "sha256": "60f85fe955494235d560805c83359746ee3016ef80cbf7bf4a54404c1b72e676",
+      "size_bytes": 8953
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Graphics"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674232115700,
+      "relative_path": "MQL5/Include/Graphics/Axis.mqh",
+      "sha256": "f7edaff3b7d7bbbc158481115de2294042c83841c8fa9ea4c9c0ded36e9cfe2a",
+      "size_bytes": 12581
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674232115700,
+      "relative_path": "MQL5/Include/Graphics/ColorGenerator.mqh",
+      "sha256": "db650a69779f29d2bfd6a5340619ac88844df10df879248aafeb05081f438ee0",
+      "size_bytes": 3120
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674232115700,
+      "relative_path": "MQL5/Include/Graphics/Curve.mqh",
+      "sha256": "ca0f2698be7769f02deda4e9b113fbd8458b4e655522cac575902f397ab00a0d",
+      "size_bytes": 22801
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674233115600,
+      "relative_path": "MQL5/Include/Graphics/Graphic.mqh",
+      "sha256": "a7eeb3f6abe3522bbbf4e0738a438f7684339b6d16ed7622b0850fb46caf1200",
+      "size_bytes": 173126
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Indicators"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674233115600,
+      "relative_path": "MQL5/Include/Indicators/BillWilliams.mqh",
+      "sha256": "add9317316aa3b8af913e407e34c10968ec7a9b5e366df26bb470e8fe0e471f9",
+      "size_bytes": 33009
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674233115600,
+      "relative_path": "MQL5/Include/Indicators/Custom.mqh",
+      "sha256": "640dad8239615e70f5a34851ffa68d3d08add88c81084f8c47a8d1d2159712ac",
+      "size_bytes": 8168
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674233115600,
+      "relative_path": "MQL5/Include/Indicators/Indicator.mqh",
+      "sha256": "7e13befcf5d2897c34d93dbf7b83b39256096caf80679400bd92c71a69ba3b26",
+      "size_bytes": 19825
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674234115500,
+      "relative_path": "MQL5/Include/Indicators/Indicators.mqh",
+      "sha256": "d097a0afab87d7d5e82e38fcafbcb682b7110667fdbcb82c83568744ee670e07",
+      "size_bytes": 12252
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674234115500,
+      "relative_path": "MQL5/Include/Indicators/Oscilators.mqh",
+      "sha256": "55bbc72a57e0e56a115b230ea409d4072b6f4fdbb6f79e546bb954d2c8a691a4",
+      "size_bytes": 73859
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674234115500,
+      "relative_path": "MQL5/Include/Indicators/Series.mqh",
+      "sha256": "1072582c768b2e5d777e0f8947e2089c7d35c0fe328234c3db32504bcdf764be",
+      "size_bytes": 12629
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674234115500,
+      "relative_path": "MQL5/Include/Indicators/TimeSeries.mqh",
+      "sha256": "37ce77ff867ef971f5005affa522848eee2e5e5d6cb17dd40366c860af0e7ea3",
+      "size_bytes": 63360
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674234115500,
+      "relative_path": "MQL5/Include/Indicators/Trend.mqh",
+      "sha256": "3d710bbfb1a7a7477e5a14b468d427a57f66cf3c4b31b01b92b1b99531197e55",
+      "size_bytes": 73766
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674235115500,
+      "relative_path": "MQL5/Include/Indicators/Volumes.mqh",
+      "sha256": "ea6b8bd95aa9b7998e1e62255d50e24496fc179b690b4ac16fd07feac7dc75c7",
+      "size_bytes": 17740
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Math"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Math/Alglib"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674237115700,
+      "relative_path": "MQL5/Include/Math/Alglib/alglib.mqh",
+      "sha256": "12c32ce9953241e589bead21d1774979be574a768f26e34e0e1d9226358c3f13",
+      "size_bytes": 2478270
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674238237400,
+      "relative_path": "MQL5/Include/Math/Alglib/alglibinternal.mqh",
+      "sha256": "a5763f6afff505e8398dabda7ffff01cddc52bbaf71b51b17c292c46feb2b5ce",
+      "size_bytes": 593648
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674238237400,
+      "relative_path": "MQL5/Include/Math/Alglib/alglibmisc.mqh",
+      "sha256": "42b671bcc8d160ca30d31b1700d2eaf1dfd5f862c31f7c201c7cbfe6d5db9398",
+      "size_bytes": 122283
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674239237500,
+      "relative_path": "MQL5/Include/Math/Alglib/ap.mqh",
+      "sha256": "d86f6c8c7fa7d7e29d6ad695147e926fcf556ddd26e5189b1fc7aac24eda9b27",
+      "size_bytes": 92144
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674239237500,
+      "relative_path": "MQL5/Include/Math/Alglib/arrayresize.mqh",
+      "sha256": "1db599cd4677250f0876b6476b5ff1515612096b0b6fd27ddf8f2aa8d341499e",
+      "size_bytes": 4080
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674239237500,
+      "relative_path": "MQL5/Include/Math/Alglib/bitconvert.mqh",
+      "sha256": "d842feaf5ef6c7b828e45912fe9f7b4f1d721faf224c4e550b0513d98aa1ee66",
+      "size_bytes": 13809
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674241237900,
+      "relative_path": "MQL5/Include/Math/Alglib/dataanalysis.mqh",
+      "sha256": "c8455f401bda48c81e3a90bc54deca93de02a16a953286b6a5d9ad71bfd03ee4",
+      "size_bytes": 1151833
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674241237900,
+      "relative_path": "MQL5/Include/Math/Alglib/delegatefunctions.mqh",
+      "sha256": "9e0f05159eab49c78ffad30584168bf1183504d0057033f7b6e13a14e5bfb773",
+      "size_bytes": 21765
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674241237900,
+      "relative_path": "MQL5/Include/Math/Alglib/diffequations.mqh",
+      "sha256": "1d5c0982b079a191d663dfebc4a387a97022b8a31e41d0fa9673a5cb0a9660f4",
+      "size_bytes": 33183
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674241237900,
+      "relative_path": "MQL5/Include/Math/Alglib/fasttransforms.mqh",
+      "sha256": "330481c2e4ad3e4edd718de7f44eabc5f7502848accd78c3fe01250f9f06988a",
+      "size_bytes": 94444
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674242237400,
+      "relative_path": "MQL5/Include/Math/Alglib/integration.mqh",
+      "sha256": "297ddf5ef480fe20e07ef4fd368ef03b27fec2bfda97a1477159c2fdb0d038b9",
+      "size_bytes": 119413
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674243237800,
+      "relative_path": "MQL5/Include/Math/Alglib/interpolation.mqh",
+      "sha256": "6b348e9f45181ab5243d2d4465fba904bc988f7ebc2d915d8c620ac6b4e570b3",
+      "size_bytes": 1465208
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674246238800,
+      "relative_path": "MQL5/Include/Math/Alglib/linalg.mqh",
+      "sha256": "042d6e804f8e17fa515c9ca0ab320845363f1e8a23c46de4ab876d56f6437c77",
+      "size_bytes": 1490029
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674246238800,
+      "relative_path": "MQL5/Include/Math/Alglib/matrix.mqh",
+      "sha256": "3996e1462b9247c8668e47bfeabd9f09e0f73e4b81b52c361fd6af91bb5e149a",
+      "size_bytes": 46475
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674249236400,
+      "relative_path": "MQL5/Include/Math/Alglib/optimization.mqh",
+      "sha256": "b35dd0e8bdcf3e567723759edac1cf897dc77b3c1d381190139c47410c96f858",
+      "size_bytes": 2300652
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674250237000,
+      "relative_path": "MQL5/Include/Math/Alglib/solvers.mqh",
+      "sha256": "a499692c48c0f5981995b92787602ff264f1bb062d45a08f2c909f53c77faa52",
+      "size_bytes": 302159
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674250237000,
+      "relative_path": "MQL5/Include/Math/Alglib/specialfunctions.mqh",
+      "sha256": "a55bd9d9b8c5c93d7bfcb62be70943d737098f34ddae0e8aa3061494fb05e603",
+      "size_bytes": 241208
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674251237300,
+      "relative_path": "MQL5/Include/Math/Alglib/statistics.mqh",
+      "sha256": "c953d2f48cb495fac7acdabf01753403f2dd427a89542cdefb48595bd2c6410a",
+      "size_bytes": 417177
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Math/Fuzzy"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674251237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/dictionary.mqh",
+      "sha256": "39fc7a92c734ab72c0af189517db82d0af7705dbc5658aa9715901dcff765dc5",
+      "size_bytes": 9060
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674251237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/fuzzyrule.mqh",
+      "sha256": "89fb72cd29295b6c48b2bb220d82d97833581f5e77d36f17104e40f21492769f",
+      "size_bytes": 18196
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/fuzzyterm.mqh",
+      "sha256": "5796aa0c7d97517cb75f3d9542362d89bb22daad3839a2cbd1679c5dec56301b",
+      "size_bytes": 3819
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/fuzzyvariable.mqh",
+      "sha256": "e1ce74489b30290fa4f8edfa0c1f21c94cc9463465a9f35066c4fb04467f8129",
+      "size_bytes": 5586
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/genericfuzzysystem.mqh",
+      "sha256": "87fd206a401b67089b00bc1c725fc3b39234f666ff0b19b61100e71bfe0194b7",
+      "size_bytes": 12170
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/helper.mqh",
+      "sha256": "8b988eb37686a317eda844bc188c77afde4a113e2602e294bc6536277b858d09",
+      "size_bytes": 7352
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/inferencemethod.mqh",
+      "sha256": "e797df595b0383426d07ba66da807630a5d45f9fd49eecc8fd6ca0621f75311b",
+      "size_bytes": 7238
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/mamdanifuzzysystem.mqh",
+      "sha256": "6e44e7855b9034ec5eaacd093e70aafe44d4a281e04e18f8f2e6fd57bd784845",
+      "size_bytes": 23075
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/membershipfunction.mqh",
+      "sha256": "fb06f9d832a1e0cf8527e169b043fd5e50cfd08278c4a6e8c10b725dbed11a80",
+      "size_bytes": 44306
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/ruleparser.mqh",
+      "sha256": "fdfbbbdd1fbe83cd13c8cfef0d662e8890049760b616ae5fccbb9596ac6925b9",
+      "size_bytes": 37389
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/sugenofuzzysystem.mqh",
+      "sha256": "f69b30beacea2bb1d5a4976741358366670100631b307c2f5b84f83df7374bd6",
+      "size_bytes": 13323
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674252237300,
+      "relative_path": "MQL5/Include/Math/Fuzzy/sugenovariable.mqh",
+      "sha256": "fe5046cad372529d5a809ed77979338e020fa1cb42fe358f4d881b89d59df6cf",
+      "size_bytes": 11248
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Math/Stat"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Beta.mqh",
+      "sha256": "28bbfd40077b1832fbcd5770d68e23da4b2d772ccd671996cde6fedf1b7a06f5",
+      "size_bytes": 33321
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Binomial.mqh",
+      "sha256": "959f235fe6b50367d75fdcfd19842ef302d0b8d08e2a61e86eb543091591eae2",
+      "size_bytes": 35728
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Cauchy.mqh",
+      "sha256": "c1cfe706a6ff72106ec97dc4fe5cf48ca369851d767c2a01cb66c6d3dd5615c4",
+      "size_bytes": 25520
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/ChiSquare.mqh",
+      "sha256": "837a6f4ecd60e160bf71bc7a5ac7f90ba1505bc8a3d476a2cb3ad8426160b915",
+      "size_bytes": 24891
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Exponential.mqh",
+      "sha256": "911a1e329c1e1e8d858ede8d803db0936945af4691a1190a947cf90fc8083e0d",
+      "size_bytes": 24774
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/F.mqh",
+      "sha256": "5c73765f6bcfef7b22944e17c0c0ca057efbdbaaea3e358e400d9d5c9bff8cb4",
+      "size_bytes": 27612
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Gamma.mqh",
+      "sha256": "eb543f9c096dba4c737d11365c9074d97e70f6c16bb1ca781ad7a03ca2b94084",
+      "size_bytes": 32373
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Geometric.mqh",
+      "sha256": "4ed44af7871049b019490b1b97be9e6c0ddd530d4af5ecd1bb8728433db7cd72",
+      "size_bytes": 25490
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Hypergeometric.mqh",
+      "sha256": "55c5c27735e441effef4ce4f164cc4f4ed40f452788ee7d7a05035e129fdf2cc",
+      "size_bytes": 35334
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Logistic.mqh",
+      "sha256": "a3576780cdfb7a778fc26390fbd8d8ce8c3bbf13b79479c36cde038b38ee13c7",
+      "size_bytes": 27860
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Lognormal.mqh",
+      "sha256": "f82e359b0fae9f1717d63fa46344f829b769e9343a40c6a0434aa0b692620032",
+      "size_bytes": 29245
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Math.mqh",
+      "sha256": "cf2ccf12bcfb69feaa34f1041df12683ded37f0e1fceb5c7315c24b81fb61de9",
+      "size_bytes": 434790
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/NegativeBinomial.mqh",
+      "sha256": "6b49882d4bacb1fd575ac9ce9d25187ece4ddeac6525e207c350c402412788ac",
+      "size_bytes": 29634
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/NoncentralBeta.mqh",
+      "sha256": "b2d2a9999450dc37ccfb735ce2aa32f41c0ebef68301df2dcdcf707c232e9185",
+      "size_bytes": 41195
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/NoncentralChiSquare.mqh",
+      "sha256": "6438ac17c0f4ec5cf59e423cee5b5b454b9765203424f86588441bc367f969dd",
+      "size_bytes": 37497
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/NoncentralF.mqh",
+      "sha256": "5509913a19379edbd3e33cd701007eabdedcd1600dc4b960680c554e278ec895",
+      "size_bytes": 35826
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/NoncentralT.mqh",
+      "sha256": "7ec7871d3e6a8a20c3bbd54b2e44f60fd7c88e70c4a09a555a2472a40580e5f3",
+      "size_bytes": 47734
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Normal.mqh",
+      "sha256": "f233b1348aed9608efdfa68035c584351b1d0faafd126fb758c2dccb59f464f9",
+      "size_bytes": 40671
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Poisson.mqh",
+      "sha256": "c576615c959c7c416e4fa79a3adc0ae5f55c7872cbc0056ae226337e412a5e90",
+      "size_bytes": 32547
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674254289800,
+      "relative_path": "MQL5/Include/Math/Stat/Stat.mqh",
+      "sha256": "8ad8556a8c38b0db7f0e09bae1fa9dea14cfc8e540fb18e1f353d73cbaaedb84",
+      "size_bytes": 1139
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Math/Stat/T.mqh",
+      "sha256": "e1149e02fae01193f9d7d335c17c78473218a17e1ed42bd438ad66f4d59ca267",
+      "size_bytes": 28548
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Math/Stat/Uniform.mqh",
+      "sha256": "c5519a3d108ef794e5a0742b3232df60cdd5fd6b02a5dfaa0ef1c0135058b0b7",
+      "size_bytes": 25659
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Math/Stat/Weibull.mqh",
+      "sha256": "4b876d377c9bf405615b33aec26968e84609a7cf45484fd9d7300be14fbe8bbd",
+      "size_bytes": 27532
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/MovingAverages.mqh",
+      "sha256": "1b4f2e671af46e881c3a9c31f0d324caac165232f4987247bb2819e0e390d8c5",
+      "size_bytes": 10737
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Object.mqh",
+      "sha256": "dfad4fdb6d1bf47cf43fcbc2882e52979459f17a776f75f250a7c32d0623ab35",
+      "size_bytes": 2036
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/OpenCL"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/OpenCL/OpenCL.mqh",
+      "sha256": "f08b8ccc298f3479660064654b0fb417dafdfae0388d696073a14c0f5535f67c",
+      "size_bytes": 28662
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/StdLibErr.mqh",
+      "sha256": "04bb2c47b1b04dceb052e6dba1f85e0330c53abc602f341e2ea95ea1498ab28b",
+      "size_bytes": 683
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Strings"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Strings/String.mqh",
+      "sha256": "1180213f8f38facfc6aa1b7753f5b875a478ae432f127e5e8ba7e5b685cee2ce",
+      "size_bytes": 13847
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Tools"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674258316600,
+      "relative_path": "MQL5/Include/Tools/DateTime.mqh",
+      "sha256": "4622eda26d8f2ccb2de2b7d36ea6756241e03839aa8880272d44f23a2bf1725c",
+      "size_bytes": 17883
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/Trade"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674260321400,
+      "relative_path": "MQL5/Include/Trade/AccountInfo.mqh",
+      "sha256": "f0230a9df2866a09db226c4382a3b53c8c691cbdaef1c4656f41f035a4c8b31b",
+      "size_bytes": 18130
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674260321400,
+      "relative_path": "MQL5/Include/Trade/DealInfo.mqh",
+      "sha256": "9d6fb4e7d8754eaee761e43943dc49cdc3a32793ee8438119d939ea7bad71880",
+      "size_bytes": 16313
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674260321400,
+      "relative_path": "MQL5/Include/Trade/HistoryOrderInfo.mqh",
+      "sha256": "e88f6be450462a045470315887ef751a4510da65a5115325dc88542743fc52f8",
+      "size_bytes": 20018
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261023000,
+      "relative_path": "MQL5/Include/Trade/OrderInfo.mqh",
+      "sha256": "d0e479578ef91d2ef1b07ae63d28ae54e15cebb914dd10e5d4510c269a9ca999",
+      "size_bytes": 22087
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261023000,
+      "relative_path": "MQL5/Include/Trade/PositionInfo.mqh",
+      "sha256": "dd720b755c7f23dcc109fc81bcf0772b907411d545e4a1117421737bb9ff6897",
+      "size_bytes": 15820
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261023000,
+      "relative_path": "MQL5/Include/Trade/SymbolInfo.mqh",
+      "sha256": "58d0eedd27ca11d93f4c81cab4c9fe0531fe2b844f871b54e200c32a3574c0e1",
+      "size_bytes": 35851
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/Trade/TerminalInfo.mqh",
+      "sha256": "19a74c4b59bd27d3c71e4e80a6e437b9c8aa7aad16eef4e17ab6bc5eaa8c2482",
+      "size_bytes": 10730
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/Trade/Trade.mqh",
+      "sha256": "96e6781624534377fe7971cba52cca3d62d1b030bc10d5e4ebf3ed8c541399ed",
+      "size_bytes": 69541
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/VirtualKeys.mqh",
+      "sha256": "6ea56b99ef3713d624b8cbbbcc2066d86dd50f204a12ce9a28f54dbbcbb403a3",
+      "size_bytes": 5755
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Include/WinAPI"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/WinAPI/errhandlingapi.mqh",
+      "sha256": "0704bb773eff846f65ca09a373fefbc7dca274add04e582b3bcde3243d805c7e",
+      "size_bytes": 1933
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/WinAPI/fileapi.mqh",
+      "sha256": "f5613d4677d764afa8b57e5e6a02aa3d07e5ae6cc45b225891a6af7e48769a0a",
+      "size_bytes": 9487
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674261789200,
+      "relative_path": "MQL5/Include/WinAPI/handleapi.mqh",
+      "sha256": "ae04961e7a5b7ba777d7e29e198881bd836c0db0785388fc458b411f0db7aea5",
+      "size_bytes": 1165
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/libloaderapi.mqh",
+      "sha256": "28d38979abd0274754a05a597496c85ce7acefdc0315cafe9c9ed8ca04d894cd",
+      "size_bytes": 2952
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/memoryapi.mqh",
+      "sha256": "be31f67f14d4f6d71e0679f93d6f14b796c70808d1e88d117ba985d8c94123c0",
+      "size_bytes": 5838
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/processenv.mqh",
+      "sha256": "2f7157f47056ce05e34e0b60d6f9c2f5f1936934bc38bb1ca91f7dfe213f240e",
+      "size_bytes": 1589
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/processthreadsapi.mqh",
+      "sha256": "fa8bc32840d9554de123a436cc6bc753fbcfe8ade03d661db6d91645837090fd",
+      "size_bytes": 10250
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/securitybaseapi.mqh",
+      "sha256": "0ca758354310149b116a0b46559296c319721cbace1d22b743af3ead5061a574",
+      "size_bytes": 16588
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/sysinfoapi.mqh",
+      "sha256": "01435555838df6e14640985cfcb2de4e15d17676b068e1d278f274a69c9acc65",
+      "size_bytes": 4827
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/winapi.mqh",
+      "sha256": "6e26412d54376eaca7c1dc3c53a19a25e9be6d060d4537c7b8d1d3681748bebb",
+      "size_bytes": 827
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/winbase.mqh",
+      "sha256": "1b1c2e4ef8b8a8b30c59f240f8f73c35273d1e1800542e663b0c23d574fe048d",
+      "size_bytes": 44329
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674263795400,
+      "relative_path": "MQL5/Include/WinAPI/windef.mqh",
+      "sha256": "0aaa38ffd9c9a8b5f7ef955eb389616c298207db99a59dc15f24f2d306279162",
+      "size_bytes": 8839
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Include/WinAPI/wingdi.mqh",
+      "sha256": "433021ec7ca1e16d967f677830409ca89dfa4149fb851839b36b043f88d04b95",
+      "size_bytes": 64995
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Include/WinAPI/winnt.mqh",
+      "sha256": "1ce3d7b033ce09c0e5dc2c7d2bffb53a0bb4deb71ed45f980571e1099e43da6e",
+      "size_bytes": 97680
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Include/WinAPI/winreg.mqh",
+      "sha256": "50cca441d2aac61262b346eaa68178cb743b48c72ce2ed3ec0d335a17eab4395",
+      "size_bytes": 6133
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Include/WinAPI/winuser.mqh",
+      "sha256": "f37f96e413d839784f428b9087cf78ee25b490307ffcbfc69c6a8f23eb65be22",
+      "size_bytes": 82945
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Examples"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Indicators/Examples/AD.mq5",
+      "sha256": "b97114537b6a213e71bad8ae488fe1a0a5a715e87e03529808ed5f9aab1a90fe",
+      "size_bytes": 3375
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Indicators/Examples/ADX.mq5",
+      "sha256": "09fea97100a524efdf0f6ed7c16b44564c0be69c170e81eee6569a5ddf25dcaf",
+      "size_bytes": 5609
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Indicators/Examples/ADXW.mq5",
+      "sha256": "656171d3e82997177ee24e06b3d61fa2f333c5fcf90a2b8bb9122f23bfc4854d",
+      "size_bytes": 6836
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/AMA.mq5",
+      "sha256": "5e9869ffb969a6ae5304fa3e6c9705e779e5ce2b2f44bc7a88c3395f27f6863d",
+      "size_bytes": 5035
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/ASI.mq5",
+      "sha256": "1fc6964d18bd4ab6c0db540876bcb53a69af580c820cf91710049b221ebc568a",
+      "size_bytes": 4129
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/ATR.mq5",
+      "sha256": "20e53e1857a0aa342c97f312a6f3f273ece06fe742079fda01e87f231d7f9e80",
+      "size_bytes": 3880
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674265595000,
+      "relative_path": "MQL5/Indicators/Examples/Accelerator.mq5",
+      "sha256": "da0994c63bc2a93abedb884a13cca9d93749d6a0093034ac019fe94fb3ade813",
+      "size_bytes": 5306
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/Alligator.mq5",
+      "sha256": "36c64ceeaee97c99479dc6641d52ccb1e891142b1e995ebd1fab597cd431aa59",
+      "size_bytes": 6064
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/Awesome_Oscillator.mq5",
+      "sha256": "bb6a3c028cf9a9621f6262358e0e3e600eda3dd9d55ac0760bad38e3119a2b06",
+      "size_bytes": 4591
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/BB.mq5",
+      "sha256": "42088d1967cb51d87f9a3fe25f83f3e660f265af9946c3cafd08b0e47cf08745",
+      "size_bytes": 5817
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/BW-ZoneTrade.mq5",
+      "sha256": "a4a666ad94bf8ebbe1dd5f02f46111a8595036cab7b0fb2556afec36c911f18f",
+      "size_bytes": 5020
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/Bears.mq5",
+      "sha256": "beabde3e4fa755117e7c427d4afc915b8c0915ddef20be9ac018fd501b18b1fb",
+      "size_bytes": 3688
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/Bulls.mq5",
+      "sha256": "31b9965398f7ddcc0603e22b2f0636a24901c5f1559c122ab911ebe61b7b7b4c",
+      "size_bytes": 3693
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/CCI.mq5",
+      "sha256": "856b0193f81239bafb31de5d522c487f2c05ccceca7558e69b6c3336c2dd41fd",
+      "size_bytes": 3641
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/CHO.mq5",
+      "sha256": "f36f24d0cf6011a10539cc31ef75fc37318d68d014de23774feadddd9a51fd92",
+      "size_bytes": 5356
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/CHV.mq5",
+      "sha256": "69f95f4c72730e180d993c36e33c8841f55758ada6572f277dc41bc6fb9457b8",
+      "size_bytes": 4440
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Examples/Canvas"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674267598900,
+      "relative_path": "MQL5/Indicators/Examples/Canvas/FlameChart.mq5",
+      "sha256": "ffaca2fcac14e15899d2b87c1e92f94d918f7bc932e5f5fefdd34dfa008c8bee",
+      "size_bytes": 3577
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/ColorBars.mq5",
+      "sha256": "df27a398bf3f31fb0fb29d0328ba1c89ff96d987c1529baa51b57d2f0987c253",
+      "size_bytes": 3059
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/ColorCandlesDaily.mq5",
+      "sha256": "c2051c08c14886be1488b4097cd43c875385a08150e8c6da60a886dcb882ccff",
+      "size_bytes": 3136
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/ColorLine.mq5",
+      "sha256": "1d583645ab730b2849df6d05e31c15887d84f8369d30fbe3547511eb16ccb736",
+      "size_bytes": 5175
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Custom Moving Average.mq5",
+      "sha256": "bfb490b0c6c77b96c1d51f780a974f9d8f5f4877d0be73905dd7f66ddd05c54c",
+      "size_bytes": 7326
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/DEMA.mq5",
+      "sha256": "90500fbfbc2447bf86e48b2f46b3a1f1abf81c45228857b771e34de132279f5a",
+      "size_bytes": 2940
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/DPO.mq5",
+      "sha256": "bd3e00ebc693ff4b3ccebb02d569519c9ae7d7e41e12d93674a1eb35717c9c9e",
+      "size_bytes": 2876
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/DeMarker.mq5",
+      "sha256": "3853d2020d29c20a5901d56b79728ca8369b6bd5550961d32dc17aad24b69cf0",
+      "size_bytes": 4177
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Envelopes.mq5",
+      "sha256": "d8b8df9090bfbef5fa72743cf4a63ad01ea0bc4591256a91c517022b4b73f6aa",
+      "size_bytes": 4337
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Force_Index.mq5",
+      "sha256": "92c8d4b1a03ea75dae3bd39644cef49ec8e4da67c4baf64c84992c4a65ba1745",
+      "size_bytes": 3927
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/FrAMA.mq5",
+      "sha256": "aef96f4966a9cb4461613739545890e4714a5ef9c1370a02668af7b93ab25c47",
+      "size_bytes": 3675
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Fractals.mq5",
+      "sha256": "ebb66e520821fd027a22fd633a49c0f6d96e1c736bf9a2770bb7412448daee33",
+      "size_bytes": 3424
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Gator.mq5",
+      "sha256": "71a34a799bf2fb9eab6ddfc5d73179da0e7065e44298fe4586f4b013ac8ead2e",
+      "size_bytes": 10247
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Gator_2.mq5",
+      "sha256": "7ecaf8c892bf0011309a748e28c9556e37cb39774c229bc7b9a151803d35ef02",
+      "size_bytes": 9877
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Heiken_Ashi.mq5",
+      "sha256": "501fed094ffb1d8f16afad3cf58e5534dab3a9393797e0910d6d0109c26e4bcd",
+      "size_bytes": 3733
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Ichimoku.mq5",
+      "sha256": "a5e87861235942cdde6b4cbfa6775931b84377343c144b0c61a0c82b65d2cf71",
+      "size_bytes": 5204
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/MACD.mq5",
+      "sha256": "1427f39db9467618f28b41dda516e11fbd6850e716bd41d6073d250daa754290",
+      "size_bytes": 4901
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/MFI.mq5",
+      "sha256": "cb60e7eb9883281d3621337538ff9828d1acf759d21261568aa9d75bc6eaf9a2",
+      "size_bytes": 4823
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/MI.mq5",
+      "sha256": "e4c57f1b307acd2207d8ec6af6ce1817b56500d1d3a99ff45811a960c8a8abd7",
+      "size_bytes": 4876
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/MarketFacilitationIndex.mq5",
+      "sha256": "33d686d7ef10978565bdf81aac3eab2e896856065e513cb7e0d3ffdddc069cd3",
+      "size_bytes": 5003
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674269603500,
+      "relative_path": "MQL5/Indicators/Examples/Momentum.mq5",
+      "sha256": "4661ca4f71b73a1839e598e9f8992c443a03ed850ee8b1a23bcee7b74e8d3597",
+      "size_bytes": 2870
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/OBV.mq5",
+      "sha256": "fdd69f6343b7cfa05a78e17f3816fba423544c154781646c9bc484375529b2dc",
+      "size_bytes": 3410
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/OsMA.mq5",
+      "sha256": "43a2fca7677acd9a62a715e69ffd0337d52b71210be2277783a0d74d357a0eff",
+      "size_bytes": 5177
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/PVT.mq5",
+      "sha256": "dd3e0c726292198eec98163d5ac8900e3f2000885cb84c3c92906a6092dea8e6",
+      "size_bytes": 3309
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Examples/Panels"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Examples/Panels/ChartPanel"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Panels/ChartPanel/ChartPanel.mq5",
+      "sha256": "369f8a55670ed69481120d0f5bf437cc01beb8d133e7b6839dfd390389b0b1d8",
+      "size_bytes": 2757
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Panels/ChartPanel/PanelDialog.mqh",
+      "sha256": "0a387d7bab868ff42c298344cadffbea6a72544270cdc58018b337933568eb14",
+      "size_bytes": 15250
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Examples/Panels/SimplePanel"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Panels/SimplePanel/PanelDialog.mqh",
+      "sha256": "684a06b93f7c3129df1bf93e00b03b366dbc65814fa0c2a8b80a06d1730fa7ba",
+      "size_bytes": 14765
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Panels/SimplePanel/SimplePanel.mq5",
+      "sha256": "0b0b164712a20870a1a80ebc934e75f2c5eec2c07b6d389631914c928da767d0",
+      "size_bytes": 2757
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/ParabolicSAR.mq5",
+      "sha256": "499d8e67c0d32fdaa729d078d7105d90c83da308345c73f00dcc2a88383f3e95",
+      "size_bytes": 7056
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Price_Channel.mq5",
+      "sha256": "3cad57e4d2ca6587987354d8ce5bf548537c19c9edb4a0ca59358fbc07410204",
+      "size_bytes": 4521
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/ROC.mq5",
+      "sha256": "0a2555f85b1cd6aa2e39166da9aa1b2a08f91c680497f55d95765a5b302491cf",
+      "size_bytes": 2682
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/RSI.mq5",
+      "sha256": "8f5a64a9141335ee230601229fb08221d1cf2915413396c9c41e0ff37d2f53c8",
+      "size_bytes": 4453
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/RVI.mq5",
+      "sha256": "ab6f66e19b0fdb1d1da81ce42da5d41c6c978607b2be78b6eafbe09c4e378dc0",
+      "size_bytes": 4258
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/StdDev.mq5",
+      "sha256": "aca09ac4e9f8fb78a600a0a673d6e826367c19a761a93de679ae9619b5d47e71",
+      "size_bytes": 5185
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Stochastic.mq5",
+      "sha256": "ec53c80d0d8dd0864885c824ed6d57d05fb895b9cb7c559fddf249a3f3f63bbc",
+      "size_bytes": 4996
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/TEMA.mq5",
+      "sha256": "f328c25b7d53bff79fca0300c226c10ba8d04806b2fa9bc869589cdfd156fd25",
+      "size_bytes": 3236
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/TRIX.mq5",
+      "sha256": "4ee9f83a1b12c09111e810d632522b45104aaeb376d0e563dfa5c23590892b4b",
+      "size_bytes": 3343
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/Ultimate_Oscillator.mq5",
+      "sha256": "2c26e089f8c425a3c35b15d3e5b1ce885688460138fa958dc40b7f2f2233b68a",
+      "size_bytes": 6907
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674273297500,
+      "relative_path": "MQL5/Indicators/Examples/VIDYA.mq5",
+      "sha256": "dfa27941db7756904b9fb7f67b0cb76ad6edb671197a0063593e3d5dfd5cff28",
+      "size_bytes": 3799
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/VROC.mq5",
+      "sha256": "c8d436973bd877a8ce1aa7d8812b03267d5d8cf71f25a57f6382daa1a33eaaaf",
+      "size_bytes": 3968
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/Volumes.mq5",
+      "sha256": "fc1b1a119c069fc32f722b2f12679073c32af5d186d00ea40ebaacd8235c1b0d",
+      "size_bytes": 3368
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/WPR.mq5",
+      "sha256": "3d7a8b8115a6a845c1ec6c9ba1728f8b3c2bcb1fcfb80ea30348088e7143bca4",
+      "size_bytes": 8490
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/W_AD.mq5",
+      "sha256": "527d25bbe0e00beeffa17f44a48b5f6f539bb8c46efb7ce4d70e1f0f1a6314d0",
+      "size_bytes": 3381
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/ZigZag.mq5",
+      "sha256": "f0bd924e0e4cec473bc6cae7e2ecdf921b978ffd8bc723a7a9d85605080b9384",
+      "size_bytes": 18820
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674276392100,
+      "relative_path": "MQL5/Indicators/Examples/ZigzagColor.mq5",
+      "sha256": "fd17e3a281c0b861836db4a661e182ff3cc8cff10d42f7e0291798639034762a",
+      "size_bytes": 9567
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Indicators/Free Indicators"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/Camarilla Channel.mq5",
+      "sha256": "8c3b3f503bae2dd97a2604e6c744e1a1a21fbc201e312f98aeba4eab8c0082b4",
+      "size_bytes": 10647
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/DeMark Channel.mq5",
+      "sha256": "1145e2c1ef93c916f55ee36cde4d2934422df400ace4bb4a5af2a7275d4161d4",
+      "size_bytes": 8529
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/Donchian Channel.mq5",
+      "sha256": "d9c4acbcb1691f57638f294eae0f422c133c28963b639f5713742da13eee0543",
+      "size_bytes": 14346
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/Fibonacci Channel.mq5",
+      "sha256": "ad25757b2714963fc1078e7a23449904a2975fcf781eeb0bcd0bb2617f5240d5",
+      "size_bytes": 11225
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/Keltner Channel.mq5",
+      "sha256": "126416a38d6ddeee8ed4cc0407b01d529fa9317eaadc0cce2dd0cdcdd48a238d",
+      "size_bytes": 9871
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/MarketProfile Canvas.mq5",
+      "sha256": "06969d43515181bb6ee59d7b2a68b858eca64631cda8474c61e4fe36f9e5c623",
+      "size_bytes": 19467
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/MarketProfile.mq5",
+      "sha256": "c4a7d59f01de1c5e48b347676d6492ce72a52720f395148ddc4d56ec016ce3cc",
+      "size_bytes": 8828
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/MurreyMath Channel.mq5",
+      "sha256": "22fd0ff50820ad6f571e38562cf9a7248a015ee5f950bec2e8daf17c20cecb53",
+      "size_bytes": 15173
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/NRTR Channel.mq5",
+      "sha256": "005e4fb7929551a070a7bd3f47527b65c2c3c94c83447277a1c0be2ba6d00b30",
+      "size_bytes": 11473
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674277714800,
+      "relative_path": "MQL5/Indicators/Free Indicators/Parabolic Channel.mq5",
+      "sha256": "be4e46c9e2af255e37f7ee75f4b56259c89caeae6fe4cecde8b84e441386d668",
+      "size_bytes": 7589
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Indicators/Free Indicators/Pivot Channel.mq5",
+      "sha256": "5b24dfd1cbe41b9442db9bf20033ad58fb2bc153888696a0a68b762a6c02751f",
+      "size_bytes": 11242
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Indicators/Free Indicators/Woodie Channel.mq5",
+      "sha256": "23f681851bff86e9bb2282bcd750b87f9f88439a424c26a46fd2ca360974b5f0",
+      "size_bytes": 10104
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Libraries"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Charts"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Charts/Default"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Community"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Symbolsets"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Templates"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/Tester"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678127982000,
+      "relative_path": "MQL5/Profiles/Tester/A1XauR6NativeSpreadProvenanceProbe.set",
+      "sha256": "58b61eb68227d4a39c16797b39d851880eb305345418d8443435853fd1c328dc",
+      "size_bytes": 1198
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Profiles/deleted"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/AccountInfo"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/AccountInfo/AccountInfoSample.mq5",
+      "sha256": "495327a7893fc8a303acc524008e1fc6b96b952f13b48a3337ff931436131e1d",
+      "size_bytes": 5904
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/AccountInfo/AccountInfoSampleInit.mqh",
+      "sha256": "eedfc7072da2f3e4770d847723f3660cee28d156626a70a4742f83c74998fec9",
+      "size_bytes": 917
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/ArrayDouble"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/ArrayDouble/ArrayDoubleSample.mq5",
+      "sha256": "2628926e445ed88b7e54464b24ee77f6c6a2045b97a4772d6da06cc025d7481b",
+      "size_bytes": 4195
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/Canvas"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/Canvas/CanvasSample.mq5",
+      "sha256": "ce06db30c619f378cdd91eb58591e312bab6a27adee49b8ac29844c120711ea1",
+      "size_bytes": 6073
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/Canvas/Charts"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/Canvas/Charts/HistogramChartSample.mq5",
+      "sha256": "9040a8aad1eb90e50e4750a77a32572ec6277c125b3bad81bd56b9f44d6242f7",
+      "size_bytes": 2205
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/Canvas/Charts/LineChartSample.mq5",
+      "sha256": "5609241c84cb5a85e59952e2df6b3a892804e155955a10313cf42550bfed3439",
+      "size_bytes": 2172
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/Canvas/Charts/PieChartSample.mq5",
+      "sha256": "271ef46274d87cb42a005bcbd86a7a6e642987a6a6d9060c20bfb3c49bf6be33",
+      "size_bytes": 3201
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/ObjectChart"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/ObjectChart/ChartSampleInit.mqh",
+      "sha256": "61006878c882fe056027c04fcf827ada9432705fdf14589b08c81b7dc7bb8bef",
+      "size_bytes": 4182
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/ObjectChart/ObjChartSample.mq5",
+      "sha256": "43008e6f356f49ca85ef98594f3762920eee95dd34d376cc91b870dfadc394fb",
+      "size_bytes": 25357
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/ObjectSphere"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/ObjectSphere/Sphere.mqh",
+      "sha256": "16eebf6f048a4fdc3a017c7ee5c0082afb610f376a25b3df79065b39354978db",
+      "size_bytes": 8030
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/ObjectSphere/SphereSample.mq5",
+      "sha256": "c8dfe77126c8d43bb120619032efb8b909bb54ec9d302904e04421b76b7d8aa8",
+      "size_bytes": 6030
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/BitonicSort.mq5",
+      "sha256": "3a88afa9e032ebc98bd9ce1dd44feb6eb90d3925d0cbc9fb92d3a42c0834cf0b",
+      "size_bytes": 7941
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/FFT.mq5",
+      "sha256": "5f082581f0cbdbba4c398ef8192ddfc5f81cbfcacea0eb2ae64bfa30b37f8c5d",
+      "size_bytes": 13394
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Kernels"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Kernels/bitonicsort.cl",
+      "sha256": "17feaed36aa810c91e35a2491aa9b5c6babf63f8c5904953fb052c45b7c4145a",
+      "size_bytes": 1516
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674280464200,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Kernels/fft.cl",
+      "sha256": "824097643dcc92e69639073158b0d78e6413278f0632ff1873a2de61a9241704",
+      "size_bytes": 6038
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Kernels/matrixmult.cl",
+      "sha256": "ec39cc5f45cdbfb37b3d9af2b5a025cf99ff6ccf366d63a962c2528e65e9dc1d",
+      "size_bytes": 2808
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Kernels/wavelet.cl",
+      "sha256": "11a5efc91e94184a7984666f164c1f2c2d6564ecebda943a53ff048dd0dca706",
+      "size_bytes": 1792
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/MatrixMult.mq5",
+      "sha256": "dc25756a31e5e271695679bb82cb72ce9df0688c2dd83ee5d0245da854ea0d5d",
+      "size_bytes": 8654
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Double/Wavelet.mq5",
+      "sha256": "863cd428ff2a5ede77f14e4b7a556548ed2c52456b8e2a6b59aa61dad11eb55f",
+      "size_bytes": 15353
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/BitonicSort.mq5",
+      "sha256": "7eba75955da6b4a67938ca22e39d776125d0b7468e39cd4103408be2021a7255",
+      "size_bytes": 7718
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/FFT.mq5",
+      "sha256": "b7d0e5eef5927a5b3016a5c0220e09f53d14f544ae58273218b7f346dbeca6a6",
+      "size_bytes": 13169
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Kernels"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Kernels/bitonicsort.cl",
+      "sha256": "9cbc43a63fc1db25f56f21911c4efef7e5951f8837c0947d92ac2ecd1b77b239",
+      "size_bytes": 1348
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Kernels/fft.cl",
+      "sha256": "c089ae3a960e62cb61a808f08d5c392d5aae4e991c6e9f68d18940146d2ef927",
+      "size_bytes": 5862
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Kernels/matrixmult.cl",
+      "sha256": "0caf77fd590a5dbc77c3e6e5c6aeb7cbad2c1dcc0710e9bf1f7d5dda7bcdd5dd",
+      "size_bytes": 2635
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Kernels/wavelet.cl",
+      "sha256": "c75677e6e970335ebf09f293a01eaa8954a62822ae1ce328945e5099e59c8439",
+      "size_bytes": 1601
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/MatrixMult.mq5",
+      "sha256": "40329af8f517e578a4b51903d4054cb15aaee855522178f2582b0ef6afc8e7ce",
+      "size_bytes": 8434
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Float/Wavelet.mq5",
+      "sha256": "c466e0846bc780bbb411c2f0ceb7c5faab494fa258bf23d274d22933d6102a9e",
+      "size_bytes": 15753
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Seascape"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Seascape/Seascape.cl",
+      "sha256": "1c57acce8dbe65c68a4b41140840fc2f1c90f83eaedc3fa20244219c29a3193d",
+      "size_bytes": 8264
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Seascape/Seascape.mq5",
+      "sha256": "7c4f338602d531bfc5b1107457821ce05bf6d3970fdd922d98cc47e319849b65",
+      "size_bytes": 6215
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OpenCL/Seascape/Seascape.mqproj",
+      "sha256": "43791bb6082c54efe2cefda05f3ffa7839009e90ef2562c72ac7e144c8ddd99f",
+      "size_bytes": 2486
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/OrderInfo"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OrderInfo/OrderInfoSample.mq5",
+      "sha256": "85a76de5a1b9e0b82c2bde718a36078c73d16dcbeb39345b4e90a76e2f5b5134",
+      "size_bytes": 7459
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/OrderInfo/OrderInfoSampleInit.mqh",
+      "sha256": "bdb12525147d070e787845b7a2196fb182bc335970402eb3336d746b345e073f",
+      "size_bytes": 931
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/PositionInfo"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/PositionInfo/PositionInfoSample.mq5",
+      "sha256": "01464eb5261056ea8f79fa0d6780903319d3808c455eba2bf7b8fec4fd99f3e3",
+      "size_bytes": 7287
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674284569800,
+      "relative_path": "MQL5/Scripts/Examples/PositionInfo/PositionInfoSampleInit.mqh",
+      "sha256": "5121851e5a6ac6d53d1aba51f2ba6115b9d854e5205fcea3713cf0d6f6c0c55f",
+      "size_bytes": 830
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D/Remnant 3D.mq5",
+      "sha256": "aa0c8f9a0ed89be1bc8221f4961c0a65eb103431af746efe8e70e7e26a4c4ef2",
+      "size_bytes": 5696
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D/Remnant 3D.mqproj",
+      "sha256": "a0126173aad600a5bb2f778f08577c79e76e90bbfa211ae5d989b1cdff5db0b1",
+      "size_bytes": 1744
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D/Shaders"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D/Shaders/pixel.hlsl",
+      "sha256": "1edc6b62da1a960b526764fef22046ef5e913604696fe9a86895272c94cba8df",
+      "size_bytes": 10093
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/Remnant 3D/Shaders/vertex.hlsl",
+      "sha256": "39fc21bf82491eafa68cc54721acbce9bcbf78707e8d8a8682718eed0b4efbb9",
+      "size_bytes": 254
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/Examples/SymbolInfo"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/SymbolInfo/SymbolInfoSample.mq5",
+      "sha256": "1b020a564ff9bf0a1017a4e26ce3d5696aa18c2387344b71ea7a77af2e50f46a",
+      "size_bytes": 8811
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/Examples/SymbolInfo/SymbolInfoSampleInit.mqh",
+      "sha256": "598923acc866abedbf12443e9993104b263a7ff650be415241a9d41b66f5e1cd",
+      "size_bytes": 1774
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/UnitTests"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/UnitTests/Alglib"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674288474100,
+      "relative_path": "MQL5/Scripts/UnitTests/Alglib/TestClasses.mq5",
+      "sha256": "ad64f28d0fd14be2656b999cc1575c4189297965435928bd6b6f3df329ce824a",
+      "size_bytes": 31148
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674292484000,
+      "relative_path": "MQL5/Scripts/UnitTests/Alglib/TestClasses.mqh",
+      "sha256": "cf6b3f3bc5b0b989eaa192816ab1481f1e3e6ccbfb36f8c4e9c3073edcd1661a",
+      "size_bytes": 3105290
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674292484000,
+      "relative_path": "MQL5/Scripts/UnitTests/Alglib/TestInterfaces.mq5",
+      "sha256": "ec4679a5ee6592c01b91d7d35d43ff6e6f45ea6f1e46f053fdcfe22340c5c2dc",
+      "size_bytes": 17911
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Alglib/TestInterfaces.mqh",
+      "sha256": "98e3a59ad32663ad81c4ce441106ea32ab62502258d5d39d748dc14ef4136ac8",
+      "size_bytes": 695999
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/UnitTests/Fuzzy"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Fuzzy/TestFuzzy.mq5",
+      "sha256": "8bb53b2a33023ec5266d6854215c6de36407f92709236834412e7ece3dc5c909",
+      "size_bytes": 27020
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/UnitTests/Generic"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestArrayList.mq5",
+      "sha256": "10096eeec5ab44a7778227d9c026ad43510ab2d2e55f18e99f76d105107235a0",
+      "size_bytes": 34226
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestHashMap.mq5",
+      "sha256": "f8821d9ac3027d959d4aa1e9f4a96da41d33fd6c5eaa3e528b9b35c141742c05",
+      "size_bytes": 6302
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestHashSet.mq5",
+      "sha256": "a195633406850cf1f487a1c81ecd03fa67a96b84d63327e69fcd6d97254ac5b4",
+      "size_bytes": 5013
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestLinkedList.mq5",
+      "sha256": "babcf668c9691f85f3413340ac0b09c487306755af1eaee082d2f2814bdf0e9d",
+      "size_bytes": 62465
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestQueue.mq5",
+      "sha256": "67b7897cc44476910b7f433622a4a9f009f15281ea4eeb2e46c535c13e8001ec",
+      "size_bytes": 8756
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestRedBlackTree.mq5",
+      "sha256": "17bb17595e3d0593580149884ffc9830b0f15a078bd5d3733fc8c46cccaaa350",
+      "size_bytes": 12001
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestSortedMap.mq5",
+      "sha256": "629f76b568e4ffdad50529d1e20fe095261e5b298d305de139156959672b9ef3",
+      "size_bytes": 6443
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestSortedSet.mq5",
+      "sha256": "bfb4340431a388f88a6ce971689484a22c93888d1d6a3ada760f41dce61a8bce",
+      "size_bytes": 5426
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Generic/TestStack.mq5",
+      "sha256": "ab186bb745990bfa69db22d2dae0ecd854aae98bd4189e9d92eaae985e8aa715",
+      "size_bytes": 8752
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Scripts/UnitTests/Stat"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674294334400,
+      "relative_path": "MQL5/Scripts/UnitTests/Stat/TestStat.mq5",
+      "sha256": "7bce5e23ba41f0af6c227cc60e18db284741e43b0dd52518e42f734aede0df4b",
+      "size_bytes": 216091
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674297877800,
+      "relative_path": "MQL5/Scripts/UnitTests/Stat/TestStatBenchmark.mq5",
+      "sha256": "aeab6880c2ffd34f6b82f957a3b3fdc3b739f82c883fd28c136b6ecd9d6e26b1",
+      "size_bytes": 58178
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913674297877800,
+      "relative_path": "MQL5/Scripts/UnitTests/Stat/TestStatPrecision.mq5",
+      "sha256": "1b8b05f5952d202457433954cb24751f9f0c663f5ecf61ba994b717c6a7ad9df",
+      "size_bytes": 16162
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/Services"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "MQL5/experts.dat",
+      "sha256": "a24e3c497bd902239162336c3e8f96a98419c545aa66df208727b0e4d42c98a3",
+      "size_bytes": 989
+    },
+    {
+      "kind": "directory",
+      "relative_path": "MQL5/logs"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207179434413200,
+      "relative_path": "MetaEditor64.exe",
+      "sha256": "2c0c8e9e5c1239e30e8a908d9205cdb01b9cdfcf876752e43bd7a755cce58ad3",
+      "size_bytes": 109408696
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Reports"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1774883261796030100,
+      "relative_path": "Terminal.ico",
+      "sha256": "f4e57d6edeecacf7ef202ed3e8ae5937554fc26b7a49f30acdef2cfc0240fc36",
+      "size_bytes": 410598
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Tester"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Tester/logs"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "Tester/logs/20260713.log",
+      "sha256": "bbf0eb013c220095121d07ef5ec186942578a7bf45b8b1d421199f0829343732",
+      "size_bytes": 272
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Custom"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Custom/history"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Custom/ticks"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/history"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/mail"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/news"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/Default/news/news.dat",
+      "sha256": "8a031f2a3b8dcb856223be5cad6a5acbb53fb7a31b52170282cc814fc4cb95ab",
+      "size_bytes": 428
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/subscriptions"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/symbols"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/ticks"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/trades"
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/Default/trades/0"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/Default/trades/0/cache.dat",
+      "sha256": "6d603a87983f16d05a7e9450e5c5805d981ad4052641e223ca6403a7f23f78f7",
+      "size_bytes": 4096
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/alerts.dat",
+      "sha256": "23167aa2c87fa44db6a05d80f404cf1f65a7c48f0ff7343050853443338d7232",
+      "size_bytes": 432
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678115442800,
+      "relative_path": "bases/books.dat",
+      "sha256": "8c2c7618150c9aa8b3efeca1fcf0b494247da658f747ecbac514d04c15f8e046",
+      "size_bytes": 428
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/indicators.dat",
+      "sha256": "ca12112c2b230591c39577994f37b5111fe5df60a469bb71bc4585962ee42455",
+      "size_bytes": 25816
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/objects.dat",
+      "sha256": "3f07aefa5d694d0dde98b2d162635a4dbf2e4435e0efe0a874fbc513ccd08105",
+      "size_bytes": 2544
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678115442800,
+      "relative_path": "bases/options.dat",
+      "sha256": "efedb6238460c207f2acd81f4d2aa2876bb10566cd25a490f08c318bf95131a6",
+      "size_bytes": 428
+    },
+    {
+      "kind": "directory",
+      "relative_path": "bases/signals"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678328201200,
+      "relative_path": "bases/strategy.dat",
+      "sha256": "2f74bdba0db9f82aed2c64195c92dd7f35300c935f6dfd52e77587ba90db9f1e",
+      "size_bytes": 32328
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672345769700,
+      "relative_path": "compile.log",
+      "sha256": "03fc7ef2feced44ddcd6c338d4c059083215e8d0c9ecb9d6afe83dbab9ebcacd",
+      "size_bytes": 1590
+    },
+    {
+      "kind": "directory",
+      "relative_path": "logs"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678461324600,
+      "relative_path": "logs/20260713.log",
+      "sha256": "9d6e4f2ae1a30d062df17042ecf646d9fb46dff57825cf99c80cfad1b366a2dc",
+      "size_bytes": 2118
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913678311301600,
+      "relative_path": "logs/metaeditor.log",
+      "sha256": "058eaa710b42784971d0b68b5e3d83f15f349ee566cea10dbca9f90a9b54a6c0",
+      "size_bytes": 2848
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207180616340400,
+      "relative_path": "metatester64.exe",
+      "sha256": "d1e991d84243ec913db8c82505ab69eab48babcb2fa6826ab3871b3360abb646",
+      "size_bytes": 21256304
+    },
+    {
+      "kind": "directory",
+      "relative_path": "np1_g2_compile_workspace"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672345769700,
+      "relative_path": "np1_g2_compile_workspace/A1XauR6NativeSpreadProvenanceProbe.ex5",
+      "sha256": "c23e4cdbc276c641a9367e2f32ae1247edb7ef1a0adace70e65ec5f255023222",
+      "size_bytes": 26148
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672345769700,
+      "relative_path": "np1_g2_compile_workspace/A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672345769700,
+      "relative_path": "np1_g2_compile_workspace/compile.log",
+      "sha256": "03fc7ef2feced44ddcd6c338d4c059083215e8d0c9ecb9d6afe83dbab9ebcacd",
+      "size_bytes": 1590
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783913672345769700,
+      "relative_path": "np1_g2_compile_workspace/source_manifest.json",
+      "sha256": "74b2c5a03e7db6eb80d86bc4d85d7a22fe02b901d76c31532ce7318768c56565",
+      "size_bytes": 348
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207179099529300,
+      "relative_path": "terminal64.exe",
+      "sha256": "a36f4bac0fdc2c53cd75bdf0e32e627660dd8d9c1eb1e9f3834acfbce93df165",
+      "size_bytes": 109817504
+    }
+  ],
+  "exists": true,
+  "root": "C:\\MT5A1NP1SpreadProvenanceCleanG2"
+}
