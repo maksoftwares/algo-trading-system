@@ -1,0 +1,614 @@
+{
+  "schema_version": "a3_ml_shared_account_replay_status_v1",
+  "status": "RESEARCH_GATES_FAIL",
+  "created_at_utc": "2026-07-13T05:54:26.688347Z",
+  "scope": {
+    "symbol": "XAUUSD",
+    "period_start": "2016-07-01T00:00:00Z",
+    "period_end": "2026-06-30T23:59:59Z",
+    "initial_balance_usd": 10000.0,
+    "contract_size": 100.0,
+    "assumed_leverage": 20.0,
+    "stress_cost_per_trade_usd": 0.3,
+    "frequency_target_trades_per_market_day": 2.0
+  },
+  "source_audits": [
+    {
+      "source": "r1_box_clean_strict_uptrend",
+      "trades": 367,
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "order_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_orders.csv",
+      "order_sha256": "175151cff1489e42b3f71ac4dc2d8bd539a5d62468841e1c49599eebb2d22330",
+      "magic_numbers": [
+        "932200"
+      ],
+      "mt5_history_quality": "98%",
+      "mt5_equity_drawdown_raw": "1 733.37 (14.43%)",
+      "mt5_equity_drawdown_usd": 1733.37
+    },
+    {
+      "source": "r2_pullback_short_h1_confirm",
+      "trades": 689,
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "order_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_orders.csv",
+      "order_sha256": "46ac211e139f060dc95dfd60755c806be5a18014a262bdfa53b69516be971991",
+      "magic_numbers": [
+        "932200"
+      ],
+      "mt5_history_quality": "98%",
+      "mt5_equity_drawdown_raw": "270.01 (23.65%)",
+      "mt5_equity_drawdown_usd": 270.01
+    }
+  ],
+  "bar_audits": [
+    {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\M5\\XAUUSD_capital_com_M5_20160103_20250701.csv",
+      "sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+      "style": "capital_processed_bid_ask",
+      "rows": 667827,
+      "selected_rows": 633069,
+      "overwritten_boundary_rows": 0,
+      "first_bar": "2016-06-30T23:55:00Z",
+      "last_bar": "2025-07-01T00:00:00Z"
+    },
+    {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\shared_account_replay_bars\\XAUUSD_M5_20250701_to_20260701.csv",
+      "sha256": "7a316737e8188e912c00bda03cf6d62ad55517157715e47e2f2002efa910b17a",
+      "style": "mt5_bid_plus_spread",
+      "rows": 70424,
+      "selected_rows": 70423,
+      "overwritten_boundary_rows": 0,
+      "first_bar": "2025-07-01T00:00:00Z",
+      "last_bar": "2026-07-01T00:00:00Z"
+    }
+  ],
+  "magic_audit": {
+    "by_source": {
+      "r1_box_clean_strict_uptrend": [
+        "932200"
+      ],
+      "r2_pullback_short_h1_confirm": [
+        "932200"
+      ]
+    },
+    "collisions": [
+      "932200"
+    ],
+    "unique": false
+  },
+  "component_calibration": [
+    {
+      "source": "r1_box_clean_strict_uptrend",
+      "mt5_equity_drawdown_usd": 1733.37,
+      "bar_replay_equity_drawdown_usd": 2170.21,
+      "ratio": 1.252018,
+      "pass": true
+    },
+    {
+      "source": "r2_pullback_short_h1_confirm",
+      "mt5_equity_drawdown_usd": 270.01,
+      "bar_replay_equity_drawdown_usd": 265.38,
+      "ratio": 0.982852,
+      "pass": true
+    }
+  ],
+  "profiles": {
+    "unconstrained_shared_baseline": {
+      "contract": {
+        "name": "unconstrained_shared_baseline",
+        "max_concurrent_positions": 1000,
+        "max_trade_initial_risk_pct": 100.0,
+        "max_total_initial_risk_pct": 100.0,
+        "max_same_direction_initial_risk_pct": 100.0,
+        "max_margin_utilization_pct": 100.0,
+        "daily_realized_loss_halt_pct": 100.0
+      },
+      "accepted": 1056,
+      "rejected": 0,
+      "rejection_reasons": {},
+      "statistics": {
+        "windows": {
+          "last_3_months": {
+            "trades": 11,
+            "wins": 6,
+            "win_rate_pct": 54.5455,
+            "net_usd": 139.13,
+            "stress_net_usd": 135.83,
+            "profit_factor": 2.4928,
+            "stress_profit_factor": 2.4343,
+            "max_stressed_closed_drawdown_usd": 77.51,
+            "market_days": 64,
+            "active_entry_days": 9,
+            "trades_per_market_day": 0.171875,
+            "trades_per_active_day": 1.222222,
+            "positive_exit_days": 4,
+            "positive_active_exit_day_pct": 44.4444,
+            "positive_market_day_pct": 6.25,
+            "worst_day_usd": -21.6,
+            "worst_week_usd": -40.99,
+            "worst_month_usd": 12.14,
+            "pnl_by_source_usd": {
+              "r2_pullback_short_h1_confirm": 139.13
+            }
+          },
+          "last_6_months": {
+            "trades": 20,
+            "wins": 15,
+            "win_rate_pct": 75.0,
+            "net_usd": 2812.28,
+            "stress_net_usd": 2806.28,
+            "profit_factor": 31.1747,
+            "stress_profit_factor": 30.6334,
+            "max_stressed_closed_drawdown_usd": 77.51,
+            "market_days": 138,
+            "active_entry_days": 13,
+            "trades_per_market_day": 0.144928,
+            "trades_per_active_day": 1.538462,
+            "positive_exit_days": 10,
+            "positive_active_exit_day_pct": 66.6667,
+            "positive_market_day_pct": 7.2464,
+            "worst_day_usd": -21.6,
+            "worst_week_usd": -40.99,
+            "worst_month_usd": 12.14,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 2673.15,
+              "r2_pullback_short_h1_confirm": 139.13
+            }
+          },
+          "last_5_years": {
+            "trades": 497,
+            "wins": 233,
+            "win_rate_pct": 46.8813,
+            "net_usd": 10975.6,
+            "stress_net_usd": 10826.5,
+            "profit_factor": 3.0137,
+            "stress_profit_factor": 2.9579,
+            "max_stressed_closed_drawdown_usd": 868.47,
+            "market_days": 1304,
+            "active_entry_days": 217,
+            "trades_per_market_day": 0.381135,
+            "trades_per_active_day": 2.290323,
+            "positive_exit_days": 117,
+            "positive_active_exit_day_pct": 51.7699,
+            "positive_market_day_pct": 8.9724,
+            "worst_day_usd": -868.47,
+            "worst_week_usd": -868.47,
+            "worst_month_usd": -376.2,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 10437.77,
+              "r2_pullback_short_h1_confirm": 537.83
+            }
+          },
+          "last_10_years": {
+            "trades": 1056,
+            "wins": 450,
+            "win_rate_pct": 42.6136,
+            "net_usd": 12840.29,
+            "stress_net_usd": 12523.49,
+            "profit_factor": 2.4325,
+            "stress_profit_factor": 2.3694,
+            "max_stressed_closed_drawdown_usd": 868.47,
+            "market_days": 2593,
+            "active_entry_days": 464,
+            "trades_per_market_day": 0.40725,
+            "trades_per_active_day": 2.275862,
+            "positive_exit_days": 212,
+            "positive_active_exit_day_pct": 46.5934,
+            "positive_market_day_pct": 8.1759,
+            "worst_day_usd": -868.47,
+            "worst_week_usd": -868.47,
+            "worst_month_usd": -388.38,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 12014.82,
+              "r2_pullback_short_h1_confirm": 825.47
+            }
+          }
+        },
+        "six_month_blocks": [
+          {
+            "block": "2016-H2",
+            "trades": 83,
+            "stress_net_usd": -64.81
+          },
+          {
+            "block": "2017-H1",
+            "trades": 31,
+            "stress_net_usd": -344.13
+          },
+          {
+            "block": "2017-H2",
+            "trades": 69,
+            "stress_net_usd": 536.96
+          },
+          {
+            "block": "2018-H1",
+            "trades": 69,
+            "stress_net_usd": -208.38
+          },
+          {
+            "block": "2018-H2",
+            "trades": 72,
+            "stress_net_usd": 278.64
+          },
+          {
+            "block": "2019-H1",
+            "trades": 63,
+            "stress_net_usd": 35.05
+          },
+          {
+            "block": "2019-H2",
+            "trades": 20,
+            "stress_net_usd": -22.04
+          },
+          {
+            "block": "2020-H1",
+            "trades": 23,
+            "stress_net_usd": 261.44
+          },
+          {
+            "block": "2020-H2",
+            "trades": 42,
+            "stress_net_usd": 1428.05
+          },
+          {
+            "block": "2021-H1",
+            "trades": 87,
+            "stress_net_usd": -203.79
+          },
+          {
+            "block": "2021-H2",
+            "trades": 52,
+            "stress_net_usd": -237.17
+          },
+          {
+            "block": "2022-H1",
+            "trades": 50,
+            "stress_net_usd": 120.07
+          },
+          {
+            "block": "2022-H2",
+            "trades": 97,
+            "stress_net_usd": 392.79
+          },
+          {
+            "block": "2023-H1",
+            "trades": 65,
+            "stress_net_usd": 495.83
+          },
+          {
+            "block": "2023-H2",
+            "trades": 72,
+            "stress_net_usd": 391.18
+          },
+          {
+            "block": "2024-H1",
+            "trades": 14,
+            "stress_net_usd": 707.13
+          },
+          {
+            "block": "2024-H2",
+            "trades": 47,
+            "stress_net_usd": 830.38
+          },
+          {
+            "block": "2025-H1",
+            "trades": 31,
+            "stress_net_usd": 1402.18
+          },
+          {
+            "block": "2025-H2",
+            "trades": 49,
+            "stress_net_usd": 3917.83
+          },
+          {
+            "block": "2026-H1",
+            "trades": 20,
+            "stress_net_usd": 2806.28
+          }
+        ],
+        "six_month_nonnegative_blocks": 14,
+        "six_month_total_blocks": 20,
+        "six_month_nonnegative_share": 0.7,
+        "equity_daily_rows": 3104
+      },
+      "equity": {
+        "final_stressed_balance_usd": 22523.49,
+        "max_equity_drawdown_usd": 2171.41,
+        "max_equity_drawdown_pct_of_peak": 10.5367,
+        "minimum_equity_usd": 9479.91,
+        "max_concurrent_positions": 14,
+        "max_concurrent_longs": 14,
+        "max_concurrent_shorts": 8,
+        "max_open_initial_risk_usd": 1020.64,
+        "max_margin_utilization_pct": 13.3985,
+        "opposite_direction_overlap_bars": 0,
+        "opposite_direction_overlap_hours": 0.0
+      }
+    },
+    "risk_controlled_shared_account": {
+      "contract": {
+        "name": "risk_controlled_shared_account",
+        "max_concurrent_positions": 3,
+        "max_trade_initial_risk_pct": 1.0,
+        "max_total_initial_risk_pct": 2.0,
+        "max_same_direction_initial_risk_pct": 1.5,
+        "max_margin_utilization_pct": 50.0,
+        "daily_realized_loss_halt_pct": 2.0
+      },
+      "accepted": 705,
+      "rejected": 351,
+      "rejection_reasons": {
+        "MAX_CONCURRENT_POSITIONS": 313,
+        "MAX_SAME_DIRECTION_RISK": 29,
+        "MAX_TOTAL_INITIAL_RISK": 1,
+        "MAX_TRADE_INITIAL_RISK": 8
+      },
+      "statistics": {
+        "windows": {
+          "last_3_months": {
+            "trades": 11,
+            "wins": 6,
+            "win_rate_pct": 54.5455,
+            "net_usd": 139.13,
+            "stress_net_usd": 135.83,
+            "profit_factor": 2.4928,
+            "stress_profit_factor": 2.4343,
+            "max_stressed_closed_drawdown_usd": 77.51,
+            "market_days": 64,
+            "active_entry_days": 9,
+            "trades_per_market_day": 0.171875,
+            "trades_per_active_day": 1.222222,
+            "positive_exit_days": 4,
+            "positive_active_exit_day_pct": 44.4444,
+            "positive_market_day_pct": 6.25,
+            "worst_day_usd": -21.6,
+            "worst_week_usd": -40.99,
+            "worst_month_usd": 12.14,
+            "pnl_by_source_usd": {
+              "r2_pullback_short_h1_confirm": 139.13
+            }
+          },
+          "last_6_months": {
+            "trades": 13,
+            "wins": 8,
+            "win_rate_pct": 61.5385,
+            "net_usd": 784.82,
+            "stress_net_usd": 780.92,
+            "profit_factor": 9.4208,
+            "stress_profit_factor": 9.2463,
+            "max_stressed_closed_drawdown_usd": 77.51,
+            "market_days": 138,
+            "active_entry_days": 11,
+            "trades_per_market_day": 0.094203,
+            "trades_per_active_day": 1.181818,
+            "positive_exit_days": 6,
+            "positive_active_exit_day_pct": 54.5455,
+            "positive_market_day_pct": 4.3478,
+            "worst_day_usd": -21.6,
+            "worst_week_usd": -40.99,
+            "worst_month_usd": 12.14,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 645.69,
+              "r2_pullback_short_h1_confirm": 139.13
+            }
+          },
+          "last_5_years": {
+            "trades": 329,
+            "wins": 139,
+            "win_rate_pct": 42.2492,
+            "net_usd": 3818.54,
+            "stress_net_usd": 3719.84,
+            "profit_factor": 2.2854,
+            "stress_profit_factor": 2.2286,
+            "max_stressed_closed_drawdown_usd": 484.7,
+            "market_days": 1304,
+            "active_entry_days": 171,
+            "trades_per_market_day": 0.252301,
+            "trades_per_active_day": 1.923977,
+            "positive_exit_days": 91,
+            "positive_active_exit_day_pct": 48.9247,
+            "positive_market_day_pct": 6.9785,
+            "worst_day_usd": -177.78,
+            "worst_week_usd": -164.36,
+            "worst_month_usd": -177.78,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 3414.77,
+              "r2_pullback_short_h1_confirm": 403.77
+            }
+          },
+          "last_10_years": {
+            "trades": 705,
+            "wins": 277,
+            "win_rate_pct": 39.2908,
+            "net_usd": 4694.87,
+            "stress_net_usd": 4483.37,
+            "profit_factor": 1.9237,
+            "stress_profit_factor": 1.8603,
+            "max_stressed_closed_drawdown_usd": 484.7,
+            "market_days": 2593,
+            "active_entry_days": 383,
+            "trades_per_market_day": 0.271886,
+            "trades_per_active_day": 1.840731,
+            "positive_exit_days": 168,
+            "positive_active_exit_day_pct": 43.9791,
+            "positive_market_day_pct": 6.479,
+            "worst_day_usd": -177.78,
+            "worst_week_usd": -164.36,
+            "worst_month_usd": -177.78,
+            "pnl_by_source_usd": {
+              "r1_box_clean_strict_uptrend": 4061.92,
+              "r2_pullback_short_h1_confirm": 632.95
+            }
+          }
+        },
+        "six_month_blocks": [
+          {
+            "block": "2016-H2",
+            "trades": 56,
+            "stress_net_usd": -59.59
+          },
+          {
+            "block": "2017-H1",
+            "trades": 19,
+            "stress_net_usd": -263.89
+          },
+          {
+            "block": "2017-H2",
+            "trades": 44,
+            "stress_net_usd": 63.1
+          },
+          {
+            "block": "2018-H1",
+            "trades": 40,
+            "stress_net_usd": -111.77
+          },
+          {
+            "block": "2018-H2",
+            "trades": 52,
+            "stress_net_usd": 107.83
+          },
+          {
+            "block": "2019-H1",
+            "trades": 43,
+            "stress_net_usd": 155.55
+          },
+          {
+            "block": "2019-H2",
+            "trades": 17,
+            "stress_net_usd": -19.98
+          },
+          {
+            "block": "2020-H1",
+            "trades": 15,
+            "stress_net_usd": 175.59
+          },
+          {
+            "block": "2020-H2",
+            "trades": 25,
+            "stress_net_usd": 523.85
+          },
+          {
+            "block": "2021-H1",
+            "trades": 65,
+            "stress_net_usd": 192.84
+          },
+          {
+            "block": "2021-H2",
+            "trades": 39,
+            "stress_net_usd": -92.35
+          },
+          {
+            "block": "2022-H1",
+            "trades": 41,
+            "stress_net_usd": -18.32
+          },
+          {
+            "block": "2022-H2",
+            "trades": 80,
+            "stress_net_usd": 297.49
+          },
+          {
+            "block": "2023-H1",
+            "trades": 42,
+            "stress_net_usd": 137.56
+          },
+          {
+            "block": "2023-H2",
+            "trades": 47,
+            "stress_net_usd": 229.09
+          },
+          {
+            "block": "2024-H1",
+            "trades": 9,
+            "stress_net_usd": 223.32
+          },
+          {
+            "block": "2024-H2",
+            "trades": 26,
+            "stress_net_usd": 253.33
+          },
+          {
+            "block": "2025-H1",
+            "trades": 15,
+            "stress_net_usd": 711.76
+          },
+          {
+            "block": "2025-H2",
+            "trades": 17,
+            "stress_net_usd": 1197.04
+          },
+          {
+            "block": "2026-H1",
+            "trades": 13,
+            "stress_net_usd": 780.92
+          }
+        ],
+        "six_month_nonnegative_blocks": 14,
+        "six_month_total_blocks": 20,
+        "six_month_nonnegative_share": 0.7,
+        "equity_daily_rows": 3104
+      },
+      "equity": {
+        "final_stressed_balance_usd": 14483.37,
+        "max_equity_drawdown_usd": 694.68,
+        "max_equity_drawdown_pct_of_peak": 5.3487,
+        "minimum_equity_usd": 9575.57,
+        "max_concurrent_positions": 3,
+        "max_concurrent_longs": 3,
+        "max_concurrent_shorts": 3,
+        "max_open_initial_risk_usd": 192.63,
+        "max_margin_utilization_pct": 4.3217,
+        "opposite_direction_overlap_bars": 0,
+        "opposite_direction_overlap_hours": 0.0,
+        "largest_component_mt5_equity_drawdown_usd": 1733.37,
+        "conservative_drawdown_usd": 1733.37,
+        "conservative_drawdown_pct_of_initial": 17.3337
+      }
+    }
+  },
+  "capital_required_for_fixed_lot_drawdown": {
+    "at_10pct_usd": 17333.7,
+    "at_15pct_usd": 11555.8
+  },
+  "frequency_target_met": false,
+  "gates": {
+    "baseline_trade_count_reconciles": true,
+    "baseline_net_pnl_reconciles": true,
+    "unique_specialist_magic_numbers": false,
+    "component_equity_calibration": true,
+    "ten_year_stress_pf_ge_minimum": true,
+    "conservative_equity_drawdown_lte_limit": false,
+    "six_month_nonnegative_share_ge_minimum": false,
+    "risk_admission_limits_respected": true,
+    "authorization_boundary_closed": true
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "limitations": [
+    "Source trades come from isolated MT5 component tests; replay cannot reproduce broker margin calls, order rejection, or execution contention exactly.",
+    "M5 bar extrema provide a conservative path estimate but do not preserve tick-level high/low ordering.",
+    "Recent MT5 bars expose one spread value per bar, so ask OHLC is approximated from bid OHLC plus that spread.",
+    "All history is development data, not an untouched final holdout.",
+    "Frequency is measured, never manufactured; no candidate is added to satisfy the target."
+  ],
+  "artifacts": {
+    "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_shared_account_replay.json",
+    "contract_sha256": "e0ca9386d8dd3fddb9982f18a64553ed01a0e1fa469eeb79942626168e7e2e62",
+    "preregistration": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\docs\\A3_ML_SHARED_ACCOUNT_PORTFOLIO_REPLAY_PREREG_2026_07_13.md",
+    "preregistration_sha256": "e1cf924bf26cd38eb599c643b846cf15522def8ffa02f1487763c8c6089baaf3",
+    "mt5_portfolio_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_MT5.json",
+    "mt5_portfolio_sha256": "e7b15ecdb381a044863eae44084f13dbd48f340b393e2eb4236ebe262da98831",
+    "decisions_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHARED_ACCOUNT_REPLAY_20260713_DECISIONS.csv",
+    "decisions_sha256": "e1321181fcc53250fd7c99d83510364b8cfc0cc820f5875ef8c7178ac2f8cb1c",
+    "daily_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHARED_ACCOUNT_REPLAY_20260713_DAILY.csv",
+    "daily_sha256": "b3cbfb2ff82cf6eb99ab63377c4cd84994eec2b78498d27d0399111b8448f5a3",
+    "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHARED_ACCOUNT_REPLAY_20260713.json",
+    "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHARED_ACCOUNT_REPLAY_20260713.md"
+  }
+}
