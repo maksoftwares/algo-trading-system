@@ -44,7 +44,14 @@ enum MomentumSignalMode
    SIGNAL_BEAR_HTF_RESISTANCE_SWEEP = 18,
    SIGNAL_BEAR_DOWNSIDE_IMPULSE_RETEST = 19,
    SIGNAL_R1_H1_PULLBACK_LONG = 20,
-   SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT = 21
+   SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT = 21,
+   SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT = 22,
+   SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG = 23,
+   SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT = 24,
+   SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK = 25,
+   SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG = 26,
+   SIGNAL_R2_M15_IMPULSE_M5_CONTINUATION_SHORT = 27,
+   SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM = 28
   };
 
 enum RegimeRouterMode
@@ -55,7 +62,9 @@ enum RegimeRouterMode
    REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3,
    REGIME_ROUTER_R4_CHOP_ONLY = 4,
    REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY = 5,
-   REGIME_ROUTER_R3_COMPRESSION_ONLY = 6
+   REGIME_ROUTER_R3_COMPRESSION_ONLY = 6,
+   REGIME_ROUTER_R3_COMPRESSION_RELEASE_SHOCK_BLOCK = 5,
+   REGIME_ROUTER_R3_INSIDE_COMPRESSION_TREND_SHOCK_BLOCK = 6
   };
 
 enum XauRegimeState
@@ -66,6 +75,33 @@ enum XauRegimeState
    XAU_REGIME_DOWNTREND = 3,
    XAU_REGIME_COMPRESSION = 4,
    XAU_REGIME_CHOP = 5
+  };
+
+enum R2LhfState
+  {
+   R2_LHF_STATE_IDLE = 0,
+   R2_LHF_STATE_WAIT_FIRST_PIVOT = 1,
+   R2_LHF_STATE_LOWER_HIGH_CONFIRMED = 2
+  };
+
+enum R3TransitionState
+  {
+   R3_TRANSITION_STATE_IDLE = 0,
+   R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE = 1,
+   R3_TRANSITION_STATE_WAIT_FIRST_PULLBACK = 2
+  };
+
+enum R1HlfState
+  {
+   R1_HLF_STATE_IDLE = 0,
+   R1_HLF_STATE_WAIT_FIRST_PIVOT = 1,
+   R1_HLF_STATE_HIGHER_LOW_CONFIRMED = 2
+  };
+
+enum R3ChopState
+  {
+   R3_CHOP_STATE_IDLE = 0,
+   R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP = 1
   };
 
 input string InpRunId                         = "A1_XAU_M5_MOMENTUM_CONTINUATION_SAFE_DEFAULT";
@@ -79,6 +115,8 @@ input double InpFixedLots                     = 0.01;
 input bool   InpUseRiskNormalizedLots         = false;
 input double InpRiskAmountUsd                 = 0.00;
 input double InpMaxRiskLots                   = 0.05;
+input bool   InpRejectRiskOvershootEnabled    = false;
+input double InpMaxRiskOvershootPct           = 10.00;
 input int    InpDeviationPoints               = 80;
 input int    InpMaxSpreadPoints               = 75;
 input double InpMaxEstimatedCostR             = 0.15;
@@ -124,6 +162,115 @@ input double InpR2PullbackMinBodyFraction     = 0.35;
 input double InpR2PullbackCloseLocation       = 0.35;
 input bool   InpR2PullbackM5ExecutionBodyFilterEnabled = false;
 input double InpR2PullbackM5MinBodyFraction   = 0.00;
+input int    InpR2PdlAtrPeriod                = 14;
+input int    InpR2PdlH1AtrPercentileLookback = 480;
+input double InpR2PdlH1AtrPercentileMin      = 40.00;
+input double InpR2PdlH1AtrPercentileMax      = 90.00;
+input double InpR2PdlBreakMarginH1Atr        = 0.10;
+input double InpR2PdlBreakMinRangeH1Atr      = 1.00;
+input double InpR2PdlBreakMinBodyFraction    = 0.50;
+input double InpR2PdlBreakCloseLocationMax  = 0.25;
+input int    InpR2PdlRetestWindowM15Bars     = 8;
+input double InpR2PdlRetestTouchM15Atr       = 0.25;
+input double InpR2PdlInvalidReclaimH1Atr     = 0.10;
+input double InpR2PdlRejectDistanceM15Atr    = 0.10;
+input double InpR2PdlRejectMinBodyFraction   = 0.50;
+input double InpR2PdlRejectCloseLocationMax = 0.25;
+input double InpR2PdlStopBufferM15Atr        = 0.20;
+input double InpR2PdlMaxStopH1Atr            = 1.00;
+input int    InpR1PdhAtrPeriod                = 14;
+input int    InpR1PdhH1AtrPercentileLookback = 480;
+input double InpR1PdhH1AtrPercentileMin      = 40.00;
+input double InpR1PdhH1AtrPercentileMax      = 90.00;
+input double InpR1PdhBreakMarginH1Atr         = 0.10;
+input double InpR1PdhBreakMinRangeH1Atr       = 1.00;
+input double InpR1PdhBreakMinBodyFraction     = 0.50;
+input double InpR1PdhBreakCloseLocationMin    = 0.75;
+input int    InpR1PdhRetestWindowM15Bars      = 8;
+input double InpR1PdhRetestTouchM15Atr        = 0.25;
+input double InpR1PdhInvalidBreakdownH1Atr    = 0.10;
+input double InpR1PdhReclaimDistanceM15Atr    = 0.10;
+input double InpR1PdhReclaimMinBodyFraction   = 0.50;
+input double InpR1PdhReclaimCloseLocationMin  = 0.75;
+input double InpR1PdhStopBufferM15Atr         = 0.20;
+input double InpR1PdhMaxStopH1Atr             = 1.00;
+input int    InpR2LhfAtrPeriod                = 14;
+input int    InpR2LhfMaturityD1Bars           = 3;
+input int    InpR2LhfLeg1LookbackH1Bars       = 12;
+input double InpR2LhfLeg1BreakMarginH1Atr     = 0.10;
+input double InpR2LhfLeg1MinRangeH1Atr        = 1.00;
+input double InpR2LhfLeg1MinBodyFraction      = 0.50;
+input double InpR2LhfLeg1CloseLocationMax     = 0.25;
+input int    InpR2LhfResetWindowM15Bars       = 16;
+input int    InpR2LhfPivotLeftBars            = 2;
+input int    InpR2LhfPivotRightBars           = 2;
+input double InpR2LhfResetMinDepthH1Atr       = 0.35;
+input double InpR2LhfLowerHighMarginH1Atr     = 0.10;
+input int    InpR2LhfSecondBreakWindowM15Bars = 16;
+input double InpR2LhfSecondTouchM15Atr        = 0.10;
+input double InpR2LhfSecondCloseM15Atr        = 0.10;
+input double InpR2LhfSecondMinBodyFraction    = 0.50;
+input double InpR2LhfSecondCloseLocationMax  = 0.25;
+input double InpR2LhfInvalidReclaimH1Atr      = 0.10;
+input double InpR2LhfStopBufferM15Atr         = 0.20;
+input double InpR2LhfMaxStopH1Atr             = 1.00;
+input int    InpR1HlfAtrPeriod                = 14;
+input int    InpR1HlfMaturityD1Bars           = 3;
+input int    InpR1HlfLeg1LookbackH1Bars       = 12;
+input double InpR1HlfLeg1BreakMarginH1Atr     = 0.10;
+input double InpR1HlfLeg1MinRangeH1Atr        = 1.00;
+input double InpR1HlfLeg1MinBodyFraction      = 0.50;
+input double InpR1HlfLeg1CloseLocationMin     = 0.75;
+input int    InpR1HlfResetWindowM15Bars       = 16;
+input int    InpR1HlfPivotLeftBars            = 2;
+input int    InpR1HlfPivotRightBars           = 2;
+input double InpR1HlfResetMinDepthH1Atr       = 0.35;
+input double InpR1HlfHigherLowMarginH1Atr     = 0.10;
+input int    InpR1HlfSecondBreakWindowM15Bars = 16;
+input double InpR1HlfSecondTouchM15Atr        = 0.10;
+input double InpR1HlfSecondCloseM15Atr        = 0.10;
+input double InpR1HlfSecondMinBodyFraction    = 0.50;
+input double InpR1HlfSecondCloseLocationMin   = 0.75;
+input double InpR1HlfInvalidBreakdownH1Atr    = 0.10;
+input double InpR1HlfStopBufferM15Atr         = 0.20;
+input double InpR1HlfMaxStopH1Atr             = 1.00;
+input int    InpR3CompressionAtrPeriod        = 14;
+input int    InpR3CompressionAtrPercentileLookback = 252;
+input double InpR3CompressionAtrPercentileMax = 30.00;
+input int    InpR3CompressionBoxDays          = 5;
+input int    InpR3CompressionRangeMedianLookback = 20;
+input double InpR3CompressionRangeMedianMax  = 1.00;
+input int    InpR3SetupLifetimeH1Bars         = 24;
+input double InpR3AcceptBreakMarginH1Atr     = 0.10;
+input double InpR3AcceptMinBodyFraction      = 0.50;
+input double InpR3AcceptLongCloseLocationMin = 0.75;
+input double InpR3AcceptShortCloseLocationMax = 0.25;
+input int    InpR3RetestWindowM15Bars        = 12;
+input double InpR3RetestTouchM15Atr          = 0.25;
+input double InpR3InvalidationH1Atr          = 0.10;
+input double InpR3RejectDistanceM15Atr       = 0.10;
+input double InpR3RejectMinBodyFraction      = 0.50;
+input double InpR3RejectLongCloseLocationMin = 0.75;
+input double InpR3RejectShortCloseLocationMax = 0.25;
+input double InpR3StopBufferM15Atr           = 0.20;
+input double InpR3MaxStopH1Atr               = 1.00;
+input bool   InpR3ConsumeOnFirstTouch        = true;
+input int    InpR3ChopD1AtrPeriod            = 14;
+input int    InpR3ChopD1AtrPercentileLookback = 252;
+input double InpR3ChopD1AtrPercentileMax     = 30.00;
+input int    InpR3ChopD1BoxDays              = 5;
+input int    InpR3ChopD1RangeMedianLookback  = 20;
+input double InpR3ChopD1RangeMedianMax       = 1.00;
+input int    InpR3ChopH1BoundaryLookback     = 4;
+input int    InpR3ChopEventWindowM15Bars     = 4;
+input double InpR3ChopSweepM15Atr            = 0.05;
+input double InpR3ChopReclaimM15Atr          = 0.05;
+input double InpR3ChopMinBodyFraction        = 0.35;
+input double InpR3ChopLongCloseLocationMin   = 0.65;
+input double InpR3ChopShortCloseLocationMax  = 0.35;
+input double InpR3ChopStopBufferM15Atr       = 0.10;
+input double InpR3ChopMaxStopH1Atr           = 0.75;
+input bool   InpR3ChopConsumeFirstSweep      = true;
 input int    InpCompressionLookbackBars       = 8;
 input double InpCompressionMaxRangeAtr        = 1.20;
 input double InpCompressionBreakAtrMultiple   = 0.10;
@@ -329,6 +476,148 @@ datetime g_last_m5_bar = 0;
 datetime g_last_m15_decision_bar = 0;
 datetime g_last_h4_decision_bar = 0;
 datetime g_last_h1_decision_bar = 0;
+datetime g_r2_pdl_last_scanned_h1_bar = 0;
+datetime g_r2_pdl_break_time = 0;
+datetime g_r2_pdl_consumed_break_time = 0;
+datetime g_r2_pdl_last_counted_m15_bar = 0;
+int      g_r2_pdl_retest_m15_bars_observed = 0;
+double   g_r2_pdl_level = 0.0;
+double   g_r2_pdl_h1_atr = 0.0;
+double   g_r2_pdl_h1_atr_percentile = 0.0;
+double   g_r2_pdl_break_close = 0.0;
+double   g_r2_pdl_log_m15_open = 0.0;
+double   g_r2_pdl_log_m15_high = 0.0;
+double   g_r2_pdl_log_m15_low = 0.0;
+double   g_r2_pdl_log_m15_close = 0.0;
+double   g_r2_pdl_log_m15_atr = 0.0;
+double   g_r2_pdl_log_body_fraction = 0.0;
+double   g_r2_pdl_log_close_location = 0.0;
+string   g_r2_pdl_last_outcome_reason = "";
+datetime g_r1_pdh_last_scanned_h1_bar = 0;
+datetime g_r1_pdh_break_time = 0;
+datetime g_r1_pdh_consumed_break_time = 0;
+datetime g_r1_pdh_last_counted_m15_bar = 0;
+int      g_r1_pdh_retest_m15_bars_observed = 0;
+double   g_r1_pdh_level = 0.0;
+double   g_r1_pdh_h1_atr = 0.0;
+double   g_r1_pdh_h1_atr_percentile = 0.0;
+double   g_r1_pdh_break_close = 0.0;
+double   g_r1_pdh_log_m15_open = 0.0;
+double   g_r1_pdh_log_m15_high = 0.0;
+double   g_r1_pdh_log_m15_low = 0.0;
+double   g_r1_pdh_log_m15_close = 0.0;
+double   g_r1_pdh_log_m15_atr = 0.0;
+double   g_r1_pdh_log_body_fraction = 0.0;
+double   g_r1_pdh_log_close_location = 0.0;
+string   g_r1_pdh_last_outcome_reason = "";
+R2LhfState g_r2_lhf_state = R2_LHF_STATE_IDLE;
+datetime g_r2_lhf_last_scanned_h1_bar = 0;
+datetime g_r2_lhf_last_logged_d1_bar = 0;
+datetime g_r2_lhf_setup_time = 0;
+datetime g_r2_lhf_consumed_setup_time = 0;
+datetime g_r2_lhf_last_counted_m15_bar = 0;
+datetime g_r2_lhf_pivot_time = 0;
+datetime g_r2_lhf_pivot_confirmation_time = 0;
+int      g_r2_lhf_reset_m15_bars_observed = 0;
+int      g_r2_lhf_second_break_m15_bars_observed = 0;
+double   g_r2_lhf_leg_one_low = 0.0;
+double   g_r2_lhf_leg_one_close = 0.0;
+double   g_r2_lhf_origin_high = 0.0;
+double   g_r2_lhf_h1_atr = 0.0;
+double   g_r2_lhf_pivot_high = 0.0;
+double   g_r2_lhf_reset_depth_h1_atr = 0.0;
+double   g_r2_lhf_log_m15_open = 0.0;
+double   g_r2_lhf_log_m15_high = 0.0;
+double   g_r2_lhf_log_m15_low = 0.0;
+double   g_r2_lhf_log_m15_close = 0.0;
+double   g_r2_lhf_log_m15_atr = 0.0;
+double   g_r2_lhf_log_body_fraction = 0.0;
+double   g_r2_lhf_log_close_location = 0.0;
+string   g_r2_lhf_last_outcome_reason = "";
+R1HlfState g_r1_hlf_state = R1_HLF_STATE_IDLE;
+datetime g_r1_hlf_last_scanned_h1_bar = 0;
+datetime g_r1_hlf_setup_time = 0;
+datetime g_r1_hlf_consumed_setup_time = 0;
+datetime g_r1_hlf_last_counted_m15_bar = 0;
+datetime g_r1_hlf_pivot_time = 0;
+datetime g_r1_hlf_pivot_confirmation_time = 0;
+datetime g_r1_hlf_attempt_time = 0;
+int      g_r1_hlf_reset_m15_bars_observed = 0;
+int      g_r1_hlf_second_break_m15_bars_observed = 0;
+double   g_r1_hlf_leg_one_high = 0.0;
+double   g_r1_hlf_leg_one_close = 0.0;
+double   g_r1_hlf_origin_low = 0.0;
+double   g_r1_hlf_h1_atr = 0.0;
+double   g_r1_hlf_pivot_low = 0.0;
+double   g_r1_hlf_reset_depth_h1_atr = 0.0;
+double   g_r1_hlf_log_m15_open = 0.0;
+double   g_r1_hlf_log_m15_high = 0.0;
+double   g_r1_hlf_log_m15_low = 0.0;
+double   g_r1_hlf_log_m15_close = 0.0;
+double   g_r1_hlf_log_m15_atr = 0.0;
+double   g_r1_hlf_log_body_fraction = 0.0;
+double   g_r1_hlf_log_close_location = 0.0;
+string   g_r1_hlf_episode_id = "";
+string   g_r1_hlf_last_outcome_reason = "";
+R3TransitionState g_r3_transition_state = R3_TRANSITION_STATE_IDLE;
+datetime g_r3_last_scanned_h1_bar = 0;
+datetime g_r3_last_setup_day = 0;
+datetime g_r3_setup_time = 0;
+datetime g_r3_acceptance_time = 0;
+int      g_r3_setup_h1_bars_elapsed = 0;
+int      g_r3_pullback_m15_bars_elapsed = 0;
+double   g_r3_box_high = 0.0;
+double   g_r3_box_low = 0.0;
+double   g_r3_setup_atr_percentile = 0.0;
+double   g_r3_setup_range_ratio = 0.0;
+double   g_r3_acceptance_h1_atr = 0.0;
+double   g_r3_boundary = 0.0;
+string   g_r3_direction = "";
+double   g_r3_log_m15_open = 0.0;
+double   g_r3_log_m15_high = 0.0;
+double   g_r3_log_m15_low = 0.0;
+double   g_r3_log_m15_close = 0.0;
+double   g_r3_log_m15_atr = 0.0;
+double   g_r3_log_body_fraction = 0.0;
+double   g_r3_log_close_location = 0.0;
+double   g_r3_log_break_distance_h1_atr = 0.0;
+string   g_r3_last_outcome_reason = "";
+R3ChopState g_r3_chop_state = R3_CHOP_STATE_IDLE;
+datetime g_r3_chop_last_scanned_h1_bar = 0;
+datetime g_r3_chop_last_scanned_d1_bar = 0;
+datetime g_r3_chop_last_context_date = 0;
+datetime g_r3_chop_context_d1_time = 0;
+bool     g_r3_chop_context_active = false;
+bool     g_r3_chop_context_suspended = false;
+bool     g_r3_chop_episode_active = false;
+string   g_r3_chop_context_id = "";
+string   g_r3_chop_episode_id = "";
+double   g_r3_chop_context_box_high = 0.0;
+double   g_r3_chop_context_box_low = 0.0;
+double   g_r3_chop_context_atr_percentile = 0.0;
+double   g_r3_chop_context_range_ratio = 0.0;
+datetime g_r3_chop_setup_time = 0;
+datetime g_r3_chop_h1_bar_time = 0;
+datetime g_r3_chop_last_counted_m15_bar = 0;
+int      g_r3_chop_m15_bars_seen = 0;
+double   g_r3_chop_boundary_high = 0.0;
+double   g_r3_chop_boundary_low = 0.0;
+double   g_r3_chop_h1_atr = 0.0;
+string   g_r3_chop_event_context_id = "";
+string   g_r3_chop_event_episode_id = "";
+double   g_r3_chop_log_m15_open = 0.0;
+double   g_r3_chop_log_m15_high = 0.0;
+double   g_r3_chop_log_m15_low = 0.0;
+double   g_r3_chop_log_m15_close = 0.0;
+double   g_r3_chop_log_m15_atr = 0.0;
+double   g_r3_chop_log_body_fraction = 0.0;
+double   g_r3_chop_log_close_location = 0.0;
+double   g_r3_chop_signal_boundary_high = 0.0;
+double   g_r3_chop_signal_boundary_low = 0.0;
+double   g_r3_chop_signal_h1_atr = 0.0;
+datetime g_r3_chop_signal_attempt_time = 0;
+int      g_r3_chop_signal_attempt_ordinal = 0;
+string   g_r3_chop_last_outcome_reason = "";
 datetime g_last_trade_time = 0;
 string   g_trade_day = "";
 int      g_trades_today = 0;
@@ -369,8 +658,8 @@ void AppendCsv(
          FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status", "account_currency", "account_leverage", "margin_mode", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_loss", "stops_level", "freeze_level");
       else if(file_name == InpSignalLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "stage", "direction", "reason", "bid", "ask", "spread_points", "recent_high", "recent_low", "signal_open", "signal_high", "signal_low", "signal_close", "atr", "body_fraction", "close_location", "three_bar_move_atr", "break_distance_atr", "estimated_cost_r");
-      else if(file_name == InpOrderLogFileName)
-         FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "action", "direction", "lots", "bid", "ask", "spread_points", "entry_reference", "sl", "tp", "stop_points", "estimated_cost_r", "retcode", "retcode_description", "order_ticket", "deal_ticket", "result_price", "reason");
+       else if(file_name == InpOrderLogFileName)
+          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "action", "direction", "lots", "bid", "ask", "spread_points", "entry_reference", "sl", "tp", "stop_points", "estimated_cost_r", "retcode", "retcode_description", "order_ticket", "deal_ticket", "result_price", "reason", "actual_risk_usd", "intended_risk_usd", "risk_calc_method");
       else if(file_name == InpManagementLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "action", "direction", "position_ticket", "volume", "entry_price", "current_price", "current_sl", "new_sl", "tp", "risk_points", "unrealized_r", "trigger_r", "lock_r", "retcode", "reason");
       else if(file_name == InpDealLogFileName)
@@ -382,8 +671,9 @@ void AppendCsv(
       case 9:  FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]); break;
       case 19: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18]); break;
       case 21: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20]); break;
-      case 24: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23]); break;
-      case 24 + 1: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24]); break;
+       case 24: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23]); break;
+       case 24 + 1: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24]); break;
+       case 26: FileWrite(handle, values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24], values[25]); break;
       default:
         {
          string row = "";
@@ -494,11 +784,14 @@ void LogOrder(
    const ulong order_ticket,
    const ulong deal_ticket,
    const double result_price,
-   const string reason
+   const string reason,
+   const double actual_risk_usd = -1.0,
+   const double intended_risk_usd = -1.0,
+   const string risk_calc_method = ""
 )
   {
    string values[];
-   ArrayResize(values, 24);
+   ArrayResize(values, 26);
    values[0] = Timestamp();
    values[1] = TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS);
    values[2] = InpRunId;
@@ -522,8 +815,10 @@ void LogOrder(
    values[20] = IntegerToString((int)deal_ticket);
    values[21] = DoubleToString(result_price, _Digits);
    values[22] = reason;
-   values[23] = "";
-  AppendCsv(InpOrderLogFileName, values);
+   values[23] = actual_risk_usd >= 0.0 ? DoubleToString(actual_risk_usd, 6) : "";
+   values[24] = intended_risk_usd >= 0.0 ? DoubleToString(intended_risk_usd, 6) : "";
+   values[25] = risk_calc_method;
+   AppendCsv(InpOrderLogFileName, values);
   }
 
 void LogManagement(
@@ -787,6 +1082,27 @@ int OnInit()
 
 void OnDeinit(const int reason)
   {
+   if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT &&
+      g_r2_lhf_state != R2_LHF_STATE_IDLE)
+      ConsumeR2LhfSetup("tester_deinit");
+   if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK &&
+      g_r3_transition_state != R3_TRANSITION_STATE_IDLE)
+     {
+      const int completed_bars =
+         g_r3_transition_state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE
+         ? g_r3_setup_h1_bars_elapsed
+         : g_r3_pullback_m15_bars_elapsed;
+      const int lifetime_bars =
+         g_r3_transition_state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE
+         ? MathMax(1, InpR3SetupLifetimeH1Bars)
+         : MathMax(1, InpR3RetestWindowM15Bars);
+      const bool lifetime_elapsed = completed_bars >= lifetime_bars;
+      ConsumeR3TransitionEvent(lifetime_elapsed ? "expired" : "window_end_incomplete");
+     }
+   if(InpSignalMode == SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM &&
+      g_r3_chop_state == R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP &&
+      g_r3_chop_m15_bars_seen < MathMax(1, InpR3ChopEventWindowM15Bars))
+      ConsumeR3ChopEvent("window_end_incomplete", 0, true);
    if(g_atr_handle != INVALID_HANDLE)
       IndicatorRelease(g_atr_handle);
    if(g_m5_pullback_ema_handle != INVALID_HANDLE)
@@ -1665,6 +1981,212 @@ double LotsForStopDistance(const double stop_distance)
    return NormalizeLotsForSymbol(requested_lots);
   }
 
+double RiskAmountForLots(const double stop_distance, const double lots)
+  {
+   const double tick_size = SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_SIZE);
+   double tick_value_loss = SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE_LOSS);
+   if(tick_value_loss <= 0.0)
+      tick_value_loss = SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE);
+   if(tick_size <= 0.0 || tick_value_loss <= 0.0 || stop_distance <= 0.0 || lots <= 0.0)
+      return 0.0;
+   return (stop_distance / tick_size) * tick_value_loss * lots;
+  }
+
+bool RiskOvershootAllowed(const double stop_distance, const double lots, double &actual_risk_usd)
+  {
+   actual_risk_usd = RiskAmountForLots(stop_distance, lots);
+   if(!InpRejectRiskOvershootEnabled)
+      return true;
+   if(!InpUseRiskNormalizedLots || InpRiskAmountUsd <= 0.0 || actual_risk_usd <= 0.0)
+      return false;
+   const double tolerance = MathMax(0.0, InpMaxRiskOvershootPct) / 100.0;
+   return actual_risk_usd <= InpRiskAmountUsd * (1.0 + tolerance);
+  }
+
+bool R2LhfHardRiskAllowed(
+   const string direction,
+   const double stop_distance,
+   const double lots,
+   const double bid,
+   const double ask,
+   double &actual_risk_usd
+)
+  {
+   actual_risk_usd = -1.0; // Fail-closed sentinel for missing OrderCalcProfit evidence.
+   const double hard_limit_usd = 50.00;
+   if(direction != "SHORT" || stop_distance <= 0.0 || lots <= 0.0 || bid <= 0.0 || ask <= 0.0)
+      return false;
+   if(!InpUseRiskNormalizedLots || !InpRejectRiskOvershootEnabled)
+      return false;
+   if(MathAbs(InpRiskAmountUsd - hard_limit_usd) > 0.0000001 || MathAbs(InpMaxRiskOvershootPct) > 0.0000001)
+      return false;
+   if(AccountInfoString(ACCOUNT_CURRENCY) != "USD")
+      return false;
+
+   const double entry_price = bid;
+   const double stop_price = entry_price + stop_distance;
+   if(stop_price <= entry_price || !MathIsValidNumber(stop_price))
+      return false;
+
+   double projected_pnl = 0.0;
+   if(!OrderCalcProfit(ORDER_TYPE_SELL, InpTargetSymbol, lots, entry_price, stop_price, projected_pnl))
+      return false;
+   if(!MathIsValidNumber(projected_pnl))
+      return false;
+
+   actual_risk_usd = MathAbs(projected_pnl);
+   if(actual_risk_usd <= 0.0 || !MathIsValidNumber(actual_risk_usd))
+     {
+      actual_risk_usd = -1.0;
+      return false;
+     }
+   return actual_risk_usd <= hard_limit_usd + 0.0000001;
+  }
+
+bool R3TransitionHardRiskAllowed(
+   const string direction,
+   const double stop_distance,
+   const double lots,
+   const double bid,
+   const double ask,
+   double &actual_risk_usd
+)
+  {
+   actual_risk_usd = -1.0; // Fail closed until direction-aware OrderCalcProfit succeeds.
+   const double hard_limit_usd = 50.00;
+   if((direction != "LONG" && direction != "SHORT") ||
+      stop_distance <= 0.0 || lots <= 0.0 || bid <= 0.0 || ask <= 0.0)
+      return false;
+   if(!InpUseRiskNormalizedLots || !InpRejectRiskOvershootEnabled)
+      return false;
+   if(MathAbs(InpRiskAmountUsd - hard_limit_usd) > 0.0000001 || MathAbs(InpMaxRiskOvershootPct) > 0.0000001)
+      return false;
+   if(AccountInfoString(ACCOUNT_CURRENCY) != "USD")
+      return false;
+
+   const int digits = (int)SymbolInfoInteger(InpTargetSymbol, SYMBOL_DIGITS);
+   const ENUM_ORDER_TYPE order_type = direction == "LONG" ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
+   const double entry_price = direction == "LONG" ? ask : bid;
+   const double stop_price = NormalizeDouble(
+      direction == "LONG" ? entry_price - stop_distance : entry_price + stop_distance,
+      digits
+   );
+   if(stop_price <= 0.0 ||
+      (direction == "LONG" && stop_price >= entry_price) ||
+      (direction == "SHORT" && stop_price <= entry_price) ||
+      !MathIsValidNumber(stop_price))
+      return false;
+
+   double projected_pnl = 0.0;
+   if(!OrderCalcProfit(order_type, InpTargetSymbol, lots, entry_price, stop_price, projected_pnl))
+      return false;
+   if(!MathIsValidNumber(projected_pnl))
+      return false;
+
+   actual_risk_usd = MathAbs(projected_pnl);
+   if(actual_risk_usd <= 0.0 || !MathIsValidNumber(actual_risk_usd))
+     {
+      actual_risk_usd = -1.0;
+      return false;
+     }
+   return actual_risk_usd <= hard_limit_usd + 0.0000001;
+  }
+
+bool R3ChopHardRiskAllowed(
+   const string direction,
+   const double stop_distance,
+   const double lots,
+   const double bid,
+   const double ask,
+   double &actual_risk_usd
+)
+  {
+   actual_risk_usd = -1.0;
+   const double hard_limit_usd = 50.00;
+   if((direction != "LONG" && direction != "SHORT") ||
+      stop_distance <= 0.0 || lots <= 0.0 || bid <= 0.0 || ask <= 0.0)
+      return false;
+   if(!InpUseRiskNormalizedLots || !InpRejectRiskOvershootEnabled)
+      return false;
+   if(MathAbs(InpRiskAmountUsd - hard_limit_usd) > 0.0000001 ||
+      MathAbs(InpMaxRiskOvershootPct) > 0.0000001)
+      return false;
+   if(AccountInfoString(ACCOUNT_CURRENCY) != "USD")
+      return false;
+
+   const double normalized_lots = NormalizeLotsForSymbol(lots);
+   if(normalized_lots <= 0.0 || MathAbs(normalized_lots - lots) > 0.0000001)
+      return false;
+   const int digits = (int)SymbolInfoInteger(InpTargetSymbol, SYMBOL_DIGITS);
+   const ENUM_ORDER_TYPE order_type = direction == "LONG" ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
+   const double entry_price = NormalizeDouble(direction == "LONG" ? ask : bid, digits);
+   const double stop_price = NormalizeDouble(
+      direction == "LONG" ? entry_price - stop_distance : entry_price + stop_distance,
+      digits
+   );
+   if(entry_price <= 0.0 || stop_price <= 0.0 ||
+      (direction == "LONG" && stop_price >= entry_price) ||
+      (direction == "SHORT" && stop_price <= entry_price) ||
+      !MathIsValidNumber(entry_price) || !MathIsValidNumber(stop_price))
+      return false;
+
+   double projected_pnl = 0.0;
+   if(!OrderCalcProfit(order_type, InpTargetSymbol, normalized_lots, entry_price, stop_price, projected_pnl))
+      return false;
+   if(!MathIsValidNumber(projected_pnl) || projected_pnl >= 0.0)
+      return false;
+
+   actual_risk_usd = -projected_pnl;
+   if(actual_risk_usd <= 0.0 || !MathIsValidNumber(actual_risk_usd))
+     {
+      actual_risk_usd = -1.0;
+      return false;
+     }
+   return actual_risk_usd <= hard_limit_usd + 0.0000001;
+  }
+
+bool R1HlfHardRiskAllowed(
+   const string direction,
+   const double stop_distance,
+   const double lots,
+   const double bid,
+   const double ask,
+   double &actual_risk_usd
+)
+  {
+   actual_risk_usd = -1.0;
+   const double hard_limit_usd = 50.00;
+   if(direction != "LONG" || stop_distance <= 0.0 || lots <= 0.0 || bid <= 0.0 || ask <= 0.0)
+      return false;
+   if(!InpUseRiskNormalizedLots || !InpRejectRiskOvershootEnabled)
+      return false;
+   if(MathAbs(InpRiskAmountUsd - hard_limit_usd) > 0.0000001 ||
+      MathAbs(InpMaxRiskOvershootPct) > 0.0000001)
+      return false;
+   if(AccountInfoString(ACCOUNT_CURRENCY) != "USD")
+      return false;
+
+   const int digits = (int)SymbolInfoInteger(InpTargetSymbol, SYMBOL_DIGITS);
+   const double entry_price = ask;
+   const double stop_price = NormalizeDouble(entry_price - stop_distance, digits);
+   if(stop_price <= 0.0 || stop_price >= entry_price || !MathIsValidNumber(stop_price))
+      return false;
+
+   double projected_pnl = 0.0;
+   if(!OrderCalcProfit(ORDER_TYPE_BUY, InpTargetSymbol, lots, entry_price, stop_price, projected_pnl))
+      return false;
+   if(!MathIsValidNumber(projected_pnl))
+      return false;
+
+   actual_risk_usd = MathAbs(projected_pnl);
+   if(actual_risk_usd <= 0.0 || !MathIsValidNumber(actual_risk_usd))
+     {
+      actual_risk_usd = -1.0;
+      return false;
+     }
+   return actual_risk_usd <= hard_limit_usd + 0.0000001;
+  }
+
 double RecentHigh(const int start_shift, const int count)
   {
    double value = 0.0;
@@ -2115,6 +2637,13 @@ string RegimeRouterModeName()
       return "directional_r1_long_r2_short";
    if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
       return "r4_chop_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_RELEASE_SHOCK_BLOCK &&
+      (InpSignalMode == SIGNAL_D1_COMPRESSION_H4_EXPANSION ||
+       InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK))
+      return "r3_compression_release_shock_block";
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_INSIDE_COMPRESSION_TREND_SHOCK_BLOCK &&
+      InpSignalMode == SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM)
+      return "r3_inside_compression_trend_shock_block";
    if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
       return "short_r5_uptrend_chop_only";
    if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_ONLY)
@@ -2325,6 +2854,22 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
       if(direction == "LONG" && regime == XAU_REGIME_UPTREND)
          return true;
       if(direction == "SHORT" && regime == XAU_REGIME_DOWNTREND)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_RELEASE_SHOCK_BLOCK &&
+      (InpSignalMode == SIGNAL_D1_COMPRESSION_H4_EXPANSION ||
+       InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK))
+     {
+      return true;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_INSIDE_COMPRESSION_TREND_SHOCK_BLOCK &&
+      InpSignalMode == SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM)
+     {
+      if(regime == XAU_REGIME_COMPRESSION && g_r3_chop_context_active && !g_r3_chop_context_suspended)
          return true;
       block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
       return false;
@@ -2640,6 +3185,12 @@ bool IsH4DecisionSignalMode()
 bool IsM15DecisionSignalMode()
   {
    return InpSignalMode == SIGNAL_BEAR_HTF_RESISTANCE_SWEEP ||
+          InpSignalMode == SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT ||
+          InpSignalMode == SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG ||
+          InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT ||
+          InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK ||
+          InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG ||
+          InpSignalMode == SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM ||
           (InpSignalMode == SIGNAL_R1_H1_PULLBACK_LONG && InpR1PullbackConfirmTimeframe == 15) ||
           (InpSignalMode == SIGNAL_R2_H1_PULLBACK_REJECTION_SHORT && InpR2PullbackConfirmTimeframe == 15);
   }
@@ -3212,6 +3763,2471 @@ bool TryR2H1PullbackRejectionShortSignal(string &direction, string &reason, doub
    reason = "R2_H1_EMA_PULLBACK_REJECTION_SHORT_" + confirmation_name;
    break_distance_atr = (h1_fast - close) / h1_atr;
    return true;
+  }
+
+void ResetR2PriorD1LowBreakState()
+  {
+   g_r2_pdl_break_time = 0;
+   g_r2_pdl_last_counted_m15_bar = 0;
+   g_r2_pdl_retest_m15_bars_observed = 0;
+   g_r2_pdl_level = 0.0;
+   g_r2_pdl_h1_atr = 0.0;
+   g_r2_pdl_h1_atr_percentile = 0.0;
+   g_r2_pdl_break_close = 0.0;
+  }
+
+bool PriorCompletedD1LowAtTime(const datetime bar_time, double &level)
+  {
+   level = 0.0;
+   const int containing_d1_shift = iBarShift(InpTargetSymbol, PERIOD_D1, bar_time, false);
+   if(containing_d1_shift < 0)
+      return false;
+   level = iLow(InpTargetSymbol, PERIOD_D1, containing_d1_shift + 1);
+   return level > 0.0;
+  }
+
+bool ArmR2PriorD1LowBreakAtH1Shift(const int shift)
+  {
+   const int atr_period = MathMax(1, InpR2PdlAtrPeriod);
+   const int percentile_lookback = MathMax(20, InpR2PdlH1AtrPercentileLookback);
+   if(iBars(InpTargetSymbol, PERIOD_H1) < percentile_lookback + atr_period + shift + 5 ||
+      iBars(InpTargetSymbol, PERIOD_D1) < atr_period + 10)
+      return false;
+
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime break_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || break_time == g_r2_pdl_consumed_break_time)
+      return false;
+
+   double level = 0.0;
+   if(!PriorCompletedD1LowAtTime(h1_bar_time, level))
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_H1, shift);
+   const double high = iHigh(InpTargetSymbol, PERIOD_H1, shift);
+   const double low = iLow(InpTargetSymbol, PERIOD_H1, shift);
+   const double close = iClose(InpTargetSymbol, PERIOD_H1, shift);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, atr_period, shift);
+   const double atr_percentile = IndicatorAtrPercentile(PERIOD_H1, atr_period, percentile_lookback, shift);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || h1_atr <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool accepted_break =
+      close < open &&
+      close <= level - MathMax(0.0, InpR2PdlBreakMarginH1Atr) * h1_atr &&
+      range >= MathMax(0.0, InpR2PdlBreakMinRangeH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR2PdlBreakMinBodyFraction) &&
+      close_location <= InpR2PdlBreakCloseLocationMax &&
+      atr_percentile >= InpR2PdlH1AtrPercentileMin &&
+      atr_percentile <= InpR2PdlH1AtrPercentileMax;
+   if(!accepted_break)
+      return false;
+
+   g_r2_pdl_break_time = break_time;
+   g_r2_pdl_last_counted_m15_bar = 0;
+   g_r2_pdl_retest_m15_bars_observed = 0;
+   g_r2_pdl_level = level;
+   g_r2_pdl_h1_atr = h1_atr;
+   g_r2_pdl_h1_atr_percentile = atr_percentile;
+   g_r2_pdl_break_close = close;
+   return true;
+  }
+
+void RefreshR2PriorD1LowBreakState()
+  {
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0 || latest_h1_bar == g_r2_pdl_last_scanned_h1_bar)
+      return;
+
+   const int oldest_shift = (g_r2_pdl_last_scanned_h1_bar == 0) ? 3 : 1;
+   for(int shift = oldest_shift; shift >= 1; shift--)
+     {
+      const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+      if(h1_bar_time <= 0 || h1_bar_time <= g_r2_pdl_last_scanned_h1_bar)
+         continue;
+      ArmR2PriorD1LowBreakAtH1Shift(shift);
+     }
+   g_r2_pdl_last_scanned_h1_bar = latest_h1_bar;
+  }
+
+bool R2PdlTakeDistinctCompletedM15Bar(datetime &m15_bar_time, datetime &m15_close_time)
+  {
+   m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   if(m15_bar_time <= 0 || m15_bar_time == g_r2_pdl_last_counted_m15_bar)
+      return false;
+   m15_close_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   // The M15 bar closing with the H1 break is context, not observed bar one.
+   if(m15_close_time <= g_r2_pdl_break_time)
+      return false;
+   g_r2_pdl_last_counted_m15_bar = m15_bar_time;
+   return true;
+  }
+
+double R2PriorD1LowRetestHigh(const datetime break_time)
+  {
+   double retest_high = 0.0;
+   const int max_bars = MathMax(1, InpR2PdlRetestWindowM15Bars);
+   for(int shift = 1; shift <= max_bars; shift++)
+     {
+      const datetime bar_time = iTime(InpTargetSymbol, PERIOD_M15, shift);
+      if(bar_time <= 0)
+         break;
+      const datetime bar_close_time = bar_time + PeriodSeconds(PERIOD_M15);
+      if(bar_close_time <= break_time)
+         break;
+      const double high = iHigh(InpTargetSymbol, PERIOD_M15, shift);
+      if(high <= 0.0)
+         return 0.0;
+      if(retest_high <= 0.0 || high > retest_high)
+         retest_high = high;
+     }
+   return retest_high;
+  }
+
+bool TryR2PriorD1LowFirstRetestShortSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   g_r2_pdl_last_outcome_reason = "";
+   RefreshR2PriorD1LowBreakState();
+   if(g_r2_pdl_break_time <= 0 || g_r2_pdl_level <= 0.0 || g_r2_pdl_h1_atr <= 0.0)
+      return false;
+   if(g_r2_pdl_break_time == g_r2_pdl_consumed_break_time)
+     {
+      ResetR2PriorD1LowBreakState();
+      return false;
+     }
+
+   datetime m15_bar_time = 0;
+   datetime m15_close_time = 0;
+   if(!R2PdlTakeDistinctCompletedM15Bar(m15_bar_time, m15_close_time))
+      return false;
+   g_r2_pdl_retest_m15_bars_observed++;
+   const bool final_retest_bar =
+      g_r2_pdl_retest_m15_bars_observed >= MathMax(1, InpR2PdlRetestWindowM15Bars);
+
+   const int atr_period = MathMax(1, InpR2PdlAtrPeriod);
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, atr_period, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || m15_atr <= 0.0 || range <= 0.0)
+     {
+      if(final_retest_bar)
+        {
+         g_r2_pdl_consumed_break_time = g_r2_pdl_break_time;
+         ResetR2PriorD1LowBreakState();
+         g_r2_pdl_last_outcome_reason = "r2_pdl_expired";
+        }
+      return false;
+     }
+
+   if(close > g_r2_pdl_level + MathMax(0.0, InpR2PdlInvalidReclaimH1Atr) * g_r2_pdl_h1_atr)
+     {
+      g_r2_pdl_consumed_break_time = g_r2_pdl_break_time;
+      ResetR2PriorD1LowBreakState();
+      g_r2_pdl_last_outcome_reason = "r2_pdl_invalidated";
+      return false;
+     }
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool touched_level = high >= g_r2_pdl_level - MathMax(0.0, InpR2PdlRetestTouchM15Atr) * m15_atr;
+   const bool rejected_level =
+      touched_level &&
+      close < open &&
+      close <= g_r2_pdl_level - MathMax(0.0, InpR2PdlRejectDistanceM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR2PdlRejectMinBodyFraction) &&
+      close_location <= InpR2PdlRejectCloseLocationMax;
+   if(!rejected_level)
+     {
+      if(final_retest_bar)
+        {
+         g_r2_pdl_consumed_break_time = g_r2_pdl_break_time;
+         ResetR2PriorD1LowBreakState();
+         g_r2_pdl_last_outcome_reason = "r2_pdl_expired";
+        }
+      return false;
+     }
+
+   // The first qualifying rejection is terminal even if later stop geometry or an
+   // execution guard rejects it. No later M15 bar may retry this H1 break.
+   g_r2_pdl_consumed_break_time = g_r2_pdl_break_time;
+
+   const double retest_high = R2PriorD1LowRetestHigh(g_r2_pdl_break_time);
+   if(retest_high <= 0.0)
+     {
+      ResetR2PriorD1LowBreakState();
+      g_r2_pdl_last_outcome_reason = "r2_pdl_first_retest_rejected";
+      return false;
+     }
+   const double projected_sl = retest_high + MathMax(0.0, InpR2PdlStopBufferM15Atr) * m15_atr;
+   stop_distance = projected_sl - close;
+   if(stop_distance <= 0.0)
+     {
+      ResetR2PriorD1LowBreakState();
+      g_r2_pdl_last_outcome_reason = "r2_pdl_first_retest_rejected";
+      return false;
+     }
+
+   g_r2_pdl_log_m15_open = open;
+   g_r2_pdl_log_m15_high = high;
+   g_r2_pdl_log_m15_low = low;
+   g_r2_pdl_log_m15_close = close;
+   g_r2_pdl_log_m15_atr = m15_atr;
+   g_r2_pdl_log_body_fraction = body_fraction;
+   g_r2_pdl_log_close_location = close_location;
+   direction = "SHORT";
+   reason = "R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT_STATE_" + RegimeStateName(CurrentXauRegime());
+   break_distance_atr = (g_r2_pdl_level - close) / g_r2_pdl_h1_atr;
+   return true;
+  }
+
+void ResetR1PriorD1HighBreakState()
+  {
+   g_r1_pdh_break_time = 0;
+   g_r1_pdh_last_counted_m15_bar = 0;
+   g_r1_pdh_retest_m15_bars_observed = 0;
+   g_r1_pdh_level = 0.0;
+   g_r1_pdh_h1_atr = 0.0;
+   g_r1_pdh_h1_atr_percentile = 0.0;
+   g_r1_pdh_break_close = 0.0;
+  }
+
+bool PriorCompletedD1HighAtTime(const datetime bar_time, double &level)
+  {
+   level = 0.0;
+   const int containing_d1_shift = iBarShift(InpTargetSymbol, PERIOD_D1, bar_time, false);
+   if(containing_d1_shift < 0)
+      return false;
+   level = iHigh(InpTargetSymbol, PERIOD_D1, containing_d1_shift + 1);
+   return level > 0.0;
+  }
+
+bool ArmR1PriorD1HighBreakAtH1Shift(const int shift)
+  {
+   if(CurrentXauRegime() != XAU_REGIME_UPTREND)
+      return false;
+
+   const int atr_period = MathMax(1, InpR1PdhAtrPeriod);
+   const int percentile_lookback = MathMax(20, InpR1PdhH1AtrPercentileLookback);
+   if(iBars(InpTargetSymbol, PERIOD_H1) < percentile_lookback + atr_period + shift + 5 ||
+      iBars(InpTargetSymbol, PERIOD_D1) < atr_period + 10)
+      return false;
+
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime break_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || break_time == g_r1_pdh_consumed_break_time)
+      return false;
+
+   double level = 0.0;
+   if(!PriorCompletedD1HighAtTime(h1_bar_time, level))
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_H1, shift);
+   const double high = iHigh(InpTargetSymbol, PERIOD_H1, shift);
+   const double low = iLow(InpTargetSymbol, PERIOD_H1, shift);
+   const double close = iClose(InpTargetSymbol, PERIOD_H1, shift);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, atr_period, shift);
+   const double atr_percentile = IndicatorAtrPercentile(PERIOD_H1, atr_period, percentile_lookback, shift);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || h1_atr <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool accepted_break =
+      close > open &&
+      close >= level + MathMax(0.0, InpR1PdhBreakMarginH1Atr) * h1_atr &&
+      range >= MathMax(0.0, InpR1PdhBreakMinRangeH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR1PdhBreakMinBodyFraction) &&
+      close_location >= InpR1PdhBreakCloseLocationMin &&
+      atr_percentile >= InpR1PdhH1AtrPercentileMin &&
+      atr_percentile <= InpR1PdhH1AtrPercentileMax;
+   if(!accepted_break)
+      return false;
+
+   g_r1_pdh_break_time = break_time;
+   g_r1_pdh_last_counted_m15_bar = 0;
+   g_r1_pdh_retest_m15_bars_observed = 0;
+   g_r1_pdh_level = level;
+   g_r1_pdh_h1_atr = h1_atr;
+   g_r1_pdh_h1_atr_percentile = atr_percentile;
+   g_r1_pdh_break_close = close;
+   return true;
+  }
+
+void RefreshR1PriorD1HighBreakState()
+  {
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0 || latest_h1_bar == g_r1_pdh_last_scanned_h1_bar)
+      return;
+
+   // The first observed H1 is initialization context, not a newly completed event.
+   if(g_r1_pdh_last_scanned_h1_bar == 0)
+     {
+      g_r1_pdh_last_scanned_h1_bar = latest_h1_bar;
+      return;
+     }
+
+   ArmR1PriorD1HighBreakAtH1Shift(1);
+   g_r1_pdh_last_scanned_h1_bar = latest_h1_bar;
+  }
+
+bool R1PdhTakeDistinctCompletedM15Bar(datetime &m15_bar_time, datetime &m15_close_time)
+  {
+   m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   if(m15_bar_time <= 0 || m15_bar_time == g_r1_pdh_last_counted_m15_bar)
+      return false;
+   m15_close_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   // The M15 bar closing with the H1 acceptance is context, not observed bar one.
+   if(m15_close_time <= g_r1_pdh_break_time)
+      return false;
+   g_r1_pdh_last_counted_m15_bar = m15_bar_time;
+   return true;
+  }
+
+double R1PriorD1HighRetestLow(const datetime break_time)
+  {
+   double retest_low = 0.0;
+   const int max_bars = MathMax(1, InpR1PdhRetestWindowM15Bars);
+   for(int shift = 1; shift <= max_bars; shift++)
+     {
+      const datetime bar_time = iTime(InpTargetSymbol, PERIOD_M15, shift);
+      if(bar_time <= 0)
+         break;
+      const datetime bar_close_time = bar_time + PeriodSeconds(PERIOD_M15);
+      if(bar_close_time <= break_time)
+         break;
+      const double low = iLow(InpTargetSymbol, PERIOD_M15, shift);
+      if(low <= 0.0)
+         return 0.0;
+      if(retest_low <= 0.0 || low < retest_low)
+         retest_low = low;
+     }
+   return retest_low;
+  }
+
+bool TryR1PriorD1HighFirstRetestLongSignal(string &direction, string &reason, double &stop_distance, double &break_distance_atr)
+  {
+   g_r1_pdh_last_outcome_reason = "";
+   RefreshR1PriorD1HighBreakState();
+   if(g_r1_pdh_break_time <= 0 || g_r1_pdh_level <= 0.0 || g_r1_pdh_h1_atr <= 0.0)
+      return false;
+   if(g_r1_pdh_break_time == g_r1_pdh_consumed_break_time)
+     {
+      ResetR1PriorD1HighBreakState();
+      return false;
+     }
+
+   datetime m15_bar_time = 0;
+   datetime m15_close_time = 0;
+   if(!R1PdhTakeDistinctCompletedM15Bar(m15_bar_time, m15_close_time))
+      return false;
+   g_r1_pdh_retest_m15_bars_observed++;
+   const bool final_retest_bar =
+      g_r1_pdh_retest_m15_bars_observed >= MathMax(1, InpR1PdhRetestWindowM15Bars);
+
+   const int atr_period = MathMax(1, InpR1PdhAtrPeriod);
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, atr_period, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || m15_atr <= 0.0 || range <= 0.0)
+     {
+      if(final_retest_bar)
+        {
+         g_r1_pdh_consumed_break_time = g_r1_pdh_break_time;
+         ResetR1PriorD1HighBreakState();
+         g_r1_pdh_last_outcome_reason = "r1_pdh_expired";
+        }
+      return false;
+     }
+
+   if(close < g_r1_pdh_level - MathMax(0.0, InpR1PdhInvalidBreakdownH1Atr) * g_r1_pdh_h1_atr)
+     {
+      g_r1_pdh_consumed_break_time = g_r1_pdh_break_time;
+      ResetR1PriorD1HighBreakState();
+      g_r1_pdh_last_outcome_reason = "r1_pdh_invalidated";
+      return false;
+     }
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool touched_level = low <= g_r1_pdh_level + MathMax(0.0, InpR1PdhRetestTouchM15Atr) * m15_atr;
+   if(!touched_level)
+     {
+      if(final_retest_bar)
+        {
+         g_r1_pdh_consumed_break_time = g_r1_pdh_break_time;
+         ResetR1PriorD1HighBreakState();
+         g_r1_pdh_last_outcome_reason = "r1_pdh_expired";
+        }
+      return false;
+     }
+
+   // Consumption is deliberately before candle qualification: no second-retest retry.
+   g_r1_pdh_consumed_break_time = g_r1_pdh_break_time;
+   g_r1_pdh_log_m15_open = open;
+   g_r1_pdh_log_m15_high = high;
+   g_r1_pdh_log_m15_low = low;
+   g_r1_pdh_log_m15_close = close;
+   g_r1_pdh_log_m15_atr = m15_atr;
+   g_r1_pdh_log_body_fraction = body_fraction;
+   g_r1_pdh_log_close_location = close_location;
+
+   const bool reclaimed_level =
+      close > open &&
+      close >= g_r1_pdh_level + MathMax(0.0, InpR1PdhReclaimDistanceM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR1PdhReclaimMinBodyFraction) &&
+      close_location >= InpR1PdhReclaimCloseLocationMin;
+   if(!reclaimed_level)
+     {
+      ResetR1PriorD1HighBreakState();
+      g_r1_pdh_last_outcome_reason = "r1_pdh_first_retest_rejected";
+      return false;
+     }
+
+   const double retest_low = R1PriorD1HighRetestLow(g_r1_pdh_break_time);
+   if(retest_low <= 0.0)
+     {
+      ResetR1PriorD1HighBreakState();
+      g_r1_pdh_last_outcome_reason = "r1_pdh_first_retest_rejected";
+      return false;
+     }
+   const double projected_sl = retest_low - MathMax(0.0, InpR1PdhStopBufferM15Atr) * m15_atr;
+   stop_distance = close - projected_sl;
+   if(stop_distance <= 0.0)
+     {
+      ResetR1PriorD1HighBreakState();
+      g_r1_pdh_last_outcome_reason = "r1_pdh_first_retest_rejected";
+      return false;
+     }
+
+   direction = "LONG";
+   reason = "R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG_STATE_" + RegimeStateName(CurrentXauRegime());
+   break_distance_atr = (close - g_r1_pdh_level) / g_r1_pdh_h1_atr;
+   return true;
+  }
+
+bool R2LhfMatureDowntrendOwnershipAllows()
+  {
+   if(InpR2LhfMaturityD1Bars != 3)
+      return false;
+   if(!InpRegimeRequireH4Confirm)
+      return false;
+   if(CurrentXauRegime() != XAU_REGIME_DOWNTREND)
+      return false;
+   for(int shift = 1; shift <= InpR2LhfMaturityD1Bars; shift++)
+     {
+      if(!RegimeTrendStackAtShift(PERIOD_D1, shift, false))
+         return false;
+     }
+   return RegimeTrendStackAtShift(PERIOD_H4, 1, false);
+  }
+
+string R2LhfStateName(const R2LhfState state)
+  {
+   if(state == R2_LHF_STATE_WAIT_FIRST_PIVOT)
+      return "WAIT_FIRST_PIVOT";
+   if(state == R2_LHF_STATE_LOWER_HIGH_CONFIRMED)
+      return "LOWER_HIGH_CONFIRMED";
+   return "IDLE";
+  }
+
+string R2LhfEventId()
+  {
+   if(g_r2_lhf_setup_time <= 0)
+      return "";
+   return "R2LHF_" + IntegerToString((long)g_r2_lhf_setup_time);
+  }
+
+void LogR2LhfLifecycle(
+   const string stage,
+   const R2LhfState from_state,
+   const R2LhfState to_state,
+   const string outcome
+)
+  {
+   const string event_id = R2LhfEventId();
+   if(event_id == "")
+      return;
+   MqlTick tick;
+   if(!SymbolInfoTick(InpTargetSymbol, tick))
+     {
+      tick.bid = 0.0;
+      tick.ask = 0.0;
+     }
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   const long spread_points = (point > 0.0 && tick.ask >= tick.bid)
+      ? (long)MathRound((tick.ask - tick.bid) / point)
+      : 0;
+   const string lifecycle_reason =
+      "R2_LHF_LIFECYCLE" +
+      "|event_id=" + event_id +
+      "|setup_time=" + IntegerToString((long)g_r2_lhf_setup_time) +
+      "|from=" + R2LhfStateName(from_state) +
+      "|to=" + R2LhfStateName(to_state) +
+      "|outcome=" + outcome +
+      "|setup=DOWN|phase=ESTABLISHED|shock=0" +
+      "|maturity=" + IntegerToString(InpR2LhfMaturityD1Bars) +
+      "|pivot_time=" + IntegerToString((long)g_r2_lhf_pivot_time) +
+      "|confirm_time=" + IntegerToString((long)g_r2_lhf_pivot_confirmation_time) +
+      "|reset_m15_bars=" + IntegerToString(g_r2_lhf_reset_m15_bars_observed) +
+      "|second_break_m15_bars=" + IntegerToString(g_r2_lhf_second_break_m15_bars_observed);
+   LogSignal(
+      stage,
+      "NONE",
+      lifecycle_reason,
+      tick.bid,
+      tick.ask,
+      spread_points,
+      g_r2_lhf_origin_high,
+      g_r2_lhf_leg_one_low,
+      g_r2_lhf_leg_one_close,
+      g_r2_lhf_pivot_high,
+      g_r2_lhf_leg_one_low,
+      g_r2_lhf_leg_one_close,
+      g_r2_lhf_h1_atr,
+      0.0,
+      0.0,
+      g_r2_lhf_reset_depth_h1_atr,
+      0.0,
+      0.0
+   );
+  }
+
+void LogR2LhfDailyOwnershipIfNeeded()
+  {
+   if(!InpRegimeSnapshotLogEnabled)
+      return;
+   const datetime completed_d1_bar = iTime(InpTargetSymbol, PERIOD_D1, 1);
+   if(completed_d1_bar <= 0 || completed_d1_bar == g_r2_lhf_last_logged_d1_bar)
+      return;
+   g_r2_lhf_last_logged_d1_bar = completed_d1_bar;
+
+   const XauRegimeState regime = CurrentXauRegime();
+   const bool mature_down = R2LhfMatureDowntrendOwnershipAllows();
+   MqlTick tick;
+   if(!SymbolInfoTick(InpTargetSymbol, tick))
+     {
+      tick.bid = 0.0;
+      tick.ask = 0.0;
+     }
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   const long spread_points = (point > 0.0 && tick.ask >= tick.bid)
+      ? (long)MathRound((tick.ask - tick.bid) / point)
+      : 0;
+   const string reason =
+      "R2_LHF_D1_OWNERSHIP" +
+      "|d1_time=" + IntegerToString((long)completed_d1_bar) +
+      "|mature=" + (mature_down ? "1" : "0") +
+      "|state=" + RegimeStateName(regime) +
+      "|setup=" + (mature_down ? "DOWN" : "NONE") +
+      "|phase=" + (mature_down ? "ESTABLISHED" : "OTHER") +
+      "|shock=" + (regime == XAU_REGIME_SHOCK ? "1" : "0") +
+      "|maturity=" + IntegerToString(InpR2LhfMaturityD1Bars);
+   LogSignal(
+      "R2_LHF_D1_OWNERSHIP",
+      "NONE",
+      reason,
+      tick.bid,
+      tick.ask,
+      spread_points,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+   );
+  }
+
+void ConsumeR2LhfSetup(const string outcome_reason)
+  {
+   const R2LhfState from_state = g_r2_lhf_state;
+   LogR2LhfLifecycle("R2_LHF_EVENT_CONSUMED", from_state, R2_LHF_STATE_IDLE, outcome_reason);
+   if(g_r2_lhf_setup_time > 0)
+      g_r2_lhf_consumed_setup_time = g_r2_lhf_setup_time;
+   g_r2_lhf_state = R2_LHF_STATE_IDLE;
+   g_r2_lhf_last_counted_m15_bar = 0;
+   g_r2_lhf_reset_m15_bars_observed = 0;
+   g_r2_lhf_second_break_m15_bars_observed = 0;
+   g_r2_lhf_last_outcome_reason = outcome_reason;
+  }
+
+bool ArmR2LhfLegOneAtH1Shift(const int shift)
+  {
+   if(g_r2_lhf_state != R2_LHF_STATE_IDLE)
+      return false;
+   if(!R2LhfMatureDowntrendOwnershipAllows())
+      return false;
+
+   const int atr_period = MathMax(1, InpR2LhfAtrPeriod);
+   const int lookback = MathMax(3, InpR2LhfLeg1LookbackH1Bars);
+   if(iBars(InpTargetSymbol, PERIOD_H1) < lookback + atr_period + shift + 5)
+      return false;
+
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime setup_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || setup_time <= 0 || setup_time == g_r2_lhf_consumed_setup_time)
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_H1, shift);
+   const double high = iHigh(InpTargetSymbol, PERIOD_H1, shift);
+   const double low = iLow(InpTargetSymbol, PERIOD_H1, shift);
+   const double close = iClose(InpTargetSymbol, PERIOD_H1, shift);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, atr_period, shift);
+   const double prior_low = TimeframeLow(PERIOD_H1, shift + 1, lookback);
+   const double origin_high = TimeframeHigh(PERIOD_H1, shift + 1, lookback);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || h1_atr <= 0.0 ||
+      prior_low <= 0.0 || origin_high <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool accepted_leg_one =
+      close < open &&
+      close <= prior_low - MathMax(0.0, InpR2LhfLeg1BreakMarginH1Atr) * h1_atr &&
+      range >= MathMax(0.0, InpR2LhfLeg1MinRangeH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR2LhfLeg1MinBodyFraction) &&
+      close_location <= InpR2LhfLeg1CloseLocationMax;
+   if(!accepted_leg_one)
+      return false;
+
+   g_r2_lhf_state = R2_LHF_STATE_WAIT_FIRST_PIVOT;
+   g_r2_lhf_setup_time = setup_time;
+   g_r2_lhf_last_counted_m15_bar = 0;
+   g_r2_lhf_pivot_time = 0;
+   g_r2_lhf_pivot_confirmation_time = 0;
+   g_r2_lhf_reset_m15_bars_observed = 0;
+   g_r2_lhf_second_break_m15_bars_observed = 0;
+   g_r2_lhf_leg_one_low = low;
+   g_r2_lhf_leg_one_close = close;
+   g_r2_lhf_origin_high = origin_high;
+   g_r2_lhf_h1_atr = h1_atr;
+   g_r2_lhf_pivot_high = 0.0;
+   g_r2_lhf_reset_depth_h1_atr = 0.0;
+   g_r2_lhf_last_outcome_reason = "r2_lhf_leg_one_armed";
+   LogR2LhfLifecycle("R2_LHF_LEG_ONE_REGISTERED", R2_LHF_STATE_IDLE, R2_LHF_STATE_WAIT_FIRST_PIVOT, "leg_one_armed");
+   return true;
+  }
+
+void RefreshR2LhfLegOneState()
+  {
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0 || latest_h1_bar == g_r2_lhf_last_scanned_h1_bar)
+      return;
+
+   // Initialization records context only. It must never backfill an earlier H1 event.
+   if(g_r2_lhf_last_scanned_h1_bar == 0)
+     {
+      g_r2_lhf_last_scanned_h1_bar = latest_h1_bar;
+      return;
+     }
+
+   // Advance the scalar H1 cursor even while an older setup is active. A later
+   // consumption may not revisit or overlap an H1 event that completed meanwhile.
+   g_r2_lhf_last_scanned_h1_bar = latest_h1_bar;
+   if(g_r2_lhf_state != R2_LHF_STATE_IDLE)
+      return;
+   ArmR2LhfLegOneAtH1Shift(1);
+  }
+
+bool R2LhfTakeDistinctCompletedM15Bar(datetime &m15_bar_time, datetime &m15_close_time)
+  {
+   m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   if(m15_bar_time <= 0 || m15_bar_time == g_r2_lhf_last_counted_m15_bar)
+      return false;
+   m15_close_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   // The M15 bar closing with leg one is context, not observed bar one.
+   if(m15_close_time <= g_r2_lhf_setup_time)
+      return false;
+   g_r2_lhf_last_counted_m15_bar = m15_bar_time;
+   return true;
+  }
+
+bool R2LhfFirstConfirmedPivotHigh(double &pivot_high, datetime &pivot_time)
+  {
+   pivot_high = 0.0;
+   pivot_time = 0;
+   const int left_bars = MathMax(1, InpR2LhfPivotLeftBars);
+   const int right_bars = MathMax(1, InpR2LhfPivotRightBars);
+   const int pivot_shift = right_bars + 1;
+   if(iBars(InpTargetSymbol, PERIOD_M15) < left_bars + right_bars + 5)
+      return false;
+
+   const double candidate = iHigh(InpTargetSymbol, PERIOD_M15, pivot_shift);
+   const datetime candidate_time = iTime(InpTargetSymbol, PERIOD_M15, pivot_shift);
+   if(candidate <= 0.0 || candidate_time < g_r2_lhf_setup_time)
+      return false;
+
+   for(int offset = 1; offset <= right_bars; offset++)
+     {
+      const double right_high = iHigh(InpTargetSymbol, PERIOD_M15, pivot_shift - offset);
+      if(right_high <= 0.0 || candidate <= right_high)
+         return false;
+     }
+   for(int offset = 1; offset <= left_bars; offset++)
+     {
+      const double left_high = iHigh(InpTargetSymbol, PERIOD_M15, pivot_shift + offset);
+      if(left_high <= 0.0 || candidate <= left_high)
+         return false;
+     }
+
+   pivot_high = candidate;
+   pivot_time = candidate_time;
+   return true;
+  }
+
+bool R2LhfPivotRightBarsTouchedLegOneLow()
+  {
+   const int right_bars = MathMax(1, InpR2LhfPivotRightBars);
+   for(int shift = 1; shift <= right_bars; shift++)
+     {
+      const double low = iLow(InpTargetSymbol, PERIOD_M15, shift);
+      if(low <= 0.0)
+         return true;
+      if(low <= g_r2_lhf_leg_one_low)
+         return true;
+     }
+   return false;
+  }
+
+bool TryR2SecondContinuationLowerHighShortSignal(
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   g_r2_lhf_last_outcome_reason = "";
+   LogR2LhfDailyOwnershipIfNeeded();
+   RefreshR2LhfLegOneState();
+   if(g_r2_lhf_state == R2_LHF_STATE_IDLE || g_r2_lhf_setup_time <= 0 ||
+      g_r2_lhf_leg_one_low <= 0.0 || g_r2_lhf_h1_atr <= 0.0)
+      return false;
+
+   datetime m15_bar_time = 0;
+   datetime m15_close_time = 0;
+   if(!R2LhfTakeDistinctCompletedM15Bar(m15_bar_time, m15_close_time))
+      return false;
+
+   const bool waiting_for_pivot = g_r2_lhf_state == R2_LHF_STATE_WAIT_FIRST_PIVOT;
+   if(waiting_for_pivot)
+      g_r2_lhf_reset_m15_bars_observed++;
+   else if(g_r2_lhf_state == R2_LHF_STATE_LOWER_HIGH_CONFIRMED)
+      g_r2_lhf_second_break_m15_bars_observed++;
+   const bool final_reset_bar = waiting_for_pivot &&
+      g_r2_lhf_reset_m15_bars_observed >= MathMax(1, InpR2LhfResetWindowM15Bars);
+   const bool final_second_break_bar = !waiting_for_pivot &&
+      g_r2_lhf_second_break_m15_bars_observed >= MathMax(1, InpR2LhfSecondBreakWindowM15Bars);
+
+   const int atr_period = MathMax(1, InpR2LhfAtrPeriod);
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, atr_period, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || m15_atr <= 0.0 || range <= 0.0)
+     {
+      if(final_reset_bar)
+         ConsumeR2LhfSetup("r2_lhf_reset_expired");
+      else if(final_second_break_bar)
+         ConsumeR2LhfSetup("r2_lhf_second_break_expired");
+      return false;
+     }
+
+   if(!R2LhfMatureDowntrendOwnershipAllows())
+     {
+      ConsumeR2LhfSetup("r2_lhf_regime_ownership_lost");
+      return false;
+     }
+
+   if(waiting_for_pivot)
+     {
+      if(close < g_r2_lhf_leg_one_low - MathMax(0.0, InpR2LhfSecondCloseM15Atr) * m15_atr)
+        {
+         ConsumeR2LhfSetup("r2_lhf_continuation_without_reset");
+         return false;
+        }
+      if(close > g_r2_lhf_origin_high)
+        {
+         ConsumeR2LhfSetup("r2_lhf_origin_high_invalidated");
+         return false;
+        }
+
+      double pivot_high = 0.0;
+      datetime pivot_time = 0;
+      if(!R2LhfFirstConfirmedPivotHigh(pivot_high, pivot_time))
+        {
+         if(final_reset_bar)
+            ConsumeR2LhfSetup("r2_lhf_reset_expired");
+         return false;
+        }
+
+      g_r2_lhf_pivot_high = pivot_high;
+      g_r2_lhf_pivot_time = pivot_time;
+      g_r2_lhf_pivot_confirmation_time = m15_close_time;
+
+      // The first chronological confirmed pivot is the event. Invalid geometry is
+      // consumed here; the state machine never waits for a later, better-looking one.
+      const double reset_depth = pivot_high - g_r2_lhf_leg_one_close;
+      const bool valid_first_pivot =
+         reset_depth >= MathMax(0.0, InpR2LhfResetMinDepthH1Atr) * g_r2_lhf_h1_atr &&
+         pivot_high <= g_r2_lhf_origin_high - MathMax(0.0, InpR2LhfLowerHighMarginH1Atr) * g_r2_lhf_h1_atr;
+      if(!valid_first_pivot)
+        {
+         ConsumeR2LhfSetup("r2_lhf_first_pivot_rejected");
+         return false;
+        }
+      if(R2LhfPivotRightBarsTouchedLegOneLow())
+        {
+         ConsumeR2LhfSetup("r2_lhf_second_break_before_arm");
+         return false;
+        }
+
+      g_r2_lhf_second_break_m15_bars_observed = 0;
+      g_r2_lhf_reset_depth_h1_atr = reset_depth / g_r2_lhf_h1_atr;
+      g_r2_lhf_state = R2_LHF_STATE_LOWER_HIGH_CONFIRMED;
+      g_r2_lhf_last_outcome_reason = "r2_lhf_lower_high_confirmed";
+      LogR2LhfLifecycle("R2_LHF_FIRST_PIVOT_CONFIRMED", R2_LHF_STATE_WAIT_FIRST_PIVOT, R2_LHF_STATE_LOWER_HIGH_CONFIRMED, "first_pivot_confirmed");
+      return false;
+     }
+
+   if(g_r2_lhf_state != R2_LHF_STATE_LOWER_HIGH_CONFIRMED)
+      return false;
+   if(m15_close_time <= g_r2_lhf_pivot_confirmation_time)
+      return false;
+   if(close > g_r2_lhf_pivot_high + MathMax(0.0, InpR2LhfInvalidReclaimH1Atr) * g_r2_lhf_h1_atr)
+     {
+      ConsumeR2LhfSetup("r2_lhf_lower_high_invalidated");
+      return false;
+     }
+
+   const bool touched_second_break =
+      low <= g_r2_lhf_leg_one_low + MathMax(0.0, InpR2LhfSecondTouchM15Atr) * m15_atr;
+   if(!touched_second_break)
+     {
+      if(final_second_break_bar)
+         ConsumeR2LhfSetup("r2_lhf_second_break_expired");
+      return false;
+     }
+
+   // First-event consumption precedes candle-quality, stop, cost, position, router,
+   // risk, claim, and broker guards. No later bar can retry this scalar setup ID.
+   ConsumeR2LhfSetup("r2_lhf_first_second_break_consumed");
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   g_r2_lhf_log_m15_open = open;
+   g_r2_lhf_log_m15_high = high;
+   g_r2_lhf_log_m15_low = low;
+   g_r2_lhf_log_m15_close = close;
+   g_r2_lhf_log_m15_atr = m15_atr;
+   g_r2_lhf_log_body_fraction = body_fraction;
+   g_r2_lhf_log_close_location = close_location;
+
+   const bool accepted_second_break =
+      close < open &&
+      close <= g_r2_lhf_leg_one_low - MathMax(0.0, InpR2LhfSecondCloseM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR2LhfSecondMinBodyFraction) &&
+      close_location <= InpR2LhfSecondCloseLocationMax;
+   if(!accepted_second_break)
+     {
+      g_r2_lhf_last_outcome_reason = "r2_lhf_first_second_break_rejected";
+      return false;
+     }
+
+   const double projected_sl = g_r2_lhf_pivot_high + MathMax(0.0, InpR2LhfStopBufferM15Atr) * m15_atr;
+   stop_distance = projected_sl - close;
+   if(stop_distance <= 0.0)
+     {
+      g_r2_lhf_last_outcome_reason = "r2_lhf_first_second_break_rejected";
+      return false;
+     }
+
+   direction = "SHORT";
+   reason =
+      "R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT_STATE_" + RegimeStateName(CurrentXauRegime()) +
+      "|event_id=" + R2LhfEventId() +
+      "|setup_time=" + IntegerToString((long)g_r2_lhf_setup_time) +
+      "|setup=DOWN|phase=ESTABLISHED|shock=0" +
+      "|maturity=" + IntegerToString(InpR2LhfMaturityD1Bars) +
+      "|pivot_time=" + IntegerToString((long)g_r2_lhf_pivot_time) +
+      "|confirm_time=" + IntegerToString((long)g_r2_lhf_pivot_confirmation_time);
+   break_distance_atr = (g_r2_lhf_leg_one_low - close) / g_r2_lhf_h1_atr;
+   return true;
+  }
+
+bool R1HlfMatureD1AtShift(const int base_shift)
+  {
+   for(int offset = 0; offset < InpR1HlfMaturityD1Bars; offset++)
+     {
+      if(!RegimeTrendStackAtShift(PERIOD_D1, base_shift + offset, true))
+         return false;
+     }
+   return true;
+  }
+
+bool R1HlfMatureUptrendOwnershipAllows()
+  {
+   if(InpR1HlfMaturityD1Bars != 3)
+      return false;
+   if(!InpRegimeRequireH4Confirm)
+      return false;
+   if(RegimeShockState())
+      return false;
+   if(CurrentXauRegime() != XAU_REGIME_UPTREND)
+      return false;
+   if(!R1HlfMatureD1AtShift(1))
+      return false;
+   return RegimeTrendStackAtShift(PERIOD_H4, 1, true);
+  }
+
+string R1HlfStateName(const R1HlfState state)
+  {
+   if(state == R1_HLF_STATE_WAIT_FIRST_PIVOT)
+      return "WAIT_FIRST_PIVOT";
+   if(state == R1_HLF_STATE_HIGHER_LOW_CONFIRMED)
+      return "HIGHER_LOW_CONFIRMED";
+   return "IDLE";
+  }
+
+string R1HlfEventId()
+  {
+   if(g_r1_hlf_setup_time <= 0)
+      return "";
+   return "R1HLF_" + IntegerToString((long)g_r1_hlf_setup_time);
+  }
+
+string R1HlfTimeText(const datetime value)
+  {
+   if(value <= 0)
+      return "";
+   return TimeToString(value, TIME_DATE | TIME_SECONDS);
+  }
+
+string R1HlfEpisodeIdAtSetup()
+  {
+   datetime episode_start = 0;
+   const int bars = iBars(InpTargetSymbol, PERIOD_D1);
+   const int scan_limit = MathMin(MathMax(0, bars - 5), 2000);
+   for(int shift = 1; shift <= scan_limit; shift++)
+     {
+      if(!R1HlfMatureD1AtShift(shift))
+         break;
+      const datetime bar_time = iTime(InpTargetSymbol, PERIOD_D1, shift);
+      if(bar_time <= 0)
+         break;
+      episode_start = bar_time;
+     }
+   if(episode_start <= 0)
+      episode_start = iTime(InpTargetSymbol, PERIOD_D1, 1);
+   return episode_start > 0 ? "R1EP_" + IntegerToString((long)episode_start) : "";
+  }
+
+void LogR1HlfLifecycle(const string stage, const string outcome)
+  {
+   const string event_id = R1HlfEventId();
+   if(event_id == "")
+      return;
+   MqlTick tick;
+   if(!SymbolInfoTick(InpTargetSymbol, tick))
+     {
+      tick.bid = 0.0;
+      tick.ask = 0.0;
+     }
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   const long spread_points = (point > 0.0 && tick.ask >= tick.bid)
+      ? (long)MathRound((tick.ask - tick.bid) / point)
+      : 0;
+   const string lifecycle_reason =
+      "R1_HLF_LIFECYCLE" +
+      "|event_id=" + event_id +
+      "|episode_id=" + g_r1_hlf_episode_id +
+      "|setup_time=" + R1HlfTimeText(g_r1_hlf_setup_time) +
+      "|canonical_direction=UP|phase=ESTABLISHED|shock=0|compatibility=uptrend" +
+      "|state=" + R1HlfStateName(g_r1_hlf_state) +
+      "|outcome=" + outcome +
+      "|pivot_ordinal=1" +
+      "|pivot_time=" + R1HlfTimeText(g_r1_hlf_pivot_time) +
+      "|pivot_confirmation_time=" + R1HlfTimeText(g_r1_hlf_pivot_confirmation_time) +
+      "|attempt_ordinal=1" +
+      "|attempt_time=" + R1HlfTimeText(g_r1_hlf_attempt_time) +
+      "|consumed_time=" + R1HlfTimeText(TimeCurrent()) +
+      "|reset_m15_bars=" + IntegerToString(g_r1_hlf_reset_m15_bars_observed) +
+      "|second_break_m15_bars=" + IntegerToString(g_r1_hlf_second_break_m15_bars_observed);
+   LogSignal(
+      stage,
+      stage == "R1_HLF_SECOND_BREAK_CONSUMED" ? "LONG" : "NONE",
+      lifecycle_reason,
+      tick.bid,
+      tick.ask,
+      spread_points,
+      g_r1_hlf_leg_one_high,
+      g_r1_hlf_pivot_low,
+      g_r1_hlf_log_m15_open,
+      g_r1_hlf_log_m15_high,
+      g_r1_hlf_log_m15_low,
+      g_r1_hlf_log_m15_close,
+      g_r1_hlf_log_m15_atr,
+      g_r1_hlf_log_body_fraction,
+      g_r1_hlf_log_close_location,
+      g_r1_hlf_reset_depth_h1_atr,
+      0.0,
+      0.0
+   );
+  }
+
+string R1HlfOutcomeReason(const string outcome)
+  {
+   if(outcome == "first_pivot_rejected")
+      return "r1_hlf_first_pivot_rejected";
+   if(outcome == "second_break_before_arm")
+      return "r1_hlf_second_break_before_arm";
+   if(outcome == "first_second_break_rejected")
+      return "r1_hlf_first_second_break_rejected";
+   return "r1_hlf_" + outcome;
+  }
+
+void FinalizeR1HlfSetupConsumption(const string outcome)
+  {
+   if(g_r1_hlf_setup_time <= 0 || g_r1_hlf_consumed_setup_time == g_r1_hlf_setup_time)
+      return;
+   LogR1HlfLifecycle("R1_HLF_SETUP_CONSUMED", outcome);
+   g_r1_hlf_consumed_setup_time = g_r1_hlf_setup_time;
+   g_r1_hlf_state = R1_HLF_STATE_IDLE;
+   g_r1_hlf_last_outcome_reason = R1HlfOutcomeReason(outcome);
+  }
+
+void ReserveR1HlfFirstSecondBreakConsumption()
+  {
+   // The first touch is unavailable to every later bar before candle quality or any
+   // execution guard is evaluated. Frozen audit fields remain available downstream.
+   g_r1_hlf_state = R1_HLF_STATE_IDLE;
+  }
+
+bool ArmR1HlfLegOneAtH1Shift(const int shift)
+  {
+   if(g_r1_hlf_state != R1_HLF_STATE_IDLE)
+      return false;
+   if(!R1HlfMatureUptrendOwnershipAllows())
+      return false;
+   const int atr_period = MathMax(1, InpR1HlfAtrPeriod);
+   const int lookback = MathMax(3, InpR1HlfLeg1LookbackH1Bars);
+   if(iBars(InpTargetSymbol, PERIOD_H1) < lookback + atr_period + shift + 5)
+      return false;
+
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime setup_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || setup_time <= 0 || setup_time == g_r1_hlf_consumed_setup_time)
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_H1, shift);
+   const double high = iHigh(InpTargetSymbol, PERIOD_H1, shift);
+   const double low = iLow(InpTargetSymbol, PERIOD_H1, shift);
+   const double close = iClose(InpTargetSymbol, PERIOD_H1, shift);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, atr_period, shift);
+   const double prior_high = TimeframeHigh(PERIOD_H1, shift + 1, lookback);
+   const double origin_low = TimeframeLow(PERIOD_H1, shift + 1, lookback);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || h1_atr <= 0.0 ||
+      prior_high <= 0.0 || origin_low <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool accepted_leg_one =
+      close > open &&
+      close >= prior_high + MathMax(0.0, InpR1HlfLeg1BreakMarginH1Atr) * h1_atr &&
+      range >= MathMax(0.0, InpR1HlfLeg1MinRangeH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR1HlfLeg1MinBodyFraction) &&
+      close_location >= InpR1HlfLeg1CloseLocationMin;
+   if(!accepted_leg_one)
+      return false;
+
+   g_r1_hlf_state = R1_HLF_STATE_WAIT_FIRST_PIVOT;
+   g_r1_hlf_setup_time = setup_time;
+   g_r1_hlf_last_counted_m15_bar = 0;
+   g_r1_hlf_pivot_time = 0;
+   g_r1_hlf_pivot_confirmation_time = 0;
+   g_r1_hlf_attempt_time = 0;
+   g_r1_hlf_reset_m15_bars_observed = 0;
+   g_r1_hlf_second_break_m15_bars_observed = 0;
+   g_r1_hlf_leg_one_high = high;
+   g_r1_hlf_leg_one_close = close;
+   g_r1_hlf_origin_low = origin_low;
+   g_r1_hlf_h1_atr = h1_atr;
+   g_r1_hlf_pivot_low = 0.0;
+   g_r1_hlf_reset_depth_h1_atr = 0.0;
+   g_r1_hlf_log_m15_open = 0.0;
+   g_r1_hlf_log_m15_high = 0.0;
+   g_r1_hlf_log_m15_low = 0.0;
+   g_r1_hlf_log_m15_close = 0.0;
+   g_r1_hlf_log_m15_atr = 0.0;
+   g_r1_hlf_log_body_fraction = 0.0;
+   g_r1_hlf_log_close_location = 0.0;
+   g_r1_hlf_episode_id = R1HlfEpisodeIdAtSetup();
+   g_r1_hlf_last_outcome_reason = "r1_hlf_leg_one_registered";
+   LogR1HlfLifecycle("R1_HLF_SETUP_REGISTERED", "registered");
+   return true;
+  }
+
+void RefreshR1HlfLegOneState()
+  {
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0 || latest_h1_bar == g_r1_hlf_last_scanned_h1_bar)
+      return;
+   // Initialization records context only; no earlier H1 event is backfilled.
+   if(g_r1_hlf_last_scanned_h1_bar == 0)
+     {
+      g_r1_hlf_last_scanned_h1_bar = latest_h1_bar;
+      return;
+     }
+   g_r1_hlf_last_scanned_h1_bar = latest_h1_bar;
+   // Active scalar state owns the event. New H1 legs are ignored, never stacked or
+   // allowed to overwrite it.
+   if(g_r1_hlf_state != R1_HLF_STATE_IDLE)
+      return;
+   ArmR1HlfLegOneAtH1Shift(1);
+  }
+
+bool R1HlfTakeDistinctCompletedM15Bar(datetime &m15_bar_time, datetime &m15_close_time)
+  {
+   m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   if(m15_bar_time <= 0 || m15_bar_time == g_r1_hlf_last_counted_m15_bar)
+      return false;
+   m15_close_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   // The M15 bar closing with leg one is context, not observed bar one.
+   if(m15_close_time <= g_r1_hlf_setup_time)
+      return false;
+   g_r1_hlf_last_counted_m15_bar = m15_bar_time;
+   return true;
+  }
+
+bool R1HlfFirstConfirmedPivotLow(double &pivot_low, datetime &pivot_time)
+  {
+   pivot_low = 0.0;
+   pivot_time = 0;
+   const int left_bars = MathMax(1, InpR1HlfPivotLeftBars);
+   const int right_bars = MathMax(1, InpR1HlfPivotRightBars);
+   const int pivot_shift = right_bars + 1;
+   if(iBars(InpTargetSymbol, PERIOD_M15) < pivot_shift + left_bars + 5)
+      return false;
+   const datetime pivot_bar_time = iTime(InpTargetSymbol, PERIOD_M15, pivot_shift);
+   const datetime pivot_close_time = pivot_bar_time + PeriodSeconds(PERIOD_M15);
+   if(pivot_bar_time <= 0 || pivot_close_time <= g_r1_hlf_setup_time)
+      return false;
+   const double candidate_low = iLow(InpTargetSymbol, PERIOD_M15, pivot_shift);
+   if(candidate_low <= 0.0)
+      return false;
+   for(int offset = 1; offset <= left_bars; offset++)
+     {
+      const double comparison_low = iLow(InpTargetSymbol, PERIOD_M15, pivot_shift + offset);
+      if(comparison_low <= 0.0 || candidate_low >= comparison_low)
+         return false;
+     }
+   for(int offset = 1; offset <= right_bars; offset++)
+     {
+      const double comparison_low = iLow(InpTargetSymbol, PERIOD_M15, pivot_shift - offset);
+      if(comparison_low <= 0.0 || candidate_low >= comparison_low)
+         return false;
+     }
+   pivot_low = candidate_low;
+   pivot_time = pivot_close_time;
+   return true;
+  }
+
+bool R1HlfPivotRightBarsTouchedLegOneHigh()
+  {
+   const int right_bars = MathMax(1, InpR1HlfPivotRightBars);
+   for(int shift = 1; shift <= right_bars; shift++)
+     {
+      const double high = iHigh(InpTargetSymbol, PERIOD_M15, shift);
+      if(high <= 0.0 || high >= g_r1_hlf_leg_one_high)
+         return true;
+     }
+   return false;
+  }
+
+bool TryR1SecondContinuationHigherLowLongSignal(
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   direction = "";
+   reason = "";
+   stop_distance = 0.0;
+   break_distance_atr = 0.0;
+   g_r1_hlf_last_outcome_reason = "";
+   RefreshR1HlfLegOneState();
+   if(g_r1_hlf_state == R1_HLF_STATE_IDLE || g_r1_hlf_setup_time <= 0 ||
+      g_r1_hlf_setup_time == g_r1_hlf_consumed_setup_time)
+      return false;
+
+   datetime m15_bar_time = 0;
+   datetime m15_close_time = 0;
+   if(!R1HlfTakeDistinctCompletedM15Bar(m15_bar_time, m15_close_time))
+      return false;
+
+   const bool waiting_for_pivot = g_r1_hlf_state == R1_HLF_STATE_WAIT_FIRST_PIVOT;
+   if(waiting_for_pivot)
+      g_r1_hlf_reset_m15_bars_observed++;
+   else if(g_r1_hlf_state == R1_HLF_STATE_HIGHER_LOW_CONFIRMED)
+      g_r1_hlf_second_break_m15_bars_observed++;
+   const bool final_reset_bar = waiting_for_pivot &&
+      g_r1_hlf_reset_m15_bars_observed >= MathMax(1, InpR1HlfResetWindowM15Bars);
+   const bool final_second_break_bar = !waiting_for_pivot &&
+      g_r1_hlf_second_break_m15_bars_observed >= MathMax(1, InpR1HlfSecondBreakWindowM15Bars);
+
+   if(!R1HlfMatureUptrendOwnershipAllows())
+     {
+      FinalizeR1HlfSetupConsumption(waiting_for_pivot
+         ? "regime_exit_before_pivot"
+         : "regime_exit_after_pivot");
+      return false;
+     }
+
+   const int atr_period = MathMax(1, InpR1HlfAtrPeriod);
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, atr_period, 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || m15_atr <= 0.0 || range <= 0.0)
+     {
+      if(final_reset_bar)
+         FinalizeR1HlfSetupConsumption("pivot_window_expired");
+      else if(final_second_break_bar)
+         FinalizeR1HlfSetupConsumption("second_break_window_expired");
+      return false;
+     }
+
+   if(waiting_for_pivot)
+     {
+      if(close > g_r1_hlf_leg_one_high + MathMax(0.0, InpR1HlfSecondCloseM15Atr) * m15_atr)
+        {
+         FinalizeR1HlfSetupConsumption("continuation_without_reset");
+         return false;
+        }
+      if(close < g_r1_hlf_origin_low)
+        {
+         FinalizeR1HlfSetupConsumption("origin_low_broken");
+         return false;
+        }
+
+      double pivot_low = 0.0;
+      datetime pivot_time = 0;
+      if(R1HlfFirstConfirmedPivotLow(pivot_low, pivot_time))
+        {
+         g_r1_hlf_pivot_low = pivot_low;
+         g_r1_hlf_pivot_time = pivot_time;
+         g_r1_hlf_pivot_confirmation_time = m15_close_time;
+         const double reset_depth = g_r1_hlf_leg_one_close - pivot_low;
+         const bool qualified_pivot =
+            reset_depth >= MathMax(0.0, InpR1HlfResetMinDepthH1Atr) * g_r1_hlf_h1_atr &&
+            pivot_low >= g_r1_hlf_origin_low + MathMax(0.0, InpR1HlfHigherLowMarginH1Atr) * g_r1_hlf_h1_atr;
+         LogR1HlfLifecycle(
+            "R1_HLF_FIRST_PIVOT_CONSUMED",
+            qualified_pivot ? "confirmed" : "first_pivot_rejected"
+         );
+         if(!qualified_pivot)
+           {
+            FinalizeR1HlfSetupConsumption("first_pivot_rejected");
+            return false;
+           }
+         if(R1HlfPivotRightBarsTouchedLegOneHigh())
+           {
+            FinalizeR1HlfSetupConsumption("second_break_before_arm");
+            return false;
+           }
+         g_r1_hlf_reset_depth_h1_atr = reset_depth / g_r1_hlf_h1_atr;
+         g_r1_hlf_second_break_m15_bars_observed = 0;
+         g_r1_hlf_state = R1_HLF_STATE_HIGHER_LOW_CONFIRMED;
+         g_r1_hlf_last_outcome_reason = "r1_hlf_higher_low_confirmed";
+         return false;
+        }
+      if(final_reset_bar)
+         FinalizeR1HlfSetupConsumption("pivot_window_expired");
+      return false;
+     }
+
+   if(g_r1_hlf_state != R1_HLF_STATE_HIGHER_LOW_CONFIRMED)
+      return false;
+   if(close < g_r1_hlf_pivot_low - MathMax(0.0, InpR1HlfInvalidBreakdownH1Atr) * g_r1_hlf_h1_atr)
+     {
+      FinalizeR1HlfSetupConsumption("invalidated_after_pivot");
+      return false;
+     }
+
+   const bool touched_second_break =
+      high >= g_r1_hlf_leg_one_high - MathMax(0.0, InpR1HlfSecondTouchM15Atr) * m15_atr;
+   if(!touched_second_break)
+     {
+      if(final_second_break_bar)
+         FinalizeR1HlfSetupConsumption("second_break_window_expired");
+      return false;
+     }
+
+   g_r1_hlf_attempt_time = m15_close_time;
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   g_r1_hlf_log_m15_open = open;
+   g_r1_hlf_log_m15_high = high;
+   g_r1_hlf_log_m15_low = low;
+   g_r1_hlf_log_m15_close = close;
+   g_r1_hlf_log_m15_atr = m15_atr;
+   g_r1_hlf_log_body_fraction = body_fraction;
+   g_r1_hlf_log_close_location = close_location;
+
+   ReserveR1HlfFirstSecondBreakConsumption();
+   const bool accepted_second_break =
+      close > open &&
+      close >= g_r1_hlf_leg_one_high + MathMax(0.0, InpR1HlfSecondCloseM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR1HlfSecondMinBodyFraction) &&
+      close_location >= InpR1HlfSecondCloseLocationMin;
+   if(!accepted_second_break)
+     {
+      LogR1HlfLifecycle("R1_HLF_SECOND_BREAK_CONSUMED", "first_second_break_rejected");
+      FinalizeR1HlfSetupConsumption("first_second_break_rejected");
+      return false;
+     }
+
+   const double projected_sl = g_r1_hlf_pivot_low - MathMax(0.0, InpR1HlfStopBufferM15Atr) * m15_atr;
+   stop_distance = close - projected_sl;
+   if(stop_distance <= 0.0)
+     {
+      LogR1HlfLifecycle("R1_HLF_SECOND_BREAK_CONSUMED", "first_second_break_rejected");
+      FinalizeR1HlfSetupConsumption("first_second_break_rejected");
+      return false;
+     }
+
+   LogR1HlfLifecycle("R1_HLF_SECOND_BREAK_CONSUMED", "entry_attempt");
+   FinalizeR1HlfSetupConsumption("entry_attempt");
+   direction = "LONG";
+   reason =
+      "R1_SECOND_CONTINUATION_HIGHER_LOW_LONG_STATE_uptrend" +
+      "|event_id=" + R1HlfEventId() +
+      "|episode_id=" + g_r1_hlf_episode_id +
+      "|setup_time=" + R1HlfTimeText(g_r1_hlf_setup_time) +
+      "|canonical_direction=UP|phase=ESTABLISHED|shock=0|compatibility=uptrend" +
+      "|pivot_time=" + R1HlfTimeText(g_r1_hlf_pivot_time) +
+      "|pivot_confirmation_time=" + R1HlfTimeText(g_r1_hlf_pivot_confirmation_time) +
+      "|attempt_time=" + R1HlfTimeText(g_r1_hlf_attempt_time);
+   break_distance_atr = (close - g_r1_hlf_leg_one_high) / g_r1_hlf_h1_atr;
+   return true;
+  }
+
+string R3TransitionStateName(const R3TransitionState state)
+  {
+   if(state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE)
+      return "WAIT_H1_ACCEPTANCE";
+   if(state == R3_TRANSITION_STATE_WAIT_FIRST_PULLBACK)
+      return "WAIT_FIRST_PULLBACK";
+   return "IDLE";
+  }
+
+string R3TransitionEventId()
+  {
+   if(g_r3_setup_time <= 0)
+      return "";
+   return "R3TRANS_" + IntegerToString((long)g_r3_setup_time);
+  }
+
+datetime R3DayStart(const datetime value)
+  {
+   if(value <= 0)
+      return 0;
+   MqlDateTime parts;
+   TimeToStruct(value, parts);
+   parts.hour = 0;
+   parts.min = 0;
+   parts.sec = 0;
+   return StructToTime(parts);
+  }
+
+bool R3EstablishedTrendNow()
+  {
+   const XauRegimeState regime = CurrentXauRegime();
+   return regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_DOWNTREND;
+  }
+
+void LogR3TransitionLifecycle(const string stage, const string outcome)
+  {
+   const string event_id = R3TransitionEventId();
+   if(event_id == "")
+      return;
+   MqlTick tick;
+   if(!SymbolInfoTick(InpTargetSymbol, tick))
+     {
+      tick.bid = 0.0;
+      tick.ask = 0.0;
+     }
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   const long spread_points = (point > 0.0 && tick.ask >= tick.bid)
+      ? (long)MathRound((tick.ask - tick.bid) / point)
+      : 0;
+   const string lifecycle_reason =
+      "R3_TRANSITION_LIFECYCLE" +
+      "|event_id=" + event_id +
+      "|setup_time=" + IntegerToString((long)g_r3_setup_time) +
+      "|acceptance_time=" + IntegerToString((long)g_r3_acceptance_time) +
+       "|state=" + R3TransitionStateName(g_r3_transition_state) +
+       "|direction=" + (g_r3_direction == "" ? "NONE" : g_r3_direction) +
+       "|outcome=" + outcome +
+       "|setup_h1_bars=" + IntegerToString(g_r3_setup_h1_bars_elapsed) +
+       "|pullback_m15_bars=" + IntegerToString(g_r3_pullback_m15_bars_elapsed) +
+       "|setup=COMPRESSED|phase=TRANSITION|shock=0|established=0";
+   LogSignal(
+      stage,
+      g_r3_direction == "" ? "NONE" : g_r3_direction,
+      lifecycle_reason,
+      tick.bid,
+      tick.ask,
+      spread_points,
+      g_r3_box_high,
+      g_r3_box_low,
+      g_r3_boundary,
+      g_r3_box_high,
+      g_r3_box_low,
+      g_r3_boundary,
+      g_r3_acceptance_h1_atr,
+      0.0,
+      0.0,
+      g_r3_setup_atr_percentile / 100.0,
+      g_r3_setup_range_ratio,
+      0.0
+   );
+  }
+
+void ConsumeR3TransitionEvent(const string outcome)
+  {
+   if(g_r3_transition_state == R3_TRANSITION_STATE_IDLE || g_r3_setup_time <= 0)
+      return;
+   LogR3TransitionLifecycle("R3_EVENT_CONSUMED", outcome);
+   g_r3_transition_state = R3_TRANSITION_STATE_IDLE;
+   g_r3_setup_h1_bars_elapsed = 0;
+   g_r3_pullback_m15_bars_elapsed = 0;
+   g_r3_last_outcome_reason = "r3_" + outcome;
+  }
+
+void ReserveR3FirstTouchConsumption()
+  {
+   // Make the scalar event unavailable before candle quality or any later guard is
+   // evaluated. Frozen event fields remain intact for the one terminal lifecycle row.
+   g_r3_transition_state = R3_TRANSITION_STATE_IDLE;
+  }
+
+void FinalizeR3FirstTouchConsumption(const string outcome)
+  {
+   LogR3TransitionLifecycle("R3_EVENT_CONSUMED", outcome);
+   g_r3_last_outcome_reason = "r3_" + outcome;
+  }
+
+bool R3CompletedD1CompressionSetup(
+   double &box_high,
+   double &box_low,
+   double &atr_percentile,
+   double &range_ratio
+)
+  {
+   box_high = 0.0;
+   box_low = 0.0;
+   atr_percentile = 0.0;
+   range_ratio = 0.0;
+   const int atr_period = MathMax(1, InpR3CompressionAtrPeriod);
+   const int percentile_lookback = MathMax(20, InpR3CompressionAtrPercentileLookback);
+   const int box_days = MathMax(2, InpR3CompressionBoxDays);
+   const int median_lookback = MathMax(5, InpR3CompressionRangeMedianLookback);
+   const int required_bars = MathMax(percentile_lookback + atr_period + 5, box_days + median_lookback + 5);
+   if(iBars(InpTargetSymbol, PERIOD_D1) < required_bars)
+      return false;
+
+   // All setup price and volatility inputs are completed D1 bars at shift 1+.
+   atr_percentile = IndicatorAtrPercentile(PERIOD_D1, atr_period, percentile_lookback, 1);
+   box_high = TimeframeHigh(PERIOD_D1, 1, box_days);
+   box_low = TimeframeLow(PERIOD_D1, 1, box_days);
+   const double median_range = TimeframeMedianRange(PERIOD_D1, median_lookback, 1);
+   const double width = box_high - box_low;
+   if(atr_percentile < 0.0 || box_high <= 0.0 || box_low <= 0.0 || width <= 0.0 || median_range <= 0.0)
+      return false;
+   range_ratio = (width / (double)box_days) / median_range;
+   return atr_percentile <= InpR3CompressionAtrPercentileMax &&
+          range_ratio <= InpR3CompressionRangeMedianMax;
+  }
+
+bool RegisterR3CompressionEventAtH1Shift(const int shift)
+  {
+   if(g_r3_transition_state != R3_TRANSITION_STATE_IDLE)
+      return false;
+   if(RegimeShockState())
+      return false;
+
+   double box_high = 0.0;
+   double box_low = 0.0;
+   double atr_percentile = 0.0;
+   double range_ratio = 0.0;
+   if(!R3CompletedD1CompressionSetup(box_high, box_low, atr_percentile, range_ratio))
+      return false;
+
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime setup_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || setup_time <= 0)
+      return false;
+
+   g_r3_transition_state = R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE;
+   g_r3_setup_time = setup_time;
+   g_r3_acceptance_time = 0;
+   // The completed H1 bar that registers the setup is acceptance decision one.
+   g_r3_setup_h1_bars_elapsed = 1;
+   g_r3_pullback_m15_bars_elapsed = 0;
+   g_r3_box_high = box_high;
+   g_r3_box_low = box_low;
+   g_r3_setup_atr_percentile = atr_percentile;
+   g_r3_setup_range_ratio = range_ratio;
+   g_r3_acceptance_h1_atr = 0.0;
+   g_r3_boundary = 0.0;
+   g_r3_direction = "";
+   g_r3_last_outcome_reason = "r3_event_registered";
+   LogR3TransitionLifecycle("R3_EVENT_REGISTERED", "registered");
+   return true;
+  }
+
+bool AcceptR3ReleaseAtH1Shift(const int shift)
+  {
+   if(g_r3_transition_state != R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE)
+      return false;
+   const datetime h1_bar_time = iTime(InpTargetSymbol, PERIOD_H1, shift);
+   const datetime acceptance_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || acceptance_time < g_r3_setup_time)
+      return false;
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_H1, shift);
+   const double high = iHigh(InpTargetSymbol, PERIOD_H1, shift);
+   const double low = iLow(InpTargetSymbol, PERIOD_H1, shift);
+   const double close = iClose(InpTargetSymbol, PERIOD_H1, shift);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, MathMax(1, InpR3CompressionAtrPeriod), shift);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || h1_atr <= 0.0 || range <= 0.0)
+      return false;
+
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   const bool long_acceptance =
+      close > open &&
+      close >= g_r3_box_high + MathMax(0.0, InpR3AcceptBreakMarginH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR3AcceptMinBodyFraction) &&
+      close_location >= InpR3AcceptLongCloseLocationMin;
+   const bool short_acceptance =
+      close < open &&
+      close <= g_r3_box_low - MathMax(0.0, InpR3AcceptBreakMarginH1Atr) * h1_atr &&
+      body_fraction >= MathMax(0.0, InpR3AcceptMinBodyFraction) &&
+      close_location <= InpR3AcceptShortCloseLocationMax;
+   if(long_acceptance && short_acceptance)
+     {
+      ConsumeR3TransitionEvent("ambiguous");
+      return false;
+     }
+   if(!long_acceptance && !short_acceptance)
+      return false;
+
+   g_r3_direction = long_acceptance ? "LONG" : "SHORT";
+   g_r3_boundary = long_acceptance ? g_r3_box_high : g_r3_box_low;
+   g_r3_acceptance_h1_atr = h1_atr;
+   g_r3_acceptance_time = acceptance_time;
+   g_r3_pullback_m15_bars_elapsed = 0;
+   g_r3_transition_state = R3_TRANSITION_STATE_WAIT_FIRST_PULLBACK;
+   g_r3_last_outcome_reason = "r3_h1_accepted";
+   LogR3TransitionLifecycle("R3_H1_ACCEPTED", "accepted");
+   return true;
+  }
+
+void RefreshR3CompressionTransitionState()
+  {
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0 || latest_h1_bar == g_r3_last_scanned_h1_bar)
+      return;
+
+   // Initialization records context only. It cannot backfill an earlier H1 event.
+   if(g_r3_last_scanned_h1_bar == 0)
+     {
+      g_r3_last_scanned_h1_bar = latest_h1_bar;
+      g_r3_last_setup_day = R3DayStart(latest_h1_bar);
+      return;
+     }
+
+   g_r3_last_scanned_h1_bar = latest_h1_bar;
+   const datetime setup_day = R3DayStart(latest_h1_bar);
+   const bool first_h1_of_new_day = setup_day > 0 && setup_day != g_r3_last_setup_day;
+   if(first_h1_of_new_day)
+      g_r3_last_setup_day = setup_day;
+
+   if(g_r3_transition_state != R3_TRANSITION_STATE_IDLE)
+     {
+      if(RegimeShockState())
+        {
+         ConsumeR3TransitionEvent("shock");
+         return;
+        }
+      if(R3EstablishedTrendNow())
+        {
+         ConsumeR3TransitionEvent("established_trend_handoff");
+         return;
+        }
+      if(g_r3_transition_state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE)
+        {
+         g_r3_setup_h1_bars_elapsed++;
+         const int setup_lifetime_bars = MathMax(1, InpR3SetupLifetimeH1Bars);
+         if(g_r3_setup_h1_bars_elapsed > setup_lifetime_bars)
+           {
+            ConsumeR3TransitionEvent("expired");
+            return;
+           }
+         const bool accepted = AcceptR3ReleaseAtH1Shift(1);
+         if(!accepted &&
+            g_r3_transition_state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE &&
+            g_r3_setup_h1_bars_elapsed >= setup_lifetime_bars)
+            ConsumeR3TransitionEvent("expired");
+        }
+      return;
+     }
+
+   // A setup is evaluated only at the first newly completed H1 bar of a D1 date.
+   // If another event was active then, that date is consumed as unavailable and is
+   // never revisited by later H1 bars.
+   if(!first_h1_of_new_day)
+      return;
+   if(!RegisterR3CompressionEventAtH1Shift(1))
+      return;
+   if(R3EstablishedTrendNow())
+     {
+      ConsumeR3TransitionEvent("established_trend_handoff");
+      return;
+     }
+   const bool accepted = AcceptR3ReleaseAtH1Shift(1);
+   if(!accepted &&
+      g_r3_transition_state == R3_TRANSITION_STATE_WAIT_H1_ACCEPTANCE &&
+      g_r3_setup_h1_bars_elapsed >= MathMax(1, InpR3SetupLifetimeH1Bars))
+      ConsumeR3TransitionEvent("expired");
+  }
+
+bool TryR3CompressionH1AcceptM15FirstPullbackSignal(
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   direction = "";
+   reason = "";
+   stop_distance = 0.0;
+   break_distance_atr = 0.0;
+   g_r3_last_outcome_reason = "";
+   RefreshR3CompressionTransitionState();
+   if(g_r3_transition_state != R3_TRANSITION_STATE_WAIT_FIRST_PULLBACK)
+      return false;
+
+   const datetime m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   const datetime m15_close_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   if(m15_bar_time <= 0 || m15_close_time <= g_r3_acceptance_time)
+      return false;
+   if(RegimeShockState())
+     {
+      ConsumeR3TransitionEvent("shock");
+      return false;
+     }
+   if(R3EstablishedTrendNow())
+     {
+      ConsumeR3TransitionEvent("established_trend_handoff");
+      return false;
+     }
+   g_r3_pullback_m15_bars_elapsed++;
+   const bool final_retest_bar =
+      g_r3_pullback_m15_bars_elapsed >= MathMax(1, InpR3RetestWindowM15Bars);
+
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, MathMax(1, InpR3CompressionAtrPeriod), 1);
+   const double range = high - low;
+   if(open <= 0.0 || high <= 0.0 || low <= 0.0 || close <= 0.0 || m15_atr <= 0.0 || range <= 0.0)
+     {
+      if(final_retest_bar)
+         ConsumeR3TransitionEvent("expired");
+      return false;
+     }
+
+   const double invalidation = MathMax(0.0, InpR3InvalidationH1Atr) * g_r3_acceptance_h1_atr;
+   if((g_r3_direction == "LONG" && close < g_r3_boundary - invalidation) ||
+      (g_r3_direction == "SHORT" && close > g_r3_boundary + invalidation))
+     {
+      ConsumeR3TransitionEvent("invalidated");
+      return false;
+     }
+
+   const double touch_band = MathMax(0.0, InpR3RetestTouchM15Atr) * m15_atr;
+   const bool first_touch = low <= g_r3_boundary + touch_band && high >= g_r3_boundary - touch_band;
+   if(!first_touch)
+     {
+      if(final_retest_bar)
+         ConsumeR3TransitionEvent("expired");
+      return false;
+     }
+
+   const string event_id = R3TransitionEventId();
+   const string event_direction = g_r3_direction;
+   const double event_boundary = g_r3_boundary;
+   const double event_h1_atr = g_r3_acceptance_h1_atr;
+   const double body_fraction = MathAbs(close - open) / range;
+   const double close_location = ClosePositionInRange(high, low, close);
+   g_r3_log_m15_open = open;
+   g_r3_log_m15_high = high;
+   g_r3_log_m15_low = low;
+   g_r3_log_m15_close = close;
+   g_r3_log_m15_atr = m15_atr;
+   g_r3_log_body_fraction = body_fraction;
+   g_r3_log_close_location = close_location;
+   g_r3_log_break_distance_h1_atr = event_h1_atr > 0.0
+      ? MathAbs(close - event_boundary) / event_h1_atr
+      : 0.0;
+
+   // First-event consumption precedes candle quality and every later execution
+   // guard. A cost, position, router, risk, claim, or broker block cannot retry it.
+   ReserveR3FirstTouchConsumption();
+   if(!InpR3ConsumeOnFirstTouch)
+     {
+      FinalizeR3FirstTouchConsumption("ambiguous");
+      return false;
+     }
+   const bool accepted_pullback =
+      (event_direction == "LONG" &&
+       close > open &&
+       close >= event_boundary + MathMax(0.0, InpR3RejectDistanceM15Atr) * m15_atr &&
+       body_fraction >= MathMax(0.0, InpR3RejectMinBodyFraction) &&
+       close_location >= InpR3RejectLongCloseLocationMin) ||
+      (event_direction == "SHORT" &&
+       close < open &&
+       close <= event_boundary - MathMax(0.0, InpR3RejectDistanceM15Atr) * m15_atr &&
+       body_fraction >= MathMax(0.0, InpR3RejectMinBodyFraction) &&
+       close_location <= InpR3RejectShortCloseLocationMax);
+   if(!accepted_pullback)
+     {
+      FinalizeR3FirstTouchConsumption("first_touch_failed");
+      return false;
+     }
+
+   const double entry_price = event_direction == "LONG"
+      ? SymbolInfoDouble(InpTargetSymbol, SYMBOL_ASK)
+      : SymbolInfoDouble(InpTargetSymbol, SYMBOL_BID);
+   const double projected_sl = event_direction == "LONG"
+      ? low - MathMax(0.0, InpR3StopBufferM15Atr) * m15_atr
+      : high + MathMax(0.0, InpR3StopBufferM15Atr) * m15_atr;
+   stop_distance = event_direction == "LONG" ? entry_price - projected_sl : projected_sl - entry_price;
+   if(entry_price <= 0.0 || stop_distance <= 0.0)
+     {
+      FinalizeR3FirstTouchConsumption("first_touch_failed");
+      return false;
+     }
+
+   FinalizeR3FirstTouchConsumption("entry");
+   direction = event_direction;
+   reason =
+      (event_direction == "LONG"
+       ? "R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK_LONG"
+       : "R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK_SHORT") +
+      "|event_id=" + event_id +
+      "|setup=COMPRESSED|phase=TRANSITION|shock=0|established=0";
+   break_distance_atr = g_r3_log_break_distance_h1_atr;
+   return true;
+  }
+
+string R3ChopEventId()
+  {
+   if(g_r3_chop_setup_time <= 0)
+      return "";
+   return "R3CHOP_" + IntegerToString((long)g_r3_chop_setup_time);
+  }
+
+string R3ChopEventCommonFields()
+  {
+   return
+      "|event_id=" + R3ChopEventId() +
+      "|episode_id=" + g_r3_chop_event_episode_id +
+      "|context_id=" + g_r3_chop_event_context_id +
+      "|setup_time=" + IntegerToString((long)g_r3_chop_setup_time) +
+      "|setup=COMPRESSED|entry=COMPRESSED|direction_state=NEUTRAL" +
+      "|shock=0|established=0|transition=0";
+  }
+
+void LogR3ChopTelemetry(
+   const string stage,
+   const string direction,
+   const string reason,
+   const double recent_high,
+   const double recent_low,
+   const double open,
+   const double high,
+   const double low,
+   const double close,
+   const double atr,
+   const double body_fraction,
+   const double close_location,
+   const double break_distance_atr,
+   const double estimated_cost_r
+)
+  {
+   const double bid = SymbolInfoDouble(InpTargetSymbol, SYMBOL_BID);
+   const double ask = SymbolInfoDouble(InpTargetSymbol, SYMBOL_ASK);
+   const long spread_points = SymbolInfoInteger(InpTargetSymbol, SYMBOL_SPREAD);
+   LogSignal(
+      stage,
+      direction,
+      reason,
+      bid,
+      ask,
+      spread_points,
+      recent_high,
+      recent_low,
+      open,
+      high,
+      low,
+      close,
+      atr,
+      body_fraction,
+      close_location,
+      0.0,
+      break_distance_atr,
+      estimated_cost_r
+   );
+  }
+
+bool R3ChopCompletedD1CompressionContext(
+   double &box_high,
+   double &box_low,
+   double &atr_percentile,
+   double &range_ratio
+)
+  {
+   box_high = 0.0;
+   box_low = 0.0;
+   atr_percentile = 100.0;
+   range_ratio = 0.0;
+   const int atr_period = MathMax(1, InpR3ChopD1AtrPeriod);
+   const int percentile_lookback = MathMax(1, InpR3ChopD1AtrPercentileLookback);
+   const int box_days = MathMax(1, InpR3ChopD1BoxDays);
+   const int median_lookback = MathMax(1, InpR3ChopD1RangeMedianLookback);
+   const int required_bars = MathMax(
+      percentile_lookback + atr_period + 5,
+      MathMax(box_days, median_lookback) + 5
+   );
+   if(iBars(InpTargetSymbol, PERIOD_D1) < required_bars)
+      return false;
+
+   // Causal ownership uses completed D1 shift 1 and older observations only.
+   atr_percentile = IndicatorAtrPercentile(PERIOD_D1, atr_period, percentile_lookback, 1);
+   box_high = TimeframeHigh(PERIOD_D1, 1, box_days);
+   box_low = TimeframeLow(PERIOD_D1, 1, box_days);
+   const double median_range = TimeframeMedianRange(PERIOD_D1, median_lookback, 1);
+   const double width = box_high - box_low;
+   if(box_high <= 0.0 || box_low <= 0.0 || width <= 0.0 || median_range <= 0.0)
+      return false;
+   range_ratio = (width / (double)box_days) / median_range;
+   return atr_percentile <= InpR3ChopD1AtrPercentileMax &&
+          range_ratio <= InpR3ChopD1RangeMedianMax;
+  }
+
+void LogR3ChopEventConsumption(
+   const string outcome,
+   const int attempt_ordinal,
+   const bool deinit
+)
+  {
+   const string reason =
+      "R3_CHOP_LIFECYCLE" + R3ChopEventCommonFields() +
+      "|outcome=" + outcome +
+      "|m15_bars_seen=" + IntegerToString(g_r3_chop_m15_bars_seen) +
+      "|attempt_ordinal=" + IntegerToString(attempt_ordinal) +
+      "|deinit=" + (deinit ? "1" : "0") +
+      "|from=WAIT_FIRST_M15_SWEEP|to=IDLE";
+   LogR3ChopTelemetry(
+      "R3_CHOP_EVENT_CONSUMED",
+      "NONE",
+      reason,
+      g_r3_chop_boundary_high,
+      g_r3_chop_boundary_low,
+      g_r3_chop_log_m15_open,
+      g_r3_chop_log_m15_high,
+      g_r3_chop_log_m15_low,
+      g_r3_chop_log_m15_close,
+      g_r3_chop_log_m15_atr,
+      g_r3_chop_log_body_fraction,
+      g_r3_chop_log_close_location,
+      0.0,
+      0.0
+   );
+  }
+
+void ConsumeR3ChopEvent(
+   const string outcome,
+   const int attempt_ordinal,
+   const bool deinit
+)
+  {
+   if(g_r3_chop_state != R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP || g_r3_chop_setup_time <= 0)
+      return;
+   LogR3ChopEventConsumption(outcome, attempt_ordinal, deinit);
+
+   if(outcome == "shock" || outcome == "trend_handoff" ||
+      outcome == "transition_handoff" || outcome == "compression_lost")
+     {
+      g_r3_chop_context_active = false;
+      g_r3_chop_context_suspended = true;
+      g_r3_chop_episode_active = false;
+     }
+   g_r3_chop_state = R3_CHOP_STATE_IDLE;
+   g_r3_chop_last_counted_m15_bar = 0;
+   g_r3_chop_last_outcome_reason = "r3_chop_" + outcome;
+  }
+
+void ReserveR3ChopFirstSweepConsumption()
+  {
+   // The scalar event becomes unavailable before candle quality, stop geometry, or
+   // any execution guard is evaluated. Frozen fields remain for the terminal row.
+   g_r3_chop_state = R3_CHOP_STATE_IDLE;
+  }
+
+void FinalizeR3ChopFirstSweepConsumption(
+   const string outcome,
+   const int attempt_ordinal
+)
+  {
+   LogR3ChopEventConsumption(outcome, attempt_ordinal, false);
+   g_r3_chop_last_counted_m15_bar = 0;
+   g_r3_chop_last_outcome_reason = "r3_chop_" + outcome;
+  }
+
+string R3ChopIntradayHandoffOutcome()
+  {
+   const XauRegimeState regime = CurrentXauRegime();
+   if(regime == XAU_REGIME_SHOCK)
+      return "shock";
+   if(regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_DOWNTREND)
+      return "trend_handoff";
+   // The current canonical enum has no TRANSITION member. CHOP/UNKNOWN are never
+   // relabelled as transition; non-compression is resolved at the next D1 context.
+   return "";
+  }
+
+void LogR3ChopContextDecision(
+   const bool owned,
+   const bool compressed,
+   const XauRegimeState regime,
+   const datetime d1_time,
+   const bool prior_context_suspended
+)
+  {
+   const bool shock = regime == XAU_REGIME_SHOCK;
+   const bool established = regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_DOWNTREND;
+   string direction_state = "NEUTRAL";
+   if(regime == XAU_REGIME_UPTREND)
+      direction_state = "UP";
+   else if(regime == XAU_REGIME_DOWNTREND)
+      direction_state = "DOWN";
+   else if(regime == XAU_REGIME_UNKNOWN)
+      direction_state = "UNKNOWN";
+   const string reason =
+      "R3_CHOP_CONTEXT" +
+      "|context_id=" + g_r3_chop_context_id +
+      "|episode_id=" + g_r3_chop_episode_id +
+      "|d1_time=" + IntegerToString((long)d1_time) +
+      "|d1_shift=1|backfill=0" +
+      "|prior_context_suspended=" + (prior_context_suspended ? "1" : "0") +
+      "|owned=" + (owned ? "1" : "0") +
+      "|compressed=" + (compressed ? "1" : "0") +
+      "|direction_state=" + direction_state +
+      "|shock=" + (shock ? "1" : "0") +
+      "|established=" + (established ? "1" : "0") +
+      "|transition=0" +
+      "|box_high=" + DoubleToString(g_r3_chop_context_box_high, _Digits) +
+      "|box_low=" + DoubleToString(g_r3_chop_context_box_low, _Digits) +
+      "|d1_atr_percentile=" + DoubleToString(g_r3_chop_context_atr_percentile, 6) +
+      "|d1_range_ratio=" + DoubleToString(g_r3_chop_context_range_ratio, 6) +
+      "|regime=" + RegimeStateName(regime);
+   LogR3ChopTelemetry(
+      "R3_CHOP_CONTEXT_DECISION",
+      "NONE",
+      reason,
+      g_r3_chop_context_box_high,
+      g_r3_chop_context_box_low,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+   );
+  }
+
+void RefreshR3ChopDailyContext(const datetime h1_bar_time)
+  {
+   const datetime setup_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   const datetime context_date = R3DayStart(setup_time);
+   if(context_date <= 0 || context_date == g_r3_chop_last_context_date)
+      return;
+
+   const bool prior_owned = g_r3_chop_context_active;
+   const bool prior_suspended = g_r3_chop_context_suspended;
+   const string prior_episode_id = g_r3_chop_episode_id;
+   double box_high = 0.0;
+   double box_low = 0.0;
+   double atr_percentile = 100.0;
+   double range_ratio = 0.0;
+   const bool compressed = R3ChopCompletedD1CompressionContext(
+      box_high,
+      box_low,
+      atr_percentile,
+      range_ratio
+   );
+   const XauRegimeState regime = CurrentXauRegime();
+   const bool owned = compressed && regime == XAU_REGIME_COMPRESSION;
+
+   string loss_outcome = "";
+   if(regime == XAU_REGIME_SHOCK)
+      loss_outcome = "shock";
+   else if(regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_DOWNTREND)
+      loss_outcome = "trend_handoff";
+   else if(!owned)
+      loss_outcome = "compression_lost";
+   if(loss_outcome != "" && g_r3_chop_state == R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP)
+      ConsumeR3ChopEvent(loss_outcome, 0, false);
+
+   g_r3_chop_last_context_date = context_date;
+   g_r3_chop_last_scanned_d1_bar = iTime(InpTargetSymbol, PERIOD_D1, 1);
+   g_r3_chop_context_d1_time = g_r3_chop_last_scanned_d1_bar;
+   g_r3_chop_context_id = "R3CHOPCTX_" + IntegerToString((long)context_date);
+   g_r3_chop_context_box_high = box_high;
+   g_r3_chop_context_box_low = box_low;
+   g_r3_chop_context_atr_percentile = atr_percentile;
+   g_r3_chop_context_range_ratio = range_ratio;
+   g_r3_chop_context_suspended = false;
+
+   if(owned)
+     {
+      const bool continuing_episode = prior_owned && !prior_suspended && loss_outcome == "";
+      g_r3_chop_episode_id = continuing_episode
+         ? prior_episode_id
+         : "R3CHOPEP_" + IntegerToString((long)context_date);
+      g_r3_chop_context_active = true;
+      g_r3_chop_episode_active = true;
+     }
+   else
+     {
+      g_r3_chop_episode_id = "";
+      g_r3_chop_context_active = false;
+      g_r3_chop_episode_active = false;
+     }
+   LogR3ChopContextDecision(
+      owned,
+      compressed,
+      regime,
+      g_r3_chop_context_d1_time,
+      prior_suspended
+   );
+  }
+
+void LogR3ChopH1Decision(
+   const string action,
+   const string event_id,
+   const datetime h1_bar_time,
+   const datetime setup_time,
+   const double boundary_high,
+   const double boundary_low,
+   const double h1_atr,
+   const bool owned
+)
+  {
+   const string reason =
+      "R3_CHOP_H1" +
+      "|event_id=" + event_id +
+      "|episode_id=" + g_r3_chop_episode_id +
+      "|context_id=" + g_r3_chop_context_id +
+      "|setup_time=" + IntegerToString((long)setup_time) +
+      "|h1_bar_time=" + IntegerToString((long)h1_bar_time) +
+      "|h1_shift=1|backfill=0" +
+      "|owned=" + (owned ? "1" : "0") +
+      "|action=" + action +
+      "|boundary_lookback=" + IntegerToString(InpR3ChopH1BoundaryLookback) +
+      "|boundary_high=" + DoubleToString(boundary_high, _Digits) +
+      "|boundary_low=" + DoubleToString(boundary_low, _Digits) +
+      "|h1_atr=" + DoubleToString(h1_atr, _Digits) +
+      "|setup=COMPRESSED|entry=COMPRESSED|direction_state=NEUTRAL" +
+      "|shock=0|established=0|transition=0";
+   LogR3ChopTelemetry(
+      "R3_CHOP_H1_DECISION",
+      "NONE",
+      reason,
+      boundary_high,
+      boundary_low,
+      0.0,
+      boundary_high,
+      boundary_low,
+      0.0,
+      h1_atr,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+   );
+  }
+
+void RegisterR3ChopEventAtCompletedH1(const datetime h1_bar_time)
+  {
+   const datetime setup_time = h1_bar_time + PeriodSeconds(PERIOD_H1);
+   if(h1_bar_time <= 0 || setup_time <= 0)
+      return;
+   // Initialization intentionally skips the remainder of the attachment-day H1
+   // stream. No context/H1 telemetry is valid until the first next-date D1 context.
+   if(g_r3_chop_context_id == "")
+      return;
+   if(!g_r3_chop_context_active || g_r3_chop_context_suspended || !g_r3_chop_episode_active)
+     {
+      LogR3ChopH1Decision("context_inactive", "", h1_bar_time, setup_time, 0.0, 0.0, 0.0, false);
+      return;
+     }
+   if(g_r3_chop_state != R3_CHOP_STATE_IDLE)
+     {
+      LogR3ChopH1Decision("active_event", R3ChopEventId(), h1_bar_time, setup_time, 0.0, 0.0, 0.0, true);
+      return;
+     }
+
+   // Router-6 ownership is exact canonical COMPRESSION; SHOCK/UP/DOWN have already
+   // handed off and CHOP/UNKNOWN fail closed without inventing a transition phase.
+   if(CurrentXauRegime() != XAU_REGIME_COMPRESSION)
+     {
+      LogR3ChopH1Decision("handoff", "", h1_bar_time, setup_time, 0.0, 0.0, 0.0, false);
+      return;
+     }
+   const int lookback = MathMax(1, InpR3ChopH1BoundaryLookback);
+   const double boundary_high = TimeframeHigh(PERIOD_H1, 1, lookback);
+   const double boundary_low = TimeframeLow(PERIOD_H1, 1, lookback);
+   const double h1_atr = IndicatorAtrPrice(PERIOD_H1, MathMax(1, InpR3ChopD1AtrPeriod), 1);
+   const string event_id = "R3CHOP_" + IntegerToString((long)setup_time);
+   if(boundary_high <= 0.0 || boundary_low <= 0.0 || boundary_high <= boundary_low || h1_atr <= 0.0)
+     {
+      LogR3ChopH1Decision("invalid_boundary_data", event_id, h1_bar_time, setup_time, boundary_high, boundary_low, h1_atr, true);
+      return;
+     }
+
+   g_r3_chop_setup_time = setup_time;
+   g_r3_chop_h1_bar_time = h1_bar_time;
+   g_r3_chop_boundary_high = boundary_high;
+   g_r3_chop_boundary_low = boundary_low;
+   g_r3_chop_h1_atr = h1_atr;
+   g_r3_chop_event_context_id = g_r3_chop_context_id;
+   g_r3_chop_event_episode_id = g_r3_chop_episode_id;
+   g_r3_chop_m15_bars_seen = 0;
+   g_r3_chop_last_counted_m15_bar = 0;
+   g_r3_chop_log_m15_open = 0.0;
+   g_r3_chop_log_m15_high = 0.0;
+   g_r3_chop_log_m15_low = 0.0;
+   g_r3_chop_log_m15_close = 0.0;
+   g_r3_chop_log_m15_atr = 0.0;
+   g_r3_chop_log_body_fraction = 0.0;
+   g_r3_chop_log_close_location = 0.0;
+   LogR3ChopH1Decision("registered", event_id, h1_bar_time, setup_time, boundary_high, boundary_low, h1_atr, true);
+   g_r3_chop_state = R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP;
+   const string reason =
+      "R3_CHOP_LIFECYCLE" + R3ChopEventCommonFields() +
+      "|h1_bar_time=" + IntegerToString((long)h1_bar_time) +
+      "|h1_shift=1|backfill=0" +
+      "|boundary_lookback=" + IntegerToString(InpR3ChopH1BoundaryLookback) +
+      "|boundary_high=" + DoubleToString(boundary_high, _Digits) +
+      "|boundary_low=" + DoubleToString(boundary_low, _Digits) +
+      "|h1_atr=" + DoubleToString(h1_atr, _Digits) +
+      "|outcome=registered|from=IDLE|to=WAIT_FIRST_M15_SWEEP";
+   LogR3ChopTelemetry(
+      "R3_CHOP_EVENT_REGISTERED",
+      "NONE",
+      reason,
+      boundary_high,
+      boundary_low,
+      0.0,
+      boundary_high,
+      boundary_low,
+      0.0,
+      h1_atr,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+   );
+   g_r3_chop_last_outcome_reason = "r3_chop_event_registered";
+  }
+
+bool R3ChopTakeDistinctCompletedM15Bar(
+   const datetime m15_bar_time,
+   const datetime m15_close_time
+)
+  {
+   if(g_r3_chop_state != R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP ||
+      m15_bar_time <= 0 || m15_close_time <= g_r3_chop_setup_time ||
+      m15_bar_time == g_r3_chop_last_counted_m15_bar)
+      return false;
+   g_r3_chop_last_counted_m15_bar = m15_bar_time;
+   g_r3_chop_m15_bars_seen++;
+   return g_r3_chop_m15_bars_seen <= MathMax(1, InpR3ChopEventWindowM15Bars);
+  }
+
+bool ProcessR3ChopCompletedM15(
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   if(g_r3_chop_state != R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP)
+      return false;
+   const datetime m15_bar_time = iTime(InpTargetSymbol, PERIOD_M15, 1);
+   const datetime decision_bar_time = m15_bar_time + PeriodSeconds(PERIOD_M15);
+   if(!R3ChopTakeDistinctCompletedM15Bar(m15_bar_time, decision_bar_time))
+      return false;
+
+   const int ordinal = g_r3_chop_m15_bars_seen;
+   const double open = iOpen(InpTargetSymbol, PERIOD_M15, 1);
+   const double high = iHigh(InpTargetSymbol, PERIOD_M15, 1);
+   const double low = iLow(InpTargetSymbol, PERIOD_M15, 1);
+   const double close = iClose(InpTargetSymbol, PERIOD_M15, 1);
+   const double m15_atr = IndicatorAtrPrice(PERIOD_M15, MathMax(1, InpR3ChopD1AtrPeriod), 1);
+   const double range = high - low;
+   const bool valid_data = open > 0.0 && high > 0.0 && low > 0.0 && close > 0.0 &&
+                           m15_atr > 0.0 && range > 0.0;
+   const double body_fraction = valid_data ? MathAbs(close - open) / range : 0.0;
+   const double close_location = valid_data ? ClosePositionInRange(high, low, close) : 0.0;
+   const bool lower_sweep = valid_data &&
+      low <= g_r3_chop_boundary_low - MathMax(0.0, InpR3ChopSweepM15Atr) * m15_atr;
+   const bool upper_sweep = valid_data &&
+      high >= g_r3_chop_boundary_high + MathMax(0.0, InpR3ChopSweepM15Atr) * m15_atr;
+   g_r3_chop_log_m15_open = open;
+   g_r3_chop_log_m15_high = high;
+   g_r3_chop_log_m15_low = low;
+   g_r3_chop_log_m15_close = close;
+   g_r3_chop_log_m15_atr = m15_atr;
+   g_r3_chop_log_body_fraction = body_fraction;
+   g_r3_chop_log_close_location = close_location;
+
+   const string decision_reason =
+      "R3_CHOP_LIFECYCLE" + R3ChopEventCommonFields() +
+      "|decision_bar_time=" + IntegerToString((long)decision_bar_time) +
+      "|m15_bar_ordinal=" + IntegerToString(ordinal) +
+      "|lower_sweep=" + (lower_sweep ? "1" : "0") +
+      "|upper_sweep=" + (upper_sweep ? "1" : "0") +
+      "|valid_data=" + (valid_data ? "1" : "0");
+   LogR3ChopTelemetry(
+      "R3_CHOP_M15_DECISION",
+      "NONE",
+      decision_reason,
+      g_r3_chop_boundary_high,
+      g_r3_chop_boundary_low,
+      open,
+      high,
+      low,
+      close,
+      m15_atr,
+      body_fraction,
+      close_location,
+      0.0,
+      0.0
+   );
+
+   if(lower_sweep && upper_sweep)
+     {
+      ConsumeR3ChopEvent("ambiguous", ordinal, false);
+      return false;
+     }
+   if(!lower_sweep && !upper_sweep)
+     {
+      if(ordinal >= MathMax(1, InpR3ChopEventWindowM15Bars))
+         ConsumeR3ChopEvent("expired", 0, false);
+      return false;
+     }
+
+   // Freeze the event and reserve its only attempt immediately after the first
+   // one-sided sweep is identified. Nothing below can make this event retry.
+   const string event_direction = lower_sweep ? "LONG" : "SHORT";
+   const string event_id = R3ChopEventId();
+   const string event_episode_id = g_r3_chop_event_episode_id;
+   const string event_context_id = g_r3_chop_event_context_id;
+   const datetime event_setup_time = g_r3_chop_setup_time;
+   const double event_boundary_high = g_r3_chop_boundary_high;
+   const double event_boundary_low = g_r3_chop_boundary_low;
+   const double event_h1_atr = g_r3_chop_h1_atr;
+   ReserveR3ChopFirstSweepConsumption();
+
+   const bool lower_quality =
+      lower_sweep && close > open &&
+      close >= event_boundary_low + MathMax(0.0, InpR3ChopReclaimM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR3ChopMinBodyFraction) &&
+      close_location >= InpR3ChopLongCloseLocationMin;
+   const bool upper_quality =
+      upper_sweep && close < open &&
+      close <= event_boundary_high - MathMax(0.0, InpR3ChopReclaimM15Atr) * m15_atr &&
+      body_fraction >= MathMax(0.0, InpR3ChopMinBodyFraction) &&
+      close_location <= InpR3ChopShortCloseLocationMax;
+   const int digits = (int)SymbolInfoInteger(InpTargetSymbol, SYMBOL_DIGITS);
+   const double entry_price = NormalizeDouble(
+      event_direction == "LONG"
+      ? SymbolInfoDouble(InpTargetSymbol, SYMBOL_ASK)
+      : SymbolInfoDouble(InpTargetSymbol, SYMBOL_BID),
+      digits
+   );
+   const double stop_price = NormalizeDouble(
+      event_direction == "LONG"
+      ? low - MathMax(0.0, InpR3ChopStopBufferM15Atr) * m15_atr
+      : high + MathMax(0.0, InpR3ChopStopBufferM15Atr) * m15_atr,
+      digits
+   );
+   const double candidate_stop_distance = event_direction == "LONG"
+      ? entry_price - stop_price
+      : stop_price - entry_price;
+   const bool stop_geometry_valid =
+      entry_price > 0.0 && stop_price > 0.0 && candidate_stop_distance > 0.0 &&
+      candidate_stop_distance <= MathMax(0.0, InpR3ChopMaxStopH1Atr) * event_h1_atr;
+   if(!InpR3ChopConsumeFirstSweep ||
+      !(lower_quality || upper_quality) || !stop_geometry_valid)
+     {
+      FinalizeR3ChopFirstSweepConsumption("first_sweep_failed", ordinal);
+      return false;
+     }
+
+   g_r3_chop_signal_boundary_high = event_boundary_high;
+   g_r3_chop_signal_boundary_low = event_boundary_low;
+   g_r3_chop_signal_h1_atr = event_h1_atr;
+   g_r3_chop_signal_attempt_time = decision_bar_time;
+   g_r3_chop_signal_attempt_ordinal = ordinal;
+   stop_distance = candidate_stop_distance;
+   break_distance_atr = event_h1_atr > 0.0
+      ? MathAbs(close - (event_direction == "LONG" ? event_boundary_low : event_boundary_high)) / event_h1_atr
+      : 0.0;
+   direction = event_direction;
+   reason =
+      (event_direction == "LONG"
+       ? "R3_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM_LONG"
+       : "R3_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM_SHORT") +
+      "|event_id=" + event_id +
+      "|episode_id=" + event_episode_id +
+      "|context_id=" + event_context_id +
+      "|setup_time=" + IntegerToString((long)event_setup_time) +
+      "|setup=COMPRESSED|entry=COMPRESSED|direction_state=NEUTRAL" +
+      "|shock=0|established=0|transition=0" +
+      "|attempt_time=" + IntegerToString((long)decision_bar_time) +
+      "|attempt_ordinal=" + IntegerToString(ordinal);
+   FinalizeR3ChopFirstSweepConsumption("entry", ordinal);
+
+   const double point = SymbolInfoDouble(InpTargetSymbol, SYMBOL_POINT);
+   const long spread_points = SymbolInfoInteger(InpTargetSymbol, SYMBOL_SPREAD);
+   const double stop_points = point > 0.0 ? stop_distance / point : 0.0;
+   const double estimated_cost_r = stop_points > 0.0 ? (double)spread_points / stop_points : 999.0;
+   LogR3ChopTelemetry(
+      "WOULD_SIGNAL",
+      direction,
+      reason,
+      event_boundary_high,
+      event_boundary_low,
+      open,
+      high,
+      low,
+      close,
+      m15_atr,
+      body_fraction,
+      close_location,
+      break_distance_atr,
+      estimated_cost_r
+   );
+   return true;
+  }
+
+bool TryR3InsideCompressionH1BoundaryM15SweepReclaimSignal(
+   string &direction,
+   string &reason,
+   double &stop_distance,
+   double &break_distance_atr
+)
+  {
+   direction = "";
+   reason = "";
+   stop_distance = 0.0;
+   break_distance_atr = 0.0;
+   g_r3_chop_last_outcome_reason = "";
+   const datetime latest_h1_bar = iTime(InpTargetSymbol, PERIOD_H1, 1);
+   if(latest_h1_bar <= 0)
+      return false;
+
+   // Initialization records the current completed H1/D1 cursors only. It cannot
+   // backfill the current date's context or an already-completed H1 event.
+   if(g_r3_chop_last_scanned_h1_bar == 0)
+     {
+      g_r3_chop_last_scanned_h1_bar = latest_h1_bar;
+      g_r3_chop_last_scanned_d1_bar = iTime(InpTargetSymbol, PERIOD_D1, 1);
+      g_r3_chop_last_context_date = R3DayStart(latest_h1_bar + PeriodSeconds(PERIOD_H1));
+      return false;
+     }
+
+   const bool new_h1 = latest_h1_bar != g_r3_chop_last_scanned_h1_bar;
+   if(new_h1)
+     {
+      g_r3_chop_last_scanned_h1_bar = latest_h1_bar;
+      // A new-date D1 context decision precedes the same-timestamp old-event M15
+      // decision, so loss of compression is labelled only as compression_lost.
+      RefreshR3ChopDailyContext(latest_h1_bar);
+     }
+
+   if(g_r3_chop_context_active && !g_r3_chop_context_suspended)
+     {
+      const string handoff_outcome = R3ChopIntradayHandoffOutcome();
+      if(handoff_outcome != "")
+        {
+         if(g_r3_chop_state == R3_CHOP_STATE_WAIT_FIRST_M15_SWEEP)
+            ConsumeR3ChopEvent(handoff_outcome, 0, false);
+         else
+           {
+            g_r3_chop_context_active = false;
+            g_r3_chop_context_suspended = true;
+            g_r3_chop_episode_active = false;
+           }
+        }
+     }
+
+   // The old scalar event's eligible M15 bar is always counted and consumed before
+   // the newly completed H1 may register its successor.
+   const bool candidate = ProcessR3ChopCompletedM15(
+      direction,
+      reason,
+      stop_distance,
+      break_distance_atr
+   );
+   if(new_h1)
+      RegisterR3ChopEventAtCompletedH1(latest_h1_bar);
+   return candidate;
   }
 
 bool TryWeeklyLevel(
@@ -4065,6 +7081,25 @@ void EvaluateCompletedM5Bar()
       g_last_m15_decision_bar = m15_decision_bar;
      }
 
+   string direction = "";
+   string reason = "";
+   double break_distance_atr = 0.0;
+   double htf_stop_distance = 0.0;
+   const bool r3_chop_mode =
+      InpSignalMode == SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM;
+   if(r3_chop_mode)
+     {
+      // Lifecycle and completed-bar counters run before unrelated M5 prerequisites.
+      // A qualifying event is already consumed and WOULD_SIGNAL is already logged.
+      if(!TryR3InsideCompressionH1BoundaryM15SweepReclaimSignal(
+         direction,
+         reason,
+         htf_stop_distance,
+         break_distance_atr
+      ))
+         return;
+     }
+
    if(iBars(InpTargetSymbol, PERIOD_M5) < InpBreakLookbackBars + InpAtrPeriod + 5)
       return;
 
@@ -4113,7 +7148,11 @@ void EvaluateCompletedM5Bar()
    const double three_bar_move_atr = (close - close_3_back) / atr;
    const double long_break_distance_atr = (close - recent_high) / atr;
    const double short_break_distance_atr = (recent_low - close) / atr;
-   if(InpRegimeSnapshotLogEnabled)
+   if(InpRegimeSnapshotLogEnabled &&
+      InpSignalMode != SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT &&
+      InpSignalMode != SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK &&
+      InpSignalMode != SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG &&
+      InpSignalMode != SIGNAL_R3_INSIDE_COMPRESSION_H1_BOUNDARY_M15_SWEEP_RECLAIM)
      {
       const string regime_name = RegimeStateName(CurrentXauRegime());
       LogSignal("REGIME_SNAPSHOT", "NONE", regime_name, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
@@ -4164,11 +7203,6 @@ void EvaluateCompletedM5Bar()
       if(m5_trend_fast <= 0.0 || m5_trend_slow <= 0.0 || m5_trend_fast_prior <= 0.0)
          return;
      }
-
-   string direction = "";
-   string reason = "";
-   double break_distance_atr = 0.0;
-   double htf_stop_distance = 0.0;
 
    if(InpSignalMode == SIGNAL_BREAK_AND_RUN)
      {
@@ -4448,25 +7482,55 @@ void EvaluateCompletedM5Bar()
      {
       TryR2H1PullbackRejectionShortSignal(direction, reason, htf_stop_distance, break_distance_atr);
      }
+   else if(InpSignalMode == SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT)
+     {
+      TryR2PriorD1LowFirstRetestShortSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG)
+     {
+      TryR1PriorD1HighFirstRetestLongSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT)
+     {
+      TryR2SecondContinuationLowerHighShortSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK)
+     {
+      TryR3CompressionH1AcceptM15FirstPullbackSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
+   else if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG)
+     {
+      TryR1SecondContinuationHigherLowLongSignal(direction, reason, htf_stop_distance, break_distance_atr);
+     }
 
    if(direction == "")
      {
-      const string no_signal_reason = h4_decision_signal_mode ? "no_h4_independent_candidate" : (h1_decision_signal_mode ? "no_h1_independent_candidate" : (m15_decision_signal_mode ? "no_m15_independent_candidate" : (InpSignalMode == SIGNAL_EVENT_REACTION_M5 ? "no_event_reaction_candidate" : "no_m5_momentum_candidate")));
+      string no_signal_reason = h4_decision_signal_mode ? "no_h4_independent_candidate" : (h1_decision_signal_mode ? "no_h1_independent_candidate" : (m15_decision_signal_mode ? "no_m15_independent_candidate" : (InpSignalMode == SIGNAL_EVENT_REACTION_M5 ? "no_event_reaction_candidate" : "no_m5_momentum_candidate")));
+      if(InpSignalMode == SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT && g_r2_pdl_last_outcome_reason != "")
+         no_signal_reason = g_r2_pdl_last_outcome_reason;
+      if(InpSignalMode == SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG && g_r1_pdh_last_outcome_reason != "")
+         no_signal_reason = g_r1_pdh_last_outcome_reason;
+      if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT && g_r2_lhf_last_outcome_reason != "")
+         no_signal_reason = g_r2_lhf_last_outcome_reason;
+      if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK && g_r3_last_outcome_reason != "")
+         no_signal_reason = g_r3_last_outcome_reason;
+      if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG && g_r1_hlf_last_outcome_reason != "")
+         no_signal_reason = g_r1_hlf_last_outcome_reason;
       LogSignal("NO_SIGNAL", "NONE", no_signal_reason, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, 0.0, 0.0);
       return;
      }
 
-   if(InpMaxThreeBarMoveAtr > 0.0 && MathAbs(three_bar_move_atr) > InpMaxThreeBarMoveAtr)
+   if(!r3_chop_mode && InpMaxThreeBarMoveAtr > 0.0 && MathAbs(three_bar_move_atr) > InpMaxThreeBarMoveAtr)
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "three_bar_move_atr_exceeds_cap");
       return;
      }
-   if(InpMinBreakDistanceAtr > 0.0 && break_distance_atr < InpMinBreakDistanceAtr)
+   if(!r3_chop_mode && InpMinBreakDistanceAtr > 0.0 && break_distance_atr < InpMinBreakDistanceAtr)
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "break_distance_atr_below_floor");
       return;
      }
-   if(InpMaxBreakDistanceAtr > 0.0 && break_distance_atr > InpMaxBreakDistanceAtr)
+   if(!r3_chop_mode && InpMaxBreakDistanceAtr > 0.0 && break_distance_atr > InpMaxBreakDistanceAtr)
      {
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, 0.0, 0.0, 0, "", 0, 0, 0.0, "break_distance_atr_exceeds_cap");
       return;
@@ -4483,7 +7547,170 @@ void EvaluateCompletedM5Bar()
      }
    const double estimated_cost_r = (stop_points > 0.0) ? (double)spread_points / stop_points : 999.0;
 
-   LogSignal("WOULD_SIGNAL", direction, reason, bid, ask, spread_points, recent_high, recent_low, open, high, low, close, atr, body_fraction, close_location, three_bar_move_atr, break_distance_atr, estimated_cost_r);
+   double log_recent_high = recent_high;
+   double log_recent_low = recent_low;
+   double log_open = open;
+   double log_high = high;
+   double log_low = low;
+   double log_close = close;
+   double log_atr = atr;
+   double log_body_fraction = body_fraction;
+   double log_close_location = close_location;
+   double log_three_bar_move_atr = three_bar_move_atr;
+   if(InpSignalMode == SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT)
+     {
+      log_recent_high = g_r2_pdl_level;
+      log_recent_low = g_r2_pdl_break_close;
+      log_open = g_r2_pdl_log_m15_open;
+      log_high = g_r2_pdl_log_m15_high;
+      log_low = g_r2_pdl_log_m15_low;
+      log_close = g_r2_pdl_log_m15_close;
+      log_atr = g_r2_pdl_log_m15_atr;
+      log_body_fraction = g_r2_pdl_log_body_fraction;
+      log_close_location = g_r2_pdl_log_close_location;
+      log_three_bar_move_atr = g_r2_pdl_h1_atr_percentile / 100.0;
+     }
+   else if(InpSignalMode == SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG)
+     {
+      log_recent_high = g_r1_pdh_break_close;
+      log_recent_low = g_r1_pdh_level;
+      log_open = g_r1_pdh_log_m15_open;
+      log_high = g_r1_pdh_log_m15_high;
+      log_low = g_r1_pdh_log_m15_low;
+      log_close = g_r1_pdh_log_m15_close;
+      log_atr = g_r1_pdh_log_m15_atr;
+      log_body_fraction = g_r1_pdh_log_body_fraction;
+      log_close_location = g_r1_pdh_log_close_location;
+      log_three_bar_move_atr = g_r1_pdh_h1_atr_percentile / 100.0;
+     }
+   else if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT)
+     {
+      log_recent_high = g_r2_lhf_pivot_high;
+      log_recent_low = g_r2_lhf_leg_one_low;
+      log_open = g_r2_lhf_log_m15_open;
+      log_high = g_r2_lhf_log_m15_high;
+      log_low = g_r2_lhf_log_m15_low;
+      log_close = g_r2_lhf_log_m15_close;
+      log_atr = g_r2_lhf_log_m15_atr;
+      log_body_fraction = g_r2_lhf_log_body_fraction;
+      log_close_location = g_r2_lhf_log_close_location;
+      log_three_bar_move_atr = g_r2_lhf_reset_depth_h1_atr;
+     }
+   else if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK)
+     {
+      log_recent_high = g_r3_box_high;
+      log_recent_low = g_r3_box_low;
+      log_open = g_r3_log_m15_open;
+      log_high = g_r3_log_m15_high;
+      log_low = g_r3_log_m15_low;
+      log_close = g_r3_log_m15_close;
+      log_atr = g_r3_log_m15_atr;
+      log_body_fraction = g_r3_log_body_fraction;
+      log_close_location = g_r3_log_close_location;
+      log_three_bar_move_atr = g_r3_setup_atr_percentile / 100.0;
+     }
+   else if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG)
+     {
+      log_recent_high = g_r1_hlf_leg_one_high;
+      log_recent_low = g_r1_hlf_pivot_low;
+      log_open = g_r1_hlf_log_m15_open;
+      log_high = g_r1_hlf_log_m15_high;
+      log_low = g_r1_hlf_log_m15_low;
+      log_close = g_r1_hlf_log_m15_close;
+      log_atr = g_r1_hlf_log_m15_atr;
+      log_body_fraction = g_r1_hlf_log_body_fraction;
+      log_close_location = g_r1_hlf_log_close_location;
+      log_three_bar_move_atr = g_r1_hlf_reset_depth_h1_atr;
+     }
+   else if(r3_chop_mode)
+     {
+      log_recent_high = g_r3_chop_signal_boundary_high;
+      log_recent_low = g_r3_chop_signal_boundary_low;
+      log_open = g_r3_chop_log_m15_open;
+      log_high = g_r3_chop_log_m15_high;
+      log_low = g_r3_chop_log_m15_low;
+      log_close = g_r3_chop_log_m15_close;
+      log_atr = g_r3_chop_log_m15_atr;
+      log_body_fraction = g_r3_chop_log_body_fraction;
+      log_close_location = g_r3_chop_log_close_location;
+      log_three_bar_move_atr = 0.0;
+     }
+   if(!r3_chop_mode)
+      LogSignal("WOULD_SIGNAL", direction, reason, bid, ask, spread_points, log_recent_high, log_recent_low, log_open, log_high, log_low, log_close, log_atr, log_body_fraction, log_close_location, log_three_bar_move_atr, break_distance_atr, estimated_cost_r);
+
+   if(InpSignalMode == SIGNAL_R2_PRIOR_D1_LOW_FIRST_RETEST_SHORT &&
+      InpR2PdlMaxStopH1Atr > 0.0 &&
+      g_r2_pdl_h1_atr > 0.0 &&
+      stop_distance > InpR2PdlMaxStopH1Atr * g_r2_pdl_h1_atr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, stop_distance / g_r2_pdl_h1_atr, "r2_pdl_stop_h1_atr_exceeded");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R1_PRIOR_D1_HIGH_FIRST_RETEST_LONG &&
+      InpR1PdhMaxStopH1Atr > 0.0 &&
+      g_r1_pdh_h1_atr > 0.0 &&
+      stop_distance > InpR1PdhMaxStopH1Atr * g_r1_pdh_h1_atr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, stop_distance / g_r1_pdh_h1_atr, "r1_pdh_stop_h1_atr_exceeded");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT &&
+      InpR2LhfMaxStopH1Atr > 0.0 &&
+      g_r2_lhf_h1_atr > 0.0 &&
+      stop_distance > InpR2LhfMaxStopH1Atr * g_r2_lhf_h1_atr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, stop_distance / g_r2_lhf_h1_atr, "r2_lhf_stop_h1_atr_exceeded");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK &&
+      InpR3MaxStopH1Atr > 0.0 &&
+      g_r3_acceptance_h1_atr > 0.0 &&
+      stop_distance > InpR3MaxStopH1Atr * g_r3_acceptance_h1_atr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, stop_distance / g_r3_acceptance_h1_atr, "r3_stop_h1_atr_exceeded");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG &&
+      InpR1HlfMaxStopH1Atr > 0.0 &&
+      g_r1_hlf_h1_atr > 0.0 &&
+      stop_distance > InpR1HlfMaxStopH1Atr * g_r1_hlf_h1_atr)
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, stop_distance / g_r1_hlf_h1_atr, "r1_hlf_stop_h1_atr_exceeded");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT &&
+      !R2LhfMatureDowntrendOwnershipAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "r2_lhf_entry_regime_ownership_block");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK &&
+      (RegimeShockState() || R3EstablishedTrendNow()))
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "r3_entry_transition_ownership_block");
+      return;
+     }
+
+   if(r3_chop_mode &&
+      (!g_r3_chop_context_active || g_r3_chop_context_suspended ||
+       CurrentXauRegime() != XAU_REGIME_COMPRESSION))
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "r3_chop_entry_regime_ownership_block");
+      return;
+     }
+
+   if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG &&
+      !R1HlfMatureUptrendOwnershipAllows())
+     {
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "r1_hlf_entry_regime_ownership_block");
+      return;
+     }
 
    if(EntryHourBlocked())
      {
@@ -4660,8 +7887,37 @@ void EvaluateCompletedM5Bar()
       LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, InpUseRiskNormalizedLots ? "minimum_lot_risk_excess" : "invalid_order_lots");
       return;
      }
+   double actual_risk_usd = 0.0;
+   bool risk_allowed =
+      (InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT)
+      ? R2LhfHardRiskAllowed(direction, stop_distance, order_lots, bid, ask, actual_risk_usd)
+      : RiskOvershootAllowed(stop_distance, order_lots, actual_risk_usd);
+   string risk_block_reason = "risk_amount_overshoot";
+   if(InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK)
+     {
+      risk_allowed = R3TransitionHardRiskAllowed(direction, stop_distance, order_lots, bid, ask, actual_risk_usd);
+      risk_block_reason = "r3_normalized_entry_to_stop_risk_overshoot";
+     }
+   else if(r3_chop_mode)
+     {
+      risk_allowed = R3ChopHardRiskAllowed(direction, stop_distance, order_lots, bid, ask, actual_risk_usd);
+      risk_block_reason = "r3_chop_hard_50usd_risk_block";
+     }
+   else if(InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG)
+     {
+      risk_allowed = R1HlfHardRiskAllowed(direction, stop_distance, order_lots, bid, ask, actual_risk_usd);
+      risk_block_reason = "risk_amount_overshoot";
+     }
+   if(!risk_allowed)
+     {
+      const bool exact_hard_risk_log =
+         InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG || r3_chop_mode;
+      LogOrder("GUARD_BLOCK", direction, order_lots, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, actual_risk_usd, risk_block_reason, actual_risk_usd, exact_hard_risk_log ? InpRiskAmountUsd : -1.0, exact_hard_risk_log ? "OrderCalcProfit" : "");
+      return;
+     }
 
-   if(!ClaimSignalSlot(direction, signal_time, bid, ask, spread_points, close, stop_points, estimated_cost_r))
+   const datetime claim_signal_time = r3_chop_mode ? g_r3_chop_signal_attempt_time : signal_time;
+   if(!ClaimSignalSlot(direction, claim_signal_time, bid, ask, spread_points, close, stop_points, estimated_cost_r))
       return;
 
    if(InpSplitEntryEnabled && !InpSplitEntryShadowOnly)
@@ -4740,10 +7996,30 @@ void EvaluateCompletedM5Bar()
      {
       g_trades_today++;
       g_last_trade_time = TimeCurrent();
-      const string pass_reason = (InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY) ? regime_block_reason : "pass";
-      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), pass_reason);
+      const bool hard_risk_mode =
+         InpSignalMode == SIGNAL_R2_SECOND_CONTINUATION_LOWER_HIGH_SHORT ||
+         InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK ||
+         InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG ||
+         r3_chop_mode;
+      const double logged_actual_risk_usd = hard_risk_mode ? actual_risk_usd : -1.0;
+      const bool exact_hard_risk_log =
+         InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG || r3_chop_mode;
+      const bool r5_router_mode =
+         InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY &&
+         InpSignalMode != SIGNAL_D1_COMPRESSION_H4_EXPANSION &&
+         InpSignalMode != SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK;
+      const string pass_reason = r5_router_mode ? regime_block_reason : "pass";
+      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), pass_reason, logged_actual_risk_usd, exact_hard_risk_log ? InpRiskAmountUsd : -1.0, exact_hard_risk_log ? "OrderCalcProfit" : "");
      }
    else
-      LogOrder("ORDER_SEND_FAIL", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "order_send_failed");
+     {
+      const double failed_actual_risk_usd =
+         (InpSignalMode == SIGNAL_R3_COMPRESSION_H1_ACCEPT_M15_FIRST_PULLBACK ||
+          InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG ||
+          r3_chop_mode) ? actual_risk_usd : -1.0;
+      const bool exact_hard_risk_log =
+         InpSignalMode == SIGNAL_R1_SECOND_CONTINUATION_HIGHER_LOW_LONG || r3_chop_mode;
+      LogOrder("ORDER_SEND_FAIL", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "order_send_failed", failed_actual_risk_usd, exact_hard_risk_log ? InpRiskAmountUsd : -1.0, exact_hard_risk_log ? "OrderCalcProfit" : "");
+     }
   }
 //+------------------------------------------------------------------+

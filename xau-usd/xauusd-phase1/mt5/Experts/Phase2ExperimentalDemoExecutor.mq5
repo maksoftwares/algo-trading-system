@@ -30,6 +30,7 @@ input string InpAttachmentLogFileName = "experimental_demo_executor_signal_log_v
 input string InpStartupLogFileName = "experimental_demo_executor_startup_v02.csv";
 input string InpOrderLogFileName = "experimental_demo_executor_order_log_v02.csv";
 input string InpManagementLogFileName = "experimental_demo_executor_management_log_v02.csv";
+input string InpDealLogFileName = "experimental_demo_executor_deal_log_v02.csv";
 input string InpDirectionStateFileName = "dirstate_xauusd.csv";
 input string InpKillSwitchFileName = "experimental_demo_kill_switch.txt";
 input double InpFixedLot = 0.01;
@@ -1087,6 +1088,84 @@ bool EnsureManagementLogHeader()
    return AppendCsvRow(InpManagementLogFileName, header);
 }
 
+bool EnsureDealLogHeader()
+{
+   if(InpDealLogFileName == "" || FileIsExist(InpDealLogFileName))
+      return true;
+
+   string header[] = {
+      "timestamp_broker",
+      "timestamp_utc",
+      "timestamp_local",
+      "run_id",
+      "account_server",
+      "account_login",
+      "symbol",
+      "candidate",
+      "magic",
+      "deal_ticket",
+      "position_id",
+      "entry_code",
+      "type_code",
+      "reason_code",
+      "direction",
+      "volume",
+      "price",
+      "profit",
+      "commission",
+      "swap",
+      "order_ticket",
+      "comment"
+   };
+   return AppendCsvRow(InpDealLogFileName, header);
+}
+
+string DealDirection(const ENUM_DEAL_ENTRY entry, const ENUM_DEAL_TYPE type)
+{
+   if(type == DEAL_TYPE_BUY)
+      return entry == DEAL_ENTRY_IN ? "LONG" : "SHORT";
+   if(type == DEAL_TYPE_SELL)
+      return entry == DEAL_ENTRY_IN ? "SHORT" : "LONG";
+   return "";
+}
+
+void LogDealTransaction(const ulong deal_ticket)
+{
+   if(InpDealLogFileName == "" || !HistoryDealSelect(deal_ticket))
+      return;
+   if((long)HistoryDealGetInteger(deal_ticket, DEAL_MAGIC) != InstanceMagic() ||
+      HistoryDealGetString(deal_ticket, DEAL_SYMBOL) != InpTargetSymbol)
+      return;
+
+   const ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(deal_ticket, DEAL_ENTRY);
+   const ENUM_DEAL_TYPE type = (ENUM_DEAL_TYPE)HistoryDealGetInteger(deal_ticket, DEAL_TYPE);
+   string row[] = {
+      TimeToString((datetime)HistoryDealGetInteger(deal_ticket, DEAL_TIME), TIME_DATE | TIME_SECONDS),
+      TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
+      TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
+      InpRunId,
+      AccountInfoString(ACCOUNT_SERVER),
+      IntegerToString((int)AccountInfoInteger(ACCOUNT_LOGIN)),
+      InpTargetSymbol,
+      InpCandidate,
+      IntegerToString((int)InstanceMagic()),
+      IntegerToString((long)deal_ticket),
+      IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_POSITION_ID)),
+      IntegerToString((int)entry),
+      IntegerToString((int)type),
+      IntegerToString((int)HistoryDealGetInteger(deal_ticket, DEAL_REASON)),
+      DealDirection(entry, type),
+      DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_VOLUME), 2),
+      DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_PRICE), _Digits),
+      DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_PROFIT), 2),
+      DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_COMMISSION), 2),
+      DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_SWAP), 2),
+      IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_ORDER)),
+      HistoryDealGetString(deal_ticket, DEAL_COMMENT)
+   };
+   AppendCsvRow(InpDealLogFileName, row);
+}
+
 int CandidateMagicOffset(const string candidate)
 {
    if(candidate == "breakout_retest")
@@ -2041,7 +2120,8 @@ int OnInit()
       return INIT_FAILED;
    }
 
-   if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader() || !EnsureManagementLogHeader())
+   if(!EnsureAttachmentLogHeader() || !EnsureStartupLogHeader() || !EnsureOrderLogHeader() ||
+      !EnsureManagementLogHeader() || !EnsureDealLogHeader())
       return INIT_FAILED;
 
    string gv_mutex_self_test_status = "";
@@ -2094,6 +2174,16 @@ void OnDeinit(const int reason)
 void OnTick()
 {
    ManageOpenPositions();
+}
+
+void OnTradeTransaction(
+   const MqlTradeTransaction &trans,
+   const MqlTradeRequest &request,
+   const MqlTradeResult &result
+)
+{
+   if(trans.type == TRADE_TRANSACTION_DEAL_ADD && trans.deal != 0)
+      LogDealTransaction(trans.deal);
 }
 
 void OnTimer()

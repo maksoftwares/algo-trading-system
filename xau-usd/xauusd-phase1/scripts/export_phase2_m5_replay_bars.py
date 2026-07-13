@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +35,7 @@ BAR_FIELDS = [
 def export_phase2_m5_replay_bars(
     phase1_root: Path,
     terminal_exe: Path = DEFAULT_TERMINAL_EXE,
+    portable: bool = False,
     symbols: list[str] | None = None,
     timeframes: list[str] | None = None,
     start_text: str = DEFAULT_START,
@@ -60,6 +61,7 @@ def export_phase2_m5_replay_bars(
     rows_by_key: dict[tuple[str, str], list[dict[str, str]]] = {}
     source: dict[str, Any] = {
         "terminal_exe": str(terminal_exe),
+        "portable": portable,
         "mode": "read_only_history_copy_rates_range",
         "symbol_select_used": False,
         "chart_or_order_changes": False,
@@ -72,7 +74,7 @@ def export_phase2_m5_replay_bars(
     if not terminal_exe.exists():
         raise FileNotFoundError(f"MT5 terminal not found: {terminal_exe}")
 
-    if not mt5.initialize(path=str(terminal_exe)):  # pragma: no cover - local terminal dependency
+    if not mt5.initialize(path=str(terminal_exe), portable=portable):  # pragma: no cover - local terminal dependency
         raise RuntimeError(f"MT5 initialize failed: {mt5.last_error()}")
     try:  # pragma: no cover - exercised against the user's local terminal
         terminal_info = mt5.terminal_info()
@@ -90,10 +92,21 @@ def export_phase2_m5_replay_bars(
                 if timeframe not in timeframe_map:
                     raise ValueError(f"Unsupported timeframe: {timeframe}")
                 mt5_timeframe, seconds = timeframe_map[timeframe]
-                rates = mt5.copy_rates_range(symbol, mt5_timeframe, start, end)
-                rows = _rate_rows(rates, symbol=symbol, timeframe=timeframe, seconds=seconds, terminal_exe=terminal_exe)
+                chunk_days = 31 if timeframe == "M5" else 366
+                rows = _copy_rate_rows_chunked(
+                    mt5,
+                    symbol=symbol,
+                    timeframe=timeframe,
+                    mt5_timeframe=mt5_timeframe,
+                    seconds=seconds,
+                    terminal_exe=terminal_exe,
+                    start=start,
+                    end=end,
+                    chunk_days=chunk_days,
+                )
                 rows_by_key[(symbol, timeframe)] = rows
-                _write_csv(output_dir / f"{symbol}_{timeframe}_20260601_to_latest.csv", rows, BAR_FIELDS)
+                window_label = f"{start:%Y%m%d}_to_{end:%Y%m%d}"
+                _write_csv(output_dir / f"{symbol}_{timeframe}_{window_label}.csv", rows, BAR_FIELDS)
     finally:
         mt5.shutdown()
 
@@ -153,6 +166,37 @@ def _rate_rows(rates: Any, *, symbol: str, timeframe: str, seconds: int, termina
             }
         )
     return rows
+
+
+def _copy_rate_rows_chunked(
+    client: Any,
+    *,
+    symbol: str,
+    timeframe: str,
+    mt5_timeframe: Any,
+    seconds: int,
+    terminal_exe: Path,
+    start: datetime,
+    end: datetime,
+    chunk_days: int,
+) -> list[dict[str, str]]:
+    if chunk_days <= 0:
+        raise ValueError("chunk_days must be positive")
+    rows_by_start: dict[str, dict[str, str]] = {}
+    cursor = start
+    while cursor < end:
+        chunk_end = min(cursor + timedelta(days=chunk_days), end)
+        rates = client.copy_rates_range(symbol, mt5_timeframe, cursor, chunk_end)
+        for row in _rate_rows(
+            rates,
+            symbol=symbol,
+            timeframe=timeframe,
+            seconds=seconds,
+            terminal_exe=terminal_exe,
+        ):
+            rows_by_start[row["bar_start_utc"]] = row
+        cursor = chunk_end
+    return [rows_by_start[key] for key in sorted(rows_by_start)]
 
 
 def _continuity(
@@ -278,6 +322,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Export read-only M5 bars for Phase 2 observer replay scoring.")
     parser.add_argument("--phase1-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--terminal-exe", type=Path, default=DEFAULT_TERMINAL_EXE)
+    parser.add_argument("--portable", action="store_true", help="Use the terminal's portable data directory.")
     parser.add_argument("--symbols", nargs="+", default=DEFAULT_SYMBOLS)
     parser.add_argument("--timeframes", nargs="+", default=DEFAULT_TIMEFRAMES)
     parser.add_argument("--start", default=DEFAULT_START)
@@ -288,6 +333,7 @@ def main() -> int:
     output = export_phase2_m5_replay_bars(
         args.phase1_root,
         terminal_exe=args.terminal_exe,
+        portable=args.portable,
         symbols=args.symbols,
         timeframes=args.timeframes,
         start_text=args.start,

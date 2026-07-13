@@ -158,11 +158,12 @@ def test_ea_router_mode_5_allows_only_short_in_uptrend_or_chop_and_tags_success(
     assert 'return "short_r5_uptrend_chop_only";' in text
     assert 'direction == "SHORT" && (regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_CHOP)' in text
     assert 'block_reason = "regime_router_allow_" + mode_name + "_state_" + regime_name;' in text
-    assert "InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY) ? regime_block_reason : \"pass\"" in text
+    assert "const bool r5_router_mode" in text
+    assert 'const string pass_reason = r5_router_mode ? regime_block_reason : "pass";' in text
     assert "input RegimeRouterMode InpRegimeRouterMode   = REGIME_ROUTER_OFF;" in text
     assert "bool RegimeRouterDataAvailable()" in text
     router = text[text.index("bool RegimeRouterAllows(") : text.index("double OwnClosedPnlBetween(")]
-    unavailable = "InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY && !RegimeRouterDataAvailable()"
+    unavailable = "if(!RegimeRouterDataAvailable())"
     assert unavailable in router
     assert 'block_reason = "regime_router_block_" + mode_name + "_state_unknown";' in router
     assert router.index(unavailable) < router.index("const XauRegimeState regime = CurrentXauRegime();")

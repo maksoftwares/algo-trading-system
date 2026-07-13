@@ -66,6 +66,42 @@ def test_m5_replay_bar_export_markdown_states_read_only_boundary():
     assert "partial exports cannot silently drive replay conclusions" in report
 
 
+def test_m5_replay_bar_export_chunks_and_deduplicates_boundaries():
+    module = _load_module()
+    start = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    end = datetime(2026, 2, 10, tzinfo=timezone.utc)
+
+    class Client:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def copy_rates_range(self, _symbol, _timeframe, _start, _end):
+            self.calls += 1
+            boundary = int(datetime(2026, 2, 1, tzinfo=timezone.utc).timestamp())
+            unique = boundary - 300 if self.calls == 1 else boundary + 300
+            return [
+                {"time": unique, "open": 1, "high": 2, "low": 0, "close": 1, "tick_volume": 1, "spread": 2, "real_volume": 0},
+                {"time": boundary, "open": 1, "high": 2, "low": 0, "close": 1, "tick_volume": 1, "spread": 2, "real_volume": 0},
+            ]
+
+    client = Client()
+    rows = module._copy_rate_rows_chunked(
+        client,
+        symbol="XAUUSD",
+        timeframe="M5",
+        mt5_timeframe=5,
+        seconds=300,
+        terminal_exe=Path("terminal64.exe"),
+        start=start,
+        end=end,
+        chunk_days=31,
+    )
+
+    assert client.calls == 2
+    assert len(rows) == 3
+    assert [row["bar_start_utc"] for row in rows] == sorted(row["bar_start_utc"] for row in rows)
+
+
 def _load_module():
     path = ROOT / "scripts" / "export_phase2_m5_replay_bars.py"
     spec = importlib.util.spec_from_file_location("export_phase2_m5_replay_bars", path)

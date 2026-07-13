@@ -1,0 +1,60 @@
+{
+  "schema_version": "a3_ml_shared_account_replay_v1",
+  "symbol": "XAUUSD",
+  "period_start": "2016-07-01T00:00:00Z",
+  "period_end": "2026-06-30T23:59:59Z",
+  "mt5_portfolio_json": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_MT5.json",
+  "preregistration": "docs/A3_ML_SHARED_ACCOUNT_PORTFOLIO_REPLAY_PREREG_2026_07_13.md",
+  "initial_balance_usd": 10000.0,
+  "component_calibration_balance_usd": 1000.0,
+  "contract_size": 100.0,
+  "point_size": 0.01,
+  "assumed_leverage": 20.0,
+  "stress_cost_per_trade_usd": 0.30,
+  "calibration_ratio_min": 0.75,
+  "calibration_ratio_max": 1.35,
+  "equity_drawdown_limit_pct": 15.0,
+  "minimum_stress_profit_factor": 1.40,
+  "minimum_nonnegative_six_month_share": 0.75,
+  "frequency_target_trades_per_market_day": 2.0,
+  "bar_sources": [
+    {
+      "path": "../xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+      "style": "capital_processed_bid_ask"
+    },
+    {
+      "path": "outputs/reports/shared_account_replay_bars/XAUUSD_M5_20250701_to_20260701.csv",
+      "style": "mt5_bid_plus_spread"
+    }
+  ],
+  "profiles": [
+    {
+      "name": "unconstrained_shared_baseline",
+      "max_concurrent_positions": 1000,
+      "max_trade_initial_risk_pct": 100.0,
+      "max_total_initial_risk_pct": 100.0,
+      "max_same_direction_initial_risk_pct": 100.0,
+      "max_margin_utilization_pct": 100.0,
+      "daily_realized_loss_halt_pct": 100.0
+    },
+    {
+      "name": "risk_controlled_shared_account",
+      "max_concurrent_positions": 3,
+      "max_trade_initial_risk_pct": 1.0,
+      "max_total_initial_risk_pct": 2.0,
+      "max_same_direction_initial_risk_pct": 1.5,
+      "max_margin_utilization_pct": 50.0,
+      "daily_realized_loss_halt_pct": 2.0
+    }
+  ],
+  "outputs": {
+    "report_json": "outputs/reports/A3_ML_SHARED_ACCOUNT_REPLAY_20260713.json",
+    "report_md": "outputs/reports/A3_ML_SHARED_ACCOUNT_REPLAY_20260713.md",
+    "decisions_csv": "outputs/reports/A3_ML_SHARED_ACCOUNT_REPLAY_20260713_DECISIONS.csv",
+    "daily_csv": "outputs/reports/A3_ML_SHARED_ACCOUNT_REPLAY_20260713_DAILY.csv"
+  },
+  "research_only": true,
+  "python_demo_predictions_authorized": false,
+  "ea_consumption_authorized": false,
+  "broker_action_authorized": false
+}
