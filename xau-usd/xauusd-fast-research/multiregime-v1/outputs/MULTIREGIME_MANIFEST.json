@@ -1,0 +1,116 @@
+{
+  "base_commit": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+  "branch": "codex/xau-multiregime-fast-discovery-v1",
+  "config": {
+    "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/multiregime_fast_discovery_v1.json",
+    "sha256": "37f1665cbd4caf6893792451a0dbb269600b045291b2a3ce3369098b8ded5303"
+  },
+  "decision": "MULTIREGIME_V1_ABANDONED_NO_RESCUE",
+  "inputs": {
+    "H1": {
+      "development_spread_p95_points": 31.0,
+      "historical": {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv",
+        "sha256": "3552e55c4203eca69aa63bdf49ad1a3fb03e32562f29ee1e7d51148f483ad358"
+      },
+      "locked_tail": {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H1_20250701_20260701_mt5.csv",
+        "sha256": "c7e92661a892f4e72d9f20d2bb321d13b861eb0b5374c4f14f347e6e523c475c"
+      }
+    },
+    "H4": {
+      "development_spread_p95_points": 24.0,
+      "historical": {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv",
+        "sha256": "02d5f6d6ae9f39037dd7731aa89ab39b30590334167add166d2036b8e1352538"
+      },
+      "locked_tail": {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H4_20250701_20260701_mt5.csv",
+        "sha256": "c215d3dfd69d309f0a5145722e7861248e744765fa91cdedd84c58c1c892ff77"
+      }
+    },
+    "M15": {
+      "development_spread_p95_points": 33.0,
+      "historical": {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M15/XAUUSD_capital_com_M15_20160103_20250701.csv",
+        "sha256": "d08c62645b9504d49d537c209ef0f26afebd6d26dc18303b215f3c3ca4bb8833"
+      },
+      "locked_tail": {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M15_20250701_20260701_mt5.csv",
+        "sha256": "5160e2d6ded62dacd1277e34de0aeb3010b658d608d62cd074b76b33edd7a4d7"
+      }
+    },
+    "M5": {
+      "development_spread_p95_points": 36.0,
+      "historical": {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7"
+      },
+      "locked_tail": {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M5_20250701_20260701_mt5.csv",
+        "sha256": "9f4501ab278b47dd070a27b1faf68cd019c684c86e9b5620a77cf32bebeecb10"
+      }
+    },
+    "contract_snapshot": {
+      "capture_method": "READ_ONLY_ORDERCALCPROFIT_AND_ORDERCALCMARGIN_ZERO_TRADE_ACTION",
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/mt5_contract_snapshot.json",
+      "sha256": "cd39ff6bbd5661ece8c463c4dd137e27c3d0c58a245f21514ba7764464ed2bfa"
+    }
+  },
+  "outputs": {
+    "direction_results": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_DIRECTION_RESULTS.csv",
+      "sha256": "01caea1d3cbb845c043c526268e1bcddf8e73a04665cf2c67887b32cc3245754"
+    },
+    "family_results": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAMILY_RESULTS.csv",
+      "sha256": "71b04c76a1f03b730233d8734d7c562879b782a3ad0fa2237287ea6b0dba2f1f"
+    },
+    "gate_audit": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_GATE_AUDIT.json",
+      "sha256": "75c15c334d5e02a7ef295f6779f41c76f7d465b74391b259643eab56e368a152"
+    },
+    "monthly_results": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_MONTHLY_RESULTS.csv",
+      "sha256": "f247af107ac972c7146c45060f3e31dc78e6e6202e8750fe416d6475cc69fa69"
+    },
+    "regime_census": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_REGIME_CENSUS.csv",
+      "sha256": "966e417833e83c872f9c6cc970b1e5cdd6e502cf2309c83bfbccab26cfe92005"
+    },
+    "result_json": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.json",
+      "sha256": "95b90a11b77e1576f92ba52ce52ae9a1d8eae3b6cb98f1298834502ee76f118c"
+    },
+    "result_md": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.md",
+      "sha256": "c17901bab224a086ad085159a9374b37c6ad042e0e4a945b0a5be59067d683aa"
+    },
+    "rolling_results": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_ROLLING_RESULTS.csv",
+      "sha256": "d21fb58ec92e93a8e0b49073851a2e059870970e54b27bdfef15d291a330fe38"
+    },
+    "segment_results": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_SEGMENT_RESULTS.csv",
+      "sha256": "8871d4a00be7379745f9df5ceb306576d28e544ea4fdebf680218de4dd6e64a1"
+    },
+    "signal_ledger": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_SIGNAL_LEDGER.csv",
+      "sha256": "63a7695d3ccade93df0613222793e41b10cbf7e858e435dd54eee11eddebf728"
+    },
+    "standalone_signal_ledger": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_SIGNAL_LEDGER.csv",
+      "sha256": "9adb90287b85298a3072d5009594f7e9c5fe1cfea20ef8274f29fef3d4c6cea6"
+    },
+    "standalone_trade_ledger": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_TRADE_LEDGER.csv",
+      "sha256": "dbaee1486ad819f0248ae50191705176afb862104e2aa6e98c238d48b00c1747"
+    },
+    "trade_ledger": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_TRADE_LEDGER.csv",
+      "sha256": "8ce465a0aee46e996cc46fec58a1e7408f7f381d2c256d3ec37f41777c2d2b44"
+    }
+  },
+  "replay_command": "python xau-usd/xauusd-fast-research/multiregime-v1/run_multiregime_fast_discovery_v1.py --config xau-usd/xauusd-fast-research/multiregime-v1/config/multiregime_fast_discovery_v1.json",
+  "schema_version": "xauusd_multiregime_manifest_v1"
+}

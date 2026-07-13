@@ -1,0 +1,75 @@
+{
+  "all_rolling_24_month_positive": false,
+  "at_least_one_family_passes": false,
+  "contract_granularity_adequate": false,
+  "contract_granularity_reject_pct": 21.47239263803681,
+  "contract_granularity_rejects": 105,
+  "data_complete": true,
+  "family_gates": {
+    "MR_COMPRESSION_BREAKOUT_V1": {
+      "checks": {
+        "expectancy_gte_0p05": false,
+        "floating_dd_lte_15": true,
+        "pf_gte_1p15": false,
+        "stress_expectancy_positive": false,
+        "stress_net_positive": false,
+        "stress_pf_gte_1p03": false,
+        "top_ten_lte_0p40": false,
+        "trades_gte_200": false
+      },
+      "passed": false
+    },
+    "MR_FAILED_AUCTION_REVERSAL_V1": {
+      "checks": {
+        "expectancy_gte_0p05": false,
+        "floating_dd_lte_15": false,
+        "pf_gte_1p15": false,
+        "stress_expectancy_positive": false,
+        "stress_net_positive": false,
+        "stress_pf_gte_1p03": false,
+        "top_ten_lte_0p40": true,
+        "trades_gte_200": true
+      },
+      "passed": false
+    },
+    "MR_TREND_PULLBACK_CONTINUATION_V1": {
+      "checks": {
+        "expectancy_gte_0p05": false,
+        "floating_dd_lte_15": false,
+        "pf_gte_1p15": false,
+        "stress_expectancy_positive": false,
+        "stress_net_positive": false,
+        "stress_pf_gte_1p03": false,
+        "top_ten_lte_0p40": true,
+        "trades_gte_200": false
+      },
+      "passed": false
+    }
+  },
+  "maximum_positive_family_share": 1.0,
+  "portfolio_checks": {
+    "all_rolling24_positive": false,
+    "average_trades_per_year_gte_120": false,
+    "best_year_lte_0p35": true,
+    "expectancy_gte_0p10": false,
+    "family_positive_net_share_lte_0p65": false,
+    "floating_dd_lte_20": true,
+    "latest12_expectancy_gte_0p05": false,
+    "latest12_gte_100": false,
+    "latest12_pf_gte_1p15": false,
+    "latest3_gte_20": false,
+    "latest6_gte_45": false,
+    "median_month_gte_8": false,
+    "pf_gte_1p30": false,
+    "positive_rolling12_gte_70pct": false,
+    "stress_expectancy_gte_0p04": false,
+    "stress_floating_dd_lte_25": true,
+    "stress_pf_gte_1p12": false,
+    "top_ten_lte_0p30": true,
+    "top_three_days_lte_0p20": true,
+    "trades_gte_1200": false
+  },
+  "portfolio_passed": false,
+  "positive_rolling_12_month_fraction": 0.0,
+  "valid_opportunities": 489
+}

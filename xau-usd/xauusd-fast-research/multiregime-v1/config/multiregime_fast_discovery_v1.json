@@ -1,0 +1,49 @@
+{
+  "schema_version": "xauusd_multiregime_fast_discovery_v1",
+  "requested_start": "2016-07-01T00:00:00Z",
+  "requested_end_exclusive": "2026-07-01T00:00:00Z",
+  "historical_source_root": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD",
+  "mt5_tail_start": "2025-07-01T00:00:00Z",
+  "cache_dir": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache",
+  "contract_snapshot_path": "xau-usd/xauusd-fast-research/multiregime-v1/config/mt5_contract_snapshot.json",
+  "output_dir": "xau-usd/xauusd-fast-research/multiregime-v1/outputs",
+  "symbol": "XAUUSD",
+  "timeframes_minutes": {"M5": 5, "M15": 15, "H1": 60, "H4": 240},
+  "router": {
+    "atr_period": 14,
+    "adx_period": 14,
+    "er_lookback": 24,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "range_lookback": 24,
+    "atr_percentile_lookback": 756,
+    "entry_consecutive": 2,
+    "exit_consecutive": 2,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5,
+    "trend_adx_min": 25.0,
+    "trend_er_min": 0.40,
+    "trend_slope_atr_min": 0.25,
+    "compression_adx_max": 22.0,
+    "compression_atr_percentile_max": 35.0,
+    "compression_width_atr_max": 4.0,
+    "range_adx_max": 23.0,
+    "range_er_max": 0.35,
+    "range_displacement_atr_max": 1.75,
+    "range_width_atr_min": 2.0,
+    "range_width_atr_max": 7.0
+  },
+  "strategies": {
+    "trend": {"swing_bars": 5, "stop_buffer_atr": 0.10, "min_stop_atr": 0.75, "max_stop_atr": 2.0, "target_r": 2.0, "max_hold_hours": 24, "cooldown_hours": 4},
+    "compression": {"box_h1_bars": 20, "breakout_buffer_atr": 0.10, "stop_buffer_atr": 0.10, "min_stop_atr": 0.75, "max_stop_atr": 1.75, "target_r": 2.0, "max_hold_hours": 12, "cooldown_hours": 6},
+    "failed_auction": {"range_h1_bars": 20, "sweep_buffer_atr": 0.10, "stop_buffer_atr": 0.10, "minimum_reward_r": 1.50, "max_hold_hours": 12, "cooldown_hours": 6}
+  },
+  "costs": {"stress_slippage_r": 0.05, "stress_funding_multiplier": 1.25, "funding_snapshot_long_pct": -5.760324, "funding_snapshot_short_pct": 2.801124, "funding_day_basis": 360, "swap_rollover3days_python_weekday": 4},
+  "account": {"equity_usd": 1000.0, "risk_fraction": 0.005, "leverage": 100, "volume_min": 0.01, "volume_step": 0.01, "contract_size_oz": 100.0, "margin_limit_fraction": 0.20, "free_margin_floor_fraction": 0.80},
+  "segments": {
+    "A": ["2016-07-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "B": ["2022-01-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "C": ["2024-01-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "D": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  }
+}
