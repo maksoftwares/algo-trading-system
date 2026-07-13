@@ -1,0 +1,141 @@
+{
+  "artifacts": {
+    "A1_XAU_H4_EPISODE_IDENTITY_REPAIR_EXACT_20260711.json": {
+      "sha256": "aac277cc65a5a62338d18c3aa01ec94073ca7c66ce97e6575517e641ba5c809c",
+      "size_bytes": 70396
+    },
+    "A1_XAU_H4_EPISODE_IDENTITY_REPAIR_EXACT_20260711.md": {
+      "sha256": "837cbd5e185b61082f6530a51720943130ba1cad15df07e8438692460e8f4f4d",
+      "size_bytes": 1222
+    },
+    "compiled/A1XauH4EpisodeIdentityRepairV1.ex5": {
+      "sha256": "c5aaf007451fea913438d1ca2b81d3a360e4cc7dbc9ef63074b8e689fd52075c",
+      "size_bytes": 184006
+    },
+    "compiled/A1XauH4EpisodeIdentityRepairV1.mq5": {
+      "sha256": "1dd22320dcc47eb861be54be1f02a76908e0a9729d0ea43da55e89a40f9525f5",
+      "size_bytes": 172584
+    },
+    "compiled/compile_A1_XAU_H4_EPISODE_REPAIR.log": {
+      "sha256": "dd0156502cf473e29cf64e7c23758ff35e30111d1433a80651af6b33ec41c5c6",
+      "size_bytes": 6978
+    },
+    "compiled/source_manifest.json": {
+      "sha256": "c002e405e66a302e31cec1ffdfb6744485802b9fa3f1f52cd4ff005fd39e4b2e",
+      "size_bytes": 809
+    },
+    "runs/rule_clean_common_risk/five_year/A1_XAU_H4_EPISODE_REPAIR_RULE_CLEAN_COMMON_RISK_FIVE_YEAR.htm": {
+      "sha256": "21b2ca35e5290249e925a2447b2c0e3e8aab8a513bc8ef98751cf6fcde72b89b",
+      "size_bytes": 111380
+    },
+    "runs/rule_clean_common_risk/five_year/a1_xau_h4_episode_repair_rule_clean_common_risk_five_year_deals_with_fee.csv": {
+      "sha256": "9a4369a40978907eccd7ee79c68e00b088ccffc867de4f7a271e04f2f23501ae",
+      "size_bytes": 3851
+    },
+    "runs/rule_clean_common_risk/five_year/a1_xau_h4_episode_repair_rule_clean_common_risk_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/rule_clean_common_risk/five_year/a1_xau_h4_episode_repair_rule_clean_common_risk_five_year_orders.csv": {
+      "sha256": "804e407e41a852016cc99e3cbd6f71d91d9426d393bfda03e092add26e5fec70",
+      "size_bytes": 120671
+    },
+    "runs/rule_clean_common_risk/five_year/a1_xau_h4_episode_repair_rule_clean_common_risk_five_year_signals.csv": {
+      "sha256": "43c8e3464c59f9ab872a957924f7093ee21732718ccfb7369f1c52b82043bb4c",
+      "size_bytes": 2165836
+    },
+    "runs/rule_clean_common_risk/five_year/a1_xau_h4_episode_repair_rule_clean_common_risk_five_year_startup.csv": {
+      "sha256": "e431509068f8d4d18cdeea18a484e6bfa5a8a4f6fd0f9f18bc3cb6366dbf10c9",
+      "size_bytes": 227
+    },
+    "runs/rule_clean_common_risk/five_year/tester.ini": {
+      "sha256": "40185dc1bae7439a157b16b3df5133efa6aa5dcce61d115a7d8dd2ec6b6ae349",
+      "size_bytes": 5623
+    },
+    "runs/rule_clean_common_risk/ten_year/A1_XAU_H4_EPISODE_REPAIR_RULE_CLEAN_COMMON_RISK_TEN_YEAR.htm": {
+      "sha256": "e069445682b39bb8f63438abd4aacfe10e7cc8c63f2ae4b5544ac57cd3d0e766",
+      "size_bytes": 165726
+    },
+    "runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_deals_with_fee.csv": {
+      "sha256": "1d5449cd8b374aa131189bb103a193fc62420e1b393f2bcc5b777f9672a90e66",
+      "size_bytes": 14834
+    },
+    "runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_orders.csv": {
+      "sha256": "1f6e53db36b3d8d034b0e2ced4f626cab9046921d9e80cfc36201c8887512702",
+      "size_bytes": 254298
+    },
+    "runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_signals.csv": {
+      "sha256": "8c7af52e7e03e27aea9353b53651fe578ef23bf856e6482664c2746be0f8e45e",
+      "size_bytes": 4314627
+    },
+    "runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_startup.csv": {
+      "sha256": "66fd60c071aa741ee6fbc60b739122d54a891e1d35c7f8311a3064b0a2e61b9b",
+      "size_bytes": 226
+    },
+    "runs/rule_clean_common_risk/ten_year/tester.ini": {
+      "sha256": "2aca7ba3c177d7ba1033cc27f3994dd2c975021c4a5c2b9f6e2d1edbc5f95416",
+      "size_bytes": 5616
+    },
+    "runs/structural_parity/five_year/A1_XAU_H4_EPISODE_REPAIR_STRUCTURAL_PARITY_FIVE_YEAR.htm": {
+      "sha256": "63a2156ca9508c49cf4cb49ed0d9bb9feb8e2f269cd799e5a1e8faaa3f5cf1d2",
+      "size_bytes": 173516
+    },
+    "runs/structural_parity/five_year/a1_xau_h4_episode_repair_structural_parity_five_year_deals_with_fee.csv": {
+      "sha256": "bafc06a2113f57985ba31a9900fe8cf40025cb99a818e72b80829806cf684352",
+      "size_bytes": 16154
+    },
+    "runs/structural_parity/five_year/a1_xau_h4_episode_repair_structural_parity_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/structural_parity/five_year/a1_xau_h4_episode_repair_structural_parity_five_year_orders.csv": {
+      "sha256": "0a24fcccd0abbd5dabb384795c51554eb2c6a9aa950c4e3dcc9c0aa112dbdda1",
+      "size_bytes": 118305
+    },
+    "runs/structural_parity/five_year/a1_xau_h4_episode_repair_structural_parity_five_year_signals.csv": {
+      "sha256": "d726b67fa8463933b5926543b9f46c87146930c9145a18d40d2f03dfa68c5265",
+      "size_bytes": 2125981
+    },
+    "runs/structural_parity/five_year/a1_xau_h4_episode_repair_structural_parity_five_year_startup.csv": {
+      "sha256": "15cc3c494ab916ba6863359997acbee25f51be05ed16bf07fcf7c26afdfe6012",
+      "size_bytes": 222
+    },
+    "runs/structural_parity/five_year/tester.ini": {
+      "sha256": "40734926a03f420915f344151fd1cf3ed1d2cda7a71ba9829a289628897c4102",
+      "size_bytes": 5600
+    },
+    "runs/structural_parity/ten_year/A1_XAU_H4_EPISODE_REPAIR_STRUCTURAL_PARITY_TEN_YEAR.htm": {
+      "sha256": "be12dde2cd21080d7e632442df5033b2f2e4f7027554503f257c6f9aa422fac0",
+      "size_bytes": 242172
+    },
+    "runs/structural_parity/ten_year/a1_xau_h4_episode_repair_structural_parity_ten_year_deals_with_fee.csv": {
+      "sha256": "c4c2e62873e3de8212f7943edb39c9acfb1d1e1a334f38a9e5724d21c15daebc",
+      "size_bytes": 29737
+    },
+    "runs/structural_parity/ten_year/a1_xau_h4_episode_repair_structural_parity_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/structural_parity/ten_year/a1_xau_h4_episode_repair_structural_parity_ten_year_orders.csv": {
+      "sha256": "81b019150d5eb30a29d8433b4429ba6710024fd30ee3643ef4a9b16685feb378",
+      "size_bytes": 249247
+    },
+    "runs/structural_parity/ten_year/a1_xau_h4_episode_repair_structural_parity_ten_year_signals.csv": {
+      "sha256": "d6d00be8a25534311b8e7e63658f4d72ade129d9fb8115065443c23cc5df4525",
+      "size_bytes": 4234977
+    },
+    "runs/structural_parity/ten_year/a1_xau_h4_episode_repair_structural_parity_ten_year_startup.csv": {
+      "sha256": "48dbde13740aeefc67ce09def116004a77ba72158180bc7c85b659109b9a9e2e",
+      "size_bytes": 221
+    },
+    "runs/structural_parity/ten_year/tester.ini": {
+      "sha256": "80a12b83b9dd2fe22cd2f2ddcf76d8e8e045e50acd38abfc80eb30a14f3e5cbb",
+      "size_bytes": 5593
+    }
+  },
+  "status": "H4_EPISODE_IDENTITY_REPAIR_FAILED"
+}

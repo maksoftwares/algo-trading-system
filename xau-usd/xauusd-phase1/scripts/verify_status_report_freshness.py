@@ -11,7 +11,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from verify_status_dashboard_freshness import verify_status_dashboard_freshness
+from verify_status_dashboard_freshness import GOVERNANCE_SCHEMA, verify_status_dashboard_freshness
 
 
 def verify_status_report_freshness(repo_root: Path, status_path: Path | None = None) -> list[str]:
@@ -21,6 +21,12 @@ def verify_status_report_freshness(repo_root: Path, status_path: Path | None = N
     phase3_reports = repo_root / "xau-usd" / "xauusd-phase3-experimental" / "outputs" / "reports"
 
     errors = verify_status_dashboard_freshness(repo_root, status_path)
+    project_status_path = repo_root / "status_summary.json"
+    project_status = _read_json(project_status_path) if project_status_path.exists() else {}
+    if project_status.get("schema_version") == GOVERNANCE_SCHEMA:
+        errors.extend(_verify_governance_status_pointers(repo_root))
+        return errors
+
     required_paths = {
         "phase1_summary": phase1_reports / "PHASE1_STATUS_SUMMARY.json",
         "phase1_acceptance": phase1_reports / "PHASE1_ACCEPTANCE_REPORT.md",
@@ -169,6 +175,47 @@ def verify_status_report_freshness(repo_root: Path, status_path: Path | None = N
 
     _expect_fragment(errors, "status.html", status_html, "phase1 acceptance status", acceptance_status)
     _expect_fragment(errors, "status.html", status_html, "phase2 readiness status", phase2_status)
+    return errors
+
+
+def _verify_governance_status_pointers(repo_root: Path) -> list[str]:
+    errors: list[str] = []
+    phase1_root = repo_root / "xau-usd" / "xauusd-phase1"
+    pointer_json_path = phase1_root / "status_summary.json"
+    pointer_md_path = phase1_root / "status_summary.md"
+    if not pointer_json_path.is_file():
+        errors.append(f"missing phase-local governance status pointer JSON: {pointer_json_path}")
+    if not pointer_md_path.is_file():
+        errors.append(f"missing phase-local governance status pointer Markdown: {pointer_md_path}")
+    if errors:
+        return errors
+
+    pointer = _read_json(pointer_json_path)
+    expected = {
+        "schema_version": "a1_xau_status_pointer_v1",
+        "status": "LEGACY_LOCATION_NOT_CANONICAL",
+        "authoritative_schema": GOVERNANCE_SCHEMA,
+        "canonical_json": "../../status_summary.json",
+        "canonical_markdown": "../../status_summary.md",
+    }
+    for key, value in expected.items():
+        if pointer.get(key) != value:
+            errors.append(
+                f"phase-local governance pointer {key} mismatch: "
+                f"actual={pointer.get(key)!r}; expected={value!r}"
+            )
+    pointer_md = pointer_md_path.read_text(encoding="utf-8", errors="replace")
+    for fragment in (
+        "LEGACY_LOCATION_NOT_CANONICAL",
+        "non-authoritative",
+        "../../status_summary.md",
+        "../../status_summary.json",
+    ):
+        if fragment not in pointer_md:
+            errors.append(f"phase-local status_summary.md is missing pointer fragment: {fragment}")
+    for stale in ("BROKER_ACTION_ENABLED", "PASS_ATTACHED", "OWNER_AUTHORIZED_DEMO_BROKER_ACTION"):
+        if stale in pointer_md or stale in pointer_json_path.read_text(encoding="utf-8", errors="replace"):
+            errors.append(f"phase-local governance pointer contains stale current claim: {stale}")
     return errors
 
 

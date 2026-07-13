@@ -1,0 +1,15 @@
+{
+  "broker_action_authorized": false,
+  "fee_instrumented_base_sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+  "fixed_rule": {
+    "equal_total_volume": true,
+    "primary_highwater_release_pct": 2.0,
+    "primary_highwater_trigger_pct": 5.0
+  },
+  "generated_expert_name": "A1XauH4ClusterHighwaterHedgeV1",
+  "pinned_commit": "d15fc9a6b3ff18d1748428ea6519fbe58ab30721",
+  "pinned_source_sha256": "bc61515d51b9414760ebe7d4d8e6bbf11fdfe760fd21d91246c0aae017449a51",
+  "purpose": "h4_cluster_primary_floating_highwater_hedge_exact_mt5",
+  "repaired_source_sha256": "208aa0578a7bf93071df592f055ce60b35cc1d58d0d54ccd28def797ea863b42",
+  "schema_version": "a1_xau_h4_cluster_highwater_hedge_source_v1"
+}

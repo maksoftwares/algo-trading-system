@@ -28,6 +28,9 @@ def _runner_module():
     assert spec is not None
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
+    # Dataclasses resolve postponed annotations through the defining module.
+    # Register the dynamically loaded runner just as the normal import path does.
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 

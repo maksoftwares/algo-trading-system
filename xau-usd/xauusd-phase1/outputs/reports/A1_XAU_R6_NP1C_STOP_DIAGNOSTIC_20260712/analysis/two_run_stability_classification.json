@@ -1,0 +1,89 @@
+{
+  "per_timeframe": {
+    "D1": {
+      "changed_common_timestamp_count": 1,
+      "changed_field_counts": {
+        "close": 0,
+        "high": 0,
+        "low": 0,
+        "open": 0,
+        "real_volume": 0,
+        "spread": 1,
+        "tick_volume": 0
+      },
+      "common_timestamp_metadata_identical": false,
+      "common_timestamp_ohlc_identical": true,
+      "common_timestamps": 3439,
+      "duplicate_timestamps": 0,
+      "first_differing_timestamp": "2026-04-14T00:00:00",
+      "last_differing_timestamp": "2026-04-14T00:00:00",
+      "run1_row_count": 3439,
+      "run1_sha256": "65a186fcb5e195120de1483c7908ba003f29b98b735ae9b66bd58cc44831a1b5",
+      "run1_timestamp_strict_superset": false,
+      "run2_row_count": 3439,
+      "run2_sha256": "d3deb5dc0e128e8bdb56266dae15d2b3deff31d5c0fe52dce937dce4f91ae21d",
+      "run2_timestamp_strict_superset": false,
+      "run_files_identical": false,
+      "timestamps_only_in_run1": 0,
+      "timestamps_only_in_run2": 0
+    },
+    "H1": {
+      "changed_common_timestamp_count": 4,
+      "changed_field_counts": {
+        "close": 0,
+        "high": 0,
+        "low": 0,
+        "open": 0,
+        "real_volume": 0,
+        "spread": 4,
+        "tick_volume": 0
+      },
+      "common_timestamp_metadata_identical": false,
+      "common_timestamp_ohlc_identical": true,
+      "common_timestamps": 65319,
+      "duplicate_timestamps": 0,
+      "first_differing_timestamp": "2026-04-14T02:00:00",
+      "last_differing_timestamp": "2026-04-14T07:00:00",
+      "run1_row_count": 65319,
+      "run1_sha256": "c8aef874a65ec316f47450bd9f058366a16a4e0ebec959ccd380ee10aa8fcf45",
+      "run1_timestamp_strict_superset": false,
+      "run2_row_count": 65319,
+      "run2_sha256": "4cff7935627e263e9cc074c8a722dcbc77a9114bf538bf7def9eafaf11df58bc",
+      "run2_timestamp_strict_superset": false,
+      "run_files_identical": false,
+      "timestamps_only_in_run1": 0,
+      "timestamps_only_in_run2": 0
+    },
+    "H4": {
+      "changed_common_timestamp_count": 2,
+      "changed_field_counts": {
+        "close": 0,
+        "high": 0,
+        "low": 0,
+        "open": 0,
+        "real_volume": 0,
+        "spread": 2,
+        "tick_volume": 0
+      },
+      "common_timestamp_metadata_identical": false,
+      "common_timestamp_ohlc_identical": true,
+      "common_timestamps": 17672,
+      "duplicate_timestamps": 0,
+      "first_differing_timestamp": "2026-04-14T00:00:00",
+      "last_differing_timestamp": "2026-04-14T04:00:00",
+      "run1_row_count": 17672,
+      "run1_sha256": "08fb0016a07bd00584a111d94096db8bc1be01575efd8a0576b6918522d1e746",
+      "run1_timestamp_strict_superset": false,
+      "run2_row_count": 17672,
+      "run2_sha256": "ef06dabe55fb44c928285d4f82f141431da2ce72ab672f31cd4ba1a71f2ea844",
+      "run2_timestamp_strict_superset": false,
+      "run_files_identical": false,
+      "timestamps_only_in_run1": 0,
+      "timestamps_only_in_run2": 0
+    }
+  },
+  "schema_version": "a1_xau_r6_np1d1_history_stability_v1",
+  "stability_flags": [
+    "COMMON_TIMESTAMP_VOLUME_OR_SPREAD_DRIFT"
+  ]
+}

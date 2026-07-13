@@ -17,6 +17,26 @@ def test_phase2_transition_artifact_verifier_passes_committed_artifacts():
     assert errors == []
 
 
+def test_phase2_transition_artifact_verifier_keeps_governance_freeze_fail_closed():
+    module = _load_module()
+    payload = {
+        "schema_version": "a1_xau_governance_status_v1",
+        "current": {
+            "overall_status": "NO_GO_RESEARCH_ONLY",
+            "authorization": {
+                "broker_action_authorized": False,
+                "demo_authorized": True,
+                "live_authorized": False,
+                "runtime_touched": False,
+            },
+        },
+    }
+
+    assert module._governance_freeze_errors(payload) == [
+        "A1 XAU governance authorization must keep demo_authorized=False."
+    ]
+
+
 def test_phase2_transition_artifact_verifier_ignores_generated_timestamps(tmp_path: Path):
     module = _load_module()
     committed = tmp_path / "committed.json"

@@ -47,7 +47,12 @@ SCRIPT_POLICY_REQUIREMENTS = {
     "owner_packet_path_required": ("owner_packet", "owner-packet"),
     "owner_packet_hash_required": ("owner_packet_sha256", "owner-packet-sha256"),
     "review_hash_required": ("review_hash", "review-hash"),
-    "zero_exposure_check_required": ("zero_exposure", "broker_a3_exposure_state", "a3_exposure_zero"),
+    "zero_exposure_check_required": (
+        "zero_exposure",
+        "broker_a3_exposure_state",
+        "a3_exposure_zero",
+        "broker_exposure_absent",
+    ),
     "profile_backup_required": ("backup_profile", "profile_backup"),
     "current_a3_pause_ack_required": ("acknowledge_current_a3_pause", "A3_ENTRY_LANES_PAUSED"),
 }

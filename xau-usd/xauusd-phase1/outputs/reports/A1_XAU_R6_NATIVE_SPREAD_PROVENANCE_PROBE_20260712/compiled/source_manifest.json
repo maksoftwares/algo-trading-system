@@ -1,0 +1,12 @@
+{
+  "interfaces": [
+    "CopyRates.spread",
+    "CopySpread",
+    "iSpread",
+    "CopyTicksRange.bid_ask"
+  ],
+  "schema_version": "a1_xau_r6_native_spread_probe_source_manifest_v1",
+  "source": "A1XauR6NativeSpreadProvenanceProbe.mq5",
+  "source_sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+  "zero_action": true
+}

@@ -1,0 +1,152 @@
+{
+  "artifacts": [
+    {
+      "path": "A1_XAU_R5_PRE_DOWNTREND_BREAK_SHORT_V1_EXACT_20260711.json",
+      "sha256": "072234fe95763ea4e6941233d60eb1e6d258262aafa61b8d7d7580cfda785a22",
+      "size": 26536
+    },
+    {
+      "path": "A1_XAU_R5_PRE_DOWNTREND_BREAK_SHORT_V1_EXACT_20260711.md",
+      "sha256": "dc93f719b8458d3fcfd410b2d8c2e2942f8b7d2e1c99c6479689a1696520ac64",
+      "size": 2197
+    },
+    {
+      "path": "locked_inputs.json",
+      "sha256": "de2ecdacc1daf79671520b4f93986a2209a60e6b63815bd176128f858cd05655",
+      "size": 2985
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1.htm",
+      "sha256": "665dab695a16e81c548edf8a75410eca29ca081dd0ba496081be3e6ada963a9d",
+      "size": 928226
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_deals.csv",
+      "sha256": "961866d535dd1daa86977879f46e2802e2184e3e7e139a66a976c4cf9ba345ba",
+      "size": 150158
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_management.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_orders.csv",
+      "sha256": "5f72dcb61e094e38d71300a0ffe5444fd0cdbc4e9b1bfe87346661439b44342a",
+      "size": 638134
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_signals.csv.gz",
+      "sha256": "0fb137f28ca8f84a9dbfc3a9e3d9dcf439977404ba04112eb4fa19d3d6ec2169",
+      "size": 12985519
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_summary.json",
+      "sha256": "08a6895843fba2d04b353436b8f561b0ade56cd52900a256d4ee3bd83684a229",
+      "size": 123931
+    },
+    {
+      "path": "runs/five_year/a1_momentum_variants_r5_pre_downtrend_q55_five_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_FIVE_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_trades.csv",
+      "sha256": "e681e00692da06d99ea5961e7b15892bd388b30afb3e87b27c50aa3f5d360ca3",
+      "size": 75690
+    },
+    {
+      "path": "runs/five_year/compile.log",
+      "sha256": "79bce0d5fd47b857ea0ec4320bfe560c15ac7be1d91c5afbe1fe24bfcdacccdb",
+      "size": 6960
+    },
+    {
+      "path": "runs/five_year/compiled/A1XauM5MomentumContinuationExecutor.ex5",
+      "sha256": "98844eb03d0d9263b188909a08b7b056fe106cbc1ee614c65f2c0d78b26e2907",
+      "size": 195106
+    },
+    {
+      "path": "runs/five_year/compiled/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "08a3af72923b709760b37d477aae53119314714708b60d0222cd6533038e714d",
+      "size": 183264
+    },
+    {
+      "path": "runs/five_year/mt5_components.json",
+      "sha256": "27151fa977036a8fc00f9a7668b68b5b612dec33407103886e06d658cbefee85",
+      "size": 144642
+    },
+    {
+      "path": "runs/five_year/mt5_components.md",
+      "sha256": "a357361dad764776d9c0ec88a26ecba5bd62925dbb7ba961fdda36d6205c1b07",
+      "size": 3566
+    },
+    {
+      "path": "runs/five_year/tester.ini",
+      "sha256": "aa58effa8f94101d9f17f377d8d76a7591c13b6b5d164cc60f63a19bc3396b41",
+      "size": 6162
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1.htm",
+      "sha256": "2c3d416b92fe307e56a8a4875c164c8537e4c44c7df9b3d2d7b59fd23ace4c74",
+      "size": 1332444
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_deals.csv",
+      "sha256": "0b2c03e0350e3e91595ef8b87d212cb1fccf0a691669ac02e1ee9276ba695d03",
+      "size": 223784
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_management.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_orders.csv",
+      "sha256": "7c8de81bef09ca490fc2100dfba29773c4ecdf28746b90e5a3cbbb5d71ca29a6",
+      "size": 1217722
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_signals.csv.gz",
+      "sha256": "3f557b39f2c150599eff0d5b292d57cb6b206bd01e3efb142e125dc8c5f5294c",
+      "size": 25305074
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_summary.json",
+      "sha256": "18c8961ab7fbbad6aa5cbd7a2cee236d98d733ab8397101749cb25a9da357037",
+      "size": 178212
+    },
+    {
+      "path": "runs/ten_year/a1_momentum_variants_r5_pre_downtrend_q55_ten_year_20260701/A1XauM5Momentum_R5_PRE_DOWNTREND_Q55_TEN_YEAR_XAUUSD_M5_r5_upchop_downside_impulse_retest_q55_v1_trades.csv",
+      "sha256": "271d978966ff49d7e2374f247a607191b06537ad36e0bf6d020423796fd62de1",
+      "size": 112823
+    },
+    {
+      "path": "runs/ten_year/compile.log",
+      "sha256": "f65c7b060fa448e21576e99018a9c9dcabe6e1ed713b8ffcc584879f0cc447eb",
+      "size": 6960
+    },
+    {
+      "path": "runs/ten_year/compiled/A1XauM5MomentumContinuationExecutor.ex5",
+      "sha256": "e9013ee961754e1fbb66583010bc42d478156997e1af1fdc11462d3d2d524eb3",
+      "size": 195424
+    },
+    {
+      "path": "runs/ten_year/compiled/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "08a3af72923b709760b37d477aae53119314714708b60d0222cd6533038e714d",
+      "size": 183264
+    },
+    {
+      "path": "runs/ten_year/mt5_components.json",
+      "sha256": "0fdd8fbcd0281fd4572829f275207e1b3dfd7c98c5bb218174b3391f2a0ecac7",
+      "size": 207722
+    },
+    {
+      "path": "runs/ten_year/mt5_components.md",
+      "sha256": "d41270b1589b04d457e66a279e1e5666d161b6cd2ba535db9407d8d9476f8b89",
+      "size": 3549
+    },
+    {
+      "path": "runs/ten_year/tester.ini",
+      "sha256": "c41d069f45f4088bf947a724b877d3f24a34f648f7a5158d57ee32aa258885f0",
+      "size": 6161
+    }
+  ],
+  "locked_inputs_sha256": "ce506a6c892d3f143675ac1feed621bedef3d3a478b3048801e317a56fa50f5c",
+  "preregistration_sha256": "bb59d71695ed31b808c37e086d79a38671a1faafc297f69a2c9d36c1965ea489",
+  "status": "R5_STANDALONE_FAIL"
+}

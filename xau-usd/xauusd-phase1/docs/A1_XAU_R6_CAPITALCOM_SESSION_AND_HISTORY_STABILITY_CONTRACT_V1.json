@@ -1,0 +1,89 @@
+{
+  "attestation": {
+    "command_order": [
+      "METAEDITOR_COMPILE",
+      "ZERO_ACTION_HISTORY_WARMUP",
+      "OFFICIAL_RUN1",
+      "OFFICIAL_RUN2",
+      "QUIET_FINALIZER",
+      "QUIET_READ_ONLY_VERIFIER"
+    ],
+    "exact_command_count": 6
+  },
+  "configured_period": {
+    "native_report_period": "M5 (2015.06.01 - 2026.07.01)",
+    "test_from_inclusive_broker_time": "2015-06-01T00:00:00",
+    "test_to_exclusive_broker_time": "2026-07-01T00:00:00"
+  },
+  "diagnostic_authority": {
+    "outer_manifest_sha256": "0137b38d72c0cdde51d0fbcf99b5b48905a781d5501ae2f773d40819bce0bc47",
+    "reviewed_diagnostic_commit": "beaa660359df240d7f336d65706f02da0239d7d8",
+    "reviewed_diagnostic_tree": "c72554e97402c8ae89aaa03a88746a9f03fe1c45",
+    "source_packet_manifest_sha256": "8479fb5dc17ceb1888521fe91344e636c02eac9d756a2dc99ea8d5d72714069c"
+  },
+  "official_stability_gates": {
+    "bar_fields_exact": [
+      "open_time_broker",
+      "open",
+      "high",
+      "low",
+      "close",
+      "tick_volume",
+      "spread",
+      "real_volume"
+    ],
+    "bar_files_sha256_exact": [
+      "native_h1_bars.tsv",
+      "native_h4_bars.tsv",
+      "native_d1_bars.tsv"
+    ],
+    "native_report_fields_exact": [
+      "bars",
+      "ticks"
+    ],
+    "spread_integer_minimum": 0,
+    "unstable_status": "NP1_RETRY_HISTORY_NOT_STABLE"
+  },
+  "phase": "NP1-E1_NATIVE_PERIOD_SESSION_AND_HISTORY_STABILITY_REPAIR",
+  "rerun_policy": {
+    "adaptive_extra_runs": 0,
+    "mt5_rerun_authorized_in_np1_e1": false,
+    "official_runs": [
+      "run1",
+      "run2"
+    ],
+    "warmup_runs": 1
+  },
+  "schema_version": "a1_xau_r6_capitalcom_session_and_history_stability_contract_v1",
+  "session_gap_policy": {
+    "allowed_interval_filter": {
+      "ignore_columns": [
+        "occurrence_count"
+      ],
+      "present_in_run1": "true",
+      "present_in_run2": "true"
+    },
+    "failure_on_additional_interval": true,
+    "failure_on_duplicate_timestamp": true,
+    "failure_on_missing_expected_interval": true,
+    "mode": "EXACT_INTERVAL_WHITELIST",
+    "source": {
+      "path": "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/market_gap_inventory.csv",
+      "sha256": "fb443e6895d3da4cbb06369d26fa9f76cd7f9df7dfdacb60517153116c058ec8"
+    }
+  },
+  "source_artifacts": {
+    "bar_common_timestamp_value_diff.csv": {
+      "path": "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/bar_common_timestamp_value_diff.csv",
+      "sha256": "f1010fea14b577cbde92a677a63c42ccdba5f2ef6319f14ac24bff1b6733601c"
+    },
+    "native_report_comparison.json": {
+      "path": "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/native_report_comparison.json",
+      "sha256": "a3ed95a6230908c89d4fa28952266e68a1cc89123bd792593d66235253b36033"
+    },
+    "two_run_stability_classification.json": {
+      "path": "outputs/reports/A1_XAU_R6_NP1C_STOP_DIAGNOSTIC_20260712/analysis/two_run_stability_classification.json",
+      "sha256": "3da484ffce6e8a3c0f5b783be405c2e60317338916256f4003e2908241b795aa"
+    }
+  }
+}

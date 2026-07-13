@@ -1,0 +1,152 @@
+{
+  "authorization": {
+    "artifact": "A1_XAU_NP1G2A9_REVIEW_47594949_2026_07_13.md",
+    "artifact_sha256": "f117122b98b7a47a4f0cb21fe747e21e8cfffcd26151f523c579d07d4ae82a78",
+    "mt5_execution_authorized": false,
+    "phase": "NP1-G2A10_NATIVE_REPORT_CONTRACT_SCHEMA_ALIGNMENT_CLOSURE"
+  },
+  "future_budget_reserved_not_activated": {
+    "metaeditor_compilations_maximum": 1,
+    "strategy_tester_order": ["warmup", "probe1", "probe2"],
+    "strategy_tester_runs_maximum": 3
+  },
+  "future_outputs": {
+    "complete": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_20260712",
+    "mutually_exclusive": true,
+    "stop": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712",
+    "atomic_staging_then_verified_promotion": true,
+    "partial_staging_preserved_inside_stop": true
+  },
+  "metadata_copy_allowlist": ["Config/accounts.dat", "Config/servers.dat"],
+  "metadata_receipt_schema": {
+    "closed_top_level_fields": ["mode", "copied"],
+    "closed_row_fields": ["source_path", "source_relative", "destination_relative", "size_bytes", "sha256"],
+    "modes": ["COPIED_ALLOWLIST", "ZERO_COPY"],
+    "reject_symlink_junction_reparse_or_hard_link": true,
+    "source_relative_must_equal_destination_relative": true
+  },
+  "new_root": {
+    "marker_bytes": "NP1 SPREAD PROBE G2 ONLY\n",
+    "marker_name": ".a1_xau_np1_spread_probe_g2_only",
+    "path": "C:\\MT5A1NP1SpreadProvenanceCleanG2",
+    "quarantined_roots": ["C:\\MT5A1NP1SpreadProvenanceClean", "C:\\MT5A1M5MomentumBacktest"]
+  },
+  "prohibitions": [
+    "modify_g1_bytes", "execute_mt5_in_g2a", "execute_metaeditor_in_g2a",
+    "copy_history_cache_reports_logs_profiles_charts_presets_or_mql5_files",
+    "normalize_native_spread", "canonical_np1c", "census", "profitability", "deployment", "broker_action"
+  ],
+  "reports_precondition": {
+    "initially_absent": true,
+    "runner_creates": true,
+    "sentinel_create_read_delete": true,
+    "versioned_prefix": "np1_g2_",
+    "canonical_repository_reports_root_only": true
+  },
+  "effective_tester_evidence": {
+    "native_report_required_fields": ["Expert", "Symbol", "Period", "History Quality", "Company", "Currency", "Initial Deposit", "Leverage", "Bars", "Ticks", "Total Trades", "Total Deals"],
+    "exact_semantics": {
+      "expert": "A1XauR6NativeSpreadProvenanceProbe",
+      "symbol": "XAUUSD",
+      "period": "M5",
+      "period_exact": "M5 (2015.06.01 - 2026.07.01)",
+      "date_from": "2015.06.01",
+      "date_to": "2026.07.01",
+      "initial_deposit": 10000.0,
+      "currency_separate_field": "USD",
+      "initial_deposit_currency_suffix_required": false,
+      "history_quality_required_grammar": "^[1-9][0-9]*(?:\\.[0-9]+)?%\\s+real ticks$",
+      "history_quality_percentage_evidence_only": true,
+      "history_quality_threshold_optimization_forbidden": true,
+      "leverage": "1:50",
+      "bars_and_ticks_positive": true,
+      "trades_and_deals_zero": true,
+      "model_if_exposed": "real ticks",
+      "company_required": "Capital Com Mena Securities Trading L.L.C",
+      "model_if_exposed_must_contain": "real tick"
+    },
+    "requested_labels_exactly_once": true,
+    "duplicate_labels_rejected": true
+  },
+  "execution_attestation": {
+    "commands_closed_schema": ["command", "exit_code", "stdout_base64", "stdout_sha256", "stderr_base64", "stderr_sha256"],
+    "compile_array_exact": ["MetaEditor64.exe", "/compile:<exact source>", "/log:<exact log>"],
+    "accepted_compile_exit_codes_with_zero_error_zero_warning_log": [0, 1],
+    "tester_array_exact": ["terminal64.exe", "/portable", "/config:<exact versioned ini>"],
+    "tester_exit_code": 0,
+    "base64_stream_bytes_must_match_sha256": true,
+    "compiled_source_sha256_must_equal_packet_source_and_manifest": true,
+    "compiled_ex5_sha256_must_equal_packet_ex5": true
+  },
+  "native_export_attestation": {
+    "closed_tsv_schemas": true,
+    "copyrates_return_error_count_time_range_load_bearing": true,
+    "copyspread_ispread_ibarshift_return_error_load_bearing": true,
+    "copyticksrange_return_error_count_day_time_load_bearing": true,
+    "bar_interface_timestamps_unique_monotonic": true,
+    "raw_tick_arithmetic_and_point_consistency": true,
+    "mq5_timestamp_grammar": "YYYY-MM-DDTHH:MM:SS",
+    "tick_broker_day_grammar": "YYYY.MM.DD",
+    "broker_day_iso_time_time_msc_same_second_required": true,
+    "time_msc_source_order": "nondecreasing",
+    "duplicate_millisecond_rows_preserved": true,
+    "deduplication_or_aggregation_forbidden": true,
+    "native_interface_point_digits_single_identity_required": true,
+    "point_must_equal_ten_to_negative_digits": true,
+    "positive_and_unavailable_quote_row_semantics_closed": true,
+    "probe1_probe2_byte_stability": true
+  },
+  "review_parser": {
+    "accepted_filename_pattern": "A1_XAU_NP1G2A10_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_derived_from_exact_reviewed_commit": true,
+    "exact_external_sha256_required": true,
+    "exact_unique_field_set_required": true,
+    "required_bindings": [
+      "reviewed_executor_commit_tree", "canonical_reports_root", "complete_stop_roots",
+      "metadata_modes_allowlist", "one_compile_three_ordered_runs", "all_no_result_runtime_deployment_prohibitions"
+    ],
+    "outside_block_content_allowed": false,
+    "reject_competing_fail_or_no_go": true
+  },
+  "stop_packet": {
+    "automatic_on_every_failure": true,
+    "exact_one_match_output_collection": true,
+    "preserve_only_fresh_or_changed_root_terminal_tester_and_agent_logs": true,
+    "preserve_authority_and_post_reports_precondition_evidence": true,
+    "verified_nonrecursive_manifest": true
+  },
+  "semantic_verification": {
+    "temporary_copy_only": true,
+    "real_analyzer_recomputation": true,
+    "byte_compare_full_result_analysis_readme_and_validation": true,
+    "validate_all_execution_provenance": true,
+    "require_exact_warmup_and_official_assertion_id_sets": true,
+    "require_exact_assertion_observed_expected_semantics": true,
+    "require_closed_selected_source_log_and_inventory_schemas": true,
+    "reject_sources_outside_exact_root_patterns": true,
+    "original_packet_must_remain_unchanged": true
+  },
+  "reviewed": {
+    "g1a_commit": "2bc44e1e69b8c3ca904c17db0f1786eb469f461c",
+    "g1a_tree": "ab122ac7b667e56a5c3bc38d451b8d2d0e20c535",
+    "g1b_commit": "d612203aeba27d8073c089c28dce5840d4a2d9fa",
+    "g1b_tree": "4bf1d8fb662364551ea745b05155aa1dce950b85",
+    "g1b_status": "NP1_G1_EVIDENCE_INVALID",
+    "g2a3_commit": "c91d16b6adc8b0e3d86f4ab75266da6006dd45f8",
+    "g2a3_tree": "dfa32761e08f2b1968bca4558723d488dee17554",
+    "g2a4_commit": "d8699d6e31fc5fba82ce1eb046d3d91359511a24",
+    "g2a4_tree": "4e0a6c865ab9c6f8301b3594ab5b19c35f0dec20",
+    "g2a5_commit": "9506a4233cb23f3218e697d98f4e628127064896",
+    "g2a5_tree": "b6be1b10fe3dd3beef31b0fb195dd54c4836f4b7",
+    "g2a6_commit": "ed6a2e2ceaaead2c02a24ef4c7f023656d0b4ebe",
+    "g2a6_tree": "e341089dff709d42e31e1d35c6bb91627a649904",
+    "g2a7_commit": "30c58650c56ed39ce61e7cf1d1aed81610f8e1c9",
+    "g2a7_tree": "4866e4399b7c2fa0768687c9e63fe73b52da940e",
+    "g2a8_commit": "eea19e1ed6898cdba64f15f51aee00ca50429905",
+    "g2a8_tree": "954af7032ee8add6971a74a17f29d09e74851d42",
+    "g2a9_commit": "47594949c03d155ca81473ce17826b839065e7cf",
+    "g2a9_tree": "5d6e8c58c9554e928fa502e60dcac73871e5db21"
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
+  "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
+}

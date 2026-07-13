@@ -15,3 +15,8 @@
 *.jpg binary
 *.jpeg binary
 *.gif binary
+
+# Exact backtest packets are hash-addressed evidence; preserve their original bytes.
+xau-usd/xauusd-phase1/outputs/reports/** -text -diff
+xau-usd/xauusd-phase1/docs/A1_XAU_R5_PRE_DOWNTREND_BREAK_SHORT_V1_PREREG_2026_07_11.md whitespace=-blank-at-eol
+xau-usd/xauusd-phase1/docs/A1_XAU_H4_PROFIT_PRESERVING_HEDGE_INDEPENDENT_REVIEW_ADDF272A_2026_07_11.md whitespace=-blank-at-eol,-blank-at-eof

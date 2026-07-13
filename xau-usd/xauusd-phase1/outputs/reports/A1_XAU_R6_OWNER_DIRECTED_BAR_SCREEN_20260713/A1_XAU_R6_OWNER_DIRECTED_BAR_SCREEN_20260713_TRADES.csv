@@ -1,0 +1,2 @@
+candidate_id,entry_time,exit_time,entry_bid,entry_ask,stop_price,target_price,exit_price,exit_reason,minimum_lot_risk_usd,pnl_r,pnl_minimum_lot_usd,pnl_reference_usd,max_adverse_r,router_state,reference_risk_feasible,deployment_risk_feasible
+6acbee585e2cf3b3b57766a6b3791882655f25057f2cff5d28e21c24424b3637,2024-08-30T17:00:00,2024-09-03T13:00:00,2497.63,2497.6800000000003,2507.65,2477.59,2477.59,TARGET_2R,10.02,1.9999999999999964,20.039999999999964,49.999999999999915,0.9590818363273144,CHOP,True,False

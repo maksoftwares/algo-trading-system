@@ -1,0 +1,7 @@
+assertion_id	passed	observed	expected
+environment	true	pass	pass
+run_id	true	warmup	warmup
+zero_files	true	pass	pass
+positions_zero	true	0	0
+orders_zero	true	0	0
+warmup_only	true	true	true

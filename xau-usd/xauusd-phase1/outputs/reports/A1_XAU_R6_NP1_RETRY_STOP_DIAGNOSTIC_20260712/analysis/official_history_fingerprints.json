@@ -1,0 +1,14 @@
+{
+  "D1": {
+    "row_count": 3439,
+    "sha256": "88cc8a3ae2b2f04d809a70942c480632c8648b9b9eeeaa126ba9e5fd1b7f6288"
+  },
+  "H1": {
+    "row_count": 65332,
+    "sha256": "9f79b8e4c844c4d1c64833f90d6d69b8a2ee30a296fafca031c5c01c68d73bff"
+  },
+  "H4": {
+    "row_count": 17673,
+    "sha256": "0f977b7dcb6ed49af135270954d0395c153ba7db9230feece11a17e7b5607f2c"
+  }
+}

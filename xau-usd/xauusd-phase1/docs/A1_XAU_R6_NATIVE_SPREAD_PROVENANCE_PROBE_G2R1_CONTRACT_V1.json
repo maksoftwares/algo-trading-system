@@ -1,0 +1,125 @@
+{
+  "authorization": {
+    "artifact": "A1_XAU_NP1G2A11_REVIEW_3BC8A091_2026_07_13.md",
+    "artifact_sha256": "80be3940ba0faad152c390ed3fb691979cec7ef0b431ea3af72796928b23a874",
+    "artifact_size_bytes": 25223,
+    "boundary": "REPO_ONLY",
+    "metaeditor_execution_authorized": false,
+    "mt5_execution_authorized": false,
+    "phase": "NP1-G2A12_PACKET_PATH_STREAM_REDACTION_CLOSURE",
+    "root_preparation_authorized": false
+  },
+  "account_selector": {
+    "closed_schema_fields": ["schema_version", "login", "platform_server", "expected_account_server"],
+    "exact_path": "C:\\MT5A1NP1Secrets\\A1_XAU_NP1_G2R1_ACCOUNT_SELECTOR_V1.json",
+    "login_grammar": "^[1-9][0-9]*$",
+    "password_field_forbidden": true,
+    "required_schema_version": "a1_xau_np1_g2r1_account_selector_v1",
+    "runtime_only": true,
+    "server_values_nonempty_trimmed_no_control_characters": true,
+    "selector_and_ancestor_symlink_junction_reparse_forbidden": true,
+    "selector_hard_link_forbidden": true,
+    "worktree_or_execution_root_location_forbidden": true
+  },
+  "account_selection": {
+    "common_login_required": true,
+    "common_server_required": true,
+    "expected_values_passed_to_ea_only_through_execution_ini": true,
+    "password_key_forbidden": true,
+    "tester_login_must_equal_common_login": true,
+    "tester_login_required": true,
+    "tester_server_key_forbidden": true,
+    "terminal_command_login_argument_forbidden": true,
+    "value_free_assertions": ["account_login_present", "account_login_matches", "account_server_present", "account_server_matches"]
+  },
+  "future_campaign_reserved_not_activated": {
+    "automatic_retry_authorized": false,
+    "complete_output": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2R1_20260713",
+    "marker_bytes": "NP1 SPREAD PROBE G2R1 ONLY\n",
+    "marker_name": ".a1_xau_np1_spread_probe_g2r1_only",
+    "metaeditor_compilations_maximum": 1,
+    "metadata_mode": "COPIED_ALLOWLIST",
+    "new_root": "C:\\MT5A1NP1SpreadProvenanceCleanG2R1",
+    "stop_output": "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2R1_STOP_20260713",
+    "strategy_tester_order": ["warmup", "probe1", "probe2"],
+    "strategy_tester_runs_maximum": 3
+  },
+  "future_execution_gate": {
+    "accepted_filename_pattern": "A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "block": "NP1_G2R1_EXECUTION_AUTHORIZATION_BLOCK",
+    "clean_exact_commit_and_tree_required_before_root_validation": true,
+    "consumed_g2a10_authorization_rejected": true,
+    "consumed_g2a11_authorization_rejected": true,
+    "consumed_g2_root_rejected": true,
+    "exact_external_sha256_required": true,
+    "extra_duplicate_or_outside_block_content_rejected": true,
+    "future_execution_authorized_by_this_contract": false
+  },
+  "metadata": {
+    "accounts_dat": {
+      "sha256": "d9b8e87ef41d4a498a34bd7ae2b37b2fea769c820311fdeef0488e0387976b8a",
+      "size_bytes": 15935
+    },
+    "allowlist": ["Config/accounts.dat", "Config/servers.dat"],
+    "copy_authorized_in_current_phase": false,
+    "future_source_root": "C:\\MT5A1NP1SpreadProvenanceClean",
+    "servers_dat": {
+      "sha256": "e2cda2f1548c92b168894d74f0959957839a89d8b992be1afc3b3062dfaefb66",
+      "size_bytes": 326364
+    }
+  },
+  "privacy_evidence": {
+    "account_or_server_literal_in_new_source_forbidden": true,
+    "accounts_or_servers_dat_committed_forbidden": true,
+    "candidate_packet_sensitive_value_scan_encodings": ["utf-8", "utf-16-le", "utf-16-be"],
+    "command_streams_sanitized_before_base64_and_independently_decoded_during_verification": true,
+    "complete_and_stop_packets_fail_closed_on_sensitive_value": true,
+    "inventory_strings_recursively_sanitized": true,
+    "manifest_relative_paths_independently_scanned": true,
+    "packet_relative_path_components_case_insensitively_scanned": true,
+    "partial_staging_copied_through_privacy_projection": true,
+    "raw_account_logs_committed": false,
+    "raw_execution_ini_committed": false,
+    "raw_native_report_committed": false,
+    "selector_committed": false,
+    "sanitized_logs_required": true,
+    "sanitized_native_report_required": true,
+    "stop_built_in_temporary_staging_and_promoted_after_manifest_verification": true,
+    "unsafe_optional_stop_artifacts_omitted_with_value_free_attestation": true,
+    "structural_account_selector_attestation_required": true,
+    "value_free_redacted_ini_required": true
+  },
+  "preserved_controls": {
+    "atomic_complete_or_stop_promotion": true,
+    "compile_source_ex5_and_command_binding": true,
+    "duplicate_millisecond_tick_rows_preserved": true,
+    "native_copyrates_copyspread_ispread_copyticksrange_evidence": true,
+    "native_report_and_export_validation_before_sanitization": true,
+    "no_deduplication_aggregation_or_normalization": true,
+    "probe1_probe2_byte_identity": true,
+    "scientific_recomputation_in_temporary_copy": true,
+    "second_compile_fourth_adaptive_out_of_order_or_retry_forbidden": true,
+    "zero_orders_positions_and_deals": true
+  },
+  "prohibitions": {
+    "broker_action_authorized": false,
+    "btc_work_authorized": false,
+    "canonical_np1c_result_authorized": false,
+    "demo_live_attach_authorized": false,
+    "deployment_authorized": false,
+    "h4_portfolio_authorized": false,
+    "mfe_mae_authorized": false,
+    "pnl_authorized": false,
+    "preset_profile_arming_authorized": false,
+    "profitability_authorized": false,
+    "r6_census_authorized": false,
+    "target_exit_authorized": false
+  },
+  "reviewed_stop_evidence": {
+    "commit": "dd3bf73b1eb3770c75c52312a34fe8caa08ddd55",
+    "manifest_sha256": "9bf73dcfd73f1db13f583dacc033087d36e9a80e864d3a30f917cf92e3cb48eb",
+    "root": "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712",
+    "tree": "8308d65c1ae51d445af1a74b4c60a935ce1a7355"
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2r1_contract_v1"
+}

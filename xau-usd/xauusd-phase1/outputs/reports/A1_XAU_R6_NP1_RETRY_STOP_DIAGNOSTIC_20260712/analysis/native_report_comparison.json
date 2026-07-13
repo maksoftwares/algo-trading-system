@@ -1,0 +1,16 @@
+{
+  "run1": {
+    "bars": 779961,
+    "period": "M5 (2015.06.01 - 2026.07.01)",
+    "ticks": 391745965,
+    "total_deals": 0,
+    "total_trades": 0
+  },
+  "run2": {
+    "bars": 779961,
+    "period": "M5 (2015.06.01 - 2026.07.01)",
+    "ticks": 391745965,
+    "total_deals": 0,
+    "total_trades": 0
+  }
+}

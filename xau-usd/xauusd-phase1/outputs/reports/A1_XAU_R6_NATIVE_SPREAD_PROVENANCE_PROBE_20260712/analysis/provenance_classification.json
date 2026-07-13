@@ -1,0 +1,15 @@
+{
+  "classification": null,
+  "evidence_complete": false,
+  "first_stop": "WARMUP_NATIVE_REPORT_MISSING",
+  "inference": {
+    "basis": [
+      "the clean root had no Reports directory before invocation",
+      "the locked runner did not create the Reports directory",
+      "the tester completed successfully but no HTML report exists anywhere under the clean root"
+    ],
+    "label": "LOCKED_RUNNER_REPORT_DIRECTORY_PRECONDITION_DEFECT_SUPPORTED"
+  },
+  "upstream_spread_origin": "UNRESOLVED",
+  "warning": "The inference concerns the report collection failure only. It is not a native spread provenance classification."
+}

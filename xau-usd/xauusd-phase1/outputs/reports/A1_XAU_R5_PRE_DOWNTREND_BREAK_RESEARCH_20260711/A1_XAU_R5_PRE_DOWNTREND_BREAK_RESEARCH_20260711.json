@@ -1,0 +1,78 @@
+{
+  "boundary": {
+    "development_data_not_holdout": true,
+    "h4_exposure_used_only_for_posthoc_availability": true,
+    "h4_outcomes_used_in_rule": false,
+    "opportunities_are_not_predicted_executions": true
+  },
+  "contract_filters": {
+    "daily_and_position_caps_applied": false,
+    "maximum_estimated_cost_r": 0.05,
+    "maximum_spread_points": 75.0,
+    "maximum_stop_points": 1000.0,
+    "router_states": [
+      "UPTREND",
+      "CHOP"
+    ]
+  },
+  "h4": {
+    "common_window_end": "2026-06-30 23:59:59",
+    "common_window_merged_exposure_episodes": 13,
+    "common_window_positions": 145,
+    "common_window_start": "2022-07-01 00:00:00",
+    "ten_year_merged_exposure_episodes": 39,
+    "ten_year_positions": 307
+  },
+  "q55_opportunities": {
+    "h4_episodes_touched": 13,
+    "h4_positions_touched": 128,
+    "overlap_state_counts": {
+      "CHOP": 84,
+      "UPTREND": 240
+    },
+    "overlap_unique_broker_dates": 137,
+    "raw_state_counts": {
+      "CHOP": 724,
+      "UPTREND": 461
+    },
+    "raw_unique_broker_dates": 462,
+    "raw_uptrend_chop_rows": 1185,
+    "risk_eligible_during_h4_exposure": 324,
+    "risk_eligible_rows": 767,
+    "risk_eligible_state_counts": {
+      "CHOP": 457,
+      "UPTREND": 310
+    },
+    "risk_eligible_unique_broker_dates": 326
+  },
+  "router_availability_while_h4_exposed": {
+    "exposed_rows": 84596,
+    "oracle_rows": 282641,
+    "state_counts": {
+      "CHOP": 24155,
+      "COMPRESSION": 2532,
+      "SHOCK": 11370,
+      "UPTREND": 46539
+    },
+    "uptrend_plus_chop": 70694,
+    "uptrend_plus_chop_pct": 83.5666
+  },
+  "schema_version": "a1_xau_r5_pre_downtrend_opportunity_v1",
+  "sources": {
+    "h4_deals": {
+      "bytes": 118870,
+      "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system-router-audit/xau-usd/xauusd-phase1/outputs/reports/A1_XAU_EXTENDED_HORIZON_EXACT_20260711/runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_deals_with_fee.csv",
+      "sha256": "9b605e36ee777dacad7f025b07fd46d151ff076be520f9e612805b02f87c9680"
+    },
+    "q55_orders": {
+      "bytes": 466109,
+      "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system-router-audit/xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R5_PRE_DOWNTREND_BREAK_RESEARCH_20260711/inputs/r2_impulse_retest_q55_orders.tsv",
+      "sha256": "c147fe0977900daa7d0caeff7e4af81925468b4250775311ea43fac22a1eb8ad"
+    },
+    "router_oracle": {
+      "bytes": 68748527,
+      "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system-router-audit/xau-usd/xauusd-phase1/outputs/reports/A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXACT_20260711_FINAL/runs/router_snapshot_oracle/run1/a1_xau_router_oracle_causal.csv",
+      "sha256": "3cc8e431a96b01cbab3764dfc488226bc1784f8874ace49cc17316ae56736585"
+    }
+  }
+}

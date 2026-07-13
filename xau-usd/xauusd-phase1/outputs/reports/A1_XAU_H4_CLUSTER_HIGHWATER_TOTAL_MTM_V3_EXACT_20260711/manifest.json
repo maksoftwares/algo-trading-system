@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.json": {
+      "sha256": "a55899db7f9619eab55347e435d68e48ff8c6f982363f1cf160cef2bafd2448b",
+      "size_bytes": 48370
+    },
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.md": {
+      "sha256": "f56fe0c26152520fed2e9150b77151e110592e1017543780524738ca7061ac15",
+      "size_bytes": 501
+    },
+    "compiled/A1XauH4ClusterHighwaterTotalMtmV3.ex5": {
+      "sha256": "c6134800b8904d63d662ca213bbf4252c3ff5d678ebe1c110beeabb30d81bdc3",
+      "size_bytes": 192116
+    },
+    "compiled/A1XauH4ClusterHighwaterTotalMtmV3.mq5": {
+      "sha256": "0312f4958ce17a2e2acf559d7eb82e1874715f3dbaca3d9e70ca18458df884dd",
+      "size_bytes": 181873
+    },
+    "compiled/compile_A1_XAU_H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_HEDGE.log": {
+      "sha256": "ff3b7f77691c217a62e8d3fc287b66b56ad9e1f2375e8783cdacb7a3ce527f05",
+      "size_bytes": 6996
+    },
+    "compiled/source_manifest.json": {
+      "sha256": "6aadb078349429ab480384f3f02e40383447aa80f2775a49e92ef84d985aa02c",
+      "size_bytes": 1138
+    },
+    "runs/five_year/A1_XAU_H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_HEDGE_FIVE_YEAR.htm": {
+      "sha256": "3bea989de1f76f94ffc69801a5714be82424478f2bb672da7cb2a68a2b8bc8f5",
+      "size_bytes": 877854
+    },
+    "runs/five_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_five_year_deals_with_fee.csv": {
+      "sha256": "8f95bec4c5caf633cad3a5d8a0812422c69257580708cf166181a5586a5b0909",
+      "size_bytes": 161760
+    },
+    "runs/five_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_five_year_management.csv": {
+      "sha256": "2fafa87a5f723562df25a29d1d4d20358cab691a3073c053bfc3f040a16b8f57",
+      "size_bytes": 111192
+    },
+    "runs/five_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_five_year_orders.csv": {
+      "sha256": "c02a3d3ba94af31980026fa03c74bfb53d45d53cb057bf7622969c62d9c4d9f9",
+      "size_bytes": 194773
+    },
+    "runs/five_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_five_year_signals.csv": {
+      "sha256": "b2a1f9f92619b8d221b28ef4fe0c1d1d69af09aeec7885993fc3ffb5cd5db009",
+      "size_bytes": 2160551
+    },
+    "runs/five_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_five_year_startup.csv": {
+      "sha256": "4a38188ba83f295851280488c2bc097b39daf8a3d78386fe9276f0e93589b83c",
+      "size_bytes": 226
+    },
+    "runs/five_year/tester.ini": {
+      "sha256": "d00249551efa435986bf5baa676b34aedc3723238b72c1bbf29ac633780a080d",
+      "size_bytes": 5781
+    },
+    "runs/ten_year/A1_XAU_H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_HEDGE_TEN_YEAR.htm": {
+      "sha256": "a730bddd8aa3aa2c80457dd3cc1225bf3fbb1b8f22a976999ef8ec1392570446",
+      "size_bytes": 1125544
+    },
+    "runs/ten_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_ten_year_deals_with_fee.csv": {
+      "sha256": "078c3eaff05c44cddb22dc982cb22b3d1938de2beb840b46e030afaeec41225f",
+      "size_bytes": 211172
+    },
+    "runs/ten_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_ten_year_management.csv": {
+      "sha256": "63450e865f022ec8086a19c80ec0fee3287b656a1a203906e44503f187d213c4",
+      "size_bytes": 97475
+    },
+    "runs/ten_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_ten_year_orders.csv": {
+      "sha256": "935e8ffc0d32a5b757bdce365055b0c3955d7dad582a1e70b6e433110ba288c3",
+      "size_bytes": 403664
+    },
+    "runs/ten_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_ten_year_signals.csv": {
+      "sha256": "637e13ae63c97fee6eafcd0306b1d8d57c3ce269e1d69547fa4f1dfc4586411a",
+      "size_bytes": 4304077
+    },
+    "runs/ten_year/a1_xau_h4_cluster_highwater_total_mtm_v3_hedge_ten_year_startup.csv": {
+      "sha256": "c03eaf87da24d48a1a601f697ba2e723cac8cf8ea4d6682c1dcbae0c0e28db11",
+      "size_bytes": 225
+    },
+    "runs/ten_year/tester.ini": {
+      "sha256": "5972fdbf57107c7e680f5371b4eb7af4c25d4c1781e6a074d08ff6f804ac3ccf",
+      "size_bytes": 5774
+    }
+  },
+  "status": "H4_CLUSTER_HIGHWATER_TOTAL_MTM_V3_FAILED"
+}

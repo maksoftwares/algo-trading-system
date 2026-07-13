@@ -1,0 +1,7 @@
+horizon,initial_equity_usd,risk_pct,risk_budget_usd,candidate_events,executable_at_0p01,blocked_at_0p01,all_candidates_executable
+five_year,1000.0,0.25,2.5,108,0,108,False
+five_year,1000.0,0.5,5.0,108,0,108,False
+five_year,1000.0,1.0,10.0,108,0,108,False
+ten_year,1000.0,0.25,2.5,156,0,156,False
+ten_year,1000.0,0.5,5.0,156,0,156,False
+ten_year,1000.0,1.0,10.0,156,4,152,False

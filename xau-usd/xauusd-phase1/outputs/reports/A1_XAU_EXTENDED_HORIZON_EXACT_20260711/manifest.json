@@ -1,0 +1,341 @@
+{
+  "artifacts": {
+    "A1_XAU_EXTENDED_FIVE_YEAR_20260711_DROPPED.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "A1_XAU_EXTENDED_FIVE_YEAR_20260711_KEPT.csv": {
+      "sha256": "c1b3d9219fda70bbf00af2bc8d656891fd9c8d368a47ba703ee93e97695bf5a9",
+      "size_bytes": 229848
+    },
+    "A1_XAU_EXTENDED_FIVE_YEAR_20260711_MONTHLY.csv": {
+      "sha256": "88856cfbf3bebc0932d74ef329a0d5a826e6fdffb44a41b93999deaecba3046f",
+      "size_bytes": 3258
+    },
+    "A1_XAU_EXTENDED_FIVE_YEAR_20260711_ROLLING.csv": {
+      "sha256": "97d901fae27c089264ff0852d0301a3234c0ac3e4df3bd1e6e499211bd087212",
+      "size_bytes": 2731
+    },
+    "A1_XAU_EXTENDED_FIVE_YEAR_20260711_YEARLY.csv": {
+      "sha256": "027e3ddf547cbac985d754d89908d161a399c600bd3307c6ba7c2be316f6fe89",
+      "size_bytes": 512
+    },
+    "A1_XAU_EXTENDED_HORIZON_EXACT_MT5_20260711.json": {
+      "sha256": "1f6813df613ab98bbdbb63017595de2b584afb0de6389a536c5c8018d54221ce",
+      "size_bytes": 90074
+    },
+    "A1_XAU_EXTENDED_HORIZON_EXACT_MT5_20260711.md": {
+      "sha256": "2b828c2dd715074e70b2b93e25b04b3166bf46826430f83dc94cd7e916788857",
+      "size_bytes": 2582
+    },
+    "A1_XAU_EXTENDED_TEN_YEAR_20260711_DROPPED.csv": {
+      "sha256": "4548001a7dcdbca3926454bf40430e4da17b991815768e344170554cde87c5ca",
+      "size_bytes": 1549
+    },
+    "A1_XAU_EXTENDED_TEN_YEAR_20260711_KEPT.csv": {
+      "sha256": "1dd7914953942cf53872c2ba1fa5464ea7441b96e4f8d819565ca85b54ca5736",
+      "size_bytes": 422640
+    },
+    "A1_XAU_EXTENDED_TEN_YEAR_20260711_MONTHLY.csv": {
+      "sha256": "09e2d5fa0f7e60b5b1bf189c6b35cd77c62cfd3f4ec7913632afae5145058f0b",
+      "size_bytes": 6192
+    },
+    "A1_XAU_EXTENDED_TEN_YEAR_20260711_ROLLING.csv": {
+      "sha256": "eaa825fc32b3cf33e1f68f1244f11a3ed545471c9e7d4d73c6d6c0c4097c8f14",
+      "size_bytes": 5828
+    },
+    "A1_XAU_EXTENDED_TEN_YEAR_20260711_YEARLY.csv": {
+      "sha256": "b1d8077b4073849484893d3bd8036ce37a502a5cb96fc14125b3f2de0e2282f4",
+      "size_bytes": 822
+    },
+    "compiled/h4_d1_long_best_box2_atr80/A1XauFeeEvidence_d15fc9a6.ex5": {
+      "sha256": "8ec58583dd2e6a33ea8c480c95a15fabe315b30cd5693938ca689f3b01f32988",
+      "size_bytes": 182456
+    },
+    "compiled/h4_d1_long_best_box2_atr80/A1XauFeeEvidence_d15fc9a6.mq5": {
+      "sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+      "size_bytes": 170602
+    },
+    "compiled/h4_d1_long_best_box2_atr80/compile_A1_XAU_EXTENDED_h4_d1_long_best_box2_atr80.log": {
+      "sha256": "82b86e411682b0e7b054c45dfc5c82b0e0acc7559f3db241ab031bfcb35f3d57",
+      "size_bytes": 6948
+    },
+    "compiled/h4_d1_long_best_box2_atr80_source_manifest.json": {
+      "sha256": "e7815135c08eb70b2a8876f402f4bbb5bb4badcf2fdbd37189a162ea125c0528",
+      "size_bytes": 720
+    },
+    "compiled/r1_h1_pullback_long_v1/A1XauFeeEvidence_23d52b49.ex5": {
+      "sha256": "02713fd17d1d122e0d3b4b924876e16df576dcbff2963684dccc236cd8ee1866",
+      "size_bytes": 188372
+    },
+    "compiled/r1_h1_pullback_long_v1/A1XauFeeEvidence_23d52b49.mq5": {
+      "sha256": "8ccab6faae5f900d2c42cd5768532318fc6a9f86c4feba5d45b3ade3c3dbb219",
+      "size_bytes": 175362
+    },
+    "compiled/r1_h1_pullback_long_v1/compile_A1_XAU_EXTENDED_r1_h1_pullback_long_v1.log": {
+      "sha256": "1d955efbcaf52737bc302b452b519dfb44543b615c84bc1eb05a4f6244ff0388",
+      "size_bytes": 6948
+    },
+    "compiled/r1_h1_pullback_long_v1_source_manifest.json": {
+      "sha256": "a8936530e4fa119027e1b26d39c0c9ca968ce87c64a50323615c27257c92d990",
+      "size_bytes": 720
+    },
+    "compiled/r2_continuation_short_v1/A1XauFeeEvidence_db8b1169.ex5": {
+      "sha256": "37f9ea99a6435a41b8fd4960db5b90265b3abba1227ce0d814a67028136c3a14",
+      "size_bytes": 193192
+    },
+    "compiled/r2_continuation_short_v1/A1XauFeeEvidence_db8b1169.mq5": {
+      "sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "size_bytes": 180523
+    },
+    "compiled/r2_continuation_short_v1/compile_A1_XAU_EXTENDED_r2_continuation_short_v1.log": {
+      "sha256": "2d3f62c7401f7f36dfd39c3bf2eb086e04a2baa71201ca1eec9bda6b3058b958",
+      "size_bytes": 6948
+    },
+    "compiled/r2_continuation_short_v1_source_manifest.json": {
+      "sha256": "9130e09eb5ed35951f8642510380cced96aa5f1204a1ade1852094dc677e8f9f",
+      "size_bytes": 720
+    },
+    "compiled/r2_pullback_rejection_short_v1/A1XauFeeEvidence_db8b1169.ex5": {
+      "sha256": "cac342af33ea7c11e93d94889b6537cb66a5e7bc3853eb0e8f8c80f3f293ece5",
+      "size_bytes": 193510
+    },
+    "compiled/r2_pullback_rejection_short_v1/A1XauFeeEvidence_db8b1169.mq5": {
+      "sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "size_bytes": 180523
+    },
+    "compiled/r2_pullback_rejection_short_v1/compile_A1_XAU_EXTENDED_r2_pullback_rejection_short_v1.log": {
+      "sha256": "11d203215a44eb1213b3e14e320273dc17a4671b749350be38f1dc1be09ca486",
+      "size_bytes": 6948
+    },
+    "compiled/r2_pullback_rejection_short_v1_source_manifest.json": {
+      "sha256": "9130e09eb5ed35951f8642510380cced96aa5f1204a1ade1852094dc677e8f9f",
+      "size_bytes": 720
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/A1_XAU_EXTENDED_H4_D1_LONG_BEST_BOX2_ATR80_FIVE_YEAR.htm": {
+      "sha256": "2cfa048f4d4cba4062f11eeb3334e31d1ca102b5803f47fc5c5d4dedb982289c",
+      "size_bytes": 407836
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_five_year_deals_with_fee.csv": {
+      "sha256": "8866b3ba849224582d3aa44a236a25545e18bf7f8663363ae19fe0b7ce61a51c",
+      "size_bytes": 60356
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_five_year_orders.csv": {
+      "sha256": "89461d37e61a01b73809eb30cb047b45fcca92b4d744a8b4beffab3f7b9fff68",
+      "size_bytes": 184262
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_five_year_signals.csv": {
+      "sha256": "b8f367ed8d17eb412715a347338ff186394849c4bc75db6ab747bfa4bd5c8c07",
+      "size_bytes": 2056928
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_five_year_startup.csv": {
+      "sha256": "21cffc4bd86af4dca2fe437d79480caa4bacf21662755072126ca20db780512d",
+      "size_bytes": 213
+    },
+    "runs/five_year/h4_d1_long_best_box2_atr80/tester.ini": {
+      "sha256": "81172de48a5de5c6c58610847e176a6f494b2f4f41e4e62311d1548a991dd013",
+      "size_bytes": 5588
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/A1_XAU_EXTENDED_R1_H1_PULLBACK_LONG_V1_FIVE_YEAR.htm": {
+      "sha256": "9b6d7434b6bf137d77b44684cc25ac9f03c8635070f7bca375702cdda282c2ea",
+      "size_bytes": 991324
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_five_year_deals_with_fee.csv": {
+      "sha256": "347a8f23c4517f7ec17b8f6efba805e1d96ca44e3065c93dbf7efbc3e7806f0e",
+      "size_bytes": 175266
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_five_year_orders.csv": {
+      "sha256": "b5a4517664c601b550093635f3cefd91c6440bd7e4d0eae75030735e48e91ed6",
+      "size_bytes": 949778
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_five_year_signals.csv": {
+      "sha256": "2e33ac399af15e1d5e46c9920cb049f83b89fabdc4da9ef61fc127001ffc22c9",
+      "size_bytes": 30914099
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_five_year_startup.csv": {
+      "sha256": "f405b179c1b4d1c63d4b3370f946f5869f8edffde839719c36418f95e98c4cdd",
+      "size_bytes": 217
+    },
+    "runs/five_year/r1_h1_pullback_long_v1/tester.ini": {
+      "sha256": "095fbd410868ecab2def0e234d14b7bb3bbc553821eaad0404b1f8a6f91cfc73",
+      "size_bytes": 5759
+    },
+    "runs/five_year/r2_continuation_short_v1/A1_XAU_EXTENDED_R2_CONTINUATION_SHORT_V1_FIVE_YEAR.htm": {
+      "sha256": "6594539ab4bd135cdc147496d9ef59f9e460420df806de880d3872bd1afa210a",
+      "size_bytes": 213654
+    },
+    "runs/five_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_five_year_deals_with_fee.csv": {
+      "sha256": "15c5f5692e5b33d74ca3a25ca7364a9c82673d42ea7436a4c5bb731e5bebc36c",
+      "size_bytes": 22401
+    },
+    "runs/five_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/five_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_five_year_orders.csv": {
+      "sha256": "53713b67b8b4afd2775003d5959b34cdaada80fbf06436d4075276fea3c24859",
+      "size_bytes": 146746
+    },
+    "runs/five_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_five_year_signals.csv": {
+      "sha256": "22f7ae22c01eb9cff13102595dd5143d8c330a31ce902d1c2b61ea4afbb6a345",
+      "size_bytes": 84090051
+    },
+    "runs/five_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_five_year_startup.csv": {
+      "sha256": "1b4debe0880dd67caa6ee5f3675e1e9612159a73ac5fcdc8c02b8bd60a58bcc8",
+      "size_bytes": 216
+    },
+    "runs/five_year/r2_continuation_short_v1/tester.ini": {
+      "sha256": "5584a49f55cb076258c29a809af1c3c66202c9002f6390b3cb1cd6c1cec92362",
+      "size_bytes": 6114
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/A1_XAU_EXTENDED_R2_PULLBACK_REJECTION_SHORT_V1_FIVE_YEAR.htm": {
+      "sha256": "23c9ee5e46832fe655cf954c1e2ff43b483db48e0ebb95cc9396e69eb54fefd7",
+      "size_bytes": 286104
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_five_year_deals_with_fee.csv": {
+      "sha256": "fad9206aafd39698b3e053ff960c2d547b8cba0e73bae5c392828f21e9146517",
+      "size_bytes": 34751
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_five_year_orders.csv": {
+      "sha256": "3528119992dd868bae8603344a37a86439f1170910548f3b6fead249fdef912b",
+      "size_bytes": 133752
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_five_year_signals.csv": {
+      "sha256": "2743c90fd1b7734722cdebaf03c5ffa6925b3defdd8b2a37bac9f781dbeabfbb",
+      "size_bytes": 7384959
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_five_year_startup.csv": {
+      "sha256": "1138d38e89e7dbd2e034e3d7e56ec651d75f4ca4778246ad9e3cd82486f22473",
+      "size_bytes": 206
+    },
+    "runs/five_year/r2_pullback_rejection_short_v1/tester.ini": {
+      "sha256": "4daa3314999aeb65193f33babaf7c3bb10f52e4b31b12c2805cba4c56e80dbda",
+      "size_bytes": 5879
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/A1_XAU_EXTENDED_H4_D1_LONG_BEST_BOX2_ATR80_TEN_YEAR.htm": {
+      "sha256": "fcdf60c8c899ef3d9d2877de37e910b5de681e68b0b0276742aec2518b7ed8cf",
+      "size_bytes": 712896
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_deals_with_fee.csv": {
+      "sha256": "9b605e36ee777dacad7f025b07fd46d151ff076be520f9e612805b02f87c9680",
+      "size_bytes": 118870
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_orders.csv": {
+      "sha256": "ec3109551b3b4208bc86fe3e343b35919d9217176c7bc8ee00743c4e1418144c",
+      "size_bytes": 383627
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_signals.csv": {
+      "sha256": "3f0af25a9c3e04a852de8643ea8825dc275cbb7da2c17c62570c4460c352f0e2",
+      "size_bytes": 4112917
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/a1_xau_extended_h4_d1_long_best_box2_atr80_ten_year_startup.csv": {
+      "sha256": "a8248de9bc58cecdc85366809b38b149ade121f1d079fc07edac5e2b1a4f51c0",
+      "size_bytes": 213
+    },
+    "runs/ten_year/h4_d1_long_best_box2_atr80/tester.ini": {
+      "sha256": "d445a7eccd34d53fbb661703b48deffe3ae0202eb5ffae013c23371e246bb487",
+      "size_bytes": 5582
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/A1_XAU_EXTENDED_R1_H1_PULLBACK_LONG_V1_TEN_YEAR.htm": {
+      "sha256": "13e578a682f999251a59735a770067dd9d52da24025f1eaf66cf45c484d49541",
+      "size_bytes": 1774716
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_ten_year_deals_with_fee.csv": {
+      "sha256": "330e395256f99faeb8cde7d5ed6226bee014337e716f8b778af5f2d666c3e11a",
+      "size_bytes": 329612
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_ten_year_orders.csv": {
+      "sha256": "8c385f1ddbcb4491bb00d713b4e1a625fdedae6230c6f7fd13d751242f9a2b83",
+      "size_bytes": 1798182
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_ten_year_signals.csv": {
+      "sha256": "8f9333abd4c54db442ec3d18c436d52caf623209d89a201487d015b6ce171cee",
+      "size_bytes": 61748072
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/a1_xau_extended_r1_h1_pullback_long_v1_ten_year_startup.csv": {
+      "sha256": "4b437f1991109bc2c7837fd0abc2c7daef6646e8cc247d3aa517c3bde95e2008",
+      "size_bytes": 217
+    },
+    "runs/ten_year/r1_h1_pullback_long_v1/tester.ini": {
+      "sha256": "930b779d37d3553a696be8e135f6664e59df9b63f855e8973eeaa09da1de3f74",
+      "size_bytes": 5753
+    },
+    "runs/ten_year/r2_continuation_short_v1/A1_XAU_EXTENDED_R2_CONTINUATION_SHORT_V1_TEN_YEAR.htm": {
+      "sha256": "db5f746753a311bd511da2e04a1e74c0593d05780191a943da4a144f4a824b1a",
+      "size_bytes": 215644
+    },
+    "runs/ten_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_ten_year_deals_with_fee.csv": {
+      "sha256": "5a111b90ff1322d61ebabca9cf3916746922cd351ec2bb31c5a773181661211b",
+      "size_bytes": 22793
+    },
+    "runs/ten_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/ten_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_ten_year_orders.csv": {
+      "sha256": "5ff010e134ea2b6832ee8741509ac1ff5aed3ec18417d9729c94c61f75f91881",
+      "size_bytes": 155590
+    },
+    "runs/ten_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_ten_year_signals.csv": {
+      "sha256": "54cdea1921449032d0e3b5f3803088ac51436a2ceab53a2edd73fe1354aaa0f3",
+      "size_bytes": 166688622
+    },
+    "runs/ten_year/r2_continuation_short_v1/a1_xau_extended_r2_continuation_short_v1_ten_year_startup.csv": {
+      "sha256": "1a144310d5f71ce8566c3ff063c0edb20b9b06c7594946aa9a6c30add391ec09",
+      "size_bytes": 216
+    },
+    "runs/ten_year/r2_continuation_short_v1/tester.ini": {
+      "sha256": "88ed3a1bc6a72e74e09736ba1ee933d6bcc34d819217389ef3f906e1eddffe22",
+      "size_bytes": 6108
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/A1_XAU_EXTENDED_R2_PULLBACK_REJECTION_SHORT_V1_TEN_YEAR.htm": {
+      "sha256": "e42a90f9cef5f32de244e6ec58bc5a4e351b12bd88493c8cd91ac306adeab16d",
+      "size_bytes": 460170
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_ten_year_deals_with_fee.csv": {
+      "sha256": "22b0eb0f1c8d8badc11ac80271b133ee6b47fe00971e53403ff82b283362a6f5",
+      "size_bytes": 66996
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_ten_year_orders.csv": {
+      "sha256": "fe41e9e74db6915846d5357ac4e65e234dba440f898498100777080e9bfb4058",
+      "size_bytes": 276123
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_ten_year_signals.csv": {
+      "sha256": "0e5b518693a4450d45eb8bafab348b9282a7130c72cccf8c52a5e4c807e63da6",
+      "size_bytes": 14748942
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/a1_xau_extended_r2_pullback_rejection_short_v1_ten_year_startup.csv": {
+      "sha256": "ab916a2b22f8a5fc112f3a48ef30374f1fc5f823af2dfe5069a14214efc3217c",
+      "size_bytes": 206
+    },
+    "runs/ten_year/r2_pullback_rejection_short_v1/tester.ini": {
+      "sha256": "8b5d42ed0b9b2ca4ad1c062879348ff28498d30a634cb26c957f0f7e7c9bf0b3",
+      "size_bytes": 5873
+    }
+  },
+  "status": "EXTENDED_HORIZON_NO_GO_ORDER_FAILURES"
+}

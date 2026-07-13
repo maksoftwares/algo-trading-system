@@ -1,0 +1,45 @@
+{
+  "boundary": {
+    "broker_action": false,
+    "census_generated": false,
+    "pnl_calculated": false
+  },
+  "errors": {
+    "invalid": [
+      "run1: native report period mismatch: 'M5 (2015.06.01 - 2026.07.01)'",
+      "run1: unexpected market-history gap: native_h1_bars.tsv: 2015-06-05T20:00:00->2015-06-07T22:00:00",
+      "run2: native report period mismatch: 'M5 (2015.06.01 - 2026.07.01)'",
+      "run2: unexpected market-history gap: native_h1_bars.tsv: 2015-06-05T20:00:00->2015-06-07T22:00:00",
+      "two-run native report bar/tick count mismatch"
+    ],
+    "parity": [
+      "two-run normalized mismatch: native_h1_bars.tsv",
+      "two-run normalized mismatch: native_h4_bars.tsv",
+      "two-run normalized mismatch: native_d1_bars.tsv"
+    ],
+    "source": [],
+    "zero_action": []
+  },
+  "metrics": {
+    "native_reports": {
+      "run1": {
+        "bars": 779751,
+        "ticks": 386580353,
+        "total_deals": 0,
+        "total_trades": 0
+      },
+      "run2": {
+        "bars": 779751,
+        "ticks": 386636287,
+        "total_deals": 0,
+        "total_trades": 0
+      }
+    },
+    "runs": [
+      {},
+      {}
+    ]
+  },
+  "schema_version": "a1_xau_r6_market_only_native_parity_exact_v1",
+  "status": "R6_NP1_EVIDENCE_INVALID"
+}

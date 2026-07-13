@@ -8,12 +8,13 @@ import os
 import re
 import shutil
 import subprocess
-import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+import parse_mt5_effective_inputs as effective_inputs
 
 
 PHASE1_ROOT = Path(__file__).resolve().parents[1]
@@ -4464,6 +4465,15 @@ def run_variant(
     if not html_report.exists():
         raise RuntimeError(f"Missing MT5 report for {variant.name}: {html_report}")
 
+    intended_inputs = effective_inputs.parse_tester_ini_inputs(config)
+    native_effective_inputs = effective_inputs.parse_effective_inputs(html_report)
+    input_comparison = effective_inputs.compare_inputs(intended_inputs, native_effective_inputs)
+    if input_comparison["missing"] or input_comparison["unequal"]:
+        raise effective_inputs.EffectiveInputError(
+            f"{variant.name} configured inputs differ from native MT5 report: {input_comparison}"
+        )
+    native_environment = effective_inputs.parse_native_environment(html_report)
+
     trades, metrics = parse_mt5_report(html_report)
     bars = int(re.sub(r"[^0-9]", "", str(metrics.get("Bars", "0"))) or "0")
     ticks = int(re.sub(r"[^0-9]", "", str(metrics.get("Ticks", "0"))) or "0")
@@ -4506,6 +4516,10 @@ def run_variant(
         "deal_csv": str(copied_deal_csv),
         "summary_json": str(copied_json),
         "mt5_report_metrics": metrics,
+        "intended_tester_inputs": intended_inputs,
+        "native_effective_inputs": native_effective_inputs,
+        "effective_input_comparison": input_comparison,
+        "native_environment": native_environment,
         "summary": summary,
         "order_activity": {
             "rows": len(order_rows),

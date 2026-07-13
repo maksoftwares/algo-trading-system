@@ -1,0 +1,12 @@
+{
+  "broker_action_authorized": false,
+  "canonical_np1c_authorized": false,
+  "census_authorized": false,
+  "deployment_authorized": false,
+  "error": "tester warmup failed",
+  "last_authorized_command_reached": "warmup",
+  "probe1_invoked": false,
+  "probe2_invoked": false,
+  "profitability_authorized": false,
+  "status": "NP1_G2_EVIDENCE_INVALID"
+}

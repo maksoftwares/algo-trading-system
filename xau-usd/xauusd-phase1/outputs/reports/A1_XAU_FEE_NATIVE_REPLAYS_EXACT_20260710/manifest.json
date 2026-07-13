@@ -1,0 +1,585 @@
+{
+  "artifacts": {
+    "A1_XAU_FEE_NATIVE_REPLAY_OVERLAY_20260710.csv": {
+      "sha256": "8d4c298800c985160a48b9418b4b6f2d55e106c07fce5fbb5f322438a653b5db",
+      "size_bytes": 164379
+    },
+    "compiled/h4_d1_long_best_box2_atr80/A1XauFeeEvidence_d15fc9a6.ex5": {
+      "sha256": "5fe58532d93dcd4702b67a13a6ed6ef305be96f6907bc778c5917fce739931d2",
+      "size_bytes": 183220
+    },
+    "compiled/h4_d1_long_best_box2_atr80/A1XauFeeEvidence_d15fc9a6.mq5": {
+      "sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+      "size_bytes": 170602
+    },
+    "compiled/h4_d1_long_best_box2_atr80/compile_A1_XAU_FEE_h4_d1_long_best_box2_atr80.log": {
+      "sha256": "de7c05820085902fe182607256d2cd1809a664eb391a83e94373e89bb986dbaf",
+      "size_bytes": 6948
+    },
+    "compiled/h4_d1_long_best_box2_atr80_source_manifest.json": {
+      "sha256": "e7815135c08eb70b2a8876f402f4bbb5bb4badcf2fdbd37189a162ea125c0528",
+      "size_bytes": 720
+    },
+    "compiled/r1_h1_pullback_long_v1/A1XauFeeEvidence_23d52b49.ex5": {
+      "sha256": "b4081c35a52afee717e8c4e09bf62d950a28da70b4d328230b19371fb59bc959",
+      "size_bytes": 188796
+    },
+    "compiled/r1_h1_pullback_long_v1/A1XauFeeEvidence_23d52b49.mq5": {
+      "sha256": "8ccab6faae5f900d2c42cd5768532318fc6a9f86c4feba5d45b3ade3c3dbb219",
+      "size_bytes": 175362
+    },
+    "compiled/r1_h1_pullback_long_v1/compile_A1_XAU_FEE_r1_h1_pullback_long_v1.log": {
+      "sha256": "22ac128ba674d689434504a691e44232840fc28bb20886ce202610cf8f487fa4",
+      "size_bytes": 6948
+    },
+    "compiled/r1_h1_pullback_long_v1_source_manifest.json": {
+      "sha256": "a8936530e4fa119027e1b26d39c0c9ca968ce87c64a50323615c27257c92d990",
+      "size_bytes": 720
+    },
+    "compiled/r2_continuation_short_v1/A1XauFeeEvidence_db8b1169.ex5": {
+      "sha256": "bb393b7dcb704659fb1d7232657422699843866bd5379f4a40370e2845b95371",
+      "size_bytes": 193006
+    },
+    "compiled/r2_continuation_short_v1/A1XauFeeEvidence_db8b1169.mq5": {
+      "sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "size_bytes": 180523
+    },
+    "compiled/r2_continuation_short_v1/compile_A1_XAU_FEE_r2_continuation_short_v1.log": {
+      "sha256": "90370c9709f1f7846b3f8420fcaa0ffe536c03a8013d1c2c5713530774f097aa",
+      "size_bytes": 6948
+    },
+    "compiled/r2_continuation_short_v1_source_manifest.json": {
+      "sha256": "9130e09eb5ed35951f8642510380cced96aa5f1204a1ade1852094dc677e8f9f",
+      "size_bytes": 720
+    },
+    "compiled/r2_pullback_rejection_short_v1/A1XauFeeEvidence_db8b1169.ex5": {
+      "sha256": "c2ad995870552c599097e160d99416f88e869193737fffbe574ded5e233e1b07",
+      "size_bytes": 193698
+    },
+    "compiled/r2_pullback_rejection_short_v1/A1XauFeeEvidence_db8b1169.mq5": {
+      "sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "size_bytes": 180523
+    },
+    "compiled/r2_pullback_rejection_short_v1/compile_A1_XAU_FEE_r2_pullback_rejection_short_v1.log": {
+      "sha256": "a8bf5e73d02f833a966b1d550e8abddf74c9d809c3d6485959e19b94cb37a74c",
+      "size_bytes": 6948
+    },
+    "compiled/r2_pullback_rejection_short_v1_source_manifest.json": {
+      "sha256": "9130e09eb5ed35951f8642510380cced96aa5f1204a1ade1852094dc677e8f9f",
+      "size_bytes": 720
+    },
+    "runs/h4_d1_long_best_box2_atr80/A1_XAU_FEE_NATIVE_REPLAY_H4_D1_LONG_BEST_BOX2_ATR80.htm": {
+      "sha256": "d1402acfa0cad31859b4a71c95677294eda9fd9fb42d52d10b0c60dcd9d2197f",
+      "size_bytes": 385580
+    },
+    "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_deals_with_fee.csv": {
+      "sha256": "35c92966aacf1d6ef66a3efcce2e60e3425968a3168ea89a20e05a9ba5424d53",
+      "size_bytes": 56086
+    },
+    "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_orders.csv": {
+      "sha256": "e337af7d3e5698f623db5e428f9b987edc5f25c2138cad901a4e54ba6b58b44b",
+      "size_bytes": 145112
+    },
+    "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_signals.csv": {
+      "sha256": "b53ee54afacfae9a5dceb74a2a16b8297b9aad1c3b582fdc2d77302d344afc3c",
+      "size_bytes": 1644851
+    },
+    "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_startup.csv": {
+      "sha256": "afbefd4341a829e557b8ddbbd165fb417ae8d6cc6f273e398af1029163689baf",
+      "size_bytes": 213
+    },
+    "runs/h4_d1_long_best_box2_atr80/derived_tester.ini": {
+      "sha256": "627edbc3595741314a3d9ee13264b03307ff46a3c01e21e07e8d60f6cf5d7ba3",
+      "size_bytes": 5512
+    },
+    "runs/h4_d1_long_best_box2_atr80/frozen_tester.ini": {
+      "sha256": "3d52e33afb4d7ec323c6c540b21b9f516e06d446de2f55f2a8ba5d0b39441222",
+      "size_bytes": 5928
+    },
+    "runs/r1_h1_pullback_long_v1/A1_XAU_FEE_NATIVE_REPLAY_R1_H1_PULLBACK_LONG_V1.htm": {
+      "sha256": "898986784a7aa4927dba7faa42c3e47516748578321c14735444703c4c8bf4f9",
+      "size_bytes": 929278
+    },
+    "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_deals_with_fee.csv": {
+      "sha256": "5fe33f07509f73afcac606b86ef4f5ff75bf44bad4e141f007589219c35c8db2",
+      "size_bytes": 163024
+    },
+    "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_orders.csv": {
+      "sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749",
+      "size_bytes": 777903
+    },
+    "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_signals.csv": {
+      "sha256": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd",
+      "size_bytes": 24710809
+    },
+    "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_startup.csv": {
+      "sha256": "298f0c834dd3fedf1b100908cf82bd3e2bb15a5d8616dfdec6758803e4cb5f3d",
+      "size_bytes": 217
+    },
+    "runs/r1_h1_pullback_long_v1/derived_tester.ini": {
+      "sha256": "cf4ffec3be06b3b4beec0779e06ce0c75c2defdcb780417b7f39857265cb1679",
+      "size_bytes": 5683
+    },
+    "runs/r1_h1_pullback_long_v1/frozen_tester.ini": {
+      "sha256": "ce6218537800d4dc51705f32997d3b2ff29a8217fedc3fc7a091a7109991e5f6",
+      "size_bytes": 6164
+    },
+    "runs/r2_continuation_short_v1/A1_XAU_FEE_NATIVE_REPLAY_R2_CONTINUATION_SHORT_V1.htm": {
+      "sha256": "5e3a8d5a0853aaa7e6c3c5e75227685756d612f7db85318d9942d826375151df",
+      "size_bytes": 213496
+    },
+    "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_deals_with_fee.csv": {
+      "sha256": "15c5f5692e5b33d74ca3a25ca7364a9c82673d42ea7436a4c5bb731e5bebc36c",
+      "size_bytes": 22401
+    },
+    "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_orders.csv": {
+      "sha256": "2284ce7a7847d6ecda755100d4e7e2bfb58eac42bf1829922ada58bb4b3e19d7",
+      "size_bytes": 142956
+    },
+    "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_signals.csv": {
+      "sha256": "f21b1182a991edfde99abe03b12b3cc04bf830c342962ba9121b2d3499fb961b",
+      "size_bytes": 67471280
+    },
+    "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_startup.csv": {
+      "sha256": "ba5acdf1e296cb318d72bd0d177f444fd006719e120b4951352ae72b6fb85ea1",
+      "size_bytes": 216
+    },
+    "runs/r2_continuation_short_v1/derived_tester.ini": {
+      "sha256": "b16f31d5806836a55b6c4ddf4af9ff53fce61f1c5fc3c0550bb19ad8cd5f1ee1",
+      "size_bytes": 6038
+    },
+    "runs/r2_continuation_short_v1/frozen_tester.ini": {
+      "sha256": "97f6cdac7ef758c2ee0b2c836b67970ceea01e525639d8b751ef7d238127dbb7",
+      "size_bytes": 6524
+    },
+    "runs/r2_pullback_rejection_short_v1/A1_XAU_FEE_NATIVE_REPLAY_R2_PULLBACK_REJECTION_SHORT_V1.htm": {
+      "sha256": "80d17ee6ee014e1ab3d268fed49a6b341fc6e0b157c99216c045674221b7c803",
+      "size_bytes": 225620
+    },
+    "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_deals_with_fee.csv": {
+      "sha256": "b9a6326c159df007f35c83c698e0fdbb2ef83de682756c687aa12f2b6b45caad",
+      "size_bytes": 23495
+    },
+    "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_orders.csv": {
+      "sha256": "893e617218c5b923545cbd6d571a035c6892b5b050a55013e7368f7642b66b66",
+      "size_bytes": 103165
+    },
+    "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_signals.csv": {
+      "sha256": "a9db4cc1f0461bb7ff6e14944ea5762da019ea959aec248a489731cacda0d49c",
+      "size_bytes": 5904455
+    },
+    "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_startup.csv": {
+      "sha256": "286513c33ca55fb56b004ec1db3c017d97bbe10dc4bfb83f7c5e37e78b1a2105",
+      "size_bytes": 206
+    },
+    "runs/r2_pullback_rejection_short_v1/derived_tester.ini": {
+      "sha256": "019c1ff0c49f0a7a06c6488c014a26f447163db8438412daf53044b00ed4e86b",
+      "size_bytes": 5803
+    },
+    "runs/r2_pullback_rejection_short_v1/frozen_tester.ini": {
+      "sha256": "cd911b5220915e59e4465923d56bc568b380b36909a6e56fe41c27f9598a6c9a",
+      "size_bytes": 6182
+    }
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "common_account_session_section_removed": true,
+    "live_or_demo_terminal_attachment": false,
+    "source_instrumentation_reversible": true,
+    "source_strategy_changed": false,
+    "strategy_tester_only": true
+  },
+  "generated_at_utc": "2026-07-10T22:08:58.394313Z",
+  "overlay": {
+    "pass": true,
+    "path": "A1_XAU_FEE_NATIVE_REPLAY_OVERLAY_20260710.csv",
+    "rows": 1356,
+    "sha256": "8d4c298800c985160a48b9418b4b6f2d55e106c07fce5fbb5f322438a653b5db",
+    "unique_namespaced_deal_keys": 1356
+  },
+  "pinned_sources": [
+    {
+      "generated_expert_name": "A1XauFeeEvidence_d15fc9a6",
+      "instrumentation": {
+        "deal_fee_appended_at_decimal_places": 16,
+        "strategy_tester_only_guard": true
+      },
+      "instrumented_source_sha256": "0786e92223f42f2d2d2238e544c5141049dadb651baf6f369068f6c07760732e",
+      "pinned_commit": "d15fc9a6b3ff18d1748428ea6519fbe58ab30721",
+      "pinned_source": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "pinned_source_sha256": "bc61515d51b9414760ebe7d4d8e6bbf11fdfe760fd21d91246c0aae017449a51",
+      "purpose": "instrumentation_only_deal_fee_reproduction",
+      "reversible_to_pinned_source": true,
+      "schema_version": "a1_xau_fee_evidence_source_v1",
+      "source_id": "h4_d1_long_best_box2_atr80",
+      "strategy_change": false
+    },
+    {
+      "generated_expert_name": "A1XauFeeEvidence_23d52b49",
+      "instrumentation": {
+        "deal_fee_appended_at_decimal_places": 16,
+        "strategy_tester_only_guard": true
+      },
+      "instrumented_source_sha256": "8ccab6faae5f900d2c42cd5768532318fc6a9f86c4feba5d45b3ade3c3dbb219",
+      "pinned_commit": "23d52b49f55cebc406c9d54f3b4e76cff079901c",
+      "pinned_source": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "pinned_source_sha256": "518564f00ca45ce120b95d8772185a50f97f669c9fd5e3a3fc43659bcee1e6bb",
+      "purpose": "instrumentation_only_deal_fee_reproduction",
+      "reversible_to_pinned_source": true,
+      "schema_version": "a1_xau_fee_evidence_source_v1",
+      "source_id": "r1_h1_pullback_long_v1",
+      "strategy_change": false
+    },
+    {
+      "generated_expert_name": "A1XauFeeEvidence_db8b1169",
+      "instrumentation": {
+        "deal_fee_appended_at_decimal_places": 16,
+        "strategy_tester_only_guard": true
+      },
+      "instrumented_source_sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "pinned_commit": "db8b116953e4706a10e54c9c711e4a78e883ef54",
+      "pinned_source": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "pinned_source_sha256": "3372d8e751141f1d397d9967b8c14272046e1a733a64f67e63fcc3f56e53d355",
+      "purpose": "instrumentation_only_deal_fee_reproduction",
+      "reversible_to_pinned_source": true,
+      "schema_version": "a1_xau_fee_evidence_source_v1",
+      "source_id": "r2_continuation_short_v1",
+      "strategy_change": false
+    },
+    {
+      "generated_expert_name": "A1XauFeeEvidence_db8b1169",
+      "instrumentation": {
+        "deal_fee_appended_at_decimal_places": 16,
+        "strategy_tester_only_guard": true
+      },
+      "instrumented_source_sha256": "f5611254aa20598e4322aeb467b42aa2410bbf3be7f495f57dcd01d353793875",
+      "pinned_commit": "db8b116953e4706a10e54c9c711e4a78e883ef54",
+      "pinned_source": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "pinned_source_sha256": "3372d8e751141f1d397d9967b8c14272046e1a733a64f67e63fcc3f56e53d355",
+      "purpose": "instrumentation_only_deal_fee_reproduction",
+      "reversible_to_pinned_source": true,
+      "schema_version": "a1_xau_fee_evidence_source_v1",
+      "source_id": "r2_pullback_rejection_short_v1",
+      "strategy_change": false
+    }
+  ],
+  "runs": [
+    {
+      "artifacts": {
+        "InpDealLogFileName": "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_deals_with_fee.csv",
+        "InpManagementLogFileName": "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_management.csv",
+        "InpOrderLogFileName": "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_orders.csv",
+        "InpSignalLogFileName": "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_signals.csv",
+        "InpStartupLogFileName": "runs/h4_d1_long_best_box2_atr80/a1_xau_fee_h4_d1_long_best_box2_atr80_startup.csv",
+        "derived_config": "runs/h4_d1_long_best_box2_atr80/derived_tester.ini",
+        "frozen_config": "runs/h4_d1_long_best_box2_atr80/frozen_tester.ini",
+        "report": "runs/h4_d1_long_best_box2_atr80/A1_XAU_FEE_NATIVE_REPLAY_H4_D1_LONG_BEST_BOX2_ATR80.htm"
+      },
+      "byte_comparisons": {
+        "management": {
+          "byte_exact": true,
+          "frozen_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "frozen_size_bytes": 0,
+          "pass": true,
+          "replay_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "replay_size_bytes": 0
+        },
+        "orders": {
+          "byte_exact": true,
+          "executed_order_rows": {
+            "historical_rows": 145,
+            "pass": true,
+            "replay_rows": 145
+          },
+          "frozen_sha256": "e337af7d3e5698f623db5e428f9b987edc5f25c2138cad901a4e54ba6b58b44b",
+          "frozen_size_bytes": 145112,
+          "pass": true,
+          "replay_sha256": "e337af7d3e5698f623db5e428f9b987edc5f25c2138cad901a4e54ba6b58b44b",
+          "replay_size_bytes": 145112
+        },
+        "signals": {
+          "byte_exact": true,
+          "frozen_sha256": "b53ee54afacfae9a5dceb74a2a16b8297b9aad1c3b582fdc2d77302d344afc3c",
+          "frozen_size_bytes": 1644851,
+          "pass": true,
+          "replay_sha256": "b53ee54afacfae9a5dceb74a2a16b8297b9aad1c3b582fdc2d77302d344afc3c",
+          "replay_size_bytes": 1644851
+        }
+      },
+      "deal_comparison": {
+        "all_fee_values_exact_zero": true,
+        "errors": [],
+        "first_mismatches": [],
+        "historical_rows": 290,
+        "pass": true,
+        "projected_rows_exact": true,
+        "replay_rows": 290
+      },
+      "derived_config_sha256": "627edbc3595741314a3d9ee13264b03307ff46a3c01e21e07e8d60f6cf5d7ba3",
+      "errors": [],
+      "expected_deals": 290,
+      "expected_trades": 145,
+      "frozen_config_sha256": "3d52e33afb4d7ec323c6c540b21b9f516e06d446de2f55f2a8ba5d0b39441222",
+      "log_states": {
+        "InpDealLogFileName": "present",
+        "InpManagementLogFileName": "absent_proven_zero_against_frozen_empty_log",
+        "InpOrderLogFileName": "present",
+        "InpSignalLogFileName": "present",
+        "InpStartupLogFileName": "present"
+      },
+      "pass": true,
+      "report_metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "290",
+        "Total Trades": "145"
+      },
+      "source_id": "h4_d1_long_best_box2_atr80"
+    },
+    {
+      "artifacts": {
+        "InpDealLogFileName": "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_deals_with_fee.csv",
+        "InpManagementLogFileName": "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_management.csv",
+        "InpOrderLogFileName": "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_orders.csv",
+        "InpSignalLogFileName": "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_signals.csv",
+        "InpStartupLogFileName": "runs/r1_h1_pullback_long_v1/a1_xau_fee_r1_h1_pullback_long_v1_startup.csv",
+        "derived_config": "runs/r1_h1_pullback_long_v1/derived_tester.ini",
+        "frozen_config": "runs/r1_h1_pullback_long_v1/frozen_tester.ini",
+        "report": "runs/r1_h1_pullback_long_v1/A1_XAU_FEE_NATIVE_REPLAY_R1_H1_PULLBACK_LONG_V1.htm"
+      },
+      "byte_comparisons": {
+        "management": {
+          "byte_exact": true,
+          "frozen_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "frozen_size_bytes": 0,
+          "pass": true,
+          "replay_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "replay_size_bytes": 0
+        },
+        "orders": {
+          "byte_exact": true,
+          "executed_order_rows": {
+            "historical_rows": 413,
+            "pass": true,
+            "replay_rows": 413
+          },
+          "frozen_sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749",
+          "frozen_size_bytes": 777903,
+          "pass": true,
+          "replay_sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749",
+          "replay_size_bytes": 777903
+        },
+        "signals": {
+          "byte_exact": true,
+          "frozen_sha256": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd",
+          "frozen_size_bytes": 24710809,
+          "pass": true,
+          "replay_sha256": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd",
+          "replay_size_bytes": 24710809
+        }
+      },
+      "deal_comparison": {
+        "all_fee_values_exact_zero": true,
+        "errors": [],
+        "first_mismatches": [],
+        "historical_rows": 826,
+        "pass": true,
+        "projected_rows_exact": true,
+        "replay_rows": 826
+      },
+      "derived_config_sha256": "cf4ffec3be06b3b4beec0779e06ce0c75c2defdcb780417b7f39857265cb1679",
+      "errors": [],
+      "expected_deals": 826,
+      "expected_trades": 413,
+      "frozen_config_sha256": "ce6218537800d4dc51705f32997d3b2ff29a8217fedc3fc7a091a7109991e5f6",
+      "log_states": {
+        "InpDealLogFileName": "present",
+        "InpManagementLogFileName": "absent_proven_zero_against_frozen_empty_log",
+        "InpOrderLogFileName": "present",
+        "InpSignalLogFileName": "present",
+        "InpStartupLogFileName": "present"
+      },
+      "pass": true,
+      "report_metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "826",
+        "Total Trades": "413"
+      },
+      "source_id": "r1_h1_pullback_long_v1"
+    },
+    {
+      "artifacts": {
+        "InpDealLogFileName": "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_deals_with_fee.csv",
+        "InpManagementLogFileName": "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_management.csv",
+        "InpOrderLogFileName": "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_orders.csv",
+        "InpSignalLogFileName": "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_signals.csv",
+        "InpStartupLogFileName": "runs/r2_continuation_short_v1/a1_xau_fee_r2_continuation_short_v1_startup.csv",
+        "derived_config": "runs/r2_continuation_short_v1/derived_tester.ini",
+        "frozen_config": "runs/r2_continuation_short_v1/frozen_tester.ini",
+        "report": "runs/r2_continuation_short_v1/A1_XAU_FEE_NATIVE_REPLAY_R2_CONTINUATION_SHORT_V1.htm"
+      },
+      "byte_comparisons": {
+        "management": {
+          "byte_exact": true,
+          "frozen_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "frozen_size_bytes": 0,
+          "pass": true,
+          "replay_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "replay_size_bytes": 0
+        },
+        "orders": {
+          "byte_exact": true,
+          "executed_order_rows": {
+            "historical_rows": 57,
+            "pass": true,
+            "replay_rows": 57
+          },
+          "frozen_sha256": "2284ce7a7847d6ecda755100d4e7e2bfb58eac42bf1829922ada58bb4b3e19d7",
+          "frozen_size_bytes": 142956,
+          "pass": true,
+          "replay_sha256": "2284ce7a7847d6ecda755100d4e7e2bfb58eac42bf1829922ada58bb4b3e19d7",
+          "replay_size_bytes": 142956
+        },
+        "signals": {
+          "byte_exact": true,
+          "frozen_sha256": "f21b1182a991edfde99abe03b12b3cc04bf830c342962ba9121b2d3499fb961b",
+          "frozen_size_bytes": 67471280,
+          "pass": true,
+          "replay_sha256": "f21b1182a991edfde99abe03b12b3cc04bf830c342962ba9121b2d3499fb961b",
+          "replay_size_bytes": 67471280
+        }
+      },
+      "deal_comparison": {
+        "all_fee_values_exact_zero": true,
+        "errors": [],
+        "first_mismatches": [],
+        "historical_rows": 114,
+        "pass": true,
+        "projected_rows_exact": true,
+        "replay_rows": 114
+      },
+      "derived_config_sha256": "b16f31d5806836a55b6c4ddf4af9ff53fce61f1c5fc3c0550bb19ad8cd5f1ee1",
+      "errors": [],
+      "expected_deals": 114,
+      "expected_trades": 57,
+      "frozen_config_sha256": "97f6cdac7ef758c2ee0b2c836b67970ceea01e525639d8b751ef7d238127dbb7",
+      "log_states": {
+        "InpDealLogFileName": "present",
+        "InpManagementLogFileName": "absent_proven_zero_against_frozen_empty_log",
+        "InpOrderLogFileName": "present",
+        "InpSignalLogFileName": "present",
+        "InpStartupLogFileName": "present"
+      },
+      "pass": true,
+      "report_metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "114",
+        "Total Trades": "57"
+      },
+      "source_id": "r2_continuation_short_v1"
+    },
+    {
+      "artifacts": {
+        "InpDealLogFileName": "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_deals_with_fee.csv",
+        "InpManagementLogFileName": "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_management.csv",
+        "InpOrderLogFileName": "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_orders.csv",
+        "InpSignalLogFileName": "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_signals.csv",
+        "InpStartupLogFileName": "runs/r2_pullback_rejection_short_v1/a1_xau_fee_r2_pullback_rejection_short_v1_startup.csv",
+        "derived_config": "runs/r2_pullback_rejection_short_v1/derived_tester.ini",
+        "frozen_config": "runs/r2_pullback_rejection_short_v1/frozen_tester.ini",
+        "report": "runs/r2_pullback_rejection_short_v1/A1_XAU_FEE_NATIVE_REPLAY_R2_PULLBACK_REJECTION_SHORT_V1.htm"
+      },
+      "byte_comparisons": {
+        "management": {
+          "byte_exact": true,
+          "frozen_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "frozen_size_bytes": 0,
+          "pass": true,
+          "replay_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "replay_size_bytes": 0
+        },
+        "orders": {
+          "byte_exact": true,
+          "executed_order_rows": {
+            "historical_rows": 63,
+            "pass": true,
+            "replay_rows": 63
+          },
+          "frozen_sha256": "893e617218c5b923545cbd6d571a035c6892b5b050a55013e7368f7642b66b66",
+          "frozen_size_bytes": 103165,
+          "pass": true,
+          "replay_sha256": "893e617218c5b923545cbd6d571a035c6892b5b050a55013e7368f7642b66b66",
+          "replay_size_bytes": 103165
+        },
+        "signals": {
+          "byte_exact": true,
+          "frozen_sha256": "a9db4cc1f0461bb7ff6e14944ea5762da019ea959aec248a489731cacda0d49c",
+          "frozen_size_bytes": 5904455,
+          "pass": true,
+          "replay_sha256": "a9db4cc1f0461bb7ff6e14944ea5762da019ea959aec248a489731cacda0d49c",
+          "replay_size_bytes": 5904455
+        }
+      },
+      "deal_comparison": {
+        "all_fee_values_exact_zero": true,
+        "errors": [],
+        "first_mismatches": [],
+        "historical_rows": 126,
+        "pass": true,
+        "projected_rows_exact": true,
+        "replay_rows": 126
+      },
+      "derived_config_sha256": "019c1ff0c49f0a7a06c6488c014a26f447163db8438412daf53044b00ed4e86b",
+      "errors": [],
+      "expected_deals": 126,
+      "expected_trades": 63,
+      "frozen_config_sha256": "cd911b5220915e59e4465923d56bc568b380b36909a6e56fe41c27f9598a6c9a",
+      "log_states": {
+        "InpDealLogFileName": "present",
+        "InpManagementLogFileName": "absent_proven_zero_against_frozen_empty_log",
+        "InpOrderLogFileName": "present",
+        "InpSignalLogFileName": "present",
+        "InpStartupLogFileName": "present"
+      },
+      "pass": true,
+      "report_metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "126",
+        "Total Trades": "63"
+      },
+      "source_id": "r2_pullback_rejection_short_v1"
+    }
+  ],
+  "schema_version": "a1_xau_fee_native_replays_exact_manifest_v1",
+  "status": "FEE_NATIVE_REPLAY_VALID",
+  "tester": {
+    "build": 5833,
+    "metaeditor_path": "C:\\Program Files\\MetaTrader 5\\MetaEditor64.exe",
+    "metaeditor_sha256": "2c0c8e9e5c1239e30e8a908d9205cdb01b9cdfcf876752e43bd7a755cce58ad3",
+    "terminal_path": "C:\\MT5A1M5MomentumBacktest\\terminal64.exe",
+    "terminal_sha256": "a36f4bac0fdc2c53cd75bdf0e32e627660dd8d9c1eb1e9f3834acfbce93df165"
+  }
+}

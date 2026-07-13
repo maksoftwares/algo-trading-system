@@ -61,6 +61,17 @@ def generate_project_status_page(
 
     phase1_summary = _read_json(phase1_reports / "PHASE1_STATUS_SUMMARY.json")
     project_summary = _read_json(repo_root / "status_summary.json")
+    if project_summary.get("schema_version") == "a1_xau_governance_status_v1":
+        _write_text_with_retries(output_path, _render_governance_status_html(project_summary))
+        return StatusPageOutput(
+            output_path=output_path,
+            candidate_count=0,
+            accepted_count=0,
+            rejected_count=0,
+            phase1_status="RESEARCH_CONTROL",
+            phase2_status="NO_GO",
+        )
+
     phase2_countdown = _read_json(phase1_reports / "PHASE2_DEMO_COUNTDOWN.json")
     phase2_preflight = _read_json(phase1_reports / "PHASE2_DEMO_PREFLIGHT.json")
     phase2_demo_account_isolation = _read_json(phase1_reports / "PHASE2_DEMO_ACCOUNT_ISOLATION.json")
@@ -171,8 +182,12 @@ def assert_status_page_current(
 ) -> None:
     repo_root = repo_root.resolve()
     output_path = (output_path or repo_root / DEFAULT_OUTPUT).resolve()
+    governance_summary_path = repo_root / "status_summary.json"
+    governance_summary = _read_json(governance_summary_path)
     summary_path = (
-        summary_path
+        governance_summary_path
+        if summary_path is None and governance_summary.get("schema_version") == "a1_xau_governance_status_v1"
+        else summary_path
         or repo_root / "xau-usd" / "xauusd-phase1" / "outputs" / "reports" / "PHASE1_STATUS_SUMMARY.json"
     ).resolve()
     if not output_path.exists():
@@ -205,6 +220,217 @@ def _write_text_with_retries(path: Path, text: str, attempts: int = 5, sleep_sec
             time.sleep(sleep_seconds * (attempt + 1))
     if last_error is not None:
         raise last_error
+
+
+def _render_governance_status_html(summary: dict[str, Any]) -> str:
+    current = _mapping(summary.get("current"))
+    control = _mapping(current.get("portfolio_control"))
+    metrics = _mapping(control.get("metrics"))
+    specialists = _mapping(current.get("specialists"))
+    r1 = _mapping(specialists.get("R1"))
+    r2 = _mapping(specialists.get("R2"))
+    r3 = _mapping(specialists.get("R3"))
+    r4 = _mapping(specialists.get("R4"))
+    rule_admissibility = _mapping(current.get("rule_admissibility"))
+    attribution_repair = _mapping(current.get("attribution_repair"))
+    history = _mapping(current.get("historical_evidence"))
+    authorization = _mapping(current.get("authorization"))
+    authority_map = _mapping(current.get("authority_map"))
+    program = _mapping(current.get("independent_specialist_program"))
+    next_task = _mapping(current.get("primary_next_task"))
+    control_diagnostic = _mapping(current.get("control_diagnostic_task"))
+    repo = _mapping(summary.get("repo"))
+    documents = _mapping(summary.get("source_documents"))
+
+    def esc(value: Any) -> str:
+        return html.escape(str(value), quote=True)
+
+    def bool_text(value: Any) -> str:
+        return str(bool(value)).lower()
+
+    statement_items = "\n".join(
+        f"          <li>{esc(item)}</li>" for item in current.get("required_current_statements", [])
+    )
+    rule_rows = "\n".join(
+        "          <tr>"
+        f"<td><code>{esc(_mapping(source).get('source_id', ''))}</code></td>"
+        f"<td><code>{esc(_mapping(source).get('admissibility_issue_type', ''))}</code></td>"
+        f"<td><code>{esc(_mapping(source).get('retained_rule_type', ''))}</code></td>"
+        f"<td>{esc(_mapping(source).get('retained_rule', ''))}</td>"
+        "</tr>"
+        for source in rule_admissibility.get("sources", [])
+    )
+    document_rows = []
+    labels = {
+        "master_direction": "Master direction",
+        "current_research_freeze": "Current research freeze",
+        "router_entry_hold_path_audit_prereg": "Router entry/hold-path audit preregistration",
+        "independent_specialist_primary_direction": "Independent-specialist primary direction",
+    }
+    for key in labels:
+        document = _mapping(documents.get(key))
+        path = str(document.get("path", ""))
+        document_rows.append(
+            "          <tr>"
+            f'<td><a href="{esc(path)}">{esc(labels[key])}</a></td>'
+            f"<td><code>{esc(document.get('sha256', ''))}</code></td>"
+            "</tr>"
+        )
+
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A1 XAUUSD Governance Status</title>
+  <style>
+    :root {{ color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }}
+    body {{ margin: 0; background: #f4f6f8; color: #172033; }}
+    main {{ max-width: 980px; margin: 0 auto; padding: 32px 20px 56px; }}
+    header, section {{ background: #fff; border: 1px solid #dce2ea; border-radius: 12px; padding: 22px; margin-bottom: 16px; }}
+    h1 {{ margin: 0 0 8px; font-size: 28px; }}
+    h2 {{ margin: 0 0 14px; font-size: 19px; }}
+    p {{ line-height: 1.55; }}
+    .meta {{ color: #5f6b7a; font-size: 13px; }}
+    .status {{ display: inline-block; padding: 6px 10px; border-radius: 999px; background: #fff0ed; color: #a6291f; font-weight: 750; }}
+    blockquote {{ margin: 12px 0 0; padding: 12px 16px; border-left: 4px solid #2f63b8; background: #f5f8ff; line-height: 1.55; }}
+    table {{ width: 100%; border-collapse: collapse; }}
+    th, td {{ padding: 9px 10px; border-bottom: 1px solid #e4e8ee; text-align: left; vertical-align: top; }}
+    th {{ color: #526071; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }}
+    code {{ font-size: 12px; overflow-wrap: anywhere; }}
+    li {{ margin: 7px 0; }}
+    a {{ color: #2456a6; }}
+    .false {{ color: #147a4a; font-weight: 750; }}
+  </style>
+</head>
+<body data-schema="{esc(summary.get('schema_version', ''))}">
+  <main>
+    <header>
+      <span class="status">{esc(current.get('overall_status', 'UNKNOWN'))}</span>
+      <h1>A1 XAUUSD Current Governance Status</h1>
+      <p class="meta">Generated {esc(summary.get('generated_at_utc', ''))} · branch {esc(repo.get('branch', ''))} · base commit {esc(repo.get('base_commit', ''))}</p>
+      <p>This is the only authoritative current status surface. Historical phase/runtime summaries are non-authorizing.</p>
+      <blockquote>{esc(current.get('north_star', ''))}</blockquote>
+    </header>
+
+    <section>
+      <h2>Required current statements</h2>
+      <ul>
+{statement_items}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Primary independent-specialist lane</h2>
+      <table>
+        <tbody>
+          <tr><th>Specialist</th><td><code>{esc(program.get('id', ''))}</code></td></tr>
+          <tr><th>Standing</th><td><code>{esc(program.get('status', ''))}</code></td></tr>
+          <tr><th>Next action</th><td><code>{esc(program.get('next_action', ''))}</code> market-only native Router/contract acquisition locks</td></tr>
+          <tr><th>Parallel specialist lane authorized</th><td class="false">{bool_text(program.get('parallel_specialist_lane_authorized', False))}</td></tr>
+          <tr><th>Historical R6 P/L authorized</th><td class="false">{bool_text(program.get('historical_pnl_authorized', False))}</td></tr>
+        </tbody>
+      </table>
+      <p>R6 owns the pre-downtrend distribution / failed-reclaim transition while Router V1 is <code>UPTREND</code> or <code>CHOP</code>. The range-box family is backlog only if R6 closes.</p>
+    </section>
+
+    <section>
+      <h2>Machine-readable authority</h2>
+      <table><tbody>
+        <tr><th>Authoritative task key</th><td><code>{esc(authority_map.get('authoritative_next_task_key', ''))}</code></td></tr>
+        <tr><th>Authoritative statements key</th><td><code>{esc(authority_map.get('authoritative_statements_key', ''))}</code></td></tr>
+        <tr><th>Compatibility task key</th><td><code>{esc(authority_map.get('compatibility_next_task_key', ''))}</code></td></tr>
+      </tbody></table>
+    </section>
+
+    <section>
+      <h2>Current research control</h2>
+      <table>
+        <tbody>
+          <tr><th>Control</th><td>{esc(control.get('id', ''))}</td></tr>
+          <tr><th>Status</th><td>{esc(control.get('status', ''))}</td></tr>
+          <tr><th>Admission</th><td>{esc(control.get('admission_status', ''))}</td></tr>
+          <tr><th>Trades</th><td>{esc(metrics.get('trades', ''))}</td></tr>
+          <tr><th>WR / W-L / PF</th><td>{esc(metrics.get('win_rate_pct', ''))}% / {esc(metrics.get('realized_win_loss', ''))} / {esc(metrics.get('profit_factor', ''))}</td></tr>
+          <tr><th>Net / stressed net</th><td>${esc(f"{float(metrics.get('net_usd', 0)):,.2f}")} / ${esc(f"{float(metrics.get('stress_net_minus_0_30_per_ticket_usd', 0)):,.2f}")}</td></tr>
+          <tr><th>Max closed DD</th><td>${esc(f"{float(metrics.get('max_closed_drawdown_usd', 0)):,.2f}")}</td></tr>
+          <tr><th>Ledger SHA256</th><td><code>{esc(control.get('ledger_sha256', ''))}</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Specialist ownership</h2>
+      <table>
+        <thead><tr><th>Specialist</th><th>Primary-program standing</th><th>Frozen compatibility standing</th><th>Role / default</th></tr></thead>
+        <tbody>
+          <tr><td>R1</td><td>{esc(r1.get('status', ''))}</td><td>{esc(r1.get('compatibility_frozen_status', ''))}</td><td>{esc(r1.get('role', ''))}</td></tr>
+          <tr><td>R2</td><td>{esc(r2.get('status', ''))}</td><td>{esc(r2.get('compatibility_frozen_status', ''))}</td><td>{esc(r2.get('role', ''))}</td></tr>
+          <tr><td>R3</td><td>{esc(r3.get('standalone_status', ''))}</td><td>{esc(r3.get('compatibility_frozen_status', ''))}; {esc(r3.get('portfolio_status', ''))}</td><td>Not independent; excluded from portfolio use</td></tr>
+          <tr><td>R4</td><td>{esc(r4.get('status', ''))}</td><td>{esc(r4.get('status', ''))}</td><td>Chop default {esc(r4.get('chop_default', ''))}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Post-audit rule admissibility</h2>
+      <p><strong>{esc(rule_admissibility.get('status', ''))}</strong></p>
+      <p>Identity scope: <code>{esc(rule_admissibility.get('identity_scope', ''))}</code></p>
+      <p>The four retained rules below preserve the 678-row audit identity only; they are not endorsed for integration. The first three are forbidden selection rules. The R2 $10 daily-loss stop is source-local containment, not standalone alpha/admission evidence, and cannot be reused as such. Future containment must be a shared preregistered integrated risk policy. Integrated admission requires independently qualified rule-clean sources or later reviewed governance. Otherwise the result is <code>NO_GO</code>. The router audit cannot remove or repair these rules.</p>
+      <table>
+        <thead><tr><th>Frozen source</th><th>Admissibility issue</th><th>Retained rule type</th><th>Retained rule</th></tr></thead>
+        <tbody>
+{rule_rows}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Native-position attribution repair</h2>
+      <p><strong>{esc(current.get('attribution_status', ''))}</strong></p>
+      <p>The legacy direction-FIFO parser assigned a non-native exit deal to {esc(attribution_repair.get('non_native_exit_deal_rows', ''))}/{esc(attribution_repair.get('total_rows', ''))} rows and non-native individual P/L to {esc(attribution_repair.get('non_native_individual_pnl_rows', ''))}/{esc(attribution_repair.get('total_rows', ''))} rows.</p>
+      <p>The aggregate exit/P&amp;L multiset and source/portfolio totals remain exact, and all 678 native positions are recoverable. The audit must complete the outcome-blind native position join and reconcile it before any router classification. FIFO fallback is prohibited. This is evidence-attribution repair only; no strategy change is authorized.</p>
+    </section>
+
+    <section>
+      <h2>Evidence and authorization boundary</h2>
+      <p>All inspected history through <code>{esc(history.get('through', ''))}</code> is <code>{esc(history.get('classification', ''))}</code>; it is not an untouched holdout.</p>
+      <table>
+        <tbody>
+          <tr><th>Demo authorized</th><td class="false">{bool_text(authorization.get('demo_authorized', False))}</td></tr>
+          <tr><th>Live authorized</th><td class="false">{bool_text(authorization.get('live_authorized', False))}</td></tr>
+          <tr><th>Broker action authorized</th><td class="false">{bool_text(authorization.get('broker_action_authorized', False))}</td></tr>
+          <tr><th>Runtime touched</th><td class="false">{bool_text(authorization.get('runtime_touched', False))}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Immediate next task</h2>
+      <p><code>{esc(next_task.get('id', ''))}</code> · {esc(next_task.get('status', ''))}</p>
+      <p>Strategy change authorized: <strong>{bool_text(next_task.get('strategy_change_authorized', False))}</strong>. EA trading-logic change: <strong>{esc(next_task.get('ea_trading_logic_change', ''))}</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Deferred control diagnostic</h2>
+      <p><code>{esc(control_diagnostic.get('id', ''))}</code> · {esc(control_diagnostic.get('status', ''))}</p>
+      <p>Authoritative for primary program: <strong>{bool_text(control_diagnostic.get('authoritative_for_primary_program', False))}</strong>. Required before old-control integration: <strong>{bool_text(control_diagnostic.get('required_before_old_control_integration', False))}</strong>.</p>
+      <p>It does not block R6 standalone discovery.</p>
+    </section>
+
+    <section>
+      <h2>Governing documents</h2>
+      <table>
+        <thead><tr><th>Document</th><th>SHA256</th></tr></thead>
+        <tbody>
+{chr(10).join(document_rows)}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
+"""
 
 
 def _render_html(

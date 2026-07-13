@@ -101,6 +101,7 @@ EXPERIMENTAL_POLICIES: dict[str, BrokerActionPolicy] = {
             "trade" + ".Buy",
             "trade" + ".Sell",
             "Order" + "Send",
+            "TRADE_ACTION_" + "DEAL",
             "TRADE_ACTION_" + "SLTP",
         ),
         required_tokens=(

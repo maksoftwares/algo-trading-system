@@ -1,0 +1,19 @@
+{
+  "logs": [
+    {
+      "sha256": "9d6e4f2ae1a30d062df17042ecf646d9fb46dff57825cf99c80cfad1b366a2dc",
+      "size_bytes": 2118,
+      "source_relative": "Logs/20260713.log"
+    },
+    {
+      "sha256": "058eaa710b42784971d0b68b5e3d83f15f349ee566cea10dbca9f90a9b54a6c0",
+      "size_bytes": 2848,
+      "source_relative": "Logs/metaeditor.log"
+    },
+    {
+      "sha256": "bbf0eb013c220095121d07ef5ec186942578a7bf45b8b1d421199f0829343732",
+      "size_bytes": 272,
+      "source_relative": "Tester/logs/20260713.log"
+    }
+  ]
+}

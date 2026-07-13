@@ -1,0 +1,42 @@
+{
+  "authorization_sha256": "f288535f1944a25a3a92cc62f8f83a692841093aeea56821b27bbe53f1b9985f",
+  "broker_action_authorized": false,
+  "canonical_np1c_authorized": false,
+  "census_authorized": false,
+  "compile": {
+    "ex5_sha256": "84d557fea579b7e35f79e3add4640900fd81f78e4bef71309607ccd5c53be7fa",
+    "metaeditor_compilations": 1,
+    "source_sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af"
+  },
+  "first_stop": {
+    "error": "missing/stale native report: warmup",
+    "expected_report": "C:\\MT5A1NP1SpreadProvenanceClean\\Reports\\np1_g1_warmup.htm",
+    "observed_report_present": false,
+    "phase_point": "warmup output collection"
+  },
+  "flags": [
+    "SINGLE_METAEDITOR_COMPILATION_SUCCEEDED",
+    "CLEAN_ROOT_WARMUP_COMPLETED_ZERO_ACTION",
+    "WARMUP_NATIVE_REPORT_MISSING",
+    "PROBE1_NOT_INVOKED",
+    "PROBE2_NOT_INVOKED",
+    "NO_RETRY_PERFORMED",
+    "NO_PROVENANCE_CLASSIFICATION_AUTHORIZED"
+  ],
+  "implementation_commit": "2bc44e1e69b8c3ca904c17db0f1786eb469f461c",
+  "implementation_tree": "ab122ac7b667e56a5c3bc38d451b8d2d0e20c535",
+  "status": "NP1_G1_EVIDENCE_INVALID",
+  "tester_invocations": [
+    "warmup"
+  ],
+  "warmup": {
+    "agent_log_sha256": "c827eeb9d0ae8ccda5289955e1136b65997b86a3517c562dc6a92a074b24a04c",
+    "assertions_sha256": "a1c2de75eeedf92bd2359dcdb58b7d798822e153266f11ee2ef44956df73eece",
+    "bars_generated": 779751,
+    "final_balance": 10000.0,
+    "order_and_deal_sentinels_zero_bytes": true,
+    "terminal_log_sha256": "76d6ca82fe495d82f8fbe45e104de75f0e2cc3422200bdb3e01495523cfe8884",
+    "ticks_generated": 386576289,
+    "zero_action_assertions_passed": true
+  }
+}

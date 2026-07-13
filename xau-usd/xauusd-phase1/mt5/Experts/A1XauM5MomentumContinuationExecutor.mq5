@@ -53,7 +53,9 @@ enum RegimeRouterMode
    REGIME_ROUTER_LONG_R1_UPTREND_ONLY = 1,
    REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY = 2,
    REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3,
-   REGIME_ROUTER_R4_CHOP_ONLY = 4
+   REGIME_ROUTER_R4_CHOP_ONLY = 4,
+   REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY = 5,
+   REGIME_ROUTER_R3_COMPRESSION_ONLY = 6
   };
 
 enum XauRegimeState
@@ -257,6 +259,7 @@ input string InpBlockedEntryHoursCsv          = "";     // comma-separated serve
 input string InpBlockedEntryDayHoursCsv       = "";     // comma-separated MQL day:hour pairs, e.g. "5:20"
 input string InpBlockedLongEntryHoursCsv      = "";     // optional direction-specific server-hour block list
 input string InpBlockedShortEntryHoursCsv     = "";     // optional direction-specific server-hour block list
+input bool   InpLegacySelectionMasksEnabled   = true;   // explicit authority; never rely on empty-string reset semantics
 input MomentumDirectionMode InpDirectionMode  = MOMENTUM_BOTH_DIRECTIONS;
 input bool   InpUseH1TrendFilter              = false;
 input bool   InpH1TrendApplyToLong            = true;
@@ -363,7 +366,7 @@ void AppendCsv(
    if(!exists)
      {
       if(file_name == InpStartupLogFileName)
-         FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status");
+         FileWrite(handle, "timestamp_broker", "run_id", "server", "account", "symbol", "magic", "demo_trading", "broker_action", "status", "account_currency", "account_leverage", "margin_mode", "volume_min", "volume_step", "volume_max", "contract_size", "tick_size", "tick_value", "tick_value_loss", "stops_level", "freeze_level");
       else if(file_name == InpSignalLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "stage", "direction", "reason", "bid", "ask", "spread_points", "recent_high", "recent_low", "signal_open", "signal_high", "signal_low", "signal_close", "atr", "body_fraction", "close_location", "three_bar_move_atr", "break_distance_atr", "estimated_cost_r");
       else if(file_name == InpOrderLogFileName)
@@ -371,7 +374,7 @@ void AppendCsv(
       else if(file_name == InpManagementLogFileName)
          FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "action", "direction", "position_ticket", "volume", "entry_price", "current_price", "current_sl", "new_sl", "tp", "risk_points", "unrealized_r", "trigger_r", "lock_r", "retcode", "reason");
       else if(file_name == InpDealLogFileName)
-         FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "deal_ticket", "position_id", "entry_code", "type_code", "reason_code", "direction", "volume", "price", "profit", "commission", "swap", "order_ticket", "comment");
+         FileWrite(handle, "timestamp_broker", "timestamp_local", "run_id", "account", "symbol", "magic", "deal_ticket", "position_id", "entry_code", "type_code", "reason_code", "direction", "volume", "price", "profit", "commission", "swap", "fee", "order_ticket", "comment");
      }
    const int n = ArraySize(values);
    switch(n)
@@ -399,7 +402,7 @@ void AppendCsv(
 void LogStartup(const string status)
   {
    string values[];
-   ArrayResize(values, 9);
+   ArrayResize(values, 21);
    values[0] = Timestamp();
    values[1] = InpRunId;
    values[2] = AccountInfoString(ACCOUNT_SERVER);
@@ -409,6 +412,18 @@ void LogStartup(const string status)
    values[6] = BoolText(AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO);
    values[7] = BoolText(InpAllowDemoTrading);
    values[8] = status;
+   values[9] = AccountInfoString(ACCOUNT_CURRENCY);
+   values[10] = IntegerToString((long)AccountInfoInteger(ACCOUNT_LEVERAGE));
+   values[11] = IntegerToString((long)AccountInfoInteger(ACCOUNT_MARGIN_MODE));
+   values[12] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN), 8);
+   values[13] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_STEP), 8);
+   values[14] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MAX), 8);
+   values[15] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_CONTRACT_SIZE), 8);
+   values[16] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_SIZE), 8);
+   values[17] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE), 8);
+   values[18] = DoubleToString(SymbolInfoDouble(InpTargetSymbol, SYMBOL_TRADE_TICK_VALUE_LOSS), 8);
+   values[19] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_STOPS_LEVEL));
+   values[20] = IntegerToString((long)SymbolInfoInteger(InpTargetSymbol, SYMBOL_TRADE_FREEZE_LEVEL));
    AppendCsv(InpStartupLogFileName, values);
   }
 
@@ -583,7 +598,7 @@ void LogDealTransaction(const ulong deal_ticket)
    const ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(deal_ticket, DEAL_ENTRY);
    const ENUM_DEAL_TYPE type = (ENUM_DEAL_TYPE)HistoryDealGetInteger(deal_ticket, DEAL_TYPE);
    string values[];
-   ArrayResize(values, 19);
+   ArrayResize(values, 20);
    values[0] = Timestamp();
    values[1] = TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS);
    values[2] = InpRunId;
@@ -601,8 +616,9 @@ void LogDealTransaction(const ulong deal_ticket)
    values[14] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_PROFIT), 2);
    values[15] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_COMMISSION), 2);
    values[16] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_SWAP), 2);
-   values[17] = IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_ORDER));
-   values[18] = HistoryDealGetString(deal_ticket, DEAL_COMMENT);
+   values[17] = DoubleToString(HistoryDealGetDouble(deal_ticket, DEAL_FEE), 2);
+   values[18] = IntegerToString((long)HistoryDealGetInteger(deal_ticket, DEAL_ORDER));
+   values[19] = HistoryDealGetString(deal_ticket, DEAL_COMMENT);
    AppendCsv(InpDealLogFileName, values);
   }
 
@@ -1642,7 +1658,11 @@ double LotsForStopDistance(const double stop_distance)
    const double risk_per_lot = (stop_distance / tick_size) * tick_value_loss;
    if(risk_per_lot <= 0.0)
       return fixed_lots;
-   return NormalizeLotsForSymbol(InpRiskAmountUsd / risk_per_lot);
+   const double requested_lots = InpRiskAmountUsd / risk_per_lot;
+   const double min_lots = SymbolInfoDouble(InpTargetSymbol, SYMBOL_VOLUME_MIN);
+   if(min_lots <= 0.0 || requested_lots + 0.0000001 < min_lots)
+      return 0.0;
+   return NormalizeLotsForSymbol(requested_lots);
   }
 
 double RecentHigh(const int start_shift, const int count)
@@ -2095,6 +2115,10 @@ string RegimeRouterModeName()
       return "directional_r1_long_r2_short";
    if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
       return "r4_chop_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
+      return "short_r5_uptrend_chop_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_ONLY)
+      return "r3_compression_only";
    return "off";
   }
 
@@ -2111,6 +2135,57 @@ string RegimeStateName(const XauRegimeState state)
    if(state == XAU_REGIME_CHOP)
       return "chop";
    return "unknown";
+  }
+
+bool RegimeTrendDataAvailableAtShift(const ENUM_TIMEFRAMES timeframe, const int shift)
+  {
+   const int fast_period = MathMax(1, InpRegimeFastEmaPeriod);
+   const int slow_period = MathMax(fast_period + 1, InpRegimeSlowEmaPeriod);
+   const int slope_lag = MathMax(1, InpRegimeSlopeLagBars);
+   if(iBars(InpTargetSymbol, timeframe) < slow_period + slope_lag + shift + 5)
+      return false;
+   return iClose(InpTargetSymbol, timeframe, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, fast_period, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, slow_period, shift) > 0.0 &&
+          IndicatorEmaClose(timeframe, fast_period, shift + slope_lag) > 0.0 &&
+          IndicatorEmaClose(timeframe, slow_period, shift + slope_lag) > 0.0;
+  }
+
+bool RegimeRouterDataAvailable()
+  {
+   const int persistence = MathMax(1, InpRegimePersistenceD1Bars);
+   for(int shift = 1; shift <= persistence; shift++)
+     {
+      if(!RegimeTrendDataAvailableAtShift(PERIOD_D1, shift))
+         return false;
+     }
+   if(InpRegimeRequireH4Confirm && !RegimeTrendDataAvailableAtShift(PERIOD_H4, 1))
+      return false;
+
+   const int atr_period = MathMax(1, InpAtrPeriod);
+   if(InpRegimeShockH1RangeAtrMultiple > 0.0)
+     {
+      if(iBars(InpTargetSymbol, PERIOD_H1) <= atr_period + 10 ||
+         iHigh(InpTargetSymbol, PERIOD_H1, 1) <= iLow(InpTargetSymbol, PERIOD_H1, 1) ||
+         IndicatorAtrPrice(PERIOD_H1, atr_period, 1) <= 0.0)
+         return false;
+     }
+   if(InpRegimeShockD1AtrPercentileMin > 0.0)
+     {
+      const int shock_lookback = MathMax(20, InpRegimeShockD1AtrLookback);
+      if(iBars(InpTargetSymbol, PERIOD_D1) <= shock_lookback + atr_period + 10 ||
+         IndicatorAtrPrice(PERIOD_D1, atr_period, 1) <= 0.0)
+         return false;
+     }
+
+   const int box_days = MathMax(2, InpRegimeCompressionBoxDays);
+   if(iBars(InpTargetSymbol, PERIOD_D1) <= 252 + atr_period + 10 ||
+      TimeframeHigh(PERIOD_D1, 1, box_days) <= 0.0 ||
+      TimeframeLow(PERIOD_D1, 1, box_days) <= 0.0 ||
+      TimeframeMedianRange(PERIOD_D1, 20, 1) <= 0.0 ||
+      IndicatorAtrPrice(PERIOD_D1, atr_period, 1) <= 0.0)
+      return false;
+   return true;
   }
 
 bool RegimeTrendStackAtShift(const ENUM_TIMEFRAMES timeframe, const int shift, const bool uptrend)
@@ -2213,9 +2288,15 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
    if(InpRegimeRouterMode == REGIME_ROUTER_OFF)
       return true;
 
+   const string mode_name = RegimeRouterModeName();
+   if(!RegimeRouterDataAvailable())
+     {
+      block_reason = "regime_router_block_" + mode_name + "_state_unknown";
+      return false;
+     }
+
    const XauRegimeState regime = CurrentXauRegime();
    const string regime_name = RegimeStateName(regime);
-   const string mode_name = RegimeRouterModeName();
 
    if(regime == XAU_REGIME_SHOCK)
      {
@@ -2253,6 +2334,27 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
      {
       if(regime == XAU_REGIME_CHOP)
          return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_ONLY)
+     {
+      if(regime == XAU_REGIME_COMPRESSION)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
+     {
+      if(direction == "SHORT" && (regime == XAU_REGIME_UPTREND || regime == XAU_REGIME_CHOP))
+        {
+         // Preserve the causal state on every successful R5 order so the exact
+         // evidence can prove that no DOWNTREND/SHOCK/COMPRESSION state leaked.
+         block_reason = "regime_router_allow_" + mode_name + "_state_" + regime_name;
+         return true;
+        }
       block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
       return false;
      }
@@ -2428,11 +2530,15 @@ bool CurrentHourInCsv(const string csv_hours)
 
 bool EntryHourBlocked()
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    return CurrentHourInCsv(InpBlockedEntryHoursCsv);
   }
 
 bool EntryDayHourBlocked()
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    if(InpBlockedEntryDayHoursCsv == "")
       return false;
    MqlDateTime parts;
@@ -2459,6 +2565,8 @@ bool EntryDayHourBlocked()
 
 bool DirectionEntryHourBlocked(const string direction)
   {
+   if(!InpLegacySelectionMasksEnabled)
+      return false;
    if(direction == "LONG")
       return CurrentHourInCsv(InpBlockedLongEntryHoursCsv);
    if(direction == "SHORT")
@@ -4549,7 +4657,7 @@ void EvaluateCompletedM5Bar()
    const double order_lots = LotsForStopDistance(stop_distance);
    if(order_lots <= 0.0)
      {
-      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, "invalid_order_lots");
+      LogOrder("GUARD_BLOCK", direction, 0.0, bid, ask, spread_points, close, 0.0, 0.0, stop_points, estimated_cost_r, 0, "", 0, 0, 0.0, InpUseRiskNormalizedLots ? "minimum_lot_risk_excess" : "invalid_order_lots");
       return;
      }
 
@@ -4632,7 +4740,8 @@ void EvaluateCompletedM5Bar()
      {
       g_trades_today++;
       g_last_trade_time = TimeCurrent();
-      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "pass");
+      const string pass_reason = (InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY) ? regime_block_reason : "pass";
+      LogOrder("ORDER_SEND_OK", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), pass_reason);
      }
    else
       LogOrder("ORDER_SEND_FAIL", direction, order_lots, bid, ask, spread_points, entry_reference, sl, tp, stop_points, estimated_cost_r, retcode, retcode_description, g_trade.ResultOrder(), g_trade.ResultDeal(), g_trade.ResultPrice(), "order_send_failed");

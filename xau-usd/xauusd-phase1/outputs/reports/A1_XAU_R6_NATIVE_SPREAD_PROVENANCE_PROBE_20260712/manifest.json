@@ -1,0 +1,65 @@
+{
+  "artifacts": [
+    {
+      "relative_path": "analysis/provenance_classification.json",
+      "sha256": "7d0ac3200660a152a388f83ce979e0d3609249584629f736d8c63e482b0c71a6",
+      "size_bytes": 626
+    },
+    {
+      "relative_path": "compiled/A1XauR6NativeSpreadProvenanceProbe.ex5",
+      "sha256": "84d557fea579b7e35f79e3add4640900fd81f78e4bef71309607ccd5c53be7fa",
+      "size_bytes": 27272
+    },
+    {
+      "relative_path": "compiled/A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "sha256": "6c516ab3854a135c034028e3904c4025fe1a59c95270e9df6fb4eaf03e8a64af",
+      "size_bytes": 8342
+    },
+    {
+      "relative_path": "compiled/compile.log",
+      "sha256": "5fb7926f1ee9fa3a7ab99ac8b876d73d935e02c00af12f8b03a3828514d201f4",
+      "size_bytes": 1586
+    },
+    {
+      "relative_path": "compiled/source_manifest.json",
+      "sha256": "74b2c5a03e7db6eb80d86bc4d85d7a22fe02b901d76c31532ce7318768c56565",
+      "size_bytes": 348
+    },
+    {
+      "relative_path": "README.md",
+      "sha256": "cc3599207cf3fa5627216510d8c548d991525ddf856b2df025a618ee81127789",
+      "size_bytes": 800
+    },
+    {
+      "relative_path": "result.json",
+      "sha256": "d95e53bb8c6da79863b8ac3e8d02701e64d37e65acec1d3690e15155267e3f9e",
+      "size_bytes": 1656
+    },
+    {
+      "relative_path": "runs/warmup/assertions.tsv",
+      "sha256": "a1c2de75eeedf92bd2359dcdb58b7d798822e153266f11ee2ef44956df73eece",
+      "size_bytes": 196
+    },
+    {
+      "relative_path": "runs/warmup/deal.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "runs/warmup/order.zero",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "relative_path": "runs/warmup/tester.ini",
+      "sha256": "dc5dba47ad0673c541ba7c741bce7e396d3319e799aa91595b64490ae1e22187",
+      "size_bytes": 865
+    },
+    {
+      "relative_path": "test_validation.md",
+      "sha256": "c8b3cb2d3e4bad17536c1da688fa748cfa1f864c4069c5d2482ded305080e828",
+      "size_bytes": 479
+    }
+  ],
+  "schema_version": "a1_xau_r6_np1_g1_incomplete_evidence_manifest_v1"
+}

@@ -1,0 +1,2 @@
+timestamp_broker	server	company	account_login	account_currency	account_leverage	margin_mode	symbol	digits	point	volume_min	volume_step	volume_max	contract_size	tick_size	tick_value	tick_value_profit	tick_value_loss	stops_level	freeze_level	trade_calc_mode	trade_mode
+2015-06-01T00:00:00	Capital.ComMena-Demo	Capital Com Mena Securities Trading L.L.C	1025742	USD	50	2	XAUUSD	2	0.01	0.01	0.01	1000	100	0.01	1	1	1	0	0	2	4

@@ -1,0 +1,24 @@
+{
+  "copied_mq5_sha256": "dd4e349a047f4e69dca61b81367134c68973a29fd551709739280e7941b64698",
+  "lineage": {
+    "copyrates_call": {
+      "line": 381,
+      "token": "const int copied=CopyRates(InpTargetSymbol,timeframe,from,until,rates);"
+    },
+    "filewrite_expression": {
+      "line": 389,
+      "token": "(int)rates[i].spread"
+    },
+    "rates_declaration": {
+      "line": 377,
+      "token": "MqlRates rates[];"
+    }
+  },
+  "reviewed_builder_source_sha256": "1e648d24a069ad5a74ac217439cae3e902cdf3fffe48583ccde5bd27ed81208d",
+  "reviewed_mq5_sha256": "dd4e349a047f4e69dca61b81367134c68973a29fd551709739280e7941b64698",
+  "source_blob": "d59338facaa01032a47c71186e64e1ba9f1dba8f",
+  "source_commit": "d51340574d90a39fe0032e54e4a8252370c19058",
+  "source_equivalence_sha256": "9e7b893d4af9d44540117cff2ac0e782b1d535d242f40f2ff61a8156ff5382c1",
+  "spread_type": "MqlRates.spread:int",
+  "transformation": "int_identity_cast_only"
+}

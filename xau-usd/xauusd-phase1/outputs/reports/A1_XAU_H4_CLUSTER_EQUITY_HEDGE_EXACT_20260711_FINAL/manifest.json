@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.json": {
+      "sha256": "a760b4b66cf6c024083086d0f4c82f460e11731e444ea4660423445fba36321f",
+      "size_bytes": 45819
+    },
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.md": {
+      "sha256": "9495c501feb181229e900c9377f42aed761566bb532bacdbddc886ed4bffbf19",
+      "size_bytes": 484
+    },
+    "compiled/A1XauH4ClusterEquityHedgeV1.ex5": {
+      "sha256": "7d82f9b7f4c962d59857c5d7452a55be2e624ec4818e264483cfe1f971f35f13",
+      "size_bytes": 190568
+    },
+    "compiled/A1XauH4ClusterEquityHedgeV1.mq5": {
+      "sha256": "e8422866977ff223e848c88a760a180809ee5b9b6a665675335ffd0da0922c41",
+      "size_bytes": 178819
+    },
+    "compiled/compile_A1_XAU_H4_CLUSTER_EQUITY_HEDGE.log": {
+      "sha256": "edb332dcbd13f5f6b0b7a4a0b659724bcd195e2b4427dfb9a591a882ef57d7c7",
+      "size_bytes": 6960
+    },
+    "compiled/source_manifest.json": {
+      "sha256": "02bb87004f6e0c2c2775e9779e6070aa95046ab3ae3ce265d23ddbce6ca5e1ce",
+      "size_bytes": 700
+    },
+    "runs/five_year/A1_XAU_H4_CLUSTER_EQUITY_HEDGE_FIVE_YEAR.htm": {
+      "sha256": "4e63fb1d09f3acdf3274021b61f2b72f8224ddfc791e077cee465c403a844bfb",
+      "size_bytes": 439566
+    },
+    "runs/five_year/a1_xau_h4_cluster_equity_hedge_five_year_deals_with_fee.csv": {
+      "sha256": "4734b407dd52369dd6560d566f34c082d22e9b7ce94f4178965b13b183638529",
+      "size_bytes": 65263
+    },
+    "runs/five_year/a1_xau_h4_cluster_equity_hedge_five_year_management.csv": {
+      "sha256": "352287ea20d2531f014dd5f152b737d2282d367380bd12118889820d857db755",
+      "size_bytes": 6992
+    },
+    "runs/five_year/a1_xau_h4_cluster_equity_hedge_five_year_orders.csv": {
+      "sha256": "a33389c4777c3bc4589d051840e015d6d99d4a6c3582e9269b426d86b995c9fe",
+      "size_bytes": 181907
+    },
+    "runs/five_year/a1_xau_h4_cluster_equity_hedge_five_year_signals.csv": {
+      "sha256": "bf86cc2e8f18e0824021665b961603d15e8181977805057d8d7c8862c66644c0",
+      "size_bytes": 2033015
+    },
+    "runs/five_year/a1_xau_h4_cluster_equity_hedge_five_year_startup.csv": {
+      "sha256": "2973971ee4e3a5f6eaeb377a1af6753395c46501de6770e7f8b81b176c5b75a4",
+      "size_bytes": 210
+    },
+    "runs/five_year/tester.ini": {
+      "sha256": "86a5385bf1231734841882de314fb44a576083e343fc22885543decd5902520c",
+      "size_bytes": 5663
+    },
+    "runs/ten_year/A1_XAU_H4_CLUSTER_EQUITY_HEDGE_TEN_YEAR.htm": {
+      "sha256": "420715bcc9a433637637a3d7b898c0b8320018bb66e9c1e01e46dbe0b244f120",
+      "size_bytes": 764516
+    },
+    "runs/ten_year/a1_xau_h4_cluster_equity_hedge_ten_year_deals_with_fee.csv": {
+      "sha256": "df531bbaa9f2fcde38a33cc8064571dcbdaec1b3761767dd47aaed34c3228486",
+      "size_bytes": 126010
+    },
+    "runs/ten_year/a1_xau_h4_cluster_equity_hedge_ten_year_management.csv": {
+      "sha256": "1d7ffc46392409541c27248c9b094c62d152b9a239b58f1c91916d6dbb3f2f12",
+      "size_bytes": 11424
+    },
+    "runs/ten_year/a1_xau_h4_cluster_equity_hedge_ten_year_orders.csv": {
+      "sha256": "622ce771102fbf27f4f7775604ac91639692917e81627e71f1afbd3315b99eef",
+      "size_bytes": 377032
+    },
+    "runs/ten_year/a1_xau_h4_cluster_equity_hedge_ten_year_signals.csv": {
+      "sha256": "256ec5af85223dede011b38e4a8f2ec9e84a0d15e72ab37f5f416313559da38a",
+      "size_bytes": 4049197
+    },
+    "runs/ten_year/a1_xau_h4_cluster_equity_hedge_ten_year_startup.csv": {
+      "sha256": "a848836c2622907cfbc871cc1c80be8864d65c9f5e7e784ba8d4bb452f056d8a",
+      "size_bytes": 209
+    },
+    "runs/ten_year/tester.ini": {
+      "sha256": "9b4c8f80c6f4537b6be62acaad19a412dd8d5736e8646225630afca2d3781836",
+      "size_bytes": 5656
+    }
+  },
+  "status": "H4_ADVERSE_R_HEDGE_FAILED"
+}

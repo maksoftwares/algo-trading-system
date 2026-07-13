@@ -1,0 +1,4 @@
+timeframe,prior_endpoint,next_endpoint,expected_native_steps,present_native_steps_run1,present_native_steps_run2,all_steps_present_run1,all_steps_present_run2,run1_run2_values_identical,closure_status
+H1,2025-07-03T00:00:00,2025-07-03T09:00:00,8,8,8,true,true,true,CLOSED_BY_CONTIGUOUS_NATIVE_BARS
+H1,2025-07-04T01:00:00,2025-07-04T07:00:00,5,5,5,true,true,true,CLOSED_BY_CONTIGUOUS_NATIVE_BARS
+H4,2025-07-03T00:00:00,2025-07-03T08:00:00,1,1,1,true,true,true,CLOSED_BY_CONTIGUOUS_NATIVE_BARS

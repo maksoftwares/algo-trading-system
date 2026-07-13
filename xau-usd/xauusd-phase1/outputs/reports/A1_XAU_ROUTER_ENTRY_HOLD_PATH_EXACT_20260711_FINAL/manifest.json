@@ -1,0 +1,330 @@
+{
+  "artifacts": {
+    "compiled/A1XauRouterEntryHoldPathExporter.ex5": {
+      "sha256": "7d4adaada3e74cce31a8338f1096b60b3fab63020047aa8281d046e85087fc55",
+      "size_bytes": 74008
+    },
+    "compiled/A1XauRouterEntryHoldPathExporter.mq5": {
+      "sha256": "7703664e07b4bcbf6c96d07857b3e9dbf260f343ef89b807636eae31723f8d43",
+      "size_bytes": 70771
+    },
+    "compiled/A1XauRouterSnapshotOracle006824.ex5": {
+      "sha256": "b9072760a43e431ef5625d3adae0cc20309694fad7556a5fc284b7721d24232a",
+      "size_bytes": 193020
+    },
+    "compiled/A1XauRouterSnapshotOracle006824.mq5": {
+      "sha256": "3372d8e751141f1d397d9967b8c14272046e1a733a64f67e63fcc3f56e53d355",
+      "size_bytes": 180025
+    },
+    "compiled/compile_A1_XAU_ROUTER_ENTRY_HOLD_PATH_EXPORTER.log": {
+      "sha256": "21948554ede758ef9a3704d9931be4292f0c8209c52207ae262cb530cf797455",
+      "size_bytes": 3100
+    },
+    "compiled/compile_A1_XAU_ROUTER_SNAPSHOT_ORACLE_006824.log": {
+      "sha256": "b57e08d483f7a65690d6cba30832f3702ed513fa3615bbe07899faee2eb79073",
+      "size_bytes": 6984
+    },
+    "inputs/a1_xau_router_entry_hold_path_schedule_v1.csv": {
+      "sha256": "ccdbb91cdbd303c477a7d4cfe404e29b89e24297cc4e61886da7b7664e5ada9f",
+      "size_bytes": 255686
+    },
+    "runs/entry_hold_path_exporter/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ENTRY_HOLD_PATH_EXPORTER_RUN1.htm": {
+      "sha256": "89bdcf3e0af2d56cd521f4912f81cfcb3c60cb3e0dc2d57290a51927660e7bac",
+      "size_bytes": 29722
+    },
+    "runs/entry_hold_path_exporter/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_entry_hold_path_exporter_run1.ini": {
+      "sha256": "2b830a969fac3f243206681139842196b8195e982ce74192f07e1ba51060791a",
+      "size_bytes": 1167
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_assertion.tsv": {
+      "sha256": "4d6762560319c433df8a2a69d0d4ab7f000a3f3c7869b525dd84f91cbb58b715",
+      "size_bytes": 1395
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_deal.zero": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_event.tsv": {
+      "sha256": "a267098ce201622a904342f1f14bf883db1a990b60d4ae5206e5f485386c5fbe",
+      "size_bytes": 166225608
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_feature.tsv": {
+      "sha256": "bd30756247aee86b06442a6f9c34d13542fc0a819cab1a08381bfc70cfd46712",
+      "size_bytes": 33233556
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_order.zero": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/entry_hold_path_exporter/run1/a1_xau_router_path_provenance.tsv": {
+      "sha256": "7cd83046af7ff3777041f4c6f5c31cb09fba6a08f4f63ef1075a2d9a237da2ad",
+      "size_bytes": 349012
+    },
+    "runs/entry_hold_path_exporter/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ENTRY_HOLD_PATH_EXPORTER_RUN2.htm": {
+      "sha256": "9112555a414eef7a146eb90458c29f5d22862210ed1e6f81d3870a6b6859f7ad",
+      "size_bytes": 29722
+    },
+    "runs/entry_hold_path_exporter/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_entry_hold_path_exporter_run2.ini": {
+      "sha256": "a983f74740b617fe98c63a31dca177b2a20bc27497daf248f68ee5aa25728a99",
+      "size_bytes": 1167
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_assertion.tsv": {
+      "sha256": "4d6762560319c433df8a2a69d0d4ab7f000a3f3c7869b525dd84f91cbb58b715",
+      "size_bytes": 1395
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_deal.zero": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_event.tsv": {
+      "sha256": "a267098ce201622a904342f1f14bf883db1a990b60d4ae5206e5f485386c5fbe",
+      "size_bytes": 166225608
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_feature.tsv": {
+      "sha256": "bd30756247aee86b06442a6f9c34d13542fc0a819cab1a08381bfc70cfd46712",
+      "size_bytes": 33233556
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_order.zero": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/entry_hold_path_exporter/run2/a1_xau_router_path_provenance.tsv": {
+      "sha256": "7cd83046af7ff3777041f4c6f5c31cb09fba6a08f4f63ef1075a2d9a237da2ad",
+      "size_bytes": 349012
+    },
+    "runs/router_snapshot_oracle/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ROUTER_SNAPSHOT_ORACLE_RUN1.htm": {
+      "sha256": "7eb4713cea36fde84f8f7a0f18687062973810b0a5456e27815f8c6a90d1908b",
+      "size_bytes": 98666
+    },
+    "runs/router_snapshot_oracle/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_router_snapshot_oracle_run1.ini": {
+      "sha256": "9db03bd96a2ceffd28ef5dca1186c83a8274510ee3097f3e25c969bbde885882",
+      "size_bytes": 1336
+    },
+    "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_causal.csv": {
+      "sha256": "3cc8e431a96b01cbab3764dfc488226bc1784f8874ace49cc17316ae56736585",
+      "size_bytes": 68748527
+    },
+    "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_deal.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_order.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/router_snapshot_oracle/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ROUTER_SNAPSHOT_ORACLE_RUN2.htm": {
+      "sha256": "c6a3b94d824fe68b832be91b7e998dd8496bfc0132365926eb8b5f3b214f0f4f",
+      "size_bytes": 98666
+    },
+    "runs/router_snapshot_oracle/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_router_snapshot_oracle_run2.ini": {
+      "sha256": "2ad3599b8a9fcb93fb21fa58d19dc735fadb591b877c6bb7a4f8e7cc22c2e31a",
+      "size_bytes": 1336
+    },
+    "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_causal.csv": {
+      "sha256": "3cc8e431a96b01cbab3764dfc488226bc1784f8874ace49cc17316ae56736585",
+      "size_bytes": 68748527
+    },
+    "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_deal.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_order.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  },
+  "audit_id": "A1_XAU_ROUTER_ENTRY_HOLD_PATH_AUDIT_V1",
+  "authoritative_router": {
+    "commit": "006824cde421ea61a0bcdb074804f9ccf95c17a9",
+    "sha256": "3372d8e751141f1d397d9967b8c14272046e1a733a64f67e63fcc3f56e53d355",
+    "source": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "classification_performed": false,
+    "repetitions_per_program": 2,
+    "strategy_tester_only": true,
+    "trading_logic_changed": false,
+    "zero_broker_action_contract": {
+      "all_order_and_deal_logs_zero_bytes": true,
+      "all_reports_zero_trades_and_deals": true,
+      "exporter_source_forbidden_action_scan_passed": true,
+      "pinned_oracle_exact_hash_and_snapshot_early_return": true,
+      "pinned_oracle_trading_input_false": true
+    }
+  },
+  "causal_repeat_sha256": {
+    "entry_hold_path_exporter": {
+      "InpAssertionLogFileName": "4d6762560319c433df8a2a69d0d4ab7f000a3f3c7869b525dd84f91cbb58b715",
+      "InpEventLogFileName": "a267098ce201622a904342f1f14bf883db1a990b60d4ae5206e5f485386c5fbe",
+      "InpFeatureLogFileName": "bd30756247aee86b06442a6f9c34d13542fc0a819cab1a08381bfc70cfd46712",
+      "InpProvenanceLogFileName": "7cd83046af7ff3777041f4c6f5c31cb09fba6a08f4f63ef1075a2d9a237da2ad"
+    },
+    "router_snapshot_oracle": {
+      "InpSignalLogFileName": "3cc8e431a96b01cbab3764dfc488226bc1784f8874ace49cc17316ae56736585"
+    }
+  },
+  "exporter": {
+    "broker_action_tokens_found": 0,
+    "source_name": "A1XauRouterEntryHoldPathExporter.mq5",
+    "source_sha256": "7703664e07b4bcbf6c96d07857b3e9dbf260f343ef89b807636eae31723f8d43"
+  },
+  "generated_at_utc": "2026-07-10T22:36:35.567642Z",
+  "runs": [
+    {
+      "artifacts": {
+        "config": "runs/router_snapshot_oracle/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_router_snapshot_oracle_run1.ini",
+        "deal_log": "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_deal.csv",
+        "order_log": "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_order.csv",
+        "report": "runs/router_snapshot_oracle/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ROUTER_SNAPSHOT_ORACLE_RUN1.htm"
+      },
+      "causal_artifacts": {
+        "InpSignalLogFileName": "runs/router_snapshot_oracle/run1/a1_xau_router_oracle_causal.csv"
+      },
+      "metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "0",
+        "Total Trades": "0"
+      },
+      "program": "router_snapshot_oracle",
+      "repetition": 1,
+      "runtime_assertions": null,
+      "zero_activity_log_state": {
+        "deal": "absent",
+        "order": "absent"
+      }
+    },
+    {
+      "artifacts": {
+        "config": "runs/router_snapshot_oracle/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_router_snapshot_oracle_run2.ini",
+        "deal_log": "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_deal.csv",
+        "order_log": "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_order.csv",
+        "report": "runs/router_snapshot_oracle/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ROUTER_SNAPSHOT_ORACLE_RUN2.htm"
+      },
+      "causal_artifacts": {
+        "InpSignalLogFileName": "runs/router_snapshot_oracle/run2/a1_xau_router_oracle_causal.csv"
+      },
+      "metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "0",
+        "Total Trades": "0"
+      },
+      "program": "router_snapshot_oracle",
+      "repetition": 2,
+      "runtime_assertions": null,
+      "zero_activity_log_state": {
+        "deal": "absent",
+        "order": "absent"
+      }
+    },
+    {
+      "artifacts": {
+        "config": "runs/entry_hold_path_exporter/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_entry_hold_path_exporter_run1.ini",
+        "deal_log": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_deal.zero",
+        "order_log": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_order.zero",
+        "report": "runs/entry_hold_path_exporter/run1/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ENTRY_HOLD_PATH_EXPORTER_RUN1.htm"
+      },
+      "causal_artifacts": {
+        "InpAssertionLogFileName": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_assertion.tsv",
+        "InpEventLogFileName": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_event.tsv",
+        "InpFeatureLogFileName": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_feature.tsv",
+        "InpProvenanceLogFileName": "runs/entry_hold_path_exporter/run1/a1_xau_router_path_provenance.tsv"
+      },
+      "metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "0",
+        "Total Trades": "0"
+      },
+      "program": "entry_hold_path_exporter",
+      "repetition": 1,
+      "runtime_assertions": {
+        "all_pass": true,
+        "required_assertions": [
+          "all_678_schedule_rows_complete",
+          "frozen_router_inputs",
+          "indicator_handles",
+          "schedule_header_exact",
+          "schedule_source_counts",
+          "tester_only",
+          "trade_sessions",
+          "zero_execution_surface_runtime"
+        ],
+        "rows": 8
+      },
+      "zero_activity_log_state": {
+        "deal": "absent",
+        "order": "absent"
+      }
+    },
+    {
+      "artifacts": {
+        "config": "runs/entry_hold_path_exporter/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_entry_hold_path_exporter_run2.ini",
+        "deal_log": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_deal.zero",
+        "order_log": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_order.zero",
+        "report": "runs/entry_hold_path_exporter/run2/A1_XAU_ROUTER_ENTRY_HOLD_PATH_ENTRY_HOLD_PATH_EXPORTER_RUN2.htm"
+      },
+      "causal_artifacts": {
+        "InpAssertionLogFileName": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_assertion.tsv",
+        "InpEventLogFileName": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_event.tsv",
+        "InpFeatureLogFileName": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_feature.tsv",
+        "InpProvenanceLogFileName": "runs/entry_hold_path_exporter/run2/a1_xau_router_path_provenance.tsv"
+      },
+      "metrics": {
+        "Bars": "282644",
+        "History Quality": "98%",
+        "Ticks": "204204660",
+        "Total Deals": "0",
+        "Total Trades": "0"
+      },
+      "program": "entry_hold_path_exporter",
+      "repetition": 2,
+      "runtime_assertions": {
+        "all_pass": true,
+        "required_assertions": [
+          "all_678_schedule_rows_complete",
+          "frozen_router_inputs",
+          "indicator_handles",
+          "schedule_header_exact",
+          "schedule_source_counts",
+          "tester_only",
+          "trade_sessions",
+          "zero_execution_surface_runtime"
+        ],
+        "rows": 8
+      },
+      "zero_activity_log_state": {
+        "deal": "absent",
+        "order": "absent"
+      }
+    }
+  ],
+  "schedule": {
+    "outcome_fields_supplied_to_exporter": false,
+    "path": "inputs/a1_xau_router_entry_hold_path_schedule_v1.csv",
+    "rows": 678,
+    "sha256": "ccdbb91cdbd303c477a7d4cfe404e29b89e24297cc4e61886da7b7664e5ada9f"
+  },
+  "schema_version": "a1_xau_router_entry_hold_path_exact_runner_manifest_v1",
+  "status": "EXACT_SNAPSHOT_EVIDENCE_GENERATED_NOT_CLASSIFIED",
+  "tester": {
+    "bars": 282644,
+    "build": 5833,
+    "cloud_agents": false,
+    "from_date": "2022.07.01",
+    "history_quality": "98%",
+    "metaeditor_path": "C:\\MT5A1M5MomentumBacktest\\MetaEditor64.exe",
+    "metaeditor_sha256": "2c0c8e9e5c1239e30e8a908d9205cdb01b9cdfcf876752e43bd7a755cce58ad3",
+    "model": "every_tick",
+    "remote_agents": false,
+    "terminal_path": "C:\\MT5A1M5MomentumBacktest\\terminal64.exe",
+    "terminal_sha256": "a36f4bac0fdc2c53cd75bdf0e32e627660dd8d9c1eb1e9f3834acfbce93df165",
+    "ticks": 204204660,
+    "to_date": "2026.06.30"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_CENSUS_PREREG_2026_07_12.md": {
+      "sha256": "a5f10f756faddc8d20a91ba668f03c0ccc43e1d6e253693b256148b296898fa3",
+      "size_bytes": 13157
+    },
+    "docs/A1_XAU_R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1_RULE_LOCK.json": {
+      "sha256": "456b3a1d153110cf55906d1b4ab82c18cf65d733fcdfe8498f0f768ef06a8181",
+      "size_bytes": 11072
+    },
+    "docs/A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json": {
+      "sha256": "f796c281b3539772bab7d7e0fc3af8ee20f69e4512fadda96c95e2673fc5bd1b",
+      "size_bytes": 5654
+    }
+  },
+  "authority": {
+    "amendment_review": "docs/A1_XAU_R6_C1_LOCK_AUDIT_D5134057_2026_07_12.md",
+    "amendment_review_sha256": "a40a05050f81c834ff63181a1835efdf251ca73980c1974a11696c831365cacf",
+    "audited_c1_commit": "d51340574d90a39fe0032e54e4a8252370c19058",
+    "c1a_review": "docs/A1_XAU_R6_C1A_REVIEW_04C7621E_2026_07_12.md",
+    "c1a_review_sha256": "e0c28e979f4a1e6f27940eacf0b05ab148d00a01287f37f65c48c8720dbf8b04",
+    "reviewed_c1a_commit": "04c7621e484193bc4c9c8ee74f634be436e9e2a2",
+    "independent_review": "docs/A1_XAU_H4_RULE_CLEAN_RERUN_V2_INDEPENDENT_REVIEW_51D7191B_2026_07_12.md",
+    "independent_review_sha256": "6f3b9e6ba530b2f942a50142f66241cd3743e9f46eae9b692c88b049baa13876",
+    "reviewed_commit": "51d7191b050697eb9854c25b092ee5f3c11fad67"
+  },
+  "boundary": {
+    "broker_action_authorized": false,
+    "census_output_authorized_in_this_commit": false,
+    "detector_code_authorized_in_this_commit": false,
+    "h4_or_portfolio_join_authorized": false,
+    "mt5_execution_authorized": false,
+    "pnl_authorized": false,
+    "phase": "R6-C1A.1_MACHINE_LOCK_RECONCILIATION_ONLY"
+  },
+  "experiment": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_r6_census_lock_manifest_v1"
+}

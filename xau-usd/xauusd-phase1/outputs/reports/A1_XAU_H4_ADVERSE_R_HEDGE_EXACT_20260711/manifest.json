@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.json": {
+      "sha256": "833f8e269f6d4c40fc4f8b9683dbaff8a1ec0e70a277567c77468608363f2599",
+      "size_bytes": 46886
+    },
+    "A1_XAU_H4_ADVERSE_R_HEDGE_EXACT_20260711.md": {
+      "sha256": "0ad0bc72482f4ef6b123447a0415a4e3a1dfe77a69fbf4af6e6eb701ace05dd7",
+      "size_bytes": 486
+    },
+    "compiled/A1XauH4AdverseRHedgeV1.ex5": {
+      "sha256": "7ebe431caf7a28db77b43bc25d9e8216ca5eadc1b970fb2cd24fdf6701669da3",
+      "size_bytes": 189420
+    },
+    "compiled/A1XauH4AdverseRHedgeV1.mq5": {
+      "sha256": "f669e6da3721406b5228effe14971ee533500f07080921950d813ffcc34cb067",
+      "size_bytes": 178470
+    },
+    "compiled/compile_A1_XAU_H4_ADVERSE_R_HEDGE.log": {
+      "sha256": "fe63101a829e26929bcc88f82e60905eccb1ec774701ce2ead1bd7a004b37f7a",
+      "size_bytes": 6930
+    },
+    "compiled/source_manifest.json": {
+      "sha256": "5dfca0a98badce801d9e5cbf0c519dd62c3cfcfed40a587d61dcd9b1742fd1b1",
+      "size_bytes": 713
+    },
+    "runs/five_year/A1_XAU_H4_ADVERSE_R_HEDGE_FIVE_YEAR.htm": {
+      "sha256": "215fa7894fc37d07298e2d43b7d922dd6a517b8d583df9dd7caa5177607594f0",
+      "size_bytes": 655564
+    },
+    "runs/five_year/a1_xau_h4_adverse_r_hedge_five_year_deals_with_fee.csv": {
+      "sha256": "af996aaeebd170057141cc49000d56faa994ff29cc54e667358c7b4ee3196bea",
+      "size_bytes": 103380
+    },
+    "runs/five_year/a1_xau_h4_adverse_r_hedge_five_year_management.csv": {
+      "sha256": "3721a56ada8830bf8b2d025dae4274c0d0186ee38a2042205aefac78cf30fc34",
+      "size_bytes": 54472
+    },
+    "runs/five_year/a1_xau_h4_adverse_r_hedge_five_year_orders.csv": {
+      "sha256": "cb8493c1e3be4886e6aabccb281b739154b0b6dbb0c6221b9ead0f15abdb0345",
+      "size_bytes": 177925
+    },
+    "runs/five_year/a1_xau_h4_adverse_r_hedge_five_year_signals.csv": {
+      "sha256": "2c96f1d96581dbd8ee4efc6ab59c0a3fa19974def6cad107804f02aec1cd46c3",
+      "size_bytes": 1993160
+    },
+    "runs/five_year/a1_xau_h4_adverse_r_hedge_five_year_startup.csv": {
+      "sha256": "0d10f3cd12adcf031ef8c9718d300aeeafc660e557798b73577ba8ed97a3ba0b",
+      "size_bytes": 205
+    },
+    "runs/five_year/tester.ini": {
+      "sha256": "9317160c3c613375b2048592f00ec57ec2ece93e4bacfd2aa71676ce898f29e4",
+      "size_bytes": 5600
+    },
+    "runs/ten_year/A1_XAU_H4_ADVERSE_R_HEDGE_TEN_YEAR.htm": {
+      "sha256": "8e1ac95c02326cdcd4ed395e5445c5114e007b05b17384026cf91281d9df7042",
+      "size_bytes": 1194904
+    },
+    "runs/ten_year/a1_xau_h4_adverse_r_hedge_ten_year_deals_with_fee.csv": {
+      "sha256": "85c6e9fdc2deb0bc888ce65f10bb27f029cdba784bd2079afa68753c6479cbc2",
+      "size_bytes": 201814
+    },
+    "runs/ten_year/a1_xau_h4_adverse_r_hedge_ten_year_management.csv": {
+      "sha256": "62852aafa3570e025d9c7b00ef97f97be4c37b6548539dbf618965f0967e5b6c",
+      "size_bytes": 105393
+    },
+    "runs/ten_year/a1_xau_h4_adverse_r_hedge_ten_year_orders.csv": {
+      "sha256": "63f051ff96bfcc07867bb73a5bb33cf37db0c7fc96e67b3f31c0a8a515cbc748",
+      "size_bytes": 368811
+    },
+    "runs/ten_year/a1_xau_h4_adverse_r_hedge_ten_year_signals.csv": {
+      "sha256": "dc5815927c4a5d06771c637bdd411fc13b4758a2698135ec99b1161c9b9236e3",
+      "size_bytes": 3969547
+    },
+    "runs/ten_year/a1_xau_h4_adverse_r_hedge_ten_year_startup.csv": {
+      "sha256": "345db73f5d0aa4b072e4fc74b296261b0a2360893df706758f261b0bcf7aa01c",
+      "size_bytes": 204
+    },
+    "runs/ten_year/tester.ini": {
+      "sha256": "74da91ad5d7b85be4fd36c32b8c9b5f59c6043ab31787f9174c17f4eafbb2ea7",
+      "size_bytes": 5593
+    }
+  },
+  "status": "H4_ADVERSE_R_HEDGE_FAILED"
+}

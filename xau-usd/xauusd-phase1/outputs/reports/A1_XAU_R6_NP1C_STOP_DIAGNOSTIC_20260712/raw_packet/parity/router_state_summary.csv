@@ -1,0 +1,3 @@
+run_id,native_decision_rows,expected_h4_decisions,state_counts,state_exact_match_rate,data_availability_exact_match_rate,first_mismatch_timestamp,first_mismatch_field,mismatch_count_by_native_state,ema_max_absolute_difference,atr_max_absolute_difference,percentile_max_absolute_difference,compression_metric_max_absolute_difference
+,,,{},,,,,{},,,,
+,,,{},,,,,{},,,,

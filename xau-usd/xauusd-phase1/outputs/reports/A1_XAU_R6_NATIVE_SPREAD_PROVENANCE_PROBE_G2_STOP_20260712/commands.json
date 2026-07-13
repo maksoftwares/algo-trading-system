@@ -1,0 +1,26 @@
+[
+  {
+    "command": [
+      "C:\\MT5A1NP1SpreadProvenanceCleanG2\\MetaEditor64.exe",
+      "/compile:C:\\MT5A1NP1SpreadProvenanceCleanG2\\MQL5\\Experts\\A1XauR6NativeSpreadProvenanceProbe.mq5",
+      "/log:C:\\MT5A1NP1SpreadProvenanceCleanG2\\compile.log"
+    ],
+    "exit_code": 1,
+    "stderr_base64": "",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_base64": "",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "command": [
+      "C:\\MT5A1NP1SpreadProvenanceCleanG2\\terminal64.exe",
+      "/portable",
+      "/config:C:\\MT5A1NP1SpreadProvenanceCleanG2\\Config\\np1_g2_warmup.ini"
+    ],
+    "exit_code": 3294954943,
+    "stderr_base64": "",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_base64": "",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "artifacts": {
+    "A1_XAU_R5_PRE_DOWNTREND_BREAK_RESEARCH_20260711.json": {
+      "bytes": 2888,
+      "sha256": "16d98fba92b016542c701880035e0e82d8fdddb6cf8ad55d2f90ae3f60e17180"
+    },
+    "A1_XAU_R5_PRE_DOWNTREND_BREAK_RESEARCH_20260711.md": {
+      "bytes": 1222,
+      "sha256": "add880dc7bf9976fe728739393284bad4a152a19815552810ed90692a841182a"
+    },
+    "A1_XAU_R5_PRE_DOWNTREND_BREAK_RESEARCH_20260711_ELIGIBLE_H4_OVERLAP.csv": {
+      "bytes": 41227,
+      "sha256": "ee8f8550d302b56aa28ec81934e6b766a8939c38ae44fc572b30ac7de9a36522"
+    },
+    "inputs/r2_impulse_retest_q55_orders.tsv": {
+      "bytes": 466109,
+      "sha256": "c147fe0977900daa7d0caeff7e4af81925468b4250775311ea43fac22a1eb8ad"
+    }
+  },
+  "schema_version": "a1_xau_r5_pre_downtrend_opportunity_v1"
+}

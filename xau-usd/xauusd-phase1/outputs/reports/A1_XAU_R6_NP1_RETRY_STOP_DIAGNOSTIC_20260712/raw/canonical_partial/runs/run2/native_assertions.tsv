@@ -1,0 +1,49 @@
+assertion_id	passed	observed	expected	detail
+environment_pass	true	true	true	locked account/server/build/symbol/period
+environment_mql_tester	true	true	true	
+environment_symbol	true	XAUUSD	XAUUSD	
+environment_period	true	PERIOD_M5	PERIOD_M5	
+environment_account_login	true	1025742	1025742	
+environment_server	true	Capital.ComMena-Demo	Capital.ComMena-Demo	
+environment_company	true	Capital Com Mena Securities Trading L.L.C	Capital Com Mena Securities Trading L.L.C	
+environment_currency	true	USD	USD	
+environment_leverage	true	50	50	
+environment_terminal_build	true	5833	5833	
+source_static_safety_pass	true	true	true	compile-time contract
+source_equivalence_pass	true	true	true	9e7b893d4af9d44540117cff2ac0e782b1d535d242f40f2ff61a8156ff5382c1
+effective_inputs_pass	true	true	true	fixed constants
+effective_input_InpRunId	true	run2	run2	
+effective_input_InpRouterRowsFileName	true	np1_run2_native_router_rows.tsv	np1_run2_native_router_rows.tsv	
+effective_input_InpH1BarsFileName	true	np1_run2_native_h1_bars.tsv	np1_run2_native_h1_bars.tsv	
+effective_input_InpH4BarsFileName	true	np1_run2_native_h4_bars.tsv	np1_run2_native_h4_bars.tsv	
+effective_input_InpD1BarsFileName	true	np1_run2_native_d1_bars.tsv	np1_run2_native_d1_bars.tsv	
+effective_input_InpContractFileName	true	np1_run2_native_contract.tsv	np1_run2_native_contract.tsv	
+effective_input_InpOrderCalcProfitFileName	true	np1_run2_native_ordercalcprofit.tsv	np1_run2_native_ordercalcprofit.tsv	
+effective_input_InpAssertionsFileName	true	np1_run2_native_assertions.tsv	np1_run2_native_assertions.tsv	
+effective_input_InpOrderZeroFileName	true	np1_run2_order.zero	np1_run2_order.zero	
+effective_input_InpDealZeroFileName	true	np1_run2_deal.zero	np1_run2_deal.zero	
+fixed_constant_InpTargetSymbol	true	XAUUSD	XAUUSD	
+fixed_constant_InpAtrPeriod	true	14	14	
+fixed_constant_InpRegimeFastEmaPeriod	true	20	20	
+fixed_constant_InpRegimeSlowEmaPeriod	true	50	50	
+fixed_constant_InpRegimeSlopeLagBars	true	5	5	
+fixed_constant_InpRegimePersistenceD1Bars	true	2	2	
+fixed_constant_InpRegimeRequireH4Confirm	true	true	true	
+fixed_constant_InpRegimeShockH1RangeAtrMultiple	true	3	3	
+fixed_constant_InpRegimeShockD1AtrLookback	true	60	60	
+fixed_constant_InpRegimeShockD1AtrPercentileMin	true	95	95	
+fixed_constant_InpRegimeCompressionBoxDays	true	5	5	
+fixed_constant_InpRegimeCompressionD1AtrPercentileMax	true	30	30	
+fixed_constant_InpRegimeCompressionRangeMedianMax	true	1	1	
+router_rows_monotonic	true	true	true	emitted on new H4 only
+contract_snapshot_complete	true	true	true	
+ordercalcprofit_all_success	true	true	true	
+report_zero_trades	true	0	0	verified again from report
+report_zero_deals	true	0	0	verified again from report
+order_zero_bytes	true	0	0	
+deal_zero_bytes	true	0	0	
+open_positions_zero	true	0	0	
+pending_orders_zero	true	0	0	
+bar_exports_monotonic	true	true	true	native CopyRates at test completion
+open_positions_zero	true	0	0	OnDeinit
+pending_orders_zero	true	0	0	OnDeinit

@@ -1,0 +1,38 @@
+{
+  "schema_version": "a1_xau_r6_ordercalcprofit_parity_v1",
+  "native_contract_source": {
+    "path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_startup.csv",
+    "sha256": "be9290169183a6ac9ba3c2ea99541b7fd6295d264ef2b9b54c54b36abd45a174"
+  },
+  "native_order_source": {
+    "path": "outputs/reports/A1_XAU_H4_RULE_CLEAN_EFFECTIVE_INPUT_RERUN_V2_20260712/runs/rule_clean_common_risk/ten_year/a1_xau_h4_episode_repair_rule_clean_common_risk_ten_year_orders.csv",
+    "sha256": "e85b750df6d0ae72f9e4c16561fa69ddc4490af966c146603fd9ad77c93bf7c3"
+  },
+  "contract": {
+    "account_currency": "USD",
+    "account_leverage": 50,
+    "margin_mode": 2,
+    "server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "point": 0.01,
+    "digits": 2,
+    "tick_size": 0.01,
+    "tick_value": 1.0,
+    "tick_value_loss": 1.0,
+    "volume_min": 0.01,
+    "volume_step": 0.01,
+    "volume_max": 1000.0,
+    "contract_size": 100.0,
+    "stops_level": 0,
+    "freeze_level": 0
+  },
+  "native_order_anchor": {"evidence_class": "NATIVE_ORDER_ANCHOR", "entry": 1829.33, "stop": 1804.83, "volume": 0.01, "loss_magnitude": 24.50, "timestamp_broker": "2021.09.03 16:00:00"},
+  "boundary_replay_cases": [
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2002.49, "captured_loss": 2.49},
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2002.50, "captured_loss": 2.50},
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2002.51, "captured_loss": 2.51},
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2024.99, "captured_loss": 24.99},
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2025.00, "captured_loss": 25.00},
+    {"evidence_class": "DERIVED_FROM_NATIVE_LINEAR_CONTRACT", "entry_bid": 2000.0, "risk_price": 2025.01, "captured_loss": 25.01}
+  ]
+}

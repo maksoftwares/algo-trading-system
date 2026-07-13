@@ -1,0 +1,2 @@
+timestamp_broker	run_id	server	account	symbol	magic	demo_trading	broker_action	status
+2016.07.01 00:00:00	A1_XAU_H4_EPISODE_REPAIR_STRUCTURAL_PARITY_TEN_YEAR	Capital.ComMena-Demo	1025742	XAUUSD	932200	true	true	INIT_OK

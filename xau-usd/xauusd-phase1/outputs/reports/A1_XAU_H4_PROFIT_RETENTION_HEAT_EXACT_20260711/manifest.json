@@ -1,0 +1,85 @@
+{
+  "artifacts": {
+    "A1_XAU_H4_PROFIT_RETENTION_HEAT_EXACT_20260711.json": {
+      "sha256": "a7347131f9c5b88ffce9abdc09ab5da8a4cd179193bc1990205f88cc53a35869",
+      "size_bytes": 44769
+    },
+    "A1_XAU_H4_PROFIT_RETENTION_HEAT_EXACT_20260711.md": {
+      "sha256": "109cf5265bdbc0e1de697f890bc2f461bc8a38ca386a8231d0ef0d31e5ce5314",
+      "size_bytes": 563
+    },
+    "compiled/A1XauH4ProfitRetentionHeatV1.ex5": {
+      "sha256": "29f1d6c3f510c28fdf11b1ad309d302c2810573f4b919f70f49dbfc9a16b45f2",
+      "size_bytes": 184856
+    },
+    "compiled/A1XauH4ProfitRetentionHeatV1.mq5": {
+      "sha256": "b1f1e5c1df0b38264259b13c10cf0c8a686b0c480bfd5169b720eaf9b683da32",
+      "size_bytes": 175448
+    },
+    "compiled/compile_A1_XAU_H4_PROFIT_RETENTION_HEAT.log": {
+      "sha256": "a87bcd444d31fc2ed0707de3a4973bf15ca51dc3b4ebdf95b8b0dff3e134d096",
+      "size_bytes": 6966
+    },
+    "compiled/source_manifest.json": {
+      "sha256": "283b14d3fc2fcdd10095e29904698db3d30233104de88ef02862efcafb1a0649",
+      "size_bytes": 748
+    },
+    "runs/five_year/A1_XAU_H4_PROFIT_RETENTION_HEAT_6PCT_FIVE_YEAR.htm": {
+      "sha256": "16bdcab3267701864f951f255bcfe6dda15c67517c53f8235cc12899db130728",
+      "size_bytes": 183728
+    },
+    "runs/five_year/a1_xau_h4_profit_retention_heat_6pct_five_year_deals_with_fee.csv": {
+      "sha256": "3cd1c183116baadf3825d2553b7986517b26faccd6c18c293a23e4c2bb7e53a7",
+      "size_bytes": 17608
+    },
+    "runs/five_year/a1_xau_h4_profit_retention_heat_6pct_five_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/five_year/a1_xau_h4_profit_retention_heat_6pct_five_year_orders.csv": {
+      "sha256": "71d790db2e53618555210a7dadea9ad33138c749a1416855d07904f9420aedfb",
+      "size_bytes": 198104
+    },
+    "runs/five_year/a1_xau_h4_profit_retention_heat_6pct_five_year_signals.csv": {
+      "sha256": "bab150ec5fe7407c65768dd224f73a3e7a5063593547efeb65723c84014a914b",
+      "size_bytes": 2080841
+    },
+    "runs/five_year/a1_xau_h4_profit_retention_heat_6pct_five_year_startup.csv": {
+      "sha256": "0b8169c29e0c95ebcafdd3f106043b84d03d4e21988b313da56b34e59ba9eb81",
+      "size_bytes": 216
+    },
+    "runs/five_year/tester.ini": {
+      "sha256": "2475b0f5ca3d587e1b059601ed0c9071b7705de4259a8e38fe53f4c685ef10ec",
+      "size_bytes": 5590
+    },
+    "runs/ten_year/A1_XAU_H4_PROFIT_RETENTION_HEAT_6PCT_TEN_YEAR.htm": {
+      "sha256": "f06672374da2cc19c4742cdb9d925ace58769aabd116853387cf8e137fbd0e75",
+      "size_bytes": 329204
+    },
+    "runs/ten_year/a1_xau_h4_profit_retention_heat_6pct_ten_year_deals_with_fee.csv": {
+      "sha256": "2e3ae5f407be215e1af3f6e113b4b6de57567c1ceee5c290a5c77302b21d6bc9",
+      "size_bytes": 45683
+    },
+    "runs/ten_year/a1_xau_h4_profit_retention_heat_6pct_ten_year_management.csv": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runs/ten_year/a1_xau_h4_profit_retention_heat_6pct_ten_year_orders.csv": {
+      "sha256": "8d05dd527d822edde33b7b80debb9a62e3ab785922c177b3788ff5cc064d9839",
+      "size_bytes": 414914
+    },
+    "runs/ten_year/a1_xau_h4_profit_retention_heat_6pct_ten_year_signals.csv": {
+      "sha256": "499fb265752979e91d7c9f7d21c75f41a72379d65bd6c98bf8c312a1fb55da9f",
+      "size_bytes": 4144777
+    },
+    "runs/ten_year/a1_xau_h4_profit_retention_heat_6pct_ten_year_startup.csv": {
+      "sha256": "7df21e6702c6fc8a85349f1ef4d68f05b536af7460d672837640acc30bb6e0e1",
+      "size_bytes": 215
+    },
+    "runs/ten_year/tester.ini": {
+      "sha256": "c7e9841339eda0ee882a92a9a6e2bc725fbac772199c9dfcf38db8fcad7073c1",
+      "size_bytes": 5583
+    }
+  },
+  "status": "H4_PROFIT_RETENTION_HEAT_GUARD_FAILED"
+}

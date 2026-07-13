@@ -1,0 +1,63 @@
+{
+  "entries": [
+    {
+      "kind": "file",
+      "mtime_ns": 1783913633830345600,
+      "relative_path": ".a1_xau_np1_spread_probe_g2_only",
+      "sha256": "fbc9a434339e1b7b6e28273f026fa34d7c78188a7164d87b46a650e286e337b7",
+      "size_bytes": 25
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Config"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783877039937406200,
+      "relative_path": "Config/accounts.dat",
+      "sha256": "d9b8e87ef41d4a498a34bd7ae2b37b2fea769c820311fdeef0488e0387976b8a",
+      "size_bytes": 15935
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1783876901267096000,
+      "relative_path": "Config/servers.dat",
+      "sha256": "e2cda2f1548c92b168894d74f0959957839a89d8b992be1afc3b3062dfaefb66",
+      "size_bytes": 326364
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207179434413200,
+      "relative_path": "MetaEditor64.exe",
+      "sha256": "2c0c8e9e5c1239e30e8a908d9205cdb01b9cdfcf876752e43bd7a755cce58ad3",
+      "size_bytes": 109408696
+    },
+    {
+      "kind": "directory",
+      "relative_path": "Reports"
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1774883261796030100,
+      "relative_path": "Terminal.ico",
+      "sha256": "f4e57d6edeecacf7ef202ed3e8ae5937554fc26b7a49f30acdef2cfc0240fc36",
+      "size_bytes": 410598
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207180616340400,
+      "relative_path": "metatester64.exe",
+      "sha256": "d1e991d84243ec913db8c82505ab69eab48babcb2fa6826ab3871b3360abb646",
+      "size_bytes": 21256304
+    },
+    {
+      "kind": "file",
+      "mtime_ns": 1777207179099529300,
+      "relative_path": "terminal64.exe",
+      "sha256": "a36f4bac0fdc2c53cd75bdf0e32e627660dd8d9c1eb1e9f3834acfbce93df165",
+      "size_bytes": 109817504
+    }
+  ],
+  "exists": true,
+  "root": "C:\\MT5A1NP1SpreadProvenanceCleanG2"
+}

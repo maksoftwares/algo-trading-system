@@ -1,0 +1,464 @@
+from __future__ import annotations
+
+import sys
+import json
+import hashlib
+import dataclasses
+import csv
+from datetime import datetime, timedelta
+from pathlib import Path
+
+import pytest
+
+SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+import build_a1_xau_r6_distribution_break_failed_reclaim_census as R  # noqa: E402
+import validate_a1_xau_r6_outcome_blind_census as V  # noqa: E402
+
+
+def bar(time: datetime, open_: float, high: float, low: float, close: float) -> R.Bar:
+    return R.Bar(time, open_, high, low, close)
+
+
+def contract(**overrides: object) -> R.Contract:
+    values = dict(
+        account_currency="USD", account_leverage=50, margin_mode=2,
+        server="Capital.ComMena-Demo", symbol="XAUUSD", point=0.01, digits=2,
+        tick_size=0.01, tick_value=1.0, tick_value_loss=1.0,
+        volume_min=0.01, volume_step=0.01, volume_max=1000.0,
+        contract_size=100.0, stops_level=0, freeze_level=0,
+    )
+    values.update(overrides)
+    return R.Contract(**values)
+
+
+def test_wilder_atr_uses_seed_then_rma() -> None:
+    start = datetime(2020, 1, 1)
+    bars = [bar(start + timedelta(hours=i), 100, 101, 100, 100.5) for i in range(17)]
+    atr = R.wilder_atr(bars)
+    assert atr[13] is None
+    assert atr[14] == pytest.approx(1.0)
+    assert atr[16] == pytest.approx(1.0)
+
+
+def test_bar_validation_rejects_duplicate_and_invalid_ohlc() -> None:
+    now = datetime(2020, 1, 1)
+    with pytest.raises(ValueError, match="timestamps"):
+        R.validate_bars([bar(now, 1, 2, 1, 1.5), bar(now, 1, 2, 1, 1.5)])
+    with pytest.raises(ValueError, match="range"):
+        R.validate_bars([bar(now, 1, 1.1, 1.05, 1.2)])
+
+
+def test_router_unknown_on_unavailable_history() -> None:
+    now = datetime(2020, 1, 1)
+    bars = [bar(now + timedelta(hours=i), 100, 101, 100, 100.5) for i in range(20)]
+    assert R.classify_router(h1=bars, h4=bars, d1=bars, decision=now + timedelta(days=3)) == "UNKNOWN"
+
+
+def native_bars(decision: datetime, count: int, spacing: timedelta) -> list[R.Bar]:
+    start = decision - spacing * (count - 1)
+    return [bar(start + spacing * i, 100, 102, 100, 101) for i in range(count)]
+
+
+def router_market() -> tuple[datetime, list[R.Bar], list[R.Bar], list[R.Bar]]:
+    decision = datetime(2024, 1, 1)
+    return (
+        decision,
+        native_bars(decision, 30, timedelta(hours=1)),
+        native_bars(decision, 70, timedelta(hours=4)),
+        native_bars(decision, 277, timedelta(days=1)),
+    )
+
+
+ROUTER_FIXTURE = json.loads(
+    (SCRIPTS.parent / "tests" / "fixtures" / "A1_XAU_R6_ROUTER_V1_NATIVE_PARITY_V1.json").read_text()
+)
+ROUTER_CASES = {case["id"]: case for case in ROUTER_FIXTURE["cases"]}
+
+
+def test_native_router_state_rows_are_parsed_from_pinned_order_evidence() -> None:
+    evidence = ROUTER_FIXTURE["native_state_evidence"]
+    path = SCRIPTS.parent / evidence["source_path"]
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == evidence["source_sha256"]
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    for state, expected in evidence["states"].items():
+        row = next(value for value in rows if value["timestamp_broker"] == expected["timestamp_broker"])
+        assert row["action"] == expected["native_action"]
+        assert row["reason"] == expected["native_reason"]
+        assert state == "UPTREND" or row["reason"].endswith("state_" + state.lower())
+    indicator_evidence = ROUTER_FIXTURE["native_indicator_state_rows"]
+    indicator_path = SCRIPTS.parent / indicator_evidence["source_path"]
+    assert hashlib.sha256(indicator_path.read_bytes()).hexdigest() == indicator_evidence["source_sha256"]
+    with indicator_path.open(encoding="utf-8", newline="") as handle:
+        signals = list(csv.DictReader(handle, delimiter="\t"))
+    for expected in indicator_evidence["rows"]:
+        row = next(value for value in signals if value["timestamp_broker"] == expected["timestamp_broker"])
+        assert float(row["atr"]) == expected["native_h4_signal_atr"]
+
+
+def mt5_router_fixture(decision: datetime, count: int, spacing: timedelta, state: str, timeframe: str) -> list[R.Bar]:
+    start = decision - spacing * (count - 1)
+    sign = 1 if state == "UPTREND" else -1 if state == "DOWNTREND" else 0
+    output = []
+    for index in range(count):
+        center = 500 + sign * 0.35 * index
+        if sign == 0:
+            center = 500 + (0.3 if index % 2 else -0.3)
+        width = 6.0 if index % 11 == 0 else 2.0
+        if state in {"COMPRESSION", "CHOP"} and index >= count - 30:
+            width = 1.0
+        if state == "CHOP" and timeframe == "d1" and count - 6 <= index <= count - 2:
+            center = 500 + 4 * (index - (count - 6))
+        open_ = center - 0.1 * sign
+        close = center + 0.1 * sign if sign else center
+        output.append(bar(start + spacing * index, open_, center + width / 2, center - width / 2, close))
+    return output
+
+
+@pytest.mark.parametrize("case_id", sorted(ROUTER_CASES))
+def test_hash_addressed_mt5_router_numerical_parity_without_monkeypatch(case_id: str) -> None:
+    case = ROUTER_CASES[case_id]
+    decision = datetime(2024, 1, 1)
+    state = case["base_state"]
+    h1 = mt5_router_fixture(decision, 40, timedelta(hours=1), state, "h1")
+    h4 = mt5_router_fixture(decision, 80, timedelta(hours=4), state, "h4")
+    d1 = mt5_router_fixture(decision, case.get("d1_bar_count", 290), timedelta(days=1), state, "d1")
+    if case.get("mutation") == "completed_h1_range_20":
+        index = R._last_completed_index(h1, decision)
+        source = h1[index]
+        h1[index] = bar(source.time, source.open, source.open + 10, source.open - 10, source.close)
+    if case.get("mutation") == "completed_d1_range_20":
+        index = R._last_completed_index(d1, decision)
+        source = d1[index]
+        d1[index] = bar(source.time, source.open, source.open + 10, source.open - 10, source.close)
+    payload = {
+        timeframe: [(value.time.isoformat(), value.open, value.high, value.low, value.close) for value in bars]
+        for timeframe, bars in (("h1", h1), ("h4", h4), ("d1", d1))
+    }
+    assert hashlib.sha256(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()).hexdigest() == case["dataset_sha256"]
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == case["expected_state"]
+    if case["expected_state"] == "UNKNOWN":
+        return
+    h1_index, d1_index = R._last_completed_index(h1, decision), R._last_completed_index(d1, decision)
+    h1_values, d1_values = R.wilder_atr(h1), R.wilder_atr(d1)
+    assert h1_values[h1_index] == pytest.approx(case["h1_atr14"])
+    assert d1_values[d1_index] == pytest.approx(case["d1_atr14"])
+    assert R.percentile_rank([value for value in d1_values[d1_index - 59 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(case["d1_percentile_60"])
+    assert R.percentile_rank([value for value in d1_values[d1_index - 251 : d1_index + 1] if value], d1_values[d1_index]) == pytest.approx(case["d1_percentile_252"])
+    if "d1_ema20" in case:
+        closes = [value.close for value in d1]
+        assert R.ema(closes, 20)[d1_index] == pytest.approx(case["d1_ema20"])
+        assert R.ema(closes, 50)[d1_index] == pytest.approx(case["d1_ema50"])
+
+
+def test_router_exact_availability_boundary_and_all_states(monkeypatch: pytest.MonkeyPatch) -> None:
+    decision, h1, h4, d1 = router_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "percentile_rank", lambda values, current: 50.0)
+    monkeypatch.setattr(R, "_trend_stack", lambda bars, index, up: False)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1[:-1], decision=decision) == "UNKNOWN"
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "CHOP"
+    h1[-2] = bar(h1[-2].time, 100, 104, 100, 101)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "SHOCK"
+    h1[-2] = bar(h1[-2].time, 100, 102, 100, 101)
+    monkeypatch.setattr(R, "_trend_stack", lambda bars, index, up: up)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "UPTREND"
+    monkeypatch.setattr(R, "_trend_stack", lambda bars, index, up: not up)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "DOWNTREND"
+
+
+def test_router_compression_uses_five_day_box_width_not_mean_daily_range(monkeypatch: pytest.MonkeyPatch) -> None:
+    decision, h1, h4, d1 = router_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "percentile_rank", lambda values, current: 0.0)
+    monkeypatch.setattr(R, "_trend_stack", lambda bars, index, up: False)
+    for offset, index in enumerate(range(len(d1) - 6, len(d1) - 1)):
+        low = 100 + 25 * offset
+        d1[index] = bar(d1[index].time, low, low + 2, low, low + 1)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "CHOP"
+    for index in range(len(d1) - 6, len(d1) - 1):
+        d1[index] = bar(d1[index].time, 100, 102, 100, 101)
+    assert R.classify_router(h1=h1, h4=h4, d1=d1, decision=decision) == "COMPRESSION"
+
+
+def fixture_market() -> tuple[list[R.Bar], list[R.Bar], list[R.Bar], list[R.Tick]]:
+    start = datetime(2022, 1, 1)
+    h4 = [bar(start + timedelta(hours=4 * i), 100, 100.6, 99.6, 100.2) for i in range(16)]
+    impulse = [
+        bar(start + timedelta(hours=4 * (2 + i)), 100 + 0.5 * i, 100.7 + 0.5 * i, 99.9 + 0.5 * i, 100.6 + 0.5 * i)
+        for i in range(6)
+    ]
+    distribution = [
+        bar(start + timedelta(hours=4 * (8 + i)), 103.5, 104.5, 102.5, 103.5)
+        for i in range(6)
+    ]
+    h4[2:8], h4[8:14] = impulse, distribution
+    h4[14] = bar(start + timedelta(hours=56), 103.0, 103.2, 102.1, 102.2)
+    h4[15] = bar(start + timedelta(hours=60), 102.2, 102.8, 102.0, 102.4)
+    h1 = [bar(start + timedelta(hours=i), 101, 101.4, 100.6, 101) for i in range(80)]
+    h1[60] = bar(start + timedelta(hours=60), 102.4, 102.45, 102.1, 102.2)
+    h1[61] = bar(start + timedelta(hours=61), 102.2, 102.4, 102.0, 102.1)
+    d1 = [bar(start + timedelta(days=i), 100, 101, 99, 100.5) for i in range(2)]
+    ticks = [R.Tick(start + timedelta(hours=61), 1000, 102.10, 102.11, source_h1_bar_time=start + timedelta(hours=61))]
+    return h4, h1, d1, ticks
+
+
+def test_exact_shift_detector_emits_one_raw_row(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(
+        h4=h4, h1=h1, d1=d1, ticks=ticks,
+        contract=contract(),
+    )
+    assert len(result.rows) == 1
+    row = result.rows[0]
+    assert row["impulse_start_h4_time"].endswith("08:00:00")
+    assert row["box_start_h4_time"].endswith("08:00:00")  # day 2, shift 7
+    assert row["breakdown_h4_time"].endswith("08:00:00")   # day 3, shift 1
+    assert row["decision_time"].endswith("13:00:00")
+    assert row["availability_status"] == "RAW_OPPORTUNITY_AVAILABLE"
+    assert result.funnel["RAW_OPPORTUNITY_AVAILABLE"] == 1
+    context = result.contexts[str(row["candidate_id"])]
+    schema = json.loads((SCRIPTS.parent / "docs" / "A1_XAU_R6_OUTCOME_BLIND_CENSUS_SCHEMA_V1.json").read_text())
+    monkeypatch.setattr(V, "classify_router", lambda **_: "CHOP")
+    V.validate_row(dict(row), schema, context)
+    V.validate_detection(result, schema)
+    raw_anchor = next(anchor for anchor in result.anchors if anchor.status == "RAW_OPPORTUNITY_AVAILABLE")
+    assert raw_anchor.candidate_id == row["candidate_id"]
+    serialized = R.serialize_detection(result)
+    assert serialized == R.serialize_detection(result)
+    assert "contexts" not in json.loads(serialized)
+    provenance = {
+        "generator_commit": "a" * 40, "generator_tree": "b" * 40,
+        "input_manifest_sha256": "c" * 64, "rule_manifest_sha256": "d" * 64,
+    }
+    package = R.serialize_evidence_package(result, provenance)
+    assert set(package) == {
+        "A1_XAU_R6_OUTCOME_BLIND_DETECTION.json", "A1_XAU_R6_OUTCOME_BLIND_ROWS.csv",
+        "A1_XAU_R6_OUTCOME_BLIND_SUMMARY.md", "A1_XAU_R6_EVIDENCE_MANIFEST.json",
+    }
+    manifest = json.loads(package["A1_XAU_R6_EVIDENCE_MANIFEST.json"])
+    for name, metadata in manifest["artifacts"].items():
+        assert hashlib.sha256(package[name].encode()).hexdigest() == metadata["sha256"]
+    V.validate_funnel(result.funnel, result.rows, result.anchors, result.incidence)
+    bad = dict(row)
+    bad["breakdown_distance_atr"] = float(bad["breakdown_distance_atr"]) + 0.01
+    with pytest.raises(ValueError, match="formula"):
+        V.validate_row(bad, schema, context)
+    bad = dict(row)
+    bad["candidate_id"] = "not-a-hash"
+    with pytest.raises(Exception, match="pattern"):
+        V.validate_row(bad, schema, context)
+    closed_entry = dataclasses.replace(context.entry_tick, session_open=False)
+    closed_context = dataclasses.replace(context, entry_tick=closed_entry, causal_ticks=(closed_entry,))
+    with pytest.raises(ValueError, match="predicate|eligible"):
+        V.validate_row(dict(row), schema, closed_context)
+    monkeypatch.setattr(V, "classify_router", lambda **_: "DOWNTREND")
+    with pytest.raises(ValueError, match="router"):
+        V.validate_row(dict(row), schema, context)
+
+
+def test_first_reclaim_attempt_consumes_episode(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    first = h1[60]
+    h1[60] = bar(first.time, 102.2, 102.45, 102.1, 102.4)  # touches, but does not reject
+    h1[61] = bar(h1[61].time, 102.4, 102.45, 102.0, 102.1)  # later rejection is unavailable
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert not result.rows
+    assert result.funnel["FIRST_RECLAIM_NOT_REJECTED"] == 1
+
+
+def test_incomplete_horizon_and_unavailable_reclaim_atr_fail_closed(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    incomplete = R.detect(h4=h4, h1=h1[:64], d1=d1, ticks=ticks, contract=contract())
+    assert incomplete.funnel["DATA_UNAVAILABLE"] == 1
+    assert incomplete.funnel["NO_RECLAIM_WITHIN_SIX_H1"] == 0
+
+    def atr_with_missing(bars: list[R.Bar], period: int = 14) -> list[float | None]:
+        values: list[float | None] = [1.0] * len(bars)
+        if bars is h1:
+            values[60] = None
+        return values
+
+    monkeypatch.setattr(R, "wilder_atr", atr_with_missing)
+    missing = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert missing.funnel["DATA_UNAVAILABLE"] == 1
+    assert not missing.rows
+
+
+def test_complete_six_h1_decision_horizon_must_remain_inside_locked_interval(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    delta = datetime(2026, 6, 30, 16) - h4[14].time
+    h4 = [dataclasses.replace(value, time=value.time + delta) for value in h4]
+    h1 = [dataclasses.replace(value, time=value.time + delta) for value in h1]
+    d1 = [dataclasses.replace(value, time=value.time + delta) for value in d1]
+    ticks = [
+        dataclasses.replace(
+            value, time=value.time + delta,
+            source_h1_bar_time=value.source_h1_bar_time + delta if value.source_h1_bar_time else None,
+        )
+        for value in ticks
+    ]
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert not result.rows
+    assert result.funnel["DATA_UNAVAILABLE"] == 1
+
+
+def test_same_second_tick_ownership_and_monotonic_source_are_enforced(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    decision = h1[61].time
+    ambiguous = [R.Tick(decision, 1000, 102.10, 102.11)]
+    with pytest.raises(ValueError, match="explicit"):
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=ambiguous, contract=contract())
+    owned = [
+        R.Tick(decision, 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+        R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
+    ]
+    prefix = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned, contract=contract())
+    assert len(prefix.rows) == 1
+    for late_tick in (
+        R.Tick(decision, 1002, 102.10, 102.11, source_h1_bar_time=decision),
+        R.Tick(decision, 1002, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+    ):
+        extended = R.detect(h4=h4, h1=h1, d1=d1, ticks=owned + [late_tick], contract=contract())
+        assert extended.rows == prefix.rows
+        assert extended.anchors == prefix.anchors
+    closed_first = [
+        R.Tick(decision, 1000, 102.10, 102.11, session_open=False, source_h1_bar_time=decision),
+        R.Tick(decision, 1001, 102.10, 102.11, source_h1_bar_time=decision),
+    ]
+    assert R.detect(h4=h4, h1=h1, d1=d1, ticks=closed_first, contract=contract()).funnel["ENTRY_TICK_UNAVAILABLE"] == 1
+    # The one-time source index rejects invalid absolute ordering before detection.
+    with pytest.raises(ValueError, match="monotonic"):
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=list(reversed(owned)), contract=contract())
+    invalid_before_entry = [
+        R.Tick(decision - timedelta(seconds=2), 1001, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+        R.Tick(decision - timedelta(seconds=1), 1000, 102.10, 102.11, source_h1_bar_time=h1[60].time),
+        owned[1],
+    ]
+    with pytest.raises(ValueError, match="monotonic"):
+        R.detect(h4=h4, h1=h1, d1=d1, ticks=invalid_before_entry, contract=contract())
+
+
+def test_streaming_resolution_is_single_pass_and_context_is_bounded(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, _ = fixture_market()
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    structural = R.detect_structural_windows(h4=h4, h1=h1, d1=d1, contract=contract())
+    decision = structural.windows[0].decision_time
+
+    class SinglePass:
+        used = False
+
+        def __iter__(self):
+            if self.used:
+                raise AssertionError("tick stream iterated twice")
+            self.used = True
+            for index in range(10_000):
+                tick_time = decision - timedelta(seconds=10_000 - index)
+                yield R.Tick(tick_time, index, 100, 100.01, source_h1_bar_time=tick_time)
+            yield R.Tick(decision, 10_000, 102.10, 102.11, source_h1_bar_time=decision)
+
+    result = R.resolve_tick_stream(
+        structural, SinglePass(), stream_contract=R.TickStreamContract(10_001, 0, 10_000),
+    )
+    assert len(result.rows) == 1
+    context = result.contexts[str(result.rows[0]["candidate_id"])]
+    assert len(context.causal_ticks) == 1
+    gap_ticks = [
+        R.Tick(decision - timedelta(seconds=2), 10, 100, 100.01, source_h1_bar_time=decision - timedelta(hours=1)),
+        R.Tick(decision - timedelta(seconds=1), 12, 100, 100.01, source_h1_bar_time=decision - timedelta(hours=1)),
+    ]
+    with pytest.raises(ValueError, match="sequence gap"):
+        R.resolve_tick_stream(structural, iter(gap_ticks))
+
+
+def test_c3_market_payload_parser_is_deterministic_and_in_memory() -> None:
+    now = datetime(2024, 1, 1)
+    bar_row = {"time": now.isoformat(), "open": 100, "high": 101, "low": 99, "close": 100.5}
+    payload = json.dumps({
+        "h4": [bar_row], "h1": [bar_row], "d1": [bar_row],
+        "contract": dataclasses.asdict(contract()), "symbol": "XAUUSD",
+    }, sort_keys=True)
+    first = R.parse_c3_market_payload(payload)
+    second = R.parse_c3_market_payload(payload)
+    assert first == second
+    assert first["h4"] == (R.Bar(now, 100, 101, 99, 100.5),)
+    tick_line = json.dumps({
+        "time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01,
+        "session_open": True, "source_h1_bar_time": now.isoformat(),
+    })
+    assert list(R.iter_c3_ticks([tick_line]))[0].sequence == 1
+    with pytest.raises(ValueError, match="explicit"):
+        R.parse_c3_tick_line(json.dumps({"time": now.isoformat(), "sequence": 1, "bid": 100, "ask": 100.01}))
+    bad = json.loads(payload)
+    bad["pnl"] = 1
+    with pytest.raises(ValueError, match="keys"):
+        R.parse_c3_market_payload(json.dumps(bad))
+
+
+def test_native_weekend_gap_and_fifteen_minute_entry_expiry(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, _ = fixture_market()
+    for index in range(61, len(h1)):
+        source = h1[index]
+        h1[index] = bar(source.time + timedelta(days=2), source.open, source.high, source.low, source.close)
+    decision = h1[61].time
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    at_expiry = [R.Tick(decision + timedelta(minutes=15), 1000, 102.10, 102.11, source_h1_bar_time=decision)]
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=at_expiry, contract=contract())
+    assert result.rows[0]["decision_time"] == R.broker_time(decision)
+    too_late = [R.Tick(decision + timedelta(minutes=15, seconds=1), 1000, 102.10, 102.11, source_h1_bar_time=decision)]
+    no_entry = R.detect(h4=h4, h1=h1, d1=d1, ticks=too_late, contract=contract())
+    assert no_entry.funnel["ENTRY_TICK_UNAVAILABLE"] == 1
+    terminal = next(anchor for anchor in no_entry.anchors if anchor.status == "ENTRY_TICK_UNAVAILABLE")
+    assert (terminal.horizon_end, terminal.horizon_sequence) == (too_late[0].time, too_late[0].sequence)
+
+
+def test_suppression_releases_on_twelfth_completed_h4_and_reuses_release_bar(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    for index in range(16, 28):
+        h4.append(bar(h4[-1].time + timedelta(hours=4), 101, 101.5, 100.5, 101))
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert result.funnel["SUPPRESSION_ACTIVE"] == 11
+    assert next(anchor for anchor in result.anchors if anchor.anchor_time == h4[26].time).status != "SUPPRESSION_ACTIVE"
+
+
+def test_suppression_releases_on_box_mid_and_reuses_release_bar(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    h4[15] = bar(h4[15].time, 103.4, 104.0, 103.3, 103.6)
+    h4.append(bar(h4[-1].time + timedelta(hours=4), 103.6, 103.8, 103.2, 103.5))
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    result = R.detect(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    assert result.funnel["SUPPRESSION_ACTIVE"] == 0
+    assert next(anchor for anchor in result.anchors if anchor.anchor_time == h4[15].time).status != "SUPPRESSION_ACTIVE"
+
+
+def test_actual_detector_and_terminal_funnel_are_prefix_invariant(monkeypatch: pytest.MonkeyPatch) -> None:
+    h4, h1, d1, ticks = fixture_market()
+    extended_h4 = list(h4)
+    extended_h1 = list(h1)
+    for _ in range(6):
+        extended_h4.append(bar(extended_h4[-1].time + timedelta(hours=4), 101, 101.5, 100.5, 101))
+    for _ in range(12):
+        extended_h1.append(bar(extended_h1[-1].time + timedelta(hours=1), 101, 101.4, 100.6, 101))
+    monkeypatch.setattr(R, "wilder_atr", lambda bars, period=14: [1.0] * len(bars))
+    monkeypatch.setattr(R, "classify_router", lambda **_: "CHOP")
+    base = dict(h4=h4, h1=h1, d1=d1, ticks=ticks, contract=contract())
+    extended = dict(h4=extended_h4, h1=extended_h1, d1=d1, ticks=ticks, contract=contract())
+    V.validate_detector_prefix_invariance(
+        R.detect, base, extended, prefix_cutoff=R.PrefixCutoff(ticks[0].time, ticks[0].sequence),
+    )

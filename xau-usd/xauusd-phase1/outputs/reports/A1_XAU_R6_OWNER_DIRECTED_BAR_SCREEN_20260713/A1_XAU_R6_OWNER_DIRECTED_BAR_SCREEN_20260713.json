@@ -1,0 +1,92 @@
+{
+  "backtest": {
+    "deployment_risk_feasible_trades": 0,
+    "early_half_net_usd": 0,
+    "expectancy_r": 1.9999999999999964,
+    "july_june_pnl": {
+      "2024": 49.999999999999915
+    },
+    "late_half_net_usd": 49.999999999999915,
+    "losses": 0,
+    "max_closed_drawdown_pct": 0.0,
+    "max_closed_drawdown_usd": 0.0,
+    "max_h1_intrabar_drawdown_pct": 0.23857757122569995,
+    "max_h1_intrabar_drawdown_usd": 23.977045908182845,
+    "net_minimum_lot_usd": 20.039999999999964,
+    "net_reference_usd": 49.999999999999915,
+    "positive_july_june_buckets": 1,
+    "profit_factor": null,
+    "realized_win_loss": null,
+    "reference_risk_feasible_trades": 1,
+    "stress_net_reference_usd": 49.69999999999992,
+    "stress_profit_factor": null,
+    "top_10_winners_removed_net_usd": 0.0,
+    "top_3_winning_days_removed_net_usd": 0.0,
+    "trades": 1,
+    "win_rate_pct": 100.0,
+    "wins": 1
+  },
+  "capture_dir": "C:\\MT5A1M5MomentumBacktest\\np1_retry_compile_40e2b096\\np1_warmup_capture",
+  "data_end": "2026-06-30T23:00:00",
+  "data_start": "2015-06-01T00:00:00",
+  "entry_proxy": "native next-H1 open plus captured H1 spread",
+  "entry_proxy_rejected": 0,
+  "exit_ordering": "pessimistic stop-first when stop and target share one H1 bar",
+  "fixed_reference_risk_usd": 25.0,
+  "fixed_target_r": 2.0,
+  "funnel_before_entry_proxy": {
+    "BOX_REJECTED": 1417,
+    "BREAKDOWN_REJECTED": 405,
+    "DATA_UNAVAILABLE": 0,
+    "ENTRY_TICK_UNAVAILABLE": 0,
+    "FIRST_RECLAIM_NOT_REJECTED": 11,
+    "IMPULSE_REJECTED": 13721,
+    "NO_RECLAIM_WITHIN_SIX_H1": 3,
+    "RAW_OPPORTUNITY_AVAILABLE": 0,
+    "ROUTER_BLOCKED_COMPRESSION": 123,
+    "ROUTER_BLOCKED_DOWNTREND": 5,
+    "ROUTER_BLOCKED_SHOCK": 113,
+    "ROUTER_BLOCKED_UNKNOWN": 0,
+    "SUPPRESSION_ACTIVE": 143
+  },
+  "incidence": {
+    "deployment_risk": {
+      "early_half": 0,
+      "feasible_share": 0.0,
+      "july_june_buckets_with_events": 0,
+      "late_half": 0,
+      "opportunities": 0,
+      "passes": false
+    },
+    "raw": {
+      "best_contiguous_24_month_share": 1.0,
+      "early_half": 0,
+      "largest_july_june_bucket_share": 1.0,
+      "late_half": 1,
+      "opportunities": 1,
+      "passes": false,
+      "qualifying_july_june_buckets": 0
+    },
+    "reference_risk": {
+      "early_half": 0,
+      "july_june_buckets_with_events": 1,
+      "late_half": 1,
+      "opportunities": 1,
+      "passes": false
+    }
+  },
+  "limitations": [
+    "full native tick entry stream not present in preserved warmup capture",
+    "H1 OHLC path is used for SL/TP ordering",
+    "native MT5 report and floating-equity path remain required for promotion",
+    "all history through 2026-06-30 is development data"
+  ],
+  "overlapping_signals_skipped_by_one_position_rule": 0,
+  "proxy_census_status": "R6_CENSUS_INSUFFICIENT_INCIDENCE",
+  "rule_version": "R6_H4_DISTRIBUTION_BREAK_FAILED_RECLAIM_SHORT_V1",
+  "schema_version": "a1_xau_r6_owner_directed_bar_screen_v1",
+  "status": "DEVELOPMENT_ONLY_NOT_EXACT_TICK_MT5",
+  "structural_windows_before_entry_proxy": 1,
+  "ticket_stress_usd": 0.3,
+  "verdict": "R6_LOCKED_DEFINITION_REJECTED_INSUFFICIENT_INCIDENCE"
+}
