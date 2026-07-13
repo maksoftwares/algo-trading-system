@@ -1,0 +1,65 @@
+{
+  "future_budget_reserved_not_activated": {
+    "automatic_retry_authorized": false,
+    "metaeditor_compilations_maximum": 1,
+    "strategy_tester_order": [
+      "warmup",
+      "probe1",
+      "probe2"
+    ],
+    "strategy_tester_runs_maximum": 3
+  },
+  "mt5_execution_authorized": false,
+  "pinned_files": {
+    "docs/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2R1_CONTRACT_V1.json": {
+      "sha256": "b9a37119026e52bdd23d835f9b5533197e39bc575ea0e7aaf3847578eab4bf6b",
+      "size_bytes": 5306
+    },
+    "mt5/Experts/A1XauR6NativeSpreadProvenanceProbeG2R1.mq5": {
+      "sha256": "7f31bb55af8f137760f07975e614a4320d2299ad723ef50bd45e4c163a568920",
+      "size_bytes": 9432
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712/manifest.json": {
+      "sha256": "9bf73dcfd73f1db13f583dacc033087d36e9a80e864d3a30f917cf92e3cb48eb",
+      "size_bytes": 4384
+    },
+    "outputs/reports/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_STOP_20260712/manifest.sha256": {
+      "sha256": "58658bad34ffdc05f52eb7d2d9e68c833332c9ed1889ba39a260870dba4d04ca",
+      "size_bytes": 65
+    },
+    "scripts/build_a1_xau_r6_native_spread_provenance_probe_g2r1.py": {
+      "sha256": "c4c25e5517d86f314ffbb50e19c46410cd5eb2e600a3a4fb38d869dc0c482a7d",
+      "size_bytes": 13003
+    },
+    "scripts/run_a1_xau_r6_native_spread_provenance_probe_g2r1.py": {
+      "sha256": "cc2fd6cf830846fa18cbea16a59ef30c5da4fb30d0f84060e47a51e4aef549dd",
+      "size_bytes": 63444
+    },
+    "tests/test_a1_xau_r6_native_spread_provenance_probe_g2r1.py": {
+      "sha256": "f146b90cbd8f93c45a4d2ac08c4e979e6a589f6ec38340501a4a4b5f3e27d4f3",
+      "size_bytes": 18678
+    }
+  },
+  "privacy_boundary": {
+    "account_selector_committed": false,
+    "accounts_or_servers_dat_committed": false,
+    "raw_account_logs_committed": false,
+    "raw_execution_ini_committed": false,
+    "raw_native_report_committed": false,
+    "redacted_account_evidence_required": true
+  },
+  "review_artifact": {
+    "filename": "A1_XAU_NP1G2B_STOP_REVIEW_DD3BF73B_2026_07_13.md",
+    "sha256": "c1ee22a0aa5303121ce305112d8d01917cc529643195921be66256a5710b1ea3",
+    "size_bytes": 26698
+  },
+  "reviewed_identities": {
+    "g2a10_commit": "bc46c07aea1ef02c4a4c57ca1e837e02b9dceb39",
+    "g2a10_tree": "2de67140e193aead8833a9af3a16e276d9afb240",
+    "g2b_stop_commit": "dd3bf73b1eb3770c75c52312a34fe8caa08ddd55",
+    "g2b_stop_tree": "8308d65c1ae51d445af1a74b4c60a935ce1a7355"
+  },
+  "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2r1_lock_v1",
+  "self_canonical_sha256": "6e82124714a0101845f6abf4b5762673f066d3ad9da0f2d5f4524189045d6e15",
+  "self_size_bytes": 2660
+}
