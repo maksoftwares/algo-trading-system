@@ -54,7 +54,8 @@ enum RegimeRouterMode
    REGIME_ROUTER_SHORT_R2_DOWNTREND_ONLY = 2,
    REGIME_ROUTER_DIRECTIONAL_R1_LONG_R2_SHORT = 3,
    REGIME_ROUTER_R4_CHOP_ONLY = 4,
-   REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY = 5
+   REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY = 5,
+   REGIME_ROUTER_R3_COMPRESSION_ONLY = 6
   };
 
 enum XauRegimeState
@@ -2116,6 +2117,8 @@ string RegimeRouterModeName()
       return "r4_chop_only";
    if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY)
       return "short_r5_uptrend_chop_only";
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_ONLY)
+      return "r3_compression_only";
    return "off";
   }
 
@@ -2286,7 +2289,7 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
       return true;
 
    const string mode_name = RegimeRouterModeName();
-   if(InpRegimeRouterMode == REGIME_ROUTER_SHORT_R5_UPTREND_CHOP_ONLY && !RegimeRouterDataAvailable())
+   if(!RegimeRouterDataAvailable())
      {
       block_reason = "regime_router_block_" + mode_name + "_state_unknown";
       return false;
@@ -2330,6 +2333,14 @@ bool RegimeRouterAllows(const string direction, string &block_reason)
    if(InpRegimeRouterMode == REGIME_ROUTER_R4_CHOP_ONLY)
      {
       if(regime == XAU_REGIME_CHOP)
+         return true;
+      block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
+      return false;
+     }
+
+   if(InpRegimeRouterMode == REGIME_ROUTER_R3_COMPRESSION_ONLY)
+     {
+      if(regime == XAU_REGIME_COMPRESSION)
          return true;
       block_reason = "regime_router_block_" + mode_name + "_state_" + regime_name;
       return false;

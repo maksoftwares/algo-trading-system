@@ -1,0 +1,101 @@
+{
+  "generated_date": "2026-07-13",
+  "scope": {
+    "symbol": "XAUUSD",
+    "timeframe": "M5",
+    "deposit_usd": 1000,
+    "fixed_lots": 0.01,
+    "five_year_window": "2021-07-01/2026-07-01",
+    "ten_year_window": "2016-07-01/2026-07-01",
+    "history_quality_pct": 98
+  },
+  "gates": {
+    "minimum_trades": 100,
+    "minimum_profit_factor": 1.2,
+    "minimum_win_rate_pct": 35.0,
+    "maximum_relative_equity_drawdown_pct": 20.0,
+    "positive_net_required": true
+  },
+  "campaign_counts": {
+    "frozen_five_year_candidate_runs": 58,
+    "untouched_ten_year_confirmation_runs": 7
+  },
+  "regimes": {
+    "UPTREND": {
+      "status": "NO_TEN_YEAR_CONFIRMED_SPECIALIST",
+      "best_five_year": {
+        "name": "r1_discovery_v3_rr0p6_long",
+        "trades": 813,
+        "win_rate_pct": 65.56,
+        "net_usd": 423.96,
+        "profit_factor": 1.26,
+        "equity_drawdown_pct": 8.36
+      },
+      "untouched_ten_year": {
+        "name": "r1_discovery_v3_rr0p6_long",
+        "trades": 1076,
+        "win_rate_pct": 63.94,
+        "net_usd": 345.88,
+        "profit_factor": 1.16,
+        "equity_drawdown_pct": 13.68,
+        "failed_gates": ["profit_factor"]
+      }
+    },
+    "DOWNTREND": {
+      "status": "TEN_YEAR_EDGE_CONFIRMED_NOT_DEMO_READY",
+      "selected_for_frequency": {
+        "name": "r2_router_v13_ema_short",
+        "trades": 477,
+        "win_rate_pct": 64.78,
+        "net_usd": 183.73,
+        "profit_factor": 1.24,
+        "equity_drawdown_pct": 5.19
+      },
+      "lower_frequency_quality_alternative": {
+        "name": "r2_router_v13_feature_loss_short",
+        "trades": 191,
+        "win_rate_pct": 69.63,
+        "net_usd": 169.45,
+        "profit_factor": 1.52,
+        "equity_drawdown_pct": 3.93
+      },
+      "deployment_blocker": "Absolute ten-year net and trade cadence are too low for the owner goal."
+    },
+    "COMPRESSION": {
+      "status": "NO_SPECIALIST",
+      "best_high_frequency_attempt": {
+        "name": "r3_discovery_compress_release_a",
+        "trades": 545,
+        "win_rate_pct": 62.02,
+        "net_usd": -2.92,
+        "profit_factor": 1.0,
+        "equity_drawdown_pct": 8.72
+      },
+      "best_sparse_attempt": {
+        "name": "r3_router_v8_compression_long",
+        "trades": 7,
+        "win_rate_pct": 85.71,
+        "net_usd": 9.75,
+        "profit_factor": 3.79,
+        "equity_drawdown_pct": 0.39,
+        "failed_gates": ["trades"]
+      }
+    },
+    "CHOP": {
+      "status": "NO_SPECIALIST",
+      "least_bad_attempt": {
+        "name": "r4_discovery_opening_reversal",
+        "trades": 179,
+        "win_rate_pct": 55.87,
+        "net_usd": -37.28,
+        "profit_factor": 0.92,
+        "equity_drawdown_pct": 6.18
+      }
+    },
+    "SHOCK": {
+      "status": "CAPITAL_PROTECTION_NO_TRADE",
+      "trading_enabled": false
+    }
+  },
+  "authorization": "RESEARCH_ONLY_NO_DEMO_OR_LIVE_DEPLOYMENT"
+}
