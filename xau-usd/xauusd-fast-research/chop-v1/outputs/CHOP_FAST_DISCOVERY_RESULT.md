@@ -32,22 +32,22 @@
 
 | Strategy | TF | Trades | Setups | Chop episodes | PF | Exp R | Net R | Stress PF | DD R | B+C R | Category |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | H1 | 21 | 21 | 21 | 0.614 | -0.157 | -3.289 | 0.524 | 5.493 | 0.501 | REJECT |
-| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M15 | 161 | 159 | 128 | 0.795 | -0.127 | -20.421 | 0.729 | 31.323 | -0.128 | REJECT |
-| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M30 | 91 | 91 | 82 | 0.741 | -0.138 | -12.581 | 0.659 | 15.988 | -1.132 | REJECT |
-| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M5 | 205 | 205 | 153 | 0.660 | -0.270 | -55.382 | 0.616 | 70.332 | -4.020 | REJECT |
-| CHOP_RANGE_ROTATION_CONTINUATION_V1 | H1 | 38 | 36 | 35 | 1.133 | 0.065 | 2.459 | 1.029 | 3.789 | 4.157 | UNDERPOWERED |
-| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M15 | 347 | 315 | 211 | 1.041 | 0.024 | 8.313 | 0.958 | 20.880 | 1.869 | BORDERLINE_DO_NOT_ENGINEER |
-| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M30 | 141 | 129 | 118 | 1.303 | 0.147 | 20.770 | 1.177 | 9.000 | 1.012 | BORDERLINE_DO_NOT_ENGINEER |
-| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M5 | 598 | 510 | 266 | 0.898 | -0.074 | -44.510 | 0.837 | 85.757 | 15.523 | REJECT |
-| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | H1 | 220 | 206 | 171 | 0.927 | -0.034 | -7.454 | 0.830 | 15.740 | -2.332 | REJECT |
-| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M15 | 691 | 621 | 339 | 0.953 | -0.030 | -20.516 | 0.880 | 66.799 | 33.151 | REJECT |
-| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M30 | 437 | 406 | 275 | 0.996 | -0.002 | -1.080 | 0.901 | 33.835 | 25.940 | REJECT |
-| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M5 | 907 | 788 | 368 | 0.798 | -0.161 | -146.034 | 0.748 | 210.098 | 56.677 | REJECT |
+| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | H1 | 21 | 21 | 21 | 0.489 | -0.214 | -4.494 | 0.412 | 6.697 | 0.564 | REJECT |
+| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M15 | 161 | 159 | 128 | 0.841 | -0.094 | -15.208 | 0.769 | 25.891 | 0.574 | REJECT |
+| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M30 | 91 | 91 | 82 | 0.806 | -0.094 | -8.587 | 0.717 | 14.606 | -1.061 | REJECT |
+| CHOP_IMPULSE_EXHAUSTION_REVERSION_V1 | M5 | 205 | 205 | 153 | 0.710 | -0.223 | -45.785 | 0.662 | 60.856 | -3.479 | REJECT |
+| CHOP_RANGE_ROTATION_CONTINUATION_V1 | H1 | 38 | 36 | 35 | 1.160 | 0.075 | 2.834 | 1.050 | 3.726 | 4.274 | UNDERPOWERED |
+| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M15 | 347 | 315 | 211 | 1.051 | 0.029 | 10.230 | 0.966 | 21.793 | 4.255 | BORDERLINE_DO_NOT_ENGINEER |
+| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M30 | 141 | 129 | 118 | 1.261 | 0.126 | 17.813 | 1.142 | 9.000 | 1.015 | BORDERLINE_DO_NOT_ENGINEER |
+| CHOP_RANGE_ROTATION_CONTINUATION_V1 | M5 | 598 | 510 | 266 | 0.891 | -0.079 | -47.457 | 0.831 | 89.804 | 16.639 | REJECT |
+| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | H1 | 221 | 207 | 171 | 0.995 | -0.002 | -0.439 | 0.886 | 11.720 | -1.442 | REJECT |
+| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M15 | 692 | 622 | 339 | 0.953 | -0.029 | -20.160 | 0.880 | 68.899 | 30.526 | REJECT |
+| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M30 | 438 | 407 | 275 | 1.032 | 0.017 | 7.462 | 0.936 | 28.322 | 23.659 | BORDERLINE_DO_NOT_ENGINEER |
+| CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1 | M5 | 908 | 789 | 368 | 0.790 | -0.166 | -151.020 | 0.740 | 215.738 | 55.321 | REJECT |
 
 ## D. Best numerical cell
 
-`CHOP_RANGE_ROTATION_CONTINUATION_V1 / M30` had the highest baseline expectancy at `0.147R` per trade and `20.770R` net. This is a numerical ranking only.
+`CHOP_RANGE_ROTATION_CONTINUATION_V1 / M30` had the highest baseline expectancy at `0.126R` per trade and `17.813R` net. This is a numerical ranking only.
 
 ## E. Best defensible cell
 
@@ -55,9 +55,9 @@ No cell met the complete advancement gate.
 
 ## F. Timeframe explanation
 
-- `CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1` - M5: 907 trades, expectancy -0.161R, median cost 0.072R, median MFE/MAE 0.700/1.178R, half-life 4.579h, VR(4h) 0.978. M15: 691 trades, expectancy -0.030R, median cost 0.033R, median MFE/MAE 0.828/1.071R, half-life 4.503h, VR(4h) 0.981. M30: 437 trades, expectancy -0.002R, median cost 0.028R, median MFE/MAE 0.882/1.030R, half-life 4.310h, VR(4h) 0.980. H1: 220 trades, expectancy -0.034R, median cost 0.013R, median MFE/MAE 0.728/0.752R, half-life 4.201h, VR(4h) 0.989.
-- `CHOP_IMPULSE_EXHAUSTION_REVERSION_V1` - M5: 205 trades, expectancy -0.270R, median cost 0.045R, median MFE/MAE 0.858/1.177R, half-life 4.579h, VR(4h) 0.978. M15: 161 trades, expectancy -0.127R, median cost 0.033R, median MFE/MAE 0.881/1.055R, half-life 4.503h, VR(4h) 0.981. M30: 91 trades, expectancy -0.138R, median cost 0.027R, median MFE/MAE 0.510/0.847R, half-life 4.310h, VR(4h) 0.980. H1: 21 trades, expectancy -0.157R, median cost 0.013R, median MFE/MAE 0.373/0.757R, half-life 4.201h, VR(4h) 0.989.
-- `CHOP_RANGE_ROTATION_CONTINUATION_V1` - M5: 598 trades, expectancy -0.074R, median cost 0.063R, median MFE/MAE 0.769/1.141R, half-life 4.579h, VR(4h) 0.978. M15: 347 trades, expectancy 0.024R, median cost 0.031R, median MFE/MAE 0.979/1.058R, half-life 4.503h, VR(4h) 0.981. M30: 141 trades, expectancy 0.147R, median cost 0.021R, median MFE/MAE 1.155/0.948R, half-life 4.310h, VR(4h) 0.980. H1: 38 trades, expectancy 0.065R, median cost 0.011R, median MFE/MAE 1.019/0.930R, half-life 4.201h, VR(4h) 0.989.
+- `CHOP_ROBUST_EQUILIBRIUM_REVERSION_V1` - M5: 908 trades, expectancy -0.166R, median cost 0.072R, median MFE/MAE 0.577/1.000R, half-life 11.983h, VR(4h) 0.938. M15: 692 trades, expectancy -0.029R, median cost 0.033R, median MFE/MAE 0.697/1.000R, half-life 11.770h, VR(4h) 0.944. M30: 438 trades, expectancy 0.017R, median cost 0.028R, median MFE/MAE 0.810/1.000R, half-life 11.330h, VR(4h) 0.943. H1: 221 trades, expectancy -0.002R, median cost 0.013R, median MFE/MAE 0.655/0.687R, half-life 9.941h, VR(4h) 0.939.
+- `CHOP_IMPULSE_EXHAUSTION_REVERSION_V1` - M5: 205 trades, expectancy -0.223R, median cost 0.045R, median MFE/MAE 0.824/1.000R, half-life 11.983h, VR(4h) 0.938. M15: 161 trades, expectancy -0.094R, median cost 0.033R, median MFE/MAE 0.815/1.000R, half-life 11.770h, VR(4h) 0.944. M30: 91 trades, expectancy -0.094R, median cost 0.025R, median MFE/MAE 0.507/0.793R, half-life 11.330h, VR(4h) 0.943. H1: 21 trades, expectancy -0.214R, median cost 0.013R, median MFE/MAE 0.373/0.757R, half-life 9.941h, VR(4h) 0.939.
+- `CHOP_RANGE_ROTATION_CONTINUATION_V1` - M5: 598 trades, expectancy -0.079R, median cost 0.063R, median MFE/MAE 0.690/1.000R, half-life 11.983h, VR(4h) 0.938. M15: 347 trades, expectancy 0.029R, median cost 0.030R, median MFE/MAE 0.935/1.000R, half-life 11.770h, VR(4h) 0.944. M30: 141 trades, expectancy 0.126R, median cost 0.020R, median MFE/MAE 1.017/0.868R, half-life 11.330h, VR(4h) 0.943. H1: 38 trades, expectancy 0.075R, median cost 0.010R, median MFE/MAE 1.017/0.858R, half-life 9.941h, VR(4h) 0.939.
 
 ## G. General chop coverage
 

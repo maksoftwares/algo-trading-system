@@ -1,0 +1,73 @@
+{
+  "base_commit": "2cddc16f380f531c3cf4b5922f5bd9fca8e29fff",
+  "branch": "codex/xau-chop-m30-bounded-verification-v1",
+  "config_path": "xau-usd/xauusd-fast-research/chop-v1/config/chop_fast_discovery_v1.json",
+  "config_sha256": "c88710d410757c468c67ea362215b3d33c011fc171ba92d4b70464d2e14c8dc8",
+  "inputs": {
+    "H1": {
+      "end": "2025-07-01T00:00:00+00:00",
+      "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv",
+      "rows": 53040,
+      "sha256": "3552e55c4203eca69aa63bdf49ad1a3fb03e32562f29ee1e7d51148f483ad358",
+      "start": "2016-07-01T00:00:00+00:00"
+    },
+    "H4": {
+      "end": "2025-07-01T00:00:00+00:00",
+      "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv",
+      "rows": 14346,
+      "sha256": "02d5f6d6ae9f39037dd7731aa89ab39b30590334167add166d2036b8e1352538",
+      "start": "2016-07-01T00:00:00+00:00"
+    },
+    "M15": {
+      "end": "2025-07-01T00:00:00+00:00",
+      "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M15/XAUUSD_capital_com_M15_20160103_20250701.csv",
+      "rows": 212048,
+      "sha256": "d08c62645b9504d49d537c209ef0f26afebd6d26dc18303b215f3c3ca4bb8833",
+      "start": "2016-07-01T00:00:00+00:00"
+    },
+    "M5": {
+      "end": "2025-07-01T00:00:00+00:00",
+      "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+      "rows": 633069,
+      "sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+      "start": "2016-07-01T00:00:00+00:00"
+    }
+  },
+  "outcome": "FOLLOWUP_DATA_INCOMPLETE_NO_ADVANCEMENT",
+  "outputs": {
+    "direction_results": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_DIRECTION_RESULTS.csv",
+      "sha256": "f7b26c1aeba3405d7a111add8302657d2b2c66243893df8db96797ff7f5432d2"
+    },
+    "execution_diagnostics": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_EXECUTION_DIAGNOSTICS.csv",
+      "sha256": "1fa986357462fff0d13fa718f210411165692dbffb4429dec5c7e9df6bda4b28"
+    },
+    "gate_audit": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_GATE_AUDIT.json",
+      "sha256": "b00127cedb31d18430aa55f8743166680f8c3830ff1ec6307583d141319fbbe9"
+    },
+    "matrix": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_FULL_MATRIX_REGRESSION.csv",
+      "sha256": "6af766c59ff96574a67cbab05480b859da39ddefdb208a1e89e4ff74c5a88a7f"
+    },
+    "result_json": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_BOUNDED_VERIFICATION_RESULT.json",
+      "sha256": "df17cbf7758824b25a806b3dbea46155bfd33c8581419f15b4dad47c23cc8616"
+    },
+    "result_md": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_BOUNDED_VERIFICATION_RESULT.md",
+      "sha256": "659500f33a3b3e083fcb38fd8033cae1fc7267a1f6868a19f03074e862c5f330"
+    },
+    "signals": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_SIGNAL_LEDGER.csv",
+      "sha256": "4eafe708b2da5b4771c2b4135f2eecba679327ce2e9b90ae61de5e3a45f10be8"
+    },
+    "trades": {
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/bounded_followup_v1/CHOP_M30_TRADE_LEDGER.csv",
+      "sha256": "f92baa2f33f29abca7c1cc084e32a0b403db7f69ae8f4bcef0bfd5956b7f7b83"
+    }
+  },
+  "replay_command": "python xau-usd/xauusd-fast-research/chop-v1/run_chop_fast_discovery_v1.py --config xau-usd/xauusd-fast-research/chop-v1/config/chop_fast_discovery_v1.json",
+  "schema_version": "chop_bounded_followup_manifest_v1"
+}

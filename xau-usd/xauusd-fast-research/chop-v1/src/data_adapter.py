@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -43,6 +44,11 @@ def load_native_bars(source_root: Path, timeframe: str) -> pd.DataFrame:
     frame = frame.sort_values("timestamp_utc", kind="mergesort").reset_index(drop=True)
     frame.attrs["source_path"] = str(path)
     frame.attrs["native"] = True
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    frame.attrs["input_sha256"] = digest.hexdigest()
     return frame
 
 
@@ -50,6 +56,19 @@ def aggregate_m30(m5: pd.DataFrame) -> pd.DataFrame:
     source = m5.copy()
     bucket = source["bar_start_utc"].dt.floor("30min")
     source = source.assign(_bucket=bucket)
+    offsets = (source["bar_start_utc"] - source["_bucket"]).dt.total_seconds().div(60).astype(int)
+    source = source.assign(_offset_minutes=offsets)
+    grouped_offsets = source.groupby("_bucket", sort=True, observed=True)["_offset_minutes"]
+    valid = (
+        grouped_offsets.size().eq(6)
+        & grouped_offsets.nunique().eq(6)
+        & grouped_offsets.min().eq(0)
+        & grouped_offsets.max().eq(25)
+        & grouped_offsets.sum().eq(75)
+    )
+    valid_buckets = valid.index[valid]
+    incomplete_buckets = int((~valid).sum())
+    source = source.loc[source["_bucket"].isin(valid_buckets)]
     aggregations: dict[str, str] = {
         "mid_open": "first", "mid_high": "max", "mid_low": "min", "mid_close": "last",
         "bid_open": "first", "bid_high": "max", "bid_low": "min", "bid_close": "last",
@@ -59,8 +78,6 @@ def aggregate_m30(m5: pd.DataFrame) -> pd.DataFrame:
         "tick_count": "sum", "volume_sum": "sum",
     }
     result = source.groupby("_bucket", sort=True, observed=True).agg(aggregations).reset_index()
-    counts = source.groupby("_bucket", sort=True, observed=True).size().to_numpy()
-    result = result.loc[counts == 6].reset_index(drop=True)
     result["bar_start_utc"] = result.pop("_bucket")
     result["bar_end_utc"] = result["bar_start_utc"] + pd.Timedelta(minutes=30)
     result["timestamp_utc"] = result["bar_end_utc"]
@@ -69,6 +86,8 @@ def aggregate_m30(m5: pd.DataFrame) -> pd.DataFrame:
     result["timeframe"] = "M30"
     result.attrs["source_path"] = str(m5.attrs.get("source_path", "M5"))
     result.attrs["native"] = False
+    result.attrs["input_sha256"] = m5.attrs.get("input_sha256")
+    result.attrs["incomplete_m30_buckets_dropped"] = incomplete_buckets
     return result
 
 
@@ -88,12 +107,17 @@ def _quality(frame: pd.DataFrame, timeframe: str) -> dict[str, Any]:
         "maximum_gap_hours": float(gaps.max().total_seconds() / 3600.0) if len(gaps) else 0.0,
         "native": bool(frame.attrs.get("native")),
         "source": frame.attrs.get("source_path", ""),
+        "input_sha256": frame.attrs.get("input_sha256", ""),
+        "incomplete_m30_buckets_dropped": int(frame.attrs.get("incomplete_m30_buckets_dropped", 0)),
     }
 
 
 def load_bundle(repo_root: Path, config: dict[str, Any]) -> DataBundle:
     source_root = repo_root / config["source_root"]
     native = {tf: load_native_bars(source_root, tf) for tf in ("M5", "M15", "H1", "H4")}
+    for tf, frame in native.items():
+        source_path = Path(str(frame.attrs["source_path"]))
+        frame.attrs["source_path"] = (Path(config["source_root"]) / tf / source_path.name).as_posix()
     native["M30"] = aggregate_m30(native["M5"])
     requested_start = pd.Timestamp(config["requested_start"])
     requested_end = pd.Timestamp(config["requested_end"])

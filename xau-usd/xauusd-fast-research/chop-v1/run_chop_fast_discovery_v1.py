@@ -19,7 +19,7 @@ if str(SRC) not in sys.path:
 
 from backtest import assert_no_outside_regime, run_cell  # noqa: E402
 from data_adapter import load_bundle  # noqa: E402
-from diagnostics import market_diagnostics, summarize_results  # noqa: E402
+from diagnostics import market_diagnostics, profit_factor, summarize_results  # noqa: E402
 from regime import attach_regime, classify_chop  # noqa: E402
 from strategies import STRATEGY_IDS, generate_signals  # noqa: E402
 
@@ -27,6 +27,10 @@ from strategies import STRATEGY_IDS, generate_signals  # noqa: E402
 TIMEFRAMES = ("M5", "M15", "M30", "H1")
 START_COMMIT = "fe0777c65b78fbb9d6002935221ab404a41dbaad"
 START_TREE = "7de88a01a6ddf8d1708ff7e427359469ccad8d5d"
+FOLLOWUP_BRANCH = "codex/xau-chop-m30-bounded-verification-v1"
+FOLLOWUP_BASE = "2cddc16f380f531c3cf4b5922f5bd9fca8e29fff"
+SELECTED_STRATEGY = "CHOP_RANGE_ROTATION_CONTINUATION_V1"
+SELECTED_TIMEFRAME = "M30"
 
 
 def _clean(value: Any) -> Any:
@@ -51,6 +55,70 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _portable(path: Path) -> str:
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
+def _direction_results(selected: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for direction, group in selected.groupby("direction", sort=True):
+        rows.append({
+            "strategy_id": SELECTED_STRATEGY, "timeframe": SELECTED_TIMEFRAME, "direction": direction,
+            "trades": int(len(group)), "net_r": float(group["net_r"].sum()),
+            "profit_factor": profit_factor(group["net_r"]), "expectancy_r": float(group["net_r"].mean()),
+            "stress_net_r": float(group["stress_net_r"].sum()), "stress_profit_factor": profit_factor(group["stress_net_r"]),
+            "wins": int((group["net_r"] > 0).sum()), "losses": int((group["net_r"] < 0).sum()),
+            "median_mfe_r": float(group["mfe_r"].median()), "median_mae_r": float(group["mae_r"].median()),
+        })
+    return pd.DataFrame(rows)
+
+
+def _gate_audit(row: pd.Series, selected: pd.DataFrame, subtypes: pd.DataFrame, yearly: pd.DataFrame, segments: pd.DataFrame) -> dict[str, Any]:
+    selected_subtypes = subtypes.loc[(subtypes["strategy_id"] == SELECTED_STRATEGY) & (subtypes["timeframe"] == SELECTED_TIMEFRAME)]
+    selected_years = yearly.loc[(yearly["strategy_id"] == SELECTED_STRATEGY) & (yearly["timeframe"] == SELECTED_TIMEFRAME)]
+    selected_segments = segments.loc[(segments["strategy_id"] == SELECTED_STRATEGY) & (segments["timeframe"] == SELECTED_TIMEFRAME)]
+    positive_years = selected_years.loc[selected_years["net_r"] > 0, "net_r"]
+    year_share = float(positive_years.max() / row["baseline_net_r"]) if len(positive_years) and row["baseline_net_r"] > 0 else 0.0
+    bad_subtype = bool(((selected_subtypes["trades"] >= 30) & (selected_subtypes["profit_factor"].fillna(0) < 0.85)).any())
+    positive_segments = int((selected_segments["net_r"] > 0).sum())
+    gates = [
+        ("accepted_trades", ">=", 100, int(row["accepted_trades"]), row["accepted_trades"] >= 100),
+        ("unique_setup_episodes", ">=", 60, int(row["unique_setup_episodes"]), row["unique_setup_episodes"] >= 60),
+        ("chop_episodes_traded", ">=", 40, int(row["chop_episodes_traded"]), row["chop_episodes_traded"] >= 40),
+        ("baseline_profit_factor", ">=", 1.20, float(row["baseline_profit_factor"]), row["baseline_profit_factor"] >= 1.20),
+        ("baseline_expectancy_r", ">=", 0.08, float(row["baseline_expectancy"]), row["baseline_expectancy"] >= 0.08),
+        ("later_net_r", ">", 0.0, float(row["later_net_r"]), row["later_net_r"] > 0),
+        ("later_profit_factor", ">=", 1.10, float(row["later_profit_factor"]), row["later_profit_factor"] >= 1.10),
+        ("positive_chronological_segments", ">=", 2, positive_segments, positive_segments >= 2),
+        ("stress_net_r", ">", 0.0, float(row["stress_net_r"]), row["stress_net_r"] > 0),
+        ("stress_profit_factor", ">=", 1.05, float(row["stress_profit_factor"]), row["stress_profit_factor"] >= 1.05),
+        ("max_closed_drawdown_r", "<=", 20.0, float(row["max_closed_drawdown_r"]), row["max_closed_drawdown_r"] <= 20),
+        ("top_ten_winner_share", "<=", 0.50, float(row["top_ten_winner_share"]), row["top_ten_winner_share"] <= 0.50),
+        ("single_positive_year_share", "<=", 0.50, year_share, year_share <= 0.50),
+        ("populated_subtype_below_0p85_pf", "==", False, bad_subtype, not bad_subtype),
+    ]
+    return {
+        "strategy_id": SELECTED_STRATEGY, "timeframe": SELECTED_TIMEFRAME,
+        "unchanged_gate": True, "all_strategy_gates_pass": all(item[4] for item in gates),
+        "data_tail_complete": False,
+        "final_advancement_allowed": False,
+        "gates": [{"name": name, "operator": op, "threshold": threshold, "observed": observed, "passed": bool(passed)} for name, op, threshold, observed, passed in gates],
+    }
+
+
+def _execution_diagnostics(selected: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for (direction, reason), group in selected.groupby(["direction", "exit_reason"], sort=True):
+        rows.append({
+            "direction": direction, "exit_reason": reason, "trades": int(len(group)),
+            "net_r": float(group["net_r"].sum()), "average_holding_minutes": float(group["holding_minutes"].mean()),
+            "median_mfe_r": float(group["mfe_r"].median()), "median_mae_r": float(group["mae_r"].median()),
+            "holding_overrun_trades": int((group["holding_overrun_minutes"] > 0).sum()),
+            "execution_timeframes": ",".join(sorted(set(group["execution_timeframe"].astype(str)))),
+        })
+    return pd.DataFrame(rows)
 
 
 def _overall_decision(matrix: pd.DataFrame) -> str:
@@ -189,12 +257,17 @@ def run(config_path: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     bundle = load_bundle(REPO_ROOT, config)
     regime_result = classify_chop(bundle.bars["H4"], config["regime"])
+    attached_bars = {timeframe: attach_regime(bundle.bars[timeframe], regime_result.bars) for timeframe in TIMEFRAMES}
     all_signals, all_trades, diagnostic_frames = [], [], []
     for timeframe in TIMEFRAMES:
         minutes = int(config["timeframes_minutes"][timeframe])
-        bars = attach_regime(bundle.bars[timeframe], regime_result.bars)
+        bars = attached_bars[timeframe]
         candidates = generate_signals(bars, minutes, config)
-        result = run_cell(bars, candidates, timeframe, int(config["cooldown_hours"]), float(config["stress_slippage_r"]))
+        execution_bars = attached_bars["M5"] if timeframe == "M30" else None
+        result = run_cell(
+            bars, candidates, timeframe, int(config["cooldown_hours"]),
+            float(config["stress_slippage_r"]), execution_bars=execution_bars,
+        )
         assert_no_outside_regime(result.trades)
         all_signals.append(result.signals)
         all_trades.append(result.trades)
@@ -258,8 +331,102 @@ def run(config_path: Path) -> dict[str, Any]:
     trades.to_csv(paths["trades"], index=False, lineterminator="\n")
     _write_json(paths["result_json"], result_payload)
     paths["result_md"].write_text(_render_report(result_payload, matrix, diagnostics, episodes), encoding="utf-8")
+
+    bounded_dir = output_dir / "bounded_followup_v1"
+    bounded_dir.mkdir(parents=True, exist_ok=True)
+    selected_signals = signals.loc[(signals["strategy_id"] == SELECTED_STRATEGY) & (signals["timeframe"] == SELECTED_TIMEFRAME)].copy()
+    selected_trades = trades.loc[(trades["strategy_id"] == SELECTED_STRATEGY) & (trades["timeframe"] == SELECTED_TIMEFRAME)].copy()
+    selected_row = matrix.loc[
+        (matrix["strategy_id"] == SELECTED_STRATEGY) & (matrix["timeframe"] == SELECTED_TIMEFRAME)
+        & (matrix["cost_scenario"] == "BASELINE")
+    ].iloc[0]
+    direction_results = _direction_results(selected_trades)
+    gate_audit = _gate_audit(selected_row, selected_trades, subtypes, yearly, segments)
+    followup_outcome = (
+        "FOLLOWUP_DATA_INCOMPLETE_NO_ADVANCEMENT"
+        if pd.Timestamp(bundle.coverage["actual_end"]) < pd.Timestamp(config["requested_end"])
+        else ("FOLLOWUP_GATE_PASSED_CONFIRMATION_REQUIRED" if gate_audit["all_strategy_gates_pass"] else "FOLLOWUP_GATE_FAILED_NO_ADVANCEMENT")
+    )
+    gate_audit["data_tail_complete"] = pd.Timestamp(bundle.coverage["actual_end"]) >= pd.Timestamp(config["requested_end"])
+    gate_audit["final_advancement_allowed"] = bool(gate_audit["data_tail_complete"] and gate_audit["all_strategy_gates_pass"])
+    bounded_payload = {
+        "schema_version": "chop_m30_bounded_verification_v1", "branch": FOLLOWUP_BRANCH,
+        "base_commit": FOLLOWUP_BASE, "strategy_id": SELECTED_STRATEGY, "timeframe": SELECTED_TIMEFRAME,
+        "frozen_parameters_changed": False, "ordered_execution_replay": "M5_SUBBARS",
+        "data_coverage": bundle.coverage, "outcome": followup_outcome,
+        "corrected_m30_result": selected_row.to_dict(), "direction_results": direction_results.to_dict(orient="records"),
+        "gate_audit": gate_audit,
+        "corrections": [
+            "REGIME_EXIT_RECORDED_AT_EXECUTABLE_OPEN_AND_COOLDOWN_STARTS_THERE",
+            "MAX_HOLD_USES_ELAPSED_UTC_TIME",
+            "GAP_THROUGH_STOP_USES_WORSE_EXECUTABLE_OPEN",
+            "M30_EXIT_AND_MFE_MAE_REPLAYED_ON_ORDERED_M5_SUBBARS",
+            "MEAN_REVERSION_DIAGNOSTICS_ARE_EPISODE_AND_GAP_SAFE",
+        ],
+        "diagnostic_timing_basis": "BOUNDARY_RETURN_AND_REMAINING_REGIME_DURATION_ARE_EX_POST_ONLY",
+    }
+    bounded_paths = {
+        "result_md": bounded_dir / "CHOP_M30_BOUNDED_VERIFICATION_RESULT.md",
+        "result_json": bounded_dir / "CHOP_M30_BOUNDED_VERIFICATION_RESULT.json",
+        "gate_audit": bounded_dir / "CHOP_M30_GATE_AUDIT.json",
+        "direction_results": bounded_dir / "CHOP_M30_DIRECTION_RESULTS.csv",
+        "execution_diagnostics": bounded_dir / "CHOP_M30_EXECUTION_DIAGNOSTICS.csv",
+        "signals": bounded_dir / "CHOP_M30_SIGNAL_LEDGER.csv",
+        "trades": bounded_dir / "CHOP_M30_TRADE_LEDGER.csv",
+        "matrix": bounded_dir / "CHOP_FULL_MATRIX_REGRESSION.csv",
+        "manifest": bounded_dir / "CHOP_BOUNDED_FOLLOWUP_MANIFEST.json",
+    }
+    _write_json(bounded_paths["result_json"], bounded_payload)
+    _write_json(bounded_paths["gate_audit"], gate_audit)
+    direction_results.to_csv(bounded_paths["direction_results"], index=False, lineterminator="\n")
+    _execution_diagnostics(selected_trades).to_csv(bounded_paths["execution_diagnostics"], index=False, lineterminator="\n")
+    selected_signals.to_csv(bounded_paths["signals"], index=False, lineterminator="\n")
+    selected_trades.to_csv(bounded_paths["trades"], index=False, lineterminator="\n")
+    matrix.to_csv(bounded_paths["matrix"], index=False, lineterminator="\n")
+    report_lines = [
+        "# XAUUSD M30 Bounded Verification V1", "",
+        f"- Branch: `{FOLLOWUP_BRANCH}`", f"- Base commit: `{FOLLOWUP_BASE}`",
+        f"- Frozen candidate: `{SELECTED_STRATEGY} / {SELECTED_TIMEFRAME}`",
+        f"- Outcome: `{followup_outcome}`", "- Engineering/deployment authorization: `NOT_AUTHORIZED`", "",
+        "## Corrected result", "",
+        f"- Trades/setups/episodes: `{int(selected_row['accepted_trades'])}` / `{int(selected_row['unique_setup_episodes'])}` / `{int(selected_row['chop_episodes_traded'])}`.",
+        f"- PF / expectancy / net R: `{_fmt(selected_row['baseline_profit_factor'])}` / `{_fmt(selected_row['baseline_expectancy'])}` / `{_fmt(selected_row['baseline_net_r'])}`.",
+        f"- Stress PF / stress net R: `{_fmt(selected_row['stress_profit_factor'])}` / `{_fmt(selected_row['stress_net_r'])}`.",
+        f"- Later PF / later net R: `{_fmt(selected_row['later_profit_factor'], 6)}` / `{_fmt(selected_row['later_net_r'])}`.",
+        f"- Unchanged strategy gate passed: `{gate_audit['all_strategy_gates_pass']}`.", "",
+        "## Data boundary", "",
+        f"- Requested end: `{bundle.coverage['requested_end']}`.", f"- Common actual end: `{bundle.coverage['actual_end']}`.",
+        "- No trustworthy Capital.com extension through 2026-06-30 was present locally; the mandated incomplete-data outcome therefore overrides advancement.", "",
+        "## Execution corrections", "",
+        "- Regime exits and cooldowns use the next executable bar open timestamp.",
+        "- Maximum holds use elapsed UTC time and report unavoidable market-closure overruns.",
+        "- Long/short gap-through-stop exits fill at the worse executable Bid/Ask open.",
+        "- M30 stop/target ordering and MFE/MAE use causal ordered M5 sub-bars.",
+        "- Half-life and variance ratios do not cross chop episodes or timestamp gaps.",
+        "- Boundary-return and remaining-regime-duration fields are explicitly ex-post diagnostics and are not trading or gate inputs.", "",
+        "## Final action", "", "Close chop-v1 without another rescue variant unless the owner supplies the missing frozen-period broker history under a separately authorized task.",
+    ]
+    bounded_paths["result_md"].write_text("\n".join(report_lines) + "\n", encoding="utf-8")
+    bounded_hashes = {name: _sha256(path) for name, path in bounded_paths.items() if name != "manifest"}
+    input_manifest = {
+        tf: {"path": details["source"], "sha256": details["input_sha256"], "rows": details["rows"], "start": details["start"], "end": details["end"]}
+        for tf, details in bundle.coverage["timeframes"].items() if tf != "M30"
+    }
+    manifest = {
+        "schema_version": "chop_bounded_followup_manifest_v1", "branch": FOLLOWUP_BRANCH,
+        "base_commit": FOLLOWUP_BASE, "config_path": _portable(config_path), "config_sha256": _sha256(config_path),
+        "inputs": input_manifest, "outputs": {name: {"path": _portable(bounded_paths[name]), "sha256": digest} for name, digest in bounded_hashes.items()},
+        "replay_command": f"python {_portable(Path(__file__).resolve())} --config {_portable(config_path)}",
+        "outcome": followup_outcome,
+    }
+    _write_json(bounded_paths["manifest"], manifest)
     principal = {name: _sha256(path) for name, path in paths.items() if path.suffix in {".csv", ".json"}}
-    return {"overall_decision": overall, "outputs": {name: str(path) for name, path in paths.items()}, "sha256": principal}
+    return {
+        "overall_decision": overall, "bounded_followup_outcome": followup_outcome,
+        "outputs": {name: _portable(path) for name, path in paths.items()}, "sha256": principal,
+        "bounded_outputs": {name: _portable(path) for name, path in bounded_paths.items()},
+        "bounded_sha256": {**bounded_hashes, "manifest": _sha256(bounded_paths["manifest"])},
+    }
 
 
 def main() -> int:

@@ -187,25 +187,8 @@ def market_diagnostics(frame: pd.DataFrame, timeframe: str, timeframe_minutes: i
     zscore = (frame["mid_close"] - equilibrium) / deviation.replace(0.0, np.nan)
     atr14 = atr(frame, max(2, 14 * 60 // timeframe_minutes))
     boundary_probabilities = _boundary_return_probabilities(frame, equilibrium, zscore, atr14, timeframe_minutes)
-    active = frame.loc[frame["chop_active"]].copy()
-    equilibrium = equilibrium.loc[active.index]
-    x = np.log(active["mid_close"]) - np.log(equilibrium)
-    lag, delta = x.shift(1), x.diff()
-    valid = np.isfinite(lag) & np.isfinite(delta)
-    half_life_bars = np.nan
-    if valid.sum() > 20:
-        design = np.column_stack([np.ones(valid.sum()), lag.loc[valid].to_numpy()])
-        b = float(np.linalg.lstsq(design, delta.loc[valid].to_numpy(), rcond=None)[0][1])
-        phi = 1.0 + b
-        if 0 < phi < 1:
-            half_life_bars = float(-np.log(2) / np.log(phi))
-    returns = np.log(active["mid_close"]).diff().dropna()
-    variance_ratios = {}
-    one_var = float(returns.var(ddof=1))
-    for hours in (1, 4, 8):
-        q = max(1, hours * 60 // timeframe_minutes)
-        q_returns = np.log(active["mid_close"] / active["mid_close"].shift(q)).dropna()
-        variance_ratios[f"variance_ratio_{hours}h"] = float(q_returns.var(ddof=1) / (q * one_var)) if one_var > 0 and len(q_returns) else np.nan
+    half_life_bars, variance_ratios = _episode_safe_mean_reversion(frame, equilibrium, timeframe_minutes)
+
     rows = []
     for strategy in strategy_ids:
         cell = trades.loc[(trades["strategy_id"] == strategy) & (trades["timeframe"] == timeframe)]
@@ -220,6 +203,7 @@ def market_diagnostics(frame: pd.DataFrame, timeframe: str, timeframe_minutes: i
             "half_life_minutes": half_life_bars * timeframe_minutes if np.isfinite(half_life_bars) else None,
             "half_life_hours": half_life_bars * timeframe_minutes / 60.0 if np.isfinite(half_life_bars) else None,
             **variance_ratios,
+            "diagnostic_timing_basis": "EX_POST_EPISODE_SAFE_NOT_USED_FOR_TRADING_OR_GATES",
             "median_mfe_r": float(mfe.median()) if len(mfe) else None, "median_mae_r": float(mae.median()) if len(mae) else None,
             "mfe_mae_ratio": float(mfe.median() / mae.median()) if len(mfe) and mae.median() > 0 else None,
             "stopped_before_0p5r_pct": _stopped_before(cell, 0.5), "stopped_before_1r_pct": _stopped_before(cell, 1.0),
@@ -237,6 +221,42 @@ def market_diagnostics(frame: pd.DataFrame, timeframe: str, timeframe_minutes: i
             "average_trades_per_chop_episode": float(len(cell) / cell["chop_episode_id"].nunique()) if len(cell) else 0.0,
         })
     return pd.DataFrame(rows)
+
+
+def _episode_safe_mean_reversion(
+    frame: pd.DataFrame, equilibrium: pd.Series, timeframe_minutes: int
+) -> tuple[float, dict[str, float]]:
+    expected = pd.Timedelta(minutes=timeframe_minutes)
+    active = frame["chop_active"] & (frame["chop_episode_id"] > 0)
+    same_previous = (
+        active & active.shift(1, fill_value=False)
+        & frame["chop_episode_id"].eq(frame["chop_episode_id"].shift(1))
+        & frame["timestamp_utc"].sub(frame["timestamp_utc"].shift(1)).eq(expected)
+    )
+    x = np.log(frame["mid_close"]) - np.log(equilibrium)
+    lag, delta = x.shift(1), x.diff()
+    valid = same_previous & np.isfinite(lag) & np.isfinite(delta)
+    half_life_bars = np.nan
+    if valid.sum() > 20:
+        design = np.column_stack([np.ones(valid.sum()), lag.loc[valid].to_numpy()])
+        b = float(np.linalg.lstsq(design, delta.loc[valid].to_numpy(), rcond=None)[0][1])
+        phi = 1.0 + b
+        if 0 < phi < 1:
+            half_life_bars = float(-np.log(2) / np.log(phi))
+    log_close = np.log(frame["mid_close"])
+    returns = log_close.diff().loc[same_previous].dropna()
+    variance_ratios = {}
+    one_var = float(returns.var(ddof=1))
+    for hours in (1, 4, 8):
+        q = max(1, hours * 60 // timeframe_minutes)
+        same_q = (
+            active & active.shift(q, fill_value=False)
+            & frame["chop_episode_id"].eq(frame["chop_episode_id"].shift(q))
+            & frame["timestamp_utc"].sub(frame["timestamp_utc"].shift(q)).eq(expected * q)
+        )
+        q_returns = log_close.sub(log_close.shift(q)).loc[same_q].dropna()
+        variance_ratios[f"variance_ratio_{hours}h"] = float(q_returns.var(ddof=1) / (q * one_var)) if one_var > 0 and len(q_returns) else np.nan
+    return half_life_bars, variance_ratios
 
 
 def _boundary_return_probabilities(
@@ -263,8 +283,11 @@ def _boundary_return_probabilities(
             center = float(equilibrium.iloc[index])
             extension = float(frame["mid_close"].iloc[index] + direction * atr14.iloc[index])
             episode = int(frame["chop_episode_id"].iloc[index])
+            horizon_end = frame["timestamp_utc"].iloc[index] + pd.Timedelta(hours=12)
             returned = False
             for future in range(index + 1, min(len(frame), index + horizon + 1)):
+                if frame["timestamp_utc"].iloc[future] > horizon_end:
+                    break
                 if not bool(frame["chop_active"].iloc[future]) or int(frame["chop_episode_id"].iloc[future]) != episode:
                     break
                 if direction > 0:

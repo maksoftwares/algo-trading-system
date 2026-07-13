@@ -1,0 +1,293 @@
+{
+  "base_commit": "2cddc16f380f531c3cf4b5922f5bd9fca8e29fff",
+  "branch": "codex/xau-chop-m30-bounded-verification-v1",
+  "corrected_m30_result": {
+    "accepted_trades": 141,
+    "active_weekdays": 6,
+    "ambiguous_trades": 1,
+    "approx_max_floating_drawdown_r": 9.999999999999945,
+    "average_gross_loss_r": -0.904658744888439,
+    "average_gross_win_r": 1.2889892577152084,
+    "average_holding_minutes": 330.88652482269504,
+    "baseline_expectancy": 0.12633096045667458,
+    "baseline_gross_r": 23.804829150381778,
+    "baseline_net_r": 17.812665424391117,
+    "baseline_profit_factor": 1.261407724553443,
+    "best_year": 2019,
+    "breakeven_trades": 0,
+    "chop_episode_coverage_pct": 26.280623608017816,
+    "chop_episodes_traded": 118,
+    "cost_scenario": "BASELINE",
+    "decision_category": "BORDERLINE_DO_NOT_ENGINEER",
+    "expectancy_per_setup_episode": 0.13808267770845828,
+    "illustrative_equity_return_pct_at_0p5pct_risk": 8.906332712195558,
+    "later_net_r": 1.014554143602331,
+    "later_profit_factor": 1.0440674917012949,
+    "long_trades": 67,
+    "longest_losing_streak": 9,
+    "losses": 73,
+    "max_closed_drawdown_r": 8.999999999999945,
+    "median_holding_minutes": 140.0,
+    "negative_years": 3,
+    "positive_years": 6,
+    "realized_win_loss_ratio": 1.354158292535314,
+    "rejected_signals": 447,
+    "rollover_crossing_trades": 24,
+    "scenario_net_r": 17.812665424391117,
+    "scenario_profit_factor": 1.261407724553443,
+    "segment_a_net_r": 16.79811128078878,
+    "segment_b_net_r": -0.42867004971829126,
+    "segment_c_net_r": 1.4432241933206218,
+    "short_trades": 74,
+    "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+    "stress_net_r": 10.257641174281588,
+    "stress_profit_factor": 1.1422595676787863,
+    "timeframe": "M30",
+    "top_five_winner_share": 0.12834061620367815,
+    "top_ten_winner_share": 0.23195416920784337,
+    "top_three_winning_days_share": 0.08036717626398235,
+    "total_chop_episodes": 449,
+    "total_raw_signals": 588,
+    "trades_per_year": 15.666666666666666,
+    "unique_setup_episodes": 129,
+    "win_rate": 0.48226950354609927,
+    "wins": 68,
+    "worst_year": 2024
+  },
+  "corrections": [
+    "REGIME_EXIT_RECORDED_AT_EXECUTABLE_OPEN_AND_COOLDOWN_STARTS_THERE",
+    "MAX_HOLD_USES_ELAPSED_UTC_TIME",
+    "GAP_THROUGH_STOP_USES_WORSE_EXECUTABLE_OPEN",
+    "M30_EXIT_AND_MFE_MAE_REPLAYED_ON_ORDERED_M5_SUBBARS",
+    "MEAN_REVERSION_DIAGNOSTICS_ARE_EPISODE_AND_GAP_SAFE"
+  ],
+  "data_coverage": {
+    "actual_end": "2025-07-01T00:00:00+00:00",
+    "actual_start": "2016-07-01T00:00:00+00:00",
+    "common_years": 8.999500331971225,
+    "missing_intervals": [
+      {
+        "end": "2026-06-30T23:59:59+00:00",
+        "start": "2025-07-01T00:00:00+00:00"
+      }
+    ],
+    "requested_end": "2026-06-30T23:59:59+00:00",
+    "requested_start": "2016-07-01T00:00:00+00:00",
+    "status": "DATA_COVERAGE_PARTIAL_REQUESTED_TAIL_MISSING",
+    "timeframes": {
+      "H1": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 533,
+        "incomplete_m30_buckets_dropped": 0,
+        "input_sha256": "3552e55c4203eca69aa63bdf49ad1a3fb03e32562f29ee1e7d51148f483ad358",
+        "invalid_prices": 0,
+        "maximum_gap_hours": 82.0,
+        "native": true,
+        "rows": 53040,
+        "source": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "H4": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 476,
+        "incomplete_m30_buckets_dropped": 0,
+        "input_sha256": "02d5f6d6ae9f39037dd7731aa89ab39b30590334167add166d2036b8e1352538",
+        "invalid_prices": 0,
+        "maximum_gap_hours": 80.0,
+        "native": true,
+        "rows": 14346,
+        "source": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M15": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2329,
+        "incomplete_m30_buckets_dropped": 0,
+        "input_sha256": "d08c62645b9504d49d537c209ef0f26afebd6d26dc18303b215f3c3ca4bb8833",
+        "invalid_prices": 0,
+        "maximum_gap_hours": 81.25,
+        "native": true,
+        "rows": 212048,
+        "source": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M15/XAUUSD_capital_com_M15_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M30": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 1735,
+        "incomplete_m30_buckets_dropped": 3319,
+        "input_sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+        "invalid_prices": 0,
+        "maximum_gap_hours": 82.0,
+        "native": false,
+        "rows": 102969,
+        "source": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M5": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2339,
+        "incomplete_m30_buckets_dropped": 0,
+        "input_sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+        "invalid_prices": 0,
+        "maximum_gap_hours": 81.16666666666667,
+        "native": true,
+        "rows": 633069,
+        "source": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      }
+    },
+    "timestamp_basis": "UTC fields from Capital.com processed broker bars; treated consistently as broker-source timestamps"
+  },
+  "diagnostic_timing_basis": "BOUNDARY_RETURN_AND_REMAINING_REGIME_DURATION_ARE_EX_POST_ONLY",
+  "direction_results": [
+    {
+      "direction": "LONG",
+      "expectancy_r": 0.19029572894739197,
+      "losses": 32,
+      "median_mae_r": 0.7519256282424934,
+      "median_mfe_r": 1.032718371628864,
+      "net_r": 12.749813839475262,
+      "profit_factor": 1.4020959716660255,
+      "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+      "stress_net_r": 9.147918734188092,
+      "stress_profit_factor": 1.2733122637517906,
+      "timeframe": "M30",
+      "trades": 67,
+      "wins": 35
+    },
+    {
+      "direction": "SHORT",
+      "expectancy_r": 0.06841691330967369,
+      "losses": 41,
+      "median_mae_r": 0.9581372783669,
+      "median_mfe_r": 0.9774288797104327,
+      "net_r": 5.062851584915853,
+      "profit_factor": 1.1389636225372184,
+      "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+      "stress_net_r": 1.1097224400934977,
+      "stress_profit_factor": 1.0287235907808625,
+      "timeframe": "M30",
+      "trades": 74,
+      "wins": 33
+    }
+  ],
+  "frozen_parameters_changed": false,
+  "gate_audit": {
+    "all_strategy_gates_pass": false,
+    "data_tail_complete": false,
+    "final_advancement_allowed": false,
+    "gates": [
+      {
+        "name": "accepted_trades",
+        "observed": 141,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 100
+      },
+      {
+        "name": "unique_setup_episodes",
+        "observed": 129,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 60
+      },
+      {
+        "name": "chop_episodes_traded",
+        "observed": 118,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 40
+      },
+      {
+        "name": "baseline_profit_factor",
+        "observed": 1.261407724553443,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 1.2
+      },
+      {
+        "name": "baseline_expectancy_r",
+        "observed": 0.12633096045667458,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 0.08
+      },
+      {
+        "name": "later_net_r",
+        "observed": 1.014554143602331,
+        "operator": ">",
+        "passed": true,
+        "threshold": 0.0
+      },
+      {
+        "name": "later_profit_factor",
+        "observed": 1.0440674917012949,
+        "operator": ">=",
+        "passed": false,
+        "threshold": 1.1
+      },
+      {
+        "name": "positive_chronological_segments",
+        "observed": 2,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 2
+      },
+      {
+        "name": "stress_net_r",
+        "observed": 10.257641174281588,
+        "operator": ">",
+        "passed": true,
+        "threshold": 0.0
+      },
+      {
+        "name": "stress_profit_factor",
+        "observed": 1.1422595676787863,
+        "operator": ">=",
+        "passed": true,
+        "threshold": 1.05
+      },
+      {
+        "name": "max_closed_drawdown_r",
+        "observed": 8.999999999999945,
+        "operator": "<=",
+        "passed": true,
+        "threshold": 20.0
+      },
+      {
+        "name": "top_ten_winner_share",
+        "observed": 0.23195416920784337,
+        "operator": "<=",
+        "passed": true,
+        "threshold": 0.5
+      },
+      {
+        "name": "single_positive_year_share",
+        "observed": 0.30364988422609435,
+        "operator": "<=",
+        "passed": true,
+        "threshold": 0.5
+      },
+      {
+        "name": "populated_subtype_below_0p85_pf",
+        "observed": false,
+        "operator": "==",
+        "passed": true,
+        "threshold": false
+      }
+    ],
+    "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+    "timeframe": "M30",
+    "unchanged_gate": true
+  },
+  "ordered_execution_replay": "M5_SUBBARS",
+  "outcome": "FOLLOWUP_DATA_INCOMPLETE_NO_ADVANCEMENT",
+  "schema_version": "chop_m30_bounded_verification_v1",
+  "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+  "timeframe": "M30"
+}

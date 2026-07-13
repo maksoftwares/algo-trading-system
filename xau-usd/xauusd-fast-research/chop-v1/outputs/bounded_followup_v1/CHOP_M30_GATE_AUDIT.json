@@ -1,0 +1,108 @@
+{
+  "all_strategy_gates_pass": false,
+  "data_tail_complete": false,
+  "final_advancement_allowed": false,
+  "gates": [
+    {
+      "name": "accepted_trades",
+      "observed": 141,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 100
+    },
+    {
+      "name": "unique_setup_episodes",
+      "observed": 129,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 60
+    },
+    {
+      "name": "chop_episodes_traded",
+      "observed": 118,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 40
+    },
+    {
+      "name": "baseline_profit_factor",
+      "observed": 1.261407724553443,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 1.2
+    },
+    {
+      "name": "baseline_expectancy_r",
+      "observed": 0.12633096045667458,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 0.08
+    },
+    {
+      "name": "later_net_r",
+      "observed": 1.014554143602331,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.0
+    },
+    {
+      "name": "later_profit_factor",
+      "observed": 1.0440674917012949,
+      "operator": ">=",
+      "passed": false,
+      "threshold": 1.1
+    },
+    {
+      "name": "positive_chronological_segments",
+      "observed": 2,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 2
+    },
+    {
+      "name": "stress_net_r",
+      "observed": 10.257641174281588,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.0
+    },
+    {
+      "name": "stress_profit_factor",
+      "observed": 1.1422595676787863,
+      "operator": ">=",
+      "passed": true,
+      "threshold": 1.05
+    },
+    {
+      "name": "max_closed_drawdown_r",
+      "observed": 8.999999999999945,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 20.0
+    },
+    {
+      "name": "top_ten_winner_share",
+      "observed": 0.23195416920784337,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "single_positive_year_share",
+      "observed": 0.30364988422609435,
+      "operator": "<=",
+      "passed": true,
+      "threshold": 0.5
+    },
+    {
+      "name": "populated_subtype_below_0p85_pf",
+      "observed": false,
+      "operator": "==",
+      "passed": true,
+      "threshold": false
+    }
+  ],
+  "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+  "timeframe": "M30",
+  "unchanged_gate": true
+}

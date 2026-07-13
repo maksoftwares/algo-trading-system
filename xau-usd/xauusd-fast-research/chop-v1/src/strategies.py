@@ -119,7 +119,7 @@ def equilibrium_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, 
         idx = rows.index
         rows["setup_episode_id"] = setup_ids.loc[idx].astype(int)
         starts = work.loc[setup_ids > 0].groupby(setup_ids.loc[setup_ids > 0])["timestamp_utc"].min()
-        rows["setup_start_time"] = rows["setup_episode_id"].map(starts)
+        rows["setup_start_time"] = rows["setup_episode_id"].map(starts) if len(rows) else pd.NaT
         rows["signal_accepted_pre_execution"] = accepted.loc[idx].astype(bool)
         rows["rejection_reason"] = np.where(rows["signal_accepted_pre_execution"], "", "EQUILIBRIUM_SIGNAL_CONDITION_FAILED")
         rows["atr"] = atr_value.loc[idx]
@@ -127,6 +127,7 @@ def equilibrium_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, 
         rows["stop_kind"] = "ENTRY_ATR"
         rows["stop_value"] = float(settings["stop_atr"])
         rows["max_hold_bars"] = cb.hold_standard
+        rows["max_hold_hours"] = float(settings["max_hold_hours"])
         rows["raw_z"] = z.loc[idx]
         rows["raw_center"] = median.loc[idx]
         rows["raw_scale"] = scale.loc[idx]
@@ -185,6 +186,9 @@ def impulse_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, Any]
             impulse_high.loc[idx] + float(settings["stop_buffer_atr"]) * atr_value.loc[idx],
         )
         rows["max_hold_bars"] = cb.hold_impulse
+        rows["max_hold_hours"] = float(settings["max_hold_hours"])
+        rows["min_stop_atr"] = float(settings["min_stop_atr"])
+        rows["max_stop_atr"] = float(settings["max_stop_atr"])
         rows["raw_z"] = impulse_z.loc[idx]
         rows["raw_center"] = impulse_start.loc[idx]
         rows["raw_scale"] = std.loc[idx]
@@ -195,8 +199,8 @@ def impulse_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, Any]
     return result
 
 
-def _rotation_memory(z: pd.Series, active: pd.Series, memory_bars: int, side: str) -> tuple[pd.Series, pd.Series]:
-    condition = z <= -1.5 if side == "LONG" else z >= 1.5
+def _rotation_memory(z: pd.Series, active: pd.Series, memory_bars: int, side: str, excursion_z: float) -> tuple[pd.Series, pd.Series]:
+    condition = z <= -excursion_z if side == "LONG" else z >= excursion_z
     recent = condition.shift(1).rolling(memory_bars, min_periods=1).max().fillna(0).astype(bool) & active
     episode_ids = np.zeros(len(z), dtype=int)
     counter = 0
@@ -223,8 +227,10 @@ def rotation_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, Any
     z = (work["mid_close"] - center) / std.replace(0.0, np.nan)
     atr_value = atr(work, cb.atr)
     two_hour_return = np.log(work["mid_close"] / work["mid_close"].shift(cb.confirmation))
-    long_memory, long_ids = _rotation_memory(z, work["chop_active"], cb.memory, "LONG")
-    short_memory, short_ids = _rotation_memory(z, work["chop_active"], cb.memory, "SHORT")
+    excursion_z = float(settings["excursion_z"])
+    target_band_z = float(settings["target_band_z"])
+    long_memory, long_ids = _rotation_memory(z, work["chop_active"], cb.memory, "LONG", excursion_z)
+    short_memory, short_ids = _rotation_memory(z, work["chop_active"], cb.memory, "SHORT", excursion_z)
     long_cross = (work["mid_close"].shift(1) < center.shift(1)) & (work["mid_close"] > center)
     short_cross = (work["mid_close"].shift(1) > center.shift(1)) & (work["mid_close"] < center)
     common = work["chop_active"] & np.isfinite(z) & np.isfinite(atr_value) & (atr_value > 0)
@@ -238,14 +244,15 @@ def rotation_signals(frame: pd.DataFrame, cb: ClockBars, settings: dict[str, Any
         idx = rows.index
         rows["setup_episode_id"] = setup_ids.loc[idx].astype(int)
         starts = work.loc[setup_ids > 0].groupby(setup_ids.loc[setup_ids > 0])["timestamp_utc"].min()
-        rows["setup_start_time"] = rows["setup_episode_id"].map(starts)
+        rows["setup_start_time"] = rows["setup_episode_id"].map(starts) if len(rows) else pd.NaT
         rows["signal_accepted_pre_execution"] = accepted.loc[idx].astype(bool)
         rows["rejection_reason"] = np.where(rows["signal_accepted_pre_execution"], "", "ROTATION_CONFIRMATION_FAILED")
         rows["atr"] = atr_value.loc[idx]
-        rows["target_frozen"] = np.where(direction == "LONG", center.loc[idx] + 1.25 * std.loc[idx], center.loc[idx] - 1.25 * std.loc[idx])
+        rows["target_frozen"] = np.where(direction == "LONG", center.loc[idx] + target_band_z * std.loc[idx], center.loc[idx] - target_band_z * std.loc[idx])
         rows["stop_kind"] = "ENTRY_ATR"
         rows["stop_value"] = float(settings["stop_atr"])
         rows["max_hold_bars"] = cb.hold_standard
+        rows["max_hold_hours"] = float(settings["max_hold_hours"])
         rows["raw_z"] = z.loc[idx]
         rows["raw_center"] = center.loc[idx]
         rows["raw_scale"] = std.loc[idx]
