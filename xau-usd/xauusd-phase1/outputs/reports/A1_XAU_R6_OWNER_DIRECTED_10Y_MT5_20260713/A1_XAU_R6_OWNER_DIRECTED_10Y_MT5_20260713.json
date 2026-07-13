@@ -1,0 +1,67 @@
+{
+  "schema_version": "a1_xau_r6_owner_directed_single_event_mt5_v1",
+  "status": "DEVELOPMENT_ONLY_SINGLE_EVENT_NOT_QUALIFIED",
+  "generated_at_utc": "2026-07-13T05:55:17.817576+00:00",
+  "elapsed_seconds": 107.414373,
+  "tester_root": "C:\\MT5A1M5MomentumBacktest",
+  "from_date": "2016.07.01",
+  "to_date": "2026.07.01",
+  "report": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-router-audit\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_R6_OWNER_DIRECTED_10Y_MT5_20260713\\A1_XAU_R6_OWNER_DIRECTED_10Y_MT5_20260713.htm",
+  "compile_log": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-router-audit\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_R6_OWNER_DIRECTED_10Y_MT5_20260713\\compile_A1XauR6OwnerDirectedSingleEventBacktest.log",
+  "config": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-router-audit\\xau-usd\\xauusd-phase1\\outputs\\reports\\A1_XAU_R6_OWNER_DIRECTED_10Y_MT5_20260713\\A1_XAU_R6_OWNER_DIRECTED_10Y_MT5_20260713.ini",
+  "compile_exit_code": 1,
+  "metrics": {
+    "History Quality": "98%",
+    "Bars": "703491",
+    "Ticks": "358249613",
+    "Total Net Profit": "20.07",
+    "Gross Profit": "20.07",
+    "Balance Drawdown Maximal": "0.00 (0.00%)",
+    "Equity Drawdown Maximal": "17.35 (1.71%)",
+    "Gross Loss": "0.00",
+    "Balance Drawdown Relative": "0.00% (0.00)",
+    "Equity Drawdown Relative": "1.71% (17.35)",
+    "Profit Factor": "0.00",
+    "Expected Payoff": "20.07",
+    "Total Trades": "1",
+    "Total Deals": "2",
+    "Profit Trades (% of total)": "1 (100.00%)",
+    "Loss Trades (% of total)": "0 (0.00%)"
+  },
+  "deals": [
+    {
+      "time": "2024.08.30 17:00:00",
+      "deal": "2",
+      "symbol": "XAUUSD",
+      "type": "sell",
+      "direction": "in",
+      "volume": "0.01",
+      "price": "2497.63",
+      "commission": "2",
+      "swap": "0.00",
+      "profit": "0.00",
+      "balance": "1 000.00",
+      "comment": "R6_OWNER_SCREEN"
+    },
+    {
+      "time": "2024.09.03 13:49:30",
+      "deal": "3",
+      "symbol": "XAUUSD",
+      "type": "buy",
+      "direction": "out",
+      "volume": "0.01",
+      "price": "2477.56",
+      "commission": "3",
+      "swap": "0.00",
+      "profit": "20.07",
+      "balance": "1 020.07",
+      "comment": "tp 2477.59"
+    }
+  ],
+  "limitations": [
+    "the decade locked detector found only one structural event",
+    "the MT5 EA executes that frozen event timestamp rather than reimplementing the full detector",
+    "one trade cannot establish expectancy, PF, win rate, or robustness",
+    "no demo/live runtime or broker position was touched"
+  ]
+}
