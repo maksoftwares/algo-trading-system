@@ -46,6 +46,10 @@ COMMAND_FIELDS = {"command","exit_code","stdout_base64","stderr_base64","stdout_
 BAR_COLUMNS = ["schema_version","timeframe","open_time_broker","open","high","low","close","tick_volume","spread","real_volume","copyrates_return","copyrates_error"]
 INTERFACE_COLUMNS = ["schema_version","timeframe","open_time_broker","open","high","low","close","tick_volume","real_volume","copyrates_spread","copyspread_spread","ispread_spread","copyspread_return","copyspread_error","ibarshift","ispread_error","point","digits"]
 TICK_COLUMNS = ["schema_version","broker_day","time_msc","time","bid","ask","last","volume","volume_real","flags","raw_ask_minus_bid","raw_spread_points","negative_spread_boolean","quote_sides_positive","copyticks_return","copyticks_error"]
+NATIVE_REPORT_REQUIRED_FIELDS = (
+    "Expert", "Symbol", "Period", "History Quality", "Company", "Currency",
+    "Initial Deposit", "Leverage", "Bars", "Ticks", "Total Trades", "Total Deals",
+)
 TICK_DAYS = {"ticks_20250618.tsv":"2025.06.18","ticks_20250929.tsv":"2025.09.29","ticks_20251117.tsv":"2025.11.17","ticks_20260414.tsv":"2026.04.14"}
 FORBIDDEN_ROOT_SURFACES = (
     "Bases", "bases", "history", "Tester/bases", "Tester/cache", "MQL5/Files",
@@ -192,7 +196,7 @@ def native_report_fields(path: Path) -> dict[str,str]:
 
 def validate_effective_report(path: Path) -> dict[str,str]:
     fields=native_report_fields(path)
-    required={"Expert","Symbol","Period","History Quality","Company","Currency","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
+    required=set(NATIVE_REPORT_REQUIRED_FIELDS)
     if not required<=set(fields): raise RuntimeError(f"native report effective-setting fields missing: {sorted(required-set(fields))}")
     if Path(fields["Expert"].split()[0]).stem!="A1XauR6NativeSpreadProvenanceProbe": raise RuntimeError("native report expert mismatch")
     if fields["Symbol"].split()[0]!="XAUUSD": raise RuntimeError("native report symbol mismatch")
@@ -517,7 +521,7 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    expected_name=f"A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    expected_name=f"A1_XAU_NP1G2A10_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
     if path.name != expected_name or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")

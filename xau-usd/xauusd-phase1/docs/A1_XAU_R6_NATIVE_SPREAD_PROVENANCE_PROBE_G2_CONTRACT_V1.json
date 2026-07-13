@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2A8_REVIEW_EEA19E1E_2026_07_13.md",
-    "artifact_sha256": "dea3567e47a08785c98b234ffbda5ac8533b628d770be011c5b634c0d74d0096",
+    "artifact": "A1_XAU_NP1G2A9_REVIEW_47594949_2026_07_13.md",
+    "artifact_sha256": "f117122b98b7a47a4f0cb21fe747e21e8cfffcd26151f523c579d07d4ae82a78",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A9_NATIVE_REPORT_REAL_TICK_MODEL_CLOSURE"
+    "phase": "NP1-G2A10_NATIVE_REPORT_CONTRACT_SCHEMA_ALIGNMENT_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -44,7 +44,7 @@
     "canonical_repository_reports_root_only": true
   },
   "effective_tester_evidence": {
-    "native_report_required_fields": ["Expert", "Symbol", "Period", "Initial Deposit", "Leverage", "Bars", "Ticks", "Total Trades", "Total Deals"],
+    "native_report_required_fields": ["Expert", "Symbol", "Period", "History Quality", "Company", "Currency", "Initial Deposit", "Leverage", "Bars", "Ticks", "Total Trades", "Total Deals"],
     "exact_semantics": {
       "expert": "A1XauR6NativeSpreadProvenanceProbe",
       "symbol": "XAUUSD",
@@ -97,7 +97,7 @@
     "probe1_probe2_byte_stability": true
   },
   "review_parser": {
-    "accepted_filename_pattern": "A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_pattern": "A1_XAU_NP1G2A10_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
     "accepted_filename_derived_from_exact_reviewed_commit": true,
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
@@ -143,7 +143,9 @@
     "g2a7_commit": "30c58650c56ed39ce61e7cf1d1aed81610f8e1c9",
     "g2a7_tree": "4866e4399b7c2fa0768687c9e63fe73b52da940e",
     "g2a8_commit": "eea19e1ed6898cdba64f15f51aee00ca50429905",
-    "g2a8_tree": "954af7032ee8add6971a74a17f29d09e74851d42"
+    "g2a8_tree": "954af7032ee8add6971a74a17f29d09e74851d42",
+    "g2a9_commit": "47594949c03d155ca81473ce17826b839065e7cf",
+    "g2a9_tree": "5d6e8c58c9554e928fa502e60dcac73871e5db21"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]

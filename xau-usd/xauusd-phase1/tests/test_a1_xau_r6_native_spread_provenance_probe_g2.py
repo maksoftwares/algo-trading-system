@@ -65,7 +65,37 @@ def _auth_fields(commit: str, tree: str) -> dict[str,str]:
 
 
 def _authorization_name(commit: str) -> str:
-    return f"A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    return f"A1_XAU_NP1G2A10_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+
+
+def _assert_native_report_required_fields_aligned(contract_fields: list[str], runner_fields: tuple[str, ...]) -> None:
+    assert len(contract_fields) == len(set(contract_fields))
+    assert len(runner_fields) == len(set(runner_fields))
+    assert set(contract_fields) == set(runner_fields)
+
+
+def test_contract_native_report_required_fields_exactly_match_runner() -> None:
+    contract_path = PHASE / "docs" / "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_CONTRACT_V1.json"
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    contract_fields = contract["effective_tester_evidence"]["native_report_required_fields"]
+    expected = (
+        "Expert", "Symbol", "Period", "History Quality", "Company", "Currency",
+        "Initial Deposit", "Leverage", "Bars", "Ticks", "Total Trades", "Total Deals",
+    )
+    assert tuple(contract_fields) == G.NATIVE_REPORT_REQUIRED_FIELDS == expected
+    _assert_native_report_required_fields_aligned(contract_fields, G.NATIVE_REPORT_REQUIRED_FIELDS)
+
+
+@pytest.mark.parametrize("required_field", ["History Quality", "Company", "Currency"])
+@pytest.mark.parametrize("removed_from", ["contract", "runner"])
+def test_native_report_required_field_removal_breaks_cross_file_invariant(required_field: str, removed_from: str) -> None:
+    contract_path = PHASE / "docs" / "A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2_CONTRACT_V1.json"
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    contract_fields = list(contract["effective_tester_evidence"]["native_report_required_fields"])
+    runner_fields = list(G.NATIVE_REPORT_REQUIRED_FIELDS)
+    (contract_fields if removed_from == "contract" else runner_fields).remove(required_field)
+    with pytest.raises(AssertionError):
+        _assert_native_report_required_fields_aligned(contract_fields, tuple(runner_fields))
 
 
 def _retag_selected(packet: Path, run_id: str, kind: str, path: Path) -> None:
