@@ -7,6 +7,7 @@ review artifact activates the reserved budget.
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import hashlib
 import json
@@ -15,6 +16,7 @@ import re
 import shutil
 import subprocess
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
@@ -39,6 +41,11 @@ WARMUP_ASSERTIONS = {"environment", "run_id", "zero_files", "positions_zero", "o
 OFFICIAL_ASSERTIONS = {"environment", "run_id", "zero_files", "positions_zero", "orders_zero", "h1_export", "h4_export", "d1_export", "interfaces_export", "ticks_20250618", "ticks_20250929", "ticks_20251117", "ticks_20260414"}
 G2_README = "# NP1-G2 Native Spread Provenance Probe\n\nStatus: `NP1_G2_DIAGNOSTIC_COMPLETE`. Diagnostic only.\n"
 G2_VALIDATION = "# NP1-G2 Validation\n\nLocked G2 implementation and evidence verification passed.\n"
+COMMAND_FIELDS = {"command","exit_code","stdout_base64","stderr_base64","stdout_sha256","stderr_sha256"}
+BAR_COLUMNS = ["schema_version","timeframe","open_time_broker","open","high","low","close","tick_volume","spread","real_volume","copyrates_return","copyrates_error"]
+INTERFACE_COLUMNS = ["schema_version","timeframe","open_time_broker","open","high","low","close","tick_volume","real_volume","copyrates_spread","copyspread_spread","ispread_spread","copyspread_return","copyspread_error","ibarshift","ispread_error","point","digits"]
+TICK_COLUMNS = ["schema_version","broker_day","time_msc","time","bid","ask","last","volume","volume_real","flags","raw_ask_minus_bid","raw_spread_points","negative_spread_boolean","quote_sides_positive","copyticks_return","copyticks_error"]
+TICK_DAYS = {"ticks_20250618.tsv":"2025.06.18","ticks_20250929.tsv":"2025.09.29","ticks_20251117.tsv":"2025.11.17","ticks_20260414.tsv":"2026.04.14"}
 FORBIDDEN_ROOT_SURFACES = (
     "Bases", "bases", "history", "Tester/bases", "Tester/cache", "MQL5/Files",
     "Logs", "Reports", "Profiles",
@@ -168,6 +175,31 @@ def validate_fresh_report(path: Path, not_before_ns: int, parser: Callable[[Path
     return parser(path)
 
 
+def native_report_fields(path: Path) -> dict[str,str]:
+    import analyze_a1_xau_r6_native_spread_provenance_probe as A
+    raw=path.read_bytes(); text=raw.decode("utf-16") if raw.startswith((b"\xff\xfe",b"\xfe\xff")) else raw.decode("utf-8-sig")
+    cells=A.Cells(); cells.feed(text)
+    return {cell[:-1].strip():cells.cells[index+1].strip() for index,cell in enumerate(cells.cells[:-1]) if cell.endswith(":")}
+
+
+def validate_effective_report(path: Path) -> dict[str,str]:
+    fields=native_report_fields(path)
+    required={"Expert","Symbol","Period","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
+    if not required<=set(fields): raise RuntimeError(f"native report effective-setting fields missing: {sorted(required-set(fields))}")
+    if Path(fields["Expert"].split()[0]).stem!="A1XauR6NativeSpreadProvenanceProbe": raise RuntimeError("native report expert mismatch")
+    if fields["Symbol"].split()[0]!="XAUUSD": raise RuntimeError("native report symbol mismatch")
+    normalized_period=" ".join(fields["Period"].replace("-"," - ").split())
+    if not normalized_period.startswith("M5") or "2015.06.01" not in normalized_period or "2026.07.01" not in normalized_period: raise RuntimeError("native report period/date mismatch")
+    deposit=float(re.sub(r"[^0-9.]","",fields["Initial Deposit"]))
+    if abs(deposit-10000.0)>1e-9 or "USD" not in fields["Initial Deposit"].upper(): raise RuntimeError("native report deposit/currency mismatch")
+    if re.sub(r"\s","",fields["Leverage"])!="1:50": raise RuntimeError("native report leverage mismatch")
+    def integer(name: str) -> int: return int(re.sub(r"[^0-9]","",fields[name]))
+    if integer("Bars")<=0 or integer("Ticks")<=0 or integer("Total Trades")!=0 or integer("Total Deals")!=0: raise RuntimeError("native report bars/ticks/zero-action mismatch")
+    if "Model" in fields and "real tick" not in fields["Model"].lower(): raise RuntimeError("native report model mismatch")
+    if "Company" in fields and fields["Company"]!="Capital Com Mena Securities Trading L.L.C": raise RuntimeError("native report company mismatch")
+    return fields
+
+
 class Ledger:
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -208,6 +240,7 @@ def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before
     shutil.copyfile(ini,destination/"tester.ini"); selected=[{"kind":"tester_ini","source":str(ini),"sha256":sha256_file(ini),"size_bytes":ini.stat().st_size}]
     report = expected_report(root, run_id)
     validate_fresh_report(report, not_before_ns, parser)
+    validate_effective_report(report)
     shutil.copyfile(report, destination / "native_report.htm")
     selected.append({"kind":"native_report","source":str(report),"sha256":sha256_file(report),"size_bytes":report.stat().st_size,"fresh_not_before_ns":not_before_ns})
     names = G1.WARMUP_NAMES if run_id == "warmup" else G1.OFFICIAL_NAMES
@@ -233,14 +266,69 @@ def write_g2_wrapper(packet: Path, result: dict[str, Any]) -> None:
     (packet/"test_validation.md").write_text(G2_VALIDATION,encoding="utf-8",newline="\n")
 
 
+def read_tsv_exact(path: Path, columns: list[str]) -> list[dict[str,str]]:
+    with path.open(encoding="utf-8-sig",newline="") as handle:
+        reader=csv.DictReader(handle,delimiter="\t")
+        if reader.fieldnames!=columns: raise RuntimeError(f"exact TSV schema mismatch: {path.name}")
+        return list(reader)
+
+
 def assert_exact_assertions(packet: Path) -> None:
     for run_id in RUN_IDS:
-        with (packet/"runs"/run_id/"assertions.tsv").open(encoding="utf-8-sig",newline="") as handle:
-            rows=list(csv.DictReader(handle,delimiter="\t"))
+        rows=read_tsv_exact(packet/"runs"/run_id/"assertions.tsv",["assertion_id","passed","observed","expected"])
         expected=WARMUP_ASSERTIONS if run_id=="warmup" else OFFICIAL_ASSERTIONS
         ids=[row.get("assertion_id") for row in rows]
         if set(ids)!=expected or len(ids)!=len(expected) or any(row.get("passed")!="true" for row in rows):
             raise RuntimeError(f"exact {run_id} assertion set mismatch")
+        expected_values={value:("pass","pass") for value in expected}; expected_values.update(positions_zero=("0","0"),orders_zero=("0","0"),run_id=(("warmup","warmup") if run_id=="warmup" else ("official","official")))
+        if run_id=="warmup": expected_values["warmup_only"]=("true","true")
+        if any((row["observed"],row["expected"])!=expected_values[row["assertion_id"]] for row in rows): raise RuntimeError(f"{run_id} assertion observed/expected mismatch")
+
+
+def validate_command_records(commands: list[dict[str,Any]], root: Path) -> None:
+    if len(commands)!=4 or any(set(row)!=COMMAND_FIELDS for row in commands): raise RuntimeError("command record closed schema mismatch")
+    for row in commands:
+        for stream in ("stdout","stderr"):
+            try: decoded=base64.b64decode(row[f"{stream}_base64"],validate=True)
+            except Exception as exc: raise RuntimeError("command stream base64 mismatch") from exc
+            if hashlib.sha256(decoded).hexdigest()!=row[f"{stream}_sha256"]: raise RuntimeError("command stream hash mismatch")
+    compile_expected=[str((root/"MetaEditor64.exe").resolve()),f"/compile:{(root/'MQL5'/'Experts'/B.PROBE_NAME).resolve()}",f"/log:{(root/'compile.log').resolve()}"]
+    if commands[0]["command"]!=compile_expected or int(commands[0]["exit_code"]) not in {0,1}: raise RuntimeError("compile command/exit semantics mismatch")
+    for run_id,row in zip(RUN_IDS,commands[1:]):
+        expected=[str((root/"terminal64.exe").resolve()),"/portable",f"/config:{(root/'Config'/f'np1_g2_{run_id}.ini').resolve()}"]
+        if row["command"]!=expected or int(row["exit_code"])!=0: raise RuntimeError("tester command/exit semantics mismatch")
+
+
+def validate_native_exports(packet: Path) -> None:
+    run=packet/"runs"/"probe1"
+    for timeframe in ("H1","H4","D1"):
+        rows=read_tsv_exact(run/f"{timeframe.lower()}_bars.tsv",BAR_COLUMNS)
+        if not rows: raise RuntimeError("empty bar export")
+        stamps=[row["open_time_broker"] for row in rows]
+        if stamps!=sorted(set(stamps)): raise RuntimeError("bar timestamps not unique/monotonic")
+        if any(row["schema_version"]!="a1_xau_np1_g1_bar_v1" or row["timeframe"]!=timeframe or int(row["copyrates_error"])!=0 or int(row["copyrates_return"])!=len(rows) or not ("2015.06.01"<=row["open_time_broker"]<"2026.07.01") for row in rows): raise RuntimeError("bar native return/error/range mismatch")
+    interfaces=read_tsv_exact(run/"bar_spread_interfaces.tsv",INTERFACE_COLUMNS)
+    if not interfaces: raise RuntimeError("empty interface export")
+    keys=[(row["timeframe"],row["open_time_broker"]) for row in interfaces]
+    if len(keys)!=len(set(keys)) or any([row["open_time_broker"] for row in interfaces if row["timeframe"]==tf]!=sorted(row["open_time_broker"] for row in interfaces if row["timeframe"]==tf) for tf in ("H1","H4","D1")): raise RuntimeError("interface timestamps not unique/monotonic")
+    if any(row["schema_version"]!="a1_xau_np1_g1_interface_v1" or row["timeframe"] not in {"H1","H4","D1"} or int(row["copyspread_return"])!=1 or int(row["copyspread_error"])!=0 or int(row["ibarshift"])<0 or int(row["ispread_error"])!=0 for row in interfaces): raise RuntimeError("interface native return/error mismatch")
+    for filename,day in TICK_DAYS.items():
+        rows=read_tsv_exact(run/filename,TICK_COLUMNS)
+        if not rows: raise RuntimeError("empty tick export")
+        times=[int(row["time_msc"]) for row in rows]
+        if times!=sorted(set(times)): raise RuntimeError("tick timestamps not unique/monotonic")
+        implied_points=[]
+        for row in rows:
+            if row["schema_version"]!="a1_xau_np1_g1_tick_v1" or row["broker_day"]!=day or not row["time"].startswith(day) or int(row["copyticks_error"])!=0 or int(row["copyticks_return"])!=len(rows): raise RuntimeError("tick native return/error/day mismatch")
+            if row["quote_sides_positive"]=="true":
+                raw=float(row["ask"])-float(row["bid"])
+                if abs(raw-float(row["raw_ask_minus_bid"]))>1e-8 or (row["negative_spread_boolean"]=="true")!=(raw<0): raise RuntimeError("raw tick arithmetic mismatch")
+                points=float(row["raw_spread_points"])
+                if points==0 and raw!=0: raise RuntimeError("raw tick point arithmetic mismatch")
+                if points: implied_points.append(raw/points)
+        if implied_points and max(implied_points)-min(implied_points)>1e-8: raise RuntimeError("inconsistent tick point arithmetic")
+    for run_id in ("probe1","probe2"):
+        if any((packet/"runs"/run_id/name).read_bytes()!=(packet/"runs"/"probe1"/name).read_bytes() for name in G1.OFFICIAL_NAMES): raise RuntimeError("official export drift")
 
 
 def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[str]:
@@ -254,12 +342,7 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
     checks.append("metadata_receipt")
     ledger=load("invocation_ledger.json")
     if ledger!={"metaeditor_compilations":1,"tester_runs":list(RUN_IDS),"last_authorized_command_reached":"probe2"}: raise RuntimeError("invocation ledger mismatch")
-    commands=load("commands.json")
-    if len(commands)!=4 or any(int(row.get("exit_code",1))!=0 for row in commands): raise RuntimeError("command budget/result mismatch")
-    if Path(commands[0].get("command",[""])[0]).name.lower()!="metaeditor64.exe": raise RuntimeError("compile command identity mismatch")
-    for run_id,row in zip(RUN_IDS,commands[1:]):
-        command=row.get("command",[])
-        if not command or Path(command[0]).name.lower()!="terminal64.exe" or f"np1_g2_{run_id}.ini" not in " ".join(command): raise RuntimeError("tester command order/identity mismatch")
+    commands=load("commands.json"); validate_command_records(commands,context["root"])
     checks.append("one_compile_three_ordered_runs")
     compiled=load("compile_attestation.json"); source=packet/"compiled"/B.PROBE_NAME; ex5=packet/"compiled"/Path(compiled["ex5_name"]).name; log=packet/"compiled"/"compile.log"
     B.verify_source(source)
@@ -280,23 +363,42 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
         rows=[row for row in selected if f"np1_g2_{run_id}" in row["source"]]
         if {row["kind"] for row in rows}!=expected_names or len(rows)!=len(expected_names): raise RuntimeError(f"selected source identity mismatch: {run_id}")
         for row in rows:
+            expected_fields={"kind","source","sha256","size_bytes","fresh_not_before_ns"} if row["kind"]=="native_report" else {"kind","source","sha256","size_bytes"}
+            if set(row)!=expected_fields: raise RuntimeError("selected source closed schema mismatch")
             name={"tester_ini":"tester.ini","native_report":"native_report.htm"}.get(row["kind"],row["kind"])
             target=packet/"runs"/run_id/name
             if target.stat().st_size!=row["size_bytes"] or sha256_file(target)!=row["sha256"]: raise RuntimeError("selected source-to-packet mismatch")
+            source_path=Path(row["source"]).resolve()
+            if row["kind"]=="tester_ini": expected_source=(context["root"]/"Config"/f"np1_g2_{run_id}.ini").resolve()
+            elif row["kind"]=="native_report": expected_source=(context["root"]/"Reports"/f"np1_g2_{run_id}.htm").resolve()
+            else:
+                try: relative=source_path.relative_to(context["root"].resolve()).parts
+                except ValueError as exc: raise RuntimeError("selected output source path mismatch") from exc
+                expected_source=source_path
+                if len(relative)!=5 or relative[0]!="Tester" or not relative[1].startswith("Agent-") or relative!=("Tester",relative[1],"MQL5","Files",f"np1_g2_{run_id}_{row['kind']}"): raise RuntimeError("selected output source path mismatch")
+            if row["kind"] in {"tester_ini","native_report"} and source_path!=expected_source: raise RuntimeError("selected source path mismatch")
         if (packet/"runs"/run_id/"tester.ini").read_text(encoding="utf-8")!=render_ini(run_id): raise RuntimeError("packet INI mismatch")
+        validate_effective_report(packet/"runs"/run_id/"native_report.htm")
     checks.append("exact_inis_and_selected_sources")
     preflight={row["relative_path"]:(row.get("size_bytes"),row.get("sha256")) for row in load("preflight_root_inventory.json").get("entries",[]) if row.get("kind")=="file"}
     log_rows=load("logs/log_inventory.json")["logs"]
     if {p.relative_to(packet/"logs").as_posix() for p in (packet/"logs").rglob("*") if p.is_file() and p.name!="log_inventory.json"}!={row["source_relative"] for row in log_rows}: raise RuntimeError("log file-set mismatch")
     for row in log_rows:
+        if set(row)!={"source_relative","size_bytes","sha256"} or re.fullmatch(r"(?:Logs/[^/]+\.log|Tester/logs/[^/]+\.log|Tester/Agent-[^/]+/logs/[^/]+\.log)",row["source_relative"]) is None: raise RuntimeError("unauthorized log path/schema")
         copied=packet/"logs"/row["source_relative"]
         if not copied.is_file() or copied.stat().st_size!=row["size_bytes"] or sha256_file(copied)!=row["sha256"] or preflight.get(row["source_relative"])==(row["size_bytes"],row["sha256"]): raise RuntimeError("fresh log reconciliation mismatch")
     checks.append("fresh_logs")
     report_att=load("reports_directory_attestation.json")
     if report_att.get("reports_path")!=str(context["root"]/"Reports") or not all(report_att.get(k) for k in ("created_by_runner","sentinel_read_back","sentinel_deleted","writable")): raise RuntimeError("Reports attestation mismatch")
-    if load("preflight_root_inventory.json").get("root")!=str(context["root"].resolve()) or load("post_reports_creation_inventory.json").get("root")!=str(context["root"].resolve()) or load("post_run_root_inventory.json").get("root")!=str(context["root"].resolve()): raise RuntimeError("root inventory identity mismatch")
+    pre_obj=load("preflight_root_inventory.json"); reports_obj=load("post_reports_creation_inventory.json"); post_obj=load("post_run_root_inventory.json")
+    if any(obj.get("root")!=str(context["root"].resolve()) for obj in (pre_obj,reports_obj,post_obj)): raise RuntimeError("root inventory identity mismatch")
+    pre_paths={row["relative_path"] for row in pre_obj.get("entries",[])}; reports_paths={row["relative_path"] for row in reports_obj.get("entries",[])}; post_paths={row["relative_path"] for row in post_obj.get("entries",[])}
+    if "Reports" in pre_paths or any(path==surface or path.startswith(surface+"/") for surface in FORBIDDEN_ROOT_SURFACES for path in pre_paths): raise RuntimeError("preflight inventory forbidden surface")
+    if not {MARKER,"terminal64.exe","MetaEditor64.exe"}<=pre_paths or "Reports" not in reports_paths or any(REPORT_SENTINEL in path or path.startswith("Reports/np1_g2_") for path in reports_paths): raise RuntimeError("pre/post Reports inventory mismatch")
+    required_post={*(f"Config/np1_g2_{rid}.ini" for rid in RUN_IDS),*(f"Reports/np1_g2_{rid}.htm" for rid in RUN_IDS)}
+    if not required_post<=post_paths or not any(path.startswith("Tester/Agent-") for path in post_paths): raise RuntimeError("post-run inventory incomplete")
     checks.append("root_and_reports_inventories")
-    assert_exact_assertions(packet); checks.append("exact_zero_action_assertion_sets")
+    assert_exact_assertions(packet); validate_native_exports(packet); checks.append("exact_zero_action_and_native_export_contracts")
     return checks
 
 
@@ -388,7 +490,7 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    if path.name != "A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
+    if path.name != "A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")
     begin, end = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN", "NP1_G2B_AUTHORIZATION_BLOCK_END"

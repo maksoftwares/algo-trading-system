@@ -21,6 +21,11 @@ G = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(G)
 
 
+def _record(command: list[str], exit_code: int = 0, stdout: bytes = b"", stderr: bytes = b"") -> dict[str,object]:
+    done=type("Done",(),{"returncode":exit_code,"stdout":stdout,"stderr":stderr})()
+    return G.G1.record(command,done)
+
+
 def _tsv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -29,24 +34,38 @@ def _tsv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
 
 def _write_campaign_outputs(root: Path, run_id: str) -> None:
     report=root/"Reports"/f"np1_g2_{run_id}.htm"
-    report.write_text("<table><tr><td>Period:</td><td>H1</td><td>Bars:</td><td>1</td><td>Ticks:</td><td>1</td><td>Total Trades:</td><td>0</td><td>Total Deals:</td><td>0</td></tr></table>",encoding="utf-8")
+    fields={"Expert":"A1XauR6NativeSpreadProvenanceProbe","Symbol":"XAUUSD","Period":"M5 (2015.06.01 - 2026.07.01)","Model":"Every tick based on real ticks","Initial Deposit":"10 000.00 USD","Leverage":"1:50","Company":"Capital Com Mena Securities Trading L.L.C","Bars":"1","Ticks":"4","Total Trades":"0","Total Deals":"0"}
+    report.write_text("<table><tr>"+"".join(f"<td>{key}:</td><td>{value}</td>" for key,value in fields.items())+"</tr></table>",encoding="utf-8")
     files=root/"Tester"/"Agent-1"/"MQL5"/"Files"; files.mkdir(parents=True,exist_ok=True)
     prefix=f"np1_g2_{run_id}_"
     ids=G.WARMUP_ASSERTIONS if run_id=="warmup" else G.OFFICIAL_ASSERTIONS
-    _tsv(files/f"{prefix}assertions.tsv",["assertion_id","passed","observed","expected"],[{"assertion_id":value,"passed":"true","observed":"pass","expected":"pass"} for value in sorted(ids)])
+    values={value:("pass","pass") for value in ids}; values.update(positions_zero=("0","0"),orders_zero=("0","0"),run_id=(("warmup","warmup") if run_id=="warmup" else ("official","official")))
+    if run_id=="warmup": values["warmup_only"]=("true","true")
+    _tsv(files/f"{prefix}assertions.tsv",["assertion_id","passed","observed","expected"],[{"assertion_id":value,"passed":"true","observed":values[value][0],"expected":values[value][1]} for value in sorted(ids)])
     (files/f"{prefix}order.zero").write_bytes(b""); (files/f"{prefix}deal.zero").write_bytes(b"")
     if run_id=="warmup": return
-    for tf in ("h1","h4","d1"): _tsv(files/f"{prefix}{tf}_bars.tsv",["open_time_broker","spread"],[{"open_time_broker":"2025-06-18T03:00:00","spread":"5"}])
-    _tsv(files/f"{prefix}bar_spread_interfaces.tsv",["timeframe","open_time_broker","copyrates_spread","copyspread_spread","ispread_spread"],[{"timeframe":"H1","open_time_broker":"2025-06-18T03:00:00","copyrates_spread":"5","copyspread_spread":"5","ispread_spread":"5"}])
-    columns=["schema_version","broker_day","time_msc","time","bid","ask","last","volume","volume_real","flags","raw_ask_minus_bid","raw_spread_points","negative_spread_boolean","quote_sides_positive","copyticks_return","copyticks_error"]
-    row={"schema_version":"v1","broker_day":"d","time_msc":"1","time":"t","bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"1","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
-    for name in G.G1.OFFICIAL_NAMES:
-        if name.startswith("ticks_"): _tsv(files/f"{prefix}{name}",columns,[row])
+    for tf in ("H1","H4","D1"):
+        row={"schema_version":"a1_xau_np1_g1_bar_v1","timeframe":tf,"open_time_broker":"2015.06.01 00:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","spread":"5","real_volume":"1","copyrates_return":"1","copyrates_error":"0"}
+        _tsv(files/f"{prefix}{tf.lower()}_bars.tsv",G.BAR_COLUMNS,[row])
+    interface_rows=[]
+    for tf in ("H1","H4","D1"):
+        for day in ("2025.06.18","2025.09.29","2025.11.17","2026.04.14"):
+            interface_rows.append({"schema_version":"a1_xau_np1_g1_interface_v1","timeframe":tf,"open_time_broker":f"{day} 03:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","real_volume":"1","copyrates_spread":"5","copyspread_spread":"5","ispread_spread":"5","copyspread_return":"1","copyspread_error":"0","ibarshift":"1","ispread_error":"0","point":"0.01","digits":"2"})
+    _tsv(files/f"{prefix}bar_spread_interfaces.tsv",G.INTERFACE_COLUMNS,interface_rows)
+    for name,day in G.TICK_DAYS.items():
+        row={"schema_version":"a1_xau_np1_g1_tick_v1","broker_day":day,"time_msc":"1","time":f"{day} 00:00:01","bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"100","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
+        _tsv(files/f"{prefix}{name}",G.TICK_COLUMNS,[row])
 
 
 def _auth_fields(commit: str, tree: str) -> dict[str,str]:
     base=G.CANONICAL_REPORTS_RELATIVE
     return {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_EXECUTOR_COMMIT":commit,"REVIEWED_EXECUTOR_TREE":tree,"NEW_ROOT_PATH":str(G.NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","CANONICAL_REPORTS_ROOT":base,"COMPLETE_OUTPUT_ROOT":f"{base}/{G.COMPLETE_NAME}","STOP_OUTPUT_ROOT":f"{base}/{G.STOP_NAME}","METADATA_RECEIPT_MODES":"COPIED_ALLOWLIST,ZERO_COPY","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","PNL_AUTHORIZED":"false","TARGET_EXIT_MFE_MAE_AUTHORIZED":"false","DEMO_LIVE_ATTACH_AUTHORIZED":"false","PRESET_PROFILE_ARMING_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false","DEPLOYMENT_AUTHORIZED":"false"}
+
+
+def _retag_selected(packet: Path, run_id: str, kind: str, path: Path) -> None:
+    selected=json.loads((packet/"searched_location_inventory.json").read_text())
+    row=next(item for item in selected["selected_sources"] if item["kind"]==kind and f"np1_g2_{run_id}" in item["source"])
+    row["size_bytes"]=path.stat().st_size; row["sha256"]=G.sha256_file(path); G.write_json(packet/"searched_location_inventory.json",selected)
 
 
 def _root(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
@@ -125,6 +144,25 @@ def test_stale_empty_rejected_and_fresh_nonempty_accepted(tmp_path: Path) -> Non
     with pytest.raises(RuntimeError, match="stale"):
         G.validate_fresh_report(report, report.stat().st_mtime_ns + 3_000_000_000, parser)
     assert G.validate_fresh_report(report, report.stat().st_mtime_ns, parser) == "report"
+
+
+@pytest.mark.parametrize(("old","new"),[("M5 (2015.06.01 - 2026.07.01)","H1 (2015.06.01 - 2026.07.01)"),("2015.06.01","2016.06.01"),("10 000.00 USD","10 000.00 EUR"),("1:50","1:100")])
+def test_native_report_effective_settings_fail_closed(tmp_path: Path, old: str, new: str) -> None:
+    root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"; report.write_text(report.read_text().replace(old,new),encoding="utf-8")
+    with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
+
+
+def test_exact_command_arrays_streams_and_compile_exit_semantics(tmp_path: Path) -> None:
+    root=tmp_path.resolve(); source=root/"MQL5"/"Experts"/G.B.PROBE_NAME; log=root/"compile.log"
+    commands=[_record([str(root/"MetaEditor64.exe"),f"/compile:{source}",f"/log:{log}"],exit_code=1,stdout=b"ok")]
+    commands += [_record([str(root/"terminal64.exe"),"/portable",f"/config:{root/'Config'/f'np1_g2_{rid}.ini'}"]) for rid in G.RUN_IDS]
+    G.validate_command_records(commands,root)
+    bad=json.loads(json.dumps(commands)); bad[0]["exit_code"]=2
+    with pytest.raises(RuntimeError,match="compile command"): G.validate_command_records(bad,root)
+    bad=json.loads(json.dumps(commands)); bad[1]["command"].append("/extra")
+    with pytest.raises(RuntimeError,match="tester command"): G.validate_command_records(bad,root)
+    bad=json.loads(json.dumps(commands)); bad[0]["stdout_sha256"]="0"*64
+    with pytest.raises(RuntimeError,match="stream hash"): G.validate_command_records(bad,root)
 
 
 def test_synthetic_writer_requires_parent_directory(tmp_path: Path) -> None:
@@ -206,7 +244,7 @@ def test_wrong_root_rejection_is_read_only(tmp_path: Path, monkeypatch: pytest.M
 
 
 def test_closed_review_parser_exact_hash_fields_and_no_go(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    path = tmp_path / "A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"
+    path = tmp_path / "A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"
     commit, tree = "a" * 40, "b" * 40
     fields = _auth_fields(commit,tree)
     block = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n" + "\n".join(f"{k}: {v}" for k,v in fields.items()) + "\nNP1_G2B_AUTHORIZATION_BLOCK_END\n"
@@ -228,12 +266,12 @@ def test_end_to_end_warmup_failure_automatically_creates_stop(tmp_path: Path, mo
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=config/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8")
     commit,tree="a"*40,"b"*40; monkeypatch.setattr(G.G1,"git",lambda *args: "" if args[0]=="status" else (commit if "rev-parse" in args else tree))
-    review=tmp_path/"A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"
+    review=tmp_path/"A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"
     fields=_auth_fields(commit,tree)
     review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     class C: pass
     def compile_fake(root,editor,runner,version_reader):
-        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,{"command":[str(editor),f"/compile:{source}"],"exit_code":0})
+        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{source}",f"/log:{log}"]; return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,_record(command))
     monkeypatch.setattr(G.G1,"compile_once",compile_fake)
     done=type("Done",(),{"returncode":0,"stdout":b"","stderr":b""})()
     with pytest.raises(RuntimeError,match="report"):
@@ -249,12 +287,12 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     for name in ("accounts.dat","servers.dat"):
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=root/"Config"/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8"); commit,tree="c"*40,"d"*40; monkeypatch.setattr(G.G1,"git",lambda *a:"" if a[0]=="status" else (commit if "rev-parse" in a else tree))
-    review=tmp_path/"A1_XAU_NP1G2A5_EXECUTION_AUTHORIZATION_D8699D6E_2026_07_13.md"; fields=_auth_fields(commit,tree); review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
+    review=tmp_path/"A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"; fields=_auth_fields(commit,tree); review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     def comp(root,editor,runner,version_reader):
-        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,{"command":[str(editor),f"/compile:{s}"],"exit_code":0})
+        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{s}",f"/log:{log}"]; return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,_record(command,exit_code=1))
     monkeypatch.setattr(G.G1,"compile_once",comp)
     import analyze_a1_xau_r6_native_spread_provenance_probe as AN
-    prior=tmp_path/"prior.csv"; prior.write_text("run,timeframe,timestamp,raw_signed_spread\nrun1,H1,2025-06-18T03:00:00,-7\n",encoding="utf-8")
+    prior=tmp_path/"prior.csv"; prior.write_text("run,timeframe,timestamp,raw_signed_spread\nrun1,H1,2025.06.18 03:00:00,-7\n",encoding="utf-8")
     fingerprints=tmp_path/"fingerprints.json"; fingerprints.write_text(json.dumps({tf:{"sha256":"0"*64,"row_count":1} for tf in AN.TIMEFRAMES}),encoding="utf-8")
     monkeypatch.setattr(AN,"PRIOR_NEGATIVE",prior); monkeypatch.setattr(AN,"PRIOR_FINGERPRINTS",fingerprints)
     done=type("D",(),{"returncode":0,"stdout":b"","stderr":b""})()
@@ -268,12 +306,32 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     assert verification["verifier"]=="full_packet_temporary_copy_recompute_v2" and not verification["original_packet_mutated"]
     assert len(json.loads((complete/"searched_location_inventory.json").read_text())["selected_sources"])==31
     context={"authorization_attestation":json.loads((complete/"authorization_attestation.json").read_text()),"metadata_receipt":json.loads((complete/"metadata_receipt.json").read_text()),"root":root}
+    def packet_copy(name: str) -> Path:
+        target=tmp_path/name; shutil.copytree(complete,target); return target
+    def mutate_tsv(packet: Path, run_id: str, name: str, column: str, value: str) -> None:
+        path=packet/"runs"/run_id/name
+        with path.open(newline="",encoding="utf-8") as handle: rows=list(csv.DictReader(handle,delimiter="\t"))
+        rows[0][column]=value; _tsv(path,list(rows[0]),rows); _retag_selected(packet,run_id,name,path)
     tampered=tmp_path/"tampered-result"; shutil.copytree(complete,tampered); payload=json.loads((tampered/"result.json").read_text()); payload["flags"].append("STALE"); (tampered/"result.json").write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     with pytest.raises(RuntimeError,match="semantic recomputation"): G.semantic_verify_packet(tampered,tmp_path/"scratch-result",context)
     tampered_auth=tmp_path/"tampered-auth"; shutil.copytree(complete,tampered_auth); auth=json.loads((tampered_auth/"authorization_attestation.json").read_text()); auth["sha256"]="0"*64; G.write_json(tampered_auth/"authorization_attestation.json",auth)
     with pytest.raises(RuntimeError,match="authorization attestation"): G.semantic_verify_packet(tampered_auth,tmp_path/"scratch-auth",context)
     tampered_assert=tmp_path/"tampered-assert"; shutil.copytree(complete,tampered_assert); assertion=tampered_assert/"runs"/"warmup"/"assertions.tsv"; lines=assertion.read_text().splitlines(); assertion.write_text("\n".join(lines[:-1])+"\n",encoding="utf-8"); selected=json.loads((tampered_assert/"searched_location_inventory.json").read_text()); row=next(item for item in selected["selected_sources"] if item["kind"]=="assertions.tsv" and "warmup" in item["source"]); row["size_bytes"]=assertion.stat().st_size; row["sha256"]=G.sha256_file(assertion); G.write_json(tampered_assert/"searched_location_inventory.json",selected)
     with pytest.raises(RuntimeError,match="assertion set"): G.semantic_verify_packet(tampered_assert,tmp_path/"scratch-assert",context)
+    contradictory=packet_copy("contradictory-assertion"); mutate_tsv(contradictory,"warmup","assertions.tsv","observed","false")
+    with pytest.raises(RuntimeError,match="observed/expected"): G.semantic_verify_packet(contradictory,tmp_path/"scratch-contradictory",context)
+    bad_rates=packet_copy("bad-copyrates"); [mutate_tsv(bad_rates,run_id,"h1_bars.tsv","copyrates_return","999") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="bar native return/error/range"): G.validate_native_exports(bad_rates)
+    bad_interface=packet_copy("bad-interface"); [mutate_tsv(bad_interface,run_id,"bar_spread_interfaces.tsv","copyspread_error","4301") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="interface native return/error"): G.validate_native_exports(bad_interface)
+    bad_ticks=packet_copy("bad-copyticks"); [mutate_tsv(bad_ticks,run_id,"ticks_20250618.tsv","copyticks_error","4301") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="tick native return/error/day"): G.validate_native_exports(bad_ticks)
+    bad_source=packet_copy("bad-selected-source"); inventory=json.loads((bad_source/"searched_location_inventory.json").read_text()); next(row for row in inventory["selected_sources"] if "np1_g2_warmup" in row["source"] and row["kind"]=="assertions.tsv")["source"]="C:/invented/np1_g2_warmup_assertions.tsv"; G.write_json(bad_source/"searched_location_inventory.json",inventory)
+    with pytest.raises(RuntimeError,match="selected output source path"): G.semantic_verify_packet(bad_source,tmp_path/"scratch-source",context)
+    bad_root=packet_copy("bad-root-inventory"); post=json.loads((bad_root/"post_run_root_inventory.json").read_text()); post["entries"]=[row for row in post["entries"] if row["relative_path"]!="Config/np1_g2_probe2.ini"]; G.write_json(bad_root/"post_run_root_inventory.json",post)
+    with pytest.raises(RuntimeError,match="post-run inventory incomplete"): G.semantic_verify_packet(bad_root,tmp_path/"scratch-root",context)
+    bad_log=packet_copy("bad-log"); log_path=bad_log/"logs"/"unapproved"/"invented.log"; log_path.parent.mkdir(); log_path.write_text("invented",encoding="utf-8"); G.write_json(bad_log/"logs"/"log_inventory.json",{"logs":[{"source_relative":"unapproved/invented.log","size_bytes":log_path.stat().st_size,"sha256":G.sha256_file(log_path)}]})
+    with pytest.raises(RuntimeError,match="unauthorized log path/schema"): G.semantic_verify_packet(bad_log,tmp_path/"scratch-log",context)
 
 
 def test_noncanonical_reports_root_rejected_before_root_mutation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
