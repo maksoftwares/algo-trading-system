@@ -192,18 +192,21 @@ def native_report_fields(path: Path) -> dict[str,str]:
 
 def validate_effective_report(path: Path) -> dict[str,str]:
     fields=native_report_fields(path)
-    required={"Expert","Symbol","Period","Currency","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
+    required={"Expert","Symbol","Period","History Quality","Company","Currency","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
     if not required<=set(fields): raise RuntimeError(f"native report effective-setting fields missing: {sorted(required-set(fields))}")
     if Path(fields["Expert"].split()[0]).stem!="A1XauR6NativeSpreadProvenanceProbe": raise RuntimeError("native report expert mismatch")
     if fields["Symbol"].split()[0]!="XAUUSD": raise RuntimeError("native report symbol mismatch")
     if fields["Period"]!="M5 (2015.06.01 - 2026.07.01)": raise RuntimeError("native report period/date mismatch")
     deposit=float(re.sub(r"[^0-9.]","",fields["Initial Deposit"]))
     if abs(deposit-10000.0)>1e-9 or fields["Currency"]!="USD": raise RuntimeError("native report deposit/currency mismatch")
+    quality=re.fullmatch(r"([1-9][0-9]*(?:\.[0-9]+)?)%\s+real ticks",fields["History Quality"],re.I)
+    if quality is None: raise RuntimeError("native report real-tick history quality mismatch")
+    float(quality.group(1))
     if re.sub(r"\s","",fields["Leverage"])!="1:50": raise RuntimeError("native report leverage mismatch")
     def integer(name: str) -> int: return int(re.sub(r"[^0-9]","",fields[name]))
     if integer("Bars")<=0 or integer("Ticks")<=0 or integer("Total Trades")!=0 or integer("Total Deals")!=0: raise RuntimeError("native report bars/ticks/zero-action mismatch")
     if "Model" in fields and "real tick" not in fields["Model"].lower(): raise RuntimeError("native report model mismatch")
-    if "Company" in fields and fields["Company"]!="Capital Com Mena Securities Trading L.L.C": raise RuntimeError("native report company mismatch")
+    if fields["Company"]!="Capital Com Mena Securities Trading L.L.C": raise RuntimeError("native report company mismatch")
     return fields
 
 
@@ -514,7 +517,7 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    expected_name=f"A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    expected_name=f"A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
     if path.name != expected_name or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")

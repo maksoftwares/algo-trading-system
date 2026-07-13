@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2A7_REVIEW_30C58650_2026_07_13.md",
-    "artifact_sha256": "9196641b6033f9d790b5e09d481cf67f3b51a381d6a5b227e30300800e3bee8b",
+    "artifact": "A1_XAU_NP1G2A8_REVIEW_EEA19E1E_2026_07_13.md",
+    "artifact_sha256": "dea3567e47a08785c98b234ffbda5ac8533b628d770be011c5b634c0d74d0096",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A8_NATIVE_REPORT_CURRENCY_AND_TICK_ORDER_CLOSURE"
+    "phase": "NP1-G2A9_NATIVE_REPORT_REAL_TICK_MODEL_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -55,11 +55,15 @@
       "initial_deposit": 10000.0,
       "currency_separate_field": "USD",
       "initial_deposit_currency_suffix_required": false,
+      "history_quality_required_grammar": "^[1-9][0-9]*(?:\\.[0-9]+)?%\\s+real ticks$",
+      "history_quality_percentage_evidence_only": true,
+      "history_quality_threshold_optimization_forbidden": true,
       "leverage": "1:50",
       "bars_and_ticks_positive": true,
       "trades_and_deals_zero": true,
       "model_if_exposed": "real ticks",
-      "company_if_exposed": "Capital Com Mena Securities Trading L.L.C"
+      "company_required": "Capital Com Mena Securities Trading L.L.C",
+      "model_if_exposed_must_contain": "real tick"
     },
     "requested_labels_exactly_once": true,
     "duplicate_labels_rejected": true
@@ -79,7 +83,7 @@
     "copyrates_return_error_count_time_range_load_bearing": true,
     "copyspread_ispread_ibarshift_return_error_load_bearing": true,
     "copyticksrange_return_error_count_day_time_load_bearing": true,
-    "unique_monotonic_native_timestamps": true,
+    "bar_interface_timestamps_unique_monotonic": true,
     "raw_tick_arithmetic_and_point_consistency": true,
     "mq5_timestamp_grammar": "YYYY-MM-DDTHH:MM:SS",
     "tick_broker_day_grammar": "YYYY.MM.DD",
@@ -93,7 +97,7 @@
     "probe1_probe2_byte_stability": true
   },
   "review_parser": {
-    "accepted_filename_pattern": "A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_pattern": "A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
     "accepted_filename_derived_from_exact_reviewed_commit": true,
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
@@ -137,7 +141,9 @@
     "g2a6_commit": "ed6a2e2ceaaead2c02a24ef4c7f023656d0b4ebe",
     "g2a6_tree": "e341089dff709d42e31e1d35c6bb91627a649904",
     "g2a7_commit": "30c58650c56ed39ce61e7cf1d1aed81610f8e1c9",
-    "g2a7_tree": "4866e4399b7c2fa0768687c9e63fe73b52da940e"
+    "g2a7_tree": "4866e4399b7c2fa0768687c9e63fe73b52da940e",
+    "g2a8_commit": "eea19e1ed6898cdba64f15f51aee00ca50429905",
+    "g2a8_tree": "954af7032ee8add6971a74a17f29d09e74851d42"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]

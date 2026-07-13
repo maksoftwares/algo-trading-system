@@ -35,7 +35,7 @@ def _tsv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
 
 def _write_campaign_outputs(root: Path, run_id: str) -> None:
     report=root/"Reports"/f"np1_g2_{run_id}.htm"
-    fields={"Expert":"A1XauR6NativeSpreadProvenanceProbe","Symbol":"XAUUSD","Period":"M5 (2015.06.01 - 2026.07.01)","Model":"Every tick based on real ticks","Currency":"USD","Initial Deposit":"10 000.00","Leverage":"1:50","Company":"Capital Com Mena Securities Trading L.L.C","Bars":"1","Ticks":"8","Total Trades":"0","Total Deals":"0"}
+    fields={"Expert":"A1XauR6NativeSpreadProvenanceProbe","Symbol":"XAUUSD","Period":"M5 (2015.06.01 - 2026.07.01)","History Quality":"1% real ticks","Currency":"USD","Initial Deposit":"10 000.00","Leverage":"1:50","Company":"Capital Com Mena Securities Trading L.L.C","Bars":"1","Ticks":"8","Total Trades":"0","Total Deals":"0"}
     report.write_text("<table><tr>"+"".join(f"<td>{key}:</td><td>{value}</td>" for key,value in fields.items())+"</tr></table>",encoding="utf-8")
     files=root/"Tester"/"Agent-1"/"MQL5"/"Files"; files.mkdir(parents=True,exist_ok=True)
     prefix=f"np1_g2_{run_id}_"
@@ -65,7 +65,7 @@ def _auth_fields(commit: str, tree: str) -> dict[str,str]:
 
 
 def _authorization_name(commit: str) -> str:
-    return f"A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    return f"A1_XAU_NP1G2A9_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
 
 
 def _retag_selected(packet: Path, run_id: str, kind: str, path: Path) -> None:
@@ -172,6 +172,28 @@ def test_native_report_currency_deposit_shape_fail_closed(tmp_path: Path, case: 
     elif case=="embedded_currency_only": text=text.replace(currency,"").replace(deposit,"<td>Initial Deposit:</td><td>10 000.00 USD</td>")
     elif case=="duplicate_currency": text=text.replace(currency,currency+currency)
     else: text=text.replace(deposit,deposit+deposit)
+    report.write_text(text,encoding="utf-8")
+    with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
+
+
+def test_native_report_positive_real_tick_percentage_is_evidence_not_threshold(tmp_path: Path) -> None:
+    root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"
+    report.write_text(report.read_text().replace("1% real ticks","12.5% real ticks"),encoding="utf-8")
+    assert G.validate_effective_report(report)["History Quality"]=="12.5% real ticks"
+
+
+@pytest.mark.parametrize("case",["missing_history","non_real_history","zero_history","duplicate_history","missing_company","wrong_company","duplicate_company","wrong_optional_model"])
+def test_native_report_real_tick_history_and_company_fail_closed(tmp_path: Path, case: str) -> None:
+    root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"; text=report.read_text()
+    history="<td>History Quality:</td><td>1% real ticks</td>"; company="<td>Company:</td><td>Capital Com Mena Securities Trading L.L.C</td>"
+    if case=="missing_history": text=text.replace(history,"")
+    elif case=="non_real_history": text=text.replace("1% real ticks","100% modeled ticks")
+    elif case=="zero_history": text=text.replace("1% real ticks","0% real ticks")
+    elif case=="duplicate_history": text=text.replace(history,history+history)
+    elif case=="missing_company": text=text.replace(company,"")
+    elif case=="wrong_company": text=text.replace("Capital Com Mena Securities Trading L.L.C","Other Broker")
+    elif case=="duplicate_company": text=text.replace(company,company+company)
+    else: text=text.replace(history,history+"<td>Model:</td><td>Open prices only</td>")
     report.write_text(text,encoding="utf-8")
     with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
 
