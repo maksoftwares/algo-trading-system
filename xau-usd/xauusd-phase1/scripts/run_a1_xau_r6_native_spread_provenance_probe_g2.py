@@ -11,12 +11,13 @@ import base64
 import csv
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
@@ -179,7 +180,14 @@ def native_report_fields(path: Path) -> dict[str,str]:
     import analyze_a1_xau_r6_native_spread_provenance_probe as A
     raw=path.read_bytes(); text=raw.decode("utf-16") if raw.startswith((b"\xff\xfe",b"\xfe\xff")) else raw.decode("utf-8-sig")
     cells=A.Cells(); cells.feed(text)
-    return {cell[:-1].strip():cells.cells[index+1].strip() for index,cell in enumerate(cells.cells[:-1]) if cell.endswith(":")}
+    fields: dict[str,str]={}
+    for index,cell in enumerate(cells.cells):
+        if not cell.endswith(":"): continue
+        label=cell[:-1].strip()
+        if label in fields: raise RuntimeError(f"duplicate native report label: {label}")
+        if index+1>=len(cells.cells): raise RuntimeError(f"native report value missing: {label}")
+        fields[label]=cells.cells[index+1].strip()
+    return fields
 
 
 def validate_effective_report(path: Path) -> dict[str,str]:
@@ -188,8 +196,7 @@ def validate_effective_report(path: Path) -> dict[str,str]:
     if not required<=set(fields): raise RuntimeError(f"native report effective-setting fields missing: {sorted(required-set(fields))}")
     if Path(fields["Expert"].split()[0]).stem!="A1XauR6NativeSpreadProvenanceProbe": raise RuntimeError("native report expert mismatch")
     if fields["Symbol"].split()[0]!="XAUUSD": raise RuntimeError("native report symbol mismatch")
-    normalized_period=" ".join(fields["Period"].replace("-"," - ").split())
-    if not normalized_period.startswith("M5") or "2015.06.01" not in normalized_period or "2026.07.01" not in normalized_period: raise RuntimeError("native report period/date mismatch")
+    if fields["Period"]!="M5 (2015.06.01 - 2026.07.01)": raise RuntimeError("native report period/date mismatch")
     deposit=float(re.sub(r"[^0-9.]","",fields["Initial Deposit"]))
     if abs(deposit-10000.0)>1e-9 or "USD" not in fields["Initial Deposit"].upper(): raise RuntimeError("native report deposit/currency mismatch")
     if re.sub(r"\s","",fields["Leverage"])!="1:50": raise RuntimeError("native report leverage mismatch")
@@ -300,33 +307,49 @@ def validate_command_records(commands: list[dict[str,Any]], root: Path) -> None:
 
 
 def validate_native_exports(packet: Path) -> None:
+    def iso(value: str) -> datetime:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}",value) is None: raise RuntimeError("native ISO timestamp grammar mismatch")
+        try: return datetime.strptime(value,"%Y-%m-%dT%H:%M:%S")
+        except ValueError as exc: raise RuntimeError("invalid native ISO timestamp") from exc
+    history_start=datetime(2015,6,1); history_end=datetime(2026,7,1)
     run=packet/"runs"/"probe1"
     for timeframe in ("H1","H4","D1"):
         rows=read_tsv_exact(run/f"{timeframe.lower()}_bars.tsv",BAR_COLUMNS)
         if not rows: raise RuntimeError("empty bar export")
-        stamps=[row["open_time_broker"] for row in rows]
+        stamps=[iso(row["open_time_broker"]) for row in rows]
         if stamps!=sorted(set(stamps)): raise RuntimeError("bar timestamps not unique/monotonic")
-        if any(row["schema_version"]!="a1_xau_np1_g1_bar_v1" or row["timeframe"]!=timeframe or int(row["copyrates_error"])!=0 or int(row["copyrates_return"])!=len(rows) or not ("2015.06.01"<=row["open_time_broker"]<"2026.07.01") for row in rows): raise RuntimeError("bar native return/error/range mismatch")
+        if any(row["schema_version"]!="a1_xau_np1_g1_bar_v1" or row["timeframe"]!=timeframe or int(row["copyrates_error"])!=0 or int(row["copyrates_return"])!=len(rows) for row in rows) or any(not history_start<=stamp<history_end for stamp in stamps): raise RuntimeError("bar native return/error/range mismatch")
     interfaces=read_tsv_exact(run/"bar_spread_interfaces.tsv",INTERFACE_COLUMNS)
     if not interfaces: raise RuntimeError("empty interface export")
-    keys=[(row["timeframe"],row["open_time_broker"]) for row in interfaces]
-    if len(keys)!=len(set(keys)) or any([row["open_time_broker"] for row in interfaces if row["timeframe"]==tf]!=sorted(row["open_time_broker"] for row in interfaces if row["timeframe"]==tf) for tf in ("H1","H4","D1")): raise RuntimeError("interface timestamps not unique/monotonic")
+    interface_times=[iso(row["open_time_broker"]) for row in interfaces]
+    keys=[(row["timeframe"],stamp) for row,stamp in zip(interfaces,interface_times)]
+    if len(keys)!=len(set(keys)) or any([stamp for row,stamp in zip(interfaces,interface_times) if row["timeframe"]==tf]!=sorted(stamp for row,stamp in zip(interfaces,interface_times) if row["timeframe"]==tf) for tf in ("H1","H4","D1")): raise RuntimeError("interface timestamps not unique/monotonic")
     if any(row["schema_version"]!="a1_xau_np1_g1_interface_v1" or row["timeframe"] not in {"H1","H4","D1"} or int(row["copyspread_return"])!=1 or int(row["copyspread_error"])!=0 or int(row["ibarshift"])<0 or int(row["ispread_error"])!=0 for row in interfaces): raise RuntimeError("interface native return/error mismatch")
+    if any(re.fullmatch(r"\d+",row["digits"]) is None for row in interfaces): raise RuntimeError("invalid native digits grammar")
+    points={float(row["point"]) for row in interfaces}; digits={int(row["digits"]) for row in interfaces}
+    if len(points)!=1 or len(digits)!=1: raise RuntimeError("mixed native point/digits identity")
+    point=next(iter(points)); digit=next(iter(digits))
+    if not (math.isfinite(point) and point>0 and digit>=0 and abs(point-(10.0**-digit))<=max(1e-12,point*1e-10)): raise RuntimeError("invalid native point/digits identity")
     for filename,day in TICK_DAYS.items():
         rows=read_tsv_exact(run/filename,TICK_COLUMNS)
         if not rows: raise RuntimeError("empty tick export")
         times=[int(row["time_msc"]) for row in rows]
         if times!=sorted(set(times)): raise RuntimeError("tick timestamps not unique/monotonic")
-        implied_points=[]
+        if re.fullmatch(r"\d{4}\.\d{2}\.\d{2}",day) is None: raise RuntimeError("tick broker-day grammar mismatch")
+        day_start=datetime.strptime(day,"%Y.%m.%d"); day_end=day_start+timedelta(days=1)
         for row in rows:
-            if row["schema_version"]!="a1_xau_np1_g1_tick_v1" or row["broker_day"]!=day or not row["time"].startswith(day) or int(row["copyticks_error"])!=0 or int(row["copyticks_return"])!=len(rows): raise RuntimeError("tick native return/error/day mismatch")
-            if row["quote_sides_positive"]=="true":
-                raw=float(row["ask"])-float(row["bid"])
-                if abs(raw-float(row["raw_ask_minus_bid"]))>1e-8 or (row["negative_spread_boolean"]=="true")!=(raw<0): raise RuntimeError("raw tick arithmetic mismatch")
-                points=float(row["raw_spread_points"])
-                if points==0 and raw!=0: raise RuntimeError("raw tick point arithmetic mismatch")
-                if points: implied_points.append(raw/points)
-        if implied_points and max(implied_points)-min(implied_points)>1e-8: raise RuntimeError("inconsistent tick point arithmetic")
+            stamp=iso(row["time"]); msc=int(row["time_msc"])
+            if row["schema_version"]!="a1_xau_np1_g1_tick_v1" or row["broker_day"]!=day or not day_start<=stamp<day_end or stamp.strftime("%Y.%m.%d")!=day or msc//1000!=int(stamp.replace(tzinfo=timezone.utc).timestamp()) or int(row["copyticks_error"])!=0 or int(row["copyticks_return"])!=len(rows): raise RuntimeError("tick native return/error/day mismatch")
+            bid=float(row["bid"]); ask=float(row["ask"])
+            if not (math.isfinite(bid) and math.isfinite(ask)): raise RuntimeError("non-finite tick quote")
+            positive=bid>0 and ask>0
+            if row["quote_sides_positive"] not in {"true","false"} or (row["quote_sides_positive"]=="true")!=positive: raise RuntimeError("tick quote-side flag mismatch")
+            if positive:
+                if not row["raw_ask_minus_bid"] or not row["raw_spread_points"] or row["negative_spread_boolean"] not in {"true","false"}: raise RuntimeError("positive tick raw fields missing")
+                raw=ask-bid; reported_raw=float(row["raw_ask_minus_bid"]); reported_points=float(row["raw_spread_points"])
+                if not (math.isfinite(reported_raw) and math.isfinite(reported_points)) or abs(raw-reported_raw)>1e-8 or (row["negative_spread_boolean"]=="true")!=(raw<0): raise RuntimeError("raw tick arithmetic mismatch")
+                if abs(reported_points-(raw/point))>max(1e-8,abs(raw/point)*1e-10): raise RuntimeError("raw tick native-point mismatch")
+            elif not (bid<=0 or ask<=0) or any(row[name]!="" for name in ("raw_ask_minus_bid","raw_spread_points","negative_spread_boolean")): raise RuntimeError("unavailable tick raw fields must be empty")
     for run_id in ("probe1","probe2"):
         if any((packet/"runs"/run_id/name).read_bytes()!=(packet/"runs"/"probe1"/name).read_bytes() for name in G1.OFFICIAL_NAMES): raise RuntimeError("official export drift")
 
@@ -349,7 +372,8 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
     source_manifest=load("compiled/source_manifest.json")
     expected_source_manifest={"schema_version":"a1_xau_r6_native_spread_probe_source_manifest_v1","source":B.PROBE_NAME,"source_sha256":sha256_file(source),"zero_action":True,"interfaces":["CopyRates.spread","CopySpread","iSpread","CopyTicksRange.bid_ask"]}
     if source_manifest!=expected_source_manifest: raise RuntimeError("source manifest mismatch")
-    if compiled!={"source_name":B.PROBE_NAME,"source_sha256":sha256_file(source),"ex5_name":ex5.name,"ex5_sha256":sha256_file(ex5),"metaeditor_version":G1.EXPECTED_VERSION,"compile_log_sha256":sha256_file(log)}: raise RuntimeError("compiled identity mismatch")
+    source_sha=sha256_file(source); ex5_sha=sha256_file(ex5)
+    if compiled!={"source_name":B.PROBE_NAME,"source_sha256":source_sha,"compiled_source_sha256":source_sha,"ex5_name":ex5.name,"ex5_sha256":ex5_sha,"compiled_ex5_sha256":ex5_sha,"metaeditor_version":G1.EXPECTED_VERSION,"compile_log_sha256":sha256_file(log)} or source_manifest["source_sha256"]!=compiled["compiled_source_sha256"]: raise RuntimeError("compiled identity mismatch")
     text=log.read_text(encoding="utf-8",errors="replace")
     if re.search(r"\b0\s+errors?\b",text,re.I) is None or re.search(r"\b0\s+warnings?\b",text,re.I) is None: raise RuntimeError("compile log is not zero-error/zero-warning")
     ex5_checks=load("ex5_identity_attestation.json")
@@ -490,7 +514,8 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    if path.name != "A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md" or not path.is_file() or sha256_file(path) != artifact_sha256:
+    expected_name=f"A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    if path.name != expected_name or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")
     begin, end = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN", "NP1_G2B_AUTHORIZATION_BLOCK_END"
@@ -549,7 +574,9 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
         if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("final post-probe2 EX5 drift")
         ex5_checks.append({"stage":"after_probe2","sha256":sha256_file(compiled.ex5)})
         write_json(staging / "metadata_receipt.json", receipt); write_json(staging / "authorization_attestation.json", authority_attestation); write_json(staging / "preflight_root_inventory.json", preflight); write_json(staging/"post_reports_creation_inventory.json",post_reports); write_json(staging / "post_run_root_inventory.json", inventory(root)); write_json(staging / "reports_directory_attestation.json", report_attestation); write_json(staging / "invocation_ledger.json", ledger.data); write_json(staging / "commands.json", commands)
-        write_json(staging/"compile_attestation.json",{"source_name":B.PROBE_NAME,"source_sha256":sha256_file(staging/"compiled"/B.PROBE_NAME),"ex5_name":compiled.ex5.name,"ex5_sha256":sha256_file(staging/"compiled"/compiled.ex5.name),"metaeditor_version":compiled.version,"compile_log_sha256":sha256_file(staging/"compiled"/"compile.log")}); write_json(staging/"ex5_identity_attestation.json",ex5_checks)
+        packet_source_sha=sha256_file(staging/"compiled"/B.PROBE_NAME); packet_ex5_sha=sha256_file(staging/"compiled"/compiled.ex5.name)
+        if compiled.source_sha256!=packet_source_sha or compiled.ex5_sha256!=packet_ex5_sha: raise RuntimeError("compiled source/EX5 packet binding mismatch")
+        write_json(staging/"compile_attestation.json",{"source_name":B.PROBE_NAME,"source_sha256":packet_source_sha,"compiled_source_sha256":compiled.source_sha256,"ex5_name":compiled.ex5.name,"ex5_sha256":packet_ex5_sha,"compiled_ex5_sha256":compiled.ex5_sha256,"metaeditor_version":compiled.version,"compile_log_sha256":sha256_file(staging/"compiled"/"compile.log")}); write_json(staging/"ex5_identity_attestation.json",ex5_checks)
         write_json(staging/"searched_location_inventory.json",{"selected_sources":selected_sources})
         log_rows=[]
         for path in changed_logs(root,preflight):

@@ -6,6 +6,7 @@ import hashlib
 import json
 import shutil
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -45,21 +46,26 @@ def _write_campaign_outputs(root: Path, run_id: str) -> None:
     (files/f"{prefix}order.zero").write_bytes(b""); (files/f"{prefix}deal.zero").write_bytes(b"")
     if run_id=="warmup": return
     for tf in ("H1","H4","D1"):
-        row={"schema_version":"a1_xau_np1_g1_bar_v1","timeframe":tf,"open_time_broker":"2015.06.01 00:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","spread":"5","real_volume":"1","copyrates_return":"1","copyrates_error":"0"}
+        row={"schema_version":"a1_xau_np1_g1_bar_v1","timeframe":tf,"open_time_broker":"2015-06-01T00:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","spread":"5","real_volume":"1","copyrates_return":"1","copyrates_error":"0"}
         _tsv(files/f"{prefix}{tf.lower()}_bars.tsv",G.BAR_COLUMNS,[row])
     interface_rows=[]
     for tf in ("H1","H4","D1"):
         for day in ("2025.06.18","2025.09.29","2025.11.17","2026.04.14"):
-            interface_rows.append({"schema_version":"a1_xau_np1_g1_interface_v1","timeframe":tf,"open_time_broker":f"{day} 03:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","real_volume":"1","copyrates_spread":"5","copyspread_spread":"5","ispread_spread":"5","copyspread_return":"1","copyspread_error":"0","ibarshift":"1","ispread_error":"0","point":"0.01","digits":"2"})
+            interface_rows.append({"schema_version":"a1_xau_np1_g1_interface_v1","timeframe":tf,"open_time_broker":f"{day.replace('.','-')}T03:00:00","open":"10","high":"11","low":"9","close":"10","tick_volume":"1","real_volume":"1","copyrates_spread":"5","copyspread_spread":"5","ispread_spread":"5","copyspread_return":"1","copyspread_error":"0","ibarshift":"1","ispread_error":"0","point":"0.01","digits":"2"})
     _tsv(files/f"{prefix}bar_spread_interfaces.tsv",G.INTERFACE_COLUMNS,interface_rows)
     for name,day in G.TICK_DAYS.items():
-        row={"schema_version":"a1_xau_np1_g1_tick_v1","broker_day":day,"time_msc":"1","time":f"{day} 00:00:01","bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"100","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
+        stamp=f"{day.replace('.','-')}T00:00:01"; msc=str(int(datetime.strptime(stamp,"%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc).timestamp())*1000)
+        row={"schema_version":"a1_xau_np1_g1_tick_v1","broker_day":day,"time_msc":msc,"time":stamp,"bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"100","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
         _tsv(files/f"{prefix}{name}",G.TICK_COLUMNS,[row])
 
 
 def _auth_fields(commit: str, tree: str) -> dict[str,str]:
     base=G.CANONICAL_REPORTS_RELATIVE
     return {"NP1_G2B_AUTHORIZATION_STATUS":"AUTHORIZED","REVIEW_VERDICT":"PASS","REVIEWED_EXECUTOR_COMMIT":commit,"REVIEWED_EXECUTOR_TREE":tree,"NEW_ROOT_PATH":str(G.NEW_ROOT),"MARKER_BYTES":"NP1 SPREAD PROBE G2 ONLY\\n","CANONICAL_REPORTS_ROOT":base,"COMPLETE_OUTPUT_ROOT":f"{base}/{G.COMPLETE_NAME}","STOP_OUTPUT_ROOT":f"{base}/{G.STOP_NAME}","METADATA_RECEIPT_MODES":"COPIED_ALLOWLIST,ZERO_COPY","METADATA_ALLOWLIST":"Config/accounts.dat,Config/servers.dat","METAEDITOR_COMPILATIONS_MAX":"1","STRATEGY_TESTER_RUNS_MAX":"3","STRATEGY_TESTER_ORDER":"warmup,probe1,probe2","MT5_EXECUTION_AUTHORIZED":"true","CANONICAL_NP1C_RESULT_AUTHORIZED":"false","R6_CENSUS_AUTHORIZED":"false","PNL_AUTHORIZED":"false","TARGET_EXIT_MFE_MAE_AUTHORIZED":"false","DEMO_LIVE_ATTACH_AUTHORIZED":"false","PRESET_PROFILE_ARMING_AUTHORIZED":"false","BROKER_ACTION_AUTHORIZED":"false","DEPLOYMENT_AUTHORIZED":"false"}
+
+
+def _authorization_name(commit: str) -> str:
+    return f"A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
 
 
 def _retag_selected(packet: Path, run_id: str, kind: str, path: Path) -> None:
@@ -146,10 +152,16 @@ def test_stale_empty_rejected_and_fresh_nonempty_accepted(tmp_path: Path) -> Non
     assert G.validate_fresh_report(report, report.stat().st_mtime_ns, parser) == "report"
 
 
-@pytest.mark.parametrize(("old","new"),[("M5 (2015.06.01 - 2026.07.01)","H1 (2015.06.01 - 2026.07.01)"),("2015.06.01","2016.06.01"),("10 000.00 USD","10 000.00 EUR"),("1:50","1:100")])
+@pytest.mark.parametrize(("old","new"),[("M5 (2015.06.01 - 2026.07.01)","H1 (2015.06.01 - 2026.07.01)"),("M5 (2015.06.01 - 2026.07.01)","M5 (2026.07.01 - 2015.06.01)"),("2015.06.01","2016.06.01"),("10 000.00 USD","10 000.00 EUR"),("1:50","1:100")])
 def test_native_report_effective_settings_fail_closed(tmp_path: Path, old: str, new: str) -> None:
     root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"; report.write_text(report.read_text().replace(old,new),encoding="utf-8")
     with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
+
+
+def test_native_report_duplicate_label_fails_closed(tmp_path: Path) -> None:
+    root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"
+    report.write_text(report.read_text().replace("<td>Period:</td>","<td>Period:</td><td>M5 (2015.06.01 - 2026.07.01)</td><td>Period:</td>"),encoding="utf-8")
+    with pytest.raises(RuntimeError,match="duplicate native report label"): G.validate_effective_report(report)
 
 
 def test_exact_command_arrays_streams_and_compile_exit_semantics(tmp_path: Path) -> None:
@@ -244,8 +256,8 @@ def test_wrong_root_rejection_is_read_only(tmp_path: Path, monkeypatch: pytest.M
 
 
 def test_closed_review_parser_exact_hash_fields_and_no_go(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    path = tmp_path / "A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"
     commit, tree = "a" * 40, "b" * 40
+    path = tmp_path / _authorization_name(commit)
     fields = _auth_fields(commit,tree)
     block = "NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n" + "\n".join(f"{k}: {v}" for k,v in fields.items()) + "\nNP1_G2B_AUTHORIZATION_BLOCK_END\n"
     path.write_text(block, encoding="utf-8")
@@ -266,12 +278,12 @@ def test_end_to_end_warmup_failure_automatically_creates_stop(tmp_path: Path, mo
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=config/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8")
     commit,tree="a"*40,"b"*40; monkeypatch.setattr(G.G1,"git",lambda *args: "" if args[0]=="status" else (commit if "rev-parse" in args else tree))
-    review=tmp_path/"A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"
+    review=tmp_path/_authorization_name(commit)
     fields=_auth_fields(commit,tree)
     review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     class C: pass
     def compile_fake(root,editor,runner,version_reader):
-        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{source}",f"/log:{log}"]; return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,_record(command))
+        experts=root/"MQL5"/"Experts"; experts.mkdir(parents=True); source=experts/G.B.PROBE_NAME; source.write_text(G.B.render_probe(),encoding="utf-8",newline="\n"); ex5=source.with_suffix('.ex5'); ex5.write_bytes(b'ex5'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{source}",f"/log:{log}"]; return G.G1.CompileResult(source,ex5,log,G.sha256_file(source),G.sha256_file(ex5),G.G1.EXPECTED_VERSION,_record(command))
     monkeypatch.setattr(G.G1,"compile_once",compile_fake)
     done=type("Done",(),{"returncode":0,"stdout":b"","stderr":b""})()
     with pytest.raises(RuntimeError,match="report"):
@@ -287,12 +299,12 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     for name in ("accounts.dat","servers.dat"):
         src=old/"Config"/name; src.write_bytes(name.encode()); dst=root/"Config"/name; dst.write_bytes(src.read_bytes()); copied.append({"source_path":str(src),"source_relative":f"Config/{name}","destination_relative":f"Config/{name}","size_bytes":dst.stat().st_size,"sha256":G.sha256_file(dst)})
     receipt=tmp_path/"receipt.json"; receipt.write_text(json.dumps({"mode":"COPIED_ALLOWLIST","copied":copied}),encoding="utf-8"); commit,tree="c"*40,"d"*40; monkeypatch.setattr(G.G1,"git",lambda *a:"" if a[0]=="status" else (commit if "rev-parse" in a else tree))
-    review=tmp_path/"A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md"; fields=_auth_fields(commit,tree); review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
+    review=tmp_path/_authorization_name(commit); fields=_auth_fields(commit,tree); review.write_text("NP1_G2B_AUTHORIZATION_BLOCK_BEGIN\n"+"\n".join(f"{k}: {v}" for k,v in fields.items())+"\nNP1_G2B_AUTHORIZATION_BLOCK_END\n",encoding="utf-8")
     def comp(root,editor,runner,version_reader):
-        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{s}",f"/log:{log}"]; return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,_record(command,exit_code=1))
+        e=root/"MQL5"/"Experts"; e.mkdir(parents=True); s=e/G.B.PROBE_NAME; s.write_text(G.B.render_probe(),encoding="utf-8",newline="\n"); x=s.with_suffix('.ex5'); x.write_bytes(b'x'); log=root/'compile.log'; log.write_text('0 errors 0 warnings'); command=[str(editor),f"/compile:{s}",f"/log:{log}"]; return G.G1.CompileResult(s,x,log,G.sha256_file(s),G.sha256_file(x),G.G1.EXPECTED_VERSION,_record(command,exit_code=1))
     monkeypatch.setattr(G.G1,"compile_once",comp)
     import analyze_a1_xau_r6_native_spread_provenance_probe as AN
-    prior=tmp_path/"prior.csv"; prior.write_text("run,timeframe,timestamp,raw_signed_spread\nrun1,H1,2025.06.18 03:00:00,-7\n",encoding="utf-8")
+    prior=tmp_path/"prior.csv"; prior.write_text("run,timeframe,timestamp,raw_signed_spread\nrun1,H1,2025-06-18T03:00:00,-7\n",encoding="utf-8")
     fingerprints=tmp_path/"fingerprints.json"; fingerprints.write_text(json.dumps({tf:{"sha256":"0"*64,"row_count":1} for tf in AN.TIMEFRAMES}),encoding="utf-8")
     monkeypatch.setattr(AN,"PRIOR_NEGATIVE",prior); monkeypatch.setattr(AN,"PRIOR_FINGERPRINTS",fingerprints)
     done=type("D",(),{"returncode":0,"stdout":b"","stderr":b""})()
@@ -312,6 +324,11 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
         path=packet/"runs"/run_id/name
         with path.open(newline="",encoding="utf-8") as handle: rows=list(csv.DictReader(handle,delimiter="\t"))
         rows[0][column]=value; _tsv(path,list(rows[0]),rows); _retag_selected(packet,run_id,name,path)
+    def mutate_all_tsv(packet: Path, run_id: str, name: str, column: str, value: str) -> None:
+        path=packet/"runs"/run_id/name
+        with path.open(newline="",encoding="utf-8") as handle: rows=list(csv.DictReader(handle,delimiter="\t"))
+        for row in rows: row[column]=value
+        _tsv(path,list(rows[0]),rows); _retag_selected(packet,run_id,name,path)
     tampered=tmp_path/"tampered-result"; shutil.copytree(complete,tampered); payload=json.loads((tampered/"result.json").read_text()); payload["flags"].append("STALE"); (tampered/"result.json").write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     with pytest.raises(RuntimeError,match="semantic recomputation"): G.semantic_verify_packet(tampered,tmp_path/"scratch-result",context)
     tampered_auth=tmp_path/"tampered-auth"; shutil.copytree(complete,tampered_auth); auth=json.loads((tampered_auth/"authorization_attestation.json").read_text()); auth["sha256"]="0"*64; G.write_json(tampered_auth/"authorization_attestation.json",auth)
@@ -332,6 +349,29 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     with pytest.raises(RuntimeError,match="post-run inventory incomplete"): G.semantic_verify_packet(bad_root,tmp_path/"scratch-root",context)
     bad_log=packet_copy("bad-log"); log_path=bad_log/"logs"/"unapproved"/"invented.log"; log_path.parent.mkdir(); log_path.write_text("invented",encoding="utf-8"); G.write_json(bad_log/"logs"/"log_inventory.json",{"logs":[{"source_relative":"unapproved/invented.log","size_bytes":log_path.stat().st_size,"sha256":G.sha256_file(log_path)}]})
     with pytest.raises(RuntimeError,match="unauthorized log path/schema"): G.semantic_verify_packet(bad_log,tmp_path/"scratch-log",context)
+    dotted_bar=packet_copy("dotted-bar"); [mutate_tsv(dotted_bar,run_id,"h1_bars.tsv","open_time_broker","2015.06.01 00:00:00") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="ISO timestamp"): G.validate_native_exports(dotted_bar)
+    dotted_tick=packet_copy("dotted-tick"); [mutate_tsv(dotted_tick,run_id,"ticks_20250618.tsv","time","2025.06.18 00:00:01") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="ISO timestamp"): G.validate_native_exports(dotted_tick)
+    outside_tick=packet_copy("outside-tick"); outside_msc=str(int(datetime(2025,6,19,tzinfo=timezone.utc).timestamp())*1000)
+    for run_id in ("probe1","probe2"): mutate_tsv(outside_tick,run_id,"ticks_20250618.tsv","time","2025-06-19T00:00:00"); mutate_tsv(outside_tick,run_id,"ticks_20250618.tsv","time_msc",outside_msc)
+    with pytest.raises(RuntimeError,match="return/error/day"): G.validate_native_exports(outside_tick)
+    disagreeing_msc=packet_copy("disagreeing-msc"); [mutate_tsv(disagreeing_msc,run_id,"ticks_20250618.tsv","time_msc","1") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="return/error/day"): G.validate_native_exports(disagreeing_msc)
+    mixed_point=packet_copy("mixed-point"); [mutate_tsv(mixed_point,run_id,"bar_spread_interfaces.tsv","point","0.1") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="mixed native point/digits"): G.validate_native_exports(mixed_point)
+    wrong_point=packet_copy("wrong-point")
+    for run_id in ("probe1","probe2"): mutate_all_tsv(wrong_point,run_id,"bar_spread_interfaces.tsv","point","0.1"); mutate_all_tsv(wrong_point,run_id,"bar_spread_interfaces.tsv","digits","1")
+    with pytest.raises(RuntimeError,match="native-point"): G.validate_native_exports(wrong_point)
+    false_positive_flag=packet_copy("false-positive-flag"); [mutate_tsv(false_positive_flag,run_id,"ticks_20250618.tsv","quote_sides_positive","false") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="quote-side flag"): G.validate_native_exports(false_positive_flag)
+    unavailable_raw=packet_copy("unavailable-raw")
+    for run_id in ("probe1","probe2"): mutate_tsv(unavailable_raw,run_id,"ticks_20250618.tsv","bid","0"); mutate_tsv(unavailable_raw,run_id,"ticks_20250618.tsv","quote_sides_positive","false")
+    with pytest.raises(RuntimeError,match="unavailable tick raw fields"): G.validate_native_exports(unavailable_raw)
+    nonfinite_quote=packet_copy("nonfinite-quote"); [mutate_tsv(nonfinite_quote,run_id,"ticks_20250618.tsv","bid","nan") for run_id in ("probe1","probe2")]
+    with pytest.raises(RuntimeError,match="non-finite tick quote"): G.validate_native_exports(nonfinite_quote)
+    bad_compiled_source=packet_copy("bad-compiled-source"); compiled=json.loads((bad_compiled_source/"compile_attestation.json").read_text()); compiled["compiled_source_sha256"]="0"*64; G.write_json(bad_compiled_source/"compile_attestation.json",compiled)
+    with pytest.raises(RuntimeError,match="compiled identity"): G.semantic_verify_packet(bad_compiled_source,tmp_path/"scratch-compiled-source",context)
 
 
 def test_noncanonical_reports_root_rejected_before_root_mutation(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

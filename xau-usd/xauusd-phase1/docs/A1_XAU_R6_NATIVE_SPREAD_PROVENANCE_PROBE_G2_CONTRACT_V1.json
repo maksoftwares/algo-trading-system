@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2A5_REVIEW_9506A423_2026_07_12.md",
-    "artifact_sha256": "5c8ad4838590a0d5064b7b057dc09b7912aa53893e49631e76c65f113b2389d8",
+    "artifact": "A1_XAU_NP1G2A6_REVIEW_ED6A2E2C_2026_07_13.md",
+    "artifact_sha256": "40edc0400190bdc367b57293db3b43f8e04e089bdcac3f2d45893d3fc8517482",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A6_EFFECTIVE_TESTER_AND_ATTESTATION_COHERENCE_CLOSURE"
+    "phase": "NP1-G2A7_NATIVE_SERIALIZATION_AND_COMPILED_SOURCE_BINDING_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -49,6 +49,7 @@
       "expert": "A1XauR6NativeSpreadProvenanceProbe",
       "symbol": "XAUUSD",
       "period": "M5",
+      "period_exact": "M5 (2015.06.01 - 2026.07.01)",
       "date_from": "2015.06.01",
       "date_to": "2026.07.01",
       "initial_deposit": 10000.0,
@@ -58,7 +59,9 @@
       "trades_and_deals_zero": true,
       "model_if_exposed": "real ticks",
       "company_if_exposed": "Capital Com Mena Securities Trading L.L.C"
-    }
+    },
+    "requested_labels_exactly_once": true,
+    "duplicate_labels_rejected": true
   },
   "execution_attestation": {
     "commands_closed_schema": ["command", "exit_code", "stdout_base64", "stdout_sha256", "stderr_base64", "stderr_sha256"],
@@ -66,7 +69,9 @@
     "accepted_compile_exit_codes_with_zero_error_zero_warning_log": [0, 1],
     "tester_array_exact": ["terminal64.exe", "/portable", "/config:<exact versioned ini>"],
     "tester_exit_code": 0,
-    "base64_stream_bytes_must_match_sha256": true
+    "base64_stream_bytes_must_match_sha256": true,
+    "compiled_source_sha256_must_equal_packet_source_and_manifest": true,
+    "compiled_ex5_sha256_must_equal_packet_ex5": true
   },
   "native_export_attestation": {
     "closed_tsv_schemas": true,
@@ -75,10 +80,17 @@
     "copyticksrange_return_error_count_day_time_load_bearing": true,
     "unique_monotonic_native_timestamps": true,
     "raw_tick_arithmetic_and_point_consistency": true,
+    "mq5_timestamp_grammar": "YYYY-MM-DDTHH:MM:SS",
+    "tick_broker_day_grammar": "YYYY.MM.DD",
+    "broker_day_iso_time_time_msc_same_second_required": true,
+    "native_interface_point_digits_single_identity_required": true,
+    "point_must_equal_ten_to_negative_digits": true,
+    "positive_and_unavailable_quote_row_semantics_closed": true,
     "probe1_probe2_byte_stability": true
   },
   "review_parser": {
-    "accepted_filename": "A1_XAU_NP1G2A6_EXECUTION_AUTHORIZATION_9506A423_2026_07_13.md",
+    "accepted_filename_pattern": "A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_derived_from_exact_reviewed_commit": true,
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
     "required_bindings": [
@@ -117,7 +129,9 @@
     "g2a4_commit": "d8699d6e31fc5fba82ce1eb046d3d91359511a24",
     "g2a4_tree": "4e0a6c865ab9c6f8301b3594ab5b19c35f0dec20",
     "g2a5_commit": "9506a4233cb23f3218e697d98f4e628127064896",
-    "g2a5_tree": "b6be1b10fe3dd3beef31b0fb195dd54c4836f4b7"
+    "g2a5_tree": "b6be1b10fe3dd3beef31b0fb195dd54c4836f4b7",
+    "g2a6_commit": "ed6a2e2ceaaead2c02a24ef4c7f023656d0b4ebe",
+    "g2a6_tree": "e341089dff709d42e31e1d35c6bb91627a649904"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
