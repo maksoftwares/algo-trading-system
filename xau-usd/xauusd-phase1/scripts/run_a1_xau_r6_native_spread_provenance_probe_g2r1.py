@@ -1,6 +1,6 @@
 """Future review-gated NP1-G2R1 privacy-safe runner with automatic stop packets.
 
-NP1-G2A11 is repository-only. This module cannot execute unless a later exact
+NP1-G2A12 is repository-only. This module cannot execute unless a later exact
 review artifact activates the reserved budget.
 """
 
@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 import time
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Sequence
@@ -70,6 +71,7 @@ SELECTOR_FIELDS = {"schema_version", "login", "platform_server", "expected_accou
 REDACTED_LOGIN = "<REDACTED_LOGIN_MATCHED>"
 REDACTED_PLATFORM_SERVER = "<REDACTED_PLATFORM_SERVER>"
 REDACTED_ACCOUNT_SERVER = "<REDACTED_ACCOUNT_SERVER>"
+PATH_REDACTION_TOKENS = ("REDACTED_LOGIN", "REDACTED_PLATFORM_SERVER", "REDACTED_ACCOUNT_SERVER")
 CommandRunner = Callable[[Sequence[str], Path, int], object]
 
 
@@ -81,8 +83,13 @@ def load_account_selector(path: Path, root: Path = NEW_ROOT) -> dict[str, str]:
     expected = ACCOUNT_SELECTOR.absolute()
     if path.absolute() != expected or not path.is_file():
         raise PermissionError("exact external account selector required")
-    stat = path.lstat()
-    if path.is_symlink() or (getattr(stat, "st_file_attributes", 0) & 0x400) or stat.st_nlink != 1:
+    for candidate in (path, *path.parents):
+        if not candidate.exists():
+            continue
+        stat = candidate.lstat()
+        if candidate.is_symlink() or (getattr(stat, "st_file_attributes", 0) & 0x400):
+            raise PermissionError("account selector or ancestor link/reparse rejected")
+    if path.lstat().st_nlink != 1:
         raise PermissionError("account selector link/reparse/hard-link rejected")
     resolved = path.resolve()
     for forbidden in (ROOT.resolve(), root.resolve()):
@@ -104,7 +111,12 @@ def load_account_selector(path: Path, root: Path = NEW_ROOT) -> dict[str, str]:
         raise PermissionError("account selector login must be a positive decimal string")
     for key in ("platform_server", "expected_account_server"):
         value = payload[key]
-        if not value.strip() or value != value.strip() or len(value) > 256 or any(char in value for char in "\r\n\x00"):
+        if (
+            not value.strip()
+            or value != value.strip()
+            or len(value) > 256
+            or any(unicodedata.category(char).startswith("C") for char in value)
+        ):
             raise PermissionError("account selector server value invalid")
     return payload
 
@@ -125,6 +137,87 @@ def selector_attestation(selector: dict[str, str]) -> dict[str, Any]:
 
 def sensitive_values(selector: dict[str, str]) -> tuple[str, ...]:
     return tuple(dict.fromkeys((selector["login"], selector["platform_server"], selector["expected_account_server"])))
+
+
+def _value_tokens(selector: dict[str, str]) -> tuple[tuple[str, str, str], ...]:
+    return tuple(zip(sensitive_values(selector), (REDACTED_LOGIN, REDACTED_PLATFORM_SERVER, REDACTED_ACCOUNT_SERVER), PATH_REDACTION_TOKENS))
+
+
+def _encoded_variants(value: str) -> tuple[bytes, ...]:
+    texts = tuple(dict.fromkeys((value, value.lower(), value.upper(), value.casefold())))
+    return tuple(dict.fromkeys(text.encode(encoding) for text in texts for encoding in ("utf-8", "utf-16-le", "utf-16-be")))
+
+
+def assert_bytes_redacted(raw: bytes, selector: dict[str, str], *, label: str) -> None:
+    for value in sensitive_values(selector):
+        if any(token and token in raw for token in _encoded_variants(value)):
+            raise RuntimeError(f"sensitive selector value remains in {label}")
+
+
+def sanitize_runtime_bytes(raw: bytes, selector: dict[str, str]) -> bytes:
+    sanitized = raw
+    for value, text_token, _ in _value_tokens(selector):
+        for encoding in ("utf-8", "utf-16-le", "utf-16-be"):
+            replacement = text_token.encode(encoding)
+            for variant in tuple(dict.fromkeys((value, value.lower(), value.upper(), value.casefold()))):
+                sanitized = sanitized.replace(variant.encode(encoding), replacement)
+    assert_bytes_redacted(sanitized, selector, label="sanitized runtime bytes")
+    return sanitized
+
+
+def sanitize_projection(value: Any, selector: dict[str, str]) -> Any:
+    if isinstance(value, str):
+        return sanitize_runtime_text(value, selector)
+    if isinstance(value, list):
+        return [sanitize_projection(item, selector) for item in value]
+    if isinstance(value, tuple):
+        return [sanitize_projection(item, selector) for item in value]
+    if isinstance(value, dict):
+        return {key: sanitize_projection(item, selector) for key, item in value.items()}
+    return value
+
+
+def assert_relative_path_redacted(relative: str, selector: dict[str, str]) -> None:
+    if relative.startswith("/") or "\\" in relative or any(part in {"", ".", ".."} for part in relative.split("/")):
+        raise RuntimeError("packet relative path grammar mismatch")
+    if any(re.search(re.escape(value), relative, flags=re.I) for value in sensitive_values(selector)):
+        raise RuntimeError("sensitive selector value remains in packet pathname")
+
+
+def sanitize_relative_path(relative: str, selector: dict[str, str]) -> str:
+    parts = []
+    for component in relative.replace("\\", "/").split("/"):
+        if component in {"", ".", ".."}:
+            raise RuntimeError("unsafe runtime-derived relative path")
+        for value, _, path_token in _value_tokens(selector):
+            component = re.sub(re.escape(value), path_token, component, flags=re.I)
+        parts.append(component)
+    sanitized = "/".join(parts)
+    assert_relative_path_redacted(sanitized, selector)
+    return sanitized
+
+
+def sanitize_command_record(record: dict[str, Any], selector: dict[str, str]) -> dict[str, Any]:
+    if set(record) != COMMAND_FIELDS or any(not isinstance(part, str) for part in record.get("command", [])):
+        raise RuntimeError("command record closed schema mismatch")
+    if any(re.search(re.escape(value), part, flags=re.I) for part in record["command"] for value in sensitive_values(selector)):
+        raise RuntimeError("sensitive selector value in command array")
+    sanitized = dict(record)
+    for stream in ("stdout", "stderr"):
+        try:
+            decoded = base64.b64decode(record[f"{stream}_base64"], validate=True)
+        except Exception as exc:
+            raise RuntimeError("command stream base64 mismatch") from exc
+        if hashlib.sha256(decoded).hexdigest() != record[f"{stream}_sha256"]:
+            raise RuntimeError("command stream hash mismatch")
+        safe = sanitize_runtime_bytes(decoded, selector)
+        sanitized[f"{stream}_base64"] = base64.b64encode(safe).decode("ascii")
+        sanitized[f"{stream}_sha256"] = hashlib.sha256(safe).hexdigest()
+    return sanitized
+
+
+def sanitize_command_records(commands: list[dict[str, Any]], selector: dict[str, str]) -> list[dict[str, Any]]:
+    return [sanitize_command_record(row, selector) for row in commands]
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -330,8 +423,7 @@ def decode_runtime_text(path: Path) -> str:
 
 
 def sanitize_runtime_text(text: str, selector: dict[str, str]) -> str:
-    tokens = (REDACTED_LOGIN, REDACTED_PLATFORM_SERVER, REDACTED_ACCOUNT_SERVER)
-    for value, token in zip((selector["login"], selector["platform_server"], selector["expected_account_server"]), tokens):
+    for value, token, _ in _value_tokens(selector):
         text = re.sub(re.escape(value), token, text, flags=re.I)
     if any(re.search(re.escape(value), text, flags=re.I) for value in sensitive_values(selector)):
         raise RuntimeError("runtime text redaction failed")
@@ -345,17 +437,37 @@ def write_sanitized_runtime_file(source: Path, destination: Path, selector: dict
 
 def assert_packet_redacted(packet: Path, selector: dict[str, str]) -> None:
     forbidden_names = {ACCOUNT_SELECTOR.name.lower(), "accounts.dat", "servers.dat"}
-    values = sensitive_values(selector)
-    for path in packet.rglob("*"):
-        if not path.is_file(): continue
+    for path in sorted(packet.rglob("*"), key=lambda candidate: candidate.relative_to(packet).as_posix()):
         relative = path.relative_to(packet).as_posix()
-        if path.name.lower() in forbidden_names or relative.endswith("/tester.ini") or relative.endswith("/native_report.htm"):
+        assert_relative_path_redacted(relative, selector)
+        if not path.is_file():
+            continue
+        if path.name.lower() in forbidden_names or relative == "tester.ini" or relative.endswith("/tester.ini") or relative == "native_report.htm" or relative.endswith("/native_report.htm"):
             raise RuntimeError("raw account-bearing artifact committed")
         raw = path.read_bytes()
-        for value in values:
-            encoded = (value.encode("utf-8"), value.encode("utf-16-le"), value.encode("utf-16-be"))
-            if any(token and token in raw for token in encoded): raise RuntimeError("sensitive selector value remains in packet")
+        assert_bytes_redacted(raw, selector, label="packet")
         if b"Password=" in raw or b"/login:" in raw.lower(): raise RuntimeError("credential material remains in packet")
+        if path.name == "commands.json":
+            payload = json.loads(raw.decode("utf-8"))
+            if not isinstance(payload, list):
+                raise RuntimeError("command records must be a list")
+            for row in payload:
+                if not isinstance(row, dict) or set(row) != COMMAND_FIELDS:
+                    raise RuntimeError("command record closed schema mismatch")
+                for stream in ("stdout", "stderr"):
+                    try:
+                        decoded = base64.b64decode(row[f"{stream}_base64"], validate=True)
+                    except Exception as exc:
+                        raise RuntimeError("command stream base64 mismatch") from exc
+                    if hashlib.sha256(decoded).hexdigest() != row[f"{stream}_sha256"]:
+                        raise RuntimeError("command stream hash mismatch")
+                    assert_bytes_redacted(decoded, selector, label=f"decoded command {stream}")
+        if relative == "manifest.json":
+            payload = json.loads(raw.decode("utf-8"))
+            for row in payload.get("artifacts", []):
+                if not isinstance(row, dict) or not isinstance(row.get("relative_path"), str):
+                    raise RuntimeError("manifest artifact schema mismatch")
+                assert_relative_path_redacted(row["relative_path"], selector)
 
 
 class Ledger:
@@ -420,20 +532,20 @@ def collect_exact_outputs(root: Path, run_id: str, destination: Path, not_before
     if raw_ini != render_ini(run_id, selector): raise RuntimeError("executed G2R1 INI missing or not exact")
     redacted_ini = destination / "tester.redacted.ini"
     redacted_ini.write_text(render_redacted_ini(raw_ini, selector), encoding="utf-8", newline="\n")
-    selected=[{"kind":"tester_redacted_ini","source":str(ini),"sha256":sha256_file(redacted_ini),"size_bytes":redacted_ini.stat().st_size}]
+    selected=[{"kind":"tester_redacted_ini","source":sanitize_runtime_text(str(ini), selector),"sha256":sha256_file(redacted_ini),"size_bytes":redacted_ini.stat().st_size}]
     report = expected_report(root, run_id)
     validate_fresh_report(report, not_before_ns, parser)
     validate_effective_report(report)
     sanitized_report = destination / "native_report.redacted.htm"
     write_sanitized_runtime_file(report, sanitized_report, selector)
-    selected.append({"kind":"native_report_redacted","source":str(report),"sha256":sha256_file(sanitized_report),"size_bytes":sanitized_report.stat().st_size,"fresh_not_before_ns":not_before_ns})
+    selected.append({"kind":"native_report_redacted","source":sanitize_runtime_text(str(report), selector),"sha256":sha256_file(sanitized_report),"size_bytes":sanitized_report.stat().st_size,"fresh_not_before_ns":not_before_ns})
     names = G1.WARMUP_NAMES if run_id == "warmup" else G1.OFFICIAL_NAMES
     for name in names:
         matches = list((root / "Tester").glob(f"Agent-*/MQL5/Files/np1_g2r1_{run_id}_{name}"))
         if len(matches) != 1:
             raise RuntimeError(f"expected exactly one {run_id} output {name}; found {len(matches)}")
         shutil.copyfile(matches[0], destination / name)
-        selected.append({"kind":name,"source":str(matches[0]),"sha256":sha256_file(matches[0]),"size_bytes":matches[0].stat().st_size})
+        selected.append({"kind":name,"source":sanitize_runtime_text(str(matches[0]), selector),"sha256":sha256_file(matches[0]),"size_bytes":matches[0].stat().st_size})
     return selected
 
 
@@ -469,13 +581,14 @@ def assert_exact_assertions(packet: Path) -> None:
         if any((row["observed"],row["expected"])!=expected_values[row["assertion_id"]] for row in rows): raise RuntimeError(f"{run_id} assertion observed/expected mismatch")
 
 
-def validate_command_records(commands: list[dict[str,Any]], root: Path) -> None:
+def validate_command_records(commands: list[dict[str,Any]], root: Path, selector: dict[str, str]) -> None:
     if len(commands)!=4 or any(set(row)!=COMMAND_FIELDS for row in commands): raise RuntimeError("command record closed schema mismatch")
     for row in commands:
         for stream in ("stdout","stderr"):
             try: decoded=base64.b64decode(row[f"{stream}_base64"],validate=True)
             except Exception as exc: raise RuntimeError("command stream base64 mismatch") from exc
             if hashlib.sha256(decoded).hexdigest()!=row[f"{stream}_sha256"]: raise RuntimeError("command stream hash mismatch")
+            assert_bytes_redacted(decoded, selector, label=f"decoded command {stream}")
     compile_expected=[str((root/"MetaEditor64.exe").resolve()),f"/compile:{(root/'MQL5'/'Experts'/B.PROBE_NAME).resolve()}",f"/log:{(root/'compile.log').resolve()}"]
     if commands[0]["command"]!=compile_expected or int(commands[0]["exit_code"]) not in {0,1}: raise RuntimeError("compile command/exit semantics mismatch")
     for run_id,row in zip(RUN_IDS,commands[1:]):
@@ -545,7 +658,7 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
     checks.append("metadata_receipt")
     ledger=load("invocation_ledger.json")
     if ledger!={"metaeditor_compilations":1,"tester_runs":list(RUN_IDS),"last_authorized_command_reached":"probe2"}: raise RuntimeError("invocation ledger mismatch")
-    commands=load("commands.json"); validate_command_records(commands,context["root"])
+    commands=load("commands.json"); validate_command_records(commands,context["root"],context["selector"])
     checks.append("one_compile_three_ordered_runs")
     compiled=load("compile_attestation.json"); source=packet/"compiled"/B.PROBE_NAME; ex5=packet/"compiled"/Path(compiled["ex5_name"]).name; log=packet/"compiled"/"compile.log"
     B.verify_source(source)
@@ -560,6 +673,7 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
     if [row["stage"] for row in ex5_checks] != ["before_warmup","before_probe1","before_probe2","after_probe2"] or any(row["sha256"]!=compiled["ex5_sha256"] for row in ex5_checks): raise RuntimeError("EX5 continuity mismatch")
     checks.append("deterministic_source_build5833_ex5_continuity")
     selected=load("searched_location_inventory.json")["selected_sources"]
+    selector=context["selector"]
     expected_count=sum(2+len(G1.WARMUP_NAMES if rid=="warmup" else G1.OFFICIAL_NAMES) for rid in RUN_IDS)
     if len(selected)!=expected_count: raise RuntimeError("selected source count mismatch")
     for run_id in RUN_IDS:
@@ -572,16 +686,17 @@ def validate_packet_attestations(packet: Path, context: dict[str, Any]) -> list[
             name={"tester_redacted_ini":"tester.redacted.ini","native_report_redacted":"native_report.redacted.htm"}.get(row["kind"],row["kind"])
             target=packet/"runs"/run_id/name
             if target.stat().st_size!=row["size_bytes"] or sha256_file(target)!=row["sha256"]: raise RuntimeError("selected source-to-packet mismatch")
-            source_path=Path(row["source"]).resolve()
-            if row["kind"]=="tester_redacted_ini": expected_source=(context["root"]/"Config"/f"np1_g2r1_{run_id}.ini").resolve()
-            elif row["kind"]=="native_report_redacted": expected_source=(context["root"]/"Reports"/f"np1_g2r1_{run_id}.htm").resolve()
+            source_text=row["source"]
+            if row["kind"]=="tester_redacted_ini": expected_source=sanitize_runtime_text(str((context["root"]/"Config"/f"np1_g2r1_{run_id}.ini").resolve()),selector)
+            elif row["kind"]=="native_report_redacted": expected_source=sanitize_runtime_text(str((context["root"]/"Reports"/f"np1_g2r1_{run_id}.htm").resolve()),selector)
             else:
-                try: relative=source_path.relative_to(context["root"].resolve()).parts
-                except ValueError as exc: raise RuntimeError("selected output source path mismatch") from exc
-                expected_source=source_path
+                root_text=sanitize_runtime_text(str(context["root"].resolve()),selector).rstrip("\\/")
+                normalized=source_text.replace("\\","/"); prefix=root_text.replace("\\","/")+"/"
+                if not normalized.startswith(prefix): raise RuntimeError("selected output source path mismatch")
+                relative=tuple(normalized[len(prefix):].split("/"))
                 if len(relative)!=5 or relative[0]!="Tester" or not relative[1].startswith("Agent-") or relative!=("Tester",relative[1],"MQL5","Files",f"np1_g2r1_{run_id}_{row['kind']}"): raise RuntimeError("selected output source path mismatch")
-            if row["kind"] in {"tester_redacted_ini","native_report_redacted"} and source_path!=expected_source: raise RuntimeError("selected source path mismatch")
-        selector=context["selector"]
+                expected_source=source_text
+            if row["kind"] in {"tester_redacted_ini","native_report_redacted"} and source_text!=expected_source: raise RuntimeError("selected source path mismatch")
         if (packet/"runs"/run_id/"tester.redacted.ini").read_text(encoding="utf-8")!=render_redacted_ini(render_ini(run_id,selector),selector): raise RuntimeError("packet redacted INI mismatch")
         validate_effective_report(packet/"runs"/run_id/"native_report.redacted.htm")
     checks.append("exact_inis_and_selected_sources")
@@ -658,6 +773,52 @@ def _manifest(root: Path, schema: str = "a1_xau_r6_np1_g2r1_stop_manifest_v1") -
     (root / "manifest.sha256").write_text(sha256_file(root / "manifest.json") + "\n", encoding="ascii", newline="\n")
 
 
+def copy_privacy_file(source: Path, destination: Path, selector: dict[str, str]) -> None:
+    stat = source.lstat()
+    if source.is_symlink() or (getattr(stat, "st_file_attributes", 0) & 0x400) or stat.st_nlink != 1:
+        raise RuntimeError("linked optional artifact rejected")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.exists():
+        raise RuntimeError("privacy projection path collision")
+    destination.write_bytes(sanitize_runtime_bytes(source.read_bytes(), selector))
+
+
+def copy_privacy_projection(source: Path, destination: Path, selector: dict[str, str], omissions: list[dict[str, str]]) -> None:
+    forbidden_names = {ACCOUNT_SELECTOR.name.lower(), "accounts.dat", "servers.dat", "tester.ini", "native_report.htm"}
+    for path in sorted(source.rglob("*"), key=lambda candidate: candidate.relative_to(source).as_posix()):
+        if not path.is_file():
+            continue
+        raw_relative = path.relative_to(source).as_posix()
+        safe_relative = sanitize_relative_path(raw_relative, selector)
+        if path.name.lower() in forbidden_names:
+            omissions.append({"artifact": safe_relative, "reason": "raw_account_artifact_omitted"})
+            continue
+        if path.name.lower() in {"manifest.json", "manifest.sha256"}:
+            omissions.append({"artifact": safe_relative, "reason": "superseded_projection_manifest_omitted"})
+            continue
+        try:
+            target = destination / safe_relative
+            if path.name == "commands.json":
+                payload = json.loads(path.read_text(encoding="utf-8"))
+                if not isinstance(payload, list):
+                    raise RuntimeError("command records must be a list")
+                write_json(target, sanitize_command_records(payload, selector))
+            else:
+                copy_privacy_file(path, target, selector)
+        except BaseException:
+            omissions.append({"artifact": safe_relative, "reason": "unsafe_optional_artifact_omitted"})
+
+
+def _finalize_stop_stage(stage: Path, stop: Path, selector: dict[str, str]) -> Path:
+    assert_packet_redacted(stage, selector)
+    _manifest(stage)
+    assert_packet_redacted(stage, selector)
+    verify_manifest(stage)
+    assert_packet_redacted(stage, selector)
+    stage.rename(stop)
+    return stop
+
+
 def preserve_stop_packet(
     *, stop: Path, root: Path, ledger: Path, preflight: dict[str, Any], reports_attestation: dict[str, Any],
     commands: list[dict[str, Any]], run_ids: list[str], error: BaseException, compile_workspace: Path | None = None,
@@ -666,50 +827,106 @@ def preserve_stop_packet(
     selector: dict[str, str] | None = None,
 ) -> Path:
     if selector is None: raise RuntimeError("selector required for privacy-safe stop packet")
-    stop.mkdir(parents=True, exist_ok=False)
-    write_json(stop / "result.json", {"status": "NP1_G2R1_EVIDENCE_INVALID", "error": sanitize_runtime_text(str(error), selector), "last_authorized_command_reached": json.loads(ledger.read_text(encoding="utf-8"))["last_authorized_command_reached"], "probe1_invoked": "probe1" in run_ids, "probe2_invoked": "probe2" in run_ids, "canonical_np1c_authorized": False, "r6_census_authorized": False, "pnl_authorized": False, "profitability_authorized": False, "target_exit_authorized": False, "mfe_mae_authorized": False, "h4_portfolio_authorized": False, "demo_live_attach_authorized": False, "preset_profile_arming_authorized": False, "deployment_authorized": False, "broker_action_authorized": False, "btc_work_authorized": False})
-    (stop / "README.md").write_text("# NP1-G2R1 Automatic Stop Packet\n\nStatus: `NP1_G2R1_EVIDENCE_INVALID`. No automatic retry is authorized.\n", encoding="utf-8", newline="\n")
-    shutil.copyfile(ledger, stop / "invocation_ledger.json")
-    write_json(stop / "preflight_root_inventory.json", preflight)
-    write_json(stop / "post_stop_root_inventory.json", inventory(root))
-    write_json(stop / "reports_directory_attestation.json", reports_attestation)
-    write_json(stop / "post_reports_creation_inventory.json", post_reports_inventory or {})
-    write_json(stop / "authorization_attestation.json", authorization_attestation or {})
-    write_json(stop / "account_selector_attestation.json", selector_attestation(selector))
-    write_json(stop / "commands.json", commands)
-    if metadata_receipt is not None: copy_if_present(metadata_receipt, stop / "metadata_receipt.json")
-    searched: list[dict[str, Any]] = []
-    for run_id in run_ids:
-        run_dir = stop / "runs" / run_id
-        raw_ini = root / "Config" / f"np1_g2r1_{run_id}.ini"
-        if raw_ini.is_file():
-            redacted = render_redacted_ini(raw_ini.read_text(encoding="utf-8"), selector)
-            (run_dir / "tester.redacted.ini").parent.mkdir(parents=True, exist_ok=True)
-            (run_dir / "tester.redacted.ini").write_text(redacted, encoding="utf-8", newline="\n")
-        report = expected_report(root, run_id)
-        if report.is_file():
-            validate_effective_report(report)
-            write_sanitized_runtime_file(report, run_dir / "native_report.redacted.htm", selector)
-        for files_dir in (root / "Tester").glob("Agent-*/MQL5/Files"):
-            for path in files_dir.glob(f"np1_g2r1_{run_id}_*"):
-                relative = path.relative_to(root).as_posix(); searched.append({"run_id":run_id,"source_relative":relative,"size_bytes":path.stat().st_size,"sha256":sha256_file(path)})
-                copy_if_present(path, run_dir / "searched_outputs" / relative)
-    write_json(stop / "searched_location_inventory.json", {"matches": searched})
-    log_rows = []
-    for path in changed_logs(root, preflight):
-        relative = path.relative_to(root).as_posix(); destination = stop / "logs" / relative
-        write_sanitized_runtime_file(path, destination, selector)
-        log_rows.append({"source_relative": relative, "size_bytes": destination.stat().st_size, "sha256": sha256_file(destination)})
-    write_json(stop / "logs" / "log_inventory.json", {"logs": log_rows})
-    if compile_workspace is not None and compile_workspace.exists():
-        for path in compile_workspace.glob("*"):
-            if path.is_file(): copy_if_present(path, stop / "compiled" / path.name)
-    if partial_staging is not None and partial_staging.exists():
-        shutil.move(str(partial_staging), str(stop / "partial_staging"))
-    assert_packet_redacted(stop, selector)
-    _manifest(stop)
-    verify_manifest(stop)
-    return stop
+    stage = stop.with_name(f".{stop.name}.staging")
+    if stop.exists() or stage.exists():
+        raise RuntimeError("fixed stop or temporary stop staging already exists")
+    omissions: list[dict[str, str]] = []
+    try:
+        try:
+            ledger_payload = json.loads(ledger.read_text(encoding="utf-8"))
+        except BaseException:
+            ledger_payload = {"metaeditor_compilations": 0, "tester_runs": [], "last_authorized_command_reached": "unavailable"}
+            omissions.append({"artifact": "invocation_ledger.json", "reason": "unsafe_optional_artifact_omitted"})
+        result = {"status": "NP1_G2R1_EVIDENCE_INVALID", "error": sanitize_runtime_text(str(error), selector), "last_authorized_command_reached": ledger_payload.get("last_authorized_command_reached", "unavailable"), "probe1_invoked": "probe1" in run_ids, "probe2_invoked": "probe2" in run_ids, "canonical_np1c_authorized": False, "r6_census_authorized": False, "pnl_authorized": False, "profitability_authorized": False, "target_exit_authorized": False, "mfe_mae_authorized": False, "h4_portfolio_authorized": False, "demo_live_attach_authorized": False, "preset_profile_arming_authorized": False, "deployment_authorized": False, "broker_action_authorized": False, "btc_work_authorized": False}
+        stage.mkdir(parents=True, exist_ok=False)
+        write_json(stage / "result.json", result)
+        (stage / "README.md").write_text("# NP1-G2R1 Automatic Stop Packet\n\nStatus: `NP1_G2R1_EVIDENCE_INVALID`. No automatic retry is authorized.\n", encoding="utf-8", newline="\n")
+        write_json(stage / "invocation_ledger.json", sanitize_projection(ledger_payload, selector))
+        write_json(stage / "preflight_root_inventory.json", sanitize_projection(preflight, selector))
+        write_json(stage / "post_stop_root_inventory.json", sanitize_projection(inventory(root), selector))
+        write_json(stage / "reports_directory_attestation.json", sanitize_projection(reports_attestation, selector))
+        write_json(stage / "post_reports_creation_inventory.json", sanitize_projection(post_reports_inventory or {}, selector))
+        write_json(stage / "authorization_attestation.json", sanitize_projection(authorization_attestation or {}, selector))
+        write_json(stage / "account_selector_attestation.json", selector_attestation(selector))
+        try:
+            safe_commands = sanitize_command_records(commands, selector)
+        except BaseException:
+            safe_commands = []
+            omissions.append({"artifact": "commands.json", "reason": "unsafe_optional_artifact_omitted"})
+        write_json(stage / "commands.json", safe_commands)
+        if metadata_receipt is not None and metadata_receipt.is_file():
+            try:
+                write_json(stage / "metadata_receipt.json", sanitize_projection(json.loads(metadata_receipt.read_text(encoding="utf-8")), selector))
+            except BaseException:
+                omissions.append({"artifact": "metadata_receipt.json", "reason": "unsafe_optional_artifact_omitted"})
+        searched: list[dict[str, Any]] = []
+        for run_id in run_ids:
+            run_dir = stage / "runs" / run_id
+            raw_ini = root / "Config" / f"np1_g2r1_{run_id}.ini"
+            if raw_ini.is_file():
+                try:
+                    redacted = render_redacted_ini(raw_ini.read_text(encoding="utf-8"), selector)
+                    (run_dir / "tester.redacted.ini").parent.mkdir(parents=True, exist_ok=True)
+                    (run_dir / "tester.redacted.ini").write_text(redacted, encoding="utf-8", newline="\n")
+                except BaseException:
+                    omissions.append({"artifact": f"runs/{run_id}/tester.redacted.ini", "reason": "unsafe_optional_artifact_omitted"})
+            report = expected_report(root, run_id)
+            if report.is_file():
+                try:
+                    validate_effective_report(report)
+                    write_sanitized_runtime_file(report, run_dir / "native_report.redacted.htm", selector)
+                except BaseException:
+                    omissions.append({"artifact": f"runs/{run_id}/native_report.redacted.htm", "reason": "unsafe_optional_artifact_omitted"})
+            for files_dir in (root / "Tester").glob("Agent-*/MQL5/Files"):
+                for path in files_dir.glob(f"np1_g2r1_{run_id}_*"):
+                    raw_relative = path.relative_to(root).as_posix()
+                    safe_relative = sanitize_relative_path(raw_relative, selector)
+                    destination = run_dir / "searched_outputs" / safe_relative
+                    try:
+                        copy_privacy_file(path, destination, selector)
+                        searched.append({"run_id":run_id,"source_relative":safe_relative,"size_bytes":destination.stat().st_size,"sha256":sha256_file(destination)})
+                    except BaseException:
+                        omissions.append({"artifact": f"runs/{run_id}/searched_outputs/{safe_relative}", "reason": "unsafe_optional_artifact_omitted"})
+        write_json(stage / "searched_location_inventory.json", {"matches": searched})
+        log_rows = []
+        try:
+            changed = changed_logs(root, preflight)
+        except BaseException:
+            changed = []
+            omissions.append({"artifact": "logs", "reason": "unsafe_optional_artifact_omitted"})
+        for path in changed:
+            raw_relative = path.relative_to(root).as_posix()
+            safe_relative = sanitize_relative_path(raw_relative, selector)
+            destination = stage / "logs" / safe_relative
+            try:
+                write_sanitized_runtime_file(path, destination, selector)
+                log_rows.append({"source_relative": safe_relative, "size_bytes": destination.stat().st_size, "sha256": sha256_file(destination)})
+            except BaseException:
+                omissions.append({"artifact": f"logs/{safe_relative}", "reason": "unsafe_optional_artifact_omitted"})
+        write_json(stage / "logs" / "log_inventory.json", {"logs": log_rows})
+        if compile_workspace is not None and compile_workspace.exists():
+            copy_privacy_projection(compile_workspace, stage / "compiled", selector, omissions)
+        if partial_staging is not None and partial_staging.exists():
+            copy_privacy_projection(partial_staging, stage / "partial_staging", selector, omissions)
+        write_json(stage / "omissions.json", {"omissions": omissions})
+        try:
+            completed = _finalize_stop_stage(stage, stop, selector)
+        except BaseException:
+            shutil.rmtree(stage, ignore_errors=True)
+            stage.mkdir(parents=True, exist_ok=False)
+            write_json(stage / "result.json", result)
+            (stage / "README.md").write_text("# NP1-G2R1 Minimal Automatic Stop Packet\n\nStatus: `NP1_G2R1_EVIDENCE_INVALID`. Unsafe optional evidence was omitted. No automatic retry is authorized.\n", encoding="utf-8", newline="\n")
+            write_json(stage / "invocation_ledger.json", sanitize_projection(ledger_payload, selector))
+            write_json(stage / "account_selector_attestation.json", selector_attestation(selector))
+            write_json(stage / "commands.json", [])
+            write_json(stage / "omissions.json", {"omissions": [{"artifact": "extended_stop_projection", "reason": "unsafe_optional_artifact_omitted"}]})
+            completed = _finalize_stop_stage(stage, stop, selector)
+        if partial_staging is not None and partial_staging.exists():
+            shutil.rmtree(partial_staging, ignore_errors=True)
+        return completed
+    except BaseException:
+        shutil.rmtree(stage, ignore_errors=True)
+        raise
 
 
 def verify_manifest(root: Path) -> None:
@@ -727,7 +944,7 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    expected_name=f"A1_XAU_NP1G2A11_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    expected_name=f"A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
     if path.name != expected_name or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2R1 review artifact identity required")
     text = path.read_text(encoding="utf-8")
@@ -758,7 +975,7 @@ def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tr
         "REDACTED_ACCOUNT_EVIDENCE_REQUIRED":"true",
         "ACCOUNT_ASSERTIONS_REQUIRED":"account_login_present,account_login_matches,account_server_present,account_server_matches",
         "METAEDITOR_COMPILATIONS_MAX":"1", "STRATEGY_TESTER_RUNS_MAX":"3", "STRATEGY_TESTER_ORDER":"warmup,probe1,probe2",
-        "AUTOMATIC_RETRY_AUTHORIZED":"false", "REUSE_G2A10_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2_ROOT_AUTHORIZED":"false",
+        "AUTOMATIC_RETRY_AUTHORIZED":"false", "REUSE_G2A10_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2A11_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2_ROOT_AUTHORIZED":"false",
         "MT5_EXECUTION_AUTHORIZED":"true", "CANONICAL_NP1C_RESULT_AUTHORIZED":"false", "R6_CENSUS_AUTHORIZED":"false",
         "PNL_AUTHORIZED":"false", "PROFITABILITY_AUTHORIZED":"false", "TARGET_EXIT_AUTHORIZED":"false",
         "MFE_MAE_AUTHORIZED":"false", "H4_PORTFOLIO_AUTHORIZED":"false", "DEMO_LIVE_ATTACH_AUTHORIZED":"false",
@@ -773,10 +990,10 @@ def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tr
 
 def execute_future(*, authorization: str, review_artifact: Path, review_sha256: str, reviewed_commit: str, reviewed_tree: str, root: Path, reports_root: Path, metadata_receipt: Path, selector_path: Path = ACCOUNT_SELECTOR, command_runner: CommandRunner = G1.command_runner, compile_runner: CommandRunner = G1.command_runner, version_reader: Callable[[Path], str] = G1.executable_version) -> Path:
     if authorization != ACTIVATION:
-        raise PermissionError("NP1-G2A11 is repo-only; future execution is not authorized")
+        raise PermissionError("NP1-G2A12 is repo-only; future execution is not authorized")
     commit = G1.git("rev-parse", "HEAD"); tree = G1.git("show", "-s", "--format=%T", "HEAD")
     if commit != reviewed_commit or tree != reviewed_tree or G1.git("status", "--porcelain=v1", "--untracked-files=all"):
-        raise PermissionError("clean reviewed G2-A11 commit/tree required")
+        raise PermissionError("clean reviewed G2-A12 commit/tree required")
     if reports_root.resolve()!=CANONICAL_REPORTS_ROOT.resolve(): raise PermissionError("exact canonical repository reports root required")
     auth_fields = parse_future_authorization(review_artifact, review_sha256, commit, tree)
     selector = load_account_selector(selector_path, root)
@@ -795,7 +1012,7 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
         compiled = compile_once_g2r1(root, editor, runner=compile_runner, version_reader=version_reader)
         workspace.mkdir(); copy_if_present(compiled.source, workspace / B.PROBE_NAME); copy_if_present(compiled.ex5, workspace / compiled.ex5.name); copy_if_present(compiled.log, workspace / "compile.log")
         B.build_probe(workspace / B.PROBE_NAME, workspace / "source_manifest.json")
-        commands.append(compiled.command_record)
+        commands.append(sanitize_command_record(compiled.command_record, selector))
         staging.mkdir()
         shutil.copytree(workspace, staging / "compiled")
         selected_sources=[]; ex5_checks=[]
@@ -805,20 +1022,20 @@ def execute_future(*, authorization: str, review_artifact: Path, review_sha256: 
             ini = root / "Config" / f"np1_g2r1_{run_id}.ini"; ini.write_text(render_ini(run_id, selector), encoding="utf-8", newline="\n")
             if expected_report(root, run_id).exists(): raise RuntimeError("stale report before invocation")
             ledger.run(run_id); invoked.append(run_id)
-            command = [str(terminal), "/portable", f"/config:{ini}"]; started = time.time_ns(); done = command_runner(command, root, 7200); commands.append(G1.record(command, done))
+            command = [str(terminal), "/portable", f"/config:{ini}"]; started = time.time_ns(); done = command_runner(command, root, 7200); commands.append(sanitize_command_record(G1.record(command, done), selector))
             if int(getattr(done, "returncode", 1)) != 0: raise RuntimeError(f"tester {run_id} failed")
             import analyze_a1_xau_r6_native_spread_provenance_probe as A
             selected_sources.extend(collect_exact_outputs(root, run_id, staging / "runs" / run_id, started, A.parse_report, selector))
         if sha256_file(compiled.ex5) != compiled.ex5_sha256: raise RuntimeError("final post-probe2 EX5 drift")
         ex5_checks.append({"stage":"after_probe2","sha256":sha256_file(compiled.ex5)})
-        write_json(staging / "metadata_receipt.json", receipt); write_json(staging / "authorization_attestation.json", authority_attestation); write_json(staging / "account_selector_attestation.json", selector_attestation(selector)); write_json(staging / "preflight_root_inventory.json", preflight); write_json(staging/"post_reports_creation_inventory.json",post_reports); write_json(staging / "post_run_root_inventory.json", inventory(root)); write_json(staging / "reports_directory_attestation.json", report_attestation); write_json(staging / "invocation_ledger.json", ledger.data); write_json(staging / "commands.json", commands)
+        write_json(staging / "metadata_receipt.json", sanitize_projection(receipt, selector)); write_json(staging / "authorization_attestation.json", sanitize_projection(authority_attestation, selector)); write_json(staging / "account_selector_attestation.json", selector_attestation(selector)); write_json(staging / "preflight_root_inventory.json", sanitize_projection(preflight, selector)); write_json(staging/"post_reports_creation_inventory.json",sanitize_projection(post_reports, selector)); write_json(staging / "post_run_root_inventory.json", sanitize_projection(inventory(root), selector)); write_json(staging / "reports_directory_attestation.json", sanitize_projection(report_attestation, selector)); write_json(staging / "invocation_ledger.json", sanitize_projection(ledger.data, selector)); write_json(staging / "commands.json", sanitize_command_records(commands, selector))
         packet_source_sha=sha256_file(staging/"compiled"/B.PROBE_NAME); packet_ex5_sha=sha256_file(staging/"compiled"/compiled.ex5.name)
         if compiled.source_sha256!=packet_source_sha or compiled.ex5_sha256!=packet_ex5_sha: raise RuntimeError("compiled source/EX5 packet binding mismatch")
         write_json(staging/"compile_attestation.json",{"source_name":B.PROBE_NAME,"source_sha256":packet_source_sha,"compiled_source_sha256":compiled.source_sha256,"ex5_name":compiled.ex5.name,"ex5_sha256":packet_ex5_sha,"compiled_ex5_sha256":compiled.ex5_sha256,"metaeditor_version":compiled.version,"compile_log_sha256":sha256_file(staging/"compiled"/"compile.log")}); write_json(staging/"ex5_identity_attestation.json",ex5_checks)
         write_json(staging/"searched_location_inventory.json",{"selected_sources":selected_sources})
         log_rows=[]
         for path in changed_logs(root,preflight):
-            rel=path.relative_to(root).as_posix(); destination=staging/"logs"/rel; write_sanitized_runtime_file(path,destination,selector);log_rows.append({"source_relative":rel,"size_bytes":destination.stat().st_size,"sha256":sha256_file(destination)})
+            rel=sanitize_relative_path(path.relative_to(root).as_posix(),selector); destination=staging/"logs"/rel; write_sanitized_runtime_file(path,destination,selector);log_rows.append({"source_relative":rel,"size_bytes":destination.stat().st_size,"sha256":sha256_file(destination)})
         write_json(staging/"logs"/"log_inventory.json",{"logs":log_rows})
         result = build_scientific_outputs_from_redacted_packet(staging,reports_root/".np1_g2r1_scientific_build"); write_g2_wrapper(staging,result)
         verification_context={"authorization_attestation":authority_attestation,"metadata_receipt":receipt,"root":root,"selector":selector}
@@ -846,7 +1063,7 @@ def _main() -> int:
     parser.add_argument("--reports-root", type=Path, default=ROOT / "outputs" / "reports")
     args = parser.parse_args()
     if args.review_artifact is None:
-        raise SystemExit("NP1-G2A11 is repository-only; no MT5 execution authorized")
+        raise SystemExit("NP1-G2A12 is repository-only; no MT5 execution authorized")
     if args.metadata_receipt is None: raise SystemExit("--metadata-receipt required")
     execute_future(authorization=args.authorization, review_artifact=args.review_artifact, review_sha256=args.review_sha256, reviewed_commit=args.reviewed_commit, reviewed_tree=args.reviewed_tree, root=args.root, reports_root=args.reports_root, metadata_receipt=args.metadata_receipt, selector_path=args.account_selector)
     return 0

@@ -1,12 +1,12 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2B_STOP_REVIEW_DD3BF73B_2026_07_13.md",
-    "artifact_sha256": "c1ee22a0aa5303121ce305112d8d01917cc529643195921be66256a5710b1ea3",
-    "artifact_size_bytes": 26698,
+    "artifact": "A1_XAU_NP1G2A11_REVIEW_3BC8A091_2026_07_13.md",
+    "artifact_sha256": "80be3940ba0faad152c390ed3fb691979cec7ef0b431ea3af72796928b23a874",
+    "artifact_size_bytes": 25223,
     "boundary": "REPO_ONLY",
     "metaeditor_execution_authorized": false,
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A11_EXPLICIT_ACCOUNT_SELECTION_PRIVACY_CLOSURE",
+    "phase": "NP1-G2A12_PACKET_PATH_STREAM_REDACTION_CLOSURE",
     "root_preparation_authorized": false
   },
   "account_selector": {
@@ -17,7 +17,8 @@
     "required_schema_version": "a1_xau_np1_g2r1_account_selector_v1",
     "runtime_only": true,
     "server_values_nonempty_trimmed_no_control_characters": true,
-    "symlink_junction_reparse_or_hard_link_forbidden": true,
+    "selector_and_ancestor_symlink_junction_reparse_forbidden": true,
+    "selector_hard_link_forbidden": true,
     "worktree_or_execution_root_location_forbidden": true
   },
   "account_selection": {
@@ -44,10 +45,11 @@
     "strategy_tester_runs_maximum": 3
   },
   "future_execution_gate": {
-    "accepted_filename_pattern": "A1_XAU_NP1G2A11_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_pattern": "A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
     "block": "NP1_G2R1_EXECUTION_AUTHORIZATION_BLOCK",
     "clean_exact_commit_and_tree_required_before_root_validation": true,
     "consumed_g2a10_authorization_rejected": true,
+    "consumed_g2a11_authorization_rejected": true,
     "consumed_g2_root_rejected": true,
     "exact_external_sha256_required": true,
     "extra_duplicate_or_outside_block_content_rejected": true,
@@ -70,13 +72,20 @@
     "account_or_server_literal_in_new_source_forbidden": true,
     "accounts_or_servers_dat_committed_forbidden": true,
     "candidate_packet_sensitive_value_scan_encodings": ["utf-8", "utf-16-le", "utf-16-be"],
+    "command_streams_sanitized_before_base64_and_independently_decoded_during_verification": true,
     "complete_and_stop_packets_fail_closed_on_sensitive_value": true,
+    "inventory_strings_recursively_sanitized": true,
+    "manifest_relative_paths_independently_scanned": true,
+    "packet_relative_path_components_case_insensitively_scanned": true,
+    "partial_staging_copied_through_privacy_projection": true,
     "raw_account_logs_committed": false,
     "raw_execution_ini_committed": false,
     "raw_native_report_committed": false,
     "selector_committed": false,
     "sanitized_logs_required": true,
     "sanitized_native_report_required": true,
+    "stop_built_in_temporary_staging_and_promoted_after_manifest_verification": true,
+    "unsafe_optional_stop_artifacts_omitted_with_value_free_attestation": true,
     "structural_account_selector_attestation_required": true,
     "value_free_redacted_ini_required": true
   },

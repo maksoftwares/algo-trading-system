@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import csv
 import hashlib
 import importlib.util
@@ -54,7 +55,7 @@ def _authorization_fields(commit: str, tree: str) -> dict[str, str]:
         "REDACTED_ACCOUNT_EVIDENCE_REQUIRED":"true",
         "ACCOUNT_ASSERTIONS_REQUIRED":"account_login_present,account_login_matches,account_server_present,account_server_matches",
         "METAEDITOR_COMPILATIONS_MAX":"1", "STRATEGY_TESTER_RUNS_MAX":"3", "STRATEGY_TESTER_ORDER":"warmup,probe1,probe2",
-        "AUTOMATIC_RETRY_AUTHORIZED":"false", "REUSE_G2A10_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2_ROOT_AUTHORIZED":"false",
+        "AUTOMATIC_RETRY_AUTHORIZED":"false", "REUSE_G2A10_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2A11_AUTHORIZATION_AUTHORIZED":"false", "REUSE_G2_ROOT_AUTHORIZED":"false",
         "MT5_EXECUTION_AUTHORIZED":"true", "CANONICAL_NP1C_RESULT_AUTHORIZED":"false", "R6_CENSUS_AUTHORIZED":"false",
         "PNL_AUTHORIZED":"false", "PROFITABILITY_AUTHORIZED":"false", "TARGET_EXIT_AUTHORIZED":"false",
         "MFE_MAE_AUTHORIZED":"false", "H4_PORTFOLIO_AUTHORIZED":"false", "DEMO_LIVE_ATTACH_AUTHORIZED":"false",
@@ -136,6 +137,31 @@ def test_selector_symlink_fails_when_supported(tmp_path: Path, monkeypatch: pyte
     with pytest.raises(PermissionError,match="link"): G.load_account_selector(link,tmp_path/"root")
 
 
+def test_selector_symlink_ancestor_fails_when_supported(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    real_parent=tmp_path/"real"; linked_parent=tmp_path/"linked"; real_parent.mkdir(); _write_selector(real_parent/"selector.json")
+    try: linked_parent.symlink_to(real_parent,target_is_directory=True)
+    except OSError: pytest.skip("directory symlink creation unavailable")
+    path=linked_parent/"selector.json"
+    monkeypatch.setattr(G,"ACCOUNT_SELECTOR",path.absolute()); monkeypatch.setattr(G,"ROOT",tmp_path/"repo")
+    with pytest.raises(PermissionError,match="ancestor|link"): G.load_account_selector(path,tmp_path/"root")
+
+
+def test_selector_reparse_ancestor_is_rejected_without_symlink_privilege(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    parent=tmp_path/"parent"; path=parent/"selector.json"; _write_selector(path)
+    original=Path.is_symlink
+    monkeypatch.setattr(Path,"is_symlink",lambda candidate: candidate==parent or original(candidate))
+    monkeypatch.setattr(G,"ACCOUNT_SELECTOR",path.absolute()); monkeypatch.setattr(G,"ROOT",tmp_path/"repo")
+    with pytest.raises(PermissionError,match="ancestor|link"): G.load_account_selector(path,tmp_path/"root")
+
+
+@pytest.mark.parametrize("control", ["\t", "\x01", "\x7f", "\x85", "\u202e"])
+@pytest.mark.parametrize("field", ["platform_server", "expected_account_server"])
+def test_selector_rejects_all_control_character_classes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, control: str, field: str) -> None:
+    payload=_selector(); payload[field]=f"Server{control}Name"; path=tmp_path/"selector.json"; _write_selector(path,payload)
+    monkeypatch.setattr(G,"ACCOUNT_SELECTOR",path.absolute()); monkeypatch.setattr(G,"ROOT",tmp_path/"repo")
+    with pytest.raises(PermissionError,match="server value invalid"): G.load_account_selector(path,tmp_path/"root")
+
+
 def test_render_ini_requires_exact_common_and_tester_selection() -> None:
     selector=_selector(); raw=G.render_ini("warmup",selector); sections=G.validate_raw_ini(raw,selector)
     assert sections["Common"]=={"Login":selector["login"],"Server":selector["platform_server"]}
@@ -190,6 +216,28 @@ def test_redacted_candidate_packet_passes(tmp_path: Path) -> None:
     G.assert_packet_redacted(tmp_path,_selector())
 
 
+@pytest.mark.parametrize("field", ["login", "platform_server", "expected_account_server"])
+@pytest.mark.parametrize("container", ["directory", "filename"])
+def test_sensitive_packet_path_component_fails(tmp_path: Path, field: str, container: str) -> None:
+    value=_selector()[field]
+    path=tmp_path/value/"safe.txt" if container=="directory" else tmp_path/f"evidence-{value}.txt"
+    path.parent.mkdir(parents=True,exist_ok=True); path.write_text("redacted",encoding="utf-8")
+    with pytest.raises(RuntimeError,match="pathname"): G.assert_packet_redacted(tmp_path,_selector())
+
+
+def test_manifest_relative_path_is_privacy_scanned(tmp_path: Path) -> None:
+    value=_selector()["platform_server"]; path=tmp_path/value/"safe.txt"; path.parent.mkdir(); path.write_text("redacted",encoding="utf-8")
+    G._manifest(tmp_path)
+    with pytest.raises(RuntimeError,match="pathname|packet"): G.assert_packet_redacted(tmp_path,_selector())
+
+
+def test_recursive_inventory_projection_redacts_runtime_paths(tmp_path: Path) -> None:
+    selector=_selector(); root=tmp_path/"root"; leaked=root/"bases"/selector["platform_server"]; leaked.mkdir(parents=True); (leaked/selector["expected_account_server"]).write_text("safe",encoding="utf-8")
+    projected=G.sanitize_projection(G.inventory(root),selector); serialized=json.dumps(projected)
+    assert all(re.search(re.escape(value),serialized,re.I) is None for value in G.sensitive_values(selector))
+    assert G.REDACTED_PLATFORM_SERVER in serialized and G.REDACTED_ACCOUNT_SERVER in serialized
+
+
 def test_all_four_value_free_account_assertions_are_required(tmp_path: Path) -> None:
     for run_id in G.RUN_IDS: _write_assertions(tmp_path/"runs"/run_id/"assertions.tsv",run_id)
     G.assert_exact_assertions(tmp_path)
@@ -204,16 +252,17 @@ def test_account_assertion_observations_cannot_emit_values(tmp_path: Path) -> No
     with pytest.raises(RuntimeError,match="observed/expected"): G.assert_exact_assertions(tmp_path)
 
 
-def test_exact_future_authorization_accepts_only_g2a11_commit_derived_artifact(tmp_path: Path) -> None:
-    commit,tree="a"*40,"b"*40; path=tmp_path/f"A1_XAU_NP1G2A11_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; fields=_authorization_fields(commit,tree); _write_authorization(path,fields)
+def test_exact_future_authorization_accepts_only_g2a12_commit_derived_artifact(tmp_path: Path) -> None:
+    commit,tree="a"*40,"b"*40; path=tmp_path/f"A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; fields=_authorization_fields(commit,tree); _write_authorization(path,fields)
     assert G.parse_future_authorization(path,G.sha256_file(path),commit,tree)==fields
-    old=tmp_path/f"A1_XAU_NP1G2A10_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; old.write_bytes(path.read_bytes())
-    with pytest.raises(PermissionError): G.parse_future_authorization(old,G.sha256_file(old),commit,tree)
+    for phase in ("G2A10","G2A11"):
+        old=tmp_path/f"A1_XAU_NP1{phase}_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; old.write_bytes(path.read_bytes())
+        with pytest.raises(PermissionError): G.parse_future_authorization(old,G.sha256_file(old),commit,tree)
 
 
 @pytest.mark.parametrize(("key","value"),[("AUTOMATIC_RETRY_AUTHORIZED","true"),("REUSE_G2A10_AUTHORIZATION_AUTHORIZED","true"),("REUSE_G2_ROOT_AUTHORIZED","true"),("PNL_AUTHORIZED","true"),("BTC_WORK_AUTHORIZED","true")])
 def test_future_authorization_fails_if_any_boundary_is_enabled(tmp_path: Path, key: str, value: str) -> None:
-    commit,tree="c"*40,"d"*40; path=tmp_path/f"A1_XAU_NP1G2A11_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; fields=_authorization_fields(commit,tree); fields[key]=value; _write_authorization(path,fields)
+    commit,tree="c"*40,"d"*40; path=tmp_path/f"A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"; fields=_authorization_fields(commit,tree); fields[key]=value; _write_authorization(path,fields)
     with pytest.raises(PermissionError): G.parse_future_authorization(path,G.sha256_file(path),commit,tree)
 
 
@@ -241,32 +290,99 @@ def test_warmup_stop_packet_prevents_probe_claims_and_is_redacted(tmp_path: Path
     G.assert_packet_redacted(stop,selector); G.verify_manifest(stop)
 
 
+@pytest.mark.parametrize("encoding", ["utf-8", "utf-16-le", "utf-16-be"])
+@pytest.mark.parametrize("stream", ["stdout", "stderr"])
+@pytest.mark.parametrize("field", ["login", "platform_server", "expected_account_server"])
+def test_command_streams_are_sanitized_before_base64_and_decoded_during_verification(tmp_path: Path, encoding: str, stream: str, field: str) -> None:
+    selector=_selector(); value=selector[field]
+    class Done:
+        returncode=0
+        stdout=(f"prefix {value} suffix".encode(encoding) if stream=="stdout" else b"")
+        stderr=(f"prefix {value} suffix".encode(encoding) if stream=="stderr" else b"")
+    raw=G.G1.record(["safe-command"],Done()); safe=G.sanitize_command_record(raw,selector)
+    decoded=base64.b64decode(safe[f"{stream}_base64"],validate=True)
+    assert hashlib.sha256(decoded).hexdigest()==safe[f"{stream}_sha256"]
+    G.assert_bytes_redacted(decoded,selector,label="test command stream")
+    packet=tmp_path/"packet"; packet.mkdir(); G.write_json(packet/"commands.json",[safe]); G.assert_packet_redacted(packet,selector)
+
+
+def test_raw_base64_command_stream_leak_is_detected_in_packet(tmp_path: Path) -> None:
+    selector=_selector()
+    class Done:
+        returncode=0; stdout=selector["expected_account_server"].encode("utf-16-le"); stderr=b""
+    packet=tmp_path/"packet"; packet.mkdir(); G.write_json(packet/"commands.json",[G.G1.record(["safe-command"],Done())])
+    with pytest.raises(RuntimeError,match="decoded command"): G.assert_packet_redacted(packet,selector)
+
+
+def test_complete_candidate_accepts_only_sanitized_stream_inventory_and_paths(tmp_path: Path) -> None:
+    selector=_selector(); root=tmp_path/"root"; leaked=root/"bases"/selector["platform_server"]; leaked.mkdir(parents=True); (leaked/"safe.txt").write_text("safe",encoding="utf-8")
+    class Done:
+        returncode=0; stdout=selector["login"].encode("utf-8"); stderr=selector["expected_account_server"].encode("utf-16-le")
+    complete=tmp_path/"complete"; safe_dir=complete/G.PATH_REDACTION_TOKENS[1]; safe_dir.mkdir(parents=True); (safe_dir/"evidence.txt").write_text("redacted",encoding="utf-8")
+    G.write_json(complete/"preflight_root_inventory.json",G.sanitize_projection(G.inventory(root),selector))
+    G.write_json(complete/"commands.json",[G.sanitize_command_record(G.G1.record(["safe-command"],Done()),selector)])
+    G.assert_packet_redacted(complete,selector); G._manifest(complete,"a1_xau_r6_np1_g2r1_complete_manifest_v1"); G.assert_packet_redacted(complete,selector); G.verify_manifest(complete)
+
+
+def test_server_named_runtime_paths_produce_atomic_redacted_stop_packet(tmp_path: Path) -> None:
+    selector=_selector(); root=tmp_path/"root"; root.mkdir(); ledger=G.Ledger(root/"ledger.json"); ledger.compilation(); ledger.run("warmup")
+    preflight=G.inventory(root)
+    leaked_dir=root/"bases"/selector["platform_server"]; leaked_dir.mkdir(parents=True); (leaked_dir/selector["expected_account_server"]).write_text(selector["login"],encoding="utf-8")
+    ini=root/"Config"/"np1_g2r1_warmup.ini"; ini.parent.mkdir(); ini.write_text(G.render_ini("warmup",selector),encoding="utf-8")
+    partial=tmp_path/"complete.staging"; partial.mkdir(); (partial/selector["platform_server"]).mkdir(); (partial/selector["platform_server"]/"safe.txt").write_text(selector["expected_account_server"],encoding="utf-8")
+    class Done:
+        returncode=1; stdout=selector["platform_server"].encode("utf-8"); stderr=selector["expected_account_server"].encode("utf-16-be")
+    commands=[G.G1.record(["safe-command"],Done())]
+    stop=tmp_path/"stop"
+    G.preserve_stop_packet(stop=stop,root=root,ledger=ledger.path,preflight=preflight,reports_attestation={},commands=commands,run_ids=["warmup"],error=RuntimeError(f"failed {selector['platform_server']}"),partial_staging=partial,selector=selector)
+    assert stop.is_dir() and not stop.with_name(f".{stop.name}.staging").exists() and not partial.exists()
+    G.assert_packet_redacted(stop,selector); G.verify_manifest(stop)
+    joined="\n".join(path.relative_to(stop).as_posix()+"\n"+path.read_text(encoding="utf-8",errors="ignore") for path in stop.rglob("*") if path.is_file())
+    assert all(re.search(re.escape(value),joined,re.I) is None for value in G.sensitive_values(selector))
+    assert (stop/"partial_staging"/G.PATH_REDACTION_TOKENS[1]/"safe.txt").is_file()
+
+
+def test_stop_privacy_projection_collision_is_omitted_without_partial_canonical_root(tmp_path: Path) -> None:
+    selector=_selector(); root=tmp_path/"root"; root.mkdir(); ledger=G.Ledger(root/"ledger.json")
+    partial=tmp_path/"partial"; partial.mkdir(); (partial/selector["platform_server"]).write_text("one",encoding="utf-8"); (partial/G.PATH_REDACTION_TOKENS[1]).write_text("two",encoding="utf-8")
+    stop=tmp_path/"stop"
+    G.preserve_stop_packet(stop=stop,root=root,ledger=ledger.path,preflight=G.inventory(root),reports_attestation={},commands=[],run_ids=[],error=RuntimeError("failure"),partial_staging=partial,selector=selector)
+    omissions=json.loads((stop/"omissions.json").read_text(encoding="utf-8"))["omissions"]
+    assert any(row["reason"]=="unsafe_optional_artifact_omitted" for row in omissions)
+    assert not stop.with_name(f".{stop.name}.staging").exists() and not partial.exists()
+    G.assert_packet_redacted(stop,selector); G.verify_manifest(stop)
+
+
 def test_command_records_never_include_login_or_server_values(tmp_path: Path) -> None:
     root=tmp_path/"root"; (root/"MQL5"/"Experts").mkdir(parents=True); (root/"Config").mkdir()
     class Done:
         returncode=0; stdout=b""; stderr=b""
-    commands=[G.G1.record([str(root/"MetaEditor64.exe"),f"/compile:{root/'MQL5'/'Experts'/G.B.PROBE_NAME}",f"/log:{root/'compile.log'}"],Done())]
-    commands.extend(G.G1.record([str(root/"terminal64.exe"),"/portable",f"/config:{root/'Config'/f'np1_g2r1_{run_id}.ini'}"],Done()) for run_id in G.RUN_IDS)
-    G.validate_command_records(commands,root)
+    commands=[G.sanitize_command_record(G.G1.record([str(root/"MetaEditor64.exe"),f"/compile:{root/'MQL5'/'Experts'/G.B.PROBE_NAME}",f"/log:{root/'compile.log'}"],Done()),_selector())]
+    commands.extend(G.sanitize_command_record(G.G1.record([str(root/"terminal64.exe"),"/portable",f"/config:{root/'Config'/f'np1_g2r1_{run_id}.ini'}"],Done()),_selector()) for run_id in G.RUN_IDS)
+    G.validate_command_records(commands,root,_selector())
     joined=json.dumps(commands); assert all(value not in joined for value in G.sensitive_values(_selector())) and "/login:" not in joined.lower()
 
 
 def test_static_preserves_prior_scientific_and_no_action_controls() -> None:
     source=SCRIPT.read_text(encoding="utf-8"); combined=source+G.B.SOURCE.read_text(encoding="utf-8"); lowered=combined.lower()
     assert all(token in combined for token in ("validate_native_exports", "semantic_verify_packet", "CopyTicksRange", "tick timestamps decreasing", "assert_packet_redacted"))
+    assert "shutil.move(str(partial_staging)" not in source and "copy_privacy_projection(partial_staging" in source
     assert all(token not in lowered for token in ("order.send", "ordersend", "positionopen", "chartopen", "net_profit", "profit_factor"))
     assert '"PNL_AUTHORIZED":"false"' in source and '"DEPLOYMENT_AUTHORIZED":"false"' in source
 
 
 def test_contract_exactly_matches_runner_privacy_and_future_boundaries() -> None:
     contract=json.loads((PHASE/"docs"/"A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2R1_CONTRACT_V1.json").read_text(encoding="utf-8"))
-    assert contract["authorization"]["phase"]=="NP1-G2A11_EXPLICIT_ACCOUNT_SELECTION_PRIVACY_CLOSURE"
+    assert contract["authorization"]["phase"]=="NP1-G2A12_PACKET_PATH_STREAM_REDACTION_CLOSURE"
     assert contract["authorization"]["boundary"]=="REPO_ONLY" and not contract["authorization"]["mt5_execution_authorized"] and not contract["authorization"]["root_preparation_authorized"]
     assert set(contract["account_selector"]["closed_schema_fields"])==G.SELECTOR_FIELDS
     assert contract["account_selector"]["exact_path"]==str(G.ACCOUNT_SELECTOR)
     assert set(contract["account_selection"]["value_free_assertions"])==G.ACCOUNT_ASSERTIONS
     future=contract["future_campaign_reserved_not_activated"]
     assert future["new_root"]==str(G.NEW_ROOT) and future["strategy_tester_order"]==list(G.RUN_IDS) and not future["automatic_retry_authorized"]
+    assert contract["future_execution_gate"]["accepted_filename_pattern"].startswith("A1_XAU_NP1G2A12_EXECUTION_AUTHORIZATION_")
+    assert contract["future_execution_gate"]["consumed_g2a11_authorization_rejected"]
+    assert all(contract["privacy_evidence"][key] for key in ("command_streams_sanitized_before_base64_and_independently_decoded_during_verification","inventory_strings_recursively_sanitized","manifest_relative_paths_independently_scanned","packet_relative_path_components_case_insensitively_scanned","partial_staging_copied_through_privacy_projection","stop_built_in_temporary_staging_and_promoted_after_manifest_verification","unsafe_optional_stop_artifacts_omitted_with_value_free_attestation"))
     assert all(value is False for value in contract["prohibitions"].values())
 
 

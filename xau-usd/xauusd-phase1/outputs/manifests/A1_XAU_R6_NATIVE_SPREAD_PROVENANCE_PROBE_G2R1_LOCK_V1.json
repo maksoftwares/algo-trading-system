@@ -12,8 +12,8 @@
   "mt5_execution_authorized": false,
   "pinned_files": {
     "docs/A1_XAU_R6_NATIVE_SPREAD_PROVENANCE_PROBE_G2R1_CONTRACT_V1.json": {
-      "sha256": "b9a37119026e52bdd23d835f9b5533197e39bc575ea0e7aaf3847578eab4bf6b",
-      "size_bytes": 5306
+      "sha256": "9049437ef893cac9a85c925b366bd3da0d536459b8c75016497f54fe408cd208",
+      "size_bytes": 5911
     },
     "mt5/Experts/A1XauR6NativeSpreadProvenanceProbeG2R1.mq5": {
       "sha256": "7f31bb55af8f137760f07975e614a4320d2299ad723ef50bd45e4c163a568920",
@@ -32,12 +32,12 @@
       "size_bytes": 13003
     },
     "scripts/run_a1_xau_r6_native_spread_provenance_probe_g2r1.py": {
-      "sha256": "cc2fd6cf830846fa18cbea16a59ef30c5da4fb30d0f84060e47a51e4aef549dd",
-      "size_bytes": 63444
+      "sha256": "24d679cf574f1d61d3a3e3699a90730eafb7f867bf246187fdadebf339eadaac",
+      "size_bytes": 76377
     },
     "tests/test_a1_xau_r6_native_spread_provenance_probe_g2r1.py": {
-      "sha256": "f146b90cbd8f93c45a4d2ac08c4e979e6a589f6ec38340501a4a4b5f3e27d4f3",
-      "size_bytes": 18678
+      "sha256": "78b8482213c80143ce45c1027a3b35dcf2ab72b192927ccd5fa710e85edd751a",
+      "size_bytes": 28435
     }
   },
   "privacy_boundary": {
@@ -46,20 +46,26 @@
     "raw_account_logs_committed": false,
     "raw_execution_ini_committed": false,
     "raw_native_report_committed": false,
-    "redacted_account_evidence_required": true
+    "redacted_account_evidence_required": true,
+    "sanitized_command_stream_binding_required": true,
+    "sanitized_inventory_and_packet_path_binding_required": true,
+    "temporary_atomic_stop_staging_required": true,
+    "verified_partial_staging_privacy_projection_required": true
   },
   "review_artifact": {
-    "filename": "A1_XAU_NP1G2B_STOP_REVIEW_DD3BF73B_2026_07_13.md",
-    "sha256": "c1ee22a0aa5303121ce305112d8d01917cc529643195921be66256a5710b1ea3",
-    "size_bytes": 26698
+    "filename": "A1_XAU_NP1G2A11_REVIEW_3BC8A091_2026_07_13.md",
+    "sha256": "80be3940ba0faad152c390ed3fb691979cec7ef0b431ea3af72796928b23a874",
+    "size_bytes": 25223
   },
   "reviewed_identities": {
     "g2a10_commit": "bc46c07aea1ef02c4a4c57ca1e837e02b9dceb39",
     "g2a10_tree": "2de67140e193aead8833a9af3a16e276d9afb240",
+    "g2a11_commit": "3bc8a09123028d4fc5f9d663c20b333df707c802",
+    "g2a11_tree": "06b91b70014183edd52ff1b5c16581f04e34e249",
     "g2b_stop_commit": "dd3bf73b1eb3770c75c52312a34fe8caa08ddd55",
     "g2b_stop_tree": "8308d65c1ae51d445af1a74b4c60a935ce1a7355"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2r1_lock_v1",
-  "self_canonical_sha256": "6e82124714a0101845f6abf4b5762673f066d3ad9da0f2d5f4524189045d6e15",
-  "self_size_bytes": 2660
+  "self_canonical_sha256": "279c4c86e8b316a79266c29b0efa5316f7db4f039a90481fd6eec7a3f8fda973",
+  "self_size_bytes": 3022
 }
