@@ -192,13 +192,13 @@ def native_report_fields(path: Path) -> dict[str,str]:
 
 def validate_effective_report(path: Path) -> dict[str,str]:
     fields=native_report_fields(path)
-    required={"Expert","Symbol","Period","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
+    required={"Expert","Symbol","Period","Currency","Initial Deposit","Leverage","Bars","Ticks","Total Trades","Total Deals"}
     if not required<=set(fields): raise RuntimeError(f"native report effective-setting fields missing: {sorted(required-set(fields))}")
     if Path(fields["Expert"].split()[0]).stem!="A1XauR6NativeSpreadProvenanceProbe": raise RuntimeError("native report expert mismatch")
     if fields["Symbol"].split()[0]!="XAUUSD": raise RuntimeError("native report symbol mismatch")
     if fields["Period"]!="M5 (2015.06.01 - 2026.07.01)": raise RuntimeError("native report period/date mismatch")
     deposit=float(re.sub(r"[^0-9.]","",fields["Initial Deposit"]))
-    if abs(deposit-10000.0)>1e-9 or "USD" not in fields["Initial Deposit"].upper(): raise RuntimeError("native report deposit/currency mismatch")
+    if abs(deposit-10000.0)>1e-9 or fields["Currency"]!="USD": raise RuntimeError("native report deposit/currency mismatch")
     if re.sub(r"\s","",fields["Leverage"])!="1:50": raise RuntimeError("native report leverage mismatch")
     def integer(name: str) -> int: return int(re.sub(r"[^0-9]","",fields[name]))
     if integer("Bars")<=0 or integer("Ticks")<=0 or integer("Total Trades")!=0 or integer("Total Deals")!=0: raise RuntimeError("native report bars/ticks/zero-action mismatch")
@@ -334,7 +334,7 @@ def validate_native_exports(packet: Path) -> None:
         rows=read_tsv_exact(run/filename,TICK_COLUMNS)
         if not rows: raise RuntimeError("empty tick export")
         times=[int(row["time_msc"]) for row in rows]
-        if times!=sorted(set(times)): raise RuntimeError("tick timestamps not unique/monotonic")
+        if times!=sorted(times): raise RuntimeError("tick timestamps decreasing")
         if re.fullmatch(r"\d{4}\.\d{2}\.\d{2}",day) is None: raise RuntimeError("tick broker-day grammar mismatch")
         day_start=datetime.strptime(day,"%Y.%m.%d"); day_end=day_start+timedelta(days=1)
         for row in rows:
@@ -514,7 +514,7 @@ def verify_manifest(root: Path) -> None:
 
 
 def parse_future_authorization(path: Path, artifact_sha256: str, commit: str, tree: str) -> dict[str, str]:
-    expected_name=f"A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    expected_name=f"A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
     if path.name != expected_name or not path.is_file() or sha256_file(path) != artifact_sha256:
         raise PermissionError("exact external G2-B review artifact identity required")
     text = path.read_text(encoding="utf-8")

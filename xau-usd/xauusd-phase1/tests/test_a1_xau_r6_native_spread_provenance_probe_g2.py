@@ -35,7 +35,7 @@ def _tsv(path: Path, columns: list[str], rows: list[dict[str, str]]) -> None:
 
 def _write_campaign_outputs(root: Path, run_id: str) -> None:
     report=root/"Reports"/f"np1_g2_{run_id}.htm"
-    fields={"Expert":"A1XauR6NativeSpreadProvenanceProbe","Symbol":"XAUUSD","Period":"M5 (2015.06.01 - 2026.07.01)","Model":"Every tick based on real ticks","Initial Deposit":"10 000.00 USD","Leverage":"1:50","Company":"Capital Com Mena Securities Trading L.L.C","Bars":"1","Ticks":"4","Total Trades":"0","Total Deals":"0"}
+    fields={"Expert":"A1XauR6NativeSpreadProvenanceProbe","Symbol":"XAUUSD","Period":"M5 (2015.06.01 - 2026.07.01)","Model":"Every tick based on real ticks","Currency":"USD","Initial Deposit":"10 000.00","Leverage":"1:50","Company":"Capital Com Mena Securities Trading L.L.C","Bars":"1","Ticks":"8","Total Trades":"0","Total Deals":"0"}
     report.write_text("<table><tr>"+"".join(f"<td>{key}:</td><td>{value}</td>" for key,value in fields.items())+"</tr></table>",encoding="utf-8")
     files=root/"Tester"/"Agent-1"/"MQL5"/"Files"; files.mkdir(parents=True,exist_ok=True)
     prefix=f"np1_g2_{run_id}_"
@@ -55,8 +55,8 @@ def _write_campaign_outputs(root: Path, run_id: str) -> None:
     _tsv(files/f"{prefix}bar_spread_interfaces.tsv",G.INTERFACE_COLUMNS,interface_rows)
     for name,day in G.TICK_DAYS.items():
         stamp=f"{day.replace('.','-')}T00:00:01"; msc=str(int(datetime.strptime(stamp,"%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc).timestamp())*1000)
-        row={"schema_version":"a1_xau_np1_g1_tick_v1","broker_day":day,"time_msc":msc,"time":stamp,"bid":"10","ask":"11","last":"0","volume":"1","volume_real":"1","flags":"1","raw_ask_minus_bid":"1","raw_spread_points":"100","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"1","copyticks_error":"0"}
-        _tsv(files/f"{prefix}{name}",G.TICK_COLUMNS,[row])
+        rows=[{"schema_version":"a1_xau_np1_g1_tick_v1","broker_day":day,"time_msc":msc,"time":stamp,"bid":bid,"ask":ask,"last":"0","volume":"1","volume_real":"1","flags":flag,"raw_ask_minus_bid":"1","raw_spread_points":"100","negative_spread_boolean":"false","quote_sides_positive":"true","copyticks_return":"2","copyticks_error":"0"} for bid,ask,flag in (("10","11","1"),("10.5","11.5","2"))]
+        _tsv(files/f"{prefix}{name}",G.TICK_COLUMNS,rows)
 
 
 def _auth_fields(commit: str, tree: str) -> dict[str,str]:
@@ -65,7 +65,7 @@ def _auth_fields(commit: str, tree: str) -> dict[str,str]:
 
 
 def _authorization_name(commit: str) -> str:
-    return f"A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
+    return f"A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_{commit[:8].upper()}_2026_07_13.md"
 
 
 def _retag_selected(packet: Path, run_id: str, kind: str, path: Path) -> None:
@@ -152,7 +152,7 @@ def test_stale_empty_rejected_and_fresh_nonempty_accepted(tmp_path: Path) -> Non
     assert G.validate_fresh_report(report, report.stat().st_mtime_ns, parser) == "report"
 
 
-@pytest.mark.parametrize(("old","new"),[("M5 (2015.06.01 - 2026.07.01)","H1 (2015.06.01 - 2026.07.01)"),("M5 (2015.06.01 - 2026.07.01)","M5 (2026.07.01 - 2015.06.01)"),("2015.06.01","2016.06.01"),("10 000.00 USD","10 000.00 EUR"),("1:50","1:100")])
+@pytest.mark.parametrize(("old","new"),[("M5 (2015.06.01 - 2026.07.01)","H1 (2015.06.01 - 2026.07.01)"),("M5 (2015.06.01 - 2026.07.01)","M5 (2026.07.01 - 2015.06.01)"),("2015.06.01","2016.06.01"),("<td>Currency:</td><td>USD</td>","<td>Currency:</td><td>EUR</td>"),("10 000.00","9 999.00"),("1:50","1:100")])
 def test_native_report_effective_settings_fail_closed(tmp_path: Path, old: str, new: str) -> None:
     root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"; report.write_text(report.read_text().replace(old,new),encoding="utf-8")
     with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
@@ -162,6 +162,18 @@ def test_native_report_duplicate_label_fails_closed(tmp_path: Path) -> None:
     root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"
     report.write_text(report.read_text().replace("<td>Period:</td>","<td>Period:</td><td>M5 (2015.06.01 - 2026.07.01)</td><td>Period:</td>"),encoding="utf-8")
     with pytest.raises(RuntimeError,match="duplicate native report label"): G.validate_effective_report(report)
+
+
+@pytest.mark.parametrize("case",["missing_currency","embedded_currency_only","duplicate_currency","duplicate_deposit"])
+def test_native_report_currency_deposit_shape_fail_closed(tmp_path: Path, case: str) -> None:
+    root=tmp_path/"root"; (root/"Reports").mkdir(parents=True); _write_campaign_outputs(root,"warmup"); report=root/"Reports"/"np1_g2_warmup.htm"; text=report.read_text()
+    currency="<td>Currency:</td><td>USD</td>"; deposit="<td>Initial Deposit:</td><td>10 000.00</td>"
+    if case=="missing_currency": text=text.replace(currency,"")
+    elif case=="embedded_currency_only": text=text.replace(currency,"").replace(deposit,"<td>Initial Deposit:</td><td>10 000.00 USD</td>")
+    elif case=="duplicate_currency": text=text.replace(currency,currency+currency)
+    else: text=text.replace(deposit,deposit+deposit)
+    report.write_text(text,encoding="utf-8")
+    with pytest.raises(RuntimeError,match="native report"): G.validate_effective_report(report)
 
 
 def test_exact_command_arrays_streams_and_compile_exit_semantics(tmp_path: Path) -> None:
@@ -329,6 +341,10 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
         with path.open(newline="",encoding="utf-8") as handle: rows=list(csv.DictReader(handle,delimiter="\t"))
         for row in rows: row[column]=value
         _tsv(path,list(rows[0]),rows); _retag_selected(packet,run_id,name,path)
+    def mutate_tsv_row(packet: Path, run_id: str, name: str, index: int, column: str, value: str) -> None:
+        path=packet/"runs"/run_id/name
+        with path.open(newline="",encoding="utf-8") as handle: rows=list(csv.DictReader(handle,delimiter="\t"))
+        rows[index][column]=value; _tsv(path,list(rows[0]),rows); _retag_selected(packet,run_id,name,path)
     tampered=tmp_path/"tampered-result"; shutil.copytree(complete,tampered); payload=json.loads((tampered/"result.json").read_text()); payload["flags"].append("STALE"); (tampered/"result.json").write_text(json.dumps(payload,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     with pytest.raises(RuntimeError,match="semantic recomputation"): G.semantic_verify_packet(tampered,tmp_path/"scratch-result",context)
     tampered_auth=tmp_path/"tampered-auth"; shutil.copytree(complete,tampered_auth); auth=json.loads((tampered_auth/"authorization_attestation.json").read_text()); auth["sha256"]="0"*64; G.write_json(tampered_auth/"authorization_attestation.json",auth)
@@ -354,10 +370,23 @@ def test_end_to_end_synthetic_complete_campaign(tmp_path: Path, monkeypatch: pyt
     dotted_tick=packet_copy("dotted-tick"); [mutate_tsv(dotted_tick,run_id,"ticks_20250618.tsv","time","2025.06.18 00:00:01") for run_id in ("probe1","probe2")]
     with pytest.raises(RuntimeError,match="ISO timestamp"): G.validate_native_exports(dotted_tick)
     outside_tick=packet_copy("outside-tick"); outside_msc=str(int(datetime(2025,6,19,tzinfo=timezone.utc).timestamp())*1000)
-    for run_id in ("probe1","probe2"): mutate_tsv(outside_tick,run_id,"ticks_20250618.tsv","time","2025-06-19T00:00:00"); mutate_tsv(outside_tick,run_id,"ticks_20250618.tsv","time_msc",outside_msc)
+    for run_id in ("probe1","probe2"): mutate_all_tsv(outside_tick,run_id,"ticks_20250618.tsv","time","2025-06-19T00:00:00"); mutate_all_tsv(outside_tick,run_id,"ticks_20250618.tsv","time_msc",outside_msc)
     with pytest.raises(RuntimeError,match="return/error/day"): G.validate_native_exports(outside_tick)
     disagreeing_msc=packet_copy("disagreeing-msc"); [mutate_tsv(disagreeing_msc,run_id,"ticks_20250618.tsv","time_msc","1") for run_id in ("probe1","probe2")]
     with pytest.raises(RuntimeError,match="return/error/day"): G.validate_native_exports(disagreeing_msc)
+    decreasing_msc=packet_copy("decreasing-msc"); base_msc=int(datetime(2025,6,18,0,0,1,tzinfo=timezone.utc).timestamp())*1000
+    for run_id in ("probe1","probe2"): mutate_tsv_row(decreasing_msc,run_id,"ticks_20250618.tsv",0,"time_msc",str(base_msc+900)); mutate_tsv_row(decreasing_msc,run_id,"ticks_20250618.tsv",1,"time_msc",str(base_msc+100))
+    with pytest.raises(RuntimeError,match="timestamps decreasing"): G.validate_native_exports(decreasing_msc)
+    reordered_same_msc=packet_copy("reordered-same-msc"); reorder_path=reordered_same_msc/"runs"/"probe2"/"ticks_20250618.tsv"
+    with reorder_path.open(newline="",encoding="utf-8") as handle: reorder_rows=list(csv.DictReader(handle,delimiter="\t"))
+    _tsv(reorder_path,list(reorder_rows[0]),list(reversed(reorder_rows))); _retag_selected(reordered_same_msc,"probe2","ticks_20250618.tsv",reorder_path)
+    with pytest.raises(RuntimeError,match="official export drift"): G.validate_native_exports(reordered_same_msc)
+    deleted_same_msc=packet_copy("deleted-same-msc"); delete_path=deleted_same_msc/"runs"/"probe2"/"ticks_20250618.tsv"
+    with delete_path.open(newline="",encoding="utf-8") as handle: delete_rows=list(csv.DictReader(handle,delimiter="\t"))
+    _tsv(delete_path,list(delete_rows[0]),delete_rows[:1]); _retag_selected(deleted_same_msc,"probe2","ticks_20250618.tsv",delete_path)
+    with pytest.raises(RuntimeError,match="official export drift"): G.validate_native_exports(deleted_same_msc)
+    changed_same_msc=packet_copy("changed-same-msc"); mutate_tsv_row(changed_same_msc,"probe2","ticks_20250618.tsv",1,"flags","999")
+    with pytest.raises(RuntimeError,match="official export drift"): G.validate_native_exports(changed_same_msc)
     mixed_point=packet_copy("mixed-point"); [mutate_tsv(mixed_point,run_id,"bar_spread_interfaces.tsv","point","0.1") for run_id in ("probe1","probe2")]
     with pytest.raises(RuntimeError,match="mixed native point/digits"): G.validate_native_exports(mixed_point)
     wrong_point=packet_copy("wrong-point")

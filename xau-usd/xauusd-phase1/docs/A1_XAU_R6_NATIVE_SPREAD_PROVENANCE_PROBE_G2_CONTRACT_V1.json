@@ -1,9 +1,9 @@
 {
   "authorization": {
-    "artifact": "A1_XAU_NP1G2A6_REVIEW_ED6A2E2C_2026_07_13.md",
-    "artifact_sha256": "40edc0400190bdc367b57293db3b43f8e04e089bdcac3f2d45893d3fc8517482",
+    "artifact": "A1_XAU_NP1G2A7_REVIEW_30C58650_2026_07_13.md",
+    "artifact_sha256": "9196641b6033f9d790b5e09d481cf67f3b51a381d6a5b227e30300800e3bee8b",
     "mt5_execution_authorized": false,
-    "phase": "NP1-G2A7_NATIVE_SERIALIZATION_AND_COMPILED_SOURCE_BINDING_CLOSURE"
+    "phase": "NP1-G2A8_NATIVE_REPORT_CURRENCY_AND_TICK_ORDER_CLOSURE"
   },
   "future_budget_reserved_not_activated": {
     "metaeditor_compilations_maximum": 1,
@@ -53,7 +53,8 @@
       "date_from": "2015.06.01",
       "date_to": "2026.07.01",
       "initial_deposit": 10000.0,
-      "currency": "USD",
+      "currency_separate_field": "USD",
+      "initial_deposit_currency_suffix_required": false,
       "leverage": "1:50",
       "bars_and_ticks_positive": true,
       "trades_and_deals_zero": true,
@@ -83,13 +84,16 @@
     "mq5_timestamp_grammar": "YYYY-MM-DDTHH:MM:SS",
     "tick_broker_day_grammar": "YYYY.MM.DD",
     "broker_day_iso_time_time_msc_same_second_required": true,
+    "time_msc_source_order": "nondecreasing",
+    "duplicate_millisecond_rows_preserved": true,
+    "deduplication_or_aggregation_forbidden": true,
     "native_interface_point_digits_single_identity_required": true,
     "point_must_equal_ten_to_negative_digits": true,
     "positive_and_unavailable_quote_row_semantics_closed": true,
     "probe1_probe2_byte_stability": true
   },
   "review_parser": {
-    "accepted_filename_pattern": "A1_XAU_NP1G2A7_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
+    "accepted_filename_pattern": "A1_XAU_NP1G2A8_EXECUTION_AUTHORIZATION_<UPPERCASE_REVIEWED_COMMIT_PREFIX8>_2026_07_13.md",
     "accepted_filename_derived_from_exact_reviewed_commit": true,
     "exact_external_sha256_required": true,
     "exact_unique_field_set_required": true,
@@ -131,7 +135,9 @@
     "g2a5_commit": "9506a4233cb23f3218e697d98f4e628127064896",
     "g2a5_tree": "b6be1b10fe3dd3beef31b0fb195dd54c4836f4b7",
     "g2a6_commit": "ed6a2e2ceaaead2c02a24ef4c7f023656d0b4ebe",
-    "g2a6_tree": "e341089dff709d42e31e1d35c6bb91627a649904"
+    "g2a6_tree": "e341089dff709d42e31e1d35c6bb91627a649904",
+    "g2a7_commit": "30c58650c56ed39ce61e7cf1d1aed81610f8e1c9",
+    "g2a7_tree": "4866e4399b7c2fa0768687c9e63fe73b52da940e"
   },
   "schema_version": "a1_xau_r6_native_spread_provenance_probe_g2_contract_v1",
   "statuses": ["NP1_G2_DIAGNOSTIC_COMPLETE", "NP1_G2_EVIDENCE_INVALID"]
