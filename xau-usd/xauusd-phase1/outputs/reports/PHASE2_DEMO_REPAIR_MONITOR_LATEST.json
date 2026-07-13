@@ -1,6 +1,6 @@
 {
   "status": "SHADOW_REPAIR_POLICY_WOULD_BLOCK_EVENTS_OBSERVED",
-  "generated_at_utc": "2026-06-26T04:02:16.744423Z",
+  "generated_at_utc": "2026-07-12T04:02:03.593114Z",
   "since": "2026-06-09 00:00:00",
   "policy_id": "phase2_demo_repair_policy_2026_06_12_v2",
   "policy_enforced": false,
