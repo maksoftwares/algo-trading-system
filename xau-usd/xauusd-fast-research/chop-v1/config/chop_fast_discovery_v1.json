@@ -1,0 +1,34 @@
+{
+  "schema_version": "chop_fast_discovery_v1",
+  "requested_start": "2016-07-01T00:00:00Z",
+  "requested_end": "2026-06-30T23:59:59Z",
+  "broker": "capital_com",
+  "symbol": "XAUUSD",
+  "source_root": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD",
+  "output_dir": "xau-usd/xauusd-fast-research/chop-v1/outputs",
+  "timeframes_minutes": {"M5": 5, "M15": 15, "M30": 30, "H1": 60},
+  "regime": {
+    "atr_period_h4": 14,
+    "adx_period_h4": 14,
+    "lookback_h4": 24,
+    "adx_max": 25.0,
+    "er_max": 0.38,
+    "displacement_atr_max": 1.75,
+    "range_width_atr_min": 1.0,
+    "range_width_atr_max": 8.0,
+    "entry_consecutive": 2,
+    "exit_consecutive": 2,
+    "exit_adx": 30.0,
+    "exit_er": 0.55,
+    "exit_displacement_atr": 2.5
+  },
+  "strategies": {
+    "equilibrium": {"z": 2.0, "stop_atr": 1.25, "max_hold_hours": 12},
+    "impulse": {"z": 2.25, "stop_buffer_atr": 0.25, "min_stop_atr": 0.5, "max_stop_atr": 2.0, "max_hold_hours": 9},
+    "rotation": {"excursion_z": 1.5, "target_band_z": 1.25, "stop_atr": 1.25, "max_hold_hours": 12}
+  },
+  "cooldown_hours": 6,
+  "stress_slippage_r": 0.05,
+  "illustrative_risk_fraction": 0.005,
+  "funding_included": false
+}

@@ -1,0 +1,108 @@
+{
+  "active_h4_bars": 3713,
+  "coverage_pct": 25.88177889307124,
+  "data_coverage": {
+    "actual_end": "2025-07-01T00:00:00+00:00",
+    "actual_start": "2016-07-01T00:00:00+00:00",
+    "common_years": 8.999500331971225,
+    "missing_intervals": [
+      {
+        "end": "2026-06-30T23:59:59+00:00",
+        "start": "2025-07-01T00:00:00+00:00"
+      }
+    ],
+    "requested_end": "2026-06-30T23:59:59+00:00",
+    "requested_start": "2016-07-01T00:00:00+00:00",
+    "status": "DATA_COVERAGE_PARTIAL_REQUESTED_TAIL_MISSING",
+    "timeframes": {
+      "H1": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 533,
+        "invalid_prices": 0,
+        "maximum_gap_hours": 82.0,
+        "native": true,
+        "rows": 53040,
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\H1\\XAUUSD_capital_com_H1_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "H4": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 476,
+        "invalid_prices": 0,
+        "maximum_gap_hours": 80.0,
+        "native": true,
+        "rows": 14346,
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\H4\\XAUUSD_capital_com_H4_20160104_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M15": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2329,
+        "invalid_prices": 0,
+        "maximum_gap_hours": 81.25,
+        "native": true,
+        "rows": 212048,
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\M15\\XAUUSD_capital_com_M15_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M30": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 1735,
+        "invalid_prices": 0,
+        "maximum_gap_hours": 82.0,
+        "native": false,
+        "rows": 102969,
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\M5\\XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M5": {
+        "duplicate_timestamps": 0,
+        "end": "2025-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2339,
+        "invalid_prices": 0,
+        "maximum_gap_hours": 81.16666666666667,
+        "native": true,
+        "rows": 633069,
+        "source": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\data\\processed\\bars\\capital_com\\XAUUSD\\M5\\XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "start": "2016-07-01T00:00:00+00:00"
+      }
+    },
+    "timestamp_basis": "UTC fields from Capital.com processed broker bars; treated consistently as broker-source timestamps"
+  },
+  "drift_subtype_distribution": {
+    "DOWNWARD_DRIFT_CHOP": 474,
+    "FLAT_CHOP": 2502,
+    "UPWARD_DRIFT_CHOP": 737
+  },
+  "episode_count": 449,
+  "median_episode_days": 1.1666666666666667,
+  "p90_episode_days": 4.333333333333333,
+  "range_width_subtype_distribution": {
+    "MEDIUM_WIDTH_CHOP": 2682,
+    "NARROW_CHOP": 105,
+    "WIDE_CHOP": 926
+  },
+  "total_chop_days": 618.8333333333334,
+  "volatility_subtype_distribution": {
+    "HIGH_VOL_CHOP": 938,
+    "LOW_VOL_CHOP": 1394,
+    "MEDIUM_VOL_CHOP": 1268,
+    "VOL_SUBTYPE_UNAVAILABLE": 113
+  },
+  "yearly_chop_coverage_pct": {
+    "2016": 15.77639751552795,
+    "2017": 19.64735516372796,
+    "2018": 30.508474576271187,
+    "2019": 26.55367231638418,
+    "2020": 29.536921151439298,
+    "2021": 30.470219435736677,
+    "2022": 29.260651629072683,
+    "2023": 21.446540880503143,
+    "2024": 26.79575265459088,
+    "2025": 21.601016518424398
+  }
+}
