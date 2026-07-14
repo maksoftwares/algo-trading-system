@@ -1,0 +1,5 @@
+symbol,source_code,source_name,description,pip_size,price_scale,tick_history_from_utc,official_instrument_url,response_sha256,source_contract_valid,etag
+EURUSD,EUR-USD,EUR/USD,Euro vs US Dollar,0.0001,5,2003-05-04T19:00:00.048Z,https://jetta.dukascopy.com/v1/instruments/EUR-USD,9fea20442c400f2e1bb55619fcf75ba882f8de583e8df0b3c58a46b2f16a7fcf,True,
+GBPUSD,GBP-USD,GBP/USD,Pound Sterling vs US Dollar,0.0001,5,2003-05-04T20:00:02.666Z,https://jetta.dukascopy.com/v1/instruments/GBP-USD,9fc247f6acb5be8157350879f72ad0520a342ee61fad4126c07c8533fb5872c0,True,
+USDJPY,USD-JPY,USD/JPY,US Dollar vs Yen,0.01,3,2003-05-04T17:00:01.425Z,https://jetta.dukascopy.com/v1/instruments/USD-JPY,bfa26a270030081514e7a5a23b59dbaae98795f1f4680c799c269db16748ce70,True,
+XAUUSD,XAU-USD,XAU/USD,Gold vs US Dollar,0.01,3,2003-05-05T00:01:03.421Z,https://jetta.dukascopy.com/v1/instruments/XAU-USD,60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33,True,

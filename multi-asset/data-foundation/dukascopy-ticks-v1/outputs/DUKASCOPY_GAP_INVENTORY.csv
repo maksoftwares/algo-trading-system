@@ -1,0 +1,5 @@
+symbol,month,gaps_over_60s,longest_gap_ms,unexplained_raw_hour_gap_count,interpretation
+EURUSD,2016-07,101,173043443,0,inter-tick diagnostic includes scheduled closures; every raw hour file is present; no bars or ticks synthesized
+GBPUSD,2016-07,67,172906757,0,inter-tick diagnostic includes scheduled closures; every raw hour file is present; no bars or ticks synthesized
+USDJPY,2016-07,105,172838931,0,inter-tick diagnostic includes scheduled closures; every raw hour file is present; no bars or ticks synthesized
+XAUUSD,2016-07,25,176461549,0,inter-tick diagnostic includes scheduled closures; every raw hour file is present; no bars or ticks synthesized
