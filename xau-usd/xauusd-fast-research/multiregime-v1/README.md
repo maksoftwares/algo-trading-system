@@ -4,7 +4,7 @@ This isolated research lane implements the reviewer-authorized, frozen XAUUSD mu
 
 The existing Capital.com processed history supplies 2016-07-01 through 2025-06-30. A read-only MT5 acquisition appends the same-broker 2025-07-01 through 2026-06-30 tail to an ignored cache under `data/cache/`. No account order is sent or modified.
 
-The frozen screen abandons the direction with no rescue. No family passes its standalone gate, so the portfolio admission rule correctly admits no family to a combined portfolio. Standalone diagnostics remain available in `outputs/`, including all trade/signal ledgers, segment results, rolling results, gate audit and a portable SHA-256 manifest. The captured contract snapshot records the broker's read-only `OrderCalcProfit` and `OrderCalcMargin` evidence used for the $1,000 / 0.5% risk audit.
+The frozen screen's approved machine classification is `NO_DEFENSIBLE_MULTIREGIME_EDGE`; its narrative disposition is abandonment with no rescue. No family passes its standalone gate, so the portfolio admission rule correctly admits no family to a combined portfolio. Standalone diagnostics remain available in `outputs/`, including all trade/signal ledgers, segment results, rolling results, gate audit and a portable SHA-256 manifest. The captured contract snapshot records the broker's read-only `OrderCalcProfit` and `OrderCalcMargin` evidence used for the $1,000 / 0.5% risk audit. Independent-review materials, including the base/research Git bundle and binary patch, are under `evidence/`.
 
 Run:
 

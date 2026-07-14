@@ -102,8 +102,10 @@ def test_minimum_contract_stop_loss_and_actual_margin_are_enforced() -> None:
     )
     margin_bound = _simulate(bars, bars.iloc[0]["bar_start_utc"], _signal(), _config(order_calc_margin_rate=0.50))
     assert too_wide["rejection_reason"] == "CONTRACT_GRANULARITY_OR_MARGIN_REJECT"
+    assert too_wide["sizing_rejection_category"] == "CONTRACT_GRANULARITY_REJECT"
     assert too_wide["minimum_volume_stop_loss_usd"] > 5.0
     assert margin_bound["rejection_reason"] == "CONTRACT_GRANULARITY_OR_MARGIN_REJECT"
+    assert margin_bound["sizing_rejection_category"] == "MARGIN_REJECT"
     assert margin_bound["required_margin_usd"] > 200.0
 
 

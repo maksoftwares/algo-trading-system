@@ -110,7 +110,7 @@
       }
     }
   },
-  "decision": "MULTIREGIME_V1_ABANDONED_NO_RESCUE",
+  "decision": "NO_DEFENSIBLE_MULTIREGIME_EDGE",
   "deployment_authorized": false,
   "family_summaries": {
     "MR_COMPRESSION_BREAKOUT_V1": {
@@ -235,7 +235,9 @@
         "passed": false
       }
     },
+    "margin_rejects": 0,
     "maximum_positive_family_share": 1.0,
+    "other_sizing_rejects": 0,
     "portfolio_checks": {
       "all_rolling24_positive": false,
       "average_trades_per_year_gte_120": false,
@@ -260,8 +262,15 @@
     },
     "portfolio_passed": false,
     "positive_rolling_12_month_fraction": 0.0,
+    "raw_strategy_opportunities": 803,
+    "reject_rate_denominator": 489,
+    "reject_rate_pct": 21.47239263803681,
+    "sizing_accepted_opportunities": 384,
+    "sizing_evaluated_opportunities": 489,
+    "sizing_reconciliation_valid": true,
     "valid_opportunities": 489
   },
+  "narrative_disposition": "MULTIREGIME_V1_ABANDONED_NO_RESCUE",
   "parameter_revision_count_after_first_complete_run": 0,
   "portfolio_admitted_families": [],
   "portfolio_summary": {
@@ -289,6 +298,9 @@
     "wins": 0
   },
   "schema_version": "xauusd_multiregime_fast_discovery_result_v1",
+  "secondary_stop_reasons": [
+    "XAUUSD_1000_ACCOUNT_CONTRACT_GRANULARITY_INADEQUATE"
+  ],
   "source_manifest": {
     "H1": {
       "development_spread_p95_points": 31.0,

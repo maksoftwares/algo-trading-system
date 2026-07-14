@@ -81,18 +81,23 @@ def _simulate(
     normalized_volume = np.floor(requested_volume / step + 1e-12) * step
     margin_rate = float(account.get("order_calc_margin_rate", 1.0 / float(account["leverage"])))
     margin_usd = entry_exec * float(account["contract_size_oz"]) * max(normalized_volume, float(account["volume_min"])) * margin_rate
-    expressible = (
-        minimum_loss_usd <= risk_budget + 1e-9 and normalized_volume >= float(account["volume_min"])
-        and margin_usd <= float(account["equity_usd"]) * float(account["margin_limit_fraction"])
-        and float(account["equity_usd"]) - margin_usd >= float(account["equity_usd"]) * float(account["free_margin_floor_fraction"])
+    contract_granularity_failed = minimum_loss_usd > risk_budget + 1e-9 or normalized_volume < float(account["volume_min"])
+    margin_failed = (
+        margin_usd > float(account["equity_usd"]) * float(account["margin_limit_fraction"])
+        or float(account["equity_usd"]) - margin_usd < float(account["equity_usd"]) * float(account["free_margin_floor_fraction"])
     )
+    expressible = not contract_granularity_failed and not margin_failed
     sizing = {
         "risk_budget_usd": risk_budget, "minimum_volume_stop_loss_usd": minimum_loss_usd,
         "requested_volume": requested_volume, "normalized_volume": normalized_volume,
         "required_margin_usd": margin_usd, "risk_expressible": bool(expressible),
     }
     if not expressible:
-        return {"accepted": False, "rejection_reason": "CONTRACT_GRANULARITY_OR_MARGIN_REJECT", "stop_atr": stop_atr, "reward_r": reward_r, **sizing}
+        category = "CONTRACT_GRANULARITY_REJECT" if contract_granularity_failed else "MARGIN_REJECT" if margin_failed else "OTHER_SIZING_REJECT"
+        return {
+            "accepted": False, "rejection_reason": "CONTRACT_GRANULARITY_OR_MARGIN_REJECT",
+            "sizing_rejection_category": category, "stop_atr": stop_atr, "reward_r": reward_r, **sizing,
+        }
 
     deadline = entry_time + pd.Timedelta(hours=float(signal["max_hold_hours"]))
     exit_index = start_index; exit_reason = "END_OF_DATA"; exit_exec = entry_exec; exit_at_open = False

@@ -143,16 +143,30 @@ def gate_audit(
         "best_year_lte_0p35": portfolio["best_year_positive_net_share"] <= 0.35,
         "family_positive_net_share_lte_0p65": family_share <= 0.65,
     }
-    sizing_reject = signals.get("rejection_reason", pd.Series(dtype=str)) == "CONTRACT_GRANULARITY_OR_MARGIN_REJECT"
-    opportunity_count = int(signals["signal_accepted"].sum() + sizing_reject.sum()) if len(signals) else 0
-    granularity_rejects = int(sizing_reject.sum())
-    granularity_pct = 100.0 * granularity_rejects / opportunity_count if opportunity_count else 0.0
+    categories = signals.get("sizing_rejection_category", pd.Series(index=signals.index, dtype=str))
+    sizing_accepted = int(signals["signal_accepted"].sum()) if len(signals) else 0
+    granularity_rejects = int((categories == "CONTRACT_GRANULARITY_REJECT").sum())
+    margin_rejects = int((categories == "MARGIN_REJECT").sum())
+    other_sizing_rejects = int((categories == "OTHER_SIZING_REJECT").sum())
+    sizing_rejects = granularity_rejects + margin_rejects + other_sizing_rejects
+    sizing_evaluated = sizing_accepted + sizing_rejects
+    granularity_pct = 100.0 * granularity_rejects / sizing_evaluated if sizing_evaluated else 0.0
+    reject_rate_pct = 100.0 * sizing_rejects / sizing_evaluated if sizing_evaluated else 0.0
     return {
         "data_complete": coverage_complete, "family_gates": family_gates,
         "at_least_one_family_passes": any(item["passed"] for item in family_gates.values()),
         "portfolio_checks": portfolio_checks, "portfolio_passed": all(portfolio_checks.values()),
         "positive_rolling_12_month_fraction": positive12, "all_rolling_24_month_positive": all24,
-        "maximum_positive_family_share": family_share, "contract_granularity_rejects": granularity_rejects,
-        "valid_opportunities": opportunity_count, "contract_granularity_reject_pct": granularity_pct,
+        "maximum_positive_family_share": family_share,
+        "raw_strategy_opportunities": int(len(signals)),
+        "sizing_evaluated_opportunities": sizing_evaluated,
+        "sizing_accepted_opportunities": sizing_accepted,
+        "contract_granularity_rejects": granularity_rejects,
+        "margin_rejects": margin_rejects,
+        "other_sizing_rejects": other_sizing_rejects,
+        "reject_rate_denominator": sizing_evaluated,
+        "reject_rate_pct": reject_rate_pct,
+        "sizing_reconciliation_valid": sizing_accepted + granularity_rejects + margin_rejects + other_sizing_rejects == sizing_evaluated,
+        "valid_opportunities": sizing_evaluated, "contract_granularity_reject_pct": granularity_pct,
         "contract_granularity_adequate": granularity_pct <= 10.0,
     }

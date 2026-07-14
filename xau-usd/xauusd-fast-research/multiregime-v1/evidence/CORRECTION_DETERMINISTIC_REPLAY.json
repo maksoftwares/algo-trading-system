@@ -1,0 +1,127 @@
+{
+    "schema_version":  "xauusd_multiregime_correction_replay_v1",
+    "research_commit":  "3765751bd5589dd6f67366cb4c2194f1e31680e0",
+    "classification":  "NO_DEFENSIBLE_MULTIREGIME_EDGE",
+    "replay_count":  2,
+    "output_file_count":  14,
+    "byte_identical":  true,
+    "changed_outputs":  [
+
+                        ],
+    "run_1":  {
+                  "MULTIREGIME_REGIME_CENSUS.csv":  {
+                                                        "size":  178711,
+                                                        "sha256":  "966e417833e83c872f9c6cc970b1e5cdd6e502cf2309c83bfbccab26cfe92005"
+                                                    },
+                  "MULTIREGIME_TRADE_LEDGER.csv":  {
+                                                       "size":  575,
+                                                       "sha256":  "8ce465a0aee46e996cc46fec58a1e7408f7f381d2c256d3ec37f41777c2d2b44"
+                                                   },
+                  "MULTIREGIME_FAMILY_RESULTS.csv":  {
+                                                         "size":  1431,
+                                                         "sha256":  "71b04c76a1f03b730233d8734d7c562879b782a3ad0fa2237287ea6b0dba2f1f"
+                                                     },
+                  "MULTIREGIME_MONTHLY_RESULTS.csv":  {
+                                                          "size":  2819,
+                                                          "sha256":  "f247af107ac972c7146c45060f3e31dc78e6e6202e8750fe416d6475cc69fa69"
+                                                      },
+                  "MULTIREGIME_STANDALONE_SIGNAL_LEDGER.csv":  {
+                                                                   "size":  198337,
+                                                                   "sha256":  "e70047ea413627127c613d4cd52106d10af0af42e78435736d71a1d7f4a4b01b"
+                                                               },
+                  "MULTIREGIME_DIRECTION_RESULTS.csv":  {
+                                                            "size":  128,
+                                                            "sha256":  "01caea1d3cbb845c043c526268e1bcddf8e73a04665cf2c67887b32cc3245754"
+                                                        },
+                  "MULTIREGIME_FAST_DISCOVERY_RESULT.json":  {
+                                                                 "size":  13419,
+                                                                 "sha256":  "383a5b824892e048b5415f94565b100fb2d65de2711a1f273320a6d4948fd2bd"
+                                                             },
+                  "MULTIREGIME_MANIFEST.json":  {
+                                                    "size":  5927,
+                                                    "sha256":  "dbb38bcaca19e423a51579babc73bf419bcbf574bf89c56a65b32a4119cdb730"
+                                                },
+                  "MULTIREGIME_SIGNAL_LEDGER.csv":  {
+                                                        "size":  344,
+                                                        "sha256":  "88294c04d2f0f37a10e54a00b4a28bc90d9405d04d501095614ae742955198d9"
+                                                    },
+                  "MULTIREGIME_SEGMENT_RESULTS.csv":  {
+                                                          "size":  2487,
+                                                          "sha256":  "8871d4a00be7379745f9df5ceb306576d28e544ea4fdebf680218de4dd6e64a1"
+                                                      },
+                  "MULTIREGIME_GATE_AUDIT.json":  {
+                                                      "size":  2592,
+                                                      "sha256":  "b4bf4f51e3f1aa87690466a75ac954269fdb4b70e4ca5286c4bed1c32bd5b427"
+                                                  },
+                  "MULTIREGIME_FAST_DISCOVERY_RESULT.md":  {
+                                                               "size":  3961,
+                                                               "sha256":  "cac4b31cb3723ad601a6ad4aff43003572c4f4a10302a38facf3b45ea75f0445"
+                                                           },
+                  "MULTIREGIME_STANDALONE_TRADE_LEDGER.csv":  {
+                                                                  "size":  222287,
+                                                                  "sha256":  "dbaee1486ad819f0248ae50191705176afb862104e2aa6e98c238d48b00c1747"
+                                                              },
+                  "MULTIREGIME_ROLLING_RESULTS.csv":  {
+                                                          "size":  13670,
+                                                          "sha256":  "d21fb58ec92e93a8e0b49073851a2e059870970e54b27bdfef15d291a330fe38"
+                                                      }
+              },
+    "run_2":  {
+                  "MULTIREGIME_REGIME_CENSUS.csv":  {
+                                                        "size":  178711,
+                                                        "sha256":  "966e417833e83c872f9c6cc970b1e5cdd6e502cf2309c83bfbccab26cfe92005"
+                                                    },
+                  "MULTIREGIME_TRADE_LEDGER.csv":  {
+                                                       "size":  575,
+                                                       "sha256":  "8ce465a0aee46e996cc46fec58a1e7408f7f381d2c256d3ec37f41777c2d2b44"
+                                                   },
+                  "MULTIREGIME_FAMILY_RESULTS.csv":  {
+                                                         "size":  1431,
+                                                         "sha256":  "71b04c76a1f03b730233d8734d7c562879b782a3ad0fa2237287ea6b0dba2f1f"
+                                                     },
+                  "MULTIREGIME_MONTHLY_RESULTS.csv":  {
+                                                          "size":  2819,
+                                                          "sha256":  "f247af107ac972c7146c45060f3e31dc78e6e6202e8750fe416d6475cc69fa69"
+                                                      },
+                  "MULTIREGIME_STANDALONE_SIGNAL_LEDGER.csv":  {
+                                                                   "size":  198337,
+                                                                   "sha256":  "e70047ea413627127c613d4cd52106d10af0af42e78435736d71a1d7f4a4b01b"
+                                                               },
+                  "MULTIREGIME_DIRECTION_RESULTS.csv":  {
+                                                            "size":  128,
+                                                            "sha256":  "01caea1d3cbb845c043c526268e1bcddf8e73a04665cf2c67887b32cc3245754"
+                                                        },
+                  "MULTIREGIME_FAST_DISCOVERY_RESULT.json":  {
+                                                                 "size":  13419,
+                                                                 "sha256":  "383a5b824892e048b5415f94565b100fb2d65de2711a1f273320a6d4948fd2bd"
+                                                             },
+                  "MULTIREGIME_MANIFEST.json":  {
+                                                    "size":  5927,
+                                                    "sha256":  "dbb38bcaca19e423a51579babc73bf419bcbf574bf89c56a65b32a4119cdb730"
+                                                },
+                  "MULTIREGIME_SIGNAL_LEDGER.csv":  {
+                                                        "size":  344,
+                                                        "sha256":  "88294c04d2f0f37a10e54a00b4a28bc90d9405d04d501095614ae742955198d9"
+                                                    },
+                  "MULTIREGIME_SEGMENT_RESULTS.csv":  {
+                                                          "size":  2487,
+                                                          "sha256":  "8871d4a00be7379745f9df5ceb306576d28e544ea4fdebf680218de4dd6e64a1"
+                                                      },
+                  "MULTIREGIME_GATE_AUDIT.json":  {
+                                                      "size":  2592,
+                                                      "sha256":  "b4bf4f51e3f1aa87690466a75ac954269fdb4b70e4ca5286c4bed1c32bd5b427"
+                                                  },
+                  "MULTIREGIME_FAST_DISCOVERY_RESULT.md":  {
+                                                               "size":  3961,
+                                                               "sha256":  "cac4b31cb3723ad601a6ad4aff43003572c4f4a10302a38facf3b45ea75f0445"
+                                                           },
+                  "MULTIREGIME_STANDALONE_TRADE_LEDGER.csv":  {
+                                                                  "size":  222287,
+                                                                  "sha256":  "dbaee1486ad819f0248ae50191705176afb862104e2aa6e98c238d48b00c1747"
+                                                              },
+                  "MULTIREGIME_ROLLING_RESULTS.csv":  {
+                                                          "size":  13670,
+                                                          "sha256":  "d21fb58ec92e93a8e0b49073851a2e059870970e54b27bdfef15d291a330fe38"
+                                                      }
+              }
+}

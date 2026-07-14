@@ -5,7 +5,7 @@
     "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/multiregime_fast_discovery_v1.json",
     "sha256": "37f1665cbd4caf6893792451a0dbb269600b045291b2a3ce3369098b8ded5303"
   },
-  "decision": "MULTIREGIME_V1_ABANDONED_NO_RESCUE",
+  "decision": "NO_DEFENSIBLE_MULTIREGIME_EDGE",
   "inputs": {
     "H1": {
       "development_spread_p95_points": 31.0,
@@ -68,7 +68,7 @@
     },
     "gate_audit": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_GATE_AUDIT.json",
-      "sha256": "75c15c334d5e02a7ef295f6779f41c76f7d465b74391b259643eab56e368a152"
+      "sha256": "b4bf4f51e3f1aa87690466a75ac954269fdb4b70e4ca5286c4bed1c32bd5b427"
     },
     "monthly_results": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_MONTHLY_RESULTS.csv",
@@ -80,11 +80,11 @@
     },
     "result_json": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.json",
-      "sha256": "95b90a11b77e1576f92ba52ce52ae9a1d8eae3b6cb98f1298834502ee76f118c"
+      "sha256": "383a5b824892e048b5415f94565b100fb2d65de2711a1f273320a6d4948fd2bd"
     },
     "result_md": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.md",
-      "sha256": "c17901bab224a086ad085159a9374b37c6ad042e0e4a945b0a5be59067d683aa"
+      "sha256": "cac4b31cb3723ad601a6ad4aff43003572c4f4a10302a38facf3b45ea75f0445"
     },
     "rolling_results": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_ROLLING_RESULTS.csv",
@@ -96,11 +96,11 @@
     },
     "signal_ledger": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_SIGNAL_LEDGER.csv",
-      "sha256": "63a7695d3ccade93df0613222793e41b10cbf7e858e435dd54eee11eddebf728"
+      "sha256": "88294c04d2f0f37a10e54a00b4a28bc90d9405d04d501095614ae742955198d9"
     },
     "standalone_signal_ledger": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_SIGNAL_LEDGER.csv",
-      "sha256": "9adb90287b85298a3072d5009594f7e9c5fe1cfea20ef8274f29fef3d4c6cea6"
+      "sha256": "e70047ea413627127c613d4cd52106d10af0af42e78435736d71a1d7f4a4b01b"
     },
     "standalone_trade_ledger": {
       "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_TRADE_LEDGER.csv",

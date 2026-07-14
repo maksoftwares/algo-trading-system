@@ -1,0 +1,16 @@
+Evidence target: detached disposable Git worktree
+Commit: 3765751bd5589dd6f67366cb4c2194f1e31680e0
+
+Command:
+git worktree add --detach <disposable-review-worktree> 3765751bd5589dd6f67366cb4c2194f1e31680e0
+
+Observed:
+HEAD is now at 3765751b research: screen XAUUSD multi-regime portfolio
+
+Command:
+git status --porcelain=v2 --untracked-files=all
+
+Observed output between PORCELAIN_BEGIN and PORCELAIN_END:
+<empty>
+
+Conclusion: the exact research commit materializes with an empty worktree status. The primary workspace separately contained four unrelated live Phase 1 monitor-report modifications; they were neither staged nor included in this screen.

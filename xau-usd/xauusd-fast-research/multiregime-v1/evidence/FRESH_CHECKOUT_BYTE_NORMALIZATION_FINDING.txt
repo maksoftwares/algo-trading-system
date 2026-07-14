@@ -1,0 +1,15 @@
+Exact research commit tested: 3765751bd5589dd6f67366cb4c2194f1e31680e0
+
+A fresh Windows checkout initially produced:
+
+......F............                                                      [100%]
+1 failed, 18 passed
+
+The failing manifest test identified two checkout-byte mismatches:
+
+- config/multiregime_fast_discovery_v1.json
+- outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.md
+
+Cause: the original commit did not contain a lane-local .gitattributes file, while the manifest hashes were captured from the pre-commit LF working files. Git checkout line-ending normalization changed those two materialized files. No strategy, data, trade, metric or economic result changed.
+
+After running the exact committed generator, all 14 outputs reproduced byte-for-byte across two consecutive runs and all original tests passed (19 passed). The evidence-only correction adds lane-local LF enforcement so fresh checkouts preserve the hashed bytes.

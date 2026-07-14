@@ -27,6 +27,14 @@ from strategies import FAMILY_IDS, generate_signals  # noqa: E402
 
 BRANCH = "codex/xau-multiregime-fast-discovery-v1"
 BASE_COMMIT = "50bf9b5dbcc563a20254e9041e41ec0762c86f6e"
+ALLOWED_CLASSIFICATIONS = {
+    "MULTIREGIME_PORTFOLIO_CONFIRMATION_CANDIDATE",
+    "POSITIVE_BUT_COMMERCIALLY_UNDERPOWERED",
+    "NO_DEFENSIBLE_MULTIREGIME_EDGE",
+    "MULTIREGIME_V1_DATA_INCOMPLETE_NO_ADVANCEMENT",
+    "XAUUSD_1000_ACCOUNT_CONTRACT_GRANULARITY_INADEQUATE",
+    "EVIDENCE_INVALID",
+}
 
 
 def clean(value: Any) -> Any:
@@ -46,7 +54,7 @@ def clean(value: Any) -> Any:
 
 
 def write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.write_text(json.dumps(clean(payload), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(clean(payload), indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
 def portable(path: Path) -> str:
@@ -111,7 +119,10 @@ def _abandonment(gates: dict[str, Any], portfolio: dict[str, Any], segment_rows:
         reasons.append("STRESS_FLOATING_DRAWDOWN_ABOVE_25R")
     if not gates["contract_granularity_adequate"]:
         reasons.append("XAUUSD_1000_ACCOUNT_CONTRACT_GRANULARITY_INADEQUATE")
-    return ("MULTIREGIME_V1_ABANDONED_NO_RESCUE" if reasons else "MULTIREGIME_V1_PROMISING_CONFIRMATION_REQUIRED"), reasons
+    classification = "NO_DEFENSIBLE_MULTIREGIME_EDGE" if reasons else "MULTIREGIME_PORTFOLIO_CONFIRMATION_CANDIDATE"
+    if classification not in ALLOWED_CLASSIFICATIONS:
+        raise AssertionError(f"Unapproved machine classification: {classification}")
+    return classification, reasons
 
 
 def _report(payload: dict[str, Any], family: pd.DataFrame, segments: pd.DataFrame) -> str:
@@ -120,7 +131,8 @@ def _report(payload: dict[str, Any], family: pd.DataFrame, segments: pd.DataFram
         "# XAUUSD Multi-Regime Fast Discovery V1", "",
         f"- Branch: `{BRANCH}`", f"- Base commit: `{BASE_COMMIT}`",
         f"- Exact period: `{payload['coverage']['requested_start']}` to `{payload['coverage']['requested_end_exclusive']}` (exclusive).",
-        f"- Data status: `{payload['coverage']['status']}`.", f"- Decision: `{payload['decision']}`.",
+        f"- Data status: `{payload['coverage']['status']}`.", f"- Machine classification: `{payload['decision']}`.",
+        f"- Narrative disposition: `{payload['narrative_disposition']}`.",
         f"- Families admitted to combined portfolio: `{', '.join(payload['portfolio_admitted_families']) or 'NONE'}`.",
         "- Engineering/deployment authorization: `NOT_AUTHORIZED`.", "",
         "## Portfolio", "",
@@ -140,7 +152,9 @@ def _report(payload: dict[str, Any], family: pd.DataFrame, segments: pd.DataFram
     lines.extend([
         "", "## $1,000 account and 100x leverage", "",
         f"- Risk budget per trade: `${payload['account_audit']['risk_budget_usd']:.2f}` (0.50%).",
-        f"- Contract-granularity rejects: `{payload['gate_audit']['contract_granularity_rejects']}` / `{payload['gate_audit']['valid_opportunities']}` (`{payload['gate_audit']['contract_granularity_reject_pct']:.2f}%`).",
+        f"- Raw strategy opportunities: `{payload['gate_audit']['raw_strategy_opportunities']}`.",
+        f"- Sizing reconciliation: `{payload['gate_audit']['sizing_accepted_opportunities']}` accepted + `{payload['gate_audit']['contract_granularity_rejects']}` contract rejects + `{payload['gate_audit']['margin_rejects']}` margin rejects + `{payload['gate_audit']['other_sizing_rejects']}` other sizing rejects = `{payload['gate_audit']['sizing_evaluated_opportunities']}` evaluated.",
+        f"- Contract-granularity rejection rate: `{payload['gate_audit']['contract_granularity_rejects']}` / `{payload['gate_audit']['reject_rate_denominator']}` (`{payload['gate_audit']['contract_granularity_reject_pct']:.2f}%`).",
         "- Leverage is used only for margin estimation and does not scale R returns.",
         "- Position risk uses captured native XAUUSD OrderCalcProfit parity; margin uses the broker-captured OrderCalcMargin result on the 100x account.", "",
         "## Cost and data notes", "",
@@ -202,7 +216,10 @@ def run(config_path: Path) -> dict[str, Any]:
         "funding_model": "FROZEN_ACTUAL_BROKER_INTEREST_CURRENT_SNAPSHOT_NOT_HISTORICAL_SERIES",
         "portfolio_summary": portfolio_summary, "family_summaries": family_summaries,
         "portfolio_admitted_families": admitted_families,
-        "gate_audit": gates, "account_audit": account_audit, "decision": decision, "abandonment_reasons": abandonment,
+        "gate_audit": gates, "account_audit": account_audit, "decision": decision,
+        "narrative_disposition": "MULTIREGIME_V1_ABANDONED_NO_RESCUE" if abandonment else "CONFIRMATION_REQUIRED",
+        "secondary_stop_reasons": [reason for reason in abandonment if reason == "XAUUSD_1000_ACCOUNT_CONTRACT_GRANULARITY_INADEQUATE"],
+        "abandonment_reasons": abandonment,
         "parameter_revision_count_after_first_complete_run": 0, "deployment_authorized": False,
     }
     paths = {
@@ -221,7 +238,7 @@ def run(config_path: Path) -> dict[str, Any]:
         "gate_audit": output_dir / "MULTIREGIME_GATE_AUDIT.json",
         "manifest": output_dir / "MULTIREGIME_MANIFEST.json",
     }
-    write_json(paths["result_json"], payload); paths["result_md"].write_text(_report(payload, family_frame, segments), encoding="utf-8")
+    write_json(paths["result_json"], payload); paths["result_md"].write_text(_report(payload, family_frame, segments), encoding="utf-8", newline="\n")
     router.census.to_csv(paths["regime_census"], index=False, lineterminator="\n")
     family_frame.to_csv(paths["family_results"], index=False, lineterminator="\n"); segments.to_csv(paths["segment_results"], index=False, lineterminator="\n")
     monthly.to_csv(paths["monthly_results"], index=False, lineterminator="\n"); rolling.to_csv(paths["rolling_results"], index=False, lineterminator="\n")

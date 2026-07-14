@@ -1,0 +1,307 @@
+{
+  "base_commit": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+  "branch": "codex/xau-multiregime-fast-discovery-v1",
+  "inventory": {
+    "code_and_tests": [
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/.gitattributes",
+        "sha256": "f29e053486052803766a3e7e93c8523869ffbe5341ecd3d0cf03a5d166047930",
+        "size_bytes": 35
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/.gitignore",
+        "sha256": "bd8e372af6f39d624c0811de6939fde5f7a212a174a4f4e21c62a77a07cf640c",
+        "size_bytes": 72
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/README.md",
+        "sha256": "8d97fcd73d29a86f1aa736b8dce30ff9016d757e11d93c19b189ba5bb92d4a92",
+        "size_bytes": 1621
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/build_review_evidence.py",
+        "sha256": "eeda0eaee6f2bcd32d8911dccae5015152fe90beecb8d70f0f2ed564d8afa49e",
+        "size_bytes": 6318
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/run_multiregime_fast_discovery_v1.py",
+        "sha256": "84b40dca7420d1a3cb9723367368ed52c8aa4e175bb94e54d624dad037ffa101",
+        "size_bytes": 18284
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/__init__.py",
+        "sha256": "222cc6da129530eea1775fdcccbf01f50637fcacd2921aa661a7a47a74938277",
+        "size_bytes": 59
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/backtest.py",
+        "sha256": "57a4054592fbca6eabf07fef6df77e04b556fea491b58313b2995f15316af440",
+        "size_bytes": 14150
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/data_adapter.py",
+        "sha256": "fc977d860d44a13be0bf7d7d2163189d8bc0d7a0aeeafe7364e4fe80568e2145",
+        "size_bytes": 12183
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/metrics.py",
+        "sha256": "4e048e47989f78ffe73a2156f076ccbdc7a16d39f46d532f357bc016e3a7eac9",
+        "size_bytes": 10646
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/regime.py",
+        "sha256": "9effb4923c32b5c96dedb223d87b976d787824aaec54ce3fbf793b82d25d0a55",
+        "size_bytes": 8199
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/src/strategies.py",
+        "sha256": "28d89eb847ebe84fb36905642a5699d24b125a60f60d2d7df2361eeefc2423d5",
+        "size_bytes": 9140
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/conftest.py",
+        "sha256": "18428c8ec29def69ac66fdbe51cbcb8833b7fee536d6f0e1d0494d961271a614",
+        "size_bytes": 198
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_backtest.py",
+        "sha256": "a5d90d8bcf50acb60099cdf4edfdf253b4da141415f64b7243c1c2d005fe1e4e",
+        "size_bytes": 4131
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_config_freeze.py",
+        "sha256": "09851d0939d8ea273d23fd7b1073d4a75cf312d34eb099fdb0dd847e80889760",
+        "size_bytes": 1265
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_data_adapter.py",
+        "sha256": "2c511cb86eac84323682cd79ce5830ba26135a929a30a9e368739c0190697d2c",
+        "size_bytes": 436
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_manifest.py",
+        "sha256": "f89fa2bcdd7d46a411d6f2a8702293ab538c12309ea45db25bc9df0990c7cfe5",
+        "size_bytes": 2207
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_metrics.py",
+        "sha256": "95682d35800c8793efe7c5fe65d3f435e7742afab811a7e49c8b37380bd9981e",
+        "size_bytes": 1939
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_regime.py",
+        "sha256": "3577227aeb4e69ef6cc4420badf43fcda2da14157fa611dbe53075dd0b131082",
+        "size_bytes": 1712
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/tests/test_strategies.py",
+        "sha256": "1ee0b786097f7fc79c47bad3d34d447b1db3db988cc09010a41b07d91a3ed2f0",
+        "size_bytes": 3008
+      }
+    ],
+    "configuration": [
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/mt5_contract_snapshot.json",
+        "sha256": "cd39ff6bbd5661ece8c463c4dd137e27c3d0c58a245f21514ba7764464ed2bfa",
+        "size_bytes": 917
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/multiregime_fast_discovery_v1.json",
+        "sha256": "37f1665cbd4caf6893792451a0dbb269600b045291b2a3ce3369098b8ded5303",
+        "size_bytes": 2543
+      }
+    ],
+    "inputs_and_sources": [
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/config/mt5_contract_snapshot.json",
+        "sha256": "cd39ff6bbd5661ece8c463c4dd137e27c3d0c58a245f21514ba7764464ed2bfa",
+        "size_bytes": 917
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H1_20250701_20260701_mt5.csv",
+        "sha256": "c7e92661a892f4e72d9f20d2bb321d13b861eb0b5374c4f14f347e6e523c475c",
+        "size_bytes": 1668183
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H4_20250701_20260701_mt5.csv",
+        "sha256": "c215d3dfd69d309f0a5145722e7861248e744765fa91cdedd84c58c1c892ff77",
+        "size_bytes": 454172
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M15_20250701_20260701_mt5.csv",
+        "sha256": "5160e2d6ded62dacd1277e34de0aeb3010b658d608d62cd074b76b33edd7a4d7",
+        "size_bytes": 6670573
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M5_20250701_20260701_mt5.csv",
+        "sha256": "9f4501ab278b47dd070a27b1faf68cd019c684c86e9b5620a77cf32bebeecb10",
+        "size_bytes": 19906748
+      },
+      {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv",
+        "sha256": "3552e55c4203eca69aa63bdf49ad1a3fb03e32562f29ee1e7d51148f483ad358",
+        "size_bytes": 14611383
+      },
+      {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv",
+        "sha256": "02d5f6d6ae9f39037dd7731aa89ab39b30590334167add166d2036b8e1352538",
+        "size_bytes": 3969131
+      },
+      {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M15/XAUUSD_capital_com_M15_20160103_20250701.csv",
+        "sha256": "d08c62645b9504d49d537c209ef0f26afebd6d26dc18303b215f3c3ca4bb8833",
+        "size_bytes": 58301152
+      },
+      {
+        "path": "xau-usd/xauusd-phase0/data/processed/bars/capital_com/XAUUSD/M5/XAUUSD_capital_com_M5_20160103_20250701.csv",
+        "sha256": "4f3f1647eecf7f620c3945a95ec13ba4996741609877d4ee65cff6d6eb02dad7",
+        "size_bytes": 172355213
+      }
+    ],
+    "outputs": [
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_DIRECTION_RESULTS.csv",
+        "sha256": "01caea1d3cbb845c043c526268e1bcddf8e73a04665cf2c67887b32cc3245754",
+        "size_bytes": 128
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAMILY_RESULTS.csv",
+        "sha256": "71b04c76a1f03b730233d8734d7c562879b782a3ad0fa2237287ea6b0dba2f1f",
+        "size_bytes": 1431
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.json",
+        "sha256": "383a5b824892e048b5415f94565b100fb2d65de2711a1f273320a6d4948fd2bd",
+        "size_bytes": 13419
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_FAST_DISCOVERY_RESULT.md",
+        "sha256": "cac4b31cb3723ad601a6ad4aff43003572c4f4a10302a38facf3b45ea75f0445",
+        "size_bytes": 3961
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_GATE_AUDIT.json",
+        "sha256": "b4bf4f51e3f1aa87690466a75ac954269fdb4b70e4ca5286c4bed1c32bd5b427",
+        "size_bytes": 2592
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_MANIFEST.json",
+        "sha256": "dbb38bcaca19e423a51579babc73bf419bcbf574bf89c56a65b32a4119cdb730",
+        "size_bytes": 5927
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_MONTHLY_RESULTS.csv",
+        "sha256": "f247af107ac972c7146c45060f3e31dc78e6e6202e8750fe416d6475cc69fa69",
+        "size_bytes": 2819
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_REGIME_CENSUS.csv",
+        "sha256": "966e417833e83c872f9c6cc970b1e5cdd6e502cf2309c83bfbccab26cfe92005",
+        "size_bytes": 178711
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_ROLLING_RESULTS.csv",
+        "sha256": "d21fb58ec92e93a8e0b49073851a2e059870970e54b27bdfef15d291a330fe38",
+        "size_bytes": 13670
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_SEGMENT_RESULTS.csv",
+        "sha256": "8871d4a00be7379745f9df5ceb306576d28e544ea4fdebf680218de4dd6e64a1",
+        "size_bytes": 2487
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_SIGNAL_LEDGER.csv",
+        "sha256": "88294c04d2f0f37a10e54a00b4a28bc90d9405d04d501095614ae742955198d9",
+        "size_bytes": 344
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_SIGNAL_LEDGER.csv",
+        "sha256": "e70047ea413627127c613d4cd52106d10af0af42e78435736d71a1d7f4a4b01b",
+        "size_bytes": 198337
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_STANDALONE_TRADE_LEDGER.csv",
+        "sha256": "dbaee1486ad819f0248ae50191705176afb862104e2aa6e98c238d48b00c1747",
+        "size_bytes": 222287
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/outputs/MULTIREGIME_TRADE_LEDGER.csv",
+        "sha256": "8ce465a0aee46e996cc46fec58a1e7408f7f381d2c256d3ec37f41777c2d2b44",
+        "size_bytes": 575
+      }
+    ],
+    "review_evidence": [
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/A1_XAU_MULTIREGIME_BASE_RESEARCH.bundle",
+        "sha256": "0d32ef7ea98d0adbe336e71bfb3ab192b4c72abd97063fda765f40eea77178f5",
+        "size_bytes": 461537
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/A1_XAU_MULTIREGIME_BASE_TO_RESEARCH.patch",
+        "sha256": "0a5e5dda049eb14fd5982ef94b9acaf22f18881bf6afdfbc36bd67a25c792620",
+        "size_bytes": 748120
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/CLEAN_WORKTREE_EVIDENCE.txt",
+        "sha256": "d0bd30d5103562443b5484bce6d0e324815ff3cb2b5241d8c0a4e6ea5c37a294",
+        "size_bytes": 651
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/CORRECTION_DETERMINISTIC_REPLAY.json",
+        "sha256": "2e96dc5df80680c2f6ace89ec060a8bb1f39c2524a7c3b1736e56811c8e78067",
+        "size_bytes": 9525
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/CORRECTION_TEST_OUTPUT.txt",
+        "sha256": "1ec2f899071d31ddad154e70b0d754ffb6e8bb17378ca60950a79034c1b535fa",
+        "size_bytes": 204
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/ECONOMIC_RESULT_RECONCILIATION.json",
+        "sha256": "17d37ea9e73d2980b31bec7a55e33890ee59d8f0de13ab17c74e00e0718b7685",
+        "size_bytes": 4534
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/FRESH_CHECKOUT_BYTE_NORMALIZATION_FINDING.txt",
+        "sha256": "ffd56649cfc70f6df477c1cf9b3d695b503c4c42017e120f5f4ea73f2ee48494",
+        "size_bytes": 935
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/ORIGINAL_COMMIT_DETERMINISTIC_REPLAY.json",
+        "sha256": "7daadbd38ca2051c18afba7ce8b09bf8c8124ef890b3eb38a01cc628e9294a3f",
+        "size_bytes": 9911
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/ORIGINAL_COMMIT_POST_REGENERATION_TEST_OUTPUT.txt",
+        "sha256": "2a1f943eb9615495d89135298beea3bb46f11bfd401ea1c01a4ae840dc5d0976",
+        "size_bytes": 204
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/README.md",
+        "sha256": "5d21687b8b1940801ac6c3519dae8ee8fa8159c9dde31340912711b0972382fe",
+        "size_bytes": 1585
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/RESEARCH_COMMIT_IDENTITY.json",
+        "sha256": "700d9c95cdfeffaf801762d31ac94f967d29a07eb39d414d73fd58d2863829bb",
+        "size_bytes": 940
+      },
+      {
+        "path": "xau-usd/xauusd-fast-research/multiregime-v1/evidence/SEGMENT_D_AND_ACCOUNT_EVIDENCE.json",
+        "sha256": "d5bb7e531e59cfc0cf87c0eb549d5caead8b0882147ad706de931b3d8a745e66",
+        "size_bytes": 7749
+      }
+    ]
+  },
+  "inventory_rules": {
+    "absolute_machine_paths_prohibited": true,
+    "manifest_excludes_itself_to_avoid_recursive_hashing": true,
+    "paths_are_repository_relative_posix": true
+  },
+  "machine_classification": "NO_DEFENSIBLE_MULTIREGIME_EDGE",
+  "narrative_disposition": "MULTIREGIME_V1_ABANDONED_NO_RESCUE",
+  "research_commit": "3765751bd5589dd6f67366cb4c2194f1e31680e0",
+  "research_parent": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+  "research_tree": "d8503b12783d2e571d98fee2a8619583c6904d06",
+  "schema_version": "xauusd_multiregime_run_manifest_v1"
+}

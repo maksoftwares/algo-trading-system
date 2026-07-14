@@ -4,7 +4,8 @@
 - Base commit: `50bf9b5dbcc563a20254e9041e41ec0762c86f6e`
 - Exact period: `2016-07-01T00:00:00+00:00` to `2026-07-01T00:00:00+00:00` (exclusive).
 - Data status: `COMPLETE_EXACT_PERIOD`.
-- Decision: `MULTIREGIME_V1_ABANDONED_NO_RESCUE`.
+- Machine classification: `NO_DEFENSIBLE_MULTIREGIME_EDGE`.
+- Narrative disposition: `MULTIREGIME_V1_ABANDONED_NO_RESCUE`.
 - Families admitted to combined portfolio: `NONE`.
 - Engineering/deployment authorization: `NOT_AUTHORIZED`.
 
@@ -46,7 +47,9 @@
 ## $1,000 account and 100x leverage
 
 - Risk budget per trade: `$5.00` (0.50%).
-- Contract-granularity rejects: `105` / `489` (`21.47%`).
+- Raw strategy opportunities: `803`.
+- Sizing reconciliation: `384` accepted + `105` contract rejects + `0` margin rejects + `0` other sizing rejects = `489` evaluated.
+- Contract-granularity rejection rate: `105` / `489` (`21.47%`).
 - Leverage is used only for margin estimation and does not scale R returns.
 - Position risk uses captured native XAUUSD OrderCalcProfit parity; margin uses the broker-captured OrderCalcMargin result on the 100x account.
 

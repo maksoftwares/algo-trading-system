@@ -1,0 +1,210 @@
+{
+  "account_audit": {
+    "contract_size_oz": 100.0,
+    "equity_usd": 1000.0,
+    "leverage": 100,
+    "native_contract_evidence": "A1_XAU_R6_ORDERCALCPROFIT_PARITY_V1",
+    "order_calc_margin_rate": 0.0020022201231956107,
+    "risk_budget_usd": 5.0,
+    "risk_fraction": 0.005,
+    "volume_min": 0.01
+  },
+  "account_feasibility": {
+    "all_rolling_24_month_positive": false,
+    "at_least_one_family_passes": false,
+    "contract_granularity_adequate": false,
+    "contract_granularity_reject_pct": 21.47239263803681,
+    "contract_granularity_rejects": 105,
+    "data_complete": true,
+    "family_gates": {
+      "MR_COMPRESSION_BREAKOUT_V1": {
+        "checks": {
+          "expectancy_gte_0p05": false,
+          "floating_dd_lte_15": true,
+          "pf_gte_1p15": false,
+          "stress_expectancy_positive": false,
+          "stress_net_positive": false,
+          "stress_pf_gte_1p03": false,
+          "top_ten_lte_0p40": false,
+          "trades_gte_200": false
+        },
+        "passed": false
+      },
+      "MR_FAILED_AUCTION_REVERSAL_V1": {
+        "checks": {
+          "expectancy_gte_0p05": false,
+          "floating_dd_lte_15": false,
+          "pf_gte_1p15": false,
+          "stress_expectancy_positive": false,
+          "stress_net_positive": false,
+          "stress_pf_gte_1p03": false,
+          "top_ten_lte_0p40": true,
+          "trades_gte_200": true
+        },
+        "passed": false
+      },
+      "MR_TREND_PULLBACK_CONTINUATION_V1": {
+        "checks": {
+          "expectancy_gte_0p05": false,
+          "floating_dd_lte_15": false,
+          "pf_gte_1p15": false,
+          "stress_expectancy_positive": false,
+          "stress_net_positive": false,
+          "stress_pf_gte_1p03": false,
+          "top_ten_lte_0p40": true,
+          "trades_gte_200": false
+        },
+        "passed": false
+      }
+    },
+    "margin_rejects": 0,
+    "maximum_positive_family_share": 1.0,
+    "other_sizing_rejects": 0,
+    "portfolio_checks": {
+      "all_rolling24_positive": false,
+      "average_trades_per_year_gte_120": false,
+      "best_year_lte_0p35": true,
+      "expectancy_gte_0p10": false,
+      "family_positive_net_share_lte_0p65": false,
+      "floating_dd_lte_20": true,
+      "latest12_expectancy_gte_0p05": false,
+      "latest12_gte_100": false,
+      "latest12_pf_gte_1p15": false,
+      "latest3_gte_20": false,
+      "latest6_gte_45": false,
+      "median_month_gte_8": false,
+      "pf_gte_1p30": false,
+      "positive_rolling12_gte_70pct": false,
+      "stress_expectancy_gte_0p04": false,
+      "stress_floating_dd_lte_25": true,
+      "stress_pf_gte_1p12": false,
+      "top_ten_lte_0p30": true,
+      "top_three_days_lte_0p20": true,
+      "trades_gte_1200": false
+    },
+    "portfolio_passed": false,
+    "positive_rolling_12_month_fraction": 0.0,
+    "raw_strategy_opportunities": 803,
+    "reject_rate_denominator": 489,
+    "reject_rate_pct": 21.47239263803681,
+    "sizing_accepted_opportunities": 384,
+    "sizing_evaluated_opportunities": 489,
+    "sizing_reconciliation_valid": true,
+    "valid_opportunities": 489
+  },
+  "captured_mt5_contract": {
+    "account_units_per_usd": 3.67,
+    "bar_bid_ask_method": "MT5 BID OHLC PLUS NATIVE COPYRATES BAR SPREAD",
+    "captured_account_currency": "AED",
+    "captured_account_leverage": 100,
+    "captured_at_utc": "2026-07-13T22:41:24.0859272Z",
+    "captured_server": "Capital.ComMena-Demo",
+    "contract_size": 100.0,
+    "digits": 2,
+    "order_calc_anchor_price": 4003.73,
+    "order_calc_capture_zero_trade_action": true,
+    "order_calc_margin_account_currency_min_volume": 29.42,
+    "order_calc_margin_rate": 0.0020022201231956107,
+    "order_calc_margin_usd_min_volume": 8.016348773841962,
+    "order_calc_profit_account_currency_for_one_usd_move_min_volume": 3.67,
+    "point": 0.01,
+    "swap_long": -5.760324,
+    "swap_mode": 5,
+    "swap_rollover3days": 5,
+    "swap_short": 2.8011239999999997,
+    "terminal_build": 5833,
+    "tick_size": 0.01,
+    "volume_max": 1000.0,
+    "volume_min": 0.01,
+    "volume_step": 0.01,
+    "zero_trade_action": true
+  },
+  "coverage": {
+    "requested_end_exclusive": "2026-07-01T00:00:00+00:00",
+    "requested_start": "2016-07-01T00:00:00+00:00",
+    "segment_d_complete": true,
+    "segment_d_start": "2025-07-01T00:00:00+00:00",
+    "source_boundary": "processed Capital.com before 2025-07-01; same-broker Capital.com MT5 at and after 2025-07-01",
+    "status": "COMPLETE_EXACT_PERIOD",
+    "timeframes": {
+      "H1": {
+        "duplicate_starts": 0,
+        "end_exclusive": "2026-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 594,
+        "invalid_rows": 0,
+        "maximum_gap_hours": 82.0,
+        "rows": 58914,
+        "source_partition_counts": {
+          "CAPITAL_COM_MT5_LOCKED_TAIL_2025_2026": 5875,
+          "CAPITAL_COM_PROCESSED_2016_2025": 53039
+        },
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "H4": {
+        "duplicate_starts": 0,
+        "end_exclusive": "2026-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 530,
+        "invalid_rows": 0,
+        "maximum_gap_hours": 80.0,
+        "rows": 15942,
+        "source_partition_counts": {
+          "CAPITAL_COM_MT5_LOCKED_TAIL_2025_2026": 1597,
+          "CAPITAL_COM_PROCESSED_2016_2025": 14345
+        },
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M15": {
+        "duplicate_starts": 0,
+        "end_exclusive": "2026-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2589,
+        "invalid_rows": 0,
+        "maximum_gap_hours": 81.25,
+        "rows": 235525,
+        "source_partition_counts": {
+          "CAPITAL_COM_MT5_LOCKED_TAIL_2025_2026": 23478,
+          "CAPITAL_COM_PROCESSED_2016_2025": 212047
+        },
+        "start": "2016-07-01T00:00:00+00:00"
+      },
+      "M5": {
+        "duplicate_starts": 0,
+        "end_exclusive": "2026-07-01T00:00:00+00:00",
+        "gaps_over_3_bars": 2601,
+        "invalid_rows": 0,
+        "maximum_gap_hours": 81.16666666666667,
+        "rows": 703491,
+        "source_partition_counts": {
+          "CAPITAL_COM_MT5_LOCKED_TAIL_2025_2026": 70423,
+          "CAPITAL_COM_PROCESSED_2016_2025": 633068
+        },
+        "start": "2016-07-01T00:00:00+00:00"
+      }
+    }
+  },
+  "locked_tail_sources": {
+    "H1": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H1_20250701_20260701_mt5.csv",
+      "sha256": "c7e92661a892f4e72d9f20d2bb321d13b861eb0b5374c4f14f347e6e523c475c"
+    },
+    "H4": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_H4_20250701_20260701_mt5.csv",
+      "sha256": "c215d3dfd69d309f0a5145722e7861248e744765fa91cdedd84c58c1c892ff77"
+    },
+    "M15": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M15_20250701_20260701_mt5.csv",
+      "sha256": "5160e2d6ded62dacd1277e34de0aeb3010b658d608d62cd074b76b33edd7a4d7"
+    },
+    "M5": {
+      "path": "xau-usd/xauusd-fast-research/multiregime-v1/data/cache/XAUUSD_M5_20250701_20260701_mt5.csv",
+      "sha256": "9f4501ab278b47dd070a27b1faf68cd019c684c86e9b5620a77cf32bebeecb10"
+    }
+  },
+  "portfolio_admitted_families": [],
+  "schema_version": "xauusd_multiregime_segment_d_account_evidence_v1",
+  "segment_d_rows_csv": [
+    "PORTFOLIO,D,2025-07-01 00:00:00+00:00,2026-07-01 00:00:00+00:00,0,0.0,,0.0,0.0,",
+    "MR_TREND_PULLBACK_CONTINUATION_V1,D,2025-07-01 00:00:00+00:00,2026-07-01 00:00:00+00:00,0,0.0,,0.0,0.0,",
+    "MR_COMPRESSION_BREAKOUT_V1,D,2025-07-01 00:00:00+00:00,2026-07-01 00:00:00+00:00,1,-1.0,0.0,-1.0,-1.0632875782963553,0.0",
+    "MR_FAILED_AUCTION_REVERSAL_V1,D,2025-07-01 00:00:00+00:00,2026-07-01 00:00:00+00:00,4,-1.4677261562229915,0.5107579479256428,-0.3669315390557479,-1.8044297475372748,0.4487448795035252"
+  ]
+}

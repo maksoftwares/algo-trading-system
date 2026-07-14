@@ -1,0 +1,22 @@
+{
+  "base": {
+    "commit": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+    "parent": "2cddc16f380f531c3cf4b5922f5bd9fca8e29fff",
+    "subject": "research: verify M30 chop rotation with corrected execution",
+    "tree": "1784b350660902dec62e495abcd61b71d2a4cf57"
+  },
+  "branch": "codex/xau-multiregime-fast-discovery-v1",
+  "research": {
+    "author_date": "2026-07-14T02:45:26+04:00",
+    "author_email": "mohdalikhans97.com@gmail.com",
+    "author_name": "MUHAMMAD ALI KHAN",
+    "commit": "3765751bd5589dd6f67366cb4c2194f1e31680e0",
+    "committer_date": "2026-07-14T02:45:26+04:00",
+    "committer_email": "mohdalikhans97.com@gmail.com",
+    "committer_name": "MUHAMMAD ALI KHAN",
+    "parent": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+    "subject": "research: screen XAUUSD multi-regime portfolio",
+    "tree": "d8503b12783d2e571d98fee2a8619583c6904d06"
+  },
+  "schema_version": "xauusd_multiregime_research_commit_identity_v1"
+}
