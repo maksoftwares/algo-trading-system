@@ -1,0 +1,179 @@
+{
+  "base_commit": "68a9988d51d04fe0c5812792e7c347570b75fb27",
+  "base_tree": "a769ab1bcaf3311a2004db7cf6f05928aabfa729",
+  "branch": "codex/multiasset-london-breakout-fast-discovery-v1",
+  "classification": "LONDON_BREAKOUT_V1_DATA_INADEQUATE_NO_SCORING",
+  "code_and_tests": [
+    {
+      "path": "multi-asset/london-breakout-v1/.gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c",
+      "size_bytes": 19
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/.gitignore",
+      "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+      "size_bytes": 23
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/README.md",
+      "sha256": "9cdd236b6d379e2c59792494eabb16c94899c8f70d81834c7adab3f23976b330",
+      "size_bytes": 1075
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/run_data_gate.py",
+      "sha256": "eacc228b3629b449e9fca8396fe34674c1ea660fc34ba090354bac158edc86c2",
+      "size_bytes": 10821
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/src/__init__.py",
+      "sha256": "2aa49be63f3739c99d89fead07c96ed360284b1ac5c910e9128c1279f3f1a5a4",
+      "size_bytes": 61
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/src/data_gate.py",
+      "sha256": "09e7f97cdeed6a8810e4a48371d679a9552257149590c0e88971ea4fa94e75e7",
+      "size_bytes": 8259
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/tests/conftest.py",
+      "sha256": "18428c8ec29def69ac66fdbe51cbcb8833b7fee536d6f0e1d0494d961271a614",
+      "size_bytes": 198
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/tests/test_data_gate.py",
+      "sha256": "c9b2a9bac3093bb5b2331ff886d5d888717b1b70d73854fa06ac9e6656e08bfc",
+      "size_bytes": 1272
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/tests/test_outputs.py",
+      "sha256": "42e46f740e89098a2aacbde4807e44459316b8540816d4dd16c455bb51915551",
+      "size_bytes": 1206
+    }
+  ],
+  "config": {
+    "path": "multi-asset/london-breakout-v1/config/london_breakout_v1.json",
+    "sha256": "b1bf18d09b8537559dad710d81821e8a62f782456640fde230880dd49ae9f08d",
+    "size_bytes": 2037
+  },
+  "contract_and_tick_probe": {
+    "path": "multi-asset/london-breakout-v1/evidence/CAPITAL_COM_CONTRACT_AND_TICK_PROBE.json",
+    "sha256": "94777e96273a4f5c134df7bc4ddd05e7337e3866015c14c394236934927f0e0c",
+    "size_bytes": 6169
+  },
+  "manifest_excludes_itself_to_avoid_recursive_hashing": true,
+  "outputs": [
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_ACCOUNT_FEASIBILITY.csv",
+      "sha256": "d7248552d8f8472eb1e6a1b360aa52450f3b2f99f562805a6f9ad9d235895d7b",
+      "size_bytes": 469
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_CHRONOLOGICAL_SEGMENTS.csv",
+      "sha256": "671d2f58ff8fc92e8cac7b17b97498eecad8f41ac73c10d20ab5ec79a8162261",
+      "size_bytes": 295
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_CORRELATION.csv",
+      "sha256": "886e7b4ba5459d0714385002e61516e650a0d019a0da071a5d391f43fbbd11c2",
+      "size_bytes": 53
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_DATA_READINESS.csv",
+      "sha256": "e0c9512a0d753579fb054a845e9de39399338b5a62ea8dc5267569d8fbed573e",
+      "size_bytes": 1088
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_GATE_AUDIT.json",
+      "sha256": "b62ce21b62c21cab024abc59876c15f9ccdcbc8865dcacb260377302ddc84dde",
+      "size_bytes": 506
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_INSTRUMENT_RESULTS.csv",
+      "sha256": "d74526749fab6cc840fe4fd730da0ad40b9c7b71351874e39179c55e4dc75385",
+      "size_bytes": 214
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_MONTHLY_RESULTS.csv",
+      "sha256": "1d5abab9999df145931e2b6eaa8a4218bdaa546984f06ab3a0a33bcd88323c87",
+      "size_bytes": 34
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_PORTFOLIO_RESULTS.csv",
+      "sha256": "cd3448572071deb8b3292e9b6a090cd436e5c4d12a1e13433f0fe9e93bfa84f9",
+      "size_bytes": 109
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_RESULT.json",
+      "sha256": "b4d2285b88e5773023d6ee4c92a0f9d9680e94424309668de61efcc2b2320bad",
+      "size_bytes": 9843
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_RESULT.md",
+      "sha256": "5c3bc53a2e98d477fea09066e4003f625c84fbc8cf4346c9ce6cfc3b59157565",
+      "size_bytes": 1651
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_ROLLING_RESULTS.csv",
+      "sha256": "0e1d48fe4a50f39f6392fbe2954ef3bef2b50c70d2ee9470b5f3d0323848f058",
+      "size_bytes": 62
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_SIGNAL_LEDGER.csv",
+      "sha256": "98e0afb1577c0198c4574d34fa76d7d921b5f240cff2b01e62b36cd86b9ab65c",
+      "size_bytes": 74
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/outputs/LONDON_BREAKOUT_TRADE_LEDGER.csv",
+      "sha256": "b446b0b509b4001108c3b759ffc705e714d63093b967fc2958a0648fdbc8b8f8",
+      "size_bytes": 69
+    }
+  ],
+  "schema_version": "london_breakout_run_manifest_v1",
+  "source_data": [
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "9db0146429afffae006a4c145988034ea2b98805680409362f87811c05faf32d",
+      "size_bytes": 3536076
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "4422c23fb34e90662dbeaece3e7c813ae865fcd7bc6194efc45fae078c5c7e14",
+      "size_bytes": 13998711
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "efc2324985c38e007d18e5aa8f2696c5dd4083c0aaa5bc842b3846cb080cae3b",
+      "size_bytes": 41637824
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_H1_20160101_20250630_capital_com.csv",
+      "sha256": "fce7dc9d6a87c3eb515ac5ad73020bf7c3942b83f5ddcb0f5b073452f203298c",
+      "size_bytes": 3544124
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M15_20160101_20250630_capital_com.csv",
+      "sha256": "04e6420923c80b60c7d65e2fd9cc972d0c5c77622e93ea752d68167f68334ee2",
+      "size_bytes": 14032766
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M5_20160101_20250630_capital_com.csv",
+      "sha256": "2047ceb88b60bd6a027e83ae13b95382916486c1f091ce6aa64a7d4751e22eba",
+      "size_bytes": 41743102
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "ac2930c4dfcf30fa902ea99a87d97570a519d98839abbba21d2ac8f94ab15e87",
+      "size_bytes": 3388656
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "ae5de2cc6f62139f350e1b700688372bba4b02d8b40daad3d41c0f563a521e72",
+      "size_bytes": 13437609
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "dee59c0da3bdc74df943054015813920271115cb614e38e03695e2299bed8ba4",
+      "size_bytes": 39808345
+    }
+  ]
+}

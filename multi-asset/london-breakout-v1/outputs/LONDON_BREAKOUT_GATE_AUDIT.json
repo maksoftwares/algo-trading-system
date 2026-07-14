@@ -1,0 +1,14 @@
+{
+  "at_least_three_complete_trustworthy_data": false,
+  "classification": "LONDON_BREAKOUT_V1_DATA_INADEQUATE_NO_SCORING",
+  "complete_trustworthy_instruments": 0,
+  "contract_feasibility_evaluated": false,
+  "minimum_required_instruments": 3,
+  "parameter_search_count": 0,
+  "pre_scoring_gate_passed": false,
+  "schema_version": "london_breakout_gate_audit_v1",
+  "stop_reasons": [
+    "FEWER_THAN_THREE_INSTRUMENTS_HAVE_COMPLETE_TRUSTWORTHY_EXECUTION_DATA"
+  ],
+  "strategy_scoring_performed": false
+}

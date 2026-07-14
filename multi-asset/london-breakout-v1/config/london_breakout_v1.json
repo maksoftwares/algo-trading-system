@@ -1,0 +1,31 @@
+{
+  "schema_version": "multiasset_london_breakout_v1",
+  "branch": "codex/multiasset-london-breakout-fast-discovery-v1",
+  "base_commit": "68a9988d51d04fe0c5812792e7c347570b75fb27",
+  "base_tree": "a769ab1bcaf3311a2004db7cf6f05928aabfa729",
+  "symbols": ["XAUUSD", "EURUSD", "GBPUSD", "USDJPY"],
+  "requested_start": "2016-07-01T00:00:00Z",
+  "requested_end_exclusive": "2026-07-01T00:00:00Z",
+  "development_end_exclusive": "2024-01-01T00:00:00Z",
+  "validation_end_exclusive": "2025-07-01T00:00:00Z",
+  "locked_exam_start": "2025-07-01T00:00:00Z",
+  "timezone": "Europe/London",
+  "sessions": {
+    "overnight_start": "00:00",
+    "overnight_end": "08:00",
+    "entry_start": "08:00",
+    "entry_end": "12:00",
+    "forced_exit": "16:00"
+  },
+  "bias": {"atr_period": 14, "ema_period": 50, "ema_slope_bars": 6, "normalized_slope_min": 0.10},
+  "range_quality": {"minimum_h1_atr": 0.50, "maximum_h1_atr": 2.00},
+  "signal": {"m15_atr_period": 14, "breakout_atr": 0.10, "minimum_body_fraction": 0.50, "close_edge_fraction": 0.25},
+  "execution": {"stop_buffer_atr": 0.10, "minimum_stop_atr": 0.75, "maximum_stop_atr": 1.50, "target_r": 2.0, "maximum_hold_hours": 8, "one_trade_per_symbol_london_date": true},
+  "costs": {"stress_slippage_r": 0.05, "stress_funding_multiplier": 1.25, "stress_spread_statistic": "LONDON_SESSION_P95"},
+  "account": {"equity_usd": 1000.0, "risk_fraction": 0.005, "preferred_forward_shadow_risk_fraction": 0.0025, "maximum_combined_open_risk_fraction": 0.005, "margin_limit_fraction": 0.20, "free_margin_floor_fraction": 0.80, "overall_sizing_reject_cap_pct": 10.0, "instrument_sizing_reject_cap_pct": 15.0},
+  "data_gate": {"minimum_complete_trustworthy_instruments": 3, "require_raw_bid_ask_ticks_or_tick_derived_executable_m5": true, "bar_spread_reconstruction_sufficient": false},
+  "parameter_search_count": 0,
+  "raw_capital_com_root": "xau-usd/xauusd-phase0/data/raw/capital_com",
+  "output_dir": "multi-asset/london-breakout-v1/outputs",
+  "evidence_dir": "multi-asset/london-breakout-v1/evidence"
+}
