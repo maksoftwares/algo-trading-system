@@ -1,0 +1,2 @@
+source_path,commit,blob_sha,input_api,timestamp_statement,ohlc_statement,spread_statement,rounding,trade_functions
+xau-usd/xauusd-phase0/mt5/PassiveBarExporter_Phase0.mq5,5c4cb81bfacc0180f47c1badc8474a15078f18e1,5ddfe243771b6fa5411e00f2ad8bd182ad192136,CopyRates,rates[index].time - InpServerToUtcOffsetHours*3600,rates[index].open/high/low/close formatted with symbol digits,rates[index].spread,"DoubleToString(value,SYMBOL_DIGITS)",False

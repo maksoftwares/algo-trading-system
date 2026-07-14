@@ -1,0 +1,26 @@
+{
+  "causality": {
+    "aggregation_uses_ticks_inside_exact_m5_interval_only": true,
+    "future_tick_mutation_tested": true,
+    "strategy_locked_exam_not_used_for_basis_selection": true,
+    "strategy_scoring_performed": false
+  },
+  "classification": "LONDON_QUOTE_CONTRACT_UNRESOLVED_CLOSE_BAR_ROUTE",
+  "instrument_classifications": {
+    "EURUSD": "PROVENANCE_CHAIN_INCOMPLETE",
+    "USDJPY": "PROVENANCE_CHAIN_INCOMPLETE",
+    "XAUUSD": "PROVENANCE_CHAIN_INCOMPLETE"
+  },
+  "labels": [
+    "THIS IS A DATA-CONTRACT AUDIT",
+    "NOT A STRATEGY OPTIMIZATION",
+    "NOT A PROFITABILITY RESULT",
+    "NOT DEPLOYMENT EVIDENCE"
+  ],
+  "phase": "MULTIASSET_LONDON_BAR_QUOTE_CONTRACT_CLOSURE_V1",
+  "provisional_strategy_result": "NOT_RERUN_QUOTE_CONTRACT_UNRESOLVED",
+  "schema_version": "london_quote_contract_result_v1",
+  "strategy_and_config_hashes_unchanged": true,
+  "strategy_scoring_rerun": false,
+  "tick_acquisition_or_broker_action": false
+}

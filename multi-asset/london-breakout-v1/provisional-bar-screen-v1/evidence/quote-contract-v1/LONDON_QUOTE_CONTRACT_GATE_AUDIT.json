@@ -1,0 +1,366 @@
+{
+  "gates": [
+    {
+      "evidence_file": "LONDON_BAR_PROVENANCE.csv",
+      "failure_reason": "No immutable per-export run record binds the untracked historical CSV to exporter settings, account/server, or offset",
+      "gate_name": "provenance_completeness",
+      "instrument": "XAUUSD",
+      "observed_value": "PROVENANCE_CHAIN_INCOMPLETE",
+      "passed": false,
+      "required_value": "COMPLETE"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "Insufficient complete overlap days",
+      "gate_name": "tick_overlap_days",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=20"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "Insufficient comparable M5 bars",
+      "gate_name": "tick_overlap_bars",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=2000"
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_open_match",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_high_match",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_low_match",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_close_match",
+      "instrument": "XAUUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "No qualifying materially separated basis",
+      "gate_name": "alternative_basis_separation",
+      "instrument": "XAUUSD",
+      "observed_value": [],
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "No spread statistic meets frozen threshold",
+      "gate_name": "spread_match",
+      "instrument": "XAUUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "Stored MqlRates spread cannot be reconciled to tick statistics",
+      "gate_name": "spread_unit_conversion",
+      "instrument": "XAUUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMESTAMP_ALIGNMENT.csv",
+      "failure_reason": "No tested alignment meets OHLC thresholds",
+      "gate_name": "timestamp_alignment",
+      "instrument": "XAUUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "UNIQUE_PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "m15_consistency",
+      "instrument": "XAUUSD",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "h1_consistency",
+      "instrument": "XAUUSD",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_BAR_PROVENANCE.csv",
+      "failure_reason": "No immutable per-export run record binds the untracked historical CSV to exporter settings, account/server, or offset",
+      "gate_name": "provenance_completeness",
+      "instrument": "EURUSD",
+      "observed_value": "PROVENANCE_CHAIN_INCOMPLETE",
+      "passed": false,
+      "required_value": "COMPLETE"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "tick_overlap_days",
+      "instrument": "EURUSD",
+      "observed_value": 42,
+      "passed": true,
+      "required_value": ">=20"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "tick_overlap_bars",
+      "instrument": "EURUSD",
+      "observed_value": 8918,
+      "passed": true,
+      "required_value": ">=2000"
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_open_match",
+      "instrument": "EURUSD",
+      "observed_value": 0.006391567616057412,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_high_match",
+      "instrument": "EURUSD",
+      "observed_value": 0.0019062570082978246,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_low_match",
+      "instrument": "EURUSD",
+      "observed_value": 0.004373177842565598,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_close_match",
+      "instrument": "EURUSD",
+      "observed_value": 0.0051581071989235255,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "No qualifying materially separated basis",
+      "gate_name": "alternative_basis_separation",
+      "instrument": "EURUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "No spread statistic meets frozen threshold",
+      "gate_name": "spread_match",
+      "instrument": "EURUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "Stored MqlRates spread cannot be reconciled to tick statistics",
+      "gate_name": "spread_unit_conversion",
+      "instrument": "EURUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMESTAMP_ALIGNMENT.csv",
+      "failure_reason": "No tested alignment meets OHLC thresholds",
+      "gate_name": "timestamp_alignment",
+      "instrument": "EURUSD",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "UNIQUE_PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "m15_consistency",
+      "instrument": "EURUSD",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "h1_consistency",
+      "instrument": "EURUSD",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_BAR_PROVENANCE.csv",
+      "failure_reason": "No immutable per-export run record binds the untracked historical CSV to exporter settings, account/server, or offset",
+      "gate_name": "provenance_completeness",
+      "instrument": "USDJPY",
+      "observed_value": "PROVENANCE_CHAIN_INCOMPLETE",
+      "passed": false,
+      "required_value": "COMPLETE"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "tick_overlap_days",
+      "instrument": "USDJPY",
+      "observed_value": 42,
+      "passed": true,
+      "required_value": ">=20"
+    },
+    {
+      "evidence_file": "LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "tick_overlap_bars",
+      "instrument": "USDJPY",
+      "observed_value": 8916,
+      "passed": true,
+      "required_value": ">=2000"
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_open_match",
+      "instrument": "USDJPY",
+      "observed_value": 0.0026917900403768506,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_high_match",
+      "instrument": "USDJPY",
+      "observed_value": 0.0021310004486316736,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_low_match",
+      "instrument": "USDJPY",
+      "observed_value": 0.002579632122027815,
+      "passed": false,
+      "required_value": 0.995
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "Selected candidate does not meet frozen threshold",
+      "gate_name": "m5_close_match",
+      "instrument": "USDJPY",
+      "observed_value": 0.003813369223867205,
+      "passed": false,
+      "required_value": 0.9999
+    },
+    {
+      "evidence_file": "LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "failure_reason": "No qualifying materially separated basis",
+      "gate_name": "alternative_basis_separation",
+      "instrument": "USDJPY",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "No spread statistic meets frozen threshold",
+      "gate_name": "spread_match",
+      "instrument": "USDJPY",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "failure_reason": "Stored MqlRates spread cannot be reconciled to tick statistics",
+      "gate_name": "spread_unit_conversion",
+      "instrument": "USDJPY",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMESTAMP_ALIGNMENT.csv",
+      "failure_reason": "No tested alignment meets OHLC thresholds",
+      "gate_name": "timestamp_alignment",
+      "instrument": "USDJPY",
+      "observed_value": false,
+      "passed": false,
+      "required_value": "UNIQUE_PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "m15_consistency",
+      "instrument": "USDJPY",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "failure_reason": "",
+      "gate_name": "h1_consistency",
+      "instrument": "USDJPY",
+      "observed_value": true,
+      "passed": true,
+      "required_value": "PASS"
+    },
+    {
+      "evidence_file": "LONDON_INSTRUMENT_CLASSIFICATIONS.csv",
+      "failure_reason": "At least one instrument unresolved",
+      "gate_name": "all_three_instruments_resolved",
+      "instrument": "ALL",
+      "observed_value": false,
+      "passed": false,
+      "required_value": true
+    }
+  ],
+  "overall": "LONDON_QUOTE_CONTRACT_UNRESOLVED_CLOSE_BAR_ROUTE",
+  "schema_version": "london_quote_contract_gate_audit_v1"
+}

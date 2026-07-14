@@ -1,0 +1,19 @@
+{
+  "phase": "MULTIASSET_LONDON_BAR_QUOTE_CONTRACT_CLOSURE_V1",
+  "branch": "codex/multiasset-london-quote-contract-closure-v1",
+  "base_commit": "4a54f21a9735ba7cc3cbf6ae4b0800f84bcc0e46",
+  "base_tree": "29ac4126915019d1140c1c71429d724487984da3",
+  "parent": "4a54f21a9735ba7cc3cbf6ae4b0800f84bcc0e46",
+  "symbols": ["XAUUSD", "EURUSD", "USDJPY"],
+  "bar_end_exclusive": "2025-07-01T00:00:00Z",
+  "minimum_complete_days": 20,
+  "minimum_comparable_m5_bars": 2000,
+  "ohlc_thresholds": {"open": 0.9999, "high": 0.995, "low": 0.995, "close": 0.9999},
+  "alternative_percentage_point_separation": 0.25,
+  "alternative_median_error_ratio": 0.25,
+  "spread_exact_threshold": 0.995,
+  "spread_within_one_threshold": 0.999,
+  "spread_median_error_max_points": 0.25,
+  "parameter_changes": 0,
+  "evidence_runs": 2
+}

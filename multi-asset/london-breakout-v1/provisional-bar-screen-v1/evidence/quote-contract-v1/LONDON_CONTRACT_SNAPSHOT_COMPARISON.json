@@ -1,0 +1,188 @@
+{
+  "schema_version": "london_contract_snapshot_comparison_v1",
+  "symbols": {
+    "EURUSD": {
+      "current_observed_at_run_start": {
+        "contract_size": 100000.0,
+        "currency_base": "EUR",
+        "currency_margin": "EUR",
+        "currency_profit": "USD",
+        "digits": 5,
+        "point": 1e-05,
+        "spread_units": "POINTS_PER_MQLRATES_FIELD_UNRESOLVED_EMPIRICALLY",
+        "symbol": "EURUSD",
+        "tick_size": 1e-05,
+        "tick_value": 3.6715000000000004
+      },
+      "frozen": {
+        "available": true,
+        "contract_size": 100000.0,
+        "currency_base": "EUR",
+        "currency_margin": "EUR",
+        "currency_profit": "USD",
+        "digits": 5,
+        "exact_symbol_name": "EURUSD",
+        "order_calc_anchor_price": 1.13882,
+        "order_calc_margin_account_currency_min_volume": 41.84,
+        "order_calc_margin_usd_min_volume": 11.400544959128066,
+        "order_calc_profit_account_currency_one_point_min_volume": 0.04,
+        "point": 1e-05,
+        "swap_long": -11.08065989,
+        "swap_mode": 1,
+        "swap_rollover3days": 5,
+        "swap_short": 1.70833919,
+        "tick_probes": {
+          "full_period": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1741697665900,
+            "first_tick_utc": "2025-03-11T12:54:25.900000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2016-07-01T00:00:00+00:00",
+            "returned_count": 1
+          },
+          "locked_exam": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1751328000219,
+            "first_tick_utc": "2025-07-01T00:00:00.219000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2025-07-01T00:00:00+00:00",
+            "returned_count": 1
+          }
+        },
+        "volume_max": 100.0,
+        "volume_min": 0.01,
+        "volume_step": 0.01,
+        "zero_trade_action": true
+      },
+      "replacement_performed": false
+    },
+    "USDJPY": {
+      "current_observed_at_run_start": {
+        "contract_size": 100000.0,
+        "currency_base": "USD",
+        "currency_margin": "USD",
+        "currency_profit": "JPY",
+        "digits": 3,
+        "point": 0.001,
+        "spread_units": "POINTS_PER_MQLRATES_FIELD_UNRESOLVED_EMPIRICALLY",
+        "symbol": "USDJPY",
+        "tick_size": 0.001,
+        "tick_value": 2.2635355914230404
+      },
+      "frozen": {
+        "available": true,
+        "contract_size": 100000.0,
+        "currency_base": "USD",
+        "currency_margin": "USD",
+        "currency_profit": "JPY",
+        "digits": 3,
+        "exact_symbol_name": "USDJPY",
+        "order_calc_anchor_price": 162.318,
+        "order_calc_margin_account_currency_min_volume": 36.74,
+        "order_calc_margin_usd_min_volume": 10.010899182561309,
+        "order_calc_profit_account_currency_one_point_min_volume": 0.02,
+        "point": 0.001,
+        "swap_long": 9.32236224,
+        "swap_mode": 1,
+        "swap_rollover3days": 5,
+        "swap_short": -22.66506624,
+        "tick_probes": {
+          "full_period": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1741697666774,
+            "first_tick_utc": "2025-03-11T12:54:26.774000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2016-07-01T00:00:00+00:00",
+            "returned_count": 1
+          },
+          "locked_exam": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1751328000119,
+            "first_tick_utc": "2025-07-01T00:00:00.119000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2025-07-01T00:00:00+00:00",
+            "returned_count": 1
+          }
+        },
+        "volume_max": 100.0,
+        "volume_min": 0.01,
+        "volume_step": 0.01,
+        "zero_trade_action": true
+      },
+      "replacement_performed": false
+    },
+    "XAUUSD": {
+      "current_observed_at_run_start": {
+        "contract_size": 100.0,
+        "currency_base": "USD",
+        "currency_margin": "USD",
+        "currency_profit": "USD",
+        "digits": 2,
+        "point": 0.01,
+        "spread_units": "POINTS_PER_MQLRATES_FIELD_UNRESOLVED_EMPIRICALLY",
+        "symbol": "XAUUSD",
+        "tick_size": 0.01,
+        "tick_value": 3.6715
+      },
+      "frozen": {
+        "available": true,
+        "contract_size": 100.0,
+        "currency_base": "USD",
+        "currency_margin": "USD",
+        "currency_profit": "USD",
+        "digits": 2,
+        "exact_symbol_name": "XAUUSD",
+        "order_calc_anchor_price": 4028.09,
+        "order_calc_margin_account_currency_min_volume": 29.6,
+        "order_calc_margin_usd_min_volume": 8.065395095367847,
+        "order_calc_profit_account_currency_one_point_min_volume": 0.04,
+        "point": 0.01,
+        "swap_long": -5.760324,
+        "swap_mode": 5,
+        "swap_rollover3days": 5,
+        "swap_short": 2.8011239999999997,
+        "tick_probes": {
+          "full_period": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1778025600291,
+            "first_tick_utc": "2026-05-06T00:00:00.291000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2016-07-01T00:00:00+00:00",
+            "returned_count": 1
+          },
+          "locked_exam": {
+            "coverage_starts_on_time": false,
+            "first_tick_time_msc": 1778025600291,
+            "first_tick_utc": "2026-05-06T00:00:00.291000+00:00",
+            "last_error": [
+              1,
+              "Success"
+            ],
+            "requested_start": "2025-07-01T00:00:00+00:00",
+            "returned_count": 1
+          }
+        },
+        "volume_max": 1000.0,
+        "volume_min": 0.01,
+        "volume_step": 0.01,
+        "zero_trade_action": true
+      },
+      "replacement_performed": false
+    }
+  }
+}

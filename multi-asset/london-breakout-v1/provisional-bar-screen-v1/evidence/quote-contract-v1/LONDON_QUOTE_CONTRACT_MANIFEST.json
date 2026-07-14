@@ -1,0 +1,301 @@
+{
+  "base_commit": "4a54f21a9735ba7cc3cbf6ae4b0800f84bcc0e46",
+  "base_tree": "29ac4126915019d1140c1c71429d724487984da3",
+  "branch": "codex/multiasset-london-quote-contract-closure-v1",
+  "code_and_tests": [
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/config.json",
+      "sha256": "b491addac0b2d83603ad95f91f40c8b7407e5b9d767a0dd12ba85e2235b7d201",
+      "size_bytes": 810
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/quote_contract.py",
+      "sha256": "dd181b8aecc7b6fa95f5a0d6d9f15da1bd7e51db472184df491af7974f956d7b",
+      "size_bytes": 6548
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/run_quote_contract_audit.py",
+      "sha256": "5055660383b5dc2ee2aeabe174ec29651d6a188d10dcbeada6bc34f5ecf51bb6",
+      "size_bytes": 32398
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/tests/conftest.py",
+      "sha256": "22660366df348b7dd798985864fef8b45832ed455f8bb8e8a96a1683ab21318e",
+      "size_bytes": 110
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/tests/test_quote_contract.py",
+      "sha256": "a7c02a65e34b1c4ed9a544b433eef2d557036ba51fbb638d42d37a1b75461a2c",
+      "size_bytes": 6258
+    }
+  ],
+  "contract_snapshots": [
+    {
+      "path": "multi-asset/london-breakout-v1/evidence/CAPITAL_COM_CONTRACT_AND_TICK_PROBE.json",
+      "sha256": "94777e96273a4f5c134df7bc4ddd05e7337e3866015c14c394236934927f0e0c",
+      "size_bytes": 6169
+    }
+  ],
+  "deterministic_replay_match": true,
+  "environment": {
+    "MetaTrader5": "5.0.5735",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytest": "9.1.1",
+    "python": "3.12.13"
+  },
+  "exact_symbols": [
+    "XAUUSD",
+    "EURUSD",
+    "USDJPY"
+  ],
+  "exporter_sources": [
+    {
+      "path": "xau-usd/xauusd-phase0/mt5/PassiveBarExporter_Phase0.mq5",
+      "sha256": "74e9efe679b45d0e314bebe492547c478300b0a58e833b49f67f2035fce178b7",
+      "size_bytes": 5550
+    }
+  ],
+  "final_commit": null,
+  "final_tree": null,
+  "historical_bars": [
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "dee59c0da3bdc74df943054015813920271115cb614e38e03695e2299bed8ba4",
+      "size_bytes": 39808345
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "ae5de2cc6f62139f350e1b700688372bba4b02d8b40daad3d41c0f563a521e72",
+      "size_bytes": 13437609
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "ac2930c4dfcf30fa902ea99a87d97570a519d98839abbba21d2ac8f94ab15e87",
+      "size_bytes": 3388656
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "efc2324985c38e007d18e5aa8f2696c5dd4083c0aaa5bc842b3846cb080cae3b",
+      "size_bytes": 41637824
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "4422c23fb34e90662dbeaece3e7c813ae865fcd7bc6194efc45fae078c5c7e14",
+      "size_bytes": 13998711
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "9db0146429afffae006a4c145988034ea2b98805680409362f87811c05faf32d",
+      "size_bytes": 3536076
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M5_20160101_20250630_capital_com.csv",
+      "sha256": "2047ceb88b60bd6a027e83ae13b95382916486c1f091ce6aa64a7d4751e22eba",
+      "size_bytes": 41743102
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M15_20160101_20250630_capital_com.csv",
+      "sha256": "04e6420923c80b60c7d65e2fd9cc972d0c5c77622e93ea752d68167f68334ee2",
+      "size_bytes": 14032766
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_H1_20160101_20250630_capital_com.csv",
+      "sha256": "fce7dc9d6a87c3eb515ac5ad73020bf7c3942b83f5ddcb0f5b073452f203298c",
+      "size_bytes": 3544124
+    }
+  ],
+  "identity_checks": {
+    "clean_detached_worktree": true,
+    "direct_parent_verified": true,
+    "phase1_monitor_changes_present": false
+  },
+  "manifest_excludes_self_hash": true,
+  "outputs": [
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_QUOTE_CONTRACT_RESULT.md",
+      "sha256": "ea8ce67707b032e5b795e742bf43be53f97c14da75d83254f7f951036f6fcc29",
+      "size_bytes": 4128
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_QUOTE_CONTRACT_RESULT.json",
+      "sha256": "9136ed3281f2b6b900c73489c3eac4b90130a2679c41ff2ee1c816d04621368c",
+      "size_bytes": 953
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_BAR_PROVENANCE.csv",
+      "sha256": "e6b62ced8f753a35c28256f18177fd4b0a942b125e70d2afa1f76ae659fb7478",
+      "size_bytes": 4062
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_EXPORTER_SOURCE_INVENTORY.csv",
+      "sha256": "4b1c2e222664ca4b8bc47306560b4645e8ce23b2ea3a80e5beefd02e6941d411",
+      "size_bytes": 440
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_TICK_OVERLAP_INVENTORY.csv",
+      "sha256": "91e399683ffe57a5dc849bc55610f4b758d967712002017957931cbd6ff9fe3c",
+      "size_bytes": 890
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_TICK_INTEGRITY_REPORT.csv",
+      "sha256": "770a5598f7d9e6a2f9fd55a908b46ebb5a4071488df3774513c459f087fe6e9e",
+      "size_bytes": 262
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_TIMESTAMP_ALIGNMENT.csv",
+      "sha256": "09bed4e94efbe5c60621483f3d2e75c2a14961381fb9a3f1b6fbd8be6ae405f8",
+      "size_bytes": 2870318
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_QUOTE_BASIS_COMPARISON.csv",
+      "sha256": "acdcfb09198d10117816bd290e9ad948bd813579acbf6468a3337a2ce5524913",
+      "size_bytes": 17158
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_QUOTE_BASIS_MISMATCHES.csv",
+      "sha256": "2238008862466cfc3592ae8551118dc312763493e755becd29c2366d78ab1278",
+      "size_bytes": 5357001
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_SPREAD_SEMANTICS_COMPARISON.csv",
+      "sha256": "3a33292e32d491dc43ee073e88b85b73f58c63b04be8477380fdb90c1ac4412c",
+      "size_bytes": 2021
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_SPREAD_MISMATCHES.csv",
+      "sha256": "270ac081ae58c652b894811bd9ca69c53460b9fd066026223449df74ca3ab29c",
+      "size_bytes": 9823689
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_TIMEFRAME_RECONCILIATION.csv",
+      "sha256": "94f43c5ddc7184bd6953011d3e7edd11d9437df2c29a88bac73da224c24847b3",
+      "size_bytes": 506
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_CONTRACT_SNAPSHOT_COMPARISON.json",
+      "sha256": "5d1a281174e617a0310ab1c418089628186f2ca0e289a41b0982924b6ff4deaa",
+      "size_bytes": 6121
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_INSTRUMENT_CLASSIFICATIONS.csv",
+      "sha256": "2b17add4d0c9d49cc452e673e5bca13d513dfa956e982cba78d85cd741ac329c",
+      "size_bytes": 445
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/evidence/quote-contract-v1/LONDON_QUOTE_CONTRACT_GATE_AUDIT.json",
+      "sha256": "43bfd5a7e1bebd7463fa3ff97a86a28b4e7709d1721bd5b4a54d64f73e5d03f8",
+      "size_bytes": 12170
+    }
+  ],
+  "parent": "4a54f21a9735ba7cc3cbf6ae4b0800f84bcc0e46",
+  "run_one_hashes": {
+    "LONDON_BAR_PROVENANCE.csv": "e6b62ced8f753a35c28256f18177fd4b0a942b125e70d2afa1f76ae659fb7478",
+    "LONDON_CONTRACT_SNAPSHOT_COMPARISON.json": "5d1a281174e617a0310ab1c418089628186f2ca0e289a41b0982924b6ff4deaa",
+    "LONDON_EXPORTER_SOURCE_INVENTORY.csv": "4b1c2e222664ca4b8bc47306560b4645e8ce23b2ea3a80e5beefd02e6941d411",
+    "LONDON_INSTRUMENT_CLASSIFICATIONS.csv": "2b17add4d0c9d49cc452e673e5bca13d513dfa956e982cba78d85cd741ac329c",
+    "LONDON_QUOTE_BASIS_COMPARISON.csv": "acdcfb09198d10117816bd290e9ad948bd813579acbf6468a3337a2ce5524913",
+    "LONDON_QUOTE_BASIS_MISMATCHES.csv": "2238008862466cfc3592ae8551118dc312763493e755becd29c2366d78ab1278",
+    "LONDON_QUOTE_CONTRACT_GATE_AUDIT.json": "43bfd5a7e1bebd7463fa3ff97a86a28b4e7709d1721bd5b4a54d64f73e5d03f8",
+    "LONDON_QUOTE_CONTRACT_RESULT.json": "9136ed3281f2b6b900c73489c3eac4b90130a2679c41ff2ee1c816d04621368c",
+    "LONDON_QUOTE_CONTRACT_RESULT.md": "ea8ce67707b032e5b795e742bf43be53f97c14da75d83254f7f951036f6fcc29",
+    "LONDON_SPREAD_MISMATCHES.csv": "270ac081ae58c652b894811bd9ca69c53460b9fd066026223449df74ca3ab29c",
+    "LONDON_SPREAD_SEMANTICS_COMPARISON.csv": "3a33292e32d491dc43ee073e88b85b73f58c63b04be8477380fdb90c1ac4412c",
+    "LONDON_TICK_INTEGRITY_REPORT.csv": "770a5598f7d9e6a2f9fd55a908b46ebb5a4071488df3774513c459f087fe6e9e",
+    "LONDON_TICK_OVERLAP_INVENTORY.csv": "91e399683ffe57a5dc849bc55610f4b758d967712002017957931cbd6ff9fe3c",
+    "LONDON_TIMEFRAME_RECONCILIATION.csv": "94f43c5ddc7184bd6953011d3e7edd11d9437df2c29a88bac73da224c24847b3",
+    "LONDON_TIMESTAMP_ALIGNMENT.csv": "09bed4e94efbe5c60621483f3d2e75c2a14961381fb9a3f1b6fbd8be6ae405f8"
+  },
+  "run_two_hashes": {
+    "LONDON_BAR_PROVENANCE.csv": "e6b62ced8f753a35c28256f18177fd4b0a942b125e70d2afa1f76ae659fb7478",
+    "LONDON_CONTRACT_SNAPSHOT_COMPARISON.json": "5d1a281174e617a0310ab1c418089628186f2ca0e289a41b0982924b6ff4deaa",
+    "LONDON_EXPORTER_SOURCE_INVENTORY.csv": "4b1c2e222664ca4b8bc47306560b4645e8ce23b2ea3a80e5beefd02e6941d411",
+    "LONDON_INSTRUMENT_CLASSIFICATIONS.csv": "2b17add4d0c9d49cc452e673e5bca13d513dfa956e982cba78d85cd741ac329c",
+    "LONDON_QUOTE_BASIS_COMPARISON.csv": "acdcfb09198d10117816bd290e9ad948bd813579acbf6468a3337a2ce5524913",
+    "LONDON_QUOTE_BASIS_MISMATCHES.csv": "2238008862466cfc3592ae8551118dc312763493e755becd29c2366d78ab1278",
+    "LONDON_QUOTE_CONTRACT_GATE_AUDIT.json": "43bfd5a7e1bebd7463fa3ff97a86a28b4e7709d1721bd5b4a54d64f73e5d03f8",
+    "LONDON_QUOTE_CONTRACT_RESULT.json": "9136ed3281f2b6b900c73489c3eac4b90130a2679c41ff2ee1c816d04621368c",
+    "LONDON_QUOTE_CONTRACT_RESULT.md": "ea8ce67707b032e5b795e742bf43be53f97c14da75d83254f7f951036f6fcc29",
+    "LONDON_SPREAD_MISMATCHES.csv": "270ac081ae58c652b894811bd9ca69c53460b9fd066026223449df74ca3ab29c",
+    "LONDON_SPREAD_SEMANTICS_COMPARISON.csv": "3a33292e32d491dc43ee073e88b85b73f58c63b04be8477380fdb90c1ac4412c",
+    "LONDON_TICK_INTEGRITY_REPORT.csv": "770a5598f7d9e6a2f9fd55a908b46ebb5a4071488df3774513c459f087fe6e9e",
+    "LONDON_TICK_OVERLAP_INVENTORY.csv": "91e399683ffe57a5dc849bc55610f4b758d967712002017957931cbd6ff9fe3c",
+    "LONDON_TIMEFRAME_RECONCILIATION.csv": "94f43c5ddc7184bd6953011d3e7edd11d9437df2c29a88bac73da224c24847b3",
+    "LONDON_TIMESTAMP_ALIGNMENT.csv": "09bed4e94efbe5c60621483f3d2e75c2a14961381fb9a3f1b6fbd8be6ae405f8"
+  },
+  "schema_version": "london_quote_contract_manifest_v1",
+  "self_reference_note": "Final commit/tree are reported externally because embedding them changes the commit itself.",
+  "strategy_contract_hashes_after": {
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/config/provisional_bar_screen_v1.json": "58e5b01bf7bc4e43f519977cd0e38119497d3ce9f3a65cbd4df4c6d88f0df06b",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/run_provisional_screen.py": "1a344624a6451c4706de5a35ea5aabbd1bed877b206134502d49792393c80443",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/provisional_gate.py": "242d630b2fa7acfb3337d2ebaf09ef73a68e70a463cd5c6053beefc6c0ba1ed0",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/research_contract.py": "9b39b35d85f61a60bf2489de8dadfc64ad6db42088ce7f03adca63b0e470228b"
+  },
+  "strategy_contract_hashes_before": {
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/config/provisional_bar_screen_v1.json": "58e5b01bf7bc4e43f519977cd0e38119497d3ce9f3a65cbd4df4c6d88f0df06b",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/run_provisional_screen.py": "1a344624a6451c4706de5a35ea5aabbd1bed877b206134502d49792393c80443",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/provisional_gate.py": "242d630b2fa7acfb3337d2ebaf09ef73a68e70a463cd5c6053beefc6c0ba1ed0",
+    "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/research_contract.py": "9b39b35d85f61a60bf2489de8dadfc64ad6db42088ce7f03adca63b0e470228b"
+  },
+  "strategy_contract_hashes_unchanged": true,
+  "tick_data_sources": [
+    {
+      "instrument": "XAUUSD",
+      "logical_source": "Capital.ComMena-Demo:XAUUSD:COPY_TICKS_ALL",
+      "tick_count": 0,
+      "tick_identity_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "instrument": "EURUSD",
+      "logical_source": "Capital.ComMena-Demo:EURUSD:COPY_TICKS_ALL",
+      "tick_count": 3056796,
+      "tick_identity_sha256": "01af47c8ea1b44964471d2438dcc8749b85a989252f354fe502ed351ea7b0b92"
+    },
+    {
+      "instrument": "USDJPY",
+      "logical_source": "Capital.ComMena-Demo:USDJPY:COPY_TICKS_ALL",
+      "tick_count": 3466206,
+      "tick_identity_sha256": "362f170aaa889e8f05a16c5b7953a63933ba129a812bfb080d0e716f7806f406"
+    }
+  ],
+  "tick_overlap_ranges": [
+    {
+      "comparable_m5_bars": 0,
+      "complete_trading_days": 0,
+      "instrument": "XAUUSD",
+      "overlap_final_tick_utc": "",
+      "overlap_first_tick_utc": "",
+      "repository_final_bar_utc": "2025-06-30T23:55:00+00:00",
+      "repository_first_bar_utc": "2016-01-03T22:05:00+00:00",
+      "status": "INSUFFICIENT_TICK_OVERLAP",
+      "terminal_first_tick_utc": "2026-02-23T00:00:00.986000+00:00",
+      "tick_count": 0,
+      "tick_identity_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "comparable_m5_bars": 8918,
+      "complete_trading_days": 42,
+      "instrument": "EURUSD",
+      "overlap_final_tick_utc": "2025-06-30T23:59:55.563000+00:00",
+      "overlap_first_tick_utc": "2025-03-11T12:54:25.900000+00:00",
+      "repository_final_bar_utc": "2025-06-30T23:55:00+00:00",
+      "repository_first_bar_utc": "2016-01-03T21:00:00+00:00",
+      "status": "PASS",
+      "terminal_first_tick_utc": "2025-03-11T12:54:25.900000+00:00",
+      "tick_count": 3056796,
+      "tick_identity_sha256": "01af47c8ea1b44964471d2438dcc8749b85a989252f354fe502ed351ea7b0b92"
+    },
+    {
+      "comparable_m5_bars": 8916,
+      "complete_trading_days": 42,
+      "instrument": "USDJPY",
+      "overlap_final_tick_utc": "2025-06-30T23:59:54.050000+00:00",
+      "overlap_first_tick_utc": "2025-03-11T12:54:26.774000+00:00",
+      "repository_final_bar_utc": "2025-06-30T23:55:00+00:00",
+      "repository_first_bar_utc": "2016-01-03T21:00:00+00:00",
+      "status": "PASS",
+      "terminal_first_tick_utc": "2025-03-11T12:54:26.774000+00:00",
+      "tick_count": 3466206,
+      "tick_identity_sha256": "362f170aaa889e8f05a16c5b7953a63933ba129a812bfb080d0e716f7806f406"
+    }
+  ]
+}

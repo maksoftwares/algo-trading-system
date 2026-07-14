@@ -1,0 +1,4 @@
+instrument,tick_count,duplicate_tick_count,decreasing_tick_count,crossed_market_count,zero_bid_ask_count,missing_bid_ask_count,session_or_weekend_gap_count_gt_5m,passed
+XAUUSD,0,0,0,0,0,0,0,False
+EURUSD,3056796,6,0,0,0,0,25,True
+USDJPY,3466206,5,0,0,0,0,28,True
