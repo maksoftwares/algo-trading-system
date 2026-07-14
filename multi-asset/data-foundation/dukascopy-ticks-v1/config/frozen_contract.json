@@ -1,0 +1,18 @@
+{
+  "phase": "DUKASCOPY_MULTI_ASSET_TICK_DATA_FOUNDATION_V1",
+  "period_start_utc": "2016-07-01T00:00:00.000Z",
+  "period_end_utc": "2026-06-30T23:59:59.999Z",
+  "instruments": ["EURUSD", "GBPUSD", "USDJPY", "XAUUSD"],
+  "price_bases": ["Bid", "Ask", "Mid"],
+  "timeframes": ["M1", "M5", "M15", "H1", "H4", "D1"],
+  "source": "OFFICIAL_DUKASCOPY_JETTA_V1",
+  "source_origin": "https://jetta.dukascopy.com/v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "max_concurrency": 4,
+  "retry_count_after_initial_attempt": 1,
+  "classifications": ["READY", "PARTIAL_NOT_READY", "INVALID"],
+  "strategy_scoring_authorized": false,
+  "mt5_strategy_tester_authorized": false,
+  "broker_action_authorized": false,
+  "deployment_authorized": false
+}

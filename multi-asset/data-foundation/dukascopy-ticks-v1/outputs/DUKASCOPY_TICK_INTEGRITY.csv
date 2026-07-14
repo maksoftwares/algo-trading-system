@@ -1,0 +1,5 @@
+symbol,month,tick_count,exact_duplicate_count,conflicting_same_timestamp_count,negative_spread_count,zero_spread_count,gaps_over_60s,longest_gap_ms
+EURUSD,2016-07,4201709,0,0,0,0,101,173043443
+GBPUSD,2016-07,3885010,0,0,0,0,67,172906757
+USDJPY,2016-07,3951312,0,0,0,0,105,172838931
+XAUUSD,2016-07,3984621,0,0,0,0,25,176461549
