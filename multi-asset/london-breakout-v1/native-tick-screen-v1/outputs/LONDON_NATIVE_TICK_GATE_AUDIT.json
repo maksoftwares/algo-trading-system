@@ -1,0 +1,166 @@
+{
+  "classification": "LONDON_NATIVE_TICK_V1_DATA_INVALID",
+  "gates": [
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "No ticks on mandatory first day",
+      "gate_name": "required_start_day_coverage",
+      "instrument": "EURUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "required_end_day_coverage",
+      "instrument": "EURUSD",
+      "observed_value": 76303,
+      "passed": true,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "No ticks on mandatory first day",
+      "gate_name": "required_start_day_coverage",
+      "instrument": "GBPUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "required_end_day_coverage",
+      "instrument": "GBPUSD",
+      "observed_value": 100332,
+      "passed": true,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "No ticks on mandatory first day",
+      "gate_name": "required_start_day_coverage",
+      "instrument": "USDJPY",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "",
+      "gate_name": "required_end_day_coverage",
+      "instrument": "USDJPY",
+      "observed_value": 74988,
+      "passed": true,
+      "required_value": ">0 ticks",
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "failure_reason": "All three fail the mandatory start date",
+      "gate_name": "all_three_complete_common_coverage",
+      "instrument": "ALL",
+      "observed_value": false,
+      "passed": false,
+      "required_value": true,
+      "scope": "DATA"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "instrument_frequency",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "portfolio_frequency",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "instrument_profitability",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "portfolio_profitability",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "locked_exam",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "drawdown",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "concentration",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "account_sizing_rejection",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "LONDON_NATIVE_TICK_RESULT.json",
+      "failure_reason": "Common coverage gate failed",
+      "gate_name": "deterministic_economic_screen",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_DATA_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    }
+  ],
+  "schema_version": "london_native_tick_gate_audit_v1"
+}

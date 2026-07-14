@@ -1,0 +1,350 @@
+{
+  "account_server_identity": {
+    "account_currency": "AED",
+    "account_login_omitted": true,
+    "server": "Capital.ComMena-Demo"
+  },
+  "base_commit": "d95849d2dc97b0a6a54b49e5607e3420bf2dbd45",
+  "base_tree": "de677c6b6a744b6b1298d0b9ed51a3feacb3ad64",
+  "branch": "codex/multiasset-london-native-tick-screen-v1",
+  "classification": "LONDON_NATIVE_TICK_V1_DATA_INVALID",
+  "code_and_tests": [
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/config/native_tick_screen_v1.json",
+      "sha256": "1e611f6d5338802da18783b43f9d994c40f352679204b0e53c6f2164663fd5a5",
+      "size_bytes": 1416
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/run_native_tick_screen.py",
+      "sha256": "ffbdcb9621227b5cc117d6323edcc1a53e583a407ca28cb3338dee0c6fe2b335",
+      "size_bytes": 17042
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/src/__init__.py",
+      "sha256": "4975d0188f111f24a174b9c3e091dd449139733fa27e0499ad7a6ad8bfb0ecbc",
+      "size_bytes": 52
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/src/native_tick_contract.py",
+      "sha256": "8ea61d810026076a5bc1d3020cad0551af17de2e27c5fb2917cf36fe40ab3ca4",
+      "size_bytes": 7819
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/tests/conftest.py",
+      "sha256": "927c35d1f52cb9e4386d3a5ec8c6acbc33be7abc14e8d7461ce126602f4e57a7",
+      "size_bytes": 107
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/tests/test_native_tick_contract.py",
+      "sha256": "d0c294f2ea463efa548421d9e7684217b285263d4a3a5c16ff7bdcb6ff094e90",
+      "size_bytes": 8407
+    }
+  ],
+  "complete_economic_screens": 0,
+  "config": {
+    "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/config/native_tick_screen_v1.json",
+    "sha256": "1e611f6d5338802da18783b43f9d994c40f352679204b0e53c6f2164663fd5a5",
+    "size_bytes": 1416
+  },
+  "contracts": {
+    "EURUSD": {
+      "commission_model": "NOT_REPORTED_NONZERO_IN_FROZEN_SNAPSHOT",
+      "contract_size": 100000.0,
+      "digits": 5,
+      "exact_symbol": "EURUSD",
+      "logical_symbol": "EURUSD",
+      "margin_calculation_mode": 0,
+      "point": 1e-05,
+      "quote_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "swap_long": -11.08065989,
+      "swap_mode": 1,
+      "swap_short": 1.70833919,
+      "tick_size": 1e-05,
+      "tick_value": 3.6715000000000004,
+      "trading_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "triple_rollover_day": 5,
+      "volume_max": 100.0,
+      "volume_min": 0.01,
+      "volume_step": 0.01
+    },
+    "GBPUSD": {
+      "commission_model": "NOT_REPORTED_NONZERO_IN_FROZEN_SNAPSHOT",
+      "contract_size": 100000.0,
+      "digits": 5,
+      "exact_symbol": "GBPUSD",
+      "logical_symbol": "GBPUSD",
+      "margin_calculation_mode": 0,
+      "point": 1e-05,
+      "quote_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "swap_long": -5.29590295,
+      "swap_mode": 1,
+      "swap_short": -5.70266255,
+      "tick_size": 1e-05,
+      "tick_value": 3.6715000000000004,
+      "trading_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "triple_rollover_day": 5,
+      "volume_max": 100.0,
+      "volume_min": 0.01,
+      "volume_step": 0.01
+    },
+    "USDJPY": {
+      "commission_model": "NOT_REPORTED_NONZERO_IN_FROZEN_SNAPSHOT",
+      "contract_size": 100000.0,
+      "digits": 3,
+      "exact_symbol": "USDJPY",
+      "logical_symbol": "USDJPY",
+      "margin_calculation_mode": 0,
+      "point": 0.001,
+      "quote_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "swap_long": 9.32236224,
+      "swap_mode": 1,
+      "swap_short": -22.66506624,
+      "tick_size": 0.001,
+      "tick_value": 2.2632146709816614,
+      "trading_sessions": "READ_ONLY_TERMINAL_SESSION_METADATA_NOT_EXPOSED_BY_PYTHON_BINDING",
+      "triple_rollover_day": 5,
+      "volume_max": 100.0,
+      "volume_min": 0.01,
+      "volume_step": 0.01
+    }
+  },
+  "deterministic_replay_match": true,
+  "environment": {
+    "MetaTrader5": "5.0.5735",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytest": "9.1.1",
+    "python": "3.12.13"
+  },
+  "exact_symbols": {
+    "EURUSD": "EURUSD",
+    "GBPUSD": "GBPUSD",
+    "USDJPY": "USDJPY"
+  },
+  "frozen_development_p95": {
+    "EURUSD": "NOT_COMPUTED_DATA_GATE_STOP",
+    "GBPUSD": "NOT_COMPUTED_DATA_GATE_STOP",
+    "USDJPY": "NOT_COMPUTED_DATA_GATE_STOP"
+  },
+  "identity_checks": {
+    "clean_worktree_before_changes": true,
+    "direct_base_verified": true,
+    "files_outside_permitted_scope": 0,
+    "phase1_monitor_changes_present": false
+  },
+  "manifest_excludes_self_hash": true,
+  "no_absolute_paths": true,
+  "outputs": [
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_RESULT.md",
+      "sha256": "6579050e0050fc7c980fe6caacc857d4126e7e5e92a7fe21031005dcd11266e1",
+      "size_bytes": 599
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_RESULT.json",
+      "sha256": "08b4fc8b65fb80a65c629e8ef182ff9b2950b08738756b7d9706a7ec2f1e8005",
+      "size_bytes": 901
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_DATA_INVENTORY.csv",
+      "sha256": "577d96c5f4a4b94c9ea06cdcd25ff707055512ac4e9e5cc47ca1514d400eb48d",
+      "size_bytes": 1372
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_INTEGRITY.csv",
+      "sha256": "f8fc7152f971bd8a47a6f9d906f9ced40448c3605c328793fd685f738f2a9ba8",
+      "size_bytes": 762
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_BAR_CENSUS.csv",
+      "sha256": "3dd94bafc93351791fd2881436e8c87701f1df79dd4dd918b3ff84854e25f82b",
+      "size_bytes": 68
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_SIGNAL_LEDGER.csv",
+      "sha256": "a8f8260bfac9728f7dcf8c23666a49f35b01e36a2c7d4d34e7041dec3669fb73",
+      "size_bytes": 488
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_TRADE_LEDGER.csv",
+      "sha256": "a93a2d0ae89580c5eb5de0f39f7afece22b95389c2be863868434f5922896b35",
+      "size_bytes": 518
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_SIGNAL_FUNNEL.csv",
+      "sha256": "b05af6513a4b7b5e18eda328f5a58f06eea4813cee946f6958eaefb92240a23d",
+      "size_bytes": 30
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_INSTRUMENT_RESULTS.csv",
+      "sha256": "e34f6c879823d01e302c3540599e9008b1daf6292c6ce6e73beb4ad9c3e0f7e1",
+      "size_bytes": 134
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_DIRECTION_RESULTS.csv",
+      "sha256": "143a84dad8f4e78b3918919905f9268c363b31f77a65ca5a1fb5d63af934d0cf",
+      "size_bytes": 41
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_SEGMENT_RESULTS.csv",
+      "sha256": "df06e68619ae10de3108df9dea6d04c9ce0469ddc33c02357cf5a55831b0a381",
+      "size_bytes": 39
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_MONTHLY_RESULTS.csv",
+      "sha256": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+      "size_bytes": 37
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_PORTFOLIO_RESULTS.csv",
+      "sha256": "88b4049996e566c806ff8bebf0fb2cc24157348605f94c2a6d2a8ad82f913b9f",
+      "size_bytes": 46
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_ROLLING_RESULTS.csv",
+      "sha256": "684d9eab8812ac723b281f0d74def4c2b9e8f2c226fd8fe98af1a5afe8d6f038",
+      "size_bytes": 27
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_SPREAD_DIAGNOSTICS.csv",
+      "sha256": "b6a0d6a6711ee0237a666723379d2b52efe47597c9ab3b8792dc915d8bc6b5a3",
+      "size_bytes": 56
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_EXECUTION_DIAGNOSTICS.csv",
+      "sha256": "12e02cc57300669dfeec76a7d61615d2343061cdff7f093f605bbf16b8e652da",
+      "size_bytes": 47
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_CORRELATION.csv",
+      "sha256": "fe6c6f9fcd05b29b892599ae2be78929c3468fa6bd889d3f71bd709f9a517fa9",
+      "size_bytes": 53
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_ACCOUNT_FEASIBILITY.csv",
+      "sha256": "5eefd6a8b4461fbc465c445a8b0cadc0374043bf798b3e0b614dce003510036a",
+      "size_bytes": 100
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/outputs/LONDON_NATIVE_TICK_GATE_AUDIT.json",
+      "sha256": "d628b8169dcce8e7eab4c51c8ea076d963c5d904b969a70ae3eb516628f269f4",
+      "size_bytes": 5365
+    }
+  ],
+  "parameter_search_count": 0,
+  "parent": "d95849d2dc97b0a6a54b49e5607e3420bf2dbd45",
+  "resulting_commit": null,
+  "resulting_tree": null,
+  "run_one_hashes": {
+    "LONDON_NATIVE_TICK_ACCOUNT_FEASIBILITY.csv": "5eefd6a8b4461fbc465c445a8b0cadc0374043bf798b3e0b614dce003510036a",
+    "LONDON_NATIVE_TICK_BAR_CENSUS.csv": "3dd94bafc93351791fd2881436e8c87701f1df79dd4dd918b3ff84854e25f82b",
+    "LONDON_NATIVE_TICK_CORRELATION.csv": "fe6c6f9fcd05b29b892599ae2be78929c3468fa6bd889d3f71bd709f9a517fa9",
+    "LONDON_NATIVE_TICK_DATA_INVENTORY.csv": "577d96c5f4a4b94c9ea06cdcd25ff707055512ac4e9e5cc47ca1514d400eb48d",
+    "LONDON_NATIVE_TICK_DIRECTION_RESULTS.csv": "143a84dad8f4e78b3918919905f9268c363b31f77a65ca5a1fb5d63af934d0cf",
+    "LONDON_NATIVE_TICK_EXECUTION_DIAGNOSTICS.csv": "12e02cc57300669dfeec76a7d61615d2343061cdff7f093f605bbf16b8e652da",
+    "LONDON_NATIVE_TICK_GATE_AUDIT.json": "d628b8169dcce8e7eab4c51c8ea076d963c5d904b969a70ae3eb516628f269f4",
+    "LONDON_NATIVE_TICK_INSTRUMENT_RESULTS.csv": "e34f6c879823d01e302c3540599e9008b1daf6292c6ce6e73beb4ad9c3e0f7e1",
+    "LONDON_NATIVE_TICK_INTEGRITY.csv": "f8fc7152f971bd8a47a6f9d906f9ced40448c3605c328793fd685f738f2a9ba8",
+    "LONDON_NATIVE_TICK_MONTHLY_RESULTS.csv": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+    "LONDON_NATIVE_TICK_PORTFOLIO_RESULTS.csv": "88b4049996e566c806ff8bebf0fb2cc24157348605f94c2a6d2a8ad82f913b9f",
+    "LONDON_NATIVE_TICK_RESULT.json": "08b4fc8b65fb80a65c629e8ef182ff9b2950b08738756b7d9706a7ec2f1e8005",
+    "LONDON_NATIVE_TICK_RESULT.md": "6579050e0050fc7c980fe6caacc857d4126e7e5e92a7fe21031005dcd11266e1",
+    "LONDON_NATIVE_TICK_ROLLING_RESULTS.csv": "684d9eab8812ac723b281f0d74def4c2b9e8f2c226fd8fe98af1a5afe8d6f038",
+    "LONDON_NATIVE_TICK_SEGMENT_RESULTS.csv": "df06e68619ae10de3108df9dea6d04c9ce0469ddc33c02357cf5a55831b0a381",
+    "LONDON_NATIVE_TICK_SIGNAL_FUNNEL.csv": "b05af6513a4b7b5e18eda328f5a58f06eea4813cee946f6958eaefb92240a23d",
+    "LONDON_NATIVE_TICK_SIGNAL_LEDGER.csv": "a8f8260bfac9728f7dcf8c23666a49f35b01e36a2c7d4d34e7041dec3669fb73",
+    "LONDON_NATIVE_TICK_SPREAD_DIAGNOSTICS.csv": "b6a0d6a6711ee0237a666723379d2b52efe47597c9ab3b8792dc915d8bc6b5a3",
+    "LONDON_NATIVE_TICK_TRADE_LEDGER.csv": "a93a2d0ae89580c5eb5de0f39f7afece22b95389c2be863868434f5922896b35"
+  },
+  "run_two_hashes": {
+    "LONDON_NATIVE_TICK_ACCOUNT_FEASIBILITY.csv": "5eefd6a8b4461fbc465c445a8b0cadc0374043bf798b3e0b614dce003510036a",
+    "LONDON_NATIVE_TICK_BAR_CENSUS.csv": "3dd94bafc93351791fd2881436e8c87701f1df79dd4dd918b3ff84854e25f82b",
+    "LONDON_NATIVE_TICK_CORRELATION.csv": "fe6c6f9fcd05b29b892599ae2be78929c3468fa6bd889d3f71bd709f9a517fa9",
+    "LONDON_NATIVE_TICK_DATA_INVENTORY.csv": "577d96c5f4a4b94c9ea06cdcd25ff707055512ac4e9e5cc47ca1514d400eb48d",
+    "LONDON_NATIVE_TICK_DIRECTION_RESULTS.csv": "143a84dad8f4e78b3918919905f9268c363b31f77a65ca5a1fb5d63af934d0cf",
+    "LONDON_NATIVE_TICK_EXECUTION_DIAGNOSTICS.csv": "12e02cc57300669dfeec76a7d61615d2343061cdff7f093f605bbf16b8e652da",
+    "LONDON_NATIVE_TICK_GATE_AUDIT.json": "d628b8169dcce8e7eab4c51c8ea076d963c5d904b969a70ae3eb516628f269f4",
+    "LONDON_NATIVE_TICK_INSTRUMENT_RESULTS.csv": "e34f6c879823d01e302c3540599e9008b1daf6292c6ce6e73beb4ad9c3e0f7e1",
+    "LONDON_NATIVE_TICK_INTEGRITY.csv": "f8fc7152f971bd8a47a6f9d906f9ced40448c3605c328793fd685f738f2a9ba8",
+    "LONDON_NATIVE_TICK_MONTHLY_RESULTS.csv": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+    "LONDON_NATIVE_TICK_PORTFOLIO_RESULTS.csv": "88b4049996e566c806ff8bebf0fb2cc24157348605f94c2a6d2a8ad82f913b9f",
+    "LONDON_NATIVE_TICK_RESULT.json": "08b4fc8b65fb80a65c629e8ef182ff9b2950b08738756b7d9706a7ec2f1e8005",
+    "LONDON_NATIVE_TICK_RESULT.md": "6579050e0050fc7c980fe6caacc857d4126e7e5e92a7fe21031005dcd11266e1",
+    "LONDON_NATIVE_TICK_ROLLING_RESULTS.csv": "684d9eab8812ac723b281f0d74def4c2b9e8f2c226fd8fe98af1a5afe8d6f038",
+    "LONDON_NATIVE_TICK_SEGMENT_RESULTS.csv": "df06e68619ae10de3108df9dea6d04c9ce0469ddc33c02357cf5a55831b0a381",
+    "LONDON_NATIVE_TICK_SIGNAL_FUNNEL.csv": "b05af6513a4b7b5e18eda328f5a58f06eea4813cee946f6958eaefb92240a23d",
+    "LONDON_NATIVE_TICK_SIGNAL_LEDGER.csv": "a8f8260bfac9728f7dcf8c23666a49f35b01e36a2c7d4d34e7041dec3669fb73",
+    "LONDON_NATIVE_TICK_SPREAD_DIAGNOSTICS.csv": "b6a0d6a6711ee0237a666723379d2b52efe47597c9ab3b8792dc915d8bc6b5a3",
+    "LONDON_NATIVE_TICK_TRADE_LEDGER.csv": "a93a2d0ae89580c5eb5de0f39f7afece22b95389c2be863868434f5922896b35"
+  },
+  "schema_version": "london_native_tick_run_manifest_v1",
+  "self_reference_note": "Resulting commit/tree are reported externally because embedding them changes the commit itself.",
+  "source_tick_exports": [
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/CAPITAL_COM_NATIVE_TICK_COVERAGE_SNAPSHOT.json",
+      "sha256": "dd319823e9fd02ad195da476d0fec67701ccfe83097d3875e37415beae572c54",
+      "size_bytes": 4238
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/EURUSD_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "sha256": "b07a1dbdc7fc7d2d6b2559efeffbadd143fdb98ba266d0a694372a649668053f",
+      "size_bytes": 386
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/GBPUSD_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "sha256": "a45c8883bc9e8003f74a2baabfc2796636a8eeecb7356179cbaae3b876a80964",
+      "size_bytes": 408
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/USDJPY_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "sha256": "d0a3f61e39207ed5ff21146f783160a5ef73fd5d2599c89572a224ea5244dc8b",
+      "size_bytes": 384
+    }
+  ],
+  "strategy_revision_count": 0,
+  "tick_row_counts": {
+    "EURUSD": "COVERAGE_PROBE_ONLY_FULL_EXPORT_SKIPPED",
+    "GBPUSD": "COVERAGE_PROBE_ONLY_FULL_EXPORT_SKIPPED",
+    "USDJPY": "COVERAGE_PROBE_ONLY_FULL_EXPORT_SKIPPED"
+  },
+  "timestamp_coverage": {
+    "EURUSD": {
+      "complete_required_coverage": false,
+      "earliest_accessible_time_msc": 1741697665900,
+      "exact_symbol": "EURUSD",
+      "first_at_or_after_required_start_msc": 1747293128214,
+      "logical_symbol": "EURUSD",
+      "probe_file": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/EURUSD_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "probe_sha256": "b07a1dbdc7fc7d2d6b2559efeffbadd143fdb98ba266d0a694372a649668053f",
+      "probe_size_bytes": 386,
+      "required_end_day_last_msc": 1782863998111,
+      "required_end_day_tick_count": 76303,
+      "required_start_day_tick_count": 0
+    },
+    "GBPUSD": {
+      "complete_required_coverage": false,
+      "earliest_accessible_time_msc": 1741697665888,
+      "exact_symbol": "GBPUSD",
+      "first_at_or_after_required_start_msc": 1747293128086,
+      "logical_symbol": "GBPUSD",
+      "probe_file": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/GBPUSD_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "probe_sha256": "a45c8883bc9e8003f74a2baabfc2796636a8eeecb7356179cbaae3b876a80964",
+      "probe_size_bytes": 408,
+      "required_end_day_last_msc": 1782863998279,
+      "required_end_day_tick_count": 100332,
+      "required_start_day_tick_count": 0
+    },
+    "USDJPY": {
+      "complete_required_coverage": false,
+      "earliest_accessible_time_msc": 1741697666774,
+      "exact_symbol": "USDJPY",
+      "first_at_or_after_required_start_msc": 1747293128085,
+      "logical_symbol": "USDJPY",
+      "probe_file": "multi-asset/london-breakout-v1/native-tick-screen-v1/data/frozen/USDJPY_NATIVE_TICK_COVERAGE_PROBE.csv",
+      "probe_sha256": "d0a3f61e39207ed5ff21146f783160a5ef73fd5d2599c89572a224ea5244dc8b",
+      "probe_size_bytes": 384,
+      "required_end_day_last_msc": 1782863998316,
+      "required_end_day_tick_count": 74988,
+      "required_start_day_tick_count": 0
+    }
+  }
+}

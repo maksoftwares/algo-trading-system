@@ -1,0 +1,23 @@
+{
+  "classification": "LONDON_NATIVE_TICK_V1_DATA_INVALID",
+  "determinism_screen_runs": 0,
+  "economic_screen_performed": false,
+  "forward_shadow_authorized": false,
+  "full_period_trades": "NOT_SCORED",
+  "instruments_scored": [],
+  "labels": [
+    "NATIVE CAPITAL.COM BID/ASK TICK RESEARCH",
+    "SHORT RECENT-HISTORY SCREEN",
+    "NOT LONG-TERM ROBUSTNESS EVIDENCE",
+    "NOT DEPLOYMENT AUTHORIZATION"
+  ],
+  "locked_exam_trades": "NOT_SCORED",
+  "phase": "MULTIASSET_LONDON_NATIVE_TICK_FAST_DISCOVERY_V1",
+  "reason": "All three required FX instruments have zero ticks on the mandatory first day; first accessible ticks after the required start jump to 2025-05-15.",
+  "required_period": {
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "start": "2025-03-17T00:00:00Z"
+  },
+  "schema_version": "london_native_tick_result_v1",
+  "xauusd_status": "INSUFFICIENT_COMMON_TICK_HISTORY_NOT_SCORED"
+}

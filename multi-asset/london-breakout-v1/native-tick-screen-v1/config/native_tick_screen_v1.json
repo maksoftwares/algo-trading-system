@@ -1,0 +1,21 @@
+{
+  "phase": "MULTIASSET_LONDON_NATIVE_TICK_FAST_DISCOVERY_V1",
+  "branch": "codex/multiasset-london-native-tick-screen-v1",
+  "base_commit": "d95849d2dc97b0a6a54b49e5607e3420bf2dbd45",
+  "base_tree": "de677c6b6a744b6b1298d0b9ed51a3feacb3ad64",
+  "instruments": ["EURUSD", "GBPUSD", "USDJPY"],
+  "not_scored": {"XAUUSD": "INSUFFICIENT_COMMON_TICK_HISTORY_NOT_SCORED"},
+  "required_start": "2025-03-17T00:00:00Z",
+  "required_end_exclusive": "2026-07-01T00:00:00Z",
+  "development_end_exclusive": "2025-10-01T00:00:00Z",
+  "validation_end_exclusive": "2026-03-01T00:00:00Z",
+  "locked_exam_end_exclusive": "2026-07-01T00:00:00Z",
+  "timezone": "Europe/London",
+  "parameter_search_count": 0,
+  "strategy_revision_count": 0,
+  "complete_economic_screens": 0,
+  "coverage_gate_precedes_tick_export_and_scoring": true,
+  "account": {"starting_equity_usd": 1000, "risk_fraction": 0.005, "preferred_shadow_risk_fraction": 0.0025, "margin_cap_fraction": 0.20, "free_margin_floor_fraction": 0.80},
+  "stress": {"development_london_p95": true, "adverse_slippage_r": 0.05},
+  "strategy": {"h1_atr_period": 14, "h1_ema_period": 50, "slope_bars": 6, "slope_threshold": 0.10, "range_atr_min": 0.50, "range_atr_max": 2.00, "break_atr": 0.10, "body_min": 0.50, "close_outer_fraction": 0.25, "stop_buffer_atr": 0.10, "stop_atr_min": 0.75, "stop_atr_max": 1.50, "target_r": 2.0, "max_hold_hours": 8, "forced_exit_london": "16:00"}
+}
