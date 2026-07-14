@@ -1,0 +1,2 @@
+scope,status,full_history_trades,locked_exam_trades,baseline_pf,baseline_expectancy_R,baseline_net_R,stress_pf,stress_expectancy_R,stress_net_R,drawdown_R
+ALL_SCORED_INSTRUMENTS,NOT_SCORED_DATA_GATE_STOP,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED,NOT_SCORED

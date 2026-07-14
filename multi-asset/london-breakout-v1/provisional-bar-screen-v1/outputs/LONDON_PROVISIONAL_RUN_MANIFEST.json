@@ -1,0 +1,667 @@
+{
+  "base_commit": "11055777a30c193640cdf546898071fb10dfc59d",
+  "base_identity_verification": {
+    "base_commit": "11055777a30c193640cdf546898071fb10dfc59d",
+    "base_tree": "1bfdeb5e797df793318638bc81b1c791565a5234",
+    "branch_parent": "11055777a30c193640cdf546898071fb10dfc59d",
+    "pre_existing_unrelated_worktree_changes": [
+      "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_REPAIR_FORWARD_WEEK_REPORT.json",
+      "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_REPAIR_FORWARD_WEEK_REPORT.md",
+      "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_REPAIR_MONITOR_LATEST.json",
+      "xau-usd/xauusd-phase1/outputs/reports/PHASE2_DEMO_REPAIR_MONITOR_LATEST.md"
+    ],
+    "verified": true,
+    "worktree_clean_before_run": false
+  },
+  "base_tree": "1bfdeb5e797df793318638bc81b1c791565a5234",
+  "branch": "codex/multiasset-london-breakout-provisional-bars-v1",
+  "classification": "LONDON_BREAKOUT_V1_PROVISIONAL_DATA_INVALID",
+  "code_and_tests": [
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/.gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c",
+      "size_bytes": 19
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/.gitignore",
+      "sha256": "599e8d09a18b6bac6f70ed12bf96f67e49c4d992ee2601bc173d92fbcb64b11d",
+      "size_bytes": 38
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/config/provisional_bar_screen_v1.json",
+      "sha256": "58e5b01bf7bc4e43f519977cd0e38119497d3ce9f3a65cbd4df4c6d88f0df06b",
+      "size_bytes": 2021
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/README.md",
+      "sha256": "936a598b1f6940c71b93fe8c12c378f4e37eefb085fae4423a38990fd8a511b8",
+      "size_bytes": 903
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/run_provisional_screen.py",
+      "sha256": "1a344624a6451c4706de5a35ea5aabbd1bed877b206134502d49792393c80443",
+      "size_bytes": 15287
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/__init__.py",
+      "sha256": "818133ecf3e4c74265b2af73114dcddb703927bd6e473d9b681e7d385030ee6b",
+      "size_bytes": 57
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/provisional_gate.py",
+      "sha256": "242d630b2fa7acfb3337d2ebaf09ef73a68e70a463cd5c6053beefc6c0ba1ed0",
+      "size_bytes": 8252
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/src/research_contract.py",
+      "sha256": "9b39b35d85f61a60bf2489de8dadfc64ad6db42088ce7f03adca63b0e470228b",
+      "size_bytes": 7300
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/tests/conftest.py",
+      "sha256": "4949140c0e2eaedbaadd37aa679885964fd70b135fd677e25f70b26d70a476ad",
+      "size_bytes": 146
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/tests/test_provisional_gate.py",
+      "sha256": "88ed8eddf10e57dde83a28472c776f31c14ba0e426e180e22e89996beb28ddaa",
+      "size_bytes": 2978
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/tests/test_research_contract.py",
+      "sha256": "b8553d7f759e3e7a176a5f5f02a6fe80cc9cb32cf099f88232fe8f92b2a33981",
+      "size_bytes": 8921
+    }
+  ],
+  "configuration": {
+    "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/config/provisional_bar_screen_v1.json",
+    "sha256": "58e5b01bf7bc4e43f519977cd0e38119497d3ce9f3a65cbd4df4c6d88f0df06b",
+    "size_bytes": 2021
+  },
+  "configuration_frozen_before_locked_exam_scoring": true,
+  "contract_snapshots": [
+    {
+      "path": "multi-asset/london-breakout-v1/evidence/CAPITAL_COM_CONTRACT_AND_TICK_PROBE.json",
+      "sha256": "94777e96273a4f5c134df7bc4ddd05e7337e3866015c14c394236934927f0e0c",
+      "size_bytes": 6169
+    }
+  ],
+  "deterministic_replay_match": true,
+  "environment": {
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "pytest": "9.1.1",
+    "python": "3.12.13"
+  },
+  "frozen_development_spread_p95": {
+    "EURUSD": "NOT_COMPUTED_DATA_GATE_STOP",
+    "USDJPY": "NOT_COMPUTED_DATA_GATE_STOP",
+    "XAUUSD": "NOT_COMPUTED_DATA_GATE_STOP"
+  },
+  "locked_exam_scoring_performed": false,
+  "manifest_excludes_self_hash": true,
+  "outputs": [
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_RESULT.md",
+      "sha256": "88af965b6d056bb77d93a43967b9b3adcaa33061633587c52a34b1d15e5828f3",
+      "size_bytes": 805
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_RESULT.json",
+      "sha256": "7ac35d0aae7f246ddd0ad48a78df2dd15ec4244d1d81bdbef2c272e1850d6775",
+      "size_bytes": 1191
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_DATA_INVENTORY.csv",
+      "sha256": "287baeec4adc4e9356ca829c17cd2cc071dc4fbc61afa6fed64817a93dba48db",
+      "size_bytes": 3623
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_QUOTE_BASIS.json",
+      "sha256": "f1cb0f1b47a186a162f3c30d6964800eae985860309973148ec9d96e9439ace8",
+      "size_bytes": 1384
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_SIGNAL_LEDGER.csv",
+      "sha256": "be20a4fe1eeb6ec285dab317ac3db5332328e3e516eca4189ddaaffadecd1608",
+      "size_bytes": 439
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_TRADE_LEDGER.csv",
+      "sha256": "a8e2f9b9e495ed18acf340978eb0d20e718bbff454342b19bf1154d0fa622935",
+      "size_bytes": 402
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_INSTRUMENT_RESULTS.csv",
+      "sha256": "27b77e1a2c74360e111795e9d89e6220fbd6219e4ea94582f3a547c78f287afa",
+      "size_bytes": 668
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_ALL_IN_RESULTS.csv",
+      "sha256": "162be1e7661f7fca8a3bcbd1146f734c28b70bef5e895a503754a4a4bd05a869",
+      "size_bytes": 303
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_SEGMENT_RESULTS.csv",
+      "sha256": "ff1842b1da3442cd349829842f264b7cfb7efd617a1959d616fe4c31fef68a3f",
+      "size_bytes": 53
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_MONTHLY_RESULTS.csv",
+      "sha256": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+      "size_bytes": 37
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_STRESS_SPREADS.csv",
+      "sha256": "3761861fed0ee8c884b2e6b593f28b0c4cae5f881ed801671057c61901307a1b",
+      "size_bytes": 289
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/provisional-bar-screen-v1/outputs/LONDON_PROVISIONAL_GATE_AUDIT.json",
+      "sha256": "b1d253afc650e95d90094e651cc83f3b6a4390ba28f82940c1989717da01d9a0",
+      "size_bytes": 29386
+    }
+  ],
+  "quote_basis_evidence": [
+    {
+      "path": "xau-usd/xauusd-phase0/mt5/PassiveBarExporter_Phase0.mq5",
+      "sha256": "74e9efe679b45d0e314bebe492547c478300b0a58e833b49f67f2035fce178b7",
+      "size_bytes": 5550
+    }
+  ],
+  "result_identity_note": "Commit/tree cannot be embedded in their own committed manifest without a self-referential hash; exact values are reported externally after commit.",
+  "resulting_commit": null,
+  "resulting_tree": null,
+  "run_one_hashes": {
+    "LONDON_PROVISIONAL_ALL_IN_RESULTS.csv": "162be1e7661f7fca8a3bcbd1146f734c28b70bef5e895a503754a4a4bd05a869",
+    "LONDON_PROVISIONAL_DATA_INVENTORY.csv": "287baeec4adc4e9356ca829c17cd2cc071dc4fbc61afa6fed64817a93dba48db",
+    "LONDON_PROVISIONAL_GATE_AUDIT.json": "b1d253afc650e95d90094e651cc83f3b6a4390ba28f82940c1989717da01d9a0",
+    "LONDON_PROVISIONAL_INSTRUMENT_RESULTS.csv": "27b77e1a2c74360e111795e9d89e6220fbd6219e4ea94582f3a547c78f287afa",
+    "LONDON_PROVISIONAL_MONTHLY_RESULTS.csv": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+    "LONDON_PROVISIONAL_QUOTE_BASIS.json": "f1cb0f1b47a186a162f3c30d6964800eae985860309973148ec9d96e9439ace8",
+    "LONDON_PROVISIONAL_RESULT.json": "7ac35d0aae7f246ddd0ad48a78df2dd15ec4244d1d81bdbef2c272e1850d6775",
+    "LONDON_PROVISIONAL_RESULT.md": "88af965b6d056bb77d93a43967b9b3adcaa33061633587c52a34b1d15e5828f3",
+    "LONDON_PROVISIONAL_SEGMENT_RESULTS.csv": "ff1842b1da3442cd349829842f264b7cfb7efd617a1959d616fe4c31fef68a3f",
+    "LONDON_PROVISIONAL_SIGNAL_LEDGER.csv": "be20a4fe1eeb6ec285dab317ac3db5332328e3e516eca4189ddaaffadecd1608",
+    "LONDON_PROVISIONAL_STRESS_SPREADS.csv": "3761861fed0ee8c884b2e6b593f28b0c4cae5f881ed801671057c61901307a1b",
+    "LONDON_PROVISIONAL_TRADE_LEDGER.csv": "a8e2f9b9e495ed18acf340978eb0d20e718bbff454342b19bf1154d0fa622935"
+  },
+  "run_two_hashes": {
+    "LONDON_PROVISIONAL_ALL_IN_RESULTS.csv": "162be1e7661f7fca8a3bcbd1146f734c28b70bef5e895a503754a4a4bd05a869",
+    "LONDON_PROVISIONAL_DATA_INVENTORY.csv": "287baeec4adc4e9356ca829c17cd2cc071dc4fbc61afa6fed64817a93dba48db",
+    "LONDON_PROVISIONAL_GATE_AUDIT.json": "b1d253afc650e95d90094e651cc83f3b6a4390ba28f82940c1989717da01d9a0",
+    "LONDON_PROVISIONAL_INSTRUMENT_RESULTS.csv": "27b77e1a2c74360e111795e9d89e6220fbd6219e4ea94582f3a547c78f287afa",
+    "LONDON_PROVISIONAL_MONTHLY_RESULTS.csv": "a257f972d10137cee8ea48891631077571c764daf523ee4bd8ea8a2178742f5c",
+    "LONDON_PROVISIONAL_QUOTE_BASIS.json": "f1cb0f1b47a186a162f3c30d6964800eae985860309973148ec9d96e9439ace8",
+    "LONDON_PROVISIONAL_RESULT.json": "7ac35d0aae7f246ddd0ad48a78df2dd15ec4244d1d81bdbef2c272e1850d6775",
+    "LONDON_PROVISIONAL_RESULT.md": "88af965b6d056bb77d93a43967b9b3adcaa33061633587c52a34b1d15e5828f3",
+    "LONDON_PROVISIONAL_SEGMENT_RESULTS.csv": "ff1842b1da3442cd349829842f264b7cfb7efd617a1959d616fe4c31fef68a3f",
+    "LONDON_PROVISIONAL_SIGNAL_LEDGER.csv": "be20a4fe1eeb6ec285dab317ac3db5332328e3e516eca4189ddaaffadecd1608",
+    "LONDON_PROVISIONAL_STRESS_SPREADS.csv": "3761861fed0ee8c884b2e6b593f28b0c4cae5f881ed801671057c61901307a1b",
+    "LONDON_PROVISIONAL_TRADE_LEDGER.csv": "a8e2f9b9e495ed18acf340978eb0d20e718bbff454342b19bf1154d0fa622935"
+  },
+  "schema_version": "london_provisional_run_manifest_v2",
+  "source_coverage_and_integrity": [
+    {
+      "complete_quote_valid_dataset": false,
+      "digits": 2,
+      "failure_reasons": [
+        "H1_END_INCOMPLETE",
+        "M15_END_INCOMPLETE",
+        "M5_END_INCOMPLETE",
+        "QUOTE_BASIS_NOT_ESTABLISHED",
+        "SPREAD_UNITS_NOT_INDEPENDENTLY_ESTABLISHED"
+      ],
+      "files": {
+        "H1": {
+          "decreasing_timestamp_count": 0,
+          "digits": 2,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:00:00Z",
+          "first_timestamp_utc": "2016-01-03T22:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 295200,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 3600,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_H1_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.01,
+          "quote_basis": "UNKNOWN",
+          "row_count": 55960,
+          "sha256": "ac2930c4dfcf30fa902ea99a87d97570a519d98839abbba21d2ac8f94ab15e87",
+          "size_bytes": 3388656,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "H1",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M15": {
+          "decreasing_timestamp_count": 0,
+          "digits": 2,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:45:00Z",
+          "first_timestamp_utc": "2016-01-03T22:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 292500,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 900,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M15_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.01,
+          "quote_basis": "UNKNOWN",
+          "row_count": 223716,
+          "sha256": "ae5de2cc6f62139f350e1b700688372bba4b02d8b40daad3d41c0f563a521e72",
+          "size_bytes": 13437609,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M15",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M5": {
+          "decreasing_timestamp_count": 0,
+          "digits": 2,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:55:00Z",
+          "first_timestamp_utc": "2016-01-03T22:05:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 292200,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 300,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M5_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.01,
+          "quote_basis": "UNKNOWN",
+          "row_count": 667827,
+          "sha256": "dee59c0da3bdc74df943054015813920271115cb614e38e03695e2299bed8ba4",
+          "size_bytes": 39808345,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M5",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        }
+      },
+      "point_size": 0.01,
+      "quote_basis_status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED",
+      "scoring_status": "PROVISIONAL_DATA_INVALID_NOT_SCORED",
+      "symbol": "XAUUSD"
+    },
+    {
+      "complete_quote_valid_dataset": false,
+      "digits": 5,
+      "failure_reasons": [
+        "H1_END_INCOMPLETE",
+        "M15_END_INCOMPLETE",
+        "M5_END_INCOMPLETE",
+        "QUOTE_BASIS_NOT_ESTABLISHED",
+        "SPREAD_UNITS_NOT_INDEPENDENTLY_ESTABLISHED"
+      ],
+      "files": {
+        "H1": {
+          "decreasing_timestamp_count": 0,
+          "digits": 5,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:00:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 284400,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 3600,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_H1_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 1e-05,
+          "quote_basis": "UNKNOWN",
+          "row_count": 59022,
+          "sha256": "9db0146429afffae006a4c145988034ea2b98805680409362f87811c05faf32d",
+          "size_bytes": 3536076,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "H1",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M15": {
+          "decreasing_timestamp_count": 0,
+          "digits": 5,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:45:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 281700,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 900,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M15_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 1e-05,
+          "quote_basis": "UNKNOWN",
+          "row_count": 236013,
+          "sha256": "4422c23fb34e90662dbeaece3e7c813ae865fcd7bc6194efc45fae078c5c7e14",
+          "size_bytes": 13998711,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M15",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M5": {
+          "decreasing_timestamp_count": 0,
+          "digits": 5,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:55:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 281100,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 300,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M5_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 1e-05,
+          "quote_basis": "UNKNOWN",
+          "row_count": 707560,
+          "sha256": "efc2324985c38e007d18e5aa8f2696c5dd4083c0aaa5bc842b3846cb080cae3b",
+          "size_bytes": 41637824,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M5",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        }
+      },
+      "point_size": 1e-05,
+      "quote_basis_status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED",
+      "scoring_status": "PROVISIONAL_DATA_INVALID_NOT_SCORED",
+      "symbol": "EURUSD"
+    },
+    {
+      "complete_quote_valid_dataset": false,
+      "digits": 5,
+      "failure_reasons": [
+        "H1_FILE_COUNT_0",
+        "M15_FILE_COUNT_0",
+        "M5_FILE_COUNT_0"
+      ],
+      "files": {
+        "H1": {
+          "exists": false,
+          "match_count": 0,
+          "timeframe": "H1"
+        },
+        "M15": {
+          "exists": false,
+          "match_count": 0,
+          "timeframe": "M15"
+        },
+        "M5": {
+          "exists": false,
+          "match_count": 0,
+          "timeframe": "M5"
+        }
+      },
+      "point_size": 1e-05,
+      "quote_basis_status": "NOT_APPLICABLE_PRE_OUTCOME_UNAVAILABLE",
+      "scoring_status": "PRE_OUTCOME_DATA_UNAVAILABLE_NOT_SCORED",
+      "symbol": "GBPUSD"
+    },
+    {
+      "complete_quote_valid_dataset": false,
+      "digits": 3,
+      "failure_reasons": [
+        "H1_END_INCOMPLETE",
+        "M15_END_INCOMPLETE",
+        "M5_END_INCOMPLETE",
+        "QUOTE_BASIS_NOT_ESTABLISHED",
+        "SPREAD_UNITS_NOT_INDEPENDENTLY_ESTABLISHED"
+      ],
+      "files": {
+        "H1": {
+          "decreasing_timestamp_count": 0,
+          "digits": 3,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:00:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 284400,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 3600,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_H1_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.001,
+          "quote_basis": "UNKNOWN",
+          "row_count": 59029,
+          "sha256": "fce7dc9d6a87c3eb515ac5ad73020bf7c3942b83f5ddcb0f5b073452f203298c",
+          "size_bytes": 3544124,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "H1",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M15": {
+          "decreasing_timestamp_count": 0,
+          "digits": 3,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:45:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 281700,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 900,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M15_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.001,
+          "quote_basis": "UNKNOWN",
+          "row_count": 236034,
+          "sha256": "04e6420923c80b60c7d65e2fd9cc972d0c5c77622e93ea752d68167f68334ee2",
+          "size_bytes": 14032766,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M15",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        },
+        "M5": {
+          "decreasing_timestamp_count": 0,
+          "digits": 3,
+          "duplicate_timestamp_count": 0,
+          "ends_on_or_after_required_last_open": false,
+          "exists": true,
+          "final_timestamp_utc": "2025-06-30T23:55:00Z",
+          "first_timestamp_utc": "2016-01-03T21:00:00Z",
+          "header": [
+            "<DATE>",
+            "<TIME>",
+            "<OPEN>",
+            "<HIGH>",
+            "<LOW>",
+            "<CLOSE>",
+            "<TICKVOL>",
+            "<SPREAD>"
+          ],
+          "invalid_price_count": 0,
+          "maximum_observed_gap_seconds": 281100,
+          "missing_required_column_count": 0,
+          "negative_spread_count": 0,
+          "nominal_bar_duration_seconds": 300,
+          "nonfinite_or_missing_spread_count": 0,
+          "off_grid_interval_count": 0,
+          "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M5_20160101_20250630_capital_com.csv",
+          "point_digits_consistent": true,
+          "point_size": 0.001,
+          "quote_basis": "UNKNOWN",
+          "row_count": 707625,
+          "sha256": "2047ceb88b60bd6a027e83ae13b95382916486c1f091ce6aa64a7d4751e22eba",
+          "size_bytes": 41743102,
+          "spread_units": "MQLRATES_SPREAD_FIELD_REPORTED_AS_POINTS_NOT_INDEPENDENTLY_DOCUMENTED_IN_REPOSITORY",
+          "starts_on_or_before_required_start": true,
+          "timeframe": "M5",
+          "timestamp_contract": "BAR_OPEN_UTC_FROM_COMMITTED_EXPORTER"
+        }
+      },
+      "point_size": 0.001,
+      "quote_basis_status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED",
+      "scoring_status": "PROVISIONAL_DATA_INVALID_NOT_SCORED",
+      "symbol": "USDJPY"
+    }
+  ],
+  "source_data": [
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "9db0146429afffae006a4c145988034ea2b98805680409362f87811c05faf32d",
+      "size_bytes": 3536076
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "4422c23fb34e90662dbeaece3e7c813ae865fcd7bc6194efc45fae078c5c7e14",
+      "size_bytes": 13998711
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/EURUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "efc2324985c38e007d18e5aa8f2696c5dd4083c0aaa5bc842b3846cb080cae3b",
+      "size_bytes": 41637824
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_H1_20160101_20250630_capital_com.csv",
+      "sha256": "fce7dc9d6a87c3eb515ac5ad73020bf7c3942b83f5ddcb0f5b073452f203298c",
+      "size_bytes": 3544124
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M15_20160101_20250630_capital_com.csv",
+      "sha256": "04e6420923c80b60c7d65e2fd9cc972d0c5c77622e93ea752d68167f68334ee2",
+      "size_bytes": 14032766
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/USDJPY_M5_20160101_20250630_capital_com.csv",
+      "sha256": "2047ceb88b60bd6a027e83ae13b95382916486c1f091ce6aa64a7d4751e22eba",
+      "size_bytes": 41743102
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_H1_20160101_20250630_capital_com.csv",
+      "sha256": "ac2930c4dfcf30fa902ea99a87d97570a519d98839abbba21d2ac8f94ab15e87",
+      "size_bytes": 3388656
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M15_20160101_20250630_capital_com.csv",
+      "sha256": "ae5de2cc6f62139f350e1b700688372bba4b02d8b40daad3d41c0f563a521e72",
+      "size_bytes": 13437609
+    },
+    {
+      "path": "xau-usd/xauusd-phase0/data/raw/capital_com/XAUUSD_M5_20160101_20250630_capital_com.csv",
+      "sha256": "dee59c0da3bdc74df943054015813920271115cb614e38e03695e2299bed8ba4",
+      "size_bytes": 39808345
+    }
+  ]
+}

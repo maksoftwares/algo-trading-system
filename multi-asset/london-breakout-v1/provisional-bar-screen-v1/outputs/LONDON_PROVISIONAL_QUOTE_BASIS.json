@@ -1,0 +1,45 @@
+{
+  "classification": "LONDON_BREAKOUT_V1_PROVISIONAL_DATA_INVALID",
+  "decision": "Repository evidence does not explicitly establish BID or MID OHLC or independently document spread units.",
+  "evidence": [
+    {
+      "observed": "CopyRates MqlRates OHLC and spread exported",
+      "path": "xau-usd/xauusd-phase0/mt5/PassiveBarExporter_Phase0.mq5"
+    },
+    {
+      "observed": "point and digits snapshot",
+      "path": "multi-asset/london-breakout-v1/evidence/CAPITAL_COM_CONTRACT_AND_TICK_PROBE.json"
+    }
+  ],
+  "instruments": {
+    "EURUSD": {
+      "digits": 5,
+      "point_size": 1e-05,
+      "quote_basis": "UNKNOWN",
+      "reconstruction_authorized": false,
+      "status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED"
+    },
+    "GBPUSD": {
+      "digits": 5,
+      "point_size": 1e-05,
+      "quote_basis": "UNKNOWN",
+      "reconstruction_authorized": false,
+      "status": "NOT_APPLICABLE_PRE_OUTCOME_UNAVAILABLE"
+    },
+    "USDJPY": {
+      "digits": 3,
+      "point_size": 0.001,
+      "quote_basis": "UNKNOWN",
+      "reconstruction_authorized": false,
+      "status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED"
+    },
+    "XAUUSD": {
+      "digits": 2,
+      "point_size": 0.01,
+      "quote_basis": "UNKNOWN",
+      "reconstruction_authorized": false,
+      "status": "QUOTE_BASIS_UNRESOLVED_NOT_SCORED"
+    }
+  },
+  "schema_version": "london_provisional_quote_basis_v1"
+}

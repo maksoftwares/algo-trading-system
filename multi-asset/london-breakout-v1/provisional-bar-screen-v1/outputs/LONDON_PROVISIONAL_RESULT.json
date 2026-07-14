@@ -1,0 +1,29 @@
+{
+  "account_dollar_return_produced": false,
+  "base_commit": "11055777a30c193640cdf546898071fb10dfc59d",
+  "base_tree": "1bfdeb5e797df793318638bc81b1c791565a5234",
+  "branch": "codex/multiasset-london-breakout-provisional-bars-v1",
+  "classification": "LONDON_BREAKOUT_V1_PROVISIONAL_DATA_INVALID",
+  "complete_quote_valid_datasets": [],
+  "complete_strategy_screens": 1,
+  "ea_or_broker_action_occurred": false,
+  "evidence_labels": [
+    "PROVISIONAL BAR-BASED REJECTION SCREEN",
+    "NOT TICK-EXACT",
+    "NOT PROMOTION EVIDENCE",
+    "NOT DEPLOYMENT EVIDENCE"
+  ],
+  "full_history_trade_count": "NOT_SCORED",
+  "instruments_scored": [],
+  "leverage_claim_produced": false,
+  "locked_exam_trade_count": "NOT_SCORED",
+  "lot_sizing_conclusion_produced": false,
+  "parameter_search_count": 0,
+  "phase": "MULTIASSET_LONDON_V1_PROVISIONAL_BAR_REJECTION_SCREEN",
+  "reason": "All scoring files end 2025-06-30 instead of 2026-06-30; quote basis and spread units are unresolved from repository-only evidence.",
+  "schema_version": "london_provisional_result_v1",
+  "signals_generated": 0,
+  "strategy_scoring_performed": false,
+  "tick_acquisition_justified": false,
+  "trades_generated": 0
+}
