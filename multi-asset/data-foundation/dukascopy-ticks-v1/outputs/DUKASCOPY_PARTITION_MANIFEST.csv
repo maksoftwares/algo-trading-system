@@ -1,0 +1,5 @@
+symbol,month,expected_hour_files,observed_hour_files,complete,frozen,total_bytes,partition_inventory_sha256,relative_path
+EURUSD,2016-07,744,744,True,True,117747914,37685266581021ebb2a027509f1fe9f283295d262f8834b55185d7903f9dce16,raw/EURUSD/year=2016/month=07
+GBPUSD,2016-07,744,744,True,True,109658334,8ff23aa15cefa6eb4d8e2ddfbe938d60c8334e87d28e73ea8cdc1e6cf6ebc85a,raw/GBPUSD/year=2016/month=07
+USDJPY,2016-07,744,744,True,True,111218473,2605ebcd2121887bb19472ceba04b876bc14568ea400bac78a08dd0aafeca498,raw/USDJPY/year=2016/month=07
+XAUUSD,2016-07,744,744,True,True,86994450,405884d369eb0005f690dd3516c3ec2560891567d57e2024bab3d772878d4f3f,raw/XAUUSD/year=2016/month=07

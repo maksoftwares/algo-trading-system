@@ -1,0 +1,5 @@
+symbol,month,tick_count,first_tick_utc,last_tick_utc,path,bytes,sha256,compression,row_order
+EURUSD,2016-07,4201709,2016-07-01T00:00:00.259Z,2016-07-31T23:59:59.851Z,normalized/EURUSD/year=2016/month=07/ticks.parquet,42069966,60686364437aed2e2795a7c9763151c84e697fb8983f030eefcc5429296b1334,zstd,timestamp_then_source_order
+GBPUSD,2016-07,3885010,2016-07-01T00:00:00.645Z,2016-07-31T23:59:59.742Z,normalized/GBPUSD/year=2016/month=07/ticks.parquet,42567713,df370ef1bbe1b9cb13dd525fb7ac7798da3f38da6fcf53e4929d3e410585338b,zstd,timestamp_then_source_order
+USDJPY,2016-07,3951312,2016-07-01T00:00:00.211Z,2016-07-31T23:59:59.953Z,normalized/USDJPY/year=2016/month=07/ticks.parquet,42075389,d275c7763147d9e1dadaefb28c08908b829d5d068b25fe4f609388a30d3bf66d,zstd,timestamp_then_source_order
+XAUUSD,2016-07,3984621,2016-07-01T00:00:00.066Z,2016-07-31T23:59:59.587Z,normalized/XAUUSD/year=2016/month=07/ticks.parquet,43174746,f9ac737ec30f25010cf1dfbf7c2a1ed8b31f2accd4e56fda705c6b80cad40318,zstd,timestamp_then_source_order
