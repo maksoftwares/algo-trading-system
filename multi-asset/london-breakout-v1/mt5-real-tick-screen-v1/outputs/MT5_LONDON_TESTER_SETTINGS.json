@@ -1,0 +1,18 @@
+{
+  "agent": "local_only",
+  "effective_common_period": null,
+  "execution_mode": 0,
+  "forward_mode": 0,
+  "model": 4,
+  "model_label": "Every tick based on real ticks",
+  "observed_tester_leverage": "1:50",
+  "optimization": 0,
+  "period": "M15",
+  "requested_leverage": "1:100",
+  "requested_period": [
+    "2016-07-01T00:00:00Z",
+    "2026-07-01T00:00:00Z"
+  ],
+  "tester_setting_drift": true,
+  "visual": false
+}

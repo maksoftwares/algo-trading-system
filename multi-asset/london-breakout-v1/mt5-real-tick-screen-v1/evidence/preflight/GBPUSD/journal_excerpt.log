@@ -1,0 +1,592 @@
+ER	0	15:21:30.984	Network	'<REDACTED_LOGIN>': terminal synchronized with Capital Com Mena Securities Trading L.L.C: 0 positions, 0 orders, 232 symbols, 0 spreads
+MM	0	15:21:31.256	AutoTesting	EURUSD: preliminary downloading of M1 history started
+RH	0	15:21:32.331	AutoTesting	EURUSD: 80% history downloaded
+HM	0	15:21:36.192	AutoTesting	EURUSD: 90% history downloaded
+GG	0	15:21:39.185	AutoTesting	EURUSD: preliminary downloading of M1 history completed in 0:00:08.031
+GQ	0	15:22:34.889	Startup	successfully initialized from start config "<ISOLATED_TESTER_ROOT>\Config\mt5_london_preflight_GBPUSD.ini"
+NS	0	15:22:34.925	Terminal	launched with <ISOLATED_TESTER_ROOT>\Config\mt5_london_preflight_GBPUSD.ini
+CL	0	15:22:39.625	Network	'<REDACTED_LOGIN>': terminal synchronized with Capital Com Mena Securities Trading L.L.C: 0 positions, 0 orders, 232 symbols, 0 spreads
+LM	0	15:22:39.846	AutoTesting	GBPUSD: preliminary downloading of M1 history started
+OQ	0	15:22:42.538	AutoTesting	GBPUSD: 90% history downloaded
+MJ	0	15:22:45.728	AutoTesting	GBPUSD: preliminary downloading of M1 history completed in 0:00:05.984
+CP	0	15:21:31.256	Tester	EURUSD: preliminary downloading of M1 history started
+LO	0	15:21:32.331	Tester	EURUSD: 80% history downloaded
+HP	0	15:21:36.192	Tester	EURUSD: 90% history downloaded
+QJ	0	15:21:39.185	Tester	EURUSD: preliminary downloading of M1 history completed in 0:00:08.031
+GF	0	15:21:39.185	Tester	EURUSD: history data begins from 2014.12.18 00:00
+RL	0	15:21:39.186	Tester	EURUSD: preliminary downloading of history ticks started, it may take quite a long time
+GG	0	15:22:07.497	Tester	EURUSD: preliminary downloading of history ticks completed, 86.35 Mb in 0:00:28.313 (3123.09 Kb/sec)
+PR	0	15:22:07.710	Tester	USDAED: history data begins from 2025.12.20 00:00
+QP	0	15:22:07.712	Tester	USDAED: preliminary downloading of history ticks started, it may take quite a long time
+QK	0	15:22:08.727	Tester	USDAED: preliminary downloading of history ticks completed, 5.03 Mb in 0:00:01.016 (5069.97 Kb/sec)
+QS	0	15:22:11.403	Core 01	common synchronization completed
+EI	0	15:22:11.498	Core 01	EURUSD: history for 2015 year synchronized
+JR	0	15:22:11.593	Core 01	EURUSD: history for 2016 year synchronized
+MK	0	15:22:11.700	Core 01	EURUSD: history for 2017 year synchronized
+GS	0	15:22:11.820	Core 01	EURUSD: history for 2018 year synchronized
+DK	0	15:22:11.820	Core 01	EURUSD: history synchronization completed [10551 Kb]
+MM	0	15:22:11.821	Core 01	EURUSD: 10.30 Mb of history processed in 0:00:00.407
+MP	0	15:22:11.861	Core 01	EURUSD: ticks synchronization [7044 Kb]
+LI	0	15:22:11.912	Core 01	EURUSD: ticks synchronization [7419 Kb]
+LQ	0	15:22:12.008	Core 01	EURUSD: ticks synchronization [9757 Kb]
+QI	0	15:22:12.128	Core 01	EURUSD: ticks synchronization [9193 Kb]
+KR	0	15:22:12.274	Core 01	EURUSD: ticks synchronization [7986 Kb]
+JJ	0	15:22:12.397	Core 01	EURUSD: ticks synchronization [5279 Kb]
+FR	0	15:22:12.474	Core 01	EURUSD: ticks synchronization [6142 Kb]
+FK	0	15:22:12.518	Core 01	EURUSD: ticks synchronization [7241 Kb]
+LS	0	15:22:12.602	Core 01	EURUSD: ticks synchronization [6684 Kb]
+KD	0	15:22:12.676	Core 01	EURUSD: ticks synchronization [7434 Kb]
+KL	0	15:22:12.793	Core 01	EURUSD: ticks synchronization [8303 Kb]
+JH	0	15:22:12.873	Core 01	EURUSD: ticks synchronization completed [3507 Kb]
+PN	0	15:22:12.968	Core 01	USDAED: history for 2026 year synchronized
+IH	0	15:22:12.968	Core 01	USDAED: history synchronization completed [3 Kb]
+NH	0	15:22:12.968	Core 01	USDAED: 3.87 Kb of history processed in 0:00:00.016
+KR	0	15:22:12.974	Core 01	USDAED: ticks synchronization [1763 Kb]
+QJ	0	15:22:12.989	Core 01	USDAED: ticks synchronization [1257 Kb]
+MP	0	15:22:13.002	Core 01	USDAED: ticks synchronization [150 Kb]
+GH	0	15:22:13.007	Core 01	USDAED: ticks synchronization [245 Kb]
+DP	0	15:22:13.013	Core 01	USDAED: ticks synchronization [153 Kb]
+DH	0	15:22:13.017	Core 01	USDAED: ticks synchronization completed [31 Kb]
+JH	0	15:22:19.123	Core 01	EURUSD: symbol to be synchronized
+PL	0	15:22:19.123	Core 01	EURUSD: symbol synchronized, 4120 bytes of symbol info received
+JD	0	15:22:19.123	Core 01	EURUSD: load 10.30 Mb of history data to synchronize in 0:00:00.442
+ND	0	15:22:19.123	Core 01	EURUSD: history synchronized from 2015.01.02 to 2026.07.03
+OR	0	15:22:19.123	Core 01	EURUSD: ticks synchronization started
+FJ	0	15:22:19.123	Core 01	EURUSD: load 83.89 Mb of tick data to synchronize in 0:00:01.062
+HN	0	15:22:19.123	Core 01	EURUSD: history ticks synchronized from 2025.03.11 to 2026.06.30
+CS	0	15:22:19.123	Core 01	EURUSD,M15: history cache allocated for 287569 bars and contains 37146 bars from 2015.01.02 06:00 to 2016.06.30 23:45
+DO	0	15:22:19.123	Core 01	EURUSD,M15: history begins from 2015.01.02 06:00
+JK	0	15:22:19.123	Core 01	EURUSD,M15 (Capital.ComMena-Demo): generating based on real ticks
+NS	0	15:22:19.123	Core 01	USDAED: symbol to be synchronized
+PG	0	15:22:19.123	Core 01	USDAED: symbol synchronized, 4120 bytes of symbol info received
+LR	0	15:22:19.123	Core 01	USDAED: load 3963 bytes of history data to synchronize in 0:00:00.005
+GM	0	15:22:19.123	Core 01	USDAED: history synchronized from 2025.12.20 to 2026.07.01
+KE	0	15:22:19.123	Core 01	USDAED: ticks synchronization started
+KN	0	15:22:19.123	Core 01	USDAED: load 3.51 Mb of tick data to synchronize in 0:00:00.047
+HG	0	15:22:19.123	Core 01	USDAED: history ticks synchronized from 2025.12.20 to 2026.06.30
+RM	3	15:22:19.123	Core 01	EURUSD : 2025.03.11 23:59 - real ticks absent for 776 minutes out of 1440 total minute bars within a day
+IL	3	15:22:19.123	Core 01	EURUSD : 2025.03.12 23:59 - real ticks absent for 598 minutes out of 1440 total minute bars within a day
+NM	3	15:22:19.123	Core 01	EURUSD : 2025.03.13 23:59 - no real ticks within a day
+KG	3	15:22:19.123	Core 01	EURUSD : 2025.03.14 23:59 - no real ticks within a day
+IR	3	15:22:19.123	Core 01	EURUSD : 2025.03.16 23:59 - no real ticks within a day
+FL	3	15:22:19.123	Core 01	EURUSD : 2025.03.17 23:59 - no real ticks within a day
+CF	3	15:22:19.123	Core 01	EURUSD : 2025.03.18 23:59 - no real ticks within a day
+HP	3	15:22:19.123	Core 01	EURUSD : 2025.03.19 23:59 - no real ticks within a day
+FK	3	15:22:19.123	Core 01	EURUSD : 2025.03.20 23:59 - no real ticks within a day
+IE	3	15:22:19.123	Core 01	EURUSD : 2025.03.21 23:59 - no real ticks within a day
+KO	3	15:22:19.123	Core 01	EURUSD : 2025.03.23 23:59 - no real ticks within a day
+NI	3	15:22:19.123	Core 01	EURUSD : 2025.03.24 23:59 - no real ticks within a day
+ID	3	15:22:19.123	Core 01	EURUSD : 2025.03.25 23:59 - no real ticks within a day
+DN	3	15:22:19.123	Core 01	EURUSD : 2025.03.26 23:59 - no real ticks within a day
+OH	3	15:22:19.123	Core 01	EURUSD : 2025.03.27 23:59 - no real ticks within a day
+JR	3	15:22:19.123	Core 01	EURUSD : 2025.03.28 23:59 - no real ticks within a day
+EM	3	15:22:19.123	Core 01	EURUSD : 2025.03.30 23:59 - no real ticks within a day
+JG	3	15:22:19.123	Core 01	EURUSD : 2025.03.31 23:59 - no real ticks within a day
+RQ	3	15:22:19.123	Core 01	EURUSD : 2025.04.01 23:59 - no real ticks within a day
+KK	3	15:22:19.123	Core 01	EURUSD : 2025.04.02 23:59 - no real ticks within a day
+HF	3	15:22:19.123	Core 01	EURUSD : 2025.04.03 23:59 - no real ticks within a day
+IP	3	15:22:19.123	Core 01	EURUSD : 2025.04.04 23:59 - no real ticks within a day
+KJ	3	15:22:19.123	Core 01	EURUSD : 2025.04.06 23:59 - no real ticks within a day
+PD	3	15:22:19.123	Core 01	EURUSD : 2025.04.07 23:59 - no real ticks within a day
+QO	3	15:22:19.123	Core 01	EURUSD : 2025.04.08 23:59 - no real ticks within a day
+NI	3	15:22:19.123	Core 01	EURUSD : 2025.04.09 23:59 - no real ticks within a day
+RS	3	15:22:19.123	Core 01	EURUSD : 2025.04.10 23:59 - no real ticks within a day
+MM	3	15:22:19.123	Core 01	EURUSD : 2025.04.11 23:59 - no real ticks within a day
+GH	3	15:22:19.123	Core 01	EURUSD : 2025.04.13 23:59 - no real ticks within a day
+JR	3	15:22:19.123	Core 01	EURUSD : 2025.04.14 23:59 - no real ticks within a day
+ML	3	15:22:19.123	Core 01	EURUSD : 2025.04.15 23:59 - no real ticks within a day
+PF	3	15:22:19.123	Core 01	EURUSD : 2025.04.16 23:59 - no real ticks within a day
+CQ	3	15:22:19.123	Core 01	EURUSD : 2025.04.17 23:59 - no real ticks within a day
+NK	3	15:22:19.123	Core 01	EURUSD : 2025.04.18 23:59 - no real ticks within a day
+OE	3	15:22:19.123	Core 01	EURUSD : 2025.04.20 23:59 - no real ticks within a day
+LO	3	15:22:19.123	Core 01	EURUSD : 2025.04.21 23:59 - no real ticks within a day
+IJ	3	15:22:19.123	Core 01	EURUSD : 2025.04.22 23:59 - no real ticks within a day
+FD	3	15:22:19.123	Core 01	EURUSD : 2025.04.23 23:59 - no real ticks within a day
+KN	3	15:22:19.123	Core 01	EURUSD : 2025.04.24 23:59 - no real ticks within a day
+PH	3	15:22:19.123	Core 01	EURUSD : 2025.04.25 23:59 - no real ticks within a day
+FS	3	15:22:19.123	Core 01	EURUSD : 2025.04.27 23:59 - no real ticks within a day
+KM	3	15:22:19.123	Core 01	EURUSD : 2025.04.28 23:59 - no real ticks within a day
+HG	3	15:22:19.123	Core 01	EURUSD : 2025.04.29 23:59 - no real ticks within a day
+LQ	3	15:22:19.123	Core 01	EURUSD : 2025.04.30 23:59 - no real ticks within a day
+IL	3	15:22:19.123	Core 01	EURUSD : 2025.05.01 23:59 - no real ticks within a day
+DF	3	15:22:19.123	Core 01	EURUSD : 2025.05.02 23:59 - no real ticks within a day
+NP	3	15:22:19.123	Core 01	EURUSD : 2025.05.04 23:59 - no real ticks within a day
+QJ	3	15:22:19.123	Core 01	EURUSD : 2025.05.05 23:59 - no real ticks within a day
+DE	3	15:22:19.123	Core 01	EURUSD : 2025.05.06 23:59 - no real ticks within a day
+GO	3	15:22:19.123	Core 01	EURUSD : 2025.05.07 23:59 - no real ticks within a day
+JI	3	15:22:19.123	Core 01	EURUSD : 2025.05.08 23:59 - no real ticks within a day
+ES	3	15:22:19.123	Core 01	EURUSD : 2025.05.09 23:59 - no real ticks within a day
+JN	3	15:22:19.123	Core 01	EURUSD : 2025.05.11 23:59 - no real ticks within a day
+CH	3	15:22:19.123	Core 01	EURUSD : 2025.05.12 23:59 - no real ticks within a day
+PR	3	15:22:19.123	Core 01	EURUSD : 2025.05.13 23:59 - no real ticks within a day
+QL	3	15:22:19.123	Core 01	EURUSD : 2025.05.14 23:59 - no real ticks within a day
+FF	3	15:22:19.123	Core 01	EURUSD : 2025.05.15 23:59 - real ticks absent for 440 minutes out of 1440 total minute bars within a day
+RE	3	15:22:19.123	Core 01	EURUSD : 2025.05.18 23:59 - real ticks absent for 1 minutes out of 180 total minute bars within a day
+EE	3	15:22:19.123	Core 01	EURUSD : 2025.05.19 23:59 - real ticks absent for 18 minutes out of 1439 total minute bars within a day
+IJ	3	15:22:19.123	Core 01	EURUSD : 2025.05.20 23:59 - real ticks absent for 10 minutes out of 1435 total minute bars within a day
+JJ	3	15:22:19.123	Core 01	EURUSD : 2025.05.21 23:59 - real ticks absent for 14 minutes out of 1440 total minute bars within a day
+NI	3	15:22:19.123	Core 01	EURUSD : 2025.05.22 23:59 - real ticks absent for 925 minutes out of 1439 total minute bars within a day
+LH	3	15:22:19.123	Core 01	EURUSD : 2025.05.23 23:59 - real ticks absent for 848 minutes out of 1258 total minute bars within a day
+FH	3	15:22:19.123	Core 01	EURUSD : 2025.05.25 23:59 - real ticks absent for 10 minutes out of 179 total minute bars within a day
+RH	3	15:22:19.123	Core 01	EURUSD : 2025.05.26 23:59 - real ticks absent for 20 minutes out of 1349 total minute bars within a day
+NH	3	15:22:19.123	Core 01	EURUSD : 2025.05.27 23:59 - real ticks absent for 10 minutes out of 1394 total minute bars within a day
+DH	3	15:22:19.123	Core 01	EURUSD : 2025.05.28 23:59 - real ticks absent for 11 minutes out of 1440 total minute bars within a day
+KJ	3	15:22:19.123	Core 01	EURUSD : 2025.05.29 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+PJ	3	15:22:19.123	Core 01	EURUSD : 2025.05.30 23:59 - real ticks absent for 1 minutes out of 1259 total minute bars within a day
+JI	3	15:22:19.123	Core 01	EURUSD : 2025.06.01 23:59 - real ticks absent for 6 minutes out of 179 total minute bars within a day
+OJ	3	15:22:19.123	Core 01	EURUSD : 2025.06.02 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+QM	3	15:22:19.123	Core 01	EURUSD : 2025.06.03 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+OM	3	15:22:19.123	Core 01	EURUSD : 2025.06.04 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+KN	3	15:22:19.123	Core 01	EURUSD : 2025.06.05 23:59 - real ticks absent for 45 minutes out of 1440 total minute bars within a day
+DM	3	15:22:19.123	Core 01	EURUSD : 2025.06.06 23:59 - real ticks absent for 650 minutes out of 1259 total minute bars within a day
+PO	3	15:22:19.123	Core 01	EURUSD : 2025.06.08 23:59 - real ticks absent for 9 minutes out of 179 total minute bars within a day
+LO	3	15:22:19.123	Core 01	EURUSD : 2025.06.09 23:59 - real ticks absent for 20 minutes out of 1439 total minute bars within a day
+QL	3	15:22:19.123	Core 01	EURUSD : 2025.06.10 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+JL	3	15:22:19.123	Core 01	EURUSD : 2025.06.11 23:59 - real ticks absent for 1303 minutes out of 1440 total minute bars within a day
+FL	3	15:22:19.123	Core 01	EURUSD : 2025.06.12 23:59 - real ticks absent for 25 minutes out of 1438 total minute bars within a day
+PM	3	15:22:19.123	Core 01	EURUSD : 2025.06.15 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+DN	3	15:22:19.123	Core 01	EURUSD : 2025.06.16 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+PN	3	15:22:19.123	Core 01	EURUSD : 2025.06.17 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+KN	3	15:22:19.123	Core 01	EURUSD : 2025.06.18 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+GQ	3	15:22:19.123	Core 01	EURUSD : 2025.06.19 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+KQ	3	15:22:19.123	Core 01	EURUSD : 2025.06.23 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+EQ	3	15:22:19.123	Core 01	EURUSD : 2025.06.24 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+KR	3	15:22:19.123	Core 01	EURUSD : 2025.06.25 23:59 - real ticks absent for 16 minutes out of 1440 total minute bars within a day
+MP	3	15:22:19.123	Core 01	EURUSD : 2025.06.26 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+IS	3	15:22:19.123	Core 01	EURUSD : 2025.06.29 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+LP	3	15:22:19.123	Core 01	EURUSD : 2025.06.30 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+RP	3	15:22:19.123	Core 01	EURUSD : 2025.07.01 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+GP	3	15:22:19.123	Core 01	EURUSD : 2025.07.02 23:59 - real ticks absent for 12 minutes out of 1440 total minute bars within a day
+JP	3	15:22:19.123	Core 01	EURUSD : 2025.07.03 23:59 - real ticks absent for 7 minutes out of 890 total minute bars within a day
+IP	3	15:22:19.123	Core 01	EURUSD : 2025.07.04 23:59 - real ticks absent for 1 minutes out of 852 total minute bars within a day
+JP	3	15:22:19.123	Core 01	EURUSD : 2025.07.06 23:59 - real ticks absent for 1 minutes out of 178 total minute bars within a day
+LS	3	15:22:19.123	Core 01	EURUSD : 2025.07.07 23:59 - real ticks absent for 9 minutes out of 1439 total minute bars within a day
+HR	3	15:22:19.123	Core 01	EURUSD : 2025.07.08 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+GN	0	15:22:19.123	Core 01	EURUSD : real ticks begin from 2025.03.11 00:00:00
+KM	3	15:22:19.123	Core 01	EURUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 70483 minutes of 3704203 total minute bars, every tick generation used
+HS	3	15:22:19.123	Core 01	EURUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 54 whole days
+IR	0	15:22:19.123	Core 01	USDAED : real ticks begin from 2025.12.20 00:00:00
+EM	0	15:22:32.591	Core 01	EURUSD,M15: 211401359 ticks, 247556 bars generated. Environment synchronized in 0:00:01.534. Test passed in 0:00:19.687 (including ticks preprocessing 0:00:05.172).
+LI	0	15:22:32.591	Core 01	EURUSD,M15: total time from login to stop testing 0:00:21.221 (including 0:00:01.585 for history data synchronization)
+OP	0	15:22:32.591	Core 01	4083 Mb memory used including 16 Mb of history data, 3968 Mb of tick data
+NH	0	15:22:39.846	Tester	GBPUSD: preliminary downloading of M1 history started
+KG	0	15:22:42.538	Tester	GBPUSD: 90% history downloaded
+CM	0	15:22:45.728	Tester	GBPUSD: preliminary downloading of M1 history completed in 0:00:05.984
+GI	0	15:22:45.728	Tester	GBPUSD: history data begins from 2014.12.23 00:00
+HO	0	15:22:45.729	Tester	GBPUSD: preliminary downloading of history ticks started, it may take quite a long time
+EP	0	15:22:45.729	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202607.tkc" download
+FQ	0	15:22:47.740	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202606.tkc" download (2083.91 Kb/sec)
+QG	0	15:22:50.759	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202605.tkc" download (2894.62 Kb/sec)
+RE	0	15:22:52.773	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202604.tkc" download (4384.84 Kb/sec)
+GK	0	15:22:56.802	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202603.tkc" download (2325.64 Kb/sec)
+EI	0	15:23:01.845	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202602.tkc" download (2544.02 Kb/sec)
+LO	0	15:23:03.861	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202601.tkc" download (4185.47 Kb/sec)
+PL	0	15:23:04.869	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202512.tkc" download (4229.13 Kb/sec)
+IR	0	15:23:07.887	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202511.tkc" download (2894.45 Kb/sec)
+MP	0	15:23:08.890	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202510.tkc" download (4280.82 Kb/sec)
+RF	0	15:23:12.909	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202509.tkc" download (2116.27 Kb/sec)
+LD	0	15:23:13.919	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202508.tkc" download (4226.28 Kb/sec)
+DJ	0	15:23:15.926	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202507.tkc" download (4242.25 Kb/sec)
+CJ	0	15:23:16.940	Tester	GBPUSD: 10% ticks downloaded (3046.64 Kb/sec)
+MS	0	15:23:16.940	Tester	GBPUSD: "bases\Capital.ComMena-Demo\ticks\GBPUSD\202506.tkc" download (4046.97 Kb/sec)
+PP	0	15:23:18.955	Tester	GBPUSD: preliminary downloading of history ticks completed, 101.38 Mb in 0:00:33.234 (3123.79 Kb/sec)
+KM	0	15:23:18.955	Tester	GBPUSD: ticks data begins from 2025.03.11 00:00
+DF	0	15:23:19.068	Tester	USDAED: history data begins from 2025.12.20 00:00
+DS	0	15:23:19.069	Tester	USDAED: preliminary downloading of history ticks started, it may take quite a long time
+LS	0	15:23:20.084	Tester	USDAED: preliminary downloading of history ticks completed, 164.78 Kb in 0:00:01.015 (162.35 Kb/sec)
+FM	0	15:23:20.619	Tester	GBPUSD,M15 (Capital.ComMena-Demo): testing of Experts\LondonRangeExpansionRealTicksV1.ex5 from 2016.07.01 00:00 to 2026.07.01 00:00
+IH	0	15:23:20.624	Core 01	common synchronization completed
+NP	0	15:23:20.721	Core 01	GBPUSD: history for 2015 year synchronized
+EK	0	15:23:20.820	Core 01	GBPUSD: history for 2016 year synchronized
+HO	0	15:23:20.820	Core 01	GBPUSD: history synchronization completed [6435 Kb]
+GE	0	15:23:20.821	Core 01	GBPUSD: 6.28 Mb of history processed in 0:00:00.188
+GO	0	15:23:20.843	Core 01	GBPUSD: ticks synchronization [8894 Kb]
+FF	0	15:23:20.903	Core 01	GBPUSD: ticks synchronization [9682 Kb]
+CM	0	15:23:21.013	Core 01	GBPUSD: ticks synchronization [12093 Kb]
+LE	0	15:23:21.094	Core 01	GBPUSD: ticks synchronization [11412 Kb]
+OI	0	15:23:21.187	Core 01	GBPUSD: ticks synchronization [9404 Kb]
+CQ	0	15:23:21.252	Core 01	GBPUSD: ticks synchronization [6323 Kb]
+DH	0	15:23:21.302	Core 01	GBPUSD: ticks synchronization [7954 Kb]
+OP	0	15:23:21.389	Core 01	GBPUSD: ticks synchronization [7279 Kb]
+GH	0	15:23:21.451	Core 01	GBPUSD: ticks synchronization [7088 Kb]
+MS	0	15:23:21.536	Core 01	GBPUSD: ticks synchronization [7172 Kb]
+FK	0	15:23:21.630	Core 01	GBPUSD: ticks synchronization [7512 Kb]
+RN	0	15:23:21.704	Core 01	GBPUSD: ticks synchronization completed [5678 Kb]
+FJ	0	15:23:21.804	Core 01	USDAED: ticks synchronized already [43 bytes]
+NI	0	15:23:27.908	Core 01	GBPUSD: symbol to be synchronized
+PM	0	15:23:27.908	Core 01	GBPUSD: symbol synchronized, 4120 bytes of symbol info received
+DF	0	15:23:27.908	Core 01	GBPUSD: load 6.28 Mb of history data to synchronize in 0:00:00.204
+PE	0	15:23:27.908	Core 01	GBPUSD: history synchronized from 2015.01.02 to 2026.07.03
+ES	0	15:23:27.908	Core 01	GBPUSD: ticks synchronization started
+MK	0	15:23:27.908	Core 01	GBPUSD: load 98.03 Mb of tick data to synchronize in 0:00:00.938
+FH	0	15:23:27.908	Core 01	GBPUSD: history ticks synchronized from 2025.03.11 to 2026.06.30
+IR	0	15:23:27.908	Core 01	GBPUSD,M15: history cache allocated for 287587 bars and contains 37164 bars from 2015.01.02 06:00 to 2016.06.30 23:45
+JN	0	15:23:27.908	Core 01	GBPUSD,M15: history begins from 2015.01.02 06:00
+DK	0	15:23:27.908	Core 01	GBPUSD,M15 (Capital.ComMena-Demo): generating based on real ticks
+JG	0	15:23:27.908	Core 01	GBPUSD,M15: testing of Experts\LondonRangeExpansionRealTicksV1.ex5 from 2016.07.01 00:00 to 2026.07.01 00:00 started with inputs:
+EG	0	15:23:27.908	Core 01	  InpLogicalSymbol=GBPUSD
+PF	0	15:23:27.908	Core 01	  InpRunId=PREFLIGHT_GBPUSD
+OQ	0	15:23:27.908	Core 01	  InpOutputPrefix=mt5_london_preflight_GBPUSD
+MS	0	15:23:27.908	Core 01	USDAED: symbol to be synchronized
+GG	0	15:23:27.908	Core 01	USDAED: symbol synchronized, 4120 bytes of symbol info received
+JR	0	15:23:27.908	Core 01	USDAED: load 27 bytes of history data to synchronize in 0:00:00.000
+LM	0	15:23:27.908	Core 01	USDAED: history synchronized from 2025.12.20 to 2026.07.01
+HE	0	15:23:27.908	Core 01	USDAED: ticks synchronization started
+QR	0	15:23:27.908	Core 01	USDAED: load 34 bytes of tick data to synchronize in 0:00:00.000
+MG	0	15:23:27.908	Core 01	USDAED: history ticks synchronized from 2025.12.20 to 2026.06.30
+KL	3	15:23:27.908	Core 01	GBPUSD : 2025.03.11 23:59 - real ticks absent for 777 minutes out of 1439 total minute bars within a day
+QM	3	15:23:27.908	Core 01	GBPUSD : 2025.03.12 23:59 - real ticks absent for 598 minutes out of 1440 total minute bars within a day
+FL	3	15:23:27.908	Core 01	GBPUSD : 2025.03.13 23:59 - no real ticks within a day
+CF	3	15:23:27.908	Core 01	GBPUSD : 2025.03.14 23:59 - no real ticks within a day
+QS	3	15:23:27.908	Core 01	GBPUSD : 2025.03.16 23:59 - no real ticks within a day
+NM	3	15:23:27.908	Core 01	GBPUSD : 2025.03.17 23:59 - no real ticks within a day
+KG	3	15:23:27.908	Core 01	GBPUSD : 2025.03.18 23:59 - no real ticks within a day
+PQ	3	15:23:27.908	Core 01	GBPUSD : 2025.03.19 23:59 - no real ticks within a day
+NJ	3	15:23:27.908	Core 01	GBPUSD : 2025.03.20 23:59 - no real ticks within a day
+QD	3	15:23:27.908	Core 01	GBPUSD : 2025.03.21 23:59 - no real ticks within a day
+CN	3	15:23:27.908	Core 01	GBPUSD : 2025.03.23 23:59 - no real ticks within a day
+FH	3	15:23:27.908	Core 01	GBPUSD : 2025.03.24 23:59 - no real ticks within a day
+QE	3	15:23:27.908	Core 01	GBPUSD : 2025.03.25 23:59 - no real ticks within a day
+LO	3	15:23:27.908	Core 01	GBPUSD : 2025.03.26 23:59 - no real ticks within a day
+GI	3	15:23:27.908	Core 01	GBPUSD : 2025.03.27 23:59 - no real ticks within a day
+RS	3	15:23:27.908	Core 01	GBPUSD : 2025.03.28 23:59 - no real ticks within a day
+ML	3	15:23:27.908	Core 01	GBPUSD : 2025.03.30 23:59 - no real ticks within a day
+RF	3	15:23:27.908	Core 01	GBPUSD : 2025.03.31 23:59 - no real ticks within a day
+JP	3	15:23:27.908	Core 01	GBPUSD : 2025.04.01 23:59 - no real ticks within a day
+CJ	3	15:23:27.908	Core 01	GBPUSD : 2025.04.02 23:59 - no real ticks within a day
+PG	3	15:23:27.908	Core 01	GBPUSD : 2025.04.03 23:59 - no real ticks within a day
+QQ	3	15:23:27.908	Core 01	GBPUSD : 2025.04.04 23:59 - no real ticks within a day
+CK	3	15:23:27.908	Core 01	GBPUSD : 2025.04.06 23:59 - no real ticks within a day
+HE	3	15:23:27.908	Core 01	GBPUSD : 2025.04.07 23:59 - no real ticks within a day
+IN	3	15:23:27.908	Core 01	GBPUSD : 2025.04.08 23:59 - no real ticks within a day
+FH	3	15:23:27.908	Core 01	GBPUSD : 2025.04.09 23:59 - no real ticks within a day
+JR	3	15:23:27.908	Core 01	GBPUSD : 2025.04.10 23:59 - no real ticks within a day
+EL	3	15:23:27.908	Core 01	GBPUSD : 2025.04.11 23:59 - no real ticks within a day
+OI	3	15:23:27.908	Core 01	GBPUSD : 2025.04.13 23:59 - no real ticks within a day
+RS	3	15:23:27.908	Core 01	GBPUSD : 2025.04.14 23:59 - no real ticks within a day
+EM	3	15:23:27.908	Core 01	GBPUSD : 2025.04.15 23:59 - no real ticks within a day
+HG	3	15:23:27.908	Core 01	GBPUSD : 2025.04.16 23:59 - no real ticks within a day
+KP	3	15:23:27.908	Core 01	GBPUSD : 2025.04.17 23:59 - no real ticks within a day
+FJ	3	15:23:27.908	Core 01	GBPUSD : 2025.04.18 23:59 - no real ticks within a day
+GD	3	15:23:27.908	Core 01	GBPUSD : 2025.04.20 23:59 - no real ticks within a day
+DN	3	15:23:27.908	Core 01	GBPUSD : 2025.04.21 23:59 - no real ticks within a day
+QK	3	15:23:27.908	Core 01	GBPUSD : 2025.04.22 23:59 - no real ticks within a day
+NE	3	15:23:27.908	Core 01	GBPUSD : 2025.04.23 23:59 - no real ticks within a day
+CO	3	15:23:27.908	Core 01	GBPUSD : 2025.04.24 23:59 - no real ticks within a day
+HI	3	15:23:27.908	Core 01	GBPUSD : 2025.04.25 23:59 - no real ticks within a day
+NR	3	15:23:27.908	Core 01	GBPUSD : 2025.04.27 23:59 - no real ticks within a day
+CL	3	15:23:27.908	Core 01	GBPUSD : 2025.04.28 23:59 - no real ticks within a day
+PF	3	15:23:27.908	Core 01	GBPUSD : 2025.04.29 23:59 - no real ticks within a day
+DP	3	15:23:27.908	Core 01	GBPUSD : 2025.04.30 23:59 - no real ticks within a day
+QM	3	15:23:27.908	Core 01	GBPUSD : 2025.05.01 23:59 - no real ticks within a day
+LG	3	15:23:27.908	Core 01	GBPUSD : 2025.05.02 23:59 - no real ticks within a day
+FQ	3	15:23:27.908	Core 01	GBPUSD : 2025.05.04 23:59 - no real ticks within a day
+IK	3	15:23:27.908	Core 01	GBPUSD : 2025.05.05 23:59 - no real ticks within a day
+LD	3	15:23:27.908	Core 01	GBPUSD : 2025.05.06 23:59 - no real ticks within a day
+ON	3	15:23:27.908	Core 01	GBPUSD : 2025.05.07 23:59 - no real ticks within a day
+RH	3	15:23:27.908	Core 01	GBPUSD : 2025.05.08 23:59 - no real ticks within a day
+MR	3	15:23:27.908	Core 01	GBPUSD : 2025.05.09 23:59 - no real ticks within a day
+RO	3	15:23:27.908	Core 01	GBPUSD : 2025.05.11 23:59 - no real ticks within a day
+KI	3	15:23:27.908	Core 01	GBPUSD : 2025.05.12 23:59 - no real ticks within a day
+HS	3	15:23:27.908	Core 01	GBPUSD : 2025.05.13 23:59 - no real ticks within a day
+IM	3	15:23:27.908	Core 01	GBPUSD : 2025.05.14 23:59 - no real ticks within a day
+NG	3	15:23:27.908	Core 01	GBPUSD : 2025.05.15 23:59 - real ticks absent for 439 minutes out of 1439 total minute bars within a day
+HD	3	15:23:27.908	Core 01	GBPUSD : 2025.05.18 23:59 - real ticks absent for 5 minutes out of 179 total minute bars within a day
+DG	3	15:23:27.908	Core 01	GBPUSD : 2025.05.19 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+NH	3	15:23:27.908	Core 01	GBPUSD : 2025.05.20 23:59 - real ticks absent for 6 minutes out of 1435 total minute bars within a day
+FH	3	15:23:27.908	Core 01	GBPUSD : 2025.05.21 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+JH	3	15:23:27.908	Core 01	GBPUSD : 2025.05.22 23:59 - real ticks absent for 927 minutes out of 1439 total minute bars within a day
+JI	3	15:23:27.908	Core 01	GBPUSD : 2025.05.23 23:59 - real ticks absent for 848 minutes out of 1258 total minute bars within a day
+NJ	3	15:23:27.908	Core 01	GBPUSD : 2025.05.25 23:59 - real ticks absent for 9 minutes out of 177 total minute bars within a day
+LI	3	15:23:27.908	Core 01	GBPUSD : 2025.05.26 23:59 - real ticks absent for 9 minutes out of 1355 total minute bars within a day
+RI	3	15:23:27.908	Core 01	GBPUSD : 2025.05.27 23:59 - real ticks absent for 7 minutes out of 1394 total minute bars within a day
+PJ	3	15:23:27.908	Core 01	GBPUSD : 2025.05.28 23:59 - real ticks absent for 7 minutes out of 1438 total minute bars within a day
+IJ	3	15:23:27.908	Core 01	GBPUSD : 2025.05.29 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+NJ	3	15:23:27.908	Core 01	GBPUSD : 2025.05.30 23:59 - real ticks absent for 1 minutes out of 1259 total minute bars within a day
+NI	3	15:23:27.908	Core 01	GBPUSD : 2025.06.01 23:59 - real ticks absent for 4 minutes out of 179 total minute bars within a day
+NK	3	15:23:27.908	Core 01	GBPUSD : 2025.06.02 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+RK	3	15:23:27.908	Core 01	GBPUSD : 2025.06.03 23:59 - real ticks absent for 9 minutes out of 1438 total minute bars within a day
+LK	3	15:23:27.908	Core 01	GBPUSD : 2025.06.04 23:59 - real ticks absent for 5 minutes out of 1439 total minute bars within a day
+NH	3	15:23:27.908	Core 01	GBPUSD : 2025.06.05 23:59 - real ticks absent for 46 minutes out of 1439 total minute bars within a day
+JL	3	15:23:27.908	Core 01	GBPUSD : 2025.06.06 23:59 - real ticks absent for 650 minutes out of 1259 total minute bars within a day
+HO	3	15:23:27.908	Core 01	GBPUSD : 2025.06.08 23:59 - real ticks absent for 6 minutes out of 178 total minute bars within a day
+QL	3	15:23:27.908	Core 01	GBPUSD : 2025.06.09 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+GM	3	15:23:27.908	Core 01	GBPUSD : 2025.06.10 23:59 - real ticks absent for 5 minutes out of 1439 total minute bars within a day
+LN	3	15:23:27.908	Core 01	GBPUSD : 2025.06.11 23:59 - real ticks absent for 1301 minutes out of 1437 total minute bars within a day
+LN	3	15:23:27.908	Core 01	GBPUSD : 2025.06.12 23:59 - real ticks absent for 27 minutes out of 1438 total minute bars within a day
+DM	3	15:23:27.908	Core 01	GBPUSD : 2025.06.15 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+HN	3	15:23:27.908	Core 01	GBPUSD : 2025.06.16 23:59 - real ticks absent for 4 minutes out of 1439 total minute bars within a day
+JN	3	15:23:27.908	Core 01	GBPUSD : 2025.06.17 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+RN	3	15:23:27.908	Core 01	GBPUSD : 2025.06.18 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+OO	3	15:23:27.908	Core 01	GBPUSD : 2025.06.19 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+HL	3	15:23:27.908	Core 01	GBPUSD : 2025.06.22 23:59 - real ticks absent for 2 minutes out of 178 total minute bars within a day
+IL	3	15:23:27.908	Core 01	GBPUSD : 2025.06.23 23:59 - real ticks absent for 10 minutes out of 1440 total minute bars within a day
+RO	3	15:23:27.908	Core 01	GBPUSD : 2025.06.24 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+PP	3	15:23:27.908	Core 01	GBPUSD : 2025.06.25 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+OS	3	15:23:27.908	Core 01	GBPUSD : 2025.06.26 23:59 - real ticks absent for 11 minutes out of 1440 total minute bars within a day
+HS	3	15:23:27.908	Core 01	GBPUSD : 2025.06.29 23:59 - real ticks absent for 4 minutes out of 180 total minute bars within a day
+NP	3	15:23:27.908	Core 01	GBPUSD : 2025.06.30 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+FR	3	15:23:27.908	Core 01	GBPUSD : 2025.07.01 23:59 - real ticks absent for 10 minutes out of 1439 total minute bars within a day
+IR	3	15:23:27.908	Core 01	GBPUSD : 2025.07.02 23:59 - real ticks absent for 12 minutes out of 1440 total minute bars within a day
+FQ	3	15:23:27.908	Core 01	GBPUSD : 2025.07.03 23:59 - real ticks absent for 11 minutes out of 891 total minute bars within a day
+PR	3	15:23:27.908	Core 01	GBPUSD : 2025.07.06 23:59 - real ticks absent for 17 minutes out of 177 total minute bars within a day
+JR	3	15:23:27.908	Core 01	GBPUSD : 2025.07.07 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+NR	3	15:23:27.908	Core 01	GBPUSD : 2025.07.08 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+GN	0	15:23:27.908	Core 01	GBPUSD : real ticks begin from 2025.03.11 00:00:00
+FM	3	15:23:27.908	Core 01	GBPUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 70414 minutes of 3717314 total minute bars, every tick generation used
+HR	3	15:23:27.908	Core 01	GBPUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 54 whole days
+PR	0	15:23:27.908	Core 01	USDAED : real ticks begin from 2025.12.20 00:00:00
+CL	0	15:23:40.286	Core 01	GBPUSD,M15: 249270139 ticks, 248489 bars generated. Environment synchronized in 0:00:01.148. Test passed in 0:00:18.529 (including ticks preprocessing 0:00:05.828).
+KH	0	15:23:40.286	Core 01	GBPUSD,M15: total time from login to stop testing 0:00:19.677 (including 0:00:01.148 for history data synchronization)
+PO	0	15:23:40.286	Core 01	GBPUSD: generate 249270139 ticks in 0:00:05.750, passed to tester 249270141 ticks
+KP	0	15:23:40.286	Core 01	4824 Mb memory used including 16 Mb of history data, 4736 Mb of tick data
+CS	0	15:22:11.408	Symbols	EURUSD: symbol to be synchronized
+CS	0	15:22:11.408	Symbols	EURUSD: symbol synchronized, 4120 bytes of symbol info received
+CS	0	15:22:11.856	History	EURUSD: load 10.30 Mb of history data to synchronize in 0:00:00.442
+CS	0	15:22:11.856	History	EURUSD: history synchronized from 2015.01.02 to 2026.07.03
+CS	0	15:22:11.856	Ticks	EURUSD: ticks synchronization started
+CS	0	15:22:12.916	Ticks	EURUSD: load 83.89 Mb of tick data to synchronize in 0:00:01.062
+CS	0	15:22:12.916	Ticks	EURUSD: history ticks synchronized from 2025.03.11 to 2026.06.30
+CS	0	15:22:12.949	History	EURUSD,M15: history cache allocated for 287569 bars and contains 37146 bars from 2015.01.02 06:00 to 2016.06.30 23:45
+CS	0	15:22:12.949	History	EURUSD,M15: history begins from 2015.01.02 06:00
+CS	0	15:22:12.949	Tester	EURUSD,M15 (Capital.ComMena-Demo): generating based on real ticks
+CS	0	15:22:12.960	Symbols	USDAED: symbol to be synchronized
+CS	0	15:22:12.961	Symbols	USDAED: symbol synchronized, 4120 bytes of symbol info received
+CS	0	15:22:12.972	History	USDAED: load 3963 bytes of history data to synchronize in 0:00:00.005
+CS	0	15:22:12.972	History	USDAED: history synchronized from 2025.12.20 to 2026.07.01
+CS	0	15:22:12.972	Ticks	USDAED: ticks synchronization started
+CS	0	15:22:13.019	Ticks	USDAED: load 3.51 Mb of tick data to synchronize in 0:00:00.047
+CS	0	15:22:13.019	Ticks	USDAED: history ticks synchronized from 2025.12.20 to 2026.06.30
+CS	3	15:22:16.879	Ticks	EURUSD : 2025.03.11 23:59 - real ticks absent for 776 minutes out of 1440 total minute bars within a day
+CS	3	15:22:16.883	Ticks	EURUSD : 2025.03.12 23:59 - real ticks absent for 598 minutes out of 1440 total minute bars within a day
+CS	3	15:22:16.884	Ticks	EURUSD : 2025.03.13 23:59 - no real ticks within a day
+CS	3	15:22:16.886	Ticks	EURUSD : 2025.03.14 23:59 - no real ticks within a day
+CS	3	15:22:16.886	Ticks	EURUSD : 2025.03.16 23:59 - no real ticks within a day
+CS	3	15:22:16.887	Ticks	EURUSD : 2025.03.17 23:59 - no real ticks within a day
+CS	3	15:22:16.888	Ticks	EURUSD : 2025.03.18 23:59 - no real ticks within a day
+CS	3	15:22:16.889	Ticks	EURUSD : 2025.03.19 23:59 - no real ticks within a day
+CS	3	15:22:16.890	Ticks	EURUSD : 2025.03.20 23:59 - no real ticks within a day
+CS	3	15:22:16.891	Ticks	EURUSD : 2025.03.21 23:59 - no real ticks within a day
+CS	3	15:22:16.891	Ticks	EURUSD : 2025.03.23 23:59 - no real ticks within a day
+CS	3	15:22:16.892	Ticks	EURUSD : 2025.03.24 23:59 - no real ticks within a day
+CS	3	15:22:16.894	Ticks	EURUSD : 2025.03.25 23:59 - no real ticks within a day
+CS	3	15:22:16.895	Ticks	EURUSD : 2025.03.26 23:59 - no real ticks within a day
+CS	3	15:22:16.896	Ticks	EURUSD : 2025.03.27 23:59 - no real ticks within a day
+CS	3	15:22:16.898	Ticks	EURUSD : 2025.03.28 23:59 - no real ticks within a day
+CS	3	15:22:16.898	Ticks	EURUSD : 2025.03.30 23:59 - no real ticks within a day
+CS	3	15:22:16.900	Ticks	EURUSD : 2025.03.31 23:59 - no real ticks within a day
+CS	3	15:22:16.901	Ticks	EURUSD : 2025.04.01 23:59 - no real ticks within a day
+CS	3	15:22:16.902	Ticks	EURUSD : 2025.04.02 23:59 - no real ticks within a day
+CS	3	15:22:16.904	Ticks	EURUSD : 2025.04.03 23:59 - no real ticks within a day
+CS	3	15:22:16.907	Ticks	EURUSD : 2025.04.04 23:59 - no real ticks within a day
+CS	3	15:22:16.908	Ticks	EURUSD : 2025.04.06 23:59 - no real ticks within a day
+CS	3	15:22:16.913	Ticks	EURUSD : 2025.04.07 23:59 - no real ticks within a day
+CS	3	15:22:16.915	Ticks	EURUSD : 2025.04.08 23:59 - no real ticks within a day
+CS	3	15:22:16.918	Ticks	EURUSD : 2025.04.09 23:59 - no real ticks within a day
+CS	3	15:22:16.921	Ticks	EURUSD : 2025.04.10 23:59 - no real ticks within a day
+CS	3	15:22:16.924	Ticks	EURUSD : 2025.04.11 23:59 - no real ticks within a day
+CS	3	15:22:16.924	Ticks	EURUSD : 2025.04.13 23:59 - no real ticks within a day
+CS	3	15:22:16.929	Ticks	EURUSD : 2025.04.14 23:59 - no real ticks within a day
+CS	3	15:22:16.931	Ticks	EURUSD : 2025.04.15 23:59 - no real ticks within a day
+CS	3	15:22:16.933	Ticks	EURUSD : 2025.04.16 23:59 - no real ticks within a day
+CS	3	15:22:16.935	Ticks	EURUSD : 2025.04.17 23:59 - no real ticks within a day
+CS	3	15:22:16.936	Ticks	EURUSD : 2025.04.18 23:59 - no real ticks within a day
+CS	3	15:22:16.936	Ticks	EURUSD : 2025.04.20 23:59 - no real ticks within a day
+CS	3	15:22:16.938	Ticks	EURUSD : 2025.04.21 23:59 - no real ticks within a day
+CS	3	15:22:16.940	Ticks	EURUSD : 2025.04.22 23:59 - no real ticks within a day
+CS	3	15:22:16.942	Ticks	EURUSD : 2025.04.23 23:59 - no real ticks within a day
+CS	3	15:22:16.946	Ticks	EURUSD : 2025.04.24 23:59 - no real ticks within a day
+CS	3	15:22:16.949	Ticks	EURUSD : 2025.04.25 23:59 - no real ticks within a day
+CS	3	15:22:16.949	Ticks	EURUSD : 2025.04.27 23:59 - no real ticks within a day
+CS	3	15:22:16.952	Ticks	EURUSD : 2025.04.28 23:59 - no real ticks within a day
+CS	3	15:22:16.954	Ticks	EURUSD : 2025.04.29 23:59 - no real ticks within a day
+CS	3	15:22:16.956	Ticks	EURUSD : 2025.04.30 23:59 - no real ticks within a day
+CS	3	15:22:16.957	Ticks	EURUSD : 2025.05.01 23:59 - no real ticks within a day
+CS	3	15:22:16.960	Ticks	EURUSD : 2025.05.02 23:59 - no real ticks within a day
+CS	3	15:22:16.960	Ticks	EURUSD : 2025.05.04 23:59 - no real ticks within a day
+CS	3	15:22:16.962	Ticks	EURUSD : 2025.05.05 23:59 - no real ticks within a day
+CS	3	15:22:16.964	Ticks	EURUSD : 2025.05.06 23:59 - no real ticks within a day
+CS	3	15:22:16.965	Ticks	EURUSD : 2025.05.07 23:59 - no real ticks within a day
+CS	3	15:22:16.967	Ticks	EURUSD : 2025.05.08 23:59 - no real ticks within a day
+CS	3	15:22:16.969	Ticks	EURUSD : 2025.05.09 23:59 - no real ticks within a day
+CS	3	15:22:16.969	Ticks	EURUSD : 2025.05.11 23:59 - no real ticks within a day
+CS	3	15:22:16.971	Ticks	EURUSD : 2025.05.12 23:59 - no real ticks within a day
+CS	3	15:22:16.972	Ticks	EURUSD : 2025.05.13 23:59 - no real ticks within a day
+CS	3	15:22:16.974	Ticks	EURUSD : 2025.05.14 23:59 - no real ticks within a day
+CS	3	15:22:16.979	Ticks	EURUSD : 2025.05.15 23:59 - real ticks absent for 440 minutes out of 1440 total minute bars within a day
+CS	3	15:22:16.985	Ticks	EURUSD : 2025.05.18 23:59 - real ticks absent for 1 minutes out of 180 total minute bars within a day
+CS	3	15:22:16.990	Ticks	EURUSD : 2025.05.19 23:59 - real ticks absent for 18 minutes out of 1439 total minute bars within a day
+CS	3	15:22:16.997	Ticks	EURUSD : 2025.05.20 23:59 - real ticks absent for 10 minutes out of 1435 total minute bars within a day
+CS	3	15:22:17.001	Ticks	EURUSD : 2025.05.21 23:59 - real ticks absent for 14 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.004	Ticks	EURUSD : 2025.05.22 23:59 - real ticks absent for 925 minutes out of 1439 total minute bars within a day
+CS	3	15:22:17.005	Ticks	EURUSD : 2025.05.23 23:59 - real ticks absent for 848 minutes out of 1258 total minute bars within a day
+CS	3	15:22:17.007	Ticks	EURUSD : 2025.05.25 23:59 - real ticks absent for 10 minutes out of 179 total minute bars within a day
+CS	3	15:22:17.011	Ticks	EURUSD : 2025.05.26 23:59 - real ticks absent for 20 minutes out of 1349 total minute bars within a day
+CS	3	15:22:17.015	Ticks	EURUSD : 2025.05.27 23:59 - real ticks absent for 10 minutes out of 1394 total minute bars within a day
+CS	3	15:22:17.020	Ticks	EURUSD : 2025.05.28 23:59 - real ticks absent for 11 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.025	Ticks	EURUSD : 2025.05.29 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.028	Ticks	EURUSD : 2025.05.30 23:59 - real ticks absent for 1 minutes out of 1259 total minute bars within a day
+CS	3	15:22:17.030	Ticks	EURUSD : 2025.06.01 23:59 - real ticks absent for 6 minutes out of 179 total minute bars within a day
+CS	3	15:22:17.034	Ticks	EURUSD : 2025.06.02 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.037	Ticks	EURUSD : 2025.06.03 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.040	Ticks	EURUSD : 2025.06.04 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+CS	3	15:22:17.045	Ticks	EURUSD : 2025.06.05 23:59 - real ticks absent for 45 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.047	Ticks	EURUSD : 2025.06.06 23:59 - real ticks absent for 650 minutes out of 1259 total minute bars within a day
+CS	3	15:22:17.049	Ticks	EURUSD : 2025.06.08 23:59 - real ticks absent for 9 minutes out of 179 total minute bars within a day
+CS	3	15:22:17.052	Ticks	EURUSD : 2025.06.09 23:59 - real ticks absent for 20 minutes out of 1439 total minute bars within a day
+CS	3	15:22:17.055	Ticks	EURUSD : 2025.06.10 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.060	Ticks	EURUSD : 2025.06.11 23:59 - real ticks absent for 1303 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.067	Ticks	EURUSD : 2025.06.12 23:59 - real ticks absent for 25 minutes out of 1438 total minute bars within a day
+CS	3	15:22:17.074	Ticks	EURUSD : 2025.06.15 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+CS	3	15:22:17.080	Ticks	EURUSD : 2025.06.16 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.083	Ticks	EURUSD : 2025.06.17 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.088	Ticks	EURUSD : 2025.06.18 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.091	Ticks	EURUSD : 2025.06.19 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.103	Ticks	EURUSD : 2025.06.23 23:59 - real ticks absent for 9 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.109	Ticks	EURUSD : 2025.06.24 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+CS	3	15:22:17.114	Ticks	EURUSD : 2025.06.25 23:59 - real ticks absent for 16 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.118	Ticks	EURUSD : 2025.06.26 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.122	Ticks	EURUSD : 2025.06.29 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+CS	3	15:22:17.128	Ticks	EURUSD : 2025.06.30 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.132	Ticks	EURUSD : 2025.07.01 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.135	Ticks	EURUSD : 2025.07.02 23:59 - real ticks absent for 12 minutes out of 1440 total minute bars within a day
+CS	3	15:22:17.138	Ticks	EURUSD : 2025.07.03 23:59 - real ticks absent for 7 minutes out of 890 total minute bars within a day
+CS	3	15:22:17.140	Ticks	EURUSD : 2025.07.04 23:59 - real ticks absent for 1 minutes out of 852 total minute bars within a day
+CS	3	15:22:17.142	Ticks	EURUSD : 2025.07.06 23:59 - real ticks absent for 1 minutes out of 178 total minute bars within a day
+CS	3	15:22:17.145	Ticks	EURUSD : 2025.07.07 23:59 - real ticks absent for 9 minutes out of 1439 total minute bars within a day
+CS	3	15:22:17.149	Ticks	EURUSD : 2025.07.08 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+CS	0	15:22:18.147	Ticks	EURUSD : real ticks begin from 2025.03.11 00:00:00
+CS	3	15:22:18.147	Ticks	EURUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 70483 minutes of 3704203 total minute bars, every tick generation used
+CS	3	15:22:18.147	Ticks	EURUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 54 whole days
+CS	0	15:22:18.223	Ticks	USDAED : real ticks begin from 2025.12.20 00:00:00
+CS	0	15:22:32.590	Tester	EURUSD,M15: 211401359 ticks, 247556 bars generated. Environment synchronized in 0:00:01.534. Test passed in 0:00:19.687 (including ticks preprocessing 0:00:05.172).
+CS	0	15:22:32.590	Tester	EURUSD,M15: total time from login to stop testing 0:00:21.221 (including 0:00:01.585 for history data synchronization)
+CS	0	15:22:32.590	Tester	4083 Mb memory used including 16 Mb of history data, 3968 Mb of tick data
+CS	0	15:23:20.627	Symbols	GBPUSD: symbol to be synchronized
+CS	0	15:23:20.627	Symbols	GBPUSD: symbol synchronized, 4120 bytes of symbol info received
+CS	0	15:23:20.837	History	GBPUSD: load 6.28 Mb of history data to synchronize in 0:00:00.204
+CS	0	15:23:20.837	History	GBPUSD: history synchronized from 2015.01.02 to 2026.07.03
+CS	0	15:23:20.837	Ticks	GBPUSD: ticks synchronization started
+CS	0	15:23:21.766	Ticks	GBPUSD: load 98.03 Mb of tick data to synchronize in 0:00:00.938
+CS	0	15:23:21.766	Ticks	GBPUSD: history ticks synchronized from 2025.03.11 to 2026.06.30
+CS	0	15:23:21.796	History	GBPUSD,M15: history cache allocated for 287587 bars and contains 37164 bars from 2015.01.02 06:00 to 2016.06.30 23:45
+CS	0	15:23:21.796	History	GBPUSD,M15: history begins from 2015.01.02 06:00
+CS	0	15:23:21.797	Tester	GBPUSD,M15 (Capital.ComMena-Demo): generating based on real ticks
+CS	0	15:23:21.797	Tester	GBPUSD,M15: testing of Experts\LondonRangeExpansionRealTicksV1.ex5 from 2016.07.01 00:00 to 2026.07.01 00:00 started with inputs:
+CS	0	15:23:21.797	Tester	  InpLogicalSymbol=GBPUSD
+CS	0	15:23:21.797	Tester	  InpRunId=PREFLIGHT_GBPUSD
+CS	0	15:23:21.797	Tester	  InpOutputPrefix=mt5_london_preflight_GBPUSD
+CS	0	15:23:21.801	Symbols	USDAED: symbol to be synchronized
+CS	0	15:23:21.801	Symbols	USDAED: symbol synchronized, 4120 bytes of symbol info received
+CS	0	15:23:21.804	History	USDAED: load 27 bytes of history data to synchronize in 0:00:00.000
+CS	0	15:23:21.804	History	USDAED: history synchronized from 2025.12.20 to 2026.07.01
+CS	0	15:23:21.804	Ticks	USDAED: ticks synchronization started
+CS	0	15:23:21.804	Ticks	USDAED: load 34 bytes of tick data to synchronize in 0:00:00.000
+CS	0	15:23:21.804	Ticks	USDAED: history ticks synchronized from 2025.12.20 to 2026.06.30
+CS	3	15:23:26.135	Ticks	GBPUSD : 2025.03.11 23:59 - real ticks absent for 777 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.138	Ticks	GBPUSD : 2025.03.12 23:59 - real ticks absent for 598 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.139	Ticks	GBPUSD : 2025.03.13 23:59 - no real ticks within a day
+CS	3	15:23:26.140	Ticks	GBPUSD : 2025.03.14 23:59 - no real ticks within a day
+CS	3	15:23:26.140	Ticks	GBPUSD : 2025.03.16 23:59 - no real ticks within a day
+CS	3	15:23:26.141	Ticks	GBPUSD : 2025.03.17 23:59 - no real ticks within a day
+CS	3	15:23:26.142	Ticks	GBPUSD : 2025.03.18 23:59 - no real ticks within a day
+CS	3	15:23:26.143	Ticks	GBPUSD : 2025.03.19 23:59 - no real ticks within a day
+CS	3	15:23:26.145	Ticks	GBPUSD : 2025.03.20 23:59 - no real ticks within a day
+CS	3	15:23:26.146	Ticks	GBPUSD : 2025.03.21 23:59 - no real ticks within a day
+CS	3	15:23:26.146	Ticks	GBPUSD : 2025.03.23 23:59 - no real ticks within a day
+CS	3	15:23:26.147	Ticks	GBPUSD : 2025.03.24 23:59 - no real ticks within a day
+CS	3	15:23:26.148	Ticks	GBPUSD : 2025.03.25 23:59 - no real ticks within a day
+CS	3	15:23:26.150	Ticks	GBPUSD : 2025.03.26 23:59 - no real ticks within a day
+CS	3	15:23:26.151	Ticks	GBPUSD : 2025.03.27 23:59 - no real ticks within a day
+CS	3	15:23:26.152	Ticks	GBPUSD : 2025.03.28 23:59 - no real ticks within a day
+CS	3	15:23:26.152	Ticks	GBPUSD : 2025.03.30 23:59 - no real ticks within a day
+CS	3	15:23:26.154	Ticks	GBPUSD : 2025.03.31 23:59 - no real ticks within a day
+CS	3	15:23:26.156	Ticks	GBPUSD : 2025.04.01 23:59 - no real ticks within a day
+CS	3	15:23:26.157	Ticks	GBPUSD : 2025.04.02 23:59 - no real ticks within a day
+CS	3	15:23:26.160	Ticks	GBPUSD : 2025.04.03 23:59 - no real ticks within a day
+CS	3	15:23:26.163	Ticks	GBPUSD : 2025.04.04 23:59 - no real ticks within a day
+CS	3	15:23:26.163	Ticks	GBPUSD : 2025.04.06 23:59 - no real ticks within a day
+CS	3	15:23:26.166	Ticks	GBPUSD : 2025.04.07 23:59 - no real ticks within a day
+CS	3	15:23:26.169	Ticks	GBPUSD : 2025.04.08 23:59 - no real ticks within a day
+CS	3	15:23:26.171	Ticks	GBPUSD : 2025.04.09 23:59 - no real ticks within a day
+CS	3	15:23:26.175	Ticks	GBPUSD : 2025.04.10 23:59 - no real ticks within a day
+CS	3	15:23:26.177	Ticks	GBPUSD : 2025.04.11 23:59 - no real ticks within a day
+CS	3	15:23:26.177	Ticks	GBPUSD : 2025.04.13 23:59 - no real ticks within a day
+CS	3	15:23:26.179	Ticks	GBPUSD : 2025.04.14 23:59 - no real ticks within a day
+CS	3	15:23:26.181	Ticks	GBPUSD : 2025.04.15 23:59 - no real ticks within a day
+CS	3	15:23:26.183	Ticks	GBPUSD : 2025.04.16 23:59 - no real ticks within a day
+CS	3	15:23:26.185	Ticks	GBPUSD : 2025.04.17 23:59 - no real ticks within a day
+CS	3	15:23:26.187	Ticks	GBPUSD : 2025.04.18 23:59 - no real ticks within a day
+CS	3	15:23:26.187	Ticks	GBPUSD : 2025.04.20 23:59 - no real ticks within a day
+CS	3	15:23:26.189	Ticks	GBPUSD : 2025.04.21 23:59 - no real ticks within a day
+CS	3	15:23:26.191	Ticks	GBPUSD : 2025.04.22 23:59 - no real ticks within a day
+CS	3	15:23:26.193	Ticks	GBPUSD : 2025.04.23 23:59 - no real ticks within a day
+CS	3	15:23:26.194	Ticks	GBPUSD : 2025.04.24 23:59 - no real ticks within a day
+CS	3	15:23:26.195	Ticks	GBPUSD : 2025.04.25 23:59 - no real ticks within a day
+CS	3	15:23:26.196	Ticks	GBPUSD : 2025.04.27 23:59 - no real ticks within a day
+CS	3	15:23:26.198	Ticks	GBPUSD : 2025.04.28 23:59 - no real ticks within a day
+CS	3	15:23:26.198	Ticks	GBPUSD : 2025.04.29 23:59 - no real ticks within a day
+CS	3	15:23:26.200	Ticks	GBPUSD : 2025.04.30 23:59 - no real ticks within a day
+CS	3	15:23:26.201	Ticks	GBPUSD : 2025.05.01 23:59 - no real ticks within a day
+CS	3	15:23:26.203	Ticks	GBPUSD : 2025.05.02 23:59 - no real ticks within a day
+CS	3	15:23:26.203	Ticks	GBPUSD : 2025.05.04 23:59 - no real ticks within a day
+CS	3	15:23:26.204	Ticks	GBPUSD : 2025.05.05 23:59 - no real ticks within a day
+CS	3	15:23:26.206	Ticks	GBPUSD : 2025.05.06 23:59 - no real ticks within a day
+CS	3	15:23:26.207	Ticks	GBPUSD : 2025.05.07 23:59 - no real ticks within a day
+CS	3	15:23:26.210	Ticks	GBPUSD : 2025.05.08 23:59 - no real ticks within a day
+CS	3	15:23:26.211	Ticks	GBPUSD : 2025.05.09 23:59 - no real ticks within a day
+CS	3	15:23:26.211	Ticks	GBPUSD : 2025.05.11 23:59 - no real ticks within a day
+CS	3	15:23:26.213	Ticks	GBPUSD : 2025.05.12 23:59 - no real ticks within a day
+CS	3	15:23:26.214	Ticks	GBPUSD : 2025.05.13 23:59 - no real ticks within a day
+CS	3	15:23:26.216	Ticks	GBPUSD : 2025.05.14 23:59 - no real ticks within a day
+CS	3	15:23:26.220	Ticks	GBPUSD : 2025.05.15 23:59 - real ticks absent for 439 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.224	Ticks	GBPUSD : 2025.05.18 23:59 - real ticks absent for 5 minutes out of 179 total minute bars within a day
+CS	3	15:23:26.229	Ticks	GBPUSD : 2025.05.19 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.234	Ticks	GBPUSD : 2025.05.20 23:59 - real ticks absent for 6 minutes out of 1435 total minute bars within a day
+CS	3	15:23:26.237	Ticks	GBPUSD : 2025.05.21 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.239	Ticks	GBPUSD : 2025.05.22 23:59 - real ticks absent for 927 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.240	Ticks	GBPUSD : 2025.05.23 23:59 - real ticks absent for 848 minutes out of 1258 total minute bars within a day
+CS	3	15:23:26.242	Ticks	GBPUSD : 2025.05.25 23:59 - real ticks absent for 9 minutes out of 177 total minute bars within a day
+CS	3	15:23:26.245	Ticks	GBPUSD : 2025.05.26 23:59 - real ticks absent for 9 minutes out of 1355 total minute bars within a day
+CS	3	15:23:26.249	Ticks	GBPUSD : 2025.05.27 23:59 - real ticks absent for 7 minutes out of 1394 total minute bars within a day
+CS	3	15:23:26.254	Ticks	GBPUSD : 2025.05.28 23:59 - real ticks absent for 7 minutes out of 1438 total minute bars within a day
+CS	3	15:23:26.258	Ticks	GBPUSD : 2025.05.29 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.259	Ticks	GBPUSD : 2025.05.30 23:59 - real ticks absent for 1 minutes out of 1259 total minute bars within a day
+CS	3	15:23:26.262	Ticks	GBPUSD : 2025.06.01 23:59 - real ticks absent for 4 minutes out of 179 total minute bars within a day
+CS	3	15:23:26.265	Ticks	GBPUSD : 2025.06.02 23:59 - real ticks absent for 7 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.268	Ticks	GBPUSD : 2025.06.03 23:59 - real ticks absent for 9 minutes out of 1438 total minute bars within a day
+CS	3	15:23:26.271	Ticks	GBPUSD : 2025.06.04 23:59 - real ticks absent for 5 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.274	Ticks	GBPUSD : 2025.06.05 23:59 - real ticks absent for 46 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.276	Ticks	GBPUSD : 2025.06.06 23:59 - real ticks absent for 650 minutes out of 1259 total minute bars within a day
+CS	3	15:23:26.278	Ticks	GBPUSD : 2025.06.08 23:59 - real ticks absent for 6 minutes out of 178 total minute bars within a day
+CS	3	15:23:26.281	Ticks	GBPUSD : 2025.06.09 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.283	Ticks	GBPUSD : 2025.06.10 23:59 - real ticks absent for 5 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.286	Ticks	GBPUSD : 2025.06.11 23:59 - real ticks absent for 1301 minutes out of 1437 total minute bars within a day
+CS	3	15:23:26.289	Ticks	GBPUSD : 2025.06.12 23:59 - real ticks absent for 27 minutes out of 1438 total minute bars within a day
+CS	3	15:23:26.294	Ticks	GBPUSD : 2025.06.15 23:59 - real ticks absent for 1 minutes out of 179 total minute bars within a day
+CS	3	15:23:26.298	Ticks	GBPUSD : 2025.06.16 23:59 - real ticks absent for 4 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.301	Ticks	GBPUSD : 2025.06.17 23:59 - real ticks absent for 5 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.305	Ticks	GBPUSD : 2025.06.18 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.308	Ticks	GBPUSD : 2025.06.19 23:59 - real ticks absent for 6 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.312	Ticks	GBPUSD : 2025.06.22 23:59 - real ticks absent for 2 minutes out of 178 total minute bars within a day
+CS	3	15:23:26.316	Ticks	GBPUSD : 2025.06.23 23:59 - real ticks absent for 10 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.319	Ticks	GBPUSD : 2025.06.24 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.323	Ticks	GBPUSD : 2025.06.25 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.326	Ticks	GBPUSD : 2025.06.26 23:59 - real ticks absent for 11 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.330	Ticks	GBPUSD : 2025.06.29 23:59 - real ticks absent for 4 minutes out of 180 total minute bars within a day
+CS	3	15:23:26.333	Ticks	GBPUSD : 2025.06.30 23:59 - real ticks absent for 8 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.336	Ticks	GBPUSD : 2025.07.01 23:59 - real ticks absent for 10 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.340	Ticks	GBPUSD : 2025.07.02 23:59 - real ticks absent for 12 minutes out of 1440 total minute bars within a day
+CS	3	15:23:26.343	Ticks	GBPUSD : 2025.07.03 23:59 - real ticks absent for 11 minutes out of 891 total minute bars within a day
+CS	3	15:23:26.349	Ticks	GBPUSD : 2025.07.06 23:59 - real ticks absent for 17 minutes out of 177 total minute bars within a day
+CS	3	15:23:26.354	Ticks	GBPUSD : 2025.07.07 23:59 - real ticks absent for 7 minutes out of 1439 total minute bars within a day
+CS	3	15:23:26.357	Ticks	GBPUSD : 2025.07.08 23:59 - real ticks absent for 6 minutes out of 1440 total minute bars within a day
+CS	0	15:23:27.590	Ticks	GBPUSD : real ticks begin from 2025.03.11 00:00:00
+CS	3	15:23:27.590	Ticks	GBPUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 70414 minutes of 3717314 total minute bars, every tick generation used
+CS	3	15:23:27.590	Ticks	GBPUSD : 2016.07.01 00:00 - 2026.07.01 00:00  real ticks absent for 54 whole days
+CS	0	15:23:27.673	Ticks	USDAED : real ticks begin from 2025.12.20 00:00:00
+CS	0	15:23:40.285	Tester	GBPUSD,M15: 249270139 ticks, 248489 bars generated. Environment synchronized in 0:00:01.148. Test passed in 0:00:18.529 (including ticks preprocessing 0:00:05.828).
+CS	0	15:23:40.285	Tester	GBPUSD,M15: total time from login to stop testing 0:00:19.677 (including 0:00:01.148 for history data synchronization)
+CS	0	15:23:40.285	Tester	GBPUSD: generate 249270139 ticks in 0:00:05.750, passed to tester 249270141 ticks
+CS	0	15:23:40.285	Tester	4824 Mb memory used including 16 Mb of history data, 4736 Mb of tick data
+CS	0	15:23:40.285	Tester	test Experts\LondonRangeExpansionRealTicksV1.ex5 on GBPUSD,M15 thread finished

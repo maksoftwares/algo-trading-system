@@ -1,0 +1,19 @@
+{
+  "classification": "LONDON_MT5_REAL_TICK_V1_DATA_INVALID",
+  "common_complete_months": 0,
+  "common_months": [],
+  "economic_screen_performed": false,
+  "forward_shadow_may_be_proposed": false,
+  "labels": [
+    "CAPITAL.COM MT5 REAL-TICK RESEARCH SCREEN",
+    "NOT LONG-TERM ROBUSTNESS EVIDENCE",
+    "NOT FORWARD-SHADOW EVIDENCE",
+    "NOT DEPLOYMENT AUTHORIZATION"
+  ],
+  "official_tester_runs": 0,
+  "reason": "No acceptable common real-tick interval exists: all three reports show 13% real ticks, journals say real ticks begin 2025-03-11 with generated-tick fallback and 54 wholly missing real-tick days, and the tester instantiated at 1:50 despite the frozen 1:100 request.",
+  "requested_period": {
+    "end_exclusive": "2026-07-01T00:00:00Z",
+    "start": "2016-07-01T00:00:00Z"
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "account_currency": "AED",
+  "base_commit": "91824fabfa9bead949c39f540d66eaa98ee84fc3",
+  "base_tree": "e2626c039a79744c34984f8b5315c5dd5c6cc8c3",
+  "branch": "codex/multiasset-london-mt5-real-tick-screen-v1",
+  "classification": "LONDON_MT5_REAL_TICK_V1_DATA_INVALID",
+  "clean_worktree_after_commit": "REPORTED_EXTERNALLY_TO_AVOID_SELF_REFERENCE",
+  "clean_worktree_before_changes": true,
+  "commit_message": "research: screen London breakout in MT5 real ticks",
+  "compile_count": 2,
+  "compile_evidence": {
+    "attempt": 2,
+    "attempts": [
+      {
+        "attempt": 1,
+        "compile_log": {
+          "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile_attempt1.log",
+          "sha256": "8e4f624ded36572f5455537131cb7eab4ec5409a2435191ab942e59d4741ae82",
+          "size_bytes": 674
+        },
+        "correction": "Replace aggregate {0} initialization with ZeroMemory and check the time-limit OrderSend return; no strategy logic changed.",
+        "errors": [
+          "cannot convert 0 to enum ENUM_TRADE_REQUEST_ACTIONS at two zero-initializations"
+        ],
+        "result": "FAILED_COMPILER_COMPATIBILITY"
+      },
+      {
+        "attempt": 2,
+        "compile_log": {
+          "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile.log",
+          "sha256": "ac28a911496338c9cb81f77ce9ecf135350b90d96d0c217a7671f3b9448492ed",
+          "size_bytes": 1484
+        },
+        "result": "PASS_ZERO_ERRORS"
+      }
+    ],
+    "command": [
+      "MetaEditor64.exe",
+      "/compile:<LANE_EA>",
+      "/log:<COMPILE_LOG>"
+    ],
+    "compile_log": {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile.log",
+      "sha256": "ac28a911496338c9cb81f77ce9ecf135350b90d96d0c217a7671f3b9448492ed",
+      "size_bytes": 1484
+    },
+    "ex5": {
+      "logical_path": "ISOLATED_TESTER_ROOT/MQL5/Experts/LondonRangeExpansionRealTicksV1.ex5",
+      "sha256": "41de23b83f2d1c2ed337528c1b17bf8d99637d743f80d46d9e5dab990dd100c9",
+      "size_bytes": 30146
+    },
+    "metaeditor_version": "5.0.0.5833",
+    "result": "PASS_ZERO_ERRORS",
+    "return_code": 1,
+    "source": {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/mql5/LondonRangeExpansionRealTicksV1.mq5",
+      "sha256": "ac7d3d33e583e05acc7f036054ef0b35dafd54202a084a2cae4fe9d0cebc9344",
+      "size_bytes": 20509
+    },
+    "started_ns": 1784028075334933000
+  },
+  "config": {
+    "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/config/frozen_contract.json",
+    "sha256": "885dee3c4fbc3866ada2c0c3ae55414e1d7b80e78cde9e445f3c93c5d7dcb089",
+    "size_bytes": 1995
+  },
+  "contract_snapshot": {
+    "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_CONTRACT_SNAPSHOT.json",
+    "sha256": "5fe92eed33db76292a28328b185fc8fbfeeba753738fed84b04cda242578c308",
+    "size_bytes": 3698
+  },
+  "determinism_result": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+  "ea_source": {
+    "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/mql5/LondonRangeExpansionRealTicksV1.mq5",
+    "sha256": "ac7d3d33e583e05acc7f036054ef0b35dafd54202a084a2cae4fe9d0cebc9344",
+    "size_bytes": 20509
+  },
+  "environment": {
+    "cloud_agents": false,
+    "metaeditor_build": 5833,
+    "remote_agents": false,
+    "terminal_build": 5833,
+    "tester_agent": "LOCAL_ONLY"
+  },
+  "evidence_files": [
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/EURUSD/coverage.tsv",
+      "sha256": "a0bd07a507449a12e2c3e9a7792fa1f675d7e36015dfd46b350ed8d303d4accd",
+      "size_bytes": 3093
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/EURUSD/contract.tsv",
+      "sha256": "14ffe0d3479fc86b2baf24a24c682fe6fdedd400f1fe0553b89fa5645bd24eb3",
+      "size_bytes": 623
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/EURUSD/tester_report.html",
+      "sha256": "ee2a2b70f417caab8c7cf14ec0249be9f2aba2e447d340383293e74a8884af76",
+      "size_bytes": 12570
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/EURUSD/journal_excerpt.log",
+      "sha256": "f448274778d905c05b324320aa1dc58b73f49b7cca78536228b2049fb8ea2b3d",
+      "size_bytes": 31050
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/GBPUSD/coverage.tsv",
+      "sha256": "0b2543889d957cc8b866a48a1158c66725ca8fe099f32959343d3691b4bcb4a1",
+      "size_bytes": 3093
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/GBPUSD/contract.tsv",
+      "sha256": "895462297a00f5e01336dff0c1a05b2d7ed9014938ca4332be7ce3f7a46ba1f4",
+      "size_bytes": 623
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/GBPUSD/tester_report.html",
+      "sha256": "f9181889c25c9ae09fc2cb289bf6896a6f2f689c4627bf4737c7ceaa656588e5",
+      "size_bytes": 12570
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/GBPUSD/journal_excerpt.log",
+      "sha256": "54043c1357b0ca529e3568b4a99e466395f8bb7c4b019fb88c5bfd332c83007d",
+      "size_bytes": 57989
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/USDJPY/coverage.tsv",
+      "sha256": "8025ecb45a89b36c61d33e38a752c56d083860316c8744f676830263cf8c079c",
+      "size_bytes": 3093
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/USDJPY/contract.tsv",
+      "sha256": "47ae05c3b78ee564c95e0573cbb013877ca686b5e65916674559982b6898a794",
+      "size_bytes": 623
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/USDJPY/tester_report.html",
+      "sha256": "9d1c4b4ec38bfccf07d529671b9c75123ce85aa8f722f3f23f77fa3cae017702",
+      "size_bytes": 12570
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/preflight/USDJPY/journal_excerpt.log",
+      "sha256": "cf7af548666de36a577fed14c16955d94d689750be28daa402d02b473242f1cb",
+      "size_bytes": 85039
+    }
+  ],
+  "exact_symbols": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "files_outside_permitted_scope": 0,
+  "no_absolute_paths": true,
+  "official_tester_run_count": 0,
+  "optimization_passes": 0,
+  "outputs": [
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_REAL_TICK_RESULT.md",
+      "sha256": "a6a6dd5a20f8ae2f4fb4cf23d8d07af763a5f869245d4e61eb74af1a183e11e8",
+      "size_bytes": 560
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_REAL_TICK_RESULT.json",
+      "sha256": "6b49c10eb9fb56efd43564b316ad996da868ab7a801aeb948b277a6e2020968b",
+      "size_bytes": 796
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_HISTORY_COVERAGE.csv",
+      "sha256": "30d69e373d2798d522ad2216bc9da8d10ae3c4d07532da6aab8ef1010512a2cf",
+      "size_bytes": 1007
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_CONTRACT_SNAPSHOT.json",
+      "sha256": "5fe92eed33db76292a28328b185fc8fbfeeba753738fed84b04cda242578c308",
+      "size_bytes": 3698
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_TESTER_SETTINGS.json",
+      "sha256": "a3d49b87e910aa91d0ef80238ea898c47cd97843ac99fb33ab4d597f75ee05f8",
+      "size_bytes": 418
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_COMPILE_EVIDENCE.json",
+      "sha256": "ceaca269be66cff8be85373125dda3d12f7cbdad764bbd4b97561bfe39d9add7",
+      "size_bytes": 1889
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_RUN_INVENTORY.csv",
+      "sha256": "b17013da3a61850b2b68fcec0b02f0d1023cebcc8a7fed41d28db949d396ea79",
+      "size_bytes": 973
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_SIGNAL_LEDGER.csv",
+      "sha256": "6e79ed17ddac6a3476dd0f6989955669f95d5ff11f5b8bc0e8744fd53619a705",
+      "size_bytes": 95
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_TRADE_LEDGER.csv",
+      "sha256": "ffc7de93d71bb96ead4485c4dce91cb3b9aad08760c0c9c081962492ee9ec1fd",
+      "size_bytes": 106
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_REJECTION_FUNNEL.csv",
+      "sha256": "8803941851328c369059d2b770489704445371a0e690074a4422991ffa034ef4",
+      "size_bytes": 24
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_INSTRUMENT_RESULTS.csv",
+      "sha256": "1c34f86955de6ccc426a45ed08d275e904a5b1a87a9d59cf4b52f899572a057d",
+      "size_bytes": 82
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_DIRECTION_RESULTS.csv",
+      "sha256": "143a84dad8f4e78b3918919905f9268c363b31f77a65ca5a1fb5d63af934d0cf",
+      "size_bytes": 41
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_SEGMENT_RESULTS.csv",
+      "sha256": "df06e68619ae10de3108df9dea6d04c9ce0469ddc33c02357cf5a55831b0a381",
+      "size_bytes": 39
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_MONTHLY_RESULTS.csv",
+      "sha256": "dd1e0434744f3ce7e25c01b4d2b76511edd92f42a4d5cf6a6ea4b8d28491888f",
+      "size_bytes": 26
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_PORTFOLIO_RESULTS.csv",
+      "sha256": "88b4049996e566c806ff8bebf0fb2cc24157348605f94c2a6d2a8ad82f913b9f",
+      "size_bytes": 46
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_ACCOUNT_FEASIBLE_RESULTS.csv",
+      "sha256": "f948b5c055b5ec381f13defd56779cc01c10479c72b819e180b566e90c206c0d",
+      "size_bytes": 52
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_STRESS_RESULTS.csv",
+      "sha256": "0b89d481bacd190295faf50f69e6445721257a54b980668636fe1b66d2ad6031",
+      "size_bytes": 37
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_SPREAD_DIAGNOSTICS.csv",
+      "sha256": "20bef3c9d07ab9a6b1702a208582c663ab474d9dc4692b0ed6912f1c361a9e1f",
+      "size_bytes": 47
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_EXECUTION_DIAGNOSTICS.csv",
+      "sha256": "5464129dbe4f7f5af3cbb9863384fe957ea16e717eb1ddc8ac99c89eddaba74a",
+      "size_bytes": 59
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_DRAWDOWN_TIMELINE.csv",
+      "sha256": "44c3c40e6104425fa8dcb0dc14f59e343af07ee728047f8a1928d24ff8d19f81",
+      "size_bytes": 56
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_CORRELATION.csv",
+      "sha256": "fe6c6f9fcd05b29b892599ae2be78929c3468fa6bd889d3f71bd709f9a517fa9",
+      "size_bytes": 53
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_ACCOUNT_FEASIBILITY.csv",
+      "sha256": "f4d4665df791decc6826983147b51bd4b319ad1e6b0ad5ca2bca8bee69eb07fa",
+      "size_bytes": 98
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/outputs/MT5_LONDON_GATE_AUDIT.json",
+      "sha256": "024c0c95dcef369ba7d1c4c3a7b5c9e72f9a4ac08cf9669da9da5c61c01a2c71",
+      "size_bytes": 9842
+    }
+  ],
+  "parameter_search_count": 0,
+  "parent": "91824fabfa9bead949c39f540d66eaa98ee84fc3",
+  "preflight_tester_run_count": 3,
+  "reported_leverage": 50,
+  "requested_leverage": 100,
+  "research_commit": null,
+  "research_tree": null,
+  "run_1_normalized_hashes": "NOT_CREATED_COVERAGE_GATE_STOP",
+  "run_2_normalized_hashes": "NOT_CREATED_COVERAGE_GATE_STOP",
+  "server_logical_identity": "Capital.ComMena-Demo",
+  "set_files": [
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/sets/EURUSD_official.set",
+      "sha256": "f08773b9817a7198cfa7f2bc78aefbb3c335712f8594e5497c5594a604630f59",
+      "size_bytes": 299
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/sets/GBPUSD_official.set",
+      "sha256": "bc09d5851798adf0aa6a09a6a21315af7a59465d4e52b3733f468aaf37c2abda",
+      "size_bytes": 299
+    },
+    {
+      "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/sets/USDJPY_official.set",
+      "sha256": "ab998bba2d5dc46b4eea951a96f06820564d8340b758c66ddabe1968bdf0d10d",
+      "size_bytes": 299
+    }
+  ],
+  "strategy_revision_count": 0,
+  "test_command": "python -m pytest tests -q",
+  "test_result": "64 passed",
+  "tester_model": "Every tick based on real ticks",
+  "tester_model_code": 4,
+  "tester_reported_leverage": {
+    "EURUSD": "1:50",
+    "GBPUSD": "1:50",
+    "USDJPY": "1:50"
+  },
+  "tester_root": "ISOLATED_TESTER_ROOT",
+  "total_tester_run_count": 3
+}

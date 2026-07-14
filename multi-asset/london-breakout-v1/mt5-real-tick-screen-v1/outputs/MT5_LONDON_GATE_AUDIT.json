@@ -1,0 +1,275 @@
+{
+  "classification": "LONDON_MT5_REAL_TICK_V1_DATA_INVALID",
+  "gates": [
+    {
+      "evidence_file": "MT5_LONDON_RUN_MANIFEST.json",
+      "failure_reason": "",
+      "gate_name": "base_identity",
+      "instrument": "ALL",
+      "observed_value": "EXACT",
+      "passed": true,
+      "required_value": "EXACT",
+      "scope": "BASE"
+    },
+    {
+      "evidence_file": "MT5_LONDON_COMPILE_EVIDENCE.json",
+      "failure_reason": "",
+      "gate_name": "compile",
+      "instrument": "ALL",
+      "observed_value": "PASS_ZERO_ERRORS",
+      "passed": true,
+      "required_value": "ZERO_ERRORS",
+      "scope": "COMPILE"
+    },
+    {
+      "evidence_file": "evidence/preflight/EURUSD/tester_report.html",
+      "failure_reason": "Report is 13% real ticks and journal confirms every-tick generation fallback",
+      "gate_name": "tester_real_tick_mode",
+      "instrument": "EURUSD",
+      "observed_value": "13% real ticks; generated fallback=True",
+      "passed": false,
+      "required_value": "100% REAL TICKS; NO GENERATED FALLBACK",
+      "scope": "TESTER_MODE"
+    },
+    {
+      "evidence_file": "evidence/preflight/EURUSD/tester_report.html",
+      "failure_reason": "Tester-setting drift: report and EA contract snapshot show 1:50",
+      "gate_name": "tester_leverage",
+      "instrument": "EURUSD",
+      "observed_value": "1:50",
+      "passed": false,
+      "required_value": "1:100",
+      "scope": "TESTER_SETTINGS"
+    },
+    {
+      "evidence_file": "MT5_LONDON_HISTORY_COVERAGE.csv",
+      "failure_reason": "Common interval below 36 months",
+      "gate_name": "history_coverage",
+      "instrument": "EURUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=36 COMMON COMPLETE MONTHS",
+      "scope": "HISTORY"
+    },
+    {
+      "evidence_file": "evidence/preflight/GBPUSD/tester_report.html",
+      "failure_reason": "Report is 13% real ticks and journal confirms every-tick generation fallback",
+      "gate_name": "tester_real_tick_mode",
+      "instrument": "GBPUSD",
+      "observed_value": "13% real ticks; generated fallback=True",
+      "passed": false,
+      "required_value": "100% REAL TICKS; NO GENERATED FALLBACK",
+      "scope": "TESTER_MODE"
+    },
+    {
+      "evidence_file": "evidence/preflight/GBPUSD/tester_report.html",
+      "failure_reason": "Tester-setting drift: report and EA contract snapshot show 1:50",
+      "gate_name": "tester_leverage",
+      "instrument": "GBPUSD",
+      "observed_value": "1:50",
+      "passed": false,
+      "required_value": "1:100",
+      "scope": "TESTER_SETTINGS"
+    },
+    {
+      "evidence_file": "MT5_LONDON_HISTORY_COVERAGE.csv",
+      "failure_reason": "Common interval below 36 months",
+      "gate_name": "history_coverage",
+      "instrument": "GBPUSD",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=36 COMMON COMPLETE MONTHS",
+      "scope": "HISTORY"
+    },
+    {
+      "evidence_file": "evidence/preflight/USDJPY/tester_report.html",
+      "failure_reason": "Report is 13% real ticks and journal confirms every-tick generation fallback",
+      "gate_name": "tester_real_tick_mode",
+      "instrument": "USDJPY",
+      "observed_value": "13% real ticks; generated fallback=True",
+      "passed": false,
+      "required_value": "100% REAL TICKS; NO GENERATED FALLBACK",
+      "scope": "TESTER_MODE"
+    },
+    {
+      "evidence_file": "evidence/preflight/USDJPY/tester_report.html",
+      "failure_reason": "Tester-setting drift: report and EA contract snapshot show 1:50",
+      "gate_name": "tester_leverage",
+      "instrument": "USDJPY",
+      "observed_value": "1:50",
+      "passed": false,
+      "required_value": "1:100",
+      "scope": "TESTER_SETTINGS"
+    },
+    {
+      "evidence_file": "MT5_LONDON_HISTORY_COVERAGE.csv",
+      "failure_reason": "Common interval below 36 months",
+      "gate_name": "history_coverage",
+      "instrument": "USDJPY",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=36 COMMON COMPLETE MONTHS",
+      "scope": "HISTORY"
+    },
+    {
+      "evidence_file": "MT5_LONDON_HISTORY_COVERAGE.csv",
+      "failure_reason": "No acceptable common real-tick interval exists: all three reports show 13% real ticks, journals say real ticks begin 2025-03-11 with generated-tick fallback and 54 wholly missing real-tick days, and the tester instantiated at 1:50 despite the frozen 1:100 request.",
+      "gate_name": "all_three_common_history",
+      "instrument": "ALL",
+      "observed_value": 0,
+      "passed": false,
+      "required_value": ">=36 CONTIGUOUS MONTHS",
+      "scope": "HISTORY"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "timezone",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "data_integrity",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "instrument_frequency",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "portfolio_frequency",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "instrument_profitability",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "portfolio_profitability",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "stress",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "locked_exam",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "drawdown",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "concentration",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "account_granularity",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "margin",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "sizing_rejection",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_REAL_TICK_RESULT.json",
+      "failure_reason": "Common real-tick coverage below 36 months",
+      "gate_name": "determinism",
+      "instrument": "ALL",
+      "observed_value": "NOT_EVALUATED_COVERAGE_GATE_STOP",
+      "passed": false,
+      "required_value": "PASS",
+      "scope": "ECONOMIC_SCREEN"
+    },
+    {
+      "evidence_file": "MT5_LONDON_RUN_MANIFEST.json",
+      "failure_reason": "",
+      "gate_name": "scope",
+      "instrument": "ALL",
+      "observed_value": 0,
+      "passed": true,
+      "required_value": "ZERO OUTSIDE-SCOPE FILES",
+      "scope": "REPOSITORY"
+    }
+  ]
+}

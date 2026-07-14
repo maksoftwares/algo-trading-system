@@ -1,0 +1,9 @@
+InpLogicalSymbol=EURUSD
+InpOfficialRunMarker=LONDON_MT5_REAL_TICK_V1_OFFICIAL
+InpRunId=OFFICIAL_RUN_ID
+InpOutputPrefix=mt5_london_EURUSD_OFFICIAL_RUN_ID
+InpFrozenStart=2016.07.01 00:00:00
+InpFrozenEndExclusive=2026.07.01 00:00:00
+InpStartingEquity=1000.0
+InpRiskFraction=0.005
+InpDebugLogging=false

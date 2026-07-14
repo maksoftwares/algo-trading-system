@@ -1,0 +1,7 @@
+MetaEditor executable version: 5.0.0.5833
+
+<ISOLATED_TESTER_ROOT>/MQL5/Experts/LondonRangeExpansionRealTicksV1.mq5 : information: compiling <ISOLATED_TESTER_ROOT>/MQL5/Experts/LondonRangeExpansionRealTicksV1.mq5
+<ISOLATED_TESTER_ROOT>/MQL5/Experts/LondonRangeExpansionRealTicksV1.mq5(368,29) : error 262: cannot convert 0 to enum 'ENUM_TRADE_REQUEST_ACTIONS'
+<ISOLATED_TESTER_ROOT>/MQL5/Experts/LondonRangeExpansionRealTicksV1.mq5(482,29) : error 262: cannot convert 0 to enum 'ENUM_TRADE_REQUEST_ACTIONS'
+<ISOLATED_TESTER_ROOT>/MQL5/Experts/LondonRangeExpansionRealTicksV1.mq5(494,7) : warning 83: return value of 'OrderSend' should be checked
+Result: 2 errors, 1 warnings

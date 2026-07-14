@@ -1,0 +1,51 @@
+{
+  "attempt": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "compile_log": {
+        "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile_attempt1.log",
+        "sha256": "8e4f624ded36572f5455537131cb7eab4ec5409a2435191ab942e59d4741ae82",
+        "size_bytes": 674
+      },
+      "correction": "Replace aggregate {0} initialization with ZeroMemory and check the time-limit OrderSend return; no strategy logic changed.",
+      "errors": [
+        "cannot convert 0 to enum ENUM_TRADE_REQUEST_ACTIONS at two zero-initializations"
+      ],
+      "result": "FAILED_COMPILER_COMPATIBILITY"
+    },
+    {
+      "attempt": 2,
+      "compile_log": {
+        "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile.log",
+        "sha256": "ac28a911496338c9cb81f77ce9ecf135350b90d96d0c217a7671f3b9448492ed",
+        "size_bytes": 1484
+      },
+      "result": "PASS_ZERO_ERRORS"
+    }
+  ],
+  "command": [
+    "MetaEditor64.exe",
+    "/compile:<LANE_EA>",
+    "/log:<COMPILE_LOG>"
+  ],
+  "compile_log": {
+    "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/evidence/compile/metaeditor_compile.log",
+    "sha256": "ac28a911496338c9cb81f77ce9ecf135350b90d96d0c217a7671f3b9448492ed",
+    "size_bytes": 1484
+  },
+  "ex5": {
+    "logical_path": "ISOLATED_TESTER_ROOT/MQL5/Experts/LondonRangeExpansionRealTicksV1.ex5",
+    "sha256": "41de23b83f2d1c2ed337528c1b17bf8d99637d743f80d46d9e5dab990dd100c9",
+    "size_bytes": 30146
+  },
+  "metaeditor_version": "5.0.0.5833",
+  "result": "PASS_ZERO_ERRORS",
+  "return_code": 1,
+  "source": {
+    "path": "multi-asset/london-breakout-v1/mt5-real-tick-screen-v1/mql5/LondonRangeExpansionRealTicksV1.mq5",
+    "sha256": "ac7d3d33e583e05acc7f036054ef0b35dafd54202a084a2cae4fe9d0cebc9344",
+    "size_bytes": 20509
+  },
+  "started_ns": 1784028075334933000
+}
