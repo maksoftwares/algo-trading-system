@@ -1,0 +1,35 @@
+{
+  "phase": "XAU_FAST_DISCOVERY_V2",
+  "instrument": "XAUUSD",
+  "source_identifier": "XAU-USD",
+  "source_origin": "https://jetta.dukascopy.com/v1",
+  "development": ["2021-07-01T00:00:00.000Z", "2024-07-01T00:00:00.000Z"],
+  "validation": ["2024-07-01T00:00:00.000Z", "2025-07-01T00:00:00.000Z"],
+  "locked_exam": ["2025-07-01T00:00:00.000Z", "2026-07-01T00:00:00.000Z"],
+  "entry_window_utc": [6, 17],
+  "forced_exit_hour_utc": 20,
+  "stress_slippage_R": 0.05,
+  "broker_transfer_diagnostic_R": 0.15,
+  "parameter_search_count": 0,
+  "global_positions": 1,
+  "family_daily_trades": 1,
+  "identical_timestamp_rule": "IDENTICAL_TIMESTAMP_STOP_FIRST",
+  "strategy_ids": [
+    "XAU_V2_H4_TREND_PULLBACK_CONTINUATION",
+    "XAU_V2_H4_BREAKOUT_RETEST_CONTINUATION",
+    "XAU_V2_H4_COMPRESSION_EXPANSION",
+    "XAU_V2_H1_FAILED_AUCTION_REVERSAL",
+    "XAU_V2_LONDON_SESSION_SWEEP_RECLAIM",
+    "XAU_V2_INTRADAY_IMPULSE_CONTINUATION"
+  ],
+  "development_gates": {
+    "accepted_trades_min": 60,
+    "baseline_pf_min": 1.05,
+    "baseline_expectancy_min_R": 0.02,
+    "baseline_net_positive": true,
+    "stress_pf_min": 1.0,
+    "stress_net_positive": true,
+    "maximum_closed_drawdown_max_R": 20.0,
+    "top_ten_winners_gross_profit_max_share": 0.50
+  }
+}
