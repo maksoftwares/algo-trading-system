@@ -1,0 +1,41 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_candidate_ranker_model_v1",
+  "selected_model_id": null,
+  "selection_probability_cutoff": null,
+  "selected_top_fraction": null,
+  "model": null,
+  "features": [
+    "direction_long",
+    "trend_strength_atr",
+    "ema_gap_atr",
+    "close_fast_distance_atr",
+    "body_fraction",
+    "directional_close_location",
+    "touch_distance_atr",
+    "stop_distance_atr",
+    "log1p_signal_tick_count",
+    "atr_fraction_of_price",
+    "entry_spread_r",
+    "server_hour_sin",
+    "server_hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "family_pullback",
+    "family_breakout",
+    "family_trend_sweep",
+    "family_band_fade",
+    "family_impulse_fade",
+    "family_mean_sweep"
+  ],
+  "input_sha256": [
+    "9db8f27e27133c1fca702181a0f093d9ca5a1e84817286c4cdff9948a78131c2",
+    "673b816709e766cf57faaca5fffc81b49ae205d024e2297e822f81ba6f2a55e6"
+  ],
+  "authorization": {
+    "research_only": true,
+    "reserved_validation_outcomes_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_candidate_ranker_v1",
+  "classification": "DUKASCOPY_M5_CANDIDATE_RANKER_NO_VALIDATION_SURVIVOR",
+  "created_at_utc": "2026-07-15T20:12:10.172189Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_m5_candidate_ranker.json",
+  "contract_sha256": "429ff98ad7f51586efb07a0d48592de0888e9c736ef0b0d5092f8af7f4ef6017",
+  "inputs": [
+    {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_DISCOVERY_TRAIN_EXECUTED_LABELS.csv",
+      "sha256": "9db8f27e27133c1fca702181a0f093d9ca5a1e84817286c4cdff9948a78131c2",
+      "selected_rows": 4705
+    },
+    {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_MEAN_REVERSION_TRAIN_EXECUTED_LABELS.csv",
+      "sha256": "673b816709e766cf57faaca5fffc81b49ae205d024e2297e822f81ba6f2a55e6",
+      "selected_rows": 7187
+    }
+  ],
+  "population": {
+    "train": 5357,
+    "validation": 4267,
+    "test": 2268
+  },
+  "source_days": {
+    "train": 388,
+    "validation": 259,
+    "test": 127
+  },
+  "train_positive_share": 0.3673697965279074,
+  "validation_evaluations": [
+    {
+      "model_id": "logistic_l2_0p01",
+      "top_fraction": 0.5,
+      "probability_cutoff": 0.3689505312641535,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.516128523175345,
+        "brier_score": 0.2335948930151862,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.6599558967987315
+      },
+      "selected_metrics": {
+        "trades": 1424,
+        "trades_per_source_day": 5.498069498069498,
+        "wins": 547,
+        "win_rate_pct": 38.412921348314605,
+        "stress_net_usd": -1020.7607205081009,
+        "stress_profit_factor": 0.8046883237307686,
+        "average_stress_r": -0.12484097454586718,
+        "max_closed_drawdown_r": 208.92349506153195,
+        "max_closed_drawdown_usd": 1143.880438237267,
+        "minimum_direction_share": 0.17907303370786518,
+        "direction_counts": {
+          "LONG": 1169,
+          "SHORT": 255
+        },
+        "positive_exit_month_share": 0.16666666666666666,
+        "top10_winners_removed_net_usd": -1229.1655943321748
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p01",
+      "top_fraction": 0.4,
+      "probability_cutoff": 0.3770130224274446,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.516128523175345,
+        "brier_score": 0.2335948930151862,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.6599558967987315
+      },
+      "selected_metrics": {
+        "trades": 1190,
+        "trades_per_source_day": 4.594594594594595,
+        "wins": 461,
+        "win_rate_pct": 38.739495798319325,
+        "stress_net_usd": -819.0684843587975,
+        "stress_profit_factor": 0.8198629336157682,
+        "average_stress_r": -0.11579522775271403,
+        "max_closed_drawdown_r": 166.0381929331537,
+        "max_closed_drawdown_usd": 919.9640305017365,
+        "minimum_direction_share": 0.1453781512605042,
+        "direction_counts": {
+          "LONG": 1017,
+          "SHORT": 173
+        },
+        "positive_exit_month_share": 0.25,
+        "top10_winners_removed_net_usd": -1034.2863788599543
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p01",
+      "top_fraction": 0.3,
+      "probability_cutoff": 0.3863399439265455,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.516128523175345,
+        "brier_score": 0.2335948930151862,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.6599558967987315
+      },
+      "selected_metrics": {
+        "trades": 919,
+        "trades_per_source_day": 3.548262548262548,
+        "wins": 364,
+        "win_rate_pct": 39.608269858541895,
+        "stress_net_usd": -583.6057869762764,
+        "stress_profit_factor": 0.842960528989363,
+        "average_stress_r": -0.0881513250058984,
+        "max_closed_drawdown_r": 117.57111016935755,
+        "max_closed_drawdown_usd": 706.0245697181733,
+        "minimum_direction_share": 0.12622415669205658,
+        "direction_counts": {
+          "SHORT": 116,
+          "LONG": 803
+        },
+        "positive_exit_month_share": 0.3333333333333333,
+        "top10_winners_removed_net_usd": -811.0356617673639
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p01",
+      "top_fraction": 0.2,
+      "probability_cutoff": 0.3965822129866818,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.516128523175345,
+        "brier_score": 0.2335948930151862,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.6599558967987315
+      },
+      "selected_metrics": {
+        "trades": 627,
+        "trades_per_source_day": 2.4208494208494207,
+        "wins": 239,
+        "win_rate_pct": 38.11802232854865,
+        "stress_net_usd": -597.6591259149304,
+        "stress_profit_factor": 0.7902138678253043,
+        "average_stress_r": -0.13234361432380512,
+        "max_closed_drawdown_r": 93.51654228984246,
+        "max_closed_drawdown_usd": 634.1592070462964,
+        "minimum_direction_share": 0.12280701754385964,
+        "direction_counts": {
+          "SHORT": 77,
+          "LONG": 550
+        },
+        "positive_exit_month_share": 0.08333333333333333,
+        "top10_winners_removed_net_usd": -825.0890007060179
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p10",
+      "top_fraction": 0.5,
+      "probability_cutoff": 0.36749540064795827,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.5155834703424363,
+        "brier_score": 0.23319625528868115,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.659138464387829
+      },
+      "selected_metrics": {
+        "trades": 1427,
+        "trades_per_source_day": 5.5096525096525095,
+        "wins": 543,
+        "win_rate_pct": 38.051857042747024,
+        "stress_net_usd": -1124.860599769674,
+        "stress_profit_factor": 0.7858769651632956,
+        "average_stress_r": -0.13719977183128948,
+        "max_closed_drawdown_r": 220.72496523240915,
+        "max_closed_drawdown_usd": 1215.6618512401617,
+        "minimum_direction_share": 0.15557112824106517,
+        "direction_counts": {
+          "LONG": 1205,
+          "SHORT": 222
+        },
+        "positive_exit_month_share": 0.16666666666666666,
+        "top10_winners_removed_net_usd": -1338.0705935080998
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p10",
+      "top_fraction": 0.4,
+      "probability_cutoff": 0.3731464362321526,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.5155834703424363,
+        "brier_score": 0.23319625528868115,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.659138464387829
+      },
+      "selected_metrics": {
+        "trades": 1196,
+        "trades_per_source_day": 4.617760617760617,
+        "wins": 457,
+        "win_rate_pct": 38.21070234113712,
+        "stress_net_usd": -920.7992741967589,
+        "stress_profit_factor": 0.7996098083047751,
+        "average_stress_r": -0.13006163270412535,
+        "max_closed_drawdown_r": 184.36391772022185,
+        "max_closed_drawdown_usd": 1026.9358950567114,
+        "minimum_direction_share": 0.11956521739130435,
+        "direction_counts": {
+          "LONG": 1053,
+          "SHORT": 143
+        },
+        "positive_exit_month_share": 0.3333333333333333,
+        "top10_winners_removed_net_usd": -1148.4426031134253
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p10",
+      "top_fraction": 0.3,
+      "probability_cutoff": 0.3790149429662382,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.5155834703424363,
+        "brier_score": 0.23319625528868115,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.659138464387829
+      },
+      "selected_metrics": {
+        "trades": 931,
+        "trades_per_source_day": 3.5945945945945947,
+        "wins": 363,
+        "win_rate_pct": 38.99033297529538,
+        "stress_net_usd": -685.4691087604197,
+        "stress_profit_factor": 0.818809138927962,
+        "average_stress_r": -0.10558869333717984,
+        "max_closed_drawdown_r": 130.199521624649,
+        "max_closed_drawdown_usd": 788.2531213964141,
+        "minimum_direction_share": 0.10096670247046187,
+        "direction_counts": {
+          "LONG": 837,
+          "SHORT": 94
+        },
+        "positive_exit_month_share": 0.3333333333333333,
+        "top10_winners_removed_net_usd": -913.5947965260444
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    },
+    {
+      "model_id": "logistic_l2_0p10",
+      "top_fraction": 0.2,
+      "probability_cutoff": 0.38618076592454903,
+      "classification_metrics": {
+        "rows": 4267,
+        "roc_auc": 0.5155834703424363,
+        "brier_score": 0.23319625528868115,
+        "train_prior_brier_score": 0.23318213828724915,
+        "log_loss": 0.659138464387829
+      },
+      "selected_metrics": {
+        "trades": 635,
+        "trades_per_source_day": 2.451737451737452,
+        "wins": 250,
+        "win_rate_pct": 39.37007874015748,
+        "stress_net_usd": -502.51896639467583,
+        "stress_profit_factor": 0.8176497025581978,
+        "average_stress_r": -0.09417724207886453,
+        "max_closed_drawdown_r": 84.75584662247876,
+        "max_closed_drawdown_usd": 589.7582665827548,
+        "minimum_direction_share": 0.09133858267716535,
+        "direction_counts": {
+          "LONG": 577,
+          "SHORT": 58
+        },
+        "positive_exit_month_share": 0.16666666666666666,
+        "top10_winners_removed_net_usd": -729.9670189762732
+      },
+      "gates": {
+        "auc_ge_minimum": false,
+        "trades_ge_minimum": true,
+        "trades_per_source_day_ge_minimum": true,
+        "stress_profit_factor_ge_minimum": false,
+        "average_stress_r_ge_minimum": false,
+        "direction_share_ge_minimum": false,
+        "top10_winners_removed_net_positive": false
+      }
+    }
+  ],
+  "validation_passing_count": 0,
+  "selected_validation_candidate": null,
+  "internal_test_outcomes_opened": false,
+  "internal_test_classification_metrics": null,
+  "internal_test_selected_metrics": null,
+  "internal_test_calendar_month_bootstrap": null,
+  "internal_test_gates": null,
+  "reserved_outcomes_after_2021_07_opened": false,
+  "artifacts": {
+    "model_json": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_MODEL.json",
+      "sha256": "eadf3dcca8401527f396b9bbbf3a192f065bd572e6412a4d29e55264af3278a3"
+    },
+    "predictions_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_PREDICTIONS.csv",
+      "sha256": "5ba336d4c7a62457083ecb4d5d1e9df78a90cfb33247a02ee195d0de563f8840"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "reserved_validation_outcomes_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "ranker_execution_authorized": false,
+    "strategy_promotion_authorized": false
+  },
+  "limitations": [
+    "The input families have negative unconditional training expectancy.",
+    "The internal test is inside an older period whose aggregate family outcomes were previously known.",
+    "A research survivor still requires untouched later-period and prospective evidence."
+  ]
+}
