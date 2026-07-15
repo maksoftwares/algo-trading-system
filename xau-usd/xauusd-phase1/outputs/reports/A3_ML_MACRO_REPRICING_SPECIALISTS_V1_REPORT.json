@@ -1,0 +1,135 @@
+{
+  "schema_version": "a3_ml_external_specialists_v1",
+  "campaign_id": "MACRO_REPRICING_V1",
+  "campaign_kind": "MACRO_REPRICING",
+  "classification": "EXTERNAL_SPECIALISTS_TRAIN_REJECTED",
+  "created_at_utc": "2026-07-15T21:47:54.637886Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_macro_repricing_specialists_v1.json",
+  "contract_sha256": "e92d0072bb94445e869e71ce0a6c701e17bd6d02d8e9e18695977e0732d52fc2",
+  "base_feature_cache": {
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\m5_macro_futures_features_v1.parquet",
+    "sha256": "4ed79c7456519a3c1b8995c2667e60304b5cf457af96c76356db8f9475dcfee7",
+    "source_inventory_sha256": "89a8ef8c37146208f956f98b9cacf8308286e1c50329ef59b03cd0ba76f3a7c0"
+  },
+  "m15_rows": 141495,
+  "source_days": {
+    "train": 624,
+    "validation": 310,
+    "internal_test": 311,
+    "exam": 620
+  },
+  "generated_candidate_population": 738,
+  "opened_candidate_population": 126,
+  "family_results": [
+    {
+      "family_id": "REAL_YIELD_SHOCK",
+      "train": {
+        "metrics": {
+          "trades": 32,
+          "baseline_profit_factor": 1.1584863334619069,
+          "baseline_average_r": 0.08641732076388106,
+          "baseline_net_r": 2.765354264444194,
+          "stress_profit_factor": 0.9774192817369003,
+          "average_stress_r": -0.013582679236119027,
+          "stress_net_r": -0.4346457355558089,
+          "maximum_closed_drawdown_r": 6.0861111897751865
+        },
+        "gates": {
+          "minimum_trades": false,
+          "baseline_profit_factor": true,
+          "stress_profit_factor": true,
+          "average_stress_r": true
+        },
+        "passes": false
+      },
+      "validation_opened": false,
+      "validation": null,
+      "internal_test_opened": false,
+      "internal_test": null,
+      "exam_opened": false,
+      "exam": null
+    },
+    {
+      "family_id": "YIELD_USD_AGREEMENT",
+      "train": {
+        "metrics": {
+          "trades": 42,
+          "baseline_profit_factor": 0.5418980008772327,
+          "baseline_average_r": -0.3321079653757323,
+          "baseline_net_r": -13.948534545780756,
+          "stress_profit_factor": 0.459036444020674,
+          "average_stress_r": -0.4321079653757324,
+          "stress_net_r": -18.14853454578076,
+          "maximum_closed_drawdown_r": 20.148534545780716
+        },
+        "gates": {
+          "minimum_trades": false,
+          "baseline_profit_factor": false,
+          "stress_profit_factor": false,
+          "average_stress_r": false
+        },
+        "passes": false
+      },
+      "validation_opened": false,
+      "validation": null,
+      "internal_test_opened": false,
+      "internal_test": null,
+      "exam_opened": false,
+      "exam": null
+    },
+    {
+      "family_id": "INFLATION_REPRICING",
+      "train": {
+        "metrics": {
+          "trades": 52,
+          "baseline_profit_factor": 0.4500000000000021,
+          "baseline_average_r": -0.42307692307692146,
+          "baseline_net_r": -21.999999999999915,
+          "stress_profit_factor": 0.38181818181818367,
+          "average_stress_r": -0.5230769230769214,
+          "stress_net_r": -27.199999999999918,
+          "maximum_closed_drawdown_r": 28.09999999999993
+        },
+        "gates": {
+          "minimum_trades": false,
+          "baseline_profit_factor": false,
+          "stress_profit_factor": false,
+          "average_stress_r": false
+        },
+        "passes": false
+      },
+      "validation_opened": false,
+      "validation": null,
+      "internal_test_opened": false,
+      "internal_test": null,
+      "exam_opened": false,
+      "exam": null
+    }
+  ],
+  "research_survivors": [],
+  "artifacts": {
+    "candidates_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MACRO_REPRICING_SPECIALISTS_V1_CANDIDATES.csv",
+      "sha256": "d996cec8147517c69ee0dec87b7ebe9ab26ade66d28b750b79e73a60310bd64b"
+    },
+    "metrics_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MACRO_REPRICING_SPECIALISTS_V1_METRICS.csv",
+      "sha256": "7e90ac964c4174d8229f33c22c08b1829774ec3553eac840cd3b7b2dfd188ff1"
+    },
+    "report_markdown": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MACRO_REPRICING_SPECIALISTS_V1_REPORT.md",
+      "sha256": "d74a4168f0061cf7faf3118271b95cea635315620cb46aa5258eb166b18d105d"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "validation_requires_train_family_pass": true,
+    "internal_test_requires_validation_pass": true,
+    "exam_requires_internal_test_pass": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "strategy_promotion_authorized": false,
+    "demo_or_live_authorized": false
+  }
+}

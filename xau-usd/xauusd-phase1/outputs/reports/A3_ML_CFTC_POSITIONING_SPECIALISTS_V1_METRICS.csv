@@ -1,0 +1,4 @@
+family_id,segment,trades,baseline_profit_factor,baseline_average_r,baseline_net_r,stress_profit_factor,average_stress_r,stress_net_r,maximum_closed_drawdown_r,passes,failed_gates
+COT_TREND_CONFIRM,train,135,0.70657254963889,-0.192362186713793,-25.968895206362053,0.5960274700066104,-0.292362186713793,-39.468895206362056,41.129441235718474,False,baseline_profit_factor|stress_profit_factor|average_stress_r
+COT_CROWDED_REVERSAL,train,65,0.8564627901662861,-0.08391406113355583,-5.454413973681129,0.7143857872751264,-0.18391406113355588,-11.954413973681133,16.15441397368103,False,minimum_trades|baseline_profit_factor|stress_profit_factor|average_stress_r
+COT_PRODUCER_CONFIRM,train,44,0.5914344376129891,-0.2692818479368935,-11.848401309223316,0.4919493045964855,-0.3692818479368936,-16.24840130922332,16.24840130922331,False,minimum_trades|baseline_profit_factor|stress_profit_factor|average_stress_r

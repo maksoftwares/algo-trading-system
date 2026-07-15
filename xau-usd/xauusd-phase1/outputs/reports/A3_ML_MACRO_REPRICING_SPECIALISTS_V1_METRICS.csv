@@ -1,0 +1,4 @@
+family_id,segment,trades,baseline_profit_factor,baseline_average_r,baseline_net_r,stress_profit_factor,average_stress_r,stress_net_r,maximum_closed_drawdown_r,passes,failed_gates
+REAL_YIELD_SHOCK,train,32,1.1584863334619069,0.08641732076388106,2.765354264444194,0.9774192817369003,-0.013582679236119027,-0.4346457355558089,6.0861111897751865,False,minimum_trades
+YIELD_USD_AGREEMENT,train,42,0.5418980008772327,-0.3321079653757323,-13.948534545780756,0.459036444020674,-0.4321079653757324,-18.14853454578076,20.148534545780716,False,minimum_trades|baseline_profit_factor|stress_profit_factor|average_stress_r
+INFLATION_REPRICING,train,52,0.4500000000000021,-0.42307692307692146,-21.999999999999915,0.38181818181818367,-0.5230769230769214,-27.199999999999918,28.09999999999993,False,minimum_trades|baseline_profit_factor|stress_profit_factor|average_stress_r
