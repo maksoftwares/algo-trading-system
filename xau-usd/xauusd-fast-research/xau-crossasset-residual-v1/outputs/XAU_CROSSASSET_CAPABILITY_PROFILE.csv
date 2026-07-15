@@ -1,0 +1,3 @@
+specialist_id,direction,entry_threshold_z,traded_instrument,explanatory_instruments,stage_a_status,router_compatible
+XAU_NEGATIVE_RESIDUAL_LONG_SPECIALIST,LONG,-2.5,XAUUSD,XAGUSD|EURUSD|USDJPY,REJECTED,false
+XAU_POSITIVE_RESIDUAL_SHORT_SPECIALIST,SHORT,2.5,XAUUSD,XAGUSD|EURUSD|USDJPY,REJECTED,false

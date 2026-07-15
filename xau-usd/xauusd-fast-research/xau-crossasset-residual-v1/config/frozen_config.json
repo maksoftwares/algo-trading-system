@@ -1,0 +1,41 @@
+{
+  "phase": "XAU_CROSSASSET_RESIDUAL_DIRECTIONAL_SPECIALISTS_V1",
+  "official_origin": "https://jetta.dukascopy.com/v1",
+  "instruments": {
+    "XAUUSD": "XAU-USD",
+    "XAGUSD": "XAG-USD",
+    "EURUSD": "EUR-USD",
+    "USDJPY": "USD-JPY"
+  },
+  "stage_a": ["2021-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+  "stage_b_validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+  "stage_b_locked_exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+  "model": {
+    "method": "OLS",
+    "intercept": true,
+    "window": 3000,
+    "minimum_observations": 2500,
+    "condition_number_limit": 1000000,
+    "residual_window": 500
+  },
+  "episodes": {
+    "long_threshold": -2.5,
+    "short_threshold": 2.5,
+    "maximum_hours": 6
+  },
+  "entry_window_utc": [6, 18],
+  "force_close_hour_utc": 20,
+  "h1_atr_period": 14,
+  "h1_atr_reference": 500,
+  "h1_atr_reject_percentile": 95,
+  "spread_reject_percentile": 99,
+  "stop_atr": 1.25,
+  "target_r": 1.5,
+  "maximum_hold_minutes": 90,
+  "ordinary_stress_fixed_r": 0.05,
+  "broker_transfer_r": 0.15,
+  "parameter_search_count": 0,
+  "feature_search_count": 0,
+  "model_search_count": 0,
+  "router_training_count": 0
+}

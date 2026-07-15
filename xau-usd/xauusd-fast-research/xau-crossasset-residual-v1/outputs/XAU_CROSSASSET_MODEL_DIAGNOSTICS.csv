@@ -1,0 +1,4 @@
+diagnostic,count,mean,std,minimum,p05,p50,p95,maximum
+condition_number,209419,5104.23723979,1466.79506608,2381.72298139,3014.07980088,5124.83621826,7646.59863781,8884.7322547
+valid_model_rows,209419,,,,,,,
+synchronized_observations,212720,,,,,,,
