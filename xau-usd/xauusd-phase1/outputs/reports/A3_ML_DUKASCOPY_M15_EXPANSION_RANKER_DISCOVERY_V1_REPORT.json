@@ -1,0 +1,215 @@
+{
+  "schema_version": "a3_ml_dukascopy_m15_expansion_ranker_discovery_v1",
+  "classification": "DUKASCOPY_M15_EXPANSION_RANKER_NO_DEVELOPMENT_SURVIVOR",
+  "created_at_utc": "2026-07-15T21:15:15.720862Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_m15_expansion_ranker_discovery_v1.json",
+  "contract_sha256": "9c700c0569576082e37f8f1a66611ecaae4d3ff915020c3b634b2769ad9cc0b4",
+  "base_expansion_contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_m15_range_expansion_v1.json",
+  "base_expansion_contract_sha256": "c297cf58ed2b3b19f4e2977d78838d8771047350589089c1a692ef4bfd544cbe",
+  "fit_population": 203,
+  "development_evaluation_population": 301,
+  "development_evaluation_source_days": 313,
+  "predictive_metrics": {
+    "auc": 0.4242718446601942,
+    "spearman": -0.12053365201705944,
+    "population": 301
+  },
+  "evaluations": [
+    {
+      "policy_id": "ML_TOP_60",
+      "policy_kind": "MODEL_TOP_FRACTION",
+      "top_fraction": 0.6,
+      "train_score_cutoff": -0.32559224919151203,
+      "predictive_metrics": {
+        "auc": 0.4242718446601942,
+        "spearman": -0.12053365201705944,
+        "population": 301
+      },
+      "economic_metrics": {
+        "trades": 164,
+        "wins": 49,
+        "losses": 115,
+        "maximum_closed_drawdown_r": 63.564007741532166,
+        "stress_profit_factor": 0.46271942803271254,
+        "average_stress_r": -0.37051224232641466,
+        "stress_net_r": -60.764007741532005,
+        "trades_per_source_day": 0.5239616613418531,
+        "positive_month_share": 0.08333333333333333,
+        "top10_winners_removed_net_r": -74.76400774153227,
+        "direction_counts": {
+          "LONG": 72,
+          "SHORT": 92
+        },
+        "family_counts": {
+          "M15_RANGE_EXPANSION": 164
+        }
+      },
+      "gates": {
+        "minimum_trades": true,
+        "minimum_frequency": true,
+        "maximum_frequency": true,
+        "stress_profit_factor": false,
+        "average_stress_r": false,
+        "positive_month_share": false,
+        "maximum_closed_drawdown_r": false,
+        "top10_winners_removed_net_positive": false,
+        "predictive_signal": false
+      },
+      "passes": false
+    },
+    {
+      "policy_id": "ML_TOP_45",
+      "policy_kind": "MODEL_TOP_FRACTION",
+      "top_fraction": 0.45,
+      "train_score_cutoff": -0.16180795907626053,
+      "predictive_metrics": {
+        "auc": 0.4242718446601942,
+        "spearman": -0.12053365201705944,
+        "population": 301
+      },
+      "economic_metrics": {
+        "trades": 129,
+        "wins": 35,
+        "losses": 94,
+        "maximum_closed_drawdown_r": 55.451149661650255,
+        "stress_profit_factor": 0.3908541173834327,
+        "average_stress_r": -0.4298538733461254,
+        "stress_net_r": -55.45114966165018,
+        "trades_per_source_day": 0.41214057507987223,
+        "positive_month_share": 0.0,
+        "top10_winners_removed_net_r": -69.45114966165038,
+        "direction_counts": {
+          "SHORT": 72,
+          "LONG": 57
+        },
+        "family_counts": {
+          "M15_RANGE_EXPANSION": 129
+        }
+      },
+      "gates": {
+        "minimum_trades": true,
+        "minimum_frequency": true,
+        "maximum_frequency": true,
+        "stress_profit_factor": false,
+        "average_stress_r": false,
+        "positive_month_share": false,
+        "maximum_closed_drawdown_r": false,
+        "top10_winners_removed_net_positive": false,
+        "predictive_signal": false
+      },
+      "passes": false
+    },
+    {
+      "policy_id": "ML_TOP_30",
+      "policy_kind": "MODEL_TOP_FRACTION",
+      "top_fraction": 0.3,
+      "train_score_cutoff": 0.00555269871284539,
+      "predictive_metrics": {
+        "auc": 0.4242718446601942,
+        "spearman": -0.12053365201705944,
+        "population": 301
+      },
+      "economic_metrics": {
+        "trades": 81,
+        "wins": 22,
+        "losses": 59,
+        "maximum_closed_drawdown_r": 36.0349027283561,
+        "stress_profit_factor": 0.4015351495238351,
+        "average_stress_r": -0.436158257497319,
+        "stress_net_r": -35.32881885728284,
+        "trades_per_source_day": 0.25878594249201275,
+        "positive_month_share": 0.08333333333333333,
+        "top10_winners_removed_net_r": -49.32881885728305,
+        "direction_counts": {
+          "SHORT": 46,
+          "LONG": 35
+        },
+        "family_counts": {
+          "M15_RANGE_EXPANSION": 81
+        }
+      },
+      "gates": {
+        "minimum_trades": true,
+        "minimum_frequency": true,
+        "maximum_frequency": true,
+        "stress_profit_factor": false,
+        "average_stress_r": false,
+        "positive_month_share": false,
+        "maximum_closed_drawdown_r": false,
+        "top10_winners_removed_net_positive": false,
+        "predictive_signal": false
+      },
+      "passes": false
+    },
+    {
+      "policy_id": "ML_TOP_20",
+      "policy_kind": "MODEL_TOP_FRACTION",
+      "top_fraction": 0.2,
+      "train_score_cutoff": 0.14093068663141717,
+      "predictive_metrics": {
+        "auc": 0.4242718446601942,
+        "spearman": -0.12053365201705944,
+        "population": 301
+      },
+      "economic_metrics": {
+        "trades": 45,
+        "wins": 9,
+        "losses": 36,
+        "maximum_closed_drawdown_r": 28.861751397867046,
+        "stress_profit_factor": 0.2009010308294459,
+        "average_stress_r": -0.6413722532859341,
+        "stress_net_r": -28.86175139786703,
+        "trades_per_source_day": 0.14376996805111822,
+        "positive_month_share": 0.08333333333333333,
+        "top10_winners_removed_net_r": -36.11786838847364,
+        "direction_counts": {
+          "SHORT": 25,
+          "LONG": 20
+        },
+        "family_counts": {
+          "M15_RANGE_EXPANSION": 45
+        }
+      },
+      "gates": {
+        "minimum_trades": false,
+        "minimum_frequency": true,
+        "maximum_frequency": true,
+        "stress_profit_factor": false,
+        "average_stress_r": false,
+        "positive_month_share": false,
+        "maximum_closed_drawdown_r": false,
+        "top10_winners_removed_net_positive": false,
+        "predictive_signal": false
+      },
+      "passes": false
+    }
+  ],
+  "selected_policy": null,
+  "outcomes_after_2020_07_opened": false,
+  "artifacts": {
+    "model_joblib": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_MODEL.joblib",
+      "sha256": "52233556423174ba9c64c0e0e603ac1d0d9acec4e88ccd34fd26631c51abd787"
+    },
+    "evaluations_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_EVALUATIONS.csv",
+      "sha256": "8c9f58e030685088cc658c71b0096c10bbd9b08b614e302b12572ef4d6b3808a"
+    },
+    "predictions_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_PREDICTIONS.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "report_markdown": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_REPORT.md",
+      "sha256": "e00059513a2007a5d2c0a6bb49c7e5b4a1f8a07eba51439f5e8858275c8c356e"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "development_diagnostic_only": true,
+    "strategy_promotion_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
