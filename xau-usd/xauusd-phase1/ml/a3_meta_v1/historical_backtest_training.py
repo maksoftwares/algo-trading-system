@@ -53,6 +53,7 @@ def train_historical_backtest_model(root: Path, contract_path: Path | None = Non
         (row for row in rows if row["split"] == "validation"), key=lambda row: row["entry_time"]
     )
     numeric_features = list(NUMERIC_FEATURES)
+    dukascopy_audit: dict[str, Any] | None = None
     if contract.get("market_data"):
         from .market_feature_enrichment import MARKET_NUMERIC_FEATURES, enrich_rows_with_completed_market_features
 
@@ -60,6 +61,26 @@ def train_historical_backtest_model(root: Path, contract_path: Path | None = Non
         train_rows = [row for row in combined_rows if row["split"] == "train"]
         validation_rows = [row for row in combined_rows if row["split"] == "validation"]
         numeric_features.extend(MARKET_NUMERIC_FEATURES)
+    if contract.get("dukascopy_availability_filter"):
+        from .dukascopy_feature_enrichment import filter_rows_to_dukascopy_availability
+
+        combined_rows, dukascopy_audit = filter_rows_to_dukascopy_availability(
+            root, train_rows + validation_rows, contract["dukascopy_availability_filter"]
+        )
+        train_rows = [row for row in combined_rows if row["split"] == "train"]
+        validation_rows = [row for row in combined_rows if row["split"] == "validation"]
+    if contract.get("dukascopy_tick_data"):
+        from .dukascopy_feature_enrichment import (
+            DUKASCOPY_NUMERIC_FEATURES,
+            enrich_rows_with_dukascopy_features,
+        )
+
+        combined_rows, dukascopy_audit = enrich_rows_with_dukascopy_features(
+            root, train_rows + validation_rows, contract["dukascopy_tick_data"]
+        )
+        train_rows = [row for row in combined_rows if row["split"] == "train"]
+        validation_rows = [row for row in combined_rows if row["split"] == "validation"]
+        numeric_features.extend(DUKASCOPY_NUMERIC_FEATURES)
     _validate_population(train_rows, validation_rows, contract)
     _write_dataset(dataset_path, train_rows + validation_rows, numeric_features)
 
@@ -87,6 +108,7 @@ def train_historical_backtest_model(root: Path, contract_path: Path | None = Non
         "largest_absolute_coefficients": coefficients,
         "model_parameters": model_parameters,
         "source_audits": source_audits,
+        "dukascopy_feature_audit": dukascopy_audit,
         "boundary": _boundary(),
     }
 
@@ -112,6 +134,10 @@ def train_historical_backtest_model(root: Path, contract_path: Path | None = Non
         limitations.append(
             "MT5 omitted the HTML history-quality percentage for at least one source; its tester journal and position-ID deal ledger exist, but quality remains unverified."
         )
+    if dukascopy_audit is not None:
+        limitations.append(
+            "Dukascopy is an independent quote feed, but it covers the same historical market events as the MT5 labels and is not an independent time holdout."
+        )
     payload = {
         "schema_version": SCHEMA_VERSION,
         "status": "TRAINED_RESEARCH_ONLY",
@@ -122,6 +148,7 @@ def train_historical_backtest_model(root: Path, contract_path: Path | None = Non
         "validation_population": _population(validation_rows),
         "metrics": metrics,
         "source_audits": source_audits,
+        "dukascopy_feature_audit": dukascopy_audit,
         "artifacts": artifact["artifacts"],
         "authorization": _boundary(),
         "limitations": limitations,

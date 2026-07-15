@@ -1,0 +1,323 @@
+{
+  "schema_version": "a3_ml_historical_backtest_training_status_v1",
+  "status": "TRAINED_RESEARCH_ONLY",
+  "stage": "C60-HISTORICAL-BACKTEST-TRAINING",
+  "created_at_utc": "2026-07-15T14:05:23.810035Z",
+  "model_family": "LOGISTIC_REGRESSION_V1",
+  "training_population": {
+    "rows": 346,
+    "wins": 139,
+    "losses": 207,
+    "win_rate": 0.401734,
+    "directions": {
+      "LONG": 116,
+      "SHORT": 230
+    },
+    "strategy_families": {
+      "r1_box_clean_strict_uptrend": 116,
+      "r2_pullback_short_h1_confirm": 230
+    }
+  },
+  "validation_population": {
+    "rows": 290,
+    "wins": 132,
+    "losses": 158,
+    "win_rate": 0.455172,
+    "directions": {
+      "LONG": 63,
+      "SHORT": 227
+    },
+    "strategy_families": {
+      "r1_box_clean_strict_uptrend": 63,
+      "r2_pullback_short_h1_confirm": 227
+    }
+  },
+  "metrics": {
+    "train": {
+      "rows": 346,
+      "positive_rate": 0.401734,
+      "roc_auc": 0.711361,
+      "accuracy": 0.684971,
+      "balanced_accuracy": 0.642182,
+      "brier_score": 0.20726,
+      "log_loss": 0.601733,
+      "threshold": 0.5,
+      "selected_rows": 88,
+      "selected_coverage": 0.254335,
+      "selected_win_rate": 0.670455,
+      "selected_win_rate_lift": 0.26872
+    },
+    "out_of_time_validation": {
+      "rows": 290,
+      "positive_rate": 0.455172,
+      "roc_auc": 0.615027,
+      "accuracy": 0.558621,
+      "balanced_accuracy": 0.535098,
+      "brier_score": 0.240718,
+      "log_loss": 0.675629,
+      "threshold": 0.5,
+      "selected_rows": 68,
+      "selected_coverage": 0.234483,
+      "selected_win_rate": 0.529412,
+      "selected_win_rate_lift": 0.074239,
+      "baseline_brier_score": 0.250846,
+      "baseline_log_loss": 0.69499,
+      "baseline_probability_from_train": 0.401734
+    },
+    "out_of_time_validation_subgroups": {
+      "strategy_family": {
+        "r1_box_clean_strict_uptrend": {
+          "rows": 63,
+          "positive_rate": 0.587302,
+          "roc_auc": 0.627859,
+          "accuracy": 0.603175,
+          "balanced_accuracy": 0.593555,
+          "brier_score": 0.234839,
+          "log_loss": 0.665,
+          "threshold": 0.5,
+          "selected_rows": 36,
+          "selected_coverage": 0.571429,
+          "selected_win_rate": 0.666667,
+          "selected_win_rate_lift": 0.079365
+        },
+        "r2_pullback_short_h1_confirm": {
+          "rows": 227,
+          "positive_rate": 0.418502,
+          "roc_auc": 0.590032,
+          "accuracy": 0.546256,
+          "balanced_accuracy": 0.4874,
+          "brier_score": 0.24235,
+          "log_loss": 0.678579,
+          "threshold": 0.5,
+          "selected_rows": 32,
+          "selected_coverage": 0.140969,
+          "selected_win_rate": 0.375,
+          "selected_win_rate_lift": -0.043502
+        }
+      },
+      "direction": {
+        "LONG": {
+          "rows": 63,
+          "positive_rate": 0.587302,
+          "roc_auc": 0.627859,
+          "accuracy": 0.603175,
+          "balanced_accuracy": 0.593555,
+          "brier_score": 0.234839,
+          "log_loss": 0.665,
+          "threshold": 0.5,
+          "selected_rows": 36,
+          "selected_coverage": 0.571429,
+          "selected_win_rate": 0.666667,
+          "selected_win_rate_lift": 0.079365
+        },
+        "SHORT": {
+          "rows": 227,
+          "positive_rate": 0.418502,
+          "roc_auc": 0.590032,
+          "accuracy": 0.546256,
+          "balanced_accuracy": 0.4874,
+          "brier_score": 0.24235,
+          "log_loss": 0.678579,
+          "threshold": 0.5,
+          "selected_rows": 32,
+          "selected_coverage": 0.140969,
+          "selected_win_rate": 0.375,
+          "selected_win_rate_lift": -0.043502
+        }
+      }
+    }
+  },
+  "source_audits": [
+    {
+      "split": "train",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json",
+      "summary_sha256": "e675f9ca120d5f54d750dcfd868ded8a0535ce4e61bc3cbe4a71b2621d039a23",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_signals.csv",
+      "signal_sha256": "0f50e8ceb77588850c130d04feaf2e5688041ec78403cdd77ece28ddec084812",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 367,
+      "completed_trades": 117,
+      "joined_rows": 117,
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z"
+    },
+    {
+      "split": "train",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json",
+      "summary_sha256": "bf76d2a6055de1c224b28d5d12024c657f931214f9046881f064da54854d47bb",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_signals.csv",
+      "signal_sha256": "6547b1f5475bf85caf03b32d4d3e41e46a59cf4f6f7f0bcdecd9e42e7a2e931b",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 689,
+      "completed_trades": 240,
+      "joined_rows": 240,
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json",
+      "summary_sha256": "e675f9ca120d5f54d750dcfd868ded8a0535ce4e61bc3cbe4a71b2621d039a23",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_signals.csv",
+      "signal_sha256": "0f50e8ceb77588850c130d04feaf2e5688041ec78403cdd77ece28ddec084812",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 367,
+      "completed_trades": 63,
+      "joined_rows": 63,
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json",
+      "summary_sha256": "bf76d2a6055de1c224b28d5d12024c657f931214f9046881f064da54854d47bb",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_signals.csv",
+      "signal_sha256": "6547b1f5475bf85caf03b32d4d3e41e46a59cf4f6f7f0bcdecd9e42e7a2e931b",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 689,
+      "completed_trades": 234,
+      "joined_rows": 234,
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z"
+    }
+  ],
+  "dukascopy_feature_audit": {
+    "source": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "symbol": "XAUUSD",
+    "storage_root": "${DUKASCOPY_TICK_DATA_ROOT}",
+    "coverage_start_utc": "2018-07-01T00:00:00Z",
+    "coverage_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "strictly_before_entry": true,
+    "lookback_minutes": 60,
+    "pre_roll_minutes": 5,
+    "feature_names": [
+      "duka_spread_last_bps",
+      "duka_spread_p95_60m_bps",
+      "duka_spread_last_to_median_60m",
+      "duka_tick_count_5m_log1p",
+      "duka_tick_count_60m_log1p",
+      "duka_mid_return_5m",
+      "duka_mid_return_60m",
+      "duka_realized_vol_60m_bps"
+    ],
+    "input_rows": 654,
+    "enriched_rows": 636,
+    "excluded_unavailable_rows": 18,
+    "exclusions": [
+      {
+        "entry_time": "2018-07-15T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2018-07-15T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2019-04-23T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2019-04-23T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2019-05-22T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2019-05-22T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2020-11-26T23:00:00Z",
+        "reason": "no causal Dukascopy ticks before 2020-11-26T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-01-27T23:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2021-01-27T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-01-29T00:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-01-29T00:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-02-14T23:00:00Z",
+        "reason": "no causal Dukascopy ticks before 2021-02-14T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-03-03T22:05:00Z",
+        "reason": "insufficient Dukascopy ticks before 2021-03-03T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2021-05-31T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2021-05-31T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2021-06-28T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-06-28T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-09-26T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-09-26T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2022-05-15T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2022-05-15T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-14T22:02:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2023-06-14T22:02:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-21T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-06-21T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-28T22:02:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2023-06-28T22:02:00+00:00"
+      },
+      {
+        "entry_time": "2023-09-13T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-09-13T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-10-03T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-10-03T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-10-04T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-10-04T22:00:00+00:00"
+      }
+    ],
+    "source_hour_files": 1226,
+    "source_hour_files_sha256": "8f16de12522d9bff150a30699fda9dc079d83b0c8db70ceba41930d8cc3be185",
+    "feature_rows_sha256": "2597574f1fce54a44d1ca71b4ad6c517f04f5193263765b27089e81bd82a3645",
+    "minimum_ticks_60m": 853,
+    "median_ticks_60m": 7119.0,
+    "maximum_ticks_60m": 31523,
+    "missing_rows": 0,
+    "future_ticks_used": 0,
+    "mode": "AVAILABILITY_FILTER_ONLY"
+  },
+  "artifacts": {
+    "model_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_BASELINE_MODEL.json",
+    "model_sha256": "d3a77f17e4e44e30f9d7eb2247d57c088913d9206151ad4941a32de48142d5f1",
+    "dataset_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_BASELINE_DATASET.csv",
+    "dataset_sha256": "13868903ae6d426588e4e70d743b66ee5c24176a75efdcb8cbb43334f1b9941b"
+  },
+  "authorization": {
+    "research_only": true,
+    "official_c05_model": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "limitations": [
+    "The model was trained from MT5 Strategy Tester outcomes, not live fills.",
+    "The source strategies were researched on overlapping historical windows, so validation is out-of-time but not a pristine untouched strategy-development holdout.",
+    "The model is specific to these source families: r1_box_clean_strict_uptrend, r2_pullback_short_h1_confirm.",
+    "Live slippage and execution readiness must remain separate from historical model-fit evidence.",
+    "Dukascopy is an independent quote feed, but it covers the same historical market events as the MT5 labels and is not an independent time holdout."
+  ],
+  "next_allowed_stage": "Review metrics and run shadow-only scoring. Do not publish to MT5 or authorize broker action."
+}

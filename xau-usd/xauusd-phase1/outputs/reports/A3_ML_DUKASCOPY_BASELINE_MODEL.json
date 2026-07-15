@@ -1,0 +1,554 @@
+{
+  "schema_version": "a3_ml_historical_backtest_model_v1",
+  "status": "TRAINED_RESEARCH_ONLY",
+  "created_at_utc": "2026-07-15T14:05:23.810035Z",
+  "model_family": "LOGISTIC_REGRESSION_V1",
+  "symbol": "XAUUSD",
+  "numeric_features": [
+    "spread_points",
+    "log_atr",
+    "body_fraction",
+    "aligned_close_location",
+    "aligned_three_bar_move_atr",
+    "break_distance_atr",
+    "estimated_cost_r",
+    "recent_range_atr",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "h1_return_3",
+    "h1_return_12",
+    "h1_range_atr",
+    "h1_ema20_distance_atr",
+    "h1_ema20_slope_atr",
+    "h1_atr_ratio_60",
+    "h4_return_3",
+    "h4_return_12",
+    "h4_range_atr",
+    "h4_ema20_distance_atr",
+    "h4_ema20_slope_atr",
+    "h4_atr_ratio_60",
+    "d1_return_5",
+    "d1_return_20",
+    "d1_range_atr",
+    "d1_ema20_distance_atr",
+    "d1_ema50_distance_atr",
+    "d1_ema20_slope_atr",
+    "d1_atr_ratio_60",
+    "d1_volatility_20"
+  ],
+  "categorical_features": [
+    "strategy_family",
+    "direction"
+  ],
+  "decision_threshold": 0.5,
+  "training_period": {
+    "first_entry": "2018-07-02T06:00:00Z",
+    "last_entry": "2021-12-31T16:00:00Z"
+  },
+  "validation_period": {
+    "first_entry": "2022-01-19T16:00:00Z",
+    "last_entry": "2024-05-20T04:00:00Z"
+  },
+  "metrics": {
+    "train": {
+      "rows": 346,
+      "positive_rate": 0.401734,
+      "roc_auc": 0.711361,
+      "accuracy": 0.684971,
+      "balanced_accuracy": 0.642182,
+      "brier_score": 0.20726,
+      "log_loss": 0.601733,
+      "threshold": 0.5,
+      "selected_rows": 88,
+      "selected_coverage": 0.254335,
+      "selected_win_rate": 0.670455,
+      "selected_win_rate_lift": 0.26872
+    },
+    "out_of_time_validation": {
+      "rows": 290,
+      "positive_rate": 0.455172,
+      "roc_auc": 0.615027,
+      "accuracy": 0.558621,
+      "balanced_accuracy": 0.535098,
+      "brier_score": 0.240718,
+      "log_loss": 0.675629,
+      "threshold": 0.5,
+      "selected_rows": 68,
+      "selected_coverage": 0.234483,
+      "selected_win_rate": 0.529412,
+      "selected_win_rate_lift": 0.074239,
+      "baseline_brier_score": 0.250846,
+      "baseline_log_loss": 0.69499,
+      "baseline_probability_from_train": 0.401734
+    },
+    "out_of_time_validation_subgroups": {
+      "strategy_family": {
+        "r1_box_clean_strict_uptrend": {
+          "rows": 63,
+          "positive_rate": 0.587302,
+          "roc_auc": 0.627859,
+          "accuracy": 0.603175,
+          "balanced_accuracy": 0.593555,
+          "brier_score": 0.234839,
+          "log_loss": 0.665,
+          "threshold": 0.5,
+          "selected_rows": 36,
+          "selected_coverage": 0.571429,
+          "selected_win_rate": 0.666667,
+          "selected_win_rate_lift": 0.079365
+        },
+        "r2_pullback_short_h1_confirm": {
+          "rows": 227,
+          "positive_rate": 0.418502,
+          "roc_auc": 0.590032,
+          "accuracy": 0.546256,
+          "balanced_accuracy": 0.4874,
+          "brier_score": 0.24235,
+          "log_loss": 0.678579,
+          "threshold": 0.5,
+          "selected_rows": 32,
+          "selected_coverage": 0.140969,
+          "selected_win_rate": 0.375,
+          "selected_win_rate_lift": -0.043502
+        }
+      },
+      "direction": {
+        "LONG": {
+          "rows": 63,
+          "positive_rate": 0.587302,
+          "roc_auc": 0.627859,
+          "accuracy": 0.603175,
+          "balanced_accuracy": 0.593555,
+          "brier_score": 0.234839,
+          "log_loss": 0.665,
+          "threshold": 0.5,
+          "selected_rows": 36,
+          "selected_coverage": 0.571429,
+          "selected_win_rate": 0.666667,
+          "selected_win_rate_lift": 0.079365
+        },
+        "SHORT": {
+          "rows": 227,
+          "positive_rate": 0.418502,
+          "roc_auc": 0.590032,
+          "accuracy": 0.546256,
+          "balanced_accuracy": 0.4874,
+          "brier_score": 0.24235,
+          "log_loss": 0.678579,
+          "threshold": 0.5,
+          "selected_rows": 32,
+          "selected_coverage": 0.140969,
+          "selected_win_rate": 0.375,
+          "selected_win_rate_lift": -0.043502
+        }
+      }
+    }
+  },
+  "largest_absolute_coefficients": [
+    {
+      "feature": "h4_ema20_distance_atr",
+      "coefficient": 0.72008228
+    },
+    {
+      "feature": "d1_atr_ratio_60",
+      "coefficient": -0.62881054
+    },
+    {
+      "feature": "d1_ema50_distance_atr",
+      "coefficient": -0.62165316
+    },
+    {
+      "feature": "h4_atr_ratio_60",
+      "coefficient": 0.29745894
+    },
+    {
+      "feature": "log_atr",
+      "coefficient": -0.28204253
+    },
+    {
+      "feature": "d1_return_5",
+      "coefficient": -0.27792191
+    },
+    {
+      "feature": "h1_range_atr",
+      "coefficient": 0.26673344
+    },
+    {
+      "feature": "d1_volatility_20",
+      "coefficient": 0.22795505
+    },
+    {
+      "feature": "d1_ema20_slope_atr",
+      "coefficient": 0.19659051
+    },
+    {
+      "feature": "hour_cos",
+      "coefficient": 0.19556611
+    },
+    {
+      "feature": "h1_atr_ratio_60",
+      "coefficient": 0.19088881
+    },
+    {
+      "feature": "strategy_family=r2_pullback_short_h1_confirm",
+      "coefficient": -0.18944336
+    },
+    {
+      "feature": "direction=SHORT",
+      "coefficient": -0.18944336
+    },
+    {
+      "feature": "strategy_family=r1_box_clean_strict_uptrend",
+      "coefficient": 0.18944269
+    },
+    {
+      "feature": "direction=LONG",
+      "coefficient": 0.18944269
+    }
+  ],
+  "model_parameters": {
+    "intercept": -0.319111208083,
+    "coefficients": [
+      -0.080007370871,
+      -0.282042533286,
+      0.003744202401,
+      -0.033787487032,
+      -0.033425700128,
+      -0.050260570181,
+      -0.13192549275,
+      -0.069185861459,
+      -0.008140888314,
+      0.195566105415,
+      0.17328523,
+      0.080159792644,
+      0.040938630978,
+      -0.107708580793,
+      0.266733440961,
+      -0.108807365928,
+      -0.186129650879,
+      0.19088880622,
+      -0.112098883051,
+      0.075879309138,
+      -0.140406217012,
+      0.720082283073,
+      0.078416603549,
+      0.297458943484,
+      -0.277921910963,
+      0.026299709866,
+      0.021238684615,
+      0.065118813586,
+      -0.621653164772,
+      0.196590508035,
+      -0.628810536332,
+      0.227955045496,
+      0.18944269157,
+      -0.189443357897,
+      0.18944269157,
+      -0.189443357897
+    ],
+    "feature_names": [
+      "spread_points",
+      "log_atr",
+      "body_fraction",
+      "aligned_close_location",
+      "aligned_three_bar_move_atr",
+      "break_distance_atr",
+      "estimated_cost_r",
+      "recent_range_atr",
+      "hour_sin",
+      "hour_cos",
+      "weekday_sin",
+      "weekday_cos",
+      "h1_return_3",
+      "h1_return_12",
+      "h1_range_atr",
+      "h1_ema20_distance_atr",
+      "h1_ema20_slope_atr",
+      "h1_atr_ratio_60",
+      "h4_return_3",
+      "h4_return_12",
+      "h4_range_atr",
+      "h4_ema20_distance_atr",
+      "h4_ema20_slope_atr",
+      "h4_atr_ratio_60",
+      "d1_return_5",
+      "d1_return_20",
+      "d1_range_atr",
+      "d1_ema20_distance_atr",
+      "d1_ema50_distance_atr",
+      "d1_ema20_slope_atr",
+      "d1_atr_ratio_60",
+      "d1_volatility_20",
+      "strategy_family=r1_box_clean_strict_uptrend",
+      "strategy_family=r2_pullback_short_h1_confirm",
+      "direction=LONG",
+      "direction=SHORT"
+    ],
+    "numeric_means": [
+      14.297687861272,
+      0.66696594913,
+      0.46585433526,
+      0.570084971098,
+      0.632097109827,
+      1.148639595376,
+      0.023572543353,
+      3.707036707463,
+      0.043543446476,
+      -0.200305292493,
+      0.376244146579,
+      0.132857055078,
+      -0.000276163684,
+      0.000292443964,
+      1.099745995431,
+      0.000246400236,
+      0.092935724464,
+      1.057881131534,
+      0.000967740298,
+      -0.001144659637,
+      1.155543646126,
+      0.03951338635,
+      -0.094282384491,
+      1.02141769615,
+      -0.003614996075,
+      -0.008831936258,
+      1.030801219343,
+      -0.353327075826,
+      -0.620018953194,
+      -0.179238183899,
+      0.946323778772,
+      0.005846324596
+    ],
+    "numeric_scales": [
+      7.7631741747,
+      0.283805134832,
+      0.269459613897,
+      0.313747814316,
+      0.968519985585,
+      0.752302017524,
+      0.022279849703,
+      0.972975190054,
+      0.747812005637,
+      0.631473643388,
+      0.507673897728,
+      0.763581402764,
+      0.003173513576,
+      0.005784985307,
+      0.451735019397,
+      1.740438585095,
+      0.700253454343,
+      0.271106391424,
+      0.005180147527,
+      0.012648650155,
+      0.642615677238,
+      1.895399799837,
+      0.846864014632,
+      0.237342409477,
+      0.015664933419,
+      0.030956758069,
+      0.687466228858,
+      1.773183741133,
+      2.975496329274,
+      0.790947225075,
+      0.131054043184,
+      0.002061119618
+    ],
+    "category_levels": {
+      "strategy_family": [
+        "r1_box_clean_strict_uptrend",
+        "r2_pullback_short_h1_confirm"
+      ],
+      "direction": [
+        "LONG",
+        "SHORT"
+      ]
+    },
+    "optimizer": {
+      "name": "adam",
+      "iterations": 4000,
+      "learning_rate": 0.025,
+      "l2": 0.01,
+      "class_weighting": "none_probability_calibration"
+    }
+  },
+  "source_audits": [
+    {
+      "split": "train",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json",
+      "summary_sha256": "e675f9ca120d5f54d750dcfd868ded8a0535ce4e61bc3cbe4a71b2621d039a23",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_signals.csv",
+      "signal_sha256": "0f50e8ceb77588850c130d04feaf2e5688041ec78403cdd77ece28ddec084812",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 367,
+      "completed_trades": 117,
+      "joined_rows": 117,
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z"
+    },
+    {
+      "split": "train",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json",
+      "summary_sha256": "bf76d2a6055de1c224b28d5d12024c657f931214f9046881f064da54854d47bb",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_signals.csv",
+      "signal_sha256": "6547b1f5475bf85caf03b32d4d3e41e46a59cf4f6f7f0bcdecd9e42e7a2e931b",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 689,
+      "completed_trades": 240,
+      "joined_rows": 240,
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json",
+      "summary_sha256": "e675f9ca120d5f54d750dcfd868ded8a0535ce4e61bc3cbe4a71b2621d039a23",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_signals.csv",
+      "signal_sha256": "0f50e8ceb77588850c130d04feaf2e5688041ec78403cdd77ece28ddec084812",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 367,
+      "completed_trades": 63,
+      "joined_rows": 63,
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "summary_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-ml-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json",
+      "summary_sha256": "bf76d2a6055de1c224b28d5d12024c657f931214f9046881f064da54854d47bb",
+      "signal_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_signals.csv",
+      "signal_sha256": "6547b1f5475bf85caf03b32d4d3e41e46a59cf4f6f7f0bcdecd9e42e7a2e931b",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "history_quality_pct": 98.0,
+      "completed_trades_in_file": 689,
+      "completed_trades": 234,
+      "joined_rows": 234,
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z"
+    }
+  ],
+  "dukascopy_feature_audit": {
+    "source": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "symbol": "XAUUSD",
+    "storage_root": "${DUKASCOPY_TICK_DATA_ROOT}",
+    "coverage_start_utc": "2018-07-01T00:00:00Z",
+    "coverage_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "strictly_before_entry": true,
+    "lookback_minutes": 60,
+    "pre_roll_minutes": 5,
+    "feature_names": [
+      "duka_spread_last_bps",
+      "duka_spread_p95_60m_bps",
+      "duka_spread_last_to_median_60m",
+      "duka_tick_count_5m_log1p",
+      "duka_tick_count_60m_log1p",
+      "duka_mid_return_5m",
+      "duka_mid_return_60m",
+      "duka_realized_vol_60m_bps"
+    ],
+    "input_rows": 654,
+    "enriched_rows": 636,
+    "excluded_unavailable_rows": 18,
+    "exclusions": [
+      {
+        "entry_time": "2018-07-15T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2018-07-15T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2019-04-23T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2019-04-23T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2019-05-22T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2019-05-22T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2020-11-26T23:00:00Z",
+        "reason": "no causal Dukascopy ticks before 2020-11-26T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-01-27T23:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2021-01-27T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-01-29T00:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-01-29T00:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-02-14T23:00:00Z",
+        "reason": "no causal Dukascopy ticks before 2021-02-14T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-03-03T22:05:00Z",
+        "reason": "insufficient Dukascopy ticks before 2021-03-03T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2021-05-31T22:05:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2021-05-31T22:05:00+00:00"
+      },
+      {
+        "entry_time": "2021-06-28T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-06-28T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2021-09-26T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2021-09-26T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2022-05-15T23:00:00Z",
+        "reason": "Dukascopy pre-roll is insufficient before 2022-05-15T23:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-14T22:02:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2023-06-14T22:02:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-21T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-06-21T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-06-28T22:02:00Z",
+        "reason": "insufficient Dukascopy minute observations before 2023-06-28T22:02:00+00:00"
+      },
+      {
+        "entry_time": "2023-09-13T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-09-13T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-10-03T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-10-03T22:00:00+00:00"
+      },
+      {
+        "entry_time": "2023-10-04T22:00:00Z",
+        "reason": "insufficient Dukascopy ticks before 2023-10-04T22:00:00+00:00"
+      }
+    ],
+    "source_hour_files": 1226,
+    "source_hour_files_sha256": "8f16de12522d9bff150a30699fda9dc079d83b0c8db70ceba41930d8cc3be185",
+    "feature_rows_sha256": "2597574f1fce54a44d1ca71b4ad6c517f04f5193263765b27089e81bd82a3645",
+    "minimum_ticks_60m": 853,
+    "median_ticks_60m": 7119.0,
+    "maximum_ticks_60m": 31523,
+    "missing_rows": 0,
+    "future_ticks_used": 0,
+    "mode": "AVAILABILITY_FILTER_ONLY"
+  },
+  "boundary": {
+    "research_only": true,
+    "official_c05_model": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

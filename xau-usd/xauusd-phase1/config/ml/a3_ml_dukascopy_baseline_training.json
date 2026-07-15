@@ -1,0 +1,97 @@
+{
+  "schema_version": "a3_ml_historical_backtest_training_v1",
+  "experiment_id": "A3_ML_DUKASCOPY_FEATURE_ABLATION_V1_BASELINE",
+  "symbol": "XAUUSD",
+  "model_family": "LOGISTIC_REGRESSION_V1",
+  "random_seed": 20260715,
+  "decision_threshold": 0.5,
+  "minimum_train_rows": 300,
+  "minimum_validation_rows": 250,
+  "minimum_history_quality_pct": 98,
+  "train_end": "2021-12-31T23:59:59Z",
+  "validation_start": "2022-01-01T00:00:00Z",
+  "sources": [
+    {
+      "split": "train",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z",
+      "summary_json": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json"
+    },
+    {
+      "split": "train",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "entry_start": "2018-07-01T00:00:00Z",
+      "entry_end": "2021-12-31T23:59:59Z",
+      "summary_json": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r1_box_clean_strict_uptrend",
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z",
+      "summary_json": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_summary.json"
+    },
+    {
+      "split": "validation",
+      "strategy_family": "r2_pullback_short_h1_confirm",
+      "entry_start": "2022-01-01T00:00:00Z",
+      "entry_end": "2024-06-30T23:59:59Z",
+      "summary_json": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_summary.json"
+    }
+  ],
+  "market_data": {
+    "H1": [
+      {
+        "path": "../xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H1/XAUUSD_capital_com_H1_20160103_20250701.csv",
+        "style": "bar_end_timestamp",
+        "time_column": "timestamp_utc"
+      },
+      {
+        "path": "data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607090713_gdb8b1169_c9221d066/raw/A1/bars/XAUUSD_H1.csv",
+        "style": "bar_start_timestamp",
+        "time_column": "time_utc"
+      }
+    ],
+    "H4": [
+      {
+        "path": "../xauusd-phase0/data/processed/bars/capital_com/XAUUSD/H4/XAUUSD_capital_com_H4_20160104_20250701.csv",
+        "style": "bar_end_timestamp",
+        "time_column": "timestamp_utc"
+      },
+      {
+        "path": "data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607090713_gdb8b1169_c9221d066/raw/A1/bars/XAUUSD_H4.csv",
+        "style": "bar_start_timestamp",
+        "time_column": "time_utc"
+      }
+    ],
+    "D1": [
+      {
+        "path": "../xauusd-phase0/data/processed/bars/dukascopy/XAUUSD/D1/XAUUSD_dukascopy_D1_20160101_20250701_derived_from_m5.csv",
+        "style": "bar_end_timestamp",
+        "time_column": "timestamp_utc"
+      }
+    ]
+  },
+  "dukascopy_availability_filter": {
+    "source": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "symbol": "XAUUSD",
+    "coverage_start_utc": "2018-07-01T00:00:00Z",
+    "coverage_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "strictly_before_entry": true,
+    "lookback_minutes": 60,
+    "pre_roll_minutes": 5,
+    "exclude_unavailable_rows": true
+  },
+  "outputs": {
+    "dataset_csv": "outputs/reports/A3_ML_DUKASCOPY_BASELINE_DATASET.csv",
+    "model_json": "outputs/reports/A3_ML_DUKASCOPY_BASELINE_MODEL.json",
+    "status_json": "outputs/reports/A3_ML_DUKASCOPY_BASELINE_STATUS.json",
+    "model_card_md": "outputs/reports/A3_ML_DUKASCOPY_BASELINE_MODEL_CARD.md"
+  },
+  "research_only": true,
+  "python_demo_predictions_authorized": false,
+  "ea_consumption_authorized": false,
+  "broker_action_authorized": false
+}

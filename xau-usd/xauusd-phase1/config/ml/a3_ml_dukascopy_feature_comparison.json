@@ -1,0 +1,27 @@
+{
+  "schema_version": "a3_ml_dukascopy_feature_comparison_v1",
+  "experiment_id": "A3_ML_DUKASCOPY_FEATURE_ABLATION_V1",
+  "baseline_contract": "config/ml/a3_ml_dukascopy_baseline_training.json",
+  "enhanced_contract": "config/ml/a3_ml_dukascopy_enhanced_training.json",
+  "bootstrap_seed": 20260715,
+  "bootstrap_month_samples": 2000,
+  "gates": {
+    "minimum_training_rows": 350,
+    "minimum_validation_rows": 290,
+    "minimum_enhanced_auc": 0.55,
+    "minimum_auc_improvement": 0.02,
+    "require_auc_delta_ci_lower_above_zero": true,
+    "maximum_brier_regression": 0.0,
+    "maximum_log_loss_regression": 0.0,
+    "maximum_direction_auc_regression": 0.01
+  },
+  "outputs": {
+    "comparison_json": "outputs/reports/A3_ML_DUKASCOPY_FEATURE_COMPARISON.json",
+    "comparison_md": "outputs/reports/A3_ML_DUKASCOPY_FEATURE_COMPARISON.md",
+    "validation_predictions_csv": "outputs/reports/A3_ML_DUKASCOPY_FEATURE_VALIDATION_PREDICTIONS.csv"
+  },
+  "research_only": true,
+  "python_demo_predictions_authorized": false,
+  "ea_consumption_authorized": false,
+  "broker_action_authorized": false
+}
