@@ -1,0 +1,44 @@
+{
+  "schema_version": "a3_ml_dukascopy_m15_expansion_ranker_discovery_v1",
+  "base_expansion_contract_path": "config/ml/a3_ml_dukascopy_m15_range_expansion_v1.json",
+  "base_expansion_contract_sha256": "c297cf58ed2b3b19f4e2977d78838d8771047350589089c1a692ef4bfd544cbe",
+  "windows": {
+    "fit_start_utc": "2018-07-01T00:00:00Z",
+    "fit_end_exclusive_utc": "2019-07-01T00:00:00Z",
+    "development_evaluation_end_exclusive_utc": "2020-07-01T00:00:00Z",
+    "outcomes_after_2020_07_authorized": false
+  },
+  "train_score_top_fractions": [0.60, 0.45, 0.30, 0.20],
+  "selection": {
+    "maximum_concurrent_trades": 1,
+    "maximum_trades_per_utc_day": 2,
+    "portfolio_cooldown_minutes": 30
+  },
+  "development_gates": {
+    "minimum_auc": 0.54,
+    "minimum_spearman": 0.05,
+    "minimum_trades": 50,
+    "minimum_trades_per_source_day": 0.08,
+    "maximum_trades_per_source_day": 1.50,
+    "minimum_stress_profit_factor": 1.10,
+    "minimum_average_stress_r": 0.03,
+    "minimum_positive_month_share": 0.50,
+    "maximum_closed_drawdown_r": 15.0,
+    "require_top10_winners_removed_net_positive": true
+  },
+  "outputs": {
+    "model_joblib": "outputs/reports/A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_MODEL.joblib",
+    "evaluations_csv": "outputs/reports/A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_EVALUATIONS.csv",
+    "predictions_csv": "outputs/reports/A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_PREDICTIONS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_M15_EXPANSION_RANKER_DISCOVERY_V1_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "development_diagnostic_only": true,
+    "strategy_promotion_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
