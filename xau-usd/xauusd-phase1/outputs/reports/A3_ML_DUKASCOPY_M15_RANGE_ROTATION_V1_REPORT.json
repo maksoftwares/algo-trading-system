@@ -1,0 +1,70 @@
+{
+  "schema_version": "a3_ml_dukascopy_m15_range_rotation_v1",
+  "classification": "DUKASCOPY_M15_RANGE_ROTATION_TRAIN_REJECTED",
+  "created_at_utc": "2026-07-15T21:02:12.212450Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_m15_range_rotation_v1.json",
+  "contract_sha256": "feee6f768fe5acbb163adda424c25e8f8e19d308a14a24e188751b2ada42f602",
+  "base_feature_cache": {
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-microstructure-regime-v1\\features\\m5_features_v1.parquet",
+    "sha256": "74ca74f2f6f5b3eaa8bca687fc2cced8dc20140a54506f3a25cb22920b53031b",
+    "source_manifest_sha256": "d7cedcf3eebc4fba32120636f63e8ced0b61ef72626c0e535edb5bac9d8a51db"
+  },
+  "m15_rows": 141495,
+  "source_days": {
+    "train": 624,
+    "validation": 310,
+    "internal_test": 311,
+    "exam": 620
+  },
+  "train_population": 525,
+  "raw_train_metrics": {
+    "trades": 525,
+    "baseline_profit_factor": 0.537470106833189,
+    "baseline_average_r": -0.2565505415497101,
+    "baseline_net_r": -134.6890343135978,
+    "stress_profit_factor": 0.42118527481350526,
+    "average_stress_r": -0.3565505415497101,
+    "stress_net_r": -187.1890343135978,
+    "maximum_closed_drawdown_r": 192.473686448102
+  },
+  "raw_train_gates": {
+    "minimum_trades": true,
+    "baseline_profit_factor": false,
+    "stress_profit_factor": false,
+    "average_stress_r": false
+  },
+  "raw_train_passes": false,
+  "validation_opened": false,
+  "validation_population": 0,
+  "validation_evaluations": [],
+  "selected_validation_policy": null,
+  "internal_test_opened": false,
+  "internal_test": null,
+  "exam_opened": false,
+  "exam": null,
+  "artifacts": {
+    "model_joblib": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_RANGE_ROTATION_V1_MODEL.joblib",
+      "sha256": "ba0f8893c792095c85140d3b28270ecbd6601852fabf3fe06a9bae5dbe1ef4fa"
+    },
+    "evaluations_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_RANGE_ROTATION_V1_EVALUATIONS.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "predictions_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M15_RANGE_ROTATION_V1_PREDICTIONS.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "validation_requires_train_raw_pass": true,
+    "internal_test_requires_validation_pass": true,
+    "exam_requires_internal_test_pass": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "strategy_promotion_authorized": false,
+    "demo_or_live_authorized": false
+  }
+}
