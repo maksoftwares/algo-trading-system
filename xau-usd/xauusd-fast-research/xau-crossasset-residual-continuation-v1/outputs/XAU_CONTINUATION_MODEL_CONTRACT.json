@@ -1,0 +1,1 @@
+{"condition_number_maximum":1000000,"current_residual_excluded":true,"features":["r_xag","r_eurusd","r_usdjpy"],"intercept":true,"method":"ordinary least squares","minimum_valid_observations":2500,"residual_reference":"500 prior valid residuals","search_count":0,"training_end":"t-1","training_window":3000}

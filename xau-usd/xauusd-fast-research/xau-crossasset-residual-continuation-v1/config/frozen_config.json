@@ -1,0 +1,33 @@
+{
+  "phase": "XAU_CROSSASSET_RESIDUAL_SHOCK_CONTINUATION_V1",
+  "branch": "codex/xau-crossasset-residual-continuation-v1",
+  "base_commit": "9a15372fc439057880bedda13d94fb628fe903ef",
+  "official_source": "https://jetta.dukascopy.com/v1",
+  "instruments": {
+    "XAUUSD": "XAU-USD",
+    "XAGUSD": "XAG-USD",
+    "EURUSD": "EUR-USD",
+    "USDJPY": "USD-JPY"
+  },
+  "hypothesis_generation_quarantine": ["2021-07-01T00:00:00.000Z", "2024-07-01T00:00:00.000Z"],
+  "stage_a": ["2018-07-01T00:00:00.000Z", "2021-07-01T00:00:00.000Z"],
+  "validation": ["2024-07-01T00:00:00.000Z", "2025-07-01T00:00:00.000Z"],
+  "locked_exam": ["2025-07-01T00:00:00.000Z", "2026-07-01T00:00:00.000Z"],
+  "model": {"method": "OLS", "intercept": true, "window": 3000, "minimum_observations": 2500, "condition_number_limit": 1000000, "residual_window": 500},
+  "episodes": {"positive_long_threshold": 2.5, "negative_short_threshold": -2.5, "maximum_hours": 6},
+  "entry_window_utc": [6, 18],
+  "force_close_hour_utc": 20,
+  "h1_atr_period": 14,
+  "h1_atr_reference": 500,
+  "h1_atr_reject_percentile": 95,
+  "spread_reject_percentile": 99,
+  "stop_atr": 1.25,
+  "target_r": 1.5,
+  "maximum_hold_minutes": 90,
+  "ordinary_stress_fixed_r": 0.05,
+  "broker_transfer_r": 0.15,
+  "parameter_search_count": 0,
+  "feature_search_count": 0,
+  "model_search_count": 0,
+  "router_training_count": 0
+}
