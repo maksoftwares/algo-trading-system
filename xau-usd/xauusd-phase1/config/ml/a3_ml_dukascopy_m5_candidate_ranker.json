@@ -1,0 +1,93 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_candidate_ranker_v1",
+  "inputs": [
+    {
+      "path": "outputs/reports/A3_ML_DUKASCOPY_M5_DISCOVERY_TRAIN_EXECUTED_LABELS.csv",
+      "sha256": "9db8f27e27133c1fca702181a0f093d9ca5a1e84817286c4cdff9948a78131c2",
+      "families": ["pullback_h1_rr1p5", "breakout_h1_rr1p5", "sweep_h1_rr1p5"]
+    },
+    {
+      "path": "outputs/reports/A3_ML_DUKASCOPY_M5_MEAN_REVERSION_TRAIN_EXECUTED_LABELS.csv",
+      "sha256": "673b816709e766cf57faaca5fffc81b49ae205d024e2297e822f81ba6f2a55e6",
+      "families": ["band_fade_any_rr1p5", "impulse_fade_any_rr1p5", "sweep_fade_any_rr1p5"]
+    }
+  ],
+  "windows": {
+    "train_start_utc": "2018-07-01T00:00:00Z",
+    "train_end_exclusive_utc": "2020-01-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2021-01-01T00:00:00Z",
+    "internal_test_end_exclusive_utc": "2021-07-01T00:00:00Z"
+  },
+  "source_days": {"train": 388, "validation": 259, "test": 127},
+  "features": [
+    "direction_long",
+    "trend_strength_atr",
+    "ema_gap_atr",
+    "close_fast_distance_atr",
+    "body_fraction",
+    "directional_close_location",
+    "touch_distance_atr",
+    "stop_distance_atr",
+    "log1p_signal_tick_count",
+    "atr_fraction_of_price",
+    "entry_spread_r",
+    "server_hour_sin",
+    "server_hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "family_pullback",
+    "family_breakout",
+    "family_trend_sweep",
+    "family_band_fade",
+    "family_impulse_fade",
+    "family_mean_sweep"
+  ],
+  "models": [
+    {"model_id": "logistic_l2_0p01", "family": "L2_LOGISTIC_ADAM_V1", "iterations": 2500, "learning_rate": 0.025, "l2": 0.01},
+    {"model_id": "logistic_l2_0p10", "family": "L2_LOGISTIC_ADAM_V1", "iterations": 2500, "learning_rate": 0.025, "l2": 0.1}
+  ],
+  "validation_top_fractions": [0.5, 0.4, 0.3, 0.2],
+  "portfolio": {
+    "maximum_concurrent_trades": 2,
+    "maximum_trades_per_server_day": 12,
+    "cooldown_minutes": 5,
+    "server_utc_offset_hours": 4
+  },
+  "validation_gates": {
+    "minimum_auc": 0.53,
+    "minimum_trades": 168,
+    "minimum_trades_per_source_day": 0.65,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_average_stress_r": 0.0,
+    "minimum_direction_share": 0.2,
+    "require_top10_winners_removed_net_positive": true
+  },
+  "test_gates": {
+    "minimum_auc": 0.52,
+    "minimum_trades": 83,
+    "minimum_trades_per_source_day": 0.65,
+    "minimum_stress_profit_factor": 1.15,
+    "minimum_average_stress_r": 0.03,
+    "minimum_direction_share": 0.2,
+    "minimum_positive_exit_month_share": 0.5,
+    "maximum_closed_drawdown_r": 25.0,
+    "maximum_closed_drawdown_usd": 200.0,
+    "require_top10_winners_removed_net_positive": true,
+    "require_calendar_month_bootstrap_p025_above_zero": true
+  },
+  "bootstrap": {"calendar_month_samples": 2000, "seed": 20260715},
+  "selection_order": ["stress_profit_factor_desc", "trades_per_source_day_desc", "model_id_asc", "fraction_desc"],
+  "outputs": {
+    "model_json": "outputs/reports/A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_MODEL.json",
+    "predictions_csv": "outputs/reports/A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_PREDICTIONS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_M5_CANDIDATE_RANKER_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "reserved_validation_outcomes_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
