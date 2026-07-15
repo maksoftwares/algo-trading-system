@@ -1,0 +1,213 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_momentum_portability_v1",
+  "classification": "DUKASCOPY_M5_MOMENTUM_PORTABILITY_NO_SURVIVOR",
+  "created_at_utc": "2026-07-15T18:50:01.831405Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_m5_momentum_portability.json",
+  "contract_sha256": "e1388bd68cf4bd7e788e4bedc5e67bc10b7bc5b3557a24eff0a366c5b54ff9c3",
+  "source_lock": {
+    "ea_path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "ea_sha256": "c590adabc92fe4b63dac22812e4ac9a12882b23b6ed8242848470f90fd01e265",
+    "portfolio_spec_path": "docs/A1_XAU_M5_MOMENTUM_CLEAN_LONG_SHORT_PORTFOLIO_FORWARD_DRAFT_2026_07_02.md",
+    "portfolio_spec_sha256": "e5d7a0fe3283820ac73800bd8562eab9f098d70e5747346c2e8e7cca07d8576a"
+  },
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "source_months": 72,
+  "source_composite_sha256": "5a4f7ec77dcdc915e945e2dd1941986ba6be7511a7cc745e1d90250f5251f32f",
+  "m5_bar_count": 425311,
+  "m5_cache_reused_months": 72,
+  "source_days_by_window": {
+    "prehistory": 1033,
+    "replication": 515
+  },
+  "raw_candidate_count": 2842,
+  "raw_resolved_count": 2807,
+  "raw_resolved_share": 1.0,
+  "selected_trade_count": 120,
+  "selected_timeout_share": 0.0,
+  "raw_candidates_by_lane": {
+    "dukascopy_clean_short_core": 766,
+    "dukascopy_clean_long_v5_move12": 2076
+  },
+  "selected_trades_by_lane": {
+    "dukascopy_clean_short_core": 36,
+    "dukascopy_clean_long_v5_move12": 84
+  },
+  "selection_reasons": {
+    "estimated_cost_r_above_maximum": 2627,
+    "lane_position_already_open": 22,
+    "spread_above_maximum": 37,
+    "raw_ineligible_NO_QUOTE_WITHIN_ENTRY_WINDOW": 35,
+    "lane_cooldown": 1
+  },
+  "quality_gates": {
+    "verified_h1_months_eq_expected": true,
+    "verified_m5_months_eq_expected": true,
+    "raw_candidates_ge_minimum": true,
+    "resolved_share_ge_minimum": true,
+    "selected_timeout_share_lte_maximum": true,
+    "candidate_ids_unique": true,
+    "selected_candidate_ids_unique": true,
+    "ea_source_hash_matches": true,
+    "portfolio_spec_hash_matches": true,
+    "all_lanes_represented": true
+  },
+  "evidence": {
+    "prehistory": {
+      "trades": 75,
+      "wins": 36,
+      "win_rate_pct": 48.0,
+      "stress_net_usd": -85.97402190393422,
+      "stress_profit_factor": 0.6677038845224883,
+      "average_stress_r": -0.2513661997630197,
+      "max_closed_drawdown_r": 21.733405618293318,
+      "max_closed_drawdown_usd": 111.23582960995293,
+      "top25_winners_removed_net_usd": -231.86820847974465,
+      "source_days": 1033,
+      "trades_per_source_day": 0.07260406582768635,
+      "active_trade_days": 64,
+      "active_trade_day_coverage": 0.061955469506292354,
+      "trades_per_active_trade_day": 1.171875,
+      "maximum_entries_one_server_day": 4,
+      "active_exit_months": 32,
+      "positive_exit_months": 13,
+      "positive_exit_month_share": 0.40625,
+      "maximum_concurrent_trades": 1,
+      "timeout_exits": 0
+    },
+    "replication": {
+      "trades": 45,
+      "wins": 33,
+      "win_rate_pct": 73.33333333333333,
+      "stress_net_usd": 68.22814796238549,
+      "stress_profit_factor": 1.6751129517024828,
+      "average_stress_r": 0.21180745935707387,
+      "max_closed_drawdown_r": 4.0170988109989345,
+      "max_closed_drawdown_usd": 32.277922579282574,
+      "top25_winners_removed_net_usd": -70.39873075983823,
+      "source_days": 515,
+      "trades_per_source_day": 0.08737864077669903,
+      "active_trade_days": 35,
+      "active_trade_day_coverage": 0.06796116504854369,
+      "trades_per_active_trade_day": 1.2857142857142858,
+      "maximum_entries_one_server_day": 3,
+      "active_exit_months": 15,
+      "positive_exit_months": 12,
+      "positive_exit_month_share": 0.8,
+      "maximum_concurrent_trades": 1,
+      "timeout_exits": 0
+    }
+  },
+  "lane_evidence": {
+    "prehistory": {
+      "dukascopy_clean_long_v5_move12": {
+        "trades": 48,
+        "wins": 24,
+        "win_rate_pct": 50.0,
+        "stress_net_usd": -42.47362335127211,
+        "stress_profit_factor": 0.7039217698696163,
+        "average_stress_r": -0.21655642029792888,
+        "max_closed_drawdown_r": 15.229137494055006,
+        "max_closed_drawdown_usd": 80.39463711168916,
+        "top25_winners_removed_net_usd": -143.45405716782363
+      },
+      "dukascopy_clean_short_core": {
+        "trades": 27,
+        "wins": 12,
+        "win_rate_pct": 44.44444444444444,
+        "stress_net_usd": -43.5003985526621,
+        "stress_profit_factor": 0.6226317593028798,
+        "average_stress_r": -0.3132502521454035,
+        "max_closed_drawdown_r": 8.457756807925893,
+        "max_closed_drawdown_usd": 43.500398552662105,
+        "top25_winners_removed_net_usd": -115.27307775636581
+      }
+    },
+    "replication": {
+      "dukascopy_clean_long_v5_move12": {
+        "trades": 36,
+        "wins": 26,
+        "win_rate_pct": 72.22222222222223,
+        "stress_net_usd": 52.029272614005116,
+        "stress_profit_factor": 1.6177513758378133,
+        "average_stress_r": 0.20089543638283186,
+        "max_closed_drawdown_r": 3.500399307003384,
+        "max_closed_drawdown_usd": 28.53382029456018,
+        "top25_winners_removed_net_usd": -81.0250033993058
+      },
+      "dukascopy_clean_short_core": {
+        "trades": 9,
+        "wins": 7,
+        "win_rate_pct": 77.77777777777777,
+        "stress_net_usd": 16.198875348380383,
+        "stress_profit_factor": 1.9620323578116452,
+        "average_stress_r": 0.25545555125404185,
+        "max_closed_drawdown_r": 1.17418011911887,
+        "max_closed_drawdown_usd": 8.937232333333462,
+        "top25_winners_removed_net_usd": -16.838181394676056
+      }
+    }
+  },
+  "calendar_month_bootstrap": {
+    "prehistory": {
+      "samples": 2000,
+      "seed": 20260715,
+      "active_exit_months": 32,
+      "average_stress_r_p025": -0.4699640090557734,
+      "average_stress_r_p50": -0.25611944739933623,
+      "average_stress_r_p975": -0.033855787225182836
+    },
+    "replication": {
+      "samples": 2000,
+      "seed": 20260715,
+      "active_exit_months": 15,
+      "average_stress_r_p025": 0.010807837715421308,
+      "average_stress_r_p50": 0.21262741458354106,
+      "average_stress_r_p975": 0.4379189567663405
+    }
+  },
+  "strategy_gates": {
+    "prehistory_rows_ge_minimum": false,
+    "replication_rows_ge_minimum": false,
+    "each_window_trades_per_source_day_ge_minimum": false,
+    "each_window_trades_per_active_day_ge_minimum": false,
+    "each_window_active_day_coverage_ge_minimum": false,
+    "prehistory_win_rate_ge_minimum": false,
+    "replication_win_rate_ge_minimum": true,
+    "prehistory_pf_ge_minimum": false,
+    "replication_pf_ge_minimum": true,
+    "each_window_positive_month_share_ge_minimum": false,
+    "prehistory_drawdown_usd_lte_maximum": true,
+    "replication_drawdown_usd_lte_maximum": true,
+    "concurrent_trades_lte_maximum": true,
+    "each_lane_net_nonnegative_each_window": false,
+    "top25_removed_net_positive_each_window": false,
+    "bootstrap_p025_above_zero_each_window": false
+  },
+  "artifacts": {
+    "raw_candidates_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_MOMENTUM_RAW_CANDIDATES.csv",
+      "sha256": "70af7ca943d50ecf5216ecab331d95d0cf913e7ddc541bc4f21fa43404d2c2f9"
+    },
+    "raw_labels_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_MOMENTUM_RAW_LABELS.csv",
+      "sha256": "8c62bf3e05c22177fe6bdb6ff0a15d04b97e345f7b2ec5ce90c348c2ea6565d0"
+    },
+    "selected_labels_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_M5_MOMENTUM_SELECTED_LABELS.csv",
+      "sha256": "411690ea6e9b50bce190cacc52bb14088b6df0469fbb7d5c828bbd8a6b870580"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "strategy_promotion_authorized": false
+  },
+  "limitations": [
+    "Prehistory is a backcast and replication dates overlap prior MT5 research.",
+    "A survivor is cross-feed evidence, not prospective demo or live proof.",
+    "The 720-hour research timeout approximates an EA that otherwise holds until stop or target.",
+    "Fixed 0.01-lot results are not account-relative sizing or risk-of-ruin evidence."
+  ]
+}
