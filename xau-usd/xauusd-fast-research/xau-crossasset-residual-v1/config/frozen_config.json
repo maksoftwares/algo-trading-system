@@ -1,5 +1,7 @@
 {
   "phase": "XAU_CROSSASSET_RESIDUAL_DIRECTIONAL_SPECIALISTS_V1",
+  "correction_phase": "XAU_CROSSASSET_RESIDUAL_V1_REVIEW_CORRECTIONS",
+  "reviewed_commit": "0722a66a41cf7a3d109a4bc129f8f469b80ca022",
   "official_origin": "https://jetta.dukascopy.com/v1",
   "instruments": {
     "XAUUSD": "XAU-USD",
@@ -34,6 +36,13 @@
   "maximum_hold_minutes": 90,
   "ordinary_stress_fixed_r": 0.05,
   "broker_transfer_r": 0.15,
+  "account_contract": {
+    "equity": 1000,
+    "risk_fraction": 0.005,
+    "margin_fraction": 0.20,
+    "minimum_free_margin_fraction": 0.80,
+    "maximum_sizing_rejection_fraction": 0.10
+  },
   "parameter_search_count": 0,
   "feature_search_count": 0,
   "model_search_count": 0,

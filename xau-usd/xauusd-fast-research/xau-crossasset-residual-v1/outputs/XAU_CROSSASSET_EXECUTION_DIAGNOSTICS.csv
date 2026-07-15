@@ -3,6 +3,13 @@ development_spread_p95_06_20_utc,0.44
 candidates,5307
 accepted_standalone,4012
 combined_conflicts,0
+DUPLICATE_SOURCE_SEQUENCE_CONFLICT,0
+MISSING_SOURCE_SEQUENCE,0
+NON_MONOTONIC_SOURCE_SEQUENCE,0
+groups_containing_both_stop_and_target_across_quotes,0
+same_millisecond_groups_inspected,0
+same_millisecond_groups_with_multiple_source_sequences,0
+unordered_groups,0
 exit_RESIDUAL_CONVERGENCE,2676
 exit_STOP,1172
 exit_TARGET,164

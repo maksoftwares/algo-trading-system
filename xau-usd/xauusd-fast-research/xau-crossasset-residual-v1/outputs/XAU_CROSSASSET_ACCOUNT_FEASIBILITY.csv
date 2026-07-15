@@ -1,2 +1,2 @@
-status,reason
-NOT_APPLICABLE,NO_FINAL_ADMITTED_STAGE_B_OPPORTUNITIES
+status,reason,account_equity,risk_limit,margin_limit,minimum_free_margin,maximum_sizing_rejection_rate
+NOT_APPLICABLE_NO_FINAL_ADMISSION,NO_FINAL_ADMITTED_STAGE_B_OPPORTUNITY,1000,5,200,800,0.1

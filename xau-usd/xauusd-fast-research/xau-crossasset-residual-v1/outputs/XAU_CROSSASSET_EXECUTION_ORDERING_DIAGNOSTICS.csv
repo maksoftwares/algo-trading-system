@@ -1,0 +1,8 @@
+diagnostic,corrected_run_one,corrected_run_two,deterministic
+DUPLICATE_SOURCE_SEQUENCE_CONFLICT,0,0,true
+MISSING_SOURCE_SEQUENCE,0,0,true
+NON_MONOTONIC_SOURCE_SEQUENCE,0,0,true
+groups_containing_both_stop_and_target_across_quotes,0,0,true
+same_millisecond_groups_inspected,0,0,true
+same_millisecond_groups_with_multiple_source_sequences,0,0,true
+unordered_groups,0,0,true

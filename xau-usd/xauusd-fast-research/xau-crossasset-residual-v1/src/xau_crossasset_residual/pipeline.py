@@ -23,9 +23,10 @@ import numpy as np
 import pandas as pd
 
 from .core import (
-    BASE_COMMIT, BASE_TREE, BRANCH, COMBINED_ID, COMMIT_MESSAGE, INSTRUMENTS, LONG_ID,
+    BASE_COMMIT, BASE_PARENT, BASE_TREE, BRANCH, COMBINED_ID, COMMIT_MESSAGE, INSTRUMENTS, LONG_ID,
     PHASE, SHORT_ID, SOURCE_ORIGIN, STORAGE_ENV, add_log_returns, canonical_json_bytes,
-    classify, construct_episodes, iso_ms, metrics, prior_percentile, rolling_causal_ols,
+    ExecutionOrderingError, classify, combine_standalone_trades, construct_episodes, iso_ms, metrics, prior_percentile,
+    process_ordered_exit_ticks, rolling_causal_ols,
     sha256_file, stage_a_gate, synchronize_m5, weighted_percentile, wilder_atr,
 )
 
@@ -78,8 +79,8 @@ def foundation_module(repo: Path):
 def assert_identity(lane: Path) -> dict[str, Any]:
     repo = lane.parents[2]
     identity = {"branch": git(repo, "branch", "--show-current"), "base_commit": git(repo, "rev-parse", "HEAD"), "base_tree": git(repo, "rev-parse", "HEAD^{tree}"), "parent": git(repo, "rev-parse", "HEAD^")}
-    if (identity["branch"], identity["base_commit"], identity["base_tree"]) != (BRANCH, BASE_COMMIT, BASE_TREE):
-        raise RuntimeError("XAU_CROSSASSET_RESIDUAL_V1_BASE_IDENTITY_MISMATCH")
+    if (identity["branch"], identity["base_commit"], identity["base_tree"], identity["parent"]) != (BRANCH, BASE_COMMIT, BASE_TREE, BASE_PARENT):
+        raise RuntimeError("XAU_CROSSASSET_RESIDUAL_V1_CORRECTION_BASE_IDENTITY_MISMATCH")
     status = git(repo, "status", "--short")
     outside = [line for line in status.splitlines() if "xau-usd/xauusd-fast-research/xau-crossasset-residual-v1/" not in line.replace("\\", "/")]
     if outside:
@@ -295,7 +296,7 @@ def _candidate_context(candidate: Mapping[str, Any], m5: pd.DataFrame, h1: pd.Da
     }
 
 
-def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.DataFrame, p95: float) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.DataFrame, p95: float) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, int]]:
     """Chronological native-tick replay for standalone specialists and combined diagnostic."""
     m5, h1 = atr_context(run_root)
     convergence = convergence_times(model, candidates)
@@ -303,6 +304,7 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
     for candidate in candidates:
         by_month.setdefault(candidate["UTC_date"][:7], []).append(candidate)
     signals, standalone = [], []
+    ordering_diagnostics: Counter[str] = Counter()
     spread_history: Counter[float] = Counter()
     open_until = {LONG_ID: -1, SHORT_ID: -1}
     for path in _tick_month_paths(run_root):
@@ -321,7 +323,7 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
                     spread_history[float(value)] += int(count)
                 position = new_position
             context = _candidate_context(candidate, m5, h1)
-            signal = {**candidate, **context, "UTC_time_of_day": iso_ms(complete)[11:19], "current_spread": "", "prior_spread_P99": weighted_percentile(spread_history, .99), "unsafe_filter_passed": False, "signal_accepted_pre_execution": False, "signal_accepted": False, "rejection_reason": "", "entry_time": "", "entry_bid": "", "entry_ask": "", "entry_price": "", "entry_spread": "", "entry_delay_milliseconds": "", "stop": "", "target": "", "initial_risk_price": ""}
+            signal = {**candidate, **context, "UTC_time_of_day": iso_ms(complete)[11:19], "current_spread": "", "current_spread_percentile": "", "prior_spread_P99": weighted_percentile(spread_history, .99), "unsafe_filter_passed": False, "signal_accepted_pre_execution": False, "signal_accepted": False, "rejection_reason": "", "entry_time": "", "entry_bid": "", "entry_ask": "", "entry_price": "", "entry_spread": "", "entry_delay_milliseconds": "", "stop": "", "target": "", "initial_risk_price": ""}
             hour = datetime.fromtimestamp(complete / 1000, UTC).hour
             if not 6 <= hour < 18:
                 signal["rejection_reason"] = "OUTSIDE_ENTRY_WINDOW"
@@ -339,6 +341,8 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
                     entry_tick = ticks.iloc[entry_index]
                     current_spread = float(entry_tick.spread)
                     signal["current_spread"] = current_spread
+                    spread_observations = sum(spread_history.values())
+                    signal["current_spread_percentile"] = (100.0 * sum(count for value, count in spread_history.items() if value <= round(current_spread, 3)) / spread_observations) if spread_observations else ""
                     if not math.isfinite(float(signal["prior_spread_P99"])) or current_spread >= float(signal["prior_spread_P99"]):
                         signal["rejection_reason"] = "UNSAFE_SPREAD_P99"
                     elif int(entry_tick.timestamp_msc) < open_until[candidate["specialist_id"]]:
@@ -353,45 +357,31 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
                         expiry = entry_ms + 90 * 60_000
                         force = int(datetime.fromisoformat(candidate["UTC_date"] + "T20:00:00+00:00").timestamp() * 1000)
                         conv = convergence.get(candidate["excursion_episode_id"], (2**63 - 1, float("nan")))
-                        exit_tick, exit_price, exit_reason, exit_z = None, None, "", float("nan")
-                        mfe, mae, ambiguity, stop_gap, target_gap = 0.0, 0.0, False, False, False
-                        i = entry_index
-                        while i < len(ticks):
-                            tick = ticks.iloc[i]
-                            ts = int(tick.timestamp_msc)
-                            if iso_ms(ts)[:10] != candidate["UTC_date"]:
-                                break
-                            j = int(np.searchsorted(tick_times, ts, side="right"))
-                            group = ticks.iloc[i:j]
-                            prices = group["bid" if direction == "LONG" else "ask"].to_numpy(float)
-                            excursions = (prices - entry) / risk if direction == "LONG" else (entry - prices) / risk
-                            mfe, mae = max(mfe, float(excursions.max())), min(mae, float(excursions.min()))
-                            stop_mask = prices <= stop if direction == "LONG" else prices >= stop
-                            target_mask = prices >= target if direction == "LONG" else prices <= target
-                            if stop_mask.any():
-                                adverse = int(np.argmin(prices) if direction == "LONG" else np.argmax(prices))
-                                exit_tick, exit_price, exit_reason = group.iloc[adverse], float(prices[adverse]), "STOP"
-                                ambiguity = bool(target_mask.any())
-                                stop_gap = float(exit_price) != stop
-                                break
-                            if target_mask.any():
-                                target_index = int(np.flatnonzero(target_mask)[0])
-                                exit_tick, exit_price, exit_reason = group.iloc[target_index], target, "TARGET"
-                                target_gap = float(prices[target_index]) != target
-                                break
-                            if ts >= conv[0]:
-                                exit_tick, exit_price, exit_reason, exit_z = tick, _side_price(tick, direction, False), "RESIDUAL_CONVERGENCE", conv[1]
-                                break
-                            if ts >= expiry:
-                                exit_tick, exit_price, exit_reason = tick, _side_price(tick, direction, False), "NINETY_MINUTE_EXPIRY"
-                                break
-                            if ts >= force:
-                                exit_tick, exit_price, exit_reason = tick, _side_price(tick, direction, False), "SAME_DAY_FORCE_CLOSE"
-                                break
-                            i = j
-                        if exit_tick is None:
+                        deadline = min(expiry, force)
+                        end_index = int(np.searchsorted(tick_times, deadline, side="left"))
+                        if end_index < len(ticks):
+                            end_index += 1
+                        try:
+                            selected = process_ordered_exit_ticks(
+                                ticks.iloc[entry_index:end_index], direction=direction, entry_price=entry, risk=risk,
+                                stop=stop, target=target, convergence_ms=int(conv[0]), convergence_z=float(conv[1]),
+                                expiry_ms=expiry, force_ms=force, utc_date=str(candidate["UTC_date"]),
+                            )
+                        except ExecutionOrderingError as exc:
+                            raise RuntimeError(f"XAU_CROSSASSET_RESIDUAL_V1_CORRECTION_EVIDENCE_INVALID:{exc}") from exc
+                        if selected is None:
                             signal["rejection_reason"] = "MISSING_EXIT_TICK"
                         else:
+                            ordering_diagnostics.update(selected["diagnostics"])
+                            exit_tick = selected["exit_tick"]
+                            exit_price = float(selected["exit_price"])
+                            exit_reason = str(selected["exit_reason"])
+                            exit_z = float(selected["exit_z"])
+                            mfe = float(selected["MFE_R"])
+                            mae = float(selected["MAE_R"])
+                            ambiguity = bool(selected["identical_timestamp_ambiguity"])
+                            stop_gap = bool(selected["stop_gap"])
+                            target_gap = bool(selected["target_gap"])
                             signal.update(signal_accepted=True, rejection_reason="", entry_time=iso_ms(entry_ms), entry_bid=float(entry_tick.bid), entry_ask=float(entry_tick.ask), entry_price=entry, entry_spread=current_spread, entry_delay_milliseconds=entry_ms - complete, stop=stop, target=target, initial_risk_price=risk)
                             exit_ms = int(exit_tick.timestamp_msc)
                             baseline = (float(exit_price) - entry) / risk if direction == "LONG" else (entry - float(exit_price)) / risk
@@ -399,7 +389,7 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
                             exit_spread = float(exit_tick.spread)
                             exit_increment = max(0.0, p95 - exit_spread) / (2 * risk)
                             gross = baseline + (current_spread + exit_spread) / (2 * risk)
-                            trade = {"simulation_id": candidate["specialist_id"] + "_STANDALONE", "specialist_id": candidate["specialist_id"], "direction": direction, "excursion_episode_id": candidate["excursion_episode_id"], "UTC_date": candidate["UTC_date"], "chronological_segment": candidate["chronological_segment"], "candidate_time": candidate["candidate_bar_time"], "entry_time": iso_ms(entry_ms), "entry_bid": float(entry_tick.bid), "entry_ask": float(entry_tick.ask), "entry_price": entry, "entry_spread": current_spread, "stop": stop, "target": target, "initial_risk_price": risk, "exit_time": iso_ms(exit_ms), "exit_bid": float(exit_tick.bid), "exit_ask": float(exit_tick.ask), "exit_price": float(exit_price), "exit_spread": exit_spread, "exit_reason": exit_reason, "residual_z_at_entry": candidate["residual_z_current"], "residual_z_at_exit_signal": exit_z, "gross_R": gross, "baseline_net_R": baseline, "stress_incremental_entry_spread_R": entry_increment, "stress_incremental_exit_spread_R": exit_increment, "stress_slippage_R": 0.05, "stress_net_R": baseline - entry_increment - exit_increment - 0.05, "broker_transfer_R": baseline - 0.15, "MFE_R": mfe, "MAE_R": mae, "holding_minutes": (exit_ms - entry_ms) / 60_000, "stop_gap": stop_gap, "target_gap": target_gap, "identical_timestamp_ambiguity": ambiguity, "convergence_exit": exit_reason == "RESIDUAL_CONVERGENCE", "expiry_exit": exit_reason == "NINETY_MINUTE_EXPIRY", "forced_exit": exit_reason == "SAME_DAY_FORCE_CLOSE", "Capital_minimum_volume_loss": "", "Capital_required_margin": "", "Capital_post_entry_free_margin": "", "Capital_account_feasible": "", "Capital_rejection_reason": "NOT_APPLICABLE_NO_FINAL_ADMISSION"}
+                            trade = {"simulation_id": candidate["specialist_id"] + "_STANDALONE", "specialist_id": candidate["specialist_id"], "direction": direction, "excursion_episode_id": candidate["excursion_episode_id"], "UTC_date": candidate["UTC_date"], "chronological_segment": candidate["chronological_segment"], "candidate_time": candidate["candidate_bar_time"], "entry_time": iso_ms(entry_ms), "entry_source_sequence": str(entry_tick.source_sequence), "entry_bid": float(entry_tick.bid), "entry_ask": float(entry_tick.ask), "entry_price": entry, "entry_spread": current_spread, "stop": stop, "target": target, "initial_risk_price": risk, "exit_time": iso_ms(exit_ms), "exit_source_sequence": selected["exit_source_sequence"], "exit_timestamp_group_size": selected["exit_timestamp_group_size"], "exit_ordering_quality": selected["exit_ordering_quality"], "exit_bid": float(exit_tick.bid), "exit_ask": float(exit_tick.ask), "exit_price": float(exit_price), "exit_spread": exit_spread, "exit_reason": exit_reason, "residual_z_at_entry": candidate["residual_z_current"], "residual_z_at_exit_signal": exit_z, "gross_R": gross, "baseline_net_R": baseline, "stress_incremental_entry_spread_R": entry_increment, "stress_incremental_exit_spread_R": exit_increment, "stress_slippage_R": 0.05, "stress_net_R": baseline - entry_increment - exit_increment - 0.05, "broker_transfer_R": baseline - 0.15, "MFE_R": mfe, "MAE_R": mae, "holding_minutes": (exit_ms - entry_ms) / 60_000, "stop_gap": stop_gap, "target_gap": target_gap, "identical_timestamp_ambiguity": ambiguity, "convergence_exit": exit_reason == "RESIDUAL_CONVERGENCE", "expiry_exit": exit_reason == "NINETY_MINUTE_EXPIRY", "forced_exit": exit_reason == "SAME_DAY_FORCE_CLOSE", "post_exit_invariance_contract": True, "Capital_minimum_volume_loss": "", "Capital_required_margin": "", "Capital_post_entry_free_margin": "", "Capital_account_feasible": "", "Capital_rejection_reason": "NOT_APPLICABLE_NO_FINAL_ADMISSION"}
                             standalone.append(trade)
                             open_until[candidate["specialist_id"]] = exit_ms
             signals.append(signal)
@@ -407,17 +397,8 @@ def execute(run_root: Path, candidates: Sequence[Mapping[str, Any]], model: pd.D
             for value, count in ticks["spread"].iloc[position:].round(3).value_counts().items():
                 spread_history[float(value)] += int(count)
         print(f"EXECUTED {key} candidates={len(monthly)}", flush=True)
-    combined, global_exit = [], -1
-    conflicts = []
-    for trade in sorted(standalone, key=lambda row: (row["entry_time"], row["specialist_id"])):
-        entry_ms = int(datetime.fromisoformat(str(trade["entry_time"]).replace("Z", "+00:00")).timestamp() * 1000)
-        exit_ms = int(datetime.fromisoformat(str(trade["exit_time"]).replace("Z", "+00:00")).timestamp() * 1000)
-        if entry_ms < global_exit:
-            conflicts.append({"specialist_id": trade["specialist_id"], "entry_time": trade["entry_time"], "rejection_reason": "GLOBAL_XAU_POSITION_ALREADY_OPEN"})
-        else:
-            combined.append({**trade, "simulation_id": COMBINED_ID})
-            global_exit = exit_ms
-    return signals, standalone + combined, conflicts
+    combined, conflicts = combine_standalone_trades(standalone)
+    return signals, standalone + combined, conflicts, dict(ordering_diagnostics)
 
 
 def _reports(trades: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, Any]], list[str]]:
@@ -440,10 +421,10 @@ def screen(run_root: Path, scratch: Path, external_model: Path) -> dict[str, Any
     model, missing, synchronized = build_model(run_root, external_model)
     candidates = construct_episodes(model)
     p95 = spread_p95(run_root)
-    signals, trades, conflicts = execute(run_root, candidates, model, p95)
+    signals, trades, conflicts, ordering_diagnostics = execute(run_root, candidates, model, p95)
     reports, survivors = _reports(trades)
-    signal_fields = ["specialist_id", "direction", "excursion_episode_id", "UTC_date", "chronological_segment", "candidate_bar_time", "residual_z_previous", "residual_z_current", "r_xau", "predicted_r_xau", "residual", "beta_xag", "beta_eurusd", "beta_usdjpy", "condition_number", "H1_ATR14", "H1_ATR_percentile", "current_spread", "prior_spread_P99", "UTC_time_of_day", "unsafe_filter_passed", "signal_accepted_pre_execution", "signal_accepted", "rejection_reason", "entry_time", "entry_bid", "entry_ask", "entry_price", "entry_spread", "entry_delay_milliseconds", "M5_ATR14", "stop", "target", "initial_risk_price"]
-    trade_fields = ["simulation_id", "specialist_id", "direction", "excursion_episode_id", "UTC_date", "chronological_segment", "candidate_time", "entry_time", "entry_bid", "entry_ask", "entry_price", "entry_spread", "stop", "target", "initial_risk_price", "exit_time", "exit_bid", "exit_ask", "exit_price", "exit_spread", "exit_reason", "residual_z_at_entry", "residual_z_at_exit_signal", "gross_R", "baseline_net_R", "stress_incremental_entry_spread_R", "stress_incremental_exit_spread_R", "stress_slippage_R", "stress_net_R", "broker_transfer_R", "MFE_R", "MAE_R", "holding_minutes", "stop_gap", "target_gap", "identical_timestamp_ambiguity", "convergence_exit", "expiry_exit", "forced_exit", "Capital_minimum_volume_loss", "Capital_required_margin", "Capital_post_entry_free_margin", "Capital_account_feasible", "Capital_rejection_reason"]
+    signal_fields = ["specialist_id", "direction", "excursion_episode_id", "UTC_date", "chronological_segment", "candidate_bar_time", "residual_z_previous", "residual_z_current", "r_xau", "predicted_r_xau", "residual", "beta_xag", "beta_eurusd", "beta_usdjpy", "condition_number", "H1_ATR14", "H1_ATR_percentile", "current_spread", "current_spread_percentile", "prior_spread_P99", "UTC_time_of_day", "unsafe_filter_passed", "signal_accepted_pre_execution", "signal_accepted", "rejection_reason", "entry_time", "entry_bid", "entry_ask", "entry_price", "entry_spread", "entry_delay_milliseconds", "M5_ATR14", "stop", "target", "initial_risk_price"]
+    trade_fields = ["simulation_id", "specialist_id", "direction", "excursion_episode_id", "UTC_date", "chronological_segment", "candidate_time", "entry_time", "entry_source_sequence", "entry_bid", "entry_ask", "entry_price", "entry_spread", "stop", "target", "initial_risk_price", "exit_time", "exit_source_sequence", "exit_timestamp_group_size", "exit_ordering_quality", "exit_bid", "exit_ask", "exit_price", "exit_spread", "exit_reason", "residual_z_at_entry", "residual_z_at_exit_signal", "gross_R", "baseline_net_R", "stress_incremental_entry_spread_R", "stress_incremental_exit_spread_R", "stress_slippage_R", "stress_net_R", "broker_transfer_R", "MFE_R", "MAE_R", "holding_minutes", "stop_gap", "target_gap", "identical_timestamp_ambiguity", "convergence_exit", "expiry_exit", "forced_exit", "post_exit_invariance_contract", "Capital_minimum_volume_loss", "Capital_required_margin", "Capital_post_entry_free_margin", "Capital_account_feasible", "Capital_rejection_reason"]
     write_csv(scratch / PRINCIPAL[0], signal_fields, signals)
     write_csv(scratch / PRINCIPAL[1], trade_fields, trades)
     funnel = []
@@ -456,7 +437,7 @@ def screen(run_root: Path, scratch: Path, external_model: Path) -> dict[str, Any
     registry = {"phase": PHASE, "stage_a_survivors": survivors, "failed_directions_permanently_rejected": [value for value in (LONG_ID, SHORT_ID) if value not in survivors], "stage_b_authorized": bool(survivors), "rules_changed_after_stage_a": False}
     write_json(scratch / PRINCIPAL[4], registry)
     hashes = {name: sha256_file(scratch / name) for name in PRINCIPAL}
-    return {"model": model, "missing": missing, "synchronized": synchronized, "candidates": candidates, "signals": signals, "trades": trades, "conflicts": conflicts, "reports": reports, "survivors": survivors, "spread_p95": p95, "principal_hashes": hashes, "scratch": scratch, "model_path": external_model}
+    return {"model": model, "missing": missing, "synchronized": synchronized, "candidates": candidates, "signals": signals, "trades": trades, "conflicts": conflicts, "reports": reports, "survivors": survivors, "spread_p95": p95, "principal_hashes": hashes, "ordering_diagnostics": ordering_diagnostics, "scratch": scratch, "model_path": external_model}
 
 
 def _group_metrics(trades: Sequence[Mapping[str, Any]], fields: Sequence[str]) -> list[dict[str, Any]]:

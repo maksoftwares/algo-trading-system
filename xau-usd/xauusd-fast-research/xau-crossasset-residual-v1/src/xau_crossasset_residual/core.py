@@ -12,11 +12,13 @@ from typing import Any, Mapping, Sequence
 import numpy as np
 import pandas as pd
 
-PHASE = "XAU_CROSSASSET_RESIDUAL_DIRECTIONAL_SPECIALISTS_V1"
-BASE_COMMIT = "c21c98711e21f3e2e4d705d64ac8cf1391aca228"
-BASE_TREE = "1bedbc6531ab4de1d02b21984ef6003fe324f97a"
-BRANCH = "codex/xau-crossasset-residual-fast-discovery-v1"
-COMMIT_MESSAGE = "research: screen XAU cross-asset residual specialists"
+PHASE = "XAU_CROSSASSET_RESIDUAL_V1_REVIEW_CORRECTIONS"
+SOURCE_PHASE = "XAU_CROSSASSET_RESIDUAL_DIRECTIONAL_SPECIALISTS_V1"
+BASE_COMMIT = "0722a66a41cf7a3d109a4bc129f8f469b80ca022"
+BASE_TREE = "89dbd09a45c85e98a67b3a1487ea87730ce7d172"
+BASE_PARENT = "c21c98711e21f3e2e4d705d64ac8cf1391aca228"
+BRANCH = "codex/xau-crossasset-residual-v1-review-corrections"
+COMMIT_MESSAGE = "fix: correct XAU residual V1 research evidence"
 SOURCE_ORIGIN = "https://jetta.dukascopy.com/v1"
 STORAGE_ENV = "DUKASCOPY_TICK_DATA_ROOT"
 INSTRUMENTS = {"XAUUSD": "XAU-USD", "XAGUSD": "XAG-USD", "EURUSD": "EUR-USD", "USDJPY": "USD-JPY"}
@@ -223,7 +225,10 @@ def metrics(trades: Sequence[Mapping[str, Any]], field: str = "baseline_net_R", 
     for row, value in zip(trades, values):
         daily[str(row["UTC_date"])] += value
     winning_days = sorted((v for v in daily.values() if v > 0), reverse=True)
-    top3days = float(sum(winning_days[:3]) / sum(winning_days)) if winning_days else 1.0
+    # Frozen definition: the numerator uses positive net days, while the
+    # denominator is gross positive *individual trade* R. Losses on a winning
+    # day therefore reduce the numerator but never the denominator.
+    top3days = float(sum(winning_days[:3]) / gross_positive) if gross_positive > 0 else 1.0
     months = {str(row["UTC_date"])[:7] for row in trades}
     return {
         "trades": int(len(values)), "wins": int(len(wins)), "losses": int(len(losses)),
@@ -304,10 +309,44 @@ def final_combined_gate(full: Mapping[str, Any], stress: Mapping[str, Any], brok
 
 
 def capital_feasibility(account_balance: float, minimum_volume_loss: float, required_margin: float) -> tuple[bool, dict[str, float | str]]:
+    """Evaluate the frozen USD 1,000-equivalent account contract.
+
+    Leverage may affect broker margin, but it cannot enlarge the 0.50% risk
+    limit or relax either of the two independent margin constraints.
+    """
+    risk_limit = account_balance * .005
+    margin_limit = account_balance * .20
+    minimum_free_margin = account_balance * .80
     post_entry_free_margin = account_balance - required_margin
-    feasible = minimum_volume_loss <= account_balance * .01 and post_entry_free_margin >= 2 * minimum_volume_loss
-    reason = "" if feasible else "MINIMUM_VOLUME_RISK_OR_MARGIN_EXCEEDS_FROZEN_ACCOUNT_LIMIT"
-    return feasible, {"minimum_volume_loss": minimum_volume_loss, "required_margin": required_margin, "post_entry_free_margin": post_entry_free_margin, "rejection_reason": reason}
+    risk_pass = minimum_volume_loss <= risk_limit
+    margin_pass = required_margin <= margin_limit
+    free_margin_pass = post_entry_free_margin >= minimum_free_margin
+    feasible = risk_pass and margin_pass and free_margin_pass
+    failures = []
+    if not risk_pass:
+        failures.append("MINIMUM_VOLUME_TOTAL_LOSS_EXCEEDS_0_50_PERCENT")
+    if not margin_pass:
+        failures.append("REQUIRED_MARGIN_EXCEEDS_20_PERCENT")
+    if not free_margin_pass:
+        failures.append("POST_ENTRY_FREE_MARGIN_BELOW_80_PERCENT")
+    return feasible, {
+        "minimum_volume_loss": minimum_volume_loss,
+        "required_margin": required_margin,
+        "post_entry_free_margin": post_entry_free_margin,
+        "risk_limit": risk_limit,
+        "margin_limit": margin_limit,
+        "minimum_free_margin": minimum_free_margin,
+        "risk_condition_passed": risk_pass,
+        "margin_condition_passed": margin_pass,
+        "free_margin_condition_passed": free_margin_pass,
+        "rejection_reason": "|".join(failures),
+    }
+
+
+def sizing_rejection_rate_passes(rejected: int, evaluated: int) -> bool:
+    if evaluated <= 0 or rejected < 0 or rejected > evaluated:
+        raise ValueError("rejected/evaluated counts are invalid")
+    return rejected / evaluated <= .10
 
 
 def classify(evidence_valid: bool, data_complete: bool, survivors: Sequence[str], final_passers: Sequence[str] = (), combined_final: bool = False) -> str:
@@ -318,12 +357,326 @@ def classify(evidence_valid: bool, data_complete: bool, survivors: Sequence[str]
     if not survivors:
         return "XAU_CROSSASSET_RESIDUAL_V1_NO_DIRECTIONAL_SURVIVOR"
     if set(final_passers) == {LONG_ID, SHORT_ID} and combined_final:
-        return "XAU_CROSSASSET_RESIDUAL_V1_BIDIRECTIONAL_CONFIRMATION_REQUIRED"
+        return "XAU_CROSSASSET_RESIDUAL_V1_BIDIRECTIONAL_SPECIALIST_CONFIRMATION_REQUIRED"
     if final_passers == [LONG_ID]:
-        return "XAU_CROSSASSET_RESIDUAL_V1_LONG_CONFIRMATION_REQUIRED"
+        return "XAU_CROSSASSET_RESIDUAL_V1_LONG_SPECIALIST_CONFIRMATION_REQUIRED"
     if final_passers == [SHORT_ID]:
-        return "XAU_CROSSASSET_RESIDUAL_V1_SHORT_CONFIRMATION_REQUIRED"
+        return "XAU_CROSSASSET_RESIDUAL_V1_SHORT_SPECIALIST_CONFIRMATION_REQUIRED"
     return "XAU_CROSSASSET_RESIDUAL_V1_FINAL_REJECTED"
+
+
+class ExecutionOrderingError(RuntimeError):
+    """Raised when tick order is unknowable and the frozen ambiguity rule does not apply."""
+
+
+def _exit_side_price(row: Mapping[str, Any], direction: str) -> float:
+    return float(row["bid"] if direction == "LONG" else row["ask"])
+
+
+def _barrier_flags(price: float, direction: str, stop: float, target: float) -> tuple[bool, bool]:
+    if direction == "LONG":
+        return price <= stop, price >= target
+    return price >= stop, price <= target
+
+
+def _process_ordered_exit_ticks_dataframe_reference(
+    ticks: pd.DataFrame,
+    *,
+    direction: str,
+    entry_price: float,
+    risk: float,
+    stop: float,
+    target: float,
+    convergence_ms: int,
+    convergence_z: float,
+    expiry_ms: int,
+    force_ms: int,
+    utc_date: str,
+) -> dict[str, Any] | None:
+    """Select an exit one tick at a time in timestamp/source-sequence order.
+
+    MFE/MAE are updated immediately before the barrier/lifecycle checks for the
+    same scalar quote, so no later quote can contaminate the chosen exit.
+    """
+    required = {"timestamp_msc", "bid", "ask", "spread", "source_sequence"}
+    if not required.issubset(ticks.columns):
+        raise ValueError(f"ticks missing required columns: {sorted(required - set(ticks.columns))}")
+    if direction not in {"LONG", "SHORT"} or not risk > 0:
+        raise ValueError("direction and risk are invalid")
+
+    frame = ticks.copy().reset_index(drop=False).rename(columns={"index": "_input_index"})
+    frame = frame.sort_values("timestamp_msc", kind="mergesort").reset_index(drop=True)
+    mfe = 0.0
+    mae = 0.0
+    diagnostics: Counter[str] = Counter()
+
+    for timestamp, group in frame.groupby("timestamp_msc", sort=True):
+        ts = int(timestamp)
+        if iso_ms(ts)[:10] != utc_date:
+            break
+        group = group.copy()
+        group_size = len(group)
+        if group_size > 1:
+            diagnostics["same_millisecond_groups_inspected"] += 1
+
+        sequences = group["source_sequence"]
+        missing_sequence = sequences.isna().any() or sequences.astype(str).str.strip().eq("").any()
+        sequence_strings = sequences.astype(str).tolist() if not missing_sequence else []
+        duplicated = bool(sequence_strings) and len(set(sequence_strings)) != len(sequence_strings)
+        duplicate_conflict = False
+        if duplicated:
+            for _, repeated in group.assign(_sequence=sequences.astype(str)).groupby("_sequence", sort=False):
+                if len(repeated) > 1 and len(repeated[["bid", "ask", "spread"]].drop_duplicates()) > 1:
+                    duplicate_conflict = True
+                    break
+
+        if missing_sequence or duplicate_conflict:
+            quality = "MISSING_SOURCE_SEQUENCE" if missing_sequence else "DUPLICATE_SOURCE_SEQUENCE_CONFLICT"
+            diagnostics["unordered_groups"] += 1
+            diagnostics[quality] += 1
+            prices = [_exit_side_price(row, direction) for row in group.to_dict("records")]
+            flags = [_barrier_flags(price, direction, stop, target) for price in prices]
+            stop_hits = [index for index, (hit, _) in enumerate(flags) if hit]
+            target_hits = [index for index, (_, hit) in enumerate(flags) if hit]
+            if stop_hits and target_hits and group_size > 1:
+                diagnostics["groups_containing_both_stop_and_target_across_quotes"] += 1
+                selected_position = min(stop_hits, key=lambda index: prices[index]) if direction == "LONG" else max(stop_hits, key=lambda index: prices[index])
+                selected = group.iloc[selected_position]
+                price = prices[selected_position]
+                excursion = (price - entry_price) / risk if direction == "LONG" else (entry_price - price) / risk
+                mfe, mae = max(mfe, excursion), min(mae, excursion)
+                return {
+                    "exit_tick": selected,
+                    "exit_price": price,
+                    "exit_reason": "STOP",
+                    "exit_z": float("nan"),
+                    "MFE_R": float(mfe),
+                    "MAE_R": float(mae),
+                    "identical_timestamp_ambiguity": True,
+                    "exit_source_sequence": "",
+                    "exit_timestamp_group_size": group_size,
+                    "exit_ordering_quality": "IDENTICAL_TIMESTAMP_STOP_FIRST",
+                    "stop_gap": price != stop,
+                    "target_gap": False,
+                    "diagnostics": dict(diagnostics),
+                }
+            raise ExecutionOrderingError(quality)
+
+        if duplicated:
+            # Byte-for-byte identical transitions with the same sequence are
+            # semantically one quote; collapsing them preserves the exact path.
+            group = group.drop_duplicates(["source_sequence", "bid", "ask", "spread"], keep="first")
+            diagnostics["identical_duplicate_source_sequences_collapsed"] += group_size - len(group)
+        if len(set(group["source_sequence"].astype(str))) > 1:
+            diagnostics["same_millisecond_groups_with_multiple_source_sequences"] += 1
+        original_sequences = group["source_sequence"].astype(str).tolist()
+        ordered_sequences = sorted(original_sequences)
+        if original_sequences != ordered_sequences:
+            diagnostics["NON_MONOTONIC_SOURCE_SEQUENCE"] += 1
+        group = group.assign(_sequence=group["source_sequence"].astype(str)).sort_values("_sequence", kind="mergesort")
+
+        for _, tick in group.iterrows():
+            price = _exit_side_price(tick, direction)
+            excursion = (price - entry_price) / risk if direction == "LONG" else (entry_price - price) / risk
+            mfe, mae = max(mfe, excursion), min(mae, excursion)
+            stop_hit, target_hit = _barrier_flags(price, direction, stop, target)
+            if stop_hit and target_hit:
+                raise AssertionError("one scalar executable quote cannot reach both frozen barriers")
+            reason = ""
+            exit_price = price
+            exit_z = float("nan")
+            if stop_hit:
+                reason = "STOP"
+            elif target_hit:
+                reason = "TARGET"
+                exit_price = target
+            elif ts >= convergence_ms:
+                reason = "RESIDUAL_CONVERGENCE"
+                exit_z = convergence_z
+            elif ts >= expiry_ms:
+                reason = "NINETY_MINUTE_EXPIRY"
+            elif ts >= force_ms:
+                reason = "SAME_DAY_FORCE_CLOSE"
+            if reason:
+                return {
+                    "exit_tick": tick,
+                    "exit_price": float(exit_price),
+                    "exit_reason": reason,
+                    "exit_z": float(exit_z),
+                    "MFE_R": float(mfe),
+                    "MAE_R": float(mae),
+                    "identical_timestamp_ambiguity": False,
+                    "exit_source_sequence": str(tick["source_sequence"]),
+                    "exit_timestamp_group_size": group_size,
+                    "exit_ordering_quality": "SOURCE_SEQUENCE_ORDERED",
+                    "stop_gap": bool(reason == "STOP" and price != stop),
+                    "target_gap": bool(reason == "TARGET" and price != target),
+                    "diagnostics": dict(diagnostics),
+                }
+    return None
+
+
+def process_ordered_exit_ticks(
+    ticks: pd.DataFrame,
+    *,
+    direction: str,
+    entry_price: float,
+    risk: float,
+    stop: float,
+    target: float,
+    convergence_ms: int,
+    convergence_z: float,
+    expiry_ms: int,
+    force_ms: int,
+    utc_date: str,
+) -> dict[str, Any] | None:
+    """NumPy-indexed equivalent of the audited scalar tick state machine."""
+    required = {"timestamp_msc", "bid", "ask", "spread", "source_sequence"}
+    if not required.issubset(ticks.columns):
+        raise ValueError(f"ticks missing required columns: {sorted(required - set(ticks.columns))}")
+    if direction not in {"LONG", "SHORT"} or not risk > 0:
+        raise ValueError("direction and risk are invalid")
+    if ticks.empty:
+        return None
+
+    timestamps = ticks["timestamp_msc"].to_numpy(dtype=np.int64, copy=False)
+    bids = ticks["bid"].to_numpy(dtype=float, copy=False)
+    asks = ticks["ask"].to_numpy(dtype=float, copy=False)
+    spreads = ticks["spread"].to_numpy(dtype=float, copy=False)
+    sequences = ticks["source_sequence"].to_numpy(dtype=object, copy=False)
+    if np.any(timestamps[1:] < timestamps[:-1]):
+        index_order = np.argsort(timestamps, kind="stable")
+        timestamps, bids, asks, spreads, sequences = (array[index_order] for array in (timestamps, bids, asks, spreads, sequences))
+
+    prices = bids if direction == "LONG" else asks
+    mfe = 0.0
+    mae = 0.0
+    diagnostics: Counter[str] = Counter()
+
+    def tick_at(index: int) -> pd.Series:
+        return pd.Series({"timestamp_msc": int(timestamps[index]), "bid": float(bids[index]), "ask": float(asks[index]), "spread": float(spreads[index]), "source_sequence": sequences[index]})
+
+    i, count = 0, len(timestamps)
+    while i < count:
+        ts = int(timestamps[i])
+        if iso_ms(ts)[:10] != utc_date:
+            break
+        j = int(np.searchsorted(timestamps, ts, side="right"))
+        group_size = j - i
+        if group_size > 1:
+            diagnostics["same_millisecond_groups_inspected"] += 1
+        raw_sequences = sequences[i:j]
+        missing_sequence = any(value is None or (isinstance(value, float) and math.isnan(value)) or not str(value).strip() for value in raw_sequences)
+        sequence_strings = [str(value) for value in raw_sequences] if not missing_sequence else []
+        duplicate_conflict = False
+        if sequence_strings and len(set(sequence_strings)) != len(sequence_strings):
+            signatures: dict[str, tuple[float, float, float]] = {}
+            for offset, sequence in enumerate(sequence_strings):
+                signature = (float(bids[i + offset]), float(asks[i + offset]), float(spreads[i + offset]))
+                if sequence in signatures and signatures[sequence] != signature:
+                    duplicate_conflict = True
+                    break
+                signatures[sequence] = signature
+
+        if missing_sequence or duplicate_conflict:
+            quality = "MISSING_SOURCE_SEQUENCE" if missing_sequence else "DUPLICATE_SOURCE_SEQUENCE_CONFLICT"
+            diagnostics["unordered_groups"] += 1
+            diagnostics[quality] += 1
+            group_prices = prices[i:j]
+            if direction == "LONG":
+                stop_offsets = np.flatnonzero(group_prices <= stop)
+                target_offsets = np.flatnonzero(group_prices >= target)
+            else:
+                stop_offsets = np.flatnonzero(group_prices >= stop)
+                target_offsets = np.flatnonzero(group_prices <= target)
+            if len(stop_offsets) and len(target_offsets) and group_size > 1:
+                diagnostics["groups_containing_both_stop_and_target_across_quotes"] += 1
+                adverse_offset = int(stop_offsets[np.argmin(group_prices[stop_offsets])]) if direction == "LONG" else int(stop_offsets[np.argmax(group_prices[stop_offsets])])
+                selected_index = i + adverse_offset
+                price = float(prices[selected_index])
+                excursion = (price - entry_price) / risk if direction == "LONG" else (entry_price - price) / risk
+                mfe, mae = max(mfe, excursion), min(mae, excursion)
+                return {
+                    "exit_tick": tick_at(selected_index), "exit_price": price, "exit_reason": "STOP", "exit_z": float("nan"),
+                    "MFE_R": float(mfe), "MAE_R": float(mae), "identical_timestamp_ambiguity": True,
+                    "exit_source_sequence": "", "exit_timestamp_group_size": group_size,
+                    "exit_ordering_quality": "IDENTICAL_TIMESTAMP_STOP_FIRST", "stop_gap": price != stop,
+                    "target_gap": False, "diagnostics": dict(diagnostics),
+                }
+            raise ExecutionOrderingError(quality)
+
+        if len(set(sequence_strings)) > 1:
+            diagnostics["same_millisecond_groups_with_multiple_source_sequences"] += 1
+        ordered_offsets = sorted(range(group_size), key=lambda offset: sequence_strings[offset])
+        if ordered_offsets != list(range(group_size)):
+            diagnostics["NON_MONOTONIC_SOURCE_SEQUENCE"] += 1
+        seen: dict[str, tuple[float, float, float]] = {}
+        for offset in ordered_offsets:
+            index = i + offset
+            sequence = sequence_strings[offset]
+            signature = (float(bids[index]), float(asks[index]), float(spreads[index]))
+            if sequence in seen:
+                diagnostics["identical_duplicate_source_sequences_collapsed"] += 1
+                continue
+            seen[sequence] = signature
+            price = float(prices[index])
+            excursion = (price - entry_price) / risk if direction == "LONG" else (entry_price - price) / risk
+            mfe, mae = max(mfe, excursion), min(mae, excursion)
+            stop_hit, target_hit = _barrier_flags(price, direction, stop, target)
+            if stop_hit and target_hit:
+                raise AssertionError("one scalar executable quote cannot reach both frozen barriers")
+            reason = ""
+            exit_price = price
+            exit_z = float("nan")
+            if stop_hit:
+                reason = "STOP"
+            elif target_hit:
+                reason, exit_price = "TARGET", target
+            elif ts >= convergence_ms:
+                reason, exit_z = "RESIDUAL_CONVERGENCE", convergence_z
+            elif ts >= expiry_ms:
+                reason = "NINETY_MINUTE_EXPIRY"
+            elif ts >= force_ms:
+                reason = "SAME_DAY_FORCE_CLOSE"
+            if reason:
+                return {
+                    "exit_tick": tick_at(index), "exit_price": float(exit_price), "exit_reason": reason,
+                    "exit_z": float(exit_z), "MFE_R": float(mfe), "MAE_R": float(mae),
+                    "identical_timestamp_ambiguity": False, "exit_source_sequence": sequence,
+                    "exit_timestamp_group_size": group_size, "exit_ordering_quality": "SOURCE_SEQUENCE_ORDERED",
+                    "stop_gap": bool(reason == "STOP" and price != stop), "target_gap": bool(reason == "TARGET" and price != target),
+                    "diagnostics": dict(diagnostics),
+                }
+        i = j
+    return None
+
+
+def trade_result_signature(result: Mapping[str, Any]) -> tuple[Any, ...]:
+    """Fields that must remain invariant when post-exit ticks are modified."""
+    tick = result["exit_tick"]
+    return (
+        int(tick["timestamp_msc"]),
+        str(result["exit_reason"]),
+        float(result["exit_price"]),
+        float(result["MFE_R"]),
+        float(result["MAE_R"]),
+    )
+
+
+def combine_standalone_trades(trades: Sequence[Mapping[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Merge directions chronologically while permitting one global XAU position."""
+    combined: list[dict[str, Any]] = []
+    conflicts: list[dict[str, Any]] = []
+    global_exit = -1
+    for trade in sorted(trades, key=lambda row: (str(row["entry_time"]), str(row["specialist_id"]))):
+        entry_ms = int(datetime.fromisoformat(str(trade["entry_time"]).replace("Z", "+00:00")).timestamp() * 1000)
+        exit_ms = int(datetime.fromisoformat(str(trade["exit_time"]).replace("Z", "+00:00")).timestamp() * 1000)
+        if entry_ms < global_exit:
+            conflicts.append({"specialist_id": trade["specialist_id"], "entry_time": trade["entry_time"], "rejection_reason": "GLOBAL_XAU_POSITION_ALREADY_OPEN"})
+        else:
+            combined.append({**trade, "simulation_id": COMBINED_ID})
+            global_exit = exit_ms
+    return combined, conflicts
 
 
 def no_search_tokens(source: str) -> bool:
