@@ -1,0 +1,43 @@
+{
+  "schema_version": "a3_ml_shared_account_portfolio_v1",
+  "portfolio_id": "R1_R2_SHARED_ACCOUNT_V1",
+  "source_report": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713.json",
+  "source_trades": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_TRADES.csv",
+  "allowed_sources": ["r1_box_clean_strict_uptrend", "r2_pullback_short_h1_confirm"],
+  "scope": {
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "starting_equity_usd": 1000.0,
+    "fixed_lot_size": 0.01,
+    "stress_cost_per_trade_usd": 0.30,
+    "severe_cost_per_trade_usd": 1.00
+  },
+  "controls": {
+    "maximum_concurrent_trades": 2,
+    "maximum_gross_lots": 0.02,
+    "maximum_directional_lots": 0.02,
+    "daily_realized_loss_limit_pct": 0.02,
+    "emergency_closed_drawdown_pct": 0.15
+  },
+  "gates": {
+    "minimum_stress_profit_factor": 1.40,
+    "minimum_severe_cost_profit_factor": 1.20,
+    "minimum_trades_per_trading_day": 0.80,
+    "minimum_nonnegative_six_month_share": 0.70,
+    "maximum_conservative_drawdown_pct": 0.15,
+    "require_top10_winners_removed_net_positive": true,
+    "require_untouched_holdout": true
+  },
+  "outputs": {
+    "events_csv": "outputs/reports/A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_EVENTS.csv",
+    "daily_csv": "outputs/reports/A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_DAILY.csv",
+    "report_json": "outputs/reports/A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

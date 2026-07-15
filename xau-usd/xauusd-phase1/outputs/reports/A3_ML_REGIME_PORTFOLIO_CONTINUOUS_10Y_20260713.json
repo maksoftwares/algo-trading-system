@@ -1,0 +1,517 @@
+{
+  "schema_version": "a3_ml_regime_portfolio_backtest_v1",
+  "status": "RESEARCH_GATES_FAIL",
+  "created_at_utc": "2026-07-15T21:52:43.465708Z",
+  "scope": {
+    "symbol": "XAUUSD",
+    "from": "2016-07-01T00:00:00Z",
+    "to": "2026-06-30T23:59:59Z",
+    "lot_size": 0.01,
+    "currency": "USD",
+    "pnl_recognition": "closed_trade_exit_time",
+    "stress_cost_per_trade_usd": 0.3
+  },
+  "regime_actions": {
+    "R0_SHOCK": "NO_TRADE",
+    "R1_UPTREND": "ARM_R1_LONG",
+    "R2_DOWNTREND": "ARM_R2_SHORT",
+    "R3_COMPRESSION": "NO_TRADE_NO_QUALIFIED_SPECIALIST",
+    "R4_CHOP_UNDEFINED": "NO_TRADE_NO_QUALIFIED_SPECIALIST",
+    "TRANSITION": "NO_TRADE"
+  },
+  "source_audits": [
+    {
+      "source": "r1_box_clean_strict_uptrend",
+      "assigned_regime": "R1_UPTREND_LONG",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "trade_sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861",
+      "trades": 367,
+      "mt5_history_quality": "98%",
+      "mt5_total_trades": "367",
+      "mt5_profit_factor": "2.94",
+      "mt5_equity_drawdown_usd": 1733.37,
+      "mt5_equity_drawdown_raw": "1 733.37 (14.43%)"
+    },
+    {
+      "source": "r2_pullback_short_h1_confirm",
+      "assigned_regime": "R2_DOWNTREND_SHORT",
+      "trade_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701\\A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "trade_sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1",
+      "trades": 689,
+      "mt5_history_quality": "98%",
+      "mt5_total_trades": "689",
+      "mt5_profit_factor": "1.30",
+      "mt5_equity_drawdown_usd": 270.01,
+      "mt5_equity_drawdown_raw": "270.01 (23.65%)"
+    }
+  ],
+  "windows": {
+    "last_3_months": {
+      "trades": 11,
+      "wins": 6,
+      "losses": 5,
+      "win_rate_pct": 54.5455,
+      "net_usd": 139.13,
+      "stress_net_usd": 135.83,
+      "profit_factor": 2.4928,
+      "stress_profit_factor": 2.4343,
+      "max_closed_drawdown_usd": 77.51,
+      "positive_months": 3,
+      "active_months": 3,
+      "pnl_by_source_usd": {
+        "r2_pullback_short_h1_confirm": 139.13
+      },
+      "start_utc": "2026-04-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:59:59Z"
+    },
+    "last_6_months": {
+      "trades": 20,
+      "wins": 15,
+      "losses": 5,
+      "win_rate_pct": 75.0,
+      "net_usd": 2812.28,
+      "stress_net_usd": 2806.28,
+      "profit_factor": 31.1747,
+      "stress_profit_factor": 30.6334,
+      "max_closed_drawdown_usd": 77.51,
+      "positive_months": 4,
+      "active_months": 4,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 2673.15,
+        "r2_pullback_short_h1_confirm": 139.13
+      },
+      "start_utc": "2026-01-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:59:59Z"
+    },
+    "last_5_years": {
+      "trades": 497,
+      "wins": 233,
+      "losses": 264,
+      "win_rate_pct": 46.8813,
+      "net_usd": 10975.6,
+      "stress_net_usd": 10826.5,
+      "profit_factor": 3.0137,
+      "stress_profit_factor": 2.9579,
+      "max_closed_drawdown_usd": 868.47,
+      "positive_months": 28,
+      "active_months": 52,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 10437.77,
+        "r2_pullback_short_h1_confirm": 537.83
+      },
+      "start_utc": "2021-07-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:59:59Z"
+    },
+    "last_10_years": {
+      "trades": 1056,
+      "wins": 450,
+      "losses": 606,
+      "win_rate_pct": 42.6136,
+      "net_usd": 12840.29,
+      "stress_net_usd": 12523.49,
+      "profit_factor": 2.4325,
+      "stress_profit_factor": 2.3694,
+      "max_closed_drawdown_usd": 868.47,
+      "positive_months": 48,
+      "active_months": 101,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 12014.82,
+        "r2_pullback_short_h1_confirm": 825.47
+      },
+      "start_utc": "2016-07-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:59:59Z",
+      "max_component_mt5_equity_drawdown_usd": 1733.37,
+      "conservative_drawdown_usd": 1733.37
+    }
+  },
+  "six_month_blocks": [
+    {
+      "block": "2016-H2",
+      "trades": 83,
+      "wins": 28,
+      "losses": 55,
+      "win_rate_pct": 33.7349,
+      "net_usd": -39.91,
+      "stress_net_usd": -64.81,
+      "profit_factor": 0.8888,
+      "stress_profit_factor": 0.8273,
+      "max_closed_drawdown_usd": 107.25,
+      "positive_months": 1,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -32.77,
+        "r2_pullback_short_h1_confirm": -7.14
+      }
+    },
+    {
+      "block": "2017-H1",
+      "trades": 31,
+      "wins": 5,
+      "losses": 26,
+      "win_rate_pct": 16.129,
+      "net_usd": -334.83,
+      "stress_net_usd": -344.13,
+      "profit_factor": 0.3043,
+      "stress_profit_factor": 0.2964,
+      "max_closed_drawdown_usd": 344.13,
+      "positive_months": 1,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -331.17,
+        "r2_pullback_short_h1_confirm": -3.66
+      }
+    },
+    {
+      "block": "2017-H2",
+      "trades": 69,
+      "wins": 31,
+      "losses": 38,
+      "win_rate_pct": 44.9275,
+      "net_usd": 557.66,
+      "stress_net_usd": 536.96,
+      "profit_factor": 3.2201,
+      "stress_profit_factor": 3.0449,
+      "max_closed_drawdown_usd": 119.38,
+      "positive_months": 3,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 581.35,
+        "r2_pullback_short_h1_confirm": -23.69
+      }
+    },
+    {
+      "block": "2018-H1",
+      "trades": 69,
+      "wins": 21,
+      "losses": 48,
+      "win_rate_pct": 30.4348,
+      "net_usd": -187.68,
+      "stress_net_usd": -208.38,
+      "profit_factor": 0.5357,
+      "stress_profit_factor": 0.5022,
+      "max_closed_drawdown_usd": 330.26,
+      "positive_months": 2,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -213.24,
+        "r2_pullback_short_h1_confirm": 25.56
+      }
+    },
+    {
+      "block": "2018-H2",
+      "trades": 72,
+      "wins": 35,
+      "losses": 37,
+      "win_rate_pct": 48.6111,
+      "net_usd": 300.24,
+      "stress_net_usd": 278.64,
+      "profit_factor": 2.5463,
+      "stress_profit_factor": 2.3574,
+      "max_closed_drawdown_usd": 100.5,
+      "positive_months": 3,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 181.07,
+        "r2_pullback_short_h1_confirm": 119.17
+      }
+    },
+    {
+      "block": "2019-H1",
+      "trades": 63,
+      "wins": 19,
+      "losses": 44,
+      "win_rate_pct": 30.1587,
+      "net_usd": 53.95,
+      "stress_net_usd": 35.05,
+      "profit_factor": 1.1423,
+      "stress_profit_factor": 1.0894,
+      "max_closed_drawdown_usd": 289.1,
+      "positive_months": 2,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 98.49,
+        "r2_pullback_short_h1_confirm": -44.54
+      }
+    },
+    {
+      "block": "2019-H2",
+      "trades": 20,
+      "wins": 5,
+      "losses": 15,
+      "win_rate_pct": 25.0,
+      "net_usd": -16.04,
+      "stress_net_usd": -22.04,
+      "profit_factor": 0.7535,
+      "stress_profit_factor": 0.6832,
+      "max_closed_drawdown_usd": 47.21,
+      "positive_months": 0,
+      "active_months": 2,
+      "pnl_by_source_usd": {
+        "r2_pullback_short_h1_confirm": -16.04
+      }
+    },
+    {
+      "block": "2020-H1",
+      "trades": 23,
+      "wins": 13,
+      "losses": 10,
+      "win_rate_pct": 56.5217,
+      "net_usd": 268.34,
+      "stress_net_usd": 261.44,
+      "profit_factor": 1.8488,
+      "stress_profit_factor": 1.8192,
+      "max_closed_drawdown_usd": 262.19,
+      "positive_months": 2,
+      "active_months": 4,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 268.34
+      }
+    },
+    {
+      "block": "2020-H2",
+      "trades": 42,
+      "wins": 30,
+      "losses": 12,
+      "win_rate_pct": 71.4286,
+      "net_usd": 1440.65,
+      "stress_net_usd": 1428.05,
+      "profit_factor": 12.16,
+      "stress_profit_factor": 11.7623,
+      "max_closed_drawdown_usd": 54.81,
+      "positive_months": 3,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 1432.07,
+        "r2_pullback_short_h1_confirm": 8.58
+      }
+    },
+    {
+      "block": "2021-H1",
+      "trades": 87,
+      "wins": 30,
+      "losses": 57,
+      "win_rate_pct": 34.4828,
+      "net_usd": -177.69,
+      "stress_net_usd": -203.79,
+      "profit_factor": 0.8098,
+      "stress_profit_factor": 0.7858,
+      "max_closed_drawdown_usd": 457.99,
+      "positive_months": 3,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -407.09,
+        "r2_pullback_short_h1_confirm": 229.4
+      }
+    },
+    {
+      "block": "2021-H2",
+      "trades": 52,
+      "wins": 12,
+      "losses": 40,
+      "win_rate_pct": 23.0769,
+      "net_usd": -221.57,
+      "stress_net_usd": -237.17,
+      "profit_factor": 0.4778,
+      "stress_profit_factor": 0.4564,
+      "max_closed_drawdown_usd": 239.17,
+      "positive_months": 0,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -69.29,
+        "r2_pullback_short_h1_confirm": -152.28
+      }
+    },
+    {
+      "block": "2022-H1",
+      "trades": 50,
+      "wins": 21,
+      "losses": 29,
+      "win_rate_pct": 42.0,
+      "net_usd": 135.07,
+      "stress_net_usd": 120.07,
+      "profit_factor": 1.3582,
+      "stress_profit_factor": 1.3112,
+      "max_closed_drawdown_usd": 154.77,
+      "positive_months": 2,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": -53.43,
+        "r2_pullback_short_h1_confirm": 188.5
+      }
+    },
+    {
+      "block": "2022-H2",
+      "trades": 97,
+      "wins": 44,
+      "losses": 53,
+      "win_rate_pct": 45.3608,
+      "net_usd": 421.89,
+      "stress_net_usd": 392.79,
+      "profit_factor": 2.014,
+      "stress_profit_factor": 1.9093,
+      "max_closed_drawdown_usd": 66.65,
+      "positive_months": 5,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 116.19,
+        "r2_pullback_short_h1_confirm": 305.7
+      }
+    },
+    {
+      "block": "2023-H1",
+      "trades": 65,
+      "wins": 28,
+      "losses": 37,
+      "win_rate_pct": 43.0769,
+      "net_usd": 515.33,
+      "stress_net_usd": 495.83,
+      "profit_factor": 1.8235,
+      "stress_profit_factor": 1.7785,
+      "max_closed_drawdown_usd": 467.17,
+      "positive_months": 2,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 528.45,
+        "r2_pullback_short_h1_confirm": -13.12
+      }
+    },
+    {
+      "block": "2023-H2",
+      "trades": 72,
+      "wins": 31,
+      "losses": 41,
+      "win_rate_pct": 43.0556,
+      "net_usd": 412.78,
+      "stress_net_usd": 391.18,
+      "profit_factor": 2.3632,
+      "stress_profit_factor": 2.2414,
+      "max_closed_drawdown_usd": 108.94,
+      "positive_months": 4,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 291.0,
+        "r2_pullback_short_h1_confirm": 121.78
+      }
+    },
+    {
+      "block": "2024-H1",
+      "trades": 14,
+      "wins": 10,
+      "losses": 4,
+      "win_rate_pct": 71.4286,
+      "net_usd": 711.33,
+      "stress_net_usd": 707.13,
+      "profit_factor": 5.5187,
+      "stress_profit_factor": 5.458,
+      "max_closed_drawdown_usd": 94.61,
+      "positive_months": 2,
+      "active_months": 4,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 711.33
+      }
+    },
+    {
+      "block": "2024-H2",
+      "trades": 47,
+      "wins": 19,
+      "losses": 28,
+      "win_rate_pct": 40.4255,
+      "net_usd": 844.48,
+      "stress_net_usd": 830.38,
+      "profit_factor": 1.8894,
+      "stress_profit_factor": 1.8669,
+      "max_closed_drawdown_usd": 431.38,
+      "positive_months": 3,
+      "active_months": 6,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 896.36,
+        "r2_pullback_short_h1_confirm": -51.88
+      }
+    },
+    {
+      "block": "2025-H1",
+      "trades": 31,
+      "wins": 19,
+      "losses": 12,
+      "win_rate_pct": 61.2903,
+      "net_usd": 1411.48,
+      "stress_net_usd": 1402.18,
+      "profit_factor": 2.896,
+      "stress_profit_factor": 2.8745,
+      "max_closed_drawdown_usd": 516.91,
+      "positive_months": 3,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 1411.48
+      }
+    },
+    {
+      "block": "2025-H2",
+      "trades": 49,
+      "wins": 34,
+      "losses": 15,
+      "win_rate_pct": 69.3878,
+      "net_usd": 3932.53,
+      "stress_net_usd": 3917.83,
+      "profit_factor": 3.8923,
+      "stress_profit_factor": 3.872,
+      "max_closed_drawdown_usd": 868.47,
+      "positive_months": 3,
+      "active_months": 5,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 3932.53
+      }
+    },
+    {
+      "block": "2026-H1",
+      "trades": 20,
+      "wins": 15,
+      "losses": 5,
+      "win_rate_pct": 75.0,
+      "net_usd": 2812.28,
+      "stress_net_usd": 2806.28,
+      "profit_factor": 31.1747,
+      "stress_profit_factor": 30.6334,
+      "max_closed_drawdown_usd": 77.51,
+      "positive_months": 4,
+      "active_months": 4,
+      "pnl_by_source_usd": {
+        "r1_box_clean_strict_uptrend": 2673.15,
+        "r2_pullback_short_h1_confirm": 139.13
+      }
+    }
+  ],
+  "six_month_nonnegative_blocks": 14,
+  "six_month_total_blocks": 20,
+  "six_month_nonnegative_share": 0.7,
+  "gates": {
+    "ten_year_stress_pf_ge_1p40": true,
+    "last_3_months_stress_net_nonnegative": true,
+    "last_6_months_stress_net_nonnegative": true,
+    "conservative_drawdown_lte_1000": false,
+    "six_month_nonnegative_share_ge_75pct": false,
+    "only_frozen_r1_r2_sources": true
+  },
+  "authorization": {
+    "research_only": true,
+    "historical_development_data": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  },
+  "limitations": [
+    "All history through 2026-06-30 is development data and is not an untouched holdout.",
+    "Component runs use fixed 0.01 lots in isolated MT5 tests; summed P/L does not model shared-account margin contention.",
+    "MT5 spread is included, but the extra USD 0.30 stress is a sensitivity test rather than a broker guarantee.",
+    "No-trade is the evidence-backed action in regimes without a qualified specialist; the system does not force continuous market exposure."
+  ],
+  "artifacts": {
+    "preregistration": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\docs\\A3_ML_REGIME_PORTFOLIO_BACKTEST_PREREG_2026_07_13.md",
+    "preregistration_sha256": "e3db4b8244d5c5549dc3f7985362ba920fb646220a591c08d453025b902867a7",
+    "mt5_report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_MT5.json",
+    "portfolio_trades_csv": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_TRADES.csv",
+    "portfolio_trades_sha256": "d942ee867aec2fe7cf5b49b02a059b598b15ce98130b9c46c230b72d4e8e552c",
+    "report_json": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713.json",
+    "report_md": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713.md"
+  }
+}
