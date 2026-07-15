@@ -1,0 +1,149 @@
+{
+  "schema_version": "a3_ml_dukascopy_compression_breakout_v1",
+  "classification": "DUKASCOPY_COMPRESSION_BREAKOUT_INVALID",
+  "created_at_utc": "2026-07-15T16:21:49.931112Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-compression-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_compression_breakout.json",
+  "contract_sha256": "acdf9c20971caca3324096bc4c7cedcd385356ab6e2dac3ae8354c5ca7280ede",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "source_months": 72,
+  "source_composite_sha256": "5a4f7ec77dcdc915e945e2dd1941986ba6be7511a7cc745e1d90250f5251f32f",
+  "bar_counts": {
+    "H1": 35459,
+    "H4": 9252,
+    "D1": 1548
+  },
+  "candidate_count": 31,
+  "eligible_candidate_count": 31,
+  "resolved_count": 31,
+  "resolved_share": 1.0,
+  "ineligible_reasons": {},
+  "unresolved_reasons": {},
+  "all": {
+    "trades": 31,
+    "wins": 11,
+    "win_rate_pct": 35.483870967741936,
+    "stress_net_usd": -22.436668182292035,
+    "stress_profit_factor": 0.9481521750512485,
+    "average_stress_r": -0.05118009413073872,
+    "max_closed_drawdown_r": 8.383548756595502,
+    "active_exit_months": 19,
+    "positive_exit_months": 5,
+    "positive_exit_month_share": 0.2631578947368421
+  },
+  "by_split": {
+    "train": {
+      "trades": 14,
+      "wins": 5,
+      "win_rate_pct": 35.714285714285715,
+      "stress_net_usd": -18.097631363425855,
+      "stress_profit_factor": 0.9129001072391199,
+      "average_stress_r": -0.0633416042841713,
+      "max_closed_drawdown_r": 4.936824395911506,
+      "active_exit_months": 7,
+      "positive_exit_months": 2,
+      "positive_exit_month_share": 0.2857142857142857
+    },
+    "validation": {
+      "trades": 14,
+      "wins": 5,
+      "win_rate_pct": 35.714285714285715,
+      "stress_net_usd": 2.001931002893433,
+      "stress_profit_factor": 1.0111222444390024,
+      "average_stress_r": -0.034874848261034416,
+      "max_closed_drawdown_r": 4.159729309561532,
+      "active_exit_months": 9,
+      "positive_exit_months": 2,
+      "positive_exit_month_share": 0.2222222222222222
+    },
+    "test": {
+      "trades": 3,
+      "wins": 1,
+      "win_rate_pct": 33.333333333333336,
+      "stress_net_usd": -6.340967821759616,
+      "stress_profit_factor": 0.8589867047422793,
+      "average_stress_r": -0.07051752747334013,
+      "max_closed_drawdown_r": 1.1320778199567876,
+      "active_exit_months": 3,
+      "positive_exit_months": 1,
+      "positive_exit_month_share": 0.3333333333333333
+    }
+  },
+  "by_direction": {
+    "LONG": {
+      "trades": 13,
+      "wins": 5,
+      "win_rate_pct": 38.46153846153846,
+      "stress_net_usd": 38.56591181712893,
+      "stress_profit_factor": 1.2511542359565029,
+      "average_stress_r": -0.06556813182112706,
+      "max_closed_drawdown_r": 6.41381010327903,
+      "active_exit_months": 10,
+      "positive_exit_months": 4,
+      "positive_exit_month_share": 0.4
+    },
+    "SHORT": {
+      "trades": 18,
+      "wins": 6,
+      "win_rate_pct": 33.333333333333336,
+      "stress_net_usd": -61.00257999942096,
+      "stress_profit_factor": 0.7814984945675396,
+      "average_stress_r": -0.040788733576569376,
+      "max_closed_drawdown_r": 5.4050663595658515,
+      "active_exit_months": 10,
+      "positive_exit_months": 2,
+      "positive_exit_month_share": 0.2
+    }
+  },
+  "test_calendar_month_bootstrap": {
+    "samples": 2000,
+    "seed": 20260715,
+    "active_exit_months": 3,
+    "average_stress_r_p025": null,
+    "average_stress_r_p50": null,
+    "average_stress_r_p975": null
+  },
+  "quality_gates": {
+    "verified_months_eq_expected": true,
+    "candidates_ge_minimum": false,
+    "resolved_share_ge_minimum": true,
+    "each_split_rows_ge_minimum": false,
+    "each_direction_rows_ge_minimum": false,
+    "candidate_ids_unique": true,
+    "candidate_keys_unique": true
+  },
+  "strategy_gates": {
+    "train_pf_ge_minimum": false,
+    "validation_pf_ge_minimum": false,
+    "test_pf_ge_minimum": false,
+    "train_average_r_ge_minimum": false,
+    "validation_average_r_ge_minimum": false,
+    "test_average_r_ge_minimum": false,
+    "test_drawdown_r_lte_maximum": true,
+    "validation_positive_month_share_ge_minimum": false,
+    "test_positive_month_share_ge_minimum": false,
+    "test_each_direction_rows_ge_minimum": false,
+    "test_average_r_bootstrap_p025_above_zero": false
+  },
+  "artifacts": {
+    "candidates_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-compression-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_CANDIDATES.csv",
+      "sha256": "618843e5396881b0c2ed7d7994a7ab4cfad06c2c23128906521d8356c5a6048b"
+    },
+    "labels_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-compression-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_LABELS.csv",
+      "sha256": "824ecc3781c0ce857fc7956d9a5fb483b3e125609ed4a4382081995168f62f0c"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "strategy_promotion_authorized": false
+  },
+  "limitations": [
+    "Fixed-lot candidate labels are not a shared-account portfolio simulation.",
+    "Dukascopy-to-broker feed differences still require shadow and demo calibration.",
+    "A research survivor would require cost, overlap, Monte Carlo, portfolio, and forward gates."
+  ]
+}

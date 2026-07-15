@@ -1,0 +1,78 @@
+{
+  "schema_version": "a3_ml_dukascopy_compression_breakout_v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "external_output_subdirectory": "research/xau-label-factory-v1",
+  "symbol": "XAUUSD",
+  "period": {
+    "start_month": "2018-07",
+    "end_month": "2024-06"
+  },
+  "splits": {
+    "train_end_exclusive_utc": "2021-07-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2023-07-01T00:00:00Z",
+    "test_end_exclusive_utc": "2024-07-01T00:00:00Z"
+  },
+  "strategy": {
+    "family_id": "dukascopy_d1_compression_h4_breakout_v1",
+    "minimum_active_h1_bars_per_d1": 12,
+    "minimum_active_h1_bars_per_h4": 2,
+    "d1_atr_period": 14,
+    "d1_atr_percentile_lookback": 252,
+    "d1_atr_percentile_maximum": 80.0,
+    "d1_box_days": 2,
+    "d1_range_median_lookback": 20,
+    "d1_box_average_to_median_maximum": 1.5,
+    "d1_trend_ema_period": 20,
+    "d1_trend_slope_lag_bars": 5,
+    "h4_atr_period": 14,
+    "h4_minimum_body_fraction": 0.35,
+    "maximum_stop_h4_atr": 3.0,
+    "reward_r": 2.0
+  },
+  "execution": {
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_entry_delay_minutes": 5,
+    "maximum_hold_hours": 240,
+    "maximum_timeout_exit_grace_hours": 72,
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35
+  },
+  "bootstrap": {
+    "calendar_month_samples": 2000,
+    "seed": 20260715
+  },
+  "quality_gates": {
+    "expected_months": 72,
+    "minimum_candidates": 250,
+    "minimum_resolved_share": 0.99,
+    "minimum_resolved_rows_per_split": 40,
+    "minimum_resolved_rows_per_direction": 60
+  },
+  "strategy_gates": {
+    "minimum_train_stress_profit_factor": 1.2,
+    "minimum_validation_stress_profit_factor": 1.2,
+    "minimum_test_stress_profit_factor": 1.1,
+    "minimum_train_average_stress_r": 0.05,
+    "minimum_validation_average_stress_r": 0.05,
+    "minimum_test_average_stress_r": 0.0,
+    "maximum_test_closed_drawdown_r": 15.0,
+    "minimum_validation_positive_exit_month_share": 0.6,
+    "minimum_test_positive_exit_month_share": 0.6,
+    "minimum_test_rows_each_direction": 15,
+    "require_test_average_r_bootstrap_p025_above_zero": true
+  },
+  "outputs": {
+    "candidates_csv": "outputs/reports/A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_CANDIDATES.csv",
+    "labels_csv": "outputs/reports/A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_LABELS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
