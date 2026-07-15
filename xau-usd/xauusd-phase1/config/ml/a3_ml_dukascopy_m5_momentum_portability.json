@@ -1,0 +1,120 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_momentum_portability_v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "external_output_subdirectory": "research/xau-m5-momentum-portability-v1",
+  "symbol": "XAUUSD",
+  "period": {
+    "start_month": "2018-07",
+    "end_month": "2024-06"
+  },
+  "windows": {
+    "prehistory_end_exclusive_utc": "2022-07-01T00:00:00Z",
+    "replication_end_exclusive_utc": "2024-07-01T00:00:00Z"
+  },
+  "source_lock": {
+    "ea_path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "ea_sha256": "c590adabc92fe4b63dac22812e4ac9a12882b23b6ed8242848470f90fd01e265",
+    "portfolio_spec_path": "docs/A1_XAU_M5_MOMENTUM_CLEAN_LONG_SHORT_PORTFOLIO_FORWARD_DRAFT_2026_07_02.md",
+    "portfolio_spec_sha256": "e5d7a0fe3283820ac73800bd8562eab9f098d70e5747346c2e8e7cca07d8576a"
+  },
+  "server_time": {
+    "utc_offset_hours": 4
+  },
+  "signal": {
+    "break_lookback_m5_bars": 12,
+    "atr_period": 14,
+    "break_atr_multiple": 0.2,
+    "minimum_range_atr": 0.6,
+    "minimum_body_fraction": 0.45,
+    "long_close_location": 0.72,
+    "short_close_location": 0.28,
+    "h1_ema_fast_period": 20,
+    "h1_ema_slow_period": 50,
+    "h1_slope_bars": 3,
+    "h4_ema_fast_period": 20,
+    "h4_ema_slow_period": 50,
+    "h4_slope_bars": 3,
+    "stop_atr_multiple": 2.5,
+    "point_size": 0.01,
+    "stop_floor_points": 350,
+    "stop_ceiling_points": 1800,
+    "maximum_spread_points": 75,
+    "maximum_estimated_cost_r": 0.05
+  },
+  "lanes": [
+    {
+      "family_id": "dukascopy_clean_long_v5_move12",
+      "source_variant": "v5_v4_move12",
+      "direction": "LONG",
+      "reward_r": 0.7,
+      "minimum_three_bar_move_atr": 1.2,
+      "blocked_server_hours": [2, 9, 10, 11, 12, 13, 17, 19, 21, 23],
+      "maximum_trades_per_server_day": 12,
+      "cooldown_minutes": 5,
+      "one_position_at_a_time": true
+    },
+    {
+      "family_id": "dukascopy_clean_short_core",
+      "source_variant": "freq_h1_h4_short_rr0p7_v1_core_1_5_15_19",
+      "direction": "SHORT",
+      "reward_r": 0.7,
+      "minimum_three_bar_move_atr": 0.7,
+      "blocked_server_hours": [0, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 20, 21, 22, 23],
+      "maximum_trades_per_server_day": 12,
+      "cooldown_minutes": 5,
+      "one_position_at_a_time": true
+    }
+  ],
+  "execution": {
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_entry_delay_minutes": 5,
+    "maximum_hold_hours": 720,
+    "maximum_timeout_exit_grace_hours": 72,
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35
+  },
+  "bootstrap": {
+    "calendar_month_samples": 2000,
+    "seed": 20260715
+  },
+  "quality_gates": {
+    "expected_months": 72,
+    "minimum_raw_candidates": 1000,
+    "minimum_resolved_share": 0.995,
+    "maximum_selected_timeout_share": 0.005,
+    "minimum_m5_bars_per_source_day": 100
+  },
+  "strategy_gates": {
+    "minimum_prehistory_trades": 600,
+    "minimum_replication_trades": 250,
+    "minimum_trades_per_source_day": 0.5,
+    "minimum_trades_per_active_trade_day": 2.0,
+    "minimum_active_trade_day_coverage": 0.35,
+    "minimum_prehistory_win_rate_pct": 55.0,
+    "minimum_replication_win_rate_pct": 55.0,
+    "minimum_prehistory_stress_profit_factor": 1.15,
+    "minimum_replication_stress_profit_factor": 1.2,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_prehistory_closed_drawdown_usd": 150.0,
+    "maximum_replication_closed_drawdown_usd": 100.0,
+    "maximum_concurrent_trades": 2,
+    "require_each_lane_net_nonnegative": true,
+    "require_top25_removed_net_positive": true,
+    "require_each_window_bootstrap_average_r_p025_above_zero": true
+  },
+  "outputs": {
+    "raw_candidates_csv": "outputs/reports/A3_ML_DUKASCOPY_M5_MOMENTUM_RAW_CANDIDATES.csv",
+    "raw_labels_csv": "outputs/reports/A3_ML_DUKASCOPY_M5_MOMENTUM_RAW_LABELS.csv",
+    "selected_labels_csv": "outputs/reports/A3_ML_DUKASCOPY_M5_MOMENTUM_SELECTED_LABELS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_M5_MOMENTUM_PORTABILITY_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_M5_MOMENTUM_PORTABILITY_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
