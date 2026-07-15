@@ -1,0 +1,69 @@
+{
+  "schema_version": "a3_ml_dukascopy_label_ranker_v1",
+  "input_labels_csv": "outputs/reports/A3_ML_DUKASCOPY_LABEL_FACTORY_LABELS.csv",
+  "input_factory_report_json": "outputs/reports/A3_ML_DUKASCOPY_LABEL_FACTORY_REPORT.json",
+  "required_factory_classification": "DUKASCOPY_LABEL_DATASET_READY_FAMILY_NO_SURVIVOR",
+  "target": "label_profitable_after_stress",
+  "model": {
+    "family": "L2_LOGISTIC_ADAM_V1",
+    "iterations": 3000,
+    "learning_rate": 0.025,
+    "l2": 0.05
+  },
+  "features": [
+    "direction_long",
+    "trend_strength_atr",
+    "ema_gap_atr",
+    "close_fast_distance_atr",
+    "body_fraction",
+    "directional_close_location",
+    "touch_distance_atr",
+    "stop_distance_atr",
+    "log1p_signal_tick_count",
+    "atr_fraction_of_price",
+    "entry_spread_r",
+    "decision_hour_sin",
+    "decision_hour_cos",
+    "decision_weekday_sin",
+    "decision_weekday_cos"
+  ],
+  "selection": {
+    "validation_top_fraction": 0.25,
+    "test_uses_frozen_validation_probability_cutoff": true
+  },
+  "bootstrap": {
+    "calendar_month_samples": 2000,
+    "seed": 20260715
+  },
+  "acceptance_gates": {
+    "minimum_validation_auc": 0.55,
+    "minimum_test_auc": 0.53,
+    "minimum_validation_selected_rows": 250,
+    "minimum_test_selected_rows": 100,
+    "minimum_test_selected_rows_each_direction": 40,
+    "minimum_validation_selected_stress_profit_factor": 1.15,
+    "minimum_test_selected_stress_profit_factor": 1.1,
+    "minimum_validation_selected_average_stress_r": 0.05,
+    "minimum_test_selected_average_stress_r": 0.0,
+    "maximum_test_selected_closed_drawdown_r": 20.0,
+    "minimum_test_selection_coverage": 0.1,
+    "maximum_test_selection_coverage": 0.4,
+    "minimum_validation_positive_month_share": 0.6,
+    "minimum_test_positive_month_share": 0.6,
+    "require_test_average_r_bootstrap_p025_above_zero": true,
+    "require_validation_brier_better_than_train_prior": true,
+    "require_test_brier_better_than_train_prior": true
+  },
+  "outputs": {
+    "model_json": "outputs/reports/A3_ML_DUKASCOPY_LABEL_RANKER_MODEL.json",
+    "predictions_csv": "outputs/reports/A3_ML_DUKASCOPY_LABEL_RANKER_PREDICTIONS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_LABEL_RANKER_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_LABEL_RANKER_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
