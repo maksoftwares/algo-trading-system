@@ -104,7 +104,7 @@ def run_expansion_ranker_discovery(root: Path, contract_path: Path | None = None
                 "policy_id": f"ML_TOP_{int(100 * fraction)}",
                 "policy_kind": "MODEL_TOP_FRACTION",
                 "top_fraction": fraction,
-                "fit_score_cutoff": cutoff,
+                "train_score_cutoff": cutoff,
                 "predictive_metrics": predictive,
                 "economic_metrics": economic,
                 "gates": gates,
