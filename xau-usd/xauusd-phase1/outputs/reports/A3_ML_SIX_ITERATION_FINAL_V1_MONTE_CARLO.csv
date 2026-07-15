@@ -1,0 +1,3 @@
+starting_capital_usd,simulations,trading_days_per_path,block_trading_days,random_seed,risk_of_ruin_probability,drawdown_threshold_pct,drawdown_threshold_breach_probability,median_max_drawdown_pct,p95_max_drawdown_pct,p99_max_drawdown_pct,median_ending_equity_usd,p05_ending_equity_usd,p95_ending_equity_usd
+1000.0,10000,2608,20,20360716,0.0222,0.15,0.8765,0.30171439208919565,0.8086835604393192,1.1883940526149488,12046.469999999998,6012.383499999995,19521.646000000015
+13355.87,10000,2608,20,21596303,0.0,0.15,0.003,0.056070740259208766,0.09817589070171462,0.1255942175848908,24485.654999999995,18499.521999999997,32041.44500000001

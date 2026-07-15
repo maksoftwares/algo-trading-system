@@ -1,0 +1,235 @@
+{
+  "schema_version": "a3_ml_six_iteration_final_qualification_v1",
+  "classification": "SIX_ITERATION_RESEARCH_COMPLETE_NO_DEPLOYABLE_SYSTEM",
+  "created_at_utc": "2026-07-15T22:03:22.377060Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_six_iteration_final_qualification_v1.json",
+  "contract_sha256": "1d2b4fbd04c09116b240a232063c6f69363c70613859608b416ec6eb8d7ba2ac",
+  "input_audit": {
+    "foundation": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MACRO_FUTURES_FOUNDATION_V1_REPORT.json",
+      "sha256": "66be2b579430dc608fd97b314d64513e0d31e329c6406d10b07f8bfcfa6b3700"
+    },
+    "macro_specialists": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_MACRO_REPRICING_SPECIALISTS_V1_REPORT.json",
+      "sha256": "5cffd84b6820890a515c472bcf63f0511e9411259aa95a43e2fe82141c395dcf"
+    },
+    "cftc_specialists": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_CFTC_POSITIONING_SPECIALISTS_V1_REPORT.json",
+      "sha256": "93dfd9b8cde9c450d4980d957941ee511d30f8154353eff785297252533bd409"
+    },
+    "shared_portfolio": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_REPORT.json",
+      "sha256": "dc3a98a8d7cd8e735413afb53cea7a99544ed91b76fe9c6135a6348115fea2c4"
+    },
+    "exact_portfolio": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713.json",
+      "sha256": "40ede38c87d9ccfb655af3217ca5bdbecaf8940b4d247d8590586e8863f72d26"
+    },
+    "ml_ranker": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_EXTERNAL_CANDIDATE_RANKER_V1_REPORT.json",
+      "sha256": "2e6d51c756b04e9d9a75ec5f4e6873b2839da622b90448859ae998d1f78d6d93"
+    },
+    "portfolio_trades": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_TRADES.csv",
+      "sha256": "d942ee867aec2fe7cf5b49b02a059b598b15ce98130b9c46c230b72d4e8e552c"
+    }
+  },
+  "iteration_results": {
+    "iteration_1_foundation": {
+      "macro_availability_not_after_market": true,
+      "cot_availability_not_after_market": true,
+      "unique_daily_availability": true,
+      "base_feature_cache_hash_verified": true
+    },
+    "iteration_2_macro_specialists": "EXTERNAL_SPECIALISTS_TRAIN_REJECTED",
+    "iteration_3_cftc_specialists": "EXTERNAL_SPECIALISTS_TRAIN_REJECTED",
+    "iteration_4_shared_portfolio": "SHARED_ACCOUNT_RESEARCH_FAIL",
+    "iteration_5_ml_ranker": "EXTERNAL_CANDIDATE_RANKER_NO_DEVELOPMENT_SURVIVOR",
+    "iteration_6_final_qualification": "FAIL"
+  },
+  "external_specialist_survivors": [],
+  "ml_selected_policy": null,
+  "historical_foundation": {
+    "profitable": true,
+    "trades": 1056,
+    "stress_net_usd": 12523.49,
+    "stress_profit_factor": 2.369351904093353,
+    "frequency_per_trading_day": 0.41909638554216866,
+    "nonnegative_six_month_share": 0.7,
+    "top10_winners_removed_stress_net_usd": 9597.18,
+    "pnl_windows": {
+      "last_3_months": {
+        "trades": 11,
+        "wins": 6,
+        "losses": 5,
+        "win_rate_pct": 54.5455,
+        "net_usd": 139.13,
+        "stress_net_usd": 135.83,
+        "profit_factor": 2.4928,
+        "stress_profit_factor": 2.4343,
+        "max_closed_drawdown_usd": 77.51,
+        "positive_months": 3,
+        "active_months": 3,
+        "pnl_by_source_usd": {
+          "r2_pullback_short_h1_confirm": 139.13
+        },
+        "start_utc": "2026-04-01T00:00:00Z",
+        "end_utc": "2026-06-30T23:59:59Z"
+      },
+      "last_6_months": {
+        "trades": 20,
+        "wins": 15,
+        "losses": 5,
+        "win_rate_pct": 75.0,
+        "net_usd": 2812.28,
+        "stress_net_usd": 2806.28,
+        "profit_factor": 31.1747,
+        "stress_profit_factor": 30.6334,
+        "max_closed_drawdown_usd": 77.51,
+        "positive_months": 4,
+        "active_months": 4,
+        "pnl_by_source_usd": {
+          "r1_box_clean_strict_uptrend": 2673.15,
+          "r2_pullback_short_h1_confirm": 139.13
+        },
+        "start_utc": "2026-01-01T00:00:00Z",
+        "end_utc": "2026-06-30T23:59:59Z"
+      },
+      "last_5_years": {
+        "trades": 497,
+        "wins": 233,
+        "losses": 264,
+        "win_rate_pct": 46.8813,
+        "net_usd": 10975.6,
+        "stress_net_usd": 10826.5,
+        "profit_factor": 3.0137,
+        "stress_profit_factor": 2.9579,
+        "max_closed_drawdown_usd": 868.47,
+        "positive_months": 28,
+        "active_months": 52,
+        "pnl_by_source_usd": {
+          "r1_box_clean_strict_uptrend": 10437.77,
+          "r2_pullback_short_h1_confirm": 537.83
+        },
+        "start_utc": "2021-07-01T00:00:00Z",
+        "end_utc": "2026-06-30T23:59:59Z"
+      },
+      "last_10_years": {
+        "trades": 1056,
+        "wins": 450,
+        "losses": 606,
+        "win_rate_pct": 42.6136,
+        "net_usd": 12840.29,
+        "stress_net_usd": 12523.49,
+        "profit_factor": 2.4325,
+        "stress_profit_factor": 2.3694,
+        "max_closed_drawdown_usd": 868.47,
+        "positive_months": 48,
+        "active_months": 101,
+        "pnl_by_source_usd": {
+          "r1_box_clean_strict_uptrend": 12014.82,
+          "r2_pullback_short_h1_confirm": 825.47
+        },
+        "start_utc": "2016-07-01T00:00:00Z",
+        "end_utc": "2026-06-30T23:59:59Z",
+        "max_component_mt5_equity_drawdown_usd": 1733.37,
+        "conservative_drawdown_usd": 1733.37
+      }
+    }
+  },
+  "drawdown_boundary": {
+    "measured_shared_closed_trade_drawdown_usd": 868.47,
+    "largest_component_mt5_equity_drawdown_usd": 1733.37,
+    "sum_component_mt5_equity_drawdown_upper_bound_usd": 2003.3799999999999,
+    "starting_equity_usd": 1000.0,
+    "conservative_drawdown_pct_of_starting_equity": 2.00338,
+    "minimum_starting_equity_for_15pct_upper_bound_usd": 13355.866666666667,
+    "exact_shared_mark_to_market_drawdown_available": false
+  },
+  "overlap": {
+    "maximum_concurrent_trades": 14,
+    "maximum_gross_lots": 0.14,
+    "entries_while_another_trade_open": 849,
+    "same_direction_overlap_entries": 849,
+    "opposite_direction_overlap_entries": 0
+  },
+  "monte_carlo": [
+    {
+      "starting_capital_usd": 1000.0,
+      "simulations": 10000,
+      "trading_days_per_path": 2608,
+      "block_trading_days": 20,
+      "random_seed": 20360716,
+      "risk_of_ruin_probability": 0.0222,
+      "drawdown_threshold_pct": 0.15,
+      "drawdown_threshold_breach_probability": 0.8765,
+      "median_max_drawdown_pct": 0.30171439208919565,
+      "p95_max_drawdown_pct": 0.8086835604393192,
+      "p99_max_drawdown_pct": 1.1883940526149488,
+      "median_ending_equity_usd": 12046.469999999998,
+      "p05_ending_equity_usd": 6012.383499999995,
+      "p95_ending_equity_usd": 19521.646000000015
+    },
+    {
+      "starting_capital_usd": 13355.87,
+      "simulations": 10000,
+      "trading_days_per_path": 2608,
+      "block_trading_days": 20,
+      "random_seed": 21596303,
+      "risk_of_ruin_probability": 0.0,
+      "drawdown_threshold_pct": 0.15,
+      "drawdown_threshold_breach_probability": 0.003,
+      "median_max_drawdown_pct": 0.056070740259208766,
+      "p95_max_drawdown_pct": 0.09817589070171462,
+      "p99_max_drawdown_pct": 0.1255942175848908,
+      "median_ending_equity_usd": 24485.654999999995,
+      "p05_ending_equity_usd": 18499.521999999997,
+      "p95_ending_equity_usd": 32041.44500000001
+    }
+  ],
+  "gates": {
+    "minimum_frequency": false,
+    "monte_carlo_drawdown": false,
+    "monte_carlo_risk_of_ruin": false,
+    "stress_profit_factor": true,
+    "six_month_stability": true,
+    "external_specialist_survivor": false,
+    "ml_ranker_survivor": false,
+    "shared_portfolio_pass": false,
+    "untouched_holdout": false
+  },
+  "failed_gates": [
+    "minimum_frequency",
+    "monte_carlo_drawdown",
+    "monte_carlo_risk_of_ruin",
+    "external_specialist_survivor",
+    "ml_ranker_survivor",
+    "shared_portfolio_pass",
+    "untouched_holdout"
+  ],
+  "deployment_decision": {
+    "python_prediction_demo": false,
+    "ea_signal_consumption": false,
+    "demo_trading": false,
+    "live_trading": false,
+    "reason": "No external specialist or ML survivor, frequency and shared-account risk gates failed, and no untouched holdout exists."
+  },
+  "artifacts": {
+    "monte_carlo_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SIX_ITERATION_FINAL_V1_MONTE_CARLO.csv",
+      "sha256": "afce515e9e77a91b1d59a78cce2bdfaae28fdfea1adfec63e42077b8554d5689"
+    },
+    "report_markdown": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_SIX_ITERATION_FINAL_V1_REPORT.md",
+      "sha256": "cdefac1f6e44dab191337784f251a9df73faeb1316b3fec90a3f0533e2650d40"
+    }
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "campaign_complete": true,
+    "demo_or_live_authorized": false
+  }
+}

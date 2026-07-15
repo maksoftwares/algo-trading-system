@@ -1,0 +1,65 @@
+{
+  "schema_version": "a3_ml_six_iteration_final_qualification_v1",
+  "inputs": {
+    "foundation": {
+      "path": "outputs/reports/A3_ML_MACRO_FUTURES_FOUNDATION_V1_REPORT.json",
+      "sha256": "66be2b579430dc608fd97b314d64513e0d31e329c6406d10b07f8bfcfa6b3700"
+    },
+    "macro_specialists": {
+      "path": "outputs/reports/A3_ML_MACRO_REPRICING_SPECIALISTS_V1_REPORT.json",
+      "sha256": "5cffd84b6820890a515c472bcf63f0511e9411259aa95a43e2fe82141c395dcf"
+    },
+    "cftc_specialists": {
+      "path": "outputs/reports/A3_ML_CFTC_POSITIONING_SPECIALISTS_V1_REPORT.json",
+      "sha256": "93dfd9b8cde9c450d4980d957941ee511d30f8154353eff785297252533bd409"
+    },
+    "shared_portfolio": {
+      "path": "outputs/reports/A3_ML_SHARED_ACCOUNT_PORTFOLIO_V1_REPORT.json",
+      "sha256": "dc3a98a8d7cd8e735413afb53cea7a99544ed91b76fe9c6135a6348115fea2c4"
+    },
+    "exact_portfolio": {
+      "path": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713.json",
+      "sha256": "40ede38c87d9ccfb655af3217ca5bdbecaf8940b4d247d8590586e8863f72d26"
+    },
+    "ml_ranker": {
+      "path": "outputs/reports/A3_ML_EXTERNAL_CANDIDATE_RANKER_V1_REPORT.json",
+      "sha256": "2e6d51c756b04e9d9a75ec5f4e6873b2839da622b90448859ae998d1f78d6d93"
+    },
+    "portfolio_trades": {
+      "path": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_TRADES.csv",
+      "sha256": "d942ee867aec2fe7cf5b49b02a059b598b15ce98130b9c46c230b72d4e8e552c"
+    }
+  },
+  "monte_carlo": {
+    "start_date": "2016-07-01",
+    "end_exclusive_date": "2026-07-01",
+    "simulations": 10000,
+    "block_trading_days": 20,
+    "batch_size": 250,
+    "random_seed": 20260716,
+    "capital_scenarios_usd": [1000.0, 13355.87],
+    "drawdown_threshold_pct": 0.15
+  },
+  "qualification_gates": {
+    "minimum_trades_per_trading_day": 0.80,
+    "maximum_drawdown_breach_probability": 0.05,
+    "maximum_risk_of_ruin": 0.01,
+    "minimum_stress_profit_factor": 1.40,
+    "minimum_nonnegative_six_month_share": 0.70,
+    "require_external_specialist_survivor": true,
+    "require_ml_ranker_survivor": true,
+    "require_shared_portfolio_pass": true,
+    "require_untouched_holdout": true
+  },
+  "outputs": {
+    "monte_carlo_csv": "outputs/reports/A3_ML_SIX_ITERATION_FINAL_V1_MONTE_CARLO.csv",
+    "report_json": "outputs/reports/A3_ML_SIX_ITERATION_FINAL_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_SIX_ITERATION_FINAL_V1_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
