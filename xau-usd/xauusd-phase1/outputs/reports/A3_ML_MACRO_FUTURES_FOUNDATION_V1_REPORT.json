@@ -1,0 +1,143 @@
+{
+  "schema_version": "a3_ml_macro_futures_foundation_v1",
+  "created_at_utc": "2026-07-15T21:40:15.846364Z",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_macro_futures_foundation_v1.json",
+  "contract_sha256": "5bb2bd47c471938922f01ed76ba21a6130a01e744f67798aaa86b3864b8e3d04",
+  "availability_policy": {
+    "treasury_series": "observation date plus one calendar day at 00:00 UTC",
+    "broad_usd_index": "observation date plus seven calendar days at 00:00 UTC",
+    "cftc_gold": "Tuesday report date plus three days at 21:00 UTC"
+  },
+  "licensed_inputs_not_present": [
+    "COMEX intraday trades",
+    "COMEX market depth or order book",
+    "consensus macro forecasts",
+    "ICE US Dollar Index intraday history"
+  ],
+  "sources": [
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2018.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2018.zip",
+      "bytes": 1961740,
+      "sha256": "df4bf7d72e8984d6ea04087f793c9f2bf3503ea8c2149f4b01eedeef4fbe40a8",
+      "source_kind": "CFTC",
+      "source_id": "2018"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2019.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2019.zip",
+      "bytes": 1981332,
+      "sha256": "942a438bcc6f66e65aaf594a1a1fdb8c1505fe4a0feece77a1fd97270317e753",
+      "source_kind": "CFTC",
+      "source_id": "2019"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2020.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2020.zip",
+      "bytes": 1930322,
+      "sha256": "0aa03c0fd6360f56b6897b6eaff30e8dba774c826bf93cac61598312e19bd1cd",
+      "source_kind": "CFTC",
+      "source_id": "2020"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2021.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2021.zip",
+      "bytes": 1943806,
+      "sha256": "12d5d49a8963367fd3439050e3e20e6a5338757dfa083432795c5556827ff8ae",
+      "source_kind": "CFTC",
+      "source_id": "2021"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2022.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2022.zip",
+      "bytes": 2049193,
+      "sha256": "74205d75d4d7b75a9f4159ef2e6abed53eeb4771a74e5a4bf78bc0451410ab7f",
+      "source_kind": "CFTC",
+      "source_id": "2022"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2023.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2023.zip",
+      "bytes": 2202972,
+      "sha256": "9fe75dba0256819d476bb0d01f9e8e5ac6ec2c4390f609a7e3259e85796b79ce",
+      "source_kind": "CFTC",
+      "source_id": "2023"
+    },
+    {
+      "url": "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2024.zip",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\cftc_disaggregated_futures_2024.zip",
+      "bytes": 2381296,
+      "sha256": "5e40f60993120d26c116ab347beaf93702f5da60c7bdccbbee43cb3d0a91d01a",
+      "source_kind": "CFTC",
+      "source_id": "2024"
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFII10",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\fred_DFII10.csv",
+      "bytes": 98191,
+      "sha256": "33ce837689a9f64af5aa47ec7362852c348e323bb797580fd5c8d1adb4f1f32e",
+      "source_kind": "FRED",
+      "source_id": "DFII10"
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFII5",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\fred_DFII5.csv",
+      "bytes": 98994,
+      "sha256": "dd3be53887264a9d13fc5664b6b5c82b69021d76348116e14c65fd7e43b4cf03",
+      "source_kind": "FRED",
+      "source_id": "DFII5"
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\fred_DGS10.csv",
+      "bytes": 268011,
+      "sha256": "9e5310854571ef4233c742a0753275d473f1cf1feaa80d47fa6181930335ec62",
+      "source_kind": "FRED",
+      "source_id": "DGS10"
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\fred_DGS2.csv",
+      "bytes": 208184,
+      "sha256": "1225a0684f290a6b57e34f4f9df02a1650e05ffc846e35595198f92bc56fc854",
+      "source_kind": "FRED",
+      "source_id": "DGS2"
+    },
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTWEXBGS",
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\sources\\fred_DTWEXBGS.csv",
+      "bytes": 103345,
+      "sha256": "15b46514271f0e8d5d721cfee2fa5a994db56982e042b55f66f23750b70e8951",
+      "source_kind": "FRED",
+      "source_id": "DTWEXBGS"
+    }
+  ],
+  "source_inventory_sha256": "89a8ef8c37146208f956f98b9cacf8308286e1c50329ef59b03cd0ba76f3a7c0",
+  "daily_features": {
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\macro_futures_daily_v1.parquet",
+    "rows": 2141,
+    "bytes": 258540,
+    "sha256": "3d0368412ec41702586ebd57e9af90a0f3ae8ec6f21644d618a8f175c0835c82"
+  },
+  "enriched_m5": {
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\m5_macro_futures_features_v1.parquet",
+    "rows": 424942,
+    "bytes": 167375181,
+    "sha256": "4ed79c7456519a3c1b8995c2667e60304b5cf457af96c76356db8f9475dcfee7"
+  },
+  "coverage": {
+    "first_market_timestamp_utc": "2018-07-01T22:00:00Z",
+    "last_market_timestamp_utc": "2024-06-30T23:55:00Z",
+    "first_macro_availability_utc": "2018-07-02T00:00:00Z",
+    "last_macro_availability_utc": "2024-06-29T00:00:00Z",
+    "macro_joined_market_rows": 424918,
+    "cot_joined_market_rows": 424918
+  },
+  "causality_checks": {
+    "macro_availability_not_after_market": true,
+    "cot_availability_not_after_market": true,
+    "unique_daily_availability": true,
+    "base_feature_cache_hash_verified": true
+  },
+  "external_manifest": "C:\\DukascopyTickDataFoundationV1\\research\\xau-macro-futures-six-iteration-v1\\foundation\\macro_futures_foundation_v1.manifest.json"
+}
