@@ -484,14 +484,20 @@ def _build_report(
         ),
     )
     selected_profile = passing[0] if all(quality_gates.values()) and passing else None
+    classification_prefix = str(
+        contract.get("classification_prefix", "DUKASCOPY_M5_DISCOVERY_TRAIN")
+    )
     if not all(quality_gates.values()):
-        classification = "DUKASCOPY_M5_DISCOVERY_TRAIN_INVALID"
+        classification = f"{classification_prefix}_INVALID"
     elif selected_profile:
-        classification = "DUKASCOPY_M5_DISCOVERY_TRAIN_SURVIVOR_FROZEN"
+        classification = f"{classification_prefix}_SURVIVOR_FROZEN"
     else:
-        classification = "DUKASCOPY_M5_DISCOVERY_TRAIN_NO_SURVIVOR"
+        classification = f"{classification_prefix}_NO_SURVIVOR"
     return {
         "schema_version": str(contract["schema_version"]),
+        "report_title": str(
+            contract.get("report_title", "A3 ML Dukascopy M5 Discovery Train V1")
+        ),
         "classification": classification,
         "created_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "contract": str(contract_file),
@@ -618,7 +624,7 @@ def _training_source_days(
 
 def _render(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# A3 ML Dukascopy M5 Discovery Train V1",
+        f"# {payload.get('report_title', 'A3 ML Dukascopy M5 Discovery Train V1')}",
         "",
         f"Classification: `{payload['classification']}`",
         "",
