@@ -1,0 +1,29 @@
+{
+  "schema_version": "a3_ml_dukascopy_m5_nonlinear_ranker_v1",
+  "base_contract_path": "config/ml/a3_ml_dukascopy_m5_candidate_ranker.json",
+  "base_contract_sha256": "429ff98ad7f51586efb07a0d48592de0888e9c736ef0b0d5092f8af7f4ef6017",
+  "model": {
+    "family": "HIST_GRADIENT_BOOSTING_V1",
+    "learning_rate": 0.05,
+    "max_iter": 200,
+    "max_leaf_nodes": 7,
+    "max_depth": 3,
+    "min_samples_leaf": 100,
+    "l2_regularization": 1.0,
+    "early_stopping": false,
+    "random_state": 20260715
+  },
+  "outputs": {
+    "model_joblib": "outputs/reports/A3_ML_DUKASCOPY_M5_NONLINEAR_RANKER_MODEL.joblib",
+    "predictions_csv": "outputs/reports/A3_ML_DUKASCOPY_M5_NONLINEAR_RANKER_PREDICTIONS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_M5_NONLINEAR_RANKER_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_M5_NONLINEAR_RANKER_REPORT.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "reserved_validation_outcomes_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
