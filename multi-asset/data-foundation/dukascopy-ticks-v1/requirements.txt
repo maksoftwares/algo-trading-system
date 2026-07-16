@@ -1,2 +1,2 @@
-pyarrow==21.0.0
+pyarrow==25.0.0
 pytest>=9.1,<10
