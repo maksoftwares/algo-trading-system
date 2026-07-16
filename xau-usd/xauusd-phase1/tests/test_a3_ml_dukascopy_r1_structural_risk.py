@@ -151,3 +151,36 @@ def test_episode_monte_carlo_is_seeded_and_reports_probabilities() -> None:
     assert first == second
     assert 0.0 <= first["ruin_probability"] <= 1.0
     assert 0.0 <= first["drawdown_warning_probability"] <= 1.0
+
+
+def test_capital_observation_tracks_absolute_and_relative_drawdown_independently() -> None:
+    start = datetime(2026, 1, 1, tzinfo=UTC)
+    first_exit = start + timedelta(minutes=20)
+    second_entry = start + timedelta(minutes=30)
+    second_exit = start + timedelta(minutes=50)
+    rows = [
+        _row("a", start, first_exit, gross=100.0),
+        _row(
+            "b",
+            second_entry,
+            second_exit,
+            entry_price=200.0,
+            entry_bid=200.0,
+            gross=-80.0,
+        ),
+    ]
+
+    class Store:
+        def load_hour(self, _hour: int):
+            return (
+                SimpleNamespace(timestamp_ms=rows[0]["entry_ms"], bid=99.0, ask=100.0),
+                SimpleNamespace(timestamp_ms=rows[0]["exit_ms"], bid=200.0, ask=201.0),
+                SimpleNamespace(timestamp_ms=rows[1]["entry_ms"], bid=200.0, ask=201.0),
+                SimpleNamespace(timestamp_ms=rows[1]["exit_ms"], bid=120.0, ask=121.0),
+            )
+
+    equity, _ = exact_tick_equity({"fixture": rows}, Store(), _contract())
+    observation = equity["fixture"]["capital_observations"]["1000.00"]
+
+    assert observation["max_floating_drawdown_usd"] == pytest.approx(80.3)
+    assert observation["max_floating_drawdown_pct"] > 7.0

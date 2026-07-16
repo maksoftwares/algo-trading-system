@@ -392,6 +392,9 @@ def exact_tick_equity(
                     "original_stop_risk_usd": state["open_risk"],
                 }
             )
+        cache_clear = getattr(tick_store.load_hour, "cache_clear", None)
+        if cache_clear is not None:
+            cache_clear()
     output: dict[str, Any] = {}
     for name, state in states.items():
         if state["event_index"] != len(state["events"]) or state["open"]:
@@ -553,10 +556,12 @@ def _mark_state(
         state["peak_stress_equity"] = stress_equity
     drawdown = state["peak_stress_equity"] - stress_equity
     fraction = drawdown / max(state["peak_stress_equity"], 0.01)
-    if fraction > state["max_drawdown_fraction"]:
+    if drawdown > state["max_drawdown"]:
         state["max_drawdown"] = drawdown
-        state["max_drawdown_fraction"] = fraction
         state["max_drawdown_timestamp_ms"] = timestamp_ms
+    state["max_drawdown_fraction"] = max(
+        state["max_drawdown_fraction"], fraction
+    )
     margin_fraction = state["open_margin"] / max(stress_equity, 0.01)
     state["max_margin_fraction"] = max(
         state["max_margin_fraction"], margin_fraction
@@ -571,9 +576,10 @@ def _mark_state(
         item["peak"] = max(item["peak"], equity)
         capital_drawdown = item["peak"] - equity
         capital_fraction = capital_drawdown / max(item["peak"], 0.01)
-        if capital_fraction > item["max_drawdown_fraction"]:
-            item["max_drawdown"] = capital_drawdown
-            item["max_drawdown_fraction"] = capital_fraction
+        item["max_drawdown"] = max(item["max_drawdown"], capital_drawdown)
+        item["max_drawdown_fraction"] = max(
+            item["max_drawdown_fraction"], capital_fraction
+        )
         margin_call_fraction = float(contract["account"]["margin_call_level_pct"]) / 100.0
         if state["open_margin"] > 0.0 and equity / state["open_margin"] <= margin_call_fraction:
             item["margin_call_observed"] = True
