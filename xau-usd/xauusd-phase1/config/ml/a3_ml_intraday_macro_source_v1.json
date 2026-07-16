@@ -1,0 +1,94 @@
+{
+  "schema_version": "a3_ml_intraday_macro_source_v1",
+  "purpose": "Acquire and validate causal intraday US-dollar-index and US-T-Bond quote data before any gold outcome analysis.",
+  "source": {
+    "provider": "Dukascopy Bank SA",
+    "service": "OFFICIAL_DUKASCOPY_JETTA_V1",
+    "origin": "https://jetta.dukascopy.com/v1",
+    "tick_endpoint_template": "https://jetta.dukascopy.com/v1/ticks/{source_code}/{year}/{month}/{day}/{hour}",
+    "instrument_endpoint_template": "https://jetta.dukascopy.com/v1/instruments/{source_code}",
+    "cfds_are_not_exchange_quotes": true,
+    "external_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "research_relative_root": "research/xau-intraday-macro-source-v1",
+    "raw_relative_root": "raw"
+  },
+  "window": {
+    "start_utc": "2019-01-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "expected_months_per_instrument": 90
+  },
+  "instruments": [
+    {
+      "symbol": "DOLLARIDXUSD",
+      "source_name": "DOLLAR.IDX/USD",
+      "source_code": "DOLLAR.IDX-USD",
+      "role": "INTRADAY_US_DOLLAR_INDEX_CFD",
+      "pip_size": 0.01,
+      "price_scale": 3,
+      "metadata_path": "source-evidence/instrument-DOLLARIDXUSD.json",
+      "metadata_sha256": "b596ab8a33b3c2bf41e042e4d92e01d9e71220ae40793eb5d6530c2039339bec",
+      "metadata_tick_from_epoch_ms": 1512089145568
+    },
+    {
+      "symbol": "USTBONDTRUSD",
+      "source_name": "USTBOND.TR/USD",
+      "source_code": "USTBOND.TR-USD",
+      "role": "INTRADAY_US_T_BOND_PRICE_CFD",
+      "pip_size": 0.01,
+      "price_scale": 3,
+      "metadata_path": "source-evidence/instrument-USTBONDTRUSD.json",
+      "metadata_sha256": "b75bcc2b0f0e0b722d47004456da6af8a25978664647a9eee3c4ac9bc169ebee",
+      "metadata_minute_from_epoch_ms": 1545163320000,
+      "usable_common_start_utc": "2019-01-01T00:00:00Z"
+    }
+  ],
+  "acquisition": {
+    "maximum_concurrency": 4,
+    "retry_count_after_initial_attempt": 1,
+    "timeout_seconds": 60,
+    "preserve_raw_response_bytes": true,
+    "resume_only_after_hash_and_schema_validation": true,
+    "empty_hourly_payload_is_valid": true,
+    "cross_symbol_url_rejected": true,
+    "partial_file_atomic_replace": true
+  },
+  "normalization": {
+    "timeframe_minutes": 5,
+    "price_bases": ["Bid", "Ask", "Mid"],
+    "bar_boundaries": "UTC epoch-aligned left-closed right-open",
+    "duplicate_policy": "Preserve source order and report exact or conflicting same-timestamp observations.",
+    "volume_semantics": "Dukascopy best-side quote volume; never call it exchange trade volume.",
+    "format": "Parquet Zstandard",
+    "deterministic_rebuilds": 2
+  },
+  "quality_gates": {
+    "metadata_hashes_match": true,
+    "all_expected_hourly_partitions_present": true,
+    "all_hourly_payloads_schema_valid": true,
+    "all_nonempty_ticks_inside_requested_hour": true,
+    "maximum_negative_spread_count": 0,
+    "maximum_nonfinite_price_or_volume_count": 0,
+    "maximum_conflicting_same_timestamp_share": 0.0001,
+    "minimum_active_source_day_share_vs_xau": 0.8,
+    "normalized_rebuild_hashes_identical": true
+  },
+  "outputs": {
+    "bars_relative_path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "manifest_relative_path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "coverage_csv": "outputs/reports/A3_ML_INTRADAY_MACRO_SOURCE_V1_COVERAGE.csv",
+    "report_json": "outputs/reports/A3_ML_INTRADAY_MACRO_SOURCE_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_INTRADAY_MACRO_SOURCE_V1_REPORT.md"
+  },
+  "research_controls": {
+    "source_only": true,
+    "gold_outcome_join_authorized": false,
+    "strategy_threshold_search_authorized": false,
+    "model_training_authorized": false
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
