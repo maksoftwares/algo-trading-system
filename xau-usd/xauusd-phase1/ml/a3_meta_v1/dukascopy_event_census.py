@@ -970,7 +970,8 @@ def build_report(
             hypotheses[name] = result
     context_rows = context_metrics(resolved_barriers, source_days)
     resolved_event_ids = {row["event_id"] for row in resolved_barriers}
-    labeled_share = len(resolved_event_ids) / len(events) if events else 0.0
+    labeled_share = _labeled_event_share(barrier_labels, len(events))
+    resolved_event_share = len(resolved_event_ids) / len(events) if events else 0.0
     quality = contract["quality_gates"]
     quality_gates = {
         "feature_rows_equal_source_lock": len(frame)
@@ -1029,6 +1030,7 @@ def build_report(
         "horizon_label_status_counts": dict(Counter(row["status"] for row in horizon_labels)),
         "barrier_label_status_counts": dict(Counter(row["status"] for row in barrier_labels)),
         "labeled_event_share": labeled_share,
+        "resolved_event_share": resolved_event_share,
         "quality_gates": quality_gates,
         "hypotheses": hypotheses,
         "stage_survivors": {
@@ -1101,6 +1103,19 @@ def policy_metrics(
         "top_ten_winners_removed_net_r": sum(returns) - sum(top_ten),
         "bootstrap_mean_stress_r_p025": bootstrap_p025,
     }
+
+
+def _labeled_event_share(
+    barrier_labels: Sequence[Mapping[str, Any]], event_count: int
+) -> float:
+    if event_count == 0:
+        return 0.0
+    labeled_ids = {
+        str(row["event_id"])
+        for row in barrier_labels
+        if str(row["status"]) != "UNRESOLVED"
+    }
+    return len(labeled_ids) / event_count
 
 
 def policy_gates(

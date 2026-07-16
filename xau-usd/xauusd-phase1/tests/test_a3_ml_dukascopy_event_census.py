@@ -12,6 +12,7 @@ from ml.a3_meta_v1.dukascopy_event_census import (
     _classification,
     _entry,
     _horizon_label,
+    _labeled_event_share,
     _volatility_expansion_events,
     policy_metrics,
     validate_contract,
@@ -200,6 +201,15 @@ def test_policy_drawdown_includes_losses_before_first_equity_peak() -> None:
     ]
     metrics = policy_metrics(rows, 4)
     assert metrics["max_closed_drawdown_r"] == 2.0
+
+
+def test_quality_coverage_counts_explicit_ineligibility_as_a_label() -> None:
+    labels = [
+        {"event_id": "resolved", "status": "RESOLVED"},
+        {"event_id": "ineligible", "status": "INELIGIBLE"},
+        {"event_id": "unavailable", "status": "UNRESOLVED"},
+    ]
+    assert _labeled_event_share(labels, 3) == pytest.approx(2 / 3)
 
 
 def test_chronological_firewall_cannot_be_rescued_by_later_windows() -> None:
