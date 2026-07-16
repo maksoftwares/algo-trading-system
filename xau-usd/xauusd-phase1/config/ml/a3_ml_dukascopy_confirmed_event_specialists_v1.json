@@ -132,6 +132,13 @@
     "holding_cost_per_24h_usd": 0.35,
     "same_tick_collision_policy": "FIRST_EXECUTABLE_TOUCH"
   },
+  "quality_gates": {
+    "require_all_expected_months_valid": true,
+    "minimum_resolved_share": 0.99,
+    "candidate_ids_unique": true,
+    "candidate_keys_unique": true,
+    "require_chronological_candidates": true
+  },
   "family_train_gates": {
     "minimum_trades": 160,
     "minimum_trades_each_direction": 30,

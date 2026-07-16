@@ -90,6 +90,8 @@ can become only a forward-shadow candidate until prospective evidence is collect
 The exact family and portfolio gates are locked in the JSON contract. Important exam
 requirements include:
 
+- all 120 source months valid, unique chronological candidates, and at least 99%
+  resolved executable labels;
 - at least 60 trades and 15 in each direction per surviving family;
 - at least 0.12 trades per source day per surviving family;
 - stress PF at least 1.30 and average stress R at least 0.05;
