@@ -1,0 +1,354 @@
+{
+  "artifacts": {
+    "daily_metrics_csv": {
+      "bytes": 1616,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_COST_CALIBRATION_V1_DAILY_METRICS.csv",
+      "sha256": "d431cec02cfe3010d9cc24c7babc17ce534b2a88a5037fdce05e20f8668dbfcc"
+    },
+    "hourly_metrics_csv": {
+      "bytes": 1957,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_COST_CALIBRATION_V1_HOURLY_METRICS.csv",
+      "sha256": "2c92a749cd3e71083426e96fcc3db21a92d6446f4d7b4904b4d5a42ce3286270"
+    },
+    "overlap_m5_csv": {
+      "bytes": 983087,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_BROKER_COST_CALIBRATION_V1_OVERLAP_M5.csv",
+      "sha256": "f40c4563002810b3345ef168350a99f69fd0159b02e7f3958654fc31f89cca8c"
+    }
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_or_live_authorized": false,
+    "ea_consumption_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "research_only": true,
+    "strategy_authorized": false
+  },
+  "auxiliary_demo_cost_context": {
+    "hash_matches": true,
+    "raw_source_reverification_available": false,
+    "reported_executed_cost_r_max": 0.0472,
+    "reported_status": "PASS",
+    "used_for_calibration": false
+  },
+  "broker_spread_points": {
+    "count": 7616882,
+    "mean": 54.77394621578751,
+    "q0": 49.999999999954525,
+    "q0.01": 50.0,
+    "q0.05": 50.0,
+    "q0.1": 50.0,
+    "q0.25": 50.0,
+    "q0.5": 50.0,
+    "q0.75": 50.0,
+    "q0.9": 75.0,
+    "q0.95": 75.0,
+    "q0.99": 75.0,
+    "q1": 180.0000000000182
+  },
+  "broker_spread_price": {
+    "count": 7616882,
+    "mean": 0.5477394621578751,
+    "q0": 0.49999999999954525,
+    "q0.01": 0.5,
+    "q0.05": 0.5,
+    "q0.1": 0.5,
+    "q0.25": 0.5,
+    "q0.5": 0.5,
+    "q0.75": 0.5,
+    "q0.9": 0.75,
+    "q0.95": 0.75,
+    "q0.99": 0.75,
+    "q1": 1.800000000000182
+  },
+  "c02_source": {
+    "dataset_version": "xauusd_c02_multiacct_202606262247_g0a9823b0_c9221d066",
+    "report_sha256": "c0568d6db09c14055400f6025c49d77b5b99854a973bdfd3d3b29909d42ab355",
+    "root_manifest_sha256": "a8a9271cab3728a363ecb06cd8c8c276d9e846b7cb3f9e35db2008524755dc70"
+  },
+  "canonical_tick_audit": {
+    "account_label": "A3",
+    "account_scope": "1033669",
+    "active_tick_files": 18,
+    "chronological_non_decreasing": true,
+    "exact_duplicate_quote_rows": 739,
+    "files": [
+      {
+        "filename": "XAUUSD_ticks_20260605.csv",
+        "first_timestamp_ms": 1780617600248,
+        "last_timestamp_ms": 1780693137436,
+        "rows": 500747,
+        "sha256": "46aae36c1a67ec7638d61dc4855cf45c8c89eb9195242a7328065e98d928c3f1"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260607.csv",
+        "first_timestamp_ms": 1780869600741,
+        "last_timestamp_ms": 1780876799821,
+        "rows": 37469,
+        "sha256": "f928e90c94200e3075de8d5b095bf777e98ac033b214e735a41f073bd35ee869"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260608.csv",
+        "first_timestamp_ms": 1780876800212,
+        "last_timestamp_ms": 1780963199210,
+        "rows": 516865,
+        "sha256": "c6b1975704496a58cade541db2fabf0de8acf39a2dc862ed89c0c747f2312e15"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260609.csv",
+        "first_timestamp_ms": 1780963200246,
+        "last_timestamp_ms": 1781049599855,
+        "rows": 515016,
+        "sha256": "6fe4a73dc054f842f57fe32552b0007295eeae0944b1826e87b9aecb6b7ae38c"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260610.csv",
+        "first_timestamp_ms": 1781049600194,
+        "last_timestamp_ms": 1781135999995,
+        "rows": 689125,
+        "sha256": "ddd63ffebbbe84fdbd19cfaa96b14cfc6a09e1f2f1944291b1e8e8619a1487a1"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260611.csv",
+        "first_timestamp_ms": 1781136000042,
+        "last_timestamp_ms": 1781222399988,
+        "rows": 704375,
+        "sha256": "50e11307e2b5f7e28252589c7b5eae486b314a77b27584afdaa21a27a16cf21b"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260612.csv",
+        "first_timestamp_ms": 1781222400074,
+        "last_timestamp_ms": 1781297936102,
+        "rows": 500386,
+        "sha256": "23d8a00c39a4b4b331eed1e0333e6e408e9935e53fab8698880ebf992386503b"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260614.csv",
+        "first_timestamp_ms": 1781474424353,
+        "last_timestamp_ms": 1781481599874,
+        "rows": 28834,
+        "sha256": "89c1d0ad3f07dd3e077fd6fd80245d08b0074ad2efea8c066921b8c9baa3a4e2"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260615.csv",
+        "first_timestamp_ms": 1781481600274,
+        "last_timestamp_ms": 1781567999827,
+        "rows": 373192,
+        "sha256": "8aa554cfa0b5686d7860a314b7f301322056dc1018455ce0701734e8e76ed112"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260616.csv",
+        "first_timestamp_ms": 1781568000363,
+        "last_timestamp_ms": 1781654399592,
+        "rows": 338000,
+        "sha256": "22c9eb431d25fe79b1301aa134f8ea29e2ae7f35c2cb72753bfff3e4117f71c1"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260617.csv",
+        "first_timestamp_ms": 1781654400025,
+        "last_timestamp_ms": 1781740799910,
+        "rows": 494440,
+        "sha256": "ea83d6706abefd577f52fda85873a1ce60356c3b7ec0362cc8bcdcf370be4f63"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260618.csv",
+        "first_timestamp_ms": 1781740800196,
+        "last_timestamp_ms": 1781827199814,
+        "rows": 459274,
+        "sha256": "940f9512b39868d056c57fc0c70a7e3d82f0b61ed9936b8cf54991e022656096"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260619.csv",
+        "first_timestamp_ms": 1781827200361,
+        "last_timestamp_ms": 1781888398036,
+        "rows": 281155,
+        "sha256": "9eda9bed70fe9cdf6d28a30903ebb8c81902dc454f2b78f53f3785236478be10"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260621.csv",
+        "first_timestamp_ms": 1782079200977,
+        "last_timestamp_ms": 1782086399866,
+        "rows": 28072,
+        "sha256": "3f47116a6a602d4f3a134156c6e068a95bf2c5394c6fec033b49d4caea93fc27"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260622.csv",
+        "first_timestamp_ms": 1782086400268,
+        "last_timestamp_ms": 1782172799823,
+        "rows": 403682,
+        "sha256": "8369c3332c8a5e12c4f2605d381ec1bbf1316475cde6e83bc0f745ed9b4a5a5b"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260623.csv",
+        "first_timestamp_ms": 1782172800375,
+        "last_timestamp_ms": 1782259199948,
+        "rows": 497003,
+        "sha256": "8cc1e35943dafb273bca62783b9ef91ca12710c7920271629f3b7975a96d95cf"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260624.csv",
+        "first_timestamp_ms": 1782259200141,
+        "last_timestamp_ms": 1782345599789,
+        "rows": 664370,
+        "sha256": "156d76aa8b136c9ee20577f5a152283eb0d7ec6b2fb127b9ebbae52cdb0e5d80"
+      },
+      {
+        "filename": "XAUUSD_ticks_20260625.csv",
+        "first_timestamp_ms": 1782345600325,
+        "last_timestamp_ms": 1782431999967,
+        "rows": 584877,
+        "sha256": "5f889b4c08686b189f01a7eedfdaa47b4e98540348edffbe51e6c73f2d5d5586"
+      }
+    ],
+    "first_timestamp_utc": "2026-06-05T00:00:00.248Z",
+    "invalid_bid_ask_rows": 0,
+    "last_timestamp_utc": "2026-06-25T23:59:59.967Z",
+    "maximum_spread_reconciliation_error": 1.1102230246251565e-16,
+    "tick_rows": 7616882
+  },
+  "classification": "BROKER_COST_CALIBRATION_VALID",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_broker_cost_calibration_v1.json",
+  "contract_sha256": "9f6e7abca318036c87519afff9375cf045c17d249748f5f6be87277aab14a7c6",
+  "created_at_utc": "2026-07-16T13:22:45.081587Z",
+  "cross_account_boundary_audit": {
+    "account_labels": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "accounts_treated_as_independent_samples": false,
+    "active_dates_compared": 18,
+    "boundary_comparisons": 72,
+    "mismatch_count": 0,
+    "mismatches": []
+  },
+  "dukascopy_overlap": {
+    "broker_spread_median": {
+      "count": 4092,
+      "mean": 0.5022849462365587,
+      "q0": 0.5,
+      "q0.01": 0.5,
+      "q0.05": 0.5,
+      "q0.1": 0.5,
+      "q0.25": 0.5,
+      "q0.5": 0.5,
+      "q0.75": 0.5,
+      "q0.9": 0.5,
+      "q0.95": 0.5,
+      "q0.99": 0.5,
+      "q1": 1.800000000000182
+    },
+    "broker_spread_p90": {
+      "count": 4092,
+      "mean": 0.6992851906158367,
+      "q0": 0.5,
+      "q0.01": 0.5,
+      "q0.05": 0.5,
+      "q0.1": 0.5,
+      "q0.25": 0.75,
+      "q0.5": 0.75,
+      "q0.75": 0.75,
+      "q0.9": 0.75,
+      "q0.95": 0.75,
+      "q0.99": 0.75,
+      "q1": 1.800000000000182
+    },
+    "broker_spread_p90_atr": {
+      "count": 4092,
+      "mean": 0.13183784436547274,
+      "q0": 0.03652671787503123,
+      "q0.01": 0.044097921516634504,
+      "q0.05": 0.06092343413688377,
+      "q0.1": 0.07199712203751757,
+      "q0.25": 0.09460949673893554,
+      "q0.5": 0.12331071909094325,
+      "q0.75": 0.16282761954349997,
+      "q0.9": 0.1998356655973275,
+      "q0.95": 0.2244479007154543,
+      "q0.99": 0.2960006254836326,
+      "q1": 0.753049206885394
+    },
+    "dukascopy_open_spread": {
+      "count": 4092,
+      "mean": 0.6331691104594367,
+      "q0": 0.19499999999970896,
+      "q0.01": 0.29000000000079124,
+      "q0.05": 0.4099999999998545,
+      "q0.1": 0.47000000000025466,
+      "q0.25": 0.5500000000000682,
+      "q0.5": 0.6099999999996726,
+      "q0.75": 0.6970000000001164,
+      "q0.9": 0.7699999999995271,
+      "q0.95": 0.7770000000000437,
+      "q0.99": 1.2603600000002104,
+      "q1": 9.881999999999607
+    },
+    "dukascopy_open_spread_atr": {
+      "count": 4092,
+      "mean": 0.11887899084172587,
+      "q0": 0.01650266124983469,
+      "q0.01": 0.04083269983617933,
+      "q0.05": 0.05599061881999192,
+      "q0.1": 0.06519052187995335,
+      "q0.25": 0.08278761166370768,
+      "q0.5": 0.10589233548215941,
+      "q0.75": 0.13795545333003706,
+      "q0.9": 0.17411985800162952,
+      "q0.95": 0.2037755449270462,
+      "q0.99": 0.3399855165453014,
+      "q1": 2.6156339973328064
+    },
+    "dukascopy_spread_mean": {
+      "count": 4092,
+      "mean": 0.6265547145529566,
+      "q0": 0.27213966480449236,
+      "q0.01": 0.3802417573291684,
+      "q0.05": 0.4789195432631314,
+      "q0.1": 0.5148903462649759,
+      "q0.25": 0.546174808419007,
+      "q0.5": 0.6053358541386,
+      "q0.75": 0.6940368879538166,
+      "q0.9": 0.74874184261976,
+      "q0.95": 0.7792724686156521,
+      "q0.99": 1.0769551572080807,
+      "q1": 2.2723184335443385
+    },
+    "first_time_utc": "2026-06-05T00:00:00.000Z",
+    "last_time_utc": "2026-06-25T23:55:00.000Z",
+    "matched_m5_bars": 4092
+  },
+  "limitations": [
+    "The target-broker sample covers June 2026, not ten historical years.",
+    "All three accounts share one broker server and are not independent feeds.",
+    "The broker spread floor is a stress input, not a historical portability claim.",
+    "Calibration validity does not establish strategy expectancy."
+  ],
+  "locked_cost_assumption": {
+    "additional_execution_cost_price": 0.3,
+    "additional_execution_cost_usd_per_0p01_lot": 0.3,
+    "broker_spread_floor_price": 0.75,
+    "broker_spread_floor_quantile": 0.9,
+    "historical_rule": "Use native Dukascopy Bid/Ask and stress entry spread to at least the broker floor; add the fixed execution cost.",
+    "maximum_total_stressed_entry_cost_r": 0.15,
+    "minimum_initial_stop_distance_price": 7.000000000000001,
+    "total_stressed_entry_cost_price": 1.05
+  },
+  "quality_gates": {
+    "account_identity_and_counts_match": true,
+    "c02_report_and_manifest_hashes_match": true,
+    "canonical_bid_ask_valid": true,
+    "canonical_file_hashes_match": true,
+    "canonical_rows_chronological": true,
+    "canonical_spread_reconciles": true,
+    "cross_account_boundary_quotes_match": true,
+    "dukascopy_source_hash_and_rows_match": true,
+    "minimum_overlap_m5_bars_met": true
+  },
+  "research_controls": {
+    "historical_broker_spread_portability_claim_authorized": false,
+    "model_training_authorized": false,
+    "same_server_accounts_are_independent_samples": false,
+    "strategy_parameter_selection_authorized": false
+  },
+  "schema_version": "a3_ml_broker_cost_calibration_v1"
+}
