@@ -511,29 +511,51 @@ def _compression_retest_candidates(
     last_decision = {"LONG": -10**18, "SHORT": -10**18}
     lookback = int(family["compression_lookback_bars"])
     values = frame.reset_index(drop=True)
-    for breakout_index in range(lookback, len(values) - 1):
+    timestamps = values["timestamp_ms"].to_numpy(dtype=np.int64)
+    gap_ok = pd.Series(np.r_[False, np.diff(timestamps) == BAR_WIDTH_MS])
+    history_contiguous = (
+        gap_ok.rolling(lookback - 1, min_periods=lookback - 1).sum().shift(1)
+        == lookback - 1
+    )
+    reference_highs = values["mid_high"].shift(1).rolling(lookback).max()
+    reference_lows = values["mid_low"].shift(1).rolling(lookback).min()
+    atr = values["atr"]
+    in_hours = (values["hour_utc"] >= int(family["decision_start_hour_utc"])) & (
+        values["hour_utc"] < int(family["decision_end_hour_utc"])
+    )
+    eligible = (
+        _finite_signal_mask(values)
+        & history_contiguous
+        & in_hours
+        & ((reference_highs - reference_lows) <= float(family["maximum_compression_range_atr"]) * atr)
+        & (values["atr_ratio"] <= float(family["maximum_atr_ratio"]))
+        & (values["body_fraction"] >= float(family["minimum_breakout_body_fraction"]))
+        & (values["price_efficiency_5m"] >= float(family["minimum_breakout_efficiency"]))
+        & (
+            values["quote_intensity_ratio"]
+            >= float(family["minimum_breakout_quote_intensity_ratio"])
+        )
+    )
+    long_breakout = values["mid_close"] >= (
+        reference_highs + float(family["minimum_breakout_atr"]) * atr
+    )
+    short_breakout = values["mid_close"] <= (
+        reference_lows - float(family["minimum_breakout_atr"]) * atr
+    )
+    breakout_indices = np.flatnonzero(
+        (eligible & (long_breakout | short_breakout)).to_numpy(dtype=bool)
+    )
+    breakout_indices = breakout_indices[breakout_indices < len(values) - 1]
+    for breakout_index in breakout_indices:
         breakout = values.iloc[breakout_index]
-        if not _finite_signal_row(breakout):
-            continue
-        history = values.iloc[breakout_index - lookback : breakout_index]
-        if not _contiguous(history) or not _in_hours(breakout, family):
-            continue
         atr = float(breakout["atr"])
-        reference_high = float(history["mid_high"].max())
-        reference_low = float(history["mid_low"].min())
-        if (
-            reference_high - reference_low > float(family["maximum_compression_range_atr"]) * atr
-            or float(breakout["atr_ratio"]) > float(family["maximum_atr_ratio"])
-            or float(breakout["body_fraction"]) < float(family["minimum_breakout_body_fraction"])
-            or float(breakout["price_efficiency_5m"]) < float(family["minimum_breakout_efficiency"])
-            or float(breakout["quote_intensity_ratio"]) < float(family["minimum_breakout_quote_intensity_ratio"])
-        ):
-            continue
+        reference_high = float(reference_highs.iloc[breakout_index])
+        reference_low = float(reference_lows.iloc[breakout_index])
         direction = None
         boundary = 0.0
-        if float(breakout["mid_close"]) >= reference_high + float(family["minimum_breakout_atr"]) * atr:
+        if bool(long_breakout.iloc[breakout_index]):
             direction, boundary = "LONG", reference_high
-        elif float(breakout["mid_close"]) <= reference_low - float(family["minimum_breakout_atr"]) * atr:
+        elif bool(short_breakout.iloc[breakout_index]):
             direction, boundary = "SHORT", reference_low
         if direction is None:
             continue
@@ -599,27 +621,43 @@ def _shock_failure_candidates(
     impulse_bars = int(family["impulse_bars"])
     consumed: set[str] = set()
     last_decision = {"LONG": -10**18, "SHORT": -10**18}
-    for end_index in range(impulse_bars - 1, len(values) - 1):
+    timestamps = values["timestamp_ms"].to_numpy(dtype=np.int64)
+    gap_ok = pd.Series(np.r_[False, np.diff(timestamps) == BAR_WIDTH_MS])
+    contiguous = (
+        gap_ok.rolling(impulse_bars - 1, min_periods=impulse_bars - 1).sum()
+        == impulse_bars - 1
+    )
+    start_open = values["mid_open"].shift(impulse_bars - 1)
+    impulse_values = values["mid_close"] - start_open
+    first_leg = (
+        values["mid_close"].shift(impulse_bars - 1) - start_open
+    ).abs()
+    later_legs = values["mid_close"].diff().abs().rolling(impulse_bars - 1).sum()
+    path_distance = first_leg + later_legs
+    efficiency = impulse_values.abs() / path_distance.replace(0, np.nan)
+    maximum_quote_intensity = values["quote_intensity_ratio"].rolling(impulse_bars).max()
+    in_hours = (values["hour_utc"] >= int(family["decision_start_hour_utc"])) & (
+        values["hour_utc"] < int(family["decision_end_hour_utc"])
+    )
+    eligible = (
+        _finite_signal_mask(values)
+        & contiguous
+        & in_hours
+        & (impulse_values.abs() >= float(family["minimum_impulse_atr"]) * values["atr"])
+        & (efficiency >= float(family["minimum_impulse_efficiency"]))
+        & (
+            maximum_quote_intensity
+            >= float(family["minimum_impulse_quote_intensity_ratio"])
+        )
+    )
+    end_indices = np.flatnonzero(eligible.to_numpy(dtype=bool))
+    end_indices = end_indices[end_indices < len(values) - 1]
+    for end_index in end_indices:
         impulse_rows = values.iloc[end_index - impulse_bars + 1 : end_index + 1]
-        if not _contiguous(impulse_rows):
-            continue
         end_row = impulse_rows.iloc[-1]
-        if not _finite_signal_row(end_row) or not _in_hours(end_row, family):
-            continue
-        start_price = float(impulse_rows.iloc[0]["mid_open"])
+        start_price = float(start_open.iloc[end_index])
         end_price = float(end_row["mid_close"])
         impulse = end_price - start_price
-        atr = float(end_row["atr"])
-        path = [start_price, *[float(value) for value in impulse_rows["mid_close"]]]
-        path_distance = float(np.abs(np.diff(path)).sum())
-        efficiency = abs(impulse) / path_distance if path_distance > 0 else 0.0
-        if (
-            abs(impulse) < float(family["minimum_impulse_atr"]) * atr
-            or efficiency < float(family["minimum_impulse_efficiency"])
-            or float(impulse_rows["quote_intensity_ratio"].max())
-            < float(family["minimum_impulse_quote_intensity_ratio"])
-        ):
-            continue
         direction = "SHORT" if impulse > 0 else "LONG"
         midpoint = start_price + float(family["minimum_retrace_fraction"]) * impulse
         event_id = f"shock:{int(end_row['timestamp_ms'])}:{direction}"
@@ -761,6 +799,19 @@ def _finite_signal_row(row: Mapping[str, Any]) -> bool:
             "tick_spread_last",
         )
     ) and float(row["atr"]) > 0
+
+
+def _finite_signal_mask(frame: pd.DataFrame) -> pd.Series:
+    columns = (
+        "atr",
+        "atr_ratio",
+        "tick_imbalance_5m",
+        "tick_imbalance_15m",
+        "quote_intensity_ratio",
+        "tick_spread_last",
+    )
+    values = frame.loc[:, columns].to_numpy(dtype=float)
+    return pd.Series(np.isfinite(values).all(axis=1) & (values[:, 0] > 0), index=frame.index)
 
 
 def _contiguous(frame: pd.DataFrame) -> bool:
