@@ -1,0 +1,203 @@
+{
+  "schema_version": "a3_ml_dukascopy_confirmed_event_specialists_v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "external_output_subdirectory": "research/xau-confirmed-event-specialists-v1",
+  "symbol": "XAUUSD",
+  "period": {
+    "start_month": "2016-07",
+    "end_month": "2026-06",
+    "expected_months": 120
+  },
+  "windows": {
+    "train_start_utc": "2016-07-01T00:00:00Z",
+    "train_end_exclusive_utc": "2020-07-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2022-07-01T00:00:00Z",
+    "internal_test_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "exam_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "prospective_holdout_start_utc": "2026-07-01T00:00:00Z"
+  },
+  "source_lock": [
+    {
+      "path": "outputs/reports/A3_ML_DUKASCOPY_COMPRESSION_BREAKOUT_REPORT.json",
+      "sha256": "cd0ea667d055ddda9e1f24a7163077331f87bdd5d2e66b4623491de4fc11bad4"
+    },
+    {
+      "path": "outputs/reports/A3_ML_DUKASCOPY_SESSION_CAMPAIGN_REPORT.json",
+      "sha256": "941729ff515a5e71484981508614ae1373c7a5b6684dc85190c34eeb033a48fe"
+    },
+    {
+      "path": "outputs/reports/A3_ML_DUKASCOPY_MICROSTRUCTURE_REGIME_V1_REPORT.json",
+      "sha256": "85cf58e934851fc1650ef52832eb5924fed843d7d129d7db561d07805424955c"
+    },
+    {
+      "path": "docs/A1_XAU_M5_REGIME_SPECIALIST_CAMPAIGN_VERDICT_2026_07_13.json",
+      "sha256": "5d143cb301d3187812bc11ef4a6d77d11a26eb0dfefc3727e45d692c8d822ce5"
+    }
+  ],
+  "aggregation": {
+    "timeframe_minutes": 5,
+    "minimum_tick_count": 10,
+    "atr_period_bars": 14,
+    "atr_baseline_bars": 288,
+    "quote_intensity_baseline_bars": 288,
+    "external_bar_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "external_bar_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json"
+  },
+  "families": [
+    {
+      "family_id": "session_boundary_sweep_reclaim_v1",
+      "mechanism": "SESSION_BOUNDARY_SWEEP_RECLAIM",
+      "profiles": [
+        {
+          "profile_id": "LONDON_ASIA",
+          "reference_start_hour_utc": 0,
+          "reference_end_hour_utc": 6,
+          "decision_start_hour_utc": 6,
+          "decision_end_hour_utc": 10
+        },
+        {
+          "profile_id": "NEW_YORK_LONDON",
+          "reference_start_hour_utc": 6,
+          "reference_end_hour_utc": 12,
+          "decision_start_hour_utc": 12,
+          "decision_end_hour_utc": 16
+        }
+      ],
+      "minimum_reference_bars": 60,
+      "minimum_sweep_atr": 0.1,
+      "minimum_reclaim_atr": 0.05,
+      "minimum_wick_fraction": 0.35,
+      "minimum_directional_tick_imbalance_5m": 0.05,
+      "minimum_directional_tick_imbalance_15m": 0.03,
+      "minimum_quote_intensity_ratio": 0.8,
+      "stop_buffer_atr": 0.1,
+      "minimum_stop_atr": 0.35,
+      "maximum_stop_atr": 1.5,
+      "reward_r": 1.5,
+      "maximum_hold_hours": 4,
+      "maximum_one_trade_per_profile_side_day": true
+    },
+    {
+      "family_id": "compression_break_retest_v1",
+      "mechanism": "COMPRESSION_BREAK_RETEST",
+      "decision_start_hour_utc": 6,
+      "decision_end_hour_utc": 18,
+      "compression_lookback_bars": 12,
+      "maximum_compression_range_atr": 2.0,
+      "maximum_atr_ratio": 0.85,
+      "minimum_breakout_atr": 0.1,
+      "minimum_breakout_body_fraction": 0.5,
+      "minimum_breakout_efficiency": 0.5,
+      "minimum_breakout_quote_intensity_ratio": 1.0,
+      "minimum_retest_close_atr": 0.05,
+      "maximum_retest_distance_atr": 0.1,
+      "minimum_directional_tick_imbalance_5m": 0.05,
+      "retest_window_bars": 3,
+      "stop_buffer_atr": 0.1,
+      "minimum_stop_atr": 0.35,
+      "maximum_stop_atr": 1.5,
+      "reward_r": 2.0,
+      "maximum_hold_hours": 6,
+      "event_cooldown_minutes": 60
+    },
+    {
+      "family_id": "shock_failure_reclaim_v1",
+      "mechanism": "SHOCK_FAILURE_RECLAIM",
+      "decision_start_hour_utc": 6,
+      "decision_end_hour_utc": 18,
+      "impulse_bars": 3,
+      "minimum_impulse_atr": 1.5,
+      "minimum_impulse_efficiency": 0.6,
+      "minimum_impulse_quote_intensity_ratio": 1.5,
+      "minimum_retrace_fraction": 0.5,
+      "minimum_directional_tick_imbalance_5m": 0.05,
+      "confirmation_window_bars": 6,
+      "stop_buffer_atr": 0.1,
+      "minimum_stop_atr": 0.35,
+      "maximum_stop_atr": 1.5,
+      "reward_r": 1.5,
+      "maximum_hold_hours": 3,
+      "event_cooldown_minutes": 60
+    }
+  ],
+  "execution": {
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_initial_risk_usd": 50.0,
+    "maximum_entry_delay_minutes": 5,
+    "maximum_timeout_exit_grace_hours": 24,
+    "maximum_entry_spread_r": 0.15,
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "same_tick_collision_policy": "FIRST_EXECUTABLE_TOUCH"
+  },
+  "family_train_gates": {
+    "minimum_trades": 160,
+    "minimum_trades_each_direction": 30,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_average_stress_r": 0.02,
+    "minimum_positive_exit_month_share": 0.5,
+    "maximum_closed_drawdown_r": 30.0,
+    "require_top_ten_winners_removed_net_positive": true
+  },
+  "validation_gates": {
+    "minimum_trades": 60,
+    "minimum_trades_each_direction": 15,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_average_stress_r": 0.03,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 18.0,
+    "require_top_five_winners_removed_net_positive": true
+  },
+  "internal_test_gates": {
+    "minimum_trades": 60,
+    "minimum_trades_each_direction": 15,
+    "minimum_stress_profit_factor": 1.25,
+    "minimum_average_stress_r": 0.04,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 15.0,
+    "require_top_five_winners_removed_net_positive": true
+  },
+  "exam_gates": {
+    "minimum_trades": 60,
+    "minimum_trades_each_direction": 15,
+    "minimum_trades_per_source_day": 0.12,
+    "minimum_stress_profit_factor": 1.3,
+    "minimum_average_stress_r": 0.05,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 15.0,
+    "require_top_five_winners_removed_net_positive": true
+  },
+  "portfolio_gates": {
+    "maximum_concurrent_trades": 2,
+    "maximum_trades_per_utc_day": 4,
+    "minimum_exam_trades_per_source_day": 0.35,
+    "minimum_exam_stress_profit_factor": 1.3,
+    "minimum_exam_average_stress_r": 0.05,
+    "maximum_exam_closed_drawdown_r": 20.0,
+    "maximum_top_episode_profit_share": 0.35,
+    "require_top_three_episodes_removed_net_positive": true
+  },
+  "outputs": {
+    "candidates_csv": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_CANDIDATES.csv",
+    "labels_csv": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_LABELS.csv",
+    "family_metrics_csv": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_FAMILY_METRICS.csv",
+    "portfolio_trades_csv": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_PORTFOLIO_TRADES.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_REPORT.md"
+  },
+  "research_controls": {
+    "parameter_grid_search_authorized": false,
+    "same_iteration_post_outcome_tuning_authorized": false,
+    "exam_requires_train_validation_and_internal_test_pass": true,
+    "known_program_level_history_contamination": true,
+    "claims_untouched_holdout": false
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
