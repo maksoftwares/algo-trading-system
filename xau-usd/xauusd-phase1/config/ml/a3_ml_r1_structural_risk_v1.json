@@ -30,6 +30,7 @@
   "account": {
     "initial_balance_usd": 10000.0,
     "leverage": 50.0,
+    "server_utc_offset_hours": 4,
     "contract_size_ounces_per_lot": 100.0,
     "lot_size": 0.01,
     "margin_call_level_pct": 100.0
