@@ -15,7 +15,7 @@ The preregistered exam classification is `PORTABILITY_FAIL`.
 The frozen result is identified by:
 
 - inventory JSON SHA256: `7b9401496ec67bf55ef1aac223e856c71f3e73bb73889bd43aeee32cff51b2d1`
-- portability JSON SHA256: `5bda423ed76a1c146e4f88b581bfaafe0ec85fb9593524a41e42eaf66d33e3a1f`
+- portability JSON SHA256: `5bda423ed76a1c146e4f88b581bfafe0ec85fb9593524a41e42eaf66d33e3a1f`
 - selected-label CSV SHA256: `618cbdc4dc9bdc1e7b49366370b70d5015a18ccc44a7e82827e9cd70025f8fee`
 
 ## Data Integrity
