@@ -17,6 +17,11 @@
     "end_exclusive_utc": "2026-07-01T00:00:00Z",
     "expected_months_per_instrument": 90
   },
+  "xau_active_day_reference": {
+    "feature_path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "feature_rows": 708538
+  },
   "instruments": [
     {
       "symbol": "DOLLARIDXUSD",

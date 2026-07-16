@@ -29,6 +29,10 @@ Dollar-index tick metadata starts on 2017-12-01. The T-Bond minute history begin
 2018-12-18, and direct hourly probes show active ticks in 2019. The locked common
 window is therefore 2019-01-01 through 2026-06-30, 90 calendar months per instrument.
 
+The activity comparison uses the already verified 708,538-row XAUUSD M5 Bid/Ask
+feature artifact with SHA256
+`e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228`.
+
 ## Acquisition
 
 Every calendar hour is requested from the official HTTPS Jetta endpoint. Raw JSON
