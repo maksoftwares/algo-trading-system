@@ -1,0 +1,119 @@
+{
+  "schema_version": "a3_ml_r1_r2_dukascopy_portability_v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "external_output_subdirectory": "research/xau-r1-r2-portability-v1",
+  "symbol": "XAUUSD",
+  "period": {
+    "start_month": "2016-07",
+    "end_month": "2026-06",
+    "expected_months": 120
+  },
+  "windows": {
+    "historical_backcast_start_utc": "2016-07-01T00:00:00Z",
+    "historical_backcast_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "recent_cross_feed_start_utc": "2024-07-01T00:00:00Z",
+    "recent_cross_feed_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "prospective_holdout_start_utc": "2026-07-01T00:00:00Z"
+  },
+  "source_lock": [
+    {
+      "path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "c590adabc92fe4b63dac22812e4ac9a12882b23b6ed8242848470f90fd01e265"
+    },
+    {
+      "path": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_MT5.json",
+      "sha256": "def6a0609b201fde0fd3f8c80d8e12aa3b599588865e71d7855b412838fcb4ff"
+    },
+    {
+      "path": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_TRADES.csv",
+      "sha256": "d942ee867aec2fe7cf5b49b02a059b598b15ce98130b9c46c230b72d4e8e552c"
+    },
+    {
+      "path": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+      "sha256": "7a8647795ec8c6bca3124aa8b0a4a5a5e9d9abce96b3f0fcd5116911eb51f861"
+    },
+    {
+      "path": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv",
+      "sha256": "560a4e77b15548b1d5dbb2a356625920f4531c03d5f0f07ceabd6636213d90e1"
+    },
+    {
+      "path": "docs/A1_XAU_R1_BOX_CLEAN_REQUALIFICATION_EXACT_PREREG_2026_07_10.md",
+      "sha256": "e05a38dfe66b83fdcc9b4f2e015f21b57cac5016c3d7fc0b5b824c56b5058f3f"
+    },
+    {
+      "path": "docs/A1_XAU_R2_PULLBACK_REJECTION_SHORT_V1_PREREG_2026_07_08.md",
+      "sha256": "d30c883b5c6f0113d7249f1233acf3c8d0f8dfe605c113f468f9d4b19cf9c057"
+    }
+  ],
+  "mt5_effective_input_contract": {
+    "report_path": "outputs/reports/A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_MT5.json",
+    "common": {
+      "InpFixedLots": "0.01",
+      "InpUseRiskNormalizedLots": "false",
+      "InpMaxSpreadPoints": "75",
+      "InpMaxEstimatedCostR": "0.15",
+      "InpOnePositionPerMagic": "false",
+      "InpCooldownMinutes": "0",
+      "InpStopAtrMultiple": "2.50",
+      "InpStopFloorPoints": "350",
+      "InpRiskReward": "2.00",
+      "InpPortfolioDailyGuardEnabled": "false"
+    },
+    "variants": {
+      "r1_box_clean_strict_uptrend": {
+        "InpSignalMode": "7",
+        "InpDirectionMode": "1",
+        "InpRegimeRouterMode": "1",
+        "InpH4D1SupportiveStateGuardEnabled": "true",
+        "InpMaxTradesPerDay": "6",
+        "InpMaxOpenPositionsPerMagic": "32",
+        "InpStopCeilingPoints": "0",
+        "InpD1CompressionAtrPercentileMax": "80.00",
+        "InpD1CompressionBoxDays": "2",
+        "InpD1CompressionRangeMedianMax": "1.50",
+        "InpD1CompressionH4MinBodyFraction": "0.35"
+      },
+      "r2_pullback_short_h1_confirm": {
+        "InpSignalMode": "21",
+        "InpDirectionMode": "2",
+        "InpRegimeRouterMode": "2",
+        "InpH4D1SupportiveStateGuardEnabled": "false",
+        "InpMaxTradesPerDay": "12",
+        "InpMaxOpenPositionsPerMagic": "8",
+        "InpStopCeilingPoints": "2200",
+        "InpR2PullbackConfirmTimeframe": "60",
+        "InpR2PullbackLookbackBars": "3",
+        "InpD1CompressionAtrPercentileMax": "30.0",
+        "InpD1CompressionBoxDays": "5",
+        "InpD1CompressionRangeMedianMax": "1.0",
+        "InpD1CompressionH4MinBodyFraction": "0.5"
+      }
+    }
+  },
+  "portability_gates": {
+    "require_all_120_months_valid": true,
+    "require_no_parameter_changes": true,
+    "minimum_portfolio_stress_profit_factor_each_window": 1.2,
+    "minimum_specialist_stress_profit_factor_each_window": 1.05,
+    "require_each_specialist_stress_net_positive_each_window": true,
+    "minimum_positive_calendar_year_share": 0.6,
+    "minimum_positive_six_month_block_share": 0.65,
+    "maximum_top_episode_profit_share": 0.35,
+    "require_top_three_episodes_removed_net_positive": true,
+    "maximum_closed_drawdown_to_net_ratio": 0.5,
+    "maximum_candidate_timestamp_median_delta_minutes": 60,
+    "minimum_candidate_count_ratio_to_mt5": 0.5,
+    "maximum_candidate_count_ratio_to_mt5": 2.0
+  },
+  "outputs": {
+    "inventory_json": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_SOURCE_INVENTORY_V1.json",
+    "inventory_markdown": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_SOURCE_INVENTORY_V1.md"
+  },
+  "authorization": {
+    "research_only": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
