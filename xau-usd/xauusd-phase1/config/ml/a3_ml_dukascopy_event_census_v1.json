@@ -1,0 +1,214 @@
+{
+  "schema_version": "a3_ml_dukascopy_event_census_v1",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "symbol": "XAUUSD",
+  "source_lock": {
+    "report_path": "outputs/reports/A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_REPORT.json",
+    "report_sha256": "689763a8654c429f112c3322bc68cf3a1c678a7d55b904354deeca3297847cb3",
+    "feature_path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "feature_rows": 708538,
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+  },
+  "windows": {
+    "train_start_utc": "2016-07-01T00:00:00Z",
+    "train_end_exclusive_utc": "2020-07-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2022-07-01T00:00:00Z",
+    "internal_test_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "exam_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "prospective_holdout_start_utc": "2026-07-01T00:00:00Z"
+  },
+  "context": {
+    "ema_fast_bars": 12,
+    "ema_slow_bars": 48,
+    "ema_slope_lag_bars": 3,
+    "trend_gap_atr": 0.2,
+    "volatility_bins": {
+      "LOW_MAX_EXCLUSIVE": 0.8,
+      "NORMAL_MAX_EXCLUSIVE": 1.2
+    },
+    "sessions_utc": {
+      "ASIA": [0, 6],
+      "LONDON": [6, 12],
+      "NEW_YORK": [12, 18],
+      "OFF_HOURS": [18, 24]
+    }
+  },
+  "event_families": [
+    {
+      "family_id": "trend_pullback_resumption_v1",
+      "mechanism": "TREND_PULLBACK_RESUMPTION",
+      "minimum_trend_gap_atr": 0.25,
+      "minimum_directional_return_60m_atr": 0.75,
+      "require_fast_ema_touch_and_reclaim": true,
+      "cooldown_minutes_per_direction": 30
+    },
+    {
+      "family_id": "session_opening_drive_v1",
+      "mechanism": "SESSION_OPENING_DRIVE",
+      "profiles": [
+        {"profile_id": "LONDON", "start_hour_utc": 6},
+        {"profile_id": "NEW_YORK", "start_hour_utc": 12}
+      ],
+      "opening_bars": 6,
+      "minimum_drive_atr": 0.75,
+      "minimum_drive_efficiency": 0.55,
+      "minimum_mean_quote_intensity_ratio": 1.0
+    },
+    {
+      "family_id": "session_range_break_v1",
+      "mechanism": "SESSION_RANGE_BREAK",
+      "profiles": [
+        {
+          "profile_id": "LONDON_ASIA",
+          "reference_start_hour_utc": 0,
+          "reference_end_hour_utc": 6,
+          "decision_start_hour_utc": 6,
+          "decision_end_hour_utc": 10
+        },
+        {
+          "profile_id": "NEW_YORK_LONDON",
+          "reference_start_hour_utc": 6,
+          "reference_end_hour_utc": 12,
+          "decision_start_hour_utc": 12,
+          "decision_end_hour_utc": 16
+        }
+      ],
+      "minimum_reference_bars": 60,
+      "minimum_close_outside_atr": 0.05,
+      "minimum_body_fraction": 0.35,
+      "minimum_directional_tick_imbalance_5m": 0.03,
+      "maximum_one_event_per_profile_side_day": true
+    },
+    {
+      "family_id": "volatility_expansion_break_v1",
+      "mechanism": "VOLATILITY_EXPANSION_BREAK",
+      "compression_lookback_bars": 12,
+      "maximum_prior_range_atr": 2.5,
+      "maximum_atr_ratio": 1.0,
+      "minimum_close_outside_atr": 0.05,
+      "minimum_body_fraction": 0.35,
+      "minimum_quote_intensity_ratio": 0.8,
+      "cooldown_minutes_per_direction": 60
+    }
+  ],
+  "entry": {
+    "maximum_delay_bars": 1,
+    "require_next_contiguous_m5_bar": true,
+    "maximum_entry_spread_atr": 0.15,
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "forward_labels": {
+    "horizons_minutes": [30, 60, 120, 240],
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "same_bar_collision_policy": "STOP_FIRST",
+    "barrier_profiles": [
+      {
+        "profile_id": "stop_0p50_target_0p75_h120",
+        "stop_atr": 0.5,
+        "target_atr": 0.75,
+        "maximum_horizon_minutes": 120
+      },
+      {
+        "profile_id": "stop_0p75_target_1p125_h240",
+        "stop_atr": 0.75,
+        "target_atr": 1.125,
+        "maximum_horizon_minutes": 240
+      },
+      {
+        "profile_id": "stop_1p00_target_1p50_h240",
+        "stop_atr": 1.0,
+        "target_atr": 1.5,
+        "maximum_horizon_minutes": 240
+      }
+    ]
+  },
+  "selection": {
+    "hypothesis_keys": ["family_id", "direction"],
+    "diagnostic_only_context_keys": [
+      "profile_id",
+      "session_utc",
+      "volatility_bin",
+      "trend_alignment"
+    ],
+    "maximum_family_direction_hypotheses": 8,
+    "train_select_one_barrier_profile": true,
+    "train_profile_tiebreak_order": [
+      "bootstrap_mean_stress_r_p025_desc",
+      "stress_profit_factor_desc",
+      "profile_id_asc"
+    ],
+    "calendar_month_bootstrap_samples": 2000,
+    "bootstrap_seed": 20260716,
+    "family_direction_train_gates": {
+      "minimum_events": 200,
+      "minimum_events_each_direction_is_not_applicable": true,
+      "minimum_stress_profit_factor": 1.1,
+      "minimum_average_stress_r": 0.02,
+      "minimum_positive_exit_month_share": 0.5,
+      "maximum_closed_drawdown_r": 35.0,
+      "require_top_ten_winners_removed_net_positive": true,
+      "require_bootstrap_mean_stress_r_p025_above_zero": true
+    },
+    "validation_gates": {
+      "minimum_events": 80,
+      "minimum_stress_profit_factor": 1.15,
+      "minimum_average_stress_r": 0.02,
+      "minimum_positive_exit_month_share": 0.5,
+      "maximum_closed_drawdown_r": 25.0,
+      "require_top_five_winners_removed_net_positive": true
+    },
+    "internal_test_gates": {
+      "minimum_events": 80,
+      "minimum_stress_profit_factor": 1.2,
+      "minimum_average_stress_r": 0.03,
+      "minimum_positive_exit_month_share": 0.55,
+      "maximum_closed_drawdown_r": 20.0,
+      "require_top_five_winners_removed_net_positive": true
+    },
+    "exam_gates": {
+      "minimum_events": 80,
+      "minimum_events_per_source_day": 0.12,
+      "minimum_stress_profit_factor": 1.25,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_exit_month_share": 0.55,
+      "maximum_closed_drawdown_r": 20.0,
+      "require_top_five_winners_removed_net_positive": true
+    }
+  },
+  "quality_gates": {
+    "feature_rows_equal_source_lock": true,
+    "feature_hash_equal_source_lock": true,
+    "minimum_labeled_event_share": 0.99,
+    "event_ids_unique": true,
+    "event_keys_unique": true,
+    "events_chronological": true
+  },
+  "outputs": {
+    "events_csv": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_EVENTS.csv",
+    "horizon_labels_csv": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_HORIZON_LABELS.csv",
+    "barrier_labels_csv": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_BARRIER_LABELS.csv",
+    "policy_metrics_csv": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_POLICY_METRICS.csv",
+    "context_metrics_csv": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_CONTEXT_METRICS.csv",
+    "report_json": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_DUKASCOPY_EVENT_CENSUS_V1_REPORT.md"
+  },
+  "research_controls": {
+    "parameter_grid_search_authorized": false,
+    "diagnostic_context_promotion_authorized": false,
+    "same_iteration_post_outcome_tuning_authorized": false,
+    "known_program_level_history_contamination": true,
+    "claims_untouched_holdout": false
+  },
+  "authorization": {
+    "research_only": true,
+    "specialist_hypothesis_authorized_if_all_gates_pass": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
