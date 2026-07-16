@@ -1,0 +1,619 @@
+{
+  "artifacts": {
+    "candidates_csv": {
+      "bytes": 76136,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_CANDIDATES.csv",
+      "sha256": "598aaffa8ab4739d65b3a2b8a651d72e5ddb1d707e97fc94a8c497d3bf2ffc9c"
+    },
+    "family_metrics_csv": {
+      "bytes": 3568,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_FAMILY_METRICS.csv",
+      "sha256": "95ac862c6331802f0280a2619ea59aee6e3815eb906d00fdf21dec6977f58e9c"
+    },
+    "labels_csv": {
+      "bytes": 128144,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_LABELS.csv",
+      "sha256": "c662f659f66bf2e2670d3ae8ce6953e98c6659ffa43afefaa7d46599e45776da"
+    },
+    "portfolio_trades_csv": {
+      "bytes": 0,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_CONFIRMED_EVENT_SPECIALISTS_V1_PORTFOLIO_TRADES.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_or_live_authorized": false,
+    "ea_consumption_authorized": false,
+    "forward_shadow_candidate": false,
+    "python_demo_predictions_authorized": false,
+    "research_only": true,
+    "strategy_promotion_authorized": false
+  },
+  "candidate_count": 149,
+  "candidate_counts_by_family": {
+    "session_boundary_sweep_reclaim_v1": 36,
+    "shock_failure_reclaim_v1": 113
+  },
+  "classification": "NO_TRAIN_FAMILY_SURVIVOR",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_confirmed_event_specialists_v1.json",
+  "contract_sha256": "7e6c6f1f3f61f33d4cec2a7faafdd183e70ae8de31bf44f8e45ba8161e111530",
+  "created_at_utc": "2026-07-16T12:44:25.122203Z",
+  "family_results": {
+    "compression_break_retest_v1": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false,
+          "trades_per_source_day_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "long_trades": 0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "positive_exit_months": 0,
+          "short_trades": 0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "trades": 0,
+          "trades_per_source_day": 0.0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "long_trades": 0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "positive_exit_months": 0,
+          "short_trades": 0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "trades": 0,
+          "trades_per_source_day": 0.0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "train": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "long_trades": 0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "positive_exit_months": 0,
+          "short_trades": 0,
+          "source_days": 1244,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "trades": 0,
+          "trades_per_source_day": 0.0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": true,
+        "passed": false
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "long_trades": 0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "positive_exit_months": 0,
+          "short_trades": 0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "trades": 0,
+          "trades_per_source_day": 0.0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "session_boundary_sweep_reclaim_v1": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false,
+          "trades_per_source_day_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 12,
+          "average_stress_r": -0.41623893972113285,
+          "long_trades": 14,
+          "max_closed_drawdown_r": 9.313369121787375,
+          "positive_exit_month_share": 0.3333333333333333,
+          "positive_exit_months": 4,
+          "short_trades": 5,
+          "source_days": 624,
+          "stress_net_r": -7.908539854701524,
+          "stress_net_usd": -74.9080404276638,
+          "stress_profit_factor": 0.4775679794959078,
+          "top_five_winners_removed_net_r": -15.137930954290686,
+          "top_ten_winners_removed_net_r": -15.137930954290686,
+          "trades": 19,
+          "trades_per_source_day": 0.030448717948717948,
+          "win_rate_pct": 26.31578947368421,
+          "wins": 5
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 3,
+          "average_stress_r": -0.4943484502443284,
+          "long_trades": 4,
+          "max_closed_drawdown_r": 2.1853129694057936,
+          "positive_exit_month_share": 0.3333333333333333,
+          "positive_exit_months": 1,
+          "short_trades": 0,
+          "source_days": 620,
+          "stress_net_r": -1.9773938009773135,
+          "stress_net_usd": -9.134808359953665,
+          "stress_profit_factor": 0.4079786154915077,
+          "top_five_winners_removed_net_r": -3.340071579709886,
+          "top_ten_winners_removed_net_r": -3.340071579709886,
+          "trades": 4,
+          "trades_per_source_day": 0.0064516129032258064,
+          "win_rate_pct": 25.0,
+          "wins": 1
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "train": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 3,
+          "average_stress_r": -1.1107157530068636,
+          "long_trades": 2,
+          "max_closed_drawdown_r": 3.3321472590205907,
+          "positive_exit_month_share": 0.0,
+          "positive_exit_months": 0,
+          "short_trades": 1,
+          "source_days": 1244,
+          "stress_net_r": -3.3321472590205907,
+          "stress_net_usd": -10.053489173611462,
+          "stress_profit_factor": 0.0,
+          "top_five_winners_removed_net_r": -3.3321472590205907,
+          "top_ten_winners_removed_net_r": -3.3321472590205907,
+          "trades": 3,
+          "trades_per_source_day": 0.002411575562700965,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": true,
+        "passed": false
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 3,
+          "average_stress_r": -0.615991909375689,
+          "long_trades": 1,
+          "max_closed_drawdown_r": 3.3222506187567538,
+          "positive_exit_month_share": 0.3333333333333333,
+          "positive_exit_months": 1,
+          "short_trades": 4,
+          "source_days": 621,
+          "stress_net_r": -3.0799595468784453,
+          "stress_net_usd": -9.71308169849503,
+          "stress_profit_factor": 0.3088400202967368,
+          "top_five_winners_removed_net_r": -4.456218006431404,
+          "top_ten_winners_removed_net_r": -4.456218006431404,
+          "trades": 5,
+          "trades_per_source_day": 0.008051529790660225,
+          "win_rate_pct": 20.0,
+          "wins": 1
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "shock_failure_reclaim_v1": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false,
+          "trades_per_source_day_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 18,
+          "average_stress_r": 0.03196171045085827,
+          "long_trades": 17,
+          "max_closed_drawdown_r": 8.65905913328314,
+          "positive_exit_month_share": 0.4444444444444444,
+          "positive_exit_months": 8,
+          "short_trades": 13,
+          "source_days": 624,
+          "stress_net_r": 0.9588513135257482,
+          "stress_net_usd": 19.972831037616103,
+          "stress_profit_factor": 1.054061796265866,
+          "top_five_winners_removed_net_r": -6.65130587938531,
+          "top_ten_winners_removed_net_r": -13.968918479729547,
+          "trades": 30,
+          "trades_per_source_day": 0.04807692307692308,
+          "win_rate_pct": 43.333333333333336,
+          "wins": 13
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": false,
+          "each_direction_ge_minimum": true,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 18,
+          "average_stress_r": -0.45214182536403613,
+          "long_trades": 20,
+          "max_closed_drawdown_r": 20.291940246545767,
+          "positive_exit_month_share": 0.3333333333333333,
+          "positive_exit_months": 6,
+          "short_trades": 17,
+          "source_days": 620,
+          "stress_net_r": -16.729247538469338,
+          "stress_net_usd": -52.139938229166425,
+          "stress_profit_factor": 0.40032611666079104,
+          "top_five_winners_removed_net_r": -23.874485121899447,
+          "top_ten_winners_removed_net_r": -27.897242156544515,
+          "trades": 37,
+          "trades_per_source_day": 0.05967741935483871,
+          "win_rate_pct": 27.027027027027028,
+          "wins": 10
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "train": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 11,
+          "average_stress_r": -0.7942893807646898,
+          "long_trades": 5,
+          "max_closed_drawdown_r": 13.313613455299262,
+          "positive_exit_month_share": 0.09090909090909091,
+          "positive_exit_months": 1,
+          "short_trades": 10,
+          "source_days": 1244,
+          "stress_net_r": -11.914340711470347,
+          "stress_net_usd": -50.51645677893477,
+          "stress_profit_factor": 0.20109082530265313,
+          "top_five_winners_removed_net_r": -14.913260591836227,
+          "top_ten_winners_removed_net_r": -14.913260591836227,
+          "trades": 15,
+          "trades_per_source_day": 0.012057877813504822,
+          "win_rate_pct": 13.333333333333334,
+          "wins": 2
+        },
+        "opened_for_decision": true,
+        "passed": false
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "each_direction_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false,
+          "trades_ge_minimum": false
+        },
+        "metrics": {
+          "active_exit_months": 16,
+          "average_stress_r": -0.1664727581336785,
+          "long_trades": 17,
+          "max_closed_drawdown_r": 11.028254401376788,
+          "positive_exit_month_share": 0.4375,
+          "positive_exit_months": 7,
+          "short_trades": 11,
+          "source_days": 621,
+          "stress_net_r": -4.6612372277429985,
+          "stress_net_usd": -14.517512020255053,
+          "stress_profit_factor": 0.7382528066331865,
+          "top_five_winners_removed_net_r": -11.850895587472518,
+          "top_ten_winners_removed_net_r": -17.53167188206824,
+          "trades": 28,
+          "trades_per_source_day": 0.04508856682769726,
+          "win_rate_pct": 39.285714285714285,
+          "wins": 11
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    }
+  },
+  "feature_cache": {
+    "columns": [
+      "timestamp_ms",
+      "xau_tick_count",
+      "xau_mid_tick_open",
+      "xau_mid_tick_close",
+      "tick_signed_move",
+      "tick_move_count",
+      "tick_realized_variance",
+      "tick_spread_mean",
+      "tick_spread_last",
+      "tick_spread_max",
+      "tick_book_imbalance_mean",
+      "tick_book_imbalance_last",
+      "tick_microprice_edge_mean",
+      "tick_microprice_edge_last",
+      "price_efficiency_5m",
+      "bid_open",
+      "bid_high",
+      "bid_low",
+      "bid_close",
+      "ask_open",
+      "ask_high",
+      "ask_low",
+      "ask_close",
+      "mid_open",
+      "mid_high",
+      "mid_low",
+      "mid_close",
+      "atr",
+      "atr_ratio",
+      "quote_intensity_ratio",
+      "tick_imbalance_5m",
+      "tick_imbalance_15m",
+      "body_fraction",
+      "close_location",
+      "date_utc",
+      "hour_utc"
+    ],
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "monthly_caches_reused": 0,
+    "monthly_caches_total": 120,
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+    "reused": true,
+    "rows": 708538,
+    "schema_version": "a3_ml_dukascopy_confirmed_event_m5_cache_v1",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+  },
+  "feature_rows": 708538,
+  "ineligible_reasons": {
+    "ENTRY_SPREAD_R": 8
+  },
+  "label_status_counts": {
+    "INELIGIBLE": 8,
+    "RESOLVED": 141
+  },
+  "limitations": [
+    "Every retrospective window has known program-level research contamination.",
+    "A survivor is limited to prospective forward shadow before demo consideration.",
+    "Shared-account floating equity, margin, and broker parity remain later gates."
+  ],
+  "portfolio": {
+    "by_segment": {
+      "exam": {
+        "active_exit_months": 0,
+        "average_stress_r": 0.0,
+        "long_trades": 0,
+        "max_closed_drawdown_r": 0.0,
+        "positive_exit_month_share": 0.0,
+        "positive_exit_months": 0,
+        "short_trades": 0,
+        "source_days": 624,
+        "stress_net_r": 0,
+        "stress_net_usd": 0,
+        "stress_profit_factor": null,
+        "top_five_winners_removed_net_r": 0,
+        "top_ten_winners_removed_net_r": 0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate_pct": 0.0,
+        "wins": 0
+      },
+      "internal_test": {
+        "active_exit_months": 0,
+        "average_stress_r": 0.0,
+        "long_trades": 0,
+        "max_closed_drawdown_r": 0.0,
+        "positive_exit_month_share": 0.0,
+        "positive_exit_months": 0,
+        "short_trades": 0,
+        "source_days": 620,
+        "stress_net_r": 0,
+        "stress_net_usd": 0,
+        "stress_profit_factor": null,
+        "top_five_winners_removed_net_r": 0,
+        "top_ten_winners_removed_net_r": 0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate_pct": 0.0,
+        "wins": 0
+      },
+      "train": {
+        "active_exit_months": 0,
+        "average_stress_r": 0.0,
+        "long_trades": 0,
+        "max_closed_drawdown_r": 0.0,
+        "positive_exit_month_share": 0.0,
+        "positive_exit_months": 0,
+        "short_trades": 0,
+        "source_days": 1244,
+        "stress_net_r": 0,
+        "stress_net_usd": 0,
+        "stress_profit_factor": null,
+        "top_five_winners_removed_net_r": 0,
+        "top_ten_winners_removed_net_r": 0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate_pct": 0.0,
+        "wins": 0
+      },
+      "validation": {
+        "active_exit_months": 0,
+        "average_stress_r": 0.0,
+        "long_trades": 0,
+        "max_closed_drawdown_r": 0.0,
+        "positive_exit_month_share": 0.0,
+        "positive_exit_months": 0,
+        "short_trades": 0,
+        "source_days": 621,
+        "stress_net_r": 0,
+        "stress_net_usd": 0,
+        "stress_profit_factor": null,
+        "top_five_winners_removed_net_r": 0,
+        "top_ten_winners_removed_net_r": 0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate_pct": 0.0,
+        "wins": 0
+      }
+    },
+    "exam_episode_metrics": {
+      "episodes": 0,
+      "maximum_trades_one_episode": 0,
+      "top_episode_profit_share": 0.0,
+      "top_three_episodes_removed_net_r": 0
+    },
+    "exam_gates": {
+      "average_r_ge_minimum": false,
+      "drawdown_r_lte_maximum": true,
+      "pf_ge_minimum": false,
+      "top_episode_share_lte_maximum": true,
+      "top_three_episodes_removed_positive": false,
+      "trades_per_source_day_ge_minimum": false
+    },
+    "selected_trades": 0
+  },
+  "quality_gates": {
+    "all_expected_months_valid": true,
+    "candidate_ids_unique": true,
+    "candidate_keys_unique": true,
+    "candidates_chronological": true,
+    "h1_source_reconciles": true,
+    "resolved_share_ge_minimum": true
+  },
+  "resolved_share": 1.0,
+  "schema_version": "a3_ml_dukascopy_confirmed_event_specialists_v1",
+  "source_days": {
+    "exam": 624,
+    "internal_test": 620,
+    "train": 1244,
+    "validation": 621
+  },
+  "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+  "source_months": 120,
+  "stage_survivors": {
+    "exam": [],
+    "internal_test": [],
+    "train": [],
+    "validation": []
+  },
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "unresolved_reasons": {}
+}
