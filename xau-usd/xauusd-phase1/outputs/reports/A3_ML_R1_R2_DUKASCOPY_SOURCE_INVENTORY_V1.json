@@ -1,20 +1,2329 @@
 {
-  "acquisition": null,
+  "acquisition": {
+    "after": {
+      "expected_months": 120,
+      "invalid_months": 0,
+      "missing_months": 0,
+      "ready": true,
+      "rows": [
+        {
+          "bytes": 87297691,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-07",
+          "partition_signature": "8cc139b097ee306bfd5975c077401b73b90568040bb6b24080b23d7e4a0a7c0d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 85880367,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-08",
+          "partition_signature": "4f61b0eb1c3097577bf896a87d2ffa94c6224fb959b66d5502abb69e3562c753",
+          "status": "VALID"
+        },
+        {
+          "bytes": 85499393,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2016-09",
+          "partition_signature": "57104a0d48027d81d56b5f34b3b702cffdae9aabea9a0b3a0e57853542d97629",
+          "status": "VALID"
+        },
+        {
+          "bytes": 67187361,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-10",
+          "partition_signature": "385b28dc4828410583549af93e13e34bfee371ea06c3300e3a31905c2d1b1001",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101704889,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2016-11",
+          "partition_signature": "0996fb197f7ccc1c2ec76a1a9d16aed6c437fe11be3ec9ebc8e7c81ff4a41368",
+          "status": "VALID"
+        },
+        {
+          "bytes": 72746990,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-12",
+          "partition_signature": "8ebd93935a2807d288af2609d3697737eb0d5c706ccce8500a92699e31d24424",
+          "status": "VALID"
+        },
+        {
+          "bytes": 86909976,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-01",
+          "partition_signature": "f64a894f3f0712ea07fe1736f0497719521fee01ff792a1d8c957e15e2c93ba0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88338473,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2017-02",
+          "partition_signature": "8c24bf30748e5a8ceabdd43dc1b906c87034ca1e401c4c7e35e2bdf5a51c78ad",
+          "status": "VALID"
+        },
+        {
+          "bytes": 92322054,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-03",
+          "partition_signature": "a3d3126298cb28d72fc175ab41ff9a161c145bdfca7fa3f883c7b377308ea54c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 71237445,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-04",
+          "partition_signature": "2f72e4519936b93537ee6936322432b28a0718e5589a5e796215c91ce6560888",
+          "status": "VALID"
+        },
+        {
+          "bytes": 77334364,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-05",
+          "partition_signature": "2ba1ad34eff8722c4b692f2f0e292ee59f6a8d7e2eaa4a74e8151744711cce08",
+          "status": "VALID"
+        },
+        {
+          "bytes": 71697451,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-06",
+          "partition_signature": "c66b3dd59362fe5a4a642c1827b15a43264590c282a4656ee5d52eecdcfc0fe2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 66325773,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-07",
+          "partition_signature": "8e41d01bfab1b9272ca5ad69f1873924988eba56e845e34e6984bc0b66a4d807",
+          "status": "VALID"
+        },
+        {
+          "bytes": 82646609,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-08",
+          "partition_signature": "9246764cf9ce7677c0a676488cf0813ce19c66a053255d0a31c0b54bb1dc14f1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 84103126,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-09",
+          "partition_signature": "e37d539d7eaf089df8e6bd429822a4ab91631607e9bfe6f3606fbe961f03d21b",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90364168,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-10",
+          "partition_signature": "b601ef5d0c6176b2c436adaad1014cd23675291b29afff051f943358910ebddb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 96494610,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-11",
+          "partition_signature": "26c74ddf27383378bd688bf5861c8c4afde48b32a6aef48294613933eeaa1576",
+          "status": "VALID"
+        },
+        {
+          "bytes": 84072436,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-12",
+          "partition_signature": "cfe50b3765a980a65099cee3a4fa71cc6e32f7f86a39c1cba664aca4a2feff08",
+          "status": "VALID"
+        },
+        {
+          "bytes": 100126639,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-01",
+          "partition_signature": "e4dfa98683f2877c722cef1a0022a401dfde0f3b372ca11f17b919df0319b1dd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 104003182,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2018-02",
+          "partition_signature": "98442b64a101800e6c7a37bf30583c8fc76d16e206e36be5b42f6954b59d724f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 79665963,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-03",
+          "partition_signature": "a721f95e40c3676756bdccdcde438bbdd35265b1a6b8074140de9c77f4004217",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56351997,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-04",
+          "partition_signature": "18ec71aab1412680d46746a872545b5091ca488d56a9789902b5da9c2c109dc2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 54368347,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-05",
+          "partition_signature": "e271ec7907501fcf3aa09b33fab300f38ab141d7a92cf13b5880cdb6d44ce2c7",
+          "status": "VALID"
+        },
+        {
+          "bytes": 50369458,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-06",
+          "partition_signature": "b8e5a035af66a41fa87b973095c75501b5c99716257eade090bb754bdf5ba40f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61820844,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-07",
+          "partition_signature": "d85dde47d9d23b6fce5dfad827392eaefd382358dd7ec378547d349e4931ac18",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63816503,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-08",
+          "partition_signature": "e27c6580cdee3cb9e87935df3b2681e175c9503f9a4ba4ba79a1a5c279b0cc55",
+          "status": "VALID"
+        },
+        {
+          "bytes": 52391064,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-09",
+          "partition_signature": "4d890e9cdbf6ace3dc464b6bb3cdb9961809e3df744b34a2b647780a0e909c3d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63843510,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-10",
+          "partition_signature": "dd1bf43267ebc92861493c4a6c766e8f9b4567d3f9d8481483cec56f7126b66f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 47003066,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-11",
+          "partition_signature": "60792679f197feee94d67c6e404eee1a79cf3e42b3553b097ae0cac14e43561c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 43185809,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-12",
+          "partition_signature": "b910f81213849b69e9e9afb5e6993f8c9fa169f4a226a3cef93bbda0400ac1d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 46193535,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-01",
+          "partition_signature": "3b8e5a2f6141db1ce851015fa9a7fb3cb8ad8323976ec23eedf4a07d4efcb10a",
+          "status": "VALID"
+        },
+        {
+          "bytes": 37970151,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2019-02",
+          "partition_signature": "7cfd5970c09028ee4838cc3dec90af8771952a4335f422242f87b80ef0a98a5e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 51040926,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-03",
+          "partition_signature": "5a746f7d87a6aef6b549b25e972e39b4da0a4de28b7cca73e5440693fffe0ada",
+          "status": "VALID"
+        },
+        {
+          "bytes": 42418961,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-04",
+          "partition_signature": "c287efdab24649f214db1a7fb51e1559a06c3201b12946a675a610accc6318d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56777522,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-05",
+          "partition_signature": "846825ca7dfe1a63307bb0a323aec756f90a3fd2718fce935362d4ba533eb3f2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76227998,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-06",
+          "partition_signature": "1428d2bb8d0bab83f879a87d6a7112e7b49c4ecd50aa14e2680b5910e4035da2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 78162962,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-07",
+          "partition_signature": "b89cedeb1cc9553b8c72d62fe726c4c476a6621be355148c5006af96703b58bb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103124784,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-08",
+          "partition_signature": "f142da049453ccfde9c643f956e692cbbb798ceec0308f8bb4a554467660211e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88328804,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-09",
+          "partition_signature": "63621f1801adb3dc2a2943b1661a64322b240ae563588672555a729a9c4b9ce2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99787417,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-10",
+          "partition_signature": "9f9469e9efb8fc8260bfbcadbebdedac815c44a356424f482438746c39fde877",
+          "status": "VALID"
+        },
+        {
+          "bytes": 64668821,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-11",
+          "partition_signature": "3f1f2be18eecb17326cffe957a344c1645e2e86f7a6ffafdded36c09d074b64c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 55966828,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-12",
+          "partition_signature": "75dd5293562b55a9e8e573f62c883205f7d52d77973607335f1449519f218101",
+          "status": "VALID"
+        },
+        {
+          "bytes": 87380964,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-01",
+          "partition_signature": "4acaa3e63b8af6c7dd6c3762b3ef96b888bdeb9f50ffb74df07c353e458e2906",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101414518,
+          "error": "",
+          "frozen": true,
+          "hour_files": 696,
+          "month": "2020-02",
+          "partition_signature": "480cdc543cbb0aaf8912f6622f318ff666b7ca19160e88f175a72207fc86cf80",
+          "status": "VALID"
+        },
+        {
+          "bytes": 146176092,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-03",
+          "partition_signature": "b417eb8bc8de1484efb2f3acf62de8cc44de84c7b26e573c123f840f22d9f086",
+          "status": "VALID"
+        },
+        {
+          "bytes": 83316203,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-04",
+          "partition_signature": "89dc057c3b2aaa0fe93604049058c3d1246db3b70ba6be87e3030d04c6a659a2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 91668866,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-05",
+          "partition_signature": "93284ef142765dc162bbc91be10752b0faf6e2940a6c3bfa99efe1c57c61bedd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99619431,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-06",
+          "partition_signature": "fd38b166596c0d883f55befdc4481fc094846c4ffea3eff159176e2d83c92078",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103340731,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-07",
+          "partition_signature": "75bdbce181a3b1d360834b20e7dcf98bad0fa89968902ff81c95251c7888d8c0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 131607067,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-08",
+          "partition_signature": "a7968c836a6638fbce991fd00cd5a5e891bb08d8e7b6032118aaffc7098c3c75",
+          "status": "VALID"
+        },
+        {
+          "bytes": 113005701,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-09",
+          "partition_signature": "2d335b266d633025bd5f57a85a8303d82d3e47b6d9fcf98cf3f60feba94a8585",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93220536,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-10",
+          "partition_signature": "0c73f8efb7c6d092c7de2ed21cb3331119952cc052c3a23b152363c7eecd368f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93322522,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-11",
+          "partition_signature": "e13c56150717959835d8f133856471605e8d8a3074babb7271de5adab026ba25",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80570052,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-12",
+          "partition_signature": "24c9da375c10557b3ccd965ce91e6140f2f82ee464fa06ee46fe380ad34b8d75",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103537635,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-01",
+          "partition_signature": "48a27c16eec6f3ed8bc322a0b700178edb2cebd7c56f41a377b7ace3724cdff6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 114712601,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2021-02",
+          "partition_signature": "187ae29e439e889dee03ddcdd3ef3ba8fe28910b14b100f1c3cfc5b811cdeb69",
+          "status": "VALID"
+        },
+        {
+          "bytes": 140620516,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-03",
+          "partition_signature": "108f240776798425c4cec4db00efdac48d1b2305a13ee989cd517dbc4b245bae",
+          "status": "VALID"
+        },
+        {
+          "bytes": 94699657,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-04",
+          "partition_signature": "884c4e468db3576e8f03fe0a3aa9ff177f7b1de1fdcee825d4c7f5348d79ef2e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103369905,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-05",
+          "partition_signature": "bb580dffe9c92f40015578f2a4db8bc627a2ff6d5143d6f4a6f1bc15d0efac43",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99644742,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-06",
+          "partition_signature": "68a294c8c1cceb7adaffdaf74863c6bcdeb74ec30b10c3315a6a0f0c3cfe48a9",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76557177,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-07",
+          "partition_signature": "2fa4d167299a6d83504c822726ae4e1f081cfaa63845cb71ae5e5d093ec756d0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76082075,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-08",
+          "partition_signature": "cea64be33df00a7d97e8df846eb7fd2eb9d7c447238d09e29e8afbb34a84c8e0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 94949590,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-09",
+          "partition_signature": "f1adf4f59c534a22417d9dd6177446ef76d6dab6d7984dcbb34ddd3d8b7137c1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90951642,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-10",
+          "partition_signature": "e9415d6d14585684c30159eaaefbb43957c075b1384bb8cfbc54aa64fa0e2f79",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90696193,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-11",
+          "partition_signature": "6bc64abe490351baca2bdfd2a145342eb31ec1253fe9a0eb4ae28d8c1a09b93b",
+          "status": "VALID"
+        },
+        {
+          "bytes": 75151030,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-12",
+          "partition_signature": "fb0c17660d34458dfc3d2c8b773bffb3d6f39ce89e07291b7def692fd79564d4",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88322935,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-01",
+          "partition_signature": "ad2d8b910c75fe8e5cbca8ce4b1bfae8bf46b4c4ce4f6dfec16ab319cb23bee1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 106567794,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2022-02",
+          "partition_signature": "6cd1f9339205db411854d6eaf4700e39f2e2917f77891686a6859db9b4e9b218",
+          "status": "VALID"
+        },
+        {
+          "bytes": 133509523,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-03",
+          "partition_signature": "f0bd2233305a74fa5f0a22680918c4250b7471b2c94dc1052e4280c536f764d8",
+          "status": "VALID"
+        },
+        {
+          "bytes": 102007813,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-04",
+          "partition_signature": "3a3d21117d6879388c46eb0a8ceb03725f0fd5e3d4b5de206d1cb9a5e8e85ac8",
+          "status": "VALID"
+        },
+        {
+          "bytes": 100861514,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-05",
+          "partition_signature": "13d8871dcb329845e023ecc292d1833e4ba9f2e612866601d68893fb9e1e22d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90173539,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-06",
+          "partition_signature": "9d895ed4479a3813e75739fb11ed2436f8c7fec0604b0081d57cbb340f55ffea",
+          "status": "VALID"
+        },
+        {
+          "bytes": 95444530,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-07",
+          "partition_signature": "5858284130afbd8299c069bd6b02bfe2d9a28c28e7c52de86b834d10e99532ec",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93398684,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-08",
+          "partition_signature": "254f420f6b645aa6e1303a0d313f37d17d26fc8db5db35473017358157074f4c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 109266900,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-09",
+          "partition_signature": "da66a05ce1deb4090332f498eb374524c511b4bc16af2803fd53a0afe1f196f0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 98231376,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-10",
+          "partition_signature": "f3710c5173ac14506c158a50fa7284dd2b9170f926aa44dcc8df4a504bcf6012",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80932825,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-11",
+          "partition_signature": "ca3eb26813a8fb4b1286a5be4a563a8dfc4cac2f3649e0fc21950f948a1f4d67",
+          "status": "VALID"
+        },
+        {
+          "bytes": 75358542,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-12",
+          "partition_signature": "d06f46df03b46bc635c7766af365d59254bd5d3f735806b67e58eb54548a3d82",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80405352,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-01",
+          "partition_signature": "97728927580295def92915502981a3f184b000baca257804965c9aef436fae69",
+          "status": "VALID"
+        },
+        {
+          "bytes": 72212888,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2023-02",
+          "partition_signature": "8c0eb12f60f77dead66240f4d696248eb6b46f03a93d163bf3607400b26688b7",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99464562,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-03",
+          "partition_signature": "da1fa2c7df77d3fd61d24da5bf182832801a6e29828f40014f4bc84f1db48078",
+          "status": "VALID"
+        },
+        {
+          "bytes": 65947929,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-04",
+          "partition_signature": "8b052f704da38b36613fd6006aea622c4ada3a7c3f55b32d775fd4810d7166ca",
+          "status": "VALID"
+        },
+        {
+          "bytes": 86946643,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-05",
+          "partition_signature": "e3ac3283394c4e62f0b1140261af449ceb9f7aaee3b151d0374a84c4cd9a3321",
+          "status": "VALID"
+        },
+        {
+          "bytes": 68899377,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-06",
+          "partition_signature": "842fc63a2f6d04f47afaebf984b2a1efd0f4fb43dff4ea6c1515bcec3f0df4d1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61489612,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-07",
+          "partition_signature": "6e8730ac1923c2f5b735863d15f45b5ab51cfd5ff534bea54dd915004d9a9cc3",
+          "status": "VALID"
+        },
+        {
+          "bytes": 53207600,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-08",
+          "partition_signature": "39c14b864174383caac2be3ce329b6204d55376792c58af3a27afa1fcc553932",
+          "status": "VALID"
+        },
+        {
+          "bytes": 42674971,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-09",
+          "partition_signature": "40e9431cd45b958177b61ca3b8d2513380b21817ef29212e0ac38fc29adc5fe9",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63675003,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-10",
+          "partition_signature": "3fc20046396975409bfd895b501e2fc8bfe71f5e1e068aca3a41f333219013ea",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56013621,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-11",
+          "partition_signature": "e04ceb07ad82baff7337a103c79b122b0c364ba2ee89db4042792c47a8e34b41",
+          "status": "VALID"
+        },
+        {
+          "bytes": 62031434,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-12",
+          "partition_signature": "542a59118d4097089068736025b19170fb991472670941f367cb564b9bda4739",
+          "status": "VALID"
+        },
+        {
+          "bytes": 68410430,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-01",
+          "partition_signature": "7381bf60cfefb0d12f4c039469c702b3db5af971d709e2edd6c2d997b2ddbcdc",
+          "status": "VALID"
+        },
+        {
+          "bytes": 47674229,
+          "error": "",
+          "frozen": true,
+          "hour_files": 696,
+          "month": "2024-02",
+          "partition_signature": "322e0ef84aa467ae0f320c03ae21dfd3b85bd4a3dfe1631369fbb40ab1d585e5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61276114,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-03",
+          "partition_signature": "c704823550388cea8218766d9b9860d0e160d306e937614dd7943402947674e1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 116035642,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-04",
+          "partition_signature": "74603b70aa00f18d6aa9abc6004498adaeb84f921627aa898986b5e41864279f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 111501897,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-05",
+          "partition_signature": "12e0ec1c3b1640994fdbcb4910377ab83bbbef173ac039ca3e28d254087b61c5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101863122,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-06",
+          "partition_signature": "b418be827fa17babb55397861a9bfe2b0a7a500160bdf8d181e459defffe7ec6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 123854475,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-07",
+          "partition_signature": "b1bd8a4ac4fade546dd031b4e88a1b322305442f7edb3eeab43a281915399024",
+          "status": "VALID"
+        },
+        {
+          "bytes": 131418209,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-08",
+          "partition_signature": "b68ce91931fedad581f2d24ddb0fdd93a7631a90c97fc28adc13bd4a0e26cb7d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 112130328,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-09",
+          "partition_signature": "e0413e9b13398d53222ca999f3be2cc997941369414d9ce06f25ed3f8cb8c52d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 121618544,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-10",
+          "partition_signature": "11d1e48ade770bb686ffba6dc5479b7612a4cd74ba97de3ee958a95c583eb6be",
+          "status": "VALID"
+        },
+        {
+          "bytes": 129870631,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-11",
+          "partition_signature": "08a5ea4b5847826195e483c501972a846dee8ef7934c306fabfadd61824e54dd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 111867045,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-12",
+          "partition_signature": "883c9a960029d656446f5e6897bf5c89eef6af34f6b8bf4e2ba6789de1da179f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 127872997,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-01",
+          "partition_signature": "fef292e22069da70a71424396234b119039c04627052de1c0672a18e9f0f27e2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 129434657,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2025-02",
+          "partition_signature": "9a3ebaa4e5b8eaf41d55e1ecdb6374de54db885f2d0141d70ce315deeea431e4",
+          "status": "VALID"
+        },
+        {
+          "bytes": 119323235,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-03",
+          "partition_signature": "821bba63109a7800b0eb3d7a732de0e89cae28eb219465dd380b3a09f167c0f6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 137797299,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2025-04",
+          "partition_signature": "8743e585dc4717b8c840c7ad071b7eb34433295d76399843fc917deb4a2b199a",
+          "status": "VALID"
+        },
+        {
+          "bytes": 119667387,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-05",
+          "partition_signature": "9ef84275b4035e2d4484155628c28bc01396598f6546a8e627861dffcf0593e4",
+          "status": "VALID"
+        },
+        {
+          "bytes": 106228643,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2025-06",
+          "partition_signature": "3788c431025c93f95449ba0ad88eb51c99ede96d468328eb72cb07d071f7a236",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93652448,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-07",
+          "partition_signature": "a619fbdc02cebecf5e9814d25ba9dfcd3dd6338c00222a7cc8183a543d2b6f49",
+          "status": "VALID"
+        },
+        {
+          "bytes": 96725460,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-08",
+          "partition_signature": "94d86b1f17cce998e77b1ac05e0cc745d858f8c4ff09d62e1f7aa1f658e6bc11",
+          "status": "VALID"
+        },
+        {
+          "bytes": 130568965,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2025-09",
+          "partition_signature": "1dbff083269b22748e2216bc2f320db792c48a6fda601b3bd1d5302d3cdc68ea",
+          "status": "VALID"
+        },
+        {
+          "bytes": 209166516,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-10",
+          "partition_signature": "b48e79139a25559535bbf67ae848b5d524fee263742a3c8063526a538aa63ebb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 148315740,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2025-11",
+          "partition_signature": "58f08d58a5847c58cb5605575d60d4459ef3c9b22bd7b827808d141390207fbb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 180188110,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-12",
+          "partition_signature": "05e9deb2303eb556efb060936c6bd12f4c5d3f96ffe794fd157713953bd96c93",
+          "status": "VALID"
+        },
+        {
+          "bytes": 206013988,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2026-01",
+          "partition_signature": "3215e72582ace85c42df08b879fed6f51afeac5ad150fd613e4e1fb53c65c6c7",
+          "status": "VALID"
+        },
+        {
+          "bytes": 169950516,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2026-02",
+          "partition_signature": "6bae38fa50d0323bcd8dac9c08f892d8d4ceddbdfd06d1fcc335312f1b5f4537",
+          "status": "VALID"
+        },
+        {
+          "bytes": 213997747,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2026-03",
+          "partition_signature": "e8639aea1ef37a9832cf545d79250138c1315114a614350b535960eaccf6eca9",
+          "status": "VALID"
+        },
+        {
+          "bytes": 169597057,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2026-04",
+          "partition_signature": "2017eee7f03a9e4155ebe7c43a8455fe6c0fb15baf8a00b6abf5b0b196db0a6a",
+          "status": "VALID"
+        },
+        {
+          "bytes": 186869379,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2026-05",
+          "partition_signature": "1a1484a2152aa2376f00b2b9df4decf1b1bb91571a7e4b9ecba096b98ccb6b62",
+          "status": "VALID"
+        },
+        {
+          "bytes": 185616390,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2026-06",
+          "partition_signature": "822cc6f459c5662e593ff13c36e1d9a71a2a9ecef72473d3e6e738866d8adda8",
+          "status": "VALID"
+        }
+      ],
+      "valid_months": 120
+    },
+    "attempts": [
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=05\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-05",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 720,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=06\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-06",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=07\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-07",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=08\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-08",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 720,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=09\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-09",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=10\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-10",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 720,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=11\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-11",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=12\\_ACQUISITION_MANIFEST.json",
+        "month": "2025-12",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=01\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-01",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 672,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=02\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-02",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=03\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-03",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 720,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=04\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-04",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 744,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=05\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-05",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      },
+      {
+        "downloaded_hours": 720,
+        "error": "",
+        "manifest": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2026\\month=06\\_ACQUISITION_MANIFEST.json",
+        "month": "2026-06",
+        "resumed_hours": 0,
+        "status": "ACQUIRED_VALID"
+      }
+    ],
+    "before": {
+      "expected_months": 120,
+      "invalid_months": 0,
+      "missing_months": 14,
+      "ready": false,
+      "rows": [
+        {
+          "bytes": 87297691,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-07",
+          "partition_signature": "8cc139b097ee306bfd5975c077401b73b90568040bb6b24080b23d7e4a0a7c0d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 85880367,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-08",
+          "partition_signature": "4f61b0eb1c3097577bf896a87d2ffa94c6224fb959b66d5502abb69e3562c753",
+          "status": "VALID"
+        },
+        {
+          "bytes": 85499393,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2016-09",
+          "partition_signature": "57104a0d48027d81d56b5f34b3b702cffdae9aabea9a0b3a0e57853542d97629",
+          "status": "VALID"
+        },
+        {
+          "bytes": 67187361,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-10",
+          "partition_signature": "385b28dc4828410583549af93e13e34bfee371ea06c3300e3a31905c2d1b1001",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101704889,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2016-11",
+          "partition_signature": "0996fb197f7ccc1c2ec76a1a9d16aed6c437fe11be3ec9ebc8e7c81ff4a41368",
+          "status": "VALID"
+        },
+        {
+          "bytes": 72746990,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2016-12",
+          "partition_signature": "8ebd93935a2807d288af2609d3697737eb0d5c706ccce8500a92699e31d24424",
+          "status": "VALID"
+        },
+        {
+          "bytes": 86909976,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-01",
+          "partition_signature": "f64a894f3f0712ea07fe1736f0497719521fee01ff792a1d8c957e15e2c93ba0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88338473,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2017-02",
+          "partition_signature": "8c24bf30748e5a8ceabdd43dc1b906c87034ca1e401c4c7e35e2bdf5a51c78ad",
+          "status": "VALID"
+        },
+        {
+          "bytes": 92322054,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-03",
+          "partition_signature": "a3d3126298cb28d72fc175ab41ff9a161c145bdfca7fa3f883c7b377308ea54c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 71237445,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-04",
+          "partition_signature": "2f72e4519936b93537ee6936322432b28a0718e5589a5e796215c91ce6560888",
+          "status": "VALID"
+        },
+        {
+          "bytes": 77334364,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-05",
+          "partition_signature": "2ba1ad34eff8722c4b692f2f0e292ee59f6a8d7e2eaa4a74e8151744711cce08",
+          "status": "VALID"
+        },
+        {
+          "bytes": 71697451,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-06",
+          "partition_signature": "c66b3dd59362fe5a4a642c1827b15a43264590c282a4656ee5d52eecdcfc0fe2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 66325773,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-07",
+          "partition_signature": "8e41d01bfab1b9272ca5ad69f1873924988eba56e845e34e6984bc0b66a4d807",
+          "status": "VALID"
+        },
+        {
+          "bytes": 82646609,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-08",
+          "partition_signature": "9246764cf9ce7677c0a676488cf0813ce19c66a053255d0a31c0b54bb1dc14f1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 84103126,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-09",
+          "partition_signature": "e37d539d7eaf089df8e6bd429822a4ab91631607e9bfe6f3606fbe961f03d21b",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90364168,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-10",
+          "partition_signature": "b601ef5d0c6176b2c436adaad1014cd23675291b29afff051f943358910ebddb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 96494610,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2017-11",
+          "partition_signature": "26c74ddf27383378bd688bf5861c8c4afde48b32a6aef48294613933eeaa1576",
+          "status": "VALID"
+        },
+        {
+          "bytes": 84072436,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2017-12",
+          "partition_signature": "cfe50b3765a980a65099cee3a4fa71cc6e32f7f86a39c1cba664aca4a2feff08",
+          "status": "VALID"
+        },
+        {
+          "bytes": 100126639,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-01",
+          "partition_signature": "e4dfa98683f2877c722cef1a0022a401dfde0f3b372ca11f17b919df0319b1dd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 104003182,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2018-02",
+          "partition_signature": "98442b64a101800e6c7a37bf30583c8fc76d16e206e36be5b42f6954b59d724f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 79665963,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-03",
+          "partition_signature": "a721f95e40c3676756bdccdcde438bbdd35265b1a6b8074140de9c77f4004217",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56351997,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-04",
+          "partition_signature": "18ec71aab1412680d46746a872545b5091ca488d56a9789902b5da9c2c109dc2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 54368347,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-05",
+          "partition_signature": "e271ec7907501fcf3aa09b33fab300f38ab141d7a92cf13b5880cdb6d44ce2c7",
+          "status": "VALID"
+        },
+        {
+          "bytes": 50369458,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-06",
+          "partition_signature": "b8e5a035af66a41fa87b973095c75501b5c99716257eade090bb754bdf5ba40f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61820844,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-07",
+          "partition_signature": "d85dde47d9d23b6fce5dfad827392eaefd382358dd7ec378547d349e4931ac18",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63816503,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-08",
+          "partition_signature": "e27c6580cdee3cb9e87935df3b2681e175c9503f9a4ba4ba79a1a5c279b0cc55",
+          "status": "VALID"
+        },
+        {
+          "bytes": 52391064,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-09",
+          "partition_signature": "4d890e9cdbf6ace3dc464b6bb3cdb9961809e3df744b34a2b647780a0e909c3d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63843510,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-10",
+          "partition_signature": "dd1bf43267ebc92861493c4a6c766e8f9b4567d3f9d8481483cec56f7126b66f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 47003066,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2018-11",
+          "partition_signature": "60792679f197feee94d67c6e404eee1a79cf3e42b3553b097ae0cac14e43561c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 43185809,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2018-12",
+          "partition_signature": "b910f81213849b69e9e9afb5e6993f8c9fa169f4a226a3cef93bbda0400ac1d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 46193535,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-01",
+          "partition_signature": "3b8e5a2f6141db1ce851015fa9a7fb3cb8ad8323976ec23eedf4a07d4efcb10a",
+          "status": "VALID"
+        },
+        {
+          "bytes": 37970151,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2019-02",
+          "partition_signature": "7cfd5970c09028ee4838cc3dec90af8771952a4335f422242f87b80ef0a98a5e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 51040926,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-03",
+          "partition_signature": "5a746f7d87a6aef6b549b25e972e39b4da0a4de28b7cca73e5440693fffe0ada",
+          "status": "VALID"
+        },
+        {
+          "bytes": 42418961,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-04",
+          "partition_signature": "c287efdab24649f214db1a7fb51e1559a06c3201b12946a675a610accc6318d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56777522,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-05",
+          "partition_signature": "846825ca7dfe1a63307bb0a323aec756f90a3fd2718fce935362d4ba533eb3f2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76227998,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-06",
+          "partition_signature": "1428d2bb8d0bab83f879a87d6a7112e7b49c4ecd50aa14e2680b5910e4035da2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 78162962,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-07",
+          "partition_signature": "b89cedeb1cc9553b8c72d62fe726c4c476a6621be355148c5006af96703b58bb",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103124784,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-08",
+          "partition_signature": "f142da049453ccfde9c643f956e692cbbb798ceec0308f8bb4a554467660211e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88328804,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-09",
+          "partition_signature": "63621f1801adb3dc2a2943b1661a64322b240ae563588672555a729a9c4b9ce2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99787417,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-10",
+          "partition_signature": "9f9469e9efb8fc8260bfbcadbebdedac815c44a356424f482438746c39fde877",
+          "status": "VALID"
+        },
+        {
+          "bytes": 64668821,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2019-11",
+          "partition_signature": "3f1f2be18eecb17326cffe957a344c1645e2e86f7a6ffafdded36c09d074b64c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 55966828,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2019-12",
+          "partition_signature": "75dd5293562b55a9e8e573f62c883205f7d52d77973607335f1449519f218101",
+          "status": "VALID"
+        },
+        {
+          "bytes": 87380964,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-01",
+          "partition_signature": "4acaa3e63b8af6c7dd6c3762b3ef96b888bdeb9f50ffb74df07c353e458e2906",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101414518,
+          "error": "",
+          "frozen": true,
+          "hour_files": 696,
+          "month": "2020-02",
+          "partition_signature": "480cdc543cbb0aaf8912f6622f318ff666b7ca19160e88f175a72207fc86cf80",
+          "status": "VALID"
+        },
+        {
+          "bytes": 146176092,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-03",
+          "partition_signature": "b417eb8bc8de1484efb2f3acf62de8cc44de84c7b26e573c123f840f22d9f086",
+          "status": "VALID"
+        },
+        {
+          "bytes": 83316203,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-04",
+          "partition_signature": "89dc057c3b2aaa0fe93604049058c3d1246db3b70ba6be87e3030d04c6a659a2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 91668866,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-05",
+          "partition_signature": "93284ef142765dc162bbc91be10752b0faf6e2940a6c3bfa99efe1c57c61bedd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99619431,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-06",
+          "partition_signature": "fd38b166596c0d883f55befdc4481fc094846c4ffea3eff159176e2d83c92078",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103340731,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-07",
+          "partition_signature": "75bdbce181a3b1d360834b20e7dcf98bad0fa89968902ff81c95251c7888d8c0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 131607067,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-08",
+          "partition_signature": "a7968c836a6638fbce991fd00cd5a5e891bb08d8e7b6032118aaffc7098c3c75",
+          "status": "VALID"
+        },
+        {
+          "bytes": 113005701,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-09",
+          "partition_signature": "2d335b266d633025bd5f57a85a8303d82d3e47b6d9fcf98cf3f60feba94a8585",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93220536,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-10",
+          "partition_signature": "0c73f8efb7c6d092c7de2ed21cb3331119952cc052c3a23b152363c7eecd368f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93322522,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2020-11",
+          "partition_signature": "e13c56150717959835d8f133856471605e8d8a3074babb7271de5adab026ba25",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80570052,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2020-12",
+          "partition_signature": "24c9da375c10557b3ccd965ce91e6140f2f82ee464fa06ee46fe380ad34b8d75",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103537635,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-01",
+          "partition_signature": "48a27c16eec6f3ed8bc322a0b700178edb2cebd7c56f41a377b7ace3724cdff6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 114712601,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2021-02",
+          "partition_signature": "187ae29e439e889dee03ddcdd3ef3ba8fe28910b14b100f1c3cfc5b811cdeb69",
+          "status": "VALID"
+        },
+        {
+          "bytes": 140620516,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-03",
+          "partition_signature": "108f240776798425c4cec4db00efdac48d1b2305a13ee989cd517dbc4b245bae",
+          "status": "VALID"
+        },
+        {
+          "bytes": 94699657,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-04",
+          "partition_signature": "884c4e468db3576e8f03fe0a3aa9ff177f7b1de1fdcee825d4c7f5348d79ef2e",
+          "status": "VALID"
+        },
+        {
+          "bytes": 103369905,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-05",
+          "partition_signature": "bb580dffe9c92f40015578f2a4db8bc627a2ff6d5143d6f4a6f1bc15d0efac43",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99644742,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-06",
+          "partition_signature": "68a294c8c1cceb7adaffdaf74863c6bcdeb74ec30b10c3315a6a0f0c3cfe48a9",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76557177,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-07",
+          "partition_signature": "2fa4d167299a6d83504c822726ae4e1f081cfaa63845cb71ae5e5d093ec756d0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 76082075,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-08",
+          "partition_signature": "cea64be33df00a7d97e8df846eb7fd2eb9d7c447238d09e29e8afbb34a84c8e0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 94949590,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-09",
+          "partition_signature": "f1adf4f59c534a22417d9dd6177446ef76d6dab6d7984dcbb34ddd3d8b7137c1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90951642,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-10",
+          "partition_signature": "e9415d6d14585684c30159eaaefbb43957c075b1384bb8cfbc54aa64fa0e2f79",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90696193,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2021-11",
+          "partition_signature": "6bc64abe490351baca2bdfd2a145342eb31ec1253fe9a0eb4ae28d8c1a09b93b",
+          "status": "VALID"
+        },
+        {
+          "bytes": 75151030,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2021-12",
+          "partition_signature": "fb0c17660d34458dfc3d2c8b773bffb3d6f39ce89e07291b7def692fd79564d4",
+          "status": "VALID"
+        },
+        {
+          "bytes": 88322935,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-01",
+          "partition_signature": "ad2d8b910c75fe8e5cbca8ce4b1bfae8bf46b4c4ce4f6dfec16ab319cb23bee1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 106567794,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2022-02",
+          "partition_signature": "6cd1f9339205db411854d6eaf4700e39f2e2917f77891686a6859db9b4e9b218",
+          "status": "VALID"
+        },
+        {
+          "bytes": 133509523,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-03",
+          "partition_signature": "f0bd2233305a74fa5f0a22680918c4250b7471b2c94dc1052e4280c536f764d8",
+          "status": "VALID"
+        },
+        {
+          "bytes": 102007813,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-04",
+          "partition_signature": "3a3d21117d6879388c46eb0a8ceb03725f0fd5e3d4b5de206d1cb9a5e8e85ac8",
+          "status": "VALID"
+        },
+        {
+          "bytes": 100861514,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-05",
+          "partition_signature": "13d8871dcb329845e023ecc292d1833e4ba9f2e612866601d68893fb9e1e22d5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 90173539,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-06",
+          "partition_signature": "9d895ed4479a3813e75739fb11ed2436f8c7fec0604b0081d57cbb340f55ffea",
+          "status": "VALID"
+        },
+        {
+          "bytes": 95444530,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-07",
+          "partition_signature": "5858284130afbd8299c069bd6b02bfe2d9a28c28e7c52de86b834d10e99532ec",
+          "status": "VALID"
+        },
+        {
+          "bytes": 93398684,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-08",
+          "partition_signature": "254f420f6b645aa6e1303a0d313f37d17d26fc8db5db35473017358157074f4c",
+          "status": "VALID"
+        },
+        {
+          "bytes": 109266900,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-09",
+          "partition_signature": "da66a05ce1deb4090332f498eb374524c511b4bc16af2803fd53a0afe1f196f0",
+          "status": "VALID"
+        },
+        {
+          "bytes": 98231376,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-10",
+          "partition_signature": "f3710c5173ac14506c158a50fa7284dd2b9170f926aa44dcc8df4a504bcf6012",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80932825,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2022-11",
+          "partition_signature": "ca3eb26813a8fb4b1286a5be4a563a8dfc4cac2f3649e0fc21950f948a1f4d67",
+          "status": "VALID"
+        },
+        {
+          "bytes": 75358542,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2022-12",
+          "partition_signature": "d06f46df03b46bc635c7766af365d59254bd5d3f735806b67e58eb54548a3d82",
+          "status": "VALID"
+        },
+        {
+          "bytes": 80405352,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-01",
+          "partition_signature": "97728927580295def92915502981a3f184b000baca257804965c9aef436fae69",
+          "status": "VALID"
+        },
+        {
+          "bytes": 72212888,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2023-02",
+          "partition_signature": "8c0eb12f60f77dead66240f4d696248eb6b46f03a93d163bf3607400b26688b7",
+          "status": "VALID"
+        },
+        {
+          "bytes": 99464562,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-03",
+          "partition_signature": "da1fa2c7df77d3fd61d24da5bf182832801a6e29828f40014f4bc84f1db48078",
+          "status": "VALID"
+        },
+        {
+          "bytes": 65947929,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-04",
+          "partition_signature": "8b052f704da38b36613fd6006aea622c4ada3a7c3f55b32d775fd4810d7166ca",
+          "status": "VALID"
+        },
+        {
+          "bytes": 86946643,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-05",
+          "partition_signature": "e3ac3283394c4e62f0b1140261af449ceb9f7aaee3b151d0374a84c4cd9a3321",
+          "status": "VALID"
+        },
+        {
+          "bytes": 68899377,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-06",
+          "partition_signature": "842fc63a2f6d04f47afaebf984b2a1efd0f4fb43dff4ea6c1515bcec3f0df4d1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61489612,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-07",
+          "partition_signature": "6e8730ac1923c2f5b735863d15f45b5ab51cfd5ff534bea54dd915004d9a9cc3",
+          "status": "VALID"
+        },
+        {
+          "bytes": 53207600,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-08",
+          "partition_signature": "39c14b864174383caac2be3ce329b6204d55376792c58af3a27afa1fcc553932",
+          "status": "VALID"
+        },
+        {
+          "bytes": 42674971,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-09",
+          "partition_signature": "40e9431cd45b958177b61ca3b8d2513380b21817ef29212e0ac38fc29adc5fe9",
+          "status": "VALID"
+        },
+        {
+          "bytes": 63675003,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-10",
+          "partition_signature": "3fc20046396975409bfd895b501e2fc8bfe71f5e1e068aca3a41f333219013ea",
+          "status": "VALID"
+        },
+        {
+          "bytes": 56013621,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2023-11",
+          "partition_signature": "e04ceb07ad82baff7337a103c79b122b0c364ba2ee89db4042792c47a8e34b41",
+          "status": "VALID"
+        },
+        {
+          "bytes": 62031434,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2023-12",
+          "partition_signature": "542a59118d4097089068736025b19170fb991472670941f367cb564b9bda4739",
+          "status": "VALID"
+        },
+        {
+          "bytes": 68410430,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-01",
+          "partition_signature": "7381bf60cfefb0d12f4c039469c702b3db5af971d709e2edd6c2d997b2ddbcdc",
+          "status": "VALID"
+        },
+        {
+          "bytes": 47674229,
+          "error": "",
+          "frozen": true,
+          "hour_files": 696,
+          "month": "2024-02",
+          "partition_signature": "322e0ef84aa467ae0f320c03ae21dfd3b85bd4a3dfe1631369fbb40ab1d585e5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 61276114,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-03",
+          "partition_signature": "c704823550388cea8218766d9b9860d0e160d306e937614dd7943402947674e1",
+          "status": "VALID"
+        },
+        {
+          "bytes": 116035642,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-04",
+          "partition_signature": "74603b70aa00f18d6aa9abc6004498adaeb84f921627aa898986b5e41864279f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 111501897,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-05",
+          "partition_signature": "12e0ec1c3b1640994fdbcb4910377ab83bbbef173ac039ca3e28d254087b61c5",
+          "status": "VALID"
+        },
+        {
+          "bytes": 101863122,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-06",
+          "partition_signature": "b418be827fa17babb55397861a9bfe2b0a7a500160bdf8d181e459defffe7ec6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 123854475,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-07",
+          "partition_signature": "b1bd8a4ac4fade546dd031b4e88a1b322305442f7edb3eeab43a281915399024",
+          "status": "VALID"
+        },
+        {
+          "bytes": 131418209,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-08",
+          "partition_signature": "b68ce91931fedad581f2d24ddb0fdd93a7631a90c97fc28adc13bd4a0e26cb7d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 112130328,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-09",
+          "partition_signature": "e0413e9b13398d53222ca999f3be2cc997941369414d9ce06f25ed3f8cb8c52d",
+          "status": "VALID"
+        },
+        {
+          "bytes": 121618544,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-10",
+          "partition_signature": "11d1e48ade770bb686ffba6dc5479b7612a4cd74ba97de3ee958a95c583eb6be",
+          "status": "VALID"
+        },
+        {
+          "bytes": 129870631,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2024-11",
+          "partition_signature": "08a5ea4b5847826195e483c501972a846dee8ef7934c306fabfadd61824e54dd",
+          "status": "VALID"
+        },
+        {
+          "bytes": 111867045,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2024-12",
+          "partition_signature": "883c9a960029d656446f5e6897bf5c89eef6af34f6b8bf4e2ba6789de1da179f",
+          "status": "VALID"
+        },
+        {
+          "bytes": 127872997,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-01",
+          "partition_signature": "fef292e22069da70a71424396234b119039c04627052de1c0672a18e9f0f27e2",
+          "status": "VALID"
+        },
+        {
+          "bytes": 129434657,
+          "error": "",
+          "frozen": true,
+          "hour_files": 672,
+          "month": "2025-02",
+          "partition_signature": "9a3ebaa4e5b8eaf41d55e1ecdb6374de54db885f2d0141d70ce315deeea431e4",
+          "status": "VALID"
+        },
+        {
+          "bytes": 119323235,
+          "error": "",
+          "frozen": true,
+          "hour_files": 744,
+          "month": "2025-03",
+          "partition_signature": "821bba63109a7800b0eb3d7a732de0e89cae28eb219465dd380b3a09f167c0f6",
+          "status": "VALID"
+        },
+        {
+          "bytes": 137797299,
+          "error": "",
+          "frozen": true,
+          "hour_files": 720,
+          "month": "2025-04",
+          "partition_signature": "8743e585dc4717b8c840c7ad071b7eb34433295d76399843fc917deb4a2b199a",
+          "status": "VALID"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-05",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-06",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-07",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-08",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-09",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-10",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-11",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2025-12",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-01",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-02",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-03",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-04",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-05",
+          "partition_signature": "",
+          "status": "MISSING"
+        },
+        {
+          "bytes": 0,
+          "error": "CorruptRawFileError: monthly acquisition manifest is missing",
+          "frozen": false,
+          "hour_files": 0,
+          "month": "2026-06",
+          "partition_signature": "",
+          "status": "MISSING"
+        }
+      ],
+      "valid_months": 106
+    },
+    "targets": [
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06"
+    ]
+  },
   "authorization": {
     "broker_action_authorized": false,
     "ea_consumption_authorized": false,
     "python_demo_predictions_authorized": false,
     "research_only": true
   },
-  "classification": "DATA_NOT_READY",
+  "classification": "DATA_READY",
   "contract": "config/ml/a3_ml_r1_r2_dukascopy_portability_v1.json",
-  "contract_sha256": "9de0ed87d38dd3792046a41b3154239d8760c83bb49a4bb49f817eb44a0b633a",
-  "generated_at_utc": "2026-07-16T05:52:53Z",
+  "contract_sha256": "394df972eff75305bd4c7de89f20672438cb30e1c6259c7eb6bb7544ee93b272",
+  "generated_at_utc": "2026-07-16T09:42:30Z",
   "inventory": {
     "expected_months": 120,
     "invalid_months": 0,
-    "missing_months": 47,
-    "ready": false,
+    "missing_months": 0,
+    "ready": true,
     "rows": [
       {
         "bytes": 87297691,
@@ -26,211 +2335,211 @@
         "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 85880367,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2016-08",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "4f61b0eb1c3097577bf896a87d2ffa94c6224fb959b66d5502abb69e3562c753",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 85499393,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2016-09",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "57104a0d48027d81d56b5f34b3b702cffdae9aabea9a0b3a0e57853542d97629",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 67187361,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2016-10",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "385b28dc4828410583549af93e13e34bfee371ea06c3300e3a31905c2d1b1001",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 101704889,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2016-11",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "0996fb197f7ccc1c2ec76a1a9d16aed6c437fe11be3ec9ebc8e7c81ff4a41368",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 72746990,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2016-12",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "8ebd93935a2807d288af2609d3697737eb0d5c706ccce8500a92699e31d24424",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 86909976,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-01",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "f64a894f3f0712ea07fe1736f0497719521fee01ff792a1d8c957e15e2c93ba0",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 88338473,
+        "error": "",
+        "frozen": true,
+        "hour_files": 672,
         "month": "2017-02",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "8c24bf30748e5a8ceabdd43dc1b906c87034ca1e401c4c7e35e2bdf5a51c78ad",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 92322054,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-03",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "a3d3126298cb28d72fc175ab41ff9a161c145bdfca7fa3f883c7b377308ea54c",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 71237445,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2017-04",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "2f72e4519936b93537ee6936322432b28a0718e5589a5e796215c91ce6560888",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 77334364,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-05",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "2ba1ad34eff8722c4b692f2f0e292ee59f6a8d7e2eaa4a74e8151744711cce08",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 71697451,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2017-06",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "c66b3dd59362fe5a4a642c1827b15a43264590c282a4656ee5d52eecdcfc0fe2",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 66325773,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-07",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "8e41d01bfab1b9272ca5ad69f1873924988eba56e845e34e6984bc0b66a4d807",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 82646609,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-08",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "9246764cf9ce7677c0a676488cf0813ce19c66a053255d0a31c0b54bb1dc14f1",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 84103126,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2017-09",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "e37d539d7eaf089df8e6bd429822a4ab91631607e9bfe6f3606fbe961f03d21b",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 90364168,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-10",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "b601ef5d0c6176b2c436adaad1014cd23675291b29afff051f943358910ebddb",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 96494610,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2017-11",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "26c74ddf27383378bd688bf5861c8c4afde48b32a6aef48294613933eeaa1576",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 84072436,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2017-12",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "cfe50b3765a980a65099cee3a4fa71cc6e32f7f86a39c1cba664aca4a2feff08",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 100126639,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2018-01",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "e4dfa98683f2877c722cef1a0022a401dfde0f3b372ca11f17b919df0319b1dd",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 104003182,
+        "error": "",
+        "frozen": true,
+        "hour_files": 672,
         "month": "2018-02",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "98442b64a101800e6c7a37bf30583c8fc76d16e206e36be5b42f6954b59d724f",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 79665963,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2018-03",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "a721f95e40c3676756bdccdcde438bbdd35265b1a6b8074140de9c77f4004217",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 56351997,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2018-04",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "18ec71aab1412680d46746a872545b5091ca488d56a9789902b5da9c2c109dc2",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 54368347,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2018-05",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "e271ec7907501fcf3aa09b33fab300f38ab141d7a92cf13b5880cdb6d44ce2c7",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 50369458,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2018-06",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "b8e5a035af66a41fa87b973095c75501b5c99716257eade090bb754bdf5ba40f",
+        "status": "VALID"
       },
       {
         "bytes": 61820844,
@@ -881,230 +3190,230 @@
         "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 123854475,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2024-07",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "b1bd8a4ac4fade546dd031b4e88a1b322305442f7edb3eeab43a281915399024",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 131418209,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2024-08",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "b68ce91931fedad581f2d24ddb0fdd93a7631a90c97fc28adc13bd4a0e26cb7d",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 112130328,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2024-09",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "e0413e9b13398d53222ca999f3be2cc997941369414d9ce06f25ed3f8cb8c52d",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 121618544,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2024-10",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "11d1e48ade770bb686ffba6dc5479b7612a4cd74ba97de3ee958a95c583eb6be",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 129870631,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2024-11",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "08a5ea4b5847826195e483c501972a846dee8ef7934c306fabfadd61824e54dd",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 111867045,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2024-12",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "883c9a960029d656446f5e6897bf5c89eef6af34f6b8bf4e2ba6789de1da179f",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 127872997,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-01",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "fef292e22069da70a71424396234b119039c04627052de1c0672a18e9f0f27e2",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 129434657,
+        "error": "",
+        "frozen": true,
+        "hour_files": 672,
         "month": "2025-02",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "9a3ebaa4e5b8eaf41d55e1ecdb6374de54db885f2d0141d70ce315deeea431e4",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 119323235,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-03",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "821bba63109a7800b0eb3d7a732de0e89cae28eb219465dd380b3a09f167c0f6",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 137797299,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2025-04",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "8743e585dc4717b8c840c7ad071b7eb34433295d76399843fc917deb4a2b199a",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 119667387,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-05",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "9ef84275b4035e2d4484155628c28bc01396598f6546a8e627861dffcf0593e4",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 106228643,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2025-06",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "3788c431025c93f95449ba0ad88eb51c99ede96d468328eb72cb07d071f7a236",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 93652448,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-07",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "a619fbdc02cebecf5e9814d25ba9dfcd3dd6338c00222a7cc8183a543d2b6f49",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 96725460,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-08",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "94d86b1f17cce998e77b1ac05e0cc745d858f8c4ff09d62e1f7aa1f658e6bc11",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 130568965,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2025-09",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "1dbff083269b22748e2216bc2f320db792c48a6fda601b3bd1d5302d3cdc68ea",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 209166516,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-10",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "b48e79139a25559535bbf67ae848b5d524fee263742a3c8063526a538aa63ebb",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 148315740,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2025-11",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "58f08d58a5847c58cb5605575d60d4459ef3c9b22bd7b827808d141390207fbb",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 180188110,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2025-12",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "05e9deb2303eb556efb060936c6bd12f4c5d3f96ffe794fd157713953bd96c93",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 206013988,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2026-01",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "3215e72582ace85c42df08b879fed6f51afeac5ad150fd613e4e1fb53c65c6c7",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 169950516,
+        "error": "",
+        "frozen": true,
+        "hour_files": 672,
         "month": "2026-02",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "6bae38fa50d0323bcd8dac9c08f892d8d4ceddbdfd06d1fcc335312f1b5f4537",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 213997747,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2026-03",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "e8639aea1ef37a9832cf545d79250138c1315114a614350b535960eaccf6eca9",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 169597057,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2026-04",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "2017eee7f03a9e4155ebe7c43a8455fe6c0fb15baf8a00b6abf5b0b196db0a6a",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 186869379,
+        "error": "",
+        "frozen": true,
+        "hour_files": 744,
         "month": "2026-05",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "1a1484a2152aa2376f00b2b9df4decf1b1bb91571a7e4b9ecba096b98ccb6b62",
+        "status": "VALID"
       },
       {
-        "bytes": 0,
-        "error": "CorruptRawFileError: monthly acquisition manifest is missing",
-        "frozen": false,
-        "hour_files": 0,
+        "bytes": 185616390,
+        "error": "",
+        "frozen": true,
+        "hour_files": 720,
         "month": "2026-06",
-        "partition_signature": "",
-        "status": "MISSING"
+        "partition_signature": "822cc6f459c5662e593ff13c36e1d9a71a2a9ecef72473d3e6e738866d8adda8",
+        "status": "VALID"
       }
     ],
-    "valid_months": 73
+    "valid_months": 120
   },
   "locked_period": {
     "end_month": "2026-06",
     "expected_months": 120,
     "start_month": "2016-07"
   },
-  "mode": "INVENTORY_ONLY",
+  "mode": "ACQUIRE_MISSING",
   "schema_version": "a3_ml_r1_r2_dukascopy_portability_v1",
   "selected_months": [],
   "storage_root": "C:\\DukascopyTickDataFoundationV1",

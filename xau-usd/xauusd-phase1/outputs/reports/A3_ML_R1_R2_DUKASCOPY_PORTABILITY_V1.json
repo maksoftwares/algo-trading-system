@@ -1,0 +1,168 @@
+{
+  "artifacts": {
+    "raw_candidates_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_R1_R2_DUKASCOPY_PORTABILITY_RAW_CANDIDATES_V1.csv",
+      "sha256": "9ce2056ac8d34e7affe218437ff4fa119d629a49b4134c9b991d817ba61ede1c"
+    },
+    "raw_labels_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_R1_R2_DUKASCOPY_PORTABILITY_RAW_LABELS_V1.csv",
+      "sha256": "e6082c833791d48673283334d5dec51284dc60dcfb85350d4e5c1f93ccf579f0"
+    },
+    "selected_labels_csv": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_R1_R2_DUKASCOPY_PORTABILITY_SELECTED_LABELS_V1.csv",
+      "sha256": "618cbdc4dc9bdc1e7b49366370b70d5015a18ccc44a7e82827e9cd70025f8fee"
+    }
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "ea_consumption_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "research_only": true,
+    "strategy_promotion_authorized": false
+  },
+  "classification": "PORTABILITY_FAIL",
+  "concentration": {
+    "r1_box_clean_strict_uptrend": {
+      "episodes": 36,
+      "largest_episode_trades": 33,
+      "net_usd": 10120.696520216432,
+      "top_episode_profit_share": 0.3877898021046088,
+      "top_three_episodes_removed_net_usd": 1739.6378545179414
+    },
+    "r2_pullback_short_h1_confirm": {
+      "episodes": 156,
+      "largest_episode_trades": 53,
+      "net_usd": 206.9294767002346,
+      "top_episode_profit_share": 0.9904032538513351,
+      "top_three_episodes_removed_net_usd": -269.79141997395567
+    }
+  },
+  "contract": "config/ml/a3_ml_r1_r2_dukascopy_portability_v1.json",
+  "contract_sha256": "394df972eff75305bd4c7de89f20672438cb30e1c6259c7eb6bb7544ee93b272",
+  "evidence": {
+    "historical_backcast": {
+      "portfolio": {
+        "average_stress_r": 0.06114533271447961,
+        "closed_drawdown_to_net_ratio": 0.6599420937048069,
+        "max_closed_drawdown_usd": 1131.388802905091,
+        "stress_net_usd": 1714.3758728188702,
+        "stress_profit_factor": 1.2943718871277732,
+        "trades": 801,
+        "win_rate_pct": 39.95006242197253,
+        "wins": 320
+      },
+      "specialists": {
+        "r1_box_clean_strict_uptrend": {
+          "average_stress_r": 0.27429530089128024,
+          "closed_drawdown_to_net_ratio": 0.5941922760089369,
+          "max_closed_drawdown_usd": 934.6384303402772,
+          "stress_net_usd": 1572.9562097609964,
+          "stress_profit_factor": 1.4987698643836616,
+          "trades": 196,
+          "win_rate_pct": 48.46938775510204,
+          "wins": 95
+        },
+        "r2_pullback_short_h1_confirm": {
+          "average_stress_r": -0.007908210694864056,
+          "closed_drawdown_to_net_ratio": 2.5634044198580024,
+          "max_closed_drawdown_usd": 362.515789337383,
+          "stress_net_usd": 141.41966305787375,
+          "stress_profit_factor": 1.0529627454545778,
+          "trades": 605,
+          "win_rate_pct": 37.1900826446281,
+          "wins": 225
+        }
+      }
+    },
+    "recent_cross_feed": {
+      "portfolio": {
+        "average_stress_r": 0.7191526216943419,
+        "closed_drawdown_to_net_ratio": 0.0814780643948767,
+        "max_closed_drawdown_usd": 701.79094826042,
+        "stress_net_usd": 8613.250124097796,
+        "stress_profit_factor": 4.057441371744615,
+        "trades": 135,
+        "win_rate_pct": 60.0,
+        "wins": 81
+      },
+      "specialists": {
+        "r1_box_clean_strict_uptrend": {
+          "average_stress_r": 0.8659747996378067,
+          "closed_drawdown_to_net_ratio": 0.08210251163129072,
+          "max_closed_drawdown_usd": 701.79094826042,
+          "stress_net_usd": 8547.740310455436,
+          "stress_profit_factor": 4.2491726645765375,
+          "trades": 114,
+          "win_rate_pct": 64.91228070175438,
+          "wins": 74
+        },
+        "r2_pullback_short_h1_confirm": {
+          "average_stress_r": -0.07788205857018082,
+          "closed_drawdown_to_net_ratio": 1.378686531909449,
+          "max_closed_drawdown_usd": 90.31749777662071,
+          "stress_net_usd": 65.5098136423608,
+          "stress_profit_factor": 1.3514483488241342,
+          "trades": 21,
+          "win_rate_pct": 33.333333333333336,
+          "wins": 7
+        }
+      }
+    }
+  },
+  "generated_at_utc": "2026-07-16T10:08:24Z",
+  "limitations": [
+    "MT5 outcomes through 2026-06 are already known, so this is cross-feed evidence rather than an untouched holdout.",
+    "EMA and ATR calculations causally reproduce the EA formulas but broker session microstructure can shift candidate timestamps.",
+    "A portability pass advances research only and does not authorize demo or broker action."
+  ],
+  "portability_gates": {
+    "drawdown_to_net_each_window": false,
+    "episode_concentration": false,
+    "portfolio_stress_pf_each_window": true,
+    "positive_calendar_year_share": true,
+    "positive_six_month_block_share": true,
+    "reference_count_ratio": true,
+    "reference_timestamp_delta": false,
+    "specialist_stress_net_positive_each_window": true,
+    "specialist_stress_pf_each_window": true,
+    "top_three_episodes_removed_net_positive": false
+  },
+  "quality_gates": {
+    "all_selected_entries_not_before_decision": true,
+    "all_selected_resolved": true,
+    "candidate_ids_unique": true,
+    "source_months_eq_120": true
+  },
+  "raw_candidates": 1053,
+  "raw_labels": 1053,
+  "reference_reconciliation": {
+    "r1_box_clean_strict_uptrend": {
+      "count_ratio": 0.8446866485013624,
+      "dukascopy_selected_trades": 310,
+      "nearest_timestamp_median_delta_minutes": 240.00098333333335,
+      "reference_trades": 367
+    },
+    "r2_pullback_short_h1_confirm": {
+      "count_ratio": 0.9085631349782293,
+      "dukascopy_selected_trades": 626,
+      "nearest_timestamp_median_delta_minutes": 180.00119166666667,
+      "reference_trades": 689
+    }
+  },
+  "schema_version": "a3_ml_r1_r2_dukascopy_portability_v1",
+  "selected_trades": 936,
+  "selection_reasons": {
+    "estimated_cost_r_too_high": 5,
+    "max_open_positions_reached": 7,
+    "spread_too_high": 42,
+    "stop_ceiling_exceeded": 63,
+    "unresolved_or_ineligible": 0
+  },
+  "source_months": 120,
+  "stability": {
+    "calendar_years": 11,
+    "positive_calendar_year_share": 0.7272727272727273,
+    "positive_six_month_block_share": 0.6782608695652174,
+    "rolling_six_month_blocks": 115
+  }
+}
