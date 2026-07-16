@@ -13,6 +13,8 @@ This is a cross-feed portability exam, not an untouched strategy-development hol
 - R1: `r1_box_clean_strict_uptrend`, long only, signal mode 7, strict R1 router, fixed 2R.
 - R2: `r2_pullback_short_h1_confirm`, short only, signal mode 21, strict R2 router, H1 confirmation, fixed 2R.
 - Execution reconstruction uses observed Dukascopy Bid/Ask ticks. No synthetic spread may replace the source spread.
+- The replay permits a maximum 1,440-hour research hold plus a 72-hour quote grace. This exceeds the longest 1,167.83-hour R1 reference trade; it is a finite research boundary for an EA that otherwise has no time exit.
+- Stress deducts an additional USD 0.30 per trade and USD 0.35 per 24 held hours after native Bid/Ask execution.
 - No threshold, session, regime, stop, target, or direction parameter may change after this preregistration.
 
 The machine-readable source hashes and effective-input assertions are in `config/ml/a3_ml_r1_r2_dukascopy_portability_v1.json`.

@@ -16,6 +16,9 @@
     "recent_cross_feed_end_exclusive_utc": "2026-07-01T00:00:00Z",
     "prospective_holdout_start_utc": "2026-07-01T00:00:00Z"
   },
+  "server_time": {
+    "utc_offset_hours": 4
+  },
   "source_lock": [
     {
       "path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
@@ -91,6 +94,34 @@
       }
     }
   },
+  "reference_trade_paths": {
+    "r1_box_clean_strict_uptrend": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r1_box_clean_strict_uptrend_trades.csv",
+    "r2_pullback_short_h1_confirm": "outputs/reports/mt5_backtests/a1_momentum_variants_a3_ml_regime_portfolio_continuous_10y_20260713_20260701/A1XauM5Momentum_A3_ML_REGIME_PORTFOLIO_CONTINUOUS_10Y_20260713_XAUUSD_M5_r2_pullback_short_h1_confirm_trades.csv"
+  },
+  "execution": {
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_entry_delay_minutes": 5,
+    "maximum_hold_hours": 1440,
+    "maximum_timeout_exit_grace_hours": 72,
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "point_size": 0.01,
+    "maximum_spread_points": 75,
+    "maximum_estimated_cost_r": 0.15
+  },
+  "specialist_controls": {
+    "r1_box_clean_strict_uptrend": {
+      "maximum_trades_per_server_day": 6,
+      "maximum_open_positions": 32,
+      "stop_ceiling_points": 0
+    },
+    "r2_pullback_short_h1_confirm": {
+      "maximum_trades_per_server_day": 12,
+      "maximum_open_positions": 8,
+      "stop_ceiling_points": 2200
+    }
+  },
   "portability_gates": {
     "require_all_120_months_valid": true,
     "require_no_parameter_changes": true,
@@ -108,7 +139,12 @@
   },
   "outputs": {
     "inventory_json": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_SOURCE_INVENTORY_V1.json",
-    "inventory_markdown": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_SOURCE_INVENTORY_V1.md"
+    "inventory_markdown": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_SOURCE_INVENTORY_V1.md",
+    "raw_candidates_csv": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_PORTABILITY_RAW_CANDIDATES_V1.csv",
+    "raw_labels_csv": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_PORTABILITY_RAW_LABELS_V1.csv",
+    "selected_labels_csv": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_PORTABILITY_SELECTED_LABELS_V1.csv",
+    "portability_json": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_PORTABILITY_V1.json",
+    "portability_markdown": "outputs/reports/A3_ML_R1_R2_DUKASCOPY_PORTABILITY_V1.md"
   },
   "authorization": {
     "research_only": true,
