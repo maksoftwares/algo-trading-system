@@ -1,0 +1,1057 @@
+{
+  "artifacts": {
+    "barrier_labels_csv": {
+      "bytes": 36206285,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_EVENT_CENSUS_V1_BARRIER_LABELS.csv",
+      "sha256": "96d780e83259a247e130956dc0efa1660357a709026193b3a3b6733640d6be74"
+    },
+    "context_metrics_csv": {
+      "bytes": 172486,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_EVENT_CENSUS_V1_CONTEXT_METRICS.csv",
+      "sha256": "58c49ca708e20daf801483b47c4037af71c971bb77415601d25fb58b2fbc7071"
+    },
+    "events_csv": {
+      "bytes": 17650081,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_EVENT_CENSUS_V1_EVENTS.csv",
+      "sha256": "4115027fb291337fccd81f7b59324924c06f8c959374d69914bbda532df1f71c"
+    },
+    "horizon_labels_csv": {
+      "bytes": 42372840,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_EVENT_CENSUS_V1_HORIZON_LABELS.csv",
+      "sha256": "472c062d13b264341c2bcae63b167a789d3dfd94e4172825f0ac2cb88b572268"
+    },
+    "policy_metrics_csv": {
+      "bytes": 25654,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\outputs\\reports\\A3_ML_DUKASCOPY_EVENT_CENSUS_V1_POLICY_METRICS.csv",
+      "sha256": "f43fbb413a9005ab13e7d63e221393cd3cf52f5155b5205ced9917483d97b7e1"
+    }
+  },
+  "authorization": {
+    "broker_action_authorized": false,
+    "demo_or_live_authorized": false,
+    "ea_consumption_authorized": false,
+    "python_demo_predictions_authorized": false,
+    "research_only": true,
+    "specialist_hypothesis_authorized_if_all_gates_pass": true,
+    "specialist_hypothesis_candidates": []
+  },
+  "barrier_label_status_counts": {
+    "INELIGIBLE": 118327,
+    "RESOLVED": 13393,
+    "UNRESOLVED": 1372
+  },
+  "classification": "EVENT_CENSUS_NO_TRAIN_SURVIVOR",
+  "contract": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system-xau-duka-session-v1\\xau-usd\\xauusd-phase1\\config\\ml\\a3_ml_dukascopy_event_census_v1.json",
+  "contract_sha256": "64255db3e0cfebf1ef9da9a746b29b03cb60ba27d7b24f7d11082ddf38e055ce",
+  "created_at_utc": "2026-07-16T13:07:12.730620Z",
+  "diagnostic_context_promotion_authorized": false,
+  "event_count": 44364,
+  "event_counts_by_family_direction": {
+    "session_opening_drive_v1:LONG": 622,
+    "session_opening_drive_v1:SHORT": 564,
+    "session_range_break_v1:LONG": 2160,
+    "session_range_break_v1:SHORT": 1985,
+    "trend_pullback_resumption_v1:LONG": 17626,
+    "trend_pullback_resumption_v1:SHORT": 16252,
+    "volatility_expansion_break_v1:LONG": 2536,
+    "volatility_expansion_break_v1:SHORT": 2619
+  },
+  "feature_rows": 708538,
+  "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "horizon_label_status_counts": {
+    "INELIGIBLE": 157768,
+    "RESOLVED": 18814,
+    "UNRESOLVED": 874
+  },
+  "hypotheses": {
+    "session_opening_drive_v1:LONG": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": true,
+          "bootstrap_p025_above_zero": true,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "session_opening_drive_v1:SHORT": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": true,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": true,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": true,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": true,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": true,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "session_range_break_v1:LONG": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "session_range_break_v1:SHORT": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "trend_pullback_resumption_v1:LONG": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "trend_pullback_resumption_v1:SHORT": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": false,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "volatility_expansion_break_v1:LONG": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    },
+    "volatility_expansion_break_v1:SHORT": {
+      "exam": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "events_per_source_day_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 624,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "internal_test": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 620,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      },
+      "selected_barrier_profile_id": null,
+      "train_profile_gates": {
+        "stop_0p50_target_0p75_h120": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_0p75_target_1p125_h240": {
+          "average_r_ge_minimum": false,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_ten_winners_removed_positive": false
+        },
+        "stop_1p00_target_1p50_h240": {
+          "average_r_ge_minimum": true,
+          "bootstrap_p025_above_zero": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": true,
+          "positive_month_share_ge_minimum": true,
+          "top_ten_winners_removed_positive": false
+        }
+      },
+      "validation": {
+        "gates": {
+          "average_r_ge_minimum": false,
+          "drawdown_r_lte_maximum": true,
+          "events_ge_minimum": false,
+          "pf_ge_minimum": false,
+          "positive_month_share_ge_minimum": false,
+          "top_five_winners_removed_positive": false
+        },
+        "metrics": {
+          "active_exit_months": 0,
+          "average_stress_r": 0.0,
+          "bootstrap_mean_stress_r_p025": null,
+          "events": 0,
+          "events_per_source_day": 0.0,
+          "max_closed_drawdown_r": 0.0,
+          "positive_exit_month_share": 0.0,
+          "source_days": 621,
+          "stress_net_r": 0,
+          "stress_net_usd": 0,
+          "stress_profit_factor": null,
+          "top_five_winners_removed_net_r": 0,
+          "top_ten_winners_removed_net_r": 0,
+          "win_rate_pct": 0.0,
+          "wins": 0
+        },
+        "opened_for_decision": false,
+        "passed": false
+      }
+    }
+  },
+  "labeled_event_share": 0.995176269046975,
+  "limitations": [
+    "Barrier outcomes are conservative M5 screens and require exact-tick replay.",
+    "Diagnostic context cells cannot be promoted under V1.",
+    "All retrospective periods have known program-level research contamination."
+  ],
+  "quality_gates": {
+    "event_ids_unique": true,
+    "event_keys_unique": true,
+    "events_chronological": true,
+    "feature_hash_equal_source_lock": true,
+    "feature_rows_equal_source_lock": true,
+    "labeled_event_share_ge_minimum": true
+  },
+  "resolved_event_share": 0.10612208096654946,
+  "schema_version": "a3_ml_dukascopy_event_census_v1",
+  "source_days": {
+    "exam": 624,
+    "internal_test": 620,
+    "train": 1244,
+    "validation": 621
+  },
+  "source_report_sha256": "689763a8654c429f112c3322bc68cf3a1c678a7d55b904354deeca3297847cb3",
+  "stage_survivors": {
+    "exam": [],
+    "internal_test": [],
+    "train": [],
+    "validation": []
+  }
+}
