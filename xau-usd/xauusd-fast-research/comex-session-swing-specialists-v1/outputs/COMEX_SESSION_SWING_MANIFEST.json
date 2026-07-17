@@ -1,0 +1,10 @@
+{
+  "candidate_rows": 55,
+  "comex_cache_sha256": "a35b7911e1eabdf9fea13507380597c8e54a6e53e6271a1f47118ba4a1dee6cd",
+  "config_sha256": "e99b3cde3fba0f94f4f734a7639663a220b209959d07b0c7e6490b0aa05b3cf0",
+  "contract_hash": "277142d1d1e2c186728d6647fd139461d3ff3aaab0ef66a317a283a6c4fba0a7",
+  "opened_label_rows": 30,
+  "runner_sha256": "1d3c0e92135c40254f5fccd813aba4b828b750c4f9648b5777f8cb84421fe73e",
+  "selected_rows": 30,
+  "specialists_sha256": "14890580c2e917905149b10db7cc69ca4e51416f748c9cc79af093f0e22b6472"
+}

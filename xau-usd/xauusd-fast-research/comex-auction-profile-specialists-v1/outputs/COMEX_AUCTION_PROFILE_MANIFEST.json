@@ -1,0 +1,12 @@
+{
+  "auction_source_sha256": "8850ca9f9c86d6b9eb30cbeb65f6f7fcf54df202da2e53f06e8fb69b3e501754",
+  "comex_cache_sha256": "a35b7911e1eabdf9fea13507380597c8e54a6e53e6271a1f47118ba4a1dee6cd",
+  "config_sha256": "449292c3ba1a7da9564900adef3ff6dff925f1ad8ec13cb85fb7a834f7023260",
+  "contract_hash": "8a13c2d8901ac0f2e070d8602d68369a6c66e1068aaaea85bf424b086fdd2980",
+  "execution_engine_sha256": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+  "gold_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "mechanical_candidate_rows": 613,
+  "opened_label_rows": 80,
+  "runner_sha256": "0da94bdc52e2ff2cc56bc4a5b527107120aae043308c9ae811fa31ae7cd6cff6",
+  "selected_trade_rows": 70
+}

@@ -1,0 +1,9 @@
+{
+  "adaptive_sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba",
+  "candidate_rows": 3561,
+  "config_sha256": "dbe4a7d35728b053b0f3b7709cbefbc69e9a1d3584453b0019a9301a714ea453",
+  "contract_hash": "0dc938138f745dc693bd5e36e3d316af3f66e05308a0050ed129180ea859baf8",
+  "opened_label_rows": 1877,
+  "runner_sha256": "621a06949e1995d5385bbf1776a4933e84061bdd5854e80bab7237ce1acfcaf2",
+  "selected_trade_rows": 97
+}

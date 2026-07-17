@@ -1,0 +1,50 @@
+{
+  "broker_action_authorized": false,
+  "combined_sha256": "11ff472e1c9f3262a249bff369d2c0df553e3a44a66b7dc0034255bc7f95a605",
+  "exam_sealed_until_prior_pass": true,
+  "families": {
+    "COMEX_DEVELOPING_POC_MIGRATION_V1": {
+      "maximum_hold_hours": 4.0,
+      "stop_atr": 1.0,
+      "target_r": 1.75
+    },
+    "COMEX_INITIAL_BALANCE_EXPANSION_V1": {
+      "maximum_hold_hours": 3.0,
+      "stop_atr": 1.0,
+      "target_r": 1.5
+    },
+    "COMEX_INITIAL_BALANCE_FAILED_EXPANSION_V1": {
+      "maximum_hold_hours": 2.0,
+      "stop_atr": 0.85,
+      "target_r": 1.25
+    }
+  },
+  "files": {
+    "../comex-auction-profile-specialists-v1/run_research.py": "0da94bdc52e2ff2cc56bc4a5b527107120aae043308c9ae811fa31ae7cd6cff6",
+    "../comex-auction-profile-specialists-v1/src/auction.py": "8850ca9f9c86d6b9eb30cbeb65f6f7fcf54df202da2e53f06e8fb69b3e501754",
+    "../independent-specialists-v1/src/data.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361",
+    "../ml-candidate-rankers-v1/src/engine.py": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+    "PREREGISTRATION.md": "50bcab0c72e366f6eb6341266fde87119f73aa82c17761a2a2a4e758bed72b41",
+    "config/comex_initial_balance_specialists_v1.json": "15d8cb47e1d44c0aefcae7bdfe552b76455bff0769c09ebf2d2dc0baa1cf088f",
+    "requirements.txt": "9900295f6de112d5aace740a7c6626abd1aaa38395bf269f2395527fe5c38eef",
+    "run_research.py": "70e2351a2e49490cfe9ac22a4b9e961aceec775a6e17e5fe816794ed733e911f",
+    "src/specialists.py": "6546de9ca08a890e3f653c3b59d9abf456e3a7774d7d2f1827c00f92bb751ecd"
+  },
+  "locked_at_utc": "2026-07-17T13:34:42.095516Z",
+  "same_version_post_outcome_tuning_authorized": false,
+  "schema_version": "comex_initial_balance_contract_lock_v1",
+  "windows": {
+    "development": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "fit": [
+      "2022-07-01T00:00:00Z",
+      "2023-07-01T00:00:00Z"
+    ]
+  }
+}

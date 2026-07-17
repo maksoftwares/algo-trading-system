@@ -1,0 +1,22 @@
+family_id,stage,block_start,status,history_rows,fit_rows,calibration_rows,evaluation_rows,threshold,calibration_spearman,threshold_pass_rows,gate_pass,gate_checks
+H4_ADAPTIVE_TREND_CONTINUATION_V1,validation,2020-01-01 00:00:00+00:00,SCORED,623.0,498.0,125.0,83.0,0.13095640412897797,-0.143010752688172,18.0,,
+H4_ADAPTIVE_TREND_CONTINUATION_V1,validation,2020-07-01 00:00:00+00:00,SCORED,710.0,568.0,142.0,86.0,0.20757110658744204,-0.17201707492387747,13.0,,
+H4_ADAPTIVE_TREND_CONTINUATION_V1,validation,2021-01-01 00:00:00+00:00,SCORED,714.0,566.0,143.0,92.0,0.015016205766435461,0.02854657080009192,18.0,,
+H4_ADAPTIVE_TREND_CONTINUATION_V1,validation,2021-07-01 00:00:00+00:00,SCORED,702.0,555.0,141.0,65.0,0.0,-0.03238580418682307,20.0,,
+H4_ADAPTIVE_TREND_CONTINUATION_V1,validation,,STAGE_GATE,,,,,,,,False,"{""maximum_closed_drawdown_r"": true, ""minimum_average_stress_r"": false, ""minimum_positive_active_month_share"": false, ""minimum_stress_pf"": false, ""minimum_trades"": false, ""minimum_trades_per_source_day"": false, ""top_winners_removed_positive"": false}"
+H4_ADAPTIVE_TREND_CONTINUATION_V1,internal_test,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,
+H4_ADAPTIVE_TREND_CONTINUATION_V1,exam,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,validation,2020-01-01 00:00:00+00:00,SCORED,221.0,176.0,45.0,32.0,0.0,-0.037812911725955196,3.0,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,validation,2020-07-01 00:00:00+00:00,SCORED,252.0,200.0,51.0,41.0,0.0,-0.05954751131221719,5.0,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,validation,2021-01-01 00:00:00+00:00,SCORED,264.0,211.0,53.0,29.0,0.0,-0.019674246089340427,2.0,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,validation,2021-07-01 00:00:00+00:00,SCORED,265.0,212.0,53.0,37.0,0.0,-0.027697703958698798,7.0,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,validation,,STAGE_GATE,,,,,,,,False,"{""maximum_closed_drawdown_r"": true, ""minimum_average_stress_r"": false, ""minimum_positive_active_month_share"": false, ""minimum_stress_pf"": false, ""minimum_trades"": false, ""minimum_trades_per_source_day"": false, ""top_winners_removed_positive"": false}"
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,internal_test,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,
+H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1,exam,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,validation,2020-01-01 00:00:00+00:00,SCORED,371.0,295.0,75.0,55.0,0.053417035569687965,-0.09029871977240397,7.0,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,validation,2020-07-01 00:00:00+00:00,SCORED,426.0,340.0,86.0,50.0,0.06718829821227418,0.013010047643756779,13.0,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,validation,2021-01-01 00:00:00+00:00,SCORED,433.0,343.0,87.0,44.0,0.0399834159382339,0.01791572501275789,6.0,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,validation,2021-07-01 00:00:00+00:00,SCORED,418.0,334.0,84.0,42.0,0.11054084129346242,-0.0653032297256252,16.0,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,validation,,STAGE_GATE,,,,,,,,False,"{""maximum_closed_drawdown_r"": true, ""minimum_average_stress_r"": false, ""minimum_positive_active_month_share"": false, ""minimum_stress_pf"": false, ""minimum_trades"": false, ""minimum_trades_per_source_day"": false, ""top_winners_removed_positive"": false}"
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,internal_test,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,
+H4_ADAPTIVE_RANGE_BREAKOUT_V1,exam,,NOT_OPENED_PRIOR_STAGE_FAIL,,,,,,,,,

@@ -1,0 +1,347 @@
+{
+  "authorization": {
+    "broker_action_authorized": false,
+    "ea_consumption_authorized": false,
+    "exam_requires_prior_stage_passes": true,
+    "paid_data_authorized": false,
+    "parameter_search_count": 0,
+    "prior_campaigns_on_fit_development": 1,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "contract_hash": "11ff472e1c9f3262a249bff369d2c0df553e3a44a66b7dc0034255bc7f95a605",
+  "data_evidence": {
+    "comex_auction": {
+      "cache": "C:\\ComexGoldFuturesFoundationV1\\research\\comex-auction-profile-v1\\m5_auction_profile_20220701_20260701.parquet",
+      "cache_sha256": "a35b7911e1eabdf9fea13507380597c8e54a6e53e6271a1f47118ba4a1dee6cd",
+      "daily_built": 1244,
+      "daily_reused": 0,
+      "download_manifest_sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6",
+      "first_available": "2022-07-01T12:25:00+00:00",
+      "last_available": "2026-06-30T17:30:00+00:00",
+      "rows": 63772,
+      "sessions": 1031,
+      "source_files": 1244
+    },
+    "gold": {
+      "end_utc": "2026-07-01T00:00:00+00:00",
+      "feature_cache": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "feature_manifest": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.manifest.json",
+      "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "manifest": {
+        "columns": [
+          "timestamp_ms",
+          "xau_tick_count",
+          "xau_mid_tick_open",
+          "xau_mid_tick_close",
+          "tick_signed_move",
+          "tick_move_count",
+          "tick_realized_variance",
+          "tick_spread_mean",
+          "tick_spread_last",
+          "tick_spread_max",
+          "tick_book_imbalance_mean",
+          "tick_book_imbalance_last",
+          "tick_microprice_edge_mean",
+          "tick_microprice_edge_last",
+          "price_efficiency_5m",
+          "bid_open",
+          "bid_high",
+          "bid_low",
+          "bid_close",
+          "ask_open",
+          "ask_high",
+          "ask_low",
+          "ask_close",
+          "mid_open",
+          "mid_high",
+          "mid_low",
+          "mid_close",
+          "atr",
+          "atr_ratio",
+          "quote_intensity_ratio",
+          "tick_imbalance_5m",
+          "tick_imbalance_15m",
+          "body_fraction",
+          "close_location",
+          "date_utc",
+          "hour_utc"
+        ],
+        "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+        "monthly_caches_reused": 0,
+        "monthly_caches_total": 120,
+        "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+        "reused": false,
+        "rows": 708538,
+        "schema_version": "a3_ml_dukascopy_confirmed_event_m5_cache_v1",
+        "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+      },
+      "rows": 283391,
+      "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+      "start_utc": "2022-07-01T00:00:00+00:00",
+      "timeframes": {
+        "H1": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 44,
+          "rows": 23589,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "H4": {
+          "end": "2026-06-30T20:00:00+00:00",
+          "incomplete_buckets_dropped": 1274,
+          "rows": 5117,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M15": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 16,
+          "rows": 94455,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M30": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 21,
+          "rows": 47219,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M5": {
+          "end": "2026-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 0,
+          "rows": 283391,
+          "start": "2022-07-01T00:00:00+00:00"
+        }
+      }
+    }
+  },
+  "decision": "REJECT_COMEX_INITIAL_BALANCE_V1",
+  "gate_audit": {
+    "COMEX_DEVELOPING_POC_MIGRATION_V1": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": false,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": false,
+        "metrics": {
+          "average_stress_r": 0.0,
+          "closed_drawdown_r": 0.0,
+          "current_account_feasible_share": 0.0,
+          "positive_active_month_share": 0.0,
+          "source_days": 310,
+          "stress_net_r": 0.0,
+          "stress_pf": null,
+          "top_winners_removed_stress_net_r": 0.0,
+          "trades": 0,
+          "trades_per_source_day": 0.0
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "INELIGIBLE"
+      },
+      "exam": {
+        "average_stress_r": null,
+        "closed_drawdown_r": null,
+        "current_account_feasible_share": null,
+        "decision_eligible": false,
+        "family_id": "COMEX_DEVELOPING_POC_MIGRATION_V1",
+        "positive_active_month_share": null,
+        "promoted": false,
+        "raw_gate_pass": false,
+        "source_days": null,
+        "stage": "exam",
+        "status": "NOT_OPENED_PRIOR_STAGE_FAIL",
+        "stress_net_r": null,
+        "stress_pf": null,
+        "top_winners_removed_stress_net_r": null,
+        "trades": null,
+        "trades_per_source_day": null
+      },
+      "fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": false,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": true,
+        "metrics": {
+          "average_stress_r": 0.0,
+          "closed_drawdown_r": 0.0,
+          "current_account_feasible_share": 0.0,
+          "positive_active_month_share": 0.0,
+          "source_days": 310,
+          "stress_net_r": 0.0,
+          "stress_pf": null,
+          "top_winners_removed_stress_net_r": 0.0,
+          "trades": 0,
+          "trades_per_source_day": 0.0
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "FAIL"
+      }
+    },
+    "COMEX_INITIAL_BALANCE_EXPANSION_V1": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": false,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": false,
+        "metrics": {
+          "average_stress_r": 0.0,
+          "closed_drawdown_r": 0.0,
+          "current_account_feasible_share": 0.0,
+          "positive_active_month_share": 0.0,
+          "source_days": 310,
+          "stress_net_r": 0.0,
+          "stress_pf": null,
+          "top_winners_removed_stress_net_r": 0.0,
+          "trades": 0,
+          "trades_per_source_day": 0.0
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "INELIGIBLE"
+      },
+      "exam": {
+        "average_stress_r": null,
+        "closed_drawdown_r": null,
+        "current_account_feasible_share": null,
+        "decision_eligible": false,
+        "family_id": "COMEX_INITIAL_BALANCE_EXPANSION_V1",
+        "positive_active_month_share": null,
+        "promoted": false,
+        "raw_gate_pass": false,
+        "source_days": null,
+        "stage": "exam",
+        "status": "NOT_OPENED_PRIOR_STAGE_FAIL",
+        "stress_net_r": null,
+        "stress_pf": null,
+        "top_winners_removed_stress_net_r": null,
+        "trades": null,
+        "trades_per_source_day": null
+      },
+      "fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": false,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": true,
+        "metrics": {
+          "average_stress_r": 0.0,
+          "closed_drawdown_r": 0.0,
+          "current_account_feasible_share": 0.0,
+          "positive_active_month_share": 0.0,
+          "source_days": 310,
+          "stress_net_r": 0.0,
+          "stress_pf": null,
+          "top_winners_removed_stress_net_r": 0.0,
+          "trades": 0,
+          "trades_per_source_day": 0.0
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "FAIL"
+      }
+    },
+    "COMEX_INITIAL_BALANCE_FAILED_EXPANSION_V1": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": true,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": false,
+        "metrics": {
+          "average_stress_r": -0.4642947843198865,
+          "closed_drawdown_r": 32.64219375132186,
+          "current_account_feasible_share": 1.0,
+          "positive_active_month_share": 0.0,
+          "source_days": 310,
+          "stress_net_r": -31.572045333752282,
+          "stress_pf": 0.42231543927846266,
+          "top_winners_removed_stress_net_r": -37.21448294322914,
+          "trades": 68,
+          "trades_per_source_day": 0.21935483870967742
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "INELIGIBLE"
+      },
+      "exam": {
+        "average_stress_r": null,
+        "closed_drawdown_r": null,
+        "current_account_feasible_share": null,
+        "decision_eligible": false,
+        "family_id": "COMEX_INITIAL_BALANCE_FAILED_EXPANSION_V1",
+        "positive_active_month_share": null,
+        "promoted": false,
+        "raw_gate_pass": false,
+        "source_days": null,
+        "stage": "exam",
+        "status": "NOT_OPENED_PRIOR_STAGE_FAIL",
+        "stress_net_r": null,
+        "stress_pf": null,
+        "top_winners_removed_stress_net_r": null,
+        "trades": null,
+        "trades_per_source_day": null
+      },
+      "fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": false,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": true,
+        "metrics": {
+          "average_stress_r": -0.5042265942873966,
+          "closed_drawdown_r": 26.063743540864465,
+          "current_account_feasible_share": 1.0,
+          "positive_active_month_share": 0.09090909090909091,
+          "source_days": 310,
+          "stress_net_r": -27.228236091519413,
+          "stress_pf": 0.3896108622873014,
+          "top_winners_removed_stress_net_r": -32.76839137915984,
+          "trades": 54,
+          "trades_per_source_day": 0.17419354838709677
+        },
+        "promoted": false,
+        "raw_gate_pass": false,
+        "status": "FAIL"
+      }
+    }
+  },
+  "mechanical_candidate_rows": 943,
+  "opened_label_rows": 133,
+  "schema_version": "xauusd_comex_initial_balance_specialists_v1",
+  "selected_trade_rows": 122,
+  "survivors": []
+}

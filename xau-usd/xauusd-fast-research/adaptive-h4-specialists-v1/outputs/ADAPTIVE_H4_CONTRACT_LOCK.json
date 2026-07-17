@@ -1,0 +1,67 @@
+{
+  "broker_action_authorized": false,
+  "combined_sha256": "0dc938138f745dc693bd5e36e3d316af3f66e05308a0050ed129180ea859baf8",
+  "families": {
+    "H4_ADAPTIVE_POST_SHOCK_REVERSAL_V1": {
+      "maximum_hold_hours": 24.0,
+      "stop_atr": 1.25,
+      "target_r": 1.5
+    },
+    "H4_ADAPTIVE_RANGE_BREAKOUT_V1": {
+      "maximum_hold_hours": 48.0,
+      "stop_atr": 1.5,
+      "target_r": 2.0
+    },
+    "H4_ADAPTIVE_TREND_CONTINUATION_V1": {
+      "maximum_hold_hours": 48.0,
+      "stop_atr": 1.5,
+      "target_r": 2.0
+    }
+  },
+  "files": {
+    "../independent-specialists-v1/src/data.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361",
+    "../ml-candidate-rankers-v1/src/engine.py": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+    "PREREGISTRATION.md": "5d5a6de0b11e46d3c63c9d09e62c0a5b3e766894454cf2d4a9eb7ea1499dfac1",
+    "config/adaptive_h4_specialists_v1.json": "dbe4a7d35728b053b0f3b7709cbefbc69e9a1d3584453b0019a9301a714ea453",
+    "requirements.txt": "ff62c79b20b992993e98f154d9cc7a6bce8f0562fea4440847d0c41550815a13",
+    "run_research.py": "621a06949e1995d5385bbf1776a4933e84061bdd5854e80bab7237ce1acfcaf2",
+    "src/adaptive.py": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+  },
+  "locked_at_utc": "2026-07-17T13:53:56.451554Z",
+  "model": {
+    "calibration_quantile": 0.75,
+    "evaluation_block_months": 6,
+    "fit_history_share": 0.8,
+    "history_years": 4,
+    "l2_regularization": 3.0,
+    "learning_rate": 0.04,
+    "max_iter": 120,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 50,
+    "minimum_calibration_rows": 40,
+    "minimum_fit_rows": 150,
+    "purge_hours": 48,
+    "random_state": 42
+  },
+  "same_version_post_outcome_tuning_authorized": false,
+  "schema_version": "adaptive_h4_specialists_contract_lock_v1",
+  "stage_firewall": "validation_then_internal_test_then_exam",
+  "windows": {
+    "exam": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "internal_test": [
+      "2022-01-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "validation": [
+      "2020-01-01T00:00:00Z",
+      "2022-01-01T00:00:00Z"
+    ],
+    "warmup": [
+      "2016-07-01T00:00:00Z",
+      "2020-01-01T00:00:00Z"
+    ]
+  }
+}

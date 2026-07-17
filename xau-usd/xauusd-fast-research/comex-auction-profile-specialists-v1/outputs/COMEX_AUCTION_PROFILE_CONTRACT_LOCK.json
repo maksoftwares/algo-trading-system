@@ -1,0 +1,50 @@
+{
+  "broker_action_authorized": false,
+  "combined_sha256": "8a13c2d8901ac0f2e070d8602d68369a6c66e1068aaaea85bf424b086fdd2980",
+  "exam_sealed_until_prior_pass": true,
+  "families": {
+    "COMEX_OPENING_VALUE_MIGRATION_V1": {
+      "maximum_hold_hours": 4.0,
+      "stop_atr": 1.0,
+      "target_r": 1.75
+    },
+    "COMEX_PRIOR_VALUE_ACCEPTANCE_CONTINUATION_V1": {
+      "maximum_hold_hours": 3.0,
+      "stop_atr": 1.0,
+      "target_r": 1.5
+    },
+    "COMEX_PRIOR_VALUE_FAILED_AUCTION_V1": {
+      "maximum_hold_hours": 2.0,
+      "stop_atr": 0.85,
+      "target_r": 1.25
+    }
+  },
+  "files": {
+    "../independent-specialists-v1/src/data.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361",
+    "../ml-candidate-rankers-v1/src/engine.py": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+    "PREREGISTRATION.md": "e9b0066258142fe3da40eb519de12e7e9f55a8352fea7c4bd79adc1f5386dfe5",
+    "config/comex_auction_profile_specialists_v1.json": "449292c3ba1a7da9564900adef3ff6dff925f1ad8ec13cb85fb7a834f7023260",
+    "requirements.txt": "99b45a9f42a3a04113ab42be68c2d77c9f976e8ea15217b9b049a5fb489873b3",
+    "run_research.py": "0da94bdc52e2ff2cc56bc4a5b527107120aae043308c9ae811fa31ae7cd6cff6",
+    "src/auction.py": "8850ca9f9c86d6b9eb30cbeb65f6f7fcf54df202da2e53f06e8fb69b3e501754",
+    "tests/test_auction.py": "8115bbb4b91267751f6166527ede3a6c85ea126d54edee68d728a60d06c87377"
+  },
+  "locked_at_utc": "2026-07-17T13:25:25.491538Z",
+  "python_predictions_authorized": false,
+  "same_version_post_outcome_tuning_authorized": false,
+  "schema_version": "comex_auction_profile_contract_lock_v1",
+  "windows": {
+    "development": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "fit": [
+      "2022-07-01T00:00:00Z",
+      "2023-07-01T00:00:00Z"
+    ]
+  }
+}
