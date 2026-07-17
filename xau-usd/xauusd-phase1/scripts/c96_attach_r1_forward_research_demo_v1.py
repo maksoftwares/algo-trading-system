@@ -399,6 +399,7 @@ foreach($proc in $procs) {{
   $p = Get-Process -Id $proc.ProcessId -ErrorAction SilentlyContinue
   if($p) {{ Stop-Process -Id $proc.ProcessId -Force }}
 }}
+exit 0
 """
     result = subprocess.run(["powershell", "-NoProfile", "-Command", command], text=True, capture_output=True, timeout=30)
     if result.returncode != 0:
