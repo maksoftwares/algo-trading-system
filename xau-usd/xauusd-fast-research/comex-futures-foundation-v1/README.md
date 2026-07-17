@@ -48,6 +48,20 @@ uv run --with-requirements requirements.txt python estimate_or_acquire.py --exec
 
 The exact request is re-priced immediately before submission. The command refuses the job when its estimated price is above the cap. Submission does not automatically download data.
 
+Inspect the submitted job without downloading:
+
+```powershell
+uv run --with-requirements requirements.txt python inspect_or_download.py --job-id JOB_ID
+```
+
+After the job reaches `done`, explicitly download and hash every raw file:
+
+```powershell
+uv run --with-requirements requirements.txt python inspect_or_download.py --job-id JOB_ID --execute-download
+```
+
+The downloader refuses unfinished jobs and nonempty destination directories. Its manifest records the vendor job metadata, file list, byte sizes, and SHA-256 digests.
+
 Never put the API key in a command, config file, commit, or chat message.
 
 ## Verification

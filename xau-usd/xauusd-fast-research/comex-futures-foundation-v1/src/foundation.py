@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import asdict, is_dataclass
 from datetime import datetime, timezone
+from hashlib import sha256
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -102,6 +104,86 @@ def _serializable(value: Any) -> Any:
     if hasattr(value, "dict"):
         return value.dict()
     return str(value)
+
+
+def inspect_batch_job(client: Any, job_id: str) -> dict[str, Any]:
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", job_id):
+        raise AcquisitionRefused("The Databento job ID contains unsupported path characters.")
+    jobs = client.batch.list_jobs()
+    job = next((item for item in jobs if str(item.get("id")) == job_id), None)
+    if job is None:
+        raise AcquisitionRefused(f"Databento job {job_id!r} was not found in the account.")
+    state = str(job.get("state", "unknown")).lower()
+    files = client.batch.list_files(job_id) if state == "done" else []
+    return {
+        "status": "JOB_INSPECTION",
+        "job_id": job_id,
+        "state": state,
+        "job": _serializable(job),
+        "files": [_serializable(item) for item in files],
+        "downloaded": False,
+    }
+
+
+def _sha256_file(path: Path) -> str:
+    digest = sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def download_completed_job(
+    client: Any,
+    config: Mapping[str, Any],
+    *,
+    job_id: str,
+    execute_download: bool,
+) -> dict[str, Any]:
+    inspection = inspect_batch_job(client, job_id)
+    if not execute_download:
+        return inspection
+    if inspection["state"] != "done":
+        raise AcquisitionRefused(
+            f"Databento job {job_id!r} is {inspection['state']!r}; only completed jobs can download."
+        )
+
+    storage = config["storage"]
+    root = Path(storage["root"]).resolve()
+    destination = (root / storage["download_directory"] / job_id).resolve()
+    if root != destination and root not in destination.parents:
+        raise AcquisitionRefused("Resolved download path is outside the frozen storage root.")
+    if destination.exists() and any(destination.iterdir()):
+        raise AcquisitionRefused(f"Download directory is not empty: {destination}")
+    destination.mkdir(parents=True, exist_ok=True)
+
+    downloaded = [Path(path).resolve() for path in client.batch.download(job_id, output_dir=destination)]
+    file_records: list[dict[str, Any]] = []
+    for path in downloaded:
+        if destination != path and destination not in path.parents:
+            raise AcquisitionRefused(f"Vendor returned a path outside the job directory: {path}")
+        if not path.is_file():
+            raise AcquisitionRefused(f"Downloaded path is not a file: {path}")
+        file_records.append(
+            {
+                "path": str(path),
+                "size_bytes": path.stat().st_size,
+                "sha256": _sha256_file(path),
+            }
+        )
+    if not file_records:
+        raise AcquisitionRefused("The completed job returned no downloaded files.")
+
+    inspection.update(
+        {
+            "status": "DOWNLOADED_AND_HASHED",
+            "downloaded_utc": datetime.now(timezone.utc).isoformat(),
+            "download_directory": str(destination),
+            "downloaded_files": file_records,
+            "downloaded": True,
+        }
+    )
+    return inspection
 
 
 def submit_authorized(
