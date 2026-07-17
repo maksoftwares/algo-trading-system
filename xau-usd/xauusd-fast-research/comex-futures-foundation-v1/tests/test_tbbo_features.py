@@ -78,10 +78,14 @@ def test_roll_instrument_features_do_not_cross_contracts() -> None:
     assert pd.isna(first_new_contract["price_impulse_ticks_5s"])
 
 
-def test_duplicate_trade_event_is_rejected() -> None:
+def test_identical_trade_rows_are_preserved_as_distinct_fills() -> None:
     duplicated = pd.concat([events(), events().iloc[[0]]], ignore_index=True)
-    with pytest.raises(ValueError, match="duplicate"):
-        normalize_tbbo(duplicated)
+    normalized = normalize_tbbo(duplicated)
+    matching = normalized.loc[
+        (normalized["sequence"] == events().iloc[0]["sequence"])
+        & (normalized["price"] == events().iloc[0]["price"])
+    ]
+    assert matching["event_ordinal_in_message"].tolist() == [0, 1]
 
 
 def feature_rows() -> pd.DataFrame:

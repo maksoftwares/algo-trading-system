@@ -41,6 +41,15 @@ def test_trade_schema_does_not_require_unavailable_book_fields() -> None:
     assert not any(column.startswith("bid_") or column.startswith("ask_") for column in normalized)
 
 
+def test_identical_trade_rows_are_counted_as_distinct_fills() -> None:
+    duplicated = pd.concat([trades().iloc[[0]], trades().iloc[[0]]], ignore_index=True)
+    normalized = normalize_trades(duplicated)
+    seconds = aggregate_trade_seconds(duplicated, tick_size=0.1)
+    assert normalized["event_ordinal_in_message"].tolist() == [0, 1]
+    assert seconds.iloc[0]["trade_count"] == 2
+    assert seconds.iloc[0]["contract_volume"] == pytest.approx(10.0)
+
+
 def test_trade_second_bar_uses_all_prints() -> None:
     seconds = aggregate_trade_seconds(trades(), tick_size=0.1)
     first = seconds.iloc[0]

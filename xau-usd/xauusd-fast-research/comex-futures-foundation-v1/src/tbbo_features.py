@@ -97,12 +97,13 @@ def normalize_trades(frame: pd.DataFrame) -> pd.DataFrame:
         normalized[column] = pd.to_numeric(normalized[column], errors="raise")
     if (normalized["size"] <= 0).any():
         raise ValueError("Trade size must be positive.")
-    if normalized.duplicated(EVENT_KEY).any():
-        raise ValueError("Input contains duplicate trade events.")
-
     normalized = normalized.sort_values(
         ["ts_event", "publisher_id", "instrument_id", "sequence"], kind="stable"
     ).reset_index(drop=True)
+    # A venue message can contain multiple economically distinct fills with identical fields.
+    normalized["event_ordinal_in_message"] = normalized.groupby(
+        EVENT_KEY, sort=False, dropna=False
+    ).cumcount()
     normalized["aggressor_sign"] = normalized["side"].map({"B": 1.0, "A": -1.0, "N": 0.0})
     normalized["buy_volume"] = np.where(normalized["aggressor_sign"] > 0, normalized["size"], 0.0)
     normalized["sell_volume"] = np.where(normalized["aggressor_sign"] < 0, normalized["size"], 0.0)
