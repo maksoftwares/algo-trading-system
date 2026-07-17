@@ -1,0 +1,13 @@
+{
+  "candidate_digest": "6598bf57fc1ae748b1eadc236dc5c69e00950f1244063200d411f41195a91cc6",
+  "config_sha256": "b1b559dbdb052004b420b751d311d8e14b7d453bf0eee85cf9a054cc03d3e185",
+  "data_loader_sha256": "9f45b1ab3866dd47ad282048475b9a39bb2825ddb2eb878c4592ec0f7b1add1f",
+  "execution_engine_sha256": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+  "gold_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "labeled_candidate_rows": 4292,
+  "macro_feature_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+  "mechanical_candidate_rows": 4817,
+  "selected_digest": "b7081060a0f71b120427a7c11b9c3fe91c1ab82a4826b3198db7d87e0ece7419",
+  "selected_trade_rows": 3030,
+  "specialists_sha256": "9e91d1a6c386f7bbee1331c968e82ba98dab6457a1a8fd656517017fda7a4750"
+}
