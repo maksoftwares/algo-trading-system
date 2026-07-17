@@ -16,6 +16,7 @@
     "required_raw_inventory_classification": "DATA_READY",
     "source_candidate_contract_path": "config/ml/a3_ml_dukascopy_m5_momentum_portability.json",
     "source_candidate_contract_sha256": "e1388bd68cf4bd7e788e4bedc5e67bc10b7bc5b3557a24eff0a366c5b54ff9c3",
+    "m5_cache_relative_root": "research/xau-m5-momentum-portability-v1/bars",
     "ea_path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
     "ea_sha256": "c590adabc92fe4b63dac22812e4ac9a12882b23b6ed8242848470f90fd01e265",
     "portfolio_spec_path": "docs/A1_XAU_M5_MOMENTUM_CLEAN_LONG_SHORT_PORTFOLIO_FORWARD_DRAFT_2026_07_02.md",

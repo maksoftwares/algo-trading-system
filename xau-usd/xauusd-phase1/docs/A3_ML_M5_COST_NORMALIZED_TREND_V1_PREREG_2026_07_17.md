@@ -4,6 +4,12 @@ Date: `2026-07-17`
 
 Status: `PREREGISTERED_NOT_IMPLEMENTED_NOT_RUN`
 
+Source-cache amendment: the first source-only launch was stopped before candidate
+payoff replay because it was rebuilding M5 bars already frozen by the source
+campaign. V1 now reuses that exact 72-month cache and extends it through June 2026.
+No strategy outcome was produced or inspected, and no strategy rule, geometry, cost,
+window, or gate changed.
+
 ## Premise
 
 The frozen M5 momentum trigger generated `2,842` raw candidates across six years,

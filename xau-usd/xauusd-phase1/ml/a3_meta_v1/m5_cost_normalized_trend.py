@@ -85,7 +85,6 @@ def run_m5_cost_normalized_trend(root: Path, contract_path: Path | None = None) 
     )
     if len(months) != int(contract["period"]["expected_months"]):
         raise M5CostNormalizedTrendError("research month count changed")
-    external_root = storage_root / contract["external_output_subdirectory"]
     h1_bars, h1_audits = prepare_verified_h1_bars(
         storage_root,
         storage_root / "research" / "xau-label-factory-v1" / "bars",
@@ -95,7 +94,7 @@ def run_m5_cost_normalized_trend(root: Path, contract_path: Path | None = None) 
     )
     m5_bars, m5_audits = prepare_verified_m5_bars(
         storage_root,
-        external_root / "bars",
+        storage_root / contract["source_lock"]["m5_cache_relative_root"],
         str(contract["symbol"]),
         months,
         foundation,
@@ -301,6 +300,10 @@ def _validate_contract(contract: Mapping[str, Any]) -> None:
         raise M5CostNormalizedTrendError("exact source trigger reuse is required")
     if source.get("candidate_threshold_changes_authorized"):
         raise M5CostNormalizedTrendError("candidate threshold changes are forbidden")
+    if source.get("m5_cache_relative_root") != (
+        "research/xau-m5-momentum-portability-v1/bars"
+    ):
+        raise M5CostNormalizedTrendError("frozen M5 source cache changed")
     selection = contract.get("selection", {})
     if selection.get("ml_ranking_authorized"):
         raise M5CostNormalizedTrendError("ML ranking is forbidden in V1")
