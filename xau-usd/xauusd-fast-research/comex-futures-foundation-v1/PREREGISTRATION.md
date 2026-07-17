@@ -16,6 +16,15 @@ Primary COMEX gold futures trades and top-of-book state may contain short-horizo
 4. Do not acquire `mbp-1` unless TBBO evidence justifies the additional depth and cost.
 5. Record the Databento job metadata, request parameters, raw-file hashes, and instrument definitions before analysis.
 
+## Frozen first-pass mechanisms
+
+The exact thresholds and session rules are stored in `config/futures_flow_feature_contract_v1.json` and must not be changed after inspecting acquired events.
+
+1. `flow_continuation` tests whether concentrated buyer- or seller-initiated volume continues when short-window futures price impulse and top-of-book imbalance agree.
+2. `absorption_reversal` tests whether concentrated one-sided flow reverses when price makes little progress and the opposing top-of-book queue remains stronger.
+
+Events are aggregated into completed UTC seconds. Features never cross raw instrument IDs, candidates are disabled during the first five minutes of each mapped contract, and the liquid-session clock is expressed in `America/New_York` so daylight-saving changes are causal and explicit.
+
 ## Research sequence after acquisition
 
 1. Decode DBN without converting timestamps or prices through lossy text formats.

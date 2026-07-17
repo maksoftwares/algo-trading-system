@@ -19,6 +19,15 @@ The frozen first-choice schema is `tbbo`: every futures trade plus the best bid 
 
 Continuous prices remain unadjusted across contract rolls. Any later feature builder must retain the source instrument mapping and must not treat roll jumps as market returns.
 
+## Frozen feature contract
+
+`config/futures_flow_feature_contract_v1.json` freezes two first-pass mechanisms before the data is inspected:
+
+- `flow_continuation`: unusually concentrated aggressive flow, matching short-window price impulse, and matching top-of-book pressure.
+- `absorption_reversal`: unusually concentrated one-sided flow that fails to move price while the top-of-book queue opposes the aggressor.
+
+`src/tbbo_features.py` converts TBBO events into completed one-second feature rows. Rolling features are isolated by raw futures instrument ID, so a continuous-contract roll cannot create a false impulse. A five-minute warm-up follows each instrument transition, and candidate timestamps are restricted to 08:20-13:30 New York time with daylight-saving conversion.
+
 ## Estimate without spending
 
 Set `DATABENTO_API_KEY` in the environment, then run:

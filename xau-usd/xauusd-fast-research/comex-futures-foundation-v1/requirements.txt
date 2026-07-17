@@ -1,2 +1,4 @@
 databento>=0.81,<1
+numpy>=2,<3
+pandas>=2.2,<3
 pytest>=8,<9
