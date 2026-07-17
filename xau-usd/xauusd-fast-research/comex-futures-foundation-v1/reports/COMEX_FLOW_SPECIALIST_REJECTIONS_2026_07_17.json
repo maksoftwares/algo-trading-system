@@ -44,6 +44,26 @@
     "validation_status": "NOT_EVALUATED",
     "exam_status": "NOT_EVALUATED"
   },
+  "comex_filtered_m15_ranker_v1": {
+    "decision": "REJECT_BEFORE_VALIDATION",
+    "evidence_report_sha256": "F0BE98A1FA2DD5637846B198209D909A7FF4FC4E88810FB802F9E8CF327F0855",
+    "momentum": {"calibration_trades": 67, "trades_per_day": 0.258, "stress_profit_factor": 0.421, "average_stress_r": -0.441},
+    "reversion": {"calibration_trades": 88, "trades_per_day": 0.338, "stress_profit_factor": 0.527, "average_stress_r": -0.301},
+    "validation_status": "NOT_EVALUATED",
+    "exam_status": "NOT_EVALUATED"
+  },
+  "regular_comex_hour_ranker_v1": {
+    "decision": "REJECT_BEFORE_VALIDATION",
+    "evidence_report_sha256": "8F1DA7EEB5E4C4EDA91CB3DAF9BC8961BC209819B771B820ACCE1367DF6789FA",
+    "calibration_trades": 319,
+    "trades_per_day": 1.227,
+    "stress_profit_factor": 0.852,
+    "average_stress_r": -0.113,
+    "maximum_drawdown_r": 43.571,
+    "validation_status": "NOT_EVALUATED",
+    "exam_status": "NOT_EVALUATED",
+    "post_rejection_diagnostic": "The 98th score percentile was positive before winner removal but negative after removing its five largest winners; no V2 promotion was authorized."
+  },
   "diagnosis": {
     "sufficient_train_validation_subgroups_tested": 94,
     "subgroups_with_positive_gross_expectancy_in_both": 0,
