@@ -1,0 +1,10 @@
+{
+  "candidate_digest": "71411d7c4575bf95035f056f0942ddb9f46e244abae72b5324bc5043cd624b70",
+  "config_sha256": "8c7218a7e0f4961de1e0592acc10b4e5bf69dddb5c259f9bf685d52727473e1c",
+  "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "labeled_candidate_rows": 59145,
+  "mechanical_candidate_rows": 86749,
+  "selected_digest": "59f8def06b98adc97ffd6973d74648ff37623fbba46bfe06e4b11f8eefd3ca29",
+  "selected_trade_rows": 1133,
+  "shared_data_loader_sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+}
