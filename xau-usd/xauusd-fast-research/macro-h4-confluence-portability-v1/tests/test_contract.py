@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from research import REPO_ROOT, _simulate_one, sha256_file
+from research import REPO_ROOT, _macro_context, _simulate_one, sha256_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +26,12 @@ def test_exam_starts_after_original_matrix_ended() -> None:
     result = pd.read_csv(original)
     assert result.iloc[0]["time_window_end"].startswith("2024-12-31")
     assert pd.Timestamp(config()["windows"]["exam"][0]) >= pd.Timestamp("2025-01-01T00:00:00Z")
+
+
+def test_macro_join_keys_are_normalized_to_nanoseconds() -> None:
+    context = _macro_context(pd.Timestamp("2016-07-01T00:00:00Z"), pd.Timestamp("2026-05-15T00:00:00Z"))
+    assert context
+    assert {str(frame["timestamp_utc"].dtype) for frame in context.values()} == {"datetime64[ns, UTC]"}
 
 
 def test_native_long_execution_enters_ask_and_exits_bid_target() -> None:

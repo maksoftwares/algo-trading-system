@@ -106,7 +106,7 @@ def _strategy_bars(frame: pd.DataFrame) -> pd.DataFrame:
 
 def _macro_context(start: pd.Timestamp, end: pd.Timestamp) -> dict[str, pd.DataFrame]:
     project = SimpleNamespace(root=PHASE0_ROOT)
-    return {
+    context = {
         MACRO_FRAME_KEY: load_macro_real_yield_context(project, start, end),
         INFLATION_EXPECTATIONS_FRAME_KEY: load_inflation_expectations_context(project, start, end),
         TREASURY_CURVE_FRAME_KEY: load_treasury_curve_context(project, start, end),
@@ -115,6 +115,9 @@ def _macro_context(start: pd.Timestamp, end: pd.Timestamp) -> dict[str, pd.DataF
         GVZ_FRAME_KEY: load_gvz_volatility_context(project, start, end),
         FINANCIAL_CONDITIONS_FRAME_KEY: load_financial_conditions_context(project, start, end),
     }
+    for frame in context.values():
+        frame["timestamp_utc"] = pd.to_datetime(frame["timestamp_utc"], utc=True).astype("datetime64[ns, UTC]")
+    return context
 
 
 def generate_candidates(h4: pd.DataFrame, d1: pd.DataFrame, config: dict[str, Any]) -> pd.DataFrame:
