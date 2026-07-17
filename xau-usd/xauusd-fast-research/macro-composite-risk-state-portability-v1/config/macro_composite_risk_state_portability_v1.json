@@ -1,0 +1,78 @@
+{
+  "schema_version": "xauusd_macro_composite_risk_state_portability_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "fred_source_root": "xau-usd/xauusd-phase0/data/raw",
+  "fred_sources": {
+    "real_yield_10y": {"path": "macro/FRED_DFII10.csv", "column": "DFII10", "lag_calendar_days": 1, "sha256": "e4270250d6f3bd39f5a154d3a64cf8f863ba3212da8475f79e2abe1da914cf4b"},
+    "dollar_index_broad": {"path": "macro/FRED_DTWEXBGS.csv", "column": "DTWEXBGS", "lag_calendar_days": 7, "sha256": "12fac5ce6d3ba88566ee11bb3b34e504fb3eade422f763b0e56c07fe529ae1a5"},
+    "breakeven_5y": {"path": "inflation_expectations/FRED_T5YIE.csv", "column": "T5YIE", "lag_calendar_days": 1, "sha256": "daf61c3b1e9dc1c02ab6bac8402ddc815601b8e43318fd225b1425ffbd6a9ef8"},
+    "dgs2": {"path": "treasury_curve/FRED_DGS2.csv", "column": "DGS2", "lag_calendar_days": 1, "sha256": "b3c9d90b1ce5d24e96238ca99a4ef83a071f02c9b13197e16145fa6217505653"},
+    "treasury_10y2y": {"path": "treasury_curve/FRED_T10Y2Y.csv", "column": "T10Y2Y", "lag_calendar_days": 1, "sha256": "0e957fd80c546b5d634813f831debe20b7f14d2cef9d19bf08e603fe66f8dcdb"},
+    "baa10y": {"path": "credit_spread/FRED_BAA10Y.csv", "column": "BAA10Y", "lag_calendar_days": 1, "sha256": "0ff45a2b63a7db178fac394fad012de907227e31ebec8740b594ea507f1d1288"},
+    "vix_close": {"path": "risk/FRED_VIXCLS.csv", "column": "VIXCLS", "lag_calendar_days": 1, "sha256": "a9221746e5f8b8d279daed69300dfe1fd4b57c2091668c430a7b7afdc6af97a3"},
+    "gvz_close": {"path": "options/FRED_GVZCLS.csv", "column": "GVZCLS", "lag_calendar_days": 1, "sha256": "7100f5450eda011478a71b0d623412da7d2887ee9598ad3543a906b266cca359"},
+    "nfci": {"path": "financial_conditions/FRED_NFCI.csv", "column": "NFCI", "lag_calendar_days": 7, "sha256": "27fac30428e179d8b715fcac1c25ad62ab91e765e90b50b8276177eb237f63cb"}
+  },
+  "signal": {
+    "atr_period": 14,
+    "ema_period": 40,
+    "return_bars": 6,
+    "composite_threshold": 3,
+    "stop_atr": 1.20,
+    "target_r": 1.65,
+    "maximum_hold_hours": 36,
+    "one_candidate_per_day_and_direction": true
+  },
+  "execution": {
+    "minimum_stop_atr": 0.75,
+    "maximum_stop_atr": 3.0,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_entry_gap_minutes": 10,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_hours": 0,
+    "maximum_trades_per_family_utc_day": 1
+  },
+  "windows": {
+    "replication_fit": ["2016-07-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "development": ["2021-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "exam": ["2024-07-01T00:00:00Z", "2026-05-22T00:00:00Z"]
+  },
+  "gates": {
+    "replication_fit": {"minimum_trades": 50, "minimum_trades_per_source_day": 0.03, "minimum_stress_pf": 1.20, "minimum_average_stress_r": 0.03, "minimum_positive_active_month_share": 0.40, "maximum_closed_drawdown_r": 18.0, "top_winners_removed": 5},
+    "development": {"minimum_trades": 30, "minimum_trades_per_source_day": 0.03, "minimum_stress_pf": 1.25, "minimum_average_stress_r": 0.05, "minimum_positive_active_month_share": 0.40, "maximum_closed_drawdown_r": 15.0, "top_winners_removed": 5},
+    "exam": {"minimum_trades": 20, "minimum_trades_per_source_day": 0.03, "minimum_stress_pf": 1.30, "minimum_average_stress_r": 0.08, "minimum_positive_active_month_share": 0.40, "maximum_closed_drawdown_r": 10.0, "top_winners_removed": 5}
+  },
+  "outputs": {
+    "directory": "outputs",
+    "candidate_ledger": "MACRO_COMPOSITE_CANDIDATES.csv",
+    "selected_trade_ledger": "MACRO_COMPOSITE_SELECTED_TRADES.csv",
+    "stage_metrics": "MACRO_COMPOSITE_STAGE_METRICS.csv",
+    "result_json": "MACRO_COMPOSITE_RESULT.json",
+    "result_markdown": "MACRO_COMPOSITE_RESULT.md",
+    "manifest": "MACRO_COMPOSITE_MANIFEST.json"
+  },
+  "research_controls": {
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_untouched_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
