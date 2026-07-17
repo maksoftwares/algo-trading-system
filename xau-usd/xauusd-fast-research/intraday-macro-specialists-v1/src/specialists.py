@@ -125,8 +125,8 @@ def generate_candidates(
     frame = prepare_frame(gold_m15, macro_m15, geometry)
     dxy_pressure = frame["dxy_gold_pressure_z"]
     bond_pressure = frame["bond_gold_pressure_z"]
-    dxy_direction = np.sign(dxy_pressure).astype("Int64")
-    bond_direction = np.sign(bond_pressure).astype("Int64")
+    dxy_direction = np.sign(dxy_pressure).fillna(0).astype(int)
+    bond_direction = np.sign(bond_pressure).fillna(0).astype(int)
     continuation_min = float(geometry["continuation_gold_move_atr_min"])
     continuation_max = float(geometry["continuation_gold_move_atr_max"])
     body_min = float(geometry["minimum_body_atr"])
@@ -168,7 +168,7 @@ def generate_candidates(
         & (dxy_pressure.abs() >= float(geometry["consensus_impulse_z_min"]))
         & (bond_pressure.abs() >= float(geometry["consensus_impulse_z_min"]))
     )
-    consensus_direction = np.sign(dxy_pressure).astype("Int64")
+    consensus_direction = np.sign(dxy_pressure).fillna(0).astype(int)
     dislocation_prior = consensus_direction * frame["gold_prior_1h_atr"]
     dislocation_body = consensus_direction * frame["body_atr"]
     directional_close = pd.Series(

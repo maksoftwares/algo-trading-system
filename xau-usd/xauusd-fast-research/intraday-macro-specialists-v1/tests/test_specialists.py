@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from specialists import prepare_frame
+from specialists import generate_candidates, prepare_frame
 
 
 def frames(rows: int = 220) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -55,6 +55,14 @@ def test_macro_join_requires_exact_completed_timestamp() -> None:
     result = prepare_frame(gold, macro, geometry())
     assert len(result) == 29
     assert gold.iloc[10]["timestamp_utc"] not in set(result["timestamp_utc"])
+
+
+def test_candidate_generation_handles_warmup_rows() -> None:
+    root = Path(__file__).resolve().parents[1]
+    config = json.loads((root / "config" / "intraday_macro_specialists_v1.json").read_text())
+    gold, macro = frames()
+    result = generate_candidates(gold, macro, config)
+    assert set(result.get("family_id", pd.Series(dtype=str))).issubset(set(config["families"]))
 
 
 def test_configuration_cannot_authorize_execution() -> None:
