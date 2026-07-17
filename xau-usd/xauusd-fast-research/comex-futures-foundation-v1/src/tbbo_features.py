@@ -70,7 +70,7 @@ def load_trades_dbn(path: Path) -> pd.DataFrame:
     frame = db.DBNStore.from_file(path).to_df(
         price_type="float",
         pretty_ts=True,
-        map_symbols=True,
+        map_symbols=False,
         schema="trades",
     )
     if isinstance(frame, pd.DataFrame):
@@ -109,7 +109,7 @@ def normalize_trades(frame: pd.DataFrame) -> pd.DataFrame:
     normalized["unknown_volume"] = np.where(normalized["aggressor_sign"] == 0, normalized["size"], 0.0)
     normalized["signed_volume"] = normalized["size"] * normalized["aggressor_sign"]
     normalized["notional"] = normalized["price"] * normalized["size"]
-    normalized["feature_time_utc"] = normalized["ts_event"].dt.floor("s") + pd.Timedelta(seconds=1)
+    normalized["feature_time_utc"] = normalized["ts_event"].dt.floor("s") + pd.offsets.Second(1)
     return normalized
 
 
