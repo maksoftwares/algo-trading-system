@@ -1,0 +1,12 @@
+{
+  "candidate_digest": "1f8d59508a01e33b72ea2b485235fcfc66f04fc9761cf96110e2d22c3d381171",
+  "config_sha256": "8987c2a2f4ae19f21d87d487af787599bd1ada0ed29f5b3d7b2057f9e63a36f3",
+  "data_loader_sha256": "9b1484ce79b8989180754172684e39d0f4ed14466729734c37e27e6e4793ee32",
+  "execution_engine_sha256": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+  "gold_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "labeled_candidate_rows": 203,
+  "mechanical_candidate_rows": 227,
+  "selected_digest": "7802944b05087657bcc7b8836223c4bc74f2d93c60ea6c53dbe10c01e71d80e5",
+  "selected_trade_rows": 159,
+  "specialist_sha256": "fdb66aee313fc6d408f84d647364e19e7c81e3dc9ec03e1be7f63cd38aaf74c2"
+}
