@@ -1,0 +1,13 @@
+{
+  "candidate_digest": "f98db0b88850a15aa16159e89c4dc127bd5c3f923086f4b4893c3f4e197a6dca",
+  "comex_vwap_sha256": "dabf4b9e1c50a922f1edae73fe26ff137f3f3c5a44df320537262e3afddeb732",
+  "config_sha256": "a513dc96417a2186d9fedcc94c873c9ec1e23ee2bfa87e72a722caa50bcac259",
+  "data_loader_sha256": "bc3928fe7362594b7d16d0dc2165234007b8a7b250d02a34118cc065977b25a2",
+  "execution_engine_sha256": "2cfddaf26949d90477854bebf59637b6142cacac8cd0f6612312bbf64428e72f",
+  "gold_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "labeled_candidate_rows": 591,
+  "mechanical_candidate_rows": 1184,
+  "selected_digest": "5896e5d13ae6c6ceac5e9d543722cc98fa32e8d01ff0c31a9e9086ac7a763263",
+  "selected_trade_rows": 428,
+  "specialists_sha256": "4193a7dd3960d7d1d7d029e3673ad2bb14f3d7df5ec69d42975cca2480330acd"
+}

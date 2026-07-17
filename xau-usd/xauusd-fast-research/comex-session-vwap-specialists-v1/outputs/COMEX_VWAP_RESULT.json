@@ -1,0 +1,228 @@
+{
+  "authorization": {
+    "broker_action_authorized": false,
+    "claims_untouched_holdout": false,
+    "ea_consumption_authorized": false,
+    "parameter_search_count": 0,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "candidate_digest": "f98db0b88850a15aa16159e89c4dc127bd5c3f923086f4b4893c3f4e197a6dca",
+  "data_evidence": {
+    "comex_vwap": {
+      "first_available_at": "2022-07-01T00:05:00+00:00",
+      "last_available_at": "2024-07-01T00:00:00+00:00",
+      "path": "C:\\ComexGoldFuturesFoundationV1\\research\\comex-session-vwap-v1\\m5_session_vwap_20220701_20240701.parquet",
+      "rows": 140781,
+      "sha256": "dabf4b9e1c50a922f1edae73fe26ff137f3f3c5a44df320537262e3afddeb732"
+    },
+    "gold": {
+      "end_utc": "2024-07-01T00:00:00+00:00",
+      "feature_cache": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "feature_manifest": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.manifest.json",
+      "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "manifest": {
+        "columns": [
+          "timestamp_ms",
+          "xau_tick_count",
+          "xau_mid_tick_open",
+          "xau_mid_tick_close",
+          "tick_signed_move",
+          "tick_move_count",
+          "tick_realized_variance",
+          "tick_spread_mean",
+          "tick_spread_last",
+          "tick_spread_max",
+          "tick_book_imbalance_mean",
+          "tick_book_imbalance_last",
+          "tick_microprice_edge_mean",
+          "tick_microprice_edge_last",
+          "price_efficiency_5m",
+          "bid_open",
+          "bid_high",
+          "bid_low",
+          "bid_close",
+          "ask_open",
+          "ask_high",
+          "ask_low",
+          "ask_close",
+          "mid_open",
+          "mid_high",
+          "mid_low",
+          "mid_close",
+          "atr",
+          "atr_ratio",
+          "quote_intensity_ratio",
+          "tick_imbalance_5m",
+          "tick_imbalance_15m",
+          "body_fraction",
+          "close_location",
+          "date_utc",
+          "hour_utc"
+        ],
+        "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+        "monthly_caches_reused": 0,
+        "monthly_caches_total": 120,
+        "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+        "reused": false,
+        "rows": 708538,
+        "schema_version": "a3_ml_dukascopy_confirmed_event_m5_cache_v1",
+        "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+      },
+      "rows": 141598,
+      "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+      "start_utc": "2022-07-01T00:00:00+00:00",
+      "timeframes": {
+        "H1": {
+          "end": "2024-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 16,
+          "rows": 11791,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "H4": {
+          "end": "2024-06-28T20:00:00+00:00",
+          "incomplete_buckets_dropped": 634,
+          "rows": 2559,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M15": {
+          "end": "2024-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 1,
+          "rows": 47199,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M30": {
+          "end": "2024-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 3,
+          "rows": 23598,
+          "start": "2022-07-01T00:00:00+00:00"
+        },
+        "M5": {
+          "end": "2024-07-01T00:00:00+00:00",
+          "incomplete_buckets_dropped": 0,
+          "rows": 141598,
+          "start": "2022-07-01T00:00:00+00:00"
+        }
+      }
+    }
+  },
+  "decision": "REJECT_COMEX_SESSION_VWAP_V1",
+  "gate_audit": {
+    "COMEX_VWAP_EXHAUSTION_REVERSION_V1": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": true,
+          "minimum_trades_per_source_day": true,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": false,
+        "metrics": {
+          "average_stress_r": -0.2330556421724498,
+          "closed_drawdown_r": 43.553277632257654,
+          "current_account_feasible_share": 0.9936305732484076,
+          "positive_active_month_share": 0.4166666666666667,
+          "source_days": 310,
+          "stress_net_r": -36.58973582107462,
+          "stress_pf": 0.6624159810811703,
+          "top_winners_removed_stress_net_r": -43.51450360499301,
+          "trades": 157,
+          "trades_per_source_day": 0.5064516129032258
+        },
+        "promoted": false,
+        "raw_gate_pass": false
+      },
+      "fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": true,
+          "minimum_trades_per_source_day": true,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": true,
+        "metrics": {
+          "average_stress_r": -0.3505451507445095,
+          "closed_drawdown_r": 51.61866831729114,
+          "current_account_feasible_share": 1.0,
+          "positive_active_month_share": 0.16666666666666666,
+          "source_days": 310,
+          "stress_net_r": -49.77741140572034,
+          "stress_pf": 0.5384681282994108,
+          "top_winners_removed_stress_net_r": -56.63944932215766,
+          "trades": 142,
+          "trades_per_source_day": 0.45806451612903226
+        },
+        "promoted": false,
+        "raw_gate_pass": false
+      }
+    },
+    "COMEX_VWAP_PULLBACK_CONTINUATION_V1": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": true,
+          "minimum_trades_per_source_day": true,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": false,
+        "metrics": {
+          "average_stress_r": -0.18053340698508422,
+          "closed_drawdown_r": 18.868277032639067,
+          "current_account_feasible_share": 1.0,
+          "positive_active_month_share": 0.3333333333333333,
+          "source_days": 310,
+          "stress_net_r": -12.637338488955894,
+          "stress_pf": 0.7590452696568414,
+          "top_winners_removed_stress_net_r": -22.05216111271924,
+          "trades": 70,
+          "trades_per_source_day": 0.22580645161290322
+        },
+        "promoted": false,
+        "raw_gate_pass": false
+      },
+      "fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": false,
+          "minimum_positive_active_month_share": false,
+          "minimum_stress_pf": false,
+          "minimum_trades": true,
+          "minimum_trades_per_source_day": false,
+          "top_winners_removed_positive": false
+        },
+        "decision_eligible": true,
+        "metrics": {
+          "average_stress_r": -0.31983062359206244,
+          "closed_drawdown_r": 17.735003170344864,
+          "current_account_feasible_share": 1.0,
+          "positive_active_month_share": 0.25,
+          "source_days": 310,
+          "stress_net_r": -18.870006791931683,
+          "stress_pf": 0.6005684311462253,
+          "top_winners_removed_stress_net_r": -28.173346540159528,
+          "trades": 59,
+          "trades_per_source_day": 0.19032258064516128
+        },
+        "promoted": false,
+        "raw_gate_pass": false
+      }
+    }
+  },
+  "interpretation": "Neither frozen family passed the chronological fit and development firewall. Do not spend time extending the cache for this version.",
+  "labeled_candidate_rows": 591,
+  "mechanical_candidate_rows": 1184,
+  "schema_version": "xauusd_comex_session_vwap_specialists_v1",
+  "selected_digest": "5896e5d13ae6c6ceac5e9d543722cc98fa32e8d01ff0c31a9e9086ac7a763263",
+  "selected_trade_rows": 428,
+  "survivors": []
+}
