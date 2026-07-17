@@ -52,6 +52,9 @@ def adapt_m5(source: pd.DataFrame, point_size: float) -> pd.DataFrame:
     missing = sorted(required.difference(frame.columns))
     if missing:
         raise ValueError(f"Dukascopy feature cache is missing portability columns: {missing}")
+    for column in ("bar_start_utc", "timestamp_utc"):
+        if column in frame.columns:
+            frame[column] = pd.to_datetime(frame[column], utc=True).astype("datetime64[ns, UTC]")
     spread_open = (frame["ask_open"] - frame["bid_open"]).clip(lower=0.0)
     spread_close = (frame["ask_close"] - frame["bid_close"]).clip(lower=0.0)
     frame["spread_open_points"] = spread_open / point_size

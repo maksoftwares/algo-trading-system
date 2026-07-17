@@ -45,6 +45,8 @@ def test_frozen_rotation_parameters_match_original_config() -> None:
 def test_adapter_preserves_native_spread_and_tick_max_stress() -> None:
     frame = pd.DataFrame(
         {
+            "bar_start_utc": pd.Series([pd.Timestamp("2026-01-02T10:00:00Z")], dtype="datetime64[ms, UTC]"),
+            "timestamp_utc": pd.Series([pd.Timestamp("2026-01-02T10:05:00Z")], dtype="datetime64[ms, UTC]"),
             "ask_open": [2000.50],
             "bid_open": [2000.10],
             "ask_close": [2000.60],
@@ -57,6 +59,8 @@ def test_adapter_preserves_native_spread_and_tick_max_stress() -> None:
     assert adapted.iloc[0]["spread_open_points"] == pytest.approx(40.0)
     assert adapted.iloc[0]["spread_p95_points"] == pytest.approx(75.0)
     assert adapted.iloc[0]["volume_sum"] == 42.0
+    assert str(adapted["bar_start_utc"].dtype) == "datetime64[ns, UTC]"
+    assert str(adapted["timestamp_utc"].dtype) == "datetime64[ns, UTC]"
 
 
 def test_result_cannot_authorize_execution() -> None:
