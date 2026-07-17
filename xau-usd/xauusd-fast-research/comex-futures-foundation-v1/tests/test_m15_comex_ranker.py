@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from m15_comex_ranker import align_comex_context, source_date
+from m15_comex_ranker import align_comex_context, normalize_m15_time_columns, source_date
 from tbbo_features import load_trade_feature_config
 
 
@@ -21,3 +21,16 @@ def test_alignment_uses_completed_second_and_direction() -> None:
     assert result.iloc[0]["feature_time_utc"] <= result.iloc[0]["signal_time"]
     assert result.iloc[0]["comex_dir_flow_5s"] == -1.0
     assert result.iloc[0]["comex_dir_impulse_5s"] < 0
+
+
+def test_ranker_adapter_accepts_original_m15_time_columns() -> None:
+    dataset = pd.DataFrame(
+        {
+            "signal_time": pd.to_datetime(["2022-08-01T12:00:00Z"]),
+            "entry_time": pd.to_datetime(["2022-08-01T12:05:00Z"]),
+            "exit_time": pd.to_datetime(["2022-08-01T12:10:00Z"]),
+        }
+    )
+    normalized = normalize_m15_time_columns(dataset)
+    assert "entry_time_utc" in normalized
+    assert "exit_time_utc" in normalized

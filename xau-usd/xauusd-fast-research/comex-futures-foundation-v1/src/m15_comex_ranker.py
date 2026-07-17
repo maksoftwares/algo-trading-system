@@ -66,7 +66,19 @@ def align_comex_context(
     return joined.loc[finite].reset_index(drop=True)
 
 
+def normalize_m15_time_columns(dataset: pd.DataFrame) -> pd.DataFrame:
+    normalized = dataset.rename(
+        columns={"entry_time": "entry_time_utc", "exit_time": "exit_time_utc"}
+    ).copy()
+    required = {"signal_time", "entry_time_utc", "exit_time_utc"}
+    missing = sorted(required - set(normalized.columns))
+    if missing:
+        raise ValueError(f"M15 ranker dataset is missing time columns: {missing}")
+    return normalized
+
+
 def run_m15_ranker(dataset: pd.DataFrame, config: Mapping[str, Any]) -> tuple[dict[str, Any], pd.DataFrame]:
+    dataset = normalize_m15_time_columns(dataset)
     exam_start = pd.Timestamp(config["windows"]["exam"][0])
     if (dataset["signal_time"] >= exam_start).any():
         raise ValueError("COMEX M15 ranker V1 refuses exam rows.")
