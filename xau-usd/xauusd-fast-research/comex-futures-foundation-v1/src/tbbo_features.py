@@ -11,7 +11,8 @@ from foundation import AcquisitionRefused, ROOT
 
 
 DEFAULT_FEATURE_CONFIG = ROOT / "config" / "futures_flow_feature_contract_v1.json"
-REQUIRED_COLUMNS = {
+DEFAULT_TRADE_FEATURE_CONFIG = ROOT / "config" / "futures_trade_feature_contract_v1.json"
+TRADE_REQUIRED_COLUMNS = {
     "ts_event",
     "publisher_id",
     "instrument_id",
@@ -19,6 +20,8 @@ REQUIRED_COLUMNS = {
     "side",
     "price",
     "size",
+}
+BOOK_REQUIRED_COLUMNS = {
     "bid_px_00",
     "ask_px_00",
     "bid_sz_00",
@@ -39,6 +42,10 @@ def load_feature_config(path: Path = DEFAULT_FEATURE_CONFIG) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_trade_feature_config(path: Path = DEFAULT_TRADE_FEATURE_CONFIG) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def load_tbbo_dbn(path: Path) -> pd.DataFrame:
     try:
         import databento as db
@@ -55,41 +62,43 @@ def load_tbbo_dbn(path: Path) -> pd.DataFrame:
     return pd.concat(frame, ignore_index=False)
 
 
-def normalize_tbbo(frame: pd.DataFrame) -> pd.DataFrame:
+def load_trades_dbn(path: Path) -> pd.DataFrame:
+    try:
+        import databento as db
+    except ImportError as exc:
+        raise AcquisitionRefused("The databento package is required to decode DBN files.") from exc
+    frame = db.DBNStore.from_file(path).to_df(
+        price_type="float",
+        pretty_ts=True,
+        map_symbols=True,
+        schema="trades",
+    )
+    if isinstance(frame, pd.DataFrame):
+        return frame
+    return pd.concat(frame, ignore_index=False)
+
+
+def normalize_trades(frame: pd.DataFrame) -> pd.DataFrame:
     normalized = frame.copy()
     if "ts_event" not in normalized.columns and normalized.index.name == "ts_event":
         normalized = normalized.reset_index()
-    missing = sorted(REQUIRED_COLUMNS - set(normalized.columns))
+    missing = sorted(TRADE_REQUIRED_COLUMNS - set(normalized.columns))
     if missing:
-        raise ValueError(f"TBBO input is missing required columns: {missing}")
+        raise ValueError(f"Trade input is missing required columns: {missing}")
 
     normalized["ts_event"] = pd.to_datetime(normalized["ts_event"], utc=True)
     normalized["side"] = normalized["side"].astype(str).str.upper().str[0]
     if not normalized["side"].isin(["A", "B", "N"]).all():
         invalid = sorted(normalized.loc[~normalized["side"].isin(["A", "B", "N"]), "side"].unique())
-        raise ValueError(f"Unsupported TBBO side values: {invalid}")
+        raise ValueError(f"Unsupported trade side values: {invalid}")
 
-    numeric = [
-        "publisher_id",
-        "instrument_id",
-        "sequence",
-        "price",
-        "size",
-        "bid_px_00",
-        "ask_px_00",
-        "bid_sz_00",
-        "ask_sz_00",
-    ]
+    numeric = ["publisher_id", "instrument_id", "sequence", "price", "size"]
     for column in numeric:
         normalized[column] = pd.to_numeric(normalized[column], errors="raise")
     if (normalized["size"] <= 0).any():
-        raise ValueError("TBBO trade size must be positive.")
-    if (normalized["bid_sz_00"] < 0).any() or (normalized["ask_sz_00"] < 0).any():
-        raise ValueError("TBBO top-of-book sizes cannot be negative.")
-    if (normalized["ask_px_00"] < normalized["bid_px_00"]).any():
-        raise ValueError("TBBO input contains a crossed top of book.")
+        raise ValueError("Trade size must be positive.")
     if normalized.duplicated(EVENT_KEY).any():
-        raise ValueError("TBBO input contains duplicate trade events.")
+        raise ValueError("Input contains duplicate trade events.")
 
     normalized = normalized.sort_values(
         ["ts_event", "publisher_id", "instrument_id", "sequence"], kind="stable"
@@ -102,6 +111,49 @@ def normalize_tbbo(frame: pd.DataFrame) -> pd.DataFrame:
     normalized["notional"] = normalized["price"] * normalized["size"]
     normalized["feature_time_utc"] = normalized["ts_event"].dt.floor("s") + pd.Timedelta(seconds=1)
     return normalized
+
+
+def normalize_tbbo(frame: pd.DataFrame) -> pd.DataFrame:
+    missing = sorted(BOOK_REQUIRED_COLUMNS - set(frame.columns))
+    if missing:
+        raise ValueError(f"TBBO input is missing required book columns: {missing}")
+    normalized = normalize_trades(frame)
+    for column in BOOK_REQUIRED_COLUMNS:
+        normalized[column] = pd.to_numeric(normalized[column], errors="raise")
+    if (normalized["bid_sz_00"] < 0).any() or (normalized["ask_sz_00"] < 0).any():
+        raise ValueError("TBBO top-of-book sizes cannot be negative.")
+    if (normalized["ask_px_00"] < normalized["bid_px_00"]).any():
+        raise ValueError("TBBO input contains a crossed top of book.")
+    return normalized
+
+
+def aggregate_trade_seconds(events: pd.DataFrame, *, tick_size: float) -> pd.DataFrame:
+    if tick_size <= 0:
+        raise ValueError("tick_size must be positive.")
+    frame = normalize_trades(events)
+    grouped = frame.groupby(["instrument_id", "feature_time_utc"], sort=True, observed=True)
+    seconds = grouped.agg(
+        publisher_id=("publisher_id", "last"),
+        event_time_last_utc=("ts_event", "last"),
+        sequence_last=("sequence", "last"),
+        trade_count=("size", "size"),
+        contract_volume=("size", "sum"),
+        buy_volume=("buy_volume", "sum"),
+        sell_volume=("sell_volume", "sum"),
+        unknown_volume=("unknown_volume", "sum"),
+        signed_volume=("signed_volume", "sum"),
+        notional=("notional", "sum"),
+        trade_price_open=("price", "first"),
+        trade_price_last=("price", "last"),
+    ).reset_index()
+    seconds["trade_vwap"] = seconds["notional"] / seconds["contract_volume"]
+    seconds["mid_px"] = seconds["trade_price_last"]
+    seconds["flow_imbalance_1s"] = seconds["signed_volume"] / seconds["contract_volume"]
+    seconds["unknown_volume_share_1s"] = seconds["unknown_volume"] / seconds["contract_volume"]
+    if "symbol" in frame.columns:
+        symbols = grouped["symbol"].last().rename("symbol").reset_index()
+        seconds = seconds.merge(symbols, on=["instrument_id", "feature_time_utc"], validate="one_to_one")
+    return seconds.sort_values(["feature_time_utc", "instrument_id"], kind="stable").reset_index(drop=True)
 
 
 def aggregate_tbbo_seconds(events: pd.DataFrame, *, tick_size: float) -> pd.DataFrame:
@@ -283,5 +335,55 @@ def generate_candidates(features: pd.DataFrame, config: Mapping[str, Any]) -> pd
         "price_impulse_ticks_5s",
         "quote_imbalance",
         "spread_ticks",
+    ]
+    return result[columns].sort_values(["feature_time_utc", "family"], kind="stable").reset_index(drop=True)
+
+
+def generate_trade_candidates(features: pd.DataFrame, config: Mapping[str, Any]) -> pd.DataFrame:
+    frame = features.copy()
+    frame["feature_time_utc"] = pd.to_datetime(frame["feature_time_utc"], utc=True)
+    base = _session_mask(frame, config["session"])
+    base &= frame["instrument_age_seconds"] >= config["instrument_warmup_seconds"]
+    rules = config["candidate_rules"]
+    candidates: list[pd.DataFrame] = []
+
+    continuation = rules["flow_continuation"]
+    flow_sign = np.sign(frame["flow_imbalance_5s"])
+    continuation_mask = base.copy()
+    continuation_mask &= frame["contract_volume_5s"] >= continuation["minimum_contract_volume_5s"]
+    continuation_mask &= frame["flow_imbalance_5s"].abs() >= continuation["minimum_absolute_flow_imbalance_5s"]
+    continuation_mask &= frame["flow_imbalance_30s"].abs() >= continuation["minimum_absolute_flow_imbalance_30s"]
+    continuation_mask &= np.sign(frame["flow_imbalance_30s"]) == flow_sign
+    continuation_mask &= frame["volume_share_5s_of_60s"] >= continuation["minimum_volume_share_5s_of_60s"]
+    continuation_mask &= frame["price_impulse_ticks_5s"] * flow_sign >= continuation["minimum_directional_impulse_ticks_5s"]
+    selected = frame.loc[continuation_mask].copy()
+    selected["family"] = "flow_continuation"
+    selected["direction"] = np.where(selected["flow_imbalance_5s"] > 0, "LONG", "SHORT")
+    candidates.append(_apply_cooldown(selected, int(continuation["cooldown_seconds"])))
+
+    absorption = rules["absorption_reversal"]
+    absorption_mask = base.copy()
+    absorption_mask &= frame["contract_volume_5s"] >= absorption["minimum_contract_volume_5s"]
+    absorption_mask &= frame["flow_imbalance_5s"].abs() >= absorption["minimum_absolute_flow_imbalance_5s"]
+    absorption_mask &= frame["volume_share_5s_of_60s"] >= absorption["minimum_volume_share_5s_of_60s"]
+    absorption_mask &= frame["price_impulse_ticks_5s"].abs() <= absorption["maximum_absolute_impulse_ticks_5s"]
+    selected = frame.loc[absorption_mask].copy()
+    selected["family"] = "absorption_reversal"
+    selected["direction"] = np.where(selected["flow_imbalance_5s"] < 0, "LONG", "SHORT")
+    candidates.append(_apply_cooldown(selected, int(absorption["cooldown_seconds"])))
+
+    result = pd.concat(candidates, ignore_index=True)
+    if result.empty:
+        return result
+    columns = [
+        "feature_time_utc",
+        "instrument_id",
+        "family",
+        "direction",
+        "contract_volume_5s",
+        "flow_imbalance_5s",
+        "flow_imbalance_30s",
+        "volume_share_5s_of_60s",
+        "price_impulse_ticks_5s",
     ]
     return result[columns].sort_values(["feature_time_utc", "family"], kind="stable").reset_index(drop=True)

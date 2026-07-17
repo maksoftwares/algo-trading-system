@@ -193,12 +193,26 @@ def submit_authorized(
     schema: str,
     max_cost_usd: float,
     execute: bool,
+    verified_free_credit_usd: float | None = None,
 ) -> dict[str, Any]:
     controls = config["acquisition_controls"]
     if controls["require_explicit_execute"] and not execute:
         raise AcquisitionRefused("Acquisition requires the explicit --execute flag.")
     if max_cost_usd <= 0:
         raise AcquisitionRefused("Acquisition requires an explicit positive --max-cost-usd cap.")
+    payment_authorized = bool(controls.get("payment_authorized", True))
+    if not payment_authorized:
+        if not controls.get("free_credit_balance_must_be_verified", False):
+            raise AcquisitionRefused("Zero-payment acquisition requires locked free-credit verification.")
+        if verified_free_credit_usd is None or verified_free_credit_usd <= 0:
+            raise AcquisitionRefused(
+                "Zero-payment acquisition requires --verified-free-credit-usd from the current billing page."
+            )
+        free_credit_cap = float(controls["maximum_free_credit_consumption_usd"])
+        if max_cost_usd > verified_free_credit_usd or max_cost_usd > free_credit_cap:
+            raise AcquisitionRefused(
+                "The authorized cost cap exceeds the verified or campaign-limited free credit."
+            )
 
     request = cost_request(config, schema)
     estimated_cost = float(client.metadata.get_cost(**request))
@@ -215,6 +229,8 @@ def submit_authorized(
         "schema": schema,
         "estimated_cost_usd": estimated_cost,
         "authorized_cost_cap_usd": max_cost_usd,
+        "payment_authorized": payment_authorized,
+        "verified_free_credit_usd": verified_free_credit_usd,
         "job": _serializable(job),
         "submitted": True,
         "automatic_download": controls["automatic_download"],

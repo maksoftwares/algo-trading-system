@@ -85,14 +85,28 @@ def test_execute_requires_explicit_flag() -> None:
 def test_estimate_above_cap_cannot_submit() -> None:
     fake = client(25.01)
     with pytest.raises(AcquisitionRefused, match="exceeds"):
-        submit_authorized(fake, config(), schema="tbbo", max_cost_usd=25.0, execute=True)
+        submit_authorized(
+            fake,
+            config(),
+            schema="tbbo",
+            max_cost_usd=25.0,
+            execute=True,
+            verified_free_credit_usd=125.0,
+        )
     assert len(fake.metadata.requests) == 1
     assert fake.batch.requests == []
 
 
 def test_authorized_submit_uses_exact_frozen_request() -> None:
     fake = client(24.99)
-    result = submit_authorized(fake, config(), schema="tbbo", max_cost_usd=25.0, execute=True)
+    result = submit_authorized(
+        fake,
+        config(),
+        schema="tbbo",
+        max_cost_usd=25.0,
+        execute=True,
+        verified_free_credit_usd=125.0,
+    )
     assert fake.metadata.requests == [cost_request(config(), "tbbo")]
     assert fake.batch.requests == [batch_request(config(), "tbbo")]
     assert result["job"] == {"id": "job-123"}
@@ -100,10 +114,58 @@ def test_authorized_submit_uses_exact_frozen_request() -> None:
     assert result["automatic_download"] is False
 
 
+def test_zero_payment_contract_requires_current_free_credit() -> None:
+    locked = config()
+    fake = client(24.99)
+    with pytest.raises(AcquisitionRefused, match="verified-free-credit"):
+        submit_authorized(fake, locked, schema="tbbo", max_cost_usd=25.0, execute=True)
+    assert fake.metadata.requests == []
+    assert fake.batch.requests == []
+
+
+def test_zero_payment_contract_rejects_cap_above_free_credit() -> None:
+    locked = config()
+    fake = client(24.99)
+    with pytest.raises(AcquisitionRefused, match="exceeds the verified"):
+        submit_authorized(
+            fake,
+            locked,
+            schema="tbbo",
+            max_cost_usd=121.0,
+            execute=True,
+            verified_free_credit_usd=120.0,
+        )
+    assert fake.metadata.requests == []
+    assert fake.batch.requests == []
+
+
+def test_zero_payment_submit_records_no_payment_authority() -> None:
+    locked = config()
+    fake = client(24.99)
+    result = submit_authorized(
+        fake,
+        locked,
+        schema="tbbo",
+        max_cost_usd=25.0,
+        execute=True,
+        verified_free_credit_usd=125.0,
+    )
+    assert result["payment_authorized"] is False
+    assert result["verified_free_credit_usd"] == 125.0
+    assert len(fake.batch.requests) == 1
+
+
 def test_unfrozen_schema_is_refused_before_vendor_call() -> None:
     fake = client()
     with pytest.raises(AcquisitionRefused, match="not in the frozen"):
-        submit_authorized(fake, config(), schema="mbo", max_cost_usd=25.0, execute=True)
+        submit_authorized(
+            fake,
+            config(),
+            schema="mbo",
+            max_cost_usd=25.0,
+            execute=True,
+            verified_free_credit_usd=125.0,
+        )
     assert fake.metadata.requests == []
     assert fake.batch.requests == []
 

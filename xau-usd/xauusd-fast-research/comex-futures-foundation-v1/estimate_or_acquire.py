@@ -25,6 +25,7 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--execute", action="store_true")
     command.add_argument("--schema")
     command.add_argument("--max-cost-usd", type=float)
+    command.add_argument("--verified-free-credit-usd", type=float)
     return command
 
 
@@ -47,10 +48,16 @@ def main() -> int:
                 schema=schema,
                 max_cost_usd=max_cost,
                 execute=True,
+                verified_free_credit_usd=args.verified_free_credit_usd,
             )
         else:
-            if args.max_cost_usd is not None or args.schema is not None:
-                raise AcquisitionRefused("--schema and --max-cost-usd are only valid with --execute.")
+            if any(
+                value is not None
+                for value in (args.max_cost_usd, args.schema, args.verified_free_credit_usd)
+            ):
+                raise AcquisitionRefused(
+                    "--schema, --max-cost-usd, and --verified-free-credit-usd are only valid with --execute."
+                )
             payload = estimate_costs(client, config)
         manifest = write_manifest(config, payload, args.output)
     except AcquisitionRefused as exc:

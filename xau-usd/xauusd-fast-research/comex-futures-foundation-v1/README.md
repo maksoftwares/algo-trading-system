@@ -43,10 +43,10 @@ This calls only the historical metadata cost endpoint and writes a manifest unde
 After reviewing the estimate, a batch job can be submitted only with both `--execute` and a positive cost cap:
 
 ```powershell
-uv run --with-requirements requirements.txt python estimate_or_acquire.py --execute --schema tbbo --max-cost-usd 125
+uv run --with-requirements requirements.txt python estimate_or_acquire.py --config config/zero_payment_trades_v1.json --execute --schema trades --max-cost-usd 121 --verified-free-credit-usd 125
 ```
 
-The exact request is re-priced immediately before submission. The command refuses the job when its estimated price is above the cap. Submission does not automatically download data.
+The exact request is re-priced immediately before submission. The command refuses the job when its estimated price is above the cap, when the cap is above the currently verified free-credit balance, or when payment authority is absent. Submission does not automatically download data.
 
 Inspect the submitted job without downloading:
 

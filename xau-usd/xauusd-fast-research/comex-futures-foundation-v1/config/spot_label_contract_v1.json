@@ -1,0 +1,73 @@
+{
+  "contract_id": "comex-flow-spot-label-contract-v1",
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_bar_width_ms": 300000
+  },
+  "splits": {
+    "train": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 2000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "flow_continuation": {
+      "atr_stop_multiple": 0.4,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 30
+    },
+    "absorption_reversal": {
+      "atr_stop_multiple": 0.35,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.2,
+      "maximum_hold_minutes": 20
+    }
+  },
+  "gates": {
+    "train": {
+      "minimum_trades": 500,
+      "minimum_profit_factor": 1.2,
+      "minimum_stress_profit_factor": 1.1,
+      "minimum_average_stress_r": 0.03,
+      "minimum_trades_per_trading_day": 0.5
+    },
+    "validation": {
+      "minimum_trades": 150,
+      "minimum_profit_factor": 1.2,
+      "minimum_stress_profit_factor": 1.1,
+      "minimum_average_stress_r": 0.03,
+      "minimum_trades_per_trading_day": 0.5
+    },
+    "exam": {
+      "minimum_trades": 150,
+      "minimum_profit_factor": 1.2,
+      "minimum_stress_profit_factor": 1.1,
+      "minimum_average_stress_r": 0.03,
+      "minimum_trades_per_trading_day": 0.5
+    }
+  },
+  "research_controls": {
+    "entry_strictly_after_signal": true,
+    "atr_from_completed_m5_bar_only": true,
+    "side_correct_bid_ask_execution": true,
+    "gap_through_uses_observed_quote": true,
+    "random_split_prohibited": true,
+    "same_version_post_exam_tuning_authorized": false,
+    "research_only": true,
+    "broker_action_authorized": false
+  }
+}
