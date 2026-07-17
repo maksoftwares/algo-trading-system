@@ -109,8 +109,16 @@ def process_label_file(
     atr_source: Any,
     tick_store: Any,
     config: Mapping[str, Any],
+    reverse_families: Sequence[str] = (),
+    include_splits: Sequence[str] | None = None,
 ) -> pd.DataFrame:
     candidates = pd.read_parquet(candidates_path)
+    candidates = prepare_label_candidates(
+        candidates,
+        config,
+        reverse_families=reverse_families,
+        include_splits=include_splits,
+    )
     if candidates.empty:
         labels = pd.DataFrame()
     else:
@@ -123,6 +131,38 @@ def process_label_file(
     destination.parent.mkdir(parents=True, exist_ok=True)
     labels.to_parquet(destination, index=False)
     return labels
+
+
+def prepare_label_candidates(
+    candidates: pd.DataFrame,
+    config: Mapping[str, Any],
+    *,
+    reverse_families: Sequence[str] = (),
+    include_splits: Sequence[str] | None = None,
+) -> pd.DataFrame:
+    result = candidates.copy()
+    requested_splits = set(include_splits or config["splits"])
+    unknown_splits = requested_splits - set(config["splits"])
+    if unknown_splits:
+        raise ValueError(f"Unknown requested splits: {sorted(unknown_splits)}")
+    timestamps = pd.to_datetime(result["feature_time_utc"], utc=True)
+    split_mask = pd.Series(False, index=result.index)
+    for split in requested_splits:
+        start, end = config["splits"][split]
+        split_mask |= (timestamps >= pd.Timestamp(start)) & (timestamps < pd.Timestamp(end))
+    result = result.loc[split_mask].copy()
+
+    reverse = set(reverse_families)
+    unknown_families = reverse - set(config["families"])
+    if unknown_families:
+        raise ValueError(f"Unknown reversed families: {sorted(unknown_families)}")
+    mask = result["family"].isin(reverse)
+    result.loc[mask, "direction"] = result.loc[mask, "direction"].map(
+        {"LONG": "SHORT", "SHORT": "LONG"}
+    )
+    if mask.any():
+        result.loc[mask, "candidate_id"] = "reverse:" + result.loc[mask, "candidate_id"].astype(str)
+    return result.reset_index(drop=True)
 
 
 def _profit_factor(values: pd.Series) -> float | None:

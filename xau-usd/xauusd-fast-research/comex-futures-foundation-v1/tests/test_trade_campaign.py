@@ -5,7 +5,12 @@ import pytest
 
 from spot_labels import load_label_config
 from tbbo_features import load_trade_feature_config
-from trade_campaign import build_evidence_report, candidates_for_events, filter_session_with_warmup
+from trade_campaign import (
+    build_evidence_report,
+    candidates_for_events,
+    filter_session_with_warmup,
+    prepare_label_candidates,
+)
 
 
 def event_frame() -> pd.DataFrame:
@@ -85,3 +90,41 @@ def test_infinite_profit_factor_is_json_safe() -> None:
     )
     assert row["profit_factor"] is None
     assert row["profit_factor_is_infinite"] is True
+
+
+def test_train_only_counterfactual_reverses_only_requested_family() -> None:
+    candidates = pd.DataFrame(
+        {
+            "candidate_id": ["a", "b", "c"],
+            "feature_time_utc": pd.to_datetime(
+                ["2023-01-01T12:00:00Z", "2023-01-01T12:01:00Z", "2025-01-01T12:00:00Z"]
+            ),
+            "family": ["flow_continuation", "absorption_reversal", "flow_continuation"],
+            "direction": ["LONG", "SHORT", "LONG"],
+        }
+    )
+    result = prepare_label_candidates(
+        candidates,
+        load_label_config(),
+        reverse_families=["flow_continuation"],
+        include_splits=["train"],
+    )
+    assert result[["candidate_id", "direction"]].to_dict("records") == [
+        {"candidate_id": "reverse:a", "direction": "SHORT"},
+        {"candidate_id": "b", "direction": "SHORT"},
+    ]
+
+
+def test_counterfactual_refuses_unknown_split_or_family() -> None:
+    candidates = pd.DataFrame(
+        {
+            "candidate_id": ["a"],
+            "feature_time_utc": pd.to_datetime(["2023-01-01T12:00:00Z"]),
+            "family": ["flow_continuation"],
+            "direction": ["LONG"],
+        }
+    )
+    with pytest.raises(ValueError, match="Unknown requested splits"):
+        prepare_label_candidates(candidates, load_label_config(), include_splits=["future"])
+    with pytest.raises(ValueError, match="Unknown reversed families"):
+        prepare_label_candidates(candidates, load_label_config(), reverse_families=["unknown"])

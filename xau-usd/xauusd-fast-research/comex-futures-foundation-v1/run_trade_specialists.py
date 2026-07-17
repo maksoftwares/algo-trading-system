@@ -43,6 +43,9 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--feature-config", type=Path, default=DEFAULT_TRADE_FEATURE_CONFIG)
     command.add_argument("--label-config", type=Path, default=DEFAULT_LABEL_CONFIG)
     command.add_argument("--candidate-only", action="store_true")
+    command.add_argument("--existing-candidate-directory", type=Path)
+    command.add_argument("--reverse-family", action="append", default=[])
+    command.add_argument("--include-split", action="append")
     command.add_argument("--force", action="store_true")
     command.add_argument("--limit-files", type=int)
     return command
@@ -72,8 +75,11 @@ def main() -> int:
     label_directory = args.output_directory / "labels"
     candidate_paths: list[Path] = []
     for index, source in enumerate(sources, start=1):
-        destination = candidate_directory / _partition_name(source)
-        if args.force or not destination.is_file():
+        source_candidate_directory = args.existing_candidate_directory or candidate_directory
+        destination = source_candidate_directory / _partition_name(source)
+        if args.existing_candidate_directory is not None and not destination.is_file():
+            raise FileNotFoundError(f"Existing candidate partition is missing: {destination}")
+        if args.existing_candidate_directory is None and (args.force or not destination.is_file()):
             process_candidate_file(source, destination, feature_config)
         candidate_paths.append(destination)
         if index == 1 or index % 25 == 0 or index == len(sources):
@@ -102,6 +108,8 @@ def main() -> int:
                 atr_source=atr_source,
                 tick_store=tick_store,
                 config=label_config,
+                reverse_families=args.reverse_family,
+                include_splits=args.include_split,
             )
         label_paths.append(destination)
         if index == 1 or index % 25 == 0 or index == len(candidate_paths):
@@ -115,6 +123,8 @@ def main() -> int:
             "job_directory": str(args.job_directory.resolve()),
             "source_file_count": len(sources),
             "feature_contract_id": feature_config["contract_id"],
+            "reverse_families": sorted(args.reverse_family),
+            "included_splits": args.include_split or list(label_config["splits"]),
         }
     )
     args.output_directory.mkdir(parents=True, exist_ok=True)
