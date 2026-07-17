@@ -756,10 +756,7 @@ def _purged_oof_predictions(
         evaluation = _segment(
             train, fold["evaluation_start_utc"], fold["evaluation_end_exclusive_utc"]
         )
-        if (
-            len(fit) < int(contract["model"]["min_samples_leaf"]) * 2
-            or evaluation.empty
-        ):
+        if fit.empty or evaluation.empty:
             raise A2IntradayContextRankerError(
                 f"OOF fold is too small: {fold['fold_id']}"
             )
