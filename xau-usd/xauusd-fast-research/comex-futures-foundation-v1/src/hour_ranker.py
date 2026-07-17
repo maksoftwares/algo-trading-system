@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from datetime import timedelta
 from typing import Any
 
 import numpy as np
@@ -119,7 +120,7 @@ def align_hour_comex(events: pd.DataFrame, signals: pd.DataFrame, feature_config
     joined = pd.merge_asof(
         signals.sort_values("signal_time"), features,
         left_on="signal_time", right_on="feature_time_utc", direction="backward",
-        tolerance=pd.Timedelta("2s"),
+        tolerance=timedelta(seconds=2),
     )
     joined = joined.loc[joined["feature_time_utc"].notna()].copy()
     if (joined["feature_time_utc"] > joined["signal_time"]).any():
