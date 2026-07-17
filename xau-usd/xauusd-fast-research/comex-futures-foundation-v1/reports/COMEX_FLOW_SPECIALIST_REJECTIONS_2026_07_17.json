@@ -35,6 +35,15 @@
     "stress_profit_factor": 0.394,
     "maximum_drawdown_usd": 14807.47
   },
+  "completed_spot_context_ranker_v1": {
+    "decision": "REJECT_BEFORE_VALIDATION",
+    "evidence_report_sha256": "FC7E1FDFBD52BE14E9780BF23DCD534BEF20A77A4FE4700A9F18F133B52ADF5D",
+    "flow_continuation_calibration_selected_trades": 0,
+    "absorption_reversal_calibration_selected_trades": 5,
+    "absorption_reversal_calibration_stress_profit_factor": 0.177,
+    "validation_status": "NOT_EVALUATED",
+    "exam_status": "NOT_EVALUATED"
+  },
   "diagnosis": {
     "sufficient_train_validation_subgroups_tested": 94,
     "subgroups_with_positive_gross_expectancy_in_both": 0,
