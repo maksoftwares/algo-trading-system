@@ -481,17 +481,32 @@ def build_combined_m5(
 
 
 def active_day_coverage(
-    source_frame: pd.DataFrame, xau_frame: pd.DataFrame
+    source_frame: pd.DataFrame,
+    xau_frame: pd.DataFrame,
+    *,
+    start_utc: str,
+    end_exclusive_utc: str,
 ) -> list[dict[str, Any]]:
+    start = pd.Timestamp(start_utc)
+    end_exclusive = pd.Timestamp(end_exclusive_utc)
+    xau_timestamps = pd.to_datetime(xau_frame["timestamp_ms"], unit="ms", utc=True)
     xau_days = set(
-        pd.to_datetime(xau_frame["timestamp_ms"], unit="ms", utc=True)
+        xau_timestamps.loc[
+            (xau_timestamps >= start) & (xau_timestamps < end_exclusive)
+        ]
         .dt.floor("D")
         .unique()
     )
+    source_in_window = source_frame.loc[
+        (source_frame["timestamp_utc"] >= start)
+        & (source_frame["timestamp_utc"] < end_exclusive)
+    ]
     rows: list[dict[str, Any]] = []
     for symbol in EXPECTED_SYMBOLS:
-        available = source_frame[f"{symbol.lower()}_available"].fillna(False)
-        source_days = set(source_frame.loc[available, "timestamp_utc"].dt.floor("D").unique())
+        available = source_in_window[f"{symbol.lower()}_available"].fillna(False)
+        source_days = set(
+            source_in_window.loc[available, "timestamp_utc"].dt.floor("D").unique()
+        )
         overlap = source_days & xau_days
         rows.append(
             {
@@ -631,7 +646,13 @@ def run_intraday_macro_source(
             "USTBONDTRUSD_available".lower(),
         ],
     )
-    active_coverage = active_day_coverage(source_frame, xau_frame)
+    window = contract["window"]
+    active_coverage = active_day_coverage(
+        source_frame,
+        xau_frame,
+        start_utc=window["start_utc"],
+        end_exclusive_utc=window["end_exclusive_utc"],
+    )
     gates = contract["quality_gates"]
     minimum_share = float(gates["minimum_active_source_day_share_vs_xau"])
     coverage_valid = all(

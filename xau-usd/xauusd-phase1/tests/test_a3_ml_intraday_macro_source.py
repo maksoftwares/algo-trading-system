@@ -105,24 +105,38 @@ def test_combined_m5_preserves_symbol_availability(tmp_path: Path) -> None:
     assert combined.loc[0, "ustbondtrusd_mid_open"] == 112.0
 
 
-def test_active_day_coverage_uses_xau_days_as_denominator() -> None:
+def test_active_day_coverage_uses_common_window_xau_days_as_denominator() -> None:
     day = pd.Timestamp("2024-01-02T00:00:00Z")
     source = pd.DataFrame(
         {
-            "timestamp_utc": [day, day + pd.Timedelta(days=1)],
-            "dollaridxusd_available": [True, True],
-            "ustbondtrusd_available": [True, False],
+            "timestamp_utc": [
+                day - pd.Timedelta(days=1),
+                day,
+                day + pd.Timedelta(days=1),
+            ],
+            "dollaridxusd_available": [True, True, True],
+            "ustbondtrusd_available": [True, True, False],
         }
     )
     xau = pd.DataFrame(
         {
             "timestamp_ms": [
+                int((day - pd.Timedelta(days=1)).timestamp() * 1000),
                 int(day.timestamp() * 1000),
                 int((day + pd.Timedelta(days=1)).timestamp() * 1000),
             ]
         }
     )
-    rows = {row["symbol"]: row for row in active_day_coverage(source, xau)}
+    rows = {
+        row["symbol"]: row
+        for row in active_day_coverage(
+            source,
+            xau,
+            start_utc=day.isoformat(),
+            end_exclusive_utc=(day + pd.Timedelta(days=2)).isoformat(),
+        )
+    }
+    assert rows["DOLLARIDXUSD"]["xau_active_days"] == 2
     assert rows["DOLLARIDXUSD"]["active_source_day_share_vs_xau"] == 1.0
     assert rows["USTBONDTRUSD"]["active_source_day_share_vs_xau"] == 0.5
 
