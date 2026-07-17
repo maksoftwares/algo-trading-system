@@ -15,6 +15,7 @@ from ml.a3_meta_v1.a2_intraday_context_ranker import (
     _segment,
     _select_daily,
     _stress_cost,
+    _to_epoch_ms,
     _validate_contract,
     _validate_lifecycle_frames,
 )
@@ -123,6 +124,7 @@ def test_feature_cutoff_and_stress_cost_are_exact() -> None:
     timestamps = pd.Series(pd.to_datetime(["2020-01-01T10:05:00Z"], utc=True))
     cutoff = _feature_cutoff_timestamp(timestamps, 5)
     assert cutoff.iloc[0] == pd.Timestamp("2020-01-01T10:00:00Z")
+    assert _to_epoch_ms(cutoff).iloc[0] == 1_577_872_800_000
     costs = _contract()["broker_cost_source_lock"]
     stress = _stress_cost(pd.Series([0.50, 1.00]), pd.Series([0.0, 2.0]), costs)
     np.testing.assert_allclose(stress.to_numpy(), [0.55, 1.0])

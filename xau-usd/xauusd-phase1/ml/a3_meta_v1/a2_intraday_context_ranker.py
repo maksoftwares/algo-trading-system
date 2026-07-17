@@ -565,9 +565,7 @@ def _build_dataset(
     data["feature_cutoff_timestamp"] = _feature_cutoff_timestamp(
         data["order_timestamp"], cutoff_minutes
     )
-    data["feature_cutoff_timestamp_ms"] = (
-        data["feature_cutoff_timestamp"].astype("int64") // 1_000_000
-    )
+    data["feature_cutoff_timestamp_ms"] = _to_epoch_ms(data["feature_cutoff_timestamp"])
     data = data.merge(
         features,
         left_on="feature_cutoff_timestamp_ms",
@@ -658,8 +656,8 @@ def _build_dataset(
     data["regime_trend"] = data["regime"].isin(["TREND_UP", "TREND_DOWN"]).astype(float)
     data["regime_range"] = data["regime"].eq("RANGE").astype(float)
     data["regime_shock"] = data["regime"].eq("SHOCK").astype(float)
-    data["entry_time_ms"] = data["entry_timestamp"].astype("int64") // 1_000_000
-    data["exit_time_ms"] = data["exit_timestamp"].astype("int64") // 1_000_000
+    data["entry_time_ms"] = _to_epoch_ms(data["entry_timestamp"])
+    data["exit_time_ms"] = _to_epoch_ms(data["exit_timestamp"])
     data["entry_time_utc"] = data["entry_timestamp"].dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     data["exit_time_utc"] = data["exit_timestamp"].dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     population = len(data)
@@ -716,6 +714,10 @@ def _feature_cutoff_timestamp(
     order_timestamp: pd.Series, cutoff_minutes: int
 ) -> pd.Series:
     return order_timestamp - pd.Timedelta(minutes=cutoff_minutes)
+
+
+def _to_epoch_ms(timestamp: pd.Series) -> pd.Series:
+    return timestamp.map(lambda value: value.value // 1_000_000).astype("int64")
 
 
 def _stress_cost(
