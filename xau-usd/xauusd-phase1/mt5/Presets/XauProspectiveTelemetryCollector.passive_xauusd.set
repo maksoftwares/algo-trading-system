@@ -1,0 +1,11 @@
+InpRunId=xau-prospective-telemetry-v1
+InpDryRunOnly=true
+InpTargetSymbol=XAUUSD
+InpExpectedServerMarker=Demo
+InpAllowedAccountLoginsCsv=1025742,1033030,1033669
+InpCollectTicks=true
+InpCollectMarketDepth=true
+InpCollectTradeTransactions=true
+InpHeartbeatSeconds=5
+InpFlushEveryRows=100
+InpFilePrefix=xau_prospective
