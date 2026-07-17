@@ -1,0 +1,9 @@
+{
+  "candidate_digest": "d2f178fbc93225c0597bfc1d159390a2960415ad82cf1180ce2e62ff8b2e4582",
+  "candidate_rows": 4782,
+  "config_sha256": "fce6ca656d56f7d77ad3187608a96ea55874f94c4bf517ffa8b9fc2ef5736f02",
+  "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "shared_data_loader_sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361",
+  "trade_digest": "6086b5707920a00c64556ee7e73c6b36b8e92df682ea97b4da0c9b2ba2c3dff5",
+  "trade_rows": 2266
+}
