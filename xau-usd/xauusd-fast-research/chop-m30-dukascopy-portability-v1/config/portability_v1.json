@@ -1,0 +1,81 @@
+{
+  "schema_version": "xauusd_chop_m30_dukascopy_portability_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "ancestry": {
+    "source_commit": "50bf9b5dbcc563a20254e9041e41ec0762c86f6e",
+    "original_config_sha256": "c88710d410757c468c67ea362215b3d33c011fc171ba92d4b70464d2e14c8dc8",
+    "regime_sha256": "fa53fc2f0a0d679b0d5f0e9c7640419d801f4a2f4d82366c80556a1dd503484f",
+    "strategies_sha256": "4b935ab44790aa4a3ea312f3085432aa9bb6a4b919c9b0260242fbe47012672e",
+    "backtest_sha256": "bcb31b8e77e647225b6125e216ba1bf5239fa91cd0ce5b700bbe376f2aeb91de",
+    "data_adapter_sha256": "97c23bdb6c776c0c45f0343796d2bd470bb84463b5782d823a8f1a38a83d1aa0"
+  },
+  "regime": {
+    "atr_period_h4": 14,
+    "adx_period_h4": 14,
+    "lookback_h4": 24,
+    "adx_max": 25.0,
+    "er_max": 0.38,
+    "displacement_atr_max": 1.75,
+    "range_width_atr_min": 1.0,
+    "range_width_atr_max": 8.0,
+    "entry_consecutive": 2,
+    "exit_consecutive": 2,
+    "exit_adx": 30.0,
+    "exit_er": 0.55,
+    "exit_displacement_atr": 2.5
+  },
+  "rotation": {
+    "excursion_z": 1.5,
+    "target_band_z": 1.25,
+    "stop_atr": 1.25,
+    "max_hold_hours": 12
+  },
+  "execution": {
+    "cooldown_hours": 6,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "ounces": 1.0,
+    "point_size": 0.01
+  },
+  "windows": {
+    "train": ["2016-07-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "validation": ["2021-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "exam": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "full": ["2016-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "train": {"minimum_trades": 50, "minimum_trades_per_source_day": 0.04, "minimum_pf": 1.10, "minimum_stress_pf": 1.00, "minimum_average_stress_r": 0.01, "maximum_drawdown_r": 15.0, "top_winners_removed": 5},
+    "validation": {"minimum_trades": 35, "minimum_trades_per_source_day": 0.04, "minimum_pf": 1.15, "minimum_stress_pf": 1.05, "minimum_average_stress_r": 0.02, "maximum_drawdown_r": 12.0, "top_winners_removed": 5},
+    "exam": {"minimum_trades": 25, "minimum_trades_per_source_day": 0.04, "minimum_pf": 1.20, "minimum_stress_pf": 1.10, "minimum_average_stress_r": 0.03, "maximum_drawdown_r": 10.0, "top_winners_removed": 3},
+    "full": {"minimum_trades": 120, "minimum_trades_per_source_day": 0.04, "minimum_pf": 1.20, "minimum_stress_pf": 1.10, "minimum_average_stress_r": 0.03, "maximum_drawdown_r": 20.0, "minimum_positive_active_year_share": 0.60, "top_winners_removed": 10}
+  },
+  "outputs": {
+    "directory": "outputs",
+    "signals": "CHOP_M30_DUKASCOPY_SIGNALS.csv",
+    "trades": "CHOP_M30_DUKASCOPY_TRADES.csv",
+    "stage_metrics": "CHOP_M30_DUKASCOPY_STAGE_METRICS.csv",
+    "result_json": "CHOP_M30_DUKASCOPY_RESULT.json",
+    "result_markdown": "CHOP_M30_DUKASCOPY_RESULT.md",
+    "manifest": "CHOP_M30_DUKASCOPY_MANIFEST.json"
+  },
+  "research_controls": {
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_untouched_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
