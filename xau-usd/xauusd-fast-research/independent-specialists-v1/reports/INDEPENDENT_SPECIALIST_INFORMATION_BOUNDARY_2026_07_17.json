@@ -1,0 +1,52 @@
+{
+  "report_id": "xauusd-independent-specialist-information-boundary-2026-07-17",
+  "decision": "NO_VERIFIED_MULTI_SPECIALIST_PORTFOLIO_CURRENT_INFORMATION_SET",
+  "near_survivors": [
+    {
+      "family": "R1_UPTREND_LONG",
+      "status": "NEAR_SURVIVOR_SAMPLE_GATE_ONLY",
+      "stages": {
+        "replication_fit": {"trades": 48, "stress_pf": 1.965, "average_stress_r": 0.490, "closed_drawdown_r": 6.699, "top_five_removed_stress_net_r": 14.037, "pass": true},
+        "development": {"trades": 28, "required_trades": 30, "stress_pf": 1.805, "average_stress_r": 0.436, "closed_drawdown_r": 4.555, "top_five_removed_stress_net_r": 2.694, "pass": false, "failed_checks": ["minimum_trades"]},
+        "exam": {"trades": 41, "stress_pf": 2.911, "average_stress_r": 0.778, "closed_drawdown_r": 3.696, "top_five_removed_stress_net_r": 22.263, "pass": true}
+      }
+    }
+  ],
+  "new_rejections": [
+    {
+      "family": "H4_MACRO_COMPOSITE_RISK_STATE_V0_PORTABILITY",
+      "decision": "REJECT_MACRO_COMPOSITE_PORTABILITY",
+      "fit_stress_pf": 0.828,
+      "development_stress_pf": 0.650,
+      "exam_stress_pf": 1.230
+    },
+    {
+      "family": "COMEX_VWAP_PULLBACK_CONTINUATION_V1",
+      "decision": "REJECT_COMEX_SESSION_VWAP_V1",
+      "fit_trades_per_source_day": 0.190,
+      "fit_stress_pf": 0.601,
+      "development_stress_pf": 0.759
+    },
+    {
+      "family": "COMEX_VWAP_EXHAUSTION_REVERSION_V1",
+      "decision": "REJECT_COMEX_SESSION_VWAP_V1",
+      "fit_trades_per_source_day": 0.458,
+      "fit_stress_pf": 0.538,
+      "development_stress_pf": 0.662
+    }
+  ],
+  "required_unlocks": [
+    "prospective_unchanged_r1_shadow_labels",
+    "zero_payment_primary_order_book_depth",
+    "zero_payment_causal_gold_options_surface",
+    "synchronized_executable_multi_broker_history",
+    "owner_accepted_lower_frequency_objective"
+  ],
+  "authorization": {
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_execution_authorized": false,
+    "live_execution_authorized": false,
+    "databento_payment_authorized": false
+  }
+}
