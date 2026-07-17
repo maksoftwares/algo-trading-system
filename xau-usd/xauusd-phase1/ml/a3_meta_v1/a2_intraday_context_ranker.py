@@ -534,12 +534,11 @@ def _build_macro_features(
         for lookback in config["return_lookbacks_m5_bars"]:
             lookback = int(lookback)
             contiguous = (
-                available.astype(int)
-                .rolling(lookback + 1, min_periods=lookback + 1)
-                .sum()
-                == lookback + 1
-            ) & data["timestamp_ms"].sub(data["timestamp_ms"].shift(lookback)).eq(
-                lookback * 300_000
+                available
+                & available.shift(lookback, fill_value=False)
+                & data["timestamp_ms"]
+                .sub(data["timestamp_ms"].shift(lookback))
+                .eq(lookback * 300_000)
             )
             returns = close.pct_change(lookback, fill_method=None).where(contiguous)
             result[f"{short}_z_{lookback * 5}m"] = (returns / volatility).where(
