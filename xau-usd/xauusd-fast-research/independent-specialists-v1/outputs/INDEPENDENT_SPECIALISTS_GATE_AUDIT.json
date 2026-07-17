@@ -1,0 +1,577 @@
+{
+  "R1_H1_TREND_PULLBACK_LONG_V1": {
+    "exam": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "minimum_trades_per_source_day": true,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 19,
+        "average_stress_r": -0.015140852958998502,
+        "closed_drawdown_r": 9.995358140437242,
+        "net_r": 4.742924888321717,
+        "positive_active_month_share": 0.3157894736842105,
+        "source_days": 624,
+        "stress_net_r": -0.9690145893759041,
+        "stress_pf": 0.9770163146495752,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -10.819107725246228,
+        "trades": 64,
+        "trades_per_source_day": 0.10256410256410256,
+        "win_rate": 0.359375
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "internal_test": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 18,
+        "average_stress_r": -0.1530907113160301,
+        "closed_drawdown_r": 11.721133482979054,
+        "net_r": -1.0674715455697443,
+        "positive_active_month_share": 0.2222222222222222,
+        "source_days": 620,
+        "stress_net_r": -6.582900586589295,
+        "stress_pf": 0.7899070229300956,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -16.027059802349363,
+        "trades": 43,
+        "trades_per_source_day": 0.06935483870967742,
+        "win_rate": 0.32558139534883723
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "train": {
+      "checks": {
+        "maximum_closed_drawdown_r": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": true,
+      "metrics": {
+        "active_months": 31,
+        "average_stress_r": -0.4775603232189804,
+        "closed_drawdown_r": 37.71411601188606,
+        "net_r": -21.230270837118955,
+        "positive_active_month_share": 0.25806451612903225,
+        "source_days": 1244,
+        "stress_net_r": -35.81702424142353,
+        "stress_pf": 0.41483543408673546,
+        "top_winners_removed": 10,
+        "top_winners_removed_stress_net_r": -54.21336577608987,
+        "trades": 75,
+        "trades_per_source_day": 0.06028938906752412,
+        "win_rate": 0.26666666666666666
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "validation": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 14,
+        "average_stress_r": -0.012576803055581077,
+        "closed_drawdown_r": 10.368251668732762,
+        "net_r": 4.376089399134847,
+        "positive_active_month_share": 0.42857142857142855,
+        "source_days": 621,
+        "stress_net_r": -0.490495319167662,
+        "stress_pf": 0.9809237340998048,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -9.97415431053004,
+        "trades": 39,
+        "trades_per_source_day": 0.06280193236714976,
+        "win_rate": 0.41025641025641024
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    }
+  },
+  "R2_H1_TREND_PULLBACK_SHORT_V1": {
+    "exam": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "minimum_trades_per_source_day": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 9,
+        "average_stress_r": -0.07072110100017034,
+        "closed_drawdown_r": 6.975387417266975,
+        "net_r": 0.15003372627661005,
+        "positive_active_month_share": 0.4444444444444444,
+        "source_days": 624,
+        "stress_net_r": -1.5558642220037475,
+        "stress_pf": 0.8960782029870005,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -11.183087569137049,
+        "trades": 22,
+        "trades_per_source_day": 0.035256410256410256,
+        "win_rate": 0.3181818181818182
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "internal_test": {
+      "checks": {
+        "maximum_closed_drawdown_r": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 15,
+        "average_stress_r": -0.3570336498114212,
+        "closed_drawdown_r": 21.824596525679706,
+        "net_r": -8.575979442756799,
+        "positive_active_month_share": 0.26666666666666666,
+        "source_days": 620,
+        "stress_net_r": -13.567278692834007,
+        "stress_pf": 0.5559733443714883,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -22.937260319198842,
+        "trades": 38,
+        "trades_per_source_day": 0.06129032258064516,
+        "win_rate": 0.2631578947368421
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "train": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": true,
+      "metrics": {
+        "active_months": 25,
+        "average_stress_r": -0.2509230353228938,
+        "closed_drawdown_r": 21.49640903288963,
+        "net_r": -3.160889192906544,
+        "positive_active_month_share": 0.28,
+        "source_days": 1244,
+        "stress_net_r": -16.811843366633884,
+        "stress_pf": 0.6792014989197859,
+        "top_winners_removed": 10,
+        "top_winners_removed_stress_net_r": -35.10152314387772,
+        "trades": 67,
+        "trades_per_source_day": 0.053858520900321546,
+        "win_rate": 0.31343283582089554
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "validation": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 15,
+        "average_stress_r": -0.1449317994513424,
+        "closed_drawdown_r": 10.293513080221844,
+        "net_r": -0.8609921831029386,
+        "positive_active_month_share": 0.4,
+        "source_days": 621,
+        "stress_net_r": -5.362476579699669,
+        "stress_pf": 0.7940208498199509,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -14.837104771023151,
+        "trades": 37,
+        "trades_per_source_day": 0.05958132045088567,
+        "win_rate": 0.35135135135135137
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    }
+  },
+  "R3_H1_COMPRESSION_BREAK_RETEST_V1": {
+    "exam": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "minimum_trades_per_source_day": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 0,
+        "average_stress_r": 0.0,
+        "closed_drawdown_r": 0.0,
+        "net_r": 0.0,
+        "positive_active_month_share": 0.0,
+        "source_days": 624,
+        "stress_net_r": 0.0,
+        "stress_pf": null,
+        "top_winners_removed": 0,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate": 0.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "internal_test": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 0,
+        "average_stress_r": 0.0,
+        "closed_drawdown_r": 0.0,
+        "net_r": 0.0,
+        "positive_active_month_share": 0.0,
+        "source_days": 620,
+        "stress_net_r": 0.0,
+        "stress_pf": null,
+        "top_winners_removed": 0,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate": 0.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "train": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_month_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": true,
+      "metrics": {
+        "active_months": 1,
+        "average_stress_r": 0.37675925997978055,
+        "closed_drawdown_r": 0.0,
+        "net_r": 1.0,
+        "positive_active_month_share": 1.0,
+        "source_days": 1244,
+        "stress_net_r": 0.7535185199595611,
+        "stress_pf": 1.6735151986018988,
+        "top_winners_removed": 2,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 2,
+        "trades_per_source_day": 0.001607717041800643,
+        "win_rate": 0.5
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "validation": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_month_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 2,
+        "average_stress_r": 0.3219894395293672,
+        "closed_drawdown_r": 0.0,
+        "net_r": 1.0,
+        "positive_active_month_share": 0.5,
+        "source_days": 621,
+        "stress_net_r": 0.6439788790587344,
+        "stress_pf": 1.5466878397277881,
+        "top_winners_removed": 2,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 2,
+        "trades_per_source_day": 0.00322061191626409,
+        "win_rate": 0.5
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    }
+  },
+  "R4_M15_SESSION_EXPANSION_V1": {
+    "exam": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "minimum_trades_per_source_day": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 0,
+        "average_stress_r": 0.0,
+        "closed_drawdown_r": 0.0,
+        "net_r": 0.0,
+        "positive_active_month_share": 0.0,
+        "source_days": 624,
+        "stress_net_r": 0.0,
+        "stress_pf": null,
+        "top_winners_removed": 0,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate": 0.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "internal_test": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_month_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 1,
+        "average_stress_r": 1.4125815453656683,
+        "closed_drawdown_r": 0.0,
+        "net_r": 1.5,
+        "positive_active_month_share": 1.0,
+        "source_days": 620,
+        "stress_net_r": 1.4125815453656683,
+        "stress_pf": null,
+        "top_winners_removed": 1,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 1,
+        "trades_per_source_day": 0.0016129032258064516,
+        "win_rate": 1.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "train": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": true,
+      "metrics": {
+        "active_months": 0,
+        "average_stress_r": 0.0,
+        "closed_drawdown_r": 0.0,
+        "net_r": 0.0,
+        "positive_active_month_share": 0.0,
+        "source_days": 1244,
+        "stress_net_r": 0.0,
+        "stress_pf": null,
+        "top_winners_removed": 0,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 0,
+        "trades_per_source_day": 0.0,
+        "win_rate": 0.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "validation": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 1,
+        "average_stress_r": -1.0908715334481132,
+        "closed_drawdown_r": 0.0,
+        "net_r": -1.0,
+        "positive_active_month_share": 0.0,
+        "source_days": 621,
+        "stress_net_r": -1.0908715334481132,
+        "stress_pf": 0.0,
+        "top_winners_removed": 1,
+        "top_winners_removed_stress_net_r": 0.0,
+        "trades": 1,
+        "trades_per_source_day": 0.001610305958132045,
+        "win_rate": 0.0
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    }
+  },
+  "R5_M30_CHOP_ROTATION_V1": {
+    "exam": {
+      "checks": {
+        "maximum_closed_drawdown_r": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "minimum_trades_per_source_day": true,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 21,
+        "average_stress_r": -0.5578271542281431,
+        "closed_drawdown_r": 24.401853899233746,
+        "net_r": -17.48719942799385,
+        "positive_active_month_share": 0.14285714285714285,
+        "source_days": 624,
+        "stress_net_r": -21.197431860669436,
+        "stress_pf": 0.315666024483962,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -28.146831487725947,
+        "trades": 38,
+        "trades_per_source_day": 0.060897435897435896,
+        "win_rate": 0.23684210526315788
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "internal_test": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 14,
+        "average_stress_r": -0.2473378219225888,
+        "closed_drawdown_r": 13.46072528738547,
+        "net_r": -3.2118639158392104,
+        "positive_active_month_share": 0.35714285714285715,
+        "source_days": 620,
+        "stress_net_r": -7.667472479600253,
+        "stress_pf": 0.6449762662694629,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -16.393854822602233,
+        "trades": 31,
+        "trades_per_source_day": 0.05,
+        "win_rate": 0.3548387096774194
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "train": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_month_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": true,
+      "metrics": {
+        "active_months": 27,
+        "average_stress_r": -0.13885716012240604,
+        "closed_drawdown_r": 13.283484232411654,
+        "net_r": 3.0618854735586574,
+        "positive_active_month_share": 0.4074074074074074,
+        "source_days": 1244,
+        "stress_net_r": -6.66514368587549,
+        "stress_pf": 0.7746709735252033,
+        "top_winners_removed": 10,
+        "top_winners_removed_stress_net_r": -19.865424297297714,
+        "trades": 48,
+        "trades_per_source_day": 0.03858520900321544,
+        "win_rate": 0.4583333333333333
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    },
+    "validation": {
+      "checks": {
+        "maximum_closed_drawdown_r": true,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_month_share": true,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "decision_eligible": false,
+      "metrics": {
+        "active_months": 18,
+        "average_stress_r": 0.049152185362991624,
+        "closed_drawdown_r": 4.660169862625372,
+        "net_r": 7.2794734081380135,
+        "positive_active_month_share": 0.5,
+        "source_days": 621,
+        "stress_net_r": 1.8677830437936818,
+        "stress_pf": 1.0900302115001947,
+        "top_winners_removed": 5,
+        "top_winners_removed_stress_net_r": -6.701354819890545,
+        "trades": 38,
+        "trades_per_source_day": 0.061191626409017714,
+        "win_rate": 0.47368421052631576
+      },
+      "promoted": false,
+      "raw_gate_pass": false
+    }
+  }
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 import sys
 from typing import Any
@@ -30,8 +31,10 @@ def _json_ready(value: Any) -> Any:
         return [_json_ready(item) for item in value]
     if isinstance(value, pd.Timestamp):
         return value.isoformat()
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
     if hasattr(value, "item"):
-        return value.item()
+        return _json_ready(value.item())
     return value
 
 
