@@ -1,0 +1,16 @@
+{
+  "ancestry_hashes": {
+    "backtest_sha256": "bcb31b8e77e647225b6125e216ba1bf5239fa91cd0ce5b700bbe376f2aeb91de",
+    "data_adapter_sha256": "97c23bdb6c776c0c45f0343796d2bd470bb84463b5782d823a8f1a38a83d1aa0",
+    "original_config_sha256": "c88710d410757c468c67ea362215b3d33c011fc171ba92d4b70464d2e14c8dc8",
+    "regime_sha256": "fa53fc2f0a0d679b0d5f0e9c7640419d801f4a2f4d82366c80556a1dd503484f",
+    "strategies_sha256": "4b935ab44790aa4a3ea312f3085432aa9bb6a4b919c9b0260242fbe47012672e"
+  },
+  "config_sha256": "42cc66b70428d12f413c6f6443af80e5b0d27cedfbe3389f58f2edf1eca3ff80",
+  "portability_sha256": "d48515e63f98b6063656aaaa3929d744e860f13f99cc95054b36866a2ed3a76a",
+  "runner_sha256": "eafffa3df67062b89e4f13bf9b292db3b5098346a920dab2d987eea5f8cfed9e",
+  "signal_rows": 731,
+  "source_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "trade_digest": "bde49bbe5f9343dc417a410ce4a5e9ab2ff3f34c3643e9503a1c621c98878808",
+  "trade_rows": 153
+}
