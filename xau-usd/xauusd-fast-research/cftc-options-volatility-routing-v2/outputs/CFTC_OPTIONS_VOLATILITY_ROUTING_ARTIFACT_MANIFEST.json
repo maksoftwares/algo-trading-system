@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_CONTRACT_LOCK.json": {
+      "bytes": 2111,
+      "sha256": "46e96a42afa264d04ab145860cd7e4a77e21bc2282a2847841a204659b37805a"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 680,
+      "sha256": "8eab2da416cc3491a82a26dd8fb7bbe746d25b6133f28b1daf8b34a9f6cd3e92"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_DISCOVERY_METRICS.csv": {
+      "bytes": 1423292,
+      "sha256": "ed4a1fa2875699d3fd63ae61d0b69430be1485e8ac80381e5d870ca8b433b1b0"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 309,
+      "sha256": "6803b79dd947409663209bd7d50584be6ba1921c26b88f5457e2ab078859eb93"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_POLICY_MANIFEST.csv": {
+      "bytes": 330651,
+      "sha256": "56a127fbd0c8f43d8ee8afeba60de6db5f32d9181370c427bd94ab31cbd92415"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_RESULT.json": {
+      "bytes": 4755,
+      "sha256": "2db6294e4d851a5b73ec3b1006e819ebf2cce5b10bc43b8a922f094546bf9f1d"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_RESULT.md": {
+      "bytes": 823,
+      "sha256": "6a47d52cb229d2e33834d5278ddeaa42700e0812fc1ca577157dabfd7dba38ea"
+    },
+    "CFTC_OPTIONS_VOLATILITY_ROUTING_SIGNAL_CENSUS.json": {
+      "bytes": 1429,
+      "sha256": "847f7d6c90f2ed71d99f6229a0bb8c5467d01ec9d3354afa83ecbf777522c4e0"
+    }
+  },
+  "contract_sha256": "bdcdac68f4e8186544798817b6547187819ad96a9ce12a39daa68888e41a1e68",
+  "execution_authorized": false,
+  "training_authorized": false
+}

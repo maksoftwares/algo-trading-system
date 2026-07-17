@@ -1,0 +1,46 @@
+{
+  "attempt_first": 9094,
+  "attempt_last": 10093,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-17T23:38:52.712605+00:00",
+  "databento_used": false,
+  "discovery_end": "2021-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "GROSS_OPTION_ACTIVITY_COMPRESSION_BREAKOUT": {
+      "maximum_raw_signals": 1711,
+      "median_raw_signals": 256.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "MM_OPTIONS_SPREAD_BUILD_BREAKOUT": {
+      "maximum_raw_signals": 1569,
+      "median_raw_signals": 262.5,
+      "minimum_raw_signals": 121,
+      "policies": 200
+    },
+    "OPTIONS_OI_CONTRACTION_REVERSAL": {
+      "maximum_raw_signals": 2571,
+      "median_raw_signals": 287.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "OPTIONS_OI_EXPANSION_BREAKOUT": {
+      "maximum_raw_signals": 1475,
+      "median_raw_signals": 269.5,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "SWAP_OPTIONS_SPREAD_BUILD_BREAKOUT": {
+      "maximum_raw_signals": 1361,
+      "median_raw_signals": 256.5,
+      "minimum_raw_signals": 121,
+      "policies": 200
+    }
+  },
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "schema_version": "xauusd_cftc_options_volatility_signal_census_v2",
+  "strategy_scoring_performed": false
+}

@@ -1,0 +1,14 @@
+{
+  "advancement_sha256": "42c2e0f0b7fe34c12697856bc1aa88eafac970d08f884c2b074474fde3161e27",
+  "contract_sha256": "bdcdac68f4e8186544798817b6547187819ad96a9ce12a39daa68888e41a1e68",
+  "created_utc": "2026-07-17T23:41:15.206606+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "ed4a1fa2875699d3fd63ae61d0b69430be1485e8ac80381e5d870ca8b433b1b0",
+  "policy_manifest_sha256": "56a127fbd0c8f43d8ee8afeba60de6db5f32d9181370c427bd94ab31cbd92415",
+  "schema_version": "xauusd_cftc_options_volatility_advancement_v2",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}

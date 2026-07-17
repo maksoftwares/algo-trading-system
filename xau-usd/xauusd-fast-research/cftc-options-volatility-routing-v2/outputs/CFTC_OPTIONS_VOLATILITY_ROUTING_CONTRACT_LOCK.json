@@ -1,0 +1,32 @@
+{
+  "attempt_first": 9094,
+  "attempt_last": 10093,
+  "cftc_source_last_report": "2026-07-14T00:00:00+00:00",
+  "cftc_source_rows": 881,
+  "contract_sha256": "bdcdac68f4e8186544798817b6547187819ad96a9ce12a39daa68888e41a1e68",
+  "created_utc": "2026-07-17T23:38:52.715011+00:00",
+  "databento_use_authorized": false,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "e8d94563559479d35df5370e0b603c85b4d1f9317e2eba58b1dad0bbe572211b",
+    "config/cftc_options_volatility_routing_v2.json": "6f29ff1fa639b7a560bfc618646a2421fc12a33c3732407b06e604fcd93f65b1",
+    "external/cftc_curated": "36bd698b3637de0bbd9e419bf0dda0e1109572ebf8c75ee4a428363823d158ed",
+    "external/cftc_manifest": "2c5be25605002019a8cdc5f602c97ee9a579958c972f8280fc22d729a38ea42c",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "lock_contract.py": "d28f1754ebe919b02de141a15a27d74a102a49b810be1c903564fb8213e986eb",
+    "requirements.txt": "af12db61492690e1165acbc7b511a9e351adfb533e0214f3517c9b880ae259fa",
+    "run_research.py": "502e043963c23f19c7c437a9247cd9d8d191f2cabf1591896061d982755b414c",
+    "src/volatility.py": "18aea3bba09e66676f4a0d845397afdaf72f49e0c36385266e9e9cf7a88250a4",
+    "upstream/cftc_foundation.py": "2e33b68f5c10465941495bb9bc484e615aef7a190c6e95f65df35bf3cfa124ee",
+    "upstream/cftc_positioning_campaign.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "56a127fbd0c8f43d8ee8afeba60de6db5f32d9181370c427bd94ab31cbd92415",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_cftc_options_volatility_contract_lock_v2",
+  "signal_census_sha256": "847f7d6c90f2ed71d99f6229a0bb8c5467d01ec9d3354afa83ecbf777522c4e0",
+  "training_authorized": false
+}
