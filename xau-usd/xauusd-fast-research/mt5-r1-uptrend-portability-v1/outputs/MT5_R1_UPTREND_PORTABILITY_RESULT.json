@@ -1,0 +1,248 @@
+{
+  "authorization": {
+    "broker_action_authorized": false,
+    "claims_untouched_holdout": false,
+    "ea_consumption_authorized": false,
+    "parameter_search_count": 0,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "candidate_digest": "7be6da023ce767a99b48d9571d017475bb852b85f43f4ca3595258ab27b4e34b",
+  "data_evidence": {
+    "d1_rows": 3105,
+    "end_utc": "2026-07-01T00:00:00+00:00",
+    "executable_candidate_rows": 345,
+    "feature_cache": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+    "feature_manifest": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "h1_rows": 59003,
+    "h4_rows": 15981,
+    "manifest": {
+      "columns": [
+        "timestamp_ms",
+        "xau_tick_count",
+        "xau_mid_tick_open",
+        "xau_mid_tick_close",
+        "tick_signed_move",
+        "tick_move_count",
+        "tick_realized_variance",
+        "tick_spread_mean",
+        "tick_spread_last",
+        "tick_spread_max",
+        "tick_book_imbalance_mean",
+        "tick_book_imbalance_last",
+        "tick_microprice_edge_mean",
+        "tick_microprice_edge_last",
+        "price_efficiency_5m",
+        "bid_open",
+        "bid_high",
+        "bid_low",
+        "bid_close",
+        "ask_open",
+        "ask_high",
+        "ask_low",
+        "ask_close",
+        "mid_open",
+        "mid_high",
+        "mid_low",
+        "mid_close",
+        "atr",
+        "atr_ratio",
+        "quote_intensity_ratio",
+        "tick_imbalance_5m",
+        "tick_imbalance_15m",
+        "body_fraction",
+        "close_location",
+        "date_utc",
+        "hour_utc"
+      ],
+      "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+      "monthly_caches_reused": 0,
+      "monthly_caches_total": 120,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "reused": false,
+      "rows": 708538,
+      "schema_version": "a3_ml_dukascopy_confirmed_event_m5_cache_v1",
+      "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+    },
+    "r1_candidate_rows": 354,
+    "rows": 708538,
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "start_utc": "2016-07-01T00:00:00+00:00"
+  },
+  "decision": "R1_NEAR_SURVIVOR_REJECT_INSUFFICIENT_SAMPLE",
+  "gate_audit": {
+    "MT5_STACKING_DIAGNOSTIC": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": true,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": false,
+        "gate_pass": true,
+        "metrics": {
+          "active_years": 4,
+          "average_stress_r": 0.4495847215920994,
+          "closed_drawdown_r": 11.716621827431485,
+          "net_r": 41.0,
+          "positive_active_year_share": 0.75,
+          "source_days": 931,
+          "stress_net_r": 28.77342218189436,
+          "stress_pf": 1.8609446245953967,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 19.23428486316036,
+          "trades": 64,
+          "trades_per_source_day": 0.06874328678839957
+        }
+      },
+      "exam": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": true,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": false,
+        "gate_pass": false,
+        "metrics": {
+          "active_years": 3,
+          "average_stress_r": 0.7420440204398265,
+          "closed_drawdown_r": 15.90866669675179,
+          "net_r": 112.82341198833913,
+          "positive_active_year_share": 1.0,
+          "source_days": 624,
+          "stress_net_r": 96.46572265717745,
+          "stress_pf": 2.7679483053247322,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 86.77965199782112,
+          "trades": 130,
+          "trades_per_source_day": 0.20833333333333334
+        }
+      },
+      "replication_fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": false,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": true,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": false,
+        "gate_pass": false,
+        "metrics": {
+          "active_years": 5,
+          "average_stress_r": 0.34766914906585333,
+          "closed_drawdown_r": 19.58061727020194,
+          "net_r": 88.0,
+          "positive_active_year_share": 0.6,
+          "source_days": 1244,
+          "stress_net_r": 50.75969576361459,
+          "stress_pf": 1.6105225586986454,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 41.179395599290224,
+          "trades": 146,
+          "trades_per_source_day": 0.11736334405144695
+        }
+      }
+    },
+    "PORTFOLIO_CONSTRAINED_PRIMARY": {
+      "development": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": false,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": true,
+        "gate_pass": false,
+        "metrics": {
+          "active_years": 4,
+          "average_stress_r": 0.4361722054152134,
+          "closed_drawdown_r": 4.554902865692243,
+          "net_r": 17.0,
+          "positive_active_year_share": 0.75,
+          "source_days": 931,
+          "stress_net_r": 12.212821751625976,
+          "stress_pf": 1.8053177913228584,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 2.6936339492057035,
+          "trades": 28,
+          "trades_per_source_day": 0.03007518796992481
+        }
+      },
+      "exam": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": true,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": true,
+        "gate_pass": true,
+        "metrics": {
+          "active_years": 3,
+          "average_stress_r": 0.7779351661823891,
+          "closed_drawdown_r": 3.6955873903064838,
+          "net_r": 36.90625993009215,
+          "positive_active_year_share": 1.0,
+          "source_days": 624,
+          "stress_net_r": 31.895341813477955,
+          "stress_pf": 2.9110507527808496,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 22.26263423493676,
+          "trades": 41,
+          "trades_per_source_day": 0.06570512820512821
+        }
+      },
+      "replication_fit": {
+        "checks": {
+          "maximum_closed_drawdown_r": true,
+          "minimum_average_stress_r": true,
+          "minimum_positive_active_year_share": true,
+          "minimum_stress_pf": true,
+          "minimum_trades": true,
+          "top_winners_removed_positive": true
+        },
+        "eligible_for_decision": true,
+        "gate_pass": true,
+        "metrics": {
+          "active_years": 5,
+          "average_stress_r": 0.4903122645998695,
+          "closed_drawdown_r": 6.698818001153258,
+          "net_r": 36.00000000000001,
+          "positive_active_year_share": 1.0,
+          "source_days": 1244,
+          "stress_net_r": 23.534988700793736,
+          "stress_pf": 1.9649271709571654,
+          "top_winners_removed": 5,
+          "top_winners_removed_stress_net_r": 14.037444699897204,
+          "trades": 48,
+          "trades_per_source_day": 0.03858520900321544
+        }
+      }
+    }
+  },
+  "interpretation": "The constrained R1 mechanism passed every frozen economic and concentration gate, but failed a minimum-sample gate. It remains an unqualified near-survivor; no threshold is relaxed and additional prospective evidence is required.",
+  "primary_failed_checks": {
+    "development": [
+      "minimum_trades"
+    ],
+    "exam": [],
+    "replication_fit": []
+  },
+  "primary_policy": "PORTFOLIO_CONSTRAINED_PRIMARY",
+  "schema_version": "mt5_r1_uptrend_dukascopy_portability_v1",
+  "trade_digest": "74e2dee12df4ffe8bc013610c7cde615f20a1f3e2f6da02242cd7eeb0f18ea98"
+}

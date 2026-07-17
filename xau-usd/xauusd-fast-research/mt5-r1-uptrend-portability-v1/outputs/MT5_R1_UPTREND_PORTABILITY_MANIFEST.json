@@ -1,0 +1,9 @@
+{
+  "all_trade_rows": 345,
+  "candidate_digest": "7be6da023ce767a99b48d9571d017475bb852b85f43f4ca3595258ab27b4e34b",
+  "candidate_rows": 354,
+  "config_sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca",
+  "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+  "policy_trade_rows": 464,
+  "trade_digest": "74e2dee12df4ffe8bc013610c7cde615f20a1f3e2f6da02242cd7eeb0f18ea98"
+}
