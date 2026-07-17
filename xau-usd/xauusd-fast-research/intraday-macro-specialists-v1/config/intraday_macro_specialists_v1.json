@@ -1,0 +1,105 @@
+{
+  "schema_version": "xauusd_intraday_macro_specialists_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "macro_source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "feature_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "expected_rows": 525099,
+    "start_utc": "2019-01-02T01:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "windows": {
+    "train": ["2020-01-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "validation": ["2021-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "internal_test": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "exam": ["2024-07-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "recent_tail": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "feature_geometry": {
+    "macro_return_bars": 4,
+    "macro_scale_bars": 192,
+    "macro_scale_minimum_bars": 96,
+    "continuation_impulse_z_min": 1.0,
+    "quiet_other_asset_z_max": 0.75,
+    "maximum_opposing_other_pressure_z": 0.50,
+    "consensus_impulse_z_min": 0.75,
+    "continuation_gold_move_atr_min": 0.10,
+    "continuation_gold_move_atr_max": 1.25,
+    "minimum_body_fraction": 0.25,
+    "minimum_body_atr": 0.08,
+    "minimum_efficiency_ratio": 0.20,
+    "maximum_dislocation_efficiency_ratio": 0.65,
+    "maximum_prior_gold_alignment_atr": 0.15,
+    "minimum_directional_close_location": 0.60
+  },
+  "families": {
+    "M15_DXY_LEAD_CONTINUATION_V1": {"stop_atr": 1.50, "target_r": 2.0, "maximum_hold_hours": 8},
+    "M15_BOND_LEAD_CONTINUATION_V1": {"stop_atr": 1.50, "target_r": 2.0, "maximum_hold_hours": 8},
+    "M15_MACRO_DISLOCATION_REVERSAL_V1": {"stop_atr": 1.25, "target_r": 1.75, "maximum_hold_hours": 6}
+  },
+  "execution": {
+    "minimum_stop_atr": 0.75,
+    "maximum_stop_atr": 3.0,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_entry_gap_minutes": 10,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_hours": 2,
+    "maximum_trades_per_family_utc_day": 2
+  },
+  "gates": {
+    "train": {"minimum_trades": 75, "minimum_trades_per_source_day": 0.10, "minimum_stress_pf": 1.10, "minimum_average_stress_r": 0.02, "minimum_positive_active_month_share": 0.50, "maximum_closed_drawdown_r": 30.0, "top_winners_removed": 10},
+    "validation": {"minimum_trades": 100, "minimum_trades_per_source_day": 0.10, "minimum_stress_pf": 1.15, "minimum_average_stress_r": 0.03, "minimum_positive_active_month_share": 0.50, "maximum_closed_drawdown_r": 25.0, "top_winners_removed": 5},
+    "internal_test": {"minimum_trades": 50, "minimum_trades_per_source_day": 0.10, "minimum_stress_pf": 1.20, "minimum_average_stress_r": 0.04, "minimum_positive_active_month_share": 0.55, "maximum_closed_drawdown_r": 20.0, "top_winners_removed": 5},
+    "exam": {"minimum_trades": 100, "minimum_trades_per_source_day": 0.10, "minimum_stress_pf": 1.25, "minimum_average_stress_r": 0.05, "minimum_positive_active_month_share": 0.55, "maximum_closed_drawdown_r": 20.0, "top_winners_removed": 5},
+    "recent_tail": {"minimum_trades": 50, "minimum_trades_per_source_day": 0.10, "minimum_stress_pf": 1.20, "minimum_average_stress_r": 0.03, "minimum_positive_active_month_share": 0.50, "maximum_closed_drawdown_r": 15.0, "top_winners_removed": 3}
+  },
+  "portfolio_gates": {
+    "minimum_survivors": 2,
+    "minimum_exam_trades_per_source_day": 0.80,
+    "minimum_exam_stress_pf": 1.30,
+    "minimum_exam_average_stress_r": 0.05,
+    "maximum_exam_closed_drawdown_r": 25.0,
+    "maximum_same_direction_overlap_share": 0.20,
+    "maximum_absolute_daily_pnl_correlation": 0.60,
+    "same_opportunity_minutes": 60,
+    "maximum_concurrent_trades": 2,
+    "maximum_trades_per_utc_day": 4
+  },
+  "outputs": {
+    "directory": "outputs",
+    "candidate_ledger": "INTRADAY_MACRO_CANDIDATES.csv",
+    "selected_trade_ledger": "INTRADAY_MACRO_SELECTED_TRADES.csv",
+    "stage_metrics": "INTRADAY_MACRO_STAGE_METRICS.csv",
+    "result_json": "INTRADAY_MACRO_RESULT.json",
+    "result_markdown": "INTRADAY_MACRO_RESULT.md",
+    "manifest": "INTRADAY_MACRO_MANIFEST.json"
+  },
+  "research_controls": {
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_untouched_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
