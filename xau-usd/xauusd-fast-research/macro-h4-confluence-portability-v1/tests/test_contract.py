@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from research import REPO_ROOT, _macro_context, _simulate_one, sha256_file
+from research import REPO_ROOT, _macro_context, _simulate_one, aggregate_trading_days, sha256_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +32,24 @@ def test_macro_join_keys_are_normalized_to_nanoseconds() -> None:
     context = _macro_context(pd.Timestamp("2016-07-01T00:00:00Z"), pd.Timestamp("2026-05-15T00:00:00Z"))
     assert context
     assert {str(frame["timestamp_utc"].dtype) for frame in context.values()} == {"datetime64[ns, UTC]"}
+
+
+def test_trading_day_adapter_accepts_maintenance_break() -> None:
+    times = pd.to_datetime(["2026-01-02T00:00:00Z", "2026-01-02T00:05:00Z"])
+    bars = pd.DataFrame(
+        {
+            "bar_start_utc": times,
+            "bid_open": [100.0, 101.0], "bid_high": [101.0, 102.0], "bid_low": [99.0, 100.0], "bid_close": [100.5, 101.5],
+            "ask_open": [100.2, 101.2], "ask_high": [101.2, 102.2], "ask_low": [99.2, 100.2], "ask_close": [100.7, 101.7],
+            "mid_open": [100.1, 101.1], "mid_high": [101.1, 102.1], "mid_low": [99.1, 100.1], "mid_close": [100.6, 101.6],
+            "volume": [10.0, 20.0],
+        }
+    )
+    daily = aggregate_trading_days(bars, minimum_rows=2)
+    assert len(daily) == 1
+    assert daily.iloc[0]["mid_open"] == pytest.approx(100.1)
+    assert daily.iloc[0]["mid_close"] == pytest.approx(101.6)
+    assert daily.iloc[0]["timestamp_utc"] == pd.Timestamp("2026-01-03T00:00:00Z")
 
 
 def test_native_long_execution_enters_ask_and_exits_bid_target() -> None:

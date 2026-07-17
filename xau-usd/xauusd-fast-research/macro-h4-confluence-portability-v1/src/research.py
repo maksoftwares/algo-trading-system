@@ -104,6 +104,30 @@ def _strategy_bars(frame: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def aggregate_trading_days(m5: pd.DataFrame, minimum_rows: int = 240) -> pd.DataFrame:
+    source = m5.copy()
+    source["_day"] = source["bar_start_utc"].dt.floor("D")
+    valid_days = source.groupby("_day", sort=True, observed=True).size()
+    source = source.loc[source["_day"].isin(valid_days.index[valid_days >= minimum_rows])]
+    aggregations: dict[str, str] = {"volume": "sum"}
+    for side in ("bid", "ask", "mid"):
+        aggregations.update(
+            {
+                f"{side}_open": "first",
+                f"{side}_high": "max",
+                f"{side}_low": "min",
+                f"{side}_close": "last",
+            }
+        )
+    result = source.groupby("_day", sort=True, observed=True).agg(aggregations).reset_index()
+    result["bar_start_utc"] = result.pop("_day")
+    result["bar_end_utc"] = result["bar_start_utc"] + pd.Timedelta(days=1)
+    result["timestamp_utc"] = result["bar_end_utc"]
+    result["timeframe"] = "D1"
+    result.attrs["incomplete_days_dropped"] = int((valid_days < minimum_rows).sum())
+    return result
+
+
 def _macro_context(start: pd.Timestamp, end: pd.Timestamp) -> dict[str, pd.DataFrame]:
     project = SimpleNamespace(root=PHASE0_ROOT)
     context = {
@@ -281,7 +305,7 @@ def run_research(config: dict[str, Any]) -> ResearchRun:
     end = pd.Timestamp(config["windows"]["full"][1])
     m5 = m5.loc[m5["bar_start_utc"] < end].reset_index(drop=True)
     h4 = SHARED_DATA.aggregate_complete_bars(m5, 240, "H4")
-    d1 = SHARED_DATA.aggregate_complete_bars(m5, 1440, "D1")
+    d1 = aggregate_trading_days(m5)
     candidates = generate_candidates(h4, d1, config)
     signals, trades = simulate_signals(m5, candidates, config["execution"])
     evidence = {
@@ -311,7 +335,10 @@ def drawdown(values: pd.Series) -> float:
 
 
 def stage_metrics(trades: pd.DataFrame, source_m5: pd.DataFrame, start: pd.Timestamp, end: pd.Timestamp, top_n: int) -> dict[str, Any]:
-    stage = trades.loc[(trades["entry_time"] >= start) & (trades["entry_time"] < end)].copy()
+    if trades.empty or "entry_time" not in trades:
+        stage = pd.DataFrame(columns=["entry_time", "direction", "net_r", "stress_net_r"])
+    else:
+        stage = trades.loc[(trades["entry_time"] >= start) & (trades["entry_time"] < end)].copy()
     source_days = int(
         source_m5.loc[
             (source_m5["bar_start_utc"] >= start) & (source_m5["bar_start_utc"] < end),
