@@ -1,0 +1,48 @@
+# COMEX Futures Foundation V1
+
+This campaign establishes a primary intraday COMEX gold futures data lane. It does not produce a strategy, authorize Python predictions, or interact with a broker.
+
+## Why this lane exists
+
+The completed spot-only specialist campaigns found that higher trade frequency is mechanically possible, but the tested edges did not survive costs or untouched periods. Public daily macro series and spot cross-asset proxies also failed to add enough independent information. Primary futures trades and top-of-book data are the next materially different evidence class.
+
+The frozen first-choice schema is `tbbo`: every futures trade plus the best bid and offer immediately before the trade. That is sufficient to research causal aggressor flow, trade intensity, spread, top-of-book imbalance, and futures-to-spot lead/lag without paying for the full order book initially.
+
+## Locked request
+
+- Dataset: `GLBX.MDP3`
+- Symbol: `GC.v.0`
+- Symbology: volume-based continuous futures
+- Window: 2016-07-01 through 2026-07-01
+- Estimates: `ohlcv-1s`, `trades`, `bbo-1s`, `tbbo`, and `mbp-1`
+- Preferred first acquisition: `tbbo`
+
+Continuous prices remain unadjusted across contract rolls. Any later feature builder must retain the source instrument mapping and must not treat roll jumps as market returns.
+
+## Estimate without spending
+
+Set `DATABENTO_API_KEY` in the environment, then run:
+
+```powershell
+uv run --with-requirements requirements.txt python estimate_or_acquire.py
+```
+
+This calls only the historical metadata cost endpoint and writes a manifest under `C:/ComexGoldFuturesFoundationV1/manifests`. It cannot submit a batch job.
+
+## Explicitly authorize an acquisition
+
+After reviewing the estimate, a batch job can be submitted only with both `--execute` and a positive cost cap:
+
+```powershell
+uv run --with-requirements requirements.txt python estimate_or_acquire.py --execute --schema tbbo --max-cost-usd 125
+```
+
+The exact request is re-priced immediately before submission. The command refuses the job when its estimated price is above the cap. Submission does not automatically download data.
+
+Never put the API key in a command, config file, commit, or chat message.
+
+## Verification
+
+```powershell
+uv run --with pytest pytest -q
+```

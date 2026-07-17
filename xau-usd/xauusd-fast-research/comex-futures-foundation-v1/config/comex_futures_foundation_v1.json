@@ -1,0 +1,42 @@
+{
+  "campaign_id": "comex-futures-foundation-v1",
+  "created_utc": "2026-07-17T00:00:00Z",
+  "purpose": "Estimate and, only after explicit cost authorization, acquire primary COMEX gold futures data for causal order-flow research.",
+  "source": {
+    "vendor": "Databento",
+    "dataset": "GLBX.MDP3",
+    "symbol": "GC.v.0",
+    "stype_in": "continuous",
+    "start": "2016-07-01T00:00:00Z",
+    "end": "2026-07-01T00:00:00Z",
+    "estimate_schemas": [
+      "ohlcv-1s",
+      "trades",
+      "bbo-1s",
+      "tbbo",
+      "mbp-1"
+    ],
+    "preferred_first_schema": "tbbo",
+    "encoding": "dbn",
+    "compression": "zstd",
+    "split_duration": "day"
+  },
+  "storage": {
+    "root": "C:/ComexGoldFuturesFoundationV1",
+    "manifest_directory": "manifests",
+    "download_directory": "raw"
+  },
+  "acquisition_controls": {
+    "default_max_cost_usd": 0.0,
+    "require_api_key_environment_variable": "DATABENTO_API_KEY",
+    "require_explicit_execute": true,
+    "reject_above_cost_cap": true,
+    "automatic_download": false
+  },
+  "research_controls": {
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
