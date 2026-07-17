@@ -37,6 +37,7 @@ def attach_r1_forward_research_demo(
     metaeditor_exe = terminal_exe.with_name("MetaEditor64.exe")
     profile_dir = data_path / "MQL5" / "Profiles" / "Charts" / "Default"
     source = (root / expert["source"]).resolve()
+    standard_trade_include = _standard_trade_include_source(root)
 
     state_before = _account_state(terminal_exe, expert["symbol"], int(expert["magic"]))
     inventory_before = _chart_inventory(profile_dir)
@@ -48,6 +49,7 @@ def attach_r1_forward_research_demo(
         metaeditor_exe,
         data_path,
         profile_dir,
+        standard_trade_include,
         state_before,
         inventory_before,
     )
@@ -60,7 +62,7 @@ def attach_r1_forward_research_demo(
     _close_terminal(terminal_exe)
     backup_dir = _backup_profile(profile_dir, data_path)
     paused_chart = _pause_fill_collection(profile_dir)
-    deployed = _deploy(root, data_path, source, Path(packet["artifacts"]["preset"]))
+    deployed = _deploy(data_path, source, Path(packet["artifacts"]["preset"]), standard_trade_include)
     compile_log = _compile(metaeditor_exe, data_path, source.name)
     chart_path, chart_action = _upsert_target_chart(profile_dir, expert["name"], inputs)
     _launch_terminal(terminal_exe)
@@ -96,6 +98,7 @@ def _preflight_checks(
     metaeditor_exe: Path,
     data_path: Path,
     profile_dir: Path,
+    standard_trade_include: Path,
     state: dict[str, Any],
     inventory: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -120,6 +123,7 @@ def _preflight_checks(
         _check("metaeditor_exists", metaeditor_exe.exists(), str(metaeditor_exe)),
         _check("data_path_exists", data_path.exists(), str(data_path)),
         _check("profile_exists", profile_dir.exists(), str(profile_dir)),
+        _check("standard_trade_include_exists", (standard_trade_include / "Trade.mqh").exists(), str(standard_trade_include)),
         _check("source_hash_matches_packet", source_hash == packet["artifacts"]["source_sha256"], source_hash),
         _check("login_exact", str(state.get("login")) == account["login"], str(state.get("login"))),
         _check("server_exact", state.get("server") == account["server"], str(state.get("server"))),
@@ -268,17 +272,24 @@ def _replace_expert_input(text: str, key: str, value: str) -> str:
     return text[: match.start()] + replaced + text[match.end() :]
 
 
-def _deploy(root: Path, data_path: Path, source: Path, preset: Path) -> list[str]:
-    del root
+def _deploy(data_path: Path, source: Path, preset: Path, standard_trade_include: Path) -> list[str]:
     expert_dir = data_path / "MQL5" / "Experts"
     preset_dir = data_path / "MQL5" / "Presets"
+    target_trade_include = data_path / "MQL5" / "Include" / "Trade"
     expert_dir.mkdir(parents=True, exist_ok=True)
     preset_dir.mkdir(parents=True, exist_ok=True)
     target_source = expert_dir / source.name
     target_preset = preset_dir / "A3_R1_FORWARD_RESEARCH_DEMO_V1.local.set"
     shutil.copy2(source, target_source)
     shutil.copy2(preset, target_preset)
-    return [str(target_source), str(target_preset)]
+    shutil.copytree(standard_trade_include, target_trade_include, dirs_exist_ok=True)
+    return [str(target_source), str(target_preset), str(target_trade_include)]
+
+
+def _standard_trade_include_source(root: Path) -> Path:
+    registry = json.loads((root / "config" / "ml" / "mt5_accounts.yaml").read_text(encoding="utf-8"))
+    a1_data_path = Path(registry["accounts"]["A1"]["expected_data_path"])
+    return a1_data_path / "MQL5" / "Include" / "Trade"
 
 
 def _compile(metaeditor_exe: Path, data_path: Path, source_name: str) -> Path:
