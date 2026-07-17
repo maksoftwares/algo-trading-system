@@ -1,0 +1,210 @@
+{
+  "schema_version": "a3_ml_intraday_crossasset_event_census_v1",
+  "symbol": "XAUUSD",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "xau_source_lock": {
+    "feature_path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "feature_rows": 708538,
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738"
+  },
+  "intraday_macro_source_lock": {
+    "required_classification": "INTRADAY_MACRO_SOURCE_VALID",
+    "report_path": "outputs/reports/A3_ML_INTRADAY_MACRO_SOURCE_V1_REPORT.json",
+    "report_sha256": "aeb9a128a4bbfc6c2a1f82a59904b0883e3028a9ec9b70aee4704f0ffab27df4",
+    "manifest_path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "feature_path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "feature_rows": 525099,
+    "roles": {
+      "DOLLARIDXUSD": "INTRADAY_US_DOLLAR_INDEX_CFD_PROXY",
+      "USTBONDTRUSD": "INTRADAY_US_T_BOND_PRICE_CFD_PROXY"
+    }
+  },
+  "broker_cost_source_lock": {
+    "report_path": "outputs/reports/A3_ML_BROKER_COST_CALIBRATION_V1_REPORT.json",
+    "report_sha256": "72f4180d518f494dce2f664c6852df0af881edc81b77ab2608d60ec2d86ae7bb",
+    "required_classification": "BROKER_COST_CALIBRATION_VALID",
+    "broker_spread_floor_price": 0.75,
+    "additional_execution_cost_usd_per_0p01_lot": 0.3,
+    "maximum_total_stressed_entry_cost_r": 0.15,
+    "minimum_initial_stop_distance_price": 7.0
+  },
+  "windows": {
+    "train_start_utc": "2019-01-01T00:00:00Z",
+    "train_end_exclusive_utc": "2022-01-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2023-01-01T00:00:00Z",
+    "internal_test_end_exclusive_utc": "2024-01-01T00:00:00Z",
+    "exam_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "prospective_holdout_start_utc": "2026-07-01T00:00:00Z"
+  },
+  "aggregation": {
+    "source_timeframe_minutes": 5,
+    "decision_timeframe_minutes": 15,
+    "required_contiguous_source_bars": 3,
+    "decision_start_hour_utc_inclusive": 6,
+    "decision_end_hour_utc_exclusive": 20,
+    "source_price_basis": "Mid",
+    "xau_signal_price_basis": "Mid",
+    "xau_execution_price_basis": "BidAsk"
+  },
+  "causal_features": {
+    "source_return_lookbacks_m15_bars": [1, 4, 12],
+    "source_volatility_window_m15_bars": 96,
+    "source_volatility_minimum_periods": 48,
+    "source_volatility_scale_is_lagged_one_bar": true,
+    "source_standardized_return_formula": "log_return_N / (prior_rolling_std_log_return_1 * sqrt(N))",
+    "xau_return_lookbacks_m15_bars": [1, 4],
+    "xau_atr_source": "locked causal M5 ATR at the final completed M5 bar",
+    "forward_fill_source_quotes": false,
+    "allow_features_across_timestamp_gaps": false,
+    "decision_uses_completed_bars_only": true
+  },
+  "event_families": [
+    {
+      "family_id": "crossasset_agreement_continuation_v1",
+      "mechanism": "DOLLAR_DOWN_AND_BOND_UP_SUPPORT_GOLD_LONG_WITH_REVERSE_FOR_SHORT",
+      "source_lookback_m15_bars": 4,
+      "minimum_directional_dollar_z": 0.75,
+      "minimum_directional_bond_z": 0.5,
+      "minimum_directional_xau_return_15m_atr": 0.1,
+      "cooldown_minutes_per_direction": 60
+    },
+    {
+      "family_id": "dollar_impulse_continuation_v1",
+      "mechanism": "DOLLAR_IMPULSE_LEADS_GOLD_WITH_BOND_NOT_STRONGLY_OPPOSING",
+      "source_lookback_m15_bars": 4,
+      "minimum_directional_dollar_z": 1.0,
+      "minimum_directional_bond_z": -0.25,
+      "minimum_directional_xau_return_15m_atr": 0.1,
+      "cooldown_minutes_per_direction": 60
+    },
+    {
+      "family_id": "bond_impulse_continuation_v1",
+      "mechanism": "BOND_PRICE_IMPULSE_LEADS_GOLD_WITH_DOLLAR_NOT_STRONGLY_OPPOSING",
+      "source_lookback_m15_bars": 4,
+      "minimum_directional_bond_z": 1.0,
+      "minimum_directional_dollar_z": -0.25,
+      "minimum_directional_xau_return_15m_atr": 0.1,
+      "cooldown_minutes_per_direction": 60
+    },
+    {
+      "family_id": "crossasset_lead_gold_catchup_v1",
+      "mechanism": "PERSISTENT_MACRO_AGREEMENT_PRECEDES_A_SMALL_GOLD_RECLAIM",
+      "source_lookback_m15_bars": 12,
+      "minimum_directional_dollar_z": 0.6,
+      "minimum_directional_bond_z": 0.4,
+      "minimum_directional_xau_return_60m_atr": -0.2,
+      "maximum_directional_xau_return_60m_atr": 0.2,
+      "minimum_directional_xau_return_15m_atr": 0.05,
+      "cooldown_minutes_per_direction": 120
+    }
+  ],
+  "event_controls": {
+    "maximum_events_per_family_direction_utc_day": 3,
+    "event_identity_keys": ["family_id", "decision_timestamp_ms", "direction"],
+    "same_timestamp_events_across_families_are_preserved": true
+  },
+  "execution": {
+    "entry_next_contiguous_m5_bar": true,
+    "maximum_entry_delay_bars": 1,
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "maximum_initial_risk_usd": 50.0,
+    "stop_atr": 1.25,
+    "structural_signal_bar_buffer_atr": 0.1,
+    "target_r": 1.5,
+    "maximum_hold_hours": 12,
+    "broker_spread_floor_price": 0.75,
+    "additional_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_total_stressed_entry_cost_r": 0.15,
+    "minimum_initial_stop_distance_price": 7.0,
+    "same_bar_collision_policy": "STOP_FIRST"
+  },
+  "selection": {
+    "hypothesis_keys": ["family_id", "direction"],
+    "maximum_hypotheses": 8,
+    "parameter_grid_search_authorized": false,
+    "context_subgroup_promotion_authorized": false,
+    "calendar_month_bootstrap_samples": 2000,
+    "bootstrap_seed": 20260716,
+    "train_gates": {
+      "minimum_events": 150,
+      "minimum_stress_profit_factor": 1.15,
+      "minimum_average_stress_r": 0.03,
+      "minimum_positive_exit_month_share": 0.55,
+      "maximum_closed_drawdown_r": 30.0,
+      "require_top_ten_winners_removed_net_positive": true,
+      "require_bootstrap_mean_stress_r_p025_above_zero": true
+    },
+    "validation_gates": {
+      "minimum_events": 50,
+      "minimum_stress_profit_factor": 1.2,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_exit_month_share": 0.55,
+      "maximum_closed_drawdown_r": 20.0,
+      "require_top_five_winners_removed_net_positive": true
+    },
+    "internal_test_gates": {
+      "minimum_events": 50,
+      "minimum_stress_profit_factor": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_exit_month_share": 0.55,
+      "maximum_closed_drawdown_r": 20.0,
+      "require_top_five_winners_removed_net_positive": true
+    },
+    "exam_gates": {
+      "minimum_events": 80,
+      "minimum_events_per_source_day": 0.15,
+      "minimum_stress_profit_factor": 1.3,
+      "minimum_average_stress_r": 0.06,
+      "minimum_positive_exit_month_share": 0.6,
+      "maximum_closed_drawdown_r": 20.0,
+      "require_top_five_winners_removed_net_positive": true
+    }
+  },
+  "frequency_context": {
+    "portfolio_research_target_trades_per_source_day": 1.0,
+    "aspirational_trades_per_source_day": 2.0,
+    "frequency_is_not_permission_to_force_trades": true
+  },
+  "quality_gates": {
+    "all_source_hashes_and_rows_match": true,
+    "broker_cost_report_hash_and_values_match": true,
+    "minimum_joined_source_day_share": 0.8,
+    "minimum_resolved_or_ineligible_event_share": 0.99,
+    "event_ids_unique": true,
+    "events_chronological": true,
+    "features_are_causal": true
+  },
+  "downstream_label_trainability": {
+    "minimum_resolved_candidate_events": 2000,
+    "minimum_final_research_survivors": 2,
+    "require_long_and_short_final_survivors": true,
+    "passing_does_not_automatically_authorize_model_training": true
+  },
+  "outputs": {
+    "m15_features_parquet": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_M15_FEATURES.parquet",
+    "events_csv": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_EVENTS.csv",
+    "labels_csv": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_LABELS.csv",
+    "metrics_csv": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_METRICS.csv",
+    "report_json": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_INTRADAY_CROSSASSET_EVENT_CENSUS_V1_REPORT.md"
+  },
+  "research_controls": {
+    "research_only": true,
+    "known_program_level_history_contamination": true,
+    "claims_untouched_holdout": false,
+    "same_iteration_post_outcome_tuning_authorized": false,
+    "model_training_authorized": false
+  },
+  "authorization": {
+    "specialist_hypothesis_authorized_if_all_gates_pass": true,
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
