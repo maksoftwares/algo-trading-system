@@ -1,0 +1,85 @@
+{
+  "schema_version": "xauusd_comex_session_vwap_specialists_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2022-07-01T00:00:00Z",
+    "end_exclusive_utc": "2024-07-01T00:00:00Z"
+  },
+  "comex_source": {
+    "path": "C:/ComexGoldFuturesFoundationV1/research/comex-session-vwap-v1/m5_session_vwap_20220701_20240701.parquet",
+    "sha256": "dabf4b9e1c50a922f1edae73fe26ff137f3f3c5a44df320537262e3afddeb732",
+    "expected_rows": 140781,
+    "start_utc": "2022-07-01T00:05:00Z",
+    "end_utc": "2024-07-01T00:00:00Z"
+  },
+  "feature_geometry": {
+    "spot_atr_period": 14,
+    "spot_fast_ema_period": 20,
+    "spot_slow_ema_period": 50,
+    "comex_vwap_slope_bars": 6,
+    "comex_volume_median_bars": 20,
+    "ny_session_start": "08:30",
+    "ny_session_end": "13:30",
+    "continuation_deviation_atr_min": 0.25,
+    "continuation_deviation_atr_max": 1.00,
+    "continuation_directional_vwap_slope_atr_min": 0.05,
+    "continuation_spot_body_atr_min": 0.15,
+    "continuation_directional_close_location_min": 0.60,
+    "continuation_volume_ratio_min": 0.75,
+    "reversion_deviation_atr_min": 1.50,
+    "reversion_absolute_vwap_slope_atr_max": 0.25,
+    "reversion_spot_body_atr_min": 0.10,
+    "reversion_directional_close_location_min": 0.60,
+    "reversion_volume_ratio_min": 1.00
+  },
+  "families": {
+    "COMEX_VWAP_PULLBACK_CONTINUATION_V1": {"stop_atr": 1.25, "target_r": 2.0, "maximum_hold_hours": 6},
+    "COMEX_VWAP_EXHAUSTION_REVERSION_V1": {"stop_atr": 1.25, "target_r": 1.5, "maximum_hold_hours": 4}
+  },
+  "execution": {
+    "minimum_stop_atr": 0.75,
+    "maximum_stop_atr": 3.0,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_entry_gap_minutes": 10,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_hours": 1,
+    "maximum_trades_per_family_utc_day": 2
+  },
+  "windows": {
+    "fit": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "development": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "fit": {"minimum_trades": 52, "minimum_trades_per_source_day": 0.20, "minimum_stress_pf": 1.15, "minimum_average_stress_r": 0.03, "minimum_positive_active_month_share": 0.45, "maximum_closed_drawdown_r": 25.0, "top_winners_removed": 5},
+    "development": {"minimum_trades": 52, "minimum_trades_per_source_day": 0.20, "minimum_stress_pf": 1.25, "minimum_average_stress_r": 0.05, "minimum_positive_active_month_share": 0.50, "maximum_closed_drawdown_r": 20.0, "top_winners_removed": 5}
+  },
+  "outputs": {
+    "directory": "outputs",
+    "candidate_ledger": "COMEX_VWAP_CANDIDATES.csv",
+    "selected_trade_ledger": "COMEX_VWAP_SELECTED_TRADES.csv",
+    "stage_metrics": "COMEX_VWAP_STAGE_METRICS.csv",
+    "result_json": "COMEX_VWAP_RESULT.json",
+    "result_markdown": "COMEX_VWAP_RESULT.md",
+    "manifest": "COMEX_VWAP_MANIFEST.json"
+  },
+  "research_controls": {
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_untouched_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
