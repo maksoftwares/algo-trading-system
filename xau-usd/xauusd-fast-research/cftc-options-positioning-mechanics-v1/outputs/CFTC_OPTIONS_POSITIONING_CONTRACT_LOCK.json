@@ -1,0 +1,31 @@
+{
+  "attempt_first": 8094,
+  "attempt_last": 9093,
+  "cftc_source_last_report": "2026-07-14T00:00:00+00:00",
+  "cftc_source_rows": 881,
+  "contract_sha256": "7486a865d41f557a338e2bb5e9f7e29d151d604c5e6218f3dd0bd5f33547cb82",
+  "created_utc": "2026-07-17T23:14:49.315905+00:00",
+  "databento_use_authorized": false,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "8e6852a4043c83af2e8c65d5f3c92e6c99bf0201cbfe0fe82a426d6093883f9a",
+    "config/cftc_options_positioning_mechanics_v1.json": "327cbde5cfcfc11542ec46c82881732eabba6b5eea997e3b2b795d4de245690c",
+    "external/cftc_curated": "36bd698b3637de0bbd9e419bf0dda0e1109572ebf8c75ee4a428363823d158ed",
+    "external/cftc_manifest": "2c5be25605002019a8cdc5f602c97ee9a579958c972f8280fc22d729a38ea42c",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "lock_contract.py": "f89064159a57650e339c95273f1322e7335483555d6f793ee1bb2c45e7fdf0cd",
+    "requirements.txt": "af12db61492690e1165acbc7b511a9e351adfb533e0214f3517c9b880ae259fa",
+    "run_research.py": "8c5f9074eb644359b805669d51370404140daec772784e9834dffe5061059814",
+    "src/campaign.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b",
+    "upstream/cftc_foundation.py": "2e33b68f5c10465941495bb9bc484e615aef7a190c6e95f65df35bf3cfa124ee",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "d9ebed9500f408fdcee61ecf31e63de839ff50196d0db82f866d7a8c94ac7dca",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_cftc_options_positioning_contract_lock_v1",
+  "signal_census_sha256": "cdcbcfb43a6ba4c8c8205cd8af1e2308ab0cd439aaa1b948637c95a14b9eb70c",
+  "training_authorized": false
+}

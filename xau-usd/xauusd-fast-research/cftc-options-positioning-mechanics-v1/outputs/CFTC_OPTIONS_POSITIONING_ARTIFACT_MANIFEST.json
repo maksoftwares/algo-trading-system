@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "CFTC_OPTIONS_POSITIONING_CONTRACT_LOCK.json": {
+      "bytes": 1998,
+      "sha256": "0ee685e63d718ef3f93742a348824ad1627b086491710e2227d7744b47edd9ba"
+    },
+    "CFTC_OPTIONS_POSITIONING_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 669,
+      "sha256": "195941f3611533093d7930f978060c94e1ea98fe0652a926fef333a34d90cfe8"
+    },
+    "CFTC_OPTIONS_POSITIONING_DISCOVERY_METRICS.csv": {
+      "bytes": 1391978,
+      "sha256": "d17114eb22c91441898db12220760d9f5e1e82208bedd2dad3233dc8bc171f5f"
+    },
+    "CFTC_OPTIONS_POSITIONING_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 298,
+      "sha256": "8afad863ddd4ec94b6c67b9ffa3f5d60b7d934844d3457e9a3a1ee4dfd544a9d"
+    },
+    "CFTC_OPTIONS_POSITIONING_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CFTC_OPTIONS_POSITIONING_POLICY_MANIFEST.csv": {
+      "bytes": 296901,
+      "sha256": "d9ebed9500f408fdcee61ecf31e63de839ff50196d0db82f866d7a8c94ac7dca"
+    },
+    "CFTC_OPTIONS_POSITIONING_RESULT.json": {
+      "bytes": 4752,
+      "sha256": "cc5f548cfea7b1b7abb0fa5bc162e2945cab41cb9d6e89408a700f509322ac6c"
+    },
+    "CFTC_OPTIONS_POSITIONING_RESULT.md": {
+      "bytes": 826,
+      "sha256": "1645d5f43b0ca338e0737097f6b37617c549a2446fdc5b0090d550ff990f60d1"
+    },
+    "CFTC_OPTIONS_POSITIONING_SIGNAL_CENSUS.json": {
+      "bytes": 1313,
+      "sha256": "cdcbcfb43a6ba4c8c8205cd8af1e2308ab0cd439aaa1b948637c95a14b9eb70c"
+    }
+  },
+  "contract_sha256": "7486a865d41f557a338e2bb5e9f7e29d151d604c5e6218f3dd0bd5f33547cb82",
+  "execution_authorized": false,
+  "training_authorized": false
+}

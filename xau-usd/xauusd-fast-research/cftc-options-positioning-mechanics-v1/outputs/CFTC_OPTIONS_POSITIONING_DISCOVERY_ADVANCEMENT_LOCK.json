@@ -1,0 +1,14 @@
+{
+  "advancement_sha256": "a46751834361c39229c8c09a2638eda7c4c216fbbd102d8ed02202e64c4ee55e",
+  "contract_sha256": "7486a865d41f557a338e2bb5e9f7e29d151d604c5e6218f3dd0bd5f33547cb82",
+  "created_utc": "2026-07-17T23:20:04.363489+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "d17114eb22c91441898db12220760d9f5e1e82208bedd2dad3233dc8bc171f5f",
+  "policy_manifest_sha256": "d9ebed9500f408fdcee61ecf31e63de839ff50196d0db82f866d7a8c94ac7dca",
+  "schema_version": "xauusd_cftc_options_advancement_v1",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}

@@ -1,0 +1,44 @@
+{
+  "attempt_first": 8094,
+  "attempt_last": 9093,
+  "created_utc": "2026-07-17T23:14:49.313755+00:00",
+  "discovery_end": "2021-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "MM_OPTIONS_CROWDING_REVERSAL": {
+      "maximum_raw_signals": 5254,
+      "median_raw_signals": 389.0,
+      "minimum_raw_signals": 120,
+      "policies": 200
+    },
+    "MM_OPTIONS_FLOW_CONTINUATION": {
+      "maximum_raw_signals": 11199,
+      "median_raw_signals": 762.5,
+      "minimum_raw_signals": 153,
+      "policies": 200
+    },
+    "OPTIONS_FUTURES_DISLOCATION": {
+      "maximum_raw_signals": 13730,
+      "median_raw_signals": 1163.5,
+      "minimum_raw_signals": 232,
+      "policies": 200
+    },
+    "PRODUCER_MM_OPTIONS_DIVERGENCE": {
+      "maximum_raw_signals": 10724,
+      "median_raw_signals": 772.5,
+      "minimum_raw_signals": 151,
+      "policies": 200
+    },
+    "SWAP_OPTIONS_HEDGE_PRESSURE": {
+      "maximum_raw_signals": 5801,
+      "median_raw_signals": 757.5,
+      "minimum_raw_signals": 132,
+      "policies": 200
+    }
+  },
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "schema_version": "xauusd_cftc_options_signal_census_v1",
+  "strategy_scoring_performed": false
+}
