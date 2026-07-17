@@ -1,0 +1,73 @@
+{
+  "schema_version": "xauusd_bounded_discovery_rejections_v1",
+  "as_of_utc": "2026-07-17",
+  "purpose": "Prevent repeated research on bounded mechanisms that failed chronological stress screens.",
+  "source": {
+    "name": "Dukascopy XAUUSD Bid/Ask M5 cache",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "windows": {
+    "fit": ["2017-07-01", "2021-07-01"],
+    "development": ["2021-07-01", "2024-07-01"],
+    "exam": ["2024-07-01", "2026-07-01"]
+  },
+  "execution": {
+    "side_specific_bid_ask": true,
+    "same_bar_priority": "STOP_FIRST",
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05
+  },
+  "rejections": [
+    {
+      "family": "H4_DONCHIAN_EMA_TREND_FIXED_TARGET",
+      "bounded_variants": 128,
+      "fit_survivors": 9,
+      "direction_result": "All fit survivors were long; no short variant passed fit.",
+      "decision": "REJECT",
+      "reason": "Every fit survivor failed development robustness or winner-removal stability."
+    },
+    {
+      "family": "H1_PULLBACK_RESUMPTION_IN_H4_EMA_TREND",
+      "bounded_representative_variants": 16,
+      "decision": "REJECT",
+      "reason": "Every representative long and short configuration was negative in fit; short PF was approximately 0.61 to 0.76."
+    },
+    {
+      "family": "UTC_SESSION_TIMED_H4_TREND_CARRY",
+      "bounded_variants": 192,
+      "fit_survivors": 0,
+      "decision": "REJECT",
+      "reason": "No entry hour, direction, stop, and target combination passed the fit stress screen."
+    },
+    {
+      "family": "COMEX_SPOT_BASIS_DISLOCATION_WITH_FLOW_CONFIRMATION",
+      "bounded_variants": 108,
+      "fit_survivors": 0,
+      "data_window": ["2022-07-01", "2025-07-01"],
+      "decision": "REJECT",
+      "reason": "No rolling basis tail, trade direction, or 30-second flow confirmation passed the first chronological year."
+    },
+    {
+      "family": "D1_DONCHIAN_TRAILING_CHANNEL_TREND",
+      "bounded_variants": 54,
+      "fit_survivors": 0,
+      "decision": "REJECT",
+      "reason": "No long or short daily breakout/trailing-exit configuration passed fit."
+    },
+    {
+      "family": "D1_RSI2_EXHAUSTION_REVERSION_IN_EMA_TREND",
+      "bounded_variants": 48,
+      "fit_survivors": 0,
+      "decision": "REJECT",
+      "reason": "No direction, trend horizon, RSI tail, stop, and holding-period combination passed fit."
+    }
+  ],
+  "interpretation": "R1 remains the only credible price-mechanical near-survivor. These failures do not authorize inverted rules, threshold repairs, or trading promotion.",
+  "authorization": {
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
