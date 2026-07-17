@@ -1,0 +1,171 @@
+{
+  "schema_version": "a3_ml_m5_cost_normalized_trend_v1",
+  "purpose": "Test whether the frozen high-frequency M5 momentum trigger has edge when its stop and payoff are deliberately wide enough relative to executable gold costs.",
+  "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+  "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+  "external_output_subdirectory": "research/xau-m5-cost-normalized-trend-v1",
+  "symbol": "XAUUSD",
+  "period": {
+    "start_month": "2018-07",
+    "end_month": "2026-06",
+    "expected_months": 96
+  },
+  "source_lock": {
+    "raw_inventory_path": "research/xau-r1-r2-portability-v1/source_inventory_latest.json",
+    "raw_inventory_sha256": "7b9401496ec67bf55ef1aac223e856c71f3e73bb73889bd43aeee32cff51b2d1",
+    "required_raw_inventory_classification": "DATA_READY",
+    "source_candidate_contract_path": "config/ml/a3_ml_dukascopy_m5_momentum_portability.json",
+    "source_candidate_contract_sha256": "e1388bd68cf4bd7e788e4bedc5e67bc10b7bc5b3557a24eff0a366c5b54ff9c3",
+    "ea_path": "mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "ea_sha256": "c590adabc92fe4b63dac22812e4ac9a12882b23b6ed8242848470f90fd01e265",
+    "portfolio_spec_path": "docs/A1_XAU_M5_MOMENTUM_CLEAN_LONG_SHORT_PORTFOLIO_FORWARD_DRAFT_2026_07_02.md",
+    "portfolio_spec_sha256": "e5d7a0fe3283820ac73800bd8562eab9f098d70e5747346c2e8e7cca07d8576a",
+    "reuse_exact_candidate_trigger_and_lane_hours": true,
+    "candidate_threshold_changes_authorized": false
+  },
+  "windows": {
+    "development_start_utc": "2018-07-01T00:00:00Z",
+    "development_end_exclusive_utc": "2020-07-01T00:00:00Z",
+    "validation_end_exclusive_utc": "2022-07-01T00:00:00Z",
+    "internal_test_end_exclusive_utc": "2024-07-01T00:00:00Z",
+    "exam_end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "entry": {
+    "decision_on_completed_m5_bar": true,
+    "maximum_entry_delay_minutes": 5,
+    "long_entry_side": "ASK",
+    "short_entry_side": "BID",
+    "approximate_or_forward_filled_entry_authorized": false
+  },
+  "geometry_profiles": [
+    {
+      "profile_id": "CN_TREND_4ATR_1R_12H",
+      "stop_atr_multiple": 4.0,
+      "minimum_stop_price": 7.0,
+      "maximum_stop_price": 50.0,
+      "reward_r": 1.0,
+      "maximum_hold_hours": 12
+    },
+    {
+      "profile_id": "CN_TREND_6ATR_1P5R_24H",
+      "stop_atr_multiple": 6.0,
+      "minimum_stop_price": 7.0,
+      "maximum_stop_price": 50.0,
+      "reward_r": 1.5,
+      "maximum_hold_hours": 24
+    },
+    {
+      "profile_id": "CN_TREND_8ATR_2R_48H",
+      "stop_atr_multiple": 8.0,
+      "minimum_stop_price": 7.0,
+      "maximum_stop_price": 50.0,
+      "reward_r": 2.0,
+      "maximum_hold_hours": 48
+    }
+  ],
+  "cost_and_risk": {
+    "lot_size": 0.01,
+    "contract_size_ounces_per_lot": 100.0,
+    "broker_spread_floor_price": 0.75,
+    "additional_execution_cost_usd_per_0p01_lot": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_immediate_cost_r": 0.15,
+    "maximum_initial_risk_usd_per_trade": 50.0,
+    "maximum_concurrent_trades": 2,
+    "maximum_same_direction_trades": 1,
+    "maximum_trades_per_utc_day": 4,
+    "maximum_portfolio_initial_risk_usd": 100.0,
+    "ambiguous_bar_policy": "STOP_FIRST"
+  },
+  "selection": {
+    "development_selects_exactly_one_profile": true,
+    "selection_order": [
+      "bootstrap_mean_stress_r_p025_desc",
+      "stress_profit_factor_desc",
+      "average_stress_r_desc",
+      "profile_id_asc"
+    ],
+    "calendar_month_bootstrap_samples": 2000,
+    "bootstrap_seed": 20260717,
+    "profile_or_threshold_search_beyond_locked_set_authorized": false,
+    "ml_ranking_authorized": false
+  },
+  "development_gates": {
+    "minimum_trades": 300,
+    "minimum_trades_per_source_day": 0.75,
+    "maximum_trades_per_source_day": 2.5,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_average_stress_r": 0.03,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_direction_share": 0.2,
+    "require_top_ten_winners_removed_net_positive": true,
+    "require_bootstrap_mean_stress_r_p025_above_zero": true
+  },
+  "validation_gates": {
+    "minimum_trades": 300,
+    "minimum_trades_per_source_day": 0.75,
+    "maximum_trades_per_source_day": 2.5,
+    "minimum_stress_profit_factor": 1.15,
+    "minimum_average_stress_r": 0.04,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_direction_share": 0.2,
+    "require_top_ten_winners_removed_net_positive": true,
+    "require_bootstrap_mean_stress_r_p025_above_zero": true
+  },
+  "internal_test_gates": {
+    "minimum_trades": 300,
+    "minimum_trades_per_source_day": 0.75,
+    "maximum_trades_per_source_day": 2.5,
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_average_stress_r": 0.05,
+    "minimum_positive_exit_month_share": 0.55,
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_direction_share": 0.2,
+    "require_top_ten_winners_removed_net_positive": true,
+    "require_bootstrap_mean_stress_r_p025_above_zero": true
+  },
+  "exam_gates": {
+    "minimum_trades": 300,
+    "minimum_trades_per_source_day": 0.75,
+    "maximum_trades_per_source_day": 2.5,
+    "minimum_stress_profit_factor": 1.25,
+    "minimum_average_stress_r": 0.06,
+    "minimum_positive_exit_month_share": 0.6,
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_direction_share": 0.2,
+    "require_top_ten_winners_removed_net_positive": true,
+    "require_bootstrap_mean_stress_r_p025_above_zero": true
+  },
+  "quality_gates": {
+    "all_source_hashes_match": true,
+    "expected_months_valid": 96,
+    "minimum_candidate_count": 3000,
+    "minimum_resolved_share": 0.99,
+    "candidate_ids_unique": true,
+    "exact_bid_ask_execution": true,
+    "no_label_crosses_segment_end": true,
+    "risk_and_cost_reconciliation_required": true
+  },
+  "outputs": {
+    "candidates_csv": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_CANDIDATES.csv",
+    "labels_csv": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_LABELS.csv",
+    "selected_trades_csv": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_SELECTED_TRADES.csv",
+    "evaluations_csv": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_EVALUATIONS.csv",
+    "report_json": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_REPORT.json",
+    "report_markdown": "outputs/reports/A3_ML_M5_COST_NORMALIZED_TREND_V1_REPORT.md"
+  },
+  "research_controls": {
+    "research_only": true,
+    "known_program_level_history_contamination": true,
+    "claims_untouched_holdout": false,
+    "same_iteration_geometry_or_gate_changes_authorized": false
+  },
+  "authorization": {
+    "python_demo_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false,
+    "live_capital_authorized": false
+  }
+}
