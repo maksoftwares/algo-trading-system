@@ -1,0 +1,99 @@
+{
+  "attempt_first": 26239,
+  "attempt_last": 27238,
+  "attempts_completed": 1000,
+  "authorization": {
+    "execution_authorized": false,
+    "historical_discovery_only": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "raw_tick_source_is_independent_holdout": false,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "baseline_reproduction": {
+    "minimum_era_average_stress_r": 0.05041784696105765,
+    "minimum_era_stress_pf": 1.1126612240425862,
+    "top_winners_removed_stress_net_r": 19.400706697189513,
+    "whole_closed_drawdown_r": 7.224584647853302,
+    "whole_stress_net_r": 29.42838261300843,
+    "whole_stress_pf": 1.213616967745682,
+    "whole_trades": 330
+  },
+  "contract_sha256": "6b3b0ea8ecba48a3f27e3644dfede69939162115d0b01a318589d98a5aa48e40",
+  "cumulative_campaign_attempts": 27238,
+  "decision": "TRANSITION_ONLINE_ROUTER_V11_ECONOMIC_FINALIST_FOUND",
+  "economic_finalist_attempts": [
+    26324,
+    26424,
+    26442,
+    26487,
+    26563,
+    26799,
+    26847,
+    26854,
+    26868,
+    26879,
+    26884,
+    26900,
+    26902,
+    26919,
+    26923,
+    26928,
+    26948,
+    26949,
+    26956,
+    26966,
+    27005,
+    27024,
+    27062,
+    27107,
+    27135,
+    27138,
+    27150,
+    27169,
+    27202,
+    27225
+  ],
+  "economic_finalist_count": 30,
+  "fdr_finalist_attempts": [],
+  "fdr_finalist_count": 0,
+  "mechanic_summary": {
+    "BAYESIAN_SHRINKAGE_WEIGHT": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1531461157305585,
+      "best_whole_pf": 2.098670005523961,
+      "economic_passes": 1,
+      "fdr_passes": 0
+    },
+    "COMPONENT_RANK_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1573476923498525,
+      "best_whole_pf": 1.50402465814531,
+      "economic_passes": 16,
+      "fdr_passes": 0
+    },
+    "TRAILING_DRAWDOWN_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.2053314678048812,
+      "best_whole_pf": 2.6434238496785136,
+      "economic_passes": 8,
+      "fdr_passes": 0
+    },
+    "TRAILING_MEAN_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1568343622019728,
+      "best_whole_pf": 2.6434238496785136,
+      "economic_passes": 2,
+      "fdr_passes": 0
+    },
+    "TRAILING_PF_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1563866792389457,
+      "best_whole_pf": 2.3839167462968627,
+      "economic_passes": 3,
+      "fdr_passes": 0
+    }
+  },
+  "schema_version": "xauusd_transition_online_component_router_v11"
+}
