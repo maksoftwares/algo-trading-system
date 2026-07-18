@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_EPISODE_STATE_V14_CONTRACT_LOCK.json": {
+      "bytes": 7197,
+      "sha256": "80a614a597e9be4907b5d17e2a3fa8cec012693f228972c074815262ae9cbd53"
+    },
+    "CHOP_EPISODE_STATE_V14_MANIFEST.csv": {
+      "bytes": 267329,
+      "sha256": "0475838534588459d772896789407fb3d970b38791684616d86a1f35668e2a7e"
+    },
+    "CHOP_EPISODE_STATE_V14_MANIFEST_EVIDENCE.json": {
+      "bytes": 3707,
+      "sha256": "b096039cd5cb3d3fafeb5656ef2f216f3bb75061166e98d272ec0a9a953c04fd"
+    },
+    "CHOP_EPISODE_STATE_V14_METRICS.csv": {
+      "bytes": 1015548,
+      "sha256": "567979f1da6026a49329c4cdd4928f1f99cda2f9236683ccae11c1df36af31b5"
+    },
+    "CHOP_EPISODE_STATE_V14_RESULT.json": {
+      "bytes": 4841,
+      "sha256": "d7005d08c881f1d05454f2a41a584524514e0b78f8fb3e129ef9811f0ba069b3"
+    },
+    "CHOP_EPISODE_STATE_V14_RESULT.md": {
+      "bytes": 2042,
+      "sha256": "533097f311e6e45c6922e46983cb71b3388dcb38b1c07a0c959154468d33d51c"
+    },
+    "CHOP_EPISODE_STATE_V14_SELECTED_TRADES.parquet": {
+      "bytes": 282522,
+      "sha256": "4b68a99f1e40b7faba3d629ca8968bfee722b42860c6e4a97b1706cccb0e9d1a"
+    },
+    "CHOP_EPISODE_STATE_V14_SHORTLIST.csv": {
+      "bytes": 16091,
+      "sha256": "c344d2db8f43f4ebf8e211d2776f018b49ad49de4327acae8819d5d7c5dade56"
+    }
+  },
+  "schema_version": "xauusd_chop_episode_state_v14_artifacts"
+}
