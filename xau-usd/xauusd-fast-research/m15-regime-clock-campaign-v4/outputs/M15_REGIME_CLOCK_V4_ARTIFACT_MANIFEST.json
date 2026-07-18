@@ -1,0 +1,29 @@
+{
+  "files": {
+    "M15_REGIME_CLOCK_V4_CONTRACT_LOCK.json": {
+      "bytes": 60378,
+      "sha256": "6be32f06eb5a95ff0a5a5bab7d7a1b3c4f70a1206014b683a1c2df9ba2e8e5c3"
+    },
+    "M15_REGIME_CLOCK_V4_MANIFEST.csv": {
+      "bytes": 230976,
+      "sha256": "4f578b5014ce6c297651f6c96b3bf6bd7d5e62aaa76d2931e61252f462b2a1f2"
+    },
+    "M15_REGIME_CLOCK_V4_METRICS.csv": {
+      "bytes": 935344,
+      "sha256": "1f26c8fa9ec0deb89e7fcc2d0ce2063e06141d23502c2114ea0a49bd3e12261d"
+    },
+    "M15_REGIME_CLOCK_V4_RESULT.json": {
+      "bytes": 2106,
+      "sha256": "7e5d8cd37324a81bd58b8b1c1bcc22a90d489d89bf86e19ae8812f7ef5034c20"
+    },
+    "M15_REGIME_CLOCK_V4_RESULT.md": {
+      "bytes": 556,
+      "sha256": "fe07ec533369671c239fa239925a5727b107c24e73ac3d2f2b2f65b716a49203"
+    },
+    "M15_REGIME_CLOCK_V4_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_m15_regime_clock_v4_artifacts"
+}
