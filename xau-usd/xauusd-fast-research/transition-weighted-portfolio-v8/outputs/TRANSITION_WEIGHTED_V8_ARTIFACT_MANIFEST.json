@@ -1,0 +1,37 @@
+{
+  "files": {
+    "TRANSITION_WEIGHTED_V8_COMPONENT_TRADES.parquet": {
+      "bytes": 61624,
+      "sha256": "ac6839f424e3b52ab2dfbfa509ded5ad8db629deaae2a73d191df3f4efbf053d"
+    },
+    "TRANSITION_WEIGHTED_V8_CONTRACT_LOCK.json": {
+      "bytes": 11286,
+      "sha256": "d4f2bf8c5ef67432a702d4a9f283ab6b79eb47a29cb24efb2aa2ff95de284f43"
+    },
+    "TRANSITION_WEIGHTED_V8_INPUT_EVIDENCE.json": {
+      "bytes": 1472,
+      "sha256": "0cbc5e17a3c55efd1e574f38d4f97aa3383fe8fd68d13db754dba002ceaefb87"
+    },
+    "TRANSITION_WEIGHTED_V8_MANIFEST.csv": {
+      "bytes": 10635,
+      "sha256": "df2b92a2cea15adf4abc8dc8014439cfc44cfb1fcf4b0506a9b3f0669a22676c"
+    },
+    "TRANSITION_WEIGHTED_V8_METRICS.csv": {
+      "bytes": 84605,
+      "sha256": "041282474628f46d8d32da8e692368652c4f89df27f33ddb204077ac915af042"
+    },
+    "TRANSITION_WEIGHTED_V8_RESULT.json": {
+      "bytes": 2968,
+      "sha256": "e62d94a6927dbafe8b7b9955bebf772011098e3ef2983296f685b5fbc04ebeb3"
+    },
+    "TRANSITION_WEIGHTED_V8_RESULT.md": {
+      "bytes": 594,
+      "sha256": "4c39c391bd6e0b5c84070ca1dee421c92b30b4961338e64dec8189a1b86ff6e2"
+    },
+    "TRANSITION_WEIGHTED_V8_TRADES.parquet": {
+      "bytes": 318157,
+      "sha256": "fb1e162844f7cf57438cb8e257b0285d51d0209f4718d1e803e5573e249ccedd"
+    }
+  },
+  "schema_version": "xauusd_transition_weighted_v8_artifacts"
+}
