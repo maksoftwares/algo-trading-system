@@ -1,0 +1,96 @@
+{
+  "schema_version": "xauusd_out_of_era_breakout_independence_v2",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "start_utc": "2010-01-01T00:00:00Z",
+    "end_exclusive_utc": "2016-07-01T00:00:00Z",
+    "expected_months": 78,
+    "replay_root": "out-of-era-replication-v1/dukascopy-replay",
+    "upstream_package": "../out-of-era-replication-v1",
+    "upstream_final_lock": "../out-of-era-replication-v1/outputs/OUT_OF_ERA_FINAL_CONTRACT_LOCK.json"
+  },
+  "candidates": [
+    {
+      "candidate_id": "R1_UPTREND_PORTABILITY_EXACT",
+      "source_config": "../mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "source_code": "../mt5-r1-uptrend-portability-v1/src/portability.py",
+      "engine": "R1_REGIME_BREAKOUT"
+    },
+    {
+      "candidate_id": "R1B_STRICT_COMPRESSION_EXACT",
+      "source_config": "../mt5-r1b-strict-compression-portability-v1/config/mt5_r1b_strict_compression_portability_v1.json",
+      "source_code": "../mt5-r1b-strict-compression-portability-v1/src/portability.py",
+      "engine": "R1_REGIME_BREAKOUT"
+    },
+    {
+      "candidate_id": "COMPRESSION_LONG_PORTABILITY_EXACT",
+      "source_config": "../mt5-compression-portability-v1/config/mt5_compression_portability_v1.json",
+      "source_code": "../mt5-compression-portability-v1/src/portability.py",
+      "engine": "COMPRESSION_BREAKOUT"
+    }
+  ],
+  "gates": {
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "R1B_STRICT_COMPRESSION_EXACT": {
+      "minimum_trades": 30,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "COMPRESSION_LONG_PORTABILITY_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.20,
+      "minimum_average_stress_r": 0.04,
+      "maximum_closed_drawdown_r": 18.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    }
+  },
+  "independence": {
+    "fixed_selection_order": [
+      "R1_UPTREND_PORTABILITY_EXACT",
+      "R1B_STRICT_COMPRESSION_EXACT",
+      "COMPRESSION_LONG_PORTABILITY_EXACT"
+    ],
+    "entry_overlap_window_minutes": 60,
+    "maximum_entry_overlap_fraction": 0.20,
+    "maximum_absolute_daily_pnl_correlation": 0.60
+  },
+  "contract_scope": {
+    "repository_files": [
+      "PREREGISTRATION.md",
+      "requirements.txt",
+      "config/out_of_era_breakout_independence_v2.json",
+      "src/replication.py",
+      "lock_definitions.py",
+      "lock_final_contract.py",
+      "run_research.py"
+    ]
+  },
+  "research_controls": {
+    "registered_candidate_count": 3,
+    "campaign_attempts_before_replication": 11093,
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_request_authorized": false,
+    "databento_use_authorized": false,
+    "broker_action_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false
+  }
+}

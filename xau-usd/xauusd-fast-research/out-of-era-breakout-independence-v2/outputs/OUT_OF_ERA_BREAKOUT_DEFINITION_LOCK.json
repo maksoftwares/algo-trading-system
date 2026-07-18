@@ -1,0 +1,72 @@
+{
+  "broker_action_performed": false,
+  "config_sha256": "80e867122e92fb9d397d569cbba12404fc6200d26f42defce3f2637a0c41dfed",
+  "databento_used": false,
+  "definition_contract_sha256": "661a6518fe92f1120d518002d3e4daa6bee8d18545fb16d1c02e0f731a033425",
+  "file_hashes": {
+    "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/config/mt5_compression_portability_v1.json": "6ebc91483e3b517bae238cfa24eee75cf5fdf091d1bd991aa338e0acc1f64f0b",
+    "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py": "506f813b583c36299434b804e1ce78d177ad387f7c447ddd5e381caa1ae7ead2",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c",
+    "xau-usd/xauusd-fast-research/mt5-r1b-strict-compression-portability-v1/config/mt5_r1b_strict_compression_portability_v1.json": "83c0901cfa2a9adcfccc3072a2e79d14f524c9f341cce725807132894e95cb49",
+    "xau-usd/xauusd-fast-research/mt5-r1b-strict-compression-portability-v1/src/portability.py": "a7e4901da2d76d252f2d03dcdc4a1d733646684f222ef496dc8214a17981215f",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/PREREGISTRATION.md": "5629f948af7f01fd0dcf669bcae685223f2bb813d267e6d2181321d12cc82a6b",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/config/out_of_era_breakout_independence_v2.json": "80e867122e92fb9d397d569cbba12404fc6200d26f42defce3f2637a0c41dfed",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/lock_definitions.py": "509fab70a30c71b1d2ef8ab992274b92bc6a569cea5f29030634c2d32c871500",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/lock_final_contract.py": "09eb3e6eca5bdcec3e9f4039d963dd862b6d220bbffbd360d4f8bda8b456cd4b",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/requirements.txt": "ba60104d721ad680e363cc8505e527b3a3ce6175006435b4378cb89a6a87cdb9",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/run_research.py": "5b06914691a2cc646f4579a88ea7185ab1fad8d8e17f7d42c47725d01e1f5753",
+    "xau-usd/xauusd-fast-research/out-of-era-breakout-independence-v2/src/replication.py": "d08aa14f2c35e41790f33554ebde5e1d1d10ef9960c639292965e0778b80a174"
+  },
+  "gates": {
+    "COMPRESSION_LONG_PORTABILITY_EXACT": {
+      "maximum_closed_drawdown_r": 18.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.2,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    },
+    "R1B_STRICT_COMPRESSION_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 30,
+      "top_winners_removed": 5
+    },
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    }
+  },
+  "independence": {
+    "entry_overlap_window_minutes": 60,
+    "fixed_selection_order": [
+      "R1_UPTREND_PORTABILITY_EXACT",
+      "R1B_STRICT_COMPRESSION_EXACT",
+      "COMPRESSION_LONG_PORTABILITY_EXACT"
+    ],
+    "maximum_absolute_daily_pnl_correlation": 0.6,
+    "maximum_entry_overlap_fraction": 0.2
+  },
+  "locked_utc": "2026-07-18T00:11:18.101359+00:00",
+  "normalized_data_ready": false,
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "parameter_search_count": 0,
+  "preregistration_sha256": "5629f948af7f01fd0dcf669bcae685223f2bb813d267e6d2181321d12cc82a6b",
+  "registered_candidates": [
+    "R1_UPTREND_PORTABILITY_EXACT",
+    "R1B_STRICT_COMPRESSION_EXACT",
+    "COMPRESSION_LONG_PORTABILITY_EXACT"
+  ],
+  "schema_version": "xauusd_out_of_era_breakout_definition_lock_v2"
+}
