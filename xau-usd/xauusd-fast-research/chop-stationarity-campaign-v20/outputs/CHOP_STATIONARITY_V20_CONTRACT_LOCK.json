@@ -1,0 +1,238 @@
+{
+  "contract_sha256": "4d69851fc14e23b0178ee0dd8ff827ad5b56d65767eb927b10df0bbc4e87882a",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 30086,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/src/campaign.py",
+      "sha256": "a2e7419e90643b70b4bf8a91919c875db77927d295453a0dbc5f2889d342a073"
+    },
+    {
+      "bytes": 4805,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_RESULT.json",
+      "sha256": "6a59da4728c0bbb98b297de7304108ef5d120d12acffce65aee9b11b79679fa9"
+    },
+    {
+      "bytes": 4832,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/outputs/CHOP_EXIT_HAZARD_ANTISIGNAL_V19_RESULT.json",
+      "sha256": "0d593d6503fd3590d8e611884181cb58af04398b936bd97e363d78b8ceb9c216"
+    },
+    {
+      "bytes": 5411,
+      "path": "xau-usd/xauusd-fast-research/intraday-strategy-campaign-v2/outputs/INTRADAY_STRATEGY_SCREEN_RESULT.json",
+      "sha256": "b559603363587dbc7af06cd01f12815ae1e0bddef8d1653c55cf021a711c6ae1"
+    },
+    {
+      "bytes": 4203,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/outputs/WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.json",
+      "sha256": "6b851608a7ef6714a7b53cd88f3da2b5d11f26a6a8ead4d76d803f503ea38aba"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "cooldown_bars": 1,
+    "current_account_risk_usd": 8.165487,
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_policy_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "risk_basis": "LATEST_COMPLETED_H1_ATR14",
+    "same_bar_priority": "STOP_FIRST",
+    "stress_slippage_r": 0.05
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "features": {
+    "atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96,
+    "h1_atr_period": 14
+  },
+  "geometries": {
+    "BALANCED": {
+      "hold_bars": 72,
+      "stop_atr": 0.8,
+      "target_r": 1.5
+    },
+    "EXTENDED": {
+      "hold_bars": 144,
+      "stop_atr": 1.2,
+      "target_r": 2.0
+    },
+    "FAST": {
+      "hold_bars": 36,
+      "stop_atr": 0.6,
+      "target_r": 1.0
+    },
+    "TREND": {
+      "hold_bars": 144,
+      "stop_atr": 1.0,
+      "target_r": 1.25
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3803,
+    "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/outputs/CHOP_STATIONARITY_V20_MANIFEST_EVIDENCE.json",
+    "sha256": "32aa4e4b7784582b37e720af98c02a90ddcc1502b356f5c7a85bd0c38eae950f"
+  },
+  "manifest_file": {
+    "bytes": 372135,
+    "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/outputs/CHOP_STATIONARITY_V20_MANIFEST.csv",
+    "sha256": "dfa180ffd685ea75578489c2cc981f014ab8ff3fe51c2a34a30bf965f2c05d07"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2594,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/PREREGISTRATION.md",
+      "sha256": "f0addd7679e446867ddcb610fb58f69a9a1fec7dfdef301b029552bd5b806c57"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 4935,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/config/chop_stationarity_campaign_v20.json",
+      "sha256": "063c8e0527a35a4a6df3825e55673f1a99edb174d9d48c6c956cc1b83f01b799"
+    },
+    {
+      "bytes": 81,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/src/__init__.py",
+      "sha256": "f5300d1225f51bdb39d7c298ce5c9aecb8b23155e18f3cc1771878726497662c"
+    },
+    {
+      "bytes": 25667,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/src/campaign.py",
+      "sha256": "794bfcb96d9259269808f02fab9841254b4762eace6cf0c884410b368d8b57d7"
+    },
+    {
+      "bytes": 3783,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/prepare_manifest.py",
+      "sha256": "f205efb6afb698a1ed145c70ed00c35ef7a1847a464c6dc349ce86a7f08b503b"
+    },
+    {
+      "bytes": 4825,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/lock_contract.py",
+      "sha256": "95f606c8764357b11d06688f6907d22a598f94af40bfe828f40875079d4a3117"
+    },
+    {
+      "bytes": 12592,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/run_screen.py",
+      "sha256": "3e5f8fc91f697ff68df1356ac390a3ccec347f06061d6d109a107d29626e25d6"
+    },
+    {
+      "bytes": 5890,
+      "path": "xau-usd/xauusd-fast-research/chop-stationarity-campaign-v20/tests/test_campaign.py",
+      "sha256": "e660dfe4dbdb2fa89b243a078a385a00fdfb00f0c87f748f96e6d97f4b58c6ef"
+    }
+  ],
+  "paid_data_used": false,
+  "prior_chop_reversion_exit_and_router_outcomes_exposed": true,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_stationarity_v20_contract",
+  "selection": {
+    "attempt_first": 35239,
+    "attempt_last": 36238,
+    "attempts_per_mechanic": 200,
+    "candidate_definitions_per_mechanic": 1000,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-stationarity-v20-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_AR1_MEAN_REVERSION",
+      "CHOP_VARIANCE_RATIO_REVERSION",
+      "CHOP_HURST_REVERSION",
+      "CHOP_RETURN_AUTOCORRELATION_FADE",
+      "CHOP_ADAPTIVE_LEVEL_REVERSION"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "total_attempts": 1000
+  },
+  "training_authorized": false,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
