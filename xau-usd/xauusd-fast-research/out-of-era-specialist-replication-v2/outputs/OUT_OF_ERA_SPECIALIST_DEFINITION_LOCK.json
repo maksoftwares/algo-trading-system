@@ -1,0 +1,611 @@
+{
+  "broker_action_performed": false,
+  "config_sha256": "d0c2b13a12bc1e0b1e84bcd9340e6f3c1f4cb1beac5c4634549bf669090e72d2",
+  "databento_used": false,
+  "definition_contract_sha256": "bdcb9980d421c12c5e15f828c394997dbcb18c9fc9945de66cb8c81ebe136a20",
+  "execution_authorized": false,
+  "gates": {
+    "COMPRESSION_LONG_PORTABILITY_EXACT": {
+      "maximum_closed_drawdown_r": 18.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.04,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.2,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    },
+    "FOMC_IMPULSE_CHOP_RR2_V6": {
+      "maximum_closed_drawdown_r": 10.0,
+      "maximum_holm_pvalue": 0.1,
+      "minimum_average_stress_r": 0.1,
+      "minimum_event_participation": 0.15,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 10,
+      "top_winners_removed": 3
+    },
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+      "maximum_closed_drawdown_r": 12.0,
+      "maximum_holm_pvalue": 0.1,
+      "minimum_average_stress_r": 0.08,
+      "minimum_event_participation": 0.25,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 15,
+      "top_winners_removed": 3
+    },
+    "R1B_STRICT_COMPRESSION_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 30,
+      "top_winners_removed": 5
+    },
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    }
+  },
+  "independence": {
+    "entry_overlap_window_minutes": 60,
+    "fixed_selection_order": [
+      "R1_UPTREND_PORTABILITY_EXACT",
+      "FOMC_IMPULSE_CHOP_RR2_V6",
+      "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+      "R1B_STRICT_COMPRESSION_EXACT",
+      "COMPRESSION_LONG_PORTABILITY_EXACT"
+    ],
+    "maximum_absolute_daily_pnl_correlation": 0.6,
+    "maximum_entry_overlap_fraction": 0.2,
+    "maximum_one_survivor_per_mechanism_family": true
+  },
+  "locked_utc": "2026-07-18T02:13:03.517479+00:00",
+  "new_attempt_first": 11112,
+  "new_attempt_last": 11113,
+  "normalized_data_ready": false,
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "parameter_search_count": 0,
+  "public_input_files": [
+    {
+      "bytes": 96157,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2010.html",
+      "sha256": "bed386555b99a8ba66733022bf5db3d5ac9910792aa0b3d02ea8e2a0b4ec2b2b"
+    },
+    {
+      "bytes": 98164,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2011.html",
+      "sha256": "c1007b15125b404efa1a2555bbcfe0a56c5e73ad83ce424b986927e7f5fd0fbe"
+    },
+    {
+      "bytes": 98085,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2012.html",
+      "sha256": "2998e1c7cd87c42fbe657482e755b459cf8da4515a0b610b3ffa830a60bf8a92"
+    },
+    {
+      "bytes": 95746,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2013.html",
+      "sha256": "ce62d2054346b13431942d3c9b39f2341195f46b5238e308594e3b9a9b8dc34b"
+    },
+    {
+      "bytes": 96026,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2014.html",
+      "sha256": "7a112970a747dfb9489e6245ae989e2e757c12ae245377d09e6eb20a33e534c7"
+    },
+    {
+      "bytes": 95178,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2015.html",
+      "sha256": "58454149b68c98a31a82690d2f20740a48055f4c488624fae5935529a0b2961b"
+    },
+    {
+      "bytes": 95766,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/fomchistorical2016.html",
+      "sha256": "82e6ed5c2466c70388385491136e5e4fe39469929ff5ef4c7e737063115b1af1"
+    },
+    {
+      "bytes": 80617,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/monetary20130313a.html",
+      "sha256": "80465634ded7011da11bed650cb62c29168136f99c194cb81d80d104a927aa17"
+    },
+    {
+      "bytes": 82910,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100127a.html",
+      "sha256": "70ebe5d892fe66d74e80a8786a4d36b0fac709316b9f22e8cbed598304fed708"
+    },
+    {
+      "bytes": 82369,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100316a.html",
+      "sha256": "0e75b5fcbd573f4561b5f4ce694b93c3c052e4370c93fd99b2f88a9b5965fecd"
+    },
+    {
+      "bytes": 82111,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100428a.html",
+      "sha256": "02754a6117f618c56144e9c5d6f1c3d534f540914567fc763d346b693eb34e46"
+    },
+    {
+      "bytes": 81831,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100623a.html",
+      "sha256": "c48080827a8b4d859cc4413a3ddc984e515fb5fe8ca8c57c0995fe645f248b62"
+    },
+    {
+      "bytes": 82825,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100810a.html",
+      "sha256": "453e67f98d211a23be9a9f1fd765a919dc5f4041bca78d3214adef2a4a8b4f2b"
+    },
+    {
+      "bytes": 82283,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20100921a.html",
+      "sha256": "648e50fbdb5a14cc8886c1f99be3d5d11e288bb36fa73e9f4cd8a64654e2c1fd"
+    },
+    {
+      "bytes": 82872,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20101103a.html",
+      "sha256": "0aeb3d28c4e8c320c77330a1e78e87ec6a5e1e76ffcfd84028d1c81bf5c8fd90"
+    },
+    {
+      "bytes": 82721,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20101214a.html",
+      "sha256": "1966163e2caca458e0e9852eddc3075dc96cfe1e2f5985cb190f02c34148c66c"
+    },
+    {
+      "bytes": 82354,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110126a.html",
+      "sha256": "9fda5c5151b8c49c501b31b2e3d3f681ec7a8778d10f613bd0e2371790c53f25"
+    },
+    {
+      "bytes": 82496,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110315a.html",
+      "sha256": "818ad938848e793d1561055e1f059f3cb849f7ecf35ad1a38ba0c2f8c6307558"
+    },
+    {
+      "bytes": 82561,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110427a.html",
+      "sha256": "80bcafdc0cf19539a37337844a2cbef174a0e17aad62ce52a223ef1379698277"
+    },
+    {
+      "bytes": 82506,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110622a.html",
+      "sha256": "56d288e09ab11fed3ace552c83da9d240cf2bb0a9d99380906e8f00db791bafc"
+    },
+    {
+      "bytes": 82979,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110809a.html",
+      "sha256": "f66910d50f62b5581c4753bd55c9f8f99c6533ee6ed5ae63f913be8b531d0b05"
+    },
+    {
+      "bytes": 84212,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20110921a.html",
+      "sha256": "0010d689d5d2b280df762fc6b5ebbe2b6968637bbd0bc8874442b8ca78f5d72c"
+    },
+    {
+      "bytes": 82926,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20111102a.html",
+      "sha256": "7604974407ab327a32dde1dea67df6989c575ca9d71b4655e90d79fd0fac18dc"
+    },
+    {
+      "bytes": 82569,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20111213a.html",
+      "sha256": "e8e569fd5c22745bce3d001ac14b57703feda73651bdba90515fc711fee05152"
+    },
+    {
+      "bytes": 82455,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120125a.html",
+      "sha256": "7c8cd25c9562ab15b2300f135e933a81df53844b9b551d7cec0a51953cbeb99b"
+    },
+    {
+      "bytes": 82504,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120313a.html",
+      "sha256": "b719e58b8ed3680392753e683547680e43c1fcc8bf11789efa6f00fd4937b5b1"
+    },
+    {
+      "bytes": 82555,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120425a.html",
+      "sha256": "af625018416790cfaf3e263bde19520a2ad1030081a9bfee3d7008e9a16b9a90"
+    },
+    {
+      "bytes": 83665,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120620a.html",
+      "sha256": "326967a903109066a755096761f45b91dd92929eda6b400fa768b319498eb06f"
+    },
+    {
+      "bytes": 82633,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120801a.html",
+      "sha256": "118ab512926e7972cbcc6ec6dd024b5ea10d3147034590aebf16b53ddb478733"
+    },
+    {
+      "bytes": 83462,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20120913a.html",
+      "sha256": "ab70406cc486ae64ded39476998df6afd33dcedd3e7ea3cb6aa12a703742e21d"
+    },
+    {
+      "bytes": 83446,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20121024a.html",
+      "sha256": "b9d984ff4ae2d2347c5628df6fe6d473504fefa2765fce19ea57c5622153f083"
+    },
+    {
+      "bytes": 84498,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20121212a.html",
+      "sha256": "3fced8ef7dd1cfcb17df4a91f4ccc7227ee9d9d99eb4b55146ceeda5193ee65a"
+    },
+    {
+      "bytes": 84084,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130130a.html",
+      "sha256": "1d52f8f9d1edf70f40e431ac21f0c666decb56a4e73bdd8797ded9499f56d497"
+    },
+    {
+      "bytes": 84121,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130320a.html",
+      "sha256": "1f13c636164472200bba48571fbde512482191cf6c0830e49ba35809b8660747"
+    },
+    {
+      "bytes": 84196,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130501a.html",
+      "sha256": "b9785c5a643c4696ad8fead9a33d5a7dd9ee9dd3e1b51597c77a44bada82dc46"
+    },
+    {
+      "bytes": 84408,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130619a.html",
+      "sha256": "a1d3d008fd4badeb3cacea72b6384e31c0a9b9acc1c286cb9143ffecf186b06f"
+    },
+    {
+      "bytes": 84384,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130731a.html",
+      "sha256": "0cdd7a60cfaa9ffaf34022b3489ef58c362cbfb1700b05a14e975685e560593d"
+    },
+    {
+      "bytes": 85052,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20130918a.html",
+      "sha256": "8b867f5d51c75986a7fef17441ec25c92d955641a801851fed5b178a029f85d3"
+    },
+    {
+      "bytes": 84921,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20131030a.html",
+      "sha256": "e51356eb04feb20466649db7727f8a0527f596bf8ca8f9cc0848816b108912b4"
+    },
+    {
+      "bytes": 85709,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20131218a.html",
+      "sha256": "a784bf9a45f6d258348c1035e95b909feccb5acec6440a8159f6f9d71326b473"
+    },
+    {
+      "bytes": 85634,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140129a.html",
+      "sha256": "d099204c0d46d2cce7f84b1186bac2869a62b81010e7a7f894abcd41776b3ada"
+    },
+    {
+      "bytes": 85930,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140319a.html",
+      "sha256": "8627dfb5fbdede48dd230f8fe8dbcf820cee9e100be6b69b8316895335e76586"
+    },
+    {
+      "bytes": 85418,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140430a.html",
+      "sha256": "1310b6fdc82f7357bbc00b7c55683165884014e985dad3c5aca569fb03e2010b"
+    },
+    {
+      "bytes": 85348,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140618a.html",
+      "sha256": "58701a77866edfb7ad1bcdee8e87adebe3bebd7db368c0c48f03ed3d49941160"
+    },
+    {
+      "bytes": 86267,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140730a.html",
+      "sha256": "d70e1e5235aca77e516b267233785c92f99d956a10d455fefca71899968ecaaa"
+    },
+    {
+      "bytes": 85996,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20140917a.html",
+      "sha256": "8ec9ddd574427e9965194aed6d35954d6f59ed6265a50bb6cc39bff741b82b21"
+    },
+    {
+      "bytes": 85379,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20141029a.html",
+      "sha256": "2c10a805a29fe2b6e825c0fde568bf0883e7373aaeb312eedc0cd971ff9c74c9"
+    },
+    {
+      "bytes": 84733,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20141217a.html",
+      "sha256": "9ebffe6319c094c8024df5fcb62348583159601a96120abdc02a9932e355bac1"
+    },
+    {
+      "bytes": 83734,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150128a.html",
+      "sha256": "3fcf9775308e8811201935818ff2b79eafef8dc47186888c65b99225958d89d4"
+    },
+    {
+      "bytes": 83647,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150318a.html",
+      "sha256": "69ed4296d4be0d7a96f967c97ed5a24aea9e5615322704c33c2cf3c2005bade5"
+    },
+    {
+      "bytes": 83538,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150429a.html",
+      "sha256": "1c564a2c47e3a0df7d5b5a8fd05124752cb7491876da710b8fcbf8d6e891e9e9"
+    },
+    {
+      "bytes": 83394,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150617a.html",
+      "sha256": "7b3673130c8c3e9c5da9669f44b9295e540c43ec2bd683c5810056992687f877"
+    },
+    {
+      "bytes": 83363,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150729a.html",
+      "sha256": "b1228151b7d3487875251f8872db6af76b38a734d78764b349875692abe9accf"
+    },
+    {
+      "bytes": 83664,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20150917a.html",
+      "sha256": "7f30c4479962430f36df0a4c7da2f616644d631d73baa8140b2f4c2c9dafcb46"
+    },
+    {
+      "bytes": 83574,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20151028a.html",
+      "sha256": "ab0e8492d7d0bc538b6171d16e181f978e24e31752dbf4a98ecec12fcea138ac"
+    },
+    {
+      "bytes": 83602,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20151216a.html",
+      "sha256": "06665abefa56c830a84ea7ebc327413f7eb88ed151af22309a1ab1dad6f263f4"
+    },
+    {
+      "bytes": 83461,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20160127a.html",
+      "sha256": "b899abe4d244ddcd17649a11264f48b248eeda3c8f96d2b5b8ed9b0e7d6d62c8"
+    },
+    {
+      "bytes": 83519,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20160316a.html",
+      "sha256": "523e6b3523041bd0235140d2bb123990305f830950205b551be0b12cd5758011"
+    },
+    {
+      "bytes": 83545,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20160427a.html",
+      "sha256": "4decc3d001cef688fcb1e58c95d5a236b98240a4fa900b9faa4193bab8471016"
+    },
+    {
+      "bytes": 83315,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/federal-reserve/statements/monetary20160615a.html",
+      "sha256": "63976eb9b62a8d82ebb29a99f0db4273d65062645988d6b8fe2548a6643762b1"
+    },
+    {
+      "bytes": 11955,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/OFFICIAL_FOMC_CALENDAR_2010_2016.csv",
+      "sha256": "9e65a4746db7ca77fec3740566fadc41604d5dd43ce68cf2af5c226ad41aaceb"
+    },
+    {
+      "bytes": 18908,
+      "path": "out-of-era-specialist-replication-v2/public-inputs/OFFICIAL_FOMC_SOURCE_MANIFEST.json",
+      "sha256": "95fe8ee91889ed89238e7dfee4735949ce71de343dc28a172ebd2a6d7d0b3181"
+    }
+  ],
+  "registered_candidates": [
+    "R1_UPTREND_PORTABILITY_EXACT",
+    "R1B_STRICT_COMPRESSION_EXACT",
+    "COMPRESSION_LONG_PORTABILITY_EXACT",
+    "FOMC_IMPULSE_CHOP_RR2_V6",
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7"
+  ],
+  "repository_files": [
+    {
+      "bytes": 104,
+      "path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/__init__.py",
+      "sha256": "0775013d4bf2403f331db1f07ee730c797b67efa07c7a3941729c8c26d559d83"
+    },
+    {
+      "bytes": 33998,
+      "path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/foundation.py",
+      "sha256": "d43980eb2d8ac5d262706380d483a36c21884981beb2b7f7de87269adcc1baba"
+    },
+    {
+      "bytes": 21521,
+      "path": "multi-asset/data-foundation/dukascopy-ticks-v1/src/dukascopy_tick_foundation/pipeline.py",
+      "sha256": "da0a4897a308cff4240b9f8c0003d5dbbbe8bc1ba0d453a464a5591e2b992346"
+    },
+    {
+      "bytes": 6102,
+      "path": "xau-usd/xauusd-fast-research/balanced-regime-campaign-v3/config/balanced_regime_campaign_v3.json",
+      "sha256": "8f6839238f4d8ed5b0f9e91afbb54f4486101ddea31e8b593d7cd5ac60396988"
+    },
+    {
+      "bytes": 19151,
+      "path": "xau-usd/xauusd-fast-research/balanced-regime-campaign-v3/src/campaign.py",
+      "sha256": "6c82b557683283f105dcd83490087c7d6acc4162d50231461312f7b8ccae27a7"
+    },
+    {
+      "bytes": 6642,
+      "path": "xau-usd/xauusd-fast-research/balanced-regime-campaign-v3/src/regimes.py",
+      "sha256": "efc43b5ac60ef91b33de27742fc29c9c0c113ea127a301d21f0362436a253098"
+    },
+    {
+      "bytes": 49,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/__init__.py",
+      "sha256": "99cd90a4d5f27e4b46ff09d6d7458d1409c5874057a87a1ae7cb2e049de4848b"
+    },
+    {
+      "bytes": 12653,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/context_ranker.py",
+      "sha256": "c482cf44eede61aae83154248aa06b3e573a74ce2375b19e6be10c16d7d4e9d3"
+    },
+    {
+      "bytes": 9330,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/foundation.py",
+      "sha256": "8030f4053842950c636fb6665bc8d7328adf05c832b7a78c11dba8c56811b0b9"
+    },
+    {
+      "bytes": 9712,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/hour_ranker.py",
+      "sha256": "e4ccf0cc1dec1cad056276aefb79a1fcb4ea186f6a0afd4f5a85d6430e139371"
+    },
+    {
+      "bytes": 6594,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/m15_comex_ranker.py",
+      "sha256": "a13a6bcebd08cd72dad8605308a2219d5924cc6b4e7c20dadfd3e452be4be62b"
+    },
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 18175,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/tbbo_features.py",
+      "sha256": "aff3e122c5aaba3778664114fc7ca29f214307aece0f5afed2eb30c54d7a7502"
+    },
+    {
+      "bytes": 11030,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/trade_campaign.py",
+      "sha256": "106dc0f962a1934833455e1a2f63a92783075404a6df777b8682d7dc0051a2ac"
+    },
+    {
+      "bytes": 62,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/__init__.py",
+      "sha256": "387272f9b591f951bc5da7e916642f55ba6919f525d6e3bd7565c8df6a162764"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 23568,
+      "path": "xau-usd/xauusd-fast-research/macro-event-reaction-replication-v2/src/event_reaction.py",
+      "sha256": "f3193da9d72882c019d62437d9bbf194401aefb08a4e2cb7bbc9f823614a5c34"
+    },
+    {
+      "bytes": 3561,
+      "path": "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/config/mt5_compression_portability_v1.json",
+      "sha256": "6ebc91483e3b517bae238cfa24eee75cf5fdf091d1bd991aa338e0acc1f64f0b"
+    },
+    {
+      "bytes": 63,
+      "path": "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/__init__.py",
+      "sha256": "5bcf133a628be0199af9f62dd3864654b3caf040b8edb7639fd37d6b6c7faf2e"
+    },
+    {
+      "bytes": 17105,
+      "path": "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py",
+      "sha256": "506f813b583c36299434b804e1ce78d177ad387f7c447ddd5e381caa1ae7ead2"
+    },
+    {
+      "bytes": 3624,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    {
+      "bytes": 64,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/__init__.py",
+      "sha256": "70e5424c96ebd1a089d184626c01328a9f32d6cc28680ea68e6d33598262c93c"
+    },
+    {
+      "bytes": 6343,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py",
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    },
+    {
+      "bytes": 3777,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1b-strict-compression-portability-v1/config/mt5_r1b_strict_compression_portability_v1.json",
+      "sha256": "83c0901cfa2a9adcfccc3072a2e79d14f524c9f341cce725807132894e95cb49"
+    },
+    {
+      "bytes": 55,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1b-strict-compression-portability-v1/src/__init__.py",
+      "sha256": "c3796e772659dc93ca20fb3cea30a0077d2f1e5aea053dab22413c17886f5a12"
+    },
+    {
+      "bytes": 755,
+      "path": "xau-usd/xauusd-fast-research/mt5-r1b-strict-compression-portability-v1/src/portability.py",
+      "sha256": "a7e4901da2d76d252f2d03dcdc4a1d733646684f222ef496dc8214a17981215f"
+    },
+    {
+      "bytes": 5703,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/acquire_official_fomc.py",
+      "sha256": "af429b820e47bdcddf48ff0da61ba074b5fac84eb84ae4f60b0eb8fc090c59a4"
+    },
+    {
+      "bytes": 8344,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/config/out_of_era_specialist_replication_v2.json",
+      "sha256": "d0c2b13a12bc1e0b1e84bcd9340e6f3c1f4cb1beac5c4634549bf669090e72d2"
+    },
+    {
+      "bytes": 647,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/lock_definitions.py",
+      "sha256": "0c912182692d2586deffe57bf589c6f2afdc695517283d31dd164d8edbed246b"
+    },
+    {
+      "bytes": 612,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/lock_final_contract.py",
+      "sha256": "6630d195a51d4c7c0ce166160ba440cb0a2fd0a0e7bee50c3fd667ae803f3a94"
+    },
+    {
+      "bytes": 2416,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/preflight_candidates.py",
+      "sha256": "c037414d089d56978caa08a279012e2b2fc792c386a685aafde8b785cd1a7629"
+    },
+    {
+      "bytes": 3690,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/PREREGISTRATION.md",
+      "sha256": "7029b76bc399bf9f0a089e1d7e82dea541f64524c1fd65c9497d95b50deddbed"
+    },
+    {
+      "bytes": 573,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/README.md",
+      "sha256": "8317fbe31622673d6ffac583ab801d0df228e16568fd7d4a2243150f5baffe52"
+    },
+    {
+      "bytes": 88,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/requirements.txt",
+      "sha256": "96c28256afdd9f675bbf96e99b2557de00b7dc5d332b5998efa014161f51d2ec"
+    },
+    {
+      "bytes": 15723,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/run_research.py",
+      "sha256": "7bbc1a7e49a4e5868a1743a20f57da3481c010ed7aba8b43556f78e49ba10408"
+    },
+    {
+      "bytes": 19738,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/src/contract.py",
+      "sha256": "3cebdadff65a972cd3aed66a8372d1bddadf980ba7fc42bfa298b79befa10326"
+    },
+    {
+      "bytes": 5169,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/src/fomc_sources.py",
+      "sha256": "33f277f8e5e4b9c7710fe2fde009df50b359debf35e91574617f2362479aca71"
+    },
+    {
+      "bytes": 29608,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/src/replication.py",
+      "sha256": "31ff5e8a3ea3b765e471a6d7f42fbac97afec362a6925682e91bc51f78532cb6"
+    },
+    {
+      "bytes": 1570,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/tests/test_contract.py",
+      "sha256": "c577feaf07235e39eb4a4413d40567c969b947f692c59d6dc88de2c78c07d9d5"
+    },
+    {
+      "bytes": 2679,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/tests/test_fomc_sources.py",
+      "sha256": "6682d859ee98de01c4681c9a9bd6a07b2f3ab39d76a88bef2262eef62718f4a1"
+    },
+    {
+      "bytes": 6399,
+      "path": "xau-usd/xauusd-fast-research/out-of-era-specialist-replication-v2/tests/test_replication.py",
+      "sha256": "35cb3e88b1052054ed87a705c91da6ae205143263b862ea27fa3f631daa72d6b"
+    }
+  ],
+  "schema_version": "xauusd_out_of_era_specialist_definition_lock_v2",
+  "training_authorized": false
+}

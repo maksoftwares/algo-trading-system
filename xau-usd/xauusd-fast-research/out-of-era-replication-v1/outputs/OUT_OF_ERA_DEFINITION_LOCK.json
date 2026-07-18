@@ -1,0 +1,74 @@
+{
+  "broker_action_performed": false,
+  "candidate_hashes": {
+    "GLD_FLOW_REVERSAL_V0_EXACT": {
+      "xau-usd/xauusd-phase0/docs/hypothesis_h4_gld_etf_flow_reversal_v0.md": "2aa540060366b2363dcc3c5e4a3925916320f571d8b70b2cda7a574318ec72dd",
+      "xau-usd/xauusd-phase0/src/phase0/strategies/h4_gld_etf_flow_reversal_v0.py": "4eb3872c589d40637347180b65df0b11826b3e8bbcee17dfe78f42848127081e"
+    },
+    "NFP_FADE_RR2_EXACT": {
+      "xau-usd/xauusd-fast-research/macro-event-reaction-replication-v2/src/event_reaction.py": "a6ad2192eda10686f9e0a124fc6eecefaeeb47609b8050c4150dc7c6e4209387",
+      "xau-usd/xauusd-fast-research/macro-event-reaction-replication-v3/config/macro_event_reaction_v2.json": "468210a07a9fa0be050a6c32b5827781218cdd7d2961bd94b2e202821514312b"
+    },
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca",
+      "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    }
+  },
+  "config_sha256": "3496fe92faaa91913c4716380477df377ab6b102a401be15bf0ccb4211b6b426",
+  "databento_used": false,
+  "definition_contract_sha256": "b0532f65c4714887b056dbec5eef323bfc3f4ae8519f77fb0d588ce02da029bf",
+  "file_hashes": {
+    "C:\\DukascopyTickDataFoundationV1\\out-of-era-replication-v1\\public-inputs\\PUBLIC_INPUT_MANIFEST.json": "403399717dc2ef17c3b90e75cba68ac6b14c6aa190f957a18df6f58a4a0b1485",
+    "C:\\DukascopyTickDataFoundationV1\\out-of-era-replication-v1\\public-inputs\\bls-nfp-2010-2016.json": "d6769022f89c677a5329cebcbb853d21519f56b20eaf1542b38df9b4cf8d8d65",
+    "C:\\DukascopyTickDataFoundationV1\\out-of-era-replication-v1\\public-inputs\\gld-daily-2008-2016.csv": "0308826bd98b03995240400c238e3460c21d872c6be6a736d88ed617f83b368f",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\macro-event-reaction-replication-v2\\src\\event_reaction.py": "a6ad2192eda10686f9e0a124fc6eecefaeeb47609b8050c4150dc7c6e4209387",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\macro-event-reaction-replication-v3\\config\\macro_event_reaction_v2.json": "468210a07a9fa0be050a6c32b5827781218cdd7d2961bd94b2e202821514312b",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\config\\mt5_r1_uptrend_portability_v1.json": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\src\\portability.py": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\out-of-era-replication-v1\\PREREGISTRATION.md": "5ca17e638038ccc2d232433235a6b22c3f827e07f4787ee838c0a270b964230c",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\out-of-era-replication-v1\\config\\out_of_era_replication_v1.json": "3496fe92faaa91913c4716380477df377ab6b102a401be15bf0ccb4211b6b426",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\docs\\hypothesis_h4_gld_etf_flow_reversal_v0.md": "2aa540060366b2363dcc3c5e4a3925916320f571d8b70b2cda7a574318ec72dd",
+    "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase0\\src\\phase0\\strategies\\h4_gld_etf_flow_reversal_v0.py": "4eb3872c589d40637347180b65df0b11826b3e8bbcee17dfe78f42848127081e"
+  },
+  "gates": {
+    "GLD_FLOW_REVERSAL_V0_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.3,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    },
+    "NFP_FADE_RR2_EXACT": {
+      "maximum_closed_drawdown_r": 12.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.08,
+      "minimum_event_participation": 0.2,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 24,
+      "top_winners_removed": 3
+    },
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "maximum_closed_drawdown_r": 15.0,
+      "maximum_holm_pvalue": 0.05,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_stress_pf": 1.25,
+      "minimum_trades": 50,
+      "top_winners_removed": 5
+    }
+  },
+  "locked_utc": "2026-07-17T21:15:30.126405+00:00",
+  "normalized_data_ready": false,
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "preregistration_sha256": "5ca17e638038ccc2d232433235a6b22c3f827e07f4787ee838c0a270b964230c",
+  "registered_candidates": [
+    "R1_UPTREND_PORTABILITY_EXACT",
+    "NFP_FADE_RR2_EXACT",
+    "GLD_FLOW_REVERSAL_V0_EXACT"
+  ],
+  "schema_version": "xauusd_out_of_era_definition_lock_v1"
+}

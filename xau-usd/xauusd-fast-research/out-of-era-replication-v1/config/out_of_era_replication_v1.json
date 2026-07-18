@@ -1,0 +1,126 @@
+{
+  "schema_version": "xauusd_out_of_era_replication_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbol": "XAUUSD",
+    "start_utc": "2010-01-01T00:00:00Z",
+    "end_exclusive_utc": "2016-07-01T00:00:00Z",
+    "expected_months": 78,
+    "extension_status": "extension-v2/status.json",
+    "replay_root": "out-of-era-replication-v1/dukascopy-replay",
+    "public_input_root": "out-of-era-replication-v1/public-inputs"
+  },
+  "public_sources": {
+    "bls_archive_url": "https://www.bls.gov/bls/news-release/empsit.htm",
+    "bls_expected_releases": 78,
+    "gld_symbol": "GLD",
+    "gld_chart_url": "https://query1.finance.yahoo.com/v8/finance/chart/GLD",
+    "gld_start_utc": "2008-01-01T00:00:00Z",
+    "gld_end_exclusive_utc": "2016-07-01T00:00:00Z",
+    "gld_minimum_rows": 1800,
+    "paid_data_authorized": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "R1_UPTREND_PORTABILITY_EXACT",
+      "role": "NEAR_SURVIVOR_REPLICATION",
+      "source_config": "../mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "source_code": "../mt5-r1-uptrend-portability-v1/src/portability.py"
+    },
+    {
+      "candidate_id": "NFP_FADE_RR2_EXACT",
+      "role": "NEAR_SURVIVOR_REPLICATION",
+      "source_config": "../macro-event-reaction-replication-v3/config/macro_event_reaction_v2.json",
+      "source_code": "../macro-event-reaction-replication-v2/src/event_reaction.py",
+      "source_policy_id": "EVENT_NFP_FADE_RR2"
+    },
+    {
+      "candidate_id": "GLD_FLOW_REVERSAL_V0_EXACT",
+      "role": "FALSIFICATION_ONLY",
+      "source_hypothesis": "../../xauusd-phase0/docs/hypothesis_h4_gld_etf_flow_reversal_v0.md",
+      "source_code": "../../xauusd-phase0/src/phase0/strategies/h4_gld_etf_flow_reversal_v0.py"
+    }
+  ],
+  "execution": {
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "same_bar_or_tick_priority": "STOP_FIRST",
+    "minimum_m5_rows_per_h4_bucket": 12,
+    "maximum_entry_gap_minutes": 10,
+    "maximum_entry_spread_usd": 0.75,
+    "maximum_entry_spread_r": 0.15,
+    "minimum_stop_distance_usd": 3.50,
+    "gld_maximum_hold_m5_bars": 288,
+    "gld_maximum_concurrent_positions": 1,
+    "ounces_at_0_01_lot": 1.0
+  },
+  "contract_scope": {
+    "repository_code_roots": [
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/src",
+      "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src",
+      "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src",
+      "xau-usd/xauusd-fast-research/independent-specialists-v1/src",
+      "xau-usd/xauusd-fast-research/macro-event-reaction-replication-v2/src",
+      "xau-usd/xauusd-fast-research/balanced-regime-campaign-v3/src",
+      "xau-usd/xauusd-fast-research/ml-candidate-rankers-v1/src",
+      "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src",
+      "multi-asset/data-foundation/dukascopy-ticks-v1/src",
+      "xau-usd/xauusd-phase0/src/phase0"
+    ],
+    "repository_files": [
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/PREREGISTRATION.md",
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/requirements.txt",
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/config/out_of_era_replication_v1.json",
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/lock_definitions.py",
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/lock_final_contract.py",
+      "xau-usd/xauusd-fast-research/out-of-era-replication-v1/run_research.py"
+    ],
+    "consumed_bar_bases": ["bid", "ask", "mid"],
+    "consumed_timeframe": "M5",
+    "verify_normalized_ticks": true
+  },
+  "gates": {
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "NFP_FADE_RR2_EXACT": {
+      "minimum_trades": 24,
+      "minimum_event_participation": 0.20,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.08,
+      "maximum_closed_drawdown_r": 12.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 3,
+      "maximum_holm_pvalue": 0.05
+    },
+    "GLD_FLOW_REVERSAL_V0_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.30,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.50,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    }
+  },
+  "research_controls": {
+    "registered_candidate_count": 3,
+    "campaign_attempts_before_this_replication": 6089,
+    "parameter_search_count": 0,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_request_authorized": false,
+    "databento_use_authorized": false,
+    "broker_action_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false
+  }
+}

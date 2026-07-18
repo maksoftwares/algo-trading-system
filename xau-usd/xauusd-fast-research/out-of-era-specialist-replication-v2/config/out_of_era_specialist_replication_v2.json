@@ -1,0 +1,224 @@
+{
+  "schema_version": "xauusd_out_of_era_specialist_replication_v2",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbol": "XAUUSD",
+    "start_utc": "2010-01-01T00:00:00Z",
+    "end_exclusive_utc": "2016-07-01T00:00:00Z",
+    "expected_months": 78,
+    "extension_status": "extension-v2/status.json",
+    "replay_root": "out-of-era-replication-v1/dukascopy-replay",
+    "public_input_root": "out-of-era-specialist-replication-v2/public-inputs",
+    "maximum_entry_delay_ms": 10000,
+    "exit_tick_grace_ms": 259200000
+  },
+  "official_fomc": {
+    "historical_page_template": "https://www.federalreserve.gov/monetarypolicy/fomchistorical{year}.htm",
+    "statement_base_url": "https://www.federalreserve.gov",
+    "timing_change_url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130313a.htm",
+    "years": [2010, 2011, 2012, 2013, 2014, 2015, 2016],
+    "expected_regular_events": 52,
+    "modern_clock_first_date": "2013-03-20",
+    "legacy_release_clock_et": "14:15",
+    "modern_release_clock_et": "14:00",
+    "timezone": "America/New_York"
+  },
+  "base_regime_config": "../balanced-regime-campaign-v3/config/balanced_regime_campaign_v3.json",
+  "candidates": [
+    {
+      "candidate_id": "R1_UPTREND_PORTABILITY_EXACT",
+      "mechanism_family": "D1_H4_UPTREND_BREAKOUT",
+      "role": "NEAR_SURVIVOR_REPLICATION",
+      "engine": "R1_REGIME_BREAKOUT",
+      "source_config": "../mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "source_code": "../mt5-r1-uptrend-portability-v1/src/portability.py"
+    },
+    {
+      "candidate_id": "R1B_STRICT_COMPRESSION_EXACT",
+      "mechanism_family": "D1_H4_COMPRESSION_BREAKOUT",
+      "role": "INDEPENDENCE_REPLICATION",
+      "engine": "R1_REGIME_BREAKOUT",
+      "source_config": "../mt5-r1b-strict-compression-portability-v1/config/mt5_r1b_strict_compression_portability_v1.json",
+      "source_code": "../mt5-r1b-strict-compression-portability-v1/src/portability.py"
+    },
+    {
+      "candidate_id": "COMPRESSION_LONG_PORTABILITY_EXACT",
+      "mechanism_family": "D1_H4_COMPRESSION_BREAKOUT",
+      "role": "INDEPENDENCE_REPLICATION",
+      "engine": "COMPRESSION_BREAKOUT",
+      "source_config": "../mt5-compression-portability-v1/config/mt5_compression_portability_v1.json",
+      "source_code": "../mt5-compression-portability-v1/src/portability.py"
+    },
+    {
+      "candidate_id": "FOMC_IMPULSE_CHOP_RR2_V6",
+      "mechanism_family": "SCHEDULED_MACRO_IMPULSE_IN_CHOP",
+      "role": "NEW_INDEPENDENT_REPLICATION",
+      "engine": "CORRECTED_RAW_TICK_EVENT",
+      "attempt_no": 11112,
+      "source_code": "../macro-event-reaction-replication-v2/src/event_reaction.py",
+      "regime_code": "../balanced-regime-campaign-v3/src/regimes.py",
+      "policy": {
+        "policy_id": "FOMC_IMPULSE_CHOP_RR2_V6",
+        "event_type": "FOMC",
+        "mode": "IMPULSE",
+        "impulse_minutes": 15,
+        "start_minutes": 5,
+        "end_minutes": 90,
+        "break_atr": 0.1,
+        "stop_buffer_atr": 0.1,
+        "minimum_body_fraction": 0.35,
+        "target_r": 2.0,
+        "required_regime": "CHOP"
+      }
+    },
+    {
+      "candidate_id": "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+      "mechanism_family": "SCHEDULED_MACRO_IMPULSE_IN_CHOP",
+      "role": "POST_HOC_DISCOVERY_INDEPENDENT_REPLICATION",
+      "engine": "CORRECTED_RAW_TICK_EVENT",
+      "attempt_no": 11113,
+      "source_code": "../macro-event-reaction-replication-v2/src/event_reaction.py",
+      "regime_code": "../balanced-regime-campaign-v3/src/regimes.py",
+      "policy": {
+        "policy_id": "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+        "event_type": "FOMC",
+        "mode": "IMPULSE",
+        "impulse_minutes": 15,
+        "start_minutes": 5,
+        "end_minutes": 90,
+        "break_atr": 0.1,
+        "stop_buffer_atr": 0.1,
+        "minimum_body_fraction": 0.35,
+        "target_r": 2.0,
+        "required_regimes": ["CHOP", "COMPRESSION", "TREND_DOWN"]
+      }
+    }
+  ],
+  "event_execution": {
+    "point_size_usd": 0.01,
+    "minimum_stop_distance_usd": 3.5,
+    "maximum_stop_distance_usd": 18.0,
+    "maximum_entry_spread_usd": 0.75,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_hold_hours": 72,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "current_account_risk_usd": 50.0,
+    "same_tick_priority": "STOP_FIRST"
+  },
+  "gates": {
+    "R1_UPTREND_PORTABILITY_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.5,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "R1B_STRICT_COMPRESSION_EXACT": {
+      "minimum_trades": 30,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "maximum_closed_drawdown_r": 15.0,
+      "minimum_positive_active_year_share": 0.5,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "COMPRESSION_LONG_PORTABILITY_EXACT": {
+      "minimum_trades": 50,
+      "minimum_stress_pf": 1.2,
+      "minimum_average_stress_r": 0.04,
+      "maximum_closed_drawdown_r": 18.0,
+      "minimum_positive_active_year_share": 0.5,
+      "top_winners_removed": 5,
+      "maximum_holm_pvalue": 0.05
+    },
+    "FOMC_IMPULSE_CHOP_RR2_V6": {
+      "minimum_trades": 10,
+      "minimum_event_participation": 0.15,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.1,
+      "maximum_closed_drawdown_r": 10.0,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "top_winners_removed": 3,
+      "maximum_holm_pvalue": 0.1
+    },
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+      "minimum_trades": 15,
+      "minimum_event_participation": 0.25,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.08,
+      "maximum_closed_drawdown_r": 12.0,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "top_winners_removed": 3,
+      "maximum_holm_pvalue": 0.1
+    }
+  },
+  "independence": {
+    "fixed_selection_order": [
+      "R1_UPTREND_PORTABILITY_EXACT",
+      "FOMC_IMPULSE_CHOP_RR2_V6",
+      "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+      "R1B_STRICT_COMPRESSION_EXACT",
+      "COMPRESSION_LONG_PORTABILITY_EXACT"
+    ],
+    "entry_overlap_window_minutes": 60,
+    "maximum_entry_overlap_fraction": 0.2,
+    "maximum_absolute_daily_pnl_correlation": 0.6,
+    "maximum_one_survivor_per_mechanism_family": true
+  },
+  "contract_scope": {
+    "consumed_bar_bases": ["bid", "ask", "mid"],
+    "consumed_timeframe": "M5",
+    "verify_normalized_ticks": true,
+    "repository_roots": [
+      "../mt5-r1-uptrend-portability-v1/src",
+      "../mt5-r1b-strict-compression-portability-v1/src",
+      "../mt5-compression-portability-v1/src",
+      "../independent-specialists-v1/src",
+      "../macro-event-reaction-replication-v2/src",
+      "../balanced-regime-campaign-v3/src",
+      "../comex-futures-foundation-v1/src",
+      "../../../multi-asset/data-foundation/dukascopy-ticks-v1/src"
+    ],
+    "repository_files": [
+      "PREREGISTRATION.md",
+      "README.md",
+      "requirements.txt",
+      "config/out_of_era_specialist_replication_v2.json",
+      "src/fomc_sources.py",
+      "src/replication.py",
+      "src/contract.py",
+      "acquire_official_fomc.py",
+      "preflight_candidates.py",
+      "lock_definitions.py",
+      "lock_final_contract.py",
+      "run_research.py",
+      "tests/test_fomc_sources.py",
+      "tests/test_replication.py",
+      "tests/test_contract.py"
+    ]
+  },
+  "research_controls": {
+    "campaign_attempts_before_v2": 11111,
+    "new_attempt_first": 11112,
+    "new_attempt_last": 11113,
+    "registered_candidate_count": 5,
+    "parameter_search_count": 0,
+    "single_outcome_opening": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_request_authorized": false,
+    "databento_use_authorized": false,
+    "broker_action_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false
+  }
+}
