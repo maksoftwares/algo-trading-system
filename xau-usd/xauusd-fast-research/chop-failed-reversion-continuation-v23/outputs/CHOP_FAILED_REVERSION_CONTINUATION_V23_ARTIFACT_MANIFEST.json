@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_CONTRACT_LOCK.json": {
+      "bytes": 8093,
+      "sha256": "ddb4d19da168faf21ee8809f5d0511d4553294104f84613e47bf70d9e77b3dfd"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_MANIFEST.csv": {
+      "bytes": 380093,
+      "sha256": "ac6f7aca276c091d2d217d22a5d1bf29d777d0176bae8f6bceb0f9efda6d8913"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_MANIFEST_EVIDENCE.json": {
+      "bytes": 3876,
+      "sha256": "5316d363f5ce21e4d69df06c4182f7b08dbe42ab8c34897f4c2c8aed6a2eea16"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_METRICS.csv": {
+      "bytes": 1081288,
+      "sha256": "22e319fdc8cf16852aefefc61c2a1b19658c645a476695fb3190a44dd588a1a9"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_RESULT.json": {
+      "bytes": 4913,
+      "sha256": "de54d6c27e97eebfa46dabff5c40db0241d3f513ca0ea28719e599f8522e6d86"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_RESULT.md": {
+      "bytes": 2228,
+      "sha256": "d374a1adb7928f016b46fd4deb25c39581df94c4fc7ce8fce45851cb6e0b0e99"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_SELECTED_TRADES.parquet": {
+      "bytes": 165038,
+      "sha256": "11537d04f528a214f3c5a750174487da2742a8423a8492f3bbf69204195dd6d5"
+    },
+    "CHOP_FAILED_REVERSION_CONTINUATION_V23_SHORTLIST.csv": {
+      "bytes": 17989,
+      "sha256": "c8a1d8210652fcb2b0c069a3876f464757672c8f5ce2bac344a3f9c8bcb69c90"
+    }
+  },
+  "schema_version": "xauusd_chop_failed_reversion_v23_artifacts"
+}
