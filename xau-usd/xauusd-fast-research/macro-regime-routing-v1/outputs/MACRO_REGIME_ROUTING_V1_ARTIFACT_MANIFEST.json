@@ -1,0 +1,33 @@
+{
+  "files": {
+    "MACRO_REGIME_ROUTING_V1_CONTRACT_LOCK.json": {
+      "bytes": 5723,
+      "sha256": "936987205152a4f02dab20d5cc280f2df3ecc43e7327eeda095d94a991f2da1a"
+    },
+    "MACRO_REGIME_ROUTING_V1_MANIFEST.csv": {
+      "bytes": 323725,
+      "sha256": "c98e791a2d8b93d6a1daa9c713e1817a3d079c0d8c3c5db59541c7f8c91178f3"
+    },
+    "MACRO_REGIME_ROUTING_V1_METRICS.csv": {
+      "bytes": 1083590,
+      "sha256": "82a0049d548c30e863ad039670a8d9a62e23bb7fcd77e99f54b21acdefdbb1bf"
+    },
+    "MACRO_REGIME_ROUTING_V1_RESULT.json": {
+      "bytes": 7182,
+      "sha256": "b797961c26b27f37f506061cccc365a0778101183db8e587182ff25e541249c0"
+    },
+    "MACRO_REGIME_ROUTING_V1_RESULT.md": {
+      "bytes": 675,
+      "sha256": "6de79fd0ee0b8b7f2314186d491cdfe37ba359c4f5a250addb9352d3b4e4ff85"
+    },
+    "MACRO_REGIME_ROUTING_V1_SELECTED_TRADES.csv": {
+      "bytes": 90,
+      "sha256": "114413c61903f1280fc35a048da88c006c3ef38019d7de26b74629d5f761264b"
+    },
+    "MACRO_REGIME_ROUTING_V1_SHORTLIST.csv": {
+      "bytes": 934,
+      "sha256": "ed91d6bfd47cc533ee1564fc078e9cc08baa3734e34ad6348f617fb9baf44693"
+    }
+  },
+  "schema_version": "xauusd_macro_regime_routing_v1_artifacts"
+}
