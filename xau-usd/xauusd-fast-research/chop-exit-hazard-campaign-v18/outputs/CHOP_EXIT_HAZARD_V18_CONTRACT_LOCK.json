@@ -1,0 +1,243 @@
+{
+  "contract_sha256": "bb69b574d2452d7a6dbf38fd445bc2e969d25a0061340411c3b8b72020e12695",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 30086,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/src/campaign.py",
+      "sha256": "a2e7419e90643b70b4bf8a91919c875db77927d295453a0dbc5f2889d342a073"
+    },
+    {
+      "bytes": 3314,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/outputs/M5_MICROSTRUCTURE_RESULT.json",
+      "sha256": "52634e76216c988b1abf5909c1effdda641c293999bbe363072dea8459f26576"
+    },
+    {
+      "bytes": 1373167,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/outputs/M5_MICROSTRUCTURE_DISCOVERY_METRICS.csv",
+      "sha256": "e649685052c36708a251636994c56a508365d1ab4aca9b36f03d3df2f83fca0f"
+    },
+    {
+      "bytes": 4828,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-state-campaign-v16/outputs/CHOP_MICROSTRUCTURE_STATE_V16_RESULT.json",
+      "sha256": "6a1ea809c239c0f4b6e5f6db0dade977425d52e39b05b26bef1e8054dafd2e62"
+    },
+    {
+      "bytes": 4945,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/outputs/CHOP_MICROSTRUCTURE_ANTISIGNAL_V17_RESULT.json",
+      "sha256": "83fd6132c7db4f8cbe0e3c1c8c281f4c34442cf5859c8b5023478d454f3fe7c1"
+    },
+    {
+      "bytes": 4203,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/outputs/WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.json",
+      "sha256": "6b851608a7ef6714a7b53cd88f3da2b5d11f26a6a8ead4d76d803f503ea38aba"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "cooldown_bars": 1,
+    "current_account_risk_usd": 8.165487,
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_policy_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "risk_basis": "LATEST_COMPLETED_H1_ATR14",
+    "same_bar_priority": "STOP_FIRST",
+    "stress_slippage_r": 0.05
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "features": {
+    "atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96,
+    "h1_atr_period": 14
+  },
+  "geometries": {
+    "BALANCED": {
+      "hold_bars": 144,
+      "stop_atr": 0.65,
+      "target_r": 1.75
+    },
+    "EXTENDED": {
+      "hold_bars": 288,
+      "stop_atr": 0.75,
+      "target_r": 3.0
+    },
+    "FAST": {
+      "hold_bars": 72,
+      "stop_atr": 0.45,
+      "target_r": 1.25
+    },
+    "TREND": {
+      "hold_bars": 288,
+      "stop_atr": 0.85,
+      "target_r": 2.25
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3744,
+    "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_MANIFEST_EVIDENCE.json",
+    "sha256": "3b3664468acc3b805185ff5f8caeb0b5a84fb35ce9766b452b32bda019a119de"
+  },
+  "manifest_file": {
+    "bytes": 346309,
+    "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_MANIFEST.csv",
+    "sha256": "299f51efedf6cf063183c565aace24537aa79ba0d087e894ba7bcc0030f91d9b"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2909,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/PREREGISTRATION.md",
+      "sha256": "3fcc4d41b7e8285820edb76e68566dbe19f7fb3838825d2d61fcde679d95dd1a"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 4911,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/config/chop_exit_hazard_campaign_v18.json",
+      "sha256": "634c72d8103912146657ca6dc326236dccf67c9c34593df579dd69a6b01ab151"
+    },
+    {
+      "bytes": 81,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/src/__init__.py",
+      "sha256": "f5300d1225f51bdb39d7c298ce5c9aecb8b23155e18f3cc1771878726497662c"
+    },
+    {
+      "bytes": 23913,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/src/campaign.py",
+      "sha256": "18c72d50ffcfa7134ecedc08c40d7e51c7917995074f7ddac41cd01b4fd2deb3"
+    },
+    {
+      "bytes": 3678,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/prepare_manifest.py",
+      "sha256": "bf009ae185eb1dcad3f39a6cb44d65bb93c22b1ff719e4411d56da24a23147a7"
+    },
+    {
+      "bytes": 4917,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/lock_contract.py",
+      "sha256": "aa2f48aefab15c4eecf904d1087bc325f9eb645cc16c9d1eeb0795a626e8ae4a"
+    },
+    {
+      "bytes": 12555,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/run_screen.py",
+      "sha256": "6c4f5a0fd02355ad39b36ee88f81b7326e07e3817359eb92578e829a617af8b2"
+    },
+    {
+      "bytes": 5980,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/tests/test_campaign.py",
+      "sha256": "2ad4ba5cbe88ce6ea2674300f890fdbdd0b52560580a83ecb3087acc6008b6ee"
+    }
+  ],
+  "paid_data_used": false,
+  "prior_m5_chop_and_router_outcomes_exposed": true,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_exit_hazard_v18_contract",
+  "selection": {
+    "attempt_first": 33239,
+    "attempt_last": 34238,
+    "attempts_per_mechanic": 200,
+    "candidate_definitions_per_mechanic": 400,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-exit-hazard-v18-deterministic-design-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_ADX_ER_EXIT_PRESSURE",
+      "CHOP_SLOPE_INFLECTION",
+      "CHOP_RANGE_EDGE_PRESSURE",
+      "CHOP_VOLATILITY_LIFT",
+      "CHOP_BOUNDARY_CONFLUENCE"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "total_attempts": 1000
+  },
+  "training_authorized": false,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
