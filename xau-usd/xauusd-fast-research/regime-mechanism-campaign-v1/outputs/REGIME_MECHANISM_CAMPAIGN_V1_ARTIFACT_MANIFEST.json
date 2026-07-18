@@ -1,0 +1,29 @@
+{
+  "files": {
+    "REGIME_MECHANISM_CAMPAIGN_V1_CONTRACT_LOCK.json": {
+      "bytes": 58861,
+      "sha256": "86b9a22de8929ecb6836ff50fb7b3b0753633f0adefd942fdaa99c9c66ba814c"
+    },
+    "REGIME_MECHANISM_CAMPAIGN_V1_MANIFEST.csv": {
+      "bytes": 780573,
+      "sha256": "73528e66dc91411dfcbafe5c5cc021b302e06aadef2d19f9ff04f9e3b54b92cf"
+    },
+    "REGIME_MECHANISM_CAMPAIGN_V1_METRICS.csv": {
+      "bytes": 3745950,
+      "sha256": "93e705d01ffdc0b3ccde30edeff64c352279c25fe41d90c97a7e4de65ee5dc88"
+    },
+    "REGIME_MECHANISM_CAMPAIGN_V1_RESULT.json": {
+      "bytes": 2343,
+      "sha256": "094c298ad6a4d772bca0a4b8b127f433aee4d482f40c9dcf7093f960c6c7268b"
+    },
+    "REGIME_MECHANISM_CAMPAIGN_V1_RESULT.md": {
+      "bytes": 751,
+      "sha256": "12c17d9a275bfa96dffbccc7177a67ae26a69abdcfb9ead8f40937e5a222b05b"
+    },
+    "REGIME_MECHANISM_CAMPAIGN_V1_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_regime_mechanism_campaign_v1_artifacts"
+}

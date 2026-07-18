@@ -1,0 +1,68 @@
+{
+  "attempt_first": 11118,
+  "attempt_last": 15117,
+  "attempts_completed": 4000,
+  "authorization": {
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "prospective_shadow_required": true,
+    "raw_tick_confirmation_required": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "cached_h1_outcomes": 2119923,
+  "contract_sha256": "8cfb11efbd85a91d2a5ce7f4c4f05759389c1b811c321ec6997e33b7d191db59",
+  "cumulative_campaign_attempts": 15117,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "feature_rows": 97765,
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "first_feature_time": "2010-01-01T03:00:00+00:00",
+    "h1_rows": 97765,
+    "h4_rows": 21548,
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "last_feature_time": "2026-07-01T00:00:00+00:00",
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "decision": "NO_REGIME_MECHANISM_V1_ECONOMIC_FINALIST",
+  "economic_finalist_rows": 0,
+  "economic_pass_rows": 0,
+  "regime_summary": [
+    {
+      "attempts": 1000,
+      "best_minimum_era_stress_pf": 0.7558603846612753,
+      "economic_passes": 0,
+      "regime_owner": "CHOP",
+      "statistical_passes": 0
+    },
+    {
+      "attempts": 1000,
+      "best_minimum_era_stress_pf": 1.4083555678876347,
+      "economic_passes": 0,
+      "regime_owner": "COMPRESSION",
+      "statistical_passes": 0
+    },
+    {
+      "attempts": 1000,
+      "best_minimum_era_stress_pf": 1.4719520673278859,
+      "economic_passes": 0,
+      "regime_owner": "DOWNTREND",
+      "statistical_passes": 0
+    },
+    {
+      "attempts": 1000,
+      "best_minimum_era_stress_pf": 0.8497224356024686,
+      "economic_passes": 0,
+      "regime_owner": "TRANSITION",
+      "statistical_passes": 0
+    }
+  ],
+  "schema_version": "xauusd_regime_mechanism_campaign_v1",
+  "statistical_finalist_rows": 0
+}
