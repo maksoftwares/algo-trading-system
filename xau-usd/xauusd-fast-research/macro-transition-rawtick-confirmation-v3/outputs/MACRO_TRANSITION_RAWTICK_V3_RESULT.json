@@ -1,0 +1,30 @@
+{
+  "authorization": {
+    "execution_authorized": false,
+    "independent_proxy_replication_required": true,
+    "prospective_shadow_required": true,
+    "raw_tick_result_can_be_independent_holdout": false,
+    "research_only": true,
+    "selected_after_origin_outcomes": true,
+    "training_authorized": false
+  },
+  "candidate_rows": 128,
+  "contract_sha256": "7aac13dbb03aeeae1947b01b06c92d86e5019750a312b6e79c6300ef842df4d4",
+  "decision": "NO_RAW_TICK_ECONOMIC_TRANSITION_CANDIDATE",
+  "execution_audit": {
+    "fixed_horizon_trades": 22,
+    "maximum_horizon_delay_minutes": 3705.0023833333335,
+    "rejections": {
+      "ENTRY_SPREAD_R": 1,
+      "POSITION_OVERLAP": 35
+    },
+    "stop_slippage_trades": 41,
+    "stop_trades": 0,
+    "target_trades": 29
+  },
+  "origin_attempt": 23925,
+  "origin_raw_signals": 130,
+  "schema_version": "xauusd_macro_transition_rawtick_confirmation_v3",
+  "selection_adjusted_pvalue": 1.0,
+  "trade_rows": 92
+}

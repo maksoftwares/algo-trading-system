@@ -1,0 +1,33 @@
+{
+  "files": {
+    "MACRO_TRANSITION_RAWTICK_V3_CANDIDATES.parquet": {
+      "bytes": 20192,
+      "sha256": "34b3560147d0417e6433bae0fcd524929fb8ca5f9851d5837fb354ca7a4d9926"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_CANDIDATE_MANIFEST.json": {
+      "bytes": 7115,
+      "sha256": "ea9073ae96a1aae5a2e9035d1dad3b0c48342695f6900498e494451e52e2b4d7"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_CONTRACT_LOCK.json": {
+      "bytes": 33171,
+      "sha256": "369c3eede624d929870343e15acef3c6e6c64573bbd915e2e56bdb9f82565334"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_METRICS.csv": {
+      "bytes": 1564,
+      "sha256": "7669b2bfaedf3d99eddc6fe6eb713821a71a9d2f2eb42b8b7fd7b294780165a0"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_RESULT.json": {
+      "bytes": 982,
+      "sha256": "7da91b4ceafea33ab901f20bba4c6cbc0ec9689db9ae47dfa19df2790f639544"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_RESULT.md": {
+      "bytes": 510,
+      "sha256": "f61c66d0ffad9ca7c6b8abcf689aebd74dd549e51575a9f1bfbd27e39ef1d855"
+    },
+    "MACRO_TRANSITION_RAWTICK_V3_TRADES.parquet": {
+      "bytes": 33351,
+      "sha256": "b8dffddf3f82c78103f25aa6c6a11cc58288da5a9d0465ed41021ca0ac8a4f22"
+    }
+  },
+  "schema_version": "xauusd_macro_transition_rawtick_v3_artifacts"
+}
