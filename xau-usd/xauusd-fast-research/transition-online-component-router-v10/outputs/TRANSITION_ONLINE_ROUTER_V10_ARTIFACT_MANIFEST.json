@@ -1,0 +1,37 @@
+{
+  "files": {
+    "TRANSITION_ONLINE_ROUTER_V10_CONTRACT_LOCK.json": {
+      "bytes": 7758,
+      "sha256": "46a91cf69b4cda3f145b560e929d0c86d6415c819e17ad1c5304af87d53882ff"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_MANIFEST.csv": {
+      "bytes": 178493,
+      "sha256": "3499fade77b4f7e4e068ba56d671877d3efd90b48820adb7193d4ac928072b8d"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_MANIFEST_EVIDENCE.json": {
+      "bytes": 592,
+      "sha256": "d234430525a12ea09cb7148abc9cf042ba66b5e4636ab37c5695dc22feeb462d"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_METRICS.csv": {
+      "bytes": 830493,
+      "sha256": "85a175caa98bd9ad5262c0308686d1c00a621727002cf1b0ebfb70dc88784425"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_RESULT.json": {
+      "bytes": 2170,
+      "sha256": "2ea190fa97411f23da75ce7d993b138b7bf2a280d840951b06ab14778a493c57"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_RESULT.md": {
+      "bytes": 1791,
+      "sha256": "14f52396fafa7f304e64fc22286987b5e0ac8df694dc5a2da19c29e92a8cdc12"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_SELECTED_TRADES.parquet": {
+      "bytes": 126250,
+      "sha256": "8c9e3514b0386d0666e78c58a6dee786f588c8e99ac5d72030bbc41276f43749"
+    },
+    "TRANSITION_ONLINE_ROUTER_V10_SHORTLIST.csv": {
+      "bytes": 15179,
+      "sha256": "b1cd7d4a6e8c51b53d30b6245bedb476e7d4f9dafe04045a200e96a70a18129f"
+    }
+  },
+  "schema_version": "xauusd_transition_online_router_v10_artifacts"
+}

@@ -1,0 +1,68 @@
+{
+  "attempt_first": 25239,
+  "attempt_last": 26238,
+  "attempts_completed": 1000,
+  "authorization": {
+    "execution_authorized": false,
+    "historical_discovery_only": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "raw_tick_source_is_independent_holdout": false,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "baseline_reproduction": {
+    "minimum_era_average_stress_r": 0.05041784696105765,
+    "minimum_era_stress_pf": 1.1126612240425862,
+    "top_winners_removed_stress_net_r": 19.400706697189513,
+    "whole_closed_drawdown_r": 7.224584647853302,
+    "whole_stress_net_r": 29.42838261300843,
+    "whole_stress_pf": 1.213616967745682,
+    "whole_trades": 330
+  },
+  "contract_sha256": "d4c8c4782d81e5510ef3d6eb33c3b3d0b77bfdaba98495ff8fa08e587d7c138d",
+  "cumulative_campaign_attempts": 26238,
+  "decision": "NO_TRANSITION_ONLINE_ROUTER_V10_ECONOMIC_FINALIST",
+  "economic_finalist_attempts": [],
+  "economic_finalist_count": 0,
+  "fdr_finalist_attempts": [],
+  "fdr_finalist_count": 0,
+  "mechanic_summary": {
+    "BAYESIAN_SHRINKAGE_WEIGHT": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1126612240425862,
+      "best_whole_pf": 1.213616967745682,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    },
+    "COMPONENT_RANK_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1126612240425862,
+      "best_whole_pf": 1.213616967745682,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    },
+    "TRAILING_DRAWDOWN_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1126612240425862,
+      "best_whole_pf": 1.213616967745682,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    },
+    "TRAILING_MEAN_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1126612240425862,
+      "best_whole_pf": 1.213616967745682,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    },
+    "TRAILING_PF_GATE": {
+      "attempts": 200,
+      "best_minimum_era_pf": 1.1126612240425862,
+      "best_whole_pf": 1.213616967745682,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    }
+  },
+  "schema_version": "xauusd_transition_online_component_router_v10"
+}
