@@ -1,0 +1,19 @@
+{
+  "authorization": {
+    "execution_authorized": false,
+    "training_authorized": false
+  },
+  "cause": "Mixed datetime64 units were interpreted as nanoseconds by the M15 execution array engine.",
+  "decision": "INVALIDATED_NO_QUANTITATIVE_INFERENCE",
+  "first_candidate_audit": {
+    "calculated_gap_minutes": -21043.85508,
+    "entry_raw_integer": 1263895200000,
+    "entry_start_utc": "2010-01-19T10:00:00Z",
+    "signal_raw_integer": 1263895200000000,
+    "signal_time_utc": "2010-01-19T10:00:00Z"
+  },
+  "original_contract_sha256": "5db58da6217a36de4260e371423cd1b46913efcc53d140609a529b8f9e8db73f",
+  "original_result_preserved": true,
+  "quantitative_conclusion_permitted": false,
+  "schema_version": "xauusd_m15_regime_target_campaign_v1_invalidation"
+}

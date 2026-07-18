@@ -1,0 +1,54 @@
+{
+  "attempt_first": 17120,
+  "attempt_last": 18119,
+  "attempts_completed": 1000,
+  "authorization": {
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "prospective_shadow_required": true,
+    "raw_tick_confirmation_required": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "cached_m15_outcomes": 2525582,
+  "contract_sha256": "5db58da6217a36de4260e371423cd1b46913efcc53d140609a529b8f9e8db73f",
+  "cumulative_campaign_attempts": 18119,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "feature_rows": 391945,
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "first_feature_time": "2010-01-01T00:15:00+00:00",
+    "h4_rows": 21548,
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "last_feature_time": "2026-07-01T00:00:00+00:00",
+    "m15_rows": 391945,
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "decision": "NO_M15_REGIME_TARGET_V1_ECONOMIC_FINALIST",
+  "economic_finalist_rows": 0,
+  "economic_pass_rows": 0,
+  "regime_summary": [
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.0,
+      "economic_passes": 0,
+      "regime_owner": "CHOP",
+      "statistical_passes": 0
+    },
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.0,
+      "economic_passes": 0,
+      "regime_owner": "TRANSITION",
+      "statistical_passes": 0
+    }
+  ],
+  "schema_version": "xauusd_m15_regime_target_campaign_v1",
+  "statistical_finalist_rows": 0
+}
