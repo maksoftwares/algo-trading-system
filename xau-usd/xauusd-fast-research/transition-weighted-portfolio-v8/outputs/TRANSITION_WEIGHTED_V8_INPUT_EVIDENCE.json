@@ -1,0 +1,54 @@
+{
+  "component_identity": [
+    {
+      "attempt_no": 23925,
+      "metric_reproduction_checks": {
+        "minimum_era_stress_pf": true,
+        "whole_stress_net_r": true,
+        "whole_stress_pf": true,
+        "whole_trades": true
+      },
+      "source": "MACRO_REGIME_ROUTING_V1",
+      "trade_rows": 92
+    },
+    {
+      "attempt_no": 24877,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "source": "CROSSASSET_RESIDUAL_V6",
+      "trade_rows": 107
+    },
+    {
+      "attempt_no": 24995,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "source": "CROSSASSET_RESIDUAL_V6",
+      "trade_rows": 118
+    },
+    {
+      "attempt_no": 25048,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "source": "CROSSASSET_RESIDUAL_V6",
+      "trade_rows": 140
+    }
+  ],
+  "component_rows": 457,
+  "component_trade_sha256": "ac6839f424e3b52ab2dfbfa509ded5ad8db629deaae2a73d191df3f4efbf053d",
+  "components_selected_after_outcomes": true,
+  "execution_authorized": false,
+  "manifest_rows": 96,
+  "manifest_sha256": "df2b92a2cea15adf4abc8dc8014439cfc44cfb1fcf4b0506a9b3f0669a22676c",
+  "portfolio_outcomes_opened": false,
+  "schema_version": "xauusd_transition_weighted_v8_input_evidence",
+  "training_authorized": false
+}
