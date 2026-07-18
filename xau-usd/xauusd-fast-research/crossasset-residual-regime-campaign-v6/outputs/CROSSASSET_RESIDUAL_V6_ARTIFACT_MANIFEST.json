@@ -1,0 +1,33 @@
+{
+  "files": {
+    "CROSSASSET_RESIDUAL_V6_CONTRACT_LOCK.json": {
+      "bytes": 8942,
+      "sha256": "69f39f41af1d611a439bd7179c1ba4e0d8fe9b6dfe13355d031f754d7e022554"
+    },
+    "CROSSASSET_RESIDUAL_V6_MANIFEST.csv": {
+      "bytes": 291772,
+      "sha256": "89d7ff673e70781a1ec3c10d8fec424cd27c189f0ba46d5e845378e63dbe1d25"
+    },
+    "CROSSASSET_RESIDUAL_V6_METRICS.csv": {
+      "bytes": 1052615,
+      "sha256": "add6cde88e3122b6dbcf7332f7be38854ff14b88bb5c1e0554dba3db8b162e85"
+    },
+    "CROSSASSET_RESIDUAL_V6_RESULT.json": {
+      "bytes": 1244,
+      "sha256": "c9a2514fda5b665858ceddfddb6825fe761df4d324606134b40334eb61d17551"
+    },
+    "CROSSASSET_RESIDUAL_V6_RESULT.md": {
+      "bytes": 3429,
+      "sha256": "ac847d182c03e00e4d7da688f9a86a4c95e76eb6050f8082efa466653e204401"
+    },
+    "CROSSASSET_RESIDUAL_V6_SELECTED_TRADES.parquet": {
+      "bytes": 609840,
+      "sha256": "c8bf597912522a2daf066268b231a5f9f8e564c435ef16f004bc8ef2587e2dd1"
+    },
+    "CROSSASSET_RESIDUAL_V6_SHORTLIST.csv": {
+      "bytes": 32548,
+      "sha256": "7208d907efed6571d3dc9d82488f8bb6ececbcb50ec05c7737164b247d41d223"
+    }
+  },
+  "schema_version": "xauusd_crossasset_residual_v6_artifacts"
+}

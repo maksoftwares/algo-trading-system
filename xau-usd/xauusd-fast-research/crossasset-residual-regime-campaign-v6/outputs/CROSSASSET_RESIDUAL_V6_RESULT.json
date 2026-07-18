@@ -1,0 +1,39 @@
+{
+  "attempt_first": 24120,
+  "attempt_last": 25119,
+  "attempts_completed": 1000,
+  "authorization": {
+    "exact_raw_tick_confirmation_required": true,
+    "execution_authorized": false,
+    "historical_discovery_only": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "contract_sha256": "759af7142033e5c6e70f2df8aca25fb0f6a9be83c5395363449a630f5c2a9f40",
+  "cumulative_campaign_attempts": 25119,
+  "decision": "NO_CROSSASSET_RESIDUAL_V6_ECONOMIC_FINALIST",
+  "economic_finalist_attempts": [],
+  "economic_finalist_count": 0,
+  "fdr_finalist_attempts": [],
+  "fdr_finalist_count": 0,
+  "owner_summary": {
+    "CHOP": {
+      "attempts": 500,
+      "best_minimum_era_pf": 0.8168607791913696,
+      "best_whole_pf": 1.1342212402772724,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    },
+    "TRANSITION": {
+      "attempts": 500,
+      "best_minimum_era_pf": 0.879878641789022,
+      "best_whole_pf": 1.2672585297573824,
+      "economic_passes": 0,
+      "fdr_passes": 0
+    }
+  },
+  "schema_version": "xauusd_crossasset_residual_regime_campaign_v6",
+  "unique_cached_outcomes": 124346
+}
