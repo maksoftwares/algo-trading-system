@@ -1,0 +1,743 @@
+{
+  "candidate_definition": {
+    "expected_raw_signals": 130,
+    "geometry": {
+      "maximum_hold_hours": 18.0,
+      "stop_atr": 1.75,
+      "target_r": 2.0
+    },
+    "geometry_id": "T_BALANCED",
+    "mechanic": "TRANS_ANCESTRY_MACRO_REACCELERATION",
+    "origin_attempt": 23925,
+    "origin_variant_id": "00e072837bf6f6e2",
+    "parameters": {
+      "body_min": 0.2,
+      "geometry_id": "T_BALANCED",
+      "gold_horizon": "H1",
+      "hour_window": "ALL",
+      "macro_key": "H1_D2",
+      "maximum_alignment_atr": 0.25,
+      "pressure_min": 0.5,
+      "require_confirmation": false,
+      "transition_age_max": 48
+    },
+    "regime_owner": "TRANSITION"
+  },
+  "candidate_file": {
+    "bytes": 20192,
+    "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/outputs/MACRO_TRANSITION_RAWTICK_V3_CANDIDATES.parquet",
+    "sha256": "34b3560147d0417e6433bae0fcd524929fb8ca5f9851d5837fb354ca7a4d9926"
+  },
+  "candidate_manifest": {
+    "bytes": 7115,
+    "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/outputs/MACRO_TRANSITION_RAWTICK_V3_CANDIDATE_MANIFEST.json",
+    "sha256": "ea9073ae96a1aae5a2e9035d1dad3b0c48342695f6900498e494451e52e2b4d7"
+  },
+  "contract_sha256": "7aac13dbb03aeeae1947b01b06c92d86e5019750a312b6e79c6300ef842df4d4",
+  "databento_used": false,
+  "dependency_files": [
+    {
+      "bytes": 20215,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/campaign.py",
+      "sha256": "501b607eb524540005401aa3e1fb2b48f6d0a38a53cbf48ecac37fd0d0b9652d"
+    },
+    {
+      "bytes": 3636,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/foundation.py",
+      "sha256": "4f157df9d2fd9028790a76b788456068cb8d865de4d8a223492a39dd3e0c47e7"
+    },
+    {
+      "bytes": 5472,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/config/macro_regime_routing_v1.json",
+      "sha256": "be1c9ab8b462e4128b1afc8d23f479152045048b957640b8af39d02f064c7612"
+    },
+    {
+      "bytes": 323725,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_MANIFEST.csv",
+      "sha256": "c98e791a2d8b93d6a1daa9c713e1817a3d079c0d8c3c5db59541c7f8c91178f3"
+    },
+    {
+      "bytes": 1083590,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_METRICS.csv",
+      "sha256": "82a0049d548c30e863ad039670a8d9a62e23bb7fcd77e99f54b21acdefdbb1bf"
+    },
+    {
+      "bytes": 7182,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_RESULT.json",
+      "sha256": "b797961c26b27f37f506061cccc365a0778101183db8e587182ff25e541249c0"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 28103,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v1/src/campaign.py",
+      "sha256": "09df77cf8df14a8b3043c95f93bdf31aac43d37bce1b37c2902bb8676621bc94"
+    },
+    {
+      "bytes": 6109,
+      "path": "xau-usd/xauusd-fast-research/intraday-macro-specialists-v1/src/data.py",
+      "sha256": "9f45b1ab3866dd47ad282048475b9a39bb2825ddb2eb878c4592ec0f7b1add1f"
+    },
+    {
+      "bytes": 2626,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v2/src/correction.py",
+      "sha256": "77491fa726d75b077ddffaaa6dc712fda187333bad60b8987bc60ab355ac94df"
+    },
+    {
+      "bytes": 24027,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/src/router.py",
+      "sha256": "0f8f6153d4b52634c623edd1655c5c91a03cede6490ca48be08f8b49852ad424"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 48486,
+      "path": "xau-usd/xauusd-fast-research/r2-downtrend-portability-v2/src/downtrend.py",
+      "sha256": "c4bf986cc1f34b12502717fe9372e905a3f9ba40c97ef5747ca664626d5b02be"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "horizon_fill_policy": "FIRST_EXECUTABLE_TICK_AT_OR_AFTER_DEADLINE",
+    "maximum_entry_gap_minutes": 20,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_horizon_gap_hours": 72,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_variant_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "same_timestamp_priority": "HORIZON_THEN_STOP_THEN_TARGET",
+    "stop_fill_policy": "OBSERVED_EXECUTABLE_TICK_ON_CROSS",
+    "stress_slippage_r": 0.05,
+    "target_fill_policy": "LOCKED_TARGET_PRICE_ON_FIRST_CROSS",
+    "ticket_cost_usd": 0.3
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 202,
+      "files_sha256": "28a5bd89a9f5a73c1a63a7b7c6e52ab4eaf1f050514a5e40726a6d4b45d5405c",
+      "path": "raw/XAUUSD/year=2019/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "33a1f6efb7abab19d9775e6b21bd9570f93d536b6c2fe1f2213734176081cbb4"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "c22edf65b1f756f05d88c4d226fb865db1dc1fbaa1f9bb3dc7bce88df478bd62",
+      "path": "raw/XAUUSD/year=2019/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "9fab5c28ac6caf5f5a849caaf3ea6fd97f613de7021da47fd74ebe5d0759c66d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0d356d92921c910c053d1ce2bb15f6e439fb7fc7229c647e93837a847847c6bd",
+      "path": "raw/XAUUSD/year=2019/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "5962a7d98f47a13b765bd5a7370529063a681e6139a1c8a774f5cb6ec6337631"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e07683ed24a109ffceed02112f8ace13f07174629d62b7051454174f39dcb59e",
+      "path": "raw/XAUUSD/year=2019/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "f853b63c3ec986ddbf330091392ffd40215854101d8508fb2c351638fb1dcc6a"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "3da16e2a5939d6fcbf8a5acb8fb0fbb4657995634ad12d92ca95630aa284b70d",
+      "path": "raw/XAUUSD/year=2019/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "7155daf6e43b32ed5ede88d72ae9a37ff05157007c02cde15757d0f0d76d2380"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "de50cd1acc34a4aec4ed2fddc89bda2718c99b95f2d8efe599b692281d5c5886",
+      "path": "raw/XAUUSD/year=2019/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "5d7703fc8b930780623e000d0526980b0e82f8c8e3acdee7815efbe9b814c004"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "3a35e50d9fa0028d2027b45e644f37fb3bc42fa0ebee786d5ca5c733e7347aeb",
+      "path": "raw/XAUUSD/year=2020/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "b884c3f274e18e54ebbd6f48b9b3a139566ab971a358b4a415eb109ecb4ce952"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "ad4e5cfcc4598110cea00991d9169e0c4840a76f089829efcc8183b36d6c02e9",
+      "path": "raw/XAUUSD/year=2020/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "1c485731e28584566b9d062a03701bdfaa59b2174353e521b9197b799fc01912"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b186b91144f488efde7671413baee6791b5be28c508faf633558cadb96c0456b",
+      "path": "raw/XAUUSD/year=2020/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "cc42bba02d2576f91b761480132d93ee21f5058a87d088862bfdc9328b6183e7"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "848c1ce04b8556cc4b64c7cce1a824c508a7a078395192c7a1e849ad697de4d7",
+      "path": "raw/XAUUSD/year=2020/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "40ffae31219b8d932d87ab77733df691f172e73e0e8f7578b83e0b7665e490b1"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "26d0576b9733b43e50c4e3934b913698fa3ec6ba7d0a9712d123c60d213bf77e",
+      "path": "raw/XAUUSD/year=2020/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "6792fb5f176a0c90b1cc40af7945d00faf8c20eb1989248dac1da322a7170335"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "ab37078c9229c568ff3a7642d23bc863d931039b15dac98925391ef867a53607",
+      "path": "raw/XAUUSD/year=2020/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "4e1a3e918a3ecc6caba6a67ba8457faae067dd2a3107b8ebe77e8210b10e1b7f"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "1a13ee825fc6077637a29019c4bb9a29522209c76944407225db2f194dffb409",
+      "path": "raw/XAUUSD/year=2020/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "4068dde0f8d7c57fa88113eb13a9e65723286ed1aeedcd2fb1142e5acd84f64c"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e4e0e0a5e09aed1a0886c8c6bce19b20f11bb678234349be22792a32f95b7569",
+      "path": "raw/XAUUSD/year=2020/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "7bc663f4878537e612ebd2260ca1614bdcdd814c6ac46b2dba66058287a1347d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "72e78e765b035306eaceb6cd1c02305b30ad2c0642e0cf1b25aa32873ef57fff",
+      "path": "raw/XAUUSD/year=2020/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "d6156e2eee92179064c78a902ac5865210b8b897b9baa2beca6a9fff7748b935"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e5358687056e85a99f2c986acffb3be0660000437a10bae91df4095e7b5825d1",
+      "path": "raw/XAUUSD/year=2020/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "9792fec4a43aa1c0e4654c07af77ace67b92fb71ec3096b7e11a92a5f2a66e75"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "d071ee0c1eb95d0dfe354496d631f5934d6ba8eb67f885080ac1c2d844eda8d6",
+      "path": "raw/XAUUSD/year=2020/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "cf6a8fd3390eecdf4afa5cd880b727812203926bd54d7761e951e069e098f0ed"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "6a012f6cdce3b3fd8b40f05a9d97a22ddcd7a73281b9a19e428f7aabe6c8a854",
+      "path": "raw/XAUUSD/year=2020/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "c74cd570f52ba87922adb480bf91eb8865993450e07f66790f21c331eefc25d5"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b3f23e746b50dc7c944884378052dabce0d008c6ec52f6d155e33139bfdea0f9",
+      "path": "raw/XAUUSD/year=2021/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "08e6428ec5b59e8d8123ddc193ca4c525a39f70e062258152cba14b2a9b8d353"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "6cdd3f9cc9490dbbc7e8fd751886d2502f66f440954291238cb28b9d31de61b1",
+      "path": "raw/XAUUSD/year=2021/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "d69adacc310bb56df108cb71dc9c5129fb848671c1be86f7bdaa4cd5e1281d20"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "2d31ac6a5a5badd20607373d4038114c7e231a58f217fb96f1aa3651dc62ced9",
+      "path": "raw/XAUUSD/year=2021/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "ea97f5b170b469582d0a6d90fc5e79e235aa1a837a976df96cd5625ea7c82980"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e58a5e59c70ce43ec8b2718ad9358684c7a025b470fc8a3be2feb1f127bdb7cb",
+      "path": "raw/XAUUSD/year=2021/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "9d1cd340c43bfdbfab74a1676b08ba68aa2b23c23a9a67b28e1960221de11c78"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "7fbce9cf1986a85db051fd80102169fc624724924a4a52efb60d70a53855eddd",
+      "path": "raw/XAUUSD/year=2021/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "c1774acc56ce60bce5aabca48c36e8a39607a5eb94f1633880719ae207f23da4"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "d4ea0f3c3ee781de467feb982340063f5d02287c5ecdb6306d8c9ab066309cb5",
+      "path": "raw/XAUUSD/year=2021/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "3651e73897f2c34c45e208aa10c46edf89fba06d47ed72fa8cadefd5dfe7e6a8"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "c84c48f30e326f4ca85f8490cad839c28e1f5307b4238288dee30e4b64e21b18",
+      "path": "raw/XAUUSD/year=2021/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "4d598e2431814c6ffa405495ee47fb74b72eb13c402009e9ae058a32dc90f4f6"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "cf75cdfc13cd313b738b1bf3a0e99054d00ff7046bd854355b068fe894eff629",
+      "path": "raw/XAUUSD/year=2021/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "88fe67f75f801518a9b00c4d42e72054f8cde068849600a9240259effef45880"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "c5862532ff3c3da6c0cec0c5f68a549286e7fd3e39a05493517e1175a577d902",
+      "path": "raw/XAUUSD/year=2021/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "bc303f5f413ba5390ac24083a0d0b19a842a953194ccfcd90743cb5f4bef099f"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "1f993015fa385d9a00dd22d3c3ee7e90604798ba8956874c2a74e0a1ea641d47",
+      "path": "raw/XAUUSD/year=2021/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "9f4a8d7a17b25b571e5cadfa3fc2174e5ccc6f5ff2d291a71bbaf4edd2f4ba0f"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0d379ec28602a499528bd9a516b5b333bda42ef162422a1e0be5e215f5581d3c",
+      "path": "raw/XAUUSD/year=2021/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "df57a3416b1949299b44a500a06503dc634a5bb4bf6649e495a79bbb6ad3dbca"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "f1cfed63a034006332f0e9f34623c3109857302b2ccca0eaae64bf60d5f23868",
+      "path": "raw/XAUUSD/year=2021/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "2dde140996e289aa31367eb80008861b236d644e28ca47b7e254c9137975e939"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "bbec6af8f4f756a4c87a51f0e988104ba92f7e8d03d57ff73b08aff58da43e0c",
+      "path": "raw/XAUUSD/year=2022/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "77f178cb9064830bc0c8f5fb43058c22df401bcad6463ae916b11692c0657fff"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b29045b206b30e65715fd6ca7a0371a540132f77b8a0ae72b07b469c342c4918",
+      "path": "raw/XAUUSD/year=2022/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "8eddf432ccd29059d0564d21fd078ad3ce8146115eb66a54fd360d66ad465312"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b36ec759b9e17339ca5bd3b2ef3fb23e03b9d98fc6a2efed296e86f770ced7e8",
+      "path": "raw/XAUUSD/year=2022/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "e044772b8d485d2e837ec574fc3328bbb35a5c6262f2d9510986b35e0cee262c"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "f0d32fb6aff1f5ae925cbb0407ea94697d9be37f86d99ffffce9241919173fb8",
+      "path": "raw/XAUUSD/year=2022/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "d4535c55a06dd8a124fa2c3144637df7db0da1501821b45e6235894cf849ca76"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "6820b1225300e9162d1564c9662f2d9facdca4c65aa9c39124537cad60ea4b9c",
+      "path": "raw/XAUUSD/year=2022/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "d92c63f566047a3c426abbc0af6590d80f650fb56b6d28e9d87ba12047d1b86c"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e15ed41bb50298c1bf2d37d9a4a3b5c46906adbd9fa9c797e51fe256ab571c16",
+      "path": "raw/XAUUSD/year=2022/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "8567643f31f8bbf567f66e883f256010ed2d1fbca1a8541cf25be377d6853e57"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "767e7d7ccb88d2c2beba70b1fc76b1a817c8e35e54ed7dfccac62ca33f2b4022",
+      "path": "raw/XAUUSD/year=2022/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "6c1f0d001b95b138f61c51c16bf2cee653d94c2334de879b1af8dd658b21f338"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "66058403e5e45a3b306ad1b889ab284b8475a43c03f04f98b05455d02c7a4ba5",
+      "path": "raw/XAUUSD/year=2022/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "3e0b10e097d29475f1f0bfd5b70791f94bd68e99758f81a9569cda482c47fa3d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "c5bbc8de405d3f50d4ba829a2740ad874bf40bd37613527a7e97c792b2c28147",
+      "path": "raw/XAUUSD/year=2022/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "f992bf62f57b52779c9526e9709d9ceea51c7dac882234d67f92e2a6c19bb42d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "d88aa09db4dc444665434fd5faf72d5d02e14b7d66717c787ec3a2152276cab8",
+      "path": "raw/XAUUSD/year=2022/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "501a3191eea56c08ce59425bc34f6bffd51371c81b5278b2740bad160fe69088"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "2d761f98ef30b19c9856c395f8485fbddcd083641223ba61ca3902646a013e02",
+      "path": "raw/XAUUSD/year=2022/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "52feb3bebccc78fe14207e6b08dbb85366a1c79dd846d2c5bec2a954dc0a454e"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "9920cc9868ca49d70ea5dadf37df7699ef5c798c7adf14b27bad3bedbbf711b5",
+      "path": "raw/XAUUSD/year=2022/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "0a8947a427c1002846e45473f691fc074fc5c0fa25b5b47084a11a19debc2ead"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "bee66bc69150f331401571910638373a324d99608f045c8e1256e22e9c7bc47c",
+      "path": "raw/XAUUSD/year=2023/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "8ef6ef75d3ae6818cfebb6e8aab8cfcea553e4fb4508cf1299403f8653ea598a"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "972435634e8c7c554857a1619cecf2be52b2f72662ea629f4dcfc1d6c6c01c8b",
+      "path": "raw/XAUUSD/year=2023/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "87e33c95da033ebf9f153e0e75539c30cbec22782a7d01575017b5a2eaa40d12"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "31e2b8b88cdd23f86952149babf9c30fc5e3c922aa8004bf0597db8e19ca38fa",
+      "path": "raw/XAUUSD/year=2023/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "6838439d2692dd69f72c066beb57c26a62fc9e437d1faf26572b05428b07120b"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e274410b8636509459e08c92922a9dee02b0a7965e67acdcfe86d2e71d181320",
+      "path": "raw/XAUUSD/year=2023/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "9f39098f54cb66dbe790ce856e64ea9537800c5e015a34dfa3b13aac330f3686"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "9206504387843a75bbc152c22e0d10f03b07bd636abf6e369d322423757c12b5",
+      "path": "raw/XAUUSD/year=2023/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "cba5a30f6755970d8a21336ed80ffd65ca16b70f021b94282cdd9800f28fe184"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0388e50ce7b7dbcb0d45e563d86c3410465f3c5c9a1c09d43b6c9c9cc3e572e2",
+      "path": "raw/XAUUSD/year=2023/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "eed8dfa765bad9f229dcdca6539f7a5102d54545eab2c59fb7e578cff6dc49dc"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "d571c93cb7753cb0d123b53b7afc4e3a471928f41411646f9b2872b351e4f1a0",
+      "path": "raw/XAUUSD/year=2023/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "011cfe157a94f67f67b054fc23d0d5bd269e304836f9ae823853fe0c5afa59d8"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "838379c2bd242e0a8778284933ea73ea44c340d34d5a0e3e150bac3a951c24cc",
+      "path": "raw/XAUUSD/year=2023/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "a7a137b0dd841305e2489c842a2ae53d4c5b5e7c87e3e693aeb02298964be3bc"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "709a12f84913863c3ed5a4af2ca73ebde1690a1fe1ad5ad1958c5cf8c9e79874",
+      "path": "raw/XAUUSD/year=2023/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "008e5d48e73d3a88cf318c976cb99e85f78f49db21b7758c1d462aa366d01271"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "8d5165ead52a474002b19bddbc5fb440d70eaf7094237f81cea3f6dfcd98667e",
+      "path": "raw/XAUUSD/year=2023/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "0d9b626d30add555008f2458b25133bc28a8a5ced388eab5d5e3c00151510f80"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "31c435fa663d0f0582771f4df4e40c20e68f4f5e69727b677e85777cf5e54ab5",
+      "path": "raw/XAUUSD/year=2023/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "935ebba358a4851f3023ffbaddef16507ae9ec03d3c340d21b827bdb0addd3dd"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "8d71388f451999196fe0025b8cb71fb69169c68809794bd20e14652325a221fb",
+      "path": "raw/XAUUSD/year=2023/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "2cf8f23329735ad963cb26e299844787c337ff4cc9b087a875af673e4cb8cd8c"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "786fab0923437514580b4730dd6afc751f60ab770aa2c73b6e40e235fce061c6",
+      "path": "raw/XAUUSD/year=2024/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "7cbfef4521c214ba800a692570c158dd05c0965918d594735da5a8de464c1918"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "83a1d6da267cbcfd6236502f8bff8e5cf13b216b5c975eadfd4cf78cd5565827",
+      "path": "raw/XAUUSD/year=2024/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "5fa5f37c79341c035936f6a984de90d94fd6a6afd01cc783d16327647675422d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "09d0656ab8beea9769cda196154071308e9a3d8332ad681b238ad569ddeb3f3a",
+      "path": "raw/XAUUSD/year=2024/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "9f49d60c5344b635636ef480e8a9894d1fd0351d8831206d0972dc4b3da18475"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e6fdcad24b6dbe4e139fbcd3ecfea15e106653b852eb44b4ebb0c9904fe90e2b",
+      "path": "raw/XAUUSD/year=2024/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "ff75ed4f0fc13e12dd0112ca41f08d9fe76c12da1ce1335c673de0f0b5c67ae3"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "130dd8ee936be4cfa00bd32839712ec31c5332b3128799bb857fad3b4433aff0",
+      "path": "raw/XAUUSD/year=2024/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "f6dbca87902214553147656ae021bad38f198bc34bcf47e6a31ccf54fbd3b241"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "db3202d6e48e0bdbbcf5b8a28d4bd3a9f1855010d689b17e51173b9a615bcb9b",
+      "path": "raw/XAUUSD/year=2024/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "564ec2ee23ad442226badd835147dfb4f08e54fdca2677aace82a8a3377e2faa"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "6c4d77405527d93e9030a47aafb854a94ca50011395fe56d6ae1127dbd781cda",
+      "path": "raw/XAUUSD/year=2024/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "7511b5cb8dd89972a16ad2ac6557e046d26d4d5ff7c90d3eaf69d4c2b44cc20d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b7970faf44cde53e40b477e4e6ec4f70fde50d1f29c59084c90411bfce0813af",
+      "path": "raw/XAUUSD/year=2024/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "b5d2f39e820b2c708e1a94cf17313ef395266157244fe3046a685c4bbf84daa1"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0dce288d21e8cbd8c3e5e4c2ec2ecfb574934b307fbf9d5b0a9fbfeef854e16b",
+      "path": "raw/XAUUSD/year=2024/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "5db263f3a74bb0c6df7da5c2626ea3ce6501eaacbfba49ba651a1dc0a6eaaecd"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "f1b3e9882afd4fe4f138dd54f53e952a9a34551e48271b1b947ee4866894f713",
+      "path": "raw/XAUUSD/year=2024/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "b146a8e5851d00bc273e99e52dc5f7940d5e309730c7e25c723a7ab7fc077851"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "1041abe0d2581b8703f693a20e4d01b6faccd85ee5d090d164585160296716f3",
+      "path": "raw/XAUUSD/year=2024/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "5a7993f2be6882d64e5e706590847c6ed0cd4e8e843b908d2052c5172471e70e"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "5e5233e3f240086666dccb6bd36fbb5903c7c49575079bb93bfdb1efeee7050c",
+      "path": "raw/XAUUSD/year=2024/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "83c22a109079ed4951467f1a13e44eb9a722b921bad7bb6de91414d19783db27"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "82982b2144465083d4a9a36f2042f4056ee3abceddb1af504884dffba8afbe8b",
+      "path": "raw/XAUUSD/year=2025/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "2f62515e1401d66d69d5428d0729bf666816984ddac5c3b1291be7a3d546326c"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "d736403a042ef9e52b6c915d807ac0fcfd87a90e3dae8a8c73be0c3081630364",
+      "path": "raw/XAUUSD/year=2025/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "522e3537738e35f33846d4fa68197d3f578ed7fad43ed4017b14cd2276aff2f9"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0f7166925ceb96c83873eb06af7eb2c51e754586fd69a90dc8780448bd7c4495",
+      "path": "raw/XAUUSD/year=2025/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "b00d9ca1201e44c04c3c1e5351db015d8c8c09f8aa50639b2d36df997afde889"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "bea80645555c253c7f5acaad82d7d2a99fef9645279a333c3ca57aca5cbb6962",
+      "path": "raw/XAUUSD/year=2025/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "3000238c984352a2f5019adb4caab34822ccb02c50a2ef71175f8891859edd8d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "a6d54dffc8fb7ee8a381f98b4435993a1ebcbbbbf47098bbbfb09435c4fdb806",
+      "path": "raw/XAUUSD/year=2025/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "c6359ebb60ba278f0bb964ce1fbc385736625e6e3f440cf1628d980e3a211497"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "8d0eabe7997ed235a8499d15f47b29ee7248e31d70751a84dbb6454720617a5d",
+      "path": "raw/XAUUSD/year=2025/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "b774e1505d171a0bb0e3afed6e14f2f910e91dc8189fbc68fb9b040f0c439460"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "e3e6df86d84551caf901ed754cdbc7cafedd3ba12f37300576aed63cffb8e250",
+      "path": "raw/XAUUSD/year=2025/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "6686df210a3e879d18093c9ba22df923bc12f8d9bab6477f0da4e66864eaf4cf"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "482b1ffb5560b040e0ad4110783b9d035c11a7cfd36a083274a92d79d0f8d1b0",
+      "path": "raw/XAUUSD/year=2025/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "0b2a2a662d5469d1e2bdd741ae9453fdb1711832ebeea80ea01340b3d35bf8b0"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "4a71a612f889b135a3f49ed298b65bbaa6ce1c28d27bc72ba978bc42f3f90e36",
+      "path": "raw/XAUUSD/year=2025/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "8384bdf1a90b631ca170b0db48c04e59c358cad6162c603b33fa96d82a80734d"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "903fbbd193f87d5c8b95d33c22d02202a56c54671110a43a37190e02915ea127",
+      "path": "raw/XAUUSD/year=2025/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "2fe9fc01a1e6332328078e4a1b55fc59f676b31f37564c03303ad64baa39e9a9"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "329e19a27e36722fe9312d1f703787e261eee8658701916eae38bc682e4029ed",
+      "path": "raw/XAUUSD/year=2025/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "09a3c344439fd78bcfb8b4f81827590ed3e20e1856b6bb12f3326fcbb5ed7f81"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "c4dbec5b2f08a385a40913468dc60a9b7d7dffcdc117c05f494c87094b5f8c45",
+      "path": "raw/XAUUSD/year=2025/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "4119c278f3a440024c55ae2388e19cbe8b4d9e5bb1c4f9888e045eb5e5d978c5"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "0796246a698cb62fab4112fedb775a4e3ef9a14edb790ded3604a162033cb297",
+      "path": "raw/XAUUSD/year=2026/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "3e5fb2e34a27d8a7fde7d3c4b5a577435e601e5a08015dd433bde3cfd5a7fbe2"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "ee3ab5be9e2ec41bc4f054b9e4da7e62dcc2e37a8f15eb7678b953f9379d6cce",
+      "path": "raw/XAUUSD/year=2026/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "f8728e19ccfc4e1e994d58905f29f3915e01d675362294d09ad86f9812a8d407"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "55cd03c3625a1be369007719ce9088bbb32d83a8adde7767115f3429fb6e39b6",
+      "path": "raw/XAUUSD/year=2026/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "e13560c065cb4b1d1d19684c27c007f315002f1c3e2f531bcabc798109247e92"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "bd4d680b64ac5086917fa443f0e543bf64cb51852841ca42dcc1756a163c69c6",
+      "path": "raw/XAUUSD/year=2026/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "a7ff180f236944672eecc36d9de74bf4fcd07972c899f081fdde2ac807c5620a"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "3b91e704024e774c441cfeb17fba06bc4c2c8707a96a5950f1120f97420efe5e",
+      "path": "raw/XAUUSD/year=2026/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "db17d35514ca5f73abccb889d83c6e23a1b8edf350a2be727003bb6a98094105"
+    },
+    {
+      "bytes": 202,
+      "files_sha256": "b82853adce0de157f2eeec73a254c57efa78d8b2cd0b40fe44c73a9c9614a444",
+      "path": "raw/XAUUSD/year=2026/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "adb585dc34169748b20ebe6fbf501b0d3c80bd5f3b642737b4a3601d3e7c021a"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 977,
+      "path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+      "sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+    },
+    {
+      "bytes": 40257937,
+      "path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    }
+  ],
+  "package_files": [
+    {
+      "bytes": 18,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/.gitattributes",
+      "sha256": "11cf3778f136d0c9701cfb1092c112c0c1372b1da74c1a1658753c498ac191ae"
+    },
+    {
+      "bytes": 2608,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/PREREGISTRATION.md",
+      "sha256": "fa82364d715162cec4dc569ed0d7ec613afbc86c197bc3cc005231dcb1c35a6a"
+    },
+    {
+      "bytes": 35,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/requirements.txt",
+      "sha256": "c4b0e019ee978520152596ad41e50dbeb3c626488d49373993199fc225a0d895"
+    },
+    {
+      "bytes": 5739,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/config/macro_transition_rawtick_confirmation_v3.json",
+      "sha256": "3ceb93bf77566b0ac44779dd61029f78e7c96e3fd5876a49e7095fda4700b5c9"
+    },
+    {
+      "bytes": 72,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/src/__init__.py",
+      "sha256": "90d64a82bfb87a006288beae00f61824d4ed8fb093382077efd36a0acbdde3a2"
+    },
+    {
+      "bytes": 10700,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/src/transition.py",
+      "sha256": "d255c2424fbfeabd8d0a8e2f498a6e5ca97db469afdbe358dc43feac73e53b59"
+    },
+    {
+      "bytes": 4183,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/prepare_candidates.py",
+      "sha256": "b42146ba0aaa48144386c06fe9c28036b2e785d883cf175ee27e63def9408943"
+    },
+    {
+      "bytes": 7189,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/lock_contract.py",
+      "sha256": "236abf3d6f73a2e7890ff98fc046bfb3a419773635d3ab76e566a4633dee532c"
+    },
+    {
+      "bytes": 9746,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/run_confirmation.py",
+      "sha256": "970c2766022e131ee04944322b4aebd49c43c7680f326e37b5cad555c313e4b6"
+    },
+    {
+      "bytes": 6044,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/tests/test_transition.py",
+      "sha256": "c1081fe10f18b2887f252ec1630c78576384ab8f853119b6b5f54bf73bb8f78c"
+    }
+  ],
+  "paid_data_request_made": false,
+  "prospective_shadow_required": true,
+  "raw_tick_result_can_be_independent_holdout": false,
+  "schema_version": "xauusd_macro_transition_rawtick_v3_contract",
+  "selected_after_origin_outcomes": true,
+  "training_authorized": false,
+  "windows": {
+    "era_2019_2021": [
+      "2019-07-01T00:00:00Z",
+      "2021-04-01T00:00:00Z"
+    ],
+    "era_2021_2023": [
+      "2021-04-01T00:00:00Z",
+      "2023-01-01T00:00:00Z"
+    ],
+    "era_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-10-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-10-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
