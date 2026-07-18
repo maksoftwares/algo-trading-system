@@ -1,0 +1,37 @@
+{
+  "files": {
+    "TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet": {
+      "bytes": 53126,
+      "sha256": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATE_MANIFEST.json": {
+      "bytes": 7186,
+      "sha256": "4eaf98478bbbbca8df29032c36b2fb7d51d498f3e9fec9dfda6f7863e5634eda"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet": {
+      "bytes": 94941,
+      "sha256": "22b13a7349d9c77e7ee31396c1155786e31a1cccfe2a1331514413c3d92c584c"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_CONTRACT_LOCK.json": {
+      "bytes": 35978,
+      "sha256": "0a812d346be8db3a08bf240c7afe1ac50a4a1853a9c8467d7cf10e9b45795edd"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_METRICS.csv": {
+      "bytes": 1560,
+      "sha256": "587c6c8d572a2f112d6d11ce570683dfadce55df37d001ff5a34580f1685f20d"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_PORTFOLIO_TRADES.parquet": {
+      "bytes": 84971,
+      "sha256": "06a123a8e79db1bef269c228ffd7ff8376b9290accf7162c58b137582f8bad1e"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.json": {
+      "bytes": 8958,
+      "sha256": "da89820d1143be20799459bba274e0cfaf1534ad7213ccfcaa816e68460070c2"
+    },
+    "TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.md": {
+      "bytes": 534,
+      "sha256": "e34e9e9b03556eb2ba88e579d72518374d46cd0502f412848dabb7255de671b6"
+    }
+  },
+  "schema_version": "xauusd_transition_weighted_rawtick_v9_artifacts"
+}
