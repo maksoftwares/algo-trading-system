@@ -1,0 +1,254 @@
+{
+  "contract_sha256": "759af7142033e5c6e70f2df8aca25fb0f6a9be83c5395363449a630f5c2a9f40",
+  "dependency_files": [
+    {
+      "bytes": 20215,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/campaign.py",
+      "sha256": "501b607eb524540005401aa3e1fb2b48f6d0a38a53cbf48ecac37fd0d0b9652d"
+    },
+    {
+      "bytes": 3636,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/foundation.py",
+      "sha256": "4f157df9d2fd9028790a76b788456068cb8d865de4d8a223492a39dd3e0c47e7"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 28103,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v1/src/campaign.py",
+      "sha256": "09df77cf8df14a8b3043c95f93bdf31aac43d37bce1b37c2902bb8676621bc94"
+    },
+    {
+      "bytes": 6109,
+      "path": "xau-usd/xauusd-fast-research/intraday-macro-specialists-v1/src/data.py",
+      "sha256": "9f45b1ab3866dd47ad282048475b9a39bb2825ddb2eb878c4592ec0f7b1add1f"
+    },
+    {
+      "bytes": 2626,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v2/src/correction.py",
+      "sha256": "77491fa726d75b077ddffaaa6dc712fda187333bad60b8987bc60ab355ac94df"
+    },
+    {
+      "bytes": 24027,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/src/router.py",
+      "sha256": "0f8f6153d4b52634c623edd1655c5c91a03cede6490ca48be08f8b49852ad424"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_gap_minutes": 20,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_horizon_gap_hours": 72,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_variant_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "same_bar_priority": "STOP_FIRST",
+    "screen_exit": "PROTECTIVE_STOP_TARGET_OR_FIXED_HORIZON",
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 40257937,
+      "path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    },
+    {
+      "bytes": 977,
+      "path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+      "sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+    }
+  ],
+  "geometries": {
+    "CHOP": {
+      "C_BALANCED": {
+        "maximum_hold_hours": 12.0,
+        "stop_atr": 1.5,
+        "target_r": 1.75
+      },
+      "C_EXTENDED": {
+        "maximum_hold_hours": 24.0,
+        "stop_atr": 2.0,
+        "target_r": 2.25
+      },
+      "C_FAST": {
+        "maximum_hold_hours": 6.0,
+        "stop_atr": 1.0,
+        "target_r": 1.25
+      }
+    },
+    "TRANSITION": {
+      "T_BALANCED": {
+        "maximum_hold_hours": 18.0,
+        "stop_atr": 1.75,
+        "target_r": 2.0
+      },
+      "T_EXTENDED": {
+        "maximum_hold_hours": 36.0,
+        "stop_atr": 2.25,
+        "target_r": 2.75
+      },
+      "T_FAST": {
+        "maximum_hold_hours": 8.0,
+        "stop_atr": 1.25,
+        "target_r": 1.5
+      }
+    }
+  },
+  "manifest_coverage_uses_no_outcomes": true,
+  "manifest_evidence": {
+    "bytes": 6625,
+    "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_MANIFEST_EVIDENCE.json",
+    "sha256": "64804c806727b12fbce06db264397afebb83113dc18bf07c1553d49a72aef6cd"
+  },
+  "manifest_file": {
+    "bytes": 291772,
+    "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_MANIFEST.csv",
+    "sha256": "89d7ff673e70781a1ec3c10d8fec424cd27c189f0ba46d5e845378e63dbe1d25"
+  },
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 18,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/.gitattributes",
+      "sha256": "11cf3778f136d0c9701cfb1092c112c0c1372b1da74c1a1658753c498ac191ae"
+    },
+    {
+      "bytes": 2377,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/PREREGISTRATION.md",
+      "sha256": "98117e960c439fd106f7beaecc99ce879a5b7511155c1b49be0dd60d82883a46"
+    },
+    {
+      "bytes": 35,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/requirements.txt",
+      "sha256": "c4b0e019ee978520152596ad41e50dbeb3c626488d49373993199fc225a0d895"
+    },
+    {
+      "bytes": 5700,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/config/crossasset_residual_regime_campaign_v6.json",
+      "sha256": "6c662b222cb98227875227016086d86cf3a810b71e3ac5bf01aecfd821735177"
+    },
+    {
+      "bytes": 54,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/src/__init__.py",
+      "sha256": "11e06ddff593a1dea5027dbf8f986148b32947f16d8846368a02de595d3a9b5a"
+    },
+    {
+      "bytes": 20636,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/src/campaign.py",
+      "sha256": "78e0a608f2ef16ba3352d10774c0b54c55c6d6ea9b79a98c5dcc2c4e465cb105"
+    },
+    {
+      "bytes": 3125,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/prepare_manifest.py",
+      "sha256": "8e5baf945ab761de058dd4ec700394c5a9e461ad3e88729ecc1cd975b36781b3"
+    },
+    {
+      "bytes": 5009,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/lock_contract.py",
+      "sha256": "06fbf4301e4481bbf68dedce80d15a675838792bdb55683dc9114dd537ca036f"
+    },
+    {
+      "bytes": 11600,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/run_screen.py",
+      "sha256": "97a21dfbfacb5a2283ebae6b4cf1bd7a22e5ce6216b7b867fb0654d28ae789da"
+    },
+    {
+      "bytes": 2922,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/tests/test_campaign.py",
+      "sha256": "4bcf72cc44343f0695cee3d376001c5a88612bb0b347049ee9137f1ec125502b"
+    }
+  ],
+  "paid_data_used": false,
+  "residual_features": {
+    "beta_clip": 3.0,
+    "keys": [
+      "H1_D2",
+      "H1_D10",
+      "H4_D2",
+      "H4_D10",
+      "H12_D2",
+      "H12_D10"
+    ],
+    "minimum_observations": {
+      "D10": 160,
+      "D2": 32
+    },
+    "rolling_windows": {
+      "D10": "10D",
+      "D2": "2D"
+    }
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_crossasset_residual_regime_campaign_v6_contract",
+  "selection": {
+    "attempt_first": 24120,
+    "attempt_last": 25119,
+    "attempts_per_mechanic": 100,
+    "attempts_per_owner": 500,
+    "false_discovery_rate": 0.1,
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics_per_owner": 5,
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "total_attempts": 1000
+  },
+  "training_authorized": false,
+  "windows": {
+    "era_2019_2021": [
+      "2019-07-01T00:00:00Z",
+      "2021-04-01T00:00:00Z"
+    ],
+    "era_2021_2023": [
+      "2021-04-01T00:00:00Z",
+      "2023-01-01T00:00:00Z"
+    ],
+    "era_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-10-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-10-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
