@@ -1,0 +1,37 @@
+{
+  "files": {
+    "REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet": {
+      "bytes": 45928,
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_CANDIDATE_MANIFEST.json": {
+      "bytes": 2757,
+      "sha256": "b943f635da6fc8f5fe2df74c3174f1096c0bd2d7c65d9cc4a4309a86e4a6758c"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_COMPONENT_TRADES.parquet": {
+      "bytes": 74959,
+      "sha256": "c12e9f748e9cc0d189e5ead782b68614d683b2f1249a45c4cdd6c7132302be90"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet": {
+      "bytes": 57268,
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_CONTRACT_LOCK.json": {
+      "bytes": 113797,
+      "sha256": "11ba54b95e002ff2accecbf899b0a408d317288fed43aa60f37bed10c4bc96fe"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_METRICS.csv": {
+      "bytes": 6579,
+      "sha256": "e2d3ba7f04d02c105f7028f4ba9c83ec073b35c5eb29dea618c5da4e4b4eca4a"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_RESULT.json": {
+      "bytes": 1693,
+      "sha256": "d7b45d4631607c0845d904148dfe23e4ade26e78e02c9dea3e78848c52c7fda6"
+    },
+    "REGIME_COMPOSITE_RAWTICK_V1_RESULT.md": {
+      "bytes": 1219,
+      "sha256": "2334fbc384e05cba1b244b971b725c6c885fa6c330aa3b0de60f3c857f674642"
+    }
+  },
+  "schema_version": "xauusd_regime_composite_rawtick_v1_artifacts"
+}

@@ -1,0 +1,45 @@
+{
+  "attempt_first": 15118,
+  "attempt_last": 15119,
+  "authorization": {
+    "execution_authorized": false,
+    "prospective_shadow_required": true,
+    "raw_tick_result_can_be_independent_holdout": false,
+    "research_only": true,
+    "selected_after_v1_outcomes": true,
+    "training_authorized": false
+  },
+  "candidate_rows": 658,
+  "component_trade_rows": 379,
+  "composite_trade_rows": 236,
+  "contract_sha256": "9c9883b8d9409ece3496490b1a3b07aabf3a8921d781343a7752d1e73368d5fc",
+  "cumulative_campaign_attempts": 15119,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "decision": "RAW_TICK_ECONOMIC_COMPOSITE_FOUND",
+  "economic_composite_ids": [
+    "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1",
+    "R3_COMPRESSION_RELEASE_TRI_MODE_V1"
+  ],
+  "execution_audit": {
+    "exact_stop_trades": 0,
+    "fixed_horizon_trades": 167,
+    "maximum_horizon_delay_minutes": 2940.0688999999998,
+    "rejections": {
+      "COMPONENT_POSITION_OVERLAP": 243,
+      "ENTRY_SPREAD_R": 36
+    },
+    "stop_slippage_trades": 212
+  },
+  "schema_version": "xauusd_regime_composite_rawtick_v1"
+}
