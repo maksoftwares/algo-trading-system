@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_CONTRACT_LOCK.json": {
+      "bytes": 8845,
+      "sha256": "c11680af0a6affd95bac9da962126460ff138faf3f29f5189f7ec86dec290fd5"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_MANIFEST.csv": {
+      "bytes": 390561,
+      "sha256": "69babc1834a9bb02656696bf3350b575298e2edab6bc0aeb99cb6619fd38d104"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_MANIFEST_EVIDENCE.json": {
+      "bytes": 4092,
+      "sha256": "4079da5f239968023fbd84e532273fc0ae202bff650946aa9e2063ccbca84395"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_METRICS.csv": {
+      "bytes": 1087585,
+      "sha256": "67c26fffce9759457dfdb130925bbefe9d841d810159123a1d0067325e4ecb66"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_RESULT.json": {
+      "bytes": 4901,
+      "sha256": "3ce54ab71f5259fca68d05e73e60db2ffac4fd1a285f4ebdfea1682865a362a2"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_RESULT.md": {
+      "bytes": 2258,
+      "sha256": "3413cf4d7affb6de4302fd5653c7f33f98e6a1c7f814219be73cd10c92e589c2"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_SELECTED_TRADES.parquet": {
+      "bytes": 145489,
+      "sha256": "3ebd0e97df277cf767064a0a736f3aad3faf34dcdcb53876eb39548ca6f89a8c"
+    },
+    "CHOP_M15_STATIONARITY_ANTISIGNAL_V22_SHORTLIST.csv": {
+      "bytes": 18153,
+      "sha256": "a3ca795a1cb7b0b770c2705d550b2237f94cedc519fe9bad59fc673b99ca747b"
+    }
+  },
+  "schema_version": "xauusd_chop_m15_stationarity_v22_artifacts"
+}
