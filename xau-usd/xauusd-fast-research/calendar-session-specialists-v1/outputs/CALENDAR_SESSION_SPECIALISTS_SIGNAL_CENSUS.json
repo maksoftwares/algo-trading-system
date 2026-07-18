@@ -1,0 +1,46 @@
+{
+  "attempt_first": 10094,
+  "attempt_last": 11093,
+  "coverage_selection_used_trade_outcomes": false,
+  "created_utc": "2026-07-17T23:59:36.207787+00:00",
+  "databento_used": false,
+  "discovery_end": "2021-01-01T00:00:00+00:00",
+  "discovery_start": "2016-07-01T00:00:00+00:00",
+  "mechanics": {
+    "PRIOR_SESSION_CONTINUATION": {
+      "maximum_raw_signals": 1103,
+      "median_raw_signals": 438.5,
+      "minimum_raw_signals": 194,
+      "policies": 200
+    },
+    "PRIOR_SESSION_REVERSAL": {
+      "maximum_raw_signals": 1103,
+      "median_raw_signals": 460.0,
+      "minimum_raw_signals": 182,
+      "policies": 200
+    },
+    "SESSION_RANGE_EXTREME_REVERSION": {
+      "maximum_raw_signals": 760,
+      "median_raw_signals": 312.0,
+      "minimum_raw_signals": 180,
+      "policies": 200
+    },
+    "UTC_HOUR_DIRECTIONAL_CARRY": {
+      "maximum_raw_signals": 1162,
+      "median_raw_signals": 694.0,
+      "minimum_raw_signals": 221,
+      "policies": 200
+    },
+    "WEEKDAY_HOUR_DIRECTIONAL_CARRY": {
+      "maximum_raw_signals": 235,
+      "median_raw_signals": 232.0,
+      "minimum_raw_signals": 212,
+      "policies": 200
+    }
+  },
+  "outcomes_opened": false,
+  "paid_data_request_made": false,
+  "policy_count": 1000,
+  "schema_version": "xauusd_calendar_session_signal_census_v1",
+  "strategy_scoring_performed": false
+}

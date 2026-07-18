@@ -1,0 +1,14 @@
+{
+  "advancement_sha256": "1f4861cc17f5f33af1c3fae5bafbfdffa9c27a298379edd425d8cfb2e544913c",
+  "contract_sha256": "67e4c244d753a9fb08caea70a274a6bcc513ebfcd3000c901c9b0b3510377d69",
+  "created_utc": "2026-07-18T00:02:11.778468+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "5fef185d8be21bdbc0fd59d2cf472a65addc08af730831e0e06667d3780a1dbc",
+  "policy_manifest_sha256": "fcb84e52704bc3ee077e18284f45c160f202fd4738e4cd4da88030af9a2220bf",
+  "schema_version": "xauusd_calendar_session_advancement_v1",
+  "selected_mechanics": [],
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}

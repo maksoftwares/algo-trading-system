@@ -1,0 +1,120 @@
+{
+  "schema_version": "xauusd_calendar_session_specialists_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "data_source": "../independent-specialists-v1/src/data.py",
+    "execution_source": "../cftc-options-positioning-mechanics-v1/src/campaign.py"
+  },
+  "windows": {
+    "discovery": ["2016-07-01T00:00:00Z", "2021-01-01T00:00:00Z"],
+    "confirmation": ["2021-01-01T00:00:00Z", "2023-01-01T00:00:00Z"],
+    "internal_test": ["2023-01-01T00:00:00Z", "2025-01-01T00:00:00Z"],
+    "exam": ["2025-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "segments": {
+    "discovery": [
+      ["2016-07-01T00:00:00Z", "2018-01-01T00:00:00Z"],
+      ["2018-01-01T00:00:00Z", "2019-07-01T00:00:00Z"],
+      ["2019-07-01T00:00:00Z", "2021-01-01T00:00:00Z"]
+    ],
+    "confirmation": [
+      ["2021-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+      ["2022-01-01T00:00:00Z", "2023-01-01T00:00:00Z"]
+    ],
+    "internal_test": [
+      ["2023-01-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+      ["2024-01-01T00:00:00Z", "2025-01-01T00:00:00Z"]
+    ],
+    "exam": [
+      ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+      ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+    ]
+  },
+  "features": {
+    "h1_atr_period": 14
+  },
+  "execution": {
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_hours": 0,
+    "maximum_trades_per_policy_utc_day": 1
+  },
+  "gates": {
+    "discovery": {
+      "minimum_trades": 150,
+      "minimum_trades_per_source_day": 0.10,
+      "minimum_stress_pf": 1.15,
+      "minimum_average_stress_r": 0.02,
+      "minimum_positive_month_share": 0.50,
+      "maximum_closed_drawdown_r": 30.0,
+      "top_winners_removed": 10,
+      "minimum_profitable_segments": 3,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10,
+      "maximum_advancers_per_mechanic": 1
+    },
+    "confirmation": {
+      "minimum_trades": 60,
+      "minimum_trades_per_source_day": 0.10,
+      "minimum_stress_pf": 1.15,
+      "minimum_average_stress_r": 0.025,
+      "minimum_positive_month_share": 0.50,
+      "maximum_closed_drawdown_r": 20.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10
+    },
+    "internal_test": {
+      "minimum_trades": 60,
+      "minimum_trades_per_source_day": 0.10,
+      "minimum_stress_pf": 1.20,
+      "minimum_average_stress_r": 0.035,
+      "minimum_positive_month_share": 0.50,
+      "maximum_closed_drawdown_r": 18.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10
+    },
+    "exam": {
+      "minimum_trades": 40,
+      "minimum_trades_per_source_day": 0.10,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_month_share": 0.55,
+      "maximum_closed_drawdown_r": 15.0,
+      "top_winners_removed": 5,
+      "minimum_profitable_segments": 2,
+      "minimum_worst_segment_pf": 1.0,
+      "maximum_fdr_qvalue": 0.10
+    }
+  },
+  "research_controls": {
+    "campaign_attempts_before_v1": 10093,
+    "registered_policy_count": 1000,
+    "policies_per_mechanic": 200,
+    "minimum_raw_discovery_signals": 180,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_authorized": false,
+    "databento_use_authorized": false,
+    "broker_action_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false
+  }
+}

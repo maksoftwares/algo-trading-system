@@ -1,0 +1,28 @@
+{
+  "attempt_first": 10094,
+  "attempt_last": 11093,
+  "contract_sha256": "67e4c244d753a9fb08caea70a274a6bcc513ebfcd3000c901c9b0b3510377d69",
+  "created_utc": "2026-07-17T23:59:36.209584+00:00",
+  "databento_use_authorized": false,
+  "dukascopy_source_rows": 708538,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "939592cc7ba095872adb465338e6f3ff8b498b26c486d1be898e604ab4ceea14",
+    "config/calendar_session_specialists_v1.json": "eff695f75a1b8165ee6e49a59ad58aceea87444c32c6dfb12fadf6e6f2404a04",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "lock_contract.py": "257c8e1ff26ffc604c58345f18ff90937751fb3fe87e40fbf5c5f354dc3b3926",
+    "requirements.txt": "ba60104d721ad680e363cc8505e527b3a3ce6175006435b4378cb89a6a87cdb9",
+    "run_research.py": "660bcc8284e5cd6ba547ebc405b0bff0560bb8a9acccd141c01f30f0233c7cdc",
+    "src/session.py": "46d00773adc138ed8ed5c4dea4991f0306d67bd16c3e498a6c3525f7b724bf90",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361",
+    "upstream/execution_and_metrics.py": "ad657ca37562de37410403d79d62755a02ca55c25f66b0f2783e8c7d00cff30b"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "policy_manifest_sha256": "fcb84e52704bc3ee077e18284f45c160f202fd4738e4cd4da88030af9a2220bf",
+  "registered_policy_count": 1000,
+  "schema_version": "xauusd_calendar_session_contract_lock_v1",
+  "signal_census_sha256": "597b6a3ee5b50a7f67e30a7bcba67a5cb490f4802377c75293fd5f6c8ba4453f",
+  "training_authorized": false
+}

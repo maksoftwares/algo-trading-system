@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "CALENDAR_SESSION_SPECIALISTS_CONTRACT_LOCK.json": {
+      "bytes": 1743,
+      "sha256": "288ac4ce2d2245b061de0bbdb490216b127c00a4f275ac66cb186951c6ab8edd"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 673,
+      "sha256": "47decb5fccd3a769305ebbba4c9f5616bc2a9947d8698029d0417a5fec071484"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_DISCOVERY_METRICS.csv": {
+      "bytes": 1298730,
+      "sha256": "5fef185d8be21bdbc0fd59d2cf472a65addc08af730831e0e06667d3780a1dbc"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 302,
+      "sha256": "c0af1ee2bc302ed0753921564f41f65e885065b3f70c78ca4a0f7b4efb90fdcf"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_DISCOVERY_TRADES.csv": {
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_POLICY_MANIFEST.csv": {
+      "bytes": 194047,
+      "sha256": "fcb84e52704bc3ee077e18284f45c160f202fd4738e4cd4da88030af9a2220bf"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_RESULT.json": {
+      "bytes": 4328,
+      "sha256": "7c710279941e292adbec958cb6330bce25f24ecf52ecbe00b7d8c5dbca1de848"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_RESULT.md": {
+      "bytes": 821,
+      "sha256": "10d391a2c60c9de4741deef803a90cea45fa45d27eb978c18b9383091851e436"
+    },
+    "CALENDAR_SESSION_SPECIALISTS_SIGNAL_CENSUS.json": {
+      "bytes": 1388,
+      "sha256": "597b6a3ee5b50a7f67e30a7bcba67a5cb490f4802377c75293fd5f6c8ba4453f"
+    }
+  },
+  "contract_sha256": "67e4c244d753a9fb08caea70a274a6bcc513ebfcd3000c901c9b0b3510377d69",
+  "execution_authorized": false,
+  "training_authorized": false
+}
