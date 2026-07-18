@@ -1,0 +1,250 @@
+{
+  "antisignal_hypothesis_derived_from_v16": true,
+  "contract_sha256": "fa93db9166b100830ddcab26de3456c81a3cc039215ffc0b0ad777a09e9167be",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 30086,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/src/campaign.py",
+      "sha256": "a2e7419e90643b70b4bf8a91919c875db77927d295453a0dbc5f2889d342a073"
+    },
+    {
+      "bytes": 3314,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/outputs/M5_MICROSTRUCTURE_RESULT.json",
+      "sha256": "52634e76216c988b1abf5909c1effdda641c293999bbe363072dea8459f26576"
+    },
+    {
+      "bytes": 1373167,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/outputs/M5_MICROSTRUCTURE_DISCOVERY_METRICS.csv",
+      "sha256": "e649685052c36708a251636994c56a508365d1ab4aca9b36f03d3df2f83fca0f"
+    },
+    {
+      "bytes": 13960,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/outputs/CHOP_ANTISIGNAL_V15_POSTHOC_SIDE_SUMMARY.json",
+      "sha256": "bbc26193535c13519cfa1db61e427c3defb2e476750e8a7f387daf372b5326e1"
+    },
+    {
+      "bytes": 4828,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-state-campaign-v16/outputs/CHOP_MICROSTRUCTURE_STATE_V16_RESULT.json",
+      "sha256": "6a1ea809c239c0f4b6e5f6db0dade977425d52e39b05b26bef1e8054dafd2e62"
+    },
+    {
+      "bytes": 982054,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-state-campaign-v16/outputs/CHOP_MICROSTRUCTURE_STATE_V16_METRICS.csv",
+      "sha256": "02b36f980ef123cea8b46836b7312e774ab719c12ce5d207d9182e553eac3e77"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "cooldown_bars": 1,
+    "current_account_risk_usd": 8.165487,
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_policy_utc_day": 6,
+    "ounces_at_lot_size": 1.0,
+    "same_bar_priority": "STOP_FIRST",
+    "stress_slippage_r": 0.05
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "features": {
+    "atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96
+  },
+  "manifest_evidence": {
+    "bytes": 3842,
+    "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/outputs/CHOP_MICROSTRUCTURE_ANTISIGNAL_V17_MANIFEST_EVIDENCE.json",
+    "sha256": "7fe73ac00321f6e011d76ca5f7f9eec0b180b6b761195b42f645b67e79410e00"
+  },
+  "manifest_file": {
+    "bytes": 300727,
+    "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/outputs/CHOP_MICROSTRUCTURE_ANTISIGNAL_V17_MANIFEST.csv",
+    "sha256": "5c771491f8561f1e4a659ef2a91ac68a56742d82e460bc41616291c182e7f090"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "mechanics": {
+    "CHOP_BOOK_ABSORPTION_REVERSE": {
+      "hold_bars": 12,
+      "stop_atr": 1.0,
+      "target_r": 1.4
+    },
+    "CHOP_FLOW_CONTINUATION_REVERSE": {
+      "hold_bars": 12,
+      "stop_atr": 1.0,
+      "target_r": 1.5
+    },
+    "CHOP_FLOW_EXHAUSTION_REVERSE": {
+      "hold_bars": 12,
+      "stop_atr": 1.1,
+      "target_r": 1.5
+    },
+    "CHOP_LIQUIDITY_SHOCK_REVERSION_REVERSE": {
+      "hold_bars": 24,
+      "stop_atr": 1.2,
+      "target_r": 1.8
+    },
+    "CHOP_POST_SHOCK_NORMALIZATION_REVERSE": {
+      "hold_bars": 12,
+      "stop_atr": 1.0,
+      "target_r": 1.5
+    }
+  },
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 1796,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/PREREGISTRATION.md",
+      "sha256": "256ad36d0ad678d5262be05fc6fcb689c24b85e3a8bd681795048865f5d2dd13"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 5174,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/config/chop_microstructure_antisignal_v17.json",
+      "sha256": "3ba0818b03eea46d71fdba47f1025bd4cf68f7199e5fe7330ca75b0cf2fd6b50"
+    },
+    {
+      "bytes": 77,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/src/__init__.py",
+      "sha256": "42e00b7c187a6013050426b7eeeca6258bf8c1a04ded95dd5a3c468a84653797"
+    },
+    {
+      "bytes": 20867,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/src/campaign.py",
+      "sha256": "6d479a513c914c3fac3bb23ad5ba296b33d3fec2df0fbea58014d031de075a93"
+    },
+    {
+      "bytes": 3807,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/prepare_manifest.py",
+      "sha256": "bd8686f0821ebd609b99fd03dd27183a5b2f686441717731a9685d05babe6ce7"
+    },
+    {
+      "bytes": 5018,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/lock_contract.py",
+      "sha256": "48dcfe5921f633d48eac62a7dd29d7b9a248d8791e3f46bc60396671d363f439"
+    },
+    {
+      "bytes": 12780,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/run_screen.py",
+      "sha256": "803bb803eaf5c7ca48bb867008622b32337a90a9c22b2175131021faec5f0a53"
+    },
+    {
+      "bytes": 4560,
+      "path": "xau-usd/xauusd-fast-research/chop-microstructure-antisignal-v17/tests/test_campaign.py",
+      "sha256": "211147537a19b832c2c86d50e5551e0d5ff4de70d61ac22de973d1dacc276cf0"
+    }
+  ],
+  "paid_data_used": false,
+  "prior_m5_and_chop_outcomes_exposed": true,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_microstructure_antisignal_v17_contract",
+  "selection": {
+    "attempt_first": 32239,
+    "attempt_last": 33238,
+    "attempts_per_mechanic": 200,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-microstructure-antisignal-v17-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_FLOW_CONTINUATION_REVERSE",
+      "CHOP_FLOW_EXHAUSTION_REVERSE",
+      "CHOP_BOOK_ABSORPTION_REVERSE",
+      "CHOP_LIQUIDITY_SHOCK_REVERSION_REVERSE",
+      "CHOP_POST_SHOCK_NORMALIZATION_REVERSE"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "paired_source_attempt_first": 31239,
+    "paired_source_attempt_last": 32238,
+    "source_policy_order_seed": "chop-microstructure-state-v16-prelock",
+    "total_attempts": 1000
+  },
+  "training_authorized": false,
+  "v16_outcomes_exposed": true,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
