@@ -1,0 +1,21 @@
+{
+  "files": {
+    "MACRO_TRANSITION_PROXY_REPLICATION_V2_CONTRACT_LOCK.json": {
+      "bytes": 7739,
+      "sha256": "c5812e0b86a888a01eb1e2b204a41e57ff4d01d7735d2f67a0ab8e76305d5bef"
+    },
+    "MACRO_TRANSITION_PROXY_REPLICATION_V2_RESULT.json": {
+      "bytes": 8454,
+      "sha256": "17035c6f7dece7640cc3af6d3be49d9e3cca6ad6cf34c1bebbcb161d7333e433"
+    },
+    "MACRO_TRANSITION_PROXY_REPLICATION_V2_RESULT.md": {
+      "bytes": 651,
+      "sha256": "1d7402a714747fbbfb187a2b3b989bdb5423eb6bd6afa3355b3f5c2d5d61014f"
+    },
+    "MACRO_TRANSITION_PROXY_REPLICATION_V2_TRADES.csv": {
+      "bytes": 4762,
+      "sha256": "acb66b09d20c6ac7c2e39b5e6671fafa9f668fb911f64c7affe1d53cd0aeb45c"
+    }
+  },
+  "schema_version": "xauusd_macro_transition_proxy_replication_v2_artifacts"
+}
