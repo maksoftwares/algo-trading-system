@@ -1,0 +1,26 @@
+{
+  "allowed_regimes": [
+    "CHOP",
+    "COMPRESSION",
+    "TRANSITION"
+  ],
+  "candidate_rows": 16,
+  "candidate_sha256": "9fab06307ee5e642e0eb61edad2d6618bd7fb0857771e48c47cfcdd40c54e3ee",
+  "contains_price_outcomes": false,
+  "databento_used": false,
+  "first_decision_utc": "2022-01-13T14:55:00+00:00",
+  "future_regime_feature_rows": 0,
+  "last_decision_utc": "2026-05-13T13:35:00+00:00",
+  "outcome_like_columns": [],
+  "paid_data_request_made": false,
+  "parent_candidate_sha256": "4dee4ef9ec92ebf52c82b65dba5334300f6ca2f7584a4a07928238ba9009bb7b",
+  "parent_contract_sha256": "7c7a2c317f9e1b9e2a137225260b27096747ba2e140028d94dfa6c921a4f072a",
+  "policy_id": "EVENT_PPI_NON_TREND_FADE_RR2",
+  "rows_by_regime": {
+    "CHOP": 8,
+    "COMPRESSION": 7,
+    "TRANSITION": 1
+  },
+  "schema_version": "xauusd_ppi_fade_regime_candidate_manifest_v2",
+  "strategy_scoring_performed": false
+}

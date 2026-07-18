@@ -1,0 +1,23 @@
+{
+  "ppi_attempts_invalidated": [
+    11100,
+    11101,
+    11102
+  ],
+  "contract_sha256": "78284ef41ff47c79f59fbf67c8307c249652e84edc66bc2dbd0fb70c1f37e402",
+  "decision": "INVALID_EXECUTION_SIMULATION_DO_NOT_USE_METRICS",
+  "defect": "datetime64[ms] integer timestamps were divided by 1000000 before comparison with epoch milliseconds",
+  "event_outcome_rows_audited": 382,
+  "event_outcome_rows_with_max_hold": 382,
+  "execution_authorized": false,
+  "invalidated_evidence": [
+    "macro-event-reaction-replication-v2",
+    "macro-event-reaction-replication-v3",
+    "ppi-event-reaction-v1",
+    "ppi-fade-regime-confirmation-v2"
+  ],
+  "model_training_authorized": false,
+  "parent_confirmation_remained_sealed": true,
+  "paid_data_request_made": false,
+  "schema_version": "xauusd_event_reaction_execution_invalidation_v1"
+}

@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "PPI_FADE_REGIME_CONFIRMATION_CANDIDATES.parquet": {
+      "bytes": 17851,
+      "sha256": "9fab06307ee5e642e0eb61edad2d6618bd7fb0857771e48c47cfcdd40c54e3ee"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_CANDIDATE_MANIFEST.json": {
+      "bytes": 918,
+      "sha256": "cdffd02b665e15211955ecfceddea687417856ec4d12d19a42d1822d94c236d4"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_CONTRACT_LOCK.json": {
+      "bytes": 11542,
+      "sha256": "fcf5ca269a7eee3383c222637194c7f98e9a84b14004eb528114f474b121cf42"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_DIAGNOSTICS.csv": {
+      "bytes": 350,
+      "sha256": "4dfe37028818bf12aa4006164bd71e611dd56182b986e04eafe64f2aa76727d9"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_EXECUTION_AUDIT.json": {
+      "bytes": 211,
+      "sha256": "11a1c88c9a15554269e84a4c147e4df6c95c958db4b56bebb803b958d63d0dea"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_EXECUTION_INVALIDATION.json": {
+      "bytes": 831,
+      "sha256": "b1bbfa38a0859bd3415053bc67a8f021e3ff9113012dd3f5a98b9d0a823e4b74"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_METRICS.csv": {
+      "bytes": 1080,
+      "sha256": "101b3aa1defacc9fbcbfc7161e5f645308bcf914b3fea94454503e7be81225b9"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_OUTCOMES.parquet": {
+      "bytes": 17495,
+      "sha256": "e2b6d0be5cd887480d952f5e931c595d5a5f862d4912e134cd22bffd3b9df792"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_OUTCOMES_OPENED.json": {
+      "bytes": 307,
+      "sha256": "3fe200342f44f6f5efae3bce83840aac437d37a6487876f9c0ae308de786fea5"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_RESULT.json": {
+      "bytes": 1030,
+      "sha256": "fd89eadeff54a99c30c8f6936401040d552d0048bbede29ac3a5da0d9bc81bfa"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_RESULT.md": {
+      "bytes": 580,
+      "sha256": "b2052642df89e3e139ad8226a0ebf2162fea81cc578cc72583ef27f7d0b6ce42"
+    },
+    "PPI_FADE_REGIME_CONFIRMATION_SURVIVORS.csv": {
+      "bytes": 37,
+      "sha256": "2bc85e58cc40b2e6dc2c3bd502c2ebae9e7b6062c1109b1247dff0c0988f964c"
+    }
+  },
+  "contract_sha256": "78284ef41ff47c79f59fbf67c8307c249652e84edc66bc2dbd0fb70c1f37e402",
+  "execution_authorized": false,
+  "training_authorized": false
+}

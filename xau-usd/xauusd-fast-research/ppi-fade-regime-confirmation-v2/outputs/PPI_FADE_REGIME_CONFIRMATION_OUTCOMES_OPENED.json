@@ -1,0 +1,8 @@
+{
+  "attempt_no": 11102,
+  "contract_sha256": "78284ef41ff47c79f59fbf67c8307c249652e84edc66bc2dbd0fb70c1f37e402",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T01:05:12.576891+00:00",
+  "schema_version": "xauusd_ppi_fade_regime_confirmation_open_v2",
+  "training_authorized": false
+}

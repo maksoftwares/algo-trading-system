@@ -1,0 +1,83 @@
+{
+  "schema_version": "xauusd_ppi_fade_regime_confirmation_v2",
+  "base_contract": "../balanced-regime-campaign-v3/config/balanced_regime_campaign_v3.json",
+  "parent_package": "../ppi-event-reaction-v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbol": "XAUUSD",
+    "start_utc": "2022-01-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "maximum_entry_delay_ms": 10000,
+    "exit_tick_grace_ms": 259200000,
+    "expected_event_rows": 53,
+    "expected_candidate_rows": 16
+  },
+  "policy": {
+    "attempt_no": 11102,
+    "policy_id": "EVENT_PPI_NON_TREND_FADE_RR2",
+    "source_policy_id": "EVENT_PPI_FADE_RR2",
+    "event_type": "PPI",
+    "mode": "FADE",
+    "impulse_minutes": 15,
+    "start_minutes": 15,
+    "end_minutes": 90,
+    "break_atr": 0.1,
+    "stop_buffer_atr": 0.1,
+    "minimum_body_fraction": 0.35,
+    "target_r": 2.0,
+    "allowed_regimes": [
+      "CHOP",
+      "COMPRESSION",
+      "TRANSITION"
+    ]
+  },
+  "execution": {
+    "point_size_usd": 0.01,
+    "minimum_stop_distance_usd": 3.5,
+    "maximum_stop_distance_usd": 18.0,
+    "maximum_entry_spread_usd": 0.75,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_hold_hours": 72,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "current_account_risk_usd": 8.165487,
+    "same_tick_priority": "STOP_FIRST"
+  },
+  "gate": {
+    "minimum_trades": 12,
+    "minimum_event_participation": 0.2,
+    "minimum_stress_pf": 1.25,
+    "minimum_average_stress_r": 0.1,
+    "minimum_positive_active_month_share": 0.5,
+    "minimum_positive_active_year_share": 0.5,
+    "minimum_current_account_feasible_share": 0.8,
+    "maximum_closed_drawdown_r": 10.0,
+    "top_winners_removed": 3,
+    "maximum_holm_qvalue": 0.1
+  },
+  "outputs": {
+    "directory": "outputs",
+    "candidates": "PPI_FADE_REGIME_CONFIRMATION_CANDIDATES.parquet",
+    "candidate_manifest": "PPI_FADE_REGIME_CONFIRMATION_CANDIDATE_MANIFEST.json",
+    "contract_lock": "PPI_FADE_REGIME_CONFIRMATION_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v2": 11101,
+    "registered_policy_count": 1,
+    "parameter_search_count": 0,
+    "historical_outcomes_used_for_hypothesis": true,
+    "confirmation_outcomes_opened_before_lock": false,
+    "related_confirmation_is_blind_exam": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_authorized": false,
+    "databento_use_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}
