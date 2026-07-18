@@ -1,0 +1,42 @@
+{
+  "schema_version": "xauusd_m15_regime_clock_campaign_v4",
+  "base": {
+    "config_path": "../m15-regime-target-campaign-v1/config/m15_regime_target_campaign_v1.json",
+    "config_sha256": "cfd5f1056ec99f912f50384001f439c2ad132c0f7b6698f297ab62cbdd926b95"
+  },
+  "selection": {
+    "attempt_first": 20120,
+    "attempt_last": 21119,
+    "regime_count": 2,
+    "mechanics_per_regime": 5,
+    "variants_per_mechanic": 100,
+    "total_attempts": 1000,
+    "maximum_economic_finalists_per_mechanic": 3,
+    "false_discovery_rate": 0.1
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "M15_REGIME_CLOCK_V4_CONTRACT_LOCK.json",
+    "manifest": "M15_REGIME_CLOCK_V4_MANIFEST.csv",
+    "metrics": "M15_REGIME_CLOCK_V4_METRICS.csv",
+    "shortlist": "M15_REGIME_CLOCK_V4_SHORTLIST.csv",
+    "result_json": "M15_REGIME_CLOCK_V4_RESULT.json",
+    "result_markdown": "M15_REGIME_CLOCK_V4_RESULT.md",
+    "artifact_manifest": "M15_REGIME_CLOCK_V4_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v4": 20119,
+    "designed_after_antisignal_v3_outcomes": true,
+    "selection_bias_acknowledged": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "raw_tick_confirmation_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
