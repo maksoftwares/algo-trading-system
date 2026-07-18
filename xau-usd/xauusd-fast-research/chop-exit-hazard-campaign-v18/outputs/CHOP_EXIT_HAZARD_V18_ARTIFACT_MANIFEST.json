@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_EXIT_HAZARD_V18_CONTRACT_LOCK.json": {
+      "bytes": 8547,
+      "sha256": "c0f7c71284e502b4bd378c313adf1364dcea82755bce01917da04f276172aaf8"
+    },
+    "CHOP_EXIT_HAZARD_V18_MANIFEST.csv": {
+      "bytes": 346309,
+      "sha256": "299f51efedf6cf063183c565aace24537aa79ba0d087e894ba7bcc0030f91d9b"
+    },
+    "CHOP_EXIT_HAZARD_V18_MANIFEST_EVIDENCE.json": {
+      "bytes": 3744,
+      "sha256": "3b3664468acc3b805185ff5f8caeb0b5a84fb35ce9766b452b32bda019a119de"
+    },
+    "CHOP_EXIT_HAZARD_V18_METRICS.csv": {
+      "bytes": 890739,
+      "sha256": "519df1da9fa40ab09bd772e6bbf434899f227b2bca639359d1e9cf955ba04323"
+    },
+    "CHOP_EXIT_HAZARD_V18_RESULT.json": {
+      "bytes": 4805,
+      "sha256": "6a59da4728c0bbb98b297de7304108ef5d120d12acffce65aee9b11b79679fa9"
+    },
+    "CHOP_EXIT_HAZARD_V18_RESULT.md": {
+      "bytes": 1963,
+      "sha256": "d377ff24f4f72ffc99eed944abdbfc300362ea9b1f77f2fcc1c8815646965abb"
+    },
+    "CHOP_EXIT_HAZARD_V18_SELECTED_TRADES.parquet": {
+      "bytes": 247167,
+      "sha256": "ed91c31427d3404b54283e98c060005a8c047ccd89d9c6a81e1eab75cbef3bcf"
+    },
+    "CHOP_EXIT_HAZARD_V18_SHORTLIST.csv": {
+      "bytes": 17449,
+      "sha256": "18b9e519ff9381f713fd6f95856d5287fad0c8dbe6924ee95942a99c9b5a4534"
+    }
+  },
+  "schema_version": "xauusd_chop_exit_hazard_v18_artifacts"
+}
