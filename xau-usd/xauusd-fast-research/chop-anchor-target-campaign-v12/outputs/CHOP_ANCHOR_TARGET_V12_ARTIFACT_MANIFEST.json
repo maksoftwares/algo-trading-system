@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_ANCHOR_TARGET_V12_CONTRACT_LOCK.json": {
+      "bytes": 7296,
+      "sha256": "d1981257263307168b2473c85488f625d973bf300efb5ee6ab45432229c5ba7b"
+    },
+    "CHOP_ANCHOR_TARGET_V12_MANIFEST.csv": {
+      "bytes": 241191,
+      "sha256": "1934a1e83b245a9ebf50e87872eac2f33187ffe5fe513b21f84c2010e81b7461"
+    },
+    "CHOP_ANCHOR_TARGET_V12_MANIFEST_EVIDENCE.json": {
+      "bytes": 3687,
+      "sha256": "317d952dc499e4ef5df28b832f048b422eb967c64e284f384e8b75689b053dd8"
+    },
+    "CHOP_ANCHOR_TARGET_V12_METRICS.csv": {
+      "bytes": 986473,
+      "sha256": "f68c093bfc4426b36b7ea57df811eb563f951b853ea2251d9634e7c478dbb602"
+    },
+    "CHOP_ANCHOR_TARGET_V12_RESULT.json": {
+      "bytes": 4824,
+      "sha256": "39b411cbe5828ddeeed1c3d41e58126fd1bb5aff262a504bcf32fa928c41050f"
+    },
+    "CHOP_ANCHOR_TARGET_V12_RESULT.md": {
+      "bytes": 1896,
+      "sha256": "d3ede730ec9a6a339c10eb4500bf7c6c5ff6f6a803ccbf789658d8b6861738da"
+    },
+    "CHOP_ANCHOR_TARGET_V12_SELECTED_TRADES.parquet": {
+      "bytes": 443841,
+      "sha256": "582e5fd34520afa3616c4e65b5d00cfab36f125d6778331b0f41239a3d3d9f4b"
+    },
+    "CHOP_ANCHOR_TARGET_V12_SHORTLIST.csv": {
+      "bytes": 15805,
+      "sha256": "37ace48e9d9319b350eaa65a4eb735c1adf152f3bca451e1f4b24ace114bb3c6"
+    }
+  },
+  "schema_version": "xauusd_chop_anchor_target_v12_artifacts"
+}
