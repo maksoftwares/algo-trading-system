@@ -1,0 +1,250 @@
+{
+  "contract_sha256": "7c6bf63f6d74f30ecfc92e01a2bbd498cfaec43c4ec168c3ee0d01ac6d9ca8ac",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 30086,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/src/campaign.py",
+      "sha256": "a2e7419e90643b70b4bf8a91919c875db77927d295453a0dbc5f2889d342a073"
+    },
+    {
+      "bytes": 23913,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/src/campaign.py",
+      "sha256": "18c72d50ffcfa7134ecedc08c40d7e51c7917995074f7ddac41cd01b4fd2deb3"
+    },
+    {
+      "bytes": 4911,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/config/chop_exit_hazard_campaign_v18.json",
+      "sha256": "634c72d8103912146657ca6dc326236dccf67c9c34593df579dd69a6b01ab151"
+    },
+    {
+      "bytes": 8547,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_CONTRACT_LOCK.json",
+      "sha256": "c0f7c71284e502b4bd378c313adf1364dcea82755bce01917da04f276172aaf8"
+    },
+    {
+      "bytes": 346309,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_MANIFEST.csv",
+      "sha256": "299f51efedf6cf063183c565aace24537aa79ba0d087e894ba7bcc0030f91d9b"
+    },
+    {
+      "bytes": 4805,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_RESULT.json",
+      "sha256": "6a59da4728c0bbb98b297de7304108ef5d120d12acffce65aee9b11b79679fa9"
+    },
+    {
+      "bytes": 890739,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-campaign-v18/outputs/CHOP_EXIT_HAZARD_V18_METRICS.csv",
+      "sha256": "519df1da9fa40ab09bd772e6bbf434899f227b2bca639359d1e9cf955ba04323"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "cooldown_bars": 1,
+    "current_account_risk_usd": 8.165487,
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_policy_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "risk_basis": "LATEST_COMPLETED_H1_ATR14",
+    "same_bar_priority": "STOP_FIRST",
+    "stress_slippage_r": 0.05
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "features": {
+    "atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96,
+    "h1_atr_period": 14
+  },
+  "geometries": {
+    "BALANCED": {
+      "hold_bars": 144,
+      "stop_atr": 0.65,
+      "target_r": 1.75
+    },
+    "EXTENDED": {
+      "hold_bars": 288,
+      "stop_atr": 0.75,
+      "target_r": 3.0
+    },
+    "FAST": {
+      "hold_bars": 72,
+      "stop_atr": 0.45,
+      "target_r": 1.25
+    },
+    "TREND": {
+      "hold_bars": 288,
+      "stop_atr": 0.85,
+      "target_r": 2.25
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3998,
+    "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/outputs/CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST_EVIDENCE.json",
+    "sha256": "7ecfab1882d577bf4ba572f82b2c0e928b481137855847c91a3faa90db87da28"
+  },
+  "manifest_file": {
+    "bytes": 355334,
+    "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/outputs/CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST.csv",
+    "sha256": "38d3e9178a5d4bd7c75111d4cd4a3081b42259ebec93c11a0fb6964e27cc302c"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2046,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/PREREGISTRATION.md",
+      "sha256": "d98123e3fb3a37ba14289cfa4b4f95180c80e954ce3514a8f487c05301909f99"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 5223,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/config/chop_exit_hazard_antisignal_v19.json",
+      "sha256": "44492950c9975fb2c388648e61c1eee84c99baff61b96a7c1a8f6418d69b72df"
+    },
+    {
+      "bytes": 81,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/src/__init__.py",
+      "sha256": "f5300d1225f51bdb39d7c298ce5c9aecb8b23155e18f3cc1771878726497662c"
+    },
+    {
+      "bytes": 24721,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/src/campaign.py",
+      "sha256": "817fdb7647de4bc98c09c659cd9a19fca5ed70a43f0aa698e86ea9bda14ed24f"
+    },
+    {
+      "bytes": 5094,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/prepare_manifest.py",
+      "sha256": "66ba9ffb3616b6336aa7fc3c95712647a7ffa82d2800e5ca5cdb7973cdf1a1e2"
+    },
+    {
+      "bytes": 5010,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/lock_contract.py",
+      "sha256": "e2240b8ae83b6de13c2aec5bd2e6b5259dc1cb02e8c57c01116399e2aaa0c441"
+    },
+    {
+      "bytes": 12709,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/run_screen.py",
+      "sha256": "d546c79fb96dcd9b1f4a952421a8526a58705f495e5b416e1c2a0127b331b407"
+    },
+    {
+      "bytes": 6882,
+      "path": "xau-usd/xauusd-fast-research/chop-exit-hazard-antisignal-v19/tests/test_campaign.py",
+      "sha256": "614dce59982497cb0870ff47b1afc3ee5a0295a2bc4d722ab28d104ab32b2182"
+    }
+  ],
+  "paid_data_used": false,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_exit_hazard_antisignal_v19_contract",
+  "selection": {
+    "attempt_first": 34239,
+    "attempt_last": 35238,
+    "attempts_per_mechanic": 200,
+    "candidate_definitions_per_mechanic": 400,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-exit-hazard-antisignal-v19-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_ADX_ER_FAILED_BREAK_FADE",
+      "CHOP_SLOPE_INFLECTION_FADE",
+      "CHOP_RANGE_EDGE_FADE",
+      "CHOP_VOLATILITY_LIFT_FADE",
+      "CHOP_BOUNDARY_CONFLUENCE_FADE"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "source_policy_order_seed": "chop-exit-hazard-v18-deterministic-design-prelock",
+    "total_attempts": 1000
+  },
+  "source_signals_parameters_and_geometries_frozen": true,
+  "training_authorized": false,
+  "v18_outcomes_exposed_before_exact_direction_inverse": true,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}

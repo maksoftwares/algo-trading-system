@@ -1,0 +1,132 @@
+{
+  "schema_version": "xauusd_chop_exit_hazard_antisignal_v19",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "expected_rows": 708538,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "windows": {
+    "era_2016_2019": ["2016-07-01T00:00:00Z", "2019-01-01T00:00:00Z"],
+    "era_2019_2021": ["2019-01-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "era_2021_2024": ["2021-07-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "era_2024_2026": ["2024-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "regime": {
+    "atr_period": 14,
+    "adx_period": 14,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "atr_percentile_lookback": 504,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "chop_adx_max": 25.0,
+    "chop_er_max": 0.38,
+    "chop_displacement_atr_max": 1.75,
+    "chop_width_atr_min": 1.0,
+    "chop_width_atr_max": 8.0,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "features": {
+    "atr_period": 14,
+    "h1_atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96
+  },
+  "geometries": {
+    "FAST": {"stop_atr": 0.45, "target_r": 1.25, "hold_bars": 72},
+    "BALANCED": {"stop_atr": 0.65, "target_r": 1.75, "hold_bars": 144},
+    "TREND": {"stop_atr": 0.85, "target_r": 2.25, "hold_bars": 288},
+    "EXTENDED": {"stop_atr": 0.75, "target_r": 3.0, "hold_bars": 288}
+  },
+  "selection": {
+    "attempt_first": 34239,
+    "attempt_last": 35238,
+    "total_attempts": 1000,
+    "mechanics": [
+      "CHOP_ADX_ER_FAILED_BREAK_FADE",
+      "CHOP_SLOPE_INFLECTION_FADE",
+      "CHOP_RANGE_EDGE_FADE",
+      "CHOP_VOLATILITY_LIFT_FADE",
+      "CHOP_BOUNDARY_CONFLUENCE_FADE"
+    ],
+    "attempts_per_mechanic": 200,
+    "candidate_definitions_per_mechanic": 400,
+    "hash_selection_seed": "chop-exit-hazard-antisignal-v19-prelock",
+    "source_policy_order_seed": "chop-exit-hazard-v18-deterministic-design-prelock",
+    "minimum_raw_signals_total": 100,
+    "minimum_raw_signals_each_era": 15,
+    "maximum_finalists_per_mechanic": 3,
+    "false_discovery_rate": 0.10
+  },
+  "execution": {
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "current_account_risk_usd": 8.165487,
+    "ounces_at_lot_size": 1.0,
+    "extra_execution_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "cooldown_bars": 1,
+    "maximum_trades_per_policy_utc_day": 4,
+    "same_bar_priority": "STOP_FIRST",
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "risk_basis": "LATEST_COMPLETED_H1_ATR14"
+  },
+  "economic_gates": {
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "minimum_stress_pf_each_era": 1.10,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_total_stress_pf": 1.25,
+    "maximum_closed_drawdown_r": 25.0,
+    "top_winners_removed": 5,
+    "minimum_top_winners_removed_net_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "manifest": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST.csv",
+    "manifest_evidence": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST_EVIDENCE.json",
+    "contract_lock": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_CONTRACT_LOCK.json",
+    "metrics": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_METRICS.csv",
+    "shortlist": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_SHORTLIST.csv",
+    "selected_trades": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_SELECTED_TRADES.parquet",
+    "result_json": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_RESULT.json",
+    "result_markdown": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_RESULT.md",
+    "artifact_manifest": "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v19": 34238,
+    "v14_through_v17_chop_outcomes_were_exposed": true,
+    "prior_ml_and_state_router_outcomes_were_exposed": true,
+    "v18_exit_hazard_outcomes_were_exposed": true,
+    "new_hypothesis_is_exact_paired_v18_direction_inverse": true,
+    "source_signals_parameters_and_geometries_are_frozen": true,
+    "signals_are_owned_by_chop_at_signal_time": true,
+    "latest_completed_h4_and_h1_state_only": true,
+    "manifest_membership_uses_signal_counts_only": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "shock_is_abstain": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
