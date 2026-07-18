@@ -1,0 +1,77 @@
+{
+  "attempt_first": 21120,
+  "attempt_last": 22119,
+  "attempts_completed": 1000,
+  "authorization": {
+    "exact_tick_confirmation_required": true,
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "prospective_shadow_required": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "cache_policy": {
+    "block_size_policies": 25,
+    "blocks_cleared": 40,
+    "policies_scored": 1000,
+    "reuse_across_blocks": false
+  },
+  "cached_pending_outcomes": 29876,
+  "clock_audit": {
+    "finite_activation_gaps": 391944,
+    "maximum_activation_gap_minutes": 4575.0,
+    "negative_activation_gaps": 0,
+    "out_of_bounds_decisions": 1,
+    "unit": "ns",
+    "zero_activation_gaps": 388261
+  },
+  "contract_sha256": "c1c4ed3e5a5d6dc74cb3fdadc90f5b004563800c7f814f099220bccef72d3bea",
+  "cumulative_campaign_attempts": 22119,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "feature_rows": 391945,
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "first_feature_time": "2010-01-01T00:15:00+00:00",
+    "h4_rows": 21548,
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "last_feature_time": "2026-07-01T00:00:00+00:00",
+    "m15_rows": 391945,
+    "m5_rows": 1176817,
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "decision": "NO_M5_PASSIVE_REGIME_V5_2_ECONOMIC_FINALIST",
+  "economic_finalist_rows": 0,
+  "economic_pass_rows": 0,
+  "fill_contract": {
+    "fill_bar_stop_charged": true,
+    "fill_bar_target_credit": false,
+    "gap_price_improvement_credited": false,
+    "maximum_anchor_reward_r": 4.0,
+    "minimum_anchor_reward_r": 0.5,
+    "minimum_pending_distance_r": 0.01
+  },
+  "regime_summary": [
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.6885024944948435,
+      "economic_passes": 0,
+      "regime_owner": "CHOP",
+      "statistical_passes": 0
+    },
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.7317666986629235,
+      "economic_passes": 0,
+      "regime_owner": "TRANSITION",
+      "statistical_passes": 0
+    }
+  ],
+  "schema_version": "xauusd_m5_passive_regime_campaign_v5_2",
+  "statistical_finalist_rows": 0
+}

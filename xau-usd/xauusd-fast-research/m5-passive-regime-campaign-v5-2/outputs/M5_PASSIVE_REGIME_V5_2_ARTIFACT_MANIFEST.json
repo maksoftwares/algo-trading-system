@@ -1,0 +1,29 @@
+{
+  "files": {
+    "M5_PASSIVE_REGIME_V5_2_CONTRACT_LOCK.json": {
+      "bytes": 61975,
+      "sha256": "bdf4a51f3281f34e29947116c8cb6316cd123798ec4234757b02717e41b53b56"
+    },
+    "M5_PASSIVE_REGIME_V5_2_MANIFEST.csv": {
+      "bytes": 273967,
+      "sha256": "938891405dc64b22b5e11378405c2bcf8d8af71df8839471f4febede0fc1595a"
+    },
+    "M5_PASSIVE_REGIME_V5_2_METRICS.csv": {
+      "bytes": 1014815,
+      "sha256": "3506df6a6530f75e2086028972f613944d867df873260757ee2e133e552caa00"
+    },
+    "M5_PASSIVE_REGIME_V5_2_RESULT.json": {
+      "bytes": 2642,
+      "sha256": "630622d965f3a95235419ce27e4d241ed87634880845e26224a34b935cd7ae7c"
+    },
+    "M5_PASSIVE_REGIME_V5_2_RESULT.md": {
+      "bytes": 562,
+      "sha256": "65495bb50e2b776eac162bad4cca2b0e3a260f038f5ca42bd882706bd1006495"
+    },
+    "M5_PASSIVE_REGIME_V5_2_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_m5_passive_regime_v5_2_artifacts"
+}
