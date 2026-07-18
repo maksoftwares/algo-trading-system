@@ -1,0 +1,29 @@
+{
+  "files": {
+    "M15_REGIME_ANTISIGNAL_V3_CONTRACT_LOCK.json": {
+      "bytes": 60434,
+      "sha256": "48ea6809d956d45452a25896262799593debfe7362d8a715b9a973e8fe3e6a76"
+    },
+    "M15_REGIME_ANTISIGNAL_V3_MANIFEST.csv": {
+      "bytes": 232847,
+      "sha256": "b7494e0c148b978fd1774a4bb59a713ecf52cdb4694ae35f6473b72b7e842959"
+    },
+    "M15_REGIME_ANTISIGNAL_V3_METRICS.csv": {
+      "bytes": 993719,
+      "sha256": "5c5713ad0036afa2170de6a1e5c30096fa9549a1449ee49b9f5c395bb9bf1c1d"
+    },
+    "M15_REGIME_ANTISIGNAL_V3_RESULT.json": {
+      "bytes": 2080,
+      "sha256": "6065dc6740e8663cc959f864028b5fc42898a09269bdf023cc260e6f91e89d0f"
+    },
+    "M15_REGIME_ANTISIGNAL_V3_RESULT.md": {
+      "bytes": 558,
+      "sha256": "7ea98562648775277c6d2e3a5b86add3df8c3820e9dbc3f10f60b99653e71c6d"
+    },
+    "M15_REGIME_ANTISIGNAL_V3_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_m15_regime_antisignal_v3_artifacts"
+}
