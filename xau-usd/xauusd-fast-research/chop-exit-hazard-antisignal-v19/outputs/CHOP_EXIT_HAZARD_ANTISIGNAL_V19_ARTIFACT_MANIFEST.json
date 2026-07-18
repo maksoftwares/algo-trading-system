@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_CONTRACT_LOCK.json": {
+      "bytes": 8923,
+      "sha256": "d2735eb4397b08660965128684f75d908c860e90e1b8829d501175e7e2d6b1d0"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST.csv": {
+      "bytes": 355334,
+      "sha256": "38d3e9178a5d4bd7c75111d4cd4a3081b42259ebec93c11a0fb6964e27cc302c"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_MANIFEST_EVIDENCE.json": {
+      "bytes": 3998,
+      "sha256": "7ecfab1882d577bf4ba572f82b2c0e928b481137855847c91a3faa90db87da28"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_METRICS.csv": {
+      "bytes": 901152,
+      "sha256": "1f1346f6ae61e3de4679d2a17e9b24758790f2483a9c4701616f7a46a4dc0f56"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_RESULT.json": {
+      "bytes": 4832,
+      "sha256": "0d593d6503fd3590d8e611884181cb58af04398b936bd97e363d78b8ceb9c216"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_RESULT.md": {
+      "bytes": 2099,
+      "sha256": "8779f35e25133d0916917a7f0f4c5d43a81c0c48ded14d20e51a0fcc28728d2c"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_SELECTED_TRADES.parquet": {
+      "bytes": 220331,
+      "sha256": "94b0505e4b028176f9569e5571725f53d9e751b3dcf2b4a1ff6c1f0b47b48377"
+    },
+    "CHOP_EXIT_HAZARD_ANTISIGNAL_V19_SHORTLIST.csv": {
+      "bytes": 17703,
+      "sha256": "b5b2a02be277593da00fcd9df64f2b820ca16c34574ee74f8d2400c2ff3c9716"
+    }
+  },
+  "schema_version": "xauusd_chop_exit_hazard_antisignal_v19_artifacts"
+}
