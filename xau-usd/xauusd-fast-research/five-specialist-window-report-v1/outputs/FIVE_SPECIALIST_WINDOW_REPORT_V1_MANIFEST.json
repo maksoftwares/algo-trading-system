@@ -1,0 +1,56 @@
+{
+  "cutoff_utc": "2026-07-01T00:00:00Z",
+  "normalized_trades": 1249,
+  "output_files": {
+    "FIVE_SPECIALIST_COMBINED_WINDOWS_V1.csv": {
+      "bytes": 1371,
+      "sha256": "c394954cf441c1c12a3d56d3c40a0a1b34cd47334fb31ea0c541e805bb758544"
+    },
+    "FIVE_SPECIALIST_INDIVIDUAL_WINDOWS_V1.csv": {
+      "bytes": 4833,
+      "sha256": "bd7900c76f2a5d9907ea840a3c2f86a92c37bbb6dccae86fccbd987c69d32dba"
+    },
+    "FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet": {
+      "bytes": 80507,
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "FIVE_SPECIALIST_WINDOW_REPORT_V1.md": {
+      "bytes": 2672,
+      "sha256": "2909137f5f58ed76677664d71249b4ce0160f7504214fb9a3e719de896aef804"
+    }
+  },
+  "research_controls": {
+    "combined_result_is_additive": true,
+    "execution_authorized": false,
+    "floating_equity_drawdown_calculated": false,
+    "historical_development_evidence_only": true,
+    "shared_risk_engine_applied": false,
+    "training_authorized": false
+  },
+  "schema_version": "xauusd_five_specialist_window_report_v1",
+  "source_files": {
+    "r1_uptrend": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_CURRENT_CANDIDATE_REGIME_ATTRIBUTION_20260709_TAGGED_TRADES.csv",
+      "sha256": "40a3f2c8f3f53cded9c54e90d300089200c7692dbfc0f9e174e24d30e4dc997f"
+    },
+    "r4_chop": {
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793"
+    },
+    "r5_transition": {
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e"
+    },
+    "regime_composites": {
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c"
+    }
+  },
+  "specialist_trade_counts": {
+    "R1_UPTREND": 558,
+    "R2_DOWNTREND": 118,
+    "R3_COMPRESSION": 118,
+    "R4_CHOP": 125,
+    "R5_TRANSITION": 330
+  }
+}

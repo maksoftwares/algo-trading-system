@@ -1,0 +1,78 @@
+{
+  "schema_version": "xauusd_five_specialist_window_report_v1",
+  "cutoff_utc": "2026-07-01T00:00:00Z",
+  "window_basis": "REALIZED_EXIT_TIME",
+  "windows": {
+    "3M": "2026-04-01T00:00:00Z",
+    "6M": "2026-01-01T00:00:00Z",
+    "1Y": "2025-07-01T00:00:00Z",
+    "2Y": "2024-07-01T00:00:00Z"
+  },
+  "specialist_order": [
+    "R1_UPTREND",
+    "R2_DOWNTREND",
+    "R3_COMPRESSION",
+    "R4_CHOP",
+    "R5_TRANSITION"
+  ],
+  "sources": {
+    "r1_uptrend": {
+      "path": "xau-usd/xauusd-phase1/outputs/reports/A1_XAU_CURRENT_CANDIDATE_REGIME_ATTRIBUTION_20260709_TAGGED_TRADES.csv",
+      "sha256": "40a3f2c8f3f53cded9c54e90d300089200c7692dbfc0f9e174e24d30e4dc997f",
+      "book": "R1_current_long_book",
+      "expected_trades": 558,
+      "expected_net_usd": 8716.36,
+      "pnl_basis": "EXACT_MT5_CLOSED_PNL_0P01_LOT"
+    },
+    "regime_composites": {
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c",
+      "pnl_basis": "DUKASCOPY_RAW_TICK_STRESS_0P01_LOT_EQUIVALENT",
+      "definitions": [
+        {
+          "specialist_id": "R2_DOWNTREND",
+          "composite_id": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1",
+          "expected_trades": 118,
+          "expected_stress_net_r": 65.9902567308215
+        },
+        {
+          "specialist_id": "R3_COMPRESSION",
+          "composite_id": "R3_COMPRESSION_RELEASE_TRI_MODE_V1",
+          "expected_trades": 118,
+          "expected_stress_net_r": 44.65064714595399
+        }
+      ]
+    },
+    "r4_chop": {
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793",
+      "expected_trades": 125,
+      "expected_stress_net_r": 41.89643598860509,
+      "pnl_basis": "DUKASCOPY_RAW_TICK_STRESS_0P01_LOT_EQUIVALENT"
+    },
+    "r5_transition": {
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+      "router_attempt": 27135,
+      "expected_trades": 330,
+      "expected_stress_net_r": 14.241946994545739,
+      "pnl_basis": "DUKASCOPY_RAW_TICK_ROUTED_STRESS_0P01_LOT_EQUIVALENT"
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "normalized_ledger": "FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+    "individual_csv": "FIVE_SPECIALIST_INDIVIDUAL_WINDOWS_V1.csv",
+    "combined_csv": "FIVE_SPECIALIST_COMBINED_WINDOWS_V1.csv",
+    "markdown": "FIVE_SPECIALIST_WINDOW_REPORT_V1.md",
+    "manifest": "FIVE_SPECIALIST_WINDOW_REPORT_V1_MANIFEST.json"
+  },
+  "research_controls": {
+    "historical_development_evidence_only": true,
+    "combined_result_is_additive": true,
+    "shared_risk_engine_applied": false,
+    "floating_equity_drawdown_calculated": false,
+    "execution_authorized": false,
+    "training_authorized": false
+  }
+}
