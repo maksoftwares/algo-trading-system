@@ -1,0 +1,33 @@
+{
+  "files": {
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_CANDIDATES.parquet": {
+      "bytes": 71482,
+      "sha256": "ad2751c618cb5c291f13c41c548fab854700fb7237f68b96cac7c0570be0d878"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_CANDIDATE_MANIFEST.json": {
+      "bytes": 5201,
+      "sha256": "c4a19bc5029f4a4d494358c5cf921a0c9987f91eb01d0b48279a810be58cafdf"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_CONTRACT_LOCK.json": {
+      "bytes": 42389,
+      "sha256": "7053cd38017ae2d7a4bc228e8458012575fcfdff0d4b9f3342c6cbcf6cbbc34b"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_METRICS.csv": {
+      "bytes": 1558,
+      "sha256": "5a5aacbd81c9e2037b0b32f16c029caf430815b16a4031fe2b4622607910fa8f"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_RESULT.json": {
+      "bytes": 1292,
+      "sha256": "78dee4865a7b6f169e1b6e40a6df9b46b03d7b8f8b5100b7ced2289428608759"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_RESULT.md": {
+      "bytes": 645,
+      "sha256": "0e39d696b2ff5850fa4029e5aa7e9742cbf83983297a62dd79d4cc6895435325"
+    },
+    "CHOP_FAILED_REVERSION_RAWTICK_V25_TRADES.parquet": {
+      "bytes": 40471,
+      "sha256": "1db6bbe6db9f317cee543a8e3cba9c6b82f078d5b0298cbde380d0f2db6e0fd9"
+    }
+  },
+  "schema_version": "xauusd_chop_failed_reversion_rawtick_v25_artifacts"
+}

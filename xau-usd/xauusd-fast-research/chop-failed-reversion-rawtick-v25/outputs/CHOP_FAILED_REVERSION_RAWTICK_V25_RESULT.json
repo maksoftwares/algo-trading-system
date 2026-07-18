@@ -1,0 +1,38 @@
+{
+  "authorization": {
+    "execution_authorized": false,
+    "prospective_shadow_required": true,
+    "raw_tick_result_can_be_independent_holdout": false,
+    "research_only": true,
+    "selected_after_origin_outcomes": true,
+    "training_authorized": false
+  },
+  "candidate_rows": 1006,
+  "contract_sha256": "c1d4845d02af48d699217976582e3ca4faca301347d03c325692a6288df7dfaa",
+  "decision": "NO_RAW_TICK_ECONOMIC_CHOP_CANDIDATE",
+  "execution_audit": {
+    "fixed_horizon_trades": 9,
+    "maximum_horizon_delay_minutes": 0.1254,
+    "rejections": {
+      "COOLDOWN": 7,
+      "ENTRY_SPREAD_R": 135,
+      "POSITION_OVERLAP": 733
+    },
+    "stop_slippage_trades": 69,
+    "stop_trades": 0,
+    "target_trades": 53
+  },
+  "independent_signal_parity": {
+    "direction_equal": true,
+    "independent_signal_sha256": "2b2377d4f0c388a505c059d2e621e19aeb91fc2faea681c8b4b70e493466d44b",
+    "mask_equal": true,
+    "reference_signal_sha256": "2b2377d4f0c388a505c059d2e621e19aeb91fc2faea681c8b4b70e493466d44b"
+  },
+  "origin_attempt": 39583,
+  "origin_m5_trades": 131,
+  "origin_raw_signals": 1986,
+  "schema_version": "xauusd_chop_failed_reversion_rawtick_v25",
+  "selection_adjusted_pass": false,
+  "selection_adjusted_pvalue": 1.0,
+  "trade_rows": 131
+}
