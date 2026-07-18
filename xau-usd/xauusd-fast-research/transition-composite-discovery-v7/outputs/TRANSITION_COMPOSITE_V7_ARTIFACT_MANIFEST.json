@@ -1,0 +1,33 @@
+{
+  "files": {
+    "TRANSITION_COMPOSITE_V7_CONTRACT_LOCK.json": {
+      "bytes": 9451,
+      "sha256": "c1c7530fb93ab2a9ddf5561928638b030e20e6ff428e6f85a7616aa4dcae9de4"
+    },
+    "TRANSITION_COMPOSITE_V7_MANIFEST.csv": {
+      "bytes": 1492,
+      "sha256": "dae2afefc9004ad28148812905a270c03edd817b451460ab53ff0d4dcdb45073"
+    },
+    "TRANSITION_COMPOSITE_V7_MANIFEST_EVIDENCE.json": {
+      "bytes": 1802,
+      "sha256": "639fe7aa3209f11204f8362ea29a0f9a0ac64ae4cd914dc4c827d6fc77545c2f"
+    },
+    "TRANSITION_COMPOSITE_V7_METRICS.csv": {
+      "bytes": 19197,
+      "sha256": "1e0461e4a4257b5891a39faea47e2e3ae599ffd509c58cd8cbebbdc4c1da1ae1"
+    },
+    "TRANSITION_COMPOSITE_V7_RESULT.json": {
+      "bytes": 2909,
+      "sha256": "860f66571b2576ce0d5fc7e1c31e476a9f27ca138dd4a4574413ed5bae7dd1e8"
+    },
+    "TRANSITION_COMPOSITE_V7_RESULT.md": {
+      "bytes": 561,
+      "sha256": "420cc4b718a4b7e99a9f6ebe54ae148f539b71930d064848f0f470698ddb9592"
+    },
+    "TRANSITION_COMPOSITE_V7_TRADES.parquet": {
+      "bytes": 146686,
+      "sha256": "9a2cd9d740962129763ed0c5b3c5f11fd77a8d41d2c0390b48cf0be26b5aaeed"
+    }
+  },
+  "schema_version": "xauusd_transition_composite_v7_artifacts"
+}
