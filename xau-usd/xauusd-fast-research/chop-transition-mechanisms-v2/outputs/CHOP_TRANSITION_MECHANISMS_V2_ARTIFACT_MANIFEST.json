@@ -1,0 +1,29 @@
+{
+  "files": {
+    "CHOP_TRANSITION_MECHANISMS_V2_CONTRACT_LOCK.json": {
+      "bytes": 59126,
+      "sha256": "26121da07a232600301abe8c0e81e1ee42018b7d4628e0c0180de16909a4dbc4"
+    },
+    "CHOP_TRANSITION_MECHANISMS_V2_MANIFEST.csv": {
+      "bytes": 465411,
+      "sha256": "e6493d44a1e242f9297d1058970665728f0187d21a23e0752138a3f705c3a8dc"
+    },
+    "CHOP_TRANSITION_MECHANISMS_V2_METRICS.csv": {
+      "bytes": 1980234,
+      "sha256": "b738474919e03680268193dac273d276b6054faec893844a36aebc85864f6d83"
+    },
+    "CHOP_TRANSITION_MECHANISMS_V2_RESULT.json": {
+      "bytes": 1953,
+      "sha256": "05ed8891886e0f125c6c8fb2ba0a728e68c20d7b692f3add566343dd949d1a73"
+    },
+    "CHOP_TRANSITION_MECHANISMS_V2_RESULT.md": {
+      "bytes": 713,
+      "sha256": "a35027dbce19309e2650490bd4343225feacb458f007ff52615a4932858e4d32"
+    },
+    "CHOP_TRANSITION_MECHANISMS_V2_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_chop_transition_mechanisms_v2_artifacts"
+}
