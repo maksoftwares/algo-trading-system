@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "R2_DOWNTREND_PORTABILITY_V2_DEFINITION_LOCK.json": {
+      "bytes": 114499,
+      "sha256": "0b6c184c394f6dffb9206b79473e13e96ad61cd808ccdcdc37bdf2f47a031674"
+    },
+    "R2_DOWNTREND_PORTABILITY_V2_METRICS.csv": {
+      "bytes": 5385,
+      "sha256": "f85faff4d21d803c01ceaa107b0874337630782a728b3268b891214108ff0b75"
+    },
+    "R2_DOWNTREND_PORTABILITY_V2_OUTCOMES_OPENED.json": {
+      "bytes": 425,
+      "sha256": "2b3d979bfb00b8a44420eeae1a1e2cefa078048fde8bc22fbd534eae0c261e1a"
+    },
+    "R2_DOWNTREND_PORTABILITY_V2_RESULT.json": {
+      "bytes": 15730,
+      "sha256": "809aa2a2f438677a4b93a6236f80a043923ca744444068c3113dd414685dd599"
+    },
+    "R2_DOWNTREND_PORTABILITY_V2_RESULT.md": {
+      "bytes": 1855,
+      "sha256": "3f84fa980d35db64bb70637ba4dbf67fc9e2b40be8c587cd09b4b50562c66927"
+    },
+    "R2_DOWNTREND_PORTABILITY_V2_TRADES.parquet": {
+      "bytes": 160946,
+      "sha256": "8e0f0d00b62147010a0af290ba7b1c5beb5526b8a059f6442266a293153a6216"
+    }
+  },
+  "execution_authorized": false,
+  "schema_version": "xauusd_r2_downtrend_artifacts_v2",
+  "training_authorized": false
+}

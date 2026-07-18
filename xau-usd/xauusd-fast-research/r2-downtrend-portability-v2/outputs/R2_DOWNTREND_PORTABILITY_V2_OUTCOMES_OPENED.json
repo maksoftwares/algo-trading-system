@@ -1,0 +1,11 @@
+{
+  "broker_action_performed": false,
+  "databento_used": false,
+  "definition_contract_sha256": "99446023b1db6dfb66d1c0aa764631fafed547b6cf85cca550f390adc3e2cf4f",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T06:32:46.797341+00:00",
+  "paid_data_request_made": false,
+  "schema_version": "xauusd_r2_downtrend_outcomes_opened_v2",
+  "single_outcome_opening": true,
+  "training_authorized": false
+}

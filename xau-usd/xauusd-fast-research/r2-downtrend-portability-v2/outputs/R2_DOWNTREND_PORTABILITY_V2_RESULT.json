@@ -1,0 +1,447 @@
+{
+  "attempts": [
+    {
+      "attempt_no": 11114,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1",
+      "engine": "H1_PULLBACK_REJECTION",
+      "mechanism_family": "R2_H1_FAILED_RALLY_PULLBACK",
+      "server_hour_end_exclusive": 24,
+      "server_hour_start": 0
+    },
+    {
+      "attempt_no": 11115,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_SERVER05_18_V1",
+      "engine": "H1_PULLBACK_REJECTION",
+      "mechanism_family": "R2_H1_FAILED_RALLY_PULLBACK",
+      "server_hour_end_exclusive": 19,
+      "server_hour_start": 5
+    },
+    {
+      "attempt_no": 11116,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR45_V1",
+      "engine": "M5_IMPULSE_RETEST",
+      "mechanism_family": "R2_M5_DOWNSIDE_IMPULSE_RETEST",
+      "minimum_m5_atr": 4.5
+    },
+    {
+      "attempt_no": 11117,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR50_V1",
+      "engine": "M5_IMPULSE_RETEST",
+      "mechanism_family": "R2_M5_DOWNSIDE_IMPULSE_RETEST",
+      "minimum_m5_atr": 5.0
+    }
+  ],
+  "boundary_candidates_removed": 1,
+  "broker_action_performed": false,
+  "campaign_attempts_before_v1": 11113,
+  "candidate_rows": 1052,
+  "candidate_rows_by_id": {
+    "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1": 547,
+    "R2_H1_PULLBACK_BODY58_SERVER05_18_V1": 365,
+    "R2_M5_IMPULSE_RETEST_ATR45_V1": 75,
+    "R2_M5_IMPULSE_RETEST_ATR50_V1": 65
+  },
+  "completed_utc": "2026-07-18T06:33:14.571098+00:00",
+  "cumulative_campaign_attempts": 11117,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1",
+    "timeframes": {
+      "D1": {
+        "first": "2009-12-31T22:00:00+00:00",
+        "last": "2026-07-01T21:00:00+00:00",
+        "rows": 4263
+      },
+      "H1": {
+        "first": "2010-01-01T00:00:00+00:00",
+        "last": "2026-07-01T00:00:00+00:00",
+        "rows": 98216
+      },
+      "H4": {
+        "first": "2009-12-31T22:00:00+00:00",
+        "last": "2026-07-01T01:00:00+00:00",
+        "rows": 25527
+      },
+      "M5": {
+        "first": "2010-01-01T00:00:00+00:00",
+        "last": "2026-07-01T00:00:00+00:00",
+        "rows": 1176817
+      }
+    }
+  },
+  "databento_used": false,
+  "decision": "NO_R2_DOWNTREND_SPECIALIST_SURVIVOR",
+  "definition_contract_sha256": "99446023b1db6dfb66d1c0aa764631fafed547b6cf85cca550f390adc3e2cf4f",
+  "distinct_survivors": [],
+  "execution_audit": {
+    "exit_reasons": {
+      "STOP": 3,
+      "STOP_SLIPPAGE": 524,
+      "TARGET": 368
+    },
+    "m5_both_thresholds_resolved_by_ticks": 0,
+    "maximum_entry_delay_ms": 6591,
+    "median_entry_delay_ms": 154.0,
+    "raw_tick_trades": 895
+  },
+  "execution_authorized": false,
+  "execution_rows": 895,
+  "metrics": [
+    {
+      "average_stress_r": -0.03279028238433869,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1",
+      "closed_drawdown_r": 49.70875975469792,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": false,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.5714285714285714,
+      "source_days": 2024,
+      "stress_net_r": -7.443394101244882,
+      "stress_pf": 0.9558518460497705,
+      "top_winners_removed_stress_net_r": -17.048332627003816,
+      "trades": 227,
+      "trades_per_source_day": 0.11215415019762846,
+      "window": "old_replication"
+    },
+    {
+      "average_stress_r": 0.0019053385545686554,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_SERVER05_18_V1",
+      "closed_drawdown_r": 30.717308229956622,
+      "daily_pvalue": 0.49446510272742056,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": false,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.2857142857142857,
+      "source_days": 2024,
+      "stress_net_r": 0.31438086150382816,
+      "stress_pf": 1.0026134168508243,
+      "top_winners_removed_stress_net_r": -9.275668639127481,
+      "trades": 165,
+      "trades_per_source_day": 0.08152173913043478,
+      "window": "old_replication"
+    },
+    {
+      "average_stress_r": 0.0,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR45_V1",
+      "closed_drawdown_r": 0.0,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.0,
+      "source_days": 2024,
+      "stress_net_r": 0.0,
+      "stress_pf": 0.0,
+      "top_winners_removed_stress_net_r": 0.0,
+      "trades": 0,
+      "trades_per_source_day": 0.0,
+      "window": "old_replication"
+    },
+    {
+      "average_stress_r": 0.0,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR50_V1",
+      "closed_drawdown_r": 0.0,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.0,
+      "source_days": 2024,
+      "stress_net_r": 0.0,
+      "stress_pf": 0.0,
+      "top_winners_removed_stress_net_r": 0.0,
+      "trades": 0,
+      "trades_per_source_day": 0.0,
+      "window": "old_replication"
+    },
+    {
+      "average_stress_r": -0.024049910640135067,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1",
+      "closed_drawdown_r": 21.098351778348096,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": false,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.5714285714285714,
+      "source_days": 1865,
+      "stress_net_r": -3.968235255622286,
+      "stress_pf": 0.9671592384860885,
+      "top_winners_removed_stress_net_r": -13.540245655439525,
+      "trades": 165,
+      "trades_per_source_day": 0.08847184986595175,
+      "window": "predevelopment_confirmation"
+    },
+    {
+      "average_stress_r": -0.07800356881367818,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_SERVER05_18_V1",
+      "closed_drawdown_r": 24.036161870201223,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": false,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.42857142857142855,
+      "source_days": 1865,
+      "stress_net_r": -9.282424688827703,
+      "stress_pf": 0.8963531093135793,
+      "top_winners_removed_stress_net_r": -18.838569070916524,
+      "trades": 119,
+      "trades_per_source_day": 0.06380697050938337,
+      "window": "predevelopment_confirmation"
+    },
+    {
+      "average_stress_r": -1.1496704813749508,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR45_V1",
+      "closed_drawdown_r": 1.1496704813749508,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.0,
+      "source_days": 1865,
+      "stress_net_r": -1.1496704813749508,
+      "stress_pf": 0.0,
+      "top_winners_removed_stress_net_r": 0.0,
+      "trades": 1,
+      "trades_per_source_day": 0.0005361930294906167,
+      "window": "predevelopment_confirmation"
+    },
+    {
+      "average_stress_r": 0.0,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR50_V1",
+      "closed_drawdown_r": 0.0,
+      "daily_pvalue": 1.0,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 1.0,
+      "positive_active_year_share": 0.0,
+      "source_days": 1865,
+      "stress_net_r": 0.0,
+      "stress_pf": 0.0,
+      "top_winners_removed_stress_net_r": 0.0,
+      "trades": 0,
+      "trades_per_source_day": 0.0,
+      "window": "predevelopment_confirmation"
+    },
+    {
+      "average_stress_r": 0.16324438501162736,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1",
+      "closed_drawdown_r": 8.80052227034017,
+      "daily_pvalue": 0.2184395482945359,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": true,
+        "top_winners_removed_positive": true
+      },
+      "gate_pass": false,
+      "holm_pvalue": 0.4368790965890718,
+      "positive_active_year_share": 0.5,
+      "source_days": 1244,
+      "stress_net_r": 12.896306415918561,
+      "stress_pf": 1.2473532659575528,
+      "top_winners_removed_stress_net_r": 3.2788101075812035,
+      "trades": 79,
+      "trades_per_source_day": 0.0635048231511254,
+      "window": "source_period_diagnostic"
+    },
+    {
+      "average_stress_r": 0.14701933730020394,
+      "candidate_id": "R2_H1_PULLBACK_BODY58_SERVER05_18_V1",
+      "closed_drawdown_r": 11.740089492437725,
+      "daily_pvalue": 0.25599025985595625,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "gate_pass": false,
+      "holm_pvalue": 0.4368790965890718,
+      "positive_active_year_share": 0.5,
+      "source_days": 1244,
+      "stress_net_r": 7.497986202310401,
+      "stress_pf": 1.2243331941524218,
+      "top_winners_removed_stress_net_r": -2.0826317085468733,
+      "trades": 51,
+      "trades_per_source_day": 0.0409967845659164,
+      "window": "source_period_diagnostic"
+    },
+    {
+      "average_stress_r": 0.7032891797426949,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR45_V1",
+      "closed_drawdown_r": 4.347426264806497,
+      "daily_pvalue": 0.030534310586909093,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": true,
+        "top_winners_removed_positive": true
+      },
+      "gate_pass": false,
+      "holm_pvalue": 0.12213724234763637,
+      "positive_active_year_share": 1.0,
+      "source_days": 1244,
+      "stress_net_r": 33.05459144790666,
+      "stress_pf": 2.592557035809789,
+      "top_winners_removed_stress_net_r": 23.393090193540004,
+      "trades": 47,
+      "trades_per_source_day": 0.03778135048231511,
+      "window": "source_period_diagnostic"
+    },
+    {
+      "average_stress_r": 0.5990693008962225,
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR50_V1",
+      "closed_drawdown_r": 6.565461680607756,
+      "daily_pvalue": 0.06780896866677888,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": true,
+        "top_winners_removed_positive": true
+      },
+      "gate_pass": false,
+      "holm_pvalue": 0.20342690600033664,
+      "positive_active_year_share": 1.0,
+      "source_days": 1244,
+      "stress_net_r": 24.561841336745122,
+      "stress_pf": 2.2492009385960157,
+      "top_winners_removed_stress_net_r": 14.900340082378467,
+      "trades": 41,
+      "trades_per_source_day": 0.03295819935691318,
+      "window": "source_period_diagnostic"
+    }
+  ],
+  "paid_data_request_made": false,
+  "parameter_search_count": 0,
+  "policy_trade_rows": 895,
+  "qualified_candidates": [],
+  "rejection_counts": {
+    "NO_TIMELY_TICK_ENTRY": 27,
+    "SPREAD_PRICE_LIMIT": 21,
+    "SPREAD_R_LIMIT": 2,
+    "STOP_CEILING_EXCEEDED": 107
+  },
+  "research_only": true,
+  "schema_version": "xauusd_r2_downtrend_portability_v2",
+  "single_outcome_opening": true,
+  "source_period_mt5_comparison": [
+    {
+      "candidate_id": "R2_H1_PULLBACK_BODY58_ALL_HOURS_V1",
+      "dukascopy_stress_profit_factor": 1.2473532659575528,
+      "dukascopy_trades": 79,
+      "mt5_profit_factor": 1.8446,
+      "mt5_trades": 86,
+      "mt5_variant": "r2_h1_m5_body58"
+    },
+    {
+      "candidate_id": "R2_H1_PULLBACK_BODY58_SERVER05_18_V1",
+      "dukascopy_stress_profit_factor": 1.2243331941524218,
+      "dukascopy_trades": 51,
+      "mt5_profit_factor": 2.3893,
+      "mt5_trades": 63,
+      "mt5_variant": "r2_h1_m5_body58_hours05_18"
+    },
+    {
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR45_V1",
+      "dukascopy_stress_profit_factor": 2.592557035809789,
+      "dukascopy_trades": 47,
+      "mt5_profit_factor": 2.7226,
+      "mt5_trades": 59,
+      "mt5_variant": "r2_impulse_body45_atr45"
+    },
+    {
+      "candidate_id": "R2_M5_IMPULSE_RETEST_ATR50_V1",
+      "dukascopy_stress_profit_factor": 2.2492009385960157,
+      "dukascopy_trades": 41,
+      "mt5_profit_factor": 2.8614,
+      "mt5_trades": 55,
+      "mt5_variant": "r2_impulse_body45_atr50"
+    }
+  ],
+  "training_authorized": false
+}
