@@ -1,0 +1,107 @@
+{
+  "schema_version": "xauusd_transition_weighted_rawtick_confirmation_v9",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "old_replay_root": "out-of-era-replication-v1/dukascopy-replay",
+    "raw_tick_root": "raw/XAUUSD",
+    "raw_tick_start_utc": "2016-07-01T00:00:00Z",
+    "raw_manifest_start_utc": "2019-07-01T00:00:00Z",
+    "raw_tick_manifest_count": 84,
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "macro_source_campaign": {
+    "directory": "../macro-regime-routing-v1",
+    "config": "config/macro_regime_routing_v1.json",
+    "contract_lock": "outputs/MACRO_REGIME_ROUTING_V1_CONTRACT_LOCK.json",
+    "manifest": "outputs/MACRO_REGIME_ROUTING_V1_MANIFEST.csv",
+    "metrics": "outputs/MACRO_REGIME_ROUTING_V1_METRICS.csv",
+    "result": "outputs/MACRO_REGIME_ROUTING_V1_RESULT.json"
+  },
+  "residual_source_campaign": {
+    "directory": "../crossasset-residual-regime-campaign-v6",
+    "config": "config/crossasset_residual_regime_campaign_v6.json",
+    "contract_lock": "outputs/CROSSASSET_RESIDUAL_V6_CONTRACT_LOCK.json",
+    "manifest": "outputs/CROSSASSET_RESIDUAL_V6_MANIFEST.csv",
+    "metrics": "outputs/CROSSASSET_RESIDUAL_V6_METRICS.csv",
+    "result": "outputs/CROSSASSET_RESIDUAL_V6_RESULT.json"
+  },
+  "portfolio_source": {
+    "directory": "../transition-weighted-portfolio-v8",
+    "config": "config/transition_weighted_portfolio_v8.json",
+    "contract_lock": "outputs/TRANSITION_WEIGHTED_V8_CONTRACT_LOCK.json",
+    "metrics": "outputs/TRANSITION_WEIGHTED_V8_METRICS.csv",
+    "result": "outputs/TRANSITION_WEIGHTED_V8_RESULT.json"
+  },
+  "portfolio": {
+    "origin_attempt_no": 25210,
+    "confirmation_attempt_no": 25238,
+    "tie_priority": "ATTEMPT_ASCENDING",
+    "weights": {
+      "23925": 1.0,
+      "24877": 0.25,
+      "24995": 0.75,
+      "25048": 0.75
+    },
+    "origin_selection_adjustment_count": 96
+  },
+  "execution": {
+    "maximum_entry_gap_minutes": 20,
+    "maximum_horizon_gap_hours": 72,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "ounces_at_lot_size": 1.0,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_trades_per_component_utc_day": 4,
+    "maximum_trades_per_portfolio_utc_day": 4,
+    "stop_fill_policy": "OBSERVED_EXECUTABLE_TICK_ON_CROSS",
+    "target_fill_policy": "LOCKED_TARGET_PRICE_ON_FIRST_CROSS",
+    "horizon_fill_policy": "FIRST_EXECUTABLE_TICK_AT_OR_AFTER_DEADLINE"
+  },
+  "windows": {
+    "era_2019_2021": ["2019-07-01T00:00:00Z", "2021-04-01T00:00:00Z"],
+    "era_2021_2023": ["2021-04-01T00:00:00Z", "2023-01-01T00:00:00Z"],
+    "era_2023_2024": ["2023-01-01T00:00:00Z", "2024-10-01T00:00:00Z"],
+    "era_2024_2026": ["2024-10-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "economic_gates": {
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "minimum_stress_pf_each_era": 1.10,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_total_stress_pf": 1.25,
+    "maximum_closed_drawdown_r": 25.0,
+    "top_winners_removed": 5,
+    "minimum_top_winners_removed_net_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "candidates": "TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet",
+    "candidate_manifest": "TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATE_MANIFEST.json",
+    "contract_lock": "TRANSITION_WEIGHTED_RAWTICK_V9_CONTRACT_LOCK.json",
+    "component_trades": "TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet",
+    "portfolio_trades": "TRANSITION_WEIGHTED_RAWTICK_V9_PORTFOLIO_TRADES.parquet",
+    "metrics": "TRANSITION_WEIGHTED_RAWTICK_V9_METRICS.csv",
+    "result_json": "TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.json",
+    "result_markdown": "TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.md",
+    "artifact_manifest": "TRANSITION_WEIGHTED_RAWTICK_V9_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "selected_after_v8_outcomes": true,
+    "historical_periods_are_discovery_only": true,
+    "raw_tick_result_can_be_independent_holdout": false,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
+
