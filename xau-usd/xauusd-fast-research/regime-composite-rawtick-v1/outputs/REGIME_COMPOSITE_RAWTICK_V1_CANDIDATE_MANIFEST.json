@@ -1,0 +1,84 @@
+{
+  "candidate_sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b",
+  "components": [
+    {
+      "first_signal_time": "2010-01-21T09:00:00+00:00",
+      "last_signal_time": "2026-06-11T09:00:00+00:00",
+      "origin_attempt": 11142,
+      "rows": 134
+    },
+    {
+      "first_signal_time": "2010-01-21T08:00:00+00:00",
+      "last_signal_time": "2026-03-18T12:00:00+00:00",
+      "origin_attempt": 11266,
+      "rows": 34
+    },
+    {
+      "first_signal_time": "2010-06-01T01:00:00+00:00",
+      "last_signal_time": "2026-04-21T20:00:00+00:00",
+      "origin_attempt": 12183,
+      "rows": 140
+    },
+    {
+      "first_signal_time": "2010-06-01T01:00:00+00:00",
+      "last_signal_time": "2026-04-21T20:00:00+00:00",
+      "origin_attempt": 12222,
+      "rows": 221
+    },
+    {
+      "first_signal_time": "2010-06-01T09:00:00+00:00",
+      "last_signal_time": "2026-04-21T17:00:00+00:00",
+      "origin_attempt": 12389,
+      "rows": 129
+    }
+  ],
+  "composites": [
+    {
+      "attempt_no": 15118,
+      "component_attempts": [
+        11142,
+        11266
+      ],
+      "composite_id": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1",
+      "priority": "ORIGIN_ATTEMPT_ASCENDING",
+      "regime_owner": "DOWNTREND",
+      "subset_search_count": 15
+    },
+    {
+      "attempt_no": 15119,
+      "component_attempts": [
+        12183,
+        12222,
+        12389
+      ],
+      "composite_id": "R3_COMPRESSION_RELEASE_TRI_MODE_V1",
+      "priority": "ORIGIN_ATTEMPT_ASCENDING",
+      "regime_owner": "COMPRESSION",
+      "subset_search_count": 7
+    }
+  ],
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "feature_rows": 97765,
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "h1_rows": 97765,
+    "h4_rows": 21548,
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "execution_authorized": false,
+  "first_scheduled_entry_time": "2010-01-21T08:00:00+00:00",
+  "first_signal_time": "2010-01-21T08:00:00+00:00",
+  "last_scheduled_entry_time": "2026-06-11T09:00:00+00:00",
+  "last_signal_time": "2026-06-11T09:00:00+00:00",
+  "raw_outcomes_opened": false,
+  "rows": 658,
+  "schema_version": "xauusd_regime_composite_rawtick_v1_candidates",
+  "training_authorized": false
+}

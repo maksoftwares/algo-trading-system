@@ -1,0 +1,4 @@
+outputs/*.csv -diff
+outputs/*.json -diff
+outputs/*.parquet -diff
+
