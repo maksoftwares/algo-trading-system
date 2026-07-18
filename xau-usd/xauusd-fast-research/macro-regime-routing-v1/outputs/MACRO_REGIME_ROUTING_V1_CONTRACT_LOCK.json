@@ -1,0 +1,140 @@
+{
+  "attempt_count": 1000,
+  "attempt_first": 23120,
+  "attempt_last": 24119,
+  "contract_sha256": "6cd7ed706fa838db9a7a58f0aa6f5c667174dbaddd365cf066819302a9f8f026",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 28103,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v1/src/campaign.py",
+      "sha256": "09df77cf8df14a8b3043c95f93bdf31aac43d37bce1b37c2902bb8676621bc94"
+    },
+    {
+      "bytes": 2626,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v2/src/correction.py",
+      "sha256": "77491fa726d75b077ddffaaa6dc712fda187333bad60b8987bc60ab355ac94df"
+    },
+    {
+      "bytes": 6109,
+      "path": "xau-usd/xauusd-fast-research/intraday-macro-specialists-v1/src/data.py",
+      "sha256": "9f45b1ab3866dd47ad282048475b9a39bb2825ddb2eb878c4592ec0f7b1add1f"
+    },
+    {
+      "bytes": 24027,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/src/router.py",
+      "sha256": "0f8f6153d4b52634c623edd1655c5c91a03cede6490ca48be08f8b49852ad424"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    }
+  ],
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 40257937,
+      "path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    },
+    {
+      "bytes": 977,
+      "path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+      "sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+    }
+  ],
+  "manifest_sha256": "c98e791a2d8b93d6a1daa9c713e1817a3d079c0d8c3c5db59541c7f8c91178f3",
+  "package_files": [
+    {
+      "bytes": 3244,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/PREREGISTRATION.md",
+      "sha256": "b48d8b7755d2c8cf043b29df6d3e1d9b9c1d661bcfe6d83083c7f967191219a4"
+    },
+    {
+      "bytes": 61,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/requirements.txt",
+      "sha256": "ba60104d721ad680e363cc8505e527b3a3ce6175006435b4378cb89a6a87cdb9"
+    },
+    {
+      "bytes": 1441,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/generate_manifest.py",
+      "sha256": "04c28311a85f181a6a22a6fef7eda340d4e2b1cc0b4d38f32549f8257940570a"
+    },
+    {
+      "bytes": 4076,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/lock_contract.py",
+      "sha256": "a30fa452dd6e9512609701f67361592cd3147eeeccd4de8580839b0b577a6124"
+    },
+    {
+      "bytes": 12563,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/run_screen.py",
+      "sha256": "a40bd379f54cb92e43c1ed0afdf9280eb9262e7cbaf5161840c5502fe98f3b52"
+    },
+    {
+      "bytes": 5472,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/config/macro_regime_routing_v1.json",
+      "sha256": "be1c9ab8b462e4128b1afc8d23f479152045048b957640b8af39d02f064c7612"
+    },
+    {
+      "bytes": 45,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/__init__.py",
+      "sha256": "4b94afa64c4132cdead5b598eb36e8e74e7f912d25134b8e1347b1f30724b568"
+    },
+    {
+      "bytes": 20215,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/campaign.py",
+      "sha256": "501b607eb524540005401aa3e1fb2b48f6d0a38a53cbf48ecac37fd0d0b9652d"
+    },
+    {
+      "bytes": 3636,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/foundation.py",
+      "sha256": "4f157df9d2fd9028790a76b788456068cb8d865de4d8a223492a39dd3e0c47e7"
+    },
+    {
+      "bytes": 6457,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/tests/test_campaign.py",
+      "sha256": "9fac553e12bd5e4825b6763d603b88b1ed5a653e5bab03f0e4304c4ae63a51fd"
+    }
+  ],
+  "research_controls": {
+    "broker_action_performed": false,
+    "broker_spread_calibration_changes_execution": false,
+    "campaign_attempts_before_v1": 23119,
+    "databento_used": false,
+    "exact_raw_tick_confirmation_required": true,
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "manifest_coverage_uses_no_outcomes": true,
+    "paid_data_request_made": false,
+    "prospective_shadow_required": true,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "shock_is_abstain": true,
+    "training_authorized": false
+  },
+  "schema_version": "xauusd_macro_regime_routing_v1_contract_lock"
+}
