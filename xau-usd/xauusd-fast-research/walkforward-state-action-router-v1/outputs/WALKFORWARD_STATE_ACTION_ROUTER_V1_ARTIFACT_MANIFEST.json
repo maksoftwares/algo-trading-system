@@ -1,0 +1,37 @@
+{
+  "files": {
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_CONTRACT_LOCK.json": {
+      "bytes": 59794,
+      "sha256": "b4d004975b344732742e9534a42d2f1fafc90fe6213a600e55b04c4ccc773208"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_DIAGNOSTICS.csv": {
+      "bytes": 989735,
+      "sha256": "651945aa1989f032ff6aba59715e034814919ba7f21dcf4abb146f72704a9b15"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_MANIFEST.csv": {
+      "bytes": 102993,
+      "sha256": "18c0b953f1f67b0122cf54d904075dd1be674ab12eda5ec682675c0815dd720f"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_METRICS.csv": {
+      "bytes": 547622,
+      "sha256": "43686e834b6b15d55c42b2fbf2df9067c67b6d5da3303137953e1660f1b8e62a"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.json": {
+      "bytes": 4203,
+      "sha256": "6b851608a7ef6714a7b53cd88f3da2b5d11f26a6a8ead4d76d803f503ea38aba"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.md": {
+      "bytes": 850,
+      "sha256": "678b0bdff0ad29778de53e69422a318da7557c29ec8dc3a372d968c286278482"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_SELECTED_TRADES.csv": {
+      "bytes": 88,
+      "sha256": "2f7b40c12e3270bb4c0a961e373188baf79844b7a8fe10848558d6269a71223f"
+    },
+    "WALKFORWARD_STATE_ACTION_ROUTER_V1_SHORTLIST.csv": {
+      "bytes": 1154,
+      "sha256": "4c230c8287e4e398f3570aea5787de148acecb81a7d9af5eaf3b5c2be09056d7"
+    }
+  },
+  "schema_version": "xauusd_walkforward_state_action_router_v1_artifacts"
+}

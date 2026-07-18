@@ -1,0 +1,122 @@
+{
+  "attempt_first": 22120,
+  "attempt_last": 23119,
+  "attempts_completed": 1000,
+  "authorization": {
+    "exact_raw_tick_confirmation_required": true,
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "implementation_parity_required": true,
+    "prospective_shadow_required": true,
+    "research_only": true,
+    "shock_is_abstain": true,
+    "training_authorized": false
+  },
+  "clock_audit": {
+    "maximum_next_bar_gap_minutes": 4590.0,
+    "minimum_next_bar_gap_minutes": 0.0,
+    "negative_next_bar_gaps": 0,
+    "unit": "ns",
+    "zero_next_bar_gaps": 387994
+  },
+  "contract_sha256": "9ded9a808e74be5759a3d90d3035e259d74daf4a6624a4307d10c189b6446f4a",
+  "cumulative_campaign_attempts": 23119,
+  "data_evidence": {
+    "continuous_rows": 1176817,
+    "execution_source": "RAW_DUKASCOPY_BID_ASK_TICKS",
+    "feature_rows": 391945,
+    "first_bar_start_utc": "2010-01-01T00:00:00+00:00",
+    "first_feature_time": "2010-01-01T00:15:00+00:00",
+    "h4_rows": 21548,
+    "last_bar_end_utc": "2026-07-01T00:00:00+00:00",
+    "last_feature_time": "2026-07-01T00:00:00+00:00",
+    "m15_rows": 391945,
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_rows": 708538,
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "old_rows": 468279,
+    "storage_root": "C:\\DukascopyTickDataFoundationV1"
+  },
+  "decision": "NO_WALKFORWARD_STATE_ACTION_ROUTER_V1_ECONOMIC_FINALIST",
+  "economic_pass_rows": 0,
+  "economic_shortlist_rows": 0,
+  "label_evidence": [
+    {
+      "decision_rows": 24872,
+      "first_signal_time": "2010-02-04T16:00:00+00:00",
+      "geometry_id": "C_G1_BALANCED",
+      "last_signal_time": "2026-06-19T03:00:00+00:00",
+      "paired_action_rows": 12922,
+      "paired_decisions": 6461,
+      "regime_owner": "CHOP"
+    },
+    {
+      "decision_rows": 24872,
+      "first_signal_time": "2010-02-04T16:00:00+00:00",
+      "geometry_id": "C_G2_ROTATION",
+      "last_signal_time": "2026-06-19T03:00:00+00:00",
+      "paired_action_rows": 20642,
+      "paired_decisions": 10321,
+      "regime_owner": "CHOP"
+    },
+    {
+      "decision_rows": 24872,
+      "first_signal_time": "2010-01-19T15:00:00+00:00",
+      "geometry_id": "C_G3_EXTENDED",
+      "last_signal_time": "2026-06-19T03:00:00+00:00",
+      "paired_action_rows": 28048,
+      "paired_decisions": 14024,
+      "regime_owner": "CHOP"
+    },
+    {
+      "decision_rows": 43215,
+      "first_signal_time": "2010-01-08T17:00:00+00:00",
+      "geometry_id": "T_G1_FAST",
+      "last_signal_time": "2026-06-30T20:00:00+00:00",
+      "paired_action_rows": 24428,
+      "paired_decisions": 12214,
+      "regime_owner": "TRANSITION"
+    },
+    {
+      "decision_rows": 43215,
+      "first_signal_time": "2010-01-04T15:00:00+00:00",
+      "geometry_id": "T_G2_STANDARD",
+      "last_signal_time": "2026-06-30T19:00:00+00:00",
+      "paired_action_rows": 49368,
+      "paired_decisions": 24684,
+      "regime_owner": "TRANSITION"
+    },
+    {
+      "decision_rows": 43215,
+      "first_signal_time": "2010-01-04T09:00:00+00:00",
+      "geometry_id": "T_G3_EXTENDED",
+      "last_signal_time": "2026-06-30T14:00:00+00:00",
+      "paired_action_rows": 66416,
+      "paired_decisions": 33208,
+      "regime_owner": "TRANSITION"
+    }
+  ],
+  "regime_summary": [
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.0,
+      "best_whole_stress_pf": 1.7297498347793776,
+      "economic_passes": 0,
+      "fdr_economic_passes": 0,
+      "maximum_oos_trades": 63,
+      "regime_owner": "CHOP"
+    },
+    {
+      "attempts": 500,
+      "best_minimum_era_stress_pf": 0.8225515454323106,
+      "best_whole_stress_pf": "Infinity",
+      "economic_passes": 0,
+      "fdr_economic_passes": 0,
+      "maximum_oos_trades": 343,
+      "regime_owner": "TRANSITION"
+    }
+  ],
+  "schema_version": "xauusd_walkforward_state_action_router_v1",
+  "statistical_finalist_rows": 0
+}
