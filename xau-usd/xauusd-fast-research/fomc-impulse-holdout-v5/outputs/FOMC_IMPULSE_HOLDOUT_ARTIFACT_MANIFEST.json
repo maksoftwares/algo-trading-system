@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "FOMC_IMPULSE_HOLDOUT_CANDIDATES.parquet": {
+      "bytes": 21905,
+      "sha256": "17f4f6ec706fc2c7947a2bbca1db72215138c01752f338d7a467bcce7332e51b"
+    },
+    "FOMC_IMPULSE_HOLDOUT_CANDIDATE_MANIFEST.json": {
+      "bytes": 974,
+      "sha256": "c23061035511ffc81aa03364116758c4c9fef568c424bb131db25a75d58aa817"
+    },
+    "FOMC_IMPULSE_HOLDOUT_CONTRACT_LOCK.json": {
+      "bytes": 11663,
+      "sha256": "45cc16c1a8a08061bd977bed7adb26b07bdb8b95de590d2a0c95bd63ba2d7f54"
+    },
+    "FOMC_IMPULSE_HOLDOUT_DIAGNOSTICS.csv": {
+      "bytes": 594,
+      "sha256": "33cd4811c843783d8d0c7088ae4a2ad52ebf02fe23000fe744cdd0a897f8cf0b"
+    },
+    "FOMC_IMPULSE_HOLDOUT_ECONOMIC_SURVIVORS.csv": {
+      "bytes": 37,
+      "sha256": "2bc85e58cc40b2e6dc2c3bd502c2ebae9e7b6062c1109b1247dff0c0988f964c"
+    },
+    "FOMC_IMPULSE_HOLDOUT_EXECUTION_AUDIT.json": {
+      "bytes": 292,
+      "sha256": "ffedd4cd4a64abec51aebb53236d5dfad72dd4ff8f342de3c694664b550c0265"
+    },
+    "FOMC_IMPULSE_HOLDOUT_METRICS.csv": {
+      "bytes": 1039,
+      "sha256": "0eab9a131809e923fb9d160d0ea76efe4b0dcef33fbf0d8db0f3f8cfd6dd3c4f"
+    },
+    "FOMC_IMPULSE_HOLDOUT_OUTCOMES.parquet": {
+      "bytes": 18027,
+      "sha256": "a14829255b356386e47f763138dd6ae2bb549c144343459f3ec22d3a343513c8"
+    },
+    "FOMC_IMPULSE_HOLDOUT_OUTCOMES_OPENED.json": {
+      "bytes": 299,
+      "sha256": "a7612a2796f247b92b8099c3e125b917697256743e1ecb5329730979ec8c33e6"
+    },
+    "FOMC_IMPULSE_HOLDOUT_RESULT.json": {
+      "bytes": 1105,
+      "sha256": "2fdfaf31d9149c584a0624e6607708aabc3ad63a886c5bd4bddb5edfa02983d7"
+    },
+    "FOMC_IMPULSE_HOLDOUT_RESULT.md": {
+      "bytes": 744,
+      "sha256": "875b7bddc5624872d11e9b7424ce5c06ba6474176b9a4b73d15d35e812eb4c27"
+    }
+  },
+  "contract_sha256": "952b283b102866256c20c81aa65084b2a747f43b3d718cf5cbd15f5c2986cae1",
+  "execution_authorized": false,
+  "training_authorized": false
+}

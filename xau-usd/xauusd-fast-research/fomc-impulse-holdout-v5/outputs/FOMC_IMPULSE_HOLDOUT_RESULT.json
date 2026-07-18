@@ -1,0 +1,34 @@
+{
+  "attempt_first": 11111,
+  "attempt_last": 11111,
+  "candidate_rows": 35,
+  "contract_sha256": "952b283b102866256c20c81aa65084b2a747f43b3d718cf5cbd15f5c2986cae1",
+  "cumulative_campaign_attempts": 11111,
+  "databento_used": false,
+  "decision": "NO_FOMC_IMPULSE_V5_HOLDOUT_SURVIVOR",
+  "deployment_feasible": false,
+  "economic_survivor_rows": 0,
+  "event_rows": 36,
+  "execution_audit": {
+    "candidate_rows": 35,
+    "max_hold_outcomes": 0,
+    "outcome_rows": 16,
+    "raw_tick_threshold_ordering": true,
+    "rejection_counts": {
+      "SPREAD_CEILING_EXCEEDED": 1,
+      "STOP_CEILING_EXCEEDED": 18
+    },
+    "rejection_rows": 19,
+    "stop_outcomes": 9,
+    "target_outcomes": 7
+  },
+  "execution_authorized": false,
+  "outcome_rows": 16,
+  "paid_data_request_made": false,
+  "parent_confirmation_remained_sealed": true,
+  "related_holdout_is_blind_exam": false,
+  "schema_version": "xauusd_fomc_impulse_holdout_v5",
+  "training_authorized": false,
+  "window_end_exclusive_utc": "2026-07-01T00:00:00+00:00",
+  "window_start_utc": "2022-01-01T00:00:00+00:00"
+}

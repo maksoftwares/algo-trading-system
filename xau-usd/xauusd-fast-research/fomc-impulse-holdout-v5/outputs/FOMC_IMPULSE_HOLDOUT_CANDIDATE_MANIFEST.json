@@ -1,0 +1,28 @@
+{
+  "candidate_rows": 35,
+  "candidate_sha256": "17f4f6ec706fc2c7947a2bbca1db72215138c01752f338d7a467bcce7332e51b",
+  "contains_price_outcomes": false,
+  "databento_used": false,
+  "direction_rows": {
+    "LONG": 16,
+    "SHORT": 19
+  },
+  "first_decision_utc": "2022-01-26T19:45:00+00:00",
+  "future_regime_feature_rows": 0,
+  "last_decision_utc": "2026-06-17T18:35:00+00:00",
+  "outcome_like_columns": [],
+  "paid_data_request_made": false,
+  "parent_candidate_sha256": "5c9f31054fdfa2328a9b7a160ab0079652c1e1396c279650c3231042849c1d08",
+  "parent_contract_sha256": "743621b30139446119a98c753e2efb24439bad79a23b76cddfedb13d87c78d6c",
+  "policy_id": "EVENT_FOMC_IMPULSE_RR2_HOLDOUT_V5",
+  "regime_rows": {
+    "CHOP": 13,
+    "COMPRESSION": 5,
+    "TRANSITION": 3,
+    "TREND_DOWN": 5,
+    "TREND_UP": 5,
+    "UNSAFE_SHOCK": 4
+  },
+  "schema_version": "xauusd_fomc_impulse_holdout_candidate_manifest_v5",
+  "strategy_scoring_performed": false
+}

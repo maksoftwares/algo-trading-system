@@ -1,0 +1,8 @@
+{
+  "attempt_no": 11111,
+  "contract_sha256": "952b283b102866256c20c81aa65084b2a747f43b3d718cf5cbd15f5c2986cae1",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T01:33:26.141365+00:00",
+  "schema_version": "xauusd_fomc_impulse_holdout_open_v5",
+  "training_authorized": false
+}
