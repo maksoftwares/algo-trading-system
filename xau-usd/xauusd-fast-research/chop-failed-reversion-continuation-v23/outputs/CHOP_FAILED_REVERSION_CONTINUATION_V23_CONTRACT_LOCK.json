@@ -1,0 +1,229 @@
+{
+  "contract_sha256": "e1df1e63d0f349ef7b17feb5833e3203a92e4cdb65647cc33637380fa64a50c2",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 30086,
+      "path": "xau-usd/xauusd-fast-research/m5-microstructure-mechanics-v1/src/campaign.py",
+      "sha256": "a2e7419e90643b70b4bf8a91919c875db77927d295453a0dbc5f2889d342a073"
+    },
+    {
+      "bytes": 4901,
+      "path": "xau-usd/xauusd-fast-research/chop-m15-stationarity-antisignal-v22/outputs/CHOP_M15_STATIONARITY_ANTISIGNAL_V22_RESULT.json",
+      "sha256": "3ce54ab71f5259fca68d05e73e60db2ffac4fd1a285f4ebdfea1682865a362a2"
+    },
+    {
+      "bytes": 1087585,
+      "path": "xau-usd/xauusd-fast-research/chop-m15-stationarity-antisignal-v22/outputs/CHOP_M15_STATIONARITY_ANTISIGNAL_V22_METRICS.csv",
+      "sha256": "67c26fffce9759457dfdb130925bbefe9d841d810159123a1d0067325e4ecb66"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "cooldown_bars": 1,
+    "current_account_risk_usd": 8.165487,
+    "entry_policy": "NEXT_CONTIGUOUS_M5_SIDE_CORRECT_OPEN",
+    "extra_execution_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_policy_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "risk_basis": "LATEST_COMPLETED_H1_ATR14",
+    "same_bar_priority": "STOP_FIRST",
+    "stress_slippage_r": 0.05
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "features": {
+    "atr_period": 14,
+    "baseline_bars": 288,
+    "baseline_minimum_bars": 96,
+    "h1_atr_period": 14,
+    "state_atr_period": 14
+  },
+  "geometries": {
+    "BALANCED": {
+      "hold_bars": 72,
+      "stop_atr": 0.6,
+      "target_r": 1.5
+    },
+    "EXTENDED": {
+      "hold_bars": 144,
+      "stop_atr": 1.0,
+      "target_r": 2.0
+    },
+    "FAST": {
+      "hold_bars": 24,
+      "stop_atr": 0.4,
+      "target_r": 1.0
+    },
+    "TREND": {
+      "hold_bars": 144,
+      "stop_atr": 0.8,
+      "target_r": 1.25
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3876,
+    "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/outputs/CHOP_FAILED_REVERSION_CONTINUATION_V23_MANIFEST_EVIDENCE.json",
+    "sha256": "5316d363f5ce21e4d69df06c4182f7b08dbe42ab8c34897f4c2c8aed6a2eea16"
+  },
+  "manifest_file": {
+    "bytes": 380093,
+    "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/outputs/CHOP_FAILED_REVERSION_CONTINUATION_V23_MANIFEST.csv",
+    "sha256": "ac6f7aca276c091d2d217d22a5d1bf29d777d0176bae8f6bceb0f9efda6d8913"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2770,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/PREREGISTRATION.md",
+      "sha256": "5d8cc064a51536f2a78f3cfc1a02acda45b67409cefe6bde0c43f08566d4ff39"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 5271,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/config/chop_failed_reversion_continuation_v23.json",
+      "sha256": "83ab7d205c9c042ad43771251b53d2f7c4150214de352bde93855e0f716c3a34"
+    },
+    {
+      "bytes": 75,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/src/__init__.py",
+      "sha256": "c889d8ae906cee526de5647a7b3166ac0b81bfe4c9d2148712b8cde6087a9137"
+    },
+    {
+      "bytes": 27667,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/src/campaign.py",
+      "sha256": "b774fb8cf0874b507bec7e3eb5d6dea4666afbbf38a161cd9b0fd5c61d1126c2"
+    },
+    {
+      "bytes": 3850,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/prepare_manifest.py",
+      "sha256": "8b862af8aaa7982f32b6f08eb74e8dd4a1599f271de2407dc65de39229ce1c56"
+    },
+    {
+      "bytes": 4684,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/lock_contract.py",
+      "sha256": "a974d09832116f289a304ac01fb89c393a8e91fe28fd4d7b1d1710319c3974e6"
+    },
+    {
+      "bytes": 12723,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/run_screen.py",
+      "sha256": "b6a719cf7a1aed57841d805d8160c73aecdc736e9c722f605a561ecaf4744a1b"
+    },
+    {
+      "bytes": 7033,
+      "path": "xau-usd/xauusd-fast-research/chop-failed-reversion-continuation-v23/tests/test_campaign.py",
+      "sha256": "287be1bc632f2a4832588fd054a34cb01393739229a06d972d29425513887e8d"
+    }
+  ],
+  "paid_data_used": false,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_failed_reversion_v23_contract",
+  "selection": {
+    "attempt_first": 38239,
+    "attempt_last": 39238,
+    "attempts_per_mechanic": 200,
+    "candidate_definitions_per_mechanic": 1000,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-failed-reversion-continuation-v23-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_M15_VARIANCE_RATIO_EXTREME_CONTINUATION",
+      "CHOP_M15_COUNTERFLOW_EXTREME_CONTINUATION",
+      "CHOP_M15_Z_EXPANSION_CONTINUATION",
+      "CHOP_M15_PERSISTENT_EXTREME_CONTINUATION",
+      "CHOP_M15_STATIONARITY_BREAK_CONTINUATION"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "total_attempts": 1000
+  },
+  "training_authorized": false,
+  "v22_stationarity_antisignal_outcomes_exposed": true,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
