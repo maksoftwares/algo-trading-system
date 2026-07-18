@@ -1,0 +1,189 @@
+{
+  "schema_version": "xauusd_walkforward_state_action_router_v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "old_replay_root": "out-of-era-replication-v1/dukascopy-replay",
+    "old_final_contract": "../out-of-era-specialist-replication-v2/outputs/OUT_OF_ERA_SPECIALIST_FINAL_CONTRACT_LOCK.json",
+    "old_final_contract_sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78",
+    "new_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "new_feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+    "new_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "new_source_digest": "4282fffda04d3b23218d4064b67e036af15b9b2937df3f0fb434d68bfb6ae738",
+    "new_expected_rows": 708538,
+    "raw_tick_root": "raw/XAUUSD",
+    "raw_tick_start_utc": "2016-07-01T00:00:00Z",
+    "raw_tick_manifest_count": 120,
+    "raw_tick_manifest_digest": "8888b21b78f431b4c33618f02030fed0227b2268c356becb66f083ae9ccabf32",
+    "start_utc": "2010-01-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "windows": {
+    "oos_2012_2015": ["2012-01-01T00:00:00Z", "2015-01-01T00:00:00Z"],
+    "oos_2015_2018": ["2015-01-01T00:00:00Z", "2018-01-01T00:00:00Z"],
+    "oos_2018_2022": ["2018-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "oos_2022_2026": ["2022-01-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "regime": {
+    "atr_period": 14,
+    "adx_period": 14,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "atr_percentile_lookback": 504,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "chop_adx_max": 25.0,
+    "chop_er_max": 0.38,
+    "chop_displacement_atr_max": 1.75,
+    "chop_width_atr_min": 1.0,
+    "chop_width_atr_max": 8.0,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "signal": {
+    "atr_period": 14,
+    "ema_fast_period": 20,
+    "ema_slow_period": 80,
+    "efficiency_lookback": 18,
+    "prior_range_bars": 18
+  },
+  "owners": {
+    "CHOP": "CHOP",
+    "TRANSITION": "TRANSITION_UNKNOWN"
+  },
+  "decision": {
+    "cadence_minutes": 60,
+    "completed_bar_end_minute": 0
+  },
+  "feature_bins": {
+    "aligned_momentum": [-4.0, -1.5, -0.25, 0.25, 1.5, 4.0],
+    "aligned_vwap": [-3.0, -1.0, 0.0, 1.0, 3.0],
+    "range_location": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "h4_adx": [15.0, 22.0, 30.0],
+    "h4_er": [0.05, 0.15, 0.30],
+    "atr_ratio": [0.75, 1.0, 1.35],
+    "spread_atr": [0.12, 0.20, 0.32, 0.50],
+    "quote_intensity": [0.5, 1.0, 2.0],
+    "body": [0.2, 0.5, 0.8],
+    "transition_age": [8.0, 24.0, 64.0, 160.0, 400.0],
+    "range_atr": [0.5, 0.8, 1.2, 1.8],
+    "aligned_ema": [-2.0, -0.5, 0.0, 0.5, 2.0]
+  },
+  "schemas": {
+    "CHOP": {
+      "C01_SESSION_VWAP": ["session", "aligned_vwap"],
+      "C02_SESSION_LOCATION_CANDLE": ["session", "range_location", "aligned_candle"],
+      "C03_MOMENTUM_VWAP": ["aligned_momentum", "aligned_vwap"],
+      "C04_H4_STATE_VWAP": ["h4_adx", "h4_er", "aligned_vwap"],
+      "C05_SESSION_VOL_LOCATION": ["session", "atr_ratio", "range_location"],
+      "C06_WEEKDAY_SESSION_VWAP": ["weekday", "session", "aligned_vwap"],
+      "C07_LIQUIDITY_MOMENTUM": ["quote_intensity", "spread_atr", "aligned_momentum"],
+      "C08_BODY_CANDLE_LOCATION": ["body", "aligned_candle", "range_location"],
+      "C09_SESSION_EMA_H4ER": ["session", "aligned_ema", "h4_er"],
+      "C10_SESSION_RANGE_MOMENTUM": ["session", "range_atr", "aligned_momentum"]
+    },
+    "TRANSITION": {
+      "T01_ANCESTRY_AGE_MOMENTUM": ["ancestry", "transition_age", "aligned_momentum"],
+      "T02_ANCESTRY_SESSION_VWAP": ["ancestry", "session", "aligned_vwap"],
+      "T03_AGE_ADX_MOMENTUM": ["transition_age", "h4_adx", "aligned_momentum"],
+      "T04_AGE_H4ER_EMA": ["transition_age", "h4_er", "aligned_ema"],
+      "T05_ANCESTRY_LOCATION_CANDLE": ["ancestry", "range_location", "aligned_candle"],
+      "T06_SESSION_VOL_MOMENTUM": ["session", "atr_ratio", "aligned_momentum"],
+      "T07_LIQUIDITY_MOMENTUM": ["quote_intensity", "spread_atr", "aligned_momentum"],
+      "T08_ANCESTRY_BODY_MOMENTUM": ["ancestry", "body", "aligned_momentum"],
+      "T09_AGE_RANGE_VWAP": ["transition_age", "range_atr", "aligned_vwap"],
+      "T10_WEEKDAY_SESSION_MOMENTUM": ["weekday", "session", "aligned_momentum"]
+    }
+  },
+  "geometries": {
+    "CHOP": {
+      "C_G1_BALANCED": {"stop_atr": 1.0, "target_r": 1.0, "maximum_hold_hours": 4.0},
+      "C_G2_ROTATION": {"stop_atr": 1.25, "target_r": 1.5, "maximum_hold_hours": 6.0},
+      "C_G3_EXTENDED": {"stop_atr": 1.5, "target_r": 2.0, "maximum_hold_hours": 8.0}
+    },
+    "TRANSITION": {
+      "T_G1_FAST": {"stop_atr": 1.0, "target_r": 1.5, "maximum_hold_hours": 6.0},
+      "T_G2_STANDARD": {"stop_atr": 1.5, "target_r": 2.0, "maximum_hold_hours": 12.0},
+      "T_G3_EXTENDED": {"stop_atr": 2.0, "target_r": 2.5, "maximum_hold_hours": 18.0}
+    }
+  },
+  "walk_forward": {
+    "oos_start_utc": "2012-01-01T00:00:00Z",
+    "oos_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "evaluation_block_months": 6,
+    "purge_hours": 24,
+    "history_modes": ["EXPANDING", "ROLLING_4Y", "ROLLING_8Y"],
+    "minimum_global_action_rows": 250
+  },
+  "selection": {
+    "attempt_first": 22120,
+    "attempt_last": 23119,
+    "total_attempts": 1000,
+    "attempts_per_owner": 500,
+    "attempts_per_schema": 50,
+    "minimum_cell_rows": [24, 48, 96, 160],
+    "prior_strength": [24.0, 64.0, 128.0],
+    "lcb_z": [0.5, 1.0, 1.5, 2.0],
+    "minimum_lcb_r": [0.0, 0.01, 0.025, 0.05],
+    "minimum_action_gap_r": [0.0, 0.01, 0.03],
+    "maximum_trades_per_utc_day": [2, 4, 6],
+    "maximum_finalists_per_schema": 3,
+    "false_discovery_rate": 0.10
+  },
+  "execution": {
+    "maximum_entry_gap_minutes": 20,
+    "maximum_horizon_gap_hours": 72,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "ounces_at_lot_size": 1.0,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "same_bar_priority": "STOP_FIRST",
+    "screen_exit": "PROTECTIVE_STOP_TARGET_OR_FIXED_HORIZON"
+  },
+  "economic_gates": {
+    "minimum_total_trades": 120,
+    "minimum_trades_each_era": 15,
+    "minimum_stress_pf_each_era": 1.10,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_total_stress_pf": 1.25,
+    "maximum_closed_drawdown_r": 30.0,
+    "top_winners_removed": 5,
+    "minimum_top_winners_removed_net_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "WALKFORWARD_STATE_ACTION_ROUTER_V1_CONTRACT_LOCK.json",
+    "manifest": "WALKFORWARD_STATE_ACTION_ROUTER_V1_MANIFEST.csv",
+    "metrics": "WALKFORWARD_STATE_ACTION_ROUTER_V1_METRICS.csv",
+    "shortlist": "WALKFORWARD_STATE_ACTION_ROUTER_V1_SHORTLIST.csv",
+    "selected_trades": "WALKFORWARD_STATE_ACTION_ROUTER_V1_SELECTED_TRADES.csv",
+    "diagnostics": "WALKFORWARD_STATE_ACTION_ROUTER_V1_DIAGNOSTICS.csv",
+    "result_json": "WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.json",
+    "result_markdown": "WALKFORWARD_STATE_ACTION_ROUTER_V1_RESULT.md",
+    "artifact_manifest": "WALKFORWARD_STATE_ACTION_ROUTER_V1_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v1": 22119,
+    "same_version_post_outcome_tuning_authorized": false,
+    "feature_bins_selected_without_outcomes": true,
+    "historical_periods_are_discovery_only": true,
+    "exact_raw_tick_confirmation_required": true,
+    "implementation_parity_required": true,
+    "prospective_shadow_required": true,
+    "shock_is_abstain": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
