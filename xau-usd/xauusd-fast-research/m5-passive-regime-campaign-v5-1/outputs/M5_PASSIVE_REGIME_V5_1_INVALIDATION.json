@@ -1,0 +1,26 @@
+{
+  "authorization": {
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "contract_file_sha256": "9679ce8653e3efecc794faa8238a0fe609fb0cfbdf304b25f18936dc08f5138c",
+  "contract_sha256": "1e590c845601c89703e78b674029345b72a9eb6829c2ef597eb4c14788083079",
+  "decision": "INVALIDATED_UNBOUNDED_MEMOIZATION_NO_QUANTITATIVE_INFERENCE",
+  "diagnosis": {
+    "available_physical_memory_gb_at_checkpoint": 11.1,
+    "cached_outcomes_at_last_checkpoint": 846283,
+    "last_reported_policy_checkpoint": 125,
+    "metrics_or_rankings_inspected": false,
+    "output_metrics_written": false,
+    "output_result_written": false,
+    "private_memory_gb_at_checkpoint": 2.49,
+    "root_cause": "The outcome memoization cache grew without a bound across all 1,000 policies and projected beyond safe machine memory.",
+    "working_set_gb_at_checkpoint": 1.39
+  },
+  "manifest_sha256": "938891405dc64b22b5e11378405c2bcf8d8af71df8839471f4febede0fc1595a",
+  "quantitative_inference_permitted": false,
+  "required_correction": "Keep strategy definitions and execution unchanged while clearing memoized outcomes after each fixed 25-policy block; prove cached and uncached output parity before opening outcomes.",
+  "schema_version": "xauusd_m5_passive_regime_v5_1_invalidation"
+}
