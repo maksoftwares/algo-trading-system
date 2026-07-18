@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_MICROSTRUCTURE_STATE_V16_CONTRACT_LOCK.json": {
+      "bytes": 8219,
+      "sha256": "3513f512b781d7874d8fb5ccd76000e7bb71b10185fc5a540571511333a541d6"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_MANIFEST.csv": {
+      "bytes": 286702,
+      "sha256": "c25a5d166666e14675c92b70a438f71639b9e3e71126abca0943ec9def4b9bd1"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_MANIFEST_EVIDENCE.json": {
+      "bytes": 3718,
+      "sha256": "f3f1a0310cc252a6497b03e32075322b776cf03b4dcfb91ae56919f282041220"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_METRICS.csv": {
+      "bytes": 982054,
+      "sha256": "02b36f980ef123cea8b46836b7312e774ab719c12ce5d207d9182e553eac3e77"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_RESULT.json": {
+      "bytes": 4828,
+      "sha256": "6a1ea809c239c0f4b6e5f6db0dade977425d52e39b05b26bef1e8054dafd2e62"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_RESULT.md": {
+      "bytes": 1945,
+      "sha256": "b15f289ac4fdfbe4faa66caeb77e0c1119311ce453572b071c812d0705f96f91"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_SELECTED_TRADES.parquet": {
+      "bytes": 309169,
+      "sha256": "b8b26d16c01af04f402ccd9eefcee566acc4b921904820e7bf4065b0372e1d16"
+    },
+    "CHOP_MICROSTRUCTURE_STATE_V16_SHORTLIST.csv": {
+      "bytes": 16034,
+      "sha256": "aaaa6a25c17a130ad6ec6bb448e123d6aba175b3d8b6337fdb6f0909a88beb0b"
+    }
+  },
+  "schema_version": "xauusd_chop_microstructure_state_v16_artifacts"
+}
