@@ -1,0 +1,183 @@
+{
+  "candidate_count": 2,
+  "candidate_identity_checks": {
+    "geometry_id": true,
+    "mechanic": true,
+    "parameters": true,
+    "regime_owner": true,
+    "variant_id": true
+  },
+  "contract_sha256": "b5c949622e48c9af2e18785034be66bc3bfd8172e0b8384a0469cd60ce180ef4",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 28103,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v1/src/campaign.py",
+      "sha256": "09df77cf8df14a8b3043c95f93bdf31aac43d37bce1b37c2902bb8676621bc94"
+    },
+    {
+      "bytes": 2626,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v2/src/correction.py",
+      "sha256": "77491fa726d75b077ddffaaa6dc712fda187333bad60b8987bc60ab355ac94df"
+    },
+    {
+      "bytes": 24027,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/src/router.py",
+      "sha256": "0f8f6153d4b52634c623edd1655c5c91a03cede6490ca48be08f8b49852ad424"
+    },
+    {
+      "bytes": 20215,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/campaign.py",
+      "sha256": "501b607eb524540005401aa3e1fb2b48f6d0a38a53cbf48ecac37fd0d0b9652d"
+    },
+    {
+      "bytes": 5723,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_CONTRACT_LOCK.json",
+      "sha256": "936987205152a4f02dab20d5cc280f2df3ecc43e7327eeda095d94a991f2da1a"
+    },
+    {
+      "bytes": 1083590,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_METRICS.csv",
+      "sha256": "82a0049d548c30e863ad039670a8d9a62e23bb7fcd77e99f54b21acdefdbb1bf"
+    },
+    {
+      "bytes": 7182,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/outputs/MACRO_REGIME_ROUTING_V1_RESULT.json",
+      "sha256": "b797961c26b27f37f506061cccc365a0778101183db8e587182ff25e541249c0"
+    }
+  ],
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 4631203,
+      "path": "research/xau-macro-transition-proxy-replication-v2/acquisition_manifest.json",
+      "sha256": "4611ea94d930929abfc7a196e0c2073408a598bdc831fd66ef06f3665ff91c1c"
+    },
+    {
+      "bytes": 207857,
+      "path": "research/xau-macro-transition-proxy-replication-v2/proxy_m15_closes_v2.parquet",
+      "sha256": "b545347652a9e0ea0bb9755db757147a6cc3476db8e1369f38c9c2edfaa6ff18"
+    },
+    {
+      "bytes": 2359,
+      "path": "research/xau-macro-transition-proxy-replication-v2/proxy_m15_closes_v2.manifest.json",
+      "sha256": "12b600afda1b1c5a6c1d1a62a55c27f9fbf4de7e146a017c7fc56574e87f7c8f"
+    },
+    {
+      "bytes": 3826,
+      "path": "research/xau-macro-transition-proxy-replication-v2/metadata/DOLLARIDXUSD.json",
+      "sha256": "b596ab8a33b3c2bf41e042e4d92e01d9e71220ae40793eb5d6530c2039339bec"
+    },
+    {
+      "bytes": 4103,
+      "path": "research/xau-macro-transition-proxy-replication-v2/metadata/TLTUSD.json",
+      "sha256": "0f0e9e3cc88663a8cece59d6fa31655303f56880638b7071dde284ec0cc6e445"
+    },
+    {
+      "bytes": 4100,
+      "path": "research/xau-macro-transition-proxy-replication-v2/metadata/IEFUSD.json",
+      "sha256": "34bc5070ecc305238a2a9358305ee0c8c26b4225a7efd4be6efd76bdea4899fb"
+    }
+  ],
+  "fixed_candidate": {
+    "attempt_no": 23925,
+    "geometry_id": "T_BALANCED",
+    "mechanic": "TRANS_ANCESTRY_MACRO_REACCELERATION",
+    "minimum_era_stress_pf": 1.0325402190201511,
+    "minimum_era_trades": 19,
+    "parameters_json": "{\"body_min\":0.2,\"geometry_id\":\"T_BALANCED\",\"gold_horizon\":\"H1\",\"hour_window\":\"ALL\",\"macro_key\":\"H1_D2\",\"maximum_alignment_atr\":0.25,\"pressure_min\":0.5,\"require_confirmation\":false,\"transition_age_max\":48}",
+    "regime_owner": "TRANSITION",
+    "variant_id": "00e072837bf6f6e2",
+    "whole_stress_net_r": 16.332272396425356,
+    "whole_stress_pf": 1.324280869930747,
+    "whole_trades": 92
+  },
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 4746,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/PREREGISTRATION.md",
+      "sha256": "a4bce15f6f7a4209907c17c59539d8feb30f01bdc90fc5dc3942460d51f96558"
+    },
+    {
+      "bytes": 72,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/requirements.txt",
+      "sha256": "f58348325a332b949e340924d8ecb924f3434c653b481bc4cfd3bd469a51fb5b"
+    },
+    {
+      "bytes": 5658,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/config/macro_transition_proxy_replication_v2.json",
+      "sha256": "7afd770fd762d1a73ed2d080e41a4e735f015d64792dd278dc218eccf2302518"
+    },
+    {
+      "bytes": 23218,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/src/proxy_data.py",
+      "sha256": "4b3883f03743d3a8023512e6df36751e7086b598894c18f4d6a42387841b5ac0"
+    },
+    {
+      "bytes": 8980,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/src/replication.py",
+      "sha256": "a730811a0cfb699a69fe0323b27ffeab7dc2fa6ea0c067f0f346e0f4627724f8"
+    },
+    {
+      "bytes": 4791,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/tests/test_proxy_data.py",
+      "sha256": "2675592f19b4fe68166d2d86b8eff5613a7ab963f450ce2288e2e122f3cda8ed"
+    },
+    {
+      "bytes": 4708,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/tests/test_replication.py",
+      "sha256": "f33ade9b356a5e8e82ff7d04845d622434ff053eb5396eb8a805a3a3e6a9ec6d"
+    },
+    {
+      "bytes": 3128,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/acquire_proxy_data.py",
+      "sha256": "c9ad98003845c651d12db3f23f558f24a8c5e3ac1f886e70fdc455fb9bc35ea0"
+    },
+    {
+      "bytes": 1025,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/prepare_proxy_cache.py",
+      "sha256": "226e473dd0a3171b32ebaa36220ba1f0f7451ef1fd4b99d58da68026e56add41"
+    },
+    {
+      "bytes": 7400,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/lock_contract.py",
+      "sha256": "882d45b3b25852cbaa6d3bb02565def3a6c4590a5f718e77935e393cf6be6a2a"
+    },
+    {
+      "bytes": 9604,
+      "path": "xau-usd/xauusd-fast-research/macro-transition-proxy-replication-v2/run_replication.py",
+      "sha256": "3d8cd24ce175eaf22cbfd947c9f532296097aaef99798e7b79830a328c1a71c1"
+    }
+  ],
+  "paid_data_used": false,
+  "parameter_sets_per_candidate": 1,
+  "proxy_symbols": [
+    "IEFUSD",
+    "TLTUSD"
+  ],
+  "schema_version": "xauusd_macro_transition_proxy_replication_v2_contract"
+}
