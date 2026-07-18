@@ -1,0 +1,126 @@
+{
+  "combined_replay": {
+    "mode": "MT5_REAL_TICK_COMBINED_EXECUTION_SCHEDULE_REPLAY",
+    "schedule": "outputs\\schedules\\FIVE_SPECIALIST_MT5_3M_ALL_SPECIALISTS_SCHEDULE.csv",
+    "schedule_rows": 6,
+    "schedule_sha256": "6253c431399acaa4e5c108231bff30d2958360a5177a37e69165017cedbb41a7",
+    "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_ALL_SPECIALISTS.ini",
+    "tester_config_sha256": "eb8965291c3d637cabd19f9c32a40f005604939098e6c3ba60f639c90a9fa925"
+  },
+  "mt5": {
+    "currency": "USD",
+    "deposit": 1000.0,
+    "fixed_lots": 0.01,
+    "leverage": 200,
+    "login": "1025742",
+    "model": 4,
+    "period": "M5",
+    "server": "Capital.ComMena-Demo",
+    "server_timezone": "Europe/Helsinki",
+    "shutdown_terminal": 1,
+    "symbol": "XAUUSD",
+    "terminal_root": "C:/MT5A1M5MomentumBacktest",
+    "visual": 0
+  },
+  "native_r1_components": [
+    {
+      "component_id": "R1_UPTREND_BOX",
+      "mode": "NATIVE_MT5_SIGNAL_GENERATION_REAL_TICKS",
+      "template": "C:/MT5A1M5MomentumBacktest/Config/A1XauM5Momentum_OWNER_GOAL_REGIME_ROUTER_V1_EXACT_202207_202606_XAUUSD_M5_router_v1_r1_long_box2_prevhealth.ini",
+      "template_sha256": "3d52e33afb4d7ec323c6c540b21b9f516e06d446de2f55f2a8ba5d0b39441222",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R1_UPTREND_BOX.ini",
+      "tester_config_sha256": "c28b9ec7019525713811898d652bc2fc7e27f94ee4451bbc956eb3c0f89b952f"
+    },
+    {
+      "component_id": "R1_UPTREND_PULLBACK",
+      "mode": "NATIVE_MT5_SIGNAL_GENERATION_REAL_TICKS",
+      "template": "C:/MT5A1M5MomentumBacktest/Config/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15.ini",
+      "template_sha256": "ce6218537800d4dc51705f32997d3b2ff29a8217fedc3fc7a091a7109991e5f6",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R1_UPTREND_PULLBACK.ini",
+      "tester_config_sha256": "6de0db250b10a0a8f727b8f092c4b9bef467422a3f48b8c377e1d1a79279746a"
+    }
+  ],
+  "replay_ea_source": {
+    "path": "mt5/FiveSpecialistSignalReplay.mq5",
+    "sha256": "62ece5409d10078ffbdf7aa38b7a7468c2fdd7749dec39b5b58109e0ab8ab324"
+  },
+  "replay_specialists": {
+    "R2_DOWNTREND": {
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "reference_net_usd": 149.29120423765187,
+      "schedule": "outputs\\schedules\\FIVE_SPECIALIST_MT5_3M_R2_DOWNTREND_SCHEDULE.csv",
+      "schedule_rows": 2,
+      "schedule_sha256": "f8768a1ea3b1ccb8cbbbd53569e7ee450a68f4a5a26bbdef3d2d961d72b2a5ec",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R2_DOWNTREND.ini",
+      "tester_config_sha256": "c29b38dcae350469228f222aca6d2226a500cbc3c82f9c6f54d2cc7f828dda9b"
+    },
+    "R3_COMPRESSION": {
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "reference_net_usd": 20.21598758974046,
+      "schedule": "outputs\\schedules\\FIVE_SPECIALIST_MT5_3M_R3_COMPRESSION_SCHEDULE.csv",
+      "schedule_rows": 2,
+      "schedule_sha256": "89105060856443d06a2adee5e0a0df70aa07f873e9cb33c84fc77bd59b80ec03",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R3_COMPRESSION.ini",
+      "tester_config_sha256": "f17698c74f6f69c786028114b4159d5784cc23e1bf80e7ae52561b6890d8844e"
+    },
+    "R4_CHOP": {
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "reference_net_usd": 0.0,
+      "schedule": "outputs\\schedules\\FIVE_SPECIALIST_MT5_3M_R4_CHOP_SCHEDULE.csv",
+      "schedule_rows": 0,
+      "schedule_sha256": "d366294a1fa75f0161dbe5c8ea40ab2df622915bafc851e4ebdd9753c3e67caa",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R4_CHOP.ini",
+      "tester_config_sha256": "fa6bd62564accb9123b1a2d9248562be6c55893864b72ddc62df6050f89f5558"
+    },
+    "R5_TRANSITION": {
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "reference_net_usd": 23.08098434785064,
+      "schedule": "outputs\\schedules\\FIVE_SPECIALIST_MT5_3M_R5_TRANSITION_SCHEDULE.csv",
+      "schedule_rows": 2,
+      "schedule_sha256": "e07d631b5077e8db7fd18ed9bb21b8e70cc58031ac7849a61a07671a787e5421",
+      "tester_config": "outputs\\tester_configs\\FIVE_SPECIALIST_MT5_3M_R5_TRANSITION.ini",
+      "tester_config_sha256": "3fe62e7038bc9187334ddc9b4f2d035b41e3d4c0da42c73e945e1117d246e36e"
+    }
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "demo_context_only": true,
+    "execution_or_training_authorized": false,
+    "native_signal_generation_parity_r1_only": true,
+    "r2_r5_are_execution_schedule_replays": true,
+    "tester_only": true
+  },
+  "schema_version": "xauusd_mt5_five_specialist_replay_v1",
+  "source_files": {
+    "r23_candidates": {
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+      "sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b"
+    },
+    "r23_trades": {
+      "path": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+      "sha256": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c"
+    },
+    "r4_candidates": {
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+      "sha256": "26b8c6e75957f3b33b966aa82bf05f4a21d41b4365a86543a8ad8391f1d084e4"
+    },
+    "r4_trades": {
+      "path": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793"
+    },
+    "r5_candidates": {
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet",
+      "sha256": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f"
+    },
+    "r5_trades": {
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e"
+    }
+  },
+  "window": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "start_utc": "2026-04-01T00:00:00Z",
+    "tester_from_date": "2026.04.01",
+    "tester_to_date": "2026.06.30"
+  }
+}

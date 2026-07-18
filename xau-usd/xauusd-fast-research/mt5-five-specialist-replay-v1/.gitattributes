@@ -1,0 +1,7 @@
+* text eol=lf
+*.ex5 binary
+*.mq5 -whitespace
+outputs/mt5_build/*.log binary
+outputs/mt5_reports/*.htm binary
+outputs/mt5_reports/*.png binary
+outputs/tester_configs/*.ini -whitespace

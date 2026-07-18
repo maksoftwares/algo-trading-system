@@ -1,0 +1,7 @@
+report_id,mode,history_quality,total_trades,net_profit_usd,gross_profit_usd,gross_loss_usd,profit_factor,expected_payoff_usd,balance_drawdown_max_usd,balance_drawdown_max_pct,equity_drawdown_max_usd,equity_drawdown_max_pct
+R1_UPTREND,NATIVE_MT5_TWO_COMPONENT_AGGREGATE,100% real ticks,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+R2_DOWNTREND,MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY,100% real ticks,2,130.57,174.86,-44.29,3.95,65.29,44.29,3.77,114.08,9.17
+R3_COMPRESSION,MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY,100% real ticks,2,-3.88,22.35,-26.23,0.85,-1.94,26.23,2.57,66.73,6.28
+R4_CHOP,MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY,100% real ticks,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+R5_TRANSITION,MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY,100% real ticks,2,54.24,61.91,-7.67,8.07,27.12,7.67,0.72,28.47,2.8
+ALL_SPECIALISTS,MT5_REAL_TICK_COMBINED_EXECUTION_SCHEDULE_REPLAY,100% real ticks,6,180.93,259.12,-78.19,3.31,30.16,44.29,3.61,114.08,8.81

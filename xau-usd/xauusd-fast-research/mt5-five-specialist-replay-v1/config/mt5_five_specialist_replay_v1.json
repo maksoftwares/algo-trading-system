@@ -1,0 +1,94 @@
+{
+  "schema_version": "xauusd_mt5_five_specialist_replay_v1",
+  "window": {
+    "start_utc": "2026-04-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "tester_from_date": "2026.04.01",
+    "tester_to_date": "2026.06.30"
+  },
+  "mt5": {
+    "terminal_root": "C:/MT5A1M5MomentumBacktest",
+    "login": "1025742",
+    "server": "Capital.ComMena-Demo",
+    "server_timezone": "Europe/Helsinki",
+    "symbol": "XAUUSD",
+    "period": "M5",
+    "model": 4,
+    "fixed_lots": 0.01,
+    "deposit": 1000.0,
+    "currency": "USD",
+    "leverage": 200,
+    "visual": 0,
+    "shutdown_terminal": 1
+  },
+  "native_r1": [
+    {
+      "component_id": "R1_UPTREND_BOX",
+      "template": "C:/MT5A1M5MomentumBacktest/Config/A1XauM5Momentum_OWNER_GOAL_REGIME_ROUTER_V1_EXACT_202207_202606_XAUUSD_M5_router_v1_r1_long_box2_prevhealth.ini",
+      "report": "FIVE_SPECIALIST_MT5_3M_R1_UPTREND_BOX",
+      "run_id": "BT_FIVE_SPECIALIST_3M_R1_BOX"
+    },
+    {
+      "component_id": "R1_UPTREND_PULLBACK",
+      "template": "C:/MT5A1M5MomentumBacktest/Config/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15.ini",
+      "report": "FIVE_SPECIALIST_MT5_3M_R1_UPTREND_PULLBACK",
+      "run_id": "BT_FIVE_SPECIALIST_3M_R1_PULLBACK"
+    }
+  ],
+  "sources": {
+    "r23_trades": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_COMPOSITE_TRADES.parquet",
+    "r23_candidates": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+    "r4_trades": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet",
+    "r4_candidates": "xau-usd/xauusd-fast-research/chop-three-mechanism-rawtick-v26/outputs/CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet",
+    "r5_trades": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+    "r5_candidates": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet"
+  },
+  "replay_specialists": [
+    {
+      "specialist_id": "R2_DOWNTREND",
+      "source": "r23",
+      "source_filter_column": "composite_id",
+      "source_filter_value": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1",
+      "magic": 936202,
+      "expected_schedule_rows": 2,
+      "reference_net_usd": 149.29120423765187
+    },
+    {
+      "specialist_id": "R3_COMPRESSION",
+      "source": "r23",
+      "source_filter_column": "composite_id",
+      "source_filter_value": "R3_COMPRESSION_RELEASE_TRI_MODE_V1",
+      "magic": 936203,
+      "expected_schedule_rows": 2,
+      "reference_net_usd": 20.21598758974046
+    },
+    {
+      "specialist_id": "R4_CHOP",
+      "source": "r4",
+      "magic": 936204,
+      "expected_schedule_rows": 0,
+      "reference_net_usd": 0.0
+    },
+    {
+      "specialist_id": "R5_TRANSITION",
+      "source": "r5",
+      "attempt_no": 27135,
+      "magic": 936205,
+      "expected_schedule_rows": 2,
+      "reference_net_usd": 23.08098434785064
+    }
+  ],
+  "combined_replay": {
+    "specialist_id": "ALL_SPECIALISTS",
+    "magic": 936299,
+    "expected_schedule_rows": 6
+  },
+  "research_controls": {
+    "tester_only": true,
+    "demo_context_only": true,
+    "broker_action_authorized": false,
+    "native_signal_generation_parity_r1_only": true,
+    "r2_r5_are_execution_schedule_replays": true,
+    "execution_or_training_authorized": false
+  }
+}

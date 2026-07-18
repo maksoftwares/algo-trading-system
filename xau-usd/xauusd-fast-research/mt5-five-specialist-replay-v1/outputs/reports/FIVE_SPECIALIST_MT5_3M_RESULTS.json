@@ -1,0 +1,238 @@
+{
+  "build_audit": {
+    "compile_log_sha256": "680c1c1b03912ed56f37b8723f17894b3ec242990aadf83d9c5ccdbe2b3a74f2",
+    "compile_result": "Result: 0 errors, 0 warnings",
+    "compiled_ex5_sha256": "f57cac9c7eb8ef1b98f0b79c3b40e41b002e9a9ceb682b00e9ddb3b5fe4fb41e",
+    "deployed_source_sha256": "62ece5409d10078ffbdf7aa38b7a7468c2fdd7749dec39b5b58109e0ab8ab324",
+    "package_source_sha256": "62ece5409d10078ffbdf7aa38b7a7468c2fdd7749dec39b5b58109e0ab8ab324"
+  },
+  "combined": {
+    "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_ALL_SPECIALISTS.htm",
+    "balance_drawdown_max_pct": 3.61,
+    "balance_drawdown_max_usd": 44.29,
+    "equity_drawdown_max_pct": 8.81,
+    "equity_drawdown_max_usd": 114.08,
+    "expected_payoff_usd": 30.16,
+    "gross_loss_usd": -78.19,
+    "gross_profit_usd": 259.12,
+    "history_quality": "100% real ticks",
+    "mode": "MT5_REAL_TICK_COMBINED_EXECUTION_SCHEDULE_REPLAY",
+    "net_profit_usd": 180.93,
+    "profit_factor": 3.31,
+    "report_id": "ALL_SPECIALISTS",
+    "source_sha256": "34edc232cd76d38b1a1e086101492c73826dfacf93bd08f35e47fc8c669bdef7",
+    "total_trades": 6
+  },
+  "five_specialists": [
+    {
+      "balance_drawdown_max_pct": 0.0,
+      "balance_drawdown_max_usd": 0.0,
+      "equity_drawdown_max_pct": 0.0,
+      "equity_drawdown_max_usd": 0.0,
+      "expected_payoff_usd": 0.0,
+      "gross_loss_usd": 0.0,
+      "gross_profit_usd": 0.0,
+      "history_quality": "100% real ticks",
+      "mode": "NATIVE_MT5_TWO_COMPONENT_AGGREGATE",
+      "net_profit_usd": 0.0,
+      "profit_factor": 0.0,
+      "report_id": "R1_UPTREND",
+      "total_trades": 0
+    },
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R2_DOWNTREND.htm",
+      "balance_drawdown_max_pct": 3.77,
+      "balance_drawdown_max_usd": 44.29,
+      "equity_drawdown_max_pct": 9.17,
+      "equity_drawdown_max_usd": 114.08,
+      "expected_payoff_usd": 65.29,
+      "gross_loss_usd": -44.29,
+      "gross_profit_usd": 174.86,
+      "history_quality": "100% real ticks",
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "net_profit_usd": 130.57,
+      "profit_factor": 3.95,
+      "report_id": "R2_DOWNTREND",
+      "source_sha256": "167e927bac03bbf02f2f2f477f8dbeeba594c90b6d0dd1d4507174890f592130",
+      "total_trades": 2
+    },
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R3_COMPRESSION.htm",
+      "balance_drawdown_max_pct": 2.57,
+      "balance_drawdown_max_usd": 26.23,
+      "equity_drawdown_max_pct": 6.28,
+      "equity_drawdown_max_usd": 66.73,
+      "expected_payoff_usd": -1.94,
+      "gross_loss_usd": -26.23,
+      "gross_profit_usd": 22.35,
+      "history_quality": "100% real ticks",
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "net_profit_usd": -3.88,
+      "profit_factor": 0.85,
+      "report_id": "R3_COMPRESSION",
+      "source_sha256": "3795a8de9a0bec75fd79b7d426a23e90f03ec95a178f0d8fe1341d1400cd3dbc",
+      "total_trades": 2
+    },
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R4_CHOP.htm",
+      "balance_drawdown_max_pct": 0.0,
+      "balance_drawdown_max_usd": 0.0,
+      "equity_drawdown_max_pct": 0.0,
+      "equity_drawdown_max_usd": 0.0,
+      "expected_payoff_usd": 0.0,
+      "gross_loss_usd": 0.0,
+      "gross_profit_usd": 0.0,
+      "history_quality": "100% real ticks",
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "net_profit_usd": 0.0,
+      "profit_factor": 0.0,
+      "report_id": "R4_CHOP",
+      "source_sha256": "d840325c31cbffa02224d8027a50a8654855404f4cf92ebc43709e7224669e0a",
+      "total_trades": 0
+    },
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R5_TRANSITION.htm",
+      "balance_drawdown_max_pct": 0.72,
+      "balance_drawdown_max_usd": 7.67,
+      "equity_drawdown_max_pct": 2.8,
+      "equity_drawdown_max_usd": 28.47,
+      "expected_payoff_usd": 27.12,
+      "gross_loss_usd": -7.67,
+      "gross_profit_usd": 61.91,
+      "history_quality": "100% real ticks",
+      "mode": "MT5_REAL_TICK_EXECUTION_SCHEDULE_REPLAY",
+      "net_profit_usd": 54.24,
+      "profit_factor": 8.07,
+      "report_id": "R5_TRANSITION",
+      "source_sha256": "c2e073cebda84d621eaf9116730e8c4881bac2501c61c48ac7981f2d7c827c6d",
+      "total_trades": 2
+    }
+  ],
+  "generated_at_utc": "2026-07-18T23:57:18.256579+00:00",
+  "mt5": {
+    "currency": "USD",
+    "deposit": 1000.0,
+    "fixed_lots": 0.01,
+    "leverage": 200,
+    "login": "1025742",
+    "model": 4,
+    "period": "M5",
+    "server": "Capital.ComMena-Demo",
+    "server_timezone": "Europe/Helsinki",
+    "shutdown_terminal": 1,
+    "symbol": "XAUUSD",
+    "terminal_root": "C:/MT5A1M5MomentumBacktest",
+    "visual": 0
+  },
+  "native_component_reports": [
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R1_UPTREND_BOX.htm",
+      "balance_drawdown_max_pct": 0.0,
+      "balance_drawdown_max_usd": 0.0,
+      "equity_drawdown_max_pct": 0.0,
+      "equity_drawdown_max_usd": 0.0,
+      "expected_payoff_usd": 0.0,
+      "gross_loss_usd": 0.0,
+      "gross_profit_usd": 0.0,
+      "history_quality": "100% real ticks",
+      "mode": "NATIVE_MT5_SIGNAL_GENERATION_REAL_TICKS",
+      "net_profit_usd": 0.0,
+      "profit_factor": 0.0,
+      "report_id": "R1_UPTREND_BOX",
+      "source_sha256": "5c5dbaafcecff7084f785eaf6c3d42b8920cf045a2a1795a245fd679dcfd6d88",
+      "total_trades": 0
+    },
+    {
+      "archived_report": "outputs/mt5_reports/FIVE_SPECIALIST_MT5_3M_R1_UPTREND_PULLBACK.htm",
+      "balance_drawdown_max_pct": 0.0,
+      "balance_drawdown_max_usd": 0.0,
+      "equity_drawdown_max_pct": 0.0,
+      "equity_drawdown_max_usd": 0.0,
+      "expected_payoff_usd": 0.0,
+      "gross_loss_usd": 0.0,
+      "gross_profit_usd": 0.0,
+      "history_quality": "100% real ticks",
+      "mode": "NATIVE_MT5_SIGNAL_GENERATION_REAL_TICKS",
+      "net_profit_usd": 0.0,
+      "profit_factor": 0.0,
+      "report_id": "R1_UPTREND_PULLBACK",
+      "source_sha256": "f8c20a39c201ffb1033af120ed2d26f09bb8604d0ea954003e0ad3cd87b5d396",
+      "total_trades": 0
+    }
+  ],
+  "reference_comparison": [
+    {
+      "difference_usd": -18.72,
+      "mt5_net_usd": 130.57,
+      "reference_net_usd": 149.29,
+      "report_id": "R2_DOWNTREND"
+    },
+    {
+      "difference_usd": -24.1,
+      "mt5_net_usd": -3.88,
+      "reference_net_usd": 20.22,
+      "report_id": "R3_COMPRESSION"
+    },
+    {
+      "difference_usd": 0.0,
+      "mt5_net_usd": 0.0,
+      "reference_net_usd": 0.0,
+      "report_id": "R4_CHOP"
+    },
+    {
+      "difference_usd": 31.16,
+      "mt5_net_usd": 54.24,
+      "reference_net_usd": 23.08,
+      "report_id": "R5_TRANSITION"
+    },
+    {
+      "difference_usd": -11.66,
+      "mt5_net_usd": 180.93,
+      "reference_net_usd": 192.59,
+      "report_id": "ALL_SPECIALISTS"
+    }
+  ],
+  "reference_net_usd": {
+    "R2_DOWNTREND": 149.29120423765187,
+    "R3_COMPRESSION": 20.21598758974046,
+    "R4_CHOP": 0.0,
+    "R5_TRANSITION": 23.08098434785064
+  },
+  "replay_audit": {
+    "ALL_SPECIALISTS": {
+      "missed": 0,
+      "opened": 6,
+      "scheduled": 6
+    },
+    "R2_DOWNTREND": {
+      "missed": 0,
+      "opened": 2,
+      "scheduled": 2
+    },
+    "R3_COMPRESSION": {
+      "missed": 0,
+      "opened": 2,
+      "scheduled": 2
+    },
+    "R4_CHOP": {
+      "missed": 0,
+      "opened": 0,
+      "scheduled": 0
+    },
+    "R5_TRANSITION": {
+      "missed": 0,
+      "opened": 2,
+      "scheduled": 2
+    }
+  },
+  "schema_version": "five_specialist_mt5_3m_results_v1",
+  "trades_per_weekday": 0.0923,
+  "verdict": "EXECUTION_PORTABILITY_EVIDENCE_ONLY_NOT_TRADING_AUTHORIZATION",
+  "window": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "start_utc": "2026-04-01T00:00:00Z",
+    "tester_from_date": "2026.04.01",
+    "tester_to_date": "2026.06.30"
+  },
+  "window_weekdays": 65
+}
