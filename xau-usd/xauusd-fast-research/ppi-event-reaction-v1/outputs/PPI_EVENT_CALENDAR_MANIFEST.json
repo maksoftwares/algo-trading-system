@@ -1,0 +1,17 @@
+{
+  "calendar_rows": 119,
+  "calendar_sha256": "f2edca1a8a87a874711446a8ed1592deb43d1a11228dbb240c6e20b71cbea6c6",
+  "contains_price_outcomes": false,
+  "created_utc": "2026-07-18T00:46:54.573171+00:00",
+  "databento_used": false,
+  "direct_bls_source_urls": 119,
+  "first_event_utc": "2016-07-14T12:30:00+00:00",
+  "free_text_transport_url": "https://r.jina.ai/https://www.bls.gov/bls/news-release/ppi.htm",
+  "last_event_utc": "2026-06-11T12:30:00+00:00",
+  "official_archive_url": "https://www.bls.gov/bls/news-release/ppi.htm",
+  "paid_data_request_made": false,
+  "raw_archive_sha256": "f800c50efbef0b52e69d67a32f8ec2195bd9df996950104bcbe97e3e0ea05aff",
+  "schema_version": "xauusd_ppi_event_calendar_manifest_v1",
+  "strategy_scoring_performed": false,
+  "transport_role": "read-only rendering of the official BLS index"
+}

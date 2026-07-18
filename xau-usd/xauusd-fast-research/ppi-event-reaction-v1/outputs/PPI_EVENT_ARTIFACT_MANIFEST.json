@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "BLS_PPI_ARCHIVE_INDEX.md": {
+      "bytes": 63711,
+      "sha256": "f800c50efbef0b52e69d67a32f8ec2195bd9df996950104bcbe97e3e0ea05aff"
+    },
+    "PPI_EVENT_CALENDAR.csv": {
+      "bytes": 21179,
+      "sha256": "f2edca1a8a87a874711446a8ed1592deb43d1a11228dbb240c6e20b71cbea6c6"
+    },
+    "PPI_EVENT_CALENDAR_MANIFEST.json": {
+      "bytes": 846,
+      "sha256": "1aaed4de60972bc79dfda1c85a5cfe10d6f4bc03b57e5bdb05a7c1fb65c42e5c"
+    },
+    "PPI_EVENT_CANDIDATES.parquet": {
+      "bytes": 41270,
+      "sha256": "4dee4ef9ec92ebf52c82b65dba5334300f6ca2f7584a4a07928238ba9009bb7b"
+    },
+    "PPI_EVENT_CANDIDATE_MANIFEST.json": {
+      "bytes": 903,
+      "sha256": "42fa752593f0518797958c299e83ec2aa69722c26725332ff14dfc3ca5017a11"
+    },
+    "PPI_EVENT_CONTRACT_LOCK.json": {
+      "bytes": 20193,
+      "sha256": "52ad0313bd78e2216316b0e854fc47ec66a5593e4af5bd24bc7eb0e1bb79cae9"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 641,
+      "sha256": "0c5c24a777dd3e6033c449c79090cc09e40f4ddcba47d4ad17a4f6774df4113a"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_EXECUTION_AUDIT.json": {
+      "bytes": 211,
+      "sha256": "44238929d4a9a484a8606cc5e2e9c0d75d123816f29f5b7ae2d7abc755049e10"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_METRICS.csv": {
+      "bytes": 1829,
+      "sha256": "2b82a2062f807cc41c7f67371ca5f62149b2cf273c9e317b32a279e1a05324b1"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_OUTCOMES.parquet": {
+      "bytes": 32443,
+      "sha256": "61d0d22a9a266dd2411d425f2940d8b4bb6bdb5736002ab52d4f18e5be221de0"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 306,
+      "sha256": "acaa247c5363faf139c0be5767da035208d365d9d435f3acd193f06460245414"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_RESULT.json": {
+      "bytes": 1111,
+      "sha256": "83e0c2e9030432a1257f8273db0454a054a3e3f1dcdb16ccd754c8f57f0e80e9"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_RESULT.md": {
+      "bytes": 875,
+      "sha256": "e1a3d3831c5adca6d9edb3aec12bde7aa99973641cd7834f14f2b84190440792"
+    },
+    "PPI_EVENT_HISTORICAL_DISCOVERY_SURVIVORS.csv": {
+      "bytes": 136,
+      "sha256": "8202aec00bd41e585d1a5dbc016fc7c09fc89ce4c67dfcb2934508bf54b1871b"
+    }
+  },
+  "contract_sha256": "7c7a2c317f9e1b9e2a137225260b27096747ba2e140028d94dfa6c921a4f072a",
+  "execution_authorized": false,
+  "training_authorized": false
+}

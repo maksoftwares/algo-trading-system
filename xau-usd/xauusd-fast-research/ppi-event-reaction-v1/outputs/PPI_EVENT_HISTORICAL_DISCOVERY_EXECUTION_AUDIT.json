@@ -1,0 +1,10 @@
+{
+  "candidate_rows": 92,
+  "outcome_rows": 90,
+  "raw_tick_threshold_ordering": true,
+  "rejection_counts": {
+    "SPREAD_CEILING_EXCEEDED": 1,
+    "SPREAD_R_EXCEEDED": 1
+  },
+  "rejection_rows": 2
+}

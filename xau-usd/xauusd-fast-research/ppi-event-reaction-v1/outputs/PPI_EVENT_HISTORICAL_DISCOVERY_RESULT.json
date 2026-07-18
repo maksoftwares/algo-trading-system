@@ -1,0 +1,33 @@
+{
+  "advancement_sha256": "565c7c1a2b9cafb36fc65c0e7d3690f04887cefeca92048ad8e8fed8468cfcd6",
+  "attempt_first": 11100,
+  "attempt_last": 11101,
+  "candidate_rows": 92,
+  "contract_sha256": "7c7a2c317f9e1b9e2a137225260b27096747ba2e140028d94dfa6c921a4f072a",
+  "cumulative_campaign_attempts": 11101,
+  "databento_used": false,
+  "decision": "NO_PPI_EVENT_V1_HISTORICAL_SURVIVOR",
+  "event_rows": 66,
+  "execution_audit": {
+    "candidate_rows": 92,
+    "outcome_rows": 90,
+    "raw_tick_threshold_ordering": true,
+    "rejection_counts": {
+      "SPREAD_CEILING_EXCEEDED": 1,
+      "SPREAD_R_EXCEEDED": 1
+    },
+    "rejection_rows": 2
+  },
+  "execution_authorized": false,
+  "outcome_rows": 90,
+  "paid_data_request_made": false,
+  "policy_rows": 2,
+  "related_confirmation_is_blind_exam": false,
+  "schema_version": "xauusd_ppi_event_reaction_v1",
+  "stage": "historical_discovery",
+  "survivor_policy_ids": [],
+  "survivor_rows": 0,
+  "training_authorized": false,
+  "window_end_exclusive_utc": "2022-01-01T00:00:00+00:00",
+  "window_start_utc": "2016-07-01T00:00:00+00:00"
+}

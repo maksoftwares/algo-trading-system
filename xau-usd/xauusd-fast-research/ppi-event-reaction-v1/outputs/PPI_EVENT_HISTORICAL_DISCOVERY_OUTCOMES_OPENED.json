@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "7c7a2c317f9e1b9e2a137225260b27096747ba2e140028d94dfa6c921a4f072a",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T00:54:03.984261+00:00",
+  "schema_version": "xauusd_ppi_event_stage_open_v1",
+  "stage": "historical_discovery",
+  "training_authorized": false
+}

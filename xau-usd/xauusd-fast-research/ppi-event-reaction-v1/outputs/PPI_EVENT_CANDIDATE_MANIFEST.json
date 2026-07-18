@@ -1,0 +1,28 @@
+{
+  "calendar_sha256": "f2edca1a8a87a874711446a8ed1592deb43d1a11228dbb240c6e20b71cbea6c6",
+  "candidate_rows": 154,
+  "candidate_sha256": "4dee4ef9ec92ebf52c82b65dba5334300f6ca2f7584a4a07928238ba9009bb7b",
+  "contains_price_outcomes": false,
+  "databento_used": false,
+  "first_decision_utc": "2016-07-14T12:55:00+00:00",
+  "future_regime_feature_rows": 0,
+  "last_decision_utc": "2026-06-11T13:15:00+00:00",
+  "maximum_feature_lag_minutes": 90.0,
+  "outcome_like_columns": [],
+  "paid_data_request_made": false,
+  "rows_by_policy": {
+    "EVENT_PPI_FADE_RR2": 73,
+    "EVENT_PPI_IMPULSE_RR2": 81
+  },
+  "rows_by_regime": {
+    "CHOP": 51,
+    "COMPRESSION": 28,
+    "TRANSITION": 14,
+    "TREND_DOWN": 21,
+    "TREND_UP": 19,
+    "UNSAFE_SHOCK": 11,
+    "WARMUP": 10
+  },
+  "schema_version": "xauusd_ppi_event_candidate_manifest_v1",
+  "strategy_scoring_performed": false
+}

@@ -1,0 +1,13 @@
+{
+  "advancement_sha256": "565c7c1a2b9cafb36fc65c0e7d3690f04887cefeca92048ad8e8fed8468cfcd6",
+  "contract_sha256": "7c7a2c317f9e1b9e2a137225260b27096747ba2e140028d94dfa6c921a4f072a",
+  "created_utc": "2026-07-18T00:55:08.226563+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "2b82a2062f807cc41c7f67371ca5f62149b2cf273c9e317b32a279e1a05324b1",
+  "outcomes_sha256": "61d0d22a9a266dd2411d425f2940d8b4bb6bdb5736002ab52d4f18e5be221de0",
+  "schema_version": "xauusd_ppi_event_advancement_v1",
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "historical_discovery",
+  "training_authorized": false
+}
