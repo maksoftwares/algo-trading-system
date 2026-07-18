@@ -1,0 +1,226 @@
+{
+  "antisignal_hypothesis_derived_from_v14": true,
+  "contract_sha256": "7d49a16689f18248eb67c99f227c72befdfbef6fdc86b8eb8fe201c22faffcd9",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 4841,
+      "path": "xau-usd/xauusd-fast-research/chop-episode-state-campaign-v14/outputs/CHOP_EPISODE_STATE_V14_RESULT.json",
+      "sha256": "d7005d08c881f1d05454f2a41a584524514e0b78f8fb3e129ef9811f0ba069b3"
+    },
+    {
+      "bytes": 1015548,
+      "path": "xau-usd/xauusd-fast-research/chop-episode-state-campaign-v14/outputs/CHOP_EPISODE_STATE_V14_METRICS.csv",
+      "sha256": "567979f1da6026a49329c4cdd4928f1f99cda2f9236683ccae11c1df36af31b5"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_gap_minutes": 40,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_variant_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "same_bar_priority": "STOP_FIRST",
+    "screen_exit": "PROTECTIVE_STOP_LOCKED_TARGET_OR_FIXED_HORIZON",
+    "stress_slippage_r": 0.05,
+    "target_fill_policy": "LOCKED_R_MULTIPLE",
+    "ticket_cost_usd": 0.3
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "geometries": {
+    "C_BALANCED": {
+      "maximum_hold_hours": 8.0,
+      "stop_atr": 1.0,
+      "target_r": 1.5
+    },
+    "C_EXTENDED": {
+      "maximum_hold_hours": 12.0,
+      "stop_atr": 1.25,
+      "target_r": 2.0
+    },
+    "C_SCALP": {
+      "maximum_hold_hours": 4.0,
+      "stop_atr": 0.75,
+      "target_r": 1.0
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3799,
+    "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/outputs/CHOP_ANTISIGNAL_V15_MANIFEST_EVIDENCE.json",
+    "sha256": "e5ee4ff697b20467cf982fbe27aff234e4fbe63674ec6641f5aa10509e16db6a"
+  },
+  "manifest_file": {
+    "bytes": 276554,
+    "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/outputs/CHOP_ANTISIGNAL_V15_MANIFEST.csv",
+    "sha256": "4fa1e324a1544dca242eb8197ed2a3a8b83755ffb026e37b3e96459ffddbefac"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2121,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/PREREGISTRATION.md",
+      "sha256": "15ae9d41751e072142cca113e3c8ddc4467854bbbbaba339bde58e78c36d6b22"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 4982,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/config/chop_antisignal_campaign_v15.json",
+      "sha256": "56e7425a641f04e7231996463fe235c2070f5d989dd454ad10cc9b96b2bfd015"
+    },
+    {
+      "bytes": 64,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/src/__init__.py",
+      "sha256": "ab3cb7e33bb8983eaa9553d31aa0f1dc18ef263f6aab6640b751b4f5b2924329"
+    },
+    {
+      "bytes": 21347,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/src/campaign.py",
+      "sha256": "a1f799f04276ca46b6007c297344af07c12483c7b691e46eb1b56fb58c2ed2a4"
+    },
+    {
+      "bytes": 3866,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/prepare_manifest.py",
+      "sha256": "b5be97d4de5907214cf5747c9a4390081481e399a27ee37c8dea3a90fccf6230"
+    },
+    {
+      "bytes": 4644,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/lock_contract.py",
+      "sha256": "6d9c4a7f60fdb2f1d70cb6d058082d01540b6ddffeb50d98d5c050bebbb233ec"
+    },
+    {
+      "bytes": 12628,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/run_screen.py",
+      "sha256": "f203fa01b286efaf3b40321f4e47816979f3c821ffb8b6ffb8bc0e2a77620607"
+    },
+    {
+      "bytes": 5362,
+      "path": "xau-usd/xauusd-fast-research/chop-antisignal-campaign-v15/tests/test_campaign.py",
+      "sha256": "9dc99fe8c8a553d1c68f7abb094d289b887ac1e9a28963e3670b37ca125c6525"
+    }
+  ],
+  "paid_data_used": false,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_antisignal_v15_contract",
+  "selection": {
+    "attempt_first": 30239,
+    "attempt_last": 31238,
+    "attempts_per_mechanic": 200,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-antisignal-v15-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_MATURE_EDGE_REENTRY_REVERSE",
+      "CHOP_MATURE_EDGE_BOUNCE_REVERSE",
+      "CHOP_FRESH_ANCESTRY_CONTINUATION_REVERSE",
+      "CHOP_FRESH_ANCESTRY_REVERSAL_REVERSE",
+      "CHOP_MATURE_BREAKOUT_REVERSE"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "paired_source_attempt_first": 29239,
+    "paired_source_attempt_last": 30238,
+    "source_policy_order_seed": "chop-episode-state-v14-prelock",
+    "total_attempts": 1000
+  },
+  "signal": {
+    "atr_period": 14,
+    "efficiency_lookback": 18,
+    "ema_fast_period": 20,
+    "ema_slow_period": 80,
+    "prior_range_bars": 18
+  },
+  "training_authorized": false,
+  "v14_outcomes_exposed": true,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
