@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "CORRECTED_EVENT_CALENDAR.csv": {
+      "bytes": 133569,
+      "sha256": "0d7c9fa37cdc4ccf2a65625910cf6d42d8c20c09fbd5cb764cb3052aabaa65ec"
+    },
+    "CORRECTED_EVENT_CALENDAR_MANIFEST.json": {
+      "bytes": 585,
+      "sha256": "8a361393f02ceff268a40d107b9db4ad528acf37687c4fe4ffd4897fa39b1b42"
+    },
+    "CORRECTED_EVENT_CANDIDATES.parquet": {
+      "bytes": 103923,
+      "sha256": "5c9f31054fdfa2328a9b7a160ab0079652c1e1396c279650c3231042849c1d08"
+    },
+    "CORRECTED_EVENT_CANDIDATE_MANIFEST.json": {
+      "bytes": 1068,
+      "sha256": "e84b489bdf5f8eb44349045706fb6da78cd9763e10846fe6abef828c8afdc15c"
+    },
+    "CORRECTED_EVENT_CONTRACT_LOCK.json": {
+      "bytes": 29785,
+      "sha256": "72b23f6e8289f1d06ac5d4cf55fb1ca1b1562d76085039c85f4639483d761098"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_ADVANCEMENT_LOCK.json": {
+      "bytes": 649,
+      "sha256": "db9374ae6c32404771540ae114b81f189d82871b17214e2b07c79e75408ff44d"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_DIAGNOSTICS.csv": {
+      "bytes": 7098,
+      "sha256": "199493af69f590fdfa1f3c02abf07fe2d7355e44d6670e70047799d8186fd1fb"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_EXECUTION_AUDIT.json": {
+      "bytes": 360,
+      "sha256": "91ace4067b774dff6060513ae2dd4cdfc285e0bd80627f1055bc3b6de766b099"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_METRICS.csv": {
+      "bytes": 5947,
+      "sha256": "638c62397eca25d6717d1678fcbbb82614a2836e68c32cedfea0bb66b59b709c"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_OUTCOMES.parquet": {
+      "bytes": 68257,
+      "sha256": "9b84c044bc0e1402233fe2bc3ed1007cb8903dca9c49359a73ff0ad50d1b58f9"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_OUTCOMES_OPENED.json": {
+      "bytes": 314,
+      "sha256": "46054fd8186f1574b769c643f80817ce8fa6b50064da115dbdcbae482ee0f490"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_RESULT.json": {
+      "bytes": 1287,
+      "sha256": "44ce39a869b485ae8aea5a5d8076c06bd690611b6e7c17e2c00071b26693233b"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_RESULT.md": {
+      "bytes": 1470,
+      "sha256": "7368bcaf3ab7f63803b06d52b104fc9d9264ebf7584afae5b890b1da8e85dc94"
+    },
+    "CORRECTED_EVENT_HISTORICAL_REPLICATION_SURVIVORS.csv": {
+      "bytes": 136,
+      "sha256": "8202aec00bd41e585d1a5dbc016fc7c09fc89ce4c67dfcb2934508bf54b1871b"
+    }
+  },
+  "contract_sha256": "743621b30139446119a98c753e2efb24439bad79a23b76cddfedb13d87c78d6c",
+  "execution_authorized": false,
+  "training_authorized": false
+}

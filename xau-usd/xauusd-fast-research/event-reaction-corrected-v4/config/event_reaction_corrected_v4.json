@@ -1,0 +1,202 @@
+{
+  "schema_version": "xauusd_event_reaction_corrected_v4",
+  "base_contract": "../balanced-regime-campaign-v3/config/balanced_regime_campaign_v3.json",
+  "ppi_parent_package": "../ppi-event-reaction-v1",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "symbol": "XAUUSD",
+    "event_research_relative_root": "event-research/xau-us-macro-repricing-v1/event-sources",
+    "bls_calendar_relative_path": "bls-event-candidates.json",
+    "fomc_statements_relative_path": "federal-reserve/statements",
+    "start_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "maximum_entry_delay_ms": 10000,
+    "exit_tick_grace_ms": 259200000,
+    "expected_calendar_rows": 436,
+    "expected_candidate_rows": 533,
+    "expected_fomc_source_files": 79,
+    "expected_tick_months": 120
+  },
+  "policies": [
+    {
+      "attempt_no": 11103,
+      "policy_id": "EVENT_NFP_IMPULSE_RR2",
+      "event_type": "NFP",
+      "mode": "IMPULSE",
+      "impulse_minutes": 15,
+      "start_minutes": 5,
+      "end_minutes": 60,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11104,
+      "policy_id": "EVENT_NFP_FADE_RR2",
+      "event_type": "NFP",
+      "mode": "FADE",
+      "impulse_minutes": 15,
+      "start_minutes": 15,
+      "end_minutes": 90,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11105,
+      "policy_id": "EVENT_CPI_IMPULSE_RR2",
+      "event_type": "CPI",
+      "mode": "IMPULSE",
+      "impulse_minutes": 15,
+      "start_minutes": 5,
+      "end_minutes": 60,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11106,
+      "policy_id": "EVENT_CPI_FADE_RR2",
+      "event_type": "CPI",
+      "mode": "FADE",
+      "impulse_minutes": 15,
+      "start_minutes": 15,
+      "end_minutes": 90,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11107,
+      "policy_id": "EVENT_FOMC_IMPULSE_RR2",
+      "event_type": "FOMC",
+      "mode": "IMPULSE",
+      "impulse_minutes": 15,
+      "start_minutes": 5,
+      "end_minutes": 90,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11108,
+      "policy_id": "EVENT_FOMC_FADE_RR2",
+      "event_type": "FOMC",
+      "mode": "FADE",
+      "impulse_minutes": 30,
+      "start_minutes": 30,
+      "end_minutes": 150,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11109,
+      "policy_id": "EVENT_PPI_IMPULSE_RR2",
+      "event_type": "PPI",
+      "mode": "IMPULSE",
+      "impulse_minutes": 15,
+      "start_minutes": 5,
+      "end_minutes": 60,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    },
+    {
+      "attempt_no": 11110,
+      "policy_id": "EVENT_PPI_FADE_RR2",
+      "event_type": "PPI",
+      "mode": "FADE",
+      "impulse_minutes": 15,
+      "start_minutes": 15,
+      "end_minutes": 90,
+      "break_atr": 0.1,
+      "stop_buffer_atr": 0.1,
+      "minimum_body_fraction": 0.35,
+      "target_r": 2.0
+    }
+  ],
+  "windows": {
+    "historical_replication": [
+      "2016-07-01T00:00:00Z",
+      "2022-01-01T00:00:00Z"
+    ],
+    "related_confirmation": [
+      "2022-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  },
+  "execution": {
+    "point_size_usd": 0.01,
+    "minimum_stop_distance_usd": 3.5,
+    "maximum_stop_distance_usd": 18.0,
+    "maximum_entry_spread_usd": 0.75,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_hold_hours": 72,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "current_account_risk_usd": 8.165487,
+    "same_tick_priority": "STOP_FIRST"
+  },
+  "gates": {
+    "historical_replication": {
+      "minimum_trades": 18,
+      "minimum_event_participation": 0.2,
+      "minimum_stress_pf": 1.25,
+      "minimum_average_stress_r": 0.08,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_current_account_feasible_share": 0.8,
+      "maximum_closed_drawdown_r": 12.0,
+      "top_winners_removed": 3,
+      "maximum_holm_qvalue": 0.15
+    },
+    "related_confirmation": {
+      "minimum_trades": 12,
+      "minimum_event_participation": 0.2,
+      "minimum_stress_pf": 1.2,
+      "minimum_average_stress_r": 0.05,
+      "minimum_positive_active_month_share": 0.5,
+      "minimum_positive_active_year_share": 0.5,
+      "minimum_current_account_feasible_share": 0.8,
+      "maximum_closed_drawdown_r": 10.0,
+      "top_winners_removed": 3,
+      "maximum_holm_qvalue": 0.15
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "calendar": "CORRECTED_EVENT_CALENDAR.csv",
+    "calendar_manifest": "CORRECTED_EVENT_CALENDAR_MANIFEST.json",
+    "candidates": "CORRECTED_EVENT_CANDIDATES.parquet",
+    "candidate_manifest": "CORRECTED_EVENT_CANDIDATE_MANIFEST.json",
+    "contract_lock": "CORRECTED_EVENT_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v4": 11102,
+    "registered_policy_count": 8,
+    "parameter_search_count": 0,
+    "prior_event_results_invalidated": true,
+    "execution_timestamp_defect_only_strategy_change": true,
+    "related_confirmation_is_blind_exam": false,
+    "later_stage_requires_prior_stage_pass": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "research_only": true,
+    "paid_data_authorized": false,
+    "databento_use_authorized": false,
+    "python_predictions_authorized": false,
+    "model_training_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

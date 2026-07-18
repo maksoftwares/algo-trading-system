@@ -1,0 +1,17 @@
+{
+  "calendar_rows": 436,
+  "calendar_sha256": "0d7c9fa37cdc4ccf2a65625910cf6d42d8c20c09fbd5cb764cb3052aabaa65ec",
+  "contains_outcomes": false,
+  "databento_used": false,
+  "first_event_utc": "2016-07-08T12:30:00+00:00",
+  "last_event_utc": "2026-06-17T18:00:00+00:00",
+  "paid_data_request_made": false,
+  "ppi_parent_calendar_sha256": "f2edca1a8a87a874711446a8ed1592deb43d1a11228dbb240c6e20b71cbea6c6",
+  "rows_by_event_type": {
+    "CPI": 119,
+    "FOMC": 79,
+    "NFP": 119,
+    "PPI": 119
+  },
+  "schema_version": "xauusd_corrected_event_calendar_manifest_v4"
+}

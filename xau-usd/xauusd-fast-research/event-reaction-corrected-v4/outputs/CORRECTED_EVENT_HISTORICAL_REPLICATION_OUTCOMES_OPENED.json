@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "743621b30139446119a98c753e2efb24439bad79a23b76cddfedb13d87c78d6c",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T01:24:25.999015+00:00",
+  "schema_version": "xauusd_corrected_event_stage_open_v4",
+  "stage": "historical_replication",
+  "training_authorized": false
+}

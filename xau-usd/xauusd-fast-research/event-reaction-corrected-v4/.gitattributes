@@ -1,0 +1,3 @@
+* -text
+PREREGISTRATION.md whitespace=-blank-at-eof
+outputs/** whitespace=-trailing-space

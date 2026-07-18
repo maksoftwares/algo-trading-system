@@ -1,0 +1,15 @@
+{
+  "candidate_rows": 303,
+  "max_hold_outcomes": 38,
+  "outcome_rows": 279,
+  "raw_tick_threshold_ordering": true,
+  "rejection_counts": {
+    "NO_TIMELY_ENTRY_QUOTE": 1,
+    "SPREAD_CEILING_EXCEEDED": 5,
+    "SPREAD_R_EXCEEDED": 4,
+    "STOP_CEILING_EXCEEDED": 14
+  },
+  "rejection_rows": 24,
+  "stop_outcomes": 160,
+  "target_outcomes": 81
+}

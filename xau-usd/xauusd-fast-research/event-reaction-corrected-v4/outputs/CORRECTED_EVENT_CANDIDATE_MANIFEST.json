@@ -1,0 +1,33 @@
+{
+  "calendar_sha256": "0d7c9fa37cdc4ccf2a65625910cf6d42d8c20c09fbd5cb764cb3052aabaa65ec",
+  "candidate_rows": 533,
+  "candidate_sha256": "5c9f31054fdfa2328a9b7a160ab0079652c1e1396c279650c3231042849c1d08",
+  "contains_price_outcomes": false,
+  "databento_used": false,
+  "first_decision_utc": "2016-07-08T13:15:00+00:00",
+  "future_regime_feature_rows": 0,
+  "last_decision_utc": "2026-06-17T18:40:00+00:00",
+  "outcome_like_columns": [],
+  "paid_data_request_made": false,
+  "rows_by_policy": {
+    "EVENT_CPI_FADE_RR2": 67,
+    "EVENT_CPI_IMPULSE_RR2": 78,
+    "EVENT_FOMC_FADE_RR2": 35,
+    "EVENT_FOMC_IMPULSE_RR2": 72,
+    "EVENT_NFP_FADE_RR2": 61,
+    "EVENT_NFP_IMPULSE_RR2": 66,
+    "EVENT_PPI_FADE_RR2": 73,
+    "EVENT_PPI_IMPULSE_RR2": 81
+  },
+  "rows_by_regime": {
+    "CHOP": 176,
+    "COMPRESSION": 104,
+    "TRANSITION": 41,
+    "TREND_DOWN": 74,
+    "TREND_UP": 63,
+    "UNSAFE_SHOCK": 39,
+    "WARMUP": 36
+  },
+  "schema_version": "xauusd_corrected_event_candidate_manifest_v4",
+  "strategy_scoring_performed": false
+}
