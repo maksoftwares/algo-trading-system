@@ -1,0 +1,27 @@
+{
+  "attempt_first": 11094,
+  "attempt_last": 11099,
+  "contract_sha256": "67901c486d86d6ef8e077ee23d04434a0cfebbdd6ce8e5f4e1e0b204caa2ec31",
+  "created_utc": "2026-07-18T00:30:48.715008+00:00",
+  "databento_use_authorized": false,
+  "dukascopy_source_rows": 708538,
+  "execution_authorized": false,
+  "files": {
+    "PREREGISTRATION.md": "f143580c3eea026e4b2153a8cb8ba5d9591d2afb7b2567e92cea1e014f0ed4d3",
+    "config/trailing_trend_specialists_v1.json": "a1c3b98f1c30eff6825a82c4d245de164a52fba5565247460e51976a3937e843",
+    "external/dukascopy_feature_cache": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "external/dukascopy_feature_manifest": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85",
+    "lock_contract.py": "a0fe4a2748957dbe029bece136be371252b5ab54c231997abcf51e10d0ca6cf0",
+    "requirements.txt": "ba60104d721ad680e363cc8505e527b3a3ce6175006435b4378cb89a6a87cdb9",
+    "run_research.py": "01c6de44ab40945c82024c657e58077703379458817b78a468dfe67528ba85b3",
+    "src/trend.py": "25d9da966e71bd6ccab5458d90cd7f48759598f5fc0fe7146276106998bfa71e",
+    "upstream/dukascopy_data_source.py": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+  },
+  "outcomes_opened": false,
+  "paid_data_authorized": false,
+  "parameter_search_count": 0,
+  "policy_manifest_sha256": "7dff62a348370528c65919d8b84dab4c54fa6ddeaf12de1989ec22b660d6f165",
+  "registered_policy_count": 6,
+  "schema_version": "xauusd_trailing_trend_contract_lock_v1",
+  "training_authorized": false
+}

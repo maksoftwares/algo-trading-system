@@ -1,0 +1,7 @@
+attempt_no,policy_id,timeframe,mechanic,entry_lookback,exit_lookback,atr_period,initial_stop_atr,trail_stop_atr,cooldown_decisions,momentum_lookback
+11094,H4_DONCHIAN_20_10_TRAIL,H4,DONCHIAN,20.0,10.0,20,2.5,3.0,3,
+11095,H4_DONCHIAN_55_20_TRAIL,H4,DONCHIAN,55.0,20.0,20,3.0,3.5,3,
+11096,H4_TSMOM_60_TRAIL,H4,TSMOM,,,20,2.5,3.0,3,60.0
+11097,H4_TSMOM_120_TRAIL,H4,TSMOM,,,20,3.0,3.5,3,120.0
+11098,D1_DONCHIAN_20_10_TRAIL,D1,DONCHIAN,20.0,10.0,20,2.0,3.0,1,
+11099,D1_DONCHIAN_55_20_TRAIL,D1,DONCHIAN,55.0,20.0,20,2.5,3.5,1,

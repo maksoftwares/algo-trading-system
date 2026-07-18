@@ -1,0 +1,8 @@
+{
+  "contract_sha256": "67901c486d86d6ef8e077ee23d04434a0cfebbdd6ce8e5f4e1e0b204caa2ec31",
+  "execution_authorized": false,
+  "opened_utc": "2026-07-18T00:30:59.999082+00:00",
+  "schema_version": "xauusd_trailing_trend_stage_open_v1",
+  "stage": "discovery",
+  "training_authorized": false
+}

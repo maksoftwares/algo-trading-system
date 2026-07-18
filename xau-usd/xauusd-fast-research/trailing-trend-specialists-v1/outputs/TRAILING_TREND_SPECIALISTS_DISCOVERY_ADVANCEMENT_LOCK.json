@@ -1,0 +1,13 @@
+{
+  "advancement_sha256": "ef3ac6c2b3d7f56580666e7379409af44fc61ef3584967f38a2031e195969dd4",
+  "contract_sha256": "67901c486d86d6ef8e077ee23d04434a0cfebbdd6ce8e5f4e1e0b204caa2ec31",
+  "created_utc": "2026-07-18T00:35:03.276569+00:00",
+  "execution_authorized": false,
+  "metrics_sha256": "d70a1f39a5cb959bda3f9b6a41ed9dd339e7ddf294b11bd462ce6812e0dc942c",
+  "policy_manifest_sha256": "7dff62a348370528c65919d8b84dab4c54fa6ddeaf12de1989ec22b660d6f165",
+  "schema_version": "xauusd_trailing_trend_advancement_v1",
+  "selected_policy_count": 0,
+  "selected_policy_ids": [],
+  "stage": "discovery",
+  "training_authorized": false
+}

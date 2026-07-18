@@ -1,0 +1,1 @@
+"""Trailing trend specialist research."""

@@ -1,0 +1,39 @@
+{
+  "artifacts": {
+    "TRAILING_TREND_SPECIALISTS_CONTRACT_LOCK.json": {
+      "bytes": 1561,
+      "sha256": "29db6e4f0f7ea1fe7f3378c6d25e54ad876cd3a6518590da74b126ee714cb824"
+    },
+    "TRAILING_TREND_SPECIALISTS_DISCOVERY_ADVANCEMENT_LOCK.json": {
+      "bytes": 642,
+      "sha256": "d4342d7c1293e5d626dba58cf033b123e865abcbe108ca523c92caae805d825d"
+    },
+    "TRAILING_TREND_SPECIALISTS_DISCOVERY_METRICS.csv": {
+      "bytes": 6953,
+      "sha256": "d70a1f39a5cb959bda3f9b6a41ed9dd339e7ddf294b11bd462ce6812e0dc942c"
+    },
+    "TRAILING_TREND_SPECIALISTS_DISCOVERY_OUTCOMES_OPENED.json": {
+      "bytes": 300,
+      "sha256": "4a4afd062740e5b02834d55a2d0203b25554e3771ca6decfb2b4e63e6d0e7eb0"
+    },
+    "TRAILING_TREND_SPECIALISTS_DISCOVERY_TRADES.csv": {
+      "bytes": 351509,
+      "sha256": "9375e4578654e4d1ecda9312ea62c5345897b59b695e5f3b8e2eae7f0b8d109f"
+    },
+    "TRAILING_TREND_SPECIALISTS_POLICY_MANIFEST.csv": {
+      "bytes": 528,
+      "sha256": "7dff62a348370528c65919d8b84dab4c54fa6ddeaf12de1989ec22b660d6f165"
+    },
+    "TRAILING_TREND_SPECIALISTS_RESULT.json": {
+      "bytes": 3357,
+      "sha256": "72ebefdacaacc63641afb59f418110bbfd5e55d1344a471bcf18a781800379cb"
+    },
+    "TRAILING_TREND_SPECIALISTS_RESULT.md": {
+      "bytes": 732,
+      "sha256": "6af856010708294450de2d189a4d41574adc11cd2430d47ccce90d394d1b0f15"
+    }
+  },
+  "contract_sha256": "67901c486d86d6ef8e077ee23d04434a0cfebbdd6ce8e5f4e1e0b204caa2ec31",
+  "execution_authorized": false,
+  "training_authorized": false
+}
