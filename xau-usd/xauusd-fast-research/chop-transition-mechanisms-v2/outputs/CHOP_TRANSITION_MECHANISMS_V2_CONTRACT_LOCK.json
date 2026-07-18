@@ -1,0 +1,1271 @@
+{
+  "attempt_count": 2000,
+  "attempt_first": 15120,
+  "attempt_last": 17119,
+  "contract_sha256": "53f3dbed94171d98b40151183749599ebe59198b0a1dbc5d544aa4931a52c42b",
+  "databento_used": false,
+  "dependency_files": [
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    },
+    {
+      "bytes": 48486,
+      "path": "xau-usd/xauusd-fast-research/r2-downtrend-portability-v2/src/downtrend.py",
+      "sha256": "c4bf986cc1f34b12502717fe9372e905a3f9ba40c97ef5747ca664626d5b02be"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    }
+  ],
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 127541,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=01/bars.parquet",
+      "sha256": "17651e21dd6ade021b00426d9677790f6df245eb8e23a4e5aa833240dc708893"
+    },
+    {
+      "bytes": 122849,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=02/bars.parquet",
+      "sha256": "77a4c0031c0f020e2cb811742a02da2561fe826104ab7d6430c2fa97aab0c883"
+    },
+    {
+      "bytes": 138071,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=03/bars.parquet",
+      "sha256": "ed4af2862a79c6e63c703346be47bdd5b2d3b3a7932c740c588552e968a58569"
+    },
+    {
+      "bytes": 133210,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=04/bars.parquet",
+      "sha256": "23dd34a1c42818e5cecc0b561eede9657358d52c8d52e3b0c1aa12f08cf859bd"
+    },
+    {
+      "bytes": 129029,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=05/bars.parquet",
+      "sha256": "43ca8e922441c6ebb4dfe6bf023941c75edcd3d51e644570c3db321caadc3038"
+    },
+    {
+      "bytes": 133957,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=06/bars.parquet",
+      "sha256": "732cfa80f316651df5c761cf54e5b7aa84881940e84ba39aeb5f02bdba4c12cc"
+    },
+    {
+      "bytes": 133120,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=07/bars.parquet",
+      "sha256": "21fa21422c2bc27869bc7ecf2f1f6face67cf196fd3d4a545b0060961a75b3dc"
+    },
+    {
+      "bytes": 134790,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=08/bars.parquet",
+      "sha256": "a27fa071003569c020e57c14e12863ef36aa66fa50b03bbc46bc5d45ecc913d4"
+    },
+    {
+      "bytes": 134608,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=09/bars.parquet",
+      "sha256": "26f335bc5a1a99f0b69501ad2f9f6633bdc2c2e15ba20482180aab4b7e20ca7d"
+    },
+    {
+      "bytes": 131817,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=10/bars.parquet",
+      "sha256": "312c447a868c32c8f7944346c2445c35284ad1bb9267ac3828baeaca35760c14"
+    },
+    {
+      "bytes": 140388,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=11/bars.parquet",
+      "sha256": "fae67338c4b7a73593504b8b56d551ae739713bfd87d7f0edb2925531d872f5b"
+    },
+    {
+      "bytes": 144074,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2010/month=12/bars.parquet",
+      "sha256": "c5d2cac9c146bd1737632a73593a7c62ff692e1f5ae591d0daaa5f9360b964bc"
+    },
+    {
+      "bytes": 133239,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=01/bars.parquet",
+      "sha256": "b323b80310a217b7bf6af7ce880ca81ca15a9d8298d5a7958fd8b13760c66c6b"
+    },
+    {
+      "bytes": 125696,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=02/bars.parquet",
+      "sha256": "664b8bd82a0d2fc7a05fa866701c7a787b7bb01e9d814d8ac147be464d8a4caa"
+    },
+    {
+      "bytes": 144669,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=03/bars.parquet",
+      "sha256": "dadb31bbac4636ec4d43da38b3c001866a03c135cf6edf820086ccd1170a2004"
+    },
+    {
+      "bytes": 130579,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=04/bars.parquet",
+      "sha256": "003b472a927f5ce1fa0927da2fcfaf496b60d217dd17c1d8c3ab6cdf32562fcc"
+    },
+    {
+      "bytes": 140385,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=05/bars.parquet",
+      "sha256": "c40217c7d651c4c7ea8afdad5303bbbea2b63229cf1e2fba1148958d4dd9b4e5"
+    },
+    {
+      "bytes": 139889,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=06/bars.parquet",
+      "sha256": "e1ac658539116279b524e5ea1a74d9fd291d35bc2df29c19557d9d6118731c58"
+    },
+    {
+      "bytes": 133323,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=07/bars.parquet",
+      "sha256": "612de5ee26f1e0009595a1308586ddb2386a62fc475f501f080a56d335204646"
+    },
+    {
+      "bytes": 151579,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=08/bars.parquet",
+      "sha256": "78d58ec96370008e49ee5880f85426cc4996b85275c0c24262420db76c17916f"
+    },
+    {
+      "bytes": 143512,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=09/bars.parquet",
+      "sha256": "3f7c08759e1500ac7e97a7a2ef10725359c6205108a4522ae4d654e274677c34"
+    },
+    {
+      "bytes": 136452,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=10/bars.parquet",
+      "sha256": "30057e6c9bdc78f1150d88d6629b44792a84aea9899ed6efa4b408f997f579ac"
+    },
+    {
+      "bytes": 139681,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=11/bars.parquet",
+      "sha256": "d0e6aee074eab81625ba4144543bf6ac4730ad2c7523104c243c674b63edf191"
+    },
+    {
+      "bytes": 135840,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2011/month=12/bars.parquet",
+      "sha256": "44867683e948f32ff3f8b1b6218c277a3e726af39ee57c39f9715e2758574375"
+    },
+    {
+      "bytes": 131309,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=01/bars.parquet",
+      "sha256": "b145765c727bbd6215aac15efc4ae5b9842848f8184f161ff0992669429fa820"
+    },
+    {
+      "bytes": 131416,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=02/bars.parquet",
+      "sha256": "44912a49703572e03208952780e68d8f4aed602c37b4a080600940e6fd25fa3b"
+    },
+    {
+      "bytes": 137905,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=03/bars.parquet",
+      "sha256": "eddb7ecc9179441ed41b058ac5c02a1f150a32f0f14aa528a2d8acdc67fe4ea7"
+    },
+    {
+      "bytes": 130243,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=04/bars.parquet",
+      "sha256": "22815b1eaebd67068708936811e570a21a4e2f5db07de1c903e064462859e87e"
+    },
+    {
+      "bytes": 143912,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=05/bars.parquet",
+      "sha256": "353e022fb93a39ad5fa165d0539d688ef81e556c38a8da11d4ebd3ed9fc396d9"
+    },
+    {
+      "bytes": 132448,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=06/bars.parquet",
+      "sha256": "9095806b8332a8f717ff270d74e76e7acb6d9ac4a04ed69687dfebe70953e79d"
+    },
+    {
+      "bytes": 139416,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=07/bars.parquet",
+      "sha256": "79b25e41f74d153d9efa1b90d72e5218c140be9bc133e4b434d4006905c062b8"
+    },
+    {
+      "bytes": 143169,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=08/bars.parquet",
+      "sha256": "9565d7f1f9f78013502581cbff7614f4ddfe0515a86d1ab0fe7444520af8d6c6"
+    },
+    {
+      "bytes": 124562,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=09/bars.parquet",
+      "sha256": "4a24c69e23b498c10641b37cdba8b549dcdb44724f006c20d9539200d01c705f"
+    },
+    {
+      "bytes": 140152,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=10/bars.parquet",
+      "sha256": "765ed89976a5d25f81d227a600c731a9916eefbda004981fcff81fd2da36e4ff"
+    },
+    {
+      "bytes": 132500,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=11/bars.parquet",
+      "sha256": "95b4f746bb20d710c5979e91958299c5b2339b053e0b258fde7b159c05eb1763"
+    },
+    {
+      "bytes": 117939,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2012/month=12/bars.parquet",
+      "sha256": "a959d2069b78e772a77c01e779b4c6624f25fc83d86c4810758142a95f41b013"
+    },
+    {
+      "bytes": 131028,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=01/bars.parquet",
+      "sha256": "642174f077ba1e0d59fc673a4960f62c8b2abf2260f423b697f1381b5837845a"
+    },
+    {
+      "bytes": 114980,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=02/bars.parquet",
+      "sha256": "1761b3a908d82102055daa77de793003a458db12715764681ee45e1efca870df"
+    },
+    {
+      "bytes": 120939,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=03/bars.parquet",
+      "sha256": "f94f422f84ceb884fdc126a1d0ed4b607896c80b19aa65443d69e1f7aa6814e7"
+    },
+    {
+      "bytes": 134724,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=04/bars.parquet",
+      "sha256": "78464a1c5fc7e93e5892af7a7df7f8fc9be217508e072baf2831a363fec6e771"
+    },
+    {
+      "bytes": 139118,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=05/bars.parquet",
+      "sha256": "99b985718019a2cd23742379de3399d26bb9dc163783f61f4a51811bd9839b27"
+    },
+    {
+      "bytes": 125558,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=06/bars.parquet",
+      "sha256": "e2d2a287afa2240c30e02cec1f336c58cfa656f9df95fffff63d2897ada8e2f8"
+    },
+    {
+      "bytes": 135881,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=07/bars.parquet",
+      "sha256": "279849c25e331f5e99663c659031b6407a909dcc2b9da95f36e367dc22278d5c"
+    },
+    {
+      "bytes": 133114,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=08/bars.parquet",
+      "sha256": "6f743b5f71665dc4dfb45163ee7515a6a98770d26d0d028c0df81c87e1713f62"
+    },
+    {
+      "bytes": 125552,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=09/bars.parquet",
+      "sha256": "cf858d278bc9fdf56b2f446de2d110282d37726256ffe38c54cb3f4ceadcfe1c"
+    },
+    {
+      "bytes": 137537,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=10/bars.parquet",
+      "sha256": "c1193ad54eecc8306c57b341d8025a5316927bc84320b499b26930254ec03940"
+    },
+    {
+      "bytes": 122279,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=11/bars.parquet",
+      "sha256": "7fc5a2247cb21daa86cee9de38816dc9137a425dffe04e68783701e8f1ac6403"
+    },
+    {
+      "bytes": 123939,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2013/month=12/bars.parquet",
+      "sha256": "92e58a2e2978b7f20298ada6f5ebc1fea8c8a920297d30827e15fb03ba561f0b"
+    },
+    {
+      "bytes": 128977,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=01/bars.parquet",
+      "sha256": "83f42d59030af698f204dbf9ea579419e3b447a9f63e0035a2d7b6f9de5f0f83"
+    },
+    {
+      "bytes": 119088,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=02/bars.parquet",
+      "sha256": "88d64501e16faecb3dadf2b1ac842a17e71081955a318c2de5aa8c1db588c02e"
+    },
+    {
+      "bytes": 125387,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=03/bars.parquet",
+      "sha256": "3cebc8491f4bf3909423675c860f91f4ed1b4f6639dcda3a55c28facb3d06f0c"
+    },
+    {
+      "bytes": 123236,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=04/bars.parquet",
+      "sha256": "bcae788884ea79e3d09f495edad28bb1e722ea7b7fc47c089ab333f51beb0d38"
+    },
+    {
+      "bytes": 131325,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=05/bars.parquet",
+      "sha256": "65cbf1195eda61cdacb7a5bf47882498a63ad96ea0a8c449b61f4b0cef82b4ff"
+    },
+    {
+      "bytes": 126860,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=06/bars.parquet",
+      "sha256": "2203e36fb3335baf181128a22ca2633eeec8ebcc6b9463f6f6bdeae1070ab934"
+    },
+    {
+      "bytes": 136283,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=07/bars.parquet",
+      "sha256": "cadb1f6f5c25aa497795c22dc91e2a8ce96f28b3e4930feb2cdfe4f63ec34a86"
+    },
+    {
+      "bytes": 125562,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=08/bars.parquet",
+      "sha256": "8cd21e2a411071227944569b7c7cf17d8dd0075d73f01def71f3209586353ad3"
+    },
+    {
+      "bytes": 134738,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=09/bars.parquet",
+      "sha256": "eb94d2dbd1bf6d8e5097729e6925cd88e4974e67076707b19e25d3d1257f41f4"
+    },
+    {
+      "bytes": 139528,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=10/bars.parquet",
+      "sha256": "230cbaa4480745ff939a81f33eede6224c9eeedc9202669d0e4f6bfd701ab75f"
+    },
+    {
+      "bytes": 121818,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=11/bars.parquet",
+      "sha256": "3842f7f94f554b3846728036a195d4cbf5724a50fb6962832ff3dfa4371f7abb"
+    },
+    {
+      "bytes": 133381,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2014/month=12/bars.parquet",
+      "sha256": "3e053016a570630baeeeacdc435d4fa17b2775140511fc7988e22550bfe370bb"
+    },
+    {
+      "bytes": 129732,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=01/bars.parquet",
+      "sha256": "5dce55bbce9435c549732b773f6993f77f3d79723db4c5ef7122f39c9530f0ab"
+    },
+    {
+      "bytes": 122424,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=02/bars.parquet",
+      "sha256": "20963982b86235d0befcbfc807401a51ebb82c7d6c7e1869e52325c671cc9920"
+    },
+    {
+      "bytes": 134942,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=03/bars.parquet",
+      "sha256": "09b7e21c7f09ef498fe4e58c35681e0a88ced8d8e49ad6189297b46127d56163"
+    },
+    {
+      "bytes": 128426,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=04/bars.parquet",
+      "sha256": "2435435e36eab6e780ed8aebaf2e619289df9b0de0d1fd9527e7c046676b3dce"
+    },
+    {
+      "bytes": 125523,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=05/bars.parquet",
+      "sha256": "8e723250e68f9b2919fc319d04840c780144a758f854ed4f26e18223d1e18af2"
+    },
+    {
+      "bytes": 127565,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=06/bars.parquet",
+      "sha256": "8ba8af687270d313baa09acdef92332d93ea0685cf8969546d3369275efbc702"
+    },
+    {
+      "bytes": 134111,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=07/bars.parquet",
+      "sha256": "0b53f1ca4e3c21a3031a291997c351c0cd538c41ec759b09a536d45b29caf453"
+    },
+    {
+      "bytes": 126034,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=08/bars.parquet",
+      "sha256": "81ad709bdf011fdc04d3a27e0e41bc345d5ccbc7d64820c44177cd84ca7b3aec"
+    },
+    {
+      "bytes": 128326,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=09/bars.parquet",
+      "sha256": "676d3c30e0e050f8f9a887944c6352b6de3e0614005b0743fc34152b8315aaca"
+    },
+    {
+      "bytes": 130419,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=10/bars.parquet",
+      "sha256": "9df71ecde700cd47f3dfa04a12ea4fbc421bd36e6809708d09813dd769cbc0d0"
+    },
+    {
+      "bytes": 123513,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=11/bars.parquet",
+      "sha256": "458a4f4d8fafe188c37a5a70d6befb457e39ecd8a05480d0ff3e6e7b5350be2a"
+    },
+    {
+      "bytes": 128282,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2015/month=12/bars.parquet",
+      "sha256": "bc195471db7b2a9b6f2d8ea8b8db08a21937f6e0581e5882fc3a646d3bbab718"
+    },
+    {
+      "bytes": 120167,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=01/bars.parquet",
+      "sha256": "1b85e49084c022a9e366f94b11019c32968746eb61a4b98fa4fbbae921535d65"
+    },
+    {
+      "bytes": 126562,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=02/bars.parquet",
+      "sha256": "9bc70e237ae624f84dcbd51202e1c85468b24780c83c69ac9981ee2675dee5ee"
+    },
+    {
+      "bytes": 131829,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=03/bars.parquet",
+      "sha256": "54a43001c0894f176b77365d067a9f13080ca438fc2ccdfb625e7f29e6f88d1d"
+    },
+    {
+      "bytes": 124711,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=04/bars.parquet",
+      "sha256": "26db0bfc40cf3e619b007ec1dd4ae2d718116813ac95bfeda1ee04be869b8e82"
+    },
+    {
+      "bytes": 131094,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=05/bars.parquet",
+      "sha256": "f9bc45c2e80a452ad30d20837c119c4057ada2e7dc25480e7aad1ab8ec6efcde"
+    },
+    {
+      "bytes": 132187,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/ask/M5/year=2016/month=06/bars.parquet",
+      "sha256": "03049520156dbc101c8b6d67cab996fe7135ebfb7699fe94df4591b01e7fa35e"
+    },
+    {
+      "bytes": 127461,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=01/bars.parquet",
+      "sha256": "de1d9213cc37026865efffabbe8e5f9ef7fb9194044e22b20a3c2f8b280e4377"
+    },
+    {
+      "bytes": 122707,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=02/bars.parquet",
+      "sha256": "a7a2532bf017513e5b04cc6ed7fe0cb3c873d87db0a3e46e837bc70cd7498b78"
+    },
+    {
+      "bytes": 138124,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=03/bars.parquet",
+      "sha256": "4e00e6b2a0c73215e37e596e9ff8b9dfe28ba425a948e0c00fb09f62fe7ee1d7"
+    },
+    {
+      "bytes": 133369,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=04/bars.parquet",
+      "sha256": "3d59af6dcec79425aafba863f46b76b8d3bfb614747e2880ca3381a6a5c78392"
+    },
+    {
+      "bytes": 128700,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=05/bars.parquet",
+      "sha256": "5cccb7eff532c1c194c1bd8f97f01386f810b50b3ab7cbe61af5809b5ec0e38e"
+    },
+    {
+      "bytes": 133874,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=06/bars.parquet",
+      "sha256": "b9090634ba6dff0bf7c589cc81b06a46a58a84687ea65988d755ec7e88540e34"
+    },
+    {
+      "bytes": 133020,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=07/bars.parquet",
+      "sha256": "3dbb35df7836d561f6406566576a9a5469fead6c65033445f271ede7af15b653"
+    },
+    {
+      "bytes": 134692,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=08/bars.parquet",
+      "sha256": "5fb13067e2d94ec9d569233a4c73f2fe7c33f4df097d0c66f115476d43cd71fd"
+    },
+    {
+      "bytes": 134672,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=09/bars.parquet",
+      "sha256": "3c30f0b5b16761f2897da0cf889fe32930e603277dabc6c03e297a78265fb16e"
+    },
+    {
+      "bytes": 131651,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=10/bars.parquet",
+      "sha256": "07679f18a3fbd753367b08393b6988c4e84db9814fedbe75f2c5fd3ddc5b5b2a"
+    },
+    {
+      "bytes": 140244,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=11/bars.parquet",
+      "sha256": "5679c8c3f2eb6719c1751e0445e768c340639d0b05c11c2716dc4a0a9658a9ea"
+    },
+    {
+      "bytes": 143887,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2010/month=12/bars.parquet",
+      "sha256": "f9a5e14fbc223709130f9954d721c31f341076beb99de50ca6786e25daf731e2"
+    },
+    {
+      "bytes": 133259,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=01/bars.parquet",
+      "sha256": "9680986801fb81a8b019610bff03fcd838d3e206264caf2a761e10dcd1ee9861"
+    },
+    {
+      "bytes": 125749,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=02/bars.parquet",
+      "sha256": "d1b28ab8b4876c4418e42132191013d8dcaa7b3ca60eb20b3cf04c2af41ad85e"
+    },
+    {
+      "bytes": 144637,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=03/bars.parquet",
+      "sha256": "03be2d384a3485ef471243344d23fecc75089abda9a4112f4f1baafcbd7aea5e"
+    },
+    {
+      "bytes": 130582,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=04/bars.parquet",
+      "sha256": "b49b4a53a9d71805e2dce074e025fbbdbe912bfd528eb18b9ef23d98561c00c2"
+    },
+    {
+      "bytes": 140451,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=05/bars.parquet",
+      "sha256": "1431c728e932d323d51716fc11bdf0d7a8a22bef1c052095d83a342edf21f2f7"
+    },
+    {
+      "bytes": 139891,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=06/bars.parquet",
+      "sha256": "8a644b154d58a7c820f49ac2774374365acf4735882b85e4bb502d8001f39374"
+    },
+    {
+      "bytes": 133265,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=07/bars.parquet",
+      "sha256": "feb6fcdc196ef482c949c178dd3e71f3e2817d4a57ae586e7c1c01c54fe78fb4"
+    },
+    {
+      "bytes": 151505,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=08/bars.parquet",
+      "sha256": "6166e2a71463de5b6b44b9dcf9fc9f507ec7253b2ed257362b9a7c05a8c2385f"
+    },
+    {
+      "bytes": 143476,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=09/bars.parquet",
+      "sha256": "65f785f1d244582107f9de0a6d81dfffdb4fed89228f2c76a03775b0a11b8b72"
+    },
+    {
+      "bytes": 136403,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=10/bars.parquet",
+      "sha256": "7b4509c94892c135a747285aef8f36fe543868a3e1dba5cfc85a1d87f9e581da"
+    },
+    {
+      "bytes": 139589,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=11/bars.parquet",
+      "sha256": "f261a65303bd33898bbd4cbce6e2b988e88f361daef1cd9c910f744f49fe1354"
+    },
+    {
+      "bytes": 135914,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2011/month=12/bars.parquet",
+      "sha256": "c7414b5299811257c0cbbd7471b5d72cc32dfebcd362817c621c5de414a8a663"
+    },
+    {
+      "bytes": 129501,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=01/bars.parquet",
+      "sha256": "7c978282b22e88663960737dd95aa4d0336570c08736e2cdf9f9e4cdaa3fa17a"
+    },
+    {
+      "bytes": 131317,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=02/bars.parquet",
+      "sha256": "717900398a3fc6c107eb9e1a5194462fd6a04073921966da89b200220732091c"
+    },
+    {
+      "bytes": 137457,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=03/bars.parquet",
+      "sha256": "73a22cac47e787c5e5958ea74f595fcf131803b9c3f6c8f609b61a8cb961cb25"
+    },
+    {
+      "bytes": 129739,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=04/bars.parquet",
+      "sha256": "f6002170e14bf1577b71603e81c79579fb847b6c7b722c624b56c28b5c4f7b3c"
+    },
+    {
+      "bytes": 143775,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=05/bars.parquet",
+      "sha256": "095b4333a8e1ced74408f93b2822c91f65b333bc0cea35b221a77d45238a3906"
+    },
+    {
+      "bytes": 132069,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=06/bars.parquet",
+      "sha256": "6f80ddef39fe3f7202bf390f0526dcdfb88f0323e510b0823b7fecf7b43b4ad1"
+    },
+    {
+      "bytes": 138649,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=07/bars.parquet",
+      "sha256": "768c3b73fd061c88655faac908d9dff1f9fad2c813f3cc047fe27180e374004d"
+    },
+    {
+      "bytes": 141845,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=08/bars.parquet",
+      "sha256": "6178db5edabe0be42d0c71aa43a5194067571c1f0725285e7d898700d4e11806"
+    },
+    {
+      "bytes": 123176,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=09/bars.parquet",
+      "sha256": "f8f5153d1c020bf11fbcd82141fd90e573706bc2eff07079a7cb5251792b4ad1"
+    },
+    {
+      "bytes": 139330,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=10/bars.parquet",
+      "sha256": "32d0d08e64c24702b212ebcc1a24339a5a3a860a046eec048c6a97a7de5d820d"
+    },
+    {
+      "bytes": 129493,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=11/bars.parquet",
+      "sha256": "6ca9fde85ff387a04cda02f035b29301ee325955c4660d79aee6b5621566a4e5"
+    },
+    {
+      "bytes": 118612,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2012/month=12/bars.parquet",
+      "sha256": "e99f1f1dc502ec0adad3b76a39fb6598e2efd086a2a6337798172288da5e7019"
+    },
+    {
+      "bytes": 129571,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=01/bars.parquet",
+      "sha256": "45fcea577fbc46cd9698b10ac49a13c0be92898708cdd87465c428b7335907e4"
+    },
+    {
+      "bytes": 114021,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=02/bars.parquet",
+      "sha256": "81f8d2e8e9b2aa75161681ea9d47083509c7b749ba64b957a2201fd648768084"
+    },
+    {
+      "bytes": 119701,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=03/bars.parquet",
+      "sha256": "ae629388e933297313620f8216e1641b1b64c7d7d3a06b60a6fd14478b75127f"
+    },
+    {
+      "bytes": 135030,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=04/bars.parquet",
+      "sha256": "94c236f46c7ad7a952a2075c83f84ceca846c137049876f7df9f5330e4e3c78e"
+    },
+    {
+      "bytes": 139102,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=05/bars.parquet",
+      "sha256": "77023506be7bb0c11c44d4323029ae23c057a80971aeb60f4e8b2dfc8d8b2f90"
+    },
+    {
+      "bytes": 125139,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=06/bars.parquet",
+      "sha256": "ec7d31df39b3a1b7c1ddec7c687afde0cf7947e7ab143a94cbbe41e526a56899"
+    },
+    {
+      "bytes": 135673,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=07/bars.parquet",
+      "sha256": "3fec7b42f1f9eb92eecec1f83a9693d3d81ed55356488f8b9de9d6fd6d363809"
+    },
+    {
+      "bytes": 133180,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=08/bars.parquet",
+      "sha256": "ff43daad4507560eddb0185d1819b20bfb20ce9140323e7a6423205937ee656c"
+    },
+    {
+      "bytes": 125838,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=09/bars.parquet",
+      "sha256": "154199095a406f04014f15cb84db553c8e872942067ffb1f06735c2739489add"
+    },
+    {
+      "bytes": 138153,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=10/bars.parquet",
+      "sha256": "ac8cc13f8fe94a12673b861fb0e19b1ecc68adb16ee460972d88bc0f245e1369"
+    },
+    {
+      "bytes": 122673,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=11/bars.parquet",
+      "sha256": "b102346aa10fa9bb7841e064356472363797d48cedf7b95880db5bca99a3e146"
+    },
+    {
+      "bytes": 125180,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2013/month=12/bars.parquet",
+      "sha256": "3b03fc689b962fc922ec3fda89c1977199d55d94f8fd6de8ded951920633c1cb"
+    },
+    {
+      "bytes": 129289,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=01/bars.parquet",
+      "sha256": "8f86878eb6b3ad684eaf45637bda51df4233810aa066c0eca8a3524e562c75c5"
+    },
+    {
+      "bytes": 118580,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=02/bars.parquet",
+      "sha256": "34db8447363557a167162bf0da8b001545fb6b6f982888a290fb14efaccd4c55"
+    },
+    {
+      "bytes": 125239,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=03/bars.parquet",
+      "sha256": "d32a315e48da80e4fba4752c2b073ab2c50ba1b26667260d411771ceedf38048"
+    },
+    {
+      "bytes": 123457,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=04/bars.parquet",
+      "sha256": "82322665f5109033d6f0cc58c28311e9266d64cea2dd5238865ae10bd2995ac5"
+    },
+    {
+      "bytes": 131620,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=05/bars.parquet",
+      "sha256": "aa8d9e59a5905eea07b63396f3eeb7a834a5ac5b53e44bccfccbf965a93dc4c6"
+    },
+    {
+      "bytes": 126800,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=06/bars.parquet",
+      "sha256": "34ed867a71e7c4098486d5b79a916c130766fc4d5e232031241223e636b89d87"
+    },
+    {
+      "bytes": 136262,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=07/bars.parquet",
+      "sha256": "3a6e158c634a60193f5d2545d3fb049875185f35fd92ead117c7433ed819534a"
+    },
+    {
+      "bytes": 125756,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=08/bars.parquet",
+      "sha256": "a40b428b0fcff9775dac364e92a5657f2cc0a230a5d01e63d2706229b210cebf"
+    },
+    {
+      "bytes": 135082,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=09/bars.parquet",
+      "sha256": "76a761c727d22d749fa5fbb3a9f14cfa36f19cdd7ac4d1c8f653ee8e03bb7f07"
+    },
+    {
+      "bytes": 139762,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=10/bars.parquet",
+      "sha256": "ca86903c562d9a77425772e6e4c654003e9fb69d1bae76c00b94eb194ee47468"
+    },
+    {
+      "bytes": 121645,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=11/bars.parquet",
+      "sha256": "e90b81fe5cd0e8003104e9efa4d83a164ae3518d2f1c0060947bd159e9019c38"
+    },
+    {
+      "bytes": 134035,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2014/month=12/bars.parquet",
+      "sha256": "b9a6ee10c58b3d280d45cbfd2ac3f2ae7fc7ee0535699ee5290526db49ae82b2"
+    },
+    {
+      "bytes": 129585,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=01/bars.parquet",
+      "sha256": "8006a1816039da652cb6694126d791a9925afece564e5906dedd5a2f696f3506"
+    },
+    {
+      "bytes": 122490,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=02/bars.parquet",
+      "sha256": "8d72970ff0e30aa206dcc09ce6678d80fd8adeb00e9f335af05e8f25833cdfa0"
+    },
+    {
+      "bytes": 135161,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=03/bars.parquet",
+      "sha256": "94552f712b487fa2037cbc24efcde423c3c2c1fa7ad6ae6d963d546b5311b131"
+    },
+    {
+      "bytes": 127786,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=04/bars.parquet",
+      "sha256": "d3f4dabd38e850de538b090268d8140fb3a5b4b24ae84758b6597a9a0036921c"
+    },
+    {
+      "bytes": 125342,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=05/bars.parquet",
+      "sha256": "98b7f258bb6600531da7037c7bc361e739c2c2e23bdabdcbb6ec561d30b14ba6"
+    },
+    {
+      "bytes": 127608,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=06/bars.parquet",
+      "sha256": "40d119b3414b264730e82eefcb12115a88b63a629a35c039c13b85bd607822c9"
+    },
+    {
+      "bytes": 133997,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=07/bars.parquet",
+      "sha256": "8c0d874b7e1fbe91d14f11b641e1b8d15cf8e9da4136f178f0af5d03d391fd26"
+    },
+    {
+      "bytes": 126145,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=08/bars.parquet",
+      "sha256": "5509fc645de040b8a566c94988d7a6f14b7d1141d3c3f8a8db0590d1913354ef"
+    },
+    {
+      "bytes": 128047,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=09/bars.parquet",
+      "sha256": "1a5f428ab9c812ea7cdfcc3b1322b6f1d9517d27d400e91594cb2e0972b45a87"
+    },
+    {
+      "bytes": 130617,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=10/bars.parquet",
+      "sha256": "95fb8ee9ea13345a77f635108974932038da730107c6ded7c13e4befc60aef1f"
+    },
+    {
+      "bytes": 123465,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=11/bars.parquet",
+      "sha256": "93d209473b5dbd82665374b3bd87d41349739ea63a3ca5c60aa18e12c747e720"
+    },
+    {
+      "bytes": 128281,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2015/month=12/bars.parquet",
+      "sha256": "136c062945ff9d347da0f706306bb2885c06b1a2deaaea5b6693fd56d2e30254"
+    },
+    {
+      "bytes": 119997,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=01/bars.parquet",
+      "sha256": "58146b3920b4b3c75d14b5aaf6f70e35264e8a96d9c6b16834954adeaa98fc49"
+    },
+    {
+      "bytes": 126459,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=02/bars.parquet",
+      "sha256": "792361b75af02420e2c8a9120583867e264297f3e3d7961a91465645a84b43a7"
+    },
+    {
+      "bytes": 131785,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=03/bars.parquet",
+      "sha256": "0bb1d4ef3f163855dfbc510088d4ac8ab9b0c7638df721fbf970a91a4d5b8770"
+    },
+    {
+      "bytes": 124768,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=04/bars.parquet",
+      "sha256": "a6b953f983f385f474d6f21d1402d7b6ab452130c1673a28d908edf8ef7b1d99"
+    },
+    {
+      "bytes": 131055,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=05/bars.parquet",
+      "sha256": "b4cf94d45bda273d778ba17207aef9819223977ddceaaa2df26b78a6ea36dce5"
+    },
+    {
+      "bytes": 132305,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/bid/M5/year=2016/month=06/bars.parquet",
+      "sha256": "371cbc1761f68c942db6ae0c172e0cbfbbe49c86a54b9930aa5bf513dd20746e"
+    },
+    {
+      "bytes": 130055,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=01/bars.parquet",
+      "sha256": "15b2b910baf5db61f152b4aef6f38ea44bd8ce0e729e676fa35d9479b3b3981f"
+    },
+    {
+      "bytes": 125759,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=02/bars.parquet",
+      "sha256": "113c3612b400d9daa7997edb36e6c1c74a553ec8079076bcefaa9919b0305c7a"
+    },
+    {
+      "bytes": 141020,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=03/bars.parquet",
+      "sha256": "61f295a1027950a361e9be74e866113b0142a8ac36b7e9a8391d0fa1dd038fcc"
+    },
+    {
+      "bytes": 134879,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=04/bars.parquet",
+      "sha256": "c37c4b57906b41fa4f2bcef120feb033a121b144052db7c30643297db1decd94"
+    },
+    {
+      "bytes": 131844,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=05/bars.parquet",
+      "sha256": "abc682f5597bcfe4127b8bb6af573798207c769264ed6c7f40e210ef2931f891"
+    },
+    {
+      "bytes": 136913,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=06/bars.parquet",
+      "sha256": "c6482885e58811fabf6b49c87f7a5b4bef4f6351c8309fa3640b39f6ed834757"
+    },
+    {
+      "bytes": 135870,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=07/bars.parquet",
+      "sha256": "9559fc07f92794fdc8ead21e39280d898eb21c808231378b0e047168b4d7f188"
+    },
+    {
+      "bytes": 138260,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=08/bars.parquet",
+      "sha256": "ed6abb3459707986e12b316aefd8439b9dad803b5fcb2f48e220605d897c0f3a"
+    },
+    {
+      "bytes": 137876,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=09/bars.parquet",
+      "sha256": "e796870d32d6f8f761bef365fc97e11193ea5cbc6d90f0eb84e26b53e640a7c4"
+    },
+    {
+      "bytes": 134748,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=10/bars.parquet",
+      "sha256": "d3833b45bc6b98a3cbb542b8a76b7a7ba4d3fe0d06b4c3cbfb897e4212c28e25"
+    },
+    {
+      "bytes": 143327,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=11/bars.parquet",
+      "sha256": "530ab27e0ef21378c854bffec62e82a66a3a960dba254670ce4237d7c9817a40"
+    },
+    {
+      "bytes": 147312,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2010/month=12/bars.parquet",
+      "sha256": "cc519c123d4322f7667e3d6a470a4af128d3ae9c24296650fc7c921dcec5b529"
+    },
+    {
+      "bytes": 137154,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=01/bars.parquet",
+      "sha256": "8fd53c0a89f246b4709a50d9f98f3a2d0ac281c392dace4b86bf120b705d2014"
+    },
+    {
+      "bytes": 130504,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=02/bars.parquet",
+      "sha256": "82af790676978fe140584d820a57c518d28ec108fd13485d60efb24fb7dc3f25"
+    },
+    {
+      "bytes": 148685,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=03/bars.parquet",
+      "sha256": "54476ab3f0b92f8d36e92219033458a9d6e8863a1f60907671443232ed22897f"
+    },
+    {
+      "bytes": 135386,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=04/bars.parquet",
+      "sha256": "955592e20a989afc1dac900739723f86db2aa6453ecd63ae5c6e0aae846e6275"
+    },
+    {
+      "bytes": 146116,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=05/bars.parquet",
+      "sha256": "fdfae2fb5f96dc7540f9010f1e7842a71d975cc50cf33df597a8922748d67949"
+    },
+    {
+      "bytes": 145421,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=06/bars.parquet",
+      "sha256": "1f3fef9793cb698b25367d03599fec922ddf2694b2138a99d8427bd83925043d"
+    },
+    {
+      "bytes": 139144,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=07/bars.parquet",
+      "sha256": "8b166028d15c2aef7259e536dc7b31bcc41f64b43596f39e6899a9c02b916647"
+    },
+    {
+      "bytes": 157932,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=08/bars.parquet",
+      "sha256": "a5f0ea0665de7a8e962f640302d6feb644c3f603f5326c0086c255aaa13c2155"
+    },
+    {
+      "bytes": 149731,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=09/bars.parquet",
+      "sha256": "9994490a19546d06a5114538daf1298f364e19f635067935a6f92cd882e1e2cc"
+    },
+    {
+      "bytes": 141254,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=10/bars.parquet",
+      "sha256": "31775e8d61379a489e574746e85b4d14075f85511d1788a8d32bae4792b976fc"
+    },
+    {
+      "bytes": 144640,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=11/bars.parquet",
+      "sha256": "ec73d1fbe6162fc74365d1067f2d3a31c41265ee42056c68fba5f1a7b90f8fd2"
+    },
+    {
+      "bytes": 141940,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2011/month=12/bars.parquet",
+      "sha256": "00c92da61d26e2f657209b738a5e78ba04644f1512c6d44f2088a6faad2a1c98"
+    },
+    {
+      "bytes": 140971,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=01/bars.parquet",
+      "sha256": "16e5233492728f0bfe8ae3b6a36d494473b48e10b18e11467009c616dd188a9b"
+    },
+    {
+      "bytes": 140000,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=02/bars.parquet",
+      "sha256": "8b1fc4a0384fce0f263fa8fb412f39f04a1ea2fab485e00e3d5fd817bc796750"
+    },
+    {
+      "bytes": 146212,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=03/bars.parquet",
+      "sha256": "efc0951d2ddba7d77b3a714048b368ed4b46105386b648bde961db9781a2892a"
+    },
+    {
+      "bytes": 137953,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=04/bars.parquet",
+      "sha256": "0ca39d0ea8f6bf2573bc5314a441e03c36272cebf04650f9886e235e4783d098"
+    },
+    {
+      "bytes": 152112,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=05/bars.parquet",
+      "sha256": "9a17a435e648388f067c2acb7e88b850fe588d7cd38df2b0f98123c551a37e42"
+    },
+    {
+      "bytes": 141222,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=06/bars.parquet",
+      "sha256": "6d5166d46cfa2b34583a3cfb836615731d65930e57e6609b05ec6fa856f8b25f"
+    },
+    {
+      "bytes": 148718,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=07/bars.parquet",
+      "sha256": "cb30d0271e67fc0ec0d965a022e8ce095faad8cd4dca3a54373be42527e82260"
+    },
+    {
+      "bytes": 152684,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=08/bars.parquet",
+      "sha256": "029f7aa722ec82b07340b1610c14c00b6924594be53359cd45544520b7358c4d"
+    },
+    {
+      "bytes": 133230,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=09/bars.parquet",
+      "sha256": "575f92128b6dfa893f2f999b4f41e1a9ffd5c539479fdffb26490c66ae9b7d02"
+    },
+    {
+      "bytes": 151196,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=10/bars.parquet",
+      "sha256": "68886bf56bf13c68dcb8c26c0954fe6c5226125b4866385bcdc8a3b3398334c7"
+    },
+    {
+      "bytes": 144060,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=11/bars.parquet",
+      "sha256": "49d86b5247930ce02ea9e2b80acbc6eec2eaeb3c216178bec96059cdc2f33bfb"
+    },
+    {
+      "bytes": 129815,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2012/month=12/bars.parquet",
+      "sha256": "67b9c9fa673d169448df42481f6570e68ff0fb4e3016c0bf567b4fdf327176d7"
+    },
+    {
+      "bytes": 141595,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=01/bars.parquet",
+      "sha256": "04258424c1919bde422a4973b34cfb65b473857997cc3912bdcc1069380656c0"
+    },
+    {
+      "bytes": 123387,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=02/bars.parquet",
+      "sha256": "b8e5bae6ba5cbe3b3dc7bd41e88f5d768e5d8aa9f03bd00ef9c6481894dc3787"
+    },
+    {
+      "bytes": 129436,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=03/bars.parquet",
+      "sha256": "2bd2e2e0ae76de92b2bb59131703e177d8a564d33323d9f989b68efd54137021"
+    },
+    {
+      "bytes": 145938,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=04/bars.parquet",
+      "sha256": "2784e42e246d78fcf2e9d4d66cacc1008a627148ec7ecf29f414dcf7a7f17b07"
+    },
+    {
+      "bytes": 148810,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=05/bars.parquet",
+      "sha256": "e0263390a36f03e33db87a743e00af897553c6dcf38a3566c8c1827bbe95d47b"
+    },
+    {
+      "bytes": 134384,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=06/bars.parquet",
+      "sha256": "e45ce16c7540feedfb77e5ae3ea44b83952b054aa4c6ba95a5fdedb73bf12e4d"
+    },
+    {
+      "bytes": 145775,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=07/bars.parquet",
+      "sha256": "286ed0bb8552c047d1ad6c5dc554efb1325a69a08602fd58c71dd9f2146073bc"
+    },
+    {
+      "bytes": 143185,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=08/bars.parquet",
+      "sha256": "c08de37f2c188fb50852262878802d8022f3f61a101ae75ff56c8839a00dbb9e"
+    },
+    {
+      "bytes": 136027,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=09/bars.parquet",
+      "sha256": "bf1ab62a22da827e28e78366903d908401ca890887ca4da4e4c37324642c408d"
+    },
+    {
+      "bytes": 148539,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=10/bars.parquet",
+      "sha256": "1f461dd7d682a7931d13c7676bc84af4fa03018f9c4bee7dd891400968314ea1"
+    },
+    {
+      "bytes": 132713,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=11/bars.parquet",
+      "sha256": "b4a32a4e7ca4f1347b66b4a0005e40532eea782f095bc41a878aa5cddf625c48"
+    },
+    {
+      "bytes": 134394,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2013/month=12/bars.parquet",
+      "sha256": "ccc16e58e7f616003147d709c745beb1ab7d274446bbd8351616591da8cafe4d"
+    },
+    {
+      "bytes": 138644,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=01/bars.parquet",
+      "sha256": "8a1445b38a4c455dc127a0b7f6f065bc7701585e495e9f2da9a46476858bd504"
+    },
+    {
+      "bytes": 128478,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=02/bars.parquet",
+      "sha256": "041ad978b2398f9b4621f87f5cf8a64062d05d3509477349bb32ba247eab307b"
+    },
+    {
+      "bytes": 133354,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=03/bars.parquet",
+      "sha256": "8693c527f5118a76d2ccec04882d2a3adf615f9e244dd785a8fc7a7366ca8a2c"
+    },
+    {
+      "bytes": 129805,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=04/bars.parquet",
+      "sha256": "e39763b57a4cf370452a776aec2913960f8a4976d449105070888af25c4babbf"
+    },
+    {
+      "bytes": 139618,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=05/bars.parquet",
+      "sha256": "04273dee7733f82383b5aae87370394a0c81b22322ba3f20974d16ea143e3967"
+    },
+    {
+      "bytes": 135470,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=06/bars.parquet",
+      "sha256": "ce4a7aa372373394934651ab6a738bc29f77d6cab4f25f440793c62012cb9669"
+    },
+    {
+      "bytes": 144422,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=07/bars.parquet",
+      "sha256": "cbca1d4ce2e0afe290d8a92008868a670b8c20b5243c38385d47331aaa814760"
+    },
+    {
+      "bytes": 133759,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=08/bars.parquet",
+      "sha256": "f19b0abee340cfcf5c929890d3a7f14029390a996b4e48890818b8b17722b086"
+    },
+    {
+      "bytes": 143416,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=09/bars.parquet",
+      "sha256": "9c5046fce17bf97e90f3421915667ea25a15557d199cf59ecc380f69666fb95e"
+    },
+    {
+      "bytes": 149851,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=10/bars.parquet",
+      "sha256": "15f409189d4b3af27c1c4c06353dbeffee197408b8edeec05434bfc8e7344d41"
+    },
+    {
+      "bytes": 130036,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=11/bars.parquet",
+      "sha256": "0f00b414a68ebf565850a6ef97de31524d9a8583df116a57f92d61b5718430a2"
+    },
+    {
+      "bytes": 143270,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2014/month=12/bars.parquet",
+      "sha256": "896efae1aa24292c3bff82900ba60c8dcc6b4ec17a355e19af1d048f87d5836d"
+    },
+    {
+      "bytes": 139817,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=01/bars.parquet",
+      "sha256": "10222a2dec739481bea978a725e9137e46be58200d54eab779120ef5e11915d6"
+    },
+    {
+      "bytes": 131282,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=02/bars.parquet",
+      "sha256": "74181ede840fb2b597fdb13e6f99ae1308bccda0b7d7bbd5e6834b87bfe1f86e"
+    },
+    {
+      "bytes": 144468,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=03/bars.parquet",
+      "sha256": "315368232dd8dd15caf5ad9968d66b40f7a51640ed4b6e8338df2764753d650a"
+    },
+    {
+      "bytes": 136733,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=04/bars.parquet",
+      "sha256": "64270778ce28c9724e7ac2ac8fe1a943681ffef5b0a640bcf98aa106ca948e9f"
+    },
+    {
+      "bytes": 135639,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=05/bars.parquet",
+      "sha256": "e929f4bfee882ad764889d1d393574f316699d6fa15facbbe447060a251458f6"
+    },
+    {
+      "bytes": 138921,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=06/bars.parquet",
+      "sha256": "9f863fce12403fd6fc04ccb0271524a2c6de33c0986fe1e133fbee4baf677a00"
+    },
+    {
+      "bytes": 147238,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=07/bars.parquet",
+      "sha256": "04a0066e6e3ee399e3cc6fad0aed84f098f2f322bb6f94473f809d25558a5c2c"
+    },
+    {
+      "bytes": 138025,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=08/bars.parquet",
+      "sha256": "ac790a3779c05f417e763fb0e9163d146749527858d4958c2526c13768cbbb24"
+    },
+    {
+      "bytes": 139005,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=09/bars.parquet",
+      "sha256": "c9a5d013ee463df9b4f6756d8eb08ae57ba9b11931f2ee3f985471197f36687e"
+    },
+    {
+      "bytes": 142332,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=10/bars.parquet",
+      "sha256": "6711112bb790d9cc7d236cb91dfa298e75ab2d0c8946ccf9dd1cbd045297ef08"
+    },
+    {
+      "bytes": 134287,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=11/bars.parquet",
+      "sha256": "3dd6493015acfba1560e2f34c16e86bd965708a26e9e7b5db0317702fd7ac94d"
+    },
+    {
+      "bytes": 138804,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2015/month=12/bars.parquet",
+      "sha256": "114e9c3298abb573449de6864ce2f5937d1ee61cff373d9dc084548f785c6778"
+    },
+    {
+      "bytes": 130501,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=01/bars.parquet",
+      "sha256": "1e2250c24a254d70be04fce5741128c5ab5da822698fd015c7bc9dfc4bdf5b67"
+    },
+    {
+      "bytes": 138000,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=02/bars.parquet",
+      "sha256": "484ec2535c09365c2f7d9c7701e7a01c6a3ff659fbb65e9c05af22b7c8830eff"
+    },
+    {
+      "bytes": 141255,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=03/bars.parquet",
+      "sha256": "e290a42244e14cfed0e4e27125988ac53cb9a1c2f79054b79961b80fd953da6a"
+    },
+    {
+      "bytes": 133716,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=04/bars.parquet",
+      "sha256": "83b270ecd9acc637d19bf9207fcc6abed6279b8a7ea91bc97b6cefbbe7f41a05"
+    },
+    {
+      "bytes": 142480,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=05/bars.parquet",
+      "sha256": "a257a8f080b435bba1df9b5085ef761bace00a86658476f18f4311af814eb556"
+    },
+    {
+      "bytes": 143795,
+      "path": "out-of-era-replication-v1/dukascopy-replay/bars/XAUUSD/mid/M5/year=2016/month=06/bars.parquet",
+      "sha256": "0a3a6673c884f36c897d1b04f911d93531088ccd10d3dbef0b362245087ff0f9"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    }
+  ],
+  "historical_periods_are_discovery_only": true,
+  "manifest_sha256": "e6493d44a1e242f9297d1058970665728f0187d21a23e0752138a3f705c3a8dc",
+  "package_files": [
+    {
+      "bytes": 71,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/.gitattributes",
+      "sha256": "1145554d43edfb5df4ab16c7bfe24d4bfd8afda1cefdca31bad6f8019a64fa0c"
+    },
+    {
+      "bytes": 3378,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/PREREGISTRATION.md",
+      "sha256": "115ab7eaff94e46cadc4b4d4908ff940c3f45e32aad8cc4f9c11f5eaa7bc84d8"
+    },
+    {
+      "bytes": 34,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/requirements.txt",
+      "sha256": "c7444d20ec0df87c796885ab90f0f87b11de0307f948c04a0c6644d0dda0ab1b"
+    },
+    {
+      "bytes": 4394,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/config/chop_transition_mechanisms_v2.json",
+      "sha256": "b14d4ba376d5d7bc4b8fb437442561351d8d850c1cfe01851d2aa10b17795a11"
+    },
+    {
+      "bytes": 64,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/src/__init__.py",
+      "sha256": "e7b5bef3ba24c885df9f96a4c6d814074b9f88a25b89c7653f218202aca9fdc6"
+    },
+    {
+      "bytes": 20859,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/src/campaign.py",
+      "sha256": "448352b32b310eeae64ccb27e31cd9ac5ed9eb3f5771987478209e2317706ecf"
+    },
+    {
+      "bytes": 5063,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/lock_contract.py",
+      "sha256": "294110fd7fe3649cd5522c24bbfb196f46202d279e8e27410fc0cf14a7c7551f"
+    },
+    {
+      "bytes": 12519,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/run_screen.py",
+      "sha256": "a582bfdfd2f201b07b1d9dccad8512fbd16606b3539ca2fe9cb354008b4dc207"
+    },
+    {
+      "bytes": 4042,
+      "path": "xau-usd/xauusd-fast-research/chop-transition-mechanisms-v2/tests/test_campaign.py",
+      "sha256": "a888cf6330046ee7358e73e6100db46415cd7fe9050a57783f62516050cdb783"
+    }
+  ],
+  "paid_data_request_made": false,
+  "prospective_shadow_required": true,
+  "raw_tick_confirmation_required": true,
+  "schema_version": "xauusd_chop_transition_mechanisms_v2_contract",
+  "training_authorized": false
+}
