@@ -1,0 +1,29 @@
+{
+  "files": {
+    "M15_REGIME_TARGET_CAMPAIGN_V2_CONTRACT_LOCK.json": {
+      "bytes": 59923,
+      "sha256": "cfbcaf1551d8566004eb8461bc2dca1a895cc4ad066000afa9d1789e39160b63"
+    },
+    "M15_REGIME_TARGET_CAMPAIGN_V2_MANIFEST.csv": {
+      "bytes": 257306,
+      "sha256": "2ba905bb1788bf415cca3033cbecd52ed5a8f87d131cd7496c34715c80ff0ec5"
+    },
+    "M15_REGIME_TARGET_CAMPAIGN_V2_METRICS.csv": {
+      "bytes": 1001695,
+      "sha256": "d1efba726dd38dad572d1e973e2179257b84830a99a1139ccd754149e73207aa"
+    },
+    "M15_REGIME_TARGET_CAMPAIGN_V2_RESULT.json": {
+      "bytes": 2159,
+      "sha256": "bec9d256aaf412812312a7cb7db277f30529c224583f3c742b4bee9bbfeb767e"
+    },
+    "M15_REGIME_TARGET_CAMPAIGN_V2_RESULT.md": {
+      "bytes": 598,
+      "sha256": "38b75f9eb6c3ea57c98337029959a08e1583cf003adc122e010b9eeda8c419e5"
+    },
+    "M15_REGIME_TARGET_CAMPAIGN_V2_SHORTLIST.csv": {
+      "bytes": 876,
+      "sha256": "f3a67ab382453f421bed330b549cfe66189b3d74b8e0885ec3ebdf320672a537"
+    }
+  },
+  "schema_version": "xauusd_m15_regime_target_campaign_v2_artifacts"
+}
