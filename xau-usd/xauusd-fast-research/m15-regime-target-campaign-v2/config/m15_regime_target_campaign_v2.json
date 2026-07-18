@@ -1,0 +1,49 @@
+{
+  "schema_version": "xauusd_m15_regime_target_campaign_v2",
+  "base": {
+    "config_path": "../m15-regime-target-campaign-v1/config/m15_regime_target_campaign_v1.json",
+    "config_sha256": "cfd5f1056ec99f912f50384001f439c2ad132c0f7b6698f297ab62cbdd926b95",
+    "invalidation_path": "../m15-regime-target-campaign-v1/outputs/M15_REGIME_TARGET_CAMPAIGN_V1_INVALIDATION.json",
+    "invalidation_sha256": "851d74ab865da459d280d0b4b7ccf5d6cef2d65e5198ddd1a9807f12e54b6e2a"
+  },
+  "selection": {
+    "attempt_first": 18120,
+    "attempt_last": 19119,
+    "regime_count": 2,
+    "mechanics_per_regime": 5,
+    "variants_per_mechanic": 100,
+    "total_attempts": 1000,
+    "maximum_economic_finalists_per_mechanic": 3,
+    "false_discovery_rate": 0.1
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "M15_REGIME_TARGET_CAMPAIGN_V2_CONTRACT_LOCK.json",
+    "manifest": "M15_REGIME_TARGET_CAMPAIGN_V2_MANIFEST.csv",
+    "metrics": "M15_REGIME_TARGET_CAMPAIGN_V2_METRICS.csv",
+    "shortlist": "M15_REGIME_TARGET_CAMPAIGN_V2_SHORTLIST.csv",
+    "result_json": "M15_REGIME_TARGET_CAMPAIGN_V2_RESULT.json",
+    "result_markdown": "M15_REGIME_TARGET_CAMPAIGN_V2_RESULT.md",
+    "artifact_manifest": "M15_REGIME_TARGET_CAMPAIGN_V2_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v2": 18119,
+    "v1_definitions_unchanged": true,
+    "v1_quantitative_inference_permitted": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "raw_tick_confirmation_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  },
+  "correction": {
+    "datetime_unit": "ns",
+    "entry_gap_regression_required": true,
+    "signal_equals_bar_end_required": true
+  }
+}
