@@ -1,0 +1,214 @@
+{
+  "contract_sha256": "05a4b878b8473ebd97ad0b211482a3b4faaff1e380de774e63bdbbcd51099376",
+  "dependency_files": [
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_gap_minutes": 40,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_variant_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "same_bar_priority": "STOP_FIRST",
+    "screen_exit": "PROTECTIVE_STOP_KNOWN_ANCHOR_OR_FIXED_HORIZON",
+    "stress_slippage_r": 0.05,
+    "target_fill_policy": "FIXED_KNOWN_ANCHOR",
+    "ticket_cost_usd": 0.3
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "geometries": {
+    "C_BALANCED": {
+      "maximum_hold_hours": 8.0,
+      "maximum_target_r": 2.5,
+      "minimum_target_r": 0.25,
+      "stop_atr": 1.0
+    },
+    "C_EXTENDED": {
+      "maximum_hold_hours": 12.0,
+      "maximum_target_r": 3.0,
+      "minimum_target_r": 0.3,
+      "stop_atr": 1.25
+    },
+    "C_FAST": {
+      "maximum_hold_hours": 4.0,
+      "maximum_target_r": 2.0,
+      "minimum_target_r": 0.2,
+      "stop_atr": 0.75
+    }
+  },
+  "manifest_evidence": {
+    "bytes": 3712,
+    "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/outputs/CHOP_WEEKLY_PARTIAL_V13_MANIFEST_EVIDENCE.json",
+    "sha256": "b8979e465d5c992e38d9cca486f41886d949b42c33b189c8adea76c2aa86c402"
+  },
+  "manifest_file": {
+    "bytes": 272663,
+    "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/outputs/CHOP_WEEKLY_PARTIAL_V13_MANIFEST.csv",
+    "sha256": "49871b3a7fa462edf7d1edef80656ea5585f427f060c09e1d6fbf216ae6d5934"
+  },
+  "manifest_membership_uses_signal_counts_only": true,
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2203,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/PREREGISTRATION.md",
+      "sha256": "42e10e27c64337bf9cb3f668fe8dfef83bf53cdb5d163f0ab8b666169d795431"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 4878,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/config/chop_weekly_partial_rotation_v13.json",
+      "sha256": "2f3534b7267486b557ab4c431cbf2fafb05748815c50f8d8f67494b283287cc9"
+    },
+    {
+      "bytes": 69,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/src/__init__.py",
+      "sha256": "4326398c83bd2a3f2b4d0caa79d55d7eef4fc39aed1f3de23943380c241b2a65"
+    },
+    {
+      "bytes": 20981,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/src/campaign.py",
+      "sha256": "397db94f061f60cdebd5584cfe9fa60c2c10864a7460136b4026e46f839d8c6d"
+    },
+    {
+      "bytes": 3632,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/prepare_manifest.py",
+      "sha256": "72aca3b8e0e3bb338aeb69b3df61ab3546ced32fb54f5033a47fbb8bda11644b"
+    },
+    {
+      "bytes": 4392,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/lock_contract.py",
+      "sha256": "6ade8d9c76c35d4b36ea2e8d5c4fe25a544a006601442147bf98335b30f9ef0f"
+    },
+    {
+      "bytes": 12281,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/run_screen.py",
+      "sha256": "8669fe16dfaf446f901f04b37975905a1d4ede61f4df2fe4faab6c7b34be91a8"
+    },
+    {
+      "bytes": 5645,
+      "path": "xau-usd/xauusd-fast-research/chop-weekly-partial-rotation-v13/tests/test_campaign.py",
+      "sha256": "84cfd8c87744e50e04e523fc309cc88df51b207dce0a589380d7852e35ded5e3"
+    }
+  ],
+  "paid_data_used": false,
+  "regime": {
+    "adx_period": 14,
+    "atr_percentile_lookback": 504,
+    "atr_period": 14,
+    "chop_adx_max": 25.0,
+    "chop_displacement_atr_max": 1.75,
+    "chop_er_max": 0.38,
+    "chop_width_atr_max": 8.0,
+    "chop_width_atr_min": 1.0,
+    "compression_adx_max": 22.0,
+    "compression_atr_ratio_max": 0.75,
+    "compression_width_atr_max": 4.5,
+    "ema_period": 50,
+    "ema_slope_bars": 6,
+    "er_lookback": 24,
+    "range_lookback": 24,
+    "trend_adx_min": 22.0,
+    "trend_er_min": 0.32,
+    "trend_slope_atr_min": 0.18,
+    "unsafe_atr_percentile": 95.0,
+    "unsafe_gap_atr": 1.5
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_chop_weekly_partial_v13_contract",
+  "selection": {
+    "attempt_first": 28239,
+    "attempt_last": 29238,
+    "attempts_per_mechanic": 200,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "chop-weekly-partial-v13-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "CHOP_WEEK_OPEN_PARTIAL_ROTATION",
+      "CHOP_WEEK_VWAP_PARTIAL_ROTATION",
+      "CHOP_PRIOR_WEEK_MID_PARTIAL_ROTATION",
+      "CHOP_PRIOR_WEEK_EDGE_REENTRY",
+      "CHOP_LONDON_WEEK_IMPULSE_FADE"
+    ],
+    "minimum_raw_signals_each_era": 15,
+    "minimum_raw_signals_total": 100,
+    "total_attempts": 1000
+  },
+  "signal": {
+    "atr_period": 14,
+    "efficiency_lookback": 18,
+    "ema_fast_period": 20,
+    "ema_slow_period": 80,
+    "prior_range_bars": 18
+  },
+  "training_authorized": false,
+  "windows": {
+    "era_2016_2019": [
+      "2016-07-01T00:00:00Z",
+      "2019-01-01T00:00:00Z"
+    ],
+    "era_2019_2021": [
+      "2019-01-01T00:00:00Z",
+      "2021-07-01T00:00:00Z"
+    ],
+    "era_2021_2024": [
+      "2021-07-01T00:00:00Z",
+      "2024-01-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-01-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}
