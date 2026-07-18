@@ -1,0 +1,2 @@
+"""Frozen transition composite discovery."""
+

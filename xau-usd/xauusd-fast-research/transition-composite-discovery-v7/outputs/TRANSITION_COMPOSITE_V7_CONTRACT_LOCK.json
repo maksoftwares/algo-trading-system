@@ -1,0 +1,243 @@
+{
+  "component_pool": [
+    {
+      "attempt_no": 24640,
+      "geometry_id": "T_EXTENDED",
+      "mechanic": "TRANS_ANCESTRY_RESIDUAL_REACCELERATION"
+    },
+    {
+      "attempt_no": 24877,
+      "geometry_id": "T_BALANCED",
+      "mechanic": "TRANS_RESIDUAL_BREAKOUT"
+    },
+    {
+      "attempt_no": 24995,
+      "geometry_id": "T_EXTENDED",
+      "mechanic": "TRANS_SINGLE_FACTOR_RESOLUTION"
+    },
+    {
+      "attempt_no": 25048,
+      "geometry_id": "T_EXTENDED",
+      "mechanic": "TRANS_ANCESTRY_OVERSHOOT_REVERSAL"
+    }
+  ],
+  "components_selected_after_outcomes": true,
+  "composite_outcomes_opened": false,
+  "contract_sha256": "7df68e90e72f47075e60a77828628808b6ee7a65f76d95afb7539b6a594b8f5b",
+  "dependency_files": [
+    {
+      "bytes": 20215,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/campaign.py",
+      "sha256": "501b607eb524540005401aa3e1fb2b48f6d0a38a53cbf48ecac37fd0d0b9652d"
+    },
+    {
+      "bytes": 3636,
+      "path": "xau-usd/xauusd-fast-research/macro-regime-routing-v1/src/foundation.py",
+      "sha256": "4f157df9d2fd9028790a76b788456068cb8d865de4d8a223492a39dd3e0c47e7"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    {
+      "bytes": 41574,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+      "sha256": "6207cc989aaebdc778defa3d65ec87cfbb0391e9239431db42091d2579b11742"
+    },
+    {
+      "bytes": 13482,
+      "path": "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+      "sha256": "6e821e57a8429c8191199fa715a286f757c31cecffb59c462ca7d3f959c00dba"
+    },
+    {
+      "bytes": 28103,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v1/src/campaign.py",
+      "sha256": "09df77cf8df14a8b3043c95f93bdf31aac43d37bce1b37c2902bb8676621bc94"
+    },
+    {
+      "bytes": 6109,
+      "path": "xau-usd/xauusd-fast-research/intraday-macro-specialists-v1/src/data.py",
+      "sha256": "9f45b1ab3866dd47ad282048475b9a39bb2825ddb2eb878c4592ec0f7b1add1f"
+    },
+    {
+      "bytes": 2626,
+      "path": "xau-usd/xauusd-fast-research/m15-regime-target-campaign-v2/src/correction.py",
+      "sha256": "77491fa726d75b077ddffaaa6dc712fda187333bad60b8987bc60ab355ac94df"
+    },
+    {
+      "bytes": 24027,
+      "path": "xau-usd/xauusd-fast-research/walkforward-state-action-router-v1/src/router.py",
+      "sha256": "0f8f6153d4b52634c623edd1655c5c91a03cede6490ca48be08f8b49852ad424"
+    },
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "component_trade_geometry_and_costs_unchanged": true,
+    "maximum_trades_per_composite_utc_day": 4,
+    "position_overlap_policy": "FIRST_ENTRY_BY_LOCKED_TIE_PRIORITY"
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    {
+      "bytes": 40257937,
+      "path": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    },
+    {
+      "bytes": 977,
+      "path": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+      "sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+    }
+  ],
+  "external_storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "manifest_evidence": {
+    "bytes": 1802,
+    "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/outputs/TRANSITION_COMPOSITE_V7_MANIFEST_EVIDENCE.json",
+    "sha256": "639fe7aa3209f11204f8362ea29a0f9a0ac64ae4cd914dc4c827d6fc77545c2f"
+  },
+  "manifest_file": {
+    "bytes": 1492,
+    "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/outputs/TRANSITION_COMPOSITE_V7_MANIFEST.csv",
+    "sha256": "dae2afefc9004ad28148812905a270c03edd817b451460ab53ff0d4dcdb45073"
+  },
+  "package_files": [
+    {
+      "bytes": 18,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/.gitattributes",
+      "sha256": "11cf3778f136d0c9701cfb1092c112c0c1372b1da74c1a1658753c498ac191ae"
+    },
+    {
+      "bytes": 1716,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/PREREGISTRATION.md",
+      "sha256": "6792decacbc194c1abb688eb11831c47965a60fc50f3984e3fa293b3ce1f5ea0"
+    },
+    {
+      "bytes": 35,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/requirements.txt",
+      "sha256": "c4b0e019ee978520152596ad41e50dbeb3c626488d49373993199fc225a0d895"
+    },
+    {
+      "bytes": 3244,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/config/transition_composite_discovery_v7.json",
+      "sha256": "09df18195e253eb257eb47307439f4a276983016c4da92ab854aef08ecc09f72"
+    },
+    {
+      "bytes": 46,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/src/__init__.py",
+      "sha256": "faa94b09f28e52a499952163628ad7461e95492b0f603a7dc05b79cdc4414673"
+    },
+    {
+      "bytes": 3444,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/src/composite.py",
+      "sha256": "443476235c392c357722238a33e19aa9ea3b724a75c3bab8a559a11d13d8a739"
+    },
+    {
+      "bytes": 3338,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/prepare_manifest.py",
+      "sha256": "5b858d32f146bec6ad3121880740325f993f0411aace2401562a7ab8db4d114a"
+    },
+    {
+      "bytes": 5065,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/lock_contract.py",
+      "sha256": "8b407585c70dd0d6c8944223b59a62cc4497cf08241c881078a652c0b4a88166"
+    },
+    {
+      "bytes": 10617,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/run_discovery.py",
+      "sha256": "8ad80f68b27378afc3fde6a0bf462c72924ad92c8bb9876db78de31efef34003"
+    },
+    {
+      "bytes": 2664,
+      "path": "xau-usd/xauusd-fast-research/transition-composite-discovery-v7/tests/test_composite.py",
+      "sha256": "3b3ab990fd1fd98f6731afb0ed6f0caf40b676129ad5d768b64ef5f2111797bf"
+    }
+  ],
+  "paid_data_used": false,
+  "schema_version": "xauusd_transition_composite_discovery_v7_contract",
+  "selection": {
+    "attempt_count": 22,
+    "attempt_first": 25120,
+    "attempt_last": 25141,
+    "false_discovery_rate": 0.1,
+    "maximum_subset_size": 4,
+    "minimum_subset_size": 2,
+    "same_version_post_outcome_tuning_authorized": false,
+    "subset_search_count": 22,
+    "tie_priorities": [
+      "ATTEMPT_ASCENDING",
+      "ATTEMPT_DESCENDING"
+    ]
+  },
+  "source_campaign_files": [
+    {
+      "bytes": 5700,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/config/crossasset_residual_regime_campaign_v6.json",
+      "sha256": "6c662b222cb98227875227016086d86cf3a810b71e3ac5bf01aecfd821735177"
+    },
+    {
+      "bytes": 8942,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_CONTRACT_LOCK.json",
+      "sha256": "69f39f41af1d611a439bd7179c1ba4e0d8fe9b6dfe13355d031f754d7e022554"
+    },
+    {
+      "bytes": 1052615,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_METRICS.csv",
+      "sha256": "add6cde88e3122b6dbcf7332f7be38854ff14b88bb5c1e0554dba3db8b162e85"
+    },
+    {
+      "bytes": 1244,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_RESULT.json",
+      "sha256": "c9a2514fda5b665858ceddfddb6825fe761df4d324606134b40334eb61d17551"
+    },
+    {
+      "bytes": 609840,
+      "path": "xau-usd/xauusd-fast-research/crossasset-residual-regime-campaign-v6/outputs/CROSSASSET_RESIDUAL_V6_SELECTED_TRADES.parquet",
+      "sha256": "c8bf597912522a2daf066268b231a5f9f8e564c435ef16f004bc8ef2587e2dd1"
+    }
+  ],
+  "subset_search_count": 22,
+  "training_authorized": false,
+  "windows": {
+    "era_2019_2021": [
+      "2019-07-01T00:00:00Z",
+      "2021-04-01T00:00:00Z"
+    ],
+    "era_2021_2023": [
+      "2021-04-01T00:00:00Z",
+      "2023-01-01T00:00:00Z"
+    ],
+    "era_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-10-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-10-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}

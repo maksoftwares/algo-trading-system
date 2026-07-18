@@ -1,0 +1,60 @@
+{
+  "component_identity": [
+    {
+      "attempt_no": 24640,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "minimum_era_stress_pf": 0.8011212644938928,
+      "whole_stress_net_r": 16.464581693403314,
+      "whole_stress_pf": 1.1706749417978768,
+      "whole_trades": 157
+    },
+    {
+      "attempt_no": 24877,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "minimum_era_stress_pf": 0.7795137869699822,
+      "whole_stress_net_r": 2.432919981185157,
+      "whole_stress_pf": 1.0347029199050126,
+      "whole_trades": 107
+    },
+    {
+      "attempt_no": 24995,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "minimum_era_stress_pf": 0.8168023627817981,
+      "whole_stress_net_r": 19.477997222511792,
+      "whole_stress_pf": 1.2672585297573824,
+      "whole_trades": 118
+    },
+    {
+      "attempt_no": 25048,
+      "checks": {
+        "geometry_id": true,
+        "mechanic": true,
+        "trade_rows": true
+      },
+      "minimum_era_stress_pf": 0.8593060762184509,
+      "whole_stress_net_r": 1.3901852991254002,
+      "whole_stress_pf": 1.0137160127857523,
+      "whole_trades": 140
+    }
+  ],
+  "component_trade_file_sha256": "c8bf597912522a2daf066268b231a5f9f8e564c435ef16f004bc8ef2587e2dd1",
+  "components_selected_after_outcomes": true,
+  "composite_outcomes_opened": false,
+  "execution_authorized": false,
+  "manifest_rows": 22,
+  "manifest_sha256": "dae2afefc9004ad28148812905a270c03edd817b451460ab53ff0d4dcdb45073",
+  "schema_version": "xauusd_transition_composite_v7_manifest_evidence",
+  "training_authorized": false
+}

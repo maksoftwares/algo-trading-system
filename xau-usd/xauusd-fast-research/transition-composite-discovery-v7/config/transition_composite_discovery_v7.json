@@ -1,0 +1,90 @@
+{
+  "schema_version": "xauusd_transition_composite_discovery_v7",
+  "source_campaign": {
+    "directory": "../crossasset-residual-regime-campaign-v6",
+    "config": "config/crossasset_residual_regime_campaign_v6.json",
+    "contract_lock": "outputs/CROSSASSET_RESIDUAL_V6_CONTRACT_LOCK.json",
+    "metrics": "outputs/CROSSASSET_RESIDUAL_V6_METRICS.csv",
+    "result": "outputs/CROSSASSET_RESIDUAL_V6_RESULT.json",
+    "selected_trades": "outputs/CROSSASSET_RESIDUAL_V6_SELECTED_TRADES.parquet"
+  },
+  "component_pool": [
+    {
+      "attempt_no": 24640,
+      "mechanic": "TRANS_ANCESTRY_RESIDUAL_REACCELERATION",
+      "geometry_id": "T_EXTENDED"
+    },
+    {
+      "attempt_no": 24877,
+      "mechanic": "TRANS_RESIDUAL_BREAKOUT",
+      "geometry_id": "T_BALANCED"
+    },
+    {
+      "attempt_no": 24995,
+      "mechanic": "TRANS_SINGLE_FACTOR_RESOLUTION",
+      "geometry_id": "T_EXTENDED"
+    },
+    {
+      "attempt_no": 25048,
+      "mechanic": "TRANS_ANCESTRY_OVERSHOOT_REVERSAL",
+      "geometry_id": "T_EXTENDED"
+    }
+  ],
+  "selection": {
+    "attempt_first": 25120,
+    "attempt_last": 25141,
+    "attempt_count": 22,
+    "minimum_subset_size": 2,
+    "maximum_subset_size": 4,
+    "tie_priorities": ["ATTEMPT_ASCENDING", "ATTEMPT_DESCENDING"],
+    "subset_search_count": 22,
+    "false_discovery_rate": 0.10,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "windows": {
+    "era_2019_2021": ["2019-07-01T00:00:00Z", "2021-04-01T00:00:00Z"],
+    "era_2021_2023": ["2021-04-01T00:00:00Z", "2023-01-01T00:00:00Z"],
+    "era_2023_2024": ["2023-01-01T00:00:00Z", "2024-10-01T00:00:00Z"],
+    "era_2024_2026": ["2024-10-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_trades_per_composite_utc_day": 4,
+    "position_overlap_policy": "FIRST_ENTRY_BY_LOCKED_TIE_PRIORITY",
+    "component_trade_geometry_and_costs_unchanged": true
+  },
+  "economic_gates": {
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "minimum_stress_pf_each_era": 1.10,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_total_stress_pf": 1.25,
+    "maximum_closed_drawdown_r": 25.0,
+    "top_winners_removed": 5,
+    "minimum_top_winners_removed_net_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "manifest": "TRANSITION_COMPOSITE_V7_MANIFEST.csv",
+    "manifest_evidence": "TRANSITION_COMPOSITE_V7_MANIFEST_EVIDENCE.json",
+    "contract_lock": "TRANSITION_COMPOSITE_V7_CONTRACT_LOCK.json",
+    "metrics": "TRANSITION_COMPOSITE_V7_METRICS.csv",
+    "trades": "TRANSITION_COMPOSITE_V7_TRADES.parquet",
+    "result_json": "TRANSITION_COMPOSITE_V7_RESULT.json",
+    "result_markdown": "TRANSITION_COMPOSITE_V7_RESULT.md",
+    "artifact_manifest": "TRANSITION_COMPOSITE_V7_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "components_selected_after_outcomes": true,
+    "composite_outcomes_opened_before_lock": false,
+    "historical_periods_are_discovery_only": true,
+    "exact_raw_tick_confirmation_required": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
+
