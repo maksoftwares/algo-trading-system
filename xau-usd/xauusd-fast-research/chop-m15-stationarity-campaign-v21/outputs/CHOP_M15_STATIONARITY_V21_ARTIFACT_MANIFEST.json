@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_M15_STATIONARITY_V21_CONTRACT_LOCK.json": {
+      "bytes": 8167,
+      "sha256": "f8ae06bc81f6e4cb1783c6f72ca801a0926b20bd0e6478641af55bdd7e0b1cfa"
+    },
+    "CHOP_M15_STATIONARITY_V21_MANIFEST.csv": {
+      "bytes": 378936,
+      "sha256": "7c7a9513f0f929afdb93aece491024714540e92acff90da0506b070192ab7e36"
+    },
+    "CHOP_M15_STATIONARITY_V21_MANIFEST_EVIDENCE.json": {
+      "bytes": 3836,
+      "sha256": "7a3aa32f68cb4ed3de12bb52ccad18725143c7a96be3849abec5a2d2c0491e6e"
+    },
+    "CHOP_M15_STATIONARITY_V21_METRICS.csv": {
+      "bytes": 1074378,
+      "sha256": "47e56e4de6c0deb20c8fc793a1462150ddc7db3ff5d5dc95408c72af008ad83f"
+    },
+    "CHOP_M15_STATIONARITY_V21_RESULT.json": {
+      "bytes": 4861,
+      "sha256": "a3c9c3a155fdd9339faea1930ca79f62857c50b140ffd8b2a908d8838c30cf87"
+    },
+    "CHOP_M15_STATIONARITY_V21_RESULT.md": {
+      "bytes": 2117,
+      "sha256": "59572613a7aaafd6e06cb1c2dacbe9f809bd4567e2976f6010f4c08977d8f967"
+    },
+    "CHOP_M15_STATIONARITY_V21_SELECTED_TRADES.parquet": {
+      "bytes": 232954,
+      "sha256": "e590a374419746ef3836a3a328bb094fba655d6be332ad6997120c06c62f7756"
+    },
+    "CHOP_M15_STATIONARITY_V21_SHORTLIST.csv": {
+      "bytes": 18022,
+      "sha256": "2f697efb08ef77257965421e53b075ba754197178cb94bc61817a66624925262"
+    }
+  },
+  "schema_version": "xauusd_chop_m15_stationarity_v21_artifacts"
+}
