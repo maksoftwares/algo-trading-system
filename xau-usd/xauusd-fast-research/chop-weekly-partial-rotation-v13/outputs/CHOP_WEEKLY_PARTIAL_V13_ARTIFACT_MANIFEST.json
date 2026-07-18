@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_WEEKLY_PARTIAL_V13_CONTRACT_LOCK.json": {
+      "bytes": 7335,
+      "sha256": "ccbc20e34d24b6cd90cddd75325d22d560e4eedda945ebbbbb9fa9648094983d"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_MANIFEST.csv": {
+      "bytes": 272663,
+      "sha256": "49871b3a7fa462edf7d1edef80656ea5585f427f060c09e1d6fbf216ae6d5934"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_MANIFEST_EVIDENCE.json": {
+      "bytes": 3712,
+      "sha256": "b8979e465d5c992e38d9cca486f41886d949b42c33b189c8adea76c2aa86c402"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_METRICS.csv": {
+      "bytes": 997100,
+      "sha256": "372324f10647bd51b916e507aeff1fded6b27190d16550fe846bb858573b796f"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_RESULT.json": {
+      "bytes": 4849,
+      "sha256": "7feee7b56bb9444e6a323b850b9a41ada1e5836fd56d046fd6cea1522653fd9a"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_RESULT.md": {
+      "bytes": 1998,
+      "sha256": "8979511632fe60e1f4b08e803f223b2d1c2083ddd586dc17b5a351d24733968b"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_SELECTED_TRADES.parquet": {
+      "bytes": 869623,
+      "sha256": "5096c6bc718ca1fb2ba293bbf4dfa5da0b751692f4e0eb0bdae71f6c801c8c3b"
+    },
+    "CHOP_WEEKLY_PARTIAL_V13_SHORTLIST.csv": {
+      "bytes": 16501,
+      "sha256": "37fd57963e29e18d43eae2cd08203da91736177cb8a000a40d4960beb116a099"
+    }
+  },
+  "schema_version": "xauusd_chop_weekly_partial_v13_artifacts"
+}
