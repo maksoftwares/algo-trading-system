@@ -1,0 +1,37 @@
+{
+  "files": {
+    "CHOP_ANTISIGNAL_V15_CONTRACT_LOCK.json": {
+      "bytes": 7872,
+      "sha256": "58cc9caf7d7c249ca16005642572769e1fd016e0dabe67ce08bb39d5da2f2173"
+    },
+    "CHOP_ANTISIGNAL_V15_MANIFEST.csv": {
+      "bytes": 276554,
+      "sha256": "4fa1e324a1544dca242eb8197ed2a3a8b83755ffb026e37b3e96459ffddbefac"
+    },
+    "CHOP_ANTISIGNAL_V15_MANIFEST_EVIDENCE.json": {
+      "bytes": 3799,
+      "sha256": "e5ee4ff697b20467cf982fbe27aff234e4fbe63674ec6641f5aa10509e16db6a"
+    },
+    "CHOP_ANTISIGNAL_V15_METRICS.csv": {
+      "bytes": 1024197,
+      "sha256": "66fecfce305060d3b191952158db17cf6de5016410402ce7a131581b8d489f17"
+    },
+    "CHOP_ANTISIGNAL_V15_RESULT.json": {
+      "bytes": 4933,
+      "sha256": "430ee0ad2a02e7141b51da03ee8c4ea87f33b7c0714a02016d08ce247f9fd0bf"
+    },
+    "CHOP_ANTISIGNAL_V15_RESULT.md": {
+      "bytes": 2106,
+      "sha256": "3311dc51f550bb8311ab3a7ba665f08f99feff3f6cf1168a1a7c7a9ff97b1ef0"
+    },
+    "CHOP_ANTISIGNAL_V15_SELECTED_TRADES.parquet": {
+      "bytes": 276478,
+      "sha256": "4230cfc96de89a2f020d4d38fe67ce24bff8b2d05f673de944772cf8f0281444"
+    },
+    "CHOP_ANTISIGNAL_V15_SHORTLIST.csv": {
+      "bytes": 16513,
+      "sha256": "1256448e8333504991529213ec0e3e2d853d0d4d9b2fb6dde920158d9829304b"
+    }
+  },
+  "schema_version": "xauusd_chop_antisignal_v15_artifacts"
+}
