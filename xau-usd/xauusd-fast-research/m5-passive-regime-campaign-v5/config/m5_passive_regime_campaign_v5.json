@@ -1,0 +1,50 @@
+{
+  "schema_version": "xauusd_m5_passive_regime_campaign_v5",
+  "base": {
+    "config_path": "../m15-regime-target-campaign-v1/config/m15_regime_target_campaign_v1.json",
+    "config_sha256": "cfd5f1056ec99f912f50384001f439c2ad132c0f7b6698f297ab62cbdd926b95"
+  },
+  "selection": {
+    "attempt_first": 21120,
+    "attempt_last": 22119,
+    "regime_count": 2,
+    "mechanics_per_regime": 5,
+    "variants_per_mechanic": 100,
+    "total_attempts": 1000,
+    "maximum_economic_finalists_per_mechanic": 3,
+    "false_discovery_rate": 0.1
+  },
+  "passive_execution": {
+    "minimum_anchor_reward_r": 0.5,
+    "maximum_anchor_reward_r": 4.0,
+    "minimum_pending_distance_r": 0.01,
+    "fill_bar_target_credit": false,
+    "fill_bar_stop_charged": true,
+    "gap_price_improvement_credited": false
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "M5_PASSIVE_REGIME_V5_CONTRACT_LOCK.json",
+    "manifest": "M5_PASSIVE_REGIME_V5_MANIFEST.csv",
+    "metrics": "M5_PASSIVE_REGIME_V5_METRICS.csv",
+    "shortlist": "M5_PASSIVE_REGIME_V5_SHORTLIST.csv",
+    "result_json": "M5_PASSIVE_REGIME_V5_RESULT.json",
+    "result_markdown": "M5_PASSIVE_REGIME_V5_RESULT.md",
+    "artifact_manifest": "M5_PASSIVE_REGIME_V5_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v5": 21119,
+    "designed_after_clock_v4_outcomes": true,
+    "selection_bias_acknowledged": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "exact_tick_confirmation_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
