@@ -1,0 +1,28 @@
+{
+  "authorization": {
+    "execution_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "research_only": true,
+    "training_authorized": false
+  },
+  "contract_file_sha256": "3a832d6c31c9ea0ed32b47ffbcd4555a15c27baaba5d5758b8e57921f36c219e",
+  "contract_sha256": "cfcf6a02795f006d327a9447b9c1f9fa05540db19142dbb9f618d782b93713a2",
+  "decision": "INVALIDATED_CLOCK_UNIT_MISMATCH_NO_QUANTITATIVE_INFERENCE",
+  "diagnosis": {
+    "first_m15_decision_astype_raw": 1262304900000000,
+    "first_m15_decision_iso": "2010-01-01T00:15:00+00:00",
+    "first_m15_decision_timestamp_value_ns": 1262304900000000000,
+    "first_m15_dtype": "datetime64[us, UTC]",
+    "first_m5_start_iso": "2010-01-01T00:00:00+00:00",
+    "first_m5_start_raw": 1262304000000,
+    "first_m5_start_dtype": "datetime64[ms, UTC]",
+    "observed_activation_gap_array": "ALL_NAN_OUT_OF_BOUNDS",
+    "root_cause": "M5 starts were compared as millisecond integers against microsecond and nanosecond M15 decision integers.",
+    "runtime_warning": "All-NaN slice encountered during activation-gap audit"
+  },
+  "manifest_sha256": "938891405dc64b22b5e11378405c2bcf8d8af71df8839471f4febede0fc1595a",
+  "quantitative_inference_permitted": false,
+  "quantitative_outcomes_opened": false,
+  "required_correction": "Normalize every M5 start/end and M15 decision timestamp to UTC nanoseconds before search, gap calculation, or pending-order simulation.",
+  "schema_version": "xauusd_m5_passive_regime_v5_invalidation"
+}
