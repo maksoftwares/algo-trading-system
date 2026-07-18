@@ -1,0 +1,44 @@
+{
+  "FOMC_IMPULSE_CHOP_RR2_V6": {
+    "all_impulse_candidate_rows": 38,
+    "candidate_sha256": "158d75f25cc2a3e61f1046e72122c5a5a92d4c4689e789f26b3539a5372ffd96",
+    "contains_outcomes": false,
+    "future_regime_feature_rows": 0,
+    "official_event_rows": 52,
+    "required_regimes": [
+      "CHOP"
+    ],
+    "rows_by_regime": {
+      "CHOP": 7,
+      "COMPRESSION": 14,
+      "TRANSITION": 2,
+      "TREND_DOWN": 4,
+      "TREND_UP": 6,
+      "UNSAFE_SHOCK": 2,
+      "WARMUP": 3
+    },
+    "selected_regime_candidate_rows": 7
+  },
+  "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+    "all_impulse_candidate_rows": 38,
+    "candidate_sha256": "0a9349ef92e9002b8af2049ac793b77fb816ff4b0dac91de644d0d0585e84ea9",
+    "contains_outcomes": false,
+    "future_regime_feature_rows": 0,
+    "official_event_rows": 52,
+    "required_regimes": [
+      "CHOP",
+      "COMPRESSION",
+      "TREND_DOWN"
+    ],
+    "rows_by_regime": {
+      "CHOP": 7,
+      "COMPRESSION": 14,
+      "TRANSITION": 2,
+      "TREND_DOWN": 4,
+      "TREND_UP": 6,
+      "UNSAFE_SHOCK": 2,
+      "WARMUP": 3
+    },
+    "selected_regime_candidate_rows": 25
+  }
+}

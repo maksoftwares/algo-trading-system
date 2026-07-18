@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "OUT_OF_ERA_FOMC_CHOP_CANDIDATE_MANIFEST.json": {
+      "bytes": 1175,
+      "sha256": "e472c6cab1698f85c9b9551ff7a4e7dbb484ed1a212d1b6179929cc8563db722"
+    },
+    "OUT_OF_ERA_FOMC_CHOP_EXECUTION_AUDIT.json": {
+      "bytes": 690,
+      "sha256": "e942d0c28cc41453e365dc3904b63c12721fd6efda4f1bf20e099dea340ae68e"
+    },
+    "OUT_OF_ERA_SPECIALIST_DEFINITION_LOCK.json": {
+      "bytes": 27407,
+      "sha256": "1cb56f1e19ba0d88d75a402f21ae0735513c0255b0d3c0d40f9db775a2d0392d"
+    },
+    "OUT_OF_ERA_SPECIALIST_FINAL_CONTRACT_LOCK.json": {
+      "bytes": 116354,
+      "sha256": "7164c77fc8fc6c7626be56a464732efd5b6306d58e4b9efcf4f4d160e1e5fa78"
+    },
+    "OUT_OF_ERA_SPECIALIST_INDEPENDENCE.csv": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "OUT_OF_ERA_SPECIALIST_METRICS.csv": {
+      "bytes": 2788,
+      "sha256": "7d328c714fb9573bb29f1fa38d0d358e5ae06624059dc13a056aeb5fbd01ebf4"
+    },
+    "OUT_OF_ERA_SPECIALIST_OUTCOMES_OPENED.json": {
+      "bytes": 560,
+      "sha256": "4b010ac0c9e0bca883c3aff494aa1d2297ac603ca5edff06cb49065705161841"
+    },
+    "OUT_OF_ERA_SPECIALIST_RESULT.json": {
+      "bytes": 11365,
+      "sha256": "1cd9e5db8250c17d20485c0205212471875e1e1c27596c584f7f3d875c7b6c51"
+    },
+    "OUT_OF_ERA_SPECIALIST_RESULT.md": {
+      "bytes": 968,
+      "sha256": "8fcf99cf4dc6229491aed675a213af2d5eadf7f7b9426518b04672b5019872cb"
+    },
+    "OUT_OF_ERA_SPECIALIST_TRADES.parquet": {
+      "bytes": 81723,
+      "sha256": "98c76ba4900aebc124ed8bf5ebd9b9d7e797a74f31c623473e716aabb80e73b1"
+    }
+  },
+  "execution_authorized": false,
+  "final_contract_sha256": "72cf3a5b78be4b971835d12e969c25a7cd7791195c4e34afc76d11bc5d8f4362",
+  "schema_version": "xauusd_out_of_era_specialist_artifacts_v2",
+  "training_authorized": false
+}

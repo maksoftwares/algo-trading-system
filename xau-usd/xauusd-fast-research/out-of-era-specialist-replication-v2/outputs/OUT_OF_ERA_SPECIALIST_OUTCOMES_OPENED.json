@@ -1,0 +1,15 @@
+{
+  "execution_authorized": false,
+  "final_contract_sha256": "72cf3a5b78be4b971835d12e969c25a7cd7791195c4e34afc76d11bc5d8f4362",
+  "opened_utc": "2026-07-18T05:45:05.759304+00:00",
+  "registered_candidates": [
+    "R1_UPTREND_PORTABILITY_EXACT",
+    "R1B_STRICT_COMPRESSION_EXACT",
+    "COMPRESSION_LONG_PORTABILITY_EXACT",
+    "FOMC_IMPULSE_CHOP_RR2_V6",
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7"
+  ],
+  "schema_version": "xauusd_out_of_era_specialist_outcomes_opened_v2",
+  "single_outcome_opening": true,
+  "training_authorized": false
+}

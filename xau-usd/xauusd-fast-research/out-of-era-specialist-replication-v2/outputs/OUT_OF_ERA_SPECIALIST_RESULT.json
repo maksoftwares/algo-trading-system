@@ -1,0 +1,315 @@
+{
+  "broker_action_performed": false,
+  "campaign_attempts_before_v2": 11111,
+  "completed_utc": "2026-07-18T05:45:11.361157+00:00",
+  "cumulative_campaign_attempts": 11113,
+  "databento_used": false,
+  "decision": "NO_OUT_OF_ERA_SPECIALIST_SURVIVOR",
+  "distinct_mechanism_families": [],
+  "distinct_survivors": [],
+  "economic_survivors": [],
+  "execution_authorized": false,
+  "final_contract_sha256": "72cf3a5b78be4b971835d12e969c25a7cd7791195c4e34afc76d11bc5d8f4362",
+  "fomc_candidate_manifests": {
+    "FOMC_IMPULSE_CHOP_RR2_V6": {
+      "all_impulse_candidate_rows": 38,
+      "candidate_sha256": "158d75f25cc2a3e61f1046e72122c5a5a92d4c4689e789f26b3539a5372ffd96",
+      "contains_outcomes": false,
+      "future_regime_feature_rows": 0,
+      "official_event_rows": 52,
+      "required_regimes": [
+        "CHOP"
+      ],
+      "rows_by_regime": {
+        "CHOP": 7,
+        "COMPRESSION": 14,
+        "TRANSITION": 2,
+        "TREND_DOWN": 4,
+        "TREND_UP": 6,
+        "UNSAFE_SHOCK": 2,
+        "WARMUP": 3
+      },
+      "selected_regime_candidate_rows": 7
+    },
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+      "all_impulse_candidate_rows": 38,
+      "candidate_sha256": "0a9349ef92e9002b8af2049ac793b77fb816ff4b0dac91de644d0d0585e84ea9",
+      "contains_outcomes": false,
+      "future_regime_feature_rows": 0,
+      "official_event_rows": 52,
+      "required_regimes": [
+        "CHOP",
+        "COMPRESSION",
+        "TREND_DOWN"
+      ],
+      "rows_by_regime": {
+        "CHOP": 7,
+        "COMPRESSION": 14,
+        "TRANSITION": 2,
+        "TREND_DOWN": 4,
+        "TREND_UP": 6,
+        "UNSAFE_SHOCK": 2,
+        "WARMUP": 3
+      },
+      "selected_regime_candidate_rows": 25
+    }
+  },
+  "fomc_execution_audits": {
+    "FOMC_IMPULSE_CHOP_RR2_V6": {
+      "candidate_rows": 7,
+      "max_hold_outcomes": 1,
+      "normalized_exact_tick_threshold_ordering": true,
+      "outcome_rows": 6,
+      "rejection_counts": {
+        "STOP_CEILING_EXCEEDED": 1
+      },
+      "rejection_rows": 1,
+      "stop_outcomes": 3,
+      "target_outcomes": 2
+    },
+    "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+      "candidate_rows": 25,
+      "max_hold_outcomes": 2,
+      "normalized_exact_tick_threshold_ordering": true,
+      "outcome_rows": 18,
+      "rejection_counts": {
+        "SPREAD_R_EXCEEDED": 1,
+        "STOP_CEILING_EXCEEDED": 6
+      },
+      "rejection_rows": 7,
+      "stop_outcomes": 7,
+      "target_outcomes": 9
+    }
+  },
+  "m5_rows": 468279,
+  "metrics": [
+    {
+      "average_stress_r": 0.1602781528304429,
+      "candidate_id": "R1_UPTREND_PORTABILITY_EXACT",
+      "closed_drawdown_r": 7.2228471513872154,
+      "daily_pvalue": 0.19599121434406822,
+      "economic_pass": false,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": true
+      },
+      "holm_pvalue": 0.7839648573762729,
+      "positive_active_month_share": 0.37037037037037035,
+      "positive_active_year_share": 0.6666666666666666,
+      "source_days": 2024,
+      "stress_net_r": 10.097523628317902,
+      "stress_pf": 1.2490167708061757,
+      "top_winners_removed_stress_net_r": 0.6086370180645548,
+      "trades": 63,
+      "trades_per_source_day": 0.031126482213438736
+    },
+    {
+      "average_stress_r": -0.13040567005123996,
+      "candidate_id": "R1B_STRICT_COMPRESSION_EXACT",
+      "closed_drawdown_r": 10.69134499688543,
+      "daily_pvalue": 1.0,
+      "economic_pass": false,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "holm_pvalue": 1.0,
+      "positive_active_month_share": 0.2857142857142857,
+      "positive_active_year_share": 0.3333333333333333,
+      "source_days": 2024,
+      "stress_net_r": -5.868255152305799,
+      "stress_pf": 0.8306097743017805,
+      "top_winners_removed_stress_net_r": -15.276636680154333,
+      "trades": 45,
+      "trades_per_source_day": 0.022233201581027668
+    },
+    {
+      "average_stress_r": -0.22511137057930247,
+      "candidate_id": "COMPRESSION_LONG_PORTABILITY_EXACT",
+      "closed_drawdown_r": 54.19424468260944,
+      "daily_pvalue": 1.0,
+      "economic_pass": false,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": false,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": false,
+        "minimum_positive_active_year_share": false,
+        "minimum_stress_pf": false,
+        "minimum_trades": true,
+        "top_winners_removed_positive": false
+      },
+      "holm_pvalue": 1.0,
+      "positive_active_month_share": 0.41379310344827586,
+      "positive_active_year_share": 0.2857142857142857,
+      "source_days": 2024,
+      "stress_net_r": -35.34248518095049,
+      "stress_pf": 0.7171741945416946,
+      "top_winners_removed_stress_net_r": -44.86377694740927,
+      "trades": 157,
+      "trades_per_source_day": 0.0775691699604743
+    },
+    {
+      "average_stress_r": 0.15465530177880024,
+      "candidate_id": "FOMC_IMPULSE_CHOP_RR2_V6",
+      "closed_drawdown_r": 3.490408281556914,
+      "daily_pvalue": 0.3921503011410116,
+      "economic_pass": false,
+      "event_count": 52,
+      "event_participation": 0.11538461538461539,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_event_participation": false,
+        "minimum_positive_active_month_share": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": false,
+        "top_winners_removed_positive": false
+      },
+      "holm_pvalue": 1.0,
+      "positive_active_month_share": 0.5,
+      "positive_active_year_share": 0.75,
+      "source_days": 2024,
+      "stress_net_r": 0.9279318106728014,
+      "stress_pf": 1.265851939320661,
+      "top_winners_removed_stress_net_r": -3.490408281556914,
+      "trades": 6,
+      "trades_per_source_day": 0.0029644268774703555
+    },
+    {
+      "average_stress_r": 0.6121555779737999,
+      "candidate_id": "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+      "closed_drawdown_r": 2.377887508910157,
+      "daily_pvalue": 0.04679818437655697,
+      "economic_pass": false,
+      "event_count": 52,
+      "event_participation": 0.34615384615384615,
+      "gate_checks": {
+        "maximum_closed_drawdown_r": true,
+        "maximum_holm_pvalue": false,
+        "minimum_average_stress_r": true,
+        "minimum_event_participation": true,
+        "minimum_positive_active_month_share": true,
+        "minimum_positive_active_year_share": true,
+        "minimum_stress_pf": true,
+        "minimum_trades": true,
+        "top_winners_removed_positive": true
+      },
+      "holm_pvalue": 0.23399092188278486,
+      "positive_active_month_share": 0.6111111111111112,
+      "positive_active_year_share": 0.6666666666666666,
+      "source_days": 2024,
+      "stress_net_r": 11.018800403528399,
+      "stress_pf": 2.3878538121692907,
+      "top_winners_removed_stress_net_r": 5.282115264997357,
+      "trades": 18,
+      "trades_per_source_day": 0.008893280632411068
+    }
+  ],
+  "new_attempt_first": 11112,
+  "new_attempt_last": 11113,
+  "paid_data_request_made": false,
+  "pairwise_independence": [],
+  "parameter_search_count": 0,
+  "portfolio_closed_trade_diagnostic": {
+    "average_stress_r": 0.0,
+    "closed_drawdown_r": 0.0,
+    "stress_net_r": 0.0,
+    "stress_pf": 0.0,
+    "trades": 0,
+    "trades_per_source_day": 0.0
+  },
+  "registered_candidates": [
+    {
+      "candidate_id": "R1_UPTREND_PORTABILITY_EXACT",
+      "engine": "R1_REGIME_BREAKOUT",
+      "mechanism_family": "D1_H4_UPTREND_BREAKOUT",
+      "role": "NEAR_SURVIVOR_REPLICATION",
+      "source_code": "../mt5-r1-uptrend-portability-v1/src/portability.py",
+      "source_config": "../mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json"
+    },
+    {
+      "candidate_id": "R1B_STRICT_COMPRESSION_EXACT",
+      "engine": "R1_REGIME_BREAKOUT",
+      "mechanism_family": "D1_H4_COMPRESSION_BREAKOUT",
+      "role": "INDEPENDENCE_REPLICATION",
+      "source_code": "../mt5-r1b-strict-compression-portability-v1/src/portability.py",
+      "source_config": "../mt5-r1b-strict-compression-portability-v1/config/mt5_r1b_strict_compression_portability_v1.json"
+    },
+    {
+      "candidate_id": "COMPRESSION_LONG_PORTABILITY_EXACT",
+      "engine": "COMPRESSION_BREAKOUT",
+      "mechanism_family": "D1_H4_COMPRESSION_BREAKOUT",
+      "role": "INDEPENDENCE_REPLICATION",
+      "source_code": "../mt5-compression-portability-v1/src/portability.py",
+      "source_config": "../mt5-compression-portability-v1/config/mt5_compression_portability_v1.json"
+    },
+    {
+      "attempt_no": 11112,
+      "candidate_id": "FOMC_IMPULSE_CHOP_RR2_V6",
+      "engine": "CORRECTED_RAW_TICK_EVENT",
+      "mechanism_family": "SCHEDULED_MACRO_IMPULSE_IN_CHOP",
+      "policy": {
+        "break_atr": 0.1,
+        "end_minutes": 90,
+        "event_type": "FOMC",
+        "impulse_minutes": 15,
+        "minimum_body_fraction": 0.35,
+        "mode": "IMPULSE",
+        "policy_id": "FOMC_IMPULSE_CHOP_RR2_V6",
+        "required_regime": "CHOP",
+        "start_minutes": 5,
+        "stop_buffer_atr": 0.1,
+        "target_r": 2.0
+      },
+      "regime_code": "../balanced-regime-campaign-v3/src/regimes.py",
+      "role": "NEW_INDEPENDENT_REPLICATION",
+      "source_code": "../macro-event-reaction-replication-v2/src/event_reaction.py"
+    },
+    {
+      "attempt_no": 11113,
+      "candidate_id": "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+      "engine": "CORRECTED_RAW_TICK_EVENT",
+      "mechanism_family": "SCHEDULED_MACRO_IMPULSE_IN_CHOP",
+      "policy": {
+        "break_atr": 0.1,
+        "end_minutes": 90,
+        "event_type": "FOMC",
+        "impulse_minutes": 15,
+        "minimum_body_fraction": 0.35,
+        "mode": "IMPULSE",
+        "policy_id": "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7",
+        "required_regimes": [
+          "CHOP",
+          "COMPRESSION",
+          "TREND_DOWN"
+        ],
+        "start_minutes": 5,
+        "stop_buffer_atr": 0.1,
+        "target_r": 2.0
+      },
+      "regime_code": "../balanced-regime-campaign-v3/src/regimes.py",
+      "role": "POST_HOC_DISCOVERY_INDEPENDENT_REPLICATION",
+      "source_code": "../macro-event-reaction-replication-v2/src/event_reaction.py"
+    }
+  ],
+  "research_only": true,
+  "schema_version": "xauusd_out_of_era_specialist_replication_v2",
+  "single_outcome_opening": true,
+  "source_days": 2024,
+  "source_months": 78,
+  "training_authorized": false,
+  "window_end_exclusive_utc": "2016-07-01T00:00:00+00:00",
+  "window_start_utc": "2010-01-01T00:00:00+00:00"
+}

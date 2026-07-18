@@ -1,0 +1,27 @@
+{
+  "FOMC_IMPULSE_CHOP_RR2_V6": {
+    "candidate_rows": 7,
+    "max_hold_outcomes": 1,
+    "normalized_exact_tick_threshold_ordering": true,
+    "outcome_rows": 6,
+    "rejection_counts": {
+      "STOP_CEILING_EXCEEDED": 1
+    },
+    "rejection_rows": 1,
+    "stop_outcomes": 3,
+    "target_outcomes": 2
+  },
+  "FOMC_IMPULSE_STABLE_NON_UPTREND_RR2_V7": {
+    "candidate_rows": 25,
+    "max_hold_outcomes": 2,
+    "normalized_exact_tick_threshold_ordering": true,
+    "outcome_rows": 18,
+    "rejection_counts": {
+      "SPREAD_R_EXCEEDED": 1,
+      "STOP_CEILING_EXCEEDED": 6
+    },
+    "rejection_rows": 7,
+    "stop_outcomes": 7,
+    "target_outcomes": 9
+  }
+}
