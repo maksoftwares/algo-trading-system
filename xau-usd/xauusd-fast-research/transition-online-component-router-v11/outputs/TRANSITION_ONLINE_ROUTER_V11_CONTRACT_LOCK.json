@@ -1,0 +1,255 @@
+{
+  "contract_sha256": "6b3b0ea8ecba48a3f27e3644dfede69939162115d0b01a318589d98a5aa48e40",
+  "dependency_files": [
+    {
+      "bytes": 36132,
+      "path": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+      "sha256": "3b50c082d1177408b0c194c3c4ffab71c4e3844f137dfd06f3cac2790a69591d"
+    }
+  ],
+  "economic_gates": {
+    "maximum_closed_drawdown_r": 25.0,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_stress_pf_each_era": 1.1,
+    "minimum_top_winners_removed_net_r": 0.0,
+    "minimum_total_stress_pf": 1.25,
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "top_winners_removed": 5
+  },
+  "execution_authorized": false,
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "manifest_evidence": {
+    "bytes": 592,
+    "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_MANIFEST_EVIDENCE.json",
+    "sha256": "6991855a88e032c6cca32a90f6d24fbe034b3b8982161f2f9a932efd878c4bd0"
+  },
+  "manifest_file": {
+    "bytes": 178155,
+    "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_MANIFEST.csv",
+    "sha256": "87647750920cb3dc68fe85760624283a85adf66e3a8d894dfb8f08d1554f3f91"
+  },
+  "manifest_membership_uses_no_policy_outcomes": true,
+  "package_files": [
+    {
+      "bytes": 31,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/.gitattributes",
+      "sha256": "0fa026531c7092bdf8b42ed9f7b623039d83dac0dd9fb8092883f0bbfc183f75"
+    },
+    {
+      "bytes": 2375,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/PREREGISTRATION.md",
+      "sha256": "9a709c00425383ada349ac0dff8f4cb2acf5051c81cf84a990eee56bb3ae5d1b"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/requirements.txt",
+      "sha256": "a1dc6ec0050575979fb5870594977b755869536e1dbe1435369cedd2e5f43c7b"
+    },
+    {
+      "bytes": 4562,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/config/transition_online_component_router_v11.json",
+      "sha256": "e092514c7e587fb8f485dcc165f6ce5b4d7717aee6db856dc64a495dfb1070c4"
+    },
+    {
+      "bytes": 69,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/src/__init__.py",
+      "sha256": "105da62b1ca37c01aac92b14ccdea4b0adadab118ea0b9cc4a3d708f047a48fb"
+    },
+    {
+      "bytes": 11320,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/src/router.py",
+      "sha256": "a5b4e5eef8e36061ff818a35b5be214f7a268664e03aee5cb173be555edf51b8"
+    },
+    {
+      "bytes": 2146,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/prepare_manifest.py",
+      "sha256": "704e6318190fba1449e22c017342cb5664f8f6444380936bfab6582a7b70e4c7"
+    },
+    {
+      "bytes": 4478,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/lock_contract.py",
+      "sha256": "472443d269fe15dde7eb0cdcca2320879604c2dc4c935437d01e8c2ee35a7504"
+    },
+    {
+      "bytes": 14084,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/run_screen.py",
+      "sha256": "73b7157b123f79d07b030778a037a4c7a4ebc853619d60ac792fa92b87200e98"
+    },
+    {
+      "bytes": 6221,
+      "path": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/tests/test_router.py",
+      "sha256": "4b0a8be6e49984ea17fb45d804d41dea0d750ccf25268a5d19a24020f95e7831"
+    }
+  ],
+  "paid_data_used": false,
+  "policy_outcomes_opened": false,
+  "policy_space": {
+    "bayesian_lower_threshold": [
+      -0.1,
+      -0.05,
+      0.0
+    ],
+    "bayesian_prior_mean": [
+      0.0,
+      0.05,
+      0.1
+    ],
+    "bayesian_prior_strength": [
+      5,
+      10,
+      20
+    ],
+    "bayesian_upper_threshold": [
+      0.025,
+      0.05,
+      0.1,
+      0.15
+    ],
+    "cold_start": [
+      "BASE",
+      "HALF",
+      "OFF"
+    ],
+    "drawdown_threshold_r": [
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      8.0
+    ],
+    "lookback_days": [
+      180,
+      365,
+      730,
+      1460,
+      3650
+    ],
+    "mean_threshold": [
+      -0.1,
+      -0.05,
+      0.0,
+      0.025,
+      0.05,
+      0.1
+    ],
+    "minimum_history": [
+      5,
+      10,
+      15,
+      20,
+      30
+    ],
+    "pf_threshold": [
+      0.9,
+      1.0,
+      1.05,
+      1.1,
+      1.2,
+      1.3
+    ],
+    "rank_metric": [
+      "MEAN",
+      "PF",
+      "BAYESIAN_MEAN"
+    ],
+    "rank_top_k": [
+      1,
+      2,
+      3
+    ],
+    "weak_multiplier": [
+      0.0,
+      0.25,
+      0.5
+    ]
+  },
+  "portfolio": {
+    "base_weights": {
+      "23925": 1.0,
+      "24877": 0.25,
+      "24995": 0.75,
+      "25048": 0.75
+    },
+    "history_cutoff": "EXIT_TIME_STRICTLY_BEFORE_CANDIDATE_ENTRY",
+    "maximum_trades_per_utc_day": 4,
+    "shadow_history_includes_nonexecuted_component_trades": true,
+    "tie_priority": "ATTEMPT_ASCENDING"
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_transition_online_router_v11_contract",
+  "selection": {
+    "attempt_first": 26239,
+    "attempt_last": 27238,
+    "attempts_per_mechanic": 200,
+    "false_discovery_rate": 0.1,
+    "hash_selection_seed": "transition-online-router-v11-prelock",
+    "maximum_finalists_per_mechanic": 3,
+    "mechanics": [
+      "TRAILING_MEAN_GATE",
+      "TRAILING_PF_GATE",
+      "BAYESIAN_SHRINKAGE_WEIGHT",
+      "COMPONENT_RANK_GATE",
+      "TRAILING_DRAWDOWN_GATE"
+    ],
+    "total_attempts": 1000
+  },
+  "source_files": [
+    {
+      "bytes": 94941,
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet",
+      "sha256": "22b13a7349d9c77e7ee31396c1155786e31a1cccfe2a1331514413c3d92c584c"
+    },
+    {
+      "bytes": 84971,
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_PORTFOLIO_TRADES.parquet",
+      "sha256": "06a123a8e79db1bef269c228ffd7ff8376b9290accf7162c58b137582f8bad1e"
+    },
+    {
+      "bytes": 1560,
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_METRICS.csv",
+      "sha256": "587c6c8d572a2f112d6d11ce570683dfadce55df37d001ff5a34580f1685f20d"
+    },
+    {
+      "bytes": 8958,
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.json",
+      "sha256": "da89820d1143be20799459bba274e0cfaf1534ad7213ccfcaa816e68460070c2"
+    },
+    {
+      "bytes": 35978,
+      "path": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CONTRACT_LOCK.json",
+      "sha256": "0a812d346be8db3a08bf240c7afe1ac50a4a1853a9c8467d7cf10e9b45795edd"
+    }
+  ],
+  "training_authorized": false,
+  "windows": {
+    "era_2019_2021": [
+      "2019-07-01T00:00:00Z",
+      "2021-04-01T00:00:00Z"
+    ],
+    "era_2021_2023": [
+      "2021-04-01T00:00:00Z",
+      "2023-01-01T00:00:00Z"
+    ],
+    "era_2023_2024": [
+      "2023-01-01T00:00:00Z",
+      "2024-10-01T00:00:00Z"
+    ],
+    "era_2024_2026": [
+      "2024-10-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "xauusd_transition_online_component_router_v11",
+  "source": {
+    "component_trades": "../transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet",
+    "baseline_portfolio_trades": "../transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_PORTFOLIO_TRADES.parquet",
+    "baseline_metrics": "../transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_METRICS.csv",
+    "baseline_result": "../transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_RESULT.json",
+    "baseline_contract": "../transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CONTRACT_LOCK.json",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json"
+  },
+  "portfolio": {
+    "base_weights": {
+      "23925": 1.0,
+      "24877": 0.25,
+      "24995": 0.75,
+      "25048": 0.75
+    },
+    "tie_priority": "ATTEMPT_ASCENDING",
+    "maximum_trades_per_utc_day": 4,
+    "shadow_history_includes_nonexecuted_component_trades": true,
+    "history_cutoff": "EXIT_TIME_STRICTLY_BEFORE_CANDIDATE_ENTRY"
+  },
+  "selection": {
+    "attempt_first": 26239,
+    "attempt_last": 27238,
+    "total_attempts": 1000,
+    "mechanics": [
+      "TRAILING_MEAN_GATE",
+      "TRAILING_PF_GATE",
+      "BAYESIAN_SHRINKAGE_WEIGHT",
+      "COMPONENT_RANK_GATE",
+      "TRAILING_DRAWDOWN_GATE"
+    ],
+    "attempts_per_mechanic": 200,
+    "hash_selection_seed": "transition-online-router-v11-prelock",
+    "false_discovery_rate": 0.10,
+    "maximum_finalists_per_mechanic": 3
+  },
+  "policy_space": {
+    "lookback_days": [180, 365, 730, 1460, 3650],
+    "minimum_history": [5, 10, 15, 20, 30],
+    "cold_start": ["BASE", "HALF", "OFF"],
+    "weak_multiplier": [0.0, 0.25, 0.5],
+    "mean_threshold": [-0.10, -0.05, 0.0, 0.025, 0.05, 0.10],
+    "pf_threshold": [0.90, 1.0, 1.05, 1.10, 1.20, 1.30],
+    "bayesian_prior_mean": [0.0, 0.05, 0.10],
+    "bayesian_prior_strength": [5, 10, 20],
+    "bayesian_lower_threshold": [-0.10, -0.05, 0.0],
+    "bayesian_upper_threshold": [0.025, 0.05, 0.10, 0.15],
+    "rank_metric": ["MEAN", "PF", "BAYESIAN_MEAN"],
+    "rank_top_k": [1, 2, 3],
+    "drawdown_threshold_r": [2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
+  },
+  "windows": {
+    "era_2019_2021": ["2019-07-01T00:00:00Z", "2021-04-01T00:00:00Z"],
+    "era_2021_2023": ["2021-04-01T00:00:00Z", "2023-01-01T00:00:00Z"],
+    "era_2023_2024": ["2023-01-01T00:00:00Z", "2024-10-01T00:00:00Z"],
+    "era_2024_2026": ["2024-10-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "economic_gates": {
+    "minimum_total_trades": 100,
+    "minimum_trades_each_era": 15,
+    "minimum_stress_pf_each_era": 1.10,
+    "minimum_average_stress_r_each_era": 0.02,
+    "minimum_total_stress_pf": 1.25,
+    "maximum_closed_drawdown_r": 25.0,
+    "top_winners_removed": 5,
+    "minimum_top_winners_removed_net_r": 0.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "manifest": "TRANSITION_ONLINE_ROUTER_V11_MANIFEST.csv",
+    "manifest_evidence": "TRANSITION_ONLINE_ROUTER_V11_MANIFEST_EVIDENCE.json",
+    "contract_lock": "TRANSITION_ONLINE_ROUTER_V11_CONTRACT_LOCK.json",
+    "metrics": "TRANSITION_ONLINE_ROUTER_V11_METRICS.csv",
+    "shortlist": "TRANSITION_ONLINE_ROUTER_V11_SHORTLIST.csv",
+    "selected_trades": "TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet",
+    "result_json": "TRANSITION_ONLINE_ROUTER_V11_RESULT.json",
+    "result_markdown": "TRANSITION_ONLINE_ROUTER_V11_RESULT.md",
+    "artifact_manifest": "TRANSITION_ONLINE_ROUTER_V11_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v11": 26238,
+    "v10_attempts_invalidated": 1000,
+    "source_outcomes_were_exposed_before_design": true,
+    "manifest_membership_uses_no_policy_outcomes": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "raw_tick_source_is_not_independent_holdout": true,
+    "independent_replication_required": true,
+    "prospective_shadow_required": true,
+    "shock_is_abstain": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}

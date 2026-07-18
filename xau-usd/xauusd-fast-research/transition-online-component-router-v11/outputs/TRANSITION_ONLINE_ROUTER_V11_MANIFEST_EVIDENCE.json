@@ -1,0 +1,18 @@
+{
+  "attempt_first": 26239,
+  "attempt_last": 27238,
+  "execution_authorized": false,
+  "manifest_membership_uses_no_policy_outcomes": true,
+  "manifest_rows": 1000,
+  "manifest_sha256": "87647750920cb3dc68fe85760624283a85adf66e3a8d894dfb8f08d1554f3f91",
+  "mechanic_counts": {
+    "BAYESIAN_SHRINKAGE_WEIGHT": 200,
+    "COMPONENT_RANK_GATE": 200,
+    "TRAILING_DRAWDOWN_GATE": 200,
+    "TRAILING_MEAN_GATE": 200,
+    "TRAILING_PF_GATE": 200
+  },
+  "policy_outcomes_opened": false,
+  "schema_version": "xauusd_transition_online_router_v11_manifest_evidence",
+  "training_authorized": false
+}
