@@ -1,0 +1,46 @@
+{
+  "schema_version": "xauusd_m5_passive_regime_campaign_v5_2",
+  "base": {
+    "config_path": "../m5-passive-regime-campaign-v5-1/config/m5_passive_regime_campaign_v5_1.json",
+    "config_sha256": "4fcb70f64dbb44ad9c92a79750558a58b1901b5a528cc0733ef685885942490a",
+    "invalidation_path": "../m5-passive-regime-campaign-v5-1/outputs/M5_PASSIVE_REGIME_V5_1_INVALIDATION.json",
+    "invalidation_sha256": "b15232eeac561911aeab2f789b67caee1f0e74913b93d9643626dd1f32a513d0",
+    "unchanged_manifest_path": "../m5-passive-regime-campaign-v5-1/outputs/M5_PASSIVE_REGIME_V5_1_MANIFEST.csv",
+    "unchanged_manifest_sha256": "938891405dc64b22b5e11378405c2bcf8d8af71df8839471f4febede0fc1595a"
+  },
+  "streaming": {
+    "cache_block_policies": 25,
+    "cache_cleared_before_first_policy": true,
+    "cache_reuse_across_blocks": false,
+    "strategy_definitions_changed": false,
+    "execution_rules_changed": false,
+    "economic_gates_changed": false,
+    "clock_rules_changed": false
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "M5_PASSIVE_REGIME_V5_2_CONTRACT_LOCK.json",
+    "manifest": "M5_PASSIVE_REGIME_V5_2_MANIFEST.csv",
+    "metrics": "M5_PASSIVE_REGIME_V5_2_METRICS.csv",
+    "shortlist": "M5_PASSIVE_REGIME_V5_2_SHORTLIST.csv",
+    "result_json": "M5_PASSIVE_REGIME_V5_2_RESULT.json",
+    "result_markdown": "M5_PASSIVE_REGIME_V5_2_RESULT.md",
+    "artifact_manifest": "M5_PASSIVE_REGIME_V5_2_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "campaign_attempts_before_v5_2": 21119,
+    "attempt_numbers_reused_because_prior_versions_produced_no_result": true,
+    "resource_only_correction": true,
+    "selection_bias_acknowledged": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "historical_periods_are_discovery_only": true,
+    "exact_tick_confirmation_required": true,
+    "prospective_shadow_required": true,
+    "paid_data_request_made": false,
+    "databento_used": false,
+    "broker_action_performed": false,
+    "training_authorized": false,
+    "execution_authorized": false,
+    "research_only": true
+  }
+}
