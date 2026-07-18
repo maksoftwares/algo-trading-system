@@ -1,0 +1,62 @@
+{
+  "authorization": {
+    "composite_selected_after_component_outcomes": true,
+    "execution_authorized": false,
+    "prospective_shadow_required": true,
+    "raw_tick_result_can_be_independent_holdout": false,
+    "research_only": true,
+    "selected_after_origin_outcomes": true,
+    "training_authorized": false
+  },
+  "candidate_rows": 521,
+  "contract_sha256": "6294d575c93bc70d3720773bd0056dee7dcd4509e3e36f31b38409c46428f650",
+  "decision": "RAW_TICK_ECONOMIC_CHOP_SPECIALIST_CANDIDATE_FOUND",
+  "execution_audit": {
+    "accepted_trades_by_component": {
+      "39427": 18,
+      "39888": 49,
+      "40193": 58
+    },
+    "fixed_horizon_trades": 4,
+    "maximum_horizon_delay_minutes": 0.08201666666666667,
+    "rejections": {
+      "COOLDOWN": 2,
+      "ENTRY_SPREAD_R": 88,
+      "POSITION_OVERLAP": 306
+    },
+    "stop_slippage_trades": 60,
+    "stop_trades": 0,
+    "target_trades": 61
+  },
+  "independent_signal_parity": {
+    "39427": {
+      "direction_equal": true,
+      "independent_signal_sha256": "bf86b730cab024852064f001ee31aa4728547333b0b8a992a982f8b3be639132",
+      "mask_equal": true,
+      "reference_signal_sha256": "bf86b730cab024852064f001ee31aa4728547333b0b8a992a982f8b3be639132"
+    },
+    "39888": {
+      "direction_equal": true,
+      "independent_signal_sha256": "7ee7f8edbd4bffb5fe61f434ddc78e7d14e10c639c4c5189f840a8c32b1bfc31",
+      "mask_equal": true,
+      "reference_signal_sha256": "7ee7f8edbd4bffb5fe61f434ddc78e7d14e10c639c4c5189f840a8c32b1bfc31"
+    },
+    "40193": {
+      "direction_equal": true,
+      "independent_signal_sha256": "5908ae9d716511fce640839ea0ea76ebf285aadd0d68c06a5eaa21c991176818",
+      "mask_equal": true,
+      "reference_signal_sha256": "5908ae9d716511fce640839ea0ea76ebf285aadd0d68c06a5eaa21c991176818"
+    }
+  },
+  "origin_attempts": [
+    39888,
+    40193,
+    39427
+  ],
+  "origin_m5_trades": 125,
+  "origin_raw_signals": 948,
+  "schema_version": "xauusd_chop_three_mechanism_rawtick_v26",
+  "selection_adjusted_pass": false,
+  "selection_adjusted_pvalue": 1.0,
+  "trade_rows": 125
+}

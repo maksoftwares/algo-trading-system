@@ -1,0 +1,33 @@
+{
+  "files": {
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATES.parquet": {
+      "bytes": 45985,
+      "sha256": "26b8c6e75957f3b33b966aa82bf05f4a21d41b4365a86543a8ad8391f1d084e4"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_CANDIDATE_MANIFEST.json": {
+      "bytes": 8540,
+      "sha256": "2123645e2326b48e5148cb44a30abfd031e86c8e6c4a7c0897c5232cf4b5fffa"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_CONTRACT_LOCK.json": {
+      "bytes": 44494,
+      "sha256": "fc3730a5a2fc3304447578659003df04c6f454758df91e48b0e45cc8f1ed938e"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_METRICS.csv": {
+      "bytes": 1555,
+      "sha256": "22938896cd813536e4ce1b8d77c220714ad70b073795db17c2604e86fd2ebb17"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_RESULT.json": {
+      "bytes": 2123,
+      "sha256": "1fdea61838b6a049f5b8ddc2b203c73b0df7d5cb903b0b21918a6f4312632eda"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_RESULT.md": {
+      "bytes": 683,
+      "sha256": "b2637b6f91a3f5c570659fe46f586f897b8076971a04b74b95bed6fb914e1748"
+    },
+    "CHOP_THREE_MECHANISM_RAWTICK_V26_TRADES.parquet": {
+      "bytes": 40405,
+      "sha256": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793"
+    }
+  },
+  "schema_version": "xauusd_chop_three_mechanism_rawtick_v26_artifacts"
+}
