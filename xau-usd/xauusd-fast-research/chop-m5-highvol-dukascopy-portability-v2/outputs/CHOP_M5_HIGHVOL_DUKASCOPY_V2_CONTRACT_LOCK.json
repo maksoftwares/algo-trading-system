@@ -1,0 +1,133 @@
+{
+  "candidate_count": 1,
+  "contract_sha256": "23a3fd0a760b50bfb2cac2fc1dbcc6e342fb5e98b112628f3217216dff72717f",
+  "dependency_files": [
+    {
+      "bytes": 7882,
+      "path": "xau-usd/xauusd-fast-research/chop-m30-dukascopy-portability-v1/src/portability.py",
+      "sha256": "d48515e63f98b6063656aaaa3929d744e860f13f99cc95054b36866a2ed3a76a"
+    },
+    {
+      "bytes": 1190,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/config/chop_fast_discovery_v1.json",
+      "sha256": "c88710d410757c468c67ea362215b3d33c011fc171ba92d4b70464d2e14c8dc8"
+    },
+    {
+      "bytes": 12885,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/src/backtest.py",
+      "sha256": "bcb31b8e77e647225b6125e216ba1bf5239fa91cd0ce5b700bbe376f2aeb91de"
+    },
+    {
+      "bytes": 6877,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/src/data_adapter.py",
+      "sha256": "97c23bdb6c776c0c45f0343796d2bd470bb84463b5782d823a8f1a38a83d1aa0"
+    },
+    {
+      "bytes": 7950,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/src/regime.py",
+      "sha256": "fa53fc2f0a0d679b0d5f0e9c7640419d801f4a2f4d82366c80556a1dd503484f"
+    },
+    {
+      "bytes": 14093,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/src/strategies.py",
+      "sha256": "4b935ab44790aa4a3ea312f3085432aa9bb6a4b919c9b0260242fbe47012672e"
+    },
+    {
+      "bytes": 36842,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/CHOP_FAST_DISCOVERY_RESULT.json",
+      "sha256": "255f0e9950f58a8dea7ff7e8bf5b74658f160e7d2ab74e60bf253a8b3b6d6716"
+    },
+    {
+      "bytes": 15712,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/CHOP_SUBTYPE_RESULTS.csv",
+      "sha256": "491889a3c8bf8514948f3f012176f05d69320d0b05775b31469e34cb4be5dfec"
+    },
+    {
+      "bytes": 2560490,
+      "path": "xau-usd/xauusd-fast-research/chop-v1/outputs/CHOP_TRADE_LEDGER.csv",
+      "sha256": "aff8209780783f92b8d8a31581a951eb28b88ac07931247b00528d83a507a816"
+    },
+    {
+      "bytes": 5494,
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    }
+  ],
+  "external_files": [
+    {
+      "bytes": 104974475,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    {
+      "bytes": 1305,
+      "path": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  ],
+  "outcomes_opened": false,
+  "package_files": [
+    {
+      "bytes": 2759,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/PREREGISTRATION.md",
+      "sha256": "becbb43c494eccfe87d8d4a6d696ecd9459c38c2aae22aed051c40dffe46d469"
+    },
+    {
+      "bytes": 73,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/requirements.txt",
+      "sha256": "040f978dabe1a6361a388edc8998a5e5efb12d5568f2be47cead5194f3bbc724"
+    },
+    {
+      "bytes": 3992,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/config/portability_v2.json",
+      "sha256": "fa57002320c8608248b90cd32da332e83cd186c2669b28b31130e4916104fb2e"
+    },
+    {
+      "bytes": 3533,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/src/portability.py",
+      "sha256": "9f5f62cc1d8cfc6e7d3de2ccda8e45d03af06368b3ee41329f8215e3e8b0e045"
+    },
+    {
+      "bytes": 2999,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/tests/test_portability.py",
+      "sha256": "cca6db59fd7f34971702edc2c3dc63f247e07f385b363342b42c59fe0a2cddbe"
+    },
+    {
+      "bytes": 5895,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/lock_contract.py",
+      "sha256": "264c3e2dcffc95a89d1d787afe9e0df3f1b0af40e36f6e4fedf5ab8d7730f664"
+    },
+    {
+      "bytes": 8797,
+      "path": "xau-usd/xauusd-fast-research/chop-m5-highvol-dukascopy-portability-v2/run_portability.py",
+      "sha256": "adbafac2786d9ab04e229593115531cde49af22a8c9a6b40a9b2a44bf766f5c5"
+    }
+  ],
+  "parameter_search_count": 0,
+  "schema_version": "xauusd_chop_m5_highvol_portability_v2_contract",
+  "source_selection_evidence": {
+    "identity_checks": {
+      "strategy": true,
+      "stress_net_r": true,
+      "subtype": true,
+      "timeframe": true,
+      "trades": true
+    },
+    "source_subtype_row": {
+      "net_r": 16.159385661320336,
+      "profit_factor": 1.2154171879568256,
+      "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+      "stress_net_r": 10.609385661322037,
+      "subtype": "HIGH_VOL_CHOP",
+      "subtype_dimension": "volatility_subtype",
+      "timeframe": "M5",
+      "trades": 111
+    },
+    "strategy_id": "CHOP_RANGE_ROTATION_CONTINUATION_V1",
+    "stress_net_r": 10.609385661322039,
+    "subtype_dimension": "volatility_subtype",
+    "timeframe": "M5",
+    "trades": 111,
+    "volatility_subtype": "HIGH_VOL_CHOP"
+  }
+}

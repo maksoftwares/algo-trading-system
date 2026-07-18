@@ -1,0 +1,29 @@
+{
+  "files": {
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_CONTRACT_LOCK.json": {
+      "bytes": 5216,
+      "sha256": "06d4446c4f6661aba2cd7bebdea4a0cec7603ae21a65f9833cefef353ca34b5e"
+    },
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_RESULT.json": {
+      "bytes": 7915,
+      "sha256": "605e10e82846c8f1025794a3acc8acafb2963a4bd2b479c7b44d616bcb8e090f"
+    },
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_RESULT.md": {
+      "bytes": 756,
+      "sha256": "ef346689abb88f57238e8ea33ed428c55e750533a0c225bca68ec9f9a2664e4b"
+    },
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_SIGNALS.csv": {
+      "bytes": 202081,
+      "sha256": "56cf985f2a1d3ae55dd4b6911b597438ed9aa8dd42e40a3aacf340b93810510c"
+    },
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_STAGE_METRICS.csv": {
+      "bytes": 1012,
+      "sha256": "56515a663dfd28cac3ad13323899ded34f461daf6bbb4388247dd920a5367dd4"
+    },
+    "CHOP_M5_HIGHVOL_DUKASCOPY_V2_TRADES.csv": {
+      "bytes": 130282,
+      "sha256": "262b0260c466666ec9257f7c33976846af558259bb436d119239cb3f4f15b0c6"
+    }
+  },
+  "schema_version": "xauusd_chop_m5_highvol_portability_v2_artifacts"
+}
