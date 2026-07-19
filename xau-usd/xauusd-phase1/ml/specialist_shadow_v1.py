@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 
 
-SCHEMA_VERSION = "xau_specialist_shadow_v1"
+SCHEMA_VERSION = "xau_specialist_shadow_v1_1"
 SPECIALIST_ID = "R1_UPTREND_LONG_V1"
 EXPECTED_LOGIN = 1033669
 EXPECTED_SERVER_MARKER = "Demo"
@@ -24,6 +24,7 @@ DEFAULT_TERMINAL = Path("C:/MT5PortableProspectiveCollector/terminal64.exe")
 DEFAULT_RUNTIME = Path("C:/MT5PortableProspectiveCollector/MQL5/Files/specialist_shadow_v1")
 HISTORY_DAYS = 1_200
 POLL_SECONDS = 60
+MAXIMUM_M5_STALENESS_HOURS = 96
 
 
 @dataclass(frozen=True)
@@ -128,6 +129,33 @@ def mt5_rates_to_m5(
     ].reset_index(drop=True)
 
 
+def assert_market_history_fresh(
+    m5: pd.DataFrame,
+    *,
+    now_utc: datetime | pd.Timestamp,
+    maximum_staleness_hours: int = MAXIMUM_M5_STALENESS_HOURS,
+) -> float:
+    if m5.empty:
+        raise ValueError("Cannot check freshness of empty M5 history")
+    now = pd.Timestamp(now_utc)
+    if now.tzinfo is None:
+        now = now.tz_localize("UTC")
+    else:
+        now = now.tz_convert("UTC")
+    latest = pd.Timestamp(m5.iloc[-1]["bar_end_utc"])
+    age_hours = (now - latest).total_seconds() / 3_600.0
+    if age_hours < 0.0:
+        raise ValueError(
+            f"Latest completed M5 bar {utc_text(latest)} is after observer time {utc_text(now)}"
+        )
+    if age_hours > float(maximum_staleness_hours):
+        raise ValueError(
+            f"Latest completed M5 bar is {age_hours:.2f} hours stale; "
+            f"maximum is {maximum_staleness_hours}"
+        )
+    return age_hours
+
+
 def evaluate_r1(
     m5: pd.DataFrame,
     frozen: FrozenR1,
@@ -148,9 +176,10 @@ def evaluate_r1(
 
     latest = enriched.iloc[-1]
     signal_time = pd.Timestamp(latest["timestamp_utc"])
-    if signal_time != completed_through:
+    if signal_time > completed_through:
         raise ValueError(
-            f"Latest completed H4 bar is {utc_text(signal_time)}, expected {utc_text(completed_through)}"
+            f"Latest completed H4 bar {utc_text(signal_time)} is after "
+            f"evaluation cutoff {utc_text(completed_through)}"
         )
 
     base_candidates = base.generate_candidates(enriched, config["signal"])
@@ -165,6 +194,7 @@ def evaluate_r1(
         "state_id": state_id,
         "specialist_id": SPECIALIST_ID,
         "signal_time_utc": utc_text(signal_time),
+        "evaluation_cutoff_utc": utc_text(completed_through),
         "contract_hash": frozen.contract_hash,
         "base_signal": not base_now.empty,
         "r1_allowed": bool(latest.get("r1_allowed", False)),
@@ -427,6 +457,8 @@ def resolve_all_candidates(
     now_utc: datetime | pd.Timestamp,
 ) -> list[dict[str, Any]]:
     candidates = read_jsonl(candidate_path)
+    if not candidates:
+        return []
     ticks = read_prospective_ticks(tick_files_dir)
     return [resolve_candidate(row, ticks, now_utc=now_utc) for row in candidates]
 

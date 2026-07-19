@@ -1083,3 +1083,52 @@ rate. Same-period Core shadow signals, floating-equity overlap, margin, and exac
 MT5 portfolio reproduction remain mandatory. No model training, Python
 prediction, EA consumption, demo, live, runtime, account, or broker action is
 authorized.
+
+## Same-Period Core Shadow Preflight - 2026-07-20
+
+The concrete remaining gap is same-period portfolio evidence, not missing price
+history or a missing research framework. The profitable five-specialist Core has
+historical evidence at approximately 0.613 trades per weekday. Earlier attempts
+that reached approximately 3-4 trades per weekday did not retain positive stressed
+expectancy. V24.1/V26 are locked forward satellite hypotheses, not proven edge.
+The owner frequency target is therefore still open.
+
+A read-only MetaTrader5 bridge query against the existing
+`C:\MT5PortableProspectiveCollector\terminal64.exe` verified account `1033669`,
+server `Capital.ComMena-Demo`, and a connected terminal without changing a chart,
+EA, order, position, profile, or account setting. Available broker history from
+2025-01-01 through the 2026-07-19 market open includes 108,837 M5 bars, 9,082 H1
+bars, 2,463 H4 bars, and 482 D1 bars. This removes the Core indicator-warm-up
+blocker.
+
+The existing read-only R1 sidecar was then found `FAILED_CLOSED` because it
+required the latest H4 decision timestamp to equal the wall-clock H4 boundary,
+including during the weekend when no new gold bar exists. The source repair:
+
+- accepts the latest actual completed H4 bar when it is not after the evaluation
+  cutoff;
+- separately rejects future M5 history and history more than 96 hours stale;
+- records the evaluation cutoff and M5 history age; and
+- skips the 42 MB prospective-tick scan when no candidate exists.
+
+Eight focused tests and Ruff pass. An isolated read-only real-terminal cycle
+completed in 1.7 seconds with `ACTIVE_READ_ONLY_SHADOW`, no candidate, decision
+`ABSTAIN_D1_TREND`, 232,003 M5 rows, and a 49.74-hour weekend history age. It
+performed no broker action. The already-running sidecar process still has the old
+module loaded and was not restarted because no runtime-change instruction was
+given; its persistent runtime status remains fail-closed until an authorized
+restart.
+
+Exact remaining same-period Core work:
+
+1. Extend the frozen Capital adapter from R1 to the deterministic R2/R3 rules.
+2. Reconstruct and freeze the R4 M5 microstructure fields from prospective bid/ask
+   quotes; do not substitute guessed values.
+3. Update and freeze the external macro/cross-asset inputs required by R5, whose
+   dynamic router may use only component outcomes closed strictly before each
+   candidate.
+4. Run R1-R5 and V24.1/V26 over identical untouched forward dates on one shared
+   timeline, reporting actual frequency, overlap, costs, floating equity,
+   concurrent exposure, margin, and drawdown.
+5. Admit nothing unless the locked validation and confirmation gates pass. More
+   data, more attempted strategies, or an ML ranker cannot replace this proof.

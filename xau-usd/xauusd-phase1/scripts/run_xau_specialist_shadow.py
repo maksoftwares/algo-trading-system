@@ -22,6 +22,7 @@ from ml.specialist_shadow_v1 import (  # noqa: E402
     SYMBOL,
     append_jsonl_once,
     assert_demo_read_only,
+    assert_market_history_fresh,
     atomic_write_json,
     evaluate_r1,
     last_completed_h4,
@@ -55,6 +56,7 @@ def run_cycle(terminal: Path, runtime: Path) -> dict[str, object]:
             now,
         )
         m5 = mt5_rates_to_m5(rates, point_size=float(symbol.point), completed_through=completed)
+        m5_age_hours = assert_market_history_fresh(m5, now_utc=now)
         state, candidate = evaluate_r1(m5, frozen, completed_through=completed)
     finally:
         client.shutdown()
@@ -81,6 +83,7 @@ def run_cycle(terminal: Path, runtime: Path) -> dict[str, object]:
         "m5_history_rows": len(m5),
         "m5_history_start_utc": utc_text(m5.iloc[0]["bar_start_utc"]),
         "m5_history_end_utc": utc_text(m5.iloc[-1]["bar_end_utc"]),
+        "m5_history_age_hours": m5_age_hours,
         "contract_hash": frozen.contract_hash,
         "latest_decision": state["decision_reason"],
         "state_added": state_added,

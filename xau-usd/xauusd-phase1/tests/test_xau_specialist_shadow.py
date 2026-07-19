@@ -53,6 +53,37 @@ def test_rates_conversion_excludes_incomplete_bars() -> None:
     assert frame.iloc[0]["timestamp_utc"] == completed
 
 
+def test_market_history_freshness_accepts_weekend_gap() -> None:
+    module = _load_module()
+    frame = pd.DataFrame(
+        {"bar_end_utc": [pd.Timestamp("2026-07-17T21:00:00Z")]}
+    )
+
+    age = module.assert_market_history_fresh(
+        frame,
+        now_utc=pd.Timestamp("2026-07-19T22:40:00Z"),
+    )
+
+    assert age == 49 + (40 / 60)
+
+
+def test_market_history_freshness_rejects_genuinely_stale_feed() -> None:
+    module = _load_module()
+    frame = pd.DataFrame(
+        {"bar_end_utc": [pd.Timestamp("2026-07-15T21:00:00Z")]}
+    )
+
+    try:
+        module.assert_market_history_fresh(
+            frame,
+            now_utc=pd.Timestamp("2026-07-19T22:40:00Z"),
+        )
+    except ValueError as exc:
+        assert "stale" in str(exc)
+    else:
+        raise AssertionError("Stale market history was accepted")
+
+
 def test_candidate_id_and_jsonl_are_idempotent(tmp_path: Path) -> None:
     module = _load_module()
     stamp = pd.Timestamp("2026-07-17T12:00:00Z")
@@ -117,3 +148,20 @@ def test_tick_outcome_rejects_missing_entry_after_deadline() -> None:
 
     assert result["status"] == "REJECTED"
     assert result["rejection_reason"] == "NO_ENTRY_TICK"
+
+
+def test_empty_candidate_ledger_does_not_scan_tick_history(tmp_path: Path) -> None:
+    module = _load_module()
+
+    def fail_if_called(_path: Path) -> pd.DataFrame:
+        raise AssertionError("Tick history should not be read without candidates")
+
+    module.read_prospective_ticks = fail_if_called
+
+    result = module.resolve_all_candidates(
+        tmp_path / "missing_candidates.jsonl",
+        tmp_path / "ticks",
+        now_utc=datetime(2026, 7, 20, tzinfo=timezone.utc),
+    )
+
+    assert result == []
