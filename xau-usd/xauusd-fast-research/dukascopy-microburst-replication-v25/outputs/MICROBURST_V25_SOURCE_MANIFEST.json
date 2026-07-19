@@ -1,0 +1,2183 @@
+{
+  "candidate_generation_performed": false,
+  "economic_outcomes_opened": false,
+  "hour_file_count": 87648,
+  "manifest_sha256": "76eab4348d9a7c16afad51e0f4c9fbd17f8086b966633de03a2117e61a459c3b",
+  "month_count": 120,
+  "months": [
+    {
+      "acquisition_manifest": {
+        "bytes": 303039,
+        "path": "raw/XAUUSD/year=2016/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "3f90d2c27d12c6772ec4dc34968afe881f2b9bf0d5b2fade65d592d1beed6edb"
+      },
+      "files_sha256": "405884d369eb0005f690dd3516c3ec2560891567d57e2024bab3d772878d4f3f",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "9e063d48eb994fb82784b6b3d070894a0528e13a05b85f714f97eff45e0bacf3"
+      },
+      "hour_files": 744,
+      "month": "2016-07",
+      "partition_signature": "8cc139b097ee306bfd5975c077401b73b90568040bb6b24080b23d7e4a0a7c0d",
+      "raw_bytes": 86994450,
+      "tick_count": 3984621
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305500,
+        "path": "raw/XAUUSD/year=2016/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "ade29150eb688fd8c6ed76d63a719d037c0be4da5aa794569ad10f0071d95a79"
+      },
+      "files_sha256": "7493360d0f0d8dd0f0ec9c26db461b3933222e652647d9849c58130393085801",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "1e9ad5601d7897bd78159a004c3f92af17dfec3c48212b95e7b4bc1b5401aac8"
+      },
+      "hour_files": 744,
+      "month": "2016-08",
+      "partition_signature": "4f61b0eb1c3097577bf896a87d2ffa94c6224fb959b66d5502abb69e3562c753",
+      "raw_bytes": 85574665,
+      "tick_count": 3925329
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295575,
+        "path": "raw/XAUUSD/year=2016/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "9d4a2cbae3e8838f0a6262d45a2fbf4b3c535b63633f24a64f0d3897fde26849"
+      },
+      "files_sha256": "61aa6418bb0631cc48c00fe7e339f5237ae6509f028690ee1a22c66c1dc557b5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "56a520713de0f0f99fd7959e17e0a55a6bd376bfb25b03ccbd473a6978760dc7"
+      },
+      "hour_files": 720,
+      "month": "2016-09",
+      "partition_signature": "57104a0d48027d81d56b5f34b3b702cffdae9aabea9a0b3a0e57853542d97629",
+      "raw_bytes": 85203616,
+      "tick_count": 3915459
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305896,
+        "path": "raw/XAUUSD/year=2016/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "0887d092723c2d73640bef2d85846329c2761fe365b0e8c121ab48fe90eb5dc5"
+      },
+      "files_sha256": "a2010ffa3b3bfb4839d4bf6fba74347724cdde29f4f96c9961583939f44b55d8",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "0aef82befcd95e1b1ee88ffe9c645c98edfab70954c9f9149cfa5faef4c8b947"
+      },
+      "hour_files": 744,
+      "month": "2016-10",
+      "partition_signature": "385b28dc4828410583549af93e13e34bfee371ea06c3300e3a31905c2d1b1001",
+      "raw_bytes": 66881263,
+      "tick_count": 3060614
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 296386,
+        "path": "raw/XAUUSD/year=2016/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "8c0b82314e490c163d6fb19a13e609cab96c8082494a36f54fbfbee72112c2c8"
+      },
+      "files_sha256": "3274c35bc31ca823b3d154ceb67533066f8bda374d394bf1bed0b60629ea8d67",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "843393484e5df3d2244a3877b071716878c562018d1fb93b73c03c4bb2edf1a8"
+      },
+      "hour_files": 720,
+      "month": "2016-11",
+      "partition_signature": "0996fb197f7ccc1c2ec76a1a9d16aed6c437fe11be3ec9ebc8e7c81ff4a41368",
+      "raw_bytes": 101408301,
+      "tick_count": 4617628
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305902,
+        "path": "raw/XAUUSD/year=2016/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "068fd3f5e1e52b93ff2505b543fafd7a93b788b0cfc3e7c1e5b721f076ebade3"
+      },
+      "files_sha256": "e0cb369fa7f69287904bd8e787049bb86cde2bd8b9dae6fdf002538d694a3ddd",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2016/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "095f054b8e2f2ef75a7717c59f38b670ff84446dc2ea2cb34f9bd608ac414135"
+      },
+      "hour_files": 744,
+      "month": "2016-12",
+      "partition_signature": "8ebd93935a2807d288af2609d3697737eb0d5c706ccce8500a92699e31d24424",
+      "raw_bytes": 72440886,
+      "tick_count": 3296726
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305281,
+        "path": "raw/XAUUSD/year=2017/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "652d7c712c120f4f97c575e6fc25c4e925b541af039ef066ca49625651fffe02"
+      },
+      "files_sha256": "cb637aa5ac59a1f2cbad2b6fc26b4e482005a742d70303551ae53c2dc0670b0a",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "3e307fdeaaf6eec69d84a46ac4bb6f6a793f6c32218590fa5fdd6f4dad4ceca9"
+      },
+      "hour_files": 744,
+      "month": "2017-01",
+      "partition_signature": "f64a894f3f0712ea07fe1736f0497719521fee01ff792a1d8c957e15e2c93ba0",
+      "raw_bytes": 86604493,
+      "tick_count": 3991125
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 275890,
+        "path": "raw/XAUUSD/year=2017/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "f22c42202e1ae638deff2e0c3682f4957003a27fdec48ad3d099d3738c8016ff"
+      },
+      "files_sha256": "adbc3616dc91f1b5ebe4448ab622d2d753f555aaa8caf82a15987360750eff4c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "3efaad1e3b27acc55207317444d894ad65471ebb3d40b2262d92e7d12057bca2"
+      },
+      "hour_files": 672,
+      "month": "2017-02",
+      "partition_signature": "8c24bf30748e5a8ceabdd43dc1b906c87034ca1e401c4c7e35e2bdf5a51c78ad",
+      "raw_bytes": 88062381,
+      "tick_count": 4018185
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305531,
+        "path": "raw/XAUUSD/year=2017/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "4adefa92c06c5c71c6678b9682c613f31520f1c6416370b20f9466e6e8e51a5e"
+      },
+      "files_sha256": "8172381b4d6675fc9a1f10107b695fabb3e11e020485f4383ff11c2559c3b1d9",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "a21cf90d6b118584922fc6b88458d4e93efed5cf400214a1e3db8d52fc20dbc7"
+      },
+      "hour_files": 744,
+      "month": "2017-03",
+      "partition_signature": "a3d3126298cb28d72fc175ab41ff9a161c145bdfca7fa3f883c7b377308ea54c",
+      "raw_bytes": 92016321,
+      "tick_count": 4238341
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295202,
+        "path": "raw/XAUUSD/year=2017/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "f009c8bed85c86578426a1284770db60905d2bbc41b2e8705b378f6ae965e4fd"
+      },
+      "files_sha256": "06e84457794bdc81fc287bed52977a171a6c60be93c43366fa70285e132fa05b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "6c6fdd37b9c566448efd78645f02f750ed260dfc5b351484a3b780ea8ab580b6"
+      },
+      "hour_files": 720,
+      "month": "2017-04",
+      "partition_signature": "2f72e4519936b93537ee6936322432b28a0718e5589a5e796215c91ce6560888",
+      "raw_bytes": 70942041,
+      "tick_count": 3302392
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305424,
+        "path": "raw/XAUUSD/year=2017/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "d5f33847fa4c8be08819cd5257b22c8b1610f45bf505bce9f2d7e551e81acc38"
+      },
+      "files_sha256": "6c03f1e6d911597a48af28e4f58ac6c29f24379bf3f0f695445b6a577617ac56",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "5decf352daff7c92db80e62db8ec6468d828a8efd0ca2a32eb84b7eee2291a65"
+      },
+      "hour_files": 744,
+      "month": "2017-05",
+      "partition_signature": "2ba1ad34eff8722c4b692f2f0e292ee59f6a8d7e2eaa4a74e8151744711cce08",
+      "raw_bytes": 77028738,
+      "tick_count": 3595878
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295530,
+        "path": "raw/XAUUSD/year=2017/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "3b5693e6cad09b00c7a550c7bb6cec0c96188cc2d85f72602527781dfa0db425"
+      },
+      "files_sha256": "e9449ab272eb3681e199b42da13fa213881a16c81eb6a1c276cbc985f43c9b0b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "7b19b8d9561b9055d33f0527939880fa0deb95e4eb67258d98bef1e061417a54"
+      },
+      "hour_files": 720,
+      "month": "2017-06",
+      "partition_signature": "c66b3dd59362fe5a4a642c1827b15a43264590c282a4656ee5d52eecdcfc0fe2",
+      "raw_bytes": 71401719,
+      "tick_count": 3333983
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305130,
+        "path": "raw/XAUUSD/year=2017/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "41db4db93ce9349831a3d68f4a02a96e006abedbb50f1d5fba6c323662ec6b6e"
+      },
+      "files_sha256": "c9cf64c0d5cc88b49d01e5670af6b2dc8df8435eeeb40bddd5896dd058b87240",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "0d3d9597a29556a96c091b316f39bb53e95960a44b086a5e1712d11186b201d2"
+      },
+      "hour_files": 744,
+      "month": "2017-07",
+      "partition_signature": "8e41d01bfab1b9272ca5ad69f1873924988eba56e845e34e6984bc0b66a4d807",
+      "raw_bytes": 66020441,
+      "tick_count": 3076986
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305471,
+        "path": "raw/XAUUSD/year=2017/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "e9459e2edb4001a021a143abb60729da686ea0ae7eed668652c9aba8565ce51a"
+      },
+      "files_sha256": "abb82a328d4f1d195cd7a47bdde25c9e2e753288055932266780ac95a45a75e0",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "5d1336710d3cedc3d0cc8de1b51892fc475dc184a63cf3cbed47cd37eec34111"
+      },
+      "hour_files": 744,
+      "month": "2017-08",
+      "partition_signature": "9246764cf9ce7677c0a676488cf0813ce19c66a053255d0a31c0b54bb1dc14f1",
+      "raw_bytes": 82340936,
+      "tick_count": 3833722
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295480,
+        "path": "raw/XAUUSD/year=2017/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "c2172144a9781b79860035f136ac3e73e5e5d0b387263ec9b1a5facbbdcc9413"
+      },
+      "files_sha256": "151c8714e3f5b05c3fb193dede992ea3a78ea17c85f566abf3d3d69282f639d4",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "d88f373a9c08c97adea78aeb542c1d6ddec346487f0bbb1b082604a82234e883"
+      },
+      "hour_files": 720,
+      "month": "2017-09",
+      "partition_signature": "e37d539d7eaf089df8e6bd429822a4ab91631607e9bfe6f3606fbe961f03d21b",
+      "raw_bytes": 83807444,
+      "tick_count": 3895196
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306172,
+        "path": "raw/XAUUSD/year=2017/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "9dab5670a048ce9eca1fe93f8a2bfe7d4512655d5d74180527335937724bd737"
+      },
+      "files_sha256": "bf017dd3bb40f619f01a8ba58a254b73a180525739876c66c54b96cbcb84e302",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "1b2d8b3b0925ee3f835a4c43a5f9f18a26d76ed69b5cbe548e59e5305921e394"
+      },
+      "hour_files": 744,
+      "month": "2017-10",
+      "partition_signature": "b601ef5d0c6176b2c436adaad1014cd23675291b29afff051f943358910ebddb",
+      "raw_bytes": 90057794,
+      "tick_count": 4188444
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 296388,
+        "path": "raw/XAUUSD/year=2017/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "beb42e11f6de3d3539ea16540837b3507f1f1ea9cb1e37efde2c13e0a81a61a7"
+      },
+      "files_sha256": "e37bd2509f298899d3ae16398326259ef685bd79810fc9842d859f8bc89eb08d",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "6a675f78e47b96f3d1adddd2c46cb8344eb96e454323d859118a0de94d8109bd"
+      },
+      "hour_files": 720,
+      "month": "2017-11",
+      "partition_signature": "26c74ddf27383378bd688bf5861c8c4afde48b32a6aef48294613933eeaa1576",
+      "raw_bytes": 96198020,
+      "tick_count": 4462560
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305888,
+        "path": "raw/XAUUSD/year=2017/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "712dcc071e8fb2d050bfeecbb76f4b967a2a8725f464b9117018f37cff808731"
+      },
+      "files_sha256": "4b7ccd89c91131e1a1dbecabd4bc317cc331f6f98955ad7d3a27ef4a59a203c7",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2017/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "d191ac62f6e7e9603273602b4519e62cd542334908ec7a9407895454d1097b9c"
+      },
+      "hour_files": 744,
+      "month": "2017-12",
+      "partition_signature": "cfe50b3765a980a65099cee3a4fa71cc6e32f7f86a39c1cba664aca4a2feff08",
+      "raw_bytes": 83766346,
+      "tick_count": 3900168
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305477,
+        "path": "raw/XAUUSD/year=2018/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "b8636ce81cdcce04f31d06b38e77feec32ae4bc0f8a1e94d98bdaa66937de463"
+      },
+      "files_sha256": "5bbea84a03d98ef0a9553939e5b543d043dff92ed6b4c0bca49a669f70d0cc9d",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "a28cdc89634c82c030bbc58a85780d7fd37f35c5fda00b66937a5b4a56e0e869"
+      },
+      "hour_files": 744,
+      "month": "2018-01",
+      "partition_signature": "e4dfa98683f2877c722cef1a0022a401dfde0f3b372ca11f17b919df0319b1dd",
+      "raw_bytes": 99820960,
+      "tick_count": 4643902
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 275986,
+        "path": "raw/XAUUSD/year=2018/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "8a8d71e6e5a6b4698a852fb472ea2af72d9f731298fefd15a554e30fa9379271"
+      },
+      "files_sha256": "47334284b0448d5964f5c266cd5c8c1a3e047352f616130294edc386ace7966c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "aad8c2d061ccef3e099c968524c8b71f45c3768e57d3812a97e6e8a13eba21d6"
+      },
+      "hour_files": 672,
+      "month": "2018-02",
+      "partition_signature": "98442b64a101800e6c7a37bf30583c8fc76d16e206e36be5b42f6954b59d724f",
+      "raw_bytes": 103726994,
+      "tick_count": 4826040
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305192,
+        "path": "raw/XAUUSD/year=2018/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "818eac2da6565ce37b9bb2bdc408dd040dc99e6424b16230540024de42d253ad"
+      },
+      "files_sha256": "63ec733b25250f2972efe68cdbc31973266838fcabb6ba2b3475e6bd53e22a58",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "8b4d3412a6bee45d1fc3b107b8094231420360f0fb02392db0078ebd52086366"
+      },
+      "hour_files": 744,
+      "month": "2018-03",
+      "partition_signature": "a721f95e40c3676756bdccdcde438bbdd35265b1a6b8074140de9c77f4004217",
+      "raw_bytes": 79360569,
+      "tick_count": 3695844
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295283,
+        "path": "raw/XAUUSD/year=2018/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "6cf2b62c4ee194ccd1cca276cb8b9458b6a6e809c12a76828ab01ec9ee4717ee"
+      },
+      "files_sha256": "8a813bf78a6cd4d6acbdd3c64e8dac5c82bf7a035b862da798ade85b3d4feb97",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "0b8683b4df8f0d1e5e72f18de9ca0554ae82939f07f0461b524d5897cae99208"
+      },
+      "hour_files": 720,
+      "month": "2018-04",
+      "partition_signature": "18ec71aab1412680d46746a872545b5091ca488d56a9789902b5da9c2c109dc2",
+      "raw_bytes": 56056512,
+      "tick_count": 2607659
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305214,
+        "path": "raw/XAUUSD/year=2018/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "1688dfe70fd370390120656cfd76d93ed7502776df8caf6b72d9b6896825ca93"
+      },
+      "files_sha256": "c6487c1cb8469a17867afbf3ba11cd4be7ca7af91d175e9987f564f7b057f1f1",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "e8357e365224591634e044a33ef50ad98480cebaf3e2cc328ce7c363081657c7"
+      },
+      "hour_files": 744,
+      "month": "2018-05",
+      "partition_signature": "e271ec7907501fcf3aa09b33fab300f38ab141d7a92cf13b5880cdb6d44ce2c7",
+      "raw_bytes": 54062931,
+      "tick_count": 2507499
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295217,
+        "path": "raw/XAUUSD/year=2018/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "36c3b6d871415715c08dff3aaf0c812146683b4b94391b9668cc4e2070ba1b91"
+      },
+      "files_sha256": "827bb1771c190be351d972e9f446d640c9d3c50ebe1cb5816d013eaf052f10db",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "a05c4fbe1155203afc891c9c34c2063f306cc68dbda92e1ecdb1582f29f67951"
+      },
+      "hour_files": 720,
+      "month": "2018-06",
+      "partition_signature": "b8e5a035af66a41fa87b973095c75501b5c99716257eade090bb754bdf5ba40f",
+      "raw_bytes": 50074039,
+      "tick_count": 2326799
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305205,
+        "path": "raw/XAUUSD/year=2018/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "1fd505644ed630e3b7c33f946cd03a51523c4b70beddd57cfb023820f1e867dd"
+      },
+      "files_sha256": "f70e171e005fe8aa074e8d0f1baa57e85a58ec2a814894540f2fb02ec0a92513",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "9908495afb413e687928fad7240bfc8dd5e3dd1f77719ba700d57890ad2f72ea"
+      },
+      "hour_files": 744,
+      "month": "2018-07",
+      "partition_signature": "d85dde47d9d23b6fce5dfad827392eaefd382358dd7ec378547d349e4931ac18",
+      "raw_bytes": 61515437,
+      "tick_count": 2855747
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305313,
+        "path": "raw/XAUUSD/year=2018/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "9a24d05661e05c92670b22a8f4f1f9981f9f8821ee14a878e3d2d7ec6b4894dc"
+      },
+      "files_sha256": "7bcc65fa845662d2674655d33e576fd7a24b37fd91860ed1b6e2df0928a5ea73",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "c6a3c8880692a04ba6e1850a06f9a4f3082f2cfacf43539e769bff7363485931"
+      },
+      "hour_files": 744,
+      "month": "2018-08",
+      "partition_signature": "e27c6580cdee3cb9e87935df3b2681e175c9503f9a4ba4ba79a1a5c279b0cc55",
+      "raw_bytes": 63510988,
+      "tick_count": 2946930
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295140,
+        "path": "raw/XAUUSD/year=2018/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "ea9d052b95ca72eca9626b0dc5e86cd3842a19e5e08183901e3e8fba6729a7ec"
+      },
+      "files_sha256": "072b1d6be22ecfabb37d9a85b9a4925f574f892ee14d5689433f9ac742082b5e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "06c6f484d9ce4963418aae23a0aef7c9da3b64c5516ca72db67d3bc0c2e8ac76"
+      },
+      "hour_files": 720,
+      "month": "2018-09",
+      "partition_signature": "4d890e9cdbf6ace3dc464b6bb3cdb9961809e3df744b34a2b647780a0e909c3d",
+      "raw_bytes": 52095722,
+      "tick_count": 2413887
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306058,
+        "path": "raw/XAUUSD/year=2018/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "d16b3f80c3f55b1d0cace34158bb8992c4321fd9be8be58175e7bb9cd6518c2b"
+      },
+      "files_sha256": "8aea56899a669ac827b98ad5776b00aca9c0f24f43f3770039944f16c8275ece",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "01d95f2900e2056c64f27f1fb48a516d2a6b39f4ca865601e070c672b36c7e6c"
+      },
+      "hour_files": 744,
+      "month": "2018-10",
+      "partition_signature": "dd1bf43267ebc92861493c4a6c766e8f9b4567d3f9d8481483cec56f7126b66f",
+      "raw_bytes": 63537250,
+      "tick_count": 2956491
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295952,
+        "path": "raw/XAUUSD/year=2018/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "1df51532ea44b698897f3ccdd490456955b0d96f7d2fb63c448e5a088390acbe"
+      },
+      "files_sha256": "8b352fae2fe8cc5d9ec8e8bff63281f6b721f3480182a498e7460fd2b8f5ef86",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "0e8377a4238d4edd73288a63c2f8dda7264df4aa8c6a7f4d3e41a317ee449bca"
+      },
+      "hour_files": 720,
+      "month": "2018-11",
+      "partition_signature": "60792679f197feee94d67c6e404eee1a79cf3e42b3553b097ae0cac14e43561c",
+      "raw_bytes": 46706912,
+      "tick_count": 2159831
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305525,
+        "path": "raw/XAUUSD/year=2018/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "3485a3acba64ac8959da8f982bb84170f0e07c0d7fd28f94345bd59b335d0d06"
+      },
+      "files_sha256": "b208b097d15b22b21644c513732da83c0532dff874a0cf0cffea114fb58999b0",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2018/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "55c3ca91c9a84621d37386d5d15009102b5a5c72b65d0891e582abf95dced985"
+      },
+      "hour_files": 744,
+      "month": "2018-12",
+      "partition_signature": "b910f81213849b69e9e9afb5e6993f8c9fa169f4a226a3cef93bbda0400ac1d5",
+      "raw_bytes": 42880082,
+      "tick_count": 1979716
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305010,
+        "path": "raw/XAUUSD/year=2019/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "fd80ae2b6ec8e6baa30a957516a6eaf908a5971783aa3992d366c5437a3add94"
+      },
+      "files_sha256": "dc36a5f66620356b0f39eb78cc0f5832ff0e1444c39b8d0b432a4d6de07ffe4d",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "80b45a11f1f985ffdd6e822b9da79d78e877a1cfa006ecc075740dd88a549106"
+      },
+      "hour_files": 744,
+      "month": "2019-01",
+      "partition_signature": "3b8e5a2f6141db1ce851015fa9a7fb3cb8ad8323976ec23eedf4a07d4efcb10a",
+      "raw_bytes": 45888323,
+      "tick_count": 2118620
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 275455,
+        "path": "raw/XAUUSD/year=2019/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "cd42c9f419c62b6d3758316ef5e079f23b7f520568bfdf997909c9fd9ca380a2"
+      },
+      "files_sha256": "5286b2d5bfef36b8a7713b4a0cabab4f707f0a32123fd8be0a0b2bb3cd22951b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "dfbb8f1ed56446417c1a37bc2233099c1e12b4725b986a01aa685d0ace6c7b79"
+      },
+      "hour_files": 672,
+      "month": "2019-02",
+      "partition_signature": "7cfd5970c09028ee4838cc3dec90af8771952a4335f422242f87b80ef0a98a5e",
+      "raw_bytes": 37694494,
+      "tick_count": 1739405
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 304977,
+        "path": "raw/XAUUSD/year=2019/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "35021e488ec9ebd58eca1d954f62b019a3b5132138cef10ebb7f03d2e936799f"
+      },
+      "files_sha256": "90f80b1af4d78575757accce67e74d31ef04776e5635ee2329670219f4bb66e7",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "debe7737ebaabcfd248f96c52e5c7f63b2e5e5fa2a6c1914bd973bfcc9809c6c"
+      },
+      "hour_files": 744,
+      "month": "2019-03",
+      "partition_signature": "5a746f7d87a6aef6b549b25e972e39b4da0a4de28b7cca73e5440693fffe0ada",
+      "raw_bytes": 50735747,
+      "tick_count": 2354110
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295121,
+        "path": "raw/XAUUSD/year=2019/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "1cb28513832832c2d7f9ec098bf7dd11c4aa3ce040d5b877312774c089eb0501"
+      },
+      "files_sha256": "f8fd180d4b687d60a739cb0f63b2f7455b465d45b990adb4714d64d31cfe61b8",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "35cfa3eb997e745f65bf6131931a6ffb94ec02b6f4bf8e24857c1cfb80b6a33b"
+      },
+      "hour_files": 720,
+      "month": "2019-04",
+      "partition_signature": "c287efdab24649f214db1a7fb51e1559a06c3201b12946a675a610accc6318d5",
+      "raw_bytes": 42123638,
+      "tick_count": 1948157
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305196,
+        "path": "raw/XAUUSD/year=2019/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "8b646ffb8543bbdaf24529b7ec88967d3df55dc50b9808fae351791df30f8ed4"
+      },
+      "files_sha256": "15cfaabe8ecab8d6cb2f6acc28cae52ce6546cb3bae7d878bfd1da003797db1f",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "4e7497e9643523e74ed434d24a3d264509d76d9ef7bdd10a82107e76118a32ca"
+      },
+      "hour_files": 744,
+      "month": "2019-05",
+      "partition_signature": "846825ca7dfe1a63307bb0a323aec756f90a3fd2718fce935362d4ba533eb3f2",
+      "raw_bytes": 56472124,
+      "tick_count": 2615221
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295312,
+        "path": "raw/XAUUSD/year=2019/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "18e50a063b6401a78bfe68469742b9ba7bb020aeb75104d5dd4bd93a4c79b40a"
+      },
+      "files_sha256": "99bc4f618fedadc48f1c3db9f7f7b012a6045dc8f72a06bfe8f2bf62b321733e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "0daf867e0a4c3e7231b4375b03251b9e4a91dc7f9f52cf9d46f8e696180c0353"
+      },
+      "hour_files": 720,
+      "month": "2019-06",
+      "partition_signature": "1428d2bb8d0bab83f879a87d6a7112e7b49c4ecd50aa14e2680b5910e4035da2",
+      "raw_bytes": 75932484,
+      "tick_count": 3508252
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305368,
+        "path": "raw/XAUUSD/year=2019/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "f9f84f0c065e3b29ab64e2f2d9a7849a305ec478a24149eca587210a39f45860"
+      },
+      "files_sha256": "28a5bd89a9f5a73c1a63a7b7c6e52ab4eaf1f050514a5e40726a6d4b45d5405c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "33a1f6efb7abab19d9775e6b21bd9570f93d536b6c2fe1f2213734176081cbb4"
+      },
+      "hour_files": 744,
+      "month": "2019-07",
+      "partition_signature": "b89cedeb1cc9553b8c72d62fe726c4c476a6621be355148c5006af96703b58bb",
+      "raw_bytes": 77857392,
+      "tick_count": 3586221
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305426,
+        "path": "raw/XAUUSD/year=2019/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "226d18ed1d242c92c52f2fd147ad84d81e59c0446c97970d2f26b761f6720b21"
+      },
+      "files_sha256": "c22edf65b1f756f05d88c4d226fb865db1dc1fbaa1f9bb3dc7bce88df478bd62",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "9fab5c28ac6caf5f5a849caaf3ea6fd97f613de7021da47fd74ebe5d0759c66d"
+      },
+      "hour_files": 744,
+      "month": "2019-08",
+      "partition_signature": "f142da049453ccfde9c643f956e692cbbb798ceec0308f8bb4a554467660211e",
+      "raw_bytes": 102819156,
+      "tick_count": 4734995
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295475,
+        "path": "raw/XAUUSD/year=2019/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "6a44ecbee2d7dab78de1bb61bb5e7f4db63e7fd2b55300d3695b812856065586"
+      },
+      "files_sha256": "0d356d92921c910c053d1ce2bb15f6e439fb7fc7229c647e93837a847847c6bd",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "5962a7d98f47a13b765bd5a7370529063a681e6139a1c8a774f5cb6ec6337631"
+      },
+      "hour_files": 720,
+      "month": "2019-09",
+      "partition_signature": "63621f1801adb3dc2a2943b1661a64322b240ae563588672555a729a9c4b9ce2",
+      "raw_bytes": 88033127,
+      "tick_count": 4060599
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306273,
+        "path": "raw/XAUUSD/year=2019/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "2e19272c9a9ab48ea92f4ca091cb97ead8cae94571663201d09afca3ba001c2d"
+      },
+      "files_sha256": "e07683ed24a109ffceed02112f8ace13f07174629d62b7051454174f39dcb59e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "f853b63c3ec986ddbf330091392ffd40215854101d8508fb2c351638fb1dcc6a"
+      },
+      "hour_files": 744,
+      "month": "2019-10",
+      "partition_signature": "9f9469e9efb8fc8260bfbcadbebdedac815c44a356424f482438746c39fde877",
+      "raw_bytes": 99480942,
+      "tick_count": 4607249
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295994,
+        "path": "raw/XAUUSD/year=2019/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "5af32b0a4dd29cd8c6181c9f8fcdff1fec066d66c5b066d0168ecfd3fbf4ba92"
+      },
+      "files_sha256": "3da16e2a5939d6fcbf8a5acb8fb0fbb4657995634ad12d92ca95630aa284b70d",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "7155daf6e43b32ed5ede88d72ae9a37ff05157007c02cde15757d0f0d76d2380"
+      },
+      "hour_files": 720,
+      "month": "2019-11",
+      "partition_signature": "3f1f2be18eecb17326cffe957a344c1645e2e86f7a6ffafdded36c09d074b64c",
+      "raw_bytes": 64372625,
+      "tick_count": 2970095
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305710,
+        "path": "raw/XAUUSD/year=2019/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "4b998dc83c15e28837958a3143ce7918b7ba9a9ab04fd24acf88e2596c8b3a63"
+      },
+      "files_sha256": "de50cd1acc34a4aec4ed2fddc89bda2718c99b95f2d8efe599b692281d5c5886",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2019/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "5d7703fc8b930780623e000d0526980b0e82f8c8e3acdee7815efbe9b814c004"
+      },
+      "hour_files": 744,
+      "month": "2019-12",
+      "partition_signature": "75dd5293562b55a9e8e573f62c883205f7d52d77973607335f1449519f218101",
+      "raw_bytes": 55660916,
+      "tick_count": 2569935
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305319,
+        "path": "raw/XAUUSD/year=2020/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "81dcdeb4860d7d484137beceb18bde389eeac6673831d2c22a6d1633e5d8cfd1"
+      },
+      "files_sha256": "3a35e50d9fa0028d2027b45e644f37fb3bc42fa0ebee786d5ca5c733e7347aeb",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "b884c3f274e18e54ebbd6f48b9b3a139566ab971a358b4a415eb109ecb4ce952"
+      },
+      "hour_files": 744,
+      "month": "2020-01",
+      "partition_signature": "4acaa3e63b8af6c7dd6c3762b3ef96b888bdeb9f50ffb74df07c353e458e2906",
+      "raw_bytes": 87075443,
+      "tick_count": 4020833
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 285602,
+        "path": "raw/XAUUSD/year=2020/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "c2cb8dd32809f0fcf99719b40b2e1ff101ad289b243203e6fc48ad926a79297e"
+      },
+      "files_sha256": "ad4e5cfcc4598110cea00991d9169e0c4840a76f089829efcc8183b36d6c02e9",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "1c485731e28584566b9d062a03701bdfaa59b2174353e521b9197b799fc01912"
+      },
+      "hour_files": 696,
+      "month": "2020-02",
+      "partition_signature": "480cdc543cbb0aaf8912f6622f318ff666b7ca19160e88f175a72207fc86cf80",
+      "raw_bytes": 101128714,
+      "tick_count": 4658254
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305576,
+        "path": "raw/XAUUSD/year=2020/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "f209610a36171989becc5d8fce2b83ecbc66164f9cce8a3d1f8e23e55b278a78"
+      },
+      "files_sha256": "b186b91144f488efde7671413baee6791b5be28c508faf633558cadb96c0456b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "cc42bba02d2576f91b761480132d93ee21f5058a87d088862bfdc9328b6183e7"
+      },
+      "hour_files": 744,
+      "month": "2020-03",
+      "partition_signature": "b417eb8bc8de1484efb2f3acf62de8cc44de84c7b26e573c123f840f22d9f086",
+      "raw_bytes": 145870314,
+      "tick_count": 6631554
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295455,
+        "path": "raw/XAUUSD/year=2020/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "5b38585d30b210760b09988a8ed93417abd81a976f18e4377f0b5e34d041b13e"
+      },
+      "files_sha256": "848c1ce04b8556cc4b64c7cce1a824c508a7a078395192c7a1e849ad697de4d7",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "40ffae31219b8d932d87ab77733df691f172e73e0e8f7578b83e0b7665e490b1"
+      },
+      "hour_files": 720,
+      "month": "2020-04",
+      "partition_signature": "89dc057c3b2aaa0fe93604049058c3d1246db3b70ba6be87e3030d04c6a659a2",
+      "raw_bytes": 83020546,
+      "tick_count": 3750430
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305234,
+        "path": "raw/XAUUSD/year=2020/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "07f3a047490aa259b8bfea195afffc22ac12178d6c7616b183a98ebdbc1c8829"
+      },
+      "files_sha256": "26d0576b9733b43e50c4e3934b913698fa3ec6ba7d0a9712d123c60d213bf77e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "6792fb5f176a0c90b1cc40af7945d00faf8c20eb1989248dac1da322a7170335"
+      },
+      "hour_files": 744,
+      "month": "2020-05",
+      "partition_signature": "93284ef142765dc162bbc91be10752b0faf6e2940a6c3bfa99efe1c57c61bedd",
+      "raw_bytes": 91363430,
+      "tick_count": 4179413
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295652,
+        "path": "raw/XAUUSD/year=2020/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "b46b0d72cea3193eaa3e5687d1835023275bdcac43a682bce389cc36b84d0b79"
+      },
+      "files_sha256": "ab37078c9229c568ff3a7642d23bc863d931039b15dac98925391ef867a53607",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "4e1a3e918a3ecc6caba6a67ba8457faae067dd2a3107b8ebe77e8210b10e1b7f"
+      },
+      "hour_files": 720,
+      "month": "2020-06",
+      "partition_signature": "fd38b166596c0d883f55befdc4481fc094846c4ffea3eff159176e2d83c92078",
+      "raw_bytes": 99323577,
+      "tick_count": 4552144
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305493,
+        "path": "raw/XAUUSD/year=2020/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "0135348f98f039a8d959a6f21d656ca4ffa69f58a969a90c9cef97faf770bf52"
+      },
+      "files_sha256": "1a13ee825fc6077637a29019c4bb9a29522209c76944407225db2f194dffb409",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "4068dde0f8d7c57fa88113eb13a9e65723286ed1aeedcd2fb1142e5acd84f64c"
+      },
+      "hour_files": 744,
+      "month": "2020-07",
+      "partition_signature": "75bdbce181a3b1d360834b20e7dcf98bad0fa89968902ff81c95251c7888d8c0",
+      "raw_bytes": 103035036,
+      "tick_count": 4726565
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305444,
+        "path": "raw/XAUUSD/year=2020/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "8af137703ca700ecf6d288b22eab81c3164ca8964d1bf7a7793a27f73fe80377"
+      },
+      "files_sha256": "e4e0e0a5e09aed1a0886c8c6bce19b20f11bb678234349be22792a32f95b7569",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "7bc663f4878537e612ebd2260ca1614bdcdd814c6ac46b2dba66058287a1347d"
+      },
+      "hour_files": 744,
+      "month": "2020-08",
+      "partition_signature": "a7968c836a6638fbce991fd00cd5a5e891bb08d8e7b6032118aaffc7098c3c75",
+      "raw_bytes": 131301421,
+      "tick_count": 5984021
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295695,
+        "path": "raw/XAUUSD/year=2020/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "70a25dccb6b4f259803cdc364d40960d63a248e947452b33f5dfa94801b2dcbc"
+      },
+      "files_sha256": "72e78e765b035306eaceb6cd1c02305b30ad2c0642e0cf1b25aa32873ef57fff",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "d6156e2eee92179064c78a902ac5865210b8b897b9baa2beca6a9fff7748b935"
+      },
+      "hour_files": 720,
+      "month": "2020-09",
+      "partition_signature": "2d335b266d633025bd5f57a85a8303d82d3e47b6d9fcf98cf3f60feba94a8585",
+      "raw_bytes": 112709804,
+      "tick_count": 5147813
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306125,
+        "path": "raw/XAUUSD/year=2020/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "ca53de0a6749ff08a031aa38f80a8ed8723cbae20261b767b8802a68ff5e9446"
+      },
+      "files_sha256": "e5358687056e85a99f2c986acffb3be0660000437a10bae91df4095e7b5825d1",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "9792fec4a43aa1c0e4654c07af77ace67b92fb71ec3096b7e11a92a5f2a66e75"
+      },
+      "hour_files": 744,
+      "month": "2020-10",
+      "partition_signature": "0c73f8efb7c6d092c7de2ed21cb3331119952cc052c3a23b152363c7eecd368f",
+      "raw_bytes": 92914209,
+      "tick_count": 4248307
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 296220,
+        "path": "raw/XAUUSD/year=2020/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "75cdc865d613aba881a5f864d5c9970a38e8570fb5fb3827ac81980ec26dbd69"
+      },
+      "files_sha256": "d071ee0c1eb95d0dfe354496d631f5934d6ba8eb67f885080ac1c2d844eda8d6",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "cf6a8fd3390eecdf4afa5cd880b727812203926bd54d7761e951e069e098f0ed"
+      },
+      "hour_files": 720,
+      "month": "2020-11",
+      "partition_signature": "e13c56150717959835d8f133856471605e8d8a3074babb7271de5adab026ba25",
+      "raw_bytes": 93026100,
+      "tick_count": 4258398
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306044,
+        "path": "raw/XAUUSD/year=2020/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "5bf9dae7f20d0a250a0ff92558c89835fb1e1cda77714f50892ef685d3241665"
+      },
+      "files_sha256": "6a012f6cdce3b3fd8b40f05a9d97a22ddcd7a73281b9a19e428f7aabe6c8a854",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2020/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "c74cd570f52ba87922adb480bf91eb8865993450e07f66790f21c331eefc25d5"
+      },
+      "hour_files": 744,
+      "month": "2020-12",
+      "partition_signature": "24c9da375c10557b3ccd965ce91e6140f2f82ee464fa06ee46fe380ad34b8d75",
+      "raw_bytes": 80263806,
+      "tick_count": 3669438
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305200,
+        "path": "raw/XAUUSD/year=2021/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "7791a0dd994e36d9666f94e6cd9937f29d236a051d34c741f7f7ca2e32f8d51b"
+      },
+      "files_sha256": "b3f23e746b50dc7c944884378052dabce0d008c6ec52f6d155e33139bfdea0f9",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "08e6428ec5b59e8d8123ddc193ca4c525a39f70e062258152cba14b2a9b8d353"
+      },
+      "hour_files": 744,
+      "month": "2021-01",
+      "partition_signature": "48a27c16eec6f3ed8bc322a0b700178edb2cebd7c56f41a377b7ace3724cdff6",
+      "raw_bytes": 103232233,
+      "tick_count": 4751517
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 275961,
+        "path": "raw/XAUUSD/year=2021/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "787b7116b4e56570d95188b6ace8d3fd763f046e0477bee4946258c3edd4cc88"
+      },
+      "files_sha256": "6cdd3f9cc9490dbbc7e8fd751886d2502f66f440954291238cb28b9d31de61b1",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "d69adacc310bb56df108cb71dc9c5129fb848671c1be86f7bdaa4cd5e1281d20"
+      },
+      "hour_files": 672,
+      "month": "2021-02",
+      "partition_signature": "187ae29e439e889dee03ddcdd3ef3ba8fe28910b14b100f1c3cfc5b811cdeb69",
+      "raw_bytes": 114436438,
+      "tick_count": 5262811
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305752,
+        "path": "raw/XAUUSD/year=2021/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "2aa49a9548b3e04ea8b4595bba73665e8912fbb74104fa4ac1dbe83e94fc3f57"
+      },
+      "files_sha256": "2d31ac6a5a5badd20607373d4038114c7e231a58f217fb96f1aa3651dc62ced9",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "ea97f5b170b469582d0a6d90fc5e79e235aa1a837a976df96cd5625ea7c82980"
+      },
+      "hour_files": 744,
+      "month": "2021-03",
+      "partition_signature": "108f240776798425c4cec4db00efdac48d1b2305a13ee989cd517dbc4b245bae",
+      "raw_bytes": 140314562,
+      "tick_count": 6482901
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295517,
+        "path": "raw/XAUUSD/year=2021/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "b9e96318feefa4250c554afd97cefb9c408e8557c01d811da1fbe227131bdada"
+      },
+      "files_sha256": "e58a5e59c70ce43ec8b2718ad9358684c7a025b470fc8a3be2feb1f127bdb7cb",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "9d1cd340c43bfdbfab74a1676b08ba68aa2b23c23a9a67b28e1960221de11c78"
+      },
+      "hour_files": 720,
+      "month": "2021-04",
+      "partition_signature": "884c4e468db3576e8f03fe0a3aa9ff177f7b1de1fdcee825d4c7f5348d79ef2e",
+      "raw_bytes": 94403938,
+      "tick_count": 4327365
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305301,
+        "path": "raw/XAUUSD/year=2021/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "b46f90d5d0fde33c2ee5d7bd6e2acb4c854131ded0b2a791d8e7510683029669"
+      },
+      "files_sha256": "7fbce9cf1986a85db051fd80102169fc624724924a4a52efb60d70a53855eddd",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "c1774acc56ce60bce5aabca48c36e8a39607a5eb94f1633880719ae207f23da4"
+      },
+      "hour_files": 744,
+      "month": "2021-05",
+      "partition_signature": "bb580dffe9c92f40015578f2a4db8bc627a2ff6d5143d6f4a6f1bc15d0efac43",
+      "raw_bytes": 103064402,
+      "tick_count": 4709319
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295654,
+        "path": "raw/XAUUSD/year=2021/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "07a64da2ecd1a2d7188d90337daf68cdb097ed474e9e97574191666cecdfed3c"
+      },
+      "files_sha256": "d4ea0f3c3ee781de467feb982340063f5d02287c5ecdb6306d8c9ab066309cb5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "3651e73897f2c34c45e208aa10c46edf89fba06d47ed72fa8cadefd5dfe7e6a8"
+      },
+      "hour_files": 720,
+      "month": "2021-06",
+      "partition_signature": "68a294c8c1cceb7adaffdaf74863c6bcdeb74ec30b10c3315a6a0f0c3cfe48a9",
+      "raw_bytes": 99348886,
+      "tick_count": 4510947
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303028,
+        "path": "raw/XAUUSD/year=2021/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "c8d8d5e7da3bd20502737273dae08af1d75587be54d858dfd8437f58a61c3a99"
+      },
+      "files_sha256": "c84c48f30e326f4ca85f8490cad839c28e1f5307b4238288dee30e4b64e21b18",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "4d598e2431814c6ffa405495ee47fb74b72eb13c402009e9ae058a32dc90f4f6"
+      },
+      "hour_files": 744,
+      "month": "2021-07",
+      "partition_signature": "2fa4d167299a6d83504c822726ae4e1f081cfaa63845cb71ae5e5d093ec756d0",
+      "raw_bytes": 76253947,
+      "tick_count": 3462270
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303044,
+        "path": "raw/XAUUSD/year=2021/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "122387d2eaa84ac47c59ea057f73dfa0452884b3fe8b4aa9ce86385fc2b67b88"
+      },
+      "files_sha256": "cf75cdfc13cd313b738b1bf3a0e99054d00ff7046bd854355b068fe894eff629",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "88fe67f75f801518a9b00c4d42e72054f8cde068849600a9240259effef45880"
+      },
+      "hour_files": 744,
+      "month": "2021-08",
+      "partition_signature": "cea64be33df00a7d97e8df846eb7fd2eb9d7c447238d09e29e8afbb34a84c8e0",
+      "raw_bytes": 75778829,
+      "tick_count": 3458443
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293430,
+        "path": "raw/XAUUSD/year=2021/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "6e9df68a4832b12b94a86724a6e28e177ac96fa37e74b4f9969276d7524e9879"
+      },
+      "files_sha256": "c5862532ff3c3da6c0cec0c5f68a549286e7fd3e39a05493517e1175a577d902",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "bc303f5f413ba5390ac24083a0d0b19a842a953194ccfcd90743cb5f4bef099f"
+      },
+      "hour_files": 720,
+      "month": "2021-09",
+      "partition_signature": "f1adf4f59c534a22417d9dd6177446ef76d6dab6d7984dcbb34ddd3d8b7137c1",
+      "raw_bytes": 94655958,
+      "tick_count": 4370571
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303787,
+        "path": "raw/XAUUSD/year=2021/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "32e8aac25e2723470525a5d05ce23be796548816e8cd5ab8cd136454743eba11"
+      },
+      "files_sha256": "1f993015fa385d9a00dd22d3c3ee7e90604798ba8956874c2a74e0a1ea641d47",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "9f4a8d7a17b25b571e5cadfa3fc2174e5ccc6f5ff2d291a71bbaf4edd2f4ba0f"
+      },
+      "hour_files": 744,
+      "month": "2021-10",
+      "partition_signature": "e9415d6d14585684c30159eaaefbb43957c075b1384bb8cfbc54aa64fa0e2f79",
+      "raw_bytes": 90647653,
+      "tick_count": 4170152
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 294134,
+        "path": "raw/XAUUSD/year=2021/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "0e58fd59ba0bba5cbac6ecec9fdea8ff872f9e01bec083681ddcf042372d35a7"
+      },
+      "files_sha256": "0d379ec28602a499528bd9a516b5b333bda42ef162422a1e0be5e215f5581d3c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "df57a3416b1949299b44a500a06503dc634a5bb4bf6649e495a79bbb6ad3dbca"
+      },
+      "hour_files": 720,
+      "month": "2021-11",
+      "partition_signature": "6bc64abe490351baca2bdfd2a145342eb31ec1253fe9a0eb4ae28d8c1a09b93b",
+      "raw_bytes": 90401857,
+      "tick_count": 4156947
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303794,
+        "path": "raw/XAUUSD/year=2021/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "922a6f95d8658f535f2b8a58079da5a2ae7cf8584e6469ca590aefa259735ba9"
+      },
+      "files_sha256": "f1cfed63a034006332f0e9f34623c3109857302b2ccca0eaae64bf60d5f23868",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2021/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "2dde140996e289aa31367eb80008861b236d644e28ca47b7e254c9137975e939"
+      },
+      "hour_files": 744,
+      "month": "2021-12",
+      "partition_signature": "fb0c17660d34458dfc3d2c8b773bffb3d6f39ce89e07291b7def692fd79564d4",
+      "raw_bytes": 74847034,
+      "tick_count": 3436395
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302996,
+        "path": "raw/XAUUSD/year=2022/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "1c2c0ca3ce230d8803db7265066ed805f1806f7f7bdd86c218cf8fcfb08b7f48"
+      },
+      "files_sha256": "bbec6af8f4f756a4c87a51f0e988104ba92f7e8d03d57ff73b08aff58da43e0c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "77f178cb9064830bc0c8f5fb43058c22df401bcad6463ae916b11692c0657fff"
+      },
+      "hour_files": 744,
+      "month": "2022-01",
+      "partition_signature": "ad2d8b910c75fe8e5cbca8ce4b1bfae8bf46b4c4ce4f6dfec16ab319cb23bee1",
+      "raw_bytes": 88019737,
+      "tick_count": 4049409
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 273918,
+        "path": "raw/XAUUSD/year=2022/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "a610255e146f4fcb8cfd4d664c3faca630bba98a10492438c2533c299b28b734"
+      },
+      "files_sha256": "b29045b206b30e65715fd6ca7a0371a540132f77b8a0ae72b07b469c342c4918",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "8eddf432ccd29059d0564d21fd078ad3ce8146115eb66a54fd360d66ad465312"
+      },
+      "hour_files": 672,
+      "month": "2022-02",
+      "partition_signature": "6cd1f9339205db411854d6eaf4700e39f2e2917f77891686a6859db9b4e9b218",
+      "raw_bytes": 106293674,
+      "tick_count": 4914145
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303477,
+        "path": "raw/XAUUSD/year=2022/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "28cf06fbdb20e63c447706b9cdd8de7a672fa3aa9e118e80f8d83065bbafb362"
+      },
+      "files_sha256": "b36ec759b9e17339ca5bd3b2ef3fb23e03b9d98fc6a2efed296e86f770ced7e8",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "e044772b8d485d2e837ec574fc3328bbb35a5c6262f2d9510986b35e0cee262c"
+      },
+      "hour_files": 744,
+      "month": "2022-03",
+      "partition_signature": "f0bd2233305a74fa5f0a22680918c4250b7471b2c94dc1052e4280c536f764d8",
+      "raw_bytes": 133205844,
+      "tick_count": 6173324
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293292,
+        "path": "raw/XAUUSD/year=2022/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "e810d8c2eaf32618f967fdde6f7142e1899f94a9b0efb0ec0259cc8913f181a3"
+      },
+      "files_sha256": "f0d32fb6aff1f5ae925cbb0407ea94697d9be37f86d99ffffce9241919173fb8",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "d4535c55a06dd8a124fa2c3144637df7db0da1501821b45e6235894cf849ca76"
+      },
+      "hour_files": 720,
+      "month": "2022-04",
+      "partition_signature": "3a3d21117d6879388c46eb0a8ceb03725f0fd5e3d4b5de206d1cb9a5e8e85ac8",
+      "raw_bytes": 101714319,
+      "tick_count": 4697480
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303216,
+        "path": "raw/XAUUSD/year=2022/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "d3a2f7dbf19770df06de1ac5f993bd09e7165e822e5454c113121c866ffe1cf4"
+      },
+      "files_sha256": "6820b1225300e9162d1564c9662f2d9facdca4c65aa9c39124537cad60ea4b9c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "d92c63f566047a3c426abbc0af6590d80f650fb56b6d28e9d87ba12047d1b86c"
+      },
+      "hour_files": 744,
+      "month": "2022-05",
+      "partition_signature": "13d8871dcb329845e023ecc292d1833e4ba9f2e612866601d68893fb9e1e22d5",
+      "raw_bytes": 100558096,
+      "tick_count": 4628667
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293452,
+        "path": "raw/XAUUSD/year=2022/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "4935f2efce9ee72d09c0f2be1640d9ce0628ae0d70866b6b51713738f097f78a"
+      },
+      "files_sha256": "e15ed41bb50298c1bf2d37d9a4a3b5c46906adbd9fa9c797e51fe256ab571c16",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "8567643f31f8bbf567f66e883f256010ed2d1fbca1a8541cf25be377d6853e57"
+      },
+      "hour_files": 720,
+      "month": "2022-06",
+      "partition_signature": "9d895ed4479a3813e75739fb11ed2436f8c7fec0604b0081d57cbb340f55ffea",
+      "raw_bytes": 89879885,
+      "tick_count": 4139077
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303037,
+        "path": "raw/XAUUSD/year=2022/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "a9529b26f4e3b4e70f5c6f0fa40501eabfb3fc11bf3f02e4b9d1bd074d6b09f0"
+      },
+      "files_sha256": "767e7d7ccb88d2c2beba70b1fc76b1a817c8e35e54ed7dfccac62ca33f2b4022",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "6c1f0d001b95b138f61c51c16bf2cee653d94c2334de879b1af8dd658b21f338"
+      },
+      "hour_files": 744,
+      "month": "2022-07",
+      "partition_signature": "5858284130afbd8299c069bd6b02bfe2d9a28c28e7c52de86b834d10e99532ec",
+      "raw_bytes": 95141291,
+      "tick_count": 4398091
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303256,
+        "path": "raw/XAUUSD/year=2022/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "063f36a55db295309f4791ca32305c17e745844da1c61290393f532a97be9231"
+      },
+      "files_sha256": "66058403e5e45a3b306ad1b889ab284b8475a43c03f04f98b05455d02c7a4ba5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "3e0b10e097d29475f1f0bfd5b70791f94bd68e99758f81a9569cda482c47fa3d"
+      },
+      "hour_files": 744,
+      "month": "2022-08",
+      "partition_signature": "254f420f6b645aa6e1303a0d313f37d17d26fc8db5db35473017358157074f4c",
+      "raw_bytes": 93095226,
+      "tick_count": 4288324
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293516,
+        "path": "raw/XAUUSD/year=2022/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "94bba42631847e29e7f7092408be23089253a22a54f77bcdd10f1fdef5b3619e"
+      },
+      "files_sha256": "c5bbc8de405d3f50d4ba829a2740ad874bf40bd37613527a7e97c792b2c28147",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "f992bf62f57b52779c9526e9709d9ceea51c7dac882234d67f92e2a6c19bb42d"
+      },
+      "hour_files": 720,
+      "month": "2022-09",
+      "partition_signature": "da66a05ce1deb4090332f498eb374524c511b4bc16af2803fd53a0afe1f196f0",
+      "raw_bytes": 108973182,
+      "tick_count": 5029466
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303799,
+        "path": "raw/XAUUSD/year=2022/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "cd1b4e6ac3a529931302e07ac3410c5ac23cbc39443efa2b6bf27235ef7a51c4"
+      },
+      "files_sha256": "d88aa09db4dc444665434fd5faf72d5d02e14b7d66717c787ec3a2152276cab8",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "501a3191eea56c08ce59425bc34f6bffd51371c81b5278b2740bad160fe69088"
+      },
+      "hour_files": 744,
+      "month": "2022-10",
+      "partition_signature": "f3710c5173ac14506c158a50fa7284dd2b9170f926aa44dcc8df4a504bcf6012",
+      "raw_bytes": 97927375,
+      "tick_count": 4499772
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 294063,
+        "path": "raw/XAUUSD/year=2022/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "7a3dadab6cd68fc463b0fc3f7a0f2826fc0699b4d7c0d9f1a8d614d294d9a5c3"
+      },
+      "files_sha256": "2d761f98ef30b19c9856c395f8485fbddcd083641223ba61ca3902646a013e02",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "52feb3bebccc78fe14207e6b08dbb85366a1c79dd846d2c5bec2a954dc0a454e"
+      },
+      "hour_files": 720,
+      "month": "2022-11",
+      "partition_signature": "ca3eb26813a8fb4b1286a5be4a563a8dfc4cac2f3649e0fc21950f948a1f4d67",
+      "raw_bytes": 80638560,
+      "tick_count": 3642770
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303659,
+        "path": "raw/XAUUSD/year=2022/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "998c1ce187a57cd3811e6b3f9133f58ac39fb0ff3e60baa1beeb245bd3018f13"
+      },
+      "files_sha256": "9920cc9868ca49d70ea5dadf37df7699ef5c798c7adf14b27bad3bedbbf711b5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2022/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "0a8947a427c1002846e45473f691fc074fc5c0fa25b5b47084a11a19debc2ead"
+      },
+      "hour_files": 744,
+      "month": "2022-12",
+      "partition_signature": "d06f46df03b46bc635c7766af365d59254bd5d3f735806b67e58eb54548a3d82",
+      "raw_bytes": 75054681,
+      "tick_count": 3391139
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302940,
+        "path": "raw/XAUUSD/year=2023/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "ff64b2f604c4052297f3197bd8b2fabe9f40a39036237fb71bb1616ac2d76a8b"
+      },
+      "files_sha256": "bee66bc69150f331401571910638373a324d99608f045c8e1256e22e9c7bc47c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "8ef6ef75d3ae6818cfebb6e8aab8cfcea553e4fb4508cf1299403f8653ea598a"
+      },
+      "hour_files": 744,
+      "month": "2023-01",
+      "partition_signature": "97728927580295def92915502981a3f184b000baca257804965c9aef436fae69",
+      "raw_bytes": 80102210,
+      "tick_count": 3610063
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 273718,
+        "path": "raw/XAUUSD/year=2023/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "f3961d8ea00403cc3acc2e1af31d57449f936995da0d581e46e3accc4a015d9a"
+      },
+      "files_sha256": "972435634e8c7c554857a1619cecf2be52b2f72662ea629f4dcfc1d6c6c01c8b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "87e33c95da033ebf9f153e0e75539c30cbec22782a7d01575017b5a2eaa40d12"
+      },
+      "hour_files": 672,
+      "month": "2023-02",
+      "partition_signature": "8c0eb12f60f77dead66240f4d696248eb6b46f03a93d163bf3607400b26688b7",
+      "raw_bytes": 71938968,
+      "tick_count": 3236027
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303273,
+        "path": "raw/XAUUSD/year=2023/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "e93199b80ca556e74aa1c3d8d8de7967b4eb1b6cf47139c643a176571ee5de61"
+      },
+      "files_sha256": "31e2b8b88cdd23f86952149babf9c30fc5e3c922aa8004bf0597db8e19ca38fa",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "6838439d2692dd69f72c066beb57c26a62fc9e437d1faf26572b05428b07120b"
+      },
+      "hour_files": 744,
+      "month": "2023-03",
+      "partition_signature": "da1fa2c7df77d3fd61d24da5bf182832801a6e29828f40014f4bc84f1db48078",
+      "raw_bytes": 99161087,
+      "tick_count": 4465226
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 292968,
+        "path": "raw/XAUUSD/year=2023/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "2f49b916bdd8e84f33812a0dba057c80317cda76359706cdd9e8d248fc09d941"
+      },
+      "files_sha256": "e274410b8636509459e08c92922a9dee02b0a7965e67acdcfe86d2e71d181320",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "9f39098f54cb66dbe790ce856e64ea9537800c5e015a34dfa3b13aac330f3686"
+      },
+      "hour_files": 720,
+      "month": "2023-04",
+      "partition_signature": "8b052f704da38b36613fd6006aea622c4ada3a7c3f55b32d775fd4810d7166ca",
+      "raw_bytes": 65654759,
+      "tick_count": 2957588
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303195,
+        "path": "raw/XAUUSD/year=2023/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "6926d3e47fd257d01108db5aa4abc27f772ac8c0d439bb68275c71a692573e2e"
+      },
+      "files_sha256": "9206504387843a75bbc152c22e0d10f03b07bd636abf6e369d322423757c12b5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "cba5a30f6755970d8a21336ed80ffd65ca16b70f021b94282cdd9800f28fe184"
+      },
+      "hour_files": 744,
+      "month": "2023-05",
+      "partition_signature": "e3ac3283394c4e62f0b1140261af449ceb9f7aaee3b151d0374a84c4cd9a3321",
+      "raw_bytes": 86643246,
+      "tick_count": 3933656
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293287,
+        "path": "raw/XAUUSD/year=2023/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "18cd3de0c021cef9fde3a086f62f672459193701947ca8e34e65f58774c89cdb"
+      },
+      "files_sha256": "0388e50ce7b7dbcb0d45e563d86c3410465f3c5c9a1c09d43b6c9c9cc3e572e2",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "eed8dfa765bad9f229dcdca6539f7a5102d54545eab2c59fb7e578cff6dc49dc"
+      },
+      "hour_files": 720,
+      "month": "2023-06",
+      "partition_signature": "842fc63a2f6d04f47afaebf984b2a1efd0f4fb43dff4ea6c1515bcec3f0df4d1",
+      "raw_bytes": 68605888,
+      "tick_count": 3091988
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302809,
+        "path": "raw/XAUUSD/year=2023/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "465b82c45ade128bd446621051d13a2e2872060d99549f3199889fa5f30b3bce"
+      },
+      "files_sha256": "d571c93cb7753cb0d123b53b7afc4e3a471928f41411646f9b2872b351e4f1a0",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "011cfe157a94f67f67b054fc23d0d5bd269e304836f9ae823853fe0c5afa59d8"
+      },
+      "hour_files": 744,
+      "month": "2023-07",
+      "partition_signature": "6e8730ac1923c2f5b735863d15f45b5ab51cfd5ff534bea54dd915004d9a9cc3",
+      "raw_bytes": 61186601,
+      "tick_count": 2760503
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302948,
+        "path": "raw/XAUUSD/year=2023/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "514eaf54876cecf7a9e02aebb2daa89323453afd39f949931eb0bd142479971a"
+      },
+      "files_sha256": "838379c2bd242e0a8778284933ea73ea44c340d34d5a0e3e150bac3a951c24cc",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "a7a137b0dd841305e2489c842a2ae53d4c5b5e7c87e3e693aeb02298964be3bc"
+      },
+      "hour_files": 744,
+      "month": "2023-08",
+      "partition_signature": "39c14b864174383caac2be3ce329b6204d55376792c58af3a27afa1fcc553932",
+      "raw_bytes": 52904450,
+      "tick_count": 2373606
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 292929,
+        "path": "raw/XAUUSD/year=2023/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "8005b64836bd111b42535dc0e1c6c7d119a3686ea32d9d519865d5f053b8c098"
+      },
+      "files_sha256": "709a12f84913863c3ed5a4af2ca73ebde1690a1fe1ad5ad1958c5cf8c9e79874",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "008e5d48e73d3a88cf318c976cb99e85f78f49db21b7758c1d462aa366d01271"
+      },
+      "hour_files": 720,
+      "month": "2023-09",
+      "partition_signature": "40e9431cd45b958177b61ca3b8d2513380b21817ef29212e0ac38fc29adc5fe9",
+      "raw_bytes": 42381840,
+      "tick_count": 1901380
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303682,
+        "path": "raw/XAUUSD/year=2023/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "933087c5e0717e9393604e9bfbe618facaaea5717fd02b62c3144e79e71f32da"
+      },
+      "files_sha256": "8d5165ead52a474002b19bddbc5fb440d70eaf7094237f81cea3f6dfcd98667e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "0d9b626d30add555008f2458b25133bc28a8a5ced388eab5d5e3c00151510f80"
+      },
+      "hour_files": 744,
+      "month": "2023-10",
+      "partition_signature": "3fc20046396975409bfd895b501e2fc8bfe71f5e1e068aca3a41f333219013ea",
+      "raw_bytes": 63371119,
+      "tick_count": 2841307
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293870,
+        "path": "raw/XAUUSD/year=2023/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "fd951ceb8a70d056c2717ee57db78594306d4c8aaf83f009c0d0d17f6604002b"
+      },
+      "files_sha256": "31c435fa663d0f0582771f4df4e40c20e68f4f5e69727b677e85777cf5e54ab5",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "935ebba358a4851f3023ffbaddef16507ae9ec03d3c340d21b827bdb0addd3dd"
+      },
+      "hour_files": 720,
+      "month": "2023-11",
+      "partition_signature": "e04ceb07ad82baff7337a103c79b122b0c364ba2ee89db4042792c47a8e34b41",
+      "raw_bytes": 55719549,
+      "tick_count": 2491773
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303445,
+        "path": "raw/XAUUSD/year=2023/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "1e438810c9e72cff146bbfe3f8b3675d70499c5d9c6e5ad38851aecda99172c2"
+      },
+      "files_sha256": "8d71388f451999196fe0025b8cb71fb69169c68809794bd20e14652325a221fb",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2023/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "2cf8f23329735ad963cb26e299844787c337ff4cc9b087a875af673e4cb8cd8c"
+      },
+      "hour_files": 744,
+      "month": "2023-12",
+      "partition_signature": "542a59118d4097089068736025b19170fb991472670941f367cb564b9bda4739",
+      "raw_bytes": 61727787,
+      "tick_count": 2765712
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302968,
+        "path": "raw/XAUUSD/year=2024/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "46b9f26ce883a6e9e5e23d498c0134185d0bf657fa9ab4570eb1f25cb4e81da2"
+      },
+      "files_sha256": "786fab0923437514580b4730dd6afc751f60ab770aa2c73b6e40e235fce061c6",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "7cbfef4521c214ba800a692570c158dd05c0965918d594735da5a8de464c1918"
+      },
+      "hour_files": 744,
+      "month": "2024-01",
+      "partition_signature": "7381bf60cfefb0d12f4c039469c702b3db5af971d709e2edd6c2d997b2ddbcdc",
+      "raw_bytes": 68107260,
+      "tick_count": 3059497
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 283297,
+        "path": "raw/XAUUSD/year=2024/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "b26df697c541833f1e24ab00fd716b8041f024c4b0052d02c1855d5f01a8573e"
+      },
+      "files_sha256": "83a1d6da267cbcfd6236502f8bff8e5cf13b216b5c975eadfd4cf78cd5565827",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "5fa5f37c79341c035936f6a984de90d94fd6a6afd01cc783d16327647675422d"
+      },
+      "hour_files": 696,
+      "month": "2024-02",
+      "partition_signature": "322e0ef84aa467ae0f320c03ae21dfd3b85bd4a3dfe1631369fbb40ab1d585e5",
+      "raw_bytes": 47390730,
+      "tick_count": 2126396
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 302705,
+        "path": "raw/XAUUSD/year=2024/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "b1d93047b958f9ad04ab8570e538b91ccf3d095dadedc5067c7160d0d42a07b0"
+      },
+      "files_sha256": "09d0656ab8beea9769cda196154071308e9a3d8332ad681b238ad569ddeb3f3a",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "9f49d60c5344b635636ef480e8a9894d1fd0351d8831206d0972dc4b3da18475"
+      },
+      "hour_files": 744,
+      "month": "2024-03",
+      "partition_signature": "c704823550388cea8218766d9b9860d0e160d306e937614dd7943402947674e1",
+      "raw_bytes": 60973207,
+      "tick_count": 2733576
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293567,
+        "path": "raw/XAUUSD/year=2024/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "d73effb99dd1ee97dc72c60b90adb205431dad7f1de7f23b4a96c1f36bbb8f94"
+      },
+      "files_sha256": "e6fdcad24b6dbe4e139fbcd3ecfea15e106653b852eb44b4ebb0c9904fe90e2b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "ff75ed4f0fc13e12dd0112ca41f08d9fe76c12da1ce1335c673de0f0b5c67ae3"
+      },
+      "hour_files": 720,
+      "month": "2024-04",
+      "partition_signature": "74603b70aa00f18d6aa9abc6004498adaeb84f921627aa898986b5e41864279f",
+      "raw_bytes": 115741873,
+      "tick_count": 5252627
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 303347,
+        "path": "raw/XAUUSD/year=2024/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "f3d407dcd3f5bd53d2f0673568cca2250fe0b438e1d6840e343b1caa7289b733"
+      },
+      "files_sha256": "130dd8ee936be4cfa00bd32839712ec31c5332b3128799bb857fad3b4433aff0",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "f6dbca87902214553147656ae021bad38f198bc34bcf47e6a31ccf54fbd3b241"
+      },
+      "hour_files": 744,
+      "month": "2024-05",
+      "partition_signature": "12e0ec1c3b1640994fdbcb4910377ab83bbbef173ac039ca3e28d254087b61c5",
+      "raw_bytes": 111198348,
+      "tick_count": 5054706
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 293300,
+        "path": "raw/XAUUSD/year=2024/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "49f8ab65c6cfc1483dc74289595a224607ee8aec4fa5a1c6cf921080a4558ceb"
+      },
+      "files_sha256": "db3202d6e48e0bdbbcf5b8a28d4bd3a9f1855010d689b17e51173b9a615bcb9b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "564ec2ee23ad442226badd835147dfb4f08e54fdca2677aace82a8a3377e2faa"
+      },
+      "hour_files": 720,
+      "month": "2024-06",
+      "partition_signature": "b418be827fa17babb55397861a9bfe2b0a7a500160bdf8d181e459defffe7ec6",
+      "raw_bytes": 101569620,
+      "tick_count": 4639089
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305664,
+        "path": "raw/XAUUSD/year=2024/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "04e26d691ccbca3f79fb968bdd917b80b215fd731b2e5dca3bab07ba1d0790e5"
+      },
+      "files_sha256": "6c4d77405527d93e9030a47aafb854a94ca50011395fe56d6ae1127dbd781cda",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "7511b5cb8dd89972a16ad2ac6557e046d26d4d5ff7c90d3eaf69d4c2b44cc20d"
+      },
+      "hour_files": 744,
+      "month": "2024-07",
+      "partition_signature": "b1bd8a4ac4fade546dd031b4e88a1b322305442f7edb3eeab43a281915399024",
+      "raw_bytes": 123548609,
+      "tick_count": 5651582
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305577,
+        "path": "raw/XAUUSD/year=2024/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "42ea76d825b52d09831c5e887f1ba3754c1f09db5d3f11a61e85956f23494398"
+      },
+      "files_sha256": "b7970faf44cde53e40b477e4e6ec4f70fde50d1f29c59084c90411bfce0813af",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "b5d2f39e820b2c708e1a94cf17313ef395266157244fe3046a685c4bbf84daa1"
+      },
+      "hour_files": 744,
+      "month": "2024-08",
+      "partition_signature": "b68ce91931fedad581f2d24ddb0fdd93a7631a90c97fc28adc13bd4a0e26cb7d",
+      "raw_bytes": 131112430,
+      "tick_count": 5987622
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295606,
+        "path": "raw/XAUUSD/year=2024/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "dc0c8fff6eefc4cf8959fb6004e4f1df4e894f60f6001ebbce374fd1426b33fa"
+      },
+      "files_sha256": "0dce288d21e8cbd8c3e5e4c2ec2ecfb574934b307fbf9d5b0a9fbfeef854e16b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "5db263f3a74bb0c6df7da5c2626ea3ce6501eaacbfba49ba651a1dc0a6eaaecd"
+      },
+      "hour_files": 720,
+      "month": "2024-09",
+      "partition_signature": "e0413e9b13398d53222ca999f3be2cc997941369414d9ce06f25ed3f8cb8c52d",
+      "raw_bytes": 111834520,
+      "tick_count": 5121630
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306421,
+        "path": "raw/XAUUSD/year=2024/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "7bddc8914808299116225793721cb94363a7ce2606f8ade19e18e3899d5f1c3f"
+      },
+      "files_sha256": "f1b3e9882afd4fe4f138dd54f53e952a9a34551e48271b1b947ee4866894f713",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "b146a8e5851d00bc273e99e52dc5f7940d5e309730c7e25c723a7ab7fc077851"
+      },
+      "hour_files": 744,
+      "month": "2024-10",
+      "partition_signature": "11d1e48ade770bb686ffba6dc5479b7612a4cd74ba97de3ee958a95c583eb6be",
+      "raw_bytes": 121311921,
+      "tick_count": 5562067
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 296396,
+        "path": "raw/XAUUSD/year=2024/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "6786d7477988fc50d7f53432cddd5caf48439b386d9921f7d10e87cc61d715a1"
+      },
+      "files_sha256": "1041abe0d2581b8703f693a20e4d01b6faccd85ee5d090d164585160296716f3",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "5a7993f2be6882d64e5e706590847c6ed0cd4e8e843b908d2052c5172471e70e"
+      },
+      "hour_files": 720,
+      "month": "2024-11",
+      "partition_signature": "08a5ea4b5847826195e483c501972a846dee8ef7934c306fabfadd61824e54dd",
+      "raw_bytes": 129574033,
+      "tick_count": 5938280
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306131,
+        "path": "raw/XAUUSD/year=2024/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "4f57fb124a33342035dc2d7002fb5b41c65c5dbbc5138c648fd7e08f6462a678"
+      },
+      "files_sha256": "5e5233e3f240086666dccb6bd36fbb5903c7c49575079bb93bfdb1efeee7050c",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2024/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "83c22a109079ed4951467f1a13e44eb9a722b921bad7bb6de91414d19783db27"
+      },
+      "hour_files": 744,
+      "month": "2024-12",
+      "partition_signature": "883c9a960029d656446f5e6897bf5c89eef6af34f6b8bf4e2ba6789de1da179f",
+      "raw_bytes": 111560712,
+      "tick_count": 5090073
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305572,
+        "path": "raw/XAUUSD/year=2025/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "7ba7a14e81efb2fbddb02f4a011482f77e8a2cd3185107685de8175bf5e35c91"
+      },
+      "files_sha256": "82982b2144465083d4a9a36f2042f4056ee3abceddb1af504884dffba8afbe8b",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "2f62515e1401d66d69d5428d0729bf666816984ddac5c3b1291be7a3d546326c"
+      },
+      "hour_files": 744,
+      "month": "2025-01",
+      "partition_signature": "fef292e22069da70a71424396234b119039c04627052de1c0672a18e9f0f27e2",
+      "raw_bytes": 127567223,
+      "tick_count": 5798226
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 276075,
+        "path": "raw/XAUUSD/year=2025/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "ecdee7a5d5441476c4dd1434fb124270319c935529535767d9719853d9d0da8c"
+      },
+      "files_sha256": "d736403a042ef9e52b6c915d807ac0fcfd87a90e3dae8a8c73be0c3081630364",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "522e3537738e35f33846d4fa68197d3f578ed7fad43ed4017b14cd2276aff2f9"
+      },
+      "hour_files": 672,
+      "month": "2025-02",
+      "partition_signature": "9a3ebaa4e5b8eaf41d55e1ecdb6374de54db885f2d0141d70ce315deeea431e4",
+      "raw_bytes": 129158380,
+      "tick_count": 5815774
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305418,
+        "path": "raw/XAUUSD/year=2025/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "33eae1b9a5a17fa4dd179f787aa03955b87fd7e01feed5734a8b12215ee14d74"
+      },
+      "files_sha256": "0f7166925ceb96c83873eb06af7eb2c51e754586fd69a90dc8780448bd7c4495",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "b00d9ca1201e44c04c3c1e5351db015d8c8c09f8aa50639b2d36df997afde889"
+      },
+      "hour_files": 744,
+      "month": "2025-03",
+      "partition_signature": "821bba63109a7800b0eb3d7a732de0e89cae28eb219465dd380b3a09f167c0f6",
+      "raw_bytes": 119017615,
+      "tick_count": 5394235
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295727,
+        "path": "raw/XAUUSD/year=2025/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "3df03a1cdda0a245e5f720d038ec63dd8637d4162cf097b0661eea4e6c3f4374"
+      },
+      "files_sha256": "bea80645555c253c7f5acaad82d7d2a99fef9645279a333c3ca57aca5cbb6962",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "3000238c984352a2f5019adb4caab34822ccb02c50a2ef71175f8891859edd8d"
+      },
+      "hour_files": 720,
+      "month": "2025-04",
+      "partition_signature": "8743e585dc4717b8c840c7ad071b7eb34433295d76399843fc917deb4a2b199a",
+      "raw_bytes": 137501370,
+      "tick_count": 6162648
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305539,
+        "path": "raw/XAUUSD/year=2025/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "ab91dbfb69c366f15efbd2a229cd4ecaf48568bc8ca9e77bd9efa2328ce30eb0"
+      },
+      "files_sha256": "a6d54dffc8fb7ee8a381f98b4435993a1ebcbbbbf47098bbbfb09435c4fdb806",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "c6359ebb60ba278f0bb964ce1fbc385736625e6e3f440cf1628d980e3a211497"
+      },
+      "hour_files": 744,
+      "month": "2025-05",
+      "partition_signature": "9ef84275b4035e2d4484155628c28bc01396598f6546a8e627861dffcf0593e4",
+      "raw_bytes": 119361646,
+      "tick_count": 5325454
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295614,
+        "path": "raw/XAUUSD/year=2025/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "6613bb4db264dd97669eec16df32abda33a19b7e4e70538e844dbb683cacbbd9"
+      },
+      "files_sha256": "8d0eabe7997ed235a8499d15f47b29ee7248e31d70751a84dbb6454720617a5d",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "b774e1505d171a0bb0e3afed6e14f2f910e91dc8189fbc68fb9b040f0c439460"
+      },
+      "hour_files": 720,
+      "month": "2025-06",
+      "partition_signature": "3788c431025c93f95449ba0ad88eb51c99ede96d468328eb72cb07d071f7a236",
+      "raw_bytes": 105932827,
+      "tick_count": 4752206
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305482,
+        "path": "raw/XAUUSD/year=2025/month=07/_ACQUISITION_MANIFEST.json",
+        "sha256": "1eb2ab12ecad5e750559bb74aed3c5901a7df3023723c83b5a3e938e63b03705"
+      },
+      "files_sha256": "e3e6df86d84551caf901ed754cdbc7cafedd3ba12f37300576aed63cffb8e250",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=07/_FROZEN_MANIFEST.json",
+        "sha256": "6686df210a3e879d18093c9ba22df923bc12f8d9bab6477f0da4e66864eaf4cf"
+      },
+      "hour_files": 744,
+      "month": "2025-07",
+      "partition_signature": "a619fbdc02cebecf5e9814d25ba9dfcd3dd6338c00222a7cc8183a543d2b6f49",
+      "raw_bytes": 93346764,
+      "tick_count": 4192283
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305288,
+        "path": "raw/XAUUSD/year=2025/month=08/_ACQUISITION_MANIFEST.json",
+        "sha256": "98bdeb43414bec621f3f1a5d571c11dd23e7a12eafaed09863483bad25450c5c"
+      },
+      "files_sha256": "482b1ffb5560b040e0ad4110783b9d035c11a7cfd36a083274a92d79d0f8d1b0",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=08/_FROZEN_MANIFEST.json",
+        "sha256": "0b2a2a662d5469d1e2bdd741ae9453fdb1711832ebeea80ea01340b3d35bf8b0"
+      },
+      "hour_files": 744,
+      "month": "2025-08",
+      "partition_signature": "94d86b1f17cce998e77b1ac05e0cc745d858f8c4ff09d62e1f7aa1f658e6bc11",
+      "raw_bytes": 96419970,
+      "tick_count": 4332294
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295813,
+        "path": "raw/XAUUSD/year=2025/month=09/_ACQUISITION_MANIFEST.json",
+        "sha256": "856eb8eb18dea4efc2c2a073826d212f2eff984f444c66b8a8629b0bdf4136b2"
+      },
+      "files_sha256": "4a71a612f889b135a3f49ed298b65bbaa6ce1c28d27bc72ba978bc42f3f90e36",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=09/_FROZEN_MANIFEST.json",
+        "sha256": "8384bdf1a90b631ca170b0db48c04e59c358cad6162c603b33fa96d82a80734d"
+      },
+      "hour_files": 720,
+      "month": "2025-09",
+      "partition_signature": "1dbff083269b22748e2216bc2f320db792c48a6fda601b3bd1d5302d3cdc68ea",
+      "raw_bytes": 130272950,
+      "tick_count": 5823801
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306675,
+        "path": "raw/XAUUSD/year=2025/month=10/_ACQUISITION_MANIFEST.json",
+        "sha256": "65e49e10313910bfdfa6c190057084a67a6f39ee1470f9d6b20234c3a93a2fb2"
+      },
+      "files_sha256": "903fbbd193f87d5c8b95d33c22d02202a56c54671110a43a37190e02915ea127",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=10/_FROZEN_MANIFEST.json",
+        "sha256": "2fe9fc01a1e6332328078e4a1b55fc59f676b31f37564c03303ad64baa39e9a9"
+      },
+      "hour_files": 744,
+      "month": "2025-10",
+      "partition_signature": "b48e79139a25559535bbf67ae848b5d524fee263742a3c8063526a538aa63ebb",
+      "raw_bytes": 208859639,
+      "tick_count": 9296611
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 296354,
+        "path": "raw/XAUUSD/year=2025/month=11/_ACQUISITION_MANIFEST.json",
+        "sha256": "0a0684205d6cf9e9896d47e2973ab0867930c073e1cb80f24892151c6ed09fa1"
+      },
+      "files_sha256": "329e19a27e36722fe9312d1f703787e261eee8658701916eae38bc682e4029ed",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=11/_FROZEN_MANIFEST.json",
+        "sha256": "09a3c344439fd78bcfb8b4f81827590ed3e20e1856b6bb12f3326fcbb5ed7f81"
+      },
+      "hour_files": 720,
+      "month": "2025-11",
+      "partition_signature": "58f08d58a5847c58cb5605575d60d4459ef3c9b22bd7b827808d141390207fbb",
+      "raw_bytes": 148019184,
+      "tick_count": 6537897
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 306471,
+        "path": "raw/XAUUSD/year=2025/month=12/_ACQUISITION_MANIFEST.json",
+        "sha256": "c794749471f00787d381dfcbffad19919bebd4e7b2789436fff426a3283129cf"
+      },
+      "files_sha256": "c4dbec5b2f08a385a40913468dc60a9b7d7dffcdc117c05f494c87094b5f8c45",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2025/month=12/_FROZEN_MANIFEST.json",
+        "sha256": "4119c278f3a440024c55ae2388e19cbe8b4d9e5bb1c4f9888e045eb5e5d978c5"
+      },
+      "hour_files": 744,
+      "month": "2025-12",
+      "partition_signature": "05e9deb2303eb556efb060936c6bd12f4c5d3f96ffe794fd157713953bd96c93",
+      "raw_bytes": 179881437,
+      "tick_count": 7972543
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305633,
+        "path": "raw/XAUUSD/year=2026/month=01/_ACQUISITION_MANIFEST.json",
+        "sha256": "901dff6d24f146c5d6c0361d47aef40dc3512ee5fa4767058ba3d5752923384e"
+      },
+      "files_sha256": "0796246a698cb62fab4112fedb775a4e3ef9a14edb790ded3604a162033cb297",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=01/_FROZEN_MANIFEST.json",
+        "sha256": "3e5fb2e34a27d8a7fde7d3c4b5a577435e601e5a08015dd433bde3cfd5a7fbe2"
+      },
+      "hour_files": 744,
+      "month": "2026-01",
+      "partition_signature": "3215e72582ace85c42df08b879fed6f51afeac5ad150fd613e4e1fb53c65c6c7",
+      "raw_bytes": 205708153,
+      "tick_count": 9135062
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 276099,
+        "path": "raw/XAUUSD/year=2026/month=02/_ACQUISITION_MANIFEST.json",
+        "sha256": "c026ca78d443af5676387ae23441b812ef3445d3ca7b21379add4acf90128592"
+      },
+      "files_sha256": "ee3ab5be9e2ec41bc4f054b9e4da7e62dcc2e37a8f15eb7678b953f9379d6cce",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=02/_FROZEN_MANIFEST.json",
+        "sha256": "f8728e19ccfc4e1e994d58905f29f3915e01d675362294d09ad86f9812a8d407"
+      },
+      "hour_files": 672,
+      "month": "2026-02",
+      "partition_signature": "6bae38fa50d0323bcd8dac9c08f892d8d4ceddbdfd06d1fcc335312f1b5f4537",
+      "raw_bytes": 169674215,
+      "tick_count": 7538317
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305784,
+        "path": "raw/XAUUSD/year=2026/month=03/_ACQUISITION_MANIFEST.json",
+        "sha256": "c2a0d32015ff8eb0c0d52db2343a796821e69c79b8cb993ac3e13ade532f5f15"
+      },
+      "files_sha256": "55cd03c3625a1be369007719ce9088bbb32d83a8adde7767115f3429fb6e39b6",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=03/_FROZEN_MANIFEST.json",
+        "sha256": "e13560c065cb4b1d1d19684c27c007f315002f1c3e2f531bcabc798109247e92"
+      },
+      "hour_files": 744,
+      "month": "2026-03",
+      "partition_signature": "e8639aea1ef37a9832cf545d79250138c1315114a614350b535960eaccf6eca9",
+      "raw_bytes": 213691761,
+      "tick_count": 9433371
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295807,
+        "path": "raw/XAUUSD/year=2026/month=04/_ACQUISITION_MANIFEST.json",
+        "sha256": "160120f02e7f094bc98315bdab8294d2cedc4a793a1636154df123fdcca82776"
+      },
+      "files_sha256": "bd4d680b64ac5086917fa443f0e543bf64cb51852841ca42dcc1756a163c69c6",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=04/_FROZEN_MANIFEST.json",
+        "sha256": "a7ff180f236944672eecc36d9de74bf4fcd07972c899f081fdde2ac807c5620a"
+      },
+      "hour_files": 720,
+      "month": "2026-04",
+      "partition_signature": "2017eee7f03a9e4155ebe7c43a8455fe6c0fb15baf8a00b6abf5b0b196db0a6a",
+      "raw_bytes": 169301048,
+      "tick_count": 7470570
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 305599,
+        "path": "raw/XAUUSD/year=2026/month=05/_ACQUISITION_MANIFEST.json",
+        "sha256": "3925ac5ef1cebf09180ac2b50783843f1a35ff6553502e0249500c606e49cef6"
+      },
+      "files_sha256": "3b91e704024e774c441cfeb17fba06bc4c2c8707a96a5950f1120f97420efe5e",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=05/_FROZEN_MANIFEST.json",
+        "sha256": "db17d35514ca5f73abccb889d83c6e23a1b8edf350a2be727003bb6a98094105"
+      },
+      "hour_files": 744,
+      "month": "2026-05",
+      "partition_signature": "1a1484a2152aa2376f00b2b9df4decf1b1bb91571a7e4b9ecba096b98ccb6b62",
+      "raw_bytes": 186563578,
+      "tick_count": 8330127
+    },
+    {
+      "acquisition_manifest": {
+        "bytes": 295986,
+        "path": "raw/XAUUSD/year=2026/month=06/_ACQUISITION_MANIFEST.json",
+        "sha256": "8aeddd3aeac8478f7a5037166671f06b8486a6b827e1409369a3efc560d0c5fa"
+      },
+      "files_sha256": "b82853adce0de157f2eeec73a254c57efa78d8b2cd0b40fe44c73a9c9614a444",
+      "frozen_manifest": {
+        "bytes": 202,
+        "path": "raw/XAUUSD/year=2026/month=06/_FROZEN_MANIFEST.json",
+        "sha256": "adb585dc34169748b20ebe6fbf501b0d3c80bd5f3b642737b4a3601d3e7c021a"
+      },
+      "hour_files": 720,
+      "month": "2026-06",
+      "partition_signature": "822cc6f459c5662e593ff13c36e1d9a71a2a9ecef72473d3e6e738866d8adda8",
+      "raw_bytes": 185320202,
+      "tick_count": 8201406
+    }
+  ],
+  "paid_data_used": false,
+  "raw_bytes": 11375007955,
+  "schema_version": "xauusd_dukascopy_microburst_v25_source_manifest",
+  "source_inventory": {
+    "bytes": 110043,
+    "path": "research/xau-r1-r2-portability-v1/source_inventory_latest.json",
+    "sha256": "7b9401496ec67bf55ef1aac223e856c71f3e73bb73889bd43aeee32cff51b2d1"
+  },
+  "symbol": "XAUUSD",
+  "tick_count": 518307832,
+  "window": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "start_inclusive_utc": "2016-07-01T00:00:00Z"
+  }
+}

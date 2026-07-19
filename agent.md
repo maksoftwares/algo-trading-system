@@ -910,3 +910,39 @@ Its heartbeat advanced through 2026-07-19 18:37:57 UTC on account `1033669` /
 `Capital.ComMena-Demo`. Weekend tick files contain headers only, as expected while
 XAUUSD is closed. No process, chart, EA input, terminal, account, or permission was
 changed.
+
+## V25 Dukascopy Microburst Replication Freeze - 2026-07-19
+
+`dukascopy-microburst-replication-v25` is an exact cross-feed replication of the
+locked V24.1 rule. It imports the V24.1 candidate, execution-label, cost, and gate
+implementation by SHA-256 and refuses any difference in the source-quality,
+feature, episode, simulation, or gate dictionaries. V25 has one hypothesis and
+no threshold, session, direction, horizon, feature, cost, or model grid.
+
+- Free Dukascopy source window: 2016-07-01 through 2026-06-30.
+- Frozen coverage: 120/120 valid months, 87,648 hourly files, 518,307,832 ticks,
+  and 11,375,007,955 raw JSON bytes.
+- Source manifest SHA-256:
+  `76eab4348d9a7c16afad51e0f4c9fbd17f8086b966633de03a2117e61a459c3b`.
+- V25 contract SHA-256:
+  `1d02d71e2b124d98cb126a02d7b00a581880165a92d6ffdb45ef102f352402cc`.
+- At lock, `candidate_generation_performed_before_lock=false`,
+  `dukascopy_microburst_pnl_opened_before_lock=false`, and no stage audit existed.
+- Tests: 8 passed. Ruff: passed. Contract verification: passed.
+
+Evidence opens sequentially and at most one stage per invocation:
+
+1. `EARLY_REPLICATION`: 2016-07-01 to 2020-07-01.
+2. `MIDDLE_VALIDATION`: 2020-07-01 to 2023-07-01.
+3. `RECENT_FINAL_HOLDOUT`: 2023-07-01 to 2026-07-01.
+
+Each stage uses the unchanged V24.1 complete-day and economic gates. Candidate
+labels are purged at stage boundaries by the full 124-second maximum entry,
+holding, and exit-delay path. A failed stage is terminal and later stages remain
+sealed; no same-version repair is permitted.
+
+The Dukascopy archive was used by earlier, different research, so V25 is
+mechanism-level cross-feed replication rather than an untouched final holdout.
+Untouched Capital evidence from 2026-07-20 onward remains mandatory. V25 passage
+alone cannot authorize model training, Python predictions, EA consumption, demo,
+live, paid data, or broker action.

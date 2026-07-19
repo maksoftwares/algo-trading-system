@@ -1,0 +1,119 @@
+{
+  "schema_version": "xauusd_dukascopy_microburst_replication_v25",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "raw_tick_root": "raw/XAUUSD",
+    "source_inventory": "research/xau-r1-r2-portability-v1/source_inventory_latest.json",
+    "source_inventory_sha256": "7b9401496ec67bf55ef1aac223e856c71f3e73bb73889bd43aeee32cff51b2d1",
+    "symbol": "XAUUSD",
+    "price_decimals": 3,
+    "start_inclusive_utc": "2016-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "raw_month_manifest_count": 120
+  },
+  "frozen_v24_1": {
+    "root_relative": "../capital-quote-microburst-forward-v24-1",
+    "config_relative": "config/capital_quote_microburst_forward_v24_1.json",
+    "config_file_sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507",
+    "module_relative": "src/microburst.py",
+    "module_file_sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96",
+    "contract_relative": "outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+    "contract_file_sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a",
+    "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0"
+  },
+  "data_quality": {
+    "maximum_duplicate_millisecond_share": 0.05,
+    "minimum_unique_quotes_per_full_day": 100000,
+    "latest_day_start_hour_utc": 2,
+    "earliest_day_end_hour_utc": 22,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011
+  },
+  "feature": {
+    "lookback_ms": 5000,
+    "maximum_boundary_quote_age_ms": 1000,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.35,
+    "minimum_nonzero_mid_updates": 15,
+    "minimum_absolute_update_imbalance": 0.75,
+    "minimum_absolute_displacement_price": 0.60
+  },
+  "episode": {
+    "utc_block_hours": 4,
+    "first_false_to_true_crossing_only": true,
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6
+  },
+  "simulation": {
+    "hold_seconds": 120,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "base_slippage_per_side_price": 0.05,
+    "stress_slippage_per_side_price": 0.15,
+    "reference_lot": 0.01,
+    "dollars_per_price_unit": 1.0
+  },
+  "gates": {
+    "minimum_executable_trades": 40,
+    "minimum_trades_per_full_weekday": 2.0,
+    "maximum_trades_per_full_weekday": 6.0,
+    "minimum_direction_share": 0.20,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_profitable_day_share": 0.50,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "minimum_recovery_factor": 1.0,
+    "minimum_half_profit_factor": 1.0,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2401,
+    "daily_bootstrap_lower_quantile": 0.10,
+    "require_daily_bootstrap_lower_bound_positive": true
+  },
+  "stages": [
+    {
+      "id": "EARLY_REPLICATION",
+      "start_inclusive_utc": "2016-07-01T00:00:00Z",
+      "end_exclusive_utc": "2020-07-01T00:00:00Z",
+      "artifact_prefix": "MICROBURST_V25_EARLY_REPLICATION"
+    },
+    {
+      "id": "MIDDLE_VALIDATION",
+      "start_inclusive_utc": "2020-07-01T00:00:00Z",
+      "end_exclusive_utc": "2023-07-01T00:00:00Z",
+      "artifact_prefix": "MICROBURST_V25_MIDDLE_VALIDATION"
+    },
+    {
+      "id": "RECENT_FINAL_HOLDOUT",
+      "start_inclusive_utc": "2023-07-01T00:00:00Z",
+      "end_exclusive_utc": "2026-07-01T00:00:00Z",
+      "artifact_prefix": "MICROBURST_V25_RECENT_FINAL_HOLDOUT"
+    }
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "source_manifest": "MICROBURST_V25_SOURCE_MANIFEST.json",
+    "contract_lock": "MICROBURST_V25_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "hypothesis_count": 1,
+    "replication_rule_selected_from_dukascopy_outcomes": false,
+    "dukascopy_archive_previously_used_for_other_research": true,
+    "untouched_archive_claimed": false,
+    "one_stage_per_invocation": true,
+    "later_stage_requires_prior_pass": true,
+    "stage_boundary_label_purge_required": true,
+    "parameter_grid_allowed": false,
+    "same_version_tuning_authorized": false,
+    "paid_data_used": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

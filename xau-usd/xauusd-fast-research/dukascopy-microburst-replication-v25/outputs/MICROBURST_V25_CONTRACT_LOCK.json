@@ -1,0 +1,1389 @@
+{
+  "broker_action_authorized": false,
+  "candidate_generation_performed_before_lock": false,
+  "contract_sha256": "1d02d71e2b124d98cb126a02d7b00a581880165a92d6ffdb45ef102f352402cc",
+  "demo_authorized": false,
+  "dependency_files": [
+    {
+      "bytes": 3776,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/config/capital_quote_microburst_forward_v24_1.json",
+      "sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507"
+    },
+    {
+      "bytes": 24144,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/src/microburst.py",
+      "sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96"
+    },
+    {
+      "bytes": 3673,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+      "sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a"
+    }
+  ],
+  "dukascopy_archive_previously_used_for_other_research": true,
+  "dukascopy_microburst_pnl_opened_before_lock": false,
+  "ea_consumption_authorized": false,
+  "external_manifest_files": [
+    {
+      "bytes": 303039,
+      "path": "raw/XAUUSD/year=2016/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "3f90d2c27d12c6772ec4dc34968afe881f2b9bf0d5b2fade65d592d1beed6edb"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "9e063d48eb994fb82784b6b3d070894a0528e13a05b85f714f97eff45e0bacf3"
+    },
+    {
+      "bytes": 305500,
+      "path": "raw/XAUUSD/year=2016/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "ade29150eb688fd8c6ed76d63a719d037c0be4da5aa794569ad10f0071d95a79"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "1e9ad5601d7897bd78159a004c3f92af17dfec3c48212b95e7b4bc1b5401aac8"
+    },
+    {
+      "bytes": 295575,
+      "path": "raw/XAUUSD/year=2016/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "9d4a2cbae3e8838f0a6262d45a2fbf4b3c535b63633f24a64f0d3897fde26849"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "56a520713de0f0f99fd7959e17e0a55a6bd376bfb25b03ccbd473a6978760dc7"
+    },
+    {
+      "bytes": 305896,
+      "path": "raw/XAUUSD/year=2016/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "0887d092723c2d73640bef2d85846329c2761fe365b0e8c121ab48fe90eb5dc5"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "0aef82befcd95e1b1ee88ffe9c645c98edfab70954c9f9149cfa5faef4c8b947"
+    },
+    {
+      "bytes": 296386,
+      "path": "raw/XAUUSD/year=2016/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "8c0b82314e490c163d6fb19a13e609cab96c8082494a36f54fbfbee72112c2c8"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "843393484e5df3d2244a3877b071716878c562018d1fb93b73c03c4bb2edf1a8"
+    },
+    {
+      "bytes": 305902,
+      "path": "raw/XAUUSD/year=2016/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "068fd3f5e1e52b93ff2505b543fafd7a93b788b0cfc3e7c1e5b721f076ebade3"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2016/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "095f054b8e2f2ef75a7717c59f38b670ff84446dc2ea2cb34f9bd608ac414135"
+    },
+    {
+      "bytes": 305281,
+      "path": "raw/XAUUSD/year=2017/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "652d7c712c120f4f97c575e6fc25c4e925b541af039ef066ca49625651fffe02"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "3e307fdeaaf6eec69d84a46ac4bb6f6a793f6c32218590fa5fdd6f4dad4ceca9"
+    },
+    {
+      "bytes": 275890,
+      "path": "raw/XAUUSD/year=2017/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "f22c42202e1ae638deff2e0c3682f4957003a27fdec48ad3d099d3738c8016ff"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "3efaad1e3b27acc55207317444d894ad65471ebb3d40b2262d92e7d12057bca2"
+    },
+    {
+      "bytes": 305531,
+      "path": "raw/XAUUSD/year=2017/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "4adefa92c06c5c71c6678b9682c613f31520f1c6416370b20f9466e6e8e51a5e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "a21cf90d6b118584922fc6b88458d4e93efed5cf400214a1e3db8d52fc20dbc7"
+    },
+    {
+      "bytes": 295202,
+      "path": "raw/XAUUSD/year=2017/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "f009c8bed85c86578426a1284770db60905d2bbc41b2e8705b378f6ae965e4fd"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "6c6fdd37b9c566448efd78645f02f750ed260dfc5b351484a3b780ea8ab580b6"
+    },
+    {
+      "bytes": 305424,
+      "path": "raw/XAUUSD/year=2017/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "d5f33847fa4c8be08819cd5257b22c8b1610f45bf505bce9f2d7e551e81acc38"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "5decf352daff7c92db80e62db8ec6468d828a8efd0ca2a32eb84b7eee2291a65"
+    },
+    {
+      "bytes": 295530,
+      "path": "raw/XAUUSD/year=2017/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "3b5693e6cad09b00c7a550c7bb6cec0c96188cc2d85f72602527781dfa0db425"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "7b19b8d9561b9055d33f0527939880fa0deb95e4eb67258d98bef1e061417a54"
+    },
+    {
+      "bytes": 305130,
+      "path": "raw/XAUUSD/year=2017/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "41db4db93ce9349831a3d68f4a02a96e006abedbb50f1d5fba6c323662ec6b6e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "0d3d9597a29556a96c091b316f39bb53e95960a44b086a5e1712d11186b201d2"
+    },
+    {
+      "bytes": 305471,
+      "path": "raw/XAUUSD/year=2017/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "e9459e2edb4001a021a143abb60729da686ea0ae7eed668652c9aba8565ce51a"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "5d1336710d3cedc3d0cc8de1b51892fc475dc184a63cf3cbed47cd37eec34111"
+    },
+    {
+      "bytes": 295480,
+      "path": "raw/XAUUSD/year=2017/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "c2172144a9781b79860035f136ac3e73e5e5d0b387263ec9b1a5facbbdcc9413"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "d88f373a9c08c97adea78aeb542c1d6ddec346487f0bbb1b082604a82234e883"
+    },
+    {
+      "bytes": 306172,
+      "path": "raw/XAUUSD/year=2017/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "9dab5670a048ce9eca1fe93f8a2bfe7d4512655d5d74180527335937724bd737"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "1b2d8b3b0925ee3f835a4c43a5f9f18a26d76ed69b5cbe548e59e5305921e394"
+    },
+    {
+      "bytes": 296388,
+      "path": "raw/XAUUSD/year=2017/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "beb42e11f6de3d3539ea16540837b3507f1f1ea9cb1e37efde2c13e0a81a61a7"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "6a675f78e47b96f3d1adddd2c46cb8344eb96e454323d859118a0de94d8109bd"
+    },
+    {
+      "bytes": 305888,
+      "path": "raw/XAUUSD/year=2017/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "712dcc071e8fb2d050bfeecbb76f4b967a2a8725f464b9117018f37cff808731"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2017/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "d191ac62f6e7e9603273602b4519e62cd542334908ec7a9407895454d1097b9c"
+    },
+    {
+      "bytes": 305477,
+      "path": "raw/XAUUSD/year=2018/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "b8636ce81cdcce04f31d06b38e77feec32ae4bc0f8a1e94d98bdaa66937de463"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "a28cdc89634c82c030bbc58a85780d7fd37f35c5fda00b66937a5b4a56e0e869"
+    },
+    {
+      "bytes": 275986,
+      "path": "raw/XAUUSD/year=2018/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "8a8d71e6e5a6b4698a852fb472ea2af72d9f731298fefd15a554e30fa9379271"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "aad8c2d061ccef3e099c968524c8b71f45c3768e57d3812a97e6e8a13eba21d6"
+    },
+    {
+      "bytes": 305192,
+      "path": "raw/XAUUSD/year=2018/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "818eac2da6565ce37b9bb2bdc408dd040dc99e6424b16230540024de42d253ad"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "8b4d3412a6bee45d1fc3b107b8094231420360f0fb02392db0078ebd52086366"
+    },
+    {
+      "bytes": 295283,
+      "path": "raw/XAUUSD/year=2018/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "6cf2b62c4ee194ccd1cca276cb8b9458b6a6e809c12a76828ab01ec9ee4717ee"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "0b8683b4df8f0d1e5e72f18de9ca0554ae82939f07f0461b524d5897cae99208"
+    },
+    {
+      "bytes": 305214,
+      "path": "raw/XAUUSD/year=2018/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "1688dfe70fd370390120656cfd76d93ed7502776df8caf6b72d9b6896825ca93"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "e8357e365224591634e044a33ef50ad98480cebaf3e2cc328ce7c363081657c7"
+    },
+    {
+      "bytes": 295217,
+      "path": "raw/XAUUSD/year=2018/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "36c3b6d871415715c08dff3aaf0c812146683b4b94391b9668cc4e2070ba1b91"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "a05c4fbe1155203afc891c9c34c2063f306cc68dbda92e1ecdb1582f29f67951"
+    },
+    {
+      "bytes": 305205,
+      "path": "raw/XAUUSD/year=2018/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "1fd505644ed630e3b7c33f946cd03a51523c4b70beddd57cfb023820f1e867dd"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "9908495afb413e687928fad7240bfc8dd5e3dd1f77719ba700d57890ad2f72ea"
+    },
+    {
+      "bytes": 305313,
+      "path": "raw/XAUUSD/year=2018/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "9a24d05661e05c92670b22a8f4f1f9981f9f8821ee14a878e3d2d7ec6b4894dc"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "c6a3c8880692a04ba6e1850a06f9a4f3082f2cfacf43539e769bff7363485931"
+    },
+    {
+      "bytes": 295140,
+      "path": "raw/XAUUSD/year=2018/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "ea9d052b95ca72eca9626b0dc5e86cd3842a19e5e08183901e3e8fba6729a7ec"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "06c6f484d9ce4963418aae23a0aef7c9da3b64c5516ca72db67d3bc0c2e8ac76"
+    },
+    {
+      "bytes": 306058,
+      "path": "raw/XAUUSD/year=2018/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "d16b3f80c3f55b1d0cace34158bb8992c4321fd9be8be58175e7bb9cd6518c2b"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "01d95f2900e2056c64f27f1fb48a516d2a6b39f4ca865601e070c672b36c7e6c"
+    },
+    {
+      "bytes": 295952,
+      "path": "raw/XAUUSD/year=2018/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "1df51532ea44b698897f3ccdd490456955b0d96f7d2fb63c448e5a088390acbe"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "0e8377a4238d4edd73288a63c2f8dda7264df4aa8c6a7f4d3e41a317ee449bca"
+    },
+    {
+      "bytes": 305525,
+      "path": "raw/XAUUSD/year=2018/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "3485a3acba64ac8959da8f982bb84170f0e07c0d7fd28f94345bd59b335d0d06"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2018/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "55c3ca91c9a84621d37386d5d15009102b5a5c72b65d0891e582abf95dced985"
+    },
+    {
+      "bytes": 305010,
+      "path": "raw/XAUUSD/year=2019/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "fd80ae2b6ec8e6baa30a957516a6eaf908a5971783aa3992d366c5437a3add94"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "80b45a11f1f985ffdd6e822b9da79d78e877a1cfa006ecc075740dd88a549106"
+    },
+    {
+      "bytes": 275455,
+      "path": "raw/XAUUSD/year=2019/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "cd42c9f419c62b6d3758316ef5e079f23b7f520568bfdf997909c9fd9ca380a2"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "dfbb8f1ed56446417c1a37bc2233099c1e12b4725b986a01aa685d0ace6c7b79"
+    },
+    {
+      "bytes": 304977,
+      "path": "raw/XAUUSD/year=2019/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "35021e488ec9ebd58eca1d954f62b019a3b5132138cef10ebb7f03d2e936799f"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "debe7737ebaabcfd248f96c52e5c7f63b2e5e5fa2a6c1914bd973bfcc9809c6c"
+    },
+    {
+      "bytes": 295121,
+      "path": "raw/XAUUSD/year=2019/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "1cb28513832832c2d7f9ec098bf7dd11c4aa3ce040d5b877312774c089eb0501"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "35cfa3eb997e745f65bf6131931a6ffb94ec02b6f4bf8e24857c1cfb80b6a33b"
+    },
+    {
+      "bytes": 305196,
+      "path": "raw/XAUUSD/year=2019/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "8b646ffb8543bbdaf24529b7ec88967d3df55dc50b9808fae351791df30f8ed4"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "4e7497e9643523e74ed434d24a3d264509d76d9ef7bdd10a82107e76118a32ca"
+    },
+    {
+      "bytes": 295312,
+      "path": "raw/XAUUSD/year=2019/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "18e50a063b6401a78bfe68469742b9ba7bb020aeb75104d5dd4bd93a4c79b40a"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "0daf867e0a4c3e7231b4375b03251b9e4a91dc7f9f52cf9d46f8e696180c0353"
+    },
+    {
+      "bytes": 305368,
+      "path": "raw/XAUUSD/year=2019/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "f9f84f0c065e3b29ab64e2f2d9a7849a305ec478a24149eca587210a39f45860"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "33a1f6efb7abab19d9775e6b21bd9570f93d536b6c2fe1f2213734176081cbb4"
+    },
+    {
+      "bytes": 305426,
+      "path": "raw/XAUUSD/year=2019/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "226d18ed1d242c92c52f2fd147ad84d81e59c0446c97970d2f26b761f6720b21"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "9fab5c28ac6caf5f5a849caaf3ea6fd97f613de7021da47fd74ebe5d0759c66d"
+    },
+    {
+      "bytes": 295475,
+      "path": "raw/XAUUSD/year=2019/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "6a44ecbee2d7dab78de1bb61bb5e7f4db63e7fd2b55300d3695b812856065586"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "5962a7d98f47a13b765bd5a7370529063a681e6139a1c8a774f5cb6ec6337631"
+    },
+    {
+      "bytes": 306273,
+      "path": "raw/XAUUSD/year=2019/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "2e19272c9a9ab48ea92f4ca091cb97ead8cae94571663201d09afca3ba001c2d"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "f853b63c3ec986ddbf330091392ffd40215854101d8508fb2c351638fb1dcc6a"
+    },
+    {
+      "bytes": 295994,
+      "path": "raw/XAUUSD/year=2019/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "5af32b0a4dd29cd8c6181c9f8fcdff1fec066d66c5b066d0168ecfd3fbf4ba92"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "7155daf6e43b32ed5ede88d72ae9a37ff05157007c02cde15757d0f0d76d2380"
+    },
+    {
+      "bytes": 305710,
+      "path": "raw/XAUUSD/year=2019/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "4b998dc83c15e28837958a3143ce7918b7ba9a9ab04fd24acf88e2596c8b3a63"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2019/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "5d7703fc8b930780623e000d0526980b0e82f8c8e3acdee7815efbe9b814c004"
+    },
+    {
+      "bytes": 305319,
+      "path": "raw/XAUUSD/year=2020/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "81dcdeb4860d7d484137beceb18bde389eeac6673831d2c22a6d1633e5d8cfd1"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "b884c3f274e18e54ebbd6f48b9b3a139566ab971a358b4a415eb109ecb4ce952"
+    },
+    {
+      "bytes": 285602,
+      "path": "raw/XAUUSD/year=2020/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "c2cb8dd32809f0fcf99719b40b2e1ff101ad289b243203e6fc48ad926a79297e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "1c485731e28584566b9d062a03701bdfaa59b2174353e521b9197b799fc01912"
+    },
+    {
+      "bytes": 305576,
+      "path": "raw/XAUUSD/year=2020/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "f209610a36171989becc5d8fce2b83ecbc66164f9cce8a3d1f8e23e55b278a78"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "cc42bba02d2576f91b761480132d93ee21f5058a87d088862bfdc9328b6183e7"
+    },
+    {
+      "bytes": 295455,
+      "path": "raw/XAUUSD/year=2020/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "5b38585d30b210760b09988a8ed93417abd81a976f18e4377f0b5e34d041b13e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "40ffae31219b8d932d87ab77733df691f172e73e0e8f7578b83e0b7665e490b1"
+    },
+    {
+      "bytes": 305234,
+      "path": "raw/XAUUSD/year=2020/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "07f3a047490aa259b8bfea195afffc22ac12178d6c7616b183a98ebdbc1c8829"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "6792fb5f176a0c90b1cc40af7945d00faf8c20eb1989248dac1da322a7170335"
+    },
+    {
+      "bytes": 295652,
+      "path": "raw/XAUUSD/year=2020/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "b46b0d72cea3193eaa3e5687d1835023275bdcac43a682bce389cc36b84d0b79"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "4e1a3e918a3ecc6caba6a67ba8457faae067dd2a3107b8ebe77e8210b10e1b7f"
+    },
+    {
+      "bytes": 305493,
+      "path": "raw/XAUUSD/year=2020/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "0135348f98f039a8d959a6f21d656ca4ffa69f58a969a90c9cef97faf770bf52"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "4068dde0f8d7c57fa88113eb13a9e65723286ed1aeedcd2fb1142e5acd84f64c"
+    },
+    {
+      "bytes": 305444,
+      "path": "raw/XAUUSD/year=2020/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "8af137703ca700ecf6d288b22eab81c3164ca8964d1bf7a7793a27f73fe80377"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "7bc663f4878537e612ebd2260ca1614bdcdd814c6ac46b2dba66058287a1347d"
+    },
+    {
+      "bytes": 295695,
+      "path": "raw/XAUUSD/year=2020/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "70a25dccb6b4f259803cdc364d40960d63a248e947452b33f5dfa94801b2dcbc"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "d6156e2eee92179064c78a902ac5865210b8b897b9baa2beca6a9fff7748b935"
+    },
+    {
+      "bytes": 306125,
+      "path": "raw/XAUUSD/year=2020/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "ca53de0a6749ff08a031aa38f80a8ed8723cbae20261b767b8802a68ff5e9446"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "9792fec4a43aa1c0e4654c07af77ace67b92fb71ec3096b7e11a92a5f2a66e75"
+    },
+    {
+      "bytes": 296220,
+      "path": "raw/XAUUSD/year=2020/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "75cdc865d613aba881a5f864d5c9970a38e8570fb5fb3827ac81980ec26dbd69"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "cf6a8fd3390eecdf4afa5cd880b727812203926bd54d7761e951e069e098f0ed"
+    },
+    {
+      "bytes": 306044,
+      "path": "raw/XAUUSD/year=2020/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "5bf9dae7f20d0a250a0ff92558c89835fb1e1cda77714f50892ef685d3241665"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2020/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "c74cd570f52ba87922adb480bf91eb8865993450e07f66790f21c331eefc25d5"
+    },
+    {
+      "bytes": 305200,
+      "path": "raw/XAUUSD/year=2021/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "7791a0dd994e36d9666f94e6cd9937f29d236a051d34c741f7f7ca2e32f8d51b"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "08e6428ec5b59e8d8123ddc193ca4c525a39f70e062258152cba14b2a9b8d353"
+    },
+    {
+      "bytes": 275961,
+      "path": "raw/XAUUSD/year=2021/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "787b7116b4e56570d95188b6ace8d3fd763f046e0477bee4946258c3edd4cc88"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "d69adacc310bb56df108cb71dc9c5129fb848671c1be86f7bdaa4cd5e1281d20"
+    },
+    {
+      "bytes": 305752,
+      "path": "raw/XAUUSD/year=2021/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "2aa49a9548b3e04ea8b4595bba73665e8912fbb74104fa4ac1dbe83e94fc3f57"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "ea97f5b170b469582d0a6d90fc5e79e235aa1a837a976df96cd5625ea7c82980"
+    },
+    {
+      "bytes": 295517,
+      "path": "raw/XAUUSD/year=2021/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "b9e96318feefa4250c554afd97cefb9c408e8557c01d811da1fbe227131bdada"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "9d1cd340c43bfdbfab74a1676b08ba68aa2b23c23a9a67b28e1960221de11c78"
+    },
+    {
+      "bytes": 305301,
+      "path": "raw/XAUUSD/year=2021/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "b46f90d5d0fde33c2ee5d7bd6e2acb4c854131ded0b2a791d8e7510683029669"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "c1774acc56ce60bce5aabca48c36e8a39607a5eb94f1633880719ae207f23da4"
+    },
+    {
+      "bytes": 295654,
+      "path": "raw/XAUUSD/year=2021/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "07a64da2ecd1a2d7188d90337daf68cdb097ed474e9e97574191666cecdfed3c"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "3651e73897f2c34c45e208aa10c46edf89fba06d47ed72fa8cadefd5dfe7e6a8"
+    },
+    {
+      "bytes": 303028,
+      "path": "raw/XAUUSD/year=2021/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "c8d8d5e7da3bd20502737273dae08af1d75587be54d858dfd8437f58a61c3a99"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "4d598e2431814c6ffa405495ee47fb74b72eb13c402009e9ae058a32dc90f4f6"
+    },
+    {
+      "bytes": 303044,
+      "path": "raw/XAUUSD/year=2021/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "122387d2eaa84ac47c59ea057f73dfa0452884b3fe8b4aa9ce86385fc2b67b88"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "88fe67f75f801518a9b00c4d42e72054f8cde068849600a9240259effef45880"
+    },
+    {
+      "bytes": 293430,
+      "path": "raw/XAUUSD/year=2021/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "6e9df68a4832b12b94a86724a6e28e177ac96fa37e74b4f9969276d7524e9879"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "bc303f5f413ba5390ac24083a0d0b19a842a953194ccfcd90743cb5f4bef099f"
+    },
+    {
+      "bytes": 303787,
+      "path": "raw/XAUUSD/year=2021/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "32e8aac25e2723470525a5d05ce23be796548816e8cd5ab8cd136454743eba11"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "9f4a8d7a17b25b571e5cadfa3fc2174e5ccc6f5ff2d291a71bbaf4edd2f4ba0f"
+    },
+    {
+      "bytes": 294134,
+      "path": "raw/XAUUSD/year=2021/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "0e58fd59ba0bba5cbac6ecec9fdea8ff872f9e01bec083681ddcf042372d35a7"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "df57a3416b1949299b44a500a06503dc634a5bb4bf6649e495a79bbb6ad3dbca"
+    },
+    {
+      "bytes": 303794,
+      "path": "raw/XAUUSD/year=2021/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "922a6f95d8658f535f2b8a58079da5a2ae7cf8584e6469ca590aefa259735ba9"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2021/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "2dde140996e289aa31367eb80008861b236d644e28ca47b7e254c9137975e939"
+    },
+    {
+      "bytes": 302996,
+      "path": "raw/XAUUSD/year=2022/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "1c2c0ca3ce230d8803db7265066ed805f1806f7f7bdd86c218cf8fcfb08b7f48"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "77f178cb9064830bc0c8f5fb43058c22df401bcad6463ae916b11692c0657fff"
+    },
+    {
+      "bytes": 273918,
+      "path": "raw/XAUUSD/year=2022/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "a610255e146f4fcb8cfd4d664c3faca630bba98a10492438c2533c299b28b734"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "8eddf432ccd29059d0564d21fd078ad3ce8146115eb66a54fd360d66ad465312"
+    },
+    {
+      "bytes": 303477,
+      "path": "raw/XAUUSD/year=2022/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "28cf06fbdb20e63c447706b9cdd8de7a672fa3aa9e118e80f8d83065bbafb362"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "e044772b8d485d2e837ec574fc3328bbb35a5c6262f2d9510986b35e0cee262c"
+    },
+    {
+      "bytes": 293292,
+      "path": "raw/XAUUSD/year=2022/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "e810d8c2eaf32618f967fdde6f7142e1899f94a9b0efb0ec0259cc8913f181a3"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "d4535c55a06dd8a124fa2c3144637df7db0da1501821b45e6235894cf849ca76"
+    },
+    {
+      "bytes": 303216,
+      "path": "raw/XAUUSD/year=2022/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "d3a2f7dbf19770df06de1ac5f993bd09e7165e822e5454c113121c866ffe1cf4"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "d92c63f566047a3c426abbc0af6590d80f650fb56b6d28e9d87ba12047d1b86c"
+    },
+    {
+      "bytes": 293452,
+      "path": "raw/XAUUSD/year=2022/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "4935f2efce9ee72d09c0f2be1640d9ce0628ae0d70866b6b51713738f097f78a"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "8567643f31f8bbf567f66e883f256010ed2d1fbca1a8541cf25be377d6853e57"
+    },
+    {
+      "bytes": 303037,
+      "path": "raw/XAUUSD/year=2022/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "a9529b26f4e3b4e70f5c6f0fa40501eabfb3fc11bf3f02e4b9d1bd074d6b09f0"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "6c1f0d001b95b138f61c51c16bf2cee653d94c2334de879b1af8dd658b21f338"
+    },
+    {
+      "bytes": 303256,
+      "path": "raw/XAUUSD/year=2022/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "063f36a55db295309f4791ca32305c17e745844da1c61290393f532a97be9231"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "3e0b10e097d29475f1f0bfd5b70791f94bd68e99758f81a9569cda482c47fa3d"
+    },
+    {
+      "bytes": 293516,
+      "path": "raw/XAUUSD/year=2022/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "94bba42631847e29e7f7092408be23089253a22a54f77bcdd10f1fdef5b3619e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "f992bf62f57b52779c9526e9709d9ceea51c7dac882234d67f92e2a6c19bb42d"
+    },
+    {
+      "bytes": 303799,
+      "path": "raw/XAUUSD/year=2022/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "cd1b4e6ac3a529931302e07ac3410c5ac23cbc39443efa2b6bf27235ef7a51c4"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "501a3191eea56c08ce59425bc34f6bffd51371c81b5278b2740bad160fe69088"
+    },
+    {
+      "bytes": 294063,
+      "path": "raw/XAUUSD/year=2022/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "7a3dadab6cd68fc463b0fc3f7a0f2826fc0699b4d7c0d9f1a8d614d294d9a5c3"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "52feb3bebccc78fe14207e6b08dbb85366a1c79dd846d2c5bec2a954dc0a454e"
+    },
+    {
+      "bytes": 303659,
+      "path": "raw/XAUUSD/year=2022/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "998c1ce187a57cd3811e6b3f9133f58ac39fb0ff3e60baa1beeb245bd3018f13"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2022/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "0a8947a427c1002846e45473f691fc074fc5c0fa25b5b47084a11a19debc2ead"
+    },
+    {
+      "bytes": 302940,
+      "path": "raw/XAUUSD/year=2023/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "ff64b2f604c4052297f3197bd8b2fabe9f40a39036237fb71bb1616ac2d76a8b"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "8ef6ef75d3ae6818cfebb6e8aab8cfcea553e4fb4508cf1299403f8653ea598a"
+    },
+    {
+      "bytes": 273718,
+      "path": "raw/XAUUSD/year=2023/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "f3961d8ea00403cc3acc2e1af31d57449f936995da0d581e46e3accc4a015d9a"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "87e33c95da033ebf9f153e0e75539c30cbec22782a7d01575017b5a2eaa40d12"
+    },
+    {
+      "bytes": 303273,
+      "path": "raw/XAUUSD/year=2023/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "e93199b80ca556e74aa1c3d8d8de7967b4eb1b6cf47139c643a176571ee5de61"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "6838439d2692dd69f72c066beb57c26a62fc9e437d1faf26572b05428b07120b"
+    },
+    {
+      "bytes": 292968,
+      "path": "raw/XAUUSD/year=2023/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "2f49b916bdd8e84f33812a0dba057c80317cda76359706cdd9e8d248fc09d941"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "9f39098f54cb66dbe790ce856e64ea9537800c5e015a34dfa3b13aac330f3686"
+    },
+    {
+      "bytes": 303195,
+      "path": "raw/XAUUSD/year=2023/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "6926d3e47fd257d01108db5aa4abc27f772ac8c0d439bb68275c71a692573e2e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "cba5a30f6755970d8a21336ed80ffd65ca16b70f021b94282cdd9800f28fe184"
+    },
+    {
+      "bytes": 293287,
+      "path": "raw/XAUUSD/year=2023/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "18cd3de0c021cef9fde3a086f62f672459193701947ca8e34e65f58774c89cdb"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "eed8dfa765bad9f229dcdca6539f7a5102d54545eab2c59fb7e578cff6dc49dc"
+    },
+    {
+      "bytes": 302809,
+      "path": "raw/XAUUSD/year=2023/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "465b82c45ade128bd446621051d13a2e2872060d99549f3199889fa5f30b3bce"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "011cfe157a94f67f67b054fc23d0d5bd269e304836f9ae823853fe0c5afa59d8"
+    },
+    {
+      "bytes": 302948,
+      "path": "raw/XAUUSD/year=2023/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "514eaf54876cecf7a9e02aebb2daa89323453afd39f949931eb0bd142479971a"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "a7a137b0dd841305e2489c842a2ae53d4c5b5e7c87e3e693aeb02298964be3bc"
+    },
+    {
+      "bytes": 292929,
+      "path": "raw/XAUUSD/year=2023/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "8005b64836bd111b42535dc0e1c6c7d119a3686ea32d9d519865d5f053b8c098"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "008e5d48e73d3a88cf318c976cb99e85f78f49db21b7758c1d462aa366d01271"
+    },
+    {
+      "bytes": 303682,
+      "path": "raw/XAUUSD/year=2023/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "933087c5e0717e9393604e9bfbe618facaaea5717fd02b62c3144e79e71f32da"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "0d9b626d30add555008f2458b25133bc28a8a5ced388eab5d5e3c00151510f80"
+    },
+    {
+      "bytes": 293870,
+      "path": "raw/XAUUSD/year=2023/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "fd951ceb8a70d056c2717ee57db78594306d4c8aaf83f009c0d0d17f6604002b"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "935ebba358a4851f3023ffbaddef16507ae9ec03d3c340d21b827bdb0addd3dd"
+    },
+    {
+      "bytes": 303445,
+      "path": "raw/XAUUSD/year=2023/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "1e438810c9e72cff146bbfe3f8b3675d70499c5d9c6e5ad38851aecda99172c2"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2023/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "2cf8f23329735ad963cb26e299844787c337ff4cc9b087a875af673e4cb8cd8c"
+    },
+    {
+      "bytes": 302968,
+      "path": "raw/XAUUSD/year=2024/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "46b9f26ce883a6e9e5e23d498c0134185d0bf657fa9ab4570eb1f25cb4e81da2"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "7cbfef4521c214ba800a692570c158dd05c0965918d594735da5a8de464c1918"
+    },
+    {
+      "bytes": 283297,
+      "path": "raw/XAUUSD/year=2024/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "b26df697c541833f1e24ab00fd716b8041f024c4b0052d02c1855d5f01a8573e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "5fa5f37c79341c035936f6a984de90d94fd6a6afd01cc783d16327647675422d"
+    },
+    {
+      "bytes": 302705,
+      "path": "raw/XAUUSD/year=2024/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "b1d93047b958f9ad04ab8570e538b91ccf3d095dadedc5067c7160d0d42a07b0"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "9f49d60c5344b635636ef480e8a9894d1fd0351d8831206d0972dc4b3da18475"
+    },
+    {
+      "bytes": 293567,
+      "path": "raw/XAUUSD/year=2024/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "d73effb99dd1ee97dc72c60b90adb205431dad7f1de7f23b4a96c1f36bbb8f94"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "ff75ed4f0fc13e12dd0112ca41f08d9fe76c12da1ce1335c673de0f0b5c67ae3"
+    },
+    {
+      "bytes": 303347,
+      "path": "raw/XAUUSD/year=2024/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "f3d407dcd3f5bd53d2f0673568cca2250fe0b438e1d6840e343b1caa7289b733"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "f6dbca87902214553147656ae021bad38f198bc34bcf47e6a31ccf54fbd3b241"
+    },
+    {
+      "bytes": 293300,
+      "path": "raw/XAUUSD/year=2024/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "49f8ab65c6cfc1483dc74289595a224607ee8aec4fa5a1c6cf921080a4558ceb"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "564ec2ee23ad442226badd835147dfb4f08e54fdca2677aace82a8a3377e2faa"
+    },
+    {
+      "bytes": 305664,
+      "path": "raw/XAUUSD/year=2024/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "04e26d691ccbca3f79fb968bdd917b80b215fd731b2e5dca3bab07ba1d0790e5"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "7511b5cb8dd89972a16ad2ac6557e046d26d4d5ff7c90d3eaf69d4c2b44cc20d"
+    },
+    {
+      "bytes": 305577,
+      "path": "raw/XAUUSD/year=2024/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "42ea76d825b52d09831c5e887f1ba3754c1f09db5d3f11a61e85956f23494398"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "b5d2f39e820b2c708e1a94cf17313ef395266157244fe3046a685c4bbf84daa1"
+    },
+    {
+      "bytes": 295606,
+      "path": "raw/XAUUSD/year=2024/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "dc0c8fff6eefc4cf8959fb6004e4f1df4e894f60f6001ebbce374fd1426b33fa"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "5db263f3a74bb0c6df7da5c2626ea3ce6501eaacbfba49ba651a1dc0a6eaaecd"
+    },
+    {
+      "bytes": 306421,
+      "path": "raw/XAUUSD/year=2024/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "7bddc8914808299116225793721cb94363a7ce2606f8ade19e18e3899d5f1c3f"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "b146a8e5851d00bc273e99e52dc5f7940d5e309730c7e25c723a7ab7fc077851"
+    },
+    {
+      "bytes": 296396,
+      "path": "raw/XAUUSD/year=2024/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "6786d7477988fc50d7f53432cddd5caf48439b386d9921f7d10e87cc61d715a1"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "5a7993f2be6882d64e5e706590847c6ed0cd4e8e843b908d2052c5172471e70e"
+    },
+    {
+      "bytes": 306131,
+      "path": "raw/XAUUSD/year=2024/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "4f57fb124a33342035dc2d7002fb5b41c65c5dbbc5138c648fd7e08f6462a678"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2024/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "83c22a109079ed4951467f1a13e44eb9a722b921bad7bb6de91414d19783db27"
+    },
+    {
+      "bytes": 305572,
+      "path": "raw/XAUUSD/year=2025/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "7ba7a14e81efb2fbddb02f4a011482f77e8a2cd3185107685de8175bf5e35c91"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "2f62515e1401d66d69d5428d0729bf666816984ddac5c3b1291be7a3d546326c"
+    },
+    {
+      "bytes": 276075,
+      "path": "raw/XAUUSD/year=2025/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "ecdee7a5d5441476c4dd1434fb124270319c935529535767d9719853d9d0da8c"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "522e3537738e35f33846d4fa68197d3f578ed7fad43ed4017b14cd2276aff2f9"
+    },
+    {
+      "bytes": 305418,
+      "path": "raw/XAUUSD/year=2025/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "33eae1b9a5a17fa4dd179f787aa03955b87fd7e01feed5734a8b12215ee14d74"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "b00d9ca1201e44c04c3c1e5351db015d8c8c09f8aa50639b2d36df997afde889"
+    },
+    {
+      "bytes": 295727,
+      "path": "raw/XAUUSD/year=2025/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "3df03a1cdda0a245e5f720d038ec63dd8637d4162cf097b0661eea4e6c3f4374"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "3000238c984352a2f5019adb4caab34822ccb02c50a2ef71175f8891859edd8d"
+    },
+    {
+      "bytes": 305539,
+      "path": "raw/XAUUSD/year=2025/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "ab91dbfb69c366f15efbd2a229cd4ecaf48568bc8ca9e77bd9efa2328ce30eb0"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "c6359ebb60ba278f0bb964ce1fbc385736625e6e3f440cf1628d980e3a211497"
+    },
+    {
+      "bytes": 295614,
+      "path": "raw/XAUUSD/year=2025/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "6613bb4db264dd97669eec16df32abda33a19b7e4e70538e844dbb683cacbbd9"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "b774e1505d171a0bb0e3afed6e14f2f910e91dc8189fbc68fb9b040f0c439460"
+    },
+    {
+      "bytes": 305482,
+      "path": "raw/XAUUSD/year=2025/month=07/_ACQUISITION_MANIFEST.json",
+      "sha256": "1eb2ab12ecad5e750559bb74aed3c5901a7df3023723c83b5a3e938e63b03705"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=07/_FROZEN_MANIFEST.json",
+      "sha256": "6686df210a3e879d18093c9ba22df923bc12f8d9bab6477f0da4e66864eaf4cf"
+    },
+    {
+      "bytes": 305288,
+      "path": "raw/XAUUSD/year=2025/month=08/_ACQUISITION_MANIFEST.json",
+      "sha256": "98bdeb43414bec621f3f1a5d571c11dd23e7a12eafaed09863483bad25450c5c"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=08/_FROZEN_MANIFEST.json",
+      "sha256": "0b2a2a662d5469d1e2bdd741ae9453fdb1711832ebeea80ea01340b3d35bf8b0"
+    },
+    {
+      "bytes": 295813,
+      "path": "raw/XAUUSD/year=2025/month=09/_ACQUISITION_MANIFEST.json",
+      "sha256": "856eb8eb18dea4efc2c2a073826d212f2eff984f444c66b8a8629b0bdf4136b2"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=09/_FROZEN_MANIFEST.json",
+      "sha256": "8384bdf1a90b631ca170b0db48c04e59c358cad6162c603b33fa96d82a80734d"
+    },
+    {
+      "bytes": 306675,
+      "path": "raw/XAUUSD/year=2025/month=10/_ACQUISITION_MANIFEST.json",
+      "sha256": "65e49e10313910bfdfa6c190057084a67a6f39ee1470f9d6b20234c3a93a2fb2"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=10/_FROZEN_MANIFEST.json",
+      "sha256": "2fe9fc01a1e6332328078e4a1b55fc59f676b31f37564c03303ad64baa39e9a9"
+    },
+    {
+      "bytes": 296354,
+      "path": "raw/XAUUSD/year=2025/month=11/_ACQUISITION_MANIFEST.json",
+      "sha256": "0a0684205d6cf9e9896d47e2973ab0867930c073e1cb80f24892151c6ed09fa1"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=11/_FROZEN_MANIFEST.json",
+      "sha256": "09a3c344439fd78bcfb8b4f81827590ed3e20e1856b6bb12f3326fcbb5ed7f81"
+    },
+    {
+      "bytes": 306471,
+      "path": "raw/XAUUSD/year=2025/month=12/_ACQUISITION_MANIFEST.json",
+      "sha256": "c794749471f00787d381dfcbffad19919bebd4e7b2789436fff426a3283129cf"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2025/month=12/_FROZEN_MANIFEST.json",
+      "sha256": "4119c278f3a440024c55ae2388e19cbe8b4d9e5bb1c4f9888e045eb5e5d978c5"
+    },
+    {
+      "bytes": 305633,
+      "path": "raw/XAUUSD/year=2026/month=01/_ACQUISITION_MANIFEST.json",
+      "sha256": "901dff6d24f146c5d6c0361d47aef40dc3512ee5fa4767058ba3d5752923384e"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=01/_FROZEN_MANIFEST.json",
+      "sha256": "3e5fb2e34a27d8a7fde7d3c4b5a577435e601e5a08015dd433bde3cfd5a7fbe2"
+    },
+    {
+      "bytes": 276099,
+      "path": "raw/XAUUSD/year=2026/month=02/_ACQUISITION_MANIFEST.json",
+      "sha256": "c026ca78d443af5676387ae23441b812ef3445d3ca7b21379add4acf90128592"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=02/_FROZEN_MANIFEST.json",
+      "sha256": "f8728e19ccfc4e1e994d58905f29f3915e01d675362294d09ad86f9812a8d407"
+    },
+    {
+      "bytes": 305784,
+      "path": "raw/XAUUSD/year=2026/month=03/_ACQUISITION_MANIFEST.json",
+      "sha256": "c2a0d32015ff8eb0c0d52db2343a796821e69c79b8cb993ac3e13ade532f5f15"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=03/_FROZEN_MANIFEST.json",
+      "sha256": "e13560c065cb4b1d1d19684c27c007f315002f1c3e2f531bcabc798109247e92"
+    },
+    {
+      "bytes": 295807,
+      "path": "raw/XAUUSD/year=2026/month=04/_ACQUISITION_MANIFEST.json",
+      "sha256": "160120f02e7f094bc98315bdab8294d2cedc4a793a1636154df123fdcca82776"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=04/_FROZEN_MANIFEST.json",
+      "sha256": "a7ff180f236944672eecc36d9de74bf4fcd07972c899f081fdde2ac807c5620a"
+    },
+    {
+      "bytes": 305599,
+      "path": "raw/XAUUSD/year=2026/month=05/_ACQUISITION_MANIFEST.json",
+      "sha256": "3925ac5ef1cebf09180ac2b50783843f1a35ff6553502e0249500c606e49cef6"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=05/_FROZEN_MANIFEST.json",
+      "sha256": "db17d35514ca5f73abccb889d83c6e23a1b8edf350a2be727003bb6a98094105"
+    },
+    {
+      "bytes": 295986,
+      "path": "raw/XAUUSD/year=2026/month=06/_ACQUISITION_MANIFEST.json",
+      "sha256": "8aeddd3aeac8478f7a5037166671f06b8486a6b827e1409369a3efc560d0c5fa"
+    },
+    {
+      "bytes": 202,
+      "path": "raw/XAUUSD/year=2026/month=06/_FROZEN_MANIFEST.json",
+      "sha256": "adb585dc34169748b20ebe6fbf501b0d3c80bd5f3b642737b4a3601d3e7c021a"
+    },
+    {
+      "bytes": 110043,
+      "path": "research/xau-r1-r2-portability-v1/source_inventory_latest.json",
+      "sha256": "7b9401496ec67bf55ef1aac223e856c71f3e73bb73889bd43aeee32cff51b2d1"
+    }
+  ],
+  "frozen_rule_sections": {
+    "data_quality": {
+      "earliest_day_end_hour_utc": 22,
+      "latest_day_start_hour_utc": 2,
+      "maximum_duplicate_millisecond_share": 0.05,
+      "maximum_p99_interquote_gap_ms": 5000,
+      "maximum_spread_field_error": 0.011,
+      "maximum_timestamp_disagreement_ms": 1,
+      "minimum_unique_quotes_per_full_day": 100000
+    },
+    "episode": {
+      "first_event_per_block_only": true,
+      "first_false_to_true_crossing_only": true,
+      "maximum_candidates_per_utc_day": 6,
+      "utc_block_hours": 4
+    },
+    "feature": {
+      "lookback_ms": 5000,
+      "maximum_boundary_quote_age_ms": 1000,
+      "maximum_internal_quote_gap_ms": 2000,
+      "maximum_spread_price": 0.35,
+      "minimum_absolute_displacement_price": 0.6,
+      "minimum_absolute_update_imbalance": 0.75,
+      "minimum_nonzero_mid_updates": 15
+    },
+    "gates": {
+      "daily_bootstrap_lower_quantile": 0.1,
+      "daily_bootstrap_samples": 10000,
+      "daily_bootstrap_seed": 2401,
+      "maximum_closed_trade_drawdown_dollars": 100.0,
+      "maximum_trades_per_full_weekday": 6.0,
+      "minimum_base_profit_factor": 1.2,
+      "minimum_direction_share": 0.2,
+      "minimum_executable_trades": 40,
+      "minimum_half_profit_factor": 1.0,
+      "minimum_profitable_day_share": 0.5,
+      "minimum_recovery_factor": 1.0,
+      "minimum_stress_profit_factor": 1.05,
+      "minimum_trades_per_full_weekday": 2.0,
+      "require_daily_bootstrap_lower_bound_positive": true,
+      "require_positive_base_net": true,
+      "require_positive_stress_net": true
+    },
+    "simulation": {
+      "base_slippage_per_side_price": 0.05,
+      "dollars_per_price_unit": 1.0,
+      "hold_seconds": 120,
+      "maximum_entry_delay_ms": 2000,
+      "maximum_exit_delay_ms": 2000,
+      "reference_lot": 0.01,
+      "stress_slippage_per_side_price": 0.15
+    }
+  },
+  "frozen_v24_1_contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+  "live_authorized": false,
+  "mechanism_level_replication_not_untouched_archive": true,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 956,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/README.md",
+      "sha256": "f913123959ff74ca3f169858f7525e89ffb0f63445f26a004cdb0312945f78c6"
+    },
+    {
+      "bytes": 4137,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/PREREGISTRATION.md",
+      "sha256": "d6baaec932614b78150faafbcc4754cd4728b47e84c8158f6194915d92666b5c"
+    },
+    {
+      "bytes": 20,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/requirements.txt",
+      "sha256": "8b24e7fbc3ba5935410e6bb1259f4b4c7e0318efef35aba28acd3b43635a8306"
+    },
+    {
+      "bytes": 4543,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/config/dukascopy_microburst_replication_v25.json",
+      "sha256": "a86145053db95391b5b237797b2a3e8613f3caef86a788121a4ca09e59d0cc7d"
+    },
+    {
+      "bytes": 59,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/src/__init__.py",
+      "sha256": "a472e95d5f560bdf50e4f15b8aeab3f2659f8a2c55a35d11bbf7019e61f3bb93"
+    },
+    {
+      "bytes": 26934,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/src/replication.py",
+      "sha256": "76d471ba5a623134461c783e67ad128fae96c68e7a0cd55e7e9653a9ec0a4333"
+    },
+    {
+      "bytes": 1054,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/prepare_source_manifest.py",
+      "sha256": "6e29d841862a5e163371f873a9550d1a2fd8f8b04fd6614c3cfc56f2df88cd5b"
+    },
+    {
+      "bytes": 6350,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/lock_contract.py",
+      "sha256": "c045ed20748596d37370dd5b0bf4181249f107c624f3038ab98be3cc72cd01e5"
+    },
+    {
+      "bytes": 7358,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/run_replication.py",
+      "sha256": "4c79510354cac4135bdfeabc67f1ff1271fce36a180ba5ae4dbbb12b9d3341fd"
+    },
+    {
+      "bytes": 4941,
+      "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/tests/test_replication.py",
+      "sha256": "dbb814fdf5e76e884711d414d228b9134e9897acff05ef7a00e1e8d5f6197a58"
+    }
+  ],
+  "python_predictions_authorized": false,
+  "research_controls": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "dukascopy_archive_previously_used_for_other_research": true,
+    "ea_consumption_authorized": false,
+    "hypothesis_count": 1,
+    "later_stage_requires_prior_pass": true,
+    "live_authorized": false,
+    "model_training_authorized": false,
+    "one_stage_per_invocation": true,
+    "paid_data_used": false,
+    "parameter_grid_allowed": false,
+    "python_predictions_authorized": false,
+    "replication_rule_selected_from_dukascopy_outcomes": false,
+    "same_version_tuning_authorized": false,
+    "stage_boundary_label_purge_required": true,
+    "untouched_archive_claimed": false
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_dukascopy_microburst_v25_contract_lock",
+  "source_manifest_file": {
+    "bytes": 90664,
+    "path": "xau-usd/xauusd-fast-research/dukascopy-microburst-replication-v25/outputs/MICROBURST_V25_SOURCE_MANIFEST.json",
+    "sha256": "85d7ba4d842bbc1790cee23c994afd3143ce632cdcc7a225b10a70a215929285"
+  },
+  "source_manifest_sha256": "76eab4348d9a7c16afad51e0f4c9fbd17f8086b966633de03a2117e61a459c3b",
+  "stages": [
+    {
+      "artifact_prefix": "MICROBURST_V25_EARLY_REPLICATION",
+      "end_exclusive_utc": "2020-07-01T00:00:00Z",
+      "id": "EARLY_REPLICATION",
+      "start_inclusive_utc": "2016-07-01T00:00:00Z"
+    },
+    {
+      "artifact_prefix": "MICROBURST_V25_MIDDLE_VALIDATION",
+      "end_exclusive_utc": "2023-07-01T00:00:00Z",
+      "id": "MIDDLE_VALIDATION",
+      "start_inclusive_utc": "2020-07-01T00:00:00Z"
+    },
+    {
+      "artifact_prefix": "MICROBURST_V25_RECENT_FINAL_HOLDOUT",
+      "end_exclusive_utc": "2026-07-01T00:00:00Z",
+      "id": "RECENT_FINAL_HOLDOUT",
+      "start_inclusive_utc": "2023-07-01T00:00:00Z"
+    }
+  ]
+}
