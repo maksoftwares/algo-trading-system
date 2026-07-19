@@ -2,6 +2,11 @@ name: V23 Sealed Dukascopy Acquisition
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - codex/xau-independent-specialists-v1
+    paths:
+      - .github/workflows/v23_sealed_dukascopy_acquisition.yml
 
 permissions:
   contents: read
