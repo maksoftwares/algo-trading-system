@@ -1,6 +1,6 @@
 # A1 XAUUSD Authoritative Handoff
 
-Updated: `2026-07-19`
+Updated: `2026-07-20`
 
 ## Repository authority
 
@@ -1032,3 +1032,54 @@ before any forward file or economic outcome existed. It corrected the false 0.05
 Bonferroni claim, removed the exact 2,000 ms clock overlap, and made the physical
 calibration-read boundary explicit. These were stricter outcome-blind governance
 corrections, not same-version economic tuning.
+
+## V27 Capital Forward Family Portfolio Freeze - 2026-07-20
+
+`capital-forward-family-portfolio-v27` freezes the selection and combination of
+V24.1 and V26 before either component has a validation audit or trade file. V27
+does not create a signal. It is the family-level test of whether both independent
+forward clocks can add enough positive marginal activity to the byte-identical
+five-specialist Core without exceeding the locked risk budget.
+
+- V27 contract SHA-256:
+  `8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6`.
+- At lock, all V24.1/V26 validation and confirmation audits and trade files were
+  absent. Component and portfolio economics were both unopened.
+- Frozen Core identity: 1,249 rows, SHA-256
+  `fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372`.
+- Frozen Core frequency reference: 160 trades over 261 weekdays, or
+  0.6130268199233716/day, in the 2025-07-01 through 2026-06-30 realized-exit
+  window.
+- The Capital forward family now has three registered claims: V24.1, V26, and
+  their fixed V27 portfolio. V27 therefore applies a 0.05 / 3 =
+  0.016666666666666666 one-sided threshold to both components and the portfolio,
+  using centered-null circular five-weekday block bootstraps with fixed seeds.
+  This stricter external gate supersedes V26's earlier two-claim 0.025 threshold
+  for family admission without modifying the locked V26 runner.
+- Both components must pass their own immutable gates and the V27 external gate.
+  If either fails, V27 fails terminally before portfolio economics are opened.
+  Selecting only the winning lane is forbidden.
+- The fixed router sorts by candidate millisecond with V24.1 then V26 tie
+  priority, permits only one satellite position, and retains at most the first
+  three selected satellite trades per UTC day. It never fills a quota.
+- Satellite frequency must be 2.386973180076628 to 3.386973180076628/day, which
+  projects the unchanged 0.6130268199233716/day Core reference into the 3-4/day
+  owner target.
+- Marginal base/stress net must be positive, base PF at least 1.20, stress PF at
+  least 1.05, profitable days at least 50%, satellite closed drawdown no more
+  than USD 100, and both half-period PFs at least 1.0. Both directions and both
+  components must each contribute at least 20% of selected trades.
+- The appended Core-plus-satellite curve must increase Core net, retain PF at
+  least 2.0, and keep closed drawdown no greater than USD 1,000.
+- Empty-stage decision: `V27_WAITING_FOR_COMPONENT_VALIDATION` with both component
+  artifacts absent, `component_economic_outcomes_opened_by_v27=false`, and
+  `portfolio_economic_outcomes_opened=false`.
+- Tests: 6 passed. Ruff and Ruff format: passed. Contract verification: passed.
+
+Validation and confirmation each require the same 20 complete weekdays as the
+component contracts and open sequentially. Even dual V27 passage is not final
+frequency proof because the total-frequency gate uses the frozen historical Core
+rate. Same-period Core shadow signals, floating-equity overlap, margin, and exact
+MT5 portfolio reproduction remain mandatory. No model training, Python
+prediction, EA consumption, demo, live, runtime, account, or broker action is
+authorized.

@@ -1,0 +1,102 @@
+{
+  "schema_version": "xauusd_capital_forward_family_portfolio_v27",
+  "components": {
+    "V24_1": {
+      "priority": 0,
+      "contract_path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+      "contract_file_sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a",
+      "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+      "validation_audit": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_VALIDATION_AUDIT.json",
+      "validation_trades": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_VALIDATION_TRADES.csv",
+      "confirmation_audit": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONFIRMATION_AUDIT.json",
+      "confirmation_trades": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONFIRMATION_TRADES.csv",
+      "bootstrap_seed": 2701
+    },
+    "V26": {
+      "priority": 1,
+      "contract_path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CONTRACT_LOCK.json",
+      "contract_file_sha256": "07b831873c31cd8dab807385099925fbe058515e5fb52218d071ddaa754783de",
+      "contract_sha256": "4981f20bff17e36fc990816e433b9cb69b708a7f39dd1cc85b3a1f96db68f1ee",
+      "validation_audit": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_VALIDATION_AUDIT.json",
+      "validation_trades": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_VALIDATION_TRADES.csv",
+      "confirmation_audit": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CONFIRMATION_AUDIT.json",
+      "confirmation_trades": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CONFIRMATION_TRADES.csv",
+      "bootstrap_seed": 2702
+    }
+  },
+  "core": {
+    "ledger_path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+    "ledger_sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372",
+    "expected_total_rows": 1249,
+    "reference_start_inclusive_utc": "2025-07-01T00:00:00Z",
+    "reference_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "expected_reference_rows": 160,
+    "expected_reference_weekdays": 261,
+    "reference_trades_per_weekday": 0.6130268199233716,
+    "expected_reference_net_dollars": 4508.783898966717,
+    "expected_reference_profit_factor": 3.491826050898352,
+    "expected_reference_closed_drawdown_dollars": 889.6899999999998
+  },
+  "multiple_testing": {
+    "registered_forward_claims": 3,
+    "family_alpha": 0.05,
+    "maximum_one_sided_pvalue": 0.016666666666666666,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "block_length_weekdays": 5,
+    "bootstrap_samples": 10000,
+    "portfolio_bootstrap_seed": 2703
+  },
+  "router": {
+    "fixed_priority": ["V24_1", "V26"],
+    "maximum_concurrent_satellite_positions": 1,
+    "maximum_selected_satellite_trades_per_utc_day": 3,
+    "reject_candidate_before_prior_selected_exit": true,
+    "outcome_based_single_lane_fallback_allowed": false
+  },
+  "gates": {
+    "minimum_satellite_trades_per_weekday": 2.386973180076628,
+    "maximum_satellite_trades_per_weekday": 3.386973180076628,
+    "minimum_projected_total_trades_per_weekday": 3.0,
+    "maximum_projected_total_trades_per_weekday": 4.0,
+    "minimum_direction_share": 0.20,
+    "minimum_component_share": 0.20,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_profitable_day_share": 0.50,
+    "maximum_satellite_closed_drawdown_dollars": 100.0,
+    "minimum_satellite_recovery_factor": 1.0,
+    "minimum_half_profit_factor": 1.0,
+    "maximum_overlap_rejection_share": 0.20,
+    "minimum_core_plus_satellite_net_dollars": 4508.783898966717,
+    "minimum_core_plus_satellite_profit_factor": 2.0,
+    "maximum_core_plus_satellite_closed_drawdown_dollars": 1000.0
+  },
+  "stages": {
+    "validation_partition": "FORWARD_VALIDATION",
+    "confirmation_partition": "FORWARD_CONFIRMATION",
+    "required_full_weekdays_per_stage": 20
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_FORWARD_FAMILY_V27_CONTRACT_LOCK.json",
+    "status": "CAPITAL_FORWARD_FAMILY_V27_STATUS.json",
+    "validation_audit": "CAPITAL_FORWARD_FAMILY_V27_VALIDATION_AUDIT.json",
+    "validation_trades": "CAPITAL_FORWARD_FAMILY_V27_VALIDATION_TRADES.csv",
+    "confirmation_audit": "CAPITAL_FORWARD_FAMILY_V27_CONFIRMATION_AUDIT.json",
+    "confirmation_trades": "CAPITAL_FORWARD_FAMILY_V27_CONFIRMATION_TRADES.csv"
+  },
+  "research_controls": {
+    "component_economic_outcomes_present_at_lock": false,
+    "portfolio_economic_outcomes_present_at_lock": false,
+    "same_version_tuning_authorized": false,
+    "single_lane_fallback_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

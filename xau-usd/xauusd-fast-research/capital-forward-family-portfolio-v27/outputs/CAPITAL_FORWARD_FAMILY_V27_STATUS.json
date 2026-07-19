@@ -1,0 +1,13 @@
+{
+  "component_economic_outcomes_opened_by_v27": false,
+  "component_stage_artifacts_available": {
+    "V24_1": false,
+    "V26": false
+  },
+  "contract_sha256": "8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6",
+  "decision": "V27_WAITING_FOR_COMPONENT_VALIDATION",
+  "portfolio_economic_outcomes_opened": false,
+  "schema_version": "xauusd_capital_forward_family_v27_status",
+  "status_sha256": "46dbdda968c3a0d2e007ab735ef7036d74821a261e3ed9b8804e0c8ecdcc86fb",
+  "waiting_for_stage": "VALIDATION"
+}

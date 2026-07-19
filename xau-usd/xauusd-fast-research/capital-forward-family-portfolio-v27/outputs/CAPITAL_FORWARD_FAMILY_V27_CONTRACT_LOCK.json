@@ -1,0 +1,133 @@
+{
+  "broker_action_authorized": false,
+  "component_contracts": [
+    {
+      "bytes": 3673,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+      "sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a"
+    },
+    {
+      "bytes": 6696,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CONTRACT_LOCK.json",
+      "sha256": "07b831873c31cd8dab807385099925fbe058515e5fb52218d071ddaa754783de"
+    }
+  ],
+  "component_economic_outcomes_present_at_lock": false,
+  "component_stage_files_present_at_lock": [],
+  "contract_sha256": "8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6",
+  "core_ledger": {
+    "bytes": 80507,
+    "path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+    "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+  },
+  "core_reference_metrics": {
+    "closed_drawdown_dollars": 889.6899999999998,
+    "net_dollars": 4508.783898966717,
+    "profit_factor": 3.491826050898352,
+    "rows": 160,
+    "trades_per_weekday": 0.6130268199233716,
+    "weekdays": 261
+  },
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "floating_equity_drawdown_calculated": false,
+  "gates": {
+    "maximum_core_plus_satellite_closed_drawdown_dollars": 1000.0,
+    "maximum_overlap_rejection_share": 0.2,
+    "maximum_projected_total_trades_per_weekday": 4.0,
+    "maximum_satellite_closed_drawdown_dollars": 100.0,
+    "maximum_satellite_trades_per_weekday": 3.386973180076628,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_component_share": 0.2,
+    "minimum_core_plus_satellite_net_dollars": 4508.783898966717,
+    "minimum_core_plus_satellite_profit_factor": 2.0,
+    "minimum_direction_share": 0.2,
+    "minimum_half_profit_factor": 1.0,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_projected_total_trades_per_weekday": 3.0,
+    "minimum_satellite_recovery_factor": 1.0,
+    "minimum_satellite_trades_per_weekday": 2.386973180076628,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "multiple_testing": {
+    "block_length_weekdays": 5,
+    "bootstrap_samples": 10000,
+    "family_alpha": 0.05,
+    "maximum_one_sided_pvalue": 0.016666666666666666,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "portfolio_bootstrap_seed": 2703,
+    "registered_forward_claims": 3
+  },
+  "package_files": [
+    {
+      "bytes": 991,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/README.md",
+      "sha256": "aea0af0bd205ae5e1b086ac117b14d39427ca0ea4a34eec815fa24a978705087"
+    },
+    {
+      "bytes": 3763,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/PREREGISTRATION.md",
+      "sha256": "a3cb3091375f38b565497da2afa854e629f48793384b06616aa99424cfe8283b"
+    },
+    {
+      "bytes": 28,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/requirements.txt",
+      "sha256": "906cab1f0062d38ac98e0c800d44b2247708641f0e08d9e95efd85d34684c68a"
+    },
+    {
+      "bytes": 5335,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/config/capital_forward_family_portfolio_v27.json",
+      "sha256": "0d8bef7b11ecc31c2ee705bc152994cc0adb1fd868fcb99b34ae9d9a4e66d90f"
+    },
+    {
+      "bytes": 62,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/src/__init__.py",
+      "sha256": "3c38d6174d2c45016b1e67e6cd1099dac27d27386c58f16e6f474919dbf13301"
+    },
+    {
+      "bytes": 17036,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/src/portfolio.py",
+      "sha256": "5797e0382b16dff730947b857b69dcfccee196b3451fa1d6ee83b9a0a06c9ab6"
+    },
+    {
+      "bytes": 5047,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/lock_contract.py",
+      "sha256": "a7f4a9b257afef7e2d6b4ffe7c5b337a8089c254c306e8e5229541d39138fa2e"
+    },
+    {
+      "bytes": 11573,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/run_portfolio_evaluation.py",
+      "sha256": "5d0128d60bfd5ff17223f31f2d7baaa9fb9307d12185714aed2218c69ab16698"
+    },
+    {
+      "bytes": 5628,
+      "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/tests/test_portfolio.py",
+      "sha256": "048fbc517881fc007d2d2be8672c88ab4ab21af1d1e093f808cdd09118f2c931"
+    }
+  ],
+  "portfolio_economic_outcomes_present_at_lock": false,
+  "projected_frequency_uses_historical_core_reference": true,
+  "python_predictions_authorized": false,
+  "router": {
+    "fixed_priority": [
+      "V24_1",
+      "V26"
+    ],
+    "maximum_concurrent_satellite_positions": 1,
+    "maximum_selected_satellite_trades_per_utc_day": 3,
+    "outcome_based_single_lane_fallback_allowed": false,
+    "reject_candidate_before_prior_selected_exit": true
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_forward_family_v27_contract_lock",
+  "single_lane_fallback_authorized": false,
+  "stages": {
+    "confirmation_partition": "FORWARD_CONFIRMATION",
+    "required_full_weekdays_per_stage": 20,
+    "validation_partition": "FORWARD_VALIDATION"
+  }
+}
