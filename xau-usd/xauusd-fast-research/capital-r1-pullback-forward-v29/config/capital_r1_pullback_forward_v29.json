@@ -1,0 +1,87 @@
+{
+  "schema_version": "xauusd_capital_r1_pullback_forward_v29_config",
+  "source": {
+    "terminal_exe": "C:\\MT5A1M5MomentumBacktest\\terminal64.exe",
+    "forward_terminal_exe": "C:\\MT5PortableProspectiveCollector\\terminal64.exe",
+    "historical_account_login": 1025742,
+    "forward_account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "history_start_inclusive_utc": "2015-06-01T00:00:00Z",
+    "parity_start_inclusive_utc": "2022-07-01T00:00:00Z",
+    "parity_end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "maximum_market_staleness_hours": 96,
+    "forward_warmup_days": {
+      "M15": 30,
+      "H1": 120,
+      "H4": 400,
+      "D1": 800
+    },
+    "runtime_directory": "C:\\MT5PortableProspectiveCollector\\MQL5\\Files\\r1_pullback_shadow_v29"
+  },
+  "settings": {
+    "atr_period": 14,
+    "h1_fast_period": 20,
+    "h1_slow_period": 50,
+    "slope_lag": 5,
+    "lookback_bars": 6,
+    "touch_atr": 0.25,
+    "stop_buffer_atr": 0.25,
+    "min_body_fraction": 0.35,
+    "close_location": 0.65,
+    "session_start_hour": 9,
+    "session_end_hour": 15,
+    "stop_floor_points": 350.0,
+    "stop_ceiling_points": 2200.0,
+    "max_spread_points": 75.0,
+    "max_estimated_cost_r": 0.15,
+    "point_size": 0.01,
+    "regime_fast_period": 20,
+    "regime_slow_period": 50,
+    "regime_persistence_d1_bars": 2,
+    "regime_shock_h1_range_atr_multiple": 3.0,
+    "regime_shock_d1_atr_percentile_min": 95.0,
+    "regime_shock_d1_lookback": 60,
+    "regime_compression_d1_atr_percentile_max": 30.0,
+    "regime_compression_box_days": 5,
+    "regime_compression_range_median_max": 1.0
+  },
+  "artifacts": {
+    "ea": "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5",
+    "ini": "C:\\MT5A1M5MomentumBacktest\\Config\\A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15.ini",
+    "signals": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_signals.csv",
+    "orders": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv",
+    "trades": "xau-usd/xauusd-phase1/outputs/reports/mt5_backtests/a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701/A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_trades.csv"
+  },
+  "contract_scope": [
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/config/capital_r1_pullback_forward_v29.json",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/PREREGISTRATION.md",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/src/__init__.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/src/pullback.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/verify_historical_parity.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/run_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/lock_contract.py",
+    "xau-usd/xauusd-fast-research/capital-r1-pullback-forward-v29/tests/test_pullback.py",
+    "xau-usd/xauusd-phase1/mt5/Experts/A1XauM5MomentumContinuationExecutor.mq5"
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "parity_report": "CAPITAL_R1_PULLBACK_V29_HISTORICAL_PARITY.json",
+    "contract_lock": "CAPITAL_R1_PULLBACK_V29_CONTRACT_LOCK.json",
+    "candidate_log": "r1_pullback_candidates.jsonl",
+    "decision_state_log": "r1_pullback_decisions.jsonl",
+    "runtime_status": "runtime_status.json"
+  },
+  "authority": {
+    "historical_status": "SHADOW_ONLY",
+    "economic_outcomes_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

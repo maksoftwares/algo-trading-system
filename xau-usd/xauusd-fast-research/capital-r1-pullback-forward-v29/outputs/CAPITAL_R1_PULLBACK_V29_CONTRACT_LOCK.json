@@ -1,0 +1,112 @@
+{
+  "broker_action_authorized": false,
+  "contract_sha256": "80efb0907d2742e47f9e871f25cfacef485853f60f973145461b5655d4db43fb",
+  "created_at_utc": "2026-07-19T23:50:35.097373Z",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "economic_outcomes_opened": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "historical_parity": {
+    "break_distance_atr_max_abs_error": 4.995739680146993e-05,
+    "break_distance_atr_within_4dp_log_precision": true,
+    "decision_rows_expected": 94223,
+    "decision_rows_observed": 94223,
+    "decision_stage_exact": true,
+    "estimated_cost_r_max_abs_error": 4.999643849284627e-05,
+    "estimated_cost_r_within_4dp_log_precision": true,
+    "expected_guard_reason_counts": {
+      "directional_session_filter_block": 2265,
+      "pass": 413,
+      "regime_router_block_long_r1_uptrend_only_state_chop": 254,
+      "regime_router_block_long_r1_uptrend_only_state_compression": 110,
+      "regime_router_block_long_r1_uptrend_only_state_downtrend": 7,
+      "regime_router_block_long_r1_uptrend_only_state_shock": 234,
+      "spread_too_high": 2,
+      "stop_ceiling_exceeded": 33
+    },
+    "observed_guard_reason_counts": {
+      "directional_session_filter_block": 2265,
+      "pass": 413,
+      "regime_router_block_long_r1_uptrend_only_state_chop": 254,
+      "regime_router_block_long_r1_uptrend_only_state_compression": 110,
+      "regime_router_block_long_r1_uptrend_only_state_downtrend": 7,
+      "regime_router_block_long_r1_uptrend_only_state_shock": 234,
+      "spread_too_high": 2,
+      "stop_ceiling_exceeded": 33
+    },
+    "order_action_exact": true,
+    "order_direction_exact": true,
+    "order_reason_exact": true,
+    "order_rows_expected": 3318,
+    "pass": true,
+    "pass_rows_expected": 413,
+    "pass_rows_observed": 413,
+    "raw_signal_rows_expected": 3318,
+    "raw_signal_rows_observed": 3318,
+    "raw_signal_times_exact": true,
+    "signal_direction_exact": true,
+    "signal_reason_exact": true,
+    "stop_points_max_abs_error": 0.005000000014661055,
+    "stop_points_within_2dp_log_precision": true
+  },
+  "historical_status": "SHADOW_ONLY",
+  "history_fingerprints": {
+    "d1": {
+      "canonical_ohlc_sha256": "6d4f8b5be22cd2910436f9e17c29e8b284defed945fa0000bae0f728daca0d1b",
+      "first_bar_utc": "2015-06-01T00:00:00Z",
+      "last_bar_utc": "2026-06-30T00:00:00Z",
+      "rows": 3439
+    },
+    "h1": {
+      "canonical_ohlc_sha256": "bab171ce8db3dd5b5dd1a389df17ef71998c9f0afb55cc6387cc22343006a695",
+      "first_bar_utc": "2015-06-01T00:00:00Z",
+      "last_bar_utc": "2026-06-30T23:00:00Z",
+      "rows": 65319
+    },
+    "h4": {
+      "canonical_ohlc_sha256": "de199c2c293b6d6850ee7e13dbd69895469b245ab19db952566594993667f2b3",
+      "first_bar_utc": "2015-06-01T00:00:00Z",
+      "last_bar_utc": "2026-06-30T20:00:00Z",
+      "rows": 17672
+    },
+    "m15": {
+      "canonical_ohlc_sha256": "66227ba34ec3fc9f35f8b48dc1d60877ae517404a30ff57da73fe4c994289ce8",
+      "first_bar_utc": "2022-04-22T18:30:00Z",
+      "last_bar_utc": "2026-06-30T23:45:00Z",
+      "rows": 98823
+    }
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "python_predictions_authorized": false,
+  "rule_dependency_sha256": "5de2d9fb972f04cc90d458622fe9fe33d55cb4238d3857f3f9177c9e742d1456",
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_r1_pullback_v29_contract_lock",
+  "source_artifacts": {
+    "ea": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\mt5\\Experts\\A1XauM5MomentumContinuationExecutor.mq5",
+      "sha256": "43c5795a3c0206447446f488ee38e23006bf59a0df1575fc81744294c0ba1a53",
+      "size_bytes": 185177
+    },
+    "ini": {
+      "path": "C:\\MT5A1M5MomentumBacktest\\Config\\A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15.ini",
+      "sha256": "ce6218537800d4dc51705f32997d3b2ff29a8217fedc3fc7a091a7109991e5f6",
+      "size_bytes": 6164
+    },
+    "orders": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_orders.csv",
+      "sha256": "8482016a012efcbb61470b8936815e0277234612d25e1bc2e084306f8338a749",
+      "size_bytes": 777903
+    },
+    "signals": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_signals.csv",
+      "sha256": "2ea28ff551bc1c1c071aa3ca1862447c10c483de70ffcc981797a2b403c355bd",
+      "size_bytes": 24710809
+    },
+    "trades": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-phase1\\outputs\\reports\\mt5_backtests\\a1_momentum_variants_owner_goal_r1_pullback_long_v2_session_exact_202207_202606_20260701\\A1XauM5Momentum_OWNER_GOAL_R1_PULLBACK_LONG_V2_SESSION_EXACT_202207_202606_XAUUSD_M5_r1_pullback_long_v2_m15_session_09_15_trades.csv",
+      "sha256": "91976d2bd3d1a373eb95b5d43efe7a4cad848e64baca69e88db2fc2240312aa6",
+      "size_bytes": 78418
+    }
+  }
+}

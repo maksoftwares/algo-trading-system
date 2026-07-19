@@ -1169,3 +1169,54 @@ V28 records R2/R3 candidate facts only. It does not calculate outcome, return,
 win rate, P/L, or an economic gate. R1 pullback, R4 Capital microstructure, R5
 current macro/cross-asset state, shared floating equity, and the 20+20 completed
 weekday decisions remain mandatory.
+
+## V29 Exact R1 Pullback Forward Shadow - 2026-07-20
+
+`capital-r1-pullback-forward-v29` closes the missing R1 pullback candidate-clock
+coverage without changing the historical specialist's `SHADOW_ONLY` status. It
+ports the exact MT5 `r1_pullback_long_v2_m15_session_09_15` signal, regime,
+session, spread, cost, and stop guards into an outcome-blind Python collector.
+
+The parity audit identified and corrected one important numerical assumption:
+the bound MT5 `iATR` values are the simple average of the last 14 true ranges,
+not Wilder smoothing. At the audit timestamp MT5 and the corrected Python path
+both produce `4.036428571428603`; Wilder smoothing would produce
+`3.750412711024045`.
+
+- Final contract SHA-256:
+  `80efb0907d2742e47f9e871f25cfacef485853f60f973145461b5655d4db43fb`.
+- Rule dependency SHA-256:
+  `5de2d9fb972f04cc90d458622fe9fe33d55cb4238d3857f3f9177c9e742d1456`.
+- Lock time: `2026-07-19T23:50:35.097373Z`, before the
+  `2026-07-20T00:00:00Z` forward boundary.
+- Historical decision parity: 94,223 expected and observed.
+- Raw-signal parity: 3,318 expected and observed, with exact timestamps,
+  directions, reasons, guard actions, and guard reasons.
+- Accepted-entry parity: 413 expected and observed.
+- Break distance and cost ratio match the four-decimal MT5 logs; stop distance
+  matches the two-decimal MT5 log precision. Every cost, spread, stop, session,
+  and regime decision is exact.
+- Guard counts match exactly: 2,265 session blocks, 254 chop blocks, 110
+  compression blocks, 7 downtrend blocks, 234 shock blocks, 33 stop-ceiling
+  blocks, 2 spread blocks, and 413 passes.
+- Real ProspectiveCollector dry run on account `1033669` returned
+  `WAITING_FORWARD_BOUNDARY`, latest decision `2026-07-19T23:30:00Z`, no raw
+  signal, zero candidates, no opened economics, and all authority flags false.
+- Each forward M15 decision freezes its first observed signal, spread, and guard
+  state in an append-only decision ledger, so later polls cannot turn a
+  bar-open spread block into a pass.
+- Persistent hidden collector: parent PID `21480`, child PID `22960`; its first
+  final-lock cycle advanced status at `2026-07-19T23:52:45.061396Z`, with zero
+  candidates, zero frozen forward decisions before the boundary, and empty
+  stderr.
+- Online warm-ups are frozen at 30 M15 days, 120 H1 days, 400 H4 days, and 800
+  D1 days. These exceed all explicit lookbacks and avoid repeatedly requesting
+  eleven years of H1 history from the live terminal.
+- Tests: 5 passed. Ruff and Ruff format: passed.
+
+V29 writes append-only candidate facts only. It cannot place orders, calculate
+outcomes or P/L, authorize model training or Python predictions, or promote the
+underlying R1 pullback rule. MT5 remains replication evidence for this exact EA,
+not the preferred research-quality feed. Prospective validation, confirmation,
+shared-account economics, R4/R5 same-period coverage, and the 3-4 trades/day
+frequency proof remain open.
