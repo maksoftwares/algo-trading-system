@@ -7,14 +7,44 @@ on:
       - codex/xau-independent-specialists-v1
     paths:
       - .github/workflows/v23_sealed_dukascopy_acquisition.yml
+      - .github/scripts/acquire_v23_dukascopy_shard.py
 
 permissions:
   contents: read
 
 jobs:
-  acquire-sealed-confirmation-data:
+  acquire-sealed-confirmation-shards:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
 
     steps:
       - name: Enforce byte-stable checkout
@@ -37,7 +67,55 @@ jobs:
           python -m pip install
           -r xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/requirements.txt
 
-      - name: Acquire free sealed Dukascopy confirmation data
+      - name: Acquire free sealed Dukascopy shard
+        run: >-
+          python
+          .github/scripts/acquire_v23_dukascopy_shard.py
+          --shard-index ${{ matrix.shard }}
+          --shard-count 24
+
+      - name: Upload sealed source shard
+        uses: actions/upload-artifact@v4
+        with:
+          name: v23-dukascopy-shard-${{ matrix.shard }}
+          path: C:\DukascopyTickDataFoundationV1\raw\XAUUSD\year=2026\month=07
+          if-no-files-found: error
+          retention-days: 7
+
+  merge-and-verify-sealed-confirmation-data:
+    needs: acquire-sealed-confirmation-shards
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Enforce byte-stable checkout
+        shell: powershell
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+          git config --global core.longpaths true
+
+      - name: Check out locked research package
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install locked package dependencies
+        run: >-
+          python -m pip install
+          -r xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/requirements.txt
+
+      - name: Merge sealed source shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: v23-dukascopy-shard-*
+          path: C:\DukascopyTickDataFoundationV1\raw\XAUUSD\year=2026\month=07
+          merge-multiple: true
+
+      - name: Verify all files and sign the sealed source manifest
         run: >-
           python
           xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/download_sealed_dukascopy.py
