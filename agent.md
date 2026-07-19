@@ -6,7 +6,7 @@ Updated: `2026-07-19`
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
 - Current operational branch: `codex/xau-independent-specialists-v1`
-- Current pushed HEAD: `40d4f1c74dbb7932d5121090e30320ba997286b4`
+- Latest pushed research implementation checkpoint: `377d79f0a551b7f1754bc63da2c77896257d13df`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -400,6 +400,84 @@ Set-Location $repo
     active/stale logs, Python shadow status, and any mismatch. Do not change runtime
     behavior during this verification.
 
+## Frequency Expansion Checkpoint - 2026-07-19
+
+This checkpoint supersedes the earlier one-to-two-trades-per-weekday research target
+in this file. The current owner target is **three to four executed XAUUSD trades per
+weekday on average**, including zero-trade weekdays, without removing or weakening
+the frozen five-specialist Core. It remains a research target, not permission to
+force trades or authorize execution.
+
+### Frozen Core and corrected accounting
+
+- Core ledger remains exactly 1,249 rows with SHA-256
+  `fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372`.
+- `audited-common-dollar-frontier-v6` found that every R1 Core row lacks a normalized
+  R denominator. In the final 2025-07 through 2026-06 window, only 44 of 160 Core
+  rows, or 27.5%, have normalized R. Prior mixed Core-plus-Expansion R averages and
+  drawdowns silently omitted the other 116 rows and are not complete-account metrics.
+- V6 therefore uses every row's fixed-lot USD P&L and applies Expansion risk weights
+  explicitly. It verified exact Core ID, timestamp, direction, and USD P&L identity
+  in all imported V3/V4 combined ledgers.
+- Corrected final-window frontier:
+
+| Policy | Trades/day | Expansion USD | Expansion PF | Combined USD | Combined PF | Closed DD USD |
+|---|---:|---:|---:|---:|---:|---:|
+| Core only | 0.613 | 0.00 | n/a | 4,508.78 | 3.492 | 889.69 |
+| Core + V3 trend only | 1.391 | -1.34 | 0.999 | 4,507.45 | 2.489 | 860.76 |
+| Core + all V3 | 3.801 | -1,170.08 | 0.762 | 3,338.71 | 1.496 | 950.43 |
+| Core + V4 diagnostic | 1.425 | -163.90 | 0.866 | 4,344.88 | 2.432 | 893.69 |
+
+Decision: `EDGE_PRESERVING_FREQUENCY_TARGET_NOT_ACHIEVED`. The high-frequency
+policies preserve Core rows mechanically but do not preserve marginal expectancy.
+
+### Additional campaigns completed after the restart handoff
+
+1. `walkforward-regime-expert-expansion-v4`: exactly 1,000 causal adaptive policies.
+   Confirmation reached 3.188 combined trades/day with strong expectancy; final
+   expansion fell to 0.812/day, PF 0.674, and -0.173 R/trade. Rejected.
+2. `comex-short-horizon-expansion-v5`: 44,418 executable COMEX-plus-spot action
+   labels and exactly 1,000 policies using only local free data. Diagnostic final
+   result was 39 trades, PF 0.563, and -13.55 R. Rejected.
+3. `pullback-swing-replication-v7`: the strongest interpretable 2019-2026 executable
+   pattern was frozen before reverse-time replication. On 2016-2018 it produced 165
+   trades, PF 0.751, -USD 108.44, and both directions were negative. Rejected with
+   no same-version tuning.
+4. `interpretable-family-replication-v8`: family-wide executable screen and
+   Benjamini-Hochberg correction. Only two unique rules passed all four forward
+   development blocks; neither passed reverse-period economics and there were zero
+   FDR survivors. Rejected.
+5. A causal fixed-lot-dollar router diagnostic tested quarterly HGB dollar-return
+   regressors and a win-probability classifier. Several variants produced useful
+   frequency and PF above 1.3 before 2025-07, but every tested variant failed in the
+   final year; the best final PF was 0.879 and higher-frequency variants were near
+   PF 0.72-0.88. This rules out normalized-R target mismatch as the primary blocker.
+
+### Information boundary and next work
+
+- More executed trades are not required to train an ML ranker. The local research
+  set already contains 69,235 spot candidate-action labels and 44,418 COMEX
+  candidate-action labels, including rejected/no-trade counterfactual outcomes.
+- Do not retune the exhausted breakout/retest/action pool, lower score thresholds,
+  count multiple action labels as trades, split one economic signal into several
+  tickets, or force a daily quota. Those operations increase a counter, not edge.
+- Preserve the Core unchanged. Admit a new sleeve only when its standalone marginal
+  P&L is positive in independent evidence, its addition does not worsen account risk
+  beyond the locked budget, and it contributes genuinely independent entry events.
+- The defensible route to three-to-four executed trades/day now requires materially
+  new information or a broader tradable opportunity set: zero-cost primary depth,
+  causal options/skew data, synchronized executable multi-broker quotes, or owner
+  approval to broaden beyond one XAUUSD instrument. Existing spot bars, existing
+  COMEX M5/trade summaries, and the current candidate mechanics have been tested
+  through distinct deterministic and ML routes and do not support the target.
+- If XAUUSD-only remains mandatory and no new information source becomes available,
+  the evidence-supported frequency ceiling is lower than three trades/day. Do not
+  conceal this by weakening gates.
+
+All new V4-V8 work remains research-only. No Python prediction, EA consumption,
+demo, live, paid-data, broker action, runtime input, lot-size, guardian, account, or
+terminal change was authorized or made by these campaigns.
+
 ### Repository/worktree restart facts
 
 - Branch: `codex/xau-independent-specialists-v1`.
@@ -410,3 +488,362 @@ Set-Location $repo
 - `agent.md` itself contains the prior uncommitted July 15 restart handoff plus this
   July 19 supersession. Commit only this file when preserving the handoff; do not
   stage unrelated runtime outputs or research directories.
+
+## Frequency Generalization Reset - 2026-07-19
+
+This section supersedes the V8-era next-work language immediately above. The
+owner target remains **three to four combined executed XAUUSD trades per weekday
+on average**, including zero-trade weekdays, without changing the frozen Core.
+The target has been solved mechanically but has **not** been solved economically
+or authorized for execution.
+
+### V7-V11 causal frequency-control evidence
+
+1. `adaptive-frequency-credit-controller-v7` tested 240 locked causal credit
+   policies. None passed validation; the best reached only 2.714 combined trades
+   per weekday. Decision: `ADAPTIVE_FREQUENCY_CREDIT_V7_REJECTED_AT_VALIDATION`.
+2. `rolling-frequency-ceiling-controller-v8` tested 480 locked rolling-window
+   policies. None passed validation; the best reached 2.994/day and exceeded the
+   stress drawdown gate. Decision:
+   `ROLLING_FREQUENCY_CEILING_V8_REJECTED_AT_VALIDATION`.
+3. `periodic-frequency-budget-controller-v9` tested 480 natural-period policies.
+   None passed validation; repeated reset deficits limited the best result to
+   2.988/day. Decision: `PERIODIC_FREQUENCY_BUDGET_V9_REJECTED_AT_VALIDATION`.
+4. `startup-reserve-frequency-budget-v10` tested 600 half-year reserve policies.
+   None passed validation; changing the startup reserve did not remove recurring
+   reset deficits. Decision:
+   `STARTUP_RESERVE_FREQUENCY_BUDGET_V10_REJECTED_AT_VALIDATION`.
+5. `balanced-periodic-frequency-budget-v11` tested 520 locked rate/reserve pairs.
+   Nineteen passed validation and advanced unchanged. All 19 failed confirmation,
+   but they did hold confirmation frequency near 3.95-4.00/day with venue PF near
+   1.88-1.92 and stress PF near 1.38-1.40. The universal blocker was stress
+   drawdown near 114R. Attribution showed the mandatory V4 base alone had 670
+   trades, PF 1.440, +169.97R, and 97.94R drawdown; therefore the 75R gate was
+   impossible while that base remained mandatory. Decision:
+   `BALANCED_PERIODIC_FREQUENCY_BUDGET_V11_REJECTED_AT_CONFIRMATION`.
+
+These campaigns show that a quota or rate controller cannot create edge. They
+also provide reusable causal frequency-ceiling infrastructure.
+
+### V12 result: frequency achieved, final economics failed
+
+`causal-expansion-health-circuit-v12` made the expansion base risk-controlled
+while preserving every Core row. It tested exactly 912 locked policies. There
+were 304 validation passers and 76 confirmation passers. One unchanged policy,
+`EEP0028__PH__R325__B75__H30__C40__SA`, opened the single sealed final window.
+
+| Stage | Combined trades/day | Expansion venue PF | Expansion stress PF | Stress DD R | Gate |
+|---|---:|---:|---:|---:|---|
+| Validation | 3.006 | 1.861 | 1.317 | 86.09 | PASS |
+| Confirmation | 3.751 | 2.449 | 1.859 | 38.34 | PASS |
+| Final, 2025-07-01 to 2026-07-01 | 3.471 | 0.869 | 0.763 | 144.52 | FAIL |
+
+- Core identity remained exact: 1,249 rows and SHA-256
+  `fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372`.
+- The final expansion had 746 trades, venue net -67.14R and stress net -128.45R.
+- The base sleeve was independently negative: 556 trades, venue PF 0.885 and
+  stress PF 0.798.
+- The add-on sleeve was independently negative: 190 trades, venue PF 0.821 and
+  stress PF 0.656.
+- Final positive rolling six-month share was zero. The drawdown covered almost
+  the full final year, so this was broad family failure rather than one isolated
+  session or month.
+- Core itself remained profitable, but the expansion reduced its common-dollar
+  PF ratio to 0.905 venue and 0.898 stress. Edge preservation therefore failed.
+- Decision: `CAUSAL_EXPANSION_HEALTH_CIRCUIT_V12_REJECTED_AT_FINAL`.
+- Result SHA-256:
+  `1262fedfffd95602b400e68f9ab3c697a8a2bc9bf79538d5e81cd6dde66978ed`.
+- Manifest SHA-256:
+  `0ee30a7d3f33806a5825b67bbb11c809c55a5a988e8dd71b1f8c47719055dcae`.
+
+The final window is now exposed development evidence. It may be used to explain
+or reject a future design, but it can never again authorize a tuned version.
+
+### V13 orthogonal research reset
+
+`orthogonal-frequency-program-v13` is the authoritative next-research contract.
+It was locked before the next market week and does not authorize execution.
+
+- All data through 2026-07-19 is development evidence.
+- Forward-only shadow evidence starts at 2026-07-20 00:00 UTC.
+- Core filtering and resizing are forbidden.
+- `BREAK_AND_RUN`, `DOWNSIDE_IMPULSE_RETEST`, and
+  `OPENING_RANGE_REVERSAL` are retired from same-family optimization. Their
+  labels remain useful negative evidence.
+- Six independent research lanes are registered: auction displacement/reclaim,
+  anchored-flow reversion, multi-scale continuation, independent compression
+  release, cross-venue dislocation, and event aftermath.
+- Historical work advances through an additive frequency ladder. No sleeve is
+  weakened to raise frequency, no daily floor is allowed, and zero-trade days
+  remain valid.
+- The first ML role remains candidate ranking, calibration, routing, or veto for
+  Satellite candidates. It cannot generate entries or suppress Core trades.
+- Historical passage nominates only a shadow candidate. An unchanged version
+  still needs post-freeze forward evidence and exact MT5 reproduction.
+- Contract tests: 3 passed. Ruff: passed.
+- Config SHA-256:
+  `107bccc71d16503ec21c80ccc31dcc68ba1d06ffc0fe908f41e9360b167fb11e`.
+- Preregistration SHA-256:
+  `9e03dcb51da9507d4b9850e7e549282febd02d03fa57c2a0a94e520b44867cd6`.
+
+### Restart instruction
+
+Do not resume V4-V12 threshold, quota, cooldown, or same-family ranker tuning.
+Resume from V13. Preserve Core, build distinct event clocks, reject new sleeves
+quickly on historical and cross-feed evidence, and begin collecting the locked
+post-2026-07-20 forward shadow stream. No runtime, terminal, account, guardian,
+lot-size, EA, demo, or live setting was changed by V7-V13.
+
+## V14-V17 Orthogonal Research Results - 2026-07-19
+
+Four additional preregistered campaigns were completed without changing the
+frozen Core or any trading runtime.
+
+1. `trend-passive-pullback-campaign-v14` tested exactly 1,000 locked passive
+   trend-entry policies. None passed the V13 admission gates. The family is
+   rejected for same-version tuning.
+2. `trend-failure-transition-campaign-v15` tested exactly 1,000 locked trend
+   failure and transition policies. None passed. Result SHA-256:
+   `a53b0edc97a72e243f41dca1fa728430518a2bd242c38e06a757a60ef2fdf9e9`.
+3. `causal-crossvenue-ranker-v16` generated 56,124 independent PAXG tail-entry
+   events and 110,584 side-correct XAU action labels. Ten causal quarterly
+   rankers and exactly 1,000 locked policies were evaluated across four yearly
+   gates. Although 119 policies maintained three-to-four trades/day in every
+   yearly block, no policy was profitable: the best frequency-valid stress PF
+   was 0.755 and the best venue PF was 0.800. Decision:
+   `NO_V16_HISTORICAL_ADMISSION_SURVIVOR`. Result SHA-256:
+   `c4c13b2a1cf17621092c516163f3313547a2a56b70b8273d23e66d296811f579`.
+4. `causal-crossvenue-reversion-v17` was locked as the exact opposite-direction
+   mirror of V16 before outcomes were evaluated. It also tested exactly 1,000
+   policies and produced no survivor; its best frequency-valid stress PF was
+   0.712. Decision: `NO_V17_HISTORICAL_ADMISSION_SURVIVOR`. Result SHA-256:
+   `022b8062503b9a4001c4ebd4409a9223cb02897b5d478ed13edbc5c53dd51910`.
+
+The matched V16/V17 audit found only USD 0.020 average directional information
+per action versus USD 0.404 native round-trip drag before ticket cost and stress.
+Both directions therefore fail for structural economic reasons. Retire the full
+PAXG tail-event lane; do not rescue it with thresholds, ML variants, or passive
+entry assumptions.
+
+## Permanent Anti-Overfitting Protocol
+
+The owner's anti-overfitting requirement is a hard constraint. Literal zero
+overfitting cannot be proven statistically, so every claim must instead satisfy
+all of these controls:
+
+- Freeze each hypothesis, event clock, feature set, label, execution rule, cost
+  model, split, metric, and pass/fail gate before reading its outcome.
+- Use only causal features and purged chronological walk-forward evaluation.
+  Random row splits and shuffled time-series validation are forbidden.
+- A failed sealed stage permanently becomes development evidence. It cannot be
+  reused as an untouched holdout or tuned until it passes.
+- Count and disclose every attempted policy and family. Correct family-wide
+  statistical claims for multiple testing; Holm is the default locked method.
+- Do not select a strategy because one recent period, direction, regime, session,
+  broker feed, or P&L chart looks attractive. Require positive marginal economics,
+  yearly and rolling stability, cost stress, and cross-feed consistency.
+- Never weaken a threshold, add a filter, alter a label, or change a time window
+  after seeing holdout P&L under the same campaign version. A materially new idea
+  needs a new preregistration and a later untouched evaluation period.
+- Historical passage can nominate only a research-shadow candidate. Execution
+  still requires unchanged post-2026-07-20 forward evidence and exact MT5
+  reproduction. No historical result alone authorizes demo or live use.
+- Preserve all rejected results as negative evidence. Do not silently discard
+  failures, cherry-pick survivors, or report overlapping action labels as extra
+  independent trades.
+
+The next step is an edge-density audit of prior independent mechanisms, followed
+by one preregistered high-displacement lane chosen from mechanism-level evidence,
+not from a profitable-looking parameter combination.
+
+## V18-V19 Edge-Density And Dependence Audits - 2026-07-19
+
+`mechanism-edge-density-audit-v18` was locked before opening its common-horizon
+outcomes. It compared 103,590 registered events from 12 sources and 31 families
+on one exact Dukascopy Bid/Ask surface. Every prescribed direction and exact
+mirror was measured at 30, 60, 180, 720, and 1,440 minutes with ticket, holding,
+and 0.05-ATR stress costs. There were 101,376 aligned events and 673,214 valid
+markout rows. Holm correction included every family, direction, and horizon.
+
+- Contract SHA-256:
+  `fa1eed9ba60f7be339c66f8c435050c32c06687f69c593f184c7f8f1e15a9ae8`.
+- Decision: `V18_NO_BROAD_ECONOMIC_LANE`.
+- No family passed the additive or full-frequency diagnostic at three of five
+  fixed horizons.
+- Break-and-run at 60/180 minutes and downside-retest at 60 minutes looked
+  profitable in pooled history, but both collapsed in the 2025-2026 era. These
+  are not candidates and remain retired.
+- No family/direction/horizon with at least four eligible eras was profitable in
+  every era. The apparent pooled edges were nonstationary.
+- Result SHA-256:
+  `77bc7a88e8434112ebb396a4d50e222859970aec684554fbfe818ca1f4a2bcfb`.
+
+`episode-independence-audit-v19` then tested one outcome-blind dependence rule:
+only the first signal in each contiguous same-family, same-direction M5 state was
+retained. It had no cooldown grid, family exception, or outcome filter.
+
+- Contract SHA-256:
+  `979bf84196ffea856ff2055f7210cc3d6a0b2171d3f93fdeed1241989a280b81`.
+- 101,165 recoverable V18 event IDs became 97,245 episode starts; only 3,920
+  signals, or 3.9%, were removed. Repeated contiguous bars were not the main
+  failure.
+- V19 required stress PF >=1.05 in every eligible July-to-July era, at least four
+  eras, positive total expectancy, cost coverage above one, and Holm-adjusted
+  weekly p <=0.10.
+- Decision: `V19_NO_STRICT_EPISODE_LANE`. There were zero additive and zero
+  full-gap broad families.
+- The strongest minimum-era PF was 1.116 for a sparse 12-hour compression clock,
+  but it ran at only about 0.105 episodes/day and failed corrected significance.
+  Compression is already represented in Core and this fragment is not additive
+  qualification evidence.
+- Result SHA-256:
+  `df5bc75c01de62d088a0eb5228deedaf2dfb12054dafc2c51df4b4d183e6115d`.
+
+The available spot, PAXG, COMEX summary, macro, auction, VWAP, compression, and
+session event clocks have now failed both common-horizon economic feasibility and
+strict episode-independence checks. Do not reopen them with new thresholds,
+cooldowns, directions, horizons, or ML rankers. The remaining route requires a
+genuinely new causal information set, a broader tradable opportunity set, or
+untouched post-2026-07-20 forward evidence. Core remains byte-identical and no
+runtime, account, terminal, EA, model, demo, live, or broker setting was changed.
+
+## V20 Oracle Mixture Feasibility - 2026-07-19
+
+`oracle-mixture-feasibility-v20` was locked before its outcome coefficients were
+opened. It is an optimistic fractional linear-program upper bound, not a
+strategy or backtest. One global set of nonnegative weights was required to add
+2.387-3.387 satellite episodes per weekday and maintain positive stress P&L and
+stress PF >=1.05 in every July-to-July era from 2016-2017 through 2025-2026.
+
+- Contract SHA-256:
+  `bdc4e74a59acbc013128a4df31cb4efb309582a7517c66f627164a1871984e91`.
+- It evaluated 2,120 era coefficients from 31 families and 212
+  family/horizon/direction sleeves.
+- Mechanical frequency alone was feasible but lost USD 2.336 per weekday in
+  its worst era and had minimum era PF 0.582.
+- The optimistic family-constrained oracle was feasible only when globally
+  hindsight-selected mirror directions were permitted. It projected 3.00-4.00
+  combined trades/day, minimum era PF 1.05, and worst-era stress net USD 0.552
+  per weekday. This is in-sample arithmetic and is not admissible evidence.
+- The prescribed-direction, family-constrained economic problem was infeasible.
+- Decision: `V20_ONLY_ORACLE_DIRECTION_RELAXATION_FEASIBLE`.
+- Result SHA-256:
+  `9089a9a5900110b1aefc84eec57b5be8812d7b68306b91e91895b449609e8a9d`.
+
+Do not trade, admit, or hand-code the V20 oracle weights. They select direction
+and horizon after seeing all ten years and would overfit by construction. The
+only defensible continuation is a separately frozen causal direction-routing
+diagnostic using information known at the event timestamp, followed by unchanged
+post-2026-07-20 forward shadow evidence. A historical diagnostic can reject that
+architecture but cannot authorize it. Core and all runtime settings remain
+unchanged.
+
+## V21 Causal Event Action Router - 2026-07-19
+
+`causal-event-action-router-v21` tested the V20 direction-routing hypothesis once
+under a locked, low-complexity protocol. It used exactly the completed M5 bar
+before entry, timestamp-normalized sample weights, L2 logistic regression with
+fixed `C=0.05`, one-hour stress labels, one action per entry timestamp, six purged
+expanding walk-forward folds, and prior-year score-only frequency calibration.
+There was no model, feature, threshold, or horizon grid.
+
+- Contract SHA-256:
+  `d10f8cb663837d7be64215f0552f9e3f2efc3db28f6e54ee9b467b3df9aff7b9`.
+- All 190,598 action rows aligned to the exact completed prior M5 bar; feature
+  coverage was 100% with a fixed five-minute lag.
+- Test AUC remained above 0.50 in all six folds, ranging from 0.519 to 0.569.
+- The first five test years were profitable, with stress PF from 1.305 to 1.689.
+- The newest 2025-2026 fold failed decisively: 803 actions, 3.077/day, stress net
+  -USD 1,283.62, PF 0.790, closed drawdown USD 1,565.11, and win rate 45.33%.
+- Aggregate: 5,057 actions, 3.231/day, stress net USD 2,733.88, PF 1.196,
+  closed drawdown USD 1,745.66, and 65.15% positive rolling six-month windows.
+  It failed the locked PF 1.20, drawdown USD 1,733.37, rolling 70%, per-fold
+  economics, frequency, and overlap gates.
+- Selection was not genuinely diversified. In every fold, 93% or more of actions
+  came from the already retired `SPOT_DOWNSIDE_IMPULSE_RETEST` and
+  `SPOT_BREAK_AND_RUN` clocks. In 2025-2026 those two clocks accounted for every
+  selected action and both lost money.
+- Decision: `V21_HISTORICAL_ARCHITECTURE_DIAGNOSTIC_FAIL`.
+- Result SHA-256:
+  `169b39781cb567da459d267d7c4d508c74a74a08c74aa9542ab846860a23e64d`.
+
+V21 is retired without rescue tuning. Do not add a family cap, shorten the
+retraining interval, alter regularization, add a regime filter, or change the
+threshold under V21: all would be responses to the exposed 2025-2026 result.
+Those two high-volume clocks must not be reopened under another historical ML
+wrapper. Any materially new architecture must preregister genuinely new causal
+information and remains development-only until unchanged forward evidence exists.
+No Python prediction, EA consumption, demo, live, runtime, terminal, account,
+guardian, lot-size, or broker action was authorized or changed by V18-V21.
+
+## V22-V23 Fresh Cross-Venue Evidence - 2026-07-19
+
+This work used a new Capital millisecond quote stream and free Dukascopy ticks.
+It did not change the frozen Core, any MT5 attachment, runtime input, account,
+guardian, lot size, or execution authorization.
+
+1. `capital-dukas-crossvenue-foundation-v22` failed closed before pairing because
+   the first five Capital daily files did not contain tick fields. The failure is
+   preserved; V22 was not edited after lock.
+2. `capital-dukas-crossvenue-foundation-v22-1` corrected only the source start to
+   2026-05-27. It produced 346,160 backward-only pairs from 356,159 unique Capital
+   quotes across 28 active UTC dates, with 97.19% coverage. Paired artifact SHA-256:
+   `6eefecfdaa569d3c6a7ea6a518506f1893a23ea6e06efef3814ba13896c5a4fb`.
+   Contract SHA-256:
+   `0190d0f8bb42848073e6cf3646743505980174f0fb7d8fed2dff6e0dd6770e7c`.
+3. The timing audit proved the logger has no local millisecond receipt clock.
+   `TimeCurrent` versus `TimeGMT` is not a stable latency measure. Same-timestamp
+   or millisecond arbitrage claims are forbidden. Subsequent work used Dukascopy
+   data at least 15 seconds old and the first strictly later Capital quote.
+4. `capital-dukas-lagged-opportunity-audit-v22-2` opened no future P&L. At the
+   strictest frozen threshold it still found 15 validation candidates/day at a
+   15-second lag, 12.42/day at 20 seconds, and 10/day at 30 seconds. Candidate
+   abundance therefore passed mechanically but failed its intended 2-4/day
+   structure gate. Decision: `V22_2_OPPORTUNITY_STRUCTURE_FAIL`. Opportunity
+   artifact SHA-256:
+   `9bc1a8ee73a17844c78bbbb834e11bfe99fc29c324de181276f6f93b9ae64b35`.
+5. V23 registered one economic hypothesis before outcomes: convergence toward the
+   causal two-hour basis after a same-direction one-minute Dukascopy impulse, fixed
+   five-minute hold, strict later Capital fills, real bid/ask, 0.05 adverse price
+   slippage per side, and 0.15 stress slippage per side. There was no model,
+   threshold grid, direction grid, or horizon grid. Contract SHA-256:
+   `2a3f6d996bd85378d7461d6f6c444b49b717eb9fe7f300048b671390f4a898d3`.
+6. Free July Dukascopy acquisition was attempted only after lock. Local and clean
+   GitHub runners received official-source HTTP 503 responses. GitHub Actions runs
+   `29697538248`, `29697607811`, and `29698092570` are transport-failure evidence;
+   no paid source was used and no July economic outcome was opened.
+7. July confirmation was not needed because V23 failed its preregistered
+   development gate first:
+
+| Safety lag | Trades/day | Trades | Base net USD | Base PF | Stress PF |
+|---:|---:|---:|---:|---:|---:|
+| 15 seconds | 16.091 | 354 | -54.50 | 0.918 | 0.821 |
+| 20 seconds | 13.227 | 291 | -98.63 | 0.836 | 0.752 |
+| 30 seconds | 11.227 | 247 | -171.25 | 0.704 | 0.637 |
+
+The frozen development gate required positive net and PF at least 1.05. Both
+primary checks failed. Decision:
+`V23_DEVELOPMENT_GATE_FAIL_NO_CONFIRMATION_REQUIRED`. Audit SHA-256:
+`e6b5b0e1f3cdc3fe653e784833f4676faf293641107871221bb245d9b8e5b4df`.
+The reporting package is
+`xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23-postlock-audit/`.
+
+V23 is terminal. Do not reverse it, alter its hold, costs, lag, threshold,
+session, direction, or filters after seeing this result. A successor must use a
+materially new mechanism, receive a new preregistration, count as another attempt,
+and require untouched post-2026-07-20 evidence.
+
+### Next outcome-independent information lane
+
+The `ProspectiveCollector` millisecond Capital demo tick file for 2026-07-17 has
+159,949 rows from 12:49:00 to 20:58:56 UTC, 158,127 unique millisecond timestamps,
+a 123 ms median inter-update gap, and a 1,093.53 ms 99th-percentile gap. This can
+support a quote-update microstructure candidate stream after deterministic
+deduplication. The corresponding book files contain only headers, so no depth or
+order-book imbalance claim is currently supportable.
+
+Past telemetry may be used only for outcome-blind schema checks, causal feature
+scaling, and candidate-frequency calibration. Freeze any microstructure event
+definition before reading its future returns. All outcomes from 2026-07-20 onward
+must remain untouched forward evidence, and historical passage still cannot
+authorize Python prediction, EA consumption, demo, live, or broker action.
