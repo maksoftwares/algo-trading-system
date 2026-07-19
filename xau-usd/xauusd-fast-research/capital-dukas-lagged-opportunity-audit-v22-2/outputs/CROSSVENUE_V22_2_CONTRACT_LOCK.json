@@ -1,0 +1,114 @@
+{
+  "contract_sha256": "0e8a288297d2ceb18338a0f25877da08c73445c1314af01ff018fed2f171c8ee",
+  "data_quality": {
+    "calibration_full_weekdays": 10,
+    "maximum_safe_snapshot_delay_ms": 10000,
+    "minimum_paired_quotes_per_full_day": 10000,
+    "weekday_only": true
+  },
+  "entry_fills_authorized": false,
+  "execution_authorized": false,
+  "exits_authorized": false,
+  "feature": {
+    "baseline_min_observations": 360,
+    "baseline_window_minutes": 120,
+    "gap_reset_minutes": 15,
+    "impulse_lookback_ms": 60000,
+    "maximum_capital_spread_price": 0.75,
+    "minimum_impulse_spread_multiple": 1.0,
+    "minimum_residual_spread_multiple": 1.5,
+    "minimum_robust_scale_price": 0.05,
+    "primary_safety_lag_ms": 15000,
+    "robustness_safety_lags_ms": [
+      20000,
+      30000
+    ]
+  },
+  "frequency": {
+    "calibration_target_candidates_per_day": 2.8,
+    "cooldown_minutes": 20,
+    "robustness_max_candidates_per_day": 6.0,
+    "robustness_min_candidates_per_day": 1.5,
+    "validation_max_candidates_per_day": 4.0,
+    "validation_min_active_day_share": 0.7,
+    "validation_min_candidates_per_day": 2.0,
+    "validation_min_minority_direction_share": 0.2,
+    "z_threshold_grid": [
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.5,
+      4.0
+    ]
+  },
+  "future_prices_authorized": false,
+  "labels_authorized": false,
+  "opportunity_frequency_only": true,
+  "package_files": [
+    {
+      "bytes": 496,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/README.md",
+      "sha256": "dd848ae7ed94782d261a81012d26aaa73036e1ccf2c0aa8e5ee31c678313d804"
+    },
+    {
+      "bytes": 2362,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/PREREGISTRATION.md",
+      "sha256": "faaba7f4c289bbb3615a8d84ab0fa0411ae5f701d413d897395abd85f6a946b4"
+    },
+    {
+      "bytes": 21,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/requirements.txt",
+      "sha256": "d932106411c00b96f329d90c30043419fe8892bbccb59d7deaaeb28d7d172176"
+    },
+    {
+      "bytes": 3027,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/config/capital_dukas_lagged_opportunity_audit_v22_2.json",
+      "sha256": "e6fe327dc7e2bad641f675017239d8351f756dcb8b34eaefe4b8fb4bdd512b8f"
+    },
+    {
+      "bytes": 62,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/src/__init__.py",
+      "sha256": "a45d3a6eeb223c1eb3e3b71a855fd8b6fc647b72f9cd693adf32d334fb49863d"
+    },
+    {
+      "bytes": 21857,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/src/opportunity.py",
+      "sha256": "aa1424b1033b35c9e38f81492eb95a8a30ddaa9f85a5283d3a1aa71e6d17d42e"
+    },
+    {
+      "bytes": 5101,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/lock_contract.py",
+      "sha256": "128cf92645f2841d744f18bed29fba3f918f6de01c05d765594fa139d3012bea"
+    },
+    {
+      "bytes": 3143,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/run_audit.py",
+      "sha256": "89e21d550b0f187111538430a0c026ba47c28229363ba19b0fa9a6f852d4681d"
+    },
+    {
+      "bytes": 3796,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/tests/test_opportunity.py",
+      "sha256": "e0f0a45d1657245b0880a217a483e654e3f54c3b2ade14093a4efbb0ee9328ad"
+    }
+  ],
+  "pnl_authorized": false,
+  "schema_version": "xauusd_capital_dukas_lagged_opportunity_audit_v22_2",
+  "strategy_admission_authorized": false,
+  "upstream": {
+    "foundation_contract": "../capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_CONTRACT_LOCK.json",
+    "foundation_contract_id": "0190d0f8bb42848073e6cf3646743505980174f0fb7d8fed2dff6e0dd6770e7c",
+    "foundation_contract_sha256": "24505a92b3974e539468aaceeb202793a2ba79622ef547727b7ee9275965e114",
+    "paired_quotes": "../capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_PAIRED_QUOTES.parquet",
+    "paired_quotes_sha256": "6eefecfdaa569d3c6a7ea6a518506f1893a23ea6e06efef3814ba13896c5a4fb",
+    "timing_limitation": "../capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_TIMING_LIMITATION.json",
+    "timing_limitation_sha256": "479657e00b02c80f0919f08eb2e552a465f68c1ec2324166f20e1f681786a4a0"
+  },
+  "window": {
+    "end_exclusive_utc": "2026-07-01T00:00:00Z",
+    "start_inclusive_utc": "2026-05-27T00:00:00Z"
+  }
+}

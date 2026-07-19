@@ -1,0 +1,109 @@
+{
+  "schema_version": "xauusd_capital_dukas_lagged_economic_test_v23",
+  "development": {
+    "paired_quotes": "../capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_PAIRED_QUOTES.parquet",
+    "paired_quotes_sha256": "6eefecfdaa569d3c6a7ea6a518506f1893a23ea6e06efef3814ba13896c5a4fb",
+    "opportunities": "../capital-dukas-lagged-opportunity-audit-v22-2/outputs/CROSSVENUE_V22_2_OPPORTUNITIES.parquet",
+    "opportunities_sha256": "9bc1a8ee73a17844c78bbbb834e11bfe99fc29c324de181276f6f93b9ae64b35"
+  },
+  "locked_modules": {
+    "foundation_module": "../capital-dukas-crossvenue-foundation-v22-1/src/foundation.py",
+    "foundation_module_sha256": "d52583ca14691e62307e2aad149e4b37ead823ad8d969afad817b1e4ab61603a",
+    "opportunity_module": "../capital-dukas-lagged-opportunity-audit-v22-2/src/opportunity.py",
+    "opportunity_module_sha256": "aa1424b1033b35c9e38f81492eb95a8a30ddaa9f85a5283d3a1aa71e6d17d42e",
+    "opportunity_contract": "../capital-dukas-lagged-opportunity-audit-v22-2/outputs/CROSSVENUE_V22_2_CONTRACT_LOCK.json",
+    "opportunity_contract_file_sha256": "d600cfc706f5073efcfe87c873b8a4bbad2aac66a5be8a63161855d92ea422b4",
+    "opportunity_contract_id": "0e8a288297d2ceb18338a0f25877da08c73445c1314af01ff018fed2f171c8ee"
+  },
+  "confirmation": {
+    "start_inclusive_utc": "2026-07-01T00:00:00Z",
+    "end_exclusive_utc": "2026-07-18T00:00:00Z",
+    "capital_directory": "C:/MT5PortableSpreadLogger/MQL5/Files",
+    "capital_filename_prefix": "spread_log_121409_Capital.ComMena-Live_XAUUSD_",
+    "capital_account": 121409,
+    "capital_server": "Capital.ComMena-Live",
+    "capital_symbol": "XAUUSD",
+    "capital_maximum_seconds_since_tick": 1,
+    "capital_manifest": "outputs/CROSSVENUE_V23_CAPITAL_SOURCE_MANIFEST.json",
+    "dukascopy_directory": "C:/DukascopyTickDataFoundationV1/raw/XAUUSD",
+    "dukascopy_symbol": "XAUUSD",
+    "dukascopy_price_divisor": 1000,
+    "dukascopy_multiplier": 0.001,
+    "dukascopy_maximum_backward_quote_age_ms": 2000,
+    "dukascopy_manifest": "outputs/CROSSVENUE_V23_DUKAS_SOURCE_MANIFEST.json",
+    "free_url_template": "https://datafeed.dukascopy.com/datafeed/XAUUSD/{year}/{zero_based_month}/{day}/{hour}h_ticks.bi5"
+  },
+  "data_quality": {
+    "weekday_only": true,
+    "minimum_paired_quotes_per_full_day": 10000,
+    "maximum_safe_snapshot_delay_ms": 10000
+  },
+  "feature": {
+    "primary_safety_lag_ms": 15000,
+    "robustness_safety_lags_ms": [20000, 30000],
+    "impulse_lookback_ms": 60000,
+    "baseline_window_minutes": 120,
+    "baseline_min_observations": 360,
+    "gap_reset_minutes": 15,
+    "minimum_robust_scale_price": 0.05,
+    "maximum_capital_spread_price": 0.75,
+    "minimum_residual_spread_multiple": 1.5,
+    "minimum_impulse_spread_multiple": 1.0
+  },
+  "candidate": {
+    "z_threshold": 4.0,
+    "cooldown_minutes": 20
+  },
+  "simulation": {
+    "hold_seconds": 300,
+    "maximum_entry_delay_ms": 10000,
+    "maximum_exit_delay_ms": 10000,
+    "base_slippage_per_side_price": 0.05,
+    "stress_slippage_per_side_price": 0.15,
+    "reference_lot": 0.01,
+    "dollars_per_price_unit": 1.0,
+    "overlap_policy": "SKIP"
+  },
+  "gates": {
+    "development_min_profit_factor": 1.05,
+    "development_require_positive_net": true,
+    "confirmation_min_trades": 80,
+    "confirmation_min_trades_per_full_weekday": 8.0,
+    "confirmation_max_trades_per_full_weekday": 20.0,
+    "confirmation_min_profit_factor": 1.2,
+    "confirmation_stress_min_profit_factor": 1.05,
+    "confirmation_require_positive_net": true,
+    "confirmation_min_profitable_day_share": 0.5,
+    "confirmation_max_closed_trade_drawdown_dollars": 200.0,
+    "confirmation_min_recovery_factor": 1.0,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2301,
+    "daily_bootstrap_lower_quantile": 0.1,
+    "daily_bootstrap_require_lower_bound_positive": true,
+    "clock_robustness_min_profit_factor": 1.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CROSSVENUE_V23_CONTRACT_LOCK.json",
+    "confirmation_paired_quotes": "CROSSVENUE_V23_CONFIRMATION_PAIRED_QUOTES.parquet",
+    "candidates": "CROSSVENUE_V23_CANDIDATES.parquet",
+    "trades": "CROSSVENUE_V23_TRADES.parquet",
+    "metrics": "CROSSVENUE_V23_METRICS.csv",
+    "daily_pnl": "CROSSVENUE_V23_DAILY_PNL.csv",
+    "audit_json": "CROSSVENUE_V23_AUDIT.json",
+    "audit_markdown": "CROSSVENUE_V23_AUDIT.md",
+    "artifact_manifest": "CROSSVENUE_V23_ARTIFACT_MANIFEST.json"
+  },
+  "research_controls": {
+    "single_preregistered_economic_test": true,
+    "july_dukascopy_must_be_absent_before_lock": true,
+    "same_version_tuning_authorized": false,
+    "strategy_admission_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

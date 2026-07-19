@@ -1,0 +1,144 @@
+{
+  "candidate": {
+    "cooldown_minutes": 20,
+    "z_threshold": 4.0
+  },
+  "capital_file_count": 17,
+  "capital_source_manifest": {
+    "bytes": 4463,
+    "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/outputs/CROSSVENUE_V23_CAPITAL_SOURCE_MANIFEST.json",
+    "sha256": "e830f765906275ddeaeaa879ca353151991a6e40a6345a4dfee2fb0f3bfd314e"
+  },
+  "capital_source_manifest_self_hash": "950b63340330deb6a15c0764b9f982d002cfff5bebb3dda334ded1d660084ded",
+  "config_file": {
+    "bytes": 4893,
+    "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/config/capital_dukas_lagged_economic_test_v23.json",
+    "sha256": "97c55774d367afb2d65387c2540320569e7695ed36264546db2b52065e780876"
+  },
+  "confirmation_window": {
+    "end_exclusive_utc": "2026-07-18T00:00:00Z",
+    "start_inclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "contract_sha256": "2a3f6d996bd85378d7461d6f6c444b49b717eb9fe7f300048b671390f4a898d3",
+  "dukascopy_expected_file_count": 408,
+  "execution_authorized": false,
+  "feature": {
+    "baseline_min_observations": 360,
+    "baseline_window_minutes": 120,
+    "gap_reset_minutes": 15,
+    "impulse_lookback_ms": 60000,
+    "maximum_capital_spread_price": 0.75,
+    "minimum_impulse_spread_multiple": 1.0,
+    "minimum_residual_spread_multiple": 1.5,
+    "minimum_robust_scale_price": 0.05,
+    "primary_safety_lag_ms": 15000,
+    "robustness_safety_lags_ms": [
+      20000,
+      30000
+    ]
+  },
+  "gates": {
+    "clock_robustness_min_profit_factor": 1.0,
+    "confirmation_max_closed_trade_drawdown_dollars": 200.0,
+    "confirmation_max_trades_per_full_weekday": 20.0,
+    "confirmation_min_profit_factor": 1.2,
+    "confirmation_min_profitable_day_share": 0.5,
+    "confirmation_min_recovery_factor": 1.0,
+    "confirmation_min_trades": 80,
+    "confirmation_min_trades_per_full_weekday": 8.0,
+    "confirmation_require_positive_net": true,
+    "confirmation_stress_min_profit_factor": 1.05,
+    "daily_bootstrap_lower_quantile": 0.1,
+    "daily_bootstrap_require_lower_bound_positive": true,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2301,
+    "development_min_profit_factor": 1.05,
+    "development_require_positive_net": true
+  },
+  "july_dukascopy_absent_at_lock": true,
+  "locked_inputs": {
+    "foundation_module": "../capital-dukas-crossvenue-foundation-v22-1/src/foundation.py",
+    "foundation_module_sha256": "d52583ca14691e62307e2aad149e4b37ead823ad8d969afad817b1e4ab61603a",
+    "opportunities": "../capital-dukas-lagged-opportunity-audit-v22-2/outputs/CROSSVENUE_V22_2_OPPORTUNITIES.parquet",
+    "opportunities_sha256": "9bc1a8ee73a17844c78bbbb834e11bfe99fc29c324de181276f6f93b9ae64b35",
+    "opportunity_contract": "../capital-dukas-lagged-opportunity-audit-v22-2/outputs/CROSSVENUE_V22_2_CONTRACT_LOCK.json",
+    "opportunity_contract_file_sha256": "d600cfc706f5073efcfe87c873b8a4bbad2aac66a5be8a63161855d92ea422b4",
+    "opportunity_contract_id": "0e8a288297d2ceb18338a0f25877da08c73445c1314af01ff018fed2f171c8ee",
+    "opportunity_module": "../capital-dukas-lagged-opportunity-audit-v22-2/src/opportunity.py",
+    "opportunity_module_sha256": "aa1424b1033b35c9e38f81492eb95a8a30ddaa9f85a5283d3a1aa71e6d17d42e",
+    "paired_quotes": "../capital-dukas-crossvenue-foundation-v22-1/outputs/CROSSVENUE_V22_1_PAIRED_QUOTES.parquet",
+    "paired_quotes_sha256": "6eefecfdaa569d3c6a7ea6a518506f1893a23ea6e06efef3814ba13896c5a4fb"
+  },
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 457,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/README.md",
+      "sha256": "16de32a6fd82aebd247a2b3625ba4734ec62d3ad91cfd86539d059f57bb9da87"
+    },
+    {
+      "bytes": 3212,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/PREREGISTRATION.md",
+      "sha256": "164c6a130754d52cea69b9f4117fc0f41d2cc2aaa7d11bcd79387b6a85b9f3e6"
+    },
+    {
+      "bytes": 21,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/requirements.txt",
+      "sha256": "d932106411c00b96f329d90c30043419fe8892bbccb59d7deaaeb28d7d172176"
+    },
+    {
+      "bytes": 4893,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/config/capital_dukas_lagged_economic_test_v23.json",
+      "sha256": "97c55774d367afb2d65387c2540320569e7695ed36264546db2b52065e780876"
+    },
+    {
+      "bytes": 57,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/src/__init__.py",
+      "sha256": "e7e4ff8be8da24e4d0dbe7cd1409d92b582f1a8d62e03049b54fd484f6feb755"
+    },
+    {
+      "bytes": 29524,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/src/economic_test.py",
+      "sha256": "dd6035b129318f0365c794be6036c3cabb74f0b097e219e123fed1ab8447a1cf"
+    },
+    {
+      "bytes": 1008,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/prepare_capital_manifest.py",
+      "sha256": "f8aeeba6595e22f8ea95ddf3ab5a1d53b6c89c6731042fa745be9c6dd6a49957"
+    },
+    {
+      "bytes": 2301,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/download_sealed_dukascopy.py",
+      "sha256": "90da6515362dd0b98b06fc1553c44b705c08c277eb500e4fdca797e19fdd64a0"
+    },
+    {
+      "bytes": 5177,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/lock_contract.py",
+      "sha256": "2a540c8b59ea1d03781391dd40a2b8d50b21b3bdfb06805d445415c81b3b0b4c"
+    },
+    {
+      "bytes": 4963,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/run_economic_test.py",
+      "sha256": "1fb69d03b8fa88110b43160935a8ab917a678fa37679527b897cea4785c28cc6"
+    },
+    {
+      "bytes": 4137,
+      "path": "xau-usd/xauusd-fast-research/capital-dukas-lagged-economic-test-v23/tests/test_economic_test.py",
+      "sha256": "ea9dff66946c13d615571e009c090be7873d830d117a7f0add5bc60c93c2bb2d"
+    }
+  ],
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_dukas_lagged_economic_test_v23",
+  "simulation": {
+    "base_slippage_per_side_price": 0.05,
+    "dollars_per_price_unit": 1.0,
+    "hold_seconds": 300,
+    "maximum_entry_delay_ms": 10000,
+    "maximum_exit_delay_ms": 10000,
+    "overlap_policy": "SKIP",
+    "reference_lot": 0.01,
+    "stress_slippage_per_side_price": 0.15
+  },
+  "single_preregistered_economic_test": true,
+  "strategy_admission_authorized": false
+}
