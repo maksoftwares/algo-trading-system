@@ -652,6 +652,11 @@ all of these controls:
   failures, cherry-pick survivors, or report overlapping action labels as extra
   independent trades.
 
+This protocol is non-negotiable. The 3-4 trades-per-weekday research target is
+never a reason to relax a split, gate, cost assumption, correction, or forward
+evidence requirement. A candidate that reaches the frequency target only after
+outcome-informed repair is rejected, not promoted.
+
 The next step is an edge-density audit of prior independent mechanisms, followed
 by one preregistered high-displacement lane chosen from mechanism-level evidence,
 not from a profitable-looking parameter combination.
@@ -977,3 +982,53 @@ V25 must not be tuned, reversed, or reinterpreted as a viable specialist. It is
 negative evidence that the exact Capital-calibrated microburst rule transfers to
 historical Dukascopy quotes. V24.1 untouched Capital forward collection remains
 unchanged, but V25 provides no training or execution authorization.
+
+## V26 Forward Gap-Restart Freeze - 2026-07-19
+
+`capital-gap-restart-forward-v26` registers one mechanically independent,
+forward-only Capital quote hypothesis. It is not a historical backtest and no
+economic outcome was opened during calibration. The event requires a 2,001-5,000
+ms quote gap, observes only the first causal second after restart, requires at
+least five nonzero midpoint updates, absolute signed-update imbalance at least
+0.60, absolute displacement at least USD 0.30, agreeing signs, and spread no
+greater than USD 0.35. It takes the first qualifying continuation event per fixed
+four-hour block, with at most six per day and the unchanged V24.1 120-second
+execution, quality, cost, and economic gates. The strict 2,001 ms lower boundary
+makes the candidate clock disjoint from V24.1's maximum 2,000 ms continuity rule.
+
+- The fixed 2026-07-17 source-only calibration found 391 eligible restart
+  episodes, 13 raw candidates, and three block candidates in three observed
+  blocks. The full file was loaded to enumerate events, but no post-candidate
+  price was used to label or economically evaluate a candidate and no return,
+  P&L, or win rate was calculated.
+- Calibration candidate SHA-256:
+  `f9b0ad64e1b8dd5f8885c7a4a5378e16f94424648c700f7ae7bc35b8807ab35b`.
+- Calibration audit SHA-256:
+  `210b2fe3ebcfb55a8c7816bf62bca8b5f52c99d61354bbdffbfeaf4bc2c35147`.
+- V26 contract SHA-256:
+  `4981f20bff17e36fc990816e433b9cb69b708a7f39dd1cc85b3a1f96db68f1ee`.
+- At lock, no file at or after the 2026-07-20 forward boundary existed,
+  `calibration_post_candidate_prices_used_for_label_or_outcome=false`,
+  `calibration_pnl_calculated=false`, and `parameter_grid_allowed=false`.
+- The empty-forward runner decision is
+  `V26_CONTINUE_SEALED_FORWARD_COLLECTION` with `0/20` eligible validation
+  weekdays and `economic_outcomes_opened=false`.
+- Tests: 9 passed. Ruff: passed. Contract verification: passed.
+
+V26 and V24.1 count as two forward hypotheses. V26 therefore adds a
+locked one-sided circular moving-block-bootstrap p-value gate of at most 0.025,
+using five-weekday blocks, 10,000 samples, and seed 2601, while retaining every
+original V24.1 gate. This is the 0.05 family alpha divided across two hypotheses;
+V24.1 must pass the same external admission recheck before either member can be
+selected. Validation may open once after 20 complete eligible weekdays; failure
+is terminal. A passing validation only permits sealed collection of the next 20
+eligible weekdays for confirmation. Historical data must not be used to tune or
+pre-screen V26, and even dual forward passage authorizes research shadow only,
+not a model, Python prediction, EA consumption, demo, live, or broker action.
+
+A pre-commit audit superseded provisional local lock
+`1e500f9392c01c30996f56ef7da11088f1bd71495cc99aafd542ddcda2f12a08`
+before any forward file or economic outcome existed. It corrected the false 0.05
+Bonferroni claim, removed the exact 2,000 ms clock overlap, and made the physical
+calibration-read boundary explicit. These were stricter outcome-blind governance
+corrections, not same-version economic tuning.

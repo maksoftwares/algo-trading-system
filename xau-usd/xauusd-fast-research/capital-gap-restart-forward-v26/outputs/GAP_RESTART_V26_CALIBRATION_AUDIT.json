@@ -1,0 +1,75 @@
+{
+  "audit_sha256": "210b2fe3ebcfb55a8c7816bf62bca8b5f52c99d61354bbdffbfeaf4bc2c35147",
+  "calibration_structure_passed": true,
+  "candidate_file_sha256": "f9b0ad64e1b8dd5f8885c7a4a5378e16f94424648c700f7ae7bc35b8807ab35b",
+  "candidate_sides": [
+    "SHORT",
+    "SHORT",
+    "LONG"
+  ],
+  "candidate_times_utc": [
+    "2026-07-17T13:55:40.270000Z",
+    "2026-07-17T16:14:07.768000Z",
+    "2026-07-17T20:00:27.556000Z"
+  ],
+  "demo_authorized": false,
+  "economic_outcomes_opened": false,
+  "expected_structure": {
+    "block_candidate_count": 3,
+    "long_candidates": 1,
+    "observed_four_hour_blocks": 3,
+    "raw_candidate_count": 13,
+    "restart_episode_count": 391,
+    "short_candidates": 2,
+    "unique_quote_rows": 158127
+  },
+  "full_calibration_source_loaded": true,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "observed_structure": {
+    "block_candidate_count": 3,
+    "long_candidates": 1,
+    "observed_four_hour_blocks": 3,
+    "raw_candidate_count": 13,
+    "restart_episode_count": 391,
+    "short_candidates": 2,
+    "unique_quote_rows": 158127
+  },
+  "parameter_grid_used": false,
+  "pnl_calculated": false,
+  "post_candidate_prices_used_for_label_or_outcome": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_gap_restart_v26_calibration_audit",
+  "source_audit": {
+    "daily_source_quality": [
+      {
+        "date_utc": "2026-07-17",
+        "duplicate_millisecond_rows": 1822,
+        "duplicate_millisecond_share": 0.0113911309229817,
+        "raw_rows": 159949,
+        "unique_milliseconds": 158127
+      }
+    ],
+    "duplicate_millisecond_rows": 1822,
+    "raw_rows": 159949,
+    "source_files": [
+      {
+        "bytes": 40147464,
+        "path": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+        "raw_rows": 159949,
+        "sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+        "source_date_utc": "2026-07-17"
+      }
+    ],
+    "unique_rows": 158127
+  },
+  "structure_checks": {
+    "block_candidate_count": true,
+    "long_candidates": true,
+    "observed_four_hour_blocks": true,
+    "raw_candidate_count": true,
+    "restart_episode_count": true,
+    "short_candidates": true,
+    "unique_quote_rows": true
+  }
+}

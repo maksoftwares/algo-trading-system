@@ -1,0 +1,163 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 2315,
+    "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CALIBRATION_AUDIT.json",
+    "sha256": "3a03ce7d5fd4ba3022ba3c0c81bd8c4cdbc18fe03e1454d2206615f8bc659f85"
+  },
+  "calibration_audit_sha256": "210b2fe3ebcfb55a8c7816bf62bca8b5f52c99d61354bbdffbfeaf4bc2c35147",
+  "calibration_candidates": {
+    "bytes": 685,
+    "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CALIBRATION_CANDIDATES.csv",
+    "sha256": "f9b0ad64e1b8dd5f8885c7a4a5378e16f94424648c700f7ae7bc35b8807ab35b"
+  },
+  "calibration_pnl_calculated": false,
+  "calibration_post_candidate_prices_used_for_label_or_outcome": false,
+  "candidate_definition": {
+    "maximum_preceding_gap_ms": 5000,
+    "maximum_spread_price": 0.35,
+    "minimum_absolute_displacement_price": 0.3,
+    "minimum_absolute_update_imbalance": 0.6,
+    "minimum_nonzero_mid_updates": 5,
+    "minimum_preceding_gap_ms": 2001,
+    "restart_observation_ms": 1000
+  },
+  "confirmation_outcome_present_at_lock": false,
+  "contract_sha256": "4981f20bff17e36fc990816e433b9cb69b708a7f39dd1cc85b3a1f96db68f1ee",
+  "data_quality_definition": {
+    "earliest_day_end_hour_utc": 22,
+    "latest_day_start_hour_utc": 2,
+    "maximum_duplicate_millisecond_share": 0.05,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_spread_field_error": 0.011,
+    "maximum_timestamp_disagreement_ms": 1,
+    "minimum_unique_quotes_per_full_day": 100000
+  },
+  "demo_authorized": false,
+  "dependency_files": [
+    {
+      "bytes": 3776,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/config/capital_quote_microburst_forward_v24_1.json",
+      "sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507"
+    },
+    {
+      "bytes": 24144,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/src/microburst.py",
+      "sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96"
+    },
+    {
+      "bytes": 3673,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+      "sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a"
+    }
+  ],
+  "ea_consumption_authorized": false,
+  "economic_gates": {
+    "daily_bootstrap_lower_quantile": 0.1,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2401,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "maximum_trades_per_full_weekday": 6.0,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_direction_share": 0.2,
+    "minimum_executable_trades": 40,
+    "minimum_half_profit_factor": 1.0,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_recovery_factor": 1.0,
+    "minimum_stress_profit_factor": 1.05,
+    "minimum_trades_per_full_weekday": 2.0,
+    "require_daily_bootstrap_lower_bound_positive": true,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true
+  },
+  "episode_definition": {
+    "first_event_per_block_only": true,
+    "first_qualifying_quote_per_restart_only": true,
+    "maximum_candidates_per_utc_day": 6,
+    "utc_block_hours": 4
+  },
+  "forward_files_at_or_after_boundary": [],
+  "forward_files_present_at_lock": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "frozen_v24_1_contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+  "hypothesis_count": 1,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "multiple_testing": {
+    "block_length_weekdays": 5,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2601,
+    "family_alpha": 0.05,
+    "maximum_one_sided_pvalue": 0.025,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "registered_capital_forward_hypotheses": 2,
+    "v24_1_external_admission_recheck_required": true
+  },
+  "outcome_blind_candidate_calibration_performed_before_lock": true,
+  "package_files": [
+    {
+      "bytes": 1062,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/README.md",
+      "sha256": "2be629f3f3eb917132b29d225e4e764598879b3e91d5d10fefdc5908a3bd24ee"
+    },
+    {
+      "bytes": 4652,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/PREREGISTRATION.md",
+      "sha256": "8f98c0ef20c773d785b1691eb58487eab5d13b3c284c8d7f57a3cacc703e2061"
+    },
+    {
+      "bytes": 20,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/requirements.txt",
+      "sha256": "8b24e7fbc3ba5935410e6bb1259f4b4c7e0318efef35aba28acd3b43635a8306"
+    },
+    {
+      "bytes": 4923,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/config/capital_gap_restart_forward_v26.json",
+      "sha256": "884ac313b660fa14023da1717fc2fe4f80c74f48b467016d3ce1f4a776eca7ec"
+    },
+    {
+      "bytes": 54,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/src/__init__.py",
+      "sha256": "c9598e191bb72517205397391a1df885c5e5c3fbdd41214aca1e9a893eb44f20"
+    },
+    {
+      "bytes": 9872,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/src/gap_restart.py",
+      "sha256": "b729eae61c026d7498d6f43d2e1a586eba648a698b886337a7dd7971ab9f533c"
+    },
+    {
+      "bytes": 3476,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/prepare_calibration.py",
+      "sha256": "290f6f6fa5473312928d92a77f14f3918315e9d16cdd4c86df7d571db597f3fe"
+    },
+    {
+      "bytes": 5227,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/lock_contract.py",
+      "sha256": "eb2c3b8f93efdc72fdd16eb837a7194937beb523ba694d7f8bea9b50a4a8ab73"
+    },
+    {
+      "bytes": 9701,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/run_forward_evaluation.py",
+      "sha256": "103e265defccf58463d792df12ad6ca7c9504b87a09f368b5c75f99551d264d5"
+    },
+    {
+      "bytes": 6490,
+      "path": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/tests/test_gap_restart.py",
+      "sha256": "92e1eed01446e4fb72a3bc539a4bbfc48cf38d02e02f1e492bcc6a970c400c4e"
+    }
+  ],
+  "parameter_grid_allowed": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_gap_restart_v26_contract_lock",
+  "simulation_definition": {
+    "base_slippage_per_side_price": 0.05,
+    "dollars_per_price_unit": 1.0,
+    "hold_seconds": 120,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "reference_lot": 0.01,
+    "stress_slippage_per_side_price": 0.15
+  },
+  "validation_outcome_present_at_lock": false
+}

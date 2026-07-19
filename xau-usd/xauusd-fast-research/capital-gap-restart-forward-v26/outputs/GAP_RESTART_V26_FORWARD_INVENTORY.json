@@ -1,0 +1,18 @@
+{
+  "block_candidate_count_all_loaded_forward_data": 0,
+  "calibration_audit_sha256": "210b2fe3ebcfb55a8c7816bf62bca8b5f52c99d61354bbdffbfeaf4bc2c35147",
+  "contract_sha256": "4981f20bff17e36fc990816e433b9cb69b708a7f39dd1cc85b3a1f96db68f1ee",
+  "economic_outcomes_opened_by_inventory": false,
+  "eligible_full_weekday_count": 0,
+  "eligible_full_weekdays": [],
+  "full_day_quality": [],
+  "inventory_sha256": "fa65f97724a4650cb5f9f8f7d717fc7ab3235016c641c9cfee5cb9c86ad81f00",
+  "raw_candidate_count_all_loaded_forward_data": 0,
+  "restart_episode_count_all_loaded_forward_data": 0,
+  "schema_version": "xauusd_gap_restart_v26_forward_inventory",
+  "source_audit": {
+    "raw_rows": 0,
+    "source_files": [],
+    "unique_rows": 0
+  }
+}
