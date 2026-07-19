@@ -1,0 +1,81 @@
+{
+  "schema_version": "xauusd_capital_core_same_period_shadow_v28",
+  "source": {
+    "terminal_exe": "C:/MT5PortableProspectiveCollector/terminal64.exe",
+    "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_shadow_v28",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "history_days": 1200,
+    "maximum_m5_staleness_hours": 96,
+    "historical_candidates": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/outputs/REGIME_COMPOSITE_RAWTICK_V1_CANDIDATES.parquet",
+    "historical_candidates_sha256": "3a8b1d1812ca46f9a89d24e41cf3580b19d7ea5a5e1744a3c052a9d0339eb99b",
+    "campaign_manifest": "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/outputs/REGIME_MECHANISM_CAMPAIGN_V1_MANIFEST.csv",
+    "campaign_manifest_sha256": "73528e66dc91411dfcbafe5c5cc021b302e06aadef2d19f9ff04f9e3b54b92cf",
+    "regime_composite_config": "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/config/regime_composite_rawtick_v1.json"
+  },
+  "forward": {
+    "start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20,
+    "poll_seconds": 60
+  },
+  "components": {
+    "R1_BOX": {
+      "status": "COLLECTED_BY_SPECIALIST_SHADOW_V1_1",
+      "runtime_status": "C:/MT5PortableProspectiveCollector/MQL5/Files/specialist_shadow_v1/runtime_status.json"
+    },
+    "R1_PULLBACK": {
+      "status": "ADAPTER_REQUIRED",
+      "source_strategy": "r1_h1_pullback_long_v1"
+    },
+    "R2_DOWNTREND": {
+      "status": "COLLECTED_BY_V28",
+      "composite_id": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1"
+    },
+    "R3_COMPRESSION": {
+      "status": "COLLECTED_BY_V28",
+      "composite_id": "R3_COMPRESSION_RELEASE_TRI_MODE_V1"
+    },
+    "R4_CHOP": {
+      "status": "MICROSTRUCTURE_ADAPTER_REQUIRED"
+    },
+    "R5_TRANSITION": {
+      "status": "CURRENT_MACRO_CROSSASSET_INPUT_REQUIRED"
+    }
+  },
+  "contract_scope": [
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/PREREGISTRATION.md",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/config/capital_core_same_period_shadow_v28.json",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/src/core_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/run_shadow.py",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/lock_contract.py",
+    "xau-usd/xauusd-fast-research/capital-core-same-period-shadow-v28/requirements.txt",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/config/regime_composite_rawtick_v1.json",
+    "xau-usd/xauusd-fast-research/regime-composite-rawtick-v1/src/composite.py",
+    "xau-usd/xauusd-fast-research/r2-downtrend-portability-v2/src/downtrend.py",
+    "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+    "xau-usd/xauusd-fast-research/independent-specialists-v1/src/research.py",
+    "xau-usd/xauusd-fast-research/adaptive-h4-specialists-v1/src/adaptive.py",
+    "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/src/campaign.py",
+    "xau-usd/xauusd-fast-research/regime-mechanism-campaign-v1/outputs/REGIME_MECHANISM_CAMPAIGN_V1_MANIFEST.csv",
+    "xau-usd/xauusd-phase1/ml/specialist_shadow_v1.py",
+    "xau-usd/xauusd-phase1/ml/a3_meta_v1/mt5_readonly.py"
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_CORE_SHADOW_V28_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "historical_candidate_parity_required": true,
+    "forward_candidates_only": true,
+    "economic_outcomes_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

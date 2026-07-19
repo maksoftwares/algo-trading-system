@@ -1132,3 +1132,40 @@ Exact remaining same-period Core work:
    concurrent exposure, margin, and drawdown.
 5. Admit nothing unless the locked validation and confirmation gates pass. More
    data, more attempted strategies, or an ML ranker cannot replace this proof.
+
+### R1 Repair Activated And V28 R2/R3 Lock
+
+The repaired R1 sidecar was intentionally restarted without changing the MT5
+terminal or any chart, EA, order, position, account, or permission. It now reports
+`ACTIVE_READ_ONLY_SHADOW` from the pushed v1.1 source, with decision
+`ABSTAIN_D1_TREND`, no candidate, and all three authority flags false.
+
+Source-identity inspection also corrected an earlier simplification: normalized
+`R1_UPTREND` contains 145 `h4_d1_long_best_box2_atr80` trades and 413
+`r1_h1_pullback_long_v1` trades. The current R1 sidecar covers the portability/box
+rule only. Complete same-period R1 evidence therefore still requires an exact
+pullback adapter; no total Core-frequency claim may omit it.
+
+`capital-core-same-period-shadow-v28` is now the outcome-blind R2/R3 forward
+candidate collector.
+
+- Final contract SHA-256:
+  `b197323782a289b7c59734c55ef97485a86d0eb5da0bfc229ea8025e56ded974`.
+- Rule dependency SHA-256:
+  `fa0fdf85c6d630c9c1306ecb1b5ac78c11c7db4e91a931b408dbbe1b13324e60`.
+- Lock time: `2026-07-19T23:00:08.898187Z`, before any July 20 prospective
+  tick file existed.
+- Historical candidate parity: 658 expected and 658 observed; every source ID,
+  composite, attempt, variant, regime, mechanic, UTC signal/entry instant,
+  direction, stop, hold, parameter payload, and ATR value matched.
+- Real-account pre-boundary dry run: 232,003 M5 rows, 19,310 feature rows, zero
+  candidates, `WAITING_FORWARD_BOUNDARY`, and `economic_outcomes_opened=false`.
+- Persistent hidden runner: parent PID 24200 with child PID 6500 at startup; its
+  runtime authority remains read-only with no order surface.
+- Tests: 3 passed. Ruff and Ruff format: passed. Re-running the lock command
+  verifies the existing immutable payload and historical parity.
+
+V28 records R2/R3 candidate facts only. It does not calculate outcome, return,
+win rate, P/L, or an economic gate. R1 pullback, R4 Capital microstructure, R5
+current macro/cross-asset state, shared floating equity, and the 20+20 completed
+weekday decisions remain mandatory.

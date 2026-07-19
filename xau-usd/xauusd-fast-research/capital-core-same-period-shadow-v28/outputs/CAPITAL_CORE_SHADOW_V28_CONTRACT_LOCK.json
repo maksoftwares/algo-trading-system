@@ -1,0 +1,62 @@
+{
+  "broker_action_authorized": false,
+  "component_statuses": {
+    "R1_BOX": {
+      "runtime_status": "C:/MT5PortableProspectiveCollector/MQL5/Files/specialist_shadow_v1/runtime_status.json",
+      "status": "COLLECTED_BY_SPECIALIST_SHADOW_V1_1"
+    },
+    "R1_PULLBACK": {
+      "source_strategy": "r1_h1_pullback_long_v1",
+      "status": "ADAPTER_REQUIRED"
+    },
+    "R2_DOWNTREND": {
+      "composite_id": "R2_DOWNTREND_FAILED_RALLY_DUAL_MODE_V1",
+      "status": "COLLECTED_BY_V28"
+    },
+    "R3_COMPRESSION": {
+      "composite_id": "R3_COMPRESSION_RELEASE_TRI_MODE_V1",
+      "status": "COLLECTED_BY_V28"
+    },
+    "R4_CHOP": {
+      "status": "MICROSTRUCTURE_ADAPTER_REQUIRED"
+    },
+    "R5_TRANSITION": {
+      "status": "CURRENT_MACRO_CROSSASSET_INPUT_REQUIRED"
+    }
+  },
+  "contract_sha256": "b197323782a289b7c59734c55ef97485a86d0eb5da0bfc229ea8025e56ded974",
+  "created_at_utc": "2026-07-19T23:00:08.898187Z",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "economic_outcomes_opened": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "forward_tick_files_present_at_lock": [],
+  "historical_candidate_parity": {
+    "column_parity": {
+      "candidate_id": true,
+      "composite_id": true,
+      "direction": true,
+      "direction_sign": true,
+      "hold_hours": true,
+      "mechanic": true,
+      "origin_attempt": true,
+      "origin_variant_id": true,
+      "parameters_json": true,
+      "regime_owner": true,
+      "scheduled_entry_time": true,
+      "signal_time": true,
+      "stop_atr": true
+    },
+    "exact_columns_equal": true,
+    "expected_rows": 658,
+    "observed_rows": 658,
+    "pass": true,
+    "signal_atr_equal": true
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "python_predictions_authorized": false,
+  "rule_dependency_sha256": "fa0fdf85c6d630c9c1306ecb1b5ac78c11c7db4e91a931b408dbbe1b13324e60",
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_core_shadow_v28_contract_lock"
+}
