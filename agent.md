@@ -946,3 +946,34 @@ mechanism-level cross-feed replication rather than an untouched final holdout.
 Untouched Capital evidence from 2026-07-20 onward remains mandatory. V25 passage
 alone cannot authorize model training, Python predictions, EA consumption, demo,
 live, paid data, or broker action.
+
+### V25 Early Replication Result
+
+The precommitted `EARLY_REPLICATION` stage opened once after contract commit
+`a00104fe` and failed terminally. The runner verified 35,064 hourly files and
+169,163,189 raw tick rows from 2016-07-01 through 2020-06-30 before calculating
+the unchanged V24.1 labels and gates.
+
+- Decision: `V25_EARLY_REPLICATION_FAIL_TERMINAL`.
+- Audit SHA-256:
+  `662b616363fe730badb405310208be35f15df74eee5fd324743918050b51d86f`.
+- Eligible full weekdays: 417.
+- All-source candidates: 555; candidates on eligible days: 308.
+- Executable trades: 291, or 0.6978 per eligible weekday.
+- Direction balance: 137 long / 154 short.
+- Base net: -USD 137.124; base PF: 0.2777; win rate: 24.74%.
+- Stress net: -USD 195.324; stress PF: 0.1716.
+- Closed-trade drawdown: USD 137.124.
+- First-half PF: 0.2241; second-half PF: 0.3012.
+- Profitable-day share: 7.19%; 90% bootstrap lower bound: -USD 0.391/day.
+
+Only executable-trade count, maximum frequency, and direction balance passed.
+Every edge, minimum-frequency, stability, drawdown, recovery, and bootstrap gate
+failed. Rerunning the locked runner reproduced the terminal decision without
+opening another outcome. `MIDDLE_VALIDATION` and `RECENT_FINAL_HOLDOUT` remain
+absent and sealed.
+
+V25 must not be tuned, reversed, or reinterpreted as a viable specialist. It is
+negative evidence that the exact Capital-calibrated microburst rule transfers to
+historical Dukascopy quotes. V24.1 untouched Capital forward collection remains
+unchanged, but V25 provides no training or execution authorization.
