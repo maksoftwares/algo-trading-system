@@ -1,0 +1,17 @@
+{
+  "broker_action_authorized": false,
+  "confirmation_economic_outcomes_opened": false,
+  "contract_sha256": "046a3015486c212e0e2e8f832a2e53413f77dc2d364b6f2e08ca6901745ec640",
+  "decision": "V24_IMPLEMENTATION_FAIL_BEFORE_FORWARD_DATA",
+  "demo_authorized": false,
+  "economic_outcomes_opened": false,
+  "error": "KeyError: tick_time_msc",
+  "failure_location": "run_forward_evaluation.py: empty candidate frame filtering",
+  "forward_files_present": false,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "same_version_edit_authorized": false,
+  "schema_version": "xauusd_v24_forward_runner_failure",
+  "structural_successor_allowed": true,
+  "validation_economic_outcomes_opened": false
+}

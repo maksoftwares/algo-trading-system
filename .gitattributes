@@ -19,5 +19,9 @@
 # Exact backtest packets are hash-addressed evidence; preserve their original bytes.
 xau-usd/xauusd-phase1/outputs/reports/** -text -diff
 xau-usd/xauusd-fast-research/capital-dukas-lagged-opportunity-audit-v22-2/outputs/CROSSVENUE_V22_2_CONTRACT_LOCK.json -text -diff
+xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/**/*.csv text eol=lf
+xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/**/*.json text eol=lf
+xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/**/*.csv text eol=lf
 xau-usd/xauusd-phase1/docs/A1_XAU_R5_PRE_DOWNTREND_BREAK_SHORT_V1_PREREG_2026_07_11.md whitespace=-blank-at-eol
 xau-usd/xauusd-phase1/docs/A1_XAU_H4_PROFIT_PRESERVING_HEDGE_INDEPENDENT_REVIEW_ADDF272A_2026_07_11.md whitespace=-blank-at-eol,-blank-at-eof

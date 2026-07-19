@@ -1,0 +1,95 @@
+{
+  "schema_version": "xauusd_capital_quote_microburst_forward_v24",
+  "source": {
+    "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+    "filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "schema_version": "xau_prospective_tick_v1",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "calibration_file": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+    "calibration_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+    "calibration_start_inclusive_utc": "2026-07-17T12:49:00Z",
+    "calibration_end_exclusive_utc": "2026-07-17T21:00:00Z",
+    "calibration_manifest": "outputs/MICROBURST_V24_CALIBRATION_SOURCE_MANIFEST.json"
+  },
+  "forward": {
+    "start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20,
+    "validation_audit": "outputs/MICROBURST_V24_VALIDATION_AUDIT.json",
+    "confirmation_audit": "outputs/MICROBURST_V24_CONFIRMATION_AUDIT.json"
+  },
+  "data_quality": {
+    "maximum_duplicate_millisecond_share": 0.05,
+    "minimum_unique_quotes_per_full_day": 100000,
+    "latest_day_start_hour_utc": 2,
+    "earliest_day_end_hour_utc": 22,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011
+  },
+  "feature": {
+    "lookback_ms": 5000,
+    "maximum_boundary_quote_age_ms": 1000,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.35,
+    "minimum_nonzero_mid_updates": 15,
+    "minimum_absolute_update_imbalance": 0.75,
+    "minimum_absolute_displacement_price": 0.60
+  },
+  "episode": {
+    "utc_block_hours": 4,
+    "first_false_to_true_crossing_only": true,
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6
+  },
+  "simulation": {
+    "hold_seconds": 120,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "base_slippage_per_side_price": 0.05,
+    "stress_slippage_per_side_price": 0.15,
+    "reference_lot": 0.01,
+    "dollars_per_price_unit": 1.0
+  },
+  "gates": {
+    "minimum_executable_trades": 40,
+    "minimum_trades_per_full_weekday": 2.0,
+    "maximum_trades_per_full_weekday": 6.0,
+    "minimum_direction_share": 0.20,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_profitable_day_share": 0.50,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "minimum_recovery_factor": 1.0,
+    "minimum_half_profit_factor": 1.0,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 2401,
+    "daily_bootstrap_lower_quantile": 0.10,
+    "require_daily_bootstrap_lower_bound_positive": true
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "MICROBURST_V24_CONTRACT_LOCK.json",
+    "calibration_candidates": "MICROBURST_V24_CALIBRATION_CANDIDATES.csv",
+    "calibration_audit": "MICROBURST_V24_CALIBRATION_FREQUENCY_AUDIT.json",
+    "forward_inventory": "MICROBURST_V24_FORWARD_INVENTORY.json",
+    "validation_trades": "MICROBURST_V24_VALIDATION_TRADES.csv",
+    "confirmation_trades": "MICROBURST_V24_CONFIRMATION_TRADES.csv"
+  },
+  "research_controls": {
+    "calibration_economic_outcomes_allowed": false,
+    "single_hypothesis": true,
+    "parameter_grid_allowed": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

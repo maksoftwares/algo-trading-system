@@ -1,0 +1,17 @@
+{
+  "calibration_files": [
+    {
+      "bytes": 40147464,
+      "path": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+      "sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a"
+    }
+  ],
+  "economic_outcomes_allowed": false,
+  "manifest_sha256": "2f4c4fabe390818b02efeb50812183be8b1d0f08d087ead464b42a063ccc730e",
+  "paid_source_used": false,
+  "schema_version": "xauusd_v24_1_calibration_source_manifest",
+  "window": {
+    "end_exclusive_utc": "2026-07-17T21:00:00Z",
+    "start_inclusive_utc": "2026-07-17T12:49:00Z"
+  }
+}

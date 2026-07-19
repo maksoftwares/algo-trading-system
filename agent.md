@@ -6,7 +6,7 @@ Updated: `2026-07-19`
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
 - Current operational branch: `codex/xau-independent-specialists-v1`
-- Latest pushed research implementation checkpoint: `377d79f0a551b7f1754bc63da2c77896257d13df`
+- Latest pushed research implementation checkpoint: `680321ad`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -847,3 +847,66 @@ scaling, and candidate-frequency calibration. Freeze any microstructure event
 definition before reading its future returns. All outcomes from 2026-07-20 onward
 must remain untouched forward evidence, and historical passage still cannot
 authorize Python prediction, EA consumption, demo, live, or broker action.
+
+## V24.1 Forward Quote-Microburst Freeze - 2026-07-19
+
+`capital-quote-microburst-forward-v24` registered one new millisecond Capital
+quote hypothesis before any forward source file existed. It uses a five-second
+causal quote-update imbalance and displacement gate, the first false-to-true event
+in each fixed four-hour UTC block, one continuation direction, one 120-second
+horizon, real bid/ask entry and exit, and fixed base/stress slippage. It has no
+parameter, session, direction, horizon, model, or cost grid.
+
+- Frozen V24 contract SHA-256:
+  `046a3015486c212e0e2e8f832a2e53413f77dc2d364b6f2e08ca6901745ec640`.
+- Outcome-blind calibration read 158,127 unique millisecond quotes from the fixed
+  2026-07-17 file. It produced three candidates in three observed four-hour blocks,
+  two long and one short. It calculated no post-event return, P&L, or win rate.
+- The first empty-forward dry run then raised `KeyError: tick_time_msc` because an
+  empty candidate frame had no declared columns. No 2026-07-20-or-later file,
+  validation outcome, confirmation outcome, or P&L existed. V24 is preserved as
+  `V24_IMPLEMENTATION_FAIL_BEFORE_FORWARD_DATA`; its locked files were not edited.
+
+`capital-quote-microburst-forward-v24-1` is the only permitted structural
+successor. Its sole change is a stable schema for empty candidate frames plus a
+regression test. Automated comparison confirmed that all source rules, causal
+features, thresholds, block selection, direction, horizon, costs, data-quality
+rules, stage lengths, economic gates, and research permissions are identical to
+V24.
+
+- V24.1 contract SHA-256:
+  `84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0`.
+- Calibration manifest SHA-256:
+  `2f4c4fabe390818b02efeb50812183be8b1d0f08d087ead464b42a063ccc730e`.
+- Calibration audit SHA-256:
+  `0d4d1031b1b96edc9687fecfe261c7ebac0b2dd745acd9a968f9f3cac2ae9766`.
+- Calibration decision:
+  `V24_1_CALIBRATION_STRUCTURE_PASS_FORWARD_COLLECTION_REQUIRED`.
+- Forward runner decision: `V24_1_CONTINUE_SEALED_FORWARD_COLLECTION` with
+  `0/20` eligible validation weekdays and `economic_outcomes_opened=false`.
+- Validation and confirmation audits and trade files are absent. Confirmation
+  cannot open in the same invocation that first opens validation.
+- Tests: 7 passed. Ruff: passed.
+
+The sequential forward protocol is now immutable:
+
+1. Existing telemetry continues from 2026-07-20 without a new attachment or
+   runtime change.
+2. A weekday counts only with at least 100,000 unique millisecond quotes, no more
+   than 5% duplicate milliseconds, coverage from no later than 02:00 UTC through
+   at least 22:00 UTC, and 99th-percentile interquote gap no more than five seconds.
+3. Before 20 full weekdays, the runner may disclose inventory and candidate counts
+   only. It must not simulate a trade or expose an economic outcome.
+4. At 20 full weekdays, validation opens once. Failure is terminal. Passing only
+   allows continued sealed collection.
+5. Confirmation uses the next 20 full weekdays and may open only on a later run
+   after immutable passing validation exists.
+6. Even dual passage nominates research shadow only. It does not authorize a model,
+   Python prediction, EA consumption, demo, live, or broker action.
+
+Read-only runtime verification found the existing ProspectiveCollector terminal
+running from `C:\MT5PortableProspectiveCollector\terminal64.exe` as PID `20892`.
+Its heartbeat advanced through 2026-07-19 18:37:57 UTC on account `1033669` /
+`Capital.ComMena-Demo`. Weekend tick files contain headers only, as expected while
+XAUUSD is closed. No process, chart, EA input, terminal, account, or permission was
+changed.

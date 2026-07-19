@@ -1,0 +1,82 @@
+{
+  "broker_action_authorized": false,
+  "calibration_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+  "calibration_manifest_sha256": "2f4c4fabe390818b02efeb50812183be8b1d0f08d087ead464b42a063ccc730e",
+  "confirmation_outcome_present_at_lock": false,
+  "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+  "demo_authorized": false,
+  "direction_count": 1,
+  "ea_consumption_authorized": false,
+  "economic_outcomes_opened_before_lock": false,
+  "forward_files_at_or_after_boundary": [],
+  "forward_files_present_at_lock": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "horizon_count": 1,
+  "hypothesis_count": 1,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "only_authorized_prelock_change": "STABLE_EMPTY_CANDIDATE_SCHEMA",
+  "package_files": [
+    {
+      "bytes": 1194,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/README.md",
+      "sha256": "2bff0ac696096cd1baf6db011c920bbbfd4e361e3486703ef7ac3db7e7c1f9be"
+    },
+    {
+      "bytes": 4404,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/PREREGISTRATION.md",
+      "sha256": "76353ea87a40ae1182774ebcdb643843773c955b00bfc34a7a49755177b06551"
+    },
+    {
+      "bytes": 13,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/requirements.txt",
+      "sha256": "7c3194b101c68d4c524948fd09ec3dff5e7ecf54f11e8ccc23440ff932a604e7"
+    },
+    {
+      "bytes": 3776,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/config/capital_quote_microburst_forward_v24_1.json",
+      "sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507"
+    },
+    {
+      "bytes": 54,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/src/__init__.py",
+      "sha256": "a0016cbf3d715976ad56ec79251a549cb9102d344b83a552525e47a5db9ddd00"
+    },
+    {
+      "bytes": 24144,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/src/microburst.py",
+      "sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96"
+    },
+    {
+      "bytes": 1444,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/prepare_calibration_manifest.py",
+      "sha256": "fbc8cd058b2b00d113ef795f76642ccd5cf3fd92ecfbe39612032aa7b47410cb"
+    },
+    {
+      "bytes": 3887,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/lock_contract.py",
+      "sha256": "9a7f3e914ecb32b9d528e47dacce62877ee3a6a9d2f34f4488dee65a6e7ca944"
+    },
+    {
+      "bytes": 4496,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/run_frequency_calibration.py",
+      "sha256": "b22cb3759e881628b608c6c21d08ddfde7bc8fbf63377329a3f271a91f9e44f4"
+    },
+    {
+      "bytes": 9544,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/run_forward_evaluation.py",
+      "sha256": "9676f46b3b7564761e002ff8711b873b1fcfa8b48c87072b8cc483e0eca36d04"
+    },
+    {
+      "bytes": 7303,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/tests/test_microburst.py",
+      "sha256": "030fb7c09e14f751037fda472253a0065e323dd4a25f5263aa080dff13ad1a38"
+    }
+  ],
+  "parameter_grid_allowed": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_v24_1_contract_lock",
+  "structural_predecessor_contract_sha256": "046a3015486c212e0e2e8f832a2e53413f77dc2d364b6f2e08ca6901745ec640",
+  "validation_outcome_present_at_lock": false
+}

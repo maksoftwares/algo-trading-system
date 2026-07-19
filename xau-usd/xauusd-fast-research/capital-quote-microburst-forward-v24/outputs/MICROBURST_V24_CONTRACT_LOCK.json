@@ -1,0 +1,80 @@
+{
+  "broker_action_authorized": false,
+  "calibration_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+  "calibration_manifest_sha256": "af35fd9fbbe109bb0b82a9ec5b484298a6c6ea60c827c105f03ac817f6205707",
+  "confirmation_outcome_present_at_lock": false,
+  "contract_sha256": "046a3015486c212e0e2e8f832a2e53413f77dc2d364b6f2e08ca6901745ec640",
+  "demo_authorized": false,
+  "direction_count": 1,
+  "ea_consumption_authorized": false,
+  "economic_outcomes_opened_before_lock": false,
+  "forward_files_at_or_after_boundary": [],
+  "forward_files_present_at_lock": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "horizon_count": 1,
+  "hypothesis_count": 1,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 808,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/README.md",
+      "sha256": "535149499e610048d2171769b6c0c17020eba2989902fafdc2b45501798d9337"
+    },
+    {
+      "bytes": 4064,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/PREREGISTRATION.md",
+      "sha256": "e9ed6d027814fb7152568ffd48b5e846152a88bbb68dcdd1cf7ac98c8537fa72"
+    },
+    {
+      "bytes": 13,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/requirements.txt",
+      "sha256": "7c3194b101c68d4c524948fd09ec3dff5e7ecf54f11e8ccc23440ff932a604e7"
+    },
+    {
+      "bytes": 3756,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/config/capital_quote_microburst_forward_v24.json",
+      "sha256": "f18eff68f0c7c9cd17a341c2a9533fc3274e738bef95bd860f28b5621975f8ff"
+    },
+    {
+      "bytes": 52,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/src/__init__.py",
+      "sha256": "d9d02ecf43ce63874555d07c91c57ff9fa0c1cfe0ac6686219796ff9848902d1"
+    },
+    {
+      "bytes": 23556,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/src/microburst.py",
+      "sha256": "ef7d9035d321eaa452c8eb53fa32617daf94dbb105fe28940ee53ad43f57b36b"
+    },
+    {
+      "bytes": 1442,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/prepare_calibration_manifest.py",
+      "sha256": "f5b097c6eabc812cb8487c9d52496dbb3eb10479cb1224ffa2edf6310f1a4175"
+    },
+    {
+      "bytes": 3688,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/lock_contract.py",
+      "sha256": "07b17e41752b08832db32c3b4bb284ffe3b2bb0dcd1248d05700bec9e3a12f68"
+    },
+    {
+      "bytes": 4490,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/run_frequency_calibration.py",
+      "sha256": "604d22d08b8395b782406da36cb67cff7e9d651d18822091160959520ef67e5d"
+    },
+    {
+      "bytes": 9530,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/run_forward_evaluation.py",
+      "sha256": "9b91e8bf35a956fd923f7a51d3d7e60c7003df6c7e5c2b1f6c31037a55e98b3d"
+    },
+    {
+      "bytes": 6934,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/tests/test_microburst.py",
+      "sha256": "b0fabc31019af9c028d67672998f20b42a7bf6aed16ebf2c098169bc94e51171"
+    }
+  ],
+  "parameter_grid_allowed": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_v24_contract_lock",
+  "validation_outcome_present_at_lock": false
+}

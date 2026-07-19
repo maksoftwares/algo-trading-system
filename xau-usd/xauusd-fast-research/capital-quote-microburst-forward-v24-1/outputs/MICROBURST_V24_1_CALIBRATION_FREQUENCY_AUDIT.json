@@ -1,0 +1,53 @@
+{
+  "audit_sha256": "0d4d1031b1b96edc9687fecfe261c7ebac0b2dd745acd9a968f9f3cac2ae9766",
+  "broker_action_authorized": false,
+  "calibration_manifest_sha256": "2f4c4fabe390818b02efeb50812183be8b1d0f08d087ead464b42a063ccc730e",
+  "calibration_rows": 158127,
+  "calibration_structure_passed": true,
+  "candidate_blocks": 3,
+  "candidate_count": 3,
+  "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+  "decision": "V24_1_CALIBRATION_STRUCTURE_PASS_FORWARD_COLLECTION_REQUIRED",
+  "demo_authorized": false,
+  "economic_outcomes_opened": false,
+  "gate_checks": {
+    "at_least_two_candidates": true,
+    "both_directions_present": true,
+    "no_economic_outcomes_opened": true,
+    "no_more_than_one_candidate_per_observed_block": true
+  },
+  "live_authorized": false,
+  "long_candidates": 2,
+  "model_training_authorized": false,
+  "observed_utc_blocks": 3,
+  "pnl_calculated": false,
+  "post_candidate_prices_read_for_labels": false,
+  "raw_gate_crossings": 23,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_v24_1_calibration_frequency_audit",
+  "short_candidates": 1,
+  "source_audit": {
+    "daily_source_quality": [
+      {
+        "date_utc": "2026-07-17",
+        "duplicate_millisecond_rows": 1822,
+        "duplicate_millisecond_share": 0.0113911309229817,
+        "raw_rows": 159949,
+        "unique_milliseconds": 158127
+      }
+    ],
+    "duplicate_millisecond_rows": 1822,
+    "raw_rows": 159949,
+    "source_files": [
+      {
+        "bytes": 40147464,
+        "path": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+        "raw_rows": 159949,
+        "sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+        "source_date_utc": "2026-07-17"
+      }
+    ],
+    "unique_rows": 158127
+  },
+  "win_rate_calculated": false
+}
