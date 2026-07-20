@@ -1,0 +1,183 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 15088,
+    "path": "outputs/COMEX_SPOT_RECEIPT_V70_CALIBRATION_AUDIT.json",
+    "sha256": "86dd34c519606012c82e5d7561c01db8620969631abe98d5378dce82de1587ed"
+  },
+  "calibration_features": {
+    "bytes": 18836460,
+    "path": "outputs/COMEX_SPOT_RECEIPT_V70_CALIBRATION_FEATURES.parquet",
+    "sha256": "1c4e55ea7d4085115bb157e06ded985950c2728ce6ee0977340ba08ab2f046e9"
+  },
+  "calibration_grid": {
+    "bytes": 91993,
+    "path": "outputs/COMEX_SPOT_RECEIPT_V70_CALIBRATION_GRID.csv",
+    "sha256": "af816ee4187e6c631d162b4a39407f4662d9e70b2b5bfdb8ff446a43e253b890"
+  },
+  "calibration_outcomes_opened": false,
+  "candidate_rule": {
+    "bar_minutes": 5,
+    "family": "COMEX_RECEIPT_INNOVATION_CATCHUP",
+    "maximum_candidates_per_utc_date": 1,
+    "maximum_comex_baseline_staleness_ms": 500,
+    "maximum_spot_quote_staleness_ms": 1000,
+    "minimum_nonempty_bars": 50,
+    "minimum_session_coverage_minutes": 300,
+    "primary_source_timestamp": "ts_recv",
+    "publisher_clock_order_required": false,
+    "receipt_bucket_ms": 100,
+    "session_end": "13:30",
+    "session_start": "08:20",
+    "timezone": "America/New_York"
+  },
+  "comex_download_manifest": {
+    "bytes": 905427,
+    "path": "downloaded_and_hashed_20260717T082157Z.json",
+    "sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6"
+  },
+  "contract_sha256": "cc71627134dd00c051756cbe9587686717ad70b49245bff071032a01325d297a",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 19419,
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  ],
+  "development_outcomes_present_at_lock": false,
+  "ea_consumption_authorized": false,
+  "exam_outcomes_present_at_lock": false,
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_delay_ms": 1000,
+    "maximum_initial_risk_usd": 50.0,
+    "ounces": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3,
+    "timeout_exit_grace_ms": 10000
+  },
+  "families": {
+    "COMEX_RECEIPT_INNOVATION_CATCHUP": {
+      "atr_stop_multiple": 0.25,
+      "maximum_hold_minutes": 2,
+      "minimum_stop_distance_usd": 0.5,
+      "reward_r": 1.0,
+      "spread_stop_multiple": 4.0
+    }
+  },
+  "gates": {
+    "bootstrap": {
+      "block_weekdays": 5,
+      "maximum_one_sided_pvalue": 0.01,
+      "resamples": 10000,
+      "seed": 690069
+    },
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.0,
+    "minimum_positive_month_share": 0.6,
+    "minimum_profitable_day_share": 0.4,
+    "minimum_resolved_trades": {
+      "development": 300,
+      "exam": 150,
+      "validation": 150
+    },
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_trades_per_full_weekday": 0.65,
+    "top_winners_removed": 5
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 857,
+      "path": "README.md",
+      "sha256": "48741292f46a34c43e4d1ca0da066434e440898a2d97a75fe27e069692a27c49"
+    },
+    {
+      "bytes": 4642,
+      "path": "PREREGISTRATION.md",
+      "sha256": "a9d5ba97d3fb3a323215d200b86cf8e62786bfeb33ea228f5e6f83c71b05ffdf"
+    },
+    {
+      "bytes": 89,
+      "path": "requirements.txt",
+      "sha256": "464a6013b1f2223fd2b9a817c010c71eece3096b229990b6ac7ce218766d2162"
+    },
+    {
+      "bytes": 4618,
+      "path": "config/comex_spot_receipt_innovation_v70.json",
+      "sha256": "4929283f4fdc3e6c87c7aa6d19834712ee0c9ea446eeeb90439e06bea08065d3"
+    },
+    {
+      "bytes": 54,
+      "path": "src/__init__.py",
+      "sha256": "b73ebb4d3601d174d2bef3605f0c6ed2691fa6560bbdf11f89e16b9e9ae932fe"
+    },
+    {
+      "bytes": 14773,
+      "path": "src/innovation.py",
+      "sha256": "134d630b0239e22bc85477eb4e83a44209ffdb103bc4610da90c5d871c845953"
+    },
+    {
+      "bytes": 6990,
+      "path": "run_calibration.py",
+      "sha256": "540623f471a72900d4795933598b7b02e904935d222749aa77e6ee4b5046b650"
+    },
+    {
+      "bytes": 5162,
+      "path": "lock_contract.py",
+      "sha256": "e148542f1a9241343b73dd43098226e3243968fa44d823b92f8733e1cd3f0bdc"
+    },
+    {
+      "bytes": 8444,
+      "path": "run_stage.py",
+      "sha256": "e8e03585648122f07c310d099e03de1e069ec71f3ff93568fd4573f38e6e2615"
+    },
+    {
+      "bytes": 4571,
+      "path": "tests/test_innovation.py",
+      "sha256": "23f56fbe2704c8eea4d83fe1a5d9be405efc8f6efcd9682679095d260efd7fe4"
+    }
+  ],
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_spot_receipt_v70_contract_lock",
+  "selected_policy": {
+    "horizon_ms": 2000,
+    "minimum_absolute_comex_move_usd": 1.0,
+    "minimum_absolute_flow_imbalance": 0.3,
+    "minimum_directional_innovation_usd": 0.4,
+    "minimum_received_volume": 10,
+    "policy_id": "H2000__CM100__IN040__FI30__VO10"
+  },
+  "splits": {
+    "development": [
+      "2022-08-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "validation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ]
+  },
+  "spot_feature_cache": {
+    "bytes": 104974475,
+    "path": "m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "validation_outcomes_present_at_lock": false
+}

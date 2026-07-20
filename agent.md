@@ -2461,3 +2461,30 @@ publisher clocks may be unsynchronized. V69 is therefore an engineering stop,
 not a failed economic test. Its contract remains immutable. The successor must
 remove only this invalid publisher-clock assertion, rerun calibration, and
 freeze a new contract without changing policy grids, execution, or gates.
+
+## V70 Corrected Receipt-Time Innovation - 2026-07-20
+
+V70 removed only V69's invalid publisher-clock ordering assertion, explicitly
+used `ts_recv` as the primary source clock, and counted rows where publisher
+event time exceeded receipt time. All 1,000 policies, calibration dates,
+thresholds, execution geometry, costs, splits, and gates remained unchanged.
+
+- Outcome-blind calibration reproduced the same `377,909` features, `662`
+  eligible policies, and selected policy `H2000__CM100__IN040__FI30__VO10`.
+- Contract SHA-256:
+  `cc71627134dd00c051756cbe9587686717ad70b49245bff071032a01325d297a`.
+- Development recorded `78,822` publisher-clock-lead rows without filtering
+  them and resolved `385` trades over `491` eligible weekdays (`0.784114/day`).
+- Direction balance was `184` longs and `201` shorts. Base net/PF was USD
+  `18.71`/`1.054`; stress net/PF was USD `-21.45`/`0.941`.
+- First/second-half stress PF was `0.978/0.906`; positive months were `43.48%`;
+  winner-removed stress net was USD `-54.95`; closed DD was USD `37.55`; and
+  bootstrap p-value was `1.0`.
+- Decision: `V70_DEVELOPMENT_FAIL_TERMINAL`. Audit SHA-256:
+  `66d9fd77b0d671188b2d8b335189d32808bcc6239d13c050046af1b54e36e867`.
+
+Validation and exam remain sealed. V70 is not an admitted sleeve despite its
+useful density and low drawdown, because realistic costs remove its edge and
+both chronological halves fail. No clock, horizon, threshold, direction, exit,
+cost, or quota rescue is allowed on the exposed family. V59/V60 remain the
+accepted control, while V24.1/V26/V27/V42/V67 continue forward collection.

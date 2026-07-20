@@ -24,6 +24,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | COMEX total-flow, auction, VWAP, session, and lead/lag | COMEX campaigns | No chronological survivor | Total flow alone is retired |
 | COMEX large-versus-small aggressor-flow continuation | V32/V33 | 2.383 resolved trades/day, base PF 0.493, stress PF 0.455 | Terminal; validation/exam sealed, no mirror rescue |
 | COMEX exhausted-flow transition and sequence ignition | V44/V45/V68 | Continuations failed near PF 0.46; fixed anti-signal reached 0.967/day but stress PF 0.401 and USD 410.41 DD | Terminal in both directions; no threshold, quota, or mirror reuse |
+| Subsecond COMEX receipt-to-spot innovation | V69/V70 | Corrected lane reached 0.784/day and low DD, but base PF 1.054, stress PF 0.941, both halves below 1, p=1.0 | Terminal; no clock, horizon, threshold, exit, or cost rescue |
 | Tokenized-gold and cross-venue divergence | PAXG and Capital-Dukascopy campaigns | No robust causal economic lane | No lag/threshold reuse on exposed history |
 | Capital quote exhaustion reversal | V30 | 5.9/day, base PF 0.7171, stress PF 0.5907 | Terminal; no tuning or mirror |
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
@@ -96,6 +97,28 @@ The result shows that weak V44/V45 continuation was not a hidden reversible
 edge; both sides are dominated by noise and cost. New historical work must use
 a new causal variable, such as a directly synchronized cross-venue price
 innovation, and may not recycle these exposed source outcomes.
+
+## V69/V70 Receipt-Time Innovation Result
+
+V69 preregistered a subsecond cross-venue mechanism using Databento receipt
+timestamps and raw Dukascopy quotes. Its outcome-blind calibration selected a
+two-second policy at exactly `0.80/day`, but development stopped before writing
+outcomes because the code incorrectly required publisher event time not to
+exceed receive time. V69 remains immutable as an engineering stop.
+
+V70 removed only that invalid cross-clock assertion, recorded the anomaly
+count, repeated calibration, and froze the same selected policy. Development
+then produced `385` resolved trades over `491` weekdays (`0.784114/day`), with
+`184` longs and `201` shorts. Base economics were barely positive at USD
+`18.71` and PF `1.054`; realistic stress was USD `-21.45` at PF `0.941`.
+First/second-half stress PF was `0.978/0.906`, only `43.48%` of months were
+positive, winner-removed stress net was USD `-54.95`, and bootstrap p-value was
+`1.0`. Closed DD was low at USD `37.55`, but low risk does not replace edge.
+
+Decision: `V70_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
+Direct event-time COMEX-to-spot innovation is now exposed and retired. Further
+historical work must use a different causal variable, not a faster/slower
+version or a post-outcome exit modification.
 
 ## Routes Not Counted As Solutions
 
