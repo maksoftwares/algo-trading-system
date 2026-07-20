@@ -30,6 +30,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Capital quote exhaustion reversal | V30 | 5.9/day, base PF 0.7171, stress PF 0.5907 | Terminal; no tuning or mirror |
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
 | Joint DXY, Treasury, and silver raw-tick consensus | V82 | Calibration coverage failed: only 6 full February 2019 weekdays because the bond feed had long zero/partial-session gaps | Terminal before economics; do not reuse USTBONDTRUSD as a continuous intraday clock |
+| Joint DXY and silver raw-tick consensus | V83 | 0.821/day but base/stress PF 0.401/0.359, zero positive months, USD 352.23 stressed DD | Terminal; no mirror, threshold, timing, response, or exit rescue |
 
 ## What Is Actually Missing
 
@@ -362,6 +363,25 @@ Decision: `V82_CALIBRATION_COVERAGE_FAIL_TERMINAL`. V82 ends before economic
 testing. The raw USTBONDTRUSD feed cannot be reused as a continuous intraday
 event clock without a separately validated source foundation. V59/V60 remain
 immutable and outside this engineering stop.
+
+## V83 DXY-Silver Consensus Result
+
+V83 removed V82's unusable bond source and required the two continuous sources,
+DXY and silver, to agree on the gold direction while XAU remained incomplete.
+Outcome-blind January 2019 calibration selected a five-second, 0.30 bps DXY,
+3.00 bps silver, nonpositive XAU-response, two-quote policy at `18/22 =
+0.818182/day`, split 8 long and 10 short.
+
+Fresh development resolved 505 trades over 615 eligible weekdays
+(`0.821138/day`), split 248 long and 257 short. Base/stress net was USD
+`-309.81/-350.52`; base/stress PF was `0.4014/0.3588`; both halves lost with
+stress PF `0.3048/0.4098`; no month was positive; winner-removed stress net was
+USD `-367.03`; stressed DD was USD `352.23`; and bootstrap p-value was `1.0`.
+
+Decision: `V83_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`3d17c8f97080f2f121f89b65f2cc0a7e78b870b1b2610bb8e242dfe97d0353ad`.
+All later stages remain sealed. V83 cannot be mirrored, retuned, or rescued;
+future work requires a different causal variable. V59/V60 remain immutable.
 
 ## Routes Not Counted As Solutions
 
