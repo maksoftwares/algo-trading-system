@@ -1595,3 +1595,41 @@ aggregate result, tune R5, train a model, route broker orders, or admit the
 sleeve. A separately locked successor router/evaluator must use each label only
 after its recorded causal knowledge time and preserve the 20-weekday validation
 plus 20-weekday confirmation boundary.
+
+## V39 R5 Causal Successor Router - 2026-07-20
+
+`capital-r5-causal-router-v39` now continues the frozen V11 180-day R5 router
+using V38 prospective labels without retrospective leakage. It leaves V35 and
+V38 unchanged.
+
+- Contract SHA-256:
+  `38f9daf3578ae209cd602321aa54706ce5897f3a7c713a5a0043d6512c8c6980`.
+- Frozen policy: attempt `27135`, router ID `16df08f0e24d9d95`, trailing
+  180-day component drawdown, minimum history five, pass threshold `2.0 R`,
+  cold-start multiplier `0.50`, weak multiplier `0.25`, and unchanged component
+  base weights.
+- A prospective component label is eligible only when its V38 status is
+  `EXECUTED` and both its exit and causal knowledge time are strictly earlier
+  than the candidate. Equal-time and future labels are excluded; rejected
+  component candidates never enter history.
+- V39 waits for V38 prefix and status synchronization before appending a route,
+  so a poll-order race cannot bypass the outcome resolver.
+- Historical route parity: 457 component route decisions, zero statistic or
+  multiplier mismatches. The generated 330 selected trades and V11 artifact
+  both hash to
+  `a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa`.
+- Focused tests: 7 passed. The strict knowledge cutoff, frozen cold/weak weights,
+  rejected-label exclusion, no-outcome route schema, invalid knowledge ordering,
+  and append-only prefix behavior are covered.
+- First persistent cycle: `ACTIVE_READ_ONLY_CAUSAL_ROUTER`, synchronized with
+  V38, zero candidates, zero resolutions, zero routes, no aggregate economics,
+  and all authority flags false. Stderr is empty.
+- Persistent hidden parent PID: `34900`; current Python child PID: `38608`;
+  poll interval: 300 seconds.
+- Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\r5_transition_router_v39`.
+
+V39 records route decisions only. It does not attach a candidate outcome,
+evaluate forward profitability, tune the router, train a model, or authorize any
+EA/demo/live action. The untouched validation and confirmation boundaries remain
+the admission gate.

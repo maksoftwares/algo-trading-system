@@ -1,0 +1,104 @@
+{
+  "broker_action_authorized": false,
+  "component_attempts": [
+    23925,
+    24877,
+    24995,
+    25048
+  ],
+  "contract_sha256": "38f9daf3578ae209cd602321aa54706ce5897f3a7c713a5a0043d6512c8c6980",
+  "dependencies": {
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/config/capital_r5_causal_outcome_resolver_v38.json": {
+      "bytes": 4140,
+      "sha256": "6d504634571276c793ab4c48dcb0d74c95c0dba850dee5b74d1719a606b0f7fb"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/outputs/CAPITAL_R5_CAUSAL_OUTCOME_RESOLVER_V38_CONTRACT_LOCK.json": {
+      "bytes": 4178,
+      "sha256": "aeae9659bd1363d1d5ab7ee29f95c90bceb5d9544f1fcadfa3883dd68a3aa151"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py": {
+      "bytes": 39695,
+      "sha256": "47e92cc2fe8fdb262311f6ae5ff63e95b32274d256809ea2ba4e514784384571"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/config/capital_r5_transition_forward_v35.json": {
+      "bytes": 7013,
+      "sha256": "0a6ed6f97fc70f1aa73a3e8cf9ef2286257e958ee4ddcb3895d0fa8132814f67"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/outputs/CAPITAL_R5_TRANSITION_FORWARD_V35_CONTRACT_LOCK.json": {
+      "bytes": 1888,
+      "sha256": "a0cb8eb834c6749fb6342ebdc4158048497a25aaf717d9a15b124a8b9cfa53ff"
+    },
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/config/transition_online_component_router_v11.json": {
+      "bytes": 4562,
+      "sha256": "e092514c7e587fb8f485dcc165f6ce5b4d7717aee6db856dc64a495dfb1070c4"
+    },
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_MANIFEST.csv": {
+      "bytes": 178155,
+      "sha256": "87647750920cb3dc68fe85760624283a85adf66e3a8d894dfb8f08d1554f3f91"
+    },
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet": {
+      "bytes": 187740,
+      "sha256": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e"
+    },
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/src/router.py": {
+      "bytes": 11320,
+      "sha256": "a5b4e5eef8e36061ff818a35b5be214f7a268664e03aee5cb173be555edf51b8"
+    },
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet": {
+      "bytes": 94941,
+      "sha256": "22b13a7349d9c77e7ee31396c1155786e31a1cccfe2a1331514413c3d92c584c"
+    }
+  },
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "package_files": {
+    ".gitattributes": {
+      "bytes": 92,
+      "sha256": "d53bdad2629116ac6fbc490907a2d07dde729f8f5993dbc3d1f9a028ae82e4b4"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 2200,
+      "sha256": "033a1703657aa07c2c812a9a1e3916654b23a9891c94c7e5efcd3e1efb8111ef"
+    },
+    "README.md": {
+      "bytes": 637,
+      "sha256": "7b0b1848e0f7e447296f39f8331de7eb5335950aa98b6cd5b8f0b2f65de8656a"
+    },
+    "config/capital_r5_causal_router_v39.json": {
+      "bytes": 5218,
+      "sha256": "4574e9f8fb53053d14c8f7165ee9d1580a27dd9b591170404fa8868fd15314cf"
+    },
+    "lock_contract.py": {
+      "bytes": 2093,
+      "sha256": "04660a81be235b61f48bdfe90a8502b28e0fb1b70a234dde79f0e6e40adc1413"
+    },
+    "requirements.txt": {
+      "bytes": 33,
+      "sha256": "026f07e75704396c46dfb8f7942ff05b051bf005c81daae43c3b617d34f87ca7"
+    },
+    "run_router.py": {
+      "bytes": 8916,
+      "sha256": "cc577c435ca10cc7b72ba7076cc119a4bc9d45c573435b74f96a37b30786fb63"
+    },
+    "src/__init__.py": {
+      "bytes": 67,
+      "sha256": "0448defc240fc340d901f4b849be202909b37567b9bbeae1f735c8935f8924df"
+    },
+    "src/router_forward.py": {
+      "bytes": 15047,
+      "sha256": "cde6a6371ba3ed96253dd0b4ef6013a2be76b762571fade03b382c37eeef6a6d"
+    },
+    "tests/test_router_forward.py": {
+      "bytes": 5120,
+      "sha256": "18910c235f41600b403d8e1bc2d448eaed9f38047df0b3732a9940ff73c856bb"
+    },
+    "verify_historical_parity.py": {
+      "bytes": 4667,
+      "sha256": "5d511c2e81397af4351f73c6f8877dc36aa0999fdd032ce52dfe62302f03e8cd"
+    }
+  },
+  "router_attempt": 27135,
+  "router_id": "16df08f0e24d9d95",
+  "schema_version": "xauusd_capital_r5_causal_router_v39",
+  "strict_causal_knowledge_cutoff": true,
+  "v38_contract_sha256": "ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd"
+}

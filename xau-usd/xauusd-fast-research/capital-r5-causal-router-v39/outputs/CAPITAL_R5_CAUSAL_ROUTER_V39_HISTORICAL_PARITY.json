@@ -1,0 +1,12 @@
+{
+  "aggregate_economics_opened": false,
+  "artifact_selected_sha256": "a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa",
+  "broker_action_authorized": false,
+  "contract_sha256": "38f9daf3578ae209cd602321aa54706ce5897f3a7c713a5a0043d6512c8c6980",
+  "generated_selected_sha256": "a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa",
+  "historical_parity_passed": true,
+  "route_candidate_rows": 457,
+  "route_stat_mismatch_rows": 0,
+  "schema_version": "xauusd_capital_r5_causal_router_historical_parity_v39",
+  "selected_trade_rows": 330
+}

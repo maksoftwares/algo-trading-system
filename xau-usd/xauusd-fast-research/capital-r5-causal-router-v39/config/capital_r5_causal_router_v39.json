@@ -1,0 +1,80 @@
+{
+  "schema_version": "xauusd_capital_r5_causal_router_v39",
+  "source": {
+    "v35_candidate_runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_shadow_v35",
+    "v35_candidate_filename": "r5_component_candidates.jsonl",
+    "v35_status_filename": "runtime_status.json",
+    "v38_runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_outcomes_v38",
+    "v38_resolution_filename": "r5_component_resolutions.jsonl",
+    "v38_prefix_state_filename": "candidate_source_prefix_state.json",
+    "v38_status_filename": "runtime_status.json",
+    "v38_config": "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/config/capital_r5_causal_outcome_resolver_v38.json",
+    "v38_resolver_module": "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py",
+    "v38_contract_lock": "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/outputs/CAPITAL_R5_CAUSAL_OUTCOME_RESOLVER_V38_CONTRACT_LOCK.json",
+    "v35_contract_lock": "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/outputs/CAPITAL_R5_TRANSITION_FORWARD_V35_CONTRACT_LOCK.json",
+    "v9_component_trades": "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet",
+    "v11_config": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/config/transition_online_component_router_v11.json",
+    "v11_router_module": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/src/router.py",
+    "v11_manifest": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_MANIFEST.csv",
+    "v11_selected_trades": "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet"
+  },
+  "frozen_identity": {
+    "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "component_attempts": [23925, 24877, 24995, 25048],
+    "v35_contract_sha256": "23a0c31a6d6466bac93362945947b8022ae466583f02a26a24c77e69ee24e7fd",
+    "v35_rule_dependency_sha256": "863b9f19635b7a7a120a51c37d80770da90cc9ee7a913cf01b348ba595642ec0",
+    "v38_contract_sha256": "ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd",
+    "router_attempt": 27135,
+    "router_id": "16df08f0e24d9d95",
+    "router_mechanic": "TRAILING_DRAWDOWN_GATE",
+    "router_parameters_json": "{\"cold_start\":\"HALF\",\"lookback_days\":180,\"minimum_history\":5,\"threshold\":2.0,\"weak_multiplier\":0.25}",
+    "tie_priority": "ATTEMPT_ASCENDING",
+    "base_weights": {
+      "23925": 1.0,
+      "24877": 0.25,
+      "24995": 0.75,
+      "25048": 0.75
+    },
+    "historical_selected_trade_rows": 330
+  },
+  "forward": {
+    "poll_seconds": 300,
+    "require_v38_status_not_older_than_v35_status": true,
+    "history_cutoff": "EXIT_AND_CAUSAL_KNOWLEDGE_STRICTLY_BEFORE_CANDIDATE_ENTRY"
+  },
+  "contract_dependencies": [
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/config/capital_r5_transition_forward_v35.json",
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/outputs/CAPITAL_R5_TRANSITION_FORWARD_V35_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/config/capital_r5_causal_outcome_resolver_v38.json",
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py",
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/outputs/CAPITAL_R5_CAUSAL_OUTCOME_RESOLVER_V38_CONTRACT_LOCK.json",
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet",
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/config/transition_online_component_router_v11.json",
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/src/router.py",
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_MANIFEST.csv",
+    "xau-usd/xauusd-fast-research/transition-online-component-router-v11/outputs/TRANSITION_ONLINE_ROUTER_V11_SELECTED_TRADES.parquet"
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_R5_CAUSAL_ROUTER_V39_CONTRACT_LOCK.json",
+    "historical_parity": "CAPITAL_R5_CAUSAL_ROUTER_V39_HISTORICAL_PARITY.json",
+    "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_router_v39",
+    "routed_ledger": "r5_causally_routed_candidates.jsonl",
+    "source_prefix_state": "router_source_prefix_state.json",
+    "runtime_status": "runtime_status.json"
+  },
+  "research_controls": {
+    "candidate_and_resolution_inputs_append_only": true,
+    "strict_causal_knowledge_cutoff": true,
+    "route_decisions_append_only": true,
+    "candidate_outcomes_consumed_for_routing_only": true,
+    "aggregate_economics_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}
