@@ -1,0 +1,111 @@
+{
+  "schema_version": "xauusd_macro_informed_bidirectional_router_v36",
+  "sources": {
+    "base_actions": "../bidirectional-action-router-v1/outputs/BIDIRECTIONAL_ROUTER_V1_MERGED_ACTIONS.parquet",
+    "base_actions_sha256": "ad5c9155f8a3b31ce4288ff644da2533d20de5eb62b1f037b288dfe61d7b5e0b",
+    "base_evidence": "../bidirectional-action-router-v1/outputs/BIDIRECTIONAL_ROUTER_V1_DATASET_EVIDENCE.json",
+    "base_evidence_sha256": "faf53f8581cf6b1d510dda4fa03746186a73af24dced090a877a4bffbf5d2f9d",
+    "baseline_config": "../bidirectional-action-router-v1/config/bidirectional_action_router_v1.json",
+    "baseline_config_sha256": "dc198fcbc1c3f91b4f4efc96f051020fd531907bcdc54cfcef4e32764e438302",
+    "baseline_router_source": "../bidirectional-action-router-v1/src/router.py",
+    "baseline_router_source_sha256": "894b93951769efe35221a8e1a4591700f598c68ddf0b51d15179191ce3a5a030",
+    "baseline_result": "../bidirectional-action-router-v1/outputs/BIDIRECTIONAL_ACTION_ROUTER_V1_RESULT.json",
+    "baseline_result_sha256": "95384d457bd91f0476a020c4f474717bd40b133a769d526ab88886958d400628",
+    "baseline_evaluation_source": "../tokenized-gold-risk-tier-v5/src/risk_tier.py",
+    "baseline_evaluation_source_sha256": "e4116f32d4a245574b4bc53fc83a5e3de1ac6d6ec7f084a6d10340992ddf457e",
+    "core_ledger": "../five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+    "core_ledger_sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+  },
+  "macro_source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-intraday-macro-source-v1/m5_bidask_features_v1.parquet",
+    "feature_manifest": "research/xau-intraday-macro-source-v1/intraday_macro_source_v1.manifest.json",
+    "feature_sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4",
+    "manifest_sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8",
+    "expected_rows": 525099,
+    "start_utc": "2019-01-02T01:00:00Z",
+    "end_exclusive_utc": "2026-07-01T00:00:00Z"
+  },
+  "macro_features": {
+    "horizons": {"H1": 4, "H4": 16},
+    "scales": {"D2": 192, "D10": 960},
+    "minimum_scale_fraction": 0.5,
+    "maximum_feature_age_minutes": 15,
+    "required_finite_features": []
+  },
+  "excluded_regimes": ["UNSAFE_SHOCK"],
+  "walkforward": {
+    "score_start": "2021-07-01T00:00:00Z",
+    "score_end": "2026-07-01T00:00:00Z",
+    "refit_months": 3,
+    "calibration_months": 3,
+    "lookback_months": 24,
+    "half_life_months": 12,
+    "minimum_fit_rows": 4000,
+    "minimum_calibration_events": 200,
+    "target_clip_low_usd": -15.0,
+    "target_clip_high_usd": 20.0
+  },
+  "model": {
+    "learning_rate": 0.03,
+    "max_iter": 140,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 150,
+    "l2_regularization": 2.0,
+    "max_bins": 127,
+    "random_state": 33017
+  },
+  "policies": {
+    "score_percentiles": [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95],
+    "daily_caps": [3, 4, 5, 6, 8],
+    "entry_separation_minutes": [0, 5, 15, 30, 60],
+    "maximum_active_expansion": [2, 3],
+    "expansion_risk_weights": [0.25, 0.50],
+    "parameter_search_count": 1000
+  },
+  "risk_weights": {"core": 1.0},
+  "windows": {
+    "development": ["2021-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "validation": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "development": {"minimum_frequency": 3.00, "maximum_frequency": 4.20, "minimum_expansion_positive_month_share": 0.50},
+    "validation": {"minimum_frequency": 3.00, "maximum_frequency": 4.20, "minimum_expansion_positive_month_share": 0.50},
+    "confirmation": {"minimum_frequency": 3.00, "maximum_frequency": 4.20, "minimum_expansion_positive_month_share": 0.50},
+    "final": {"minimum_frequency": 3.00, "maximum_frequency": 4.20, "minimum_expansion_positive_month_share": 0.50},
+    "common": {
+      "minimum_expansion_pf": 1.20,
+      "minimum_combined_pf": 1.50,
+      "maximum_drawdown_ratio_to_core": 1.25,
+      "top_winners_removed": 10
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "MACRO_INFORMED_ROUTER_V36_CONTRACT_LOCK.json",
+    "merged_actions": "MACRO_INFORMED_ROUTER_V36_MERGED_ACTIONS.parquet",
+    "dataset_evidence": "MACRO_INFORMED_ROUTER_V36_DATASET_EVIDENCE.json",
+    "scored_events": "MACRO_INFORMED_ROUTER_V36_SCORED_EVENTS.parquet",
+    "attempts": "MACRO_INFORMED_ROUTER_V36_ATTEMPTS.csv",
+    "survivors": "MACRO_INFORMED_ROUTER_V36_SURVIVORS.csv",
+    "best_expansion": "MACRO_INFORMED_ROUTER_V36_BEST_EXPANSION.parquet",
+    "selected_expansion": "MACRO_INFORMED_ROUTER_V36_SELECTED_EXPANSION.parquet",
+    "selected_portfolio": "MACRO_INFORMED_ROUTER_V36_SELECTED_PORTFOLIO.parquet",
+    "result_json": "MACRO_INFORMED_ROUTER_V36_RESULT.json",
+    "result_markdown": "MACRO_INFORMED_ROUTER_V36_RESULT.md",
+    "manifest": "MACRO_INFORMED_ROUTER_V36_MANIFEST.json"
+  },
+  "authorization": {
+    "research_only": true,
+    "historical_blocks_contaminated": true,
+    "same_version_tuning_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

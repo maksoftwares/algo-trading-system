@@ -1,0 +1,58 @@
+{
+  "contract_files": {
+    ".gitattributes": "cb64cb1d9d17dcb986e539482d44c79cf2e88dd02abf8a93e753ac7b9759219c",
+    "PREREGISTRATION.md": "f9968bac936644dfc8069daf590d8e9021d1eec270ed260106be45026f328214",
+    "PRE_OUTCOME_AMENDMENT.md": "081288c7f58c92f1e8c10ab97a0785865ca681ed6ebd46c20d1eac2df176af7e",
+    "README.md": "9096c809dd4c522bf39264a664ca3cecd12edf7edc7b4e8f27209a24a0eaa9e8",
+    "build_dataset.py": "620c5c19af89f087fa928a12966f62bbed6cfe6c774fbe4570f4c6d626ee9566",
+    "config/macro_informed_bidirectional_router_v36.json": "cf62c27303a5209128bf8e63e45f9b86f39d201450adf88f65b6e7678f4b2746",
+    "lock_contract.py": "0d47225a00171b2ae6085b7017edebed142b774d67704dde6f8b1d8a980f1730",
+    "requirements.txt": "58ecbc3e3bbf1e6ac5befca5dc3713f1a401f45df830e628837e1e7a9ff6d72f",
+    "run_router.py": "51859088e883749b54056d75154e262f4cf401fd33a58d6ffef2d86c70a2538a",
+    "src/__init__.py": "5db7516a57b8a88c9f4757f3ab42f2fbd5325dd6bd6d89a4bc916c5363af9cc2",
+    "src/contract.py": "1ec0a7c87ae4fe1056e0af92b05a1f1f087c76b40346ca05842c3a66e58f7063",
+    "src/evaluation.py": "1228f137865b9e4ac08b4b58376b3f2a994319e2fd1fddef69f896cf3b7c2127",
+    "src/macro_features.py": "0f36ee9c632fe5d5365287d1f6c5a70533247f694da60b69210dd0c5ed8f3654",
+    "src/router.py": "ca75f093f6505af816ab40cdbd67ce0d576dc35a0f7f1f5c2fa051fb74cb9dfc",
+    "tests/test_v36.py": "a1f96bc0de7b9aa5c1118978920b6b88af4743d5bc92b2d8943848aa48deda8e"
+  },
+  "dependencies": {
+    "base_actions": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\bidirectional-action-router-v1\\outputs\\BIDIRECTIONAL_ROUTER_V1_MERGED_ACTIONS.parquet",
+      "sha256": "ad5c9155f8a3b31ce4288ff644da2533d20de5eb62b1f037b288dfe61d7b5e0b"
+    },
+    "base_evidence": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\bidirectional-action-router-v1\\outputs\\BIDIRECTIONAL_ROUTER_V1_DATASET_EVIDENCE.json",
+      "sha256": "faf53f8581cf6b1d510dda4fa03746186a73af24dced090a877a4bffbf5d2f9d"
+    },
+    "baseline_config": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\bidirectional-action-router-v1\\config\\bidirectional_action_router_v1.json",
+      "sha256": "dc198fcbc1c3f91b4f4efc96f051020fd531907bcdc54cfcef4e32764e438302"
+    },
+    "baseline_evaluation_source": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\tokenized-gold-risk-tier-v5\\src\\risk_tier.py",
+      "sha256": "e4116f32d4a245574b4bc53fc83a5e3de1ac6d6ec7f084a6d10340992ddf457e"
+    },
+    "baseline_result": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\bidirectional-action-router-v1\\outputs\\BIDIRECTIONAL_ACTION_ROUTER_V1_RESULT.json",
+      "sha256": "95384d457bd91f0476a020c4f474717bd40b133a769d526ab88886958d400628"
+    },
+    "baseline_router_source": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\bidirectional-action-router-v1\\src\\router.py",
+      "sha256": "894b93951769efe35221a8e1a4591700f598c68ddf0b51d15179191ce3a5a030"
+    },
+    "core_ledger": {
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\five-specialist-window-report-v1\\outputs\\FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "macro_feature_cache": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-intraday-macro-source-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "3982a3bb56741a5c5139f0381696d4ec4f50d7b1be7588a0efa2664bbf51ffa4"
+    },
+    "macro_feature_manifest": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-intraday-macro-source-v1\\intraday_macro_source_v1.manifest.json",
+      "sha256": "d1250292258d64ac3d052d4cb90691d9415bd638dd03a31f0fdc2a50845c10c8"
+    }
+  },
+  "schema_version": "xauusd_macro_informed_bidirectional_router_v36"
+}

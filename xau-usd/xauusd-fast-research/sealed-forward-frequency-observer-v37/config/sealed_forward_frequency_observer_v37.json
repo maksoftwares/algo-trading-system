@@ -1,0 +1,78 @@
+{
+  "schema_version": "xauusd_sealed_forward_frequency_observer_v37",
+  "forward_boundary_utc": "2026-07-20T00:00:00Z",
+  "maximum_status_age_seconds": 900,
+  "poll_seconds": 900,
+  "automatic_refresh_stop_eligible_weekdays": 19,
+  "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/forward_frequency_observer_v37",
+  "collectors": [
+    {
+      "source_id": "R2_R3_CORE_V28",
+      "status_path": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_shadow_v28/runtime_status.json",
+      "candidate_count_key": "candidate_counts",
+      "candidate_count_mode": "dictionary_sum"
+    },
+    {
+      "source_id": "R1_PULLBACK_V29",
+      "status_path": "C:/MT5PortableProspectiveCollector/MQL5/Files/r1_pullback_shadow_v29/runtime_status.json",
+      "candidate_count_key": "candidate_count",
+      "candidate_count_mode": "integer"
+    },
+    {
+      "source_id": "R4_CHOP_V34",
+      "status_path": "C:/MT5PortableProspectiveCollector/MQL5/Files/r4_chop_shadow_v34/runtime_status.json",
+      "candidate_count_key": "total_forward_candidates",
+      "candidate_count_mode": "integer"
+    },
+    {
+      "source_id": "R5_TRANSITION_V35",
+      "status_path": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_shadow_v35/runtime_status.json",
+      "candidate_count_key": "total_routed_candidates",
+      "candidate_count_mode": "integer"
+    }
+  ],
+  "forward_families": [
+    {
+      "source_id": "MICROBURST_V24_1",
+      "inventory_path": "../capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_FORWARD_INVENTORY.json",
+      "runner_path": "../capital-quote-microburst-forward-v24-1/run_forward_evaluation.py",
+      "candidate_count_key": "candidate_count_all_loaded_forward_data",
+      "eligible_count_key": "eligible_full_weekday_count",
+      "economic_open_key": "economic_outcomes_opened_by_inventory"
+    },
+    {
+      "source_id": "GAP_RESTART_V26",
+      "inventory_path": "../capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_FORWARD_INVENTORY.json",
+      "runner_path": "../capital-gap-restart-forward-v26/run_forward_evaluation.py",
+      "candidate_count_key": "block_candidate_count_all_loaded_forward_data",
+      "eligible_count_key": "eligible_full_weekday_count",
+      "economic_open_key": "economic_outcomes_opened_by_inventory"
+    }
+  ],
+  "locked_dependencies": {
+    "v24_config": {"path": "../capital-quote-microburst-forward-v24-1/config/capital_quote_microburst_forward_v24_1.json", "sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507"},
+    "v24_runner": {"path": "../capital-quote-microburst-forward-v24-1/run_forward_evaluation.py", "sha256": "9676f46b3b7564761e002ff8711b873b1fcfa8b48c87072b8cc483e0eca36d04"},
+    "v24_contract": {"path": "../capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json", "sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a"},
+    "v26_config": {"path": "../capital-gap-restart-forward-v26/config/capital_gap_restart_forward_v26.json", "sha256": "884ac313b660fa14023da1717fc2fe4f80c74f48b467016d3ce1f4a776eca7ec"},
+    "v26_runner": {"path": "../capital-gap-restart-forward-v26/run_forward_evaluation.py", "sha256": "103e265defccf58463d792df12ad6ca7c9504b87a09f368b5c75f99551d264d5"},
+    "v26_contract": {"path": "../capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_CONTRACT_LOCK.json", "sha256": "07b831873c31cd8dab807385099925fbe058515e5fb52218d071ddaa754783de"}
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "SEALED_FORWARD_FREQUENCY_OBSERVER_V37_CONTRACT_LOCK.json",
+    "runtime_status": "forward_frequency_status.json",
+    "runtime_history": "forward_frequency_history.jsonl",
+    "stdout_log": "observer_stdout.log",
+    "stderr_log": "observer_stderr.log"
+  },
+  "authorization": {
+    "research_only": true,
+    "candidate_inventory_only": true,
+    "economic_outcomes_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "attempts_sha256": "a75f885cb615768da89c58e2ebefd208845455e255e42bd64b648c6364e2a502",
+  "best_expansion_sha256": "aa8cbc0e06719b49362ce90686dcad34184b5d7145da1a9c161fdcd1bf02d163",
+  "config_sha256": "cf62c27303a5209128bf8e63e45f9b86f39d201450adf88f65b6e7678f4b2746",
+  "contract_lock_sha256": "8f7831444854995c7b77854c388bfc762c64e1db450d61bb9f1feb69a5b1eaf6",
+  "dataset_evidence_sha256": "cd1c1c3b5728df78b0a7467c26313785e3869a99ff3a0d461a5a4727393e2a22",
+  "dataset_sha256": "f5c9670e86a30fa05685c611241fe173cb07505764b3f5b1a6323f85635bcdad",
+  "markdown_sha256": "73243f8a16c27ca56f0acfcac809aa71b0638660c96969f2c414434839d87db4",
+  "preregistration_sha256": "f9968bac936644dfc8069daf590d8e9021d1eec270ed260106be45026f328214",
+  "result_sha256": "41892e5071878cb6bed2f77d5ebdca5add0ce86e19f30b98b438471b04267ef1",
+  "schema_version": "xauusd_macro_informed_bidirectional_router_v36",
+  "scored_events_sha256": "3c6d305b205d2ecbae04fd37c6f221cbcbce8bf387edd7cb8b891a07fe98cb45",
+  "selected_expansion_sha256": "a2041761ac753e98cb6bf0f6383d013599188c73100d542ba20effdf226cc243",
+  "selected_portfolio_sha256": "068d35dc0959c6588720a9886a733a6fd82de5a6e8e18a70c743f4b955357e37",
+  "survivors_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+}

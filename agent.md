@@ -1478,3 +1478,78 @@ does not affect the initial candidate clock, but it must be closed before claimi
 long-horizon exact online-router continuity. V35 opens no economic outcomes and
 has no broker-action path. Same-period shared-account economics and the 3-4
 trades/day proof remain open.
+
+## V36 Macro-Informed Bidirectional Router - 2026-07-20
+
+`macro-informed-bidirectional-router-v36` tested one locked structural change to
+the rejected V1 bidirectional router: causal DXY and Treasury total-return
+pressure at H1/H4 horizons, plus exact route-direction alignment. The 100,780
+actions, 20,331 events, 81 base features, labels, costs, Core ledger, model,
+walk-forward schedule, four blocks, 1,000 policies, and economic gates remained
+unchanged.
+
+Two pre-economic input checkpoints are documented in
+`PRE_OUTCOME_AMENDMENT.md`. Exact H12 returns were unusable across regular
+Treasury session gaps, and initially requiring complete macro fields reduced a
+calibration block below the unchanged 200-event minimum. No policy economics had
+opened. The final lock preserved every V1 row and used native histogram-model
+missing branches; the 200-event guard was not weakened.
+
+- Final contract lock SHA-256:
+  `8f7831444854995c7b77854c388bfc762c64e1db450d61bb9f1feb69a5b1eaf6`.
+- Dataset: 100,780 actions, 20,331 events, 98 model fields, balanced 50,390
+  long/short rows.
+- Macro timestamps available: 88,216 action rows; every available timestamp was
+  no later than its signal and at most 15 minutes old.
+- Policies evaluated: exactly 1,000; all-block survivors: zero.
+- Diagnostic best: `MACRO_Q90__D6__S60__A2__W0P5`.
+- Final Expansion: 298 trades, 1.142/day, -$128.32 at 0.50 risk weight,
+  PF 0.881, $223.04 drawdown.
+- Final combined: 458 trades, 1.755/day, +$4,380.47, PF 2.515, $944.81
+  closed-trade drawdown.
+- The unchanged final Core alone remained 160 trades, 0.613/day, +$4,508.78,
+  PF 3.492, and $889.69 drawdown. V36 therefore weakened the Core.
+- 68 policies reached at least 3.0 combined trades/day in every block, but none
+  maintained PF >=1.20 or positive Expansion net in every block.
+- In the final block the top-decile router shifted to 85.9% long and 42.6%
+  flipped actions; its top-decile PF fell to 0.843. This is a nonstationary
+  direction failure, not a candidate-density failure.
+- Result SHA-256:
+  `41892e5071878cb6bed2f77d5ebdca5add0ce86e19f30b98b438471b04267ef1`.
+- Manifest SHA-256:
+  `6944d281b52054eec87bb926ba1fb2e01b3a695bb22ec950b9ccbef782e3c80d`.
+- Focused tests: 10 passed after the documented input-only amendments. Ruff:
+  passed. Manifest, causal alignment, split boundaries, duplicates, infinity,
+  and exact baseline-evaluator parity all reverified.
+
+Decision: `MACRO_ROUTER_V36_NO_ALL_BLOCK_SURVIVOR`. V36 is terminal and may not
+be rescued with a score threshold, direction cap, regime filter, feature subset,
+or model retune against the exposed final result. It authorizes no model serving,
+EA consumption, demo/live trading, or broker action.
+
+## V37 Sealed Forward Frequency Observer - 2026-07-20
+
+`sealed-forward-frequency-observer-v37` now provides one outcome-blind status for
+the six active candidate clocks: V28 R2/R3, V29 R1, V34 R4, V35 R5, V24.1
+microburst, and V26 gap-restart. It reads candidate counts and liveness only.
+
+- Static contract SHA-256:
+  `004d48ff7f02670556b3bf8497d40580660263f0a675517be6163d9241825667`.
+- Focused tests: 6 passed. Ruff: passed.
+- First sealed cycle: `PASS_READ_ONLY_SEALED`, all four specialist adapters fresh,
+  all authority flags false, no economic outcome open.
+- Partial Monday supply at 03:13 UTC: one V24.1 candidate and one V26 candidate;
+  all R1-R5 candidate counts remained zero. Raw component supply was two, with a
+  one-to-two unique-count bound because cross-clock timestamps remain sealed.
+- Zero complete evidence weekdays exist. Candidate frequency is explicitly not
+  authorized from a partial day.
+- Automatic inventory refresh is permitted only below 19 eligible weekdays and
+  stops before the 20-day validation can open.
+- Persistent hidden observer PID: `40656`, polling every 900 seconds.
+- Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\forward_frequency_observer_v37`.
+
+V37 does not deduplicate clocks, resolve shared-account concurrency, calculate an
+exit, open P/L, admit a strategy, or call a broker API. The untouched V24.1/V26
+validation path and same-period Core candidate collection remain the authoritative
+route forward.
