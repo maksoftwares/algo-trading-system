@@ -2368,3 +2368,44 @@ economic outcome was opened. V27 and V42 correctly remain fail-closed pending
 component validation. These collectors are now the only genuinely unexposed
 high-density evidence path; they require complete forward weekdays and may not
 be accelerated by retrospective tuning.
+
+## V67 Automatic Forward Handoff Watch - 2026-07-20
+
+An operational audit found that V24.1 and V26 can publish their sealed stage
+artifacts automatically, and V42 already polls V27, but the locked V27 family
+evaluator itself is intentionally one-shot. Without an external scheduler, V42
+could wait indefinitely after a component stage became available. V67 closes
+that scheduling gap without modifying any locked research package.
+
+- Package: `xau-usd/xauusd-fast-research/capital-forward-handoff-watch-v67`.
+- V67 invokes the unchanged V27 runner with the current Python interpreter and
+  no strategy arguments every 300 seconds.
+- V27 still performs all contract, component-artifact, date, hash, admission,
+  and portfolio checks. V67 only records child-process health, operational
+  inventory counts, and the already-published V27 decision.
+- Any child error, missing status, hash mismatch, or contract mismatch produces
+  a self-hashed `FAILED_CLOSED` V67 status. Every model, Python, EA, demo, live,
+  trade, and broker permission remains false.
+- Six focused tests, Ruff lint, and Ruff format verification pass. The first
+  real one-shot and the first detached watch cycle both completed successfully.
+- V67 contract SHA-256:
+  `f267ab2d30339b351a4bfae807019f616a2e53e1c0b71cd19fbe10d2fd0b1ab9`.
+- Detached V67 process tree at launch: `uv` PID `38824`, intermediary Python
+  PID `29084`, worker Python PID `25544`.
+- Existing V24.1 worker PIDs `32220/35740` and V26 process tree
+  `30672/4120/27408` remained responsive. The Capital tick source grew to
+  `51,304,414` bytes at `2026-07-20T12:44:25Z`.
+- The finalized scheduled V67 status at `2026-07-20T12:48:45Z` was
+  `HANDOFF_HEALTHY`; V27 remained
+  `V27_WAITING_FOR_COMPONENT_VALIDATION`, both eligible-full-weekday counts
+  remained zero, and no economics were opened. V67 now prefers a verified V27
+  validation or confirmation audit over a stale waiting status, so terminal
+  stage decisions cannot be hidden by V27's one-shot status behavior.
+- V42 independently refreshed at `2026-07-20T12:43:55Z` with
+  `WAITING_FOR_SEALED_STAGE`, zero authority flags, and V27 health correctly
+  reported as waiting for component validation.
+
+V67 adds no alpha and does not shorten the 20-validation-day plus
+20-confirmation-day evidence requirement. Its sole achievement is making the
+sealed forward handoff automatic and observable while preserving every frozen
+edge, gate, and drawdown control.

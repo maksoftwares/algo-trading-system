@@ -1,0 +1,38 @@
+{
+  "schema_version": "xauusd_capital_forward_handoff_watch_v67",
+  "v27": {
+    "root": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27",
+    "runner": "run_portfolio_evaluation.py",
+    "contract": "outputs/CAPITAL_FORWARD_FAMILY_V27_CONTRACT_LOCK.json",
+    "contract_file_sha256": "93e57f15bf1d8433b4b9669aeba9ec0622b8159f523c62694bc6a57d298e586e",
+    "contract_sha256": "8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6",
+    "status": "outputs/CAPITAL_FORWARD_FAMILY_V27_STATUS.json",
+    "validation_audit": "outputs/CAPITAL_FORWARD_FAMILY_V27_VALIDATION_AUDIT.json",
+    "confirmation_audit": "outputs/CAPITAL_FORWARD_FAMILY_V27_CONFIRMATION_AUDIT.json"
+  },
+  "inventories": {
+    "V24_1": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_FORWARD_INVENTORY.json",
+    "V26": "xau-usd/xauusd-fast-research/capital-gap-restart-forward-v26/outputs/GAP_RESTART_V26_FORWARD_INVENTORY.json"
+  },
+  "runtime": {
+    "poll_seconds": 300,
+    "child_timeout_seconds": 180,
+    "maximum_log_bytes": 5242880
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_FORWARD_HANDOFF_V67_CONTRACT_LOCK.json",
+    "status": "CAPITAL_FORWARD_HANDOFF_V67_STATUS.json",
+    "child_log": "CAPITAL_FORWARD_HANDOFF_V67_CHILD.log"
+  },
+  "research_controls": {
+    "economic_outcomes_calculated_by_v67": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

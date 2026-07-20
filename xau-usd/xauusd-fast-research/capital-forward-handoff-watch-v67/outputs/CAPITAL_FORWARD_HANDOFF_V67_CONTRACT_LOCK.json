@@ -1,0 +1,71 @@
+{
+  "broker_action_authorized": false,
+  "contract_sha256": "f267ab2d30339b351a4bfae807019f616a2e53e1c0b71cd19fbe10d2fd0b1ab9",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "economic_logic_present": false,
+  "economic_outcomes_calculated_by_v67": false,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 1106,
+      "path": "README.md",
+      "sha256": "c7bd2f77e3fbf56c9f943f0a10fa5ae9aaff715031609c28cd25e62542d80e23"
+    },
+    {
+      "bytes": 1138,
+      "path": "PREREGISTRATION.md",
+      "sha256": "dfc8fe63bad7b93cd1fe9094e328c45b883ef049e71b73d625d7aac7d105bf1b"
+    },
+    {
+      "bytes": 28,
+      "path": "requirements.txt",
+      "sha256": "906cab1f0062d38ac98e0c800d44b2247708641f0e08d9e95efd85d34684c68a"
+    },
+    {
+      "bytes": 1673,
+      "path": "config/capital_forward_handoff_watch_v67.json",
+      "sha256": "07780cbfd96b6abebc46bbc07163fe6e8070d4cf4a1bace03784764d1f307385"
+    },
+    {
+      "bytes": 43,
+      "path": "src/__init__.py",
+      "sha256": "050ac3de448af4b4c43fbcde7428feafbc180140b689d3da0a824d66f8d4c784"
+    },
+    {
+      "bytes": 4397,
+      "path": "src/handoff.py",
+      "sha256": "cc051fabbeccd8701ef24bb172e9fc5499bac85d1f9255ec7f8b47704d70e224"
+    },
+    {
+      "bytes": 2796,
+      "path": "lock_contract.py",
+      "sha256": "af22e94d869aa655656950d6e2d0ec3cb25ced7784323d0adc18754a31995f04"
+    },
+    {
+      "bytes": 6779,
+      "path": "run_watch.py",
+      "sha256": "b329a1dbd70233caa36dd18fbc45bc2d739e507c10b313cbba99d7342f4a0dc0"
+    },
+    {
+      "bytes": 4380,
+      "path": "tests/test_handoff.py",
+      "sha256": "13c793a01320d7225f73f8b97cc630e58f7e2ecc19a573a8eb6d2ff578121804"
+    }
+  ],
+  "python_predictions_authorized": false,
+  "runtime": {
+    "child_timeout_seconds": 180,
+    "maximum_log_bytes": 5242880,
+    "poll_seconds": 300
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_forward_handoff_watch_v67_contract_lock",
+  "v27_contract": {
+    "bytes": 5431,
+    "path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/outputs/CAPITAL_FORWARD_FAMILY_V27_CONTRACT_LOCK.json",
+    "sha256": "93e57f15bf1d8433b4b9669aeba9ec0622b8159f523c62694bc6a57d298e586e"
+  },
+  "v27_contract_sha256": "8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6"
+}
