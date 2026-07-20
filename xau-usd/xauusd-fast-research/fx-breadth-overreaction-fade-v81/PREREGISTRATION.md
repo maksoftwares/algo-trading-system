@@ -47,3 +47,9 @@ Failure is terminal. No mirror, threshold, horizon, timing, exit, cost, quota,
 regime, or model rescue may be selected from exposed outcomes. A historical
 pass remains provisional until shared-account testing and untouched forward
 proof. V59/V60 remain byte-identical and outside selection.
+
+The source-freezing sequence is refined by
+`PRELOCK_STAGED_SOURCE_AMENDMENT.md`, written before any post-calibration
+economic outcome was opened. It changes only when raw holdout source slices are
+acquired and audited; the selected policy, execution, gates, and stage dates are
+unchanged.

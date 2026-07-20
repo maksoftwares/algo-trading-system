@@ -121,6 +121,12 @@
     "calibration_features": "FX_BREADTH_XAU_V81_CALIBRATION_FEATURES.parquet",
     "calibration_grid": "FX_BREADTH_XAU_V81_CALIBRATION_GRID.csv",
     "calibration_audit": "FX_BREADTH_XAU_V81_CALIBRATION_AUDIT.json",
+    "stage_source_audits": {
+      "development": "FX_BREADTH_XAU_V81_DEVELOPMENT_SOURCE_AUDIT.json",
+      "confirmation": "FX_BREADTH_XAU_V81_CONFIRMATION_SOURCE_AUDIT.json",
+      "validation": "FX_BREADTH_XAU_V81_VALIDATION_SOURCE_AUDIT.json",
+      "exam": "FX_BREADTH_XAU_V81_EXAM_SOURCE_AUDIT.json"
+    },
     "contract_lock": "FX_BREADTH_XAU_V81_CONTRACT_LOCK.json"
   },
   "research_controls": {

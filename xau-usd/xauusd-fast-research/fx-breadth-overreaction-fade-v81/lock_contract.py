@@ -13,12 +13,18 @@ for source in (ROOT / "src", V72_SRC):
     sys.path.insert(0, str(source))
 
 from catchup import canonical_hash, load_json, sha256_file  # noqa: E402
+from run_source_audit import (  # noqa: E402
+    audit_month_bounds,
+    source_audit_decision,
+    source_audit_output_path,
+)
 
 
 CONFIG = ROOT / "config" / "fx_breadth_overreaction_fade_v81.json"
 PACKAGE_FILES = (
     "README.md",
     "PREREGISTRATION.md",
+    "PRELOCK_STAGED_SOURCE_AMENDMENT.md",
     "requirements.txt",
     "config/fx_breadth_overreaction_fade_v81.json",
     "src/__init__.py",
@@ -47,7 +53,7 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
     if missing := [str(path) for path in package_paths if not path.is_file()]:
         raise FileNotFoundError(missing)
     output = ROOT / str(config["outputs"]["directory"])
-    source_path = output / str(config["outputs"]["source_audit"])
+    source_path = source_audit_output_path(dict(config), "development")
     calibration_source_path = output / str(
         config["outputs"]["calibration_source_audit"]
     )
@@ -56,17 +62,18 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
     calibration_source_audit = load_json(calibration_source_path)
     calibration = load_json(calibration_path)
     if (
-        source_audit.get("decision") != "V81_SOURCE_AUDIT_PASS"
+        source_audit.get("decision") != source_audit_decision("development")
         or canonical_hash(source_audit, "audit_sha256")
         != source_audit.get("audit_sha256")
     ):
         raise ValueError("V81 source audit is invalid")
     if source_audit.get("symbols") != config["source"]["symbols"]:
         raise ValueError("V81 source audit symbol semantics changed")
-    if source_audit.get("first_month") != config["source"]["first_month"]:
-        raise ValueError("V81 source audit start month changed")
-    if source_audit.get("last_month") != config["source"]["last_month"]:
-        raise ValueError("V81 source audit end month changed")
+    first_month, last_month = audit_month_bounds(dict(config), "development")
+    if source_audit.get("first_month") != first_month:
+        raise ValueError("V81 development source audit start month changed")
+    if source_audit.get("last_month") != last_month:
+        raise ValueError("V81 development source audit end month changed")
     if (
         calibration_source_audit.get("decision")
         != "V81_CALIBRATION_SOURCE_AUDIT_PASS"
@@ -107,7 +114,7 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
         "schema_version": "xauusd_fx_breadth_overreaction_v81_contract_lock",
         "package_files": [record(path, ROOT) for path in package_paths],
         "calibration_source_audit": record(calibration_source_path, ROOT),
-        "source_audit": record(source_path, ROOT),
+        "development_source_audit": record(source_path, ROOT),
         "calibration_audit": record(calibration_path, ROOT),
         "calibration_features": record(feature_path, ROOT),
         "calibration_grid": record(grid_path, ROOT),

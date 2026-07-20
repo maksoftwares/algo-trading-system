@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pandas as pd
 
 from fx_breadth import (
@@ -8,6 +11,15 @@ from fx_breadth import (
     policy_grid,
     session_quality,
 )
+from run_source_audit import (
+    SCOPES,
+    audit_month_bounds,
+    source_audit_decision,
+    source_audit_output_path,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def quote_frame(rows: list[tuple[int, float]]) -> pd.DataFrame:
@@ -117,3 +129,31 @@ def test_candidate_generation_keeps_first_event_per_date() -> None:
     candidates = generate_candidates(features, policy=policy, family="TEST")
     assert len(candidates) == 1
     assert int(candidates.iloc[0]["decision_timestamp_ms"]) == 1
+
+
+def test_source_audits_are_sliced_on_registered_stage_boundaries() -> None:
+    config = json.loads(
+        (ROOT / "config" / "fx_breadth_overreaction_fade_v81.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert SCOPES == (
+        "calibration",
+        "development",
+        "confirmation",
+        "validation",
+        "exam",
+        "full",
+    )
+    assert audit_month_bounds(config, "calibration") == ("2018-07", "2018-08")
+    assert audit_month_bounds(config, "development") == ("2018-09", "2021-06")
+    assert audit_month_bounds(config, "confirmation") == ("2021-07", "2022-06")
+    assert audit_month_bounds(config, "validation") == ("2022-07", "2023-06")
+    assert audit_month_bounds(config, "exam") == ("2023-07", "2024-06")
+    assert audit_month_bounds(config, "full") == ("2018-07", "2024-06")
+    assert source_audit_decision("development") == (
+        "V81_DEVELOPMENT_SOURCE_AUDIT_PASS"
+    )
+    assert source_audit_output_path(config, "exam").name == (
+        "FX_BREADTH_XAU_V81_EXAM_SOURCE_AUDIT.json"
+    )

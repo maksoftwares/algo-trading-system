@@ -30,6 +30,11 @@ from fx_breadth import (  # noqa: E402
 )
 from lock_contract import verify_lock  # noqa: E402
 from run_calibration import load_day  # noqa: E402
+from run_source_audit import (  # noqa: E402
+    audit_month_bounds,
+    source_audit_decision,
+    source_audit_output_path,
+)
 import size_segment_flow as base  # noqa: E402
 from spot_labels import label_candidates, load_completed_atr  # noqa: E402
 
@@ -61,10 +66,37 @@ def require_firewall(config: Mapping[str, Any], stage: str) -> None:
             raise RuntimeError(f"V81 {stage} sealed because {prior} failed")
 
 
+def verify_stage_source_audit(
+    config: Mapping[str, Any], stage: str, contract: Mapping[str, Any]
+) -> tuple[dict[str, Any], Path]:
+    values = dict(config)
+    path = source_audit_output_path(values, stage)
+    audit = load_json(path)
+    first_month, last_month = audit_month_bounds(values, stage)
+    if (
+        audit.get("decision") != source_audit_decision(stage)
+        or canonical_hash(audit, "audit_sha256") != audit.get("audit_sha256")
+        or audit.get("symbols") != config["source"]["symbols"]
+        or audit.get("first_month") != first_month
+        or audit.get("last_month") != last_month
+        or bool(audit.get("paid_data_used"))
+        or bool(audit.get("economic_outcomes_opened"))
+    ):
+        raise ValueError(f"V81 {stage} source audit is invalid")
+    if stage == "development" and sha256_file(path) != contract[
+        "development_source_audit"
+    ]["sha256"]:
+        raise ValueError("V81 locked development source audit changed")
+    return audit, path
+
+
 def run_stage(stage: str) -> dict[str, Any]:
     config = load_json(CONFIG)
     contract = verify_lock(config)
     require_firewall(config, stage)
+    stage_source_audit, stage_source_path = verify_stage_source_audit(
+        config, stage, contract
+    )
     candidate_path, label_path, audit_path = output_paths(config, stage)
     if any(path.exists() for path in (candidate_path, label_path, audit_path)):
         raise FileExistsError(f"V81 {stage} outputs already exist")
@@ -168,6 +200,8 @@ def run_stage(stage: str) -> dict[str, Any]:
         "decision": decision,
         "contract_sha256": contract["contract_sha256"],
         "selected_policy": policy,
+        "stage_source_audit_sha256": sha256_file(stage_source_path),
+        "stage_source_audit_hash": stage_source_audit["audit_sha256"],
         "session_quality": quality_rows,
         "eligible_full_weekdays": len(eligible_dates),
         "event_feature_rows": int(feature_rows),

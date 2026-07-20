@@ -25,6 +25,8 @@ from catchup import (  # noqa: E402
 
 
 CONFIG = ROOT / "config" / "fx_breadth_overreaction_fade_v81.json"
+STAGES = ("development", "confirmation", "validation", "exam")
+SCOPES = ("calibration", *STAGES, "full")
 
 
 def audit_month_bounds(config: dict[str, Any], scope: str) -> tuple[str, str]:
@@ -32,17 +34,63 @@ def audit_month_bounds(config: dict[str, Any], scope: str) -> tuple[str, str]:
         return str(config["source"]["first_month"]), str(
             config["source"]["last_month"]
         )
-    calibration = config["calibration"]
-    start = pd.Timestamp(calibration["start"])
-    end = pd.Timestamp(calibration["end"]) - pd.Timedelta(nanoseconds=1)
+    if scope == "calibration":
+        window = config["calibration"]
+        start = pd.Timestamp(window["start"])
+        end = pd.Timestamp(window["end"]) - pd.Timedelta(nanoseconds=1)
+        return start.strftime("%Y-%m"), end.strftime("%Y-%m")
+    if scope not in STAGES:
+        raise ValueError(f"unknown V81 source-audit scope: {scope}")
+    start = pd.Timestamp(config["splits"][scope][0])
+    end = pd.Timestamp(config["splits"][scope][1]) - pd.Timedelta(nanoseconds=1)
     return start.strftime("%Y-%m"), end.strftime("%Y-%m")
+
+
+def source_audit_output_path(config: dict[str, Any], scope: str) -> Path:
+    output = ROOT / str(config["outputs"]["directory"])
+    if scope == "calibration":
+        return output / str(config["outputs"]["calibration_source_audit"])
+    if scope == "full":
+        return output / str(config["outputs"]["source_audit"])
+    if scope not in STAGES:
+        raise ValueError(f"unknown V81 source-audit scope: {scope}")
+    return output / str(config["outputs"]["stage_source_audits"][scope])
+
+
+def source_audit_decision(scope: str) -> str:
+    if scope == "calibration":
+        return "V81_CALIBRATION_SOURCE_AUDIT_PASS"
+    if scope == "full":
+        return "V81_SOURCE_AUDIT_PASS"
+    if scope not in STAGES:
+        raise ValueError(f"unknown V81 source-audit scope: {scope}")
+    return f"V81_{scope.upper()}_SOURCE_AUDIT_PASS"
+
+
+def require_prior_economic_pass(config: dict[str, Any], scope: str) -> None:
+    if scope in ("calibration", "development"):
+        return
+    prior = "exam" if scope == "full" else STAGES[STAGES.index(scope) - 1]
+    output = ROOT / str(config["outputs"]["directory"])
+    path = output / f"FX_BREADTH_XAU_V81_{prior.upper()}_AUDIT.json"
+    if not path.is_file():
+        raise RuntimeError(
+            f"V81 {scope} source remains sealed until {prior} passes"
+        )
+    audit = load_json(path)
+    if (
+        canonical_hash(audit, "audit_sha256") != audit.get("audit_sha256")
+        or not bool(audit.get("gate_passed"))
+    ):
+        raise RuntimeError(
+            f"V81 {scope} source remains sealed because {prior} failed"
+        )
 
 
 def run_source_audit(scope: str = "full") -> dict[str, Any]:
     config = load_json(CONFIG)
-    output = ROOT / str(config["outputs"]["directory"])
-    output_key = "source_audit" if scope == "full" else "calibration_source_audit"
-    path = output / str(config["outputs"][output_key])
+    require_prior_economic_pass(config, scope)
+    path = source_audit_output_path(config, scope)
     if path.exists():
         raise FileExistsError(f"V81 {scope} source audit already exists")
     source = config["source"]
@@ -91,11 +139,7 @@ def run_source_audit(scope: str = "full") -> dict[str, Any]:
         "schema_version": f"xauusd_fx_breadth_overreaction_v81_{scope}_source_audit",
         "campaign_id": config["campaign_id"],
         "scope": scope,
-        "decision": (
-            "V81_SOURCE_AUDIT_PASS"
-            if scope == "full"
-            else "V81_CALIBRATION_SOURCE_AUDIT_PASS"
-        ),
+        "decision": source_audit_decision(scope),
         "storage_root": str(storage),
         "symbols": source["symbols"],
         "first_month": first_month,
@@ -111,7 +155,7 @@ def run_source_audit(scope: str = "full") -> dict[str, Any]:
         "economic_outcomes_opened": False,
     }
     audit["audit_sha256"] = canonical_hash(audit, "audit_sha256")
-    output.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes((json.dumps(audit, indent=2, sort_keys=True) + "\n").encode())
     print(
         json.dumps(
@@ -130,7 +174,7 @@ def run_source_audit(scope: str = "full") -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit frozen V81 source months")
-    parser.add_argument("--scope", choices=("calibration", "full"), default="full")
+    parser.add_argument("--scope", choices=SCOPES, default="full")
     args = parser.parse_args()
     run_source_audit(str(args.scope))
     return 0
