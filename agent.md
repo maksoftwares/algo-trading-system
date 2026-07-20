@@ -1534,8 +1534,10 @@ the six active candidate clocks: V28 R2/R3, V29 R1, V34 R4, V35 R5, V24.1
 microburst, and V26 gap-restart. It reads candidate counts and liveness only.
 
 - Static contract SHA-256:
-  `004d48ff7f02670556b3bf8497d40580660263f0a675517be6163d9241825667`.
-- Focused tests: 6 passed. Ruff: passed.
+  `930b7f8a6bcbb17dea2658ea3efadafaa0195333ff4a60b8ff368a7c2f6599c8`.
+- Focused tests: 7 passed. Ruff: passed. Any malformed, missing, or failed
+  source cycle now overwrites the prior status with an explicit `FAIL_CLOSED`
+  record rather than leaving a stale green status visible.
 - First sealed cycle: `PASS_READ_ONLY_SEALED`, all four specialist adapters fresh,
   all authority flags false, no economic outcome open.
 - Partial Monday supply at 03:13 UTC: one V24.1 candidate and one V26 candidate;
@@ -1545,7 +1547,7 @@ microburst, and V26 gap-restart. It reads candidate counts and liveness only.
   authorized from a partial day.
 - Automatic inventory refresh is permitted only below 19 eligible weekdays and
   stops before the 20-day validation can open.
-- Persistent hidden observer PID: `40656`, polling every 900 seconds.
+- Persistent hidden observer PID: `37456`, polling every 900 seconds.
 - Runtime directory:
   `C:\MT5PortableProspectiveCollector\MQL5\Files\forward_frequency_observer_v37`.
 

@@ -214,6 +214,27 @@ def build_status(
     return payload
 
 
+def build_failure_status(
+    config: dict[str, Any], now_utc: str, error: Exception
+) -> dict[str, Any]:
+    payload = {
+        "schema_version": config["schema_version"],
+        "updated_at_utc": now_utc,
+        "forward_boundary_utc": config["forward_boundary_utc"],
+        "status": "FAIL_CLOSED",
+        "failures": ["OBSERVER_CYCLE_ERROR"],
+        "error_type": type(error).__name__,
+        "error_message": str(error),
+        "raw_component_candidate_supply": None,
+        "candidate_frequency_authorized": False,
+        "economic_outcomes_opened": None,
+        "authorization": config["authorization"],
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    payload["status_sha256"] = hashlib.sha256(canonical).hexdigest()
+    return payload
+
+
 def write_status(config: dict[str, Any], payload: dict[str, Any]) -> Path:
     runtime = resolve(str(config["runtime_directory"]))
     runtime.mkdir(parents=True, exist_ok=True)

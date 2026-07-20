@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from observer import (  # noqa: E402
+    build_failure_status,
     candidate_count,
     load_config,
     should_refresh,
@@ -55,3 +56,16 @@ def test_authority_is_read_only_and_outcome_sealed() -> None:
 def test_locked_dependencies_match() -> None:
     observed = verify_locked_dependencies(load_config())
     assert len(observed) == 6
+
+
+def test_cycle_exception_produces_explicit_fail_closed_status() -> None:
+    config = load_config()
+    payload = build_failure_status(
+        config, "2026-07-20T04:00:00Z", FileNotFoundError("missing status")
+    )
+    assert payload["status"] == "FAIL_CLOSED"
+    assert payload["failures"] == ["OBSERVER_CYCLE_ERROR"]
+    assert payload["candidate_frequency_authorized"] is False
+    assert payload["raw_component_candidate_supply"] is None
+    assert payload["economic_outcomes_opened"] is None
+    assert len(payload["status_sha256"]) == 64

@@ -1,5 +1,5 @@
 {
-  "contract_sha256": "004d48ff7f02670556b3bf8497d40580660263f0a675517be6163d9241825667",
+  "contract_sha256": "930b7f8a6bcbb17dea2658ea3efadafaa0195333ff4a60b8ff368a7c2f6599c8",
   "dependencies": {
     "v24_config": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507",
     "v24_contract": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a",
@@ -15,10 +15,10 @@
     "config/sealed_forward_frequency_observer_v37.json": "eded22fcdfe28d3afe2a6a2cb50d2191f24259d5061326f699ea89cf758993ac",
     "lock_contract.py": "f33710af679287c0dc015e6e6374a1cd7827ba0cce977a76205580834f12d4c3",
     "requirements.txt": "97f2b5a07f6bf3721816df92f78024d03d1b6dd024819c5929aab96fa0c7e433",
-    "run_observer.py": "0d8d3caadde974c342239dc2c010699b4e40fade82ae875bbbc9fd2dcfdb1bf1",
+    "run_observer.py": "3f83c0ce0f69d4f54380c2aaa7e6fa84bfd65ec215ac1e5722b85d84b1e2738c",
     "src/__init__.py": "330e8c35e7ba096aa98e4f921e918d5704a173c78a5974c5c0b0c05d63c579ee",
-    "src/observer.py": "24bdf8a6c8212942cdfc53da57fff4e0059136b0eea41a99db607de43eac3622",
-    "tests/test_observer.py": "8094d15aff3d7015debdf67bc49201f0dff93c880c91dc54997d1cdbf58b9ae3"
+    "src/observer.py": "05df114f6dae24265ca2488fa4f6380f40b5a5ce8afc532b19c0c94a1896fd28",
+    "tests/test_observer.py": "c8919366fea64e55463a3128db500d4f360c344b5612c5736b315b27481cee64"
   },
   "schema_version": "xauusd_sealed_forward_frequency_observer_v37"
 }

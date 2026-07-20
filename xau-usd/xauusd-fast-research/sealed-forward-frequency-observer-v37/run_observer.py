@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from observer import (  # noqa: E402
+    build_failure_status,
     build_status,
     load_config,
     load_json,
@@ -51,6 +52,9 @@ def main() -> int:
             payload = run_cycle(refresh=not args.no_refresh)
             print(json.dumps(payload, indent=2, sort_keys=True), flush=True)
         except Exception as exc:
+            now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+            payload = build_failure_status(config, now, exc)
+            write_status(config, payload)
             print(
                 f"V37 observer cycle failed closed: {exc}", file=sys.stderr, flush=True
             )
