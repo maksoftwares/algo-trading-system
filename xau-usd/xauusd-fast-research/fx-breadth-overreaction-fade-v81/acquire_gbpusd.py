@@ -8,6 +8,8 @@ from pathlib import Path
 import sys
 from urllib.parse import urlparse
 
+import httpx
+
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parents[2]
@@ -90,26 +92,54 @@ def main() -> int:
     }
     evidence = acquire_instrument_evidence(storage)
     print(f"verified official instrument evidence: {evidence}", flush=True)
-    for year, month in month_range(str(args.start), str(args.end)):
-        rows = foundation.acquire_month(
-            storage, "GBPUSD", year, month, concurrency=args.concurrency
-        )
-        manifest = foundation.write_month_acquisition_manifest(
-            storage, "GBPUSD", year, month, rows
-        )
-        foundation.validate_month_acquisition_manifest(
-            storage, "GBPUSD", year, month
-        )
-        frozen = foundation.freeze_raw_month(storage, "GBPUSD", year, month)
-        if not bool(frozen["complete"]):
-            raise RuntimeError(f"incomplete GBPUSD month {year:04d}-{month:02d}")
-        downloaded = sum(row["status"] == "DOWNLOADED_VALID" for row in rows)
-        resumed = sum(row["status"] == "RESUMED_VALID" for row in rows)
-        print(
-            f"GBPUSD {year:04d}-{month:02d}: downloaded={downloaded} "
-            f"resumed={resumed} manifest={manifest}",
-            flush=True,
-        )
+    limits = httpx.Limits(
+        max_connections=args.concurrency,
+        max_keepalive_connections=args.concurrency,
+    )
+    headers = {
+        "User-Agent": "xauusd-fx-breadth-v81/1.0",
+        "Accept": "application/json",
+    }
+    with httpx.Client(headers=headers, limits=limits, follow_redirects=True) as client:
+
+        def fetch(
+            url: str, timeout_seconds: int
+        ) -> tuple[bytes, dict[str, str], int]:
+            foundation.validate_official_url(url)
+            response = client.get(url, timeout=timeout_seconds)
+            return (
+                response.content,
+                {key.lower(): value for key, value in response.headers.items()},
+                int(response.status_code),
+            )
+
+        for year, month in month_range(str(args.start), str(args.end)):
+            rows = foundation.acquire_month(
+                storage,
+                "GBPUSD",
+                year,
+                month,
+                concurrency=args.concurrency,
+                fetcher=fetch,
+            )
+            manifest = foundation.write_month_acquisition_manifest(
+                storage, "GBPUSD", year, month, rows
+            )
+            foundation.validate_month_acquisition_manifest(
+                storage, "GBPUSD", year, month
+            )
+            frozen = foundation.freeze_raw_month(storage, "GBPUSD", year, month)
+            if not bool(frozen["complete"]):
+                raise RuntimeError(
+                    f"incomplete GBPUSD month {year:04d}-{month:02d}"
+                )
+            downloaded = sum(row["status"] == "DOWNLOADED_VALID" for row in rows)
+            resumed = sum(row["status"] == "RESUMED_VALID" for row in rows)
+            print(
+                f"GBPUSD {year:04d}-{month:02d}: downloaded={downloaded} "
+                f"resumed={resumed} manifest={manifest}",
+                flush=True,
+            )
     return 0
 
 
