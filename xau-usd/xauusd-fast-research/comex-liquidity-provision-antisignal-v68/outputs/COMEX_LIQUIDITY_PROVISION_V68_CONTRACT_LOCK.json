@@ -1,0 +1,189 @@
+{
+  "broker_action_authorized": false,
+  "comex_download_manifest": {
+    "bytes": 905427,
+    "path": "C:\\ComexGoldFuturesFoundationV1\\manifests\\downloaded_and_hashed_20260717T082157Z.json",
+    "sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6"
+  },
+  "contract_sha256": "89385b6604d6012f5ba16bc383a24d3c302a8b2bf122b3feec746738b5b4fca3",
+  "demo_authorized": false,
+  "dependency_records": [
+    {
+      "bytes": 12735,
+      "path": "xau-usd/xauusd-fast-research/comex-flow-transition-v44/src/flow_transition.py",
+      "sha256": "ebdcd1dd61ab67549ea4ad867c9df52ee01e2a1baf5d457432dd0651490029a8"
+    },
+    {
+      "bytes": 13018,
+      "path": "xau-usd/xauusd-fast-research/comex-sequence-ignition-v45/src/sequence_ignition.py",
+      "sha256": "bba27778dce046933288cdda9f74c5fd13a359cc768d2b3a4ae81517400e795d"
+    },
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 19419,
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  ],
+  "development_antisignal_outcomes_present_at_lock": false,
+  "development_is_hypothesis_generation_only": true,
+  "ea_consumption_authorized": false,
+  "exam_antisignal_outcomes_present_at_lock": false,
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_initial_risk_usd": 50.0,
+    "ounces": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3,
+    "timeout_exit_grace_ms": 10000
+  },
+  "families": {
+    "FLOW_TRANSITION_LIQUIDITY_PROVISION": {
+      "atr_stop_multiple": 0.5,
+      "maximum_hold_minutes": 30,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "spread_stop_multiple": 4.0
+    },
+    "SEQUENCE_IGNITION_FADE": {
+      "atr_stop_multiple": 0.5,
+      "maximum_hold_minutes": 20,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "spread_stop_multiple": 4.0
+    }
+  },
+  "gates": {
+    "bootstrap": {
+      "block_weekdays": 5,
+      "maximum_one_sided_pvalue": 0.01,
+      "resamples": 10000,
+      "seed": 680068
+    },
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.0,
+    "minimum_positive_month_share": 0.6,
+    "minimum_profitable_day_share": 0.4,
+    "minimum_resolved_trades": {
+      "development": 350,
+      "exam": 180,
+      "validation": 180
+    },
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_trades_per_full_weekday": 0.6,
+    "top_winners_removed": 5
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 1132,
+      "path": "README.md",
+      "sha256": "4fdf19ff6318dcb100aa1dcdc8c6d973395ecf797041419b7ad9695e684bb0e5"
+    },
+    {
+      "bytes": 3037,
+      "path": "PREREGISTRATION.md",
+      "sha256": "25f9af32d91fbaa0cc597b71207586590419a359cd93075d13cae9418220b42f"
+    },
+    {
+      "bytes": 89,
+      "path": "requirements.txt",
+      "sha256": "a7d2cd6c96224427f20e77c194ebb5c978fc3221d61bc305cd2867068f4b351a"
+    },
+    {
+      "bytes": 7641,
+      "path": "config/comex_liquidity_provision_antisignal_v68.json",
+      "sha256": "ce79494b61352a482e0ebbfe7d49a1a50c6d3a0d201ae5e38fa16015591a8fac"
+    },
+    {
+      "bytes": 63,
+      "path": "src/__init__.py",
+      "sha256": "79a038387a2905299be70df0868db0faab3709dc29bb9e6b72b6f57ab66ff53e"
+    },
+    {
+      "bytes": 4852,
+      "path": "src/antisignal.py",
+      "sha256": "7a2c9314f8fb5a5662b2b1000ffbdfd61abbfa6d3471580031926fc4f3f00af4"
+    },
+    {
+      "bytes": 6445,
+      "path": "lock_contract.py",
+      "sha256": "c533afb7af72367584d463e54855874eb80571a530608547ee9cf35c6e1c98db"
+    },
+    {
+      "bytes": 8091,
+      "path": "run_stage.py",
+      "sha256": "af9e993ff041fb28fef724f0ed71014e7c0622e15b533ef25b774c537b20751e"
+    },
+    {
+      "bytes": 3697,
+      "path": "tests/test_antisignal.py",
+      "sha256": "9ffff08d296caa3e667b2c6636d2fc62e5939c5e9bfd36346aef2eacfc2ba5e2"
+    }
+  ],
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "router": {
+    "invert_source_direction": true,
+    "maximum_projected_additive_frequency": 1.0,
+    "maximum_selected_candidates_per_utc_day": 1,
+    "minimum_projected_additive_frequency": 0.6,
+    "source_priority": [
+      "V44",
+      "V45"
+    ]
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_liquidity_provision_v68_contract_lock",
+  "source_hypothesis_records": [
+    {
+      "bytes": 1942,
+      "path": "xau-usd/xauusd-fast-research/comex-flow-transition-v44/outputs/COMEX_FLOW_TRANSITION_V44_CONTRACT_LOCK.json",
+      "sha256": "0e5341166c1fb0788c3d7e7af206e22470aa9518b5fb359cf57cb1935f9f81ed"
+    },
+    {
+      "bytes": 327149,
+      "path": "xau-usd/xauusd-fast-research/comex-flow-transition-v44/outputs/COMEX_FLOW_TRANSITION_V44_DEVELOPMENT_AUDIT.json",
+      "sha256": "0120dc7297137d2483073408fe5ce413318d3b38503ee479440e9e4de2421eed"
+    },
+    {
+      "bytes": 1950,
+      "path": "xau-usd/xauusd-fast-research/comex-sequence-ignition-v45/outputs/COMEX_SEQUENCE_IGNITION_V45_CONTRACT_LOCK.json",
+      "sha256": "0e089185da5af1323cf9dc1f3a5d5f8b382f42519bf6050db4cbc18f899171d6"
+    },
+    {
+      "bytes": 327154,
+      "path": "xau-usd/xauusd-fast-research/comex-sequence-ignition-v45/outputs/COMEX_SEQUENCE_IGNITION_V45_DEVELOPMENT_AUDIT.json",
+      "sha256": "67b5cb6a35385c4905d3d019bc3cd43da7ae8047339718ad2782404cc61bcb08"
+    }
+  ],
+  "splits": {
+    "development": [
+      "2022-08-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2025-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "validation": [
+      "2024-07-01T00:00:00Z",
+      "2025-07-01T00:00:00Z"
+    ]
+  },
+  "spot_feature_cache": {
+    "bytes": 104974475,
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "validation_antisignal_outcomes_present_at_lock": false
+}

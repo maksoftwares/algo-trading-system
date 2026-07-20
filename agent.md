@@ -2409,3 +2409,29 @@ V67 adds no alpha and does not shorten the 20-validation-day plus
 20-confirmation-day evidence requirement. Its sole achievement is making the
 sealed forward handoff automatic and observable while preserving every frozen
 edge, gate, and drawdown control.
+
+## V68 COMEX Liquidity-Provision Anti-Signal - 2026-07-20
+
+V68 tested whether the terminally failed V44 exhausted-flow transition and V45
+sequence-ignition candidates contained a mechanically recoverable reversal
+edge. The package was frozen before opening V68 outcomes; it inverted source
+direction exactly once, kept the first candidate per UTC date, and preserved
+all source thresholds, sessions, stops, targets, holds, costs, and risk.
+
+- Contract SHA-256:
+  `89385b6604d6012f5ba16bc383a24d3c302a8b2bf122b3feec746738b5b4fca3`.
+- Development selected `479` candidates over `491` eligible weekdays; `475`
+  resolved for `0.967413/day`, with `235` longs and `240` shorts.
+- Base/stress net was USD `-365.52/-402.40`; base/stress PF was
+  `0.4338/0.4006`; both half-stage stress PF values were below `0.425`.
+- Positive-month share was zero, top-five-winner-removed stress net was USD
+  `-425.19`, closed stress DD was USD `410.41`, and bootstrap p-value was `1.0`.
+- Decision: `V68_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
+  Audit SHA-256:
+  `d4ee2fa4363e026aa2479909548b140053117406c39a36dc4aa235f8e0152aa7`.
+
+V68 closes the V44/V45 continuation-versus-mirror question: neither direction
+has evidence of edge after costs. V59/V60 remain immutable and accepted. Any
+next historical expansion must add a materially new causal input; threshold,
+quota, direction, or timing rescue on these outcomes is prohibited. V24.1,
+V26, V27, V42, and V67 continue as the untouched forward evidence path.

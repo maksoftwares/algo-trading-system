@@ -23,6 +23,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | Scheduled CPI, PPI, NFP, and FOMC aftermath | corrected event and holdout campaigns | Sparse and not multiplicity/stability supported | Event sleeves cannot solve daily frequency |
 | COMEX total-flow, auction, VWAP, session, and lead/lag | COMEX campaigns | No chronological survivor | Total flow alone is retired |
 | COMEX large-versus-small aggressor-flow continuation | V32/V33 | 2.383 resolved trades/day, base PF 0.493, stress PF 0.455 | Terminal; validation/exam sealed, no mirror rescue |
+| COMEX exhausted-flow transition and sequence ignition | V44/V45/V68 | Continuations failed near PF 0.46; fixed anti-signal reached 0.967/day but stress PF 0.401 and USD 410.41 DD | Terminal in both directions; no threshold, quota, or mirror reuse |
 | Tokenized-gold and cross-venue divergence | PAXG and Capital-Dukascopy campaigns | No robust causal economic lane | No lag/threshold reuse on exposed history |
 | Capital quote exhaustion reversal | V30 | 5.9/day, base PF 0.7171, stress PF 0.5907 | Terminal; no tuning or mirror |
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
@@ -75,6 +76,26 @@ with an unexposed information boundary are:
 
 Historical exploration may continue only for a mechanism with a materially new
 causal input. It cannot delay or replace the untouched forward proof.
+
+## V68 Fixed Anti-Signal Result
+
+V68 tested the only defensible mirror audit of V44/V45: one preregistered union,
+source direction inverted exactly once, earliest candidate per UTC date, and no
+outcome-selected threshold, quota, session, stop, target, or hold change. It
+reached the intended density but failed every economic and stability gate.
+
+- 475 resolved trades over 491 eligible full weekdays, or `0.967413/day`;
+- 235 longs and 240 shorts;
+- USD `-365.52` base and USD `-402.40` stress net;
+- base PF `0.4338` and stress PF `0.4006`;
+- first/second-half stress PF `0.3804/0.4241`;
+- zero positive months, USD `410.41` stress DD, and bootstrap p-value `1.0`.
+
+Decision: `V68_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
+The result shows that weak V44/V45 continuation was not a hidden reversible
+edge; both sides are dominated by noise and cost. New historical work must use
+a new causal variable, such as a directly synchronized cross-venue price
+innovation, and may not recycle these exposed source outcomes.
 
 ## Routes Not Counted As Solutions
 

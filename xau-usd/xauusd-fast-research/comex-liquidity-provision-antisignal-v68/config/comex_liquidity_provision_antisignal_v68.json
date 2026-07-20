@@ -1,0 +1,185 @@
+{
+  "schema_version": "xauusd_comex_liquidity_provision_antisignal_v68",
+  "campaign_id": "comex-liquidity-provision-antisignal-v68",
+  "source": {
+    "job_directory": "C:/ComexGoldFuturesFoundationV1/raw/GLBX-20260717-5MX758XBAQ/GLBX-20260717-5MX758XBAQ",
+    "download_manifest": "C:/ComexGoldFuturesFoundationV1/manifests/downloaded_and_hashed_20260717T082157Z.json",
+    "download_manifest_sha256": "5abfaa2de812671938a48b5b88b83c7a45acdc85093effa61890a45ee2a428e6",
+    "network_access_authorized": false,
+    "payment_authorized": false
+  },
+  "source_hypotheses": {
+    "V44": {
+      "root": "xau-usd/xauusd-fast-research/comex-flow-transition-v44",
+      "contract": "outputs/COMEX_FLOW_TRANSITION_V44_CONTRACT_LOCK.json",
+      "contract_file_sha256": "0e5341166c1fb0788c3d7e7af206e22470aa9518b5fb359cf57cb1935f9f81ed",
+      "contract_sha256": "3f0fa32f8b5d70c2abdcd93b0eb4bb1823912ab7780dee34f9e5d611294ebcf6",
+      "development_audit": "outputs/COMEX_FLOW_TRANSITION_V44_DEVELOPMENT_AUDIT.json",
+      "development_audit_file_sha256": "0120dc7297137d2483073408fe5ce413318d3b38503ee479440e9e4de2421eed",
+      "development_audit_sha256": "0cf494f8a4abece1db1f5fe181fcd88f1a490ed43d6bf5854888c79aaace75b3",
+      "validation_prefix": "outputs/COMEX_FLOW_TRANSITION_V44_VALIDATION",
+      "exam_prefix": "outputs/COMEX_FLOW_TRANSITION_V44_EXAM",
+      "selected_policy": {
+        "maximum_prior_directional_impact_efficiency": 0.1,
+        "minimum_absolute_current_imbalance": 0.2,
+        "minimum_absolute_prior_imbalance": 0.25,
+        "minimum_current_volume": 50,
+        "minimum_prior_volume": 220,
+        "policy_id": "PV220__PI25__IE10__CV50__CI20"
+      },
+      "candidate_rule": {
+        "family": "flow_exhaustion_flip",
+        "timezone": "America/New_York",
+        "session_start": "08:20",
+        "session_end": "13:30",
+        "bar_minutes": 5,
+        "tick_size": 0.1,
+        "instrument_warmup_seconds": 300,
+        "prior_window_seconds": 30,
+        "current_window_seconds": 5,
+        "minimum_current_acceleration": 0.75,
+        "minimum_current_directional_impulse_ticks": 1.0,
+        "cooldown_minutes": 45,
+        "minimum_session_coverage_minutes": 300,
+        "minimum_nonempty_bars": 50
+      },
+      "antisignal_family": "FLOW_TRANSITION_LIQUIDITY_PROVISION"
+    },
+    "V45": {
+      "root": "xau-usd/xauusd-fast-research/comex-sequence-ignition-v45",
+      "contract": "outputs/COMEX_SEQUENCE_IGNITION_V45_CONTRACT_LOCK.json",
+      "contract_file_sha256": "0e089185da5af1323cf9dc1f3a5d5f8b382f42519bf6050db4cbc18f899171d6",
+      "contract_sha256": "3e950672a46401187d2bcddbc2634c53bd862a420c15b2c8c19c59a26cec019b",
+      "development_audit": "outputs/COMEX_SEQUENCE_IGNITION_V45_DEVELOPMENT_AUDIT.json",
+      "development_audit_file_sha256": "67b5cb6a35385c4905d3d019bc3cd43da7ae8047339718ad2782404cc61bcb08",
+      "development_audit_sha256": "c405b5a21f8cb6a203916e8691f7c9fd92818749be4229d27977daacd1f19c42",
+      "validation_prefix": "outputs/COMEX_SEQUENCE_IGNITION_V45_VALIDATION",
+      "exam_prefix": "outputs/COMEX_SEQUENCE_IGNITION_V45_EXAM",
+      "selected_policy": {
+        "minimum_absolute_current_imbalance": 0.35,
+        "minimum_arrival_acceleration": 1.25,
+        "minimum_current_trade_count": 30,
+        "minimum_same_side_transition_share": 0.7,
+        "minimum_terminal_run_trades": 5,
+        "policy_id": "TC30__RL05__TS70__IM35__AC125"
+      },
+      "candidate_rule": {
+        "family": "sequence_ignition_continuation",
+        "timezone": "America/New_York",
+        "session_start": "08:20",
+        "session_end": "13:30",
+        "bar_minutes": 5,
+        "tick_size": 0.1,
+        "instrument_warmup_seconds": 300,
+        "prior_window_seconds": 30,
+        "current_window_seconds": 5,
+        "minimum_current_directional_impulse_ticks": 1.0,
+        "cooldown_minutes": 45,
+        "minimum_session_coverage_minutes": 300,
+        "minimum_nonempty_bars": 50
+      },
+      "antisignal_family": "SEQUENCE_IGNITION_FADE"
+    }
+  },
+  "locked_dependencies": {
+    "flow_transition": {
+      "path": "xau-usd/xauusd-fast-research/comex-flow-transition-v44/src/flow_transition.py",
+      "sha256": "ebdcd1dd61ab67549ea4ad867c9df52ee01e2a1baf5d457432dd0651490029a8"
+    },
+    "sequence_ignition": {
+      "path": "xau-usd/xauusd-fast-research/comex-sequence-ignition-v45/src/sequence_ignition.py",
+      "sha256": "bba27778dce046933288cdda9f74c5fd13a359cc768d2b3a4ae81517400e795d"
+    },
+    "spot_labels": {
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    "stage_metrics": {
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  },
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "m5_bar_width_ms": 300000
+  },
+  "splits": {
+    "development": ["2022-08-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "router": {
+    "source_priority": ["V44", "V45"],
+    "maximum_selected_candidates_per_utc_day": 1,
+    "invert_source_direction": true,
+    "minimum_projected_additive_frequency": 0.6,
+    "maximum_projected_additive_frequency": 1.0
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 2000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "FLOW_TRANSITION_LIQUIDITY_PROVISION": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 30
+    },
+    "SEQUENCE_IGNITION_FADE": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 20
+    }
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "development": 350,
+      "validation": 180,
+      "exam": 180
+    },
+    "minimum_trades_per_full_weekday": 0.6,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_profitable_day_share": 0.4,
+    "minimum_positive_month_share": 0.6,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 10000,
+      "seed": 680068,
+      "maximum_one_sided_pvalue": 0.01
+    }
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "COMEX_LIQUIDITY_PROVISION_V68_CONTRACT_LOCK.json"
+  },
+  "research_controls": {
+    "development_is_hypothesis_generation_only": true,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "paid_data_authorized": false,
+    "broker_action_authorized": false
+  }
+}
