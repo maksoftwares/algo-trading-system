@@ -1,0 +1,127 @@
+{
+  "schema_version": "xauusd_capital_quote_exhaustion_reversal_v30",
+  "source": {
+    "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+    "filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "schema_version": "xau_prospective_tick_v1",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "calibration_file": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+    "calibration_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a"
+  },
+  "development_source": {
+    "directory": "../../xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks",
+    "filename_glob": "XAUUSD_ticks_202606*.csv",
+    "dataset_version": "xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066",
+    "account_scope": 1025742,
+    "account_label": "A1",
+    "symbol": "XAUUSD"
+  },
+  "frozen_v24_1": {
+    "root_relative": "../capital-quote-microburst-forward-v24-1",
+    "config_relative": "config/capital_quote_microburst_forward_v24_1.json",
+    "config_file_sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507",
+    "module_relative": "src/microburst.py",
+    "module_file_sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96",
+    "contract_relative": "outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+    "contract_file_sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a",
+    "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0"
+  },
+  "forward": {
+    "start_inclusive_utc": "2026-07-21T00:00:00Z",
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20,
+    "validation_audit": "outputs/EXHAUSTION_REVERSAL_V30_VALIDATION_AUDIT.json",
+    "confirmation_audit": "outputs/EXHAUSTION_REVERSAL_V30_CONFIRMATION_AUDIT.json"
+  },
+  "data_quality": {
+    "maximum_duplicate_millisecond_share": 0.05,
+    "minimum_unique_quotes_per_full_day": 100000,
+    "latest_day_start_hour_utc": 2,
+    "earliest_day_end_hour_utc": 22,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011
+  },
+  "feature": {
+    "lookback_ms": 3000,
+    "maximum_boundary_quote_age_ms": 1000,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.75,
+    "minimum_nonzero_mid_updates": 15,
+    "minimum_absolute_update_imbalance": 0.70,
+    "minimum_absolute_displacement_price": 1.20,
+    "arm_expiry_ms": 5000,
+    "minimum_retracement_price": 0.40,
+    "minimum_consecutive_counter_updates": 3,
+    "post_trigger_refractory_ms": 60000
+  },
+  "episode": {
+    "utc_block_hours": 4,
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6
+  },
+  "simulation": {
+    "hold_seconds": 120,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "base_slippage_per_side_price": 0.05,
+    "stress_slippage_per_side_price": 0.15,
+    "reference_lot": 0.01,
+    "dollars_per_price_unit": 1.0
+  },
+  "gates": {
+    "minimum_executable_trades": 20,
+    "minimum_trades_per_full_weekday": 2.0,
+    "maximum_trades_per_full_weekday": 6.0,
+    "minimum_direction_share": 0.20,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_profitable_day_share": 0.50,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "minimum_recovery_factor": 1.0,
+    "minimum_half_profit_factor": 1.0,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 3001,
+    "daily_bootstrap_lower_quantile": 0.10,
+    "require_daily_bootstrap_lower_bound_positive": true
+  },
+  "multiple_testing": {
+    "registered_capital_forward_hypotheses": 4,
+    "family_alpha": 0.05,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "block_length_weekdays": 5,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 3002,
+    "maximum_one_sided_pvalue": 0.0125,
+    "prior_claim_external_recheck_required": true
+  },
+  "outputs": {
+    "directory": "outputs",
+    "calibration_candidates": "EXHAUSTION_REVERSAL_V30_CALIBRATION_CANDIDATES.csv",
+    "calibration_audit": "EXHAUSTION_REVERSAL_V30_CALIBRATION_AUDIT.json",
+    "contract_lock": "EXHAUSTION_REVERSAL_V30_CONTRACT_LOCK.json",
+    "development_trades": "EXHAUSTION_REVERSAL_V30_DEVELOPMENT_TRADES.csv",
+    "development_audit": "EXHAUSTION_REVERSAL_V30_DEVELOPMENT_AUDIT.json",
+    "forward_inventory": "EXHAUSTION_REVERSAL_V30_FORWARD_INVENTORY.json",
+    "validation_trades": "EXHAUSTION_REVERSAL_V30_VALIDATION_TRADES.csv",
+    "confirmation_trades": "EXHAUSTION_REVERSAL_V30_CONFIRMATION_TRADES.csv"
+  },
+  "research_controls": {
+    "hypothesis_count": 1,
+    "outcome_blind_calibration_before_lock": true,
+    "calibration_post_candidate_prices_used_for_label_or_outcome": false,
+    "calibration_pnl_calculated": false,
+    "parameter_grid_allowed": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

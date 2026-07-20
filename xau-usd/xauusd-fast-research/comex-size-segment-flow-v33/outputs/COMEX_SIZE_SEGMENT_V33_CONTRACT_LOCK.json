@@ -1,0 +1,37 @@
+{
+  "base_dependency_sha256": {
+    "config/comex_size_segment_flow_v32.json": "2175bb8d1fc1a87f425df5f57f81676e03cd3294b1cfa34fadf3f2d4b152fddc",
+    "outputs/COMEX_SIZE_SEGMENT_V32_CALIBRATION_AUDIT.json": "376d188bc288d0f657c8d313e480889726930061579018dafb9489379bf99e4a",
+    "src/size_segment_flow.py": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+  },
+  "broker_action_authorized": false,
+  "calibration_audit_sha256": "634f7555b10b86af2a18ccb256a0945874586ecab329892e82263dc04017848c",
+  "calibration_payload_sha256": "4c2f51c99961fff129e92b2bbc6bf69e121011896119e449a619e68a6745a1e3",
+  "campaign_id": "comex-size-segment-flow-v33",
+  "contract_sha256": "3bc928c5eddc2254a2b086ed2d0901c5af8314df57fa65aff068b4898713addc",
+  "economic_outcomes_opened_at_lock": false,
+  "local_file_sha256": {
+    "PREREGISTRATION.md": "534b7353687c86270c80afb991eeb2da54650439becad39347c87949e3920888",
+    "README.md": "4a7af2e3a0db574176bdc0b8494a72325e641729e27b508340a00757a18bcf83",
+    "config/comex_size_segment_flow_v33.json": "a53ccaf0ad58e70e5a6a5018432928897dc2672b36cbf111a65197828436ba6e",
+    "lock_contract.py": "bc8f49463942e96ae7b7f8ed8afe35b929fbe7af7d56a8a0a1a3a7dc19fd3d02",
+    "prepare_calibration.py": "497e0ec47e5388fcb240be9b9d8749d05a4701c2b7f4d2d907452d07173bb956",
+    "requirements.txt": "f5cf1da269975209faac7ab2859c49b4acba63507291b3f0e56bdfbe96e7744f",
+    "run_stage.py": "1adc8c561de07049232370f9a75f9656fcc3e7470f697c6bba22b268c38eb9a3",
+    "src/__init__.py": "188317bb400f1103e4e7c42e39bc33492fad23b8611061b7ef4b8399489f3b9d",
+    "src/v33.py": "200de4615b2b57cba9d515f4adb12a5751327c7022c0d16688da3fb7a2f48174",
+    "tests/test_v33.py": "64d399faf0d76b69cdae6266980fa516d0cba2dd074f573977735de585bd137b"
+  },
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_size_segment_v33_contract_lock",
+  "selected_candidates_sha256": "28cbaa61b912f105cafa1541701c1f593337f3573bde32b38f03e3d9eaa58e97",
+  "selected_policy": {
+    "cooldown_minutes": 45,
+    "large_trade_size": 8,
+    "minimum_absolute_large_imbalance": 0.35,
+    "minimum_absolute_opposing_small_imbalance": 0.1,
+    "minimum_large_volume": 20,
+    "minimum_small_volume": 50,
+    "policy_id": "SZ08__LV020__LI35__SI10__SV050__CD45"
+  }
+}

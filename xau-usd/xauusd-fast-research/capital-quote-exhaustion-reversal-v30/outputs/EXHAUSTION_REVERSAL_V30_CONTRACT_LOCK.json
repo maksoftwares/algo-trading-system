@@ -1,0 +1,283 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 2139,
+    "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/outputs/EXHAUSTION_REVERSAL_V30_CALIBRATION_AUDIT.json",
+    "sha256": "f4be8cf42ff6834c108930d03ab9aa7cf0501268b11b2e0cd23e36b5be9257ac"
+  },
+  "calibration_audit_sha256": "8ac76e484cacd72ea2042bcea32e938c7ce08c553023bc11e7ed3245b472079d",
+  "calibration_candidates": {
+    "bytes": 716,
+    "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/outputs/EXHAUSTION_REVERSAL_V30_CALIBRATION_CANDIDATES.csv",
+    "sha256": "99658987b842affad8488e9bd922358eefdbff79c02dba68797f29a0912a4edd"
+  },
+  "candidate_definition": {
+    "arm_expiry_ms": 5000,
+    "lookback_ms": 3000,
+    "maximum_boundary_quote_age_ms": 1000,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.75,
+    "minimum_absolute_displacement_price": 1.2,
+    "minimum_absolute_update_imbalance": 0.7,
+    "minimum_consecutive_counter_updates": 3,
+    "minimum_nonzero_mid_updates": 15,
+    "minimum_retracement_price": 0.4,
+    "post_trigger_refractory_ms": 60000
+  },
+  "contract_sha256": "456b4ae5ddca695c2e5b37a79ab297c859d133b39e5197c4a78a80cf8a687d95",
+  "data_quality_definition": {
+    "earliest_day_end_hour_utc": 22,
+    "latest_day_start_hour_utc": 2,
+    "maximum_duplicate_millisecond_share": 0.05,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_spread_field_error": 0.011,
+    "maximum_timestamp_disagreement_ms": 1,
+    "minimum_unique_quotes_per_full_day": 100000
+  },
+  "demo_authorized": false,
+  "dependency_files": [
+    {
+      "bytes": 3776,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/config/capital_quote_microburst_forward_v24_1.json",
+      "sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507"
+    },
+    {
+      "bytes": 24144,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/src/microburst.py",
+      "sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96"
+    },
+    {
+      "bytes": 3673,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+      "sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a"
+    }
+  ],
+  "development_outcomes_opened_at_lock": false,
+  "development_source_files": [
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260601.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260602.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260603.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260604.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 73622535,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260605.csv",
+      "sha256": "de9db486973498163d0a4d0b2f27ba7f8a98bb8001719c1e7d5401ff2a0faeca"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260606.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 5538925,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260607.csv",
+      "sha256": "5a32a283a11c176ff1b66f3354fb7ac2337c5d160aacb6c6a7730ed232b8596b"
+    },
+    {
+      "bytes": 75992567,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260608.csv",
+      "sha256": "881091eaf25cd855b27571be924bad51618bde3ad56c2297b511d7dee822a3f2"
+    },
+    {
+      "bytes": 75734002,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260609.csv",
+      "sha256": "1b3d31e577eeec36cc6d9d3f055dbdd95aae1780b06a27c69151c3d769abdf67"
+    },
+    {
+      "bytes": 101326308,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260610.csv",
+      "sha256": "14662a735705e7c2b4feab1dbc524b8841600aab13acc12c006a82725e0bfdcd"
+    },
+    {
+      "bytes": 103639528,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260611.csv",
+      "sha256": "b3e4c78bf473e5a20eadc563cd49063f87c15bdebc4fd049d226cea884671220"
+    },
+    {
+      "bytes": 73553631,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260612.csv",
+      "sha256": "a8827f5e5fd3d971cc8ca2f2fa4bf3bf5b32ea596abc37406cbdffaa5f3cf059"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260613.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 4257282,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260614.csv",
+      "sha256": "5c6418ca58d814b45c6c7399879737e8bc1c50b86b9da47f7377304028cfb56c"
+    },
+    {
+      "bytes": 54871921,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260615.csv",
+      "sha256": "e6c1dd19643e635c3917e0b97a097021e927a2bf5a560cb28ef8eb27cf997790"
+    },
+    {
+      "bytes": 49692692,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260616.csv",
+      "sha256": "09565acd71807e1de3add0b5d11f3093b3ae4e52a8fea9182b0e44c2d34cfa48"
+    },
+    {
+      "bytes": 72710062,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260617.csv",
+      "sha256": "15c23eb5c80314c4634495f46114cff1cf6289af9311605b36f7d1e52cc6f5dc"
+    },
+    {
+      "bytes": 67529005,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260618.csv",
+      "sha256": "cdebdc0776957fe0868e54407c9daf8e8c975c289c9b3d6d871d0e39cada3347"
+    },
+    {
+      "bytes": 41340860,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260619.csv",
+      "sha256": "2b339f73977f6b2bcd51cc6564f7a23d0737439ace099f50c4ecea11863f2985"
+    },
+    {
+      "bytes": 135,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260620.csv",
+      "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+    },
+    {
+      "bytes": 4151869,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260621.csv",
+      "sha256": "3e41c17f9227a7aee71f726450e3238877d495e80829a47546a5b8820a6b601d"
+    },
+    {
+      "bytes": 59349381,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260622.csv",
+      "sha256": "be2a93973d9cd8c269fce821c9c729882af5cc6e99ce5b1f7968711fa58c48c2"
+    },
+    {
+      "bytes": 73071517,
+      "path": "xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260623.csv",
+      "sha256": "7ae775f90510e53c56476d0828c86f8be6191da7a5de672ad809877d68781448"
+    }
+  ],
+  "ea_consumption_authorized": false,
+  "economic_gates": {
+    "daily_bootstrap_lower_quantile": 0.1,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 3001,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "maximum_trades_per_full_weekday": 6.0,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_direction_share": 0.2,
+    "minimum_executable_trades": 20,
+    "minimum_half_profit_factor": 1.0,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_recovery_factor": 1.0,
+    "minimum_stress_profit_factor": 1.05,
+    "minimum_trades_per_full_weekday": 2.0,
+    "require_daily_bootstrap_lower_bound_positive": true,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true
+  },
+  "episode_definition": {
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6,
+    "utc_block_hours": 4
+  },
+  "forward_files_present_at_lock": false,
+  "forward_start_inclusive_utc": "2026-07-21T00:00:00Z",
+  "frozen_v24_1_contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0",
+  "hypothesis_count": 1,
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "multiple_testing": {
+    "block_length_weekdays": 5,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 3002,
+    "family_alpha": 0.05,
+    "maximum_one_sided_pvalue": 0.0125,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "prior_claim_external_recheck_required": true,
+    "registered_capital_forward_hypotheses": 4
+  },
+  "package_files": [
+    {
+      "bytes": 909,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/README.md",
+      "sha256": "27fa33b734bed9f11b03274dda2342f20b59300567262ea4f36c4413b170e7a3"
+    },
+    {
+      "bytes": 3292,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/PREREGISTRATION.md",
+      "sha256": "7326dd88cc0bd5465555fee508a69cd787945ebaacc925b65888ecbe63e1997a"
+    },
+    {
+      "bytes": 54,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/requirements.txt",
+      "sha256": "b624e6a3232537eb07eba47e255ef3edd1da5c81acbd2e9aba9f6078a637e36d"
+    },
+    {
+      "bytes": 5360,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/config/capital_quote_exhaustion_reversal_v30.json",
+      "sha256": "53981c1cb4a9ccd3ac8bf2d53f170fac4c2573e5021b49113852aab393486d27"
+    },
+    {
+      "bytes": 62,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/src/__init__.py",
+      "sha256": "de3e978fb2e4db7002de950db842cef4b56fbf28a81bcb8f382f0b4f5e54dbf5"
+    },
+    {
+      "bytes": 16546,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/src/exhaustion_reversal.py",
+      "sha256": "b5d2cead72fa346ca8af8dfad489344fba88976ba50c71c1ac14743ec90bcdf4"
+    },
+    {
+      "bytes": 2607,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/prepare_calibration.py",
+      "sha256": "3e93f8c0b3ba99fbce792e2e6a960bb6e60b6a4a7bd54ab0ea16306d80283a28"
+    },
+    {
+      "bytes": 5610,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/lock_contract.py",
+      "sha256": "e00dfae0bf862bef7fefad84a2bbe947672582645f1da77a89a38b1c27030d18"
+    },
+    {
+      "bytes": 4316,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/run_development.py",
+      "sha256": "d51ce46d349a0a8624b9b24875d23d549da3f43c4d2f5f62eb7de4663174dc9c"
+    },
+    {
+      "bytes": 9967,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/run_forward_evaluation.py",
+      "sha256": "04265899a9da6e9ed4205e6a6b846b4d4ebcb6f56f90b387c06696fb83a58367"
+    },
+    {
+      "bytes": 2819,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/tests/test_exhaustion_reversal.py",
+      "sha256": "a5f62100488f9ced0a19a08cdecbf70f47b16ff0af6495d8ee36a9b4d0c3a25a"
+    }
+  ],
+  "parameter_grid_allowed": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_exhaustion_reversal_v30_contract_lock",
+  "simulation_definition": {
+    "base_slippage_per_side_price": 0.05,
+    "dollars_per_price_unit": 1.0,
+    "hold_seconds": 120,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "reference_lot": 0.01,
+    "stress_slippage_per_side_price": 0.15
+  }
+}

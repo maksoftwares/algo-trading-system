@@ -1,0 +1,20 @@
+{
+  "schema_version": "xauusd_v30_postlock_timestamp_adapter",
+  "v30_root_relative": "../capital-quote-exhaustion-reversal-v30",
+  "v30_contract_relative": "outputs/EXHAUSTION_REVERSAL_V30_CONTRACT_LOCK.json",
+  "v30_contract_sha256": "456b4ae5ddca695c2e5b37a79ab297c859d133b39e5197c4a78a80cf8a687d95",
+  "timestamp_rule": "FLOOR_TIME_MSC_SECOND_EQUALS_TIME_UTC_SECOND",
+  "maximum_same_second_disagreement_ms": 999,
+  "outputs": {
+    "adapter_lock": "outputs/V30_TIMESTAMP_ADAPTER_LOCK.json"
+  },
+  "authorization": {
+    "strategy_change": false,
+    "model_training": false,
+    "python_prediction": false,
+    "ea_consumption": false,
+    "demo": false,
+    "live": false,
+    "broker_action": false
+  }
+}

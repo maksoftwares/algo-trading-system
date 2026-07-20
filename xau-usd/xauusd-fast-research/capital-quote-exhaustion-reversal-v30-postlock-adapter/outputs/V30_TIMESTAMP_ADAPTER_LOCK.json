@@ -1,0 +1,67 @@
+{
+  "adapter_contract_sha256": "3a209900f9e063263356084aa59ff3fd0b7d74c758b73f62452906eb7d2a79d1",
+  "broker_action_authorized": false,
+  "demo_authorized": false,
+  "development_outcomes_opened_at_lock": false,
+  "ea_consumption_authorized": false,
+  "live_authorized": false,
+  "maximum_same_second_disagreement_ms": 999,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 791,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/README.md",
+      "sha256": "7dcc8f55567711cda4d35c1a1c0ca985831f898a74da625f8cf1369f8123d592"
+    },
+    {
+      "bytes": 860,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/PREREGISTRATION.md",
+      "sha256": "e1b5a6ba35a3542f7ae951d25e3999ade74db9c3857ea08d57e1260e6fb2c136"
+    },
+    {
+      "bytes": 27,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/requirements.txt",
+      "sha256": "1a0fea00c346abf3dd6491002695eebc26953ba28a8728f44bcd5378b49b58cd"
+    },
+    {
+      "bytes": 712,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/config/adapter.json",
+      "sha256": "50034eceb6a27592c1f969f3df6de405f491c4ea7af35314f76820a8b3e8c062"
+    },
+    {
+      "bytes": 49,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/src/__init__.py",
+      "sha256": "d570139ad3c59ba911d66d109e4c11da5e7a2cbeaac3aab15037c7d20c084d09"
+    },
+    {
+      "bytes": 5768,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/src/adapter.py",
+      "sha256": "bc74e310caccd71fd40cfc9073c502fdec0c27e835015f60d4f595ee2da82646"
+    },
+    {
+      "bytes": 3298,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/lock_adapter.py",
+      "sha256": "0dcf20e488fca332753ba04aadf10b0f726aadadb455b64339d85b382290a0dd"
+    },
+    {
+      "bytes": 5278,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/run_development_adapter.py",
+      "sha256": "517156ffb805d4bd0b2a54d53c72e536382bf0d0edee2a737c4eefd29334cd80"
+    },
+    {
+      "bytes": 1952,
+      "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30-postlock-adapter/tests/test_adapter.py",
+      "sha256": "8784b8f7c0320e56b552093306b5a41a036528dba1e82c2c63b7c5e60b4284ec"
+    }
+  ],
+  "python_predictions_authorized": false,
+  "schema_version": "xauusd_v30_timestamp_adapter_lock",
+  "strategy_change": false,
+  "timestamp_rule": "FLOOR_TIME_MSC_SECOND_EQUALS_TIME_UTC_SECOND",
+  "v30_contract_file": {
+    "bytes": 13206,
+    "path": "xau-usd/xauusd-fast-research/capital-quote-exhaustion-reversal-v30/outputs/EXHAUSTION_REVERSAL_V30_CONTRACT_LOCK.json",
+    "sha256": "2683f5c21b8829c87ddf7d20e4a7273d56a5e847d37d4f004bd6fad561e4ee5a"
+  },
+  "v30_contract_sha256": "456b4ae5ddca695c2e5b37a79ab297c859d133b39e5197c4a78a80cf8a687d95"
+}

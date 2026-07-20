@@ -1,0 +1,614 @@
+{
+  "absorption_arm_count": 5849,
+  "audit_sha256": "0d0f7cafafb0800d5455b8e708485bba76fd510f34612199df775e3928930bfc",
+  "broker_action_authorized": false,
+  "contract_sha256": "6a681021a595ed8679454aab1bfbe29dff512ccd4ad9872986b7151bcc29745c",
+  "daily_metrics": [
+    {
+      "base_pnl_dollars": -0.42999999999992766,
+      "date_utc": "2026-06-08",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -1.6299999999999264,
+      "trades": 6
+    },
+    {
+      "base_pnl_dollars": -2.2500000000005462,
+      "date_utc": "2026-06-09",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -3.4500000000005455,
+      "trades": 6
+    },
+    {
+      "base_pnl_dollars": -4.490000000000691,
+      "date_utc": "2026-06-10",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -5.490000000000691,
+      "trades": 5
+    },
+    {
+      "base_pnl_dollars": -1.4200000000010733,
+      "date_utc": "2026-06-11",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -2.6200000000010726,
+      "trades": 6
+    },
+    {
+      "base_pnl_dollars": -5.8100000000004,
+      "date_utc": "2026-06-15",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -6.8100000000004,
+      "trades": 5
+    },
+    {
+      "base_pnl_dollars": -3.979999999998654,
+      "date_utc": "2026-06-16",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -4.979999999998654,
+      "trades": 5
+    },
+    {
+      "base_pnl_dollars": -6.110000000000218,
+      "date_utc": "2026-06-17",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -7.310000000000218,
+      "trades": 6
+    },
+    {
+      "base_pnl_dollars": 0.2399999999997816,
+      "date_utc": "2026-06-18",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -0.7600000000002185,
+      "trades": 5
+    },
+    {
+      "base_pnl_dollars": 0.229999999999563,
+      "date_utc": "2026-06-22",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -0.7700000000004366,
+      "trades": 5
+    },
+    {
+      "base_pnl_dollars": -5.829999999999018,
+      "date_utc": "2026-06-23",
+      "evidence_partition": "DEVELOPMENT",
+      "stress_pnl_dollars": -6.829999999999018,
+      "trades": 5
+    }
+  ],
+  "decision": "V31_DEVELOPMENT_FAIL_TERMINAL",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "evidence_partition": "DEVELOPMENT",
+  "full_day_quality": [
+    {
+      "date_utc": "2026-06-05",
+      "duplicate_millisecond_rows": 5667,
+      "duplicate_millisecond_share": 0.01131709226415735,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 20.98262111111111,
+      "p99_interquote_gap_ms": 991.0,
+      "raw_rows": 500747,
+      "start_offset_hours": 6.88888888888889e-05,
+      "unique_milliseconds": 495080,
+      "unique_quotes": 495080,
+      "weekday": 4
+    },
+    {
+      "date_utc": "2026-06-07",
+      "duplicate_millisecond_rows": 442,
+      "duplicate_millisecond_share": 0.011796418372521284,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 23.999950277777778,
+      "p99_interquote_gap_ms": 1165.75,
+      "raw_rows": 37469,
+      "start_offset_hours": 22.000205833333332,
+      "unique_milliseconds": 37027,
+      "unique_quotes": 37027,
+      "weekday": 6
+    },
+    {
+      "date_utc": "2026-06-08",
+      "duplicate_millisecond_rows": 5730,
+      "duplicate_millisecond_share": 0.01108606696139224,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999780555555557,
+      "p99_interquote_gap_ms": 1004.0,
+      "raw_rows": 516865,
+      "start_offset_hours": 5.888888888888889e-05,
+      "unique_milliseconds": 511135,
+      "unique_quotes": 511135,
+      "weekday": 0
+    },
+    {
+      "date_utc": "2026-06-09",
+      "duplicate_millisecond_rows": 6248,
+      "duplicate_millisecond_share": 0.01213166192894978,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999959722222222,
+      "p99_interquote_gap_ms": 1120.0,
+      "raw_rows": 515016,
+      "start_offset_hours": 6.833333333333333e-05,
+      "unique_milliseconds": 508768,
+      "unique_quotes": 508768,
+      "weekday": 1
+    },
+    {
+      "date_utc": "2026-06-10",
+      "duplicate_millisecond_rows": 12805,
+      "duplicate_millisecond_share": 0.018581534554688917,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.99999861111111,
+      "p99_interquote_gap_ms": 713.0,
+      "raw_rows": 689125,
+      "start_offset_hours": 5.388888888888889e-05,
+      "unique_milliseconds": 676320,
+      "unique_quotes": 676320,
+      "weekday": 2
+    },
+    {
+      "date_utc": "2026-06-11",
+      "duplicate_millisecond_rows": 11229,
+      "duplicate_millisecond_share": 0.015941792369121563,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999996666666668,
+      "p99_interquote_gap_ms": 712.0,
+      "raw_rows": 704375,
+      "start_offset_hours": 1.1666666666666666e-05,
+      "unique_milliseconds": 693146,
+      "unique_quotes": 693146,
+      "weekday": 3
+    },
+    {
+      "date_utc": "2026-06-12",
+      "duplicate_millisecond_rows": 5510,
+      "duplicate_millisecond_share": 0.011011499122677293,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 20.982250555555556,
+      "p99_interquote_gap_ms": 892.0,
+      "raw_rows": 500386,
+      "start_offset_hours": 2.0555555555555555e-05,
+      "unique_milliseconds": 494876,
+      "unique_quotes": 494876,
+      "weekday": 4
+    },
+    {
+      "date_utc": "2026-06-14",
+      "duplicate_millisecond_rows": 227,
+      "duplicate_millisecond_share": 0.007872650343344662,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 23.999965,
+      "p99_interquote_gap_ms": 1695.9000000000015,
+      "raw_rows": 28834,
+      "start_offset_hours": 22.006764722222222,
+      "unique_milliseconds": 28607,
+      "unique_quotes": 28607,
+      "weekday": 6
+    },
+    {
+      "date_utc": "2026-06-15",
+      "duplicate_millisecond_rows": 2246,
+      "duplicate_millisecond_share": 0.0060183498038543165,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999951944444444,
+      "p99_interquote_gap_ms": 1448.5599999999977,
+      "raw_rows": 373192,
+      "start_offset_hours": 7.61111111111111e-05,
+      "unique_milliseconds": 370946,
+      "unique_quotes": 370946,
+      "weekday": 0
+    },
+    {
+      "date_utc": "2026-06-16",
+      "duplicate_millisecond_rows": 1432,
+      "duplicate_millisecond_share": 0.004236686390532545,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999886666666665,
+      "p99_interquote_gap_ms": 1640.0,
+      "raw_rows": 338000,
+      "start_offset_hours": 0.00010083333333333334,
+      "unique_milliseconds": 336568,
+      "unique_quotes": 336568,
+      "weekday": 1
+    },
+    {
+      "date_utc": "2026-06-17",
+      "duplicate_millisecond_rows": 6623,
+      "duplicate_millisecond_share": 0.013394951864735863,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999975,
+      "p99_interquote_gap_ms": 1277.0,
+      "raw_rows": 494440,
+      "start_offset_hours": 6.944444444444445e-06,
+      "unique_milliseconds": 487817,
+      "unique_quotes": 487817,
+      "weekday": 2
+    },
+    {
+      "date_utc": "2026-06-18",
+      "duplicate_millisecond_rows": 3377,
+      "duplicate_millisecond_share": 0.007352909156625457,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999948333333332,
+      "p99_interquote_gap_ms": 1132.0,
+      "raw_rows": 459274,
+      "start_offset_hours": 5.4444444444444446e-05,
+      "unique_milliseconds": 455897,
+      "unique_quotes": 455897,
+      "weekday": 3
+    },
+    {
+      "date_utc": "2026-06-19",
+      "duplicate_millisecond_rows": 1576,
+      "duplicate_millisecond_share": 0.0056054489516458895,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 16.999454444444446,
+      "p99_interquote_gap_ms": 1351.0,
+      "raw_rows": 281155,
+      "start_offset_hours": 0.00010027777777777777,
+      "unique_milliseconds": 279579,
+      "unique_quotes": 279579,
+      "weekday": 4
+    },
+    {
+      "date_utc": "2026-06-21",
+      "duplicate_millisecond_rows": 138,
+      "duplicate_millisecond_share": 0.004915930464519806,
+      "eligible_full_weekday": false,
+      "end_offset_hours": 23.999962777777778,
+      "p99_interquote_gap_ms": 1765.6800000000003,
+      "raw_rows": 28072,
+      "start_offset_hours": 22.00027138888889,
+      "unique_milliseconds": 27934,
+      "unique_quotes": 27934,
+      "weekday": 6
+    },
+    {
+      "date_utc": "2026-06-22",
+      "duplicate_millisecond_rows": 2365,
+      "duplicate_millisecond_share": 0.005858571846156133,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999950833333333,
+      "p99_interquote_gap_ms": 1333.0,
+      "raw_rows": 403682,
+      "start_offset_hours": 7.444444444444444e-05,
+      "unique_milliseconds": 401317,
+      "unique_quotes": 401317,
+      "weekday": 0
+    },
+    {
+      "date_utc": "2026-06-23",
+      "duplicate_millisecond_rows": 4092,
+      "duplicate_millisecond_share": 0.008233350704120498,
+      "eligible_full_weekday": true,
+      "end_offset_hours": 23.999985555555554,
+      "p99_interquote_gap_ms": 970.0,
+      "raw_rows": 497003,
+      "start_offset_hours": 0.00010416666666666667,
+      "unique_milliseconds": 492911,
+      "unique_quotes": 492911,
+      "weekday": 1
+    }
+  ],
+  "gate_checks": {
+    "daily_bootstrap_lower_bound": false,
+    "direction_balance": true,
+    "first_half_profit_factor": false,
+    "maximum_closed_trade_drawdown": true,
+    "maximum_frequency": true,
+    "minimum_base_profit_factor": false,
+    "minimum_executable_trades": true,
+    "minimum_frequency": true,
+    "minimum_profitable_day_share": false,
+    "minimum_recovery_factor": false,
+    "minimum_stress_profit_factor": false,
+    "positive_base_net": false,
+    "positive_stress_net": false,
+    "second_half_profit_factor": false
+  },
+  "gate_passed": false,
+  "live_authorized": false,
+  "metrics": {
+    "base_mean_pnl_dollars": -0.5527777777777998,
+    "base_net_pnl_dollars": -29.85000000000119,
+    "base_profit_factor": 0.4924332596496932,
+    "base_win_rate": 0.3888888888888889,
+    "closed_trade_drawdown_dollars": 32.420000000000556,
+    "daily_bootstrap_mean_lower_bound_dollars": -4.001100000000183,
+    "evidence_partition": "DEVELOPMENT",
+    "first_half_profit_factor": 0.5749704840613393,
+    "full_weekdays": 10,
+    "long_share": 0.5555555555555556,
+    "long_trades": 30,
+    "profitable_day_share": 0.2,
+    "recovery_factor": -0.9207279457125441,
+    "second_half_profit_factor": 0.38026474127556475,
+    "short_share": 0.4444444444444444,
+    "short_trades": 24,
+    "stress_net_pnl_dollars": -40.65000000000116,
+    "stress_profit_factor": 0.3815609310816827,
+    "trades": 54,
+    "trades_per_full_weekday": 5.4
+  },
+  "model_training_authorized": false,
+  "python_predictions_authorized": false,
+  "raw_release_count": 580,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_v31_development_audit",
+  "selected_candidate_count": 72,
+  "source_audit": {
+    "daily_source_quality": [
+      {
+        "date_utc": "2026-06-05",
+        "duplicate_millisecond_rows": 5667,
+        "duplicate_millisecond_share": 0.01131709226415735,
+        "raw_rows": 500747,
+        "unique_milliseconds": 495080
+      },
+      {
+        "date_utc": "2026-06-07",
+        "duplicate_millisecond_rows": 442,
+        "duplicate_millisecond_share": 0.011796418372521284,
+        "raw_rows": 37469,
+        "unique_milliseconds": 37027
+      },
+      {
+        "date_utc": "2026-06-08",
+        "duplicate_millisecond_rows": 5730,
+        "duplicate_millisecond_share": 0.01108606696139224,
+        "raw_rows": 516865,
+        "unique_milliseconds": 511135
+      },
+      {
+        "date_utc": "2026-06-09",
+        "duplicate_millisecond_rows": 6248,
+        "duplicate_millisecond_share": 0.01213166192894978,
+        "raw_rows": 515016,
+        "unique_milliseconds": 508768
+      },
+      {
+        "date_utc": "2026-06-10",
+        "duplicate_millisecond_rows": 12805,
+        "duplicate_millisecond_share": 0.018581534554688917,
+        "raw_rows": 689125,
+        "unique_milliseconds": 676320
+      },
+      {
+        "date_utc": "2026-06-11",
+        "duplicate_millisecond_rows": 11229,
+        "duplicate_millisecond_share": 0.015941792369121563,
+        "raw_rows": 704375,
+        "unique_milliseconds": 693146
+      },
+      {
+        "date_utc": "2026-06-12",
+        "duplicate_millisecond_rows": 5510,
+        "duplicate_millisecond_share": 0.011011499122677293,
+        "raw_rows": 500386,
+        "unique_milliseconds": 494876
+      },
+      {
+        "date_utc": "2026-06-14",
+        "duplicate_millisecond_rows": 227,
+        "duplicate_millisecond_share": 0.007872650343344662,
+        "raw_rows": 28834,
+        "unique_milliseconds": 28607
+      },
+      {
+        "date_utc": "2026-06-15",
+        "duplicate_millisecond_rows": 2246,
+        "duplicate_millisecond_share": 0.0060183498038543165,
+        "raw_rows": 373192,
+        "unique_milliseconds": 370946
+      },
+      {
+        "date_utc": "2026-06-16",
+        "duplicate_millisecond_rows": 1432,
+        "duplicate_millisecond_share": 0.004236686390532545,
+        "raw_rows": 338000,
+        "unique_milliseconds": 336568
+      },
+      {
+        "date_utc": "2026-06-17",
+        "duplicate_millisecond_rows": 6623,
+        "duplicate_millisecond_share": 0.013394951864735863,
+        "raw_rows": 494440,
+        "unique_milliseconds": 487817
+      },
+      {
+        "date_utc": "2026-06-18",
+        "duplicate_millisecond_rows": 3377,
+        "duplicate_millisecond_share": 0.007352909156625457,
+        "raw_rows": 459274,
+        "unique_milliseconds": 455897
+      },
+      {
+        "date_utc": "2026-06-19",
+        "duplicate_millisecond_rows": 1576,
+        "duplicate_millisecond_share": 0.0056054489516458895,
+        "raw_rows": 281155,
+        "unique_milliseconds": 279579
+      },
+      {
+        "date_utc": "2026-06-21",
+        "duplicate_millisecond_rows": 138,
+        "duplicate_millisecond_share": 0.004915930464519806,
+        "raw_rows": 28072,
+        "unique_milliseconds": 27934
+      },
+      {
+        "date_utc": "2026-06-22",
+        "duplicate_millisecond_rows": 2365,
+        "duplicate_millisecond_share": 0.005858571846156133,
+        "raw_rows": 403682,
+        "unique_milliseconds": 401317
+      },
+      {
+        "date_utc": "2026-06-23",
+        "duplicate_millisecond_rows": 4092,
+        "duplicate_millisecond_share": 0.008233350704120498,
+        "raw_rows": 497003,
+        "unique_milliseconds": 492911
+      }
+    ],
+    "duplicate_millisecond_rows": 69707,
+    "maximum_timestamp_representation_difference_ms": 999,
+    "minimum_timestamp_representation_difference_ms": 0,
+    "raw_rows": 6367635,
+    "same_second_agreement_share": 1.0,
+    "source_files": [
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260601.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260602.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260603.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260604.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 73622535,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260605.csv",
+        "raw_rows": 500747,
+        "sha256": "de9db486973498163d0a4d0b2f27ba7f8a98bb8001719c1e7d5401ff2a0faeca"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260606.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 5538925,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260607.csv",
+        "raw_rows": 37469,
+        "sha256": "5a32a283a11c176ff1b66f3354fb7ac2337c5d160aacb6c6a7730ed232b8596b"
+      },
+      {
+        "bytes": 75992567,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260608.csv",
+        "raw_rows": 516865,
+        "sha256": "881091eaf25cd855b27571be924bad51618bde3ad56c2297b511d7dee822a3f2"
+      },
+      {
+        "bytes": 75734002,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260609.csv",
+        "raw_rows": 515016,
+        "sha256": "1b3d31e577eeec36cc6d9d3f055dbdd95aae1780b06a27c69151c3d769abdf67"
+      },
+      {
+        "bytes": 101326308,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260610.csv",
+        "raw_rows": 689125,
+        "sha256": "14662a735705e7c2b4feab1dbc524b8841600aab13acc12c006a82725e0bfdcd"
+      },
+      {
+        "bytes": 103639528,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260611.csv",
+        "raw_rows": 704375,
+        "sha256": "b3e4c78bf473e5a20eadc563cd49063f87c15bdebc4fd049d226cea884671220"
+      },
+      {
+        "bytes": 73553631,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260612.csv",
+        "raw_rows": 500386,
+        "sha256": "a8827f5e5fd3d971cc8ca2f2fa4bf3bf5b32ea596abc37406cbdffaa5f3cf059"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260613.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 4257282,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260614.csv",
+        "raw_rows": 28834,
+        "sha256": "5c6418ca58d814b45c6c7399879737e8bc1c50b86b9da47f7377304028cfb56c"
+      },
+      {
+        "bytes": 54871921,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260615.csv",
+        "raw_rows": 373192,
+        "sha256": "e6c1dd19643e635c3917e0b97a097021e927a2bf5a560cb28ef8eb27cf997790"
+      },
+      {
+        "bytes": 49692692,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260616.csv",
+        "raw_rows": 338000,
+        "sha256": "09565acd71807e1de3add0b5d11f3093b3ae4e52a8fea9182b0e44c2d34cfa48"
+      },
+      {
+        "bytes": 72710062,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260617.csv",
+        "raw_rows": 494440,
+        "sha256": "15c23eb5c80314c4634495f46114cff1cf6289af9311605b36f7d1e52cc6f5dc"
+      },
+      {
+        "bytes": 67529005,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260618.csv",
+        "raw_rows": 459274,
+        "sha256": "cdebdc0776957fe0868e54407c9daf8e8c975c289c9b3d6d871d0e39cada3347"
+      },
+      {
+        "bytes": 41340860,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260619.csv",
+        "raw_rows": 281155,
+        "sha256": "2b339f73977f6b2bcd51cc6564f7a23d0737439ace099f50c4ecea11863f2985"
+      },
+      {
+        "bytes": 135,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260620.csv",
+        "raw_rows": 0,
+        "sha256": "2da256619209e0c5f55f747a4cf43780756cf884a7403203177697cdbf23d022"
+      },
+      {
+        "bytes": 4151869,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260621.csv",
+        "raw_rows": 28072,
+        "sha256": "3e41c17f9227a7aee71f726450e3238877d495e80829a47546a5b8820a6b601d"
+      },
+      {
+        "bytes": 59349381,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260622.csv",
+        "raw_rows": 403682,
+        "sha256": "be2a93973d9cd8c269fce821c9c729882af5cc6e99ce5b1f7968711fa58c48c2"
+      },
+      {
+        "bytes": 73071517,
+        "path": "C:/Users/ZHAO ZHU INFORMATION/Downloads/algo-trading-system/xau-usd/xauusd-phase1/data/ml/a3_meta_v1/c02/xauusd_c02_multiacct_202607030845_g0a9823b0_c9221d066/raw/A1/ticks/XAUUSD_ticks_20260623.csv",
+        "raw_rows": 497003,
+        "sha256": "7ae775f90510e53c56476d0828c86f8be6191da7a5de672ad809877d68781448"
+      }
+    ],
+    "timestamp_rule": "FLOOR_TIME_MSC_SECOND_EQUALS_TIME_UTC_SECOND",
+    "unique_rows": 6297928
+  },
+  "stage_dates": [
+    "2026-06-08",
+    "2026-06-09",
+    "2026-06-10",
+    "2026-06-11",
+    "2026-06-15",
+    "2026-06-16",
+    "2026-06-17",
+    "2026-06-18",
+    "2026-06-22",
+    "2026-06-23"
+  ],
+  "trades_sha256": "f11a69f03d719c8a8d511438e9fb2e71b04a4b9c66baa346243298e5a6cafa04"
+}

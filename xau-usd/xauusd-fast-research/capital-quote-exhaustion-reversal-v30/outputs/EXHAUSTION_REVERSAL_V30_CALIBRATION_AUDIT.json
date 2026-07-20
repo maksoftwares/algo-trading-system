@@ -1,0 +1,58 @@
+{
+  "audit_sha256": "8ac76e484cacd72ea2042bcea32e938c7ce08c553023bc11e7ed3245b472079d",
+  "calibration_structure_passed": true,
+  "candidate_definition": {
+    "arm_expiry_ms": 5000,
+    "lookback_ms": 3000,
+    "maximum_boundary_quote_age_ms": 1000,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.75,
+    "minimum_absolute_displacement_price": 1.2,
+    "minimum_absolute_update_imbalance": 0.7,
+    "minimum_consecutive_counter_updates": 3,
+    "minimum_nonzero_mid_updates": 15,
+    "minimum_retracement_price": 0.4,
+    "post_trigger_refractory_ms": 60000
+  },
+  "candidate_file_sha256": "99658987b842affad8488e9bd922358eefdbff79c02dba68797f29a0912a4edd",
+  "economic_outcomes_opened": false,
+  "episode_definition": {
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6,
+    "utc_block_hours": 4
+  },
+  "impulse_arm_count": 32,
+  "long_candidates": 0,
+  "observed_utc_blocks": 2,
+  "pnl_calculated": false,
+  "post_candidate_prices_used_for_label_or_outcome": false,
+  "raw_trigger_count": 20,
+  "schema_version": "xauusd_v30_outcome_blind_calibration_audit",
+  "selected_candidate_count": 2,
+  "short_candidates": 2,
+  "source_audit": {
+    "daily_source_quality": [
+      {
+        "date_utc": "2026-07-17",
+        "duplicate_millisecond_rows": 1822,
+        "duplicate_millisecond_share": 0.0113911309229817,
+        "raw_rows": 159949,
+        "unique_milliseconds": 158127
+      }
+    ],
+    "duplicate_millisecond_rows": 1822,
+    "raw_rows": 159949,
+    "source_files": [
+      {
+        "bytes": 40147464,
+        "path": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+        "raw_rows": 159949,
+        "sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+        "source_date_utc": "2026-07-17"
+      }
+    ],
+    "unique_rows": 158127
+  },
+  "source_file": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+  "source_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a"
+}

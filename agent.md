@@ -1244,3 +1244,146 @@ tick is `2026-07-20T00:00:05.812Z`. Tick and heartbeat rows contain
 
 This proves collection started; it does not prove edge or frequency. The first
 economic decision remains sealed until 20 complete eligible weekdays exist.
+
+## V30 Capital Quote Exhaustion Reversal - 2026-07-20
+
+`capital-quote-exhaustion-reversal-v30` tested a new real-tick mechanism on the
+locked June Capital packet. A three-second one-sided quote impulse armed the
+rule; at least three consecutive counter-updates and a USD 0.40 retracement
+triggered a fade of the original impulse. Only the first trigger in each fixed
+four-hour block was retained and each trade used a locked 120-second hold.
+
+The July 17 calibration packet was used only to select a frequency-capable,
+direction-balanced configuration. It exposed no P/L: 32 impulse arms produced
+20 raw triggers and two selected candidates, one per eligible four-hour block.
+The original contract SHA-256 is
+`456b4ae5ddca695c2e5b37a79ab297c859d133b39e5197c4a78a80cf8a687d95`.
+
+Two fail-closed interface corrections were separately preregistered before any
+economic outcome was opened:
+
+- timestamp adapter contract
+  `3a209900f9e063263356084aa59ff3fd0b7d74c758b73f62452906eb7d2a79d1`;
+  whole-second `time_utc` must equal the floor of authoritative `time_msc`;
+- simulator metadata alias contract
+  `a68b8e183d493734b6e563a89e02562f193397d98d0ddb023e8e434c3673a9ca`;
+  it maps two metadata names without changing rows, signals, or fills.
+
+The locked June development packet contains 6,367,635 raw rows, 6,297,928
+unique millisecond rows, and ten eligible full weekdays. It produced 59
+executable trades, or 5.9/full weekday, split 30 long and 29 short. Base net was
+USD -19.99, base PF 0.7170959524, stress net USD -31.79, and stress PF
+0.5906515581. Only 40% of days were profitable; first-half PF was 0.856 and
+second-half PF was 0.490. The terminal decision is
+`V30_DEVELOPMENT_FAIL_TERMINAL`. Audit SHA-256 is
+`d9f60d5242b65a950ffe8224edd1b168073782c5036ca925ea17248433e09ad7` and
+trade-ledger SHA-256 is
+`108ba9977abd54b9440456e976dcd2d75e9938e3d9e12c8a69580407beddcf04`.
+
+V30 may not be tuned, mirrored, re-timed, trained, or executed from the exposed
+June outcomes.
+
+## V31 Capital Quote Absorption Release - 2026-07-20
+
+`capital-quote-absorption-release-v31` tested the opposite real-tick mechanism.
+A completed trailing 30-second window required at least 100 nonzero updates,
+absolute update imbalance no greater than 0.10, range no greater than USD 0.75,
+maximum internal gap no greater than two seconds, and spread no greater than
+USD 0.75. A later USD 0.75 release beyond the frozen range triggered
+continuation, again limited to the first candidate per fixed four-hour block
+with a 120-second hold.
+
+The outcome-blind July 17 calibration found 297 absorption arms, 14 raw
+releases, and two selected candidates, balanced one long and one short. The
+contract SHA-256 is
+`6a681021a595ed8679454aab1bfbe29dff512ccd4ad9872986b7151bcc29745c`.
+
+On the same locked ten-full-weekday June development packet, V31 produced 54
+executable trades, or 5.4/full weekday, split 30 long and 24 short. Base net was
+USD -29.85, base PF 0.4924332596, stress net USD -40.65, and stress PF
+0.3815609311. Only 20% of days were profitable; first-half PF was 0.575 and
+second-half PF was 0.380. The terminal decision is
+`V31_DEVELOPMENT_FAIL_TERMINAL`. Audit SHA-256 is
+`0d0f7cafafb0800d5455b8e708485bba76fd510f34612199df775e3928930bfc` and
+trade-ledger SHA-256 is
+`f11a69f03d719c8a8d511438e9fb2e71b04a4b9c66baa346243298e5a6cafa04`.
+
+V31 may not be tuned, mirrored, re-timed, trained, or executed from the exposed
+June outcomes.
+
+### V30/V31 Mechanism Decision
+
+Both rules solved mechanical frequency, at 5.9 and 5.4 trades per full weekday,
+but both lost money after real bid/ask execution and locked slippage. The June
+short-horizon Capital market-order threshold family is therefore retired. More
+threshold, mirror, or holding-period variants on that exposed packet would be
+outcome-driven overfitting, not independent research.
+
+V24.1 and V26 remain valid locked forward hypotheses because their rules and
+boundaries were frozen before the untouched post-July-20 evidence began. Their
+20-day validation and 20-day confirmation requirements are unchanged. No V30
+or V31 result authorizes model training, Python prediction, EA consumption,
+demo, live, account, terminal, or broker action.
+
+## V32/V33 COMEX Size-Segment Flow - 2026-07-20
+
+The mechanism failure map identified one untested field in the already acquired
+COMEX trades data: prior COMEX campaigns aggregated all aggressive volume and
+did not separate large-lot from small-lot flow. V32/V33 therefore registered one
+narrow hypothesis that a completed five-minute window with strongly directional
+large-lot flow and opposing small-lot flow could precede a slower XAUUSD move in
+the large-lot direction. This was a distinct input segmentation, not a mirror of
+the failed Capital 120-second quote rules.
+
+V32 preregistered 144 outcome-blind density policies. Its July 2022 calibration
+contained 1,351,730 COMEX trade rows and 20 eligible full weekdays. The highest
+density was only 43 candidates, or 2.15/day, below the locked
+2.3869731801/day minimum. Direction balance and active-day coverage were
+adequate. V32 therefore stopped before reading a future spot price or opening a
+fill, label, return, or P/L. Decision:
+`V32_CALIBRATION_FREQUENCY_STRUCTURE_FAIL`; calibration payload SHA-256:
+`b84d951eb9e935581552029dc7e09f15e3acef8919ebf53c5b05442e6a61d090`.
+
+Because V32 exposed candidate density only, V33 registered one explicit
+frequency-only repair with 96 additional policies. It preserved the hypothesis,
+five-minute completed clock, direction, one-hour economic hold, stop, target,
+costs, splits, and gates. It widened only activity thresholds and allowed a 45-
+or 60-minute signal cooldown. One pre-candidate path-resolution failure occurred
+before any source file or candidate metric was read; a regression-tested package-
+root adapter corrected it without changing the grid.
+
+V33 selected the deterministic policy
+`SZ08__LV020__LI35__SI10__SV050__CD45`: trades of at least eight contracts,
+minimum large volume 20, absolute large imbalance at least 0.35, opposing small
+imbalance at least 0.10, small volume at least 50, and 45-minute cooldown. It
+produced 58 candidate facts over 20 full weekdays, exactly 2.9/day, active on
+95% of days, with 21 long and 37 short. Calibration payload SHA-256 is
+`4c2f51c99961fff129e92b2bbc6bf69e121011896119e449a619e68a6745a1e3`.
+The immutable contract SHA-256 is
+`3bc928c5eddc2254a2b086ed2d0901c5af8314df57fa65aff068b4898713addc`.
+
+The locked development stage then processed 594 COMEX daily files and priced
+the retained candidates from verified Dukascopy bid/ask ticks. Across 491
+eligible full weekdays it resolved 1,170 trades, or 2.3828920570/day, split 560
+long and 610 short. The economic result was consistently negative:
+
+- base net USD -692.87 and base PF 0.4928;
+- stress net USD -775.75 and stress PF 0.4547;
+- first-half stress PF 0.4606 and second-half stress PF 0.4487;
+- 24.44% profitable weekdays and 0% positive months;
+- top-five-winners-removed stress net USD -800.21; and
+- closed stress drawdown USD 775.75.
+
+Decision: `V33_DEVELOPMENT_FAIL_TERMINAL`. Audit SHA-256 is
+`888e38a5c1361dcbea9b528087e8424e8a398199e5cbac0d93c80aa6f73e62ab`,
+candidate SHA-256 is
+`8ef040907d7dd3d06a306fca0d54413993dcb8ed5a8c34bcd9842cae45c25475`,
+and label SHA-256 is
+`0804b646fbc84130d3ee7de3e50bcc62aa282ee4bdfcb31183062fc8852ec544`.
+Validation and exam remain sealed.
+
+The COMEX large-versus-small continuation family is retired on exposed history.
+Its mirror, thresholds, hold, stop, and target may not be selected from these
+outcomes. V32/V33 authorize no training or execution. The untouched V24.1/V26
+forward collection and same-period Core reconstruction remain the authoritative
+active evidence paths.

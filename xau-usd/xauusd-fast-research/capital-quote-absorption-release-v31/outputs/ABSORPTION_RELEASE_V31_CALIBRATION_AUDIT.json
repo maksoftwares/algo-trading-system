@@ -1,0 +1,55 @@
+{
+  "absorption_arm_count": 297,
+  "audit_sha256": "24eebf75147e64484c9d8ff65fbd8eab0c55eccfb5122033228c4b10495e77f9",
+  "calibration_structure_passed": true,
+  "candidate_definition": {
+    "absorption_lookback_ms": 30000,
+    "arm_expiry_ms": 10000,
+    "maximum_absolute_update_imbalance": 0.1,
+    "maximum_absorption_range_price": 0.75,
+    "maximum_internal_quote_gap_ms": 2000,
+    "maximum_spread_price": 0.75,
+    "minimum_nonzero_mid_updates": 100,
+    "minimum_release_price": 0.75,
+    "post_trigger_refractory_ms": 60000
+  },
+  "candidate_file_sha256": "2eafc93068dc874424db5ddbd94efec664351469a3b84b242d5796940f725bfd",
+  "economic_outcomes_opened": false,
+  "episode_definition": {
+    "first_event_per_block_only": true,
+    "maximum_candidates_per_utc_day": 6,
+    "utc_block_hours": 4
+  },
+  "long_candidates": 1,
+  "pnl_calculated": false,
+  "post_candidate_prices_used_for_label_or_outcome": false,
+  "raw_release_count": 14,
+  "schema_version": "xauusd_v31_outcome_blind_calibration_audit",
+  "selected_candidate_count": 2,
+  "short_candidates": 1,
+  "source_audit": {
+    "daily_source_quality": [
+      {
+        "date_utc": "2026-07-17",
+        "duplicate_millisecond_rows": 1822,
+        "duplicate_millisecond_share": 0.0113911309229817,
+        "raw_rows": 159949,
+        "unique_milliseconds": 158127
+      }
+    ],
+    "duplicate_millisecond_rows": 1822,
+    "raw_rows": 159949,
+    "source_files": [
+      {
+        "bytes": 40147464,
+        "path": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+        "raw_rows": 159949,
+        "sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a",
+        "source_date_utc": "2026-07-17"
+      }
+    ],
+    "unique_rows": 158127
+  },
+  "source_file": "C:/MT5PortableProspectiveCollector/MQL5/Files/xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_20260717.csv",
+  "source_file_sha256": "09c48b64ad4a117e8c599deae9baad13a1b543a938195327a5011579dad2828a"
+}

@@ -1,0 +1,24 @@
+{
+  "campaign_id": "comex-size-segment-flow-v33",
+  "base_config": "../comex-size-segment-flow-v32/config/comex_size_segment_flow_v32.json",
+  "v32_calibration_audit": "../comex-size-segment-flow-v32/outputs/COMEX_SIZE_SEGMENT_V32_CALIBRATION_AUDIT.json",
+  "v32_calibration_payload_sha256": "b84d951eb9e935581552029dc7e09f15e3acef8919ebf53c5b05442e6a61d090",
+  "calibration": {
+    "start": "2022-07-01T00:00:00Z",
+    "end": "2022-08-01T00:00:00Z",
+    "large_trade_size_grid": [8, 10],
+    "minimum_large_volume_grid": [20, 30, 40],
+    "minimum_absolute_large_imbalance_grid": [0.25, 0.35],
+    "minimum_absolute_opposing_small_imbalance_grid": [0.05, 0.1],
+    "minimum_small_volume_grid": [30, 50],
+    "cooldown_minutes_grid": [45, 60]
+  },
+  "selection": {
+    "minimum_candidates_per_full_weekday": 2.386973180076628,
+    "maximum_candidates_per_full_weekday": 3.386973180076628,
+    "target_candidates_per_full_weekday": 2.886973180076628,
+    "minimum_active_day_share": 0.8,
+    "minimum_minority_direction_share": 0.3
+  }
+}
+
