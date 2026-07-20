@@ -1,0 +1,148 @@
+{
+  "schema_version": "xauusd_capital_relative_spread_pullback_forward_v49",
+  "calibration_source": {
+    "directory": "C:/MT5PortableSpreadLogger/MQL5/Files",
+    "filename_glob": "spread_log_121409_Capital.ComMena-Live_XAUUSD_*.csv",
+    "start_inclusive_utc": "2026-05-27T00:00:00Z",
+    "end_exclusive_utc": "2026-07-18T00:00:00Z",
+    "account_login": 121409,
+    "account_server": "Capital.ComMena-Live",
+    "symbol": "XAUUSD",
+    "maximum_seconds_since_tick": 1,
+    "exclude_rollover": true
+  },
+  "source": {
+    "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+    "filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "schema_version": "xau_prospective_tick_v1",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD"
+  },
+  "frozen_v24_1": {
+    "root_relative": "../capital-quote-microburst-forward-v24-1",
+    "config_relative": "config/capital_quote_microburst_forward_v24_1.json",
+    "config_file_sha256": "5cff6cdc2fae06b5fcaa8842b4267f541b5d551594758bd92562f40bad5ef507",
+    "module_relative": "src/microburst.py",
+    "module_file_sha256": "ef962fc72155dab12666186f9c7f9400c053479101a5b49997fe61230af6bc96",
+    "contract_relative": "outputs/MICROBURST_V24_1_CONTRACT_LOCK.json",
+    "contract_file_sha256": "b735527cdbbf6405088f83e4910e568f2699725f2bf66b34b3b53b8e8ec20a0a",
+    "contract_sha256": "84a1d60b025be15f9cedf3c0fc6688ac30c9c06075ab415efc155996df4858c0"
+  },
+  "sampling": {
+    "interval_ms": 5000,
+    "maximum_quote_age_ms": 6000,
+    "minimum_samples_per_calibration_weekday": 12000,
+    "minimum_calibration_weekdays": 25
+  },
+  "feature": {
+    "baseline_shift_samples": 18,
+    "baseline_samples": 360,
+    "baseline_minimum_samples": 180,
+    "baseline_quantile": 0.75,
+    "minimum_scale_dollars": 0.02,
+    "impulse_start_lag_samples": 18,
+    "impulse_end_lag_samples": 4,
+    "pullback_end_lag_samples": 1,
+    "minimum_retracement_fraction": 0.15,
+    "spread_baseline_shift_samples": 18,
+    "spread_baseline_samples": 360,
+    "spread_baseline_minimum_samples": 180,
+    "maximum_spread_to_baseline_ratio": 1.10,
+    "maximum_absolute_spread_dollars": 1.0
+  },
+  "grid": {
+    "impulse_scale_multiples": [8.0, 10.0, 12.0, 15.0, 20.0],
+    "maximum_retracement_fractions": [0.35, 0.50, 0.65],
+    "minimum_resume_scale_multiples": [1.0, 1.5, 2.0, 3.0],
+    "cooldown_minutes": [45, 60, 90, 120]
+  },
+  "calibration_selection": {
+    "target_candidates_per_weekday": 1.0,
+    "minimum_candidates_per_weekday": 0.5,
+    "maximum_candidates_per_weekday": 1.5,
+    "minimum_active_day_share": 0.40,
+    "minimum_direction_share": 0.20,
+    "minimum_half_candidates_per_weekday": 0.30,
+    "maximum_half_candidates_per_weekday": 2.0
+  },
+  "forward": {
+    "start_inclusive_utc": "2026-07-21T00:00:00Z",
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20,
+    "validation_audit": "outputs/RELATIVE_PULLBACK_V49_VALIDATION_AUDIT.json",
+    "confirmation_audit": "outputs/RELATIVE_PULLBACK_V49_CONFIRMATION_AUDIT.json"
+  },
+  "data_quality": {
+    "maximum_duplicate_millisecond_share": 0.05,
+    "minimum_unique_quotes_per_full_day": 100000,
+    "latest_day_start_hour_utc": 2,
+    "earliest_day_end_hour_utc": 22,
+    "maximum_p99_interquote_gap_ms": 5000,
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011
+  },
+  "simulation": {
+    "hold_seconds": 300,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "base_slippage_per_side_price": 0.05,
+    "stress_slippage_per_side_price": 0.15,
+    "reference_lot": 0.01,
+    "dollars_per_price_unit": 1.0
+  },
+  "gates": {
+    "minimum_executable_trades": 10,
+    "minimum_trades_per_full_weekday": 0.5,
+    "maximum_trades_per_full_weekday": 1.5,
+    "minimum_active_day_share": 0.40,
+    "minimum_direction_share": 0.20,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_profitable_day_share": 0.50,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "minimum_recovery_factor": 1.0,
+    "minimum_half_profit_factor": 1.0,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 4901,
+    "daily_bootstrap_lower_quantile": 0.10,
+    "require_daily_bootstrap_lower_bound_positive": true
+  },
+  "multiple_testing": {
+    "registered_capital_forward_hypotheses": 4,
+    "family_alpha": 0.05,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "block_length_weekdays": 5,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 490049,
+    "maximum_one_sided_pvalue": 0.0125
+  },
+  "outputs": {
+    "directory": "outputs",
+    "calibration_source_manifest": "RELATIVE_PULLBACK_V49_CALIBRATION_SOURCE_MANIFEST.json",
+    "calibration_grid": "RELATIVE_PULLBACK_V49_CALIBRATION_GRID.csv",
+    "calibration_candidates": "RELATIVE_PULLBACK_V49_CALIBRATION_CANDIDATES.csv",
+    "calibration_audit": "RELATIVE_PULLBACK_V49_CALIBRATION_AUDIT.json",
+    "contract_lock": "RELATIVE_PULLBACK_V49_CONTRACT_LOCK.json",
+    "forward_inventory": "RELATIVE_PULLBACK_V49_FORWARD_INVENTORY.json",
+    "validation_trades": "RELATIVE_PULLBACK_V49_VALIDATION_TRADES.csv",
+    "confirmation_trades": "RELATIVE_PULLBACK_V49_CONFIRMATION_TRADES.csv"
+  },
+  "research_controls": {
+    "hypothesis_count": 1,
+    "registered_grid_policies": 240,
+    "outcome_blind_calibration": true,
+    "calibration_post_candidate_prices_used": false,
+    "calibration_pnl_calculated": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "payment_authorized": false,
+    "broker_action_authorized": false
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "economic_outcomes_opened": false,
+  "manifest_sha256": "9e325ad8cb900a2e6091e6d00455d560e38bd9ed9604d59f87b7479102d0909c",
+  "schema_version": "xauusd_v49_calibration_source_manifest",
+  "source_file_count": 51,
+  "source_files": [
+    {
+      "bytes": 3144724,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260527.csv",
+      "raw_rows": 16991,
+      "sha256": "c3e2600e3623e911200826740ac2ac0340cb36f1623554fa0bc5b9ef183dedb2",
+      "source_date_utc": "2026-05-27"
+    },
+    {
+      "bytes": 3196220,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260528.csv",
+      "raw_rows": 17274,
+      "sha256": "8a2190b3482b6689de0e270e67a6dcaf9dc010799412bf079c22bca9e575a521",
+      "source_date_utc": "2026-05-28"
+    },
+    {
+      "bytes": 3155104,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260529.csv",
+      "raw_rows": 17061,
+      "sha256": "33a54ec9d17ff536614a59b2a3d34cd61a01df9bcf2a75fb0b498397431825e1",
+      "source_date_utc": "2026-05-29"
+    },
+    {
+      "bytes": 3196086,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260530.csv",
+      "raw_rows": 17279,
+      "sha256": "8451e339078747c43e1e92a006c6ded9ab3ae8c631765ee688db944bd955b225",
+      "source_date_utc": "2026-05-30"
+    },
+    {
+      "bytes": 1531972,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260531.csv",
+      "raw_rows": 8355,
+      "sha256": "014a8bd1573d21bd92a2c9e485b765e91ad3d06f7da0ba6660cac89d381794c4",
+      "source_date_utc": "2026-05-31"
+    },
+    {
+      "bytes": 3197332,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260601.csv",
+      "raw_rows": 17280,
+      "sha256": "6c57e04fb88892eac5e9e7cb71e25ee865fd87d0a0a72553ce67bdb8b312e9b5",
+      "source_date_utc": "2026-06-01"
+    },
+    {
+      "bytes": 3196949,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260602.csv",
+      "raw_rows": 17278,
+      "sha256": "2ed1253b7b6df36579b43f91ecdcb9537005fca04993d0fe84b06375d2210200",
+      "source_date_utc": "2026-06-02"
+    },
+    {
+      "bytes": 3197133,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260603.csv",
+      "raw_rows": 17279,
+      "sha256": "7cfdea4b99d0fed991412dc26e09df1f90dda38a56107b7b5db26ea59dc06b59",
+      "source_date_utc": "2026-06-03"
+    },
+    {
+      "bytes": 3197135,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260604.csv",
+      "raw_rows": 17279,
+      "sha256": "d28c85967a24d3ed7f8d2d68318c64c64935e03e151f66649fd1a9c56fed757e",
+      "source_date_utc": "2026-06-04"
+    },
+    {
+      "bytes": 3196086,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260605.csv",
+      "raw_rows": 17279,
+      "sha256": "4c9e53e953d574cd889cc0f206c168b2deab460d8eca045ca8dd2bb06b235ba7",
+      "source_date_utc": "2026-06-05"
+    },
+    {
+      "bytes": 3196086,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260606.csv",
+      "raw_rows": 17279,
+      "sha256": "b33f4173ceba9413be2c3045d8c1e618f23d3f6c8095d33e824b49291185039c",
+      "source_date_utc": "2026-06-06"
+    },
+    {
+      "bytes": 3199152,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260607.csv",
+      "raw_rows": 17280,
+      "sha256": "d0cc45d5652f0e7fb16c17fe702bc9b4cb257e1cbd941e450d7d25c3347de0d6",
+      "source_date_utc": "2026-06-07"
+    },
+    {
+      "bytes": 3197136,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260608.csv",
+      "raw_rows": 17279,
+      "sha256": "c8527df39511e61038ec6b3dcc3a8141040491eaf7175bac6faa0f4c557fe7b6",
+      "source_date_utc": "2026-06-08"
+    },
+    {
+      "bytes": 3197139,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260609.csv",
+      "raw_rows": 17279,
+      "sha256": "0aade635a931b6361eefbeba59eb1292df746672e90e9d54ab6fc1719075752f",
+      "source_date_utc": "2026-06-09"
+    },
+    {
+      "bytes": 734924,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260610.csv",
+      "raw_rows": 4037,
+      "sha256": "d50e2c0d34454664b81aa7adaaa202017ec55f6649c90589da779633c8a70835",
+      "source_date_utc": "2026-06-10"
+    },
+    {
+      "bytes": 146050,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260612.csv",
+      "raw_rows": 780,
+      "sha256": "9bbc0011ba0258e1fa80aef130dcbd3bf460d5121575bf835b5fbbdd9d98cc37",
+      "source_date_utc": "2026-06-12"
+    },
+    {
+      "bytes": 3195709,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260613.csv",
+      "raw_rows": 17277,
+      "sha256": "3a5d6948ec8905baeba9454e77d781e649d1e9b18f42747c19ce22e5df6c6f6d",
+      "source_date_utc": "2026-06-13"
+    },
+    {
+      "bytes": 3199055,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260614.csv",
+      "raw_rows": 17279,
+      "sha256": "d6e09bf3575854ddc35ce0dd943f42e7c6a411ab131d33cda7b7efd7e2c243be",
+      "source_date_utc": "2026-06-14"
+    },
+    {
+      "bytes": 3197137,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260615.csv",
+      "raw_rows": 17279,
+      "sha256": "72545a3cdd33a21451702b32485d7882ada0bfda06f832169f9dbd71983c70e8",
+      "source_date_utc": "2026-06-15"
+    },
+    {
+      "bytes": 3197180,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260616.csv",
+      "raw_rows": 17279,
+      "sha256": "78ea97272ef0c469129491053cef5f64d32e6d12ffe33c4434b3027b823de191",
+      "source_date_utc": "2026-06-16"
+    },
+    {
+      "bytes": 3197132,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260617.csv",
+      "raw_rows": 17279,
+      "sha256": "cef308c03de92803649389de98fd0faa80f273bb9e154b41ab0c4d5fafd7869a",
+      "source_date_utc": "2026-06-17"
+    },
+    {
+      "bytes": 3197329,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260618.csv",
+      "raw_rows": 17280,
+      "sha256": "6b79aeff10d8edfa338cdc50c5e05f7a6697c5de5369d963cf395b989b2185e0",
+      "source_date_utc": "2026-06-18"
+    },
+    {
+      "bytes": 3219063,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260619.csv",
+      "raw_rows": 17279,
+      "sha256": "5820bf56a8b1a6d8ec43a6f080064f8df77061fcffd7c126c8c6f87f4bc57ebc",
+      "source_date_utc": "2026-06-19"
+    },
+    {
+      "bytes": 3282670,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260620.csv",
+      "raw_rows": 17280,
+      "sha256": "b1437fb48ce937ff3e992742537a3d0f3ff66a4eac7b7c88dc187f0a9662f199",
+      "source_date_utc": "2026-06-20"
+    },
+    {
+      "bytes": 3274373,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260621.csv",
+      "raw_rows": 17278,
+      "sha256": "159cdaef10a55112edb9358b8d8b27d9ed9e089693ca7d0d1dd08eb6d8b2e49f",
+      "source_date_utc": "2026-06-21"
+    },
+    {
+      "bytes": 3197329,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260622.csv",
+      "raw_rows": 17280,
+      "sha256": "dbe5fce8e57feb39128646627b28c3c2ad3623dadcc352758b6352e6dd81e515",
+      "source_date_utc": "2026-06-22"
+    },
+    {
+      "bytes": 3196951,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260623.csv",
+      "raw_rows": 17278,
+      "sha256": "22cf31379b30704a072a72fe8e0f5c15eb81cd326f76643a4e0e388e6af25fb3",
+      "source_date_utc": "2026-06-23"
+    },
+    {
+      "bytes": 3196755,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260624.csv",
+      "raw_rows": 17277,
+      "sha256": "e9cfbfec47d4544d6d27d442948db224f9bdee12f7a69640e5eaa4ab88ea9618",
+      "source_date_utc": "2026-06-24"
+    },
+    {
+      "bytes": 3197141,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260625.csv",
+      "raw_rows": 17279,
+      "sha256": "5c4d5b4fa38e188e0ecc6d496aae111974219ae429e8ba392401d97eed7fe7d0",
+      "source_date_utc": "2026-06-25"
+    },
+    {
+      "bytes": 3196082,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260626.csv",
+      "raw_rows": 17279,
+      "sha256": "459c9e950744fc1850bbda1b31498ddb04a37a8fdd872fbbad423bb0f12f7f5f",
+      "source_date_utc": "2026-06-26"
+    },
+    {
+      "bytes": 3195900,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260627.csv",
+      "raw_rows": 17278,
+      "sha256": "0b939baaa2042b558ef01baf6f8edd5c06569000205d1a3aea64993b544c64e1",
+      "source_date_utc": "2026-06-27"
+    },
+    {
+      "bytes": 3198823,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260628.csv",
+      "raw_rows": 17279,
+      "sha256": "aeb7ef23369bf8655d125aef459234ee9a211e5d309385f609d02484143240d7",
+      "source_date_utc": "2026-06-28"
+    },
+    {
+      "bytes": 3196772,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260629.csv",
+      "raw_rows": 17277,
+      "sha256": "a84c797a6ec5f7349ba73d2fd0e02b8380a383aa563e3bd71e8ea61c8821a42c",
+      "source_date_utc": "2026-06-29"
+    },
+    {
+      "bytes": 2675817,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260630.csv",
+      "raw_rows": 14492,
+      "sha256": "7e79ae9fa62de76b55278c09ba9d3745fbc77ce709c4909b1a09544f51919ba9",
+      "source_date_utc": "2026-06-30"
+    },
+    {
+      "bytes": 3196943,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260701.csv",
+      "raw_rows": 17278,
+      "sha256": "4ea049ecbd7e176121b369b38735ec42120241230c20f788fb24454eef96d6b1",
+      "source_date_utc": "2026-07-01"
+    },
+    {
+      "bytes": 3196954,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260702.csv",
+      "raw_rows": 17278,
+      "sha256": "9394125439deee835dcd9abbe82db5ff6ffcbe36288b6dbd1766aaf96cd41cc6",
+      "source_date_utc": "2026-07-02"
+    },
+    {
+      "bytes": 3219061,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260703.csv",
+      "raw_rows": 17279,
+      "sha256": "d0182575d6898a38970a226fe0b257366acd6cce638bf24af5a8d24c1fe4b07b",
+      "source_date_utc": "2026-07-03"
+    },
+    {
+      "bytes": 1022958,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260704.csv",
+      "raw_rows": 5456,
+      "sha256": "f4c7d90f7d99d55753e0dfbd02958d4b8a166567a414df2a69a44b99eae80018",
+      "source_date_utc": "2026-07-04"
+    },
+    {
+      "bytes": 3269692,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260705.csv",
+      "raw_rows": 17253,
+      "sha256": "8d29bef321384fd77b7cba217622ccb07260f7e6fddcfdc684d57a7a6dda491b",
+      "source_date_utc": "2026-07-05"
+    },
+    {
+      "bytes": 3197142,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260706.csv",
+      "raw_rows": 17279,
+      "sha256": "1c8af24f41bcff13f155f6e5a99a4449de9da92833087011c2cea9d7208da1eb",
+      "source_date_utc": "2026-07-06"
+    },
+    {
+      "bytes": 3197143,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260707.csv",
+      "raw_rows": 17279,
+      "sha256": "5b9a0e0adbfa2b38c257a3a7d85830ceaa917567c29f7a7a8ba6cd329eefde24",
+      "source_date_utc": "2026-07-07"
+    },
+    {
+      "bytes": 3197139,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260708.csv",
+      "raw_rows": 17279,
+      "sha256": "773675549385cb3c9be8b84727c5747182f7149402f80ad7e69d6ed576bc26b5",
+      "source_date_utc": "2026-07-08"
+    },
+    {
+      "bytes": 3197149,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260709.csv",
+      "raw_rows": 17279,
+      "sha256": "3bf3f272479d4c3bb026b53233e4926e7cc04c3cb8c4bb6e9ba25d50fd16589d",
+      "source_date_utc": "2026-07-09"
+    },
+    {
+      "bytes": 3196086,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260710.csv",
+      "raw_rows": 17279,
+      "sha256": "95fd094267c2767ed92ae4867eb67defdf14942eb53dc72c2e6c0d51068f55e8",
+      "source_date_utc": "2026-07-10"
+    },
+    {
+      "bytes": 3196082,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260711.csv",
+      "raw_rows": 17279,
+      "sha256": "325c53f225a2041a8151bce7f07a6aff594a95aa1a32dc259496aa28ff0d6d85",
+      "source_date_utc": "2026-07-11"
+    },
+    {
+      "bytes": 3199176,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260712.csv",
+      "raw_rows": 17280,
+      "sha256": "50bbfc3b133648a656db379a246ca79fbd8b2fb67fa543aa90afdccc021c16a4",
+      "source_date_utc": "2026-07-12"
+    },
+    {
+      "bytes": 3197139,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260713.csv",
+      "raw_rows": 17279,
+      "sha256": "c2c6fb32c759d567289d759a6abf67a00c023df668d232e9a87a31db78d62a00",
+      "source_date_utc": "2026-07-13"
+    },
+    {
+      "bytes": 3197140,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260714.csv",
+      "raw_rows": 17279,
+      "sha256": "e865f8f63cf8f89257177ae525dc17cad7c6f4fdccfb4b047c5b4734eb269f8b",
+      "source_date_utc": "2026-07-14"
+    },
+    {
+      "bytes": 3196770,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260715.csv",
+      "raw_rows": 17277,
+      "sha256": "0e66857c99864c0a164333d34c91f031331bcab5729575a24208e6af78a00b09",
+      "source_date_utc": "2026-07-15"
+    },
+    {
+      "bytes": 3197139,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260716.csv",
+      "raw_rows": 17279,
+      "sha256": "a7edc2e7e3964728d6a3c0b156a185515aa66d1e357317c704d2879df1c24fc4",
+      "source_date_utc": "2026-07-16"
+    },
+    {
+      "bytes": 3196086,
+      "path": "C:/MT5PortableSpreadLogger/MQL5/Files/spread_log_121409_Capital.ComMena-Live_XAUUSD_20260717.csv",
+      "raw_rows": 17279,
+      "sha256": "763e83d0bf9ab0c2371e65c1bdf2fedb44c890491be9502a5940313c369541ad",
+      "source_date_utc": "2026-07-17"
+    }
+  ]
+}

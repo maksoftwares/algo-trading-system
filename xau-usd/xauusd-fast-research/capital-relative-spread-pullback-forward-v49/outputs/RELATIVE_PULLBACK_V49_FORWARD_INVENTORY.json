@@ -1,0 +1,16 @@
+{
+  "calibration_audit_sha256": "edfbeabb542b34fe850a8c4d951cd71877eb960d2567ce33334b1a12223d3bda",
+  "candidate_count_all_loaded_forward_data": 0,
+  "contract_sha256": "d37d5da5660db1eb743dfe722e536da545fd33e5c2835c5f02d73efb03c94218",
+  "economic_outcomes_opened_by_inventory": false,
+  "eligible_full_weekday_count": 0,
+  "eligible_full_weekdays": [],
+  "full_day_quality": [],
+  "inventory_sha256": "40daf578708774d56c61b7aa1002a960568d10ac605a7cdd573ce84898730e50",
+  "schema_version": "xauusd_v49_forward_inventory",
+  "source_audit": {
+    "raw_rows": 0,
+    "source_files": [],
+    "unique_rows": 0
+  }
+}

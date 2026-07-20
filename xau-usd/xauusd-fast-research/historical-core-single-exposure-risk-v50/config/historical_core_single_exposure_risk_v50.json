@@ -1,0 +1,92 @@
+{
+  "schema_version": "xauusd_historical_core_single_exposure_risk_v50",
+  "cutoff_exclusive_utc": "2026-07-01T00:00:00Z",
+  "windows": {
+    "1Y": "2025-07-01T00:00:00Z",
+    "2Y": "2024-07-01T00:00:00Z",
+    "5Y": "2021-07-01T00:00:00Z",
+    "10Y": "2016-07-01T00:00:00Z"
+  },
+  "sources": {
+    "v43_audit_module": {
+      "path": "xau-usd/xauusd-fast-research/historical-core-drawdown-control-audit-v43/src/audit.py",
+      "sha256": "1126431d4c11b90aecfde90511298498fdacbcfc8f1fbda5d22c5ec8f8457f11"
+    },
+    "v43_result": {
+      "path": "xau-usd/xauusd-fast-research/historical-core-drawdown-control-audit-v43/outputs/HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_RESULT.json",
+      "sha256": "00fc080b7e5ee6462c6101e665637a28d9e8c996f39ab02ec5deca5c2aa0d955"
+    },
+    "normalized_core_ledger": {
+      "path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "r1_portability_config": {
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    "r1_portability_module": {
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py",
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    }
+  },
+  "external_sources": {
+    "m5_feature_cache": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    "exact_peak_hour": {
+      "path": "C:/DukascopyTickDataFoundationV1/raw/XAUUSD/year=2025/month=04/2025040223.json",
+      "sha256": "71ee49751fe6af0dc18a07001828d1be5864535e09e6145bfd7bfd5fad3f1132"
+    },
+    "exact_trough_hour": {
+      "path": "C:/DukascopyTickDataFoundationV1/raw/XAUUSD/year=2025/month=08/2025082802.json",
+      "sha256": "fbeb3199abfbc09efc80d31555d0eacc2fcd6be93417aec5a150abe60811fb07"
+    }
+  },
+  "target": {
+    "specialist_id": "R1_UPTREND",
+    "source_strategy": "h4_d1_long_best_box2_atr80"
+  },
+  "comparison_policies": {
+    "V43_TWO_POSITION": {
+      "maximum_concurrent_positions": 2,
+      "maximum_entries_per_utc_day": 1
+    },
+    "V50_SINGLE_POSITION": {
+      "maximum_concurrent_positions": 1,
+      "maximum_entries_per_utc_day": 1
+    }
+  },
+  "account_reference": {
+    "current_equity_dollars": 2998.45,
+    "reference_lot": 0.01,
+    "broker_minimum_lot": 0.01,
+    "broker_lot_step": 0.01,
+    "maximum_equity_drawdown_fraction": 0.15,
+    "capital_safety_buffer_multiple": 1.25
+  },
+  "gates": {
+    "minimum_one_year_profit_factor": 1.5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_CONTRACT_LOCK.json",
+    "result_json": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_RESULT.json",
+    "result_markdown": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_RESULT.md",
+    "window_metrics": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_WINDOWS.csv",
+    "decisions": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_DECISIONS.csv",
+    "manifest": "HISTORICAL_CORE_SINGLE_EXPOSURE_RISK_V50_MANIFEST.json"
+  },
+  "research_controls": {
+    "diagnostic_after_outcome_observation": true,
+    "parameter_search_count": 0,
+    "claims_untouched_holdout": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

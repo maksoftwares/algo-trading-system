@@ -1,0 +1,59 @@
+{
+  "schema_version": "xauusd_histdata_independent_feed_audit_v47",
+  "window": {
+    "month": "2024-01",
+    "start_inclusive_utc": "2024-01-01T05:00:00Z",
+    "end_exclusive_utc": "2024-02-01T05:00:00Z"
+  },
+  "histdata": {
+    "archive_path": "C:/HistDataGoldTickFoundationV1/raw/XAUUSD/year=2024/month=01/HISTDATA_COM_ASCII_XAUUSD_T202401.zip",
+    "archive_sha256": "5b73733b7e1fcc5f10943602d83e54396338f7e106a2f80f03605eabf37a8990",
+    "csv_path": "C:/HistDataGoldTickFoundationV1/staging/XAUUSD/year=2024/month=01/DAT_ASCII_XAUUSD_T_202401.csv",
+    "csv_sha256": "83eeca170c710dda487829c2702474b477dd1cbc191c75d5319b5623296b7893",
+    "status_path": "C:/HistDataGoldTickFoundationV1/staging/XAUUSD/year=2024/month=01/DAT_ASCII_XAUUSD_T_202401.txt",
+    "status_sha256": "2e71245af32d8bd3cc588c8432f0d8f89ae5572961d2ffacfe750e18358fffc3",
+    "timestamp_format": "%Y%m%d %H%M%S%f",
+    "fixed_est_to_utc_hours": 5
+  },
+  "dukascopy": {
+    "m5_path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "gates": {
+    "minimum_rows": 1000000,
+    "minimum_calendar_days_spanned": 25,
+    "maximum_invalid_quote_rows": 0,
+    "maximum_spread_p99_dollars": 10.0,
+    "minimum_active_bar_coverage_fraction": 0.90,
+    "minimum_matched_bars": 5000,
+    "minimum_contemporaneous_return_correlation": 0.95,
+    "maximum_median_absolute_basis_dollars": 5.0,
+    "maximum_exact_mid_close_fraction": 0.95,
+    "minimum_basis_standard_deviation_dollars": 0.01
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "HISTDATA_XAUUSD_V47_CONTRACT_LOCK.json",
+    "m5_quotes": "HISTDATA_XAUUSD_V47_M5_QUOTES.parquet",
+    "daily_audit": "HISTDATA_XAUUSD_V47_DAILY_AUDIT.csv",
+    "result_json": "HISTDATA_XAUUSD_V47_RESULT.json",
+    "result_markdown": "HISTDATA_XAUUSD_V47_RESULT.md",
+    "manifest": "HISTDATA_XAUUSD_V47_MANIFEST.json"
+  },
+  "research_controls": {
+    "source_quality_only": true,
+    "historical_data_is_development_only": true,
+    "same_version_tuning_authorized": false,
+    "future_columns_authorized": false,
+    "labels_authorized": false,
+    "signals_authorized": false,
+    "trade_outcomes_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "payment_authorized": false,
+    "broker_action_authorized": false
+  }
+}

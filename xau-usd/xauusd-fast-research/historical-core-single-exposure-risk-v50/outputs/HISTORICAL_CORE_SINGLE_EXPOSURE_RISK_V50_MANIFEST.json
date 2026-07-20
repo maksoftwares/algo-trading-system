@@ -1,0 +1,49 @@
+{
+  "decision": "V50_SINGLE_R1_EXPOSURE_RISK_GATE_PASS",
+  "external_source_audit": {
+    "exact_peak_hour": {
+      "bytes": 364370,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=04\\2025040223.json",
+      "sha256": "71ee49751fe6af0dc18a07001828d1be5864535e09e6145bfd7bfd5fad3f1132"
+    },
+    "exact_trough_hour": {
+      "bytes": 164629,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=08\\2025082802.json",
+      "sha256": "fbeb3199abfbc09efc80d31555d0eacc2fcd6be93417aec5a150abe60811fb07"
+    },
+    "m5_feature_cache": {
+      "bytes": 104974475,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    }
+  },
+  "result_sha256": "602bee9ec80812f365cc39ba18696b12c23ca1b2bdecebc03cd2e7928f73ba15",
+  "schema_version": "xauusd_historical_core_single_exposure_risk_v50",
+  "source_audit": {
+    "normalized_core_ledger": {
+      "bytes": 80507,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\five-specialist-window-report-v1\\outputs\\FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "r1_portability_config": {
+      "bytes": 3624,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\config\\mt5_r1_uptrend_portability_v1.json",
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    "r1_portability_module": {
+      "bytes": 6343,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\src\\portability.py",
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    },
+    "v43_audit_module": {
+      "bytes": 24219,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\historical-core-drawdown-control-audit-v43\\src\\audit.py",
+      "sha256": "1126431d4c11b90aecfde90511298498fdacbcfc8f1fbda5d22c5ec8f8457f11"
+    },
+    "v43_result": {
+      "bytes": 7859,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\historical-core-drawdown-control-audit-v43\\outputs\\HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_RESULT.json",
+      "sha256": "00fc080b7e5ee6462c6101e665637a28d9e8c996f39ab02ec5deca5c2aa0d955"
+    }
+  }
+}

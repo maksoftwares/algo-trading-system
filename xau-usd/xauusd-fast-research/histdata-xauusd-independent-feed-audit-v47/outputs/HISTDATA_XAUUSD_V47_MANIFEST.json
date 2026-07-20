@@ -1,0 +1,25 @@
+{
+  "files": {
+    "HISTDATA_XAUUSD_V47_CONTRACT_LOCK.json": {
+      "bytes": 4028,
+      "sha256": "0670f93cb09585f7a785d405fbcabd3bcdfc4d54007f187f13ff005d8e9025fe"
+    },
+    "HISTDATA_XAUUSD_V47_DAILY_AUDIT.csv": {
+      "bytes": 1681,
+      "sha256": "f52d537e94bd980a888148a3a9e0e7289842c6673d3ca64fa85478ec9f548bbe"
+    },
+    "HISTDATA_XAUUSD_V47_M5_QUOTES.parquet": {
+      "bytes": 213925,
+      "sha256": "148db13af96d016fc9a4faa98ffc48ec3cf405179bb605f576a2bb765cc5b2f1"
+    },
+    "HISTDATA_XAUUSD_V47_RESULT.json": {
+      "bytes": 3126,
+      "sha256": "a72a4cd5db6831de13f11260beea33c0c6c2050062ea8989b5dabb5fbac64ea0"
+    },
+    "HISTDATA_XAUUSD_V47_RESULT.md": {
+      "bytes": 1329,
+      "sha256": "1dc7744b777a5321d65970277ccde60a57426ffe739990ad2e02dbb1747258ce"
+    }
+  },
+  "manifest_sha256": "842c6c84a036e68493a32ec76279462387c6c6a30a84f545fbe36fbdbf083126"
+}

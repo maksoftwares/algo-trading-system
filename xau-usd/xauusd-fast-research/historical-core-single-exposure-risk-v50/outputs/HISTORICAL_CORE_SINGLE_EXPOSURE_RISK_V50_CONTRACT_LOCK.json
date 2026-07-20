@@ -1,0 +1,50 @@
+{
+  "contract_sha256": "3a9649fe6e77105e19583a1351262699dd9a1bb21dc19fd97dc514f916020195",
+  "files": {
+    ".gitattributes": {
+      "bytes": 19,
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 1942,
+      "sha256": "67f3643dc36f72e2ef808d6395121d8eb98b36d925c1be7d7666e12f3cd5cdec"
+    },
+    "README.md": {
+      "bytes": 673,
+      "sha256": "1067d9dfe2a97de13436b19b2e6225a8a0809414bd5ea754ca1553a07a0859bc"
+    },
+    "config/historical_core_single_exposure_risk_v50.json": {
+      "bytes": 3775,
+      "sha256": "0c3e3b09928aacb4c918054dcee9004df947036514685fab8c0cfac49261acc7"
+    },
+    "lock_contract.py": {
+      "bytes": 2315,
+      "sha256": "be2d889e584b3b2bbb554553cda5e7ba447442243b72755a04998992e25638d9"
+    },
+    "requirements.txt": {
+      "bytes": 59,
+      "sha256": "b48384cfc90259719f9669d65e11df930d558fca24ee11ffedbd046e066ea7a1"
+    },
+    "run_audit.py": {
+      "bytes": 3894,
+      "sha256": "d5602086409954e6018bfcee881d6d63f81de3aec08bff2535c171ed4da386f5"
+    },
+    "src/__init__.py": {
+      "bytes": 56,
+      "sha256": "f12757fa7248170b9316064adffb43448020718de12007399de7be3addff03cd"
+    },
+    "src/audit.py": {
+      "bytes": 9282,
+      "sha256": "53553f026cbcac181dc953ee0177f6ff7b93d82c5c98afd6036684895c3f455f"
+    },
+    "tests/conftest.py": {
+      "bytes": 181,
+      "sha256": "49cd94edfb57e7721348e6f1b952044ac2a7162fb17a5eb25de6d4ddabc24174"
+    },
+    "tests/test_audit.py": {
+      "bytes": 2463,
+      "sha256": "f46a33155bfb6b7b49c0ccc8e2598405a5074cfe10ecc17702d8f19050fc4d40"
+    }
+  },
+  "schema_version": "xauusd_historical_core_single_exposure_risk_v50"
+}

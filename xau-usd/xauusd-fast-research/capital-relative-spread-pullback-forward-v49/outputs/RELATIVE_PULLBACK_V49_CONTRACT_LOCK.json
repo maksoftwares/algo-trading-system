@@ -1,0 +1,165 @@
+{
+  "calibration_audit_sha256": "edfbeabb542b34fe850a8c4d951cd71877eb960d2567ce33334b1a12223d3bda",
+  "calibration_files": [
+    {
+      "bytes": 15798,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/outputs/RELATIVE_PULLBACK_V49_CALIBRATION_SOURCE_MANIFEST.json",
+      "sha256": "56d7729ff2cfa68e82fc1951786fd00be692aff3a281711facd771f15867b18b"
+    },
+    {
+      "bytes": 29508,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/outputs/RELATIVE_PULLBACK_V49_CALIBRATION_GRID.csv",
+      "sha256": "a104276dfc41ad1d5daa3355cd9633e0ee5e63ca3265e14d9971de9ab8c13be4"
+    },
+    {
+      "bytes": 7701,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/outputs/RELATIVE_PULLBACK_V49_CALIBRATION_CANDIDATES.csv",
+      "sha256": "0108faddd36c2b8164e9e1ed73b313d8f6679312a6e86072a19126a26ba60077"
+    },
+    {
+      "bytes": 2147,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/outputs/RELATIVE_PULLBACK_V49_CALIBRATION_AUDIT.json",
+      "sha256": "baa9b2bb69c70207dd277253a36fe1915b16a22aa3deb53e9356c420a0d87a2c"
+    }
+  ],
+  "contract_sha256": "d37d5da5660db1eb743dfe722e536da545fd33e5c2835c5f02d73efb03c94218",
+  "forward": {
+    "confirmation_audit": "outputs/RELATIVE_PULLBACK_V49_CONFIRMATION_AUDIT.json",
+    "confirmation_full_weekdays": 20,
+    "start_inclusive_utc": "2026-07-21T00:00:00Z",
+    "validation_audit": "outputs/RELATIVE_PULLBACK_V49_VALIDATION_AUDIT.json",
+    "validation_full_weekdays": 20
+  },
+  "gates": {
+    "daily_bootstrap_lower_quantile": 0.1,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 4901,
+    "maximum_closed_trade_drawdown_dollars": 100.0,
+    "maximum_trades_per_full_weekday": 1.5,
+    "minimum_active_day_share": 0.4,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_direction_share": 0.2,
+    "minimum_executable_trades": 10,
+    "minimum_half_profit_factor": 1.0,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_recovery_factor": 1.0,
+    "minimum_stress_profit_factor": 1.05,
+    "minimum_trades_per_full_weekday": 0.5,
+    "require_daily_bootstrap_lower_bound_positive": true,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true
+  },
+  "multiple_testing": {
+    "block_length_weekdays": 5,
+    "daily_bootstrap_samples": 10000,
+    "daily_bootstrap_seed": 490049,
+    "family_alpha": 0.05,
+    "maximum_one_sided_pvalue": 0.0125,
+    "method": "CIRCULAR_MOVING_BLOCK_BOOTSTRAP_BONFERRONI",
+    "registered_capital_forward_hypotheses": 4
+  },
+  "package_files": [
+    {
+      "bytes": 36,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/.gitattributes",
+      "sha256": "110c790da893ecc45a00fe4e2174966c2835a313c021645385c491ff5aea6ad0"
+    },
+    {
+      "bytes": 28,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/.gitignore",
+      "sha256": "a51104264729e7b362ea8c739de0ada29ba6e4f6047580ec3a3fd330ad20fd47"
+    },
+    {
+      "bytes": 3686,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/PREREGISTRATION.md",
+      "sha256": "5ff02d342471ab8cbdcf1002aba231da06dc6681cb9f63ba4b15aa482a795619"
+    },
+    {
+      "bytes": 593,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/README.md",
+      "sha256": "c4e988b582a9d7306ab2e1ae01fa00f8522fcb682ed6cde57710ee7b48dc25ef"
+    },
+    {
+      "bytes": 43,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/requirements.txt",
+      "sha256": "ea4d373bb2dad281837d2abd2eb9723d6d65f147464dacf1ec04536b8f1f27d7"
+    },
+    {
+      "bytes": 5879,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/config/capital_relative_spread_pullback_forward_v49.json",
+      "sha256": "1566dc860d37bf427a01983a5fc408e8779b2e6fdc08777b695e338adf5bb7df"
+    },
+    {
+      "bytes": 4265,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/prepare_calibration.py",
+      "sha256": "6652c84884f1d75661ba79ba12e3a2732f0d1e609b099e563e7d66a4cf6e3ea8"
+    },
+    {
+      "bytes": 3446,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/lock_contract.py",
+      "sha256": "c9677b3fb4959e80975c5cee2b0bace0bd89d0102fe1483d7b8716393319cf14"
+    },
+    {
+      "bytes": 9005,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/run_forward_evaluation.py",
+      "sha256": "2a0bcb27e18516e01ece05bbe4752686e8dc47465e8c7a35ce47c65d0b433b01"
+    },
+    {
+      "bytes": 51,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/src/__init__.py",
+      "sha256": "b1be1c8df324ddf3fd196a83af0c43abbca574b1c653270ed86d692a03c3fdc6"
+    },
+    {
+      "bytes": 18478,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/src/pullback.py",
+      "sha256": "d1636b52475fb182736fb16c1f98f80abd584a31e01328b513367006b5a4aa2d"
+    },
+    {
+      "bytes": 4809,
+      "path": "xau-usd/xauusd-fast-research/capital-relative-spread-pullback-forward-v49/tests/test_pullback.py",
+      "sha256": "f4f1951e6c375496d83d6b81b077b25b6b6afa91ad62d4a190d1712bf42390f6"
+    }
+  ],
+  "research_controls": {
+    "broker_action_authorized": false,
+    "calibration_pnl_calculated": false,
+    "calibration_post_candidate_prices_used": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "hypothesis_count": 1,
+    "live_authorized": false,
+    "model_training_authorized": false,
+    "outcome_blind_calibration": true,
+    "payment_authorized": false,
+    "python_predictions_authorized": false,
+    "registered_grid_policies": 240,
+    "same_version_tuning_authorized": false
+  },
+  "schema_version": "xauusd_capital_relative_spread_pullback_forward_v49",
+  "selected_policy": {
+    "active_day_share": 0.6666666666666666,
+    "candidates": 33,
+    "candidates_per_weekday": 1.0,
+    "cooldown_minutes": 120,
+    "density_distance": 0.0,
+    "eligible_weekdays": 33,
+    "first_half_candidates_per_weekday": 1.125,
+    "impulse_scale_multiple": 20.0,
+    "long_candidates": 17,
+    "maximum_retracement_fraction": 0.5,
+    "minimum_resume_scale_multiple": 1.0,
+    "minority_direction_share": 0.48484848484848486,
+    "policy_id": "I200__R50__S10__C120",
+    "second_half_candidates_per_weekday": 0.8823529411764706,
+    "short_candidates": 16
+  },
+  "simulation": {
+    "base_slippage_per_side_price": 0.05,
+    "dollars_per_price_unit": 1.0,
+    "hold_seconds": 300,
+    "maximum_entry_delay_ms": 2000,
+    "maximum_exit_delay_ms": 2000,
+    "reference_lot": 0.01,
+    "stress_slippage_per_side_price": 0.15
+  }
+}

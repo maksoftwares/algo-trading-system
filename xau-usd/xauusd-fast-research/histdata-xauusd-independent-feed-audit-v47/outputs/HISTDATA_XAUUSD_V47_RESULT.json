@@ -1,0 +1,76 @@
+{
+  "all_gates_pass": false,
+  "crossvenue_comparison": {
+    "active_bar_coverage_fraction": 0.9921491658488715,
+    "basis_standard_deviation_dollars": 0.0,
+    "consecutive_return_pairs": 6043,
+    "contemporaneous_return_correlation": 0.9999999999999999,
+    "dukascopy_active_m5_bars": 6114,
+    "exact_mid_close_fraction": 1.0,
+    "histdata_active_m5_bars": 6066,
+    "matched_m5_bars": 6066,
+    "median_absolute_basis_dollars": 0.0,
+    "median_basis_dollars": 0.0
+  },
+  "decision": "REJECT_SOURCE_FOR_CROSSVENUE_RESEARCH",
+  "execution_authorized": false,
+  "gates": {
+    "maximum_exact_mid_close_fraction": false,
+    "maximum_invalid_quote_rows": true,
+    "maximum_median_absolute_basis_dollars": true,
+    "maximum_spread_p99_dollars": true,
+    "minimum_active_bar_coverage_fraction": true,
+    "minimum_basis_standard_deviation_dollars": false,
+    "minimum_calendar_days_spanned": true,
+    "minimum_contemporaneous_return_correlation": true,
+    "minimum_matched_bars": true,
+    "minimum_rows": true,
+    "positive_median_spread": true,
+    "timestamps_monotonic": true
+  },
+  "histdata_source_audit": {
+    "calendar_days_spanned": 31,
+    "crossed_quote_rows": 0,
+    "duplicate_timestamp_rows": 0,
+    "exact_duplicate_rows": 0,
+    "first_timestamp_utc": "2024-01-01T23:00:00.312000+00:00",
+    "last_timestamp_utc": "2024-02-01T04:59:56.887000+00:00",
+    "maximum_spread_dollars": 4.542000000000144,
+    "median_spread_dollars": 0.32999999999992724,
+    "nonpositive_quote_rows": 0,
+    "rows": 3062220,
+    "spread_p99_dollars": 0.43699999999989814,
+    "timestamps_monotonic": true
+  },
+  "histdata_status_report": {
+    "reported_average_tick_interval_ms": 5495,
+    "reported_gap_count": 28,
+    "reported_gaps_at_least_3500_seconds": 17,
+    "reported_gaps_at_least_60_seconds": 28,
+    "reported_maximum_tick_interval_ms": 3602954
+  },
+  "schema_version": "xauusd_histdata_independent_feed_audit_v47",
+  "source_files": {
+    "dukascopy_m5": {
+      "bytes": 104974475,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    "histdata_archive": {
+      "bytes": 21433463,
+      "path": "C:\\HistDataGoldTickFoundationV1\\raw\\XAUUSD\\year=2024\\month=01\\HISTDATA_COM_ASCII_XAUUSD_T202401.zip",
+      "sha256": "5b73733b7e1fcc5f10943602d83e54396338f7e106a2f80f03605eabf37a8990"
+    },
+    "histdata_csv": {
+      "bytes": 137799900,
+      "path": "C:\\HistDataGoldTickFoundationV1\\staging\\XAUUSD\\year=2024\\month=01\\DAT_ASCII_XAUUSD_T_202401.csv",
+      "sha256": "83eeca170c710dda487829c2702474b477dd1cbc191c75d5319b5623296b7893"
+    },
+    "histdata_status": {
+      "bytes": 1879,
+      "path": "C:\\HistDataGoldTickFoundationV1\\staging\\XAUUSD\\year=2024\\month=01\\DAT_ASCII_XAUUSD_T_202401.txt",
+      "sha256": "2e71245af32d8bd3cc588c8432f0d8f89ae5572961d2ffacfe750e18358fffc3"
+    }
+  },
+  "strategy_research_authorized_in_v47": false
+}

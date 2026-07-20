@@ -1,0 +1,105 @@
+{
+  "contract_sha256": "44fed2b2cc2a515927eede186ba035244331d73338d0f174fb9c6584b0866b38",
+  "external_sources": {
+    "dukascopy_m5": {
+      "bytes": 104974475,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    "histdata_archive": {
+      "bytes": 21433463,
+      "path": "C:\\HistDataGoldTickFoundationV1\\raw\\XAUUSD\\year=2024\\month=01\\HISTDATA_COM_ASCII_XAUUSD_T202401.zip",
+      "sha256": "5b73733b7e1fcc5f10943602d83e54396338f7e106a2f80f03605eabf37a8990"
+    },
+    "histdata_csv": {
+      "bytes": 137799900,
+      "path": "C:\\HistDataGoldTickFoundationV1\\staging\\XAUUSD\\year=2024\\month=01\\DAT_ASCII_XAUUSD_T_202401.csv",
+      "sha256": "83eeca170c710dda487829c2702474b477dd1cbc191c75d5319b5623296b7893"
+    },
+    "histdata_status": {
+      "bytes": 1879,
+      "path": "C:\\HistDataGoldTickFoundationV1\\staging\\XAUUSD\\year=2024\\month=01\\DAT_ASCII_XAUUSD_T_202401.txt",
+      "sha256": "2e71245af32d8bd3cc588c8432f0d8f89ae5572961d2ffacfe750e18358fffc3"
+    }
+  },
+  "gates": {
+    "maximum_exact_mid_close_fraction": 0.95,
+    "maximum_invalid_quote_rows": 0,
+    "maximum_median_absolute_basis_dollars": 5.0,
+    "maximum_spread_p99_dollars": 10.0,
+    "minimum_active_bar_coverage_fraction": 0.9,
+    "minimum_basis_standard_deviation_dollars": 0.01,
+    "minimum_calendar_days_spanned": 25,
+    "minimum_contemporaneous_return_correlation": 0.95,
+    "minimum_matched_bars": 5000,
+    "minimum_rows": 1000000
+  },
+  "package_files": {
+    ".gitattributes": {
+      "bytes": 49,
+      "sha256": "0a1eab93b39b1432a2a237e67a773afb05c405a8c6548d1169e3cf5cc8eb45c2"
+    },
+    ".gitignore": {
+      "bytes": 46,
+      "sha256": "53a44b187faa6b43639872fed68cfcf4ac3300b0e7109b343398a040c78a255a"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 2675,
+      "sha256": "3e9a6196f1799251dcce05578b18c69a5efa525947424663e240ffd9c3211e46"
+    },
+    "README.md": {
+      "bytes": 589,
+      "sha256": "bdc0e9b2b213229cab0ce46f191dfbcc6558ab7d41455dcf7cfd731594fe39ac"
+    },
+    "config/histdata_xauusd_independent_feed_audit_v47.json": {
+      "bytes": 2559,
+      "sha256": "30865f0689c6f0d3da99126eb77aea3f188181df6b169d22da07b27d7f555b8d"
+    },
+    "lock_contract.py": {
+      "bytes": 3463,
+      "sha256": "32485a600155679d58e5991050a4acb5eab1be2ab33b62b244a7819ceb0afbed"
+    },
+    "requirements.txt": {
+      "bytes": 59,
+      "sha256": "59e12f0507d396513f2db444edce64a0303dc85ddb61fbbc1b10aa6019aad1fe"
+    },
+    "run_audit.py": {
+      "bytes": 4552,
+      "sha256": "cebcc33f80d6b5a3cdeed787ca3a3747f8e9cec416f40033e3c99fa80fb37feb"
+    },
+    "src/__init__.py": {
+      "bytes": 50,
+      "sha256": "1b59bec1038779d79753fd158d0171adefbde54074d3ead7c0759f3a439acb94"
+    },
+    "src/audit.py": {
+      "bytes": 12282,
+      "sha256": "d8f471995d08a7525ed2590a986cebbdd9445fed7c75d57101811a9d4f995cf7"
+    },
+    "tests/test_audit.py": {
+      "bytes": 4489,
+      "sha256": "0bb370e7e5d331937429d7caa0ba7c6573206d3881241d6302278d7823ec7861"
+    }
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "future_columns_authorized": false,
+    "historical_data_is_development_only": true,
+    "labels_authorized": false,
+    "live_authorized": false,
+    "model_training_authorized": false,
+    "payment_authorized": false,
+    "python_predictions_authorized": false,
+    "same_version_tuning_authorized": false,
+    "signals_authorized": false,
+    "source_quality_only": true,
+    "trade_outcomes_authorized": false
+  },
+  "schema_version": "xauusd_histdata_independent_feed_audit_v47",
+  "window": {
+    "end_exclusive_utc": "2024-02-01T05:00:00Z",
+    "month": "2024-01",
+    "start_inclusive_utc": "2024-01-01T05:00:00Z"
+  }
+}

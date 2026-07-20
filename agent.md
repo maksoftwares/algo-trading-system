@@ -6,7 +6,7 @@ Updated: `2026-07-20`
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
 - Current operational branch: `codex/xau-independent-specialists-v1`
-- Latest pushed research implementation checkpoint: `680321ad`
+- Latest pushed research implementation checkpoint before this handoff update: `44815e67`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -71,7 +71,14 @@ Attribution status: `REPAIR_REQUIRED_NATIVE_POSITION_JOIN`.
 
 Frozen uncapped diagnostic metrics: `678` trades; `51.03%` win rate; `2.6082` realized W/L; `2.7182` profit factor; `+$9,640.05` net; `+$9,436.65` stress net at `-$0.30/ticket`; `+$764.92` recent-three-month net; `$889.69` maximum closed drawdown; `26` positive months; approximately `21.28%` active weekdays. The `$889.69` curve is retained for audit history only and is not a deployable portfolio result.
 
-Current drawdown status: V43 attributes the `$889.69` episode to R1 position stacking. The pre-existing limit of two concurrent R1 positions and one R1 entry per UTC day reduces one-year closed drawdown to `$259.53`, but exact bid/ask replay still measures `$521.21` floating drawdown. That is `17.38%` of the reference `$2,998.45` equity and fails the locked `15%` ceiling. Execution therefore remains fail-closed; the capped R1 lane needs at least `$4,343.45` equity with the frozen buffer, or a broker that can express the calculated `0.0069` lot size.
+Current drawdown status: V43 attributes the `$889.69` episode to R1 position
+stacking. V50 replaces the two-position research policy with a prospective
+maximum of one open R1 box position and one new R1 box entry per UTC day. The
+one-year closed drawdown falls to `$106.71`; exact ten-year stress floating
+drawdown is `$335.58`, or `11.19%` of the reference `$2,998.45` equity and
+`13.99%` after the frozen 25% buffer. The R1 lane therefore fits its 15% gate at
+0.01 lot, but whole-account historical floating drawdown is still unavailable.
+Execution remains fail-closed pending sealed shared-account forward evidence.
 
 Frozen ledger: [current R1+R2 baseline](xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv)
 
@@ -1920,3 +1927,82 @@ V46 is a real trained and hashed Python research artifact, but not a usable
 prediction model. It proves drawdown and frequency can coexist in this stream;
 it does not prove positive expectancy. No model, Python, EA, demo/live, or
 broker authority is granted.
+
+## V47 HistData Independent-Feed Audit - 2026-07-20
+
+`histdata-xauusd-independent-feed-audit-v47` tested whether the free HistData
+XAUUSD tick download could add an independent market view without payment.
+
+- January 2024 contained `3,062,220` valid tick rows and covered `6,066` matched
+  active M5 bars against the immutable Dukascopy cache.
+- Quote quality was internally valid, but M5 mid closes matched exactly on
+  `100%` of matched bars; return correlation was effectively `1.0`, median basis
+  was zero, and basis standard deviation was zero.
+- Decision: `REJECT_SOURCE_FOR_CROSSVENUE_RESEARCH`. HistData is a
+  wrapper/derivative of the existing Dukascopy feed, so more HistData years
+  would add volume, not information. No additional years should be downloaded.
+- Seven focused tests, Ruff, formatting, source hashing, and contract
+  verification passed. No paid request or broker action occurred.
+
+## V48 Capital Micro-Pullback Calibration - 2026-07-20
+
+`capital-micro-pullback-forward-v48` tested a short-horizon Capital quote
+mechanism using only candidate density and no future outcomes.
+
+- The fixed USD `0.35` spread ceiling excluded the first chronological half
+  because ordinary logged spread changed from roughly USD `0.50` to USD `0.30`
+  on 2026-07-02.
+- All `108` registered policies therefore had zero first-half density.
+- Decision: `V48_CALIBRATION_STRUCTURE_FAIL_TERMINAL`. No candidate P/L or
+  post-candidate outcome was opened, and same-version repair is prohibited.
+
+## V49 Relative-Spread Pullback Forward Lane - 2026-07-20
+
+`capital-relative-spread-pullback-forward-v49` is the preregistered portability
+successor to V48. It uses the current spread relative to a completed lagged
+30-minute median, plus a USD `1.00` hard ceiling.
+
+- Outcome-blind calibration registered `240` policies and selected
+  `I200__R50__S10__C120`: `33` candidates over `33` eligible weekdays, exactly
+  `1.0/day`, `66.67%` active days, `17` long and `16` short.
+- First/second-half density was `1.125/0.882` per weekday. No calibration P/L,
+  post-candidate price, or future label was used.
+- Calibration audit SHA-256:
+  `edfbeabb542b34fe850a8c4d951cd71877eb960d2567ce33334b1a12223d3bda`.
+- Contract SHA-256:
+  `d37d5da5660db1eb743dfe722e536da545fd33e5c2835c5f02d73efb03c94218`.
+- Forward collection begins 2026-07-21. It currently has zero eligible full
+  weekdays and keeps economics sealed until `20` complete weekdays exist.
+- Eight focused tests and Ruff/format checks pass. Hidden watcher PID `6084`
+  polls every `300` seconds. All model, EA, demo/live, payment, and broker
+  authority flags remain false.
+
+## V50 Single-R1 Exposure Risk Control - 2026-07-20
+
+`historical-core-single-exposure-risk-v50` directly addresses the USD `889.69`
+drawdown by locking the smallest non-zero broker-expressible exposure: one open
+R1 box position and one new R1 box entry per UTC day.
+
+- This is retrospective risk governance with zero parameter search, not an
+  untouched-alpha claim. Signal, stop, target, and all other specialists remain
+  unchanged.
+- One-year results move from the V43 two-position policy's `142` trades,
+  `0.544/day`, USD `2,478.19` net, PF `3.195`, and USD `259.53` closed DD to
+  `138` trades, `0.529/day`, USD `1,997.98` net, PF `3.047`, and USD `106.71`
+  closed DD.
+- Ten-year results retain `1,053` trades, USD `4,230.82` net, PF `2.127`, and
+  USD `252.68` closed DD.
+- Independent Dukascopy replay has `68` R1 trades. Global M5 stress floating DD
+  is USD `335.5784`; exact raw ticks verify USD `335.5782` from 2025-04-02
+  23:52:59.261 UTC to 2025-08-28 02:36:56.104 UTC.
+- The exact drawdown is `11.19%` of USD `2,998.45`, or `13.99%` after the locked
+  25% capital buffer. Buffered minimum equity is USD `2,796.48`, so 0.01 lot is
+  broker-expressible with USD `201.97` reserve above that minimum.
+- Decision: `V50_SINGLE_R1_EXPOSURE_RISK_GATE_PASS`. Contract SHA-256:
+  `3a9649fe6e77105e19583a1351262699dd9a1bb21dc19fd97dc514f916020195`;
+  result SHA-256:
+  `602bee9ec80812f365cc39ba18696b12c23ca1b2bdecebc03cd2e7928f73ba15`.
+- Five focused tests, Ruff, formatting, contract verification, and a fresh full
+  audit pass. Whole-account execution remains fail-closed because historical
+  intratrade marks are unavailable for every specialist; V42 prospective
+  shared-account confirmation is still mandatory.
