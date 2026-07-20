@@ -1,0 +1,27 @@
+{
+  "config_sha256": "8ff5b6ae75a07672b1f61144807485044eb07e7e27b712d87cafb8de65484035",
+  "generated_files": {
+    "cap_decisions": {
+      "bytes": 19703,
+      "sha256": "c683fabaf9d52d1e01e039dc841f677ba264b7170c481c970c3f15545b63b482"
+    },
+    "episode_trades": {
+      "bytes": 2240,
+      "sha256": "a5ec82824335764742342bc395b49850d2c0b5f04b18c952f9f6e748790c2f09"
+    },
+    "result_json": {
+      "bytes": 7859,
+      "sha256": "00fc080b7e5ee6462c6101e665637a28d9e8c996f39ab02ec5deca5c2aa0d955"
+    },
+    "result_markdown": {
+      "bytes": 1887,
+      "sha256": "9ffc94149840bb04fee03db1578fde67cc49967da17cf0239a078499c358b9bb"
+    },
+    "window_metrics": {
+      "bytes": 1333,
+      "sha256": "8155779eb34098eaa16bd8ce0413cac9a5483557f65376f2feaced6f4df7d9d8"
+    }
+  },
+  "result_sha256": "59d1ce2ee5cac1bc2672fc1b861a33892e88d1fa162b3472fde2b29d8c4a1f4d",
+  "schema_version": "xauusd_historical_core_drawdown_control_audit_v43"
+}

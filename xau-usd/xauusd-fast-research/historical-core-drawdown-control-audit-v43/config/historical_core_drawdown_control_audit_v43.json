@@ -1,0 +1,93 @@
+{
+  "schema_version": "xauusd_historical_core_drawdown_control_audit_v43",
+  "cutoff_exclusive_utc": "2026-07-01T00:00:00Z",
+  "windows": {
+    "1Y": "2025-07-01T00:00:00Z",
+    "2Y": "2024-07-01T00:00:00Z",
+    "5Y": "2021-07-01T00:00:00Z",
+    "10Y": "2016-07-01T00:00:00Z"
+  },
+  "sources": {
+    "normalized_core_ledger": {
+      "path": "xau-usd/xauusd-fast-research/five-specialist-window-report-v1/outputs/FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "r1_portability_config": {
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    "r1_portability_module": {
+      "path": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py",
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    },
+    "compression_portability_module": {
+      "path": "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py",
+      "sha256": "506f813b583c36299434b804e1ce78d177ad387f7c447ddd5e381caa1ae7ead2"
+    },
+    "shared_data_module": {
+      "path": "xau-usd/xauusd-fast-research/independent-specialists-v1/src/data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    "v41_contract": {
+      "path": "xau-usd/xauusd-fast-research/capital-r1-box-causal-outcome-resolver-v41/outputs/CAPITAL_R1_BOX_CAUSAL_OUTCOME_RESOLVER_V41_CONTRACT_LOCK.json",
+      "sha256": "7a339a8358a46c24b8599c91d288f4d4e2ec9e0bb310e571a28b3717bae2a7fc"
+    }
+  },
+  "external_sources": {
+    "m5_feature_cache": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    "m5_feature_manifest": {
+      "path": "C:/DukascopyTickDataFoundationV1/research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    },
+    "exact_peak_hour": {
+      "path": "C:/DukascopyTickDataFoundationV1/raw/XAUUSD/year=2025/month=04/2025040223.json",
+      "sha256": "71ee49751fe6af0dc18a07001828d1be5864535e09e6145bfd7bfd5fad3f1132"
+    },
+    "exact_trough_hour": {
+      "path": "C:/DukascopyTickDataFoundationV1/raw/XAUUSD/year=2025/month=08/2025082813.json",
+      "sha256": "a894d31e2b8edbaa8a5a1b4a439fcca8923e0a8b1606c50042fea8bed6f8a807"
+    }
+  },
+  "frozen_control": {
+    "specialist_id": "R1_UPTREND",
+    "source_strategy": "h4_d1_long_best_box2_atr80",
+    "maximum_concurrent_positions": 2,
+    "maximum_entries_per_utc_day": 1,
+    "source_policy_id": "PORTFOLIO_CONSTRAINED_PRIMARY"
+  },
+  "account_reference": {
+    "current_equity_dollars": 2998.45,
+    "reference_lot": 0.01,
+    "broker_minimum_lot": 0.01,
+    "broker_lot_step": 0.01,
+    "maximum_equity_drawdown_fraction": 0.15,
+    "capital_safety_buffer_multiple": 1.25,
+    "legacy_core_floating_drawdown_dollars": 1733.37
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_CONTRACT_LOCK.json",
+    "result_json": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_RESULT.json",
+    "result_markdown": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_RESULT.md",
+    "window_metrics": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_WINDOWS.csv",
+    "cap_decisions": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_CAP_DECISIONS.csv",
+    "episode_trades": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_EPISODE_TRADES.csv",
+    "manifest": "HISTORICAL_CORE_DRAWDOWN_CONTROL_V43_MANIFEST.json"
+  },
+  "research_controls": {
+    "diagnostic_after_outcome_observation": true,
+    "frozen_cap_predates_v43_audit": true,
+    "parameter_search_count": 0,
+    "claims_untouched_holdout": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

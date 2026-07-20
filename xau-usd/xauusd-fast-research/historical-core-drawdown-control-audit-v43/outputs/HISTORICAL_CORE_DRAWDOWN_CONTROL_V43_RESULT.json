@@ -1,0 +1,176 @@
+{
+  "account_sizing": {
+    "account_readiness_decision": "FAIL_CURRENT_ACCOUNT_CAPITAL_INADEQUATE",
+    "broker_can_express_safe_lot": false,
+    "broker_lot_step": 0.01,
+    "broker_minimum_lot": 0.01,
+    "buffered_minimum_equity_capped_r1_dollars": 4343.451522588729,
+    "buffered_minimum_equity_legacy_core_dollars": 14444.749999999998,
+    "capped_r1_fits_with_buffer": false,
+    "capped_r1_fits_without_buffer": false,
+    "capped_r1_stress_drawdown_fraction": 0.17382787197073404,
+    "current_equity_dollars": 2998.45,
+    "legacy_core_floating_drawdown_dollars": 1733.37,
+    "maximum_allowed_drawdown_dollars": 449.7675,
+    "maximum_lot_at_current_equity_with_buffer": 0.006903380835278442,
+    "minimum_equity_capped_r1_dollars": 3474.7612180709834,
+    "minimum_equity_legacy_core_dollars": 11555.8
+  },
+  "decision": "R1_STACKING_CONTROL_EFFECTIVE_ACCOUNT_NOT_READY",
+  "dukascopy_frozen_policy": {
+    "base_exact_tick": {
+      "maximum_drawdown_dollars": 492.6849999999995,
+      "peak_equity_dollars": 2383.0570000000007,
+      "peak_tick_rows": 16455,
+      "peak_time_utc": "2025-04-02T23:52:59.261000+00:00",
+      "trough_equity_dollars": 1890.3720000000012,
+      "trough_tick_rows": 20434,
+      "trough_time_utc": "2025-08-28T13:07:00.727000+00:00"
+    },
+    "base_m5_conservative": {
+      "bar_count": 708538,
+      "maximum_drawdown_dollars": 492.6849999999995,
+      "peak_bar_start_utc": "2025-04-02T23:50:00+00:00",
+      "peak_equity_dollars": 2383.0570000000007,
+      "trough_bar_start_utc": "2025-08-28T13:05:00+00:00",
+      "trough_equity_dollars": 1890.3720000000012
+    },
+    "policy_id": "PORTFOLIO_CONSTRAINED_PRIMARY",
+    "stress_exact_tick": {
+      "maximum_drawdown_dollars": 521.2141827106475,
+      "peak_equity_dollars": 1809.1001018206014,
+      "peak_tick_rows": 16455,
+      "peak_time_utc": "2025-04-02T23:52:59.261000+00:00",
+      "trough_equity_dollars": 1287.8859191099539,
+      "trough_tick_rows": 20434,
+      "trough_time_utc": "2025-08-28T13:07:00.727000+00:00"
+    },
+    "stress_m5_conservative": {
+      "bar_count": 708538,
+      "maximum_drawdown_dollars": 521.214656944444,
+      "peak_bar_start_utc": "2025-04-02T23:50:00+00:00",
+      "peak_equity_dollars": 1809.1015541666663,
+      "trough_bar_start_utc": "2025-08-28T13:05:00+00:00",
+      "trough_equity_dollars": 1287.8868972222224
+    },
+    "trades": 119
+  },
+  "external_source_audit": {
+    "exact_peak_hour": {
+      "bytes": 364370,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=04\\2025040223.json",
+      "sha256": "71ee49751fe6af0dc18a07001828d1be5864535e09e6145bfd7bfd5fad3f1132"
+    },
+    "exact_trough_hour": {
+      "bytes": 453146,
+      "path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2025\\month=08\\2025082813.json",
+      "sha256": "a894d31e2b8edbaa8a5a1b4a439fcca8923e0a8b1606c50042fea8bed6f8a807"
+    },
+    "m5_feature_cache": {
+      "bytes": 104974475,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+      "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+    },
+    "m5_feature_manifest": {
+      "bytes": 1305,
+      "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.manifest.json",
+      "sha256": "1c3e1759ebf25cfda569875a33d9fbc77e9de29ed7fb126492f63e52660fac85"
+    }
+  },
+  "frozen_cap_audit": {
+    "accepted_rows": 54,
+    "capped_ledger_rows": 1158,
+    "one_year_capped_closed_drawdown_dollars": 259.53,
+    "one_year_capped_trades_per_weekday": 0.5440613026819924,
+    "one_year_drawdown_reduction_fraction": 0.7082916521485012,
+    "one_year_original_closed_drawdown_dollars": 889.6899999999998,
+    "one_year_original_trades_per_weekday": 0.6130268199233716,
+    "original_ledger_rows": 1249,
+    "rejected_rows": 91,
+    "target_rows": 145
+  },
+  "limitations": {
+    "diagnostic_after_outcome_observation": true,
+    "full_five_specialist_historical_floating_curve_reconstructed": false,
+    "normalized_ledger_has_no_intratrade_marks": true,
+    "v42_forward_shared_account_evidence_required": true
+  },
+  "original_one_year_drawdown_episode": {
+    "maximum_drawdown_dollars": 889.6899999999998,
+    "peak_equity_dollars": 2072.273951986141,
+    "peak_time_utc": "2025-12-26T16:05:13+00:00",
+    "trough_equity_dollars": 1182.5839519861413,
+    "trough_time_utc": "2026-01-09T13:30:42+00:00"
+  },
+  "original_one_year_episode_attribution": [
+    {
+      "net_pnl_dollars": -866.37,
+      "regime": "UPTREND",
+      "source_strategy": "h4_d1_long_best_box2_atr80",
+      "specialist_id": "R1_UPTREND",
+      "trades": 7
+    },
+    {
+      "net_pnl_dollars": -23.32,
+      "regime": "UPTREND",
+      "source_strategy": "r1_h1_pullback_long_v1",
+      "specialist_id": "R1_UPTREND",
+      "trades": 4
+    }
+  ],
+  "required_controls": {
+    "demo_or_live_activation_authorized": false,
+    "r1_maximum_concurrent_positions": 2,
+    "r1_maximum_entries_per_utc_day": 1,
+    "reject_reference_lot_until_buffered_equity_requirement_met": true,
+    "reject_reference_lot_when_broker_minimum_exceeds_safe_lot": true,
+    "retain_v42_exact_shared_account_forward_gate": true
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "claims_untouched_holdout": false,
+    "demo_authorized": false,
+    "diagnostic_after_outcome_observation": true,
+    "ea_consumption_authorized": false,
+    "frozen_cap_predates_v43_audit": true,
+    "live_authorized": false,
+    "model_training_authorized": false,
+    "parameter_search_count": 0,
+    "python_predictions_authorized": false,
+    "same_version_tuning_authorized": false
+  },
+  "result_sha256": "59d1ce2ee5cac1bc2672fc1b861a33892e88d1fa162b3472fde2b29d8c4a1f4d",
+  "schema_version": "xauusd_historical_core_drawdown_control_audit_v43",
+  "source_audit": {
+    "compression_portability_module": {
+      "bytes": 17105,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-compression-portability-v1\\src\\portability.py",
+      "sha256": "506f813b583c36299434b804e1ce78d177ad387f7c447ddd5e381caa1ae7ead2"
+    },
+    "normalized_core_ledger": {
+      "bytes": 80507,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\five-specialist-window-report-v1\\outputs\\FIVE_SPECIALIST_NORMALIZED_LEDGER_V1.parquet",
+      "sha256": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372"
+    },
+    "r1_portability_config": {
+      "bytes": 3624,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\config\\mt5_r1_uptrend_portability_v1.json",
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    "r1_portability_module": {
+      "bytes": 6343,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\mt5-r1-uptrend-portability-v1\\src\\portability.py",
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    },
+    "shared_data_module": {
+      "bytes": 5494,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\independent-specialists-v1\\src\\data.py",
+      "sha256": "98d03da62af66edbc3e178465450cb1aaa6a40a068dff42110284ed406124361"
+    },
+    "v41_contract": {
+      "bytes": 4003,
+      "path": "C:\\Users\\ZHAO ZHU INFORMATION\\Downloads\\algo-trading-system\\xau-usd\\xauusd-fast-research\\capital-r1-box-causal-outcome-resolver-v41\\outputs\\CAPITAL_R1_BOX_CAUSAL_OUTCOME_RESOLVER_V41_CONTRACT_LOCK.json",
+      "sha256": "7a339a8358a46c24b8599c91d288f4d4e2ec9e0bb310e571a28b3717bae2a7fc"
+    }
+  }
+}

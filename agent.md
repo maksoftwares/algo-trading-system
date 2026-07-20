@@ -1769,3 +1769,40 @@ or V27 satellite trade.
 V42 has no model-training, prediction, EA, demo, live, or broker authority. A
 historical shared-account drawdown attribution and separately preregistered risk
 controller are mandatory before the account-readiness failure can be addressed.
+
+## V43 Historical Core Drawdown-Control Audit - 2026-07-20
+
+`historical-core-drawdown-control-audit-v43` attributes the USD 889.69 closed
+drawdown and applies only the R1 box exposure policy that was frozen before this
+diagnostic. It does not search a new drawdown threshold or alter another
+specialist.
+
+- Contract SHA-256:
+  `b85fa207b87f7fdd91775cda3433b8e5222fe30b26c09bc54b227e1d2f92895c`.
+- The one-year drawdown ran from the 2025-12-26 equity peak to the 2026-01-09
+  trough. All 11 exits were R1 uptrend trades: seven stacked R1 box trades lost
+  USD 866.37 and four R1 pullbacks lost USD 23.32.
+- The pre-existing R1 box cap permits at most two concurrent positions and one
+  new entry per UTC day. It keeps 54 of 145 historical R1 box rows and leaves
+  all other Core rows unchanged.
+- One-year metrics change from 160 trades, 0.613/day, USD 4,508.78 net, PF
+  3.492, and USD 889.69 closed drawdown to 142 trades, 0.544/day, USD 2,478.19
+  net, PF 3.195, and USD 259.53 closed drawdown. Closed drawdown falls 70.8%,
+  but this is retrospective evidence and not a fresh holdout.
+- The independent ten-year Dukascopy `PORTFOLIO_CONSTRAINED_PRIMARY` replay has
+  119 trades. Its globally marked M5 stress drawdown is USD 521.21; exact raw
+  ticks verify USD 521.21 from 2025-04-02 23:52:59.261 UTC to 2025-08-28
+  13:07:00.727 UTC.
+- USD 521.21 is 17.38% of the current USD 2,998.45 equity and fails the frozen
+  15% ceiling. R1 alone needs USD 3,474.76 without a capital buffer or USD
+  4,343.45 with the frozen 25% buffer.
+- At current equity the buffered maximum lot is 0.0069. Capital's minimum and
+  step are 0.01, so the broker cannot express the safe size. Until V42 produces
+  complete same-period evidence, the legacy whole-Core USD 1,733.37 floating
+  drawdown requires USD 14,444.75 with the same buffer.
+- Decision: `R1_STACKING_CONTROL_EFFECTIVE_ACCOUNT_NOT_READY`. Keep the R1 cap,
+  reject a 0.01-lot executor on the current account, and retain V42 exact
+  shared-account validation. No demo/live or broker authority is granted.
+- Focused tests: 6 passed. Ruff and format checks passed. Source hashes include
+  the normalized Core ledger, frozen portability code/config, V41 contract,
+  ten-year Dukascopy M5 cache, and exact raw peak/trough hours.
