@@ -140,6 +140,23 @@ Decision: `V71_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
 The barrier family cannot be mirrored into breakout continuation or retuned on
 the exposed outcomes. A successor needs another causal variable.
 
+## V73 Fixed Silver Anti-Signal Result
+
+V73 performed the one allowed directional falsification of V72. It inherited
+the exact locked event policy and execution, inverted direction once, and began
+only after V72's exposed cutoff. Fresh development resolved `242` trades over
+`257` weekdays (`0.941634/day`), with `136` longs and `106` shorts. Base/stress
+net was USD `-136.62/-154.25`; base/stress PF was `0.3987/0.3554`;
+first/second-half stress PF was `0.3359/0.3730`; no month was positive;
+winner-removed stress net was USD `-166.38`; stressed DD was USD `154.25`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V73_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`c0949fe88fd157df89bf9a06b96f5fd2ee9f6eaefc2fb6b4330c93807c998ee7`.
+All later stages remain sealed. V72/V73 show that the raw silver-lag event is
+not a hidden reversible edge under the locked tradable geometry. Both
+directions and all associated threshold or exit rescues are retired.
+
 ## Routes Not Counted As Solutions
 
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
