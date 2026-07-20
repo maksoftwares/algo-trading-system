@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import argparse
 import json
 import os
 from pathlib import Path
 import sys
 from typing import Any
+
+import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parent
@@ -24,13 +27,26 @@ from catchup import (  # noqa: E402
 CONFIG = ROOT / "config" / "fx_breadth_overreaction_fade_v81.json"
 
 
-def run_source_audit() -> dict[str, Any]:
+def audit_month_bounds(config: dict[str, Any], scope: str) -> tuple[str, str]:
+    if scope == "full":
+        return str(config["source"]["first_month"]), str(
+            config["source"]["last_month"]
+        )
+    calibration = config["calibration"]
+    start = pd.Timestamp(calibration["start"])
+    end = pd.Timestamp(calibration["end"]) - pd.Timedelta(nanoseconds=1)
+    return start.strftime("%Y-%m"), end.strftime("%Y-%m")
+
+
+def run_source_audit(scope: str = "full") -> dict[str, Any]:
     config = load_json(CONFIG)
     output = ROOT / str(config["outputs"]["directory"])
-    path = output / str(config["outputs"]["source_audit"])
+    output_key = "source_audit" if scope == "full" else "calibration_source_audit"
+    path = output / str(config["outputs"][output_key])
     if path.exists():
-        raise FileExistsError("V81 source audit already exists")
+        raise FileExistsError(f"V81 {scope} source audit already exists")
     source = config["source"]
+    first_month, last_month = audit_month_bounds(config, scope)
     storage = Path(
         os.environ.get(
             str(source["storage_environment_variable"]),
@@ -63,22 +79,27 @@ def run_source_audit() -> dict[str, Any]:
         }
     manifests: list[dict[str, Any]] = []
     for symbol, spec in source["symbols"].items():
-        for year, month in month_keys(source["first_month"], source["last_month"]):
+        for year, month in month_keys(first_month, last_month):
             _, row = validate_month_manifest(storage, symbol, spec, year, month)
             manifests.append(row)
     expected_count = len(source["symbols"]) * len(
-        month_keys(source["first_month"], source["last_month"])
+        month_keys(first_month, last_month)
     )
     if len(manifests) != expected_count:
         raise ValueError("V81 source audit has incomplete symbol-month coverage")
     audit: dict[str, Any] = {
-        "schema_version": "xauusd_fx_breadth_overreaction_v81_source_audit",
+        "schema_version": f"xauusd_fx_breadth_overreaction_v81_{scope}_source_audit",
         "campaign_id": config["campaign_id"],
-        "decision": "V81_SOURCE_AUDIT_PASS",
+        "scope": scope,
+        "decision": (
+            "V81_SOURCE_AUDIT_PASS"
+            if scope == "full"
+            else "V81_CALIBRATION_SOURCE_AUDIT_PASS"
+        ),
         "storage_root": str(storage),
         "symbols": source["symbols"],
-        "first_month": source["first_month"],
-        "last_month": source["last_month"],
+        "first_month": first_month,
+        "last_month": last_month,
         "instrument_evidence": evidence_rows,
         "month_manifests": manifests,
         "month_manifest_count": len(manifests),
@@ -107,5 +128,13 @@ def run_source_audit() -> dict[str, Any]:
     return audit
 
 
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Audit frozen V81 source months")
+    parser.add_argument("--scope", choices=("calibration", "full"), default="full")
+    args = parser.parse_args()
+    run_source_audit(str(args.scope))
+    return 0
+
+
 if __name__ == "__main__":
-    run_source_audit()
+    raise SystemExit(main())

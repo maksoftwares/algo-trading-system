@@ -48,8 +48,12 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
         raise FileNotFoundError(missing)
     output = ROOT / str(config["outputs"]["directory"])
     source_path = output / str(config["outputs"]["source_audit"])
+    calibration_source_path = output / str(
+        config["outputs"]["calibration_source_audit"]
+    )
     calibration_path = output / str(config["outputs"]["calibration_audit"])
     source_audit = load_json(source_path)
+    calibration_source_audit = load_json(calibration_source_path)
     calibration = load_json(calibration_path)
     if (
         source_audit.get("decision") != "V81_SOURCE_AUDIT_PASS"
@@ -63,6 +67,17 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
         raise ValueError("V81 source audit start month changed")
     if source_audit.get("last_month") != config["source"]["last_month"]:
         raise ValueError("V81 source audit end month changed")
+    if (
+        calibration_source_audit.get("decision")
+        != "V81_CALIBRATION_SOURCE_AUDIT_PASS"
+        or canonical_hash(calibration_source_audit, "audit_sha256")
+        != calibration_source_audit.get("audit_sha256")
+    ):
+        raise ValueError("V81 calibration source audit is invalid")
+    if calibration.get("source_audit_sha256") != sha256_file(
+        calibration_source_path
+    ):
+        raise ValueError("V81 calibration source audit changed")
     if (
         calibration.get("decision") != "V81_CALIBRATION_POLICY_SELECTED"
         or calibration.get("selected_policy") is None
@@ -91,6 +106,7 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
     contract: dict[str, Any] = {
         "schema_version": "xauusd_fx_breadth_overreaction_v81_contract_lock",
         "package_files": [record(path, ROOT) for path in package_paths],
+        "calibration_source_audit": record(calibration_source_path, ROOT),
         "source_audit": record(source_path, ROOT),
         "calibration_audit": record(calibration_path, ROOT),
         "calibration_features": record(feature_path, ROOT),

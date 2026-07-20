@@ -116,6 +116,7 @@
   },
   "outputs": {
     "directory": "outputs",
+    "calibration_source_audit": "FX_BREADTH_XAU_V81_CALIBRATION_SOURCE_AUDIT.json",
     "source_audit": "FX_BREADTH_XAU_V81_SOURCE_AUDIT.json",
     "calibration_features": "FX_BREADTH_XAU_V81_CALIBRATION_FEATURES.parquet",
     "calibration_grid": "FX_BREADTH_XAU_V81_CALIBRATION_GRID.csv",

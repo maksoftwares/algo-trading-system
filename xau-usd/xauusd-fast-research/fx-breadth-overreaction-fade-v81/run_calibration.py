@@ -67,14 +67,14 @@ def run_calibration() -> dict[str, Any]:
         raise FileExistsError("V81 calibration outputs already exist")
     if (output / str(config["outputs"]["contract_lock"])).exists():
         raise RuntimeError("V81 calibration cannot run after lock")
-    source_path = output / str(config["outputs"]["source_audit"])
+    source_path = output / str(config["outputs"]["calibration_source_audit"])
     source_audit = load_json(source_path)
     if (
-        source_audit.get("decision") != "V81_SOURCE_AUDIT_PASS"
+        source_audit.get("decision") != "V81_CALIBRATION_SOURCE_AUDIT_PASS"
         or canonical_hash(source_audit, "audit_sha256")
         != source_audit.get("audit_sha256")
     ):
-        raise ValueError("V81 source audit is invalid")
+        raise ValueError("V81 calibration source audit is invalid")
     source = config["source"]
     storage = Path(
         os.environ.get(
