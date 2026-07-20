@@ -1,0 +1,31 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit_sha256": "412c10db5e0e81ad8dd1e6e1bef7137823bff8b236b1fe8624d75c0362539e35",
+  "calibration_payload_sha256": "a6b189f8b92d7c9fb720b9e7a5175cac58c59bf63ac7ffb8e5ae2a56aed74105",
+  "campaign_id": "comex-sequence-ignition-v45",
+  "contract_sha256": "3e950672a46401187d2bcddbc2634c53bd862a420c15b2c8c19c59a26cec019b",
+  "economic_outcomes_opened_at_lock": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_sequence_ignition_v45_contract_lock",
+  "selected_candidates_sha256": "4ff00b0bfee3310206becb3fed659739ebdda8e7733d74d4d07222cb91a356d5",
+  "selected_policy": {
+    "minimum_absolute_current_imbalance": 0.35,
+    "minimum_arrival_acceleration": 1.25,
+    "minimum_current_trade_count": 30,
+    "minimum_same_side_transition_share": 0.7,
+    "minimum_terminal_run_trades": 5,
+    "policy_id": "TC30__RL05__TS70__IM35__AC125"
+  },
+  "tracked_file_sha256": {
+    "PREREGISTRATION.md": "21f3d37d1b4a4597ded7ddc68868a20d2855cd97e72adc1b4e5573b1940ada4c",
+    "README.md": "4cb0dfa8cd716d5ed360869edc4c8048ca86397b2baacd8403bb177b0fa1fc8a",
+    "config/comex_sequence_ignition_v45.json": "c5123d8b8045623e1775d72c005a5cace5e3a84ca3f2e25e88b12fe0e094fdbf",
+    "lock_contract.py": "7b032d9490d0d8153b0fd29989a9d2ea98a530be19ee9de598271e113e462361",
+    "prepare_calibration.py": "53e210e516df32dd95f32f0d05072d4799d8bd2e4ad7d4115145f73b204f3b41",
+    "requirements.txt": "a7d2cd6c96224427f20e77c194ebb5c978fc3221d61bc305cd2867068f4b351a",
+    "run_stage.py": "0e0f9826dbb189e638038f3c8c7b444f67496080e88ca22bf26dda9dec6d4c66",
+    "src/__init__.py": "9d8b472de707c10ccd8bbef2c40afb93b88f452763c5a49a6f5a481512831c75",
+    "src/sequence_ignition.py": "bba27778dce046933288cdda9f74c5fd13a359cc768d2b3a4ae81517400e795d",
+    "tests/test_sequence_ignition.py": "384dd611bfd14e802b50af10784877b768ac6c8313deb10f4e35e92541c15c07"
+  }
+}

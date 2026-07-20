@@ -1,0 +1,31 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit_sha256": "ef9225409bec655eb6a55e549192a5cda371e1ebd076b68b8011745264a65c8e",
+  "calibration_payload_sha256": "e3f8cdd4acdbfdc8abde1c8584bf1b0cb4a41fc54ee639b1388fadb318171a08",
+  "campaign_id": "comex-flow-transition-v44",
+  "contract_sha256": "3f0fa32f8b5d70c2abdcd93b0eb4bb1823912ab7780dee34f9e5d611294ebcf6",
+  "economic_outcomes_opened_at_lock": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_flow_transition_v44_contract_lock",
+  "selected_candidates_sha256": "93592d59405505aeacf904c4ed565139109cdec62422cb33e96c40e879296eeb",
+  "selected_policy": {
+    "maximum_prior_directional_impact_efficiency": 0.1,
+    "minimum_absolute_current_imbalance": 0.2,
+    "minimum_absolute_prior_imbalance": 0.25,
+    "minimum_current_volume": 50,
+    "minimum_prior_volume": 220,
+    "policy_id": "PV220__PI25__IE10__CV50__CI20"
+  },
+  "tracked_file_sha256": {
+    "PREREGISTRATION.md": "9e90563f779bb0e5c17968aa8b291fc7e7a7f798837406abf322b6e2913d8778",
+    "README.md": "c39c361b2952f30f1a0da6360d0f4bab331c6cea3132e56e4c0aaf9c81de47d9",
+    "config/comex_flow_transition_v44.json": "b11fac4d104f11554576400f49825942cf00e4d16799bdfb5bd72672cabdb22c",
+    "lock_contract.py": "1a888c8466bdfc382e416a52b862c83fe05ad96299459149b843843b92709f1f",
+    "prepare_calibration.py": "262eae12049f797b2ebad7a0f5552b16f40cb982130fafec4b2366af367529b8",
+    "requirements.txt": "a7d2cd6c96224427f20e77c194ebb5c978fc3221d61bc305cd2867068f4b351a",
+    "run_stage.py": "bd79d106d648c587db0dfaf83751eb700c33321c28718d9490d62b6f264c0d40",
+    "src/__init__.py": "d08c42563cdbdd2735fda802128ec3f3a5f7bb1a1e2cc14e5e3423d684f61300",
+    "src/flow_transition.py": "ebdcd1dd61ab67549ea4ad867c9df52ee01e2a1baf5d457432dd0651490029a8",
+    "tests/test_flow_transition.py": "744de7b72a971e3b1bb3ae4e0b322ac67f096b4dd4883fe3eecf8aa8115a0a1e"
+  }
+}

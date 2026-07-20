@@ -1,0 +1,70 @@
+{
+  "campaign_id": "comex-sequence-ml-ranker-v46",
+  "created_utc": "2026-07-20T00:00:00Z",
+  "v45": {
+    "root": "../comex-sequence-ignition-v45",
+    "contract_sha256": "3e950672a46401187d2bcddbc2634c53bd862a420c15b2c8c19c59a26cec019b",
+    "contract_lock_sha256": "0e089185da5af1323cf9dc1f3a5d5f8b382f42519bf6050db4cbc18f899171d6",
+    "development_candidates_sha256": "cd1d02fb9fa34a08be5252a7690521dbac050e33cc2b612e903f097257a7cd2b",
+    "development_labels_sha256": "c0c8f54c6372232633eade7f6a9b0d9185eef53c1446a0485054ce039b16500d",
+    "development_audit_sha256": "67b5cb6a35385c4905d3d019bc3cd43da7ae8047339718ad2782404cc61bcb08"
+  },
+  "partitions": {
+    "fit": ["2022-08-01T00:00:00Z", "2023-07-01T00:00:00Z"],
+    "threshold_calibration": ["2023-07-01T00:00:00Z", "2024-01-01T00:00:00Z"],
+    "internal_exam": ["2024-01-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+  },
+  "evaluation_splits": {
+    "validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "model": {
+    "learning_rate": 0.05,
+    "max_iter": 100,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 50,
+    "l2_regularization": 1.0,
+    "early_stopping": false,
+    "random_state": 460046
+  },
+  "threshold_selection": {
+    "minimum_candidates_per_full_weekday": 2.386973180076628,
+    "maximum_candidates_per_full_weekday": 3.386973180076628,
+    "target_candidates_per_full_weekday": 2.886973180076628,
+    "minimum_active_day_share": 0.8,
+    "minimum_minority_direction_share": 0.3
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "internal_exam": 200,
+      "validation": 200,
+      "exam": 200
+    },
+    "minimum_rank_auc": 0.55,
+    "minimum_trades_per_full_weekday": 2.386973180076628,
+    "maximum_trades_per_full_weekday": 3.386973180076628,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_positive_month_share": 0.5,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_usd": 250.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 10000,
+      "seed": 460046,
+      "maximum_one_sided_pvalue": 0.01
+    }
+  },
+  "research_controls": {
+    "threshold_outcomes_prohibited": true,
+    "internal_exam_before_model_lock_prohibited": true,
+    "random_split_prohibited": true,
+    "same_version_retraining_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

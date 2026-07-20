@@ -1,0 +1,110 @@
+{
+  "campaign_id": "comex-sequence-ignition-v45",
+  "created_utc": "2026-07-20T00:00:00Z",
+  "source": {
+    "vendor": "Databento",
+    "dataset": "GLBX.MDP3",
+    "schema": "trades",
+    "symbol": "GC.v.0",
+    "job_directory": "C:/ComexGoldFuturesFoundationV1/raw/GLBX-20260717-5MX758XBAQ/GLBX-20260717-5MX758XBAQ",
+    "download_manifest": "C:/ComexGoldFuturesFoundationV1/manifests/downloaded_and_hashed_20260717T082157Z.json",
+    "download_manifest_sha256": "5ABFAA2DE812671938A48B5B88B83C7A45ACDC85093EFFA61890A45EE2A428E6",
+    "network_access_authorized": false,
+    "payment_authorized": false
+  },
+  "calibration": {
+    "start": "2022-07-01T00:00:00Z",
+    "end": "2022-08-01T00:00:00Z",
+    "minimum_current_trade_count_grid": [10, 20, 30, 40, 50],
+    "minimum_terminal_run_trades_grid": [3, 5, 8, 13, 21],
+    "minimum_same_side_transition_share_grid": [0.5, 0.6, 0.7, 0.8],
+    "minimum_absolute_current_imbalance_grid": [0.2, 0.35, 0.5, 0.65, 0.8],
+    "minimum_arrival_acceleration_grid": [1.25, 2.0]
+  },
+  "candidate_rule": {
+    "family": "sequence_ignition_continuation",
+    "timezone": "America/New_York",
+    "session_start": "08:20",
+    "session_end": "13:30",
+    "bar_minutes": 5,
+    "tick_size": 0.1,
+    "instrument_warmup_seconds": 300,
+    "prior_window_seconds": 30,
+    "current_window_seconds": 5,
+    "minimum_current_directional_impulse_ticks": 1.0,
+    "cooldown_minutes": 45,
+    "minimum_session_coverage_minutes": 300,
+    "minimum_nonempty_bars": 50
+  },
+  "selection": {
+    "minimum_candidates_per_full_weekday": 2.386973180076628,
+    "maximum_candidates_per_full_weekday": 3.386973180076628,
+    "target_candidates_per_full_weekday": 2.886973180076628,
+    "minimum_active_day_share": 0.8,
+    "minimum_minority_direction_share": 0.3
+  },
+  "spot_source": {
+    "symbol": "XAUUSD",
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "m5_feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "m5_bar_width_ms": 300000
+  },
+  "splits": {
+    "development": ["2022-08-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "validation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "exam": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
+  },
+  "execution": {
+    "maximum_entry_delay_ms": 2000,
+    "timeout_exit_grace_ms": 10000,
+    "ounces": 1.0,
+    "ticket_cost_usd": 0.3,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "maximum_initial_risk_usd": 50.0
+  },
+  "families": {
+    "sequence_ignition_continuation": {
+      "atr_stop_multiple": 0.5,
+      "spread_stop_multiple": 4.0,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "maximum_hold_minutes": 20
+    }
+  },
+  "gates": {
+    "minimum_resolved_trades": {
+      "development": 500,
+      "validation": 200,
+      "exam": 200
+    },
+    "minimum_trades_per_full_weekday": 2.386973180076628,
+    "maximum_trades_per_full_weekday": 3.386973180076628,
+    "minimum_base_profit_factor": 1.2,
+    "minimum_stress_profit_factor": 1.1,
+    "minimum_profitable_day_share": 0.5,
+    "minimum_positive_month_share": 0.5,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.0,
+    "maximum_closed_trade_drawdown_usd": 250.0,
+    "top_winners_removed": 5,
+    "bootstrap": {
+      "block_weekdays": 5,
+      "resamples": 10000,
+      "seed": 450045,
+      "maximum_one_sided_pvalue": 0.01
+    }
+  },
+  "research_controls": {
+    "calibration_outcomes_prohibited": true,
+    "entry_strictly_after_signal": true,
+    "features_use_completed_windows_only": true,
+    "side_correct_bid_ask_execution": true,
+    "random_split_prohibited": true,
+    "same_version_post_outcome_tuning_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "broker_action_authorized": false
+  }
+}

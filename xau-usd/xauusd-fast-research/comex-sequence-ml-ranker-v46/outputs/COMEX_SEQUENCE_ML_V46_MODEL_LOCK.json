@@ -1,0 +1,81 @@
+{
+  "broker_action_authorized": false,
+  "calibration_scores_sha256": "ade3b1bbfc2d8941d5426ef71f4e79d074608bb3950204b93ccccce89ee5709c",
+  "campaign_id": "comex-sequence-ml-ranker-v46",
+  "contract_sha256": "dc2066337e4bc8e72fbca5561ddc7e96af93a8305ea8cc7cff55ed4040e87a6b",
+  "ea_consumption_authorized": false,
+  "fit_end": "2023-07-01T00:00:00+00:00",
+  "fit_negative_labels": 638,
+  "fit_positive_labels": 288,
+  "fit_rows": 926,
+  "fit_start": "2022-08-01T00:00:00+00:00",
+  "internal_exam_labels_read_before_lock": false,
+  "model_class": "HistGradientBoostingClassifier",
+  "model_features": [
+    "log_current_trade_count_5s",
+    "log_prior_trade_count_30s",
+    "log_current_volume_5s",
+    "current_imbalance_5s",
+    "same_side_transition_share_5s",
+    "log_arrival_acceleration",
+    "log_terminal_run_trades",
+    "log_terminal_run_volume",
+    "current_directional_impulse_ticks",
+    "terminal_direction_sign",
+    "session_progress"
+  ],
+  "model_parameters": {
+    "early_stopping": false,
+    "l2_regularization": 1.0,
+    "learning_rate": 0.05,
+    "max_iter": 100,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 50,
+    "random_state": 460046
+  },
+  "model_sha256": "006e01305ba52d907820971c121637cc99ee52daf367fe837f386c935a028a61",
+  "python_predictions_authorized": false,
+  "runtime_versions": {
+    "joblib": "1.5.3",
+    "numpy": "2.4.2",
+    "pandas": "3.0.1",
+    "scikit_learn": "1.9.0"
+  },
+  "same_version_retraining_authorized": false,
+  "schema_version": "xauusd_comex_sequence_ml_v46_model_lock",
+  "source_sha256": {
+    "development_audit": "67b5cb6a35385c4905d3d019bc3cd43da7ae8047339718ad2782404cc61bcb08",
+    "development_candidates": "cd1d02fb9fa34a08be5252a7690521dbac050e33cc2b612e903f097257a7cd2b",
+    "development_labels": "c0c8f54c6372232633eade7f6a9b0d9185eef53c1446a0485054ce039b16500d",
+    "v45_contract_lock": "0e089185da5af1323cf9dc1f3a5d5f8b382f42519bf6050db4cbc18f899171d6"
+  },
+  "threshold": 0.2568986844692343,
+  "threshold_calibration_candidates": 528,
+  "threshold_calibration_end": "2024-01-01T00:00:00+00:00",
+  "threshold_calibration_start": "2023-07-01T00:00:00+00:00",
+  "threshold_candidate_facts": {
+    "accepted_candidates": 372,
+    "active_day_share": 0.9612403100775194,
+    "active_days": 124,
+    "candidates_per_full_weekday": 2.883720930232558,
+    "eligible_full_weekdays": 129,
+    "long_candidates": 183,
+    "minority_direction_share": 0.49193548387096775,
+    "short_candidates": 189
+  },
+  "threshold_labels_read": false,
+  "tracked_file_sha256": {
+    "PREREGISTRATION.md": "f533a34c8095b3bfece3e35e4c943d0c590caebb7ba86ad9236f7caf23a20ab6",
+    "README.md": "6249621b66a25392e01d2b622ca4122bd9283cd64e8c71615a235b4c2bbfc7b6",
+    "config/comex_sequence_ml_ranker_v46.json": "0fec952819bbfc81631027ecb9a3f0b999b17e6cf706366f3a22190db8781485",
+    "model_lock.py": "452174eea951e7fc28b5fcc9f0cb5ad017f2466bca58ce83af9dc36f78c534f4",
+    "requirements.txt": "5fb4e25e92cbea4e5ca79054966a0e42e0e72e45fbd7bd37488aec1bdb81dcf1",
+    "run_internal_exam.py": "2b1b9b9b177ad30ac4756bb07f7026410cb41ade3330fe7b1ce398bafe7ebeb0",
+    "run_stage.py": "b4736b94307ed573c769bc32e733bccda61f35e0bb3ad5b02a707c87c8a56119",
+    "src/__init__.py": "5333a4f11d5a46596920867699cdacf152e070da2ff170758e44e8a7f5bd6704",
+    "src/ranker.py": "447be5efc6b497ee04fec9121bfc75077d221b2c17f9ef859bb320fcddf88549",
+    "tests/test_ranker.py": "79b2371d2b09c1d393b34da234cf04890467fbdd3d5ca6a342d5a0a486ee5d54",
+    "train_and_lock.py": "e5995eb8adcf6e2ac8474c1e4373d4fbd4e71686f4e3f078c5962675d15b8901"
+  },
+  "v45_contract_sha256": "3e950672a46401187d2bcddbc2634c53bd862a420c15b2c8c19c59a26cec019b"
+}

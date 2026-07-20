@@ -1806,3 +1806,115 @@ specialist.
 - Focused tests: 6 passed. Ruff and format checks passed. Source hashes include
   the normalized Core ledger, frozen portability code/config, V41 contract,
   ten-year Dukascopy M5 cache, and exact raw peak/trough hours.
+
+## V44 COMEX Flow-Transition Diagnostic - 2026-07-20
+
+`comex-flow-transition-v44` tested a genuinely event-ordered COMEX mechanism
+after static flow, bar lead/lag, auction, and large-versus-small lanes failed. It
+used individual already-acquired Databento trade prints and opened no paid or
+network data.
+
+- Hypothesis: one-sided prior aggressor flow with weak directional price impact,
+  followed by accelerated opposite five-second flow and at least one tick of
+  confirmation, may continue in the new-flow direction.
+- All feature events are strictly earlier than the decision. The fixed windows
+  are prior `(t-35s,t-5s]` and current `(t-5s,t]`, followed by a global
+  45-minute dependence cooldown.
+- Pre-outcome tests caught and fixed a pandas-3 timestamp-resolution mismatch
+  before calibration. Four focused causality/grid/selector tests and Ruff pass.
+- Outcome-blind July-2022 calibration evaluated exactly 1,000 registered
+  policies over 20 eligible weekdays. It selected
+  `PV220__PI25__IE10__CV50__CI20`: 58 candidates, 2.90/day, 90% active days,
+  31 long, and 27 short. No spot price, label, return, or P/L was opened.
+- Calibration audit payload SHA-256:
+  `e3f8cdd4acdbfdc8abde1c8584bf1b0cb4a41fc54ee639b1388fadb318171a08`.
+- Immutable contract SHA-256:
+  `3f0fa32f8b5d70c2abdcd93b0eb4bb1823912ab7780dee34f9e5d611294ebcf6`.
+- Development opened 491 eligible weekdays and 1,615 executable Dukascopy
+  labels. Frequency passed at 3.289/day with 878 long and 737 short.
+- Economics failed terminally: base net `-$1,050.65`, stress net `-$1,168.09`,
+  base PF `0.4695`, stress PF `0.4333`, 22.20% profitable days, zero positive
+  months, first/second-half PF `0.4164/0.4508`, and top-five-winners-removed net
+  `-$1,194.37`.
+- Development closed stress drawdown was `$1,168.09`, far above the frozen
+  `$250` specialist ceiling. The bootstrap p-value was `1.0`.
+- Decision: `V44_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
+  Threshold repair, direction mirroring, and same-version economic changes are
+  prohibited.
+
+V44 proves that event-level COMEX data can generate the requested density, but
+not that density has positive expectancy. It cannot enter Core, V42, model
+training, Python prediction, an EA, demo/live, or broker action. Forward V24.1
+and V26 collection remains untouched.
+
+## V45 COMEX Sequence-Ignition Diagnostic - 2026-07-20
+
+`comex-sequence-ignition-v45` tested event-order persistence and trade-arrival
+acceleration, not V44's exhausted-flow flip. It used only already-acquired
+Databento trade prints and verified Dukascopy execution labels.
+
+- Fixed mechanism: a persistent terminal same-side aggressor run, elevated
+  same-side transition share, directional five-second flow/price response, and
+  arrival acceleration relative to the preceding 30 seconds.
+- Exactly 1,000 outcome-blind density policies were registered. Four focused
+  causality/grid/selector tests and Ruff pass.
+- July-2022 calibration selected `TC30__RL05__TS70__IM35__AC125`: 58 signals,
+  2.90/day, 95% active days, and exactly 29 long/29 short. No spot outcome or
+  P/L participated.
+- Calibration payload SHA-256:
+  `a6b189f8b92d7c9fb720b9e7a5175cac58c59bf63ac7ffb8e5ae2a56aed74105`.
+- Immutable contract SHA-256:
+  `3e950672a46401187d2bcddbc2634c53bd862a420c15b2c8c19c59a26cec019b`.
+- Development produced 1,939 executable trades over 491 eligible weekdays,
+  3.949/day, with 984 long and 955 short. Frequency drift exceeded the locked
+  3.38697/day maximum.
+- Economics failed terminally: base/stress net `-$1,231.11/-$1,373.04`,
+  base/stress PF `0.4599/0.4224`, mean stress `-$0.7081/trade`, 18.33%
+  profitable days, zero positive months, first/second-half stress PF
+  `0.4431/0.4021`, and winner-removed net `-$1,410.19`.
+- Closed stress drawdown was `$1,373.04`, versus the frozen `$250` maximum; the
+  bootstrap p-value was `1.0`.
+- Decision: `V45_DEVELOPMENT_FAIL_TERMINAL`. Validation/exam stay sealed and
+  same-version repair is prohibited.
+
+The 1,939 development feature/outcome rows are high-quality executable labels
+for a separately preregistered Python ranking diagnostic. They do not make V45
+tradable and cannot authorize model, EA, demo/live, or broker use.
+
+## V46 COMEX Sequence Python Ranker - 2026-07-20
+
+`comex-sequence-ml-ranker-v46` trained the first new Python model in this COMEX
+sequence lane under a fixed feature/model/chronology contract. It attempted to
+filter V45 candidates without allowing frequency to collapse.
+
+- Fixed model: shallow `HistGradientBoostingClassifier`, 100 iterations, seven
+  leaves, minimum 50 samples/leaf, L2 1.0, early stopping off, seed 460046.
+- Eleven candidate-time features cover log flow counts/volume, imbalance,
+  same-side transitions, arrival acceleration, terminal run length/volume,
+  directional impulse, direction, and session progress. No label, exit, P/L,
+  MFE/MAE, future regime, candidate ID, or date identity is a feature.
+- Fit used 2022-08 to 2023-07. Threshold calibration used only model scores and
+  candidate facts from 2023-07 to 2024-01; its labels were not read.
+- Pre-fit tests: three passed; deterministic dual fits produced identical
+  probabilities. Ruff and format checks pass.
+- Immutable model contract SHA-256:
+  `dc2066337e4bc8e72fbca5561ddc7e96af93a8305ea8cc7cff55ed4040e87a6b`.
+- Locked threshold `0.2568986845` accepted 372 calibration candidates over 129
+  eligible weekdays: 2.884/day, 96.12% active days, 183 long, and 189 short.
+- The 2024-01 to 2024-07 internal exam was opened only after lock. It accepted
+  323 trades over 128 days, 2.523/day, with 149 long and 174 short.
+- Rank AUC was `0.5340`, below the frozen `0.55` minimum. Base/stress net was
+  `-$193.18/-$218.30`; base/stress PF `0.5192/0.4785`; profitable days 24.22%;
+  positive months zero; first/second-half PF `0.3691/0.5815`; winner-removed net
+  `-$236.35`; and bootstrap p-value `1.0`.
+- Closed stress drawdown was `$221.53`, passing the `$250` ceiling. Frequency,
+  sample size, direction balance, and drawdown passed, but discrimination and
+  every economic/stability gate failed.
+- Decision: `V46_INTERNAL_EXAM_FAIL_TERMINAL`. Historical validation and exam
+  remain sealed. Retraining, threshold repair, alternate seeds, or feature
+  changes are prohibited.
+
+V46 is a real trained and hashed Python research artifact, but not a usable
+prediction model. It proves drawdown and frequency can coexist in this stream;
+it does not prove positive expectancy. No model, Python, EA, demo/live, or
+broker authority is granted.
