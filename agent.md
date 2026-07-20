@@ -2516,3 +2516,27 @@ Validation and exam remain sealed. Fixed round-barrier rejection is terminal;
 its breakout mirror, spacing, window, thresholds, direction, exit, costs, and
 quota may not be rescued on these outcomes. V59/V60 remain the accepted control
 and the forward collectors continue independently.
+
+## V72 Raw Silver Event-Time Catch-Up - 2026-07-20
+
+V72 tested raw synchronized Dukascopy XAGUSD-to-XAUUSD event-time catch-up as a
+new causal information class. Its source audit validated `144` frozen
+symbol-month manifests, `105,216` hourly rows, and `370,219,394` declared ticks
+from July 2018 through June 2024. July 2018 calibration opened no outcomes,
+registered exactly `1,000` policies, and selected
+`H01000__XM040__IN025__RR050__QC05` at `17/21 = 0.809524/day`, with five longs
+and twelve shorts. Contract SHA-256:
+`1f95f6442f037aa71b7c33886aa56722cefbab5d485c1285dd10127a1003cc90`.
+
+Development resolved `693` trades over `745` eligible weekdays
+(`0.930201/day`), with `315` longs and `378` shorts. Base/stress net was USD
+`-491.63/-542.61`; base/stress PF was `0.2973/0.2646`; first/second-half stress
+PF was `0.2293/0.2892`; positive-day share was `22.01%`; no month was positive;
+winner-removed stress net was USD `-561.59`; stressed DD was USD `543.21`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V72_DEVELOPMENT_FAIL_TERMINAL`. All later outcomes remain sealed and
+the untouched July 2024-June 2026 exam source was not acquired. Do not tune or
+rescue V72. A V73 anti-signal successor may invert direction exactly once while
+inheriting the locked event policy and execution, and must begin in the still
+unopened July 2021 period. V59/V60 remain immutable and accepted.

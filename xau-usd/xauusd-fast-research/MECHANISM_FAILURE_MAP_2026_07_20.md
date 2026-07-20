@@ -142,6 +142,32 @@ the exposed outcomes. A successor needs another causal variable.
 
 ## Routes Not Counted As Solutions
 
+## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
+
+V72 introduced a materially new causal input: raw, synchronized Dukascopy
+XAGUSD quote movement compared with only already-known XAUUSD quotes. Its source
+audit validated 144 frozen symbol-month manifests, 105,216 hourly rows, and
+370,219,394 declared ticks from July 2018 through June 2024. Outcome-blind July
+2018 calibration registered exactly 1,000 policies and selected a one-second,
+4.0 bps XAG move, 2.5 bps innovation, 0.50 response-ratio, five-quote policy at
+17/21 eligible weekdays (`0.809524/day`).
+
+Development resolved `693` trades over `745` eligible weekdays
+(`0.930201/day`), split `315` long and `378` short. Base/stress net was USD
+`-491.63/-542.61`; base/stress PF was `0.2973/0.2646`; first/second-half stress
+PF was `0.2293/0.2892`; no month was positive; winner-removed stress net was USD
+`-561.59`; stressed DD was USD `543.21`; and bootstrap p-value was `1.0`.
+
+Decision: `V72_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`1f95f6442f037aa71b7c33886aa56722cefbab5d485c1285dd10127a1003cc90`.
+Confirmation, validation, and exam remain sealed. The same-direction catch-up
+interpretation, thresholds, horizon, response rule, and execution are retired.
+The persistent, directionally symmetric loss permits one new preregistered
+anti-signal hypothesis, but that successor must keep the event policy fixed,
+invert direction exactly once, and begin only in the unopened July 2021 period.
+
+## Routes Not Counted As Solutions
+
 - Splitting one position into several tickets does not create independent
   opportunities or additional ML labels.
 - Pyramiding the frozen Core changes its risk and is not additive edge.
