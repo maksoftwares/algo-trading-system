@@ -1,0 +1,143 @@
+{
+  "audit_sha256": "1dedbfc192482a882b9c07a830dc974d9678bec815bf4627b5858df9d6d0ac7a",
+  "campaign_id": "fx-breadth-overreaction-fade-v81",
+  "decision": "V81_CALIBRATION_SOURCE_AUDIT_PASS",
+  "declared_bytes": 452431277,
+  "declared_hours": 5952,
+  "declared_ticks": 17184878,
+  "economic_outcomes_opened": false,
+  "first_month": "2018-07",
+  "instrument_evidence": {
+    "EURUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-EURUSD.json",
+      "sha256": "9fea20442c400f2e1bb55619fcf75ba882f8de583e8df0b3c58a46b2f16a7fcf"
+    },
+    "GBPUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-GBPUSD.json",
+      "sha256": "9fc247f6acb5be8157350879f72ad0520a342ee61fad4126c07c8533fb5872c0"
+    },
+    "USDJPY": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-USDJPY.json",
+      "sha256": "bfa26a270030081514e7a5a23b59dbaae98795f1f4680c799c269db16748ce70"
+    },
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "last_month": "2018-08",
+  "month_manifest_count": 8,
+  "month_manifests": [
+    {
+      "declared_bytes": 61455310,
+      "declared_ticks": 2137676,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\EURUSD\\year=2018\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "f34d788f01c8cad14505ee33d0988394bad7f9145cf24288884dcc07de489581",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\EURUSD\\year=2018\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "39d757bd5fa344a3292c29485f19cd64a3065a3d86a046fdaf4b686e969ab470",
+      "month": "2018-07",
+      "symbol": "EURUSD"
+    },
+    {
+      "declared_bytes": 60617882,
+      "declared_ticks": 2107850,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\EURUSD\\year=2018\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "308d31e4b04758293ae0a411f32c2271806d6975d599f633b673a21787940e13",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\EURUSD\\year=2018\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "f0dd6e562ebae951816635af051fd473fc9acfe3aa95cf246607ecc659ddf4b4",
+      "month": "2018-08",
+      "symbol": "EURUSD"
+    },
+    {
+      "declared_bytes": 59720121,
+      "declared_ticks": 2079883,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\GBPUSD\\year=2018\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "7f3e731dda8a6ebe9aae8e924c214343883374c19eb04a97918354a10e7866fe",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\GBPUSD\\year=2018\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "f212f7a3fc8aaff1e7232c2413623cd94aceaf11dc9ced0668e91fe5b77bb06f",
+      "month": "2018-07",
+      "symbol": "GBPUSD"
+    },
+    {
+      "declared_bytes": 56796937,
+      "declared_ticks": 1978513,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\GBPUSD\\year=2018\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "701a759174a7e7b6071862ae4f6d4cecc6878907bd343155606c4530f56bbe91",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\GBPUSD\\year=2018\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "87a68d54afc21304eebf54e27cfe957e232dad927108e0b7a8a8849b76408bf4",
+      "month": "2018-08",
+      "symbol": "GBPUSD"
+    },
+    {
+      "declared_bytes": 46129500,
+      "declared_ticks": 1600296,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USDJPY\\year=2018\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "812f1f2269db749a36b87c27fb315348967f717f575c55beab26d930b05e5f53",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USDJPY\\year=2018\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "d4b9eb1e4f7d9455efce956879c40137fb3818be13606fd0c50a65273212fda3",
+      "month": "2018-07",
+      "symbol": "USDJPY"
+    },
+    {
+      "declared_bytes": 42685102,
+      "declared_ticks": 1477983,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USDJPY\\year=2018\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "aaf2dc800bad664130bc486b7616b401202d745ee6a5bc1e2e887d723593de03",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\USDJPY\\year=2018\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "57665379af91b5a92bd058b2dd3ebc3ea2ba48f27d62d208caadfadbc2ee318e",
+      "month": "2018-08",
+      "symbol": "USDJPY"
+    },
+    {
+      "declared_bytes": 61515437,
+      "declared_ticks": 2855747,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2018\\month=07\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "9908495afb413e687928fad7240bfc8dd5e3dd1f77719ba700d57890ad2f72ea",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2018\\month=07\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "1fd505644ed630e3b7c33f946cd03a51523c4b70beddd57cfb023820f1e867dd",
+      "month": "2018-07",
+      "symbol": "XAUUSD"
+    },
+    {
+      "declared_bytes": 63510988,
+      "declared_ticks": 2946930,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2018\\month=08\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "c6a3c8880692a04ba6e1850a06f9a4f3082f2cfacf43539e769bff7363485931",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2018\\month=08\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "9a24d05661e05c92670b22a8f4f1f9981f9f8821ee14a878e3d2d7ec6b4894dc",
+      "month": "2018-08",
+      "symbol": "XAUUSD"
+    }
+  ],
+  "paid_data_used": false,
+  "runtime_raw_file_hash_verification_required": true,
+  "schema_version": "xauusd_fx_breadth_overreaction_v81_calibration_source_audit",
+  "scope": "calibration",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "symbols": {
+    "EURUSD": {
+      "price_scale": 5,
+      "source_code": "EUR-USD"
+    },
+    "GBPUSD": {
+      "price_scale": 5,
+      "source_code": "GBP-USD"
+    },
+    "USDJPY": {
+      "price_scale": 3,
+      "source_code": "USD-JPY"
+    },
+    "XAUUSD": {
+      "price_scale": 3,
+      "source_code": "XAU-USD"
+    }
+  }
+}
