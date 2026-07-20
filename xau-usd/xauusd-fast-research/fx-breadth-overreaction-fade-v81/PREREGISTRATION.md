@@ -53,3 +53,8 @@ The source-freezing sequence is refined by
 economic outcome was opened. It changes only when raw holdout source slices are
 acquired and audited; the selected policy, execution, gates, and stage dates are
 unchanged.
+
+The amendment also registers two untouched forward stages, July 2024-June 2025
+and July 2025-June 2026, under the same policy and gates. These align V81 with
+the frozen V59/V60 confirmation and final windows without opening either source
+slice early.

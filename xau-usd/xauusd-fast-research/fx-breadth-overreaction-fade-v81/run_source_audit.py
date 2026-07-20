@@ -25,7 +25,14 @@ from catchup import (  # noqa: E402
 
 
 CONFIG = ROOT / "config" / "fx_breadth_overreaction_fade_v81.json"
-STAGES = ("development", "confirmation", "validation", "exam")
+STAGES = (
+    "development",
+    "confirmation",
+    "validation",
+    "exam",
+    "forward_confirmation",
+    "forward_final",
+)
 SCOPES = ("calibration", *STAGES, "full")
 
 
@@ -70,7 +77,7 @@ def source_audit_decision(scope: str) -> str:
 def require_prior_economic_pass(config: dict[str, Any], scope: str) -> None:
     if scope in ("calibration", "development"):
         return
-    prior = "exam" if scope == "full" else STAGES[STAGES.index(scope) - 1]
+    prior = STAGES[-1] if scope == "full" else STAGES[STAGES.index(scope) - 1]
     output = ROOT / str(config["outputs"]["directory"])
     path = output / f"FX_BREADTH_XAU_V81_{prior.upper()}_AUDIT.json"
     if not path.is_file():

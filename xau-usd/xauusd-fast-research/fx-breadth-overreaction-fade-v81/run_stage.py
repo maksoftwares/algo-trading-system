@@ -40,7 +40,14 @@ from spot_labels import label_candidates, load_completed_atr  # noqa: E402
 
 
 CONFIG = ROOT / "config" / "fx_breadth_overreaction_fade_v81.json"
-STAGES = ("development", "confirmation", "validation", "exam")
+STAGES = (
+    "development",
+    "confirmation",
+    "validation",
+    "exam",
+    "forward_confirmation",
+    "forward_final",
+)
 
 
 def output_paths(config: Mapping[str, Any], stage: str) -> tuple[Path, Path, Path]:

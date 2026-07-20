@@ -5,7 +5,7 @@
     "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
     "default_storage_root": "C:/DukascopyTickDataFoundationV1",
     "first_month": "2018-07",
-    "last_month": "2024-06",
+    "last_month": "2026-06",
     "symbols": {
       "EURUSD": {"source_code": "EUR-USD", "price_scale": 5},
       "GBPUSD": {"source_code": "GBP-USD", "price_scale": 5},
@@ -70,7 +70,9 @@
     "development": ["2018-09-01T00:00:00Z", "2021-07-01T00:00:00Z"],
     "confirmation": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
     "validation": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
-    "exam": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"]
+    "exam": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "forward_confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"],
+    "forward_final": ["2025-07-01T00:00:00Z", "2026-07-01T00:00:00Z"]
   },
   "execution": {
     "maximum_entry_delay_ms": 1000,
@@ -95,7 +97,9 @@
       "development": 450,
       "confirmation": 150,
       "validation": 150,
-      "exam": 150
+      "exam": 150,
+      "forward_confirmation": 150,
+      "forward_final": 150
     },
     "minimum_trades_per_full_weekday": 0.65,
     "maximum_trades_per_full_weekday": 1.0,
@@ -125,7 +129,9 @@
       "development": "FX_BREADTH_XAU_V81_DEVELOPMENT_SOURCE_AUDIT.json",
       "confirmation": "FX_BREADTH_XAU_V81_CONFIRMATION_SOURCE_AUDIT.json",
       "validation": "FX_BREADTH_XAU_V81_VALIDATION_SOURCE_AUDIT.json",
-      "exam": "FX_BREADTH_XAU_V81_EXAM_SOURCE_AUDIT.json"
+      "exam": "FX_BREADTH_XAU_V81_EXAM_SOURCE_AUDIT.json",
+      "forward_confirmation": "FX_BREADTH_XAU_V81_FORWARD_CONFIRMATION_SOURCE_AUDIT.json",
+      "forward_final": "FX_BREADTH_XAU_V81_FORWARD_FINAL_SOURCE_AUDIT.json"
     },
     "contract_lock": "FX_BREADTH_XAU_V81_CONTRACT_LOCK.json"
   },
