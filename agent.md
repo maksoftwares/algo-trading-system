@@ -2298,3 +2298,35 @@ achieved. Two trades/day is not achieved and must not be claimed by relaxing edg
 or drawdown requirements. The next expansion must use a genuinely new mechanical
 event family or prospective data, not another threshold variation on the retired
 action-ledger routers.
+
+## V65 Box-Breakout Scale Replication - 2026-07-20
+
+V65 tested whether the qualified higher-timeframe box-breakout mechanism could
+be translated mechanically to H4/H1 and H1/M15. It loaded only Dukascopy bid/ask
+M5 bars before `2025-07-01`, used broker-side executable prices, charged ticket,
+holding, and slippage stress, resolved same-bar ambiguity stop-first, and kept the
+final year sealed.
+
+- The bounded manifest contained exactly `256` variants across two scales, both
+  directions, two causal regime modes, two box widths, two volatility ceilings,
+  two range ceilings, two signal-body floors, and two reward targets.
+- Zero variants passed all three chronological development-1, development-2,
+  and confirmation gates.
+- The best H4/H1 long minimum-window stressed PF was only `1.013`; its later
+  windows improved to `1.085` and `1.465`, but the first window failed average
+  return, winner-removal, and positive-month gates.
+- The best H4/H1 short minimum-window PF was `0.870`. H1/M15 generated more
+  signals but the best long and short minimum-window PF values were only `0.698`
+  and `0.639` after costs.
+- Decision: `V65_NO_PREFINAL_SURVIVOR`. No final-year evaluation was run, no
+  sleeve was admitted, and no V59/V60 trade or risk rule changed.
+- Result SHA-256:
+  `49789c525c96189cd0fcf9772eda9be5544e64a398c5409d0c7f6608c4ed76cf`.
+- Metrics SHA-256:
+  `c15090cdb709650a435ca31d23dd008eac11dd9fd223584ecc6bd458df1dd646`.
+
+The accepted first milestone remains V59/V60: final-year `1.395/day`, USD
+`2,537.35` net, PF `1.976`, USD `152.59` closed DD, and USD `419.18`
+conservative buffered floating DD under extra fee stress. V65 shows that simply
+compressing the box-breakout clock raises activity without preserving the edge;
+the next additive study must change the economic mechanism.

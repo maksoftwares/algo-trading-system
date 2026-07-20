@@ -1,0 +1,87 @@
+{
+  "schema_version": "xauusd_box_breakout_scale_replication_v65",
+  "selection_cutoff_exclusive_utc": "2025-07-01T00:00:00Z",
+  "source": {
+    "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
+    "default_storage_root": "C:/DukascopyTickDataFoundationV1",
+    "feature_cache": "research/xau-confirmed-event-specialists-v1/m5_bidask_features_v1.parquet",
+    "feature_sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "scales": [
+    {
+      "scale_id": "H4_H1",
+      "parent_minutes": 240,
+      "signal_minutes": 60,
+      "maximum_hold_hours": 24
+    },
+    {
+      "scale_id": "H1_M15",
+      "parent_minutes": 60,
+      "signal_minutes": 15,
+      "maximum_hold_hours": 8
+    }
+  ],
+  "features": {
+    "minimum_calendar_bucket_share": 0.8,
+    "atr_period": 14,
+    "atr_percentile_lookback_bars": 252,
+    "range_median_lookback_bars": 20,
+    "fast_ema_period": 20,
+    "slow_ema_period": 50,
+    "slope_lag_bars": 5,
+    "parent_trend_persistence_bars": 2,
+    "shock_range_atr_multiple": 3.0
+  },
+  "parameter_grid": {
+    "directions": ["LONG", "SHORT"],
+    "regime_modes": ["STRICT", "PARENT_ONLY"],
+    "box_bars": [2, 3],
+    "atr_percentile_max": [60.0, 80.0],
+    "box_average_to_median_max": [1.25, 1.5],
+    "minimum_signal_body_fraction": [0.2, 0.35],
+    "target_r": [1.5, 2.0],
+    "stop_atr_floor": 1.0
+  },
+  "execution": {
+    "maximum_entry_gap_minutes": 10,
+    "maximum_spread_price": 0.75,
+    "maximum_spread_r": 0.15,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "same_bar_priority": "STOP_FIRST",
+    "maximum_open_positions_per_variant": 1,
+    "maximum_entries_per_variant_utc_day": 2
+  },
+  "windows": {
+    "development_1": ["2019-01-01T00:00:00Z", "2022-01-01T00:00:00Z"],
+    "development_2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
+    "confirmation": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z"]
+  },
+  "gates": {
+    "minimum_trades": {
+      "development_1": 30,
+      "development_2": 30,
+      "confirmation": 20
+    },
+    "minimum_trades_per_weekday": 0.1,
+    "minimum_stress_profit_factor": 1.15,
+    "minimum_average_stress_r": 0.03,
+    "maximum_closed_drawdown_r": 30.0,
+    "minimum_positive_month_share": 0.4,
+    "top_winners_removed": 5
+  },
+  "outputs": {
+    "directory": "outputs",
+    "metrics": "BOX_BREAKOUT_SCALE_REPLICATION_V65_METRICS.csv",
+    "survivor_trades": "BOX_BREAKOUT_SCALE_REPLICATION_V65_SURVIVOR_TRADES.parquet",
+    "result": "BOX_BREAKOUT_SCALE_REPLICATION_V65_RESULT.json"
+  },
+  "research_controls": {
+    "bounded_variant_count": 256,
+    "selection_uses_final_year": false,
+    "final_year_exposed_elsewhere": true,
+    "research_only": true,
+    "execution_authorized": false
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "xauusd_box_breakout_scale_replication_v65",
+  "variant_count": 256,
+  "survivor_count": 0,
+  "survivor_variant_ids": [],
+  "outcome_cache_rows": 27640,
+  "data_evidence": {
+    "path": "C:\\DukascopyTickDataFoundationV1\\research\\xau-confirmed-event-specialists-v1\\m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228",
+    "rows_loaded": 637657,
+    "first_bar_start_utc": "2016-07-01 00:00:00+00:00",
+    "last_bar_start_utc": "2025-06-30 23:55:00+00:00"
+  },
+  "research_controls": {
+    "bounded_variant_count": 256,
+    "selection_uses_final_year": false,
+    "final_year_exposed_elsewhere": true,
+    "research_only": true,
+    "execution_authorized": false
+  }
+}
