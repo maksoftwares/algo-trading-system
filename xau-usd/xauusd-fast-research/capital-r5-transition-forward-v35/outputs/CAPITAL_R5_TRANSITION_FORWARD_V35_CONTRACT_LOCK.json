@@ -1,0 +1,49 @@
+{
+  "broker_action_authorized": false,
+  "component_attempts": [
+    23925,
+    24877,
+    24995,
+    25048
+  ],
+  "contract_sha256": "23a0c31a6d6466bac93362945947b8022ae466583f02a26a24c77e69ee24e7fd",
+  "created_at_utc": "2026-07-20T02:28:16.963095Z",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "frozen_r5_rules_precede_forward_boundary": true,
+  "historical_parity": {
+    "candidate_artifact_canonical_sha256": "feab363ab7aa9b93e335bbcae2d83a735df50b07922ada4574d40d064abc3a2c",
+    "candidate_canonical_sha256": "feab363ab7aa9b93e335bbcae2d83a735df50b07922ada4574d40d064abc3a2c",
+    "candidate_rows": 799,
+    "component_attempts": [
+      23925,
+      24877,
+      24995,
+      25048
+    ],
+    "router_attempt": 27135,
+    "selected_trade_artifact_canonical_sha256": "a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa",
+    "selected_trade_canonical_sha256": "a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa",
+    "selected_trade_rows": 330
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "official_macro_source": {
+    "completed_hours_only": true,
+    "maximum_concurrency": 4,
+    "origin": "https://jetta.dukascopy.com/v1",
+    "symbols": {
+      "DOLLARIDXUSD": "DOLLAR.IDX-USD",
+      "USTBONDTRUSD": "USTBOND.TR-USD"
+    }
+  },
+  "post_boundary_economic_outcomes_opened": false,
+  "prospective_component_outcome_updates_authorized": false,
+  "python_predictions_authorized": false,
+  "router_attempt": 27135,
+  "rule_dependency_sha256": "863b9f19635b7a7a120a51c37d80770da90cc9ee7a913cf01b348ba595642ec0",
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_capital_r5_transition_forward_v35_contract_lock",
+  "transport_adapter_locked_after_forward_boundary": true
+}

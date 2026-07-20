@@ -26,6 +26,7 @@ xau-usd/xauusd-fast-research/capital-quote-absorption-release-v31/** -text white
 xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/** -text whitespace=cr-at-eol,-blank-at-eof
 xau-usd/xauusd-fast-research/comex-size-segment-flow-v33/** -text whitespace=cr-at-eol,-blank-at-eof
 xau-usd/xauusd-fast-research/capital-r4-chop-forward-v34/** -text whitespace=cr-at-eol,-blank-at-eof
+xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/** -text whitespace=cr-at-eol,-blank-at-eof
 xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/**/*.json text eol=lf
 xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24/**/*.csv text eol=lf
 xau-usd/xauusd-fast-research/capital-quote-microburst-forward-v24-1/**/*.json text eol=lf

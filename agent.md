@@ -1431,3 +1431,50 @@ edge. No post-boundary outcome, P/L, label, exit, win rate, or return was opened
 while implementing it. It emits append-only candidate facts only and has no
 broker-action path. R5 current-input coverage, same-period shared-account
 outcomes, and the 3-4 trades/day proof remain open.
+
+## V35 Capital R5 Transition Forward Adapter - 2026-07-20
+
+`capital-r5-transition-forward-v35` closes the current macro-input and candidate-
+clock gap for the frozen R5 transition specialist without changing its four
+components or selected router. The exact components are attempts `23925`,
+`24877`, `24995`, and `25048`. The router is attempt `27135`, the frozen 180-day
+trailing-drawdown policy.
+
+Capital exposes DXY but no exact Treasury total-return instrument. V35 therefore
+uses the original free official Dukascopy instruments rather than substituting a
+proxy:
+
+- `DOLLAR.IDX-USD`;
+- `USTBOND.TR-USD`.
+
+The official Jetta July backfill completed 916 hour-symbol records through the
+2026-07-20 02:00 UTC boundary: 914 new validated downloads, two resumed validated
+hours, 176,961 ticks, and zero failures. Concurrency never exceeded four. No paid
+data service or account was used.
+
+- Final transport contract SHA-256:
+  `23a0c31a6d6466bac93362945947b8022ae466583f02a26a24c77e69ee24e7fd`.
+- Rule dependency SHA-256:
+  `863b9f19635b7a7a120a51c37d80770da90cc9ee7a913cf01b348ba595642ec0`.
+- Historical V9 candidate parity: exactly 799 rows; generated and frozen
+  canonical SHA-256 values both equal
+  `feab363ab7aa9b93e335bbcae2d83a735df50b07922ada4574d40d064abc3a2c`.
+- Historical V11 router parity for attempt `27135`: exactly 330 selected trades;
+  generated and frozen canonical SHA-256 values both equal
+  `a6755d5903376766a0abcda05666a5b33bfb527544457bb9f841e99501ea3efa`.
+- Focused tests: 5 passed. Ruff: passed. Existing lock re-verification: passed.
+- First integrated Capital cycle: 232,054 gold M5 bars, 137,986 joint macro M15
+  rows through `2026-07-20T01:15:00Z`, zero component candidates, zero routed
+  candidates, and all authority flags false.
+- Persistent hidden collector: parent PID `38784`, Python child PID `532`.
+  Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\r5_transition_shadow_v35`.
+
+V35 emits current component and router candidate facts only. It uses frozen
+component outcomes whose exits precede each candidate. Updating the 180-day
+router with new prospective component outcomes is intentionally unauthorized
+until a separate causal resolver is preregistered and locked. This limitation
+does not affect the initial candidate clock, but it must be closed before claiming
+long-horizon exact online-router continuity. V35 opens no economic outcomes and
+has no broker-action path. Same-period shared-account economics and the 3-4
+trades/day proof remain open.
