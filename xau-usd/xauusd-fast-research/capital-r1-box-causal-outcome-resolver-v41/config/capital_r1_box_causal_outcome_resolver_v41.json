@@ -1,0 +1,90 @@
+{
+  "schema_version": "xauusd_capital_r1_box_causal_outcome_resolver_v41",
+  "source": {
+    "candidate_runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/specialist_shadow_v1",
+    "candidate_filename": "r1_candidates.jsonl",
+    "candidate_status_filename": "runtime_status.json",
+    "candidate_schema_version": "xau_specialist_shadow_v1_1",
+    "tick_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+    "tick_filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+    "tick_schema_version": "xau_prospective_tick_v1",
+    "account_login": 1033669,
+    "account_server": "Capital.ComMena-Demo",
+    "symbol": "XAUUSD",
+    "specialist_id": "R1_UPTREND_LONG_V1"
+  },
+  "frozen_identity": {
+    "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+    "source_contract_sha256": "27fef83d1a57aa28a1e4d4e6968b2854184a673cdff6769da16828fbe4084908",
+    "historical_candidate_rows": 354,
+    "historical_executable_trade_rows": 345,
+    "historical_primary_policy_trade_rows": 119,
+    "historical_candidate_digest": "7be6da023ce767a99b48d9571d017475bb852b85f43f4ca3595258ab27b4e34b",
+    "historical_all_policy_trade_digest": "74e2dee12df4ffe8bc013610c7cde615f20a1f3e2f6da02242cd7eeb0f18ea98",
+    "historical_primary_policy_trade_digest": "d69148ea409c10c90f74bc10d961ce6502c4fc609d5b801d24eddbafe32faf93"
+  },
+  "execution": {
+    "maximum_entry_gap_minutes": 10,
+    "maximum_spread_price": 0.75,
+    "maximum_spread_r": 0.15,
+    "ounces_at_0_01_lot": 1.0,
+    "ticket_cost_usd": 0.30,
+    "holding_cost_per_24h_usd": 0.35,
+    "stress_slippage_r": 0.05,
+    "target_r": 2.0,
+    "maximum_concurrent_positions": 2,
+    "maximum_entries_per_utc_day": 1,
+    "exit_mode": "EXECUTABLE_STOP_OR_LOCKED_TARGET_NO_HORIZON"
+  },
+  "data_quality": {
+    "maximum_timestamp_disagreement_ms": 1,
+    "maximum_spread_field_error": 0.011,
+    "require_dry_run_true": true,
+    "require_all_authority_flags_false": true
+  },
+  "forward": {
+    "poll_seconds": 300,
+    "validation_full_weekdays": 20,
+    "confirmation_full_weekdays": 20
+  },
+  "historical": {
+    "source_config": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+    "source_result": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_RESULT.json",
+    "source_manifest": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_MANIFEST.json",
+    "source_module": "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py",
+    "base_module": "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py"
+  },
+  "contract_dependencies": [
+    "xau-usd/xauusd-phase1/ml/specialist_shadow_v1.py",
+    "xau-usd/xauusd-phase1/scripts/run_xau_specialist_shadow.py",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_RESULT.json",
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_MANIFEST.json",
+    "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py",
+    "xau-usd/xauusd-fast-research/capital-core-causal-outcome-resolver-v40/src/resolver.py",
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py"
+  ],
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_R1_BOX_CAUSAL_OUTCOME_RESOLVER_V41_CONTRACT_LOCK.json",
+    "historical_semantic_parity": "CAPITAL_R1_BOX_CAUSAL_OUTCOME_RESOLVER_V41_HISTORICAL_SEMANTIC_PARITY.json",
+    "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r1_box_outcomes_v41",
+    "resolution_ledger": "r1_box_resolutions.jsonl",
+    "source_prefix_state": "candidate_source_prefix_state.json",
+    "runtime_status": "runtime_status.json"
+  },
+  "research_controls": {
+    "append_only_candidate_facts": true,
+    "append_only_resolutions": true,
+    "prospective_individual_outcomes_recorded": true,
+    "aggregate_economics_opened": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

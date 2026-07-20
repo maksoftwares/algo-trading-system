@@ -1,0 +1,97 @@
+{
+  "aggregate_economics_opened": false,
+  "broker_action_authorized": false,
+  "contract_sha256": "f78d0b01b9ed9b65e71429dd461d0b967ae44058944de2452043051402728363",
+  "dependencies": {
+    "xau-usd/xauusd-fast-research/capital-core-causal-outcome-resolver-v40/src/resolver.py": {
+      "bytes": 39324,
+      "sha256": "f00a58e0115b837bf46d5e974eafad0f5218226cf1074dfa394fab320d6332c7"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/src/resolver.py": {
+      "bytes": 39695,
+      "sha256": "47e92cc2fe8fdb262311f6ae5ff63e95b32274d256809ea2ba4e514784384571"
+    },
+    "xau-usd/xauusd-fast-research/mt5-compression-portability-v1/src/portability.py": {
+      "bytes": 17105,
+      "sha256": "506f813b583c36299434b804e1ce78d177ad387f7c447ddd5e381caa1ae7ead2"
+    },
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/config/mt5_r1_uptrend_portability_v1.json": {
+      "bytes": 3624,
+      "sha256": "1b3e4eb6d3cc111b9042d1f4f1c1f78dd7d85f4cc270d3801e506f69d01ce1ca"
+    },
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_MANIFEST.json": {
+      "bytes": 441,
+      "sha256": "2791d2d033eef2c1a577150f1dab5ce73be9011e17fb8284b8ce26b32255a88e"
+    },
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/outputs/MT5_R1_UPTREND_PORTABILITY_RESULT.json": {
+      "bytes": 9151,
+      "sha256": "19e2f38ea8e0438f447ae0668ff2aac0e279a930a364704fd7b7b8054094b4d2"
+    },
+    "xau-usd/xauusd-fast-research/mt5-r1-uptrend-portability-v1/src/portability.py": {
+      "bytes": 6343,
+      "sha256": "b61cb1e18623ce7796933c348841c2cbc666a5a9728c29665c71059a50a9c51c"
+    },
+    "xau-usd/xauusd-phase1/ml/specialist_shadow_v1.py": {
+      "bytes": 18250,
+      "sha256": "a9a7545550ccddc71fb3ca72faa263d7fc689eb5cf53b62c6bde00b49e031054"
+    },
+    "xau-usd/xauusd-phase1/scripts/run_xau_specialist_shadow.py": {
+      "bytes": 5138,
+      "sha256": "4aa4f0d6bc86eb0d8457472d2fb67ffa6ca67965defad775cf9c427d744f30a9"
+    }
+  },
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "package_files": {
+    ".gitattributes": {
+      "bytes": 121,
+      "sha256": "8e523f5787e3fcbed90961929940878dbad6dd206006eae315671bafb56f6360"
+    },
+    ".gitignore": {
+      "bytes": 51,
+      "sha256": "5cc022ce0a8f43cb87cc5ca1ab6da14bde2dbc4b0b571299e4c0cdff2e7e98c4"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 2076,
+      "sha256": "610d980b631cd93f3e9e2ff9de2fb9cb537b2830c5ea2791af0e8bc0349eee8a"
+    },
+    "README.md": {
+      "bytes": 670,
+      "sha256": "bb30677563dbb94e1420bf2201cad50c2e5494635482127539c01776fad57c5f"
+    },
+    "config/capital_r1_box_causal_outcome_resolver_v41.json": {
+      "bytes": 4523,
+      "sha256": "0c688a2abe0367dd24eae7890362db5e85b3e8577a9eef0c86a052a2e5c87409"
+    },
+    "lock_contract.py": {
+      "bytes": 1972,
+      "sha256": "fdb5401b130fe168577e3c5606cbe7d866331e6a0d2dac5f46841c9087b11a00"
+    },
+    "requirements.txt": {
+      "bytes": 21,
+      "sha256": "d932106411c00b96f329d90c30043419fe8892bbccb59d7deaaeb28d7d172176"
+    },
+    "run_resolver.py": {
+      "bytes": 7981,
+      "sha256": "2e49620562263c9236dbec7be8d19ca97cf90bf5df3b69b9ec0bef6f24b1e504"
+    },
+    "src/__init__.py": {
+      "bytes": 72,
+      "sha256": "488d3b05b08c4947b8903118377f7a1ddbb03cebfa54eddba7d4ce555a1c6f65"
+    },
+    "src/resolver.py": {
+      "bytes": 27021,
+      "sha256": "7be72393f09afb39177bc520f75a7368d9b1d216b3d8c4015771d1e53fb163ea"
+    },
+    "tests/test_resolver.py": {
+      "bytes": 7752,
+      "sha256": "0b21fdcfb022bd547500760e3f72cf8d5c8d545625cc7624826864b868041863"
+    },
+    "verify_historical_semantics.py": {
+      "bytes": 6396,
+      "sha256": "12cb1855e95fff2bc486d4d35ea02d3c7c287922080052b18450df89b9114511"
+    }
+  },
+  "policy_id": "PORTFOLIO_CONSTRAINED_PRIMARY",
+  "schema_version": "xauusd_capital_r1_box_causal_outcome_resolver_v41",
+  "source_contract_sha256": "27fef83d1a57aa28a1e4d4e6968b2854184a673cdff6769da16828fbe4084908"
+}

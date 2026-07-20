@@ -1,0 +1,25 @@
+{
+  "aggregate_economics_opened": false,
+  "broker_action_authorized": false,
+  "checks": {
+    "all_policy_trade_digest": "74e2dee12df4ffe8bc013610c7cde615f20a1f3e2f6da02242cd7eeb0f18ea98",
+    "all_policy_trade_rows": 464,
+    "candidate_digest": "7be6da023ce767a99b48d9571d017475bb852b85f43f4ca3595258ab27b4e34b",
+    "candidate_ids_unique": true,
+    "candidate_rows": 354,
+    "executable_trade_rows": 345,
+    "execution_has_no_time_exit": true,
+    "maximum_primary_concurrent_positions": 2,
+    "maximum_primary_entries_per_utc_day": 1,
+    "pass": true,
+    "primary_candidate_ids_are_known": true,
+    "primary_policy_trade_digest": "d69148ea409c10c90f74bc10d961ce6502c4fc609d5b801d24eddbafe32faf93",
+    "primary_policy_trade_rows": 119,
+    "source_contract_sha256": "27fef83d1a57aa28a1e4d4e6968b2854184a673cdff6769da16828fbe4084908",
+    "source_manifest_counts_and_digests_match": true,
+    "source_result_digests_match": true
+  },
+  "contract_sha256": "f78d0b01b9ed9b65e71429dd461d0b967ae44058944de2452043051402728363",
+  "schema_version": "xauusd_capital_r1_box_causal_outcome_semantic_parity_v41",
+  "semantic_parity_passed": true
+}

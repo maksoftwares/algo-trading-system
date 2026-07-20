@@ -1675,3 +1675,40 @@ V40 may append individual causal labels only. It does not route the R2/R3
 composites into a shared account, combine R1-R5 with V24.1/V26, publish aggregate
 P/L, train a model, tune a strategy, or authorize EA/demo/live action. A locked
 same-period shared-account evaluator remains the next engineering dependency.
+
+## V41 R1 Box Causal Outcome Resolver - 2026-07-20
+
+`capital-r1-box-causal-outcome-resolver-v41` replaces the R1 sidecar's mutable
+latest-outcome snapshot as evidence with an append-only causal label path. The
+source observer and frozen R1 rule remain unchanged.
+
+- Contract SHA-256:
+  `f78d0b01b9ed9b65e71429dd461d0b967ae44058944de2452043051402728363`.
+- Frozen source contract SHA-256:
+  `27fef83d1a57aa28a1e4d4e6968b2854184a673cdff6769da16828fbe4084908`.
+- Historical Dukascopy parity: 354 candidates, 345 executable candidate paths,
+  464 policy rows, and 119 decision-eligible
+  `PORTFOLIO_CONSTRAINED_PRIMARY` trades. Candidate, all-policy, and primary-policy
+  digests exactly reproduce the frozen source artifacts.
+- The primary policy reached exactly two concurrent positions and one entry per
+  UTC day, matching its frozen limits. The diagnostic 32-position policy remains
+  excluded from prospective decisions.
+- Long entry uses the first timely Capital ask; exits use Capital bid. Stops pay
+  observed executable slippage, targets fill at the locked 2R price, and no time
+  exit is invented. An accepted position remains pending until stop or target.
+- Candidate and resolution ledgers have independent immutable prefix hashes.
+  Candidate identity, settings, source bytes, status identity, authority, tick
+  schema, or consumed-prefix drift fails closed.
+- Focused tests: 7 passed. Ruff and format checks passed.
+- First locked Capital cycle: `ACTIVE_READ_ONLY_CAUSAL_RESOLVER`, zero candidates,
+  zero resolutions, quote ledger observed through
+  `2026-07-20T04:57:32.643Z`, and all authority flags false. Stderr is empty.
+- Persistent hidden parent PID: `25780`; current Python child PID: `24392`; poll
+  interval: 300 seconds.
+- Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\r1_box_outcomes_v41`.
+
+V41 records individual primary-policy R1 box outcomes only. It does not combine
+R1 sleeves, route R2/R3 composites, attach an R5 routed outcome, calculate
+shared-account economics, train a model, or authorize an order. The sealed
+same-period shared-account evaluator is the next engineering dependency.
