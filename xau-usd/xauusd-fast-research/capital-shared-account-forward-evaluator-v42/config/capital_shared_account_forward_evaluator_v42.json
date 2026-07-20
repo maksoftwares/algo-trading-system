@@ -1,0 +1,151 @@
+{
+  "schema_version": "xauusd_capital_shared_account_forward_evaluator_v42",
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "sources": {
+    "v27": {
+      "root": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27",
+      "contract_path": "xau-usd/xauusd-fast-research/capital-forward-family-portfolio-v27/outputs/CAPITAL_FORWARD_FAMILY_V27_CONTRACT_LOCK.json",
+      "contract_file_sha256": "93e57f15bf1d8433b4b9669aeba9ec0622b8159f523c62694bc6a57d298e586e",
+      "contract_sha256": "8f62bb6bf9bd7ff1d69c01cd79abb502e385a87aacf90f6a40cbcab6083f15a6",
+      "status": "outputs/CAPITAL_FORWARD_FAMILY_V27_STATUS.json",
+      "validation_audit": "outputs/CAPITAL_FORWARD_FAMILY_V27_VALIDATION_AUDIT.json",
+      "validation_trades": "outputs/CAPITAL_FORWARD_FAMILY_V27_VALIDATION_TRADES.csv",
+      "confirmation_audit": "outputs/CAPITAL_FORWARD_FAMILY_V27_CONFIRMATION_AUDIT.json",
+      "confirmation_trades": "outputs/CAPITAL_FORWARD_FAMILY_V27_CONFIRMATION_TRADES.csv"
+    },
+    "v40": {
+      "contract_path": "xau-usd/xauusd-fast-research/capital-core-causal-outcome-resolver-v40/outputs/CAPITAL_CORE_CAUSAL_OUTCOME_RESOLVER_V40_CONTRACT_LOCK.json",
+      "contract_file_sha256": "d4dc5588c689fad602a4af793563832ba9532e0c648936f78cd62d88e9ba5d41",
+      "contract_sha256": "5968e3f6c43b1bb01be93ba7ecce76b1ad2ea42c4c1389bd7c82803b49d4e9fa",
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_outcomes_v40",
+      "status": "runtime_status.json",
+      "prefix_state_pattern": "{stream}_prefix_state.json",
+      "candidate_sources": {
+        "v28": {
+          "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/core_shadow_v28",
+          "filename": "r2_r3_candidates.jsonl",
+          "scheduled_time_field": "scheduled_entry_time_utc"
+        },
+        "v29": {
+          "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r1_pullback_shadow_v29",
+          "filename": "r1_pullback_candidates.jsonl",
+          "scheduled_time_field": "decision_time_utc"
+        },
+        "v34": {
+          "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r4_chop_shadow_v34",
+          "filename": "r4_candidates.jsonl",
+          "scheduled_time_field": "scheduled_entry_time_utc"
+        }
+      },
+      "resolution_pattern": "{stream}_resolutions.jsonl"
+    },
+    "v41": {
+      "contract_path": "xau-usd/xauusd-fast-research/capital-r1-box-causal-outcome-resolver-v41/outputs/CAPITAL_R1_BOX_CAUSAL_OUTCOME_RESOLVER_V41_CONTRACT_LOCK.json",
+      "contract_file_sha256": "7a339a8358a46c24b8599c91d288f4d4e2ec9e0bb310e571a28b3717bae2a7fc",
+      "contract_sha256": "f78d0b01b9ed9b65e71429dd461d0b967ae44058944de2452043051402728363",
+      "candidate_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/specialist_shadow_v1",
+      "candidate_filename": "r1_candidates.jsonl",
+      "scheduled_time_field": "signal_time_utc",
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r1_box_outcomes_v41",
+      "resolution_filename": "r1_box_resolutions.jsonl",
+      "prefix_state": "candidate_source_prefix_state.json",
+      "status": "runtime_status.json"
+    },
+    "v38": {
+      "contract_path": "xau-usd/xauusd-fast-research/capital-r5-causal-outcome-resolver-v38/outputs/CAPITAL_R5_CAUSAL_OUTCOME_RESOLVER_V38_CONTRACT_LOCK.json",
+      "contract_file_sha256": "aeae9659bd1363d1d5ab7ee29f95c90bceb5d9544f1fcadfa3883dd68a3aa151",
+      "contract_sha256": "ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd",
+      "candidate_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_shadow_v35",
+      "candidate_filename": "r5_component_candidates.jsonl",
+      "scheduled_time_field": "scheduled_entry_time_utc",
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_outcomes_v38",
+      "resolution_filename": "r5_component_resolutions.jsonl",
+      "prefix_state": "candidate_source_prefix_state.json",
+      "status": "runtime_status.json"
+    },
+    "v39": {
+      "contract_path": "xau-usd/xauusd-fast-research/capital-r5-causal-router-v39/outputs/CAPITAL_R5_CAUSAL_ROUTER_V39_CONTRACT_LOCK.json",
+      "contract_file_sha256": "1cb051256dcf33e593d16c9487a9a608fc48a9c200e505322decdcd5f26ea5e9",
+      "contract_sha256": "38f9daf3578ae209cd602321aa54706ce5897f3a7c713a5a0043d6512c8c6980",
+      "runtime_directory": "C:/MT5PortableProspectiveCollector/MQL5/Files/r5_transition_router_v39",
+      "route_filename": "r5_causally_routed_candidates.jsonl",
+      "prefix_state": "router_source_prefix_state.json",
+      "status": "runtime_status.json"
+    },
+    "ticks": {
+      "directory": "C:/MT5PortableProspectiveCollector/MQL5/Files",
+      "filename_glob": "xau_prospective_1033669_Capital_ComMena_Demo_XAUUSD_ticks_*.csv",
+      "schema_version": "xau_prospective_tick_v1",
+      "account_login": 1033669,
+      "account_server": "Capital.ComMena-Demo",
+      "symbol": "XAUUSD",
+      "maximum_timestamp_disagreement_ms": 1,
+      "maximum_spread_field_error": 0.011
+    }
+  },
+  "portfolio": {
+    "reference_lot": 0.01,
+    "ounces_at_reference_lot": 1.0,
+    "core_stress_slippage_r": 0.05,
+    "r2_component_attempts": [11142, 11266],
+    "r3_component_attempts": [12183, 12222, 12389],
+    "composite_priority": "ENTRY_TIME_THEN_ORIGIN_ATTEMPT_ASCENDING",
+    "core_trade_rejection_authorized": false,
+    "satellite_trade_rejection_authorized_beyond_v27": false,
+    "r5_fractional_risk_weight_is_broker_lot": false
+  },
+  "account_reference": {
+    "reference_equity_dollars": 3000.0,
+    "leverage": 100.0,
+    "contract_size_ounces_per_lot": 100.0,
+    "minimum_lot": 0.01,
+    "lot_step": 0.01,
+    "maximum_equity_drawdown_fraction": 0.15,
+    "maximum_daily_loss_fraction": 0.03,
+    "maximum_margin_fraction": 0.40,
+    "maximum_concurrent_positions": 12,
+    "maximum_absolute_directional_lots": 0.12,
+    "historical_conservative_core_equity_drawdown_dollars": 1733.37,
+    "historical_risk_must_fit_reference_equity": true,
+    "r5_broker_sizing_mapping_preregistered": false
+  },
+  "stages": {
+    "required_full_weekdays_per_stage": 20,
+    "validation_partition": "FORWARD_VALIDATION",
+    "confirmation_partition": "FORWARD_CONFIRMATION"
+  },
+  "research_gates": {
+    "minimum_total_trades_per_weekday": 3.0,
+    "maximum_total_trades_per_weekday": 4.0,
+    "require_v27_stage_pass": true,
+    "require_positive_base_net": true,
+    "require_positive_stress_net": true,
+    "minimum_base_profit_factor": 1.20,
+    "minimum_stress_profit_factor": 1.05,
+    "minimum_profitable_day_share": 0.50,
+    "minimum_half_base_profit_factor": 1.0,
+    "maximum_closed_drawdown_dollars": 1000.0
+  },
+  "outputs": {
+    "directory": "outputs",
+    "contract_lock": "CAPITAL_SHARED_ACCOUNT_V42_CONTRACT_LOCK.json",
+    "status": "CAPITAL_SHARED_ACCOUNT_V42_STATUS.json",
+    "validation_audit": "CAPITAL_SHARED_ACCOUNT_V42_VALIDATION_AUDIT.json",
+    "validation_trades": "CAPITAL_SHARED_ACCOUNT_V42_VALIDATION_TRADES.csv",
+    "confirmation_audit": "CAPITAL_SHARED_ACCOUNT_V42_CONFIRMATION_AUDIT.json",
+    "confirmation_trades": "CAPITAL_SHARED_ACCOUNT_V42_CONFIRMATION_TRADES.csv"
+  },
+  "runtime": {
+    "poll_seconds": 300
+  },
+  "research_controls": {
+    "economic_outcomes_present_at_lock": false,
+    "same_version_tuning_authorized": false,
+    "model_training_authorized": false,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false,
+    "broker_action_authorized": false
+  }
+}

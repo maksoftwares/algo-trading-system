@@ -1585,8 +1585,11 @@ Capital quote CSV ledger only.
   resolutions, no aggregate economics opened, and all execution flags false.
 - Capital quote ledger observed through `2026-07-20T03:50:55.516Z` on the first
   persistent cycle.
-- Persistent hidden parent PID: `12756`; current Python child PID: `38316`;
-  poll interval: 300 seconds.
+- The V38/V39 polling order was rephased after V39 entered
+  `WAITING_FOR_V38_SYNC`: V35 now updates before V38, and V39 polls after V38.
+  Current V38 status is `ACTIVE_READ_ONLY_CAUSAL_RESOLVER`.
+- Persistent hidden parent PID: `27700`; wrapper PID: `44264`; current Python
+  child PID: `39464`; poll interval: 300 seconds.
 - Runtime directory:
   `C:\MT5PortableProspectiveCollector\MQL5\Files\r5_transition_outcomes_v38`.
 
@@ -1624,8 +1627,12 @@ V38 unchanged.
 - First persistent cycle: `ACTIVE_READ_ONLY_CAUSAL_ROUTER`, synchronized with
   V38, zero candidates, zero resolutions, zero routes, no aggregate economics,
   and all authority flags false. Stderr is empty.
-- Persistent hidden parent PID: `34900`; current Python child PID: `38608`;
-  poll interval: 300 seconds.
+- Current status after poll rephasing: `ACTIVE_READ_ONLY_CAUSAL_ROUTER`,
+  `v38_synchronized=true`; V35 updated at `2026-07-20T05:31:17.748755Z`, V38
+  at `2026-07-20T05:31:27.569843Z`, and V39 at
+  `2026-07-20T05:32:09.340740Z`.
+- Persistent hidden parent PID: `31524`; wrapper PID: `30960`; current Python
+  child PID: `44808`; poll interval: 300 seconds.
 - Runtime directory:
   `C:\MT5PortableProspectiveCollector\MQL5\Files\r5_transition_router_v39`.
 
@@ -1712,3 +1719,53 @@ V41 records individual primary-policy R1 box outcomes only. It does not combine
 R1 sleeves, route R2/R3 composites, attach an R5 routed outcome, calculate
 shared-account economics, train a model, or authorize an order. The sealed
 same-period shared-account evaluator is the next engineering dependency.
+
+## V42 Sealed Shared-Account Forward Evaluator - 2026-07-20
+
+`capital-shared-account-forward-evaluator-v42` now closes the same-period Core
+and floating-equity measurement gap without changing or rejecting a frozen Core
+or V27 satellite trade.
+
+- Contract SHA-256:
+  `bcb1b985161d1d889c1953441af065bad897715fc57e46c4c3e97dd896551bfa`.
+- V42 reconstructs V41 R1 box, V40/V29 R1 pullback, exact one-position V40/V28
+  R2 and R3 composites, V40/V34 R4, and V38/V39 causally weighted R5. It then
+  adds only the already frozen V27 satellite selections.
+- Validation uses V27's exact first 20 full weekdays; confirmation uses the next
+  20 and remains sealed unless V42 validation passes its research gates.
+- Before a complete stage, V42 exposes liveness and counts only. It verifies
+  source contract identity, consumed append-only prefixes, candidate fact
+  hashes, final causal resolutions, route weights, timestamps, authority flags,
+  and exact Capital entry/exit ticks.
+- Every combined position is marked on each Capital bid/ask tick. V42 reports
+  base and stress floating drawdown, closed drawdown, daily loss, concurrent
+  positions, gross/directional lots, and leverage-based margin.
+- Research gates require 3.0-4.0 trades per weekday, V27 passage, positive base
+  and stress net, PF at least 1.20/1.05, at least 50% profitable days, PF at
+  least 1.0 in both chronological halves, and no more than USD 1,000 closed
+  drawdown.
+- Account readiness is separate. The locked reference is USD 3,000 equity,
+  1:100 leverage, 0.01 minimum/step, 15% maximum equity drawdown, 3% daily loss,
+  and 40% margin. The historical USD 1,733.37 conservative Core drawdown alone
+  requires at least USD 11,555.80 equity at the 15% limit. Therefore this
+  reference account is known not ready before forward economics open.
+- The live Capital account check at lock returned balance/equity USD 2,998.45,
+  leverage 100, XAUUSD contract size 100 ounces, and volume minimum/step 0.01.
+  Historical USD 889.69 closed drawdown is about 29.7% of USD 3,000; USD
+  1,733.37 floating-equity evidence is about 57.8%.
+- R5 fractional research weights are not broker lots. V42 cannot pass account
+  readiness until a separate causal broker-size mapping is preregistered and
+  validated.
+- Focused tests: 7 passed. Integrated V28/V29/V34/V38/V39/V40/V41/V42 tests:
+  55 passed. Ruff and format checks passed.
+- First cycle: `WAITING_FOR_SEALED_STAGE`, V27 validation unavailable, all Core
+  sources active, zero Core candidates/resolutions, aggregate economics sealed,
+  and all authority flags false. Stderr is empty.
+- Persistent hidden parent PID: `34168`; wrapper PID: `35696`; current Python
+  child PID: `6420`; poll interval: 300 seconds.
+- Runtime status:
+  `xau-usd/xauusd-fast-research/capital-shared-account-forward-evaluator-v42/outputs/CAPITAL_SHARED_ACCOUNT_V42_STATUS.json`.
+
+V42 has no model-training, prediction, EA, demo, live, or broker authority. A
+historical shared-account drawdown attribution and separately preregistered risk
+controller are mandatory before the account-readiness failure can be addressed.
