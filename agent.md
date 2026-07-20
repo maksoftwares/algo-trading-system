@@ -2661,3 +2661,23 @@ Decision: `V78_DEVELOPMENT_FAIL_TERMINAL`. Later stages remain sealed. Do not
 tune V78. One fixed direction inversion may start on the untouched July 2021
 period; no additional FX-consensus threshold, timing, response, exit, cost, or
 quota reuse is permitted. V59/V60 remain immutable and accepted.
+
+## V79 Fixed FX Dollar-Consensus Anti-Signal - 2026-07-20
+
+V79 inherited V78 policy `H01000__LM025__CS050__RR000__QC05`, every event time,
+the one-per-day quota, execution geometry, costs, and economic gates. It inverted
+direction exactly once and began after V78's exposed cutoff. Contract SHA-256:
+`471f5c9512d4ceff2c755543c5cbf91af154d15c17dceef5f6b34e7c9e615831`.
+
+Fresh development resolved `242` trades over `257` eligible weekdays
+(`0.941634/day`), split `124` long and `118` short. Base/stress net was USD
+`-147.17/-165.02`; base/stress PF was `0.3985/0.3570`; first/second-half stress
+PF was `0.3291/0.3885`; positive-day share was `30.74%`; no month was positive;
+winner-removed stress net was USD `-179.03`; stressed DD was USD `165.47`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V79_DEVELOPMENT_FAIL_TERMINAL`. Confirmation and validation remain
+sealed. V78/V79 retire both directions of immediate entry after the fixed raw FX
+consensus event. No same-family mirror, threshold, response, horizon, immediate
+entry, exit, cost, or quota rescue is permitted. V59/V60 remain immutable and
+accepted.

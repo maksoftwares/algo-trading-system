@@ -255,6 +255,23 @@ Later stages remain sealed. No event threshold or execution rescue is allowed.
 One fixed direction inversion may begin only on the unopened July 2021 period;
 after that test, the raw FX-consensus family is terminal in both directions.
 
+## V79 Fixed FX Dollar-Consensus Anti-Signal Result
+
+V79 performed the one allowed directional falsification of V78. It inherited
+the exact locked event policy and execution, inverted direction once, and began
+only after V78's exposed cutoff. Fresh development resolved `242` trades over
+`257` weekdays (`0.941634/day`), with `124` longs and `118` shorts. Base/stress
+net was USD `-147.17/-165.02`; base/stress PF was `0.3985/0.3570`;
+first/second-half stress PF was `0.3291/0.3885`; no month was positive;
+winner-removed stress net was USD `-179.03`; stressed DD was USD `165.47`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V79_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`471f5c9512d4ceff2c755543c5cbf91af154d15c17dceef5f6b34e7c9e615831`.
+All later stages remain sealed. V78/V79 show that immediate entry after the raw
+FX-consensus event is not a reversible edge. Both directions and all associated
+threshold, horizon, immediate-entry timing, or exit rescues are retired.
+
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 
 V72 introduced a materially new causal input: raw, synchronized Dukascopy
