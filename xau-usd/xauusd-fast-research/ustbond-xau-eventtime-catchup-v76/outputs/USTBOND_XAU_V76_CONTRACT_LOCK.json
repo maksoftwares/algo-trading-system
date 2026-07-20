@@ -1,0 +1,200 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit": {
+    "bytes": 7047,
+    "path": "outputs/USTBOND_XAU_V76_CALIBRATION_AUDIT.json",
+    "sha256": "d8cd3852c5a9761b4ef58410a3795149e505ad1f76b34fd1220ff198456883de"
+  },
+  "calibration_features": {
+    "bytes": 6660559,
+    "path": "outputs/USTBOND_XAU_V76_CALIBRATION_FEATURES.parquet",
+    "sha256": "a1fc1ac24ee286f6f6a5c6401511c46b21b03eeabd91479cecfe4199167807e7"
+  },
+  "calibration_grid": {
+    "bytes": 96178,
+    "path": "outputs/USTBOND_XAU_V76_CALIBRATION_GRID.csv",
+    "sha256": "4e71d5231d99fcce833cf27717d8f96243d33fbfb5be1fd408ae9703a48ed392"
+  },
+  "calibration_outcomes_opened": false,
+  "candidate_rule": {
+    "family": "USTBOND_LEAD_XAU_SAME_EVENTTIME_CATCHUP",
+    "maximum_baseline_staleness_ms": 1000,
+    "maximum_candidates_per_utc_date": 1,
+    "maximum_current_xau_staleness_ms": 1000,
+    "minimum_session_coverage_minutes": 600,
+    "minimum_source_quotes": 500,
+    "minimum_xau_quotes": 1000,
+    "session_end_utc": "18:00",
+    "session_start_utc": "07:00"
+  },
+  "completed_m5_atr": {
+    "bytes": 104974475,
+    "path": "m5_bidask_features_v1.parquet",
+    "sha256": "e587306f530a615dfdc6f869c4f79f881cfa0b572e078fd26d3c9995fbc66228"
+  },
+  "confirmation_outcomes_present_at_lock": false,
+  "contract_sha256": "56151a77385d55c6a19c577016075fa92b17db137e845695b472bd5e78b0f681",
+  "demo_authorized": false,
+  "dependencies": [
+    {
+      "bytes": 20512,
+      "path": "xau-usd/xauusd-fast-research/xag-xau-eventtime-catchup-v72/src/catchup.py",
+      "sha256": "3f93b55068daa51316766f4a961b5cb7d02b94030b139c930d432462a37e9f4c"
+    },
+    {
+      "bytes": 13216,
+      "path": "xau-usd/xauusd-fast-research/comex-futures-foundation-v1/src/spot_labels.py",
+      "sha256": "76a51dcf5798b410df3e254de97e7205c3e6806cfe26132d87632e0b804607b8"
+    },
+    {
+      "bytes": 19419,
+      "path": "xau-usd/xauusd-fast-research/comex-size-segment-flow-v32/src/size_segment_flow.py",
+      "sha256": "a84181b77874cb80e5e8db59644c061464f87e223366c6ccfcc354e0438d4d49"
+    }
+  ],
+  "development_outcomes_present_at_lock": false,
+  "ea_consumption_authorized": false,
+  "exam_outcomes_present_at_lock": false,
+  "execution": {
+    "holding_cost_per_24h_usd": 0.35,
+    "maximum_entry_delay_ms": 1000,
+    "maximum_initial_risk_usd": 50.0,
+    "ounces": 1.0,
+    "stress_slippage_r": 0.05,
+    "ticket_cost_usd": 0.3,
+    "timeout_exit_grace_ms": 10000
+  },
+  "families": {
+    "USTBOND_LEAD_XAU_SAME_EVENTTIME_CATCHUP": {
+      "atr_stop_multiple": 0.5,
+      "maximum_hold_minutes": 15,
+      "minimum_stop_distance_usd": 1.0,
+      "reward_r": 1.5,
+      "spread_stop_multiple": 4.0
+    }
+  },
+  "gates": {
+    "bootstrap": {
+      "block_weekdays": 5,
+      "maximum_one_sided_pvalue": 0.005,
+      "resamples": 20000,
+      "seed": 760076
+    },
+    "maximum_closed_trade_drawdown_usd": 150.0,
+    "maximum_trades_per_full_weekday": 1.0,
+    "minimum_base_profit_factor": 1.3,
+    "minimum_direction_share": 0.2,
+    "minimum_half_stress_profit_factor": 1.05,
+    "minimum_positive_month_share": 0.6,
+    "minimum_profitable_day_share": 0.45,
+    "minimum_resolved_trades": {
+      "confirmation": 150,
+      "development": 500,
+      "exam": 300,
+      "validation": 150
+    },
+    "minimum_stress_profit_factor": 1.2,
+    "minimum_trades_per_full_weekday": 0.65,
+    "top_winners_removed": 5
+  },
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "package_files": [
+    {
+      "bytes": 337,
+      "path": "README.md",
+      "sha256": "fcfd5e4ada317a853fbb785da41cbfc02e60b141b7a2004bfbbbdb44aa51424d"
+    },
+    {
+      "bytes": 2966,
+      "path": "PREREGISTRATION.md",
+      "sha256": "7da4dbbebecd4a2cf9c944ab614c94e19a16196c712b522330d41897668e88ad"
+    },
+    {
+      "bytes": 59,
+      "path": "requirements.txt",
+      "sha256": "975dab7894d9a5d8deb7ac0003179ee80544b173b2d273e247e7045cfbcb1bc5"
+    },
+    {
+      "bytes": 4889,
+      "path": "config/ustbond_xau_eventtime_catchup_v76.json",
+      "sha256": "c56cd6b55ae7adc51aa57adeec4951c97522bee39270a4f1069434371e9576c7"
+    },
+    {
+      "bytes": 67,
+      "path": "src/__init__.py",
+      "sha256": "051261952ea14cd4f7a5c64c1908868c68b9bee999ff8d56bfa0e79e2521647c"
+    },
+    {
+      "bytes": 11940,
+      "path": "src/same_direction_lead.py",
+      "sha256": "b5fbb86afcddd594d174e7d13daf2078a4b6c61c8b8bdfed752db00dadddad71"
+    },
+    {
+      "bytes": 3277,
+      "path": "run_source_audit.py",
+      "sha256": "15178189235d142552e193b8ce6c2b8fbc01449cea8e098da964ed987b49d35f"
+    },
+    {
+      "bytes": 6464,
+      "path": "run_calibration.py",
+      "sha256": "1ae0811001e190119b536c80c0ccb063e274846737299ec3d0df7afb4c6184a0"
+    },
+    {
+      "bytes": 5874,
+      "path": "lock_contract.py",
+      "sha256": "06edff7126e0f2c9906dee649390ee054937d609fe3eddada98fccd82cb08b62"
+    },
+    {
+      "bytes": 7018,
+      "path": "run_stage.py",
+      "sha256": "5cd4c8891796106b69f47852cbe28eb3818222022cd38950d6096a7ddaca167b"
+    },
+    {
+      "bytes": 256,
+      "path": "tests/conftest.py",
+      "sha256": "41f6f3442ad77e7f2a93fef48d55189fa42ec868f977ae15e3f485a4164cf905"
+    },
+    {
+      "bytes": 3232,
+      "path": "tests/test_same_direction_lead.py",
+      "sha256": "1d77bf8c56fe3630ad6a1a544c4680bcdb03b1b6ba9433bde14683cf6dbe30aa"
+    }
+  ],
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_ustbond_xau_v76_contract_lock",
+  "selected_policy": {
+    "horizon_ms": 2000,
+    "maximum_signed_xau_response_ratio": 0.0,
+    "minimum_absolute_source_move_bps": 0.5,
+    "minimum_directional_innovation_bps": 0.5,
+    "minimum_source_quote_count": 5,
+    "policy_id": "H02000__BM005__IN005__RR000__QC05"
+  },
+  "source_audit": {
+    "bytes": 108679,
+    "path": "outputs/USTBOND_XAU_V76_SOURCE_AUDIT.json",
+    "sha256": "15d9c3daa4b19f88a8c1ce27776839ca949fc85b142bef75c8e6fb33b63cca81"
+  },
+  "splits": {
+    "confirmation": [
+      "2022-07-01T00:00:00Z",
+      "2023-07-01T00:00:00Z"
+    ],
+    "development": [
+      "2019-02-01T00:00:00Z",
+      "2022-07-01T00:00:00Z"
+    ],
+    "exam": [
+      "2024-07-01T00:00:00Z",
+      "2026-07-01T00:00:00Z"
+    ],
+    "validation": [
+      "2023-07-01T00:00:00Z",
+      "2024-07-01T00:00:00Z"
+    ]
+  },
+  "validation_outcomes_present_at_lock": false
+}

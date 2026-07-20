@@ -1,0 +1,242 @@
+{
+  "audit_sha256": "c7856770f4d03b3bdc2a7eb13bacbeabb7afbfc0d3bcf50fcbbd71dca9772df5",
+  "broker_action_authorized": false,
+  "calibration_end_exclusive": "2019-02-01 00:00:00+00:00",
+  "calibration_outcomes_opened": false,
+  "calibration_start": "2019-01-01 00:00:00+00:00",
+  "campaign_id": "ustbond-xau-eventtime-catchup-v76",
+  "decision": "V76_CALIBRATION_POLICY_SELECTED",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "eligible_full_weekdays": 9,
+  "eligible_policy_count": 875,
+  "feature_rows": 119369,
+  "feature_sha256": "a1fc1ac24ee286f6f6a5c6401511c46b21b03eeabd91479cecfe4199167807e7",
+  "grid_sha256": "4e71d5231d99fcce833cf27717d8f96243d33fbfb5be1fd408ae9703a48ed392",
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "paid_data_authorized": false,
+  "post_decision_xau_outcomes_opened": false,
+  "python_predictions_authorized": false,
+  "registered_policy_count": 1000,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_ustbond_xau_v76_calibration_audit",
+  "selected_policy": {
+    "horizon_ms": 2000,
+    "maximum_signed_xau_response_ratio": 0.0,
+    "minimum_absolute_source_move_bps": 0.5,
+    "minimum_directional_innovation_bps": 0.5,
+    "minimum_source_quote_count": 5,
+    "policy_id": "H02000__BM005__IN005__RR000__QC05"
+  },
+  "session_quality": [
+    {
+      "date_utc": "2019-01-01",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 1,
+      "xau_coverage_minutes": 0.0,
+      "xau_quotes": 0
+    },
+    {
+      "date_utc": "2019-01-02",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.96995,
+      "xau_quotes": 73274
+    },
+    {
+      "date_utc": "2019-01-03",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9701666666666,
+      "xau_quotes": 98731
+    },
+    {
+      "date_utc": "2019-01-04",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99135,
+      "xau_quotes": 91485
+    },
+    {
+      "date_utc": "2019-01-07",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.95585,
+      "xau_quotes": 65941
+    },
+    {
+      "date_utc": "2019-01-08",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9769166666666,
+      "xau_quotes": 65474
+    },
+    {
+      "date_utc": "2019-01-09",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9849833333334,
+      "xau_quotes": 63193
+    },
+    {
+      "date_utc": "2019-01-10",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99555,
+      "xau_quotes": 66621
+    },
+    {
+      "date_utc": "2019-01-11",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9731666666667,
+      "xau_quotes": 70050
+    },
+    {
+      "date_utc": "2019-01-14",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.8667166666667,
+      "xau_quotes": 65577
+    },
+    {
+      "date_utc": "2019-01-15",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9358833333333,
+      "xau_quotes": 68298
+    },
+    {
+      "date_utc": "2019-01-16",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9922833333334,
+      "xau_quotes": 59976
+    },
+    {
+      "date_utc": "2019-01-17",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.6584666666666,
+      "xau_quotes": 57635
+    },
+    {
+      "date_utc": "2019-01-18",
+      "eligible_full_weekday": false,
+      "source_coverage_minutes": 0.0,
+      "source_quotes": 0,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9895166666666,
+      "xau_quotes": 60225
+    },
+    {
+      "date_utc": "2019-01-21",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.8138333333334,
+      "source_quotes": 4440,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9705,
+      "xau_quotes": 27400
+    },
+    {
+      "date_utc": "2019-01-22",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.8635666666667,
+      "source_quotes": 28004,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9729666666667,
+      "xau_quotes": 48237
+    },
+    {
+      "date_utc": "2019-01-23",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.8448166666667,
+      "source_quotes": 30396,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9593166666667,
+      "xau_quotes": 54919
+    },
+    {
+      "date_utc": "2019-01-24",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.3960833333333,
+      "source_quotes": 27399,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9697,
+      "xau_quotes": 65268
+    },
+    {
+      "date_utc": "2019-01-25",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.97185,
+      "source_quotes": 25053,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99485,
+      "xau_quotes": 56367
+    },
+    {
+      "date_utc": "2019-01-28",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.25025,
+      "source_quotes": 20161,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9869666666667,
+      "xau_quotes": 48225
+    },
+    {
+      "date_utc": "2019-01-29",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.7311666666667,
+      "source_quotes": 15740,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9868333333334,
+      "xau_quotes": 59973
+    },
+    {
+      "date_utc": "2019-01-30",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.9454166666667,
+      "source_quotes": 13546,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.99555,
+      "xau_quotes": 50170
+    },
+    {
+      "date_utc": "2019-01-31",
+      "eligible_full_weekday": true,
+      "source_coverage_minutes": 659.9421,
+      "source_quotes": 29205,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9877666666666,
+      "xau_quotes": 63206
+    }
+  ],
+  "source_audit_sha256": "15d9c3daa4b19f88a8c1ce27776839ca949fc85b142bef75c8e6fb33b63cca81"
+}
