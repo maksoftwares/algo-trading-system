@@ -1,0 +1,80 @@
+{
+  "audit_sha256": "338bb7894aed4c87121c9026c30f0609ccd1478f6578d382a12c031c0fbbcd1f",
+  "campaign_id": "crossasset-volatility-xau-momentum-v84",
+  "decision": "V84_CALIBRATION_SOURCE_AUDIT_PASS",
+  "declared_bytes": 69351173,
+  "declared_hours": 2232,
+  "declared_ticks": 3036917,
+  "economic_outcomes_opened": false,
+  "first_month": "2019-01",
+  "instrument_evidence": {
+    "DOLLARIDXUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-DOLLARIDXUSD.json",
+      "sha256": "b596ab8a33b3c2bf41e042e4d92e01d9e71220ae40793eb5d6530c2039339bec"
+    },
+    "XAGUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAGUSD.json",
+      "sha256": "26ff827b0dfba416668d4da3afc7682af4a389faea7d78140ce4319eb2d063e9"
+    },
+    "XAUUSD": {
+      "path": "C:\\DukascopyTickDataFoundationV1\\source-evidence\\instrument-XAUUSD.json",
+      "sha256": "60e292320bc49ad124276cd6e432eede5f4ef525ca9969088670652b6e14af33"
+    }
+  },
+  "last_month": "2019-01",
+  "month_manifest_count": 3,
+  "month_manifests": [
+    {
+      "declared_bytes": 9299358,
+      "declared_ticks": 382470,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD\\year=2019\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "3020f0abed7eb138de8430c35292dcd97da62c48c41ef9058f1fc12e25a79e1f",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\DOLLARIDXUSD\\year=2019\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "40649a1badf6cd6b283782c00b587d6dce2f1ebb88a512190d24ccb46bb4c538",
+      "month": "2019-01",
+      "symbol": "DOLLARIDXUSD"
+    },
+    {
+      "declared_bytes": 14163492,
+      "declared_ticks": 535827,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAGUSD\\year=2019\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "da267dd9d8ece33ee52550405d9e6c9b8e15dbe8449674a37d19fca6cc4bb4ab",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAGUSD\\year=2019\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "f73c2fdd940781097c64af49c9de50e1efb3bc7f40bf7594614a493662396e91",
+      "month": "2019-01",
+      "symbol": "XAGUSD"
+    },
+    {
+      "declared_bytes": 45888323,
+      "declared_ticks": 2118620,
+      "frozen_manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=01\\_FROZEN_MANIFEST.json",
+      "frozen_manifest_sha256": "80b45a11f1f985ffdd6e822b9da79d78e877a1cfa006ecc075740dd88a549106",
+      "hours": 744,
+      "manifest_path": "C:\\DukascopyTickDataFoundationV1\\raw\\XAUUSD\\year=2019\\month=01\\_ACQUISITION_MANIFEST.json",
+      "manifest_sha256": "fd80ae2b6ec8e6baa30a957516a6eaf908a5971783aa3992d366c5437a3add94",
+      "month": "2019-01",
+      "symbol": "XAUUSD"
+    }
+  ],
+  "paid_data_used": false,
+  "runtime_raw_file_hash_verification_required": true,
+  "schema_version": "xauusd_crossasset_volatility_xau_momentum_v84_calibration_source_audit",
+  "scope": "calibration",
+  "storage_root": "C:\\DukascopyTickDataFoundationV1",
+  "symbols": {
+    "DOLLARIDXUSD": {
+      "price_scale": 3,
+      "source_code": "DOLLAR.IDX-USD"
+    },
+    "XAGUSD": {
+      "price_scale": 3,
+      "source_code": "XAG-USD"
+    },
+    "XAUUSD": {
+      "price_scale": 3,
+      "source_code": "XAU-USD"
+    }
+  }
+}
