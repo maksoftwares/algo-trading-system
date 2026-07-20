@@ -2435,3 +2435,29 @@ has evidence of edge after costs. V59/V60 remain immutable and accepted. Any
 next historical expansion must add a materially new causal input; threshold,
 quota, direction, or timing rescue on these outcomes is prohibited. V24.1,
 V26, V27, V42, and V67 continue as the untouched forward evidence path.
+
+## V69 Receipt-Time Innovation Engineering Stop - 2026-07-20
+
+V69 introduced a materially new event-time mechanism: completed 100 ms COMEX
+receipt buckets compared with raw Dukascopy quotes strictly before the receipt
+decision. It registered exactly 1,000 policies and performed outcome-blind July
+2022 calibration only.
+
+- Calibration contained `377,909` causal feature rows over `20` eligible full
+  weekdays; `662/1,000` policies met density and direction-balance requirements.
+- The deterministic selector froze policy
+  `H2000__CM100__IN040__FI30__VO10`: two-second horizon, USD `1.00` COMEX move,
+  USD `0.40` directional innovation, `0.30` flow imbalance, and `10` contracts.
+- It produced `16` calibration candidates, exactly `0.80/day`, split eight long
+  and eight short. No post-decision outcome was opened in calibration.
+- Contract SHA-256:
+  `747c43a0e476941a08a4e0c87be78efde0c986cf45be8a6fe67cabec61ae4586`.
+
+Development stopped before writing any candidate, label, audit, or economic
+result. V69 incorrectly required `ts_recv >= ts_event`; the first violating day
+had 18 such records among 93,990 trades, with a minimum `-10.83 ms` difference.
+Databento documents `ts_recv` as the primary sort/index timestamp and warns that
+publisher clocks may be unsynchronized. V69 is therefore an engineering stop,
+not a failed economic test. Its contract remains immutable. The successor must
+remove only this invalid publisher-clock assertion, rerun calibration, and
+freeze a new contract without changing policy grids, execution, or gates.

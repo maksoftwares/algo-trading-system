@@ -1,0 +1,432 @@
+{
+  "audit_sha256": "d4fde2f8ea764944abef79578c44dde2b61db9ee8a84b6c0b4c9a75af3720378",
+  "broker_action_authorized": false,
+  "calibration_end_exclusive": "2022-08-01 00:00:00+00:00",
+  "calibration_outcomes_opened": false,
+  "calibration_start": "2022-07-01 00:00:00+00:00",
+  "campaign_id": "comex-spot-receipt-innovation-v69",
+  "decision": "V69_CALIBRATION_POLICY_SELECTED",
+  "demo_authorized": false,
+  "ea_consumption_authorized": false,
+  "eligible_full_weekdays": 20,
+  "eligible_policy_count": 662,
+  "feature_rows": 377909,
+  "feature_sha256": "1c4e55ea7d4085115bb157e06ded985950c2728ce6ee0977340ba08ab2f046e9",
+  "grid_sha256": "af816ee4187e6c631d162b4a39407f4662d9e70b2b5bfdb8ff446a43e253b890",
+  "live_authorized": false,
+  "model_training_authorized": false,
+  "paid_data_authorized": false,
+  "post_decision_spot_outcomes_opened": false,
+  "python_predictions_authorized": false,
+  "registered_policy_count": 1000,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_spot_receipt_v69_calibration_audit",
+  "selected_policy": {
+    "horizon_ms": 2000,
+    "minimum_absolute_comex_move_usd": 1.0,
+    "minimum_absolute_flow_imbalance": 0.3,
+    "minimum_directional_innovation_usd": 0.4,
+    "minimum_received_volume": 10,
+    "policy_id": "H2000__CM100__IN040__FI30__VO10"
+  },
+  "session_quality": [
+    {
+      "coverage_minutes": 309.99720405,
+      "date_utc": "2022-07-01",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 48289,
+      "source_file": "glbx-mdp3-20220701.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 0.0,
+      "eligible_full_weekday": false,
+      "nonempty_bars": 0,
+      "raw_trades": 0,
+      "source_file": "glbx-mdp3-20220703.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.81513114999996,
+      "date_utc": "2022-07-04",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 7227,
+      "source_file": "glbx-mdp3-20220704.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99712343333334,
+      "date_utc": "2022-07-05",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 56478,
+      "source_file": "glbx-mdp3-20220705.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.9990264833333,
+      "date_utc": "2022-07-06",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 49147,
+      "source_file": "glbx-mdp3-20220706.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.9983971666667,
+      "date_utc": "2022-07-07",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 30025,
+      "source_file": "glbx-mdp3-20220707.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.9976043,
+      "date_utc": "2022-07-08",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 37971,
+      "source_file": "glbx-mdp3-20220708.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 0.0,
+      "eligible_full_weekday": false,
+      "nonempty_bars": 0,
+      "raw_trades": 0,
+      "source_file": "glbx-mdp3-20220710.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99390815,
+      "date_utc": "2022-07-11",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 24182,
+      "source_file": "glbx-mdp3-20220711.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.9940066333333,
+      "date_utc": "2022-07-12",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 26437,
+      "source_file": "glbx-mdp3-20220712.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99418345,
+      "date_utc": "2022-07-13",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 69158,
+      "source_file": "glbx-mdp3-20220713.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.9983830333333,
+      "date_utc": "2022-07-14",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 54528,
+      "source_file": "glbx-mdp3-20220714.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99655413333335,
+      "date_utc": "2022-07-15",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 39504,
+      "source_file": "glbx-mdp3-20220715.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 0.0,
+      "eligible_full_weekday": false,
+      "nonempty_bars": 0,
+      "raw_trades": 0,
+      "source_file": "glbx-mdp3-20220717.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99401385,
+      "date_utc": "2022-07-18",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 26293,
+      "source_file": "glbx-mdp3-20220718.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.992077,
+      "date_utc": "2022-07-19",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 23360,
+      "source_file": "glbx-mdp3-20220719.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99274146666664,
+      "date_utc": "2022-07-20",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 25920,
+      "source_file": "glbx-mdp3-20220720.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99366838333333,
+      "date_utc": "2022-07-21",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 56306,
+      "source_file": "glbx-mdp3-20220721.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99670875,
+      "date_utc": "2022-07-22",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 33461,
+      "source_file": "glbx-mdp3-20220722.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 0.0,
+      "eligible_full_weekday": false,
+      "nonempty_bars": 0,
+      "raw_trades": 0,
+      "source_file": "glbx-mdp3-20220724.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99785058333333,
+      "date_utc": "2022-07-25",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 22080,
+      "source_file": "glbx-mdp3-20220725.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99830475,
+      "date_utc": "2022-07-26",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 19283,
+      "source_file": "glbx-mdp3-20220726.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.99873605,
+      "date_utc": "2022-07-27",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 15526,
+      "source_file": "glbx-mdp3-20220727.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 309.8350236,
+      "date_utc": "2022-07-28",
+      "eligible_full_weekday": true,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 62,
+      "raw_trades": 3896,
+      "source_file": "glbx-mdp3-20220728.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 303.60474535,
+      "date_utc": "2022-07-29",
+      "eligible_full_weekday": false,
+      "instrument_ids": [
+        5568
+      ],
+      "nonempty_bars": 47,
+      "raw_trades": 217,
+      "source_file": "glbx-mdp3-20220729.trades.dbn.zst"
+    },
+    {
+      "coverage_minutes": 0.0,
+      "eligible_full_weekday": false,
+      "nonempty_bars": 0,
+      "raw_trades": 0,
+      "source_file": "glbx-mdp3-20220731.trades.dbn.zst"
+    }
+  ],
+  "source_files": [
+    {
+      "bytes": 1594028,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220701.trades.dbn.zst",
+      "sha256": "9280f1c261521b87c45556616ab1a5e13809ff875bf3343b7eaec4a470cdc00b"
+    },
+    {
+      "bytes": 25753,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220703.trades.dbn.zst",
+      "sha256": "0b23d6ac8b46ec33eaa2ea967e0de8959f8895b22d079a1c15b9f8b0ce786ca7"
+    },
+    {
+      "bytes": 460035,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220704.trades.dbn.zst",
+      "sha256": "57859f47020a3f4fcb65c1eba0ef6d7c70143bac209962c7a096e79e8a8b038f"
+    },
+    {
+      "bytes": 1546298,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220705.trades.dbn.zst",
+      "sha256": "ca6f1a5ed89bf696b3437fdeb35f482d1073b0d83d3e275054dadbd6abdb39ac"
+    },
+    {
+      "bytes": 1523590,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220706.trades.dbn.zst",
+      "sha256": "84391d5258bed4644850e45c3fb7992d82fec3e70201d507b74d59c8ca3feeef"
+    },
+    {
+      "bytes": 1067832,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220707.trades.dbn.zst",
+      "sha256": "13f3565c847998b2acdcef988a25b509186d3c2a5bba957991846709bd3e4cda"
+    },
+    {
+      "bytes": 1163952,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220708.trades.dbn.zst",
+      "sha256": "1b690d58a08a2780a3711a5a7015762358cb431529c19d7825f730ef4c4e9312"
+    },
+    {
+      "bytes": 25585,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220710.trades.dbn.zst",
+      "sha256": "81cf469c4840a3e4dee6410c53bad8e27e9adc883831f73fa68d816c32392db4"
+    },
+    {
+      "bytes": 905882,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220711.trades.dbn.zst",
+      "sha256": "f7bb3bd3061c733dd41117e2c20b4ee402e4df67b008455b0bb80d0a2962d749"
+    },
+    {
+      "bytes": 1127964,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220712.trades.dbn.zst",
+      "sha256": "b8e665c8410d90d72e33ff741daac24de18dfa2739d1063b952a56aa8b28a307"
+    },
+    {
+      "bytes": 1709783,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220713.trades.dbn.zst",
+      "sha256": "f2f24586432ef5ede0e6d3cc5c668275e0639d88b2901af994b1a3bf1bdaa3ad"
+    },
+    {
+      "bytes": 1682025,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220714.trades.dbn.zst",
+      "sha256": "5d852a0f8d7d3f63d9365d9c0613271b7bacbf23c4840aad6e2c6d187a4920d6"
+    },
+    {
+      "bytes": 1299449,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220715.trades.dbn.zst",
+      "sha256": "6a4489061e3979d6fb88ee7b2244344375a8ba4ae737fd881c532abdc05f165c"
+    },
+    {
+      "bytes": 33901,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220717.trades.dbn.zst",
+      "sha256": "1e3f7a68a1894a445874bbd3ace5bdb66b9949b2ed85ae4cacf6f2b99351f731"
+    },
+    {
+      "bytes": 1007939,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220718.trades.dbn.zst",
+      "sha256": "50a8b5018a559731e11bd16d3345526dfa9b212a5ccbf6306aab7dd601c674a0"
+    },
+    {
+      "bytes": 916559,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220719.trades.dbn.zst",
+      "sha256": "01746f4c110285428de38ce5b71b6ce6b2dc21e8e8bb29b84ce93b84ac6686b8"
+    },
+    {
+      "bytes": 1008926,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220720.trades.dbn.zst",
+      "sha256": "1aa8f68937d4e6b773277ba50ba086b4f639e1357e0e80fade70cfdea30bf405"
+    },
+    {
+      "bytes": 1608375,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220721.trades.dbn.zst",
+      "sha256": "a753cb241250edffe939525513b5facb39201585dc3a0b12f7be4f0bdb4352b4"
+    },
+    {
+      "bytes": 1206952,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220722.trades.dbn.zst",
+      "sha256": "46de0dd14ea04a667eeececc2f4e63e6f563ed573bc59bb0ff3cf07309b09abe"
+    },
+    {
+      "bytes": 22325,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220724.trades.dbn.zst",
+      "sha256": "8d83304f2a9c69bcf46e8e058b86ace3643bd9ee6ffb57ebe449e18c2a0d0c3a"
+    },
+    {
+      "bytes": 836703,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220725.trades.dbn.zst",
+      "sha256": "875daf06945d5099664fbec572cb787cfdb2197ee4a59c5744e59a7aa6e4e3be"
+    },
+    {
+      "bytes": 762258,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220726.trades.dbn.zst",
+      "sha256": "20e56390f11e62c1f63a8e91956fa44ef1b686f497d8df59ee493d62a90461c7"
+    },
+    {
+      "bytes": 814403,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220727.trades.dbn.zst",
+      "sha256": "8624847ba1e2e928bddf2c3ed6aa4061d2f02db163331b914b5309bb39223348"
+    },
+    {
+      "bytes": 133368,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220728.trades.dbn.zst",
+      "sha256": "675f40e4329bea5ed6ada02f9470ec0fec81e2747ce268703e1ca6817c0f1f41"
+    },
+    {
+      "bytes": 15862,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220729.trades.dbn.zst",
+      "sha256": "34360100ca8934abff8b02acc74e7659f93b8e2304be2e0d63df692d561e675a"
+    },
+    {
+      "bytes": 29261,
+      "path": "C:\\ComexGoldFuturesFoundationV1\\raw\\GLBX-20260717-5MX758XBAQ\\GLBX-20260717-5MX758XBAQ\\glbx-mdp3-20220731.trades.dbn.zst",
+      "sha256": "fecb984936618a96cb1bee8c72c309448e30fee728791f11daf8aba343379d9d"
+    }
+  ]
+}
