@@ -6,7 +6,7 @@ Updated: `2026-07-20`
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
 - Current operational branch: `codex/xau-independent-specialists-v1`
-- Latest pushed research implementation checkpoint before this handoff update: `44815e67`
+- Latest pushed research implementation checkpoint before this handoff update: `06d00a97`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -18,6 +18,38 @@ Updated: `2026-07-20`
 4. [Independent-specialist primary direction](xau-usd/xauusd-phase1/docs/A1_XAU_INDEPENDENT_SPECIALIST_PRIMARY_DIRECTION_2026_07_12.md)
 
 Read all four before changing code or generating evidence.
+
+## Latest frequency-milestone supersession - 2026-07-20
+
+This section supersedes older statements in this handoff that say the first
+frequency milestone or whole-account historical floating-equity audit is still
+unavailable.
+
+- V59 is the corrected broker-expressible historical portfolio. It preserves the
+  exact frozen V57 add-on policy while replacing legacy FIFO R1 attribution with
+  native MT5 position joins and rejecting all transition rows below the broker's
+  0.01-lot minimum.
+- Required-window combined frequency remains above one trade per weekday:
+  `1.142` in development-2, `1.690` in confirmation, and `1.395` in the final
+  year.
+- Final-year economics are `364` trades, USD `2,537.35` net, PF `1.976`, USD
+  `152.59` closed drawdown, 83.3% positive months, and USD `1,143.73` after
+  removing the five largest winners.
+- V60 reconstructed all `2,194/2,194` accepted trades from native-position or
+  raw-tick prices and evaluated `1,172,191` bid/ask M5 bars. Conservative
+  whole-account floating drawdown is USD `329.64`, or USD `412.06` with the
+  frozen 25% capital buffer. Under an extra USD `0.30` charge on every R1 trade,
+  it is USD `335.34`, or USD `419.18` buffered. Both pass the USD `449.77` hard
+  limit.
+- Exact raw ticks independently confirm the identified episode at USD `328.77`
+  base and USD `334.47` under fee stress.
+- Historical milestone one is therefore achieved. It is an exposed historical
+  research result, not demo/live authority. MT5 portfolio parity and sealed
+  prospective shadow evidence remain mandatory.
+
+Do not weaken or retune V59/V60. The next research phase may target two trades per
+weekday as an additive, separately preregistered expansion after this checkpoint is
+committed and pushed.
 
 ## Exact north star
 
@@ -2143,3 +2175,83 @@ overlap to seven open positions. USD `158.19` is therefore verified closed
 drawdown, not complete whole-account floating-equity drawdown. MT5 parity,
 prospective shadow evidence, and full intratrade equity reconstruction remain
 mandatory before execution or before starting the two-trades/day phase.
+
+## V58-V60 Correctness And Floating-Equity Closure - 2026-07-20
+
+Self-review found and corrected two execution-significant defects before accepting
+the V57 historical milestone.
+
+### V58 native-position correction
+
+- The legacy R1 parser paired exits FIFO by direction instead of using native MT5
+  position IDs. In the frozen 678-row R1/R2 control, `388` exits and `387`
+  individual P&L assignments did not belong to the native position, although the
+  total P&L multiset and aggregate source totals were unchanged.
+- V58 rebuilt all `558` R1 rows from the previously sealed native-position
+  reconciliation and reapplied the V50 one-open-position/one-entry-per-day rule
+  using corrected holding intervals. It did not change a strategy threshold or
+  economic gate.
+- Final year remained above target at `376` trades, `1.441/day`, USD `2,579.36`
+  net, PF `1.988`, and USD `152.59` closed DD.
+- Decision: `V58_NATIVE_POSITION_ONE_TRADE_PER_DAY_GATE_PASS`. Contract SHA-256:
+  `29b33bd139536f51b0e0a71dd7c5643b6dba82ae128d911a96aa5936313627f5`;
+  result SHA-256:
+  `3ab433bf59875286983de11c9960cfd72f324fdb563e4641dadae17d1ba7ec2d`.
+
+### V59 broker-expression correction
+
+- Transition V11 counted fractional `risk_weight` rows as trades even though
+  their implied lots were below the broker's 0.01 minimum. Rounding those rows up
+  would change their risk and is prohibited.
+- V59 retained only the `10/330` transition rows with weight exactly `1.0` and
+  rejected the remaining `320` without replacement. Every other Core and add-on
+  trade remained unchanged and the same causal governor was replayed.
+- Development-2: `595` trades, `1.142/day`, USD `1,099.82` net, PF `1.624`, USD
+  `242.03` closed DD, and USD `793.17` after removing five winners.
+- Confirmation: `441` trades, `1.690/day`, USD `1,273.45` net, PF `1.656`, USD
+  `291.76` closed DD, and USD `710.31` after removing five winners.
+- Final: `364` trades, `1.395/day`, USD `2,537.35` net, PF `1.976`, USD `152.59`
+  closed DD, 83.3% positive months, and USD `1,143.73` after removing five
+  winners.
+- Decision: `V59_BROKER_EXPRESSIBLE_ONE_TRADE_PER_DAY_GATE_PASS`. Contract
+  SHA-256:
+  `6e21c5d0316cc0e9b6d7f4b8a8bc9d0b5de0c61feb2154f28814290ed6ba81bf`;
+  result SHA-256:
+  `ab59b9f62fd03f719412f7e6982bdb59fe98991b5de45b7fc9419500c5822e61`.
+
+### V60 whole-account floating equity
+
+- V60 locked its metric and source hashes before opening the floating result. It
+  reconstructed all `2,194/2,194` accepted trades one-to-one and found zero
+  timestamp, direction, source-P&L, source-risk, or endpoint mismatches.
+- The audit combined `468,279` legacy bid M5 rows, `468,279` matching ask M5
+  rows, and `708,538` modern bid/ask feature rows, covering 2010-01-01 through
+  2026-06-30. The evaluated portfolio interval contained `1,172,191` bars.
+- The mark-to-market envelope uses bid lows/highs for longs, ask highs/lows for
+  shorts, charges known cost at entry, exposes boundary trades to the full M5
+  bar, and allows favorable-before-adverse ordering inside each bar.
+- Base whole-account floating DD is USD `329.64`; with the 25% buffer it is USD
+  `412.06`. The extra USD `0.30` native-R1 fee stress produces USD `335.34` raw
+  and USD `419.18` buffered. Both pass the frozen USD `359.814` raw and USD
+  `449.7675` buffered limits on USD `2,998.45` starting equity.
+- Window fee-stress floating DD is USD `298.34` in development-2, USD `335.34`
+  in confirmation, and USD `258.70` in the final year. Maximum historical
+  concurrency is ten positions, with add-ons capped at two.
+- The worst episode is caused by three overlapping R1 longs, not the new add-on
+  sleeves. Exact raw ticks independently confirm USD `334.47` fee-stress DD,
+  USD `0.87` below the conservative M5 envelope.
+- Decision: `V60_WHOLE_ACCOUNT_FLOATING_EQUITY_GATE_PASS`. Contract SHA-256:
+  `d9c691f62ce5e39831a6a07f38dc22d01e6b39d06cfa4eeb3aa1030fa50c6ad3`;
+  result SHA-256:
+  `31c0af548e314b8cd0e935082f58fe088aa91c574b410320b28f3ffe4945af5a`.
+
+V58 has four focused tests, V59 has three, and V60 has two; Ruff, compile checks,
+source hashes, implementation hashes, contract verification, endpoint
+reconciliation, and fresh locked reproductions pass. The first historical
+one-trade-per-weekday milestone is achieved without weakening the locked edge or
+breaching the inherited drawdown gate.
+
+The result does not authorize Python prediction, EA consumption, demo/live attach,
+or broker action. Remaining execution gates are MT5 portfolio parity and genuinely
+new sealed prospective shadow evidence. The two-trades/day research phase must be
+additive and separately preregistered; V59/V60 are frozen controls.

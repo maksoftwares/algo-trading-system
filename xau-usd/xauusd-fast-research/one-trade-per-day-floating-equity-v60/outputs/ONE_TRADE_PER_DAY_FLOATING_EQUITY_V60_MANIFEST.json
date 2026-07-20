@@ -1,0 +1,35 @@
+{
+  "artifacts": {
+    "contract_lock": {
+      "bytes": 43348,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_CONTRACT_LOCK.json",
+      "sha256": "dcd852f96b1d8bfb7f6ed4eb423e0843b70f3eaf35433a12d2b0b9f359a13516"
+    },
+    "episodes": {
+      "bytes": 548,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_EPISODES.csv",
+      "sha256": "9253a5fed1f86e9ab1d95ff8c666ba697543170a58b8e676e5edebad942666f5"
+    },
+    "price_ledger": {
+      "bytes": 340892,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_PRICE_LEDGER.parquet",
+      "sha256": "ba9044e0f5ef73292b3b243c39c6b9aa8d7f9921da33633b3354281f378b5bbf"
+    },
+    "result_json": {
+      "bytes": 4950,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.json",
+      "sha256": "e0e693301858640fd3b9e946a96542ad6715d711eebbdef24cf17a229e323095"
+    },
+    "result_markdown": {
+      "bytes": 951,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_RESULT.md",
+      "sha256": "0bd27e08060680eb16805691cc6723e87a56b7f8c8f86778b58375cab6e66803"
+    },
+    "windows": {
+      "bytes": 1219,
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-floating-equity-v60\\outputs\\ONE_TRADE_PER_DAY_FLOATING_EQUITY_V60_WINDOWS.csv",
+      "sha256": "da8edf02471880cafa0ac80540f9646e1f2a8477d7019dec3619fe2ef0601985"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_floating_equity_v60_manifest"
+}

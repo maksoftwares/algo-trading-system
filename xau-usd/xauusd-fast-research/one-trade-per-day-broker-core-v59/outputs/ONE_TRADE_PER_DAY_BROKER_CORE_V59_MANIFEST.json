@@ -1,0 +1,37 @@
+{
+  "artifacts": {
+    "addon_decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_ADDON_DECISIONS.parquet",
+      "sha256": "4a1f5496fca9bcef93e05e735e4c796975d7f7afee3ddc28bb0f6f6f6ce0551d"
+    },
+    "broker_core": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_CORE.parquet",
+      "sha256": "46c8ce5d90431581d6d16b03f210fae6955d707b8bc2d605b74bb5c84906987b"
+    },
+    "contract_lock": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_CONTRACT_LOCK.json",
+      "sha256": "933148f5a57eaf5ba6c9827fb30db32e559a2d27eaaad83088b434ba57f60700"
+    },
+    "rejected_r5": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_REJECTED_R5.parquet",
+      "sha256": "6e483b46adeb39c1d8effd90b419099a538368268a8411b415ff88a95072efa9"
+    },
+    "result_json": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_RESULT.json",
+      "sha256": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac"
+    },
+    "result_markdown": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_RESULT.md",
+      "sha256": "b0655b75b037673f70dc184013ec9890c25d31583f8b4226e6e24eafdd9d0c26"
+    },
+    "trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_TRADES.parquet",
+      "sha256": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724"
+    },
+    "windows": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-broker-core-v59\\outputs\\ONE_TRADE_PER_DAY_BROKER_CORE_V59_WINDOWS.csv",
+      "sha256": "da98bf6885f3acbe889b90adf602b66507c79eda90e52895d780435123227431"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_broker_core_v59_manifest"
+}

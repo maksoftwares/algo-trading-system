@@ -1,0 +1,18 @@
+{
+  "config_sha256": "214b94f1f97da88963191c6718ffdbe96b29b6258bfc32e11f3add5fc27a1a45",
+  "contract_sha256": "6e21c5d0316cc0e9b6d7f4b8a8bc9d0b5de0c61feb2154f28814290ed6ba81bf",
+  "implementation_hashes": {
+    "policy": "2ee44bed7872a2190fb01faa34f76689e17c9054dbe49a261e07b593e935d763",
+    "runner": "9552d3eb39f7632ba518ffc92543c66a3c8c9ea049f3ad6912c6c7b2faa73a22"
+  },
+  "same_version_post_outcome_tuning_authorized": false,
+  "schema_version": "xauusd_one_trade_per_day_broker_core_v59_contract",
+  "source_hashes": {
+    "r5_router_trades": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+    "v57_candidates": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9",
+    "v58_audit_module": "db0ffb64c8ea86b8c9985c6ba7006622dbfdfa6b06e69243970417d2a62b8f05",
+    "v58_config": "fce9c2572f83467b00aa776afd1f533711c36855fb48245983ac14837b611442",
+    "v58_corrected_core": "3e83d790f366005de49c7815995f9fc681559b1eda8166410008533c6ebce654",
+    "v58_result": "3c1bb1871fdf721dbe4bf91bef9f3109e7e44da4fdc0f9be821fcdbcc7e03a4d"
+  }
+}

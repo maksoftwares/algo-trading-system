@@ -1,0 +1,17 @@
+{
+  "config_sha256": "fce9c2572f83467b00aa776afd1f533711c36855fb48245983ac14837b611442",
+  "contract_sha256": "29b33bd139536f51b0e0a71dd7c5643b6dba82ae128d911a96aa5936313627f5",
+  "implementation_hashes": {
+    "audit": "db0ffb64c8ea86b8c9985c6ba7006622dbfdfa6b06e69243970417d2a62b8f05",
+    "runner": "cda4c299883b444b70bd77427093272961ec179307f321787642277b326b3dec"
+  },
+  "same_version_post_outcome_tuning_authorized": false,
+  "schema_version": "xauusd_one_trade_per_day_native_core_v58_contract",
+  "source_hashes": {
+    "native_reconciliation": "57375018fea7dd54b4350f3e0ed6e8ac79d1599bc3769c76da4a38b6e6edb4ec",
+    "normalized_core": "fec25e1127b8bea261109010c7b0ad3eca275adf14e0ec52395e7efdfa86d372",
+    "v53_base_config": "19f69e470e86e45118f2423e7f5833fbcb2aaa8b1f4007fb40233f87ad7197fc",
+    "v57_candidates": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9",
+    "v57_overlay_config": "dadd3853ad8b3599598dba1e37b8a17c1301c8693bdf1e7a61dc01aecd2fbacc"
+  }
+}

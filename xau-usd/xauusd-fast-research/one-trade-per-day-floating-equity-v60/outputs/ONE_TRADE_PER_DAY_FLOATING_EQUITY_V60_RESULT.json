@@ -1,0 +1,111 @@
+{
+  "base_endpoint_pnl_usd": 5591.587220997324,
+  "base_floating": {
+    "maximum_drawdown_usd": 329.6442066942627,
+    "peak_equity_pnl_usd": 1952.585104085576,
+    "peak_time_utc": "2024-07-17T14:00:00+00:00",
+    "trough_addon_initial_risk_usd": -1.7763568394002505e-15,
+    "trough_equity_pnl_usd": 1622.9408973913132,
+    "trough_known_initial_risk_usd": -1.7763568394002505e-15,
+    "trough_open_addons": 0,
+    "trough_open_positions": 3,
+    "trough_time_utc": "2024-09-10T14:10:00+00:00"
+  },
+  "capital_gate": {
+    "capital_buffer_multiplier": 1.25,
+    "maximum_allowed_drawdown_usd": 449.7675,
+    "maximum_raw_drawdown_usd": 359.814,
+    "starting_equity_usd": 2998.45
+  },
+  "checks": {
+    "all_trades_price_reconstructed": true,
+    "base_endpoint_reconciled": true,
+    "fee_stress_endpoint_reconciled": true,
+    "full_history_base_buffered_drawdown": true,
+    "full_history_base_raw_drawdown": true,
+    "full_history_fee_stress_buffered_drawdown": true,
+    "full_history_fee_stress_raw_drawdown": true,
+    "required_windows_base_raw_drawdown": true,
+    "required_windows_fee_stress_raw_drawdown": true,
+    "v59_inherited_gates": true
+  },
+  "contract_sha256": "d9c691f62ce5e39831a6a07f38dc22d01e6b39d06cfa4eeb3aa1030fa50c6ad3",
+  "decision": "V60_WHOLE_ACCOUNT_FLOATING_EQUITY_GATE_PASS",
+  "evaluated_bar_count": 1172191,
+  "fee_stress_endpoint_pnl_usd": 5458.387220997325,
+  "fee_stress_floating": {
+    "maximum_drawdown_usd": 335.34420669426163,
+    "peak_equity_pnl_usd": 1891.0851040855814,
+    "peak_time_utc": "2024-07-17T14:00:00+00:00",
+    "trough_addon_initial_risk_usd": -1.7763568394002505e-15,
+    "trough_equity_pnl_usd": 1555.7408973913198,
+    "trough_known_initial_risk_usd": -1.7763568394002505e-15,
+    "trough_open_addons": 0,
+    "trough_open_positions": 3,
+    "trough_time_utc": "2024-09-10T14:10:00+00:00"
+  },
+  "limitations": {
+    "boundary_bars_intentionally_conservative": true,
+    "m5_envelope_not_exact_tick_curve": true,
+    "mt5_portfolio_parity_required": true,
+    "native_r1_fee_evidence_complete": false,
+    "prospective_shadow_required": true
+  },
+  "market_data_audit": {
+    "bars": 1176817,
+    "first_bar_utc": "2010-01-01T00:00:00+00:00",
+    "last_bar_utc": "2026-06-30T23:55:00+00:00",
+    "legacy_ask_manifest_sha256": "140df640a17f1acf1566c32d36100a22f923a128303e57ddcb2164e94c15f346",
+    "legacy_bid_manifest_sha256": "65caffbba728eecf2c76fc82d2eab56a717b45e638c25e825977095e11222676"
+  },
+  "maximum_addon_initial_risk_usd": 29.951548525986297,
+  "maximum_known_initial_risk_usd": 58.838930438631294,
+  "maximum_open_addons": 2,
+  "maximum_open_positions": 10,
+  "passed": true,
+  "price_reconstruction_audit": {
+    "maximum_endpoint_error_usd": 1.1102230246251565e-16,
+    "maximum_entry_time_error_seconds": 0.0,
+    "maximum_exit_time_error_seconds": 0.0,
+    "maximum_source_pnl_error_usd": 0.0,
+    "maximum_source_risk_error_usd": 0.0,
+    "negative_implied_cost_trades": 0,
+    "r1_fee_stressed_trades": 444,
+    "source_counts": {
+      "R1_NATIVE_POSITION": 444,
+      "R2_DOWNTREND_DUKASCOPY_RAW_TICK": 118,
+      "R3_COMPRESSION_DUKASCOPY_RAW_TICK": 118,
+      "R4_CHOP_DUKASCOPY_RAW_TICK": 125,
+      "R5_TRANSITION_DUKASCOPY_RAW_TICK": 10,
+      "V25_DUKASCOPY_RAW_TICK": 111,
+      "V57_OVERLAY_DUKASCOPY_RAW_TICK": 610,
+      "V7_DUKASCOPY_RAW_TICK": 454,
+      "V8_DUKASCOPY_RAW_TICK": 204
+    },
+    "trades": 2194
+  },
+  "repo_source_hashes": {
+    "chop_rawtick": "f0dc5ccf622e1b9086031c26d174d3585f7e15f6e31401d6e06a8d08864cb793",
+    "expansion_rawtick": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a",
+    "regime_rawtick": "1616087181e0faa5d50883a44938bfd3e3665e33e7eee06d48a25b2c8900c93c",
+    "transition_rawtick": "a55cc7f7ec2088870b7b956c7148dcad01cad016a8ae6151720a60d13e586c9e",
+    "v25_rawtick": "1db6bbe6db9f317cee543a8e3cba9c6b82f078d5b0298cbde380d0f2db6e0fd9",
+    "v59_config": "214b94f1f97da88963191c6718ffdbe96b29b6258bfc32e11f3add5fc27a1a45",
+    "v59_core": "46c8ce5d90431581d6d16b03f210fae6955d707b8bc2d605b74bb5c84906987b",
+    "v59_result": "de6c1e050f431d7b396018f078fd7992c98328140a2d7c259ce17198e7970cac",
+    "v59_trades": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724",
+    "v7_rawtick": "313eaea3e3417604ba3e57a95368ce653f4630566bb47a41f6c72579d850f314"
+  },
+  "research_controls": {
+    "broker_action_authorized": false,
+    "demo_authorized": false,
+    "ea_consumption_authorized": false,
+    "live_authorized": false,
+    "metric_locked_before_floating_outcome": true,
+    "python_predictions_authorized": false,
+    "research_only": true,
+    "same_version_post_outcome_tuning_authorized": false
+  },
+  "result_sha256": "31c0af548e314b8cd0e935082f58fe088aa91c574b410320b28f3ffe4945af5a",
+  "schema_version": "xauusd_one_trade_per_day_floating_equity_v60_result"
+}

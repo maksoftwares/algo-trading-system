@@ -1,0 +1,37 @@
+{
+  "artifacts": {
+    "addon_decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_ADDON_DECISIONS.parquet",
+      "sha256": "08468054cabd37713208d7066a34af28ce2238944cab6ae98d2222e47ec90128"
+    },
+    "contract_lock": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_CONTRACT_LOCK.json",
+      "sha256": "ef55de593ddca4631feda3b7359f50fdf606d261cc6d8179e1ed7816f4d80e3b"
+    },
+    "corrected_core": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_CORRECTED_CORE.parquet",
+      "sha256": "3e83d790f366005de49c7815995f9fc681559b1eda8166410008533c6ebce654"
+    },
+    "r1_decisions": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_R1_DECISIONS.parquet",
+      "sha256": "0015131a8e6c3ef128a06b1aa0735c7717c278e3c4810b468e45fe171555df92"
+    },
+    "result_json": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_RESULT.json",
+      "sha256": "3c1bb1871fdf721dbe4bf91bef9f3109e7e44da4fdc0f9be821fcdbcc7e03a4d"
+    },
+    "result_markdown": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_RESULT.md",
+      "sha256": "3f1180a888ab9080feb2d342c5ee5999ec0b135553070aafb79cf72d09fc9d6d"
+    },
+    "trades": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_TRADES.parquet",
+      "sha256": "b84e694bf825d94fbff724d680690c60712c90b080f0d7375f7f6f98ee78201d"
+    },
+    "windows": {
+      "path": "xau-usd\\xauusd-fast-research\\one-trade-per-day-native-core-v58\\outputs\\ONE_TRADE_PER_DAY_NATIVE_CORE_V58_WINDOWS.csv",
+      "sha256": "349e5906d6b66805dae6fe30b76ca37308c2dd6da69c7036b5560b7c91ddff7a"
+    }
+  },
+  "schema_version": "xauusd_one_trade_per_day_native_core_v58_manifest"
+}
