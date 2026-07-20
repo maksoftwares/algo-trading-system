@@ -2488,3 +2488,31 @@ useful density and low drawdown, because realistic costs remove its edge and
 both chronological halves fail. No clock, horizon, threshold, direction, exit,
 cost, or quota rescue is allowed on the exposed family. V59/V60 remain the
 accepted control, while V24.1/V26/V27/V42/V67 continue forward collection.
+
+## V71 COMEX Round-Barrier Rejection - 2026-07-20
+
+V71 tested the previously unused hypothesis that mechanically fixed COMEX round
+prices concentrate liquidity and create a causal rejection signal. It
+registered exactly 1,000 spacing, window, probe, rejection, and opposite-flow
+policies before calibration.
+
+- Outcome-blind calibration had `199,361` material feature rows over `20`
+  eligible weekdays and selected `LS100__LB120__PR040__RJ080__FI25` at exactly
+  `0.80/day`, with nine longs and seven shorts.
+- The selected rule used USD `10` barriers, a `120`-second lookback, USD `0.40`
+  probe, USD `0.80` rejection, and at least `0.25` opposite flow.
+- Contract SHA-256:
+  `5d22a4a05669f5be0eb3a1d4618387e7431c3a75f20eeb56425d20071ba7e263`.
+- Development resolved `383` trades over `491` weekdays (`0.780041/day`), with
+  `203` longs and `180` shorts.
+- Base/stress net was USD `-238.78/-268.00`; base/stress PF was
+  `0.512/0.473`; first/second-half stress PF was `0.430/0.521`.
+- Positive months were `13.04%`, winner-removed stress net was USD `-284.24`,
+  closed stress DD was USD `282.92`, and bootstrap p-value was `1.0`.
+- Decision: `V71_DEVELOPMENT_FAIL_TERMINAL`. Audit SHA-256:
+  `f7fdcf5bdb9df9c6be308418f1e2c2f8d534d747b84dad4f16ed60d77a67f9b0`.
+
+Validation and exam remain sealed. Fixed round-barrier rejection is terminal;
+its breakout mirror, spacing, window, thresholds, direction, exit, costs, and
+quota may not be rescued on these outcomes. V59/V60 remain the accepted control
+and the forward collectors continue independently.

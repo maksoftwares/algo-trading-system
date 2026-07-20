@@ -1,0 +1,31 @@
+{
+  "broker_action_authorized": false,
+  "calibration_audit_sha256": "c021661663a5ee687f0a56ac09d712a9396da7bdccc07dab5040434e39054ef3",
+  "calibration_payload_sha256": "83f41b2315389b6b43e6b1370a2595e9d5d0372b5c681d25887644e441702b4b",
+  "campaign_id": "comex-round-barrier-rejection-v71",
+  "contract_sha256": "5d22a4a05669f5be0eb3a1d4618387e7431c3a75f20eeb56425d20071ba7e263",
+  "economic_outcomes_opened_at_lock": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_comex_round_barrier_rejection_v71_contract_lock",
+  "selected_candidates_sha256": "81a769fbea9e9a42e7de00ec537699cc026eafd90befbc25181e18ec8d10612a",
+  "selected_policy": {
+    "level_spacing_usd": 10.0,
+    "lookback_seconds": 120,
+    "minimum_opposite_flow_imbalance": 0.25,
+    "minimum_probe_usd": 0.4,
+    "minimum_rejection_usd": 0.8,
+    "policy_id": "LS100__LB120__PR040__RJ080__FI25"
+  },
+  "tracked_file_sha256": {
+    "PREREGISTRATION.md": "033df3dca881667ac99af5765ee86ba6d12476a0a4a3120edd76af33e2b6d971",
+    "README.md": "00bb55dcc069df678249b2a6bee0cd9c80b94610a230eebe5dc1a1e3e7647a35",
+    "config/comex_round_barrier_rejection_v71.json": "cc54c6c0314068e20eb26de506a8460d1224555328f3c2ae95d92d6568dcbc25",
+    "lock_contract.py": "5535f35bb1c027edaba50bb7af50a25bd0fced60d8595be8fe993f3c25f806be",
+    "prepare_calibration.py": "8f03f609ac87f577569330e3f21d03f0068a5dccf6755d68e48b2cba74323fb9",
+    "requirements.txt": "a7d2cd6c96224427f20e77c194ebb5c978fc3221d61bc305cd2867068f4b351a",
+    "run_stage.py": "e6973d23c7bf5dbacf82864ac8a52b32b75569f35a3bb95ac8b0e7854637f007",
+    "src/__init__.py": "d08c42563cdbdd2735fda802128ec3f3a5f7bb1a1e2cc14e5e3423d684f61300",
+    "src/round_barrier.py": "12d76617dc13dc758b1ba83732e368eb68d73ac425be1ddbc0bbe8eb76e70dfb",
+    "tests/test_round_barrier.py": "97815de63eaf9c477e0a55aff8f0bf1435f5a00f31cd3d13b1c1ca90acbce676"
+  }
+}

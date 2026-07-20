@@ -25,6 +25,7 @@ weekday. The final-year Core reference is 160 trades over 261 weekdays, or
 | COMEX large-versus-small aggressor-flow continuation | V32/V33 | 2.383 resolved trades/day, base PF 0.493, stress PF 0.455 | Terminal; validation/exam sealed, no mirror rescue |
 | COMEX exhausted-flow transition and sequence ignition | V44/V45/V68 | Continuations failed near PF 0.46; fixed anti-signal reached 0.967/day but stress PF 0.401 and USD 410.41 DD | Terminal in both directions; no threshold, quota, or mirror reuse |
 | Subsecond COMEX receipt-to-spot innovation | V69/V70 | Corrected lane reached 0.784/day and low DD, but base PF 1.054, stress PF 0.941, both halves below 1, p=1.0 | Terminal; no clock, horizon, threshold, exit, or cost rescue |
+| COMEX fixed round-price barrier rejection | V71 | 0.780/day, base PF 0.512, stress PF 0.473, both halves below 0.53, USD 282.92 DD | Terminal; no spacing, window, breakout mirror, exit, or threshold rescue |
 | Tokenized-gold and cross-venue divergence | PAXG and Capital-Dukascopy campaigns | No robust causal economic lane | No lag/threshold reuse on exposed history |
 | Capital quote exhaustion reversal | V30 | 5.9/day, base PF 0.7171, stress PF 0.5907 | Terminal; no tuning or mirror |
 | Capital quote absorption release | V31 | 5.4/day, base PF 0.4924, stress PF 0.3816 | Terminal; no tuning or mirror |
@@ -119,6 +120,25 @@ Decision: `V70_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
 Direct event-time COMEX-to-spot innovation is now exposed and retired. Further
 historical work must use a different causal variable, not a faster/slower
 version or a post-outcome exit modification.
+
+## V71 Fixed Round-Barrier Rejection Result
+
+V71 tested an untried causal variable: probes through mechanically fixed COMEX
+round prices followed by a completed rejection and opposite aggressor flow.
+Exactly 1,000 policies were registered, and outcome-blind calibration selected
+USD `10` barriers, a `120`-second window, USD `0.40` probe, USD `0.80`
+rejection, and `0.25` opposite-flow imbalance at exactly `0.80/day`.
+
+Development retained density at `383` resolved trades over `491` weekdays
+(`0.780041/day`) with `203` longs and `180` shorts, but the edge failed
+decisively. Base/stress PF was `0.512/0.473`, stress net was USD `-268.00`,
+first/second-half stress PF was `0.430/0.521`, positive months were `13.04%`,
+winner-removed stress net was USD `-284.24`, closed DD was USD `282.92`, and
+bootstrap p-value was `1.0`.
+
+Decision: `V71_DEVELOPMENT_FAIL_TERMINAL`. Validation and exam remain sealed.
+The barrier family cannot be mirrored into breakout continuation or retuned on
+the exposed outcomes. A successor needs another causal variable.
 
 ## Routes Not Counted As Solutions
 
