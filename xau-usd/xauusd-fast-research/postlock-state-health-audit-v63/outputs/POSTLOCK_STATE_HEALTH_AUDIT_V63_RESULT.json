@@ -1,0 +1,15 @@
+{
+  "schema_version": "xauusd_postlock_state_health_audit_v63",
+  "policy_count": 48,
+  "core_frequency_edge_dd_pass_count": 0,
+  "full_v62_gate_pass_count": 0,
+  "maximum_final_combined_frequency": 1.9425287356321839,
+  "maximum_final_frequency_with_positive_new_net": 1.7471264367816093,
+  "research_controls": {
+    "postlock_forensic_only": true,
+    "confirmation_and_final_are_exposed": true,
+    "policy_selection_authorized": false,
+    "execution_evidence": false,
+    "research_only": true
+  }
+}

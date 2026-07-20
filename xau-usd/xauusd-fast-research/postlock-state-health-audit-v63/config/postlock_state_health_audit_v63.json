@@ -1,0 +1,24 @@
+{
+  "schema_version": "xauusd_postlock_state_health_audit_v63",
+  "sources": {
+    "action_ledger": "xau-usd/xauusd-fast-research/high-frequency-expansion-v1/outputs/HIGH_FREQUENCY_EXPANSION_ACTION_LABELS.parquet",
+    "qualified_v57_candidates": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+    "frozen_v59_trades": "xau-usd/xauusd-fast-research/one-trade-per-day-broker-core-v59/outputs/ONE_TRADE_PER_DAY_BROKER_CORE_V59_TRADES.parquet",
+    "v61_config": "xau-usd/xauusd-fast-research/causal-unused-event-router-v61/config/causal_unused_event_router_v61.json",
+    "v61_router_module": "xau-usd/xauusd-fast-research/causal-unused-event-router-v61/src/router.py",
+    "v62_config": "xau-usd/xauusd-fast-research/two-trade-per-day-locked-router-v62/config/two_trade_per_day_locked_router_v62.json",
+    "v62_evaluator_module": "xau-usd/xauusd-fast-research/two-trade-per-day-locked-router-v62/src/evaluator.py"
+  },
+  "outputs": {
+    "directory": "outputs",
+    "policy_audit": "POSTLOCK_STATE_HEALTH_AUDIT_V63_POLICIES.csv",
+    "result": "POSTLOCK_STATE_HEALTH_AUDIT_V63_RESULT.json"
+  },
+  "research_controls": {
+    "postlock_forensic_only": true,
+    "confirmation_and_final_are_exposed": true,
+    "policy_selection_authorized": false,
+    "execution_evidence": false,
+    "research_only": true
+  }
+}

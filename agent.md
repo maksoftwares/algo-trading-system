@@ -6,7 +6,7 @@ Updated: `2026-07-20`
 
 - Base commit: `006824cde421ea61a0bcdb074804f9ccf95c17a9`
 - Current operational branch: `codex/xau-independent-specialists-v1`
-- Latest pushed research implementation checkpoint before this handoff update: `06d00a97`
+- Latest pushed research implementation checkpoint before this handoff update: `41367ca7`
 - Scope: A1 XAUUSD repository research, exact-MT5 Strategy Tester evidence, offline analysis, and shadow-only preparation.
 - This file replaces the prior oversized handoff. If an older statement conflicts with the documents below, the documents below control.
 
@@ -2255,3 +2255,46 @@ The result does not authorize Python prediction, EA consumption, demo/live attac
 or broker action. Remaining execution gates are MT5 portfolio parity and genuinely
 new sealed prospective shadow evidence. The two-trades/day research phase must be
 additive and separately preregistered; V59/V60 are frozen controls.
+
+## V61-V64 Two-Trade-Per-Day Expansion Audit - 2026-07-20
+
+V59/V60 remained immutable while the first additive two-trades/day research paths
+were tested. No rejected experiment removed, resized, or rewrote a frozen trade.
+
+- A capacity-only replay proved that the complete existing qualified V57 pool can
+  reach at most `1.659/day` in the final year even with three add-on positions,
+  four daily entries, and USD `75` add-on risk. Existing sleeve capacity therefore
+  cannot produce two trades/day.
+- The complete width-one through width-four interpretable census evaluated
+  `13,362` four-condition rules after `1,698` narrower rules. Every stable passer
+  was a duplicate or narrower expression of V7, V8, or V57; no independent rule
+  remained.
+- V61 tested 48 development-only causal state-health policies over events not
+  qualified by V57. Several approached or crossed `2/day` in development-2, but
+  none passed the original full development gate. The strongest honest near-pass
+  reached `2.038/day`, new-trade PF `1.434`, combined PF `1.558`, and USD `268.21`
+  closed DD.
+- V62 locked exactly that H4-ADX state policy before opening confirmation and
+  final. Confirmation was strong at `2.674/day`, USD `1,955.82` net, PF `1.767`,
+  and USD `280.84` closed DD. The final-year new lane then failed at only `43`
+  trades, USD `-190.51`, and PF `0.294`; combined frequency was `1.559/day`.
+  V62 is rejected. Its circuit preserved all V59 trades and combined final PF
+  remained `1.818` with USD `166.02` closed DD.
+- V63 opened all 48 already exposed policies only as a post-lock architecture
+  audit. Zero passed. The maximum final combined frequency was `1.943/day`, but
+  its add-on lost USD `442.20` at PF `0.431`. The maximum final frequency with a
+  positive add-on was only `1.747/day`. Causal state-health routing over this
+  event family is retired for frequency expansion.
+- V64 tested the independent counter-direction action ledger: `48,811`
+  broker-feasible counter-route rows, bounded interpretable rule widths one to
+  four, V57 timestamps excluded, and final outcomes not loaded for selection.
+  Zero rules survived both development-2 and confirmation PF, winner-removal,
+  sample, and frequency gates.
+
+The current accepted result is still V59/V60: final-year `1.395/day`, USD
+`2,537.35` net, PF `1.976`, USD `152.59` closed DD, and USD `419.18` conservative
+buffered floating DD under extra fee stress. The requested first milestone is
+achieved. Two trades/day is not achieved and must not be claimed by relaxing edge
+or drawdown requirements. The next expansion must use a genuinely new mechanical
+event family or prospective data, not another threshold variation on the retired
+action-ledger routers.

@@ -1,0 +1,65 @@
+{
+  "schema_version": "xauusd_counterdirection_rule_discovery_v64",
+  "selection_cutoff_exclusive_utc": "2025-07-01T00:00:00Z",
+  "sources": {
+    "bidirectional_actions": {
+      "path": "xau-usd/xauusd-fast-research/bidirectional-candidate-actions-v1/outputs/BIDIRECTIONAL_CANDIDATE_ACTIONS_V1.parquet",
+      "sha256": "12d9615a31227f69dc775dccb708fea39997eec80493447c73aab9ccc141e748"
+    },
+    "family_module": {
+      "path": "xau-usd/xauusd-fast-research/interpretable-family-replication-v8/src/family.py",
+      "sha256": "a79e34c902d9cca72ceb9d1c00e77f7e8d8e338c81d779a5b1e5aed3a27eb9d7"
+    },
+    "qualified_v57_candidates": {
+      "path": "xau-usd/xauusd-fast-research/one-trade-per-day-unified-portfolio-v57/outputs/ONE_TRADE_PER_DAY_UNIFIED_PORTFOLIO_V57_CANDIDATES.parquet",
+      "sha256": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9"
+    }
+  },
+  "candidate_filter": {
+    "counter_direction_only": true,
+    "exclude_all_v57_signal_timestamps": true,
+    "maximum_risk_usd": 30.0,
+    "require_current_account_feasible": true
+  },
+  "rule_features": [
+    "action_id",
+    "mechanism",
+    "direction",
+    "regime",
+    "session",
+    "h1adx",
+    "h4adx",
+    "atrstate",
+    "dirmove",
+    "spreadstate",
+    "weekday"
+  ],
+  "rule_widths": [1, 2, 3, 4],
+  "required_feature": "action_id",
+  "forward_windows": {
+    "D2": ["2022-07-01T00:00:00Z", "2024-07-01T00:00:00Z", 50],
+    "F4": ["2024-07-01T00:00:00Z", "2025-07-01T00:00:00Z", 30]
+  },
+  "forward_gates": {
+    "minimum_pf": 1.15,
+    "minimum_final_frequency": 0.15,
+    "top_winners_removed": 5
+  },
+  "execution": {
+    "maximum_open_positions": 1,
+    "maximum_entries_per_utc_date": 2
+  },
+  "outputs": {
+    "directory": "outputs",
+    "rules": "COUNTERDIRECTION_RULE_DISCOVERY_V64_RULES.csv",
+    "trades": "COUNTERDIRECTION_RULE_DISCOVERY_V64_TRADES.parquet",
+    "result": "COUNTERDIRECTION_RULE_DISCOVERY_V64_RESULT.json"
+  },
+  "research_controls": {
+    "development_and_confirmation_only": true,
+    "final_outcomes_loaded_for_selection": false,
+    "final_window_exposed_elsewhere": true,
+    "research_only": true,
+    "execution_authorized": false
+  }
+}

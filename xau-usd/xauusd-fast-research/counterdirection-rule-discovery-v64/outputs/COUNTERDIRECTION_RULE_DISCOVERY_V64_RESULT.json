@@ -1,0 +1,13 @@
+{
+  "schema_version": "xauusd_counterdirection_rule_discovery_v64",
+  "screened_counter_action_rows": 48811,
+  "surviving_unique_rules": 0,
+  "selection_cutoff_exclusive_utc": "2025-07-01 00:00:00+00:00",
+  "research_controls": {
+    "development_and_confirmation_only": true,
+    "final_outcomes_loaded_for_selection": false,
+    "final_window_exposed_elsewhere": true,
+    "research_only": true,
+    "execution_authorized": false
+  }
+}

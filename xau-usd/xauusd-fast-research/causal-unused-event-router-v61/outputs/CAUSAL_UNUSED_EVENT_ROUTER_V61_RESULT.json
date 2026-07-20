@@ -1,0 +1,24 @@
+{
+  "schema_version": "xauusd_causal_unused_event_router_v61",
+  "development_cutoff_exclusive_utc": "2024-07-01 00:00:00+00:00",
+  "verified_sources": {
+    "action_ledger": "a5a765fa70da99e7162377ac893546b4195d9e43bdad1cd19cb4006314c7c21a",
+    "qualified_v57_candidates": "05a30d5ba24fefe728e39bb4d85c38d2f82d35cdfb45eb0dc59e71ef26badad9",
+    "frozen_v59_trades": "532de14e93955e1a3d4284475e692c1749e98df042c5891bb8350f856ef12724"
+  },
+  "policy_count": 48,
+  "passing_policy_count": 0,
+  "selected_policy_id": null,
+  "selected_policy": null,
+  "research_controls": {
+    "development_only": true,
+    "confirmation_or_final_outcomes_loaded_for_selection": false,
+    "frozen_v59_trade_removal_authorized": false,
+    "claims_pristine_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false
+  }
+}

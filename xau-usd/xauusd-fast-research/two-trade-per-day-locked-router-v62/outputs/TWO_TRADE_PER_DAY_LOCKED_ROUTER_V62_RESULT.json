@@ -1,0 +1,83 @@
+{
+  "schema_version": "xauusd_two_trade_per_day_locked_router_v62",
+  "contract_sha256": "21ef15e7107ebae62f924f245dc413d55762044c60306c51cc2affd5d797c714",
+  "locked_policy": {
+    "policy_id": "S3_W20_100_PF1P15",
+    "state_schema": [
+      "mechanism",
+      "action_id",
+      "h4adx"
+    ],
+    "short_window": 20,
+    "long_window": 100,
+    "minimum_profit_factor": 1.15,
+    "maximum_risk_usd": 30.0,
+    "one_action_per_event": true,
+    "exclude_all_v57_qualified_events": true,
+    "selection_rule": "Highest minimum development new-trade PF among policies reaching 2/day in development_2 with combined PF >= 1.5 and combined closed DD <= 280"
+  },
+  "candidate_events": 4721,
+  "selected_new_trades": 1669,
+  "frozen_v59_trades": 2194,
+  "frozen_v59_trades_preserved": true,
+  "gate_results": [
+    {
+      "window": "development_2",
+      "passed": false,
+      "checks": {
+        "minimum_new_trades": true,
+        "minimum_new_profit_factor": true,
+        "minimum_new_net_usd": true,
+        "minimum_new_top5_removed_net_usd": true,
+        "minimum_combined_trades_per_weekday": true,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_net_usd": true,
+        "maximum_combined_closed_drawdown_usd": true,
+        "minimum_combined_positive_month_share": false
+      }
+    },
+    {
+      "window": "confirmation",
+      "passed": true,
+      "checks": {
+        "minimum_new_trades": true,
+        "minimum_new_profit_factor": true,
+        "minimum_new_net_usd": true,
+        "minimum_new_top5_removed_net_usd": true,
+        "minimum_combined_trades_per_weekday": true,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_net_usd": true,
+        "maximum_combined_closed_drawdown_usd": true,
+        "minimum_combined_positive_month_share": true
+      }
+    },
+    {
+      "window": "final",
+      "passed": false,
+      "checks": {
+        "minimum_new_trades": false,
+        "minimum_new_profit_factor": false,
+        "minimum_new_net_usd": false,
+        "minimum_new_top5_removed_net_usd": false,
+        "minimum_combined_trades_per_weekday": false,
+        "minimum_combined_profit_factor": true,
+        "minimum_combined_net_usd": true,
+        "maximum_combined_closed_drawdown_usd": true,
+        "minimum_combined_positive_month_share": true
+      }
+    }
+  ],
+  "passed": false,
+  "research_controls": {
+    "policy_selected_from_development_only": true,
+    "single_policy_opened_on_confirmation_and_final": true,
+    "frozen_v59_trade_removal_authorized": false,
+    "same_version_post_outcome_tuning_authorized": false,
+    "claims_pristine_holdout": false,
+    "research_only": true,
+    "python_predictions_authorized": false,
+    "ea_consumption_authorized": false,
+    "demo_authorized": false,
+    "live_authorized": false
+  }
+}
