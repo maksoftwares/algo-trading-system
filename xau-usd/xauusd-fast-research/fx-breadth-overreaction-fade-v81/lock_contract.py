@@ -82,6 +82,10 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
         != calibration_source_audit.get("audit_sha256")
     ):
         raise ValueError("V81 calibration source audit is invalid")
+    if source_audit.get("instrument_evidence") != calibration_source_audit.get(
+        "instrument_evidence"
+    ):
+        raise ValueError("V81 instrument evidence changed after calibration")
     if calibration.get("source_audit_sha256") != sha256_file(
         calibration_source_path
     ):
@@ -116,6 +120,7 @@ def build_contract(config: Mapping[str, Any]) -> dict[str, Any]:
         "package_files": [record(path, ROOT) for path in package_paths],
         "calibration_source_audit": record(calibration_source_path, ROOT),
         "development_source_audit": record(source_path, ROOT),
+        "instrument_evidence": source_audit["instrument_evidence"],
         "calibration_audit": record(calibration_path, ROOT),
         "calibration_features": record(feature_path, ROOT),
         "calibration_grid": record(grid_path, ROOT),

@@ -86,6 +86,7 @@ def verify_stage_source_audit(
         or audit.get("symbols") != config["source"]["symbols"]
         or audit.get("first_month") != first_month
         or audit.get("last_month") != last_month
+        or audit.get("instrument_evidence") != contract["instrument_evidence"]
         or bool(audit.get("paid_data_used"))
         or bool(audit.get("economic_outcomes_opened"))
     ):
