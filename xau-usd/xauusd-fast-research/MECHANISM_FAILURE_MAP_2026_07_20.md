@@ -195,6 +195,28 @@ All later stages remain sealed. V74/V75 show that this raw DXY-lag event is not
 a hidden reversible edge under the locked tradable geometry. Both directions
 and all associated threshold, timing, or exit rescues are retired.
 
+## V76 Raw Treasury-Bond-to-XAU Event-Time Result
+
+V76 tested a new raw event-time input: a U.S. Treasury bond price shock followed
+by the expected same-direction XAU catch-up. Its source audit covered `180`
+frozen symbol-months, `131,424` hourly rows, and `445,583,861` declared ticks
+through June 2026. Outcome-blind calibration registered `1,000` policies and
+selected a two-second, 0.5 bps source-move, 0.5 bps innovation, zero-response,
+five-quote policy at `9/9 = 1.0/day`, with seven long and two short candidates.
+
+Development resolved `730` trades over `828` eligible weekdays
+(`0.881643/day`), split exactly `365` long and `365` short. Base/stress net was
+USD `-512.26/-567.63`; base/stress PF was `0.3301/0.2952`;
+first/second-half stress PF was `0.2233/0.3668`; no month was positive;
+winner-removed stress net was USD `-584.37`; stressed DD was USD `567.88`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V76_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`56151a77385d55c6a19c577016075fa92b17db137e845695b472bd5e78b0f681`.
+Later stages remain sealed. No event threshold or execution rescue is allowed.
+One fixed direction inversion may begin only on the unopened July 2022 period;
+after that test, the raw Treasury-bond family is terminal in both directions.
+
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 
 V72 introduced a materially new causal input: raw, synchronized Dukascopy
