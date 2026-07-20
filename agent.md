@@ -2681,3 +2681,24 @@ sealed. V78/V79 retire both directions of immediate entry after the fixed raw FX
 consensus event. No same-family mirror, threshold, response, horizon, immediate
 entry, exit, cost, or quota rescue is permitted. V59/V60 remain immutable and
 accepted.
+
+## V80 FX Consensus Transmission-Retracement - 2026-07-20
+
+V80 inherited V78's locked FX-consensus event but required XAU to transmit in
+the implied direction and then retrace before a candidate could exist.
+Outcome-blind July-August 2022 calibration registered exactly 100 timing
+policies and selected `TR150__RF075__MW010` at `43/44 = 0.977273/day`, split 21
+long and 22 short. Contract SHA-256:
+`2a0a7f897440c71c0dec6caa1b010f11cca536755ca880456d5d986ae375dab5`.
+
+Fresh development from September 2022 through June 2023 resolved `202` trades
+over `214` eligible weekdays (`0.943925/day`), split 105 long and 97 short.
+Base/stress net was USD `-132.81/-149.24`; base/stress PF was
+`0.4813/0.4417`; first/second-half stress PF was `0.3559/0.5198`; positive-day
+share was `27.10%`; no month was positive; winner-removed stress net was USD
+`-173.83`; stressed DD was USD `150.33`; and bootstrap p-value was `1.0`.
+
+Decision: `V80_DEVELOPMENT_FAIL_TERMINAL`. Validation remains sealed. Do not
+tune or rescue V80. V78-V80 retire the locked FX-consensus source event under
+immediate, mirrored, and fast transmission-retracement interpretations. V59/V60
+remain immutable and accepted; the forward collectors continue independently.

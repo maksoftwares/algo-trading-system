@@ -296,6 +296,28 @@ The persistent, directionally symmetric loss permits one new preregistered
 anti-signal hypothesis, but that successor must keep the event policy fixed,
 invert direction exactly once, and begin only in the unopened July 2021 period.
 
+## V80 FX Consensus Transmission-Retracement Result
+
+V80 tested a materially different entry clock after the locked V78 source
+event. XAU first had to transmit in the FX-implied direction and then retrace a
+fixed fraction before a candidate could exist. Outcome-blind July-August 2022
+calibration registered 100 policies and selected a 1.50 bps transmission, 75%
+retracement, ten-second policy at `43/44 = 0.977273/day`, with 21 long and 22
+short candidates.
+
+Fresh development resolved `202` trades over `214` eligible weekdays
+(`0.943925/day`), split 105 long and 97 short. Base/stress net was USD
+`-132.81/-149.24`; base/stress PF was `0.4813/0.4417`; first/second-half stress
+PF was `0.3559/0.5198`; no month was positive; winner-removed stress net was USD
+`-173.83`; stressed DD was USD `150.33`; and bootstrap p-value was `1.0`.
+
+Decision: `V80_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`2a0a7f897440c71c0dec6caa1b010f11cca536755ca880456d5d986ae375dab5`.
+Validation remains sealed. V78-V80 show that neither immediate entry, a fixed
+direction inversion, nor this predeclared fast transmission-retracement clock
+creates positive expectancy from the locked FX-consensus event. This mechanism
+and its timing, thresholds, direction, exits, costs, and quota are retired.
+
 ## Routes Not Counted As Solutions
 
 - Splitting one position into several tickets does not create independent
