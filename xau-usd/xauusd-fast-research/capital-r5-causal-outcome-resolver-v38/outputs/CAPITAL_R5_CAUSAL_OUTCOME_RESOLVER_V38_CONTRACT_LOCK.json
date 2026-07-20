@@ -1,0 +1,98 @@
+{
+  "broker_action_authorized": false,
+  "component_attempts": [
+    23925,
+    24877,
+    24995,
+    25048
+  ],
+  "contract_sha256": "ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd",
+  "dependencies": {
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/config/capital_r5_transition_forward_v35.json": {
+      "bytes": 7013,
+      "sha256": "0a6ed6f97fc70f1aa73a3e8cf9ef2286257e958ee4ddcb3895d0fa8132814f67"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/outputs/CAPITAL_R5_TRANSITION_FORWARD_V35_CONTRACT_LOCK.json": {
+      "bytes": 1888,
+      "sha256": "a0cb8eb834c6749fb6342ebdc4158048497a25aaf717d9a15b124a8b9cfa53ff"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/run_shadow.py": {
+      "bytes": 8946,
+      "sha256": "f45e35634bbf96024f58d13b3b293ef78d345990c7326bb880dabd9d159c6f78"
+    },
+    "xau-usd/xauusd-fast-research/capital-r5-transition-forward-v35/src/transition_forward.py": {
+      "bytes": 22058,
+      "sha256": "5c15dcafdeb8288f81e44051fdb9cd91986ade2c006466a7937f976ad71227b1"
+    },
+    "xau-usd/xauusd-fast-research/macro-transition-rawtick-confirmation-v3/src/transition.py": {
+      "bytes": 10700,
+      "sha256": "d255c2424fbfeabd8d0a8e2f498a6e5ca97db469afdbe358dc43feac73e53b59"
+    },
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/config/transition_weighted_rawtick_confirmation_v9.json": {
+      "bytes": 4575,
+      "sha256": "350524f9e5ef6a3deb75edf297e1ab169b46943bf343f43dc905b7b299576af3"
+    },
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_CANDIDATES.parquet": {
+      "bytes": 53126,
+      "sha256": "25742cdf86c4634e447c6aed59c8251ead09f5e04f7a80a173eb9c518ef1742f"
+    },
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/outputs/TRANSITION_WEIGHTED_RAWTICK_V9_COMPONENT_TRADES.parquet": {
+      "bytes": 94941,
+      "sha256": "22b13a7349d9c77e7ee31396c1155786e31a1cccfe2a1331514413c3d92c584c"
+    },
+    "xau-usd/xauusd-fast-research/transition-weighted-rawtick-confirmation-v9/src/confirmation.py": {
+      "bytes": 5620,
+      "sha256": "383aca26f8e2eb778adb57e9aeddd0b0dad5868563fdeecd002c1ba1dd778850"
+    }
+  },
+  "forward_start_inclusive_utc": "2026-07-20T00:00:00Z",
+  "package_files": {
+    ".gitattributes": {
+      "bytes": 92,
+      "sha256": "d53bdad2629116ac6fbc490907a2d07dde729f8f5993dbc3d1f9a028ae82e4b4"
+    },
+    "PREREGISTRATION.md": {
+      "bytes": 3803,
+      "sha256": "6199922b8321482a115890c959e927796f9c353b17b2ef3bee09cf9c84814bba"
+    },
+    "README.md": {
+      "bytes": 725,
+      "sha256": "e1f08747bb53c45854b760cbd67d4e97cfae161ee57a14c0f984df7b384a113b"
+    },
+    "config/capital_r5_causal_outcome_resolver_v38.json": {
+      "bytes": 4140,
+      "sha256": "6d504634571276c793ab4c48dcb0d74c95c0dba850dee5b74d1719a606b0f7fb"
+    },
+    "lock_contract.py": {
+      "bytes": 2088,
+      "sha256": "29c07a80036d90243648c56a3613d1f296af3920d0a229546f3e73206cb170f5"
+    },
+    "requirements.txt": {
+      "bytes": 33,
+      "sha256": "026f07e75704396c46dfb8f7942ff05b051bf005c81daae43c3b617d34f87ca7"
+    },
+    "run_resolver.py": {
+      "bytes": 8070,
+      "sha256": "c6d58ee9c5d6f5c312d95cca8e432e741ccffef2d80f5aa03f2da53f97c0a571"
+    },
+    "src/__init__.py": {
+      "bytes": 81,
+      "sha256": "1062dd2b02040bf8dab44e82994ee168b825d0f9a0d879dc442cd8f9f27cc76b"
+    },
+    "src/resolver.py": {
+      "bytes": 39695,
+      "sha256": "47e92cc2fe8fdb262311f6ae5ff63e95b32274d256809ea2ba4e514784384571"
+    },
+    "tests/test_resolver.py": {
+      "bytes": 13882,
+      "sha256": "000f5ba9e4a6d23b2c0d6464a5a3ae85d58fca68573e3161479762c0140098f6"
+    },
+    "verify_historical_semantics.py": {
+      "bytes": 2430,
+      "sha256": "a026a42529145cfa6c85a45e19c53ebf07533266da196730a683ee0f7e95e841"
+    }
+  },
+  "schema_version": "xauusd_capital_r5_causal_outcome_resolver_v38",
+  "v35_contract_sha256": "23a0c31a6d6466bac93362945947b8022ae466583f02a26a24c77e69ee24e7fd",
+  "v35_rule_dependency_sha256": "863b9f19635b7a7a120a51c37d80770da90cc9ee7a913cf01b348ba595642ec0"
+}

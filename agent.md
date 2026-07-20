@@ -1474,9 +1474,11 @@ V35 emits current component and router candidate facts only. It uses frozen
 component outcomes whose exits precede each candidate. Updating the 180-day
 router with new prospective component outcomes is intentionally unauthorized
 until a separate causal resolver is preregistered and locked. This limitation
-does not affect the initial candidate clock, but it must be closed before claiming
-long-horizon exact online-router continuity. V35 opens no economic outcomes and
-has no broker-action path. Same-period shared-account economics and the 3-4
+does not affect the initial candidate clock. V38 now provides the separately
+locked causal component resolver, but a successor router must still consume only
+outcomes causally known before each future candidate before exact long-horizon
+online-router continuity can be claimed. V35 opens no economic outcomes and has
+no broker-action path. Same-period shared-account economics and the 3-4
 trades/day proof remain open.
 
 ## V36 Macro-Informed Bidirectional Router - 2026-07-20
@@ -1555,3 +1557,41 @@ V37 does not deduplicate clocks, resolve shared-account concurrency, calculate a
 exit, open P/L, admit a strategy, or call a broker API. The untouched V24.1/V26
 validation path and same-period Core candidate collection remain the authoritative
 route forward.
+
+## V38 R5 Causal Prospective Outcome Resolver - 2026-07-20
+
+`capital-r5-causal-outcome-resolver-v38` closes the missing R5 component-label
+engineering path without modifying the locked V35 candidate adapter or the
+frozen Core. It consumes V35's append-only component candidate facts and the
+Capital quote CSV ledger only.
+
+- Contract SHA-256:
+  `ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd`.
+- Frozen components: attempts `23925`, `24877`, `24995`, and `25048`.
+- Historical audit: all 799 V9 candidates retained exact
+  `signal_time == scheduled_entry_time` parity and all four component identities.
+- Execution semantics: first timely quote, side-correct bid/ask, observed stop
+  slippage, locked target fill, fixed horizon, spread/risk gates, ticket and
+  holding costs, stress slippage, component overlap, and the four-trade UTC-day
+  cap all remain frozen from V9.
+- Candidate and resolution ledgers have independent persisted append-only prefix
+  hashes. Mutation, truncation, partial output, dependency changes, malformed
+  quotes, or any enabled authority flag fails closed.
+- Focused tests: 11 passed. Ruff: passed. A complete synthetic outcome is exactly
+  equal to the frozen V9 execution function; pending windows, missing-data
+  cutoffs, stop/target/horizon behavior, overlap, daily cap, idempotence, source
+  mutation, ledger mutation, and authority rejection are covered.
+- First real cycle: `ACTIVE_READ_ONLY_CAUSAL_RESOLVER`, zero V35 candidates, zero
+  resolutions, no aggregate economics opened, and all execution flags false.
+- Capital quote ledger observed through `2026-07-20T03:50:55.516Z` on the first
+  persistent cycle.
+- Persistent hidden parent PID: `12756`; current Python child PID: `38316`;
+  poll interval: 300 seconds.
+- Runtime directory:
+  `C:\MT5PortableProspectiveCollector\MQL5\Files\r5_transition_outcomes_v38`.
+
+V38 records individual prospective component outcomes but does not publish an
+aggregate result, tune R5, train a model, route broker orders, or admit the
+sleeve. A separately locked successor router/evaluator must use each label only
+after its recorded causal knowledge time and preserve the 20-weekday validation
+plus 20-weekday confirmation boundary.

@@ -1,0 +1,31 @@
+{
+  "aggregate_economics_opened": false,
+  "broker_action_authorized": false,
+  "candidate_rows": 799,
+  "component_attempts": [
+    23925,
+    24877,
+    24995,
+    25048
+  ],
+  "contract_sha256": "ef58627347cc0d10775f1d1cc0bd152abcab995bbc7a2e3ae844e9f7cd17cccd",
+  "execution_config": {
+    "holding_cost_per_24h_usd": 0.35,
+    "horizon_fill_policy": "FIRST_EXECUTABLE_TICK_AT_OR_AFTER_DEADLINE",
+    "maximum_entry_gap_minutes": 20,
+    "maximum_entry_spread_r": 0.15,
+    "maximum_horizon_gap_hours": 72,
+    "maximum_research_risk_usd": 50.0,
+    "maximum_trades_per_component_utc_day": 4,
+    "maximum_trades_per_portfolio_utc_day": 4,
+    "ounces_at_lot_size": 1.0,
+    "stop_fill_policy": "OBSERVED_EXECUTABLE_TICK_ON_CROSS",
+    "stress_slippage_r": 0.05,
+    "target_fill_policy": "LOCKED_TARGET_PRICE_ON_FIRST_CROSS",
+    "ticket_cost_usd": 0.3
+  },
+  "schema_version": "xauusd_capital_r5_causal_outcome_semantic_parity_v38",
+  "semantic_parity_passed": true,
+  "signal_equals_entry_rows": 799,
+  "v35_historical_candidate_rows": 799
+}
