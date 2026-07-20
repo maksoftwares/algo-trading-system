@@ -6,8 +6,8 @@ This amendment exists before calibration or economic outcomes are opened.
 Source evidence is audited separately for calibration, development,
 confirmation, validation, exam, forward confirmation, and forward final.
 
-- Calibration: January 2019.
-- Development: February 2019 through June 2021.
+- Calibration: February 2019.
+- Development: March 2019 through June 2021.
 - Confirmation: July 2021 through June 2022.
 - Validation: July 2022 through June 2023.
 - Exam: July 2023 through June 2024.

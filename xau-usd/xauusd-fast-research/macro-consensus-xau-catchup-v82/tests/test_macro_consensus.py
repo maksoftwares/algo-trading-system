@@ -161,8 +161,8 @@ def test_source_audits_are_sliced_on_registered_stage_boundaries() -> None:
         "forward_final",
         "full",
     )
-    assert audit_month_bounds(config, "calibration") == ("2019-01", "2019-01")
-    assert audit_month_bounds(config, "development") == ("2019-02", "2021-06")
+    assert audit_month_bounds(config, "calibration") == ("2019-02", "2019-02")
+    assert audit_month_bounds(config, "development") == ("2019-03", "2021-06")
     assert audit_month_bounds(config, "confirmation") == ("2021-07", "2022-06")
     assert audit_month_bounds(config, "validation") == ("2022-07", "2023-06")
     assert audit_month_bounds(config, "exam") == ("2023-07", "2024-06")
@@ -171,7 +171,7 @@ def test_source_audits_are_sliced_on_registered_stage_boundaries() -> None:
         "2025-06",
     )
     assert audit_month_bounds(config, "forward_final") == ("2025-07", "2026-06")
-    assert audit_month_bounds(config, "full") == ("2019-01", "2026-06")
+    assert audit_month_bounds(config, "full") == ("2019-02", "2026-06")
     assert source_audit_decision("development") == (
         "V82_DEVELOPMENT_SOURCE_AUDIT_PASS"
     )

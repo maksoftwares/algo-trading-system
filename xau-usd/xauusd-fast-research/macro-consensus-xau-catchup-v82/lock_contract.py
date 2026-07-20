@@ -25,6 +25,7 @@ PACKAGE_FILES = (
     "README.md",
     "PREREGISTRATION.md",
     "PRELOCK_STAGED_SOURCE_AMENDMENT.md",
+    "PRELOCK_CALIBRATION_COVERAGE_CORRECTION.md",
     "SHARED_PORTFOLIO_PRECOMMITMENT.md",
     "requirements.txt",
     "config/macro_consensus_xau_catchup_v82.json",

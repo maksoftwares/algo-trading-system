@@ -26,7 +26,7 @@ single-source event. V82 does not retune or mirror any rejected event.
 
 ## Outcome-Blind Calibration
 
-January 2019 registers exactly `4 x 5 x 5 x 5 x 2 = 1,000` policies:
+February 2019 registers exactly `4 x 5 x 5 x 5 x 2 = 1,000` policies:
 
 - horizons: 2, 5, 10, and 20 seconds;
 - minimum DXY move: 0.05, 0.10, 0.15, 0.20, or 0.30 bps;

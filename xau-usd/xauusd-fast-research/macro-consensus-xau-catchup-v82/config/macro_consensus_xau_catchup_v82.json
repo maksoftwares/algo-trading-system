@@ -4,7 +4,7 @@
   "source": {
     "storage_environment_variable": "DUKASCOPY_TICK_DATA_ROOT",
     "default_storage_root": "C:/DukascopyTickDataFoundationV1",
-    "first_month": "2019-01",
+    "first_month": "2019-02",
     "last_month": "2026-06",
     "symbols": {
       "DOLLARIDXUSD": {"source_code": "DOLLAR.IDX-USD", "price_scale": 3},
@@ -59,8 +59,8 @@
     "maximum_candidates_per_utc_date": 1
   },
   "calibration": {
-    "start": "2019-01-01T00:00:00Z",
-    "end": "2019-02-01T00:00:00Z",
+    "start": "2019-02-01T00:00:00Z",
+    "end": "2019-03-01T00:00:00Z",
     "horizon_ms_grid": [2000, 5000, 10000, 20000],
     "minimum_dxy_move_bps_grid": [0.05, 0.10, 0.15, 0.20, 0.30],
     "minimum_bond_move_bps_grid": [0.05, 0.10, 0.15, 0.20, 0.30],
@@ -74,7 +74,7 @@
     "target_candidates_per_full_weekday": 0.8
   },
   "splits": {
-    "development": ["2019-02-01T00:00:00Z", "2021-07-01T00:00:00Z"],
+    "development": ["2019-03-01T00:00:00Z", "2021-07-01T00:00:00Z"],
     "confirmation": ["2021-07-01T00:00:00Z", "2022-07-01T00:00:00Z"],
     "validation": ["2022-07-01T00:00:00Z", "2023-07-01T00:00:00Z"],
     "exam": ["2023-07-01T00:00:00Z", "2024-07-01T00:00:00Z"],
