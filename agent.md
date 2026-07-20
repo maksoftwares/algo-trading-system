@@ -69,7 +69,9 @@ classification may use the legacy FIFO pair.
 
 Attribution status: `REPAIR_REQUIRED_NATIVE_POSITION_JOIN`.
 
-Frozen metrics: `678` trades; `51.03%` win rate; `2.6082` realized W/L; `2.7182` profit factor; `+$9,640.05` net; `+$9,436.65` stress net at `-$0.30/ticket`; `+$764.92` recent-three-month net; `$889.69` maximum closed drawdown; `26` positive months; approximately `21.28%` active weekdays.
+Frozen uncapped diagnostic metrics: `678` trades; `51.03%` win rate; `2.6082` realized W/L; `2.7182` profit factor; `+$9,640.05` net; `+$9,436.65` stress net at `-$0.30/ticket`; `+$764.92` recent-three-month net; `$889.69` maximum closed drawdown; `26` positive months; approximately `21.28%` active weekdays. The `$889.69` curve is retained for audit history only and is not a deployable portfolio result.
+
+Current drawdown status: V43 attributes the `$889.69` episode to R1 position stacking. The pre-existing limit of two concurrent R1 positions and one R1 entry per UTC day reduces one-year closed drawdown to `$259.53`, but exact bid/ask replay still measures `$521.21` floating drawdown. That is `17.38%` of the reference `$2,998.45` equity and fails the locked `15%` ceiling. Execution therefore remains fail-closed; the capped R1 lane needs at least `$4,343.45` equity with the frozen buffer, or a broker that can express the calculated `0.0069` lot size.
 
 Frozen ledger: [current R1+R2 baseline](xau-usd/xauusd-phase1/outputs/reports/A1_XAU_R2_CONTINUATION_SHORT_V4_VOLATILITY_GATE_EXACT_20260709_current_r1_best_r2_pullback_plus_r2_impulse_body45_atr45_daily_loss10_KEPT.csv)
 
