@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 import urllib.error
 from urllib.parse import urlparse
 
@@ -75,9 +76,12 @@ def main() -> int:
     parser.add_argument("--start", default="2018-07")
     parser.add_argument("--end", default="2024-06")
     parser.add_argument("--concurrency", type=int, default=4)
+    parser.add_argument("--inter-month-cooldown-seconds", type=int, default=300)
     args = parser.parse_args()
     if not 1 <= args.concurrency <= 4:
         raise ValueError("V81 acquisition concurrency must be 1-4")
+    if not 0 <= args.inter_month_cooldown_seconds <= 900:
+        raise ValueError("V81 inter-month cooldown must be between 0 and 900 seconds")
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source = config["source"]
     storage = Path(
@@ -101,7 +105,8 @@ def main() -> int:
         "User-Agent": "xauusd-fx-breadth-v81/1.0",
         "Accept": "application/json",
     }
-    for year, month in month_range(str(args.start), str(args.end)):
+    months = month_range(str(args.start), str(args.end))
+    for index, (year, month) in enumerate(months):
         with httpx.Client(
             headers=headers, limits=limits, follow_redirects=True
         ) as client:
@@ -146,6 +151,13 @@ def main() -> int:
             f"resumed={resumed} manifest={manifest}",
             flush=True,
         )
+        if index < len(months) - 1 and args.inter_month_cooldown_seconds:
+            print(
+                "GBPUSD acquisition cooldown: "
+                f"{args.inter_month_cooldown_seconds}s",
+                flush=True,
+            )
+            time.sleep(args.inter_month_cooldown_seconds)
     return 0
 
 
