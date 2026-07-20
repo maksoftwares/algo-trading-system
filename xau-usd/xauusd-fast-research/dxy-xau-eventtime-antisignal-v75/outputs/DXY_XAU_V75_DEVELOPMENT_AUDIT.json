@@ -1,0 +1,2428 @@
+{
+  "audit_sha256": "8266d8f61032389edf5ddecfc43b5f829573874b6cff5a16bf74fdb30aa0b3cc",
+  "broker_action_authorized": false,
+  "campaign_id": "dxy-xau-eventtime-antisignal-v75",
+  "candidate_rows": 252,
+  "candidate_sha256": "b1989ff299ffdbb4a1cf93e06a63cac5db56cd1679f68f07bfec8d71df5fb2da",
+  "contract_sha256": "9384d5c77a82346f057a53759d4dfc200c54531c7d49c1349634965875b6d816",
+  "decision": "V75_DEVELOPMENT_FAIL_TERMINAL",
+  "demo_authorized": false,
+  "direction_transform": {
+    "LONG": "SHORT",
+    "SHORT": "LONG"
+  },
+  "ea_consumption_authorized": false,
+  "eligible_full_weekdays": 256,
+  "event_feature_rows": 9944,
+  "gate_checks": {
+    "bootstrap_significance": false,
+    "direction_balance": true,
+    "first_half_profit_factor": false,
+    "maximum_drawdown": false,
+    "maximum_frequency": true,
+    "minimum_base_profit_factor": false,
+    "minimum_frequency": true,
+    "minimum_positive_month_share": false,
+    "minimum_profitable_day_share": false,
+    "minimum_resolved_trades": true,
+    "minimum_stress_profit_factor": false,
+    "positive_base_net": false,
+    "positive_mean_stress": false,
+    "positive_stress_net": false,
+    "second_half_profit_factor": false,
+    "top_winners_removed_positive": false
+  },
+  "gate_passed": false,
+  "label_rows": 252,
+  "label_status_counts": {
+    "INELIGIBLE": 21,
+    "RESOLVED": 231
+  },
+  "labels_sha256": "70d456522a49de0640067fcc4e54330997d032fc6e923eba386f6d8495a1894f",
+  "live_authorized": false,
+  "metrics": {
+    "base_net_pnl_usd": -131.42125836689857,
+    "base_profit_factor": 0.44447312013824664,
+    "closed_trade_stress_drawdown_usd": 153.98858940335703,
+    "daily_block_bootstrap_one_sided_pvalue": 1.0,
+    "eligible_full_weekdays": 256,
+    "first_half_stress_profit_factor": 0.4536398088497575,
+    "long_trades": 115,
+    "mean_stress_pnl_usd": -0.6415439756142793,
+    "positive_month_share": 0.08333333333333333,
+    "profitable_day_share": 0.2734375,
+    "resolved_trades": 231,
+    "second_half_stress_profit_factor": 0.3591910092525749,
+    "short_trades": 116,
+    "stage": "development",
+    "stress_net_pnl_usd": -148.19665836689853,
+    "stress_profit_factor": 0.4025270692680257,
+    "top_winners_removed_stress_net_usd": -166.77992900578735,
+    "trades_per_full_weekday": 0.90234375
+  },
+  "model_training_authorized": false,
+  "paid_data_authorized": false,
+  "python_predictions_authorized": false,
+  "same_version_tuning_authorized": false,
+  "schema_version": "xauusd_dxy_xau_v75_stage_audit",
+  "selected_policy": {
+    "horizon_ms": 1000,
+    "maximum_signed_xau_response_ratio": 0.0,
+    "minimum_absolute_dxy_move_bps": 1.0,
+    "minimum_directional_innovation_bps": 0.5,
+    "minimum_dxy_quote_count": 2,
+    "policy_id": "H01000__DM010__IN005__RR000__QC02"
+  },
+  "session_quality": [
+    {
+      "date_utc": "2022-07-01",
+      "dxy_coverage_minutes": 659.9925666666667,
+      "dxy_quotes": 21562,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9970166666667,
+      "xau_quotes": 162891
+    },
+    {
+      "date_utc": "2022-07-04",
+      "dxy_coverage_minutes": 598.9028666666667,
+      "dxy_quotes": 10058,
+      "eligible_full_weekday": false,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9935833333333,
+      "xau_quotes": 67222
+    },
+    {
+      "date_utc": "2022-07-05",
+      "dxy_coverage_minutes": 659.99225,
+      "dxy_quotes": 22181,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9935833333333,
+      "xau_quotes": 162931
+    },
+    {
+      "date_utc": "2022-07-06",
+      "dxy_coverage_minutes": 659.9696666666666,
+      "dxy_quotes": 23159,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9936,
+      "xau_quotes": 161744
+    },
+    {
+      "date_utc": "2022-07-07",
+      "dxy_coverage_minutes": 659.81525,
+      "dxy_quotes": 19613,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99465,
+      "xau_quotes": 128527
+    },
+    {
+      "date_utc": "2022-07-08",
+      "dxy_coverage_minutes": 659.9428833333334,
+      "dxy_quotes": 23249,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9704166666667,
+      "xau_quotes": 132769
+    },
+    {
+      "date_utc": "2022-07-11",
+      "dxy_coverage_minutes": 659.8515666666667,
+      "dxy_quotes": 18982,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9831333333333,
+      "xau_quotes": 126057
+    },
+    {
+      "date_utc": "2022-07-12",
+      "dxy_coverage_minutes": 659.92745,
+      "dxy_quotes": 21075,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9715,
+      "xau_quotes": 127144
+    },
+    {
+      "date_utc": "2022-07-13",
+      "dxy_coverage_minutes": 659.98065,
+      "dxy_quotes": 18978,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9948666666667,
+      "xau_quotes": 172460
+    },
+    {
+      "date_utc": "2022-07-14",
+      "dxy_coverage_minutes": 659.9749,
+      "dxy_quotes": 28305,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9970833333333,
+      "xau_quotes": 195972
+    },
+    {
+      "date_utc": "2022-07-15",
+      "dxy_coverage_minutes": 659.9289166666666,
+      "dxy_quotes": 22043,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9647,
+      "xau_quotes": 145515
+    },
+    {
+      "date_utc": "2022-07-18",
+      "dxy_coverage_minutes": 659.9651166666666,
+      "dxy_quotes": 19299,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9970333333333,
+      "xau_quotes": 135065
+    },
+    {
+      "date_utc": "2022-07-19",
+      "dxy_coverage_minutes": 659.9814166666666,
+      "dxy_quotes": 22339,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9963833333334,
+      "xau_quotes": 138495
+    },
+    {
+      "date_utc": "2022-07-20",
+      "dxy_coverage_minutes": 659.9859333333334,
+      "dxy_quotes": 23397,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9926,
+      "xau_quotes": 133681
+    },
+    {
+      "date_utc": "2022-07-21",
+      "dxy_coverage_minutes": 659.9841666666666,
+      "dxy_quotes": 26877,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99075,
+      "xau_quotes": 150359
+    },
+    {
+      "date_utc": "2022-07-22",
+      "dxy_coverage_minutes": 659.94805,
+      "dxy_quotes": 24267,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9968,
+      "xau_quotes": 156561
+    },
+    {
+      "date_utc": "2022-07-25",
+      "dxy_coverage_minutes": 659.95935,
+      "dxy_quotes": 19392,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9939333333333,
+      "xau_quotes": 133937
+    },
+    {
+      "date_utc": "2022-07-26",
+      "dxy_coverage_minutes": 659.994,
+      "dxy_quotes": 18906,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9972833333334,
+      "xau_quotes": 122720
+    },
+    {
+      "date_utc": "2022-07-27",
+      "dxy_coverage_minutes": 659.89025,
+      "dxy_quotes": 16848,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9916333333333,
+      "xau_quotes": 106325
+    },
+    {
+      "date_utc": "2022-07-28",
+      "dxy_coverage_minutes": 659.9685166666667,
+      "dxy_quotes": 25359,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9978166666667,
+      "xau_quotes": 177554
+    },
+    {
+      "date_utc": "2022-07-29",
+      "dxy_coverage_minutes": 659.9659,
+      "dxy_quotes": 25104,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9977833333334,
+      "xau_quotes": 169114
+    },
+    {
+      "date_utc": "2022-08-01",
+      "dxy_coverage_minutes": 659.9831666666666,
+      "dxy_quotes": 21008,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9753666666667,
+      "xau_quotes": 158691
+    },
+    {
+      "date_utc": "2022-08-02",
+      "dxy_coverage_minutes": 659.96175,
+      "dxy_quotes": 24505,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9926,
+      "xau_quotes": 163029
+    },
+    {
+      "date_utc": "2022-08-03",
+      "dxy_coverage_minutes": 659.99125,
+      "dxy_quotes": 22878,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9856166666667,
+      "xau_quotes": 142027
+    },
+    {
+      "date_utc": "2022-08-04",
+      "dxy_coverage_minutes": 659.9798833333333,
+      "dxy_quotes": 21115,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9410166666667,
+      "xau_quotes": 138857
+    },
+    {
+      "date_utc": "2022-08-05",
+      "dxy_coverage_minutes": 659.9742833333333,
+      "dxy_quotes": 21187,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9984333333333,
+      "xau_quotes": 152199
+    },
+    {
+      "date_utc": "2022-08-08",
+      "dxy_coverage_minutes": 659.9282333333333,
+      "dxy_quotes": 16117,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9730666666667,
+      "xau_quotes": 121223
+    },
+    {
+      "date_utc": "2022-08-09",
+      "dxy_coverage_minutes": 659.8019333333333,
+      "dxy_quotes": 15061,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9933833333333,
+      "xau_quotes": 110510
+    },
+    {
+      "date_utc": "2022-08-10",
+      "dxy_coverage_minutes": 659.9577,
+      "dxy_quotes": 20631,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9759666666666,
+      "xau_quotes": 133853
+    },
+    {
+      "date_utc": "2022-08-11",
+      "dxy_coverage_minutes": 659.93035,
+      "dxy_quotes": 20046,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99555,
+      "xau_quotes": 128875
+    },
+    {
+      "date_utc": "2022-08-12",
+      "dxy_coverage_minutes": 659.9201333333333,
+      "dxy_quotes": 16780,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9984833333333,
+      "xau_quotes": 127824
+    },
+    {
+      "date_utc": "2022-08-15",
+      "dxy_coverage_minutes": 659.7174333333334,
+      "dxy_quotes": 12277,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9962333333333,
+      "xau_quotes": 127190
+    },
+    {
+      "date_utc": "2022-08-16",
+      "dxy_coverage_minutes": 659.9713166666667,
+      "dxy_quotes": 15707,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9973,
+      "xau_quotes": 102804
+    },
+    {
+      "date_utc": "2022-08-17",
+      "dxy_coverage_minutes": 659.9705166666666,
+      "dxy_quotes": 17242,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9936,
+      "xau_quotes": 128852
+    },
+    {
+      "date_utc": "2022-08-18",
+      "dxy_coverage_minutes": 659.8960333333333,
+      "dxy_quotes": 18573,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.98625,
+      "xau_quotes": 128863
+    },
+    {
+      "date_utc": "2022-08-19",
+      "dxy_coverage_minutes": 659.78585,
+      "dxy_quotes": 15796,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9618,
+      "xau_quotes": 119808
+    },
+    {
+      "date_utc": "2022-08-22",
+      "dxy_coverage_minutes": 659.9612,
+      "dxy_quotes": 16781,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.98065,
+      "xau_quotes": 128559
+    },
+    {
+      "date_utc": "2022-08-23",
+      "dxy_coverage_minutes": 659.7802666666666,
+      "dxy_quotes": 20034,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9794333333333,
+      "xau_quotes": 127350
+    },
+    {
+      "date_utc": "2022-08-24",
+      "dxy_coverage_minutes": 659.9667,
+      "dxy_quotes": 19791,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9867,
+      "xau_quotes": 118212
+    },
+    {
+      "date_utc": "2022-08-25",
+      "dxy_coverage_minutes": 659.98755,
+      "dxy_quotes": 18390,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9942,
+      "xau_quotes": 114451
+    },
+    {
+      "date_utc": "2022-08-26",
+      "dxy_coverage_minutes": 659.9008666666666,
+      "dxy_quotes": 23285,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9701333333334,
+      "xau_quotes": 137541
+    },
+    {
+      "date_utc": "2022-08-29",
+      "dxy_coverage_minutes": 659.9846333333334,
+      "dxy_quotes": 20101,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9868833333334,
+      "xau_quotes": 114315
+    },
+    {
+      "date_utc": "2022-08-30",
+      "dxy_coverage_minutes": 659.9902,
+      "dxy_quotes": 23480,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.98905,
+      "xau_quotes": 127760
+    },
+    {
+      "date_utc": "2022-08-31",
+      "dxy_coverage_minutes": 659.9650333333333,
+      "dxy_quotes": 24100,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9770166666667,
+      "xau_quotes": 145586
+    },
+    {
+      "date_utc": "2022-09-01",
+      "dxy_coverage_minutes": 659.93635,
+      "dxy_quotes": 23760,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9680833333333,
+      "xau_quotes": 143751
+    },
+    {
+      "date_utc": "2022-09-02",
+      "dxy_coverage_minutes": 659.8590166666667,
+      "dxy_quotes": 22321,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9868666666666,
+      "xau_quotes": 134818
+    },
+    {
+      "date_utc": "2022-09-05",
+      "dxy_coverage_minutes": 598.9050333333333,
+      "dxy_quotes": 13982,
+      "eligible_full_weekday": false,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9860666666667,
+      "xau_quotes": 72600
+    },
+    {
+      "date_utc": "2022-09-06",
+      "dxy_coverage_minutes": 659.9813666666666,
+      "dxy_quotes": 23986,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9985833333334,
+      "xau_quotes": 151436
+    },
+    {
+      "date_utc": "2022-09-07",
+      "dxy_coverage_minutes": 659.9867333333333,
+      "dxy_quotes": 22920,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9964166666666,
+      "xau_quotes": 146843
+    },
+    {
+      "date_utc": "2022-09-08",
+      "dxy_coverage_minutes": 659.98045,
+      "dxy_quotes": 26462,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9557666666667,
+      "xau_quotes": 173834
+    },
+    {
+      "date_utc": "2022-09-09",
+      "dxy_coverage_minutes": 659.9379166666666,
+      "dxy_quotes": 22716,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9858666666667,
+      "xau_quotes": 146181
+    },
+    {
+      "date_utc": "2022-09-12",
+      "dxy_coverage_minutes": 659.9361666666666,
+      "dxy_quotes": 21364,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9737333333334,
+      "xau_quotes": 155640
+    },
+    {
+      "date_utc": "2022-09-13",
+      "dxy_coverage_minutes": 659.9878833333333,
+      "dxy_quotes": 23498,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9900833333334,
+      "xau_quotes": 161947
+    },
+    {
+      "date_utc": "2022-09-14",
+      "dxy_coverage_minutes": 659.9726833333333,
+      "dxy_quotes": 24768,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9903,
+      "xau_quotes": 155694
+    },
+    {
+      "date_utc": "2022-09-15",
+      "dxy_coverage_minutes": 659.9795333333333,
+      "dxy_quotes": 19422,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9697,
+      "xau_quotes": 159325
+    },
+    {
+      "date_utc": "2022-09-16",
+      "dxy_coverage_minutes": 659.9930166666667,
+      "dxy_quotes": 21267,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9959166666666,
+      "xau_quotes": 150910
+    },
+    {
+      "date_utc": "2022-09-19",
+      "dxy_coverage_minutes": 659.9918333333334,
+      "dxy_quotes": 16275,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9973833333333,
+      "xau_quotes": 116562
+    },
+    {
+      "date_utc": "2022-09-20",
+      "dxy_coverage_minutes": 659.9702666666667,
+      "dxy_quotes": 19774,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9919,
+      "xau_quotes": 131189
+    },
+    {
+      "date_utc": "2022-09-21",
+      "dxy_coverage_minutes": 659.6879,
+      "dxy_quotes": 19418,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9983333333333,
+      "xau_quotes": 123158
+    },
+    {
+      "date_utc": "2022-09-22",
+      "dxy_coverage_minutes": 659.9836833333334,
+      "dxy_quotes": 31525,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99165,
+      "xau_quotes": 209252
+    },
+    {
+      "date_utc": "2022-09-23",
+      "dxy_coverage_minutes": 659.9319833333333,
+      "dxy_quotes": 30353,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9744333333333,
+      "xau_quotes": 203021
+    },
+    {
+      "date_utc": "2022-09-26",
+      "dxy_coverage_minutes": 659.9852,
+      "dxy_quotes": 34978,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9958166666667,
+      "xau_quotes": 199841
+    },
+    {
+      "date_utc": "2022-09-27",
+      "dxy_coverage_minutes": 659.99605,
+      "dxy_quotes": 29204,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9926166666667,
+      "xau_quotes": 176987
+    },
+    {
+      "date_utc": "2022-09-28",
+      "dxy_coverage_minutes": 659.9554333333333,
+      "dxy_quotes": 38474,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9936666666666,
+      "xau_quotes": 223182
+    },
+    {
+      "date_utc": "2022-09-29",
+      "dxy_coverage_minutes": 659.9868666666666,
+      "dxy_quotes": 33972,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9983166666667,
+      "xau_quotes": 196691
+    },
+    {
+      "date_utc": "2022-09-30",
+      "dxy_coverage_minutes": 659.9785,
+      "dxy_quotes": 33518,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9978333333333,
+      "xau_quotes": 165199
+    },
+    {
+      "date_utc": "2022-10-03",
+      "dxy_coverage_minutes": 659.9780666666667,
+      "dxy_quotes": 27742,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9920333333333,
+      "xau_quotes": 190003
+    },
+    {
+      "date_utc": "2022-10-04",
+      "dxy_coverage_minutes": 659.9929333333333,
+      "dxy_quotes": 27770,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9978,
+      "xau_quotes": 182566
+    },
+    {
+      "date_utc": "2022-10-05",
+      "dxy_coverage_minutes": 659.94515,
+      "dxy_quotes": 25922,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9694166666667,
+      "xau_quotes": 172403
+    },
+    {
+      "date_utc": "2022-10-06",
+      "dxy_coverage_minutes": 659.9881166666667,
+      "dxy_quotes": 28104,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9965,
+      "xau_quotes": 175749
+    },
+    {
+      "date_utc": "2022-10-07",
+      "dxy_coverage_minutes": 659.8919833333333,
+      "dxy_quotes": 25920,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9842333333333,
+      "xau_quotes": 165860
+    },
+    {
+      "date_utc": "2022-10-10",
+      "dxy_coverage_minutes": 659.9725166666667,
+      "dxy_quotes": 23027,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9858833333333,
+      "xau_quotes": 121199
+    },
+    {
+      "date_utc": "2022-10-11",
+      "dxy_coverage_minutes": 659.9458166666667,
+      "dxy_quotes": 27691,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9785,
+      "xau_quotes": 160242
+    },
+    {
+      "date_utc": "2022-10-12",
+      "dxy_coverage_minutes": 659.9465666666666,
+      "dxy_quotes": 27470,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9027166666667,
+      "xau_quotes": 165409
+    },
+    {
+      "date_utc": "2022-10-13",
+      "dxy_coverage_minutes": 659.9155666666667,
+      "dxy_quotes": 33638,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9832833333334,
+      "xau_quotes": 219484
+    },
+    {
+      "date_utc": "2022-10-14",
+      "dxy_coverage_minutes": 659.9432333333333,
+      "dxy_quotes": 32118,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.96145,
+      "xau_quotes": 199369
+    },
+    {
+      "date_utc": "2022-10-17",
+      "dxy_coverage_minutes": 659.9753666666667,
+      "dxy_quotes": 25488,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9814,
+      "xau_quotes": 136799
+    },
+    {
+      "date_utc": "2022-10-18",
+      "dxy_coverage_minutes": 659.8985,
+      "dxy_quotes": 27275,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9651333333334,
+      "xau_quotes": 127521
+    },
+    {
+      "date_utc": "2022-10-19",
+      "dxy_coverage_minutes": 659.96615,
+      "dxy_quotes": 26858,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.994,
+      "xau_quotes": 128421
+    },
+    {
+      "date_utc": "2022-10-20",
+      "dxy_coverage_minutes": 659.9401666666666,
+      "dxy_quotes": 27345,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9792,
+      "xau_quotes": 124351
+    },
+    {
+      "date_utc": "2022-10-21",
+      "dxy_coverage_minutes": 659.96805,
+      "dxy_quotes": 37215,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99355,
+      "xau_quotes": 193284
+    },
+    {
+      "date_utc": "2022-10-24",
+      "dxy_coverage_minutes": 659.9261666666666,
+      "dxy_quotes": 30988,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9609833333334,
+      "xau_quotes": 154395
+    },
+    {
+      "date_utc": "2022-10-25",
+      "dxy_coverage_minutes": 659.8907666666667,
+      "dxy_quotes": 24806,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9753833333333,
+      "xau_quotes": 122905
+    },
+    {
+      "date_utc": "2022-10-26",
+      "dxy_coverage_minutes": 659.9810833333333,
+      "dxy_quotes": 28988,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9223,
+      "xau_quotes": 127164
+    },
+    {
+      "date_utc": "2022-10-27",
+      "dxy_coverage_minutes": 659.7663,
+      "dxy_quotes": 28380,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9924666666667,
+      "xau_quotes": 132814
+    },
+    {
+      "date_utc": "2022-10-28",
+      "dxy_coverage_minutes": 659.9359,
+      "dxy_quotes": 26179,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9763,
+      "xau_quotes": 120175
+    },
+    {
+      "date_utc": "2022-10-31",
+      "dxy_coverage_minutes": 659.9359833333333,
+      "dxy_quotes": 20811,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9201166666667,
+      "xau_quotes": 80229
+    },
+    {
+      "date_utc": "2022-11-01",
+      "dxy_coverage_minutes": 659.9623833333334,
+      "dxy_quotes": 25004,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9990166666666,
+      "xau_quotes": 120207
+    },
+    {
+      "date_utc": "2022-11-02",
+      "dxy_coverage_minutes": 659.8566166666667,
+      "dxy_quotes": 19020,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9918166666666,
+      "xau_quotes": 77555
+    },
+    {
+      "date_utc": "2022-11-03",
+      "dxy_coverage_minutes": 659.99305,
+      "dxy_quotes": 27330,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99105,
+      "xau_quotes": 130947
+    },
+    {
+      "date_utc": "2022-11-04",
+      "dxy_coverage_minutes": 659.9650333333333,
+      "dxy_quotes": 30313,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9689333333333,
+      "xau_quotes": 152599
+    },
+    {
+      "date_utc": "2022-11-07",
+      "dxy_coverage_minutes": 659.9801166666666,
+      "dxy_quotes": 25274,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9876666666667,
+      "xau_quotes": 110376
+    },
+    {
+      "date_utc": "2022-11-08",
+      "dxy_coverage_minutes": 659.93935,
+      "dxy_quotes": 22476,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9975166666667,
+      "xau_quotes": 109570
+    },
+    {
+      "date_utc": "2022-11-09",
+      "dxy_coverage_minutes": 659.9457,
+      "dxy_quotes": 27321,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9731833333333,
+      "xau_quotes": 127712
+    },
+    {
+      "date_utc": "2022-11-10",
+      "dxy_coverage_minutes": 659.9922166666666,
+      "dxy_quotes": 31226,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9702333333333,
+      "xau_quotes": 152232
+    },
+    {
+      "date_utc": "2022-11-11",
+      "dxy_coverage_minutes": 659.9924666666667,
+      "dxy_quotes": 30490,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9966666666667,
+      "xau_quotes": 144991
+    },
+    {
+      "date_utc": "2022-11-14",
+      "dxy_coverage_minutes": 659.9626666666667,
+      "dxy_quotes": 26700,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9503833333333,
+      "xau_quotes": 109473
+    },
+    {
+      "date_utc": "2022-11-15",
+      "dxy_coverage_minutes": 659.96685,
+      "dxy_quotes": 32030,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9989166666667,
+      "xau_quotes": 158408
+    },
+    {
+      "date_utc": "2022-11-16",
+      "dxy_coverage_minutes": 659.97115,
+      "dxy_quotes": 28824,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9847166666667,
+      "xau_quotes": 130711
+    },
+    {
+      "date_utc": "2022-11-17",
+      "dxy_coverage_minutes": 659.9764,
+      "dxy_quotes": 28603,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9829166666667,
+      "xau_quotes": 132918
+    },
+    {
+      "date_utc": "2022-11-18",
+      "dxy_coverage_minutes": 659.8911333333333,
+      "dxy_quotes": 23883,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.91455,
+      "xau_quotes": 110118
+    },
+    {
+      "date_utc": "2022-11-21",
+      "dxy_coverage_minutes": 659.9294333333333,
+      "dxy_quotes": 22524,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.97855,
+      "xau_quotes": 94356
+    },
+    {
+      "date_utc": "2022-11-22",
+      "dxy_coverage_minutes": 659.9195833333333,
+      "dxy_quotes": 20562,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9846166666666,
+      "xau_quotes": 84444
+    },
+    {
+      "date_utc": "2022-11-23",
+      "dxy_coverage_minutes": 659.9724833333333,
+      "dxy_quotes": 22080,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.99185,
+      "xau_quotes": 100527
+    },
+    {
+      "date_utc": "2022-11-24",
+      "dxy_coverage_minutes": 658.8923833333333,
+      "dxy_quotes": 17595,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9934333333333,
+      "xau_quotes": 66661
+    },
+    {
+      "date_utc": "2022-11-25",
+      "dxy_coverage_minutes": 659.9851666666667,
+      "dxy_quotes": 19522,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9993166666667,
+      "xau_quotes": 83351
+    },
+    {
+      "date_utc": "2022-11-28",
+      "dxy_coverage_minutes": 659.8779666666667,
+      "dxy_quotes": 24543,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9679833333333,
+      "xau_quotes": 109033
+    },
+    {
+      "date_utc": "2022-11-29",
+      "dxy_coverage_minutes": 659.9852833333333,
+      "dxy_quotes": 24962,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9936333333334,
+      "xau_quotes": 95439
+    },
+    {
+      "date_utc": "2022-11-30",
+      "dxy_coverage_minutes": 659.9854,
+      "dxy_quotes": 23678,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9777166666667,
+      "xau_quotes": 98176
+    },
+    {
+      "date_utc": "2022-12-01",
+      "dxy_coverage_minutes": 659.9786666666666,
+      "dxy_quotes": 28195,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9964833333333,
+      "xau_quotes": 118080
+    },
+    {
+      "date_utc": "2022-12-02",
+      "dxy_coverage_minutes": 659.9977666666666,
+      "dxy_quotes": 26838,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9959833333334,
+      "xau_quotes": 128101
+    },
+    {
+      "date_utc": "2022-12-05",
+      "dxy_coverage_minutes": 659.9579666666667,
+      "dxy_quotes": 23347,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9881833333334,
+      "xau_quotes": 110123
+    },
+    {
+      "date_utc": "2022-12-06",
+      "dxy_coverage_minutes": 659.8836,
+      "dxy_quotes": 22368,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.98855,
+      "xau_quotes": 93815
+    },
+    {
+      "date_utc": "2022-12-07",
+      "dxy_coverage_minutes": 659.983,
+      "dxy_quotes": 23988,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9962666666667,
+      "xau_quotes": 109508
+    },
+    {
+      "date_utc": "2022-12-08",
+      "dxy_coverage_minutes": 659.9919,
+      "dxy_quotes": 19220,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9704666666667,
+      "xau_quotes": 93227
+    },
+    {
+      "date_utc": "2022-12-09",
+      "dxy_coverage_minutes": 659.9399,
+      "dxy_quotes": 20856,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9686,
+      "xau_quotes": 109330
+    },
+    {
+      "date_utc": "2022-12-12",
+      "dxy_coverage_minutes": 659.8740666666666,
+      "dxy_quotes": 17398,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9802666666667,
+      "xau_quotes": 76968
+    },
+    {
+      "date_utc": "2022-12-13",
+      "dxy_coverage_minutes": 659.89615,
+      "dxy_quotes": 25835,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.98585,
+      "xau_quotes": 150193
+    },
+    {
+      "date_utc": "2022-12-14",
+      "dxy_coverage_minutes": 659.9756666666667,
+      "dxy_quotes": 21213,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9724666666667,
+      "xau_quotes": 92064
+    },
+    {
+      "date_utc": "2022-12-15",
+      "dxy_coverage_minutes": 659.94895,
+      "dxy_quotes": 25138,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99855,
+      "xau_quotes": 150478
+    },
+    {
+      "date_utc": "2022-12-16",
+      "dxy_coverage_minutes": 659.9460333333334,
+      "dxy_quotes": 20800,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9972333333334,
+      "xau_quotes": 118117
+    },
+    {
+      "date_utc": "2022-12-19",
+      "dxy_coverage_minutes": 659.95295,
+      "dxy_quotes": 18107,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9983666666667,
+      "xau_quotes": 86788
+    },
+    {
+      "date_utc": "2022-12-20",
+      "dxy_coverage_minutes": 659.9710833333334,
+      "dxy_quotes": 24601,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9950833333334,
+      "xau_quotes": 137974
+    },
+    {
+      "date_utc": "2022-12-21",
+      "dxy_coverage_minutes": 659.9098333333334,
+      "dxy_quotes": 19513,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9929666666667,
+      "xau_quotes": 97534
+    },
+    {
+      "date_utc": "2022-12-22",
+      "dxy_coverage_minutes": 659.9841833333334,
+      "dxy_quotes": 17629,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9685833333333,
+      "xau_quotes": 106676
+    },
+    {
+      "date_utc": "2022-12-23",
+      "dxy_coverage_minutes": 659.9921333333333,
+      "dxy_quotes": 17405,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9981333333334,
+      "xau_quotes": 98969
+    },
+    {
+      "date_utc": "2022-12-26",
+      "dxy_coverage_minutes": 0.0,
+      "dxy_quotes": 0,
+      "eligible_full_weekday": false,
+      "weekday": 0,
+      "xau_coverage_minutes": 0.0,
+      "xau_quotes": 0
+    },
+    {
+      "date_utc": "2022-12-27",
+      "dxy_coverage_minutes": 659.9903833333333,
+      "dxy_quotes": 13570,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9835333333333,
+      "xau_quotes": 97215
+    },
+    {
+      "date_utc": "2022-12-28",
+      "dxy_coverage_minutes": 659.9860333333334,
+      "dxy_quotes": 15763,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9713,
+      "xau_quotes": 94499
+    },
+    {
+      "date_utc": "2022-12-29",
+      "dxy_coverage_minutes": 659.9323666666667,
+      "dxy_quotes": 15391,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9882166666666,
+      "xau_quotes": 93331
+    },
+    {
+      "date_utc": "2022-12-30",
+      "dxy_coverage_minutes": 659.9881333333333,
+      "dxy_quotes": 17865,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.999,
+      "xau_quotes": 113697
+    },
+    {
+      "date_utc": "2023-01-02",
+      "dxy_coverage_minutes": 0.0,
+      "dxy_quotes": 0,
+      "eligible_full_weekday": false,
+      "weekday": 0,
+      "xau_coverage_minutes": 0.0,
+      "xau_quotes": 0
+    },
+    {
+      "date_utc": "2023-01-03",
+      "dxy_coverage_minutes": 659.9921333333333,
+      "dxy_quotes": 23295,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9990333333334,
+      "xau_quotes": 140353
+    },
+    {
+      "date_utc": "2023-01-04",
+      "dxy_coverage_minutes": 659.99285,
+      "dxy_quotes": 22373,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9988,
+      "xau_quotes": 138348
+    },
+    {
+      "date_utc": "2023-01-05",
+      "dxy_coverage_minutes": 659.9834666666667,
+      "dxy_quotes": 21187,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9975166666667,
+      "xau_quotes": 132785
+    },
+    {
+      "date_utc": "2023-01-06",
+      "dxy_coverage_minutes": 659.9640833333333,
+      "dxy_quotes": 23503,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9969666666667,
+      "xau_quotes": 135845
+    },
+    {
+      "date_utc": "2023-01-09",
+      "dxy_coverage_minutes": 659.9830666666667,
+      "dxy_quotes": 20079,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.99055,
+      "xau_quotes": 110744
+    },
+    {
+      "date_utc": "2023-01-10",
+      "dxy_coverage_minutes": 659.9662833333333,
+      "dxy_quotes": 20145,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9848833333333,
+      "xau_quotes": 116205
+    },
+    {
+      "date_utc": "2023-01-11",
+      "dxy_coverage_minutes": 659.9760833333333,
+      "dxy_quotes": 16966,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9973166666666,
+      "xau_quotes": 113368
+    },
+    {
+      "date_utc": "2023-01-12",
+      "dxy_coverage_minutes": 659.9797,
+      "dxy_quotes": 24277,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9577833333333,
+      "xau_quotes": 142831
+    },
+    {
+      "date_utc": "2023-01-13",
+      "dxy_coverage_minutes": 659.9833666666667,
+      "dxy_quotes": 20855,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99755,
+      "xau_quotes": 128594
+    },
+    {
+      "date_utc": "2023-01-16",
+      "dxy_coverage_minutes": 658.7800166666667,
+      "dxy_quotes": 13120,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 658.9744,
+      "xau_quotes": 67422
+    },
+    {
+      "date_utc": "2023-01-17",
+      "dxy_coverage_minutes": 659.9330333333334,
+      "dxy_quotes": 21610,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.98125,
+      "xau_quotes": 109909
+    },
+    {
+      "date_utc": "2023-01-18",
+      "dxy_coverage_minutes": 659.9876166666667,
+      "dxy_quotes": 26576,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.96825,
+      "xau_quotes": 139350
+    },
+    {
+      "date_utc": "2023-01-19",
+      "dxy_coverage_minutes": 659.9278,
+      "dxy_quotes": 20953,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9832,
+      "xau_quotes": 118840
+    },
+    {
+      "date_utc": "2023-01-20",
+      "dxy_coverage_minutes": 659.9422833333333,
+      "dxy_quotes": 18561,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9977833333334,
+      "xau_quotes": 106339
+    },
+    {
+      "date_utc": "2023-01-23",
+      "dxy_coverage_minutes": 659.5304,
+      "dxy_quotes": 17639,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.92005,
+      "xau_quotes": 114503
+    },
+    {
+      "date_utc": "2023-01-24",
+      "dxy_coverage_minutes": 659.9263166666667,
+      "dxy_quotes": 18113,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9961166666667,
+      "xau_quotes": 120810
+    },
+    {
+      "date_utc": "2023-01-25",
+      "dxy_coverage_minutes": 659.9167333333334,
+      "dxy_quotes": 16866,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9554166666667,
+      "xau_quotes": 108124
+    },
+    {
+      "date_utc": "2023-01-26",
+      "dxy_coverage_minutes": 659.92345,
+      "dxy_quotes": 17893,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9855166666666,
+      "xau_quotes": 120931
+    },
+    {
+      "date_utc": "2023-01-27",
+      "dxy_coverage_minutes": 659.9707666666667,
+      "dxy_quotes": 15434,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9979,
+      "xau_quotes": 104834
+    },
+    {
+      "date_utc": "2023-01-30",
+      "dxy_coverage_minutes": 659.9922,
+      "dxy_quotes": 15401,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9934666666667,
+      "xau_quotes": 90505
+    },
+    {
+      "date_utc": "2023-01-31",
+      "dxy_coverage_minutes": 659.9187,
+      "dxy_quotes": 17250,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9938,
+      "xau_quotes": 116914
+    },
+    {
+      "date_utc": "2023-02-01",
+      "dxy_coverage_minutes": 659.9909333333334,
+      "dxy_quotes": 15527,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9921833333333,
+      "xau_quotes": 102013
+    },
+    {
+      "date_utc": "2023-02-02",
+      "dxy_coverage_minutes": 659.9835666666667,
+      "dxy_quotes": 22549,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9960166666667,
+      "xau_quotes": 150021
+    },
+    {
+      "date_utc": "2023-02-03",
+      "dxy_coverage_minutes": 659.9645,
+      "dxy_quotes": 21706,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9771666666667,
+      "xau_quotes": 150287
+    },
+    {
+      "date_utc": "2023-02-06",
+      "dxy_coverage_minutes": 659.9807833333333,
+      "dxy_quotes": 17840,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9788833333333,
+      "xau_quotes": 108838
+    },
+    {
+      "date_utc": "2023-02-07",
+      "dxy_coverage_minutes": 659.9875833333333,
+      "dxy_quotes": 19952,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9983833333333,
+      "xau_quotes": 111369
+    },
+    {
+      "date_utc": "2023-02-08",
+      "dxy_coverage_minutes": 659.9479333333334,
+      "dxy_quotes": 17490,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.93405,
+      "xau_quotes": 104096
+    },
+    {
+      "date_utc": "2023-02-09",
+      "dxy_coverage_minutes": 659.98935,
+      "dxy_quotes": 16840,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99095,
+      "xau_quotes": 106885
+    },
+    {
+      "date_utc": "2023-02-10",
+      "dxy_coverage_minutes": 659.8969833333333,
+      "dxy_quotes": 21400,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99435,
+      "xau_quotes": 115877
+    },
+    {
+      "date_utc": "2023-02-13",
+      "dxy_coverage_minutes": 659.8500333333334,
+      "dxy_quotes": 14725,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9987333333333,
+      "xau_quotes": 83363
+    },
+    {
+      "date_utc": "2023-02-14",
+      "dxy_coverage_minutes": 659.9090166666666,
+      "dxy_quotes": 23798,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9663166666667,
+      "xau_quotes": 148147
+    },
+    {
+      "date_utc": "2023-02-15",
+      "dxy_coverage_minutes": 659.9816333333333,
+      "dxy_quotes": 19011,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9944833333333,
+      "xau_quotes": 112570
+    },
+    {
+      "date_utc": "2023-02-16",
+      "dxy_coverage_minutes": 659.9321,
+      "dxy_quotes": 18771,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9987833333333,
+      "xau_quotes": 102686
+    },
+    {
+      "date_utc": "2023-02-17",
+      "dxy_coverage_minutes": 659.9575666666667,
+      "dxy_quotes": 18149,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9624333333334,
+      "xau_quotes": 106616
+    },
+    {
+      "date_utc": "2023-02-20",
+      "dxy_coverage_minutes": 659.9338,
+      "dxy_quotes": 9932,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9335666666667,
+      "xau_quotes": 51816
+    },
+    {
+      "date_utc": "2023-02-21",
+      "dxy_coverage_minutes": 659.9837833333333,
+      "dxy_quotes": 20512,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9993,
+      "xau_quotes": 110109
+    },
+    {
+      "date_utc": "2023-02-22",
+      "dxy_coverage_minutes": 659.9970166666667,
+      "dxy_quotes": 17926,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9244166666666,
+      "xau_quotes": 93316
+    },
+    {
+      "date_utc": "2023-02-23",
+      "dxy_coverage_minutes": 659.9732833333334,
+      "dxy_quotes": 18341,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9983,
+      "xau_quotes": 105344
+    },
+    {
+      "date_utc": "2023-02-24",
+      "dxy_coverage_minutes": 659.8317666666667,
+      "dxy_quotes": 20131,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9971666666667,
+      "xau_quotes": 108620
+    },
+    {
+      "date_utc": "2023-02-27",
+      "dxy_coverage_minutes": 659.9907833333333,
+      "dxy_quotes": 16948,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9677166666667,
+      "xau_quotes": 88341
+    },
+    {
+      "date_utc": "2023-02-28",
+      "dxy_coverage_minutes": 659.6504666666667,
+      "dxy_quotes": 18740,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9881333333333,
+      "xau_quotes": 98806
+    },
+    {
+      "date_utc": "2023-03-01",
+      "dxy_coverage_minutes": 659.9680166666667,
+      "dxy_quotes": 21512,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9754166666667,
+      "xau_quotes": 105854
+    },
+    {
+      "date_utc": "2023-03-02",
+      "dxy_coverage_minutes": 659.9950833333334,
+      "dxy_quotes": 18854,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9540666666667,
+      "xau_quotes": 102240
+    },
+    {
+      "date_utc": "2023-03-03",
+      "dxy_coverage_minutes": 659.9865,
+      "dxy_quotes": 18100,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9970333333333,
+      "xau_quotes": 88964
+    },
+    {
+      "date_utc": "2023-03-06",
+      "dxy_coverage_minutes": 659.9864833333334,
+      "dxy_quotes": 16626,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9975,
+      "xau_quotes": 83794
+    },
+    {
+      "date_utc": "2023-03-07",
+      "dxy_coverage_minutes": 659.9454666666667,
+      "dxy_quotes": 21809,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.99875,
+      "xau_quotes": 107371
+    },
+    {
+      "date_utc": "2023-03-08",
+      "dxy_coverage_minutes": 659.94815,
+      "dxy_quotes": 19670,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9996666666667,
+      "xau_quotes": 95881
+    },
+    {
+      "date_utc": "2023-03-09",
+      "dxy_coverage_minutes": 659.8800333333334,
+      "dxy_quotes": 13540,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9931166666667,
+      "xau_quotes": 82144
+    },
+    {
+      "date_utc": "2023-03-10",
+      "dxy_coverage_minutes": 659.98375,
+      "dxy_quotes": 26832,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9947,
+      "xau_quotes": 154718
+    },
+    {
+      "date_utc": "2023-03-13",
+      "dxy_coverage_minutes": 659.9713333333333,
+      "dxy_quotes": 34768,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9968833333334,
+      "xau_quotes": 223998
+    },
+    {
+      "date_utc": "2023-03-14",
+      "dxy_coverage_minutes": 659.9697833333333,
+      "dxy_quotes": 28007,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9901666666667,
+      "xau_quotes": 168523
+    },
+    {
+      "date_utc": "2023-03-15",
+      "dxy_coverage_minutes": 659.92665,
+      "dxy_quotes": 30220,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.99665,
+      "xau_quotes": 205931
+    },
+    {
+      "date_utc": "2023-03-16",
+      "dxy_coverage_minutes": 659.93585,
+      "dxy_quotes": 27941,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9988666666667,
+      "xau_quotes": 177269
+    },
+    {
+      "date_utc": "2023-03-17",
+      "dxy_coverage_minutes": 659.5032166666666,
+      "dxy_quotes": 19611,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9977333333334,
+      "xau_quotes": 162541
+    },
+    {
+      "date_utc": "2023-03-20",
+      "dxy_coverage_minutes": 659.9129333333333,
+      "dxy_quotes": 20050,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9989833333333,
+      "xau_quotes": 181538
+    },
+    {
+      "date_utc": "2023-03-21",
+      "dxy_coverage_minutes": 659.9864833333334,
+      "dxy_quotes": 15374,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9919,
+      "xau_quotes": 141770
+    },
+    {
+      "date_utc": "2023-03-22",
+      "dxy_coverage_minutes": 659.6371666666666,
+      "dxy_quotes": 12311,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9979333333333,
+      "xau_quotes": 110233
+    },
+    {
+      "date_utc": "2023-03-23",
+      "dxy_coverage_minutes": 659.9538333333334,
+      "dxy_quotes": 17102,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9890833333334,
+      "xau_quotes": 136786
+    },
+    {
+      "date_utc": "2023-03-24",
+      "dxy_coverage_minutes": 659.9795166666667,
+      "dxy_quotes": 19590,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9987666666667,
+      "xau_quotes": 159953
+    },
+    {
+      "date_utc": "2023-03-27",
+      "dxy_coverage_minutes": 659.9612,
+      "dxy_quotes": 12683,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9708,
+      "xau_quotes": 115812
+    },
+    {
+      "date_utc": "2023-03-28",
+      "dxy_coverage_minutes": 659.89795,
+      "dxy_quotes": 11828,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9855166666666,
+      "xau_quotes": 103369
+    },
+    {
+      "date_utc": "2023-03-29",
+      "dxy_coverage_minutes": 659.9776333333333,
+      "dxy_quotes": 13863,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9889833333333,
+      "xau_quotes": 88634
+    },
+    {
+      "date_utc": "2023-03-30",
+      "dxy_coverage_minutes": 659.7231,
+      "dxy_quotes": 13346,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9641833333334,
+      "xau_quotes": 99592
+    },
+    {
+      "date_utc": "2023-03-31",
+      "dxy_coverage_minutes": 659.8753666666667,
+      "dxy_quotes": 13976,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.99785,
+      "xau_quotes": 106969
+    },
+    {
+      "date_utc": "2023-04-03",
+      "dxy_coverage_minutes": 659.9892,
+      "dxy_quotes": 13561,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.97665,
+      "xau_quotes": 109858
+    },
+    {
+      "date_utc": "2023-04-04",
+      "dxy_coverage_minutes": 659.9083,
+      "dxy_quotes": 14402,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.99755,
+      "xau_quotes": 115636
+    },
+    {
+      "date_utc": "2023-04-05",
+      "dxy_coverage_minutes": 659.9613,
+      "dxy_quotes": 13808,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9978666666667,
+      "xau_quotes": 110428
+    },
+    {
+      "date_utc": "2023-04-06",
+      "dxy_coverage_minutes": 659.5768666666667,
+      "dxy_quotes": 11707,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.97755,
+      "xau_quotes": 96904
+    },
+    {
+      "date_utc": "2023-04-07",
+      "dxy_coverage_minutes": 314.8288333333333,
+      "dxy_quotes": 3135,
+      "eligible_full_weekday": false,
+      "weekday": 4,
+      "xau_coverage_minutes": 0.0,
+      "xau_quotes": 0
+    },
+    {
+      "date_utc": "2023-04-10",
+      "dxy_coverage_minutes": 659.4979833333333,
+      "dxy_quotes": 9565,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9758166666667,
+      "xau_quotes": 76620
+    },
+    {
+      "date_utc": "2023-04-11",
+      "dxy_coverage_minutes": 659.7556833333333,
+      "dxy_quotes": 10798,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9441833333333,
+      "xau_quotes": 76567
+    },
+    {
+      "date_utc": "2023-04-12",
+      "dxy_coverage_minutes": 659.94445,
+      "dxy_quotes": 13698,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.86375,
+      "xau_quotes": 110146
+    },
+    {
+      "date_utc": "2023-04-13",
+      "dxy_coverage_minutes": 659.9301166666667,
+      "dxy_quotes": 11970,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9851,
+      "xau_quotes": 96997
+    },
+    {
+      "date_utc": "2023-04-14",
+      "dxy_coverage_minutes": 659.9362,
+      "dxy_quotes": 13684,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9969666666667,
+      "xau_quotes": 133078
+    },
+    {
+      "date_utc": "2023-04-17",
+      "dxy_coverage_minutes": 658.9803333333333,
+      "dxy_quotes": 11857,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.8517333333333,
+      "xau_quotes": 95788
+    },
+    {
+      "date_utc": "2023-04-18",
+      "dxy_coverage_minutes": 659.6568666666667,
+      "dxy_quotes": 11632,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9719833333334,
+      "xau_quotes": 88892
+    },
+    {
+      "date_utc": "2023-04-19",
+      "dxy_coverage_minutes": 659.9736,
+      "dxy_quotes": 12752,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.98365,
+      "xau_quotes": 108292
+    },
+    {
+      "date_utc": "2023-04-20",
+      "dxy_coverage_minutes": 659.7066666666667,
+      "dxy_quotes": 12900,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.99725,
+      "xau_quotes": 92895
+    },
+    {
+      "date_utc": "2023-04-21",
+      "dxy_coverage_minutes": 659.8532,
+      "dxy_quotes": 13181,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9938666666667,
+      "xau_quotes": 106106
+    },
+    {
+      "date_utc": "2023-04-24",
+      "dxy_coverage_minutes": 659.6106166666667,
+      "dxy_quotes": 11455,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9967666666666,
+      "xau_quotes": 89899
+    },
+    {
+      "date_utc": "2023-04-25",
+      "dxy_coverage_minutes": 659.92245,
+      "dxy_quotes": 13888,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9757,
+      "xau_quotes": 110633
+    },
+    {
+      "date_utc": "2023-04-26",
+      "dxy_coverage_minutes": 659.9577833333333,
+      "dxy_quotes": 16703,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9906666666667,
+      "xau_quotes": 120657
+    },
+    {
+      "date_utc": "2023-04-27",
+      "dxy_coverage_minutes": 659.8465,
+      "dxy_quotes": 14773,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9781833333333,
+      "xau_quotes": 123250
+    },
+    {
+      "date_utc": "2023-04-28",
+      "dxy_coverage_minutes": 659.7320833333333,
+      "dxy_quotes": 16652,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9963166666666,
+      "xau_quotes": 115533
+    },
+    {
+      "date_utc": "2023-05-01",
+      "dxy_coverage_minutes": 659.9782666666666,
+      "dxy_quotes": 9844,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.99075,
+      "xau_quotes": 105336
+    },
+    {
+      "date_utc": "2023-05-02",
+      "dxy_coverage_minutes": 659.97515,
+      "dxy_quotes": 15583,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9848666666667,
+      "xau_quotes": 119412
+    },
+    {
+      "date_utc": "2023-05-03",
+      "dxy_coverage_minutes": 659.8245166666667,
+      "dxy_quotes": 13080,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9978833333333,
+      "xau_quotes": 89528
+    },
+    {
+      "date_utc": "2023-05-04",
+      "dxy_coverage_minutes": 659.7537333333333,
+      "dxy_quotes": 19152,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9799166666667,
+      "xau_quotes": 160214
+    },
+    {
+      "date_utc": "2023-05-05",
+      "dxy_coverage_minutes": 659.7912166666666,
+      "dxy_quotes": 14533,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9713166666667,
+      "xau_quotes": 147634
+    },
+    {
+      "date_utc": "2023-05-08",
+      "dxy_coverage_minutes": 659.8212333333333,
+      "dxy_quotes": 8910,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9362333333333,
+      "xau_quotes": 97515
+    },
+    {
+      "date_utc": "2023-05-09",
+      "dxy_coverage_minutes": 659.8369166666666,
+      "dxy_quotes": 10104,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.97595,
+      "xau_quotes": 117572
+    },
+    {
+      "date_utc": "2023-05-10",
+      "dxy_coverage_minutes": 659.87965,
+      "dxy_quotes": 13862,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9977,
+      "xau_quotes": 150850
+    },
+    {
+      "date_utc": "2023-05-11",
+      "dxy_coverage_minutes": 659.8927,
+      "dxy_quotes": 14351,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9955833333333,
+      "xau_quotes": 181513
+    },
+    {
+      "date_utc": "2023-05-12",
+      "dxy_coverage_minutes": 659.9958833333334,
+      "dxy_quotes": 10599,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9805666666666,
+      "xau_quotes": 128740
+    },
+    {
+      "date_utc": "2023-05-15",
+      "dxy_coverage_minutes": 659.7407166666667,
+      "dxy_quotes": 9262,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9957,
+      "xau_quotes": 105850
+    },
+    {
+      "date_utc": "2023-05-16",
+      "dxy_coverage_minutes": 659.9186333333333,
+      "dxy_quotes": 12287,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9843333333333,
+      "xau_quotes": 140318
+    },
+    {
+      "date_utc": "2023-05-17",
+      "dxy_coverage_minutes": 659.9783666666667,
+      "dxy_quotes": 12059,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.96075,
+      "xau_quotes": 125827
+    },
+    {
+      "date_utc": "2023-05-18",
+      "dxy_coverage_minutes": 659.9524666666666,
+      "dxy_quotes": 11529,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9860166666666,
+      "xau_quotes": 116560
+    },
+    {
+      "date_utc": "2023-05-19",
+      "dxy_coverage_minutes": 659.9696,
+      "dxy_quotes": 13526,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9956666666667,
+      "xau_quotes": 109497
+    },
+    {
+      "date_utc": "2023-05-22",
+      "dxy_coverage_minutes": 659.6352166666667,
+      "dxy_quotes": 11892,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9874,
+      "xau_quotes": 96348
+    },
+    {
+      "date_utc": "2023-05-23",
+      "dxy_coverage_minutes": 659.9812833333333,
+      "dxy_quotes": 13354,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9915166666667,
+      "xau_quotes": 114360
+    },
+    {
+      "date_utc": "2023-05-24",
+      "dxy_coverage_minutes": 659.8896666666667,
+      "dxy_quotes": 15045,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9955,
+      "xau_quotes": 108443
+    },
+    {
+      "date_utc": "2023-05-25",
+      "dxy_coverage_minutes": 659.9345833333333,
+      "dxy_quotes": 13837,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9923,
+      "xau_quotes": 112851
+    },
+    {
+      "date_utc": "2023-05-26",
+      "dxy_coverage_minutes": 659.5780666666667,
+      "dxy_quotes": 14185,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9897833333333,
+      "xau_quotes": 108027
+    },
+    {
+      "date_utc": "2023-05-29",
+      "dxy_coverage_minutes": 658.6981833333333,
+      "dxy_quotes": 4417,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9204833333333,
+      "xau_quotes": 39368
+    },
+    {
+      "date_utc": "2023-05-30",
+      "dxy_coverage_minutes": 659.4479333333334,
+      "dxy_quotes": 13779,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.94685,
+      "xau_quotes": 97479
+    },
+    {
+      "date_utc": "2023-05-31",
+      "dxy_coverage_minutes": 659.9834333333333,
+      "dxy_quotes": 14800,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9701833333334,
+      "xau_quotes": 100314
+    },
+    {
+      "date_utc": "2023-06-01",
+      "dxy_coverage_minutes": 659.95465,
+      "dxy_quotes": 14284,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9681166666667,
+      "xau_quotes": 108586
+    },
+    {
+      "date_utc": "2023-06-02",
+      "dxy_coverage_minutes": 659.7143166666667,
+      "dxy_quotes": 12799,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9977666666666,
+      "xau_quotes": 105823
+    },
+    {
+      "date_utc": "2023-06-05",
+      "dxy_coverage_minutes": 659.5786666666667,
+      "dxy_quotes": 11036,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9634666666667,
+      "xau_quotes": 83378
+    },
+    {
+      "date_utc": "2023-06-06",
+      "dxy_coverage_minutes": 659.64115,
+      "dxy_quotes": 12300,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9912833333333,
+      "xau_quotes": 79201
+    },
+    {
+      "date_utc": "2023-06-07",
+      "dxy_coverage_minutes": 659.9825166666667,
+      "dxy_quotes": 12697,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9952333333333,
+      "xau_quotes": 93560
+    },
+    {
+      "date_utc": "2023-06-08",
+      "dxy_coverage_minutes": 659.9003,
+      "dxy_quotes": 12700,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.98955,
+      "xau_quotes": 97191
+    },
+    {
+      "date_utc": "2023-06-09",
+      "dxy_coverage_minutes": 659.5102666666667,
+      "dxy_quotes": 11656,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9733666666667,
+      "xau_quotes": 81369
+    },
+    {
+      "date_utc": "2023-06-12",
+      "dxy_coverage_minutes": 659.9111833333334,
+      "dxy_quotes": 12283,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9970166666667,
+      "xau_quotes": 84701
+    },
+    {
+      "date_utc": "2023-06-13",
+      "dxy_coverage_minutes": 659.9876,
+      "dxy_quotes": 14782,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9842166666666,
+      "xau_quotes": 104573
+    },
+    {
+      "date_utc": "2023-06-14",
+      "dxy_coverage_minutes": 659.7700166666667,
+      "dxy_quotes": 9567,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9959833333334,
+      "xau_quotes": 72801
+    },
+    {
+      "date_utc": "2023-06-15",
+      "dxy_coverage_minutes": 659.9642,
+      "dxy_quotes": 14929,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9880166666667,
+      "xau_quotes": 112456
+    },
+    {
+      "date_utc": "2023-06-16",
+      "dxy_coverage_minutes": 659.72185,
+      "dxy_quotes": 14063,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9705,
+      "xau_quotes": 104101
+    },
+    {
+      "date_utc": "2023-06-19",
+      "dxy_coverage_minutes": 658.28575,
+      "dxy_quotes": 7102,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9653166666667,
+      "xau_quotes": 51211
+    },
+    {
+      "date_utc": "2023-06-20",
+      "dxy_coverage_minutes": 659.9881166666667,
+      "dxy_quotes": 11992,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9982,
+      "xau_quotes": 99498
+    },
+    {
+      "date_utc": "2023-06-21",
+      "dxy_coverage_minutes": 659.88855,
+      "dxy_quotes": 14102,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9957833333333,
+      "xau_quotes": 110928
+    },
+    {
+      "date_utc": "2023-06-22",
+      "dxy_coverage_minutes": 659.9763166666667,
+      "dxy_quotes": 14901,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9617,
+      "xau_quotes": 103151
+    },
+    {
+      "date_utc": "2023-06-23",
+      "dxy_coverage_minutes": 659.6464166666667,
+      "dxy_quotes": 14744,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9524833333334,
+      "xau_quotes": 101854
+    },
+    {
+      "date_utc": "2023-06-26",
+      "dxy_coverage_minutes": 659.9211,
+      "dxy_quotes": 11052,
+      "eligible_full_weekday": true,
+      "weekday": 0,
+      "xau_coverage_minutes": 659.9939666666667,
+      "xau_quotes": 79850
+    },
+    {
+      "date_utc": "2023-06-27",
+      "dxy_coverage_minutes": 659.98925,
+      "dxy_quotes": 12123,
+      "eligible_full_weekday": true,
+      "weekday": 1,
+      "xau_coverage_minutes": 659.9757333333333,
+      "xau_quotes": 96807
+    },
+    {
+      "date_utc": "2023-06-28",
+      "dxy_coverage_minutes": 659.8104333333333,
+      "dxy_quotes": 12651,
+      "eligible_full_weekday": true,
+      "weekday": 2,
+      "xau_coverage_minutes": 659.9898,
+      "xau_quotes": 92233
+    },
+    {
+      "date_utc": "2023-06-29",
+      "dxy_coverage_minutes": 659.7972833333333,
+      "dxy_quotes": 13381,
+      "eligible_full_weekday": true,
+      "weekday": 3,
+      "xau_coverage_minutes": 659.9896666666667,
+      "xau_quotes": 104508
+    },
+    {
+      "date_utc": "2023-06-30",
+      "dxy_coverage_minutes": 659.9656,
+      "dxy_quotes": 13721,
+      "eligible_full_weekday": true,
+      "weekday": 4,
+      "xau_coverage_minutes": 659.9964,
+      "xau_quotes": 109202
+    }
+  ],
+  "stage": "development"
+}

@@ -157,8 +157,6 @@ All later stages remain sealed. V72/V73 show that the raw silver-lag event is
 not a hidden reversible edge under the locked tradable geometry. Both
 directions and all associated threshold or exit rescues are retired.
 
-## Routes Not Counted As Solutions
-
 ## V74 Raw DXY-to-XAU Event-Time Result
 
 V74 tested a new raw event-time input: a DXY quote shock followed by the expected
@@ -180,7 +178,22 @@ Later stages remain sealed. No event threshold or execution rescue is allowed.
 One fixed direction inversion may begin only on the unopened July 2022 period;
 after that test, the raw DXY family is terminal in both directions.
 
-## Routes Not Counted As Solutions
+## V75 Fixed DXY Anti-Signal Result
+
+V75 performed the one allowed directional falsification of V74. It inherited
+the exact locked event policy and execution, inverted direction once, and began
+only after V74's exposed cutoff. Fresh development resolved `231` trades over
+`256` weekdays (`0.902344/day`), with `115` longs and `116` shorts. Base/stress
+net was USD `-131.42/-148.20`; base/stress PF was `0.4445/0.4025`;
+first/second-half stress PF was `0.4536/0.3592`; one of 12 months was positive;
+winner-removed stress net was USD `-166.78`; stressed DD was USD `153.99`; and
+bootstrap p-value was `1.0`.
+
+Decision: `V75_DEVELOPMENT_FAIL_TERMINAL`. Contract SHA-256:
+`9384d5c77a82346f057a53759d4dfc200c54531c7d49c1349634965875b6d816`.
+All later stages remain sealed. V74/V75 show that this raw DXY-lag event is not
+a hidden reversible edge under the locked tradable geometry. Both directions
+and all associated threshold, timing, or exit rescues are retired.
 
 ## V72 Raw XAG-to-XAU Event-Time Catch-Up Result
 

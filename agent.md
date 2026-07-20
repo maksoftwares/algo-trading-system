@@ -2579,3 +2579,22 @@ Decision: `V74_DEVELOPMENT_FAIL_TERMINAL`. Later stages remain sealed. Do not
 tune V74. One fixed direction inversion may start on the untouched July 2022
 period; no additional DXY threshold, timing, response, exit, cost, or quota reuse
 is permitted. V59/V60 remain immutable and accepted.
+
+## V75 Fixed DXY Anti-Signal - 2026-07-20
+
+V75 inherited V74 policy `H01000__DM010__IN005__RR000__QC02`, every event time,
+the one-per-day quota, execution geometry, costs, and economic gates. It inverted
+direction exactly once and began after V74's exposed cutoff. Contract SHA-256:
+`9384d5c77a82346f057a53759d4dfc200c54531c7d49c1349634965875b6d816`.
+
+Fresh development resolved `231` trades over `256` eligible weekdays
+(`0.902344/day`), split `115` long and `116` short. Base/stress net was USD
+`-131.42/-148.20`; base/stress PF was `0.4445/0.4025`; first/second-half stress
+PF was `0.4536/0.3592`; positive-day share was `27.34%`; one of 12 months was
+positive; winner-removed stress net was USD `-166.78`; stressed DD was USD
+`153.99`; and bootstrap p-value was `1.0`.
+
+Decision: `V75_DEVELOPMENT_FAIL_TERMINAL`. Confirmation, validation, and exam
+remain sealed. V74/V75 retire both directional interpretations of the fixed raw
+DXY event family. No same-family mirror, threshold, response, timing, exit,
+cost, or quota rescue is permitted. V59/V60 remain immutable and accepted.
